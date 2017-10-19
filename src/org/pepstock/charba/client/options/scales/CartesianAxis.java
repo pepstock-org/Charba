@@ -101,6 +101,6 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	}
 
 	public Position getPosition(){
-		return getValue(Property.position, Position.values(), Position.top);
+		return getValue(Property.position, Position.class, Position.top);
 	} 
 }

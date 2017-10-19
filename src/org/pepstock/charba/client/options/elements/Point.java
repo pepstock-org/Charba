@@ -62,7 +62,7 @@ public class Point extends JavaScriptObjectContainer{
 	}
 
 	public PointStyle getPointStyle() {
-		return getValue(Property.pointStyle, PointStyle.values(), PointStyle.circle);
+		return getValue(Property.pointStyle, PointStyle.class, PointStyle.circle);
 	}
 
 	public void setBackgroundColor(String backgroundColor) {

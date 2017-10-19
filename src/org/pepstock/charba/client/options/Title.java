@@ -49,7 +49,7 @@ public final class Title extends AbstractLabel{
 	 */
 	@Override
 	public FontStyle getFontStyle() {
-		return getValue(Property.fontStyle, FontStyle.values(), FontStyle.bold);
+		return getValue(Property.fontStyle, FontStyle.class, FontStyle.bold);
 	}
 
 	public void setDisplay(boolean display) {
@@ -77,7 +77,7 @@ public final class Title extends AbstractLabel{
 	}
 
 	public Position getPosition(){
-		return getValue(Property.position, Position.values(), Position.top);
+		return getValue(Property.position, Position.class, Position.top);
 	}    
 
 }

@@ -21,8 +21,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.pepstock.charba.client.enums.EnumValue;
-
 import com.google.gwt.core.client.JsArrayString;
 
 /**
@@ -33,19 +31,19 @@ import com.google.gwt.core.client.JsArrayString;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.commons.JsArrayStringImpl
  */
-public final class JsEnumValueArrayList<K> implements List<EnumValue<K>> {
+public final class JsEnumValueArrayList<E extends Key> implements List<E> {
 	
 	// delegated array to store objects
 	private final JsArrayStringImpl array;
 	// array of all enumeration
-	private final EnumValue<K>[] definedValues;
+	private final E[] definedValues;
 
 	/**
 	 * Internal constructor used to load a JSArray already in another object.
 	 * @param values all values of an enumeration
 	 * @param array JS array instance
 	 */
-	JsEnumValueArrayList(EnumValue<K>[] values, JsArrayStringImpl array) {
+	JsEnumValueArrayList(E[] values, JsArrayStringImpl array) {
 		// sets all enumeration values
 		this.definedValues = values;
 		// if null, creates a new JS array
@@ -61,8 +59,8 @@ public final class JsEnumValueArrayList<K> implements List<EnumValue<K>> {
 	 * Creates an empty list
 	 * @param vdefinedValues all values of an enumeration
 	 */
-	JsEnumValueArrayList(EnumValue<K>[] definedValues) {
-		this(definedValues, null);
+	JsEnumValueArrayList(Class<E> clazz) {
+		this(clazz.getEnumConstants(), null);
 	}
 
 	/**
@@ -77,9 +75,9 @@ public final class JsEnumValueArrayList<K> implements List<EnumValue<K>> {
 	 * Loads an array of elements into the list
 	 * @param values an array of elements to be loaded
 	 */
-	public void addAll(EnumValue<K>[] values){
+	public void addAll(E[] values){
 		// scans all elements 
-		for (EnumValue<K> val : values){
+		for (E val : values){
 			// adds
 			add(val);
 		}
@@ -116,8 +114,8 @@ public final class JsEnumValueArrayList<K> implements List<EnumValue<K>> {
 	 * Returns an iterator over the elements in this list in proper sequence.
 	 */
 	@Override
-	public Iterator<EnumValue<K>> iterator() {
-		return new IteratorImpl<EnumValue<K>>(this);
+	public Iterator<E> iterator() {
+		return new IteratorImpl<E>(this);
 	}
 
 	/**
@@ -140,7 +138,7 @@ public final class JsEnumValueArrayList<K> implements List<EnumValue<K>> {
 	 * Appends the specified element to the end of this list
 	 */
 	@Override
-	public boolean add(EnumValue<K> e) {
+	public boolean add(E e) {
 		array.push(e.name());
 		return true;
 	}
@@ -182,10 +180,10 @@ public final class JsEnumValueArrayList<K> implements List<EnumValue<K>> {
 	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by the specified collection's iterator
 	 */
 	@Override
-	public boolean addAll(Collection<? extends EnumValue<K>> c) {
+	public boolean addAll(Collection<? extends E> c) {
 		// set modified checking if collection is empty
 		boolean modified = !c.isEmpty();
-		Iterator<? extends EnumValue<K>> e = c.iterator();
+		Iterator<? extends E> e = c.iterator();
 		// scans all elements
 		while (e.hasNext()) {
 			// if adds
@@ -205,14 +203,14 @@ public final class JsEnumValueArrayList<K> implements List<EnumValue<K>> {
 	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (increases their indices). 
 	 */
 	@Override
-	public boolean addAll(int index, Collection<? extends EnumValue<K>> c) {
+	public boolean addAll(int index, Collection<? extends E> c) {
 		// set modified checking if collection is empty
 		boolean modified = !c.isEmpty();
 		// checks if continue
 		if (modified && checkRange(index)){
 			// saves index
 			int myIndex = index;
-			Iterator<? extends EnumValue<K>> e = c.iterator();
+			Iterator<? extends E> e = c.iterator();
 			// scans all elements
 			while (e.hasNext()) {
 				// adds to the stored new index
@@ -252,10 +250,10 @@ public final class JsEnumValueArrayList<K> implements List<EnumValue<K>> {
 		boolean modified = !c.isEmpty();
 		if (modified){
 			// creates a copy of elements
-			List<EnumValue<K>> contained = new ArrayList<EnumValue<K>>();
+			List<E> contained = new ArrayList<E>();
 			// scans all current elements
 			for (int i=0; i<size(); i++){
-				EnumValue<K> value = get(i);
+				E value = get(i);
 				// checks if not present into
 				// passed collection
 				if (!c.contains(get(i))){
@@ -266,7 +264,7 @@ public final class JsEnumValueArrayList<K> implements List<EnumValue<K>> {
 			// if temporary list is not empty
 			if (!contained.isEmpty()){
 				// scans all elements
-				for (EnumValue<K> toRemove : contained){
+				for (E toRemove : contained){
 					// removes and checks if modified
 					modified = modified && remove(toRemove);
 				}
@@ -287,7 +285,7 @@ public final class JsEnumValueArrayList<K> implements List<EnumValue<K>> {
 	 * Returns the element at the specified position in this list. If index out of range, returns null
 	 */
 	@Override
-	public EnumValue<K> get(int index) {
+	public E get(int index) {
 		// checks range
 		if (checkRange(index)){
 			String value = array.get(index);
@@ -300,12 +298,12 @@ public final class JsEnumValueArrayList<K> implements List<EnumValue<K>> {
 	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns null
 	 */
 	@Override
-	public EnumValue<K> set(int index, EnumValue<K> element) {
+	public E set(int index, E element) {
 		// checks range
 		if (checkRange(index)){
 			// gets current element at that index
 			String old = array.get(index);
-			EnumValue<K> oldValue = getByName(old);
+			E oldValue = getByName(old);
 			// replaces with new element
 			array.set(index, element.name());
 			// returns old
@@ -319,7 +317,7 @@ public final class JsEnumValueArrayList<K> implements List<EnumValue<K>> {
 	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
 	 */
 	@Override
-	public void add(int index, EnumValue<K> element) {
+	public void add(int index, E element) {
 		array.insertAt(index, element.name());
 	}
 
@@ -328,7 +326,7 @@ public final class JsEnumValueArrayList<K> implements List<EnumValue<K>> {
 	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from the list.
 	 */
 	@Override
-	public EnumValue<K> remove(int index) {
+	public E remove(int index) {
 		// checks range
 		if (checkRange(index)){
 			String value = array.remove(index);
@@ -343,9 +341,9 @@ public final class JsEnumValueArrayList<K> implements List<EnumValue<K>> {
 	@Override
 	public int indexOf(Object o) {
 		// checks if EnumValue
-		if (o instanceof EnumValue<?>){
+		if (o instanceof Key){
 			// cast
-			EnumValue<?> val = (EnumValue<?>) o;
+			Key val = (Key) o;
 			// search
 			return array.indexOf(val.name());
 		}
@@ -358,9 +356,9 @@ public final class JsEnumValueArrayList<K> implements List<EnumValue<K>> {
 	@Override
 	public int lastIndexOf(Object o) {
 		// checks if EnumValue
-		if (o instanceof EnumValue<?>){
+		if (o instanceof Key){
 			// cast
-			EnumValue<?> val = (EnumValue<?>) o;
+			Key val = (Key) o;
 			// search
 			return array.lastIndexOf(val.name());
 		}
@@ -371,8 +369,8 @@ public final class JsEnumValueArrayList<K> implements List<EnumValue<K>> {
 	 * Returns a list iterator over the elements in this list
 	 */
 	@Override
-	public ListIterator<EnumValue<K>> listIterator() {
-		return new ListIteratorImpl<EnumValue<K>>(0, this);
+	public ListIterator<E> listIterator() {
+		return new ListIteratorImpl<E>(0, this);
 	}
 
 	/**
@@ -381,19 +379,19 @@ public final class JsEnumValueArrayList<K> implements List<EnumValue<K>> {
 	 * An initial call to previous would return the element with the specified index minus one.
 	 */
 	@Override
-	public ListIterator<EnumValue<K>> listIterator(int index) {
+	public ListIterator<E> listIterator(int index) {
 		// if index is out of range, EXCEPTION
 		if (!checkRange(index)){
             throw new IndexOutOfBoundsException("Index: "+index);
 		}
-		return new ListIteratorImpl<EnumValue<K>>(index, this);
+		return new ListIteratorImpl<E>(index, this);
 	}
 
 	/**
 	 * Not implemented
 	 */
 	@Override
-	public List<EnumValue<K>> subList(int fromIndex, int toIndex) {
+	public List<E> subList(int fromIndex, int toIndex) {
 		throw new UnsupportedOperationException("Unable to copy into an array");
 	}
 
@@ -419,9 +417,9 @@ public final class JsEnumValueArrayList<K> implements List<EnumValue<K>> {
 	 * @param name name to search
 	 * @return EnumValue instance or null if not found
 	 */
-	private EnumValue<K> getByName(String name){
+	private E getByName(String name){
 		// scans all EnumValues
-		for (EnumValue<K> value : definedValues){
+		for (E value : definedValues){
 			// if equals returns it
 			if (value.name().equalsIgnoreCase(name)){
 				return value;

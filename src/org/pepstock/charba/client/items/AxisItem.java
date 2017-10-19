@@ -288,7 +288,7 @@ public class AxisItem extends BaseItem {
 	}
 
 	public final Position getPosition() {
-		return getValue(Property.position, Position.values(), Position.top);
+		return getValue(Property.position, Position.class, Position.top);
 	}
 
 	public final void setMargins(AxisMarginsItem item) {

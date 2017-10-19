@@ -15,15 +15,12 @@
 */
 package org.pepstock.charba.client.enums;
 
-public enum JoinStyle implements EnumValue<JoinStyle> {
+import org.pepstock.charba.client.commons.Key;
+
+public enum JoinStyle implements Key {
 	
 	bevel,
 	round,
 	miter;
-	
-	@Override
-	public JoinStyle getValue() {
-		return this;
-	}
-	
+
 }

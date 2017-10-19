@@ -136,7 +136,7 @@ public final class Legend extends EventProvider {
     }
 
     public Position getPosition(){
-    	return getValue(Property.position, Position.values(), Position.top);
+    	return getValue(Property.position, Position.class, Position.top);
     }    
     
 	protected void onClick(ChartNativeEvent event, LegendItem item) {

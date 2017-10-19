@@ -15,16 +15,12 @@
 */
 package org.pepstock.charba.client.enums;
 
-public enum Position implements EnumValue<Position>{
+import org.pepstock.charba.client.commons.Key;
+
+public enum Position implements Key {
 
     top,
     left,
     bottom,
     right;
-	
-	@Override
-	public Position getValue() {
-		return this;
-	}
-
 }

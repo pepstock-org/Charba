@@ -17,7 +17,6 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.EnumValue;
 
 public abstract class BaseItem  extends GenericJavaScriptObject {
     
@@ -34,16 +33,16 @@ public abstract class BaseItem  extends GenericJavaScriptObject {
      * @param defaultValue
      * @return
      */
-    protected final <T> T getValue(Key key, EnumValue<T>[] values, T defaultValue){
+    protected final <T extends Key> T getValue(Key key, Class<T> clazz, T defaultValue){
     	if (!contains(key.name())){
     		return defaultValue;
     	}
     	Object object = getString(key.name());
 		if (object != null){
 			String value = object.toString();
-			for (EnumValue<T> enumValue : values){
+			for (T enumValue : clazz.getEnumConstants()){
 				if (enumValue.name().equalsIgnoreCase(value)){
-					return enumValue.getValue();
+					return enumValue;
 				}
 			}
 		}

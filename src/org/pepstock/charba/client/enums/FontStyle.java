@@ -15,28 +15,13 @@
 */
 package org.pepstock.charba.client.enums;
 
-public enum FontStyle implements EnumValue<FontStyle> {
+import org.pepstock.charba.client.commons.Key;
+
+public enum FontStyle implements Key {
 	
 	normal,
 	bold,
 	oblique,
 	italic;
-	
-//	public static FontStyle getFontStyle(Object object){
-//		if (object != null){
-//			String value = object.toString();
-//			for (FontStyle fontStyle : values()){
-//				if (fontStyle.name().equalsIgnoreCase(value)){
-//					return fontStyle;
-//				}
-//			}
-//		}
-//		return normal;
-//	}
 
-	@Override
-	public FontStyle getValue() {
-		return this;
-	}
-	
 }

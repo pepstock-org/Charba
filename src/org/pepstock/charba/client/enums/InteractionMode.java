@@ -15,7 +15,9 @@
 */
 package org.pepstock.charba.client.enums;
 
-public enum InteractionMode implements EnumValue<InteractionMode>{
+import org.pepstock.charba.client.commons.Key;
+
+public enum InteractionMode implements Key {
 	
 	point,
 	nearest,
@@ -25,22 +27,4 @@ public enum InteractionMode implements EnumValue<InteractionMode>{
 	dataset,
 	x,
 	y;
-
-	@Override
-	public InteractionMode getValue() {
-		return this;
-	}
-	
-//	public static InteractionMode getInteractionMode(Object object){
-//		if (object != null){
-//			String value = object.toString();
-//			for (InteractionMode mode : values()){
-//				if (mode.name().equalsIgnoreCase(value)){
-//					return mode;
-//				}
-//			}
-//		}
-//		return nearest;
-//	}
-
 }

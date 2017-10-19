@@ -94,7 +94,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	}
 
 	public AxisType getType() {
-		return getValue(Property.type, AxisType.values(), AxisType.linear);
+		return getValue(Property.type, AxisType.class, AxisType.linear);
 	}
 
 	public void setDisplay(boolean display) {

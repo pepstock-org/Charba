@@ -95,7 +95,7 @@ public class Line extends JavaScriptObjectContainer{
 	}
 
 	public CapStyle getBorderCapStyle(){
-		  return getValue(Property.borderCapStyle, CapStyle.values(), CapStyle.butt);
+		  return getValue(Property.borderCapStyle, CapStyle.class, CapStyle.butt);
 	}
 
 	public void setBorderDash(int... borderDash) {
@@ -123,7 +123,7 @@ public class Line extends JavaScriptObjectContainer{
 	}
 
 	public JoinStyle getBorderJoinStyle() {
-		return getValue(Property.borderJoinStyle, JoinStyle.values(), JoinStyle.miter);
+		return getValue(Property.borderJoinStyle, JoinStyle.class, JoinStyle.miter);
 	}
 
 	public void setCapBezierPoints(boolean capBezierPoints) {
@@ -149,7 +149,7 @@ public class Line extends JavaScriptObjectContainer{
 		}
 		for (Fill enumValue : Fill.values()){
 			if (enumValue.name().equalsIgnoreCase(value)){
-				return enumValue.getValue();
+				return enumValue;
 			}
 		}
 		return Fill.origin;

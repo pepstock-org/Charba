@@ -15,12 +15,14 @@
 */
 package org.pepstock.charba.client.enums;
 
+import org.pepstock.charba.client.commons.Key;
+
 /**
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum Easing implements EnumValue<Easing>{
+public enum Easing implements Key {
     linear,
     easeInQuad,
     easeOutQuad,
@@ -53,20 +55,4 @@ public enum Easing implements EnumValue<Easing>{
     easeOutBounce,
     easeInOutBounce;
 	
-//	public static Easing getEasing(Object object){
-//		if (object != null){
-//			String value = object.toString();
-//			for (Easing easing : values()){
-//				if (easing.name().equalsIgnoreCase(value)){
-//					return easing;
-//				}
-//			}
-//		}
-//		return easeOutQuart;
-//	}
-
-	@Override
-	public Easing getValue() {
-		return this;
-	}
 }

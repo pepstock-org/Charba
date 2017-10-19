@@ -71,7 +71,7 @@ public final class Animation extends EventProvider{
     }
 
     public Easing getEasing(){
-    	return getValue(Property.easing, Easing.values(), Easing.easeOutQuart);
+    	return getValue(Property.easing, Easing.class, Easing.easeOutQuart);
     }
     
     public void setDuration(int milliseconds){

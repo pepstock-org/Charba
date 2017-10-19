@@ -106,7 +106,7 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer{
     }
 
     public FontStyle getFontStyle(){
-    	return getValue(Property.fontStyle, FontStyle.values(), FontStyle.normal);
+    	return getValue(Property.fontStyle, FontStyle.class, FontStyle.normal);
     }    
     
 	public void setFontColor(String fontColor) {

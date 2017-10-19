@@ -15,17 +15,14 @@
 */
 package org.pepstock.charba.client.enums;
 
-public enum AxisType implements EnumValue<AxisType> {
+import org.pepstock.charba.client.commons.Key;
+
+public enum AxisType implements Key {
 	
     linear,
     logarithmic,
     category,
     time,
     radialLinear;
-	
-	@Override
-	public AxisType getValue() {
-		return this;
-	}
-	
+
 }

@@ -66,7 +66,7 @@ public class Rectangle extends JavaScriptObjectContainer{
 	}
 
 	public Position getBorderJoinStyle() {
-		return getValue(Property.borderSkipped, Position.values(), Position.bottom);
+		return getValue(Property.borderSkipped, Position.class, Position.bottom);
 	}
 
 }

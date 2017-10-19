@@ -157,7 +157,7 @@ public final class TooltipModel  extends BaseItem {
     }
 
     public final FontStyle getBodyFontStyle() {
-        return getValue(Property._bodyFontStyle, FontStyle.values(), FontStyle.normal);
+        return getValue(Property._bodyFontStyle, FontStyle.class, FontStyle.normal);
     }
 
     public final String getBodyAlign() {
@@ -185,7 +185,7 @@ public final class TooltipModel  extends BaseItem {
     }
 
     public final FontStyle getTitleFontStyle() {
-    	return getValue(Property._titleFontStyle, FontStyle.values(), FontStyle.normal);
+    	return getValue(Property._titleFontStyle, FontStyle.class, FontStyle.normal);
     }
 
     public final int getTitleFontSize() {
@@ -217,7 +217,7 @@ public final class TooltipModel  extends BaseItem {
     }
 
     public final FontStyle getFooterFontStyle() {
-    	return getValue(Property._footerFontStyle, FontStyle.values(), FontStyle.normal);
+    	return getValue(Property._footerFontStyle, FontStyle.class, FontStyle.normal);
     }
 
     public final int getFooterFontSize() {
@@ -250,15 +250,6 @@ public final class TooltipModel  extends BaseItem {
 
     public final List<TooltipLabelColor> getLabelColors() {
     	return getObjectArray(Property.labelColors.name());
-//    	GenericJavaScriptObject[] objects = getJavaScriptObjectArray(Property.labelColors.name());
-//    	if (objects == null || objects.length == 0){
-//    		return new TooltipLabelColor[0]; 
-//    	} 
-//    	TooltipLabelColor[] items = new TooltipLabelColor[objects.length]; 
-//    	for (int i=0; i<objects.length; i++){
-//    		items[i] = (TooltipLabelColor)objects[i];
-//    	}
-//    	return items;
     }
 
     public final double getOpacity() {

@@ -46,17 +46,6 @@ public class BaseTick extends JavaScriptObjectContainer{
 		fontFamily,
 	}
 	
-	
-	
-	// callback // Return an empty string to draw the tick line but hide the tick label
-    // Return `null` or `undefined` to hide the tick line entirely
-//	callback 	Function 		Returns the string representation of the tick value as it should be displayed on the chart. See callback.
-//	fontColor 	Color 	'#666' 	Font color for tick labels.
-//	fontFamily 	String 	"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif" 	Font family for the tick labels, follows CSS font-family options.
-//	fontSize 	Number 	12 	Font size for the tick labels.
-//	fontStyle 	String 	'normal' 	Font style for the tick labels, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-//	
-	
 	BaseTick() {
 		registerNativeTickCallbacktHandler(getJavaScriptObject());
 	}
@@ -88,7 +77,7 @@ public class BaseTick extends JavaScriptObjectContainer{
     }
 
     public FontStyle getFontStyle(){
-    	return getValue(Property.fontStyle, FontStyle.values(), FontStyle.normal);
+    	return getValue(Property.fontStyle, FontStyle.class, FontStyle.normal);
     }    
     
 	public void setFontColor(String fontColor) {

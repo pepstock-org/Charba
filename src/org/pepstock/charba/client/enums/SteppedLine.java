@@ -15,7 +15,9 @@
 */
 package org.pepstock.charba.client.enums;
 
-public enum SteppedLine implements EnumValue<SteppedLine> {
+import org.pepstock.charba.client.commons.Key;
+
+public enum SteppedLine implements Key {
 	
 //	The following values are supported for steppedLine:
 //
@@ -29,10 +31,5 @@ public enum SteppedLine implements EnumValue<SteppedLine> {
 	before,
 	after,
 	nosteppedline;
-	
-	@Override
-	public SteppedLine getValue() {
-		return this;
-	}
 	
 }

@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.commons;
 
-import org.pepstock.charba.client.enums.EnumValue;
-
 /**
  * Utility to create array list objects based on GWT JavaScript objects.
  * 
@@ -96,13 +94,13 @@ public final class ArrayListHelper {
 	 * @see org.pepstock.charba.client.commons.GenericJavaScriptObject
 	 * @see org.pepstock.charba.client.commons.JsObjectArrayList
 	 */
-	public static <T extends GenericJavaScriptObject> JsObjectArrayList<T> build(T[] values){
+	public static <E extends GenericJavaScriptObject> JsObjectArrayList<E> build(E[] values){
 		// checks if array is null
 		if (values == null){
 			return null;
 		}
 		// creates the list
-		JsObjectArrayList<T> result = new JsObjectArrayList<T>();
+		JsObjectArrayList<E> result = new JsObjectArrayList<E>();
 		// adds all elements
 		result.addAll(values);
 		// returns the list
@@ -132,19 +130,18 @@ public final class ArrayListHelper {
 
 	/**
 	 * Creates a JavaScript array list of EnumValues.
-	 * @param definedValues all possible values of enumeration
+	 * @param clazz Enum class with all possible values of enumeration
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of EnumValues instance or <code>null</code> if the elements are null.
+	 * @return a array list of values or <code>null</code> if the elements are null.
 	 * @see org.pepstock.charba.client.commons.JsEnumValueArrayList
-	 * @see org.pepstock.charba.client.enums.EnumValue
 	 */
-	public static <K> JsEnumValueArrayList<K> build(EnumValue<K>[] definedValues, EnumValue<K>[] values){
+	public static <E extends Key> JsEnumValueArrayList<E> build(Class<E> clazz, E[] values){
 		// checks if array is null
 		if (values == null){
 			return null;
 		}
 		// creates the list
-		JsEnumValueArrayList<K> result = new JsEnumValueArrayList<K>(definedValues);
+		JsEnumValueArrayList<E> result = new JsEnumValueArrayList<E>(clazz);
 		// adds all elements
 		result.addAll(values);
 		// returns the list
@@ -153,20 +150,19 @@ public final class ArrayListHelper {
 
 	/**
 	 * Creates a JavaScript array list of EnumValues.
-	 * @param definedValues all possible values of enumeration
+	 * @param clazz Enum class with all possible values of enumeration
 	 * @param list a string array list 
-	 * @return a array list of EnumValues instance or <code>null</code> if the list is null.
+	 * @return a array list of values  or <code>null</code> if the list is null.
 	 * @see org.pepstock.charba.client.commons.JsEnumValueArrayList
-	 * @see org.pepstock.charba.client.enums.EnumValue
 	 * @see org.pepstock.charba.client.commons.JsStringArrayList
 	 */
-	public static <K> JsEnumValueArrayList<K> build(EnumValue<K>[] definedValues, JsStringArrayList list){
+	public static <E extends Key> JsEnumValueArrayList<E> build(Class<E> clazz, JsStringArrayList list){
 		// checks if array is null
 		if (list == null){
 			return null;
 		}
 		// returns the list adding the string array list to initialize it
-		return new JsEnumValueArrayList<K>(definedValues, list.getJsArray());
+		return new JsEnumValueArrayList<E>(clazz.getEnumConstants(), list.getJsArray());
 	}
 
 }

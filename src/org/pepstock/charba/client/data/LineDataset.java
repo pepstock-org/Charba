@@ -181,7 +181,7 @@ public class LineDataset extends LiningDataset{
 			// if enum is equals to value
 			if (enumValue.name().equalsIgnoreCase(value)){
 				// returns enum
-				return enumValue.getValue();
+				return enumValue;
 			}
 		}
 		// returns this as default

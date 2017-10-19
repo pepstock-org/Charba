@@ -162,16 +162,16 @@ public abstract class BaseOptions extends EventProvider {
 		if (events == null || events.length == 0){
 			remove(Property.events);
 		} else {
-			setEnumValueArray(Property.events, ArrayListHelper.build(Event.values(), events));
+			setEnumValueArray(Property.events, ArrayListHelper.build(Event.class, events));
 		}
 	}
 
 	public JsEnumValueArrayList<Event> getEvents(){
 		if (has(Property.events)){
 			JsStringArrayList value = getStringArray(Property.events);
-			return ArrayListHelper.build(Event.values(), value);
+			return ArrayListHelper.build(Event.class, value);
 		} else {
-			return ArrayListHelper.build(Event.values(), Event.values());
+			return ArrayListHelper.build(Event.class, Event.values());
 		}
 	}
 

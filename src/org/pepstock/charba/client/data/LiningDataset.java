@@ -196,7 +196,7 @@ abstract class LiningDataset extends Dataset{
 	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public CapStyle getBorderCapStyle(){
-		  return getValue(Property.borderCapStyle, CapStyle.values(), CapStyle.butt);
+		  return getValue(Property.borderCapStyle, CapStyle.class, CapStyle.butt);
 	}
 
 	/**
@@ -216,7 +216,7 @@ abstract class LiningDataset extends Dataset{
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public JoinStyle getBorderJoinStyle() {
-		return getValue(Property.borderJoinStyle, JoinStyle.values(), JoinStyle.miter);
+		return getValue(Property.borderJoinStyle, JoinStyle.class, JoinStyle.miter);
 	}
 
 	/**
@@ -253,7 +253,7 @@ abstract class LiningDataset extends Dataset{
 			// if enum is equals to value
 			if (enumValue.name().equalsIgnoreCase(value)){
 				// returns enum
-				return enumValue.getValue();
+				return enumValue;
 			}
 		}
 		// returns this as default
@@ -499,7 +499,7 @@ abstract class LiningDataset extends Dataset{
 	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public void setPointStyle(PointStyle... pointStyle) {
-		setPointStyle(ArrayListHelper.build(PointStyle.values(), pointStyle));
+		setPointStyle(ArrayListHelper.build(PointStyle.class, pointStyle));
 	}
 
 	/**
@@ -521,9 +521,9 @@ abstract class LiningDataset extends Dataset{
 		JsStringArrayList sValues = checkAndGetStringValues(Property.pointStyle, isPointStyleArray);
 		// if empty, returns the default
 		if (sValues.isEmpty()){
-			return ArrayListHelper.build(PointStyle.values(), new PointStyle[]{PointStyle.circle});
+			return ArrayListHelper.build(PointStyle.class, new PointStyle[]{PointStyle.circle});
 		} else {
-			return ArrayListHelper.build(PointStyle.values(), sValues);
+			return ArrayListHelper.build(PointStyle.class, sValues);
 		}
 	}
 

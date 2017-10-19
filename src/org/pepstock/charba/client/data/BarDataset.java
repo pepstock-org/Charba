@@ -249,7 +249,7 @@ public class BarDataset extends Dataset{
 	 * @return the edge to skip drawing the border for.
 	 */
 	public Position getBorderSkipped(){
-		return getValue(Property.borderSkipped, Position.values(), Position.top);
+		return getValue(Property.borderSkipped, Position.class, Position.top);
 	}
 
 }

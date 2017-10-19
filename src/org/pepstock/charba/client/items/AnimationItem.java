@@ -41,7 +41,7 @@ public final class AnimationItem  extends BaseItem {
     }
 
     public final Easing getEasing() {
-    	return getValue(Property.easing, Easing.values(), Easing.easeOutQuart);
+    	return getValue(Property.easing, Easing.class, Easing.easeOutQuart);
     }
 
 	public String toContentString()  {

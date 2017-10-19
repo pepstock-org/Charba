@@ -15,7 +15,9 @@
 */
 package org.pepstock.charba.client.enums;
 
-public enum Event implements EnumValue<Event> {
+import org.pepstock.charba.client.commons.Key;
+
+public enum Event implements Key {
 	
 	mousemove, 
 	mouseout, 
@@ -23,10 +25,5 @@ public enum Event implements EnumValue<Event> {
 	touchstart, 
 	touchmove, 
 	touchend;
-	
-	@Override
-	public Event getValue() {
-		return this;
-	}
 	
 }

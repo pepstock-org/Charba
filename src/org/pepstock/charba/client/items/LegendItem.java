@@ -61,7 +61,7 @@ public final class LegendItem  extends BaseItem {
     }
 
     public final CapStyle getLineCap() {
-    	return getValue(Property.fillStyle, CapStyle.values(), CapStyle.butt);
+    	return getValue(Property.fillStyle, CapStyle.class, CapStyle.butt);
     }
 
     public final List<Integer> getLineDash() {
@@ -73,7 +73,7 @@ public final class LegendItem  extends BaseItem {
     }
 
     public final JoinStyle getLineJoin() {
-    	return getValue(Property.lineJoin, JoinStyle.values(), JoinStyle.miter);
+    	return getValue(Property.lineJoin, JoinStyle.class, JoinStyle.miter);
     }
 
     public final int getLineWidth() {
@@ -85,7 +85,7 @@ public final class LegendItem  extends BaseItem {
     }
 
     public final PointStyle getPointStyle() {
-        return getValue(Property.lineJoin, PointStyle.values(), PointStyle.circle);
+        return getValue(Property.lineJoin, PointStyle.class, PointStyle.circle);
     }
 
 	public final String toContentString() {

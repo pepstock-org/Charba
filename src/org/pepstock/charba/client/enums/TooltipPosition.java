@@ -15,14 +15,11 @@
 */
 package org.pepstock.charba.client.enums;
 
-public enum TooltipPosition implements EnumValue<TooltipPosition>{
+import org.pepstock.charba.client.commons.Key;
+
+public enum TooltipPosition implements Key {
 
     average,
     nearest;
-	
-	@Override
-	public TooltipPosition getValue() {
-		return this;
-	}
 
 }

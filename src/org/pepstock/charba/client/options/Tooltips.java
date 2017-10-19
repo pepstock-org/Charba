@@ -207,7 +207,7 @@ public final class Tooltips extends AbstractLabel{
 	}
 
 	public InteractionMode getMode() {
-		return getValue(Property.mode, InteractionMode.values(), InteractionMode.nearest);
+		return getValue(Property.mode, InteractionMode.class, InteractionMode.nearest);
 	}
 
 	public void setIntersect(boolean intersect) {
@@ -223,7 +223,7 @@ public final class Tooltips extends AbstractLabel{
 	}
 
 	public TooltipPosition getPosition() {
-		return getValue(Property.position, TooltipPosition.values(), TooltipPosition.average);
+		return getValue(Property.position, TooltipPosition.class, TooltipPosition.average);
 	}
 
 	public void setBackgroundColor(String backgroundColor) {
@@ -255,7 +255,7 @@ public final class Tooltips extends AbstractLabel{
 	}
 
 	public FontStyle getTitleFontStyle() {
-		return getValue(Property.titleFontStyle, FontStyle.values(), FontStyle.bold);
+		return getValue(Property.titleFontStyle, FontStyle.class, FontStyle.bold);
 	}
 
 	public void setTitleFontColor(String titleFontColor) {
@@ -303,7 +303,7 @@ public final class Tooltips extends AbstractLabel{
 	}
 
 	public FontStyle getBodyFontStyle() {
-		return getValue(Property.bodyFontStyle, FontStyle.values(), FontStyle.normal);
+		return getValue(Property.bodyFontStyle, FontStyle.class, FontStyle.normal);
 	}
 
 	public void setBodyFontColor(String bodyFontColor) {
@@ -343,7 +343,7 @@ public final class Tooltips extends AbstractLabel{
 	}
 
 	public FontStyle getFooterFontStyle() {
-		return getValue(Property.footerFontStyle, FontStyle.values(), FontStyle.bold);
+		return getValue(Property.footerFontStyle, FontStyle.class, FontStyle.bold);
 	}
 
 	public void setFooterFontColor(String footerFontColor) {

@@ -15,15 +15,12 @@
 */
 package org.pepstock.charba.client.enums;
 
-public enum CapStyle implements EnumValue<CapStyle> {
+import org.pepstock.charba.client.commons.Key;
+
+public enum CapStyle implements Key {
 	
 	butt,
 	round,
 	square;
-	
-	@Override
-	public CapStyle getValue() {
-		return this;
-	}
 	
 }

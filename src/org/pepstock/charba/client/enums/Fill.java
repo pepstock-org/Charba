@@ -15,16 +15,13 @@
 */
 package org.pepstock.charba.client.enums;
 
-public enum Fill implements EnumValue<Fill> {
+import org.pepstock.charba.client.commons.Key;
+
+public enum Fill implements Key {
 	
 	start,
 	end,
 	origin,
 	nofill;
-	
-	@Override
-	public Fill getValue() {
-		return this;
-	}
 	
 }

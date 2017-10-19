@@ -15,7 +15,9 @@
 */
 package org.pepstock.charba.client.enums;
 
-public enum PointStyle implements EnumValue<PointStyle> {
+import org.pepstock.charba.client.commons.Key;
+
+public enum PointStyle implements Key {
 
     circle,
     cross,
@@ -27,10 +29,5 @@ public enum PointStyle implements EnumValue<PointStyle> {
     rectRot,
     star,
     triangle;
-    
-	@Override
-	public PointStyle getValue() {
-		return this;
-	}
 	
 }

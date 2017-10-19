@@ -43,7 +43,7 @@ public final class Hover extends JavaScriptObjectContainer{
     }
 
     public InteractionMode getMode(){
-    	return getValue(Property.mode, InteractionMode.values(), InteractionMode.nearest);
+    	return getValue(Property.mode, InteractionMode.class, InteractionMode.nearest);
     }    
     
 	public void setIntersect(boolean intersect) {

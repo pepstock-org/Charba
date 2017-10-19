@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.commons;
 
-import org.pepstock.charba.client.enums.EnumValue;
-
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
@@ -282,14 +280,14 @@ public class JavaScriptObjectContainer {
     }
 
     /**
-     * Returns a value (EnumValue) into embedded JavaScript object at specific property.
+     * Returns a value (key) into embedded JavaScript object at specific property.
      * @param key key of the property of JavaScript object.
+     * @param clazz class of object to get all enumartion values
      * @param defaultValue default value if the property is missing
      * @return value of the property
      * @see org.pepstock.charba.client.commons.Key
-     * @see org.pepstock.charba.client.enums.EnumValue
      */
-    protected <T> T getValue(Key key, EnumValue<T>[] values, T defaultValue){
+    protected <T extends Key> T getValue(Key key, Class<T> clazz, T defaultValue){
     	// checks if the property exists
     	if (!has(key)){
     		// if no, returns the default value
@@ -300,11 +298,11 @@ public class JavaScriptObjectContainer {
     	// if not null
 		if (value != null){
 			// scans all EnumValue array
-			for (EnumValue<T> enumValue : values){
-				// checks if Enuvalue name is equals to value
+			for (T enumValue : clazz.getEnumConstants()){
+				// checks if Enum value name is equals to value
 				if (enumValue.name().equalsIgnoreCase(value)){
 					// returns EnumValue
-					return enumValue.getValue();
+					return enumValue;
 				}
 			}
 		}
@@ -318,9 +316,8 @@ public class JavaScriptObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
 	 * @see org.pepstock.charba.client.commons.Key
-	 * @see org.pepstock.charba.client.enums.EnumValue
 	 */
-    protected <T> void setValue(Key key, EnumValue<T> value){
+    protected <T extends Key> void setValue(Key key, T value){
     	// if value is null
     	// try to remove the reference if exists
     	if (value == null){
@@ -486,7 +483,7 @@ public class JavaScriptObjectContainer {
 	 * @see org.pepstock.charba.client.commons.Key
 	 * @see org.pepstock.charba.client.commons.JsEnumValueArrayList
 	 */
-    protected final <T> void setEnumValueArray(Key key, JsEnumValueArrayList<T> list){
+    protected final <T extends Key> void setEnumValueArray(Key key, JsEnumValueArrayList<T> list){
     	// if list is null
     	// try to remove the reference if exists
     	if (list == null){
@@ -508,7 +505,7 @@ public class JavaScriptObjectContainer {
 	 * @return <code>true</code> if the complete list has been set otherwise false
 	 * @see org.pepstock.charba.client.commons.JsEnumValueArrayList
 	 */
-	protected <T> boolean checkAndSetEnumValues(Key key, JsEnumValueArrayList<T> values) {
+	protected <T extends Key> boolean checkAndSetEnumValues(Key key, JsEnumValueArrayList<T> values) {
 		// if values is consistent and has got ONLY 1 value
 		if (values != null && values.size() == 1){
 			// sets at that property only the value and not the array
