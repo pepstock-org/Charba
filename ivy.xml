@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
-    <info organisation="com.vts" module="kics" />
+    <info organisation="com.pepstock" module="charba" />
     <!--
     default     runtime dependencies and master artifact can be used with this conf
     master         contains only the artifact published by this module itself, with no transitive dependencies
