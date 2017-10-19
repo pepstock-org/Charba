@@ -16,17 +16,17 @@
 package org.pepstock.charba.client.events;
 
 /**
- * Event handler for new application creation.
+ * Event handler for chart animation progress event.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
+
 public interface AnimationProgressEventHandler extends ChartEventHandler {
 
 	/**
-	 * Invoked when a new event is fired.
-	 * 
-	 * @param event event
+	 * Invoked when chart animation is progressing.
+	 * @param event animation event
 	 */
 	void onProgress(AnimationProgressEvent event);
 	

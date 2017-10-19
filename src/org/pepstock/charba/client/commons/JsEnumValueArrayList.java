@@ -189,7 +189,7 @@ public final class JsEnumValueArrayList<E extends Key> implements List<E> {
 			// if adds
 			if (add(e.next())){
 				// sets modified 
-				modified = modified && true;
+				modified &= true;
 			} else {
 				// sets false!
 				modified = false;

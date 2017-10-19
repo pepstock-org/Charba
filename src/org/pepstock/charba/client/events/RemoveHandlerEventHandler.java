@@ -18,17 +18,15 @@ package org.pepstock.charba.client.events;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Event handler for new application creation.
- * 
+ * Event handler for removing a chart event handler.
  * @author Andrea "Stock" Stocchero
  *
  */
 public interface RemoveHandlerEventHandler extends EventHandler {
 
 	/**
-	 * Invoked when a new event is fired.
-	 * 
-	 * @param event event
+	 * Invoked when a chart event handler is removed.
+	 * @param event event to be consumed
 	 */
 	void onRemove(RemoveHandlerEvent event);
 	

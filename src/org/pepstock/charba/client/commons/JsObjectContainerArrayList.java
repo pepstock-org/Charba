@@ -170,7 +170,7 @@ public final class JsObjectContainerArrayList<E extends JavaScriptObjectContaine
 			// if adds
 			if (add(e.next())){
 				// sets modified 
-				modified = modified && true;
+				modified &= true;
 			} else {
 				// sets false!
 				modified = false;

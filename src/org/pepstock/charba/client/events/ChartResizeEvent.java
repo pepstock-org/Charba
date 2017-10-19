@@ -20,30 +20,37 @@ import org.pepstock.charba.client.items.SizeItem;
 import com.google.gwt.dom.client.NativeEvent;
 
 /**
- * Event which is fired when a request to create new application has been submitted.<br>
- * When a new application is created, is mandatory to indicate the first administrator of the application.
+ * Event which is fired when the chart has been resized.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class ChartResizeEvent extends AbstractEvent<ChartResizeEventHandler> {
 
+	/**
+	 * Event type
+	 */
 	public static final Type<ChartResizeEventHandler> TYPE = new Type<ChartResizeEventHandler>();
-	
+	// item which contains the new size of the chart
 	private final SizeItem size;
 	
+	/**
+	 * Creates the event with a item with new size of the chart
+	 * @param nativeEvent native event of this custom event
+	 * @param size item with the new size of the chart
+	 */
 	public ChartResizeEvent(NativeEvent nativeEvent, SizeItem size) {
 		super(nativeEvent);
 		this.size = size;
 	}
 
 	/**
-	 * @return the item
+	 * Returns item with the new size of the chart
+	 * @return the item with the new size of the chart
 	 */
 	public SizeItem getSize() {
 		return size;
 	}
-
 
 	/* (non-Javadoc)
 	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()

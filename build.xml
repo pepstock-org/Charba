@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<project name="Charba" default="build" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="Charba" default="javadoc" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
     
     <!--
         Apache IVY ANT lib include
@@ -10,25 +10,17 @@
 		CHARBA project configuration 
 	-->
 	<property name="charba.version" value="1.0" />
-	
 	<property name="charba.built.by" value="www.pepstock.org" />
 	<tstamp>
 			<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
 	</tstamp>
-
 	<property name="src.dir" value="src" />
-    
 	<property name="dest.dir" value="classes" />
-	
 	<property name="dist.dir" value="dist" />
-
     <property name="module.archive.file" value="${dist.dir}/charba.jar" />
-
 	<property name="temp.dir" value="temp" />
-    
 	<property name="javadoc.dir" value="javadoc" />
-
-    <property name="javadoc.archive.file" value="${dist.dir}/charba-doc.zip" />
+    <property name="javadoc.archive.file" value="${dist.dir}/charba-javadoc.jar" />
 
 	<!-- 
 		JAVA compiler options 
@@ -43,9 +35,11 @@
     <target name="clean" description="Cleans folders">
     	<mkdir dir="${dest.dir}"/>
     	<mkdir dir="${dist.dir}"/>
+    	<mkdir dir="${javadoc.dir}"/>
     	<delete failonerror="false" includeemptydirs="true">
             <fileset dir="${dist.dir}" includes="**/*"/>
             <fileset dir="${dest.dir}" includes="**/*"/>
+    		<fileset dir="${javadoc.dir}" includes="**/*"/>
         </delete>
     </target>
 
@@ -68,7 +62,6 @@
     </target>
 
    <target name="build" description="Build Charba distribution" depends="compile">
-
 	<!-- Creates the JAR file adding the classes folder and adding the mnifest part -->
 		<jar jarfile="${module.archive.file}">
 			<fileset dir="${dest.dir}"/>
@@ -81,4 +74,32 @@
 			</manifest>
 		</jar>
    	</target>
+	
+	<target name="javadoc" depends="build">
+		<javadoc destdir="${javadoc.dir}"
+				useexternalfile="yes"
+		         author="true"
+		         version="true"
+		         use="true"
+		         windowtitle="Charba, GWT wrapper for CHART.JS">
+			<classpath>
+				<path refid="ivyPath"/>
+				<fileset dir="${dest.dir}"/>
+				<pathelement path="${java.class.path}" />
+			</classpath>
+			<packageset dir="${src.dir}" defaultexcludes="yes">
+				<include name="org/pepstock/**"/>
+			</packageset>
+		</javadoc>
+		<jar jarfile="${javadoc.archive.file}">
+			<fileset dir="${javadoc.dir}"/>
+			<manifest>
+				<section name="Charba">
+					<attribute name="Version" value="${charba.version}" />
+					<attribute name="Built-By" value="${charba.built.by}" />
+					<attribute name="Creation-time" value="${TODAY}" />
+				</section>
+			</manifest>
+		</jar>
+	</target>
 </project>

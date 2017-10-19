@@ -19,29 +19,37 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 
 /**
- * Event which is fired when a request to create new application has been submitted.<br>
- * When a new application is created, is mandatory to indicate the first administrator of the application.
+ * Event which is fired when new event handler has been added to the chart.<br>
+ * This event should use only for use internal only to manage internally all handlers.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class AddHandlerEvent extends GwtEvent<AddHandlerEventHandler> {
 
+	/**
+	 * Event type
+	 */
 	public static final Type<AddHandlerEventHandler> TYPE = new Type<AddHandlerEventHandler>();
 	
+	// type of new handler added to the chart
 	private final Type<? extends EventHandler> type;
 
+	/**
+	 * Creates the event with the type of new handler.
+	 * @param type the type of new handler.
+	 */
 	public AddHandlerEvent(Type<? extends EventHandler> type) {
 		this.type = type;
 	}
 
 	/**
-	 * @return the type
+	 * Returns the type of new handler.
+	 * @return the type of new handler.
 	 */
 	public Type<? extends EventHandler> getType() {
 		return type;
 	}
-
 
 	/* (non-Javadoc)
 	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()

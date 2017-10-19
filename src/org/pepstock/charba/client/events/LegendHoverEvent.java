@@ -20,30 +20,38 @@ import org.pepstock.charba.client.items.LegendItem;
 import com.google.gwt.dom.client.NativeEvent;
 
 /**
- * Event which is fired when a request to create new application has been submitted.<br>
- * When a new application is created, is mandatory to indicate the first administrator of the application.
+ * Event which is fired when the user hovers on the legend of the chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class LegendHoverEvent extends AbstractEvent<LegendHoverEventHandler> {
 
+	/**
+	 * Event type
+	 */
 	public static final Type<LegendHoverEventHandler> TYPE = new Type<LegendHoverEventHandler>();
-	
+	// legend item selected by hovering
 	private final LegendItem item;
 	
+	/**
+	 * Creates the event with legend item related to the hover
+	 * @param nativeEvent native event of this custom event
+	 * @param item legend item related to the hover
+	 * @see org.pepstock.charba.client.items.LegendItem
+	 */
 	public LegendHoverEvent(NativeEvent nativeEvent, LegendItem item) {
 		super(nativeEvent);
 		this.item = item;
 	}
 
 	/**
-	 * @return the item
+	 * Returns the legend item related to the hover
+	 * @return the legend item related to the hover
 	 */
 	public LegendItem getItem() {
 		return item;
 	}
-
 
 	/* (non-Javadoc)
 	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()

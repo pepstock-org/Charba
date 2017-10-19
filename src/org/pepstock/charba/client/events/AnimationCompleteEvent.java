@@ -20,30 +20,37 @@ import org.pepstock.charba.client.items.AnimationItem;
 import com.google.gwt.dom.client.NativeEvent;
 
 /**
- * Event which is fired when a request to create new application has been submitted.<br>
- * When a new application is created, is mandatory to indicate the first administrator of the application.
- * 
+ * Event which is fired when the animation of the chart is completed.
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class AnimationCompleteEvent extends AbstractEvent<AnimationCompleteEventHandler> {
 
+	/**
+	 * Event type
+	 */
 	public static final Type<AnimationCompleteEventHandler> TYPE = new Type<AnimationCompleteEventHandler>();
 	
+	// animation item with animation info from chart
 	private final AnimationItem item;
 	
+	/**
+	 * Creates the event with the animation info from chart.
+	 * @param nativeEvent native event of this custom event
+	 * @param item item with animation info from chart
+	 */
 	public AnimationCompleteEvent(NativeEvent nativeEvent, AnimationItem item) {
 		super(nativeEvent);
 		this.item = item;
 	}
 
 	/**
-	 * @return the item
+	 * Returns item with animation info from chart
+	 * @return the item with animation info from chart
 	 */
 	public  AnimationItem getItem() {
 		return item;
 	}
-
 
 	/* (non-Javadoc)
 	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()

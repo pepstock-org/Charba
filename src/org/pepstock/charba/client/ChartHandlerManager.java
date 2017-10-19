@@ -1,7 +1,5 @@
 package org.pepstock.charba.client;
 
-import java.util.logging.Logger;
-
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.ChartEventHandler;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
@@ -13,8 +11,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
 
 final class ChartHandlerManager extends HandlerManager {
 
-	final Logger LOG = Logger.getLogger("TEST");
-	
 	ChartHandlerManager(AbstractChart<?, ?> chart) {
 		super(chart, false);
 	}

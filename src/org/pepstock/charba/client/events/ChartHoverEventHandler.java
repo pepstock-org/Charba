@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.events;
 
 /**
- * Event handler for new application creation.
+ * Event handler for hovering on the chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -24,9 +24,8 @@ package org.pepstock.charba.client.events;
 public interface ChartHoverEventHandler extends ChartEventHandler {
 
 	/**
-	 * Invoked when a new event is fired.
-	 * 
-	 * @param event event
+	 * Invoked when the user hovers on the chart.
+	 * @param event chart hover event
 	 */
 	void onHover(ChartHoverEvent event);
 	

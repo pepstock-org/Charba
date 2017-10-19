@@ -22,30 +22,40 @@ import org.pepstock.charba.client.items.DatasetMetaItem;
 import com.google.gwt.dom.client.NativeEvent;
 
 /**
- * Event which is fired when a request to create new application has been submitted.<br>
- * When a new application is created, is mandatory to indicate the first administrator of the application.
+ * Event which is fired when the user hovers on the chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class ChartHoverEvent extends AbstractEvent<ChartHoverEventHandler> {
 
+	/**
+	 * Event type
+	 */
 	public static final Type<ChartHoverEventHandler> TYPE = new Type<ChartHoverEventHandler>();
 	
+	// a list of items with dataset metadata related to the hover
 	private final List<DatasetMetaItem> items;
 
+	/**
+	 * Creates the event with a list of items with dataset metadata related to the hover
+	 * @param nativeEvent native event of this custom event
+	 * @param items a list of items with dataset metadata related to the hover
+	 * @see org.pepstock.charba.client.items.DatasetMetaItem
+	 */
 	public ChartHoverEvent(NativeEvent nativeEvent, List<DatasetMetaItem> items) {
 		super(nativeEvent);
 		this.items = items;
 	}
 
 	/**
-	 * @return the item
+	 * Returns a list of items with dataset metadata related to the hover
+	 * @return a list of items with dataset metadata related to the hover
+	 * @see org.pepstock.charba.client.items.DatasetMetaItem
 	 */
 	public List<DatasetMetaItem> getItems() {
 		return items;
 	}
-
 
 	/* (non-Javadoc)
 	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()

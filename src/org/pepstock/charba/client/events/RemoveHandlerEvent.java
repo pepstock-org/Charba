@@ -19,29 +19,36 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 
 /**
- * Event which is fired when a request to create new application has been submitted.<br>
- * When a new application is created, is mandatory to indicate the first administrator of the application.
+ * Event which is fired when new event handler has been removed to the chart.<br>
+ * This event should use only for use internal only to manage internally all handlers.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class RemoveHandlerEvent extends GwtEvent<RemoveHandlerEventHandler> {
 
+	/**
+	 * Event type
+	 */
 	public static final Type<RemoveHandlerEventHandler> TYPE = new Type<RemoveHandlerEventHandler>();
-	
+	// type of the handler removed from the chart
 	private final Type<? extends EventHandler> type;
 
+	/**
+	 * Creates the event with the type of removed handler.
+	 * @param type the type of removed handler.
+	 */
 	public RemoveHandlerEvent(Type<? extends EventHandler> type) {
 		this.type = type;
 	}
 
 	/**
-	 * @return the type
+	 * Returns the type of removed handler.
+	 * @return the type of removed handler.
 	 */
 	public Type<? extends EventHandler> getType() {
 		return type;
 	}
-
 
 	/* (non-Javadoc)
 	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()

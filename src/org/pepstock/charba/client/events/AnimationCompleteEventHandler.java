@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.events;
 
 /**
- * Event handler for new application creation.
+ * Event handler for chart animation complete event.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -24,9 +24,8 @@ package org.pepstock.charba.client.events;
 public interface AnimationCompleteEventHandler extends ChartEventHandler {
 
 	/**
-	 * Invoked when a new event is fired.
-	 * 
-	 * @param event event
+	 * Invoked when chart animation is complete.
+	 * @param event animation event
 	 */
 	void onComplete(AnimationCompleteEvent event);
 	

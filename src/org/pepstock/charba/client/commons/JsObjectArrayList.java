@@ -181,7 +181,7 @@ public final class JsObjectArrayList<E extends GenericJavaScriptObject> implemen
 			// if adds
 			if (add(e.next())){
 				// sets modified 
-				modified = modified && true;
+				modified &= true;
 			} else {
 				// sets false!
 				modified = false;

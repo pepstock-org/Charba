@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.events;
 
 /**
- * Event handler for new application creation.
+ * Event handler for chart dataset selecting.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -24,9 +24,8 @@ package org.pepstock.charba.client.events;
 public interface DatasetSelectionEventHandler extends ChartEventHandler {
 
 	/**
-	 * Invoked when a new event is fired.
-	 * 
-	 * @param event event
+	 * Invoked when the user clicks on the chart to select a dataet.
+	 * @param event chart dataset selection event
 	 */
 	void onSelect(DatasetSelectionEvent event);
 	

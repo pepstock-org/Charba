@@ -183,7 +183,7 @@ public final class JsIntegerArrayList implements List<Integer> {
 			// if adds
 			if (add(e.next())){
 				// sets modified 
-				modified = modified && true;
+				modified &= true;
 			} else {
 				// sets false!
 				modified = false;

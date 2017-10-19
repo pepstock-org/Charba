@@ -183,7 +183,7 @@ public final class JsStringArrayList implements List<String> {
 			// if adds
 			if (add(e.next())){
 				// sets modified 
-				modified = modified && true;
+				modified &= true;
 			} else {
 				// sets false!
 				modified = false;
