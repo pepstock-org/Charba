@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+    <info organisation="com.vts" module="kics" />
+    <!--
+    default     runtime dependencies and master artifact can be used with this conf
+    master         contains only the artifact published by this module itself, with no transitive dependencies
+    compile     this is the default scope, used if none is specified. Compile dependencies are available in all classpaths 
+                provided this is much like compile, but indicates you expect the JDK or a container to provide it. 
+                It is only available on the compilation classpath, and is not transitive
+    runtime     this scope indicates that the dependency is not required for compilation, but is for execution. 
+                It is in the runtime and test classpaths, but not the compile classpath
+    test         this scope indicates that the dependency is not required for normal use of the application, and 
+                is only available for the test compilation and execution phases
+    system         this scope is similar to provided except that you have to provide the JAR which contains it explicitly.
+    sources     this configuration contains the source artifact of this module, if any Source for the project
+    javadoc     this configuration contains the javadoc artifact of this module, if any JavaDoc for the project
+    optional     contains all optional dependencies
+    -->
+    <configurations defaultconf="runtime" defaultconfmapping="runtime->default; sources->sources,javadoc">
+        <conf name="runtime" description="runtime dependencies" />
+        <conf name="sources" description="source and javadoc" />
+    </configurations>
+    <dependencies>
+        <!-- GWT SDK + GWT RELATED -->
+
+        <dependency org="com.google.gwt" name="gwt-user" rev="2.7.0" conf="*->default"/>
+        <dependency org="com.google.gwt" name="gwt-dev" rev="2.7.0" />
+
+    </dependencies>
+</ivy-module>

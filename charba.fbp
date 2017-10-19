@@ -1,0 +1,11 @@
+<Project projectName="Charba">
+  <Jar>.\bin</Jar>
+  <AuxClasspathEntry>.\lib-ivy\asm-5.0.3.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\asm-commons-5.0.3.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\asm-tree-5.0.3.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\asm-util-5.0.3.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\gwt-dev-2.7.0.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\gwt-user-2.7.0.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\validation-api-1.0.0.ga-sources.jar</AuxClasspathEntry>
+  <SrcDir>.\src</SrcDir>
+</Project>
