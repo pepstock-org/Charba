@@ -17,13 +17,37 @@ package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Key;
 
+/**
+ * The events option defines the browser events that the chart should listen to for tooltips and hovering.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public enum Event implements Key {
 	
+	/**
+	 * The user moves the mouse over an element
+	 */
 	mousemove, 
-	mouseout, 
+	/**
+	 * The user moves the mouse away from an element
+	 */
+	mouseout,
+	/**
+	 * The user clicks an element
+	 */
 	click, 
+	/**
+	 * The user touches a point is placed on the touch surface.
+	 */
 	touchstart, 
+	/**
+	 * The user touches a point is moved along the touch surface.
+	 */
 	touchmove, 
+	/**
+	 * The user touches a point is removed from the touch surface.
+	 */
 	touchend;
 	
 }

@@ -18,6 +18,8 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
+ * Easing is acceleration, a change in speed.<br>
+ * For further deatils, see <a href="http://www.chartjs.org/docs/latest/configuration/animations.html#easing">here</a>.
  * 
  * @author Andrea "Stock" Stocchero
  *

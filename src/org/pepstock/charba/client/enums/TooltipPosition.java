@@ -17,9 +17,20 @@ package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Key;
 
+/**
+ * These are the different modes for positioning the tooltip
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public enum TooltipPosition implements Key {
 
+	/**
+	 * Will place the tooltip at the average position of the items displayed in the tooltip.
+	 */
     average,
+    /**
+     * Will place the tooltip at the position of the element closest to the event position.
+     */
     nearest;
 
 }

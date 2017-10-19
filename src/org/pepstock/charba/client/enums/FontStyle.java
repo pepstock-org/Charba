@@ -17,11 +17,29 @@ package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Key;
 
+/**
+ * The font-style property specifies the font style for a text.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public enum FontStyle implements Key {
 	
+	/**
+	 * The browser displays a normal font style. This is default
+	 */
 	normal,
+	/**
+	 * The browser displays thick characters.
+	 */
 	bold,
+	/**
+	 * The browser displays an oblique font style
+	 */
 	oblique,
+	/**
+	 * The browser displays an italic font style
+	 */
 	italic;
 
 }

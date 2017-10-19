@@ -17,19 +17,25 @@ package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Key;
 
+/**
+ * Property to set if the line is shown as a stepped line.
+ *  
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public enum SteppedLine implements Key {
 	
-//	The following values are supported for steppedLine:
-//
-//    false: No Step Interpolation (default)
-//    true: Step-before Interpolation (eq. 'before')
-//    'before': Step-before Interpolation
-//    'after': Step-after Interpolation
-//
-//If the steppedLine value is set to anything other than false, lineTension will be ignored.
-	
+	/**
+	 * Step-before Interpolation
+	 */
 	before,
+	/**
+	 * Step-after Interpolation
+	 */
 	after,
+	/**
+	 * No Step Interpolation (default)
+	 */
 	nosteppedline;
 	
 }

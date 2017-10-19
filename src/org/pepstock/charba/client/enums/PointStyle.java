@@ -17,6 +17,12 @@ package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Key;
 
+/**
+ * Style of the point.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public enum PointStyle implements Key {
 
     circle,
