@@ -19,12 +19,17 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.Key;
 
+/**
+ * This object is passed by CHART.JS to the callback to manage tooltip body.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @see org.pepstock.charba.client.items.TooltipModel
+ */
 public final class TooltipBodyItem  extends BaseItem {
     
-	// before: String[] // lines of text before the line with the color square
-    // lines: String[], // lines of text to render as the main item with color square
-    // after: String[], // lines of text to render after the main lines
-	
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
     private enum Property implements Key{
     	before,
     	lines,
@@ -35,22 +40,31 @@ public final class TooltipBodyItem  extends BaseItem {
      * Needed for GWt injection
      */
     protected TooltipBodyItem() {
+    	// do nothing
 	}
     
+    /**
+     * Returns text to render before the body section.
+     * @return text to render before the body section.
+     */
 	public final List<String> getBefore() {
         return getStringArray(Property.before.name());
     }
 
+	/**
+	 * Returns all lines of body section.
+	 * @return all lines of body section.
+	 */
 	public final List<String> getLines() {
         return getStringArray(Property.lines.name());
     }
 
+	/**
+	 * Returns text to render after the body section
+	 * @return text to render after the body section
+	 */
 	public final List<String> getAfter() {
         return getStringArray(Property.after.name());
     }
-
-	public String toContentString()  {
-		return "TooltipBodyItem [getBefore()=" + getBefore() + ", getLines()=" + getLines() + ", getAfter()=" + getAfter() + "]";
-	}
 
 }

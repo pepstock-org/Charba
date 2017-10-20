@@ -17,8 +17,19 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.Key;
 
+/**
+ * This item contains the new size of the chart after it has been resized.<br>
+ * This object has been created ONLY when a resize event occurs.
+ *  
+ * @author Andrea "Stock" Stocchero
+ * @see org.pepstock.charba.client.events.ChartResizeEvent
+ * @see org.pepstock.charba.client.events.ChartResizeEventHandler
+ */
 public final class SizeItem  extends BaseItem {
     
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
     private enum Property implements Key{
     	width,
     	height
@@ -28,18 +39,23 @@ public final class SizeItem  extends BaseItem {
      * Needed for GWt injection
      */
     protected SizeItem() {
+    	// do nothing
 	}
 
+	/**
+	 * Returns the width of the chart item in pixel.
+	 * @return the width of the chart item in pixel.
+	 */
 	public final int getWidth() {
         return getInt(Property.width.name());
     }
-    
+
+	/**
+	 * Returns the height of the chart item in pixel.
+	 * @return the height of the chart item in pixel.
+	 */
     public final double getHeight() {
         return getInt(Property.height.name());
     }
-
-	public String toContentString()  {
-		return "SizeItem [getWidth()=" + getWidth() + ", getHeight()=" + getHeight() + "]";
-	}
 
 }

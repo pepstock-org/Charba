@@ -20,8 +20,19 @@ import java.util.List;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
 
+/**
+ * This object is just a proxy object, created from JavaScript side, to wrap an JavaScript array.<br>
+ * Created and passed by CHART.JS.<br>
+ * This object is NOT used or passed to any callbacks or event handling
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public final class TooltipItemArray  extends GenericJavaScriptObject {
  
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
     private enum Property implements Key{
     	items
     }
@@ -30,13 +41,15 @@ public final class TooltipItemArray  extends GenericJavaScriptObject {
      * Needed for GWt injection
      */
     protected TooltipItemArray() {
+    	// do nothing
 	}
 
+	/**
+	 * Returns a list of tooltip items.
+	 * @return a list of tooltip items.
+	 * @see org.pepstock.charba.client.items.TooltipItem
+	 */
     public final List<TooltipItem> getItems() {
     	return getObjectArray(Property.items.name());
-    }
-
-    public String toContentString()  {
-    	return "TooltipItemArray [getItems()=" + getItems() + "]";
     }
 }

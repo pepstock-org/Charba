@@ -17,10 +17,19 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.Key;
 
+/**
+ * This item provides all information about the view where a dataset has been displayed.<br>
+ * This object has been created and passed to event handler or 
+ * callbacks to apply own logic.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public class DatasetMetaViewItem extends BaseItem {
 
-//	click { target: <canvas>, buttons: 0, clientX: 400, clientY: 101, layerX: 137, layerY: 91 }
-	
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
 	private enum Property implements Key{
 		datasetLabel,
 		label,
@@ -36,55 +45,107 @@ public class DatasetMetaViewItem extends BaseItem {
 		height
 	}
 	
-//  datasetLabel: "dataset 1", label: "January", borderSkipped: "bottom", backgroundColor: "rgba(11, 80, 218, 0.2)", borderColor: "rgb(11, 80, 218)", borderWidth: 1, horizontal: false, base: 305, x: 70.10714285714286, y: 156,
-//	height, width   
-	
     /** 
      * Needed for GWt injection
      */
 	protected DatasetMetaViewItem() {
-		
+		// do nothing
 	}
 
+	/**
+	 * Returns the dataset label 
+	 * @return the dataset label
+	 * @see org.pepstock.charba.client.data.Dataset#setLabel(String)
+	 */
 	public final String getDatasetLabel(){
 	    return getString(Property.datasetLabel.name());
 	}
+	/**
+	 * Returns the label
+	 * @return the label
+	 */
 	public final String getLabel(){
 	    return getString(Property.label.name());
 	}
+	
+	/**
+	 * Returns the edge to skip drawing the border for.
+	 * @return the edge to skip drawing the border for.
+	 */
 	public final String getBorderSkipped(){
 	    return getString(Property.borderSkipped.name());
 	}
+
+	/**
+	 * Returns the fill color of the dataset item
+	 * @return list of the fill color of the dataset item
+	 */
 	public final String getBackgroundColor(){
 	    return getString(Property.backgroundColor.name());
 	}
+	
+	/**
+	 * Returns the color of the dataset item border
+	 * @return list of the color of the dataset item border
+	 */
 	public final String getBorderColor(){
 	    return getString(Property.borderColor.name());
 	}
+	
+	/**
+	 * Returns the stroke width of the dataset item in pixels.
+	 * @return list of the stroke width of the dataset item in pixels.
+	 */
 	public final int getBorderWidth(){
 	    return getInt(Property.borderWidth.name());
 	}
+	
+	/**
+	 * Returns if is an horizontal view 
+	 * @return <code>true</code> if is an horizontal view
+	 */
 	public final boolean isHorizontal(){
 	    return getBoolean(Property.horizontal.name());
 	}
+	
+	/**
+	 * Returns the base value of dataset
+	 * @return the base value of dataset
+	 */
 	public final int getBase(){
 	    return getInt(Property.base.name());
 	}
+
+	/**
+	 * Returns the X location of dataset item in pixel.
+	 * @return the X location of dataset item in pixel.
+	 */
 	public final double getX(){
 	    return getDouble(Property.x.name());
 	}
+
+	/**
+	 * Returns the Y location of dataset item in pixel.
+	 * @return the Y location of dataset item in pixel.
+	 */
 	public final double getY(){
 	    return getDouble(Property.y.name());
 	}
+
+	/**
+	 * Returns the width of dataset item in pixel.
+	 * @return the width of dataset item in pixel.
+	 */
 	public final double getWidth(){
 	    return getDouble(Property.width.name());
 	}
+	
+	/**
+	 * Returns the height of dataset item in pixel.
+	 * @return the height of dataset item in pixel.
+	 */
 	public final double getHeight(){
 	    return getDouble(Property.height.name());
 	}
 
-	public final String toContentString() {
-		return "EventViewItem [getDatasetLabel()=" + getDatasetLabel() + ", getLabel()=" + getLabel() + ", getBorderSkipped()=" + getBorderSkipped() + ", getBackgroundColor()=" + getBackgroundColor() + ", getBorderColor()=" + getBorderColor()
-		+ ", getBorderWidth()=" + getBorderWidth() + ", isHorizontal()=" + isHorizontal() + ", getBase()=" + getBase() + ", getX()=" + getX() + ", getY()=" + getY() + ", getWidth()=" + getWidth() + ", getHeight()=" + getHeight() + "]";
-	}
 }

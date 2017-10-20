@@ -18,34 +18,50 @@ package org.pepstock.charba.client.items;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
 
+/**
+ * It is the base object for all JavaScript objects items that CHART.JS will pass to Charba for callbacks and events.<br>
+ * It maps a JavaScript object providing a set of methods to get and set easily properties from JavaScript Object.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public abstract class BaseItem  extends GenericJavaScriptObject {
     
-     /** 
+    /** 
      * Needed for GWt injection
      */
     protected BaseItem() {
-	}
+    	// do nothing
+    }
    
     /**
-     * ENUM
-     * @param key
-     * @param values
-     * @param defaultValue
-     * @return
+     * Returns a value (key) into embedded JavaScript object at specific property.
+     * @param key key of the property of JavaScript object.
+     * @param clazz class of object to get all enumeration values
+     * @param defaultValue default value if the property is missing
+     * @return value of the property
+     * @see org.pepstock.charba.client.commons.Key
      */
     protected final <T extends Key> T getValue(Key key, Class<T> clazz, T defaultValue){
+    	// checks if the property exists
     	if (!contains(key.name())){
+    		// if no, returns the default value
     		return defaultValue;
     	}
-    	Object object = getString(key.name());
-		if (object != null){
-			String value = object.toString();
+    	// gets the string value
+    	String value = getString(key.name());
+		if (value != null){
+			// scans all EnumValue array
 			for (T enumValue : clazz.getEnumConstants()){
+				// checks if Enum value name is equals to value
 				if (enumValue.name().equalsIgnoreCase(value)){
+					// returns EnumValue
 					return enumValue;
 				}
 			}
 		}
+		// if here, means the value is wrong into java script object
+		// returns the default value
 		return defaultValue;
     }
     

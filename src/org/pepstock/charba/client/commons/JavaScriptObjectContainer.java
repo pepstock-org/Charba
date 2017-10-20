@@ -282,7 +282,7 @@ public class JavaScriptObjectContainer {
     /**
      * Returns a value (key) into embedded JavaScript object at specific property.
      * @param key key of the property of JavaScript object.
-     * @param clazz class of object to get all enumartion values
+     * @param clazz class of object to get all enumeration values
      * @param defaultValue default value if the property is missing
      * @return value of the property
      * @see org.pepstock.charba.client.commons.Key

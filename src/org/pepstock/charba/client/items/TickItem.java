@@ -19,8 +19,18 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.Key;
 
+/**
+ * This item contains the tick info item.<br>
+ * It has been created to change the tick marks.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @see org.pepstock.charba.client.callbacks.TickCallback
+ */
 public class TickItem extends BaseItem {
 
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
 	private enum Property implements Key{
 		value,
 		index,
@@ -30,23 +40,31 @@ public class TickItem extends BaseItem {
      * Needed for GWt injection
      */
 	protected TickItem() {
-		
+		// do nothing
 	}
 
+	/**
+	 * Returns the value of the tick.
+	 * @return the value of the tick.
+	 */
 	public final double getValue() {
 		return getDouble(Property.value.name());
 	}
 
+	/**
+	 * Returns the index of the tick.
+	 * @return the index of the tick.
+	 */
 	public final int getIndex() {
 		return getInt(Property.index.name());
 	}
 
+	/**
+	 * Returns the complete list of ticks.
+	 * @return the complete list of ticks.
+	 */
 	public final List<Double> getValues() {
 		return getDoubleArray(Property.values.name());
 	}
-
-	public final String toContentString() {
-		return "TickItem [getValue()=" + getValue() + ", getIndex()=" + getIndex() + ", getValues()=" + getValues() + "]";
-	} 
 
 }

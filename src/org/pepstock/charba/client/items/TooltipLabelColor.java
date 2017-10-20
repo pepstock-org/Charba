@@ -17,8 +17,18 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.Key;
 
+/**
+ * This object contains the color info when a label into tooltip.<br>
+ * It must be used into label tooltip callback.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @see org.pepstock.charba.client.callbacks.TooltipLabelCallback
+ */
 public final class TooltipLabelColor  extends BaseItem {
 	
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
     private enum Property implements Key{
     	backgroundColor,
     	borderColor
@@ -28,17 +38,22 @@ public final class TooltipLabelColor  extends BaseItem {
      * Needed for GWt injection
      */
     protected TooltipLabelColor() {
+    	// do nothing
 	}
 
+    /**
+     * Returns the background color of the label.
+     * @return the background color of the label.
+     */
 	public final String getBackgroundColor() {
         return getString(Property.backgroundColor.name());
     }
 
+	/**
+	 * Returns the border color of the label.
+	 * @return the border color of the label.
+	 */
 	public final String getBorderColor() {
         return getString(Property.borderColor.name());
     }
-
-	public final String toContentString() {
-		return "TooltipLabelColor [getBackgroundColor()=" + getBackgroundColor() + ", getBorderColor()=" + getBorderColor() + "]";
-	}
 }

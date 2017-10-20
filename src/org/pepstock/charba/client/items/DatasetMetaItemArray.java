@@ -20,8 +20,19 @@ import java.util.List;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
 
+/**
+ * This object is just a proxy object, created from JavaScript side, to wrap an JavaScript array.<br>
+ * Created and passed by CHART.JS.<br>
+ * This object is NOT used or passed to any callbacks or event handling
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public class DatasetMetaItemArray extends GenericJavaScriptObject {
  
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
     private enum Property implements Key{
     	items
     }
@@ -29,15 +40,16 @@ public class DatasetMetaItemArray extends GenericJavaScriptObject {
      * Needed for GWt injection
      */
 	protected DatasetMetaItemArray() {
-		
+		// do nothing
 	}
 
+	/**
+	 * Returns a list of dataset metadata items.
+	 * @return a list of dataset metadata items.
+	 * @see org.pepstock.charba.client.items.DatasetMetaItem
+	 */
     public final List<DatasetMetaItem>  getItems() {
     	return getObjectArray(Property.items.name());
     }
-
-	public final String toContentString() {
-		return "DasetMetaItemArray [getItems()=" + getItems() + "]";
-	}
 
 }
