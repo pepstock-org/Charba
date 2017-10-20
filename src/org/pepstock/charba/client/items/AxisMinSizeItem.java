@@ -17,8 +17,18 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.Key;
 
+/**
+ * JavaScript object which contains the minimum size of an axis.<br>
+ * This object reflects the object created by CHART.JS and is provided to Axis callbacks.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public class AxisMinSizeItem extends BaseItem {
 
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
 	private enum Property implements Key{
 		width,
 		height
@@ -27,27 +37,39 @@ public class AxisMinSizeItem extends BaseItem {
      * Needed for GWt injection
      */
 	protected AxisMinSizeItem() {
-		
+		// do nothing
 	}
 
+	/**
+	 * Sets the minimum width of axis in pixel.
+	 * @return the minimum width of axis in pixel.
+	 */
 	public final int getWidth() {
 		return getInt(Property.width.name());
 	}
 
+	/**
+	 * Returns the minimum width of axis in pixel.
+	 * @param width the minimum width of axis in pixel.
+	 */
 	public final void setWidth(int width) {
 		setInt(Property.width.name(), width);
 	}
 
+	/**
+	 * Returns the minimum height of axis in pixel.
+	 * @return the minimum height of axis in pixel.
+	 */
 	public final int getHeight() {
 		return getInt(Property.height.name());
 	}
 
+	/**
+	 * Sets the minimum height of axis in pixel.
+	 * @param height the minimum height of axis in pixel.
+	 */
 	public final void setHeight(int height) {
 		setInt(Property.height.name(), height);
-	}
-
-	public final String toContentString() {
-		return "AxisMinSizeItem [getWidth()=" + getWidth() + ", getHeight()=" + getHeight() + "]";
 	}
 
 }

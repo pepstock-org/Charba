@@ -22,18 +22,18 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ScriptElement;
 
 /**
- * This utility injects ChartJS javascript into teh web page of GWT.<br>
+ * This utility injects ChartJS javascript into the web page of GWT.<br>
  * If ChartJS is already injected, it does nothing.<br>
  * 
  * @author Andrea "Stock" Stocchero
- * @since 1.0
+ * 
  */
 final class Injector {
 
 	// stores if the ChartJS is already injected
 	private static boolean injected = false;
 	// ID of script element with CHART JS
-	private static String CHART_JS_SCRIPT_ELEMENT_ID = "_charba_chartjs";
+	private static final String CHART_JS_SCRIPT_ELEMENT_ID = "_charba_chartjs";
 
 	/**
 	 * Injects ChartJS if not injected yet.

@@ -17,8 +17,18 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.Key;
 
+/**
+ * JavaScript object which contains the margins sizes of an axis.<br>
+ * This object reflects teh object created by CHART.JS and is provided to Axis callbacks.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public class AxisMarginsItem extends BaseItem {
 
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
 	private enum Property implements Key{
 		left,
 		right, 
@@ -30,43 +40,70 @@ public class AxisMarginsItem extends BaseItem {
 	 * Needed for GWt injection
 	 */
 	protected AxisMarginsItem() {
-
+		// do nothing
 	}
 
+	/**
+	 * Returns the top margin in pixel
+	 * @return  the top margin in pixel
+	 */
 	public final int getTop() {
 		return getInt(Property.top.name());
 	}
 
+	/**
+	 * Sets the top margin in pixel 
+	 * @param top the top margin in pixel
+	 */
 	public final void setTop(int top) {
 		setInt(Property.top.name(), top);
 	}
 
+	/**
+	 * Returns the bottom margin in pixel
+	 * @return the bottom margin in pixel
+	 */
 	public final int getBottom() {
 		return getInt(Property.bottom.name());
 	}
 
+	/**
+	 * Sets the bottom margin in pixel
+	 * @param bottom the bottom margin in pixel
+	 */
 	public final void setBottom(int bottom) {
 		setInt(Property.bottom.name(), bottom);
 	}
 
+	/**
+	 * Returns the left margin in pixel
+	 * @return the left margin in pixel
+	 */
 	public final int getLeft() {
 		return getInt(Property.left.name());
 	}
 
+	/**
+	 * Sets the left margin in pixel
+	 * @param left the left margin in pixel
+	 */
 	public final void setLeft(int left) {
 		setInt(Property.left.name(), left);
 	}
 
+	/**
+	 * Returns the right margin in pixel
+	 * @return the right margin in pixel
+	 */
 	public final int getRight() {
 		return getInt(Property.right.name());
 	}
 
+	/**
+	 * Sets the right margin in pixel
+	 * @param right the right margin in pixel
+	 */
 	public final void setRight(int right) {
 		setInt(Property.right.name(), right);
 	}
-
-	public final String toContentString() {
-		return "AxisMarginsItem [getTop()=" + getTop() + ", getBottom()=" + getBottom() + ", getLeft()=" + getLeft() + ", getRight()=" + getRight() + "]";
-	}
-
 }

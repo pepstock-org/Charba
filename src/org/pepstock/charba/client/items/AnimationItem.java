@@ -18,8 +18,18 @@ package org.pepstock.charba.client.items;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Easing;
 
+/**
+ * The onProgress and onComplete event are useful for synchronizing an external draw to the chart animation.<br>
+ * This is the CHART.JS item with all needed info.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public final class AnimationItem  extends BaseItem {
     
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
     private enum Property implements Key{
     	currentStep,
     	numSteps,
@@ -30,22 +40,32 @@ public final class AnimationItem  extends BaseItem {
      * Needed for GWt injection
      */
     protected AnimationItem() {
+    	// do nothing
 	}
 
+    /**
+     * Returns the current Animation frame number.
+     * @return the current Animation frame number.
+     */
 	public final double getCurrentStep() {
         return getDouble(Property.currentStep.name());
     }
     
+	/**
+	 * Returns the total number of animation frames. 
+	 * @return the total number of animation frames.
+	 */
     public final double getNumSteps() {
         return getDouble(Property.numSteps.name());
     }
 
+    /**
+     * Returns the animation easing to use.
+     * @return the animation easing to use.
+     * @see org.pepstock.charba.client.enums.Easing
+     */
     public final Easing getEasing() {
     	return getValue(Property.easing, Easing.class, Easing.easeOutQuart);
     }
-
-	public String toContentString()  {
-		return "AnimationItem [getCurrentStep()=" + getCurrentStep() + ", getNumSteps()=" + getNumSteps() + ", getEasing()=" + getEasing() + "]";
-	}
 
 }

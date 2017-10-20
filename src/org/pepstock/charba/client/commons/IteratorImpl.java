@@ -36,7 +36,7 @@ public class IteratorImpl<E> implements Iterator<E> {
 	protected int lastReturn = -1; 
 
 	/**
-	 * Builds teh iterator, storing the list instance
+	 * Builds the iterator, storing the list instance
 	 * @param parent list instance
 	 * @see java.util.List
 	 */
@@ -72,10 +72,10 @@ public class IteratorImpl<E> implements Iterator<E> {
 		}
 		// increments cursor
 		cursor = i + 1;
-		// stores teh index of this next call
+		// stores the index of this next call
 		// for remove method if will be called
 		lastReturn = i;
-		// gets teh object from list
+		// gets the object from list
 		return parent.get(i);
 	}
 

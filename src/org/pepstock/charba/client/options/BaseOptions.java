@@ -322,11 +322,6 @@ public abstract class BaseOptions extends EventProvider {
 
 
 	/**
-	 * to generate the html legend, call .generateLegend on your chart after it
-	 * has been created. It will return an html string that you can add to the
-	 * page.
-	 * 
-	 * The default legend is drawn on canvas and doesn't use this function.
 	 * 
 	 * @param options
 	 */
@@ -338,12 +333,7 @@ public abstract class BaseOptions extends EventProvider {
 	}-*/;
 	
 	/**
-	 * to generate the html legend, call .generateLegend on your chart after it
-	 * has been created. It will return an html string that you can add to the
-	 * page.
-	 * 
-	 * The default legend is drawn on canvas and doesn't use this function.
-	 * 
+	 * FIXME
 	 * @param options
 	 */
 	private native void registerNativeClickHandler(GenericJavaScriptObject options)/*-{
@@ -361,11 +351,6 @@ public abstract class BaseOptions extends EventProvider {
 	}-*/;
 	
 	/**
-	 * to generate the html legend, call .generateLegend on your chart after it
-	 * has been created. It will return an html string that you can add to the
-	 * page.
-	 * 
-	 * The default legend is drawn on canvas and doesn't use this function.
 	 * 
 	 * @param options
 	 */
