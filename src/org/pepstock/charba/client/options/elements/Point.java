@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
- * 
+ * FIXME - add Scriptable options
  */
 public class Point extends JavaScriptObjectContainer{
 

@@ -17,9 +17,9 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.AbstractChart;
 
-public class ScatterOptions extends LineOptions {
+public final class BubbleOptions extends ScatterOptions {
 
-	public ScatterOptions(AbstractChart<?, ?> chart) {
+	public BubbleOptions(AbstractChart<?, ?> chart) {
 		super(chart);
 	}
 

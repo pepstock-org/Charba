@@ -13,14 +13,32 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.options;
+package org.pepstock.charba.client;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.data.BubbleDataset;
+import org.pepstock.charba.client.options.BubbleOptions;
 
-public class ScatterOptions extends LineOptions {
+public class BubbleChart extends AbstractChart<BubbleOptions, BubbleDataset> {
+	
+	private final BubbleOptions options;
+	
+	public BubbleChart() {
+		options = new BubbleOptions(this);
+	}
 
-	public ScatterOptions(AbstractChart<?, ?> chart) {
-		super(chart);
+	@Override
+	public Type getType() {
+		return Type.bubble;
+	}
+
+	@Override
+	public BubbleOptions getOptions() {
+		return options;
+	}
+
+	@Override
+	public BubbleDataset newDataset() {
+		return new BubbleDataset();
 	}
 
 }

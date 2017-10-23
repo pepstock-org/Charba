@@ -15,11 +15,6 @@
 */
 package org.pepstock.charba.client.data;
 
-import java.util.List;
-
-import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.JsIntegerArrayList;
-import org.pepstock.charba.client.commons.JsStringArrayList;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Position;
 
@@ -30,178 +25,15 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.data.Dataset
  */
-public class BarDataset extends Dataset{
+public class BarDataset extends HovingFlexDataset{
 
-	// set of boolean flags to know if the value has been set as single value or as array
-	private boolean isBackgroundColorArray = false;
-	
-	private boolean isBorderColorArray = false;
-	
-	private boolean isBorderWidthArray = false;
-	
-	private boolean isHoverBackgroundColorArray = false;
-	
-	private boolean isHoverBorderColorArray = false;
-	
-	private boolean isHoverBorderWidthArray = false;
-	
 	/**
 	 * Name of fields of JavaScript object. 
 	 */
 	private enum Property implements Key {
-		backgroundColor,
-		borderColor,
-		borderWidth,
-		hoverBackgroundColor,
-		hoverBorderColor,
-		hoverBorderWidth,
 		xAxisID,
 		yAxisID,
 		borderSkipped
-	}
-
-	/**
-	 * Sets the fill colors of the bars.
-	 * @param backgroundColor the fill colors of the bars.
-	 */
-	public void setBackgroundColor(String... backgroundColor) {
-		setBackgroundColor(ArrayListHelper.build(backgroundColor));
-	}
-
-	/**
-	 * Sets the fill colors of the bars.
-	 * @param backgroundColor the fill colors of the bars.
-	 */
-	private void setBackgroundColor(JsStringArrayList backgroundColor) {
-		isBackgroundColorArray = checkAndSetStringValues(Property.backgroundColor, backgroundColor);
-	}
-
-	/**
-	 * Returns the fill colors of the bars
-	 * @return list of the fill colors of the bars
-	 */
-	public List<String> getBackgroundColor() {
-		return checkAndGetStringValues(Property.backgroundColor, isBackgroundColorArray);
-	}
-
-	/**
-	 * Sets the color of the bar border
-	 * @param borderColor the color of the bar border
-	 */
-	public void setBorderColor(String... borderColor) {
-		setBorderColor(ArrayListHelper.build(borderColor));
-	}
-	
-	/**
-	 * Sets the color of the bar border
-	 * @param borderColor the color of the bar border
-	 */
-	private void setBorderColor(JsStringArrayList borderColor) {
-		isBorderColorArray = checkAndSetStringValues(Property.borderColor, borderColor);
-	}
-
-	/**
-	 * Returns the color of the bar border
-	 * @return list of the color of the bar border
-	 */
-	public List<String> getBorderColor() {
-		return checkAndGetStringValues(Property.borderColor, isBorderColorArray);
-	}
-	
-	/**
-	 * Sets the stroke width of the bar in pixels.
-	 * @param borderWidth the stroke width of the bar in pixels.
-	 */
-	public void setBorderWidth(int... borderWidth) {
-		setBorderWidth(ArrayListHelper.build(borderWidth));
-	}
-
-	/**
-	 * Sets the stroke width of the bar in pixels.
-	 * @param borderWidth the stroke width of the bar in pixels.
-	 */
-	private void setBorderWidth(JsIntegerArrayList borderWidth) {
-		isBorderWidthArray = checkAndSetIntegerValues(Property.borderWidth, borderWidth);
-	}
-
-	/**
-	 * Returns the stroke width of the bar in pixels.
-	 * @return list of the stroke width of the bar in pixels.
-	 */
-	public List<Integer> getBorderWidth() {
-		return checkAndGetIntegerValues(Property.borderWidth, isBorderWidthArray);
-	}
-
-	/**
-	 * Sets the fill color of the bars when hovered
-	 * @param colors the fill color of the bars when hovered
-	 */
-	public void setHoverBackgroundColor(String... colors){
-		setHoverBackgroundColor(ArrayListHelper.build(colors));
-	}
-	
-	/**
-	 * Sets the fill color of the bars when hovered
-	 * @param colors the fill color of the bars when hovered
-	 */
-	private void setHoverBackgroundColor(JsStringArrayList colors){
-		isHoverBackgroundColorArray = checkAndSetStringValues(Property.hoverBackgroundColor, colors);
-	}
-	
-	/**
-	 * Returns the fill color of the bars when hovered
-	 * @return list of the fill color of the bars when hovered
-	 */
-	public List<String> getHoverBackgroundColor(){
-		return checkAndGetStringValues(Property.hoverBackgroundColor, isHoverBackgroundColorArray);
-	}
-
-	/**
-	 * Sets the stroke color of the bars when hovered
-	 * @param colors the stroke color of the bars when hovered
-	 */
-	public void setHoverBorderColor(String... colors){
-		setHoverBorderColor(ArrayListHelper.build(colors));
-	}
-	
-	/**
-	 * Sets the stroke color of the bars when hovered
-	 * @param colors the stroke color of the bars when hovered
-	 */
-	private void setHoverBorderColor(JsStringArrayList colors){
-		isHoverBorderColorArray = checkAndSetStringValues(Property.hoverBorderColor, colors);
-	}
-	
-	/**
-	 * Returns the stroke color of the bars when hovered
-	 * @return list of the stroke color of the bars when hovered
-	 */
-	public List<String> getHoverBorderColor(){
-		return checkAndGetStringValues(Property.hoverBorderColor, isHoverBorderColorArray);
-	}
-
-	/**
-	 * Sets the stroke width of the bars when hovered.
-	 * @param widths the stroke width of the bars when hovered.
-	 */
-	public void setHoverBorderWidth(int... widths){
-		setHoverBorderWidth(ArrayListHelper.build(widths));
-	}
-
-	/**
-	 * Sets the stroke width of the bars when hovered.
-	 * @param widths the stroke width of the bars when hovered.
-	 */
-	private void setHoverBorderWidth(JsIntegerArrayList widths){
-		isHoverBorderWidthArray = checkAndSetIntegerValues(Property.hoverBorderWidth, widths);
-	}
-	
-	/**
-	 * Returns the stroke width of the bars when hovered.
-	 * @return list of the stroke width of the bars when hovered.
-	 */
-	public List<Integer> getHoverBorderWidth(){
-		return checkAndGetIntegerValues(Property.hoverBorderWidth, isHoverBorderWidthArray);
 	}
 
 	/**

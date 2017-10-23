@@ -30,13 +30,17 @@ public final class DataPoint extends JavaScriptObjectContainer{
 	private static final double DEFAULT_X = Double.MIN_VALUE;
 	// default value for Y
 	private static final double DEFAULT_Y = Double.MIN_VALUE;
+	// default value for R
+	private static final double DEFAULT_R = Double.MIN_VALUE;
 
+	
 	/**
 	 * Name of fields of JavaScript object. 
 	 */
 	private enum Property implements Key {
 		x,
-		y
+		y,
+		r
 	}
 	
 	/**
@@ -69,6 +73,23 @@ public final class DataPoint extends JavaScriptObjectContainer{
 	 */
 	public double getY(){
 		return getValue(Property.y, DEFAULT_Y);
+	}
+
+	/**
+	 * Sets the bubble radius in pixels (not scaled).<br>
+	 * It is not scaled by the chart, it is the raw radius in pixels of the bubble that is drawn on the canvas.
+	 * @param r the bubble radius in pixels (not scaled).
+	 */
+	public void setR(double r){
+		  setValue(Property.r, r);
+	}
+
+	/** 
+	 * Returns the bubble radius in pixels (not scaled).
+	 * @return the bubble radius in pixels (not scaled).
+	 */
+	public double getR(){
+		return getValue(Property.r, DEFAULT_R);
 	}
 
 }
