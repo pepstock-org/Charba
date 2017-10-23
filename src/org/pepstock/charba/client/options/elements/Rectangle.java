@@ -15,56 +15,69 @@
 */
 package org.pepstock.charba.client.options.elements;
 
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Position;
 
 /**
- * 
+ * Rectangle elements are used to represent the bars in a bar chart.<br>
+ * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the same way.<br>
+ * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
+ * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a dataset.
+ * @author Andrea "Stock" Stocchero
+ * @see org.pepstock.charba.client.BarChart
  */
-public class Rectangle extends JavaScriptObjectContainer{
+public class Rectangle extends Arc{
 
+	// default background color
 	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
-
+	// default border with
 	private static final int DEFAULT_BORDER_WIDTH = 0;
-
+	// default border color
 	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0.1)";
 
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
 	enum Property implements Key {
-		backgroundColor,
-		borderWidth,
-		borderColor,
 		borderSkipped
 	}
 	
-	public void setBackgroundColor(String backgroundColor) {
-		setValue(Property.backgroundColor, backgroundColor);
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.options.elements.Arc#getDefaultBackgroundColor()
+	 */
+	@Override
+	protected String getDefaultBackgroundColor() {
+		return DEFAULT_BACKGROUND_COLOR;
 	}
 
-	public String getBackgroundColor() {
-		return getValue(Property.backgroundColor, DEFAULT_BACKGROUND_COLOR);
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.options.elements.Arc#getDefaultBorderWidth()
+	 */
+	@Override
+	protected int getDefaultBorderWidth() {
+		return DEFAULT_BORDER_WIDTH;
 	}
 
-	public void setBorderWidth(int borderWidth) {
-		setValue(Property.borderWidth, borderWidth);
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.options.elements.Arc#getDefaultBorderColor()
+	 */
+	@Override
+	protected String getDefaultBorderColor() {
+		return DEFAULT_BORDER_COLOR;
 	}
 
-	public int getBorderWidth() {
-		return getValue(Property.borderWidth, DEFAULT_BORDER_WIDTH);
-	}
-
-	public void setBorderColor(String borderColor) {
-		setValue(Property.borderColor, borderColor);
-	}
-
-	public String getBorderColor() {
-		return getValue(Property.borderColor, DEFAULT_BORDER_COLOR);
-	}
-
+	/**
+	 * Sets the edge to skip drawing the border for.
+	 * @param position the edge to skip drawing the border for.
+	 */
 	public void setBorderSkipped(Position borderSkipped) {
 		setValue(Property.borderSkipped, borderSkipped);
 	}
 
+	/**
+	 * Returns the edge to skip drawing the border for.
+	 * @return the edge to skip drawing the border for.
+	 */
 	public Position getBorderJoinStyle() {
 		return getValue(Property.borderSkipped, Position.class, Position.bottom);
 	}

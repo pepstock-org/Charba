@@ -31,6 +31,8 @@ import org.pepstock.charba.client.items.AxisItem;
 
 /**
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
 public abstract class Axis extends JavaScriptObjectContainer {
 	
