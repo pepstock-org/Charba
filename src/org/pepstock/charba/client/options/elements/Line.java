@@ -88,16 +88,16 @@ public class Line extends Arc{
 	}
 
 	/**
-	 * Returns the Bézier curve tension (0 for no Bézier curves).
-	 * @param tension the Bézier curve tension (0 for no Bézier curves).
+	 * Returns the BÃ©zier curve tension (0 for no BÃ©zier curves).
+	 * @param tension the BÃ©zier curve tension (0 for no BÃ©zier curves).
 	 */
 	public void setTension(double tension) {
 		setValue(Property.tension, tension);
 	}
 
 	/**
-	 * Returns the Bézier curve tension (0 for no Bézier curves).
-	 * @return the Bézier curve tension (0 for no Bézier curves).
+	 * Returns the BÃ©zier curve tension (0 for no BÃ©zier curves).
+	 * @return the BÃ©zier curve tension (0 for no BÃ©zier curves).
 	 */
 	public double getTension() {
 		return getValue(Property.tension, DEFAULT_TENSION);
@@ -182,16 +182,16 @@ public class Line extends Arc{
 	}
 
 	/**
-	 * Sets <code>true</code> to keep Bézier control inside the chart, <code>false</code> for no restriction.
-	 * @param capBezierPoints <code>true</code> to keep Bézier control inside the chart, <code>false</code> for no restriction.
+	 * Sets <code>true</code> to keep BÃ©zier control inside the chart, <code>false</code> for no restriction.
+	 * @param capBezierPoints <code>true</code> to keep BÃ©zier control inside the chart, <code>false</code> for no restriction.
 	 */
 	public void setCapBezierPoints(boolean capBezierPoints) {
 		setValue(Property.capBezierPoints, capBezierPoints);
 	}
 
 	/**
-	 * Returns <code>true</code> to keep Bézier control inside the chart, <code>false</code> for no restriction.
-	 * @return <code>true</code> to keep Bézier control inside the chart, <code>false</code> for no restriction.
+	 * Returns <code>true</code> to keep BÃ©zier control inside the chart, <code>false</code> for no restriction.
+	 * @return <code>true</code> to keep BÃ©zier control inside the chart, <code>false</code> for no restriction.
 	 */
 	public boolean isCapBezierPoints() {
 		return getValue(Property.capBezierPoints, DEFAULT_CAP_BEZIER_POINTS);
