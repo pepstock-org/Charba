@@ -17,10 +17,20 @@ package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.enums.AxisType;
 
+/**
+ * This object is used to map defined axis as logarithmic.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public final class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmicTick> {
 
+	/**
+	 * Builds the axis
+	 */
 	public CartesianLogarithmicAxis() {
 		super(new CartesianLogarithmicTick());
+		// sets axis type
 		super.setType(AxisType.logarithmic);
 	}
 

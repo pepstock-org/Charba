@@ -17,10 +17,20 @@ package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.enums.AxisType;
 
+/**
+ * This object is used to map defined axis as linear.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public final class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> {
 
+	/**
+	 * Builds the axis
+	 */
 	public CartesianLinearAxis() {
 		super(new CartesianLinearTick());
+		// sets axis type
 		super.setType(AxisType.linear);
 	}
 

@@ -19,7 +19,7 @@ import org.pepstock.charba.client.commons.Key;
 
 /**
  * JavaScript object which contains the margins sizes of an axis.<br>
- * This object reflects teh object created by CHART.JS and is provided to Axis callbacks.
+ * This object reflects the object created by CHART.JS and is provided to Axis callbacks.
  * 
  * @author Andrea "Stock" Stocchero
  *

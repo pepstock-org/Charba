@@ -22,59 +22,117 @@ import org.pepstock.charba.client.commons.JsStringArrayList;
 import org.pepstock.charba.client.commons.Key;
 
 /**
+ * The category scale provides the following options for configuring tick
+ * marks.<br>
+ * The labels are drawn from one of the label arrays included in the chart data.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
-public final class CartesianCategoryTick extends CartesianTick{
-	
-	private enum Property implements Key {
+public final class CartesianCategoryTick extends CartesianTick {
+
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
 		labels,
 		min,
 		max
 	}
-	
-//	labels  Array[String]  -  An array of labels to display.
-//	min  String   The minimum item to display. more...
-//	max  String   The maximum item to display. more...
-	
+
+	/**
+	 * Empty constructor to reduce visibility
+	 */
 	CartesianCategoryTick() {
 	}
 
-	public void setLabels(String... labels){
+	/**
+	 * Sets an array of labels to display.
+	 * 
+	 * @param labels
+	 *            An array of labels to display.
+	 */
+	public void setLabels(String... labels) {
 		setInternalLabels(ArrayListHelper.build(labels));
 	}
 
-	public void setLabels(List<String> labels){
-		if (labels instanceof JsStringArrayList){
-			setInternalLabels((JsStringArrayList)labels);
+	/**
+	 * Sets an array of labels to display.
+	 * 
+	 * @param labels
+	 *            An array of labels to display.
+	 */
+	public void setLabels(List<String> labels) {
+		// if the list is already a java script object list
+		if (labels instanceof JsStringArrayList) {
+			// sets directly
+			setInternalLabels((JsStringArrayList) labels);
 		} else {
+			// creates a new java script object list
 			JsStringArrayList list = new JsStringArrayList();
+			// loads values
 			list.addAll(labels);
+			// sets list
 			setInternalLabels(list);
 		}
 	}
 
-	private void setInternalLabels(JsStringArrayList labels){
+	/**
+	 * Sets the list of labels to java script object
+	 * 
+	 * @param labels
+	 *            An array of labels to display.
+	 */
+	private void setInternalLabels(JsStringArrayList labels) {
 		setStringArray(Property.labels, labels);
 	}
 
-	public List<String> getLabels(){
+	/**
+	 * Returns the array of labels to display.
+	 * 
+	 * @return the array of labels to display.
+	 */
+	public List<String> getLabels() {
 		return getStringArray(Property.labels);
 	}
-	
-	public void setMin(String min){
-		  setValue(Property.min, min);
+
+	/**
+	 * Sets the minimum item to display.
+	 * 
+	 * @param min
+	 *            The minimum item to display
+	 */
+	public void setMin(String min) {
+		setValue(Property.min, min);
 	}
 
-	public String getMin(){
-		  return getValue(Property.min, null);
+	/**
+	 * Returns the minimum item to display
+	 * 
+	 * @return The minimum item to display
+	 */
+	public String getMin() {
+		return getValue(Property.min, null);
 	}
 
-	public void setMax(String max){
-		  setValue(Property.max, max);
+	/**
+	 * Sets the maximum item to display.
+	 * 
+	 * @param max
+	 *            the maximum item to display.
+	 */
+	public void setMax(String max) {
+		setValue(Property.max, max);
 	}
 
-	public String getMax(){
-		  return getValue(Property.max, null);
+	/**
+	 * Returns the maximum item to display.
+	 * 
+	 * @return the maximum item to display.
+	 */
+	public String getMax() {
+		return getValue(Property.max, null);
 	}
 
 }

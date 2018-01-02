@@ -18,39 +18,79 @@ package org.pepstock.charba.client.options.scales;
 import org.pepstock.charba.client.commons.Key;
 
 /**
+ * The logarithmic scale is use to chart numerical data. It can be placed on
+ * either the x or y axis.<br>
+ * As the name suggests, logarithmic interpolation is used to determine where a
+ * value lies on the axis.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
-public final class CartesianLogarithmicTick extends CartesianTick{
-	
+public final class CartesianLogarithmicTick extends CartesianTick {
+
 	private static final double DEFAULT_MIN = Double.MIN_VALUE;
-	
+
 	private static final double DEFAULT_MAX = Double.MAX_VALUE;
-	
-	private enum Property implements Key {
+
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
 		min,
 		max
 	}
-	
-//	min 	Number 		User defined minimum number for the scale, overrides minimum value from data.
-//	max 	Number 		User defined maximum number for the scale, overrides maximum value from data.
 
+	/**
+	 * Empty constructor to reduce visibility
+	 */
 	CartesianLogarithmicTick() {
 	}
-	
-	public void setMin(int min){
-		  setValue(Property.min, min);
+
+	/**
+	 * Sets the user defined minimum number for the scale, overrides minimum
+	 * value from data.
+	 * 
+	 * @param min
+	 *            the user defined minimum number for the scale, overrides
+	 *            minimum value from data.
+	 */
+	public void setMin(int min) {
+		setValue(Property.min, min);
 	}
 
-	public double getMin(){
-		  return getValue(Property.min, DEFAULT_MIN);
+	/**
+	 * Returns the user defined minimum number for the scale, overrides minimum
+	 * value from data.
+	 * 
+	 * @return the user defined minimum number for the scale, overrides minimum
+	 *         value from data. Default is Double.MIN_VALUE.
+	 */
+	public double getMin() {
+		return getValue(Property.min, DEFAULT_MIN);
 	}
 
-	public void setMax(double max){
-		  setValue(Property.max, max);
+	/**
+	 * Sets the user defined maximum number for the scale, overrides maximum
+	 * value from data.
+	 * 
+	 * @param max
+	 *            user defined maximum number for the scale, overrides maximum
+	 *            value from data.
+	 */
+	public void setMax(double max) {
+		setValue(Property.max, max);
 	}
 
-	public double getMax(){
-		  return getValue(Property.max, DEFAULT_MAX);
+	/**
+	 * Returns the user defined maximum number for the scale, overrides maximum
+	 * value from data.
+	 * 
+	 * @return user defined maximum number for the scale, overrides maximum
+	 *         value from data. Default is Double.MAX_VALUE.
+	 */
+	public double getMax() {
+		return getValue(Property.max, DEFAULT_MAX);
 	}
 
 }

@@ -23,72 +23,154 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
+ * It is used to configure the point labels that are shown on the perimeter of
+ * the scale.<br>
+ * Note that these options only apply if display is true.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
-public final class RadialPointLabel extends JavaScriptObjectContainer{
+public final class RadialPointLabel extends JavaScriptObjectContainer {
 	
+	private static final boolean DEFAULT_DISPLAY = true;
+
 	private static final int DEFAULT_FONT_SIZE = 10;
-	
+
 	private static final String DEFAULT_FONT_COLOR = "#666";
-	
+
 	private static final String DEFAULT_FONT_FAMILY = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
-	
+
 	private final Axis axis;
-	
+
 	private RadialPointLabelCallback callback = null;
 
-	private enum Property implements Key {
-		callback, 
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		display,
+		callback,
 		fontSize,
 		fontStyle,
 		fontColor,
 		fontFamily,
 	}
-	
-//	callback 	Function 		Returns the string representation of the tick value as it should be displayed on the chart. See callback.
-//	fontColor 	Color 	'#666' 	Font color for tick labels.
-//	fontFamily 	String 	"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif" 	Font family for the tick labels, follows CSS font-family options.
-//	fontSize 	Number 	10 	Font size for the tick labels.
-//	fontStyle 	String 	'normal' 	Font style for the tick labels, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-//	
-	
-    RadialPointLabel(Axis axis) {
-    	this.axis = axis;
-    	registerNativePointLabelCallbacktHandler(getJavaScriptObject());
+
+	/**
+	 * Builds the object with own axis.
+	 * 
+	 * @param axis
+	 *            own axis.
+	 */
+	RadialPointLabel(Axis axis) {
+		this.axis = axis;
+		registerNativePointLabelCallbacktHandler(getJavaScriptObject());
 	}
-    
+	
+	/**
+	 * If true, labels are shown
+	 * @param display if true, labels are shown
+	 */
+	public void setDisplay(boolean display){
+		  setValue(Property.display, display);
+	}
+
+	/**
+	 * If true, labels are shown
+	 * @return if true, labels are shown. Default is true.
+	 */
+	public boolean isDisplay(){
+		  return getValue(Property.display, DEFAULT_DISPLAY);
+	}
+
+	/**
+	 * Sets the font size for the tick labels.
+	 * 
+	 * @param fontSize
+	 *            font size for the tick labels.
+	 */
 	public void setFontSize(int fontSize) {
 		setValue(Property.fontSize, fontSize);
 	}
 
-	public int getFontSize(){
-    	return getValue(Property.fontSize, DEFAULT_FONT_SIZE);
-    }
+	/**
+	 * Returns the font size for the tick labels.
+	 * 
+	 * @return font size for the tick labels. Default is 10.
+	 */
+	public int getFontSize() {
+		return getValue(Property.fontSize, DEFAULT_FONT_SIZE);
+	}
 
-     public void setFontStyle(FontStyle fontStyle){
-    	 setValue(Property.fontStyle, fontStyle);
-    }
+	/**
+	 * Sets the font style for the tick labels, follows CSS font-style options
+	 * (i.e. normal, italic, oblique, initial, inherit).
+	 * 
+	 * @param fontStyle
+	 *            font style for the tick labels, follows CSS font-style options
+	 *            (i.e. normal, italic, oblique, initial, inherit).
+	 * @see org.pepstock.charba.client.enums.FontStyle
+	 */
+	public void setFontStyle(FontStyle fontStyle) {
+		setValue(Property.fontStyle, fontStyle);
+	}
 
-    public FontStyle getFontStyle(){
-    	return getValue(Property.fontStyle, FontStyle.class, FontStyle.normal);
-    }    
-    
+	/**
+	 * Returns the font style for the tick labels, follows CSS font-style
+	 * options (i.e. normal, italic, oblique, initial, inherit).
+	 * 
+	 * @return font style for the tick labels, follows CSS font-style options
+	 *         (i.e. normal, italic, oblique, initial, inherit). Default is
+	 *         normal.
+	 * @see org.pepstock.charba.client.enums.FontStyle
+	 */
+	public FontStyle getFontStyle() {
+		return getValue(Property.fontStyle, FontStyle.class, FontStyle.normal);
+	}
+
+	/**
+	 * Sets the font color for tick labels.
+	 * 
+	 * @param fontColor
+	 *            font color for tick labels.
+	 */
 	public void setFontColor(String fontColor) {
 		setValue(Property.fontColor, fontColor);
 	}
 
-    public String getFontColor(){
-    	return getValue(Property.fontColor, DEFAULT_FONT_COLOR);
-    }
+	/**
+	 * Returns the font color for tick labels.
+	 * 
+	 * @return font color for tick labels. Default is '#666'.
+	 */
+	public String getFontColor() {
+		return getValue(Property.fontColor, DEFAULT_FONT_COLOR);
+	}
 
+	/**
+	 * Sets the font family for the tick labels, follows CSS font-family
+	 * options.
+	 * 
+	 * @param fontFamily
+	 *            font family for the tick labels, follows CSS font-family
+	 *            options.
+	 */
 	public void setFontFamily(String fontFamily) {
 		setValue(Property.fontFamily, fontFamily);
 	}
 
-    public String getFontFamily(){
-    	return getValue(Property.fontFamily, DEFAULT_FONT_FAMILY);
-    }
-    
+	/**
+	 * Returns the font family for the tick labels, follows CSS font-family
+	 * options.
+	 * 
+	 * @return font family for the tick labels, follows CSS font-family options.
+	 *         Default is "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif".
+	 */
+	public String getFontFamily() {
+		return getValue(Property.fontFamily, DEFAULT_FONT_FAMILY);
+	}
+
 	/**
 	 * @return the callback
 	 */
@@ -97,26 +179,43 @@ public final class RadialPointLabel extends JavaScriptObjectContainer{
 	}
 
 	/**
-	 * @param callback the callback to set
+	 * @param callback
+	 *            the callback to set
 	 */
 	public void setCallback(RadialPointLabelCallback callback) {
-		if (hasToBeRegistered(callback, Property.callback)){
+		// checks if property is already set
+		if (hasToBeRegistered(callback, Property.callback)) {
+			// registers the property
 			registerNativePointLabelCallbacktHandler(getJavaScriptObject());
 		}
 		this.callback = callback;
 	}
 
-	protected String onCallback(String item){
+	/**
+	 * Returns the string representation of the tick value as it should be
+	 * displayed on the chart.
+	 * 
+	 * @param item
+	 *            tick item to be shown
+	 * @return string representation of the tick value
+	 */
+	protected String onCallback(String item) {
+		// gets the chart instance
 		AbstractChart<?, ?> chart = axis.getChart();
-		if (callback != null && chart != null){
+		// checks if callback and chart are consistent
+		if (callback != null && chart != null) {
+			// invokes callback and returns new value
 			return callback.onCallback(chart, item);
 		}
-    	return item;
-    }
-    
+		// returns the item passed because no changed
+		return item;
+	}
+
 	/**
+	 * Sets the java script code to activate the call back, adding functions.
 	 * 
 	 * @param options
+	 *            java script object where adding new functions definition.
 	 */
     private native void registerNativePointLabelCallbacktHandler(GenericJavaScriptObject options)/*-{
 		var self = this;

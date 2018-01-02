@@ -18,33 +18,40 @@ package org.pepstock.charba.client.options.scales;
 import org.pepstock.charba.client.commons.Key;
 
 /**
+ * This object is used to map defined radial axis as linear.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
-public final class RadialLinearTick extends Tick{
-	
+public final class RadialLinearTick extends Tick {
+
 	private static final boolean DEFAULT_BEGIN_AT_ZERO = false;
 
 	private static final double DEFAULT_MIN = Double.MIN_VALUE;
-	
+
 	private static final double DEFAULT_MAX = Double.MAX_VALUE;
-	
+
 	private static final int DEFAULT_MAX_TICKS_LIMIT = 11;
-	
+
 	private static final double DEFAULT_STEP_SIZE = Double.MIN_VALUE;
-	
+
 	private static final double DEFAULT_SUGGESTED_MAX = Double.MAX_VALUE;
-	
+
 	private static final double DEFAULT_SUGGESTED_MIN = Double.MIN_VALUE;
-	
+
 	private static final String DEFAULT_BACKDROP_COLOR = "rgba(255,255,255,0.75)";
-	
+
 	private static final int DEFAULT_BACKDROP_PADDING_X = 2;
-	
+
 	private static final int DEFAULT_BACKDROP_PADDING_Y = 2;
-	
+
 	private static final boolean DEFAULT_SHOW_LABEL_BACKDROP = true;
-	
-	private enum Property implements Key {
+
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
 		backdropColor,
 		backdropPaddingX,
 		backdropPaddingY,
@@ -57,108 +64,231 @@ public final class RadialLinearTick extends Tick{
 		suggestedMax,
 		suggestedMin
 	}
-	
-//	backdropColor Color 'rgba(255, 255, 255, 0.75)' Color of label backdrops
-//	backdropPaddingX Number 2 Horizontal padding of label backdrop.
-//	backdropPaddingY Number 2 Vertical padding of label backdrop.
-//	beginAtZero Boolean false if true, scale will include 0 if it is not already included.
-//	min Number  User defined minimum number for the scale, overrides minimum value from data. more...
-//	max Number  User defined maximum number for the scale, overrides maximum value from data. more...
-//	maxTicksLimit Number 11 Maximum number of ticks and gridlines to show.
-//	stepSize Number  User defined fixed step size for the scale. more...
-//	suggestedMax Number  Adjustment used when calculating the maximum data value. more...
-//	suggestedMin Number  Adjustment used when calculating the minimum data value. more...
-//	showLabelBackdrop Boolean true If true, draw a background behind the tick labels
-	
+
+	/**
+	 * Empty constructor to reduce visibility
+	 */
 	RadialLinearTick() {
 	}
-	
-	public void setBeginAtZero(boolean beginAtZero){
-		  setValue(Property.beginAtZero, beginAtZero);
+
+	/**
+	 * If true, scale will include 0 if it is not already included.
+	 * 
+	 * @param beginAtZero
+	 *            if true, scale will include 0 if it is not already included.
+	 */
+	public void setBeginAtZero(boolean beginAtZero) {
+		setValue(Property.beginAtZero, beginAtZero);
 	}
 
-	public boolean isBeginAtZero(){
-		  return getValue(Property.beginAtZero, DEFAULT_BEGIN_AT_ZERO);
+	/**
+	 * If true, scale will include 0 if it is not already included.
+	 * 
+	 * @return if true, scale will include 0 if it is not already included..
+	 *         Default is false
+	 */
+	public boolean isBeginAtZero() {
+		return getValue(Property.beginAtZero, DEFAULT_BEGIN_AT_ZERO);
 	}
 
-	public void setMin(int min){
-		  setValue(Property.min, min);
+	/**
+	 * Sets the user defined minimum number for the scale, overrides minimum
+	 * value from data.
+	 * 
+	 * @param min
+	 *            user defined minimum number for the scale, overrides minimum
+	 *            value from data.
+	 */
+	public void setMin(int min) {
+		setValue(Property.min, min);
 	}
 
-	public double getMin(){
-		  return getValue(Property.min, DEFAULT_MIN);
+	/**
+	 * Returns the user defined minimum number for the scale, overrides minimum
+	 * value from data.
+	 * 
+	 * @return user defined minimum number for the scale, overrides minimum
+	 *         value from data.. Default is Double.MIN_VALUE
+	 */
+	public double getMin() {
+		return getValue(Property.min, DEFAULT_MIN);
 	}
 
-	public void setMax(double max){
-		  setValue(Property.max, max);
+	/**
+	 * Sets the user defined maximum number for the scale, overrides maximum
+	 * value from data.
+	 * 
+	 * @param max
+	 *            user defined maximum number for the scale, overrides maximum
+	 *            value from data.
+	 */
+	public void setMax(double max) {
+		setValue(Property.max, max);
 	}
 
-	public double getMax(){
-		  return getValue(Property.max, DEFAULT_MAX);
+	/**
+	 * Returns the user defined maximum number for the scale, overrides maximum
+	 * value from data.
+	 * 
+	 * @return user defined maximum number for the scale, overrides maximum
+	 *         value from data. Default is Double.MAX_VALUE
+	 */
+	public double getMax() {
+		return getValue(Property.max, DEFAULT_MAX);
 	}
 
-	public void setMaxTicksLimit(int maxTicksLimit){
-		  setValue(Property.maxTicksLimit, maxTicksLimit);
+	/**
+	 * Sets the maximum number of ticks and gridlines to show.
+	 * 
+	 * @param maxTicksLimit
+	 *            maximum number of ticks and gridlines to show.
+	 */
+	public void setMaxTicksLimit(int maxTicksLimit) {
+		setValue(Property.maxTicksLimit, maxTicksLimit);
 	}
 
-	public int getMaxTicksLimit(){
-		  return getValue(Property.maxTicksLimit, DEFAULT_MAX_TICKS_LIMIT);
+	/**
+	 * Returns the maximum number of ticks and gridlines to show.
+	 * 
+	 * @return maximum number of ticks and gridlines to show. Default is 11.
+	 */
+	public int getMaxTicksLimit() {
+		return getValue(Property.maxTicksLimit, DEFAULT_MAX_TICKS_LIMIT);
 	}
 
-	public void setStepSize(double stepSize){
-		  setValue(Property.stepSize, stepSize);
+	/**
+	 * Sets the user defined fixed step size for the scale.
+	 * 
+	 * @param stepSize
+	 *            user defined fixed step size for the scale.
+	 */
+	public void setStepSize(double stepSize) {
+		setValue(Property.stepSize, stepSize);
 	}
 
-	public double getStepSize(){
-		  return getValue(Property.stepSize, DEFAULT_STEP_SIZE);
+	/**
+	 * Returns the user defined fixed step size for the scale.
+	 * 
+	 * @return user defined fixed step size for the scale. Default is
+	 *         Double.MIN_VALUE
+	 */
+	public double getStepSize() {
+		return getValue(Property.stepSize, DEFAULT_STEP_SIZE);
 	}
 
-	public void setSuggestedMax(double suggestedMax){
-		  setValue(Property.suggestedMax, suggestedMax);
+	/**
+	 * Sets the adjustment used when calculating the maximum data value.
+	 * 
+	 * @param suggestedMax
+	 *            adjustment used when calculating the maximum data value.
+	 */
+	public void setSuggestedMax(double suggestedMax) {
+		setValue(Property.suggestedMax, suggestedMax);
 	}
 
-	public double getSuggestedMax(){
-		  return getValue(Property.suggestedMax, DEFAULT_SUGGESTED_MAX);
+	/**
+	 * Returns the adjustment used when calculating the maximum data value.
+	 * 
+	 * @return adjustment used when calculating the maximum data value.
+	 */
+	public double getSuggestedMax() {
+		return getValue(Property.suggestedMax, DEFAULT_SUGGESTED_MAX);
 	}
 
-	public void setSuggestedMin(double suggestedMin){
-		  setValue(Property.suggestedMin, suggestedMin);
+	/**
+	 * Sets the adjustment used when calculating the minimum data value.
+	 * 
+	 * @param suggestedMin
+	 *            adjustment used when calculating the minimum data value.
+	 */
+	public void setSuggestedMin(double suggestedMin) {
+		setValue(Property.suggestedMin, suggestedMin);
 	}
 
-	public double getSuggestedMin(){
-		  return getValue(Property.suggestedMin, DEFAULT_SUGGESTED_MIN);
+	/**
+	 * Returns the adjustment used when calculating the minimum data value.
+	 * 
+	 * @return adjustment used when calculating the minimum data value.
+	 */
+	public double getSuggestedMin() {
+		return getValue(Property.suggestedMin, DEFAULT_SUGGESTED_MIN);
 	}
 
-	public void setBackdropColor(String backdropColor){
-		  setValue(Property.backdropColor, backdropColor);
+	/**
+	 * Sets the color of label backdrops.
+	 * 
+	 * @param backdropColor
+	 *            color of label backdrops.
+	 */
+	public void setBackdropColor(String backdropColor) {
+		setValue(Property.backdropColor, backdropColor);
 	}
 
-	public String getBackdropColor(){
-		  return getValue(Property.backdropColor, DEFAULT_BACKDROP_COLOR);
+	/**
+	 * Returns the color of label backdrops.
+	 * 
+	 * @return color of label backdrops. Default is 'rgba(255, 255, 255, 0.75)'
+	 */
+	public String getBackdropColor() {
+		return getValue(Property.backdropColor, DEFAULT_BACKDROP_COLOR);
 	}
 
-	public void setBackdropPaddingX(int backdropPaddingX){
-		  setValue(Property.backdropPaddingX, backdropPaddingX);
+	/**
+	 * Sets the horizontal padding of label backdrop.
+	 * 
+	 * @param backdropPaddingX
+	 *            horizontal padding of label backdrop.
+	 */
+	public void setBackdropPaddingX(int backdropPaddingX) {
+		setValue(Property.backdropPaddingX, backdropPaddingX);
 	}
 
-	public int getBackdropPaddingX(){
-		  return getValue(Property.backdropPaddingX, DEFAULT_BACKDROP_PADDING_X);
+	/**
+	 * Returns the horizontal padding of label backdrop.
+	 * 
+	 * @return horizontal padding of label backdrop. Default is 2.
+	 */
+	public int getBackdropPaddingX() {
+		return getValue(Property.backdropPaddingX, DEFAULT_BACKDROP_PADDING_X);
 	}
 
-	public void setBackdropPaddingY(int backdropPaddingY){
-		  setValue(Property.backdropPaddingY, backdropPaddingY);
+	/**
+	 * Sets the vertical padding of label backdrop.
+	 * 
+	 * @param backdropPaddingY
+	 *            vertical padding of label backdrop.
+	 */
+	public void setBackdropPaddingY(int backdropPaddingY) {
+		setValue(Property.backdropPaddingY, backdropPaddingY);
 	}
 
-	public int getBackdropPaddingY(){
-		  return getValue(Property.backdropPaddingY, DEFAULT_BACKDROP_PADDING_Y);
+	/**
+	 * Returns the vertical padding of label backdrop.
+	 * 
+	 * @return vertical padding of label backdrop. Default is 2.
+	 */
+	public int getBackdropPaddingY() {
+		return getValue(Property.backdropPaddingY, DEFAULT_BACKDROP_PADDING_Y);
 	}
 
-	public void setShowLabelBackdrop(boolean showLabelBackdrop){
-		  setValue(Property.showLabelBackdrop, showLabelBackdrop);
+	/**
+	 * If true, draw a background behind the tick labels.
+	 * 
+	 * @param showLabelBackdrop
+	 *            if true, draw a background behind the tick labels.
+	 */
+	public void setShowLabelBackdrop(boolean showLabelBackdrop) {
+		setValue(Property.showLabelBackdrop, showLabelBackdrop);
 	}
 
-	public boolean isShowLabelBackdrop(){
-		  return getValue(Property.showLabelBackdrop, DEFAULT_SHOW_LABEL_BACKDROP);
+	/**
+	 * If true, draw a background behind the tick labels.
+	 * 
+	 * @return if true, draw a background behind the tick labels. Default is
+	 *         true.
+	 */
+	public boolean isShowLabelBackdrop() {
+		return getValue(Property.showLabelBackdrop, DEFAULT_SHOW_LABEL_BACKDROP);
 	}
 
 }

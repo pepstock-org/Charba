@@ -17,10 +17,20 @@ package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.enums.AxisType;
 
+/**
+ * This object is used to map defined axis as category.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> {
 
+	/**
+	 * Builds the axis
+	 */
 	public CartesianCategoryAxis() {
 		super(new CartesianCategoryTick());
+		// sets axis type
 		super.setType(AxisType.category);
 	}
 

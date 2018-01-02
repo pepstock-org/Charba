@@ -18,19 +18,45 @@ package org.pepstock.charba.client.options.scales;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Position;
 
+/**
+ * Axes are an integral part of a chart. They are used to determine how data
+ * maps to a pixel value on the chart. <br>
+ * In a cartesian chart, there is 1 or more X axis and 1 or more Y axis to map
+ * points onto the 2 dimensional canvas. These axes are know as 'cartesian
+ * axes'.<br>
+ * Axes that follow a cartesian grid are known as 'Cartesian Axes'. Cartesian
+ * axes are used for line, bar, and bubble charts. Four cartesian axes are
+ * included by default.<br>
+ * <ul>
+ * <li>linear
+ * <li>logarithmic
+ * <li>category
+ * <li>time (not implemented yet)
+ * </ul>
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ * @param <T>
+ *            type of tick to apply to axis
+ */
 abstract class CartesianAxis<T extends CartesianTick> extends Axis {
-	
+
+	// default offset
 	private static final boolean DEFAULT_OFFSET = false;
-	
+	// default if is stacked
 	private static final boolean DEFAULT_STACKED = false;
-	
+
 	private final GridLines grideLines = new GridLines();
-	
+
 	private final T ticks;
-	
+
 	private final CartesianScaleLabel scaleLabel = new CartesianScaleLabel();
-	
-	private enum Property implements Key {
+
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
 		position,
 		offset,
 		id,
@@ -40,9 +66,18 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 		stacked
 	}
 
+	/**
+	 * Builds the object storing the ticks
+	 * 
+	 * @param ticks
+	 *            ticks of this axis
+	 */
 	protected CartesianAxis(T ticks) {
+		// stores the ticks
 		this.ticks = ticks;
+		// sets to the ticks the axis
 		ticks.setAxis(this);
+		// sets properties
 		setValue(Property.gridLines, grideLines);
 		setValue(Property.ticks, this.ticks);
 		setValue(Property.scaleLabel, scaleLabel);
@@ -50,6 +85,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 
 	/**
 	 * @return the scaleLabel
+	 * @see CartesianScaleLabel
 	 */
 	public CartesianScaleLabel getScaleLabel() {
 		return scaleLabel;
@@ -57,6 +93,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 
 	/**
 	 * @return the ticks
+	 * @see Tick
 	 */
 	public T getTicks() {
 		return ticks;
@@ -64,15 +101,22 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 
 	/**
 	 * @return the grideLines
+	 * @see GridLines
 	 */
 	public GridLines getGrideLines() {
 		return grideLines;
 	}
 
-	public void setStacked(boolean stacked){
+	/**
+	 * Sets if the axis are stacked or not.
+	 * 
+	 * @param stacked
+	 *            if the axis are stacked or not.
+	 */
+	public void setStacked(boolean stacked) {
 		setValue(Property.stacked, stacked);
 	}
-	
+
 	/**
 	 * @return the stacked
 	 */
@@ -80,27 +124,69 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 		return getValue(Property.stacked, DEFAULT_STACKED);
 	}
 
+	/**
+	 * If true, extra space is added to the both edges and the axis is scaled to
+	 * fit into the chart area.
+	 * 
+	 * @param offset
+	 *            extra space of axis
+	 */
 	public void setOffset(boolean offset) {
 		setValue(Property.offset, offset);
 	}
 
+	/**
+	 * If true, extra space is added to the both edges and the axis is scaled to
+	 * fit into the chart area.
+	 * 
+	 * @return extra space of axis
+	 */
 	public boolean isOffset() {
 		return getValue(Property.offset, DEFAULT_OFFSET);
 	}
-	
-	public void setId(String type){
-		  setValue(Property.id, type);
+
+	/**
+	 * The ID is used to link datasets and scale axes together.<br>
+	 * This is especially needed if multi-axes charts are used.
+	 * 
+	 * @param id
+	 *            The ID is used to link datasets and scale axes together
+	 */
+	public void setId(String id) {
+		setValue(Property.id, id);
 	}
 
-	public String getId(){
-		  return getValue(Property.id, null);
+	/**
+	 * The ID is used to link datasets and scale axes together.<br>
+	 * This is especially needed if multi-axes charts are used.
+	 * 
+	 * @return The ID is used to link datasets and scale axes together or
+	 *         <code>null</code> if not set
+	 */
+	public String getId() {
+		return getValue(Property.id, null);
 	}
-	
-	public void setPosition(Position position){
+
+	/**
+	 * Position of the axis in the chart. Possible values are: 'top', 'left',
+	 * 'bottom', 'right'
+	 * 
+	 * @param position
+	 *            position of axis
+	 * @see org.pepstock.charba.client.enums.Position
+	 */
+	public void setPosition(Position position) {
 		setValue(Property.position, position);
 	}
 
-	public Position getPosition(){
+	/**
+	 * Position of the axis in the chart. Possible values are: 'top', 'left',
+	 * 'bottom', 'right'
+	 * 
+	 * @return position of axis
+	 * @see org.pepstock.charba.client.enums.Position
+	 */
+	public Position getPosition() {
 		return getValue(Property.position, Position.class, Position.top);
-	} 
+	}
 }

@@ -19,7 +19,11 @@ import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 
 /**
+ * It is used to configure angled lines that radiate from the center of the chart to the point labels.<br>
+ * Note that these options only apply if display is true.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
 public final class RadialAngleLine extends JavaScriptObjectContainer{
 	
@@ -29,39 +33,65 @@ public final class RadialAngleLine extends JavaScriptObjectContainer{
 	
 	private static final int DEFAULT_LINE_WIDTH = 1;
 	
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
 	private enum Property implements Key {
 		display,
 		color,
 		lineWidth
 	}
 	
-//	display Boolean true if true, angle lines are shown
-//	color Color rgba(0, 0, 0, 0.1) Color of angled lines
-//	lineWidth Number 1 Width of angled lines
-	
+	/**
+	 * Empty constructor to reduce visibility
+	 */
 	RadialAngleLine() {
 	}
 	
+	/**
+	 * If true, angle lines are shown
+	 * @param display if true, angle lines are shown
+	 */
 	public void setDisplay(boolean display){
 		  setValue(Property.display, display);
 	}
 
+	/**
+	 * If true, angle lines are shown
+	 * @return if true, angle lines are shown. Default is true.
+	 */
 	public boolean isDisplay(){
 		  return getValue(Property.display, DEFAULT_DISPLAY);
 	}
 
+	/**
+	 * Sets the color of angled lines.
+	 * @param color color of angled lines.
+	 */
 	public void setColor(String color){
 		  setValue(Property.color, color);
 	}
 
+	/**
+	 * Returns the color of angled lines.
+	 * @return color of angled lines. Default is 'rgba(0, 0, 0, 0.1)'
+	 */
 	public String getColor(){
 		  return getValue(Property.color, DEFAULT_COLOR);
 	}
 
+	/**
+	 * Sets the width of angled lines.
+	 * @param lineWidth width of angled lines.
+	 */
 	public void setLineWidth(int lineWidth){
 		  setValue(Property.lineWidth, lineWidth);
 	}
 
+	/**
+	 * Returns the width of angled lines.
+	 * @return width of angled lines. Default is 1.
+	 */
 	public int getLineWidth(){
 		  return getValue(Property.lineWidth, DEFAULT_LINE_WIDTH);
 	}

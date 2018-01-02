@@ -18,7 +18,10 @@ package org.pepstock.charba.client.options.scales;
 import org.pepstock.charba.client.commons.Key;
 
 /**
+ * Specific tick with min and max sub ticks.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
 abstract class Tick extends BaseTick{
 	
@@ -30,6 +33,9 @@ abstract class Tick extends BaseTick{
 	
 	private final BaseTick major = new BaseTick();
 	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
 	enum Property implements Key {
 		display,
 		reverse,
@@ -37,14 +43,11 @@ abstract class Tick extends BaseTick{
 		major
 	}
 	
-	
-//	display 	Boolean 	true 	If true, show tick marks
-//	reverse 	Boolean 	false 	Reverses order of tick labels.
-//	minor 	object 	{} 	Minor ticks configuration. Ommited options are inherited from options above.
-//	major 	object 	{} 	Major ticks configuration. Ommited options are inherited from options above.
-//	
-	
+	/**
+	 * Builds the object
+	 */
 	Tick() {
+		// sets java script properties
 		setValue(Property.minor, minor);
 		setValue(Property.major, major);
 	}
@@ -55,10 +58,11 @@ abstract class Tick extends BaseTick{
 	@Override
 	void setAxis(Axis axis) {
 		super.setAxis(axis);
+		// stores the axis instance to sub tick
 		minor.setAxis(axis);
 		major.setAxis(axis);
 	}
-
+	
 	/**
 	 * @return the minor
 	 */
@@ -73,18 +77,34 @@ abstract class Tick extends BaseTick{
 		return major;
 	}
 
+	/**
+	 * If true, show tick marks.
+	 * @param display if true, show tick marks
+	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
 	}
 
+	/**
+	 * If true, show tick marks
+	 * @return if true, show tick marks. Default is true.
+	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, DEFAULT_DISPLAY);
 	}
     
+	/**
+	 * Sets the reverses order of tick labels.
+	 * @param reverse reverses order of tick labels.
+	 */
 	public void setReverse(boolean reverse) {
 		setValue(Property.reverse, reverse);
 	}
 
+	/**
+	 * Returns the reverses order of tick labels.
+	 * @return reverses order of tick labels. Default is false.
+	 */
 	public boolean isReverse() {
 		return getValue(Property.reverse, DEFAULT_REVERSE);
 	}

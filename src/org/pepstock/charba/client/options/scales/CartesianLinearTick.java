@@ -18,25 +18,37 @@ package org.pepstock.charba.client.options.scales;
 import org.pepstock.charba.client.commons.Key;
 
 /**
+ * The linear scale is use to chart numerical data.<br>
+ * It can be placed on either the x or y axis.<br>
+ * The scatter chart type automatically configures a line chart to use one of
+ * these scales for the x axis.<br>
+ * As the name suggests, linear interpolation is used to determine where a value
+ * lies on the axis.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
-public final class CartesianLinearTick extends CartesianTick{
-	
+public final class CartesianLinearTick extends CartesianTick {
+
 	private static final boolean DEFAULT_BEGIN_AT_ZERO = false;
 
 	private static final double DEFAULT_MIN = Double.MIN_VALUE;
-	
+
 	private static final double DEFAULT_MAX = Double.MAX_VALUE;
-	
+
 	private static final int DEFAULT_MAX_TICKS_LIMIT = 11;
-	
+
 	private static final double DEFAULT_STEP_SIZE = Double.MIN_VALUE;
-	
+
 	private static final double DEFAULT_SUGGESTED_MAX = Double.MAX_VALUE;
-	
+
 	private static final double DEFAULT_SUGGESTED_MIN = Double.MIN_VALUE;
-	
-	private enum Property implements Key {
+
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
 		beginAtZero,
 		min,
 		max,
@@ -45,74 +57,154 @@ public final class CartesianLinearTick extends CartesianTick{
 		suggestedMax,
 		suggestedMin
 	}
-	
-	
-	
-//	beginAtZero Boolean  if true, scale will include 0 if it is not already included.
-//	min Number  User defined minimum number for the scale, overrides minimum value from data. more...
-//	max Number  User defined maximum number for the scale, overrides maximum value from data. more...
-//	maxTicksLimit Number 11 Maximum number of ticks and gridlines to show.
-//	stepSize Number  User defined fixed step size for the scale. more...
-//	suggestedMax Number  Adjustment used when calculating the maximum data value. more...
-//	suggestedMin Number  Adjustment used when calculating the minimum data value. more...
-	
+
+	/**
+	 * Empty constructor to reduce visibility
+	 */
 	CartesianLinearTick() {
 	}
 
-	public void setBeginAtZero(boolean beginAtZero){
-		  setValue(Property.beginAtZero, beginAtZero);
+	/**
+	 * If true, scale will include 0 if it is not already included.
+	 * 
+	 * @param beginAtZero
+	 *            if true, scale will include 0 if it is not already included.
+	 */
+	public void setBeginAtZero(boolean beginAtZero) {
+		setValue(Property.beginAtZero, beginAtZero);
 	}
 
-	public boolean isBeginAtZero(){
-		  return getValue(Property.beginAtZero, DEFAULT_BEGIN_AT_ZERO);
+	/**
+	 * If true, scale will include 0 if it is not already included.
+	 * 
+	 * @return if true, scale will include 0 if it is not already included..
+	 *         Default is false
+	 */
+	public boolean isBeginAtZero() {
+		return getValue(Property.beginAtZero, DEFAULT_BEGIN_AT_ZERO);
 	}
 
-	public void setMin(double min){
-		  setValue(Property.min, min);
+	/**
+	 * Sets the user defined minimum number for the scale, overrides minimum
+	 * value from data.
+	 * 
+	 * @param min
+	 *            the user defined minimum number for the scale, overrides
+	 *            minimum value from data.
+	 */
+	public void setMin(double min) {
+		setValue(Property.min, min);
 	}
 
-	public double getMin(){
-		  return getValue(Property.min, DEFAULT_MIN);
+	/**
+	 * Returns the user defined minimum number for the scale, overrides minimum
+	 * value from data.
+	 * 
+	 * @return the user defined minimum number for the scale, overrides minimum
+	 *         value from data. Default is Double.MIN_VALUE.
+	 */
+	public double getMin() {
+		return getValue(Property.min, DEFAULT_MIN);
 	}
 
-	public void setMax(double max){
-		  setValue(Property.max, max);
+	/**
+	 * Sets the user defined maximum number for the scale, overrides maximum
+	 * value from data.
+	 * 
+	 * @param max
+	 *            user defined maximum number for the scale, overrides maximum
+	 *            value from data.
+	 */
+	public void setMax(double max) {
+		setValue(Property.max, max);
 	}
 
-	public double getMax(){
-		  return getValue(Property.max, DEFAULT_MAX);
+	/**
+	 * Returns the user defined maximum number for the scale, overrides maximum
+	 * value from data.
+	 * 
+	 * @return user defined maximum number for the scale, overrides maximum
+	 *         value from data. Default is Double.MAX_VALUE.
+	 */
+	public double getMax() {
+		return getValue(Property.max, DEFAULT_MAX);
 	}
 
-	public void setMaxTicksLimit(int maxTicksLimit){
-		  setValue(Property.maxTicksLimit, maxTicksLimit);
+	/**
+	 * Sets the maximum number of ticks and gridlines to show.
+	 * 
+	 * @param maxTicksLimit
+	 *            maximum number of ticks and gridlines to show.
+	 */
+	public void setMaxTicksLimit(int maxTicksLimit) {
+		setValue(Property.maxTicksLimit, maxTicksLimit);
 	}
 
-	public int getMaxTicksLimit(){
-		  return getValue(Property.maxTicksLimit, DEFAULT_MAX_TICKS_LIMIT);
+	/**
+	 * Returns the maximum number of ticks and gridlines to show.
+	 * 
+	 * @return maximum number of ticks and gridlines to show. Default is 11.
+	 */
+	public int getMaxTicksLimit() {
+		return getValue(Property.maxTicksLimit, DEFAULT_MAX_TICKS_LIMIT);
 	}
 
-	public void setStepSize(double stepSize){
-		  setValue(Property.stepSize, stepSize);
+	/**
+	 * Sets the user defined fixed step size for the scale.
+	 * 
+	 * @param stepSize
+	 *            user defined fixed step size for the scale.
+	 */
+	public void setStepSize(double stepSize) {
+		setValue(Property.stepSize, stepSize);
 	}
 
-	public double getStepSize(){
-		  return getValue(Property.stepSize, DEFAULT_STEP_SIZE);
+	/**
+	 * Returns the user defined fixed step size for the scale.
+	 * 
+	 * @return user defined fixed step size for the scale. Default is
+	 *         Double.MIN_VALUE.
+	 */
+	public double getStepSize() {
+		return getValue(Property.stepSize, DEFAULT_STEP_SIZE);
 	}
 
-	public void setSuggestedMax(double suggestedMax){
-		  setValue(Property.suggestedMax, suggestedMax);
+	/**
+	 * Sets the adjustment used when calculating the maximum data value.
+	 * 
+	 * @param suggestedMax
+	 *            adjustment used when calculating the maximum data value.
+	 */
+	public void setSuggestedMax(double suggestedMax) {
+		setValue(Property.suggestedMax, suggestedMax);
 	}
 
-	public double getSuggestedMax(){
-		  return getValue(Property.suggestedMax, DEFAULT_SUGGESTED_MAX);
+	/**
+	 * Returns the adjustment used when calculating the maximum data value.
+	 * 
+	 * @return adjustment used when calculating the maximum data value.
+	 */
+	public double getSuggestedMax() {
+		return getValue(Property.suggestedMax, DEFAULT_SUGGESTED_MAX);
 	}
 
-	public void setSuggestedMin(double suggestedMin){
-		  setValue(Property.suggestedMin, suggestedMin);
+	/**
+	 * Sets the adjustment used when calculating the minimum data value.
+	 * 
+	 * @param suggestedMin
+	 *            adjustment used when calculating the minimum data value.
+	 */
+	public void setSuggestedMin(double suggestedMin) {
+		setValue(Property.suggestedMin, suggestedMin);
 	}
 
-	public double getSuggestedMin(){
-		  return getValue(Property.suggestedMin, DEFAULT_SUGGESTED_MIN);
+	/**
+	 * Returns the adjustment used when calculating the minimum data value.
+	 * 
+	 * @return adjustment used when calculating the minimum data value.
+	 */
+	public double getSuggestedMin() {
+		return getValue(Property.suggestedMin, DEFAULT_SUGGESTED_MIN);
 	}
-	
+
 }
