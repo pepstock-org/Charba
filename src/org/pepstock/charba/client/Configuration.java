@@ -20,6 +20,7 @@ import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.options.BaseOptions;
+import org.pepstock.charba.client.plugins.Plugins;
 
 /**
  * 
@@ -29,9 +30,10 @@ class Configuration extends JavaScriptObjectContainer{
 	private enum Property implements Key {
 		type,
 		options,
+		plugins,
 		data
 	}
-	
+
 	void setType(Type type){
 		setValue(Property.type, type.name());
 	}
@@ -43,7 +45,11 @@ class Configuration extends JavaScriptObjectContainer{
 	void setData(Data data){
 		setValue(Property.data, data);
 	}
-	
+
+	void setPlugins(Plugins plugins){
+		setObjectArray(Property.plugins, plugins.getArrayList());
+	}
+
 	GenericJavaScriptObject getObject(){
 		return getJavaScriptObject();
 	}

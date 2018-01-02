@@ -90,6 +90,7 @@ public abstract class BaseOptions extends EventProvider {
 		onResize, 
 		legendCallback,
 		events,
+		plugins,
 		onClick,
 		onHover
 	}

@@ -30,14 +30,15 @@ import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.items.AxisItem;
 
 /**
- * 
+ * Axes are an integral part of a chart.<br>They are used to determine how data maps to a pixel value on the chart. 
  * @author Andrea "Stock" Stocchero
  *
  */
 public abstract class Axis extends JavaScriptObjectContainer {
 	
+	// default weight
 	private static final int DEFAULT_WEIGHT = 0;
-
+	// default display
 	private static final boolean DEFAULT_DISPLAY = true;
 	
 	private AbstractChart<?, ?> chart = null;
@@ -56,6 +57,9 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	
 	private AxisFitCallback fitCallback = null;
 
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
 	private enum Property implements Key
 	{
 		type, 
@@ -377,7 +381,6 @@ public abstract class Axis extends JavaScriptObjectContainer {
     private native void registerNativeAxisBuildTicksHandler(GenericJavaScriptObject options)/*-{
 		var self = this;
 	    options.beforeBuildTicks = function(axis){
-	    	console.log(axis.minSize);
         	self.@org.pepstock.charba.client.options.scales.Axis::onBeforeBuildTicks(Lorg/pepstock/charba/client/items/AxisItem;)(axis);
 	    }
 	    options.afterBuildTicks = function(axis){

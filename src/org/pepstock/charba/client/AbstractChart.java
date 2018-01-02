@@ -25,6 +25,7 @@ import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.items.DatasetMetaItemArray;
 import org.pepstock.charba.client.options.BaseOptions;
+import org.pepstock.charba.client.plugins.Plugins;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -72,6 +73,8 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset>  e
     
     // Data element of configuration
     private final Data data = new Data();
+
+    private final Plugins plugins;
     
     private boolean drawOnAttach = true;
     
@@ -111,8 +114,8 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset>  e
 		setElement(div);
 		// injects Chart.js java script source
 		Injector.ensureInjected();
-		// creates handler manager
-		
+		// creates plugins container
+		plugins = new Plugins(this);
 	}
 	
 	/* (non-Javadoc)
@@ -121,6 +124,13 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset>  e
 	@Override
 	protected HandlerManager createHandlerManager() {
 		return new ChartHandlerManager(this);
+	}
+	
+	/**
+	 * @return the canvas
+	 */
+	public CanvasElement getCanvas() {
+		return canvas;
 	}
 
 	/**
@@ -137,6 +147,13 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset>  e
 		return data;
 	}
 
+	/**
+	 * @return the plugins configuration object
+	 */
+	public final Plugins getPlugins() {
+		return plugins;
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.google.gwt.user.client.ui.UIObject#setHeight(java.lang.String)
 	 */
@@ -371,6 +388,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset>  e
 			configuration.setType(getType());
 			configuration.setOptions(options);
 			configuration.setData(data);
+			configuration.setPlugins(plugins);
 			drawChart(configuration.getObject());
 		}
 	}
@@ -381,6 +399,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset>  e
 		configuration.setType(getType());
 		configuration.setOptions(options);
 		configuration.setData(data);
+		configuration.setPlugins(plugins);
 		return configuration.getObject().toJSON();
 	}
 
@@ -471,7 +490,6 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset>  e
 	private native DatasetMetaItemArray getChartDatasetMeta(int datasetIndex)/*-{
 	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
 		var item = chart.getDatasetMeta(datasetIndex);
-		console.log(item);
 		var myItems = new Object();
    		myItems.items = item.data;
 	    return myItems;

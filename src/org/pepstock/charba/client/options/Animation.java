@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.options;
 
-import java.util.logging.Logger;
-
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.commons.EventProvider;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
@@ -35,8 +33,6 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * 
  */
 public final class Animation extends EventProvider{
-	
-	final Logger LOG = Logger.getLogger("TEST");
 	
 	private static final int DEFAULT_DURATION = 1000;
 	
