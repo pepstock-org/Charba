@@ -20,6 +20,7 @@
 	<property name="module.archive.file" value="${dist.dir}/charba.jar" />
 	<property name="temp.dir" value="temp" />
 	<property name="javadoc.dir" value="javadoc" />
+	<property name="sources.archive.file" value="${dist.dir}/charba-sources.jar" />
 	<property name="javadoc.archive.file" value="${dist.dir}/charba-javadoc.jar" />
 
 	<property name="ivy.pubrevision" value="20180103-SNAPSHOT" />
@@ -58,7 +59,7 @@
 	  be marking them as provided or system. See
 	  IVY-1201 for an ehancement request.
 	-->
-	<target name="gen-pom">
+	<target name="makePom">
 		<ivy:makepom ivyfile="ivy.xml" pomfile="charba.pom">
 			<mapping conf="default" scope="compile" />
 		</ivy:makepom>
@@ -71,10 +72,37 @@
 		</ivy:publish>
 	</target>
 
-	<target name="ivyPublish-local-m2" depends="build">
-		<ivy:publish resolver="local-m2-publish" pubrevision="${revision}" forcedeliver="true" overwrite="true" publishivy="true">
+	<target name="ivyPublish-snapshot" depends="makePom, build">
+		<ivy:publish resolver="nexus-snapshots" pubrevision="${revision}-SNAPSHOT" forcedeliver="true" overwrite="true" publishivy="false">
 			<artifacts pattern="${dist.dir}/[artifact].[ext]" />
 		</ivy:publish>
+	</target>
+
+	<target name="ivyPublish-release" depends="makePom, build">
+		<ivy:publish resolver="nexus-releases" pubrevision="${revision}" forcedeliver="true" overwrite="true" publishivy="false">
+			<artifacts pattern="${dist.dir}/[artifact].[ext]" />
+		</ivy:publish>
+	</target>
+
+	<target name="buildSources">
+		<!-- build the sources jar -->
+		<jar jarfile="${sources.archive.file}">
+			<fileset dir="${src.dir}" />
+		</jar>
+	</target>
+
+	<target name="buildJavadoc" depends="javadoc">
+		<!-- build the javadoc jar -->
+		<jar jarfile="${javadoc.archive.file}">
+			<fileset dir="${javadoc.dir}" />
+			<manifest>
+				<section name="Charba">
+					<attribute name="Version" value="${charba.version}" />
+					<attribute name="Built-By" value="${charba.built.by}" />
+					<attribute name="Creation-time" value="${TODAY}" />
+				</section>
+			</manifest>
+		</jar>
 	</target>
 
 	<target name="compile" description="Compile Charba" depends="clean, ivyRetrieve">
@@ -116,15 +144,5 @@
 				<include name="org/pepstock/**"/>
 			</packageset>
 		</javadoc>
-		<jar jarfile="${javadoc.archive.file}">
-			<fileset dir="${javadoc.dir}"/>
-			<manifest>
-				<section name="Charba">
-					<attribute name="Version" value="${charba.version}" />
-					<attribute name="Built-By" value="${charba.built.by}" />
-					<attribute name="Creation-time" value="${TODAY}" />
-				</section>
-			</manifest>
-		</jar>
 	</target>
 </project>

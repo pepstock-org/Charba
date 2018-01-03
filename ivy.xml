@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
 	
-    <info organisation="org.pepstock" module="charba" />
+    <info organisation="org.pepstock" module="charba" revision="1.0" />
     
     <!--
     default     runtime dependencies and master artifact can be used with this conf
@@ -25,11 +25,11 @@
         <conf name="default" />
         <conf name="sources" />
     </configurations>
+    
     <dependencies>
-        <!-- GWT SDK + GWT RELATED -->
-
+        <!-- GWT SDK -->
         <dependency org="com.google.gwt" name="gwt-user" rev="${gwt.ver}" conf="*->default"/>
         <dependency org="com.google.gwt" name="gwt-dev" rev="${gwt.ver}"/>
-
     </dependencies>
+    
 </ivy-module>
