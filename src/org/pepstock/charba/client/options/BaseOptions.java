@@ -40,7 +40,10 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 
 /**
+ * Base object which maps chart options.<br>
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
 public abstract class BaseOptions extends EventProvider {
 

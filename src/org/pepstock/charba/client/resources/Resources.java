@@ -19,13 +19,20 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.TextResource;
 
+/**
+ * Client bundle to reference CHART.JS java script code.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public interface Resources extends ClientBundle{
 	
+	// static reference of this resource
 	public static final Resources INSTANCE = GWT.create(Resources.class);
 	
 	/**
 	 * Contains text representation of native chart.js code
-	 * @return
+	 * @return chart.js code
 	 */
 	@Source("js/chart.min.js")
 	TextResource chartJsSource();
