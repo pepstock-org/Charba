@@ -1,6 +1,10 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+	
     <info organisation="org.pepstock" module="charba" />
+    
     <!--
     default     runtime dependencies and master artifact can be used with this conf
     master         contains only the artifact published by this module itself, with no transitive dependencies
@@ -16,15 +20,16 @@
     javadoc     this configuration contains the javadoc artifact of this module, if any JavaDoc for the project
     optional     contains all optional dependencies
     -->
-    <configurations defaultconf="runtime" defaultconfmapping="runtime->default; sources->sources,javadoc">
-        <conf name="runtime" description="runtime dependencies" />
-        <conf name="sources" description="source and javadoc" />
+    
+    <configurations defaultconf="default" defaultconfmapping="default->default; sources->sources,javadoc">
+        <conf name="default" />
+        <conf name="sources" />
     </configurations>
     <dependencies>
         <!-- GWT SDK + GWT RELATED -->
 
-        <dependency org="com.google.gwt" name="gwt-user" rev="2.7.0" conf="*->default"/>
-        <dependency org="com.google.gwt" name="gwt-dev" rev="2.7.0" />
+        <dependency org="com.google.gwt" name="gwt-user" rev="${gwt.ver}" conf="*->default"/>
+        <dependency org="com.google.gwt" name="gwt-dev" rev="${gwt.ver}"/>
 
     </dependencies>
 </ivy-module>
