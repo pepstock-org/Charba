@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<project name="Charba" default="build" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="Charba" default="build-bin" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 
-	<!--
-        Apache IVY ANT lib include
-    -->
 	<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" />
 
 	<!-- 
@@ -14,16 +11,17 @@
 	<tstamp>
 		<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
 	</tstamp>
+	
 	<property name="src.dir" value="src" />
-	<property name="dest.dir" value="classes" />
-	<property name="dist.dir" value="dist" />
-	<property name="module.archive.file" value="${dist.dir}/charba.jar" />
-	<property name="temp.dir" value="temp" />
+	<property name="classes.dir" value="classes" />
 	<property name="javadoc.dir" value="javadoc" />
+
+	<property name="dist.dir" value="dist" />
+
+	<property name="bin.archive.file" value="${dist.dir}/charba.jar" />
 	<property name="sources.archive.file" value="${dist.dir}/charba-sources.jar" />
 	<property name="javadoc.archive.file" value="${dist.dir}/charba-javadoc.jar" />
 
-	<property name="ivy.pubrevision" value="20180103-SNAPSHOT" />
 	<!-- 
 		JAVA compiler options 
 	-->
@@ -35,18 +33,15 @@
 	<property name="javac.nowarn" value="true" />
 
 	<target name="clean" description="Cleans folders">
-		<mkdir dir="${dest.dir}"/>
 		<mkdir dir="${dist.dir}"/>
-		<mkdir dir="${javadoc.dir}"/>
 		<delete failonerror="false" includeemptydirs="true">
-			<fileset dir="${dist.dir}" includes="**/*"/>
-			<fileset dir="${dest.dir}" includes="**/*"/>
-			<fileset dir="${javadoc.dir}" includes="**/*"/>
+			<fileset dir="${classes.dir}" includes="**/*"/>
+			<filename name="${bin.archive.file}"/>
 		</delete>
 	</target>
 
 	<!--
-        Apache IVY
+        IVY
     -->
 	<target name="ivyRetrieve">
 		<ivy:retrieve sync="true" pattern="lib-ivy/[artifact]-[revision](-[classifier]).[ext]" pathid="ivyPath" />
@@ -60,39 +55,44 @@
 	  IVY-1201 for an ehancement request.
 	-->
 	<target name="makePom">
-		<ivy:makepom ivyfile="ivy.xml" pomfile="charba.pom">
+		<ivy:makepom ivyfile="ivy.xml" pomfile="${dist.dir}/charba.pom">
 			<mapping conf="default" scope="compile" />
 		</ivy:makepom>
 	</target>
 
-	<target name="ivyPublish" depends="build">
-		<ivy:resolve />
+	<target name="ivyPublish" depends="build-all">
 		<ivy:publish resolver="local" pubrevision="${revision}">
 			<artifacts pattern="${dist.dir}/[artifact].[ext]" />
 		</ivy:publish>
 	</target>
 
-	<target name="ivyPublish-snapshot" depends="makePom, build">
+	<target name="ivyPublish-local-m2" depends="makePom, build-all">
+		<ivy:publish resolver="local-m2-publish" pubrevision="${revision}" overwrite="true" publishivy="false">
+			<artifacts pattern="${dist.dir}/[artifact].[ext]" />
+		</ivy:publish>
+	</target>
+
+	<target name="ivyPublish-snapshot" depends="makePom, build-all">
 		<ivy:publish resolver="nexus-snapshots" pubrevision="${revision}-SNAPSHOT" forcedeliver="true" overwrite="true" publishivy="false">
 			<artifacts pattern="${dist.dir}/[artifact].[ext]" />
 		</ivy:publish>
 	</target>
 
-	<target name="ivyPublish-release" depends="makePom, build">
+	<target name="ivyPublish-release" depends="makePom, build-all">
 		<ivy:publish resolver="nexus-releases" pubrevision="${revision}" forcedeliver="true" overwrite="true" publishivy="false">
 			<artifacts pattern="${dist.dir}/[artifact].[ext]" />
 		</ivy:publish>
 	</target>
 
-	<target name="buildSources">
-		<!-- build the sources jar -->
+	<target name="build-all" depends="build-bin, build-sources, build-javadoc" />
+	
+	<target name="build-sources">
 		<jar jarfile="${sources.archive.file}">
 			<fileset dir="${src.dir}" />
 		</jar>
 	</target>
 
-	<target name="buildJavadoc" depends="javadoc">
-		<!-- build the javadoc jar -->
+	<target name="build-javadoc" depends="javadoc">
 		<jar jarfile="${javadoc.archive.file}">
 			<fileset dir="${javadoc.dir}" />
 			<manifest>
@@ -105,19 +105,9 @@
 		</jar>
 	</target>
 
-	<target name="compile" description="Compile Charba" depends="clean, ivyRetrieve">
-		<javac srcdir="${src.dir}" includes="**" encoding="utf-8" destdir="${dest.dir}" includeantruntime="${javac.includeantruntime}" source="${javac.source}" target="${javac.target}" nowarn="${javac.nowarn}" debug="${javac.debug}" debuglevel="${javac.debuglevel}">
-			<classpath refid="ivyPath"/>
-		</javac>
-		<copy todir="${dest.dir}">
-			<fileset dir="${src.dir}"/>
-		</copy>
-	</target>
-
-	<target name="build" description="Build Charba distribution" depends="compile">
-		<!-- Creates the JAR file adding the classes folder and adding the mnifest part -->
-		<jar jarfile="${module.archive.file}">
-			<fileset dir="${dest.dir}"/>
+	<target name="build-bin" depends="compile">
+		<jar jarfile="${bin.archive.file}">
+			<fileset dir="${classes.dir}"/>
 			<manifest>
 				<section name="Charba">
 					<attribute name="Version" value="${charba.version}" />
@@ -128,21 +118,31 @@
 		</jar>
 	</target>
 
-	<target name="javadoc" depends="build">
-		<javadoc destdir="${javadoc.dir}"
-				useexternalfile="yes"
-		         author="true"
-		         version="true"
-		         use="true"
-		         windowtitle="Charba, GWT wrapper for CHART.JS">
+	<target name="compile" depends="clean, ivyRetrieve">
+		<javac srcdir="${src.dir}" includes="**" encoding="utf-8" destdir="${classes.dir}" includeantruntime="${javac.includeantruntime}" source="${javac.source}" target="${javac.target}" nowarn="${javac.nowarn}" debug="${javac.debug}" debuglevel="${javac.debuglevel}">
+			<classpath refid="ivyPath"/>
+		</javac>
+		<!-- copy is necessary as GWT needs sources -->
+		<copy todir="${classes.dir}">
+			<fileset dir="${src.dir}"/>
+		</copy>
+	</target>
+
+	<target name="javadoc" depends="ivyRetrieve">
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${javadoc.dir}" includes="**/*"/>
+		</delete>
+		<javadoc destdir="${javadoc.dir}" useexternalfile="yes" author="true" version="true" use="true" 
+			windowtitle="Charba, GWT wrapper for CHART.JS">
 			<classpath>
-				<path refid="ivyPath"/>
-				<fileset dir="${dest.dir}"/>
+				<path refid="ivyPath" />
+				<fileset dir="${dest.dir}" />
 				<pathelement path="${java.class.path}" />
 			</classpath>
 			<packageset dir="${src.dir}" defaultexcludes="yes">
-				<include name="org/pepstock/**"/>
+				<include name="org/pepstock/**" />
 			</packageset>
 		</javadoc>
 	</target>
+	
 </project>

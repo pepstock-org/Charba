@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+	xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd"
+	xmlns:m="http://ant.apache.org/ivy/maven">
 	
     <info organisation="org.pepstock" module="charba" revision="1.0" />
     
@@ -21,10 +22,18 @@
     optional     contains all optional dependencies
     -->
     
-    <configurations defaultconf="default" defaultconfmapping="default->default; sources->sources,javadoc">
+    <configurations defaultconf="default" defaultconfmapping="default->default; sources->sources; javadoc->javadoc">
         <conf name="default" />
         <conf name="sources" />
+        <conf name="javadoc" />
     </configurations>
+
+	<publications>
+		<artifact name="charba" type="pom" ext="pom" conf="default" />
+		<artifact name="charba" type="jar" ext="jar" conf="default" />
+		<artifact name="charba" type="source" ext="jar" conf="sources" m:classifier="sources" />
+		<artifact name="charba" type="javadoc" ext="jar" conf="javadoc" m:classifier="javadoc" />
+	</publications>
     
     <dependencies>
         <!-- GWT SDK -->
