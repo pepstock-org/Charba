@@ -32,23 +32,32 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
+ * The chart legend displays data about the datasets that area appearing on the
+ * chart.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
 public final class Legend extends EventProvider {
-	
+
 	private static final boolean DEFAULT_DISPLAY = true;
-	
+
 	private static final boolean DEFAULT_FULL_WIDTH = true;
-	
+
 	private static final boolean DEFAULT_REVERSE = false;
-	
+
 	private final LegendLabels labels;
-	
+
+	// amount of click handlers
 	private int onClickHandlers = 0;
-	
+	// amount of hover handlers
 	private int onHoverHandlers = 0;
-	
-	private enum Property implements Key{
+
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
 		display,
 		position,
 		fullWidth,
@@ -57,7 +66,13 @@ public final class Legend extends EventProvider {
 		onClick,
 		onHover
 	}
-	
+
+	/**
+	 * Builds the object storing the chart instance.
+	 * 
+	 * @param chart
+	 *            chart instance
+	 */
 	Legend(AbstractChart<?, ?> chart) {
 		super(chart);
 		labels = new LegendLabels(chart);
@@ -70,83 +85,154 @@ public final class Legend extends EventProvider {
 	public LegendLabels getLabels() {
 		return labels;
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.commons.ChartContainer#addHandler(com.google.gwt.event.shared.GwtEvent.Type)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.pepstock.charba.client.commons.ChartContainer#addHandler(com.google.
+	 * gwt.event.shared.GwtEvent.Type)
 	 */
 	@Override
 	protected <H extends EventHandler> void addHandler(Type<H> type) {
-		if (type.equals(DatasetSelectionEvent.TYPE) || type.equals(ChartClickEvent.TYPE)){
-			if (!has(Property.onClick)){
+		// checks if type of added event handler is dataset selection or click
+		if (type.equals(DatasetSelectionEvent.TYPE) || type.equals(ChartClickEvent.TYPE)) {
+			// if java script property is missing
+			if (!has(Property.onClick)) {
+				// adds the java script function to catch the event
 				registerNativeClickHandler(getJavaScriptObject());
 			}
+			// increments amount of handlers
 			onClickHandlers++;
-		} else if (type.equals(ChartHoverEvent.TYPE)){
-			if (!has(Property.onHover)){
+		} else if (type.equals(ChartHoverEvent.TYPE)) {
+			// if java script property is missing
+			if (!has(Property.onHover)) {
+				// adds the java script function to catch the event
 				registerNativeHoverHandler(getJavaScriptObject());
 			}
+			// increments amount of handlers
 			onHoverHandlers++;
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.commons.ChartContainer#removeHandler(org.pepstock.charba.client.commons.Key)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.ChartContainer#removeHandler(org.
+	 * pepstock.charba.client.commons.Key)
 	 */
 	@Override
 	protected <H extends EventHandler> void removeHandler(Type<H> type) {
-		if (type.equals(DatasetSelectionEvent.TYPE) || type.equals(ChartClickEvent.TYPE)){
+		// checks if type of removed event handler is dataset selection or click
+		if (type.equals(DatasetSelectionEvent.TYPE) || type.equals(ChartClickEvent.TYPE)) {
+			// decrements the amount of handlers
 			onClickHandlers--;
-			if (onClickHandlers == 0){
+			// if there is not any handler
+			if (onClickHandlers == 0) {
+				// removes the java script object
 				remove(Property.onClick);
 			}
-		} else if (type.equals(ChartHoverEvent.TYPE)){
+		} else if (type.equals(ChartHoverEvent.TYPE)) {
+			// decrements the amount of handlers
 			onHoverHandlers--;
-			if (onHoverHandlers == 0){
+			// if there is not any handler
+			if (onHoverHandlers == 0) {
+				// removes the java script object
 				remove(Property.onHover);
 			}
 		}
 	}
 
+	/**
+	 * Sets if the legend is shown.
+	 * @param display if the legend is shown.
+	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
 	}
 
-    public boolean isDisplay(){
-    	return getValue(Property.display, DEFAULT_DISPLAY);
-    }
+	/**
+	 * Returns if the legend is shown.
+	 * @return if the legend is shown. Default is true.
+	 */
+	public boolean isDisplay() {
+		return getValue(Property.display, DEFAULT_DISPLAY);
+	}
 
+	/**
+	 * Marks that this box should take the full width of the canvas (pushing down other boxes).
+	 * @param fullWidth Marks that this box should take the full width of the canvas (pushing down other boxes)
+	 */
 	public void setFullWidth(boolean fullWidth) {
 		setValue(Property.fullWidth, fullWidth);
 	}
 
-    public boolean isFullWidth(){
-    	return getValue(Property.fullWidth, DEFAULT_FULL_WIDTH);
-    }
+	/**
+	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). Default is true.
+	 */
+	public boolean isFullWidth() {
+		return getValue(Property.fullWidth, DEFAULT_FULL_WIDTH);
+	}
 
+	/**
+	 * Sets the legend will show datasets in reverse order.
+	 * @param reverse legend will show datasets in reverse order.
+	 */
 	public void setReverse(boolean reverse) {
 		setValue(Property.reverse, reverse);
 	}
 
-    public boolean isReverse(){
-    	return getValue(Property.reverse, DEFAULT_REVERSE);
-    }
-    
-     public void setPosition(Position position){
-    	 setValue(Property.position, position);
-    }
+	/**
+	 * Returns if the legend will show datasets in reverse order.
+	 * @return Legend will show datasets in reverse order. Default is false.
+	 */
+	public boolean isReverse() {
+		return getValue(Property.reverse, DEFAULT_REVERSE);
+	}
 
-    public Position getPosition(){
-    	return getValue(Property.position, Position.class, Position.top);
-    }    
-    
+	/**
+	 * Sets the position of the legend.
+	 * @param position Position of the legend.
+	 * @see org.pepstock.charba.client.enums.Position
+	 */
+	public void setPosition(Position position) {
+		setValue(Property.position, position);
+	}
+
+	/**
+	 * Returns the position of the legend. 
+	 * @return Position of the legend. Default is {@link org.pepstock.charba.client.enums.Position#top}.
+	 * @see org.pepstock.charba.client.enums.Position
+	 */
+	public Position getPosition() {
+		return getValue(Property.position, Position.class, Position.top);
+	}
+
+	/**
+	 * A callback that is called when a click event is registered on a label item 
+	 * @param event event generated by chart.
+	 * @param item legend item affected by event.
+	 */
 	protected void onClick(ChartNativeEvent event, LegendItem item) {
 		getChart().fireEvent(new LegendClickEvent(event, item));
 	}
 
+	/**
+	 * A callback that is called when a 'mousemove' event is registered on top of a label item
+	 * @param event event generated by chart.
+	 * @param item legend item affected by event.
+	 */
 	protected void onHover(ChartNativeEvent event, LegendItem item) {
 		getChart().fireEvent(new LegendHoverEvent(event, item));
 	}
     
+	/**
+	 * Sets the java script code to activate the call back, adding functions.
+	 * 
+	 * @param options
+	 *            java script object where adding new functions definition.
+	 */
     private native void registerNativeClickHandler(GenericJavaScriptObject options)/*-{
 		var self = this;
 	    options.onClick = function(event, legendItem){
@@ -154,12 +240,17 @@ public final class Legend extends EventProvider {
 	    }
 	}-*/;
 
+	/**
+	 * Sets the java script code to activate the call back, adding functions.
+	 * 
+	 * @param options
+	 *            java script object where adding new functions definition.
+	 */
     private native void registerNativeHoverHandler(GenericJavaScriptObject options)/*-{
 		var self = this;
 	    options.onHover = function(event, legendItem){
 	    	self.@org.pepstock.charba.client.options.Legend::onHover(Lorg/pepstock/charba/client/events/ChartNativeEvent;Lorg/pepstock/charba/client/items/LegendItem;)(event, legendItem);
 	    }
 	}-*/;
-
     
 }

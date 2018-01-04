@@ -15,10 +15,27 @@
 */
 package org.pepstock.charba.client.options;
 
+/**
+ * Exception created when the plugin ID is not valid.<br>
+ * A plugin id <br>
+ * <ul>
+ * <li>can not start with a dot or an underscore
+ * <li>can not contain any non-URL-safe characters
+ * <li>cannot contain uppercase letters
+ * <li>should be something short, but also reasonably descriptive
+ * </ul>
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public class InvalidPluginIdException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds the exception using the message explaining why the id is not valid. 
+	 * @param message explaination why the id is not valid. 
+	 */
 	public InvalidPluginIdException(String message) {
 		super(message);
 	}

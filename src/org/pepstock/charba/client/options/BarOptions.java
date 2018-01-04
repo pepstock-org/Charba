@@ -18,7 +18,7 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.AbstractChart;
 
 /**
- * Specific options for BAR chart. It continas all properties for this kind of chart.
+ * Specific options for BAR chart. It contains all properties for this kind of chart.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -17,8 +17,18 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.AbstractChart;
 
+/**
+ * Specific options for BUBBLE chart. It contains all properties for this kind of chart.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public final class BubbleOptions extends ScatterOptions {
 
+	/**
+	 * Builds the object storing the chart instance.
+	 * @param chart chart instance
+	 */
 	public BubbleOptions(AbstractChart<?, ?> chart) {
 		super(chart);
 	}

@@ -26,40 +26,63 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.options.scales.Axis;
 
 /**
+ * The configuration element which contains all axes definitions.
  * 
- * display: true type:[boolean]
- * 
- * 
- * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
-public class Scales extends ChartContainer{
-	
+public class Scales extends ChartContainer {
+
 	private static final boolean DEFAULT_DISPLAY = true;
-	
+	// buffer to maintain axes
 	private final AbstractList<Axis> yAxes = new JsObjectContainerArrayList<>();
-	
+	// buffer to maintain axes
 	private final AbstractList<Axis> xAxes = new JsObjectContainerArrayList<>();
-	
-	enum Property implements Key {
+
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	enum Property implements Key
+	{
 		display,
 		xAxes,
 		yAxes
 	}
-	
+
+	/**
+	 * Builds the object storing the chart instance.
+	 * 
+	 * @param chart chart instance
+	 */
 	protected Scales(AbstractChart<?, ?> chart) {
 		super(chart);
 	}
 
+	/**
+	 * Sets if the scales are shown.
+	 * 
+	 * @param display if the scales are shown.
+	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
 	}
 
+	/**
+	 * Returns if the scales are shown.
+	 * 
+	 * @return the scales are shown. Default is true.
+	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, DEFAULT_DISPLAY);
 	}
 
-	
-	public void setXAxes(Axis... axes){
+	/**
+	 * Sets an array of X axes.
+	 * 
+	 * @param axesan array of axes.
+	 */
+	public void setXAxes(Axis... axes) {
+		// set java script array
 		setValue(Property.xAxes, ArrayListHelper.load(this.xAxes, axes));
 		loadChartToAxes(axes);
 	}
@@ -71,7 +94,13 @@ public class Scales extends ChartContainer{
 		return xAxes;
 	}
 
-	public void setYAxes(Axis... axes){
+	/**
+	 * Sets an array of Y axes.
+	 * 
+	 * @param axesan array of axes.
+	 */
+	public void setYAxes(Axis... axes) {
+		// set java script array
 		setValue(Property.yAxes, ArrayListHelper.load(this.yAxes, axes));
 		loadChartToAxes(axes);
 	}
@@ -83,12 +112,20 @@ public class Scales extends ChartContainer{
 		return yAxes;
 	}
 
-	private void loadChartToAxes(Axis... axes){
-		if (axes != null && axes.length > 0){
-			for (Axis axis : axes){
+	/**
+	 * Sets the chart instance to loaded axes.
+	 * 
+	 * @param axes array of axes
+	 */
+	private void loadChartToAxes(Axis... axes) {
+		// checks the axes array
+		if (axes != null && axes.length > 0) {
+			// scans array
+			for (Axis axis : axes) {
+				// sets chart instance
 				axis.setChart(getChart());
 			}
 		}
 	}
-	
+
 }

@@ -17,12 +17,13 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
-
 import org.pepstock.charba.client.options.layout.Padding;
 
-
 /**
+ * The layout configuration is needed to set the padidng.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
 public final class Layout extends JavaScriptObjectContainer{
 	
@@ -32,7 +33,11 @@ public final class Layout extends JavaScriptObjectContainer{
 		padding
 	}
 	
+	/**
+	 * Builds the object setting the java script padding object.
+	 */
 	Layout() {
+		// sets the padding object
 		setValue(Property.padding, padding);
 	}
 

@@ -18,10 +18,17 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.AbstractChart;
 
 /**
+ * Specific options for RADAR chart. It contains all properties for this kind of chart.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
 public final class RadarOptions extends SingleScaleOptions{
 
+	/**
+	 * Builds the object storing the chart instance.
+	 * @param chart chart instance
+	 */
 	public RadarOptions(AbstractChart<?, ?> chart) {
 		super(chart);
 	}

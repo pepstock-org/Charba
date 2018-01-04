@@ -17,16 +17,18 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
-
 import org.pepstock.charba.client.options.elements.Arc;
 import org.pepstock.charba.client.options.elements.Line;
 import org.pepstock.charba.client.options.elements.Point;
 import org.pepstock.charba.client.options.elements.Rectangle;
 
 /**
+ * Options can be configured for four different types of elements: arc, lines, points, and rectangles. When set, these options apply to the configuration attached to a dataset.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
-public class Elements extends JavaScriptObjectContainer{
+public final class Elements extends JavaScriptObjectContainer{
 	
 	private final Point point = new Point();
 	
@@ -36,7 +38,9 @@ public class Elements extends JavaScriptObjectContainer{
 
 	private final Rectangle rectangle = new Rectangle();
 
-
+	/**
+	 * Name of fields of JavaScript object.
+	 */
 	private enum Property implements Key {
 		point,
 		line,
@@ -44,14 +48,16 @@ public class Elements extends JavaScriptObjectContainer{
 		arc
 	}
 
-
-	public Elements() {
+	/**
+	 * Builds the object setting java script objects
+	 */
+	Elements() {
+		// set java script objects even if empty
 		setValue(Property.point, point);
 		setValue(Property.line, line);
 		setValue(Property.rectangle, rectangle);
 		setValue(Property.arc, arc);
 	}
-
 
 	/**
 	 * @return the point
@@ -60,7 +66,6 @@ public class Elements extends JavaScriptObjectContainer{
 		return point;
 	}
 
-
 	/**
 	 * @return the line
 	 */
@@ -68,14 +73,12 @@ public class Elements extends JavaScriptObjectContainer{
 		return line;
 	}
 
-
 	/**
 	 * @return the arc
 	 */
 	public Arc getArc() {
 		return arc;
 	}
-
 
 	/**
 	 * @return the rectangle

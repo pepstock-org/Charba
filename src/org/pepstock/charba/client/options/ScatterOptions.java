@@ -17,8 +17,18 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.AbstractChart;
 
+/**
+ * Specific options for SCATTER chart. It contains all properties for this kind of chart.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public class ScatterOptions extends LineOptions {
 
+	/**
+	 * Builds the object storing the chart instance.
+	 * @param chart chart instance
+	 */
 	public ScatterOptions(AbstractChart<?, ?> chart) {
 		super(chart);
 	}

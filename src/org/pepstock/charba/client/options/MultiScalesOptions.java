@@ -19,21 +19,33 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.commons.Key;
 
 /**
+ * Configuration of chart with multiple scales.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
-public abstract class MultiScalesOptions extends BaseOptions{
+public abstract class MultiScalesOptions extends BaseOptions {
 
 	private final Scales scales;
 
-	private enum Property implements Key {
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
 		scales
 	}
-	
-    protected MultiScalesOptions(AbstractChart<?, ?> chart) {
+
+	/**
+	 * Builds the object storing the chart instance.<br>
+	 * Sets also the scales object.
+	 * @param chart chart instance
+	 */
+	protected MultiScalesOptions(AbstractChart<?, ?> chart) {
 		super(chart);
 		scales = new Scales(chart);
 		setValue(Property.scales, scales);
-    }
+	}
 
 	/**
 	 * @return the scales

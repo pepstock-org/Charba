@@ -19,27 +19,55 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.commons.Key;
 
 /**
+ * pecific options for POLAR AREA chart. It contains all properties for this
+ * kind of chart.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
-public final class PolarAreaOptions extends SingleScaleOptions{
-	
+public final class PolarAreaOptions extends SingleScaleOptions {
+
 	private static final double DEFAULT_START_ANGLE = -0.5 * Math.PI;
 
-	private enum Property implements Key {
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
 		startAngle
 	}
-	
+
+	/**
+	 * Builds the object storing the chart instance.<br>
+	 * Sets also the internal parts of options.
+	 * 
+	 * @param chart
+	 *            chart instance
+	 */
 	public PolarAreaOptions(AbstractChart<?, ?> chart) {
 		super(chart);
+		// sets rotate and animation scale
 		getAnimation().setAnimateRotate(true);
 		getAnimation().setAnimateScale(true);
 	}
-	
-	public void setStartAngle(double startAngle){
-		  setValue(Property.startAngle, startAngle);
+
+	/**
+	 * Sets the starting angle to draw arcs for the first item in a dataset.
+	 * 
+	 * @param startAngle
+	 *            starting angle to draw arcs for the first item in a dataset.
+	 */
+	public void setStartAngle(double startAngle) {
+		setValue(Property.startAngle, startAngle);
 	}
 
-	public double getStartAngle(){
-		  return getValue(Property.startAngle, DEFAULT_START_ANGLE);
+	/**
+	 * Returns the starting angle to draw arcs for the first item in a dataset.
+	 * 
+	 * @return starting angle to draw arcs for the first item in a dataset.
+	 *         Default is <code>-0.5 * Math.PI</code>.
+	 */
+	public double getStartAngle() {
+		return getValue(Property.startAngle, DEFAULT_START_ANGLE);
 	}
 }
