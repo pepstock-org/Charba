@@ -20,20 +20,37 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.options.scales.Axis;
 
 /**
+ * Configuration of chart with only 1 scale.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
 public abstract class SingleScaleOptions extends BaseOptions{
 
+	/**
+	 * Name of fields of JavaScript object.
+	 */
 	private enum Property implements Key {
 		scale
 	}
 	
+	/**
+	 * Builds the object storing the chart instance.
+	 * @param chart chart instance
+	 */
 	public SingleScaleOptions(AbstractChart<?, ?> chart) {
 		super(chart);
 	}
 
+	/**
+	 * Sets an array of X axes.
+	 * 
+	 * @param axesan array of axes.
+	 */
 	public void setXAxis(Axis axis){
+		// sets chart instance
 		axis.setChart(getChart());
+		// set java script array
 		setValue(Property.scale, axis);
 	}
 

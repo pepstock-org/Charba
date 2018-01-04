@@ -19,37 +19,65 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * 
+ * Specific options for LINE chart. It contains all properties for this kind of
+ * chart.
+ *
+ * @author Andrea "Stock" Stocchero
+ *
  */
-public class LineOptions extends MultiScalesOptions{
+public class LineOptions extends MultiScalesOptions {
 
 	private static final boolean DEFAULT_SHOW_LINE = true;
-	
+
 	private static final boolean DEFAULT_SPAN_GAPS = false;
 
-	private enum Property implements Key {
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
 		showLine,
 		spanGaps
 	}
-	
+
+	/**
+	 * Builds the object storing the chart instance.
+	 * @param chart chart instance
+	 */
 	public LineOptions(AbstractChart<?, ?> chart) {
 		super(chart);
 	}
 
-	public void setShowLine(boolean showLine){
-		  setValue(Property.showLine, showLine);
+	/**
+	 * If false, the lines between points are not drawn.
+	 * @param showLine If false, the lines between points are not drawn.
+	 */
+	public void setShowLine(boolean showLine) {
+		setValue(Property.showLine, showLine);
 	}
 
-	public boolean isShowLine(){
-		  return getValue(Property.showLine, DEFAULT_SHOW_LINE);
+	/**
+	 * If false, the lines between points are not drawn.
+	 * @return If false, the lines between points are not drawn.. Default is true.
+	 */
+	public boolean isShowLine() {
+		return getValue(Property.showLine, DEFAULT_SHOW_LINE);
 	}
 
-	public void setSpanGaps(boolean spanGaps){
-		  setValue(Property.spanGaps, spanGaps);
+	/**
+	 * If false, NaN data causes a break in the line.
+	 * @param spanGaps If false, NaN data causes a break in the line.
+	 */
+	public void setSpanGaps(boolean spanGaps) {
+		setValue(Property.spanGaps, spanGaps);
 	}
 
-	public boolean isSpanGaps(){
-		  return getValue(Property.spanGaps, DEFAULT_SPAN_GAPS);
+	/**
+	 * If false, NaN data causes a break in the line.
+	 * @return If false, NaN data causes a break in the line. Default is false.
+	 */
+	public boolean isSpanGaps() {
+		return getValue(Property.spanGaps, DEFAULT_SPAN_GAPS);
 	}
 
 }

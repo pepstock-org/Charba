@@ -19,57 +19,96 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.commons.Key;
 
 /**
+ * Specific options for PIE chart. It contains all properties for this kind of chart.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
-public class PieOptions extends BaseOptions{
-	
+public class PieOptions extends BaseOptions {
+
 	private static final double DEFAULT_CUTOUT_PERCENTAGE = 0D;
-	
+
 	private static final double DEFAULT_ROTATION = -0.5 * Math.PI;
-	
+
 	private static final double DEFAULT_CIRCUMFERENCE = 2 * Math.PI;
 
-	private enum Property implements Key {
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
 		cutoutPercentage,
 		rotation,
 		circumference
 	}
-	
+
+	/**
+	 * Builds the object storing the chart instance.<br>
+	 * Sets also the internal parts of options.
+	 * 
+	 * @param chart chart instance
+	 */
 	public PieOptions(AbstractChart<?, ?> chart) {
 		super(chart);
+		// forces to 0
 		setCutoutPercentage(0);
+		// sets rotate and animation scale
 		getAnimation().setAnimateRotate(true);
 		getAnimation().setAnimateScale(true);
 	}
-	
-//	cutoutPercentage Number 50 - for doughnut, 0 - for pie The percentage of the chart that is cut out of the middle.
-//	rotation Number -0.5 * Math.PI Starting angle to draw arcs from.
-//	circumference Number 2 * Math.PI Sweep to allow arcs to cover
-//	animation.animateRotate Boolean true If true, the chart will animate in with a rotation animation. This property is in the options.animation object.
-//	animation.animateScale Boolean false If true, will animate scaling the chart from the center outwards.
-	
-	public void setCutoutPercentage(double cutoutPercentage){
-		  setValue(Property.cutoutPercentage, cutoutPercentage);
+
+	/**
+	 * Sets the percentage of the chart that is cut out of the middle.
+	 * 
+	 * @param cutoutPercentage the percentage of the chart that is cut out of the middle.
+	 */
+	public void setCutoutPercentage(double cutoutPercentage) {
+		setValue(Property.cutoutPercentage, cutoutPercentage);
 	}
 
-	public double getCutoutPercentage(){
-		  return getValue(Property.cutoutPercentage, DEFAULT_CUTOUT_PERCENTAGE);
+	/**
+	 * Returns the the percentage of the chart that is cut out of the middle.
+	 * 
+	 * @return the percentage of the chart that is cut out of the middle. Default is 0.
+	 */
+	public double getCutoutPercentage() {
+		return getValue(Property.cutoutPercentage, DEFAULT_CUTOUT_PERCENTAGE);
 	}
 
-	public void setRotation(double rotation){
-		  setValue(Property.rotation, rotation);
+	/**
+	 * Sets the starting angle to draw arcs from.
+	 * 
+	 * @param rotation starting angle to draw arcs from.
+	 */
+	public void setRotation(double rotation) {
+		setValue(Property.rotation, rotation);
 	}
 
-	public double getRotation(){
-		  return getValue(Property.rotation, DEFAULT_ROTATION);
+	/**
+	 * returns the starting angle to draw arcs from.
+	 * 
+	 * @return starting angle to draw arcs from. Default is <code>-0.5 * Math.PI</code>.
+	 */
+	public double getRotation() {
+		return getValue(Property.rotation, DEFAULT_ROTATION);
 	}
 
-	public void setCircumference(double circumference){
-		  setValue(Property.circumference, circumference);
+	/**
+	 * Sets the sweep to allow arcs to cover.
+	 * 
+	 * @param circumference the sweep to allow arcs to cover.
+	 */
+	public void setCircumference(double circumference) {
+		setValue(Property.circumference, circumference);
 	}
 
-	public double getCircumference(){
-		  return getValue(Property.circumference, DEFAULT_CIRCUMFERENCE);
+	/**
+	 * Returns the the sweep to allow arcs to cover.
+	 * 
+	 * @return the sweep to allow arcs to cover. Default is <code>2 * Math.PI</code>.
+	 */
+	public double getCircumference() {
+		return getValue(Property.circumference, DEFAULT_CIRCUMFERENCE);
 	}
 
 }

@@ -20,45 +20,80 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.InteractionMode;
 
 /**
+ * Defintions about how elements appear in the tooltip, hovering the chart.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
-public final class Hover extends JavaScriptObjectContainer{
-	
+public final class Hover extends JavaScriptObjectContainer {
+
 	private static final boolean DEFAULT_INTERSECT = true;
-	
+
 	private static final int DEFAULT_ANIMATION_DURATION = 400;
-	
-	private enum Property implements Key {
+
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
 		mode,
 		intersect,
 		animationDuration
 	}
-	
-    Hover() {
-		super();
+
+	/**
+	 * Empty constructor to reduce its visibility
+	 */
+	Hover() {
 	}
 
-    public void setMode(InteractionMode mode){
-    	setValue(Property.mode, mode);
-    }
+	/**
+	 * Sets which elements appear in the tooltip.
+	 * @param mode which elements appear in the tooltip.
+	 * @see org.pepstock.charba.client.enums.InteractionMode
+	 */
+	public void setMode(InteractionMode mode) {
+		setValue(Property.mode, mode);
+	}
 
-    public InteractionMode getMode(){
-    	return getValue(Property.mode, InteractionMode.class, InteractionMode.nearest);
-    }    
-    
+	/**
+	 * Returns which elements appear in the tooltip.
+	 * @return which elements appear in the tooltip. Default is {@link org.pepstock.charba.client.enums.InteractionMode#nearest}.
+	 * @see org.pepstock.charba.client.enums.InteractionMode
+	 */
+	public InteractionMode getMode() {
+		return getValue(Property.mode, InteractionMode.class, InteractionMode.nearest);
+	}
+
+	/**
+	 * if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * @param intersect if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 */
 	public void setIntersect(boolean intersect) {
 		setValue(Property.intersect, intersect);
 	}
 
-    public boolean isIntersect(){
-    	return getValue(Property.intersect, DEFAULT_INTERSECT);
-    }
-    
-    public void setAnimationDuration(int milliseconds){
-    	setValue(Property.animationDuration, milliseconds);
-    }
+	/**
+	 * if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart. Default is true.
+	 */
+	public boolean isIntersect() {
+		return getValue(Property.intersect, DEFAULT_INTERSECT);
+	}
 
-    public int getAnimationDuration(){
-    	return getValue(Property.animationDuration, DEFAULT_ANIMATION_DURATION);
-    }
+	/**
+	 * Sets the duration in milliseconds it takes to animate hover style changes.
+	 * @param milliseconds duration in milliseconds it takes to animate hover style changes.
+	 */
+	public void setAnimationDuration(int milliseconds) {
+		setValue(Property.animationDuration, milliseconds);
+	}
+
+	/**
+	 * Returns the duration in milliseconds it takes to animate hover style changes.
+	 * @return duration in milliseconds it takes to animate hover style changes. Default is 400.
+	 */
+	public int getAnimationDuration() {
+		return getValue(Property.animationDuration, DEFAULT_ANIMATION_DURATION);
+	}
 }
