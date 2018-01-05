@@ -18,24 +18,48 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.data.PolarAreaDataset;
 import org.pepstock.charba.client.options.PolarAreaOptions;
 
+/**
+ * POLAR AREA chart implementation.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public final class PolarAreaChart extends AbstractChart<PolarAreaOptions, PolarAreaDataset> {
-	
+
 	private final PolarAreaOptions options;
-	
+
+	/**
+	 * Builds the object.
+	 */
 	public PolarAreaChart() {
 		options = new PolarAreaOptions(this);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getType()
+	 */
 	@Override
 	public Type getType() {
 		return Type.polarArea;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 */
 	@Override
 	public PolarAreaOptions getOptions() {
 		return options;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 */
 	@Override
 	public PolarAreaDataset newDataset() {
 		return new PolarAreaDataset();

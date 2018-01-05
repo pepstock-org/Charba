@@ -20,44 +20,91 @@ import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Easing;
 
-public final class UpdateConfiguration  extends JavaScriptObjectContainer {
-	
+/**
+ * Object can be provided with additional configuration for the update/render process.<br>
+ * This is useful when update is manually called inside an event handler and some different animation is desired.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
+public final class UpdateConfiguration extends JavaScriptObjectContainer {
+
 	private static final boolean DEFAULT_LAZY = false;
-	
+
 	private static final int DEFAULT_DURATION = 1000;
-	
-    private enum Property implements Key{
-    	duration,
-    	lazy,
-    	easing
-    }
-   
-    public void setEasing(Easing easing){
-    	setValue(Property.easing, easing);
-    }
 
-    public Easing getEasing(){
-    	return getValue(Property.easing, Easing.class, Easing.easeOutQuart);
-    }
-    
-    public void setDuration(int milliseconds){
-    	setValue(Property.duration, milliseconds);
-    }
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		duration,
+		lazy,
+		easing
+	}
 
-    public int getDuration(){
-    	return getValue(Property.duration, DEFAULT_DURATION);
-    }
+	/**
+	 * Sets the animation easing function.
+	 * 
+	 * @param easing animation easing function.
+	 * @see org.pepstock.charba.client.enums.Easing
+	 */
+	public void setEasing(Easing easing) {
+		setValue(Property.easing, easing);
+	}
 
+	/**
+	 * Returns the animation easing function.
+	 * 
+	 * @return the animation easing function. Default is {@link org.pepstock.charba.client.enums.Easing#easeOutQuart}.
+	 * @see org.pepstock.charba.client.enums.Easing
+	 */
+	public Easing getEasing() {
+		return getValue(Property.easing, Easing.class, Easing.easeOutQuart);
+	}
 
+	/**
+	 * Sets the time for the animation of the redraw in milliseconds.
+	 * 
+	 * @param milliseconds time for the animation of the redraw in milliseconds.
+	 */
+	public void setDuration(int milliseconds) {
+		setValue(Property.duration, milliseconds);
+	}
+
+	/**
+	 * Returns the time for the animation of the redraw in milliseconds.
+	 * 
+	 * @return time for the animation of the redraw in milliseconds. Default is 1000.
+	 */
+	public int getDuration() {
+		return getValue(Property.duration, DEFAULT_DURATION);
+	}
+
+	/**
+	 * If true, the animation can be interrupted by other animations.
+	 * 
+	 * @param intersect if true, the animation can be interrupted by other animations.
+	 */
 	public void setLazy(boolean intersect) {
 		setValue(Property.lazy, intersect);
 	}
 
-    public boolean isLazy(){
-    	return getValue(Property.lazy, DEFAULT_LAZY);
-    }
-	
-	GenericJavaScriptObject getObject(){
+	/**
+	 * If true, the animation can be interrupted by other animations
+	 * 
+	 * @return if true, the animation can be interrupted by other animations. Default is false.
+	 */
+	public boolean isLazy() {
+		return getValue(Property.lazy, DEFAULT_LAZY);
+	}
+
+	/**
+	 * Wraps the protected method to get the java script object in order to consume it to configure the chart update or render.
+	 * 
+	 * @return the java script object in order to consume it to configure the chart update or render.
+	 */
+	GenericJavaScriptObject getObject() {
 		return getJavaScriptObject();
 	}
 

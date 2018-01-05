@@ -18,26 +18,51 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.data.PieDataset;
 import org.pepstock.charba.client.options.PieOptions;
 
+/**
+ * PIE chart implementation.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public final class PieChart extends AbstractChart<PieOptions, PieDataset> {
-	
+
 	private final PieOptions options;
-	
+
+	/**
+	 * Builds the object.
+	 */
 	public PieChart() {
 		options = new PieOptions(this);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getType()
+	 */
 	@Override
 	public Type getType() {
 		return Type.pie;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 */
 	@Override
 	public PieOptions getOptions() {
 		return options;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 */
 	@Override
 	public PieDataset newDataset() {
 		return new PieDataset();
 	}
+
 }

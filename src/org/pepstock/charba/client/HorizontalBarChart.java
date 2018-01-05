@@ -15,8 +15,19 @@
 */
 package org.pepstock.charba.client;
 
+/**
+ * HORIZONTAL BAR chart implementation.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public class HorizontalBarChart extends BarChart {
-	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.BarChart#getType()
+	 */
 	@Override
 	public Type getType() {
 		return Type.horizontalBar;

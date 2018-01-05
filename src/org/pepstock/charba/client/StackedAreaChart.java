@@ -19,29 +19,47 @@ import org.pepstock.charba.client.data.StackedAreaDataset;
 import org.pepstock.charba.client.options.StackedOptions;
 
 /**
- * Line charts can be configured into stacked area charts by changing the settings on the y axis to enable stacking.<br>
- * Stacked area charts can be used to show how one data trend is made up of a number of smaller pieces.
+ * STACKED AREA chart implementation.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class StackedAreaChart extends AbstractChart<StackedOptions, StackedAreaDataset> {
-	
+
 	private final StackedOptions options;
-	
+
+	/**
+	 * Builds the object.
+	 */
 	public StackedAreaChart() {
 		options = new StackedOptions(this, true);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getType()
+	 */
 	@Override
 	public Type getType() {
 		return Type.line;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 */
 	@Override
 	public StackedOptions getOptions() {
 		return options;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 */
 	@Override
 	public StackedAreaDataset newDataset() {
 		return new StackedAreaDataset();

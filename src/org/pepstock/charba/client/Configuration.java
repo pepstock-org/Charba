@@ -23,34 +23,69 @@ import org.pepstock.charba.client.options.BaseOptions;
 import org.pepstock.charba.client.plugins.Plugins;
 
 /**
+ * This is the configuration object of a chart.<br>
+ * It contains always teh type, options, plugins and data.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
-class Configuration extends JavaScriptObjectContainer{
-	
-	private enum Property implements Key {
+class Configuration extends JavaScriptObjectContainer {
+
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
 		type,
 		options,
 		plugins,
 		data
 	}
 
-	void setType(Type type){
+	/**
+	 * Sets the type of chart.
+	 * 
+	 * @param type type of chart.
+	 * @see Type
+	 */
+	void setType(Type type) {
 		setValue(Property.type, type.name());
 	}
-	
-	void setOptions(BaseOptions options){
-		setValue(Property.options, options);;
+
+	/**
+	 * Sets the options of the chart.
+	 * 
+	 * @param options the options of the chart.
+	 */
+	void setOptions(BaseOptions options) {
+		setValue(Property.options, options);
+		;
 	}
-	
-	void setData(Data data){
+
+	/**
+	 * Sets the data of chart.
+	 * 
+	 * @param data the data of chart.
+	 */
+	void setData(Data data) {
 		setValue(Property.data, data);
 	}
 
-	void setPlugins(Plugins plugins){
+	/**
+	 * Sets the plugins of chart.
+	 * 
+	 * @param plugins the plugins of chart.
+	 */
+	void setPlugins(Plugins plugins) {
 		setObjectArray(Property.plugins, plugins.getArrayList());
 	}
 
-	GenericJavaScriptObject getObject(){
+	/**
+	 * Wraps the protected method to get the java script object in order to consume it to configure the chart.
+	 * 
+	 * @return the java script object in order to consume it to configure the chart.
+	 */
+	GenericJavaScriptObject getObject() {
 		return getJavaScriptObject();
 	}
 

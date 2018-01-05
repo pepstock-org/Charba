@@ -15,8 +15,15 @@
 */
 package org.pepstock.charba.client;
 
-public enum Type {
-	
+/**
+ * Enumerates all possible available types of a chart.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
+public enum Type
+{
+
 	line,
 	bar,
 	horizontalBar,

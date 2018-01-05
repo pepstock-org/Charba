@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.options;
+package org.pepstock.charba.client.plugins;
 
 /**
  * Exception created when the plugin ID is not valid.<br>

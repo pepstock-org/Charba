@@ -18,24 +18,48 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.data.ScatterDataset;
 import org.pepstock.charba.client.options.ScatterOptions;
 
+/**
+ * SCATTER chart implementation.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public class ScatterChart extends AbstractChart<ScatterOptions, ScatterDataset> {
-	
+
 	private final ScatterOptions options;
-	
+
+	/**
+	 * Builds the object.
+	 */
 	public ScatterChart() {
 		options = new ScatterOptions(this);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getType()
+	 */
 	@Override
 	public Type getType() {
 		return Type.scatter;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 */
 	@Override
 	public ScatterOptions getOptions() {
 		return options;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 */
 	@Override
 	public ScatterDataset newDataset() {
 		return new ScatterDataset();

@@ -18,24 +18,49 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.data.BubbleDataset;
 import org.pepstock.charba.client.options.BubbleOptions;
 
+/**
+ * BUBBLE chart implementation.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public class BubbleChart extends AbstractChart<BubbleOptions, BubbleDataset> {
-	
+
 	private final BubbleOptions options;
-	
+
+	/**
+	 * Builds the object.
+	 */
 	public BubbleChart() {
+		// creates the options
 		options = new BubbleOptions(this);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getType()
+	 */
 	@Override
 	public Type getType() {
 		return Type.bubble;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 */
 	@Override
 	public BubbleOptions getOptions() {
 		return options;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 */
 	@Override
 	public BubbleDataset newDataset() {
 		return new BubbleDataset();

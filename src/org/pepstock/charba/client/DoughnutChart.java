@@ -18,27 +18,51 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.data.DoughnutDataset;
 import org.pepstock.charba.client.options.DoughnutOptions;
 
+/**
+ * DOUGHNUT chart implementation.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public final class DoughnutChart extends AbstractChart<DoughnutOptions, DoughnutDataset> {
-	
+
 	private final DoughnutOptions options;
-	
+
+	/**
+	 * Builds the object.
+	 */
 	public DoughnutChart() {
 		options = new DoughnutOptions(this);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getType()
+	 */
 	@Override
 	public Type getType() {
 		return Type.pie;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 */
 	@Override
 	public DoughnutOptions getOptions() {
 		return options;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 */
 	@Override
 	public DoughnutDataset newDataset() {
 		return new DoughnutDataset();
 	}
-	
+
 }

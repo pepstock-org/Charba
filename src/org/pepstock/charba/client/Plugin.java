@@ -17,270 +17,242 @@ package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.items.SizeItem;
+import org.pepstock.charba.client.items.TooltipModel;
 
-public interface Plugin  {
-	
-    /**
-	 * Plugin extension hooks.
-	 * @interface IPlugin
-	 * @since 2.1.0
-	 */
-	String getId() ;
+/**
+ * This interface is defining the extension hook for Chart.JS plugin implementation (a.k.a. <i>inline plugins</i>).<br>
+ * Plugins are the most efficient way to customize or change the default behavior of a chart.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
+public interface Plugin {
 
 	/**
-	 * @method IPlugin#beforeInit
-	 * @desc Called before initializing 'chart'.
-	 * @param {Chart.Controller} chart - The chart instance.
-	 * @param {Object} options - The plugin options.
+	 * Plugins must define a unique id in order to be configurable.<br>
+	 * Returns the plugin id. A plugin id <br>
+	 * <ul>
+	 * <li>can not start with a dot or an underscore
+	 * <li>can not contain any non-URL-safe characters
+	 * <li>cannot contain uppercase letters
+	 * <li>should be something short, but also reasonably descriptive
+	 * </ul>
+	 * 
+	 * @return the plugin id.
+	 */
+	String getId();
+
+	/**
+	 * Called before initializing 'chart'.
+	 * 
+	 * @param chart The chart instance.
 	 */
 	void onBeforeInit(AbstractChart<?, ?> chart);
-  
+
 	/**
-	 * @method IPlugin#afterInit
-	 * @desc Called after 'chart' has been initialized and before the first update.
-	 * @param {Chart.Controller} chart - The chart instance.
-	 * @param {Object} options - The plugin options.
+	 * Called after 'chart' has been initialized and before the first update.
+	 * 
+	 * @param chart The chart instance.
 	 */
 	void onAfterInit(AbstractChart<?, ?> chart);
 
 	/**
-	 * @method IPlugin#beforeUpdate
-	 * @desc Called before updating 'chart'. If any plugin returns 'false', the update
-	 * is cancelled (and thus subsequent render(s)) until another 'update' is triggered.
-	 * @param {Chart.Controller} chart - The chart instance.
-	 * @param {Object} options - The plugin options.
-	 * @returns {Boolean} 'false' to cancel the chart update.
+	 * Called before updating 'chart'. If any plugin returns <code>false</code>, the update is cancelled (and thus subsequent
+	 * render(s)) until another 'update' is triggered.
+	 * 
+	 * @param chart The chart instance.
+	 * @return <code>false</code> to cancel the chart update.
 	 */
 	boolean onBeforeUpdate(AbstractChart<?, ?> chart);
-	
+
 	/**
-	 * @method IPlugin#afterUpdate
-	 * @desc Called after 'chart' has been updated and before rendering. Note that this
-	 * hook will not be called if the chart update has been previously cancelled.
-	 * @param {Chart.Controller} chart - The chart instance.
-	 * @param {Object} options - The plugin options.
+	 * Called after 'chart' has been updated and before rendering. Note that this hook will not be called if the chart update
+	 * has been previously cancelled.
+	 * 
+	 * @param chart The chart instance.
 	 */
 	void onAfterUpdate(AbstractChart<?, ?> chart);
 
 	/**
-	 * @method IPlugin#beforeLayout
-	 * @desc Called before laying out 'chart'. If any plugin returns 'false',
-	 * the layout update is cancelled until another 'update' is triggered.
-	 * @param {Chart.Controller} chart - The chart instance.
-	 * @param {Object} options - The plugin options.
-	 * @returns {Boolean} 'false' to cancel the chart layout.
+	 * Called before laying out 'chart'. If any plugin returns <code>false</code>, the layout update is cancelled until another
+	 * 'update' is triggered.
+	 * 
+	 * @param chart The chart instance.
+	 * @return <code>false</code> to cancel the chart layout.
 	 */
 	boolean onBeforeLayout(AbstractChart<?, ?> chart);
-	
+
 	/**
-	 * @method IPlugin#afterLayout
-	 * @desc Called after the 'chart' has been layed out. Note that this hook will not
-	 * be called if the layout update has been previously cancelled.
-	 * @param {Chart.Controller} chart - The chart instance.
-	 * @param {Object} options - The plugin options.
+	 * Called after the 'chart' has been layed out. Note that this hook will not be called if the layout update has been
+	 * previously cancelled.
+	 * 
+	 * @param chart The chart instance.
 	 */
 	void onAfterLayout(AbstractChart<?, ?> chart);
 
 	/**
-	 * @method IPlugin#beforeDatasetsUpdate
- 	 * @desc Called before updating the 'chart' datasets. If any plugin returns 'false',
-	 * the datasets update is cancelled until another 'update' is triggered.
-	 * @param {Chart.Controller} chart - The chart instance.
-	 * @param {Object} options - The plugin options.
-	 * @returns {Boolean} false to cancel the datasets update.
-	 * @since version 2.1.5
+	 * Called before updating the 'chart' datasets. If any plugin returns <code>false</code>, the datasets update is cancelled
+	 * until another 'update' is triggered.
+	 * 
+	 * @param chart The chart instance.
+	 * @return <code>false</code> to cancel the datasets update.
 	 */
 	boolean onBeforeDatasetsUpdate(AbstractChart<?, ?> chart);
-	
+
 	/**
-	 * @method IPlugin#afterDatasetsUpdate
-	 * @desc Called after the 'chart' datasets have been updated. Note that this hook
-	 * will not be called if the datasets update has been previously cancelled.
-	 * @param {Chart.Controller} chart - The chart instance.
-	 * @param {Object} options - The plugin options.
-	 * @since version 2.1.5
+	 * Called after the 'chart' datasets have been updated. Note that this hook will not be called if the datasets update has
+	 * been previously cancelled.
+	 * 
+	 * @param chart The chart instance.
 	 */
 	void onAfterDatasetsUpdate(AbstractChart<?, ?> chart);
 
 	/**
-	 * @method IPlugin#beforeDatasetUpdate
- 	 * @desc Called before updating the 'chart' dataset at the given 'args.index'. If any plugin
-	 * returns 'false', the datasets update is cancelled until another 'update' is triggered.
-	 * @param {Chart} chart - The chart instance.
-	 * @param {Object} args - The call arguments.
-	 * @param {Number} args.index - The dataset index.
-	 * @param {Object} args.meta - The dataset metadata.
-	 * @param {Object} options - The plugin options.
-	 * @returns {Boolean} 'false' to cancel the chart datasets drawing.
+	 * Called before updating the 'chart' dataset at the given 'args.index'. If any plugin returns <code>false</code>, the
+	 * datasets update is cancelled until another 'update' is triggered.
+	 * 
+	 * @param chart The chart instance.
+	 * @param datasetIndex The dataset index.
+	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
 	boolean onBeforeDatasetUpdate(AbstractChart<?, ?> chart, int datasetIndex);
-	
+
 	/**
-	 * @method IPlugin#afterDatasetUpdate
- 	 * @desc Called after the 'chart' datasets at the given 'args.index' has been updated. Note
-	 * that this hook will not be called if the datasets update has been previously cancelled.
-	 * @param {Chart} chart - The chart instance.
-	 * @param {Object} args - The call arguments.
-	 * @param {Number} args.index - The dataset index.
-	 * @param {Object} args.meta - The dataset metadata.
-	 * @param {Object} options - The plugin options.
+	 * Called after the 'chart' datasets at the given 'args.index' has been updated. Note that this hook will not be called if
+	 * the datasets update has been previously cancelled.
+	 * 
+	 * @param chart The chart instance.
+	 * @param datasetIndex The dataset index.
 	 */
 	void onAfterDatasetUpdate(AbstractChart<?, ?> chart, int datasetIndex);
 
 	/**
-	 * @method IPlugin#beforeRender
-	 * @desc Called before rendering 'chart'. If any plugin returns 'false',
-	 * the rendering is cancelled until another 'render' is triggered.
-	 * @param {Chart.Controller} chart - The chart instance.
-	 * @param {Object} options - The plugin options.
-	 * @returns {Boolean} 'false' to cancel the chart rendering.
+	 * Called before rendering 'chart'. If any plugin returns <code>false</code>, the rendering is cancelled until another
+	 * 'render' is triggered.
+	 * 
+	 * @param chart The chart instance.
+	 * @return <code>false</code> to cancel the chart rendering.
 	 */
 	boolean onBeforeRender(AbstractChart<?, ?> chart);
-	
+
 	/**
-	 * @method IPlugin#afterRender
-	 * @desc Called after the 'chart' has been fully rendered (and animation completed). Note
-	 * that this hook will not be called if the rendering has been previously cancelled.
-	 * @param {Chart.Controller} chart - The chart instance.
-	 * @param {Object} options - The plugin options.
+	 * Called after the 'chart' has been fully rendered (and animation completed). Note that this hook will not be called if the
+	 * rendering has been previously cancelled.
+	 * 
+	 * @param chart The chart instance.
 	 */
 	void onAfterRender(AbstractChart<?, ?> chart);
 
 	/**
-	 * @method IPlugin#beforeDraw
-	 * @desc Called before drawing 'chart' at every animation frame specified by the given
-	 * easing value. If any plugin returns 'false', the frame drawing is cancelled until
-	 * another 'render' is triggered.
-	 * @param {Chart.Controller} chart - The chart instance.
-	 * @param {Number} easingValue - The current animation value, between 0.0 and 1.0.
-	 * @param {Object} options - The plugin options.
-	 * @returns {Boolean} 'false' to cancel the chart drawing.
+	 * Called before drawing 'chart' at every animation frame specified by the given easing value. If any plugin returns
+	 * <code>false</code>, the frame drawing is cancelled until another 'render' is triggered.
+	 * 
+	 * @param chart The chart instance.
+	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @return <code>false</code> to cancel the chart drawing.
 	 */
-	// FIXME
 	boolean onBeforeDraw(AbstractChart<?, ?> chart, double easing);
-	
+
 	/**
-	 * @method IPlugin#afterDraw
-	 * @desc Called after the 'chart' has been drawn for the specific easing value. Note
-	 * that this hook will not be called if the drawing has been previously cancelled.
-	 * @param {Chart.Controller} chart - The chart instance.
-	 * @param {Number} easingValue - The current animation value, between 0.0 and 1.0.
-	 * @param {Object} options - The plugin options.
+	 * Called after the 'chart' has been drawn for the specific easing value. Note that this hook will not be called if the
+	 * drawing has been previously cancelled.
+	 * 
+	 * @param chart The chart instance.
+	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	//FIXME
 	void onAfterDraw(AbstractChart<?, ?> chart, double easing);
-	
+
 	/**
-	 * @method IPlugin#beforeDatasetsDraw
- 	 * @desc Called before drawing the 'chart' datasets. If any plugin returns 'false',
-	 * the datasets drawing is cancelled until another 'render' is triggered.
-	 * @param {Chart.Controller} chart - The chart instance.
-	 * @param {Number} easingValue - The current animation value, between 0.0 and 1.0.
-	 * @param {Object} options - The plugin options.
-	 * @returns {Boolean} 'false' to cancel the chart datasets drawing.
+	 * Called before drawing the 'chart' datasets. If any plugin returns <code>false</code>, the datasets drawing is cancelled
+	 * until another 'render' is triggered.
+	 * 
+	 * @param chart The chart instance.
+	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
 	boolean onBeforeDatasetsDraw(AbstractChart<?, ?> chart, double easing);
-	
+
 	/**
-	 * @method IPlugin#afterDatasetsDraw
-	 * @desc Called after the 'chart' datasets have been drawn. Note that this hook
-	 * will not be called if the datasets drawing has been previously cancelled.
-	 * @param {Chart.Controller} chart - The chart instance.
-	 * @param {Number} easingValue - The current animation value, between 0.0 and 1.0.
-	 * @param {Object} options - The plugin options.
+	 * Called after the 'chart' datasets have been drawn. Note that this hook will not be called if the datasets drawing has
+	 * been previously cancelled.
+	 * 
+	 * @param chart The chart instance.
+	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
 	void onAfterDatasetsDraw(AbstractChart<?, ?> chart, double easing);
 
 	/**
-	 * @method IPlugin#beforeDatasetDraw
- 	 * @desc Called before drawing the 'chart' dataset at the given 'args.index' (datasets
-	 * are drawn in the reverse order). If any plugin returns 'false', the datasets drawing
-	 * is cancelled until another 'render' is triggered.
-	 * @param {Chart} chart - The chart instance.
-	 * @param {Object} args - The call arguments.
-	 * @param {Number} args.index - The dataset index.
-	 * @param {Object} args.meta - The dataset metadata.
-	 * @param {Number} args.easingValue - The current animation value, between 0.0 and 1.0.
-	 * @param {Object} options - The plugin options.
-	 * @returns {Boolean} 'false' to cancel the chart datasets drawing.
+	 * Called before drawing the 'chart' dataset at the given 'args.index' (datasets are drawn in the reverse order). If any
+	 * plugin returns <code>false</code>, the datasets drawing is cancelled until another 'render' is triggered.
+	 * 
+	 * @param chart The chart instance.
+	 * @param datasetIndex The dataset index.
+	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	//FIXME
 	boolean onBeforeDatasetDraw(AbstractChart<?, ?> chart, int datasetIndex, double easing);
-	
+
 	/**
-	 * @method IPlugin#afterDatasetDraw
- 	 * @desc Called after the 'chart' datasets at the given 'args.index' have been drawn
-	 * (datasets are drawn in the reverse order). Note that this hook will not be called
-	 * if the datasets drawing has been previously cancelled.
-	 * @param {Chart} chart - The chart instance.
-	 * @param {Object} args - The call arguments.
-	 * @param {Number} args.index - The dataset index.
-	 * @param {Object} args.meta - The dataset metadata.
-	 * @param {Number} args.easingValue - The current animation value, between 0.0 and 1.0.
-	 * @param {Object} options - The plugin options.
+	 * Called after the 'chart' datasets at the given 'args.index' have been drawn (datasets are drawn in the reverse order).
+	 * Note that this hook will not be called if the datasets drawing has been previously cancelled.
+	 * 
+	 * @param chart The chart instance.
+	 * @param datasetIndex The dataset index.
+	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	// FIXME
 	void onAfterDatasetDraw(AbstractChart<?, ?> chart, int datasetIndex, double easing);
 
 	/**
-  	 * @method IPlugin#beforeTooltipDraw
-	 * @desc Called before drawing the 'tooltip'. If any plugin returns 'false',
-	 * the tooltip drawing is cancelled until another 'render' is triggered.
-	 * @param {Chart} chart - The chart instance.
-	 * @param {Object} args - The call arguments.
-	 * @param {Object} args.tooltip - The tooltip.
-	 * @param {Number} args.easingValue - The current animation value, between 0.0 and 1.0.
-	 * @param {Object} options - The plugin options.
-	 * @returns {Boolean} 'false' to cancel the chart tooltip drawing.
-  	 */
-	boolean onBeforeTooltipDraw(AbstractChart<?, ?> chart, double easing);
-
-	/**
- 	 * @method IPlugin#afterTooltipDraw
-  	 * @desc Called after drawing the 'tooltip'. Note that this hook will not
- 	 * be called if the tooltip drawing has been previously cancelled.
- 	 * @param {Chart} chart - The chart instance.
- 	 * @param {Object} args - The call arguments.
- 	 * @param {Object} args.tooltip - The tooltip.
-	 * @param {Number} args.easingValue - The current animation value, between 0.0 and 1.0.
- 	 * @param {Object} options - The plugin options.
- 	 */
-	void onAfterTooltipDraw(AbstractChart<?, ?> chart, double easing);
-
-	/**
-	 * @method IPlugin#beforeEvent
- 	 * @desc Called before processing the specified 'event'. If any plugin returns 'false',
-	 * the event will be discarded.
-	 * @param {Chart.Controller} chart - The chart instance.
-	 * @param {IEvent} event - The event object.
-	 * @param {Object} options - The plugin options.
+	 * Called before drawing the 'tooltip'. If any plugin returns <code>false</code>, the tooltip drawing is cancelled until
+	 * another 'render' is triggered.
+	 * 
+	 * @param chart The chart instance.
+	 * @param tooltip The tooltip instance.
+	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @return <code>false</code> to cancel the chart tooltip drawing.
 	 */
-	void onBeforeEvent(AbstractChart<?, ?> chart, ChartNativeEvent event);
-	
+	boolean onBeforeTooltipDraw(AbstractChart<?, ?> chart, TooltipModel tooltip, double easing);
+
 	/**
-	 * @method IPlugin#afterEvent
-	 * @desc Called after the 'event' has been consumed. Note that this hook
-	 * will not be called if the 'event' has been previously discarded.
-	 * @param {Chart.Controller} chart - The chart instance.
-	 * @param {IEvent} event - The event object.
-	 * @param {Object} options - The plugin options.
+	 * Called after drawing the 'tooltip'. Note that this hook will not be called if the tooltip drawing has been previously
+	 * cancelled.
+	 * 
+	 * @param chart The chart instance.
+	 * @param tooltip The tooltip instance.
+	 * @param easing The current animation value, between 0.0 and 1.0.
+	 */
+	void onAfterTooltipDraw(AbstractChart<?, ?> chart, TooltipModel tooltip, double easing);
+
+	/**
+	 * Called before processing the specified 'event'. If any plugin returns <code>false</code>, the event will be discarded.
+	 * 
+	 * @param chart The chart instance.
+	 * @param event The event object.
+	 * @return <code>false</code> to discard the event.
+	 */
+	boolean onBeforeEvent(AbstractChart<?, ?> chart, ChartNativeEvent event);
+
+	/**
+	 * Called after the 'event' has been consumed. Note that this hook will not be called if the 'event' has been previously
+	 * discarded.
+	 * 
+	 * @param chart The chart instance.
+	 * @param event The event object.
 	 */
 	void onAfterEvent(AbstractChart<?, ?> chart, ChartNativeEvent event);
-	
-	/**
-	 * @method IPlugin#resize
-	 * @desc Called after the chart as been resized.
-	 * @param {Chart.Controller} chart - The chart instance.
-	 * @param {Number} size - The new canvas display size (eq. canvas.style width & height).
-	 * @param {Object} options - The plugin options.
-	 */
-    void onResize(AbstractChart<?, ?> chart, SizeItem size);
 
 	/**
-	 * @method IPlugin#destroy
-	 * @desc Called after the chart as been destroyed.
-	 * @param {Chart.Controller} chart - The chart instance.
-	 * @param {Object} options - The plugin options.
+	 * Called after the chart as been resized.
+	 * 
+	 * @param chart The chart instance.
+	 * @param size The new canvas display size (eq. canvas.style width & height).
 	 */
-    void onDestroy(AbstractChart<?, ?> chart);
+	void onResize(AbstractChart<?, ?> chart, SizeItem size);
+
+	/**
+	 * Called after the chart as been destroyed.
+	 * 
+	 * @param chart The chart instance.
+	 */
+	void onDestroy(AbstractChart<?, ?> chart);
 }

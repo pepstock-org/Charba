@@ -18,24 +18,48 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.data.RadarDataset;
 import org.pepstock.charba.client.options.RadarOptions;
 
+/**
+ * RADAR chart implementation.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public class RadarChart extends AbstractChart<RadarOptions, RadarDataset> {
-	
+
 	private final RadarOptions options;
-	
+
+	/**
+	 * Builds the object.
+	 */
 	public RadarChart() {
 		options = new RadarOptions(this);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getType()
+	 */
 	@Override
 	public Type getType() {
 		return Type.radar;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 */
 	@Override
 	public RadarOptions getOptions() {
 		return options;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 */
 	@Override
 	public RadarDataset newDataset() {
 		return new RadarDataset();
