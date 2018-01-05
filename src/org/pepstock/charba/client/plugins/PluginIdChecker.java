@@ -37,7 +37,7 @@ final class PluginIdChecker {
 
 	private static final char DOT = '.';
 
-	private static final char UNDERSCORE = '.';
+	private static final char UNDERSCORE = '_';
 
 	/**
 	 * To avoid any instantiation
@@ -61,7 +61,7 @@ final class PluginIdChecker {
 	static void check(String id) throws InvalidPluginIdException {
 		// checks if is null
 		if (id == null) {
-			throw new InvalidPluginIdException(buildMessage(id, INVALID_PLUGIN__ID_NULL));
+			throw new InvalidPluginIdException(INVALID_PLUGIN__ID_NULL);
 		} else if (id.charAt(0) == DOT || id.charAt(0) == UNDERSCORE) {
 			// checks if is starting with DOT or underscore
 			throw new InvalidPluginIdException(buildMessage(id, INVALID_PLUGIN__ID_FIRST_CHAR));
