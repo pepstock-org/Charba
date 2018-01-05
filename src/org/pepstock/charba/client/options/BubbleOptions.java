@@ -27,6 +27,7 @@ public final class BubbleOptions extends ScatterOptions {
 
 	/**
 	 * Builds the object storing the chart instance.
+	 * 
 	 * @param chart chart instance
 	 */
 	public BubbleOptions(AbstractChart<?, ?> chart) {

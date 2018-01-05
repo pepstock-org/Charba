@@ -18,7 +18,7 @@ package org.pepstock.charba.client.options.scales;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * This a cartesian axis for bar chart.
+ * This a cartesian axis for BAR chart.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -33,8 +33,12 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 
 	private static final int DEFAULT_MAX_BAR_THICKNESS = 0;
 
+	// specific gridlines for BAR charts
 	private final BarGridLines barGridLines = new BarGridLines();
 
+	/**
+	 * Name of fields of JavaScript object.
+	 */
 	private enum Property implements Key
 	{
 		barPercentage,
@@ -43,50 +47,84 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 		maxBarThickness
 	}
 
-	// barPercentage Number 0.9 Percent (0-1) of the available width each bar
-	// should be within the category width. 1.0 will take the whole category
-	// width and put the bars right next to each other. more...
-	// categoryPercentage Number 0.8 Percent (0-1) of the available width each
-	// category should be within the sample width. more...
-	// barThickness Number Manually set width of each bar in pixels. If not set,
-	// the base sample widths are calculated automatically so that they take the
-	// full available widths without overlap. Then, the bars are sized using
-	// barPercentage and categoryPercentage.
-	// maxBarThickness Number Set this to ensure that bars are not sized thicker
-	// than this.
-	// gridLines.offsetGridLines Boolean true If true, the bars for a particular
-	// data point fall between the grid lines. The grid line will move to the
-	// left by one half of the tick interval. If false, the grid line will go
-	// right down the middle of the bars. more...
-
+	/**
+	 * Sets the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
+	 * category width and put the bars right next to each other.
+	 * 
+	 * @param barPercentage percent (0-1) of the available width each bar should be within the category width. 1.0 will take the
+	 *            whole category width and put the bars right next to each other.
+	 */
 	public void setBarPercentage(double barPercentage) {
 		setValue(Property.barPercentage, barPercentage);
 	}
 
+	/**
+	 * Returns the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
+	 * category width and put the bars right next to each other.
+	 * 
+	 * @return percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
+	 *         category width and put the bars right next to each other. Default is 0.9.
+	 */
 	public double getBarPercentage() {
 		return getValue(Property.barPercentage, DEFAULT_BAR_PERCENTAGE);
 	}
 
+	/**
+	 * Sets the percent (0-1) of the available width each category should be within the sample width.
+	 * 
+	 * @param categoryPercentage percent (0-1) of the available width each category should be within the sample width.
+	 */
 	public void setCategoryPercentage(double categoryPercentage) {
 		setValue(Property.categoryPercentage, categoryPercentage);
 	}
 
+	/**
+	 * Returns the percent (0-1) of the available width each category should be within the sample width.
+	 * 
+	 * @return the percent (0-1) of the available width each category should be within the sample width. Default is 0.8.
+	 */
 	public double getCategoryPercentage() {
 		return getValue(Property.categoryPercentage, DEFAULT_CATEGORY_PERCENTAGE);
 	}
 
+	/**
+	 * Sets the width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take
+	 * the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
+	 * 
+	 * @param barThickness width of each bar in pixels. If not set, the base sample widths are calculated automatically so that
+	 *            they take the full available widths without overlap. Then, the bars are sized using barPercentage and
+	 *            categoryPercentage.
+	 */
 	public void setBarThickness(int barThickness) {
 		setValue(Property.barThickness, barThickness);
 	}
 
+	/**
+	 * Returns the width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they
+	 * take the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
+	 * 
+	 * @return width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take
+	 *         the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
+	 *         Default is 0.
+	 */
 	public int getBarThickness() {
 		return getValue(Property.barThickness, DEFAULT_BAR_THICKNESS);
 	}
 
+	/**
+	 * Sets the maximum bar thickness, to ensure that bars are not sized thicker than this
+	 * 
+	 * @param maxBarThickness the maximum bar thickness.
+	 */
 	public void setMaxBarThickness(int maxBarThickness) {
 		setValue(Property.maxBarThickness, maxBarThickness);
 	}
 
+	/**
+	 * Returns the maximum bar thickness.
+	 * 
+	 * @return the maximum bar thickness. Default is 0.
+	 */
 	public int getMaxBarThickness() {
 		return getValue(Property.maxBarThickness, DEFAULT_MAX_BAR_THICKNESS);
 	}
@@ -94,8 +132,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.options.scales.CartesianAxis#getGrideLines()
+	 * @see org.pepstock.charba.client.options.scales.CartesianAxis#getGrideLines()
 	 */
 	@Override
 	public GridLines getGrideLines() {
@@ -103,6 +140,11 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	}
 
 	/**
+	 * Gridlines is set to true in the bar chart by default.<br>
+	 * It overrides the method to set offset, setting ALWAYS true.<br>
+	 * If true, the bars for a particular data point fall between the grid lines.<br>
+	 * The grid line will move to the left by one half of the tick interval.<br>
+	 * If false, the grid line will go right down the middle of the bars.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
@@ -112,11 +154,11 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.options.scales.GridLines#
-		 * setOffsetGridLines(boolean)
+		 * @see org.pepstock.charba.client.options.scales.GridLines# setOffsetGridLines(boolean)
 		 */
 		@Override
 		public void setOffsetGridLines(boolean offsetGridLines) {
+			// sets always true
 			super.setOffsetGridLines(true);
 		}
 	}

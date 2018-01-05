@@ -29,10 +29,11 @@ import org.pepstock.charba.client.enums.JoinStyle;
  * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the same way.<br>
  * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
  * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a dataset.
+ * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.LineChart
  */
-public class Line extends Arc{
+public class Line extends Arc {
 
 	// default line tension
 	private static final float DEFAULT_TENSION = 0.4F;
@@ -48,11 +49,12 @@ public class Line extends Arc{
 	private static final boolean DEFAULT_CAP_BEZIER_POINTS = true;
 
 	private static final boolean DEFAULT_STEPPED = false;
-	
+
 	/**
-	 * Name of fields of JavaScript object. 
+	 * Name of fields of JavaScript object.
 	 */
-	enum Property implements Key {
+	enum Property implements Key
+	{
 		tension,
 		borderCapStyle,
 		borderDash,
@@ -62,8 +64,10 @@ public class Line extends Arc{
 		fill,
 		stepped
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.elements.Arc#getDefaultBackgroundColor()
 	 */
 	@Override
@@ -71,7 +75,9 @@ public class Line extends Arc{
 		return DEFAULT_BACKGROUND_COLOR;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.elements.Arc#getDefaultBorderWidth()
 	 */
 	@Override
@@ -79,7 +85,9 @@ public class Line extends Arc{
 		return DEFAULT_BORDER_WIDTH;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.elements.Arc#getDefaultBorderColor()
 	 */
 	@Override
@@ -89,6 +97,7 @@ public class Line extends Arc{
 
 	/**
 	 * Returns the Bezier curve tension (0 for no Bezier curves).
+	 * 
 	 * @param tension the Bezier curve tension (0 for no Bezier curves).
 	 */
 	public void setTension(double tension) {
@@ -97,6 +106,7 @@ public class Line extends Arc{
 
 	/**
 	 * Returns the Bezier curve tension (0 for no Bezier curves).
+	 * 
 	 * @return the Bezier curve tension (0 for no Bezier curves).
 	 */
 	public double getTension() {
@@ -104,7 +114,8 @@ public class Line extends Arc{
 	}
 
 	/**
-	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square. 
+	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square.
+	 * 
 	 * @param borderCapStyle how the end points of every line are drawn.
 	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
@@ -114,15 +125,17 @@ public class Line extends Arc{
 
 	/**
 	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square. By default this property is set to butt.
+	 * 
 	 * @return how the end points of every line are drawn.
 	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
-	public CapStyle getBorderCapStyle(){
-		  return getValue(Property.borderCapStyle, CapStyle.class, CapStyle.butt);
+	public CapStyle getBorderCapStyle() {
+		return getValue(Property.borderCapStyle, CapStyle.class, CapStyle.butt);
 	}
 
 	/**
 	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * 
 	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
@@ -130,7 +143,8 @@ public class Line extends Arc{
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern. 
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * 
 	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	private void setBorderDash(JsIntegerArrayList borderDash) {
@@ -139,6 +153,7 @@ public class Line extends Arc{
 
 	/**
 	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * 
 	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public List<Integer> getBorderDash() {
@@ -146,24 +161,28 @@ public class Line extends Arc{
 	}
 
 	/**
-	 * Sets the line dash pattern offset or "phase". 
-	 * @param borderDashOffset the line dash pattern offset or "phase". 
+	 * Sets the line dash pattern offset or "phase".
+	 * 
+	 * @param borderDashOffset the line dash pattern offset or "phase".
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
 		setValue(Property.borderDashOffset, borderDashOffset);
 	}
 
 	/**
-	 * Returns the line dash pattern offset or "phase". 
-	 * @return the line dash pattern offset or "phase". 
+	 * Returns the line dash pattern offset or "phase".
+	 * 
+	 * @return the line dash pattern offset or "phase".
 	 */
 	public int getBorderDashOffset() {
 		return getValue(Property.borderDashOffset, DEFAULT_BORDER_DASH_OFFSET);
 	}
 
 	/**
-	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are skipped).<br>
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are
+	 * skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
+	 * 
 	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
@@ -172,8 +191,10 @@ public class Line extends Arc{
 	}
 
 	/**
-	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are skipped).<br>
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are
+	 * skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
+	 * 
 	 * @return There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
@@ -183,6 +204,7 @@ public class Line extends Arc{
 
 	/**
 	 * Sets <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
+	 * 
 	 * @param capBezierPoints <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
 	 */
 	public void setCapBezierPoints(boolean capBezierPoints) {
@@ -191,6 +213,7 @@ public class Line extends Arc{
 
 	/**
 	 * Returns <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
+	 * 
 	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
 	 */
 	public boolean isCapBezierPoints() {
@@ -199,12 +222,13 @@ public class Line extends Arc{
 
 	/**
 	 * Sets how to fill the area under the line.
+	 * 
 	 * @param fill how to fill the area under the line.
 	 * @see org.pepstock.charba.client.enums.Fill
 	 */
-	public void setFill(Fill fill){
+	public void setFill(Fill fill) {
 		// checks if is no fill
-		if (Fill.nofill.equals(fill)){
+		if (Fill.nofill.equals(fill)) {
 			// sets the boolean value instead of string one
 			setValue(Property.fill, false);
 		} else {
@@ -212,24 +236,25 @@ public class Line extends Arc{
 			setValue(Property.fill, fill.name());
 		}
 	}
-	
+
 	/**
 	 * Returns how to fill the area under the line.
+	 * 
 	 * @return how to fill the area under the line.
 	 * @see org.pepstock.charba.client.enums.Fill
 	 */
-	public Fill getFill(){
+	public Fill getFill() {
 		// gets value
 		String value = getValue(Property.fill, Fill.origin.name());
 		// if is a boolean FALSE value
-		if (value.equalsIgnoreCase(Boolean.FALSE.toString())){
+		if (value.equalsIgnoreCase(Boolean.FALSE.toString())) {
 			// returns no fill
 			return Fill.nofill;
 		}
 		// scans all enums
-		for (Fill enumValue : Fill.values()){
+		for (Fill enumValue : Fill.values()) {
 			// if enum is equals to value
-			if (enumValue.name().equalsIgnoreCase(value)){
+			if (enumValue.name().equalsIgnoreCase(value)) {
 				// returns enum
 				return enumValue;
 			}
@@ -240,6 +265,7 @@ public class Line extends Arc{
 
 	/**
 	 * Sets <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 * 
 	 * @param stepped <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 */
 	public void setStepped(boolean stepped) {
@@ -248,6 +274,7 @@ public class Line extends Arc{
 
 	/**
 	 * Returns <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 * 
 	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 */
 	public boolean isStepped() {

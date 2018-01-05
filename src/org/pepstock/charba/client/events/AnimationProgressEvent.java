@@ -21,6 +21,7 @@ import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the animation of the chart is progressing.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -30,12 +31,13 @@ public final class AnimationProgressEvent extends AbstractEvent<AnimationProgres
 	 * Event type
 	 */
 	public static final Type<AnimationProgressEventHandler> TYPE = new Type<AnimationProgressEventHandler>();
-	
+
 	// animation item with animation info from chart
 	private final AnimationItem item;
-	
+
 	/**
 	 * Creates the event with the animation info from chart.
+	 * 
 	 * @param nativeEvent native event of this custom event
 	 * @param item item with animation info from chart
 	 */
@@ -46,21 +48,26 @@ public final class AnimationProgressEvent extends AbstractEvent<AnimationProgres
 
 	/**
 	 * Returns item with animation info from chart
+	 * 
 	 * @return the item with animation info from chart
 	 */
-	public  AnimationItem getItem() {
+	public AnimationItem getItem() {
 		return item;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
 	 */
 	@Override
 	public Type<AnimationProgressEventHandler> getAssociatedType() {
 		return TYPE;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
 	 */
 	@Override

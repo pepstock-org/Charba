@@ -49,6 +49,7 @@ public final class Hover extends JavaScriptObjectContainer {
 
 	/**
 	 * Sets which elements appear in the tooltip.
+	 * 
 	 * @param mode which elements appear in the tooltip.
 	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
@@ -58,6 +59,7 @@ public final class Hover extends JavaScriptObjectContainer {
 
 	/**
 	 * Returns which elements appear in the tooltip.
+	 * 
 	 * @return which elements appear in the tooltip. Default is {@link org.pepstock.charba.client.enums.InteractionMode#nearest}.
 	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
@@ -67,6 +69,7 @@ public final class Hover extends JavaScriptObjectContainer {
 
 	/**
 	 * if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * 
 	 * @param intersect if true, the hover mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public void setIntersect(boolean intersect) {
@@ -75,6 +78,7 @@ public final class Hover extends JavaScriptObjectContainer {
 
 	/**
 	 * if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * 
 	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart. Default is true.
 	 */
 	public boolean isIntersect() {
@@ -83,6 +87,7 @@ public final class Hover extends JavaScriptObjectContainer {
 
 	/**
 	 * Sets the duration in milliseconds it takes to animate hover style changes.
+	 * 
 	 * @param milliseconds duration in milliseconds it takes to animate hover style changes.
 	 */
 	public void setAnimationDuration(int milliseconds) {
@@ -91,6 +96,7 @@ public final class Hover extends JavaScriptObjectContainer {
 
 	/**
 	 * Returns the duration in milliseconds it takes to animate hover style changes.
+	 * 
 	 * @return duration in milliseconds it takes to animate hover style changes. Default is 400.
 	 */
 	public int getAnimationDuration() {

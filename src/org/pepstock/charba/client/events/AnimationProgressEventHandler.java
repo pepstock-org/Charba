@@ -26,8 +26,9 @@ public interface AnimationProgressEventHandler extends ChartEventHandler {
 
 	/**
 	 * Invoked when chart animation is progressing.
+	 * 
 	 * @param event animation event
 	 */
 	void onProgress(AnimationProgressEvent event);
-	
+
 }

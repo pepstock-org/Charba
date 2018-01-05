@@ -33,9 +33,10 @@ public final class ChartResizeEvent extends AbstractEvent<ChartResizeEventHandle
 	public static final Type<ChartResizeEventHandler> TYPE = new Type<ChartResizeEventHandler>();
 	// item which contains the new size of the chart
 	private final SizeItem size;
-	
+
 	/**
 	 * Creates the event with a item with new size of the chart
+	 * 
 	 * @param nativeEvent native event of this custom event
 	 * @param size item with the new size of the chart
 	 */
@@ -46,21 +47,26 @@ public final class ChartResizeEvent extends AbstractEvent<ChartResizeEventHandle
 
 	/**
 	 * Returns item with the new size of the chart
+	 * 
 	 * @return the item with the new size of the chart
 	 */
 	public SizeItem getSize() {
 		return size;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
 	 */
 	@Override
 	public Type<ChartResizeEventHandler> getAssociatedType() {
 		return TYPE;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
 	 */
 	@Override

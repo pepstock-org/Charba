@@ -28,28 +28,30 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TooltipItemArray  extends GenericJavaScriptObject {
- 
-	/**
-	 * Name of fields of JavaScript object. 
-	 */
-    private enum Property implements Key{
-    	items
-    }
+public final class TooltipItemArray extends GenericJavaScriptObject {
 
-    /** 
-     * Needed for GWt injection
-     */
-    protected TooltipItemArray() {
-    	// do nothing
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		items
+	}
+
+	/**
+	 * Needed for GWt injection
+	 */
+	protected TooltipItemArray() {
+		// do nothing
 	}
 
 	/**
 	 * Returns a list of tooltip items.
+	 * 
 	 * @return a list of tooltip items.
 	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
-    public final List<TooltipItem> getItems() {
-    	return getObjectArray(Property.items.name());
-    }
+	public final List<TooltipItem> getItems() {
+		return getObjectArray(Property.items.name());
+	}
 }

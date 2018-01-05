@@ -20,8 +20,8 @@ import org.pepstock.charba.client.AbstractChart;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 
 /**
- * Sometimes you need a very complex legend. In these cases, it makes sense to generate an HTML legend. 
- * Charts provide a {@link org.pepstock.charba.client.AbstractChart#generateLegend()} method that returns an HTML string for the legend.
+ * Sometimes you need a very complex legend. In these cases, it makes sense to generate an HTML legend. Charts provide a
+ * {@link org.pepstock.charba.client.AbstractChart#generateLegend()} method that returns an HTML string for the legend.
  * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.AbstractChart#generateLegend()
@@ -29,10 +29,11 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 public interface LegendCallback {
 
 	/**
-	 * Creates HTML representation of legend. 
+	 * Creates HTML representation of legend.
+	 * 
 	 * @param chart chart instance
 	 * @param builder uses SafeHTML builder to create HTML
 	 */
 	void generateLegend(AbstractChart<?, ?> chart, SafeHtmlBuilder builder);
-	
+
 }

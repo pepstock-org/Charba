@@ -20,10 +20,8 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
- * When creating a chart, you want to tell the viewer what data they are
- * viewing. To do this, you need to label the axis.<br>
- * The scale label configuration defines options for the scale title. Note that
- * this only applies to cartesian axes.
+ * When creating a chart, you want to tell the viewer what data they are viewing. To do this, you need to label the axis.<br>
+ * The scale label configuration defines options for the scale title. Note that this only applies to cartesian axes.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -68,8 +66,7 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer {
 	/**
 	 * f true, display the axis title.
 	 * 
-	 * @param display
-	 *            f true, display the axis title.
+	 * @param display f true, display the axis title.
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
@@ -87,8 +84,7 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer {
 	/**
 	 * Sets the text for the title.
 	 * 
-	 * @param labelString
-	 *            The text for the title.
+	 * @param labelString The text for the title.
 	 */
 	public void setLabelString(String labelString) {
 		setValue(Property.labelString, labelString);
@@ -106,8 +102,7 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer {
 	/**
 	 * Sets the height of an individual line of text.
 	 * 
-	 * @param lineHeight
-	 *            Height of an individual line of text.
+	 * @param lineHeight Height of an individual line of text.
 	 */
 	public void setLineHeight(String lineHeight) {
 		setValue(Property.lineHeight, lineHeight);
@@ -123,23 +118,18 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * Sets the padding to apply around scale labels. Only top and bottom are
-	 * implemented.
+	 * Sets the padding to apply around scale labels. Only top and bottom are implemented.
 	 * 
-	 * @param padding
-	 *            Padding to apply around scale labels. Only top and bottom are
-	 *            implemented.
+	 * @param padding Padding to apply around scale labels. Only top and bottom are implemented.
 	 */
 	public void setPadding(int padding) {
 		setValue(Property.padding, padding);
 	}
 
 	/**
-	 * Returns the padding to apply around scale labels. Only top and bottom are
-	 * implemented.
+	 * Returns the padding to apply around scale labels. Only top and bottom are implemented.
 	 * 
-	 * @return Padding to apply around scale labels. Only top and bottom are
-	 *         implemented. Default is 4.
+	 * @return Padding to apply around scale labels. Only top and bottom are implemented. Default is 4.
 	 */
 	public int getPadding() {
 		return getValue(Property.padding, DEFAULT_PADDING);
@@ -148,8 +138,7 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer {
 	/**
 	 * Sets the font size for scale title.
 	 * 
-	 * @param fontSize
-	 *            Font size for scale title.
+	 * @param fontSize Font size for scale title.
 	 */
 	public void setFontSize(int fontSize) {
 		setValue(Property.fontSize, fontSize);
@@ -165,12 +154,9 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * Sets the font style for the scale title, follows CSS font-style options
-	 * (i.e. normal, italic, oblique, initial, inherit).
+	 * Sets the font style for the scale title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @param fontStyle
-	 *            Font style for the scale title, follows CSS font-style options
-	 *            (i.e. normal, italic, oblique, initial, inherit).
+	 * @param fontStyle Font style for the scale title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
@@ -178,12 +164,9 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * Returns the font style for the scale title, follows CSS font-style
-	 * options (i.e. normal, italic, oblique, initial, inherit).
+	 * Returns the font style for the scale title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style for the scale title, follows CSS font-style
-	 *         options (i.e. normal, italic, oblique, initial, inherit). Default
-	 *         is normal
+	 * @return the font style for the scale title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). Default is normal
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
@@ -193,8 +176,7 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer {
 	/**
 	 * Sets the font color for scale title
 	 * 
-	 * @param fontColor
-	 *            Font color for scale title
+	 * @param fontColor Font color for scale title
 	 */
 	public void setFontColor(String fontColor) {
 		setValue(Property.fontColor, fontColor);
@@ -210,23 +192,18 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * Sets the font family for the scale title, follows CSS font-family
-	 * options.
+	 * Sets the font family for the scale title, follows CSS font-family options.
 	 * 
-	 * @param fontFamily
-	 *            Font family for the scale title, follows CSS font-family
-	 *            options.
+	 * @param fontFamily Font family for the scale title, follows CSS font-family options.
 	 */
 	public void setFontFamily(String fontFamily) {
 		setValue(Property.fontFamily, fontFamily);
 	}
 
 	/**
-	 * Returns the font family for the scale title, follows CSS font-family
-	 * options.
+	 * Returns the font family for the scale title, follows CSS font-family options.
 	 * 
-	 * @return Font family for the scale title, follows CSS font-family options.
-	 *         Default is 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
+	 * @return Font family for the scale title, follows CSS font-family options. Default is 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
 	 */
 	public String getFontFamily() {
 		return getValue(Property.fontFamily, DEFAULT_FONT_FAMILY);

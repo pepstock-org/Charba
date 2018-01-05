@@ -33,12 +33,13 @@ public final class ChartHoverEvent extends AbstractEvent<ChartHoverEventHandler>
 	 * Event type
 	 */
 	public static final Type<ChartHoverEventHandler> TYPE = new Type<ChartHoverEventHandler>();
-	
+
 	// a list of items with dataset metadata related to the hover
 	private final List<DatasetMetaItem> items;
 
 	/**
 	 * Creates the event with a list of items with dataset metadata related to the hover
+	 * 
 	 * @param nativeEvent native event of this custom event
 	 * @param items a list of items with dataset metadata related to the hover
 	 * @see org.pepstock.charba.client.items.DatasetMetaItem
@@ -50,6 +51,7 @@ public final class ChartHoverEvent extends AbstractEvent<ChartHoverEventHandler>
 
 	/**
 	 * Returns a list of items with dataset metadata related to the hover
+	 * 
 	 * @return a list of items with dataset metadata related to the hover
 	 * @see org.pepstock.charba.client.items.DatasetMetaItem
 	 */
@@ -57,15 +59,19 @@ public final class ChartHoverEvent extends AbstractEvent<ChartHoverEventHandler>
 		return items;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
 	 */
 	@Override
 	public Type<ChartHoverEventHandler> getAssociatedType() {
 		return TYPE;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
 	 */
 	@Override

@@ -23,10 +23,11 @@ import org.pepstock.charba.client.enums.Position;
  * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the same way.<br>
  * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
  * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a dataset.
+ * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.BarChart
  */
-public class Rectangle extends Arc{
+public class Rectangle extends Arc {
 
 	// default background color
 	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
@@ -36,13 +37,16 @@ public class Rectangle extends Arc{
 	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0.1)";
 
 	/**
-	 * Name of fields of JavaScript object. 
+	 * Name of fields of JavaScript object.
 	 */
-	enum Property implements Key {
+	enum Property implements Key
+	{
 		borderSkipped
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.elements.Arc#getDefaultBackgroundColor()
 	 */
 	@Override
@@ -50,7 +54,9 @@ public class Rectangle extends Arc{
 		return DEFAULT_BACKGROUND_COLOR;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.elements.Arc#getDefaultBorderWidth()
 	 */
 	@Override
@@ -58,7 +64,9 @@ public class Rectangle extends Arc{
 		return DEFAULT_BORDER_WIDTH;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.elements.Arc#getDefaultBorderColor()
 	 */
 	@Override
@@ -68,6 +76,7 @@ public class Rectangle extends Arc{
 
 	/**
 	 * Sets the edge to skip drawing the border for.
+	 * 
 	 * @param position the edge to skip drawing the border for.
 	 */
 	public void setBorderSkipped(Position borderSkipped) {
@@ -76,6 +85,7 @@ public class Rectangle extends Arc{
 
 	/**
 	 * Returns the edge to skip drawing the border for.
+	 * 
 	 * @return the edge to skip drawing the border for.
 	 */
 	public Position getBorderJoinStyle() {

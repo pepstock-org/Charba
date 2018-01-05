@@ -21,13 +21,14 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.items.TooltipItem;
 
 /**
- * The tooltip label configuration is nested below the tooltip configuration using the callbacks key.<br> 
+ * The tooltip label configuration is nested below the tooltip configuration using the callbacks key.<br>
  * The tooltip has the following callbacks for providing text.<br>
- * All functions must return either a string or an array of strings. Arrays of strings are treated as multiple lines of text.<br>
+ * All functions must return either a string or an array of strings. Arrays of strings are treated as multiple lines of
+ * text.<br>
  * This interface takes care about labels to apply to the footer.
- *   
+ * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.options.TooltipsCallbacks 
+ * @see org.pepstock.charba.client.options.TooltipsCallbacks
  */
 public interface TooltipFooterCallback {
 
@@ -41,7 +42,7 @@ public interface TooltipFooterCallback {
 	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
 	String[] onBeforeFooter(AbstractChart<?, ?> chart, List<TooltipItem> items);
-	
+
 	/**
 	 * Returns text to render as the footer of the tooltip.
 	 * 
@@ -52,7 +53,7 @@ public interface TooltipFooterCallback {
 	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
 	String[] onFooter(AbstractChart<?, ?> chart, List<TooltipItem> items);
-	
+
 	/**
 	 * Text to render after the footer section.
 	 * 
@@ -63,5 +64,5 @@ public interface TooltipFooterCallback {
 	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
 	String[] onAfterFooter(AbstractChart<?, ?> chart, List<TooltipItem> items);
-	
+
 }

@@ -25,8 +25,9 @@ public interface LegendHoverEventHandler extends ChartEventHandler {
 
 	/**
 	 * Invoked when the user hovers on the chart legend.
+	 * 
 	 * @param event legend hover event
 	 */
 	void onHover(LegendHoverEvent event);
-	
+
 }

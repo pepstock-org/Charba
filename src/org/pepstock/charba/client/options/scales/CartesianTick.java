@@ -60,184 +60,152 @@ abstract class CartesianTick extends Tick {
 	}
 
 	/**
-	 * If true, automatically calculates how many labels that can be shown and
-	 * hides labels accordingly. Turn it off to show all labels no matter what
+	 * If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all
+	 * labels no matter what
 	 * 
-	 * @param autoSkip
-	 *            If true, automatically calculates how many labels that can be
-	 *            shown and hides labels accordingly. Turn it off to show all
-	 *            labels no matter what
+	 * @param autoSkip If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it
+	 *            off to show all labels no matter what
 	 */
 	public void setAutoSkip(boolean autoSkip) {
 		setValue(Property.autoSkip, autoSkip);
 	}
 
 	/**
-	 * If true, automatically calculates how many labels that can be shown and
-	 * hides labels accordingly. Turn it off to show all labels no matter what
+	 * If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all
+	 * labels no matter what
 	 * 
-	 * @return If true, automatically calculates how many labels that can be
-	 *         shown and hides labels accordingly. Turn it off to show all
-	 *         labels no matter what. Default is true
+	 * @return If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to
+	 *         show all labels no matter what. Default is true
 	 */
 	public boolean isAutoSkip() {
 		return getValue(Property.autoSkip, DEFAULT_AUTO_SKIP);
 	}
 
 	/**
-	 * Sets the padding between the ticks on the horizontal axis when autoSkip
-	 * is enabled. Note: Only applicable to horizontal scales.
+	 * Sets the padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal
+	 * scales.
 	 * 
-	 * @param autoSkipPadding
-	 *            padding between the ticks on the horizontal axis when autoSkip
-	 *            is enabled. Note: Only applicable to horizontal scales.
+	 * @param autoSkipPadding padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable
+	 *            to horizontal scales.
 	 */
 	public void setAutoSkipPadding(int autoSkipPadding) {
 		setValue(Property.autoSkipPadding, autoSkipPadding);
 	}
 
 	/**
-	 * Returns the padding between the ticks on the horizontal axis when
-	 * autoSkip is enabled. Note: Only applicable to horizontal scales.
+	 * Returns the padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to
+	 * horizontal scales.
 	 * 
-	 * @return padding between the ticks on the horizontal axis when autoSkip is
-	 *         enabled. Note: Only applicable to horizontal scales. Defualt is
-	 *         0.
+	 * @return padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal
+	 *         scales. Defualt is 0.
 	 */
 	public int getAutoSkipPadding() {
 		return getValue(Property.autoSkipPadding, DEFAULT_AUTO_SKIP_PADDING);
 	}
 
 	/**
-	 * Sets the distance in pixels to offset the label from the centre point of
-	 * the tick (in the y direction for the x axis, and the x direction for the
-	 * y axis).<br>
-	 * Note: this can cause labels at the edges to be cropped by the edge of the
-	 * canvas.
+	 * Sets the distance in pixels to offset the label from the centre point of the tick (in the y direction for the x axis, and
+	 * the x direction for the y axis).<br>
+	 * Note: this can cause labels at the edges to be cropped by the edge of the canvas.
 	 * 
-	 * @param labelOffset
-	 *            the distance in pixels to offset the label from the centre
-	 *            point of the tick (in the y direction for the x axis, and the
-	 *            x direction for the y axis)
+	 * @param labelOffset the distance in pixels to offset the label from the centre point of the tick (in the y direction for
+	 *            the x axis, and the x direction for the y axis)
 	 */
 	public void setLabelOffset(int labelOffset) {
 		setValue(Property.labelOffset, labelOffset);
 	}
 
 	/**
-	 * Returns the distance in pixels to offset the label from the centre point
-	 * of the tick (in the y direction for the x axis, and the x direction for
-	 * the y axis).<br>
-	 * Note: this can cause labels at the edges to be cropped by the edge of the
-	 * canvas.
+	 * Returns the distance in pixels to offset the label from the centre point of the tick (in the y direction for the x axis,
+	 * and the x direction for the y axis).<br>
+	 * Note: this can cause labels at the edges to be cropped by the edge of the canvas.
 	 * 
-	 * @return the distance in pixels to offset the label from the centre point
-	 *         of the tick (in the y direction for the x axis, and the x
-	 *         direction for the y axis). Default is 0.
+	 * @return the distance in pixels to offset the label from the centre point of the tick (in the y direction for the x axis,
+	 *         and the x direction for the y axis). Default is 0.
 	 */
 	public int getLabelOffset() {
 		return getValue(Property.labelOffset, DEFAULT_LABEL_OFFSET);
 	}
 
 	/**
-	 * Sets the maximum rotation for tick labels when rotating to condense
-	 * labels. Note: Rotation doesn't occur until necessary. Note: Only
-	 * applicable to horizontal scales.
+	 * Sets the maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary.
+	 * Note: Only applicable to horizontal scales.
 	 * 
-	 * @param maxRotation
-	 *            maximum rotation for tick labels when rotating to condense
-	 *            labels. Note: Rotation doesn't occur until necessary. Note:
-	 *            Only applicable to horizontal scales.
+	 * @param maxRotation maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until
+	 *            necessary. Note: Only applicable to horizontal scales.
 	 */
 	public void setMaxRotation(int maxRotation) {
 		setValue(Property.maxRotation, maxRotation);
 	}
 
 	/**
-	 * Returns the maximum rotation for tick labels when rotating to condense
-	 * labels. Note: Rotation doesn't occur until necessary. Note: Only
-	 * applicable to horizontal scales.
+	 * Returns the maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until
+	 * necessary. Note: Only applicable to horizontal scales.
 	 * 
-	 * @return maximum rotation for tick labels when rotating to condense
-	 *         labels. Note: Rotation doesn't occur until necessary. Note: Only
-	 *         applicable to horizontal scales. Default is 90
+	 * @return maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary.
+	 *         Note: Only applicable to horizontal scales. Default is 90
 	 */
 	public int getMaxRotation() {
 		return getValue(Property.maxRotation, DEFAULT_MAX_ROTATION);
 	}
 
 	/**
-	 * Sets the minimum rotation for tick labels. Note: Only applicable to
-	 * horizontal scales.
+	 * Sets the minimum rotation for tick labels. Note: Only applicable to horizontal scales.
 	 * 
-	 * @param minRotation
-	 *            minimum rotation for tick labels. Note: Only applicable to
-	 *            horizontal scales.
+	 * @param minRotation minimum rotation for tick labels. Note: Only applicable to horizontal scales.
 	 */
 	public void setMinRotation(int minRotation) {
 		setValue(Property.minRotation, minRotation);
 	}
 
 	/**
-	 * Returns the minimum rotation for tick labels. Note: Only applicable to
-	 * horizontal scales.
+	 * Returns the minimum rotation for tick labels. Note: Only applicable to horizontal scales.
 	 * 
-	 * @return minimum rotation for tick labels. Note: Only applicable to
-	 *         horizontal scales.. Default is 0.
+	 * @return minimum rotation for tick labels. Note: Only applicable to horizontal scales.. Default is 0.
 	 */
 	public int getMinRotation() {
 		return getValue(Property.minRotation, DEFAULT_MIN_ROTATION);
 	}
 
 	/**
-	 * Sets the flips tick labels around axis, displaying the labels inside the
-	 * chart instead of outside. Note: Only applicable to vertical scales.
+	 * Sets the flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable
+	 * to vertical scales.
 	 * 
-	 * @param mirror
-	 *            flips tick labels around axis, displaying the labels inside
-	 *            the chart instead of outside. Note: Only applicable to
-	 *            vertical scales.
+	 * @param mirror flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only
+	 *            applicable to vertical scales.
 	 */
 	public void setMirror(boolean mirror) {
 		setValue(Property.mirror, mirror);
 	}
 
 	/**
-	 * Returns the flips tick labels around axis, displaying the labels inside
-	 * the chart instead of outside. Note: Only applicable to vertical scales.
+	 * Returns the flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only
+	 * applicable to vertical scales.
 	 * 
-	 * @return flips tick labels around axis, displaying the labels inside the
-	 *         chart instead of outside. Note: Only applicable to vertical
-	 *         scales. Default is false.
+	 * @return flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable
+	 *         to vertical scales. Default is false.
 	 */
 	public boolean isMirror() {
 		return getValue(Property.mirror, DEFAULT_MIRROR);
 	}
 
 	/**
-	 * Sets the padding between the tick label and the axis. When set on a
-	 * vertical axis, this applies in the horizontal (X) direction. When set on
-	 * a horizontal axis, this applies in the vertical (Y) direction.
+	 * Sets the padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X)
+	 * direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
 	 * 
-	 * @param padding
-	 *            padding between the tick label and the axis. When set on a
-	 *            vertical axis, this applies in the horizontal (X) direction.
-	 *            When set on a horizontal axis, this applies in the vertical
-	 *            (Y) direction.
+	 * @param padding padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal
+	 *            (X) direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
 	 */
 	public void setPadding(int padding) {
 		setValue(Property.padding, padding);
 	}
 
 	/**
-	 * Returns the padding between the tick label and the axis. When set on a
-	 * vertical axis, this applies in the horizontal (X) direction. When set on
-	 * a horizontal axis, this applies in the vertical (Y) direction.
+	 * Returns the padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X)
+	 * direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
 	 * 
-	 * @return padding between the tick label and the axis. When set on a
-	 *         vertical axis, this applies in the horizontal (X) direction. When
-	 *         set on a horizontal axis, this applies in the vertical (Y)
-	 *         direction. Default is 10.
+	 * @return padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X)
+	 *         direction. When set on a horizontal axis, this applies in the vertical (Y) direction. Default is 10.
 	 */
 	public int getPadding() {
 		return getValue(Property.padding, DEFAULT_PADDING);

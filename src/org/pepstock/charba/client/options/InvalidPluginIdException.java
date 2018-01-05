@@ -33,8 +33,9 @@ public class InvalidPluginIdException extends Exception {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Builds the exception using the message explaining why the id is not valid. 
-	 * @param message explaination why the id is not valid. 
+	 * Builds the exception using the message explaining why the id is not valid.
+	 * 
+	 * @param message explaination why the id is not valid.
 	 */
 	public InvalidPluginIdException(String message) {
 		super(message);

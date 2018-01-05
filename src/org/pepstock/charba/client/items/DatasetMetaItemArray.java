@@ -29,27 +29,30 @@ import org.pepstock.charba.client.commons.Key;
  *
  */
 public class DatasetMetaItemArray extends GenericJavaScriptObject {
- 
+
 	/**
-	 * Name of fields of JavaScript object. 
+	 * Name of fields of JavaScript object.
 	 */
-    private enum Property implements Key{
-    	items
-    }
-    /** 
-     * Needed for GWt injection
-     */
+	private enum Property implements Key
+	{
+		items
+	}
+
+	/**
+	 * Needed for GWt injection
+	 */
 	protected DatasetMetaItemArray() {
 		// do nothing
 	}
 
 	/**
 	 * Returns a list of dataset metadata items.
+	 * 
 	 * @return a list of dataset metadata items.
 	 * @see org.pepstock.charba.client.items.DatasetMetaItem
 	 */
-    public final List<DatasetMetaItem>  getItems() {
-    	return getObjectArray(Property.items.name());
-    }
+	public final List<DatasetMetaItem> getItems() {
+		return getObjectArray(Property.items.name());
+	}
 
 }

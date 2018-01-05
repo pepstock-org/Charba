@@ -19,18 +19,19 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.items.TooltipItem;
 
 /**
- * The tooltip label configuration is nested below the tooltip configuration using the callbacks key.<br> 
+ * The tooltip label configuration is nested below the tooltip configuration using the callbacks key.<br>
  * The tooltip has the following callbacks for providing text.<br>
- * All functions must return either a string or an array of strings. Arrays of strings are treated as multiple lines of text. FIXME
- * This interface takes care about labels.
- *   
+ * All functions must return either a string or an array of strings. Arrays of strings are treated as multiple lines of text.
+ * FIXME This interface takes care about labels.
+ * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.options.TooltipsCallbacks 
+ * @see org.pepstock.charba.client.options.TooltipsCallbacks
  */
 public interface TooltipLabelCallback {
-	
+
 	/**
 	 * Returns text to render before an individual label. This will be called for each item in the tooltip.
+	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
 	 * @return label to be applied. If returns <code>null</code>, it will be ignored.
@@ -38,9 +39,10 @@ public interface TooltipLabelCallback {
 	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
 	String onBeforeLabel(AbstractChart<?, ?> chart, TooltipItem item);
-	
+
 	/**
 	 * Returns text to render for an individual item in the tooltip.
+	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
 	 * @return label to be applied. If returns <code>null</code>, it will be ignored.
@@ -50,7 +52,8 @@ public interface TooltipLabelCallback {
 	String onLabel(AbstractChart<?, ?> chart, TooltipItem item);
 
 	/**
-	 * Returns the colors to render for the tooltip item. 
+	 * Returns the colors to render for the tooltip item.
+	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
 	 * @return label color to be applied. If returns <code>null</code>, it will be ignored.
@@ -62,6 +65,7 @@ public interface TooltipLabelCallback {
 
 	/**
 	 * Returns the colors for the text of the label for the tooltip item.
+	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
 	 * @return label text color to be applied. If returns <code>null</code>, it will be ignored.
@@ -72,6 +76,7 @@ public interface TooltipLabelCallback {
 
 	/**
 	 * Returns text to render after an individual label.
+	 * 
 	 * @param chart chart instance
 	 * @param item tooltip item
 	 * @return label to be applied. If returns <code>null</code>, it will be ignored.
@@ -79,5 +84,5 @@ public interface TooltipLabelCallback {
 	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
 	String onAfterLabel(AbstractChart<?, ?> chart, TooltipItem item);
-	
+
 }

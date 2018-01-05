@@ -28,20 +28,22 @@ public interface AxisTickToLabelConversionCallback {
 
 	/**
 	 * Callback that runs before ticks are converted into strings.
+	 * 
 	 * @param chart chart instance
-	 * @param item axis item instance 
+	 * @param item axis item instance
 	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem 
+	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	void onBeforeTickToLabelConversion(AbstractChart<?, ?> chart, AxisItem item);
 
 	/**
-	 * Callback that runs after ticks are converted into strings. 
+	 * Callback that runs after ticks are converted into strings.
+	 * 
 	 * @param chart chart instance
-	 * @param item axis item instance 
+	 * @param item axis item instance
 	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem 
+	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	void onAfterTickToLabelConversion(AbstractChart<?, ?> chart, AxisItem item);
-	
+
 }

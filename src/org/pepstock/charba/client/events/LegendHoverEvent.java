@@ -33,9 +33,10 @@ public final class LegendHoverEvent extends AbstractEvent<LegendHoverEventHandle
 	public static final Type<LegendHoverEventHandler> TYPE = new Type<LegendHoverEventHandler>();
 	// legend item selected by hovering
 	private final LegendItem item;
-	
+
 	/**
 	 * Creates the event with legend item related to the hover
+	 * 
 	 * @param nativeEvent native event of this custom event
 	 * @param item legend item related to the hover
 	 * @see org.pepstock.charba.client.items.LegendItem
@@ -47,21 +48,26 @@ public final class LegendHoverEvent extends AbstractEvent<LegendHoverEventHandle
 
 	/**
 	 * Returns the legend item related to the hover
+	 * 
 	 * @return the legend item related to the hover
 	 */
 	public LegendItem getItem() {
 		return item;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
 	 */
 	@Override
 	public Type<LegendHoverEventHandler> getAssociatedType() {
 		return TYPE;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
 	 */
 	@Override

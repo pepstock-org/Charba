@@ -25,8 +25,9 @@ public interface AnimationCompleteEventHandler extends ChartEventHandler {
 
 	/**
 	 * Invoked when chart animation is complete.
+	 * 
 	 * @param event animation event
 	 */
 	void onComplete(AnimationCompleteEvent event);
-	
+
 }

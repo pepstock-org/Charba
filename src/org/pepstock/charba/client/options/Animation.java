@@ -35,23 +35,24 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Animation extends EventProvider{
-	
+public final class Animation extends EventProvider {
+
 	private static final int DEFAULT_DURATION = 1000;
-	
+
 	private static final boolean DEFAULT_ANIMATE_ROTATE = true;
 
 	private static final boolean DEFAULT_ANIMATE_SCALE = false;
-	
+
 	// amount of handlers
 	private int onCompleteHandlers = 0;
 	// amount of handlers
 	private int onProgressHandlers = 0;
-	
+
 	/**
 	 * Name of fields of JavaScript object.
 	 */
-	private enum Property implements Key{
+	private enum Property implements Key
+	{
 		animateRotate,
 		animateScale,
 		duration,
@@ -59,100 +60,109 @@ public final class Animation extends EventProvider{
 		onProgress,
 		onComplete
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance.
+	 * 
 	 * @param chart chart instance
 	 */
-    Animation(AbstractChart<?, ?> chart) {
+	Animation(AbstractChart<?, ?> chart) {
 		super(chart);
 	}
 
 	/**
-     * Sets the animation easing.
-     * 
-     * @param easing animation easing.
-     * @see org.pepstock.charba.client.enums.Easing
-     */
-    public void setEasing(Easing easing){
-    	setValue(Property.easing, easing);
-    }
+	 * Sets the animation easing.
+	 * 
+	 * @param easing animation easing.
+	 * @see org.pepstock.charba.client.enums.Easing
+	 */
+	public void setEasing(Easing easing) {
+		setValue(Property.easing, easing);
+	}
 
-    /**
-     * Returns the animation easing.
-     * 
-     * @return animation easing. Default value is {@link org.pepstock.charba.client.enums.Easing#EASE_OUT_QUART}.
-     * @see org.pepstock.charba.client.enums.Easing
-     */
-    public Easing getEasing(){
-    	return getValue(Property.easing, Easing.class, Easing.easeOutQuart);
-    }
-    
-    /**
-     * Sets the number of milliseconds an animation takes.
-     * @param milliseconds the number of milliseconds an animation takes.
-     */
-    public void setDuration(int milliseconds){
-    	setValue(Property.duration, milliseconds);
-    }
+	/**
+	 * Returns the animation easing.
+	 * 
+	 * @return animation easing. Default value is {@link org.pepstock.charba.client.enums.Easing#EASE_OUT_QUART}.
+	 * @see org.pepstock.charba.client.enums.Easing
+	 */
+	public Easing getEasing() {
+		return getValue(Property.easing, Easing.class, Easing.easeOutQuart);
+	}
 
-    /**
-     * Returns the number of milliseconds an animation takes.
-     * @return the number of milliseconds an animation takes. Default is 1000 (1 second).
-     */
-    public int getDuration(){
-    	return getValue(Property.duration, DEFAULT_DURATION);
-    }
-    
-    /**
-     * If true, the chart will animate in with a rotation animation.
-     * @param animateRotate If true, the chart will animate in with a rotation animation.
-     */
-    public void setAnimateRotate(boolean animateRotate){
-    	setValue(Property.animateRotate, animateRotate);
-    }
+	/**
+	 * Sets the number of milliseconds an animation takes.
+	 * 
+	 * @param milliseconds the number of milliseconds an animation takes.
+	 */
+	public void setDuration(int milliseconds) {
+		setValue(Property.duration, milliseconds);
+	}
 
-    /**
-     * If true, the chart will animate in with a rotation animation.
-     * @return If true, the chart will animate in with a rotation animation. Default is true.
-     */
-    public boolean isAnimateRotate(){
-    	return getValue(Property.animateRotate, DEFAULT_ANIMATE_ROTATE);
-    }
+	/**
+	 * Returns the number of milliseconds an animation takes.
+	 * 
+	 * @return the number of milliseconds an animation takes. Default is 1000 (1 second).
+	 */
+	public int getDuration() {
+		return getValue(Property.duration, DEFAULT_DURATION);
+	}
 
-    /**
-     * If true, will animate scaling the chart from the center outwards.
-     * @param animateScale If true, will animate scaling the chart from the center outwards.
-     */
-    public void setAnimateScale(boolean animateScale){
-    	setValue(Property.animateScale, animateScale);
-    }
+	/**
+	 * If true, the chart will animate in with a rotation animation.
+	 * 
+	 * @param animateRotate If true, the chart will animate in with a rotation animation.
+	 */
+	public void setAnimateRotate(boolean animateRotate) {
+		setValue(Property.animateRotate, animateRotate);
+	}
 
-    /**
-     * If true, will animate scaling the chart from the center outwards.
-     * @return If true, will animate scaling the chart from the center outwards. Default is false.
-     */
-    public boolean isAnimateScale(){
-    	return getValue(Property.animateScale, DEFAULT_ANIMATE_SCALE);
-    }
+	/**
+	 * If true, the chart will animate in with a rotation animation.
+	 * 
+	 * @return If true, the chart will animate in with a rotation animation. Default is true.
+	 */
+	public boolean isAnimateRotate() {
+		return getValue(Property.animateRotate, DEFAULT_ANIMATE_ROTATE);
+	}
 
-	/* (non-Javadoc)
+	/**
+	 * If true, will animate scaling the chart from the center outwards.
+	 * 
+	 * @param animateScale If true, will animate scaling the chart from the center outwards.
+	 */
+	public void setAnimateScale(boolean animateScale) {
+		setValue(Property.animateScale, animateScale);
+	}
+
+	/**
+	 * If true, will animate scaling the chart from the center outwards.
+	 * 
+	 * @return If true, will animate scaling the chart from the center outwards. Default is false.
+	 */
+	public boolean isAnimateScale() {
+		return getValue(Property.animateScale, DEFAULT_ANIMATE_SCALE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.commons.ChartContainer#addHandler(com.google.gwt.event.shared.GwtEvent.Type)
 	 */
 	@Override
 	protected <H extends EventHandler> void addHandler(Type<H> type) {
 		// checks which kind of handler has been added
-		if (type.equals(AnimationCompleteEvent.TYPE)){
+		if (type.equals(AnimationCompleteEvent.TYPE)) {
 			// checks if property exist
-			if (!has(Property.onComplete)){
+			if (!has(Property.onComplete)) {
 				// sets the java script code to get the event
 				registerNativeCompleteHandler(getJavaScriptObject());
 			}
 			// increments amount of handlers
 			onCompleteHandlers++;
-		} else if (type.equals(AnimationProgressEvent.TYPE)){
-			//	checks if property exist
-			if (!has(Property.onProgress)){
+		} else if (type.equals(AnimationProgressEvent.TYPE)) {
+			// checks if property exist
+			if (!has(Property.onProgress)) {
 				// sets the java script code to get the event
 				registerNativeProgressHandler(getJavaScriptObject());
 			}
@@ -161,25 +171,27 @@ public final class Animation extends EventProvider{
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.commons.ChartContainer#removeHandler(org.pepstock.charba.client.commons.Key)
 	 */
 	@Override
 	protected <H extends EventHandler> void removeHandler(Type<H> type) {
 		// checks which kind of handler has been removed
-		if (type.equals(AnimationCompleteEvent.TYPE)){
+		if (type.equals(AnimationCompleteEvent.TYPE)) {
 			// decrements amount of handlers
 			onCompleteHandlers--;
 			// if zero, no handler
-			if (onCompleteHandlers == 0){
-				// therefore remove property 
+			if (onCompleteHandlers == 0) {
+				// therefore remove property
 				remove(Property.onComplete);
 			}
-		} else if (type.equals(AnimationProgressEvent.TYPE)){
+		} else if (type.equals(AnimationProgressEvent.TYPE)) {
 			// decrements amount of handlers
 			onProgressHandlers--;
 			// if zero, no handler
-			if (onProgressHandlers  == 0){
+			if (onProgressHandlers == 0) {
 				// therefore remove property
 				remove(Property.onProgress);
 			}
@@ -187,7 +199,8 @@ public final class Animation extends EventProvider{
 	}
 
 	/**
-	 * Callback called on each step of an animation. 
+	 * Callback called on each step of an animation.
+	 * 
 	 * @param item animation item info.
 	 */
 	protected void onProgress(AnimationItem item) {
@@ -198,7 +211,8 @@ public final class Animation extends EventProvider{
 	}
 
 	/**
-	 * Callback called at the end of an animation. 
+	 * Callback called at the end of an animation.
+	 * 
 	 * @param item animation item info.
 	 */
 	protected void onComplete(AnimationItem item) {

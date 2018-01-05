@@ -18,13 +18,13 @@ package org.pepstock.charba.client.callbacks;
 import org.pepstock.charba.client.items.TooltipItem;
 
 /**
- * Allows filtering of tooltip items. 
+ * Allows filtering of tooltip items.
  * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.items.TooltipItem
- * @see org.pepstock.charba.client.options.Tooltips 
+ * @see org.pepstock.charba.client.options.Tooltips
  * @see org.pepstock.charba.client.callbacks.FilterHandler
  */
-public interface TooltipFilterHandler extends FilterHandler<TooltipItem>{
+public interface TooltipFilterHandler extends FilterHandler<TooltipItem> {
 
 }

@@ -19,6 +19,7 @@ import com.google.gwt.event.shared.EventHandler;
 
 /**
  * Event handler for new event handler.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -26,8 +27,9 @@ public interface AddHandlerEventHandler extends EventHandler {
 
 	/**
 	 * Invoked when a new event handler is added.
+	 * 
 	 * @param event event to be consumed
 	 */
 	void onAdd(AddHandlerEvent event);
-	
+
 }

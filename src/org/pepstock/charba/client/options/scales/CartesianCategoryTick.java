@@ -22,8 +22,7 @@ import org.pepstock.charba.client.commons.JsStringArrayList;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * The category scale provides the following options for configuring tick
- * marks.<br>
+ * The category scale provides the following options for configuring tick marks.<br>
  * The labels are drawn from one of the label arrays included in the chart data.
  * 
  * @author Andrea "Stock" Stocchero
@@ -50,8 +49,7 @@ public final class CartesianCategoryTick extends CartesianTick {
 	/**
 	 * Sets an array of labels to display.
 	 * 
-	 * @param labels
-	 *            An array of labels to display.
+	 * @param labels An array of labels to display.
 	 */
 	public void setLabels(String... labels) {
 		setInternalLabels(ArrayListHelper.build(labels));
@@ -60,8 +58,7 @@ public final class CartesianCategoryTick extends CartesianTick {
 	/**
 	 * Sets an array of labels to display.
 	 * 
-	 * @param labels
-	 *            An array of labels to display.
+	 * @param labels An array of labels to display.
 	 */
 	public void setLabels(List<String> labels) {
 		// if the list is already a java script object list
@@ -81,8 +78,7 @@ public final class CartesianCategoryTick extends CartesianTick {
 	/**
 	 * Sets the list of labels to java script object
 	 * 
-	 * @param labels
-	 *            An array of labels to display.
+	 * @param labels An array of labels to display.
 	 */
 	private void setInternalLabels(JsStringArrayList labels) {
 		setStringArray(Property.labels, labels);
@@ -100,8 +96,7 @@ public final class CartesianCategoryTick extends CartesianTick {
 	/**
 	 * Sets the minimum item to display.
 	 * 
-	 * @param min
-	 *            The minimum item to display
+	 * @param min The minimum item to display
 	 */
 	public void setMin(String min) {
 		setValue(Property.min, min);
@@ -119,8 +114,7 @@ public final class CartesianCategoryTick extends CartesianTick {
 	/**
 	 * Sets the maximum item to display.
 	 * 
-	 * @param max
-	 *            the maximum item to display.
+	 * @param max the maximum item to display.
 	 */
 	public void setMax(String max) {
 		setValue(Property.max, max);

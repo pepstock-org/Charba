@@ -28,20 +28,22 @@ public interface AxisUpdateCallback {
 
 	/**
 	 * Callback called before the update process starts.
+	 * 
 	 * @param chart chart instance
-	 * @param item axis item instance 
+	 * @param item axis item instance
 	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem 
+	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	void onBeforeUpdate(AbstractChart<?, ?> chart, AxisItem item);
-	
+
 	/**
 	 * Callback that runs at the end of the update process.
+	 * 
 	 * @param chart chart instance
-	 * @param item axis item instance 
+	 * @param item axis item instance
 	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem 
+	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	void onAfterUpdate(AbstractChart<?, ?> chart, AxisItem item);
-	
+
 }

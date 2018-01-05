@@ -24,7 +24,8 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Position;
 
 /**
- * There are a number of configuration callbacks that can be used to change parameters in the scale at different points in the update process.<br>
+ * There are a number of configuration callbacks that can be used to change parameters in the scale at different points in the
+ * update process.<br>
  * This is the CHART.JS item with all needed info about an axis.
  * 
  * @author Andrea "Stock" Stocchero
@@ -33,9 +34,10 @@ import org.pepstock.charba.client.enums.Position;
 public class AxisItem extends BaseItem {
 
 	/**
-	 * Name of fields of JavaScript object. 
+	 * Name of fields of JavaScript object.
 	 */
-	private enum Property implements Key{
+	private enum Property implements Key
+	{
 		id,
 		hidden,
 		fullWidth,
@@ -64,15 +66,17 @@ public class AxisItem extends BaseItem {
 		left,
 		right
 	}
-    /** 
-     * Needed for GWt injection
-     */
+
+	/**
+	 * Needed for GWt injection
+	 */
 	protected AxisItem() {
 		// do nothing
 	}
 
 	/**
 	 * Returns the ID, used to link datasets and scale axes together.
+	 * 
 	 * @return the axis ID
 	 */
 	public final String getId() {
@@ -81,6 +85,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns if the axis is hidden.
+	 * 
 	 * @return <code>true</code> if the axis is hidden, otherwise <code>false</code>.
 	 */
 	public final boolean isHidden() {
@@ -89,6 +94,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets if the axis must be hidden.
+	 * 
 	 * @param hidden <code>true</code> if the axis must be hidden, otherwise <code>false</code>.
 	 */
 	public final void setHidden(boolean hidden) {
@@ -97,6 +103,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the full width of axis
+	 * 
 	 * @return the full width of axis
 	 */
 	public final boolean isFullWidth() {
@@ -105,6 +112,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the full width of axis in pixel
+	 * 
 	 * @param fullWidth the full width of axis
 	 */
 	public final void setFullWidth(boolean fullWidth) {
@@ -112,7 +120,8 @@ public class AxisItem extends BaseItem {
 	}
 
 	/**
-	 * Returns the weight of axis 
+	 * Returns the weight of axis
+	 * 
 	 * @return the weight of axis
 	 */
 	public final int getWeight() {
@@ -121,6 +130,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the weight of axis
+	 * 
 	 * @param weight the weight of axis
 	 */
 	public final void setWeight(int weight) {
@@ -129,6 +139,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the max width of axis in pixel.
+	 * 
 	 * @return the max width of axis in pixel.
 	 */
 	public final int getMaxWidth() {
@@ -137,6 +148,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the max width of axis in pixel.
+	 * 
 	 * @param maxWidth the max width of axis in pixel.
 	 */
 	public final void setMaxWidth(int maxWidth) {
@@ -145,6 +157,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the max height of the axis in pixel
+	 * 
 	 * @return the max height of the axis in pixel
 	 */
 	public final int getMaxHeight() {
@@ -153,6 +166,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the max height of the axis in pixel
+	 * 
 	 * @param maxHeight the max height of the axis in pixel
 	 */
 	public final void setMaxHeight(int maxHeight) {
@@ -161,6 +175,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the height of axis in pixel.
+	 * 
 	 * @return the height of axis in pixel.
 	 */
 	public final int getHeight() {
@@ -169,6 +184,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the height of axis in pixel.
+	 * 
 	 * @param height the height of axis in pixel.
 	 */
 	public final void setHeight(int height) {
@@ -177,15 +193,17 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the top location in pixel
-	 * @return  the top location in pixel
+	 * 
+	 * @return the top location in pixel
 	 */
 	public final int getTop() {
 		return getInt(Property.top.name());
 	}
 
 	/**
-	 * Sets  the top location in pixel
-	 * @param top  the top location in pixel
+	 * Sets the top location in pixel
+	 * 
+	 * @param top the top location in pixel
 	 */
 	public final void setTop(int top) {
 		setInt(Property.top.name(), top);
@@ -193,14 +211,16 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the bottom location in pixel
+	 * 
 	 * @return the bottom location in pixel
 	 */
 	public final int getBottom() {
 		return getInt(Property.bottom.name());
 	}
 
-	/** 
+	/**
 	 * Sets the bottom location in pixel
+	 * 
 	 * @param bottom the bottom location in pixel
 	 */
 	public final void setBottom(int bottom) {
@@ -209,6 +229,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the padding left in pixel
+	 * 
 	 * @return the padding left in pixel
 	 */
 	public final int getPaddingLeft() {
@@ -217,6 +238,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the padding left in pixel
+	 * 
 	 * @param paddingLeft the padding left in pixel
 	 */
 	public final void setPaddingLeft(int paddingLeft) {
@@ -225,6 +247,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the padding top in pixel
+	 * 
 	 * @return the padding top in pixel
 	 */
 	public final int getPaddingTop() {
@@ -233,6 +256,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the padding top in pixel
+	 * 
 	 * @param paddingTop the padding top in pixel
 	 */
 	public final void setPaddingTop(int paddingTop) {
@@ -241,6 +265,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the padding right in pixel
+	 * 
 	 * @return the padding right in pixel
 	 */
 	public final int getPaddingRight() {
@@ -249,6 +274,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the padding right in pixel
+	 * 
 	 * @param paddingRight the padding right in pixel
 	 */
 	public final void setPaddingRight(int paddingRight) {
@@ -257,6 +283,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the padding bottom in pixel
+	 * 
 	 * @return the padding bottom in pixel
 	 */
 	public final int getPaddingBottom() {
@@ -265,6 +292,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the padding bottom in pixel
+	 * 
 	 * @param paddingBottom the padding bottom in pixel
 	 */
 	public final void setPaddingBottom(int paddingBottom) {
@@ -272,7 +300,8 @@ public class AxisItem extends BaseItem {
 	}
 
 	/**
-	 * Returns the minimum value of axis 
+	 * Returns the minimum value of axis
+	 * 
 	 * @return the minimum value of axis
 	 */
 	public final String getMin() {
@@ -281,6 +310,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the minimum value of axis
+	 * 
 	 * @param min the minimum value of axis
 	 */
 	public final void setMin(String min) {
@@ -289,6 +319,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the maximum value of axis
+	 * 
 	 * @return the maximum value of axis
 	 */
 	public final String getMax() {
@@ -297,14 +328,16 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the maximum value of axis
+	 * 
 	 * @param max the maximum value of axis
 	 */
 	public final void setMax(String max) {
 		setString(Property.max.name(), max);
 	}
-	
+
 	/**
 	 * Returns the minimum value of axis
+	 * 
 	 * @return the minimum value of axis
 	 */
 	public final int getMinAsNumber() {
@@ -313,6 +346,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the minimum value of axis
+	 * 
 	 * @param min the minimum value of axis
 	 */
 	public final void setMinAsNumber(int min) {
@@ -321,6 +355,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the maximum value of axis
+	 * 
 	 * @return the maximum value of axis
 	 */
 	public final int getMaxAsNumber() {
@@ -329,6 +364,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the maximum value of axis
+	 * 
 	 * @param max the maximum value of axis
 	 */
 	public final void setMaxAsNumber(int max) {
@@ -337,6 +373,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the list of ticks
+	 * 
 	 * @return the list of ticks
 	 */
 	public final List<String> getTicks() {
@@ -345,22 +382,25 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets an array of ticks
+	 * 
 	 * @param ticks the array of ticks
 	 */
 	public final void setTicks(String... ticks) {
 		setTicks(ArrayListHelper.build(ticks));
 	}
-	
+
 	/**
 	 * Sets the list of ticks
+	 * 
 	 * @param ticks the list of ticks
 	 */
-	private final void setTicks(JsStringArrayList ticks){
+	private final void setTicks(JsStringArrayList ticks) {
 		setStringArray(Property.ticks.name(), ticks);
 	}
 
 	/**
 	 * Returns the start value of the axis
+	 * 
 	 * @return the start value of the axis
 	 */
 	public final int getStart() {
@@ -369,6 +409,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the start value of the axis
+	 * 
 	 * @param start the start value of the axis
 	 */
 	public final void setStart(int start) {
@@ -377,6 +418,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the end value of the axis
+	 * 
 	 * @return the end value of the axis
 	 */
 	public final int getEnd() {
@@ -385,6 +427,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the end value of the axis
+	 * 
 	 * @param end the end value of the axis
 	 */
 	public final void setEnd(int end) {
@@ -393,6 +436,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the list of ticks
+	 * 
 	 * @return the list of ticks
 	 */
 	public final List<Double> getTicksAsNumbers() {
@@ -401,6 +445,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets an array of ticks
+	 * 
 	 * @param ticks the array of ticks
 	 */
 	public final void setTicksAsNumbers(double... ticksAsNumbers) {
@@ -409,13 +454,14 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the list of ticks
+	 * 
 	 * @param ticksAsNumbers the list of ticks
 	 */
 	public final void setTicksAsNumbers(List<Double> ticksAsNumbers) {
 		// checks if is already a JavaScript object wrapper
-		if (ticksAsNumbers instanceof JsDoubleArrayList){
+		if (ticksAsNumbers instanceof JsDoubleArrayList) {
 			// sets directly
-			setInternalTicksAsNumbers((JsDoubleArrayList)ticksAsNumbers);
+			setInternalTicksAsNumbers((JsDoubleArrayList) ticksAsNumbers);
 		} else {
 			// creates a JavaScript list
 			JsDoubleArrayList list = new JsDoubleArrayList();
@@ -428,6 +474,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the list of ticks
+	 * 
 	 * @param ticksAsNumbers the list of ticks
 	 */
 	private final void setInternalTicksAsNumbers(JsDoubleArrayList ticksAsNumbers) {
@@ -436,6 +483,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the index of line 0 of axis
+	 * 
 	 * @return the index of line 0 of axis
 	 */
 	public final int getZeroLineIndex() {
@@ -444,6 +492,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the index of line 0 of axis
+	 * 
 	 * @param zeroLineIndex the index of line 0 of axis
 	 */
 	public final void setZeroLineIndex(int zeroLineIndex) {
@@ -452,6 +501,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the label rotation value
+	 * 
 	 * @return the label rotation value
 	 */
 	public final double getLabelRotation() {
@@ -460,6 +510,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the label rotation value
+	 * 
 	 * @param labelRotation the label rotation value
 	 */
 	public final void setLabelRotation(double labelRotation) {
@@ -468,6 +519,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the width of axis
+	 * 
 	 * @return the width of axis
 	 */
 	public final int getWidth() {
@@ -476,6 +528,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the width of axis
+	 * 
 	 * @param width the width of axis
 	 */
 	public final void setWidth(int width) {
@@ -484,6 +537,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the left location in pixel
+	 * 
 	 * @return the left location in pixel
 	 */
 	public final int getLeft() {
@@ -492,6 +546,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the left location in pixel
+	 * 
 	 * @param left the left location in pixel
 	 */
 	public final void setLeft(int left) {
@@ -500,6 +555,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the right location in pixel
+	 * 
 	 * @return the right location in pixel
 	 */
 	public final int getRight() {
@@ -508,6 +564,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the right location in pixel
+	 * 
 	 * @param right the right location in pixel
 	 */
 	public final void setRight(int right) {
@@ -516,6 +573,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Sets the position of axis
+	 * 
 	 * @param position the position of axis
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
@@ -525,6 +583,7 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the position of axis
+	 * 
 	 * @return the position of axis
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
@@ -532,8 +591,9 @@ public class AxisItem extends BaseItem {
 		return getValue(Property.position, Position.class, Position.top);
 	}
 
-	/** 
+	/**
 	 * Sets the margins of axis
+	 * 
 	 * @param item the margins of axis
 	 * @see org.pepstock.charba.client.items.AxisMarginsItem
 	 */
@@ -543,15 +603,17 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the margins of axis
+	 * 
 	 * @return the margins of axis
 	 * @see org.pepstock.charba.client.items.AxisMarginsItem
 	 */
 	public final AxisMarginsItem getMargins() {
-		return (AxisMarginsItem)getJavaScriptObject(Property.margins.name());
+		return (AxisMarginsItem) getJavaScriptObject(Property.margins.name());
 	}
 
 	/**
 	 * Sets the minimum size of axis
+	 * 
 	 * @param minSize the minimum size of axis
 	 * @see org.pepstock.charba.client.items.AxisMinSizeItem
 	 */
@@ -561,11 +623,12 @@ public class AxisItem extends BaseItem {
 
 	/**
 	 * Returns the minimum size of axis
+	 * 
 	 * @return the minimum size of axis
 	 * @see org.pepstock.charba.client.items.AxisMinSizeItem
 	 */
 	public final AxisMinSizeItem getMinSize() {
-		return (AxisMinSizeItem)getJavaScriptObject(Property.minSize.name());
+		return (AxisMinSizeItem) getJavaScriptObject(Property.minSize.name());
 	}
 
 }

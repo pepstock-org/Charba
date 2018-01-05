@@ -23,10 +23,11 @@ import org.pepstock.charba.client.AbstractChart;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BarOptions extends MultiScalesOptions{
+public final class BarOptions extends MultiScalesOptions {
 
 	/**
 	 * Builds the object storing the chart instance.
+	 * 
 	 * @param chart chart instance
 	 */
 	public BarOptions(AbstractChart<?, ?> chart) {

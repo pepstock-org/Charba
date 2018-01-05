@@ -25,8 +25,9 @@ public interface DatasetSelectionEventHandler extends ChartEventHandler {
 
 	/**
 	 * Invoked when the user clicks on the chart to select a dataet.
+	 * 
 	 * @param event chart dataset selection event
 	 */
 	void onSelect(DatasetSelectionEvent event);
-	
+
 }

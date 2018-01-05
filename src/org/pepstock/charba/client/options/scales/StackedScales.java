@@ -24,12 +24,13 @@ import org.pepstock.charba.client.options.Scales;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class StackedScales extends Scales{
-	
+public final class StackedScales extends Scales {
+
 	private boolean isOnlyYAxis = false;
-	
+
 	/**
-	 * Builds the object storing the chart instance. 
+	 * Builds the object storing the chart instance.
+	 * 
 	 * @param chart chart instance.
 	 */
 	public StackedScales(AbstractChart<?, ?> chart) {
@@ -50,13 +51,15 @@ public final class StackedScales extends Scales{
 		this.isOnlyYAxis = isOnlyYAxis;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.Scales#setXAxes(org.pepstock.charba.client.options.scales.Axis[])
 	 */
 	@Override
 	public void setXAxes(Axis... axes) {
 		// if not ONLY yaxis
-		if (!isOnlyYAxis){
+		if (!isOnlyYAxis) {
 			// changes the stacked field
 			// for all axes
 			setStackedProperty(axes);
@@ -65,7 +68,9 @@ public final class StackedScales extends Scales{
 		super.setXAxes(axes);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.Scales#setYAxes(org.pepstock.charba.client.options.scales.Axis[])
 	 */
 	@Override
@@ -76,21 +81,22 @@ public final class StackedScales extends Scales{
 		// calls super method
 		super.setYAxes(axes);
 	}
-	
+
 	/**
 	 * Scans all axes and set flag for stacked
+	 * 
 	 * @param axes all axes
 	 */
-	private void setStackedProperty(Axis... axes){
+	private void setStackedProperty(Axis... axes) {
 		// scans axes
-		for (Axis ax : axes){
+		for (Axis ax : axes) {
 			// ONLY cartesina axes can be managed
-			if (ax instanceof CartesianAxis){
+			if (ax instanceof CartesianAxis) {
 				// sets the stacked field
-				CartesianAxis<?> cax = (CartesianAxis<?>)ax;
+				CartesianAxis<?> cax = (CartesianAxis<?>) ax;
 				cax.setStacked(true);
 			}
 		}
 	}
-	
+
 }

@@ -18,13 +18,15 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * When configuring interaction with the graph via hover or tooltips, a number of different modes are available to set which elements appear via tooltip or hover. 
+ * When configuring interaction with the graph via hover or tooltips, a number of different modes are available to set which
+ * elements appear via tooltip or hover.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum InteractionMode implements Key {
-	
+public enum InteractionMode implements Key
+{
+
 	/**
 	 * Finds all of the items that intersect the point.
 	 */
@@ -46,12 +48,14 @@ public enum InteractionMode implements Key {
 	@Deprecated
 	single,
 	/**
-	 * Finds item at the same index. If the intersect setting is true, the first intersecting item is used to determine the index in the data.<br>
-	 * If intersect false the nearest item, in the x direction, is used to determine the index. 
+	 * Finds item at the same index. If the intersect setting is true, the first intersecting item is used to determine the
+	 * index in the data.<br>
+	 * If intersect false the nearest item, in the x direction, is used to determine the index.
 	 */
 	index,
 	/**
-	 * Finds items in the same dataset. If the intersect setting is true, the first intersecting item is used to determine the index in the data.<br>
+	 * Finds items in the same dataset. If the intersect setting is true, the first intersecting item is used to determine the
+	 * index in the data.<br>
 	 * If intersect false the nearest item is used to determine the index.
 	 */
 	dataset,

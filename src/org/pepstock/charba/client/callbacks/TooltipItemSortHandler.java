@@ -19,7 +19,7 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.items.TooltipItem;
 
 /**
- * Allows sorting of tooltip items. 
+ * Allows sorting of tooltip items.
  * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.options.Tooltips
@@ -27,15 +27,16 @@ import org.pepstock.charba.client.items.TooltipItem;
 public interface TooltipItemSortHandler {
 
 	/**
-	 * Allows sorting of tooltip items. 
+	 * Allows sorting of tooltip items.
 	 * 
 	 * @param chart chart instance
 	 * @param item1 the first object to be compared.
 	 * @param item2 the second object to be compared.
-	 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
+	 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the
+	 *         second.
 	 * @see org.pepstock.charba.client.AbstractChart
 	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
 	int onItemSort(AbstractChart<?, ?> chart, TooltipItem item1, TooltipItem item2);
-	
+
 }

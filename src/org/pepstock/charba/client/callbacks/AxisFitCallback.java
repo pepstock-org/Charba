@@ -27,21 +27,23 @@ import org.pepstock.charba.client.items.AxisItem;
 public interface AxisFitCallback {
 
 	/**
-	 * Callback that runs before the scale fits to the canvas. 
+	 * Callback that runs before the scale fits to the canvas.
+	 * 
 	 * @param chart chart instance
 	 * @param item axis item instance instance
 	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem 
+	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	void onBeforeFit(AbstractChart<?, ?> chart, AxisItem item);
-	
+
 	/**
-	 * Callback that runs after the scale fits to the canvas. 
+	 * Callback that runs after the scale fits to the canvas.
+	 * 
 	 * @param chart chart instance
 	 * @param item axis item instance instance
 	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem 
+	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	void onAfterFit(AbstractChart<?, ?> chart, AxisItem item);
-	
+
 }

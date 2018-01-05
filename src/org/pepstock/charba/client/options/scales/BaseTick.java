@@ -25,11 +25,9 @@ import org.pepstock.charba.client.items.TickItem;
 
 /**
  * Base object to map an axis tick.<br>
- * It is also common to want to change the tick marks to include information
- * about the data type.<br>
+ * It is also common to want to change the tick marks to include information about the data type.<br>
  * To do this, you need to add a callback in the axis configuration. <br>
- * If the callback returns null or undefined the associated grid line will be
- * hidden.
+ * If the callback returns null or undefined the associated grid line will be hidden.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -68,8 +66,7 @@ public class BaseTick extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * @param axis
-	 *            the axis to set
+	 * @param axis the axis to set
 	 */
 	void setAxis(Axis axis) {
 		this.axis = axis;
@@ -85,8 +82,7 @@ public class BaseTick extends JavaScriptObjectContainer {
 	/**
 	 * Sets the font size for tick.
 	 * 
-	 * @param fontSize
-	 *            the font size for tick.
+	 * @param fontSize the font size for tick.
 	 */
 	public void setFontSize(int fontSize) {
 		setValue(Property.fontSize, fontSize);
@@ -102,12 +98,9 @@ public class BaseTick extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * Sets the font style for the tick, follows CSS font-style options (i.e.
-	 * normal, italic, oblique, initial, inherit).
+	 * Sets the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @param fontStyle
-	 *            Font style for the tick, follows CSS font-style options (i.e.
-	 *            normal, italic, oblique, initial, inherit).
+	 * @param fontStyle Font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
@@ -115,11 +108,9 @@ public class BaseTick extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * Returns the font style for the tick, follows CSS font-style options (i.e.
-	 * normal, italic, oblique, initial, inherit).
+	 * Returns the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style for the tick, follows CSS font-style options (i.e.
-	 *         normal, italic, oblique, initial, inherit). Default is normal
+	 * @return the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). Default is normal
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
@@ -129,8 +120,7 @@ public class BaseTick extends JavaScriptObjectContainer {
 	/**
 	 * Sets the font color for tick
 	 * 
-	 * @param fontColor
-	 *            Font color for tick
+	 * @param fontColor Font color for tick
 	 */
 	public void setFontColor(String fontColor) {
 		setValue(Property.fontColor, fontColor);
@@ -148,8 +138,7 @@ public class BaseTick extends JavaScriptObjectContainer {
 	/**
 	 * Sets the font family for the tick, follows CSS font-family options.
 	 * 
-	 * @param fontFamily
-	 *            Font family for the tick, follows CSS font-family options.
+	 * @param fontFamily Font family for the tick, follows CSS font-family options.
 	 */
 	public void setFontFamily(String fontFamily) {
 		setValue(Property.fontFamily, fontFamily);
@@ -158,8 +147,7 @@ public class BaseTick extends JavaScriptObjectContainer {
 	/**
 	 * Returns the font family for the tick, follows CSS font-family options.
 	 * 
-	 * @return Font family for the tick, follows CSS font-family options.
-	 *         Default is 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
+	 * @return Font family for the tick, follows CSS font-family options. Default is 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
 	 */
 	public String getFontFamily() {
 		return getValue(Property.fontFamily, DEFAULT_FONT_FAMILY);
@@ -173,8 +161,7 @@ public class BaseTick extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * @param callback
-	 *            the callback to set
+	 * @param callback the callback to set
 	 */
 	public void setCallback(TickCallback callback) {
 		// checks if callback has been already set
@@ -186,13 +173,10 @@ public class BaseTick extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * Called to change the tick marks to include information about the data
-	 * type.
+	 * Called to change the tick marks to include information about the data type.
 	 * 
-	 * @param item
-	 *            element of a single tick.
-	 * @return if the callback returns null or undefined the associated grid
-	 *         line will be hidden.
+	 * @param item element of a single tick.
+	 * @return if the callback returns null or undefined the associated grid line will be hidden.
 	 * @see org.pepstock.charba.client.items.TickItem
 	 */
 	protected String onCallback(TickItem item) {

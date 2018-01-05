@@ -25,8 +25,9 @@ public interface ChartHoverEventHandler extends ChartEventHandler {
 
 	/**
 	 * Invoked when the user hovers on the chart.
+	 * 
 	 * @param event chart hover event
 	 */
 	void onHover(ChartHoverEvent event);
-	
+
 }

@@ -23,22 +23,23 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum Position implements Key {
+public enum Position implements Key
+{
 
 	/**
-	 * The top property sets the top edge of an element to a unit above/below its normal position. 
+	 * The top property sets the top edge of an element to a unit above/below its normal position.
 	 */
-    top,
-    /**
-     * the left property sets the left edge of an element to a unit to the left/right to its normal position. 
-     */
-    left,
-    /**
-     * the bottom property sets the bottom edge of an element to a unit above/below its normal position.
-     */
-    bottom,
-    /**
-     * the right property sets the right edge of an element to a unit to the left/right to its normal position. 
-     */
-    right;
+	top,
+	/**
+	 * the left property sets the left edge of an element to a unit to the left/right to its normal position.
+	 */
+	left,
+	/**
+	 * the bottom property sets the bottom edge of an element to a unit above/below its normal position.
+	 */
+	bottom,
+	/**
+	 * the right property sets the right edge of an element to a unit to the left/right to its normal position.
+	 */
+	right;
 }

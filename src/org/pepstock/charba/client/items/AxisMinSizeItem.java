@@ -27,21 +27,24 @@ import org.pepstock.charba.client.commons.Key;
 public class AxisMinSizeItem extends BaseItem {
 
 	/**
-	 * Name of fields of JavaScript object. 
+	 * Name of fields of JavaScript object.
 	 */
-	private enum Property implements Key{
+	private enum Property implements Key
+	{
 		width,
 		height
 	}
-    /** 
-     * Needed for GWt injection
-     */
+
+	/**
+	 * Needed for GWt injection
+	 */
 	protected AxisMinSizeItem() {
 		// do nothing
 	}
 
 	/**
 	 * Sets the minimum width of axis in pixel.
+	 * 
 	 * @return the minimum width of axis in pixel.
 	 */
 	public final int getWidth() {
@@ -50,6 +53,7 @@ public class AxisMinSizeItem extends BaseItem {
 
 	/**
 	 * Returns the minimum width of axis in pixel.
+	 * 
 	 * @param width the minimum width of axis in pixel.
 	 */
 	public final void setWidth(int width) {
@@ -58,6 +62,7 @@ public class AxisMinSizeItem extends BaseItem {
 
 	/**
 	 * Returns the minimum height of axis in pixel.
+	 * 
 	 * @return the minimum height of axis in pixel.
 	 */
 	public final int getHeight() {
@@ -66,6 +71,7 @@ public class AxisMinSizeItem extends BaseItem {
 
 	/**
 	 * Sets the minimum height of axis in pixel.
+	 * 
 	 * @param height the minimum height of axis in pixel.
 	 */
 	public final void setHeight(int height) {

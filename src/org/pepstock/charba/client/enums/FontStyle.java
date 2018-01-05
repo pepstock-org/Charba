@@ -23,8 +23,9 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum FontStyle implements Key {
-	
+public enum FontStyle implements Key
+{
+
 	/**
 	 * The browser displays a normal font style. This is default
 	 */

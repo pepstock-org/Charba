@@ -25,8 +25,9 @@ public interface LegendClickEventHandler extends ChartEventHandler {
 
 	/**
 	 * Invoked when the user clicks on the chart legend.
+	 * 
 	 * @param event legend click event
 	 */
 	void onClick(LegendClickEvent event);
-	
+
 }

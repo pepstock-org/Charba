@@ -19,14 +19,9 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Position;
 
 /**
- * Axes are an integral part of a chart. They are used to determine how data
- * maps to a pixel value on the chart. <br>
- * In a cartesian chart, there is 1 or more X axis and 1 or more Y axis to map
- * points onto the 2 dimensional canvas. These axes are know as 'cartesian
- * axes'.<br>
- * Axes that follow a cartesian grid are known as 'Cartesian Axes'. Cartesian
- * axes are used for line, bar, and bubble charts. Four cartesian axes are
- * included by default.<br>
+ * Axes are an integral part of a chart. They are used to determine how data maps to a pixel value on the chart. <br>
+ * In a cartesian chart, there is 1 or more X axis and 1 or more Y axis to map points onto the 2 dimensional canvas. These axes are know as 'cartesian axes'.<br>
+ * Axes that follow a cartesian grid are known as 'Cartesian Axes'. Cartesian axes are used for line, bar, and bubble charts. Four cartesian axes are included by default.<br>
  * <ul>
  * <li>linear
  * <li>logarithmic
@@ -36,8 +31,7 @@ import org.pepstock.charba.client.enums.Position;
  * 
  * @author Andrea "Stock" Stocchero
  *
- * @param <T>
- *            type of tick to apply to axis
+ * @param <T> type of tick to apply to axis
  */
 abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 
@@ -69,8 +63,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	/**
 	 * Builds the object storing the ticks
 	 * 
-	 * @param ticks
-	 *            ticks of this axis
+	 * @param ticks ticks of this axis
 	 */
 	protected CartesianAxis(T ticks) {
 		// stores the ticks
@@ -110,8 +103,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	/**
 	 * Sets if the axis are stacked or not.
 	 * 
-	 * @param stacked
-	 *            if the axis are stacked or not.
+	 * @param stacked if the axis are stacked or not.
 	 */
 	public void setStacked(boolean stacked) {
 		setValue(Property.stacked, stacked);
@@ -125,19 +117,16 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	}
 
 	/**
-	 * If true, extra space is added to the both edges and the axis is scaled to
-	 * fit into the chart area.
+	 * If true, extra space is added to the both edges and the axis is scaled to fit into the chart area.
 	 * 
-	 * @param offset
-	 *            extra space of axis
+	 * @param offset extra space of axis
 	 */
 	public void setOffset(boolean offset) {
 		setValue(Property.offset, offset);
 	}
 
 	/**
-	 * If true, extra space is added to the both edges and the axis is scaled to
-	 * fit into the chart area.
+	 * If true, extra space is added to the both edges and the axis is scaled to fit into the chart area.
 	 * 
 	 * @return extra space of axis
 	 */
@@ -149,8 +138,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * The ID is used to link datasets and scale axes together.<br>
 	 * This is especially needed if multi-axes charts are used.
 	 * 
-	 * @param id
-	 *            The ID is used to link datasets and scale axes together
+	 * @param id The ID is used to link datasets and scale axes together
 	 */
 	public void setId(String id) {
 		setValue(Property.id, id);
@@ -160,19 +148,16 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * The ID is used to link datasets and scale axes together.<br>
 	 * This is especially needed if multi-axes charts are used.
 	 * 
-	 * @return The ID is used to link datasets and scale axes together or
-	 *         <code>null</code> if not set
+	 * @return The ID is used to link datasets and scale axes together or <code>null</code> if not set
 	 */
 	public String getId() {
 		return getValue(Property.id, null);
 	}
 
 	/**
-	 * Position of the axis in the chart. Possible values are: 'top', 'left',
-	 * 'bottom', 'right'
+	 * Position of the axis in the chart. Possible values are: 'top', 'left', 'bottom', 'right'
 	 * 
-	 * @param position
-	 *            position of axis
+	 * @param position position of axis
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public void setPosition(Position position) {
@@ -180,8 +165,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	}
 
 	/**
-	 * Position of the axis in the chart. Possible values are: 'top', 'left',
-	 * 'bottom', 'right'
+	 * Position of the axis in the chart. Possible values are: 'top', 'left', 'bottom', 'right'
 	 * 
 	 * @return position of axis
 	 * @see org.pepstock.charba.client.enums.Position

@@ -29,22 +29,25 @@ import org.pepstock.charba.client.commons.Key;
 public class TickItem extends BaseItem {
 
 	/**
-	 * Name of fields of JavaScript object. 
+	 * Name of fields of JavaScript object.
 	 */
-	private enum Property implements Key{
+	private enum Property implements Key
+	{
 		value,
 		index,
 		values
 	}
-    /** 
-     * Needed for GWt injection
-     */
+
+	/**
+	 * Needed for GWt injection
+	 */
 	protected TickItem() {
 		// do nothing
 	}
 
 	/**
 	 * Returns the value of the tick.
+	 * 
 	 * @return the value of the tick.
 	 */
 	public final double getValue() {
@@ -53,6 +56,7 @@ public class TickItem extends BaseItem {
 
 	/**
 	 * Returns the index of the tick.
+	 * 
 	 * @return the index of the tick.
 	 */
 	public final int getIndex() {
@@ -61,6 +65,7 @@ public class TickItem extends BaseItem {
 
 	/**
 	 * Returns the complete list of ticks.
+	 * 
 	 * @return the complete list of ticks.
 	 */
 	public final List<Double> getValues() {

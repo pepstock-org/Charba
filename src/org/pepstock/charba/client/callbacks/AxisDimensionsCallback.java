@@ -28,20 +28,22 @@ public interface AxisDimensionsCallback {
 
 	/**
 	 * Callback that runs before dimensions are set.
+	 * 
 	 * @param chart chart instance
 	 * @param item axis item instance instance
 	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem 
+	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	void onBeforeSetDimensions(AbstractChart<?, ?> chart, AxisItem item);
 
 	/**
 	 * Callback that runs after dimensions are set.
+	 * 
 	 * @param chart chart instance
 	 * @param item axis item instance instance
 	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem 
+	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	void onAfterSetDimensions(AbstractChart<?, ?> chart, AxisItem item);
-	
+
 }
