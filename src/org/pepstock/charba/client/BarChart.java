@@ -18,24 +18,49 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.options.BarOptions;
 
+/**
+ * BAR chart implementation.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public class BarChart extends AbstractChart<BarOptions, BarDataset> {
-	
+
 	private final BarOptions options;
-	
+
+	/**
+	 * Builds the object.
+	 */
 	public BarChart() {
+		// creates the options
 		options = new BarOptions(this);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getType()
+	 */
 	@Override
 	public Type getType() {
 		return Type.bar;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 */
 	@Override
 	public BarOptions getOptions() {
 		return options;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 */
 	@Override
 	public BarDataset newDataset() {
 		return new BarDataset();

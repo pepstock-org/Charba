@@ -18,24 +18,48 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.data.StackedBarDataset;
 import org.pepstock.charba.client.options.StackedOptions;
 
+/**
+ * STACKED BAR chart implementation.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public final class StackedBarChart extends AbstractChart<StackedOptions, StackedBarDataset> {
-	
+
 	private final StackedOptions options;
-	
+
+	/**
+	 * Builds the object.
+	 */
 	public StackedBarChart() {
 		options = new StackedOptions(this);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getType()
+	 */
 	@Override
 	public Type getType() {
 		return Type.bar;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 */
 	@Override
 	public StackedOptions getOptions() {
 		return options;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 */
 	@Override
 	public StackedBarDataset newDataset() {
 		return new StackedBarDataset();

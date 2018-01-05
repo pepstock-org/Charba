@@ -18,24 +18,48 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.data.LineDataset;
 import org.pepstock.charba.client.options.LineOptions;
 
+/**
+ * LINE chart implementation.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 public class LineChart extends AbstractChart<LineOptions, LineDataset> {
-	
+
 	private final LineOptions options;
-	
+
+	/**
+	 * Builds the object.
+	 */
 	public LineChart() {
 		options = new LineOptions(this);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getType()
+	 */
 	@Override
 	public Type getType() {
 		return Type.line;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 */
 	@Override
 	public LineOptions getOptions() {
 		return options;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 */
 	@Override
 	public LineDataset newDataset() {
 		return new LineDataset();

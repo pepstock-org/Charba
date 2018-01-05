@@ -23,43 +23,78 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JsObjectArrayList;
-import org.pepstock.charba.client.options.InvalidPluginIdException;
 
 /**
+ * Is the manager of plugins which can manage the list of plugins and returns them as java script object to store into chart
+ * configuration.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
 public final class Plugins {
 	// chart instance
 	private final AbstractChart<?, ?> chart;
-	
+	// list of added plugins
 	private final List<WrapperPlugin> plugins = new LinkedList<WrapperPlugin>();
-	
+
+	/**
+	 * Builds the object storing the chart instance.
+	 * 
+	 * @param chart chart instance
+	 */
 	public Plugins(AbstractChart<?, ?> chart) {
 		this.chart = chart;
 	}
 
-	public void add(Plugin plugin) throws InvalidPluginIdException{
+	/**
+	 * Adds a new plugin to the chart.<br>
+	 * If the chart is already initialized, to get this update teh chart must be drawn again.
+	 * 
+	 * @param plugin plugin instance
+	 * @throws InvalidPluginIdException if the plugin id is not correct.
+	 */
+	public void add(Plugin plugin) throws InvalidPluginIdException {
+		// checks the plugin id
 		PluginIdChecker.check(plugin.getId());
-		WrapperPlugin wPlugin = new WrapperPlugin(chart, plugin);	
+		// creates a java script object, wrapper of teh plugin
+		WrapperPlugin wPlugin = new WrapperPlugin(chart, plugin);
+		// stores the wrapper into a list
 		plugins.add(wPlugin);
 	}
-	
+
+	/**
+	 * Removes a plugin from the chart.<br>
+	 * If the chart is already initialized, to get this update teh chart must be drawn again.
+	 * 
+	 * @param id plugin id to remove.
+	 */
 	public void remove(String id) {
+		// scans all plugins
 		Iterator<WrapperPlugin> iter = plugins.iterator();
-		while(iter.hasNext()){
+		while (iter.hasNext()) {
+			// gets wrapper
 			WrapperPlugin plugin = iter.next();
-			if (plugin.getId().equals(id)){
+			// if has got the same id
+			if (plugin.getId().equals(id)) {
+				// removes it
 				iter.remove();
 			}
 		}
 	}
 
-	public JsObjectArrayList<GenericJavaScriptObject> getArrayList(){
+	/**
+	 * Creates a java script array (mapped into a list) with all plugins added to the chart.
+	 * 
+	 * @return a java script array (mapped into a list) with all plugins added to the chart.
+	 */
+	public JsObjectArrayList<GenericJavaScriptObject> getArrayList() {
+		// creates list
 		JsObjectArrayList<GenericJavaScriptObject> list = new JsObjectArrayList<GenericJavaScriptObject>();
-		for (WrapperPlugin plugin : plugins){
+		// adds all java script object of the plugin wrapper
+		for (WrapperPlugin plugin : plugins) {
 			list.add(plugin.getObject());
 		}
 		return list;
 	}
-	
+
 }

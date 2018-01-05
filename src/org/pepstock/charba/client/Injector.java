@@ -38,11 +38,11 @@ final class Injector {
 	/**
 	 * Injects ChartJS if not injected yet.
 	 */
-	static void ensureInjected(){ 
-		if (!injected){
+	static void ensureInjected() {
+		if (!injected) {
 			// gets resource
 			Resources res = GWT.create(Resources.class);
-			// gets source of ChartJS 
+			// gets source of ChartJS
 			String source = res.chartJsSource().getText();
 			// creates a script element
 			ScriptElement scriptElement = Document.get().createScriptElement();

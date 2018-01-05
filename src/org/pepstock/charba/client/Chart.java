@@ -18,12 +18,36 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.options.BaseOptions;
 
+/**
+ * Interface which defines a chart.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ * @param <O> Options type for the specific chart
+ * @param <D> Dataset type for the specific chart
+ */
 public interface Chart<O extends BaseOptions, D extends Dataset> {
 
+	/**
+	 * Returns the type of chart.
+	 * 
+	 * @return the type of chart.
+	 * @see Type
+	 */
 	Type getType();
-	
+
+	/**
+	 * Returns the options of chart.
+	 * 
+	 * @return the options of chart.
+	 */
 	O getOptions();
-	
+
+	/**
+	 * Creates a new dataset related to chart type.
+	 * 
+	 * @return a new dataset related to chart type.
+	 */
 	D newDataset();
-	
+
 }
