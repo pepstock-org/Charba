@@ -23,26 +23,27 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class Tick extends BaseTick{
-	
+abstract class Tick extends BaseTick {
+
 	private static final boolean DEFAULT_DISPLAY = true;
-	
+
 	private static final boolean DEFAULT_REVERSE = false;
-	
+
 	private final BaseTick minor = new BaseTick();
-	
+
 	private final BaseTick major = new BaseTick();
-	
+
 	/**
 	 * Name of fields of JavaScript object.
 	 */
-	enum Property implements Key {
+	enum Property implements Key
+	{
 		display,
 		reverse,
 		minor,
 		major
 	}
-	
+
 	/**
 	 * Builds the object
 	 */
@@ -52,7 +53,9 @@ abstract class Tick extends BaseTick{
 		setValue(Property.major, major);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.scales.BaseTick#setAxis(org.pepstock.charba.client.options.scales.Axis)
 	 */
 	@Override
@@ -62,7 +65,7 @@ abstract class Tick extends BaseTick{
 		minor.setAxis(axis);
 		major.setAxis(axis);
 	}
-	
+
 	/**
 	 * @return the minor
 	 */
@@ -79,6 +82,7 @@ abstract class Tick extends BaseTick{
 
 	/**
 	 * If true, show tick marks.
+	 * 
 	 * @param display if true, show tick marks
 	 */
 	public void setDisplay(boolean display) {
@@ -87,14 +91,16 @@ abstract class Tick extends BaseTick{
 
 	/**
 	 * If true, show tick marks
+	 * 
 	 * @return if true, show tick marks. Default is true.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, DEFAULT_DISPLAY);
 	}
-    
+
 	/**
 	 * Sets the reverses order of tick labels.
+	 * 
 	 * @param reverse reverses order of tick labels.
 	 */
 	public void setReverse(boolean reverse) {
@@ -103,6 +109,7 @@ abstract class Tick extends BaseTick{
 
 	/**
 	 * Returns the reverses order of tick labels.
+	 * 
 	 * @return reverses order of tick labels. Default is false.
 	 */
 	public boolean isReverse() {

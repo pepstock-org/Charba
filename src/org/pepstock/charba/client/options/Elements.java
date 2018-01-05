@@ -28,10 +28,10 @@ import org.pepstock.charba.client.options.elements.Rectangle;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Elements extends JavaScriptObjectContainer{
-	
+public final class Elements extends JavaScriptObjectContainer {
+
 	private final Point point = new Point();
-	
+
 	private final Line line = new Line();
 
 	private final Arc arc = new Arc();
@@ -41,7 +41,8 @@ public final class Elements extends JavaScriptObjectContainer{
 	/**
 	 * Name of fields of JavaScript object.
 	 */
-	private enum Property implements Key {
+	private enum Property implements Key
+	{
 		point,
 		line,
 		rectangle,
@@ -86,5 +87,5 @@ public final class Elements extends JavaScriptObjectContainer{
 	public Rectangle getRectangle() {
 		return rectangle;
 	}
-    
+
 }

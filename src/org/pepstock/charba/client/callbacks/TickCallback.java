@@ -28,12 +28,13 @@ public interface TickCallback {
 
 	/**
 	 * Changes the tick marks to include information about the data type.
+	 * 
 	 * @param chart chart instance
 	 * @param item tick item to be changed
 	 * @return the tick to apply or if the callback returns <code>null</code> the associated grid line will be hidden.
 	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.TickItem 
+	 * @see org.pepstock.charba.client.items.TickItem
 	 */
 	String onCallback(AbstractChart<?, ?> chart, TickItem item);
-	
+
 }

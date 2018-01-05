@@ -24,34 +24,36 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum AxisType implements Key {
-	
+public enum AxisType implements Key
+{
+
 	/**
 	 * The linear scale is use to chart numerical data. It can be placed on either the x or y axis.<br>
 	 * The linear interpolation is used to determine where a value lies on the axis.
 	 */
-    linear,
-    /**
-     * The logarithmic scale is use to chart numerical data. It can be placed on either the x or y axis. <br>
-     * The logarithmic interpolation is used to determine where a value lies on the axis.
-     */
-    logarithmic,
-    /**
-     * The labels are drawn from one of the label arrays included in the chart data.<br<
-     * Where not specified, this is the default.
-     */
-    category,
-    /**
-     * The time scale is used to display times and dates. When building its ticks, it will automatically calculate the most comfortable unit base on the size of the scale.<br>
-     * Not implemented
-     */
-    time,
-    /**
-     * Radial axes are used specifically for the radar and polar area chart types.<br>
-     * These axes overlay the chart area, rather than being positioned on one of the edges.<br>
-     * The linear scale is use to chart numerical data.<br>
-     * The linear interpolation is used to determine where a value lies in relation the center of the axis.
-     */
-    radialLinear;
+	linear,
+	/**
+	 * The logarithmic scale is use to chart numerical data. It can be placed on either the x or y axis. <br>
+	 * The logarithmic interpolation is used to determine where a value lies on the axis.
+	 */
+	logarithmic,
+	/**
+	 * The labels are drawn from one of the label arrays included in the chart data.<br< Where not specified, this is the
+	 * default.
+	 */
+	category,
+	/**
+	 * The time scale is used to display times and dates. When building its ticks, it will automatically calculate the most
+	 * comfortable unit base on the size of the scale.<br>
+	 * Not implemented
+	 */
+	time,
+	/**
+	 * Radial axes are used specifically for the radar and polar area chart types.<br>
+	 * These axes overlay the chart area, rather than being positioned on one of the edges.<br>
+	 * The linear scale is use to chart numerical data.<br>
+	 * The linear interpolation is used to determine where a value lies in relation the center of the axis.
+	 */
+	radialLinear;
 
 }

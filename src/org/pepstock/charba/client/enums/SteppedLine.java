@@ -19,12 +19,13 @@ import org.pepstock.charba.client.commons.Key;
 
 /**
  * Property to set if the line is shown as a stepped line.
- *  
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum SteppedLine implements Key {
-	
+public enum SteppedLine implements Key
+{
+
 	/**
 	 * Step-before Interpolation
 	 */
@@ -37,5 +38,5 @@ public enum SteppedLine implements Key {
 	 * No Step Interpolation (default)
 	 */
 	nosteppedline;
-	
+
 }

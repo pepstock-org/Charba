@@ -25,8 +25,9 @@ public interface ChartResizeEventHandler extends ChartEventHandler {
 
 	/**
 	 * Invoked when the chart has been resized.
+	 * 
 	 * @param event chart resize event
 	 */
 	void onResize(ChartResizeEvent event);
-	
+
 }

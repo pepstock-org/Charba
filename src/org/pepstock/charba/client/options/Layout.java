@@ -25,14 +25,15 @@ import org.pepstock.charba.client.options.layout.Padding;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Layout extends JavaScriptObjectContainer{
-	
+public final class Layout extends JavaScriptObjectContainer {
+
 	private final Padding padding = new Padding();
-	
-	private enum Property implements Key{
+
+	private enum Property implements Key
+	{
 		padding
 	}
-	
+
 	/**
 	 * Builds the object setting the java script padding object.
 	 */
@@ -47,5 +48,5 @@ public final class Layout extends JavaScriptObjectContainer{
 	public Padding getPadding() {
 		return padding;
 	}
-   
+
 }

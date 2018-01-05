@@ -29,21 +29,24 @@ import com.google.gwt.dom.client.NativeEvent;
 public class ChartNativeEvent extends NativeEvent {
 
 	/**
-	 * Name of fields of JavaScript object. 
+	 * Name of fields of JavaScript object.
 	 */
-	private enum Property implements Key{
+	private enum Property implements Key
+	{
 		layerX,
 		layerY
 	}
-    /** 
-     * Needed for GWt injection
-     */
+
+	/**
+	 * Needed for GWt injection
+	 */
 	protected ChartNativeEvent() {
 		// do notnihg
 	}
 
 	/**
 	 * Returns the layer X property
+	 * 
 	 * @return the layer X property
 	 */
 	public final int getLayerX() {
@@ -52,6 +55,7 @@ public class ChartNativeEvent extends NativeEvent {
 
 	/**
 	 * Returns the layer Y property
+	 * 
 	 * @return the layer Y property
 	 */
 	public final int getLayerY() {
@@ -60,6 +64,7 @@ public class ChartNativeEvent extends NativeEvent {
 
 	/**
 	 * Returns the string representation of the object content.
+	 * 
 	 * @return the string representation of the object content.
 	 */
 	public final String toContentString() {
@@ -68,6 +73,7 @@ public class ChartNativeEvent extends NativeEvent {
 
 	/**
 	 * Native method to get the integer value of layers properties.
+	 * 
 	 * @param key name of JavaScript object field
 	 * @return integer value of the property
 	 */

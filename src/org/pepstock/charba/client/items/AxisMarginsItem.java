@@ -27,15 +27,16 @@ import org.pepstock.charba.client.commons.Key;
 public class AxisMarginsItem extends BaseItem {
 
 	/**
-	 * Name of fields of JavaScript object. 
+	 * Name of fields of JavaScript object.
 	 */
-	private enum Property implements Key{
+	private enum Property implements Key
+	{
 		left,
-		right, 
-		top, 
+		right,
+		top,
 		bottom
 	}
-	
+
 	/**
 	 * Needed for GWt injection
 	 */
@@ -45,14 +46,16 @@ public class AxisMarginsItem extends BaseItem {
 
 	/**
 	 * Returns the top margin in pixel
-	 * @return  the top margin in pixel
+	 * 
+	 * @return the top margin in pixel
 	 */
 	public final int getTop() {
 		return getInt(Property.top.name());
 	}
 
 	/**
-	 * Sets the top margin in pixel 
+	 * Sets the top margin in pixel
+	 * 
 	 * @param top the top margin in pixel
 	 */
 	public final void setTop(int top) {
@@ -61,6 +64,7 @@ public class AxisMarginsItem extends BaseItem {
 
 	/**
 	 * Returns the bottom margin in pixel
+	 * 
 	 * @return the bottom margin in pixel
 	 */
 	public final int getBottom() {
@@ -69,6 +73,7 @@ public class AxisMarginsItem extends BaseItem {
 
 	/**
 	 * Sets the bottom margin in pixel
+	 * 
 	 * @param bottom the bottom margin in pixel
 	 */
 	public final void setBottom(int bottom) {
@@ -77,6 +82,7 @@ public class AxisMarginsItem extends BaseItem {
 
 	/**
 	 * Returns the left margin in pixel
+	 * 
 	 * @return the left margin in pixel
 	 */
 	public final int getLeft() {
@@ -85,6 +91,7 @@ public class AxisMarginsItem extends BaseItem {
 
 	/**
 	 * Sets the left margin in pixel
+	 * 
 	 * @param left the left margin in pixel
 	 */
 	public final void setLeft(int left) {
@@ -93,6 +100,7 @@ public class AxisMarginsItem extends BaseItem {
 
 	/**
 	 * Returns the right margin in pixel
+	 * 
 	 * @return the right margin in pixel
 	 */
 	public final int getRight() {
@@ -101,6 +109,7 @@ public class AxisMarginsItem extends BaseItem {
 
 	/**
 	 * Sets the right margin in pixel
+	 * 
 	 * @param right the right margin in pixel
 	 */
 	public final void setRight(int right) {

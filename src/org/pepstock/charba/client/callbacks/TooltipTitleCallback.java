@@ -21,11 +21,12 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.items.TooltipItem;
 
 /**
- * The tooltip label configuration is nested below the tooltip configuration using the callbacks key.<br> 
+ * The tooltip label configuration is nested below the tooltip configuration using the callbacks key.<br>
  * The tooltip has the following callbacks for providing text.<br>
- * All functions must return either a string or an array of strings. Arrays of strings are treated as multiple lines of text.<br>
+ * All functions must return either a string or an array of strings. Arrays of strings are treated as multiple lines of
+ * text.<br>
  * This interface takes care about labels to apply to the title.
- *   
+ * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.options.TooltipsCallbacks
  *
@@ -34,32 +35,35 @@ public interface TooltipTitleCallback {
 
 	/**
 	 * Returns the text to render before the title.
+	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored. 
+	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored.
 	 * @see org.pepstock.charba.client.AbstractChart
 	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
 	String[] onBeforeTitle(AbstractChart<?, ?> chart, List<TooltipItem> items);
-	
+
 	/**
 	 * Returns text to render as the title of the tooltip.
+	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored. 
+	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored.
 	 * @see org.pepstock.charba.client.AbstractChart
 	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
 	String[] onTitle(AbstractChart<?, ?> chart, List<TooltipItem> items);
-	
+
 	/**
 	 * Returns text to render after the title.
+	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored. 
+	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored.
 	 * @see org.pepstock.charba.client.AbstractChart
 	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
 	String[] onAfterTitle(AbstractChart<?, ?> chart, List<TooltipItem> items);
-	
+
 }

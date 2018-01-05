@@ -21,7 +21,7 @@ import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * Event which is fired when the user clicks on the chart and selects a dataset.<br>
- * This event doesn't suppress the click event on the chart. 
+ * This event doesn't suppress the click event on the chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -32,14 +32,14 @@ public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionE
 	 * Event type
 	 */
 	public static final Type<DatasetSelectionEventHandler> TYPE = new Type<DatasetSelectionEventHandler>();
-	//item with dataset metadata related to the click
+	// item with dataset metadata related to the click
 	private final DatasetMetaItem item;
 
 	/**
 	 * Creates the event with dataset metadata item related to the click
+	 * 
 	 * @param nativeEvent native event of this custom event
-	 * @param item dataset metadata item related to the click
-	 * org.pepstock.charba.client.items.DatasetMetaItem
+	 * @param item dataset metadata item related to the click org.pepstock.charba.client.items.DatasetMetaItem
 	 */
 	public DatasetSelectionEvent(NativeEvent nativeEvent, DatasetMetaItem item) {
 		super(nativeEvent);
@@ -48,22 +48,26 @@ public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionE
 
 	/**
 	 * Returns the item with dataset metadata related to the click
-	 * @return the item with dataset metadata related to the click
-	 * org.pepstock.charba.client.items.DatasetMetaItem
+	 * 
+	 * @return the item with dataset metadata related to the click org.pepstock.charba.client.items.DatasetMetaItem
 	 */
 	public DatasetMetaItem getItem() {
 		return item;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
 	 */
 	@Override
 	public Type<DatasetSelectionEventHandler> getAssociatedType() {
 		return TYPE;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
 	 */
 	@Override

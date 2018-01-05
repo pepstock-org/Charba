@@ -33,9 +33,10 @@ public final class LegendClickEvent extends AbstractEvent<LegendClickEventHandle
 	public static final Type<LegendClickEventHandler> TYPE = new Type<LegendClickEventHandler>();
 	// legend item selected by clicking
 	private final LegendItem item;
-	
+
 	/**
 	 * Creates the event with legend item related to the click
+	 * 
 	 * @param nativeEvent native event of this custom event
 	 * @param item legend item related to the click
 	 * @see org.pepstock.charba.client.items.LegendItem
@@ -47,21 +48,26 @@ public final class LegendClickEvent extends AbstractEvent<LegendClickEventHandle
 
 	/**
 	 * Returns the legend item related to the click
+	 * 
 	 * @return the legend item related to the click
 	 */
 	public LegendItem getItem() {
 		return item;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
 	 */
 	@Override
 	public Type<LegendClickEventHandler> getAssociatedType() {
 		return TYPE;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
 	 */
 	@Override

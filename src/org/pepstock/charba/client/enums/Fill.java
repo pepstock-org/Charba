@@ -18,14 +18,17 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Both line and radar charts support a fill option on the dataset object which can be used to create area between two datasets or a dataset and a boundary.
+ * Both line and radar charts support a fill option on the dataset object which can be used to create area between two datasets
+ * or a dataset and a boundary.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum Fill implements Key {
-	
+public enum Fill implements Key
+{
+
 	/**
-	 * Fill the area from the botton X axis 
+	 * Fill the area from the botton X axis
 	 */
 	start,
 	/**
@@ -33,12 +36,13 @@ public enum Fill implements Key {
 	 */
 	end,
 	/**
-	 * Fill the area from 0 axis to top or bottom, depending on value.<br> Default.  
+	 * Fill the area from 0 axis to top or bottom, depending on value.<br>
+	 * Default.
 	 */
 	origin,
 	/**
 	 * Does not fill any area
 	 */
 	nofill;
-	
+
 }

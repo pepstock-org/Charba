@@ -23,12 +23,13 @@ import org.pepstock.charba.client.commons.Key;
  * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the same way.<br>
  * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
  * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a dataset.
+ * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.PolarAreaChart
  * @see org.pepstock.charba.client.DoughnutChart
  * @see org.pepstock.charba.client.PieChart
  */
-public class Arc extends JavaScriptObjectContainer{
+public class Arc extends JavaScriptObjectContainer {
 
 	// default background color
 	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
@@ -38,33 +39,37 @@ public class Arc extends JavaScriptObjectContainer{
 	private static final String DEFAULT_BORDER_COLOR = "#fff";
 
 	/**
-	 * Name of fields of JavaScript object. 
+	 * Name of fields of JavaScript object.
 	 */
-	enum Property implements Key {
+	enum Property implements Key
+	{
 		backgroundColor,
 		borderWidth,
 		borderColor
 	}
-	
+
 	/**
 	 * Sets the background color
+	 * 
 	 * @param backgroundColor the background color
 	 */
 	public void setBackgroundColor(String backgroundColor) {
 		setValue(Property.backgroundColor, backgroundColor);
 	}
 
-	/** 
-	 * Returns the background color 
+	/**
+	 * Returns the background color
+	 * 
 	 * @return the background color
 	 */
 	public String getBackgroundColor() {
 		return getValue(Property.backgroundColor, getDefaultBackgroundColor());
 	}
-	
-	/** 
-	 * Returns the default background color 
-	 * @return the default  background color
+
+	/**
+	 * Returns the default background color
+	 * 
+	 * @return the default background color
 	 */
 	protected String getDefaultBackgroundColor() {
 		return DEFAULT_BACKGROUND_COLOR;
@@ -72,6 +77,7 @@ public class Arc extends JavaScriptObjectContainer{
 
 	/**
 	 * Sets the border width
+	 * 
 	 * @param borderWidth the border width
 	 */
 	public void setBorderWidth(int borderWidth) {
@@ -80,6 +86,7 @@ public class Arc extends JavaScriptObjectContainer{
 
 	/**
 	 * Returns the border width
+	 * 
 	 * @return the border width
 	 */
 	public int getBorderWidth() {
@@ -88,6 +95,7 @@ public class Arc extends JavaScriptObjectContainer{
 
 	/**
 	 * Returns the default border width
+	 * 
 	 * @return the default border width
 	 */
 	protected int getDefaultBorderWidth() {
@@ -96,6 +104,7 @@ public class Arc extends JavaScriptObjectContainer{
 
 	/**
 	 * Sets the border color
+	 * 
 	 * @param borderColor the border color
 	 */
 	public void setBorderColor(String borderColor) {
@@ -104,6 +113,7 @@ public class Arc extends JavaScriptObjectContainer{
 
 	/**
 	 * Returns the border color
+	 * 
 	 * @return the border color
 	 */
 	public String getBorderColor() {
@@ -112,6 +122,7 @@ public class Arc extends JavaScriptObjectContainer{
 
 	/**
 	 * Returns the default border color
+	 * 
 	 * @return the default border color
 	 */
 	protected String getDefaultBorderColor() {

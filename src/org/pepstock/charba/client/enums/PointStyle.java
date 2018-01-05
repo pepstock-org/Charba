@@ -23,17 +23,18 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum PointStyle implements Key {
+public enum PointStyle implements Key
+{
 
-    circle,
-    cross,
-    crossRot,
-    dash,
-    line,
-    rect,
-    rectRounded,
-    rectRot,
-    star,
-    triangle;
-	
+	circle,
+	cross,
+	crossRot,
+	dash,
+	line,
+	rect,
+	rectRounded,
+	rectRot,
+	star,
+	triangle;
+
 }

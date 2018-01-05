@@ -25,75 +25,82 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class RadialAngleLine extends JavaScriptObjectContainer{
-	
+public final class RadialAngleLine extends JavaScriptObjectContainer {
+
 	private static final boolean DEFAULT_DISPLAY = true;
-	
+
 	private static final String DEFAULT_COLOR = "rgba(0,0,0,0.1)";
-	
+
 	private static final int DEFAULT_LINE_WIDTH = 1;
-	
+
 	/**
-	 * Name of fields of JavaScript object. 
+	 * Name of fields of JavaScript object.
 	 */
-	private enum Property implements Key {
+	private enum Property implements Key
+	{
 		display,
 		color,
 		lineWidth
 	}
-	
+
 	/**
 	 * Empty constructor to reduce visibility
 	 */
 	RadialAngleLine() {
 	}
-	
+
 	/**
 	 * If true, angle lines are shown
+	 * 
 	 * @param display if true, angle lines are shown
 	 */
-	public void setDisplay(boolean display){
-		  setValue(Property.display, display);
+	public void setDisplay(boolean display) {
+		setValue(Property.display, display);
 	}
 
 	/**
 	 * If true, angle lines are shown
+	 * 
 	 * @return if true, angle lines are shown. Default is true.
 	 */
-	public boolean isDisplay(){
-		  return getValue(Property.display, DEFAULT_DISPLAY);
+	public boolean isDisplay() {
+		return getValue(Property.display, DEFAULT_DISPLAY);
 	}
 
 	/**
 	 * Sets the color of angled lines.
+	 * 
 	 * @param color color of angled lines.
 	 */
-	public void setColor(String color){
-		  setValue(Property.color, color);
+	public void setColor(String color) {
+		setValue(Property.color, color);
 	}
 
 	/**
 	 * Returns the color of angled lines.
+	 * 
 	 * @return color of angled lines. Default is 'rgba(0, 0, 0, 0.1)'
 	 */
-	public String getColor(){
-		  return getValue(Property.color, DEFAULT_COLOR);
+	public String getColor() {
+		return getValue(Property.color, DEFAULT_COLOR);
 	}
 
 	/**
 	 * Sets the width of angled lines.
+	 * 
 	 * @param lineWidth width of angled lines.
 	 */
-	public void setLineWidth(int lineWidth){
-		  setValue(Property.lineWidth, lineWidth);
+	public void setLineWidth(int lineWidth) {
+		setValue(Property.lineWidth, lineWidth);
 	}
 
 	/**
 	 * Returns the width of angled lines.
+	 * 
 	 * @return width of angled lines. Default is 1.
 	 */
-	public int getLineWidth(){
-		  return getValue(Property.lineWidth, DEFAULT_LINE_WIDTH);
+	public int getLineWidth() {
+		return getValue(Property.lineWidth, DEFAULT_LINE_WIDTH);
 	}
 
 }

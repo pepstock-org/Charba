@@ -39,6 +39,7 @@ public abstract class MultiScalesOptions extends BaseOptions {
 	/**
 	 * Builds the object storing the chart instance.<br>
 	 * Sets also the scales object.
+	 * 
 	 * @param chart chart instance
 	 */
 	protected MultiScalesOptions(AbstractChart<?, ?> chart) {

@@ -52,8 +52,7 @@ public final class LegendLabels extends AbstractLabel {
 	/**
 	 * Builds the object storing the chart instance.
 	 * 
-	 * @param chart
-	 *            chart instance
+	 * @param chart chart instance
 	 */
 	LegendLabels(AbstractChart<?, ?> chart) {
 		super(chart);
@@ -67,8 +66,7 @@ public final class LegendLabels extends AbstractLabel {
 	}
 
 	/**
-	 * @param legendLabelsCallBack
-	 *            the legendCallBack to set
+	 * @param legendLabelsCallBack the legendCallBack to set
 	 */
 	public void setLabelsCallBack(LegendLabelsCallback legendLabelsCallBack) {
 		// checks if the callback is already set into java script object
@@ -87,8 +85,7 @@ public final class LegendLabels extends AbstractLabel {
 	}
 
 	/**
-	 * @param legendFilterHandler
-	 *            the legendFilterHandler to set
+	 * @param legendFilterHandler the legendFilterHandler to set
 	 */
 	public void setLegendFilterHandler(LegendFilterHandler filterHandler) {
 		// checks if the callback is already set into java script object
@@ -101,6 +98,7 @@ public final class LegendLabels extends AbstractLabel {
 
 	/**
 	 * Sets if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
+	 * 
 	 * @param usePointStyle if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 */
 	public void setUsePointStyle(boolean usePointStyle) {
@@ -109,6 +107,7 @@ public final class LegendLabels extends AbstractLabel {
 
 	/**
 	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
+	 * 
 	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case). Default is false.
 	 */
 	public boolean isUsePointStyle() {
@@ -117,6 +116,7 @@ public final class LegendLabels extends AbstractLabel {
 
 	/**
 	 * Sets the width of coloured box.
+	 * 
 	 * @param boxWidth width of coloured box.
 	 */
 	public void setBoxWidth(int boxWidth) {
@@ -125,6 +125,7 @@ public final class LegendLabels extends AbstractLabel {
 
 	/**
 	 * Returns the width of coloured box.
+	 * 
 	 * @return width of coloured box. Default is 40.
 	 */
 	public int getBoxWidth() {
@@ -132,7 +133,8 @@ public final class LegendLabels extends AbstractLabel {
 	}
 
 	/**
-	 * Called to generate legend items for each thing in the legend. Default implementation returns the text + styling for the color box. 
+	 * Called to generate legend items for each thing in the legend. Default implementation returns the text + styling for the color box.
+	 * 
 	 * @return array of legend items.
 	 */
 	protected LegendItem[] generateLegendLabels() {
@@ -154,6 +156,7 @@ public final class LegendLabels extends AbstractLabel {
 
 	/**
 	 * Called to filter legend items out of the legend. Receives 1 parameter, a Legend Item.
+	 * 
 	 * @param item legend item to check.
 	 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
 	 */

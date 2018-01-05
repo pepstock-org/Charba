@@ -36,6 +36,7 @@ public final class RemoveHandlerEvent extends GwtEvent<RemoveHandlerEventHandler
 
 	/**
 	 * Creates the event with the type of removed handler.
+	 * 
 	 * @param type the type of removed handler.
 	 */
 	public RemoveHandlerEvent(Type<? extends EventHandler> type) {
@@ -44,21 +45,26 @@ public final class RemoveHandlerEvent extends GwtEvent<RemoveHandlerEventHandler
 
 	/**
 	 * Returns the type of removed handler.
+	 * 
 	 * @return the type of removed handler.
 	 */
 	public Type<? extends EventHandler> getType() {
 		return type;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
 	 */
 	@Override
 	public Type<RemoveHandlerEventHandler> getAssociatedType() {
 		return TYPE;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
 	 */
 	@Override

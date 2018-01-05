@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.plugins;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Plugin;
@@ -25,25 +25,10 @@ import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JsObjectArrayList;
 import org.pepstock.charba.client.options.InvalidPluginIdException;
 
-import com.google.gwt.safehtml.shared.UriUtils;
-
 /**
  * 
  */
 public final class Plugins {
-	
-	private static final String INVALID_PLUGIN__ID_NULL = "Plugin id can not be null ";
-	
-	private static final String INVALID_PLUGIN__ID_FIRST_CHAR = "Plugin id can not start with a dot or an underscore ";
-
-	private static final String INVALID_PLUGIN__ID_URL_SAFE = "Plugin id can not contain any non-URL-safe characters ";
-	
-	private static final String INVALID_PLUGIN__ID_UPPERCASE = "Plugin id can not contain uppercase letters ";
-	
-	private static final char DOT = '.';
-	
-	private static final char UNDERSCORE = '.';
-
 	// chart instance
 	private final AbstractChart<?, ?> chart;
 	
@@ -54,25 +39,21 @@ public final class Plugins {
 	}
 
 	public void add(Plugin plugin) throws InvalidPluginIdException{
-		if (plugin.getId() == null){
-			throw new InvalidPluginIdException(buildMessage(plugin.getId(), INVALID_PLUGIN__ID_NULL));
-		} else if (plugin.getId().charAt(0) == DOT || plugin.getId().charAt(0) == UNDERSCORE){
-			throw new InvalidPluginIdException(buildMessage(plugin.getId(), INVALID_PLUGIN__ID_FIRST_CHAR));
-		} else if (!UriUtils.isSafeUri(plugin.getId())){
-			throw new InvalidPluginIdException(buildMessage(plugin.getId(), INVALID_PLUGIN__ID_URL_SAFE));
-		} else if (!plugin.getId().toLowerCase(Locale.getDefault()).equals(plugin.getId())){
-			throw new InvalidPluginIdException(buildMessage(plugin.getId(), INVALID_PLUGIN__ID_UPPERCASE));
-		}
+		PluginIdChecker.check(plugin.getId());
 		WrapperPlugin wPlugin = new WrapperPlugin(chart, plugin);	
 		plugins.add(wPlugin);
 	}
-
-	private String buildMessage(String pluginId, String message){
-		StringBuilder sb = new StringBuilder(message);
-		sb.append("[").append(pluginId).append("]");
-		return sb.toString();
-	}
 	
+	public void remove(String id) {
+		Iterator<WrapperPlugin> iter = plugins.iterator();
+		while(iter.hasNext()){
+			WrapperPlugin plugin = iter.next();
+			if (plugin.getId().equals(id)){
+				iter.remove();
+			}
+		}
+	}
+
 	public JsObjectArrayList<GenericJavaScriptObject> getArrayList(){
 		JsObjectArrayList<GenericJavaScriptObject> list = new JsObjectArrayList<GenericJavaScriptObject>();
 		for (WrapperPlugin plugin : plugins){

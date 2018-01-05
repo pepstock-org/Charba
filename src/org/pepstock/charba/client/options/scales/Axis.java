@@ -32,8 +32,7 @@ import org.pepstock.charba.client.items.AxisItem;
 /**
  * Axes are an integral part of a chart.<br>
  * They are used to determine how data maps to a pixel value on the chart.<br>
- * It contains a number of config callbacks that can be used to change
- * parameters in the scale at different points in the update process.
+ * It contains a number of config callbacks that can be used to change parameters in the scale at different points in the update process.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -86,8 +85,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * @param chart
-	 *            the chart to set
+	 * @param chart the chart to set
 	 */
 	public void setChart(AbstractChart<?, ?> chart) {
 		this.chart = chart;
@@ -103,8 +101,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	/**
 	 * Type of scale being employed.
 	 * 
-	 * @param type
-	 *            type of axis
+	 * @param type type of axis
 	 * @see org.pepstock.charba.client.enums.AxisType
 	 */
 	public void setType(AxisType type) {
@@ -122,12 +119,9 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * If set to false the axis is hidden from view. Overrides
-	 * gridLines.display, scaleLabel.display, and ticks.display.
+	 * If set to false the axis is hidden from view. Overrides gridLines.display, scaleLabel.display, and ticks.display.
 	 * 
-	 * @param display
-	 *            If set to false the axis is hidden from view. Overrides
-	 *            gridLines.display, scaleLabel.display, and ticks.display.
+	 * @param display If set to false the axis is hidden from view. Overrides gridLines.display, scaleLabel.display, and ticks.display.
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
@@ -136,27 +130,23 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	/**
 	 * Returns if axis is hidden.
 	 * 
-	 * @return <code>false</code> if axis is hidden, otherwise
-	 *         <code>true</code>.
+	 * @return <code>false</code> if axis is hidden, otherwise <code>true</code>.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, DEFAULT_DISPLAY);
 	}
 
 	/**
-	 * The weight used to sort the axis. Higher weights are further away from
-	 * the chart area.
+	 * The weight used to sort the axis. Higher weights are further away from the chart area.
 	 * 
-	 * @param weight
-	 *            weight of axis
+	 * @param weight weight of axis
 	 */
 	public void setWeight(int weight) {
 		setValue(Property.weight, weight);
 	}
 
 	/**
-	 * The weight used to sort the axis. Higher weights are further away from
-	 * the chart area.
+	 * The weight used to sort the axis. Higher weights are further away from the chart area.
 	 * 
 	 * @return weight of axis
 	 */
@@ -172,8 +162,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * @param axisUpdateCallback
-	 *            the axisUpdateCallback to set
+	 * @param axisUpdateCallback the axisUpdateCallback to set
 	 */
 	public void setUpdateCallback(AxisUpdateCallback axisUpdateCallback) {
 		// checks if callback has been already set
@@ -192,8 +181,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * @param dimensionsCallback
-	 *            the dimensionsCallback to set
+	 * @param dimensionsCallback the dimensionsCallback to set
 	 */
 	public void setDimensionsCallback(AxisDimensionsCallback dimensionsCallback) {
 		// checks if callback has been already set
@@ -212,8 +200,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * @param dataLimitsCallback
-	 *            the dataLimitsCallback to set
+	 * @param dataLimitsCallback the dataLimitsCallback to set
 	 */
 	public void setDataLimitsCallback(AxisDataLimitsCallback dataLimitsCallback) {
 		// checks if callback has been already set
@@ -232,8 +219,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * @param buildTicksCallback
-	 *            the buildTicksCallback to set
+	 * @param buildTicksCallback the buildTicksCallback to set
 	 */
 	public void setBuildTicksCallback(AxisBuildTicksCallback buildTicksCallback) {
 		// checks if callback has been already set
@@ -252,8 +238,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * @param tickToLabelConversionCallback
-	 *            the tickToLabelConversionCallback to set
+	 * @param tickToLabelConversionCallback the tickToLabelConversionCallback to set
 	 */
 	public void setTickToLabelConversionCallback(AxisTickToLabelConversionCallback tickToLabelConversionCallback) {
 		// checks if callback has been already set
@@ -272,8 +257,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * @param calculateTickRotationCallback
-	 *            the calculateTickRotationCallback to set
+	 * @param calculateTickRotationCallback the calculateTickRotationCallback to set
 	 */
 	public void setCalculateTickRotationCallback(AxisCalculateTickRotationCallback calculateTickRotationCallback) {
 		// checks if callback has been already set
@@ -292,8 +276,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * @param fitCallback
-	 *            the fitCallback to set
+	 * @param fitCallback the fitCallback to set
 	 */
 	public void setFitCallback(AxisFitCallback fitCallback) {
 		// checks if callback has been already set
@@ -307,8 +290,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	/**
 	 * Callback called before the update process starts.
 	 * 
-	 * @param item
-	 *            axis item got from java script
+	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	protected void onBeforeUpdate(AxisItem item) {
@@ -321,8 +303,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	/**
 	 * Callback that runs at the end of the update process.
 	 * 
-	 * @param item
-	 *            axis item got from java script
+	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	protected void onAfterUpdate(AxisItem item) {
@@ -335,8 +316,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	/**
 	 * Callback that runs before dimensions are set.
 	 * 
-	 * @param item
-	 *            axis item got from java script
+	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	protected void onBeforeSetDimensions(AxisItem item) {
@@ -349,8 +329,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	/**
 	 * Callback that runs after dimensions are set.
 	 * 
-	 * @param item
-	 *            axis item got from java script
+	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	protected void onAfterSetDimensions(AxisItem item) {
@@ -363,8 +342,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	/**
 	 * Callback that runs before data limits are determined.
 	 * 
-	 * @param item
-	 *            axis item got from java script
+	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	protected void onBeforeDataLimits(AxisItem item) {
@@ -378,8 +356,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	/**
 	 * Callback that runs after data limits are determined.
 	 * 
-	 * @param item
-	 *            axis item got from java script
+	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	protected void onAfterDataLimits(AxisItem item) {
@@ -393,8 +370,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	/**
 	 * Callback that runs before ticks are created.
 	 * 
-	 * @param item
-	 *            axis item got from java script
+	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	protected void onBeforeBuildTicks(AxisItem item) {
@@ -407,8 +383,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	/**
 	 * Callback that runs after ticks are created. Useful for filtering ticks.
 	 * 
-	 * @param item
-	 *            axis item got from java script
+	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	protected void onAfterBuildTicks(AxisItem item) {
@@ -421,8 +396,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	/**
 	 * Callback that runs before ticks are converted into strings.
 	 * 
-	 * @param item
-	 *            axis item got from java script
+	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	protected void onBeforeTickToLabelConversion(AxisItem item) {
@@ -435,8 +409,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	/**
 	 * Callback that runs after ticks are converted into strings.
 	 * 
-	 * @param item
-	 *            axis item got from java script
+	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	protected void onAfterTickToLabelConversion(AxisItem item) {
@@ -449,8 +422,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	/**
 	 * Callback that runs before tick rotation is determined.
 	 * 
-	 * @param item
-	 *            axis item got from java script
+	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	protected void onBeforeCalculateTickRotation(AxisItem item) {
@@ -463,8 +435,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	/**
 	 * Callback that runs after tick rotation is determined.
 	 * 
-	 * @param item
-	 *            axis item got from java script
+	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	protected void onAfterCalculateTickRotation(AxisItem item) {
@@ -477,8 +448,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	/**
 	 * Callback that runs before the scale fits to the canvas.
 	 * 
-	 * @param item
-	 *            axis item got from java script
+	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	protected void onBeforeFit(AxisItem item) {
@@ -491,8 +461,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	/**
 	 * Callback that runs after the scale fits to the canvas.
 	 * 
-	 * @param item
-	 *            axis item got from java script
+	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	protected void onAfterFit(AxisItem item) {

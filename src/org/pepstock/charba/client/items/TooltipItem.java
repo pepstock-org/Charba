@@ -31,75 +31,82 @@ import org.pepstock.charba.client.commons.Key;
  * @see org.pepstock.charba.client.callbacks.TooltipTitleCallback
  *
  */
-public final class TooltipItem  extends BaseItem {
-    
-	/**
-	 * Name of fields of JavaScript object. 
-	 */
-    private enum Property implements Key{
-    	xLabel,
-    	yLabel,
-    	datasetIndex,
-    	index,
-    	x,
-    	y
-    }
+public final class TooltipItem extends BaseItem {
 
-    /** 
-     * Needed for GWt injection
-     */
-    protected TooltipItem() {
-    	// do nothings
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		xLabel,
+		yLabel,
+		datasetIndex,
+		index,
+		x,
+		y
 	}
 
-    /**
-     * Returns the X location of label.
-     * @return the X location of label.
-     */
+	/**
+	 * Needed for GWt injection
+	 */
+	protected TooltipItem() {
+		// do nothings
+	}
+
+	/**
+	 * Returns the X location of label.
+	 * 
+	 * @return the X location of label.
+	 */
 	public final String getXLabel() {
-        return getString(Property.xLabel.name());
-    }
+		return getString(Property.xLabel.name());
+	}
 
-    /**
-     * Returns the Y location of label.
-     * @return the Y location of label.
-     */
+	/**
+	 * Returns the Y location of label.
+	 * 
+	 * @return the Y location of label.
+	 */
 	public final String getYLabel() {
-        return getString(Property.yLabel.name());
-    }
+		return getString(Property.yLabel.name());
+	}
 
-    /**
-     * Returns the dataset index of the chart
-     * @return the dataset index of the chart
-     * @see org.pepstock.charba.client.data.Data#getDatasets()
-     */
+	/**
+	 * Returns the dataset index of the chart
+	 * 
+	 * @return the dataset index of the chart
+	 * @see org.pepstock.charba.client.data.Data#getDatasets()
+	 */
 	public final int getDatasetIndex() {
-        return getInt(Property.datasetIndex.name());
-    }
+		return getInt(Property.datasetIndex.name());
+	}
 
 	/**
 	 * Returns the index of the data inside the dataset.
+	 * 
 	 * @return the index of the data inside the dataset.
 	 * @see org.pepstock.charba.client.data.Dataset#getData()
 	 * @see org.pepstock.charba.client.data.Data#getLabels()
 	 */
 	public final int getIndex() {
-        return getInt(Property.index.name());
-    }
+		return getInt(Property.index.name());
+	}
 
-    /**
-     * Returns the X location of tooltip item.
-     * @return the X location of tooltip item.
-     */
+	/**
+	 * Returns the X location of tooltip item.
+	 * 
+	 * @return the X location of tooltip item.
+	 */
 	public final int getX() {
-        return getInt(Property.x.name());
-    }
+		return getInt(Property.x.name());
+	}
 
-    /**
-     * Returns the Y location of tooltip item.
-     * @return the Y location of tooltip item.
-     */
+	/**
+	 * Returns the Y location of tooltip item.
+	 * 
+	 * @return the Y location of tooltip item.
+	 */
 	public final int getY() {
-        return getInt(Property.y.name());
-    }
+		return getInt(Property.y.name());
+	}
 }

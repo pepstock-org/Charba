@@ -19,44 +19,48 @@ import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event position.<br>
+ * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event
+ * position.<br>
  * The elements are mapped by this object.<br>
- * This is the CHART.JS item with all needed info about a selected dataset. This object has been created and passed to event handler or 
- * callbacks to apply own logic.
+ * This is the CHART.JS item with all needed info about a selected dataset. This object has been created and passed to event
+ * handler or callbacks to apply own logic.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DatasetMetaItem  extends GenericJavaScriptObject {
- 
-    /** 
-     * Needed for GWt injection
-     */
-    private enum Property implements Key{
-    	_datasetIndex,
-    	_index,
-    	_view,
-    	hidden
-    }
-    
-    /** 
-     * Needed for GWt injection
-     */
-    protected DatasetMetaItem() {
-    	// do nothing
-    }
-    
-    /**
-     * Returns the dataset index of the chart
-     * @return the dataset index of the chart
-     * @see org.pepstock.charba.client.data.Data#getDatasets()
-     */
+public final class DatasetMetaItem extends GenericJavaScriptObject {
+
+	/**
+	 * Needed for GWt injection
+	 */
+	private enum Property implements Key
+	{
+		_datasetIndex,
+		_index,
+		_view,
+		hidden
+	}
+
+	/**
+	 * Needed for GWt injection
+	 */
+	protected DatasetMetaItem() {
+		// do nothing
+	}
+
+	/**
+	 * Returns the dataset index of the chart
+	 * 
+	 * @return the dataset index of the chart
+	 * @see org.pepstock.charba.client.data.Data#getDatasets()
+	 */
 	public final int getDatasetIndex() {
 		return getInt(Property._datasetIndex.name());
 	}
 
 	/**
 	 * Returns the index of the data inside the dataset.
+	 * 
 	 * @return the index of the data inside the dataset.
 	 * @see org.pepstock.charba.client.data.Dataset#getData()
 	 * @see org.pepstock.charba.client.data.Data#getLabels()
@@ -67,6 +71,7 @@ public final class DatasetMetaItem  extends GenericJavaScriptObject {
 
 	/**
 	 * Returns if the dataset is hidden.
+	 * 
 	 * @return <code>true</code> if the dataset is hidden, otherwise <code>false</code>.
 	 */
 	public final boolean isHidden() {
@@ -75,6 +80,7 @@ public final class DatasetMetaItem  extends GenericJavaScriptObject {
 
 	/**
 	 * Sets if the dataset must be hidden.
+	 * 
 	 * @param hidden <code>true</code> if the dataset must be hidden, otherwise <code>false</code>.
 	 */
 	public final void setHidden(boolean hidden) {
@@ -82,11 +88,12 @@ public final class DatasetMetaItem  extends GenericJavaScriptObject {
 	}
 
 	/**
-	 * Returns all view information about the dataset. 
+	 * Returns all view information about the dataset.
+	 * 
 	 * @return all view information about the dataset.
 	 * @see org.pepstock.charba.client.items.DatasetMetaViewItem
 	 */
-	public final DatasetMetaViewItem getView(){
+	public final DatasetMetaViewItem getView() {
 		return (DatasetMetaViewItem) getJavaScriptObject(Property._view.name());
 	}
 }

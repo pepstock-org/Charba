@@ -34,25 +34,27 @@ public final class ChartClickEvent extends AbstractEvent<ChartClickEventHandler>
 	 * Event type
 	 */
 	public static final Type<ChartClickEventHandler> TYPE = new Type<ChartClickEventHandler>();
-	
+
 	// a list of items with dataset metadata related to the click
 	private final List<DatasetMetaItem> items;
 
 	/**
 	 * Creates the event with dataset metadata item related to the click
+	 * 
 	 * @param nativeEvent native event of this custom event
 	 * @param item dataset metadata item related to the click
 	 * @see org.pepstock.charba.client.items.DatasetMetaItem
 	 */
 	public ChartClickEvent(NativeEvent nativeEvent, DatasetMetaItem item) {
-		this(nativeEvent, ArrayListHelper.build(new DatasetMetaItem[]{item}));
+		this(nativeEvent, ArrayListHelper.build(new DatasetMetaItem[] { item }));
 	}
 
 	/**
 	 * Creates the event with a list of items with dataset metadata related to the click
+	 * 
 	 * @param nativeEvent native event of this custom event
 	 * @param items a list of items with dataset metadata related to the click
-	 * @see org.pepstock.charba.client.items.DatasetMetaItem 
+	 * @see org.pepstock.charba.client.items.DatasetMetaItem
 	 */
 	public ChartClickEvent(NativeEvent nativeEvent, List<DatasetMetaItem> items) {
 		super(nativeEvent);
@@ -61,6 +63,7 @@ public final class ChartClickEvent extends AbstractEvent<ChartClickEventHandler>
 
 	/**
 	 * Returns a list of items with dataset metadata related to the click
+	 * 
 	 * @return a list of items with dataset metadata related to the click
 	 * @see org.pepstock.charba.client.items.DatasetMetaItem
 	 */
@@ -68,15 +71,19 @@ public final class ChartClickEvent extends AbstractEvent<ChartClickEventHandler>
 		return items;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
 	 */
 	@Override
 	public Type<ChartClickEventHandler> getAssociatedType() {
 		return TYPE;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
 	 */
 	@Override

@@ -25,73 +25,79 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.callbacks.TooltipLabelColor
  */
-public final class TooltipLabelColor  extends JavaScriptObjectContainer {
-	
+public final class TooltipLabelColor extends JavaScriptObjectContainer {
+
 	// default background color
 	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.8)";
 	// default border color
 	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0)";
-    
+
 	/**
 	 * List of fields name of JavaScript object
 	 */
-    private enum Property implements Key{
-    	backgroundColor,
-    	borderColor
-    }
+	private enum Property implements Key
+	{
+		backgroundColor,
+		borderColor
+	}
 
-    /** 
-     * Needed for GWt injection.
-     */
-    public TooltipLabelColor() {
-    	// do nothing
-    }
+	/**
+	 * Needed for GWt injection.
+	 */
+	public TooltipLabelColor() {
+		// do nothing
+	}
 
-    /**
-     * Returns the background color 
-     * @return the background color 
-     */
+	/**
+	 * Returns the background color
+	 * 
+	 * @return the background color
+	 */
 	public final String getBackgroundColor() {
-        return getValue(Property.backgroundColor, DEFAULT_BACKGROUND_COLOR);
-    }
-	
+		return getValue(Property.backgroundColor, DEFAULT_BACKGROUND_COLOR);
+	}
+
 	/**
 	 * Sets background color
+	 * 
 	 * @param backgroundColor background color
 	 */
 	public void setBackgroundColor(String backgroundColor) {
-        setValue(Property.backgroundColor, backgroundColor);
-    }
+		setValue(Property.backgroundColor, backgroundColor);
+	}
 
 	/**
-     * Returns the border color 
-     * @return the border color 
-     */
+	 * Returns the border color
+	 * 
+	 * @return the border color
+	 */
 	public final String getBorderColor() {
-        return getValue(Property.borderColor, DEFAULT_BORDER_COLOR);
-    }
+		return getValue(Property.borderColor, DEFAULT_BORDER_COLOR);
+	}
 
 	/**
 	 * Sets border color
+	 * 
 	 * @param boderColor border color
 	 */
 	public void setBorderColor(String borderColor) {
 		setValue(Property.borderColor, borderColor);
-    }
-	
+	}
+
 	/**
 	 * Returns the JavaScript object with properties
+	 * 
 	 * @return the JavaScript object with properties
 	 * @see org.pepstock.charba.client.commons.GenericJavaScriptObject
 	 */
-	public final GenericJavaScriptObject getObject(){
+	public final GenericJavaScriptObject getObject() {
 		return getJavaScriptObject();
 	}
 
 	/**
 	 * String representation of this object
 	 */
-	public String toString()  {
+	public String toString() {
 		return "TooltipLabelColor [getBackgroundColor()=" + getBackgroundColor() + ", getBorderColor()=" + getBorderColor() + "]";
 	}
 }

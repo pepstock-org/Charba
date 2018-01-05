@@ -25,8 +25,9 @@ public interface ChartClickEventHandler extends ChartEventHandler {
 
 	/**
 	 * Invoked when the user clicks on the chart.
+	 * 
 	 * @param event chart click event
 	 */
 	void onClick(ChartClickEvent event);
-	
+
 }

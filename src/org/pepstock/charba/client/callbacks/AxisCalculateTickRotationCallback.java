@@ -29,20 +29,22 @@ public interface AxisCalculateTickRotationCallback {
 
 	/**
 	 * Callback that runs before tick rotation is determined.
+	 * 
 	 * @param chart chart instance
-	 * @param item axis item instance 
+	 * @param item axis item instance
 	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem 
+	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	void onBeforeCalculateTickRotation(AbstractChart<?, ?> chart, AxisItem item);
 
 	/**
 	 * Callback that runs after tick rotation is determined.
+	 * 
 	 * @param chart chart instance
-	 * @param item axis item instance 
+	 * @param item axis item instance
 	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem 
+	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	void onAfterCalculateTickRotation(AbstractChart<?, ?> chart, AxisItem item);
-	
+
 }

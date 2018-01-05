@@ -18,8 +18,8 @@ package org.pepstock.charba.client.events;
 import com.google.gwt.event.shared.EventHandler;
 
 /**
- * Common interface for all chart event handlers, used to recognize when 
- * the chart event handlers (and only the chart ones) have been activated.
+ * Common interface for all chart event handlers, used to recognize when the chart event handlers (and only the chart ones) have
+ * been activated.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -19,8 +19,7 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Specific options for LINE chart. It contains all properties for this kind of
- * chart.
+ * Specific options for LINE chart. It contains all properties for this kind of chart.
  *
  * @author Andrea "Stock" Stocchero
  *
@@ -42,6 +41,7 @@ public class LineOptions extends MultiScalesOptions {
 
 	/**
 	 * Builds the object storing the chart instance.
+	 * 
 	 * @param chart chart instance
 	 */
 	public LineOptions(AbstractChart<?, ?> chart) {
@@ -50,6 +50,7 @@ public class LineOptions extends MultiScalesOptions {
 
 	/**
 	 * If false, the lines between points are not drawn.
+	 * 
 	 * @param showLine If false, the lines between points are not drawn.
 	 */
 	public void setShowLine(boolean showLine) {
@@ -58,6 +59,7 @@ public class LineOptions extends MultiScalesOptions {
 
 	/**
 	 * If false, the lines between points are not drawn.
+	 * 
 	 * @return If false, the lines between points are not drawn.. Default is true.
 	 */
 	public boolean isShowLine() {
@@ -66,6 +68,7 @@ public class LineOptions extends MultiScalesOptions {
 
 	/**
 	 * If false, NaN data causes a break in the line.
+	 * 
 	 * @param spanGaps If false, NaN data causes a break in the line.
 	 */
 	public void setSpanGaps(boolean spanGaps) {
@@ -74,6 +77,7 @@ public class LineOptions extends MultiScalesOptions {
 
 	/**
 	 * If false, NaN data causes a break in the line.
+	 * 
 	 * @return If false, NaN data causes a break in the line. Default is false.
 	 */
 	public boolean isSpanGaps() {

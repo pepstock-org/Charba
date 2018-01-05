@@ -25,46 +25,50 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.items.TooltipModel
  */
-public final class TooltipBodyItem  extends BaseItem {
-    
-	/**
-	 * Name of fields of JavaScript object. 
-	 */
-    private enum Property implements Key{
-    	before,
-    	lines,
-    	after
-    }
+public final class TooltipBodyItem extends BaseItem {
 
-    /** 
-     * Needed for GWt injection
-     */
-    protected TooltipBodyItem() {
-    	// do nothing
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		before,
+		lines,
+		after
 	}
-    
-    /**
-     * Returns text to render before the body section.
-     * @return text to render before the body section.
-     */
+
+	/**
+	 * Needed for GWt injection
+	 */
+	protected TooltipBodyItem() {
+		// do nothing
+	}
+
+	/**
+	 * Returns text to render before the body section.
+	 * 
+	 * @return text to render before the body section.
+	 */
 	public final List<String> getBefore() {
-        return getStringArray(Property.before.name());
-    }
+		return getStringArray(Property.before.name());
+	}
 
 	/**
 	 * Returns all lines of body section.
+	 * 
 	 * @return all lines of body section.
 	 */
 	public final List<String> getLines() {
-        return getStringArray(Property.lines.name());
-    }
+		return getStringArray(Property.lines.name());
+	}
 
 	/**
 	 * Returns text to render after the body section
+	 * 
 	 * @return text to render after the body section
 	 */
 	public final List<String> getAfter() {
-        return getStringArray(Property.after.name());
-    }
+		return getStringArray(Property.after.name());
+	}
 
 }

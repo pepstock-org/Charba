@@ -25,16 +25,17 @@ import com.google.gwt.resources.client.TextResource;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface Resources extends ClientBundle{
-	
+public interface Resources extends ClientBundle {
+
 	// static reference of this resource
 	public static final Resources INSTANCE = GWT.create(Resources.class);
-	
+
 	/**
 	 * Contains text representation of native chart.js code
+	 * 
 	 * @return chart.js code
 	 */
 	@Source("js/chart.min.js")
 	TextResource chartJsSource();
-	
+
 }

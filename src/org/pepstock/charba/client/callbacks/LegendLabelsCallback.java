@@ -19,7 +19,7 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.items.LegendItem;
 
 /**
- * Generates legend items for each thing in the legend. 
+ * Generates legend items for each thing in the legend.
  * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.options.LegendLabels
@@ -28,11 +28,12 @@ public interface LegendLabelsCallback {
 
 	/**
 	 * Generates legend items for each thing in the legend. Default implementation returns the text + styling for the color box.
+	 * 
 	 * @param chart chart instance
-	 * @return an array of legend items. if <code>null</code>, uses the default implementation 
+	 * @return an array of legend items. if <code>null</code>, uses the default implementation
 	 * @see org.pepstock.charba.client.AbstractChart
 	 * @see org.pepstock.charba.client.items.LegendItem
 	 */
 	LegendItem[] generateLegendLabels(AbstractChart<?, ?> chart);
-	
+
 }

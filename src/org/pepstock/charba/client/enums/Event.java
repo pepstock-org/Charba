@@ -23,12 +23,13 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum Event implements Key {
-	
+public enum Event implements Key
+{
+
 	/**
 	 * The user moves the mouse over an element
 	 */
-	mousemove, 
+	mousemove,
 	/**
 	 * The user moves the mouse away from an element
 	 */
@@ -36,18 +37,18 @@ public enum Event implements Key {
 	/**
 	 * The user clicks an element
 	 */
-	click, 
+	click,
 	/**
 	 * The user touches a point is placed on the touch surface.
 	 */
-	touchstart, 
+	touchstart,
 	/**
 	 * The user touches a point is moved along the touch surface.
 	 */
-	touchmove, 
+	touchmove,
 	/**
 	 * The user touches a point is removed from the touch surface.
 	 */
 	touchend;
-	
+
 }

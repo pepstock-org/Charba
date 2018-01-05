@@ -30,16 +30,17 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Title extends AbstractLabel{
-	
+public final class Title extends AbstractLabel {
+
 	private static final boolean DEFAULT_DISPLAY = false;
 	// flag to check if a multiple line title has been set
 	private boolean isTextArray = false;
-	
+
 	/**
 	 * Name of fields of JavaScript object.
 	 */
-	private enum Property implements Key {
+	private enum Property implements Key
+	{
 		display,
 		fontStyle,
 		position,
@@ -55,7 +56,9 @@ public final class Title extends AbstractLabel{
 		super(chart);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.AbstractLabel#getFontStyle()
 	 */
 	@Override
@@ -65,6 +68,7 @@ public final class Title extends AbstractLabel{
 
 	/**
 	 * Sets if the title is shown.
+	 * 
 	 * @param display if the title is shown.
 	 */
 	public void setDisplay(boolean display) {
@@ -73,52 +77,58 @@ public final class Title extends AbstractLabel{
 
 	/**
 	 * Returns if the title is shown.
+	 * 
 	 * @return if the title is shown. Default is true.
 	 */
-	public boolean isDisplay(){
+	public boolean isDisplay() {
 		return getValue(Property.display, DEFAULT_DISPLAY);
 	}
 
 	/**
 	 * Sets the title text to display. If specified as an array, text is rendered on multiple lines.
+	 * 
 	 * @param text the title text to display. If specified as an array, text is rendered on multiple lines.
 	 */
 	public void setText(String... text) {
 		setText(ArrayListHelper.build(text));
 	}
-	
+
 	/**
 	 * Sets the title text to display as an array.
+	 * 
 	 * @param text the title text to display as an array.
 	 */
 	private void setText(JsStringArrayList text) {
 		isTextArray = checkAndSetStringValues(Property.text, text);
 	}
-	
+
 	/**
 	 * Returns the title text to display, as a list of strings.
+	 * 
 	 * @return a list of strings
 	 */
-	public List<String> getText(){
+	public List<String> getText() {
 		return checkAndGetStringValues(Property.text, isTextArray);
 	}
 
 	/**
 	 * Sets the position of title.
+	 * 
 	 * @param position the position of title.
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
-	public void setPosition(Position position){
+	public void setPosition(Position position) {
 		setValue(Property.position, position);
 	}
 
 	/**
 	 * Returns the position of title.
+	 * 
 	 * @return the position of title. Default is {@link org.pepstock.charba.client.enums.Position#top}.
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
-	public Position getPosition(){
+	public Position getPosition() {
 		return getValue(Property.position, Position.class, Position.top);
-	}    
+	}
 
 }

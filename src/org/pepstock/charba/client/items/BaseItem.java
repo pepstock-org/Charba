@@ -25,36 +25,37 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class BaseItem  extends GenericJavaScriptObject {
-    
-    /** 
-     * Needed for GWt injection
-     */
-    protected BaseItem() {
-    	// do nothing
-    }
-   
-    /**
-     * Returns a value (key) into embedded JavaScript object at specific property.
-     * @param key key of the property of JavaScript object.
-     * @param clazz class of object to get all enumeration values
-     * @param defaultValue default value if the property is missing
-     * @return value of the property
-     * @see org.pepstock.charba.client.commons.Key
-     */
-    protected final <T extends Key> T getValue(Key key, Class<T> clazz, T defaultValue){
-    	// checks if the property exists
-    	if (!contains(key.name())){
-    		// if no, returns the default value
-    		return defaultValue;
-    	}
-    	// gets the string value
-    	String value = getString(key.name());
-		if (value != null){
+public abstract class BaseItem extends GenericJavaScriptObject {
+
+	/**
+	 * Needed for GWt injection
+	 */
+	protected BaseItem() {
+		// do nothing
+	}
+
+	/**
+	 * Returns a value (key) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param clazz class of object to get all enumeration values
+	 * @param defaultValue default value if the property is missing
+	 * @return value of the property
+	 * @see org.pepstock.charba.client.commons.Key
+	 */
+	protected final <T extends Key> T getValue(Key key, Class<T> clazz, T defaultValue) {
+		// checks if the property exists
+		if (!contains(key.name())) {
+			// if no, returns the default value
+			return defaultValue;
+		}
+		// gets the string value
+		String value = getString(key.name());
+		if (value != null) {
 			// scans all EnumValue array
-			for (T enumValue : clazz.getEnumConstants()){
+			for (T enumValue : clazz.getEnumConstants()) {
 				// checks if Enum value name is equals to value
-				if (enumValue.name().equalsIgnoreCase(value)){
+				if (enumValue.name().equalsIgnoreCase(value)) {
 					// returns EnumValue
 					return enumValue;
 				}
@@ -63,6 +64,6 @@ public abstract class BaseItem  extends GenericJavaScriptObject {
 		// if here, means the value is wrong into java script object
 		// returns the default value
 		return defaultValue;
-    }
-    
+	}
+
 }

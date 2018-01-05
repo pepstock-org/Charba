@@ -28,20 +28,22 @@ public interface AxisBuildTicksCallback {
 
 	/**
 	 * Callback that runs before ticks are created.
+	 * 
 	 * @param chart chart instance
-	 * @param item axis item instance 
+	 * @param item axis item instance
 	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem 
+	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	void onBeforeBuildTicks(AbstractChart<?, ?> chart, AxisItem item);
-	
+
 	/**
 	 * Callback that runs after ticks are created. Useful for filtering ticks.
+	 * 
 	 * @param chart chart instance
-	 * @param item axis item instance 
+	 * @param item axis item instance
 	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem 
+	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	void onAfterBuildTicks(AbstractChart<?, ?> chart, AxisItem item);
-	
+
 }

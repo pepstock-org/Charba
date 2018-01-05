@@ -19,8 +19,9 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.items.TooltipModel;
 
 /**
- * Custom tooltips allow you to hook into the tooltip rendering process so that you can render the tooltip in your own custom way.<br>
- * Generally this is used to create an HTML tooltip instead of an on canvas one. 
+ * Custom tooltips allow you to hook into the tooltip rendering process so that you can render the tooltip in your own custom
+ * way.<br>
+ * Generally this is used to create an HTML tooltip instead of an on canvas one.
  * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.options.Tooltips
@@ -28,12 +29,14 @@ import org.pepstock.charba.client.items.TooltipModel;
 public interface TooltipCustomCallback {
 
 	/**
-	 * Custom tooltips allow you to hook into the tooltip rendering process so that you can render the tooltip in your own custom way.
+	 * Custom tooltips allow you to hook into the tooltip rendering process so that you can render the tooltip in your own
+	 * custom way.
+	 * 
 	 * @param chart chart instance
 	 * @param model all info about tooltip to create own HTML tooltip.
 	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.TooltipModel 
+	 * @see org.pepstock.charba.client.items.TooltipModel
 	 */
 	void onCustom(AbstractChart<?, ?> chart, TooltipModel model);
-	
+
 }

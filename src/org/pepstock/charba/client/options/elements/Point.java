@@ -23,13 +23,14 @@ import org.pepstock.charba.client.enums.PointStyle;
  * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the same way.<br>
  * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
  * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a dataset.
+ * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.LineChart
  * @see org.pepstock.charba.client.BubbleChart
  */
-public class Point extends Arc{
+public class Point extends Arc {
 
-	/// default radius 
+	/// default radius
 	private static final int DEFAULT_RADIUS = 3;
 	// default background color
 	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
@@ -43,19 +44,22 @@ public class Point extends Arc{
 	private static final int DEFAULT_HOVER_RADIUS = 4;
 	// default hover border width
 	private static final int DEFAULT_HOVER_BORDER_WIDTH = 1;
-	
+
 	/**
-	 * Name of fields of JavaScript object. 
+	 * Name of fields of JavaScript object.
 	 */
-	enum Property implements Key {
+	enum Property implements Key
+	{
 		radius,
 		pointStyle,
 		hitRadius,
 		hoverRadius,
 		hoverBorderWidth
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.elements.Arc#getDefaultBackgroundColor()
 	 */
 	@Override
@@ -63,7 +67,9 @@ public class Point extends Arc{
 		return DEFAULT_BACKGROUND_COLOR;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.elements.Arc#getDefaultBorderWidth()
 	 */
 	@Override
@@ -71,16 +77,19 @@ public class Point extends Arc{
 		return DEFAULT_BORDER_WIDTH;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.elements.Arc#getDefaultBorderColor()
 	 */
 	@Override
 	protected String getDefaultBorderColor() {
 		return DEFAULT_BORDER_COLOR;
 	}
-	
+
 	/**
 	 * Sets the radius of the point shape. If set to 0, the point is not rendered.
+	 * 
 	 * @param pointRadius array of the radius of the point shape.
 	 */
 	public void setRadius(int radius) {
@@ -89,6 +98,7 @@ public class Point extends Arc{
 
 	/**
 	 * Returns the radius of the point when hovered.
+	 * 
 	 * @return list of the radius of the point when hovered.
 	 */
 	public int getRadius() {
@@ -97,6 +107,7 @@ public class Point extends Arc{
 
 	/**
 	 * Sets the style of the point.
+	 * 
 	 * @param pointStyle array of the style of the point.
 	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
@@ -106,6 +117,7 @@ public class Point extends Arc{
 
 	/**
 	 * Returns the style of the point.
+	 * 
 	 * @return the style of the point. Default is <code>PointStyle.circle</code>
 	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
@@ -115,6 +127,7 @@ public class Point extends Arc{
 
 	/**
 	 * Sets the pixel size of the non-displayed point that reacts to mouse events.
+	 * 
 	 * @param hitRadius the pixel size of the non-displayed point.
 	 */
 	public void setHitRadius(int hitRadius) {
@@ -123,6 +136,7 @@ public class Point extends Arc{
 
 	/**
 	 * Returns the pixel size of the non-displayed point that reacts to mouse events.
+	 * 
 	 * @return the pixel size of the non-displayed point.
 	 */
 	public int getHitRadius() {
@@ -131,6 +145,7 @@ public class Point extends Arc{
 
 	/**
 	 * Sets the radius of the point when hovered.
+	 * 
 	 * @param hoverRadius the radius of the point when hovered.
 	 */
 	public void setHoverRadius(int hoverRadius) {
@@ -139,6 +154,7 @@ public class Point extends Arc{
 
 	/**
 	 * Returns the radius of the point when hovered.
+	 * 
 	 * @return the radius of the point when hovered.
 	 */
 	public int getHoverRadius() {
@@ -147,7 +163,8 @@ public class Point extends Arc{
 
 	/**
 	 * Sets the border width of point when hovered.
-	 * @param hoverBorderWidth  the border width of point when hovered.
+	 * 
+	 * @param hoverBorderWidth the border width of point when hovered.
 	 */
 	public void setHoverBorderWidth(int hoverBorderWidth) {
 		setValue(Property.hoverBorderWidth, hoverBorderWidth);
@@ -155,10 +172,11 @@ public class Point extends Arc{
 
 	/**
 	 * Returns the border width of point when hovered.
+	 * 
 	 * @return the border width of point when hovered.
 	 */
 	public int getHoverBorderWidth() {
 		return getValue(Property.hoverBorderWidth, DEFAULT_HOVER_BORDER_WIDTH);
 	}
-    
+
 }

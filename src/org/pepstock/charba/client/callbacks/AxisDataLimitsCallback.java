@@ -28,20 +28,22 @@ public interface AxisDataLimitsCallback {
 
 	/**
 	 * Callback that runs before data limits are determined.
+	 * 
 	 * @param chart chart instance
-	 * @param item axis item instance 
+	 * @param item axis item instance
 	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem 
+	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	void onBeforeDataLimits(AbstractChart<?, ?> chart, AxisItem item);
-	
+
 	/**
 	 * Callback that runs after data limits are determined.
+	 * 
 	 * @param chart chart instance
-	 * @param item axis item instance 
+	 * @param item axis item instance
 	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem 
+	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
 	void onAfterDataLimits(AbstractChart<?, ?> chart, AxisItem item);
-	
+
 }

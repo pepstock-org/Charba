@@ -19,8 +19,7 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * pecific options for POLAR AREA chart. It contains all properties for this
- * kind of chart.
+ * pecific options for POLAR AREA chart. It contains all properties for this kind of chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -41,8 +40,7 @@ public final class PolarAreaOptions extends SingleScaleOptions {
 	 * Builds the object storing the chart instance.<br>
 	 * Sets also the internal parts of options.
 	 * 
-	 * @param chart
-	 *            chart instance
+	 * @param chart chart instance
 	 */
 	public PolarAreaOptions(AbstractChart<?, ?> chart) {
 		super(chart);
@@ -54,8 +52,7 @@ public final class PolarAreaOptions extends SingleScaleOptions {
 	/**
 	 * Sets the starting angle to draw arcs for the first item in a dataset.
 	 * 
-	 * @param startAngle
-	 *            starting angle to draw arcs for the first item in a dataset.
+	 * @param startAngle starting angle to draw arcs for the first item in a dataset.
 	 */
 	public void setStartAngle(double startAngle) {
 		setValue(Property.startAngle, startAngle);
@@ -64,8 +61,7 @@ public final class PolarAreaOptions extends SingleScaleOptions {
 	/**
 	 * Returns the starting angle to draw arcs for the first item in a dataset.
 	 * 
-	 * @return starting angle to draw arcs for the first item in a dataset.
-	 *         Default is <code>-0.5 * Math.PI</code>.
+	 * @return starting angle to draw arcs for the first item in a dataset. Default is <code>-0.5 * Math.PI</code>.
 	 */
 	public double getStartAngle() {
 		return getValue(Property.startAngle, DEFAULT_START_ANGLE);
