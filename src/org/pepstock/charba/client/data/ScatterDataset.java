@@ -36,16 +36,16 @@ public final class ScatterDataset extends LineDataset {
 		// scatter is always no fill
 		super.setFill(Fill.nofill);
 		// scatter has never show lines
-		super.setShowLine(false);
+		super.setShowLines(false);
 	}
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.data.LineDataset#setShowLine(boolean)
 	 */
 	@Override
-	public void setShowLine(boolean showLine) {
+	public void setShowLines(boolean showLine) {
 		// force always to false
-		super.setShowLine(false);
+		super.setShowLines(false);
 	}
 
 	/* (non-Javadoc)

@@ -36,7 +36,7 @@ public class LineDataset extends LiningDataset{
 	// default value for cubic interpolation mode
 	private static final String DEFAULT_CUBIC_INTERPOLATION_MODE = "default";
 	// default value for show line
-	private static final boolean DEFAULT_SHOW_LINE = true;
+	private static final boolean DEFAULT_SHOW_LINES = true;
 	// default value for span gaps
 	private static final boolean DEFAULT_SPAN_GAPS = false;
 	
@@ -50,7 +50,7 @@ public class LineDataset extends LiningDataset{
 		xAxisID,
 		yAxisID,
 		cubicInterpolationMode,
-		showLine,
+		showLines,
 		spanGaps,
 		steppedLine,
 		data
@@ -118,16 +118,16 @@ public class LineDataset extends LiningDataset{
 	 * Sets  if the line is not drawn for this dataset.
 	 * @param showLine <code>false</code> if the line is not drawn for this dataset.
 	 */
-	public void setShowLine(boolean showLine){
-		  setValue(Property.showLine, showLine);
+	public void setShowLines(boolean showLine){
+		  setValue(Property.showLines, showLine);
 	}
 
 	/**
 	 * Returns if the line is not drawn for this dataset.
 	 * @return <code>false</code> if the line is not drawn for this dataset. Default is <code>true</code>
 	 */
-	public boolean isShowLine(){
-		  return getValue(Property.showLine, DEFAULT_SHOW_LINE);
+	public boolean isShowLines(){
+		  return getValue(Property.showLines, DEFAULT_SHOW_LINES);
 	}
 
 	/**

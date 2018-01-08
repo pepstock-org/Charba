@@ -59,8 +59,6 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
  */
 public abstract class BaseOptions extends EventProvider {
 
-	private static int currentId = 0;
-
 	private static final int NO_CHART_ID = Integer.MIN_VALUE;
 
 	private static final boolean DEFAULT_RESPONSIVE = true;
