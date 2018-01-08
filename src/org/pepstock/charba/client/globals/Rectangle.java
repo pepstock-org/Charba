@@ -13,8 +13,9 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.options.elements;
+package org.pepstock.charba.client.globals;
 
+import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Position;
 
@@ -44,6 +45,13 @@ public final class Rectangle extends Arc {
 		borderSkipped
 	}
 
+	/**
+	 * Builds the object setting java script objects
+	 */
+	Rectangle(GenericJavaScriptObject javaScriptObject) {
+		super(javaScriptObject);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -13,11 +13,12 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.options.elements;
+package org.pepstock.charba.client.globals;
 
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JsIntegerArrayList;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.CapStyle;
@@ -48,8 +49,6 @@ public final class Line extends Arc {
 
 	private static final boolean DEFAULT_CAP_BEZIER_POINTS = true;
 
-	private static final boolean DEFAULT_STEPPED = false;
-
 	/**
 	 * Name of fields of JavaScript object.
 	 */
@@ -61,8 +60,14 @@ public final class Line extends Arc {
 		borderDashOffset,
 		borderJoinStyle,
 		capBezierPoints,
-		fill,
-		stepped
+		fill
+	}
+	
+	/**
+	 * Builds the object setting java script objects
+	 */
+	Line(GenericJavaScriptObject javaScriptObject) {
+		super(javaScriptObject);
 	}
 
 	/*
@@ -224,6 +229,16 @@ public final class Line extends Arc {
 	 * Sets how to fill the area under the line.
 	 * 
 	 * @param fill how to fill the area under the line.
+	 */
+	public void setFill(boolean fill) {
+		// sets the boolean value instead of string one
+		setValue(Property.fill, fill);
+	}
+
+	/**
+	 * Sets how to fill the area under the line.
+	 * 
+	 * @param fill how to fill the area under the line.
 	 * @see org.pepstock.charba.client.enums.Fill
 	 */
 	public void setFill(Fill fill) {
@@ -250,6 +265,8 @@ public final class Line extends Arc {
 		if (value.equalsIgnoreCase(Boolean.FALSE.toString())) {
 			// returns no fill
 			return Fill.nofill;
+		} else if (value.equalsIgnoreCase(Boolean.TRUE.toString())) {
+			return Fill.origin;
 		}
 		// scans all enums
 		for (Fill enumValue : Fill.values()) {
@@ -262,23 +279,4 @@ public final class Line extends Arc {
 		// returns this as default
 		return Fill.origin;
 	}
-
-	/**
-	 * Sets <code>true</code> to show the line as a stepped line (tension will be ignored).
-	 * 
-	 * @param stepped <code>true</code> to show the line as a stepped line (tension will be ignored).
-	 */
-	public void setStepped(boolean stepped) {
-		setValue(Property.stepped, stepped);
-	}
-
-	/**
-	 * Returns <code>true</code> to show the line as a stepped line (tension will be ignored).
-	 * 
-	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored).
-	 */
-	public boolean isStepped() {
-		return getValue(Property.stepped, DEFAULT_STEPPED);
-	}
-
 }

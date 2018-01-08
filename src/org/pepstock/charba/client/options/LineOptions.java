@@ -26,7 +26,7 @@ import org.pepstock.charba.client.commons.Key;
  */
 public class LineOptions extends MultiScalesOptions {
 
-	private static final boolean DEFAULT_SHOW_LINE = true;
+	private static final boolean DEFAULT_SHOW_LINES = true;
 
 	private static final boolean DEFAULT_SPAN_GAPS = false;
 
@@ -35,7 +35,7 @@ public class LineOptions extends MultiScalesOptions {
 	 */
 	private enum Property implements Key
 	{
-		showLine,
+		showLines,
 		spanGaps
 	}
 
@@ -53,8 +53,8 @@ public class LineOptions extends MultiScalesOptions {
 	 * 
 	 * @param showLine If false, the lines between points are not drawn.
 	 */
-	public void setShowLine(boolean showLine) {
-		setValue(Property.showLine, showLine);
+	public void setShowLines(boolean showLine) {
+		setValue(Property.showLines, showLine);
 	}
 
 	/**
@@ -62,8 +62,8 @@ public class LineOptions extends MultiScalesOptions {
 	 * 
 	 * @return If false, the lines between points are not drawn.. Default is true.
 	 */
-	public boolean isShowLine() {
-		return getValue(Property.showLine, DEFAULT_SHOW_LINE);
+	public boolean isShowLines() {
+		return getValue(Property.showLines, DEFAULT_SHOW_LINES);
 	}
 
 	/**

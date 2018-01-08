@@ -13,8 +13,9 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.options.elements;
+package org.pepstock.charba.client.globals;
 
+import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.PointStyle;
 
@@ -44,7 +45,7 @@ public final class Point extends Arc {
 	private static final int DEFAULT_HOVER_RADIUS = 4;
 	// default hover border width
 	private static final int DEFAULT_HOVER_BORDER_WIDTH = 1;
-
+	
 	/**
 	 * Name of fields of JavaScript object.
 	 */
@@ -57,6 +58,13 @@ public final class Point extends Arc {
 		hoverBorderWidth
 	}
 
+	/**
+	 * Builds the object setting java script objects
+	 */
+	Point(GenericJavaScriptObject javaScriptObject) {
+		super(javaScriptObject);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

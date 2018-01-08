@@ -26,7 +26,15 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class JavaScriptObjectContainer {
 
 	// every object must have a generic JavaScript object 
-	private final GenericJavaScriptObject javaScriptObject = GenericJavaScriptObject.build();
+	private final GenericJavaScriptObject javaScriptObject;
+
+	protected JavaScriptObjectContainer() {
+		this(GenericJavaScriptObject.build());
+	}
+
+	protected JavaScriptObjectContainer(GenericJavaScriptObject javaScriptObject) {
+		this.javaScriptObject = javaScriptObject;
+	}
 
 	/**
 	 * Returns the JavaScript object instance 

@@ -13,11 +13,11 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.options;
+package org.pepstock.charba.client.globals;
 
+import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
 
 /**
@@ -39,14 +39,14 @@ public final class Hover extends JavaScriptObjectContainer {
 	{
 		mode,
 		intersect,
-		axis,
 		animationDuration
 	}
 
 	/**
 	 * Empty constructor to reduce its visibility
 	 */
-	Hover() {
+	Hover(GenericJavaScriptObject javaScriptObject) {
+		super(javaScriptObject);
 	}
 
 	/**
@@ -104,25 +104,5 @@ public final class Hover extends JavaScriptObjectContainer {
 	public int getAnimationDuration() {
 		return getValue(Property.animationDuration, DEFAULT_ANIMATION_DURATION);
 	}
-	
-	/**
-	 * Sets to 'x', 'y', or 'xy' to define which directions are used in calculating distances.<br>
-	 * Defaults to 'x' for index mode and 'xy' in dataset and nearest modes.
-	 * 
-	 * @param mode define which directions are used in calculating distances.
-	 * @see org.pepstock.charba.client.enums.InteractionAxis
-	 */
-	public void setAxis(InteractionAxis axis) {
-		setValue(Property.axis, axis);
-	}
 
-	/**
-	 * Returns to 'x', 'y', or 'xy' to define which directions are used in calculating distances.
-	 * 
-	 * @return define which directions are used in calculating distances. Default is {@link org.pepstock.charba.client.enums.InteractionAxis#x}.
-	 * @see org.pepstock.charba.client.enums.InteractionAxis
-	 */
-	public InteractionAxis getAxis() {
-		return getValue(Property.axis, InteractionAxis.class, InteractionAxis.x);
-	}
 }
