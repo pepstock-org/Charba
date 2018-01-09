@@ -2,30 +2,46 @@ package org.pepstock.charba.client;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JsArrayStringImpl;
-import org.pepstock.charba.client.globals.Options;
+import org.pepstock.charba.client.defaults.Options;
+import org.pepstock.charba.client.defaults.Scale;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-public final class Globals {
-
-	private static final Globals INSTANCE = new Globals();
+public final class Defaults {
 	
-	private final Options options;
+	Logger log = Logger.getLogger("mio");
+
+	private static final Defaults INSTANCE = new Defaults();
+	
+	private final Options global;
+	
+	private Scale scale;
 	
 	/**
 	 * To avoid any instantiation
 	 */
-	private Globals() {
+	private Defaults() {
 		Injector.ensureInjected();
-		GenericJavaScriptObject impl = (GenericJavaScriptObject)INSTANCE.getGlobalOptions();
-		options = new Options(impl);
+		GenericJavaScriptObject options = (GenericJavaScriptObject)getGlobalOptions();
+		global = new Options(options);
+		GenericJavaScriptObject scaleImpl = (GenericJavaScriptObject)getGlobalScale();
+		scale = new Scale(scaleImpl);
 	}
 	
-	public static Options getOptions(){
-		return INSTANCE.options;
+	public static void test(){
+		INSTANCE.dump();
+	}
+	
+	public static Options getGlobal(){
+		return INSTANCE.global;
+	}
+	
+	public static Scale getScale(){
+		return INSTANCE.scale;
 	}
 
 	public static Set<String> getPlugins(){
@@ -59,6 +75,16 @@ public final class Globals {
 	 */
 	private native JavaScriptObject getGlobalOptions()/*-{
 	    return $wnd.Chart.defaults.global;
+	}-*/;
+
+	private native JavaScriptObject getGlobalScale()/*-{
+    	return $wnd.Chart.defaults.scale;
+	}-*/;
+
+	/**
+	 */
+	private native void dump()/*-{
+	    console.log($wnd.Chart.defaults);
 	}-*/;
 
 }

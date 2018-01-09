@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.LegendCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.EventProvider;
@@ -59,13 +60,13 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
  */
 public abstract class BaseOptions extends EventProvider {
 
-	private static final int NO_CHART_ID = Integer.MIN_VALUE;
+//	private static final int NO_CHART_ID = Integer.MIN_VALUE;
 
-	private static final boolean DEFAULT_RESPONSIVE = true;
-
-	private static final int DEFAULT_RESPONSIVE_ANIMATION_DURATION = 0;
-
-	private static final boolean DEFAULT_MAINTAIN_ASPECT_RATIO = true;
+//	private static final boolean DEFAULT_RESPONSIVE = true;
+//
+//	private static final int DEFAULT_RESPONSIVE_ANIMATION_DURATION = 0;
+//
+//	private static final boolean DEFAULT_MAINTAIN_ASPECT_RATIO = true;
 
 	private static final String LEGEND_CALLBACK_ERROR = "Unable to execute LegendCallback";
 
@@ -217,8 +218,9 @@ public abstract class BaseOptions extends EventProvider {
 			JsStringArrayList value = getStringArray(Property.events);
 			return ArrayListHelper.build(Event.class, value);
 		} else {
-			// returns all events
-			return ArrayListHelper.build(Event.class, Event.values());
+			// returns global events events
+			return Defaults.getGlobal().getEvents();
+//			return ArrayListHelper.build(Event.class, Event.values());
 		}
 	}
 
@@ -283,7 +285,8 @@ public abstract class BaseOptions extends EventProvider {
 	 * @return the resizing of the chart canvas when its container does. Default is true.
 	 */
 	public boolean isResponsive() {
-		return getValue(Property.responsive, DEFAULT_RESPONSIVE);
+//		return getValue(Property.responsive, DEFAULT_RESPONSIVE);
+		return getValue(Property.responsive, Defaults.getGlobal().isResponsive());
 	}
 
 	/**
@@ -301,7 +304,8 @@ public abstract class BaseOptions extends EventProvider {
 	 * @return the duration in milliseconds it takes to animate to new size after a resize event. Default is 0.
 	 */
 	public int getResponsiveAnimationDuration() {
-		return getValue(Property.responsiveAnimationDuration, DEFAULT_RESPONSIVE_ANIMATION_DURATION);
+//		return getValue(Property.responsiveAnimationDuration, DEFAULT_RESPONSIVE_ANIMATION_DURATION);
+		return getValue(Property.responsiveAnimationDuration, Defaults.getGlobal().getResponsiveAnimationDuration());
 	}
 
 	/**
@@ -319,7 +323,8 @@ public abstract class BaseOptions extends EventProvider {
 	 * @return the maintaining of the original canvas aspect ratio (width / height) when resizing. Default is true.
 	 */
 	public boolean isMaintainAspectRatio() {
-		return getValue(Property.maintainAspectRatio, DEFAULT_MAINTAIN_ASPECT_RATIO);
+//		return getValue(Property.maintainAspectRatio, DEFAULT_MAINTAIN_ASPECT_RATIO);
+		return getValue(Property.maintainAspectRatio, Defaults.getGlobal().isMaintainAspectRatio());
 	}
 
 	/*

@@ -13,11 +13,12 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.globals;
+package org.pepstock.charba.client.defaults.global;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.AbstractDefaultsObject;
+import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
 
 /**
@@ -26,7 +27,7 @@ import org.pepstock.charba.client.enums.InteractionMode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Hover extends JavaScriptObjectContainer {
+public final class Hover extends AbstractDefaultsObject {
 
 	private static final boolean DEFAULT_INTERSECT = true;
 
@@ -38,6 +39,7 @@ public final class Hover extends JavaScriptObjectContainer {
 	private enum Property implements Key
 	{
 		mode,
+		axis,
 		intersect,
 		animationDuration
 	}
@@ -45,7 +47,7 @@ public final class Hover extends JavaScriptObjectContainer {
 	/**
 	 * Empty constructor to reduce its visibility
 	 */
-	Hover(GenericJavaScriptObject javaScriptObject) {
+	public Hover(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
 
@@ -62,7 +64,8 @@ public final class Hover extends JavaScriptObjectContainer {
 	/**
 	 * Returns which elements appear in the tooltip.
 	 * 
-	 * @return which elements appear in the tooltip. Default is {@link org.pepstock.charba.client.enums.InteractionMode#nearest}.
+	 * @return which elements appear in the tooltip. Default is
+	 *         {@link org.pepstock.charba.client.enums.InteractionMode#nearest}.
 	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
 	public InteractionMode getMode() {
@@ -103,6 +106,27 @@ public final class Hover extends JavaScriptObjectContainer {
 	 */
 	public int getAnimationDuration() {
 		return getValue(Property.animationDuration, DEFAULT_ANIMATION_DURATION);
+	}
+	
+	/**
+	 * Sets to 'x', 'y', or 'xy' to define which directions are used in calculating distances.<br>
+	 * Defaults to 'x' for index mode and 'xy' in dataset and nearest modes.
+	 * 
+	 * @param mode define which directions are used in calculating distances.
+	 * @see org.pepstock.charba.client.enums.InteractionAxis
+	 */
+	public void setAxis(InteractionAxis axis) {
+		setValue(Property.axis, axis);
+	}
+
+	/**
+	 * Returns to 'x', 'y', or 'xy' to define which directions are used in calculating distances.
+	 * 
+	 * @return define which directions are used in calculating distances. Default is {@link org.pepstock.charba.client.enums.InteractionAxis#x}.
+	 * @see org.pepstock.charba.client.enums.InteractionAxis
+	 */
+	public InteractionAxis getAxis() {
+		return getValue(Property.axis, InteractionAxis.class, InteractionAxis.x);
 	}
 
 }

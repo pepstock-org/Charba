@@ -13,20 +13,20 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.globals;
+package org.pepstock.charba.client.defaults.global;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
-
+import org.pepstock.charba.client.defaults.AbstractDefaultsObject;
 
 /**
- * Options can be configured for four different types of elements: arc, lines, points, and rectangles. When set, these options apply to the configuration attached to a dataset.
+ * Options can be configured for four different types of elements: arc, lines, points, and rectangles. When set, these options
+ * apply to the configuration attached to a dataset.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Elements extends JavaScriptObjectContainer {
+public final class Elements extends AbstractDefaultsObject {
 
 	private final Point point;
 
@@ -50,12 +50,12 @@ public final class Elements extends JavaScriptObjectContainer {
 	/**
 	 * Builds the object setting java script objects
 	 */
-	Elements(GenericJavaScriptObject javaScriptObject) {
+	public Elements(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
-		point = new Point((GenericJavaScriptObject)getValue(Property.point));
-		arc = new Arc((GenericJavaScriptObject)getValue(Property.arc));
-		line = new Line((GenericJavaScriptObject)getValue(Property.line));
-		rectangle = new Rectangle((GenericJavaScriptObject)getValue(Property.rectangle));
+		point = new Point(load(Property.point));
+		arc = new Arc(load(Property.arc));
+		line = new Line(load(Property.line));
+		rectangle = new Rectangle(load(Property.rectangle));
 	}
 
 	/**

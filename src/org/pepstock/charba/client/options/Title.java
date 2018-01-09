@@ -18,7 +18,9 @@ package org.pepstock.charba.client.options;
 import java.util.List;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.JsStringArrayList;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
@@ -30,9 +32,8 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Title extends AbstractLabel {
+public final class Title extends ChartContainer {
 
-	private static final boolean DEFAULT_DISPLAY = false;
 	// flag to check if a multiple line title has been set
 	private boolean isTextArray = false;
 
@@ -41,8 +42,12 @@ public final class Title extends AbstractLabel {
 	 */
 	private enum Property implements Key
 	{
-		display,
+		fontSize,
 		fontStyle,
+		fontColor,
+		fontFamily,
+		display,
+		padding,
 		position,
 		text
 	}
@@ -56,14 +61,78 @@ public final class Title extends AbstractLabel {
 		super(chart);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Sets the font size for label.
 	 * 
-	 * @see org.pepstock.charba.client.options.AbstractLabel#getFontStyle()
+	 * @param fontSize Font size for label.
 	 */
-	@Override
+	public void setFontSize(int fontSize) {
+		setValue(Property.fontSize, fontSize);
+	}
+
+	/**
+	 * Returns the font size for label.
+	 * 
+	 * @return Font size for label. Default is {@link org.pepstock.charba.client.defaults.Options#getDefaultFontSize()}.
+	 */
+	public int getFontSize() {
+		return getValue(Property.fontSize, Defaults.getGlobal().getTitle().getFontSize());
+	}
+
+	/**
+	 * Sets the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * 
+	 * @param fontStyle Font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * @see org.pepstock.charba.client.enums.FontStyle
+	 */
+	public void setFontStyle(FontStyle fontStyle) {
+		setValue(Property.fontStyle, fontStyle);
+	}
+
+	/**
+	 * Returns the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * 
+	 * @return the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). Default is normal
+	 * @see org.pepstock.charba.client.enums.FontStyle
+	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.fontStyle, FontStyle.class, FontStyle.bold);
+		return getValue(Property.fontStyle, FontStyle.class, Defaults.getGlobal().getTitle().getFontStyle());
+	}
+
+	/**
+	 * Sets the font color for label
+	 * 
+	 * @param fontColor Font color for label
+	 */
+	public void setFontColor(String fontColor) {
+		setValue(Property.fontColor, fontColor);
+	}
+
+	/**
+	 * Returns the font color for label
+	 * 
+	 * @return Font color for label. Default is '#666'
+	 */
+	public String getFontColor() {
+		return getValue(Property.fontColor, Defaults.getGlobal().getTitle().getFontColor());
+	}
+
+	/**
+	 * Sets the font family for the label, follows CSS font-family options.
+	 * 
+	 * @param fontFamily Font family for the label, follows CSS font-family options.
+	 */
+	public void setFontFamily(String fontFamily) {
+		setValue(Property.fontFamily, fontFamily);
+	}
+
+	/**
+	 * Returns the font family for the label, follows CSS font-family options.
+	 * 
+	 * @return Font family for the label, follows CSS font-family options. Default is 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
+	 */
+	public String getFontFamily() {
+		return getValue(Property.fontFamily, Defaults.getGlobal().getTitle().getFontFamily());
 	}
 
 	/**
@@ -81,7 +150,7 @@ public final class Title extends AbstractLabel {
 	 * @return if the title is shown. Default is true.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, DEFAULT_DISPLAY);
+		return getValue(Property.display, Defaults.getGlobal().getTitle().isDisplay());
 	}
 
 	/**
@@ -128,7 +197,25 @@ public final class Title extends AbstractLabel {
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {
-		return getValue(Property.position, Position.class, Position.top);
+		return getValue(Property.position, Position.class, Defaults.getGlobal().getTitle().getPosition());
+	}
+	
+	/**
+	 * Sets the padding to apply around title. Only top and bottom are implemented.
+	 * 
+	 * @param padding Padding to apply around title. Only top and bottom are implemented.
+	 */
+	public void setPadding(int padding) {
+		setValue(Property.padding, padding);
+	}
+
+	/**
+	 * Returns the padding to apply around title. Only top and bottom are implemented.
+	 * 
+	 * @return Padding to apply around title. Only top and bottom are implemented. Default is 10.
+	 */
+	public int getPadding() {
+		return getValue(Property.padding, Defaults.getGlobal().getTitle().getPadding());
 	}
 
 }

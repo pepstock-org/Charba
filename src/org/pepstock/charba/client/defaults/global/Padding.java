@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.globals;
+package org.pepstock.charba.client.defaults.global;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
@@ -28,14 +28,13 @@ import org.pepstock.charba.client.enums.Position;
 public final class Padding extends JavaScriptObjectContainer {
 
 	private static final int DEFAULT_PADDING = 0;
-	
+
 	/**
 	 * Builds the object setting java script objects
 	 */
 	Padding(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
-	
 
 	/**
 	 * Sets the padding left in pixel

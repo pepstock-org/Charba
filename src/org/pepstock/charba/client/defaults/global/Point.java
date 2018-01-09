@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.globals;
+package org.pepstock.charba.client.defaults.global;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
@@ -21,9 +21,11 @@ import org.pepstock.charba.client.enums.PointStyle;
 
 /**
  * Point elements are used to represent the points in a line chart or a bubble chart.<br>
- * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the same way.<br>
+ * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the
+ * same way.<br>
  * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
- * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a dataset.
+ * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a
+ * dataset.
  * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.LineChart
@@ -45,7 +47,7 @@ public final class Point extends Arc {
 	private static final int DEFAULT_HOVER_RADIUS = 4;
 	// default hover border width
 	private static final int DEFAULT_HOVER_BORDER_WIDTH = 1;
-	
+
 	/**
 	 * Name of fields of JavaScript object.
 	 */
@@ -64,7 +66,7 @@ public final class Point extends Arc {
 	Point(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

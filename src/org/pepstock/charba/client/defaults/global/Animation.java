@@ -13,20 +13,21 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.globals;
+package org.pepstock.charba.client.defaults.global;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.AbstractDefaultsObject;
 import org.pepstock.charba.client.enums.Easing;
 
 /**
- * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it takes.
+ * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it
+ * takes.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Animation extends JavaScriptObjectContainer {
+public final class Animation extends AbstractDefaultsObject {
 
 	private static final int DEFAULT_DURATION = 1000;
 
@@ -44,7 +45,7 @@ public final class Animation extends JavaScriptObjectContainer {
 	 * 
 	 * @param chart chart instance
 	 */
-	Animation(GenericJavaScriptObject javaScriptObject) {
+	public Animation(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
 
