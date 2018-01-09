@@ -17,7 +17,7 @@ package org.pepstock.charba.client.defaults.global;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.AbstractDefaultsObject;
+import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
 import org.pepstock.charba.client.enums.Easing;
 
 /**
@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.Easing;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Animation extends AbstractDefaultsObject {
+public final class Animation extends AbstractDefaultsItem {
 
 	private static final int DEFAULT_DURATION = 1000;
 

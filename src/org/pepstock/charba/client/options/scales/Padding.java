@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.options.layout;
+package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
@@ -39,10 +39,10 @@ public final class Padding extends JavaScriptObjectContainer {
 	/**
 	 * Returns the padding left in pixel.
 	 * 
-	 * @return the padding left in pixel. Default is {@link org.pepstock.charba.client.defaults.global.Padding#getLeft()}.
+	 * @return the padding left in pixel. Default is {@link org.pepstock.charba.client.defaults.scale.Padding#getLeft()}.
 	 */
 	public int getLeft() {
-		return getValue(Position.left, Defaults.getGlobal().getLayout().getPadding().getLeft());
+		return getValue(Position.left, Defaults.getScale().getScaleLabel().getPadding().getLeft());
 	}
 
 	/**
@@ -57,10 +57,10 @@ public final class Padding extends JavaScriptObjectContainer {
 	/**
 	 * Returns the padding right in pixel.
 	 * 
-	 * @return the padding right in pixel. Default is {@link org.pepstock.charba.client.defaults.global.Padding#getRight()}.
+	 * @return the padding right in pixel. Default is {@link org.pepstock.charba.client.defaults.scale.Padding#getRight()}.
 	 */
 	public int getRight() {
-		return getValue(Position.right, Defaults.getGlobal().getLayout().getPadding().getRight());
+		return getValue(Position.right, Defaults.getScale().getScaleLabel().getPadding().getRight());
 	}
 
 	/**
@@ -75,10 +75,10 @@ public final class Padding extends JavaScriptObjectContainer {
 	/**
 	 * Returns the padding top in pixel.
 	 * 
-	 * @return the padding top in pixel. Default is {@link org.pepstock.charba.client.defaults.global.Padding#getTop()}.
+	 * @return the padding top in pixel. Default is {@link org.pepstock.charba.client.defaults.scale.Padding#getTop()}.
 	 */
 	public int getTop() {
-		return getValue(Position.top, Defaults.getGlobal().getLayout().getPadding().getTop());
+		return getValue(Position.top, Defaults.getScale().getScaleLabel().getPadding().getTop());
 	}
 
 	/**
@@ -93,10 +93,10 @@ public final class Padding extends JavaScriptObjectContainer {
 	/**
 	 * Returns the padding bottom in pixel.
 	 * 
-	 * @return the padding bottom in pixel. Default is {@link org.pepstock.charba.client.defaults.global.Padding#getBottom()}.
+	 * @return the padding bottom in pixel. Default is {@link org.pepstock.charba.client.defaults.scale.Padding#getBottom()}.
 	 */
 	public int getBottom() {
-		return getValue(Position.bottom, Defaults.getGlobal().getLayout().getPadding().getBottom());
+		return getValue(Position.bottom, Defaults.getScale().getScaleLabel().getPadding().getBottom());
 	}
 
 }

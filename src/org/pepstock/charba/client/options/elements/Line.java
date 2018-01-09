@@ -17,6 +17,7 @@ package org.pepstock.charba.client.options.elements;
 
 import java.util.List;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.JsIntegerArrayList;
 import org.pepstock.charba.client.commons.Key;
@@ -34,21 +35,6 @@ import org.pepstock.charba.client.enums.JoinStyle;
  * @see org.pepstock.charba.client.LineChart
  */
 public final class Line extends Arc {
-
-	// default line tension
-	private static final float DEFAULT_TENSION = 0.4F;
-	// default background color
-	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
-	// default border width
-	private static final int DEFAULT_BORDER_WIDTH = 3;
-	// default line tension
-	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0.1)";
-
-	private static final int DEFAULT_BORDER_DASH_OFFSET = 0;
-
-	private static final boolean DEFAULT_CAP_BEZIER_POINTS = true;
-
-	private static final boolean DEFAULT_STEPPED = false;
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -72,7 +58,7 @@ public final class Line extends Arc {
 	 */
 	@Override
 	protected String getDefaultBackgroundColor() {
-		return DEFAULT_BACKGROUND_COLOR;
+		return Defaults.getGlobal().getElements().getLine().getBackgroundColor();
 	}
 
 	/*
@@ -82,7 +68,7 @@ public final class Line extends Arc {
 	 */
 	@Override
 	protected int getDefaultBorderWidth() {
-		return DEFAULT_BORDER_WIDTH;
+		return Defaults.getGlobal().getElements().getLine().getBorderWidth();
 	}
 
 	/*
@@ -92,7 +78,7 @@ public final class Line extends Arc {
 	 */
 	@Override
 	protected String getDefaultBorderColor() {
-		return DEFAULT_BORDER_COLOR;
+		return Defaults.getGlobal().getElements().getLine().getBorderColor();
 	}
 
 	/**
@@ -107,10 +93,10 @@ public final class Line extends Arc {
 	/**
 	 * Returns the Bezier curve tension (0 for no Bezier curves).
 	 * 
-	 * @return the Bezier curve tension (0 for no Bezier curves).
+	 * @return the Bezier curve tension (0 for no Bezier curves). Default is {@link org.pepstock.charba.client.defaults.global.Line#getTension()}.
 	 */
 	public double getTension() {
-		return getValue(Property.tension, DEFAULT_TENSION);
+		return getValue(Property.tension, Defaults.getGlobal().getElements().getLine().getTension());
 	}
 
 	/**
@@ -126,11 +112,11 @@ public final class Line extends Arc {
 	/**
 	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square. By default this property is set to butt.
 	 * 
-	 * @return how the end points of every line are drawn.
+	 * @return how the end points of every line are drawn. Default is {@link org.pepstock.charba.client.defaults.global.Line#getBorderCapStyle()}.
 	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public CapStyle getBorderCapStyle() {
-		return getValue(Property.borderCapStyle, CapStyle.class, CapStyle.butt);
+		return getValue(Property.borderCapStyle, CapStyle.class, Defaults.getGlobal().getElements().getLine().getBorderCapStyle());
 	}
 
 	/**
@@ -157,7 +143,11 @@ public final class Line extends Arc {
 	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public List<Integer> getBorderDash() {
-		return getIntegerArray(Property.borderDashOffset);
+		List<Integer> values = getIntegerArray(Property.borderDash);
+		if (values.isEmpty()){
+			return Defaults.getGlobal().getElements().getLine().getBorderDash();
+		}
+		return values;
 	}
 
 	/**
@@ -172,10 +162,10 @@ public final class Line extends Arc {
 	/**
 	 * Returns the line dash pattern offset or "phase".
 	 * 
-	 * @return the line dash pattern offset or "phase".
+	 * @return the line dash pattern offset or "phase". Default is {@link org.pepstock.charba.client.defaults.global.Line#getBorderDashOffset()}.
 	 */
 	public int getBorderDashOffset() {
-		return getValue(Property.borderDashOffset, DEFAULT_BORDER_DASH_OFFSET);
+		return getValue(Property.borderDashOffset, Defaults.getGlobal().getElements().getLine().getBorderDashOffset());
 	}
 
 	/**
@@ -195,11 +185,11 @@ public final class Line extends Arc {
 	 * skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
-	 * @return There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
+	 * @return There are three possible values for this property: round, bevel and miter. Default is {@link org.pepstock.charba.client.defaults.global.Line#getBorderJoinStyle()}.
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public JoinStyle getBorderJoinStyle() {
-		return getValue(Property.borderJoinStyle, JoinStyle.class, JoinStyle.miter);
+		return getValue(Property.borderJoinStyle, JoinStyle.class, Defaults.getGlobal().getElements().getLine().getBorderJoinStyle());
 	}
 
 	/**
@@ -214,10 +204,10 @@ public final class Line extends Arc {
 	/**
 	 * Returns <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
 	 * 
-	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
+	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction. Default is {@link org.pepstock.charba.client.defaults.global.Line#isCapBezierPoints()}.
 	 */
 	public boolean isCapBezierPoints() {
-		return getValue(Property.capBezierPoints, DEFAULT_CAP_BEZIER_POINTS);
+		return getValue(Property.capBezierPoints, Defaults.getGlobal().getElements().getLine().isCapBezierPoints());
 	}
 
 	/**
@@ -240,14 +230,16 @@ public final class Line extends Arc {
 	/**
 	 * Returns how to fill the area under the line.
 	 * 
-	 * @return how to fill the area under the line.
+	 * @return how to fill the area under the line. Default is {@link org.pepstock.charba.client.defaults.global.Line#getFill()}.
 	 * @see org.pepstock.charba.client.enums.Fill
 	 */
 	public Fill getFill() {
 		// gets value
-		String value = getValue(Property.fill, Fill.origin.name());
-		// if is a boolean FALSE value
-		if (value.equalsIgnoreCase(Boolean.FALSE.toString())) {
+		String value = getValue(Property.fill, null);
+		if (value == null){
+			return Defaults.getGlobal().getElements().getLine().getFill();
+		} else if (value.equalsIgnoreCase(Boolean.FALSE.toString())) {
+			// if is a boolean FALSE value
 			// returns no fill
 			return Fill.nofill;
 		}
@@ -260,7 +252,7 @@ public final class Line extends Arc {
 			}
 		}
 		// returns this as default
-		return Fill.origin;
+		return Defaults.getGlobal().getElements().getLine().getFill();
 	}
 
 	/**
@@ -275,10 +267,10 @@ public final class Line extends Arc {
 	/**
 	 * Returns <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 * 
-	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored). Default is {@link org.pepstock.charba.client.defaults.global.Line#isStepped()}.
 	 */
 	public boolean isStepped() {
-		return getValue(Property.stepped, DEFAULT_STEPPED);
+		return getValue(Property.stepped, Defaults.getGlobal().getElements().getLine().isStepped());
 	}
 
 }

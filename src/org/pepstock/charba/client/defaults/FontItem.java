@@ -29,7 +29,7 @@ import org.pepstock.charba.client.enums.FontStyle;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class FontItem extends AbstractDefaultsObject {
+public class FontItem extends AbstractDefaultsItem {
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -50,27 +50,27 @@ public class FontItem extends AbstractDefaultsObject {
 	}
 
 	/**
-	 * Sets the font size for tick.
+	 * Sets the font size.
 	 * 
-	 * @param fontSize the font size for tick.
+	 * @param fontSize the font size.
 	 */
 	public void setFontSize(int fontSize) {
 		setValue(Property.fontSize, fontSize);
 	}
 
 	/**
-	 * Returns the font size for tick.
+	 * Returns the font size.
 	 * 
-	 * @return the font size for tick. Default is 12.
+	 * @return the font size. Default is {@link org.pepstock.charba.client.defaults.Options#getDefaultFontSize()}.
 	 */
 	public int getFontSize() {
 		return getValue(Property.fontSize, Defaults.getGlobal().getDefaultFontSize());
 	}
 
 	/**
-	 * Sets the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * Sets the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @param fontStyle Font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * @param fontStyle Font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
@@ -78,9 +78,9 @@ public class FontItem extends AbstractDefaultsObject {
 	}
 
 	/**
-	 * Returns the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * Returns the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). Default is normal
+	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). Default is {@link org.pepstock.charba.client.defaults.Options#getDefaultFontStyle()}.
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
@@ -88,36 +88,36 @@ public class FontItem extends AbstractDefaultsObject {
 	}
 
 	/**
-	 * Sets the font color for tick
+	 * Sets the font color
 	 * 
-	 * @param fontColor Font color for tick
+	 * @param fontColor Font color
 	 */
 	public void setFontColor(String fontColor) {
 		setValue(Property.fontColor, fontColor);
 	}
 
 	/**
-	 * Returns the font color for tick
+	 * Returns the font color
 	 * 
-	 * @return Font color for tick. Default is '#666'
+	 * @return Font color. Default is {@link org.pepstock.charba.client.defaults.Options#getDefaultFontColor()}.
 	 */
 	public String getFontColor() {
 		return getValue(Property.fontColor, Defaults.getGlobal().getDefaultFontColor());
 	}
 
 	/**
-	 * Sets the font family for the tick, follows CSS font-family options.
+	 * Sets the font family, follows CSS font-family options.
 	 * 
-	 * @param fontFamily Font family for the tick, follows CSS font-family options.
+	 * @param fontFamily Font family, follows CSS font-family options.
 	 */
 	public void setFontFamily(String fontFamily) {
 		setValue(Property.fontFamily, fontFamily);
 	}
 
 	/**
-	 * Returns the font family for the tick, follows CSS font-family options.
+	 * Returns the font family, follows CSS font-family options.
 	 * 
-	 * @return Font family for the tick, follows CSS font-family options. Default is 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
+	 * @return Font family, follows CSS font-family options. Default is {@link org.pepstock.charba.client.defaults.Options#getDefaultFontFamily()}.
 	 */
 	public String getFontFamily() {
 		return getValue(Property.fontFamily, Defaults.getGlobal().getDefaultFontFamily());

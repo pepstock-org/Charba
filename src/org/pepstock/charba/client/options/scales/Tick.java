@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options.scales;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -24,10 +25,6 @@ import org.pepstock.charba.client.commons.Key;
  *
  */
 abstract class Tick extends BaseTick {
-
-	private static final boolean DEFAULT_DISPLAY = true;
-
-	private static final boolean DEFAULT_REVERSE = false;
 
 	private final BaseTick minor = new BaseTick();
 
@@ -92,10 +89,10 @@ abstract class Tick extends BaseTick {
 	/**
 	 * If true, show tick marks
 	 * 
-	 * @return if true, show tick marks. Default is true.
+	 * @return if true, show tick marks. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#isDisplay()}.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, DEFAULT_DISPLAY);
+		return getValue(Property.display, Defaults.getScale().getTicks().isDisplay());
 	}
 
 	/**
@@ -110,10 +107,10 @@ abstract class Tick extends BaseTick {
 	/**
 	 * Returns the reverses order of tick labels.
 	 * 
-	 * @return reverses order of tick labels. Default is false.
+	 * @return reverses order of tick labels. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#isReverse()}.
 	 */
 	public boolean isReverse() {
-		return getValue(Property.reverse, DEFAULT_REVERSE);
+		return getValue(Property.reverse, Defaults.getScale().getTicks().isReverse());
 	}
 
 }

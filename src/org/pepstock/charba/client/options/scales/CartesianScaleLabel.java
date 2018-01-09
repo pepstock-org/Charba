@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options.scales;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
@@ -28,20 +29,8 @@ import org.pepstock.charba.client.enums.FontStyle;
  */
 public class CartesianScaleLabel extends JavaScriptObjectContainer {
 
-	private static final int DEFAULT_FONT_SIZE = 12;
-
-	private static final String DEFAULT_FONT_COLOR = "#666";
-
-	private static final String DEFAULT_FONT_FAMILY = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
-
-	private static final boolean DEFAULT_DISPLAY = false;
-
-	private static final String DEFAULT_LABEL_STRING = "";
-
-	private static final String DEFAULT_LINE_HEIGHT = "1.2";
-
-	private static final int DEFAULT_PADDING = 4;
-
+	private final Padding padding = new Padding();
+	
 	/**
 	 * Name of fields of JavaScript object.
 	 */
@@ -61,6 +50,14 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer {
 	 * Empty constructor to reduce visibility
 	 */
 	CartesianScaleLabel() {
+		setValue(Property.padding, padding);
+	}
+	
+	/**
+	 * @return the padding
+	 */
+	public Padding getPadding() {
+		return padding;
 	}
 
 	/**
@@ -75,10 +72,10 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer {
 	/**
 	 * f true, display the axis title.
 	 * 
-	 * @return f true, display the axis title. Default is false
+	 * @return f true, display the axis title. Default is {@link org.pepstock.charba.client.defaults.scale.ScaleLabel#isDisplay()}.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, DEFAULT_DISPLAY);
+		return getValue(Property.display, Defaults.getScale().getScaleLabel().isDisplay());
 	}
 
 	/**
@@ -93,10 +90,10 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer {
 	/**
 	 * Returns the text for the title.
 	 * 
-	 * @return The text for the title.
+	 * @return The text for the title. Default is {@link org.pepstock.charba.client.defaults.scale.ScaleLabel#getLabelString()}.
 	 */
 	public String getLabelString() {
-		return getValue(Property.labelString, DEFAULT_LABEL_STRING);
+		return getValue(Property.labelString, Defaults.getScale().getScaleLabel().getLabelString());
 	}
 
 	/**
@@ -104,35 +101,17 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer {
 	 * 
 	 * @param lineHeight Height of an individual line of text.
 	 */
-	public void setLineHeight(String lineHeight) {
+	public void setLineHeight(double lineHeight) {
 		setValue(Property.lineHeight, lineHeight);
 	}
 
 	/**
 	 * Returns the height of an individual line of text.
 	 * 
-	 * @return the height of an individual line of text. Default is 1.2
+	 * @return the height of an individual line of text. Default is {@link org.pepstock.charba.client.defaults.scale.ScaleLabel#getLineHeight()}.
 	 */
-	public String getLineHeight() {
-		return getValue(Property.lineHeight, DEFAULT_LINE_HEIGHT);
-	}
-
-	/**
-	 * Sets the padding to apply around scale labels. Only top and bottom are implemented.
-	 * 
-	 * @param padding Padding to apply around scale labels. Only top and bottom are implemented.
-	 */
-	public void setPadding(int padding) {
-		setValue(Property.padding, padding);
-	}
-
-	/**
-	 * Returns the padding to apply around scale labels. Only top and bottom are implemented.
-	 * 
-	 * @return Padding to apply around scale labels. Only top and bottom are implemented. Default is 4.
-	 */
-	public int getPadding() {
-		return getValue(Property.padding, DEFAULT_PADDING);
+	public double getLineHeight() {
+		return getValue(Property.lineHeight, Defaults.getScale().getScaleLabel().getLineHeight());
 	}
 
 	/**
@@ -147,10 +126,10 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer {
 	/**
 	 * Returns the font size for scale title.
 	 * 
-	 * @return Font size for scale title.. Default is 12.
+	 * @return Font size for scale title.. Default is {@link org.pepstock.charba.client.defaults.scale.ScaleLabel#getFontSize()}.
 	 */
 	public int getFontSize() {
-		return getValue(Property.fontSize, DEFAULT_FONT_SIZE);
+		return getValue(Property.fontSize, Defaults.getScale().getScaleLabel().getFontSize());
 	}
 
 	/**
@@ -166,11 +145,11 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer {
 	/**
 	 * Returns the font style for the scale title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style for the scale title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). Default is normal
+	 * @return the font style for the scale title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). Default is {@link org.pepstock.charba.client.defaults.scale.ScaleLabel#getFontStyle()}.
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.fontStyle, FontStyle.class, FontStyle.normal);
+		return getValue(Property.fontStyle, FontStyle.class, Defaults.getScale().getScaleLabel().getFontStyle());
 	}
 
 	/**
@@ -185,10 +164,10 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer {
 	/**
 	 * Returns the font color for scale title
 	 * 
-	 * @return Font color for scale title. Default is '#666'
+	 * @return Font color for scale title. Default is {@link org.pepstock.charba.client.defaults.scale.ScaleLabel#getFontColor()}.
 	 */
 	public String getFontColor() {
-		return getValue(Property.fontColor, DEFAULT_FONT_COLOR);
+		return getValue(Property.fontColor, Defaults.getScale().getScaleLabel().getFontColor());
 	}
 
 	/**
@@ -203,10 +182,10 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer {
 	/**
 	 * Returns the font family for the scale title, follows CSS font-family options.
 	 * 
-	 * @return Font family for the scale title, follows CSS font-family options. Default is 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
+	 * @return Font family for the scale title, follows CSS font-family options. Default is {@link org.pepstock.charba.client.defaults.scale.ScaleLabel#getFontFamily()}.
 	 */
 	public String getFontFamily() {
-		return getValue(Property.fontFamily, DEFAULT_FONT_FAMILY);
+		return getValue(Property.fontFamily, Defaults.getScale().getScaleLabel().getFontFamily());
 	}
 
 }

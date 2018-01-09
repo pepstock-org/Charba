@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options.scales;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -25,19 +26,19 @@ import org.pepstock.charba.client.commons.Key;
  */
 abstract class CartesianTick extends Tick {
 
-	private static final boolean DEFAULT_AUTO_SKIP = true;
-
-	private static final int DEFAULT_AUTO_SKIP_PADDING = 0;
-
-	private static final int DEFAULT_LABEL_OFFSET = 0;
-
-	private static final int DEFAULT_MAX_ROTATION = 90;
-
-	private static final int DEFAULT_MIN_ROTATION = 0;
-
-	private static final boolean DEFAULT_MIRROR = false;
-
-	private static final int DEFAULT_PADDING = 10;
+//	private static final boolean DEFAULT_AUTO_SKIP = true;
+//
+//	private static final int DEFAULT_AUTO_SKIP_PADDING = 0;
+//
+//	private static final int DEFAULT_LABEL_OFFSET = 0;
+//
+//	private static final int DEFAULT_MAX_ROTATION = 90;
+//
+//	private static final int DEFAULT_MIN_ROTATION = 0;
+//
+//	private static final boolean DEFAULT_MIRROR = false;
+//
+//	private static final int DEFAULT_PADDING = 10;
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -75,10 +76,10 @@ abstract class CartesianTick extends Tick {
 	 * labels no matter what
 	 * 
 	 * @return If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to
-	 *         show all labels no matter what. Default is true
+	 *         show all labels no matter what. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#isAutoSkip()}.
 	 */
 	public boolean isAutoSkip() {
-		return getValue(Property.autoSkip, DEFAULT_AUTO_SKIP);
+		return getValue(Property.autoSkip, Defaults.getScale().getTicks().isAutoSkip());
 	}
 
 	/**
@@ -97,10 +98,10 @@ abstract class CartesianTick extends Tick {
 	 * horizontal scales.
 	 * 
 	 * @return padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal
-	 *         scales. Defualt is 0.
+	 *         scales. Defualt is {@link org.pepstock.charba.client.defaults.scale.Ticks#getAutoSkipPadding()}.
 	 */
 	public int getAutoSkipPadding() {
-		return getValue(Property.autoSkipPadding, DEFAULT_AUTO_SKIP_PADDING);
+		return getValue(Property.autoSkipPadding, Defaults.getScale().getTicks().getAutoSkipPadding());
 	}
 
 	/**
@@ -121,10 +122,10 @@ abstract class CartesianTick extends Tick {
 	 * Note: this can cause labels at the edges to be cropped by the edge of the canvas.
 	 * 
 	 * @return the distance in pixels to offset the label from the centre point of the tick (in the y direction for the x axis,
-	 *         and the x direction for the y axis). Default is 0.
+	 *         and the x direction for the y axis). Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getLabelOffset()}.
 	 */
 	public int getLabelOffset() {
-		return getValue(Property.labelOffset, DEFAULT_LABEL_OFFSET);
+		return getValue(Property.labelOffset, Defaults.getScale().getTicks().getLabelOffset());
 	}
 
 	/**
@@ -143,10 +144,10 @@ abstract class CartesianTick extends Tick {
 	 * necessary. Note: Only applicable to horizontal scales.
 	 * 
 	 * @return maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary.
-	 *         Note: Only applicable to horizontal scales. Default is 90
+	 *         Note: Only applicable to horizontal scales. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getMaxRotation()}.
 	 */
 	public int getMaxRotation() {
-		return getValue(Property.maxRotation, DEFAULT_MAX_ROTATION);
+		return getValue(Property.maxRotation, Defaults.getScale().getTicks().getMaxRotation());
 	}
 
 	/**
@@ -161,10 +162,10 @@ abstract class CartesianTick extends Tick {
 	/**
 	 * Returns the minimum rotation for tick labels. Note: Only applicable to horizontal scales.
 	 * 
-	 * @return minimum rotation for tick labels. Note: Only applicable to horizontal scales.. Default is 0.
+	 * @return minimum rotation for tick labels. Note: Only applicable to horizontal scales. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getMinRotation()}.
 	 */
 	public int getMinRotation() {
-		return getValue(Property.minRotation, DEFAULT_MIN_ROTATION);
+		return getValue(Property.minRotation, Defaults.getScale().getTicks().getMinRotation());
 	}
 
 	/**
@@ -183,10 +184,10 @@ abstract class CartesianTick extends Tick {
 	 * applicable to vertical scales.
 	 * 
 	 * @return flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable
-	 *         to vertical scales. Default is false.
+	 *         to vertical scales. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#isMirror()}.
 	 */
 	public boolean isMirror() {
-		return getValue(Property.mirror, DEFAULT_MIRROR);
+		return getValue(Property.mirror, Defaults.getScale().getTicks().isMirror());
 	}
 
 	/**
@@ -205,10 +206,10 @@ abstract class CartesianTick extends Tick {
 	 * direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
 	 * 
 	 * @return padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X)
-	 *         direction. When set on a horizontal axis, this applies in the vertical (Y) direction. Default is 10.
+	 *         direction. When set on a horizontal axis, this applies in the vertical (Y) direction. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getPadding()}.
 	 */
 	public int getPadding() {
-		return getValue(Property.padding, DEFAULT_PADDING);
+		return getValue(Property.padding, Defaults.getScale().getTicks().getPadding());
 	}
 
 }

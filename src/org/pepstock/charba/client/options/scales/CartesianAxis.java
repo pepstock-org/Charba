@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options.scales;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Position;
 
@@ -35,8 +36,6 @@ import org.pepstock.charba.client.enums.Position;
  */
 abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 
-	// default offset
-	private static final boolean DEFAULT_OFFSET = false;
 	// default if is stacked
 	private static final boolean DEFAULT_STACKED = false;
 
@@ -128,10 +127,10 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	/**
 	 * If true, extra space is added to the both edges and the axis is scaled to fit into the chart area.
 	 * 
-	 * @return extra space of axis
+	 * @return extra space of axis. Default is {@link org.pepstock.charba.client.defaults.Scale#isOffset()}.
 	 */
 	public boolean isOffset() {
-		return getValue(Property.offset, DEFAULT_OFFSET);
+		return getValue(Property.offset, Defaults.getScale().isOffset());
 	}
 
 	/**
@@ -167,10 +166,10 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	/**
 	 * Position of the axis in the chart. Possible values are: 'top', 'left', 'bottom', 'right'
 	 * 
-	 * @return position of axis
+	 * @return position of axis. Default is {@link org.pepstock.charba.client.defaults.Scale#getPosition()}.
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {
-		return getValue(Property.position, Position.class, Position.top);
+		return getValue(Property.position, Position.class, Defaults.getScale().getPosition());
 	}
 }

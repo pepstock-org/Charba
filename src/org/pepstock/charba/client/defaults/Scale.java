@@ -37,7 +37,7 @@ import org.pepstock.charba.client.enums.Position;
  *
  * @param <T> type of tick to apply to axis
  */
-public final class Scale extends AbstractDefaultsObject {
+public final class Scale extends AbstractDefaultsItem {
 	
 	private static final boolean DEFAULT_DISPLAY = true;
 	// default offset

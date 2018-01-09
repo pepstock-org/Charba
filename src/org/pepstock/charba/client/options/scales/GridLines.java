@@ -17,6 +17,7 @@ package org.pepstock.charba.client.options.scales;
 
 import java.util.List;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.JsIntegerArrayList;
@@ -30,30 +31,6 @@ import org.pepstock.charba.client.commons.Key;
  *
  */
 public class GridLines extends JavaScriptObjectContainer {
-
-	private static final boolean DEFAULT_DISPLAY = true;
-
-	private static final String DEFAULT_COLOR = "rgba(0,0,0,0.1)";
-
-	private static final int DEFAULT_BORDER_DASH_OFFSET = 0;
-
-	private static final int DEFAULT_LINE_WIDTH = 1;
-
-	private static final boolean DEFAULT_DRAW_BORDER = true;
-
-	private static final boolean DEFAULT_DRAW_ON_CHART_AREA = true;
-
-	private static final boolean DEFAULT_DRAW_TICKS = true;
-
-	private static final int DEFAULT_TICK_MARK_LENGTH = 10;
-
-	private static final int DEFAULT_ZERO_LINE_WIDTH = 1;
-
-	private static final String DEFAULT_ZERO_LINE_COLOR = "rgba(0,0,0,0.25)";
-
-	private static final int DEFAULT_ZERO_LINE_BORDER_DASH_OFFSET = 0;
-
-	private static final boolean DEFAULT_OFFSET_GRID_LINES = false;
 
 	private boolean isColorArray = false;
 
@@ -98,10 +75,10 @@ public class GridLines extends JavaScriptObjectContainer {
 	/**
 	 * If false, do not display grid lines for this axis.
 	 * 
-	 * @return If false, do not display grid lines for this axis. Default is true.
+	 * @return If false, do not display grid lines for this axis. Default is {@link org.pepstock.charba.client.defaults.scale.GridLines#isDisplay()}.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, DEFAULT_DISPLAY);
+		return getValue(Property.display, Defaults.getScale().getGrideLines().isDisplay());
 	}
 
 	/**
@@ -130,7 +107,7 @@ public class GridLines extends JavaScriptObjectContainer {
 	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
 	 * second grid line and so on.
 	 * 
-	 * @return the list of colors of the grid lines. If not set, default is only 1 value 'rgba(0, 0, 0, 0.1)'
+	 * @return the list of colors of the grid lines. If not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#getColor()}.
 	 */
 	public List<String> getColor() {
 		// loads stored data
@@ -138,7 +115,7 @@ public class GridLines extends JavaScriptObjectContainer {
 		// if empty
 		if (values.isEmpty()) {
 			// return default color
-			values.add(DEFAULT_COLOR);
+			return Defaults.getScale().getGrideLines().getColor();
 		}
 		return values;
 	}
@@ -167,10 +144,16 @@ public class GridLines extends JavaScriptObjectContainer {
 	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
 	 * lines and gaps which describe the pattern.
 	 * 
-	 * @return the line dash pattern used when stroking lines
+	 * @return the line dash pattern used when stroking lines. Default is {@link org.pepstock.charba.client.defaults.scale.GridLines#getBorderDash()}.
 	 */
 	public List<Integer> getBorderDash() {
-		return getIntegerArray(Property.borderDash);
+		List<Integer> values = getIntegerArray(Property.borderDash);
+		// if empty
+		if (values.isEmpty()) {
+			// return default color
+			return Defaults.getScale().getGrideLines().getBorderDash();
+		}
+		return values;
 	}
 
 	/**
@@ -185,10 +168,10 @@ public class GridLines extends JavaScriptObjectContainer {
 	/**
 	 * Returns the line dash pattern offset or "phase".
 	 * 
-	 * @return Offset for line dashes. If not set, default is 0
+	 * @return Offset for line dashes. If not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#getBorderDashOffset()}.
 	 */
 	public int getBorderDashOffset() {
-		return getValue(Property.borderDashOffset, DEFAULT_BORDER_DASH_OFFSET);
+		return getValue(Property.borderDashOffset, Defaults.getScale().getGrideLines().getBorderDashOffset());
 	}
 
 	/**
@@ -212,7 +195,7 @@ public class GridLines extends JavaScriptObjectContainer {
 	/**
 	 * Returns the stroke widths of grid lines.
 	 * 
-	 * @return lineWidth stroke widths of grid lines. If not set, default is 1.
+	 * @return lineWidth stroke widths of grid lines. If not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#getLineWidth()}.
 	 */
 	public List<Integer> getLineWidth() {
 		// loads stored data
@@ -220,7 +203,7 @@ public class GridLines extends JavaScriptObjectContainer {
 		// if empty
 		if (values.isEmpty()) {
 			// returns default
-			values.add(DEFAULT_LINE_WIDTH);
+			return Defaults.getScale().getGrideLines().getLineWidth();
 		}
 		return values;
 	}
@@ -237,10 +220,10 @@ public class GridLines extends JavaScriptObjectContainer {
 	/**
 	 * If true, draw border at the edge between the axis and the chart area.
 	 * 
-	 * @return If true, draw border at the edge between the axis and the chart area. If not set, default is true
+	 * @return If true, draw border at the edge between the axis and the chart area. If not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#isDrawBorder()}.
 	 */
 	public boolean isDrawBorder() {
-		return getValue(Property.drawBorder, DEFAULT_DRAW_BORDER);
+		return getValue(Property.drawBorder, Defaults.getScale().getGrideLines().isDrawBorder());
 	}
 
 	/**
@@ -259,10 +242,10 @@ public class GridLines extends JavaScriptObjectContainer {
 	 * control which grid lines are drawn.
 	 * 
 	 * @return If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you
-	 *         need to control which grid lines are drawn. If not set, default is true
+	 *         need to control which grid lines are drawn. If not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#isDrawOnChartArea()}.
 	 */
 	public boolean isDrawOnChartArea() {
-		return getValue(Property.drawOnChartArea, DEFAULT_DRAW_ON_CHART_AREA);
+		return getValue(Property.drawOnChartArea, Defaults.getScale().getGrideLines().isDrawOnChartArea());
 	}
 
 	/**
@@ -277,10 +260,10 @@ public class GridLines extends JavaScriptObjectContainer {
 	/**
 	 * If true, draw lines beside the ticks in the axis area beside the chart.
 	 * 
-	 * @return If true, draw lines beside the ticks in the axis area beside the chart. If not set, default is true
+	 * @return If true, draw lines beside the ticks in the axis area beside the chart. If not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#isDrawTicks()}.
 	 */
 	public boolean isDrawTicks() {
-		return getValue(Property.drawTicks, DEFAULT_DRAW_TICKS);
+		return getValue(Property.drawTicks, Defaults.getScale().getGrideLines().isDrawTicks());
 	}
 
 	/**
@@ -295,10 +278,10 @@ public class GridLines extends JavaScriptObjectContainer {
 	/**
 	 * Returns the length in pixels that the grid lines will draw into the axis area.
 	 * 
-	 * @return Length in pixels that the grid lines will draw into the axis area. If not set, default is 10
+	 * @return Length in pixels that the grid lines will draw into the axis area. If not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#getTickMarkLength()}.
 	 */
 	public int getTickMarkLength() {
-		return getValue(Property.tickMarkLength, DEFAULT_TICK_MARK_LENGTH);
+		return getValue(Property.tickMarkLength, Defaults.getScale().getGrideLines().getTickMarkLength());
 	}
 
 	/**
@@ -313,10 +296,10 @@ public class GridLines extends JavaScriptObjectContainer {
 	/**
 	 * Returns the stroke width of the grid line for the first index (index 0).
 	 * 
-	 * @return Stroke width of the grid line for the first index (index 0). If not set, default is 1
+	 * @return Stroke width of the grid line for the first index (index 0). If not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#getZeroLineWidth()}.
 	 */
 	public int getZeroLineWidth() {
-		return getValue(Property.zeroLineWidth, DEFAULT_ZERO_LINE_WIDTH);
+		return getValue(Property.zeroLineWidth, Defaults.getScale().getGrideLines().getZeroLineWidth());
 	}
 
 	/**
@@ -331,10 +314,10 @@ public class GridLines extends JavaScriptObjectContainer {
 	/**
 	 * Returns the stroke color of the grid line for the first index (index 0).
 	 * 
-	 * @return Stroke color of the grid line for the first index (index 0). If not set, default is 'rgba(0, 0, 0, 0.25)'
+	 * @return Stroke color of the grid line for the first index (index 0). If not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#getZeroLineColor()}.
 	 */
 	public String getZeroLineColor() {
-		return getValue(Property.zeroLineColor, DEFAULT_ZERO_LINE_COLOR);
+		return getValue(Property.zeroLineColor, Defaults.getScale().getGrideLines().getZeroLineColor());
 	}
 
 	/**
@@ -358,10 +341,16 @@ public class GridLines extends JavaScriptObjectContainer {
 	/**
 	 * Returns the length and spacing of dashes of the grid line for the first index (index 0).
 	 * 
-	 * @return the length and spacing of dashes of the grid line for the first index (index 0).
+	 * @return the length and spacing of dashes of the grid line for the first index (index 0). Default is {@link org.pepstock.charba.client.defaults.scale.GridLines#getZeroLineBorderDash()}.
 	 */
 	public List<Integer> getZeroLineBorderDash() {
-		return getIntegerArray(Property.zeroLineBorderDash);
+		List<Integer> values = getIntegerArray(Property.zeroLineBorderDash);
+		// if empty
+		if (values.isEmpty()) {
+			// return default color
+			return Defaults.getScale().getGrideLines().getZeroLineBorderDash();
+		}
+		return values;
 	}
 
 	/**
@@ -376,10 +365,10 @@ public class GridLines extends JavaScriptObjectContainer {
 	/**
 	 * Returns the offset for line dashes of the grid line for the first index (index 0).
 	 * 
-	 * @return the offset for line dashes of the grid line for the first index (index 0). if not set, default is 0
+	 * @return the offset for line dashes of the grid line for the first index (index 0). if not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#getZeroLineBorderDashOffset()}.
 	 */
 	public int getZeroLineBorderDashOffset() {
-		return getValue(Property.zeroLineBorderDashOffset, DEFAULT_ZERO_LINE_BORDER_DASH_OFFSET);
+		return getValue(Property.zeroLineBorderDashOffset, Defaults.getScale().getGrideLines().getZeroLineBorderDashOffset());
 	}
 
 	/**
@@ -394,10 +383,10 @@ public class GridLines extends JavaScriptObjectContainer {
 	/**
 	 * If true, grid lines will be shifted to be between labels. This is set to true in the bar chart by default.
 	 * 
-	 * @return If true, grid lines will be shifted to be between labels. If not set, default is false.
+	 * @return If true, grid lines will be shifted to be between labels. If not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#isOffsetGridLines()}.
 	 */
 	public boolean isOffsetGridLines() {
-		return getValue(Property.offsetGridLines, DEFAULT_OFFSET_GRID_LINES);
+		return getValue(Property.offsetGridLines, Defaults.getScale().getGrideLines().isOffsetGridLines());
 	}
 
 }

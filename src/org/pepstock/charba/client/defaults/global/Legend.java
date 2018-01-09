@@ -17,7 +17,7 @@ package org.pepstock.charba.client.defaults.global;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.AbstractDefaultsObject;
+import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -26,7 +26,7 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Legend extends AbstractDefaultsObject {
+public final class Legend extends AbstractDefaultsItem {
 	
 //    "weight": 1000,
 

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.AxisBuildTicksCallback;
 import org.pepstock.charba.client.callbacks.AxisCalculateTickRotationCallback;
 import org.pepstock.charba.client.callbacks.AxisDataLimitsCallback;
@@ -41,8 +42,6 @@ public abstract class Axis extends JavaScriptObjectContainer {
 
 	// default weight
 	private static final int DEFAULT_WEIGHT = 0;
-	// default display
-	private static final boolean DEFAULT_DISPLAY = true;
 
 	private AbstractChart<?, ?> chart = null;
 
@@ -130,10 +129,10 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	/**
 	 * Returns if axis is hidden.
 	 * 
-	 * @return <code>false</code> if axis is hidden, otherwise <code>true</code>.
+	 * @return <code>false</code> if axis is hidden, otherwise <code>true</code>. Default is {@link org.pepstock.charba.client.defaults.Scale#isDisplay()}.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, DEFAULT_DISPLAY);
+		return getValue(Property.display, Defaults.getScale().isDisplay());
 	}
 
 	/**

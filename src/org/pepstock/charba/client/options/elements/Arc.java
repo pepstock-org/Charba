@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options.elements;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 
@@ -31,13 +32,6 @@ import org.pepstock.charba.client.commons.Key;
  */
 public class Arc extends JavaScriptObjectContainer {
 
-	// default background color
-	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
-	// default border with
-	private static final int DEFAULT_BORDER_WIDTH = 2;
-	// default border color
-	private static final String DEFAULT_BORDER_COLOR = "#fff";
-
 	/**
 	 * Name of fields of JavaScript object.
 	 */
@@ -49,84 +43,84 @@ public class Arc extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * Sets the background color
+	 * Sets the background color.
 	 * 
-	 * @param backgroundColor the background color
+	 * @param backgroundColor the background color.
 	 */
 	public void setBackgroundColor(String backgroundColor) {
 		setValue(Property.backgroundColor, backgroundColor);
 	}
 
 	/**
-	 * Returns the background color
+	 * Returns the background color.
 	 * 
-	 * @return the background color
+	 * @return the background color.
 	 */
 	public String getBackgroundColor() {
 		return getValue(Property.backgroundColor, getDefaultBackgroundColor());
 	}
 
 	/**
-	 * Returns the default background color
+	 * Returns the default background color.
 	 * 
-	 * @return the default background color
+	 * @return the default background color. Default is {@link org.pepstock.charba.client.defaults.global.Arc#getBackgroundColor()}.
 	 */
 	protected String getDefaultBackgroundColor() {
-		return DEFAULT_BACKGROUND_COLOR;
+		return Defaults.getGlobal().getElements().getArc().getBackgroundColor();
 	}
 
 	/**
-	 * Sets the border width
+	 * Sets the border width.
 	 * 
-	 * @param borderWidth the border width
+	 * @param borderWidth the border width.
 	 */
 	public void setBorderWidth(int borderWidth) {
 		setValue(Property.borderWidth, borderWidth);
 	}
 
 	/**
-	 * Returns the border width
+	 * Returns the border width.
 	 * 
-	 * @return the border width
+	 * @return the border width.
 	 */
 	public int getBorderWidth() {
 		return getValue(Property.borderWidth, getDefaultBorderWidth());
 	}
 
 	/**
-	 * Returns the default border width
+	 * Returns the default border width.
 	 * 
-	 * @return the default border width
+	 * @return the default border width. Default is {@link org.pepstock.charba.client.defaults.global.Arc#getBorderWidth()}.
 	 */
 	protected int getDefaultBorderWidth() {
-		return DEFAULT_BORDER_WIDTH;
+		return Defaults.getGlobal().getElements().getArc().getBorderWidth();
 	}
 
 	/**
-	 * Sets the border color
+	 * Sets the border color.
 	 * 
-	 * @param borderColor the border color
+	 * @param borderColor the border color.
 	 */
 	public void setBorderColor(String borderColor) {
 		setValue(Property.borderColor, borderColor);
 	}
 
 	/**
-	 * Returns the border color
+	 * Returns the border color.
 	 * 
-	 * @return the border color
+	 * @return the border color.
 	 */
 	public String getBorderColor() {
 		return getValue(Property.borderColor, getDefaultBorderColor());
 	}
 
 	/**
-	 * Returns the default border color
+	 * Returns the default border color.
 	 * 
-	 * @return the default border color
+	 * @return the default border color. Default is {@link org.pepstock.charba.client.defaults.global.Arc#getBorderColor()}.
 	 */
 	protected String getDefaultBorderColor() {
-		return DEFAULT_BORDER_COLOR;
+		return Defaults.getGlobal().getElements().getArc().getBorderColor();
 	}
 
 }
