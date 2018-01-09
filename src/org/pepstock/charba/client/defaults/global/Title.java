@@ -1,0 +1,152 @@
+/**
+    Copyright 2017 Andrea "Stock" Stocchero
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+	    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
+package org.pepstock.charba.client.defaults.global;
+
+import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.FontItem;
+import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.Position;
+
+/**
+ * Configures the chart title which defines text to draw at the top of the chart.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
+public final class Title extends FontItem {
+
+	private static final int DEFAULT_PADDING = 10;
+	
+	private static final boolean DEFAULT_FULL_WIDTH = true;
+
+	private static final double DEFAULT_LINE_HEIGHT = 1.2D;
+
+	// FIXME
+//    "fullWidth": true,
+//    "lineHeight": 1.2,
+//    "weight": 2000
+	
+	private static final boolean DEFAULT_DISPLAY = false;
+
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		display,
+		fontStyle,
+		position,
+		padding,
+		fullWidth,
+		lineHeight
+	}
+
+	/**
+	 * Builds the object storing the chart instance.
+	 * 
+	 * @param chart chart instance
+	 */
+	public Title(GenericJavaScriptObject javaScriptObject) {
+		super(javaScriptObject);
+	}
+
+	@Override
+	public FontStyle getFontStyle() {
+		return getValue(Property.fontStyle, FontStyle.class, FontStyle.bold);
+	}
+
+	/**
+	 * Sets if the title is shown.
+	 * 
+	 * @param display if the title is shown.
+	 */
+	public void setDisplay(boolean display) {
+		setValue(Property.display, display);
+	}
+
+	/**
+	 * Returns if the title is shown.
+	 * 
+	 * @return if the title is shown. Default is true.
+	 */
+	public boolean isDisplay() {
+		return getValue(Property.display, DEFAULT_DISPLAY);
+	}
+
+	/**
+	 * Sets the position of title.
+	 * 
+	 * @param position the position of title.
+	 * @see org.pepstock.charba.client.enums.Position
+	 */
+	public void setPosition(Position position) {
+		setValue(Property.position, position);
+	}
+
+	/**
+	 * Returns the position of title.
+	 * 
+	 * @return the position of title. Default is {@link org.pepstock.charba.client.enums.Position#top}.
+	 * @see org.pepstock.charba.client.enums.Position
+	 */
+	public Position getPosition() {
+		return getValue(Property.position, Position.class, Position.top);
+	}
+	
+	/**
+	 * Sets the padding to apply around labels. Only top and bottom are implemented.
+	 * 
+	 * @param padding Padding to apply around labels. Only top and bottom are implemented.
+	 */
+	public void setPadding(int padding) {
+		setValue(Property.padding, padding);
+	}
+
+	/**
+	 * Returns the padding to apply around labels. Only top and bottom are implemented.
+	 * 
+	 * @return Padding to apply around labels. Only top and bottom are implemented. Default is 10.
+	 */
+	public int getPadding() {
+		return getValue(Property.padding, DEFAULT_PADDING);
+	}
+
+	/**
+	 */
+	public void setFullWidth(boolean fullWidth) {
+		setValue(Property.fullWidth, fullWidth);
+	}
+
+	/**
+	 */
+	public boolean isFullWidth() {
+		return getValue(Property.fullWidth, DEFAULT_FULL_WIDTH);
+	}
+
+	/**
+	 */
+	public void setLineHeight(boolean lineHeight) {
+		setValue(Property.lineHeight, lineHeight);
+	}
+
+	/**
+	 */
+	public double getLineHeight() {
+		return getValue(Property.lineHeight, DEFAULT_LINE_HEIGHT);
+	}
+
+}

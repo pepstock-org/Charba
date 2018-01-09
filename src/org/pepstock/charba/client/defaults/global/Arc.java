@@ -13,24 +13,26 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.globals;
+package org.pepstock.charba.client.defaults.global;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.AbstractDefaultsObject;
 
 /**
  * Arcs are used in the polar area, doughnut and pie charts.<br>
- * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the same way.<br>
+ * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the
+ * same way.<br>
  * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
- * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a dataset.
+ * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a
+ * dataset.
  * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.PolarAreaChart
  * @see org.pepstock.charba.client.DoughnutChart
  * @see org.pepstock.charba.client.PieChart
  */
-public class Arc extends JavaScriptObjectContainer {
+public class Arc extends AbstractDefaultsObject {
 
 	// default background color
 	protected static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
@@ -55,7 +57,7 @@ public class Arc extends JavaScriptObjectContainer {
 	Arc(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
-	
+
 	/**
 	 * Sets the background color
 	 * 

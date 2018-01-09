@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.EventProvider;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
@@ -39,11 +40,11 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public final class Legend extends EventProvider {
 
-	private static final boolean DEFAULT_DISPLAY = true;
-
-	private static final boolean DEFAULT_FULL_WIDTH = true;
-
-	private static final boolean DEFAULT_REVERSE = false;
+//	private static final boolean DEFAULT_DISPLAY = true;
+//
+//	private static final boolean DEFAULT_FULL_WIDTH = true;
+//
+//	private static final boolean DEFAULT_REVERSE = false;
 
 	private final LegendLabels labels;
 
@@ -153,7 +154,8 @@ public final class Legend extends EventProvider {
 	 * @return if the legend is shown. Default is true.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, DEFAULT_DISPLAY);
+//		return getValue(Property.display, DEFAULT_DISPLAY);
+		return getValue(Property.display, Defaults.getGlobal().getLegend().isDisplay());
 	}
 
 	/**
@@ -171,7 +173,8 @@ public final class Legend extends EventProvider {
 	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). Default is true.
 	 */
 	public boolean isFullWidth() {
-		return getValue(Property.fullWidth, DEFAULT_FULL_WIDTH);
+//		return getValue(Property.fullWidth, DEFAULT_FULL_WIDTH);
+		return getValue(Property.fullWidth, Defaults.getGlobal().getLegend().isFullWidth());
 	}
 
 	/**
@@ -189,7 +192,8 @@ public final class Legend extends EventProvider {
 	 * @return Legend will show datasets in reverse order. Default is false.
 	 */
 	public boolean isReverse() {
-		return getValue(Property.reverse, DEFAULT_REVERSE);
+//		return getValue(Property.reverse, DEFAULT_REVERSE);
+		return getValue(Property.reverse, Defaults.getGlobal().getLegend().isReverse());
 	}
 
 	/**
@@ -209,7 +213,8 @@ public final class Legend extends EventProvider {
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {
-		return getValue(Property.position, Position.class, Position.top);
+//		return getValue(Property.position, Position.class, Position.top);
+		return getValue(Property.position, Position.class, Defaults.getGlobal().getLegend().getPosition());
 	}
 
 	/**

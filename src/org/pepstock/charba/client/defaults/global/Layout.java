@@ -13,11 +13,11 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.globals;
+package org.pepstock.charba.client.defaults.global;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.AbstractDefaultsObject;
 
 /**
  * The layout configuration is needed to set the padidng.
@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Layout extends JavaScriptObjectContainer {
+public final class Layout extends AbstractDefaultsObject {
 
 	private final Padding padding;
 
@@ -37,10 +37,11 @@ public final class Layout extends JavaScriptObjectContainer {
 	/**
 	 * Builds the object setting the java script padding object.
 	 */
-	Layout(GenericJavaScriptObject javaScriptObject) {
+	public Layout(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
-		padding = new Padding((GenericJavaScriptObject)getValue(Property.padding));
+		padding = new Padding(load(Property.padding));
 	}
+
 	/**
 	 * @return the padding
 	 */

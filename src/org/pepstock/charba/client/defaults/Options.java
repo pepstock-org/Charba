@@ -13,14 +13,20 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.globals;
+package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.JsEnumValueArrayList;
 import org.pepstock.charba.client.commons.JsStringArrayList;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.global.Animation;
+import org.pepstock.charba.client.defaults.global.Elements;
+import org.pepstock.charba.client.defaults.global.Hover;
+import org.pepstock.charba.client.defaults.global.Layout;
+import org.pepstock.charba.client.defaults.global.Legend;
+import org.pepstock.charba.client.defaults.global.Title;
+import org.pepstock.charba.client.defaults.global.Tooltips;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.FontStyle;
 
@@ -42,34 +48,38 @@ import org.pepstock.charba.client.enums.FontStyle;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Options extends JavaScriptObjectContainer {
-	
+public final class Options extends AbstractDefaultsObject {
+
 	private static final boolean DEFAULT_RESPONSIVE = true;
 
 	private static final int DEFAULT_RESPONSIVE_ANIMATION_DURATION = 0;
 
 	private static final boolean DEFAULT_MAINTAIN_ASPECT_RATIO = true;
-	
+
 	private static final String DEFAULT_COLOR = "rgba(0,0,0,0.1)";
-	
+
 	private static final int DEFAULT_FONT_SIZE = 12;
 
 	private static final String DEFAULT_FONT_COLOR = "#666";
 
 	private static final String DEFAULT_FONT_FAMILY = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
-	
+
 	private static final boolean DEFAULT_SHOW_LINES = true;
-	
+
 	private final Hover hover;
-	
+
 	private final Elements elements;
-	
+
 	private final Layout layout;
-	
+
 	private final Animation animation;
-	
+
 	private final Tooltips tooltips;
-	
+
+	private final Title title;
+
+	private final Legend legend;
+
 	/**
 	 * Name of fields of JavaScript object.
 	 */
@@ -90,54 +100,68 @@ public final class Options extends JavaScriptObjectContainer {
 		layout,
 		animation,
 		tooltips,
-		/**/
-		
 		legend,
 		title
 	}
 
 	public Options(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
-		hover = new Hover((GenericJavaScriptObject)getValue(Property.hover));
-		elements = new Elements((GenericJavaScriptObject)getValue(Property.elements));
-		layout = new Layout((GenericJavaScriptObject)getValue(Property.layout));
-		animation = new Animation((GenericJavaScriptObject)getValue(Property.animation));
-		tooltips = new Tooltips((GenericJavaScriptObject)getValue(Property.tooltips));
+		hover = new Hover(load(Property.hover));
+		elements = new Elements(load(Property.elements));
+		layout = new Layout(load(Property.layout));
+		animation = new Animation(load(Property.animation));
+		tooltips = new Tooltips(load(Property.tooltips));
+		legend = new Legend(load(Property.legend));
+		title = new Title(load(Property.title));
 	}
-	
+
 	/**
 	 * @return the hover
 	 */
 	public Hover getHover() {
 		return hover;
 	}
-	
+
 	/**
 	 * @return the elements
 	 */
 	public Elements getElements() {
 		return elements;
 	}
-	
+
 	/**
 	 * @return the layout
 	 */
 	public Layout getLayout() {
 		return layout;
 	}
-	
+
 	/**
 	 * @return the animation
 	 */
 	public Animation getAnimation() {
 		return animation;
 	}
-	
+
 	/**
 	 * @return the tooltips
 	 */
 	public Tooltips getTooltips() {
 		return tooltips;
+	}
+	
+	/**
+	 * @return the title
+	 */
+	public Title getTitle() {
+		return title;
+	}
+	
+	/**
+	 * @return the legend
+	 */
+	public Legend getLegend() {
+		return legend;
 	}
 
 	/**
@@ -236,7 +260,7 @@ public final class Options extends JavaScriptObjectContainer {
 	public boolean isMaintainAspectRatio() {
 		return getValue(Property.maintainAspectRatio, DEFAULT_MAINTAIN_ASPECT_RATIO);
 	}
-	
+
 	/**
 	 */
 	public void setDefaultColor(String defaultColor) {
@@ -260,7 +284,7 @@ public final class Options extends JavaScriptObjectContainer {
 	public String getDefaultFontColor() {
 		return getValue(Property.defaultFontColor, DEFAULT_FONT_COLOR);
 	}
-	
+
 	/**
 	 * Sets the font size for label.
 	 * 
@@ -282,7 +306,8 @@ public final class Options extends JavaScriptObjectContainer {
 	/**
 	 * Sets the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @param fontStyle Font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * @param fontStyle Font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial,
+	 *            inherit).
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public void setDefaultFontStyle(FontStyle fontStyle) {
@@ -292,13 +317,14 @@ public final class Options extends JavaScriptObjectContainer {
 	/**
 	 * Returns the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). Default is normal
+	 * @return the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 *         Default is normal
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getDefaultFontStyle() {
 		return getValue(Property.defaultFontStyle, FontStyle.class, FontStyle.normal);
 	}
-	
+
 	/**
 	 * Sets the font family for the label, follows CSS font-family options.
 	 * 
@@ -311,7 +337,8 @@ public final class Options extends JavaScriptObjectContainer {
 	/**
 	 * Returns the font family for the label, follows CSS font-family options.
 	 * 
-	 * @return Font family for the label, follows CSS font-family options. Default is 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
+	 * @return Font family for the label, follows CSS font-family options. Default is 'Helvetica Neue', 'Helvetica', 'Arial',
+	 *         sans-serif
 	 */
 	public String getDefaultFontFamily() {
 		return getValue(Property.defaultFontFamily, DEFAULT_FONT_FAMILY);
@@ -334,5 +361,17 @@ public final class Options extends JavaScriptObjectContainer {
 	public boolean isShowLines() {
 		return getValue(Property.showLines, DEFAULT_SHOW_LINES);
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Options [isAnimationEnable()=" + isAnimationEnable() + ", isResponsive()=" + isResponsive() + ", getResponsiveAnimationDuration()=" + getResponsiveAnimationDuration() + ", isMaintainAspectRatio()=" + isMaintainAspectRatio()
+				+ ", getDefaultColor()=" + getDefaultColor() + ", getDefaultFontColor()=" + getDefaultFontColor() + ", getDefaultFontSize()=" + getDefaultFontSize() + ", getDefaultFontStyle()=" + getDefaultFontStyle() + ", getDefaultFontFamily()="
+				+ getDefaultFontFamily() + ", isShowLines()=" + isShowLines() + "]";
+	}
+	
+	
 
 }

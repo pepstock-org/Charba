@@ -16,10 +16,13 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.LegendFilterHandler;
 import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
+import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.items.LegendItem;
 
 /**
@@ -28,11 +31,7 @@ import org.pepstock.charba.client.items.LegendItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LegendLabels extends AbstractLabel {
-
-	private static final int DEFAULT_BOX_WIDTH = 40;
-
-	private static final boolean DEFAULT_USE_POINT_STYLE = false;
+public final class LegendLabels extends ChartContainer {
 
 	private LegendLabelsCallback labelsCallBack = null;
 
@@ -43,7 +42,12 @@ public final class LegendLabels extends AbstractLabel {
 	 */
 	private enum Property implements Key
 	{
+		fontSize,
+		fontStyle,
+		fontColor,
+		fontFamily,
 		boxWidth,
+		padding,
 		usePointStyle,
 		generateLabels,
 		filter
@@ -95,6 +99,80 @@ public final class LegendLabels extends AbstractLabel {
 		}
 		this.filterHandler = filterHandler;
 	}
+	
+	/**
+	 * Sets the font size for label.
+	 * 
+	 * @param fontSize Font size for label.
+	 */
+	public void setFontSize(int fontSize) {
+		setValue(Property.fontSize, fontSize);
+	}
+
+	/**
+	 * Returns the font size for label.
+	 * 
+	 * @return Font size for label. Default is {@link org.pepstock.charba.client.defaults.Options#getDefaultFontSize()}.
+	 */
+	public int getFontSize() {
+		return getValue(Property.fontSize, Defaults.getGlobal().getLegend().getLabels().getFontSize());
+	}
+
+	/**
+	 * Sets the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * 
+	 * @param fontStyle Font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * @see org.pepstock.charba.client.enums.FontStyle
+	 */
+	public void setFontStyle(FontStyle fontStyle) {
+		setValue(Property.fontStyle, fontStyle);
+	}
+
+	/**
+	 * Returns the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * 
+	 * @return the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). Default is normal
+	 * @see org.pepstock.charba.client.enums.FontStyle
+	 */
+	public FontStyle getFontStyle() {
+		return getValue(Property.fontStyle, FontStyle.class, Defaults.getGlobal().getLegend().getLabels().getFontStyle());
+	}
+
+	/**
+	 * Sets the font color for label
+	 * 
+	 * @param fontColor Font color for label
+	 */
+	public void setFontColor(String fontColor) {
+		setValue(Property.fontColor, fontColor);
+	}
+
+	/**
+	 * Returns the font color for label
+	 * 
+	 * @return Font color for label. Default is '#666'
+	 */
+	public String getFontColor() {
+		return getValue(Property.fontColor, Defaults.getGlobal().getLegend().getLabels().getFontColor());
+	}
+
+	/**
+	 * Sets the font family for the label, follows CSS font-family options.
+	 * 
+	 * @param fontFamily Font family for the label, follows CSS font-family options.
+	 */
+	public void setFontFamily(String fontFamily) {
+		setValue(Property.fontFamily, fontFamily);
+	}
+
+	/**
+	 * Returns the font family for the label, follows CSS font-family options.
+	 * 
+	 * @return Font family for the label, follows CSS font-family options. Default is 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
+	 */
+	public String getFontFamily() {
+		return getValue(Property.fontFamily, Defaults.getGlobal().getLegend().getLabels().getFontFamily());
+	}
 
 	/**
 	 * Sets if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
@@ -111,7 +189,7 @@ public final class LegendLabels extends AbstractLabel {
 	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case). Default is false.
 	 */
 	public boolean isUsePointStyle() {
-		return getValue(Property.usePointStyle, DEFAULT_USE_POINT_STYLE);
+		return getValue(Property.usePointStyle, Defaults.getGlobal().getLegend().getLabels().isUsePointStyle());
 	}
 
 	/**
@@ -129,7 +207,25 @@ public final class LegendLabels extends AbstractLabel {
 	 * @return width of coloured box. Default is 40.
 	 */
 	public int getBoxWidth() {
-		return getValue(Property.boxWidth, DEFAULT_BOX_WIDTH);
+		return getValue(Property.boxWidth, Defaults.getGlobal().getLegend().getLabels().getBoxWidth());
+	}
+	
+	/**
+	 * Sets the padding to apply around labels. Only top and bottom are implemented.
+	 * 
+	 * @param padding Padding to apply around labels. Only top and bottom are implemented.
+	 */
+	public void setPadding(int padding) {
+		setValue(Property.padding, padding);
+	}
+
+	/**
+	 * Returns the padding to apply around labels. Only top and bottom are implemented.
+	 * 
+	 * @return Padding to apply around labels. Only top and bottom are implemented. Default is 10.
+	 */
+	public int getPadding() {
+		return getValue(Property.padding, Defaults.getGlobal().getLegend().getLabels().getPadding());
 	}
 
 	/**

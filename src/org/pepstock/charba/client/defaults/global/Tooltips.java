@@ -13,12 +13,12 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.globals;
+package org.pepstock.charba.client.defaults.global;
 
-import org.pepstock.charba.client.Globals;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.AbstractDefaultsObject;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.TooltipPosition;
@@ -29,7 +29,7 @@ import org.pepstock.charba.client.enums.TooltipPosition;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Tooltips extends JavaScriptObjectContainer {
+public final class Tooltips extends AbstractDefaultsObject {
 
 	private static final boolean DEFAULT_ENABLED = true;
 
@@ -71,11 +71,11 @@ public final class Tooltips extends JavaScriptObjectContainer {
 
 	private static final int DEFAULT_BORDER_WIDTH = 0;
 
-	//FIXME
-//  "titleAlign": "left",
-//  "bodyAlign": "left",
-//  "footerAlign": "left",
-	
+	// FIXME
+	// "titleAlign": "left",
+	// "bodyAlign": "left",
+	// "footerAlign": "left",
+
 	/**
 	 * Name of fields of JavaScript object.
 	 */
@@ -112,14 +112,13 @@ public final class Tooltips extends JavaScriptObjectContainer {
 		displayColors,
 		borderColor,
 		borderWidth
-
 	}
 
 	/**
 	 * Builds the object storing the chart instance.<br>
 	 * 
 	 */
-	Tooltips(GenericJavaScriptObject javaScriptObject) {
+	public Tooltips(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
 
@@ -237,7 +236,7 @@ public final class Tooltips extends JavaScriptObjectContainer {
 	 * @return the title font. Default is "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif".
 	 */
 	public String getTitleFontFamily() {
-		return getValue(Property.titleFontFamily, Globals.getOptions().getDefaultFontFamily());
+		return getValue(Property.titleFontFamily, Defaults.getGlobal().getDefaultFontFamily());
 	}
 
 	/**
@@ -255,7 +254,7 @@ public final class Tooltips extends JavaScriptObjectContainer {
 	 * @return Title font size. Default is 12.
 	 */
 	public int getTitleFontSize() {
-		return getValue(Property.titleFontSize, Globals.getOptions().getDefaultFontSize());
+		return getValue(Property.titleFontSize, Defaults.getGlobal().getDefaultFontSize());
 	}
 
 	/**
@@ -347,7 +346,7 @@ public final class Tooltips extends JavaScriptObjectContainer {
 	 * @return body line font. Default is "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif".
 	 */
 	public String getBodyFontFamily() {
-		return getValue(Property.bodyFontFamily, Globals.getOptions().getDefaultFontFamily());
+		return getValue(Property.bodyFontFamily, Defaults.getGlobal().getDefaultFontFamily());
 	}
 
 	/**
@@ -365,7 +364,7 @@ public final class Tooltips extends JavaScriptObjectContainer {
 	 * @return body font size. Default is 12.
 	 */
 	public int getBodyFontSize() {
-		return getValue(Property.bodyFontSize, Globals.getOptions().getDefaultFontSize());
+		return getValue(Property.bodyFontSize, Defaults.getGlobal().getDefaultFontSize());
 	}
 
 	/**
@@ -439,7 +438,7 @@ public final class Tooltips extends JavaScriptObjectContainer {
 	 * @return footer font. Default is "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif".
 	 */
 	public String getFooterFontFamily() {
-		return getValue(Property.footerFontFamily, Globals.getOptions().getDefaultFontFamily());
+		return getValue(Property.footerFontFamily, Defaults.getGlobal().getDefaultFontFamily());
 	}
 
 	/**
@@ -457,7 +456,7 @@ public final class Tooltips extends JavaScriptObjectContainer {
 	 * @return footer font size. Default is 12.
 	 */
 	public int getFooterFontSize() {
-		return getValue(Property.footerFontSize, Globals.getOptions().getDefaultFontSize());
+		return getValue(Property.footerFontSize, Defaults.getGlobal().getDefaultFontSize());
 	}
 
 	/**

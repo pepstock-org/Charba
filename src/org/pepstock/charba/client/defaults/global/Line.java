@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.globals;
+package org.pepstock.charba.client.defaults.global;
 
 import java.util.List;
 
@@ -27,9 +27,11 @@ import org.pepstock.charba.client.enums.JoinStyle;
 
 /**
  * Line elements are used to represent the line in a line chart.<br>
- * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the same way.<br>
+ * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the
+ * same way.<br>
  * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
- * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a dataset.
+ * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a
+ * dataset.
  * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.LineChart
@@ -62,7 +64,7 @@ public final class Line extends Arc {
 		capBezierPoints,
 		fill
 	}
-	
+
 	/**
 	 * Builds the object setting java script objects
 	 */
@@ -119,7 +121,8 @@ public final class Line extends Arc {
 	}
 
 	/**
-	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square.
+	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt,
+	 * round and square.
 	 * 
 	 * @param borderCapStyle how the end points of every line are drawn.
 	 * @see org.pepstock.charba.client.enums.CapStyle
@@ -129,7 +132,8 @@ public final class Line extends Arc {
 	}
 
 	/**
-	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square. By default this property is set to butt.
+	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are:
+	 * butt, round and square. By default this property is set to butt.
 	 * 
 	 * @return how the end points of every line are drawn.
 	 * @see org.pepstock.charba.client.enums.CapStyle
@@ -139,27 +143,33 @@ public final class Line extends Arc {
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
+	 * and gaps which describe the pattern.
 	 * 
-	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating
+	 *            lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
 		setBorderDash(ArrayListHelper.build(borderDash));
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
+	 * and gaps which describe the pattern.
 	 * 
-	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating
+	 *            lengths of lines and gaps which describe the pattern.
 	 */
 	private void setBorderDash(JsIntegerArrayList borderDash) {
 		setIntegerArray(Property.borderDash, borderDash);
 	}
 
 	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
+	 * lines and gaps which describe the pattern.
 	 * 
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
+	 *         lines and gaps which describe the pattern.
 	 */
 	public List<Integer> getBorderDash() {
 		return getIntegerArray(Property.borderDashOffset);
@@ -184,11 +194,13 @@ public final class Line extends Arc {
 	}
 
 	/**
-	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are
-	 * skipped).<br>
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 * (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position,
+	 * are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
-	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
+	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter. By default this
+	 *            property is set to miter.
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
@@ -196,11 +208,13 @@ public final class Line extends Arc {
 	}
 
 	/**
-	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are
-	 * skipped).<br>
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 * (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position,
+	 * are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
-	 * @return There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
+	 * @return There are three possible values for this property: round, bevel and miter. By default this property is set to
+	 *         miter.
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public JoinStyle getBorderJoinStyle() {

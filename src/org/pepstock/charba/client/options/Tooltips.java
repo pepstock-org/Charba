@@ -16,9 +16,11 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.TooltipCustomCallback;
 import org.pepstock.charba.client.callbacks.TooltipFilterHandler;
 import org.pepstock.charba.client.callbacks.TooltipItemSortHandler;
+import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
@@ -33,59 +35,7 @@ import org.pepstock.charba.client.items.TooltipModel;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Tooltips extends AbstractLabel {
-
-	private static final boolean DEFAULT_ENABLED = true;
-
-	private static final boolean DEFAULT_INTERSECT = true;
-
-	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.8)";
-
-	private static final String DEFAULT_TITLE_FONT_FAMILY = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
-
-	private static final int DEFAULT_TITLE_FONT_SIZE = 12;
-
-	private static final String DEFAULT_TITLE_FONT_COLOR = "#fff";
-
-	private static final int DEFAULT_TITLE_SPACING = 2;
-
-	private static final int DEFAULT_TITLE_MARGIN_BOTTOM = 6;
-
-	private static final String DEFAULT_BODY_FONT_FAMILY = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
-
-	private static final int DEFAULT_BODY_FONT_SIZE = 12;
-
-	private static final String DEFAULT_BODY_FONT_COLOR = "#fff";
-
-	private static final int DEFAULT_BODY_SPACING = 2;
-
-	private static final String DEFAULT_FOOTER_FONT_FAMILY = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
-
-	private static final int DEFAULT_FOOTER_FONT_SIZE = 12;
-
-	private static final String DEFAULT_FOOTER_FONT_COLOR = "#fff";
-
-	private static final int DEFAULT_FOOTER_SPACING = 2;
-
-	private static final int DEFAULT_FOOTER_MARGIN_TOP = 6;
-
-	private static final int DEFAULT_X_PADDING = 6;
-
-	private static final int DEFAULT_Y_PADDING = 6;
-
-	private static final int DEFAULT_CARET_PADDING = 2;
-
-	private static final int DEFAULT_CARET_SIZE = 5;
-
-	private static final int DEFAULT_CORNER_RADIUS = 6;
-
-	private static final String DEFAULT_MULTI_KEY_BACKGROUND = "#fff";
-
-	private static final boolean DEFAULT_DISPLAY_COLORS = true;
-
-	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0)";
-
-	private static final int DEFAULT_BORDER_WIDTH = 0;
+public final class Tooltips extends ChartContainer {
 
 	private final TooltipsCallbacks callbacks;
 
@@ -220,10 +170,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns if tooltips are enabled.
 	 * 
-	 * @return if tooltips are enabled.. Default is true.
+	 * @return if tooltips are enabled.. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#isEnabled()}.
 	 */
 	public boolean isEnabled() {
-		return getValue(Property.enabled, DEFAULT_ENABLED);
+		return getValue(Property.enabled, Defaults.getGlobal().getTooltips().isEnabled());
 	}
 
 	/**
@@ -239,12 +189,11 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns which elements appear in the tooltip.
 	 * 
-	 * @return which elements appear in the tooltip. Default is
-	 *         {@link org.pepstock.charba.client.enums.InteractionMode#nearest}.
+	 * @return which elements appear in the tooltip. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getMode()}.
 	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
 	public InteractionMode getMode() {
-		return getValue(Property.mode, InteractionMode.class, InteractionMode.nearest);
+		return getValue(Property.mode, InteractionMode.class, Defaults.getGlobal().getTooltips().getMode());
 	}
 
 	/**
@@ -263,10 +212,10 @@ public final class Tooltips extends AbstractLabel {
 	 * applied at all times.
 	 * 
 	 * @return if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode
-	 *         will be applied at all times. Default is true.
+	 *         will be applied at all times. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#isIntersect()}.
 	 */
 	public boolean isIntersect() {
-		return getValue(Property.intersect, DEFAULT_INTERSECT);
+		return getValue(Property.intersect, Defaults.getGlobal().getTooltips().isIntersect());
 	}
 
 	/**
@@ -282,11 +231,11 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the mode for positioning the tooltip.
 	 * 
-	 * @return mode for positioning the tooltip. Default is {@link org.pepstock.charba.client.enums.TooltipPosition#average}.
+	 * @return mode for positioning the tooltip. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getPosition()}.
 	 * @see org.pepstock.charba.client.enums.TooltipPosition
 	 */
 	public TooltipPosition getPosition() {
-		return getValue(Property.position, TooltipPosition.class, TooltipPosition.average);
+		return getValue(Property.position, TooltipPosition.class, Defaults.getGlobal().getTooltips().getPosition());
 	}
 
 	/**
@@ -301,10 +250,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the background color of the tooltip.
 	 * 
-	 * @return Background color of the tooltip. Default is "rgba(0,0,0,0.8)".
+	 * @return Background color of the tooltip. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBackgroundColor()}.
 	 */
 	public String getBackgroundColor() {
-		return getValue(Property.backgroundColor, DEFAULT_BACKGROUND_COLOR);
+		return getValue(Property.backgroundColor, Defaults.getGlobal().getTooltips().getBackgroundColor());
 	}
 
 	/**
@@ -319,10 +268,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the title font.
 	 * 
-	 * @return the title font. Default is "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif".
+	 * @return the title font. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getTitleFontFamily()()}.
 	 */
 	public String getTitleFontFamily() {
-		return getValue(Property.titleFontFamily, DEFAULT_TITLE_FONT_FAMILY);
+		return getValue(Property.titleFontFamily, Defaults.getGlobal().getTooltips().getTitleFontFamily());
 	}
 
 	/**
@@ -337,10 +286,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the title font size.
 	 * 
-	 * @return Title font size. Default is 12.
+	 * @return Title font size. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getTitleFontSize()}.
 	 */
 	public int getTitleFontSize() {
-		return getValue(Property.titleFontSize, DEFAULT_TITLE_FONT_SIZE);
+		return getValue(Property.titleFontSize, Defaults.getGlobal().getTooltips().getTitleFontSize());
 	}
 
 	/**
@@ -356,11 +305,11 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the title font style.
 	 * 
-	 * @return title font style. Default is {@link org.pepstock.charba.client.enums.FontStyle#bold}.
+	 * @return title font style. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getTitleFontStyle()}.
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getTitleFontStyle() {
-		return getValue(Property.titleFontStyle, FontStyle.class, FontStyle.bold);
+		return getValue(Property.titleFontStyle, FontStyle.class, Defaults.getGlobal().getTooltips().getTitleFontStyle());
 	}
 
 	/**
@@ -375,10 +324,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the title font color.
 	 * 
-	 * @return title font color.Default is '#fff'.
+	 * @return title font color.Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getTitleFontColor()}.
 	 */
 	public String getTitleFontColor() {
-		return getValue(Property.titleFontColor, DEFAULT_TITLE_FONT_COLOR);
+		return getValue(Property.titleFontColor, Defaults.getGlobal().getTooltips().getTitleFontColor());
 	}
 
 	/**
@@ -393,10 +342,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the spacing to add to top and bottom of each title line.
 	 * 
-	 * @return spacing to add to top and bottom of each title line. Default is 2.
+	 * @return spacing to add to top and bottom of each title line. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getTitleSpacing()}.
 	 */
 	public int getTitleSpacing() {
-		return getValue(Property.titleSpacing, DEFAULT_TITLE_SPACING);
+		return getValue(Property.titleSpacing, Defaults.getGlobal().getTooltips().getTitleSpacing());
 	}
 
 	/**
@@ -411,10 +360,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the margin to add on bottom of title section.
 	 * 
-	 * @return margin to add on bottom of title section. Default is 6.
+	 * @return margin to add on bottom of title section. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getTitleMarginBottom()}.
 	 */
 	public int getTitleMarginBottom() {
-		return getValue(Property.titleMarginBottom, DEFAULT_TITLE_MARGIN_BOTTOM);
+		return getValue(Property.titleMarginBottom, Defaults.getGlobal().getTooltips().getTitleMarginBottom());
 	}
 
 	/**
@@ -429,10 +378,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the body line font.
 	 * 
-	 * @return body line font. Default is "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif".
+	 * @return body line font. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBodyFontFamily()}.
 	 */
 	public String getBodyFontFamily() {
-		return getValue(Property.bodyFontFamily, DEFAULT_BODY_FONT_FAMILY);
+		return getValue(Property.bodyFontFamily, Defaults.getGlobal().getTooltips().getBodyFontFamily());
 	}
 
 	/**
@@ -447,10 +396,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the body font size.
 	 * 
-	 * @return body font size. Default is 12.
+	 * @return body font size. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBodyFontSize()}.
 	 */
 	public int getBodyFontSize() {
-		return getValue(Property.bodyFontSize, DEFAULT_BODY_FONT_SIZE);
+		return getValue(Property.bodyFontSize, Defaults.getGlobal().getTooltips().getBodyFontSize());
 	}
 
 	/**
@@ -466,11 +415,11 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the body font style.
 	 * 
-	 * @return body font style. Default is {@link org.pepstock.charba.client.enums.FontStyle#normal}.
+	 * @return body font style. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBodyFontSize()}.
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getBodyFontStyle() {
-		return getValue(Property.bodyFontStyle, FontStyle.class, FontStyle.normal);
+		return getValue(Property.bodyFontStyle, FontStyle.class, Defaults.getGlobal().getTooltips().getBodyFontStyle());
 	}
 
 	/**
@@ -485,10 +434,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the body font color.
 	 * 
-	 * @return body font color. Default is '#fff'.
+	 * @return body font color. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBodyFontColor()}.
 	 */
 	public String getBodyFontColor() {
-		return getValue(Property.bodyFontColor, DEFAULT_BODY_FONT_COLOR);
+		return getValue(Property.bodyFontColor, Defaults.getGlobal().getTooltips().getBodyFontColor());
 	}
 
 	/**
@@ -503,10 +452,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the spacing to add to top and bottom of each tooltip item.
 	 * 
-	 * @return spacing to add to top and bottom of each tooltip item. Default is 2.
+	 * @return spacing to add to top and bottom of each tooltip item. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBodySpacing()}.
 	 */
 	public int getBodySpacing() {
-		return getValue(Property.bodySpacing, DEFAULT_BODY_SPACING);
+		return getValue(Property.bodySpacing, Defaults.getGlobal().getTooltips().getBodySpacing());
 	}
 
 	/**
@@ -521,10 +470,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the footer font.
 	 * 
-	 * @return footer font. Default is "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif".
+	 * @return footer font. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBodyFontFamily()}.
 	 */
 	public String getFooterFontFamily() {
-		return getValue(Property.footerFontFamily, DEFAULT_FOOTER_FONT_FAMILY);
+		return getValue(Property.footerFontFamily, Defaults.getGlobal().getTooltips().getBodyFontFamily());
 	}
 
 	/**
@@ -539,10 +488,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the footer font size.
 	 * 
-	 * @return footer font size. Default is 12.
+	 * @return footer font size. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBodyFontSize()}.
 	 */
 	public int getFooterFontSize() {
-		return getValue(Property.footerFontSize, DEFAULT_FOOTER_FONT_SIZE);
+		return getValue(Property.footerFontSize, Defaults.getGlobal().getTooltips().getFooterFontSize());
 	}
 
 	/**
@@ -557,11 +506,11 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the footer font style.
 	 * 
-	 * @return footer font style. Default is {@link org.pepstock.charba.client.enums.FontStyle#normal}.
+	 * @return footer font style. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getFooterFontStyle()}.
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFooterFontStyle() {
-		return getValue(Property.footerFontStyle, FontStyle.class, FontStyle.bold);
+		return getValue(Property.footerFontStyle, FontStyle.class, Defaults.getGlobal().getTooltips().getFooterFontStyle());
 	}
 
 	/**
@@ -576,10 +525,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the footer font color.
 	 * 
-	 * @return footer font color. Default is '#fff'.
+	 * @return footer font color. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getFooterFontColor()}.
 	 */
 	public String getFooterFontColor() {
-		return getValue(Property.footerFontColor, DEFAULT_FOOTER_FONT_COLOR);
+		return getValue(Property.footerFontColor, Defaults.getGlobal().getTooltips().getFooterFontColor());
 	}
 
 	/**
@@ -594,10 +543,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the spacing to add to top and bottom of each footer line.
 	 * 
-	 * @return spacing to add to top and bottom of each footer line. Default is 2.
+	 * @return spacing to add to top and bottom of each footer line. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getFooterSpacing()}.
 	 */
 	public int getFooterSpacing() {
-		return getValue(Property.footerSpacing, DEFAULT_FOOTER_SPACING);
+		return getValue(Property.footerSpacing, Defaults.getGlobal().getTooltips().getFooterSpacing());
 	}
 
 	/**
@@ -612,10 +561,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the margin to add before drawing the footer.
 	 * 
-	 * @return margin to add before drawing the footer. Default is 6.
+	 * @return margin to add before drawing the footer. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getFooterMarginTop()}.
 	 */
 	public int getFooterMarginTop() {
-		return getValue(Property.footerMarginTop, DEFAULT_FOOTER_MARGIN_TOP);
+		return getValue(Property.footerMarginTop, Defaults.getGlobal().getTooltips().getFooterMarginTop());
 	}
 
 	/**
@@ -630,10 +579,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the padding to add on left and right of tooltip.
 	 * 
-	 * @return padding to add on left and right of tooltip. Default is 6.
+	 * @return padding to add on left and right of tooltip. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getXPadding()}.
 	 */
 	public int getXPadding() {
-		return getValue(Property.xPadding, DEFAULT_X_PADDING);
+		return getValue(Property.xPadding, Defaults.getGlobal().getTooltips().getXPadding());
 	}
 
 	/**
@@ -648,10 +597,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the padding to add on top and bottom of tooltip.
 	 * 
-	 * @return padding to add on top and bottom of tooltip. Default is 6.
+	 * @return padding to add on top and bottom of tooltip. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getYPadding()}.
 	 */
 	public int getYPadding() {
-		return getValue(Property.yPadding, DEFAULT_Y_PADDING);
+		return getValue(Property.yPadding, Defaults.getGlobal().getTooltips().getYPadding());
 	}
 
 	/**
@@ -666,10 +615,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the extra distance to move the end of the tooltip arrow away from the tooltip point.
 	 * 
-	 * @return extra distance to move the end of the tooltip arrow away from the tooltip point. Default is 2.
+	 * @return extra distance to move the end of the tooltip arrow away from the tooltip point. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getCaretPadding()}.
 	 */
 	public int getCaretPadding() {
-		return getValue(Property.caretPadding, DEFAULT_CARET_PADDING);
+		return getValue(Property.caretPadding, Defaults.getGlobal().getTooltips().getCaretPadding());
 	}
 
 	/**
@@ -684,10 +633,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the size, in px, of the tooltip arrow.
 	 * 
-	 * @return size, in px, of the tooltip arrow. Default is 5.
+	 * @return size, in px, of the tooltip arrow. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getCaretSize()}.
 	 */
 	public int getCaretSize() {
-		return getValue(Property.caretSize, DEFAULT_CARET_SIZE);
+		return getValue(Property.caretSize, Defaults.getGlobal().getTooltips().getCaretSize());
 	}
 
 	/**
@@ -702,10 +651,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the radius of tooltip corner curves.
 	 * 
-	 * @return radius of tooltip corner curves. Default is 6.
+	 * @return radius of tooltip corner curves. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getCornerRadius()}.
 	 */
 	public int getCornerRadius() {
-		return getValue(Property.cornerRadius, DEFAULT_CORNER_RADIUS);
+		return getValue(Property.cornerRadius, Defaults.getGlobal().getTooltips().getCornerRadius());
 	}
 
 	/**
@@ -720,10 +669,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the color to draw behind the colored boxes when multiple items are in the tooltip.
 	 * 
-	 * @return color to draw behind the colored boxes when multiple items are in the tooltip. Default is '#fff'.
+	 * @return color to draw behind the colored boxes when multiple items are in the tooltip. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getMultiKeyBackground()}.
 	 */
 	public String getMultiKeyBackground() {
-		return getValue(Property.multiKeyBackground, DEFAULT_MULTI_KEY_BACKGROUND);
+		return getValue(Property.multiKeyBackground, Defaults.getGlobal().getTooltips().getMultiKeyBackground());
 	}
 
 	/**
@@ -738,10 +687,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * If true, color boxes are shown in the tooltip.
 	 * 
-	 * @return if true, color boxes are shown in the tooltip. Default is true.
+	 * @return if true, color boxes are shown in the tooltip. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#isDisplayColors()}.
 	 */
 	public boolean isDisplayColors() {
-		return getValue(Property.displayColors, DEFAULT_DISPLAY_COLORS);
+		return getValue(Property.displayColors, Defaults.getGlobal().getTooltips().isDisplayColors());
 	}
 
 	/**
@@ -756,10 +705,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the color of the border.
 	 * 
-	 * @return color of the border. Default is 'rgba(0,0,0,0)'.
+	 * @return color of the border. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBorderColor()}.
 	 */
 	public String getBorderColor() {
-		return getValue(Property.borderColor, DEFAULT_BORDER_COLOR);
+		return getValue(Property.borderColor, Defaults.getGlobal().getTooltips().getBorderColor());
 	}
 
 	/**
@@ -774,10 +723,10 @@ public final class Tooltips extends AbstractLabel {
 	/**
 	 * Returns the size of the border.
 	 * 
-	 * @return size of the border. Default is 0.
+	 * @return size of the border. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBorderWidth()}.
 	 */
 	public int getBorderWidth() {
-		return getValue(Property.borderWidth, DEFAULT_BORDER_WIDTH);
+		return getValue(Property.borderWidth, Defaults.getGlobal().getTooltips().getBorderWidth());
 	}
 
 	/**
