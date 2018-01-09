@@ -4,9 +4,9 @@ import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 
-public abstract class AbstractDefaultsObject extends JavaScriptObjectContainer {
+public abstract class AbstractDefaultsItem extends JavaScriptObjectContainer {
 
-	protected AbstractDefaultsObject(GenericJavaScriptObject javaScriptObject) {
+	protected AbstractDefaultsItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
 	

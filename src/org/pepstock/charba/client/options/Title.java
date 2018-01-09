@@ -49,6 +49,8 @@ public final class Title extends ChartContainer {
 		display,
 		padding,
 		position,
+		lineHeight,
+		fullWidth,
 		text
 	}
 
@@ -62,27 +64,27 @@ public final class Title extends ChartContainer {
 	}
 
 	/**
-	 * Sets the font size for label.
+	 * Sets the font size for title.
 	 * 
-	 * @param fontSize Font size for label.
+	 * @param fontSize Font size for title.
 	 */
 	public void setFontSize(int fontSize) {
 		setValue(Property.fontSize, fontSize);
 	}
 
 	/**
-	 * Returns the font size for label.
+	 * Returns the font size for title.
 	 * 
-	 * @return Font size for label. Default is {@link org.pepstock.charba.client.defaults.Options#getDefaultFontSize()}.
+	 * @return Font size for title. Default is {@link org.pepstock.charba.client.defaults.global.Title#getFontSize()}.
 	 */
 	public int getFontSize() {
 		return getValue(Property.fontSize, Defaults.getGlobal().getTitle().getFontSize());
 	}
 
 	/**
-	 * Sets the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * Sets the font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @param fontStyle Font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * @param fontStyle Font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
@@ -90,9 +92,9 @@ public final class Title extends ChartContainer {
 	}
 
 	/**
-	 * Returns the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * Returns the font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). Default is normal
+	 * @return the font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). {@link org.pepstock.charba.client.defaults.global.Title#getFontStyle()}.
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
@@ -100,36 +102,36 @@ public final class Title extends ChartContainer {
 	}
 
 	/**
-	 * Sets the font color for label
+	 * Sets the font color for title
 	 * 
-	 * @param fontColor Font color for label
+	 * @param fontColor Font color for title
 	 */
 	public void setFontColor(String fontColor) {
 		setValue(Property.fontColor, fontColor);
 	}
 
 	/**
-	 * Returns the font color for label
+	 * Returns the font color for title
 	 * 
-	 * @return Font color for label. Default is '#666'
+	 * @return Font color for title. Default is {@link org.pepstock.charba.client.defaults.global.Title#getFontColor()}.
 	 */
 	public String getFontColor() {
 		return getValue(Property.fontColor, Defaults.getGlobal().getTitle().getFontColor());
 	}
 
 	/**
-	 * Sets the font family for the label, follows CSS font-family options.
+	 * Sets the font family for title, follows CSS font-family options.
 	 * 
-	 * @param fontFamily Font family for the label, follows CSS font-family options.
+	 * @param fontFamily Font family for title, follows CSS font-family options.
 	 */
 	public void setFontFamily(String fontFamily) {
 		setValue(Property.fontFamily, fontFamily);
 	}
 
 	/**
-	 * Returns the font family for the label, follows CSS font-family options.
+	 * Returns the font family for title, follows CSS font-family options.
 	 * 
-	 * @return Font family for the label, follows CSS font-family options. Default is 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
+	 * @return Font family for title, follows CSS font-family options. Default is {@link org.pepstock.charba.client.defaults.global.Title#getFontFamily()}.
 	 */
 	public String getFontFamily() {
 		return getValue(Property.fontFamily, Defaults.getGlobal().getTitle().getFontFamily());
@@ -147,7 +149,7 @@ public final class Title extends ChartContainer {
 	/**
 	 * Returns if the title is shown.
 	 * 
-	 * @return if the title is shown. Default is true.
+	 * @return if the title is shown. Default is {@link org.pepstock.charba.client.defaults.global.Title#isDisplay()}.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, Defaults.getGlobal().getTitle().isDisplay());
@@ -193,7 +195,7 @@ public final class Title extends ChartContainer {
 	/**
 	 * Returns the position of title.
 	 * 
-	 * @return the position of title. Default is {@link org.pepstock.charba.client.enums.Position#top}.
+	 * @return the position of title. Default is {@link org.pepstock.charba.client.defaults.global.Title#getPosition()}.
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {
@@ -212,10 +214,35 @@ public final class Title extends ChartContainer {
 	/**
 	 * Returns the padding to apply around title. Only top and bottom are implemented.
 	 * 
-	 * @return Padding to apply around title. Only top and bottom are implemented. Default is 10.
+	 * @return Padding to apply around title. Only top and bottom are implemented. Default is {@link org.pepstock.charba.client.defaults.global.Title#getPadding()}.
 	 */
 	public int getPadding() {
 		return getValue(Property.padding, Defaults.getGlobal().getTitle().getPadding());
 	}
+	
+	/**
+	 */
+	public void setFullWidth(boolean fullWidth) {
+		setValue(Property.fullWidth, fullWidth);
+	}
+
+	/**
+	 */
+	public boolean isFullWidth() {
+		return getValue(Property.fullWidth, Defaults.getGlobal().getTitle().isFullWidth());
+	}
+
+	/**
+	 */
+	public void setLineHeight(boolean lineHeight) {
+		setValue(Property.lineHeight, lineHeight);
+	}
+
+	/**
+	 */
+	public double getLineHeight() {
+		return getValue(Property.lineHeight, Defaults.getGlobal().getTitle().getLineHeight());
+	}
+
 
 }

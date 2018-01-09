@@ -38,8 +38,6 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public final class Animation extends EventProvider {
 
-//	private static final int DEFAULT_DURATION = 1000;
-
 	private static final boolean DEFAULT_ANIMATE_ROTATE = true;
 
 	private static final boolean DEFAULT_ANIMATE_SCALE = false;
@@ -84,11 +82,10 @@ public final class Animation extends EventProvider {
 	/**
 	 * Returns the animation easing.
 	 * 
-	 * @return animation easing. Default value is {@link org.pepstock.charba.client.enums.Easing#EASE_OUT_QUART}.
+	 * @return animation easing. Default value is {@link org.pepstock.charba.client.defaults.global.Animation#getEasing()}.
 	 * @see org.pepstock.charba.client.enums.Easing
 	 */
 	public Easing getEasing() {
-//		return getValue(Property.easing, Easing.class, Easing.easeOutQuart);
 		return getValue(Property.easing, Easing.class, Defaults.getGlobal().getAnimation().getEasing());
 	}
 
@@ -104,10 +101,9 @@ public final class Animation extends EventProvider {
 	/**
 	 * Returns the number of milliseconds an animation takes.
 	 * 
-	 * @return the number of milliseconds an animation takes. Default is 1000 (1 second).
+	 * @return the number of milliseconds an animation takes. Default is {@link org.pepstock.charba.client.defaults.global.Animation#getDuration()}.
 	 */
 	public int getDuration() {
-//		return getValue(Property.duration, DEFAULT_DURATION);
 		return getValue(Property.duration, Defaults.getGlobal().getAnimation().getDuration());
 	}
 

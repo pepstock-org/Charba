@@ -40,12 +40,6 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public final class Legend extends EventProvider {
 
-//	private static final boolean DEFAULT_DISPLAY = true;
-//
-//	private static final boolean DEFAULT_FULL_WIDTH = true;
-//
-//	private static final boolean DEFAULT_REVERSE = false;
-
 	private final LegendLabels labels;
 
 	// amount of click handlers
@@ -151,10 +145,9 @@ public final class Legend extends EventProvider {
 	/**
 	 * Returns if the legend is shown.
 	 * 
-	 * @return if the legend is shown. Default is true.
+	 * @return if the legend is shown. Default is {@link org.pepstock.charba.client.defaults.global.Legend#isDisplay()}.
 	 */
 	public boolean isDisplay() {
-//		return getValue(Property.display, DEFAULT_DISPLAY);
 		return getValue(Property.display, Defaults.getGlobal().getLegend().isDisplay());
 	}
 
@@ -170,10 +163,9 @@ public final class Legend extends EventProvider {
 	/**
 	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
 	 * 
-	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). Default is true.
+	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). Default is {@link org.pepstock.charba.client.defaults.global.Legend#isFullWidth()}.
 	 */
 	public boolean isFullWidth() {
-//		return getValue(Property.fullWidth, DEFAULT_FULL_WIDTH);
 		return getValue(Property.fullWidth, Defaults.getGlobal().getLegend().isFullWidth());
 	}
 
@@ -189,10 +181,9 @@ public final class Legend extends EventProvider {
 	/**
 	 * Returns if the legend will show datasets in reverse order.
 	 * 
-	 * @return Legend will show datasets in reverse order. Default is false.
+	 * @return Legend will show datasets in reverse order. Default is {@link org.pepstock.charba.client.defaults.global.Legend#isReverse()}.
 	 */
 	public boolean isReverse() {
-//		return getValue(Property.reverse, DEFAULT_REVERSE);
 		return getValue(Property.reverse, Defaults.getGlobal().getLegend().isReverse());
 	}
 
@@ -209,7 +200,7 @@ public final class Legend extends EventProvider {
 	/**
 	 * Returns the position of the legend.
 	 * 
-	 * @return Position of the legend. Default is {@link org.pepstock.charba.client.enums.Position#top}.
+	 * @return Position of the legend. Default is {@link org.pepstock.charba.client.defaults.global.Legend#getPosition()}.
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {

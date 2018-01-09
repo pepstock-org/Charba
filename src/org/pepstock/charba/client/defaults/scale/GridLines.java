@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JsIntegerArrayList;
 import org.pepstock.charba.client.commons.JsStringArrayList;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.AbstractDefaultsObject;
+import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
 
 /**
  * The grid line configuration defines options for the grid lines that run perpendicular to the axis.
@@ -30,7 +30,7 @@ import org.pepstock.charba.client.defaults.AbstractDefaultsObject;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class GridLines extends AbstractDefaultsObject {
+public final class GridLines extends AbstractDefaultsItem {
 
 	private static final boolean DEFAULT_DISPLAY = true;
 

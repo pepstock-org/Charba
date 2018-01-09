@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.TickCallback;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
@@ -33,12 +34,6 @@ import org.pepstock.charba.client.items.TickItem;
  *
  */
 public class BaseTick extends JavaScriptObjectContainer {
-
-	private static final int DEFAULT_FONT_SIZE = 12;
-
-	private static final String DEFAULT_FONT_COLOR = "#666";
-
-	private static final String DEFAULT_FONT_FAMILY = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
 
 	// the axis instance, owner of this tick
 	private Axis axis = null;
@@ -91,10 +86,10 @@ public class BaseTick extends JavaScriptObjectContainer {
 	/**
 	 * Returns the font size for tick.
 	 * 
-	 * @return the font size for tick. Default is 12.
+	 * @return the font size for tick. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getFontSize()}.
 	 */
 	public int getFontSize() {
-		return getValue(Property.fontSize, DEFAULT_FONT_SIZE);
+		return getValue(Property.fontSize, Defaults.getScale().getTicks().getFontSize());
 	}
 
 	/**
@@ -110,11 +105,11 @@ public class BaseTick extends JavaScriptObjectContainer {
 	/**
 	 * Returns the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). Default is normal
+	 * @return the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getFontStyle()}.
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.fontStyle, FontStyle.class, FontStyle.normal);
+		return getValue(Property.fontStyle, FontStyle.class, Defaults.getScale().getTicks().getFontStyle());
 	}
 
 	/**
@@ -129,10 +124,10 @@ public class BaseTick extends JavaScriptObjectContainer {
 	/**
 	 * Returns the font color for tick
 	 * 
-	 * @return Font color for tick. Default is '#666'
+	 * @return Font color for tick. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getFontColor()}.
 	 */
 	public String getFontColor() {
-		return getValue(Property.fontColor, DEFAULT_FONT_COLOR);
+		return getValue(Property.fontColor, Defaults.getScale().getTicks().getFontColor());
 	}
 
 	/**
@@ -147,10 +142,10 @@ public class BaseTick extends JavaScriptObjectContainer {
 	/**
 	 * Returns the font family for the tick, follows CSS font-family options.
 	 * 
-	 * @return Font family for the tick, follows CSS font-family options. Default is 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
+	 * @return Font family for the tick, follows CSS font-family options. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getFontFamily()}.
 	 */
 	public String getFontFamily() {
-		return getValue(Property.fontFamily, DEFAULT_FONT_FAMILY);
+		return getValue(Property.fontFamily, Defaults.getScale().getTicks().getFontFamily());
 	}
 
 	/**

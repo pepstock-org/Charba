@@ -31,7 +31,6 @@ public final class LegendLabels extends FontItem {
 	
 	private static final int DEFAULT_BOX_WIDTH = 40;
 
-	// FIXME
 	private static final boolean DEFAULT_USE_POINT_STYLE = false;
 
 	/**
@@ -49,7 +48,7 @@ public final class LegendLabels extends FontItem {
 	 * 
 	 * @param chart chart instance
 	 */
-	LegendLabels(GenericJavaScriptObject javaScriptObject) {
+	public LegendLabels(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
 

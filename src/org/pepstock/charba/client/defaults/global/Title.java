@@ -22,7 +22,8 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 
 /**
- * Configures the chart title which defines text to draw at the top of the chart.
+ * Configures the chart title which defines text to draw at the top of the chart.<br>
+ * "weight"property is not present.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -34,11 +35,6 @@ public final class Title extends FontItem {
 	private static final boolean DEFAULT_FULL_WIDTH = true;
 
 	private static final double DEFAULT_LINE_HEIGHT = 1.2D;
-
-	// FIXME
-//    "fullWidth": true,
-//    "lineHeight": 1.2,
-//    "weight": 2000
 	
 	private static final boolean DEFAULT_DISPLAY = false;
 
@@ -126,24 +122,36 @@ public final class Title extends FontItem {
 	}
 
 	/**
+	 * Marks that this box should take the full width of the canvas (pushing down other boxes).
+	 * 
+	 * @param fullWidth Marks that this box should take the full width of the canvas (pushing down other boxes)
 	 */
 	public void setFullWidth(boolean fullWidth) {
 		setValue(Property.fullWidth, fullWidth);
 	}
 
 	/**
+	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * 
+	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). Default is true.
 	 */
 	public boolean isFullWidth() {
 		return getValue(Property.fullWidth, DEFAULT_FULL_WIDTH);
 	}
 
 	/**
+	 * Sets the height of an individual line of text.
+	 * 
+	 * @param lineHeight Height of an individual line of text.
 	 */
-	public void setLineHeight(boolean lineHeight) {
+	public void setLineHeight(double lineHeight) {
 		setValue(Property.lineHeight, lineHeight);
 	}
 
 	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text. Default is 1.2
 	 */
 	public double getLineHeight() {
 		return getValue(Property.lineHeight, DEFAULT_LINE_HEIGHT);

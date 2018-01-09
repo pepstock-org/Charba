@@ -18,7 +18,7 @@ package org.pepstock.charba.client.defaults.global;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.AbstractDefaultsObject;
+import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.TooltipPosition;
@@ -29,7 +29,7 @@ import org.pepstock.charba.client.enums.TooltipPosition;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Tooltips extends AbstractDefaultsObject {
+public final class Tooltips extends AbstractDefaultsItem {
 
 	private static final boolean DEFAULT_ENABLED = true;
 

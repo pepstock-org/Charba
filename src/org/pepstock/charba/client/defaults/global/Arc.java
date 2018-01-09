@@ -17,7 +17,7 @@ package org.pepstock.charba.client.defaults.global;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.AbstractDefaultsObject;
+import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
 
 /**
  * Arcs are used in the polar area, doughnut and pie charts.<br>
@@ -32,7 +32,7 @@ import org.pepstock.charba.client.defaults.AbstractDefaultsObject;
  * @see org.pepstock.charba.client.DoughnutChart
  * @see org.pepstock.charba.client.PieChart
  */
-public class Arc extends AbstractDefaultsObject {
+public class Arc extends AbstractDefaultsItem {
 
 	// default background color
 	protected static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";

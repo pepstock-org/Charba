@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options.elements;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Position;
 
@@ -28,13 +29,6 @@ import org.pepstock.charba.client.enums.Position;
  * @see org.pepstock.charba.client.BarChart
  */
 public final class Rectangle extends Arc {
-
-	// default background color
-	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
-	// default border with
-	private static final int DEFAULT_BORDER_WIDTH = 0;
-	// default border color
-	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0.1)";
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -51,7 +45,7 @@ public final class Rectangle extends Arc {
 	 */
 	@Override
 	protected String getDefaultBackgroundColor() {
-		return DEFAULT_BACKGROUND_COLOR;
+		return Defaults.getGlobal().getElements().getRectangle().getBackgroundColor();
 	}
 
 	/*
@@ -61,7 +55,7 @@ public final class Rectangle extends Arc {
 	 */
 	@Override
 	protected int getDefaultBorderWidth() {
-		return DEFAULT_BORDER_WIDTH;
+		return Defaults.getGlobal().getElements().getRectangle().getBorderWidth();
 	}
 
 	/*
@@ -71,7 +65,7 @@ public final class Rectangle extends Arc {
 	 */
 	@Override
 	protected String getDefaultBorderColor() {
-		return DEFAULT_BORDER_COLOR;
+		return Defaults.getGlobal().getElements().getRectangle().getBorderColor();
 	}
 
 	/**
@@ -89,7 +83,7 @@ public final class Rectangle extends Arc {
 	 * @return the edge to skip drawing the border for.
 	 */
 	public Position getBorderJoinStyle() {
-		return getValue(Property.borderSkipped, Position.class, Position.bottom);
+		return getValue(Property.borderSkipped, Position.class, Defaults.getGlobal().getElements().getRectangle().getBorderJoinStyle());
 	}
 
 }

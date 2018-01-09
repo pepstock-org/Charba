@@ -17,7 +17,7 @@ package org.pepstock.charba.client.defaults.global;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.AbstractDefaultsObject;
+import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
 
@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.InteractionMode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Hover extends AbstractDefaultsObject {
+public final class Hover extends AbstractDefaultsItem {
 
 	private static final boolean DEFAULT_INTERSECT = true;
 

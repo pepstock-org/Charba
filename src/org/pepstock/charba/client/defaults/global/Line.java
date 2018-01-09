@@ -50,6 +50,8 @@ public final class Line extends Arc {
 	private static final int DEFAULT_BORDER_DASH_OFFSET = 0;
 
 	private static final boolean DEFAULT_CAP_BEZIER_POINTS = true;
+	
+	private static final boolean DEFAULT_STEPPED = false;
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -62,7 +64,8 @@ public final class Line extends Arc {
 		borderDashOffset,
 		borderJoinStyle,
 		capBezierPoints,
-		fill
+		fill,
+		stepped
 	}
 
 	/**
@@ -172,7 +175,7 @@ public final class Line extends Arc {
 	 *         lines and gaps which describe the pattern.
 	 */
 	public List<Integer> getBorderDash() {
-		return getIntegerArray(Property.borderDashOffset);
+		return getIntegerArray(Property.borderDash);
 	}
 
 	/**
@@ -292,5 +295,22 @@ public final class Line extends Arc {
 		}
 		// returns this as default
 		return Fill.origin;
+	}
+	/**
+	 * Sets <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 * 
+	 * @param stepped <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 */
+	public void setStepped(boolean stepped) {
+		setValue(Property.stepped, stepped);
+	}
+
+	/**
+	 * Returns <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 * 
+	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 */
+	public boolean isStepped() {
+		return getValue(Property.stepped, DEFAULT_STEPPED);
 	}
 }
