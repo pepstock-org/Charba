@@ -126,7 +126,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	/**
 	 * Returns if axis is hidden.
 	 * 
-	 * @return <code>false</code> if axis is hidden, otherwise <code>true</code>. Default is {@link org.pepstock.charba.client.defaults.Scale#isDisplay()}.
+	 * @return <code>false</code> if axis is hidden, otherwise <code>true</code>. Default is {@link org.pepstock.charba.client.defaults.scale.Scale#isDisplay()}.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, Defaults.getScale().isDisplay());

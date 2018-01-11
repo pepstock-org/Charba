@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
 
@@ -29,7 +28,7 @@ import org.pepstock.charba.client.enums.FontStyle;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class FontItem extends AbstractDefaultsItem {
+public class FontItem extends AbstractItem {
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -45,8 +44,8 @@ public class FontItem extends AbstractDefaultsItem {
 	/**
 	 * Builds the object and registers the callback
 	 */
-	public FontItem(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	protected FontItem(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
 	}
 
 	/**
@@ -56,12 +55,13 @@ public class FontItem extends AbstractDefaultsItem {
 	 */
 	public void setFontSize(int fontSize) {
 		setValue(Property.fontSize, fontSize);
+		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the font size.
 	 * 
-	 * @return the font size. Default is {@link org.pepstock.charba.client.defaults.Options#getDefaultFontSize()}.
+	 * @return the font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
 	 */
 	public int getFontSize() {
 		return getValue(Property.fontSize, Defaults.getGlobal().getDefaultFontSize());
@@ -75,12 +75,13 @@ public class FontItem extends AbstractDefaultsItem {
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
 		setValue(Property.fontStyle, fontStyle);
+		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). Default is {@link org.pepstock.charba.client.defaults.Options#getDefaultFontStyle()}.
+	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontStyle()}.
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
@@ -94,12 +95,13 @@ public class FontItem extends AbstractDefaultsItem {
 	 */
 	public void setFontColor(String fontColor) {
 		setValue(Property.fontColor, fontColor);
+		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the font color
 	 * 
-	 * @return Font color. Default is {@link org.pepstock.charba.client.defaults.Options#getDefaultFontColor()}.
+	 * @return Font color. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontColor()}.
 	 */
 	public String getFontColor() {
 		return getValue(Property.fontColor, Defaults.getGlobal().getDefaultFontColor());
@@ -112,12 +114,13 @@ public class FontItem extends AbstractDefaultsItem {
 	 */
 	public void setFontFamily(String fontFamily) {
 		setValue(Property.fontFamily, fontFamily);
+		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the font family, follows CSS font-family options.
 	 * 
-	 * @return Font family, follows CSS font-family options. Default is {@link org.pepstock.charba.client.defaults.Options#getDefaultFontFamily()}.
+	 * @return Font family, follows CSS font-family options. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
 	 */
 	public String getFontFamily() {
 		return getValue(Property.fontFamily, Defaults.getGlobal().getDefaultFontFamily());

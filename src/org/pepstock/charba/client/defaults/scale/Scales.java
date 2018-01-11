@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.defaults;
+package org.pepstock.charba.client.defaults.scale;
 
 import java.util.List;
 
@@ -22,6 +22,7 @@ import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JsObjectArrayList;
 import org.pepstock.charba.client.commons.JsObjectContainerArrayList;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.AbstractItem;
 
 /**
  * The configuration element which contains all axes definitions.
@@ -29,7 +30,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Scales extends AbstractDefaultsItem {
+public class Scales extends AbstractItem {
 
 	private static final boolean DEFAULT_DISPLAY = true;
 	// buffer to maintain axes
@@ -52,11 +53,11 @@ public class Scales extends AbstractDefaultsItem {
 	 * 
 	 * @param chart chart instance
 	 */
-	public Scales(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
-		if (javaScriptObject != null){
+	protected Scales(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
+		if (!isEmpty()){
 			// cast object to reach some methods
-			InternalJavaScriptObject obj = (InternalJavaScriptObject)javaScriptObject;
+			InternalJavaScriptObject obj = (InternalJavaScriptObject)getJavaScriptObject();
 			loadScales(Property.xAxes, obj, xAxes);
 			loadScales(Property.yAxes, obj, yAxes);
 		}
@@ -69,6 +70,7 @@ public class Scales extends AbstractDefaultsItem {
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		checkAndAddToParent();
 	}
 
 	/**

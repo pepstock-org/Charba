@@ -15,9 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.global;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
+import org.pepstock.charba.client.defaults.AbstractItem;
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
 
@@ -27,7 +26,7 @@ import org.pepstock.charba.client.enums.InteractionMode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Hover extends AbstractDefaultsItem {
+public final class Hover extends AbstractItem {
 
 	private static final boolean DEFAULT_INTERSECT = true;
 
@@ -47,8 +46,8 @@ public final class Hover extends AbstractDefaultsItem {
 	/**
 	 * Empty constructor to reduce its visibility
 	 */
-	public Hover(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	Hover(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
 	}
 
 	/**
@@ -59,6 +58,7 @@ public final class Hover extends AbstractDefaultsItem {
 	 */
 	public void setMode(InteractionMode mode) {
 		setValue(Property.mode, mode);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -79,6 +79,7 @@ public final class Hover extends AbstractDefaultsItem {
 	 */
 	public void setIntersect(boolean intersect) {
 		setValue(Property.intersect, intersect);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -97,6 +98,7 @@ public final class Hover extends AbstractDefaultsItem {
 	 */
 	public void setAnimationDuration(int milliseconds) {
 		setValue(Property.animationDuration, milliseconds);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -117,6 +119,7 @@ public final class Hover extends AbstractDefaultsItem {
 	 */
 	public void setAxis(InteractionAxis axis) {
 		setValue(Property.axis, axis);
+		checkAndAddToParent();
 	}
 
 	/**

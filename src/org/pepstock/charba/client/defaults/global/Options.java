@@ -13,20 +13,16 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.defaults;
+package org.pepstock.charba.client.defaults.global;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JsEnumValueArrayList;
 import org.pepstock.charba.client.commons.JsStringArrayList;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.global.Animation;
-import org.pepstock.charba.client.defaults.global.Elements;
-import org.pepstock.charba.client.defaults.global.Hover;
-import org.pepstock.charba.client.defaults.global.Layout;
-import org.pepstock.charba.client.defaults.global.Legend;
-import org.pepstock.charba.client.defaults.global.Title;
-import org.pepstock.charba.client.defaults.global.Tooltips;
+import org.pepstock.charba.client.defaults.AbstractItem;
+import org.pepstock.charba.client.defaults.scale.Scale;
+import org.pepstock.charba.client.defaults.scale.Scales;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.FontStyle;
 
@@ -48,7 +44,7 @@ import org.pepstock.charba.client.enums.FontStyle;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Options extends AbstractDefaultsItem {
+public final class Options extends AbstractItem {
 
 	private static final boolean DEFAULT_RESPONSIVE = true;
 
@@ -76,23 +72,23 @@ public final class Options extends AbstractDefaultsItem {
 	
 	private static final double DEFAULT_START_ANGLE = -0.5 * Math.PI;
 
-	private final Hover hover;
+	private Hover hover;
 
-	private final Elements elements;
+	private Elements elements;
 
-	private final Layout layout;
+	private Layout layout;
 
-	private final Animation animation;
+	private Animation animation;
 
-	private final Tooltips tooltips;
+	private Tooltips tooltips;
 
-	private final Title title;
+	private Title title;
 
-	private final Legend legend;
+	private Legend legend;
 	
-	private final Scale scale;
+	private Scale scale;
 	
-	private final Scales scales;
+	private Scales scales;
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -127,15 +123,15 @@ public final class Options extends AbstractDefaultsItem {
 
 	public Options(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
-		hover = new Hover(load(Property.hover));
-		elements = new Elements(load(Property.elements));
-		layout = new Layout(load(Property.layout));
-		animation = new Animation(load(Property.animation));
-		tooltips = new Tooltips(load(Property.tooltips));
-		legend = new Legend(load(Property.legend));
-		title = new Title(load(Property.title));
-		scale = new Scale(load(Property.scale));
-		scales = new Scales(load(Property.scales));
+		hover = new Hover(this, Property.hover);
+		elements = new Elements(this, Property.elements);
+		layout = new Layout(this, Property.layout);
+		animation = new Animation(this, Property.animation);
+		tooltips = new Tooltips(this, Property.tooltips);
+		legend = new Legend(this, Property.legend);
+		title = new Title(this, Property.title);
+		scale = new ScaleImpl(this, Property.scale);
+		scales = new ScalesImpl(this, Property.scales);
 	}
 
 	/**
@@ -488,5 +484,20 @@ public final class Options extends AbstractDefaultsItem {
 		return getValue(Property.startAngle, DEFAULT_START_ANGLE);
 	}
 
+	private static class ScaleImpl extends Scale {
+
+		protected ScaleImpl(AbstractItem parent, Key childKey) {
+			super(parent, childKey);
+		}
+		
+	}
+
+	private static class ScalesImpl extends Scales {
+
+		protected ScalesImpl(AbstractItem parent, Key childKey) {
+			super(parent, childKey);
+		}
+		
+	}
 
 }

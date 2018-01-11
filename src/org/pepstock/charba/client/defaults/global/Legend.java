@@ -15,9 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.global;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
+import org.pepstock.charba.client.defaults.AbstractItem;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -26,7 +25,7 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Legend extends AbstractDefaultsItem {
+public final class Legend extends AbstractItem {
 	
 //    "weight": 1000,
 
@@ -56,9 +55,9 @@ public final class Legend extends AbstractDefaultsItem {
 	 * 
 	 * @param chart chart instance
 	 */
-	public Legend(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
-		labels = new LegendLabels(load(Property.labels));
+	Legend(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
+		labels = new LegendLabels(this, Property.labels);
 	}
 
 	/**
@@ -75,6 +74,7 @@ public final class Legend extends AbstractDefaultsItem {
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -93,6 +93,7 @@ public final class Legend extends AbstractDefaultsItem {
 	 */
 	public void setFullWidth(boolean fullWidth) {
 		setValue(Property.fullWidth, fullWidth);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -111,6 +112,7 @@ public final class Legend extends AbstractDefaultsItem {
 	 */
 	public void setReverse(boolean reverse) {
 		setValue(Property.reverse, reverse);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -130,6 +132,7 @@ public final class Legend extends AbstractDefaultsItem {
 	 */
 	public void setPosition(Position position) {
 		setValue(Property.position, position);
+		checkAndAddToParent();
 	}
 
 	/**

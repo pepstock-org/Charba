@@ -15,9 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.global;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
+import org.pepstock.charba.client.defaults.AbstractItem;
 
 /**
  * Options can be configured for four different types of elements: arc, lines, points, and rectangles. When set, these options
@@ -26,7 +25,7 @@ import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Elements extends AbstractDefaultsItem {
+public final class Elements extends AbstractItem {
 
 	private final Point point;
 
@@ -50,12 +49,12 @@ public final class Elements extends AbstractDefaultsItem {
 	/**
 	 * Builds the object setting java script objects
 	 */
-	public Elements(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
-		point = new Point(load(Property.point));
-		arc = new Arc(load(Property.arc));
-		line = new Line(load(Property.line));
-		rectangle = new Rectangle(load(Property.rectangle));
+	Elements(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
+		point = new Point(this, Property.point);
+		arc = new Arc(this, Property.arc);
+		line = new Line(this, Property.line);
+		rectangle = new Rectangle(this, Property.rectangle);
 	}
 
 	/**

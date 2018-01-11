@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.scale;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.AbstractItem;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -25,15 +25,15 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Padding extends JavaScriptObjectContainer {
+public final class Padding extends AbstractItem {
 
 	private static final int DEFAULT_PADDING = 4;
 
 	/**
 	 * Builds the object setting java script objects
 	 */
-	Padding(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	Padding(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
 	}
 
 	/**
@@ -43,6 +43,7 @@ public final class Padding extends JavaScriptObjectContainer {
 	 */
 	public void setLeft(int padding) {
 		setValue(Position.left, padding);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -61,6 +62,7 @@ public final class Padding extends JavaScriptObjectContainer {
 	 */
 	public void setRight(int padding) {
 		setValue(Position.right, padding);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -79,6 +81,7 @@ public final class Padding extends JavaScriptObjectContainer {
 	 */
 	public void setTop(int padding) {
 		setValue(Position.top, padding);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -97,6 +100,7 @@ public final class Padding extends JavaScriptObjectContainer {
 	 */
 	public void setBottom(int padding) {
 		setValue(Position.bottom, padding);
+		checkAndAddToParent();
 	}
 
 	/**

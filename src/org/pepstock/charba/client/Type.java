@@ -15,15 +15,16 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.commons.Key;
+
 /**
  * Enumerates all possible available types of a chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum Type
+public enum Type implements Key
 {
-
 	line,
 	bar,
 	horizontalBar,
@@ -33,5 +34,4 @@ public enum Type
 	polarArea,
 	scatter,
 	bubble;
-
 }

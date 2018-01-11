@@ -18,11 +18,10 @@ package org.pepstock.charba.client.defaults.scale;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JsIntegerArrayList;
 import org.pepstock.charba.client.commons.JsStringArrayList;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
+import org.pepstock.charba.client.defaults.AbstractItem;
 
 /**
  * The grid line configuration defines options for the grid lines that run perpendicular to the axis.
@@ -30,7 +29,7 @@ import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class GridLines extends AbstractDefaultsItem {
+public final class GridLines extends AbstractItem {
 
 	private static final boolean DEFAULT_DISPLAY = true;
 
@@ -84,8 +83,8 @@ public final class GridLines extends AbstractDefaultsItem {
 	/**
 	 * Empty constructor to reduce visibility
 	 */
-	public GridLines(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	GridLines(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
 	}
 
 	/**
@@ -95,6 +94,7 @@ public final class GridLines extends AbstractDefaultsItem {
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -126,6 +126,7 @@ public final class GridLines extends AbstractDefaultsItem {
 	 */
 	private void setColor(JsStringArrayList color) {
 		isColorArray = checkAndSetStringValues(Property.color, color);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -163,6 +164,7 @@ public final class GridLines extends AbstractDefaultsItem {
 	 */
 	private void setBorderDash(JsIntegerArrayList borderDash) {
 		setIntegerArray(Property.borderDash, borderDash);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -182,6 +184,7 @@ public final class GridLines extends AbstractDefaultsItem {
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
 		setValue(Property.borderDashOffset, borderDashOffset);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -209,6 +212,7 @@ public final class GridLines extends AbstractDefaultsItem {
 	 */
 	private void setLineWidth(JsIntegerArrayList lineWidth) {
 		isLineWidthArray = checkAndSetIntegerValues(Property.lineWidth, lineWidth);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -234,6 +238,7 @@ public final class GridLines extends AbstractDefaultsItem {
 	 */
 	public void setDrawBorder(boolean drawBorder) {
 		setValue(Property.drawBorder, drawBorder);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -254,6 +259,7 @@ public final class GridLines extends AbstractDefaultsItem {
 	 */
 	public void setDrawOnChartArea(boolean drawOnChartArea) {
 		setValue(Property.drawOnChartArea, drawOnChartArea);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -274,6 +280,7 @@ public final class GridLines extends AbstractDefaultsItem {
 	 */
 	public void setDrawTicks(boolean drawTicks) {
 		setValue(Property.drawTicks, drawTicks);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -292,6 +299,7 @@ public final class GridLines extends AbstractDefaultsItem {
 	 */
 	public void setTickMarkLength(int tickMarkLength) {
 		setValue(Property.tickMarkLength, tickMarkLength);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -310,6 +318,7 @@ public final class GridLines extends AbstractDefaultsItem {
 	 */
 	public void setZeroLineWidth(int zeroLineWidth) {
 		setValue(Property.zeroLineWidth, zeroLineWidth);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -328,6 +337,7 @@ public final class GridLines extends AbstractDefaultsItem {
 	 */
 	public void setZeroLineColor(String zeroLineColor) {
 		setValue(Property.zeroLineColor, zeroLineColor);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -355,6 +365,7 @@ public final class GridLines extends AbstractDefaultsItem {
 	 */
 	private void setZeroLineBorderDash(JsIntegerArrayList zeroLineBorderDash) {
 		setIntegerArray(Property.zeroLineBorderDash, zeroLineBorderDash);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -373,6 +384,7 @@ public final class GridLines extends AbstractDefaultsItem {
 	 */
 	public void setZeroLineBorderDashOffset(int zeroLineBorderDashOffset) {
 		setValue(Property.zeroLineBorderDashOffset, zeroLineBorderDashOffset);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -391,6 +403,7 @@ public final class GridLines extends AbstractDefaultsItem {
 	 */
 	public void setOffsetGridLines(boolean offsetGridLines) {
 		setValue(Property.offsetGridLines, offsetGridLines);
+		checkAndAddToParent();
 	}
 
 	/**
