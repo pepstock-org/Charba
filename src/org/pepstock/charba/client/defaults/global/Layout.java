@@ -15,9 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.global;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
+import org.pepstock.charba.client.defaults.AbstractItem;
 
 /**
  * The layout configuration is needed to set the padidng.
@@ -25,7 +24,7 @@ import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Layout extends AbstractDefaultsItem {
+public final class Layout extends AbstractItem {
 
 	private final Padding padding;
 
@@ -37,9 +36,9 @@ public final class Layout extends AbstractDefaultsItem {
 	/**
 	 * Builds the object setting the java script padding object.
 	 */
-	public Layout(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
-		padding = new Padding(load(Property.padding));
+	Layout(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
+		padding = new Padding(this, Property.padding);
 	}
 
 	/**

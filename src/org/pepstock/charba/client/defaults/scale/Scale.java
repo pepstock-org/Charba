@@ -13,15 +13,11 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.defaults;
+package org.pepstock.charba.client.defaults.scale;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.scale.AngleLines;
-import org.pepstock.charba.client.defaults.scale.GridLines;
-import org.pepstock.charba.client.defaults.scale.PointLabels;
-import org.pepstock.charba.client.defaults.scale.ScaleLabel;
-import org.pepstock.charba.client.defaults.scale.Ticks;
+import org.pepstock.charba.client.defaults.AbstractItem;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 
@@ -40,7 +36,7 @@ import org.pepstock.charba.client.enums.Position;
  *
  * @param <T> type of tick to apply to axis
  */
-public final class Scale extends AbstractDefaultsItem {
+public class Scale extends AbstractItem {
 	
 	private static final boolean DEFAULT_DISPLAY = true;
 	// default offset
@@ -92,16 +88,28 @@ public final class Scale extends AbstractDefaultsItem {
 		pointLabels
 	}
 
+//	public Scale(GenericJavaScriptObject javaScriptObject) {
+//		super(javaScriptObject);
+//	}
+
+	public Scale(GenericJavaScriptObject javaScriptObject) {
+		super(javaScriptObject);
+		grideLines = new GridLines(this, Property.gridLines);
+		ticks = new Ticks(this, Property.ticks);
+		scaleLabel = new ScaleLabel(this, Property.scaleLabel);
+		angleLines = new AngleLines(this, Property.angleLines);
+		pointLabels = new PointLabels(this, Property.pointLabels);
+	}
 	
 	/**
 	 */
-	public Scale(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
-		grideLines = new GridLines(load(Property.gridLines));
-		ticks = new Ticks(load(Property.ticks));
-		scaleLabel = new ScaleLabel(load(Property.scaleLabel));
-		angleLines = new AngleLines(load(Property.angleLines));
-		pointLabels = new PointLabels(load(Property.pointLabels));
+	protected Scale(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
+		grideLines = new GridLines(this, Property.gridLines);
+		ticks = new Ticks(this, Property.ticks);
+		scaleLabel = new ScaleLabel(this, Property.scaleLabel);
+		angleLines = new AngleLines(this, Property.angleLines);
+		pointLabels = new PointLabels(this, Property.pointLabels);
 	}
 
 	/**
@@ -150,6 +158,7 @@ public final class Scale extends AbstractDefaultsItem {
 	 */
 	public void setId(String id) {
 		setValue(Property.id, id);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -169,6 +178,7 @@ public final class Scale extends AbstractDefaultsItem {
 	 */
 	public void setStacked(boolean stacked) {
 		setValue(Property.stacked, stacked);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -186,6 +196,7 @@ public final class Scale extends AbstractDefaultsItem {
 	 */
 	public void setType(AxisType type) {
 		setValue(Property.type, type);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -205,6 +216,7 @@ public final class Scale extends AbstractDefaultsItem {
 	 */
 	public void setWeight(int weight) {
 		setValue(Property.weight, weight);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -223,6 +235,7 @@ public final class Scale extends AbstractDefaultsItem {
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -240,6 +253,7 @@ public final class Scale extends AbstractDefaultsItem {
 	 */
 	public void setOffset(boolean offset) {
 		setValue(Property.offset, offset);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -259,6 +273,7 @@ public final class Scale extends AbstractDefaultsItem {
 	 */
 	public void setPosition(Position position) {
 		setValue(Property.position, position);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -280,6 +295,7 @@ public final class Scale extends AbstractDefaultsItem {
 	 */
 	public void setBarPercentage(double barPercentage) {
 		setValue(Property.barPercentage, barPercentage);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -300,6 +316,7 @@ public final class Scale extends AbstractDefaultsItem {
 	 */
 	public void setCategoryPercentage(double categoryPercentage) {
 		setValue(Property.categoryPercentage, categoryPercentage);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -321,6 +338,7 @@ public final class Scale extends AbstractDefaultsItem {
 	 */
 	public void setBarThickness(int barThickness) {
 		setValue(Property.barThickness, barThickness);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -342,6 +360,7 @@ public final class Scale extends AbstractDefaultsItem {
 	 */
 	public void setMaxBarThickness(int maxBarThickness) {
 		setValue(Property.maxBarThickness, maxBarThickness);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -352,18 +371,5 @@ public final class Scale extends AbstractDefaultsItem {
 	public int getMaxBarThickness() {
 		return getValue(Property.maxBarThickness, DEFAULT_MAX_BAR_THICKNESS);
 	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Scale [getScaleLabel()=" + getScaleLabel() + ", getTicks()=" + getTicks() + ", getGrideLines()=" + getGrideLines() + ", getAngleLines()=" + getAngleLines() + ", getPointLabels()=" + getPointLabels() + ", getId()=" + getId()
-				+ ", isStacked()=" + isStacked() + ", getType()=" + getType() + ", getWeight()=" + getWeight() + ", isDisplay()=" + isDisplay() + ", isOffset()=" + isOffset() + ", getPosition()=" + getPosition() + ", getBarPercentage()="
-				+ getBarPercentage() + ", getCategoryPercentage()=" + getCategoryPercentage() + ", getBarThickness()=" + getBarThickness() + ", getMaxBarThickness()=" + getMaxBarThickness() + "]";
-	}
-	
-	
-	
 	
 }

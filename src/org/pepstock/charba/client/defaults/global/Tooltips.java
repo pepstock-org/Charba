@@ -16,9 +16,8 @@
 package org.pepstock.charba.client.defaults.global;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
+import org.pepstock.charba.client.defaults.AbstractItem;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.TooltipPosition;
@@ -29,7 +28,7 @@ import org.pepstock.charba.client.enums.TooltipPosition;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Tooltips extends AbstractDefaultsItem {
+public final class Tooltips extends AbstractItem {
 
 	private static final boolean DEFAULT_ENABLED = true;
 
@@ -118,8 +117,8 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 * Builds the object storing the chart instance.<br>
 	 * 
 	 */
-	public Tooltips(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	Tooltips(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
 	}
 
 	/**
@@ -129,6 +128,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setEnabled(boolean enabled) {
 		setValue(Property.enabled, enabled);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -148,6 +148,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setMode(InteractionMode mode) {
 		setValue(Property.mode, mode);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -170,6 +171,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setIntersect(boolean intersect) {
 		setValue(Property.intersect, intersect);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -191,6 +193,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setPosition(TooltipPosition position) {
 		setValue(Property.position, position);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -210,6 +213,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setBackgroundColor(String backgroundColor) {
 		setValue(Property.backgroundColor, backgroundColor);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -228,6 +232,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setTitleFontFamily(String titleFontFamily) {
 		setValue(Property.titleFontFamily, titleFontFamily);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -246,6 +251,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setTitleFontSize(int titleFontSize) {
 		setValue(Property.titleFontSize, titleFontSize);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -265,6 +271,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setTitleFontStyle(FontStyle titleFontStyle) {
 		setValue(Property.titleFontStyle, titleFontStyle);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -284,6 +291,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setTitleFontColor(String titleFontColor) {
 		setValue(Property.titleFontColor, titleFontColor);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -302,6 +310,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setTitleSpacing(int titleSpacing) {
 		setValue(Property.titleSpacing, titleSpacing);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -320,6 +329,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setTitleMarginBottom(int titleMarginBottom) {
 		setValue(Property.titleMarginBottom, titleMarginBottom);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -338,6 +348,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setBodyFontFamily(String bodyFontFamily) {
 		setValue(Property.bodyFontFamily, bodyFontFamily);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -356,6 +367,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setBodyFontSize(int bodyFontSize) {
 		setValue(Property.bodyFontSize, bodyFontSize);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -375,6 +387,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setBodyFontStyle(FontStyle bodyFontStyle) {
 		setValue(Property.bodyFontStyle, bodyFontStyle);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -394,6 +407,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setBodyFontColor(String bodyFontColor) {
 		setValue(Property.bodyFontColor, bodyFontColor);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -412,6 +426,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setBodySpacing(int bodySpacing) {
 		setValue(Property.bodySpacing, bodySpacing);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -430,6 +445,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setFooterFontFamily(String footerFontFamily) {
 		setValue(Property.footerFontFamily, footerFontFamily);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -448,6 +464,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setFooterFontSize(int footerFontSize) {
 		setValue(Property.footerFontSize, footerFontSize);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -466,6 +483,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setFooterFontStyle(FontStyle footerFontStyle) {
 		setValue(Property.footerFontStyle, footerFontStyle);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -485,6 +503,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setFooterFontColor(String footerFontColor) {
 		setValue(Property.footerFontColor, footerFontColor);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -503,6 +522,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setFooterSpacing(int footerSpacing) {
 		setValue(Property.footerSpacing, footerSpacing);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -521,6 +541,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setFooterMarginTop(int footerMarginTop) {
 		setValue(Property.footerMarginTop, footerMarginTop);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -539,6 +560,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setXPadding(int xPadding) {
 		setValue(Property.xPadding, xPadding);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -557,6 +579,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setYPadding(int yPadding) {
 		setValue(Property.yPadding, yPadding);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -575,6 +598,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setCaretPadding(int caretPadding) {
 		setValue(Property.caretPadding, caretPadding);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -593,6 +617,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setCaretSize(int caretSize) {
 		setValue(Property.caretSize, caretSize);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -611,6 +636,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setCornerRadius(int cornerRadius) {
 		setValue(Property.cornerRadius, cornerRadius);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -629,6 +655,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setMultiKeyBackground(String multiKeyBackground) {
 		setValue(Property.multiKeyBackground, multiKeyBackground);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -647,6 +674,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setDisplayColors(boolean displayColors) {
 		setValue(Property.displayColors, displayColors);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -665,6 +693,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setBorderColor(String borderColor) {
 		setValue(Property.borderColor, borderColor);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -683,6 +712,7 @@ public final class Tooltips extends AbstractDefaultsItem {
 	 */
 	public void setBorderWidth(int borderWidth) {
 		setValue(Property.borderWidth, borderWidth);
+		checkAndAddToParent();
 	}
 
 	/**

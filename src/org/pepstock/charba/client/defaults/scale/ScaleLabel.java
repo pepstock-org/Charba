@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.scale;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.AbstractItem;
 import org.pepstock.charba.client.defaults.FontItem;
 
 /**
@@ -50,9 +50,9 @@ public final class ScaleLabel extends FontItem {
 	/**
 	 * Empty constructor to reduce visibility
 	 */
-	public ScaleLabel(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
-		padding = new Padding(load(Property.padding));
+	public ScaleLabel(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
+		padding = new Padding(this, Property.padding);
 	}
 	
 	/**
@@ -69,6 +69,7 @@ public final class ScaleLabel extends FontItem {
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -87,6 +88,7 @@ public final class ScaleLabel extends FontItem {
 	 */
 	public void setLabelString(String labelString) {
 		setValue(Property.labelString, labelString);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -105,6 +107,7 @@ public final class ScaleLabel extends FontItem {
 	 */
 	public void setLineHeight(double lineHeight) {
 		setValue(Property.lineHeight, lineHeight);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -115,6 +118,4 @@ public final class ScaleLabel extends FontItem {
 	public double getLineHeight() {
 		return getValue(Property.lineHeight, DEFAULT_LINE_HEIGHT);
 	}
-
-
 }

@@ -201,7 +201,7 @@ public abstract class BaseOptions extends EventProvider {
 	/**
 	 * Returns the browser events that the chart should listen to for tooltips and hovering.
 	 * 
-	 * @return the browser events that the chart should listen to for tooltips and hovering. Default is {@link org.pepstock.charba.client.defaults.Options#getEvents()}.
+	 * @return the browser events that the chart should listen to for tooltips and hovering. Default is {@link org.pepstock.charba.client.defaults.global.Options#getEvents()}.
 	 */
 	public JsEnumValueArrayList<Event> getEvents() {
 		// checks if the java script property is set
@@ -273,7 +273,7 @@ public abstract class BaseOptions extends EventProvider {
 	/**
 	 * Returns the resizing of the chart canvas when its container does.
 	 * 
-	 * @return the resizing of the chart canvas when its container does. Default is {@link org.pepstock.charba.client.defaults.Options#isResponsive()}.
+	 * @return the resizing of the chart canvas when its container does. Default is {@link org.pepstock.charba.client.defaults.global.Options#isResponsive()}.
 	 */
 	public boolean isResponsive() {
 		return getValue(Property.responsive, Defaults.getGlobal().isResponsive());
@@ -291,7 +291,7 @@ public abstract class BaseOptions extends EventProvider {
 	/**
 	 * Returns the duration in milliseconds it takes to animate to new size after a resize event.
 	 * 
-	 * @return the duration in milliseconds it takes to animate to new size after a resize event. Default is {@link org.pepstock.charba.client.defaults.Options#getResponsiveAnimationDuration()}.
+	 * @return the duration in milliseconds it takes to animate to new size after a resize event. Default is {@link org.pepstock.charba.client.defaults.global.Options#getResponsiveAnimationDuration()}.
 	 */
 	public int getResponsiveAnimationDuration() {
 		return getValue(Property.responsiveAnimationDuration, Defaults.getGlobal().getResponsiveAnimationDuration());
@@ -309,7 +309,7 @@ public abstract class BaseOptions extends EventProvider {
 	/**
 	 * Returns the the maintaining of the original canvas aspect ratio (width / height) when resizing.
 	 * 
-	 * @return the maintaining of the original canvas aspect ratio (width / height) when resizing. Default is {@link org.pepstock.charba.client.defaults.Options#isMaintainAspectRatio()}.
+	 * @return the maintaining of the original canvas aspect ratio (width / height) when resizing. Default is {@link org.pepstock.charba.client.defaults.global.Options#isMaintainAspectRatio()}.
 	 */
 	public boolean isMaintainAspectRatio() {
 		return getValue(Property.maintainAspectRatio, Defaults.getGlobal().isMaintainAspectRatio());

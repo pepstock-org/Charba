@@ -15,9 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.global;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
+import org.pepstock.charba.client.defaults.AbstractItem;
 
 /**
  * Arcs are used in the polar area, doughnut and pie charts.<br>
@@ -32,7 +31,7 @@ import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
  * @see org.pepstock.charba.client.DoughnutChart
  * @see org.pepstock.charba.client.PieChart
  */
-public class Arc extends AbstractDefaultsItem {
+public class Arc extends AbstractItem {
 
 	// default background color
 	protected static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
@@ -54,8 +53,8 @@ public class Arc extends AbstractDefaultsItem {
 	/**
 	 * Builds the object setting java script objects
 	 */
-	Arc(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	Arc(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
 	}
 
 	/**
@@ -65,6 +64,7 @@ public class Arc extends AbstractDefaultsItem {
 	 */
 	public void setBackgroundColor(String backgroundColor) {
 		setValue(Property.backgroundColor, backgroundColor);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -92,6 +92,7 @@ public class Arc extends AbstractDefaultsItem {
 	 */
 	public void setBorderWidth(int borderWidth) {
 		setValue(Property.borderWidth, borderWidth);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -119,6 +120,7 @@ public class Arc extends AbstractDefaultsItem {
 	 */
 	public void setBorderColor(String borderColor) {
 		setValue(Property.borderColor, borderColor);
+		checkAndAddToParent();
 	}
 
 	/**

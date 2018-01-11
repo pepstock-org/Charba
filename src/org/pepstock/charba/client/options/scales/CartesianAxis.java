@@ -126,7 +126,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	/**
 	 * If true, extra space is added to the both edges and the axis is scaled to fit into the chart area.
 	 * 
-	 * @return extra space of axis. Default is {@link org.pepstock.charba.client.defaults.Scale#isOffset()}.
+	 * @return extra space of axis. Default is {@link org.pepstock.charba.client.defaults.scale.Scale#isOffset()}.
 	 */
 	public boolean isOffset() {
 		return getValue(Property.offset, Defaults.getScale().isOffset());
@@ -165,7 +165,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	/**
 	 * Position of the axis in the chart. Possible values are: 'top', 'left', 'bottom', 'right'
 	 * 
-	 * @return position of axis. Default is {@link org.pepstock.charba.client.defaults.Scale#getPosition()}.
+	 * @return position of axis. Default is {@link org.pepstock.charba.client.defaults.scale.Scale#getPosition()}.
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {

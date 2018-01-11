@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.global;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.AbstractItem;
 import org.pepstock.charba.client.defaults.FontItem;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
@@ -56,8 +56,8 @@ public final class Title extends FontItem {
 	 * 
 	 * @param chart chart instance
 	 */
-	public Title(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	Title(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
 	}
 
 	@Override
@@ -72,6 +72,7 @@ public final class Title extends FontItem {
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -91,6 +92,7 @@ public final class Title extends FontItem {
 	 */
 	public void setPosition(Position position) {
 		setValue(Property.position, position);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -110,6 +112,7 @@ public final class Title extends FontItem {
 	 */
 	public void setPadding(int padding) {
 		setValue(Property.padding, padding);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -128,6 +131,7 @@ public final class Title extends FontItem {
 	 */
 	public void setFullWidth(boolean fullWidth) {
 		setValue(Property.fullWidth, fullWidth);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -146,6 +150,7 @@ public final class Title extends FontItem {
 	 */
 	public void setLineHeight(double lineHeight) {
 		setValue(Property.lineHeight, lineHeight);
+		checkAndAddToParent();
 	}
 
 	/**

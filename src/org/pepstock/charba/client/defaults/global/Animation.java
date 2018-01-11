@@ -15,9 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.global;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
+import org.pepstock.charba.client.defaults.AbstractItem;
 import org.pepstock.charba.client.enums.Easing;
 
 /**
@@ -27,7 +26,7 @@ import org.pepstock.charba.client.enums.Easing;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Animation extends AbstractDefaultsItem {
+public final class Animation extends AbstractItem {
 
 	private static final int DEFAULT_DURATION = 1000;
 
@@ -51,8 +50,8 @@ public final class Animation extends AbstractDefaultsItem {
 	 * 
 	 * @param chart chart instance
 	 */
-	public Animation(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	Animation(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
 	}
 
 	/**
@@ -63,6 +62,7 @@ public final class Animation extends AbstractDefaultsItem {
 	 */
 	public void setEasing(Easing easing) {
 		setValue(Property.easing, easing);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -82,6 +82,7 @@ public final class Animation extends AbstractDefaultsItem {
 	 */
 	public void setDuration(int milliseconds) {
 		setValue(Property.duration, milliseconds);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -100,6 +101,7 @@ public final class Animation extends AbstractDefaultsItem {
 	 */
 	public void setAnimateRotate(boolean animateRotate) {
 		setValue(Property.animateRotate, animateRotate);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -118,6 +120,7 @@ public final class Animation extends AbstractDefaultsItem {
 	 */
 	public void setAnimateScale(boolean animateScale) {
 		setValue(Property.animateScale, animateScale);
+		checkAndAddToParent();
 	}
 
 	/**

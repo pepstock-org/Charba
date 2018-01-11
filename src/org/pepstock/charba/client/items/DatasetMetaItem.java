@@ -54,13 +54,7 @@ public class DatasetMetaItem extends BaseItem {
 	 * @see org.pepstock.charba.client.enums.AxisType
 	 */
 	public final Type getType() {
-		String value = getString(Property.type.name());
-		for (Type type : Type.values()){
-			if (type.name().equalsIgnoreCase(value)){
-				return type;
-			}
-		}
-		return Type.bar;
+		return getValue(Property.type, Type.class, Type.bar);
 	}
 
 	/**

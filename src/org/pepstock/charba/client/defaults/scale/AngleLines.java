@@ -16,9 +16,8 @@
 package org.pepstock.charba.client.defaults.scale;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
+import org.pepstock.charba.client.defaults.AbstractItem;
 
 /**
  * It is used to configure angled lines that radiate from the center of the chart to the point labels.<br>
@@ -27,7 +26,7 @@ import org.pepstock.charba.client.defaults.AbstractDefaultsItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AngleLines extends AbstractDefaultsItem {
+public final class AngleLines extends AbstractItem {
 
 	private static final boolean DEFAULT_DISPLAY = true;
 
@@ -46,8 +45,8 @@ public final class AngleLines extends AbstractDefaultsItem {
 	/**
 	 * Empty constructor to reduce visibility
 	 */
-	public AngleLines(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	AngleLines(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
 	}
 
 	/**
@@ -57,6 +56,7 @@ public final class AngleLines extends AbstractDefaultsItem {
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -75,6 +75,7 @@ public final class AngleLines extends AbstractDefaultsItem {
 	 */
 	public void setColor(String color) {
 		setValue(Property.color, color);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -93,6 +94,7 @@ public final class AngleLines extends AbstractDefaultsItem {
 	 */
 	public void setLineWidth(int lineWidth) {
 		setValue(Property.lineWidth, lineWidth);
+		checkAndAddToParent();
 	}
 
 	/**

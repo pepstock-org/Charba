@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.global;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.AbstractItem;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
@@ -63,8 +63,8 @@ public final class Point extends Arc {
 	/**
 	 * Builds the object setting java script objects
 	 */
-	Point(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	Point(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
 	}
 
 	/*
@@ -104,6 +104,7 @@ public final class Point extends Arc {
 	 */
 	public void setRadius(int radius) {
 		setValue(Property.radius, radius);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -123,6 +124,7 @@ public final class Point extends Arc {
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
 		setValue(Property.pointStyle, pointStyle);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -142,6 +144,7 @@ public final class Point extends Arc {
 	 */
 	public void setHitRadius(int hitRadius) {
 		setValue(Property.hitRadius, hitRadius);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -160,6 +163,7 @@ public final class Point extends Arc {
 	 */
 	public void setHoverRadius(int hoverRadius) {
 		setValue(Property.hoverRadius, hoverRadius);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -178,6 +182,7 @@ public final class Point extends Arc {
 	 */
 	public void setHoverBorderWidth(int hoverBorderWidth) {
 		setValue(Property.hoverBorderWidth, hoverBorderWidth);
+		checkAndAddToParent();
 	}
 
 	/**

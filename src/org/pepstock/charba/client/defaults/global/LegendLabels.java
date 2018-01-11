@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.global;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.AbstractItem;
 import org.pepstock.charba.client.defaults.FontItem;
 
 /**
@@ -48,8 +48,8 @@ public final class LegendLabels extends FontItem {
 	 * 
 	 * @param chart chart instance
 	 */
-	public LegendLabels(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	LegendLabels(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
 	}
 
 	/**
@@ -59,6 +59,7 @@ public final class LegendLabels extends FontItem {
 	 */
 	public void setUsePointStyle(boolean usePointStyle) {
 		setValue(Property.usePointStyle, usePointStyle);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -77,6 +78,7 @@ public final class LegendLabels extends FontItem {
 	 */
 	public void setBoxWidth(int boxWidth) {
 		setValue(Property.boxWidth, boxWidth);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -95,6 +97,7 @@ public final class LegendLabels extends FontItem {
 	 */
 	public void setPadding(int padding) {
 		setValue(Property.padding, padding);
+		checkAndAddToParent();
 	}
 
 	/**

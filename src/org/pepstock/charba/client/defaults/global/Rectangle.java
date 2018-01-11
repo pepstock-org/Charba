@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.global;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.AbstractItem;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -50,8 +50,8 @@ public final class Rectangle extends Arc {
 	/**
 	 * Builds the object setting java script objects
 	 */
-	Rectangle(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	Rectangle(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
 	}
 
 	/*
@@ -91,6 +91,7 @@ public final class Rectangle extends Arc {
 	 */
 	public void setBorderSkipped(Position borderSkipped) {
 		setValue(Property.borderSkipped, borderSkipped);
+		checkAndAddToParent();
 	}
 
 	/**

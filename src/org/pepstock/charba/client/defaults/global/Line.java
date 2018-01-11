@@ -18,9 +18,9 @@ package org.pepstock.charba.client.defaults.global;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JsIntegerArrayList;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.AbstractItem;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.JoinStyle;
@@ -71,8 +71,8 @@ public final class Line extends Arc {
 	/**
 	 * Builds the object setting java script objects
 	 */
-	Line(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	Line(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
 	}
 
 	/*
@@ -112,6 +112,7 @@ public final class Line extends Arc {
 	 */
 	public void setTension(double tension) {
 		setValue(Property.tension, tension);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -132,6 +133,7 @@ public final class Line extends Arc {
 	 */
 	public void setBorderCapStyle(CapStyle borderCapStyle) {
 		setValue(Property.borderCapStyle, borderCapStyle);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -165,6 +167,7 @@ public final class Line extends Arc {
 	 */
 	private void setBorderDash(JsIntegerArrayList borderDash) {
 		setIntegerArray(Property.borderDash, borderDash);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -185,6 +188,7 @@ public final class Line extends Arc {
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
 		setValue(Property.borderDashOffset, borderDashOffset);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -208,6 +212,7 @@ public final class Line extends Arc {
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
 		setValue(Property.borderJoinStyle, borderJoinStyle);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -231,6 +236,7 @@ public final class Line extends Arc {
 	 */
 	public void setCapBezierPoints(boolean capBezierPoints) {
 		setValue(Property.capBezierPoints, capBezierPoints);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -250,6 +256,7 @@ public final class Line extends Arc {
 	public void setFill(boolean fill) {
 		// sets the boolean value instead of string one
 		setValue(Property.fill, fill);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -267,6 +274,7 @@ public final class Line extends Arc {
 			// sets value
 			setValue(Property.fill, fill.name());
 		}
+		checkAndAddToParent();
 	}
 
 	/**
@@ -303,6 +311,7 @@ public final class Line extends Arc {
 	 */
 	public void setStepped(boolean stepped) {
 		setValue(Property.stepped, stepped);
+		checkAndAddToParent();
 	}
 
 	/**

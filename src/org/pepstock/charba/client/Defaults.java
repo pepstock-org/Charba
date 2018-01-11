@@ -1,25 +1,26 @@
 package org.pepstock.charba.client;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JsArrayStringImpl;
-import org.pepstock.charba.client.defaults.Options;
-import org.pepstock.charba.client.defaults.Scale;
+import org.pepstock.charba.client.defaults.global.Options;
+import org.pepstock.charba.client.defaults.scale.Scale;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
 public final class Defaults {
-	
-	Logger log = Logger.getLogger("mio");
 
 	private static final Defaults INSTANCE = new Defaults();
 	
 	private final Options global;
 	
-	private Scale scale;
+	private final Scale scale;
+	
+	private final Map<Type, Options> chartOptions = new HashMap<Type, Options>();
 	
 	/**
 	 * To avoid any instantiation
@@ -28,30 +29,24 @@ public final class Defaults {
 		Injector.ensureInjected();
 		global = new Options((GenericJavaScriptObject)getGlobalOptions());
 		scale = new Scale((GenericJavaScriptObject)getGlobalScale());
-	}
-	
-	public static void test(){
-		Options chart = new Options((GenericJavaScriptObject)INSTANCE.getChart(Type.bar.name()));
-		
-		for (Scale s : chart.getScales().getXAxes()){
-			INSTANCE.log.info(s.toString());
+		for (Type type : Type.values()){
+			chartOptions.put(type, new Options((GenericJavaScriptObject)getChart(type.name())));
 		}
-//		INSTANCE.log.info(chart.getScales().getXAxes()+" ");
-//		INSTANCE.log.info(chart.getScales().getYAxes()+" ");
-//		for (Type t : Type.values()){
-//			INSTANCE.log.info("*** "+t.name()+" ***\n");
-//			GenericJavaScriptObject options = (GenericJavaScriptObject)INSTANCE.getChart(t.name());
-//			INSTANCE.log.info(options.toJSON());
-//		}
 	}
 	
 	public static Options getGlobal(){
 		return INSTANCE.global;
 	}
 	
-	//FIXME to remove
 	public static Scale getScale(){
 		return INSTANCE.scale;
+	}
+	
+	public static Options getChartGlobal(Type type){
+		if (INSTANCE.chartOptions.containsKey(type)){
+			return INSTANCE.chartOptions.get(type);
+		}
+		return INSTANCE.chartOptions.get(Type.bar);
 	}
 
 	public static Set<String> getPlugins(){
@@ -93,12 +88,6 @@ public final class Defaults {
 
 	private native JavaScriptObject getChart(String type)/*-{
 		return $wnd.Chart.defaults[type];
-	}-*/;
-
-	/**
-	 */
-	private native void dump()/*-{
-	    console.log($wnd.Chart.defaults.line);
 	}-*/;
 
 }

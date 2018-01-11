@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.scale;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.AbstractItem;
 import org.pepstock.charba.client.defaults.FontItem;
 
 /**
@@ -104,10 +104,10 @@ public final class Ticks extends FontItem {
 	/**
 	 * Builds the object
 	 */
-	public Ticks(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
-		minor = new FontItem(load(Property.minor));
-		major = new FontItem(load(Property.major));
+	Ticks(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
+		minor = new FontItemImpl(this, Property.minor);
+		major = new FontItemImpl(this, Property.major);
 	}
 	
 	/**
@@ -117,6 +117,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setBeginAtZero(boolean beginAtZero) {
 		setValue(Property.beginAtZero, beginAtZero);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -135,6 +136,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -153,6 +155,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setReverse(boolean reverse) {
 		setValue(Property.reverse, reverse);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -173,6 +176,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setAutoSkip(boolean autoSkip) {
 		setValue(Property.autoSkip, autoSkip);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -195,6 +199,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setAutoSkipPadding(int autoSkipPadding) {
 		setValue(Property.autoSkipPadding, autoSkipPadding);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -218,6 +223,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setLabelOffset(int labelOffset) {
 		setValue(Property.labelOffset, labelOffset);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -241,6 +247,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setMaxRotation(int maxRotation) {
 		setValue(Property.maxRotation, maxRotation);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -261,6 +268,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setMinRotation(int minRotation) {
 		setValue(Property.minRotation, minRotation);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -281,6 +289,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setMirror(boolean mirror) {
 		setValue(Property.mirror, mirror);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -303,6 +312,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setPadding(int padding) {
 		setValue(Property.padding, padding);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -323,6 +333,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setMin(double min) {
 		setValue(Property.min, min);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -341,6 +352,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setMax(double max) {
 		setValue(Property.max, max);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -359,6 +371,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setMaxTicksLimit(int maxTicksLimit) {
 		setValue(Property.maxTicksLimit, maxTicksLimit);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -377,6 +390,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setStepSize(double stepSize) {
 		setValue(Property.stepSize, stepSize);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -395,6 +409,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setSuggestedMax(double suggestedMax) {
 		setValue(Property.suggestedMax, suggestedMax);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -413,6 +428,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setSuggestedMin(double suggestedMin) {
 		setValue(Property.suggestedMin, suggestedMin);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -431,6 +447,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setBackdropColor(String backdropColor) {
 		setValue(Property.backdropColor, backdropColor);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -449,6 +466,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setBackdropPaddingX(int backdropPaddingX) {
 		setValue(Property.backdropPaddingX, backdropPaddingX);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -467,6 +485,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setBackdropPaddingY(int backdropPaddingY) {
 		setValue(Property.backdropPaddingY, backdropPaddingY);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -485,6 +504,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setShowLabelBackdrop(boolean showLabelBackdrop) {
 		setValue(Property.showLabelBackdrop, showLabelBackdrop);
+		checkAndAddToParent();
 	}
 
 	/**
@@ -508,6 +528,14 @@ public final class Ticks extends FontItem {
 	 */
 	public FontItem getMajor() {
 		return major;
+	}
+	
+	private static class FontItemImpl extends FontItem{
+
+		protected FontItemImpl(AbstractItem parent, Key childKey) {
+			super(parent, childKey);
+		}
+		
 	}
 
 }

@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.scale;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.AbstractItem;
 import org.pepstock.charba.client.defaults.FontItem;
 
 /**
@@ -26,7 +26,7 @@ import org.pepstock.charba.client.defaults.FontItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PointLabels  extends FontItem {
+public final class PointLabels extends FontItem {
 
 	private static final boolean DEFAULT_DISPLAY = true;
 
@@ -41,8 +41,8 @@ public final class PointLabels  extends FontItem {
 	/**
 	 * 	
 	 */
-	public PointLabels(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	PointLabels(AbstractItem parent, Key childKey) {
+		super(parent, childKey);
 	}
 
 	/**
@@ -52,6 +52,7 @@ public final class PointLabels  extends FontItem {
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		checkAndAddToParent();
 	}
 
 	/**
