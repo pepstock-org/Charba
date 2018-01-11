@@ -21,7 +21,7 @@ import org.pepstock.charba.client.AbstractChart;
  * Callback function to transform data labels to point labels.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.options.scales.RadialPointLabel
+ * @see org.pepstock.charba.client.options.scales.RadialPointLabels
  */
 public interface RadialPointLabelCallback {
 

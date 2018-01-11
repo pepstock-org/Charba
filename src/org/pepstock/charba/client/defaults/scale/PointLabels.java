@@ -13,46 +13,53 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.items;
-
-import java.util.List;
+package org.pepstock.charba.client.defaults.scale;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.FontItem;
 
 /**
- * This object is just a proxy object, created from JavaScript side, to wrap an JavaScript array.<br>
- * Created and passed by CHART.JS.<br>
- * This object is NOT used or passed to any callbacks or event handling
+ * It is used to configure the point labels that are shown on the perimeter of the scale.<br>
+ * Note that these options only apply if display is true.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public class DatasetMetaItemArray extends GenericJavaScriptObject {
+public final class PointLabels  extends FontItem {
+
+	private static final boolean DEFAULT_DISPLAY = true;
 
 	/**
 	 * Name of fields of JavaScript object.
 	 */
 	private enum Property implements Key
 	{
-		items
+		display
 	}
 
 	/**
-	 * Needed for GWt injection
+	 * 	
 	 */
-	protected DatasetMetaItemArray() {
-		// do nothing
+	public PointLabels(GenericJavaScriptObject javaScriptObject) {
+		super(javaScriptObject);
 	}
 
 	/**
-	 * Returns a list of dataset metadata items.
+	 * If true, labels are shown
 	 * 
-	 * @return a list of dataset metadata items.
-	 * @see org.pepstock.charba.client.items.DatasetMetaItem
+	 * @param display if true, labels are shown
 	 */
-	public final List<DatasetMetaItem> getItems() {
-		return getObjectArray(Property.items.name());
+	public void setDisplay(boolean display) {
+		setValue(Property.display, display);
 	}
 
+	/**
+	 * If true, labels are shown
+	 * 
+	 * @return if true, labels are shown. Default is true.
+	 */
+	public boolean isDisplay() {
+		return getValue(Property.display, DEFAULT_DISPLAY);
+	}
 }

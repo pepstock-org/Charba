@@ -79,7 +79,7 @@ public class JsArrayObjectImpl extends JsArray<GenericJavaScriptObject> {
     
 	/**
 	 * Returns a JSON representation of this object.
-	 * @return a JSON representation of this object
+	 * @return a JSON representation of this object FIXME errore val_0_g$.toJSON is not a function
 	 */
     public final native String toJSON()/*-{
 		return JSON.stringify(this, function(key, val) {

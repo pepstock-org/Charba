@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options.scales;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 
@@ -25,13 +26,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class RadialAngleLine extends JavaScriptObjectContainer {
-
-	private static final boolean DEFAULT_DISPLAY = true;
-
-	private static final String DEFAULT_COLOR = "rgba(0,0,0,0.1)";
-
-	private static final int DEFAULT_LINE_WIDTH = 1;
+public final class RadialAngleLines extends JavaScriptObjectContainer {
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -46,9 +41,11 @@ public final class RadialAngleLine extends JavaScriptObjectContainer {
 	/**
 	 * Empty constructor to reduce visibility
 	 */
-	RadialAngleLine() {
+	RadialAngleLines() {
 	}
 
+	// FIXME defaults comment
+	
 	/**
 	 * If true, angle lines are shown
 	 * 
@@ -64,7 +61,7 @@ public final class RadialAngleLine extends JavaScriptObjectContainer {
 	 * @return if true, angle lines are shown. Default is true.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, DEFAULT_DISPLAY);
+		return getValue(Property.display, Defaults.getScale().getAngleLines().isDisplay());
 	}
 
 	/**
@@ -82,7 +79,7 @@ public final class RadialAngleLine extends JavaScriptObjectContainer {
 	 * @return color of angled lines. Default is 'rgba(0, 0, 0, 0.1)'
 	 */
 	public String getColor() {
-		return getValue(Property.color, DEFAULT_COLOR);
+		return getValue(Property.color, Defaults.getScale().getAngleLines().getColor());
 	}
 
 	/**
@@ -100,7 +97,7 @@ public final class RadialAngleLine extends JavaScriptObjectContainer {
 	 * @return width of angled lines. Default is 1.
 	 */
 	public int getLineWidth() {
-		return getValue(Property.lineWidth, DEFAULT_LINE_WIDTH);
+		return getValue(Property.lineWidth, Defaults.getScale().getAngleLines().getLineWidth());
 	}
 
 }

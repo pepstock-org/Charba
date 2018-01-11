@@ -33,7 +33,11 @@ public class JavaScriptObjectContainer {
 	}
 
 	protected JavaScriptObjectContainer(GenericJavaScriptObject javaScriptObject) {
-		this.javaScriptObject = javaScriptObject;
+		if (javaScriptObject == null){
+			this.javaScriptObject = GenericJavaScriptObject.build();	
+		} else {
+			this.javaScriptObject = javaScriptObject;
+		}
 	}
 
 	/**

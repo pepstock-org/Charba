@@ -26,6 +26,7 @@ import org.pepstock.charba.client.commons.Key;
  */
 public final class DoughnutOptions extends PieOptions {
 
+	// FIXME con globals/chart options
 	private static final double DEFAULT_CUTOUT_PERCENTAGE = 50D;
 
 	/**

@@ -38,10 +38,6 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  */
 public final class Animation extends EventProvider {
 
-	private static final boolean DEFAULT_ANIMATE_ROTATE = true;
-
-	private static final boolean DEFAULT_ANIMATE_SCALE = false;
-
 	// amount of handlers
 	private int onCompleteHandlers = 0;
 	// amount of handlers
@@ -122,7 +118,7 @@ public final class Animation extends EventProvider {
 	 * @return If true, the chart will animate in with a rotation animation. Default is true.
 	 */
 	public boolean isAnimateRotate() {
-		return getValue(Property.animateRotate, DEFAULT_ANIMATE_ROTATE);
+		return getValue(Property.animateRotate, Defaults.getGlobal().getAnimation().isAnimateRotate());
 	}
 
 	/**
@@ -140,7 +136,7 @@ public final class Animation extends EventProvider {
 	 * @return If true, will animate scaling the chart from the center outwards. Default is false.
 	 */
 	public boolean isAnimateScale() {
-		return getValue(Property.animateScale, DEFAULT_ANIMATE_SCALE);
+		return getValue(Property.animateScale, Defaults.getGlobal().getAnimation().isAnimateScale());
 	}
 
 	/*

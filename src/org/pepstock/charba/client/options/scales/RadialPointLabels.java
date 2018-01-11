@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.RadialPointLabelCallback;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
@@ -29,15 +30,7 @@ import org.pepstock.charba.client.enums.FontStyle;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class RadialPointLabel extends JavaScriptObjectContainer {
-
-	private static final boolean DEFAULT_DISPLAY = true;
-
-	private static final int DEFAULT_FONT_SIZE = 10;
-
-	private static final String DEFAULT_FONT_COLOR = "#666";
-
-	private static final String DEFAULT_FONT_FAMILY = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
+public final class RadialPointLabels extends JavaScriptObjectContainer {
 
 	private final Axis axis;
 
@@ -61,11 +54,13 @@ public final class RadialPointLabel extends JavaScriptObjectContainer {
 	 * 
 	 * @param axis own axis.
 	 */
-	RadialPointLabel(Axis axis) {
+	RadialPointLabels(Axis axis) {
 		this.axis = axis;
 		registerNativePointLabelCallbacktHandler(getJavaScriptObject());
 	}
 
+	// FIXME defaults comment
+	
 	/**
 	 * If true, labels are shown
 	 * 
@@ -81,7 +76,7 @@ public final class RadialPointLabel extends JavaScriptObjectContainer {
 	 * @return if true, labels are shown. Default is true.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, DEFAULT_DISPLAY);
+		return getValue(Property.display, Defaults.getScale().getPointLabels().isDisplay());
 	}
 
 	/**
@@ -99,7 +94,7 @@ public final class RadialPointLabel extends JavaScriptObjectContainer {
 	 * @return font size for the tick labels. Default is 10.
 	 */
 	public int getFontSize() {
-		return getValue(Property.fontSize, DEFAULT_FONT_SIZE);
+		return getValue(Property.fontSize, Defaults.getScale().getPointLabels().getFontSize());
 	}
 
 	/**
@@ -122,7 +117,7 @@ public final class RadialPointLabel extends JavaScriptObjectContainer {
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.fontStyle, FontStyle.class, FontStyle.normal);
+		return getValue(Property.fontStyle, FontStyle.class, Defaults.getScale().getPointLabels().getFontStyle());
 	}
 
 	/**
@@ -140,7 +135,7 @@ public final class RadialPointLabel extends JavaScriptObjectContainer {
 	 * @return font color for tick labels. Default is '#666'.
 	 */
 	public String getFontColor() {
-		return getValue(Property.fontColor, DEFAULT_FONT_COLOR);
+		return getValue(Property.fontColor, Defaults.getScale().getPointLabels().getFontColor());
 	}
 
 	/**
@@ -159,7 +154,7 @@ public final class RadialPointLabel extends JavaScriptObjectContainer {
 	 *         'Arial', sans-serif".
 	 */
 	public String getFontFamily() {
-		return getValue(Property.fontFamily, DEFAULT_FONT_FAMILY);
+		return getValue(Property.fontFamily, Defaults.getScale().getPointLabels().getFontFamily());
 	}
 
 	/**
@@ -208,7 +203,7 @@ public final class RadialPointLabel extends JavaScriptObjectContainer {
     private native void registerNativePointLabelCallbacktHandler(GenericJavaScriptObject options)/*-{
 		var self = this;
 	    options.callback = function(item){
-	    	return self.@org.pepstock.charba.client.options.scales.RadialPointLabel::onCallback(Ljava/lang/String;)(item);
+	    	return self.@org.pepstock.charba.client.options.scales.RadialPointLabels::onCallback(Ljava/lang/String;)(item);
 	    }
 	}-*/;
 }

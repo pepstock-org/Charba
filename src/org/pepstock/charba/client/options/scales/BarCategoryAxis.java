@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options.scales;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -25,13 +26,7 @@ import org.pepstock.charba.client.commons.Key;
  */
 public final class BarCategoryAxis extends CartesianCategoryAxis {
 
-	private static final double DEFAULT_BAR_PERCENTAGE = 0.9F;
 
-	private static final double DEFAULT_CATEGORY_PERCENTAGE = 0.8F;
-
-	private static final int DEFAULT_BAR_THICKNESS = 0;
-
-	private static final int DEFAULT_MAX_BAR_THICKNESS = 0;
 
 	// specific gridlines for BAR charts
 	private final BarGridLines barGridLines = new BarGridLines();
@@ -46,6 +41,8 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 		barThickness,
 		maxBarThickness
 	}
+	
+	// FIXME defaults comment
 
 	/**
 	 * Sets the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
@@ -66,7 +63,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 *         category width and put the bars right next to each other. Default is 0.9.
 	 */
 	public double getBarPercentage() {
-		return getValue(Property.barPercentage, DEFAULT_BAR_PERCENTAGE);
+		return getValue(Property.barPercentage, Defaults.getScale().getBarPercentage());
 	}
 
 	/**
@@ -84,7 +81,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 * @return the percent (0-1) of the available width each category should be within the sample width. Default is 0.8.
 	 */
 	public double getCategoryPercentage() {
-		return getValue(Property.categoryPercentage, DEFAULT_CATEGORY_PERCENTAGE);
+		return getValue(Property.categoryPercentage, Defaults.getScale().getCategoryPercentage());
 	}
 
 	/**
@@ -108,7 +105,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 *         Default is 0.
 	 */
 	public int getBarThickness() {
-		return getValue(Property.barThickness, DEFAULT_BAR_THICKNESS);
+		return getValue(Property.barThickness, Defaults.getScale().getBarThickness());
 	}
 
 	/**
@@ -126,7 +123,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 * @return the maximum bar thickness. Default is 0.
 	 */
 	public int getMaxBarThickness() {
-		return getValue(Property.maxBarThickness, DEFAULT_MAX_BAR_THICKNESS);
+		return getValue(Property.maxBarThickness, Defaults.getScale().getMaxBarThickness());
 	}
 
 	/*

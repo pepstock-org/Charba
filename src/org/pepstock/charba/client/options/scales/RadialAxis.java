@@ -33,9 +33,9 @@ public final class RadialAxis extends Axis {
 
 	private final RadialLinearTick ticks = new RadialLinearTick();
 
-	private final RadialAngleLine angleLines = new RadialAngleLine();
+	private final RadialAngleLines angleLines = new RadialAngleLines();
 
-	private final RadialPointLabel pointLabels;
+	private final RadialPointLabels pointLabels;
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -57,7 +57,7 @@ public final class RadialAxis extends Axis {
 		// sets axis to own tick
 		ticks.setAxis(this);
 		// initialize POINT labels
-		pointLabels = new RadialPointLabel(this);
+		pointLabels = new RadialPointLabels(this);
 		// stores into java script object
 		setValue(Property.gridLines, grideLines);
 		setValue(Property.ticks, ticks);
@@ -82,14 +82,14 @@ public final class RadialAxis extends Axis {
 	/**
 	 * @return the angleLines
 	 */
-	public RadialAngleLine getAngleLines() {
+	public RadialAngleLines getAngleLines() {
 		return angleLines;
 	}
 
 	/**
 	 * @return the pointLabels
 	 */
-	public RadialPointLabel getPointLabels() {
+	public RadialPointLabels getPointLabels() {
 		return pointLabels;
 	}
 

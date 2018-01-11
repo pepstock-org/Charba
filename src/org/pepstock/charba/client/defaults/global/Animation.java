@@ -31,11 +31,17 @@ public final class Animation extends AbstractDefaultsItem {
 
 	private static final int DEFAULT_DURATION = 1000;
 
+	private static final boolean DEFAULT_ANIMATE_ROTATE = true;
+
+	private static final boolean DEFAULT_ANIMATE_SCALE = false;
+
 	/**
 	 * Name of fields of JavaScript object.
 	 */
 	private enum Property implements Key
 	{
+		animateRotate,
+		animateScale,
 		duration,
 		easing
 	}
@@ -85,6 +91,42 @@ public final class Animation extends AbstractDefaultsItem {
 	 */
 	public int getDuration() {
 		return getValue(Property.duration, DEFAULT_DURATION);
+	}
+	
+	/**
+	 * If true, the chart will animate in with a rotation animation.
+	 * 
+	 * @param animateRotate If true, the chart will animate in with a rotation animation.
+	 */
+	public void setAnimateRotate(boolean animateRotate) {
+		setValue(Property.animateRotate, animateRotate);
+	}
+
+	/**
+	 * If true, the chart will animate in with a rotation animation.
+	 * 
+	 * @return If true, the chart will animate in with a rotation animation. Default is true.
+	 */
+	public boolean isAnimateRotate() {
+		return getValue(Property.animateRotate, DEFAULT_ANIMATE_ROTATE);
+	}
+
+	/**
+	 * If true, will animate scaling the chart from the center outwards.
+	 * 
+	 * @param animateScale If true, will animate scaling the chart from the center outwards.
+	 */
+	public void setAnimateScale(boolean animateScale) {
+		setValue(Property.animateScale, animateScale);
+	}
+
+	/**
+	 * If true, will animate scaling the chart from the center outwards.
+	 * 
+	 * @return If true, will animate scaling the chart from the center outwards. Default is false.
+	 */
+	public boolean isAnimateScale() {
+		return getValue(Property.animateScale, DEFAULT_ANIMATE_SCALE);
 	}
 
 }

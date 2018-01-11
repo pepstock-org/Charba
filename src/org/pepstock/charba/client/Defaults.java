@@ -26,20 +26,30 @@ public final class Defaults {
 	 */
 	private Defaults() {
 		Injector.ensureInjected();
-		GenericJavaScriptObject options = (GenericJavaScriptObject)getGlobalOptions();
-		global = new Options(options);
-		GenericJavaScriptObject scaleImpl = (GenericJavaScriptObject)getGlobalScale();
-		scale = new Scale(scaleImpl);
+		global = new Options((GenericJavaScriptObject)getGlobalOptions());
+		scale = new Scale((GenericJavaScriptObject)getGlobalScale());
 	}
 	
 	public static void test(){
-		INSTANCE.dump();
+		Options chart = new Options((GenericJavaScriptObject)INSTANCE.getChart(Type.bar.name()));
+		
+		for (Scale s : chart.getScales().getXAxes()){
+			INSTANCE.log.info(s.toString());
+		}
+//		INSTANCE.log.info(chart.getScales().getXAxes()+" ");
+//		INSTANCE.log.info(chart.getScales().getYAxes()+" ");
+//		for (Type t : Type.values()){
+//			INSTANCE.log.info("*** "+t.name()+" ***\n");
+//			GenericJavaScriptObject options = (GenericJavaScriptObject)INSTANCE.getChart(t.name());
+//			INSTANCE.log.info(options.toJSON());
+//		}
 	}
 	
 	public static Options getGlobal(){
 		return INSTANCE.global;
 	}
 	
+	//FIXME to remove
 	public static Scale getScale(){
 		return INSTANCE.scale;
 	}
@@ -81,10 +91,14 @@ public final class Defaults {
     	return $wnd.Chart.defaults.scale;
 	}-*/;
 
+	private native JavaScriptObject getChart(String type)/*-{
+		return $wnd.Chart.defaults[type];
+	}-*/;
+
 	/**
 	 */
 	private native void dump()/*-{
-	    console.log($wnd.Chart.defaults);
+	    console.log($wnd.Chart.defaults.line);
 	}-*/;
 
 }

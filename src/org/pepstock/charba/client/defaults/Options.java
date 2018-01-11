@@ -65,6 +65,16 @@ public final class Options extends AbstractDefaultsItem {
 	private static final String DEFAULT_FONT_FAMILY = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
 
 	private static final boolean DEFAULT_SHOW_LINES = true;
+	
+	private static final boolean DEFAULT_SPAN_GAPS = false;
+	
+	private static final double DEFAULT_CUTOUT_PERCENTAGE = 0D;
+
+	private static final double DEFAULT_ROTATION = -0.5 * Math.PI;
+
+	private static final double DEFAULT_CIRCUMFERENCE = 2 * Math.PI;
+	
+	private static final double DEFAULT_START_ANGLE = -0.5 * Math.PI;
 
 	private final Hover hover;
 
@@ -79,6 +89,10 @@ public final class Options extends AbstractDefaultsItem {
 	private final Title title;
 
 	private final Legend legend;
+	
+	private final Scale scale;
+	
+	private final Scales scales;
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -95,13 +109,20 @@ public final class Options extends AbstractDefaultsItem {
 		defaultFontSize,
 		defaultFontStyle,
 		showLines,
+		spanGaps,
 		hover,
 		elements,
 		layout,
 		animation,
 		tooltips,
 		legend,
-		title
+		title,
+		cutoutPercentage,
+		rotation,
+		circumference,
+		startAngle,
+		scale,
+		scales
 	}
 
 	public Options(GenericJavaScriptObject javaScriptObject) {
@@ -113,6 +134,8 @@ public final class Options extends AbstractDefaultsItem {
 		tooltips = new Tooltips(load(Property.tooltips));
 		legend = new Legend(load(Property.legend));
 		title = new Title(load(Property.title));
+		scale = new Scale(load(Property.scale));
+		scales = new Scales(load(Property.scales));
 	}
 
 	/**
@@ -164,6 +187,19 @@ public final class Options extends AbstractDefaultsItem {
 		return legend;
 	}
 
+	/**
+	 * @return the scale
+	 */
+	public Scale getScale() {
+		return scale;
+	}
+
+	/**
+	 * @return the scales
+	 */
+	public Scales getScales() {
+		return scales;
+	}
 	/**
 	 * Sets the browser events that the chart should listen to for tooltips and hovering.
 	 * 
@@ -361,17 +397,96 @@ public final class Options extends AbstractDefaultsItem {
 	public boolean isShowLines() {
 		return getValue(Property.showLines, DEFAULT_SHOW_LINES);
 	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	
+	/**
+	 * If false, NaN data causes a break in the line.
+	 * 
+	 * @param spanGaps If false, NaN data causes a break in the line.
 	 */
-	@Override
-	public String toString() {
-		return "Options [isAnimationEnable()=" + isAnimationEnable() + ", isResponsive()=" + isResponsive() + ", getResponsiveAnimationDuration()=" + getResponsiveAnimationDuration() + ", isMaintainAspectRatio()=" + isMaintainAspectRatio()
-				+ ", getDefaultColor()=" + getDefaultColor() + ", getDefaultFontColor()=" + getDefaultFontColor() + ", getDefaultFontSize()=" + getDefaultFontSize() + ", getDefaultFontStyle()=" + getDefaultFontStyle() + ", getDefaultFontFamily()="
-				+ getDefaultFontFamily() + ", isShowLines()=" + isShowLines() + "]";
+	public void setSpanGaps(boolean spanGaps) {
+		setValue(Property.spanGaps, spanGaps);
+	}
+
+	/**
+	 * If false, NaN data causes a break in the line.
+	 * 
+	 * @return If false, NaN data causes a break in the line. Default is false.
+	 */
+	public boolean isSpanGaps() {
+		return getValue(Property.spanGaps, DEFAULT_SPAN_GAPS);
 	}
 	
-	
+	/**
+	 * Sets the percentage of the chart that is cut out of the middle.
+	 * 
+	 * @param cutoutPercentage the percentage of the chart that is cut out of the middle.
+	 */
+	public void setCutoutPercentage(double cutoutPercentage) {
+		setValue(Property.cutoutPercentage, cutoutPercentage);
+	}
+
+	/**
+	 * Returns the the percentage of the chart that is cut out of the middle.
+	 * 
+	 * @return the percentage of the chart that is cut out of the middle. Default is 0.
+	 */
+	public double getCutoutPercentage() {
+		return getValue(Property.cutoutPercentage, DEFAULT_CUTOUT_PERCENTAGE);
+	}
+
+	/**
+	 * Sets the starting angle to draw arcs from.
+	 * 
+	 * @param rotation starting angle to draw arcs from.
+	 */
+	public void setRotation(double rotation) {
+		setValue(Property.rotation, rotation);
+	}
+
+	/**
+	 * returns the starting angle to draw arcs from.
+	 * 
+	 * @return starting angle to draw arcs from. Default is <code>-0.5 * Math.PI</code>.
+	 */
+	public double getRotation() {
+		return getValue(Property.rotation, DEFAULT_ROTATION);
+	}
+
+	/**
+	 * Sets the sweep to allow arcs to cover.
+	 * 
+	 * @param circumference the sweep to allow arcs to cover.
+	 */
+	public void setCircumference(double circumference) {
+		setValue(Property.circumference, circumference);
+	}
+
+	/**
+	 * Returns the the sweep to allow arcs to cover.
+	 * 
+	 * @return the sweep to allow arcs to cover. Default is <code>2 * Math.PI</code>.
+	 */
+	public double getCircumference() {
+		return getValue(Property.circumference, DEFAULT_CIRCUMFERENCE);
+	}
+
+	/**
+	 * Sets the starting angle to draw arcs for the first item in a dataset.
+	 * 
+	 * @param startAngle starting angle to draw arcs for the first item in a dataset.
+	 */
+	public void setStartAngle(double startAngle) {
+		setValue(Property.startAngle, startAngle);
+	}
+
+	/**
+	 * Returns the starting angle to draw arcs for the first item in a dataset.
+	 * 
+	 * @return starting angle to draw arcs for the first item in a dataset. Default is <code>-0.5 * Math.PI</code>.
+	 */
+	public double getStartAngle() {
+		return getValue(Property.startAngle, DEFAULT_START_ANGLE);
+	}
+
 
 }

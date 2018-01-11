@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.events;
 
-import org.pepstock.charba.client.items.DatasetMetaItem;
+import org.pepstock.charba.client.items.DatasetItem;
 
 import com.google.gwt.dom.client.NativeEvent;
 
@@ -33,7 +33,7 @@ public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionE
 	 */
 	public static final Type<DatasetSelectionEventHandler> TYPE = new Type<DatasetSelectionEventHandler>();
 	// item with dataset metadata related to the click
-	private final DatasetMetaItem item;
+	private final DatasetItem item;
 
 	/**
 	 * Creates the event with dataset metadata item related to the click
@@ -41,7 +41,7 @@ public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionE
 	 * @param nativeEvent native event of this custom event
 	 * @param item dataset metadata item related to the click org.pepstock.charba.client.items.DatasetMetaItem
 	 */
-	public DatasetSelectionEvent(NativeEvent nativeEvent, DatasetMetaItem item) {
+	public DatasetSelectionEvent(NativeEvent nativeEvent, DatasetItem item) {
 		super(nativeEvent);
 		this.item = item;
 	}
@@ -51,7 +51,7 @@ public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionE
 	 * 
 	 * @return the item with dataset metadata related to the click org.pepstock.charba.client.items.DatasetMetaItem
 	 */
-	public DatasetMetaItem getItem() {
+	public DatasetItem getItem() {
 		return item;
 	}
 
