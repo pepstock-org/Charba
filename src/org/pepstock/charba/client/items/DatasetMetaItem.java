@@ -15,30 +15,29 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import java.util.List;
+
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event
- * position.<br>
- * The elements are mapped by this object.<br>
- * This is the CHART.JS item with all needed info about a selected dataset. This object has been created and passed to event
- * handler or callbacks to apply own logic.
+ * This object is just a proxy object, created from JavaScript side, to wrap an JavaScript array.<br>
+ * Created and passed by CHART.JS.<br>
+ * This object is NOT used or passed to any callbacks or event handling
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DatasetMetaItem extends GenericJavaScriptObject {
+public class DatasetMetaItem extends BaseItem {
 
 	/**
-	 * Needed for GWt injection
+	 * Name of fields of JavaScript object.
 	 */
 	private enum Property implements Key
 	{
-		_datasetIndex,
-		_index,
-		_view,
-		hidden
+		hidden,
+		type,
+		data
 	}
 
 	/**
@@ -47,26 +46,21 @@ public final class DatasetMetaItem extends GenericJavaScriptObject {
 	protected DatasetMetaItem() {
 		// do nothing
 	}
-
+	
 	/**
-	 * Returns the dataset index of the chart
+	 * Returns the type of axis. If not set, the default is <code>linear</code>.
 	 * 
-	 * @return the dataset index of the chart
-	 * @see org.pepstock.charba.client.data.Data#getDatasets()
+	 * @return the type of axis
+	 * @see org.pepstock.charba.client.enums.AxisType
 	 */
-	public final int getDatasetIndex() {
-		return getInt(Property._datasetIndex.name());
-	}
-
-	/**
-	 * Returns the index of the data inside the dataset.
-	 * 
-	 * @return the index of the data inside the dataset.
-	 * @see org.pepstock.charba.client.data.Dataset#getData()
-	 * @see org.pepstock.charba.client.data.Data#getLabels()
-	 */
-	public final int getIndex() {
-		return getInt(Property._index.name());
+	public final Type getType() {
+		String value = getString(Property.type.name());
+		for (Type type : Type.values()){
+			if (type.name().equalsIgnoreCase(value)){
+				return type;
+			}
+		}
+		return Type.bar;
 	}
 
 	/**
@@ -88,12 +82,13 @@ public final class DatasetMetaItem extends GenericJavaScriptObject {
 	}
 
 	/**
-	 * Returns all view information about the dataset.
+	 * Returns a list of dataset metadata items.
 	 * 
-	 * @return all view information about the dataset.
-	 * @see org.pepstock.charba.client.items.DatasetMetaViewItem
+	 * @return a list of dataset metadata items.
+	 * @see org.pepstock.charba.client.items.DatasetItem
 	 */
-	public final DatasetMetaViewItem getView() {
-		return (DatasetMetaViewItem) getJavaScriptObject(Property._view.name());
+	public final List<DatasetItem> getDatasets() {
+		return getObjectArray(Property.data.name());
 	}
+
 }

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -25,12 +26,6 @@ import org.pepstock.charba.client.commons.Key;
  *
  */
 public class PieOptions extends BaseOptions {
-
-	private static final double DEFAULT_CUTOUT_PERCENTAGE = 0D;
-
-	private static final double DEFAULT_ROTATION = -0.5 * Math.PI;
-
-	private static final double DEFAULT_CIRCUMFERENCE = 2 * Math.PI;
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -72,7 +67,7 @@ public class PieOptions extends BaseOptions {
 	 * @return the percentage of the chart that is cut out of the middle. Default is 0.
 	 */
 	public double getCutoutPercentage() {
-		return getValue(Property.cutoutPercentage, DEFAULT_CUTOUT_PERCENTAGE);
+		return getValue(Property.cutoutPercentage, Defaults.getGlobal().getCutoutPercentage());
 	}
 
 	/**
@@ -90,7 +85,7 @@ public class PieOptions extends BaseOptions {
 	 * @return starting angle to draw arcs from. Default is <code>-0.5 * Math.PI</code>.
 	 */
 	public double getRotation() {
-		return getValue(Property.rotation, DEFAULT_ROTATION);
+		return getValue(Property.rotation, Defaults.getGlobal().getRotation());
 	}
 
 	/**
@@ -108,7 +103,7 @@ public class PieOptions extends BaseOptions {
 	 * @return the sweep to allow arcs to cover. Default is <code>2 * Math.PI</code>.
 	 */
 	public double getCircumference() {
-		return getValue(Property.circumference, DEFAULT_CIRCUMFERENCE);
+		return getValue(Property.circumference, Defaults.getGlobal().getCircumference());
 	}
 
 }

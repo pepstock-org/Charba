@@ -36,8 +36,7 @@ import org.pepstock.charba.client.enums.Position;
  */
 abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 
-	// default if is stacked
-	private static final boolean DEFAULT_STACKED = false;
+
 
 	private final GridLines grideLines = new GridLines();
 
@@ -112,7 +111,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @return the stacked
 	 */
 	public boolean isStacked() {
-		return getValue(Property.stacked, DEFAULT_STACKED);
+		return getValue(Property.stacked, Defaults.getScale().isStacked());
 	}
 
 	/**
@@ -150,7 +149,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @return The ID is used to link datasets and scale axes together or <code>null</code> if not set
 	 */
 	public String getId() {
-		return getValue(Property.id, null);
+		return getValue(Property.id, Defaults.getScale().getId());
 	}
 
 	/**

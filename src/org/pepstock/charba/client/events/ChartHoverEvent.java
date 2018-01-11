@@ -17,6 +17,7 @@ package org.pepstock.charba.client.events;
 
 import java.util.List;
 
+import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 
 import com.google.gwt.dom.client.NativeEvent;
@@ -35,27 +36,27 @@ public final class ChartHoverEvent extends AbstractEvent<ChartHoverEventHandler>
 	public static final Type<ChartHoverEventHandler> TYPE = new Type<ChartHoverEventHandler>();
 
 	// a list of items with dataset metadata related to the hover
-	private final List<DatasetMetaItem> items;
+	private final List<DatasetItem> items;
 
 	/**
 	 * Creates the event with a list of items with dataset metadata related to the hover
 	 * 
 	 * @param nativeEvent native event of this custom event
 	 * @param items a list of items with dataset metadata related to the hover
-	 * @see org.pepstock.charba.client.items.DatasetMetaItem
+	 * @see org.pepstock.charba.client.items.DatasetItem
 	 */
-	public ChartHoverEvent(NativeEvent nativeEvent, List<DatasetMetaItem> items) {
+	public ChartHoverEvent(NativeEvent nativeEvent, DatasetMetaItem items) {
 		super(nativeEvent);
-		this.items = items;
+		this.items = items.getDatasets();
 	}
 
 	/**
 	 * Returns a list of items with dataset metadata related to the hover
 	 * 
 	 * @return a list of items with dataset metadata related to the hover
-	 * @see org.pepstock.charba.client.items.DatasetMetaItem
+	 * @see org.pepstock.charba.client.items.DatasetItem
 	 */
-	public List<DatasetMetaItem> getItems() {
+	public List<DatasetItem> getItems() {
 		return items;
 	}
 

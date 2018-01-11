@@ -18,6 +18,7 @@ package org.pepstock.charba.client.events;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 
 import com.google.gwt.dom.client.NativeEvent;
@@ -36,17 +37,18 @@ public final class ChartClickEvent extends AbstractEvent<ChartClickEventHandler>
 	public static final Type<ChartClickEventHandler> TYPE = new Type<ChartClickEventHandler>();
 
 	// a list of items with dataset metadata related to the click
-	private final List<DatasetMetaItem> items;
+	private final List<DatasetItem> items;
 
 	/**
 	 * Creates the event with dataset metadata item related to the click
 	 * 
 	 * @param nativeEvent native event of this custom event
 	 * @param item dataset metadata item related to the click
-	 * @see org.pepstock.charba.client.items.DatasetMetaItem
+	 * @see org.pepstock.charba.client.items.DatasetItem
 	 */
-	public ChartClickEvent(NativeEvent nativeEvent, DatasetMetaItem item) {
-		this(nativeEvent, ArrayListHelper.build(new DatasetMetaItem[] { item }));
+	public ChartClickEvent(NativeEvent nativeEvent, DatasetItem item) {
+		super(nativeEvent);
+		this.items = ArrayListHelper.build(new DatasetItem[] { item });
 	}
 
 	/**
@@ -54,20 +56,20 @@ public final class ChartClickEvent extends AbstractEvent<ChartClickEventHandler>
 	 * 
 	 * @param nativeEvent native event of this custom event
 	 * @param items a list of items with dataset metadata related to the click
-	 * @see org.pepstock.charba.client.items.DatasetMetaItem
+	 * @see org.pepstock.charba.client.items.DatasetItem
 	 */
-	public ChartClickEvent(NativeEvent nativeEvent, List<DatasetMetaItem> items) {
+	public ChartClickEvent(NativeEvent nativeEvent, DatasetMetaItem items) {
 		super(nativeEvent);
-		this.items = items;
+		this.items = items.getDatasets();
 	}
 
 	/**
 	 * Returns a list of items with dataset metadata related to the click
 	 * 
 	 * @return a list of items with dataset metadata related to the click
-	 * @see org.pepstock.charba.client.items.DatasetMetaItem
+	 * @see org.pepstock.charba.client.items.DatasetItem
 	 */
-	public List<DatasetMetaItem> getItems() {
+	public List<DatasetItem> getItems() {
 		return items;
 	}
 

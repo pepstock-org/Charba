@@ -40,9 +40,6 @@ import org.pepstock.charba.client.items.AxisItem;
  */
 public abstract class Axis extends JavaScriptObjectContainer {
 
-	// default weight
-	private static final int DEFAULT_WEIGHT = 0;
-
 	private AbstractChart<?, ?> chart = null;
 
 	private AxisUpdateCallback updateCallback = null;
@@ -150,7 +147,7 @@ public abstract class Axis extends JavaScriptObjectContainer {
 	 * @return weight of axis
 	 */
 	public int getWeight() {
-		return getValue(Property.weight, DEFAULT_WEIGHT);
+		return getValue(Property.weight, Defaults.getScale().getWeight());
 	}
 
 	/**
