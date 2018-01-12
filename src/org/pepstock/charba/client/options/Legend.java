@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.logging.Logger;
+
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.EventProvider;
@@ -27,6 +29,7 @@ import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.events.DatasetSelectionEvent;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendHoverEvent;
+import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.items.LegendItem;
 
 import com.google.gwt.event.shared.EventHandler;
@@ -87,7 +90,7 @@ public final class Legend extends EventProvider {
 	@Override
 	protected <H extends EventHandler> void addHandler(Type<H> type) {
 		// checks if type of added event handler is dataset selection or click
-		if (type.equals(DatasetSelectionEvent.TYPE) || type.equals(ChartClickEvent.TYPE)) {
+		if (type.equals(ChartClickEvent.TYPE)) {
 			// if java script property is missing
 			if (!has(Property.onClick)) {
 				// adds the java script function to catch the event
@@ -204,10 +207,11 @@ public final class Legend extends EventProvider {
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {
-//		return getValue(Property.position, Position.class, Position.top);
 		return getValue(Property.position, Position.class, Defaults.getGlobal().getLegend().getPosition());
 	}
 
+	final Logger log = Logger.getLogger("mio");
+	
 	/**
 	 * A callback that is called when a click event is registered on a label item
 	 * 
@@ -216,6 +220,23 @@ public final class Legend extends EventProvider {
 	 */
 	protected void onClick(ChartNativeEvent event, LegendItem item) {
 		getChart().fireEvent(new LegendClickEvent(event, item));
+	}
+	
+	private void executeInternalOnClickEvent(ChartNativeEvent event, LegendItem item){
+		if (getChart().getType().equals(org.pepstock.charba.client.Type.pie) ||
+				getChart().getType().equals(org.pepstock.charba.client.Type.polarArea) ||
+				getChart().getType().equals(org.pepstock.charba.client.Type.doughnut)){
+			
+		} else {
+			int index = item.getDatasetIndex();
+			DatasetMetaItem meta = getChart().getDatasetMeta(index);
+
+			// See controller.isDatasetVisible comment
+			meta.setHidden(!meta.isHidden());
+
+			// We hid a dataset ... rerender the chart
+			getChart().update();						
+		}
 	}
 
 	/**

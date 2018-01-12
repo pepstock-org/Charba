@@ -485,7 +485,20 @@ public abstract class BaseOptions extends EventProvider {
 		options.onClick = function(event, objects) {
 			var items = this.getElementAtEvent(event);
 			// if there is only 1 item, calls the method with only 1 dataset item
-			if (items.length == 1){
+			if (items.length == 0){
+				// check if the event is on legend
+				var isInLegend = event.layerX > this.legend.left && event.layerX < this.legend.right && event.layerY > this.legend.top && event.layerY < this.legend.bottom && this.legend.options.display;
+				if (isInLegend && this.legend.legendHitBoxes.length > 0){
+					// checks which legend item is affected
+					for (var i = 0; i < this.legend.legendHitBoxes.length; i++){
+						var item = this.legend.legendHitBoxes[i];
+						var isInLegendItem = event.layerX > item.left && event.layerX < (item.width + item.left) && event.layerY > this.legend.top && event.layerY < (item.height + item.top);
+						if (isInLegendItem){
+							this.chart.legend.options.onClick.call(this, event, this.legend.legendItems[i]);
+						}
+					}
+				}
+			} else if (items.length == 1){
 				self.@org.pepstock.charba.client.options.BaseOptions::onClick(Lorg/pepstock/charba/client/events/ChartNativeEvent;Lorg/pepstock/charba/client/items/DatasetItem;)(event, items[0]);
 			} else {
 				// stores the array into a wrapper object

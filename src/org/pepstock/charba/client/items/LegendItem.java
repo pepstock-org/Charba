@@ -163,5 +163,5 @@ public final class LegendItem extends BaseItem {
 	public final PointStyle getPointStyle() {
 		return getValue(Property.lineJoin, PointStyle.class, PointStyle.circle);
 	}
-
+	
 }
