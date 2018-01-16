@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
+import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.options.layout.Padding;
 
@@ -25,9 +26,9 @@ import org.pepstock.charba.client.options.layout.Padding;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Layout extends JavaScriptObjectContainer {
+public final class Layout extends ChartContainer {
 
-	private final Padding padding = new Padding();
+	private final Padding padding;
 
 	private enum Property implements Key
 	{
@@ -36,9 +37,13 @@ public final class Layout extends JavaScriptObjectContainer {
 
 	/**
 	 * Builds the object setting the java script padding object.
+	 * 
+	 * @param chart chart instance
 	 */
-	Layout() {
+	Layout(AbstractChart<?, ?> chart) {
+		super(chart);
 		// sets the padding object
+		padding = new Padding(chart);
 		setValue(Property.padding, padding);
 	}
 

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options.scales;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
 
@@ -26,10 +27,8 @@ import org.pepstock.charba.client.commons.Key;
  */
 public final class BarCategoryAxis extends CartesianCategoryAxis {
 
-
-
 	// specific gridlines for BAR charts
-	private final BarGridLines barGridLines = new BarGridLines();
+	private final BarGridLines barGridLines;
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -41,8 +40,11 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 		barThickness,
 		maxBarThickness
 	}
-	
-	// FIXME defaults comment
+
+	public BarCategoryAxis(AbstractChart<?, ?> chart) {
+		super(chart);
+		barGridLines = new BarGridLines(chart);
+	}
 
 	/**
 	 * Sets the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
@@ -147,6 +149,10 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 *
 	 */
 	private static class BarGridLines extends GridLines {
+
+		BarGridLines(AbstractChart<?, ?> chart) {
+			super(chart);
+		}
 
 		/*
 		 * (non-Javadoc)

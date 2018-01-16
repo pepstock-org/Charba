@@ -15,9 +15,7 @@
 */
 package org.pepstock.charba.client.options.elements;
 
-import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.AbstractChart;
 
 /**
  * Arcs are used in the polar area, doughnut and pie charts.<br>
@@ -30,97 +28,15 @@ import org.pepstock.charba.client.commons.Key;
  * @see org.pepstock.charba.client.DoughnutChart
  * @see org.pepstock.charba.client.PieChart
  */
-public class Arc extends JavaScriptObjectContainer {
+public final class Arc extends AbstractElement {
 
 	/**
-	 * Name of fields of JavaScript object.
-	 */
-	enum Property implements Key
-	{
-		backgroundColor,
-		borderWidth,
-		borderColor
-	}
-
-	/**
-	 * Sets the background color.
+	 * Builds the object setting the java script padding object.
 	 * 
-	 * @param backgroundColor the background color.
+	 * @param chart chart instance
 	 */
-	public void setBackgroundColor(String backgroundColor) {
-		setValue(Property.backgroundColor, backgroundColor);
-	}
-
-	/**
-	 * Returns the background color.
-	 * 
-	 * @return the background color.
-	 */
-	public String getBackgroundColor() {
-		return getValue(Property.backgroundColor, getDefaultBackgroundColor());
-	}
-
-	/**
-	 * Returns the default background color.
-	 * 
-	 * @return the default background color. Default is {@link org.pepstock.charba.client.defaults.global.Arc#getBackgroundColor()}.
-	 */
-	protected String getDefaultBackgroundColor() {
-		return Defaults.getGlobal().getElements().getArc().getBackgroundColor();
-	}
-
-	/**
-	 * Sets the border width.
-	 * 
-	 * @param borderWidth the border width.
-	 */
-	public void setBorderWidth(int borderWidth) {
-		setValue(Property.borderWidth, borderWidth);
-	}
-
-	/**
-	 * Returns the border width.
-	 * 
-	 * @return the border width.
-	 */
-	public int getBorderWidth() {
-		return getValue(Property.borderWidth, getDefaultBorderWidth());
-	}
-
-	/**
-	 * Returns the default border width.
-	 * 
-	 * @return the default border width. Default is {@link org.pepstock.charba.client.defaults.global.Arc#getBorderWidth()}.
-	 */
-	protected int getDefaultBorderWidth() {
-		return Defaults.getGlobal().getElements().getArc().getBorderWidth();
-	}
-
-	/**
-	 * Sets the border color.
-	 * 
-	 * @param borderColor the border color.
-	 */
-	public void setBorderColor(String borderColor) {
-		setValue(Property.borderColor, borderColor);
-	}
-
-	/**
-	 * Returns the border color.
-	 * 
-	 * @return the border color.
-	 */
-	public String getBorderColor() {
-		return getValue(Property.borderColor, getDefaultBorderColor());
-	}
-
-	/**
-	 * Returns the default border color.
-	 * 
-	 * @return the default border color. Default is {@link org.pepstock.charba.client.defaults.global.Arc#getBorderColor()}.
-	 */
-	protected String getDefaultBorderColor() {
-		return Defaults.getGlobal().getElements().getArc().getBorderColor();
+	public Arc(AbstractChart<?, ?> chart) {
+		super(chart);
 	}
 
 }

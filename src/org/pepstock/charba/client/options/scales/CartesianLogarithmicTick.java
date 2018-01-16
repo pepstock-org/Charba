@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options.scales;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -42,7 +43,8 @@ public final class CartesianLogarithmicTick extends CartesianTick {
 	/**
 	 * Empty constructor to reduce visibility
 	 */
-	CartesianLogarithmicTick() {
+	CartesianLogarithmicTick(AbstractChart<?, ?> chart) {
+		super(chart);
 	}
 
 	/**

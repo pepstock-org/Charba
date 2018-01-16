@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.options.elements;
 
-import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Position;
 
@@ -28,7 +28,7 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.BarChart
  */
-public final class Rectangle extends Arc {
+public final class Rectangle extends AbstractElement {
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -38,6 +38,15 @@ public final class Rectangle extends Arc {
 		borderSkipped
 	}
 
+	/**
+	 * Builds the object storing the chart instance.
+	 * 
+	 * @param chart chart instance
+	 */
+	public Rectangle(AbstractChart<?, ?> chart) {
+		super(chart);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -45,7 +54,7 @@ public final class Rectangle extends Arc {
 	 */
 	@Override
 	protected String getDefaultBackgroundColor() {
-		return Defaults.getGlobal().getElements().getRectangle().getBackgroundColor();
+		return getChart().getGlobal().getElements().getRectangle().getBackgroundColor();
 	}
 
 	/*
@@ -55,7 +64,7 @@ public final class Rectangle extends Arc {
 	 */
 	@Override
 	protected int getDefaultBorderWidth() {
-		return Defaults.getGlobal().getElements().getRectangle().getBorderWidth();
+		return getChart().getGlobal().getElements().getRectangle().getBorderWidth();
 	}
 
 	/*
@@ -65,7 +74,7 @@ public final class Rectangle extends Arc {
 	 */
 	@Override
 	protected String getDefaultBorderColor() {
-		return Defaults.getGlobal().getElements().getRectangle().getBorderColor();
+		return getChart().getGlobal().getElements().getRectangle().getBorderColor();
 	}
 
 	/**
@@ -83,7 +92,7 @@ public final class Rectangle extends Arc {
 	 * @return the edge to skip drawing the border for.
 	 */
 	public Position getBorderJoinStyle() {
-		return getValue(Property.borderSkipped, Position.class, Defaults.getGlobal().getElements().getRectangle().getBorderJoinStyle());
+		return getValue(Property.borderSkipped, Position.class, getChart().getGlobal().getElements().getRectangle().getBorderJoinStyle());
 	}
 
 }

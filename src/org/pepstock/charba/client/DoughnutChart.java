@@ -42,7 +42,7 @@ public final class DoughnutChart extends AbstractChart<DoughnutOptions, Doughnut
 	 */
 	@Override
 	public Type getType() {
-		return Type.pie;
+		return Type.doughnut;
 	}
 
 	/*

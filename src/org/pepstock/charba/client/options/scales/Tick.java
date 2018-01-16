@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options.scales;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
 
@@ -26,9 +27,9 @@ import org.pepstock.charba.client.commons.Key;
  */
 abstract class Tick extends BaseTick {
 
-	private final BaseTick minor = new BaseTick();
+	private final BaseTick minor;
 
-	private final BaseTick major = new BaseTick();
+	private final BaseTick major;
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -44,24 +45,27 @@ abstract class Tick extends BaseTick {
 	/**
 	 * Builds the object
 	 */
-	Tick() {
+	Tick(AbstractChart<?, ?> chart) {
+		super(chart);
+		minor = new BaseTick(chart);
+		major = new BaseTick(chart);
 		// sets java script properties
 		setValue(Property.minor, minor);
 		setValue(Property.major, major);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.scales.BaseTick#setAxis(org.pepstock.charba.client.options.scales.Axis)
-	 */
-	@Override
-	void setAxis(Axis axis) {
-		super.setAxis(axis);
-		// stores the axis instance to sub tick
-		minor.setAxis(axis);
-		major.setAxis(axis);
-	}
+//	/*
+//	 * (non-Javadoc)
+//	 * 
+//	 * @see org.pepstock.charba.client.options.scales.BaseTick#setAxis(org.pepstock.charba.client.options.scales.Axis)
+//	 */
+//	@Override
+//	void setAxis(Axis axis) {
+//		super.setAxis(axis);
+//		// stores the axis instance to sub tick
+//		minor.setAxis(axis);
+//		major.setAxis(axis);
+//	}
 
 	/**
 	 * @return the minor

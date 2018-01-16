@@ -18,8 +18,8 @@ package org.pepstock.charba.client.options.scales;
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.RadialPointLabelCallback;
+import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
 
@@ -30,9 +30,7 @@ import org.pepstock.charba.client.enums.FontStyle;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class RadialPointLabels extends JavaScriptObjectContainer {
-
-	private final Axis axis;
+public final class RadialPointLabels extends ChartContainer {
 
 	private RadialPointLabelCallback callback = null;
 
@@ -54,8 +52,8 @@ public final class RadialPointLabels extends JavaScriptObjectContainer {
 	 * 
 	 * @param axis own axis.
 	 */
-	RadialPointLabels(Axis axis) {
-		this.axis = axis;
+	RadialPointLabels(AbstractChart<?, ?> chart) {
+		super(chart);
 		registerNativePointLabelCallbacktHandler(getJavaScriptObject());
 	}
 
@@ -184,7 +182,7 @@ public final class RadialPointLabels extends JavaScriptObjectContainer {
 	 */
 	protected String onCallback(String item) {
 		// gets the chart instance
-		AbstractChart<?, ?> chart = axis.getChart();
+		AbstractChart<?, ?> chart = getChart();
 		// checks if callback and chart are consistent
 		if (callback != null && chart != null) {
 			// invokes callback and returns new value

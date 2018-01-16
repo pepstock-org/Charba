@@ -24,8 +24,8 @@ import org.pepstock.charba.client.callbacks.AxisDimensionsCallback;
 import org.pepstock.charba.client.callbacks.AxisFitCallback;
 import org.pepstock.charba.client.callbacks.AxisTickToLabelConversionCallback;
 import org.pepstock.charba.client.callbacks.AxisUpdateCallback;
+import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.items.AxisItem;
@@ -38,7 +38,7 @@ import org.pepstock.charba.client.items.AxisItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class Axis extends JavaScriptObjectContainer {
+public abstract class Axis extends ChartContainer {
 
 	private AbstractChart<?, ?> chart = null;
 
@@ -80,18 +80,8 @@ public abstract class Axis extends JavaScriptObjectContainer {
 		afterUpdate
 	}
 
-	/**
-	 * @param chart the chart to set
-	 */
-	public void setChart(AbstractChart<?, ?> chart) {
-		this.chart = chart;
-	}
-
-	/**
-	 * @return the chart
-	 */
-	AbstractChart<?, ?> getChart() {
-		return chart;
+	protected Axis(AbstractChart<?, ?> chart) {
+		super(chart);
 	}
 
 	/**

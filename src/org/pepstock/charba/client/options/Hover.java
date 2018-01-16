@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
+import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.InteractionMode;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Hover extends JavaScriptObjectContainer {
+public final class Hover extends ChartContainer {
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -42,8 +42,11 @@ public final class Hover extends JavaScriptObjectContainer {
 
 	/**
 	 * Empty constructor to reduce its visibility
+	 * 
+	 * @param chart chart instance
 	 */
-	Hover() {
+	Hover(AbstractChart<?, ?> chart) {
+		super(chart);
 	}
 
 	/**
@@ -63,7 +66,7 @@ public final class Hover extends JavaScriptObjectContainer {
 	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
 	public InteractionMode getMode() {
-		return getValue(Property.mode, InteractionMode.class, Defaults.getGlobal().getHover().getMode());
+		return getValue(Property.mode, InteractionMode.class, getChart().getGlobal().getHover().getMode());
 	}
 
 	/**
@@ -81,7 +84,7 @@ public final class Hover extends JavaScriptObjectContainer {
 	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart. Default is {@link org.pepstock.charba.client.defaults.global.Hover#isIntersect()}.
 	 */
 	public boolean isIntersect() {
-		return getValue(Property.intersect, Defaults.getGlobal().getHover().isIntersect());
+		return getValue(Property.intersect, getChart().getGlobal().getHover().isIntersect());
 	}
 
 	/**
@@ -99,7 +102,7 @@ public final class Hover extends JavaScriptObjectContainer {
 	 * @return duration in milliseconds it takes to animate hover style changes. Default is {@link org.pepstock.charba.client.defaults.global.Hover#getAnimationDuration()}.
 	 */
 	public int getAnimationDuration() {
-		return getValue(Property.animationDuration, Defaults.getGlobal().getHover().getAnimationDuration());
+		return getValue(Property.animationDuration, getChart().getGlobal().getHover().getAnimationDuration());
 	}
 	
 	/**
@@ -120,6 +123,6 @@ public final class Hover extends JavaScriptObjectContainer {
 	 * @see org.pepstock.charba.client.enums.InteractionAxis
 	 */
 	public InteractionAxis getAxis() {
-		return getValue(Property.axis, InteractionAxis.class, Defaults.getGlobal().getHover().getAxis());
+		return getValue(Property.axis, InteractionAxis.class, getChart().getGlobal().getHover().getAxis());
 	}
 }

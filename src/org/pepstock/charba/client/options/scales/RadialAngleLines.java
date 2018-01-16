@@ -15,8 +15,9 @@
 */
 package org.pepstock.charba.client.options.scales;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
+import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -26,7 +27,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class RadialAngleLines extends JavaScriptObjectContainer {
+public final class RadialAngleLines extends ChartContainer {
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -41,11 +42,10 @@ public final class RadialAngleLines extends JavaScriptObjectContainer {
 	/**
 	 * Empty constructor to reduce visibility
 	 */
-	RadialAngleLines() {
+	RadialAngleLines(AbstractChart<?, ?> chart) {
+		super(chart);
 	}
 
-	// FIXME defaults comment
-	
 	/**
 	 * If true, angle lines are shown
 	 * 

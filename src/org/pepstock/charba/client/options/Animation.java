@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.EventProvider;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
@@ -82,7 +81,7 @@ public final class Animation extends EventProvider {
 	 * @see org.pepstock.charba.client.enums.Easing
 	 */
 	public Easing getEasing() {
-		return getValue(Property.easing, Easing.class, Defaults.getGlobal().getAnimation().getEasing());
+		return getValue(Property.easing, Easing.class, getChart().getGlobal().getAnimation().getEasing());
 	}
 
 	/**
@@ -100,7 +99,7 @@ public final class Animation extends EventProvider {
 	 * @return the number of milliseconds an animation takes. Default is {@link org.pepstock.charba.client.defaults.global.Animation#getDuration()}.
 	 */
 	public int getDuration() {
-		return getValue(Property.duration, Defaults.getGlobal().getAnimation().getDuration());
+		return getValue(Property.duration, getChart().getGlobal().getAnimation().getDuration());
 	}
 
 	/**
@@ -118,7 +117,7 @@ public final class Animation extends EventProvider {
 	 * @return If true, the chart will animate in with a rotation animation. Default is true.
 	 */
 	public boolean isAnimateRotate() {
-		return getValue(Property.animateRotate, Defaults.getGlobal().getAnimation().isAnimateRotate());
+		return getValue(Property.animateRotate, getChart().getGlobal().getAnimation().isAnimateRotate());
 	}
 
 	/**
@@ -136,7 +135,7 @@ public final class Animation extends EventProvider {
 	 * @return If true, will animate scaling the chart from the center outwards. Default is false.
 	 */
 	public boolean isAnimateScale() {
-		return getValue(Property.animateScale, Defaults.getGlobal().getAnimation().isAnimateScale());
+		return getValue(Property.animateScale, getChart().getGlobal().getAnimation().isAnimateScale());
 	}
 
 	/*

@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
+import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.options.elements.Arc;
 import org.pepstock.charba.client.options.elements.Line;
@@ -28,15 +29,15 @@ import org.pepstock.charba.client.options.elements.Rectangle;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Elements extends JavaScriptObjectContainer {
+public final class Elements extends ChartContainer {
 
-	private final Point point = new Point();
+	private final Point point;
 
-	private final Line line = new Line();
+	private final Line line;
 
-	private final Arc arc = new Arc();
+	private final Arc arc;
 
-	private final Rectangle rectangle = new Rectangle();
+	private final Rectangle rectangle;
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -50,9 +51,17 @@ public final class Elements extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * Builds the object setting java script objects
+	 * Builds the object storing the chart instance.
+	 * 
+	 * @param chart chart instance
 	 */
-	Elements() {
+	Elements(AbstractChart<?, ?> chart) {
+		super(chart);
+		// creates the sub-options objects
+		point = new Point(chart);
+		line = new Line(chart);
+		arc = new Arc(chart);
+		rectangle = new Rectangle(chart);
 		// set java script objects even if empty
 		setValue(Property.point, point);
 		setValue(Property.line, line);

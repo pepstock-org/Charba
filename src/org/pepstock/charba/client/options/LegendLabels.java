@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.LegendFilterHandler;
 import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
 import org.pepstock.charba.client.commons.ChartContainer;
@@ -115,7 +114,7 @@ public final class LegendLabels extends ChartContainer {
 	 * @return Font size for label. Default is {@link org.pepstock.charba.client.defaults.global.LegendLabels#getFontSize()}.
 	 */
 	public int getFontSize() {
-		return getValue(Property.fontSize, Defaults.getGlobal().getLegend().getLabels().getFontSize());
+		return getValue(Property.fontSize, getChart().getGlobal().getLegend().getLabels().getFontSize());
 	}
 
 	/**
@@ -135,7 +134,7 @@ public final class LegendLabels extends ChartContainer {
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.fontStyle, FontStyle.class, Defaults.getGlobal().getLegend().getLabels().getFontStyle());
+		return getValue(Property.fontStyle, FontStyle.class, getChart().getGlobal().getLegend().getLabels().getFontStyle());
 	}
 
 	/**
@@ -153,7 +152,7 @@ public final class LegendLabels extends ChartContainer {
 	 * @return Font color for label. Default is {@link org.pepstock.charba.client.defaults.global.LegendLabels#getFontColor()}.
 	 */
 	public String getFontColor() {
-		return getValue(Property.fontColor, Defaults.getGlobal().getLegend().getLabels().getFontColor());
+		return getValue(Property.fontColor, getChart().getGlobal().getLegend().getLabels().getFontColor());
 	}
 
 	/**
@@ -171,7 +170,7 @@ public final class LegendLabels extends ChartContainer {
 	 * @return Font family for the label, follows CSS font-family options. Default is {@link org.pepstock.charba.client.defaults.global.LegendLabels#getFontFamily()}.
 	 */
 	public String getFontFamily() {
-		return getValue(Property.fontFamily, Defaults.getGlobal().getLegend().getLabels().getFontFamily());
+		return getValue(Property.fontFamily, getChart().getGlobal().getLegend().getLabels().getFontFamily());
 	}
 
 	/**
@@ -189,7 +188,7 @@ public final class LegendLabels extends ChartContainer {
 	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case). Default is {@link org.pepstock.charba.client.defaults.global.LegendLabels#isUsePointStyle()}.
 	 */
 	public boolean isUsePointStyle() {
-		return getValue(Property.usePointStyle, Defaults.getGlobal().getLegend().getLabels().isUsePointStyle());
+		return getValue(Property.usePointStyle, getChart().getGlobal().getLegend().getLabels().isUsePointStyle());
 	}
 
 	/**
@@ -207,7 +206,7 @@ public final class LegendLabels extends ChartContainer {
 	 * @return width of coloured box. Default is {@link org.pepstock.charba.client.defaults.global.LegendLabels#getBoxWidth()}.
 	 */
 	public int getBoxWidth() {
-		return getValue(Property.boxWidth, Defaults.getGlobal().getLegend().getLabels().getBoxWidth());
+		return getValue(Property.boxWidth, getChart().getGlobal().getLegend().getLabels().getBoxWidth());
 	}
 	
 	/**
@@ -225,7 +224,7 @@ public final class LegendLabels extends ChartContainer {
 	 * @return Padding to apply around labels. Only top and bottom are implemented. Default is {@link org.pepstock.charba.client.defaults.global.LegendLabels#getPadding()}.
 	 */
 	public int getPadding() {
-		return getValue(Property.padding, Defaults.getGlobal().getLegend().getLabels().getPadding());
+		return getValue(Property.padding, getChart().getGlobal().getLegend().getLabels().getPadding());
 	}
 
 	/**

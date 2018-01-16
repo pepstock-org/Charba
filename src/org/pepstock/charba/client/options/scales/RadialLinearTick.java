@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options.scales;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -68,7 +69,8 @@ public final class RadialLinearTick extends Tick {
 	/**
 	 * Empty constructor to reduce visibility
 	 */
-	RadialLinearTick() {
+	RadialLinearTick(AbstractChart<?, ?> chart) {
+		super(chart);
 	}
 
 	/**

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.options.scales;
 
 import java.util.List;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.JsStringArrayList;
 import org.pepstock.charba.client.commons.Key;
@@ -43,7 +44,8 @@ public final class CartesianCategoryTick extends CartesianTick {
 	/**
 	 * Empty constructor to reduce visibility
 	 */
-	CartesianCategoryTick() {
+	CartesianCategoryTick(AbstractChart<?, ?> chart) {
+		super(chart);
 	}
 
 	/**

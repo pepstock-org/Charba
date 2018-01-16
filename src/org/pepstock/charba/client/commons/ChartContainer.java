@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.commons;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Type;
 
 /**
  * Extends a JavaScript object container for all entities which needs the chart instance.<br>
@@ -25,7 +24,7 @@ import org.pepstock.charba.client.Type;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer
  */
-public abstract class ChartContainer extends JavaScriptObjectContainer implements HasChartType{
+public abstract class ChartContainer extends JavaScriptObjectContainer{
 
 	// chart instance
 	private final AbstractChart<?, ?> chart;
@@ -45,14 +44,6 @@ public abstract class ChartContainer extends JavaScriptObjectContainer implement
 	 */
 	public final AbstractChart<?, ?> getChart() {
 		return chart;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.commons.HasChartType#getType()
-	 */
-	@Override
-	public Type getType() {
-		return chart.getType();
 	}
 
 }

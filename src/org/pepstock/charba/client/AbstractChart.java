@@ -16,6 +16,7 @@
 package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.callbacks.LegendCallback;
+import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.events.ChartNativeEvent;
@@ -77,6 +78,8 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 
 	// gets if Canvas is supported
 	private final boolean isCanvasSupported = Canvas.isSupported();
+	
+	private final GlobalOptions options;
 
 	/**
 	 * Initializes HTMl elements (DIV and Canvas).<br>
@@ -112,6 +115,8 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 		Injector.ensureInjected();
 		// creates plugins container
 		plugins = new Plugins(this);
+		// creates global options
+		options = new GlobalOptions(createGlobalOptions(getType().name()));
 	}
 
 	/*
@@ -160,6 +165,13 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 */
 	public final Plugins getPlugins() {
 		return plugins;
+	}
+
+	/**
+	 * @return the options
+	 */
+	public GlobalOptions getGlobal() {
+		return options;
 	}
 
 	/*
@@ -591,4 +603,30 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 		return chart.getDatasetMeta(datasetIndex);
 	}-*/;
 
+	
+	/**
+	 * Builds the configuration suing teh defaults global both for chart and for teh specific chart.
+	 * 
+	 * @param chartType type of chart
+	 */
+	private native GenericJavaScriptObject createGlobalOptions(String chartType) /*-{
+		var chartOptions = $wnd.Chart.helpers.clone($wnd.Chart.defaults[chartType]);
+		var scaleOptions = $wnd.Chart.helpers.clone($wnd.Chart.defaults.scale);
+	    var globalOptions = $wnd.Chart.helpers.clone($wnd.Chart.defaults.global);
+		
+		if (chartOptions.hasOwnProperty("scale")){
+			var scaleChartOptions = $wnd.Chart.helpers.mergeIf(chartOptions.scale, scaleOptions);
+		} else if (chartOptions.hasOwnProperty("scales")){
+			var xAxes = chartOptions.scales.xAxes;
+			for (var i=0; i<xAxes.length; i++){
+				$wnd.Chart.helpers.mergeIf(xAxes[i], scaleOptions, xAxes[i]);
+			}
+			var yAxes = chartOptions.scales.yAxes;
+			for (var i=0; i<yAxes.length; i++){
+				$wnd.Chart.helpers.mergeIf(yAxes[i], scaleOptions);
+			}
+		}
+	    $wnd.Chart.helpers.mergeIf(chartOptions, globalOptions);
+	    return chartOptions;
+	}-*/;
  }

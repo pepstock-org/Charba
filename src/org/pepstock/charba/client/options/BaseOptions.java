@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.LegendCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.EventProvider;
@@ -70,11 +69,11 @@ public abstract class BaseOptions extends EventProvider {
 
 	private final Tooltips tooltips;
 
-	private final Hover hover = new Hover();
+	private final Hover hover;
 
-	private final Layout layout = new Layout();
+	private final Layout layout;
 
-	private final Elements elements = new Elements();
+	private final Elements elements;
 
 	private LegendCallback legendCallBack = null;
 
@@ -116,8 +115,11 @@ public abstract class BaseOptions extends EventProvider {
 	 */
 	protected BaseOptions(AbstractChart<?, ?> chart) {
 		super(chart);
-		// creates teh sub-options objects
+		// creates the sub-options objects
 		animation = new Animation(chart);
+		hover = new Hover(chart);
+		layout = new Layout(chart);
+		elements = new Elements(chart);
 		legend = new Legend(chart);
 		title = new Title(chart);
 		tooltips = new Tooltips(chart);
@@ -211,7 +213,7 @@ public abstract class BaseOptions extends EventProvider {
 			return ArrayListHelper.build(Event.class, value);
 		} else {
 			// returns global events events
-			return Defaults.getGlobal().getEvents();
+			return getChart().getGlobal().getEvents();
 		}
 	}
 
@@ -276,7 +278,7 @@ public abstract class BaseOptions extends EventProvider {
 	 * @return the resizing of the chart canvas when its container does. Default is {@link org.pepstock.charba.client.defaults.global.Options#isResponsive()}.
 	 */
 	public boolean isResponsive() {
-		return getValue(Property.responsive, Defaults.getGlobal().isResponsive());
+		return getValue(Property.responsive, getChart().getGlobal().isResponsive());
 	}
 
 	/**
@@ -294,7 +296,7 @@ public abstract class BaseOptions extends EventProvider {
 	 * @return the duration in milliseconds it takes to animate to new size after a resize event. Default is {@link org.pepstock.charba.client.defaults.global.Options#getResponsiveAnimationDuration()}.
 	 */
 	public int getResponsiveAnimationDuration() {
-		return getValue(Property.responsiveAnimationDuration, Defaults.getGlobal().getResponsiveAnimationDuration());
+		return getValue(Property.responsiveAnimationDuration, getChart().getGlobal().getResponsiveAnimationDuration());
 	}
 
 	/**
@@ -312,7 +314,7 @@ public abstract class BaseOptions extends EventProvider {
 	 * @return the maintaining of the original canvas aspect ratio (width / height) when resizing. Default is {@link org.pepstock.charba.client.defaults.global.Options#isMaintainAspectRatio()}.
 	 */
 	public boolean isMaintainAspectRatio() {
-		return getValue(Property.maintainAspectRatio, Defaults.getGlobal().isMaintainAspectRatio());
+		return getValue(Property.maintainAspectRatio, getChart().getGlobal().isMaintainAspectRatio());
 	}
 
 	/*
@@ -493,7 +495,7 @@ public abstract class BaseOptions extends EventProvider {
 					for (var i = 0; i < this.legend.legendHitBoxes.length; i++){
 						var item = this.legend.legendHitBoxes[i];
 						var isInLegendItem = event.layerX > item.left && event.layerX < (item.width + item.left) && event.layerY > this.legend.top && event.layerY < (item.height + item.top);
-						if (isInLegendItem){
+						if (isInLegendItem && this.chart.legend.options.onClick != null){
 							this.chart.legend.options.onClick.call(this, event, this.legend.legendItems[i]);
 						}
 					}
@@ -521,7 +523,22 @@ public abstract class BaseOptions extends EventProvider {
 			// stores the array into a wrapper object
 			var myItems = new Object();
     		myItems.items = objects;
-			self.@org.pepstock.charba.client.options.BaseOptions::onHover(Lorg/pepstock/charba/client/events/ChartNativeEvent;Lorg/pepstock/charba/client/items/DatasetMetaItem;)(event, myItems);
+			if (myItems.items.length == 0){
+				// check if the event is on legend
+				var isInLegend = event.layerX > this.legend.left && event.layerX < this.legend.right && event.layerY > this.legend.top && event.layerY < this.legend.bottom && this.legend.options.display;
+				if (isInLegend && this.legend.legendHitBoxes.length > 0){
+					// checks which legend item is affected
+					for (var i = 0; i < this.legend.legendHitBoxes.length; i++){
+						var item = this.legend.legendHitBoxes[i];
+						var isInLegendItem = event.layerX > item.left && event.layerX < (item.width + item.left) && event.layerY > this.legend.top && event.layerY < (item.height + item.top);
+						if (isInLegendItem && this.chart.legend.options.onHover != null){
+							this.chart.legend.options.onHover.call(this, event, this.legend.legendItems[i]);
+						}
+					}
+				}
+			} else {
+				self.@org.pepstock.charba.client.options.BaseOptions::onHover(Lorg/pepstock/charba/client/events/ChartNativeEvent;Lorg/pepstock/charba/client/items/DatasetMetaItem;)(event, myItems);
+			}
 		}
 	}-*/;
 
