@@ -18,7 +18,6 @@ package org.pepstock.charba.client.options;
 import java.util.logging.Logger;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.EventProvider;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
@@ -151,7 +150,7 @@ public final class Legend extends EventProvider {
 	 * @return if the legend is shown. Default is {@link org.pepstock.charba.client.defaults.global.Legend#isDisplay()}.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, Defaults.getGlobal().getLegend().isDisplay());
+		return getValue(Property.display, getChart().getGlobal().getLegend().isDisplay());
 	}
 
 	/**
@@ -169,7 +168,7 @@ public final class Legend extends EventProvider {
 	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). Default is {@link org.pepstock.charba.client.defaults.global.Legend#isFullWidth()}.
 	 */
 	public boolean isFullWidth() {
-		return getValue(Property.fullWidth, Defaults.getGlobal().getLegend().isFullWidth());
+		return getValue(Property.fullWidth, getChart().getGlobal().getLegend().isFullWidth());
 	}
 
 	/**
@@ -187,7 +186,7 @@ public final class Legend extends EventProvider {
 	 * @return Legend will show datasets in reverse order. Default is {@link org.pepstock.charba.client.defaults.global.Legend#isReverse()}.
 	 */
 	public boolean isReverse() {
-		return getValue(Property.reverse, Defaults.getGlobal().getLegend().isReverse());
+		return getValue(Property.reverse, getChart().getGlobal().getLegend().isReverse());
 	}
 
 	/**
@@ -207,7 +206,7 @@ public final class Legend extends EventProvider {
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {
-		return getValue(Property.position, Position.class, Defaults.getGlobal().getLegend().getPosition());
+		return getValue(Property.position, Position.class, getChart().getGlobal().getLegend().getPosition());
 	}
 
 	final Logger log = Logger.getLogger("mio");

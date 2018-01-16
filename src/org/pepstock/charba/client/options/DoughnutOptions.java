@@ -16,26 +16,14 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.commons.Key;
 
 /**
- * Specific options for DOUGHNUT chart. It contains all properties for this kind of chart.
+ * Specific options for DOUGHNUT chart. 
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DoughnutOptions extends PieOptions {
-
-	// FIXME con globals/chart options
-	private static final double DEFAULT_CUTOUT_PERCENTAGE = 50D;
-
-	/**
-	 * Name of fields of JavaScript object.
-	 */
-	private enum Property implements Key
-	{
-		cutoutPercentage
-	}
+public final class DoughnutOptions extends AbstractPieOptions {
 
 	/**
 	 * Builds the object storing the chart instance.
@@ -44,16 +32,6 @@ public final class DoughnutOptions extends PieOptions {
 	 */
 	public DoughnutOptions(AbstractChart<?, ?> chart) {
 		super(chart);
-		// sets the cut out percentage property
-		setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
 	}
 
-	/**
-	 * Returns the percentage of the chart that is cut out of the middle.
-	 * 
-	 * @return The percentage of the chart that is cut out of the middle. ALWAYS 50.
-	 */
-	public double getCutoutPercentage() {
-		return getValue(Property.cutoutPercentage, DEFAULT_CUTOUT_PERCENTAGE);
-	}
 }

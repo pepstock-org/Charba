@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.options.layout;
 
-import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
+import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -25,8 +25,17 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Padding extends JavaScriptObjectContainer {
+public final class Padding extends ChartContainer {
 
+	/**
+	 * Builds the object setting the java script padding object.
+	 * 
+	 * @param chart chart instance
+	 */
+	public Padding(AbstractChart<?, ?> chart) {
+		super(chart);
+	}
+	
 	/**
 	 * Sets the padding left in pixel.
 	 * 
@@ -42,7 +51,7 @@ public final class Padding extends JavaScriptObjectContainer {
 	 * @return the padding left in pixel. Default is {@link org.pepstock.charba.client.defaults.global.Padding#getLeft()}.
 	 */
 	public int getLeft() {
-		return getValue(Position.left, Defaults.getGlobal().getLayout().getPadding().getLeft());
+		return getValue(Position.left, getChart().getGlobal().getLayout().getPadding().getLeft());
 	}
 
 	/**
@@ -60,7 +69,7 @@ public final class Padding extends JavaScriptObjectContainer {
 	 * @return the padding right in pixel. Default is {@link org.pepstock.charba.client.defaults.global.Padding#getRight()}.
 	 */
 	public int getRight() {
-		return getValue(Position.right, Defaults.getGlobal().getLayout().getPadding().getRight());
+		return getValue(Position.right, getChart().getGlobal().getLayout().getPadding().getRight());
 	}
 
 	/**
@@ -78,7 +87,7 @@ public final class Padding extends JavaScriptObjectContainer {
 	 * @return the padding top in pixel. Default is {@link org.pepstock.charba.client.defaults.global.Padding#getTop()}.
 	 */
 	public int getTop() {
-		return getValue(Position.top, Defaults.getGlobal().getLayout().getPadding().getTop());
+		return getValue(Position.top, getChart().getGlobal().getLayout().getPadding().getTop());
 	}
 
 	/**
@@ -96,7 +105,7 @@ public final class Padding extends JavaScriptObjectContainer {
 	 * @return the padding bottom in pixel. Default is {@link org.pepstock.charba.client.defaults.global.Padding#getBottom()}.
 	 */
 	public int getBottom() {
-		return getValue(Position.bottom, Defaults.getGlobal().getLayout().getPadding().getBottom());
+		return getValue(Position.bottom, getChart().getGlobal().getLayout().getPadding().getBottom());
 	}
 
 }

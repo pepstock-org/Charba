@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.options.elements;
 
-import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.PointStyle;
 
@@ -29,7 +29,7 @@ import org.pepstock.charba.client.enums.PointStyle;
  * @see org.pepstock.charba.client.LineChart
  * @see org.pepstock.charba.client.BubbleChart
  */
-public final class Point extends Arc {
+public final class Point extends AbstractElement {
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -42,6 +42,15 @@ public final class Point extends Arc {
 		hoverRadius,
 		hoverBorderWidth
 	}
+	
+	/**
+	 * Builds the object storing the chart instance.
+	 * 
+	 * @param chart chart instance
+	 */
+	public Point(AbstractChart<?, ?> chart) {
+		super(chart);
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -50,7 +59,7 @@ public final class Point extends Arc {
 	 */
 	@Override
 	protected String getDefaultBackgroundColor() {
-		return Defaults.getGlobal().getElements().getPoint().getBackgroundColor();
+		return getChart().getGlobal().getElements().getPoint().getBackgroundColor();
 	}
 
 	/*
@@ -60,7 +69,7 @@ public final class Point extends Arc {
 	 */
 	@Override
 	protected int getDefaultBorderWidth() {
-		return Defaults.getGlobal().getElements().getPoint().getBorderWidth();
+		return getChart().getGlobal().getElements().getPoint().getBorderWidth();
 	}
 
 	/*
@@ -70,7 +79,7 @@ public final class Point extends Arc {
 	 */
 	@Override
 	protected String getDefaultBorderColor() {
-		return Defaults.getGlobal().getElements().getPoint().getBorderColor();
+		return getChart().getGlobal().getElements().getPoint().getBorderColor();
 	}
 
 	/**
@@ -88,7 +97,7 @@ public final class Point extends Arc {
 	 * @return list of the radius of the point when hovered. Default is {@link org.pepstock.charba.client.defaults.global.Point#getRadius()}.
 	 */
 	public int getRadius() {
-		return getValue(Property.radius, Defaults.getGlobal().getElements().getPoint().getRadius());
+		return getValue(Property.radius, getChart().getGlobal().getElements().getPoint().getRadius());
 	}
 
 	/**
@@ -108,7 +117,7 @@ public final class Point extends Arc {
 	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public PointStyle getPointStyle() {
-		return getValue(Property.pointStyle, PointStyle.class, Defaults.getGlobal().getElements().getPoint().getPointStyle());
+		return getValue(Property.pointStyle, PointStyle.class, getChart().getGlobal().getElements().getPoint().getPointStyle());
 	}
 
 	/**
@@ -126,7 +135,7 @@ public final class Point extends Arc {
 	 * @return the pixel size of the non-displayed point. Default is {@link org.pepstock.charba.client.defaults.global.Point#getHitRadius()}.
 	 */
 	public int getHitRadius() {
-		return getValue(Property.hitRadius, Defaults.getGlobal().getElements().getPoint().getHitRadius());
+		return getValue(Property.hitRadius, getChart().getGlobal().getElements().getPoint().getHitRadius());
 	}
 
 	/**
@@ -144,7 +153,7 @@ public final class Point extends Arc {
 	 * @return the radius of the point when hovered. Default is {@link org.pepstock.charba.client.defaults.global.Point#getHoverRadius()}.
 	 */
 	public int getHoverRadius() {
-		return getValue(Property.hoverRadius, Defaults.getGlobal().getElements().getPoint().getHoverRadius());
+		return getValue(Property.hoverRadius, getChart().getGlobal().getElements().getPoint().getHoverRadius());
 	}
 
 	/**
@@ -162,7 +171,7 @@ public final class Point extends Arc {
 	 * @return the border width of point when hovered. Default is {@link org.pepstock.charba.client.defaults.global.Point#getHoverBorderWidth()}.
 	 */
 	public int getHoverBorderWidth() {
-		return getValue(Property.hoverBorderWidth,  Defaults.getGlobal().getElements().getPoint().getBorderWidth());
+		return getValue(Property.hoverBorderWidth,  getChart().getGlobal().getElements().getPoint().getBorderWidth());
 	}
 
 }

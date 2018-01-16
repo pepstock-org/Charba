@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options.scales;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisType;
 
@@ -29,11 +30,11 @@ import org.pepstock.charba.client.enums.AxisType;
  */
 public final class RadialAxis extends Axis {
 
-	private final GridLines grideLines = new GridLines();
+	private final GridLines grideLines;
 
-	private final RadialLinearTick ticks = new RadialLinearTick();
+	private final RadialLinearTick ticks;
 
-	private final RadialAngleLines angleLines = new RadialAngleLines();
+	private final RadialAngleLines angleLines;
 
 	private final RadialPointLabels pointLabels;
 
@@ -51,13 +52,16 @@ public final class RadialAxis extends Axis {
 	/**
 	 * Builds the axis
 	 */
-	public RadialAxis() {
+	public RadialAxis(AbstractChart<?, ?> chart) {
+		super(chart);
 		// sets type
 		setType(AxisType.radialLinear);
-		// sets axis to own tick
-		ticks.setAxis(this);
 		// initialize POINT labels
-		pointLabels = new RadialPointLabels(this);
+		pointLabels = new RadialPointLabels(chart);
+		grideLines = new GridLines(chart);
+		ticks = new RadialLinearTick(chart);
+		angleLines = new RadialAngleLines(chart);
+		
 		// stores into java script object
 		setValue(Property.gridLines, grideLines);
 		setValue(Property.ticks, ticks);

@@ -53,9 +53,9 @@ public final class StackedOptions extends BaseOptions {
 		// sets if only Y scaled
 		scales.setOnlyYAxis(onlyYScaled);
 		// creates the axes
-		CartesianCategoryAxis axis1 = new CartesianCategoryAxis();
+		CartesianCategoryAxis axis1 = new CartesianCategoryAxis(chart);
 		scales.setXAxes(axis1);
-		CartesianLinearAxis axis2 = new CartesianLinearAxis();
+		CartesianLinearAxis axis2 = new CartesianLinearAxis(chart);
 		scales.setYAxes(axis2);
 		// sets java script property
 		setValue(Property.scales, scales);

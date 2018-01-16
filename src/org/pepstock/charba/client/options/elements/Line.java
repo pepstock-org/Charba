@@ -17,7 +17,7 @@ package org.pepstock.charba.client.options.elements;
 
 import java.util.List;
 
-import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.JsIntegerArrayList;
 import org.pepstock.charba.client.commons.Key;
@@ -34,7 +34,7 @@ import org.pepstock.charba.client.enums.JoinStyle;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.LineChart
  */
-public final class Line extends Arc {
+public final class Line extends AbstractElement {
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -50,6 +50,15 @@ public final class Line extends Arc {
 		fill,
 		stepped
 	}
+	
+	/**
+	 * Builds the object storing the chart instance.
+	 * 
+	 * @param chart chart instance
+	 */
+	public Line(AbstractChart<?, ?> chart) {
+		super(chart);
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -58,7 +67,7 @@ public final class Line extends Arc {
 	 */
 	@Override
 	protected String getDefaultBackgroundColor() {
-		return Defaults.getGlobal().getElements().getLine().getBackgroundColor();
+		return getChart().getGlobal().getElements().getLine().getBackgroundColor();
 	}
 
 	/*
@@ -68,7 +77,7 @@ public final class Line extends Arc {
 	 */
 	@Override
 	protected int getDefaultBorderWidth() {
-		return Defaults.getGlobal().getElements().getLine().getBorderWidth();
+		return getChart().getGlobal().getElements().getLine().getBorderWidth();
 	}
 
 	/*
@@ -78,7 +87,7 @@ public final class Line extends Arc {
 	 */
 	@Override
 	protected String getDefaultBorderColor() {
-		return Defaults.getGlobal().getElements().getLine().getBorderColor();
+		return getChart().getGlobal().getElements().getLine().getBorderColor();
 	}
 
 	/**
@@ -96,7 +105,7 @@ public final class Line extends Arc {
 	 * @return the Bezier curve tension (0 for no Bezier curves). Default is {@link org.pepstock.charba.client.defaults.global.Line#getTension()}.
 	 */
 	public double getTension() {
-		return getValue(Property.tension, Defaults.getGlobal().getElements().getLine().getTension());
+		return getValue(Property.tension, getChart().getGlobal().getElements().getLine().getTension());
 	}
 
 	/**
@@ -116,7 +125,7 @@ public final class Line extends Arc {
 	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public CapStyle getBorderCapStyle() {
-		return getValue(Property.borderCapStyle, CapStyle.class, Defaults.getGlobal().getElements().getLine().getBorderCapStyle());
+		return getValue(Property.borderCapStyle, CapStyle.class, getChart().getGlobal().getElements().getLine().getBorderCapStyle());
 	}
 
 	/**
@@ -145,7 +154,7 @@ public final class Line extends Arc {
 	public List<Integer> getBorderDash() {
 		List<Integer> values = getIntegerArray(Property.borderDash);
 		if (values.isEmpty()){
-			return Defaults.getGlobal().getElements().getLine().getBorderDash();
+			return getChart().getGlobal().getElements().getLine().getBorderDash();
 		}
 		return values;
 	}
@@ -165,7 +174,7 @@ public final class Line extends Arc {
 	 * @return the line dash pattern offset or "phase". Default is {@link org.pepstock.charba.client.defaults.global.Line#getBorderDashOffset()}.
 	 */
 	public int getBorderDashOffset() {
-		return getValue(Property.borderDashOffset, Defaults.getGlobal().getElements().getLine().getBorderDashOffset());
+		return getValue(Property.borderDashOffset, getChart().getGlobal().getElements().getLine().getBorderDashOffset());
 	}
 
 	/**
@@ -189,7 +198,7 @@ public final class Line extends Arc {
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public JoinStyle getBorderJoinStyle() {
-		return getValue(Property.borderJoinStyle, JoinStyle.class, Defaults.getGlobal().getElements().getLine().getBorderJoinStyle());
+		return getValue(Property.borderJoinStyle, JoinStyle.class, getChart().getGlobal().getElements().getLine().getBorderJoinStyle());
 	}
 
 	/**
@@ -207,7 +216,7 @@ public final class Line extends Arc {
 	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction. Default is {@link org.pepstock.charba.client.defaults.global.Line#isCapBezierPoints()}.
 	 */
 	public boolean isCapBezierPoints() {
-		return getValue(Property.capBezierPoints, Defaults.getGlobal().getElements().getLine().isCapBezierPoints());
+		return getValue(Property.capBezierPoints, getChart().getGlobal().getElements().getLine().isCapBezierPoints());
 	}
 
 	/**
@@ -237,7 +246,7 @@ public final class Line extends Arc {
 		// gets value
 		String value = getValue(Property.fill, null);
 		if (value == null){
-			return Defaults.getGlobal().getElements().getLine().getFill();
+			return getChart().getGlobal().getElements().getLine().getFill();
 		} else if (value.equalsIgnoreCase(Boolean.FALSE.toString())) {
 			// if is a boolean FALSE value
 			// returns no fill
@@ -252,7 +261,7 @@ public final class Line extends Arc {
 			}
 		}
 		// returns this as default
-		return Defaults.getGlobal().getElements().getLine().getFill();
+		return getChart().getGlobal().getElements().getLine().getFill();
 	}
 
 	/**
@@ -270,7 +279,7 @@ public final class Line extends Arc {
 	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored). Default is {@link org.pepstock.charba.client.defaults.global.Line#isStepped()}.
 	 */
 	public boolean isStepped() {
-		return getValue(Property.stepped, Defaults.getGlobal().getElements().getLine().isStepped());
+		return getValue(Property.stepped, getChart().getGlobal().getElements().getLine().isStepped());
 	}
 
 }

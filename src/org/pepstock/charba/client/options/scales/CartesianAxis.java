@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options.scales;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Position;
@@ -36,13 +37,11 @@ import org.pepstock.charba.client.enums.Position;
  */
 abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 
-
-
-	private final GridLines grideLines = new GridLines();
+	private final GridLines grideLines;
 
 	private final T ticks;
 
-	private final CartesianScaleLabel scaleLabel = new CartesianScaleLabel();
+	private final CartesianScaleLabel scaleLabel;
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -63,11 +62,13 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * 
 	 * @param ticks ticks of this axis
 	 */
-	protected CartesianAxis(T ticks) {
+	protected CartesianAxis(AbstractChart<?, ?> chart, T ticks) {
+		super(chart);
 		// stores the ticks
 		this.ticks = ticks;
-		// sets to the ticks the axis
-		ticks.setAxis(this);
+//		// sets to the objects
+		grideLines = new GridLines(chart);
+		scaleLabel = new CartesianScaleLabel(chart);
 		// sets properties
 		setValue(Property.gridLines, grideLines);
 		setValue(Property.ticks, this.ticks);

@@ -17,9 +17,10 @@ package org.pepstock.charba.client.options.scales;
 
 import java.util.List;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
+import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.JsIntegerArrayList;
 import org.pepstock.charba.client.commons.JsStringArrayList;
 import org.pepstock.charba.client.commons.Key;
@@ -30,7 +31,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class GridLines extends JavaScriptObjectContainer {
+public class GridLines extends ChartContainer {
 
 	private boolean isColorArray = false;
 
@@ -60,7 +61,8 @@ public class GridLines extends JavaScriptObjectContainer {
 	/**
 	 * Empty constructor to reduce visibility
 	 */
-	GridLines() {
+	GridLines(AbstractChart<?, ?> chart) {
+		super(chart);
 	}
 
 	/**

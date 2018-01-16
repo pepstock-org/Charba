@@ -44,7 +44,7 @@ import org.pepstock.charba.client.enums.FontStyle;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Options extends AbstractItem {
+public class Options extends AbstractItem {
 
 	private static final boolean DEFAULT_RESPONSIVE = true;
 

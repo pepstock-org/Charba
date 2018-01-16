@@ -15,8 +15,9 @@
 */
 package org.pepstock.charba.client.options.scales;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
+import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
 
@@ -27,9 +28,9 @@ import org.pepstock.charba.client.enums.FontStyle;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class CartesianScaleLabel extends JavaScriptObjectContainer {
+public class CartesianScaleLabel extends ChartContainer {
 
-	private final Padding padding = new Padding();
+	private final Padding padding;
 	
 	/**
 	 * Name of fields of JavaScript object.
@@ -49,7 +50,9 @@ public class CartesianScaleLabel extends JavaScriptObjectContainer {
 	/**
 	 * Empty constructor to reduce visibility
 	 */
-	CartesianScaleLabel() {
+	CartesianScaleLabel(AbstractChart<?, ?> chart) {
+		super(chart);
+		padding = new Padding(chart);
 		setValue(Property.padding, padding);
 	}
 	

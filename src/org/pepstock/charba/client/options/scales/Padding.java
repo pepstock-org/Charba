@@ -15,8 +15,9 @@
 */
 package org.pepstock.charba.client.options.scales;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
+import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -25,7 +26,13 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Padding extends JavaScriptObjectContainer {
+public final class Padding extends ChartContainer {
+	
+	
+	// FIXME
+	Padding(AbstractChart<?, ?> chart) {
+		super(chart);
+	}
 
 	/**
 	 * Sets the padding left in pixel.

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options.scales;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.enums.AxisType;
 
 /**
@@ -28,8 +29,8 @@ public final class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick
 	/**
 	 * Builds the axis
 	 */
-	public CartesianLinearAxis() {
-		super(new CartesianLinearTick());
+	public CartesianLinearAxis(AbstractChart<?, ?> chart) {
+		super(chart, new CartesianLinearTick(chart));
 		// sets axis type
 		super.setType(AxisType.linear);
 	}

@@ -18,8 +18,8 @@ package org.pepstock.charba.client.options.scales;
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.TickCallback;
+import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.items.TickItem;
@@ -33,10 +33,10 @@ import org.pepstock.charba.client.items.TickItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class BaseTick extends JavaScriptObjectContainer {
+public class BaseTick extends ChartContainer {
 
 	// the axis instance, owner of this tick
-	private Axis axis = null;
+//	private final Axis axis;
 
 	private TickCallback callback = null;
 
@@ -55,24 +55,25 @@ public class BaseTick extends JavaScriptObjectContainer {
 	/**
 	 * Builds the object and registers the callback
 	 */
-	BaseTick() {
+	BaseTick(AbstractChart<?, ?> chart) {
+		super(chart);
 		// registers callback
 		registerNativeTickCallbacktHandler(getJavaScriptObject());
 	}
 
-	/**
-	 * @param axis the axis to set
-	 */
-	void setAxis(Axis axis) {
-		this.axis = axis;
-	}
+//	/**
+//	 * @param axis the axis to set
+//	 */
+//	void setAxis(Axis axis) {
+//		this.axis = axis;
+//	}
 
-	/**
-	 * @return the axis
-	 */
-	Axis getAxis() {
-		return axis;
-	}
+//	/**
+//	 * @return the axis
+//	 */
+//	Axis getAxis() {
+//		return axis;
+//	}
 
 	/**
 	 * Sets the font size for tick.
@@ -175,7 +176,7 @@ public class BaseTick extends JavaScriptObjectContainer {
 	 * @see org.pepstock.charba.client.items.TickItem
 	 */
 	protected String onCallback(TickItem item) {
-		AbstractChart<?, ?> chart = axis.getChart();
+		AbstractChart<?, ?> chart = getChart();
 		if (callback != null && chart != null) {
 			return callback.onCallback(chart, item);
 		}

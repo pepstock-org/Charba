@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -63,6 +62,6 @@ public final class PolarAreaOptions extends SingleScaleOptions {
 	 * @return starting angle to draw arcs for the first item in a dataset. Default is <code>-0.5 * Math.PI</code>.
 	 */
 	public double getStartAngle() {
-		return getValue(Property.startAngle, Defaults.getGlobal().getStartAngle());
+		return getValue(Property.startAngle, getChart().getGlobal().getStartAngle());
 	}
 }

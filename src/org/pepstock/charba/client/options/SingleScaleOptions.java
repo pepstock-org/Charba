@@ -48,8 +48,6 @@ public abstract class SingleScaleOptions extends BaseOptions{
 	 * @param axesan array of axes.
 	 */
 	public void setXAxis(Axis axis){
-		// sets chart instance
-		axis.setChart(getChart());
 		// set java script array
 		setValue(Property.scale, axis);
 	}

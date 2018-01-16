@@ -23,7 +23,7 @@ import org.pepstock.charba.client.AbstractChart;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BubbleOptions extends ScatterOptions {
+public final class BubbleOptions extends AbstractLineOptions {
 
 	/**
 	 * Builds the object storing the chart instance.

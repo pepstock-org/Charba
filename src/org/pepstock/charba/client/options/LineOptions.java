@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.commons.Key;
 
 /**
  * Specific options for LINE chart. It contains all properties for this kind of chart.
@@ -24,20 +23,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LineOptions extends MultiScalesOptions {
-
-	private static final boolean DEFAULT_SHOW_LINES = true;
-
-	private static final boolean DEFAULT_SPAN_GAPS = false;
-
-	/**
-	 * Name of fields of JavaScript object.
-	 */
-	private enum Property implements Key
-	{
-		showLines,
-		spanGaps
-	}
+public final class LineOptions extends AbstractLineOptions {
 
 	/**
 	 * Builds the object storing the chart instance.
@@ -46,42 +32,6 @@ public class LineOptions extends MultiScalesOptions {
 	 */
 	public LineOptions(AbstractChart<?, ?> chart) {
 		super(chart);
-	}
-
-	/**
-	 * If false, the lines between points are not drawn.
-	 * 
-	 * @param showLine If false, the lines between points are not drawn.
-	 */
-	public void setShowLines(boolean showLine) {
-		setValue(Property.showLines, showLine);
-	}
-
-	/**
-	 * If false, the lines between points are not drawn.
-	 * 
-	 * @return If false, the lines between points are not drawn.. Default is true.
-	 */
-	public boolean isShowLines() {
-		return getValue(Property.showLines, DEFAULT_SHOW_LINES);
-	}
-
-	/**
-	 * If false, NaN data causes a break in the line.
-	 * 
-	 * @param spanGaps If false, NaN data causes a break in the line.
-	 */
-	public void setSpanGaps(boolean spanGaps) {
-		setValue(Property.spanGaps, spanGaps);
-	}
-
-	/**
-	 * If false, NaN data causes a break in the line.
-	 * 
-	 * @return If false, NaN data causes a break in the line. Default is false.
-	 */
-	public boolean isSpanGaps() {
-		return getValue(Property.spanGaps, DEFAULT_SPAN_GAPS);
 	}
 
 }

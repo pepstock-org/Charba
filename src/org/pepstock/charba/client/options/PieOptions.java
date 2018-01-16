@@ -16,8 +16,6 @@
 package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.commons.Key;
 
 /**
  * Specific options for PIE chart. It contains all properties for this kind of chart.
@@ -25,17 +23,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class PieOptions extends BaseOptions {
-
-	/**
-	 * Name of fields of JavaScript object.
-	 */
-	private enum Property implements Key
-	{
-		cutoutPercentage,
-		rotation,
-		circumference
-	}
+public final class PieOptions extends AbstractPieOptions {
 
 	/**
 	 * Builds the object storing the chart instance.<br>
@@ -45,65 +33,6 @@ public class PieOptions extends BaseOptions {
 	 */
 	public PieOptions(AbstractChart<?, ?> chart) {
 		super(chart);
-		// forces to 0
-		setCutoutPercentage(0);
-		// sets rotate and animation scale
-		getAnimation().setAnimateRotate(true);
-		getAnimation().setAnimateScale(true);
-	}
-
-	/**
-	 * Sets the percentage of the chart that is cut out of the middle.
-	 * 
-	 * @param cutoutPercentage the percentage of the chart that is cut out of the middle.
-	 */
-	public void setCutoutPercentage(double cutoutPercentage) {
-		setValue(Property.cutoutPercentage, cutoutPercentage);
-	}
-
-	/**
-	 * Returns the the percentage of the chart that is cut out of the middle.
-	 * 
-	 * @return the percentage of the chart that is cut out of the middle. Default is 0.
-	 */
-	public double getCutoutPercentage() {
-		return getValue(Property.cutoutPercentage, Defaults.getGlobal().getCutoutPercentage());
-	}
-
-	/**
-	 * Sets the starting angle to draw arcs from.
-	 * 
-	 * @param rotation starting angle to draw arcs from.
-	 */
-	public void setRotation(double rotation) {
-		setValue(Property.rotation, rotation);
-	}
-
-	/**
-	 * returns the starting angle to draw arcs from.
-	 * 
-	 * @return starting angle to draw arcs from. Default is <code>-0.5 * Math.PI</code>.
-	 */
-	public double getRotation() {
-		return getValue(Property.rotation, Defaults.getGlobal().getRotation());
-	}
-
-	/**
-	 * Sets the sweep to allow arcs to cover.
-	 * 
-	 * @param circumference the sweep to allow arcs to cover.
-	 */
-	public void setCircumference(double circumference) {
-		setValue(Property.circumference, circumference);
-	}
-
-	/**
-	 * Returns the the sweep to allow arcs to cover.
-	 * 
-	 * @return the sweep to allow arcs to cover. Default is <code>2 * Math.PI</code>.
-	 */
-	public double getCircumference() {
-		return getValue(Property.circumference, Defaults.getGlobal().getCircumference());
 	}
 
 }
