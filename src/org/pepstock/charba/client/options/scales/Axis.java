@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.options.scales;
 
+import java.util.List;
+
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.AxisBuildTicksCallback;
@@ -27,8 +29,14 @@ import org.pepstock.charba.client.callbacks.AxisUpdateCallback;
 import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.global.Options;
+import org.pepstock.charba.client.defaults.scale.Scale;
+import org.pepstock.charba.client.defaults.scale.Scales;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.items.AxisItem;
+import org.pepstock.charba.client.options.MultiScalesOptions;
+import org.pepstock.charba.client.options.SingleScaleOptions;
 
 /**
  * Axes are an integral part of a chart.<br>
@@ -119,7 +127,7 @@ public abstract class Axis extends ChartContainer {
 	 * @return <code>false</code> if axis is hidden, otherwise <code>true</code>. Default is {@link org.pepstock.charba.client.defaults.scale.Scale#isDisplay()}.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, Defaults.getScale().isDisplay());
+		return getValue(Property.display, getScale().isDisplay());
 	}
 
 	/**
@@ -137,9 +145,36 @@ public abstract class Axis extends ChartContainer {
 	 * @return weight of axis
 	 */
 	public int getWeight() {
-		return getValue(Property.weight, Defaults.getScale().getWeight());
+		return getValue(Property.weight, getScale().getWeight());
 	}
 
+	protected Scale getScale(){
+		Options options = getChart().getGlobal();
+		if (getChart().getOptions() instanceof MultiScalesOptions){
+			Scales scales = options.getScales();
+			CartesianAxisType type = null;
+			if (this instanceof CartesianAxis<?>){
+				CartesianAxis<?> cAxis = (CartesianAxis<?>)this;
+				type = cAxis.getCartesianType();
+			}
+			if (type != null){
+				return getCartesianScale(CartesianAxisType.x.equals(type) ? scales.getXAxes() : scales.getYAxes());
+			}
+		} else if (getChart().getOptions() instanceof SingleScaleOptions){
+			return options.getScale();
+		}
+		return Defaults.getScale();
+	}
+	
+	private Scale getCartesianScale(List<Scale> scales){
+		for (Scale axis : scales){
+			if (getType().equals(axis.getType())){
+				return axis;
+			}
+		}
+		return Defaults.getScale();
+	}
+	
 	/**
 	 * @return the axisUpdateCallback
 	 */

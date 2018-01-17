@@ -24,7 +24,7 @@ import org.pepstock.charba.client.options.BarOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class BarChart extends AbstractChart<BarOptions, BarDataset> {
+public class BarChart extends AbstractChart<BarOptions, BarDataset>{
 
 	private final BarOptions options;
 

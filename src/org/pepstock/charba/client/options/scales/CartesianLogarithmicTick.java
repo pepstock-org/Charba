@@ -27,10 +27,6 @@ import org.pepstock.charba.client.commons.Key;
  */
 public final class CartesianLogarithmicTick extends CartesianTick {
 
-	private static final double DEFAULT_MIN = Double.MIN_VALUE;
-
-	private static final double DEFAULT_MAX = Double.MAX_VALUE;
-
 	/**
 	 * Name of fields of JavaScript object.
 	 */
@@ -62,7 +58,7 @@ public final class CartesianLogarithmicTick extends CartesianTick {
 	 * @return the user defined minimum number for the scale, overrides minimum value from data. Default is Double.MIN_VALUE.
 	 */
 	public double getMin() {
-		return getValue(Property.min, DEFAULT_MIN);
+		return getValue(Property.min, getAxis().getScale().getTicks().getMin());
 	}
 
 	/**
@@ -80,7 +76,7 @@ public final class CartesianLogarithmicTick extends CartesianTick {
 	 * @return user defined maximum number for the scale, overrides maximum value from data. Default is Double.MAX_VALUE.
 	 */
 	public double getMax() {
-		return getValue(Property.max, DEFAULT_MAX);
+		return getValue(Property.max, getAxis().getScale().getTicks().getMax());
 	}
 
 }

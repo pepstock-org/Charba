@@ -17,6 +17,7 @@ package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.CartesianAxisType;
 
 /**
  * This object is used to map defined axis as logarithmic.
@@ -26,11 +27,14 @@ import org.pepstock.charba.client.enums.AxisType;
  */
 public final class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmicTick> {
 
+	public CartesianLogarithmicAxis(AbstractChart<?, ?> chart) {
+		this(chart, CartesianAxisType.y);
+	}
 	/**
 	 * Builds the axis
 	 */
-	public CartesianLogarithmicAxis(AbstractChart<?, ?> chart) {
-		super(chart, new CartesianLogarithmicTick(chart));
+	public CartesianLogarithmicAxis(AbstractChart<?, ?> chart, CartesianAxisType cartesianType) {
+		super(chart, new CartesianLogarithmicTick(chart), cartesianType);
 		// sets axis type
 		super.setType(AxisType.logarithmic);
 	}

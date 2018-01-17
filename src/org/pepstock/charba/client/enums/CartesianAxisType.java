@@ -13,43 +13,25 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.options;
+package org.pepstock.charba.client.enums;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.options.scales.Axis;
 
 /**
- * Configuration of chart with only 1 scale.
+ * Can be set to 'x', 'y' to define which directions are used in axis.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class SingleScaleOptions extends BaseOptions{
+public enum CartesianAxisType implements Key
+{
 
 	/**
-	 * Name of fields of JavaScript object.
+	 *  X directions are used in calculating axis. 
 	 */
-	private enum Property implements Key {
-		scale
-	}
-	
+	x,
 	/**
-	 * Builds the object storing the chart instance.
-	 * @param chart chart instance
+	 *  Y directions are used in calculating axis. 
 	 */
-	public SingleScaleOptions(AbstractChart<?, ?> chart) {
-		super(chart);
-	}
-
-	/**
-	 * Sets the single axis of chart.
-	 * 
-	 * @param axis the axis.
-	 */
-	public void setAxis(Axis axis){
-		// set java script array
-		setValue(Property.scale, axis);
-	}
-
+	y
 }

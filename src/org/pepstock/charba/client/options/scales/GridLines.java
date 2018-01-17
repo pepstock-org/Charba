@@ -18,7 +18,6 @@ package org.pepstock.charba.client.options.scales;
 import java.util.List;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.JsIntegerArrayList;
@@ -33,6 +32,8 @@ import org.pepstock.charba.client.commons.Key;
  */
 public class GridLines extends ChartContainer {
 
+	private final Axis axis;
+	
 	private boolean isColorArray = false;
 
 	private boolean isLineWidthArray = false;
@@ -61,8 +62,9 @@ public class GridLines extends ChartContainer {
 	/**
 	 * Empty constructor to reduce visibility
 	 */
-	GridLines(AbstractChart<?, ?> chart) {
+	GridLines(AbstractChart<?, ?> chart, Axis axis) {
 		super(chart);
+		this.axis = axis;
 	}
 
 	/**
@@ -80,7 +82,7 @@ public class GridLines extends ChartContainer {
 	 * @return If false, do not display grid lines for this axis. Default is {@link org.pepstock.charba.client.defaults.scale.GridLines#isDisplay()}.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, Defaults.getScale().getGrideLines().isDisplay());
+		return getValue(Property.display, axis.getScale().getGrideLines().isDisplay());
 	}
 
 	/**
@@ -117,7 +119,7 @@ public class GridLines extends ChartContainer {
 		// if empty
 		if (values.isEmpty()) {
 			// return default color
-			return Defaults.getScale().getGrideLines().getColor();
+			return axis.getScale().getGrideLines().getColor();
 		}
 		return values;
 	}
@@ -153,7 +155,7 @@ public class GridLines extends ChartContainer {
 		// if empty
 		if (values.isEmpty()) {
 			// return default color
-			return Defaults.getScale().getGrideLines().getBorderDash();
+			return axis.getScale().getGrideLines().getBorderDash();
 		}
 		return values;
 	}
@@ -173,7 +175,7 @@ public class GridLines extends ChartContainer {
 	 * @return Offset for line dashes. If not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#getBorderDashOffset()}.
 	 */
 	public int getBorderDashOffset() {
-		return getValue(Property.borderDashOffset, Defaults.getScale().getGrideLines().getBorderDashOffset());
+		return getValue(Property.borderDashOffset, axis.getScale().getGrideLines().getBorderDashOffset());
 	}
 
 	/**
@@ -205,7 +207,7 @@ public class GridLines extends ChartContainer {
 		// if empty
 		if (values.isEmpty()) {
 			// returns default
-			return Defaults.getScale().getGrideLines().getLineWidth();
+			return axis.getScale().getGrideLines().getLineWidth();
 		}
 		return values;
 	}
@@ -225,7 +227,7 @@ public class GridLines extends ChartContainer {
 	 * @return If true, draw border at the edge between the axis and the chart area. If not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#isDrawBorder()}.
 	 */
 	public boolean isDrawBorder() {
-		return getValue(Property.drawBorder, Defaults.getScale().getGrideLines().isDrawBorder());
+		return getValue(Property.drawBorder, axis.getScale().getGrideLines().isDrawBorder());
 	}
 
 	/**
@@ -247,7 +249,7 @@ public class GridLines extends ChartContainer {
 	 *         need to control which grid lines are drawn. If not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#isDrawOnChartArea()}.
 	 */
 	public boolean isDrawOnChartArea() {
-		return getValue(Property.drawOnChartArea, Defaults.getScale().getGrideLines().isDrawOnChartArea());
+		return getValue(Property.drawOnChartArea, axis.getScale().getGrideLines().isDrawOnChartArea());
 	}
 
 	/**
@@ -265,7 +267,7 @@ public class GridLines extends ChartContainer {
 	 * @return If true, draw lines beside the ticks in the axis area beside the chart. If not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#isDrawTicks()}.
 	 */
 	public boolean isDrawTicks() {
-		return getValue(Property.drawTicks, Defaults.getScale().getGrideLines().isDrawTicks());
+		return getValue(Property.drawTicks, axis.getScale().getGrideLines().isDrawTicks());
 	}
 
 	/**
@@ -283,7 +285,7 @@ public class GridLines extends ChartContainer {
 	 * @return Length in pixels that the grid lines will draw into the axis area. If not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#getTickMarkLength()}.
 	 */
 	public int getTickMarkLength() {
-		return getValue(Property.tickMarkLength, Defaults.getScale().getGrideLines().getTickMarkLength());
+		return getValue(Property.tickMarkLength, axis.getScale().getGrideLines().getTickMarkLength());
 	}
 
 	/**
@@ -301,7 +303,7 @@ public class GridLines extends ChartContainer {
 	 * @return Stroke width of the grid line for the first index (index 0). If not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#getZeroLineWidth()}.
 	 */
 	public int getZeroLineWidth() {
-		return getValue(Property.zeroLineWidth, Defaults.getScale().getGrideLines().getZeroLineWidth());
+		return getValue(Property.zeroLineWidth, axis.getScale().getGrideLines().getZeroLineWidth());
 	}
 
 	/**
@@ -319,7 +321,7 @@ public class GridLines extends ChartContainer {
 	 * @return Stroke color of the grid line for the first index (index 0). If not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#getZeroLineColor()}.
 	 */
 	public String getZeroLineColor() {
-		return getValue(Property.zeroLineColor, Defaults.getScale().getGrideLines().getZeroLineColor());
+		return getValue(Property.zeroLineColor, axis.getScale().getGrideLines().getZeroLineColor());
 	}
 
 	/**
@@ -350,7 +352,7 @@ public class GridLines extends ChartContainer {
 		// if empty
 		if (values.isEmpty()) {
 			// return default color
-			return Defaults.getScale().getGrideLines().getZeroLineBorderDash();
+			return axis.getScale().getGrideLines().getZeroLineBorderDash();
 		}
 		return values;
 	}
@@ -370,7 +372,7 @@ public class GridLines extends ChartContainer {
 	 * @return the offset for line dashes of the grid line for the first index (index 0). if not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#getZeroLineBorderDashOffset()}.
 	 */
 	public int getZeroLineBorderDashOffset() {
-		return getValue(Property.zeroLineBorderDashOffset, Defaults.getScale().getGrideLines().getZeroLineBorderDashOffset());
+		return getValue(Property.zeroLineBorderDashOffset, axis.getScale().getGrideLines().getZeroLineBorderDashOffset());
 	}
 
 	/**
@@ -388,7 +390,7 @@ public class GridLines extends ChartContainer {
 	 * @return If true, grid lines will be shifted to be between labels. If not set, default is {@link org.pepstock.charba.client.defaults.scale.GridLines#isOffsetGridLines()}.
 	 */
 	public boolean isOffsetGridLines() {
-		return getValue(Property.offsetGridLines, Defaults.getScale().getGrideLines().isOffsetGridLines());
+		return getValue(Property.offsetGridLines, axis.getScale().getGrideLines().isOffsetGridLines());
 	}
 
 }

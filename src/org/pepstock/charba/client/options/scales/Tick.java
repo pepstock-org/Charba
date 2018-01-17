@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -54,18 +53,18 @@ abstract class Tick extends BaseTick {
 		setValue(Property.major, major);
 	}
 
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see org.pepstock.charba.client.options.scales.BaseTick#setAxis(org.pepstock.charba.client.options.scales.Axis)
-//	 */
-//	@Override
-//	void setAxis(Axis axis) {
-//		super.setAxis(axis);
-//		// stores the axis instance to sub tick
-//		minor.setAxis(axis);
-//		major.setAxis(axis);
-//	}
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.scales.BaseTick#setAxis(org.pepstock.charba.client.options.scales.Axis)
+	 */
+	@Override
+	void setAxis(Axis axis) {
+		super.setAxis(axis);
+		// stores the axis instance to sub tick
+		minor.setAxis(axis);
+		major.setAxis(axis);
+	}
 
 	/**
 	 * @return the minor
@@ -96,7 +95,7 @@ abstract class Tick extends BaseTick {
 	 * @return if true, show tick marks. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#isDisplay()}.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, Defaults.getScale().getTicks().isDisplay());
+		return getValue(Property.display, getAxis().getScale().getTicks().isDisplay());
 	}
 
 	/**
@@ -114,7 +113,7 @@ abstract class Tick extends BaseTick {
 	 * @return reverses order of tick labels. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#isReverse()}.
 	 */
 	public boolean isReverse() {
-		return getValue(Property.reverse, Defaults.getScale().getTicks().isReverse());
+		return getValue(Property.reverse, getAxis().getScale().getTicks().isReverse());
 	}
 
 }

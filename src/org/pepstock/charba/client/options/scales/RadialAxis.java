@@ -57,11 +57,12 @@ public final class RadialAxis extends Axis {
 		// sets type
 		setType(AxisType.radialLinear);
 		// initialize POINT labels
-		pointLabels = new RadialPointLabels(chart);
-		grideLines = new GridLines(chart);
+		pointLabels = new RadialPointLabels(chart, this);
+		grideLines = new GridLines(chart, this);
 		ticks = new RadialLinearTick(chart);
-		angleLines = new RadialAngleLines(chart);
-		
+		ticks.setAxis(this);
+		angleLines = new RadialAngleLines(chart, this);
+	
 		// stores into java script object
 		setValue(Property.gridLines, grideLines);
 		setValue(Property.ticks, ticks);

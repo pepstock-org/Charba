@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.Key;
 
@@ -28,6 +27,8 @@ import org.pepstock.charba.client.commons.Key;
  *
  */
 public final class RadialAngleLines extends ChartContainer {
+	
+	private final Axis axis;
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -42,8 +43,9 @@ public final class RadialAngleLines extends ChartContainer {
 	/**
 	 * Empty constructor to reduce visibility
 	 */
-	RadialAngleLines(AbstractChart<?, ?> chart) {
+	RadialAngleLines(AbstractChart<?, ?> chart, Axis axis) {
 		super(chart);
+		this.axis = axis;
 	}
 
 	/**
@@ -61,7 +63,7 @@ public final class RadialAngleLines extends ChartContainer {
 	 * @return if true, angle lines are shown. Default is true.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, Defaults.getScale().getAngleLines().isDisplay());
+		return getValue(Property.display, axis.getScale().getAngleLines().isDisplay());
 	}
 
 	/**
@@ -79,7 +81,7 @@ public final class RadialAngleLines extends ChartContainer {
 	 * @return color of angled lines. Default is 'rgba(0, 0, 0, 0.1)'
 	 */
 	public String getColor() {
-		return getValue(Property.color, Defaults.getScale().getAngleLines().getColor());
+		return getValue(Property.color, axis.getScale().getAngleLines().getColor());
 	}
 
 	/**
@@ -97,7 +99,7 @@ public final class RadialAngleLines extends ChartContainer {
 	 * @return width of angled lines. Default is 1.
 	 */
 	public int getLineWidth() {
-		return getValue(Property.lineWidth, Defaults.getScale().getAngleLines().getLineWidth());
+		return getValue(Property.lineWidth, axis.getScale().getAngleLines().getLineWidth());
 	}
 
 }

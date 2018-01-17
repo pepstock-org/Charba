@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -43,7 +42,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 
 	public BarCategoryAxis(AbstractChart<?, ?> chart) {
 		super(chart);
-		barGridLines = new BarGridLines(chart);
+		barGridLines = new BarGridLines(chart, this);
 	}
 
 	/**
@@ -65,7 +64,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 *         category width and put the bars right next to each other. Default is 0.9.
 	 */
 	public double getBarPercentage() {
-		return getValue(Property.barPercentage, Defaults.getScale().getBarPercentage());
+		return getValue(Property.barPercentage, getScale().getBarPercentage());
 	}
 
 	/**
@@ -83,7 +82,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 * @return the percent (0-1) of the available width each category should be within the sample width. Default is 0.8.
 	 */
 	public double getCategoryPercentage() {
-		return getValue(Property.categoryPercentage, Defaults.getScale().getCategoryPercentage());
+		return getValue(Property.categoryPercentage, getScale().getCategoryPercentage());
 	}
 
 	/**
@@ -107,7 +106,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 *         Default is 0.
 	 */
 	public int getBarThickness() {
-		return getValue(Property.barThickness, Defaults.getScale().getBarThickness());
+		return getValue(Property.barThickness, getScale().getBarThickness());
 	}
 
 	/**
@@ -125,7 +124,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 * @return the maximum bar thickness. Default is 0.
 	 */
 	public int getMaxBarThickness() {
-		return getValue(Property.maxBarThickness, Defaults.getScale().getMaxBarThickness());
+		return getValue(Property.maxBarThickness, getScale().getMaxBarThickness());
 	}
 
 	/*
@@ -150,8 +149,8 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 */
 	private static class BarGridLines extends GridLines {
 
-		BarGridLines(AbstractChart<?, ?> chart) {
-			super(chart);
+		BarGridLines(AbstractChart<?, ?> chart, Axis axis) {
+			super(chart, axis);
 		}
 
 		/*

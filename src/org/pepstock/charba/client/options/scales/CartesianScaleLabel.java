@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
@@ -31,6 +30,8 @@ import org.pepstock.charba.client.enums.FontStyle;
 public class CartesianScaleLabel extends ChartContainer {
 
 	private final Padding padding;
+	
+	private final Axis axis;
 	
 	/**
 	 * Name of fields of JavaScript object.
@@ -50,9 +51,10 @@ public class CartesianScaleLabel extends ChartContainer {
 	/**
 	 * Empty constructor to reduce visibility
 	 */
-	CartesianScaleLabel(AbstractChart<?, ?> chart) {
+	CartesianScaleLabel(AbstractChart<?, ?> chart, Axis axis) {
 		super(chart);
-		padding = new Padding(chart);
+		this.axis = axis;
+		padding = new Padding(chart, axis);
 		setValue(Property.padding, padding);
 	}
 	
@@ -78,7 +80,7 @@ public class CartesianScaleLabel extends ChartContainer {
 	 * @return f true, display the axis title. Default is {@link org.pepstock.charba.client.defaults.scale.ScaleLabel#isDisplay()}.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, Defaults.getScale().getScaleLabel().isDisplay());
+		return getValue(Property.display, axis.getScale().getScaleLabel().isDisplay());
 	}
 
 	/**
@@ -96,7 +98,7 @@ public class CartesianScaleLabel extends ChartContainer {
 	 * @return The text for the title. Default is {@link org.pepstock.charba.client.defaults.scale.ScaleLabel#getLabelString()}.
 	 */
 	public String getLabelString() {
-		return getValue(Property.labelString, Defaults.getScale().getScaleLabel().getLabelString());
+		return getValue(Property.labelString, axis.getScale().getScaleLabel().getLabelString());
 	}
 
 	/**
@@ -114,7 +116,7 @@ public class CartesianScaleLabel extends ChartContainer {
 	 * @return the height of an individual line of text. Default is {@link org.pepstock.charba.client.defaults.scale.ScaleLabel#getLineHeight()}.
 	 */
 	public double getLineHeight() {
-		return getValue(Property.lineHeight, Defaults.getScale().getScaleLabel().getLineHeight());
+		return getValue(Property.lineHeight, axis.getScale().getScaleLabel().getLineHeight());
 	}
 
 	/**
@@ -132,7 +134,7 @@ public class CartesianScaleLabel extends ChartContainer {
 	 * @return Font size for scale title.. Default is {@link org.pepstock.charba.client.defaults.scale.ScaleLabel#getFontSize()}.
 	 */
 	public int getFontSize() {
-		return getValue(Property.fontSize, Defaults.getScale().getScaleLabel().getFontSize());
+		return getValue(Property.fontSize, axis.getScale().getScaleLabel().getFontSize());
 	}
 
 	/**
@@ -152,7 +154,7 @@ public class CartesianScaleLabel extends ChartContainer {
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.fontStyle, FontStyle.class, Defaults.getScale().getScaleLabel().getFontStyle());
+		return getValue(Property.fontStyle, FontStyle.class, axis.getScale().getScaleLabel().getFontStyle());
 	}
 
 	/**
@@ -170,7 +172,7 @@ public class CartesianScaleLabel extends ChartContainer {
 	 * @return Font color for scale title. Default is {@link org.pepstock.charba.client.defaults.scale.ScaleLabel#getFontColor()}.
 	 */
 	public String getFontColor() {
-		return getValue(Property.fontColor, Defaults.getScale().getScaleLabel().getFontColor());
+		return getValue(Property.fontColor, axis.getScale().getScaleLabel().getFontColor());
 	}
 
 	/**
@@ -188,7 +190,7 @@ public class CartesianScaleLabel extends ChartContainer {
 	 * @return Font family for the scale title, follows CSS font-family options. Default is {@link org.pepstock.charba.client.defaults.scale.ScaleLabel#getFontFamily()}.
 	 */
 	public String getFontFamily() {
-		return getValue(Property.fontFamily, Defaults.getScale().getScaleLabel().getFontFamily());
+		return getValue(Property.fontFamily, axis.getScale().getScaleLabel().getFontFamily());
 	}
 
 }
