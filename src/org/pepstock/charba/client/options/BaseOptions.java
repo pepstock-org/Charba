@@ -58,7 +58,7 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
  *
  */
 public abstract class BaseOptions extends EventProvider {
-
+	
 	private static final String LEGEND_CALLBACK_ERROR = "Unable to execute LegendCallback";
 
 	private final Animation animation;
@@ -74,7 +74,9 @@ public abstract class BaseOptions extends EventProvider {
 	private final Layout layout;
 
 	private final Elements elements;
-
+	
+	private final Plugins plugins = new Plugins();
+	
 	private LegendCallback legendCallBack = null;
 
 	// amount of click event handlers
@@ -89,6 +91,7 @@ public abstract class BaseOptions extends EventProvider {
 	 */
 	private enum Property implements Key
 	{
+		charbaId,
 		animation,
 		hover,
 		layout,
@@ -132,6 +135,8 @@ public abstract class BaseOptions extends EventProvider {
 		setValue(Property.title, title);
 		setValue(Property.tooltips, tooltips);
 		setValue(Property.elements, elements);
+		setValue(Property.plugins, plugins);
+		setValue(Property.charbaId, chart.getId());
 	}
 
 	/**
@@ -181,6 +186,13 @@ public abstract class BaseOptions extends EventProvider {
 	 */
 	public Elements getElements() {
 		return elements;
+	}
+	
+	/**
+	 * @return the plugins
+	 */
+	protected Plugins getPlugins() {
+		return plugins;
 	}
 
 	/**

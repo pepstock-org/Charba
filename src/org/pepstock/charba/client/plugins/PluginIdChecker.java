@@ -25,7 +25,7 @@ import com.google.gwt.safehtml.shared.UriUtils;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class PluginIdChecker {
+public final class PluginIdChecker {
 
 	private static final String INVALID_PLUGIN__ID_NULL = "Plugin id can not be null ";
 
@@ -58,7 +58,7 @@ final class PluginIdChecker {
 	 * @param id plugin id to be checked.
 	 * @throws InvalidPluginIdException if the plugin is not compliant
 	 */
-	static void check(String id) throws InvalidPluginIdException {
+	public static void check(String id) throws InvalidPluginIdException {
 		// checks if is null
 		if (id == null) {
 			throw new InvalidPluginIdException(INVALID_PLUGIN__ID_NULL);

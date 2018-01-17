@@ -57,7 +57,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	private static final double DEFAULT_PCT_WIDTH = 90D;
 	// reference to Chart.js chart instance
 	JavaScriptObject chart = null;
-
+	
 	// chart container
 	final DivElement div;
 
@@ -130,10 +130,10 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	}
 
 	/**
-	 * Returns the ID of DIV element.<br>
+	 * Returns the ID of chart.<br>
 	 * It could be considered as chart unique ID.
 	 * 
-	 * @return the ID of DIV element
+	 * @return the ID of chart
 	 */
 	public final String getId(){
 		return div.getId();
@@ -259,6 +259,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	public void destroy() {
 		if (chart != null) {
 			destroyChart();
+			Charts.remove(getId());
 		}
 	}
 
@@ -445,6 +446,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 			configuration.setPlugins(plugins);
 			// destroy chart if chart is already instantiated
 			destroy();
+			Charts.add(this);
 			// draws chart with configuration
 			drawChart(configuration.getObject());
 		}
@@ -474,12 +476,14 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 * 
 	 * @param config configuration java script object.
 	 */
-	private native void drawChart(JavaScriptObject config)/*-{
+	private native int drawChart(JavaScriptObject config)/*-{
 	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
 	    var canvas = this.@org.pepstock.charba.client.AbstractChart::canvas;
 	    var ctx = canvas.getContext("2d");
 	    chart = new $wnd.Chart(ctx, config);
 	    this.@org.pepstock.charba.client.AbstractChart::chart = chart;
+	    console.log(chart);
+	    return chart.id;
 	}-*/;
 
 	/**

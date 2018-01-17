@@ -35,7 +35,7 @@ public final class Plugins {
 	// chart instance
 	private final AbstractChart<?, ?> chart;
 	// list of added plugins
-	private final List<WrapperPlugin> plugins = new LinkedList<WrapperPlugin>();
+	private final List<InlinePlugin> plugins = new LinkedList<InlinePlugin>();
 
 	/**
 	 * Builds the object storing the chart instance.
@@ -57,7 +57,7 @@ public final class Plugins {
 		// checks the plugin id
 		PluginIdChecker.check(plugin.getId());
 		// creates a java script object, wrapper of teh plugin
-		WrapperPlugin wPlugin = new WrapperPlugin(chart, plugin);
+		InlinePlugin wPlugin = new InlinePlugin(chart, plugin);
 		// stores the wrapper into a list
 		plugins.add(wPlugin);
 	}
@@ -70,10 +70,10 @@ public final class Plugins {
 	 */
 	public void remove(String id) {
 		// scans all plugins
-		Iterator<WrapperPlugin> iter = plugins.iterator();
+		Iterator<InlinePlugin> iter = plugins.iterator();
 		while (iter.hasNext()) {
 			// gets wrapper
-			WrapperPlugin plugin = iter.next();
+			InlinePlugin plugin = iter.next();
 			// if has got the same id
 			if (plugin.getId().equals(id)) {
 				// removes it
@@ -91,7 +91,7 @@ public final class Plugins {
 		// creates list
 		JsObjectArrayList<GenericJavaScriptObject> list = new JsObjectArrayList<GenericJavaScriptObject>();
 		// adds all java script object of the plugin wrapper
-		for (WrapperPlugin plugin : plugins) {
+		for (InlinePlugin plugin : plugins) {
 			list.add(plugin.getObject());
 		}
 		return list;
