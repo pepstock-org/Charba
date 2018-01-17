@@ -16,8 +16,8 @@
 package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -42,6 +42,8 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	private final T ticks;
 
 	private final CartesianScaleLabel scaleLabel;
+	
+	private final CartesianAxisType cartesianType;
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -62,13 +64,15 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * 
 	 * @param ticks ticks of this axis
 	 */
-	protected CartesianAxis(AbstractChart<?, ?> chart, T ticks) {
+	protected CartesianAxis(AbstractChart<?, ?> chart, T ticks, CartesianAxisType cartesianType) {
 		super(chart);
+		this.cartesianType = cartesianType;
 		// stores the ticks
 		this.ticks = ticks;
-//		// sets to the objects
-		grideLines = new GridLines(chart);
-		scaleLabel = new CartesianScaleLabel(chart);
+		this.ticks.setAxis(this);
+		// sets to the objects
+		grideLines = new GridLines(chart, this);
+		scaleLabel = new CartesianScaleLabel(chart, this);
 		// sets properties
 		setValue(Property.gridLines, grideLines);
 		setValue(Property.ticks, this.ticks);
@@ -98,6 +102,14 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	public GridLines getGrideLines() {
 		return grideLines;
 	}
+	
+	/**
+	 * @return the cartesianType
+	 * @see org.pepstock.charba.client.enums.CartesianAxisType
+	 */
+	public CartesianAxisType getCartesianType() {
+		return cartesianType;
+	}
 
 	/**
 	 * Sets if the axis are stacked or not.
@@ -112,7 +124,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @return the stacked
 	 */
 	public boolean isStacked() {
-		return getValue(Property.stacked, Defaults.getScale().isStacked());
+		return getValue(Property.stacked, getScale().isStacked());
 	}
 
 	/**
@@ -130,7 +142,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @return extra space of axis. Default is {@link org.pepstock.charba.client.defaults.scale.Scale#isOffset()}.
 	 */
 	public boolean isOffset() {
-		return getValue(Property.offset, Defaults.getScale().isOffset());
+		return getValue(Property.offset, getScale().isOffset());
 	}
 
 	/**
@@ -150,7 +162,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @return The ID is used to link datasets and scale axes together or <code>null</code> if not set
 	 */
 	public String getId() {
-		return getValue(Property.id, Defaults.getScale().getId());
+		return getValue(Property.id, getScale().getId());
 	}
 
 	/**
@@ -170,6 +182,6 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {
-		return getValue(Property.position, Position.class, Defaults.getScale().getPosition());
+		return getValue(Property.position, Position.class, getScale().getPosition());
 	}
 }

@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.enums.Position;
 
@@ -28,10 +27,12 @@ import org.pepstock.charba.client.enums.Position;
  */
 public final class Padding extends ChartContainer {
 	
+	private final Axis axis;
 	
 	// FIXME
-	Padding(AbstractChart<?, ?> chart) {
+	Padding(AbstractChart<?, ?> chart, Axis axis) {
 		super(chart);
+		this.axis = axis;
 	}
 
 	/**
@@ -49,7 +50,7 @@ public final class Padding extends ChartContainer {
 	 * @return the padding left in pixel. Default is {@link org.pepstock.charba.client.defaults.scale.Padding#getLeft()}.
 	 */
 	public int getLeft() {
-		return getValue(Position.left, Defaults.getScale().getScaleLabel().getPadding().getLeft());
+		return getValue(Position.left, axis.getScale().getScaleLabel().getPadding().getLeft());
 	}
 
 	/**
@@ -67,7 +68,7 @@ public final class Padding extends ChartContainer {
 	 * @return the padding right in pixel. Default is {@link org.pepstock.charba.client.defaults.scale.Padding#getRight()}.
 	 */
 	public int getRight() {
-		return getValue(Position.right, Defaults.getScale().getScaleLabel().getPadding().getRight());
+		return getValue(Position.right, axis.getScale().getScaleLabel().getPadding().getRight());
 	}
 
 	/**
@@ -85,7 +86,7 @@ public final class Padding extends ChartContainer {
 	 * @return the padding top in pixel. Default is {@link org.pepstock.charba.client.defaults.scale.Padding#getTop()}.
 	 */
 	public int getTop() {
-		return getValue(Position.top, Defaults.getScale().getScaleLabel().getPadding().getTop());
+		return getValue(Position.top, axis.getScale().getScaleLabel().getPadding().getTop());
 	}
 
 	/**
@@ -103,7 +104,7 @@ public final class Padding extends ChartContainer {
 	 * @return the padding bottom in pixel. Default is {@link org.pepstock.charba.client.defaults.scale.Padding#getBottom()}.
 	 */
 	public int getBottom() {
-		return getValue(Position.bottom, Defaults.getScale().getScaleLabel().getPadding().getBottom());
+		return getValue(Position.bottom, axis.getScale().getScaleLabel().getPadding().getBottom());
 	}
 
 }

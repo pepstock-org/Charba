@@ -26,28 +26,6 @@ import org.pepstock.charba.client.commons.Key;
  */
 public final class RadialLinearTick extends Tick {
 
-	private static final boolean DEFAULT_BEGIN_AT_ZERO = false;
-
-	private static final double DEFAULT_MIN = Double.MIN_VALUE;
-
-	private static final double DEFAULT_MAX = Double.MAX_VALUE;
-
-	private static final int DEFAULT_MAX_TICKS_LIMIT = 11;
-
-	private static final double DEFAULT_STEP_SIZE = Double.MIN_VALUE;
-
-	private static final double DEFAULT_SUGGESTED_MAX = Double.MAX_VALUE;
-
-	private static final double DEFAULT_SUGGESTED_MIN = Double.MIN_VALUE;
-
-	private static final String DEFAULT_BACKDROP_COLOR = "rgba(255,255,255,0.75)";
-
-	private static final int DEFAULT_BACKDROP_PADDING_X = 2;
-
-	private static final int DEFAULT_BACKDROP_PADDING_Y = 2;
-
-	private static final boolean DEFAULT_SHOW_LABEL_BACKDROP = true;
-
 	/**
 	 * Name of fields of JavaScript object.
 	 */
@@ -88,7 +66,7 @@ public final class RadialLinearTick extends Tick {
 	 * @return if true, scale will include 0 if it is not already included.. Default is false
 	 */
 	public boolean isBeginAtZero() {
-		return getValue(Property.beginAtZero, DEFAULT_BEGIN_AT_ZERO);
+		return getValue(Property.beginAtZero, getAxis().getScale().getTicks().isBeginAtZero());
 	}
 
 	/**
@@ -106,7 +84,7 @@ public final class RadialLinearTick extends Tick {
 	 * @return user defined minimum number for the scale, overrides minimum value from data.. Default is Double.MIN_VALUE
 	 */
 	public double getMin() {
-		return getValue(Property.min, DEFAULT_MIN);
+		return getValue(Property.min, getAxis().getScale().getTicks().getMin());
 	}
 
 	/**
@@ -124,7 +102,7 @@ public final class RadialLinearTick extends Tick {
 	 * @return user defined maximum number for the scale, overrides maximum value from data. Default is Double.MAX_VALUE
 	 */
 	public double getMax() {
-		return getValue(Property.max, DEFAULT_MAX);
+		return getValue(Property.max, getAxis().getScale().getTicks().getMax());
 	}
 
 	/**
@@ -142,7 +120,7 @@ public final class RadialLinearTick extends Tick {
 	 * @return maximum number of ticks and gridlines to show. Default is 11.
 	 */
 	public int getMaxTicksLimit() {
-		return getValue(Property.maxTicksLimit, DEFAULT_MAX_TICKS_LIMIT);
+		return getValue(Property.maxTicksLimit, getAxis().getScale().getTicks().getMaxTicksLimit());
 	}
 
 	/**
@@ -160,7 +138,7 @@ public final class RadialLinearTick extends Tick {
 	 * @return user defined fixed step size for the scale. Default is Double.MIN_VALUE
 	 */
 	public double getStepSize() {
-		return getValue(Property.stepSize, DEFAULT_STEP_SIZE);
+		return getValue(Property.stepSize, getAxis().getScale().getTicks().getStepSize());
 	}
 
 	/**
@@ -178,7 +156,7 @@ public final class RadialLinearTick extends Tick {
 	 * @return adjustment used when calculating the maximum data value.
 	 */
 	public double getSuggestedMax() {
-		return getValue(Property.suggestedMax, DEFAULT_SUGGESTED_MAX);
+		return getValue(Property.suggestedMax, getAxis().getScale().getTicks().getSuggestedMax());
 	}
 
 	/**
@@ -196,7 +174,7 @@ public final class RadialLinearTick extends Tick {
 	 * @return adjustment used when calculating the minimum data value.
 	 */
 	public double getSuggestedMin() {
-		return getValue(Property.suggestedMin, DEFAULT_SUGGESTED_MIN);
+		return getValue(Property.suggestedMin, getAxis().getScale().getTicks().getSuggestedMin());
 	}
 
 	/**
@@ -214,7 +192,7 @@ public final class RadialLinearTick extends Tick {
 	 * @return color of label backdrops. Default is 'rgba(255, 255, 255, 0.75)'
 	 */
 	public String getBackdropColor() {
-		return getValue(Property.backdropColor, DEFAULT_BACKDROP_COLOR);
+		return getValue(Property.backdropColor, getAxis().getScale().getTicks().getBackdropColor());
 	}
 
 	/**
@@ -232,7 +210,7 @@ public final class RadialLinearTick extends Tick {
 	 * @return horizontal padding of label backdrop. Default is 2.
 	 */
 	public int getBackdropPaddingX() {
-		return getValue(Property.backdropPaddingX, DEFAULT_BACKDROP_PADDING_X);
+		return getValue(Property.backdropPaddingX, getAxis().getScale().getTicks().getBackdropPaddingX());
 	}
 
 	/**
@@ -250,7 +228,7 @@ public final class RadialLinearTick extends Tick {
 	 * @return vertical padding of label backdrop. Default is 2.
 	 */
 	public int getBackdropPaddingY() {
-		return getValue(Property.backdropPaddingY, DEFAULT_BACKDROP_PADDING_Y);
+		return getValue(Property.backdropPaddingY, getAxis().getScale().getTicks().getBackdropPaddingY());
 	}
 
 	/**
@@ -268,7 +246,7 @@ public final class RadialLinearTick extends Tick {
 	 * @return if true, draw a background behind the tick labels. Default is true.
 	 */
 	public boolean isShowLabelBackdrop() {
-		return getValue(Property.showLabelBackdrop, DEFAULT_SHOW_LABEL_BACKDROP);
+		return getValue(Property.showLabelBackdrop, getAxis().getScale().getTicks().isShowLabelBackdrop());
 	}
 
 }

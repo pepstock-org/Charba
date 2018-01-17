@@ -17,6 +17,7 @@ package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.CartesianAxisType;
 
 /**
  * This object is used to map defined axis as category.
@@ -25,12 +26,16 @@ import org.pepstock.charba.client.enums.AxisType;
  *
  */
 public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> {
+	
+	public CartesianCategoryAxis(AbstractChart<?, ?> chart) {
+		this(chart, CartesianAxisType.x);
+	}
 
 	/**
 	 * Builds the axis
 	 */
-	public CartesianCategoryAxis(AbstractChart<?, ?> chart) {
-		super(chart, new CartesianCategoryTick(chart));
+	public CartesianCategoryAxis(AbstractChart<?, ?> chart, CartesianAxisType cartesianType) {
+		super(chart, new CartesianCategoryTick(chart), cartesianType);
 		// sets axis type
 		super.setType(AxisType.category);
 	}

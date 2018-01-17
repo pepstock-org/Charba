@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.RadialPointLabelCallback;
 import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
@@ -31,6 +30,8 @@ import org.pepstock.charba.client.enums.FontStyle;
  *
  */
 public final class RadialPointLabels extends ChartContainer {
+	
+	private final Axis axis;
 
 	private RadialPointLabelCallback callback = null;
 
@@ -52,8 +53,9 @@ public final class RadialPointLabels extends ChartContainer {
 	 * 
 	 * @param axis own axis.
 	 */
-	RadialPointLabels(AbstractChart<?, ?> chart) {
+	RadialPointLabels(AbstractChart<?, ?> chart, Axis axis) {
 		super(chart);
+		this.axis = axis;
 		registerNativePointLabelCallbacktHandler(getJavaScriptObject());
 	}
 
@@ -74,7 +76,7 @@ public final class RadialPointLabels extends ChartContainer {
 	 * @return if true, labels are shown. Default is true.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, Defaults.getScale().getPointLabels().isDisplay());
+		return getValue(Property.display, axis.getScale().getPointLabels().isDisplay());
 	}
 
 	/**
@@ -92,7 +94,7 @@ public final class RadialPointLabels extends ChartContainer {
 	 * @return font size for the tick labels. Default is 10.
 	 */
 	public int getFontSize() {
-		return getValue(Property.fontSize, Defaults.getScale().getPointLabels().getFontSize());
+		return getValue(Property.fontSize, axis.getScale().getPointLabels().getFontSize());
 	}
 
 	/**
@@ -115,7 +117,7 @@ public final class RadialPointLabels extends ChartContainer {
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.fontStyle, FontStyle.class, Defaults.getScale().getPointLabels().getFontStyle());
+		return getValue(Property.fontStyle, FontStyle.class, axis.getScale().getPointLabels().getFontStyle());
 	}
 
 	/**
@@ -133,7 +135,7 @@ public final class RadialPointLabels extends ChartContainer {
 	 * @return font color for tick labels. Default is '#666'.
 	 */
 	public String getFontColor() {
-		return getValue(Property.fontColor, Defaults.getScale().getPointLabels().getFontColor());
+		return getValue(Property.fontColor, axis.getScale().getPointLabels().getFontColor());
 	}
 
 	/**
@@ -152,7 +154,7 @@ public final class RadialPointLabels extends ChartContainer {
 	 *         'Arial', sans-serif".
 	 */
 	public String getFontFamily() {
-		return getValue(Property.fontFamily, Defaults.getScale().getPointLabels().getFontFamily());
+		return getValue(Property.fontFamily, axis.getScale().getPointLabels().getFontFamily());
 	}
 
 	/**

@@ -110,7 +110,7 @@ public final class CartesianCategoryTick extends CartesianTick {
 	 * @return The minimum item to display
 	 */
 	public String getMin() {
-		return getValue(Property.min, null);
+		return getValue(Property.min, String.valueOf(getAxis().getScale().getTicks().getMin()));
 	}
 
 	/**
@@ -128,7 +128,7 @@ public final class CartesianCategoryTick extends CartesianTick {
 	 * @return the maximum item to display.
 	 */
 	public String getMax() {
-		return getValue(Property.max, null);
+		return getValue(Property.max,String.valueOf(getAxis().getScale().getTicks().getMax()));
 	}
 
 }

@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.TickCallback;
 import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
@@ -36,7 +35,7 @@ import org.pepstock.charba.client.items.TickItem;
 public class BaseTick extends ChartContainer {
 
 	// the axis instance, owner of this tick
-//	private final Axis axis;
+	private Axis axis;
 
 	private TickCallback callback = null;
 
@@ -61,19 +60,19 @@ public class BaseTick extends ChartContainer {
 		registerNativeTickCallbacktHandler(getJavaScriptObject());
 	}
 
-//	/**
-//	 * @param axis the axis to set
-//	 */
-//	void setAxis(Axis axis) {
-//		this.axis = axis;
-//	}
+	/**
+	 * @param axis the axis to set
+	 */
+	void setAxis(Axis axis) {
+		this.axis = axis;
+	}
 
-//	/**
-//	 * @return the axis
-//	 */
-//	Axis getAxis() {
-//		return axis;
-//	}
+	/**
+	 * @return the axis
+	 */
+	Axis getAxis() {
+		return axis;
+	}
 
 	/**
 	 * Sets the font size for tick.
@@ -90,7 +89,7 @@ public class BaseTick extends ChartContainer {
 	 * @return the font size for tick. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getFontSize()}.
 	 */
 	public int getFontSize() {
-		return getValue(Property.fontSize, Defaults.getScale().getTicks().getFontSize());
+		return getValue(Property.fontSize, axis.getScale().getTicks().getFontSize());
 	}
 
 	/**
@@ -110,7 +109,7 @@ public class BaseTick extends ChartContainer {
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.fontStyle, FontStyle.class, Defaults.getScale().getTicks().getFontStyle());
+		return getValue(Property.fontStyle, FontStyle.class, axis.getScale().getTicks().getFontStyle());
 	}
 
 	/**
@@ -128,7 +127,7 @@ public class BaseTick extends ChartContainer {
 	 * @return Font color for tick. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getFontColor()}.
 	 */
 	public String getFontColor() {
-		return getValue(Property.fontColor, Defaults.getScale().getTicks().getFontColor());
+		return getValue(Property.fontColor, axis.getScale().getTicks().getFontColor());
 	}
 
 	/**
@@ -146,7 +145,7 @@ public class BaseTick extends ChartContainer {
 	 * @return Font family for the tick, follows CSS font-family options. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getFontFamily()}.
 	 */
 	public String getFontFamily() {
-		return getValue(Property.fontFamily, Defaults.getScale().getTicks().getFontFamily());
+		return getValue(Property.fontFamily, axis.getScale().getTicks().getFontFamily());
 	}
 
 	/**

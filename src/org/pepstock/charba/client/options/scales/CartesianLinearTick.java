@@ -29,20 +29,6 @@ import org.pepstock.charba.client.commons.Key;
  */
 public final class CartesianLinearTick extends CartesianTick {
 
-	private static final boolean DEFAULT_BEGIN_AT_ZERO = false;
-
-	private static final double DEFAULT_MIN = Double.MIN_VALUE;
-
-	private static final double DEFAULT_MAX = Double.MAX_VALUE;
-
-	private static final int DEFAULT_MAX_TICKS_LIMIT = 11;
-
-	private static final double DEFAULT_STEP_SIZE = Double.MIN_VALUE;
-
-	private static final double DEFAULT_SUGGESTED_MAX = Double.MAX_VALUE;
-
-	private static final double DEFAULT_SUGGESTED_MIN = Double.MIN_VALUE;
-
 	/**
 	 * Name of fields of JavaScript object.
 	 */
@@ -79,7 +65,7 @@ public final class CartesianLinearTick extends CartesianTick {
 	 * @return if true, scale will include 0 if it is not already included.. Default is false
 	 */
 	public boolean isBeginAtZero() {
-		return getValue(Property.beginAtZero, DEFAULT_BEGIN_AT_ZERO);
+		return getValue(Property.beginAtZero, getAxis().getScale().getTicks().isBeginAtZero());
 	}
 
 	/**
@@ -97,7 +83,7 @@ public final class CartesianLinearTick extends CartesianTick {
 	 * @return the user defined minimum number for the scale, overrides minimum value from data. Default is Double.MIN_VALUE.
 	 */
 	public double getMin() {
-		return getValue(Property.min, DEFAULT_MIN);
+		return getValue(Property.min, getAxis().getScale().getTicks().getMin());
 	}
 
 	/**
@@ -115,7 +101,7 @@ public final class CartesianLinearTick extends CartesianTick {
 	 * @return user defined maximum number for the scale, overrides maximum value from data. Default is Double.MAX_VALUE.
 	 */
 	public double getMax() {
-		return getValue(Property.max, DEFAULT_MAX);
+		return getValue(Property.max, getAxis().getScale().getTicks().getMax());
 	}
 
 	/**
@@ -133,7 +119,7 @@ public final class CartesianLinearTick extends CartesianTick {
 	 * @return maximum number of ticks and gridlines to show. Default is 11.
 	 */
 	public int getMaxTicksLimit() {
-		return getValue(Property.maxTicksLimit, DEFAULT_MAX_TICKS_LIMIT);
+		return getValue(Property.maxTicksLimit, getAxis().getScale().getTicks().getMaxTicksLimit());
 	}
 
 	/**
@@ -151,7 +137,7 @@ public final class CartesianLinearTick extends CartesianTick {
 	 * @return user defined fixed step size for the scale. Default is Double.MIN_VALUE.
 	 */
 	public double getStepSize() {
-		return getValue(Property.stepSize, DEFAULT_STEP_SIZE);
+		return getValue(Property.stepSize, getAxis().getScale().getTicks().getStepSize());
 	}
 
 	/**
@@ -169,7 +155,7 @@ public final class CartesianLinearTick extends CartesianTick {
 	 * @return adjustment used when calculating the maximum data value.
 	 */
 	public double getSuggestedMax() {
-		return getValue(Property.suggestedMax, DEFAULT_SUGGESTED_MAX);
+		return getValue(Property.suggestedMax, getAxis().getScale().getTicks().getSuggestedMax());
 	}
 
 	/**
@@ -187,7 +173,7 @@ public final class CartesianLinearTick extends CartesianTick {
 	 * @return adjustment used when calculating the minimum data value.
 	 */
 	public double getSuggestedMin() {
-		return getValue(Property.suggestedMin, DEFAULT_SUGGESTED_MIN);
+		return getValue(Property.suggestedMin, getAxis().getScale().getTicks().getSuggestedMin());
 	}
 
 }
