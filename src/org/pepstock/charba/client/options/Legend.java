@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.options;
 
-import java.util.logging.Logger;
-
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.commons.EventProvider;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
@@ -209,8 +207,6 @@ public final class Legend extends EventProvider {
 		return getValue(Property.position, Position.class, getChart().getGlobal().getLegend().getPosition());
 	}
 
-	final Logger log = Logger.getLogger("mio");
-	
 	/**
 	 * A callback that is called when a click event is registered on a label item
 	 * 

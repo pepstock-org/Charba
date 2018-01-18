@@ -191,7 +191,7 @@ public abstract class BaseOptions extends EventProvider {
 	/**
 	 * @return the plugins
 	 */
-	protected Plugins getPlugins() {
+	public Plugins getPlugins() {
 		return plugins;
 	}
 
