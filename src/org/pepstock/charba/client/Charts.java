@@ -13,10 +13,8 @@ public final class Charts {
 	private Charts() {
 	}
 
-	public static void add(AbstractChart<?, ?> chart){
-		if (!CHARTS.containsKey(chart.getId())){
-			CHARTS.put(chart.getId(), chart);
-		}
+	static void add(AbstractChart<?, ?> chart){
+		CHARTS.put(chart.getId(), chart);
 	}
 	
 	public static AbstractChart<?, ?> get(String chartId){
@@ -24,7 +22,7 @@ public final class Charts {
 	}
 	
 	
-	public static void remove(String chartId){
+	static void remove(String chartId){
 		CHARTS.remove(chartId);
 	}
 	

@@ -58,6 +58,9 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	// reference to Chart.js chart instance
 	JavaScriptObject chart = null;
 	
+	// chart ID using GWT unique id
+	private final String id = Document.get().createUniqueId();
+	
 	// chart container
 	final DivElement div;
 
@@ -88,7 +91,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	public AbstractChart() {
 		// creates DIV
 		div = Document.get().createDivElement();
-		div.setId(Document.get().createUniqueId());
+		div.setId(id);
 		// sets relative position
 		div.getStyle().setPosition(Position.RELATIVE);
 		// sets default width values
@@ -136,7 +139,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 * @return the ID of chart
 	 */
 	public final String getId(){
-		return div.getId();
+		return id;
 	}
 	
 	/**

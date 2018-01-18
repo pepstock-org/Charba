@@ -19,9 +19,12 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.TooltipModel;
+
+import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * Wraps a plugin, delegating the execution of all hooks to it.<br>
@@ -35,6 +38,14 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	private final Plugin delegation;
 
 	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		id
+	}
+	
+	/**
 	 * Builds teh object with the chart and plugin instances
 	 * 
 	 * @param chart chart instance
@@ -42,6 +53,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 */
 	WrapperPlugin(Plugin delegation) {
 		this.delegation = delegation;
+		setValue(Property.id, delegation.getId());
 		// registers itself with all methods of plugin definition
 		registerNativePluginsHandler(getJavaScriptObject());
 	}
@@ -57,18 +69,26 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 		return delegation.getId();
 	}
 
+	private JavaScriptObject getOptions(String chartId){
+		try {
+			return getChart(chartId).getOptions().getPlugins().getOptions(getId());
+		} catch (InvalidPluginIdException e) {
+			return null;
+		}
+	}
+	
 	/**
 	 * Called before initializing 'chart'.
 	 */
 	protected void onBeforeInit(String chartId) {
-		delegation.onBeforeInit(getChart(chartId));
+		delegation.onBeforeInit(getChart(chartId), getOptions(chartId));
 	}
 
 	/**
 	 * Called after 'chart' has been initialized and before the first update.
 	 */
 	protected void onAfterInit(String chartId) {
-		delegation.onAfterInit(getChart(chartId));
+		delegation.onAfterInit(getChart(chartId), getOptions(chartId));
 	}
 
 	/**
@@ -78,7 +98,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to cancel the chart update.
 	 */
 	protected boolean onBeforeUpdate(String chartId) {
-		return delegation.onBeforeUpdate(getChart(chartId));
+		return delegation.onBeforeUpdate(getChart(chartId), getOptions(chartId));
 	}
 
 	/**
@@ -86,7 +106,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * has been previously cancelled.
 	 */
 	protected void onAfterUpdate(String chartId) {
-		delegation.onAfterUpdate(getChart(chartId));
+		delegation.onAfterUpdate(getChart(chartId), getOptions(chartId));
 	}
 
 	/**
@@ -96,7 +116,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to cancel the chart layout.
 	 */
 	protected boolean onBeforeLayout(String chartId) {
-		return delegation.onBeforeLayout(getChart(chartId));
+		return delegation.onBeforeLayout(getChart(chartId), getOptions(chartId));
 	}
 
 	/**
@@ -104,7 +124,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * previously cancelled.
 	 */
 	protected void onAfterLayout(String chartId) {
-		delegation.onAfterLayout(getChart(chartId));
+		delegation.onAfterLayout(getChart(chartId), getOptions(chartId));
 	}
 
 	/**
@@ -114,7 +134,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to cancel the datasets update.
 	 */
 	protected boolean onBeforeDatasetsUpdate(String chartId) {
-		return delegation.onBeforeDatasetsUpdate(getChart(chartId));
+		return delegation.onBeforeDatasetsUpdate(getChart(chartId), getOptions(chartId));
 	}
 
 	/**
@@ -122,7 +142,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * been previously cancelled.
 	 */
 	protected void onAfterDatasetsUpdate(String chartId) {
-		delegation.onAfterDatasetsUpdate(getChart(chartId));
+		delegation.onAfterDatasetsUpdate(getChart(chartId), getOptions(chartId));
 	}
 
 	/**
@@ -133,7 +153,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
 	protected boolean onBeforeDatasetUpdate(String chartId, int datasetIndex) {
-		return delegation.onBeforeDatasetUpdate(getChart(chartId), datasetIndex);
+		return delegation.onBeforeDatasetUpdate(getChart(chartId), datasetIndex, getOptions(chartId));
 	}
 
 	/**
@@ -143,7 +163,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param datasetIndex The dataset index.
 	 */
 	protected void onAfterDatasetUpdate(String chartId, int datasetIndex) {
-		delegation.onAfterDatasetUpdate(getChart(chartId), datasetIndex);
+		delegation.onAfterDatasetUpdate(getChart(chartId), datasetIndex, getOptions(chartId));
 	}
 
 	/**
@@ -153,7 +173,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to cancel the chart rendering.
 	 */
 	protected boolean onBeforeRender(String chartId) {
-		return delegation.onBeforeRender(getChart(chartId));
+		return delegation.onBeforeRender(getChart(chartId), getOptions(chartId));
 	}
 
 	/**
@@ -161,7 +181,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * rendering has been previously cancelled.
 	 */
 	protected void onAfterRender(String chartId) {
-		delegation.onAfterRender(getChart(chartId));
+		delegation.onAfterRender(getChart(chartId), getOptions(chartId));
 	}
 
 	/**
@@ -172,7 +192,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to cancel the chart drawing.
 	 */
 	protected boolean onBeforeDraw(String chartId, String easing) {
-		return delegation.onBeforeDraw(getChart(chartId), Double.valueOf(easing));
+		return delegation.onBeforeDraw(getChart(chartId), Double.valueOf(easing), getOptions(chartId));
 	}
 
 	/**
@@ -182,7 +202,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
 	protected void onAfterDraw(String chartId, String easing) {
-		delegation.onAfterDraw(getChart(chartId), Double.valueOf(easing));
+		delegation.onAfterDraw(getChart(chartId), Double.valueOf(easing), getOptions(chartId));
 	}
 
 	/**
@@ -193,7 +213,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
 	protected boolean onBeforeDatasetsDraw(String chartId, String easing) {
-		return delegation.onBeforeDatasetsDraw(getChart(chartId), Double.valueOf(easing));
+		return delegation.onBeforeDatasetsDraw(getChart(chartId), Double.valueOf(easing), getOptions(chartId));
 	}
 
 	/**
@@ -203,7 +223,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
 	protected void onAfterDatasetsDraw(String chartId, String easing) {
-		delegation.onAfterDatasetsDraw(getChart(chartId), Double.valueOf(easing));
+		delegation.onAfterDatasetsDraw(getChart(chartId), Double.valueOf(easing), getOptions(chartId));
 	}
 
 	/**
@@ -215,7 +235,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
 	protected boolean onBeforeDatasetDraw(String chartId, int datasetIndex, String easing) {
-		return delegation.onBeforeDatasetDraw(getChart(chartId), datasetIndex, Double.valueOf(easing));
+		return delegation.onBeforeDatasetDraw(getChart(chartId), datasetIndex, Double.valueOf(easing), getOptions(chartId));
 	}
 
 	/**
@@ -226,7 +246,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
 	protected void onAfterDatasetDraw(String chartId, int datasetIndex, String easing) {
-		delegation.onAfterDatasetDraw(getChart(chartId), datasetIndex, Double.valueOf(easing));
+		delegation.onAfterDatasetDraw(getChart(chartId), datasetIndex, Double.valueOf(easing), getOptions(chartId));
 	}
 
 	/**
@@ -239,7 +259,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to cancel the chart tooltip drawing.
 	 */
 	protected boolean onBeforeTooltipDraw(String chartId, TooltipModel model, String easing) {
-		return delegation.onBeforeTooltipDraw(getChart(chartId), model, Double.valueOf(easing));
+		return delegation.onBeforeTooltipDraw(getChart(chartId), model, Double.valueOf(easing), getOptions(chartId));
 	}
 
 	/**
@@ -250,7 +270,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
 	protected void onAfterTooltipDraw(String chartId, TooltipModel model, String easing) {
-		delegation.onAfterTooltipDraw(getChart(chartId), model, Double.valueOf(easing));
+		delegation.onAfterTooltipDraw(getChart(chartId), model, Double.valueOf(easing), getOptions(chartId));
 	}
 
 	/**
@@ -260,7 +280,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to discard the event.
 	 */
 	protected boolean onBeforeEvent(String chartId, ChartNativeEvent event) {
-		return delegation.onBeforeEvent(getChart(chartId), event);
+		return delegation.onBeforeEvent(getChart(chartId), event, getOptions(chartId));
 	}
 
 	/**
@@ -270,7 +290,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param event The event object.
 	 */
 	protected void onAfterEvent(String chartId, ChartNativeEvent event) {
-		delegation.onAfterEvent(getChart(chartId), event);
+		delegation.onAfterEvent(getChart(chartId), event, getOptions(chartId));
 	}
 
 	/**
@@ -279,14 +299,14 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param item The new canvas display size (eq. canvas.style width & height).
 	 */
 	protected void onResize(String chartId, SizeItem item) {
-		delegation.onResize(getChart(chartId), item);
+		delegation.onResize(getChart(chartId), item, getOptions(chartId));
 	}
 
 	/**
 	 * Called after the chart as been destroyed.
 	 */
 	protected void onDestroy(String chartId) {
-		delegation.onDestroy(getChart(chartId));
+		delegation.onDestroy(getChart(chartId), getOptions(chartId));
 	}
 
 	/**

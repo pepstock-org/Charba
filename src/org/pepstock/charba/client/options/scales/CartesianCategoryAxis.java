@@ -39,5 +39,5 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 		// sets axis type
 		super.setType(AxisType.category);
 	}
-
+	
 }

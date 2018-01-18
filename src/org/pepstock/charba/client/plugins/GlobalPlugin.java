@@ -29,7 +29,7 @@ import org.pepstock.charba.client.Plugin;
 class GlobalPlugin extends WrapperPlugin {
 
 	/**
-	 * Builds teh object with the chart and plugin instances
+	 * Builds the object with the chart and plugin instances
 	 * 
 	 * @param chart chart instance
 	 * @param delegation plugin instance

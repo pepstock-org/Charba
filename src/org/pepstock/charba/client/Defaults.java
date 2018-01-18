@@ -1,14 +1,12 @@
 package org.pepstock.charba.client;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JsArrayStringImpl;
 import org.pepstock.charba.client.defaults.global.Options;
 import org.pepstock.charba.client.defaults.scale.Scale;
+import org.pepstock.charba.client.plugins.GlobalPlugins;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
@@ -22,6 +20,7 @@ public final class Defaults {
 	
 	private final Map<Type, Options> chartOptions = new HashMap<Type, Options>();
 	
+	private final GlobalPlugins plugins = new GlobalPlugins();
 	/**
 	 * To avoid any instantiation
 	 */
@@ -42,40 +41,18 @@ public final class Defaults {
 		return INSTANCE.scale;
 	}
 	
+	public static GlobalPlugins getPlugins(){
+		return INSTANCE.plugins;
+	}
+	
+	
 	public static Options getChartGlobal(Type type){
 		if (INSTANCE.chartOptions.containsKey(type)){
 			return INSTANCE.chartOptions.get(type);
 		}
 		return INSTANCE.chartOptions.get(Type.bar);
 	}
-
-	public static Set<String> getPlugins(){
-		JsArrayStringImpl impl = (JsArrayStringImpl)INSTANCE.getPluginsIds();
-		final Set<String> pluginsIds = new HashSet<String>();
-		if (impl != null && impl.length() > 0){
-			for (int i=0; i<impl.length(); i++){
-				pluginsIds.add(impl.get(i));
-			}
-		}
-		return pluginsIds;
-	}
 	
-	/**
-	 */
-	private native JavaScriptObject getPluginsIds()/*-{
-	    //console.log($wnd.Chart.defaults.global);
-	    var ids = $wnd.Chart.plugins._plugins;
-	    if (ids != null && ids.length > 0){
-	    	var returnValue = new Array();
-	    	for(var i = 0; i < ids.length; i++)
-			{
-     			returnValue[i] = ids[i].id;
-			}
-			return returnValue;
-	    }
-	    return new Array[0];
-	}-*/;
-
 	/**
 	 */
 	private native JavaScriptObject getGlobalOptions()/*-{
@@ -89,5 +66,5 @@ public final class Defaults {
 	private native JavaScriptObject getChart(String type)/*-{
 		return $wnd.Chart.defaults[type];
 	}-*/;
-
+	
 }
