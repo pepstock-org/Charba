@@ -144,7 +144,7 @@ public final class Legend extends EventProvider {
 	/**
 	 * Returns if the legend is shown.
 	 * 
-	 * @return if the legend is shown. For default see {@link org.pepstock.charba.client.GlobalOptions##getLegend()}.
+	 * @return if the legend is shown. For default see {@link org.pepstock.charba.client.GlobalOptions#getLegend()}.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getChart().getGlobal().getLegend().isDisplay());
@@ -162,7 +162,7 @@ public final class Legend extends EventProvider {
 	/**
 	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
 	 * 
-	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). For default see {@link org.pepstock.charba.client.GlobalOptions##getLegend()}.
+	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). For default see {@link org.pepstock.charba.client.GlobalOptions#getLegend()}.
 	 */
 	public boolean isFullWidth() {
 		return getValue(Property.fullWidth, getChart().getGlobal().getLegend().isFullWidth());
@@ -180,7 +180,7 @@ public final class Legend extends EventProvider {
 	/**
 	 * Returns if the legend will show datasets in reverse order.
 	 * 
-	 * @return Legend will show datasets in reverse order. For default see {@link org.pepstock.charba.client.GlobalOptions##getLegend()}.
+	 * @return Legend will show datasets in reverse order. For default see {@link org.pepstock.charba.client.GlobalOptions#getLegend()}.
 	 */
 	public boolean isReverse() {
 		return getValue(Property.reverse, getChart().getGlobal().getLegend().isReverse());
@@ -199,7 +199,7 @@ public final class Legend extends EventProvider {
 	/**
 	 * Returns the position of the legend.
 	 * 
-	 * @return Position of the legend. Default is For default see {@link org.pepstock.charba.client.GlobalOptions##getLegend()}.
+	 * @return Position of the legend. Default is For default see {@link org.pepstock.charba.client.GlobalOptions#getLegend()}.
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {

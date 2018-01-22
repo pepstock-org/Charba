@@ -113,7 +113,7 @@ public abstract class Dataset extends JavaScriptObjectContainer{
 
 	/**
 	 * Returns the type of dataset, based on type of chart.
-	 * @param type type of dataset.
+	 * @return type of dataset or null if not set.
 	 */
 	public Type getType(){
 		  return getValue(Property.type, Type.class, (Type)null);

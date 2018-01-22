@@ -78,7 +78,7 @@ public final class TooltipLabelColor extends JavaScriptObjectContainer {
 	/**
 	 * Sets border color
 	 * 
-	 * @param boderColor border color
+	 * @param borderColor border color
 	 */
 	public void setBorderColor(String borderColor) {
 		setValue(Property.borderColor, borderColor);

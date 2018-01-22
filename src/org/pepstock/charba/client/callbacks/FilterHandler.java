@@ -28,7 +28,6 @@ interface FilterHandler<T> {
 	/**
 	 * Callback that runs before ticks are created.
 	 * 
-	 * @param item axis item instance
 	 * @param chart chart instance
 	 * @param item item to be filtered
 	 * @return <code>false</code> to remove the item from the container, otherwise <code>true</code>.

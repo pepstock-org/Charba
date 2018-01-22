@@ -59,7 +59,7 @@ public class Scales extends ChartContainer {
 	/**
 	 * Sets an array of X axes.
 	 * 
-	 * @param axesan array of axes.
+	 * @param axes an array of axes.
 	 */
 	public void setXAxes(Axis... axes) {
 		// set java script array
@@ -76,7 +76,7 @@ public class Scales extends ChartContainer {
 	/**
 	 * Sets an array of Y axes.
 	 * 
-	 * @param axesan array of axes.
+	 * @param axes an array of axes.
 	 */
 	public void setYAxes(Axis... axes) {
 		// set java script array

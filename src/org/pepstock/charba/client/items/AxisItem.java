@@ -446,7 +446,7 @@ public class AxisItem extends BaseItem {
 	/**
 	 * Sets an array of ticks
 	 * 
-	 * @param ticks the array of ticks
+	 * @param ticksAsNumbers the array of ticks
 	 */
 	public final void setTicksAsNumbers(double... ticksAsNumbers) {
 		setInternalTicksAsNumbers(ArrayListHelper.build(ticksAsNumbers));

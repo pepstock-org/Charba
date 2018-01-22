@@ -235,7 +235,7 @@ public final class Title extends ChartContainer {
 	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
 	 * 
 	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). For default see
-	 *         {@link org.pepstock.charba.client.GlobalOptions##getTitle()}.
+	 *         {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
 	 */
 	public boolean isFullWidth() {
 		return getValue(Property.fullWidth, getChart().getGlobal().getTitle().isFullWidth());
@@ -254,7 +254,7 @@ public final class Title extends ChartContainer {
 	 * Returns the height of an individual line of text.
 	 * 
 	 * @return height of an individual line of text. For default see
-	 *         {@link org.pepstock.charba.client.GlobalOptions##getTitle()}.
+	 *         {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
 	 */
 	public double getLineHeight() {
 		return getValue(Property.lineHeight, getChart().getGlobal().getTitle().getLineHeight());

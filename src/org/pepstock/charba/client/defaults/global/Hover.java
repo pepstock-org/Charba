@@ -120,7 +120,7 @@ public final class Hover extends AbstractItem {
 	 * Sets to 'x', 'y', or 'xy' to define which directions are used in calculating distances.<br>
 	 * Defaults to 'x' for index mode and 'xy' in dataset and nearest modes.
 	 * 
-	 * @param mode define which directions are used in calculating distances.
+	 * @param axis define which directions are used in calculating distances.
 	 * @see org.pepstock.charba.client.enums.InteractionAxis
 	 */
 	public void setAxis(InteractionAxis axis) {
