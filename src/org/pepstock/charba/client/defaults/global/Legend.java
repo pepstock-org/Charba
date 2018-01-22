@@ -27,9 +27,6 @@ import org.pepstock.charba.client.enums.Position;
  */
 public final class Legend extends AbstractItem {
 	
-//    "weight": 1000,
-
-
 	private static final boolean DEFAULT_DISPLAY = true;
 
 	private static final boolean DEFAULT_FULL_WIDTH = true;
@@ -51,12 +48,14 @@ public final class Legend extends AbstractItem {
 	}
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object with parent item and child.
 	 * 
-	 * @param chart chart instance
+	 * @param parent parent item.
+	 * @param childKey key of child.
 	 */
 	Legend(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
+		// creates children items
 		labels = new LegendLabels(this, Property.labels);
 	}
 
@@ -74,6 +73,7 @@ public final class Legend extends AbstractItem {
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -93,6 +93,7 @@ public final class Legend extends AbstractItem {
 	 */
 	public void setFullWidth(boolean fullWidth) {
 		setValue(Property.fullWidth, fullWidth);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -112,6 +113,7 @@ public final class Legend extends AbstractItem {
 	 */
 	public void setReverse(boolean reverse) {
 		setValue(Property.reverse, reverse);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -132,6 +134,7 @@ public final class Legend extends AbstractItem {
 	 */
 	public void setPosition(Position position) {
 		setValue(Property.position, position);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 

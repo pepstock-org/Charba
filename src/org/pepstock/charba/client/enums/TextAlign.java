@@ -13,46 +13,28 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.defaults.global;
+package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.AbstractItem;
 
 /**
- * The layout configuration is needed to set the padding.
+ * Property to set the text alignment
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Layout extends AbstractItem {
-
-	private final Padding padding;
-
+public enum TextAlign implements Key
+{
 	/**
-	 * Name of fields of JavaScript object.
+	 * the left property sets the left text alignment.
 	 */
-	private enum Property implements Key
-	{
-		padding
-	}
-
+	left,
 	/**
-	 * Builds the object with parent item and child.
-	 * 
-	 * @param parent parent item.
-	 * @param childKey key of child.
+	 * the bottom property sets the left text alignment.
 	 */
-	Layout(AbstractItem parent, Key childKey) {
-		super(parent, childKey);
-		// creates children items
-		padding = new Padding(this, Property.padding);
-	}
-
+	center,
 	/**
-	 * @return the padding
+	 * the right property sets the left text alignment.
 	 */
-	public Padding getPadding() {
-		return padding;
-	}
-
+	right;
 }

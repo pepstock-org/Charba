@@ -21,7 +21,7 @@ import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
 
 /**
- * Defintions about how elements appear in the tooltip, hovering the chart.
+ * Definitions about how elements appear in the tooltip, hovering the chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -44,7 +44,10 @@ public final class Hover extends AbstractItem {
 	}
 
 	/**
-	 * Empty constructor to reduce its visibility
+	 * Builds the object with parent item and child.
+	 * 
+	 * @param parent parent item.
+	 * @param childKey key of child.
 	 */
 	Hover(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
@@ -58,6 +61,7 @@ public final class Hover extends AbstractItem {
 	 */
 	public void setMode(InteractionMode mode) {
 		setValue(Property.mode, mode);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -79,6 +83,7 @@ public final class Hover extends AbstractItem {
 	 */
 	public void setIntersect(boolean intersect) {
 		setValue(Property.intersect, intersect);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -98,6 +103,7 @@ public final class Hover extends AbstractItem {
 	 */
 	public void setAnimationDuration(int milliseconds) {
 		setValue(Property.animationDuration, milliseconds);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -119,6 +125,7 @@ public final class Hover extends AbstractItem {
 	 */
 	public void setAxis(InteractionAxis axis) {
 		setValue(Property.axis, axis);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 

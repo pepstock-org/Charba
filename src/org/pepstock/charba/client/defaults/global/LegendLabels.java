@@ -44,9 +44,10 @@ public final class LegendLabels extends FontItem {
 	}
 	
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object with parent item and child.
 	 * 
-	 * @param chart chart instance
+	 * @param parent parent item.
+	 * @param childKey key of child.
 	 */
 	LegendLabels(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
@@ -59,6 +60,7 @@ public final class LegendLabels extends FontItem {
 	 */
 	public void setUsePointStyle(boolean usePointStyle) {
 		setValue(Property.usePointStyle, usePointStyle);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -78,6 +80,7 @@ public final class LegendLabels extends FontItem {
 	 */
 	public void setBoxWidth(int boxWidth) {
 		setValue(Property.boxWidth, boxWidth);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -97,6 +100,7 @@ public final class LegendLabels extends FontItem {
 	 */
 	public void setPadding(int padding) {
 		setValue(Property.padding, padding);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 

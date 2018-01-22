@@ -44,22 +44,29 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	{
 		id
 	}
-	
+
 	/**
-	 * Builds teh object with the chart and plugin instances
+	 * Builds the object with plugin instance
 	 * 
-	 * @param chart chart instance
 	 * @param delegation plugin instance
 	 */
 	WrapperPlugin(Plugin delegation) {
+		// stores the plugin
 		this.delegation = delegation;
+		// sets teh plugin ID
 		setValue(Property.id, delegation.getId());
 		// registers itself with all methods of plugin definition
 		registerNativePluginsHandler(getJavaScriptObject());
 	}
 
+	/**
+	 * Returns the chart instances which must be consumed by plugin.
+	 * 
+	 * @param chartId chart id.
+	 * @return the chart instance or <code>null</code> if not found.
+	 */
 	abstract AbstractChart<?, ?> getChart(String chartId);
-	
+
 	/**
 	 * Returns the plugin id.
 	 * 
@@ -69,26 +76,45 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 		return delegation.getId();
 	}
 
-	private JavaScriptObject getOptions(String chartId){
+	/**
+	 * Returns the options that the user specified into the chart option
+	 * 
+	 * @param chartId chart instance id
+	 * @return the java script object with options or <code>null</code> if not exist.
+	 */
+	private JavaScriptObject getOptions(AbstractChart<?, ?> chart) {
 		try {
-			return getChart(chartId).getOptions().getPlugins().getOptions(getId());
+			// returns the options of chart, stored by plugin id
+			return chart.getOptions().getPlugins().getOptions(getId());
 		} catch (InvalidPluginIdException e) {
+			// plugin id is invalid
+			// returns null
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Called before initializing 'chart'.
 	 */
 	protected void onBeforeInit(String chartId) {
-		delegation.onBeforeInit(getChart(chartId), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			delegation.onBeforeInit(chart, getOptions(chart));
+		}
 	}
 
 	/**
 	 * Called after 'chart' has been initialized and before the first update.
 	 */
 	protected void onAfterInit(String chartId) {
-		delegation.onAfterInit(getChart(chartId), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			delegation.onAfterInit(chart, getOptions(chart));
+		}
 	}
 
 	/**
@@ -98,7 +124,13 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to cancel the chart update.
 	 */
 	protected boolean onBeforeUpdate(String chartId) {
-		return delegation.onBeforeUpdate(getChart(chartId), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			return delegation.onBeforeUpdate(chart, getOptions(chart));
+		}
+		return true;
 	}
 
 	/**
@@ -106,7 +138,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * has been previously cancelled.
 	 */
 	protected void onAfterUpdate(String chartId) {
-		delegation.onAfterUpdate(getChart(chartId), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			delegation.onAfterUpdate(chart, getOptions(chart));
+		}
 	}
 
 	/**
@@ -116,7 +153,13 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to cancel the chart layout.
 	 */
 	protected boolean onBeforeLayout(String chartId) {
-		return delegation.onBeforeLayout(getChart(chartId), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			return delegation.onBeforeLayout(chart, getOptions(chart));
+		}
+		return true;
 	}
 
 	/**
@@ -124,7 +167,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * previously cancelled.
 	 */
 	protected void onAfterLayout(String chartId) {
-		delegation.onAfterLayout(getChart(chartId), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			delegation.onAfterLayout(chart, getOptions(chart));
+		}
 	}
 
 	/**
@@ -134,7 +182,13 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to cancel the datasets update.
 	 */
 	protected boolean onBeforeDatasetsUpdate(String chartId) {
-		return delegation.onBeforeDatasetsUpdate(getChart(chartId), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			return delegation.onBeforeDatasetsUpdate(chart, getOptions(chart));
+		}
+		return true;
 	}
 
 	/**
@@ -142,7 +196,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * been previously cancelled.
 	 */
 	protected void onAfterDatasetsUpdate(String chartId) {
-		delegation.onAfterDatasetsUpdate(getChart(chartId), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			delegation.onAfterDatasetsUpdate(chart, getOptions(chart));
+		}
 	}
 
 	/**
@@ -153,7 +212,13 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
 	protected boolean onBeforeDatasetUpdate(String chartId, int datasetIndex) {
-		return delegation.onBeforeDatasetUpdate(getChart(chartId), datasetIndex, getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			return delegation.onBeforeDatasetUpdate(chart, datasetIndex, getOptions(chart));
+		}
+		return true;
 	}
 
 	/**
@@ -163,7 +228,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param datasetIndex The dataset index.
 	 */
 	protected void onAfterDatasetUpdate(String chartId, int datasetIndex) {
-		delegation.onAfterDatasetUpdate(getChart(chartId), datasetIndex, getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			delegation.onAfterDatasetUpdate(chart, datasetIndex, getOptions(chart));
+		}
 	}
 
 	/**
@@ -173,7 +243,13 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to cancel the chart rendering.
 	 */
 	protected boolean onBeforeRender(String chartId) {
-		return delegation.onBeforeRender(getChart(chartId), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			return delegation.onBeforeRender(chart, getOptions(chart));
+		}
+		return true;
 	}
 
 	/**
@@ -181,7 +257,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * rendering has been previously cancelled.
 	 */
 	protected void onAfterRender(String chartId) {
-		delegation.onAfterRender(getChart(chartId), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			delegation.onAfterRender(chart, getOptions(chart));
+		}
 	}
 
 	/**
@@ -192,7 +273,13 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to cancel the chart drawing.
 	 */
 	protected boolean onBeforeDraw(String chartId, String easing) {
-		return delegation.onBeforeDraw(getChart(chartId), Double.valueOf(easing), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			return delegation.onBeforeDraw(chart, Double.valueOf(easing), getOptions(chart));
+		}
+		return true;
 	}
 
 	/**
@@ -202,7 +289,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
 	protected void onAfterDraw(String chartId, String easing) {
-		delegation.onAfterDraw(getChart(chartId), Double.valueOf(easing), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			delegation.onAfterDraw(chart, Double.valueOf(easing), getOptions(chart));
+		}
 	}
 
 	/**
@@ -213,7 +305,13 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
 	protected boolean onBeforeDatasetsDraw(String chartId, String easing) {
-		return delegation.onBeforeDatasetsDraw(getChart(chartId), Double.valueOf(easing), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			return delegation.onBeforeDatasetsDraw(chart, Double.valueOf(easing), getOptions(chart));
+		}
+		return true;
 	}
 
 	/**
@@ -223,7 +321,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
 	protected void onAfterDatasetsDraw(String chartId, String easing) {
-		delegation.onAfterDatasetsDraw(getChart(chartId), Double.valueOf(easing), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			delegation.onAfterDatasetsDraw(chart, Double.valueOf(easing), getOptions(chart));
+		}
 	}
 
 	/**
@@ -235,7 +338,13 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
 	protected boolean onBeforeDatasetDraw(String chartId, int datasetIndex, String easing) {
-		return delegation.onBeforeDatasetDraw(getChart(chartId), datasetIndex, Double.valueOf(easing), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			return delegation.onBeforeDatasetDraw(chart, datasetIndex, Double.valueOf(easing), getOptions(chart));
+		}
+		return true;
 	}
 
 	/**
@@ -246,7 +355,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
 	protected void onAfterDatasetDraw(String chartId, int datasetIndex, String easing) {
-		delegation.onAfterDatasetDraw(getChart(chartId), datasetIndex, Double.valueOf(easing), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			delegation.onAfterDatasetDraw(chart, datasetIndex, Double.valueOf(easing), getOptions(chart));
+		}
 	}
 
 	/**
@@ -259,7 +373,13 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to cancel the chart tooltip drawing.
 	 */
 	protected boolean onBeforeTooltipDraw(String chartId, TooltipModel model, String easing) {
-		return delegation.onBeforeTooltipDraw(getChart(chartId), model, Double.valueOf(easing), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			return delegation.onBeforeTooltipDraw(chart, model, Double.valueOf(easing), getOptions(chart));
+		}
+		return true;
 	}
 
 	/**
@@ -270,7 +390,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
 	protected void onAfterTooltipDraw(String chartId, TooltipModel model, String easing) {
-		delegation.onAfterTooltipDraw(getChart(chartId), model, Double.valueOf(easing), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			delegation.onAfterTooltipDraw(chart, model, Double.valueOf(easing), getOptions(chart));
+		}
 	}
 
 	/**
@@ -280,7 +405,13 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @return <code>false</code> to discard the event.
 	 */
 	protected boolean onBeforeEvent(String chartId, ChartNativeEvent event) {
-		return delegation.onBeforeEvent(getChart(chartId), event, getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			return delegation.onBeforeEvent(chart, event, getOptions(chart));
+		}
+		return true;
 	}
 
 	/**
@@ -290,7 +421,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param event The event object.
 	 */
 	protected void onAfterEvent(String chartId, ChartNativeEvent event) {
-		delegation.onAfterEvent(getChart(chartId), event, getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			delegation.onAfterEvent(chart, event, getOptions(chart));
+		}
 	}
 
 	/**
@@ -299,14 +435,24 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param item The new canvas display size (eq. canvas.style width & height).
 	 */
 	protected void onResize(String chartId, SizeItem item) {
-		delegation.onResize(getChart(chartId), item, getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			delegation.onResize(chart, item, getOptions(chart));
+		}
 	}
 
 	/**
 	 * Called after the chart as been destroyed.
 	 */
 	protected void onDestroy(String chartId) {
-		delegation.onDestroy(getChart(chartId), getOptions(chartId));
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls plugin
+		if (chart != null) {
+			delegation.onDestroy(chart, getOptions(chart));
+		}
 	}
 
 	/**

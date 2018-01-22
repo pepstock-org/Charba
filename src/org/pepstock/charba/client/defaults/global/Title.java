@@ -22,7 +22,7 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 
 /**
- * Configures the chart title which defines text to draw at the top of the chart.<br>
+ * Configures the default chart title which defines text to draw at the top of the chart.<br>
  * "weight"property is not present.
  * 
  * @author Andrea "Stock" Stocchero
@@ -52,14 +52,18 @@ public final class Title extends FontItem {
 	}
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object with parent item and child.
 	 * 
-	 * @param chart chart instance
+	 * @param parent parent item.
+	 * @param childKey key of child.
 	 */
 	Title(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
 	}
-
+	
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.FontItem#getFontStyle()
+	 */
 	@Override
 	public FontStyle getFontStyle() {
 		return getValue(Property.fontStyle, FontStyle.class, FontStyle.bold);
@@ -72,6 +76,7 @@ public final class Title extends FontItem {
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -92,6 +97,7 @@ public final class Title extends FontItem {
 	 */
 	public void setPosition(Position position) {
 		setValue(Property.position, position);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -112,6 +118,7 @@ public final class Title extends FontItem {
 	 */
 	public void setPadding(int padding) {
 		setValue(Property.padding, padding);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -131,6 +138,7 @@ public final class Title extends FontItem {
 	 */
 	public void setFullWidth(boolean fullWidth) {
 		setValue(Property.fullWidth, fullWidth);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -150,6 +158,7 @@ public final class Title extends FontItem {
 	 */
 	public void setLineHeight(double lineHeight) {
 		setValue(Property.lineHeight, lineHeight);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 

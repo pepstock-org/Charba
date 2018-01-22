@@ -20,10 +20,11 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.AbstractItem;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TooltipPosition;
 
 /**
- * Configuration element to set all attributes and features of the tooltip.
+ * Configuration element to set all attributes and features of the default tooltip.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -70,11 +71,6 @@ public final class Tooltips extends AbstractItem {
 
 	private static final int DEFAULT_BORDER_WIDTH = 0;
 
-	// FIXME
-	// "titleAlign": "left",
-	// "bodyAlign": "left",
-	// "footerAlign": "left",
-
 	/**
 	 * Name of fields of JavaScript object.
 	 */
@@ -91,17 +87,20 @@ public final class Tooltips extends AbstractItem {
 		titleFontColor,
 		titleSpacing,
 		titleMarginBottom,
+		titleAlign,
 		bodyFontFamily,
 		bodyFontSize,
 		bodyFontStyle,
 		bodyFontColor,
 		bodySpacing,
+		bodyAlign,
 		footerFontFamily,
 		footerFontSize,
 		footerFontStyle,
 		footerFontColor,
 		footerSpacing,
 		footerMarginTop,
+		footerAlign,
 		xPadding,
 		yPadding,
 		caretPadding,
@@ -114,8 +113,10 @@ public final class Tooltips extends AbstractItem {
 	}
 
 	/**
-	 * Builds the object storing the chart instance.<br>
+	 * Builds the object with parent item and child.
 	 * 
+	 * @param parent parent item.
+	 * @param childKey key of child.
 	 */
 	Tooltips(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
@@ -128,6 +129,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setEnabled(boolean enabled) {
 		setValue(Property.enabled, enabled);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -148,6 +150,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setMode(InteractionMode mode) {
 		setValue(Property.mode, mode);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -171,6 +174,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setIntersect(boolean intersect) {
 		setValue(Property.intersect, intersect);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -193,6 +197,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setPosition(TooltipPosition position) {
 		setValue(Property.position, position);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -213,6 +218,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setBackgroundColor(String backgroundColor) {
 		setValue(Property.backgroundColor, backgroundColor);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -232,13 +238,14 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setTitleFontFamily(String titleFontFamily) {
 		setValue(Property.titleFontFamily, titleFontFamily);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the title font.
 	 * 
-	 * @return the title font. Default is "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif".
+	 * @return the title font. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
 	 */
 	public String getTitleFontFamily() {
 		return getValue(Property.titleFontFamily, Defaults.getGlobal().getDefaultFontFamily());
@@ -251,13 +258,14 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setTitleFontSize(int titleFontSize) {
 		setValue(Property.titleFontSize, titleFontSize);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the title font size.
 	 * 
-	 * @return Title font size. Default is 12.
+	 * @return Title font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
 	 */
 	public int getTitleFontSize() {
 		return getValue(Property.titleFontSize, Defaults.getGlobal().getDefaultFontSize());
@@ -271,6 +279,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setTitleFontStyle(FontStyle titleFontStyle) {
 		setValue(Property.titleFontStyle, titleFontStyle);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -285,12 +294,35 @@ public final class Tooltips extends AbstractItem {
 	}
 
 	/**
+	 * Sets the title alignment.
+	 * 
+	 * @param align title alignment.
+	 * @see org.pepstock.charba.client.enums.TextAlign
+	 */
+	public void setTitleAlign(TextAlign align) {
+		setValue(Property.titleAlign, align);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the title alignment.
+	 * 
+	 * @return title alignment. Default is {@link org.pepstock.charba.client.enums.TextAlign#left}.
+	 * @see org.pepstock.charba.client.enums.TextAlign
+	 */
+	public TextAlign getTitleAlign() {
+		return getValue(Property.titleAlign, TextAlign.class, TextAlign.left);
+	}
+
+	/**
 	 * Sets the title font color.
 	 * 
 	 * @param titleFontColor title font color.
 	 */
 	public void setTitleFontColor(String titleFontColor) {
 		setValue(Property.titleFontColor, titleFontColor);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -310,6 +342,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setTitleSpacing(int titleSpacing) {
 		setValue(Property.titleSpacing, titleSpacing);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -329,6 +362,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setTitleMarginBottom(int titleMarginBottom) {
 		setValue(Property.titleMarginBottom, titleMarginBottom);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -348,13 +382,14 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setBodyFontFamily(String bodyFontFamily) {
 		setValue(Property.bodyFontFamily, bodyFontFamily);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the body line font.
 	 * 
-	 * @return body line font. Default is "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif".
+	 * @return body line font. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
 	 */
 	public String getBodyFontFamily() {
 		return getValue(Property.bodyFontFamily, Defaults.getGlobal().getDefaultFontFamily());
@@ -367,13 +402,14 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setBodyFontSize(int bodyFontSize) {
 		setValue(Property.bodyFontSize, bodyFontSize);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the body font size.
 	 * 
-	 * @return body font size. Default is 12.
+	 * @return body font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
 	 */
 	public int getBodyFontSize() {
 		return getValue(Property.bodyFontSize, Defaults.getGlobal().getDefaultFontSize());
@@ -387,6 +423,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setBodyFontStyle(FontStyle bodyFontStyle) {
 		setValue(Property.bodyFontStyle, bodyFontStyle);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -401,12 +438,35 @@ public final class Tooltips extends AbstractItem {
 	}
 
 	/**
+	 * Sets the body alignment.
+	 * 
+	 * @param align body alignment.
+	 * @see org.pepstock.charba.client.enums.TextAlign
+	 */
+	public void setBodyAlign(TextAlign align) {
+		setValue(Property.bodyAlign, align);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the body alignment.
+	 * 
+	 * @return body alignment. Default is {@link org.pepstock.charba.client.enums.TextAlign#left}.
+	 * @see org.pepstock.charba.client.enums.TextAlign
+	 */
+	public TextAlign getBodyAlign() {
+		return getValue(Property.bodyAlign, TextAlign.class, TextAlign.left);
+	}
+
+	/**
 	 * Sets the body font color.
 	 * 
 	 * @param bodyFontColor body font color.
 	 */
 	public void setBodyFontColor(String bodyFontColor) {
 		setValue(Property.bodyFontColor, bodyFontColor);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -426,6 +486,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setBodySpacing(int bodySpacing) {
 		setValue(Property.bodySpacing, bodySpacing);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -445,13 +506,14 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setFooterFontFamily(String footerFontFamily) {
 		setValue(Property.footerFontFamily, footerFontFamily);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the footer font.
 	 * 
-	 * @return footer font. Default is "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif".
+	 * @return footer font. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
 	 */
 	public String getFooterFontFamily() {
 		return getValue(Property.footerFontFamily, Defaults.getGlobal().getDefaultFontFamily());
@@ -464,13 +526,14 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setFooterFontSize(int footerFontSize) {
 		setValue(Property.footerFontSize, footerFontSize);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the footer font size.
 	 * 
-	 * @return footer font size. Default is 12.
+	 * @return footer font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
 	 */
 	public int getFooterFontSize() {
 		return getValue(Property.footerFontSize, Defaults.getGlobal().getDefaultFontSize());
@@ -483,6 +546,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setFooterFontStyle(FontStyle footerFontStyle) {
 		setValue(Property.footerFontStyle, footerFontStyle);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -497,12 +561,35 @@ public final class Tooltips extends AbstractItem {
 	}
 
 	/**
+	 * Sets the footer alignment.
+	 * 
+	 * @param align footer alignment.
+	 * @see org.pepstock.charba.client.enums.TextAlign
+	 */
+	public void setFooterAlign(TextAlign align) {
+		setValue(Property.footerAlign, align);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the body alignment.
+	 * 
+	 * @return footer alignment. Default is {@link org.pepstock.charba.client.enums.TextAlign#left}.
+	 * @see org.pepstock.charba.client.enums.TextAlign
+	 */
+	public TextAlign getFooterAlign() {
+		return getValue(Property.footerAlign, TextAlign.class, TextAlign.left);
+	}
+
+	/**
 	 * Sets the footer font color.
 	 * 
 	 * @param footerFontColor footer font color.
 	 */
 	public void setFooterFontColor(String footerFontColor) {
 		setValue(Property.footerFontColor, footerFontColor);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -522,6 +609,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setFooterSpacing(int footerSpacing) {
 		setValue(Property.footerSpacing, footerSpacing);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -541,6 +629,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setFooterMarginTop(int footerMarginTop) {
 		setValue(Property.footerMarginTop, footerMarginTop);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -560,6 +649,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setXPadding(int xPadding) {
 		setValue(Property.xPadding, xPadding);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -579,6 +669,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setYPadding(int yPadding) {
 		setValue(Property.yPadding, yPadding);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -598,6 +689,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setCaretPadding(int caretPadding) {
 		setValue(Property.caretPadding, caretPadding);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -617,6 +709,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setCaretSize(int caretSize) {
 		setValue(Property.caretSize, caretSize);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -636,6 +729,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setCornerRadius(int cornerRadius) {
 		setValue(Property.cornerRadius, cornerRadius);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -655,6 +749,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setMultiKeyBackground(String multiKeyBackground) {
 		setValue(Property.multiKeyBackground, multiKeyBackground);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -674,6 +769,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setDisplayColors(boolean displayColors) {
 		setValue(Property.displayColors, displayColors);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -693,6 +789,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setBorderColor(String borderColor) {
 		setValue(Property.borderColor, borderColor);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -712,6 +809,7 @@ public final class Tooltips extends AbstractItem {
 	 */
 	public void setBorderWidth(int borderWidth) {
 		setValue(Property.borderWidth, borderWidth);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 

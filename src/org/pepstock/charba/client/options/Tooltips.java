@@ -24,6 +24,7 @@ import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TooltipPosition;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipModel;
@@ -64,17 +65,20 @@ public final class Tooltips extends ChartContainer {
 		titleFontColor,
 		titleSpacing,
 		titleMarginBottom,
+		titleAlign,
 		bodyFontFamily,
 		bodyFontSize,
 		bodyFontStyle,
 		bodyFontColor,
 		bodySpacing,
+		bodyAlign,
 		footerFontFamily,
 		footerFontSize,
 		footerFontStyle,
 		footerFontColor,
 		footerSpacing,
 		footerMarginTop,
+		footerAlign,
 		xPadding,
 		yPadding,
 		caretPadding,
@@ -310,6 +314,26 @@ public final class Tooltips extends ChartContainer {
 	public FontStyle getTitleFontStyle() {
 		return getValue(Property.titleFontStyle, FontStyle.class, getChart().getGlobal().getTooltips().getTitleFontStyle());
 	}
+	
+	/**
+	 * Sets the title alignment.
+	 * 
+	 * @param align title alignment.
+	 * @see org.pepstock.charba.client.enums.TextAlign
+	 */
+	public void setTitleAlign(TextAlign align) {
+		setValue(Property.titleAlign, align);
+	}
+
+	/**
+	 * Returns the title alignment.
+	 * 
+	 * @return title alignment. Default is {@link org.pepstock.charba.client.enums.TextAlign#left}.
+	 * @see org.pepstock.charba.client.enums.TextAlign
+	 */
+	public TextAlign getTitleAlign() {
+		return getValue(Property.titleAlign, TextAlign.class, getChart().getGlobal().getTooltips().getTitleAlign());
+	}
 
 	/**
 	 * Sets the title font color.
@@ -422,6 +446,26 @@ public final class Tooltips extends ChartContainer {
 	}
 
 	/**
+	 * Sets the body alignment.
+	 * 
+	 * @param align body alignment.
+	 * @see org.pepstock.charba.client.enums.TextAlign
+	 */
+	public void setBodyAlign(TextAlign align) {
+		setValue(Property.bodyAlign, align);
+	}
+
+	/**
+	 * Returns the body alignment.
+	 * 
+	 * @return body alignment. Default is {@link org.pepstock.charba.client.enums.TextAlign#left}.
+	 * @see org.pepstock.charba.client.enums.TextAlign
+	 */
+	public TextAlign getBodyAlign() {
+		return getValue(Property.bodyAlign, TextAlign.class, getChart().getGlobal().getTooltips().getBodyAlign());
+	}
+
+	/**
 	 * Sets the body font color.
 	 * 
 	 * @param bodyFontColor body font color.
@@ -512,6 +556,26 @@ public final class Tooltips extends ChartContainer {
 		return getValue(Property.footerFontStyle, FontStyle.class, getChart().getGlobal().getTooltips().getFooterFontStyle());
 	}
 
+	/**
+	 * Sets the footer alignment.
+	 * 
+	 * @param align footer alignment.
+	 * @see org.pepstock.charba.client.enums.TextAlign
+	 */
+	public void setFooterAlign(TextAlign align) {
+		setValue(Property.footerAlign, align);
+	}
+
+	/**
+	 * Returns the footer alignment.
+	 * 
+	 * @return footer alignment. Default is {@link org.pepstock.charba.client.enums.TextAlign#left}.
+	 * @see org.pepstock.charba.client.enums.TextAlign
+	 */
+	public TextAlign getFooterAlign() {
+		return getValue(Property.footerAlign, TextAlign.class, getChart().getGlobal().getTooltips().getFooterAlign());
+	}
+	
 	/**
 	 * Sets the footer font color.
 	 * 
