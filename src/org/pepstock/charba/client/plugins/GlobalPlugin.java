@@ -20,7 +20,7 @@ import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.Plugin;
 
 /**
- * Wraps a plugin, delegating the execution of all hooks to it.<br>
+ * Wraps a plugin (GLOBAL plugin), delegating the execution of all hooks to it.<br>
  * The wrapper is mandatory to able to catch all hooks of chart even if the plugin implements just a part of the hooks.
  * 
  * @author Andrea "Stock" Stocchero
@@ -29,15 +29,17 @@ import org.pepstock.charba.client.Plugin;
 class GlobalPlugin extends WrapperPlugin {
 
 	/**
-	 * Builds the object with the chart and plugin instances
+	 * Builds the object with plugin instance
 	 * 
-	 * @param chart chart instance
 	 * @param delegation plugin instance
 	 */
 	GlobalPlugin(Plugin delegation) {
 		super(delegation);
 	}
-
+	
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.plugins.WrapperPlugin#getChart(java.lang.String)
+	 */
 	@Override
 	AbstractChart<?, ?> getChart(String chartId) {
 		return Charts.get(chartId);

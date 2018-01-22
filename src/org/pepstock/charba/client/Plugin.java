@@ -22,7 +22,7 @@ import org.pepstock.charba.client.items.TooltipModel;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * This interface is defining the extension hook for Chart.JS plugin implementation (a.k.a. <i>inline plugins</i>).<br>
+ * This interface is defining the extension hook for Chart.JS plugin implementation (both for <i>inline</i> and <i>global</i> plugins).<br>
  * Plugins are the most efficient way to customize or change the default behavior of a chart.
  * 
  * @author Andrea "Stock" Stocchero
@@ -48,6 +48,7 @@ public interface Plugin {
 	 * Called before initializing 'chart'.
 	 * 
 	 * @param chart The chart instance.
+	 * @param options plugin options set by user into chart options.
 	 */
 	void onBeforeInit(AbstractChart<?, ?> chart, JavaScriptObject options);
 
@@ -55,6 +56,7 @@ public interface Plugin {
 	 * Called after 'chart' has been initialized and before the first update.
 	 * 
 	 * @param chart The chart instance.
+	 * @param options plugin options set by user into chart options.
 	 */
 	void onAfterInit(AbstractChart<?, ?> chart, JavaScriptObject options);
 
@@ -63,6 +65,7 @@ public interface Plugin {
 	 * render(s)) until another 'update' is triggered.
 	 * 
 	 * @param chart The chart instance.
+	 * @param options plugin options set by user into chart options.
 	 * @return <code>false</code> to cancel the chart update.
 	 */
 	boolean onBeforeUpdate(AbstractChart<?, ?> chart, JavaScriptObject options);
@@ -72,6 +75,7 @@ public interface Plugin {
 	 * has been previously cancelled.
 	 * 
 	 * @param chart The chart instance.
+	 * @param options plugin options set by user into chart options.
 	 */
 	void onAfterUpdate(AbstractChart<?, ?> chart, JavaScriptObject options);
 
@@ -80,6 +84,7 @@ public interface Plugin {
 	 * 'update' is triggered.
 	 * 
 	 * @param chart The chart instance.
+	 * @param options plugin options set by user into chart options.
 	 * @return <code>false</code> to cancel the chart layout.
 	 */
 	boolean onBeforeLayout(AbstractChart<?, ?> chart, JavaScriptObject options);
@@ -89,6 +94,7 @@ public interface Plugin {
 	 * previously cancelled.
 	 * 
 	 * @param chart The chart instance.
+	 * @param options plugin options set by user into chart options.
 	 */
 	void onAfterLayout(AbstractChart<?, ?> chart, JavaScriptObject options);
 
@@ -97,6 +103,7 @@ public interface Plugin {
 	 * until another 'update' is triggered.
 	 * 
 	 * @param chart The chart instance.
+	 * @param options plugin options set by user into chart options.
 	 * @return <code>false</code> to cancel the datasets update.
 	 */
 	boolean onBeforeDatasetsUpdate(AbstractChart<?, ?> chart, JavaScriptObject options);
@@ -106,6 +113,7 @@ public interface Plugin {
 	 * been previously cancelled.
 	 * 
 	 * @param chart The chart instance.
+	 * @param options plugin options set by user into chart options.
 	 */
 	void onAfterDatasetsUpdate(AbstractChart<?, ?> chart, JavaScriptObject options);
 
@@ -115,6 +123,7 @@ public interface Plugin {
 	 * 
 	 * @param chart The chart instance.
 	 * @param datasetIndex The dataset index.
+	 * @param options plugin options set by user into chart options.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
 	boolean onBeforeDatasetUpdate(AbstractChart<?, ?> chart, int datasetIndex, JavaScriptObject options);
@@ -125,6 +134,7 @@ public interface Plugin {
 	 * 
 	 * @param chart The chart instance.
 	 * @param datasetIndex The dataset index.
+	 * @param options plugin options set by user into chart options.
 	 */
 	void onAfterDatasetUpdate(AbstractChart<?, ?> chart, int datasetIndex, JavaScriptObject options);
 
@@ -133,6 +143,7 @@ public interface Plugin {
 	 * 'render' is triggered.
 	 * 
 	 * @param chart The chart instance.
+	 * @param options plugin options set by user into chart options.
 	 * @return <code>false</code> to cancel the chart rendering.
 	 */
 	boolean onBeforeRender(AbstractChart<?, ?> chart, JavaScriptObject options);
@@ -142,6 +153,7 @@ public interface Plugin {
 	 * rendering has been previously cancelled.
 	 * 
 	 * @param chart The chart instance.
+	 * @param options plugin options set by user into chart options.
 	 */
 	void onAfterRender(AbstractChart<?, ?> chart, JavaScriptObject options);
 
@@ -151,6 +163,7 @@ public interface Plugin {
 	 * 
 	 * @param chart The chart instance.
 	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @param options plugin options set by user into chart options.
 	 * @return <code>false</code> to cancel the chart drawing.
 	 */
 	boolean onBeforeDraw(AbstractChart<?, ?> chart, double easing, JavaScriptObject options);
@@ -161,6 +174,7 @@ public interface Plugin {
 	 * 
 	 * @param chart The chart instance.
 	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @param options plugin options set by user into chart options.
 	 */
 	void onAfterDraw(AbstractChart<?, ?> chart, double easing, JavaScriptObject options);
 
@@ -170,6 +184,7 @@ public interface Plugin {
 	 * 
 	 * @param chart The chart instance.
 	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @param options plugin options set by user into chart options.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
 	boolean onBeforeDatasetsDraw(AbstractChart<?, ?> chart, double easing, JavaScriptObject options);
@@ -180,6 +195,7 @@ public interface Plugin {
 	 * 
 	 * @param chart The chart instance.
 	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @param options plugin options set by user into chart options.
 	 */
 	void onAfterDatasetsDraw(AbstractChart<?, ?> chart, double easing, JavaScriptObject options);
 
@@ -190,6 +206,7 @@ public interface Plugin {
 	 * @param chart The chart instance.
 	 * @param datasetIndex The dataset index.
 	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @param options plugin options set by user into chart options.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
 	boolean onBeforeDatasetDraw(AbstractChart<?, ?> chart, int datasetIndex, double easing, JavaScriptObject options);
@@ -201,6 +218,7 @@ public interface Plugin {
 	 * @param chart The chart instance.
 	 * @param datasetIndex The dataset index.
 	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @param options plugin options set by user into chart options.
 	 */
 	void onAfterDatasetDraw(AbstractChart<?, ?> chart, int datasetIndex, double easing, JavaScriptObject options);
 
@@ -211,6 +229,7 @@ public interface Plugin {
 	 * @param chart The chart instance.
 	 * @param tooltip The tooltip instance.
 	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @param options plugin options set by user into chart options.
 	 * @return <code>false</code> to cancel the chart tooltip drawing.
 	 */
 	boolean onBeforeTooltipDraw(AbstractChart<?, ?> chart, TooltipModel tooltip, double easing, JavaScriptObject options);
@@ -222,6 +241,7 @@ public interface Plugin {
 	 * @param chart The chart instance.
 	 * @param tooltip The tooltip instance.
 	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @param options plugin options set by user into chart options.
 	 */
 	void onAfterTooltipDraw(AbstractChart<?, ?> chart, TooltipModel tooltip, double easing, JavaScriptObject options);
 
@@ -230,6 +250,7 @@ public interface Plugin {
 	 * 
 	 * @param chart The chart instance.
 	 * @param event The event object.
+	 * @param options plugin options set by user into chart options.
 	 * @return <code>false</code> to discard the event.
 	 */
 	boolean onBeforeEvent(AbstractChart<?, ?> chart, ChartNativeEvent event, JavaScriptObject options);
@@ -240,6 +261,7 @@ public interface Plugin {
 	 * 
 	 * @param chart The chart instance.
 	 * @param event The event object.
+	 * @param options plugin options set by user into chart options.
 	 */
 	void onAfterEvent(AbstractChart<?, ?> chart, ChartNativeEvent event, JavaScriptObject options);
 
@@ -248,6 +270,7 @@ public interface Plugin {
 	 * 
 	 * @param chart The chart instance.
 	 * @param size The new canvas display size (eq. canvas.style width & height).
+	 * @param options plugin options set by user into chart options.
 	 */
 	void onResize(AbstractChart<?, ?> chart, SizeItem size, JavaScriptObject options);
 
@@ -255,6 +278,7 @@ public interface Plugin {
 	 * Called after the chart as been destroyed.
 	 * 
 	 * @param chart The chart instance.
+	 * @param options plugin options set by user into chart options.
 	 */
 	void onDestroy(AbstractChart<?, ?> chart, JavaScriptObject options);
 }
