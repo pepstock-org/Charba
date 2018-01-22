@@ -492,7 +492,6 @@ abstract class LiningDataset extends Dataset{
 	    return checkAndGetDoubleValues(Property.pointRadius, isPointRadiusArray);
 	}
 
-	// FIXME mettere immagini
 	/**
 	 * Sets the style of the point.
 	 * @param pointStyle array of the style of the point.

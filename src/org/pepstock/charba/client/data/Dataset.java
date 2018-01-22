@@ -17,6 +17,7 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.JsDoubleArrayList;
@@ -106,16 +107,16 @@ public abstract class Dataset extends JavaScriptObjectContainer{
 	 * Sets the type of dataset based on type of chart.
 	 * @param type type of dataset.
 	 */
-	public void setType(String type){
+	public void setType(Type type){
 		  setValue(Property.type, type);
 	}
 
 	/**
 	 * Returns the type of dataset, based on type of chart.
 	 * @param type type of dataset.
-	 * FIXME usare chart type 
 	 */
-	public String getType(){
-		  return getValue(Property.type, null);
+	public Type getType(){
+		  return getValue(Property.type, Type.class, (Type)null);
 	}
+
 }
