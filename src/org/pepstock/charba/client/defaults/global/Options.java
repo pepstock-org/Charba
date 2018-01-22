@@ -36,16 +36,13 @@ import org.pepstock.charba.client.enums.FontStyle;
  * automatically based on the display size, making the rendering inaccurate.<br>
  * It provides a few options to enable responsiveness and control the resize behavior of charts by detecting when the canvas
  * display size changes and update the render size accordingly.<br>
- * <b> Legend </b><br>
- * Sometimes you need a very complex legend. In these cases, it makes sense to generate an HTML legend. Charts provide a
- * generateLegend() method on their prototype that returns an HTML string for the legend. To configure how this legend is
- * generated, you can set the legendCallback.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public class Options extends AbstractItem {
 
+	// default values
 	private static final boolean DEFAULT_RESPONSIVE = true;
 
 	private static final int DEFAULT_RESPONSIVE_ANIMATION_DURATION = 0;
@@ -72,6 +69,7 @@ public class Options extends AbstractItem {
 	
 	private static final double DEFAULT_START_ANGLE = -0.5 * Math.PI;
 
+	// internal children objects
 	private Hover hover;
 
 	private Elements elements;
@@ -121,8 +119,14 @@ public class Options extends AbstractItem {
 		scales
 	}
 
+	/**
+	 * Creates the object using the java script object with teh defaults provided by CHART.JS.
+	 * 
+	 * @param javaScriptObject the java script object with teh defaults provided by CHART.JS.
+	 */
 	public Options(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
+		// creates all children objects
 		hover = new Hover(this, Property.hover);
 		elements = new Elements(this, Property.elements);
 		layout = new Layout(this, Property.layout);
@@ -231,9 +235,9 @@ public class Options extends AbstractItem {
 	}
 
 	/**
-	 * Returns if should chart be animated or not Default value is <code>true</code>.
+	 * Returns if should chart be animated or not.
 	 * 
-	 * @return if should chart be animated or not Default value is <code>true</code>.
+	 * @return if should chart be animated or not. Default value is <code>true</code>.
 	 */
 	public boolean isAnimationEnable() {
 		return has(Property.animation);
@@ -294,51 +298,59 @@ public class Options extends AbstractItem {
 	}
 
 	/**
+	 * Sets the default color to use in the chart, on all objects, if not override by the specific configuration.
+	 * @param defaultColor color to use into chart. 
 	 */
 	public void setDefaultColor(String defaultColor) {
 		setValue(Property.defaultColor, defaultColor);
 	}
 
 	/**
+	 * Returns the default color to use in the chart, on all objects, if not override by the specific configuration.
+	 * @return color to use into chart. Default is "rgba(0,0,0,0.1)"
 	 */
 	public String getDefaultColor() {
 		return getValue(Property.defaultColor, DEFAULT_COLOR);
 	}
 
 	/**
+	 * Sets the default font color to use in the chart, on all objects, if not override by the specific configuration.
+	 * @param defaultFontColor font color to use into chart. 
 	 */
 	public void setDefaultFontColor(String defaultFontColor) {
 		setValue(Property.defaultFontColor, defaultFontColor);
 	}
 
 	/**
+	 * Returns the default font color to use in the chart, on all objects, if not override by the specific configuration.
+	 * @return  font color to use into chart. Default is #666.
 	 */
 	public String getDefaultFontColor() {
 		return getValue(Property.defaultFontColor, DEFAULT_FONT_COLOR);
 	}
 
 	/**
-	 * Sets the font size for label.
+	 * Sets the font size to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @param fontSize Font size for label.
+	 * @param fontSize Font size into chart.
 	 */
 	public void setDefaultFontSize(int fontSize) {
 		setValue(Property.defaultFontSize, fontSize);
 	}
 
 	/**
-	 * Returns the font size for label.
+	 * Returns the font size to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @return Font size for label.. Default is 12.
+	 * @return Font size into chart. Default is 12.
 	 */
 	public int getDefaultFontSize() {
 		return getValue(Property.defaultFontSize, DEFAULT_FONT_SIZE);
 	}
 
 	/**
-	 * Sets the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * Sets the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @param fontStyle Font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial,
+	 * @param fontStyle Font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-style options (i.e. normal, italic, oblique, initial,
 	 *            inherit).
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
@@ -347,10 +359,10 @@ public class Options extends AbstractItem {
 	}
 
 	/**
-	 * Returns the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * Returns the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 *         Default is normal
+	 * @return the font styleto use in the chart, on all objects, if not override by the specific configuration, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 *         Default is {@link org.pepstock.charba.client.enums.FontStyle#normal}.
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getDefaultFontStyle() {
@@ -358,18 +370,18 @@ public class Options extends AbstractItem {
 	}
 
 	/**
-	 * Sets the font family for the label, follows CSS font-family options.
+	 * Sets the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
 	 * 
-	 * @param fontFamily Font family for the label, follows CSS font-family options.
+	 * @param fontFamily Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
 	 */
 	public void setDefaultFontFamily(String fontFamily) {
 		setValue(Property.defaultFontFamily, fontFamily);
 	}
 
 	/**
-	 * Returns the font family for the label, follows CSS font-family options.
+	 * Returns the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
 	 * 
-	 * @return Font family for the label, follows CSS font-family options. Default is 'Helvetica Neue', 'Helvetica', 'Arial',
+	 * @return Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options. Default is 'Helvetica Neue', 'Helvetica', 'Arial',
 	 *         sans-serif
 	 */
 	public String getDefaultFontFamily() {
@@ -388,7 +400,7 @@ public class Options extends AbstractItem {
 	/**
 	 * If false, the lines between points are not drawn.
 	 * 
-	 * @return If false, the lines between points are not drawn.. Default is true.
+	 * @return If false, the lines between points are not drawn. Default is true.
 	 */
 	public boolean isShowLines() {
 		return getValue(Property.showLines, DEFAULT_SHOW_LINES);
@@ -440,7 +452,7 @@ public class Options extends AbstractItem {
 	}
 
 	/**
-	 * returns the starting angle to draw arcs from.
+	 * Returns the starting angle to draw arcs from.
 	 * 
 	 * @return starting angle to draw arcs from. Default is <code>-0.5 * Math.PI</code>.
 	 */
@@ -484,20 +496,42 @@ public class Options extends AbstractItem {
 		return getValue(Property.startAngle, DEFAULT_START_ANGLE);
 	}
 
+	/**
+	 * Internal scale implementation to allow the access to protected methods.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @see org.pepstock.charba.client.defaults.scale.Scale
+	 *
+	 */
 	private static class ScaleImpl extends Scale {
 
+		/**
+		 * Builds the object with parent item and child.
+		 * 
+		 * @param parent parent item
+		 * @param childKey key of child
+		 */
 		protected ScaleImpl(AbstractItem parent, Key childKey) {
 			super(parent, childKey);
 		}
-		
 	}
 
+	/**
+	 * Internal scales implementation to allow the access to protected methods.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @see org.pepstock.charba.client.defaults.scale.Scale
+	 */
 	private static class ScalesImpl extends Scales {
 
+		/**
+		 * Builds the object with parent item and child.
+		 * 
+		 * @param parent parent item
+		 * @param childKey key of child
+		 */
 		protected ScalesImpl(AbstractItem parent, Key childKey) {
 			super(parent, childKey);
 		}
-		
 	}
-
 }

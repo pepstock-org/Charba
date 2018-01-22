@@ -20,10 +20,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
- * Base object to map an axis tick.<br>
- * It is also common to want to change the tick marks to include information about the data type.<br>
- * To do this, you need to add a callback in the axis configuration. <br>
- * If the callback returns null or undefined the associated grid line will be hidden.
+ * Base object to map font options of globals.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -42,7 +39,10 @@ public class FontItem extends AbstractItem {
 	}
 
 	/**
-	 * Builds the object and registers the callback
+	 * Builds the object with parent item and child.
+	 * 
+	 * @param parent parent item
+	 * @param childKey key of child
 	 */
 	protected FontItem(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
@@ -55,6 +55,7 @@ public class FontItem extends AbstractItem {
 	 */
 	public void setFontSize(int fontSize) {
 		setValue(Property.fontSize, fontSize);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -75,13 +76,15 @@ public class FontItem extends AbstractItem {
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
 		setValue(Property.fontStyle, fontStyle);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontStyle()}.
+	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). Default is
+	 *         {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontStyle()}.
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
@@ -95,6 +98,7 @@ public class FontItem extends AbstractItem {
 	 */
 	public void setFontColor(String fontColor) {
 		setValue(Property.fontColor, fontColor);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -114,13 +118,15 @@ public class FontItem extends AbstractItem {
 	 */
 	public void setFontFamily(String fontFamily) {
 		setValue(Property.fontFamily, fontFamily);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the font family, follows CSS font-family options.
 	 * 
-	 * @return Font family, follows CSS font-family options. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
+	 * @return Font family, follows CSS font-family options. Default is
+	 *         {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
 	 */
 	public String getFontFamily() {
 		return getValue(Property.fontFamily, Defaults.getGlobal().getDefaultFontFamily());

@@ -34,7 +34,7 @@ import org.pepstock.charba.client.enums.JoinStyle;
  * dataset.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.LineChart
+ * 
  */
 public final class Line extends Arc {
 
@@ -69,7 +69,10 @@ public final class Line extends Arc {
 	}
 
 	/**
-	 * Builds the object setting java script objects
+	 * Builds the object with parent item and child.
+	 * 
+	 * @param parent parent item.
+	 * @param childKey key of child.
 	 */
 	Line(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
@@ -112,13 +115,14 @@ public final class Line extends Arc {
 	 */
 	public void setTension(double tension) {
 		setValue(Property.tension, tension);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the Bezier curve tension (0 for no Bezier curves).
 	 * 
-	 * @return the Bezier curve tension (0 for no Bezier curves).
+	 * @return the Bezier curve tension (0 for no Bezier curves). Default is 0.4F.
 	 */
 	public double getTension() {
 		return getValue(Property.tension, DEFAULT_TENSION);
@@ -133,6 +137,7 @@ public final class Line extends Arc {
 	 */
 	public void setBorderCapStyle(CapStyle borderCapStyle) {
 		setValue(Property.borderCapStyle, borderCapStyle);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -140,7 +145,7 @@ public final class Line extends Arc {
 	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are:
 	 * butt, round and square. By default this property is set to butt.
 	 * 
-	 * @return how the end points of every line are drawn.
+	 * @return how the end points of every line are drawn. Default is {@link org.pepstock.charba.client.enums.CapStyle#butt}.
 	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public CapStyle getBorderCapStyle() {
@@ -188,13 +193,14 @@ public final class Line extends Arc {
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
 		setValue(Property.borderDashOffset, borderDashOffset);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the line dash pattern offset or "phase".
 	 * 
-	 * @return the line dash pattern offset or "phase".
+	 * @return the line dash pattern offset or "phase". Default is 0.
 	 */
 	public int getBorderDashOffset() {
 		return getValue(Property.borderDashOffset, DEFAULT_BORDER_DASH_OFFSET);
@@ -212,6 +218,7 @@ public final class Line extends Arc {
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
 		setValue(Property.borderJoinStyle, borderJoinStyle);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -222,7 +229,7 @@ public final class Line extends Arc {
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
 	 * @return There are three possible values for this property: round, bevel and miter. By default this property is set to
-	 *         miter.
+	 *         miter. Default is {@link org.pepstock.charba.client.enums.JoinStyle#miter}.
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public JoinStyle getBorderJoinStyle() {
@@ -236,13 +243,14 @@ public final class Line extends Arc {
 	 */
 	public void setCapBezierPoints(boolean capBezierPoints) {
 		setValue(Property.capBezierPoints, capBezierPoints);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
 	 * 
-	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
+	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction. Default is <code>true</code>.
 	 */
 	public boolean isCapBezierPoints() {
 		return getValue(Property.capBezierPoints, DEFAULT_CAP_BEZIER_POINTS);
@@ -256,6 +264,7 @@ public final class Line extends Arc {
 	public void setFill(boolean fill) {
 		// sets the boolean value instead of string one
 		setValue(Property.fill, fill);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -274,13 +283,14 @@ public final class Line extends Arc {
 			// sets value
 			setValue(Property.fill, fill.name());
 		}
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns how to fill the area under the line.
 	 * 
-	 * @return how to fill the area under the line.
+	 * @return how to fill the area under the line. Default is {@link org.pepstock.charba.client.enums.Fill#origin}.
 	 * @see org.pepstock.charba.client.enums.Fill
 	 */
 	public Fill getFill() {
@@ -311,13 +321,14 @@ public final class Line extends Arc {
 	 */
 	public void setStepped(boolean stepped) {
 		setValue(Property.stepped, stepped);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 * 
-	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored).
+	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored). Default is <code>false</code>.
 	 */
 	public boolean isStepped() {
 		return getValue(Property.stepped, DEFAULT_STEPPED);

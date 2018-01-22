@@ -28,8 +28,6 @@ import org.pepstock.charba.client.enums.PointStyle;
  * dataset.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.LineChart
- * @see org.pepstock.charba.client.BubbleChart
  */
 public final class Point extends Arc {
 
@@ -61,7 +59,10 @@ public final class Point extends Arc {
 	}
 
 	/**
-	 * Builds the object setting java script objects
+	 * Builds the object with parent item and child.
+	 * 
+	 * @param parent parent item.
+	 * @param childKey key of child.
 	 */
 	Point(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
@@ -104,13 +105,14 @@ public final class Point extends Arc {
 	 */
 	public void setRadius(int radius) {
 		setValue(Property.radius, radius);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the radius of the point when hovered.
 	 * 
-	 * @return list of the radius of the point when hovered.
+	 * @return list of the radius of the point when hovered. Default is 3.
 	 */
 	public int getRadius() {
 		return getValue(Property.radius, DEFAULT_RADIUS);
@@ -124,13 +126,14 @@ public final class Point extends Arc {
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
 		setValue(Property.pointStyle, pointStyle);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the style of the point.
 	 * 
-	 * @return the style of the point. Default is <code>PointStyle.circle</code>
+	 * @return the style of the point. Default is {@link org.pepstock.charba.client.enums.PointStyle#circle}.
 	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public PointStyle getPointStyle() {
@@ -144,13 +147,14 @@ public final class Point extends Arc {
 	 */
 	public void setHitRadius(int hitRadius) {
 		setValue(Property.hitRadius, hitRadius);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the pixel size of the non-displayed point that reacts to mouse events.
 	 * 
-	 * @return the pixel size of the non-displayed point.
+	 * @return the pixel size of the non-displayed point. Default is 1.
 	 */
 	public int getHitRadius() {
 		return getValue(Property.hitRadius, DEFAULT_HIT_RADIUS);
@@ -163,13 +167,14 @@ public final class Point extends Arc {
 	 */
 	public void setHoverRadius(int hoverRadius) {
 		setValue(Property.hoverRadius, hoverRadius);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the radius of the point when hovered.
 	 * 
-	 * @return the radius of the point when hovered.
+	 * @return the radius of the point when hovered. Default is 4.
 	 */
 	public int getHoverRadius() {
 		return getValue(Property.hoverRadius, DEFAULT_HOVER_RADIUS);
@@ -182,13 +187,14 @@ public final class Point extends Arc {
 	 */
 	public void setHoverBorderWidth(int hoverBorderWidth) {
 		setValue(Property.hoverBorderWidth, hoverBorderWidth);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the border width of point when hovered.
 	 * 
-	 * @return the border width of point when hovered.
+	 * @return the border width of point when hovered.Default is 1.
 	 */
 	public int getHoverBorderWidth() {
 		return getValue(Property.hoverBorderWidth, DEFAULT_HOVER_BORDER_WIDTH);

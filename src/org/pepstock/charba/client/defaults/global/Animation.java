@@ -46,9 +46,10 @@ public final class Animation extends AbstractItem {
 	}
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object with parent item and child.
 	 * 
-	 * @param chart chart instance
+	 * @param parent parent item
+	 * @param childKey key of child
 	 */
 	Animation(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
@@ -62,6 +63,7 @@ public final class Animation extends AbstractItem {
 	 */
 	public void setEasing(Easing easing) {
 		setValue(Property.easing, easing);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -82,6 +84,7 @@ public final class Animation extends AbstractItem {
 	 */
 	public void setDuration(int milliseconds) {
 		setValue(Property.duration, milliseconds);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -101,6 +104,7 @@ public final class Animation extends AbstractItem {
 	 */
 	public void setAnimateRotate(boolean animateRotate) {
 		setValue(Property.animateRotate, animateRotate);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -120,6 +124,7 @@ public final class Animation extends AbstractItem {
 	 */
 	public void setAnimateScale(boolean animateScale) {
 		setValue(Property.animateScale, animateScale);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 

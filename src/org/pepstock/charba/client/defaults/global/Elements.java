@@ -47,10 +47,14 @@ public final class Elements extends AbstractItem {
 	}
 
 	/**
-	 * Builds the object setting java script objects
+	 * Builds the object with parent item and child.
+	 * 
+	 * @param parent parent item
+	 * @param childKey key of child
 	 */
 	Elements(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
+		// creates children items
 		point = new Point(this, Property.point);
 		arc = new Arc(this, Property.arc);
 		line = new Line(this, Property.line);

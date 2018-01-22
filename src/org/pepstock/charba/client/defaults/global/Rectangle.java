@@ -28,7 +28,6 @@ import org.pepstock.charba.client.enums.Position;
  * dataset.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.BarChart
  */
 public final class Rectangle extends Arc {
 
@@ -48,7 +47,10 @@ public final class Rectangle extends Arc {
 	}
 
 	/**
-	 * Builds the object setting java script objects
+	 * Builds the object with parent item and child.
+	 * 
+	 * @param parent parent item.
+	 * @param childKey key of child.
 	 */
 	Rectangle(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
@@ -88,16 +90,19 @@ public final class Rectangle extends Arc {
 	 * Sets the edge to skip drawing the border for.
 	 * 
 	 * @param position the edge to skip drawing the border for.
+	 * @see  org.pepstock.charba.client.enums.Position
 	 */
 	public void setBorderSkipped(Position borderSkipped) {
 		setValue(Property.borderSkipped, borderSkipped);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the edge to skip drawing the border for.
 	 * 
-	 * @return the edge to skip drawing the border for.
+	 * @return the edge to skip drawing the border for. Default is {@link  org.pepstock.charba.client.enums.Position#bottom}.
+	 * @see  org.pepstock.charba.client.enums.Position
 	 */
 	public Position getBorderJoinStyle() {
 		return getValue(Property.borderSkipped, Position.class, Position.bottom);
