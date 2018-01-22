@@ -41,7 +41,10 @@ public final class RadialAngleLines extends ChartContainer {
 	}
 
 	/**
-	 * Empty constructor to reduce visibility
+	 * Builds the object storing the chart instance and the axis which this angle lines belongs to.
+	 * 
+	 * @param chart chart instance.
+	 * @param axis axis which this angle lines belongs to.
 	 */
 	RadialAngleLines(AbstractChart<?, ?> chart, Axis axis) {
 		super(chart);
@@ -60,7 +63,7 @@ public final class RadialAngleLines extends ChartContainer {
 	/**
 	 * If true, angle lines are shown
 	 * 
-	 * @return if true, angle lines are shown. Default is true.
+	 * @return if true, angle lines are shown. 
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, axis.getScale().getAngleLines().isDisplay());
@@ -78,7 +81,7 @@ public final class RadialAngleLines extends ChartContainer {
 	/**
 	 * Returns the color of angled lines.
 	 * 
-	 * @return color of angled lines. Default is 'rgba(0, 0, 0, 0.1)'
+	 * @return color of angled lines. 
 	 */
 	public String getColor() {
 		return getValue(Property.color, axis.getScale().getAngleLines().getColor());
@@ -96,7 +99,7 @@ public final class RadialAngleLines extends ChartContainer {
 	/**
 	 * Returns the width of angled lines.
 	 * 
-	 * @return width of angled lines. Default is 1.
+	 * @return width of angled lines.
 	 */
 	public int getLineWidth() {
 		return getValue(Property.lineWidth, axis.getScale().getAngleLines().getLineWidth());

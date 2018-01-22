@@ -41,7 +41,9 @@ abstract class CartesianTick extends Tick {
 	}
 
 	/**
-	 * Empty constructor to reduce visibility
+	 * Builds the object storing the chart instance.
+	 * 
+	 * @param chart chart instance
 	 */
 	CartesianTick(AbstractChart<?, ?> chart) {
 		super(chart);
@@ -63,7 +65,7 @@ abstract class CartesianTick extends Tick {
 	 * labels no matter what
 	 * 
 	 * @return If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to
-	 *         show all labels no matter what. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#isAutoSkip()}.
+	 *         show all labels no matter what.
 	 */
 	public boolean isAutoSkip() {
 		return getValue(Property.autoSkip, getAxis().getScale().getTicks().isAutoSkip());
@@ -85,7 +87,7 @@ abstract class CartesianTick extends Tick {
 	 * horizontal scales.
 	 * 
 	 * @return padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal
-	 *         scales. Defualt is {@link org.pepstock.charba.client.defaults.scale.Ticks#getAutoSkipPadding()}.
+	 *         scales.
 	 */
 	public int getAutoSkipPadding() {
 		return getValue(Property.autoSkipPadding, getAxis().getScale().getTicks().getAutoSkipPadding());
@@ -109,7 +111,7 @@ abstract class CartesianTick extends Tick {
 	 * Note: this can cause labels at the edges to be cropped by the edge of the canvas.
 	 * 
 	 * @return the distance in pixels to offset the label from the centre point of the tick (in the y direction for the x axis,
-	 *         and the x direction for the y axis). Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getLabelOffset()}.
+	 *         and the x direction for the y axis). 
 	 */
 	public int getLabelOffset() {
 		return getValue(Property.labelOffset, getAxis().getScale().getTicks().getLabelOffset());
@@ -131,7 +133,7 @@ abstract class CartesianTick extends Tick {
 	 * necessary. Note: Only applicable to horizontal scales.
 	 * 
 	 * @return maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary.
-	 *         Note: Only applicable to horizontal scales. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getMaxRotation()}.
+	 *         Note: Only applicable to horizontal scales. 
 	 */
 	public int getMaxRotation() {
 		return getValue(Property.maxRotation, getAxis().getScale().getTicks().getMaxRotation());
@@ -149,7 +151,7 @@ abstract class CartesianTick extends Tick {
 	/**
 	 * Returns the minimum rotation for tick labels. Note: Only applicable to horizontal scales.
 	 * 
-	 * @return minimum rotation for tick labels. Note: Only applicable to horizontal scales. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getMinRotation()}.
+	 * @return minimum rotation for tick labels. Note: Only applicable to horizontal scales. 
 	 */
 	public int getMinRotation() {
 		return getValue(Property.minRotation, getAxis().getScale().getTicks().getMinRotation());
@@ -171,7 +173,7 @@ abstract class CartesianTick extends Tick {
 	 * applicable to vertical scales.
 	 * 
 	 * @return flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable
-	 *         to vertical scales. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#isMirror()}.
+	 *         to vertical scales.
 	 */
 	public boolean isMirror() {
 		return getValue(Property.mirror, getAxis().getScale().getTicks().isMirror());
@@ -193,7 +195,7 @@ abstract class CartesianTick extends Tick {
 	 * direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
 	 * 
 	 * @return padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X)
-	 *         direction. When set on a horizontal axis, this applies in the vertical (Y) direction. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getPadding()}.
+	 *         direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
 	 */
 	public int getPadding() {
 		return getValue(Property.padding, getAxis().getScale().getTicks().getPadding());

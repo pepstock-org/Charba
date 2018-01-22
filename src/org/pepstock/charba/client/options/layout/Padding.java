@@ -48,7 +48,7 @@ public final class Padding extends ChartContainer {
 	/**
 	 * Returns the padding left in pixel.
 	 * 
-	 * @return the padding left in pixel. Default is {@link org.pepstock.charba.client.defaults.global.Padding#getLeft()}.
+	 * @return the padding left in pixel.
 	 */
 	public int getLeft() {
 		return getValue(Position.left, getChart().getGlobal().getLayout().getPadding().getLeft());
@@ -66,7 +66,7 @@ public final class Padding extends ChartContainer {
 	/**
 	 * Returns the padding right in pixel.
 	 * 
-	 * @return the padding right in pixel. Default is {@link org.pepstock.charba.client.defaults.global.Padding#getRight()}.
+	 * @return the padding right in pixel.
 	 */
 	public int getRight() {
 		return getValue(Position.right, getChart().getGlobal().getLayout().getPadding().getRight());
@@ -84,7 +84,7 @@ public final class Padding extends ChartContainer {
 	/**
 	 * Returns the padding top in pixel.
 	 * 
-	 * @return the padding top in pixel. Default is {@link org.pepstock.charba.client.defaults.global.Padding#getTop()}.
+	 * @return the padding top in pixel.
 	 */
 	public int getTop() {
 		return getValue(Position.top, getChart().getGlobal().getLayout().getPadding().getTop());
@@ -102,7 +102,7 @@ public final class Padding extends ChartContainer {
 	/**
 	 * Returns the padding bottom in pixel.
 	 * 
-	 * @return the padding bottom in pixel. Default is {@link org.pepstock.charba.client.defaults.global.Padding#getBottom()}.
+	 * @return the padding bottom in pixel. 
 	 */
 	public int getBottom() {
 		return getValue(Position.bottom, getChart().getGlobal().getLayout().getPadding().getBottom());

@@ -45,7 +45,9 @@ public final class RadialLinearTick extends Tick {
 	}
 
 	/**
-	 * Empty constructor to reduce visibility
+	 * Builds the object storing the chart instance.
+	 * 
+	 * @param chart chart instance
 	 */
 	RadialLinearTick(AbstractChart<?, ?> chart) {
 		super(chart);
@@ -63,7 +65,7 @@ public final class RadialLinearTick extends Tick {
 	/**
 	 * If true, scale will include 0 if it is not already included.
 	 * 
-	 * @return if true, scale will include 0 if it is not already included.. Default is false
+	 * @return if true, scale will include 0 if it is not already included.
 	 */
 	public boolean isBeginAtZero() {
 		return getValue(Property.beginAtZero, getAxis().getScale().getTicks().isBeginAtZero());
@@ -81,7 +83,7 @@ public final class RadialLinearTick extends Tick {
 	/**
 	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
 	 * 
-	 * @return user defined minimum number for the scale, overrides minimum value from data.. Default is Double.MIN_VALUE
+	 * @return user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	public double getMin() {
 		return getValue(Property.min, getAxis().getScale().getTicks().getMin());
@@ -99,7 +101,7 @@ public final class RadialLinearTick extends Tick {
 	/**
 	 * Returns the user defined maximum number for the scale, overrides maximum value from data.
 	 * 
-	 * @return user defined maximum number for the scale, overrides maximum value from data. Default is Double.MAX_VALUE
+	 * @return user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	public double getMax() {
 		return getValue(Property.max, getAxis().getScale().getTicks().getMax());
@@ -117,7 +119,7 @@ public final class RadialLinearTick extends Tick {
 	/**
 	 * Returns the maximum number of ticks and gridlines to show.
 	 * 
-	 * @return maximum number of ticks and gridlines to show. Default is 11.
+	 * @return maximum number of ticks and gridlines to show.
 	 */
 	public int getMaxTicksLimit() {
 		return getValue(Property.maxTicksLimit, getAxis().getScale().getTicks().getMaxTicksLimit());
@@ -135,7 +137,7 @@ public final class RadialLinearTick extends Tick {
 	/**
 	 * Returns the user defined fixed step size for the scale.
 	 * 
-	 * @return user defined fixed step size for the scale. Default is Double.MIN_VALUE
+	 * @return user defined fixed step size for the scale.
 	 */
 	public double getStepSize() {
 		return getValue(Property.stepSize, getAxis().getScale().getTicks().getStepSize());
@@ -189,7 +191,7 @@ public final class RadialLinearTick extends Tick {
 	/**
 	 * Returns the color of label backdrops.
 	 * 
-	 * @return color of label backdrops. Default is 'rgba(255, 255, 255, 0.75)'
+	 * @return color of label backdrops.
 	 */
 	public String getBackdropColor() {
 		return getValue(Property.backdropColor, getAxis().getScale().getTicks().getBackdropColor());
@@ -207,7 +209,7 @@ public final class RadialLinearTick extends Tick {
 	/**
 	 * Returns the horizontal padding of label backdrop.
 	 * 
-	 * @return horizontal padding of label backdrop. Default is 2.
+	 * @return horizontal padding of label backdrop.
 	 */
 	public int getBackdropPaddingX() {
 		return getValue(Property.backdropPaddingX, getAxis().getScale().getTicks().getBackdropPaddingX());
@@ -225,7 +227,7 @@ public final class RadialLinearTick extends Tick {
 	/**
 	 * Returns the vertical padding of label backdrop.
 	 * 
-	 * @return vertical padding of label backdrop. Default is 2.
+	 * @return vertical padding of label backdrop.
 	 */
 	public int getBackdropPaddingY() {
 		return getValue(Property.backdropPaddingY, getAxis().getScale().getTicks().getBackdropPaddingY());
@@ -243,7 +245,7 @@ public final class RadialLinearTick extends Tick {
 	/**
 	 * If true, draw a background behind the tick labels.
 	 * 
-	 * @return if true, draw a background behind the tick labels. Default is true.
+	 * @return if true, draw a background behind the tick labels.
 	 */
 	public boolean isShowLabelBackdrop() {
 		return getValue(Property.showLabelBackdrop, getAxis().getScale().getTicks().isShowLabelBackdrop());

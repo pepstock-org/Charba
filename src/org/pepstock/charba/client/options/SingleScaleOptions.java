@@ -25,17 +25,19 @@ import org.pepstock.charba.client.options.scales.Axis;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class SingleScaleOptions extends BaseOptions{
+public abstract class SingleScaleOptions extends BaseOptions {
 
 	/**
 	 * Name of fields of JavaScript object.
 	 */
-	private enum Property implements Key {
+	private enum Property implements Key
+	{
 		scale
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance.
+	 * 
 	 * @param chart chart instance
 	 */
 	public SingleScaleOptions(AbstractChart<?, ?> chart) {
@@ -47,7 +49,7 @@ public abstract class SingleScaleOptions extends BaseOptions{
 	 * 
 	 * @param axis the axis.
 	 */
-	public void setAxis(Axis axis){
+	public void setAxis(Axis axis) {
 		// set java script array
 		setValue(Property.scale, axis);
 	}

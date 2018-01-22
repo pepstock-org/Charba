@@ -22,7 +22,7 @@ import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
 
 /**
- * Defintions about how elements appear in the tooltip, hovering the chart.
+ * Definitions about how elements appear in the tooltip, hovering the chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -41,7 +41,7 @@ public final class Hover extends ChartContainer {
 	}
 
 	/**
-	 * Empty constructor to reduce its visibility
+	 * Builds the object storing the chart instance.
 	 * 
 	 * @param chart chart instance
 	 */
@@ -62,7 +62,7 @@ public final class Hover extends ChartContainer {
 	/**
 	 * Returns which elements appear in the tooltip.
 	 * 
-	 * @return which elements appear in the tooltip. Default is {@link org.pepstock.charba.client.defaults.global.Hover#getMode()}.
+	 * @return which elements appear in the tooltip. For default see {@link org.pepstock.charba.client.GlobalOptions#getHover()}.
 	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
 	public InteractionMode getMode() {
@@ -81,7 +81,7 @@ public final class Hover extends ChartContainer {
 	/**
 	 * if true, the hover mode only applies when the mouse position intersects an item on the chart.
 	 * 
-	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart. Default is {@link org.pepstock.charba.client.defaults.global.Hover#isIntersect()}.
+	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart.  For default see {@link org.pepstock.charba.client.GlobalOptions#getHover()}.
 	 */
 	public boolean isIntersect() {
 		return getValue(Property.intersect, getChart().getGlobal().getHover().isIntersect());
@@ -99,7 +99,7 @@ public final class Hover extends ChartContainer {
 	/**
 	 * Returns the duration in milliseconds it takes to animate hover style changes.
 	 * 
-	 * @return duration in milliseconds it takes to animate hover style changes. Default is {@link org.pepstock.charba.client.defaults.global.Hover#getAnimationDuration()}.
+	 * @return duration in milliseconds it takes to animate hover style changes.  For default see {@link org.pepstock.charba.client.GlobalOptions#getHover()}.
 	 */
 	public int getAnimationDuration() {
 		return getValue(Property.animationDuration, getChart().getGlobal().getHover().getAnimationDuration());
@@ -119,7 +119,7 @@ public final class Hover extends ChartContainer {
 	/**
 	 * Returns to 'x', 'y', or 'xy' to define which directions are used in calculating distances.
 	 * 
-	 * @return define which directions are used in calculating distances. Default is {@link org.pepstock.charba.client.defaults.global.Hover#getAxis()}.
+	 * @return define which directions are used in calculating distances.  For default see {@link org.pepstock.charba.client.GlobalOptions#getHover()}.
 	 * @see org.pepstock.charba.client.enums.InteractionAxis
 	 */
 	public InteractionAxis getAxis() {

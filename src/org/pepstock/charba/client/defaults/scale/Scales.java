@@ -25,7 +25,8 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.AbstractItem;
 
 /**
- * The configuration element which contains all axes definitions.
+ * The configuration element which contains all axes definitions.<br>
+ * It maps the CHART.JS object of default, <code>chart.defaults.[chart_type].scales</code>.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -49,15 +50,17 @@ public class Scales extends AbstractItem {
 	}
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object with parent item and child. 
 	 * 
-	 * @param chart chart instance
+	 * @param parent parent item.
+	 * @param childKey key of child.
 	 */
 	protected Scales(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
 		if (!isEmpty()){
 			// cast object to reach some methods
 			InternalJavaScriptObject obj = (InternalJavaScriptObject)getJavaScriptObject();
+			// loads axes
 			loadScales(Property.xAxes, obj, xAxes);
 			loadScales(Property.yAxes, obj, yAxes);
 		}
@@ -70,6 +73,7 @@ public class Scales extends AbstractItem {
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -96,6 +100,12 @@ public class Scales extends AbstractItem {
 		return yAxes;
 	}
 	
+	/**
+	 * Loads the axes configuration.
+	 * @param key java script object key to load.
+	 * @param obj java script object to load.
+	 * @param axes list of axes to load.
+	 */
 	private void loadScales(Key key, InternalJavaScriptObject obj, List<Scale> axes){
 		// loads scale
 		JsObjectArrayList<GenericJavaScriptObject> axesList = obj.getAxis(key);
@@ -105,6 +115,12 @@ public class Scales extends AbstractItem {
 		}
 	}
 	
+	/**
+	 * Is a generic java script object which enables the protected methods.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
 	protected static class InternalJavaScriptObject extends GenericJavaScriptObject{
 		
 		/**
@@ -114,6 +130,11 @@ public class Scales extends AbstractItem {
 			// do nothing
 		}
 		
+		/**
+		 * Returns the axes configuration.
+		 * @param key java script object key of axis.
+		 * @return array list of java script objects
+		 */
 		protected final JsObjectArrayList<GenericJavaScriptObject> getAxis(Key key) {
 			return getObjectArray(key.name());
 		}

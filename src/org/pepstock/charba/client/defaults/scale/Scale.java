@@ -31,7 +31,8 @@ import org.pepstock.charba.client.enums.Position;
  * <li>category
  * <li>time (not implemented yet)
  * </ul>
- * 
+ * <br>
+ * It maps the CHART.JS object of default, <code>chart.defaults.scale</code>.<br>
  * @author Andrea "Stock" Stocchero
  *
  * @param <T> type of tick to apply to axis
@@ -88,12 +89,15 @@ public class Scale extends AbstractItem {
 		pointLabels
 	}
 
-//	public Scale(GenericJavaScriptObject javaScriptObject) {
-//		super(javaScriptObject);
-//	}
-
+	/**
+	 * Creates the object using the java script object with the defaults provided by CHART.JS.<br>
+	 * It's a root element.
+	 * 
+	 * @param javaScriptObject the java script object with the defaults provided by CHART.JS.
+	 */
 	public Scale(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
+		// creates children objects
 		grideLines = new GridLines(this, Property.gridLines);
 		ticks = new Ticks(this, Property.ticks);
 		scaleLabel = new ScaleLabel(this, Property.scaleLabel);
@@ -102,9 +106,14 @@ public class Scale extends AbstractItem {
 	}
 	
 	/**
+	 * Builds the object with parent item and child. With this constructor we are creating a child of default options.
+	 * 
+	 * @param parent parent item.
+	 * @param childKey key of child.
 	 */
 	protected Scale(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
+		// creates children objects
 		grideLines = new GridLines(this, Property.gridLines);
 		ticks = new Ticks(this, Property.ticks);
 		scaleLabel = new ScaleLabel(this, Property.scaleLabel);
@@ -138,6 +147,7 @@ public class Scale extends AbstractItem {
 	
 	/**
 	 * @return the angleLines
+	 * @see AngleLines
 	 */
 	public AngleLines getAngleLines() {
 		return angleLines;
@@ -145,6 +155,7 @@ public class Scale extends AbstractItem {
 
 	/**
 	 * @return the pointLabels
+	 * @see PointLabels
 	 */
 	public PointLabels getPointLabels() {
 		return pointLabels;
@@ -158,6 +169,7 @@ public class Scale extends AbstractItem {
 	 */
 	public void setId(String id) {
 		setValue(Property.id, id);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -178,11 +190,14 @@ public class Scale extends AbstractItem {
 	 */
 	public void setStacked(boolean stacked) {
 		setValue(Property.stacked, stacked);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
-	 * @return the stacked
+	 * Returns if the axis are stacked or not.
+	 * 
+	 * @return if the axis are stacked or not. Default is <code>false</code>.
 	 */
 	public boolean isStacked() {
 		return getValue(Property.stacked, DEFAULT_STACKED);
@@ -196,13 +211,14 @@ public class Scale extends AbstractItem {
 	 */
 	public void setType(AxisType type) {
 		setValue(Property.type, type);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
-	 * Returns the type of axis. If not set, the default is <code>linear</code>.
+	 * Returns the type of axis.
 	 * 
-	 * @return the type of axis
+	 * @return the type of axis. If not set, the default is {@link org.pepstock.charba.client.enums.AxisType#linear}.
 	 * @see org.pepstock.charba.client.enums.AxisType
 	 */
 	public AxisType getType() {
@@ -216,32 +232,34 @@ public class Scale extends AbstractItem {
 	 */
 	public void setWeight(int weight) {
 		setValue(Property.weight, weight);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * The weight used to sort the axis. Higher weights are further away from the chart area.
 	 * 
-	 * @return weight of axis
+	 * @return weight of axis. Default is 0.
 	 */
 	public int getWeight() {
 		return getValue(Property.weight, DEFAULT_WEIGHT);
 	}
 
 	/**
-	 * If true, show tick marks.
+	 * If true, shows the axis.
 	 * 
-	 * @param display if true, show tick marks
+	 * @param display if true, shows the axes. 
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
-	 * If true, show tick marks
+	 * If true, shows the axis.
 	 * 
-	 * @return if true, show tick marks. Default is true.
+	 * @return if true, shows the axis. Default is true.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, DEFAULT_DISPLAY);
@@ -253,13 +271,14 @@ public class Scale extends AbstractItem {
 	 */
 	public void setOffset(boolean offset) {
 		setValue(Property.offset, offset);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * If true, extra space is added to the both edges and the axis is scaled to fit into the chart area.
 	 * 
-	 * @return extra space of axis
+	 * @return extra space of axis. Default is <code>false</code>.
 	 */
 	public boolean isOffset() {
 		return getValue(Property.offset, DEFAULT_OFFSET);
@@ -273,13 +292,14 @@ public class Scale extends AbstractItem {
 	 */
 	public void setPosition(Position position) {
 		setValue(Property.position, position);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Position of the axis in the chart. Possible values are: 'top', 'left', 'bottom', 'right'
 	 * 
-	 * @return position of axis
+	 * @return position of axis. Default is {@link org.pepstock.charba.client.enums.Position#top}.
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {
@@ -295,6 +315,7 @@ public class Scale extends AbstractItem {
 	 */
 	public void setBarPercentage(double barPercentage) {
 		setValue(Property.barPercentage, barPercentage);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -316,6 +337,7 @@ public class Scale extends AbstractItem {
 	 */
 	public void setCategoryPercentage(double categoryPercentage) {
 		setValue(Property.categoryPercentage, categoryPercentage);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -338,6 +360,7 @@ public class Scale extends AbstractItem {
 	 */
 	public void setBarThickness(int barThickness) {
 		setValue(Property.barThickness, barThickness);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -360,6 +383,7 @@ public class Scale extends AbstractItem {
 	 */
 	public void setMaxBarThickness(int maxBarThickness) {
 		setValue(Property.maxBarThickness, maxBarThickness);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 

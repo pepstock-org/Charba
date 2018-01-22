@@ -35,16 +35,12 @@ public final class PolarAreaOptions extends SingleScaleOptions {
 	}
 
 	/**
-	 * Builds the object storing the chart instance.<br>
-	 * Sets also the internal parts of options.
+	 * Builds the object storing the chart instance.
 	 * 
 	 * @param chart chart instance
 	 */
 	public PolarAreaOptions(AbstractChart<?, ?> chart) {
 		super(chart);
-		// sets rotate and animation scale
-		getAnimation().setAnimateRotate(true);
-		getAnimation().setAnimateScale(true);
 	}
 
 	/**
@@ -59,7 +55,7 @@ public final class PolarAreaOptions extends SingleScaleOptions {
 	/**
 	 * Returns the starting angle to draw arcs for the first item in a dataset.
 	 * 
-	 * @return starting angle to draw arcs for the first item in a dataset. Default is <code>-0.5 * Math.PI</code>.
+	 * @return starting angle to draw arcs for the first item in a dataset. Default is {@link org.pepstock.charba.client.GlobalOptions#getStartAngle()}.
 	 */
 	public double getStartAngle() {
 		return getValue(Property.startAngle, getChart().getGlobal().getStartAngle());

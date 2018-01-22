@@ -88,6 +88,11 @@ public abstract class Axis extends ChartContainer {
 		afterUpdate
 	}
 
+	/**
+	 * Builds the object storing the chart instance.
+	 * 
+	 * @param chart chart instance
+	 */
 	protected Axis(AbstractChart<?, ?> chart) {
 		super(chart);
 	}
@@ -103,7 +108,7 @@ public abstract class Axis extends ChartContainer {
 	}
 
 	/**
-	 * Returns the type of axis. If not set, the default is <code>linear</code>.
+	 * Returns the type of axis. 
 	 * 
 	 * @return the type of axis
 	 * @see org.pepstock.charba.client.enums.AxisType
@@ -124,7 +129,7 @@ public abstract class Axis extends ChartContainer {
 	/**
 	 * Returns if axis is hidden.
 	 * 
-	 * @return <code>false</code> if axis is hidden, otherwise <code>true</code>. Default is {@link org.pepstock.charba.client.defaults.scale.Scale#isDisplay()}.
+	 * @return <code>false</code> if axis is hidden, otherwise <code>true</code>. 
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getScale().isDisplay());
@@ -148,33 +153,59 @@ public abstract class Axis extends ChartContainer {
 		return getValue(Property.weight, getScale().getWeight());
 	}
 
-	protected Scale getScale(){
+	/**
+	 * Returns the global options for this chart.
+	 * 
+	 * @return the global options for this chart.
+	 */
+	protected Scale getScale() {
+		// gets the gloabl option for the chart.
 		Options options = getChart().getGlobal();
-		if (getChart().getOptions() instanceof MultiScalesOptions){
+		// if is a multi scale chart
+		if (getChart().getOptions() instanceof MultiScalesOptions) {
+			// gets scales
 			Scales scales = options.getScales();
 			CartesianAxisType type = null;
-			if (this instanceof CartesianAxis<?>){
-				CartesianAxis<?> cAxis = (CartesianAxis<?>)this;
+			// checks if is cartesian axis
+			// only cartesian axis has got the mutli scale
+			if (this instanceof CartesianAxis<?>) {
+				CartesianAxis<?> cAxis = (CartesianAxis<?>) this;
+				// gets cartesian type
 				type = cAxis.getCartesianType();
 			}
-			if (type != null){
+			// if type is consistent
+			if (type != null) {
+				// returns the option for x or y scale.
 				return getCartesianScale(CartesianAxisType.x.equals(type) ? scales.getXAxes() : scales.getYAxes());
 			}
-		} else if (getChart().getOptions() instanceof SingleScaleOptions){
+		} else if (getChart().getOptions() instanceof SingleScaleOptions) {
+			// being a single escale
+			// returns scale otpion
 			return options.getScale();
 		}
+		// returns default scale
 		return Defaults.getScale();
 	}
-	
-	private Scale getCartesianScale(List<Scale> scales){
-		for (Scale axis : scales){
-			if (getType().equals(axis.getType())){
+
+	/**
+	 * Returns the scale option for multi scale chart using the axis type.
+	 * 
+	 * @param scales X or Y scale option.
+	 * @return a scale object with axis configuration
+	 */
+	private Scale getCartesianScale(List<Scale> scales) {
+		// scan all configuration axes
+		for (Scale axis : scales) {
+			// if configuration type equals to this axis
+			if (getType().equals(axis.getType())) {
+				// returns scale config
 				return axis;
 			}
 		}
+		// returns default scale
 		return Defaults.getScale();
 	}
-	
+
 	/**
 	 * @return the axisUpdateCallback
 	 */

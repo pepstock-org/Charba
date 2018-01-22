@@ -20,10 +20,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Position;
 
 /**
- * Rectangle elements are used to represent the bars in a bar chart.<br>
- * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the same way.<br>
- * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
- * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a dataset.
+ * Rectangle elements are used to represent the bars in a bar chart.
  * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.BarChart

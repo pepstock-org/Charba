@@ -22,8 +22,7 @@ import org.pepstock.charba.client.commons.Key;
 
 /**
  * This object is just a proxy object, created from JavaScript side, to wrap an JavaScript array.<br>
- * Created and passed by CHART.JS.<br>
- * This object is NOT used or passed to any callbacks or event handling
+ * Created and passed by CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  *

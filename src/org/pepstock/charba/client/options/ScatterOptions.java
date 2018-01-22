@@ -27,6 +27,7 @@ public final class ScatterOptions extends AbstractLineOptions {
 
 	/**
 	 * Builds the object storing the chart instance.
+	 * 
 	 * @param chart chart instance
 	 */
 	public ScatterOptions(AbstractChart<?, ?> chart) {

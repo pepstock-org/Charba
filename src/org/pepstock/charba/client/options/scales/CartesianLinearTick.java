@@ -44,7 +44,9 @@ public final class CartesianLinearTick extends CartesianTick {
 	}
 
 	/**
-	 * Empty constructor to reduce visibility
+	 * Builds the object storing the chart instance.
+	 * 
+	 * @param chart chart instance
 	 */
 	CartesianLinearTick(AbstractChart<?, ?> chart) {
 		super(chart);
@@ -62,7 +64,7 @@ public final class CartesianLinearTick extends CartesianTick {
 	/**
 	 * If true, scale will include 0 if it is not already included.
 	 * 
-	 * @return if true, scale will include 0 if it is not already included.. Default is false
+	 * @return if true, scale will include 0 if it is not already included.
 	 */
 	public boolean isBeginAtZero() {
 		return getValue(Property.beginAtZero, getAxis().getScale().getTicks().isBeginAtZero());
@@ -80,7 +82,7 @@ public final class CartesianLinearTick extends CartesianTick {
 	/**
 	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
 	 * 
-	 * @return the user defined minimum number for the scale, overrides minimum value from data. Default is Double.MIN_VALUE.
+	 * @return the user defined minimum number for the scale, overrides minimum value from data. 
 	 */
 	public double getMin() {
 		return getValue(Property.min, getAxis().getScale().getTicks().getMin());
@@ -98,7 +100,7 @@ public final class CartesianLinearTick extends CartesianTick {
 	/**
 	 * Returns the user defined maximum number for the scale, overrides maximum value from data.
 	 * 
-	 * @return user defined maximum number for the scale, overrides maximum value from data. Default is Double.MAX_VALUE.
+	 * @return user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	public double getMax() {
 		return getValue(Property.max, getAxis().getScale().getTicks().getMax());
@@ -116,7 +118,7 @@ public final class CartesianLinearTick extends CartesianTick {
 	/**
 	 * Returns the maximum number of ticks and gridlines to show.
 	 * 
-	 * @return maximum number of ticks and gridlines to show. Default is 11.
+	 * @return maximum number of ticks and gridlines to show.
 	 */
 	public int getMaxTicksLimit() {
 		return getValue(Property.maxTicksLimit, getAxis().getScale().getTicks().getMaxTicksLimit());
@@ -134,7 +136,7 @@ public final class CartesianLinearTick extends CartesianTick {
 	/**
 	 * Returns the user defined fixed step size for the scale.
 	 * 
-	 * @return user defined fixed step size for the scale. Default is Double.MIN_VALUE.
+	 * @return user defined fixed step size for the scale. 
 	 */
 	public double getStepSize() {
 		return getValue(Property.stepSize, getAxis().getScale().getTicks().getStepSize());

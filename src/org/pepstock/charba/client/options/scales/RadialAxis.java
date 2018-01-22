@@ -50,7 +50,9 @@ public final class RadialAxis extends Axis {
 	}
 
 	/**
-	 * Builds the axis
+	 * Builds the object storing the chart instance.
+	 * 
+	 * @param chart chart instance
 	 */
 	public RadialAxis(AbstractChart<?, ?> chart) {
 		super(chart);
@@ -62,7 +64,6 @@ public final class RadialAxis extends Axis {
 		ticks = new RadialLinearTick(chart);
 		ticks.setAxis(this);
 		angleLines = new RadialAngleLines(chart, this);
-	
 		// stores into java script object
 		setValue(Property.gridLines, grideLines);
 		setValue(Property.ticks, ticks);

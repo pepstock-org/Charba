@@ -26,8 +26,7 @@ import org.pepstock.charba.client.AbstractChart;
 public final class PieOptions extends AbstractPieOptions {
 
 	/**
-	 * Builds the object storing the chart instance.<br>
-	 * Sets also the internal parts of options.
+	 * Builds the object storing the chart instance.
 	 * 
 	 * @param chart chart instance
 	 */

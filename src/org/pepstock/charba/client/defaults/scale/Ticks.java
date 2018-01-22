@@ -20,7 +20,7 @@ import org.pepstock.charba.client.defaults.AbstractItem;
 import org.pepstock.charba.client.defaults.FontItem;
 
 /**
- * Specific tick with min and max sub ticks.
+ * All configuration for ticks of a chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -67,7 +67,6 @@ public final class Ticks extends FontItem {
 
 	private static final boolean DEFAULT_SHOW_LABEL_BACKDROP = true;
 
-
 	private final FontItem minor;
 
 	private final FontItem major;
@@ -102,12 +101,30 @@ public final class Ticks extends FontItem {
 	}
 
 	/**
-	 * Builds the object
+	 * Builds the object with parent item and child.
+	 * 
+	 * @param parent parent item.
+	 * @param childKey key of child.
 	 */
 	Ticks(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
+		// creates children objects
 		minor = new FontItemImpl(this, Property.minor);
 		major = new FontItemImpl(this, Property.major);
+	}
+	
+	/**
+	 * @return the minor
+	 */
+	public FontItem getMinor() {
+		return minor;
+	}
+
+	/**
+	 * @return the major
+	 */
+	public FontItem getMajor() {
+		return major;
 	}
 	
 	/**
@@ -117,6 +134,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setBeginAtZero(boolean beginAtZero) {
 		setValue(Property.beginAtZero, beginAtZero);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -136,6 +154,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -155,6 +174,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setReverse(boolean reverse) {
 		setValue(Property.reverse, reverse);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -176,6 +196,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setAutoSkip(boolean autoSkip) {
 		setValue(Property.autoSkip, autoSkip);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -199,6 +220,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setAutoSkipPadding(int autoSkipPadding) {
 		setValue(Property.autoSkipPadding, autoSkipPadding);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -223,6 +245,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setLabelOffset(int labelOffset) {
 		setValue(Property.labelOffset, labelOffset);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -247,6 +270,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setMaxRotation(int maxRotation) {
 		setValue(Property.maxRotation, maxRotation);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -268,6 +292,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setMinRotation(int minRotation) {
 		setValue(Property.minRotation, minRotation);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -289,6 +314,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setMirror(boolean mirror) {
 		setValue(Property.mirror, mirror);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -312,6 +338,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setPadding(int padding) {
 		setValue(Property.padding, padding);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -333,6 +360,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setMin(double min) {
 		setValue(Property.min, min);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -352,6 +380,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setMax(double max) {
 		setValue(Property.max, max);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -371,6 +400,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setMaxTicksLimit(int maxTicksLimit) {
 		setValue(Property.maxTicksLimit, maxTicksLimit);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -390,6 +420,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setStepSize(double stepSize) {
 		setValue(Property.stepSize, stepSize);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -409,6 +440,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setSuggestedMax(double suggestedMax) {
 		setValue(Property.suggestedMax, suggestedMax);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -428,6 +460,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setSuggestedMin(double suggestedMin) {
 		setValue(Property.suggestedMin, suggestedMin);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -447,6 +480,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setBackdropColor(String backdropColor) {
 		setValue(Property.backdropColor, backdropColor);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -466,6 +500,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setBackdropPaddingX(int backdropPaddingX) {
 		setValue(Property.backdropPaddingX, backdropPaddingX);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -485,6 +520,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setBackdropPaddingY(int backdropPaddingY) {
 		setValue(Property.backdropPaddingY, backdropPaddingY);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -504,6 +540,7 @@ public final class Ticks extends FontItem {
 	 */
 	public void setShowLabelBackdrop(boolean showLabelBackdrop) {
 		setValue(Property.showLabelBackdrop, showLabelBackdrop);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -517,21 +554,19 @@ public final class Ticks extends FontItem {
 	}
 
 	/**
-	 * @return the minor
+	 * Internal class to extend the configuration item enabling the protected methods.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
 	 */
-	public FontItem getMinor() {
-		return minor;
-	}
-
-	/**
-	 * @return the major
-	 */
-	public FontItem getMajor() {
-		return major;
-	}
-	
 	private static class FontItemImpl extends FontItem{
 
+		/**
+		 * Builds the object with parent item and child.
+		 * 
+		 * @param parent parent item.
+		 * @param childKey key of child.
+		 */
 		protected FontItemImpl(AbstractItem parent, Key childKey) {
 			super(parent, childKey);
 		}

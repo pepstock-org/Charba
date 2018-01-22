@@ -173,7 +173,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns if tooltips are enabled.
 	 * 
-	 * @return if tooltips are enabled.. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#isEnabled()}.
+	 * @return if tooltips are enabled. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public boolean isEnabled() {
 		return getValue(Property.enabled, getChart().getGlobal().getTooltips().isEnabled());
@@ -192,7 +192,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns which elements appear in the tooltip.
 	 * 
-	 * @return which elements appear in the tooltip. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getMode()}.
+	 * @return which elements appear in the tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
 	public InteractionMode getMode() {
@@ -215,7 +215,7 @@ public final class Tooltips extends ChartContainer {
 	 * applied at all times.
 	 * 
 	 * @return if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode
-	 *         will be applied at all times. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#isIntersect()}.
+	 *         will be applied at all times. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public boolean isIntersect() {
 		return getValue(Property.intersect, getChart().getGlobal().getTooltips().isIntersect());
@@ -234,7 +234,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the mode for positioning the tooltip.
 	 * 
-	 * @return mode for positioning the tooltip. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getPosition()}.
+	 * @return mode for positioning the tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 * @see org.pepstock.charba.client.enums.TooltipPosition
 	 */
 	public TooltipPosition getPosition() {
@@ -253,7 +253,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the background color of the tooltip.
 	 * 
-	 * @return Background color of the tooltip. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBackgroundColor()}.
+	 * @return Background color of the tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public String getBackgroundColor() {
 		return getValue(Property.backgroundColor, getChart().getGlobal().getTooltips().getBackgroundColor());
@@ -271,7 +271,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the title font.
 	 * 
-	 * @return the title font. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getTitleFontFamily()()}.
+	 * @return the title font. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public String getTitleFontFamily() {
 		return getValue(Property.titleFontFamily, getChart().getGlobal().getTooltips().getTitleFontFamily());
@@ -289,7 +289,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the title font size.
 	 * 
-	 * @return Title font size. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getTitleFontSize()}.
+	 * @return Title font size. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public int getTitleFontSize() {
 		return getValue(Property.titleFontSize, getChart().getGlobal().getTooltips().getTitleFontSize());
@@ -308,7 +308,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the title font style.
 	 * 
-	 * @return title font style. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getTitleFontStyle()}.
+	 * @return title font style. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getTitleFontStyle() {
@@ -328,7 +328,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the title alignment.
 	 * 
-	 * @return title alignment. Default is {@link org.pepstock.charba.client.enums.TextAlign#left}.
+	 * @return title alignment. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 * @see org.pepstock.charba.client.enums.TextAlign
 	 */
 	public TextAlign getTitleAlign() {
@@ -347,7 +347,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the title font color.
 	 * 
-	 * @return title font color.Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getTitleFontColor()}.
+	 * @return title font color. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public String getTitleFontColor() {
 		return getValue(Property.titleFontColor, getChart().getGlobal().getTooltips().getTitleFontColor());
@@ -365,7 +365,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the spacing to add to top and bottom of each title line.
 	 * 
-	 * @return spacing to add to top and bottom of each title line. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getTitleSpacing()}.
+	 * @return spacing to add to top and bottom of each title line. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public int getTitleSpacing() {
 		return getValue(Property.titleSpacing, getChart().getGlobal().getTooltips().getTitleSpacing());
@@ -383,7 +383,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the margin to add on bottom of title section.
 	 * 
-	 * @return margin to add on bottom of title section. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getTitleMarginBottom()}.
+	 * @return margin to add on bottom of title section. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public int getTitleMarginBottom() {
 		return getValue(Property.titleMarginBottom, getChart().getGlobal().getTooltips().getTitleMarginBottom());
@@ -401,7 +401,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the body line font.
 	 * 
-	 * @return body line font. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBodyFontFamily()}.
+	 * @return body line font. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public String getBodyFontFamily() {
 		return getValue(Property.bodyFontFamily, getChart().getGlobal().getTooltips().getBodyFontFamily());
@@ -419,7 +419,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the body font size.
 	 * 
-	 * @return body font size. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBodyFontSize()}.
+	 * @return body font size. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public int getBodyFontSize() {
 		return getValue(Property.bodyFontSize, getChart().getGlobal().getTooltips().getBodyFontSize());
@@ -438,7 +438,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the body font style.
 	 * 
-	 * @return body font style. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBodyFontSize()}.
+	 * @return body font style. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getBodyFontStyle() {
@@ -458,7 +458,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the body alignment.
 	 * 
-	 * @return body alignment. Default is {@link org.pepstock.charba.client.enums.TextAlign#left}.
+	 * @return body alignment. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 * @see org.pepstock.charba.client.enums.TextAlign
 	 */
 	public TextAlign getBodyAlign() {
@@ -477,7 +477,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the body font color.
 	 * 
-	 * @return body font color. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBodyFontColor()}.
+	 * @return body font color. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public String getBodyFontColor() {
 		return getValue(Property.bodyFontColor, getChart().getGlobal().getTooltips().getBodyFontColor());
@@ -495,7 +495,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the spacing to add to top and bottom of each tooltip item.
 	 * 
-	 * @return spacing to add to top and bottom of each tooltip item. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBodySpacing()}.
+	 * @return spacing to add to top and bottom of each tooltip item. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public int getBodySpacing() {
 		return getValue(Property.bodySpacing, getChart().getGlobal().getTooltips().getBodySpacing());
@@ -513,7 +513,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the footer font.
 	 * 
-	 * @return footer font. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBodyFontFamily()}.
+	 * @return footer font. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public String getFooterFontFamily() {
 		return getValue(Property.footerFontFamily, getChart().getGlobal().getTooltips().getBodyFontFamily());
@@ -531,7 +531,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the footer font size.
 	 * 
-	 * @return footer font size. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBodyFontSize()}.
+	 * @return footer font size. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public int getFooterFontSize() {
 		return getValue(Property.footerFontSize, getChart().getGlobal().getTooltips().getFooterFontSize());
@@ -549,7 +549,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the footer font style.
 	 * 
-	 * @return footer font style. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getFooterFontStyle()}.
+	 * @return footer font style. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFooterFontStyle() {
@@ -569,7 +569,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the footer alignment.
 	 * 
-	 * @return footer alignment. Default is {@link org.pepstock.charba.client.enums.TextAlign#left}.
+	 * @return footer alignment. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 * @see org.pepstock.charba.client.enums.TextAlign
 	 */
 	public TextAlign getFooterAlign() {
@@ -588,7 +588,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the footer font color.
 	 * 
-	 * @return footer font color. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getFooterFontColor()}.
+	 * @return footer font color. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public String getFooterFontColor() {
 		return getValue(Property.footerFontColor, getChart().getGlobal().getTooltips().getFooterFontColor());
@@ -606,7 +606,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the spacing to add to top and bottom of each footer line.
 	 * 
-	 * @return spacing to add to top and bottom of each footer line. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getFooterSpacing()}.
+	 * @return spacing to add to top and bottom of each footer line. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public int getFooterSpacing() {
 		return getValue(Property.footerSpacing, getChart().getGlobal().getTooltips().getFooterSpacing());
@@ -624,7 +624,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the margin to add before drawing the footer.
 	 * 
-	 * @return margin to add before drawing the footer. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getFooterMarginTop()}.
+	 * @return margin to add before drawing the footer. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public int getFooterMarginTop() {
 		return getValue(Property.footerMarginTop, getChart().getGlobal().getTooltips().getFooterMarginTop());
@@ -642,7 +642,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the padding to add on left and right of tooltip.
 	 * 
-	 * @return padding to add on left and right of tooltip. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getXPadding()}.
+	 * @return padding to add on left and right of tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public int getXPadding() {
 		return getValue(Property.xPadding, getChart().getGlobal().getTooltips().getXPadding());
@@ -660,7 +660,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the padding to add on top and bottom of tooltip.
 	 * 
-	 * @return padding to add on top and bottom of tooltip. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getYPadding()}.
+	 * @return padding to add on top and bottom of tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public int getYPadding() {
 		return getValue(Property.yPadding, getChart().getGlobal().getTooltips().getYPadding());
@@ -678,7 +678,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the extra distance to move the end of the tooltip arrow away from the tooltip point.
 	 * 
-	 * @return extra distance to move the end of the tooltip arrow away from the tooltip point. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getCaretPadding()}.
+	 * @return extra distance to move the end of the tooltip arrow away from the tooltip point. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public int getCaretPadding() {
 		return getValue(Property.caretPadding, getChart().getGlobal().getTooltips().getCaretPadding());
@@ -696,7 +696,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the size, in px, of the tooltip arrow.
 	 * 
-	 * @return size, in px, of the tooltip arrow. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getCaretSize()}.
+	 * @return size, in px, of the tooltip arrow. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public int getCaretSize() {
 		return getValue(Property.caretSize, getChart().getGlobal().getTooltips().getCaretSize());
@@ -714,7 +714,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the radius of tooltip corner curves.
 	 * 
-	 * @return radius of tooltip corner curves. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getCornerRadius()}.
+	 * @return radius of tooltip corner curves. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public int getCornerRadius() {
 		return getValue(Property.cornerRadius, getChart().getGlobal().getTooltips().getCornerRadius());
@@ -732,7 +732,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the color to draw behind the colored boxes when multiple items are in the tooltip.
 	 * 
-	 * @return color to draw behind the colored boxes when multiple items are in the tooltip. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getMultiKeyBackground()}.
+	 * @return color to draw behind the colored boxes when multiple items are in the tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public String getMultiKeyBackground() {
 		return getValue(Property.multiKeyBackground, getChart().getGlobal().getTooltips().getMultiKeyBackground());
@@ -750,7 +750,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * If true, color boxes are shown in the tooltip.
 	 * 
-	 * @return if true, color boxes are shown in the tooltip. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#isDisplayColors()}.
+	 * @return if true, color boxes are shown in the tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public boolean isDisplayColors() {
 		return getValue(Property.displayColors, getChart().getGlobal().getTooltips().isDisplayColors());
@@ -768,7 +768,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the color of the border.
 	 * 
-	 * @return color of the border. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBorderColor()}.
+	 * @return color of the border. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public String getBorderColor() {
 		return getValue(Property.borderColor, getChart().getGlobal().getTooltips().getBorderColor());
@@ -786,7 +786,7 @@ public final class Tooltips extends ChartContainer {
 	/**
 	 * Returns the size of the border.
 	 * 
-	 * @return size of the border. Default is {@link org.pepstock.charba.client.defaults.global.Tooltips#getBorderWidth()}.
+	 * @return size of the border. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
 	public int getBorderWidth() {
 		return getValue(Property.borderWidth, getChart().getGlobal().getTooltips().getBorderWidth());

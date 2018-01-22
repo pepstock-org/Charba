@@ -77,7 +77,7 @@ public final class Animation extends EventProvider {
 	/**
 	 * Returns the animation easing.
 	 * 
-	 * @return animation easing. Default value is {@link org.pepstock.charba.client.defaults.global.Animation#getEasing()}.
+	 * @return animation easing. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getAnimation()}.
 	 * @see org.pepstock.charba.client.enums.Easing
 	 */
 	public Easing getEasing() {
@@ -96,7 +96,7 @@ public final class Animation extends EventProvider {
 	/**
 	 * Returns the number of milliseconds an animation takes.
 	 * 
-	 * @return the number of milliseconds an animation takes. Default is {@link org.pepstock.charba.client.defaults.global.Animation#getDuration()}.
+	 * @return the number of milliseconds an animation takes. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getAnimation()}.
 	 */
 	public int getDuration() {
 		return getValue(Property.duration, getChart().getGlobal().getAnimation().getDuration());
@@ -114,7 +114,7 @@ public final class Animation extends EventProvider {
 	/**
 	 * If true, the chart will animate in with a rotation animation.
 	 * 
-	 * @return If true, the chart will animate in with a rotation animation. Default is true.
+	 * @return If true, the chart will animate in with a rotation animation. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getAnimation()}.
 	 */
 	public boolean isAnimateRotate() {
 		return getValue(Property.animateRotate, getChart().getGlobal().getAnimation().isAnimateRotate());
@@ -132,7 +132,7 @@ public final class Animation extends EventProvider {
 	/**
 	 * If true, will animate scaling the chart from the center outwards.
 	 * 
-	 * @return If true, will animate scaling the chart from the center outwards. Default is false.
+	 * @return If true, will animate scaling the chart from the center outwards. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getAnimation()}.
 	 */
 	public boolean isAnimateScale() {
 		return getValue(Property.animateScale, getChart().getGlobal().getAnimation().isAnimateScale());

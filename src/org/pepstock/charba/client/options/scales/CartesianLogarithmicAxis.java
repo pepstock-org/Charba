@@ -27,11 +27,22 @@ import org.pepstock.charba.client.enums.CartesianAxisType;
  */
 public final class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmicTick> {
 
+	/**
+	 * Builds the object storing the chart instance. Axis type is Y by default.
+	 * 
+	 * @param chart chart instance
+	 * @see CartesianAxisType#y
+	 */
 	public CartesianLogarithmicAxis(AbstractChart<?, ?> chart) {
 		this(chart, CartesianAxisType.y);
 	}
+
 	/**
-	 * Builds the axis
+	 * Builds the object storing the chart instance and axis type.
+	 * 
+	 * @param chart chart instance
+	 * @param cartesianType cartesian axis type.
+	 * @see CartesianAxisType
 	 */
 	public CartesianLogarithmicAxis(AbstractChart<?, ?> chart, CartesianAxisType cartesianType) {
 		super(chart, new CartesianLogarithmicTick(chart), cartesianType);

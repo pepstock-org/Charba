@@ -42,7 +42,9 @@ abstract class Tick extends BaseTick {
 	}
 
 	/**
-	 * Builds the object
+	 * Builds the object storing the chart instance.
+	 * 
+	 * @param chart chart instance
 	 */
 	Tick(AbstractChart<?, ?> chart) {
 		super(chart);
@@ -92,7 +94,7 @@ abstract class Tick extends BaseTick {
 	/**
 	 * If true, show tick marks
 	 * 
-	 * @return if true, show tick marks. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#isDisplay()}.
+	 * @return if true, show tick marks. 
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getAxis().getScale().getTicks().isDisplay());
@@ -110,7 +112,7 @@ abstract class Tick extends BaseTick {
 	/**
 	 * Returns the reverses order of tick labels.
 	 * 
-	 * @return reverses order of tick labels. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#isReverse()}.
+	 * @return reverses order of tick labels.
 	 */
 	public boolean isReverse() {
 		return getValue(Property.reverse, getAxis().getScale().getTicks().isReverse());

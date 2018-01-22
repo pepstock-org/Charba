@@ -48,9 +48,12 @@ public final class ScaleLabel extends FontItem {
 	}
 
 	/**
-	 * Empty constructor to reduce visibility
+	 * Builds the object with parent item and child.
+	 * 
+	 * @param parent parent item.
+	 * @param childKey key of child.
 	 */
-	public ScaleLabel(AbstractItem parent, Key childKey) {
+	ScaleLabel(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
 		padding = new Padding(this, Property.padding);
 	}
@@ -63,17 +66,18 @@ public final class ScaleLabel extends FontItem {
 	}
 
 	/**
-	 * f true, display the axis title.
+	 * If true, display the axis title.
 	 * 
-	 * @param display f true, display the axis title.
+	 * @param display if true, display the axis title.
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
-	 * f true, display the axis title.
+	 * If true, display the axis title.
 	 * 
 	 * @return f true, display the axis title. Default is false
 	 */
@@ -82,19 +86,20 @@ public final class ScaleLabel extends FontItem {
 	}
 
 	/**
-	 * Sets the text for the title.
+	 * Sets the text for the scale string.
 	 * 
-	 * @param labelString The text for the title.
+	 * @param labelString The text for the scale string.
 	 */
 	public void setLabelString(String labelString) {
 		setValue(Property.labelString, labelString);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
-	 * Returns the text for the title.
+	 * Returns the text for the scale string.
 	 * 
-	 * @return The text for the title.
+	 * @return The text for the scale string. Default is "".
 	 */
 	public String getLabelString() {
 		return getValue(Property.labelString, DEFAULT_LABEL_STRING);
@@ -107,6 +112,7 @@ public final class ScaleLabel extends FontItem {
 	 */
 	public void setLineHeight(double lineHeight) {
 		setValue(Property.lineHeight, lineHeight);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 

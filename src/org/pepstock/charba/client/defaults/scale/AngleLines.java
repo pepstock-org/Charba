@@ -43,7 +43,10 @@ public final class AngleLines extends AbstractItem {
 	}
 
 	/**
-	 * Empty constructor to reduce visibility
+	 * Builds the object with parent item and child.
+	 * 
+	 * @param parent parent item.
+	 * @param childKey key of child.
 	 */
 	AngleLines(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
@@ -56,6 +59,7 @@ public final class AngleLines extends AbstractItem {
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -75,13 +79,14 @@ public final class AngleLines extends AbstractItem {
 	 */
 	public void setColor(String color) {
 		setValue(Property.color, color);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the color of angled lines.
 	 * 
-	 * @return color of angled lines. Default is 'rgba(0, 0, 0, 0.1)'
+	 * @return color of angled lines. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultColor()}.
 	 */
 	public String getColor() {
 		return getValue(Property.color, Defaults.getGlobal().getDefaultColor());
@@ -94,6 +99,7 @@ public final class AngleLines extends AbstractItem {
 	 */
 	public void setLineWidth(int lineWidth) {
 		setValue(Property.lineWidth, lineWidth);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 

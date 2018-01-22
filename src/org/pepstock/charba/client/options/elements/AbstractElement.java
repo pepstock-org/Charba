@@ -21,15 +21,11 @@ import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Arcs are used in the polar area, doughnut and pie charts.<br>
  * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the same way.<br>
  * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
  * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a dataset.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.PolarAreaChart
- * @see org.pepstock.charba.client.DoughnutChart
- * @see org.pepstock.charba.client.PieChart
  */
 abstract class AbstractElement extends ChartContainer {
 
@@ -73,7 +69,7 @@ abstract class AbstractElement extends ChartContainer {
 	/**
 	 * Returns the default background color.
 	 * 
-	 * @return the default background color. Default is {@link org.pepstock.charba.client.defaults.global.Arc#getBackgroundColor()}.
+	 * @return the default background color. 
 	 */
 	protected String getDefaultBackgroundColor() {
 		return Defaults.getGlobal().getElements().getArc().getBackgroundColor();
@@ -100,7 +96,7 @@ abstract class AbstractElement extends ChartContainer {
 	/**
 	 * Returns the default border width.
 	 * 
-	 * @return the default border width. Default is {@link org.pepstock.charba.client.defaults.global.Arc#getBorderWidth()}.
+	 * @return the default border width.
 	 */
 	protected int getDefaultBorderWidth() {
 		return Defaults.getGlobal().getElements().getArc().getBorderWidth();
@@ -127,7 +123,7 @@ abstract class AbstractElement extends ChartContainer {
 	/**
 	 * Returns the default border color.
 	 * 
-	 * @return the default border color. Default is {@link org.pepstock.charba.client.defaults.global.Arc#getBorderColor()}.
+	 * @return the default border color.
 	 */
 	protected String getDefaultBorderColor() {
 		return Defaults.getGlobal().getElements().getArc().getBorderColor();
