@@ -40,7 +40,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 
 /**
- * Base object which maps chart options.<br>
+ * Base object which maps chart options.<br>Charba stores the unique chart ID into CHART.JS chart options using <code>charbaId</code> property key.<br>
  * Important topics to take care:<br>
  * <b> Responsive </b><br>
  * When it comes to change the chart size based on the window size, a major limitation is that the canvas render size
