@@ -89,7 +89,7 @@ public final class Rectangle extends Arc {
 	/**
 	 * Sets the edge to skip drawing the border for.
 	 * 
-	 * @param position the edge to skip drawing the border for.
+	 * @param borderSkipped the edge to skip drawing the border for.
 	 * @see  org.pepstock.charba.client.enums.Position
 	 */
 	public void setBorderSkipped(Position borderSkipped) {

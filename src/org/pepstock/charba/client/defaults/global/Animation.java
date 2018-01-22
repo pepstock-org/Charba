@@ -70,7 +70,7 @@ public final class Animation extends AbstractItem {
 	/**
 	 * Returns the animation easing.
 	 * 
-	 * @return animation easing. Default value is {@link org.pepstock.charba.client.enums.Easing#EASE_OUT_QUART}.
+	 * @return animation easing. Default value is {@link org.pepstock.charba.client.enums.Easing#easeOutQuart}.
 	 * @see org.pepstock.charba.client.enums.Easing
 	 */
 	public Easing getEasing() {

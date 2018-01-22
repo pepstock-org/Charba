@@ -77,7 +77,7 @@ public final class Rectangle extends AbstractElement {
 	/**
 	 * Sets the edge to skip drawing the border for.
 	 * 
-	 * @param position the edge to skip drawing the border for.
+	 * @param borderSkipped the edge to skip drawing the border for.
 	 */
 	public void setBorderSkipped(Position borderSkipped) {
 		setValue(Property.borderSkipped, borderSkipped);

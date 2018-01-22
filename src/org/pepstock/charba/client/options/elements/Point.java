@@ -82,7 +82,7 @@ public final class Point extends AbstractElement {
 	/**
 	 * Sets the radius of the point shape. If set to 0, the point is not rendered.
 	 * 
-	 * @param pointRadius array of the radius of the point shape.
+	 * @param radius array of the radius of the point shape.
 	 */
 	public void setRadius(int radius) {
 		setValue(Property.radius, radius);

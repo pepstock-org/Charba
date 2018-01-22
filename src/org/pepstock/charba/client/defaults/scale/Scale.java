@@ -35,7 +35,6 @@ import org.pepstock.charba.client.enums.Position;
  * It maps the CHART.JS object of default, <code>chart.defaults.scale</code>.<br>
  * @author Andrea "Stock" Stocchero
  *
- * @param <T> type of tick to apply to axis
  */
 public class Scale extends AbstractItem {
 	
@@ -131,7 +130,7 @@ public class Scale extends AbstractItem {
 
 	/**
 	 * @return the ticks
-	 * @see Tick
+	 * @see Ticks
 	 */
 	public Ticks getTicks() {
 		return ticks;
