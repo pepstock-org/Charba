@@ -49,9 +49,10 @@ public final class RadialPointLabels extends ChartContainer {
 	}
 
 	/**
-	 * Builds the object with own axis.
+	 * Builds the object storing the chart instance and the axis which this point labels belongs to.
 	 * 
-	 * @param axis own axis.
+	 * @param chart chart instance.
+	 * @param axis axis which this point labels belongs to.
 	 */
 	RadialPointLabels(AbstractChart<?, ?> chart, Axis axis) {
 		super(chart);
@@ -59,8 +60,6 @@ public final class RadialPointLabels extends ChartContainer {
 		registerNativePointLabelCallbacktHandler(getJavaScriptObject());
 	}
 
-	// FIXME defaults comment
-	
 	/**
 	 * If true, labels are shown
 	 * 
@@ -73,7 +72,7 @@ public final class RadialPointLabels extends ChartContainer {
 	/**
 	 * If true, labels are shown
 	 * 
-	 * @return if true, labels are shown. Default is true.
+	 * @return if true, labels are shown. 
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, axis.getScale().getPointLabels().isDisplay());
@@ -91,7 +90,7 @@ public final class RadialPointLabels extends ChartContainer {
 	/**
 	 * Returns the font size for the tick labels.
 	 * 
-	 * @return font size for the tick labels. Default is 10.
+	 * @return font size for the tick labels. 
 	 */
 	public int getFontSize() {
 		return getValue(Property.fontSize, axis.getScale().getPointLabels().getFontSize());
@@ -113,7 +112,6 @@ public final class RadialPointLabels extends ChartContainer {
 	 * inherit).
 	 * 
 	 * @return font style for the tick labels, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 *         Default is normal.
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
@@ -132,7 +130,7 @@ public final class RadialPointLabels extends ChartContainer {
 	/**
 	 * Returns the font color for tick labels.
 	 * 
-	 * @return font color for tick labels. Default is '#666'.
+	 * @return font color for tick labels. 
 	 */
 	public String getFontColor() {
 		return getValue(Property.fontColor, axis.getScale().getPointLabels().getFontColor());
@@ -150,8 +148,7 @@ public final class RadialPointLabels extends ChartContainer {
 	/**
 	 * Returns the font family for the tick labels, follows CSS font-family options.
 	 * 
-	 * @return font family for the tick labels, follows CSS font-family options. Default is "'Helvetica Neue', 'Helvetica',
-	 *         'Arial', sans-serif".
+	 * @return font family for the tick labels, follows CSS font-family options. 
 	 */
 	public String getFontFamily() {
 		return getValue(Property.fontFamily, axis.getScale().getPointLabels().getFontFamily());

@@ -81,7 +81,6 @@ public class Scales extends ChartContainer {
 	public void setYAxes(Axis... axes) {
 		// set java script array
 		setValue(Property.yAxes, ArrayListHelper.load(this.yAxes, axes));
-//		loadChartToAxes(axes);
 	}
 
 	/**
@@ -90,21 +89,5 @@ public class Scales extends ChartContainer {
 	public List<Axis> getYAxes() {
 		return yAxes;
 	}
-
-//	/**
-//	 * Sets the chart instance to loaded axes.
-//	 * 
-//	 * @param axes array of axes
-//	 */
-//	private void loadChartToAxes(Axis... axes) {
-//		// checks the axes array
-//		if (axes != null && axes.length > 0) {
-//			// scans array
-//			for (Axis axis : axes) {
-//				// sets chart instance
-//				axis.setChart(getChart());
-//			}
-//		}
-//	}
 
 }

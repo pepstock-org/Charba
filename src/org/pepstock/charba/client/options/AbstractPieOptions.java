@@ -19,12 +19,12 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Specific options for PIE chart. It contains all properties for this kind of chart.
+ * Abstract options for PIE chart. It contains all properties for this kind of chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractPieOptions extends BaseOptions {
+abstract class AbstractPieOptions extends BaseOptions {
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -37,18 +37,12 @@ public abstract class AbstractPieOptions extends BaseOptions {
 	}
 
 	/**
-	 * Builds the object storing the chart instance.<br>
-	 * Sets also the internal parts of options.
+	 * Builds the object storing the chart instance.
 	 * 
 	 * @param chart chart instance
 	 */
 	protected AbstractPieOptions(AbstractChart<?, ?> chart) {
 		super(chart);
-//		// forces to 0
-//		setCutoutPercentage(0);
-		// sets rotate and animation scale
-		getAnimation().setAnimateRotate(true);
-		getAnimation().setAnimateScale(true);
 	}
 
 	/**
@@ -63,7 +57,7 @@ public abstract class AbstractPieOptions extends BaseOptions {
 	/**
 	 * Returns the the percentage of the chart that is cut out of the middle.
 	 * 
-	 * @return the percentage of the chart that is cut out of the middle. Default is 0.
+	 * @return the percentage of the chart that is cut out of the middle. Default is {@link org.pepstock.charba.client.GlobalOptions#getCutoutPercentage()}.
 	 */
 	public double getCutoutPercentage() {
 		return getValue(Property.cutoutPercentage, getChart().getGlobal().getCutoutPercentage());
@@ -81,7 +75,7 @@ public abstract class AbstractPieOptions extends BaseOptions {
 	/**
 	 * returns the starting angle to draw arcs from.
 	 * 
-	 * @return starting angle to draw arcs from. Default is <code>-0.5 * Math.PI</code>.
+	 * @return starting angle to draw arcs from. Default is {@link org.pepstock.charba.client.GlobalOptions#getRotation()}.
 	 */
 	public double getRotation() {
 		return getValue(Property.rotation, getChart().getGlobal().getRotation());
@@ -99,7 +93,7 @@ public abstract class AbstractPieOptions extends BaseOptions {
 	/**
 	 * Returns the the sweep to allow arcs to cover.
 	 * 
-	 * @return the sweep to allow arcs to cover. Default is <code>2 * Math.PI</code>.
+	 * @return the sweep to allow arcs to cover. Default is {@link org.pepstock.charba.client.GlobalOptions#getCircumference()}.
 	 */
 	public double getCircumference() {
 		return getValue(Property.circumference, getChart().getGlobal().getCircumference());

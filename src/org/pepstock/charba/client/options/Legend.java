@@ -26,7 +26,6 @@ import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.events.DatasetSelectionEvent;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendHoverEvent;
-import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.items.LegendItem;
 
 import com.google.gwt.event.shared.EventHandler;
@@ -145,7 +144,7 @@ public final class Legend extends EventProvider {
 	/**
 	 * Returns if the legend is shown.
 	 * 
-	 * @return if the legend is shown. Default is {@link org.pepstock.charba.client.defaults.global.Legend#isDisplay()}.
+	 * @return if the legend is shown. For default see {@link org.pepstock.charba.client.GlobalOptions##getLegend()}.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getChart().getGlobal().getLegend().isDisplay());
@@ -163,7 +162,7 @@ public final class Legend extends EventProvider {
 	/**
 	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
 	 * 
-	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). Default is {@link org.pepstock.charba.client.defaults.global.Legend#isFullWidth()}.
+	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). For default see {@link org.pepstock.charba.client.GlobalOptions##getLegend()}.
 	 */
 	public boolean isFullWidth() {
 		return getValue(Property.fullWidth, getChart().getGlobal().getLegend().isFullWidth());
@@ -181,7 +180,7 @@ public final class Legend extends EventProvider {
 	/**
 	 * Returns if the legend will show datasets in reverse order.
 	 * 
-	 * @return Legend will show datasets in reverse order. Default is {@link org.pepstock.charba.client.defaults.global.Legend#isReverse()}.
+	 * @return Legend will show datasets in reverse order. For default see {@link org.pepstock.charba.client.GlobalOptions##getLegend()}.
 	 */
 	public boolean isReverse() {
 		return getValue(Property.reverse, getChart().getGlobal().getLegend().isReverse());
@@ -200,7 +199,7 @@ public final class Legend extends EventProvider {
 	/**
 	 * Returns the position of the legend.
 	 * 
-	 * @return Position of the legend. Default is {@link org.pepstock.charba.client.defaults.global.Legend#getPosition()}.
+	 * @return Position of the legend. Default is For default see {@link org.pepstock.charba.client.GlobalOptions##getLegend()}.
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {
@@ -215,23 +214,6 @@ public final class Legend extends EventProvider {
 	 */
 	protected void onClick(ChartNativeEvent event, LegendItem item) {
 		getChart().fireEvent(new LegendClickEvent(event, item));
-	}
-	
-	private void executeInternalOnClickEvent(ChartNativeEvent event, LegendItem item){
-		if (getChart().getType().equals(org.pepstock.charba.client.Type.pie) ||
-				getChart().getType().equals(org.pepstock.charba.client.Type.polarArea) ||
-				getChart().getType().equals(org.pepstock.charba.client.Type.doughnut)){
-			
-		} else {
-			int index = item.getDatasetIndex();
-			DatasetMetaItem meta = getChart().getDatasetMeta(index);
-
-			// See controller.isDatasetVisible comment
-			meta.setHidden(!meta.isHidden());
-
-			// We hid a dataset ... rerender the chart
-			getChart().update();						
-		}
 	}
 
 	/**

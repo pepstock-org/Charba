@@ -39,24 +39,28 @@ public final class PointLabels extends FontItem {
 	}
 
 	/**
-	 * 	
+	 * Builds the object with parent item and child.
+	 * 
+	 * @param parent parent item.
+	 * @param childKey key of child.
 	 */
 	PointLabels(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
 	}
 
 	/**
-	 * If true, labels are shown
+	 * If true, labels are shown.
 	 * 
-	 * @param display if true, labels are shown
+	 * @param display if true, labels are shown.
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
-	 * If true, labels are shown
+	 * If true, labels are shown.
 	 * 
 	 * @return if true, labels are shown. Default is true.
 	 */

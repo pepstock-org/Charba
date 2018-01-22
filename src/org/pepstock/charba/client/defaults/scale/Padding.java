@@ -30,83 +30,90 @@ public final class Padding extends AbstractItem {
 	private static final int DEFAULT_PADDING = 4;
 
 	/**
-	 * Builds the object setting java script objects
+	 * Builds the object with parent item and child.
+	 * 
+	 * @param parent parent item.
+	 * @param childKey key of child.
 	 */
 	Padding(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
 	}
 
 	/**
-	 * Sets the padding left in pixel
+	 * Sets the padding left in pixel.
 	 * 
-	 * @param padding the padding left in pixel
+	 * @param padding the padding left in pixel.
 	 */
 	public void setLeft(int padding) {
 		setValue(Position.left, padding);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
-	 * Returns the padding left in pixel
+	 * Returns the padding left in pixel.
 	 * 
-	 * @return the padding left in pixel
+	 * @return the padding left in pixel. Default is 4.
 	 */
 	public int getLeft() {
 		return getValue(Position.left, DEFAULT_PADDING);
 	}
 
 	/**
-	 * Sets the padding right in pixel
+	 * Sets the padding right in pixel.
 	 * 
-	 * @param padding the padding right in pixel
+	 * @param padding the padding right in pixel.
 	 */
 	public void setRight(int padding) {
 		setValue(Position.right, padding);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
-	 * Returns the padding right in pixel
+	 * Returns the padding right in pixel.
 	 * 
-	 * @return the padding right in pixel
+	 * @return the padding right in pixel. Default is 4.
 	 */
 	public int getRight() {
 		return getValue(Position.right, DEFAULT_PADDING);
 	}
 
 	/**
-	 * Sets the padding top in pixel
+	 * Sets the padding top in pixel.
 	 * 
-	 * @param padding the padding top in pixel
+	 * @param padding the padding top in pixel.
 	 */
 	public void setTop(int padding) {
 		setValue(Position.top, padding);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
-	 * Returns the padding top in pixel
+	 * Returns the padding top in pixel.
 	 * 
-	 * @return the padding top in pixel
+	 * @return the padding top in pixel. Default is 4.
 	 */
 	public int getTop() {
 		return getValue(Position.top, DEFAULT_PADDING);
 	}
 
 	/**
-	 * Sets the padding bottom in pixel
+	 * Sets the padding bottom in pixel.
 	 * 
-	 * @param padding the padding bottom in pixel
+	 * @param padding the padding bottom in pixel.
 	 */
 	public void setBottom(int padding) {
 		setValue(Position.bottom, padding);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
-	 * Returns the padding bottom in pixel
+	 * Returns the padding bottom in pixel.
 	 * 
-	 * @return the padding bottom in pixel
+	 * @return the padding bottom in pixel. Default is 4.
 	 */
 	public int getBottom() {
 		return getValue(Position.bottom, DEFAULT_PADDING);

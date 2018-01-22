@@ -52,7 +52,9 @@ public class BaseTick extends ChartContainer {
 	}
 
 	/**
-	 * Builds the object and registers the callback
+	 * Builds the object storing the chart instance.
+	 * 
+	 * @param chart chart instance
 	 */
 	BaseTick(AbstractChart<?, ?> chart) {
 		super(chart);
@@ -86,7 +88,7 @@ public class BaseTick extends ChartContainer {
 	/**
 	 * Returns the font size for tick.
 	 * 
-	 * @return the font size for tick. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getFontSize()}.
+	 * @return the font size for tick. 
 	 */
 	public int getFontSize() {
 		return getValue(Property.fontSize, axis.getScale().getTicks().getFontSize());
@@ -105,7 +107,7 @@ public class BaseTick extends ChartContainer {
 	/**
 	 * Returns the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getFontStyle()}.
+	 * @return the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). 
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
@@ -124,7 +126,7 @@ public class BaseTick extends ChartContainer {
 	/**
 	 * Returns the font color for tick
 	 * 
-	 * @return Font color for tick. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getFontColor()}.
+	 * @return Font color for tick.
 	 */
 	public String getFontColor() {
 		return getValue(Property.fontColor, axis.getScale().getTicks().getFontColor());
@@ -142,7 +144,7 @@ public class BaseTick extends ChartContainer {
 	/**
 	 * Returns the font family for the tick, follows CSS font-family options.
 	 * 
-	 * @return Font family for the tick, follows CSS font-family options. Default is {@link org.pepstock.charba.client.defaults.scale.Ticks#getFontFamily()}.
+	 * @return Font family for the tick, follows CSS font-family options. 
 	 */
 	public String getFontFamily() {
 		return getValue(Property.fontFamily, axis.getScale().getTicks().getFontFamily());

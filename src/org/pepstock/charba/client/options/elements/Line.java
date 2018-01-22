@@ -26,10 +26,7 @@ import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.JoinStyle;
 
 /**
- * Line elements are used to represent the line in a line chart.<br>
- * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the same way.<br>
- * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
- * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a dataset.
+ * Line elements are used to represent the line in a line chart.
  * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.LineChart
@@ -102,7 +99,7 @@ public final class Line extends AbstractElement {
 	/**
 	 * Returns the Bezier curve tension (0 for no Bezier curves).
 	 * 
-	 * @return the Bezier curve tension (0 for no Bezier curves). Default is {@link org.pepstock.charba.client.defaults.global.Line#getTension()}.
+	 * @return the Bezier curve tension (0 for no Bezier curves).
 	 */
 	public double getTension() {
 		return getValue(Property.tension, getChart().getGlobal().getElements().getLine().getTension());
@@ -121,7 +118,7 @@ public final class Line extends AbstractElement {
 	/**
 	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square. By default this property is set to butt.
 	 * 
-	 * @return how the end points of every line are drawn. Default is {@link org.pepstock.charba.client.defaults.global.Line#getBorderCapStyle()}.
+	 * @return how the end points of every line are drawn.
 	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public CapStyle getBorderCapStyle() {
@@ -171,7 +168,7 @@ public final class Line extends AbstractElement {
 	/**
 	 * Returns the line dash pattern offset or "phase".
 	 * 
-	 * @return the line dash pattern offset or "phase". Default is {@link org.pepstock.charba.client.defaults.global.Line#getBorderDashOffset()}.
+	 * @return the line dash pattern offset or "phase". 
 	 */
 	public int getBorderDashOffset() {
 		return getValue(Property.borderDashOffset, getChart().getGlobal().getElements().getLine().getBorderDashOffset());
@@ -182,7 +179,7 @@ public final class Line extends AbstractElement {
 	 * skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
-	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
+	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter. 
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
@@ -194,7 +191,7 @@ public final class Line extends AbstractElement {
 	 * skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
-	 * @return There are three possible values for this property: round, bevel and miter. Default is {@link org.pepstock.charba.client.defaults.global.Line#getBorderJoinStyle()}.
+	 * @return There are three possible values for this property: round, bevel and miter. 
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public JoinStyle getBorderJoinStyle() {
@@ -213,7 +210,7 @@ public final class Line extends AbstractElement {
 	/**
 	 * Returns <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
 	 * 
-	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction. Default is {@link org.pepstock.charba.client.defaults.global.Line#isCapBezierPoints()}.
+	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
 	 */
 	public boolean isCapBezierPoints() {
 		return getValue(Property.capBezierPoints, getChart().getGlobal().getElements().getLine().isCapBezierPoints());
@@ -239,7 +236,7 @@ public final class Line extends AbstractElement {
 	/**
 	 * Returns how to fill the area under the line.
 	 * 
-	 * @return how to fill the area under the line. Default is {@link org.pepstock.charba.client.defaults.global.Line#getFill()}.
+	 * @return how to fill the area under the line.
 	 * @see org.pepstock.charba.client.enums.Fill
 	 */
 	public Fill getFill() {
@@ -276,7 +273,7 @@ public final class Line extends AbstractElement {
 	/**
 	 * Returns <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 * 
-	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored). Default is {@link org.pepstock.charba.client.defaults.global.Line#isStepped()}.
+	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 */
 	public boolean isStepped() {
 		return getValue(Property.stepped, getChart().getGlobal().getElements().getLine().isStepped());

@@ -37,7 +37,9 @@ public final class CartesianLogarithmicTick extends CartesianTick {
 	}
 
 	/**
-	 * Empty constructor to reduce visibility
+	 * Builds the object storing the chart instance.
+	 * 
+	 * @param chart chart instance
 	 */
 	CartesianLogarithmicTick(AbstractChart<?, ?> chart) {
 		super(chart);
@@ -55,7 +57,7 @@ public final class CartesianLogarithmicTick extends CartesianTick {
 	/**
 	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
 	 * 
-	 * @return the user defined minimum number for the scale, overrides minimum value from data. Default is Double.MIN_VALUE.
+	 * @return the user defined minimum number for the scale, overrides minimum value from data. 
 	 */
 	public double getMin() {
 		return getValue(Property.min, getAxis().getScale().getTicks().getMin());
@@ -73,7 +75,7 @@ public final class CartesianLogarithmicTick extends CartesianTick {
 	/**
 	 * Returns the user defined maximum number for the scale, overrides maximum value from data.
 	 * 
-	 * @return user defined maximum number for the scale, overrides maximum value from data. Default is Double.MAX_VALUE.
+	 * @return user defined maximum number for the scale, overrides maximum value from data. 
 	 */
 	public double getMax() {
 		return getValue(Property.max, getAxis().getScale().getTicks().getMax());

@@ -20,10 +20,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
- * Point elements are used to represent the points in a line chart or a bubble chart.<br>
- * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the same way.<br>
- * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
- * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a dataset.
+ * Point elements are used to represent the points in a line chart or a bubble chart.
  * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.LineChart
@@ -94,7 +91,7 @@ public final class Point extends AbstractElement {
 	/**
 	 * Returns the radius of the point when hovered.
 	 * 
-	 * @return list of the radius of the point when hovered. Default is {@link org.pepstock.charba.client.defaults.global.Point#getRadius()}.
+	 * @return list of the radius of the point when hovered.
 	 */
 	public int getRadius() {
 		return getValue(Property.radius, getChart().getGlobal().getElements().getPoint().getRadius());
@@ -113,7 +110,7 @@ public final class Point extends AbstractElement {
 	/**
 	 * Returns the style of the point.
 	 * 
-	 * @return the style of the point. Default is {@link org.pepstock.charba.client.defaults.global.Point#getPointStyle()}.
+	 * @return the style of the point.
 	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public PointStyle getPointStyle() {
@@ -132,7 +129,7 @@ public final class Point extends AbstractElement {
 	/**
 	 * Returns the pixel size of the non-displayed point that reacts to mouse events.
 	 * 
-	 * @return the pixel size of the non-displayed point. Default is {@link org.pepstock.charba.client.defaults.global.Point#getHitRadius()}.
+	 * @return the pixel size of the non-displayed point. 
 	 */
 	public int getHitRadius() {
 		return getValue(Property.hitRadius, getChart().getGlobal().getElements().getPoint().getHitRadius());
@@ -150,7 +147,7 @@ public final class Point extends AbstractElement {
 	/**
 	 * Returns the radius of the point when hovered.
 	 * 
-	 * @return the radius of the point when hovered. Default is {@link org.pepstock.charba.client.defaults.global.Point#getHoverRadius()}.
+	 * @return the radius of the point when hovered. 
 	 */
 	public int getHoverRadius() {
 		return getValue(Property.hoverRadius, getChart().getGlobal().getElements().getPoint().getHoverRadius());
@@ -168,7 +165,7 @@ public final class Point extends AbstractElement {
 	/**
 	 * Returns the border width of point when hovered.
 	 * 
-	 * @return the border width of point when hovered. Default is {@link org.pepstock.charba.client.defaults.global.Point#getHoverBorderWidth()}.
+	 * @return the border width of point when hovered.
 	 */
 	public int getHoverBorderWidth() {
 		return getValue(Property.hoverBorderWidth,  getChart().getGlobal().getElements().getPoint().getBorderWidth());

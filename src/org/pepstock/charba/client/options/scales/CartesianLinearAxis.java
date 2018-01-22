@@ -27,12 +27,22 @@ import org.pepstock.charba.client.enums.CartesianAxisType;
  */
 public final class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> {
 	
+	/**
+	 * Builds the object storing the chart instance. Axis type is Y by default.
+	 * 
+	 * @param chart chart instance
+	 * @see CartesianAxisType#y
+	 */
 	public CartesianLinearAxis(AbstractChart<?, ?> chart) {
 		this(chart, CartesianAxisType.y);
 	}
 
 	/**
-	 * Builds the axis
+	 * Builds the object storing the chart instance and axis type.
+	 * 
+	 * @param chart chart instance
+	 * @param cartesianType cartesian axis type.
+	 * @see CartesianAxisType
 	 */
 	public CartesianLinearAxis(AbstractChart<?, ?> chart, CartesianAxisType cartesianType) {
 		super(chart, new CartesianLinearTick(chart), cartesianType);

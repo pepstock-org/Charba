@@ -40,6 +40,11 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 		maxBarThickness
 	}
 
+	/**
+	 * Builds the object storing the chart instance.
+	 * 
+	 * @param chart chart instance
+	 */
 	public BarCategoryAxis(AbstractChart<?, ?> chart) {
 		super(chart);
 		barGridLines = new BarGridLines(chart, this);
@@ -61,7 +66,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 * category width and put the bars right next to each other.
 	 * 
 	 * @return percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
-	 *         category width and put the bars right next to each other. Default is 0.9.
+	 *         category width and put the bars right next to each other. 
 	 */
 	public double getBarPercentage() {
 		return getValue(Property.barPercentage, getScale().getBarPercentage());
@@ -79,7 +84,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	/**
 	 * Returns the percent (0-1) of the available width each category should be within the sample width.
 	 * 
-	 * @return the percent (0-1) of the available width each category should be within the sample width. Default is 0.8.
+	 * @return the percent (0-1) of the available width each category should be within the sample width.
 	 */
 	public double getCategoryPercentage() {
 		return getValue(Property.categoryPercentage, getScale().getCategoryPercentage());
@@ -103,7 +108,6 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 * 
 	 * @return width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take
 	 *         the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
-	 *         Default is 0.
 	 */
 	public int getBarThickness() {
 		return getValue(Property.barThickness, getScale().getBarThickness());
@@ -121,7 +125,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	/**
 	 * Returns the maximum bar thickness.
 	 * 
-	 * @return the maximum bar thickness. Default is 0.
+	 * @return the maximum bar thickness.
 	 */
 	public int getMaxBarThickness() {
 		return getValue(Property.maxBarThickness, getScale().getMaxBarThickness());

@@ -60,9 +60,10 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	}
 
 	/**
-	 * Builds the object storing the ticks
-	 * 
-	 * @param ticks ticks of this axis
+	 * Builds the object storing the chart instance, ticks and cartesian axis type.
+	 * @param chart chart instance
+	 * @param ticks ticks instance
+	 * @param cartesianType cartesian type
 	 */
 	protected CartesianAxis(AbstractChart<?, ?> chart, T ticks, CartesianAxisType cartesianType) {
 		super(chart);
@@ -139,7 +140,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	/**
 	 * If true, extra space is added to the both edges and the axis is scaled to fit into the chart area.
 	 * 
-	 * @return extra space of axis. Default is {@link org.pepstock.charba.client.defaults.scale.Scale#isOffset()}.
+	 * @return extra space of axis. 
 	 */
 	public boolean isOffset() {
 		return getValue(Property.offset, getScale().isOffset());
@@ -159,7 +160,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * The ID is used to link datasets and scale axes together.<br>
 	 * This is especially needed if multi-axes charts are used.
 	 * 
-	 * @return The ID is used to link datasets and scale axes together or <code>null</code> if not set
+	 * @return The ID is used to link datasets and scale axes together 
 	 */
 	public String getId() {
 		return getValue(Property.id, getScale().getId());
@@ -178,7 +179,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	/**
 	 * Position of the axis in the chart. Possible values are: 'top', 'left', 'bottom', 'right'
 	 * 
-	 * @return position of axis. Default is {@link org.pepstock.charba.client.defaults.scale.Scale#getPosition()}.
+	 * @return position of axis.
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {

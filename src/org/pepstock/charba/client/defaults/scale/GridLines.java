@@ -81,7 +81,10 @@ public final class GridLines extends AbstractItem {
 	}
 
 	/**
-	 * Empty constructor to reduce visibility
+	 * Builds the object with parent item and child.
+	 * 
+	 * @param parent parent item.
+	 * @param childKey key of child.
 	 */
 	GridLines(AbstractItem parent, Key childKey) {
 		super(parent, childKey);
@@ -94,6 +97,7 @@ public final class GridLines extends AbstractItem {
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -126,6 +130,7 @@ public final class GridLines extends AbstractItem {
 	 */
 	private void setColor(JsStringArrayList color) {
 		isColorArray = checkAndSetStringValues(Property.color, color);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -164,6 +169,7 @@ public final class GridLines extends AbstractItem {
 	 */
 	private void setBorderDash(JsIntegerArrayList borderDash) {
 		setIntegerArray(Property.borderDash, borderDash);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -184,6 +190,7 @@ public final class GridLines extends AbstractItem {
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
 		setValue(Property.borderDashOffset, borderDashOffset);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -212,6 +219,7 @@ public final class GridLines extends AbstractItem {
 	 */
 	private void setLineWidth(JsIntegerArrayList lineWidth) {
 		isLineWidthArray = checkAndSetIntegerValues(Property.lineWidth, lineWidth);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -238,6 +246,7 @@ public final class GridLines extends AbstractItem {
 	 */
 	public void setDrawBorder(boolean drawBorder) {
 		setValue(Property.drawBorder, drawBorder);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -259,6 +268,7 @@ public final class GridLines extends AbstractItem {
 	 */
 	public void setDrawOnChartArea(boolean drawOnChartArea) {
 		setValue(Property.drawOnChartArea, drawOnChartArea);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -280,6 +290,7 @@ public final class GridLines extends AbstractItem {
 	 */
 	public void setDrawTicks(boolean drawTicks) {
 		setValue(Property.drawTicks, drawTicks);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -299,6 +310,7 @@ public final class GridLines extends AbstractItem {
 	 */
 	public void setTickMarkLength(int tickMarkLength) {
 		setValue(Property.tickMarkLength, tickMarkLength);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -318,6 +330,7 @@ public final class GridLines extends AbstractItem {
 	 */
 	public void setZeroLineWidth(int zeroLineWidth) {
 		setValue(Property.zeroLineWidth, zeroLineWidth);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -337,6 +350,7 @@ public final class GridLines extends AbstractItem {
 	 */
 	public void setZeroLineColor(String zeroLineColor) {
 		setValue(Property.zeroLineColor, zeroLineColor);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -365,6 +379,7 @@ public final class GridLines extends AbstractItem {
 	 */
 	private void setZeroLineBorderDash(JsIntegerArrayList zeroLineBorderDash) {
 		setIntegerArray(Property.zeroLineBorderDash, zeroLineBorderDash);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -384,6 +399,7 @@ public final class GridLines extends AbstractItem {
 	 */
 	public void setZeroLineBorderDashOffset(int zeroLineBorderDashOffset) {
 		setValue(Property.zeroLineBorderDashOffset, zeroLineBorderDashOffset);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -403,6 +419,7 @@ public final class GridLines extends AbstractItem {
 	 */
 	public void setOffsetGridLines(boolean offsetGridLines) {
 		setValue(Property.offsetGridLines, offsetGridLines);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 

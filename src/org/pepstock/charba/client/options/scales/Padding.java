@@ -29,7 +29,12 @@ public final class Padding extends ChartContainer {
 	
 	private final Axis axis;
 	
-	// FIXME
+	/**
+	 * Builds the object storing the chart instance and the axis which this padding belongs to.
+	 * 
+	 * @param chart chart instance.
+	 * @param axis axis which this padding belongs to.
+	 */
 	Padding(AbstractChart<?, ?> chart, Axis axis) {
 		super(chart);
 		this.axis = axis;
@@ -47,7 +52,7 @@ public final class Padding extends ChartContainer {
 	/**
 	 * Returns the padding left in pixel.
 	 * 
-	 * @return the padding left in pixel. Default is {@link org.pepstock.charba.client.defaults.scale.Padding#getLeft()}.
+	 * @return the padding left in pixel. 
 	 */
 	public int getLeft() {
 		return getValue(Position.left, axis.getScale().getScaleLabel().getPadding().getLeft());
@@ -65,7 +70,7 @@ public final class Padding extends ChartContainer {
 	/**
 	 * Returns the padding right in pixel.
 	 * 
-	 * @return the padding right in pixel. Default is {@link org.pepstock.charba.client.defaults.scale.Padding#getRight()}.
+	 * @return the padding right in pixel. 
 	 */
 	public int getRight() {
 		return getValue(Position.right, axis.getScale().getScaleLabel().getPadding().getRight());
@@ -83,7 +88,7 @@ public final class Padding extends ChartContainer {
 	/**
 	 * Returns the padding top in pixel.
 	 * 
-	 * @return the padding top in pixel. Default is {@link org.pepstock.charba.client.defaults.scale.Padding#getTop()}.
+	 * @return the padding top in pixel.
 	 */
 	public int getTop() {
 		return getValue(Position.top, axis.getScale().getScaleLabel().getPadding().getTop());
@@ -101,7 +106,7 @@ public final class Padding extends ChartContainer {
 	/**
 	 * Returns the padding bottom in pixel.
 	 * 
-	 * @return the padding bottom in pixel. Default is {@link org.pepstock.charba.client.defaults.scale.Padding#getBottom()}.
+	 * @return the padding bottom in pixel.
 	 */
 	public int getBottom() {
 		return getValue(Position.bottom, axis.getScale().getScaleLabel().getPadding().getBottom());

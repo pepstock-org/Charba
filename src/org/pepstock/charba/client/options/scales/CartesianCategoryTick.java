@@ -42,7 +42,9 @@ public final class CartesianCategoryTick extends CartesianTick {
 	}
 
 	/**
-	 * Empty constructor to reduce visibility
+	 * Builds the object storing the chart instance.
+	 * 
+	 * @param chart chart instance
 	 */
 	CartesianCategoryTick(AbstractChart<?, ?> chart) {
 		super(chart);

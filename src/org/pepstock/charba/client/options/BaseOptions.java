@@ -59,6 +59,7 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
  */
 public abstract class BaseOptions extends EventProvider {
 	
+	// legend error
 	private static final String LEGEND_CALLBACK_ERROR = "Unable to execute LegendCallback";
 
 	private final Animation animation;
@@ -287,7 +288,7 @@ public abstract class BaseOptions extends EventProvider {
 	/**
 	 * Returns the resizing of the chart canvas when its container does.
 	 * 
-	 * @return the resizing of the chart canvas when its container does. Default is {@link org.pepstock.charba.client.defaults.global.Options#isResponsive()}.
+	 * @return the resizing of the chart canvas when its container does. Default is {@link org.pepstock.charba.client.GlobalOptions#isResponsive()}.
 	 */
 	public boolean isResponsive() {
 		return getValue(Property.responsive, getChart().getGlobal().isResponsive());
@@ -305,7 +306,7 @@ public abstract class BaseOptions extends EventProvider {
 	/**
 	 * Returns the duration in milliseconds it takes to animate to new size after a resize event.
 	 * 
-	 * @return the duration in milliseconds it takes to animate to new size after a resize event. Default is {@link org.pepstock.charba.client.defaults.global.Options#getResponsiveAnimationDuration()}.
+	 * @return the duration in milliseconds it takes to animate to new size after a resize event. Default is {@link org.pepstock.charba.client.GlobalOptions#getResponsiveAnimationDuration()}.
 	 */
 	public int getResponsiveAnimationDuration() {
 		return getValue(Property.responsiveAnimationDuration, getChart().getGlobal().getResponsiveAnimationDuration());
@@ -323,7 +324,7 @@ public abstract class BaseOptions extends EventProvider {
 	/**
 	 * Returns the the maintaining of the original canvas aspect ratio (width / height) when resizing.
 	 * 
-	 * @return the maintaining of the original canvas aspect ratio (width / height) when resizing. Default is {@link org.pepstock.charba.client.defaults.global.Options#isMaintainAspectRatio()}.
+	 * @return the maintaining of the original canvas aspect ratio (width / height) when resizing. Default is {@link org.pepstock.charba.client.GlobalOptions#isMaintainAspectRatio()}.
 	 */
 	public boolean isMaintainAspectRatio() {
 		return getValue(Property.maintainAspectRatio, getChart().getGlobal().isMaintainAspectRatio());

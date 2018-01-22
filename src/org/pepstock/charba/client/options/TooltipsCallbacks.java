@@ -27,10 +27,14 @@ import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipItemArray;
 
 /**
+ * Contains all callbacks defined for a toolitp.
  * 
+ * @author Andrea "Stock" Stocchero
+ *
  */
 public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	
+	// empty string 
 	private static final String EMPTY = "";
 	
 	private static final TooltipLabelColor DEFAULT_LABEL_COLOR = new TooltipLabelColor();
@@ -61,8 +65,14 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	    afterFooter
 	}
 	
+	/**
+	 * Creates the object using the tooltip one.
+	 * 
+	 * @param tooltips tooltip object
+	 */
 	TooltipsCallbacks(Tooltips tooltips) {
 		this.tooltips = tooltips;
+		// sets the colors getting from tooltip
 		DEFAULT_LABEL_COLOR.setBackgroundColor(tooltips.getBackgroundColor());
 		DEFAULT_LABEL_COLOR.setBackgroundColor(tooltips.getBorderColor());
 	}
@@ -136,108 +146,195 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	}
 
 	/**
-	 * 
-	 * @param chartId
-	 * @param items
-	 * @return
+	 * Called before body creation.
+	 * @param items tooltips items
+	 * @return array of strings for body. Default is an empty array.
 	 */
 	protected String[] onBeforeBody(TooltipItemArray items){
+		// checks if callbacks is set
 		if (bodyCallback != null){
 			return bodyCallback.onBeforeBody(tooltips.getChart(), items.getItems());
 		}
 		return new String[0];
 	}
 	
+	/**
+	 * Called after body creation.
+	 * @param items tooltips items
+	 * @return array of strings for body. Default is an empty array.
+	 */
 	protected String[] onAfterBody(TooltipItemArray items){
+		// checks if callbacks is set
 		if (bodyCallback != null){
 			return bodyCallback.onAfterBody(tooltips.getChart(), items.getItems());
 		}
+		// empty array
 		return new String[0];
 	}
 
+	/**
+	 * Called before title creation.
+	 * @param items tooltips items
+	 * @return array of strings for body. Default is an empty array.
+	 */
 	protected String[] onBeforeTitle(TooltipItemArray items){
+		// checks if callbacks is set
 		if (titleCallback != null){
 			return titleCallback.onBeforeTitle(tooltips.getChart(), items.getItems());
 		}
+		// empty array
 		return new String[0];
 	}
 
+	/**
+	 * Called title creation
+	 * @param items tooltips items
+	 * @return array of strings for body. Default is an empty array.
+	 */
 	protected String[] onTitle(TooltipItemArray items){
+		// checks if callbacks is set
 		if (titleCallback != null){
 			return titleCallback.onTitle(tooltips.getChart(), items.getItems());
 		}
+		// empty array
 		return new String[0];
 	}
 
+	/**
+	 * Called after title creation.
+	 * @param items tooltips items
+	 * @return array of strings for body. Default is an empty array.
+	 */
 	protected String[] onAfterTitle(TooltipItemArray items){
+		// checks if callbacks is set
 		if (titleCallback != null){
 			return titleCallback.onAfterTitle(tooltips.getChart(), items.getItems());
 		}
+		// empty array
 		return new String[0];
 	}
 
+	/**
+	 * Called before footer creation.
+	 * @param items tooltips items
+	 * @return array of strings for body. Default is an empty array.
+	 */
 	protected String[] onBeforeFooter(TooltipItemArray items){
+		// checks if callbacks is set
 		if (footerCallback != null){
 			return footerCallback.onBeforeFooter(tooltips.getChart(), items.getItems());
 		}
+		// empty array
 		return new String[0];
 	}
 
+	/**
+	 * Called footer creation.
+	 * @param items tooltips items
+	 * @return array of strings for body. Default is an empty array.
+	 */
 	protected String[] onFooter(TooltipItemArray items){
+		// checks if callbacks is set
 		if (footerCallback != null){
 			return footerCallback.onFooter(tooltips.getChart(), items.getItems());
 		}
+		// empty array
 		return new String[0];
 	}
 
+	/**
+	 * Called after footer creation.
+	 * @param items tooltips items
+	 * @return array of strings for body. Default is an empty array.
+	 */
 	protected String[] onAfterFooter(TooltipItemArray items){
+		// checks if callbacks is set
 		if (footerCallback != null){
 			return footerCallback.onAfterFooter(tooltips.getChart(), items.getItems());
 		}
+		// empty array
 		return new String[0];
 	}
 
+	/**
+	 * Called before label creation.
+	 * @param item tooltips item
+	 * @return string for label. Default is an empty string.
+	 */
 	protected String onBeforeLabel(TooltipItem item){
+		// checks if callbacks is set
 		if (labelCallback != null){
 			return labelCallback.onBeforeLabel(tooltips.getChart(), item);
 		}
+		// empty string
 		return EMPTY;
 	}
 
+	/**
+	 * Called label creation.
+	 * @param item tooltips item
+	 * @return string for label. Default is an empty string.
+	 */
 	protected String onLabel(TooltipItem item){
+		// checks if callbacks is set
 		if (labelCallback != null){
 			return labelCallback.onLabel(tooltips.getChart(), item);
 		}
+		// empty string
 		return EMPTY;
 	}
 	
+	/**
+	 * Called text label color creation.
+	 * @param item tooltips item
+	 * @return string for label color.
+	 */
 	protected String onLabelTextColor(TooltipItem item){
+		// checks if callbacks is set
 		if (labelCallback != null){
 			return labelCallback.onLabelTextColor(tooltips.getChart(), item);
 		}
+		// empty string
 		return EMPTY;
 	}
 	
+	/**
+	 * Called label color creation.
+	 * @param item tooltips item
+	 * @return label color object.
+	 * @see org.pepstock.charba.client.callbacks.TooltipLabelColor
+	 */
 	protected GenericJavaScriptObject onLabelColor(TooltipItem item){
+		// checks if callbacks is set
 		if (labelCallback != null){
 			TooltipLabelColor result = labelCallback.onLabelColor(tooltips.getChart(), item);
 			if (result != null){
 				return result.getObject();
 			}
 		}
+		// default color
 		return DEFAULT_LABEL_COLOR.getObject();
 	}
 
+	/**
+	 * Called after label creation.
+	 * @param item tooltips item
+	 * @return string for label.
+	 */
 	protected String onAfterLabel(TooltipItem item){
+		// checks if callbacks is set
 		if (labelCallback != null){
 			return labelCallback.onAfterLabel(tooltips.getChart(), item);
 		}
+		// empty string
 		return EMPTY;
 	}
 
 	/**
+	 * Sets the java script code to activate the call back, adding functions.
 	 * 
 	 * @param options
+	 *            java script object where adding new functions definition.
 	 */
     private native void registerNativeTitleHandlers(GenericJavaScriptObject options)/*-{
 		var self = this;
@@ -259,8 +356,10 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	}-*/;
 
 	/**
+	 * Sets the java script code to activate the call back, adding functions.
 	 * 
 	 * @param options
+	 *            java script object where adding new functions definition.
 	 */
     private native void registerNativeBodyHandlers(GenericJavaScriptObject options)/*-{
 		var self = this;
@@ -277,8 +376,10 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	}-*/;
 
 	/**
+	 * Sets the java script code to activate the call back, adding functions.
 	 * 
 	 * @param options
+	 *            java script object where adding new functions definition.
 	 */
     private native void registerNativeFooterHandlers(GenericJavaScriptObject options)/*-{
 		var self = this;
@@ -301,8 +402,10 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
     
    
 	/**
+	 * Sets the java script code to activate the call back, adding functions.
 	 * 
 	 * @param options
+	 *            java script object where adding new functions definition.
 	 */
     private native void registerNativeLabelHandlers(GenericJavaScriptObject options)/*-{
 		var self = this;

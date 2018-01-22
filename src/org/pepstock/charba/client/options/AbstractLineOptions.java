@@ -19,7 +19,7 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Specific options for LINE chart. It contains all properties for this kind of chart.
+ * Abstract options for LINE chart. It contains all properties for this kind of chart.
  *
  * @author Andrea "Stock" Stocchero
  *
@@ -56,7 +56,7 @@ abstract class AbstractLineOptions extends MultiScalesOptions {
 	/**
 	 * If false, the lines between points are not drawn.
 	 * 
-	 * @return If false, the lines between points are not drawn.. Default is true.
+	 * @return If false, the lines between points are not drawn. Default is {@link org.pepstock.charba.client.GlobalOptions#isShowLines()}.
 	 */
 	public boolean isShowLines() {
 		return getValue(Property.showLines, getChart().getGlobal().isShowLines());
@@ -74,7 +74,7 @@ abstract class AbstractLineOptions extends MultiScalesOptions {
 	/**
 	 * If false, NaN data causes a break in the line.
 	 * 
-	 * @return If false, NaN data causes a break in the line. Default is false.
+	 * @return If false, NaN data causes a break in the line. Default is {@link org.pepstock.charba.client.GlobalOptions#isSpanGaps()}.
 	 */
 	public boolean isSpanGaps() {
 		return getValue(Property.spanGaps, getChart().getGlobal().isSpanGaps());

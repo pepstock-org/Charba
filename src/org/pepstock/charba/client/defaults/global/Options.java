@@ -36,6 +36,7 @@ import org.pepstock.charba.client.enums.FontStyle;
  * automatically based on the display size, making the rendering inaccurate.<br>
  * It provides a few options to enable responsiveness and control the resize behavior of charts by detecting when the canvas
  * display size changes and update the render size accordingly.<br>
+ * It maps the CHART.JS object of default, <code>chart.defaults.global</code>.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -120,9 +121,10 @@ public class Options extends AbstractItem {
 	}
 
 	/**
-	 * Creates the object using the java script object with teh defaults provided by CHART.JS.
+	 * Creates the object using the java script object with the defaults provided by CHART.JS.<br>
+	 * It's a root element.
 	 * 
-	 * @param javaScriptObject the java script object with teh defaults provided by CHART.JS.
+	 * @param javaScriptObject the java script object with the defaults provided by CHART.JS.
 	 */
 	public Options(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
