@@ -82,6 +82,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	// gets if Canvas is supported
 	private final boolean isCanvasSupported = Canvas.isSupported();
 	
+	// merged options of defaults
 	private final GlobalOptions options;
 
 	/**
@@ -262,6 +263,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	public void destroy() {
 		if (chart != null) {
 			destroyChart();
+			// removes chart instance from collection
 			Charts.remove(getId());
 		}
 	}
@@ -382,7 +384,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 * Looks for the dataset that matches the current index and returns that metadata.
 	 * 
 	 * @param index dataset index
-	 * @return list of dataset meta data items.
+	 * @return dataset meta data item.
 	 */
 	public DatasetMetaItem getDatasetMeta(int index) {
 		// checks consistency of chart and datasets
@@ -449,6 +451,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 			configuration.setPlugins(plugins);
 			// destroy chart if chart is already instantiated
 			destroy();
+			// stores teh chart instance into collection
 			Charts.add(this);
 			// draws chart with configuration
 			drawChart(configuration.getObject());
@@ -612,9 +615,10 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 
 	
 	/**
-	 * Builds the configuration suing teh defaults global both for chart and for teh specific chart.
+	 * Builds the configuration using the defaults global both for chart and for the specific chart.
 	 * 
 	 * @param chartType type of chart
+	 * @return java script object with merged configuration.
 	 */
 	private native GenericJavaScriptObject createGlobalOptions(String chartType) /*-{
 		var chartOptions = $wnd.Chart.helpers.clone($wnd.Chart.defaults[chartType]);

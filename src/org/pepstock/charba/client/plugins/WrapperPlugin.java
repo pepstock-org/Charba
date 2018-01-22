@@ -53,7 +53,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	WrapperPlugin(Plugin delegation) {
 		// stores the plugin
 		this.delegation = delegation;
-		// sets teh plugin ID
+		// sets the plugin ID
 		setValue(Property.id, delegation.getId());
 		// registers itself with all methods of plugin definition
 		registerNativePluginsHandler(getJavaScriptObject());
