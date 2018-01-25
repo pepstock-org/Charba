@@ -17,6 +17,7 @@ package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.StandardKey;
 
 /**
  * Used for sparse datasets, such as those in scatter charts. Each data point is specified using an object containing x and y properties.
@@ -92,4 +93,21 @@ public final class DataPoint extends JavaScriptObjectContainer{
 		return getValue(Property.r, DEFAULT_R);
 	}
 
+	/**
+	 * Sets a custom field to data point.
+	 * @param key key of java script object to set.
+	 * @param value value to set.
+	 */
+	public void setAttribute(String key, double value){
+		  setValue(new StandardKey(key), value);
+	}
+
+	/** 
+	 * Returns a custom field value from data point.
+	 * @param key key of java script object to get.
+	 * @return custom field value from data point. Default is {@link java.lang.Double#MIN_VALUE}.
+	 */
+	public double getAttribute(String key){
+		return getValue(new StandardKey(key), Double.MIN_VALUE);
+	}
 }
