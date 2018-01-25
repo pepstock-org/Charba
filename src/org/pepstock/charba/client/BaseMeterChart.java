@@ -21,6 +21,7 @@ import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.MeterDataset;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.MeterDisplay;
+import org.pepstock.charba.client.items.ChartAreaItem;
 import org.pepstock.charba.client.items.ChartItem;
 import org.pepstock.charba.client.options.MeterOptions;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
@@ -107,10 +108,10 @@ abstract class BaseMeterChart<O extends MeterOptions, D extends MeterDataset> ex
 		public void onAfterDraw(AbstractChart<?, ?> chart, double easing, JavaScriptObject options) {
 			List<Dataset> datasets = superChart.getData().getDatasets();
 			if (!datasets.isEmpty()){
-				ChartItem m = superChart.getChart();
+				ChartItem item = superChart.getChart();
 				@SuppressWarnings("unchecked")
 				D dataset = (D) datasets.get(0);
-				execute(chart, m, dataset, superChart.getOptions());
+				execute(chart, item, dataset, superChart.getOptions());
 			}
 		}
 		
@@ -118,9 +119,10 @@ abstract class BaseMeterChart<O extends MeterOptions, D extends MeterDataset> ex
 			final int sideOfSquare = (int) ((item.getInnerRadius() * 2) / SQRT_2);
 
 			Context2d ctx = chart.getCanvas().getContext2d();
-			final int centerX = chart.getCanvas().getOffsetWidth() / 2;
-			final int centerY = chart.getCanvas().getOffsetHeight() / 2;
+			ChartAreaItem area = item.getChartArea();
 
+			final int centerX = (area.getRight() - area.getLeft()) / 2 + area.getLeft();
+			final int centerY = (area.getBottom() - area.getTop()) / 2 + area.getTop();
 			// gets value
 			final double maxValue = MeterDisplay.percentage.equals(options.getDisplay()) || MeterDisplay.percentageAndLabel.equals(options.getDisplay()) ? MAX_PERCENTAGE : dataset.getMax();
 
