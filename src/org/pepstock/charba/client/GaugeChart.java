@@ -15,16 +15,9 @@
 */
 package org.pepstock.charba.client;
 
-import java.util.List;
-
-import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.GaugeDataset;
-import org.pepstock.charba.client.items.ChartItem;
+import org.pepstock.charba.client.data.MeterDataset;
 import org.pepstock.charba.client.options.GaugeOptions;
-import org.pepstock.charba.client.plugins.AbstractPlugin;
-import org.pepstock.charba.client.plugins.InvalidPluginIdException;
-
-import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * GAUGE chart implementation.
@@ -32,31 +25,18 @@ import com.google.gwt.core.client.JavaScriptObject;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class GaugeChart extends AbstractChart<GaugeOptions, GaugeDataset> {
-	
-	private static final double DEFAULT_MAX = 100D;
+public final class GaugeChart extends BaseMeterChart<GaugeOptions, GaugeDataset> {
 	
 	private final GaugeOptions options;
-	
-	private final GaugeChartLabel plugin = new GaugeChartLabel();
 	
 	/**
 	 * Builds the object.
 	 */
 	public GaugeChart() {
+		super();
 		options = new GaugeOptions(this);
-		try {
-			getPlugins().add(plugin);
-		} catch (InvalidPluginIdException e) {
-			// nop
-			e.printStackTrace();
-		}
 	}
 
-	private final JavaScriptObject getChart(){
-		return super.chart;
-	}
-	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -84,48 +64,12 @@ public final class GaugeChart extends AbstractChart<GaugeOptions, GaugeDataset> 
 	 */
 	@Override
 	public GaugeDataset newDataset() {
-		return newDataset(DEFAULT_MAX);
+		return newDataset(MeterDataset.DEFAULT_MAXIMUM_VALUE);
 	}
 
+	@Override
 	public GaugeDataset newDataset(double max) {
 		return new GaugeDataset(max);
 	}
-	
-	
-	private static class GaugeChartLabel extends AbstractPlugin {
-	
-		/**
-		 * Plugin ID 
-		 */
-		private static final String ID = "meter";
-		
-		private final CenteredLabelDesigner<GaugeDataset, GaugeOptions> designer = new CenteredLabelDesigner<GaugeDataset, GaugeOptions>();
 
-		GaugeChartLabel() {
-			super();
-		}
-
-		/* (non-Javadoc)
-		 * @see org.pepstock.charba.client.Plugin#getId()
-		 */
-		@Override
-		public String getId() {
-			return ID;
-		}
-
-		/* (non-Javadoc)
-		 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterDatasetsDraw(org.pepstock.charba.client.AbstractChart, double)
-		 */
-		@Override
-		//public void onAfterDatasetsDraw(AbstractChart<?, ?> chart, double easing, JavaScriptObject options) {
-		public void onAfterDraw(AbstractChart<?, ?> chart, double easing, JavaScriptObject options) {
-			List<Dataset> datasets = chart.getData().getDatasets();
-			if (!datasets.isEmpty()){
-				GaugeChart mChart = (GaugeChart) chart;
-				ChartItem m = (ChartItem)mChart.getChart();
-				GaugeDataset dataset = (GaugeDataset) datasets.get(0);
-				designer.execute(mChart, m, dataset, mChart.getOptions());
-			}
-		}
-	}
 }

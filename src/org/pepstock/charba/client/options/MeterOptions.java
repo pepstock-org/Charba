@@ -20,6 +20,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.LegendCallback;
 import org.pepstock.charba.client.commons.Color;
 import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.MeterDisplay;
 
 /**
  * Specific options for DOUGHNUT chart. 
@@ -29,15 +30,15 @@ import org.pepstock.charba.client.enums.FontStyle;
  */
 public class MeterOptions extends AbstractPieOptions {
 	
+	private static final String INVALID__CALL = "The invoked component is not available for Meter or Gauge charts.";
+	
 	public static final String DEFAULT_FORMAT = "##0";
 	
 	public static final String DEFAULT_LABEL_COLOR = new Color(128, 128, 128).toRGBA();
 	
 	private static final double DEFAULT_CUTOUT_PERCENTAGE = 90D;
 	
-	private boolean showPercentage = false;
-	
-	private boolean showLabel = false;
+	private MeterDisplay display = MeterDisplay.value;
 	
 	private String format = DEFAULT_FORMAT;
 	
@@ -74,7 +75,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 */
 	@Override
 	public Hover getHover() {
-		throw new UnsupportedOperationException("Not usable into meter chart");
+		throw new UnsupportedOperationException(INVALID__CALL);
 	}
 
 	/* (non-Javadoc)
@@ -82,7 +83,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 */
 	@Override
 	public Layout getLayout() {
-		throw new UnsupportedOperationException("Not usable into meter chart");
+		throw new UnsupportedOperationException(INVALID__CALL);
 	}
 
 	/* (non-Javadoc)
@@ -90,23 +91,23 @@ public class MeterOptions extends AbstractPieOptions {
 	 */
 	@Override
 	public Legend getLegend() {
-		throw new UnsupportedOperationException("Not usable into meter chart");
+		throw new UnsupportedOperationException(INVALID__CALL);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.options.BaseOptions#getTitle()
-	 */
-	@Override
-	public Title getTitle() {
-		throw new UnsupportedOperationException("Not usable into meter chart");
-	}
+//	/* (non-Javadoc)
+//	 * @see org.pepstock.charba.client.options.BaseOptions#getTitle()
+//	 */
+//	@Override
+//	public Title getTitle() {
+//		throw new UnsupportedOperationException(INVALID__CALL);
+//	}
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.options.BaseOptions#getTooltips()
 	 */
 	@Override
 	public Tooltips getTooltips() {
-		throw new UnsupportedOperationException("Not usable into meter chart");
+		throw new UnsupportedOperationException(INVALID__CALL);
 	}
 
 	/* (non-Javadoc)
@@ -114,35 +115,21 @@ public class MeterOptions extends AbstractPieOptions {
 	 */
 	@Override
 	public void setLegendCallBack(LegendCallback legendCallBack) {
-		throw new UnsupportedOperationException("Not usable into meter chart");
+		throw new UnsupportedOperationException(INVALID__CALL);
+	}
+	
+	/**
+	 * @return the display
+	 */
+	public MeterDisplay getDisplay() {
+		return display;
 	}
 
 	/**
-	 * @return the showLabel
+	 * @param display the display to set
 	 */
-	public boolean isShowLabel() {
-		return showLabel;
-	}
-
-	/**
-	 * @param showLabel the showLabel to set
-	 */
-	public void setShowLabel(boolean showLabel) {
-		this.showLabel = showLabel;
-	}
-
-	/**
-	 * @return the showPercentage
-	 */
-	public boolean isShowPercentage() {
-		return showPercentage;
-	}
-
-	/**
-	 * @param showPercentage the showPercentage to set
-	 */
-	public void setShowPercentage(boolean showPercentage) {
-		this.showPercentage = showPercentage;
+	public void setDisplay(MeterDisplay display) {
+		this.display = display;
 	}
 
 	/**

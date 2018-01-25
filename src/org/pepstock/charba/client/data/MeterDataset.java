@@ -25,17 +25,23 @@ import org.pepstock.charba.client.commons.Color;
  */
 public class MeterDataset extends DoughnutDataset{
 	
+	private static final String INVALID_SET_DATA_CALL = "setData method is not invokable by a Meter chart. Use setValue method.";
+	
 	public static final String DEFAULT_VALUE_COLOR = new Color(140, 214, 16).toRGBA();
 	
 	public static final String DEFAULT_EMPTY_VALUE_COLOR = new Color(234, 234, 234).toRGBA();
 	
+	public static final double DEFAULT_MAXIMUM_VALUE = 100D;
+
+	public static final double MINIMUM_VALUE = 0D;
+
 	private final double max;
 	
-	private double value = 0;
+	private double value = MINIMUM_VALUE;
 
 	public MeterDataset(double max) {
 		super();
-		this.max = max;
+		this.max = Math.max(max, MINIMUM_VALUE);
 		super.setBorderWidth(0, 0);
 		super.setHoverBorderWidth(0, 0);
 		super.setBackgroundColor(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR);
@@ -77,8 +83,8 @@ public class MeterDataset extends DoughnutDataset{
 	 * @param value the value to set
 	 */
 	public void setValue(double value) {
-		this.value = Math.min(max, value);
-		super.setData(this.value, Math.max(0, max - value));
+		this.value = Math.max(Math.min(max, value), MINIMUM_VALUE);
+		super.setData(this.value, Math.max(MINIMUM_VALUE, max - value));
 	}
 	
 	/* (non-Javadoc)
@@ -86,7 +92,7 @@ public class MeterDataset extends DoughnutDataset{
 	 */
 	@Override
 	public void setData(double... values) {
-		throw new UnsupportedOperationException("Not usable into meter chart");
+		throw new UnsupportedOperationException(INVALID_SET_DATA_CALL);
 	}
 
 }

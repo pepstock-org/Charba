@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.pepstock.charba.client.enums.GaugeThreshold;
 import org.pepstock.charba.client.enums.IsThreshold;
@@ -34,13 +33,11 @@ import org.pepstock.charba.client.enums.Threshold;
  */
 public class GaugeDataset extends MeterDataset{
 	
-	Logger log = Logger.getLogger("gauge");
-	
 	private final List<Threshold> thresholds = new LinkedList<Threshold>();
 	
 	private IsThreshold current = GaugeThreshold.normal.getThreshold();
 	
-	private boolean percentageThresholds = true;
+	private boolean percentageThreshold = true;
 	
 	private final static Comparator<Threshold> COMPARATOR = new Comparator<Threshold>() {
 
@@ -76,15 +73,15 @@ public class GaugeDataset extends MeterDataset{
 	/**
 	 * @return the percentageThresholds
 	 */
-	public boolean isPercentageThresholds() {
-		return percentageThresholds;
+	public boolean isPercentageThreshold() {
+		return percentageThreshold;
 	}
 
 	/**
-	 * @param percentageThresholds the percentageThresholds to set
+	 * @param percentageThreshold the percentageThresholds to set
 	 */
-	public void setPercentageThresholds(boolean percentageThresholds) {
-		this.percentageThresholds = percentageThresholds;
+	public void setPercentageThreshold(boolean percentageThreshold) {
+		this.percentageThreshold = percentageThreshold;
 		current = checkLevel();
 		checkAndSetColor();
 	}
@@ -122,18 +119,14 @@ public class GaugeDataset extends MeterDataset{
 	private Threshold checkLevel(){
 		if (!thresholds.isEmpty()){
 			Collections.sort(thresholds, COMPARATOR);
-			log.info(thresholds.toString());
-			final double valueToCheck = isPercentageThresholds() ? getValue() / getMax() * 100 : getValue() ;
+			final double valueToCheck = isPercentageThreshold() ? getValue() / getMax() * 100 : getValue() ;
 			double lowLimit = 0;
 			for (Threshold t : thresholds){
-				log.info(t.getName()+" "+t.getValue()+ " " + valueToCheck);
 				if (t.isInRange(valueToCheck, lowLimit)){
-					log.info("Scelto "+t.getName());
 					return t;
 				}
 				lowLimit = t.getValue();
 			}
-			log.info("Scelto ultimo "+((LinkedList<Threshold>)thresholds).getLast().getName());
 			return ((LinkedList<Threshold>)thresholds).getLast();
 		}
 		return GaugeThreshold.normal.getThreshold();
