@@ -4,3 +4,5 @@
 /javadoc/
 /lib-ivy/
 /.settings/
+/charba.pom
+/sonatype.properties
