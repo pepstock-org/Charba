@@ -20,9 +20,9 @@
 
 	<property name="dist.dir" value="dist" />
 
-	<property name="bin.archive.file" value="${dist.dir}/charba-bin.jar" />
-	<property name="sources.archive.file" value="${dist.dir}/charba-sources.jar" />
-	<property name="javadoc.archive.file" value="${dist.dir}/charba-javadoc.jar" />
+	<property name="bin.archive.file" value="${dist.dir}/charba-${ivy.revision}-bin.jar" />
+	<property name="sources.archive.file" value="${dist.dir}/charba-${ivy.revision}-sources.jar" />
+	<property name="javadoc.archive.file" value="${dist.dir}/charba-${ivy.revision}-javadoc.jar" />
 
 	<!-- 
 		JAVA compiler options 
@@ -57,32 +57,32 @@
 	  IVY-1201 for an ehancement request.
 	-->
 	<target name="makePom">
-		<ivy:makepom ivyfile="ivy.xml" pomfile="${dist.dir}/charba-pom.pom">
+		<ivy:makepom ivyfile="ivy.xml" pomfile="${dist.dir}/charba-${ivy.revision}-pom.pom">
 			<mapping conf="default" scope="compile" />
 		</ivy:makepom>
 	</target>
 
 	<target name="ivyPublish" depends="build-all">
 		<ivy:publish resolver="local" pubrevision="${ivy.revision}">
-			<artifacts pattern="${dist.dir}/[artifact].[ext]" />
+			<artifacts pattern="${dist.dir}/[artifact]-[revision]-[type].[ext]" />
 		</ivy:publish>
 	</target>
 
 	<target name="ivyPublish-local-m2" depends="makePom, build-all">
 		<ivy:publish resolver="local-m2-publish" pubrevision="${ivy.revision}" overwrite="true" publishivy="false">
-			<artifacts pattern="${dist.dir}/[artifact]-[type].[ext]" />
+			<artifacts pattern="${dist.dir}/[artifact]-[revision]-[type].[ext]" />
 		</ivy:publish>
 	</target>
 
 	<target name="ivyPublish-snapshot" depends="makePom, build-all">
 		<ivy:publish resolver="nexus-snapshots" pubrevision="${ivy.revision}-SNAPSHOT" forcedeliver="true" overwrite="true" publishivy="false">
-			<artifacts pattern="${dist.dir}/[artifact].[ext]" />
+			<artifacts pattern="${dist.dir}/[artifact]-[revision]-[type].[ext]" />
 		</ivy:publish>
 	</target>
 
 	<target name="ivyPublish-release" depends="makePom, build-all">
 		<ivy:publish resolver="nexus-releases" pubrevision="${ivy.revision}" forcedeliver="true" overwrite="true" publishivy="false">
-			<artifacts pattern="${dist.dir}/[artifact].[ext]" />
+			<artifacts pattern="${dist.dir}/[artifact]-[revision]-[type].[ext]" />
 		</ivy:publish>
 	</target>
 
