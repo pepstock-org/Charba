@@ -35,10 +35,9 @@
 	<property name="javac.nowarn" value="true" />
 
 	<target name="clean" description="Cleans folders">
-		<mkdir dir="${dist.dir}"/>
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${classes.dir}" includes="**/*"/>
-			<filename name="${bin.archive.file}"/>
+			<fileset dir="${dist.dir}" includes="**/*"/>
 		</delete>
 	</target>
 
@@ -57,7 +56,11 @@
 	  IVY-1201 for an ehancement request.
 	-->
 	<target name="makePom">
-		<ivy:makepom ivyfile="ivy.xml" pomfile="${dist.dir}/charba-${ivy.revision}-pom.pom">
+		<property name="ivy.pom.name" value="Charba"/>
+		<property name="ivy.pom.description" value="Charba, GWT wrapper for CHART.JS"/>
+		<property name="ivy.pom.url" value="www.pepstock.org"/>
+
+		<ivy:makepom ivyfile="ivy.xml" pomfile="${dist.dir}/charba-${ivy.revision}-pom.pom" templatefile="pom.template">
 			<mapping conf="default" scope="compile" />
 		</ivy:makepom>
 	</target>
