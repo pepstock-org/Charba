@@ -65,29 +65,34 @@
 		</ivy:makepom>
 	</target>
 
-	<target name="ivyPublish" depends="build-all">
+	<!--
+	<target name="ivyPublish" depends="makePom, build-all">
 		<ivy:publish resolver="local" pubrevision="${ivy.revision}">
 			<artifacts pattern="${dist.dir}/[artifact]-[revision]-[type].[ext]" />
 		</ivy:publish>
 	</target>
+	-->
 
-	<target name="ivyPublish-local-m2" depends="makePom, build-all">
+	<target name="ivyPublish-local-m2">
+		<ivy:resolve />
 		<ivy:publish resolver="local-m2-publish" pubrevision="${ivy.revision}" overwrite="true" publishivy="false">
 			<artifacts pattern="${dist.dir}/[artifact]-[revision]-[type].[ext]" />
 		</ivy:publish>
 	</target>
 
-	<target name="ivyPublish-snapshot" depends="makePom, build-all">
+	<target name="ivyPublish-snapshot">
 		<ivy:publish resolver="nexus-snapshots" pubrevision="${ivy.revision}-SNAPSHOT" forcedeliver="true" overwrite="true" publishivy="false">
 			<artifacts pattern="${dist.dir}/[artifact]-[revision]-[type].[ext]" />
 		</ivy:publish>
 	</target>
 
+	<!--
 	<target name="ivyPublish-release" depends="makePom, build-all">
 		<ivy:publish resolver="nexus-releases" pubrevision="${ivy.revision}" forcedeliver="true" overwrite="true" publishivy="false">
 			<artifacts pattern="${dist.dir}/[artifact]-[revision]-[type].[ext]" />
 		</ivy:publish>
 	</target>
+	-->
 
 	<target name="build-all" depends="build-bin, build-sources, build-javadoc" />
 	

@@ -33,6 +33,11 @@
 		<artifact name="charba" type="bin" ext="jar" conf="default" />
 		<artifact name="charba" type="sources" ext="jar" conf="sources" m:classifier="sources" />
 		<artifact name="charba" type="javadoc" ext="jar" conf="javadoc" m:classifier="javadoc" />
+		
+		<artifact name="charba" type="pom.asc" ext="pom.asc" conf="default"/>
+		<artifact name="charba" type="bin.asc" ext="jar.asc" conf="default"/>
+		<artifact name="charba" type="sources.asc" ext="jar.asc" conf="default" m:classifier="sources" />
+		<artifact name="charba" type="javadoc.asc" ext="jar.asc" conf="default" m:classifier="javadoc"/>
 	</publications>
     
     <dependencies>
