@@ -20,7 +20,7 @@
 
 	<property name="dist.dir" value="dist" />
 
-	<property name="bin.archive.file" value="${dist.dir}/charba-${ivy.revision}-bin.jar" />
+	<property name="bin.archive.file" value="${dist.dir}/charba-${ivy.revision}.jar" />
 	<property name="sources.archive.file" value="${dist.dir}/charba-${ivy.revision}-sources.jar" />
 	<property name="javadoc.archive.file" value="${dist.dir}/charba-${ivy.revision}-javadoc.jar" />
 
@@ -60,7 +60,7 @@
 		<property name="ivy.pom.description" value="Charba, GWT wrapper for CHART.JS"/>
 		<property name="ivy.pom.url" value="www.pepstock.org"/>
 
-		<ivy:makepom ivyfile="ivy.xml" pomfile="${dist.dir}/charba-${ivy.revision}-pom.pom" templatefile="pom.template">
+		<ivy:makepom ivyfile="ivy.xml" pomfile="${dist.dir}/charba-${ivy.revision}.pom" templatefile="pom.template">
 			<mapping conf="default" scope="compile" />
 		</ivy:makepom>
 	</target>
@@ -76,7 +76,7 @@
 	<target name="ivyPublish-local-m2">
 		<ivy:resolve />
 		<ivy:publish resolver="local-m2-publish" pubrevision="${ivy.revision}" overwrite="true" publishivy="false">
-			<artifacts pattern="${dist.dir}/[artifact]-[revision]-[type].[ext]" />
+			<artifacts pattern="${dist.dir}/[artifact]-[revision](-[classifier]).[ext]" />
 		</ivy:publish>
 	</target>
 
