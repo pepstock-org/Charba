@@ -1,48 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivysettings>
 
-	<properties file="ivyconfiguration.properties"/>
+	<properties file="ivyconfiguration.properties" environment="ivy"/>
 
 	<property name="publish.pattern" value="[artifact]/[artifact]-[revision].[ext]"/>
-	<property name="ivy.file.pattern" value="[module]/ivy-[revision].xml"/>
+	<property name="file.pattern" value="[module]/ivy-[revision].xml"/>
 
+	<!-- Change username and password to match real credentials -->
 	<credentials host="oss.sonatype.org" realm="Sonatype Nexus Repository Manager" 
 		username="changeIt" passwd="changeIt"/>
 		
-    <property name="nexus-releases" value="https://oss.sonatype.org/service/local/staging/deploy/maven2"/>
     <property name="nexus-snapshots" value=" https://oss.sonatype.org/content/repositories/snapshots"/>
+    <property name="nexus-releases" value="https://oss.sonatype.org/service/local/staging/deploy/maven2"/>
 
 	<settings defaultResolver="all"/>
 	
 	<resolvers>
 
-		<ibiblio name="local-m2" m2compatible="true" root="file://${user.home}/.m2/repository" changingPattern=".*SNAPSHOT" />
-		
-	    <!--
-	      for *publishing* artifacts for local testing builds,
-	      as the previous ibiblio resolver does not support
-	      publishing
-	    -->
+		<ibiblio name="nexus-releases" m2compatible="true" root="${nexus-releases}"/>
+		<ibiblio name="nexus-snapshots" m2compatible="true" root="${nexus-snapshots}"/>
 	    <filesystem name="local-m2-publish" m2compatible="true">
 	      <artifact pattern="${user.home}/.m2/repository/[organisation]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"/>
 	    </filesystem>
-    
-    	<!--
-		<ibiblio name="nexus-releases" m2compatible="true" root="${nexus-releases}"/>
-		<ibiblio name="nexus-snapshots" m2compatible="true" root="${nexus-snapshots}"/>
-		-->
-
 		<filesystem name="local" local="true">
-			<ivy pattern="${ivy.local.repository.dir}/${ivy.file.pattern}"/>
+			<ivy pattern="${ivy.local.repository.dir}/${file.pattern}"/>
 			<artifact pattern="${ivy.local.repository.dir}/${publish.pattern}"/>
 		</filesystem>
 		
-		<chain name="all" changingPattern=".*SNAPSHOT">
-			<!--
-			<resolver ref="nexus-snapshots" />
+		<chain name="all">
 			<resolver ref="nexus-releases" />
-			-->
-			<resolver ref="local-m2" />
+			<resolver ref="nexus-snapshots" />
 			<resolver ref="local-m2-publish" />
 			<resolver ref="local" />
 		</chain>

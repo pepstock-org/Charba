@@ -20,10 +20,12 @@
 
 	<property name="dist.dir" value="dist" />
 
-	<property name="bin.archive.file" value="${dist.dir}/charba-bin.jar" />
-	<property name="sources.archive.file" value="${dist.dir}/charba-sources.jar" />
-	<property name="javadoc.archive.file" value="${dist.dir}/charba-javadoc.jar" />
+	<property name="bin.archive.file" value="${dist.dir}/charba-${ivy.revision}.jar" />
+	<property name="sources.archive.file" value="${dist.dir}/charba-${ivy.revision}-sources.jar" />
+	<property name="javadoc.archive.file" value="${dist.dir}/charba-${ivy.revision}-javadoc.jar" />
 
+	<property name="artifact.pattern" value="${dist.dir}/[artifact]-[revision](-[classifier]).[ext]" />
+	
 	<!-- 
 		JAVA compiler options 
 	-->
@@ -35,10 +37,9 @@
 	<property name="javac.nowarn" value="true" />
 
 	<target name="clean" description="Cleans folders">
-		<mkdir dir="${dist.dir}"/>
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${classes.dir}" includes="**/*"/>
-			<filename name="${bin.archive.file}"/>
+			<fileset dir="${dist.dir}" includes="**/*"/>
 		</delete>
 	</target>
 
@@ -57,32 +58,41 @@
 	  IVY-1201 for an ehancement request.
 	-->
 	<target name="makePom">
-		<ivy:makepom ivyfile="ivy.xml" pomfile="${dist.dir}/charba-pom.pom">
+		<property name="ivy.pom.name" value="Charba"/>
+		<property name="ivy.pom.description" value="Charba, GWT wrapper for CHART.JS"/>
+		<property name="ivy.pom.url" value="www.pepstock.org"/>
+
+		<ivy:makepom ivyfile="ivy.xml" pomfile="${dist.dir}/charba-${ivy.revision}.pom" templatefile="pom.template" >
 			<mapping conf="default" scope="compile" />
 		</ivy:makepom>
 	</target>
 
-	<target name="ivyPublish" depends="build-all">
+	<!--
+	<target name="ivyPublish" depends="makePom, build-all">
 		<ivy:publish resolver="local" pubrevision="${ivy.revision}">
-			<artifacts pattern="${dist.dir}/[artifact].[ext]" />
+			<artifacts pattern="${dist.dir}/[artifact]-[revision]-[type].[ext]" />
+		</ivy:publish>
+	</target>
+	-->
+
+	<target name="ivyPublish-local-m2">
+		<ivy:resolve />
+		<ivy:publish resolver="local-m2-publish" pubrevision="${ivy.revision}" forcedeliver="true" overwrite="true" publishivy="false">
+			<artifacts pattern="${artifact.pattern}" />
 		</ivy:publish>
 	</target>
 
-	<target name="ivyPublish-local-m2" depends="makePom, build-all">
-		<ivy:publish resolver="local-m2-publish" pubrevision="${ivy.revision}" overwrite="true" publishivy="false">
-			<artifacts pattern="${dist.dir}/[artifact]-[type].[ext]" />
+	<target name="ivyPublish-snapshot">
+		<ivy:resolve />
+		<ivy:publish resolver="nexus-snapshots" pubrevision="${ivy.revision}" forcedeliver="true" overwrite="true" publishivy="false">
+			<artifacts pattern="${artifact.pattern}" />
 		</ivy:publish>
 	</target>
 
-	<target name="ivyPublish-snapshot" depends="makePom, build-all">
-		<ivy:publish resolver="nexus-snapshots" pubrevision="${ivy.revision}-SNAPSHOT" forcedeliver="true" overwrite="true" publishivy="false">
-			<artifacts pattern="${dist.dir}/[artifact].[ext]" />
-		</ivy:publish>
-	</target>
-
-	<target name="ivyPublish-release" depends="makePom, build-all">
+	<target name="ivyPublish-release">
+		<ivy:resolve />
 		<ivy:publish resolver="nexus-releases" pubrevision="${ivy.revision}" forcedeliver="true" overwrite="true" publishivy="false">
-			<artifacts pattern="${dist.dir}/[artifact].[ext]" />
+			<artifacts pattern="${artifact.pattern}" />
 		</ivy:publish>
 	</target>
 
