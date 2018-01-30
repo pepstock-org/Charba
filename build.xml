@@ -51,13 +51,6 @@
 		<ivy:retrieve sync="true" pattern="lib-ivy/[artifact]-[revision](-[classifier]).[ext]" pathid="ivyPath" />
 	</target>
 
-	<!--
-	  Mapping confs to scopes is important, otherwise
-	  unmapped confs are included as optional. If you
-	  have private confs, the best option seems to
-	  be marking them as provided or system. See
-	  IVY-1201 for an ehancement request.
-	-->
 	<target name="makePom">
 		<property name="ivy.pom.name" value="Charba"/>
 		<property name="ivy.pom.description" value="Charba, GWT wrapper for CHART.JS"/>
@@ -69,13 +62,12 @@
 		</ivy:makepom>
 	</target>
 
-	<!--
-	<target name="ivyPublish" depends="makePom, build-all">
-		<ivy:publish resolver="local" pubrevision="${ivy.revision}">
-			<artifacts pattern="${dist.dir}/[artifact]-[revision]-[type].[ext]" />
+	<target name="ivyPublish-local">
+		<ivy:resolve />
+		<ivy:publish resolver="local" pubrevision="${ivy.revision}" overwrite="true">
+			<artifacts pattern="${artifact.pattern}" />
 		</ivy:publish>
 	</target>
-	-->
 
 	<target name="ivyPublish-local-m2">
 		<ivy:resolve />

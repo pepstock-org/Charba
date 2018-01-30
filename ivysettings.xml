@@ -3,7 +3,7 @@
 
 	<properties file="ivyconfiguration.properties" environment="ivy"/>
 
-	<property name="publish.pattern" value="[artifact]/[artifact]-[revision].[ext]"/>
+	<property name="publish.pattern" value="[artifact]/[artifact]-[revision](-[classifier]).[ext]"/>
 	<property name="file.pattern" value="[module]/ivy-[revision].xml"/>
 
 	<!-- Change username and password to match real credentials -->

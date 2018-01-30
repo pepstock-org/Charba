@@ -4,7 +4,7 @@
 	xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd"
 	xmlns:m="http://ant.apache.org/ivy/maven">
 	
-    <info organisation="org.pepstock" module="charba" revision="1.0" />
+    <info organisation="org.pepstock" module="charba" revision="1.1" />
     
     <!--
     default     runtime dependencies and master artifact can be used with this conf
@@ -34,12 +34,12 @@
 		<artifact type="jar" ext="jar" conf="default" />
 		<artifact type="sources" ext="jar" conf="sources" m:classifier="sources" />
 		<artifact type="javadoc" ext="jar" conf="javadoc" m:classifier="javadoc" />
-		<artifact type="pom" ext="pom" conf="optional" m:classifier="optional" /> 
+		<artifact type="pom" ext="pom" conf="optional" />
 		
 		<artifact type="jar.asc" ext="jar.asc" conf="default" />
 		<artifact type="jar.asc" ext="jar.asc" conf="sources" m:classifier="sources" />
 		<artifact type="jar.asc" ext="jar.asc" conf="javadoc" m:classifier="javadoc" />
-		<artifact type="pom.asc" ext="pom.asc" conf="optional" m:classifier="optional" />
+		<artifact type="pom.asc" ext="pom.asc" conf="optional" />
 	</publications>
     
     <dependencies defaultconf="*->master">
