@@ -61,7 +61,8 @@
 		<property name="ivy.pom.name" value="Charba"/>
 		<property name="ivy.pom.description" value="Charba, GWT wrapper for CHART.JS"/>
 		<property name="ivy.pom.url" value="www.pepstock.org"/>
-
+		<property name="ivy.pom.packaging" value="jar"/>
+		
 		<ivy:makepom ivyfile="ivy.xml" pomfile="${dist.dir}/charba-${ivy.revision}.pom" templatefile="pom.template" >
 			<mapping conf="default" scope="compile" />
 		</ivy:makepom>
