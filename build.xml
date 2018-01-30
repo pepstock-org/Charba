@@ -40,6 +40,7 @@
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${classes.dir}" includes="**/*"/>
 			<fileset dir="${dist.dir}" includes="**/*"/>
+			<fileset dir="${javadoc.dir}" includes="**/*"/>
 		</delete>
 	</target>
 
