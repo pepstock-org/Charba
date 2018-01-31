@@ -18,9 +18,7 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Determines how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
- * (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are
- * skipped).
+ * Determines which information must be displaied into meter or gauge chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -28,23 +26,19 @@ import org.pepstock.charba.client.commons.Key;
 public enum MeterDisplay implements Key
 {
 	/**
-	 * 
+	 * Shows only the value
 	 */
 	value,
 	/**
-	 * 
+	 * Shows the percentage 
 	 */
 	percentage,
 	/**
-	 * 
-	 */
-	label,
-	/**
-	 * 
+	 * Shows value and label
 	 */
 	valueAndLabel,
 	/**
-	 * 
+	 * Shows percentage and label
 	 */
 	percentageAndLabel
 

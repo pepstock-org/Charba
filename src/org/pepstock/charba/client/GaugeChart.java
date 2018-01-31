@@ -66,7 +66,10 @@ public final class GaugeChart extends BaseMeterChart<GaugeOptions, GaugeDataset>
 	public GaugeDataset newDataset() {
 		return newDataset(MeterDataset.DEFAULT_MAXIMUM_VALUE);
 	}
-
+	
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.BaseMeterChart#newDataset(double)
+	 */
 	@Override
 	public GaugeDataset newDataset(double max) {
 		return new GaugeDataset(max);

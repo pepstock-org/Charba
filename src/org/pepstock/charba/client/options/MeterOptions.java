@@ -23,18 +23,24 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.MeterDisplay;
 
 /**
- * Specific options for DOUGHNUT chart. 
+ * Specific options for METER chart. This chart doesn't allow any legend, hover, layout and tooltips components.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public class MeterOptions extends AbstractPieOptions {
-	
+	// exception message
 	private static final String INVALID__CALL = "The invoked component is not available for Meter or Gauge charts.";
 	
+	/**
+	 * Default format to apply displaying the value or percentage
+	 */
 	public static final String DEFAULT_FORMAT = "##0";
 	
-	public static final String DEFAULT_LABEL_COLOR = new Color(128, 128, 128).toRGBA();
+	/**
+	 * Default color of display.
+	 */
+	public static final String DEFAULT_DISPLAY_COLOR = new Color(128, 128, 128).toRGBA();
 	
 	private static final double DEFAULT_CUTOUT_PERCENTAGE = 90D;
 	
@@ -46,7 +52,7 @@ public class MeterOptions extends AbstractPieOptions {
 	
 	private FontStyle fontStyle = FontStyle.normal;
 	
-	private String labelFontColor = DEFAULT_LABEL_COLOR;
+	private String displayFontColor = DEFAULT_DISPLAY_COLOR;
 	
 	/**
 	 * Builds the object storing the chart instance.
@@ -55,9 +61,11 @@ public class MeterOptions extends AbstractPieOptions {
 	 */
 	public MeterOptions(AbstractChart<?, ?> chart) {
 		super(chart);
+		// disables legend, title and tooltips.
 		super.getLegend().setDisplay(false);
 		super.getTitle().setDisplay(false);
 		super.getTooltips().setEnabled(false);
+		// sets the 90% of cutout
 		super.setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
 	}
 	
@@ -93,14 +101,6 @@ public class MeterOptions extends AbstractPieOptions {
 	public Legend getLegend() {
 		throw new UnsupportedOperationException(INVALID__CALL);
 	}
-
-//	/* (non-Javadoc)
-//	 * @see org.pepstock.charba.client.options.BaseOptions#getTitle()
-//	 */
-//	@Override
-//	public Title getTitle() {
-//		throw new UnsupportedOperationException(INVALID__CALL);
-//	}
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.options.BaseOptions#getTooltips()
@@ -175,16 +175,17 @@ public class MeterOptions extends AbstractPieOptions {
 	}
 
 	/**
-	 * @return the labelFontColor
+	 * @return the displayFontColor
 	 */
-	public String getLabelFontColor() {
-		return labelFontColor;
+	public String getDisplayFontColor() {
+		return displayFontColor;
 	}
 
 	/**
-	 * @param labelFontColor the labelFontColor to set
+	 * @param displayFontColor the displayFontColor to set
 	 */
-	public void setLabelFontColor(String labelFontColor) {
-		this.labelFontColor = labelFontColor;
+	public void setDisplayFontColor(String displayFontColor) {
+		this.displayFontColor = displayFontColor;
 	}
+
 }

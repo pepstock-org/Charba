@@ -15,35 +15,64 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.List;
+
 import org.pepstock.charba.client.commons.Color;
 
 /**
  * The Meter chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
- * Is equals of Doughnut dataset.
+ * Is equals of Doughnut dataset.<br>
+ * The minimum value of data is 0 (see {@link org.pepstock.charba.client.data.MeterDataset#MINIMUM_VALUE}).<br>
+ * The dataset will have always 2 data and setting the color of data, the first is the value color and the second is the empty one.<br>
+ * To set the data, is mandatory to use {@link org.pepstock.charba.client.data.MeterDataset#setValue(double)}) method instead of {@link org.pepstock.charba.client.data.Dataset#setData(double...)}) one. 
+ * 
+ * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.data.DoughnutDataset
  */
 public class MeterDataset extends DoughnutDataset{
 	
+	// exception string message
 	private static final String INVALID_SET_DATA_CALL = "setData method is not invokable by a Meter chart. Use setValue method.";
 	
+	/**
+	 * Default value color
+	 */
 	public static final String DEFAULT_VALUE_COLOR = new Color(140, 214, 16).toRGBA();
 	
+	/**
+	 * Default empty color
+	 */
 	public static final String DEFAULT_EMPTY_VALUE_COLOR = new Color(234, 234, 234).toRGBA();
-	
+
+	/**
+	 * Default maximum value. 
+	 */
 	public static final double DEFAULT_MAXIMUM_VALUE = 100D;
 
+	/**
+	 * Minimum value.
+	 */
 	public static final double MINIMUM_VALUE = 0D;
 
 	private final double max;
 	
 	private double value = MINIMUM_VALUE;
 
+	/**
+	 * Creates a dataset setting the maximum value of dataset.
+	 * @param max maximum value of dataset. 
+	 */
 	public MeterDataset(double max) {
 		super();
+		// sets the max value between the max and minimum value
+		// max value must be higher than 0
 		this.max = Math.max(max, MINIMUM_VALUE);
+		// sets default dataset values
+		// removing borders
 		super.setBorderWidth(0, 0);
 		super.setHoverBorderWidth(0, 0);
+		// sets the color of datasets.
 		super.setBackgroundColor(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR);
 	}
 
@@ -83,7 +112,9 @@ public class MeterDataset extends DoughnutDataset{
 	 * @param value the value to set
 	 */
 	public void setValue(double value) {
+		//checks the value is greater than minimum and less than maximum
 		this.value = Math.max(Math.min(max, value), MINIMUM_VALUE);
+		// sets the data
 		super.setData(this.value, Math.max(MINIMUM_VALUE, max - value));
 	}
 	
@@ -95,4 +126,12 @@ public class MeterDataset extends DoughnutDataset{
 		throw new UnsupportedOperationException(INVALID_SET_DATA_CALL);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.data.Dataset#setData(java.util.List)
+	 */
+	@Override
+	public void setData(List<Double> values) {
+		throw new UnsupportedOperationException(INVALID_SET_DATA_CALL);
+	}
+	
 }
