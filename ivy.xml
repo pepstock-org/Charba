@@ -4,7 +4,7 @@
 	xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd"
 	xmlns:m="http://ant.apache.org/ivy/maven">
 	
-    <info organisation="org.pepstock" module="charba" revision="1.0" />
+    <info organisation="org.pepstock" module="charba" revision="1.1" />
     
     <!--
     default     runtime dependencies and master artifact can be used with this conf
@@ -22,28 +22,30 @@
     optional     contains all optional dependencies
     -->
     
-    <configurations defaultconf="default" defaultconfmapping="default->default; sources->sources; javadoc->javadoc">
+    <configurations defaultconf="default" 
+    	defaultconfmapping="default->default; sources->sources; javadoc->javadoc; optional->optional">
         <conf name="default" />
         <conf name="sources" />
         <conf name="javadoc" />
+        <conf name="optional" />
     </configurations>
 
 	<publications>
-		<artifact type="pom" ext="pom" conf="default" /> 
 		<artifact type="jar" ext="jar" conf="default" />
 		<artifact type="sources" ext="jar" conf="sources" m:classifier="sources" />
 		<artifact type="javadoc" ext="jar" conf="javadoc" m:classifier="javadoc" />
+		<artifact type="pom" ext="pom" conf="optional" />
 		
-		<artifact type="pom.asc" ext="pom.asc" conf="default" />
 		<artifact type="jar.asc" ext="jar.asc" conf="default" />
 		<artifact type="jar.asc" ext="jar.asc" conf="sources" m:classifier="sources" />
 		<artifact type="jar.asc" ext="jar.asc" conf="javadoc" m:classifier="javadoc" />
+		<artifact type="pom.asc" ext="pom.asc" conf="optional" />
 	</publications>
     
-    <dependencies>
+    <dependencies defaultconf="*->master">
         <!-- GWT SDK -->
-        <dependency org="com.google.gwt" name="gwt-user" rev="${gwt.ver}" conf="*->default"/>
-        <dependency org="com.google.gwt" name="gwt-dev" rev="${gwt.ver}"/>
+        <dependency org="com.google.gwt" name="gwt-user" rev="2.8.2" />
+        <dependency org="com.google.gwt" name="gwt-dev" rev="2.8.2" />
     </dependencies>
     
 </ivy-module>
