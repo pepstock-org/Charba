@@ -18,61 +18,74 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Color;
 
 /**
- * Property to set the text alignment
+ * Default gauge thresholds.
  * 
  * @author Andrea "Stock" Stocchero
+ * @see IsThreshold
  *
  */
 public enum GaugeThreshold implements IsThreshold
 {
 	/**
-	 * the left property sets the left text alignment.
+	 * the normal threshold 
 	 */
 	normal(75D, new Color(140, 214, 16).toRGBA()),
 	/**
-	 * the bottom property sets the left text alignment.
+	 * the warning threshold.
 	 */
 	warning(90D, new Color(239, 198, 0).toRGBA()),
 	/**
-	 * the right property sets the left text alignment.
+	 * the critical threshold.
 	 */
 	critical(Double.MAX_VALUE, new Color(231, 24, 49).toRGBA());
 	
+	// value
 	private final double value;
-	
+	// color
 	private final String color;
 	
+	/**
+	 * Creates the threshold value using value and color
+	 * @param value threshold value
+	 * @param color threshold value
+	 */
 	private GaugeThreshold(double value, String color) {
 		this.value = value;
 		this.color = color;
 	}
-
-	/**
-	 * @return the value
+	
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.enums.IsThreshold#getValue()
 	 */
+	@Override
 	public double getValue() {
 		return value;
 	}
 
-	/**
-	 * @return the color
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.enums.IsThreshold#getColor()
 	 */
+	@Override
 	public String getColor() {
 		return color;
 	}
 
-
-
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.enums.IsThreshold#getName()
+	 */
 	@Override
 	public String getName() {
 		return name();
 	}
 
 	/**
+	 * Creates a new threshold cloning the constant one. This is helpful to change standard color or value.
 	 * @return the threshold
 	 */
 	public Threshold getThreshold() {
+		// clones threshold
 		Threshold threshold = new Threshold(name());
+		// sets values
 		return threshold.setValue(value).setColor(color);
 	}
 

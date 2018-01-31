@@ -488,7 +488,6 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	    var ctx = canvas.getContext("2d");
 	    chart = new $wnd.Chart(ctx, config);
 	    this.@org.pepstock.charba.client.AbstractChart::chart = chart;
-	    console.log(chart);
 	    return chart.id;
 	}-*/;
 
