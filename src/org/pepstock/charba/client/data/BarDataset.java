@@ -15,6 +15,11 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.List;
+
+import org.pepstock.charba.client.commons.AbstractList;
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.JsObjectContainerArrayList;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Position;
 
@@ -26,6 +31,9 @@ import org.pepstock.charba.client.enums.Position;
  * @see org.pepstock.charba.client.data.Dataset
  */
 public class BarDataset extends HovingFlexDataset{
+	
+	// list of data points
+	private final AbstractList<DataPoint> dataPoints = new JsObjectContainerArrayList<DataPoint>();
 
 	/**
 	 * Name of fields of JavaScript object. 
@@ -33,7 +41,8 @@ public class BarDataset extends HovingFlexDataset{
 	private enum Property implements Key {
 		xAxisID,
 		yAxisID,
-		borderSkipped
+		borderSkipped,
+		data
 	}
 
 	/**
@@ -49,7 +58,7 @@ public class BarDataset extends HovingFlexDataset{
 	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
 	public String getXAxisID(){
-		  return getValue(Property.xAxisID, null);
+		  return getValue(Property.xAxisID, (String)null);
 	}
 
 	/**
@@ -65,7 +74,7 @@ public class BarDataset extends HovingFlexDataset{
 	 * @return the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
 	 */
 	public String getYAxisID(){
-		  return getValue(Property.yAxisID, null);
+		  return getValue(Property.yAxisID, (String)null);
 	}
 
 	/**
@@ -82,6 +91,24 @@ public class BarDataset extends HovingFlexDataset{
 	 */
 	public Position getBorderSkipped(){
 		return getValue(Property.borderSkipped, Position.class, Position.top);
+	}
+	
+	/**
+	 * Sets the data property of a dataset for a chart is specified as an array of data points.
+	 * @param datapoints an array of data points
+	 * @see org.pepstock.charba.client.data.DataPoint
+	 */
+	public void setDataPoints(DataPoint... datapoints){
+		setValue(Property.data, ArrayListHelper.load(this.dataPoints, datapoints));
+	}
+	
+	/**
+	 * Returns the data property of a dataset for a chart is specified as an array of data points
+	 * @return a list of data points
+	 * @see org.pepstock.charba.client.data.DataPoint
+	 */
+	public List<DataPoint> getDataPoints(){
+		return dataPoints;
 	}
 
 }

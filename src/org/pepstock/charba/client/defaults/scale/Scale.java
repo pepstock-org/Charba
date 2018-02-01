@@ -179,7 +179,7 @@ public class Scale extends AbstractItem {
 	 * @return The ID is used to link datasets and scale axes together or <code>null</code> if not set
 	 */
 	public String getId() {
-		return getValue(Property.id, null);
+		return getValue(Property.id, (String)null);
 	}
 	
 	/**

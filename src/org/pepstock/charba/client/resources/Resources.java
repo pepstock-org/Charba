@@ -35,7 +35,7 @@ public interface Resources extends ClientBundle {
 	 * 
 	 * @return chart.js code
 	 */
-	@Source("js/chart.min.js")
+	@Source("js/chart.bundle.min.js")
 	TextResource chartJsSource();
 
 }

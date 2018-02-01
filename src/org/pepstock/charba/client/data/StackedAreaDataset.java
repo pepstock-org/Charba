@@ -46,7 +46,7 @@ public class StackedAreaDataset extends LineDataset{
 	 * @return the name of stack group.
 	 */
 	public String getStackGroup(){
-		  return getValue(Property.stack, null);
+		  return getValue(Property.stack, (String)null);
 	}
 
 }
