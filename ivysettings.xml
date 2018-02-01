@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivysettings>
 
-	<properties file="ivyconfiguration.properties" environment="ivy"/>
-
 	<property name="publish.pattern" value="[artifact]/[artifact]-[revision](-[classifier]).[ext]"/>
 	<property name="file.pattern" value="[module]/ivy-[revision].xml"/>
 
@@ -19,19 +17,10 @@
 
 		<ibiblio name="nexus-releases" m2compatible="true" root="${nexus-releases}"/>
 		<ibiblio name="nexus-snapshots" m2compatible="true" root="${nexus-snapshots}"/>
-	    <filesystem name="local-m2-publish" m2compatible="true">
-	      <artifact pattern="${user.home}/.m2/repository/[organisation]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"/>
-	    </filesystem>
-		<filesystem name="local" local="true">
-			<ivy pattern="${ivy.local.repository.dir}/${file.pattern}"/>
-			<artifact pattern="${ivy.local.repository.dir}/${publish.pattern}"/>
-		</filesystem>
-		
+
 		<chain name="all">
 			<resolver ref="nexus-releases" />
 			<resolver ref="nexus-snapshots" />
-			<resolver ref="local-m2-publish" />
-			<resolver ref="local" />
 		</chain>
 		
 	</resolvers>
