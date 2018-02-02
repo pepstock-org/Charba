@@ -1,7 +1,7 @@
 Charba - GWT wrapper for CHART.JS
 ===============================================
 
-Version 1.0 [not yet released]
+Version 1.2 [not yet released]
 
 What's Charba
 --------
@@ -21,7 +21,7 @@ Building
 
 To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/master/build.xml).
 
-It creates a `charba.jar` file into `dist` folder, ready to be included into your project.
+It creates a `charba.[version.release].jar` file into `dist` folder, ready to be included into your project.
 
 Installation
 ------------
