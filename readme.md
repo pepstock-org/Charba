@@ -26,7 +26,9 @@ It creates a `charba.[version.release].jar` file into `dist` folder, ready to be
 Installation
 ------------
 
-Currently **Charba** is not available on any Maven repository (it will soon).
+Currently **Charba** is available on [MVN repository](https://mvnrepository.com/artifact/org.pepstock/charba), but is not the final version, it's a pre-release.
+
+It will be soon available also on [GitHub release](https://github.com/pepstock-org/Charba/releases).
 
 To install in your GWT project, you must the following configuration into your GWT project module configuration:
 
