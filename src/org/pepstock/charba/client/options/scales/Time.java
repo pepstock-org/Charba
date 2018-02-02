@@ -283,7 +283,7 @@ public class Time extends ChartContainer {
 	/**
 	 * Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
 	 * 
-	 * @param unit Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
+	 * @param parser Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
 	 */
 	public void setParser(String parser) {
 		setValue(Property.parser, parser);

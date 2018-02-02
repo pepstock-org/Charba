@@ -17,10 +17,9 @@ package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.enums.TimeUnit;
-import org.pepstock.charba.client.plugins.InvalidPluginIdException;
 
 /**
- * Determines display formats are used to configure how different time units are formed into strings for the axis tick marks.
+ * The following display formats are used to configure how different time units are formed into strings for the axis tick marks.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -34,10 +33,9 @@ public final class DisplayFormats extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * Sets the plugin options. If passed otpions is null, the configuration of plugin will be removed.
-	 * @param pluginId plugin id.
-	 * @param options java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if exist.
-	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
+	 * Sets the display formats are used to configure how different time units are formed into strings for the axis tick marks.
+	 * @param key time unit.
+	 * @param format display format
 	 */
 	/**
 	 * 
@@ -51,10 +49,9 @@ public final class DisplayFormats extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * Returns the plugin options, if exist.
-	 * @param pluginId plugin id.
-	 * @return java script object used to configure the plugin or <code>null</code> if not exist.
-	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
+	 * Returns the display formats are used to configure how different time units are formed into strings for the axis tick marks.
+	 * @param key time unit.
+	 * @return display format
 	 */
 	public String getDisplayFormat(TimeUnit key){
 		// returns the configuration creating a key.
