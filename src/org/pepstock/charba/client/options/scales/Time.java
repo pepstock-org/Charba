@@ -52,8 +52,6 @@ public class Time extends ChartContainer {
 		stepSize,
 		minUnit
 	}
-	
-//	time.parser 	String/Function 		Custom parser for dates. more...
 
 	/**
 	 * Builds the object storing the chart instance and the axis which this grid lines belongs to.
@@ -280,5 +278,23 @@ public class Time extends ChartContainer {
 	 */
 	public TimeUnit getMinUnit() {
 		return getValue(Property.minUnit, TimeUnit.class, TimeUnit.millisecond);
+	}
+	
+	/**
+	 * Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
+	 * 
+	 * @param unit Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
+	 */
+	public void setParser(String parser) {
+		setValue(Property.parser, parser);
+	}
+
+	/**
+	 * Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
+	 * 
+	 * @return Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.  Default is <code>null</code>.
+	 */
+	public String getParser() {
+		return getValue(Property.parser, (String)null);
 	}
 }

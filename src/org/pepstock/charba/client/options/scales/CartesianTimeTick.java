@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.TickSource;
 
 /**
- * The time scale is use to chart numerical data.<br>
+ * The time scale is use to chart time data.<br>
  * It can be placed on either the x or y axis.<br>
  * 
  * @author Andrea "Stock" Stocchero

@@ -43,13 +43,13 @@ public final class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	}
 	
 	/**
-	 * Builds the object storing the chart instance. Axis type is Y by default.
+	 * Builds the object storing the chart instance. Axis type is X by default.
 	 * 
 	 * @param chart chart instance
-	 * @see CartesianAxisType#y
+	 * @see CartesianAxisType#x
 	 */
 	public CartesianTimeAxis(AbstractChart<?, ?> chart) {
-		this(chart, CartesianAxisType.y);
+		this(chart, CartesianAxisType.x);
 	}
 
 	/**
