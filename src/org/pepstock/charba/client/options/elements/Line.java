@@ -241,7 +241,7 @@ public final class Line extends AbstractElement {
 	 */
 	public Fill getFill() {
 		// gets value
-		String value = getValue(Property.fill, null);
+		String value = getValue(Property.fill, (String)null);
 		if (value == null){
 			return getChart().getGlobal().getElements().getLine().getFill();
 		} else if (value.equalsIgnoreCase(Boolean.FALSE.toString())) {

@@ -54,7 +54,7 @@ public abstract class Dataset extends JavaScriptObjectContainer{
 	 * @return the label for the dataset which appears in the legend and tooltips.
 	 */
 	public String getLabel(){
-		  return getValue(Property.label, null);
+		  return getValue(Property.label, (String)null);
 	}
 
 	/**

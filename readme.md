@@ -1,7 +1,7 @@
 Charba - GWT wrapper for CHART.JS
 ===============================================
 
-Version 1.0 [not yet released]
+Version 1.2 [not yet released]
 
 What's Charba
 --------
@@ -21,12 +21,14 @@ Building
 
 To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/master/build.xml).
 
-It creates a `charba.jar` file into `dist` folder, ready to be included into your project.
+It creates a `charba.[version.release].jar` file into `dist` folder, ready to be included into your project.
 
 Installation
 ------------
 
-Currently **Charba** is not available on any Maven repository (it will soon).
+Currently **Charba** is available on [MVN repository](https://mvnrepository.com/artifact/org.pepstock/charba), but is not the final version, it's a pre-release.
+
+It will be soon available also on [GitHub release](https://github.com/pepstock-org/Charba/releases).
 
 To install in your GWT project, you must the following configuration into your GWT project module configuration:
 

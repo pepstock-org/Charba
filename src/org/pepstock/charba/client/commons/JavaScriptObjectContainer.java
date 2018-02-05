@@ -15,7 +15,10 @@
 */
 package org.pepstock.charba.client.commons;
 
+import java.util.Date;
+
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsDate;
 
 /**
  * Contains a GWT JavaScript object. This is used for all configuration items for CHART.JS.
@@ -220,7 +223,7 @@ public class JavaScriptObjectContainer {
     }
 
     /**
-     * Returns a value (boolean) into embedded JavaScript object at specific property.
+     * Returns a value (string) into embedded JavaScript object at specific property.
      * @param key key of the property of JavaScript object.
      * @param defaultValue default value if the property is missing
      * @return value of the property
@@ -254,6 +257,45 @@ public class JavaScriptObjectContainer {
         } else {
         	// sets value
         	javaScriptObject.setString(key.name(), value);	
+        }
+    }
+
+    /**
+     * Returns a value (date) into embedded JavaScript object at specific property.
+     * @param key key of the property of JavaScript object.
+     * @param defaultValue default value if the property is missing
+     * @return value of the property
+     * @see org.pepstock.charba.client.commons.Key
+     */
+    protected Date getValue(Key key, Date defaultValue){
+    	// checks if the property exists
+    	if (!has(key)){
+    		// if no, returns the default value
+    		return defaultValue;
+    	}
+    	JsDate date = (JsDate)javaScriptObject.getJavaScriptObject(key.name());
+    	// returns value
+    	return new Date((long)date.getTime());
+    }
+
+	/**
+	 * Sets a value (date) into embedded JavaScript object at specific property.
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 * @see org.pepstock.charba.client.commons.Key
+	 */
+    protected void setValue(Key key, Date value){
+    	// if value is null
+    	// try to remove the reference if exists
+    	if (value == null){
+    		// checks if the property exists
+        	if (has(key)){
+        		// removes property
+        		remove(key);
+        	}
+        } else {
+        	// sets value
+        	javaScriptObject.setJavaScriptObject(key.name(), JsDate.create((double) value.getTime()));	
         }
     }
 
@@ -483,7 +525,7 @@ public class JavaScriptObjectContainer {
     		return getStringArray(key);
     	}
     	// gets value
-    	String value = getValue(key, null);
+    	String value = getValue(key, (String)null);
     	// returns an array list with 1 element or empty
     	return value != null ? ArrayListHelper.build(value) : new JsStringArrayList();
 	}

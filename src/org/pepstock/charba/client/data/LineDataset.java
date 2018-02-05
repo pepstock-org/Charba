@@ -69,7 +69,7 @@ public class LineDataset extends LiningDataset{
 	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
 	public String getXAxisID(){
-		  return getValue(Property.xAxisID, null);
+		  return getValue(Property.xAxisID, (String)null);
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class LineDataset extends LiningDataset{
 	 * @return the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
 	 */
 	public String getYAxisID(){
-		  return getValue(Property.yAxisID, null);
+		  return getValue(Property.yAxisID, (String)null);
 	}
 
 	/**
