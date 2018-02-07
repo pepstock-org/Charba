@@ -1,7 +1,7 @@
 Charba - GWT wrapper for CHART.JS
 ===============================================
 
-Version 1.2 [not yet released]
+Version 1.2
 
 What's Charba
 --------
@@ -26,9 +26,31 @@ It creates a `charba-[version.release].jar` file into `dist` folder, ready to be
 Installation
 ------------
 
-Currently **Charba** is available on [MVN repository](https://mvnrepository.com/artifact/org.pepstock/charba), but is not the final version, it's a pre-release.
+Currently **Charba** is available on [MVN repository](https://mvnrepository.com/artifact/org.pepstock/charba).
 
-It will be soon available also on [GitHub release](https://github.com/pepstock-org/Charba/releases).
+It will be available also on [GitHub release](https://github.com/pepstock-org/Charba/releases).
+
+If you are using [Apache Maven](https://maven.apache.org/):
+
+```xml
+<dependency>
+    <groupId>org.pepstock</groupId>
+    <artifactId>charba</artifactId>
+    <version>1.2</version>
+</dependency>
+```
+
+If you are using [Apache Ivy](http://ant.apache.org/ivy/):
+
+```xml
+<dependency org="org.pepstock" name="charba" rev="1.2"/>
+```
+
+If you are using [Gradle](https://gradle.org/):
+
+```json
+compile group: 'org.pepstock', name: 'charba', version: '1.2'
+```
 
 To install in your GWT project, you must the following configuration into your GWT project module configuration:
 
@@ -41,7 +63,7 @@ To install in your GWT project, you must the following configuration into your G
 Documentation
 -------------
 
-All **Charba** documentation will be maintained into [GitHub wiki](https://github.com/pepstock-org/Charba/wiki) of **Charba** project (not available yet).
+All **Charba** documentation will be maintained into [GitHub wiki](https://github.com/pepstock-org/Charba/wiki) of **Charba** project.
  
 
 Showcase
