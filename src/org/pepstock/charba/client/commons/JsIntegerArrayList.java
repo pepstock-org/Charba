@@ -101,7 +101,7 @@ public final class JsIntegerArrayList implements List<Integer> {
 	@Override
 	public boolean contains(Object o) {
 		// checks if index of the object in JS array is not equals to -1
-		return indexOf(o.toString()) != -1;
+		return indexOf(o) != -1;
 	}
 
 	/**
