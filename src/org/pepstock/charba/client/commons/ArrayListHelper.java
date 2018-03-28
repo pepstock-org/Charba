@@ -90,6 +90,7 @@ public final class ArrayListHelper {
 	/**
 	 * Creates a JavaScript array list of generic javaScript objects.
 	 * @param values array of elements to load when the list is creating.
+	 * @param <E> type of java script object
 	 * @return a array list of strings instance or <code>null</code> if the elements are null.
 	 * @see org.pepstock.charba.client.commons.GenericJavaScriptObject
 	 * @see org.pepstock.charba.client.commons.JsObjectArrayList
@@ -111,6 +112,7 @@ public final class ArrayListHelper {
 	 * Loads an existing list of JavaScript object container.
 	 * @param container list instance of JavaScript object container
 	 * @param values array of elements to load when the list is creating.
+	 * @param <E> type of key
 	 * @return the instance of updated list
 	 * @see org.pepstock.charba.client.commons.AbstractList
 	 * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer
@@ -132,6 +134,7 @@ public final class ArrayListHelper {
 	 * Creates a JavaScript array list of EnumValues.
 	 * @param clazz Enum class with all possible values of enumeration
 	 * @param values array of elements to load when the list is creating.
+	 * @param <E> type of key
 	 * @return a array list of values or <code>null</code> if the elements are null.
 	 * @see org.pepstock.charba.client.commons.JsEnumValueArrayList
 	 */
@@ -152,6 +155,7 @@ public final class ArrayListHelper {
 	 * Creates a JavaScript array list of EnumValues.
 	 * @param clazz Enum class with all possible values of enumeration
 	 * @param list a string array list 
+	 * @param <E> type of key
 	 * @return a array list of values  or <code>null</code> if the list is null.
 	 * @see org.pepstock.charba.client.commons.JsEnumValueArrayList
 	 * @see org.pepstock.charba.client.commons.JsStringArrayList

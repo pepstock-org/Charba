@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.enums;
 
-import org.pepstock.charba.client.commons.Color;
+import org.pepstock.charba.client.utils.Color;
 
 /**
  * Default gauge thresholds.

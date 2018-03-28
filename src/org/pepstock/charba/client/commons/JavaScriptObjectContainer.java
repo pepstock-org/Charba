@@ -302,6 +302,7 @@ public class JavaScriptObjectContainer {
     /**
      * Returns a value (JavaScript Object) into embedded JavaScript object at specific property.
      * @param key key of the property of JavaScript object.
+     * @param <T> type of java script object
      * @return value of the property or <code>null</code> if not there
      * @see org.pepstock.charba.client.commons.Key
      * @see com.google.gwt.core.client.JavaScriptObject
@@ -338,6 +339,7 @@ public class JavaScriptObjectContainer {
      * @param key key of the property of JavaScript object.
      * @param clazz class of object to get all enumeration values
      * @param defaultValue default value if the property is missing
+     * @param <T> type of key
      * @return value of the property
      * @see org.pepstock.charba.client.commons.Key
      */
@@ -369,6 +371,7 @@ public class JavaScriptObjectContainer {
 	 * Sets a value (EnumValue) into embedded JavaScript object at specific property.
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
+	 * @param <T> type of key
 	 * @see org.pepstock.charba.client.commons.Key
 	 */
     protected <T extends Key> void setValue(Key key, T value){
@@ -534,6 +537,7 @@ public class JavaScriptObjectContainer {
 	 * Sets a value (EnumValue array list) into embedded JavaScript object at specific property.
 	 * @param key key of the property of JavaScript object.
 	 * @param list value to be set
+	 * @param <T> type of key
 	 * @see org.pepstock.charba.client.commons.Key
 	 * @see org.pepstock.charba.client.commons.JsEnumValueArrayList
 	 */
@@ -556,6 +560,7 @@ public class JavaScriptObjectContainer {
 	 * Checks if it should set an array list (EnumValues) or a single value for a specific property.
 	 * @param key key of the property of JavaScript object.
 	 * @param values array list to set 
+	 * @param <T> type of key
 	 * @return <code>true</code> if the complete list has been set otherwise false
 	 * @see org.pepstock.charba.client.commons.JsEnumValueArrayList
 	 */
@@ -659,6 +664,7 @@ public class JavaScriptObjectContainer {
 	 * Sets a value (JavaScript array list) into embedded JavaScript object at specific property.
 	 * @param key key of the property of JavaScript object.
 	 * @param list value to be set
+	 * @param <T> type of java script object
 	 * @see org.pepstock.charba.client.commons.Key
 	 * @see org.pepstock.charba.client.commons.JsObjectArrayList
 	 */
@@ -703,6 +709,7 @@ public class JavaScriptObjectContainer {
 	 * Sets a value (JavaScript object container array list) into embedded JavaScript object at specific property.
 	 * @param key key of the property of JavaScript object.
 	 * @param container value to be set
+	 * @param <E> type of java script object
 	 * @see org.pepstock.charba.client.commons.Key
 	 * @see org.pepstock.charba.client.commons.AbstractList
 	 */

@@ -36,11 +36,6 @@ public final class DisplayFormats extends JavaScriptObjectContainer {
 	 * Sets the display formats are used to configure how different time units are formed into strings for the axis tick marks.
 	 * @param key time unit.
 	 * @param format display format
-	 */
-	/**
-	 * 
-	 * @param key 
-	 * @param format
 	 * @see org.pepstock.charba.client.enums.TimeUnit 
 	 */
 	public void setDisplayFormat(TimeUnit key, String format){

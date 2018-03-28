@@ -140,7 +140,7 @@ public class LineDataset extends LiningDataset{
 
 	/**
 	 * Returns if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in the line.
-	 * @return code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in the line. Default is <code>false</code>
+	 * @return <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in the line. Default is <code>false</code>
 	 */
 	public boolean isSpanGaps(){
 		  return getValue(Property.spanGaps, DEFAULT_SPAN_GAPS);

@@ -17,7 +17,7 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
-import org.pepstock.charba.client.commons.Color;
+import org.pepstock.charba.client.utils.Color;
 
 /**
  * The Meter chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>

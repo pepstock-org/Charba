@@ -18,9 +18,9 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.LegendCallback;
-import org.pepstock.charba.client.commons.Color;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.MeterDisplay;
+import org.pepstock.charba.client.utils.Color;
 
 /**
  * Specific options for METER chart. This chart doesn't allow any legend, hover, layout and tooltips components.

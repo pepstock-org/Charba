@@ -110,6 +110,7 @@ public class GenericJavaScriptObject extends JavaScriptObject{
      * Stores an array list (generic JavaScript objects) into the JavaScript object.
      * @param key name of the property of JavaScript object where to store the array list.
      * @param list array list instance to be stored
+     * @param <T> type of java script object
      * @see org.pepstock.charba.client.commons.JsObjectArrayList
      */
 	protected final <T extends GenericJavaScriptObject> void setObjectArray(String key, JsObjectArrayList<T> list) {
@@ -119,6 +120,7 @@ public class GenericJavaScriptObject extends JavaScriptObject{
 	/**
      * Returns an array list (generic JavaScript objects) from the JavaScript object.
      * @param key key name of the property of JavaScript object.
+     * @param <T> type of java script object
      * @return  array list instance stored in this object
      * @see org.pepstock.charba.client.commons.JsObjectArrayList
      */
@@ -149,7 +151,7 @@ public class GenericJavaScriptObject extends JavaScriptObject{
 
     /**
      * Returns the type of element in this object.<br>
-     * <table>
+     * <table summary="">
      * <tr><th>Type</th><th>Result</th></tr>
      * <tr><td>Undefined</td><td>"undefined"</td></tr>
      * <tr><td>Null</td><td>"object"</td></tr>

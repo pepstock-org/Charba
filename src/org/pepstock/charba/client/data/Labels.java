@@ -30,8 +30,8 @@ import com.google.gwt.core.client.JsArrayString;
 public final class Labels extends JavaScriptObject {
 	
 	/**
-	 * Types of different elements of internal array.<br<
-	 * string is single line label, array is multi-line label.
+	 * Types of different elements of internal array.<br>
+	 * String is single line label, array is multi-line label.
 	 */
 	public enum Type {
 		string,

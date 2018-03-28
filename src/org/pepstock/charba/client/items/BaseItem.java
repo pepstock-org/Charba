@@ -40,6 +40,7 @@ public abstract class BaseItem extends GenericJavaScriptObject {
 	 * @param key key of the property of JavaScript object.
 	 * @param clazz class of object to get all enumeration values
 	 * @param defaultValue default value if the property is missing
+	 * @param <T> type of key
 	 * @return value of the property
 	 * @see org.pepstock.charba.client.commons.Key
 	 */

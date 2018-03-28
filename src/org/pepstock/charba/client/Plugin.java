@@ -269,7 +269,7 @@ public interface Plugin {
 	 * Called after the chart as been resized.
 	 * 
 	 * @param chart The chart instance.
-	 * @param size The new canvas display size (eq. canvas.style width & height).
+	 * @param size The new canvas display size (eq. canvas.style width and height).
 	 * @param options plugin options set by user into chart options.
 	 */
 	void onResize(AbstractChart<?, ?> chart, SizeItem size, JavaScriptObject options);

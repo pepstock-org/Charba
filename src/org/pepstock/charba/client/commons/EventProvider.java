@@ -62,12 +62,14 @@ public abstract class EventProvider extends ChartContainer implements AddHandler
 	/**
 	 * Notifies the event provider when a new handler has been added.
 	 * @param type type of event
+	 * @param <H> type of event handler
 	 */
 	protected abstract <H extends EventHandler> void addHandler(Type<H> type);
 	
 	/**
 	 * Notifies the event provider when a new handler has been deregistered
 	 * @param type type of event handler
+	 * @param <H> type of event handler
 	 */
 	protected abstract <H extends EventHandler> void removeHandler(Type<H> type);
 }
