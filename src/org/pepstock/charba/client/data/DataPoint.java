@@ -109,7 +109,7 @@ public final class DataPoint extends JavaScriptObjectContainer{
 	 * @return T value. <code>null</code> is not set.
 	 */
 	public Date getT(){
-		return getValue(Property.y, (Date)null);
+		return getValue(Property.t, (Date)null);
 	}
 	
 	/**
