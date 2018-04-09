@@ -1,7 +1,7 @@
 Charba - GWT wrapper for CHART.JS
 ===============================================
 
-Version 1.2
+Version 1.3
 
 What's Charba
 --------
