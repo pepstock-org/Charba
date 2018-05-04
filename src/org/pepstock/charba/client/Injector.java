@@ -15,44 +15,54 @@
 */
 package org.pepstock.charba.client;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.pepstock.charba.client.resources.Resources;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ScriptElement;
+import com.google.gwt.resources.client.TextResource;
 
 /**
  * This utility injects ChartJS javascript into the web page of GWT.<br>
  * If ChartJS is already injected, it does nothing.<br>
+ * It enables also to inject other script into web page, necessary when you want to use some Chart.JS plugins.
  * 
  * @author Andrea "Stock" Stocchero
  * 
  */
-final class Injector {
+public final class Injector {
 
-	// stores if the ChartJS is already injected
-	private static boolean injected = false;
-	// ID of script element with CHART JS
-	private static final String CHART_JS_SCRIPT_ELEMENT_ID = "_charba_chartjs";
+	// Prefix ID of script element with CHART JS
+	private static final String CHARBA_PREFIX_SCRIPT_ELEMENT_ID = "_charba_";
+	// contains all script object injected
+	private static final Set<String> ELEMENTS_INJECTED = new HashSet<String>();
 
 	/**
 	 * Injects ChartJS if not injected yet.
 	 */
-	static void ensureInjected() {
-		if (!injected) {
-			// gets resource
-			Resources res = GWT.create(Resources.class);
-			// gets source of ChartJS
-			String source = res.chartJsSource().getText();
+	public static void ensureInjected() {
+		// use default chart.js
+		ensureInjected(Resources.INSTANCE.chartJsSource());
+	}
+
+	/**
+	 * Injects a script resource if not injected yet.
+	 * @param resource script resource
+	 */
+	public static void ensureInjected(TextResource resource) {
+		// checks if already injected
+		if (!ELEMENTS_INJECTED.contains(resource.getName())) {
 			// creates a script element
 			ScriptElement scriptElement = Document.get().createScriptElement();
 			// sets ID
-			scriptElement.setId(CHART_JS_SCRIPT_ELEMENT_ID);
+			scriptElement.setId(CHARBA_PREFIX_SCRIPT_ELEMENT_ID+resource.getName());
 			// sets the script content with ChartJS source
-			scriptElement.setInnerText(source);
+			scriptElement.setInnerText(resource.getText());
 			// appends to the body
 			Document.get().getBody().appendChild(scriptElement);
-			injected = true;
+			ELEMENTS_INJECTED.add(resource.getName());
 		}
 	}
 }
