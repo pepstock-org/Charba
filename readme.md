@@ -36,20 +36,20 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>1.2</version>
+    <version>1.3</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="1.2"/>
+<dependency org="org.pepstock" name="charba" rev="1.3"/>
 ```
 
 If you are using [Gradle](https://gradle.org/):
 
 ```json
-compile group: 'org.pepstock', name: 'charba', version: '1.2'
+compile group: 'org.pepstock', name: 'charba', version: '1.3'
 ```
 
 To install in your GWT project, you must the following configuration into your GWT project module configuration:
