@@ -3,7 +3,7 @@
 
 	<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" />
 
-	<property name="ivy.revision" value="1.3" />
+	<property name="ivy.revision" value="1.4" />
 	
 	<!-- 
 		CHARBA project configuration 
