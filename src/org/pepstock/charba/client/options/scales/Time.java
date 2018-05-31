@@ -61,6 +61,8 @@ public class Time extends ChartContainer {
 	 */
 	Time(AbstractChart<?, ?> chart) {
 		super(chart);
+		// sets java script properties
+		setValue(Property.displayFormats, displayFormats);
 	}
 
 	/**
