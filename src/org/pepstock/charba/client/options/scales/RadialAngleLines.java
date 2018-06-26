@@ -16,6 +16,8 @@
 package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.Key;
 
@@ -74,6 +76,15 @@ public final class RadialAngleLines extends ChartContainer {
 	 * 
 	 * @param color color of angled lines.
 	 */
+	public void setColor(IsColor color) {
+		setColor(color.toRGBA());
+	}
+
+	/**
+	 * Sets the color of angled lines.
+	 * 
+	 * @param color color of angled lines.
+	 */
 	public void setColor(String color) {
 		setValue(Property.color, color);
 	}
@@ -83,8 +94,17 @@ public final class RadialAngleLines extends ChartContainer {
 	 * 
 	 * @return color of angled lines. 
 	 */
-	public String getColor() {
-		return getValue(Property.color, axis.getScale().getAngleLines().getColor());
+	public String getColorAsString() {
+		return getValue(Property.color, axis.getScale().getAngleLines().getColorAsString());
+	}
+
+	/**
+	 * Returns the color of angled lines.
+	 * 
+	 * @return color of angled lines. 
+	 */
+	public IsColor getColor() {
+		return ColorBuilder.parse(getColorAsString());
 	}
 
 	/**

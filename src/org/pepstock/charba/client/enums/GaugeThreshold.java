@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.enums;
 
-import org.pepstock.charba.client.utils.Color;
+import org.pepstock.charba.client.colors.Color;
+import org.pepstock.charba.client.colors.IsColor;
 
 /**
  * Default gauge thresholds.
@@ -29,27 +30,27 @@ public enum GaugeThreshold implements IsThreshold
 	/**
 	 * the normal threshold 
 	 */
-	normal(75D, new Color(140, 214, 16).toRGBA()),
+	normal(75D, new Color(140, 214, 16)),
 	/**
 	 * the warning threshold.
 	 */
-	warning(90D, new Color(239, 198, 0).toRGBA()),
+	warning(90D, new Color(239, 198, 0)),
 	/**
 	 * the critical threshold.
 	 */
-	critical(Double.MAX_VALUE, new Color(231, 24, 49).toRGBA());
+	critical(Double.MAX_VALUE, new Color(231, 24, 49));
 	
 	// value
 	private final double value;
 	// color
-	private final String color;
+	private final IsColor color;
 	
 	/**
 	 * Creates the threshold value using value and color
 	 * @param value threshold value
 	 * @param color threshold value
 	 */
-	private GaugeThreshold(double value, String color) {
+	private GaugeThreshold(double value, IsColor color) {
 		this.value = value;
 		this.color = color;
 	}
@@ -66,7 +67,7 @@ public enum GaugeThreshold implements IsThreshold
 	 * @see org.pepstock.charba.client.enums.IsThreshold#getColor()
 	 */
 	@Override
-	public String getColor() {
+	public IsColor getColor() {
 		return color;
 	}
 

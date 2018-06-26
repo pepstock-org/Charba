@@ -17,6 +17,8 @@ package org.pepstock.charba.client.items;
 
 import java.util.List;
 
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
 
@@ -221,8 +223,17 @@ public final class TooltipModel extends BaseItem {
 	 * 
 	 * @return the color of the tooltip body section.
 	 */
-	public final String getBodyFontColor() {
+	public final String getBodyFontColorAsString() {
 		return getString(Property.bodyFontColor.name());
+	}
+
+	/**
+	 * Returns the color of the tooltip body section.
+	 * 
+	 * @return the color of the tooltip body section.
+	 */
+	public final IsColor getBodyFontColor() {
+		return ColorBuilder.parse(getBodyFontColorAsString());
 	}
 
 	/**
@@ -285,8 +296,17 @@ public final class TooltipModel extends BaseItem {
 	 * 
 	 * @return the color of the tooltip title section.
 	 */
-	public final String getTitleFontColor() {
+	public final String getTitleFontColorAsString() {
 		return getString(Property.titleFontColor.name());
+	}
+
+	/**
+	 * Returns the color of the tooltip title section.
+	 * 
+	 * @return the color of the tooltip title section.
+	 */
+	public final IsColor getTitleFontColor() {
+		return ColorBuilder.parse(getTitleFontColorAsString());
 	}
 
 	/**
@@ -358,8 +378,17 @@ public final class TooltipModel extends BaseItem {
 	 * 
 	 * @return the color of the tooltip footer section.
 	 */
-	public final String getFooterFontColor() {
+	public final String getFooterFontColorAsString() {
 		return getString(Property.footerFontColor.name());
+	}
+
+	/**
+	 * Returns the color of the tooltip footer section.
+	 * 
+	 * @return the color of the tooltip footer section.
+	 */
+	public final IsColor getFooterFontColor() {
+		return ColorBuilder.parse(getFooterFontColorAsString());
 	}
 
 	/**
@@ -440,8 +469,17 @@ public final class TooltipModel extends BaseItem {
 	 * 
 	 * @return the background color of tooltip.
 	 */
-	public final String getBackgroundColor() {
+	public final String getBackgroundColorAsString() {
 		return getString(Property.backgroundColor.name());
+	}
+
+	/**
+	 * Returns the background color of tooltip.
+	 * 
+	 * @return the background color of tooltip.
+	 */
+	public final IsColor getBackgroundColor() {
+		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
 	/**
@@ -468,10 +506,18 @@ public final class TooltipModel extends BaseItem {
 	 * 
 	 * @return the legend color of tooltips.
 	 */
-	public final String getLegendColorBackground() {
+	public final String getLegendColorBackgroundAsString() {
 		return getString(Property.legendColorBackground.name());
 	}
 
+	/**
+	 * Returns the legend color of tooltips.
+	 * 
+	 * @return the legend color of tooltips.
+	 */
+	public final IsColor getLegendColorBackground() {
+		return ColorBuilder.parse(getLegendColorBackgroundAsString());
+	}
 	/**
 	 * Returns the display of colors of tooltip.
 	 * 

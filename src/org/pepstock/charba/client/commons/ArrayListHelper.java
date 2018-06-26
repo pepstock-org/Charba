@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.commons;
 
+import org.pepstock.charba.client.colors.IsColor;
+
 /**
  * Utility to create array list objects based on GWT JavaScript objects.
  * 
@@ -87,6 +89,26 @@ public final class ArrayListHelper {
 		return result;
 	}
 
+	/**
+	 * Creates a JavaScript array list of strings.
+	 * @param values array of elements to load when the list is creating.
+	 * @return a array list of strings instance or <code>null</code> if the elements are null.
+	 * @see org.pepstock.charba.client.commons.JsStringArrayList
+	 */
+	public static JsStringArrayList build(IsColor... values){
+		// checks if array is null
+		if (values == null){
+			return null;
+		}
+		// creates the list
+		JsStringArrayList result = new JsStringArrayList();
+		for (IsColor color : values) {
+			// adds all elements
+			result.addAll(color.toRGBA());
+		}
+		// returns the list
+		return result;
+	}
 	/**
 	 * Creates a JavaScript array list of generic javaScript objects.
 	 * @param values array of elements to load when the list is creating.

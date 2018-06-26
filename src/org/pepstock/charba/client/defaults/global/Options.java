@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.global;
 
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JsEnumValueArrayList;
@@ -303,6 +305,14 @@ public class Options extends AbstractItem {
 	 * Sets the default color to use in the chart, on all objects, if not override by the specific configuration.
 	 * @param defaultColor color to use into chart. 
 	 */
+	public void setDefaultColor(IsColor defaultColor) {
+		setDefaultColor(defaultColor.toRGBA());
+	}
+
+	/**
+	 * Sets the default color to use in the chart, on all objects, if not override by the specific configuration.
+	 * @param defaultColor color to use into chart. 
+	 */
 	public void setDefaultColor(String defaultColor) {
 		setValue(Property.defaultColor, defaultColor);
 	}
@@ -311,8 +321,24 @@ public class Options extends AbstractItem {
 	 * Returns the default color to use in the chart, on all objects, if not override by the specific configuration.
 	 * @return color to use into chart. Default is "rgba(0,0,0,0.1)"
 	 */
-	public String getDefaultColor() {
+	public String getDefaultColorAsString() {
 		return getValue(Property.defaultColor, DEFAULT_COLOR);
+	}
+
+	/**
+	 * Returns the default color to use in the chart, on all objects, if not override by the specific configuration.
+	 * @return color to use into chart. Default is "rgba(0,0,0,0.1)"
+	 */
+	public IsColor getDefaultColor() {
+		return ColorBuilder.parse(getDefaultColorAsString());
+	}
+
+	/**
+	 * Sets the default font color to use in the chart, on all objects, if not override by the specific configuration.
+	 * @param defaultFontColor font color to use into chart. 
+	 */
+	public void setDefaultFontColor(IsColor defaultFontColor) {
+		setDefaultFontColor(defaultFontColor.toRGBA());
 	}
 
 	/**
@@ -327,8 +353,16 @@ public class Options extends AbstractItem {
 	 * Returns the default font color to use in the chart, on all objects, if not override by the specific configuration.
 	 * @return  font color to use into chart. Default is #666.
 	 */
-	public String getDefaultFontColor() {
+	public String getDefaultFontColorAsString() {
 		return getValue(Property.defaultFontColor, DEFAULT_FONT_COLOR);
+	}
+
+	/**
+	 * Returns the default font color to use in the chart, on all objects, if not override by the specific configuration.
+	 * @return  font color to use into chart. Default is #666.
+	 */
+	public IsColor getDefaultFontColor() {
+		return ColorBuilder.parse(getDefaultFontColorAsString());
 	}
 
 	/**

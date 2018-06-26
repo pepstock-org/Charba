@@ -17,6 +17,8 @@ package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.callbacks.RadialPointLabelCallback;
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
@@ -123,6 +125,15 @@ public final class RadialPointLabels extends ChartContainer {
 	 * 
 	 * @param fontColor font color for tick labels.
 	 */
+	public void setFontColor(IsColor fontColor) {
+		setFontColor(fontColor.toRGBA());
+	}
+
+	/**
+	 * Sets the font color for tick labels.
+	 * 
+	 * @param fontColor font color for tick labels.
+	 */
 	public void setFontColor(String fontColor) {
 		setValue(Property.fontColor, fontColor);
 	}
@@ -132,8 +143,17 @@ public final class RadialPointLabels extends ChartContainer {
 	 * 
 	 * @return font color for tick labels. 
 	 */
-	public String getFontColor() {
-		return getValue(Property.fontColor, axis.getScale().getPointLabels().getFontColor());
+	public String getFontColorAsString() {
+		return getValue(Property.fontColor, axis.getScale().getPointLabels().getFontColorAsString());
+	}
+
+	/**
+	 * Returns the font color for tick labels.
+	 * 
+	 * @return font color for tick labels. 
+	 */
+	public IsColor getFontColor() {
+		return ColorBuilder.parse(getFontColorAsString());
 	}
 
 	/**

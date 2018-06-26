@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.plugins.impl;
 
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
@@ -63,8 +65,17 @@ public final class ChartBackgroundColorOptions extends JavaScriptObjectContainer
 	 * 
 	 * @return the background color.
 	 */
-	public String getBackgroundColor(){
+	public String getBackgroundColorAsString(){
 		return getValue(Property.backGroundColor, color);
+	}
+	
+	/**
+	 * Returns the background color.
+	 * 
+	 * @return the background color.
+	 */
+	public IsColor getBackgroundColor(){
+		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 	
 	/**
@@ -74,7 +85,15 @@ public final class ChartBackgroundColorOptions extends JavaScriptObjectContainer
 	public void setBackgroundColor(String color){
 		setValue(Property.backGroundColor, color);
 	}
-	
+
+	/**
+	 * Sets the background color.
+	 * @param color the background color.
+	 */
+	public void setBackgroundColor(IsColor color){
+		setBackgroundColor(color.toRGBA());
+	}
+
 	/**
 	 * Returns the java script object of this options.
 	 * 

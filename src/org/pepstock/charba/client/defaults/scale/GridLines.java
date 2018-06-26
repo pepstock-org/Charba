@@ -17,6 +17,8 @@ package org.pepstock.charba.client.defaults.scale;
 
 import java.util.List;
 
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.JsIntegerArrayList;
 import org.pepstock.charba.client.commons.JsStringArrayList;
@@ -117,6 +119,17 @@ public final class GridLines extends AbstractItem {
 	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the
 	 *            second to the second grid line and so on.
 	 */
+	public void setColor(IsColor... color) {
+		setColor(ArrayListHelper.build(color));
+	}
+
+	/**
+	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
+	 * second grid line and so on.
+	 * 
+	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the
+	 *            second to the second grid line and so on.
+	 */
 	public void setColor(String... color) {
 		setColor(ArrayListHelper.build(color));
 	}
@@ -140,7 +153,7 @@ public final class GridLines extends AbstractItem {
 	 * 
 	 * @return the list of colors of the grid lines. If not set, default is only 1 value 'rgba(0, 0, 0, 0.1)'
 	 */
-	public List<String> getColor() {
+	public List<String> getColorAsString() {
 		// loads stored data
 		JsStringArrayList values = checkAndGetStringValues(Property.color, isColorArray);
 		// if empty
@@ -149,6 +162,16 @@ public final class GridLines extends AbstractItem {
 			values.add(DEFAULT_COLOR);
 		}
 		return values;
+	}
+
+	/**
+	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
+	 * second grid line and so on.
+	 * 
+	 * @return the list of colors of the grid lines. If not set, default is only 1 value 'rgba(0, 0, 0, 0.1)'
+	 */
+	public List<IsColor> getColor() {
+		return ColorBuilder.parse(getColorAsString());
 	}
 
 	/**
@@ -348,6 +371,15 @@ public final class GridLines extends AbstractItem {
 	 * 
 	 * @param zeroLineColor Stroke color of the grid line for the first index (index 0).
 	 */
+	public void setZeroLineColor(IsColor zeroLineColor) {
+		setZeroLineColor(zeroLineColor.toRGBA());
+	}
+
+	/**
+	 * Sets the stroke color of the grid line for the first index (index 0).
+	 * 
+	 * @param zeroLineColor Stroke color of the grid line for the first index (index 0).
+	 */
 	public void setZeroLineColor(String zeroLineColor) {
 		setValue(Property.zeroLineColor, zeroLineColor);
 		// checks if all parents are attached
@@ -359,8 +391,17 @@ public final class GridLines extends AbstractItem {
 	 * 
 	 * @return Stroke color of the grid line for the first index (index 0). If not set, default is 'rgba(0, 0, 0, 0.25)'
 	 */
-	public String getZeroLineColor() {
+	public String getZeroLineColorAsString() {
 		return getValue(Property.zeroLineColor, DEFAULT_ZERO_LINE_COLOR);
+	}
+
+	/**
+	 * Returns the stroke color of the grid line for the first index (index 0).
+	 * 
+	 * @return Stroke color of the grid line for the first index (index 0). If not set, default is 'rgba(0, 0, 0, 0.25)'
+	 */
+	public IsColor getZeroLineColor() {
+		return ColorBuilder.parse(getZeroLineColorAsString());
 	}
 
 	/**

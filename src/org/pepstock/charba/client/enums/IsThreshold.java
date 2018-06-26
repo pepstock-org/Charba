@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.enums;
 
+import org.pepstock.charba.client.colors.IsColor;
+
 /**
  * Interface tomap a threshold. Needed for standard ones.
  * 
@@ -39,6 +41,6 @@ public interface IsThreshold {
 	 * Returns the color of threshold.
 	 * @return the color of threshold.
 	 */
-	String getColor();
+	IsColor getColor();
 
 }

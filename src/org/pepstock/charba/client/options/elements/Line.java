@@ -64,7 +64,7 @@ public final class Line extends AbstractElement {
 	 */
 	@Override
 	protected String getDefaultBackgroundColor() {
-		return getChart().getGlobal().getElements().getLine().getBackgroundColor();
+		return getChart().getGlobal().getElements().getLine().getBackgroundColorAsString();
 	}
 
 	/*
@@ -84,7 +84,7 @@ public final class Line extends AbstractElement {
 	 */
 	@Override
 	protected String getDefaultBorderColor() {
-		return getChart().getGlobal().getElements().getLine().getBorderColor();
+		return getChart().getGlobal().getElements().getLine().getBorderColorAsString();
 	}
 
 	/**

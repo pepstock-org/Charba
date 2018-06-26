@@ -16,6 +16,8 @@
 package org.pepstock.charba.client.defaults.global;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.AbstractItem;
 import org.pepstock.charba.client.enums.FontStyle;
@@ -216,6 +218,15 @@ public final class Tooltips extends AbstractItem {
 	 * 
 	 * @param backgroundColor background color of the tooltip.
 	 */
+	public void setBackgroundColor(IsColor backgroundColor) {
+		setBackgroundColor(backgroundColor.toRGBA());
+	}
+
+	/**
+	 * Sets the background color of the tooltip.
+	 * 
+	 * @param backgroundColor background color of the tooltip.
+	 */
 	public void setBackgroundColor(String backgroundColor) {
 		setValue(Property.backgroundColor, backgroundColor);
 		// checks if all parents are attached
@@ -227,8 +238,17 @@ public final class Tooltips extends AbstractItem {
 	 * 
 	 * @return Background color of the tooltip. Default is "rgba(0,0,0,0.8)".
 	 */
-	public String getBackgroundColor() {
+	public String getBackgroundColorAsString() {
 		return getValue(Property.backgroundColor, DEFAULT_BACKGROUND_COLOR);
+	}
+
+	/**
+	 * Returns the background color of the tooltip.
+	 * 
+	 * @return Background color of the tooltip. Default is "rgba(0,0,0,0.8)".
+	 */
+	public IsColor getBackgroundColor() {
+		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
 	/**
@@ -320,6 +340,15 @@ public final class Tooltips extends AbstractItem {
 	 * 
 	 * @param titleFontColor title font color.
 	 */
+	public void setTitleFontColor(IsColor titleFontColor) {
+		setTitleFontColor(titleFontColor.toRGBA());
+	}
+
+	/**
+	 * Sets the title font color.
+	 * 
+	 * @param titleFontColor title font color.
+	 */
 	public void setTitleFontColor(String titleFontColor) {
 		setValue(Property.titleFontColor, titleFontColor);
 		// checks if all parents are attached
@@ -331,8 +360,17 @@ public final class Tooltips extends AbstractItem {
 	 * 
 	 * @return title font color.Default is '#fff'.
 	 */
-	public String getTitleFontColor() {
+	public String getTitleFontColorAsString() {
 		return getValue(Property.titleFontColor, DEFAULT_TITLE_FONT_COLOR);
+	}
+
+	/**
+	 * Returns the title font color.
+	 * 
+	 * @return title font color.Default is '#fff'.
+	 */
+	public IsColor getTitleFontColor() {
+		return ColorBuilder.parse(getTitleFontColorAsString());
 	}
 
 	/**
@@ -464,6 +502,15 @@ public final class Tooltips extends AbstractItem {
 	 * 
 	 * @param bodyFontColor body font color.
 	 */
+	public void setBodyFontColor(IsColor bodyFontColor) {
+		setBodyFontColor(bodyFontColor.toRGBA());
+	}
+
+	/**
+	 * Sets the body font color.
+	 * 
+	 * @param bodyFontColor body font color.
+	 */
 	public void setBodyFontColor(String bodyFontColor) {
 		setValue(Property.bodyFontColor, bodyFontColor);
 		// checks if all parents are attached
@@ -475,8 +522,17 @@ public final class Tooltips extends AbstractItem {
 	 * 
 	 * @return body font color. Default is '#fff'.
 	 */
-	public String getBodyFontColor() {
+	public String getBodyFontColorAsString() {
 		return getValue(Property.bodyFontColor, DEFAULT_BODY_FONT_COLOR);
+	}
+
+	/**
+	 * Returns the body font color.
+	 * 
+	 * @return body font color. Default is '#fff'.
+	 */
+	public IsColor getBodyFontColor() {
+		return ColorBuilder.parse(getBodyFontColorAsString());
 	}
 
 	/**
@@ -587,6 +643,15 @@ public final class Tooltips extends AbstractItem {
 	 * 
 	 * @param footerFontColor footer font color.
 	 */
+	public void setFooterFontColor(IsColor footerFontColor) {
+		setFooterFontColor(footerFontColor.toRGBA());
+	}
+
+	/**
+	 * Sets the footer font color.
+	 * 
+	 * @param footerFontColor footer font color.
+	 */
 	public void setFooterFontColor(String footerFontColor) {
 		setValue(Property.footerFontColor, footerFontColor);
 		// checks if all parents are attached
@@ -598,10 +663,19 @@ public final class Tooltips extends AbstractItem {
 	 * 
 	 * @return footer font color. Default is '#fff'.
 	 */
-	public String getFooterFontColor() {
+	public String getFooterFontColorAsString() {
 		return getValue(Property.footerFontColor, DEFAULT_FOOTER_FONT_COLOR);
 	}
 
+	/**
+	 * Returns the footer font color.
+	 * 
+	 * @return footer font color. Default is '#fff'.
+	 */
+	public IsColor getFooterFontColor() {
+		return ColorBuilder.parse(getFooterFontColorAsString());
+	}
+	
 	/**
 	 * Sets the spacing to add to top and bottom of each footer line.
 	 * 
@@ -747,6 +821,15 @@ public final class Tooltips extends AbstractItem {
 	 * 
 	 * @param multiKeyBackground color to draw behind the colored boxes when multiple items are in the tooltip.
 	 */
+	public void setMultiKeyBackground(IsColor multiKeyBackground) {
+		setMultiKeyBackground(multiKeyBackground.toRGBA());
+	}
+
+	/**
+	 * Sets the color to draw behind the colored boxes when multiple items are in the tooltip.
+	 * 
+	 * @param multiKeyBackground color to draw behind the colored boxes when multiple items are in the tooltip.
+	 */
 	public void setMultiKeyBackground(String multiKeyBackground) {
 		setValue(Property.multiKeyBackground, multiKeyBackground);
 		// checks if all parents are attached
@@ -758,8 +841,17 @@ public final class Tooltips extends AbstractItem {
 	 * 
 	 * @return color to draw behind the colored boxes when multiple items are in the tooltip. Default is '#fff'.
 	 */
-	public String getMultiKeyBackground() {
+	public String getMultiKeyBackgroundAsString() {
 		return getValue(Property.multiKeyBackground, DEFAULT_MULTI_KEY_BACKGROUND);
+	}
+
+	/**
+	 * Returns the color to draw behind the colored boxes when multiple items are in the tooltip.
+	 * 
+	 * @return color to draw behind the colored boxes when multiple items are in the tooltip. Default is '#fff'.
+	 */
+	public IsColor getMultiKeyBackground() {
+		return ColorBuilder.parse(getMultiKeyBackgroundAsString());
 	}
 
 	/**
@@ -787,6 +879,15 @@ public final class Tooltips extends AbstractItem {
 	 * 
 	 * @param borderColor color of the border.
 	 */
+	public void setBorderColor(IsColor borderColor) {
+		setBorderColor(borderColor.toRGBA());
+	}
+
+	/**
+	 * Sets the color of the border.
+	 * 
+	 * @param borderColor color of the border.
+	 */
 	public void setBorderColor(String borderColor) {
 		setValue(Property.borderColor, borderColor);
 		// checks if all parents are attached
@@ -798,8 +899,17 @@ public final class Tooltips extends AbstractItem {
 	 * 
 	 * @return color of the border. Default is 'rgba(0,0,0,0)'.
 	 */
-	public String getBorderColor() {
+	public String getBorderColorAsString() {
 		return getValue(Property.borderColor, DEFAULT_BORDER_COLOR);
+	}
+
+	/**
+	 * Returns the color of the border.
+	 * 
+	 * @return color of the border. Default is 'rgba(0,0,0,0)'.
+	 */
+	public IsColor getBorderColor() {
+		return ColorBuilder.parse(getBorderColorAsString());
 	}
 
 	/**

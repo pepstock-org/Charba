@@ -17,6 +17,8 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.JsIntegerArrayList;
 import org.pepstock.charba.client.commons.JsStringArrayList;
@@ -59,6 +61,14 @@ abstract class HovingFlexDataset extends Dataset{
 	 * Sets the fill colors of the elements.
 	 * @param backgroundColor the fill colors of the elements.
 	 */
+	public void setBackgroundColor(IsColor... backgroundColor) {
+		setBackgroundColor(ArrayListHelper.build(backgroundColor));
+	}
+
+	/**
+	 * Sets the fill colors of the elements.
+	 * @param backgroundColor the fill colors of the elements.
+	 */
 	public void setBackgroundColor(String... backgroundColor) {
 		setBackgroundColor(ArrayListHelper.build(backgroundColor));
 	}
@@ -75,8 +85,24 @@ abstract class HovingFlexDataset extends Dataset{
 	 * Returns the fill colors of the elements
 	 * @return list of the fill colors of the elements
 	 */
-	public List<String> getBackgroundColor() {
+	public List<String> getBackgroundColorAsString() {
 		return checkAndGetStringValues(Property.backgroundColor, isBackgroundColorArray);
+	}
+
+	/**
+	 * Returns the fill colors of the elements
+	 * @return list of the fill colors of the elements
+	 */
+	public List<IsColor> getBackgroundColor() {
+		return ColorBuilder.parse(getBackgroundColorAsString());
+	}
+
+	/**
+	 * Sets the color of the bar border
+	 * @param borderColor the color of the bar border
+	 */
+	public void setBorderColor(IsColor... borderColor) {
+		setBorderColor(ArrayListHelper.build(borderColor));
 	}
 
 	/**
@@ -99,10 +125,18 @@ abstract class HovingFlexDataset extends Dataset{
 	 * Returns the color of the bar border
 	 * @return list of the color of the bar border
 	 */
-	public List<String> getBorderColor() {
+	public List<String> getBorderColorAsString() {
 		return checkAndGetStringValues(Property.borderColor, isBorderColorArray);
 	}
-	
+
+	/**
+	 * Returns the color of the bar border
+	 * @return list of the color of the bar border
+	 */
+	public List<IsColor> getBorderColor() {
+		return ColorBuilder.parse(getBorderColorAsString());
+	}
+
 	/**
 	 * Sets the stroke width of the bar in pixels.
 	 * @param borderWidth the stroke width of the bar in pixels.
@@ -131,6 +165,14 @@ abstract class HovingFlexDataset extends Dataset{
 	 * Sets the fill color of the elements when hovered
 	 * @param colors the fill color of the elements when hovered
 	 */
+	public void setHoverBackgroundColor(IsColor... colors){
+		setHoverBackgroundColor(ArrayListHelper.build(colors));
+	}
+
+	/**
+	 * Sets the fill color of the elements when hovered
+	 * @param colors the fill color of the elements when hovered
+	 */
 	public void setHoverBackgroundColor(String... colors){
 		setHoverBackgroundColor(ArrayListHelper.build(colors));
 	}
@@ -147,8 +189,24 @@ abstract class HovingFlexDataset extends Dataset{
 	 * Returns the fill color of the elements when hovered
 	 * @return list of the fill color of the elements when hovered
 	 */
-	public List<String> getHoverBackgroundColor(){
+	public List<String> getHoverBackgroundColorAsString(){
 		return checkAndGetStringValues(Property.hoverBackgroundColor, isHoverBackgroundColorArray);
+	}
+
+	/**
+	 * Returns the fill color of the elements when hovered
+	 * @return list of the fill color of the elements when hovered
+	 */
+	public List<IsColor> getHoverBackgroundColor(){
+		return ColorBuilder.parse(getHoverBackgroundColorAsString());
+	}
+
+	/**
+	 * Sets the stroke color of the elements when hovered
+	 * @param colors the stroke color of the elements when hovered
+	 */
+	public void setHoverBorderColor(IsColor... colors){
+		setHoverBorderColor(ArrayListHelper.build(colors));
 	}
 
 	/**
@@ -171,8 +229,16 @@ abstract class HovingFlexDataset extends Dataset{
 	 * Returns the stroke color of the elements when hovered
 	 * @return list of the stroke color of the elements when hovered
 	 */
-	public List<String> getHoverBorderColor(){
+	public List<String> getHoverBorderColorAsString(){
 		return checkAndGetStringValues(Property.hoverBorderColor, isHoverBorderColorArray);
+	}
+
+	/**
+	 * Returns the stroke color of the elements when hovered
+	 * @return list of the stroke color of the elements when hovered
+	 */
+	public List<IsColor> getHoverBorderColor(){
+		return ColorBuilder.parse(getHoverBorderColorAsString());
 	}
 
 	/**

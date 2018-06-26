@@ -16,6 +16,8 @@
 package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
@@ -165,6 +167,15 @@ public class CartesianScaleLabel extends ChartContainer {
 	 * 
 	 * @param fontColor Font color for scale title
 	 */
+	public void setFontColor(IsColor fontColor) {
+		setFontColor(fontColor.toRGBA());
+	}
+
+	/**
+	 * Sets the font color for scale title
+	 * 
+	 * @param fontColor Font color for scale title
+	 */
 	public void setFontColor(String fontColor) {
 		setValue(Property.fontColor, fontColor);
 	}
@@ -174,8 +185,17 @@ public class CartesianScaleLabel extends ChartContainer {
 	 * 
 	 * @return Font color for scale title. 
 	 */
-	public String getFontColor() {
-		return getValue(Property.fontColor, axis.getScale().getScaleLabel().getFontColor());
+	public String getFontColorAsString() {
+		return getValue(Property.fontColor, axis.getScale().getScaleLabel().getFontColorAsString());
+	}
+
+	/**
+	 * Returns the font color for scale title
+	 * 
+	 * @return Font color for scale title. 
+	 */
+	public IsColor getFontColor() {
+		return ColorBuilder.parse(getFontColorAsString());
 	}
 
 	/**

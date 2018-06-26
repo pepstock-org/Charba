@@ -71,6 +71,7 @@ public interface TooltipLabelCallback {
 	 * @return label text color to be applied. If returns <code>null</code>, it will be ignored.
 	 * @see org.pepstock.charba.client.AbstractChart
 	 * @see org.pepstock.charba.client.items.TooltipItem
+	 * FIXME isColor
 	 */
 	String onLabelTextColor(AbstractChart<?, ?> chart, TooltipItem item);
 
