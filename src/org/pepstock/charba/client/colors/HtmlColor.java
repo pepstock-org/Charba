@@ -192,7 +192,6 @@ public enum HtmlColor implements IsColor
 		String blueValue = newHexvalue.substring(4);
 		int blue = Integer.parseInt(blueValue, 16);
 		color = new Color(red, green, blue, Color.DEFAULT_ALPHA);
-//		this.color = ColorBuilder.parse(hexValue);
 	}
 
 	/* (non-Javadoc)

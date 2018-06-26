@@ -82,6 +82,12 @@ public final class ColorBuilder {
 				return color;
 			}
 		}
+		for (GwtMaterialColor color : GwtMaterialColor.values()) {
+			// if equals returns the enum item
+			if (color.getRed() == r && color.getGreen() == g && color.getBlue() == b) {
+				return color;
+			}
+		}
 		// if here, the required color doesn't exist
 		// creates new color
 		return new Color(r, g, b);
@@ -135,6 +141,12 @@ public final class ColorBuilder {
 		// checks if already exists the required color 
 		// into enum HTML color with alpha
 		for (HtmlColor color : HtmlColor.values()) {
+			if (color.getRed() == r && color.getGreen() == g && color.getBlue() == b) {
+				return color.alpha(alpha);
+			}
+		}
+		for (GwtMaterialColor color : GwtMaterialColor.values()) {
+			// if equals returns the enum item
 			if (color.getRed() == r && color.getGreen() == g && color.getBlue() == b) {
 				return color.alpha(alpha);
 			}
