@@ -16,6 +16,8 @@
 package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -184,6 +186,15 @@ public final class RadialLinearTick extends Tick {
 	 * 
 	 * @param backdropColor color of label backdrops.
 	 */
+	public void setBackdropColor(IsColor backdropColor) {
+		setBackdropColor(backdropColor.toRGBA());
+	}
+
+	/**
+	 * Sets the color of label backdrops.
+	 * 
+	 * @param backdropColor color of label backdrops.
+	 */
 	public void setBackdropColor(String backdropColor) {
 		setValue(Property.backdropColor, backdropColor);
 	}
@@ -193,8 +204,17 @@ public final class RadialLinearTick extends Tick {
 	 * 
 	 * @return color of label backdrops.
 	 */
-	public String getBackdropColor() {
-		return getValue(Property.backdropColor, getAxis().getScale().getTicks().getBackdropColor());
+	public String getBackdropColorAsString() {
+		return getValue(Property.backdropColor, getAxis().getScale().getTicks().getBackdropColorAsString());
+	}
+
+	/**
+	 * Returns the color of label backdrops.
+	 * 
+	 * @return color of label backdrops.
+	 */
+	public IsColor getBackdropColor() {
+		return ColorBuilder.parse(getBackdropColorAsString());
 	}
 
 	/**

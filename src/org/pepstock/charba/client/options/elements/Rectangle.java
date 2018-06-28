@@ -51,7 +51,7 @@ public final class Rectangle extends AbstractElement {
 	 */
 	@Override
 	protected String getDefaultBackgroundColor() {
-		return getChart().getGlobal().getElements().getRectangle().getBackgroundColor();
+		return getChart().getGlobal().getElements().getRectangle().getBackgroundColorAsString();
 	}
 
 	/*
@@ -71,7 +71,7 @@ public final class Rectangle extends AbstractElement {
 	 */
 	@Override
 	protected String getDefaultBorderColor() {
-		return getChart().getGlobal().getElements().getRectangle().getBorderColor();
+		return getChart().getGlobal().getElements().getRectangle().getBorderColorAsString();
 	}
 
 	/**

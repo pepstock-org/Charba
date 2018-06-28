@@ -56,7 +56,7 @@ public final class Point extends AbstractElement {
 	 */
 	@Override
 	protected String getDefaultBackgroundColor() {
-		return getChart().getGlobal().getElements().getPoint().getBackgroundColor();
+		return getChart().getGlobal().getElements().getPoint().getBackgroundColorAsString();
 	}
 
 	/*
@@ -76,7 +76,7 @@ public final class Point extends AbstractElement {
 	 */
 	@Override
 	protected String getDefaultBorderColor() {
-		return getChart().getGlobal().getElements().getPoint().getBorderColor();
+		return getChart().getGlobal().getElements().getPoint().getBorderColorAsString();
 	}
 
 	/**

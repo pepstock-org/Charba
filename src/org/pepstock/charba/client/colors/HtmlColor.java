@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.utils;
+package org.pepstock.charba.client.colors;
 
 /**
  * All modern browsers support the following 140 color names.
@@ -182,7 +182,16 @@ public enum HtmlColor implements IsColor
 	 */
 	private HtmlColor(String hexValue) {
 		this.hexValue = hexValue;
-		this.color = ColorBuilder.parse(hexValue);
+		// checks if the HEX value
+		String newHexvalue = hexValue.substring(1);
+		// reads colors
+		String redValue = newHexvalue.substring(0, 2);
+		int red = Integer.parseInt(redValue, 16);
+		String greenValue = newHexvalue.substring(2, 4);
+		int green = Integer.parseInt(greenValue, 16);
+		String blueValue = newHexvalue.substring(4);
+		int blue = Integer.parseInt(blueValue, 16);
+		color = new Color(red, green, blue, Color.DEFAULT_ALPHA);
 	}
 
 	/* (non-Javadoc)

@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.global;
 
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.AbstractItem;
 
@@ -63,6 +65,15 @@ public class Arc extends AbstractItem {
 	 * 
 	 * @param backgroundColor the background color.
 	 */
+	public void setBackgroundColor(IsColor backgroundColor) {
+		setBackgroundColor(backgroundColor.toRGBA());
+	}
+	
+	/**
+	 * Sets the background color.
+	 * 
+	 * @param backgroundColor the background color.
+	 */
 	public void setBackgroundColor(String backgroundColor) {
 		setValue(Property.backgroundColor, backgroundColor);
 		// checks if all parents are attached
@@ -74,8 +85,18 @@ public class Arc extends AbstractItem {
 	 * 
 	 * @return the background color. Default is rgba(0,0,0,0.1).
 	 */
-	public String getBackgroundColor() {
+	public String getBackgroundColorAsString() {
 		return getValue(Property.backgroundColor, getDefaultBackgroundColor());
+	}
+
+
+	/**
+	 * Returns the background color.
+	 * 
+	 * @return the background color. Default is rgba(0,0,0,0.1).
+	 */
+	public IsColor getBackgroundColor() {
+		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
 	/**
@@ -121,6 +142,15 @@ public class Arc extends AbstractItem {
 	 * 
 	 * @param borderColor the border color.
 	 */
+	public void setBorderColor(IsColor borderColor) {
+		setBorderColor(borderColor.toRGBA());
+	}
+
+	/**
+	 * Sets the border color.
+	 * 
+	 * @param borderColor the border color.
+	 */
 	public void setBorderColor(String borderColor) {
 		setValue(Property.borderColor, borderColor);
 		// checks if all parents are attached
@@ -132,8 +162,17 @@ public class Arc extends AbstractItem {
 	 * 
 	 * @return the border color. Default is #fff.
 	 */
-	public String getBorderColor() {
+	public String getBorderColorAsString() {
 		return getValue(Property.borderColor, getDefaultBorderColor());
+	}
+
+	/**
+	 * Returns the border color.
+	 * 
+	 * @return the border color. Default is #fff.
+	 */
+	public IsColor getBorderColor() {
+		return ColorBuilder.parse(getBorderColorAsString());
 	}
 
 	/**

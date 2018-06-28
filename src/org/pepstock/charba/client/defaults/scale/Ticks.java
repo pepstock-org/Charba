@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.scale;
 
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.AbstractItem;
 import org.pepstock.charba.client.defaults.FontItem;
@@ -472,7 +474,16 @@ public final class Ticks extends FontItem {
 	public double getSuggestedMin() {
 		return getValue(Property.suggestedMin, DEFAULT_SUGGESTED_MIN);
 	}
-	
+
+	/**
+	 * Sets the color of label backdrops.
+	 * 
+	 * @param backdropColor color of label backdrops.
+	 */
+	public void setBackdropColor(IsColor backdropColor) {
+		setBackdropColor(backdropColor.toRGBA());
+	}
+
 	/**
 	 * Sets the color of label backdrops.
 	 * 
@@ -489,8 +500,17 @@ public final class Ticks extends FontItem {
 	 * 
 	 * @return color of label backdrops. Default is 'rgba(255, 255, 255, 0.75)'
 	 */
-	public String getBackdropColor() {
+	public String getBackdropColorAsString() {
 		return getValue(Property.backdropColor, DEFAULT_BACKDROP_COLOR);
+	}
+
+	/**
+	 * Returns the color of label backdrops.
+	 * 
+	 * @return color of label backdrops. Default is 'rgba(255, 255, 255, 0.75)'
+	 */
+	public IsColor getBackdropColor() {
+		return ColorBuilder.parse(getBackdropColorAsString());
 	}
 
 	/**

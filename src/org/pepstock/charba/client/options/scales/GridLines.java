@@ -18,6 +18,8 @@ package org.pepstock.charba.client.options.scales;
 import java.util.List;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.JsIntegerArrayList;
@@ -95,6 +97,17 @@ public class GridLines extends ChartContainer {
 	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the
 	 *            second to the second grid line and so on.
 	 */
+	public void setColor(IsColor... color) {
+		setColor(ArrayListHelper.build(color));
+	}
+
+	/**
+	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
+	 * second grid line and so on.
+	 * 
+	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the
+	 *            second to the second grid line and so on.
+	 */
 	public void setColor(String... color) {
 		setColor(ArrayListHelper.build(color));
 	}
@@ -116,15 +129,25 @@ public class GridLines extends ChartContainer {
 	 * 
 	 * @return the list of colors of the grid lines. 
 	 */
-	public List<String> getColor() {
+	public List<String> getColorAsString() {
 		// loads stored data
 		JsStringArrayList values = checkAndGetStringValues(Property.color, isColorArray);
 		// if empty
 		if (values.isEmpty()) {
 			// return default color
-			return axis.getScale().getGrideLines().getColor();
+			return axis.getScale().getGrideLines().getColorAsString();
 		}
 		return values;
+	}
+
+	/**
+	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
+	 * second grid line and so on.
+	 * 
+	 * @return the list of colors of the grid lines. 
+	 */
+	public List<IsColor> getColor() {
+		return ColorBuilder.parse(getColorAsString());
 	}
 
 	/**
@@ -314,6 +337,15 @@ public class GridLines extends ChartContainer {
 	 * 
 	 * @param zeroLineColor Stroke color of the grid line for the first index (index 0).
 	 */
+	public void setZeroLineColor(IsColor zeroLineColor) {
+		setZeroLineColor(zeroLineColor.toRGBA());
+	}
+
+	/**
+	 * Sets the stroke color of the grid line for the first index (index 0).
+	 * 
+	 * @param zeroLineColor Stroke color of the grid line for the first index (index 0).
+	 */
 	public void setZeroLineColor(String zeroLineColor) {
 		setValue(Property.zeroLineColor, zeroLineColor);
 	}
@@ -323,8 +355,17 @@ public class GridLines extends ChartContainer {
 	 * 
 	 * @return Stroke color of the grid line for the first index (index 0).
 	 */
-	public String getZeroLineColor() {
-		return getValue(Property.zeroLineColor, axis.getScale().getGrideLines().getZeroLineColor());
+	public String getZeroLineColorAsString() {
+		return getValue(Property.zeroLineColor, axis.getScale().getGrideLines().getZeroLineColorAsString());
+	}
+
+	/**
+	 * Returns the stroke color of the grid line for the first index (index 0).
+	 * 
+	 * @return Stroke color of the grid line for the first index (index 0).
+	 */
+	public IsColor getZeroLineColor() {
+		return ColorBuilder.parse(getZeroLineColorAsString());
 	}
 
 	/**

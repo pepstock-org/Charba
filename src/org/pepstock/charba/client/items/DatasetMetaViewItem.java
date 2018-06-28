@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -85,8 +87,17 @@ public class DatasetMetaViewItem extends BaseItem {
 	 * 
 	 * @return list of the fill color of the dataset item
 	 */
-	public final String getBackgroundColor() {
+	public final String getBackgroundColorAsString() {
 		return getString(Property.backgroundColor.name());
+	}
+
+	/**
+	 * Returns the fill color of the dataset item
+	 * 
+	 * @return list of the fill color of the dataset item
+	 */
+	public final IsColor getBackgroundColor() {
+		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
 	/**
@@ -94,10 +105,19 @@ public class DatasetMetaViewItem extends BaseItem {
 	 * 
 	 * @return list of the color of the dataset item border
 	 */
-	public final String getBorderColor() {
+	public final String getBorderColorAsString() {
 		return getString(Property.borderColor.name());
 	}
 
+	/**
+	 * Returns the color of the dataset item border
+	 * 
+	 * @return list of the color of the dataset item border
+	 */
+	public final IsColor getBorderColor() {
+		return ColorBuilder.parse(getBorderColorAsString());
+	}
+	
 	/**
 	 * Returns the stroke width of the dataset item in pixels.
 	 * 

@@ -21,6 +21,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.enums.GaugeThreshold;
 import org.pepstock.charba.client.enums.IsThreshold;
 import org.pepstock.charba.client.enums.Threshold;
@@ -66,6 +67,16 @@ public final class GaugeDataset extends MeterDataset{
 		for (GaugeThreshold t: GaugeThreshold.values()){
 			thresholds.add(t.getThreshold());
 		}
+	}
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.data.HovingDataset#setBackgroundColor(java.lang.String[])
+	 */
+	@Override
+	public void setBackgroundColor(IsColor... backgroundColor) {
+		// sets color for empty value
+		super.setBackgroundColor(backgroundColor);
+		// checks colors to use for dataset
+		checkAndSetColor();
 	}
 
 	/* (non-Javadoc)
@@ -148,7 +159,7 @@ public final class GaugeDataset extends MeterDataset{
 	private void checkAndSetColor(){
 		// gets all colors
 		// to get the color for empty value 
-		List<String> colors = getBackgroundColor();
+		List<IsColor> colors = getBackgroundColor();
 		// if empty
 		if (colors.isEmpty()){
 			// it sets the threshold color for value and the default value for empty one

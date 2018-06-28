@@ -13,7 +13,10 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.utils;
+package org.pepstock.charba.client.colors;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import com.google.gwt.regexp.shared.MatchResult;
 import com.google.gwt.regexp.shared.RegExp;
@@ -48,6 +51,22 @@ public final class ColorBuilder {
 	}
 	
 	/**
+	 * Builds a list of colors starting from a list of strings which represent colors.
+	 * @param colorsAsString list of strings which represent colors
+	 * @return a list of colors
+	 */
+	public static List<IsColor> parse(List<String> colorsAsString){
+		// creates result
+		final List<IsColor> colors = new LinkedList<IsColor>();
+		// scans all colors as strings
+		for (String colorAsString : colorsAsString) {
+			// parses and add colors
+			colors.add(parse(colorAsString));
+		}
+		return colors;
+	}
+	
+	/**
 	 * Creates a color using red, green and blue channels.
 	 * @param r red channel
 	 * @param g green  channel
@@ -58,6 +77,12 @@ public final class ColorBuilder {
 		// checks if already exists the required color 
 		// into enum HTML color
 		for (HtmlColor color : HtmlColor.values()) {
+			// if equals returns the enum item
+			if (color.getRed() == r && color.getGreen() == g && color.getBlue() == b) {
+				return color;
+			}
+		}
+		for (GwtMaterialColor color : GwtMaterialColor.values()) {
 			// if equals returns the enum item
 			if (color.getRed() == r && color.getGreen() == g && color.getBlue() == b) {
 				return color;
@@ -120,6 +145,12 @@ public final class ColorBuilder {
 				return color.alpha(alpha);
 			}
 		}
+		for (GwtMaterialColor color : GwtMaterialColor.values()) {
+			// if equals returns the enum item
+			if (color.getRed() == r && color.getGreen() == g && color.getBlue() == b) {
+				return color.alpha(alpha);
+			}
+		}
 		// creates a new color
 		return new Color(r, g, b, alpha);
 	}
@@ -139,16 +170,16 @@ public final class ColorBuilder {
 			int red = Integer.parseInt(redValue, 16);
 			String greenValue = newHexvalue.substring(1, 2) + newHexvalue.substring(1, 2);
 			int green = Integer.parseInt(greenValue, 16);
-			String blueValue = newHexvalue.substring(2);
+			String blueValue = newHexvalue.substring(2) + newHexvalue.substring(2);
 			int blue = Integer.parseInt(blueValue, 16);
 			// builds color
 			return build(red, green, blue);
 		} else if (newHexvalue.length() == 6) {
 			// checks if the HEX value
 			// reads colors
-			String redValue = newHexvalue.substring(0, 1);
+			String redValue = newHexvalue.substring(0, 2);
 			int red = Integer.parseInt(redValue, 16);
-			String greenValue = newHexvalue.substring(2, 3);
+			String greenValue = newHexvalue.substring(2, 4);
 			int green = Integer.parseInt(greenValue, 16);
 			String blueValue = newHexvalue.substring(4);
 			int blue = Integer.parseInt(blueValue, 16);
@@ -244,6 +275,5 @@ public final class ColorBuilder {
 			// if here the rgba value is not valid
 			throw new IllegalArgumentException("RGBA value is invalid");
 		}
-	}
-
+	}	
 }

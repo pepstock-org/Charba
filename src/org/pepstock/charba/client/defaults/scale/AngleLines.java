@@ -16,6 +16,8 @@
 package org.pepstock.charba.client.defaults.scale;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.AbstractItem;
 
@@ -77,6 +79,15 @@ public final class AngleLines extends AbstractItem {
 	 * 
 	 * @param color color of angled lines.
 	 */
+	public void setColor(IsColor color) {
+		setColor(color.toRGBA());
+	}
+	
+	/**
+	 * Sets the color of angled lines.
+	 * 
+	 * @param color color of angled lines.
+	 */
 	public void setColor(String color) {
 		setValue(Property.color, color);
 		// checks if all parents are attached
@@ -88,10 +99,19 @@ public final class AngleLines extends AbstractItem {
 	 * 
 	 * @return color of angled lines. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultColor()}.
 	 */
-	public String getColor() {
-		return getValue(Property.color, Defaults.getGlobal().getDefaultColor());
+	public String getColorAsString() {
+		return getValue(Property.color, Defaults.getGlobal().getDefaultColorAsString());
 	}
 
+	/**
+	 * Returns the color of angled lines.
+	 * 
+	 * @return color of angled lines. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultColor()}.
+	 */
+	public IsColor getColor() {
+		return ColorBuilder.parse(getColorAsString());
+	}
+	
 	/**
 	 * Sets the width of angled lines.
 	 * 

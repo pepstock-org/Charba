@@ -18,6 +18,8 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.callbacks.LegendFilterHandler;
 import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
@@ -142,6 +144,15 @@ public final class LegendLabels extends ChartContainer {
 	 * 
 	 * @param fontColor Font color for label
 	 */
+	public void setFontColor(IsColor fontColor) {
+		setFontColor(fontColor.toRGBA());
+	}
+
+	/**
+	 * Sets the font color for label
+	 * 
+	 * @param fontColor Font color for label
+	 */
 	public void setFontColor(String fontColor) {
 		setValue(Property.fontColor, fontColor);
 	}
@@ -151,8 +162,17 @@ public final class LegendLabels extends ChartContainer {
 	 * 
 	 * @return Font color for label. For default see {@link org.pepstock.charba.client.GlobalOptions#getLegend()}.
 	 */
-	public String getFontColor() {
-		return getValue(Property.fontColor, getChart().getGlobal().getLegend().getLabels().getFontColor());
+	public String getFontColorAsString() {
+		return getValue(Property.fontColor, getChart().getGlobal().getLegend().getLabels().getFontColorAsString());
+	}
+
+	/**
+	 * Returns the font color for label
+	 * 
+	 * @return Font color for label. For default see {@link org.pepstock.charba.client.GlobalOptions#getLegend()}.
+	 */
+	public IsColor getFontColor() {
+		return ColorBuilder.parse(getFontColorAsString());
 	}
 
 	/**

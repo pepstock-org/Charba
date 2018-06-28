@@ -18,6 +18,8 @@ package org.pepstock.charba.client.options;
 import java.util.List;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.JsStringArrayList;
@@ -106,6 +108,15 @@ public final class Title extends ChartContainer {
 	 * 
 	 * @param fontColor Font color for title
 	 */
+	public void setFontColor(IsColor fontColor) {
+		setFontColor(fontColor.toRGBA());
+	}
+
+	/**
+	 * Sets the font color for title
+	 * 
+	 * @param fontColor Font color for title
+	 */
 	public void setFontColor(String fontColor) {
 		setValue(Property.fontColor, fontColor);
 	}
@@ -115,8 +126,17 @@ public final class Title extends ChartContainer {
 	 * 
 	 * @return Font color for title. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
 	 */
-	public String getFontColor() {
-		return getValue(Property.fontColor, getChart().getGlobal().getTitle().getFontColor());
+	public String getFontColorAsString() {
+		return getValue(Property.fontColor, getChart().getGlobal().getTitle().getFontColorAsString());
+	}
+
+	/**
+	 * Returns the font color for title
+	 * 
+	 * @return Font color for title. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
+	 */
+	public IsColor getFontColor() {
+		return ColorBuilder.parse(getFontColorAsString());
 	}
 
 	/**

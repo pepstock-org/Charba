@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
@@ -53,12 +55,21 @@ public final class TooltipLabelColor extends JavaScriptObjectContainer {
 	 * 
 	 * @return the background color
 	 */
-	public final String getBackgroundColor() {
+	public final IsColor getBackgroundColor() {
+		return ColorBuilder.parse(getBackgroundColorAsString());
+	}
+
+	/**
+	 * Returns the background color as string
+	 * 
+	 * @return the background color
+	 */
+	public final String getBackgroundColorAsString() {
 		return getValue(Property.backgroundColor, DEFAULT_BACKGROUND_COLOR);
 	}
 
 	/**
-	 * Sets background color
+	 * Sets background color as string
 	 * 
 	 * @param backgroundColor background color
 	 */
@@ -67,12 +78,39 @@ public final class TooltipLabelColor extends JavaScriptObjectContainer {
 	}
 
 	/**
+	 * Sets background color
+	 * 
+	 * @param backgroundColor background color
+	 */
+	public void setBackgroundColor(IsColor backgroundColor) {
+		setBackgroundColor(backgroundColor.toRGBA());
+	}
+	
+	/**
+	 * Returns the border color as string
+	 * 
+	 * @return the border color as string
+	 */
+	public final String getBorderColorAsString() {
+		return getValue(Property.borderColor, DEFAULT_BORDER_COLOR);
+	}
+
+	/**
 	 * Returns the border color
 	 * 
 	 * @return the border color
 	 */
-	public final String getBorderColor() {
-		return getValue(Property.borderColor, DEFAULT_BORDER_COLOR);
+	public final IsColor getBorderColor() {
+		return ColorBuilder.parse(getBorderColorAsString());
+	}
+
+	/**
+	 * Sets border color as string
+	 * 
+	 * @param borderColor border color
+	 */
+	public void setBorderColor(String borderColor) {
+		setValue(Property.borderColor, borderColor);
 	}
 
 	/**
@@ -80,8 +118,8 @@ public final class TooltipLabelColor extends JavaScriptObjectContainer {
 	 * 
 	 * @param borderColor border color
 	 */
-	public void setBorderColor(String borderColor) {
-		setValue(Property.borderColor, borderColor);
+	public void setBorderColor(IsColor borderColor) {
+		setBorderColor(borderColor.toRGBA());
 	}
 
 	/**
@@ -98,6 +136,6 @@ public final class TooltipLabelColor extends JavaScriptObjectContainer {
 	 * String representation of this object
 	 */
 	public String toString() {
-		return "TooltipLabelColor [getBackgroundColor()=" + getBackgroundColor() + ", getBorderColor()=" + getBorderColor() + "]";
+		return "TooltipLabelColor [getBackgroundColor()=" + getBackgroundColorAsString() + ", getBorderColor()=" + getBorderColorAsString() + "]";
 	}
 }

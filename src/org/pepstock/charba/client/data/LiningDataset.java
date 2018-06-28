@@ -17,6 +17,8 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.JsDoubleArrayList;
 import org.pepstock.charba.client.commons.JsEnumValueArrayList;
@@ -97,6 +99,14 @@ abstract class LiningDataset extends Dataset{
 	 * Sets the fill color under the line. 
 	 * @param backgroundColor the fill color under the line.
 	 */
+	public void setBackgroundColor(IsColor backgroundColor) {
+		setBackgroundColor(backgroundColor.toRGBA());
+	}
+
+	/**
+	 * Sets the fill color under the line. 
+	 * @param backgroundColor the fill color under the line.
+	 */
 	public void setBackgroundColor(String backgroundColor) {
 		setValue(Property.backgroundColor, backgroundColor);
 	}
@@ -105,8 +115,24 @@ abstract class LiningDataset extends Dataset{
 	 * Returns the fill color under the line.
 	 * @return the fill color under the line. Default is <code>rgba(0,0,0,0.1)</code>
 	 */
-	public String getBackgroundColor() {
+	public String getBackgroundColorAsString() {
 		return getValue(Property.backgroundColor, DEFAULT_BACKGROUND_COLOR);
+	}
+
+	/**
+	 * Returns the fill color under the line.
+	 * @return the fill color under the line. Default is <code>rgba(0,0,0,0.1)</code>
+	 */
+	public IsColor getBackgroundColor() {
+		return ColorBuilder.parse(getBackgroundColorAsString());
+	}
+
+	/**
+	 * Sets the color of the line. 
+	 * @param borderColor the color of the line.
+	 */
+	public void setBorderColor(IsColor borderColor) {
+		setBorderColor(borderColor.toRGBA());
 	}
 
 	/**
@@ -121,10 +147,17 @@ abstract class LiningDataset extends Dataset{
 	 * Returns the color of the line.
 	 * @return the color of the line. Default is <code>rgba(0,0,0,0.1)</code>
 	 */
-	public String getBorderColor() {
+	public String getBorderColorAsString() {
 		return getValue(Property.borderColor, DEFAULT_BORDER_COLOR);
 	}
 
+	/**
+	 * Returns the color of the line.
+	 * @return the color of the line. Default is <code>rgba(0,0,0,0.1)</code>
+	 */
+	public IsColor getBorderColor() {
+		return ColorBuilder.parse(getBorderColorAsString());
+	}
 	/**
 	 * Sets the width of the line in pixels.
 	 * @param borderWidth the width of the line in pixels.
@@ -280,6 +313,14 @@ abstract class LiningDataset extends Dataset{
 	 * Sets the fill color for points.
 	 * @param pointBackgroundColor array of the fill color for points.
 	 */
+	public void setPointBackgroundColor(IsColor... pointBackgroundColor) {
+	    setPointBackgroundColor(ArrayListHelper.build(pointBackgroundColor));
+	}
+
+	/**
+	 * Sets the fill color for points.
+	 * @param pointBackgroundColor array of the fill color for points.
+	 */
 	public void setPointBackgroundColor(String... pointBackgroundColor) {
 	    setPointBackgroundColor(ArrayListHelper.build(pointBackgroundColor));
 	}
@@ -296,8 +337,24 @@ abstract class LiningDataset extends Dataset{
 	 * Returns the fill color for points.
 	 * @return list of the fill color for points.
 	 */
-	public List<String> getPointBackgroundColor() {
+	public List<String> getPointBackgroundColorAsString() {
 	    return checkAndGetStringValues(Property.pointBackgroundColor, isPointBackgroundColorArray);
+	}
+
+	/**
+	 * Returns the fill color for points.
+	 * @return list of the fill color for points.
+	 */
+	public List<IsColor> getPointBackgroundColor() {
+	    return ColorBuilder.parse(getPointBackgroundColorAsString());
+	}
+
+	/**
+	 * Sets the border color for points.
+	 * @param pointBorderColor array of the border color for points.
+	 */
+	public void setPointBorderColor(IsColor... pointBorderColor) {
+		setPointBorderColor(ArrayListHelper.build(pointBorderColor));
 	}
 
 	/**
@@ -320,8 +377,16 @@ abstract class LiningDataset extends Dataset{
 	 * Returns the border color for points.
 	 * @return list of the border color for points.
 	 */
-	public List<String> getPointBorderColor() {
+	public List<String> getPointBorderColorAsString() {
 	    return checkAndGetStringValues(Property.pointBorderColor, isPointBorderColorArray);
+	}
+
+	/**
+	 * Returns the border color for points.
+	 * @return list of the border color for points.
+	 */
+	public List<IsColor> getPointBorderColor() {
+	    return ColorBuilder.parse(getPointBorderColorAsString());
 	}
 
 	/**
@@ -376,6 +441,14 @@ abstract class LiningDataset extends Dataset{
 	 * Sets the point background color when hovered.
 	 * @param pointHoverBackgroundColor array of the point background color when hovered.
 	 */
+	public void setPointHoverBackgroundColor(IsColor... pointHoverBackgroundColor) {
+		setPointHoverBackgroundColor(ArrayListHelper.build(pointHoverBackgroundColor));
+	}
+	
+	/**
+	 * Sets the point background color when hovered.
+	 * @param pointHoverBackgroundColor array of the point background color when hovered.
+	 */
 	public void setPointHoverBackgroundColor(String... pointHoverBackgroundColor) {
 		setPointHoverBackgroundColor(ArrayListHelper.build(pointHoverBackgroundColor));
 	}
@@ -392,8 +465,24 @@ abstract class LiningDataset extends Dataset{
 	 * Returns the point background color when hovered.
 	 * @return list of the point background color when hovered.
 	 */
-	public List<String> getPointHoverBackgroundColor() {
+	public List<String> getPointHoverBackgroundColorAsString() {
 	    return checkAndGetStringValues(Property.pointHoverBackgroundColor, isPointHoverBackgroundColorArray);
+	}
+
+	/**
+	 * Returns the point background color when hovered.
+	 * @return list of the point background color when hovered.
+	 */
+	public List<IsColor> getPointHoverBackgroundColor() {
+	    return ColorBuilder.parse(getPointHoverBackgroundColorAsString());
+	}
+
+	/**
+	 * Sets the point border color when hovered.
+	 * @param pointHoverBorderColor array of the point border color when hovered.
+	 */
+	public void setPointHoverBorderColor(IsColor... pointHoverBorderColor) {
+		setPointHoverBorderColor(ArrayListHelper.build(pointHoverBorderColor));
 	}
 
 	/**
@@ -416,8 +505,16 @@ abstract class LiningDataset extends Dataset{
 	 * Returns the point border color when hovered.
 	 * @return list of the point border color when hovered.
 	 */
-	public List<String> getPointHoverBorderColor() {
+	public List<String> getPointHoverBorderColorAsString() {
 	    return checkAndGetStringValues(Property.pointHoverBorderColor, isPointHoverBorderColorArray);
+	}
+
+	/**
+	 * Returns the point border color when hovered.
+	 * @return list of the point border color when hovered.
+	 */
+	public List<IsColor> getPointHoverBorderColor() {
+	    return ColorBuilder.parse(getPointHoverBorderColorAsString());
 	}
 
 	/**

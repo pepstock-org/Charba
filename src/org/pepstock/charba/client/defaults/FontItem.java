@@ -16,6 +16,8 @@
 package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
 
@@ -96,6 +98,15 @@ public class FontItem extends AbstractItem {
 	 * 
 	 * @param fontColor Font color
 	 */
+	public void setFontColor(IsColor fontColor) {
+		setFontColor(fontColor.toRGBA());
+	}
+	
+	/**
+	 * Sets the font color
+	 * 
+	 * @param fontColor Font color
+	 */
 	public void setFontColor(String fontColor) {
 		setValue(Property.fontColor, fontColor);
 		// checks if all parents are attached
@@ -107,10 +118,19 @@ public class FontItem extends AbstractItem {
 	 * 
 	 * @return Font color. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontColor()}.
 	 */
-	public String getFontColor() {
-		return getValue(Property.fontColor, Defaults.getGlobal().getDefaultFontColor());
+	public String getFontColorAsString() {
+		return getValue(Property.fontColor, Defaults.getGlobal().getDefaultFontColorAsString());
 	}
 
+	/**
+	 * Returns the font color
+	 * 
+	 * @return Font color. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontColor()}.
+	 */
+	public IsColor getFontColor() {
+		return ColorBuilder.parse(getFontColorAsString());
+	}
+	
 	/**
 	 * Sets the font family, follows CSS font-family options.
 	 * 

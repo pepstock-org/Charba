@@ -17,7 +17,8 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
-import org.pepstock.charba.client.utils.Color;
+import org.pepstock.charba.client.colors.Color;
+import org.pepstock.charba.client.colors.IsColor;
 
 /**
  * The Meter chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
@@ -38,12 +39,12 @@ public class MeterDataset extends DoughnutDataset{
 	/**
 	 * Default value color
 	 */
-	public static final String DEFAULT_VALUE_COLOR = new Color(140, 214, 16).toRGBA();
+	public static final IsColor DEFAULT_VALUE_COLOR = new Color(140, 214, 16);
 	
 	/**
 	 * Default empty color
 	 */
-	public static final String DEFAULT_EMPTY_VALUE_COLOR = new Color(234, 234, 234).toRGBA();
+	public static final IsColor DEFAULT_EMPTY_VALUE_COLOR = new Color(234, 234, 234);
 
 	/**
 	 * Default maximum value. 

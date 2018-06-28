@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.utils;
+package org.pepstock.charba.client.colors;
 
 /**
  * This class contains information about a color.<br>

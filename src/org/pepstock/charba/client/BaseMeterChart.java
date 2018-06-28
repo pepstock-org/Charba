@@ -178,7 +178,7 @@ abstract class BaseMeterChart<O extends MeterOptions, D extends MeterDataset> ex
 			// gets font family
 			final String fontFamily = options.getFontFamily() == null ? Defaults.getGlobal().getDefaultFontFamily() : options.getFontFamily();
 			// gets font color
-			final String fontColor = options.getDisplayFontColor() == null ? MeterOptions.DEFAULT_DISPLAY_COLOR : options.getDisplayFontColor();
+			final String fontColor = options.getDisplayFontColor() == null ? MeterOptions.DEFAULT_DISPLAY_COLOR.toRGBA() : options.getDisplayFontColor().toRGBA();
 			// gets the label
 			final String label = dataset.getLabel();
 			// calculates the font size

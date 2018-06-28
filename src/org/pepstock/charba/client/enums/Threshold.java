@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.enums;
 
+import org.pepstock.charba.client.colors.IsColor;
+
 /**
  * Is the threshold to use for gauge chart.
  * 
@@ -28,7 +30,7 @@ public final class Threshold implements IsThreshold{
 	 * Default color value.
 	 * @see GaugeThreshold#normal
 	 */
-	public static final String DEFAULT_VALUE_COLOR = GaugeThreshold.normal.getColor();
+	public static final IsColor DEFAULT_VALUE_COLOR = GaugeThreshold.normal.getColor();
 	
 	/**
 	 * Default value (see {@link java.lang.Double#MAX_VALUE}).
@@ -39,7 +41,7 @@ public final class Threshold implements IsThreshold{
 	
 	private double value = DEFAULT_VALUE;
 	
-	private String color = DEFAULT_VALUE_COLOR;
+	private IsColor color = DEFAULT_VALUE_COLOR;
 
 	/**
 	 * Creates a threshold with standard color ({@link org.pepstock.charba.client.enums.Threshold#DEFAULT_VALUE_COLOR}) and value ({@link java.lang.Double#MAX_VALUE}).
@@ -54,7 +56,7 @@ public final class Threshold implements IsThreshold{
 	 * @param name name of threshold
 	 * @param color color of threshold
 	 */
-	public Threshold(String name, String color) {
+	public Threshold(String name, IsColor color) {
 		this(name, DEFAULT_VALUE, color);
 	}
 
@@ -73,7 +75,7 @@ public final class Threshold implements IsThreshold{
 	 * @param value value of threshold
 	 * @param color color of threshold
 	 */
-	public Threshold(String name, double value, String color) {
+	public Threshold(String name, double value, IsColor color) {
 		this.name = name;
 		this.value = value;
 		this.color = color;
@@ -99,7 +101,7 @@ public final class Threshold implements IsThreshold{
 	 * @see org.pepstock.charba.client.enums.IsThreshold#getColor()
 	 */
 	@Override
-	public String getColor() {
+	public IsColor getColor() {
 		return color;
 	}
 
@@ -116,7 +118,7 @@ public final class Threshold implements IsThreshold{
 	 * @param color the color to set
 	 * @return the threshold instance
 	 */
-	public Threshold setColor(String color) {
+	public Threshold setColor(IsColor color) {
 		this.color = color;
 		return this;
 	}

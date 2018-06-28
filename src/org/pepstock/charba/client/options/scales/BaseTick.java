@@ -17,6 +17,8 @@ package org.pepstock.charba.client.options.scales;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.callbacks.TickCallback;
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
@@ -119,6 +121,15 @@ public class BaseTick extends ChartContainer {
 	 * 
 	 * @param fontColor Font color for tick
 	 */
+	public void setFontColor(IsColor fontColor) {
+		setFontColor(fontColor.toRGBA());
+	}
+
+	/**
+	 * Sets the font color for tick
+	 * 
+	 * @param fontColor Font color for tick
+	 */
 	public void setFontColor(String fontColor) {
 		setValue(Property.fontColor, fontColor);
 	}
@@ -128,8 +139,17 @@ public class BaseTick extends ChartContainer {
 	 * 
 	 * @return Font color for tick.
 	 */
-	public String getFontColor() {
-		return getValue(Property.fontColor, axis.getScale().getTicks().getFontColor());
+	public String getFontColorAsString() {
+		return getValue(Property.fontColor, axis.getScale().getTicks().getFontColorAsString());
+	}
+
+	/**
+	 * Returns the font color for tick
+	 * 
+	 * @return Font color for tick.
+	 */
+	public IsColor getFontColor() {
+		return ColorBuilder.parse(getFontColorAsString());
 	}
 
 	/**

@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -47,8 +49,17 @@ public final class TooltipLabelColor extends BaseItem {
 	 * 
 	 * @return the background color of the label.
 	 */
-	public final String getBackgroundColor() {
+	public final String getBackgroundColorAsString() {
 		return getString(Property.backgroundColor.name());
+	}
+
+	/**
+	 * Returns the background color of the label.
+	 * 
+	 * @return the background color of the label.
+	 */
+	public final IsColor getBackgroundColor() {
+		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
 	/**
@@ -56,7 +67,17 @@ public final class TooltipLabelColor extends BaseItem {
 	 * 
 	 * @return the border color of the label.
 	 */
-	public final String getBorderColor() {
+	public final String getBorderColorAsString() {
 		return getString(Property.borderColor.name());
 	}
+	
+	/**
+	 * Returns the border color of the label.
+	 * 
+	 * @return the border color of the label.
+	 */
+	public final IsColor getBorderColor() {
+		return ColorBuilder.parse(getBorderColorAsString());
+	}
+
 }

@@ -17,6 +17,8 @@ package org.pepstock.charba.client.options.elements;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.Key;
 
@@ -53,6 +55,15 @@ abstract class AbstractElement extends ChartContainer {
 	 * 
 	 * @param backgroundColor the background color.
 	 */
+	public void setBackgroundColor(IsColor backgroundColor) {
+		setBackgroundColor(backgroundColor.toRGBA());
+	}
+
+	/**
+	 * Sets the background color.
+	 * 
+	 * @param backgroundColor the background color.
+	 */
 	public void setBackgroundColor(String backgroundColor) {
 		setValue(Property.backgroundColor, backgroundColor);
 	}
@@ -62,8 +73,17 @@ abstract class AbstractElement extends ChartContainer {
 	 * 
 	 * @return the background color.
 	 */
-	public String getBackgroundColor() {
+	public String getBackgroundColorAsString() {
 		return getValue(Property.backgroundColor, getDefaultBackgroundColor());
+	}
+
+	/**
+	 * Returns the background color.
+	 * 
+	 * @return the background color.
+	 */
+	public IsColor getBackgroundColor() {
+		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
 	/**
@@ -72,7 +92,7 @@ abstract class AbstractElement extends ChartContainer {
 	 * @return the default background color. 
 	 */
 	protected String getDefaultBackgroundColor() {
-		return Defaults.getGlobal().getElements().getArc().getBackgroundColor();
+		return Defaults.getGlobal().getElements().getArc().getBackgroundColorAsString();
 	}
 
 	/**
@@ -107,6 +127,15 @@ abstract class AbstractElement extends ChartContainer {
 	 * 
 	 * @param borderColor the border color.
 	 */
+	public void setBorderColor(IsColor borderColor) {
+		setBorderColor(borderColor.toRGBA());
+	}
+
+	/**
+	 * Sets the border color.
+	 * 
+	 * @param borderColor the border color.
+	 */
 	public void setBorderColor(String borderColor) {
 		setValue(Property.borderColor, borderColor);
 	}
@@ -116,8 +145,17 @@ abstract class AbstractElement extends ChartContainer {
 	 * 
 	 * @return the border color.
 	 */
-	public String getBorderColor() {
+	public String getBorderColorAsString() {
 		return getValue(Property.borderColor, getDefaultBorderColor());
+	}
+
+	/**
+	 * Returns the border color.
+	 * 
+	 * @return the border color.
+	 */
+	public IsColor getBorderColor() {
+		return ColorBuilder.parse(getBorderColorAsString());
 	}
 
 	/**
@@ -126,7 +164,7 @@ abstract class AbstractElement extends ChartContainer {
 	 * @return the default border color.
 	 */
 	protected String getDefaultBorderColor() {
-		return Defaults.getGlobal().getElements().getArc().getBorderColor();
+		return Defaults.getGlobal().getElements().getArc().getBorderColorAsString();
 	}
 
 }

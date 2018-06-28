@@ -19,6 +19,8 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.callbacks.TooltipCustomCallback;
 import org.pepstock.charba.client.callbacks.TooltipFilterHandler;
 import org.pepstock.charba.client.callbacks.TooltipItemSortHandler;
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
@@ -246,6 +248,15 @@ public final class Tooltips extends ChartContainer {
 	 * 
 	 * @param backgroundColor background color of the tooltip.
 	 */
+	public void setBackgroundColor(IsColor backgroundColor) {
+		setBackgroundColor(backgroundColor.toRGBA());
+	}
+
+	/**
+	 * Sets the background color of the tooltip.
+	 * 
+	 * @param backgroundColor background color of the tooltip.
+	 */
 	public void setBackgroundColor(String backgroundColor) {
 		setValue(Property.backgroundColor, backgroundColor);
 	}
@@ -255,10 +266,18 @@ public final class Tooltips extends ChartContainer {
 	 * 
 	 * @return Background color of the tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
-	public String getBackgroundColor() {
-		return getValue(Property.backgroundColor, getChart().getGlobal().getTooltips().getBackgroundColor());
+	public String getBackgroundColorAsString() {
+		return getValue(Property.backgroundColor, getChart().getGlobal().getTooltips().getBackgroundColorAsString());
 	}
 
+	/**
+	 * Returns the background color of the tooltip.
+	 * 
+	 * @return Background color of the tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 */
+	public IsColor getBackgroundColor() {
+		return ColorBuilder.parse(getBackgroundColorAsString());
+	}
 	/**
 	 * Sets the title font.
 	 * 
@@ -340,6 +359,15 @@ public final class Tooltips extends ChartContainer {
 	 * 
 	 * @param titleFontColor title font color.
 	 */
+	public void setTitleFontColor(IsColor titleFontColor) {
+		setTitleFontColor(titleFontColor.toRGBA());
+	}
+	
+	/**
+	 * Sets the title font color.
+	 * 
+	 * @param titleFontColor title font color.
+	 */
 	public void setTitleFontColor(String titleFontColor) {
 		setValue(Property.titleFontColor, titleFontColor);
 	}
@@ -349,8 +377,17 @@ public final class Tooltips extends ChartContainer {
 	 * 
 	 * @return title font color. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
-	public String getTitleFontColor() {
-		return getValue(Property.titleFontColor, getChart().getGlobal().getTooltips().getTitleFontColor());
+	public String getTitleFontColorAsString() {
+		return getValue(Property.titleFontColor, getChart().getGlobal().getTooltips().getTitleFontColorAsString());
+	}
+
+	/**
+	 * Returns the title font color.
+	 * 
+	 * @return title font color. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 */
+	public IsColor getTitleFontColor() {
+		return ColorBuilder.parse(getTitleFontColorAsString());
 	}
 
 	/**
@@ -470,6 +507,15 @@ public final class Tooltips extends ChartContainer {
 	 * 
 	 * @param bodyFontColor body font color.
 	 */
+	public void setBodyFontColor(IsColor bodyFontColor) {
+		setBodyFontColor(bodyFontColor.toRGBA());
+	}
+	
+	/**
+	 * Sets the body font color.
+	 * 
+	 * @param bodyFontColor body font color.
+	 */
 	public void setBodyFontColor(String bodyFontColor) {
 		setValue(Property.bodyFontColor, bodyFontColor);
 	}
@@ -479,10 +525,19 @@ public final class Tooltips extends ChartContainer {
 	 * 
 	 * @return body font color. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
-	public String getBodyFontColor() {
-		return getValue(Property.bodyFontColor, getChart().getGlobal().getTooltips().getBodyFontColor());
+	public String getBodyFontColorAsString() {
+		return getValue(Property.bodyFontColor, getChart().getGlobal().getTooltips().getBodyFontColorAsString());
 	}
 
+	/**
+	 * Returns the body font color.
+	 * 
+	 * @return body font color. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 */
+	public IsColor getBodyFontColor() {
+		return ColorBuilder.parse(getBodyFontColorAsString());
+	}
+	
 	/**
 	 * Sets the spacing to add to top and bottom of each tooltip item.
 	 * 
@@ -581,6 +636,15 @@ public final class Tooltips extends ChartContainer {
 	 * 
 	 * @param footerFontColor footer font color.
 	 */
+	public void setFooterFontColor(IsColor footerFontColor) {
+		setFooterFontColor(footerFontColor.toRGBA());
+	}
+	
+	/**
+	 * Sets the footer font color.
+	 * 
+	 * @param footerFontColor footer font color.
+	 */
 	public void setFooterFontColor(String footerFontColor) {
 		setValue(Property.footerFontColor, footerFontColor);
 	}
@@ -590,8 +654,17 @@ public final class Tooltips extends ChartContainer {
 	 * 
 	 * @return footer font color. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
-	public String getFooterFontColor() {
-		return getValue(Property.footerFontColor, getChart().getGlobal().getTooltips().getFooterFontColor());
+	public String getFooterFontColorAsString() {
+		return getValue(Property.footerFontColor, getChart().getGlobal().getTooltips().getFooterFontColorAsString());
+	}
+
+	/**
+	 * Returns the footer font color.
+	 * 
+	 * @return footer font color. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 */
+	public IsColor getFooterFontColor() {
+		return ColorBuilder.parse(getFooterFontColorAsString());
 	}
 
 	/**
@@ -725,6 +798,15 @@ public final class Tooltips extends ChartContainer {
 	 * 
 	 * @param multiKeyBackground color to draw behind the colored boxes when multiple items are in the tooltip.
 	 */
+	public void setMultiKeyBackground(IsColor multiKeyBackground) {
+		setMultiKeyBackground(multiKeyBackground.toRGBA());
+	}
+
+	/**
+	 * Sets the color to draw behind the colored boxes when multiple items are in the tooltip.
+	 * 
+	 * @param multiKeyBackground color to draw behind the colored boxes when multiple items are in the tooltip.
+	 */
 	public void setMultiKeyBackground(String multiKeyBackground) {
 		setValue(Property.multiKeyBackground, multiKeyBackground);
 	}
@@ -734,8 +816,17 @@ public final class Tooltips extends ChartContainer {
 	 * 
 	 * @return color to draw behind the colored boxes when multiple items are in the tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
-	public String getMultiKeyBackground() {
-		return getValue(Property.multiKeyBackground, getChart().getGlobal().getTooltips().getMultiKeyBackground());
+	public String getMultiKeyBackgroundAsString() {
+		return getValue(Property.multiKeyBackground, getChart().getGlobal().getTooltips().getMultiKeyBackgroundAsString());
+	}
+
+	/**
+	 * Returns the color to draw behind the colored boxes when multiple items are in the tooltip.
+	 * 
+	 * @return color to draw behind the colored boxes when multiple items are in the tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 */
+	public IsColor getMultiKeyBackground() {
+		return ColorBuilder.parse(getMultiKeyBackgroundAsString());
 	}
 
 	/**
@@ -761,6 +852,15 @@ public final class Tooltips extends ChartContainer {
 	 * 
 	 * @param borderColor color of the border.
 	 */
+	public void setBorderColor(IsColor borderColor) {
+		setBorderColor(borderColor.toRGBA());
+	}
+	
+	/**
+	 * Sets the color of the border.
+	 * 
+	 * @param borderColor color of the border.
+	 */
 	public void setBorderColor(String borderColor) {
 		setValue(Property.borderColor, borderColor);
 	}
@@ -770,8 +870,17 @@ public final class Tooltips extends ChartContainer {
 	 * 
 	 * @return color of the border. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
 	 */
-	public String getBorderColor() {
-		return getValue(Property.borderColor, getChart().getGlobal().getTooltips().getBorderColor());
+	public String getBorderColorAsString() {
+		return getValue(Property.borderColor, getChart().getGlobal().getTooltips().getBorderColorAsString());
+	}
+
+	/**
+	 * Returns the color of the border.
+	 * 
+	 * @return color of the border. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 */
+	public IsColor getBorderColor() {
+		return ColorBuilder.parse(getBorderColorAsString());
 	}
 
 	/**

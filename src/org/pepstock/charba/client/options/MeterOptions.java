@@ -18,9 +18,10 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.LegendCallback;
+import org.pepstock.charba.client.colors.Color;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.MeterDisplay;
-import org.pepstock.charba.client.utils.Color;
 
 /**
  * Specific options for METER chart. This chart doesn't allow any legend, hover, layout and tooltips components.
@@ -40,7 +41,7 @@ public class MeterOptions extends AbstractPieOptions {
 	/**
 	 * Default color of display.
 	 */
-	public static final String DEFAULT_DISPLAY_COLOR = new Color(128, 128, 128).toRGBA();
+	public static final IsColor DEFAULT_DISPLAY_COLOR = new Color(128, 128, 128);
 	
 	private static final double DEFAULT_CUTOUT_PERCENTAGE = 90D;
 	
@@ -52,7 +53,7 @@ public class MeterOptions extends AbstractPieOptions {
 	
 	private FontStyle fontStyle = FontStyle.normal;
 	
-	private String displayFontColor = DEFAULT_DISPLAY_COLOR;
+	private IsColor displayFontColor = DEFAULT_DISPLAY_COLOR;
 	
 	/**
 	 * Builds the object storing the chart instance.
@@ -177,14 +178,14 @@ public class MeterOptions extends AbstractPieOptions {
 	/**
 	 * @return the displayFontColor
 	 */
-	public String getDisplayFontColor() {
+	public IsColor getDisplayFontColor() {
 		return displayFontColor;
 	}
 
 	/**
 	 * @param displayFontColor the displayFontColor to set
 	 */
-	public void setDisplayFontColor(String displayFontColor) {
+	public void setDisplayFontColor(IsColor displayFontColor) {
 		this.displayFontColor = displayFontColor;
 	}
 

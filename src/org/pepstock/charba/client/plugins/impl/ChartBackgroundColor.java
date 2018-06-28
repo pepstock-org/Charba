@@ -16,6 +16,8 @@
 package org.pepstock.charba.client.plugins.impl;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
 import com.google.gwt.canvas.dom.client.Context2d;
@@ -52,6 +54,15 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 * 
 	 * @param color background default color for all charts.
 	 */
+	public ChartBackgroundColor(IsColor color) {
+		this(color.toRGBA());
+	}
+
+	/**
+	 * Builds the object with the default background color for all charts.
+	 * 
+	 * @param color background default color for all charts.
+	 */
 	public ChartBackgroundColor(String color) {
 		super();
 		this.color = (color != null) ? color : DEFAULT_BACKGROUND_COLOR;
@@ -60,8 +71,15 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/**
 	 * @return the color
 	 */
-	public String getColor() {
+	public String getColorAsString() {
 		return color;
+	}
+
+	/**
+	 * @return the color
+	 */
+	public IsColor getColor() {
+		return ColorBuilder.parse(getColorAsString());
 	}
 
 	/* (non-Javadoc)
@@ -83,7 +101,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		// gets the canvas
 		Context2d ctx = chart.getCanvas().getContext2d();
 		// set fill canvas color
-		ctx.setFillStyle(bgOptions.getBackgroundColor());
+		ctx.setFillStyle(bgOptions.getBackgroundColorAsString());
 		// fills back ground
 		ctx.fillRect(0, 0, chart.getCanvas().getWidth(), chart.getCanvas().getHeight());
 		// always TRUE
