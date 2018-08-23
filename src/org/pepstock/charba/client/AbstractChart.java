@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.events.ChartNativeEvent;
-import org.pepstock.charba.client.items.ChartItem;
+import org.pepstock.charba.client.items.ChartNode;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.options.BaseOptions;
@@ -162,8 +162,8 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 * Returns the chart item.
 	 * @return the chart item.
 	 */
-	public final ChartItem getChartItem(){
-		return new ChartItem((GenericJavaScriptObject)chart);
+	public final ChartNode getChartNode(){
+		return new ChartNode((GenericJavaScriptObject)chart);
 	}
 
 	/**
@@ -497,7 +497,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	    var ctx = canvas.getContext("2d");
 	    chart = new $wnd.Chart(ctx, config);
 	    this.@org.pepstock.charba.client.AbstractChart::chart = chart;
-	    console.log(chart.tooltip);
+	    console.log(chart.options);
 	    return chart.id;
 	}-*/;
 

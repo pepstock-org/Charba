@@ -25,17 +25,17 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class ChartItem extends JavaScriptObjectContainer {
+public class ChartNode extends JavaScriptObjectContainer {
 	
-	private final LegendNodeItem legendNode;
+	private final LegendNode legendNode;
 	
-	private final ScalesItem scales;
+	private final ScalesNode scales;
 	
 	private final ChartAreaItem chartArea;
 
-	private final TitleItem title;
+	private final TitleNode title;
 	
-	private final TooltipNodeItem tooltip;
+	private final TooltipNode tooltip;
 	
 	/**
 	 * Name of fields of JavaScript object.
@@ -62,26 +62,24 @@ public class ChartItem extends JavaScriptObjectContainer {
 		// solo PIE
 		offsetX,
 		offsetY,
-		// mancano SCALES vedere BOXES per PIE
-
 	}
 
-	public ChartItem(GenericJavaScriptObject javaScriptObject) {
+	public ChartNode(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
-		legendNode = new LegendNodeItem((GenericJavaScriptObject)getValue(Property.legend));
-		scales = new ScalesItem((GenericJavaScriptObject)getValue(Property.scales));
+		legendNode = new LegendNode((GenericJavaScriptObject)getValue(Property.legend));
+		scales = new ScalesNode((GenericJavaScriptObject)getValue(Property.scales));
 		chartArea = new ChartAreaItem((GenericJavaScriptObject)getValue(Property.chartArea));
-		title = new TitleItem((GenericJavaScriptObject)getValue(Property.titleBlock));
-		tooltip = new TooltipNodeItem((GenericJavaScriptObject)getValue(Property.titleBlock));
+		title = new TitleNode((GenericJavaScriptObject)getValue(Property.titleBlock));
+		tooltip = new TooltipNode((GenericJavaScriptObject)getValue(Property.titleBlock));
 	}
 	
 	// FIXME
-	public final LegendNodeItem getLegend(){
+	public final LegendNode getLegend(){
 		return legendNode;
 	}
 
 	// FIXME
-	public final ScalesItem getScales(){
+	public final ScalesNode getScales(){
 		return scales;
 	}
 
@@ -94,12 +92,12 @@ public class ChartItem extends JavaScriptObjectContainer {
 	}
 
 	// FIXME
-	public final TitleItem getTitle(){
+	public final TitleNode getTitle(){
 		return title;
 	}
 
 	// FIXME
-	public final TooltipNodeItem getTooltip(){
+	public final TooltipNode getTooltip(){
 		return tooltip;
 	}
 

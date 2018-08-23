@@ -15,10 +15,6 @@
 */
 package org.pepstock.charba.client.items;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
@@ -31,21 +27,29 @@ import org.pepstock.charba.client.commons.Key;
  * @see org.pepstock.charba.client.events.ChartResizeEvent
  * @see org.pepstock.charba.client.events.ChartResizeEventHandler
  */
-public final class ScalesItem extends JavaScriptObjectContainer {
+public final class TooltipNode extends JavaScriptObjectContainer {
 	
-	ScalesItem(GenericJavaScriptObject javaScriptObject) {
+	private final TooltipModel model;
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		_model
+	}
+	
+	TooltipNode(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
+		model = new TooltipModel((GenericJavaScriptObject)getValue(Property._model));
+		
 	}
 
-	public final Map<String, ScaleItem> getItems() {
-		final Map<String, ScaleItem> result = new HashMap<>();
-		List<Key> keys =  keys();
-		if (!keys.isEmpty()) {
-			for (Key key : keys) {
-				result.put(key.name(), new ScaleItem((GenericJavaScriptObject)getValue(key)));
-			}
-		}
-		return result;
+	/**
+	 * @return the model
+	 */
+	public final TooltipModel getModel() {
+		return model;
 	}
 
 }

@@ -23,9 +23,9 @@ import org.pepstock.charba.client.commons.GenericJavaScriptObject;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TitleItem extends BaseBoxNodeItem {
+public final class TitleNode extends BaseBoxNodeItem {
 
-	TitleItem(GenericJavaScriptObject javaScriptObject) {
+	TitleNode(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
 }

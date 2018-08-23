@@ -103,6 +103,7 @@ public abstract class BaseOptions extends EventProvider {
 		responsive,
 		responsiveAnimationDuration,
 		maintainAspectRatio,
+		devicePixelRatio,
 		onResize,
 		legendCallback,
 		events,
@@ -329,6 +330,28 @@ public abstract class BaseOptions extends EventProvider {
 	public boolean isMaintainAspectRatio() {
 		return getValue(Property.maintainAspectRatio, getChart().getGlobal().isMaintainAspectRatio());
 	}
+
+	/**
+	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina displays).
+	 * Setting devicePixelRatio to a value other than 1 will force the canvas size to be scaled by that amount.
+	 * 
+	 * @param ratio the pixel ratio.
+	 */
+	public void setDevicePixelRatio(double ratio) {
+		setValue(Property.devicePixelRatio, ratio);
+	}
+
+	/**
+	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina displays).
+	 * Setting devicePixelRatio to a value other than 1 will force the canvas size to be scaled by that amount.
+	 * Returns  the pixel ratio.
+	 * FIXME add to GLOBAl
+	 * @return  the pixel ratio. Default is 1.
+	 */
+	public double getDevicePixelRatio() {
+		return getValue(Property.devicePixelRatio, 1);
+	}
+	
 
 	/*
 	 * (non-Javadoc)

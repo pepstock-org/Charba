@@ -27,7 +27,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LegendNodeItem extends BaseBoxNodeItem {
+public final class LegendNode extends BaseBoxNodeItem {
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -41,7 +41,7 @@ public final class LegendNodeItem extends BaseBoxNodeItem {
 		columnWidths
 	}
 
-	LegendNodeItem(GenericJavaScriptObject javaScriptObject) {
+	LegendNode(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
 

@@ -22,7 +22,7 @@ import org.pepstock.charba.client.data.MeterDataset;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.MeterDisplay;
 import org.pepstock.charba.client.items.ChartAreaItem;
-import org.pepstock.charba.client.items.ChartItem;
+import org.pepstock.charba.client.items.ChartNode;
 import org.pepstock.charba.client.options.MeterOptions;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 import org.pepstock.charba.client.plugins.InvalidPluginIdException;
@@ -132,7 +132,7 @@ abstract class BaseMeterChart<O extends MeterOptions, D extends MeterDataset> ex
 			// checks if not empty
 			if (!datasets.isEmpty()){
 				// gets chart item
-				ChartItem item = superChart.getChartItem();
+				ChartNode item = superChart.getChartNode();
 				@SuppressWarnings("unchecked")
 				D dataset = (D) datasets.get(0);
 				// let's draw the value inside the doughnut
@@ -147,7 +147,7 @@ abstract class BaseMeterChart<O extends MeterOptions, D extends MeterDataset> ex
 		 * @param dataset the dataset instance
 		 * @param options the chart options
 		 */
-		private void execute(AbstractChart<?, ?> chart, ChartItem item, D dataset, O options) {
+		private void execute(AbstractChart<?, ?> chart, ChartNode item, D dataset, O options) {
 			// calculate the side of the square where to draw the value
 			final int sideOfSquare = (int) ((item.getInnerRadius() * 2) / SQRT_2);
 			// gets canvas context 2d
