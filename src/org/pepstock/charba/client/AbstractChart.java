@@ -20,6 +20,7 @@ import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.events.ChartNativeEvent;
+import org.pepstock.charba.client.items.ChartItem;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.options.BaseOptions;
@@ -46,7 +47,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @param <D> Dataset type for the specific chart
  */
 public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> extends Widget implements Chart<O, D> {
-
+	
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
 	// constant for WIDTH property
@@ -56,7 +57,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	// PCT standard for width
 	private static final double DEFAULT_PCT_WIDTH = 90D;
 	// reference to Chart.js chart instance
-	JavaScriptObject chart = null;
+	private JavaScriptObject chart = null;
 	
 	// chart ID using GWT unique id
 	private final String id = Document.get().createUniqueId();
@@ -155,6 +156,14 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 */
 	public final DivElement getContainer() {
 		return div;
+	}
+	
+	/**
+	 * Returns the chart item.
+	 * @return the chart item.
+	 */
+	public final ChartItem getChartItem(){
+		return (chart != null) ? new ChartItem((GenericJavaScriptObject)chart) : null;
 	}
 
 	/**
@@ -390,7 +399,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 		// checks consistency of chart and datasets
 		if (chart != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size()) {
 			// gets all meta data items
-			DatasetMetaItem array = getChartDatasetMeta(index);
+			DatasetMetaItem array = new DatasetMetaItem(getChartDatasetMeta(index));
 			// returns the array
 			return array;
 		}
@@ -409,7 +418,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 		// checks consistency of chart and event
 		if (chart != null && event != null) {
 			// gets element
-			return getChartElementAtEvent(event);
+			return new DatasetItem(getChartElementAtEvent(event));
 		}
 		return null;
 	}
@@ -426,7 +435,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 		// checks consistency of chart and event
 		if (chart != null && event != null) {
 			// gets elements
-			DatasetMetaItem array = getChartElementsAtEvent(event);
+			DatasetMetaItem array = new DatasetMetaItem(getChartElementsAtEvent(event));
 			// returns the array
 			return array;
 		}
@@ -583,7 +592,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
      * @param event event of get the element.
      * @return dataset meta data item.
      */
-	private native DatasetItem getChartElementAtEvent(JavaScriptObject event)/*-{
+	private native GenericJavaScriptObject getChartElementAtEvent(JavaScriptObject event)/*-{
 	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
 		var items = chart.getElementAtEvent(event);
 		if (items.length == 1){
@@ -597,7 +606,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 * @param event event of get the elements.
 	 * @return dataset meta data items.
 	 */
-	private native DatasetMetaItem getChartElementsAtEvent(JavaScriptObject event)/*-{
+	private native GenericJavaScriptObject getChartElementsAtEvent(JavaScriptObject event)/*-{
 	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
 		return chart.getElementsAtEvent(event);
 	}-*/;
@@ -607,7 +616,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 * @param datasetIndex dataset index
 	 * @return dataset meta data items.
 	 */
-	private native DatasetMetaItem getChartDatasetMeta(int datasetIndex)/*-{
+	private native GenericJavaScriptObject getChartDatasetMeta(int datasetIndex)/*-{
 	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
 		return chart.getDatasetMeta(datasetIndex);
 	}-*/;

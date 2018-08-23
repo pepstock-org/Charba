@@ -129,6 +129,11 @@ public class GenericJavaScriptObject extends JavaScriptObject{
 		return new JsObjectArrayList<T>(impl);
 	}
 
+	// FIXME
+    protected final native String[] keys()/*-{
+	    return Object.getOwnPropertyNames(this);
+	}-*/;
+	
 	/**
 	 * Returns true if this object contains no elements.
 	 * @return <code>true</code> if this object contains no elements.
@@ -170,6 +175,17 @@ public class GenericJavaScriptObject extends JavaScriptObject{
 		return typeof this[key];
 	}-*/;
 
+    /**
+     * Returns true if this object is an array.<br>
+     * For further information, refer to this JavaScript documentation: https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray
+     * @param key name of the property of JavaScript object.
+     * @return <code>true</code> if this object is an array.
+     */
+    protected final native boolean isArray(String key)/*-{
+		return Array.isArray(this[key]);
+	}-*/;
+    
+    
     /**
      * Returns true if this object contains the specified element.
      * @param key name of the property of JavaScript object.

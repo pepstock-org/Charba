@@ -197,11 +197,11 @@ public final class Animation extends EventProvider {
 	 * 
 	 * @param item animation item info.
 	 */
-	protected void onProgress(AnimationItem item) {
+	protected void onProgress(GenericJavaScriptObject item) {
 		// creates a native event by GWT (change)
 		NativeEvent event = Document.get().createChangeEvent();
 		// fires the event
-		getChart().fireEvent(new AnimationProgressEvent(event, item));
+		getChart().fireEvent(new AnimationProgressEvent(event, new AnimationItem(item)));
 	}
 
 	/**
@@ -209,11 +209,11 @@ public final class Animation extends EventProvider {
 	 * 
 	 * @param item animation item info.
 	 */
-	protected void onComplete(AnimationItem item) {
+	protected void onComplete(GenericJavaScriptObject item) {
 		// creates a native event by GWT (change)
 		NativeEvent event = Document.get().createChangeEvent();
 		// fires the event
-		getChart().fireEvent(new AnimationCompleteEvent(event, item));
+		getChart().fireEvent(new AnimationCompleteEvent(event, new AnimationItem(item)));
 	}
 
 	/**
@@ -225,7 +225,7 @@ public final class Animation extends EventProvider {
     private native void registerNativeProgressHandler(GenericJavaScriptObject options)/*-{
     	var self = this;
         options.onProgress = function(animation){
-            self.@org.pepstock.charba.client.options.Animation::onProgress(Lorg/pepstock/charba/client/items/AnimationItem;)(animation.animationObject);
+            self.@org.pepstock.charba.client.options.Animation::onProgress(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(animation.animationObject);
             return;
         }
     }-*/;
@@ -239,7 +239,7 @@ public final class Animation extends EventProvider {
     private native void registerNativeCompleteHandler(GenericJavaScriptObject options)/*-{
 		var self = this;
 	    options.onComplete = function(animation){
-	        self.@org.pepstock.charba.client.options.Animation::onComplete(Lorg/pepstock/charba/client/items/AnimationItem;)(animation.animationObject);
+	        self.@org.pepstock.charba.client.options.Animation::onComplete(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(animation.animationObject);
 	        return;
 	    }
 	}-*/;

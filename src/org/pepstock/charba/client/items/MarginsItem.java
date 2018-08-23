@@ -18,34 +18,15 @@ package org.pepstock.charba.client.items;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 
 /**
- * JavaScript object which contains the minimum size of an axis.<br>
- * This object reflects the object created by CHART.JS and is provided to Axis callbacks.
+ * It is applied to all sides of the chart (left, top, right, bottom).
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AxisMinSizeItem extends SizeItem {
+public class MarginsItem extends BaseBoxItem  {
 
-	AxisMinSizeItem(GenericJavaScriptObject javaScriptObject) {
+	MarginsItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
-	}
-
-	/**
-	 * Returns the minimum width of axis in pixel.
-	 * 
-	 * @param width the minimum width of axis in pixel.
-	 */
-	public final void setWidth(int width) {
-		setValue(Property.width, width);
-	}
-
-	/**
-	 * Sets the minimum height of axis in pixel.
-	 * 
-	 * @param height the minimum height of axis in pixel.
-	 */
-	public final void setHeight(int height) {
-		setValue(Property.height, height);
 	}
 
 }

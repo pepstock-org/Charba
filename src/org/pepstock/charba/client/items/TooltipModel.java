@@ -15,12 +15,17 @@
 */
 package org.pepstock.charba.client.items;
 
+import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.TextAlign;
 
 /**
  * This object is passed by CHART.JS to the callback to manage tooltip custom callback.<br>
@@ -31,7 +36,7 @@ import org.pepstock.charba.client.enums.FontStyle;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.callbacks.TooltipCustomCallback
  */
-public final class TooltipModel extends BaseItem {
+public final class TooltipModel extends JavaScriptObjectContainer {
 
 	/**
 	 * Needed for GWt injection
@@ -83,11 +88,8 @@ public final class TooltipModel extends BaseItem {
 		displayColors
 	}
 
-	/**
-	 * Needed for GWt injection
-	 */
-	protected TooltipModel() {
-		// do nothing
+	public TooltipModel(GenericJavaScriptObject javaScriptObject) {
+		super(javaScriptObject);
 	}
 
 	/**
@@ -97,7 +99,14 @@ public final class TooltipModel extends BaseItem {
 	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
 	public final List<TooltipItem> getDataPoints() {
-		return getObjectArray(Property.dataPoints.name());
+		List<TooltipItem> result = new LinkedList<>();
+		if (has(Property.dataPoints)) {
+			for (GenericJavaScriptObject object : getObjectArray(Property.dataPoints)) {
+				TooltipItem item = new TooltipItem(object);
+				result.add(item);
+			}
+		}
+		return result;
 	}
 
 	/**
@@ -106,7 +115,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the X padding location.
 	 */
 	public final int getXPadding() {
-		return getInt(Property.xPadding.name());
+		return getValue(Property.xPadding, Defaults.getGlobal().getTooltips().getXPadding());
 	}
 
 	/**
@@ -115,7 +124,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the Y padding location.
 	 */
 	public final int getYPadding() {
-		return getInt(Property.yPadding.name());
+		return getValue(Property.yPadding, Defaults.getGlobal().getTooltips().getYPadding());
 	}
 
 	/**
@@ -124,7 +133,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the X align location.
 	 */
 	public final String getXAlign() {
-		return getString(Property.xAlign.name());
+		return getValue(Property.xAlign, UndefinedValues.STRING);
 	}
 
 	/**
@@ -133,7 +142,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the Y align location.
 	 */
 	public final String getYAlign() {
-		return getString(Property.yAlign.name());
+		return getValue(Property.yAlign, UndefinedValues.STRING);
 	}
 
 	/**
@@ -142,7 +151,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the X location of tooltip.
 	 */
 	public final int getX() {
-		return getInt(Property.x.name());
+		return getValue(Property.x, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -151,7 +160,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the Y location of tooltip.
 	 */
 	public final int getY() {
-		return getInt(Property.y.name());
+		return getValue(Property.y, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -160,7 +169,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the width of tooltip.
 	 */
 	public final int getWidth() {
-		return getInt(Property.width.name());
+		return getValue(Property.width, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -169,7 +178,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the height of tooltip.
 	 */
 	public final int getHeight() {
-		return getInt(Property.height.name());
+		return getValue(Property.height, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -178,7 +187,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the X location of the tooltip arrow.
 	 */
 	public final int getCaretX() {
-		return getInt(Property.caretX.name());
+		return getValue(Property.caretX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -187,7 +196,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the Y location of the tooltip arrow.
 	 */
 	public final int getCaretY() {
-		return getInt(Property.caretY.name());
+		return getValue(Property.caretY, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -197,7 +206,14 @@ public final class TooltipModel extends BaseItem {
 	 * @see org.pepstock.charba.client.items.TooltipBodyItem
 	 */
 	public final List<TooltipBodyItem> getBody() {
-		return getObjectArray(Property.body.name());
+		List<TooltipBodyItem> result = new LinkedList<>();
+		if (has(Property.body)) {
+			for (GenericJavaScriptObject object : getObjectArray(Property.body)) {
+				TooltipBodyItem item = new TooltipBodyItem(object);
+				result.add(item);
+			}
+		}
+		return result;
 	}
 
 	/**
@@ -206,7 +222,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the list of lines before body section.
 	 */
 	public final List<String> getBeforeBody() {
-		return getStringArray(Property.beforeBody.name());
+		return getStringArray(Property.beforeBody);
 	}
 
 	/**
@@ -215,7 +231,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the list of lines after body section.
 	 */
 	public final List<String> getAfterBody() {
-		return getStringArray(Property.afterBody.name());
+		return getStringArray(Property.afterBody);
 	}
 
 	/**
@@ -224,7 +240,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the color of the tooltip body section.
 	 */
 	public final String getBodyFontColorAsString() {
-		return getString(Property.bodyFontColor.name());
+		return getValue(Property.bodyFontColor, Defaults.getGlobal().getTooltips().getBodyFontColorAsString());
 	}
 
 	/**
@@ -242,7 +258,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the font family of the tooltip body section.
 	 */
 	public final String getBodyFontFamily() {
-		return getString(Property._bodyFontFamily.name());
+		return getValue(Property._bodyFontFamily, Defaults.getGlobal().getTooltips().getBodyFontFamily());
 	}
 
 	/**
@@ -252,7 +268,7 @@ public final class TooltipModel extends BaseItem {
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public final FontStyle getBodyFontStyle() {
-		return getValue(Property._bodyFontStyle, FontStyle.class, FontStyle.normal);
+		return getValue(Property._bodyFontStyle, FontStyle.class, Defaults.getGlobal().getTooltips().getBodyFontStyle());
 	}
 
 	/**
@@ -260,8 +276,8 @@ public final class TooltipModel extends BaseItem {
 	 * 
 	 * @return the alignment of the tooltip body section.
 	 */
-	public final String getBodyAlign() {
-		return getString(Property._bodyAlign.name());
+	public final TextAlign getBodyAlign() {
+		return getValue(Property._bodyAlign, TextAlign.class, Defaults.getGlobal().getTooltips().getBodyAlign());
 	}
 
 	/**
@@ -270,7 +286,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the font size of the tooltip body section.
 	 */
 	public final int getBodyFontSize() {
-		return getInt(Property.bodyFontSize.name());
+		return getValue(Property.bodyFontSize, Defaults.getGlobal().getTooltips().getBodyFontSize());
 	}
 
 	/**
@@ -279,7 +295,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the spacing of the tooltip body section.
 	 */
 	public final int getBodySpacing() {
-		return getInt(Property.bodySpacing.name());
+		return getValue(Property.bodySpacing, Defaults.getGlobal().getTooltips().getBodySpacing());
 	}
 
 	/**
@@ -288,7 +304,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the title of the tooltip.
 	 */
 	public final List<String> getTitle() {
-		return getStringArray(Property.title.name());
+		return getStringArray(Property.title);
 	}
 
 	/**
@@ -297,7 +313,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the color of the tooltip title section.
 	 */
 	public final String getTitleFontColorAsString() {
-		return getString(Property.titleFontColor.name());
+		return getValue(Property.titleFontColor, Defaults.getGlobal().getTooltips().getTitleFontColorAsString());
 	}
 
 	/**
@@ -315,7 +331,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the font family of the tooltip title section.
 	 */
 	public final String getTitleFontFamily() {
-		return getString(Property._titleFontFamily.name());
+		return getValue(Property._titleFontFamily, Defaults.getGlobal().getTooltips().getTitleFontFamily());
 	}
 
 	/**
@@ -325,7 +341,7 @@ public final class TooltipModel extends BaseItem {
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public final FontStyle getTitleFontStyle() {
-		return getValue(Property._titleFontStyle, FontStyle.class, FontStyle.normal);
+		return getValue(Property._titleFontStyle, FontStyle.class, Defaults.getGlobal().getTooltips().getTitleFontStyle());
 	}
 
 	/**
@@ -334,7 +350,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the font size of the tooltip title section.
 	 */
 	public final int getTitleFontSize() {
-		return getInt(Property.titleFontSize.name());
+		return getValue(Property.titleFontSize, Defaults.getGlobal().getTooltips().getTitleFontSize());
 	}
 
 	/**
@@ -342,8 +358,8 @@ public final class TooltipModel extends BaseItem {
 	 * 
 	 * @return the alignment of the tooltip title section.
 	 */
-	public final String getTitleAlign() {
-		return getString(Property._titleAlign.name());
+	public final TextAlign getTitleAlign() {
+		return getValue(Property._titleAlign, TextAlign.class, Defaults.getGlobal().getTooltips().getTitleAlign());
 	}
 
 	/**
@@ -352,7 +368,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the spacing of the tooltip title section.
 	 */
 	public final int getTitleSpacing() {
-		return getInt(Property.titleSpacing.name());
+		return getValue(Property.titleSpacing, Defaults.getGlobal().getTooltips().getTitleSpacing());
 	}
 
 	/**
@@ -361,7 +377,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the bottom margin of the tooltip title section.
 	 */
 	public final int getTitleMarginBottom() {
-		return getInt(Property.titleMarginBottom.name());
+		return getValue(Property.titleMarginBottom, Defaults.getGlobal().getTooltips().getTitleMarginBottom());
 	}
 
 	/**
@@ -370,7 +386,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the footer of the tooltip.
 	 */
 	public final List<String> getFooter() {
-		return getStringArray(Property.footer.name());
+		return getStringArray(Property.footer);
 	}
 
 	/**
@@ -379,7 +395,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the color of the tooltip footer section.
 	 */
 	public final String getFooterFontColorAsString() {
-		return getString(Property.footerFontColor.name());
+		return getValue(Property.footerFontColor, Defaults.getGlobal().getTooltips().getFooterFontColorAsString());
 	}
 
 	/**
@@ -397,7 +413,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the font family of the tooltip footer section.
 	 */
 	public final String getFooterFontFamily() {
-		return getString(Property._footerFontFamily.name());
+		return getValue(Property._footerFontFamily, Defaults.getGlobal().getTooltips().getFooterFontFamily());
 	}
 
 	/**
@@ -407,7 +423,7 @@ public final class TooltipModel extends BaseItem {
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public final FontStyle getFooterFontStyle() {
-		return getValue(Property._footerFontStyle, FontStyle.class, FontStyle.normal);
+		return getValue(Property._footerFontStyle, FontStyle.class, Defaults.getGlobal().getTooltips().getFooterFontStyle());
 	}
 
 	/**
@@ -416,7 +432,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the font size of the tooltip footer section.
 	 */
 	public final int getFooterFontSize() {
-		return getInt(Property.footerFontSize.name());
+		return getValue(Property.footerFontSize, Defaults.getGlobal().getTooltips().getFooterFontSize());
 	}
 
 	/**
@@ -424,8 +440,8 @@ public final class TooltipModel extends BaseItem {
 	 * 
 	 * @return the alignment of the tooltip footer section.
 	 */
-	public final String getFooterAlign() {
-		return getString(Property._footerAlign.name());
+	public final TextAlign getFooterAlign() {
+		return getValue(Property._footerAlign, TextAlign.class, Defaults.getGlobal().getTooltips().getFooterAlign());
 	}
 
 	/**
@@ -434,7 +450,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the spacing of the tooltip footer section.
 	 */
 	public final int getFooterSpacing() {
-		return getInt(Property.footerSpacing.name());
+		return getValue(Property.footerSpacing, Defaults.getGlobal().getTooltips().getFooterSpacing());
 	}
 
 	/**
@@ -443,7 +459,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the margin top of the tooltip footer section.
 	 */
 	public final int getFooterMarginTop() {
-		return getInt(Property.footerMarginTop.name());
+		return getValue(Property.footerMarginTop, Defaults.getGlobal().getTooltips().getFooterMarginTop());
 	}
 
 	/**
@@ -452,7 +468,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the size, in px, of the tooltip arrow of footer section.
 	 */
 	public final int getCaretSize() {
-		return getInt(Property.caretSize.name());
+		return getValue(Property.caretSize, Defaults.getGlobal().getTooltips().getCaretSize());
 	}
 
 	/**
@@ -461,7 +477,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the radius of tooltip corner curves of footer section.
 	 */
 	public final double getCornerRadius() {
-		return getDouble(Property.cornerRadius.name());
+		return getValue(Property.cornerRadius, Defaults.getGlobal().getTooltips().getCornerRadius());
 	}
 
 	/**
@@ -470,7 +486,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the background color of tooltip.
 	 */
 	public final String getBackgroundColorAsString() {
-		return getString(Property.backgroundColor.name());
+		return getValue(Property.backgroundColor, Defaults.getGlobal().getTooltips().getBackgroundColorAsString());
 	}
 
 	/**
@@ -489,7 +505,14 @@ public final class TooltipModel extends BaseItem {
 	 * @see org.pepstock.charba.client.items.TooltipLabelColor
 	 */
 	public final List<TooltipLabelColor> getLabelColors() {
-		return getObjectArray(Property.labelColors.name());
+		List<TooltipLabelColor> result = new LinkedList<>();
+		if (has(Property.labelColors)) {
+			for (GenericJavaScriptObject object : getObjectArray(Property.labelColors)) {
+				TooltipLabelColor item = new TooltipLabelColor(object);
+				result.add(item);
+			}
+		}
+		return result;
 	}
 
 	/**
@@ -498,7 +521,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the opacity of tooltip.
 	 */
 	public final double getOpacity() {
-		return getDouble(Property.opacity.name());
+		return getValue(Property.opacity, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -507,7 +530,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the legend color of tooltips.
 	 */
 	public final String getLegendColorBackgroundAsString() {
-		return getString(Property.legendColorBackground.name());
+		return getValue(Property.legendColorBackground,  Defaults.getGlobal().getDefaultColorAsString());
 	}
 
 	/**
@@ -524,7 +547,7 @@ public final class TooltipModel extends BaseItem {
 	 * @return the display of colors of tooltip.
 	 */
 	public final Boolean getDisplayColors() {
-		return getBoolean(Property.displayColors.name());
+		return getValue(Property.displayColors, UndefinedValues.BOOLEAN);
 	}
 
 }

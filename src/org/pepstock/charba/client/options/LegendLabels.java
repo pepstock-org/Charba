@@ -275,11 +275,11 @@ public final class LegendLabels extends ChartContainer {
 	 * @param item legend item to check.
 	 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
 	 */
-	protected boolean onFilter(LegendItem item) {
+	protected boolean onFilter(GenericJavaScriptObject item) {
 		// checks if callback is consistent
 		if (filterHandler != null) {
 			// calls callback
-			return filterHandler.onFilter(getChart(), item);
+			return filterHandler.onFilter(getChart(), new LegendItem(item));
 		}
 		return true;
 	}
@@ -316,7 +316,7 @@ public final class LegendLabels extends ChartContainer {
     private native void registerNativeFilterLabelsHandler(GenericJavaScriptObject options)/*-{
 		var self = this;
 	    options.filter = function(legendItem){
-	    	return self.@org.pepstock.charba.client.options.LegendLabels::onFilter(Lorg/pepstock/charba/client/items/LegendItem;)(legendItem);
+	    	return self.@org.pepstock.charba.client.options.LegendLabels::onFilter(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(legendItem);
 	    }
 	}-*/;
 

@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 
 /**
  * JavaScript object which contains the margins sizes of an axis.<br>
@@ -24,33 +24,11 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class AxisMarginsItem extends BaseItem {
+public final class AxisMarginsItem extends MarginsItem {
 
-	/**
-	 * Name of fields of JavaScript object.
-	 */
-	private enum Property implements Key
-	{
-		left,
-		right,
-		top,
-		bottom
-	}
 
-	/**
-	 * Needed for GWt injection
-	 */
-	protected AxisMarginsItem() {
-		// do nothing
-	}
-
-	/**
-	 * Returns the top margin in pixel
-	 * 
-	 * @return the top margin in pixel
-	 */
-	public final int getTop() {
-		return getInt(Property.top.name());
+	AxisMarginsItem(GenericJavaScriptObject javaScriptObject) {
+		super(javaScriptObject);
 	}
 
 	/**
@@ -59,16 +37,7 @@ public class AxisMarginsItem extends BaseItem {
 	 * @param top the top margin in pixel
 	 */
 	public final void setTop(int top) {
-		setInt(Property.top.name(), top);
-	}
-
-	/**
-	 * Returns the bottom margin in pixel
-	 * 
-	 * @return the bottom margin in pixel
-	 */
-	public final int getBottom() {
-		return getInt(Property.bottom.name());
+		setValue(Property.top, top);
 	}
 
 	/**
@@ -77,16 +46,7 @@ public class AxisMarginsItem extends BaseItem {
 	 * @param bottom the bottom margin in pixel
 	 */
 	public final void setBottom(int bottom) {
-		setInt(Property.bottom.name(), bottom);
-	}
-
-	/**
-	 * Returns the left margin in pixel
-	 * 
-	 * @return the left margin in pixel
-	 */
-	public final int getLeft() {
-		return getInt(Property.left.name());
+		setValue(Property.bottom, bottom);
 	}
 
 	/**
@@ -95,16 +55,7 @@ public class AxisMarginsItem extends BaseItem {
 	 * @param left the left margin in pixel
 	 */
 	public final void setLeft(int left) {
-		setInt(Property.left.name(), left);
-	}
-
-	/**
-	 * Returns the right margin in pixel
-	 * 
-	 * @return the right margin in pixel
-	 */
-	public final int getRight() {
-		return getInt(Property.right.name());
+		setValue(Property.left, left);
 	}
 
 	/**
@@ -113,6 +64,6 @@ public class AxisMarginsItem extends BaseItem {
 	 * @param right the right margin in pixel
 	 */
 	public final void setRight(int right) {
-		setInt(Property.right.name(), right);
+		setValue(Property.right, right);
 	}
 }

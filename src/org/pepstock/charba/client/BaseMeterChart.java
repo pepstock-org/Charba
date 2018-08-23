@@ -67,14 +67,6 @@ abstract class BaseMeterChart<O extends MeterOptions, D extends MeterDataset> ex
 	}
 	
 	/**
-	 * Returns the chart item.
-	 * @return the chart item.
-	 */
-	protected final ChartItem getChart(){
-		return (ChartItem)super.chart;
-	}
-
-	/**
 	 * Returns a dataset with a maximum value.
 	 * @param max maximum value of dataset
 	 * @return dataset instance
@@ -140,7 +132,7 @@ abstract class BaseMeterChart<O extends MeterOptions, D extends MeterDataset> ex
 			// checks if not empty
 			if (!datasets.isEmpty()){
 				// gets chart item
-				ChartItem item = superChart.getChart();
+				ChartItem item = superChart.getChartItem();
 				@SuppressWarnings("unchecked")
 				D dataset = (D) datasets.get(0);
 				// let's draw the value inside the doughnut

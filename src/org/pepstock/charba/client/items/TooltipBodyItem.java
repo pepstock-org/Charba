@@ -17,6 +17,8 @@ package org.pepstock.charba.client.items;
 
 import java.util.List;
 
+import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -25,7 +27,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.items.TooltipModel
  */
-public final class TooltipBodyItem extends BaseItem {
+public final class TooltipBodyItem extends JavaScriptObjectContainer {
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -37,11 +39,8 @@ public final class TooltipBodyItem extends BaseItem {
 		after
 	}
 
-	/**
-	 * Needed for GWt injection
-	 */
-	protected TooltipBodyItem() {
-		// do nothing
+	TooltipBodyItem(GenericJavaScriptObject javaScriptObject) {
+		super(javaScriptObject);
 	}
 
 	/**
@@ -50,7 +49,7 @@ public final class TooltipBodyItem extends BaseItem {
 	 * @return text to render before the body section.
 	 */
 	public final List<String> getBefore() {
-		return getStringArray(Property.before.name());
+		return getStringArray(Property.before);
 	}
 
 	/**
@@ -59,7 +58,7 @@ public final class TooltipBodyItem extends BaseItem {
 	 * @return all lines of body section.
 	 */
 	public final List<String> getLines() {
-		return getStringArray(Property.lines.name());
+		return getStringArray(Property.lines);
 	}
 
 	/**
@@ -68,7 +67,7 @@ public final class TooltipBodyItem extends BaseItem {
 	 * @return text to render after the body section
 	 */
 	public final List<String> getAfter() {
-		return getStringArray(Property.after.name());
+		return getStringArray(Property.after);
 	}
 
 }

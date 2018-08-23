@@ -372,11 +372,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart tooltip drawing.
 	 */
-	protected boolean onBeforeTooltipDraw(String chartId, TooltipModel model, String easing) {
+	protected boolean onBeforeTooltipDraw(String chartId, GenericJavaScriptObject object, String easing) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
+			TooltipModel model = new TooltipModel(object);
 			return delegation.onBeforeTooltipDraw(chart, model, Double.valueOf(easing), getOptions(chart));
 		}
 		return true;
@@ -389,11 +390,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param model The tooltip instance.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	protected void onAfterTooltipDraw(String chartId, TooltipModel model, String easing) {
+	protected void onAfterTooltipDraw(String chartId, GenericJavaScriptObject object, String easing) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
+			TooltipModel model = new TooltipModel(object);
 			delegation.onAfterTooltipDraw(chart, model, Double.valueOf(easing), getOptions(chart));
 		}
 	}
@@ -434,12 +436,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * 
 	 * @param item The new canvas display size (eq. canvas.style width & height).
 	 */
-	protected void onResize(String chartId, SizeItem item) {
+	protected void onResize(String chartId, GenericJavaScriptObject item) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onResize(chart, item, getOptions(chart));
+			delegation.onResize(chart, new SizeItem(item), getOptions(chart));
 		}
 	}
 
@@ -556,10 +558,10 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 
 	// tooltip draw
 	config.beforeTooltipDraw = function(chart, args, option) {
-		return self.@org.pepstock.charba.client.plugins.WrapperPlugin::onBeforeTooltipDraw(Ljava/lang/String;Lorg/pepstock/charba/client/items/TooltipModel;Ljava/lang/String;)(chart.options.charbaId, args.tooltip._model, args.easingValue);
+		return self.@org.pepstock.charba.client.plugins.WrapperPlugin::onBeforeTooltipDraw(Ljava/lang/String;Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;Ljava/lang/String;)(chart.options.charbaId, args.tooltip._model, args.easingValue);
 	}
 	config.afterTooltipDraw = function(chart, args, option) {
-		self.@org.pepstock.charba.client.plugins.WrapperPlugin::onAfterTooltipDraw(Ljava/lang/String;Lorg/pepstock/charba/client/items/TooltipModel;Ljava/lang/String;)(chart.options.charbaId, args.tooltip._model, args.easingValue);
+		self.@org.pepstock.charba.client.plugins.WrapperPlugin::onAfterTooltipDraw(Ljava/lang/String;Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;Ljava/lang/String;)(chart.options.charbaId, args.tooltip._model, args.easingValue);
 		return;
 	}
 
@@ -576,7 +578,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 
 	// resize
 	config.resize = function(chart, size, option) {
-		self.@org.pepstock.charba.client.plugins.WrapperPlugin::onResize(Ljava/lang/String;Lorg/pepstock/charba/client/items/SizeItem;)(chart.options.charbaId, size);
+		self.@org.pepstock.charba.client.plugins.WrapperPlugin::onResize(Ljava/lang/String;Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(chart.options.charbaId, size);
 		return;
 	}
 

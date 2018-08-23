@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -31,7 +33,7 @@ import org.pepstock.charba.client.commons.Key;
  * @see org.pepstock.charba.client.callbacks.TooltipTitleCallback
  *
  */
-public final class TooltipItem extends BaseItem {
+public final class TooltipItem extends JavaScriptObjectContainer {
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -46,11 +48,8 @@ public final class TooltipItem extends BaseItem {
 		y
 	}
 
-	/**
-	 * Needed for GWt injection
-	 */
-	protected TooltipItem() {
-		// do nothings
+	public TooltipItem(GenericJavaScriptObject javaScriptObject) {
+		super(javaScriptObject);
 	}
 
 	/**
@@ -59,7 +58,7 @@ public final class TooltipItem extends BaseItem {
 	 * @return the X location of label.
 	 */
 	public final String getXLabel() {
-		return getString(Property.xLabel.name());
+		return getValue(Property.xLabel, UndefinedValues.STRING);
 	}
 
 	/**
@@ -68,7 +67,7 @@ public final class TooltipItem extends BaseItem {
 	 * @return the Y location of label.
 	 */
 	public final String getYLabel() {
-		return getString(Property.yLabel.name());
+		return getValue(Property.yLabel, UndefinedValues.STRING);
 	}
 
 	/**
@@ -78,7 +77,7 @@ public final class TooltipItem extends BaseItem {
 	 * @see org.pepstock.charba.client.data.Data#getDatasets()
 	 */
 	public final int getDatasetIndex() {
-		return getInt(Property.datasetIndex.name());
+		return getValue(Property.datasetIndex, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -89,7 +88,7 @@ public final class TooltipItem extends BaseItem {
 	 * @see org.pepstock.charba.client.data.Data#getLabels()
 	 */
 	public final int getIndex() {
-		return getInt(Property.index.name());
+		return getValue(Property.index, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -98,7 +97,7 @@ public final class TooltipItem extends BaseItem {
 	 * @return the X location of tooltip item.
 	 */
 	public final int getX() {
-		return getInt(Property.x.name());
+		return getValue(Property.x, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -107,6 +106,6 @@ public final class TooltipItem extends BaseItem {
 	 * @return the Y location of tooltip item.
 	 */
 	public final int getY() {
-		return getInt(Property.y.name());
+		return getValue(Property.y, UndefinedValues.INTEGER);
 	}
 }

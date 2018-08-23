@@ -15,63 +15,16 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 
 /**
  * Object which maps the chart area item of CHART.JS chart java script object.<br> Used only for meter and gauge charts.
  * @author Andrea "Stock" Stocchero
  *
  */
-public class ChartAreaItem extends BaseItem {
+public final class ChartAreaItem extends BaseBoxItem {
 
-	/**
-	 * Name of fields of JavaScript object.
-	 */
-	private enum Property implements Key
-	{
-		top,
-		right,
-		bottom,
-		left
+	ChartAreaItem(GenericJavaScriptObject javaScriptObject) {
+		super(javaScriptObject);
 	}
-	
- 	/**
-	 * Needed for GWt injection
-	 */
-	protected ChartAreaItem() {
-		// do nothing
-	}
-	
-	/**
-	 * Returns the top of chart area.
-	 * @return the top of chart area.
-	 */
-	public final int getTop(){
-		return getInt(Property.top.name());
-	}
-	
-	/**
-	 * Returns the right of chart area.
-	 * @return the right of chart area.
-	 */
-	public final int getRight(){
-		return getInt(Property.right.name());
-	}
-
-	/**
-	 * Returns the bottom of chart area.
-	 * @return the bottom of chart area.
-	 */
-	public final int getBottom(){
-		return getInt(Property.bottom.name());
-	}
-
-	/**
-	 * Returns the left of chart area.
-	 * @return the left of chart area.
-	 */
-	public final int getLeft(){
-		return getInt(Property.left.name());
-	}
-
 }

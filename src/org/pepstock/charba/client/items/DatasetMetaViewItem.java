@@ -17,6 +17,8 @@ package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -26,7 +28,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class DatasetMetaViewItem extends BaseItem {
+public final class DatasetMetaViewItem extends JavaScriptObjectContainer {
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -47,11 +49,8 @@ public class DatasetMetaViewItem extends BaseItem {
 		height
 	}
 
-	/**
-	 * Needed for GWt injection
-	 */
-	protected DatasetMetaViewItem() {
-		// do nothing
+	DatasetMetaViewItem(GenericJavaScriptObject javaScriptObject) {
+		super(javaScriptObject);
 	}
 
 	/**
@@ -61,7 +60,7 @@ public class DatasetMetaViewItem extends BaseItem {
 	 * @see org.pepstock.charba.client.data.Dataset#setLabel(String)
 	 */
 	public final String getDatasetLabel() {
-		return getString(Property.datasetLabel.name());
+		return getValue(Property.datasetLabel, UndefinedValues.STRING);
 	}
 
 	/**
@@ -70,7 +69,7 @@ public class DatasetMetaViewItem extends BaseItem {
 	 * @return the label
 	 */
 	public final String getLabel() {
-		return getString(Property.label.name());
+		return getValue(Property.label, UndefinedValues.STRING);
 	}
 
 	/**
@@ -79,7 +78,7 @@ public class DatasetMetaViewItem extends BaseItem {
 	 * @return the edge to skip drawing the border for.
 	 */
 	public final String getBorderSkipped() {
-		return getString(Property.borderSkipped.name());
+		return getValue(Property.borderSkipped, UndefinedValues.STRING);
 	}
 
 	/**
@@ -88,7 +87,7 @@ public class DatasetMetaViewItem extends BaseItem {
 	 * @return list of the fill color of the dataset item
 	 */
 	public final String getBackgroundColorAsString() {
-		return getString(Property.backgroundColor.name());
+		return getValue(Property.backgroundColor, UndefinedValues.STRING);
 	}
 
 	/**
@@ -106,7 +105,7 @@ public class DatasetMetaViewItem extends BaseItem {
 	 * @return list of the color of the dataset item border
 	 */
 	public final String getBorderColorAsString() {
-		return getString(Property.borderColor.name());
+		return getValue(Property.borderColor, UndefinedValues.STRING);
 	}
 
 	/**
@@ -124,7 +123,7 @@ public class DatasetMetaViewItem extends BaseItem {
 	 * @return list of the stroke width of the dataset item in pixels.
 	 */
 	public final int getBorderWidth() {
-		return getInt(Property.borderWidth.name());
+		return getValue(Property.borderWidth, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -133,7 +132,7 @@ public class DatasetMetaViewItem extends BaseItem {
 	 * @return <code>true</code> if is an horizontal view
 	 */
 	public final boolean isHorizontal() {
-		return getBoolean(Property.horizontal.name());
+		return getValue(Property.horizontal, UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -142,7 +141,7 @@ public class DatasetMetaViewItem extends BaseItem {
 	 * @return the base value of dataset
 	 */
 	public final int getBase() {
-		return getInt(Property.base.name());
+		return getValue(Property.base, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -151,7 +150,7 @@ public class DatasetMetaViewItem extends BaseItem {
 	 * @return the X location of dataset item in pixel.
 	 */
 	public final double getX() {
-		return getDouble(Property.x.name());
+		return getValue(Property.x, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -160,7 +159,7 @@ public class DatasetMetaViewItem extends BaseItem {
 	 * @return the Y location of dataset item in pixel.
 	 */
 	public final double getY() {
-		return getDouble(Property.y.name());
+		return getValue(Property.y, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -169,7 +168,7 @@ public class DatasetMetaViewItem extends BaseItem {
 	 * @return the width of dataset item in pixel.
 	 */
 	public final double getWidth() {
-		return getDouble(Property.width.name());
+		return getValue(Property.width, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -178,7 +177,7 @@ public class DatasetMetaViewItem extends BaseItem {
 	 * @return the height of dataset item in pixel.
 	 */
 	public final double getHeight() {
-		return getDouble(Property.height.name());
+		return getValue(Property.height, UndefinedValues.DOUBLE);
 	}
 
 }

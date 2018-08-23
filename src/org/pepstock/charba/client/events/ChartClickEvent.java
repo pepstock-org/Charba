@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.events;
 
+import java.util.Arrays;
 import java.util.List;
 
-import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 
@@ -48,7 +48,7 @@ public final class ChartClickEvent extends AbstractEvent<ChartClickEventHandler>
 	 */
 	public ChartClickEvent(NativeEvent nativeEvent, DatasetItem item) {
 		super(nativeEvent);
-		this.items = ArrayListHelper.build(new DatasetItem[] { item });
+		this.items = Arrays.asList(item);
 	}
 
 	/**

@@ -196,7 +196,8 @@ public class BaseTick extends ChartContainer {
 	 * @return if the callback returns null or undefined the associated grid line will be hidden.
 	 * @see org.pepstock.charba.client.items.TickItem
 	 */
-	protected String onCallback(TickItem item) {
+	protected String onCallback(GenericJavaScriptObject object) {
+		TickItem item = new TickItem(object);
 		AbstractChart<?, ?> chart = getChart();
 		if (callback != null && chart != null) {
 			return callback.onCallback(chart, item);
@@ -217,7 +218,7 @@ public class BaseTick extends ChartContainer {
 			myItem.value = value;
 			myItem.index = index;
 			myItem.values = values;
-			return self.@org.pepstock.charba.client.options.scales.BaseTick::onCallback(Lorg/pepstock/charba/client/items/TickItem;)(myItem);
+			return self.@org.pepstock.charba.client.options.scales.BaseTick::onCallback(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(myItem);
 		}
 	}-*/;
 

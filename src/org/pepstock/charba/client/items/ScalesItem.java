@@ -15,6 +15,10 @@
 */
 package org.pepstock.charba.client.items;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
@@ -27,37 +31,21 @@ import org.pepstock.charba.client.commons.Key;
  * @see org.pepstock.charba.client.events.ChartResizeEvent
  * @see org.pepstock.charba.client.events.ChartResizeEventHandler
  */
-public class SizeItem extends JavaScriptObjectContainer {
-
-	/**
-	 * Name of fields of JavaScript object.
-	 */
-	protected enum Property implements Key
-	{
-		width,
-		height
-	}
-
-	public SizeItem(GenericJavaScriptObject javaScriptObject) {
+public final class ScalesItem extends JavaScriptObjectContainer {
+	
+	ScalesItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
 
-	/**
-	 * Returns the width of the chart item in pixel.
-	 * 
-	 * @return the width of the chart item in pixel.
-	 */
-	public final int getWidth() {
-		return getValue(Property.width, UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * Returns the height of the chart item in pixel.
-	 * 
-	 * @return the height of the chart item in pixel.
-	 */
-	public final int getHeight() {
-		return getValue(Property.height, UndefinedValues.INTEGER);
+	public final Map<String, ScaleItem> getItems() {
+		final Map<String, ScaleItem> result = new HashMap<>();
+		List<Key> keys =  keys();
+		if (keys != null && !keys.isEmpty()) {
+			for (Key key : keys) {
+				result.put(key.name(), new ScaleItem((GenericJavaScriptObject)getValue(key)));
+			}
+		}
+		return result;
 	}
 
 }

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.items;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -28,7 +29,9 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DatasetItem extends GenericJavaScriptObject {
+public final class DatasetItem extends JavaScriptObjectContainer {
+	
+	private final DatasetMetaViewItem view;
 
 	/**
 	 * Needed for GWt injection
@@ -41,11 +44,9 @@ public final class DatasetItem extends GenericJavaScriptObject {
 		hidden
 	}
 
-	/**
-	 * Needed for GWt injection
-	 */
-	protected DatasetItem() {
-		// do nothing
+	public DatasetItem(GenericJavaScriptObject javaScriptObject) {
+		super(javaScriptObject);
+		view = new DatasetMetaViewItem((GenericJavaScriptObject)getValue(Property._view));
 	}
 
 	/**
@@ -55,7 +56,7 @@ public final class DatasetItem extends GenericJavaScriptObject {
 	 * @see org.pepstock.charba.client.data.Data#getDatasets()
 	 */
 	public final int getDatasetIndex() {
-		return getInt(Property._datasetIndex.name());
+		return getValue(Property._datasetIndex, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -66,7 +67,7 @@ public final class DatasetItem extends GenericJavaScriptObject {
 	 * @see org.pepstock.charba.client.data.Data#getLabels()
 	 */
 	public final int getIndex() {
-		return getInt(Property._index.name());
+		return getValue(Property._index, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -75,7 +76,7 @@ public final class DatasetItem extends GenericJavaScriptObject {
 	 * @return <code>true</code> if the dataset is hidden, otherwise <code>false</code>.
 	 */
 	public final boolean isHidden() {
-		return getBoolean(Property.hidden.name());
+		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -84,7 +85,7 @@ public final class DatasetItem extends GenericJavaScriptObject {
 	 * @param hidden <code>true</code> if the dataset must be hidden, otherwise <code>false</code>.
 	 */
 	public final void setHidden(boolean hidden) {
-		setBoolean(Property.hidden.name(), hidden);
+		setValue(Property.hidden, hidden);
 	}
 
 	/**
@@ -94,6 +95,6 @@ public final class DatasetItem extends GenericJavaScriptObject {
 	 * @see org.pepstock.charba.client.items.DatasetMetaViewItem
 	 */
 	public final DatasetMetaViewItem getView() {
-		return (DatasetMetaViewItem) getJavaScriptObject(Property._view.name());
+		return view;
 	}
 }

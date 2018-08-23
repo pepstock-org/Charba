@@ -15,8 +15,11 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -26,7 +29,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.callbacks.TooltipLabelCallback
  */
-public final class TooltipLabelColor extends BaseItem {
+public final class TooltipLabelColor extends JavaScriptObjectContainer {
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -37,11 +40,8 @@ public final class TooltipLabelColor extends BaseItem {
 		borderColor
 	}
 
-	/**
-	 * Needed for GWt injection
-	 */
-	protected TooltipLabelColor() {
-		// do nothing
+	TooltipLabelColor(GenericJavaScriptObject javaScriptObject) {
+		super(javaScriptObject);
 	}
 
 	/**
@@ -50,7 +50,7 @@ public final class TooltipLabelColor extends BaseItem {
 	 * @return the background color of the label.
 	 */
 	public final String getBackgroundColorAsString() {
-		return getString(Property.backgroundColor.name());
+		return getValue(Property.backgroundColor, Defaults.getGlobal().getTooltips().getBackgroundColorAsString());
 	}
 
 	/**
@@ -68,7 +68,7 @@ public final class TooltipLabelColor extends BaseItem {
 	 * @return the border color of the label.
 	 */
 	public final String getBorderColorAsString() {
-		return getString(Property.borderColor.name());
+		return getValue(Property.borderColor,  Defaults.getGlobal().getTooltips().getBorderColorAsString());
 	}
 	
 	/**

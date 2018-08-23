@@ -908,11 +908,11 @@ public final class Tooltips extends ChartContainer {
 	 * 
 	 * @param model tooltip model contains parameters that can be used to render the tooltip.
 	 */
-	protected void onCustom(TooltipModel model) {
+	protected void onCustom(GenericJavaScriptObject model) {
 		// checks if callback is consistent
 		if (customCallback != null) {
 			// calls callback
-			customCallback.onCustom(getChart(), model);
+			customCallback.onCustom(getChart(), new TooltipModel(model));
 		}
 	}
 
@@ -924,11 +924,11 @@ public final class Tooltips extends ChartContainer {
 	 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the
 	 *         second.
 	 */
-	protected int onItemSort(TooltipItem o1, TooltipItem o2) {
+	protected int onItemSort(GenericJavaScriptObject o1, GenericJavaScriptObject o2) {
 		// checks if callback is consistent
 		if (itemSortHandler != null) {
 			// calls callback
-			return itemSortHandler.onItemSort(getChart(), o1, o2);
+			return itemSortHandler.onItemSort(getChart(), new TooltipItem(o1), new TooltipItem(o2));
 		}
 		// default is 0
 		return 0;
@@ -940,11 +940,11 @@ public final class Tooltips extends ChartContainer {
 	 * @param item element of tooltip
 	 * @return <code>false</code> to remove the item from the container, otherwise <code>true</code>.
 	 */
-	protected boolean onFilter(TooltipItem item) {
+	protected boolean onFilter(GenericJavaScriptObject item) {
 		// checks if callback is consistent
 		if (filterHandler != null) {
 			// calls callback
-			return filterHandler.onFilter(getChart(), item);
+			return filterHandler.onFilter(getChart(), new TooltipItem(item));
 		}
 		// default is true
 		return true;
@@ -959,7 +959,7 @@ public final class Tooltips extends ChartContainer {
     private native void registerNativeCustomHandlers(GenericJavaScriptObject options)/*-{
 		var self = this;
 	    options.custom = function(tooltipModel){
-        	self.@org.pepstock.charba.client.options.Tooltips::onCustom(Lorg/pepstock/charba/client/items/TooltipModel;)(tooltipModel);
+        	self.@org.pepstock.charba.client.options.Tooltips::onCustom(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(tooltipModel);
 	    }
 	}-*/;
     
@@ -972,7 +972,7 @@ public final class Tooltips extends ChartContainer {
     private native void registerNativeItemSortHandlers(GenericJavaScriptObject options)/*-{
 		var self = this;
 	    options.itemSort = function(item1, item2, data){
-        	return self.@org.pepstock.charba.client.options.Tooltips::onItemSort(Lorg/pepstock/charba/client/items/TooltipItem;Lorg/pepstock/charba/client/items/TooltipItem;)(item1, item2);
+        	return self.@org.pepstock.charba.client.options.Tooltips::onItemSort(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(item1, item2);
 	    }
 	}-*/;
 
@@ -985,7 +985,7 @@ public final class Tooltips extends ChartContainer {
     private native void registerNativeFilterHandlers(GenericJavaScriptObject options)/*-{
 		var self = this;
 	    options.filter = function(item){
-        	return self.@org.pepstock.charba.client.options.Tooltips::onFilter(Lorg/pepstock/charba/client/items/TooltipItem;)(item);
+        	return self.@org.pepstock.charba.client.options.Tooltips::onFilter(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(item);
 	    }
 	}-*/;
 

@@ -345,10 +345,10 @@ public abstract class Axis extends ChartContainer {
 	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
-	protected void onBeforeUpdate(AxisItem item) {
+	protected void onBeforeUpdate(GenericJavaScriptObject item) {
 		// checks if callback and chart are consistent
 		if (updateCallback != null && chart != null) {
-			updateCallback.onBeforeUpdate(chart, item);
+			updateCallback.onBeforeUpdate(chart, new AxisItem(item));
 		}
 	}
 
@@ -358,10 +358,10 @@ public abstract class Axis extends ChartContainer {
 	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
-	protected void onAfterUpdate(AxisItem item) {
+	protected void onAfterUpdate(GenericJavaScriptObject item) {
 		// checks if callback and chart are consistent
 		if (updateCallback != null && chart != null) {
-			updateCallback.onAfterUpdate(chart, item);
+			updateCallback.onAfterUpdate(chart, new AxisItem(item));
 		}
 	}
 
@@ -371,10 +371,10 @@ public abstract class Axis extends ChartContainer {
 	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
-	protected void onBeforeSetDimensions(AxisItem item) {
+	protected void onBeforeSetDimensions(GenericJavaScriptObject item) {
 		// checks if callback and chart are consistent
 		if (dimensionsCallback != null && chart != null) {
-			dimensionsCallback.onBeforeSetDimensions(chart, item);
+			dimensionsCallback.onBeforeSetDimensions(chart, new AxisItem(item));
 		}
 	}
 
@@ -384,10 +384,10 @@ public abstract class Axis extends ChartContainer {
 	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
-	protected void onAfterSetDimensions(AxisItem item) {
+	protected void onAfterSetDimensions(GenericJavaScriptObject item) {
 		// checks if callback and chart are consistent
 		if (dimensionsCallback != null && chart != null) {
-			dimensionsCallback.onAfterSetDimensions(chart, item);
+			dimensionsCallback.onAfterSetDimensions(chart, new AxisItem(item));
 		}
 	}
 
@@ -397,10 +397,10 @@ public abstract class Axis extends ChartContainer {
 	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
-	protected void onBeforeDataLimits(AxisItem item) {
+	protected void onBeforeDataLimits(GenericJavaScriptObject item) {
 		// checks if callback and chart are consistent
 		if (dataLimitsCallback != null && chart != null) {
-			dataLimitsCallback.onBeforeDataLimits(chart, item);
+			dataLimitsCallback.onBeforeDataLimits(chart, new AxisItem(item));
 			;
 		}
 	}
@@ -411,10 +411,10 @@ public abstract class Axis extends ChartContainer {
 	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
-	protected void onAfterDataLimits(AxisItem item) {
+	protected void onAfterDataLimits(GenericJavaScriptObject item) {
 		// checks if callback and chart are consistent
 		if (dataLimitsCallback != null && chart != null) {
-			dataLimitsCallback.onAfterDataLimits(chart, item);
+			dataLimitsCallback.onAfterDataLimits(chart, new AxisItem(item));
 			;
 		}
 	}
@@ -425,10 +425,10 @@ public abstract class Axis extends ChartContainer {
 	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
-	protected void onBeforeBuildTicks(AxisItem item) {
+	protected void onBeforeBuildTicks(GenericJavaScriptObject item) {
 		// checks if callback and chart are consistent
 		if (buildTicksCallback != null && chart != null) {
-			buildTicksCallback.onBeforeBuildTicks(chart, item);
+			buildTicksCallback.onBeforeBuildTicks(chart, new AxisItem(item));
 		}
 	}
 
@@ -438,10 +438,10 @@ public abstract class Axis extends ChartContainer {
 	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
-	protected void onAfterBuildTicks(AxisItem item) {
+	protected void onAfterBuildTicks(GenericJavaScriptObject item) {
 		// checks if callback and chart are consistent
 		if (buildTicksCallback != null && chart != null) {
-			buildTicksCallback.onAfterBuildTicks(chart, item);
+			buildTicksCallback.onAfterBuildTicks(chart, new AxisItem(item));
 		}
 	}
 
@@ -451,10 +451,10 @@ public abstract class Axis extends ChartContainer {
 	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
-	protected void onBeforeTickToLabelConversion(AxisItem item) {
+	protected void onBeforeTickToLabelConversion(GenericJavaScriptObject item) {
 		// checks if callback and chart are consistent
 		if (tickToLabelConversionCallback != null && chart != null) {
-			tickToLabelConversionCallback.onBeforeTickToLabelConversion(chart, item);
+			tickToLabelConversionCallback.onBeforeTickToLabelConversion(chart, new AxisItem(item));
 		}
 	}
 
@@ -464,10 +464,10 @@ public abstract class Axis extends ChartContainer {
 	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
-	protected void onAfterTickToLabelConversion(AxisItem item) {
+	protected void onAfterTickToLabelConversion(GenericJavaScriptObject item) {
 		// checks if callback and chart are consistent
 		if (tickToLabelConversionCallback != null && chart != null) {
-			tickToLabelConversionCallback.onAfterTickToLabelConversion(chart, item);
+			tickToLabelConversionCallback.onAfterTickToLabelConversion(chart, new AxisItem(item));
 		}
 	}
 
@@ -477,10 +477,10 @@ public abstract class Axis extends ChartContainer {
 	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
-	protected void onBeforeCalculateTickRotation(AxisItem item) {
+	protected void onBeforeCalculateTickRotation(GenericJavaScriptObject item) {
 		// checks if callback and chart are consistent
 		if (calculateTickRotationCallback != null && chart != null) {
-			calculateTickRotationCallback.onBeforeCalculateTickRotation(chart, item);
+			calculateTickRotationCallback.onBeforeCalculateTickRotation(chart, new AxisItem(item));
 		}
 	}
 
@@ -490,10 +490,10 @@ public abstract class Axis extends ChartContainer {
 	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
-	protected void onAfterCalculateTickRotation(AxisItem item) {
+	protected void onAfterCalculateTickRotation(GenericJavaScriptObject item) {
 		// checks if callback and chart are consistent
 		if (calculateTickRotationCallback != null && chart != null) {
-			calculateTickRotationCallback.onAfterCalculateTickRotation(chart, item);
+			calculateTickRotationCallback.onAfterCalculateTickRotation(chart, new AxisItem(item));
 		}
 	}
 
@@ -503,10 +503,10 @@ public abstract class Axis extends ChartContainer {
 	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
-	protected void onBeforeFit(AxisItem item) {
+	protected void onBeforeFit(GenericJavaScriptObject item) {
 		// checks if callback and chart are consistent
 		if (fitCallback != null && chart != null) {
-			fitCallback.onBeforeFit(chart, item);
+			fitCallback.onBeforeFit(chart, new AxisItem(item));
 		}
 	}
 
@@ -516,10 +516,10 @@ public abstract class Axis extends ChartContainer {
 	 * @param item axis item got from java script
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
-	protected void onAfterFit(AxisItem item) {
+	protected void onAfterFit(GenericJavaScriptObject item) {
 		// checks if callback and chart are consistent
 		if (fitCallback != null && chart != null) {
-			fitCallback.onAfterFit(chart, item);
+			fitCallback.onAfterFit(chart, new AxisItem(item));
 		}
 	}
 
@@ -532,10 +532,10 @@ public abstract class Axis extends ChartContainer {
 	private native void registerNativeAxisUpdateHandler(GenericJavaScriptObject options)/*-{
 		var self = this;
 		options.beforeUpdate = function(axis){
-			self.@org.pepstock.charba.client.options.scales.Axis::onBeforeUpdate(Lorg/pepstock/charba/client/items/AxisItem;)(axis);
+			self.@org.pepstock.charba.client.options.scales.Axis::onBeforeUpdate(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(axis);
 		}
 		options.afterUpdate = function(axis){
-			self.@org.pepstock.charba.client.options.scales.Axis::onAfterUpdate(Lorg/pepstock/charba/client/items/AxisItem;)(axis);
+			self.@org.pepstock.charba.client.options.scales.Axis::onAfterUpdate(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(axis);
 		}
 	}-*/;
 
@@ -548,10 +548,10 @@ public abstract class Axis extends ChartContainer {
 	private native void registerNativeAxisDimensionsHandler(GenericJavaScriptObject options)/*-{
 		var self = this;
 		options.beforeSetDimensions = function(axis){
-			self.@org.pepstock.charba.client.options.scales.Axis::onBeforeSetDimensions(Lorg/pepstock/charba/client/items/AxisItem;)(axis);
+			self.@org.pepstock.charba.client.options.scales.Axis::onBeforeSetDimensions(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(axis);
 		}
 		options.afterSetDimensions = function(axis){
-			self.@org.pepstock.charba.client.options.scales.Axis::onAfterSetDimensions(Lorg/pepstock/charba/client/items/AxisItem;)(axis);
+			self.@org.pepstock.charba.client.options.scales.Axis::onAfterSetDimensions(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(axis);
 		}
 	}-*/;
 
@@ -564,10 +564,10 @@ public abstract class Axis extends ChartContainer {
 	private native void registerNativeAxisDataLimitsHandler(GenericJavaScriptObject options)/*-{
 		var self = this;
 		options.beforeDataLimits = function(axis){
-			self.@org.pepstock.charba.client.options.scales.Axis::onBeforeDataLimits(Lorg/pepstock/charba/client/items/AxisItem;)(axis);
+			self.@org.pepstock.charba.client.options.scales.Axis::onBeforeDataLimits(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(axis);
 		}
 		options.afterDataLimits = function(axis){
-			self.@org.pepstock.charba.client.options.scales.Axis::onAfterDataLimits(Lorg/pepstock/charba/client/items/AxisItem;)(axis);
+			self.@org.pepstock.charba.client.options.scales.Axis::onAfterDataLimits(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(axis);
 		}
 	}-*/;
 
@@ -580,10 +580,10 @@ public abstract class Axis extends ChartContainer {
 	private native void registerNativeAxisBuildTicksHandler(GenericJavaScriptObject options)/*-{
 		var self = this;
 		options.beforeBuildTicks = function(axis){
-			self.@org.pepstock.charba.client.options.scales.Axis::onBeforeBuildTicks(Lorg/pepstock/charba/client/items/AxisItem;)(axis);
+			self.@org.pepstock.charba.client.options.scales.Axis::onBeforeBuildTicks(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(axis);
 		}
 		options.afterBuildTicks = function(axis){
-			self.@org.pepstock.charba.client.options.scales.Axis::onAfterBuildTicks(Lorg/pepstock/charba/client/items/AxisItem;)(axis);
+			self.@org.pepstock.charba.client.options.scales.Axis::onAfterBuildTicks(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(axis);
 		}
 	}-*/;
 
@@ -596,10 +596,10 @@ public abstract class Axis extends ChartContainer {
 	private native void registerNativeAxisTickToLabelConversionHandler(GenericJavaScriptObject options)/*-{
 		var self = this;
 		options.beforeTickToLabelConversion = function(axis){
-			self.@org.pepstock.charba.client.options.scales.Axis::onBeforeTickToLabelConversion(Lorg/pepstock/charba/client/items/AxisItem;)(axis);
+			self.@org.pepstock.charba.client.options.scales.Axis::onBeforeTickToLabelConversion(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(axis);
 		}
 		options.afterTickToLabelConversion = function(axis){
-			self.@org.pepstock.charba.client.options.scales.Axis::onAfterTickToLabelConversion(Lorg/pepstock/charba/client/items/AxisItem;)(axis);
+			self.@org.pepstock.charba.client.options.scales.Axis::onAfterTickToLabelConversion(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(axis);
 		}
 	}-*/;
 
@@ -612,10 +612,10 @@ public abstract class Axis extends ChartContainer {
 	private native void registerNativeAxisCalculateTickRotationHandler(GenericJavaScriptObject options)/*-{
 		var self = this;
 		options.beforeCalculateTickRotation = function(axis){
-			self.@org.pepstock.charba.client.options.scales.Axis::onBeforeCalculateTickRotation(Lorg/pepstock/charba/client/items/AxisItem;)(axis);
+			self.@org.pepstock.charba.client.options.scales.Axis::onBeforeCalculateTickRotation(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(axis);
 		}
 		options.afterCalculateTickRotation = function(axis){
-			self.@org.pepstock.charba.client.options.scales.Axis::onAfterCalculateTickRotation(Lorg/pepstock/charba/client/items/AxisItem;)(axis);
+			self.@org.pepstock.charba.client.options.scales.Axis::onAfterCalculateTickRotation(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(axis);
 		}
 	}-*/;
 
@@ -628,10 +628,10 @@ public abstract class Axis extends ChartContainer {
 	private native void registerNativeAxisFitHandler(GenericJavaScriptObject options)/*-{
 		var self = this;
 		options.beforeFit = function(axis){
-			self.@org.pepstock.charba.client.options.scales.Axis::onBeforeFit(Lorg/pepstock/charba/client/items/AxisItem;)(axis);
+			self.@org.pepstock.charba.client.options.scales.Axis::onBeforeFit(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(axis);
 		}
 		options.afterFit = function(axis){
-			self.@org.pepstock.charba.client.options.scales.Axis::onBeforeFit(Lorg/pepstock/charba/client/items/AxisItem;)(axis);
+			self.@org.pepstock.charba.client.options.scales.Axis::onBeforeFit(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(axis);
 		}
 	}-*/;
 

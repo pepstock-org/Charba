@@ -15,9 +15,11 @@
 */
 package org.pepstock.charba.client.items;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -28,7 +30,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TooltipItemArray extends GenericJavaScriptObject {
+public final class TooltipItemArray extends JavaScriptObjectContainer {
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -38,11 +40,8 @@ public final class TooltipItemArray extends GenericJavaScriptObject {
 		items
 	}
 
-	/**
-	 * Needed for GWt injection
-	 */
-	protected TooltipItemArray() {
-		// do nothing
+	public TooltipItemArray(GenericJavaScriptObject javaScriptObject) {
+		super(javaScriptObject);
 	}
 
 	/**
@@ -52,6 +51,13 @@ public final class TooltipItemArray extends GenericJavaScriptObject {
 	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
 	public final List<TooltipItem> getItems() {
-		return getObjectArray(Property.items.name());
+		List<TooltipItem> result = new LinkedList<>();
+		if (has(Property.items)) {
+			for (GenericJavaScriptObject object : getObjectArray(Property.items)) {
+				TooltipItem item = new TooltipItem(object);
+				result.add(item);
+			}
+		}
+		return result;
 	}
 }

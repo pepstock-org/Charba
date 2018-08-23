@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.items;
 
+import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Easing;
 
@@ -25,8 +27,8 @@ import org.pepstock.charba.client.enums.Easing;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AnimationItem extends BaseItem {
-
+public final class AnimationItem extends JavaScriptObjectContainer {
+	
 	/**
 	 * Name of fields of JavaScript object.
 	 */
@@ -37,11 +39,8 @@ public final class AnimationItem extends BaseItem {
 		easing
 	}
 
-	/**
-	 * Needed for GWt injection
-	 */
-	protected AnimationItem() {
-		// do nothing
+	public AnimationItem(GenericJavaScriptObject javaScriptObject) {
+		super(javaScriptObject);
 	}
 
 	/**
@@ -49,8 +48,8 @@ public final class AnimationItem extends BaseItem {
 	 * 
 	 * @return the current Animation frame number.
 	 */
-	public final double getCurrentStep() {
-		return getDouble(Property.currentStep.name());
+	public double getCurrentStep() {
+		return getValue(Property.currentStep, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -58,8 +57,8 @@ public final class AnimationItem extends BaseItem {
 	 * 
 	 * @return the total number of animation frames.
 	 */
-	public final double getNumSteps() {
-		return getDouble(Property.numSteps.name());
+	public double getNumSteps() {
+		return getValue(Property.numSteps, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -68,7 +67,7 @@ public final class AnimationItem extends BaseItem {
 	 * @return the animation easing to use.
 	 * @see org.pepstock.charba.client.enums.Easing
 	 */
-	public final Easing getEasing() {
+	public Easing getEasing() {
 		return getValue(Property.easing, Easing.class, Easing.easeOutQuart);
 	}
 

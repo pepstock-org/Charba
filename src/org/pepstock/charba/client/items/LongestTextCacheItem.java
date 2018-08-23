@@ -15,60 +15,52 @@
 */
 package org.pepstock.charba.client.items;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 
-/**
- * This item contains the tick info item.<br>
- * It has been created to change the tick marks.
- * 
- * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.callbacks.TickCallback
- */
-public final class TickItem extends JavaScriptObjectContainer {
+public class LongestTextCacheItem extends BaseBoxNodeItem {
 
 	/**
 	 * Name of fields of JavaScript object.
 	 */
 	private enum Property implements Key
 	{
-		value,
-		index,
-		values
+		data,
+		garbageCollect,
+		font
 	}
 
-	public TickItem(GenericJavaScriptObject javaScriptObject) {
+	LongestTextCacheItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * Returns the value of the tick.
+	 * Returns the font of scale
 	 * 
-	 * @return the value of the tick.
+	 * @return the font of scale
 	 */
-	public final double getValue() {
-		return getValue(Property.value, UndefinedValues.DOUBLE);
+	public final String getFont() {
+		return getValue(Property.font, UndefinedValues.STRING);
 	}
-
-	/**
-	 * Returns the index of the tick.
-	 * 
-	 * @return the index of the tick.
-	 */
-	public final int getIndex() {
-		return getValue(Property.index, UndefinedValues.INTEGER);
+	
+	public final List<String> getGarbageCollect() {
+		return getStringArray(Property.garbageCollect);
 	}
-
-	/**
-	 * Returns the complete list of ticks.
-	 * 
-	 * @return the complete list of ticks.
-	 */
-	public final List<Double> getValues() {
-		return getDoubleArray(Property.values);
+	
+	public final Map<String, Integer> getData() {
+		final Map<String, Integer> result = new HashMap<>();
+		List<Key> keys =  keys();
+		if (keys != null && !keys.isEmpty()) {
+			for (Key key : keys) {
+				result.put(key.name(), getValue(key, UndefinedValues.INTEGER));
+			}
+		}
+		return result;
 	}
 
 }

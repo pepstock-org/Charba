@@ -150,9 +150,10 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	 * @param items tooltips items
 	 * @return array of strings for body. Default is an empty array.
 	 */
-	protected String[] onBeforeBody(TooltipItemArray items){
+	protected String[] onBeforeBody(GenericJavaScriptObject object){
 		// checks if callbacks is set
 		if (bodyCallback != null){
+			TooltipItemArray items = new TooltipItemArray(object);
 			return bodyCallback.onBeforeBody(tooltips.getChart(), items.getItems());
 		}
 		return new String[0];
@@ -163,9 +164,10 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	 * @param items tooltips items
 	 * @return array of strings for body. Default is an empty array.
 	 */
-	protected String[] onAfterBody(TooltipItemArray items){
+	protected String[] onAfterBody(GenericJavaScriptObject object){
 		// checks if callbacks is set
 		if (bodyCallback != null){
+			TooltipItemArray items = new TooltipItemArray(object);
 			return bodyCallback.onAfterBody(tooltips.getChart(), items.getItems());
 		}
 		// empty array
@@ -177,9 +179,10 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	 * @param items tooltips items
 	 * @return array of strings for body. Default is an empty array.
 	 */
-	protected String[] onBeforeTitle(TooltipItemArray items){
+	protected String[] onBeforeTitle(GenericJavaScriptObject object){
 		// checks if callbacks is set
 		if (titleCallback != null){
+			TooltipItemArray items = new TooltipItemArray(object);
 			return titleCallback.onBeforeTitle(tooltips.getChart(), items.getItems());
 		}
 		// empty array
@@ -191,9 +194,10 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	 * @param items tooltips items
 	 * @return array of strings for body. Default is an empty array.
 	 */
-	protected String[] onTitle(TooltipItemArray items){
+	protected String[] onTitle(GenericJavaScriptObject object){
 		// checks if callbacks is set
 		if (titleCallback != null){
+			TooltipItemArray items = new TooltipItemArray(object);
 			return titleCallback.onTitle(tooltips.getChart(), items.getItems());
 		}
 		// empty array
@@ -205,9 +209,10 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	 * @param items tooltips items
 	 * @return array of strings for body. Default is an empty array.
 	 */
-	protected String[] onAfterTitle(TooltipItemArray items){
+	protected String[] onAfterTitle(GenericJavaScriptObject object){
 		// checks if callbacks is set
 		if (titleCallback != null){
+			TooltipItemArray items = new TooltipItemArray(object);
 			return titleCallback.onAfterTitle(tooltips.getChart(), items.getItems());
 		}
 		// empty array
@@ -219,9 +224,10 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	 * @param items tooltips items
 	 * @return array of strings for body. Default is an empty array.
 	 */
-	protected String[] onBeforeFooter(TooltipItemArray items){
+	protected String[] onBeforeFooter(GenericJavaScriptObject object){
 		// checks if callbacks is set
 		if (footerCallback != null){
+			TooltipItemArray items = new TooltipItemArray(object);
 			return footerCallback.onBeforeFooter(tooltips.getChart(), items.getItems());
 		}
 		// empty array
@@ -233,9 +239,10 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	 * @param items tooltips items
 	 * @return array of strings for body. Default is an empty array.
 	 */
-	protected String[] onFooter(TooltipItemArray items){
+	protected String[] onFooter(GenericJavaScriptObject object){
 		// checks if callbacks is set
 		if (footerCallback != null){
+			TooltipItemArray items = new TooltipItemArray(object);
 			return footerCallback.onFooter(tooltips.getChart(), items.getItems());
 		}
 		// empty array
@@ -247,9 +254,10 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	 * @param items tooltips items
 	 * @return array of strings for body. Default is an empty array.
 	 */
-	protected String[] onAfterFooter(TooltipItemArray items){
+	protected String[] onAfterFooter(GenericJavaScriptObject object){
 		// checks if callbacks is set
 		if (footerCallback != null){
+			TooltipItemArray items = new TooltipItemArray(object);
 			return footerCallback.onAfterFooter(tooltips.getChart(), items.getItems());
 		}
 		// empty array
@@ -261,9 +269,10 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	 * @param item tooltips item
 	 * @return string for label. Default is an empty string.
 	 */
-	protected String onBeforeLabel(TooltipItem item){
+	protected String onBeforeLabel(GenericJavaScriptObject object){
 		// checks if callbacks is set
 		if (labelCallback != null){
+			TooltipItem item = new TooltipItem(object);
 			return labelCallback.onBeforeLabel(tooltips.getChart(), item);
 		}
 		// empty string
@@ -275,9 +284,10 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	 * @param item tooltips item
 	 * @return string for label. Default is an empty string.
 	 */
-	protected String onLabel(TooltipItem item){
+	protected String onLabel(GenericJavaScriptObject object){
 		// checks if callbacks is set
 		if (labelCallback != null){
+			TooltipItem item = new TooltipItem(object);
 			return labelCallback.onLabel(tooltips.getChart(), item);
 		}
 		// empty string
@@ -289,9 +299,10 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	 * @param item tooltips item
 	 * @return string for label color.
 	 */
-	protected String onLabelTextColor(TooltipItem item){
+	protected String onLabelTextColor(GenericJavaScriptObject object){
 		// checks if callbacks is set
 		if (labelCallback != null){
+			TooltipItem item = new TooltipItem(object);
 			return labelCallback.onLabelTextColor(tooltips.getChart(), item);
 		}
 		// empty string
@@ -304,9 +315,10 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	 * @return label color object.
 	 * @see org.pepstock.charba.client.callbacks.TooltipLabelColor
 	 */
-	protected GenericJavaScriptObject onLabelColor(TooltipItem item){
+	protected GenericJavaScriptObject onLabelColor(GenericJavaScriptObject object){
 		// checks if callbacks is set
 		if (labelCallback != null){
+			TooltipItem item = new TooltipItem(object);
 			TooltipLabelColor result = labelCallback.onLabelColor(tooltips.getChart(), item);
 			if (result != null){
 				return result.getObject();
@@ -321,9 +333,10 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	 * @param item tooltips item
 	 * @return string for label.
 	 */
-	protected String onAfterLabel(TooltipItem item){
+	protected String onAfterLabel(GenericJavaScriptObject object){
 		// checks if callbacks is set
 		if (labelCallback != null){
+			TooltipItem item = new TooltipItem(object);
 			return labelCallback.onAfterLabel(tooltips.getChart(), item);
 		}
 		// empty string
@@ -341,17 +354,17 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	    options.title = function(items, data){
 	    	var myItems = new Object();
 	    	myItems.items = items;
-        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onTitle(Lorg/pepstock/charba/client/items/TooltipItemArray;)(myItems);
+        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onTitle(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(myItems);
 	    }
 	    options.beforeTitle = function(items, data){
 	    	var myItems = new Object();
 	    	myItems.items = items;
-        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onBeforeTitle(Lorg/pepstock/charba/client/items/TooltipItemArray;)(myItems);
+        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onBeforeTitle(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(myItems);
 	    }
 	    options.afterTitle = function(items, data){
 	    	var myItems = new Object();
 	    	myItems.items = items;
-        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onAfterTitle(Lorg/pepstock/charba/client/items/TooltipItemArray;)(myItems);
+        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onAfterTitle(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(myItems);
 	    }
 	}-*/;
 
@@ -366,12 +379,12 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	    options.beforeBody = function(items, data){
 	    	var myItems = new Object();
 	    	myItems.items = items;
-        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onBeforeBody(Lorg/pepstock/charba/client/items/TooltipItemArray;)(myItems);
+        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onBeforeBody(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(myItems);
 	    }
 	    options.afterBody = function(items, data){
 	    	var myItems = new Object();
 	    	myItems.items = items;
-        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onAfterBody(Lorg/pepstock/charba/client/items/TooltipItemArray;)(myItems);
+        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onAfterBody(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(myItems);
 	    }
 	}-*/;
 
@@ -386,17 +399,17 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	    options.footer = function(items, data){
 	    	var myItems = new Object();
 	    	myItems.items = items;
-        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onFooter(Lorg/pepstock/charba/client/items/TooltipItemArray;)(myItems);
+        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onFooter(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(myItems);
 	    }
 	    options.beforeFooter = function(items, data){
 	    	var myItems = new Object();
 	    	myItems.items = items;
-        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onBeforeFooter(Lorg/pepstock/charba/client/items/TooltipItemArray;)(myItems);
+        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onBeforeFooter(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(myItems);
 	    }
 	    options.afterFooter = function(items, data){
 	    	var myItems = new Object();
 	    	myItems.items = items;
-        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onAfterFooter(Lorg/pepstock/charba/client/items/TooltipItemArray;)(myItems);
+        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onAfterFooter(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(myItems);
 	    }
 	}-*/;
     
@@ -410,19 +423,19 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
     private native void registerNativeLabelHandlers(GenericJavaScriptObject options)/*-{
 		var self = this;
 	    options.label = function(item, data){
-        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onLabel(Lorg/pepstock/charba/client/items/TooltipItem;)(item);
+        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onLabel(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(item);
 	    }
 	    options.beforeLabel = function(item, data){
-        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onBeforeLabel(Lorg/pepstock/charba/client/items/TooltipItem;)(item);
+        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onBeforeLabel(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(item);
 	    }
 	    options.afterLabel = function(item, chart){
-        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onAfterLabel(Lorg/pepstock/charba/client/items/TooltipItem;)(item);
+        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onAfterLabel(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(item);
 	    }
 	    options.labelColor = function(item, chart){
-        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onLabelColor(Lorg/pepstock/charba/client/items/TooltipItem;)(item);
+        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onLabelColor(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(item);
 	    }
 	    options.labelTextColor = function(item, data){
-        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onLabelTextColor(Lorg/pepstock/charba/client/items/TooltipItem;)(item);
+        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onLabelTextColor(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(item);
 	    }
 	}-*/;
 

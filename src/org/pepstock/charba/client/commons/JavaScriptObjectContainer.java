@@ -15,7 +15,9 @@
 */
 package org.pepstock.charba.client.commons;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsDate;
@@ -86,7 +88,22 @@ public class JavaScriptObjectContainer {
 		}
 		return true;
 	}
+	
+	//FIXME
+	protected List<Key> keys() {
+		List<Key> keys = new ArrayList<>();
+		for (String key : javaScriptObject.keys()) {
+			keys.add(new StandardKey(key));
+		}
+		return keys;
+	}
+	
 
+	//FIXME
+	protected JavaScriptFieldType type(Key key) {
+		return JavaScriptFieldType.getType(javaScriptObject.typeOf(key.name()), javaScriptObject.isArray(key.name()));
+	}
+	
 	/**
 	 * Removes an element (by key) from the embedded JavaScript object if exists.
 	 * @param key key of the property of JavaScript object.
@@ -726,6 +743,11 @@ public class JavaScriptObjectContainer {
         	// sets value
             setValue(key, container.getJsArray());
         }
+    }
+    
+    // FIXME
+    protected List<GenericJavaScriptObject> getObjectArray(Key key){
+    	return has(key) ? javaScriptObject.getObjectArray(key.name()) : new ArrayList<GenericJavaScriptObject>();
     }
 
 	/* (non-Javadoc)
