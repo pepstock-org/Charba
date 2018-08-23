@@ -33,6 +33,10 @@ public class ChartItem extends JavaScriptObjectContainer {
 	
 	private final ChartAreaItem chartArea;
 
+	private final TitleItem title;
+	
+	private final TooltipNodeItem tooltip;
+	
 	/**
 	 * Name of fields of JavaScript object.
 	 */
@@ -67,6 +71,8 @@ public class ChartItem extends JavaScriptObjectContainer {
 		legendNode = new LegendNodeItem((GenericJavaScriptObject)getValue(Property.legend));
 		scales = new ScalesItem((GenericJavaScriptObject)getValue(Property.scales));
 		chartArea = new ChartAreaItem((GenericJavaScriptObject)getValue(Property.chartArea));
+		title = new TitleItem((GenericJavaScriptObject)getValue(Property.titleBlock));
+		tooltip = new TooltipNodeItem((GenericJavaScriptObject)getValue(Property.titleBlock));
 	}
 	
 	// FIXME
@@ -87,16 +93,15 @@ public class ChartItem extends JavaScriptObjectContainer {
 		return chartArea;
 	}
 
-//	// FIXME
-//	public final JavaScriptObject getTitle(){
-//		return getJavaScriptObject(Property.titleBlock, UndefinedValues.);
-//	}
-//
-//	// FIXME
-//	public final JavaScriptObject getTooltip(){
-//		return getJavaScriptObject(Property.tooltip, UndefinedValues.);
-//	}
-//
+	// FIXME
+	public final TitleItem getTitle(){
+		return title;
+	}
+
+	// FIXME
+	public final TooltipNodeItem getTooltip(){
+		return tooltip;
+	}
 
 	public final int getId(){
 		return getValue(Property.id, UndefinedValues.INTEGER);

@@ -15,17 +15,9 @@
 */
 package org.pepstock.charba.client.items;
 
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptFieldType;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
@@ -36,33 +28,10 @@ import org.pepstock.charba.client.enums.PointStyle;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LegendItem extends JavaScriptObjectContainer {
+public final class LegendLabelItem extends LegendItem {
 
-	/**
-	 * Name of fields of JavaScript object.
-	 */
-	private enum Property implements Key
-	{
-		datasetIndex, 
-		index,
-		text,
-		fillStyle,
-		hidden,
-		lineCap,
-		lineDash,
-		lineDashOffset,
-		lineJoin,
-		lineWidth,
-		strokeStyle,
-		pointStyle
-	}
-
-	protected LegendItem() {
+	public LegendLabelItem() {
 		super();
-	}
-
-	public LegendItem(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
 	}
 
 	/**
@@ -71,8 +40,8 @@ public class LegendItem extends JavaScriptObjectContainer {
 	 * @return the dataset index of the chart
 	 * @see org.pepstock.charba.client.data.Data#getDatasets()
 	 */
-	public final int getDatasetIndex() {
-		return getValue(Property.datasetIndex, UndefinedValues.INTEGER);
+	public void setDatasetIndex(int datasetIndex) {
+		//return getValue(Property.datasetIndex, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -81,8 +50,8 @@ public class LegendItem extends JavaScriptObjectContainer {
 	 * @return the dataset index of the chart (for POLAR and PIE charts)
 	 * @see org.pepstock.charba.client.data.Data#getDatasets()
 	 */
-	public final int getIndex() {
-		return getValue(Property.index, UndefinedValues.INTEGER);
+	public void setIndex(int index) {
+		//return getValue(Property.index, UndefinedValues.INTEGER);
 	}
 	
 	/**
@@ -90,8 +59,8 @@ public class LegendItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return the label that will be displayed
 	 */
-	public final String getText() {
-		return getValue(Property.text, UndefinedValues.STRING);
+	public void setText(String text) {
+//		return getValue(Property.text, UndefinedValues.STRING);
 	}
 
 	/**
@@ -99,8 +68,8 @@ public class LegendItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return the fill style of the legend box
 	 */
-	public final IsColor getFillStyle() {
-		return ColorBuilder.parse(getValue(Property.fillStyle, Defaults.getGlobal().getDefaultColorAsString()));
+	public void setFillStyle(IsColor color) {
+		//return ColorBuilder.parse(getValue(Property.fillStyle, Defaults.getGlobal().getDefaultColorAsString()));
 	}
 
 	/**
@@ -108,8 +77,8 @@ public class LegendItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return <code>true</code> if this item represents a hidden dataset. Label will be rendered with a strike-through effect
 	 */
-	public final boolean isHidden() {
-		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
+	public void setHidden(boolean hidden) {
+//		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -119,8 +88,8 @@ public class LegendItem extends JavaScriptObjectContainer {
 	 * @return how the end points of every box border are drawn.
 	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
-	public final CapStyle getLineCap() {
-		return getValue(Property.lineCap, CapStyle.class, CapStyle.butt);
+	public void setLineCap(CapStyle style) {
+//		return getValue(Property.lineCap, CapStyle.class, CapStyle.butt);
 	}
 
 	/**
@@ -130,8 +99,8 @@ public class LegendItem extends JavaScriptObjectContainer {
 	 * @return the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths
 	 *         of lines and gaps which describe the pattern.
 	 */
-	public final List<Integer> getLineDash() {
-		return getIntegerArray(Property.lineDash);
+	public void setLineDash(List<Integer> lineDash) {
+//		return getIntegerArray(Property.lineDash);
 	}
 
 	/**
@@ -139,8 +108,8 @@ public class LegendItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return the box border dash pattern offset or "phase".
 	 */
-	public final int getLineDashOffset() {
-		return getValue(Property.lineDashOffset, UndefinedValues.INTEGER);
+	public void setLineDashOffset(int lineDashOffset) {
+//		return getValue(Property.lineDashOffset, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -152,8 +121,8 @@ public class LegendItem extends JavaScriptObjectContainer {
 	 * @return There are three possible values for this property: round, bevel and miter.
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
-	public final JoinStyle getLineJoin() {
-		return getValue(Property.lineJoin, JoinStyle.class, JoinStyle.miter);
+	public void setLineJoin(JoinStyle style) {
+//		return getValue(Property.lineJoin, JoinStyle.class, JoinStyle.miter);
 	}
 
 	// ARRAYS
@@ -162,12 +131,13 @@ public class LegendItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return the width of box border in pixels.
 	 */
-	public final List<Integer> getLineWidth() {
-		if (JavaScriptFieldType.Array.equals(type(Property.lineWidth))) {
-			return getIntegerArray(Property.lineWidth);
-		} else {
-			return Arrays.asList(getValue(Property.lineWidth, UndefinedValues.INTEGER));
-		}
+	//FIXME
+	public void setLineWidth(int lineWidths) {
+//		if (JavaScriptFieldType.Array.equals(type(Property.lineWidth))) {
+//			return getIntegerArray(Property.lineWidth);
+//		} else {
+//			return Arrays.asList(getValue(Property.lineWidth, UndefinedValues.INTEGER));
+//		}
 	}
 
 	/**
@@ -175,17 +145,17 @@ public class LegendItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return the stroke style of the legend box
 	 */
-	public final List<IsColor> getStrokeStyle() {
-		final List<IsColor> result = new LinkedList<>();
-		if (JavaScriptFieldType.Array.equals(type(Property.strokeStyle))) {
-			List<String> values = getStringArray(Property.strokeStyle);
-			for (String value : values) {
-				result.add(ColorBuilder.parse(value));
-			}
-		} else {
-			result.add(ColorBuilder.parse(getValue(Property.strokeStyle, Defaults.getGlobal().getDefaultColorAsString())));
-		}
-		return result;
+	public void setStrokeStyle(IsColor color) {
+//		final List<IsColor> result = new LinkedList<>();
+//		if (JavaScriptFieldType.Array.equals(type(Property.strokeStyle))) {
+//			List<String> values = getStringArray(Property.strokeStyle);
+//			for (String value : values) {
+//				result.add(ColorBuilder.parse(value));
+//			}
+//		} else {
+//			result.add(ColorBuilder.parse(getValue(Property.strokeStyle, Defaults.getGlobal().getDefaultColorAsString())));
+//		}
+//		return result;
 	}
 
 	/**
@@ -194,18 +164,18 @@ public class LegendItem extends JavaScriptObjectContainer {
 	 * @return the style of the legend box
 	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
-	public final List<PointStyle> getPointStyle() {
-		//return getValue(Property.pointStyle, PointStyle.class, PointStyle.circle);
-		final List<PointStyle> result = new LinkedList<>();
-		if (JavaScriptFieldType.Array.equals(type(Property.pointStyle))) {
-			List<String> values = getStringArray(Property.pointStyle);
-			for (String value : values) {
-				result.add(PointStyle.valueOf(value));
-			}
-		} else {
-			result.add(getValue(Property.pointStyle, PointStyle.class, PointStyle.circle));
-		}
-		return result;
+	public void setPointStyle(PointStyle style) {
+//		//return getValue(Property.pointStyle, PointStyle.class, PointStyle.circle);
+//		final List<PointStyle> result = new LinkedList<>();
+//		if (JavaScriptFieldType.Array.equals(type(Property.pointStyle))) {
+//			List<String> values = getStringArray(Property.pointStyle);
+//			for (String value : values) {
+//				result.add(PointStyle.valueOf(value));
+//			}
+//		} else {
+//			result.add(getValue(Property.pointStyle, PointStyle.class, PointStyle.circle));
+//		}
+//		return result;
 
 	}
 	

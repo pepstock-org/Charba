@@ -45,7 +45,7 @@ public final class Merger {
 	 * @param source  Object to merge into <code>target</code>.
 	 */
 	public static void merge(JavaScriptObjectContainer target, JavaScriptObjectContainer source) {
-		Merger.merge(target.getJavaScriptObject(), source.getJavaScriptObject());
+		merge(target.getJavaScriptObject(), source.getJavaScriptObject());
 	}
 
 	/**
@@ -55,7 +55,7 @@ public final class Merger {
 	 * @param source  Object to merge into <code>target</code>.
 	 */
 	public static void merge(JavaScriptObject target, JavaScriptObjectContainer source) {
-		Merger.merge(target, source.getJavaScriptObject());
+		merge(target, source.getJavaScriptObject());
 	}
 
 	/**
@@ -65,7 +65,7 @@ public final class Merger {
 	 * @param source  Object to merge into <code>target</code>.
 	 */
 	public static void merge(JavaScriptObjectContainer target, JavaScriptObject source) {
-		Merger.merge(target.getJavaScriptObject(), source);
+		merge(target.getJavaScriptObject(), source);
 	}
 
 	/**
@@ -75,7 +75,7 @@ public final class Merger {
 	 * @param source  Object to merge into <code>target</code>.
 	 */
 	public static void merge(JavaScriptObject target, JavaScriptObject source) {
-		Merger.merge(target, source);
+		INSTANCE.mergeJavaScriptObject(target, source);
 	}
 
 	/**

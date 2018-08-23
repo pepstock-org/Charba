@@ -15,51 +15,41 @@
 */
 package org.pepstock.charba.client.items;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 
-public class LongestTextCacheItem extends BaseBoxNodeItem {
-
+/**
+ * This item contains the new size of the chart after it has been resized.<br>
+ * This object has been created ONLY when a resize event occurs.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @see org.pepstock.charba.client.events.ChartResizeEvent
+ * @see org.pepstock.charba.client.events.ChartResizeEventHandler
+ */
+public final class TooltipNodeItem extends JavaScriptObjectContainer {
+	
+	private final TooltipModel model;
+	
 	/**
 	 * Name of fields of JavaScript object.
 	 */
 	private enum Property implements Key
 	{
-		data,
-		garbageCollect,
-		font
+		_model
 	}
-
-	LongestTextCacheItem(GenericJavaScriptObject javaScriptObject) {
+	
+	TooltipNodeItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
+		model = new TooltipModel((GenericJavaScriptObject)getValue(Property._model));
+		
 	}
 
 	/**
-	 * Returns the font of scale
-	 * 
-	 * @return the font of scale
+	 * @return the model
 	 */
-	public final String getFont() {
-		return getValue(Property.font, UndefinedValues.STRING);
-	}
-	
-	public final List<String> getGarbageCollect() {
-		return getStringArray(Property.garbageCollect);
-	}
-	
-	public final Map<String, Integer> getData() {
-		final Map<String, Integer> result = new HashMap<>();
-		List<Key> keys =  keys();
-		if (!keys.isEmpty()) {
-			for (Key key : keys) {
-				result.put(key.name(), getValue(key, UndefinedValues.INTEGER));
-			}
-		}
-		return result;
+	public final TooltipModel getModel() {
+		return model;
 	}
 
 }

@@ -20,6 +20,7 @@ import org.pepstock.charba.client.callbacks.TooltipFooterCallback;
 import org.pepstock.charba.client.callbacks.TooltipLabelCallback;
 import org.pepstock.charba.client.callbacks.TooltipLabelColor;
 import org.pepstock.charba.client.callbacks.TooltipTitleCallback;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
@@ -303,7 +304,8 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 		// checks if callbacks is set
 		if (labelCallback != null){
 			TooltipItem item = new TooltipItem(object);
-			return labelCallback.onLabelTextColor(tooltips.getChart(), item);
+			IsColor color = labelCallback.onLabelTextColor(tooltips.getChart(), item); 
+			return color != null ? color.toRGBA() : null;
 		}
 		// empty string
 		return EMPTY;

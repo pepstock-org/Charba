@@ -163,7 +163,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 * @return the chart item.
 	 */
 	public final ChartItem getChartItem(){
-		return (chart != null) ? new ChartItem((GenericJavaScriptObject)chart) : null;
+		return new ChartItem((GenericJavaScriptObject)chart);
 	}
 
 	/**
@@ -497,6 +497,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	    var ctx = canvas.getContext("2d");
 	    chart = new $wnd.Chart(ctx, config);
 	    this.@org.pepstock.charba.client.AbstractChart::chart = chart;
+	    console.log(chart.tooltip);
 	    return chart.id;
 	}-*/;
 

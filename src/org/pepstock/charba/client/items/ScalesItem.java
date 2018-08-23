@@ -40,7 +40,7 @@ public final class ScalesItem extends JavaScriptObjectContainer {
 	public final Map<String, ScaleItem> getItems() {
 		final Map<String, ScaleItem> result = new HashMap<>();
 		List<Key> keys =  keys();
-		if (keys != null && !keys.isEmpty()) {
+		if (!keys.isEmpty()) {
 			for (Key key : keys) {
 				result.put(key.name(), new ScaleItem((GenericJavaScriptObject)getValue(key)));
 			}

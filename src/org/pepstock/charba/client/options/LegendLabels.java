@@ -25,6 +25,7 @@ import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.items.LegendItem;
+import org.pepstock.charba.client.items.LegendLabelItem;
 
 /**
  * This is the labels configuration of the legend.
@@ -252,21 +253,21 @@ public final class LegendLabels extends ChartContainer {
 	 * 
 	 * @return array of legend items.
 	 */
-	protected LegendItem[] generateLegendLabels() {
+	protected LegendLabelItem[] generateLegendLabels() {
 		// checks if callback is consistent
 		if (labelsCallBack != null) {
 			// calls callback
-			LegendItem[] result = labelsCallBack.generateLegendLabels(getChart());
+			LegendLabelItem[] result = labelsCallBack.generateLegendLabels(getChart());
 			// if result is null..
 			if (result == null) {
 				// .. returns a empty array.
-				return new LegendItem[0];
+				return new LegendLabelItem[0];
 			}
 			// returns the generated array of legend items.
 			return result;
 		}
 		// returns a empty array
-		return new LegendItem[0];
+		return new LegendLabelItem[0];
 	}
 
 	/**

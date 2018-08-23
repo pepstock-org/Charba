@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.items.LegendItem;
+import org.pepstock.charba.client.items.LegendLabelItem;
 
 /**
  * Generates legend items for each thing in the legend.
@@ -34,6 +34,6 @@ public interface LegendLabelsCallback {
 	 * @see org.pepstock.charba.client.AbstractChart
 	 * @see org.pepstock.charba.client.items.LegendItem
 	 */
-	LegendItem[] generateLegendLabels(AbstractChart<?, ?> chart);
+	LegendLabelItem[] generateLegendLabels(AbstractChart<?, ?> chart);
 
 }

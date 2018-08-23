@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.items.TooltipItem;
 
 /**
@@ -71,9 +72,8 @@ public interface TooltipLabelCallback {
 	 * @return label text color to be applied. If returns <code>null</code>, it will be ignored.
 	 * @see org.pepstock.charba.client.AbstractChart
 	 * @see org.pepstock.charba.client.items.TooltipItem
-	 * FIXME isColor
 	 */
-	String onLabelTextColor(AbstractChart<?, ?> chart, TooltipItem item);
+	IsColor onLabelTextColor(AbstractChart<?, ?> chart, TooltipItem item);
 
 	/**
 	 * Returns text to render after an individual label.

@@ -462,7 +462,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * 
 	 * @return the java script object.
 	 */
-	public GenericJavaScriptObject getObject() {
+	GenericJavaScriptObject getObject() {
 		return getJavaScriptObject();
 	}
 	
