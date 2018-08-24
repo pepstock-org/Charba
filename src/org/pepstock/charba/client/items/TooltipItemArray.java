@@ -40,6 +40,11 @@ public final class TooltipItemArray extends JavaScriptObjectContainer {
 		items
 	}
 
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	public TooltipItemArray(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
@@ -50,10 +55,14 @@ public final class TooltipItemArray extends JavaScriptObjectContainer {
 	 * @return a list of tooltip items.
 	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
-	public final List<TooltipItem> getItems() {
+	public List<TooltipItem> getItems() {
+		// creates result
 		List<TooltipItem> result = new LinkedList<>();
+		// checks if items exists
 		if (has(Property.items)) {
+			// gets and scans all java script objects
 			for (GenericJavaScriptObject object : getObjectArray(Property.items)) {
+				// creates tooltip otem
 				TooltipItem item = new TooltipItem(object);
 				result.add(item);
 			}

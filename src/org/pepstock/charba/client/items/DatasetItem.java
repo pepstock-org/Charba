@@ -44,8 +44,14 @@ public final class DatasetItem extends JavaScriptObjectContainer {
 		hidden
 	}
 
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	public DatasetItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
+		// initializes the sub objects
 		view = new DatasetMetaViewItem((GenericJavaScriptObject)getValue(Property._view));
 	}
 
@@ -55,7 +61,7 @@ public final class DatasetItem extends JavaScriptObjectContainer {
 	 * @return the dataset index of the chart
 	 * @see org.pepstock.charba.client.data.Data#getDatasets()
 	 */
-	public final int getDatasetIndex() {
+	public int getDatasetIndex() {
 		return getValue(Property._datasetIndex, UndefinedValues.INTEGER);
 	}
 
@@ -66,7 +72,7 @@ public final class DatasetItem extends JavaScriptObjectContainer {
 	 * @see org.pepstock.charba.client.data.Dataset#getData()
 	 * @see org.pepstock.charba.client.data.Data#getLabels()
 	 */
-	public final int getIndex() {
+	public int getIndex() {
 		return getValue(Property._index, UndefinedValues.INTEGER);
 	}
 
@@ -75,7 +81,7 @@ public final class DatasetItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return <code>true</code> if the dataset is hidden, otherwise <code>false</code>.
 	 */
-	public final boolean isHidden() {
+	public boolean isHidden() {
 		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
 	}
 
@@ -84,7 +90,7 @@ public final class DatasetItem extends JavaScriptObjectContainer {
 	 * 
 	 * @param hidden <code>true</code> if the dataset must be hidden, otherwise <code>false</code>.
 	 */
-	public final void setHidden(boolean hidden) {
+	public void setHidden(boolean hidden) {
 		setValue(Property.hidden, hidden);
 	}
 
@@ -94,7 +100,7 @@ public final class DatasetItem extends JavaScriptObjectContainer {
 	 * @return all view information about the dataset.
 	 * @see org.pepstock.charba.client.items.DatasetMetaViewItem
 	 */
-	public final DatasetMetaViewItem getView() {
+	public DatasetMetaViewItem getView() {
 		return view;
 	}
 }

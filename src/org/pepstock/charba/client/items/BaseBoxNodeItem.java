@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Position;
 
 /**
- * This object is created by CHART.JS and passed to all callbacks and events handlers related to legend entity.
+ * Base object which maps the CHART.JS chart items and represents main nodes of chart java script object.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -51,62 +51,133 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 		minSize
 	}
 
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object.
+	 */
 	protected BaseBoxNodeItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
-		margins = new MarginsItem((GenericJavaScriptObject)getValue(Property.margins));
-		minSize= new SizeItem((GenericJavaScriptObject)getValue(Property.minSize));
+		// initializes the sub objects
+		margins = new MarginsItem((GenericJavaScriptObject) getValue(Property.margins));
+		minSize = new SizeItem((GenericJavaScriptObject) getValue(Property.minSize));
 	}
 
+	/**
+	 * Returns the full width in pixel.
+	 * 
+	 * @return the full width in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 */
 	public final boolean isFullWidth() {
 		return getValue(Property.fullWidth, UndefinedValues.BOOLEAN);
 	}
-	
+
+	/**
+	 * Returns the position of node.
+	 * 
+	 * @return the position of node.
+	 */
 	public final Position getPosition() {
 		return getValue(Property.position, Position.class, Position.top);
 	}
 
-	public final double getWeight(){
+	/**
+	 * Returns the weight.
+	 * 
+	 * @return the weight. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 */
+	public final double getWeight() {
 		return getValue(Property.weight, UndefinedValues.DOUBLE);
 	}
 
-	public final int getWidth(){
+	/**
+	 * Returns the width in pixel.
+	 * 
+	 * @return the width in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 */
+	public final int getWidth() {
 		return getValue(Property.width, UndefinedValues.INTEGER);
 	}
 
-	public final int getHeight(){
+	/**
+	 * Returns the height in pixel.
+	 * 
+	 * @return the height in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 */
+	public final int getHeight() {
 		return getValue(Property.height, UndefinedValues.INTEGER);
 	}
 
-	public final double getMaxWidth(){
+	/**
+	 * Returns the max width in pixel.
+	 * 
+	 * @return the max width in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 */
+	public final double getMaxWidth() {
 		return getValue(Property.maxWidth, UndefinedValues.DOUBLE);
 	}
 
-	public final double getMaxHeight(){
+	/**
+	 * Returns the max height in pixel.
+	 * 
+	 * @return the max height in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 */
+	public final double getMaxHeight() {
 		return getValue(Property.maxHeight, UndefinedValues.DOUBLE);
 	}
 
-	public final int getPaddingTop(){
+	/**
+	 * Returns the padding top in pixel.
+	 * 
+	 * @return the padding top in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 */
+	public final int getPaddingTop() {
 		return getValue(Property.paddingTop, UndefinedValues.INTEGER);
 	}
 
-	public final int getPaddingRight(){
+	/**
+	 * Returns the padding right in pixel.
+	 * 
+	 * @return the padding right in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 */
+	public final int getPaddingRight() {
 		return getValue(Property.paddingRight, UndefinedValues.INTEGER);
 	}
 
-	public final int getPaddingBottom(){
+	/**
+	 * Returns the padding bottom in pixel.
+	 * 
+	 * @return the padding bottom in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 */
+	public final int getPaddingBottom() {
 		return getValue(Property.paddingBottom, UndefinedValues.INTEGER);
 	}
 
-	public final int getPaddingLeft(){
+	/**
+	 * Returns the padding left in pixel.
+	 * 
+	 * @return the padding left in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 */
+	public final int getPaddingLeft() {
 		return getValue(Property.paddingLeft, UndefinedValues.INTEGER);
 	}
 
-	public final MarginsItem getMargins(){
+	/**
+	 * Returns the margin item.
+	 * 
+	 * @return the margin item.
+	 */
+	public final MarginsItem getMargins() {
 		return margins;
 	}
 
-	public final SizeItem getMinSize(){
-		return minSize; 
+	/**
+	 * Returns the min size item.
+	 * 
+	 * @return the min size item.
+	 */
+	public final SizeItem getMinSize() {
+		return minSize;
 	}
 
 }

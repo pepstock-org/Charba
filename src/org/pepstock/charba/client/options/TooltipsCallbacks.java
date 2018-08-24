@@ -148,7 +148,7 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 
 	/**
 	 * Called before body creation.
-	 * @param items tooltips items
+	 * @param object java script object tooltips items
 	 * @return array of strings for body. Default is an empty array.
 	 */
 	protected String[] onBeforeBody(GenericJavaScriptObject object){
@@ -162,7 +162,7 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	
 	/**
 	 * Called after body creation.
-	 * @param items tooltips items
+	 * @param object java script object tooltips items
 	 * @return array of strings for body. Default is an empty array.
 	 */
 	protected String[] onAfterBody(GenericJavaScriptObject object){
@@ -177,7 +177,7 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 
 	/**
 	 * Called before title creation.
-	 * @param items tooltips items
+	 * @param object java script object tooltips items
 	 * @return array of strings for body. Default is an empty array.
 	 */
 	protected String[] onBeforeTitle(GenericJavaScriptObject object){
@@ -192,7 +192,7 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 
 	/**
 	 * Called title creation
-	 * @param items tooltips items
+	 * @param object java script object tooltips items
 	 * @return array of strings for body. Default is an empty array.
 	 */
 	protected String[] onTitle(GenericJavaScriptObject object){
@@ -207,7 +207,7 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 
 	/**
 	 * Called after title creation.
-	 * @param items tooltips items
+	 * @param object java script object tooltips items
 	 * @return array of strings for body. Default is an empty array.
 	 */
 	protected String[] onAfterTitle(GenericJavaScriptObject object){
@@ -222,7 +222,7 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 
 	/**
 	 * Called before footer creation.
-	 * @param items tooltips items
+	 * @param object java script object tooltips items
 	 * @return array of strings for body. Default is an empty array.
 	 */
 	protected String[] onBeforeFooter(GenericJavaScriptObject object){
@@ -237,7 +237,7 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 
 	/**
 	 * Called footer creation.
-	 * @param items tooltips items
+	 * @param object java script object tooltips items
 	 * @return array of strings for body. Default is an empty array.
 	 */
 	protected String[] onFooter(GenericJavaScriptObject object){
@@ -252,7 +252,7 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 
 	/**
 	 * Called after footer creation.
-	 * @param items tooltips items
+	 * @param object java script object tooltips items
 	 * @return array of strings for body. Default is an empty array.
 	 */
 	protected String[] onAfterFooter(GenericJavaScriptObject object){
@@ -267,7 +267,7 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 
 	/**
 	 * Called before label creation.
-	 * @param item tooltips item
+	 * @param object java script object tooltips items
 	 * @return string for label. Default is an empty string.
 	 */
 	protected String onBeforeLabel(GenericJavaScriptObject object){
@@ -282,7 +282,7 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 
 	/**
 	 * Called label creation.
-	 * @param item tooltips item
+	 * @param object java script object tooltips items
 	 * @return string for label. Default is an empty string.
 	 */
 	protected String onLabel(GenericJavaScriptObject object){
@@ -297,7 +297,7 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	
 	/**
 	 * Called text label color creation.
-	 * @param item tooltips item
+	 * @param object java script object tooltips items
 	 * @return string for label color.
 	 */
 	protected String onLabelTextColor(GenericJavaScriptObject object){
@@ -313,7 +313,7 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 	
 	/**
 	 * Called label color creation.
-	 * @param item tooltips item
+	 * @param object java script object tooltips items
 	 * @return label color object.
 	 * @see org.pepstock.charba.client.callbacks.TooltipLabelColor
 	 */
@@ -332,7 +332,7 @@ public final class TooltipsCallbacks extends JavaScriptObjectContainer{
 
 	/**
 	 * Called after label creation.
-	 * @param item tooltips item
+	 * @param object java script object tooltips items
 	 * @return string for label.
 	 */
 	protected String onAfterLabel(GenericJavaScriptObject object){

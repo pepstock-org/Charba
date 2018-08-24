@@ -20,12 +20,10 @@ import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * This item contains the new size of the chart after it has been resized.<br>
- * This object has been created ONLY when a resize event occurs.
+ * Wrapper of tooltip node of CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.events.ChartResizeEvent
- * @see org.pepstock.charba.client.events.ChartResizeEventHandler
+ *
  */
 public final class TooltipNode extends JavaScriptObjectContainer {
 	
@@ -39,16 +37,22 @@ public final class TooltipNode extends JavaScriptObjectContainer {
 		_model
 	}
 	
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	TooltipNode(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
-		model = new TooltipModel((GenericJavaScriptObject)getValue(Property._model));
-		
+		model = new TooltipModel((GenericJavaScriptObject) getValue(Property._model));
 	}
 
 	/**
+	 * Returns the tooltip model
+	 * 
 	 * @return the model
 	 */
-	public final TooltipModel getModel() {
+	public TooltipModel getModel() {
 		return model;
 	}
 

@@ -26,7 +26,11 @@ import org.pepstock.charba.client.commons.GenericJavaScriptObject;
  */
 public final class AxisMarginsItem extends MarginsItem {
 
-
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	AxisMarginsItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}

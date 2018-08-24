@@ -49,6 +49,11 @@ public final class DatasetMetaViewItem extends JavaScriptObjectContainer {
 		height
 	}
 
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	DatasetMetaViewItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
@@ -59,7 +64,7 @@ public final class DatasetMetaViewItem extends JavaScriptObjectContainer {
 	 * @return the dataset label
 	 * @see org.pepstock.charba.client.data.Dataset#setLabel(String)
 	 */
-	public final String getDatasetLabel() {
+	public String getDatasetLabel() {
 		return getValue(Property.datasetLabel, UndefinedValues.STRING);
 	}
 
@@ -68,7 +73,7 @@ public final class DatasetMetaViewItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return the label
 	 */
-	public final String getLabel() {
+	public String getLabel() {
 		return getValue(Property.label, UndefinedValues.STRING);
 	}
 
@@ -77,7 +82,7 @@ public final class DatasetMetaViewItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return the edge to skip drawing the border for.
 	 */
-	public final String getBorderSkipped() {
+	public String getBorderSkipped() {
 		return getValue(Property.borderSkipped, UndefinedValues.STRING);
 	}
 
@@ -86,7 +91,7 @@ public final class DatasetMetaViewItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return list of the fill color of the dataset item
 	 */
-	public final String getBackgroundColorAsString() {
+	public String getBackgroundColorAsString() {
 		return getValue(Property.backgroundColor, UndefinedValues.STRING);
 	}
 
@@ -95,7 +100,7 @@ public final class DatasetMetaViewItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return list of the fill color of the dataset item
 	 */
-	public final IsColor getBackgroundColor() {
+	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
@@ -104,7 +109,7 @@ public final class DatasetMetaViewItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return list of the color of the dataset item border
 	 */
-	public final String getBorderColorAsString() {
+	public String getBorderColorAsString() {
 		return getValue(Property.borderColor, UndefinedValues.STRING);
 	}
 
@@ -113,7 +118,7 @@ public final class DatasetMetaViewItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return list of the color of the dataset item border
 	 */
-	public final IsColor getBorderColor() {
+	public IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
 	}
 	
@@ -122,7 +127,7 @@ public final class DatasetMetaViewItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return list of the stroke width of the dataset item in pixels.
 	 */
-	public final int getBorderWidth() {
+	public int getBorderWidth() {
 		return getValue(Property.borderWidth, UndefinedValues.INTEGER);
 	}
 
@@ -131,7 +136,7 @@ public final class DatasetMetaViewItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return <code>true</code> if is an horizontal view
 	 */
-	public final boolean isHorizontal() {
+	public boolean isHorizontal() {
 		return getValue(Property.horizontal, UndefinedValues.BOOLEAN);
 	}
 
@@ -140,7 +145,7 @@ public final class DatasetMetaViewItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return the base value of dataset
 	 */
-	public final int getBase() {
+	public int getBase() {
 		return getValue(Property.base, UndefinedValues.INTEGER);
 	}
 
@@ -149,7 +154,7 @@ public final class DatasetMetaViewItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return the X location of dataset item in pixel.
 	 */
-	public final double getX() {
+	public double getX() {
 		return getValue(Property.x, UndefinedValues.DOUBLE);
 	}
 
@@ -158,7 +163,7 @@ public final class DatasetMetaViewItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return the Y location of dataset item in pixel.
 	 */
-	public final double getY() {
+	public double getY() {
 		return getValue(Property.y, UndefinedValues.DOUBLE);
 	}
 
@@ -167,7 +172,7 @@ public final class DatasetMetaViewItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return the width of dataset item in pixel.
 	 */
-	public final double getWidth() {
+	public double getWidth() {
 		return getValue(Property.width, UndefinedValues.DOUBLE);
 	}
 
@@ -176,7 +181,7 @@ public final class DatasetMetaViewItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return the height of dataset item in pixel.
 	 */
-	public final double getHeight() {
+	public double getHeight() {
 		return getValue(Property.height, UndefinedValues.DOUBLE);
 	}
 

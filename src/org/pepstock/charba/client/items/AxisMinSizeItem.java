@@ -26,6 +26,11 @@ import org.pepstock.charba.client.commons.GenericJavaScriptObject;
  */
 public final class AxisMinSizeItem extends SizeItem {
 
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	AxisMinSizeItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}

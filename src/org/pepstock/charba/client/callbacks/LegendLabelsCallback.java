@@ -32,7 +32,7 @@ public interface LegendLabelsCallback {
 	 * @param chart chart instance
 	 * @return an array of legend items. if <code>null</code>, uses the default implementation
 	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.LegendItem
+	 * @see org.pepstock.charba.client.items.LegendLabelItem
 	 */
 	LegendLabelItem[] generateLegendLabels(AbstractChart<?, ?> chart);
 

@@ -129,7 +129,10 @@ public class GenericJavaScriptObject extends JavaScriptObject{
 		return new JsObjectArrayList<T>(impl);
 	}
 
-	// FIXME
+	/**
+	 * Returns the list of elements names of the object. 
+	 * @return the list of elements names of the object.
+	 */
     protected final native String[] keys()/*-{
 	    return Object.getOwnPropertyNames(this);
 	}-*/;

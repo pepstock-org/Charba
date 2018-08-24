@@ -20,10 +20,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 
-public class LongestTextCacheItem extends BaseBoxNodeItem {
-
+/**
+ * Legend internal object to get data about ticks and their length in pixels.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
+public final class LongestTextCacheItem extends BaseBoxNodeItem {
+	
 	/**
 	 * Name of fields of JavaScript object.
 	 */
@@ -34,32 +41,96 @@ public class LongestTextCacheItem extends BaseBoxNodeItem {
 		font
 	}
 
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	LongestTextCacheItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
 
 	/**
-	 * Returns the font of scale
+	 * Returns the font of scale.
 	 * 
-	 * @return the font of scale
+	 * @return the font of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}
 	 */
-	public final String getFont() {
+	public String getFont() {
 		return getValue(Property.font, UndefinedValues.STRING);
 	}
-	
-	public final List<String> getGarbageCollect() {
+
+	/**
+	 * Returns the list of ticks in garbage collect item
+	 * 
+	 * @return the list of ticks in garbage collect item
+	 */
+	public List<String> getGarbageCollect() {
 		return getStringArray(Property.garbageCollect);
 	}
-	
-	public final Map<String, Integer> getData() {
-		final Map<String, Integer> result = new HashMap<>();
-		List<Key> keys =  keys();
-		if (!keys.isEmpty()) {
-			for (Key key : keys) {
-				result.put(key.name(), getValue(key, UndefinedValues.INTEGER));
+
+	/**
+	 * Returns a map with all ticks and max lengths in pixel of ticks.<br>
+	 * Key is the value of tick in string format, value is the max length in pixels.
+	 * 
+	 * @return a map with all ticks and max lengths in pixel of ticks.
+	 */
+	public Map<String, Integer> getData() {
+		// creates result
+		Map<String, Integer> result = new HashMap<>();
+		// checks if data is present
+		if (has(Property.data)) {
+			// creates data object
+			Data data = new Data((GenericJavaScriptObject) getValue(Property.data));
+			// gets all keys
+			List<Key> keys = data.keys();
+			// checks if has got items
+			if (!keys.isEmpty()) {
+				// scans all properties
+				for (Key key : keys) {
+					// loads map
+					result.put(key.name(), data.getValue(key, UndefinedValues.INTEGER));
+				}
 			}
 		}
 		return result;
 	}
 
+	/**
+	 * Internal class to expose keys and getValue form generic java script object.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class Data extends JavaScriptObjectContainer {
+
+		/**
+		 * Wraps the CHART.JS java script object.
+		 * 
+		 * @param javaScriptObject CHART.JS java script object
+		 */
+		Data(GenericJavaScriptObject javaScriptObject) {
+			super(javaScriptObject);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer#keys()
+		 */
+		@Override
+		protected List<Key> keys() {
+			return super.keys();
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer#getValue(org.pepstock.charba.client.commons.Key,
+		 * int)
+		 */
+		@Override
+		protected int getValue(Key key, int defaultValue) {
+			return super.getValue(key, defaultValue);
+		}
+	}
 }

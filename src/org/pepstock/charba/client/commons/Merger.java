@@ -89,7 +89,7 @@ public final class Merger {
 	 * @return the added java script object
 	 */
 	public static JavaScriptObjectContainer merge(JavaScriptObjectContainer target, JavaScriptObjectContainer source, String property) {
-		return Merger.merge(target.getJavaScriptObject(), source.getJavaScriptObject(), property);
+		return merge(target.getJavaScriptObject(), source.getJavaScriptObject(), property);
 	}
 
 	/**
@@ -103,7 +103,7 @@ public final class Merger {
 	 * @return the added java script object
 	 */
 	public static JavaScriptObjectContainer merge(JavaScriptObject target, JavaScriptObjectContainer source, String property) {
-		return Merger.merge(target, source.getJavaScriptObject(), property);
+		return merge(target, source.getJavaScriptObject(), property);
 	}
 
 	/**
@@ -117,7 +117,7 @@ public final class Merger {
 	 * @return the added java script object
 	 */
 	public static JavaScriptObjectContainer merge(JavaScriptObjectContainer target, JavaScriptObject source, String property) {
-		return Merger.merge(target.getJavaScriptObject(), source, property);
+		return merge(target.getJavaScriptObject(), source, property);
 	}
 
 	/**

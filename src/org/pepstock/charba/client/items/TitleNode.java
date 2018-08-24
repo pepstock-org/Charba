@@ -18,13 +18,18 @@ package org.pepstock.charba.client.items;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 
 /**
- * This object is created by CHART.JS and passed to all callbacks and events handlers related to legend entity.
+ * Wrapper of title node of CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class TitleNode extends BaseBoxNodeItem {
 
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	TitleNode(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}

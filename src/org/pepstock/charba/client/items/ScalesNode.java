@@ -24,31 +24,52 @@ import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * This item contains the new size of the chart after it has been resized.<br>
- * This object has been created ONLY when a resize event occurs.
+ * Wrapper of scales node of CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.events.ChartResizeEvent
- * @see org.pepstock.charba.client.events.ChartResizeEventHandler
  */
 public final class ScalesNode extends JavaScriptObjectContainer {
-	
+
+	/**
+	 * Default name of X axis
+	 */
 	public static final String DEFAULT_X_AXIS_ID = "x-axis-0";
-	
+
+	/**
+	 * Default name of Y axis
+	 */
 	public static final String DEFAULT_Y_AXIS_ID = "y-axis-0";
-	
+
+	/**
+	 * Default name of axis when the chart has got only 1 scale (polar, radar)
+	 */
 	public static final String DEFAULT_SINGLE_AXIS_ID = "scale";
-	
+
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	ScalesNode(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
 
-	public final Map<String, ScaleItem> getItems() {
-		final Map<String, ScaleItem> result = new HashMap<>();
-		List<Key> keys =  keys();
+	/**
+	 * Returns a map with all defined axis. Key is the scale ID and value is scale item.
+	 * 
+	 * @return a map with all defined axis. Key is the scale ID and value is scale item.
+	 */
+	public Map<String, ScaleItem> getItems() {
+		// creates result
+		Map<String, ScaleItem> result = new HashMap<>();
+		// gets all keys
+		List<Key> keys = keys();
+		// if keys are consistent
 		if (!keys.isEmpty()) {
+			// scans all keys
 			for (Key key : keys) {
-				result.put(key.name(), new ScaleItem((GenericJavaScriptObject)getValue(key)));
+				// loads scale item
+				result.put(key.name(), new ScaleItem((GenericJavaScriptObject) getValue(key)));
 			}
 		}
 		return result;

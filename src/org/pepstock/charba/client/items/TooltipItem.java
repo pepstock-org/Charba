@@ -48,6 +48,11 @@ public final class TooltipItem extends JavaScriptObjectContainer {
 		y
 	}
 
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	public TooltipItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
@@ -55,57 +60,57 @@ public final class TooltipItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the X location of label.
 	 * 
-	 * @return the X location of label.
+	 * @return the X location of label. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
 	 */
-	public final String getXLabel() {
+	public String getXLabel() {
 		return getValue(Property.xLabel, UndefinedValues.STRING);
 	}
 
 	/**
 	 * Returns the Y location of label.
 	 * 
-	 * @return the Y location of label.
+	 * @return the Y location of label. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
 	 */
-	public final String getYLabel() {
+	public String getYLabel() {
 		return getValue(Property.yLabel, UndefinedValues.STRING);
 	}
 
 	/**
 	 * Returns the dataset index of the chart
 	 * 
-	 * @return the dataset index of the chart
+	 * @return the dataset index of the chart. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 * @see org.pepstock.charba.client.data.Data#getDatasets()
 	 */
-	public final int getDatasetIndex() {
+	public int getDatasetIndex() {
 		return getValue(Property.datasetIndex, UndefinedValues.INTEGER);
 	}
 
 	/**
 	 * Returns the index of the data inside the dataset.
 	 * 
-	 * @return the index of the data inside the dataset.
+	 * @return the index of the data inside the dataset. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 * @see org.pepstock.charba.client.data.Dataset#getData()
 	 * @see org.pepstock.charba.client.data.Data#getLabels()
 	 */
-	public final int getIndex() {
+	public int getIndex() {
 		return getValue(Property.index, UndefinedValues.INTEGER);
 	}
 
 	/**
 	 * Returns the X location of tooltip item.
 	 * 
-	 * @return the X location of tooltip item.
+	 * @return the X location of tooltip item. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	public final int getX() {
+	public int getX() {
 		return getValue(Property.x, UndefinedValues.INTEGER);
 	}
 
 	/**
 	 * Returns the Y location of tooltip item.
 	 * 
-	 * @return the Y location of tooltip item.
+	 * @return the Y location of tooltip item. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	public final int getY() {
+	public int getY() {
 		return getValue(Property.y, UndefinedValues.INTEGER);
 	}
 }

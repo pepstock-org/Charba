@@ -31,7 +31,7 @@ import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
- * This object is created by CHART.JS and passed to all callbacks and events handlers related to legend entity.
+ * JavaScript object which contains the legends hit box size.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -41,7 +41,7 @@ public class LegendItem extends JavaScriptObjectContainer {
 	/**
 	 * Name of fields of JavaScript object.
 	 */
-	private enum Property implements Key
+	protected enum Property implements Key
 	{
 		datasetIndex, 
 		index,
@@ -57,10 +57,18 @@ public class LegendItem extends JavaScriptObjectContainer {
 		pointStyle
 	}
 
+	/**
+	 * Standard constructor which wraps a new java script object.
+	 */
 	protected LegendItem() {
 		super();
 	}
 
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	public LegendItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
@@ -68,7 +76,7 @@ public class LegendItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the dataset index of the chart
 	 * 
-	 * @return the dataset index of the chart
+	 * @return the dataset index of the chart. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 * @see org.pepstock.charba.client.data.Data#getDatasets()
 	 */
 	public final int getDatasetIndex() {
@@ -78,7 +86,7 @@ public class LegendItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the dataset index of the chart (for POLAR and PIE charts)
 	 * 
-	 * @return the dataset index of the chart (for POLAR and PIE charts)
+	 * @return the dataset index of the chart (for POLAR and PIE charts). Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 * @see org.pepstock.charba.client.data.Data#getDatasets()
 	 */
 	public final int getIndex() {
@@ -88,7 +96,7 @@ public class LegendItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the label that will be displayed
 	 * 
-	 * @return the label that will be displayed
+	 * @return the label that will be displayed. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
 	 */
 	public final String getText() {
 		return getValue(Property.text, UndefinedValues.STRING);
@@ -106,7 +114,8 @@ public class LegendItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns true if this item represents a hidden dataset. Label will be rendered with a strike-through effect
 	 * 
-	 * @return <code>true</code> if this item represents a hidden dataset. Label will be rendered with a strike-through effect
+	 * @return <code>true</code> if this item represents a hidden dataset. Label will be rendered with a strike-through effect.<br>
+	 * Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
 	 */
 	public final boolean isHidden() {
 		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
@@ -137,7 +146,7 @@ public class LegendItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the box border dash pattern offset or "phase".
 	 * 
-	 * @return the box border dash pattern offset or "phase".
+	 * @return the box border dash pattern offset or "phase". Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getLineDashOffset() {
 		return getValue(Property.lineDashOffset, UndefinedValues.INTEGER);
@@ -156,16 +165,17 @@ public class LegendItem extends JavaScriptObjectContainer {
 		return getValue(Property.lineJoin, JoinStyle.class, JoinStyle.miter);
 	}
 
-	// ARRAYS
 	/**
-	 * Returns the width of box border in pixels.
+	 * Returns the width of line in pixels.
 	 * 
-	 * @return the width of box border in pixels.
+	 * @return the width of line in pixels.
 	 */
 	public final List<Integer> getLineWidth() {
+		// checks if the value into object is an arrray
 		if (JavaScriptFieldType.Array.equals(type(Property.lineWidth))) {
 			return getIntegerArray(Property.lineWidth);
 		} else {
+			// returns an array with 1 element
 			return Arrays.asList(getValue(Property.lineWidth, UndefinedValues.INTEGER));
 		}
 	}
@@ -176,13 +186,19 @@ public class LegendItem extends JavaScriptObjectContainer {
 	 * @return the stroke style of the legend box
 	 */
 	public final List<IsColor> getStrokeStyle() {
-		final List<IsColor> result = new LinkedList<>();
+		// creates result
+		List<IsColor> result = new LinkedList<>();
+		// checks if is an array 
 		if (JavaScriptFieldType.Array.equals(type(Property.strokeStyle))) {
+			// gets all values in string mode
 			List<String> values = getStringArray(Property.strokeStyle);
+			// scans all value
 			for (String value : values) {
+				// creates and adds color
 				result.add(ColorBuilder.parse(value));
 			}
 		} else {
+			// adds to the list the single element
 			result.add(ColorBuilder.parse(getValue(Property.strokeStyle, Defaults.getGlobal().getDefaultColorAsString())));
 		}
 		return result;
@@ -195,18 +211,22 @@ public class LegendItem extends JavaScriptObjectContainer {
 	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public final List<PointStyle> getPointStyle() {
-		//return getValue(Property.pointStyle, PointStyle.class, PointStyle.circle);
-		final List<PointStyle> result = new LinkedList<>();
+		// creates result
+		List<PointStyle> result = new LinkedList<>();
+		// checks if is an array 
 		if (JavaScriptFieldType.Array.equals(type(Property.pointStyle))) {
+			// gets all values in string mode
 			List<String> values = getStringArray(Property.pointStyle);
+			// scans all value
 			for (String value : values) {
+				// creates and adds point style
 				result.add(PointStyle.valueOf(value));
 			}
 		} else {
+			// adds to the list the single element
 			result.add(getValue(Property.pointStyle, PointStyle.class, PointStyle.circle));
 		}
 		return result;
-
 	}
 	
 }

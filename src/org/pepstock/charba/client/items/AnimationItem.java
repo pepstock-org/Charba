@@ -39,6 +39,10 @@ public final class AnimationItem extends JavaScriptObjectContainer {
 		easing
 	}
 
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	public AnimationItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
@@ -46,7 +50,7 @@ public final class AnimationItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the current Animation frame number.
 	 * 
-	 * @return the current Animation frame number.
+	 * @return the current Animation frame number. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getCurrentStep() {
 		return getValue(Property.currentStep, UndefinedValues.DOUBLE);
@@ -55,7 +59,7 @@ public final class AnimationItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the total number of animation frames.
 	 * 
-	 * @return the total number of animation frames.
+	 * @return the total number of animation frames. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getNumSteps() {
 		return getValue(Property.numSteps, UndefinedValues.DOUBLE);

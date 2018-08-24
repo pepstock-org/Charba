@@ -159,8 +159,8 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	}
 	
 	/**
-	 * Returns the chart item.
-	 * @return the chart item.
+	 * Returns the chart node.
+	 * @return the chart node.
 	 */
 	public final ChartNode getChartNode(){
 		return new ChartNode((GenericJavaScriptObject)chart);
@@ -497,7 +497,6 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	    var ctx = canvas.getContext("2d");
 	    chart = new $wnd.Chart(ctx, config);
 	    this.@org.pepstock.charba.client.AbstractChart::chart = chart;
-	    console.log(chart.options);
 	    return chart.id;
 	}-*/;
 

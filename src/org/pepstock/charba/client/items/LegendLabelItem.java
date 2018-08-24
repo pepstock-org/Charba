@@ -18,6 +18,7 @@ package org.pepstock.charba.client.items;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.JsIntegerArrayList;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
@@ -30,37 +31,38 @@ import org.pepstock.charba.client.enums.PointStyle;
  */
 public final class LegendLabelItem extends LegendItem {
 
+	/**
+	 * Standard constructor which wraps a new java script object.
+	 */
 	public LegendLabelItem() {
 		super();
 	}
 
 	/**
-	 * Returns the dataset index of the chart
+	 * Sets the dataset index of the chart
 	 * 
-	 * @return the dataset index of the chart
-	 * @see org.pepstock.charba.client.data.Data#getDatasets()
+	 * @param datasetIndex the dataset index of the chart
 	 */
 	public void setDatasetIndex(int datasetIndex) {
-		//return getValue(Property.datasetIndex, UndefinedValues.INTEGER);
+		setValue(LegendItem.Property.datasetIndex, datasetIndex);
 	}
 
 	/**
-	 * Returns the dataset index of the chart (for POLAR and PIE charts)
+	 * Sets the dataset index of the chart (for POLAR and PIE charts)
 	 * 
-	 * @return the dataset index of the chart (for POLAR and PIE charts)
-	 * @see org.pepstock.charba.client.data.Data#getDatasets()
+	 * @param index the dataset index of the chart (for POLAR and PIE charts)
 	 */
 	public void setIndex(int index) {
-		//return getValue(Property.index, UndefinedValues.INTEGER);
+		setValue(LegendItem.Property.index, index);
 	}
-	
+
 	/**
-	 * Returns the label that will be displayed
+	 * Sets the label that will be displayed
 	 * 
-	 * @return the label that will be displayed
+	 * @param text the label that will be displayed
 	 */
 	public void setText(String text) {
-//		return getValue(Property.text, UndefinedValues.STRING);
+		setValue(LegendItem.Property.text, text);
 	}
 
 	/**
@@ -68,115 +70,116 @@ public final class LegendLabelItem extends LegendItem {
 	 * 
 	 * @return the fill style of the legend box
 	 */
+	/**
+	 * Sets the fill style of the legend box
+	 * 
+	 * @param color the fill style of the legend box
+	 */
 	public void setFillStyle(IsColor color) {
-		//return ColorBuilder.parse(getValue(Property.fillStyle, Defaults.getGlobal().getDefaultColorAsString()));
+		setValue(LegendItem.Property.fillStyle, color.toRGBA());
 	}
 
 	/**
-	 * Returns true if this item represents a hidden dataset. Label will be rendered with a strike-through effect
+	 * Sets true if this item represents a hidden dataset. Label will be rendered with a strike-through effect
 	 * 
-	 * @return <code>true</code> if this item represents a hidden dataset. Label will be rendered with a strike-through effect
+	 * @param hidden true if this item represents a hidden dataset. Label will be rendered with a strike-through effect
 	 */
 	public void setHidden(boolean hidden) {
-//		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
+		setValue(LegendItem.Property.hidden, hidden);
 	}
 
 	/**
-	 * Returns how the end points of every box border are drawn. There are three possible values for this property and those
-	 * are: butt, round and square.
+	 * Sets how the end points of every box border are drawn. There are three possible values for this property and those are:
+	 * butt, round and square.
 	 * 
-	 * @return how the end points of every box border are drawn.
+	 * @param style how the end points of every box border are drawn.
 	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public void setLineCap(CapStyle style) {
-//		return getValue(Property.lineCap, CapStyle.class, CapStyle.butt);
+		setValue(LegendItem.Property.lineCap, style);
 	}
 
 	/**
-	 * Returns the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths
-	 * of lines and gaps which describe the pattern.
+	 * Sets the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths of
+	 * lines and gaps which describe the pattern.
 	 * 
-	 * @return the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths
-	 *         of lines and gaps which describe the pattern.
+	 * @param lineDash the box border dash pattern used when stroking lines, using an array of values which specify alternating
+	 *            lengths of lines and gaps which describe the pattern.
 	 */
 	public void setLineDash(List<Integer> lineDash) {
-//		return getIntegerArray(Property.lineDash);
+		// checks if is a internal list, already with JavaScript object
+		if (lineDash instanceof JsIntegerArrayList) {
+			// sets directly
+			setInternalLineDash((JsIntegerArrayList) lineDash);
+		} else {
+			// creates a new JavaScript arraylist
+			JsIntegerArrayList list = new JsIntegerArrayList();
+			// adds all values
+			list.addAll(lineDash);
+			// sets array
+			setInternalLineDash(list);
+		}
 	}
 
 	/**
-	 * Returns the box border dash pattern offset or "phase".
+	 * Sets the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths of
+	 * lines and gaps which describe the pattern.
 	 * 
-	 * @return the box border dash pattern offset or "phase".
+	 * @param list the box border dash pattern used when stroking lines, using an array of values which specify alternating
+	 *            lengths of lines and gaps which describe the pattern.
+	 */
+	private void setInternalLineDash(JsIntegerArrayList list) {
+		setIntegerArray(LegendItem.Property.lineDash, list);
+	}
+
+	/**
+	 * Sets the box border dash pattern offset or "phase".
+	 * 
+	 * @param lineDashOffset the box border dash pattern offset or "phase".
 	 */
 	public void setLineDashOffset(int lineDashOffset) {
-//		return getValue(Property.lineDashOffset, UndefinedValues.INTEGER);
+		setValue(LegendItem.Property.lineDashOffset, lineDashOffset);
 	}
 
 	/**
-	 * Returns how two connecting segments (of box border) with non-zero lengths in a shape are joined together (degenerate
+	 * Sets how two connecting segments (of box border) with non-zero lengths in a shape are joined together (degenerate
 	 * segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are
 	 * skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter.
 	 * 
-	 * @return There are three possible values for this property: round, bevel and miter.
+	 * @param style There are three possible values for this property: round, bevel and miter.
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public void setLineJoin(JoinStyle style) {
-//		return getValue(Property.lineJoin, JoinStyle.class, JoinStyle.miter);
+		setValue(LegendItem.Property.lineJoin, style);
 	}
 
-	// ARRAYS
 	/**
-	 * Returns the width of box border in pixels.
+	 * Sets the width of box border in pixels.
 	 * 
-	 * @return the width of box border in pixels.
+	 * @param lineWidths the width of box border in pixels.
 	 */
-	//FIXME
 	public void setLineWidth(int lineWidths) {
-//		if (JavaScriptFieldType.Array.equals(type(Property.lineWidth))) {
-//			return getIntegerArray(Property.lineWidth);
-//		} else {
-//			return Arrays.asList(getValue(Property.lineWidth, UndefinedValues.INTEGER));
-//		}
+		setValue(LegendItem.Property.lineWidth, lineWidths);
 	}
 
 	/**
-	 * Returns the stroke style of the legend box
+	 * Sets the stroke style of the legend box
 	 * 
-	 * @return the stroke style of the legend box
+	 * @param color the stroke style of the legend box
 	 */
 	public void setStrokeStyle(IsColor color) {
-//		final List<IsColor> result = new LinkedList<>();
-//		if (JavaScriptFieldType.Array.equals(type(Property.strokeStyle))) {
-//			List<String> values = getStringArray(Property.strokeStyle);
-//			for (String value : values) {
-//				result.add(ColorBuilder.parse(value));
-//			}
-//		} else {
-//			result.add(ColorBuilder.parse(getValue(Property.strokeStyle, Defaults.getGlobal().getDefaultColorAsString())));
-//		}
-//		return result;
+		setValue(LegendItem.Property.strokeStyle, color.toRGBA());
 	}
 
 	/**
-	 * Returns the style of the legend box (only used if usePointStyle is true)
+	 * Sets the style of the legend box (only used if usePointStyle is true)
 	 * 
-	 * @return the style of the legend box
+	 * @param style the style of the legend box
 	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public void setPointStyle(PointStyle style) {
-//		//return getValue(Property.pointStyle, PointStyle.class, PointStyle.circle);
-//		final List<PointStyle> result = new LinkedList<>();
-//		if (JavaScriptFieldType.Array.equals(type(Property.pointStyle))) {
-//			List<String> values = getStringArray(Property.pointStyle);
-//			for (String value : values) {
-//				result.add(PointStyle.valueOf(value));
-//			}
-//		} else {
-//			result.add(getValue(Property.pointStyle, PointStyle.class, PointStyle.circle));
-//		}
-//		return result;
-
+		setValue(LegendItem.Property.pointStyle, style);
 	}
-	
+
 }

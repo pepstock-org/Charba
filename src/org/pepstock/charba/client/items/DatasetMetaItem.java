@@ -42,17 +42,22 @@ public final class DatasetMetaItem extends JavaScriptObjectContainer {
 		data
 	}
 	
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	public DatasetMetaItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
 
 	/**
-	 * Returns the type of axis. If not set, the default is <code>linear</code>.
+	 * Returns the type of dataset. If not set, the default is <code>bar</code>.
 	 * 
-	 * @return the type of axis
-	 * @see org.pepstock.charba.client.enums.AxisType
+	 * @return the type of dataset
+	 * @see org.pepstock.charba.client.Type
 	 */
-	public final Type getType() {
+	public Type getType() {
 		return getValue(Property.type, Type.class, Type.bar);
 	}
 
@@ -61,7 +66,7 @@ public final class DatasetMetaItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return <code>true</code> if the dataset is hidden, otherwise <code>false</code>.
 	 */
-	public final boolean isHidden() {
+	public boolean isHidden() {
 		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
 	}
 
@@ -70,7 +75,7 @@ public final class DatasetMetaItem extends JavaScriptObjectContainer {
 	 * 
 	 * @param hidden <code>true</code> if the dataset must be hidden, otherwise <code>false</code>.
 	 */
-	public final void setHidden(boolean hidden) {
+	public void setHidden(boolean hidden) {
 		setValue(Property.hidden, hidden);
 	}
 
@@ -80,10 +85,14 @@ public final class DatasetMetaItem extends JavaScriptObjectContainer {
 	 * @return a list of dataset metadata items.
 	 * @see org.pepstock.charba.client.items.DatasetItem
 	 */
-	public final List<DatasetItem> getDatasets() {
+	public List<DatasetItem> getDatasets() {
+		// creates the result
 		List<DatasetItem> result = new LinkedList<>();
+		// checks if the object has got the property
 		if (has(Property.data)) {
+			// gets and scans teh array of objects
 			for (GenericJavaScriptObject object : getObjectArray(Property.data)) {
+				// creates dataset item
 				DatasetItem item = new DatasetItem(object);
 				result.add(item);
 			}

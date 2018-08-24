@@ -37,8 +37,14 @@ public final class AxisItem extends ScaleItem {
 	
 	private final AxisMinSizeItem minSize;
 
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	public AxisItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
+		// initializes the sub objects
 		margins = new AxisMarginsItem((GenericJavaScriptObject)getValue(BaseBoxNodeItem.Property.margins));
 		minSize= new AxisMinSizeItem((GenericJavaScriptObject)getValue(BaseBoxNodeItem.Property.minSize));
 	}
@@ -48,7 +54,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param hidden <code>true</code> if the axis must be hidden, otherwise <code>false</code>.
 	 */
-	public final void setHidden(boolean hidden) {
+	public void setHidden(boolean hidden) {
 		setValue(Property.hidden, hidden);
 	}
 
@@ -57,7 +63,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param fullWidth the full width of axis
 	 */
-	public final void setFullWidth(boolean fullWidth) {
+	public void setFullWidth(boolean fullWidth) {
 		setValue(BaseBoxNodeItem.Property.fullWidth, fullWidth);
 	}
 
@@ -66,7 +72,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param weight the weight of axis
 	 */
-	public final void setWeight(int weight) {
+	public void setWeight(int weight) {
 		setValue(BaseBoxNodeItem.Property.weight, weight);
 	}
 
@@ -75,7 +81,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param maxWidth the max width of axis in pixel.
 	 */
-	public final void setMaxWidth(int maxWidth) {
+	public void setMaxWidth(int maxWidth) {
 		setValue(BaseBoxNodeItem.Property.maxWidth, maxWidth);
 	}
 
@@ -84,7 +90,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param maxHeight the max height of the axis in pixel
 	 */
-	public final void setMaxHeight(int maxHeight) {
+	public void setMaxHeight(int maxHeight) {
 		setValue(BaseBoxNodeItem.Property.maxHeight, maxHeight);
 	}
 
@@ -93,7 +99,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param height the height of axis in pixel.
 	 */
-	public final void setHeight(int height) {
+	public void setHeight(int height) {
 		setValue(BaseBoxNodeItem.Property.height, height);
 	}
 
@@ -102,7 +108,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param top the top location in pixel
 	 */
-	public final void setTop(int top) {
+	public void setTop(int top) {
 		setValue(BaseBoxItem.Property.top, top);
 	}
 
@@ -111,7 +117,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param bottom the bottom location in pixel
 	 */
-	public final void setBottom(int bottom) {
+	public void setBottom(int bottom) {
 		setValue(BaseBoxItem.Property.bottom, bottom);
 	}
 
@@ -120,7 +126,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param paddingLeft the padding left in pixel
 	 */
-	public final void setPaddingLeft(int paddingLeft) {
+	public void setPaddingLeft(int paddingLeft) {
 		setValue(BaseBoxNodeItem.Property.paddingLeft, paddingLeft);
 	}
 
@@ -129,7 +135,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param paddingTop the padding top in pixel
 	 */
-	public final void setPaddingTop(int paddingTop) {
+	public void setPaddingTop(int paddingTop) {
 		setValue(BaseBoxNodeItem.Property.paddingTop, paddingTop);
 	}
 
@@ -138,7 +144,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param paddingRight the padding right in pixel
 	 */
-	public final void setPaddingRight(int paddingRight) {
+	public void setPaddingRight(int paddingRight) {
 		setValue(BaseBoxNodeItem.Property.paddingRight, paddingRight);
 	}
 
@@ -147,7 +153,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param paddingBottom the padding bottom in pixel
 	 */
-	public final void setPaddingBottom(int paddingBottom) {
+	public void setPaddingBottom(int paddingBottom) {
 		setValue(BaseBoxNodeItem.Property.paddingBottom, paddingBottom);
 	}
 
@@ -156,7 +162,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param min the minimum value of axis
 	 */
-	public final void setMin(String min) {
+	public void setMin(String min) {
 		setValue(Property.min, min);
 	}
 
@@ -165,7 +171,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param max the maximum value of axis
 	 */
-	public final void setMax(String max) {
+	public void setMax(String max) {
 		setValue(Property.max, max);
 	}
 
@@ -174,7 +180,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param min the minimum value of axis
 	 */
-	public final void setMinAsNumber(int min) {
+	public void setMinAsNumber(int min) {
 		setValue(Property.min, min);
 	}
 
@@ -183,7 +189,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param max the maximum value of axis
 	 */
-	public final void setMaxAsNumber(int max) {
+	public void setMaxAsNumber(int max) {
 		setValue(Property.max, max);
 	}
 
@@ -192,7 +198,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param ticks the array of ticks
 	 */
-	public final void setTicks(String... ticks) {
+	public void setTicks(String... ticks) {
 		setTicks(ArrayListHelper.build(ticks));
 	}
 
@@ -210,7 +216,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param start the start value of the axis
 	 */
-	public final void setStart(int start) {
+	public void setStart(int start) {
 		setValue(Property.start, start);
 	}
 
@@ -219,7 +225,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param end the end value of the axis
 	 */
-	public final void setEnd(int end) {
+	public void setEnd(int end) {
 		setValue(Property.end, end);
 	}
 
@@ -228,8 +234,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param ticksAsNumbers the array of ticks
 	 */
-	public final void setTicksAsNumbers(double... ticksAsNumbers) {
-		setValueernalTicksAsNumbers(ArrayListHelper.build(ticksAsNumbers));
+	public void setTicksAsNumbers(double... ticksAsNumbers) {
+		setInternalTicksAsNumbers(ArrayListHelper.build(ticksAsNumbers));
 	}
 
 	/**
@@ -237,18 +243,18 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param ticksAsNumbers the list of ticks
 	 */
-	public final void setTicksAsNumbers(List<Double> ticksAsNumbers) {
+	public void setTicksAsNumbers(List<Double> ticksAsNumbers) {
 		// checks if is already a JavaScript object wrapper
 		if (ticksAsNumbers instanceof JsDoubleArrayList) {
 			// sets directly
-			setValueernalTicksAsNumbers((JsDoubleArrayList) ticksAsNumbers);
+			setInternalTicksAsNumbers((JsDoubleArrayList) ticksAsNumbers);
 		} else {
 			// creates a JavaScript list
 			JsDoubleArrayList list = new JsDoubleArrayList();
 			// adds all values
 			list.addAll(ticksAsNumbers);
 			// sets list
-			setValueernalTicksAsNumbers(list);
+			setInternalTicksAsNumbers(list);
 		}
 	}
 
@@ -257,7 +263,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param ticksAsNumbers the list of ticks
 	 */
-	private final void setValueernalTicksAsNumbers(JsDoubleArrayList ticksAsNumbers) {
+	private void setInternalTicksAsNumbers(JsDoubleArrayList ticksAsNumbers) {
 		setDoubleArray(Property.ticksAsNumbers, ticksAsNumbers);
 	}
 
@@ -266,7 +272,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param zeroLineIndex the index of line 0 of axis
 	 */
-	public final void setZeroLineIndex(int zeroLineIndex) {
+	public void setZeroLineIndex(int zeroLineIndex) {
 		setValue(Property.zeroLineIndex, zeroLineIndex);
 	}
 
@@ -275,7 +281,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param labelRotation the label rotation value
 	 */
-	public final void setLabelRotation(double labelRotation) {
+	public void setLabelRotation(double labelRotation) {
 		setValue(Property.labelRotation, labelRotation);
 	}
 
@@ -284,7 +290,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param width the width of axis
 	 */
-	public final void setWidth(int width) {
+	public void setWidth(int width) {
 		setValue(BaseBoxNodeItem.Property.width, width);
 	}
 
@@ -293,7 +299,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param left the left location in pixel
 	 */
-	public final void setLeft(int left) {
+	public void setLeft(int left) {
 		setValue(BaseBoxItem.Property.left, left);
 	}
 
@@ -302,7 +308,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param right the right location in pixel
 	 */
-	public final void setRight(int right) {
+	public void setRight(int right) {
 		setValue(BaseBoxItem.Property.right, right);
 	}
 
@@ -312,7 +318,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param position the position of axis
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
-	public final void setPosition(Position position) {
+	public void setPosition(Position position) {
 		setValue(BaseBoxNodeItem.Property.position, position);
 	}
 
@@ -322,7 +328,7 @@ public final class AxisItem extends ScaleItem {
 	 * @return the margins of axis
 	 * @see org.pepstock.charba.client.items.AxisMarginsItem
 	 */
-	public final AxisMarginsItem getAxisMargins() {
+	public AxisMarginsItem getAxisMargins() {
 		return margins;
 	}
 
@@ -332,7 +338,7 @@ public final class AxisItem extends ScaleItem {
 	 * @return the minimum size of axis
 	 * @see org.pepstock.charba.client.items.AxisMinSizeItem
 	 */
-	public final AxisMinSizeItem getAxisMinSize() {
+	public AxisMinSizeItem getAxisMinSize() {
 		return minSize;
 	}
 

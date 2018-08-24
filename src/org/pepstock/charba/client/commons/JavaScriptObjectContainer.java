@@ -33,10 +33,17 @@ public class JavaScriptObjectContainer {
 	// every object must have a generic JavaScript object 
 	private final GenericJavaScriptObject javaScriptObject;
 
+	/**
+	 * Creates the object instantiating new java script object. 
+	 */
 	protected JavaScriptObjectContainer() {
 		this(GenericJavaScriptObject.build());
 	}
 
+	/**
+	 * Creates the object wrapping another java script object.
+	 * @param javaScriptObject java script object to be wrapped
+	 */
 	protected JavaScriptObjectContainer(GenericJavaScriptObject javaScriptObject) {
 		if (javaScriptObject == null){
 			this.javaScriptObject = GenericJavaScriptObject.build();	
@@ -89,17 +96,26 @@ public class JavaScriptObjectContainer {
 		return true;
 	}
 	
-	//FIXME
+	/**
+	 * Returns the list of properties names of the object.  
+	 * @return the list of properties names of the object.
+	 */
 	protected List<Key> keys() {
+		// creates the result
 		List<Key> keys = new ArrayList<>();
+		// scans all properties names of object
 		for (String key : javaScriptObject.keys()) {
+			// adds a key object by name of the property
 			keys.add(new StandardKey(key));
 		}
 		return keys;
 	}
 	
-
-	//FIXME
+	/**
+	 * Returns the java script type of the property.
+	 * @param key name of the java script property.
+	 * @return the java script type of the property.
+	 */
 	protected JavaScriptFieldType type(Key key) {
 		return JavaScriptFieldType.getType(javaScriptObject.typeOf(key.name()), javaScriptObject.isArray(key.name()));
 	}
@@ -431,7 +447,7 @@ public class JavaScriptObjectContainer {
     /**
      * Returns a value (double array list) into embedded JavaScript object at specific property.
      * @param key key of the property of JavaScript object.
-     * @return value of the property or <code>null</code> if not there 
+     * @return value of the property or empty list if not there 
      * @see org.pepstock.charba.client.commons.Key
      * @see org.pepstock.charba.client.commons.JsDoubleArrayList
      */
@@ -503,7 +519,7 @@ public class JavaScriptObjectContainer {
     /**
      * Returns a value (string array list) into embedded JavaScript object at specific property.
      * @param key key of the property of JavaScript object.
-     * @return value of the property or <code>null</code> if not there 
+     * @return value of the property or empty list if not there 
      * @see org.pepstock.charba.client.commons.Key
      * @see org.pepstock.charba.client.commons.JsStringArrayList
      */
@@ -630,7 +646,7 @@ public class JavaScriptObjectContainer {
     /**
      * Returns a value (integer array list) into embedded JavaScript object at specific property.
      * @param key key of the property of JavaScript object.
-     * @return value of the property or <code>null</code> if not there 
+     * @return value of the property or empty list if not there 
      * @see org.pepstock.charba.client.commons.Key
      * @see org.pepstock.charba.client.commons.JsIntegerArrayList
      */
@@ -745,7 +761,11 @@ public class JavaScriptObjectContainer {
         }
     }
     
-    // FIXME
+    /**
+     * Returns a value (generic java script object array list) into embedded JavaScript object at specific property.
+     * @param key key of the property of JavaScript object.
+     * @return value of the property or an emtpy list if not there 
+     */
     protected List<GenericJavaScriptObject> getObjectArray(Key key){
     	return has(key) ? javaScriptObject.getObjectArray(key.name()) : new ArrayList<GenericJavaScriptObject>();
     }

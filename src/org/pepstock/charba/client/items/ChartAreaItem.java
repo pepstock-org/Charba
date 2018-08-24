@@ -18,12 +18,17 @@ package org.pepstock.charba.client.items;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 
 /**
- * Object which maps the chart area item of CHART.JS chart java script object.<br> Used only for meter and gauge charts.
+ * Object which maps the chart area item of CHART.JS chart java script object.
  * @author Andrea "Stock" Stocchero
- *
+ * @see org.pepstock.charba.client.AbstractChart
  */
 public final class ChartAreaItem extends BaseBoxItem {
 
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	ChartAreaItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}

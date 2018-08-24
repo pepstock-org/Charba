@@ -79,7 +79,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	/**
 	 * Returns the options that the user specified into the chart option
 	 * 
-	 * @param chartId chart instance id
+	 * @param chart chart instance
 	 * @return the java script object with options or <code>null</code> if not exist.
 	 */
 	private JavaScriptObject getOptions(AbstractChart<?, ?> chart) {
@@ -95,6 +95,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 
 	/**
 	 * Called before initializing 'chart'.
+	 * @param chartId chart id.
 	 */
 	protected void onBeforeInit(String chartId) {
 		// gets chart instance
@@ -107,6 +108,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 
 	/**
 	 * Called after 'chart' has been initialized and before the first update.
+	 * @param chartId chart id.
 	 */
 	protected void onAfterInit(String chartId) {
 		// gets chart instance
@@ -121,6 +123,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * Called before updating 'chart'. If any plugin returns <code>false</code>, the update is cancelled (and thus subsequent
 	 * render(s)) until another 'update' is triggered.
 	 * 
+	 * @param chartId chart id.
 	 * @return <code>false</code> to cancel the chart update.
 	 */
 	protected boolean onBeforeUpdate(String chartId) {
@@ -136,6 +139,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	/**
 	 * Called after 'chart' has been updated and before rendering. Note that this hook will not be called if the chart update
 	 * has been previously cancelled.
+	 * @param chartId chart id.
 	 */
 	protected void onAfterUpdate(String chartId) {
 		// gets chart instance
@@ -150,6 +154,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * Called before laying out 'chart'. If any plugin returns <code>false</code>, the layout update is cancelled until another
 	 * 'update' is triggered.
 	 * 
+	 * @param chartId chart id.
 	 * @return <code>false</code> to cancel the chart layout.
 	 */
 	protected boolean onBeforeLayout(String chartId) {
@@ -165,6 +170,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	/**
 	 * Called after the 'chart' has been layed out. Note that this hook will not be called if the layout update has been
 	 * previously cancelled.
+	 * @param chartId chart id.
 	 */
 	protected void onAfterLayout(String chartId) {
 		// gets chart instance
@@ -179,6 +185,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * Called before updating the 'chart' datasets. If any plugin returns <code>false</code>, the datasets update is cancelled
 	 * until another 'update' is triggered.
 	 * 
+	 * @param chartId chart id.
 	 * @return <code>false</code> to cancel the datasets update.
 	 */
 	protected boolean onBeforeDatasetsUpdate(String chartId) {
@@ -194,6 +201,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	/**
 	 * Called after the 'chart' datasets have been updated. Note that this hook will not be called if the datasets update has
 	 * been previously cancelled.
+	 * @param chartId chart id.
 	 */
 	protected void onAfterDatasetsUpdate(String chartId) {
 		// gets chart instance
@@ -207,7 +215,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	/**
 	 * Called before updating the 'chart' dataset at the given 'args.index'. If any plugin returns <code>false</code>, the
 	 * datasets update is cancelled until another 'update' is triggered.
-	 * 
+	 * @param chartId chart id.
 	 * @param datasetIndex The dataset index.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
@@ -225,6 +233,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * Called after the 'chart' datasets at the given 'args.index' has been updated. Note that this hook will not be called if
 	 * the datasets update has been previously cancelled.
 	 * 
+	 * @param chartId chart id.
 	 * @param datasetIndex The dataset index.
 	 */
 	protected void onAfterDatasetUpdate(String chartId, int datasetIndex) {
@@ -240,6 +249,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * Called before rendering 'chart'. If any plugin returns <code>false</code>, the rendering is cancelled until another
 	 * 'render' is triggered.
 	 * 
+	 * @param chartId chart id.
 	 * @return <code>false</code> to cancel the chart rendering.
 	 */
 	protected boolean onBeforeRender(String chartId) {
@@ -255,6 +265,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	/**
 	 * Called after the 'chart' has been fully rendered (and animation completed). Note that this hook will not be called if the
 	 * rendering has been previously cancelled.
+	 * @param chartId chart id.
 	 */
 	protected void onAfterRender(String chartId) {
 		// gets chart instance
@@ -269,6 +280,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * Called before drawing 'chart' at every animation frame specified by the given easing value. If any plugin returns
 	 * <code>false</code>, the frame drawing is cancelled until another 'render' is triggered.
 	 * 
+	 * @param chartId chart id.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart drawing.
 	 */
@@ -286,6 +298,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * Called after the 'chart' has been drawn for the specific easing value. Note that this hook will not be called if the
 	 * drawing has been previously cancelled.
 	 * 
+	 * @param chartId chart id.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
 	protected void onAfterDraw(String chartId, String easing) {
@@ -301,6 +314,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * Called before drawing the 'chart' datasets. If any plugin returns <code>false</code>, the datasets drawing is cancelled
 	 * until another 'render' is triggered.
 	 * 
+	 * @param chartId chart id.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
@@ -318,6 +332,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * Called after the 'chart' datasets have been drawn. Note that this hook will not be called if the datasets drawing has
 	 * been previously cancelled.
 	 * 
+	 * @param chartId chart id.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
 	protected void onAfterDatasetsDraw(String chartId, String easing) {
@@ -333,6 +348,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * Called before drawing the 'chart' dataset at the given 'args.index' (datasets are drawn in the reverse order). If any
 	 * plugin returns <code>false</code>, the datasets drawing is cancelled until another 'render' is triggered.
 	 * 
+	 * @param chartId chart id.
 	 * @param datasetIndex The dataset index.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
@@ -351,6 +367,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * Called after the 'chart' datasets at the given 'args.index' have been drawn (datasets are drawn in the reverse order).
 	 * Note that this hook will not be called if the datasets drawing has been previously cancelled.
 	 * 
+	 * @param chartId chart id.
 	 * @param datasetIndex The dataset index.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
@@ -367,8 +384,8 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * Called before drawing the 'tooltip'. If any plugin returns <code>false</code>, the tooltip drawing is cancelled until
 	 * another 'render' is triggered.
 	 * 
-	 * @FIXME
-	 * @param model The tooltip instance.
+	 * @param chartId chart id.
+	 * @param object The tooltip model instance as java script object.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart tooltip drawing.
 	 */
@@ -387,7 +404,8 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * Called after drawing the 'tooltip'. Note that this hook will not be called if the tooltip drawing has been previously
 	 * cancelled.
 	 * 
-	 * @param model The tooltip instance.
+	 * @param chartId chart id.
+	 * @param object The tooltip model instance as java script object.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
 	protected void onAfterTooltipDraw(String chartId, GenericJavaScriptObject object, String easing) {
@@ -403,6 +421,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	/**
 	 * Called before processing the specified 'event'. If any plugin returns <code>false</code>, the event will be discarded.
 	 * 
+	 * @param chartId chart id.
 	 * @param event The event object.
 	 * @return <code>false</code> to discard the event.
 	 */
@@ -420,6 +439,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * Called after the 'event' has been consumed. Note that this hook will not be called if the 'event' has been previously
 	 * discarded.
 	 * 
+	 * @param chartId chart id.
 	 * @param event The event object.
 	 */
 	protected void onAfterEvent(String chartId, ChartNativeEvent event) {
@@ -434,6 +454,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	/**
 	 * Called after the chart as been resized.
 	 * 
+	 * @param chartId chart id.
 	 * @param item The new canvas display size (eq. canvas.style width & height).
 	 */
 	protected void onResize(String chartId, GenericJavaScriptObject item) {
@@ -447,6 +468,7 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 
 	/**
 	 * Called after the chart as been destroyed.
+	 * @param chartId chart id.
 	 */
 	protected void onDestroy(String chartId) {
 		// gets chart instance

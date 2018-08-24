@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * This object is created by CHART.JS and passed to all callbacks and events handlers related to legend entity.
+ * Wrapper of legend node of CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -35,48 +35,87 @@ public final class LegendNode extends BaseBoxNodeItem {
 	private enum Property implements Key
 	{
 		doughnutMode,
-		legendItems, 
-		legendHitBoxes, 
+		legendItems,
+		legendHitBoxes,
 		lineWidths,
 		columnWidths
 	}
 
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	LegendNode(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
 
-	public final boolean isDoughnutMode() {
+	/**
+	 * Returns if it is in doughnut mode.
+	 * 
+	 * @return <code>true</code> it is in doughnut mode. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 */
+	public boolean isDoughnutMode() {
 		return getValue(Property.doughnutMode, UndefinedValues.BOOLEAN);
 	}
 
-	public final List<Integer> getLineWidths(){
+	/**
+	 * Returns the list of line widths.
+	 * 
+	 * @return the list of line widths.
+	 */
+	public List<Integer> getLineWidths() {
 		return getIntegerArray(Property.lineWidths);
 	}
 
-	public final List<Integer> getColumnWidths(){
+	/**
+	 * Returns the list of columns widths.
+	 * 
+	 * @return the list of columns widths.
+	 */
+	public List<Integer> getColumnWidths() {
 		return getIntegerArray(Property.columnWidths);
 	}
 
-	public final List<LegendHitBoxItem> getHitBoxes(){
+	/**
+	 * Returns the list of hit boxes of the legend.
+	 * 
+	 * @return the list of hit boxes of the legend.
+	 */
+	public List<LegendHitBoxItem> getHitBoxes() {
+		// creates result
 		List<LegendHitBoxItem> result = new LinkedList<>();
+		// checks if the property exists
 		if (has(Property.legendHitBoxes)) {
+			// scans all objects array
 			for (GenericJavaScriptObject object : getObjectArray(Property.legendHitBoxes)) {
+				// creates hit box
 				LegendHitBoxItem item = new LegendHitBoxItem(object);
+				// adds it
 				result.add(item);
 			}
 		}
 		return result;
 	}
 
-	public final List<LegendItem> getItems(){
+	/**
+	 * Returns the list of items of the legend.
+	 * 
+	 * @return the list of items of the legend.
+	 */
+	public List<LegendItem> getItems() {
+		// creates result
 		List<LegendItem> result = new LinkedList<>();
+		// checks if the property exists
 		if (has(Property.legendItems)) {
+			// scans all objects array
 			for (GenericJavaScriptObject object : getObjectArray(Property.legendItems)) {
+				// creates item
 				LegendItem item = new LegendItem(object);
+				// adds it
 				result.add(item);
 			}
 		}
 		return result;
 	}
-
 }

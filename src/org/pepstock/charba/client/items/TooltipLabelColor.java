@@ -40,6 +40,11 @@ public final class TooltipLabelColor extends JavaScriptObjectContainer {
 		borderColor
 	}
 
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	TooltipLabelColor(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
@@ -49,7 +54,7 @@ public final class TooltipLabelColor extends JavaScriptObjectContainer {
 	 * 
 	 * @return the background color of the label.
 	 */
-	public final String getBackgroundColorAsString() {
+	public String getBackgroundColorAsString() {
 		return getValue(Property.backgroundColor, Defaults.getGlobal().getTooltips().getBackgroundColorAsString());
 	}
 
@@ -58,7 +63,7 @@ public final class TooltipLabelColor extends JavaScriptObjectContainer {
 	 * 
 	 * @return the background color of the label.
 	 */
-	public final IsColor getBackgroundColor() {
+	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
@@ -67,7 +72,7 @@ public final class TooltipLabelColor extends JavaScriptObjectContainer {
 	 * 
 	 * @return the border color of the label.
 	 */
-	public final String getBorderColorAsString() {
+	public String getBorderColorAsString() {
 		return getValue(Property.borderColor,  Defaults.getGlobal().getTooltips().getBorderColorAsString());
 	}
 	
@@ -76,7 +81,7 @@ public final class TooltipLabelColor extends JavaScriptObjectContainer {
 	 * 
 	 * @return the border color of the label.
 	 */
-	public final IsColor getBorderColor() {
+	public IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
 	}
 

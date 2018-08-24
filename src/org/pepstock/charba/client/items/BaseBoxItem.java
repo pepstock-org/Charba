@@ -20,7 +20,8 @@ import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Object which maps the chart area item of CHART.JS chart java script object.<br> Used only for meter and gauge charts.
+ * Base object which maps the CHART.JS chart items which represents a box.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -37,39 +38,48 @@ public abstract class BaseBoxItem extends JavaScriptObjectContainer {
 		left
 	}
 	
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	protected BaseBoxItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
 
 	/**
 	 * Returns the top of chart area.
+	 * 
 	 * @return the top of chart area.
 	 */
-	public final int getTop(){
+	public final int getTop() {
 		return getValue(Property.top, UndefinedValues.INTEGER);
 	}
-	
+
 	/**
 	 * Returns the right of chart area.
+	 * 
 	 * @return the right of chart area.
 	 */
-	public final int getRight(){
+	public final int getRight() {
 		return getValue(Property.right, UndefinedValues.INTEGER);
 	}
 
 	/**
 	 * Returns the bottom of chart area.
+	 * 
 	 * @return the bottom of chart area.
 	 */
-	public final int getBottom(){
+	public final int getBottom() {
 		return getValue(Property.bottom, UndefinedValues.INTEGER);
 	}
-	
+
 	/**
 	 * Returns the left of chart area.
+	 * 
 	 * @return the left of chart area.
 	 */
-	public final int getLeft(){
+	public final int getLeft() {
 		return getValue(Property.left, UndefinedValues.INTEGER);
 	}
 

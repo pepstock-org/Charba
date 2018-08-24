@@ -39,6 +39,11 @@ public final class TooltipBodyItem extends JavaScriptObjectContainer {
 		after
 	}
 
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	TooltipBodyItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
@@ -48,7 +53,7 @@ public final class TooltipBodyItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return text to render before the body section.
 	 */
-	public final List<String> getBefore() {
+	public List<String> getBefore() {
 		return getStringArray(Property.before);
 	}
 
@@ -57,7 +62,7 @@ public final class TooltipBodyItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return all lines of body section.
 	 */
-	public final List<String> getLines() {
+	public List<String> getLines() {
 		return getStringArray(Property.lines);
 	}
 
@@ -66,7 +71,7 @@ public final class TooltipBodyItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return text to render after the body section
 	 */
-	public final List<String> getAfter() {
+	public List<String> getAfter() {
 		return getStringArray(Property.after);
 	}
 

@@ -105,6 +105,7 @@ public class Options extends AbstractItem {
 		defaultFontFamily,
 		defaultFontSize,
 		defaultFontStyle,
+		devicePixelRatio,
 		showLines,
 		spanGaps,
 		hover,
@@ -299,6 +300,27 @@ public class Options extends AbstractItem {
 	 */
 	public boolean isMaintainAspectRatio() {
 		return getValue(Property.maintainAspectRatio, DEFAULT_MAINTAIN_ASPECT_RATIO);
+	}
+	
+	/**
+	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina displays).
+	 * Setting devicePixelRatio to a value other than 1 will force the canvas size to be scaled by that amount.
+	 * 
+	 * @param ratio the pixel ratio.
+	 */
+	public void setDevicePixelRatio(double ratio) {
+		setValue(Property.devicePixelRatio, ratio);
+	}
+
+	/**
+	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina displays).
+	 * Setting devicePixelRatio to a value other than 1 will force the canvas size to be scaled by that amount.
+	 * Returns  the pixel ratio.
+	 * 
+	 * @return  the pixel ratio. Default is <code>window.devicePixelRatio</code>.
+	 */
+	public double getDevicePixelRatio() {
+		return getValue(Property.devicePixelRatio, defaultDevicePixelRatio());
 	}
 
 	/**
@@ -570,4 +592,13 @@ public class Options extends AbstractItem {
 			super(parent, childKey);
 		}
 	}
+	
+	/**
+	 * Returns the default device pixel ratio by window java script object. 
+	 * 
+	 * @return the default device pixel ratio by window java script object. 
+	 */
+	private native double defaultDevicePixelRatio()/*-{
+		return $wnd.devicePixelRatio;
+	}-*/;
 }

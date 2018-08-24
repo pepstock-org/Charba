@@ -20,12 +20,13 @@ import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Object which maps the CHART.JS chart java script object.<br> Used only for meter and gauge charts.
+ * Main object node which maps CHART.JS java script object in order to retrieve chart information (for instances
+ * dimensions of all chart elements) at runtime.  
  *  
  * @author Andrea "Stock" Stocchero
  *
  */
-public class ChartNode extends JavaScriptObjectContainer {
+public final class ChartNode extends JavaScriptObjectContainer {
 	
 	private final LegendNode legendNode;
 	
@@ -53,125 +54,180 @@ public class ChartNode extends JavaScriptObjectContainer {
 		tooltip,
 		animating,
 		chartArea,
-		
-		// PIE & Polar
 		borderWidth,
 		outerRadius,
 		innerRadius,
 		radiusLength,
-		// solo PIE
 		offsetX,
 		offsetY,
 	}
 
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	public ChartNode(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
-		legendNode = new LegendNode((GenericJavaScriptObject)getValue(Property.legend));
-		scales = new ScalesNode((GenericJavaScriptObject)getValue(Property.scales));
-		chartArea = new ChartAreaItem((GenericJavaScriptObject)getValue(Property.chartArea));
-		title = new TitleNode((GenericJavaScriptObject)getValue(Property.titleBlock));
-		tooltip = new TooltipNode((GenericJavaScriptObject)getValue(Property.titleBlock));
+		// initializes the sub objects
+		legendNode = new LegendNode((GenericJavaScriptObject) getValue(Property.legend));
+		scales = new ScalesNode((GenericJavaScriptObject) getValue(Property.scales));
+		chartArea = new ChartAreaItem((GenericJavaScriptObject) getValue(Property.chartArea));
+		title = new TitleNode((GenericJavaScriptObject) getValue(Property.titleBlock));
+		tooltip = new TooltipNode((GenericJavaScriptObject) getValue(Property.titleBlock));
 	}
-	
-	// FIXME
-	public final LegendNode getLegend(){
+
+	/**
+	 * Returns the legend item.
+	 * 
+	 * @return the legend item.
+	 */
+	public LegendNode getLegend() {
 		return legendNode;
 	}
 
-	// FIXME
-	public final ScalesNode getScales(){
+	/**
+	 * Returns the scales item.
+	 * 
+	 * @return the scales item.
+	 */
+	public ScalesNode getScales() {
 		return scales;
 	}
 
 	/**
 	 * Returns the chart area item.
+	 * 
 	 * @return the chart area item.
 	 */
-	public final ChartAreaItem getChartArea(){
+	public ChartAreaItem getChartArea() {
 		return chartArea;
 	}
 
-	// FIXME
-	public final TitleNode getTitle(){
+	/**
+	 * Returns the title item.
+	 * 
+	 * @return the title item.
+	 */
+	public TitleNode getTitle() {
 		return title;
 	}
 
-	// FIXME
-	public final TooltipNode getTooltip(){
+	/**
+	 * Returns the tooltip item.
+	 * 
+	 * @return the tooltip item.
+	 */
+	public TooltipNode getTooltip() {
 		return tooltip;
 	}
 
-	public final int getId(){
+	/**
+	 * Returns the CHART JS chart ID.
+	 * 
+	 * @return the CHART JS chart ID. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 */
+	public int getId() {
 		return getValue(Property.id, UndefinedValues.INTEGER);
 	}
 
-	public final int getWidth(){
+	/**
+	 * Returns the width in pixel.
+	 * 
+	 * @return the width in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 */
+	public int getWidth() {
 		return getValue(Property.width, UndefinedValues.INTEGER);
 	}
 
-	public final int getHeight(){
+	/**
+	 * Returns the height in pixel.
+	 * 
+	 * @return the height in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 */
+	public int getHeight() {
 		return getValue(Property.height, UndefinedValues.INTEGER);
 	}
 
-	public final double getAspectRatio(){
+	/**
+	 * Returns the aspect ratio.
+	 * 
+	 * @return the aspect ratio. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 */
+	public double getAspectRatio() {
 		return getValue(Property.aspectRatio, UndefinedValues.DOUBLE);
 	}
 
-	public final double getCurrentDevicePixelRatio(){
+	/**
+	 * Returns the current device pixel ratio.
+	 * 
+	 * @return the current device pixel ratio. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 */
+	public double getCurrentDevicePixelRatio() {
 		return getValue(Property.currentDevicePixelRatio, UndefinedValues.DOUBLE);
 	}
 
-	public final boolean isAnimating(){
+	/**
+	 * Returns if the chart is animating or not.
+	 * 
+	 * @return if the chart is animating or not. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 */
+	public boolean isAnimating() {
 		return getValue(Property.animating, UndefinedValues.BOOLEAN);
 	}
 
 	/**
 	 * Returns the border width value.
-	 * @return the border width value.
+	 * 
+	 * @return the border width value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	public final int getBorderWidth(){
+	public int getBorderWidth() {
 		return getValue(Property.borderWidth, UndefinedValues.INTEGER);
 	}
 
 	/**
 	 * Returns the outer radius value.
-	 * @return the outer radius value.
+	 * 
+	 * @return the outer radius value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	public final double getOuterRadius(){
+	public double getOuterRadius() {
 		return getValue(Property.outerRadius, UndefinedValues.DOUBLE);
 	}
 
 	/**
 	 * Returns the inner radius value.
-	 * @return the inner radius value.
+	 * 
+	 * @return the inner radius value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	public final double getInnerRadius(){
+	public double getInnerRadius() {
 		return getValue(Property.innerRadius, UndefinedValues.DOUBLE);
 	}
 
 	/**
 	 * Returns the radius length value.
-	 * @return the radius length value.
+	 * 
+	 * @return the radius length value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	public final double getRadiusLength(){
+	public double getRadiusLength() {
 		return getValue(Property.radiusLength, UndefinedValues.DOUBLE);
 	}
-	
+
 	/**
 	 * Returns the offset X value.
-	 * @return the offset X value.
+	 * 
+	 * @return the offset X value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	public final int getOffsetX(){
+	public int getOffsetX() {
 		return getValue(Property.offsetX, UndefinedValues.INTEGER);
 	}
-	
+
 	/**
 	 * Returns the offset Y value.
-	 * @return the offset Y value.
+	 * 
+	 * @return the offset Y value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	public final int getOffsetY(){
+	public int getOffsetY() {
 		return getValue(Property.offsetY, UndefinedValues.INTEGER);
 	}
-
 
 }

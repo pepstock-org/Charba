@@ -192,7 +192,7 @@ public class BaseTick extends ChartContainer {
 	/**
 	 * Called to change the tick marks to include information about the data type.
 	 * 
-	 * @param item element of a single tick.
+	 * @param object java script object element of a single tick.
 	 * @return if the callback returns null or undefined the associated grid line will be hidden.
 	 * @see org.pepstock.charba.client.items.TickItem
 	 */

@@ -23,8 +23,13 @@ import org.pepstock.charba.client.commons.GenericJavaScriptObject;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class MarginsItem extends BaseBoxItem  {
+public class MarginsItem extends BaseBoxItem {
 
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	MarginsItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}

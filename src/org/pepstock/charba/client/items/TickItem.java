@@ -40,6 +40,11 @@ public final class TickItem extends JavaScriptObjectContainer {
 		values
 	}
 
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
 	public TickItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
@@ -47,18 +52,18 @@ public final class TickItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the value of the tick.
 	 * 
-	 * @return the value of the tick.
+	 * @return the value of the tick. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	public final double getValue() {
+	public double getValue() {
 		return getValue(Property.value, UndefinedValues.DOUBLE);
 	}
 
 	/**
 	 * Returns the index of the tick.
 	 * 
-	 * @return the index of the tick.
+	 * @return the index of the tick. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	public final int getIndex() {
+	public int getIndex() {
 		return getValue(Property.index, UndefinedValues.INTEGER);
 	}
 
@@ -67,7 +72,7 @@ public final class TickItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return the complete list of ticks.
 	 */
-	public final List<Double> getValues() {
+	public List<Double> getValues() {
 		return getDoubleArray(Property.values);
 	}
 
