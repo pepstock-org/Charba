@@ -1,7 +1,7 @@
 Charba - GWT wrapper for CHART.JS
 ===============================================
 
-Version 1.4
+Version 1.5
 
 What's Charba
 --------
@@ -36,20 +36,20 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>1.4</version>
+    <version>1.5</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="1.4"/>
+<dependency org="org.pepstock" name="charba" rev="1.5"/>
 ```
 
 If you are using [Gradle](https://gradle.org/):
 
 ```json
-compile group: 'org.pepstock', name: 'charba', version: '1.4'
+compile group: 'org.pepstock', name: 'charba', version: '1.5'
 ```
 
 To install in your GWT project, you must the following configuration into your GWT project module configuration:
