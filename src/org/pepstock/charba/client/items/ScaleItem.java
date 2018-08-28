@@ -28,7 +28,7 @@ import org.pepstock.charba.client.commons.Key;
  */
 public class ScaleItem extends BaseBoxNodeItem {
 	
-	private final LongestTextCacheItem longestTextCache;
+	private final ScaleLongestTextCacheItem longestTextCache;
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -63,7 +63,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	protected ScaleItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 		// initializes sub objects
-		longestTextCache = new LongestTextCacheItem((GenericJavaScriptObject) getValue(Property.longestTextCache));
+		longestTextCache = new ScaleLongestTextCacheItem((GenericJavaScriptObject) getValue(Property.longestTextCache));
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * 
 	 * @return the longest text cache item.
 	 */
-	public final LongestTextCacheItem getLongestTextCache() {
+	public final ScaleLongestTextCacheItem getLongestTextCache() {
 		return longestTextCache;
 	}
 

@@ -29,7 +29,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LongestTextCacheItem extends BaseBoxNodeItem {
+public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	
 	/**
 	 * Name of fields of JavaScript object.
@@ -46,7 +46,7 @@ public final class LongestTextCacheItem extends BaseBoxNodeItem {
 	 * 
 	 * @param javaScriptObject CHART.JS java script object
 	 */
-	LongestTextCacheItem(GenericJavaScriptObject javaScriptObject) {
+	ScaleLongestTextCacheItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
 

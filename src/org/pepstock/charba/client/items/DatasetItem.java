@@ -31,7 +31,7 @@ import org.pepstock.charba.client.commons.Key;
  */
 public final class DatasetItem extends JavaScriptObjectContainer {
 	
-	private final DatasetMetaViewItem view;
+	private final DatasetViewItem view;
 
 	/**
 	 * Needed for GWt injection
@@ -52,7 +52,7 @@ public final class DatasetItem extends JavaScriptObjectContainer {
 	public DatasetItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 		// initializes the sub objects
-		view = new DatasetMetaViewItem((GenericJavaScriptObject)getValue(Property._view));
+		view = new DatasetViewItem((GenericJavaScriptObject)getValue(Property._view));
 	}
 
 	/**
@@ -98,9 +98,9 @@ public final class DatasetItem extends JavaScriptObjectContainer {
 	 * Returns all view information about the dataset.
 	 * 
 	 * @return all view information about the dataset.
-	 * @see org.pepstock.charba.client.items.DatasetMetaViewItem
+	 * @see org.pepstock.charba.client.items.DatasetViewItem
 	 */
-	public DatasetMetaViewItem getView() {
+	public DatasetViewItem getView() {
 		return view;
 	}
 }
