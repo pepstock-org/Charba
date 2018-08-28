@@ -78,7 +78,7 @@ public final class RadialLinearTick extends Tick {
 	 * 
 	 * @param min user defined minimum number for the scale, overrides minimum value from data.
 	 */
-	public void setMin(int min) {
+	public void setMin(double min) {
 		setValue(Property.min, min);
 	}
 

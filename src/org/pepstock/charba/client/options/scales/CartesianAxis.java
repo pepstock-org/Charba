@@ -28,7 +28,7 @@ import org.pepstock.charba.client.enums.Position;
  * <li>linear
  * <li>logarithmic
  * <li>category
- * <li>time (not implemented yet)
+ * <li>time
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
