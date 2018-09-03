@@ -42,7 +42,7 @@ public final class PieChart extends AbstractChart<PieOptions, PieDataset> {
 	 */
 	@Override
 	public Type getType() {
-		return Type.pie;
+		return ChartType.pie;
 	}
 
 	/*

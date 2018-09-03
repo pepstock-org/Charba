@@ -75,6 +75,7 @@ public final class ChartNode extends JavaScriptObjectContainer {
 		chartArea = new ChartAreaItem((GenericJavaScriptObject) getValue(Property.chartArea));
 		title = new TitleNode((GenericJavaScriptObject) getValue(Property.titleBlock));
 		tooltip = new TooltipNode((GenericJavaScriptObject) getValue(Property.titleBlock));
+//		log(javaScriptObject);
 	}
 
 	/**
@@ -230,4 +231,10 @@ public final class ChartNode extends JavaScriptObjectContainer {
 		return getValue(Property.offsetY, UndefinedValues.INTEGER);
 	}
 
+	private native void log(GenericJavaScriptObject options)/*-{
+		console.log(options);
+	}-*/;
+
+
+	
 }

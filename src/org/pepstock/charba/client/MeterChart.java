@@ -43,7 +43,7 @@ public final class MeterChart extends BaseMeterChart<MeterOptions, MeterDataset>
 	 */
 	@Override
 	public Type getType() {
-		return Type.doughnut;
+		return ChartType.doughnut;
 	}
 
 	/*

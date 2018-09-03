@@ -43,7 +43,7 @@ public class BarChart extends AbstractChart<BarOptions, BarDataset>{
 	 */
 	@Override
 	public Type getType() {
-		return Type.bar;
+		return ChartType.bar;
 	}
 
 	/*

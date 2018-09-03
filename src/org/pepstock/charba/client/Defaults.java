@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.controllers.Controllers;
 import org.pepstock.charba.client.defaults.global.Options;
 import org.pepstock.charba.client.defaults.scale.Scale;
 import org.pepstock.charba.client.plugins.GlobalPlugins;
@@ -47,6 +48,9 @@ public final class Defaults {
 	// global plugins
 	private final GlobalPlugins plugins = new GlobalPlugins();
 	
+	// controller
+	private final Controllers controllers = new Controllers();
+	
 	/**
 	 * To avoid any instantiation
 	 */
@@ -58,7 +62,7 @@ public final class Defaults {
 		// loads scale options
 		scale = new Scale((GenericJavaScriptObject)getGlobalScale());
 		// loads all charts options
-		for (Type type : Type.values()){
+		for (Type type : ChartType.values()){
 			chartOptions.put(type, new Options((GenericJavaScriptObject)getChart(type.name())));
 		}
 	}
@@ -96,6 +100,16 @@ public final class Defaults {
 	}
 	
 	/**
+	 * FIXME
+	 *  
+	 * @return the global plugins wrapper.
+	 * @see org.pepstock.charba.client.plugins.GlobalPlugins
+	 */
+	public static Controllers getControllers(){
+		return INSTANCE.controllers;
+	}
+	
+	/**
 	 * Returns the global options by chart type.
 	 * 
 	 * @param type chart type.
@@ -109,7 +123,7 @@ public final class Defaults {
 		}
 		// if type not exist
 		// returns the options for BAR chart.
-		return INSTANCE.chartOptions.get(Type.bar);
+		return INSTANCE.chartOptions.get(ChartType.bar);
 	}
 	
 	/**

@@ -42,7 +42,7 @@ public class RadarChart extends AbstractChart<RadarOptions, RadarDataset> {
 	 */
 	@Override
 	public Type getType() {
-		return Type.radar;
+		return ChartType.radar;
 	}
 
 	/*

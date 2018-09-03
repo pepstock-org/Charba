@@ -30,7 +30,7 @@ public class HorizontalBarChart extends BarChart {
 	 */
 	@Override
 	public Type getType() {
-		return Type.horizontalBar;
+		return ChartType.horizontalBar;
 	}
 
 }

@@ -42,7 +42,7 @@ public final class StackedBarChart extends AbstractChart<StackedOptions, Stacked
 	 */
 	@Override
 	public Type getType() {
-		return Type.bar;
+		return ChartType.bar;
 	}
 
 	/*

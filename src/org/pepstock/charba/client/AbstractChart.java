@@ -629,7 +629,10 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 * @return java script object with merged configuration.
 	 */
 	private native GenericJavaScriptObject createGlobalOptions(String chartType) /*-{
-		var chartOptions = $wnd.Chart.helpers.clone($wnd.Chart.defaults[chartType]);
+		var chartOptions = new Object();
+		if ($wnd.Chart.defaults.hasOwnProperty(chartType)){
+			chartOptions = $wnd.Chart.helpers.clone($wnd.Chart.defaults[chartType]);
+		}
 		var scaleOptions = $wnd.Chart.helpers.clone($wnd.Chart.defaults.scale);
 	    var globalOptions = $wnd.Chart.helpers.clone($wnd.Chart.defaults.global);
 		

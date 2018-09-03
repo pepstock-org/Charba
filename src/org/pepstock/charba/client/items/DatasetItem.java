@@ -29,7 +29,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DatasetItem extends JavaScriptObjectContainer {
+public class DatasetItem extends JavaScriptObjectContainer {
 	
 	private final DatasetViewItem view;
 

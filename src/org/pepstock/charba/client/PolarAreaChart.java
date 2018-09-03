@@ -42,7 +42,7 @@ public final class PolarAreaChart extends AbstractChart<PolarAreaOptions, PolarA
 	 */
 	@Override
 	public Type getType() {
-		return Type.polarArea;
+		return ChartType.polarArea;
 	}
 
 	/*

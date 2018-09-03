@@ -18,10 +18,12 @@ package org.pepstock.charba.client.items;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.controllers.ControllerType;
 
 /**
  * This object is just a proxy object, created from JavaScript side, to wrap an JavaScript array.<br>
@@ -60,7 +62,10 @@ public final class DatasetMetaItem extends JavaScriptObjectContainer {
 	 * @see org.pepstock.charba.client.Type
 	 */
 	public Type getType() {
-		return getValue(Property.type, Type.class, Type.bar);
+		String value = getValue(Property.type, ChartType.bar.name());
+		Type type = ChartType.get(value);
+		//FIXME
+		return type == null ? new ControllerType(value) : type;
 	}
 
 	/**

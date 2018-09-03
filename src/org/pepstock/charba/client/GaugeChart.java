@@ -44,7 +44,7 @@ public final class GaugeChart extends BaseMeterChart<GaugeOptions, GaugeDataset>
 	 */
 	@Override
 	public Type getType() {
-		return Type.doughnut;
+		return ChartType.doughnut;
 	}
 
 	/*
