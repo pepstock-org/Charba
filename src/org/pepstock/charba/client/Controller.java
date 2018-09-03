@@ -30,7 +30,7 @@ public interface Controller {
 	 * 
 	 * @return the controller id.
 	 */
-	String getType();
+	Type getType();
 	
 	ChartType getChartType();
 

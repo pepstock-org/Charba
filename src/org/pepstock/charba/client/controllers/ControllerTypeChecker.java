@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.controllers;
 
+import org.pepstock.charba.client.Type;
+
 import com.google.gwt.safehtml.shared.UriUtils;
 
 /**
@@ -52,16 +54,18 @@ final class ControllerTypeChecker {
 	 * @param type controller type to be checked.
 	 * @throws InvalidControllerTypeException if the controller is not compliant
 	 */
-	public static void check(String type) throws InvalidControllerTypeException {
+	public static void check(Type type) throws InvalidControllerTypeException {
 		// checks if is null
 		if (type == null) {
 			throw new InvalidControllerTypeException(INVALID_CONTROLLER_TYPE_NULL);
-		} else if (type.charAt(0) == DOT || type.charAt(0) == UNDERSCORE) {
+		} else if (type.name() == null) {
+			throw new InvalidControllerTypeException(INVALID_CONTROLLER_TYPE_NULL);
+		} else if (type.name().charAt(0) == DOT || type.name().charAt(0) == UNDERSCORE) {
 			// checks if is starting with DOT or underscore
-			throw new InvalidControllerTypeException(buildMessage(type, INVALID_CONTROLLER_TYPE_FIRST_CHAR));
-		} else if (!UriUtils.isSafeUri(type)) {
+			throw new InvalidControllerTypeException(buildMessage(type.name(), INVALID_CONTROLLER_TYPE_FIRST_CHAR));
+		} else if (!UriUtils.isSafeUri(type.name())) {
 			// checks if is not safe URL
-			throw new InvalidControllerTypeException(buildMessage(type, INVALID_CONTROLLER_TYPE_URL_SAFE));
+			throw new InvalidControllerTypeException(buildMessage(type.name(), INVALID_CONTROLLER_TYPE_URL_SAFE));
 		}
 	}
 

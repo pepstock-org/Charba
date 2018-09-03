@@ -18,6 +18,7 @@ package org.pepstock.charba.client.controllers;
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.Controller;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
@@ -70,7 +71,7 @@ final class WrapperController extends JavaScriptObjectContainer {
 	 * 
 	 * @return the plugin id.
 	 */
-	final String getType() {
+	final Type getType() {
 		return delegation.getType();
 	}
 

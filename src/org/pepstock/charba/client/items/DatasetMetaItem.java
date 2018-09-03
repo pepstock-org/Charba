@@ -64,7 +64,6 @@ public final class DatasetMetaItem extends JavaScriptObjectContainer {
 	public Type getType() {
 		String value = getValue(Property.type, ChartType.bar.name());
 		Type type = ChartType.get(value);
-		//FIXME
 		return type == null ? new ControllerType(value) : type;
 	}
 

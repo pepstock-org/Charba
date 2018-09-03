@@ -18,7 +18,7 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Enumerates all possible available types of a chart.
+ * Maps the type of a chart.
  * 
  * @author Andrea "Stock" Stocchero
  *

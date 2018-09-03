@@ -48,7 +48,7 @@ public final class Controllers {
 			// creates a java script object, wrapper of the controller
 			WrapperController wController = check(controller);
 			if (wController != null) {
-				extendController(chartType.name(), controller.getType(), wController.getObject());
+				extendController(chartType.name(), controller.getType().name(), wController.getObject());
 				return true;
 			}
 		}
@@ -59,11 +59,11 @@ public final class Controllers {
 		// checks the controller id
 		ControllerTypeChecker.check(controller.getType());
 		// checks if ID is already registered
-		if (controllers.containsKey(controller.getType())){
+		if (controllers.containsKey(controller.getType().name())){
 			return null;
 		}
 		// stores the id into a set
-		controllers.put(controller.getType(), controller);
+		controllers.put(controller.getType().name(), controller);
 		// creates a java script object, wrapper of the controller
 		return new WrapperController(controller);
 	}
