@@ -70,19 +70,16 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 
 	// CHart configuration object
 	private final Configuration configuration = new Configuration();
-
 	// Data element of configuration
 	private final Data data = new Data();
-
+	// plugins of this chart
 	private final Plugins plugins;
-
+	// flag if must be draw on attach
 	private boolean drawOnAttach = true;
-
+	// flag if must be destroy on detach
 	private boolean destroyOnDetach = true;
-
 	// gets if Canvas is supported
 	private final boolean isCanvasSupported = Canvas.isSupported();
-	
 	// merged options of defaults
 	private final GlobalOptions options;
 
@@ -133,7 +130,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	protected HandlerManager createHandlerManager() {
 		return new ChartHandlerManager(this);
 	}
-
+	
 	/**
 	 * Returns the ID of chart.<br>
 	 * It could be considered as chart unique ID.
@@ -159,7 +156,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	}
 	
 	/**
-	 * Returns the chart node.
+	 * Returns the chart node with runtime data.
 	 * @return the chart node.
 	 */
 	public final ChartNode getChartNode(){
@@ -651,4 +648,5 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	    $wnd.Chart.helpers.mergeIf(chartOptions, globalOptions);
 	    return chartOptions;
 	}-*/;
+
  }

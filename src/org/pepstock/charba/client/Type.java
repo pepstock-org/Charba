@@ -18,7 +18,7 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Maps the type of a chart.
+ * Interface to set the type of a chart.
  * 
  * @author Andrea "Stock" Stocchero
  *

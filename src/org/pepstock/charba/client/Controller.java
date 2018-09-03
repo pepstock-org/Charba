@@ -19,6 +19,8 @@ import org.pepstock.charba.client.controllers.Context;
 import org.pepstock.charba.client.controllers.StyleElement;
 
 /**
+ * This interface enables the capability to create a custom chart.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -32,27 +34,74 @@ public interface Controller {
 	 */
 	Type getType();
 	
+	/**
+	 * Controller must define the extended chart to use.<br>
+	 * If the controller does not extend any existing chart, returns <code>null</code>
+	 * 
+	 * @return chart type extended by controller. <code>null</code> if the controller does not extend any chart.
+	 */
 	ChartType getChartType();
 
-	// Create elements for each piece of data in the dataset. Store elements in an array on the dataset as dataset.metaData
+	/**
+	 * Initializes the controller.
+	 * 
+	 * @param jsThis context of controller 
+	 * @param chart chart instance
+	 * @param datasetIndex dataset index
+	 */
+	void initialize(Context jsThis, AbstractChart<?, ?> chart, int datasetIndex);
+
+	/**
+	 * Create elements for each piece of data in the dataset. Store elements in an array on the dataset.
+	 * 
+	 * @param jsThis context of controller
+	 * @param chart chart instance
+	 */
 	void addElements(Context jsThis, AbstractChart<?, ?> chart);
 
-	// Create a single element for the data at the given index and reset its state
+	/**
+	 * Create a single element for the data at the given index and reset its state.
+	 * 
+	 * @param jsThis context of controller
+	 * @param chart chart instance
+	 * @param index dataset index
+	 */
 	void addElementAndReset(Context jsThis, AbstractChart<?, ?> chart, int index);
 
-	// Draw the representation of the dataset
-	// @param ease : if specified, this number represents how far to transition elements. See the implementation of draw() in
-	// any of the provided controllers to see how this should be used
+	/**
+	 * Draw the representation of the dataset.
+	 * 
+	 * @param jsThis context of controller
+	 * @param chart chart instance
+	 * @param ease if specified, this number represents how far to transition elements.
+	 */
 	void draw(Context jsThis, AbstractChart<?, ?> chart, double ease);
 
-	// Remove hover styling from the given element
+	/**
+	 * Remove hover styling from the given element.
+	 * 
+	 * @param jsThis context of controller
+	 * @param chart chart instance
+	 * @param element element to be removed.
+	 */
 	void removeHoverStyle(Context jsThis, AbstractChart<?, ?> chart, StyleElement element);
 
-	// Add hover styling to the given element
+	/**
+	 * Add hover styling to the given element.
+	 * 
+	 * @param jsThis context of controller
+	 * @param chart chart instance
+	 * @param element element to be set.
+	 */
 	void setHoverStyle(Context jsThis, AbstractChart<?, ?> chart, StyleElement element);
 
-	// Update the elements in response to new data
-	// @param reset : if true, put the elements into a reset state so they can animate to their final values
+	/**
+	 * Update the elements in response to new data.
+	 * 
+	 * @param jsThis context of controller
+	 * @param chart chart instance
+	 * @param reset if true, put the elements into a reset state so they can animate to their final values
+	 */
 	void update(Context jsThis, AbstractChart<?, ?> chart, boolean reset);
 
 }

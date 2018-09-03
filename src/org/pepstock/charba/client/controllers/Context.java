@@ -24,14 +24,13 @@ import org.pepstock.charba.client.items.ChartNode;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * 
+ * This object stores the <code>this</code> instance of java script because is necessary to invoke the 
+ * default methods of controller when it's extending an existing chart.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class Context extends JavaScriptObjectContainer {
-	
-	private final ChartNode chartNode;
 	
 	/**
 	 * Needed for GWt injection
@@ -50,11 +49,6 @@ public final class Context extends JavaScriptObjectContainer {
 	 */
 	Context(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
-		if (has(Property.chart)) {
-			chartNode = new ChartNode((GenericJavaScriptObject) getValue(Property.chart));
-		} else {
-			chartNode = null;
-		}
 	}
 
 	/**
@@ -69,19 +63,31 @@ public final class Context extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * Returns all view information about the dataset.
+	 * Returns all view information about the chart instance.
 	 * 
-	 * @return all view information about the dataset.
-	 * @see org.pepstock.charba.client.items.DatasetViewItem
+	 * @return all view information about the chart instance, otherwise <code>null</code>.
 	 */
 	public ChartNode getChartNode() {
-		return chartNode;
+		// checks if chart instance exists
+		if (has(Property.chart)) {
+			// returns the chart node
+			return new ChartNode((GenericJavaScriptObject) getValue(Property.chart));
+		}
+		return null;
 	}
 	
+	/**
+	 * Returns an array of integer of data 
+	 * @return an array of integer of data 
+	 */
 	public List<Integer> getData(){
 		return getIntegerArray(Property._data);
 	}
 	
+	/**
+	 * Overrides the protected method of the container to export the java script object.
+	 * @return export the java script object.
+	 */
 	GenericJavaScriptObject getObject() {
 		return super.getJavaScriptObject();
 	}

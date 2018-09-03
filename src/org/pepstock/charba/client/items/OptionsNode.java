@@ -13,29 +13,26 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.controllers;
+package org.pepstock.charba.client.items;
+
+import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.defaults.global.Options;
 
 /**
- * Exception created when the controller type is not valid.<br>
- * A controller type <br>
- * <ul>
- * <li>can not start with a dot or an underscore
- * <li>can not contain any non-URL-safe characters
- * </ul>
+ *  Wrapper of options node of CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public class InvalidControllerTypeException extends Exception {
-
-	private static final long serialVersionUID = 1L;
+public final class OptionsNode extends Options {
 
 	/**
-	 * Builds the exception using the message explaining why the type is not valid.
+	 * Wraps the CHART.JS java script object.
 	 * 
-	 * @param message explaination why the type is not valid.
+	 * @param javaScriptObject CHART.JS java script object
 	 */
-	public InvalidControllerTypeException(String message) {
-		super(message);
+	OptionsNode(GenericJavaScriptObject javaScriptObject) {
+		super(javaScriptObject);
 	}
+
 }

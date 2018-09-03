@@ -20,7 +20,7 @@ import org.pepstock.charba.client.Type;
 import com.google.gwt.safehtml.shared.UriUtils;
 
 /**
- * This utility checks if the controller ID is acceptable or not.
+ * This utility checks if the controller type is acceptable or not.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -44,7 +44,7 @@ final class ControllerTypeChecker {
 	}
 
 	/**
-	 * Checks if the controller is compliant with the constraints of controller id.<br>
+	 * Checks if the controller is compliant with the constraints of controller type.<br>
 	 * A controller type <br>
 	 * <ul>
 	 * <li>can not start with a dot or an underscore
@@ -59,6 +59,7 @@ final class ControllerTypeChecker {
 		if (type == null) {
 			throw new InvalidControllerTypeException(INVALID_CONTROLLER_TYPE_NULL);
 		} else if (type.name() == null) {
+			// checks if value is null
 			throw new InvalidControllerTypeException(INVALID_CONTROLLER_TYPE_NULL);
 		} else if (type.name().charAt(0) == DOT || type.name().charAt(0) == UNDERSCORE) {
 			// checks if is starting with DOT or underscore
@@ -72,7 +73,7 @@ final class ControllerTypeChecker {
 	/**
 	 * Creates the message for the exception.
 	 * 
-	 * @param type controller id
+	 * @param type controller type
 	 * @param message message
 	 * @return message for exception
 	 */

@@ -28,7 +28,9 @@ import org.pepstock.charba.client.commons.Key;
  */
 public final class ChartNode extends JavaScriptObjectContainer {
 	
-	private final LegendNode legendNode;
+	private final OptionsNode options;
+	
+	private final LegendNode legend;
 	
 	private final ScalesNode scales;
 	
@@ -47,6 +49,7 @@ public final class ChartNode extends JavaScriptObjectContainer {
 		width,
 		height,
 		aspectRatio,
+		options,
 		legend,
 		titleBlock,
 		currentDevicePixelRatio,
@@ -70,12 +73,21 @@ public final class ChartNode extends JavaScriptObjectContainer {
 	public ChartNode(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 		// initializes the sub objects
-		legendNode = new LegendNode((GenericJavaScriptObject) getValue(Property.legend));
+		options = new OptionsNode((GenericJavaScriptObject) getValue(Property.options));
+		legend = new LegendNode((GenericJavaScriptObject) getValue(Property.legend));
 		scales = new ScalesNode((GenericJavaScriptObject) getValue(Property.scales));
 		chartArea = new ChartAreaItem((GenericJavaScriptObject) getValue(Property.chartArea));
 		title = new TitleNode((GenericJavaScriptObject) getValue(Property.titleBlock));
 		tooltip = new TooltipNode((GenericJavaScriptObject) getValue(Property.titleBlock));
-//		log(javaScriptObject);
+	}
+
+	/**
+	 * Returns the options item.
+	 * 
+	 * @return the options item.
+	 */
+	public OptionsNode getOptions() {
+		return options;
 	}
 
 	/**
@@ -84,7 +96,7 @@ public final class ChartNode extends JavaScriptObjectContainer {
 	 * @return the legend item.
 	 */
 	public LegendNode getLegend() {
-		return legendNode;
+		return legend;
 	}
 
 	/**
@@ -231,10 +243,4 @@ public final class ChartNode extends JavaScriptObjectContainer {
 		return getValue(Property.offsetY, UndefinedValues.INTEGER);
 	}
 
-	private native void log(GenericJavaScriptObject options)/*-{
-		console.log(options);
-	}-*/;
-
-
-	
 }

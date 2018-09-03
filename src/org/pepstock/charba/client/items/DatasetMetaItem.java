@@ -62,8 +62,11 @@ public final class DatasetMetaItem extends JavaScriptObjectContainer {
 	 * @see org.pepstock.charba.client.Type
 	 */
 	public Type getType() {
+		// gets string value from java script object
 		String value = getValue(Property.type, ChartType.bar.name());
+		// checks if consistent with out of the box chart types
 		Type type = ChartType.get(value);
+		// if not, creates new type being a controller.
 		return type == null ? new ControllerType(value) : type;
 	}
 

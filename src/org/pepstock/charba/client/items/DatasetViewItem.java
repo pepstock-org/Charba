@@ -353,7 +353,7 @@ public final class DatasetViewItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return the inner radius of dataset item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	public double getinnerRadius() {
+	public double getInnerRadius() {
 		return getValue(Property.innerRadius, UndefinedValues.DOUBLE);
 	}
 }

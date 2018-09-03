@@ -24,8 +24,8 @@ import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Wraps a plugin, delegating the execution of all hooks to it.<br>
- * The wrapper is mandatory to able to catch all hooks of chart even if the plugin implements just a part of the hooks.
+ * Wraps a controller, delegating the execution of all hooks to it.<br>
+ * The wrapper is mandatory to able to catch all hooks of chart even if the controller implements just a part of the hooks.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -43,21 +43,21 @@ final class WrapperController extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * Builds the object with plugin instance
+	 * Builds the object with controller instance
 	 * 
-	 * @param delegation plugin instance
+	 * @param delegation controller instance
 	 */
 	WrapperController(Controller delegation) {
-		// stores the plugin
+		// stores the controller
 		this.delegation = delegation;
-		// sets the plugin ID
+		// sets the controller type
 		setValue(Property.type, delegation.getType());
-		// registers itself with all methods of plugin definition
+		// registers itself with all methods of controller definition
 		registerNativeControllersHandler(getJavaScriptObject());
 	}
 
 	/**
-	 * Returns the chart instances which must be consumed by plugin.
+	 * Returns the chart instances which must be consumed by controller.
 	 * 
 	 * @param chartId chart id.
 	 * @return the chart instance or <code>null</code> if not found.
@@ -67,93 +67,117 @@ final class WrapperController extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * Returns the plugin id.
+	 * Returns the controller type.
 	 * 
-	 * @return the plugin id.
+	 * @return the controller type.
 	 */
 	final Type getType() {
 		return delegation.getType();
 	}
+	
+	/**
+	 * Initializes the controller.
+	 * @param jsThis context of controller 
+	 * @param chartId chartId chart id.
+	 * @param datasetIndex dataset index
+	 */
+	protected void onInitialize(GenericJavaScriptObject jsThis, String chartId, int datasetIndex) {
+		// gets chart instance
+		AbstractChart<?, ?> chart = getChart(chartId);
+		// if consistent, calls controller
+		if (chart != null) {
+			delegation.initialize(new Context(jsThis), chart, datasetIndex);
+		}
+	}
 
 	/**
-	 * Called before initializing 'chart'.
-	 * @param chartId chart id.
+	 * Create elements for each piece of data in the dataset. Store elements in an array on the dataset.
+	 * @param jsThis context of controller 
+	 * @param chartId chartId chart id.
 	 */
 	protected void onAddElements(GenericJavaScriptObject jsThis, String chartId) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
-		// if consistent, calls plugin
+		// if consistent, calls controller
 		if (chart != null) {
 			delegation.addElements(new Context(jsThis), chart);
 		}
 	}
 
 	/**
-	 * Called after 'chart' has been initialized and before the first update.
-	 * @param chartId chart id.
+	 * Create a single element for the data at the given index and reset its state.
+	 * @param jsThis context of controller 
+	 * @param chartId chartId chart id.
+	 * @param index dataset index
 	 */
 	protected void onAddElementAndReset(GenericJavaScriptObject jsThis, String chartId, int index) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
-		// if consistent, calls plugin
+		// if consistent, calls controller
 		if (chart != null) {
 			delegation.addElementAndReset(new Context(jsThis), chart, index);
 		}
 	}
 
 	/**
-	 * Called before updating 'chart'. If any plugin returns <code>false</code>, the update is cancelled (and thus subsequent
-	 * render(s)) until another 'update' is triggered.
+	 * Draw the representation of the dataset.
 	 * 
-	 * @param chartId chart id.
-	 * @return <code>false</code> to cancel the chart update.
+	 * @param jsThis context of controller 
+	 * @param chartId chartId chart id.
+	 * @param ease if specified, this number represents how far to transition elements.
 	 */
 	protected void onDraw(GenericJavaScriptObject jsThis, String chartId, String ease) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
-		// if consistent, calls plugin
+		// if consistent, calls controller
 		if (chart != null) {
 			delegation.draw(new Context(jsThis), chart, Double.valueOf(ease));
 		}
 	}
 
 	/**
-	 * Called after 'chart' has been updated and before rendering. Note that this hook will not be called if the chart update
-	 * has been previously cancelled.
-	 * @param chartId chart id.
+	 * Remove hover styling from the given element.
+	 * 
+	 * @param jsThis context of controller 
+	 * @param chartId chartId chart id.
+	 * @param object element to be removed.
 	 */
 	protected void onRemoveHoverStyle(GenericJavaScriptObject jsThis, String chartId, GenericJavaScriptObject object) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
-		// if consistent, calls plugin
+		// if consistent, calls controller
 		if (chart != null) {
 			delegation.removeHoverStyle(new Context(jsThis), chart, new StyleElement(object));
 		}
 	}
 
 	/**
-	 * Called after 'chart' has been updated and before rendering. Note that this hook will not be called if the chart update
-	 * has been previously cancelled.
-	 * @param chartId chart id.
+	 * Add hover styling to the given element.
+	 * 
+	 * @param jsThis context of controller 
+	 * @param chartId chartId chart id.
+	 * @param object element to be set.
 	 */
 	protected void onSetHoverStyle(GenericJavaScriptObject jsThis, String chartId, GenericJavaScriptObject object) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
-		// if consistent, calls plugin
+		// if consistent, calls controller
 		if (chart != null) {
 			delegation.setHoverStyle(new Context(jsThis), chart, new StyleElement(object));
 		}
 	}
 
 	/**
-	 * Called after the 'chart' has been layed out. Note that this hook will not be called if the layout update has been
-	 * previously cancelled.
-	 * @param chartId chart id.
+	 * Update the elements in response to new data.
+	 * 
+	 * @param jsThis context of controller 
+	 * @param chartId chartId chart id.
+	 * @param reset if true, put the elements into a reset state so they can animate to their final values
 	 */
 	protected void onUpdate(GenericJavaScriptObject jsThis, String chartId, boolean reset) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
-		// if consistent, calls plugin
+		// if consistent, calls controller
 		if (chart != null) {
 			delegation.update(new Context(jsThis), chart, reset);
 		}
@@ -169,13 +193,18 @@ final class WrapperController extends JavaScriptObjectContainer {
 	}
 	
 	/**
-	 * FIXME
-	 * @param config
+	 * Registers all hooks of the controller to the wrapper.
+	 * @param config java script object where adding the new function and link of java code.
 	 */
 	private native void registerNativeControllersHandler(GenericJavaScriptObject config)/*-{
 	var self = this;
 
-	// init
+	// Initializes the controller
+    config.initialize = function(chart, datasetIndex) {
+		this.chart = chart;
+		this.datasetIndex = datasetIndex;
+		self.@org.pepstock.charba.client.controllers.WrapperController::onInitialize(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;Ljava/lang/String;I)(this, chart.options.charbaId, datasetIndex);
+	};
     // Create elements for each piece of data in the dataset. Store elements in an array on the dataset as dataset.metaData
     config.addElements = function() {
 		self.@org.pepstock.charba.client.controllers.WrapperController::onAddElements(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;Ljava/lang/String;)(this, this.chart.options.charbaId);

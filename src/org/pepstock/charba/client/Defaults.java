@@ -100,10 +100,10 @@ public final class Defaults {
 	}
 	
 	/**
-	 * FIXME
+	 * Returns the controllers managers.
 	 *  
-	 * @return the global plugins wrapper.
-	 * @see org.pepstock.charba.client.plugins.GlobalPlugins
+	 * @return the controllers managers.
+	 * @see org.pepstock.charba.client.controller.Controllers
 	 */
 	public static Controllers getControllers(){
 		return INSTANCE.controllers;

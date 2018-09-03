@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 
 /**
  * Glabal configuration to set controllers at global level.<br>
- * It maps the CHART.JS object of default, <code>chart.controllers</code>.<br>
+ * It maps the CHART.JS object of controller, <code>chart.controllers</code>.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -38,31 +38,46 @@ public final class Controllers {
 	/**
 	 * Registers a controller as global, to apply to all charts. 
 	 * @param controller controller instance
-	 * @return <code>true</code> if registered, otherwise <code>false</code> if the controller is already registered with the controller id of controller instance.
-	 * @throws InvalidControllerTypeException  if the controller id is not correct.
+	 * @return <code>true</code> if registered, otherwise <code>false</code> if the controller is already registered with the controller type of controller instance.
+	 * @throws InvalidControllerTypeException  if the controller type is not correct.
 	 */
 
 	public boolean extend(Controller controller) throws InvalidControllerTypeException{
-		ChartType chartType = controller.getChartType();
-		if (chartType != null) {
-			// creates a java script object, wrapper of the controller
-			WrapperController wController = check(controller);
-			if (wController != null) {
+		// checks the consistency of controller
+		// and creates a java script object, wrapper of the controller
+		WrapperController wController = check(controller);
+		// checks if consistent
+		if (wController != null) {
+			// gets the chart type to extend
+			ChartType chartType = controller.getChartType();
+			// if not null, the controller extends an existing chart
+			if (chartType != null) {
 				extendController(chartType.name(), controller.getType().name(), wController.getObject());
+				return true;
+			} else {
+				// if here, the controller is new TYPE (no extend)
+				registerController(controller.getType().name(), wController.getObject());
 				return true;
 			}
 		}
+		// controller already exists
 		return false;
 	}
 	
+	/**
+	 * Checks the consistency of controller type and creates a wrapper.
+	 * @param controller controller implementation
+	 * @return 
+	 * @throws InvalidControllerTypeException if the controller type is not correct.
+	 */
 	private WrapperController check(Controller controller) throws InvalidControllerTypeException {
-		// checks the controller id
+		// checks the controller type
 		ControllerTypeChecker.check(controller.getType());
-		// checks if ID is already registered
+		// checks if type is already registered
 		if (controllers.containsKey(controller.getType().name())){
 			return null;
 		}
-		// stores the id into a set
+		// stores the type into a set
 		controllers.put(controller.getType().name(), controller);
 		// creates a java script object, wrapper of the controller
 		return new WrapperController(controller);
@@ -77,7 +92,7 @@ public final class Controllers {
 	}
 
 	/**
-	 * Calls <code>Chart.controllers.register</code> function to register a global controller.
+	 * Calls <code>Chart.DatasetController.extend</code> function to register a controller.
 	 * 
 	 * @param instance controller instance.
 	 */
@@ -86,7 +101,7 @@ public final class Controllers {
 	}-*/;
 
 	/**
-	 * Calls <code>Chart.controllers.register</code> function to register a global controller.
+	 * Calls <code>Chart.controllers[chartType].extend</code> function to register a controller, extending an existing chart type.
 	 * 
 	 * @param instance controller instance.
 	 */
