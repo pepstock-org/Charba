@@ -103,7 +103,7 @@ public final class Defaults {
 	 * Returns the controllers managers.
 	 *  
 	 * @return the controllers managers.
-	 * @see org.pepstock.charba.client.controller.Controllers
+	 * @see org.pepstock.charba.client.controllers.Controllers
 	 */
 	public static Controllers getControllers(){
 		return INSTANCE.controllers;
