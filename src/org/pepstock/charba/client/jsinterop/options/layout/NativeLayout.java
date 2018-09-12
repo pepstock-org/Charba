@@ -13,32 +13,28 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.resources;
+package org.pepstock.charba.client.jsinterop.options.layout;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.TextResource;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.options.layout.padding.NativePadding;
+
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
- * Client bundle to reference CHART.JS java script code.
+ * The layout configuration is needed to set the padding.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface Resources extends ClientBundle {
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
+public final class NativeLayout extends NativeObject {
 
-	// static reference of this resource
-	public static final Resources INSTANCE = GWT.create(Resources.class);
+	@JsProperty
+	public native NativePadding getPadding();
 
-	/**
-	 * Contains text representation of native chart.js code
-	 * 
-	 * @return chart.js code
-	 */
-	@Source("js/chart.bundle.min.js")
-	TextResource chartJsSource();
-	
-	@Source("js/charba.factory.js")
-	TextResource charbaFactory();
+	@JsProperty
+	public native void setPadding(NativePadding padding);
 
 }

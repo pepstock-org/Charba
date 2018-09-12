@@ -104,7 +104,7 @@ public final class Rectangle extends Arc {
 	 * @return the edge to skip drawing the border for. Default is {@link  org.pepstock.charba.client.enums.Position#bottom}.
 	 * @see  org.pepstock.charba.client.enums.Position
 	 */
-	public Position getBorderJoinStyle() {
+	public Position getBorderSkipped() {
 		return getValue(Property.borderSkipped, Position.class, Position.bottom);
 	}
 

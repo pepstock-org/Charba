@@ -88,8 +88,8 @@ public final class Rectangle extends AbstractElement {
 	 * 
 	 * @return the edge to skip drawing the border for.
 	 */
-	public Position getBorderJoinStyle() {
-		return getValue(Property.borderSkipped, Position.class, getChart().getGlobal().getElements().getRectangle().getBorderJoinStyle());
+	public Position getBorderSkipped() {
+		return getValue(Property.borderSkipped, Position.class, getChart().getGlobal().getElements().getRectangle().getBorderSkipped());
 	}
 
 }
