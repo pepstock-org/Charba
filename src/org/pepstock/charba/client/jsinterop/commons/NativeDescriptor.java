@@ -8,6 +8,12 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
 public class NativeDescriptor {
 	
+	/**
+	 * 
+	 */
+	protected NativeDescriptor() {
+	}
+
 	@JsProperty
 	public native Object getValue();
 	

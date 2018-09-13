@@ -13,6 +13,12 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
 public final class NativeElements extends NativeObject {
 	
+	/**
+	 * 
+	 */
+	protected NativeElements() {
+	}
+
 	@JsProperty
 	public native NativeArc getArc();
 

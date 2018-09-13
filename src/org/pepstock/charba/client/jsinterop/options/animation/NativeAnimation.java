@@ -17,6 +17,12 @@ import jsinterop.annotations.JsType;
 public final class NativeAnimation extends NativeObject {
 	
 	/**
+	 * 
+	 */
+	protected NativeAnimation() {
+	}
+
+	/**
 	 * Sets the animation easing.
 	 * 
 	 * @param easing animation easing.

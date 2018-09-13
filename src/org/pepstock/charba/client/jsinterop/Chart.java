@@ -5,7 +5,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 @JsType(isNative = true, name = "Chart", namespace = JsPackage.GLOBAL)
-public class Chart {
+public final class Chart {
 
 	@JsProperty(name = "defaults")
 	public static native Defaults defaults();

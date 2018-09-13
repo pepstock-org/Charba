@@ -35,6 +35,12 @@ import jsinterop.annotations.JsType;
 public final class NativeRectangle extends NativeArc {
 
 	/**
+	 * 
+	 */
+	protected NativeRectangle() {
+	}
+
+	/**
 	 * Sets the edge to skip drawing the border for.
 	 * 
 	 * @param borderSkipped the edge to skip drawing the border for.

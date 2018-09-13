@@ -26,7 +26,7 @@ import org.pepstock.charba.client.jsinterop.options.layout.padding.Padding;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Layout implements IsDelegated<NativeLayout> {
+public class Layout implements IsDelegated<NativeLayout> {
 
 	private final NativeLayout delegated;
 

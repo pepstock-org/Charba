@@ -8,7 +8,9 @@ import org.pepstock.charba.client.jsinterop.options.elements.point.IsDefaultPoin
 import org.pepstock.charba.client.jsinterop.options.elements.rectangle.IsDefaultRectangle;
 import org.pepstock.charba.client.jsinterop.options.hover.IsDefaultHover;
 import org.pepstock.charba.client.jsinterop.options.layout.padding.IsDefaultPadding;
+import org.pepstock.charba.client.jsinterop.options.legend.IsDefaultLegend;
 import org.pepstock.charba.client.jsinterop.options.title.IsDefaultTitle;
+import org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips;
 
 public interface IsDefaultOptions {
 	
@@ -17,7 +19,11 @@ public interface IsDefaultOptions {
 	IsDefaultHover getHover();
 	
 	IsDefaultTitle getTitle();
+
+	IsDefaultLegend getLegend();
 	
+	IsDefaultTooltips getTooltips();
+
 	IsDefaultPadding getPadding();
 	
 	IsDefaultArc getArc();

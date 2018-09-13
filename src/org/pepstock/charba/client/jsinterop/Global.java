@@ -10,6 +10,5 @@ public final class Global extends Options{
 
 	Global(NativeOptions nativeObject) {
 		super(nativeObject, DEFAULT_GLOBAL_OPTIONS);
-	}
-	
+	}	
 }

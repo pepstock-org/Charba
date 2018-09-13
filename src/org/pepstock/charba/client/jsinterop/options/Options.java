@@ -6,6 +6,7 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.jsinterop.Global;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
@@ -18,8 +19,12 @@ import org.pepstock.charba.client.jsinterop.options.hover.Hover;
 import org.pepstock.charba.client.jsinterop.options.hover.NativeHover;
 import org.pepstock.charba.client.jsinterop.options.layout.Layout;
 import org.pepstock.charba.client.jsinterop.options.layout.NativeLayout;
+import org.pepstock.charba.client.jsinterop.options.legend.Legend;
+import org.pepstock.charba.client.jsinterop.options.legend.NativeLegend;
 import org.pepstock.charba.client.jsinterop.options.title.NativeTitle;
 import org.pepstock.charba.client.jsinterop.options.title.Title;
+import org.pepstock.charba.client.jsinterop.options.tooltips.NativeTooltips;
+import org.pepstock.charba.client.jsinterop.options.tooltips.Tooltips;
 
 public class Options implements IsDelegated<NativeOptions>{
 	
@@ -36,12 +41,23 @@ public class Options implements IsDelegated<NativeOptions>{
 	private Elements elements;
 	
 	private Title title;
+
+	private Legend legend;
 	
+	private Tooltips tooltips;
+
+	/**
+	 * 
+	 */
+	public Options() {
+		this(Global.DEFAULT_GLOBAL_OPTIONS);
+	}
+
 	public Options(IsDefaultOptions defaultValues) {
 		this(new NativeOptions(), defaultValues);
 	}
 
-	public Options(NativeOptions delegated, IsDefaultOptions defaultValues) {
+	protected Options(NativeOptions delegated, IsDefaultOptions defaultValues) {
 		this.delegated = delegated;
 		this.defaultValues = defaultValues;
 		NativeAnimation animationObject = delegated.getAnimation();
@@ -73,6 +89,18 @@ public class Options implements IsDelegated<NativeOptions>{
 			title = new Title(titleObject, defaultValues.getTitle());
 		} else {
 			setTitle(new Title(defaultValues.getTitle()));
+		}
+		NativeLegend legendObject = this.delegated.getLegend();
+		if (legendObject != null) {
+			legend = new Legend(legendObject, defaultValues.getLegend());
+		} else {
+			setLegend(new Legend(defaultValues.getLegend()));
+		}
+		NativeTooltips tooltipsObject = this.delegated.getTooltips();
+		if (tooltipsObject != null) {
+			tooltips = new Tooltips(tooltipsObject, defaultValues.getTooltips());
+		} else {
+			setTooltips(new Tooltips(defaultValues.getTooltips()));
 		}
 	}
 	
@@ -119,6 +147,30 @@ public class Options implements IsDelegated<NativeOptions>{
 	public void setTitle(Title title) {
 		this.title = title;
 		delegated.setTitle(title.getDelegated());
+	}
+
+	public Legend getLegend() {
+		return legend;
+	}
+
+	public void setLegend(Legend legend) {
+		this.legend = legend;
+		delegated.setLegend(legend.getDelegated());
+	}
+
+	/**
+	 * @return the tooltips
+	 */
+	public final Tooltips getTooltips() {
+		return tooltips;
+	}
+
+	/**
+	 * @param tooltips the tooltips to set
+	 */
+	public final void setTooltips(Tooltips tooltips) {
+		this.tooltips = tooltips;
+		delegated.setTooltips(tooltips.getDelegated());
 	}
 
 	/**

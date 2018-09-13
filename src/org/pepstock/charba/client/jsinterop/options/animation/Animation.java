@@ -26,7 +26,7 @@ import org.pepstock.charba.client.jsinterop.commons.IsDelegated;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Animation implements IsDelegated<NativeAnimation> {
+public class Animation implements IsDelegated<NativeAnimation> {
 
 	private final NativeAnimation delegated;
 	

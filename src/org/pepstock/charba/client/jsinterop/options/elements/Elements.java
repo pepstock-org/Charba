@@ -33,7 +33,7 @@ import org.pepstock.charba.client.jsinterop.options.elements.rectangle.Rectangle
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Elements implements IsDelegated<NativeElements> {
+public class Elements implements IsDelegated<NativeElements> {
 
 	private final NativeElements delegated;
 

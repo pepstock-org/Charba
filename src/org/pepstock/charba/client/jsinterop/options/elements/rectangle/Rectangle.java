@@ -31,7 +31,7 @@ import org.pepstock.charba.client.jsinterop.commons.IsDelegated;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Rectangle implements IsDelegated<NativeRectangle>{
+public class Rectangle implements IsDelegated<NativeRectangle>{
 
 	private final NativeRectangle delegated;
 	

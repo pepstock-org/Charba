@@ -27,7 +27,7 @@ import org.pepstock.charba.client.jsinterop.options.FontItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Title extends FontItem implements IsDelegated<NativeTitle> {
+public class Title extends FontItem implements IsDelegated<NativeTitle> {
 
 	private final NativeTitle delegated;
 	

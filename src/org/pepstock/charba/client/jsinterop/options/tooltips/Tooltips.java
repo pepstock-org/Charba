@@ -1,0 +1,796 @@
+/**
+    Copyright 2017 Andrea "Stock" Stocchero
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+	    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
+package org.pepstock.charba.client.jsinterop.options.tooltips;
+
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.TextAlign;
+import org.pepstock.charba.client.enums.TooltipPosition;
+import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.IsDelegated;
+
+/**
+ * Configuration element to set all attributes and features of the default tooltip.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
+public final class Tooltips implements IsDelegated<NativeTooltips> {
+
+	private final NativeTooltips delegated;
+	
+	private final IsDefaultTooltips defaultValues;
+	
+	public Tooltips(IsDefaultTooltips defaultValues) {
+		this(new NativeTooltips(), defaultValues);
+	}
+
+	public Tooltips(NativeTooltips delegated, IsDefaultTooltips defaultValues) {
+		this.delegated = delegated;
+		this.defaultValues = defaultValues;
+	}
+
+	/**
+	 * Sets if tooltips are enabled.
+	 * 
+	 * @param enabled if tooltips are enabled.
+	 */
+	public void setEnabled(boolean enabled) {
+		delegated.setEnabled(enabled);
+	}
+
+	/**
+	 * Returns if tooltips are enabled.
+	 * 
+	 * @return if tooltips are enabled.. Default is true.
+	 */
+	public boolean isEnabled() {
+		return AssignHelper.check(delegated.isEnabled(), defaultValues.isEnabled());
+	}
+
+	/**
+	 * Sets which elements appear in the tooltip.
+	 * 
+	 * @param mode which elements appear in the tooltip.
+	 * @see org.pepstock.charba.client.enums.InteractionMode
+	 */
+	public void setMode(InteractionMode mode) {
+		delegated.setMode(mode.name());
+	}
+
+	/**
+	 * Returns which elements appear in the tooltip.
+	 * 
+	 * @return which elements appear in the tooltip. Default is
+	 *         {@link org.pepstock.charba.client.enums.InteractionMode#nearest}.
+	 * @see org.pepstock.charba.client.enums.InteractionMode
+	 */
+	public InteractionMode getMode() {
+		return AssignHelper.deserialize(AssignHelper.check(delegated.getMode(), defaultValues.getMode()), InteractionMode.class, InteractionMode.nearest);
+	}
+
+	/**
+	 * if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be
+	 * applied at all times.
+	 * 
+	 * @param intersect if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the
+	 *            mode will be applied at all times.
+	 */
+	public void setIntersect(boolean intersect) {
+		delegated.setIntersect(intersect);;
+	}
+
+	/**
+	 * if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be
+	 * applied at all times.
+	 * 
+	 * @return if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode
+	 *         will be applied at all times. Default is true.
+	 */
+	public boolean isIntersect() {
+		return AssignHelper.check(delegated.isIntersect(), defaultValues.isIntersect());
+	}
+
+	/**
+	 * Sets the mode for positioning the tooltip.
+	 * 
+	 * @param position the mode for positioning the tooltip.
+	 * @see org.pepstock.charba.client.enums.TooltipPosition
+	 */
+	public void setPosition(TooltipPosition position) {
+		delegated.setPosition(position.name());
+	}
+
+	/**
+	 * Returns the mode for positioning the tooltip.
+	 * 
+	 * @return mode for positioning the tooltip. Default is {@link org.pepstock.charba.client.enums.TooltipPosition#average}.
+	 * @see org.pepstock.charba.client.enums.TooltipPosition
+	 */
+	public TooltipPosition getPosition() {
+		return AssignHelper.deserialize(AssignHelper.check(delegated.getPosition(), defaultValues.getPosition()), TooltipPosition.class, TooltipPosition.average);
+	}
+
+	/**
+	 * Sets the background color of the tooltip.
+	 * 
+	 * @param backgroundColor background color of the tooltip.
+	 */
+	public void setBackgroundColor(IsColor backgroundColor) {
+		setBackgroundColor(backgroundColor.toRGBA());
+	}
+
+	/**
+	 * Sets the background color of the tooltip.
+	 * 
+	 * @param backgroundColor background color of the tooltip.
+	 */
+	public void setBackgroundColor(String backgroundColor) {
+		delegated.setBackgroundColor(backgroundColor);
+	}
+
+	/**
+	 * Returns the background color of the tooltip.
+	 * 
+	 * @return Background color of the tooltip. Default is "rgba(0,0,0,0.8)".
+	 */
+	public String getBackgroundColorAsString() {
+		return AssignHelper.check(delegated.getBackgroundColor(), defaultValues.getBackgroundColor());
+	}
+
+	/**
+	 * Returns the background color of the tooltip.
+	 * 
+	 * @return Background color of the tooltip. Default is "rgba(0,0,0,0.8)".
+	 */
+	public IsColor getBackgroundColor() {
+		return ColorBuilder.parse(getBackgroundColorAsString());
+	}
+
+	/**
+	 * Sets the title font.
+	 * 
+	 * @param titleFontFamily title font.
+	 */
+	public void setTitleFontFamily(String titleFontFamily) {
+		delegated.setTitleFontFamily(titleFontFamily);
+	}
+
+	/**
+	 * Returns the title font.
+	 * 
+	 * @return the title font. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
+	 */
+	public String getTitleFontFamily() {
+		return AssignHelper.check(delegated.getTitleFontFamily(), defaultValues.getTitleFontFamily());
+	}
+
+	/**
+	 * Sets the title font size.
+	 * 
+	 * @param titleFontSize Title font size.
+	 */
+	public void setTitleFontSize(int titleFontSize) {
+		delegated.setTitleFontSize(titleFontSize);
+	}
+
+	/**
+	 * Returns the title font size.
+	 * 
+	 * @return Title font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
+	 */
+	public int getTitleFontSize() {
+		return AssignHelper.check(delegated.getTitleFontSize(), defaultValues.getTitleFontSize());
+	}
+
+	/**
+	 * Sets the title font style.
+	 * 
+	 * @param titleFontStyle title font style.
+	 * @see org.pepstock.charba.client.enums.FontStyle
+	 */
+	public void setTitleFontStyle(FontStyle titleFontStyle) {
+		delegated.setTitleFontStyle(titleFontStyle.name());
+	}
+
+	/**
+	 * Returns the title font style.
+	 * 
+	 * @return title font style. Default is {@link org.pepstock.charba.client.enums.FontStyle#bold}.
+	 * @see org.pepstock.charba.client.enums.FontStyle
+	 */
+	public FontStyle getTitleFontStyle() {
+		return AssignHelper.deserialize(AssignHelper.check(delegated.getTitleFontStyle(), defaultValues.getTitleFontStyle()), FontStyle.class, FontStyle.bold);
+	}
+
+	/**
+	 * Sets the title alignment.
+	 * 
+	 * @param align title alignment.
+	 * @see org.pepstock.charba.client.enums.TextAlign
+	 */
+	public void setTitleAlign(TextAlign align) {
+		delegated.setTitleAlign(align.name());
+	}
+
+	/**
+	 * Returns the title alignment.
+	 * 
+	 * @return title alignment. Default is {@link org.pepstock.charba.client.enums.TextAlign#left}.
+	 * @see org.pepstock.charba.client.enums.TextAlign
+	 */
+	public TextAlign getTitleAlign() {
+		return AssignHelper.deserialize(AssignHelper.check(delegated.getTitleAlign(), defaultValues.getTitleAlign()), TextAlign.class, TextAlign.left);
+	}
+
+	/**
+	 * Sets the title font color.
+	 * 
+	 * @param titleFontColor title font color.
+	 */
+	public void setTitleFontColor(IsColor titleFontColor) {
+		setTitleFontColor(titleFontColor.toRGBA());
+	}
+
+	/**
+	 * Sets the title font color.
+	 * 
+	 * @param titleFontColor title font color.
+	 */
+	public void setTitleFontColor(String titleFontColor) {
+		delegated.setTitleFontColor(titleFontColor);
+	}
+
+	/**
+	 * Returns the title font color.
+	 * 
+	 * @return title font color.Default is '#fff'.
+	 */
+	public String getTitleFontColorAsString() {
+		return AssignHelper.check(delegated.getTitleFontColor(), defaultValues.getTitleFontColor());
+	}
+
+	/**
+	 * Returns the title font color.
+	 * 
+	 * @return title font color.Default is '#fff'.
+	 */
+	public IsColor getTitleFontColor() {
+		return ColorBuilder.parse(getTitleFontColorAsString());
+	}
+
+	/**
+	 * Sets the spacing to add to top and bottom of each title line.
+	 * 
+	 * @param titleSpacing spacing to add to top and bottom of each title line.
+	 */
+	public void setTitleSpacing(int titleSpacing) {
+		delegated.setTitleSpacing(titleSpacing);
+	}
+
+	/**
+	 * Returns the spacing to add to top and bottom of each title line.
+	 * 
+	 * @return spacing to add to top and bottom of each title line. Default is 2.
+	 */
+	public int getTitleSpacing() {
+		return AssignHelper.check(delegated.getTitleSpacing(), defaultValues.getTitleSpacing());
+	}
+
+	/**
+	 * Sets the margin to add on bottom of title section.
+	 * 
+	 * @param titleMarginBottom margin to add on bottom of title section.
+	 */
+	public void setTitleMarginBottom(int titleMarginBottom) {
+		delegated.setTitleMarginBottom(titleMarginBottom);
+	}
+
+	/**
+	 * Returns the margin to add on bottom of title section.
+	 * 
+	 * @return margin to add on bottom of title section. Default is 6.
+	 */
+	public int getTitleMarginBottom() {
+		return AssignHelper.check(delegated.getTitleMarginBottom(), defaultValues.getTitleMarginBottom());
+	}
+
+	/**
+	 * Sets the body line font.
+	 * 
+	 * @param bodyFontFamily body line font.
+	 */
+	public void setBodyFontFamily(String bodyFontFamily) {
+		delegated.setBodyFontFamily(bodyFontFamily);
+	}
+
+	/**
+	 * Returns the body line font.
+	 * 
+	 * @return body line font. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
+	 */
+	public String getBodyFontFamily() {
+		return AssignHelper.check(delegated.getBodyFontFamily(), defaultValues.getBodyFontFamily());
+	}
+
+	/**
+	 * Sets the body font size.
+	 * 
+	 * @param bodyFontSize body font size.
+	 */
+	public void setBodyFontSize(int bodyFontSize) {
+		delegated.setBodyFontSize(bodyFontSize);
+	}
+
+	/**
+	 * Returns the body font size.
+	 * 
+	 * @return body font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
+	 */
+	public int getBodyFontSize() {
+		return AssignHelper.check(delegated.getBodyFontSize(), defaultValues.getBodyFontSize());
+	}
+
+	/**
+	 * Sets the body font style.
+	 * 
+	 * @param bodyFontStyle body font style.
+	 * @see org.pepstock.charba.client.enums.FontStyle
+	 */
+	public void setBodyFontStyle(FontStyle bodyFontStyle) {
+		delegated.setBodyFontStyle(bodyFontStyle.name());
+	}
+
+	/**
+	 * Returns the body font style.
+	 * 
+	 * @return body font style. Default is {@link org.pepstock.charba.client.enums.FontStyle#normal}.
+	 * @see org.pepstock.charba.client.enums.FontStyle
+	 */
+	public FontStyle getBodyFontStyle() {
+		return AssignHelper.deserialize(AssignHelper.check(delegated.getBodyFontStyle(), defaultValues.getBodyFontStyle()), FontStyle.class, FontStyle.normal);
+	}
+
+	/**
+	 * Sets the body alignment.
+	 * 
+	 * @param align body alignment.
+	 * @see org.pepstock.charba.client.enums.TextAlign
+	 */
+	public void setBodyAlign(TextAlign align) {
+		delegated.setBodyAlign(align.name());
+	}
+
+	/**
+	 * Returns the body alignment.
+	 * 
+	 * @return body alignment. Default is {@link org.pepstock.charba.client.enums.TextAlign#left}.
+	 * @see org.pepstock.charba.client.enums.TextAlign
+	 */
+	public TextAlign getBodyAlign() {
+		return AssignHelper.deserialize(AssignHelper.check(delegated.getBodyAlign(), defaultValues.getBodyAlign()), TextAlign.class, TextAlign.left);
+	}
+
+	/**
+	 * Sets the body font color.
+	 * 
+	 * @param bodyFontColor body font color.
+	 */
+	public void setBodyFontColor(IsColor bodyFontColor) {
+		setBodyFontColor(bodyFontColor.toRGBA());
+	}
+
+	/**
+	 * Sets the body font color.
+	 * 
+	 * @param bodyFontColor body font color.
+	 */
+	public void setBodyFontColor(String bodyFontColor) {
+		delegated.setBodyFontColor(bodyFontColor);
+	}
+
+	/**
+	 * Returns the body font color.
+	 * 
+	 * @return body font color. Default is '#fff'.
+	 */
+	public String getBodyFontColorAsString() {
+		return AssignHelper.check(delegated.getBodyFontColor(), defaultValues.getBodyFontColor());
+	}
+
+	/**
+	 * Returns the body font color.
+	 * 
+	 * @return body font color. Default is '#fff'.
+	 */
+	public IsColor getBodyFontColor() {
+		return ColorBuilder.parse(getBodyFontColorAsString());
+	}
+
+	/**
+	 * Sets the spacing to add to top and bottom of each tooltip item.
+	 * 
+	 * @param bodySpacing spacing to add to top and bottom of each tooltip item.
+	 */
+	public void setBodySpacing(int bodySpacing) {
+		delegated.setBodySpacing(bodySpacing);
+	}
+
+	/**
+	 * Returns the spacing to add to top and bottom of each tooltip item.
+	 * 
+	 * @return spacing to add to top and bottom of each tooltip item. Default is 2.
+	 */
+	public int getBodySpacing() {
+		return AssignHelper.check(delegated.getBodySpacing(), defaultValues.getBodySpacing());
+	}
+
+	/**
+	 * Sets the footer font.
+	 * 
+	 * @param footerFontFamily footer font.
+	 */
+	public void setFooterFontFamily(String footerFontFamily) {
+		delegated.setFooterFontFamily(footerFontFamily);
+	}
+
+	/**
+	 * Returns the footer font.
+	 * 
+	 * @return footer font. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
+	 */
+	public String getFooterFontFamily() {
+		return AssignHelper.check(delegated.getFooterFontFamily(), defaultValues.getFooterFontFamily());
+	}
+
+	/**
+	 * Sets the footer font size.
+	 * 
+	 * @param footerFontSize footer font size.
+	 */
+	public void setFooterFontSize(int footerFontSize) {
+		delegated.setFooterFontSize(footerFontSize);
+	}
+
+	/**
+	 * Returns the footer font size.
+	 * 
+	 * @return footer font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
+	 */
+	public int getFooterFontSize() {
+		return AssignHelper.check(delegated.getFooterFontSize(), defaultValues.getFooterFontSize());
+	}
+
+	/**
+	 * Sets the footer font style.
+	 * 
+	 * @param footerFontStyle the footer font style.
+	 */
+	public void setFooterFontStyle(FontStyle footerFontStyle) {
+		delegated.setFooterFontStyle(footerFontStyle.name());
+	}
+
+	/**
+	 * Returns the footer font style.
+	 * 
+	 * @return footer font style. Default is {@link org.pepstock.charba.client.enums.FontStyle#normal}.
+	 * @see org.pepstock.charba.client.enums.FontStyle
+	 */
+	public FontStyle getFooterFontStyle() {
+		return AssignHelper.deserialize(AssignHelper.check(delegated.getFooterFontStyle(), defaultValues.getFooterFontStyle()), FontStyle.class, FontStyle.bold);
+	}
+
+	/**
+	 * Sets the footer alignment.
+	 * 
+	 * @param align footer alignment.
+	 * @see org.pepstock.charba.client.enums.TextAlign
+	 */
+	public void setFooterAlign(TextAlign align) {
+		delegated.setFooterAlign(align.name());
+	}
+
+	/**
+	 * Returns the body alignment.
+	 * 
+	 * @return footer alignment. Default is {@link org.pepstock.charba.client.enums.TextAlign#left}.
+	 * @see org.pepstock.charba.client.enums.TextAlign
+	 */
+	public TextAlign getFooterAlign() {
+		return AssignHelper.deserialize(AssignHelper.check(delegated.getFooterAlign(), defaultValues.getFooterAlign()), TextAlign.class, TextAlign.left);
+	}
+
+	/**
+	 * Sets the footer font color.
+	 * 
+	 * @param footerFontColor footer font color.
+	 */
+	public void setFooterFontColor(IsColor footerFontColor) {
+		setFooterFontColor(footerFontColor.toRGBA());
+	}
+
+	/**
+	 * Sets the footer font color.
+	 * 
+	 * @param footerFontColor footer font color.
+	 */
+	public void setFooterFontColor(String footerFontColor) {
+		delegated.setFooterFontColor(footerFontColor);
+	}
+
+	/**
+	 * Returns the footer font color.
+	 * 
+	 * @return footer font color. Default is '#fff'.
+	 */
+	public String getFooterFontColorAsString() {
+		return AssignHelper.check(delegated.getFooterFontColor(), defaultValues.getFooterFontColor());
+	}
+
+	/**
+	 * Returns the footer font color.
+	 * 
+	 * @return footer font color. Default is '#fff'.
+	 */
+	public IsColor getFooterFontColor() {
+		return ColorBuilder.parse(getFooterFontColorAsString());
+	}
+	
+	/**
+	 * Sets the spacing to add to top and bottom of each footer line.
+	 * 
+	 * @param footerSpacing spacing to add to top and bottom of each footer line.
+	 */
+	public void setFooterSpacing(int footerSpacing) {
+		delegated.setFooterSpacing(footerSpacing);
+	}
+
+	/**
+	 * Returns the spacing to add to top and bottom of each footer line.
+	 * 
+	 * @return spacing to add to top and bottom of each footer line. Default is 2.
+	 */
+	public int getFooterSpacing() {
+		return AssignHelper.check(delegated.getFooterSpacing(), defaultValues.getFooterSpacing());
+	}
+
+	/**
+	 * Sets the margin to add before drawing the footer.
+	 * 
+	 * @param footerMarginTop margin to add before drawing the footer.
+	 */
+	public void setFooterMarginTop(int footerMarginTop) {
+		delegated.setFooterMarginTop(footerMarginTop);
+	}
+
+	/**
+	 * Returns the margin to add before drawing the footer.
+	 * 
+	 * @return margin to add before drawing the footer. Default is 6.
+	 */
+	public int getFooterMarginTop() {
+		return AssignHelper.check(delegated.getFooterMarginTop(), defaultValues.getFooterMarginTop());
+	}
+
+	/**
+	 * Sets the padding to add on left and right of tooltip.
+	 * 
+	 * @param xPadding padding to add on left and right of tooltip.
+	 */
+	public void setXPadding(int xPadding) {
+		delegated.setXPadding(xPadding);
+	}
+
+	/**
+	 * Returns the padding to add on left and right of tooltip.
+	 * 
+	 * @return padding to add on left and right of tooltip. Default is 6.
+	 */
+	public int getXPadding() {
+		return AssignHelper.check(delegated.getXPadding(), defaultValues.getXPadding());
+	}
+
+	/**
+	 * Sets the padding to add on top and bottom of tooltip.
+	 * 
+	 * @param yPadding padding to add on top and bottom of tooltip.
+	 */
+	public void setYPadding(int yPadding) {
+		delegated.setYPadding(yPadding);
+	}
+
+	/**
+	 * Returns the padding to add on top and bottom of tooltip.
+	 * 
+	 * @return padding to add on top and bottom of tooltip. Default is 6.
+	 */
+	public int getYPadding() {
+		return AssignHelper.check(delegated.getYPadding(), defaultValues.getYPadding());
+	}
+
+	/**
+	 * Sets the extra distance to move the end of the tooltip arrow away from the tooltip point.
+	 * 
+	 * @param caretPadding extra distance to move the end of the tooltip arrow away from the tooltip point.
+	 */
+	public void setCaretPadding(int caretPadding) {
+		delegated.setCaretPadding(caretPadding);
+	}
+
+	/**
+	 * Returns the extra distance to move the end of the tooltip arrow away from the tooltip point.
+	 * 
+	 * @return extra distance to move the end of the tooltip arrow away from the tooltip point. Default is 2.
+	 */
+	public int getCaretPadding() {
+		return AssignHelper.check(delegated.getCaretPadding(), defaultValues.getCaretPadding());
+	}
+
+	/**
+	 * Sets the size, in px, of the tooltip arrow.
+	 * 
+	 * @param caretSize size, in px, of the tooltip arrow.
+	 */
+	public void setCaretSize(int caretSize) {
+		delegated.setCaretSize(caretSize);
+	}
+
+	/**
+	 * Returns the size, in px, of the tooltip arrow.
+	 * 
+	 * @return size, in px, of the tooltip arrow. Default is 5.
+	 */
+	public int getCaretSize() {
+		return AssignHelper.check(delegated.getCaretSize(), defaultValues.getCaretSize());
+	}
+
+	/**
+	 * Sets the radius of tooltip corner curves.
+	 * 
+	 * @param cornerRadius radius of tooltip corner curves.
+	 */
+	public void setCornerRadius(int cornerRadius) {
+		delegated.setCornerRadius(cornerRadius);
+	}
+
+	/**
+	 * Returns the radius of tooltip corner curves.
+	 * 
+	 * @return radius of tooltip corner curves. Default is 6.
+	 */
+	public int getCornerRadius() {
+		return AssignHelper.check(delegated.getCornerRadius(), defaultValues.getCornerRadius());
+	}
+
+	/**
+	 * Sets the color to draw behind the colored boxes when multiple items are in the tooltip.
+	 * 
+	 * @param multiKeyBackground color to draw behind the colored boxes when multiple items are in the tooltip.
+	 */
+	public void setMultiKeyBackground(IsColor multiKeyBackground) {
+		setMultiKeyBackground(multiKeyBackground.toRGBA());
+	}
+
+	/**
+	 * Sets the color to draw behind the colored boxes when multiple items are in the tooltip.
+	 * 
+	 * @param multiKeyBackground color to draw behind the colored boxes when multiple items are in the tooltip.
+	 */
+	public void setMultiKeyBackground(String multiKeyBackground) {
+		delegated.setMultiKeyBackground(multiKeyBackground);
+	}
+
+	/**
+	 * Returns the color to draw behind the colored boxes when multiple items are in the tooltip.
+	 * 
+	 * @return color to draw behind the colored boxes when multiple items are in the tooltip. Default is '#fff'.
+	 */
+	public String getMultiKeyBackgroundAsString() {
+		return AssignHelper.check(delegated.getMultiKeyBackground(), defaultValues.getMultiKeyBackground());
+	}
+
+	/**
+	 * Returns the color to draw behind the colored boxes when multiple items are in the tooltip.
+	 * 
+	 * @return color to draw behind the colored boxes when multiple items are in the tooltip. Default is '#fff'.
+	 */
+	public IsColor getMultiKeyBackground() {
+		return ColorBuilder.parse(getMultiKeyBackgroundAsString());
+	}
+
+	/**
+	 * If true, color boxes are shown in the tooltip.
+	 * 
+	 * @param displayColors if true, color boxes are shown in the tooltip.
+	 */
+	public void setDisplayColors(boolean displayColors) {
+		delegated.setDisplayColors(displayColors);
+	}
+
+	/**
+	 * If true, color boxes are shown in the tooltip.
+	 * 
+	 * @return if true, color boxes are shown in the tooltip. Default is true.
+	 */
+	public boolean isDisplayColors() {
+		return AssignHelper.check(delegated.isDisplayColors(), defaultValues.isDisplayColors());
+	}
+
+	/**
+	 * Sets the color of the border.
+	 * 
+	 * @param borderColor color of the border.
+	 */
+	public void setBorderColor(IsColor borderColor) {
+		setBorderColor(borderColor.toRGBA());
+	}
+
+	/**
+	 * Sets the color of the border.
+	 * 
+	 * @param borderColor color of the border.
+	 */
+	public void setBorderColor(String borderColor) {
+		delegated.setBorderColor(borderColor);
+	}
+
+	/**
+	 * Returns the color of the border.
+	 * 
+	 * @return color of the border. Default is 'rgba(0,0,0,0)'.
+	 */
+	public String getBorderColorAsString() {
+		return AssignHelper.check(delegated.getBorderColor(), defaultValues.getBorderColor());
+	}
+
+	/**
+	 * Returns the color of the border.
+	 * 
+	 * @return color of the border. Default is 'rgba(0,0,0,0)'.
+	 */
+	public IsColor getBorderColor() {
+		return ColorBuilder.parse(getBorderColorAsString());
+	}
+
+	/**
+	 * Sets the size of the border.
+	 * 
+	 * @param borderWidth size of the border.
+	 */
+	public void setBorderWidth(int borderWidth) {
+		delegated.setBorderWidth(borderWidth);
+	}
+
+	/**
+	 * Returns the size of the border.
+	 * 
+	 * @return size of the border. Default is 0.
+	 */
+	public int getBorderWidth() {
+		return AssignHelper.check(delegated.getBorderWidth(), defaultValues.getBorderWidth());
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.commons.IsDelegated#getDelegated()
+	 */
+	@Override
+	public NativeTooltips getDelegated() {
+		return delegated;
+	}
+	
+}

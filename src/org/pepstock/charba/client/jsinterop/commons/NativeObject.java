@@ -9,6 +9,12 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true, name="Object", namespace = JsPackage.GLOBAL)
 public class NativeObject {
 	
+	/**
+	 * 
+	 */
+	protected NativeObject() {
+	}
+
 	public static native NativeDescriptor getOwnPropertyDescriptor(Object object, String key);
 
 	@JsOverlay

@@ -3,7 +3,7 @@ package org.pepstock.charba.client.jsinterop.defaults;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.jsinterop.options.elements.point.IsDefaultPoint;
 
-public class DefaultPoint extends DefaultArc implements IsDefaultPoint{
+public final class DefaultPoint extends DefaultArc implements IsDefaultPoint{
 	
 	/// default radius
 	private static final int DEFAULT_RADIUS = 3;

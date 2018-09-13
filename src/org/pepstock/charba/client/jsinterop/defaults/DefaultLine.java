@@ -6,7 +6,7 @@ import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.options.elements.line.IsDefaultLine;
 
-public class DefaultLine extends DefaultArc implements IsDefaultLine{
+public final class DefaultLine extends DefaultArc implements IsDefaultLine{
 	
 	// default line tension
 	private static final float DEFAULT_TENSION = 0.4F;

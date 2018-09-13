@@ -23,6 +23,8 @@ import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.events.AnimationCompleteEvent;
 import org.pepstock.charba.client.events.AnimationProgressEvent;
 import org.pepstock.charba.client.items.AnimationItem;
+import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
+import org.pepstock.charba.client.jsinterop.commons.JsFactory;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;
@@ -150,7 +152,10 @@ public final class Animation extends EventProvider {
 			// checks if property exist
 			if (!has(Property.onComplete)) {
 				// sets the java script code to get the event
-				registerNativeCompleteHandler(getJavaScriptObject());
+				//registerNativeCompleteHandler(getJavaScriptObject());
+				// FIXME
+				CallbackProxy cp = JsFactory.newCallbackProxy();
+				registerNativeCompleteHandler(getJavaScriptObject(), cp.getProxy());
 			}
 			// increments amount of handlers
 			onCompleteHandlers++;
@@ -242,6 +247,18 @@ public final class Animation extends EventProvider {
 	        self.@org.pepstock.charba.client.options.Animation::onComplete(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(animation.animationObject);
 	        return;
 	    }
+	}-*/;
+    
+	/**
+	 * Sets the java script code to activate the call back, adding functions.
+	 * 
+	 * @param options
+	 *            java script object where adding new functions definition.
+	 */
+    private native void registerNativeCompleteHandler(GenericJavaScriptObject options, Object proxy)/*-{
+    	console.log(proxy);
+    	console.log(typeof proxy);
+	    options.onComplete = proxy;
 	}-*/;
 
 }

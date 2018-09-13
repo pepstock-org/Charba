@@ -24,7 +24,7 @@ import org.pepstock.charba.client.jsinterop.commons.IsDelegated;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Padding implements IsDelegated<NativePadding>{
+public class Padding implements IsDelegated<NativePadding>{
 
 	private final NativePadding delegated;
 	

@@ -31,6 +31,12 @@ import jsinterop.annotations.JsType;
 public final class NativeHover extends NativeObject {
 
 	/**
+	 * 
+	 */
+	protected NativeHover() {
+	}
+
+	/**
 	 * Sets which elements appear in the tooltip.
 	 * 
 	 * @param mode which elements appear in the tooltip.

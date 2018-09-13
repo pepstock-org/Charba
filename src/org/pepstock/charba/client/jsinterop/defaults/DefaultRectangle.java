@@ -3,7 +3,7 @@ package org.pepstock.charba.client.jsinterop.defaults;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.jsinterop.options.elements.rectangle.IsDefaultRectangle;
 
-public class DefaultRectangle extends DefaultArc implements IsDefaultRectangle{
+public final class DefaultRectangle extends DefaultArc implements IsDefaultRectangle{
 	
 	// default background color
 	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";

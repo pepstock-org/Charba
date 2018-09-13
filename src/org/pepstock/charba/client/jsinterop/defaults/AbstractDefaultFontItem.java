@@ -3,7 +3,7 @@ package org.pepstock.charba.client.jsinterop.defaults;
 import org.pepstock.charba.client.jsinterop.Global;
 import org.pepstock.charba.client.jsinterop.options.IsDefaultFontItem;
 
-public abstract class AbstractDefaultFontItem implements IsDefaultFontItem{
+abstract class AbstractDefaultFontItem implements IsDefaultFontItem{
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultFontItem#getFontColor()

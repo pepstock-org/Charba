@@ -6,7 +6,9 @@ import org.pepstock.charba.client.jsinterop.options.animation.NativeAnimation;
 import org.pepstock.charba.client.jsinterop.options.elements.NativeElements;
 import org.pepstock.charba.client.jsinterop.options.hover.NativeHover;
 import org.pepstock.charba.client.jsinterop.options.layout.NativeLayout;
+import org.pepstock.charba.client.jsinterop.options.legend.NativeLegend;
 import org.pepstock.charba.client.jsinterop.options.title.NativeTitle;
+import org.pepstock.charba.client.jsinterop.options.tooltips.NativeTooltips;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -14,6 +16,9 @@ import jsinterop.annotations.JsType;
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public final class NativeOptions extends NativeObject{
+	
+	protected NativeOptions() {
+	}
 	
 	@JsProperty
 	public native NativeAnimation getAnimation();
@@ -44,7 +49,19 @@ public final class NativeOptions extends NativeObject{
 
 	@JsProperty
 	public native void setTitle(NativeTitle title);
-	
+
+	@JsProperty
+	public native NativeLegend getLegend();
+
+	@JsProperty
+	public native void setLegend(NativeLegend legend);
+
+	@JsProperty
+	public native NativeTooltips getTooltips();
+
+	@JsProperty
+	public native void setTooltips(NativeTooltips tooltips);
+
 	@JsProperty
 	public native void setResponsive(boolean responsive);
 

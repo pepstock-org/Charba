@@ -13,7 +13,9 @@ import org.pepstock.charba.client.jsinterop.options.elements.point.IsDefaultPoin
 import org.pepstock.charba.client.jsinterop.options.elements.rectangle.IsDefaultRectangle;
 import org.pepstock.charba.client.jsinterop.options.hover.IsDefaultHover;
 import org.pepstock.charba.client.jsinterop.options.layout.padding.IsDefaultPadding;
+import org.pepstock.charba.client.jsinterop.options.legend.IsDefaultLegend;
 import org.pepstock.charba.client.jsinterop.options.title.IsDefaultTitle;
+import org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips;
 
 public final class DefaultOptions implements IsDefaultOptions{
 	
@@ -59,6 +61,10 @@ public final class DefaultOptions implements IsDefaultOptions{
 	private final DefaultPadding padding = new DefaultPadding();
 	
 	private final DefaultTitle title = new DefaultTitle();
+	
+	private final DefaultLegend legend = new DefaultLegend();
+	
+	private final DefaultTooltips tooltips = new DefaultTooltips();
 
 
 	/* (non-Javadoc)
@@ -123,6 +129,22 @@ public final class DefaultOptions implements IsDefaultOptions{
 	@Override
 	public IsDefaultTitle getTitle() {
 		return title;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultOptions#getLegend()
+	 */
+	@Override
+	public IsDefaultLegend getLegend() {
+		return legend;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultOptions#getTooltips()
+	 */
+	@Override
+	public IsDefaultTooltips getTooltips() {
+		return tooltips;
 	}
 
 	/* (non-Javadoc)

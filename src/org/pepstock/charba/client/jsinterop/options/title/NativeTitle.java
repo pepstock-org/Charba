@@ -31,8 +31,12 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
 public final class NativeTitle extends NativeFontItem {
 
-	//FIXME default font style is BOLD
-	
+	/**
+	 * 
+	 */
+	protected NativeTitle() {
+	}
+
 	/**
 	 * Sets if the title is shown.
 	 * 

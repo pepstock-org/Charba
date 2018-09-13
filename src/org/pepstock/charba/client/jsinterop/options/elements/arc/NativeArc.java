@@ -21,6 +21,12 @@ import jsinterop.annotations.JsType;
 public class NativeArc extends NativeObject {
 	
 	/**
+	 * 
+	 */
+	protected NativeArc() {
+	}
+
+	/**
 	 * Sets the background color.
 	 * 
 	 * @param backgroundColor the background color.

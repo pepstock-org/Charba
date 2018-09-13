@@ -26,7 +26,7 @@ import org.pepstock.charba.client.jsinterop.commons.IsDelegated;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Hover implements IsDelegated<NativeHover>{
+public class Hover implements IsDelegated<NativeHover>{
 
 	private final NativeHover delegated;
 	

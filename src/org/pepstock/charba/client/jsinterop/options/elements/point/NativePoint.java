@@ -33,6 +33,12 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
 public final class NativePoint extends NativeArc {
+	
+	/**
+	 * 
+	 */
+	protected NativePoint() {
+	}
 
 	/**
 	 * Sets the radius of the point shape. If set to 0, the point is not rendered.

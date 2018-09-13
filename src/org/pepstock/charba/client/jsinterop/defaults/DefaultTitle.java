@@ -4,7 +4,7 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.jsinterop.options.title.IsDefaultTitle;
 
-public class DefaultTitle extends AbstractDefaultFontItem implements IsDefaultTitle {
+public final class DefaultTitle extends AbstractDefaultFontItem implements IsDefaultTitle {
 
 	private static final int DEFAULT_PADDING = 10;
 	
