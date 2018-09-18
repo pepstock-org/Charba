@@ -4,20 +4,11 @@ import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
-import org.pepstock.charba.client.jsinterop.commons.Window;
-import org.pepstock.charba.client.jsinterop.options.IsDefaultOptions;
-import org.pepstock.charba.client.jsinterop.options.animation.IsDefaultAnimation;
-import org.pepstock.charba.client.jsinterop.options.elements.arc.IsDefaultArc;
-import org.pepstock.charba.client.jsinterop.options.elements.line.IsDefaultLine;
-import org.pepstock.charba.client.jsinterop.options.elements.point.IsDefaultPoint;
-import org.pepstock.charba.client.jsinterop.options.elements.rectangle.IsDefaultRectangle;
-import org.pepstock.charba.client.jsinterop.options.hover.IsDefaultHover;
-import org.pepstock.charba.client.jsinterop.options.layout.padding.IsDefaultPadding;
-import org.pepstock.charba.client.jsinterop.options.legend.IsDefaultLegend;
-import org.pepstock.charba.client.jsinterop.options.title.IsDefaultTitle;
-import org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips;
+import org.pepstock.charba.client.jsinterop.utils.Window;
 
 public final class DefaultOptions implements IsDefaultOptions{
+	
+	private static final DefaultOptions INSTANCE = new DefaultOptions();
 	
 	// default values
 	private static final boolean DEFAULT_RESPONSIVE = true;
@@ -66,6 +57,15 @@ public final class DefaultOptions implements IsDefaultOptions{
 	
 	private final DefaultTooltips tooltips = new DefaultTooltips();
 
+	/**
+	 * 
+	 */
+	protected DefaultOptions() {
+	}
+	
+	public static final DefaultOptions get() {
+		return INSTANCE;
+	}
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultOptions#getAnimation()

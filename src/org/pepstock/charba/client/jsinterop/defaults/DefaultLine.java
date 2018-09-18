@@ -4,7 +4,6 @@ import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
-import org.pepstock.charba.client.jsinterop.options.elements.line.IsDefaultLine;
 
 public final class DefaultLine extends DefaultArc implements IsDefaultLine{
 	

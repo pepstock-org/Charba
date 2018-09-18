@@ -1,7 +1,5 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
-import org.pepstock.charba.client.jsinterop.options.legend.labels.IsDefaultLegendLabels;
-
 public final class DefaultLegendLabels extends AbstractDefaultFontItem implements IsDefaultLegendLabels {
 
 	private static final int DEFAULT_PADDING = 10;

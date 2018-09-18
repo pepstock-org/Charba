@@ -4,8 +4,6 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TooltipPosition;
-import org.pepstock.charba.client.jsinterop.Global;
-import org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips;
 
 public final class DefaultTooltips implements IsDefaultTooltips{
 
@@ -48,7 +46,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0)";
 
 	private static final int DEFAULT_BORDER_WIDTH = 0;
-
+	
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#isEnabled()
 	 */
@@ -94,7 +92,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	 */
 	@Override
 	public String getTitleFontFamily() {
-		return Global.DEFAULT_GLOBAL_OPTIONS.getDefaultFontFamily();
+		return DefaultOptions.get().getDefaultFontFamily();
 	}
 
 	/* (non-Javadoc)
@@ -102,7 +100,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	 */
 	@Override
 	public int getTitleFontSize() {
-		return Global.DEFAULT_GLOBAL_OPTIONS.getDefaultFontSize();
+		return DefaultOptions.get().getDefaultFontSize();
 	}
 
 	/* (non-Javadoc)
@@ -150,7 +148,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	 */
 	@Override
 	public String getBodyFontFamily() {
-		return Global.DEFAULT_GLOBAL_OPTIONS.getDefaultFontFamily();
+		return DefaultOptions.get().getDefaultFontFamily();
 	}
 
 	/* (non-Javadoc)
@@ -158,7 +156,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	 */
 	@Override
 	public int getBodyFontSize() {
-		return Global.DEFAULT_GLOBAL_OPTIONS.getDefaultFontSize();
+		return DefaultOptions.get().getDefaultFontSize();
 	}
 
 	/* (non-Javadoc)
@@ -198,7 +196,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	 */
 	@Override
 	public String getFooterFontFamily() {
-		return Global.DEFAULT_GLOBAL_OPTIONS.getDefaultFontFamily();
+		return DefaultOptions.get().getDefaultFontFamily();
 	}
 
 	/* (non-Javadoc)
@@ -206,7 +204,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	 */
 	@Override
 	public int getFooterFontSize() {
-		return Global.DEFAULT_GLOBAL_OPTIONS.getDefaultFontSize();
+		return DefaultOptions.get().getDefaultFontSize();
 	}
 
 	/* (non-Javadoc)

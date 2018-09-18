@@ -42,7 +42,7 @@ public abstract class NativeFontItem extends NativeObject {
 	 * @param fontColor Font color
 	 */
 	@JsProperty
-	public native void setFontColor(String fontColor);
+	native void setFontColor(String fontColor);
 
 	/**
 	 * Returns the font color
@@ -50,7 +50,7 @@ public abstract class NativeFontItem extends NativeObject {
 	 * @return Font color
 	 */
 	@JsProperty
-	public native String getFontColor();
+	native String getFontColor();
 
 	/**
 	 * Sets the font size.
@@ -58,7 +58,7 @@ public abstract class NativeFontItem extends NativeObject {
 	 * @param fontSize the font size.
 	 */
 	@JsProperty
-	public native void setFontSize(int fontSize);
+	native void setFontSize(int fontSize);
 
 	/**
 	 * Returns the font size.
@@ -66,7 +66,7 @@ public abstract class NativeFontItem extends NativeObject {
 	 * @return the font size.
 	 */
 	@JsProperty
-	public native int getFontSize();
+	native int getFontSize();
 
 
 	/**
@@ -75,7 +75,7 @@ public abstract class NativeFontItem extends NativeObject {
 	 * @param fontStyle Font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	@JsProperty
-	public native void setFontStyle(String fontStyle);
+	native void setFontStyle(String fontStyle);
 
 	/**
 	 * Returns the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
@@ -83,7 +83,7 @@ public abstract class NativeFontItem extends NativeObject {
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). 
 	 */
 	@JsProperty
-	public native String getFontStyle();
+	native String getFontStyle();
 
 	/**
 	 * Sets the font family, follows CSS font-family options.
@@ -91,7 +91,7 @@ public abstract class NativeFontItem extends NativeObject {
 	 * @param fontFamily Font family, follows CSS font-family options.
 	 */
 	@JsProperty
-	public native void setFontFamily(String fontFamily);
+	native void setFontFamily(String fontFamily);
 
 	/**
 	 * Returns the font family, follows CSS font-family options.
@@ -100,6 +100,6 @@ public abstract class NativeFontItem extends NativeObject {
 	 *         {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
 	 */
 	@JsProperty
-	public native String getFontFamily();
+	native String getFontFamily();
 
 }

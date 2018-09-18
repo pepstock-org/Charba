@@ -6,9 +6,11 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 @JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
-public class Array<T> {
+public class Array<T extends NativeObject> {
 	
-	public static native <T> Array<T> of(T[] objects);
+	public static native <T extends NativeObject> Array<T> of(T[] objects);
+
+	public static native <T extends NativeObject> boolean isArray(T object);
 
 	public static native boolean isArray(Object object);
 
@@ -23,7 +25,7 @@ public class Array<T> {
 	 * @return the index of the last occurrence of the specified element in this object, or -1 if this object does not contain
 	 *         the element
 	 */
-	public native int lastIndexOf(T value);
+	public native int lastIndexOf(Object value);
 
 	/**
 	 * Returns the index of the first occurrence of the specified element in this object, or -1 if this object does not contain
@@ -33,7 +35,7 @@ public class Array<T> {
 	 * @return the index of the first occurrence of the specified element in this object, or -1 if this object does not contain
 	 *         the element
 	 */
-	public native int indexOf(T value);
+	public native int indexOf(Object value);
 
 	public native Array<T> slice(int start, int end);
 	

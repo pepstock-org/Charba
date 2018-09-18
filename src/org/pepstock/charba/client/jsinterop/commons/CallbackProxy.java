@@ -6,17 +6,17 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public class CallbackProxy {
+public final class CallbackProxy<T> {
 	
-	@JsFunction
-	public interface VoidCallback {
-	    void call(Object context, int val1);
-	}
-	
-	@JsFunction
-	public interface ResultCallback {
-	    Object call(Object context, int val1, int val2);
-	}
+//	@JsFunction
+//	public interface VoidCallback {
+//	    void call(Object context, AnimationObject animationObject);
+//	}
+//	
+//	@JsFunction
+//	public interface ResultCallback {
+//	    Object call(Object context, int val1, int val2);
+//	}
 
 	@JsFunction
 	public interface Proxy {
@@ -27,10 +27,10 @@ public class CallbackProxy {
 	public native Proxy getProxy();
 	
 	@JsProperty
-	public native Object getCallback();
+	public native T getCallback();
 
 	@JsProperty
-	public native void setCallback(Object callback);
+	public native void setCallback(T callback);
 
 	
 }

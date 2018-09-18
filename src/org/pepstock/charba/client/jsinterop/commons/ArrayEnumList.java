@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.utils.JSON;
 
 /**
  * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each element is inserted. <br>

@@ -1,8 +1,6 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
 import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.jsinterop.options.legend.IsDefaultLegend;
-import org.pepstock.charba.client.jsinterop.options.legend.labels.IsDefaultLegendLabels;
 
 public final class DefaultLegend implements IsDefaultLegend{
 

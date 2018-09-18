@@ -1,7 +1,6 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
 import org.pepstock.charba.client.enums.Easing;
-import org.pepstock.charba.client.jsinterop.options.animation.IsDefaultAnimation;
 
 public final class DefaultAnimation implements IsDefaultAnimation{
 

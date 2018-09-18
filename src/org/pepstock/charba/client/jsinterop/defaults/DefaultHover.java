@@ -2,7 +2,6 @@ package org.pepstock.charba.client.jsinterop.defaults;
 
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
-import org.pepstock.charba.client.jsinterop.options.hover.IsDefaultHover;
 
 public final class DefaultHover implements IsDefaultHover{
 

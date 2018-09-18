@@ -1,7 +1,5 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
-import org.pepstock.charba.client.jsinterop.options.elements.arc.IsDefaultArc;
-
 public class DefaultArc implements IsDefaultArc{
 
 	// default background color

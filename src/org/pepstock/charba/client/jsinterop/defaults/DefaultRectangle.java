@@ -1,7 +1,6 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
 import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.jsinterop.options.elements.rectangle.IsDefaultRectangle;
 
 public final class DefaultRectangle extends DefaultArc implements IsDefaultRectangle{
 	

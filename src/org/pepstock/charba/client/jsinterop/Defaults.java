@@ -1,6 +1,7 @@
 package org.pepstock.charba.client.jsinterop;
 
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.defaults.DefaultOptions;
 import org.pepstock.charba.client.jsinterop.options.NativeOptions;
 
 import jsinterop.annotations.JsOverlay;
@@ -16,7 +17,7 @@ public final class Defaults extends NativeObject {
 	
 	@JsOverlay
 	public Global global() {
-		return new Global(getGlobal());
+		return new Global(getGlobal(), DefaultOptions.get());
 	}
 
 //	@JsProperty(name = "line")

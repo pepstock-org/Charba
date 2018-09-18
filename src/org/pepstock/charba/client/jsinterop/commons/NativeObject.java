@@ -33,6 +33,7 @@ public class NativeObject {
      * Removes the occurrence of the specified element from this object by its property name, if it is present.
      * @param key name of the property of JavaScript object.
      */
+	//FIXME
     protected final native void remove(String key);
 	
 	

@@ -1,14 +1,8 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
+import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-import org.pepstock.charba.client.jsinterop.options.animation.NativeAnimation;
-import org.pepstock.charba.client.jsinterop.options.elements.NativeElements;
-import org.pepstock.charba.client.jsinterop.options.hover.NativeHover;
-import org.pepstock.charba.client.jsinterop.options.layout.NativeLayout;
-import org.pepstock.charba.client.jsinterop.options.legend.NativeLegend;
-import org.pepstock.charba.client.jsinterop.options.title.NativeTitle;
-import org.pepstock.charba.client.jsinterop.options.tooltips.NativeTooltips;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -21,58 +15,58 @@ public final class NativeOptions extends NativeObject{
 	}
 	
 	@JsProperty
-	public native NativeAnimation getAnimation();
+	native NativeAnimation getAnimation();
 
 	@JsProperty
-	public native void setAnimation(NativeAnimation animation);
+	native void setAnimation(NativeAnimation animation);
 
 	@JsProperty
-	public native NativeHover getHover();
+	native NativeHover getHover();
 
 	@JsProperty
-	public native void setHover(NativeHover hover);
+	native void setHover(NativeHover hover);
 
 	@JsProperty
-	public native NativeLayout getLayout();
+	native NativeLayout getLayout();
 
 	@JsProperty
-	public native void setLayout(NativeLayout layout);
+	native void setLayout(NativeLayout layout);
 
 	@JsProperty
-	public native NativeElements getElements();
+	native NativeElements getElements();
 
 	@JsProperty
-	public native void setElements(NativeElements elements);
+	native void setElements(NativeElements elements);
 
 	@JsProperty
-	public native NativeTitle getTitle();
+	native NativeTitle getTitle();
 
 	@JsProperty
-	public native void setTitle(NativeTitle title);
+	native void setTitle(NativeTitle title);
 
 	@JsProperty
-	public native NativeLegend getLegend();
+	native NativeLegend getLegend();
 
 	@JsProperty
-	public native void setLegend(NativeLegend legend);
+	native void setLegend(NativeLegend legend);
 
 	@JsProperty
-	public native NativeTooltips getTooltips();
+	native NativeTooltips getTooltips();
 
 	@JsProperty
-	public native void setTooltips(NativeTooltips tooltips);
+	native void setTooltips(NativeTooltips tooltips);
 
 	@JsProperty
-	public native void setResponsive(boolean responsive);
+	native void setResponsive(boolean responsive);
 
 	@JsProperty
-	public native boolean isResponsive();
+	native boolean isResponsive();
 	
 	@JsProperty
-	public native void setEvents(ArrayString events);
+	native void setEvents(ArrayString events);
 
 	@JsProperty
-	public native ArrayString getEvents();
+	native ArrayString getEvents();
 
 	/**
 	 * Sets the duration in milliseconds it takes to animate to new size after a resize event.
@@ -80,7 +74,7 @@ public final class NativeOptions extends NativeObject{
 	 * @param milliseconds the duration in milliseconds it takes to animate to new size after a resize event.
 	 */
 	@JsProperty
-	public native void setResponsiveAnimationDuration(int milliseconds);
+	native void setResponsiveAnimationDuration(int milliseconds);
 
 	/**
 	 * Returns the duration in milliseconds it takes to animate to new size after a resize event.
@@ -88,7 +82,7 @@ public final class NativeOptions extends NativeObject{
 	 * @return the duration in milliseconds it takes to animate to new size after a resize event. Default is 0.
 	 */
 	@JsProperty
-	public native int getResponsiveAnimationDuration();
+	native int getResponsiveAnimationDuration();
 
 	/**
 	 * Sets the maintaining of the original canvas aspect ratio (width / height) when resizing.
@@ -96,7 +90,7 @@ public final class NativeOptions extends NativeObject{
 	 * @param maintainAspectRatio the maintaining of the original canvas aspect ratio (width / height) when resizing.
 	 */
 	@JsProperty
-	public native void setMaintainAspectRatio(boolean maintainAspectRatio);
+	native void setMaintainAspectRatio(boolean maintainAspectRatio);
 
 	/**
 	 * Returns the the maintaining of the original canvas aspect ratio (width / height) when resizing.
@@ -104,7 +98,7 @@ public final class NativeOptions extends NativeObject{
 	 * @return the maintaining of the original canvas aspect ratio (width / height) when resizing. Default is true.
 	 */
 	@JsProperty
-	public native boolean isMaintainAspectRatio();
+	native boolean isMaintainAspectRatio();
 	
 	/**
 	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina displays).
@@ -113,7 +107,7 @@ public final class NativeOptions extends NativeObject{
 	 * @param ratio the pixel ratio.
 	 */
 	@JsProperty
-	public native void setDevicePixelRatio(double ratio);
+	native void setDevicePixelRatio(double ratio);
 
 	/**
 	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina displays).
@@ -123,35 +117,35 @@ public final class NativeOptions extends NativeObject{
 	 * @return  the pixel ratio. Default is <code>window.devicePixelRatio</code>.
 	 */
 	@JsProperty
-	public native double getDevicePixelRatio();
+	native double getDevicePixelRatio();
 
 	/**
 	 * Sets the default color to use in the chart, on all objects, if not override by the specific configuration.
 	 * @param defaultColor color to use into chart. 
 	 */
 	@JsProperty
-	public native void setDefaultColor(String defaultColor);
+	native void setDefaultColor(String defaultColor);
 
 	/**
 	 * Returns the default color to use in the chart, on all objects, if not override by the specific configuration.
 	 * @return color to use into chart. Default is "rgba(0,0,0,0.1)"
 	 */
 	@JsProperty
-	public native String getDefaultColor();
+	native String getDefaultColor();
 
 	/**
 	 * Sets the default font color to use in the chart, on all objects, if not override by the specific configuration.
 	 * @param defaultFontColor font color to use into chart. 
 	 */
 	@JsProperty
-	public native void setDefaultFontColor(String defaultFontColor);
+	native void setDefaultFontColor(String defaultFontColor);
 
 	/**
 	 * Returns the default font color to use in the chart, on all objects, if not override by the specific configuration.
 	 * @return  font color to use into chart. Default is #666.
 	 */
 	@JsProperty
-	public native String getDefaultFontColor();
+	native String getDefaultFontColor();
 
 
 	/**
@@ -160,7 +154,7 @@ public final class NativeOptions extends NativeObject{
 	 * @param fontSize Font size into chart.
 	 */
 	@JsProperty
-	public native void setDefaultFontSize(int fontSize);
+	native void setDefaultFontSize(int fontSize);
 
 	/**
 	 * Returns the font size to use in the chart, on all objects, if not override by the specific configuration.
@@ -168,13 +162,13 @@ public final class NativeOptions extends NativeObject{
 	 * @return Font size into chart. Default is 12.
 	 */
 	@JsProperty
-	public native int getDefaultFontSize();
+	native int getDefaultFontSize();
 
 	@JsProperty
-	public native void setDefaultFontStyle(String defaultFontStyle);
+	native void setDefaultFontStyle(String defaultFontStyle);
 
 	@JsProperty
-	public native String getDefaultFontStyle();
+	native String getDefaultFontStyle();
 
 	/**
 	 * Sets the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
@@ -182,7 +176,7 @@ public final class NativeOptions extends NativeObject{
 	 * @param fontFamily Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
 	 */
 	@JsProperty
-	public native void setDefaultFontFamily(String fontFamily);
+	native void setDefaultFontFamily(String fontFamily);
 
 	/**
 	 * Returns the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
@@ -191,7 +185,7 @@ public final class NativeOptions extends NativeObject{
 	 *         sans-serif
 	 */
 	@JsProperty
-	public native String getDefaultFontFamily();
+	native String getDefaultFontFamily();
 
 	/**
 	 * If false, the lines between points are not drawn.
@@ -199,14 +193,14 @@ public final class NativeOptions extends NativeObject{
 	 * @param showLine If false, the lines between points are not drawn.
 	 */
 	@JsProperty
-	public native void setShowLines(boolean showLine);
+	native void setShowLines(boolean showLine);
 	/**
 	 * If false, the lines between points are not drawn.
 	 * 
 	 * @return If false, the lines between points are not drawn. Default is true.
 	 */
 	@JsProperty
-	public native boolean isShowLines();
+	native boolean isShowLines();
 	
 	/**
 	 * If false, NaN data causes a break in the line.
@@ -214,7 +208,7 @@ public final class NativeOptions extends NativeObject{
 	 * @param spanGaps If false, NaN data causes a break in the line.
 	 */
 	@JsProperty
-	public native void setSpanGaps(boolean spanGaps);
+	native void setSpanGaps(boolean spanGaps);
 
 	/**
 	 * If false, NaN data causes a break in the line.
@@ -222,7 +216,7 @@ public final class NativeOptions extends NativeObject{
 	 * @return If false, NaN data causes a break in the line. Default is false.
 	 */
 	@JsProperty
-	public native boolean isSpanGaps();
+	native boolean isSpanGaps();
 	
 	/**
 	 * Sets the percentage of the chart that is cut out of the middle.
@@ -230,7 +224,7 @@ public final class NativeOptions extends NativeObject{
 	 * @param cutoutPercentage the percentage of the chart that is cut out of the middle.
 	 */
 	@JsProperty
-	public native void setCutoutPercentage(double cutoutPercentage);
+	native void setCutoutPercentage(double cutoutPercentage);
 
 	/**
 	 * Returns the the percentage of the chart that is cut out of the middle.
@@ -238,7 +232,7 @@ public final class NativeOptions extends NativeObject{
 	 * @return the percentage of the chart that is cut out of the middle. Default is 0.
 	 */
 	@JsProperty
-	public native double getCutoutPercentage();
+	native double getCutoutPercentage();
 	
 	/**
 	 * Sets the starting angle to draw arcs from.
@@ -246,7 +240,7 @@ public final class NativeOptions extends NativeObject{
 	 * @param rotation starting angle to draw arcs from.
 	 */
 	@JsProperty
-	public native void setRotation(double rotation);
+	native void setRotation(double rotation);
 
 	/**
 	 * Returns the starting angle to draw arcs from.
@@ -254,7 +248,7 @@ public final class NativeOptions extends NativeObject{
 	 * @return starting angle to draw arcs from. Default is <code>-0.5 * Math.PI</code>.
 	 */
 	@JsProperty
-	public native double getRotation();
+	native double getRotation();
 	
 
 	/**
@@ -263,7 +257,7 @@ public final class NativeOptions extends NativeObject{
 	 * @param circumference the sweep to allow arcs to cover.
 	 */
 	@JsProperty
-	public native void setCircumference(double circumference);
+	native void setCircumference(double circumference);
 
 	/**
 	 * Returns the the sweep to allow arcs to cover.
@@ -271,7 +265,7 @@ public final class NativeOptions extends NativeObject{
 	 * @return the sweep to allow arcs to cover. Default is <code>2 * Math.PI</code>.
 	 */
 	@JsProperty
-	public native double getCircumference();
+	native double getCircumference();
 	
 	/**
 	 * Sets the starting angle to draw arcs for the first item in a dataset.
@@ -279,7 +273,7 @@ public final class NativeOptions extends NativeObject{
 	 * @param startAngle starting angle to draw arcs for the first item in a dataset.
 	 */
 	@JsProperty
-	public native void setStartAngle(double startAngle);
+	native void setStartAngle(double startAngle);
 
 	/**
 	 * Returns the starting angle to draw arcs for the first item in a dataset.
@@ -287,6 +281,15 @@ public final class NativeOptions extends NativeObject{
 	 * @return starting angle to draw arcs for the first item in a dataset. Default is <code>-0.5 * Math.PI</code>.
 	 */
 	@JsProperty
-	public native double getStartAngle();
+	native double getStartAngle();
+	
+	@JsProperty
+	native void setOnResize(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setOnClick(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setOnHover(CallbackProxy.Proxy proxy);
 
 }

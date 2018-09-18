@@ -1,8 +1,5 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
-import org.pepstock.charba.client.jsinterop.Global;
-import org.pepstock.charba.client.jsinterop.options.IsDefaultFontItem;
-
 abstract class AbstractDefaultFontItem implements IsDefaultFontItem{
 
 	/* (non-Javadoc)
@@ -10,7 +7,7 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem{
 	 */
 	@Override
 	public String getFontColor() {
-		return Global.DEFAULT_GLOBAL_OPTIONS.getDefaultFontColor();
+		return DefaultOptions.get().getDefaultFontColor();
 	}
 
 	/* (non-Javadoc)
@@ -18,7 +15,7 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem{
 	 */
 	@Override
 	public int getFontSize() {
-		return Global.DEFAULT_GLOBAL_OPTIONS.getDefaultFontSize();
+		return DefaultOptions.get().getDefaultFontSize();
 	}
 
 	/* (non-Javadoc)
@@ -26,7 +23,7 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem{
 	 */
 	@Override
 	public String getFontStyle() {
-		return Global.DEFAULT_GLOBAL_OPTIONS.getDefaultFontStyle();
+		return DefaultOptions.get().getDefaultFontStyle();
 	}
 
 	/* (non-Javadoc)
@@ -34,6 +31,6 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem{
 	 */
 	@Override
 	public String getFontFamily() {
-		return Global.DEFAULT_GLOBAL_OPTIONS.getDefaultFontFamily();
+		return DefaultOptions.get().getDefaultFontFamily();
 	}
 }

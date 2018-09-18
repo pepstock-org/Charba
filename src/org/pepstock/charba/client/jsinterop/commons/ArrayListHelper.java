@@ -146,26 +146,22 @@ public final class ArrayListHelper {
 		return new ArrayEnumList<E>(clazz.getEnumConstants(), array);
 	}
 	
-//	/**
-//	 * Creates a JavaScript array list of generic javaScript objects.
-//	 * @param values array of elements to load when the list is creating.
-//	 * @param <E> type of java script object
-//	 * @return a array list of strings instance or <code>null</code> if the elements are null.
-//	 * @see org.pepstock.charba.client.commons.GenericJavaScriptObject
-//	 * @see org.pepstock.charba.client.commons.JsObjectArrayList
-//	 */
-//	public static <E extends GenericJavaScriptObject> JsObjectArrayList<E> build(E[] values){
-//		// checks if array is null
-//		if (values == null){
-//			return null;
-//		}
-//		// creates the list
-//		JsObjectArrayList<E> result = new JsObjectArrayList<E>();
-//		// adds all elements
-//		result.addAll(values);
-//		// returns the list
-//		return result;
-//	}
+	/**
+	 * Creates a JavaScript array list of generic javaScript objects.
+	 * @param values array of elements to load when the list is creating.
+	 * @param <E> type of java script object
+	 * @return a array list of strings instance or <code>null</code> if the elements are null.
+	 * @see org.pepstock.charba.client.commons.GenericJavaScriptObject
+	 * @see org.pepstock.charba.client.commons.JsObjectArrayList
+	 */
+	public static <E extends NativeObject> ArrayObjectList<E> build(Array<E> values){
+		// checks if array is null
+		if (values == null){
+			return null;
+		}
+		// creates the list
+		return new ArrayObjectList<E>(values);
+	}
 //
 //	/**
 //	 * Loads an existing list of JavaScript object container.

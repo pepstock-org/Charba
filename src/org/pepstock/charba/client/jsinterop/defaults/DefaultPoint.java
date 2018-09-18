@@ -1,7 +1,6 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
 import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.jsinterop.options.elements.point.IsDefaultPoint;
 
 public final class DefaultPoint extends DefaultArc implements IsDefaultPoint{
 	

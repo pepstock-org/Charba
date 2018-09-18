@@ -1,7 +1,5 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
-import org.pepstock.charba.client.jsinterop.options.layout.padding.IsDefaultPadding;
-
 public final class DefaultPadding implements IsDefaultPadding{
 
 	private static final int DEFAULT_PADDING = 0;

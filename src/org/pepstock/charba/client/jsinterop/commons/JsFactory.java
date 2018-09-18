@@ -10,5 +10,8 @@ public final class JsFactory {
 	
 	public static native <T extends NativeObject> T newObject();
 	
-	public static native CallbackProxy newCallbackProxy();
+	public static native <T> CallbackProxy<T> newCallbackProxy();
+	
+	public static native <T extends NativeObject> void remove(T object, String key);
+
 }

@@ -25,11 +25,15 @@ import org.pepstock.charba.client.events.AnimationProgressEvent;
 import org.pepstock.charba.client.items.AnimationItem;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.JsFactory;
+import org.pepstock.charba.client.jsinterop.items.AnimationObject;
+import org.pepstock.charba.client.jsinterop.utils.Window;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
+
+import jsinterop.annotations.JsFunction;
 
 /**
  * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it takes.
@@ -43,6 +47,12 @@ public final class Animation extends EventProvider {
 	private int onCompleteHandlers = 0;
 	// amount of handlers
 	private int onProgressHandlers = 0;
+	
+	@JsFunction
+	public interface VoidCallback {
+	    void call(Object context, AnimationObject animationObject);
+	}
+
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -155,6 +165,14 @@ public final class Animation extends EventProvider {
 				//registerNativeCompleteHandler(getJavaScriptObject());
 				// FIXME
 				CallbackProxy cp = JsFactory.newCallbackProxy();
+				cp.setCallback(new VoidCallback() {
+					
+					@Override
+					public void call(Object context, AnimationObject animationObject) {
+						Window.getConsole().log(context);
+						Window.getConsole().log(animationObject.getAnimationItem());
+					}
+				});
 				registerNativeCompleteHandler(getJavaScriptObject(), cp.getProxy());
 			}
 			// increments amount of handlers
