@@ -48,28 +48,23 @@ public class NativeScale extends NativeObject {
 	protected NativeScale() {
 	}
 
+	@JsProperty
+	native NativeScaleLabel getScaleLabel();
 
-//	/**
-//	 * @return the scaleLabel
-//	 * @see ScaleLabel
-//	 */
-//	@JsProperty
-//	native ScaleLabel getScaleLabel();
-//
-//	/**
-//	 * @return the ticks
-//	 * @see Ticks
-//	 */
-//	@JsProperty
-//	native Ticks getTicks();
-//
-//	/**
-//	 * @return the grideLines
-//	 * @see GridLines
-//	 */
-//	@JsProperty
-//	native GridLines getGrideLines();
+	@JsProperty
+	native void setScaleLabel(NativeScaleLabel scaleLabel);
 
+	@JsProperty
+	native NativePointLabels getPointLabels();
+
+	@JsProperty
+	native void setPointLabels(NativePointLabels pointLabels);
+
+	@JsProperty
+	native NativeGridLines getGridLines();
+
+	@JsProperty
+	native void setGridLines(NativeGridLines gridLines);
 
 	/**
 	 * @return the angleLines

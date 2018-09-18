@@ -34,16 +34,16 @@ import org.pepstock.charba.client.jsinterop.utils.JSON;
 public final class ArrayObjectList<E extends NativeObject> implements List<E> {
 	
 	// delegated array to store objects
-	private final Array<E> array;
+	private final ArrayObject<E> array;
 
 	/**
 	 * Internal constructor used to load a JSArray already in another object.
 	 * @param array JS array instance
 	 */
-	ArrayObjectList(Array<E> array) {
+	ArrayObjectList(ArrayObject<E> array) {
 		// if null, creates a new JS array
 		if (array == null){
-			this.array = new Array<E>();
+			this.array = new ArrayObject<E>();
 		} else {
 			// uses an existing array
 			this.array = array;
@@ -61,7 +61,7 @@ public final class ArrayObjectList<E extends NativeObject> implements List<E> {
 	 * Returns the JS array to be able to store it in another object (internally used).
 	 * @return the JS array
 	 */
-	Array<E> getJsArray() {
+	ArrayObject<E> getJsArray() {
 		return array;
 	}
 

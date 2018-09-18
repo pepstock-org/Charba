@@ -38,15 +38,15 @@ import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
  */
 public class Scale extends BaseModel<NativeScale, Options, IsDefaultScale>{
 	
-//	private final GridLines grideLines;
+	private final GridLines gridLines;
 //
 //	private final Ticks ticks;
 //
-//	private final ScaleLabel scaleLabel;
+	private final ScaleLabel scaleLabel;
 	
 	private final AngleLines angleLines;
 	
-//	private final PointLabels pointLabels;
+	private final PointLabels pointLabels;
 
 
 	public Scale(Options options, IsDefaultScale defaultValues) {
@@ -61,17 +61,35 @@ public class Scale extends BaseModel<NativeScale, Options, IsDefaultScale>{
 		} else {
 			angleLines = new AngleLines(this, getDefaultValues().getAngleLines());
 		}
+		NativeGridLines gridLinesObject = getDelegated().getGridLines();
+		if (gridLinesObject != null) {
+			gridLines = new GridLines(gridLinesObject, this, getDefaultValues().getGrideLines());
+		} else {
+			gridLines = new GridLines(this, getDefaultValues().getGrideLines());
+		}
+		NativePointLabels pointLabelsObject = getDelegated().getPointLabels();
+		if (pointLabelsObject != null) {
+			pointLabels = new PointLabels(pointLabelsObject, this, getDefaultValues().getPointLabels());
+		} else {
+			pointLabels = new PointLabels(this, getDefaultValues().getPointLabels());
+		}
+		NativeScaleLabel scaleLabelObject = getDelegated().getScaleLabel();
+		if (scaleLabelObject != null) {
+			scaleLabel = new ScaleLabel(scaleLabelObject, this, getDefaultValues().getScaleLabel());
+		} else {
+			scaleLabel = new ScaleLabel(this, getDefaultValues().getScaleLabel());
+		}
 	}
 
 
-//	/**
-//	 * @return the scaleLabel
-//	 * @see ScaleLabel
-//	 */
-//	public ScaleLabel getScaleLabel() {
-//		return scaleLabel;
-//	}
-//
+	/**
+	 * @return the scaleLabel
+	 * @see ScaleLabel
+	 */
+	public ScaleLabel getScaleLabel() {
+		return scaleLabel;
+	}
+
 //	/**
 //	 * @return the ticks
 //	 * @see Ticks
@@ -80,13 +98,13 @@ public class Scale extends BaseModel<NativeScale, Options, IsDefaultScale>{
 //		return ticks;
 //	}
 //
-//	/**
-//	 * @return the grideLines
-//	 * @see GridLines
-//	 */
-//	public GridLines getGrideLines() {
-//		return grideLines;
-//	}
+	/**
+	 * @return the grideLines
+	 * @see GridLines
+	 */
+	public GridLines getGrideLines() {
+		return gridLines;
+	}
 	
 	/**
 	 * @return the angleLines
@@ -96,13 +114,13 @@ public class Scale extends BaseModel<NativeScale, Options, IsDefaultScale>{
 		return angleLines;
 	}
 
-//	/**
-//	 * @return the pointLabels
-//	 * @see PointLabels
-//	 */
-//	public PointLabels getPointLabels() {
-//		return pointLabels;
-//	}
+	/**
+	 * @return the pointLabels
+	 * @see PointLabels
+	 */
+	public PointLabels getPointLabels() {
+		return pointLabels;
+	}
 	
 	/**
 	 * The ID is used to link datasets and scale axes together.<br>
@@ -346,10 +364,9 @@ public class Scale extends BaseModel<NativeScale, Options, IsDefaultScale>{
 	 */
 	@Override
 	protected void addToParent() {
-		// FIXME
-		//		if (getParent().getDelegated().getS == null) {
-//			getParent().getDelegated().setHover(getDelegated());
-//		}
+		if (getParent().getDelegated().getScale() == null) {
+			getParent().getDelegated().setScale(getDelegated());
+		}
 	}
 	
 }

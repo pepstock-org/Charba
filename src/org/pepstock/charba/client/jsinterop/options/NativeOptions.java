@@ -13,7 +13,13 @@ public final class NativeOptions extends NativeObject{
 	
 	protected NativeOptions() {
 	}
-	
+
+	@JsProperty
+	native NativeScale getScale();
+
+	@JsProperty
+	native void setScale(NativeScale scale);
+
 	@JsProperty
 	native NativeAnimation getAnimation();
 

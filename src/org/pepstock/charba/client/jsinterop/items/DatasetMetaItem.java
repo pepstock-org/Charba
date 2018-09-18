@@ -20,8 +20,8 @@ import java.util.List;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.controllers.ControllerType;
-import org.pepstock.charba.client.jsinterop.commons.Array;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
+import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
@@ -56,7 +56,7 @@ public final class DatasetMetaItem extends NativeObject {
 	native String getNativeXAxisID();
 	
 	@JsProperty(name = "data")
-	native Array<DatasetItem> getNativeData();
+	native ArrayObject<DatasetItem> getNativeData();
 
 	
 	/**

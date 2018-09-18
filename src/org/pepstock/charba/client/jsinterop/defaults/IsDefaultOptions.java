@@ -4,6 +4,8 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 
 public interface IsDefaultOptions {
 	
+	IsDefaultScale getScale();
+	
 	IsDefaultAnimation getAnimation();
 	
 	IsDefaultHover getHover();

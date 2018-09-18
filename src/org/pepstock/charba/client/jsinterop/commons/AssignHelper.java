@@ -5,7 +5,7 @@ import org.pepstock.charba.client.commons.Key;
 public final class AssignHelper {
 	
 	private static final String UNDEFINED = "undefined";
-
+	
 	private AssignHelper() {
 	}
 
@@ -30,6 +30,13 @@ public final class AssignHelper {
 		return Double.isNaN(value) ? defaultValue : value;
 	}
 
+	public static int check(Object value, int defaultValue) {
+		return value == null ? defaultValue : (int)value;
+	}
+
+	public static double check(Object value, double defaultValue) {
+		return value == null ? defaultValue : (double)value;
+	}
 	
 	public static <T extends Key> T deserialize(String value, Class<T> enumClass, T defaultValue) {
 		if (enumClass.isEnum()) {

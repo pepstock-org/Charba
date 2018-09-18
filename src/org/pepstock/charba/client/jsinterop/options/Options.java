@@ -7,8 +7,8 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.FontStyle;
-import org.pepstock.charba.client.jsinterop.commons.Array;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
+import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
@@ -23,12 +23,12 @@ public class Options extends BaseModel<NativeOptions, Options, IsDefaultOptions>
 	
 	@JsFunction
 	public interface ChartClickCallback {
-		void call(Object context, ChartNativeEvent event, Array<DatasetItem> items);
+		void call(Object context, ChartNativeEvent event, ArrayObject<DatasetItem> items);
 	}
 
 	@JsFunction
 	public interface ChartHoverCallback {
-		void call(Object context, ChartNativeEvent event, Array<DatasetItem> items);
+		void call(Object context, ChartNativeEvent event, ArrayObject<DatasetItem> items);
 	}
 
 	@JsFunction
@@ -36,19 +36,21 @@ public class Options extends BaseModel<NativeOptions, Options, IsDefaultOptions>
 		void call(Object context, Object chart, SizeItem size);
 	}
 	
-	private Animation animation;
+	private final Animation animation;
 	
-	private Hover hover;
+	private final Hover hover;
 	
-	private Layout layout;
+	private final Layout layout;
 	
-	private Elements elements;
+	private final Elements elements;
 	
-	private Title title;
+	private final Title title;
 
-	private Legend legend;
+	private final Legend legend;
 	
-	private Tooltips tooltips;
+	private final Tooltips tooltips;
+	
+	private final Scale scale;
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -112,21 +114,27 @@ public class Options extends BaseModel<NativeOptions, Options, IsDefaultOptions>
 		} else {
 			tooltips = new Tooltips(this, getDefaultValues().getTooltips());
 		}
+		NativeScale scaleObject = getDelegated().getScale();
+		if (scaleObject != null) {
+			scale = new Scale(scaleObject, this, getDefaultValues().getScale());
+		} else {
+			scale = new Scale(this, getDefaultValues().getScale());
+		}
+
 	}
-	
+
+	/**
+	 * @return the scale
+	 */
+	public final Scale getScale() {
+		return scale;
+	}
 
 	/**
 	 * @return the animation
 	 */
 	public final Animation getAnimation() {
 		return animation;
-	}
-
-	/**
-	 * @param animation the animation to set
-	 */
-	public final void setAnimation(Animation animation) {
-		this.animation = animation;
 	}
 
 	/**
@@ -137,24 +145,10 @@ public class Options extends BaseModel<NativeOptions, Options, IsDefaultOptions>
 	}
 
 	/**
-	 * @param hover the hover to set
-	 */
-	public final void setHover(Hover hover) {
-		this.hover = hover;
-	}
-
-	/**
 	 * @return the layout
 	 */
 	public final Layout getLayout() {
 		return layout;
-	}
-
-	/**
-	 * @param layout the layout to set
-	 */
-	public final void setLayout(Layout layout) {
-		this.layout = layout;
 	}
 
 	/**
@@ -165,24 +159,10 @@ public class Options extends BaseModel<NativeOptions, Options, IsDefaultOptions>
 	}
 
 	/**
-	 * @param elements the elements to set
-	 */
-	public final void setElements(Elements elements) {
-		this.elements = elements;
-	}
-
-	/**
 	 * @return the title
 	 */
 	public final Title getTitle() {
 		return title;
-	}
-
-	/**
-	 * @param title the title to set
-	 */
-	public final void setTitle(Title title) {
-		this.title = title;
 	}
 
 	/**
@@ -193,24 +173,10 @@ public class Options extends BaseModel<NativeOptions, Options, IsDefaultOptions>
 	}
 
 	/**
-	 * @param legend the legend to set
-	 */
-	public final void setLegend(Legend legend) {
-		this.legend = legend;
-	}
-
-	/**
 	 * @return the tooltips
 	 */
 	public final Tooltips getTooltips() {
 		return tooltips;
-	}
-
-	/**
-	 * @param tooltips the tooltips to set
-	 */
-	public final void setTooltips(Tooltips tooltips) {
-		this.tooltips = tooltips;
 	}
 
 	/**

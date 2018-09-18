@@ -23,6 +23,12 @@ public final class DefaultScale implements IsDefaultScale{
 	private static final boolean DEFAULT_STACKED = false;
 	
 	private final DefaultAngleLines angleLines = new DefaultAngleLines();
+	
+	private final DefaultGridLines gridLines = new DefaultGridLines();
+	
+	private final DefaultPointLabels pointLabels = new DefaultPointLabels();
+	
+	private final DefaultScaleLabel scaleLabel = new DefaultScaleLabel();
 
 
 	/* (non-Javadoc)
@@ -31,6 +37,30 @@ public final class DefaultScale implements IsDefaultScale{
 	@Override
 	public IsDefaultAngleLines getAngleLines() {
 		return angleLines;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getGrideLines()
+	 */
+	@Override
+	public IsDefaultGridLines getGrideLines() {
+		return gridLines;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getPointLabels()
+	 */
+	@Override
+	public IsDefaultPointLabels getPointLabels() {
+		return pointLabels;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getScaleLabel()
+	 */
+	@Override
+	public IsDefaultScaleLabel getScaleLabel() {
+		return scaleLabel;
 	}
 
 	/* (non-Javadoc)

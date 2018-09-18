@@ -18,12 +18,12 @@ package org.pepstock.charba.client.jsinterop.defaults;
 public interface IsDefaultScale{
 
 
-//	/**
-//	 * @return the scaleLabel
-//	 * @see ScaleLabel
-//	 */
-//
-//	 ScaleLabel getScaleLabel();
+	/**
+	 * @return the scaleLabel
+	 * @see ScaleLabel
+	 */
+
+	 IsDefaultScaleLabel getScaleLabel();
 //
 //	/**
 //	 * @return the ticks
@@ -32,12 +32,12 @@ public interface IsDefaultScale{
 //
 //	 Ticks getTicks();
 //
-//	/**
-//	 * @return the grideLines
-//	 * @see GridLines
-//	 */
-//
-//	 GridLines getGrideLines();
+	/**
+	 * @return the grideLines
+	 * @see GridLines
+	 */
+
+	 IsDefaultGridLines getGrideLines();
 
 
 	/**
@@ -46,12 +46,12 @@ public interface IsDefaultScale{
 	 */
 	IsDefaultAngleLines getAngleLines();
 
-//	/**
-//	 * @return the pointLabels
-//	 * @see PointLabels
-//	 */
-//
-//	 PointLabels getPointLabels();
+	/**
+	 * @return the pointLabels
+	 * @see PointLabels
+	 */
+
+	 IsDefaultPointLabels getPointLabels();
 
 	/**
 	 * Returns if the axis are stacked or not.

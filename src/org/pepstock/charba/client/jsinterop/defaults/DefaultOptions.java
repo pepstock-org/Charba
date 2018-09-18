@@ -56,6 +56,8 @@ public final class DefaultOptions implements IsDefaultOptions{
 	private final DefaultLegend legend = new DefaultLegend();
 	
 	private final DefaultTooltips tooltips = new DefaultTooltips();
+	
+	private final DefaultScale scale = new DefaultScale();
 
 	/**
 	 * 
@@ -65,6 +67,14 @@ public final class DefaultOptions implements IsDefaultOptions{
 	
 	public static final DefaultOptions get() {
 		return INSTANCE;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getScale()
+	 */
+	@Override
+	public IsDefaultScale getScale() {
+		return scale;
 	}
 
 	/* (non-Javadoc)

@@ -39,17 +39,9 @@ public final class ArrayListHelper {
 	 * @return a array list of doubles instance or <code>null</code> if the elements are null.
 	 * @see org.pepstock.charba.client.commons.JsDoubleArrayList
 	 */
-	public static ArrayDoubleList build(double... values){
-		// checks if array is null
-		if (values == null){
-			return null;
-		}
+	public static ArrayDoubleList build(ArrayDouble values){
 		// creates the list
-		ArrayDoubleList result = new ArrayDoubleList();
-		// adds all elements
-		result.addAll(values);
-		// returns the list
-		return result;
+		return new ArrayDoubleList(values);
 	}
 
 	/**
@@ -59,10 +51,6 @@ public final class ArrayListHelper {
 	 * @see org.pepstock.charba.client.commons.JsIntegerArrayList
 	 */
 	public static ArrayIntegerList build(ArrayInteger values){
-		// checks if array is null
-		if (values == null){
-			return null;
-		}
 		// creates the list
 		return new ArrayIntegerList(values);
 	}
@@ -73,17 +61,9 @@ public final class ArrayListHelper {
 	 * @return a array list of strings instance or <code>null</code> if the elements are null.
 	 * @see org.pepstock.charba.client.commons.JsStringArrayList
 	 */
-	public static ArrayStringList build(String... values){
-		// checks if array is null
-		if (values == null){
-			return null;
-		}
+	public static ArrayStringList build(ArrayString values){
 		// creates the list
-		ArrayStringList result = new ArrayStringList();
-		// adds all elements
-		result.addAll(values);
-		// returns the list
-		return result;
+		return new ArrayStringList(values);
 	}
 
 	/**
@@ -93,12 +73,12 @@ public final class ArrayListHelper {
 	 * @see org.pepstock.charba.client.commons.JsStringArrayList
 	 */
 	public static ArrayStringList build(IsColor... values){
-		// checks if array is null
-		if (values == null){
-			return null;
-		}
 		// creates the list
 		ArrayStringList result = new ArrayStringList();
+		// checks if array is null
+		if (values == null){
+			return result;
+		}
 		for (IsColor color : values) {
 			// adds all elements
 			result.addAll(color.toRGBA());
@@ -107,6 +87,27 @@ public final class ArrayListHelper {
 		return result;
 	}
 	
+
+	/**
+	 * Creates a JavaScript array list of strings.
+	 * @param values array of elements to load when the list is creating.
+	 * @return a array list of strings instance or <code>null</code> if the elements are null.
+	 * @see org.pepstock.charba.client.commons.JsStringArrayList
+	 */
+	public static ArrayString of(IsColor... values){
+		// creates the list
+		ArrayString result = new ArrayString();
+		// checks if array is null
+		if (values == null){
+			return result;
+		}
+		for (IsColor color : values) {
+			// adds all elements
+			result.push(color.toRGBA());
+		}
+		// returns the list
+		return result;
+	}
 	/**
 	 * Creates a JavaScript array list of EnumValues.
 	 * @param clazz Enum class with all possible values of enumeration
@@ -154,7 +155,7 @@ public final class ArrayListHelper {
 	 * @see org.pepstock.charba.client.commons.GenericJavaScriptObject
 	 * @see org.pepstock.charba.client.commons.JsObjectArrayList
 	 */
-	public static <E extends NativeObject> ArrayObjectList<E> build(Array<E> values){
+	public static <E extends NativeObject> ArrayObjectList<E> build(ArrayObject<E> values){
 		// checks if array is null
 		if (values == null){
 			return null;
