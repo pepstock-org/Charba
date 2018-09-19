@@ -31,10 +31,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc;
  * @author Andrea "Stock" Stocchero
  * 
  */
-abstract class AbstractElement<O extends NativeArc, P extends Elements, D extends IsDefaultArc> extends BaseModel<O, P, D>{
+abstract class AbstractElement<P extends Elements, D extends IsDefaultArc, O extends NativeArc> extends BaseModel<P, D, O>{
 
-	protected AbstractElement(O delegated, P parent, D defaultValues) {
-		super(delegated, parent, defaultValues);
+	AbstractElement(P parent, D defaultValues, O delegated) {
+		super(parent, defaultValues, delegated);
 	}
 
 	/**

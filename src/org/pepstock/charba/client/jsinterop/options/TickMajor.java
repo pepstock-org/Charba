@@ -15,28 +15,19 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
 
 /**
- * The layout configuration is needed to set the padding.
+ * Configures the default chart title which defines text to draw at the top of the chart.<br>
+ * "weight"property is not present.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Layout extends BaseModel<Options, IsDefaultOptions, NativeLayout> {
+public final class TickMajor extends FontItem<Ticks, IsDefaultFontItem, NativeTickItem> {
 
-	private final Padding padding;
-	
-	Layout(Options options, IsDefaultOptions defaultOptions, NativeLayout delegated) {
-		super(options, defaultOptions, delegated == null ? new NativeLayout() : delegated);
-		padding = new Padding(this, defaultOptions.getPadding(), getDelegated().getPadding());
-	}
-
-	/**
-	 * @return the padding
-	 */
-	public Padding getPadding() {
-		return padding;
+	TickMajor(Ticks ticks, IsDefaultFontItem defaultValues, NativeTickItem delegated) {
+		super(ticks, defaultValues, delegated == null ? new NativeTickItem() : delegated);
 	}
 	
 	/* (non-Javadoc)
@@ -44,8 +35,9 @@ public class Layout extends BaseModel<Options, IsDefaultOptions, NativeLayout> {
 	 */
 	@Override
 	protected void addToParent() {
-		if (getParent().getDelegated().getLayout() == null) {
-			getParent().getDelegated().setLayout(getDelegated());
+		if (getParent().getDelegated().getMajor() == null) {
+			getParent().getDelegated().setMajor(getDelegated());
 		}
 	}
+
 }

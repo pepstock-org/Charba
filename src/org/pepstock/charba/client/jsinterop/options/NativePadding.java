@@ -28,7 +28,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
-public final class NativePadding extends NativeObject {
+final class NativePadding extends NativeObject {
 
 	/**
 	 * Sets the padding left in pixel.

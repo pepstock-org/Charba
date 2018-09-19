@@ -17,9 +17,8 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.AbstractItem;
-import org.pepstock.charba.client.defaults.FontItem;
+import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks;
 
 /**
  * All configuration for ticks of a chart.
@@ -27,115 +26,39 @@ import org.pepstock.charba.client.defaults.FontItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Ticks extends FontItem {
-	
-	private static final boolean DEFAULT_DISPLAY = true;
-	
-	private static final boolean DEFAULT_BEGIN_AT_ZERO = false;
+public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 
-	private static final boolean DEFAULT_REVERSE = false;
-	
-	private static final boolean DEFAULT_AUTO_SKIP = true;
+	private final TickMinor minor;
 
-	private static final int DEFAULT_AUTO_SKIP_PADDING = 0;
+	private final TickMajor major;
 
-	private static final int DEFAULT_LABEL_OFFSET = 0;
-
-	private static final int DEFAULT_MAX_ROTATION = 50;
-
-	private static final int DEFAULT_MIN_ROTATION = 0;
-
-	private static final boolean DEFAULT_MIRROR = false;
-
-	private static final int DEFAULT_PADDING = 0;
-	
-	private static final double DEFAULT_MIN = Double.MIN_VALUE;
-
-	private static final double DEFAULT_MAX = Double.MAX_VALUE;
-
-	private static final int DEFAULT_MAX_TICKS_LIMIT = 11;
-
-	private static final double DEFAULT_STEP_SIZE = Double.MIN_VALUE;
-
-	private static final double DEFAULT_SUGGESTED_MAX = Double.MAX_VALUE;
-
-	private static final double DEFAULT_SUGGESTED_MIN = Double.MIN_VALUE;
-	
-	private static final String DEFAULT_BACKDROP_COLOR = "rgba(255,255,255,0.75)";
-
-	private static final int DEFAULT_BACKDROP_PADDING_X = 2;
-
-	private static final int DEFAULT_BACKDROP_PADDING_Y = 2;
-
-	private static final boolean DEFAULT_SHOW_LABEL_BACKDROP = true;
-
-	private final FontItem minor;
-
-	private final FontItem major;
-
-	/**
-	 * Name of fields of JavaScript object.
-	 */
-	enum Property implements Key
-	{
-		display,
-		reverse,
-		autoSkip,
-		autoSkipPadding,
-		labelOffset,
-		maxRotation,
-		minRotation,
-		mirror,
-		padding,
-		beginAtZero,
-		minor,
-		major,
-		min,
-		max,
-		maxTicksLimit,
-		stepSize,
-		suggestedMax,
-		suggestedMin,
-		backdropColor,
-		backdropPaddingX,
-		backdropPaddingY,
-		showLabelBackdrop
-	}
-
-	/**
-	 * Builds the object with parent item and child.
-	 * 
-	 * @param parent parent item.
-	 * @param childKey key of child.
-	 */
-	Ticks(AbstractItem parent, Key childKey) {
-		super(parent, childKey);
-		// creates children objects
-		minor = new FontItemImpl(this, Property.minor);
-		major = new FontItemImpl(this, Property.major);
+	Ticks(Scale scale, IsDefaultTicks defaultValues, NativeTicks delegated) {
+		super(scale, defaultValues, delegated == null ? new NativeTicks() : delegated);
+		minor = new TickMinor(this, getDefaultValues().getMinor(), getDelegated().getMinor());
+		major = new TickMajor(this, getDefaultValues().getMajor(), getDelegated().getMajor());
 	}
 	
 	/**
 	 * @return the minor
 	 */
-	public FontItem getMinor() {
+	public final TickMinor getMinor() {
 		return minor;
 	}
 
 	/**
 	 * @return the major
 	 */
-	public FontItem getMajor() {
+	public final TickMajor getMajor() {
 		return major;
 	}
-	
+
 	/**
 	 * If true, scale will include 0 if it is not already included.
 	 * 
 	 * @param beginAtZero if true, scale will include 0 if it is not already included.
 	 */
 	public void setBeginAtZero(boolean beginAtZero) {
-		setValue(Property.beginAtZero, beginAtZero);
+		getDelegated().setBeginAtZero(beginAtZero);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -146,7 +69,7 @@ public final class Ticks extends FontItem {
 	 * @return if true, scale will include 0 if it is not already included.. Default is false
 	 */
 	public boolean isBeginAtZero() {
-		return getValue(Property.beginAtZero, DEFAULT_BEGIN_AT_ZERO);
+		return AssignHelper.check(getDelegated().isBeginAtZero(), getDefaultValues().isBeginAtZero());
 	}
 
 	/**
@@ -155,7 +78,7 @@ public final class Ticks extends FontItem {
 	 * @param display if true, show tick marks
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.display, display);
+		getDelegated().setDisplay(display);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -166,7 +89,7 @@ public final class Ticks extends FontItem {
 	 * @return if true, show tick marks. Default is true.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, DEFAULT_DISPLAY);
+		return AssignHelper.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -175,7 +98,7 @@ public final class Ticks extends FontItem {
 	 * @param reverse reverses order of tick labels.
 	 */
 	public void setReverse(boolean reverse) {
-		setValue(Property.reverse, reverse);
+		getDelegated().setReverse(reverse);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -186,7 +109,7 @@ public final class Ticks extends FontItem {
 	 * @return reverses order of tick labels. Default is false.
 	 */
 	public boolean isReverse() {
-		return getValue(Property.reverse, DEFAULT_REVERSE);
+		return AssignHelper.check(getDelegated().isReverse(), getDefaultValues().isReverse());
 	}
 	
 	/**
@@ -197,7 +120,7 @@ public final class Ticks extends FontItem {
 	 *            off to show all labels no matter what
 	 */
 	public void setAutoSkip(boolean autoSkip) {
-		setValue(Property.autoSkip, autoSkip);
+		getDelegated().setAutoSkip(autoSkip);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -210,7 +133,7 @@ public final class Ticks extends FontItem {
 	 *         show all labels no matter what. Default is true
 	 */
 	public boolean isAutoSkip() {
-		return getValue(Property.autoSkip, DEFAULT_AUTO_SKIP);
+		return AssignHelper.check(getDelegated().isAutoSkip(), getDefaultValues().isAutoSkip());
 	}
 
 	/**
@@ -221,7 +144,7 @@ public final class Ticks extends FontItem {
 	 *            to horizontal scales.
 	 */
 	public void setAutoSkipPadding(int autoSkipPadding) {
-		setValue(Property.autoSkipPadding, autoSkipPadding);
+		getDelegated().setAutoSkipPadding(autoSkipPadding);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -234,7 +157,7 @@ public final class Ticks extends FontItem {
 	 *         scales. Defualt is 0.
 	 */
 	public int getAutoSkipPadding() {
-		return getValue(Property.autoSkipPadding, DEFAULT_AUTO_SKIP_PADDING);
+		return AssignHelper.check(getDelegated().getAutoSkipPadding(), getDefaultValues().getAutoSkipPadding());
 	}
 
 	/**
@@ -246,7 +169,7 @@ public final class Ticks extends FontItem {
 	 *            the x axis, and the x direction for the y axis)
 	 */
 	public void setLabelOffset(int labelOffset) {
-		setValue(Property.labelOffset, labelOffset);
+		getDelegated().setLabelOffset(labelOffset);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -260,7 +183,7 @@ public final class Ticks extends FontItem {
 	 *         and the x direction for the y axis). Default is 0.
 	 */
 	public int getLabelOffset() {
-		return getValue(Property.labelOffset, DEFAULT_LABEL_OFFSET);
+		return AssignHelper.check(getDelegated().getLabelOffset(), getDefaultValues().getLabelOffset());
 	}
 
 	/**
@@ -271,7 +194,7 @@ public final class Ticks extends FontItem {
 	 *            necessary. Note: Only applicable to horizontal scales.
 	 */
 	public void setMaxRotation(int maxRotation) {
-		setValue(Property.maxRotation, maxRotation);
+		getDelegated().setMaxRotation(maxRotation);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -284,7 +207,7 @@ public final class Ticks extends FontItem {
 	 *         Note: Only applicable to horizontal scales. Default is 90
 	 */
 	public int getMaxRotation() {
-		return getValue(Property.maxRotation, DEFAULT_MAX_ROTATION);
+		return AssignHelper.check(getDelegated().getMaxRotation(), getDefaultValues().getMaxRotation());
 	}
 
 	/**
@@ -293,7 +216,7 @@ public final class Ticks extends FontItem {
 	 * @param minRotation minimum rotation for tick labels. Note: Only applicable to horizontal scales.
 	 */
 	public void setMinRotation(int minRotation) {
-		setValue(Property.minRotation, minRotation);
+		getDelegated().setMinRotation(minRotation);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -304,7 +227,7 @@ public final class Ticks extends FontItem {
 	 * @return minimum rotation for tick labels. Note: Only applicable to horizontal scales.. Default is 0.
 	 */
 	public int getMinRotation() {
-		return getValue(Property.minRotation, DEFAULT_MIN_ROTATION);
+		return AssignHelper.check(getDelegated().getMinRotation(), getDefaultValues().getMinRotation());
 	}
 
 	/**
@@ -315,7 +238,7 @@ public final class Ticks extends FontItem {
 	 *            applicable to vertical scales.
 	 */
 	public void setMirror(boolean mirror) {
-		setValue(Property.mirror, mirror);
+		getDelegated().setMirror(mirror);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -328,7 +251,7 @@ public final class Ticks extends FontItem {
 	 *         to vertical scales. Default is false.
 	 */
 	public boolean isMirror() {
-		return getValue(Property.mirror, DEFAULT_MIRROR);
+		return AssignHelper.check(getDelegated().isMirror(), getDefaultValues().isMirror());
 	}
 
 	/**
@@ -339,7 +262,7 @@ public final class Ticks extends FontItem {
 	 *            (X) direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
 	 */
 	public void setPadding(int padding) {
-		setValue(Property.padding, padding);
+		getDelegated().setPadding(padding);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -352,7 +275,7 @@ public final class Ticks extends FontItem {
 	 *         direction. When set on a horizontal axis, this applies in the vertical (Y) direction. Default is 10.
 	 */
 	public int getPadding() {
-		return getValue(Property.padding, DEFAULT_PADDING);
+		return AssignHelper.check(getDelegated().getPadding(), getDefaultValues().getPadding());
 	}
 	
 	/**
@@ -361,7 +284,7 @@ public final class Ticks extends FontItem {
 	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	public void setMin(double min) {
-		setValue(Property.min, min);
+		getDelegated().setMin(min);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -372,7 +295,7 @@ public final class Ticks extends FontItem {
 	 * @return the user defined minimum number for the scale, overrides minimum value from data. Default is Double.MIN_VALUE.
 	 */
 	public double getMin() {
-		return getValue(Property.min, DEFAULT_MIN);
+		return AssignHelper.check(getDelegated().getMin(), getDefaultValues().getMin());
 	}
 
 	/**
@@ -381,7 +304,7 @@ public final class Ticks extends FontItem {
 	 * @param max user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	public void setMax(double max) {
-		setValue(Property.max, max);
+		getDelegated().setMax(max);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -392,7 +315,7 @@ public final class Ticks extends FontItem {
 	 * @return user defined maximum number for the scale, overrides maximum value from data. Default is Double.MAX_VALUE.
 	 */
 	public double getMax() {
-		return getValue(Property.max, DEFAULT_MAX);
+		return AssignHelper.check(getDelegated().getMax(), getDefaultValues().getMax());
 	}
 
 	/**
@@ -401,7 +324,7 @@ public final class Ticks extends FontItem {
 	 * @param maxTicksLimit maximum number of ticks and gridlines to show.
 	 */
 	public void setMaxTicksLimit(int maxTicksLimit) {
-		setValue(Property.maxTicksLimit, maxTicksLimit);
+		getDelegated().setMaxTicksLimit(maxTicksLimit);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -412,7 +335,7 @@ public final class Ticks extends FontItem {
 	 * @return maximum number of ticks and gridlines to show. Default is 11.
 	 */
 	public int getMaxTicksLimit() {
-		return getValue(Property.maxTicksLimit, DEFAULT_MAX_TICKS_LIMIT);
+		return AssignHelper.check(getDelegated().getMaxTicksLimit(), getDefaultValues().getMaxTicksLimit());
 	}
 
 	/**
@@ -421,7 +344,7 @@ public final class Ticks extends FontItem {
 	 * @param stepSize user defined fixed step size for the scale.
 	 */
 	public void setStepSize(double stepSize) {
-		setValue(Property.stepSize, stepSize);
+		getDelegated().setStepSize(stepSize);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -432,7 +355,7 @@ public final class Ticks extends FontItem {
 	 * @return user defined fixed step size for the scale. Default is Double.MIN_VALUE.
 	 */
 	public double getStepSize() {
-		return getValue(Property.stepSize, DEFAULT_STEP_SIZE);
+		return AssignHelper.check(getDelegated().getStepSize(), getDefaultValues().getStepSize());
 	}
 
 	/**
@@ -441,7 +364,7 @@ public final class Ticks extends FontItem {
 	 * @param suggestedMax adjustment used when calculating the maximum data value.
 	 */
 	public void setSuggestedMax(double suggestedMax) {
-		setValue(Property.suggestedMax, suggestedMax);
+		getDelegated().setSuggestedMax(suggestedMax);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -452,7 +375,7 @@ public final class Ticks extends FontItem {
 	 * @return adjustment used when calculating the maximum data value.
 	 */
 	public double getSuggestedMax() {
-		return getValue(Property.suggestedMax, DEFAULT_SUGGESTED_MAX);
+		return AssignHelper.check(getDelegated().getSuggestedMax(), getDefaultValues().getSuggestedMax());
 	}
 
 	/**
@@ -461,7 +384,7 @@ public final class Ticks extends FontItem {
 	 * @param suggestedMin adjustment used when calculating the minimum data value.
 	 */
 	public void setSuggestedMin(double suggestedMin) {
-		setValue(Property.suggestedMin, suggestedMin);
+		getDelegated().setSuggestedMin(suggestedMin);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -472,7 +395,7 @@ public final class Ticks extends FontItem {
 	 * @return adjustment used when calculating the minimum data value.
 	 */
 	public double getSuggestedMin() {
-		return getValue(Property.suggestedMin, DEFAULT_SUGGESTED_MIN);
+		return AssignHelper.check(getDelegated().getSuggestedMin(), getDefaultValues().getSuggestedMin());
 	}
 
 	/**
@@ -490,7 +413,7 @@ public final class Ticks extends FontItem {
 	 * @param backdropColor color of label backdrops.
 	 */
 	public void setBackdropColor(String backdropColor) {
-		setValue(Property.backdropColor, backdropColor);
+		getDelegated().setBackdropColor(backdropColor);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -501,7 +424,7 @@ public final class Ticks extends FontItem {
 	 * @return color of label backdrops. Default is 'rgba(255, 255, 255, 0.75)'
 	 */
 	public String getBackdropColorAsString() {
-		return getValue(Property.backdropColor, DEFAULT_BACKDROP_COLOR);
+		return AssignHelper.check(getDelegated().getBackdropColor(), getDefaultValues().getBackdropColor());
 	}
 
 	/**
@@ -519,7 +442,7 @@ public final class Ticks extends FontItem {
 	 * @param backdropPaddingX horizontal padding of label backdrop.
 	 */
 	public void setBackdropPaddingX(int backdropPaddingX) {
-		setValue(Property.backdropPaddingX, backdropPaddingX);
+		getDelegated().setBackdropPaddingX(backdropPaddingX);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -530,7 +453,7 @@ public final class Ticks extends FontItem {
 	 * @return horizontal padding of label backdrop. Default is 2.
 	 */
 	public int getBackdropPaddingX() {
-		return getValue(Property.backdropPaddingX, DEFAULT_BACKDROP_PADDING_X);
+		return AssignHelper.check(getDelegated().getBackdropPaddingX(), getDefaultValues().getBackdropPaddingX());
 	}
 
 	/**
@@ -539,7 +462,7 @@ public final class Ticks extends FontItem {
 	 * @param backdropPaddingY vertical padding of label backdrop.
 	 */
 	public void setBackdropPaddingY(int backdropPaddingY) {
-		setValue(Property.backdropPaddingY, backdropPaddingY);
+		getDelegated().setBackdropPaddingY(backdropPaddingY);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -550,7 +473,7 @@ public final class Ticks extends FontItem {
 	 * @return vertical padding of label backdrop. Default is 2.
 	 */
 	public int getBackdropPaddingY() {
-		return getValue(Property.backdropPaddingY, DEFAULT_BACKDROP_PADDING_Y);
+		return AssignHelper.check(getDelegated().getBackdropPaddingY(), getDefaultValues().getBackdropPaddingY());
 	}
 
 	/**
@@ -559,7 +482,7 @@ public final class Ticks extends FontItem {
 	 * @param showLabelBackdrop if true, draw a background behind the tick labels.
 	 */
 	public void setShowLabelBackdrop(boolean showLabelBackdrop) {
-		setValue(Property.showLabelBackdrop, showLabelBackdrop);
+		getDelegated().setShowLabelBackdrop(showLabelBackdrop);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -570,27 +493,16 @@ public final class Ticks extends FontItem {
 	 * @return if true, draw a background behind the tick labels. Default is true.
 	 */
 	public boolean isShowLabelBackdrop() {
-		return getValue(Property.showLabelBackdrop, DEFAULT_SHOW_LABEL_BACKDROP);
+		return AssignHelper.check(getDelegated().isShowLabelBackdrop(), getDefaultValues().isShowLabelBackdrop());
 	}
 
-	/**
-	 * Internal class to extend the configuration item enabling the protected methods.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
 	 */
-	private static class FontItemImpl extends FontItem{
-
-		/**
-		 * Builds the object with parent item and child.
-		 * 
-		 * @param parent parent item.
-		 * @param childKey key of child.
-		 */
-		protected FontItemImpl(AbstractItem parent, Key childKey) {
-			super(parent, childKey);
+	@Override
+	protected void addToParent() {
+		if (getParent().getDelegated().getTicks() == null) {
+			getParent().getDelegated().setTicks(getDelegated());
 		}
-		
 	}
-
 }

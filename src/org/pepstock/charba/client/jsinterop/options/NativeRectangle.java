@@ -30,13 +30,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
-public final class NativeRectangle extends NativeArc {
-
-	/**
-	 * 
-	 */
-	protected NativeRectangle() {
-	}
+final class NativeRectangle extends NativeArc {
 
 	/**
 	 * Sets the edge to skip drawing the border for.

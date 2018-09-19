@@ -25,14 +25,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPointLabels;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PointLabels extends FontItem<NativePointLabels, Scale, IsDefaultPointLabels> {
+public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels, NativePointLabels> {
 
-	public PointLabels(Scale scale, IsDefaultPointLabels defaultValues) {
-		this(new NativePointLabels(), scale, defaultValues);
-	}
-
-	PointLabels(NativePointLabels delegated, Scale scale, IsDefaultPointLabels defaultValues) {
-		super(delegated, scale, defaultValues);
+	PointLabels(Scale scale, IsDefaultPointLabels defaultValues, NativePointLabels delegated) {
+		super(scale, defaultValues, delegated == null ? new NativePointLabels() : delegated);
 	}
 
 	/**

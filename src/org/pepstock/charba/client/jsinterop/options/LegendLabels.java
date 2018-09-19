@@ -24,14 +24,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LegendLabels extends FontItem<NativeLegendLabels, Legend, IsDefaultLegendLabels> {
+public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels, NativeLegendLabels> {
 
-	public LegendLabels(Legend legend, IsDefaultLegendLabels defaultValues) {
-		this(new NativeLegendLabels(), legend, defaultValues);
-	}
-
-	LegendLabels(NativeLegendLabels delegated, Legend legend, IsDefaultLegendLabels defaultValues) {
-		super(delegated, legend, defaultValues);
+	LegendLabels(Legend legend, IsDefaultLegendLabels defaultValues, NativeLegendLabels delegated) {
+		super(legend, defaultValues, delegated == null ? new NativeLegendLabels() : delegated);
 	}
 
 	/**

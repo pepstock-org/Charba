@@ -17,7 +17,7 @@ public final class Defaults extends NativeObject {
 	
 	@JsOverlay
 	public Global global() {
-		return new Global(getGlobal(), DefaultOptions.get());
+		return new Global(DefaultOptions.get(), getGlobal());
 	}
 
 //	@JsProperty(name = "line")

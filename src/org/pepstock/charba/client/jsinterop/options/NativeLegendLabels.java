@@ -26,13 +26,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
-public final class NativeLegendLabels extends NativeFontItem {
-
-	/**
-	 * 
-	 */
-	protected NativeLegendLabels() {
-	}
+final class NativeLegendLabels extends NativeFontItem {
 
 	/**
 	 * Sets if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).

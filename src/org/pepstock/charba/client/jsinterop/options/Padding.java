@@ -24,14 +24,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Padding extends BaseModel<NativePadding, Layout, IsDefaultPadding>{
+public class Padding extends BaseModel<Layout, IsDefaultPadding, NativePadding>{
 
-	public Padding(Layout layout, IsDefaultPadding defaultValues) {
-		this(new NativePadding(), layout, defaultValues);
-	}
-
-	Padding(NativePadding delegated, Layout layout, IsDefaultPadding defaultValues) {
-		super(delegated, layout, defaultValues);
+	Padding(Layout layout, IsDefaultPadding defaultValues, NativePadding delegated) {
+		super(layout, defaultValues, delegated == null ? new NativePadding(): delegated);
 	}
 	
 	/**

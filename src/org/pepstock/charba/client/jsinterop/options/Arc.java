@@ -28,14 +28,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public class Arc extends AbstractElement<NativeArc, Elements, IsDefaultArc>{
+public class Arc extends AbstractElement<Elements, IsDefaultArc, NativeArc>{
 
-	public Arc(Elements elements, IsDefaultArc defaultValues) {
-		this(new NativeArc(), elements, defaultValues);
-	}
-
-	Arc(NativeArc delegated, Elements elements, IsDefaultArc defaultValues) {
-		super(delegated, elements, defaultValues);
+	Arc(Elements elements, IsDefaultArc defaultValues,NativeArc delegated) {
+		super(elements, defaultValues, delegated == null ? new NativeArc(): delegated);
 	}
 	
 	/* (non-Javadoc)

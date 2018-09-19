@@ -28,13 +28,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
-public final class NativeLegend extends NativeObject {
-
-	/**
-	 * 
-	 */
-	protected NativeLegend() {
-	}
+final class NativeLegend extends NativeObject {
 
 	/**
 	 * @return the labels

@@ -27,13 +27,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
-public final class NativeTitle extends NativeFontItem {
-
-	/**
-	 * 
-	 */
-	protected NativeTitle() {
-	}
+final class NativeTitle extends NativeFontItem {
 
 	/**
 	 * Sets if the title is shown.

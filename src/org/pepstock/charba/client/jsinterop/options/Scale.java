@@ -36,12 +36,12 @@ import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Scale extends BaseModel<NativeScale, Options, IsDefaultScale>{
+public class Scale extends BaseModel<Options, IsDefaultScale, NativeScale>{
 	
 	private final GridLines gridLines;
-//
-//	private final Ticks ticks;
-//
+
+	private final Ticks ticks;
+
 	private final ScaleLabel scaleLabel;
 	
 	private final AngleLines angleLines;
@@ -49,36 +49,13 @@ public class Scale extends BaseModel<NativeScale, Options, IsDefaultScale>{
 	private final PointLabels pointLabels;
 
 
-	public Scale(Options options, IsDefaultScale defaultValues) {
-		this(new NativeScale(), options, defaultValues);
-	}
-
-	protected Scale(NativeScale delegated, Options options, IsDefaultScale defaultValues) {
-		super(delegated, null, defaultValues);
-		NativeAngleLines angleLinesObject = getDelegated().getAngleLines();
-		if (angleLinesObject != null) {
-			angleLines = new AngleLines(angleLinesObject, this, getDefaultValues().getAngleLines());
-		} else {
-			angleLines = new AngleLines(this, getDefaultValues().getAngleLines());
-		}
-		NativeGridLines gridLinesObject = getDelegated().getGridLines();
-		if (gridLinesObject != null) {
-			gridLines = new GridLines(gridLinesObject, this, getDefaultValues().getGrideLines());
-		} else {
-			gridLines = new GridLines(this, getDefaultValues().getGrideLines());
-		}
-		NativePointLabels pointLabelsObject = getDelegated().getPointLabels();
-		if (pointLabelsObject != null) {
-			pointLabels = new PointLabels(pointLabelsObject, this, getDefaultValues().getPointLabels());
-		} else {
-			pointLabels = new PointLabels(this, getDefaultValues().getPointLabels());
-		}
-		NativeScaleLabel scaleLabelObject = getDelegated().getScaleLabel();
-		if (scaleLabelObject != null) {
-			scaleLabel = new ScaleLabel(scaleLabelObject, this, getDefaultValues().getScaleLabel());
-		} else {
-			scaleLabel = new ScaleLabel(this, getDefaultValues().getScaleLabel());
-		}
+	Scale(Options options, IsDefaultScale defaultValues, NativeScale delegated) {
+		super(options, defaultValues, delegated == null ? new NativeScale(): delegated);
+		angleLines = new AngleLines(this, getDefaultValues().getAngleLines(), getDelegated().getAngleLines());
+		gridLines = new GridLines(this, getDefaultValues().getGrideLines(), getDelegated().getGridLines());
+		pointLabels = new PointLabels(this, getDefaultValues().getPointLabels(), getDelegated().getPointLabels());
+		scaleLabel = new ScaleLabel(this, getDefaultValues().getScaleLabel(), getDelegated().getScaleLabel());
+		ticks = new Ticks(this, getDefaultValues().getTicks(), getDelegated().getTicks());
 	}
 
 
@@ -90,14 +67,14 @@ public class Scale extends BaseModel<NativeScale, Options, IsDefaultScale>{
 		return scaleLabel;
 	}
 
-//	/**
-//	 * @return the ticks
-//	 * @see Ticks
-//	 */
-//	public Ticks getTicks() {
-//		return ticks;
-//	}
-//
+	/**
+	 * @return the ticks
+	 * @see Ticks
+	 */
+	public Ticks getTicks() {
+		return ticks;
+	}
+
 	/**
 	 * @return the grideLines
 	 * @see GridLines

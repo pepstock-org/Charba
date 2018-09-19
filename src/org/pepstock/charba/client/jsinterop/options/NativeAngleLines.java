@@ -15,13 +15,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
-public class NativeAngleLines extends NativeObject {
-	
-	/**
-	 * 
-	 */
-	protected NativeAngleLines() {
-	}
+final class NativeAngleLines extends NativeObject {
 
 	/**
 	 * If true, angle lines are shown

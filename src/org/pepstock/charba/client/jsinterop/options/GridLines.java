@@ -34,14 +34,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class GridLines extends BaseModel<NativeGridLines, Scale, IsDefaultGridLines> {
+public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, NativeGridLines> {
 
-	public GridLines(Scale scale, IsDefaultGridLines defaultValues) {
-		this(new NativeGridLines(), scale, defaultValues);
-	}
-
-	GridLines(NativeGridLines delegated, Scale scale, IsDefaultGridLines defaultValues) {
-		super(delegated, scale, defaultValues);
+	GridLines(Scale scale, IsDefaultGridLines defaultValues, NativeGridLines delegated) {
+		super(scale, defaultValues, delegated == null ? new NativeGridLines(): delegated);
 	}
 
 	/**

@@ -24,14 +24,14 @@ public interface IsDefaultScale{
 	 */
 
 	 IsDefaultScaleLabel getScaleLabel();
-//
-//	/**
-//	 * @return the ticks
-//	 * @see Ticks
-//	 */
-//
-//	 Ticks getTicks();
-//
+
+	/**
+	 * @return the ticks
+	 * @see Ticks
+	 */
+
+	 IsDefaultTicks getTicks();
+
 	/**
 	 * @return the grideLines
 	 * @see GridLines

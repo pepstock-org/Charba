@@ -29,14 +29,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultRectangle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Rectangle extends AbstractElement<NativeRectangle, Elements, IsDefaultRectangle>{
+public class Rectangle extends AbstractElement<Elements, IsDefaultRectangle, NativeRectangle>{
 
-	public Rectangle(Elements elements, IsDefaultRectangle defaultValues) {
-		this(new NativeRectangle(), elements, defaultValues);
-	}
-
-	Rectangle(NativeRectangle delegated, Elements elements, IsDefaultRectangle defaultValues) {
-		super(delegated, elements, defaultValues);
+	Rectangle(Elements elements, IsDefaultRectangle defaultValues, NativeRectangle delegated) {
+		super(elements, defaultValues, delegated == null ? new NativeRectangle() : delegated);
 	}
 
 	/**

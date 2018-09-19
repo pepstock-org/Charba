@@ -29,14 +29,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Point extends AbstractElement<NativePoint, Elements, IsDefaultPoint>{
+public class Point extends AbstractElement<Elements, IsDefaultPoint, NativePoint>{
 
-	public Point(Elements elements, IsDefaultPoint defaultValues) {
-		this(new NativePoint(), elements, defaultValues);
-	}
-
-	Point(NativePoint delegated, Elements elements, IsDefaultPoint defaultValues) {
-		super(delegated, elements, defaultValues);
+	Point(Elements elements, IsDefaultPoint defaultValues, NativePoint delegated) {
+		super(elements, defaultValues,delegated == null ? new NativePoint() : delegated);
 	}
 
 	/**

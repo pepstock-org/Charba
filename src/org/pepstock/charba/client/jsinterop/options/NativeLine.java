@@ -18,13 +18,7 @@ import jsinterop.annotations.JsType;
  * 
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
-public final class NativeLine extends NativeArc {
-	
-	/**
-	 * 
-	 */
-	protected NativeLine() {
-	}
+final class NativeLine extends NativeArc {
 
 	/**
 	 * Returns the Bezier curve tension (0 for no Bezier curves).

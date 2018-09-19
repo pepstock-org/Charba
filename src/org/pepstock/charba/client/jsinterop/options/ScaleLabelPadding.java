@@ -24,14 +24,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class ScaleLabelPadding extends BaseModel<NativePadding, ScaleLabel, IsDefaultPadding>{
+public class ScaleLabelPadding extends BaseModel<ScaleLabel, IsDefaultPadding, NativePadding>{
 
-	public ScaleLabelPadding(ScaleLabel scaleLabel, IsDefaultPadding defaultValues) {
-		this(new NativePadding(), scaleLabel, defaultValues);
-	}
-
-	ScaleLabelPadding(NativePadding delegated, ScaleLabel scaleLabel, IsDefaultPadding defaultValues) {
-		super(delegated, scaleLabel, defaultValues);
+	ScaleLabelPadding(ScaleLabel scaleLabel, IsDefaultPadding defaultValues, NativePadding delegated) {
+		super(scaleLabel, defaultValues, delegated == null ? new NativePadding() : delegated);
 	}
 	
 	/**

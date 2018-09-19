@@ -28,13 +28,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
-public final class NativeLayout extends NativeObject {
-
-	/**
-	 * 
-	 */
-	protected NativeLayout() {
-	}
+final class NativeLayout extends NativeObject {
 
 	@JsProperty
 	native NativePadding getPadding();

@@ -36,14 +36,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public class Line extends AbstractElement<NativeLine, Elements, IsDefaultLine>{
+public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 
-	public Line(Elements elements,IsDefaultLine defaultValues) {
-		this(new NativeLine(), elements, defaultValues);
-	}
-
-	Line(NativeLine delegated, Elements elements, IsDefaultLine defaultValues) {
-		super(delegated, elements, defaultValues);
+	Line(Elements elements, IsDefaultLine defaultValues, NativeLine delegated) {
+		super(elements, defaultValues, delegated == null ? new NativeLine(): delegated);
 	}
 	
 	/**

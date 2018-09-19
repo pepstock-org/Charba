@@ -40,13 +40,13 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public class NativeScale extends NativeObject {
-	
-	/**
-	 * 
-	 */
-	protected NativeScale() {
-	}
+final class NativeScale extends NativeObject {
+
+	@JsProperty
+	native NativeTicks getTicks();
+
+	@JsProperty
+	native void setTicks(NativeTicks ticks);
 
 	@JsProperty
 	native NativeScaleLabel getScaleLabel();

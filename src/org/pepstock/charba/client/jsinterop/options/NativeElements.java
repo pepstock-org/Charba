@@ -7,14 +7,8 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
-public final class NativeElements extends NativeObject {
+final class NativeElements extends NativeObject {
 	
-	/**
-	 * 
-	 */
-	protected NativeElements() {
-	}
-
 	@JsProperty
 	native NativeArc getArc();
 

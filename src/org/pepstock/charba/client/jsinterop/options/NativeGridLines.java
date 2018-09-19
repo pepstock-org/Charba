@@ -29,13 +29,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public final class NativeGridLines extends NativeObject {
-
-	/**
-	 * 
-	 */
-	protected NativeGridLines() {
-	}
+final class NativeGridLines extends NativeObject {
 
 	/**
 	 * If false, do not display grid lines for this axis.

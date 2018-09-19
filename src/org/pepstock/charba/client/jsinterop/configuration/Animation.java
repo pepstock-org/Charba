@@ -23,9 +23,9 @@ import org.pepstock.charba.client.jsinterop.events.AnimationCompleteEvent;
 import org.pepstock.charba.client.jsinterop.events.AnimationProgressEvent;
 import org.pepstock.charba.client.jsinterop.items.AnimationItem;
 import org.pepstock.charba.client.jsinterop.items.AnimationObject;
+import org.pepstock.charba.client.jsinterop.options.Options;
 import org.pepstock.charba.client.jsinterop.options.Animation.AnimationCompleteCallback;
 import org.pepstock.charba.client.jsinterop.options.Animation.AnimationProgressCallback;
-import org.pepstock.charba.client.jsinterop.options.Options;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;

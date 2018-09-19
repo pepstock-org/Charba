@@ -19,7 +19,7 @@ import org.pepstock.charba.client.jsinterop.items.SizeItem;
 
 import jsinterop.annotations.JsFunction;
 
-public class Options extends BaseModel<NativeOptions, Options, IsDefaultOptions>{
+public class Options extends BaseModel<Options, IsDefaultOptions, NativeOptions>{
 	
 	@JsFunction
 	public interface ChartClickCallback {
@@ -63,64 +63,19 @@ public class Options extends BaseModel<NativeOptions, Options, IsDefaultOptions>
 	}
 
 	public Options(IsDefaultOptions defaultValues) {
-		this(new NativeOptions(), defaultValues);
+		this(defaultValues, new NativeOptions());
 	}
 
-	protected Options(Options options) {
-		this(options.getDelegated(), options.getDefaultValues());
-	}
-	
-	protected Options(NativeOptions delegated, IsDefaultOptions defaultValues) {
-		super(delegated, null, defaultValues);
-		NativeAnimation animationObject = getDelegated().getAnimation();
-		if (animationObject != null) {
-			animation = new Animation(animationObject, this, getDefaultValues().getAnimation());
-		} else {
-			animation = new Animation(this, getDefaultValues().getAnimation());
-		}
-		NativeElements elementsObject = getDelegated().getElements();
-		if (elementsObject != null) {
-			elements = new Elements(elementsObject, this, defaultValues);
-		} else {
-			elements = new Elements(this, defaultValues);
-		}
-		NativeHover hoverObject = getDelegated().getHover();
-		if (hoverObject != null) {
-			hover = new Hover(hoverObject, this, getDefaultValues().getHover());
-		} else {
-			hover = new Hover(this, getDefaultValues().getHover());
-		}
-		NativeLayout layoutObject = getDelegated().getLayout();
-		if (layoutObject != null) {
-			layout = new Layout(layoutObject, this, defaultValues);
-		} else {
-			layout = new Layout(this, defaultValues);
-		}
-		NativeTitle titleObject = getDelegated().getTitle();
-		if (titleObject != null) {
-			title = new Title(titleObject, this, getDefaultValues().getTitle());
-		} else {
-			title = new Title(this, getDefaultValues().getTitle());
-		}
-		NativeLegend legendObject = getDelegated().getLegend();
-		if (legendObject != null) {
-			legend = new Legend(legendObject, this, getDefaultValues().getLegend());
-		} else {
-			legend = new Legend(this, getDefaultValues().getLegend());
-		}
-		NativeTooltips tooltipsObject = getDelegated().getTooltips();
-		if (tooltipsObject != null) {
-			tooltips = new Tooltips(tooltipsObject, this, getDefaultValues().getTooltips());
-		} else {
-			tooltips = new Tooltips(this, getDefaultValues().getTooltips());
-		}
-		NativeScale scaleObject = getDelegated().getScale();
-		if (scaleObject != null) {
-			scale = new Scale(scaleObject, this, getDefaultValues().getScale());
-		} else {
-			scale = new Scale(this, getDefaultValues().getScale());
-		}
-
+	protected Options(IsDefaultOptions defaultValues, NativeOptions delegated) {
+		super(defaultValues, delegated == null ? new NativeOptions() : delegated);
+		animation = new Animation(this, getDefaultValues().getAnimation(), getDelegated().getAnimation());
+		elements = new Elements(this, defaultValues, getDelegated().getElements());
+		hover = new Hover(this, getDefaultValues().getHover(), getDelegated().getHover());
+		layout = new Layout(this, defaultValues, getDelegated().getLayout());
+		title = new Title(this, getDefaultValues().getTitle(), getDelegated().getTitle());
+		legend = new Legend(this, getDefaultValues().getLegend(),getDelegated().getLegend());
+		tooltips = new Tooltips(this, getDefaultValues().getTooltips(), getDelegated().getTooltips());
+		scale = new Scale(this, getDefaultValues().getScale(), getDelegated().getScale());
 	}
 
 	/**

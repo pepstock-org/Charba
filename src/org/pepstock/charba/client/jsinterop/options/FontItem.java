@@ -27,10 +27,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class FontItem<O extends NativeFontItem,  P extends BaseModel<?,?,?>, D extends IsDefaultFontItem> extends BaseModel<O, P, D>{
+abstract class FontItem<P extends BaseModel<?,?,?>, D extends IsDefaultFontItem, O extends NativeFontItem> extends BaseModel<P, D, O>{
 	
-	protected FontItem(O delegated, P parent, D defaultValues) {
-		super(delegated, parent, defaultValues);
+	FontItem(P parent, D defaultValues, O delegated) {
+		super(parent, defaultValues, delegated);
 	}
 	
 	/**

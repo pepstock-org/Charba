@@ -25,22 +25,13 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ScaleLabel extends FontItem<NativeScaleLabel, Scale, IsDefaultScaleLabel> {
+public class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel, NativeScaleLabel> {
 	
 	private final ScaleLabelPadding padding;
 
-	public ScaleLabel(Scale scale, IsDefaultScaleLabel defaultValues) {
-		this(new NativeScaleLabel(), scale, defaultValues);
-	}
-
-	ScaleLabel(NativeScaleLabel delegated, Scale scale, IsDefaultScaleLabel defaultValues) {
-		super(delegated, scale, defaultValues);
-		NativePadding paddingObject = getDelegated().getPadding();
-		if (paddingObject != null) {
-			padding = new ScaleLabelPadding(paddingObject, this, getDefaultValues().getPadding());
-		} else {
-			padding = new ScaleLabelPadding(this, getDefaultValues().getPadding());
-		}
+	ScaleLabel(Scale scale, IsDefaultScaleLabel defaultValues, NativeScaleLabel delegated) {
+		super(scale, defaultValues, delegated == null ? new NativeScaleLabel() : delegated);
+		padding = new ScaleLabelPadding(this, getDefaultValues().getPadding(), getDelegated().getPadding());
 	}
 	
 	/**

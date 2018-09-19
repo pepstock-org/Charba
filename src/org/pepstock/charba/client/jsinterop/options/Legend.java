@@ -25,22 +25,13 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Legend extends BaseModel<NativeLegend, Options, IsDefaultLegend> {
+public class Legend extends BaseModel<Options, IsDefaultLegend, NativeLegend> {
 	
 	private LegendLabels labels;
 	
-	public Legend(Options options, IsDefaultLegend defaultValues) {
-		this(new NativeLegend(), options, defaultValues);
-	}
-
-	Legend(NativeLegend delegated, Options options, IsDefaultLegend defaultValues) {
-		super(delegated, options, defaultValues);
-		NativeLegendLabels labelsObject = getDelegated().getLabels();
-		if (labelsObject != null) {
-			labels = new LegendLabels(labelsObject, this, getDefaultValues().getLabels());
-		} else {
-			labels = new LegendLabels(this, getDefaultValues().getLabels());
-		}
+	Legend(Options options, IsDefaultLegend defaultValues, NativeLegend delegated) {
+		super(options, defaultValues, delegated == null ? new NativeLegend() : delegated);
+		labels = new LegendLabels(this, getDefaultValues().getLabels(), getDelegated().getLabels());
 	}
 
 	/**

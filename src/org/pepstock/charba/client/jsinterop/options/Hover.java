@@ -26,14 +26,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Hover extends BaseModel<NativeHover, Options, IsDefaultHover>{
+public class Hover extends BaseModel<Options, IsDefaultHover, NativeHover>{
 
-	public Hover(Options options, IsDefaultHover defaultValues) {
-		this(new NativeHover(), options, defaultValues);
-	}
-
-	Hover(NativeHover delegated, Options options, IsDefaultHover defaultValues) {
-		super(delegated, options, defaultValues);
+	Hover(Options options, IsDefaultHover defaultValues, NativeHover delegated) {
+		super(options, defaultValues, delegated == null ? new NativeHover() : delegated);
 	}
 
 	/**

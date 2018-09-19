@@ -10,9 +10,6 @@ import jsinterop.annotations.JsType;
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
 public final class NativeOptions extends NativeObject{
-	
-	protected NativeOptions() {
-	}
 
 	@JsProperty
 	native NativeScale getScale();

@@ -15,11 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
-import org.pepstock.charba.client.colors.ColorBuilder;
-import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.defaults.AbstractItem;
-import org.pepstock.charba.client.defaults.FontItem;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * All configuration for ticks of a chart.
@@ -27,168 +25,69 @@ import org.pepstock.charba.client.defaults.FontItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class NativeTicks extends FontItem {
-	
-	private static final boolean DEFAULT_DISPLAY = true;
-	
-	private static final boolean DEFAULT_BEGIN_AT_ZERO = false;
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+final class NativeTicks extends NativeFontItem {
 
-	private static final boolean DEFAULT_REVERSE = false;
-	
-	private static final boolean DEFAULT_AUTO_SKIP = true;
+	@JsProperty 
+	native void setMinor(NativeTickItem minor);
 
-	private static final int DEFAULT_AUTO_SKIP_PADDING = 0;
+	@JsProperty 
+	native NativeTickItem getMinor();
 
-	private static final int DEFAULT_LABEL_OFFSET = 0;
+	@JsProperty 
+	native void setMajor(NativeTickItem major);
 
-	private static final int DEFAULT_MAX_ROTATION = 50;
+	@JsProperty 
+	native NativeTickItem getMajor();
 
-	private static final int DEFAULT_MIN_ROTATION = 0;
-
-	private static final boolean DEFAULT_MIRROR = false;
-
-	private static final int DEFAULT_PADDING = 0;
-	
-	private static final double DEFAULT_MIN = Double.MIN_VALUE;
-
-	private static final double DEFAULT_MAX = Double.MAX_VALUE;
-
-	private static final int DEFAULT_MAX_TICKS_LIMIT = 11;
-
-	private static final double DEFAULT_STEP_SIZE = Double.MIN_VALUE;
-
-	private static final double DEFAULT_SUGGESTED_MAX = Double.MAX_VALUE;
-
-	private static final double DEFAULT_SUGGESTED_MIN = Double.MIN_VALUE;
-	
-	private static final String DEFAULT_BACKDROP_COLOR = "rgba(255,255,255,0.75)";
-
-	private static final int DEFAULT_BACKDROP_PADDING_X = 2;
-
-	private static final int DEFAULT_BACKDROP_PADDING_Y = 2;
-
-	private static final boolean DEFAULT_SHOW_LABEL_BACKDROP = true;
-
-	private final FontItem minor;
-
-	private final FontItem major;
-
-	/**
-	 * Name of fields of JavaScript object.
-	 */
-	enum Property implements Key
-	{
-		display,
-		reverse,
-		autoSkip,
-		autoSkipPadding,
-		labelOffset,
-		maxRotation,
-		minRotation,
-		mirror,
-		padding,
-		beginAtZero,
-		minor,
-		major,
-		min,
-		max,
-		maxTicksLimit,
-		stepSize,
-		suggestedMax,
-		suggestedMin,
-		backdropColor,
-		backdropPaddingX,
-		backdropPaddingY,
-		showLabelBackdrop
-	}
-
-	/**
-	 * Builds the object with parent item and child.
-	 * 
-	 * @param parent parent item.
-	 * @param childKey key of child.
-	 */
-	NativeTicks(AbstractItem parent, Key childKey) {
-		super(parent, childKey);
-		// creates children objects
-		minor = new FontItemImpl(this, Property.minor);
-		major = new FontItemImpl(this, Property.major);
-	}
-	
-	/**
-	 * @return the minor
-	 */
-	public FontItem getMinor() {
-		return minor;
-	}
-
-	/**
-	 * @return the major
-	 */
-	public FontItem getMajor() {
-		return major;
-	}
-	
 	/**
 	 * If true, scale will include 0 if it is not already included.
 	 * 
 	 * @param beginAtZero if true, scale will include 0 if it is not already included.
 	 */
-	public void setBeginAtZero(boolean beginAtZero) {
-		setValue(Property.beginAtZero, beginAtZero);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setBeginAtZero(boolean beginAtZero);
 
 	/**
 	 * If true, scale will include 0 if it is not already included.
 	 * 
 	 * @return if true, scale will include 0 if it is not already included.. Default is false
 	 */
-	public boolean isBeginAtZero() {
-		return getValue(Property.beginAtZero, DEFAULT_BEGIN_AT_ZERO);
-	}
+	@JsProperty
+	native boolean isBeginAtZero();
 
 	/**
 	 * If true, show tick marks.
 	 * 
 	 * @param display if true, show tick marks
 	 */
-	public void setDisplay(boolean display) {
-		setValue(Property.display, display);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setDisplay(boolean display);
 
 	/**
 	 * If true, show tick marks
 	 * 
 	 * @return if true, show tick marks. Default is true.
 	 */
-	public boolean isDisplay() {
-		return getValue(Property.display, DEFAULT_DISPLAY);
-	}
+	@JsProperty
+	native boolean isDisplay();
 
 	/**
 	 * Sets the reverses order of tick labels.
 	 * 
 	 * @param reverse reverses order of tick labels.
 	 */
-	public void setReverse(boolean reverse) {
-		setValue(Property.reverse, reverse);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setReverse(boolean reverse);
 
 	/**
 	 * Returns the reverses order of tick labels.
 	 * 
 	 * @return reverses order of tick labels. Default is false.
 	 */
-	public boolean isReverse() {
-		return getValue(Property.reverse, DEFAULT_REVERSE);
-	}
-	
+	@JsProperty
+	native boolean isReverse();
+
 	/**
 	 * If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all
 	 * labels no matter what
@@ -196,11 +95,8 @@ public final class NativeTicks extends FontItem {
 	 * @param autoSkip If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it
 	 *            off to show all labels no matter what
 	 */
-	public void setAutoSkip(boolean autoSkip) {
-		setValue(Property.autoSkip, autoSkip);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setAutoSkip(boolean autoSkip);
 
 	/**
 	 * If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all
@@ -209,9 +105,8 @@ public final class NativeTicks extends FontItem {
 	 * @return If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to
 	 *         show all labels no matter what. Default is true
 	 */
-	public boolean isAutoSkip() {
-		return getValue(Property.autoSkip, DEFAULT_AUTO_SKIP);
-	}
+	@JsProperty
+	native boolean isAutoSkip();
 
 	/**
 	 * Sets the padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal
@@ -220,11 +115,8 @@ public final class NativeTicks extends FontItem {
 	 * @param autoSkipPadding padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable
 	 *            to horizontal scales.
 	 */
-	public void setAutoSkipPadding(int autoSkipPadding) {
-		setValue(Property.autoSkipPadding, autoSkipPadding);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setAutoSkipPadding(int autoSkipPadding);
 
 	/**
 	 * Returns the padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to
@@ -233,9 +125,8 @@ public final class NativeTicks extends FontItem {
 	 * @return padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal
 	 *         scales. Defualt is 0.
 	 */
-	public int getAutoSkipPadding() {
-		return getValue(Property.autoSkipPadding, DEFAULT_AUTO_SKIP_PADDING);
-	}
+	@JsProperty
+	native int getAutoSkipPadding();
 
 	/**
 	 * Sets the distance in pixels to offset the label from the centre point of the tick (in the y direction for the x axis, and
@@ -245,11 +136,8 @@ public final class NativeTicks extends FontItem {
 	 * @param labelOffset the distance in pixels to offset the label from the centre point of the tick (in the y direction for
 	 *            the x axis, and the x direction for the y axis)
 	 */
-	public void setLabelOffset(int labelOffset) {
-		setValue(Property.labelOffset, labelOffset);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setLabelOffset(int labelOffset);
 
 	/**
 	 * Returns the distance in pixels to offset the label from the centre point of the tick (in the y direction for the x axis,
@@ -259,9 +147,8 @@ public final class NativeTicks extends FontItem {
 	 * @return the distance in pixels to offset the label from the centre point of the tick (in the y direction for the x axis,
 	 *         and the x direction for the y axis). Default is 0.
 	 */
-	public int getLabelOffset() {
-		return getValue(Property.labelOffset, DEFAULT_LABEL_OFFSET);
-	}
+	@JsProperty
+	native int getLabelOffset();
 
 	/**
 	 * Sets the maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary.
@@ -270,11 +157,8 @@ public final class NativeTicks extends FontItem {
 	 * @param maxRotation maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until
 	 *            necessary. Note: Only applicable to horizontal scales.
 	 */
-	public void setMaxRotation(int maxRotation) {
-		setValue(Property.maxRotation, maxRotation);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setMaxRotation(int maxRotation);
 
 	/**
 	 * Returns the maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until
@@ -283,29 +167,24 @@ public final class NativeTicks extends FontItem {
 	 * @return maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary.
 	 *         Note: Only applicable to horizontal scales. Default is 90
 	 */
-	public int getMaxRotation() {
-		return getValue(Property.maxRotation, DEFAULT_MAX_ROTATION);
-	}
+	@JsProperty
+	native int getMaxRotation();
 
 	/**
 	 * Sets the minimum rotation for tick labels. Note: Only applicable to horizontal scales.
 	 * 
 	 * @param minRotation minimum rotation for tick labels. Note: Only applicable to horizontal scales.
 	 */
-	public void setMinRotation(int minRotation) {
-		setValue(Property.minRotation, minRotation);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setMinRotation(int minRotation);
 
 	/**
 	 * Returns the minimum rotation for tick labels. Note: Only applicable to horizontal scales.
 	 * 
 	 * @return minimum rotation for tick labels. Note: Only applicable to horizontal scales.. Default is 0.
 	 */
-	public int getMinRotation() {
-		return getValue(Property.minRotation, DEFAULT_MIN_ROTATION);
-	}
+	@JsProperty
+	native int getMinRotation();
 
 	/**
 	 * Sets the flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable
@@ -314,11 +193,8 @@ public final class NativeTicks extends FontItem {
 	 * @param mirror flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only
 	 *            applicable to vertical scales.
 	 */
-	public void setMirror(boolean mirror) {
-		setValue(Property.mirror, mirror);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setMirror(boolean mirror);
 
 	/**
 	 * Returns the flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only
@@ -327,9 +203,8 @@ public final class NativeTicks extends FontItem {
 	 * @return flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable
 	 *         to vertical scales. Default is false.
 	 */
-	public boolean isMirror() {
-		return getValue(Property.mirror, DEFAULT_MIRROR);
-	}
+	@JsProperty
+	native boolean isMirror();
 
 	/**
 	 * Sets the padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X)
@@ -338,11 +213,8 @@ public final class NativeTicks extends FontItem {
 	 * @param padding padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal
 	 *            (X) direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
 	 */
-	public void setPadding(int padding) {
-		setValue(Property.padding, padding);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setPadding(int padding);
 
 	/**
 	 * Returns the padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X)
@@ -351,246 +223,166 @@ public final class NativeTicks extends FontItem {
 	 * @return padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X)
 	 *         direction. When set on a horizontal axis, this applies in the vertical (Y) direction. Default is 10.
 	 */
-	public int getPadding() {
-		return getValue(Property.padding, DEFAULT_PADDING);
-	}
-	
+	@JsProperty
+	native int getPadding();
+
 	/**
 	 * Sets the user defined minimum number for the scale, overrides minimum value from data.
 	 * 
 	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
 	 */
-	public void setMin(double min) {
-		setValue(Property.min, min);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setMin(double min);
 
 	/**
 	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
 	 * 
 	 * @return the user defined minimum number for the scale, overrides minimum value from data. Default is Double.MIN_VALUE.
 	 */
-	public double getMin() {
-		return getValue(Property.min, DEFAULT_MIN);
-	}
+	@JsProperty
+	native double getMin();
 
 	/**
 	 * Sets the user defined maximum number for the scale, overrides maximum value from data.
 	 * 
 	 * @param max user defined maximum number for the scale, overrides maximum value from data.
 	 */
-	public void setMax(double max) {
-		setValue(Property.max, max);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setMax(double max);
 
 	/**
 	 * Returns the user defined maximum number for the scale, overrides maximum value from data.
 	 * 
 	 * @return user defined maximum number for the scale, overrides maximum value from data. Default is Double.MAX_VALUE.
 	 */
-	public double getMax() {
-		return getValue(Property.max, DEFAULT_MAX);
-	}
+	@JsProperty
+	native double getMax();
 
 	/**
 	 * Sets the maximum number of ticks and gridlines to show.
 	 * 
 	 * @param maxTicksLimit maximum number of ticks and gridlines to show.
 	 */
-	public void setMaxTicksLimit(int maxTicksLimit) {
-		setValue(Property.maxTicksLimit, maxTicksLimit);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setMaxTicksLimit(int maxTicksLimit);
 
 	/**
 	 * Returns the maximum number of ticks and gridlines to show.
 	 * 
 	 * @return maximum number of ticks and gridlines to show. Default is 11.
 	 */
-	public int getMaxTicksLimit() {
-		return getValue(Property.maxTicksLimit, DEFAULT_MAX_TICKS_LIMIT);
-	}
+	@JsProperty
+	native int getMaxTicksLimit();
 
 	/**
 	 * Sets the user defined fixed step size for the scale.
 	 * 
 	 * @param stepSize user defined fixed step size for the scale.
 	 */
-	public void setStepSize(double stepSize) {
-		setValue(Property.stepSize, stepSize);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setStepSize(double stepSize);
 
 	/**
 	 * Returns the user defined fixed step size for the scale.
 	 * 
 	 * @return user defined fixed step size for the scale. Default is Double.MIN_VALUE.
 	 */
-	public double getStepSize() {
-		return getValue(Property.stepSize, DEFAULT_STEP_SIZE);
-	}
+	@JsProperty
+	native double getStepSize();
 
 	/**
 	 * Sets the adjustment used when calculating the maximum data value.
 	 * 
 	 * @param suggestedMax adjustment used when calculating the maximum data value.
 	 */
-	public void setSuggestedMax(double suggestedMax) {
-		setValue(Property.suggestedMax, suggestedMax);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setSuggestedMax(double suggestedMax);
 
 	/**
 	 * Returns the adjustment used when calculating the maximum data value.
 	 * 
 	 * @return adjustment used when calculating the maximum data value.
 	 */
-	public double getSuggestedMax() {
-		return getValue(Property.suggestedMax, DEFAULT_SUGGESTED_MAX);
-	}
+	@JsProperty
+	native double getSuggestedMax();
 
 	/**
 	 * Sets the adjustment used when calculating the minimum data value.
 	 * 
 	 * @param suggestedMin adjustment used when calculating the minimum data value.
 	 */
-	public void setSuggestedMin(double suggestedMin) {
-		setValue(Property.suggestedMin, suggestedMin);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setSuggestedMin(double suggestedMin);
 
 	/**
 	 * Returns the adjustment used when calculating the minimum data value.
 	 * 
 	 * @return adjustment used when calculating the minimum data value.
 	 */
-	public double getSuggestedMin() {
-		return getValue(Property.suggestedMin, DEFAULT_SUGGESTED_MIN);
-	}
+	@JsProperty
+	native double getSuggestedMin();
 
 	/**
 	 * Sets the color of label backdrops.
 	 * 
 	 * @param backdropColor color of label backdrops.
 	 */
-	public void setBackdropColor(IsColor backdropColor) {
-		setBackdropColor(backdropColor.toRGBA());
-	}
-
-	/**
-	 * Sets the color of label backdrops.
-	 * 
-	 * @param backdropColor color of label backdrops.
-	 */
-	public void setBackdropColor(String backdropColor) {
-		setValue(Property.backdropColor, backdropColor);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setBackdropColor(String backdropColor);
 
 	/**
 	 * Returns the color of label backdrops.
 	 * 
 	 * @return color of label backdrops. Default is 'rgba(255, 255, 255, 0.75)'
 	 */
-	public String getBackdropColorAsString() {
-		return getValue(Property.backdropColor, DEFAULT_BACKDROP_COLOR);
-	}
-
-	/**
-	 * Returns the color of label backdrops.
-	 * 
-	 * @return color of label backdrops. Default is 'rgba(255, 255, 255, 0.75)'
-	 */
-	public IsColor getBackdropColor() {
-		return ColorBuilder.parse(getBackdropColorAsString());
-	}
+	@JsProperty
+	native String getBackdropColor();
 
 	/**
 	 * Sets the horizontal padding of label backdrop.
 	 * 
 	 * @param backdropPaddingX horizontal padding of label backdrop.
 	 */
-	public void setBackdropPaddingX(int backdropPaddingX) {
-		setValue(Property.backdropPaddingX, backdropPaddingX);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setBackdropPaddingX(int backdropPaddingX);
 
 	/**
 	 * Returns the horizontal padding of label backdrop.
 	 * 
 	 * @return horizontal padding of label backdrop. Default is 2.
 	 */
-	public int getBackdropPaddingX() {
-		return getValue(Property.backdropPaddingX, DEFAULT_BACKDROP_PADDING_X);
-	}
+	@JsProperty
+	native int getBackdropPaddingX();
 
 	/**
 	 * Sets the vertical padding of label backdrop.
 	 * 
 	 * @param backdropPaddingY vertical padding of label backdrop.
 	 */
-	public void setBackdropPaddingY(int backdropPaddingY) {
-		setValue(Property.backdropPaddingY, backdropPaddingY);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setBackdropPaddingY(int backdropPaddingY);
 
 	/**
 	 * Returns the vertical padding of label backdrop.
 	 * 
 	 * @return vertical padding of label backdrop. Default is 2.
 	 */
-	public int getBackdropPaddingY() {
-		return getValue(Property.backdropPaddingY, DEFAULT_BACKDROP_PADDING_Y);
-	}
+	@JsProperty
+	native int getBackdropPaddingY();
 
 	/**
 	 * If true, draw a background behind the tick labels.
 	 * 
 	 * @param showLabelBackdrop if true, draw a background behind the tick labels.
 	 */
-	public void setShowLabelBackdrop(boolean showLabelBackdrop) {
-		setValue(Property.showLabelBackdrop, showLabelBackdrop);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
+	@JsProperty
+	native void setShowLabelBackdrop(boolean showLabelBackdrop);
 
 	/**
 	 * If true, draw a background behind the tick labels.
 	 * 
 	 * @return if true, draw a background behind the tick labels. Default is true.
 	 */
-	public boolean isShowLabelBackdrop() {
-		return getValue(Property.showLabelBackdrop, DEFAULT_SHOW_LABEL_BACKDROP);
-	}
-
-	/**
-	 * Internal class to extend the configuration item enabling the protected methods.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	private static class FontItemImpl extends FontItem{
-
-		/**
-		 * Builds the object with parent item and child.
-		 * 
-		 * @param parent parent item.
-		 * @param childKey key of child.
-		 */
-		protected FontItemImpl(AbstractItem parent, Key childKey) {
-			super(parent, childKey);
-		}
-		
-	}
-
+	@JsProperty
+	native boolean isShowLabelBackdrop();
 }

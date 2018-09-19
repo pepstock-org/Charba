@@ -5,7 +5,7 @@ import org.pepstock.charba.client.jsinterop.commons.JsFactory;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.utils.JSON;
 
-public abstract class BaseModel<O extends NativeObject, P extends BaseModel<?,?,?>, D> {
+public abstract class BaseModel<P extends BaseModel<?,?,?>, D,  O extends NativeObject> {
 	
 	private final O delegated;
 	
@@ -17,10 +17,18 @@ public abstract class BaseModel<O extends NativeObject, P extends BaseModel<?,?,
 	 * @param delegated
 	 * @param defaultValues
 	 */
-	protected BaseModel(O delegated, P parent, D defaultValues) {
+	protected BaseModel(D defaultValues, O delegated) {
+		this(null, defaultValues, delegated);
+	}
+
+	/**
+	 * @param delegated
+	 * @param defaultValues
+	 */
+	protected BaseModel(P parent, D defaultValues, O delegated) {
+		this.parent = parent;
 		this.delegated = delegated;
 		this.defaultValues = defaultValues;
-		this.parent = parent;
 	}
 	
 	/**
@@ -31,7 +39,7 @@ public abstract class BaseModel<O extends NativeObject, P extends BaseModel<?,?,
 	}
 
 	protected final void remove(Key key) {
-		JsFactory.remove(getDelegated(), key.name());
+		JsFactory.remove(delegated, key.name());
 	}
 
 	protected final O getDelegated() {

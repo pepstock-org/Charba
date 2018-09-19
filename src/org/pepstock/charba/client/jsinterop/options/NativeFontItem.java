@@ -28,14 +28,8 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public abstract class NativeFontItem extends NativeObject {
+abstract class NativeFontItem extends NativeObject {
 	
-	/**
-	 * 
-	 */
-	protected NativeFontItem() {
-	}
-
 	/**
 	 * Sets the font color
 	 * 

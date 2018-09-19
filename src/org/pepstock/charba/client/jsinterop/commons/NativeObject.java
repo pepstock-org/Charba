@@ -9,34 +9,48 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true, name="Object", namespace = JsPackage.GLOBAL)
 public class NativeObject {
 	
-	/**
-	 * 
-	 */
-	protected NativeObject() {
-	}
-
-	public static native NativeDescriptor getOwnPropertyDescriptor(Object object, String key);
-
-	@JsOverlay
-	public static final NativeDescriptor getOwnPropertyDescriptor(Object object,Key key) {
-		return getOwnPropertyDescriptor(object, key.name());
-	}
+//	/**
+//	 * 
+//	 */
+//	public NativeObject() {
+//	}
 	
-	public native boolean hasOwnProperty(String key);
+	static native <T extends NativeObject> void defineProperty(NativeObject source, String key, NativeDescriptor<T> descriptor);
+
+
+	static native <T extends NativeObject, S extends NativeObject> NativeDescriptor<T> getOwnPropertyDescriptor(S source, String key);
+	
+	native boolean hasOwnProperty(String key);
 
 	@JsOverlay
-	public final boolean hasOwnProperty(Key key) {
+	final boolean hasProperty(Key key) {
 		return hasOwnProperty(key.name());
 	}
 	
-    /**
-     * Removes the occurrence of the specified element from this object by its property name, if it is present.
-     * @param key name of the property of JavaScript object.
-     */
-	//FIXME
-    protected final native void remove(String key);
+	@JsOverlay
+	static final void removeProperty(NativeObject object, Key key) {
+		JsFactory.remove(object, key.name());
+	}
+
+	@JsOverlay
+	static final <T extends NativeObject> void defineProperty(NativeObject source, Key key, T object) {
+		NativeDescriptor<T> descriptor = new NativeDescriptor<>();
+		descriptor.setValue(object);
+		descriptor.setConfigurable(true);
+		descriptor.setEnumerable(true);
+		descriptor.setWritable(true);
+		defineProperty(source, key, descriptor);
+	}
 	
+	@JsOverlay
+	static final <T extends NativeObject> void defineProperty(NativeObject source, Key key, NativeDescriptor<T> descriptor) {
+		defineProperty(source, key.name(), descriptor);
+	}
+
 	
-//	public native JsArray<String> keys();
+	@JsOverlay
+	static final <T extends NativeObject, S extends NativeObject> NativeDescriptor<T> getPropertyDescriptor(S source,Key key) {
+		return getOwnPropertyDescriptor(source, key.name());
+	}
 
 }

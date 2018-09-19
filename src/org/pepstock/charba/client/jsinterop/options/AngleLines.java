@@ -27,14 +27,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AngleLines extends BaseModel<NativeAngleLines, Scale, IsDefaultAngleLines> {
+public final class AngleLines extends BaseModel<Scale, IsDefaultAngleLines, NativeAngleLines> {
 
-	public AngleLines(Scale scale, IsDefaultAngleLines defaultValues) {
-		this(new NativeAngleLines(), scale, defaultValues);
-	}
-
-	AngleLines(NativeAngleLines delegated, Scale scale, IsDefaultAngleLines defaultValues) {
-		super(delegated, scale, defaultValues);
+	AngleLines(Scale scale, IsDefaultAngleLines defaultValues, NativeAngleLines delegated) {
+		super(scale, defaultValues, delegated == null ? new NativeAngleLines(): delegated);
 	}
 
 	/**

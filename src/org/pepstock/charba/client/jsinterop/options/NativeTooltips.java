@@ -28,13 +28,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
-public class NativeTooltips extends NativeObject {
-
-	/**
-	 * 
-	 */
-	protected NativeTooltips() {
-	}
+final class NativeTooltips extends NativeObject {
 
 	/**
 	 * Sets if tooltips are enabled.

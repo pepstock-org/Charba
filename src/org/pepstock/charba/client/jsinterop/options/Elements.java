@@ -24,7 +24,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Elements extends BaseModel<NativeElements, Options, IsDefaultOptions> {
+public class Elements extends BaseModel<Options, IsDefaultOptions, NativeElements> {
 
 	private Arc arc;
 	
@@ -34,36 +34,12 @@ public class Elements extends BaseModel<NativeElements, Options, IsDefaultOption
 	
 	private Rectangle rectangle;
 
-	public Elements(Options options,IsDefaultOptions defaultOptions) {
-		this(new NativeElements(), options, defaultOptions);
-	}
-
-	Elements(NativeElements delegated, Options options,IsDefaultOptions defaultOptions) {
-		super(delegated, options, defaultOptions);
-		NativeArc arcObject = getDelegated().getArc();
-		if (arcObject != null) {
-			arc = new Arc(arcObject, this, defaultOptions.getArc());
-		} else {
-			arc = new Arc(this,defaultOptions.getArc());
-		}
-		NativeLine lineObject = getDelegated().getLine();
-		if (lineObject != null) {
-			line = new Line(lineObject, this, defaultOptions.getLine());
-		} else {
-			line = new Line(this, defaultOptions.getLine());
-		}
-		NativePoint pointObject = getDelegated().getPoint();
-		if (pointObject != null) {
-			point = new Point(pointObject, this, defaultOptions.getPoint());
-		} else {
-			point = new Point(this, defaultOptions.getPoint());
-		}
-		NativeRectangle rectangleObject = getDelegated().getRectangle();
-		if (rectangleObject != null) {
-			rectangle = new Rectangle(rectangleObject, this, defaultOptions.getRectangle());
-		} else {
-			rectangle = new Rectangle(this, defaultOptions.getRectangle());
-		}
+	Elements(Options options,IsDefaultOptions defaultOptions, NativeElements delegated) {
+		super(options, defaultOptions, delegated == null ? new NativeElements() : delegated);
+		arc = new Arc(this,defaultOptions.getArc(), getDelegated().getArc());
+		line = new Line(this, defaultOptions.getLine(), getDelegated().getLine());
+		point = new Point(this, defaultOptions.getPoint(),getDelegated().getPoint());
+		rectangle = new Rectangle(this, defaultOptions.getRectangle(), getDelegated().getRectangle());
 	}
 
 	/**

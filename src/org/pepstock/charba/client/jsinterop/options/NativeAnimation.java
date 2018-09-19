@@ -15,13 +15,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
-public class NativeAnimation extends NativeObject {
-	
-	/**
-	 * 
-	 */
-	protected NativeAnimation() {
-	}
+final class NativeAnimation extends NativeObject {
 
 	/**
 	 * Sets the animation easing.

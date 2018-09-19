@@ -29,6 +29,8 @@ public final class DefaultScale implements IsDefaultScale{
 	private final DefaultPointLabels pointLabels = new DefaultPointLabels();
 	
 	private final DefaultScaleLabel scaleLabel = new DefaultScaleLabel();
+	
+	private final DefaultTicks ticks = new DefaultTicks();
 
 
 	/* (non-Javadoc)
@@ -61,6 +63,15 @@ public final class DefaultScale implements IsDefaultScale{
 	@Override
 	public IsDefaultScaleLabel getScaleLabel() {
 		return scaleLabel;
+	}
+	
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getTicks()
+	 */
+	@Override
+	public IsDefaultTicks getTicks() {
+		return ticks;
 	}
 
 	/* (non-Javadoc)

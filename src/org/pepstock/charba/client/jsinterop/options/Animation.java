@@ -31,7 +31,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Animation extends BaseModel<NativeAnimation, Options, IsDefaultAnimation> {
+public class Animation extends BaseModel<Options, IsDefaultAnimation, NativeAnimation> {
 	
 	@JsFunction
 	public interface AnimationCompleteCallback {
@@ -52,17 +52,9 @@ public class Animation extends BaseModel<NativeAnimation, Options, IsDefaultAnim
 		onProgress,
 		onComplete
 	}
-	
-	public Animation(Options options, IsDefaultAnimation defaultValues) {
-		this(new NativeAnimation(), options, defaultValues);
-	}
 
-	Animation(NativeAnimation delegated, Options options, IsDefaultAnimation defaultValues) {
-		super(delegated, options, defaultValues);
-	}
-
-	protected Animation(Animation wrapper) {
-		this(wrapper.getDelegated(), wrapper.getParent(), wrapper.getDefaultValues());
+	Animation(Options options, IsDefaultAnimation defaultValues, NativeAnimation delegated) {
+		super(options, defaultValues, delegated == null ? new NativeAnimation() : delegated);
 	}
 	
 	/**
