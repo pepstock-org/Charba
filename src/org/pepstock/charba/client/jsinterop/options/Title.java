@@ -15,7 +15,12 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import java.util.List;
+
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.jsinterop.commons.Array;
+import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
+import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle;
 
@@ -133,6 +138,39 @@ public class Title extends FontItem<Options, IsDefaultTitle, NativeTitle> {
 	public double getLineHeight() {
 		return AssignHelper.check(getDelegated().getLineHeight(), getDefaultValues().getLineHeight());
 	}
+	
+	/**
+	 * Sets the title text to display. If specified as an array, text is rendered on multiple lines.
+	 * 
+	 * @param text the title text to display. If specified as an array, text is rendered on multiple lines.
+	 */
+	public void setText(String... text) {
+		if (text != null) {
+			if (text.length > 1) {
+				getDelegated().setText(ArrayString.of(text));
+			} else {
+				getDelegated().setText(text[0]);
+			}
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		}
+	}
+
+	/**
+	 * Returns the title text to display, as a list of strings.
+	 * 
+	 * @return a list of strings
+	 */
+	public List<String> getText() {
+		Object value = getDelegated().getText();
+		if (Array.isArray(value)) {
+			return ArrayListHelper.build((ArrayString)value);
+		} else if (value != null ){
+			return ArrayListHelper.build(ArrayString.of(value.toString()));
+		}
+		return null;
+	}
+
 	
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()

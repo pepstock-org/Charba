@@ -110,5 +110,21 @@ final class NativeTitle extends NativeFontItem {
 	 */
 	@JsProperty
 	native double getLineHeight();
+	
+	/**
+	 * Sets the title text to display. If specified as an array, text is rendered on multiple lines.
+	 * 
+	 * @param text the title text to display. If specified as an array, text is rendered on multiple lines.
+	 */
+	@JsProperty
+	native void setText(Object text);
+
+	/**
+	 * Returns the title text to display, as a list of strings.
+	 * 
+	 * @return a list of strings
+	 */
+	@JsProperty
+	native Object getText();
 
 }

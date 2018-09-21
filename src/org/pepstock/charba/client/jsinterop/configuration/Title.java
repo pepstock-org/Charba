@@ -13,19 +13,14 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.options;
+package org.pepstock.charba.client.jsinterop.configuration;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.ChartContainer;
-import org.pepstock.charba.client.commons.JsStringArrayList;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.jsinterop.options.Options;
 
 /**
  * Configures the chart title which defines text to draw at the top of the chart.
@@ -33,35 +28,17 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Title extends ChartContainer {
-
-	// flag to check if a multiple line title has been set
-	private boolean isTextArray = false;
-
-	/**
-	 * Name of fields of JavaScript object.
-	 */
-	private enum Property implements Key
-	{
-		fontSize,
-		fontStyle,
-		fontColor,
-		fontFamily,
-		display,
-		padding,
-		position,
-		lineHeight,
-		fullWidth,
-		text
-	}
+public final class Title {
+	
+	private final Options options;
 
 	/**
 	 * Builds the object storing the chart instance.
 	 * 
 	 * @param chart chart instance
 	 */
-	Title(AbstractChart<?, ?> chart) {
-		super(chart);
+	Title(Options options) {
+		this.options = options;
 	}
 
 	/**
@@ -70,7 +47,7 @@ public final class Title extends ChartContainer {
 	 * @param fontSize Font size for title.
 	 */
 	public void setFontSize(int fontSize) {
-		setValue(Property.fontSize, fontSize);
+		options.getTitle().setFontSize(fontSize);
 	}
 
 	/**
@@ -79,7 +56,7 @@ public final class Title extends ChartContainer {
 	 * @return Font size for title. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
 	 */
 	public int getFontSize() {
-		return getValue(Property.fontSize, getChart().getGlobal().getTitle().getFontSize());
+		return options.getTitle().getFontSize();
 	}
 
 	/**
@@ -89,7 +66,7 @@ public final class Title extends ChartContainer {
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
-		setValue(Property.fontStyle, fontStyle);
+		options.getTitle().setFontStyle(fontStyle);
 	}
 
 	/**
@@ -100,7 +77,7 @@ public final class Title extends ChartContainer {
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.fontStyle, FontStyle.class, getChart().getGlobal().getTitle().getFontStyle());
+		return options.getTitle().getFontStyle();
 	}
 
 	/**
@@ -109,7 +86,7 @@ public final class Title extends ChartContainer {
 	 * @param fontColor Font color for title
 	 */
 	public void setFontColor(IsColor fontColor) {
-		setFontColor(fontColor.toRGBA());
+		options.getTitle().setFontColor(fontColor);
 	}
 
 	/**
@@ -118,7 +95,7 @@ public final class Title extends ChartContainer {
 	 * @param fontColor Font color for title
 	 */
 	public void setFontColor(String fontColor) {
-		setValue(Property.fontColor, fontColor);
+		options.getTitle().setFontColor(fontColor);
 	}
 
 	/**
@@ -127,7 +104,7 @@ public final class Title extends ChartContainer {
 	 * @return Font color for title. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
 	 */
 	public String getFontColorAsString() {
-		return getValue(Property.fontColor, getChart().getGlobal().getTitle().getFontColorAsString());
+		return options.getTitle().getFontColorAsString();
 	}
 
 	/**
@@ -136,7 +113,7 @@ public final class Title extends ChartContainer {
 	 * @return Font color for title. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
 	 */
 	public IsColor getFontColor() {
-		return ColorBuilder.parse(getFontColorAsString());
+		return options.getTitle().getFontColor();
 	}
 
 	/**
@@ -145,7 +122,7 @@ public final class Title extends ChartContainer {
 	 * @param fontFamily Font family for title, follows CSS font-family options.
 	 */
 	public void setFontFamily(String fontFamily) {
-		setValue(Property.fontFamily, fontFamily);
+		options.getTitle().setFontFamily(fontFamily);
 	}
 
 	/**
@@ -155,7 +132,7 @@ public final class Title extends ChartContainer {
 	 *         {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
 	 */
 	public String getFontFamily() {
-		return getValue(Property.fontFamily, getChart().getGlobal().getTitle().getFontFamily());
+		return options.getTitle().getFontFamily();
 	}
 
 	/**
@@ -164,7 +141,7 @@ public final class Title extends ChartContainer {
 	 * @param display if the title is shown.
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.display, display);
+		options.getTitle().setDisplay(display);
 	}
 
 	/**
@@ -173,7 +150,7 @@ public final class Title extends ChartContainer {
 	 * @return if the title is shown. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, getChart().getGlobal().getTitle().isDisplay());
+		return options.getTitle().isDisplay();
 	}
 
 	/**
@@ -182,16 +159,7 @@ public final class Title extends ChartContainer {
 	 * @param text the title text to display. If specified as an array, text is rendered on multiple lines.
 	 */
 	public void setText(String... text) {
-		setText(ArrayListHelper.build(text));
-	}
-
-	/**
-	 * Sets the title text to display as an array.
-	 * 
-	 * @param text the title text to display as an array.
-	 */
-	private void setText(JsStringArrayList text) {
-		isTextArray = checkAndSetStringValues(Property.text, text);
+		options.getTitle().setText(text);
 	}
 
 	/**
@@ -200,7 +168,7 @@ public final class Title extends ChartContainer {
 	 * @return a list of strings
 	 */
 	public List<String> getText() {
-		return checkAndGetStringValues(Property.text, isTextArray);
+		return options.getTitle().getText();
 	}
 
 	/**
@@ -210,7 +178,7 @@ public final class Title extends ChartContainer {
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public void setPosition(Position position) {
-		setValue(Property.position, position);
+		options.getTitle().setPosition(position);
 	}
 
 	/**
@@ -220,7 +188,7 @@ public final class Title extends ChartContainer {
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {
-		return getValue(Property.position, Position.class, getChart().getGlobal().getTitle().getPosition());
+		return options.getTitle().getPosition();
 	}
 
 	/**
@@ -229,7 +197,7 @@ public final class Title extends ChartContainer {
 	 * @param padding Padding to apply around title. Only top and bottom are implemented.
 	 */
 	public void setPadding(int padding) {
-		setValue(Property.padding, padding);
+		options.getTitle().setPadding(padding);
 	}
 
 	/**
@@ -239,7 +207,7 @@ public final class Title extends ChartContainer {
 	 *         {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
 	 */
 	public int getPadding() {
-		return getValue(Property.padding, getChart().getGlobal().getTitle().getPadding());
+		return options.getTitle().getPadding();
 	}
 
 	/**
@@ -248,7 +216,7 @@ public final class Title extends ChartContainer {
 	 * @param fullWidth Marks that this box should take the full width of the canvas (pushing down other boxes)
 	 */
 	public void setFullWidth(boolean fullWidth) {
-		setValue(Property.fullWidth, fullWidth);
+		options.getTitle().setFullWidth(fullWidth);
 	}
 
 	/**
@@ -258,7 +226,7 @@ public final class Title extends ChartContainer {
 	 *         {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
 	 */
 	public boolean isFullWidth() {
-		return getValue(Property.fullWidth, getChart().getGlobal().getTitle().isFullWidth());
+		return options.getTitle().isFullWidth();
 	}
 
 	/**
@@ -267,7 +235,7 @@ public final class Title extends ChartContainer {
 	 * @param lineHeight height of an individual line of text.
 	 */
 	public void setLineHeight(double lineHeight) {
-		setValue(Property.lineHeight, lineHeight);
+		options.getTitle().setLineHeight(lineHeight);
 	}
 
 	/**
@@ -277,6 +245,6 @@ public final class Title extends ChartContainer {
 	 *         {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
 	 */
 	public double getLineHeight() {
-		return getValue(Property.lineHeight, getChart().getGlobal().getTitle().getLineHeight());
+		return options.getTitle().getLineHeight();
 	}
 }

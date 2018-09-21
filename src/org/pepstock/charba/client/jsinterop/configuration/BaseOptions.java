@@ -62,20 +62,20 @@ public abstract class BaseOptions extends EventProvider<Options> {
 	private static final String LEGEND_CALLBACK_ERROR = "Unable to execute LegendCallback";
 	
 	private final Animation animation;
+
+	private final Legend legend;
+
+	private final Title title;
 //
-//	private final Legend legend;
-//
-//	private final Title title;
-//
-//	private final Tooltips tooltips;
-//
-//	private final Hover hover;
-//
-//	private final Layout layout;
+	private final Tooltips tooltips;
+
+	private final Hover hover;
+
+	private final Layout layout;
 
 	private final Elements elements;
 	
-//	private final Plugins plugins = new Plugins();
+	private final Plugins plugins;
 //	
 //	private LegendCallback legendCallBack = null;
 
@@ -125,6 +125,12 @@ public abstract class BaseOptions extends EventProvider<Options> {
 		hoverCallback = null;
 		animation = new Animation(chart, getConfiguration());
 		elements = new Elements(getConfiguration());
+		legend = new Legend(chart, getConfiguration());
+		title = new Title(getConfiguration());
+		layout = new Layout(getConfiguration());
+		hover = new Hover(getConfiguration());
+		plugins = new Plugins(getConfiguration());
+		tooltips = new Tooltips(chart, getConfiguration());
 	}
 
 	/**
@@ -133,41 +139,41 @@ public abstract class BaseOptions extends EventProvider<Options> {
 	public Animation getAnimation() {
 		return animation;
 	}
-//
-//	/**
-//	 * @return the hover
-//	 */
-//	public Hover getHover() {
-//		return hover;
-//	}
-//
-//	/**
-//	 * @return the layout
-//	 */
-//	public Layout getLayout() {
-//		return layout;
-//	}
-//
-//	/**
-//	 * @return the legend
-//	 */
-//	public Legend getLegend() {
-//		return legend;
-//	}
-//
-//	/**
-//	 * @return the title
-//	 */
-//	public Title getTitle() {
-//		return title;
-//	}
-//
-//	/**
-//	 * @return the tooltip
-//	 */
-//	public Tooltips getTooltips() {
-//		return tooltips;
-//	}
+
+	/**
+	 * @return the hover
+	 */
+	public Hover getHover() {
+		return hover;
+	}
+
+	/**
+	 * @return the layout
+	 */
+	public Layout getLayout() {
+		return layout;
+	}
+
+	/**
+	 * @return the legend
+	 */
+	public Legend getLegend() {
+		return legend;
+	}
+
+	/**
+	 * @return the title
+	 */
+	public Title getTitle() {
+		return title;
+	}
+
+	/**
+	 * @return the tooltip
+	 */
+	public Tooltips getTooltips() {
+		return tooltips;
+	}
 
 	/**
 	 * @return the elements
@@ -176,12 +182,12 @@ public abstract class BaseOptions extends EventProvider<Options> {
 		return elements;
 	}
 	
-//	/**
-//	 * @return the plugins
-//	 */
-//	public Plugins getPlugins() {
-//		return plugins;
-//	}
+	/**
+	 * @return the plugins
+	 */
+	public Plugins getPlugins() {
+		return plugins;
+	}
 
 	/**
 	 * Sets the browser events that the chart should listen to for tooltips and hovering.

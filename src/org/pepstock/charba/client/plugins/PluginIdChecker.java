@@ -17,6 +17,9 @@ package org.pepstock.charba.client.plugins;
 
 import java.util.Locale;
 
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.StandardKey;
+
 import com.google.gwt.safehtml.shared.UriUtils;
 
 /**
@@ -72,6 +75,25 @@ public final class PluginIdChecker {
 			// checks if contains uppercase letters
 			throw new InvalidPluginIdException(buildMessage(id, INVALID_PLUGIN__ID_UPPERCASE));
 		}
+	}
+	
+	/**
+	 * Checks if the plugin is compliant with the constraints of plugin id.<br>
+	 * A plugin id <br>
+	 * <ul>
+	 * <li>can not start with a dot or an underscore
+	 * <li>can not contain any non-URL-safe characters
+	 * <li>cannot contain uppercase letters
+	 * <li>should be something short, but also reasonably descriptive
+	 * </ul>
+	 * 
+	 * @param id plugin id to be checked.
+	 * @throws InvalidPluginIdException if the plugin is not compliant
+	 */
+	public static Key key(String id) throws InvalidPluginIdException {
+		// checks
+		check(id);
+		return new StandardKey(id);
 	}
 
 	/**

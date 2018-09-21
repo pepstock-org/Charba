@@ -51,6 +51,8 @@ public class Options extends BaseModel<Options, IsDefaultOptions, NativeOptions>
 	
 	private final Tooltips tooltips;
 	
+	private final Plugins plugins;
+	
 	private Scale scale;
 	
 	private final Scales scales;
@@ -89,6 +91,7 @@ public class Options extends BaseModel<Options, IsDefaultOptions, NativeOptions>
 			scale = new Scale(this, getDefaultValues().getScale(), getDelegated().getScale());
 		}
 		scales = new Scales(this, getDefaultValues().getScale(), getDelegated().getScales());
+		plugins = new Plugins(this, getDelegated().getPlugins());
 	}
 	
 	/**
@@ -159,6 +162,13 @@ public class Options extends BaseModel<Options, IsDefaultOptions, NativeOptions>
 	 */
 	public final Tooltips getTooltips() {
 		return tooltips;
+	}
+
+	/**
+	 * @return the plugins
+	 */
+	public final Plugins getPlugins() {
+		return plugins;
 	}
 
 	/**

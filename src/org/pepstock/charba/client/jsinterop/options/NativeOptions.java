@@ -12,6 +12,12 @@ import jsinterop.annotations.JsType;
 public final class NativeOptions extends NativeObject{
 
 	@JsProperty
+	native NativePlugins getPlugins();
+
+	@JsProperty
+	native void setPlugins(NativePlugins plugins);
+
+	@JsProperty
 	native NativeScales getScales();
 
 	@JsProperty

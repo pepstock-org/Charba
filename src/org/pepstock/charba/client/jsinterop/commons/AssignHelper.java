@@ -37,7 +37,11 @@ public final class AssignHelper {
 	public static double check(Object value, double defaultValue) {
 		return value == null ? defaultValue : (double)value;
 	}
-	
+
+	public static String check(Object value, String defaultValue) {
+		return value == null ? defaultValue : value.toString();
+	}
+
 	public static <T extends Key> T deserialize(String value, Class<T> enumClass, T defaultValue) {
 		if (enumClass.isEnum()) {
 			for (T key : enumClass.getEnumConstants()) {

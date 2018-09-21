@@ -51,7 +51,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 */
 	Time(Scale scale, IsDefaultTime defaultValues, NativeTime delegated) {
 		super(scale, defaultValues, delegated == null ? new NativeTime(): delegated);
-		displayFormats = new DisplayFormats(this, defaultValues, getDelegated().getDisplayFormats());
+		displayFormats = new DisplayFormats(this, getDelegated().getDisplayFormats());
 	}
 
 	/**

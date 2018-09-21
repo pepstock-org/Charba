@@ -52,7 +52,11 @@ final class NativeDisplayFormats extends NativeObject {
 	@JsOverlay
 	final String getDisplayFormat(TimeUnit unit){
 		NativeDescriptor<String> descriptor = getProperty(this, unit);
-		return descriptor.getValue();
+		if (descriptor != null) {
+			return descriptor.getValue();
+		} else {
+			return null;
+		}
 	}
 
 }

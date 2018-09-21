@@ -31,6 +31,16 @@ public class NativeObject {
 		JsFactory.remove(object, key.name());
 	}
 
+//	@JsOverlay
+//	protected static final void defineProperty(NativeObject source, Key key, boolean object) {
+//		NativeDescriptor<Boolean> descriptor = new NativeDescriptor<>();
+//		descriptor.setValue(object);
+//		descriptor.setConfigurable(true);
+//		descriptor.setEnumerable(true);
+//		descriptor.setWritable(true);
+//		defineProperty(source, key, descriptor);
+//	}
+
 	@JsOverlay
 	protected static final <T> void defineProperty(NativeObject source, Key key, T object) {
 		NativeDescriptor<T> descriptor = new NativeDescriptor<>();

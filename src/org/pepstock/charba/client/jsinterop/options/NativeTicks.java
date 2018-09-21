@@ -240,7 +240,7 @@ final class NativeTicks extends NativeFontItem {
 	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	@JsProperty
-	native void setMin(double min);
+	native void setMin(Object min);
 
 	/**
 	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
@@ -248,7 +248,7 @@ final class NativeTicks extends NativeFontItem {
 	 * @return the user defined minimum number for the scale, overrides minimum value from data. Default is Double.MIN_VALUE.
 	 */
 	@JsProperty
-	native double getMin();
+	native Object getMin();
 
 	/**
 	 * Sets the user defined maximum number for the scale, overrides maximum value from data.
@@ -256,7 +256,7 @@ final class NativeTicks extends NativeFontItem {
 	 * @param max user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	@JsProperty
-	native void setMax(double max);
+	native void setMax(Object max);
 
 	/**
 	 * Returns the user defined maximum number for the scale, overrides maximum value from data.
@@ -264,40 +264,8 @@ final class NativeTicks extends NativeFontItem {
 	 * @return user defined maximum number for the scale, overrides maximum value from data. Default is Double.MAX_VALUE.
 	 */
 	@JsProperty
-	native double getMax();
+	native Object getMax();
 
-	/**
-	 * Sets the user defined minimum number for the scale, overrides minimum value from data.
-	 * 
-	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
-	 */
-	@JsProperty
-	native void setMin(String min);
-
-	/**
-	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
-	 * 
-	 * @return the user defined minimum number for the scale, overrides minimum value from data. Default is Double.MIN_VALUE.
-	 */
-	@JsProperty
-	native String getMinAsString();
-
-	/**
-	 * Sets the user defined maximum number for the scale, overrides maximum value from data.
-	 * 
-	 * @param max user defined maximum number for the scale, overrides maximum value from data.
-	 */
-	@JsProperty
-	native void setMax(String max);
-
-	/**
-	 * Returns the user defined maximum number for the scale, overrides maximum value from data.
-	 * 
-	 * @return user defined maximum number for the scale, overrides maximum value from data. Default is Double.MAX_VALUE.
-	 */
-	@JsProperty
-	native String getMaxAsString();
-	
 	/**
 	 * Sets the maximum number of ticks and gridlines to show.
 	 * 

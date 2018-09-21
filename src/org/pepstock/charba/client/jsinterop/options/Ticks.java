@@ -340,7 +340,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return the user defined minimum number for the scale, overrides minimum value from data. Default is Double.MIN_VALUE.
 	 */
 	public String getMinAsString() {
-		return AssignHelper.check(getDelegated().getMinAsString(), String.valueOf(getDefaultValues().getMin()));
+		return AssignHelper.check(getDelegated().getMin(), String.valueOf(getDefaultValues().getMin()));
 	}
 
 	/**
@@ -360,7 +360,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return user defined maximum number for the scale, overrides maximum value from data. Default is Double.MAX_VALUE.
 	 */
 	public String getMaxAsString() {
-		return AssignHelper.check(getDelegated().getMaxAsString(), String.valueOf(getDefaultValues().getMax()));
+		return AssignHelper.check(getDelegated().getMax(), String.valueOf(getDefaultValues().getMax()));
 	}
 	
 	/**

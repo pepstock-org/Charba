@@ -17,7 +17,6 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.enums.TimeUnit;
 import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime;
 
 /**
  * The following display formats are used to configure how different time units are formed into strings for the axis tick marks.
@@ -25,7 +24,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DisplayFormats extends BaseModel<Time, IsDefaultTime, NativeDisplayFormats> {
+public final class DisplayFormats extends BaseModel<Time, Void, NativeDisplayFormats> {
 
 	/**
 	 * Builds the object storing the chart instance and the axis which this grid lines belongs to.
@@ -33,8 +32,8 @@ public final class DisplayFormats extends BaseModel<Time, IsDefaultTime, NativeD
 	 * @param chart chart instance.
 	 * @param axis axis which this grid lines belongs to.
 	 */
-	DisplayFormats(Time time, IsDefaultTime defaultValues, NativeDisplayFormats delegated) {
-		super(time, defaultValues, delegated == null ? new NativeDisplayFormats(): delegated);
+	DisplayFormats(Time time, NativeDisplayFormats delegated) {
+		super(time, null, delegated == null ? new NativeDisplayFormats(): delegated);
 	}
 	
 	/**
