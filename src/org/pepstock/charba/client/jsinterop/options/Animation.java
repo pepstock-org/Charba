@@ -19,6 +19,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
+import org.pepstock.charba.client.jsinterop.commons.JsFactory;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.jsinterop.items.AnimationObject;
 
@@ -43,6 +44,9 @@ public class Animation extends BaseModel<Options, IsDefaultAnimation, NativeAnim
 		void call(Object context, AnimationObject animationObject);
 	}
 
+	private final CallbackProxy<AnimationCompleteCallback> completeCallbackProxy = JsFactory.newCallbackProxy();
+
+	private final CallbackProxy<AnimationProgressCallback> progressCallbackProxy = JsFactory.newCallbackProxy();
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -54,7 +58,7 @@ public class Animation extends BaseModel<Options, IsDefaultAnimation, NativeAnim
 	}
 
 	Animation(Options options, IsDefaultAnimation defaultValues, NativeAnimation delegated) {
-		super(options, defaultValues, delegated == null ? new NativeAnimation() : delegated);
+		super(options, defaultValues, delegated == null ? new NativeAnimation() : delegated, delegated == null);
 	}
 	
 	/**
@@ -139,31 +143,31 @@ public class Animation extends BaseModel<Options, IsDefaultAnimation, NativeAnim
 		return AssignHelper.check(getDelegated().isAnimateScale(), getDefaultValues().isAnimateScale());
 	}
 	
-	protected void removeOnComplete() {
-		remove(Property.onComplete);
-	}
-
-	protected void removeOnProgress() {
-		remove(Property.onProgress);
-	}
-	
-	protected void setOnComplete(CallbackProxy<AnimationCompleteCallback> callbackProxy) {
-		if (callbackProxy != null && callbackProxy.getProxy() != null) {
-			getDelegated().setOnComplete(callbackProxy.getProxy());
-			// checks if the node is already added to parent
-			checkAndAddToParent();
+	public void setOnComplete(AnimationCompleteCallback callback) {
+		if (isEventEnabled()) {
+			if (callback != null) {
+				completeCallbackProxy.setCallback(callback);
+				getDelegated().setOnComplete(completeCallbackProxy.getProxy());	
+				checkAndAddToParent();
+			} else {
+				remove(Property.onComplete);
+			}
 		} else {
-			removeOnComplete();
+			throw new UnsupportedOperationException("This 'animation' is not created to configure a chart and unables to set an event callback.");
 		}
 	}
 
-	protected void setOnProgress(CallbackProxy<AnimationProgressCallback> callbackProxy) {
-		if (callbackProxy != null && callbackProxy.getProxy() != null) {
-			getDelegated().setOnProgress(callbackProxy.getProxy());
-			// checks if the node is already added to parent
-			checkAndAddToParent();
+	public void setOnProgress(AnimationProgressCallback callback) {
+		if (isEventEnabled()) {
+			if (callback != null) {
+				progressCallbackProxy.setCallback(callback);
+				getDelegated().setOnProgress(progressCallbackProxy.getProxy());	
+				checkAndAddToParent();
+			} else {
+				remove(Property.onProgress);
+			}
 		} else {
-			removeOnProgress();
+			throw new UnsupportedOperationException("This 'animation' is not created to configure a chart and unables to set an event callback.");
 		}
 	}
 

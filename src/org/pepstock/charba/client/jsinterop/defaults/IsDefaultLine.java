@@ -1,7 +1,5 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
-import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
-
 public interface IsDefaultLine extends IsDefaultArc{
 	
 	/**
@@ -19,15 +17,6 @@ public interface IsDefaultLine extends IsDefaultArc{
 	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	String getBorderCapStyle();
-
-	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
-	 * 
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 *         lines and gaps which describe the pattern.
-	 */
-	ArrayInteger getBorderDash();
 
 	/**
 	 * Returns the line dash pattern offset or "phase".

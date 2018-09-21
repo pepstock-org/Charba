@@ -15,30 +15,28 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults;
 
-public interface IsDefaultScale{
-
+public interface IsDefaultScale {
 
 	/**
 	 * @return the scaleLabel
 	 * @see ScaleLabel
 	 */
 
-	 IsDefaultScaleLabel getScaleLabel();
+	IsDefaultScaleLabel getScaleLabel();
 
 	/**
 	 * @return the ticks
 	 * @see Ticks
 	 */
 
-	 IsDefaultTicks getTicks();
+	IsDefaultTicks getTicks();
 
 	/**
 	 * @return the grideLines
 	 * @see GridLines
 	 */
 
-	 IsDefaultGridLines getGrideLines();
-
+	IsDefaultGridLines getGrideLines();
 
 	/**
 	 * @return the angleLines
@@ -50,15 +48,20 @@ public interface IsDefaultScale{
 	 * @return the pointLabels
 	 * @see PointLabels
 	 */
+	IsDefaultPointLabels getPointLabels();
 
-	 IsDefaultPointLabels getPointLabels();
+	/**
+	 * @return the pointLabels
+	 * @see PointLabels
+	 */
+	IsDefaultTime getTime();
 
 	/**
 	 * Returns if the axis are stacked or not.
 	 * 
 	 * @return if the axis are stacked or not. Default is <code>false</code>.
 	 */
-	 boolean isStacked();
+	boolean isStacked();
 
 	/**
 	 * Returns the type of axis.
@@ -66,28 +69,28 @@ public interface IsDefaultScale{
 	 * @return the type of axis. If not set, the default is {@link org.pepstock.charba.client.enums.AxisType#linear}.
 	 * @see org.pepstock.charba.client.enums.AxisType
 	 */
-	 String getType();
+	String getType();
 
 	/**
 	 * The weight used to sort the axis. Higher weights are further away from the chart area.
 	 * 
 	 * @return weight of axis. Default is 0.
 	 */
-	 int getWeight();
+	int getWeight();
 
 	/**
 	 * If true, shows the axis.
 	 * 
 	 * @return if true, shows the axis. Default is true.
 	 */
-	 boolean isDisplay();
+	boolean isDisplay();
 
 	/**
 	 * If true, extra space is added to the both edges and the axis is scaled to fit into the chart area.
 	 * 
 	 * @return extra space of axis. Default is <code>false</code>.
 	 */
-	 boolean isOffset();
+	boolean isOffset();
 
 	/**
 	 * Position of the axis in the chart. Possible values are: 'top', 'left', 'bottom', 'right'
@@ -95,7 +98,7 @@ public interface IsDefaultScale{
 	 * @return position of axis. Default is {@link org.pepstock.charba.client.enums.Position#top}.
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
-	 String getPosition();
+	String getPosition();
 
 	/**
 	 * Returns the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
@@ -104,14 +107,14 @@ public interface IsDefaultScale{
 	 * @return percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
 	 *         category width and put the bars right next to each other. Default is 0.9.
 	 */
-	 double getBarPercentage();
+	double getBarPercentage();
 
 	/**
 	 * Returns the percent (0-1) of the available width each category should be within the sample width.
 	 * 
 	 * @return the percent (0-1) of the available width each category should be within the sample width. Default is 0.8.
 	 */
-	 double getCategoryPercentage();
+	double getCategoryPercentage();
 
 	/**
 	 * Returns the width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they
@@ -121,13 +124,27 @@ public interface IsDefaultScale{
 	 *         the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
 	 *         Default is 0.
 	 */
-	 int getBarThickness();
+	int getBarThickness();
 
 	/**
 	 * Returns the maximum bar thickness.
 	 * 
 	 * @return the maximum bar thickness. Default is 0.
 	 */
-	 int getMaxBarThickness();
+	int getMaxBarThickness();
+
+	/**
+	 * Returns the property controls the data distribution along the scale.
+	 * 
+	 * @return property controls the data distribution along the scale.
+	 */
+	String getDistribution();
+
+	/**
+	 * Returns the property controls the scale boundary strategy (bypassed by min/max time options).
+	 * 
+	 * @return property controls the scale boundary strategy (bypassed by min/max time options).
+	 */
+	String getBounds();
 
 }

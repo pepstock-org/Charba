@@ -185,4 +185,11 @@ public interface IsDefaultTicks extends IsDefaultFontItem {
 	 * @return if true, draw a background behind the tick labels. Default is true.
 	 */
 	boolean isShowLabelBackdrop();
+	
+	/**
+	 * Returns the property controls the ticks generation.
+	 * 
+	 * @return property controls the ticks generation.
+	 */
+	String getSource();
 }

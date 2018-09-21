@@ -20,7 +20,7 @@ import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.AddHandlerEventHandler;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.events.RemoveHandlerEventHandler;
-import org.pepstock.charba.client.jsinterop.options.Options;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
@@ -31,15 +31,15 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.commons.ChartContainer
  */
-public abstract class EventProvider extends ChartContainer implements AddHandlerEventHandler, RemoveHandlerEventHandler{
+public abstract class EventProvider<T extends NativeObjectContainer<?>> extends ChartContainer<T> implements AddHandlerEventHandler, RemoveHandlerEventHandler{
 
 	/**
 	 * Creates the chart configuration object with the chart instance 
 	 * @param chart chart instance
 	 * @see org.pepstock.charba.client.AbstractChart
 	 */
-	public EventProvider(AbstractChart<?, ?> chart, Options options) {
-		super(chart, options);
+	public EventProvider(AbstractChart<?, ?> chart, T configuration) {
+		super(chart, configuration);
 		//FIXME
 //		chart.addHandler(this, AddHandlerEvent.TYPE);
 //		chart.addHandler(this, RemoveHandlerEvent.TYPE);

@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.jsinterop.options.Options;
+import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
 
 /**
  * Abstract options for PIE chart. It contains all properties for this kind of chart.
@@ -31,8 +31,8 @@ abstract class AbstractPieOptions extends BaseOptions {
 	 * 
 	 * @param chart chart instance
 	 */
-	protected AbstractPieOptions(AbstractChart<?, ?> chart, Options options) {
-		super(chart, options);
+	protected AbstractPieOptions(AbstractChart<?, ?> chart, IsDefaultOptions defaultvalues) {
+		super(chart, defaultvalues);
 	}
 
 	/**
@@ -41,7 +41,7 @@ abstract class AbstractPieOptions extends BaseOptions {
 	 * @param cutoutPercentage the percentage of the chart that is cut out of the middle.
 	 */
 	public void setCutoutPercentage(double cutoutPercentage) {
-		getOptions().setCutoutPercentage(cutoutPercentage);
+		getConfiguration().setCutoutPercentage(cutoutPercentage);
 	}
 
 	/**
@@ -50,7 +50,7 @@ abstract class AbstractPieOptions extends BaseOptions {
 	 * @return the percentage of the chart that is cut out of the middle. Default is {@link org.pepstock.charba.client.GlobalOptions#getCutoutPercentage()}.
 	 */
 	public double getCutoutPercentage() {
-		return getOptions().getCutoutPercentage();
+		return getConfiguration().getCutoutPercentage();
 	}
 
 	/**
@@ -59,7 +59,7 @@ abstract class AbstractPieOptions extends BaseOptions {
 	 * @param rotation starting angle to draw arcs from.
 	 */
 	public void setRotation(double rotation) {
-		getOptions().setRotation(rotation);
+		getConfiguration().setRotation(rotation);
 	}
 
 	/**
@@ -68,7 +68,7 @@ abstract class AbstractPieOptions extends BaseOptions {
 	 * @return starting angle to draw arcs from. Default is {@link org.pepstock.charba.client.GlobalOptions#getRotation()}.
 	 */
 	public double getRotation() {
-		return getOptions().getRotation();
+		return getConfiguration().getRotation();
 	}
 
 	/**
@@ -77,7 +77,7 @@ abstract class AbstractPieOptions extends BaseOptions {
 	 * @param circumference the sweep to allow arcs to cover.
 	 */
 	public void setCircumference(double circumference) {
-		getOptions().setCircumference(circumference);
+		getConfiguration().setCircumference(circumference);
 	}
 
 	/**
@@ -86,7 +86,7 @@ abstract class AbstractPieOptions extends BaseOptions {
 	 * @return the sweep to allow arcs to cover. Default is {@link org.pepstock.charba.client.GlobalOptions#getCircumference()}.
 	 */
 	public double getCircumference() {
-		return getOptions().getCircumference();
+		return getConfiguration().getCircumference();
 	}
 
 }

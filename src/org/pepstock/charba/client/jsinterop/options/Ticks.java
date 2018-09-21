@@ -15,8 +15,13 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import java.util.List;
+
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.enums.TickSource;
+import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
+import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks;
 
@@ -319,6 +324,46 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	}
 
 	/**
+	 * Sets the user defined minimum number for the scale, overrides minimum value from data.
+	 * 
+	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
+	 */
+	public void setMin(String min) {
+		getDelegated().setMin(min);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
+	 * 
+	 * @return the user defined minimum number for the scale, overrides minimum value from data. Default is Double.MIN_VALUE.
+	 */
+	public String getMinAsString() {
+		return AssignHelper.check(getDelegated().getMinAsString(), String.valueOf(getDefaultValues().getMin()));
+	}
+
+	/**
+	 * Sets the user defined maximum number for the scale, overrides maximum value from data.
+	 * 
+	 * @param max user defined maximum number for the scale, overrides maximum value from data.
+	 */
+	public void setMax(String max) {
+		getDelegated().setMax(max);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the user defined maximum number for the scale, overrides maximum value from data.
+	 * 
+	 * @return user defined maximum number for the scale, overrides maximum value from data. Default is Double.MAX_VALUE.
+	 */
+	public String getMaxAsString() {
+		return AssignHelper.check(getDelegated().getMaxAsString(), String.valueOf(getDefaultValues().getMax()));
+	}
+	
+	/**
 	 * Sets the maximum number of ticks and gridlines to show.
 	 * 
 	 * @param maxTicksLimit maximum number of ticks and gridlines to show.
@@ -494,6 +539,57 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 */
 	public boolean isShowLabelBackdrop() {
 		return AssignHelper.check(getDelegated().isShowLabelBackdrop(), getDefaultValues().isShowLabelBackdrop());
+	}
+	
+	/**
+	 * Sets an array of labels to display.
+	 * 
+	 * @param labels An array of labels to display.
+	 */
+	public void setLabels(String... labels) {
+		getDelegated().setLabels(ArrayString.of(labels));
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+	
+	/**
+	 * Sets an array of labels to display.
+	 * 
+	 * @param labels A list of labels to display.
+	 */
+	public void setLabels(List<String> labels) {
+		setLabels(labels.toArray(new String[0]));
+	}
+
+	/**
+	 * Returns the array of labels to display.
+	 * 
+	 * @return the array of labels to display.
+	 */
+	public List<String> getLabels() {
+		return ArrayListHelper.build(getDelegated().getLabels());
+	}
+	
+	/**
+	 * Sets the property controls the ticks generation.
+	 * 
+	 * @param source property controls the ticks generation.
+	 * @see org.pepstock.charba.client.enums.TickSource
+	 */
+	public void setSource(TickSource source) {
+		getDelegated().setSource(source.name());
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the property controls the ticks generation.
+	 * 
+	 * @return property controls the ticks generation.
+	 * @see org.pepstock.charba.client.enums.TickSource
+	 */
+	public TickSource getSource() {
+		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getSource(), getDefaultValues().getSource()), TickSource.class, TickSource.auto);
 	}
 
 	/* (non-Javadoc)

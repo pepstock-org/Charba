@@ -12,6 +12,12 @@ import jsinterop.annotations.JsType;
 public final class NativeOptions extends NativeObject{
 
 	@JsProperty
+	native NativeScales getScales();
+
+	@JsProperty
+	native void setScales(NativeScales scale);
+
+	@JsProperty
 	native NativeScale getScale();
 
 	@JsProperty
@@ -58,6 +64,12 @@ public final class NativeOptions extends NativeObject{
 
 	@JsProperty
 	native void setTooltips(NativeTooltips tooltips);
+
+	@JsProperty
+	native void setCharbaId(String id);
+
+	@JsProperty
+	native String getCharbaId();
 
 	@JsProperty
 	native void setResponsive(boolean responsive);

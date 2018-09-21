@@ -12,6 +12,7 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
+import org.pepstock.charba.client.jsinterop.commons.JsFactory;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
 import org.pepstock.charba.client.jsinterop.items.DatasetItem;
@@ -50,7 +51,15 @@ public class Options extends BaseModel<Options, IsDefaultOptions, NativeOptions>
 	
 	private final Tooltips tooltips;
 	
-	private final Scale scale;
+	private Scale scale;
+	
+	private final Scales scales;
+	
+	private final CallbackProxy<ChartResizeCallback> resizeCallbackProxy = JsFactory.newCallbackProxy();
+
+	private final CallbackProxy<ChartClickCallback> clickCallbackProxy = JsFactory.newCallbackProxy();
+
+	private final CallbackProxy<ChartHoverCallback> hoverCallbackProxy = JsFactory.newCallbackProxy();
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -63,11 +72,12 @@ public class Options extends BaseModel<Options, IsDefaultOptions, NativeOptions>
 	}
 
 	public Options(IsDefaultOptions defaultValues) {
-		this(defaultValues, new NativeOptions());
+		this(defaultValues, null);
 	}
 
 	protected Options(IsDefaultOptions defaultValues, NativeOptions delegated) {
-		super(defaultValues, delegated == null ? new NativeOptions() : delegated);
+		// if delegated == null, is global or chart, noit config
+		super(defaultValues, delegated == null ? new NativeOptions() : delegated, delegated == null);
 		animation = new Animation(this, getDefaultValues().getAnimation(), getDelegated().getAnimation());
 		elements = new Elements(this, defaultValues, getDelegated().getElements());
 		hover = new Hover(this, getDefaultValues().getHover(), getDelegated().getHover());
@@ -75,7 +85,17 @@ public class Options extends BaseModel<Options, IsDefaultOptions, NativeOptions>
 		title = new Title(this, getDefaultValues().getTitle(), getDelegated().getTitle());
 		legend = new Legend(this, getDefaultValues().getLegend(),getDelegated().getLegend());
 		tooltips = new Tooltips(this, getDefaultValues().getTooltips(), getDelegated().getTooltips());
-		scale = new Scale(this, getDefaultValues().getScale(), getDelegated().getScale());
+		if (getDelegated().getScale() != null) {
+			scale = new Scale(this, getDefaultValues().getScale(), getDelegated().getScale());
+		}
+		scales = new Scales(this, getDefaultValues().getScale(), getDelegated().getScales());
+	}
+	
+	/**
+	 * @return the scales
+	 */
+	public final Scales getScales() {
+		return scales;
 	}
 
 	/**
@@ -83,6 +103,13 @@ public class Options extends BaseModel<Options, IsDefaultOptions, NativeOptions>
 	 */
 	public final Scale getScale() {
 		return scale;
+	}
+	
+	/**
+	 * @param scale the scale to set
+	 */
+	public final void setScale(Scale scale) {
+		this.scale = scale;
 	}
 
 	/**
@@ -156,7 +183,7 @@ public class Options extends BaseModel<Options, IsDefaultOptions, NativeOptions>
 	 * @return the browser events that the chart should listen to for tooltips and hovering.
 	 */
 	public List<Event> getEvents() {
-		return ArrayListHelper.build(Event.class, AssignHelper.check(getDelegated().getEvents(), getDefaultValues().getEvents()));
+		return ArrayListHelper.build(Event.class, getDelegated().getEvents());
 	}
 
 	/**
@@ -475,40 +502,44 @@ public class Options extends BaseModel<Options, IsDefaultOptions, NativeOptions>
 		return AssignHelper.check(getDelegated().getStartAngle(), getDefaultValues().getStartAngle());
 	}
 
-	protected void removeOnResize() {
-		remove(Property.onResize);
-	}
-
-	protected void removeOnClick() {
-		remove(Property.onClick);
-	}
-
-	protected void removeOnHover() {
-		remove(Property.onHover);
-	}
-
-	protected void setOnResize(CallbackProxy<ChartResizeCallback> callbackProxy) {
-		if (callbackProxy != null && callbackProxy.getProxy() != null) {
-			getDelegated().setOnResize(callbackProxy.getProxy());	
+	public void setOnResize(ChartResizeCallback callback) {
+		if (isEventEnabled()) {
+			if (callback != null) {
+				resizeCallbackProxy.setCallback(callback);
+				getDelegated().setOnResize(resizeCallbackProxy.getProxy());	
+			} else {
+				remove(Property.onResize);
+			}
 		} else {
-			removeOnResize();
+			throw new UnsupportedOperationException("This 'options' is not created to configure a chart and unables to set an event callback.");
 		}
 	}
 
-	protected void setOnClick(CallbackProxy<ChartClickCallback> callbackProxy) {
-		if (callbackProxy != null && callbackProxy.getProxy() != null) {
-			getDelegated().setOnClick(callbackProxy.getProxy());	
+	public void setOnClick(ChartClickCallback callback) {
+		if (isEventEnabled()) {
+			if (callback != null) {
+				clickCallbackProxy.setCallback(callback);
+				getDelegated().setOnClick(clickCallbackProxy.getProxy());	
+			} else {
+				remove(Property.onClick);
+			}
 		} else {
-			removeOnClick();
+			throw new UnsupportedOperationException("This 'options' is not created to configure a chart and unables to set an event callback.");
 		}
 	}
 
-	protected void setOnHover(CallbackProxy<ChartHoverCallback> callbackProxy) {
-		if (callbackProxy != null && callbackProxy.getProxy() != null) {
-			getDelegated().setOnHover(callbackProxy.getProxy());	
+	public void setOnHover(ChartHoverCallback callback) {
+		if (isEventEnabled()) {
+			if (callback != null) {
+				hoverCallbackProxy.setCallback(callback);
+				getDelegated().setOnHover(hoverCallbackProxy.getProxy());	
+			} else {
+				remove(Property.onHover);
+			}
 		} else {
-			removeOnClick();
+			throw new UnsupportedOperationException("This 'options' is not created to configure a chart and unables to set an event callback.");
 		}
+
 	}
 	
 	/* (non-Javadoc)

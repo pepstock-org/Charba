@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults;
 
-import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
-
 /**
  * The grid line configuration defines options for the grid lines that run perpendicular to the axis.
  * 
@@ -39,14 +37,6 @@ public interface IsDefaultGridLines {
 	 * @return the list of colors of the grid lines. If not set, default is only 1 value 'rgba(0, 0, 0, 0.1)'
 	 */
 	String getColor();
-
-	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
-	 * 
-	 * @return the line dash pattern used when stroking lines
-	 */
-	ArrayInteger getBorderDash();
 
 	/**
 	 * Returns the line dash pattern offset or "phase".
@@ -105,13 +95,6 @@ public interface IsDefaultGridLines {
 	 * @return Stroke color of the grid line for the first index (index 0). If not set, default is 'rgba(0, 0, 0, 0.25)'
 	 */
 	String getZeroLineColor();
-
-	/**
-	 * Returns the length and spacing of dashes of the grid line for the first index (index 0).
-	 * 
-	 * @return the length and spacing of dashes of the grid line for the first index (index 0).
-	 */
-	ArrayInteger getZeroLineBorderDash();
 
 	/**
 	 * Returns the offset for line dashes of the grid line for the first index (index 0).

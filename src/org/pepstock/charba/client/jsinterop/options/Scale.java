@@ -17,6 +17,8 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.enums.ScaleBounds;
+import org.pepstock.charba.client.enums.ScaleDistribution;
 import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
 import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
@@ -47,7 +49,13 @@ public class Scale extends BaseModel<Options, IsDefaultScale, NativeScale>{
 	private final AngleLines angleLines;
 	
 	private final PointLabels pointLabels;
+	
+	private final Time time;
 
+	// here scale is ROOT
+	public Scale(IsDefaultScale defaultValues) {
+		this(null, defaultValues, null);
+	}
 
 	Scale(Options options, IsDefaultScale defaultValues, NativeScale delegated) {
 		super(options, defaultValues, delegated == null ? new NativeScale(): delegated);
@@ -56,8 +64,8 @@ public class Scale extends BaseModel<Options, IsDefaultScale, NativeScale>{
 		pointLabels = new PointLabels(this, getDefaultValues().getPointLabels(), getDelegated().getPointLabels());
 		scaleLabel = new ScaleLabel(this, getDefaultValues().getScaleLabel(), getDelegated().getScaleLabel());
 		ticks = new Ticks(this, getDefaultValues().getTicks(), getDelegated().getTicks());
+		time = new Time(this, getDefaultValues().getTime(), getDelegated().getTime());
 	}
-
 
 	/**
 	 * @return the scaleLabel
@@ -99,6 +107,13 @@ public class Scale extends BaseModel<Options, IsDefaultScale, NativeScale>{
 		return pointLabels;
 	}
 	
+	/**
+	 * @return the time
+	 */
+	public Time getTime() {
+		return time;
+	}
+
 	/**
 	 * The ID is used to link datasets and scale axes together.<br>
 	 * This is especially needed if multi-axes charts are used.
@@ -334,6 +349,50 @@ public class Scale extends BaseModel<Options, IsDefaultScale, NativeScale>{
 	 */
 	public int getMaxBarThickness() {
 		return AssignHelper.check(getDelegated().getMaxBarThickness(), getDefaultValues().getMaxBarThickness());
+	}
+	
+	/**
+	 * Sets property controls the data distribution along the scale.
+	 * 
+	 * @param distribution property controls the data distribution along the scale.
+	 * @see org.pepstock.charba.client.enums.ScaleDistribution
+	 */
+	public void setDistribution(ScaleDistribution distribution) {
+		getDelegated().setDistribution(distribution.name());
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the property controls the data distribution along the scale.
+	 * 
+	 * @return property controls the data distribution along the scale.
+	 * @see org.pepstock.charba.client.enums.ScaleDistribution
+	 */
+	public ScaleDistribution getDistribution() {
+		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getDistribution(), getDefaultValues().getDistribution()), ScaleDistribution.class, ScaleDistribution.linear);
+	}
+	
+	/**
+	 * Sets the property controls the scale boundary strategy (bypassed by min/max time options).
+	 * 
+	 * @param bounds property controls the scale boundary strategy (bypassed by min/max time options).
+	 * @see org.pepstock.charba.client.enums.ScaleBounds
+	 */
+	public void setBounds(ScaleBounds bounds) {
+		getDelegated().setBounds(bounds.name());
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the property controls the scale boundary strategy (bypassed by min/max time options).
+	 * 
+	 * @return property controls the scale boundary strategy (bypassed by min/max time options).
+	 * @see org.pepstock.charba.client.enums.ScaleBounds
+	 */
+	public ScaleBounds getBounds() {
+		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getBounds(), getDefaultValues().getBounds()), ScaleBounds.class, ScaleBounds.data);
 	}
 	
 	/* (non-Javadoc)

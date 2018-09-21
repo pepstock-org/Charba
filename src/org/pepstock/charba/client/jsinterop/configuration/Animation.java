@@ -17,15 +17,13 @@ package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.enums.Easing;
-import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
-import org.pepstock.charba.client.jsinterop.commons.JsFactory;
 import org.pepstock.charba.client.jsinterop.events.AnimationCompleteEvent;
 import org.pepstock.charba.client.jsinterop.events.AnimationProgressEvent;
 import org.pepstock.charba.client.jsinterop.items.AnimationItem;
 import org.pepstock.charba.client.jsinterop.items.AnimationObject;
-import org.pepstock.charba.client.jsinterop.options.Options;
 import org.pepstock.charba.client.jsinterop.options.Animation.AnimationCompleteCallback;
 import org.pepstock.charba.client.jsinterop.options.Animation.AnimationProgressCallback;
+import org.pepstock.charba.client.jsinterop.options.Options;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;
@@ -39,7 +37,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Animation extends EventProvider {
+public final class Animation extends EventProvider<Options> {
 
 	// amount of handlers
 	private int onCompleteHandlers = 0;
@@ -49,8 +47,6 @@ public final class Animation extends EventProvider {
 	private final AnimationCompleteCallback completeCallback;
 
 	private final AnimationProgressCallback progressCallback;
-	
-	private final InternalAnimation wrapper;
 
 	/**
 	 * Builds the object storing the chart instance.
@@ -59,7 +55,7 @@ public final class Animation extends EventProvider {
 	 */
 	Animation(AbstractChart<?, ?> chart, Options options) {
 		super(chart, options);
-		wrapper = new InternalAnimation(options.getAnimation());
+
 		completeCallback = new AnimationCompleteCallback() {
 
 			/*
@@ -102,7 +98,7 @@ public final class Animation extends EventProvider {
 	 * @see org.pepstock.charba.client.enums.Easing
 	 */
 	public void setEasing(Easing easing) {
-		getOptions().getAnimation().setEasing(easing);
+		getConfiguration().getAnimation().setEasing(easing);
 	}
 
 	/**
@@ -112,7 +108,7 @@ public final class Animation extends EventProvider {
 	 * @see org.pepstock.charba.client.enums.Easing
 	 */
 	public Easing getEasing() {
-		return getOptions().getAnimation().getEasing();
+		return getConfiguration().getAnimation().getEasing();
 	}
 
 	/**
@@ -121,7 +117,7 @@ public final class Animation extends EventProvider {
 	 * @param milliseconds the number of milliseconds an animation takes.
 	 */
 	public void setDuration(int milliseconds) {
-		getOptions().getAnimation().setDuration(milliseconds);
+		getConfiguration().getAnimation().setDuration(milliseconds);
 	}
 
 	/**
@@ -131,7 +127,7 @@ public final class Animation extends EventProvider {
 	 *         {@link org.pepstock.charba.client.GlobalOptions#getAnimation()}.
 	 */
 	public int getDuration() {
-		return getOptions().getAnimation().getDuration();
+		return getConfiguration().getAnimation().getDuration();
 	}
 
 	/**
@@ -140,7 +136,7 @@ public final class Animation extends EventProvider {
 	 * @param animateRotate If true, the chart will animate in with a rotation animation.
 	 */
 	public void setAnimateRotate(boolean animateRotate) {
-		getOptions().getAnimation().setAnimateRotate(animateRotate);
+		getConfiguration().getAnimation().setAnimateRotate(animateRotate);
 	}
 
 	/**
@@ -150,7 +146,7 @@ public final class Animation extends EventProvider {
 	 *         {@link org.pepstock.charba.client.GlobalOptions#getAnimation()}.
 	 */
 	public boolean isAnimateRotate() {
-		return getOptions().getAnimation().isAnimateRotate();
+		return getConfiguration().getAnimation().isAnimateRotate();
 	}
 
 	/**
@@ -159,7 +155,7 @@ public final class Animation extends EventProvider {
 	 * @param animateScale If true, will animate scaling the chart from the center outwards.
 	 */
 	public void setAnimateScale(boolean animateScale) {
-		getOptions().getAnimation().setAnimateScale(animateScale);
+		getConfiguration().getAnimation().setAnimateScale(animateScale);
 	}
 
 	/**
@@ -169,7 +165,7 @@ public final class Animation extends EventProvider {
 	 *         {@link org.pepstock.charba.client.GlobalOptions#getAnimation()}.
 	 */
 	public boolean isAnimateScale() {
-		return getOptions().getAnimation().isAnimateScale();
+		return getConfiguration().getAnimation().isAnimateScale();
 	}
 
 	/*
@@ -184,9 +180,7 @@ public final class Animation extends EventProvider {
 			// checks if property exist
 			if (onCompleteHandlers == 0) {
 				// sets the java script code to get the event
-				CallbackProxy<AnimationCompleteCallback> cp = JsFactory.newCallbackProxy();
-				cp.setCallback(completeCallback);
-				wrapper.setOnComplete(cp);
+				getConfiguration().getAnimation().setOnComplete(completeCallback);
 			}
 			// increments amount of handlers
 			onCompleteHandlers++;
@@ -194,9 +188,7 @@ public final class Animation extends EventProvider {
 			// checks if property exist
 			if (onProgressHandlers == 0) {
 				// sets the java script code to get the event
-				CallbackProxy<AnimationProgressCallback> cp = JsFactory.newCallbackProxy();
-				cp.setCallback(progressCallback);
-				wrapper.setOnProgress(cp);
+				getConfiguration().getAnimation().setOnProgress(progressCallback);
 			}
 			// increments amount of handlers
 			onProgressHandlers++;
@@ -217,7 +209,7 @@ public final class Animation extends EventProvider {
 			// if zero, no handler
 			if (onCompleteHandlers == 0) {
 				// therefore remove property
-				wrapper.removeOnComplete();
+				getConfiguration().getAnimation().setOnComplete(null);
 			}
 		} else if (type.equals(AnimationProgressEvent.TYPE)) {
 			// decrements amount of handlers
@@ -226,7 +218,7 @@ public final class Animation extends EventProvider {
 			if (onProgressHandlers == 0) {
 				// therefore remove property
 				// therefore remove property
-				wrapper.removeOnProgress();
+				getConfiguration().getAnimation().setOnProgress(null);
 			}
 		}
 	}
@@ -236,7 +228,7 @@ public final class Animation extends EventProvider {
 	 * 
 	 * @param item animation item info.
 	 */
-	protected void onProgress(AnimationItem item) {
+	private void onProgress(AnimationItem item) {
 		// creates a native event by GWT (change)
 		NativeEvent event = Document.get().createChangeEvent();
 		// fires the event
@@ -248,53 +240,10 @@ public final class Animation extends EventProvider {
 	 * 
 	 * @param item animation item info.
 	 */
-	protected void onComplete(AnimationItem item) {
+	private void onComplete(AnimationItem item) {
 		// creates a native event by GWT (change)
 		NativeEvent event = Document.get().createChangeEvent();
 		// fires the event
 		getChart().fireEvent(new AnimationCompleteEvent(event, item));
-	}
-	
-	private class InternalAnimation extends org.pepstock.charba.client.jsinterop.options.Animation{
-
-		/**
-		 * @param wrapper
-		 */
-		InternalAnimation(org.pepstock.charba.client.jsinterop.options.Animation wrapper) {
-			super(wrapper);
-		}
-
-		/* (non-Javadoc)
-		 * @see org.pepstock.charba.client.jsinterop.options.Animation#removeOnComplete()
-		 */
-		@Override
-		protected void removeOnComplete() {
-			super.removeOnComplete();
-		}
-
-		/* (non-Javadoc)
-		 * @see org.pepstock.charba.client.jsinterop.options.Animation#removeOnProgress()
-		 */
-		@Override
-		protected void removeOnProgress() {
-			super.removeOnProgress();
-		}
-
-		/* (non-Javadoc)
-		 * @see org.pepstock.charba.client.jsinterop.options.Animation#setOnComplete(org.pepstock.charba.client.jsinterop.commons.CallbackProxy)
-		 */
-		@Override
-		protected void setOnComplete(CallbackProxy<AnimationCompleteCallback> callbackProxy) {
-			super.setOnComplete(callbackProxy);
-		}
-
-		/* (non-Javadoc)
-		 * @see org.pepstock.charba.client.jsinterop.options.Animation#setOnProgress(org.pepstock.charba.client.jsinterop.commons.CallbackProxy)
-		 */
-		@Override
-		protected void setOnProgress(CallbackProxy<AnimationProgressCallback> callbackProxy) {
-			super.setOnProgress(callbackProxy);
-		}
-		
 	}
 }

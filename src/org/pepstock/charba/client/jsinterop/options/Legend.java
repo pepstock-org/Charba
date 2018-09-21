@@ -30,7 +30,7 @@ public class Legend extends BaseModel<Options, IsDefaultLegend, NativeLegend> {
 	private LegendLabels labels;
 	
 	Legend(Options options, IsDefaultLegend defaultValues, NativeLegend delegated) {
-		super(options, defaultValues, delegated == null ? new NativeLegend() : delegated);
+		super(options, defaultValues, delegated == null ? new NativeLegend() : delegated, delegated == null);
 		labels = new LegendLabels(this, getDefaultValues().getLabels(), getDelegated().getLabels());
 	}
 

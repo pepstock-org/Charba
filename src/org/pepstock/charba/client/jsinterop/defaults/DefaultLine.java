@@ -3,7 +3,6 @@ package org.pepstock.charba.client.jsinterop.defaults;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.JoinStyle;
-import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 
 public final class DefaultLine extends DefaultArc implements IsDefaultLine{
 	
@@ -22,8 +21,6 @@ public final class DefaultLine extends DefaultArc implements IsDefaultLine{
 	
 	private static final boolean DEFAULT_STEPPED = false;
 	
-	private static final ArrayInteger DEFAULT_DORDER_DASH = new ArrayInteger();
-
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBackgroundColor()
 	 */
@@ -62,14 +59,6 @@ public final class DefaultLine extends DefaultArc implements IsDefaultLine{
 	@Override
 	public String getBorderCapStyle() {
 		return CapStyle.butt.name();
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.elements.line.IsDefaultLine#getBorderDash()
-	 */
-	@Override
-	public ArrayInteger getBorderDash() {
-		return DEFAULT_DORDER_DASH;
 	}
 
 	/* (non-Javadoc)

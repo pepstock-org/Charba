@@ -1,7 +1,5 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
-import org.pepstock.charba.client.jsinterop.commons.ArrayString;
-
 public interface IsDefaultOptions {
 	
 	IsDefaultScale getScale();
@@ -27,8 +25,6 @@ public interface IsDefaultOptions {
 	IsDefaultRectangle getRectangle();
 	
 	boolean isResponsive();
-	
-	ArrayString getEvents();
 
 	/**
 	 * Returns the duration in milliseconds it takes to animate to new size after a resize event.

@@ -40,7 +40,13 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-final class NativeScale extends NativeObject {
+public final class NativeScale extends NativeObject {
+
+	@JsProperty
+	native NativeTime getTime();
+
+	@JsProperty
+	native void setTime(NativeTime time);
 
 	@JsProperty
 	native NativeTicks getTicks();
@@ -75,14 +81,7 @@ final class NativeScale extends NativeObject {
 
 	@JsProperty
 	native void setAngleLines(NativeAngleLines angleLines);
-
-//	/**
-//	 * @return the pointLabels
-//	 * @see PointLabels
-//	 */
-//	@JsProperty
-//	native PointLabels getPointLabels();
-
+	
 	/**
 	 * The ID is used to link datasets and scale axes together.<br>
 	 * This is especially needed if multi-axes charts are used.
@@ -274,5 +273,39 @@ final class NativeScale extends NativeObject {
 	 */
 	@JsProperty
 	native int getMaxBarThickness();
+	
+	/**
+	 * Sets property controls the data distribution along the scale.
+	 * 
+	 * @param distribution property controls the data distribution along the scale.
+	 */
+	@JsProperty
+	native void setDistribution(String distribution);
+
+	/**
+	 * Returns the property controls the data distribution along the scale.
+	 * 
+	 * @return property controls the data distribution along the scale.
+	 */
+	@JsProperty
+	native String getDistribution();
+	
+	/**
+	 * Sets the property controls the scale boundary strategy (bypassed by min/max time options).
+	 * 
+	 * @param bounds property controls the scale boundary strategy (bypassed by min/max time options).
+	 */
+	@JsProperty
+	native void setBounds(String bounds);
+
+	/**
+	 * Returns the property controls the scale boundary strategy (bypassed by min/max time options).
+	 * 
+	 * @return property controls the scale boundary strategy (bypassed by min/max time options).
+	 */
+	@JsProperty
+	native String getBounds();
+	
+	
 
 }

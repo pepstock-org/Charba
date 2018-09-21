@@ -1,9 +1,6 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
-import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.FontStyle;
-import org.pepstock.charba.client.jsinterop.commons.ArrayString;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
 import org.pepstock.charba.client.jsinterop.utils.Window;
 
 public final class DefaultOptions implements IsDefaultOptions{
@@ -163,14 +160,6 @@ public final class DefaultOptions implements IsDefaultOptions{
 	@Override
 	public boolean isResponsive() {
 		return DEFAULT_RESPONSIVE;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.DefaultOptions#getEvents()
-	 */
-	@Override
-	public ArrayString getEvents() {
-		return AssignHelper.serialize(Event.values());
 	}
 
 	/* (non-Javadoc)

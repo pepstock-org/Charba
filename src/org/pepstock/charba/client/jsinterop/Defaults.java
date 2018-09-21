@@ -13,7 +13,7 @@ import jsinterop.annotations.JsType;
 public final class Defaults extends NativeObject {
 
 	@JsProperty
-	native NativeOptions getGlobal();
+	public native NativeOptions getGlobal();
 	
 	@JsOverlay
 	public Global global() {

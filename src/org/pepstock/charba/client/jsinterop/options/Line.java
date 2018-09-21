@@ -118,7 +118,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 *         lines and gaps which describe the pattern.
 	 */
 	public List<Integer> getBorderDash() {
-		return ArrayListHelper.build(AssignHelper.check(getDelegated().getBorderDash(), getDefaultValues().getBorderDash()));
+		return ArrayListHelper.build(getDelegated().getBorderDash());
 	}
 
 	/**

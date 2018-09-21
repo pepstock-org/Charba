@@ -1,7 +1,5 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
-import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
-
 public final class DefaultGridLines implements IsDefaultGridLines{
 	
 	private static final boolean DEFAULT_DISPLAY = true;
@@ -42,14 +40,6 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 	@Override
 	public String getColor() {
 		return DEFAULT_COLOR;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getBorderDash()
-	 */
-	@Override
-	public ArrayInteger getBorderDash() {
-		return new ArrayInteger();
 	}
 
 	/* (non-Javadoc)
@@ -114,14 +104,6 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 	@Override
 	public String getZeroLineColor() {
 		return DEFAULT_ZERO_LINE_COLOR;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getZeroLineBorderDash()
-	 */
-	@Override
-	public ArrayInteger getZeroLineBorderDash() {
-		return new ArrayInteger();
 	}
 
 	/* (non-Javadoc)

@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import org.pepstock.charba.client.jsinterop.commons.ArrayString;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -39,6 +41,12 @@ final class NativeTicks extends NativeFontItem {
 
 	@JsProperty 
 	native NativeTickItem getMajor();
+	
+	@JsProperty
+	native ArrayString getLabels();
+
+	@JsProperty
+	native void setLabels(ArrayString labels);
 
 	/**
 	 * If true, scale will include 0 if it is not already included.
@@ -259,6 +267,38 @@ final class NativeTicks extends NativeFontItem {
 	native double getMax();
 
 	/**
+	 * Sets the user defined minimum number for the scale, overrides minimum value from data.
+	 * 
+	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
+	 */
+	@JsProperty
+	native void setMin(String min);
+
+	/**
+	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
+	 * 
+	 * @return the user defined minimum number for the scale, overrides minimum value from data. Default is Double.MIN_VALUE.
+	 */
+	@JsProperty
+	native String getMinAsString();
+
+	/**
+	 * Sets the user defined maximum number for the scale, overrides maximum value from data.
+	 * 
+	 * @param max user defined maximum number for the scale, overrides maximum value from data.
+	 */
+	@JsProperty
+	native void setMax(String max);
+
+	/**
+	 * Returns the user defined maximum number for the scale, overrides maximum value from data.
+	 * 
+	 * @return user defined maximum number for the scale, overrides maximum value from data. Default is Double.MAX_VALUE.
+	 */
+	@JsProperty
+	native String getMaxAsString();
+	
+	/**
 	 * Sets the maximum number of ticks and gridlines to show.
 	 * 
 	 * @param maxTicksLimit maximum number of ticks and gridlines to show.
@@ -385,4 +425,20 @@ final class NativeTicks extends NativeFontItem {
 	 */
 	@JsProperty
 	native boolean isShowLabelBackdrop();
+	
+	/**
+	 * Sets the property controls the ticks generation.
+	 * 
+	 * @param source property controls the ticks generation.
+	 */
+	@JsProperty
+	native void setSource(String source);
+
+	/**
+	 * Returns the property controls the ticks generation.
+	 * 
+	 * @return property controls the ticks generation.
+	 */
+	@JsProperty
+	native String getSource();
 }

@@ -29,7 +29,7 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
 public class ArrayInteger {
-	
+
 	public static native ArrayInteger of(int... items);
 
 	@JsProperty(name = "length")

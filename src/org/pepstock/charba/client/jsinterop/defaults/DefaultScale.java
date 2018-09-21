@@ -2,6 +2,8 @@ package org.pepstock.charba.client.jsinterop.defaults;
 
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.enums.ScaleBounds;
+import org.pepstock.charba.client.enums.ScaleDistribution;
 
 public final class DefaultScale implements IsDefaultScale{
 
@@ -31,6 +33,8 @@ public final class DefaultScale implements IsDefaultScale{
 	private final DefaultScaleLabel scaleLabel = new DefaultScaleLabel();
 	
 	private final DefaultTicks ticks = new DefaultTicks();
+	
+	private final DefaultTime time = new DefaultTime();
 
 
 	/* (non-Javadoc)
@@ -72,6 +76,14 @@ public final class DefaultScale implements IsDefaultScale{
 	@Override
 	public IsDefaultTicks getTicks() {
 		return ticks;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getTime()
+	 */
+	@Override
+	public IsDefaultTime getTime() {
+		return time;
 	}
 
 	/* (non-Javadoc)
@@ -152,6 +164,22 @@ public final class DefaultScale implements IsDefaultScale{
 	@Override
 	public int getMaxBarThickness() {
 		return DEFAULT_MAX_BAR_THICKNESS;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getDistribution()
+	 */
+	@Override
+	public String getDistribution() {
+		return ScaleDistribution.linear.name();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getBounds()
+	 */
+	@Override
+	public String getBounds() {
+		return ScaleBounds.data.name();
 	}
 	
 }

@@ -1,5 +1,7 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
+import org.pepstock.charba.client.enums.TickSource;
+
 public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTicks {
 	
 	private static final boolean DEFAULT_DISPLAY = true;
@@ -220,6 +222,14 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 	@Override
 	public boolean isShowLabelBackdrop() {
 		return DEFAULT_SHOW_LABEL_BACKDROP;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getSource()
+	 */
+	@Override
+	public String getSource() {
+		return TickSource.auto.name();
 	}
 	
 }
