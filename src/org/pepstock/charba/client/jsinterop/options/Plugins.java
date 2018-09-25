@@ -26,9 +26,9 @@ import org.pepstock.charba.client.plugins.PluginIdChecker;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Plugins extends BaseModel<Options, Void, NativePlugins> {
+public final class Plugins extends BaseModel<BaseOptions<?,?>, Void, NativePlugins> {
 
-	Plugins(Options options, NativePlugins delegated) {
+	Plugins(BaseOptions<?,?> options, NativePlugins delegated) {
 		super(options, null, delegated == null ? new NativePlugins() : delegated);
 	}
 

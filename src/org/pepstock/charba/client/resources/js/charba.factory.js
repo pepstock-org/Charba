@@ -13,6 +13,7 @@
     	obj.callback = null;
     	obj.proxy = function() {
         	if (obj.callback != null && typeof obj.callback === 'function'){
+        	    //console.log(this);
 				var args = Array.of(this).concat(Array.prototype.slice.call(arguments));
 				var result = obj.callback.apply(this, args);
 				if (result === null){

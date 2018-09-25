@@ -6,11 +6,34 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 @JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
-public class ArrayObject<T extends NativeObject> {
+public final class ArrayObject<T extends NativeObject> {
 	
 	public static native <T extends NativeObject> ArrayObject<T> of(T[] objects);
 
 	public static native <T extends NativeObject> boolean isArray(T object);
+	
+	/**
+	 * FIXME
+	 * Creates a JavaScript array list of strings.
+	 * @param values array of elements to load when the list is creating.
+	 * @return a array list of strings instance or <code>null</code> if the elements are null.
+	 * @see org.pepstock.charba.client.commons.JsStringArrayList
+	 */
+	@JsOverlay
+	public static <E extends NativeObjectContainer<O>, O extends NativeObject> ArrayObject<O> of(E[] values){
+		// creates the list
+		ArrayObject<O> result = new ArrayObject<>();
+		// checks if array is null
+		if (values == null){
+			return result;
+		}
+		for (E value : values) {
+			// adds all elements
+			result.push(value.getNativeObject());
+		}
+		// returns the list
+		return result;
+	}
 
 	@JsProperty(name = "length")
 	public native int length();
@@ -23,7 +46,7 @@ public class ArrayObject<T extends NativeObject> {
 	 * @return the index of the last occurrence of the specified element in this object, or -1 if this object does not contain
 	 *         the element
 	 */
-	public native int lastIndexOf(Object value);
+	native int lastIndexOf(Object value);
 
 	/**
 	 * Returns the index of the first occurrence of the specified element in this object, or -1 if this object does not contain
@@ -33,21 +56,21 @@ public class ArrayObject<T extends NativeObject> {
 	 * @return the index of the first occurrence of the specified element in this object, or -1 if this object does not contain
 	 *         the element
 	 */
-	public native int indexOf(Object value);
+	native int indexOf(Object value);
 
-	public native ArrayObject<T> slice(int start, int end);
+	native ArrayObject<T> slice(int start, int end);
 	
-	public native ArrayObject<T> splice(int start);
+	native ArrayObject<T> splice(int start);
 
-	public native ArrayObject<T> splice(int start, int deleteCounts);
+	native ArrayObject<T> splice(int start, int deleteCounts);
 
-	public native ArrayObject<T> splice(int start, int deleteCounts, T item);
+	native ArrayObject<T> splice(int start, int deleteCounts, T item);
 
 	/**
 	 * Removes all of the elements from this object. The object will be empty after this call returns.
 	 */
 	@JsOverlay
-	public final void clear() {
+	void clear() {
 		splice(0, length());
 	};
 
@@ -59,7 +82,7 @@ public class ArrayObject<T extends NativeObject> {
 	 * @return the element previously at the specified position
 	 */
 	@JsOverlay
-	public final T remove(int index) {
+	T remove(int index) {
 		return splice(index, 1).get(0);
 	}
 
@@ -71,7 +94,7 @@ public class ArrayObject<T extends NativeObject> {
 	 * @param value element to be inserted
 	 */
 	@JsOverlay
-	public final void insertAt(int index, T item) {
+	void insertAt(int index, T item) {
 		splice(index, 0, item);
 	};
 
@@ -86,24 +109,24 @@ public class ArrayObject<T extends NativeObject> {
 	 * @return the value at the given index
 	 */
 	@JsOverlay
-	public final T get(int index) {
+	public T get(int index) {
 		return slice(index, index+1).pop();
 	}
 
 	/**
 	 * Pushes the given integer onto the end of the array.
 	 */
-	public native void fill(T item, int start, int end);
+	native void fill(T item, int start, int end);
 
 	/**
 	 * Pushes the given integer onto the end of the array.
 	 */
-	public native void push(T item);
+	native void push(T item);
 	
 	/**
 	 * Pushes the given integer onto the end of the array.
 	 */
-	public native T pop();
+	native T pop();
 
 	/**
 	 * Sets the value value at a given index.
@@ -115,7 +138,7 @@ public class ArrayObject<T extends NativeObject> {
 	 * @param value the value to be stored
 	 */
 	@JsOverlay
-	public final void set(int index, T item){
+	void set(int index, T item){
 		fill(item, index, index+1);
 	}
 

@@ -15,8 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
 
 /**
  * Extends a JavaScript object container for all entities which needs the chart instance.<br>
@@ -25,21 +24,18 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer
  */
-public abstract class ChartContainer<T extends NativeObjectContainer<?>>{
+public abstract class ChartContainer{
 
 	// chart instance
 	private final AbstractChart<?, ?> chart;
 	
-	private final T configuration;
-	
 	/**
 	 * Creates the chart configuration object with the chart instance
 	 * @param chart chart instance
-	 * @see org.pepstock.charba.client.AbstractChart
+	 * @see org.pepstock.charba.client.jsinterop.AbstractChart
 	 */
-	public ChartContainer(AbstractChart<?, ?> chart, T configuration) {
+	public ChartContainer(AbstractChart<?, ?> chart) {
 		this.chart = chart;
-		this.configuration = configuration;
 	}
 
 	/**
@@ -48,12 +44,4 @@ public abstract class ChartContainer<T extends NativeObjectContainer<?>>{
 	public final AbstractChart<?, ?> getChart() {
 		return chart;
 	}
-
-	/**
-	 * @return the options
-	 */
-	protected final T getConfiguration() {
-		return configuration;
-	}
-
 }

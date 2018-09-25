@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.commons;
 
+import java.util.List;
+
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -28,9 +30,25 @@ import jsinterop.annotations.JsType;
  * @see com.google.gwt.core.client.JsArrayNumber
  */
 @JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
-public class ArrayDouble {
+public final class ArrayDouble {
 	
 	public static native ArrayDouble of(double... items);
+	
+	@JsOverlay
+	public static ArrayDouble of(List<Double> items) {
+		// creates the list
+		ArrayDouble result = new ArrayDouble();
+		// checks if array is null
+		if (items == null){
+			return result;
+		}
+		for (Double value : items) {
+			// adds all elements
+			result.push(value.doubleValue());
+		}
+		// returns the list
+		return result;
+	}
 
 	@JsProperty(name = "length")
 	public native int length();
@@ -43,7 +61,7 @@ public class ArrayDouble {
 	 * @return the index of the last occurrence of the specified element in this object, or -1 if this object does not contain
 	 *         the element
 	 */
-	public native int lastIndexOf(double value);
+	native int lastIndexOf(double value);
 
 	/**
 	 * Returns the index of the first occurrence of the specified element in this object, or -1 if this object does not contain
@@ -53,21 +71,21 @@ public class ArrayDouble {
 	 * @return the index of the first occurrence of the specified element in this object, or -1 if this object does not contain
 	 *         the element
 	 */
-	public native int indexOf(double value);
+	native int indexOf(double value);
 
-	public native ArrayDouble slice(int start, int end);
+	native ArrayDouble slice(int start, int end);
 	
-	public native ArrayDouble splice(int start);
+	native ArrayDouble splice(int start);
 
-	public native ArrayDouble splice(int start, int deleteCounts);
+	native ArrayDouble splice(int start, int deleteCounts);
 
-	public native ArrayDouble splice(int start, int deleteCounts, double item);
+	native ArrayDouble splice(int start, int deleteCounts, double item);
 
 	/**
 	 * Removes all of the elements from this object. The object will be empty after this call returns.
 	 */
 	@JsOverlay
-	public final void clear() {
+	void clear() {
 		splice(0, length());
 	};
 
@@ -79,7 +97,7 @@ public class ArrayDouble {
 	 * @return the element previously at the specified position
 	 */
 	@JsOverlay
-	public final double remove(int index) {
+	double remove(int index) {
 		return splice(index, 1).get(0);
 	}
 
@@ -91,7 +109,7 @@ public class ArrayDouble {
 	 * @param value element to be inserted
 	 */
 	@JsOverlay
-	public final void insertAt(int index, double item) {
+	void insertAt(int index, double item) {
 		splice(index, 0, item);
 	};
 
@@ -106,24 +124,24 @@ public class ArrayDouble {
 	 * @return the value at the given index
 	 */
 	@JsOverlay
-	public final double get(int index) {
+	public double get(int index) {
 		return slice(index, index+1).pop();
 	}
 
 	/**
 	 * Pushes the given integer onto the end of the array.
 	 */
-	public native void fill(double item, int start, int end);
+	native void fill(double item, int start, int end);
 
 	/**
 	 * Pushes the given integer onto the end of the array.
 	 */
-	public native void push(double item);
+	native void push(double item);
 	
 	/**
 	 * Pushes the given integer onto the end of the array.
 	 */
-	public native double pop();
+	native double pop();
 
 	/**
 	 * Sets the value value at a given index.
@@ -135,7 +153,7 @@ public class ArrayDouble {
 	 * @param value the value to be stored
 	 */
 	@JsOverlay
-	public final void set(int index, double item){
+	void set(int index, double item){
 		fill(item, index, index+1);
 	}
 

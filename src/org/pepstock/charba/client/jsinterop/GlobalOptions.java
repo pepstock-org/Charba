@@ -4,9 +4,9 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.jsinterop.options.NativeOptions;
 import org.pepstock.charba.client.jsinterop.options.Options;
 
-public final class Global extends Options{
+public final class GlobalOptions extends Options{
 	
-	Global(IsDefaultOptions defaultValues, NativeOptions nativeObject) {
+	GlobalOptions(IsDefaultOptions defaultValues, NativeOptions nativeObject) {
 		super(defaultValues, nativeObject);
 	}	
 }

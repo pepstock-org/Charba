@@ -520,7 +520,6 @@ public abstract class BaseOptions extends EventProvider {
 	private native void registerNativeClickHandler(GenericJavaScriptObject options)/*-{
 		var self = this;
 		options.onClick = function(event, objects) {
-		console.log(objects);
 			var items = this.getElementAtEvent(event);
 			// if there is only 1 item, calls the method with only 1 dataset item
 			if (items.length == 0){

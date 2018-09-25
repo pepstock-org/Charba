@@ -15,12 +15,13 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration.scales;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.jsinterop.configuration.ChartContainer;
-import org.pepstock.charba.client.jsinterop.options.Options;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.configuration.ConfigurationContainer;
+import org.pepstock.charba.client.jsinterop.options.EventableOptions;
 import org.pepstock.charba.client.jsinterop.options.Scale;
 
 /**
@@ -29,7 +30,7 @@ import org.pepstock.charba.client.jsinterop.options.Scale;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Scales extends ChartContainer<Options> {
+public class Scales extends ConfigurationContainer<EventableOptions> {
 
 	// buffer to maintain axes
 	private final List<Axis> yAxes = new LinkedList<>();
@@ -41,7 +42,7 @@ public class Scales extends ChartContainer<Options> {
 	 * 
 	 * @param chart chart instance
 	 */
-	public Scales(AbstractChart<?, ?> chart, Options options) {
+	public Scales(AbstractChart<?, ?> chart, EventableOptions options) {
 		super(chart, options);
 	}
 
@@ -66,7 +67,7 @@ public class Scales extends ChartContainer<Options> {
 	 * @return the xAxes
 	 */
 	public List<Axis> getXAxes() {
-		return xAxes.isEmpty() ? null : xAxes;
+		return xAxes.isEmpty() ? null : Collections.unmodifiableList(xAxes);
 	}
 
 	/**
@@ -90,7 +91,7 @@ public class Scales extends ChartContainer<Options> {
 	 * @return the yAxes
 	 */
 	public List<Axis> getYAxes() {
-		return yAxes.isEmpty() ? null : yAxes;
+		return yAxes.isEmpty() ? null : Collections.unmodifiableList(yAxes);
 	}
 
 }

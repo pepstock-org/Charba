@@ -23,11 +23,11 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Layout extends BaseModel<Options, IsDefaultOptions, NativeLayout> {
+public class Layout extends BaseModel<BaseOptions<?,?>, IsDefaultOptions, NativeLayout> {
 
 	private final Padding padding;
 	
-	Layout(Options options, IsDefaultOptions defaultOptions, NativeLayout delegated) {
+	Layout(BaseOptions<?,?> options, IsDefaultOptions defaultOptions, NativeLayout delegated) {
 		super(options, defaultOptions, delegated == null ? new NativeLayout() : delegated);
 		padding = new Padding(this, defaultOptions.getPadding(), getDelegated().getPadding());
 	}

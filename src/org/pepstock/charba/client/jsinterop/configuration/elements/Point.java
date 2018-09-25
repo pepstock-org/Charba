@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.jsinterop.configuration.elements;
 
 import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.jsinterop.options.Options;
+import org.pepstock.charba.client.jsinterop.options.EventableOptions;
 
 /**
  * Point elements are used to represent the points in a line chart or a bubble chart.
@@ -32,7 +32,7 @@ public final class Point extends BaseElement {
 	 * 
 	 * @param chart chart instance
 	 */
-	public Point(Options options) {
+	public Point(EventableOptions options) {
 		super(options, options.getElements().getPoint());
 	}
 

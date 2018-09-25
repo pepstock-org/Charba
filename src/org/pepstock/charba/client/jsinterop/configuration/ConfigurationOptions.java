@@ -17,27 +17,31 @@ package org.pepstock.charba.client.jsinterop.configuration;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.enums.Event;
-import org.pepstock.charba.client.events.DatasetSelectionEvent;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.callbacks.LegendCallback;
+import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.jsinterop.events.ChartClickEvent;
 import org.pepstock.charba.client.jsinterop.events.ChartHoverEvent;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
 import org.pepstock.charba.client.jsinterop.events.ChartResizeEvent;
+import org.pepstock.charba.client.jsinterop.events.DatasetSelectionEvent;
 import org.pepstock.charba.client.jsinterop.items.DatasetItem;
 import org.pepstock.charba.client.jsinterop.items.SizeItem;
-import org.pepstock.charba.client.jsinterop.options.Options;
-import org.pepstock.charba.client.jsinterop.options.Options.ChartClickCallback;
-import org.pepstock.charba.client.jsinterop.options.Options.ChartHoverCallback;
-import org.pepstock.charba.client.jsinterop.options.Options.ChartResizeCallback;
+import org.pepstock.charba.client.jsinterop.options.BaseOptions.GenerateLegendCallback;
+import org.pepstock.charba.client.jsinterop.options.EventableOptions;
+import org.pepstock.charba.client.jsinterop.options.EventableOptions.ChartClickCallback;
+import org.pepstock.charba.client.jsinterop.options.EventableOptions.ChartHoverCallback;
+import org.pepstock.charba.client.jsinterop.options.EventableOptions.ChartResizeCallback;
+import org.pepstock.charba.client.jsinterop.options.NativeOptions;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 
 /**
  * Base object which maps chart getConfiguration().<br>Charba stores the unique chart ID into CHART.JS chart options using <code>charbaId</code> property key.<br>
@@ -57,7 +61,8 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class BaseOptions extends EventProvider<Options> {
+public abstract class ConfigurationOptions extends EventProvider<EventableOptions> {
+	
 	// legend error
 	private static final String LEGEND_CALLBACK_ERROR = "Unable to execute LegendCallback";
 	
@@ -66,7 +71,7 @@ public abstract class BaseOptions extends EventProvider<Options> {
 	private final Legend legend;
 
 	private final Title title;
-//
+
 	private final Tooltips tooltips;
 
 	private final Hover hover;
@@ -76,15 +81,16 @@ public abstract class BaseOptions extends EventProvider<Options> {
 	private final Elements elements;
 	
 	private final Plugins plugins;
-//	
-//	private LegendCallback legendCallBack = null;
 
-	
 	private final ChartClickCallback clickCallback;
 	
 	private final ChartResizeCallback resizeCallback;
 	
 	private final ChartHoverCallback hoverCallback;
+	
+	private final GenerateLegendCallback generateLegendCallback;
+	
+	private LegendCallback legendCallback = null;
 	
 	// amount of click event handlers
 	private int onClickHandlers = 0;
@@ -99,30 +105,8 @@ public abstract class BaseOptions extends EventProvider<Options> {
 	 * 
 	 * @param chart chart instance
 	 */
-	protected BaseOptions(AbstractChart<?, ?> chart, IsDefaultOptions defaultValues) {
-		super(chart, new Options(defaultValues));
-		clickCallback = new ChartClickCallback() {
-
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.Options.ChartClickCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.commons.Array)
-			 */
-			@Override
-			public void call(Object context, ChartNativeEvent event, ArrayObject<DatasetItem> items) {
-			}
-			
-		};
-		resizeCallback = new ChartResizeCallback() {
-
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.Options.ChartResizeCallback#call(java.lang.Object, java.lang.Object, org.pepstock.charba.client.jsinterop.items.SizeItem)
-			 */
-			@Override
-			public void call(Object context, Object chart, SizeItem size) {
-				onResize(size);
-			}
-
-		};
-		hoverCallback = null;
+	protected ConfigurationOptions(AbstractChart<?, ?> chart, IsDefaultOptions defaultValues) {
+		super(chart, new EventableOptions(defaultValues));
 		animation = new Animation(chart, getConfiguration());
 		elements = new Elements(getConfiguration());
 		legend = new Legend(chart, getConfiguration());
@@ -131,6 +115,136 @@ public abstract class BaseOptions extends EventProvider<Options> {
 		hover = new Hover(getConfiguration());
 		plugins = new Plugins(getConfiguration());
 		tooltips = new Tooltips(chart, getConfiguration());
+		// sets charba ID
+		getConfiguration().setCharbaId(chart.getId());
+		// callbacks
+		generateLegendCallback = new GenerateLegendCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.EventableOptions.GenerateLegendCallback#call(java.lang.Object)
+			 */
+			@Override
+			public String call(Object context) {
+				// checks if legend callback is set
+				if (legendCallback != null) {
+					// creates the safe html to be sure about the right HTML to send back
+					SafeHtmlBuilder builder = new SafeHtmlBuilder();
+					// calls callback
+					legendCallback.generateLegend(getChart(), builder);
+					// returns safe html
+					return builder.toSafeHtml().asString();
+				}
+				return LEGEND_CALLBACK_ERROR;
+			}
+			
+		};
+		// events
+		clickCallback = new ChartClickCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.EventableOptions.ChartClickCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 */
+			@Override
+			public void call(Object context, ChartNativeEvent event, ArrayObject<DatasetItem> items) {
+				if (items.length() == 0) {
+					//FIXME context = chart
+				} else if (items.length() == 1) {
+					getChart().fireEvent(new DatasetSelectionEvent(event, items.get(0)));
+					getChart().fireEvent(new ChartClickEvent(event, items.get(0)));
+				} else {
+					getChart().fireEvent(new ChartClickEvent(event, ArrayListHelper.build(items)));
+				}
+			}
+//			/**
+//			 * Called if the event is of type 'mouseup' or 'click'. Called in the context of the chart and passed the event and an
+//			 * active element.
+//			 * 
+//			 * @param event event generated by chart.
+//			 * @param object java script object dataset meta data.
+//			 */
+//			protected void onItemClick(ChartNativeEvent event, GenericJavaScriptObject object) {
+////				DatasetItem item = new DatasetItem(object);
+////				getChart().fireEvent(new DatasetSelectionEvent(event, item));
+////				getChart().fireEvent(new ChartClickEvent(event, item));
+//			}
+			
+			
+			
+//			var self = this;
+//			options.onClick = function(event, objects) {
+//				var items = this.getElementAtEvent(event);
+//				// if there is only 1 item, calls the method with only 1 dataset item
+//				if (items.length == 0){
+//					// check if the event is on legend
+//					var isInLegend = event.layerX > this.legend.left && event.layerX < this.legend.right && event.layerY > this.legend.top && event.layerY < this.legend.bottom && this.legend.options.display;
+//					if (isInLegend && this.legend.legendHitBoxes.length > 0){
+//						// checks which legend item is affected
+//						for (var i = 0; i < this.legend.legendHitBoxes.length; i++){
+//							var item = this.legend.legendHitBoxes[i];
+//							var isInLegendItem = event.layerX > item.left && event.layerX < (item.width + item.left) && event.layerY > this.legend.top && event.layerY < (item.height + item.top);
+//							if (isInLegendItem && this.chart.legend.options.onClick != null){
+//								this.chart.legend.options.onClick.call(this, event, this.legend.legendItems[i]);
+//							}
+//						}
+//					}
+//				} else if (items.length == 1){
+//					self.@org.pepstock.charba.client.options.BaseOptions::onItemClick(Lorg/pepstock/charba/client/events/ChartNativeEvent;Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(event, items[0]);
+//				} else {
+//					// stores the array into a wrapper object
+//					var myItems = new Object();
+//		    		myItems.data = objects;
+//					self.@org.pepstock.charba.client.options.BaseOptions::onClick(Lorg/pepstock/charba/client/events/ChartNativeEvent;Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(event, myItems);
+//				}
+//			}
+
+
+		};
+		resizeCallback = new ChartResizeCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.EventableOptions.ChartResizeCallback#call(java.lang.Object, java.lang.Object, org.pepstock.charba.client.jsinterop.items.SizeItem)
+			 */
+			@Override
+			public void call(Object context, Object chart, SizeItem size) {
+				NativeEvent event = Document.get().createChangeEvent();
+				getChart().fireEvent(new ChartResizeEvent(event, size));
+			}
+			
+		};
+		hoverCallback = new ChartHoverCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.EventableOptions.ChartHoverCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 */
+			@Override
+			public void call(Object context, ChartNativeEvent event, ArrayObject<DatasetItem> items) {
+				getChart().fireEvent(new ChartHoverEvent(event, ArrayListHelper.build(items)));
+			}
+			// FIXME
+//			var self = this;
+//			options.onHover = function(event, objects) {
+//				// stores the array into a wrapper object
+//				var myItems = new Object();
+//				myItems.items = objects;
+//				if (myItems.items.length == 0){
+//					// check if the event is on legend
+//					var isInLegend = event.layerX > this.legend.left && event.layerX < this.legend.right && event.layerY > this.legend.top && event.layerY < this.legend.bottom && this.legend.options.display;
+//					if (isInLegend && this.legend.legendHitBoxes.length > 0){
+//						// checks which legend item is affected
+//						for (var i = 0; i < this.legend.legendHitBoxes.length; i++){
+//							var item = this.legend.legendHitBoxes[i];
+//							var isInLegendItem = event.layerX > item.left && event.layerX < (item.width + item.left) && event.layerY > this.legend.top && event.layerY < (item.height + item.top);
+//							if (isInLegendItem && this.chart.legend.options.onHover != null){
+//								this.chart.legend.options.onHover.call(this, event, this.legend.legendItems[i]);
+//							}
+//						}
+//					}
+//				} else {
+//					self.@org.pepstock.charba.client.options.BaseOptions::onHover(Lorg/pepstock/charba/client/events/ChartNativeEvent;Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(event, myItems);
+//				}
+//			}
+			
+		};	
 	}
 
 	/**
@@ -347,163 +461,28 @@ public abstract class BaseOptions extends EventProvider<Options> {
 			}
 		}
 	}
-
-	/**
-	 * Called when any of the events fire. Called in the context of the chart and passed the event and an array of active
-	 * elements (bars, points, etc).
-	 * 
-	 * @param event event generated by chart.
-	 * @param metadata dataset meta data.
-	 */
-	protected void onHover(ChartNativeEvent event, GenericJavaScriptObject metadata) {
-//		getChart().fireEvent(new ChartHoverEvent(event, new DatasetMetaItem(metadata)));
-	}
-
-	/**
-	 * Called if the event is of type 'mouseup' or 'click'. Called in the context of the chart and passed the event and an array
-	 * of active elements.
-	 * 
-	 * @param event event generated by chart.
-	 * @param metadata dataset meta data.
-	 */
-	protected void onClick(ChartNativeEvent event, ArrayObject<DatasetItem> array) {
-		
-//		getChart().fireEvent(new ChartClickEvent(event, new DatasetMetaItem(metadata)));
-	}
-
-	/**
-	 * Called if the event is of type 'mouseup' or 'click'. Called in the context of the chart and passed the event and an
-	 * active element.
-	 * 
-	 * @param event event generated by chart.
-	 * @param object java script object dataset meta data.
-	 */
-	protected void onItemClick(ChartNativeEvent event, GenericJavaScriptObject object) {
-//		DatasetItem item = new DatasetItem(object);
-//		getChart().fireEvent(new DatasetSelectionEvent(event, item));
-//		getChart().fireEvent(new ChartClickEvent(event, item));
-	}
-
-	/**
-	 * Called when a resize occurs. Gets passed the new size.
-	 * 
-	 * @param item the new size item.
-	 */
-	protected void onResize(SizeItem item) {
-		NativeEvent event = Document.get().createChangeEvent();
-		getChart().fireEvent(new ChartResizeEvent(event, item));
-	}
-
-	/**
-	 * Called to generate an HTML legend.
-	 * 
-	 * @return an HTML string which represents the legend.
-	 */
-//	protected String generateLegend() {
-//		// checks if legend callback is set
-//		if (legendCallBack != null) {
-//			// creates the safe html to be sure about the right HTML to send back
-//			SafeHtmlBuilder builder = new SafeHtmlBuilder();
-//			// calls callback
-//			legendCallBack.generateLegend(getChart(), builder);
-//			// returns safe html
-//			return builder.toSafeHtml().asString();
-//		}
-//		return LEGEND_CALLBACK_ERROR;
-//	}
-
-
-	/**
-	 * Sets the java script code to activate the call back, adding functions.
-	 * 
-	 * @param options
-	 *            java script object where adding new functions definition.
-	 */
-	private native void registerNativeResizeHandler(GenericJavaScriptObject options)/*-{
-		var self = this;
-		options.onResize = function(chart, size) {
-			self.@org.pepstock.charba.client.options.BaseOptions::onResize(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(size);
-			return;
-		}
-	}-*/;
-
-	/**
-	 * Sets the java script code to activate the call back, adding functions.
-	 * 
-	 * @param options
-	 *            java script object where adding new functions definition.
-	 */
-	private native void registerNativeLegendHandler(GenericJavaScriptObject options)/*-{
-		var self = this;
-		options.legendCallback = function(chart) {
-			return self.@org.pepstock.charba.client.options.BaseOptions::generateLegend()();
-		}
-	}-*/;
 	
 	/**
-	 * Sets the java script code to activate the call back, adding functions.
-	 * 
-	 * @param options
-	 *            java script object where adding new functions definition.
+	 * @return the legendCallBack
 	 */
-	private native void registerNativeClickHandler(GenericJavaScriptObject options)/*-{
-		var self = this;
-		options.onClick = function(event, objects) {
-			var items = this.getElementAtEvent(event);
-			// if there is only 1 item, calls the method with only 1 dataset item
-			if (items.length == 0){
-				// check if the event is on legend
-				var isInLegend = event.layerX > this.legend.left && event.layerX < this.legend.right && event.layerY > this.legend.top && event.layerY < this.legend.bottom && this.legend.options.display;
-				if (isInLegend && this.legend.legendHitBoxes.length > 0){
-					// checks which legend item is affected
-					for (var i = 0; i < this.legend.legendHitBoxes.length; i++){
-						var item = this.legend.legendHitBoxes[i];
-						var isInLegendItem = event.layerX > item.left && event.layerX < (item.width + item.left) && event.layerY > this.legend.top && event.layerY < (item.height + item.top);
-						if (isInLegendItem && this.chart.legend.options.onClick != null){
-							this.chart.legend.options.onClick.call(this, event, this.legend.legendItems[i]);
-						}
-					}
-				}
-			} else if (items.length == 1){
-				self.@org.pepstock.charba.client.options.BaseOptions::onItemClick(Lorg/pepstock/charba/client/events/ChartNativeEvent;Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(event, items[0]);
-			} else {
-				// stores the array into a wrapper object
-				var myItems = new Object();
-	    		myItems.data = objects;
-				self.@org.pepstock.charba.client.options.BaseOptions::onClick(Lorg/pepstock/charba/client/events/ChartNativeEvent;Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(event, myItems);
-			}
-		}
-	}-*/;
-	
+	public LegendCallback getLegendCallBack() {
+		return legendCallback;
+	}
+
 	/**
-	 * Sets the java script code to activate the call back, adding functions.
-	 * 
-	 * @param options
-	 *            java script object where adding new functions definition.
+	 * @param legendCallBack the legendCallBack to set
 	 */
-	private native void registerNativeHoverHandler(GenericJavaScriptObject options)/*-{
-		var self = this;
-		options.onHover = function(event, objects) {
-			// stores the array into a wrapper object
-			var myItems = new Object();
-    		myItems.items = objects;
-			if (myItems.items.length == 0){
-				// check if the event is on legend
-				var isInLegend = event.layerX > this.legend.left && event.layerX < this.legend.right && event.layerY > this.legend.top && event.layerY < this.legend.bottom && this.legend.options.display;
-				if (isInLegend && this.legend.legendHitBoxes.length > 0){
-					// checks which legend item is affected
-					for (var i = 0; i < this.legend.legendHitBoxes.length; i++){
-						var item = this.legend.legendHitBoxes[i];
-						var isInLegendItem = event.layerX > item.left && event.layerX < (item.width + item.left) && event.layerY > this.legend.top && event.layerY < (item.height + item.top);
-						if (isInLegendItem && this.chart.legend.options.onHover != null){
-							this.chart.legend.options.onHover.call(this, event, this.legend.legendItems[i]);
-						}
-					}
-				}
-			} else {
-				self.@org.pepstock.charba.client.options.BaseOptions::onHover(Lorg/pepstock/charba/client/events/ChartNativeEvent;Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(event, myItems);
-			}
+	public void setLegendCallBack(LegendCallback legendCallBack) {
+		if (legendCallBack == null) {
+			getConfiguration().setLegendCallBack(null);
+		} else {
+			getConfiguration().setLegendCallBack(generateLegendCallback);
 		}
-	}-*/;
+		this.legendCallback = legendCallBack;
+	}
+	
+	public NativeOptions getObject() {
+		return super.getConfiguration().getNode();
+	}
 	
 }

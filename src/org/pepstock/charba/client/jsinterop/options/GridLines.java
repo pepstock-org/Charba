@@ -68,7 +68,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 *            second to the second grid line and so on.
 	 */
 	public void setColor(IsColor... color) {
-		setColor(ArrayListHelper.of(color));
+		setColor(ArrayString.of(color));
 	}
 
 	/**

@@ -15,15 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
-import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
-import org.pepstock.charba.client.jsinterop.commons.JsFactory;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
-import org.pepstock.charba.client.jsinterop.items.AnimationObject;
-
-import jsinterop.annotations.JsFunction;
 
 /**
  * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it
@@ -32,33 +26,10 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Animation extends BaseModel<Options, IsDefaultAnimation, NativeAnimation> {
+public class Animation extends BaseModel<BaseOptions<?,?>, IsDefaultAnimation, NativeAnimation> {
 	
-	@JsFunction
-	public interface AnimationCompleteCallback {
-		void call(Object context, AnimationObject animationObject);
-	}
-
-	@JsFunction
-	public interface AnimationProgressCallback {
-		void call(Object context, AnimationObject animationObject);
-	}
-
-	private final CallbackProxy<AnimationCompleteCallback> completeCallbackProxy = JsFactory.newCallbackProxy();
-
-	private final CallbackProxy<AnimationProgressCallback> progressCallbackProxy = JsFactory.newCallbackProxy();
-
-	/**
-	 * Name of fields of JavaScript object.
-	 */
-	private enum Property implements Key
-	{
-		onProgress,
-		onComplete
-	}
-
-	Animation(Options options, IsDefaultAnimation defaultValues, NativeAnimation delegated) {
-		super(options, defaultValues, delegated == null ? new NativeAnimation() : delegated, delegated == null);
+	Animation(BaseOptions<?,?> options, IsDefaultAnimation defaultValues, NativeAnimation delegated) {
+		super(options, defaultValues, delegated == null ? new NativeAnimation() : delegated);
 	}
 	
 	/**
@@ -141,34 +112,6 @@ public class Animation extends BaseModel<Options, IsDefaultAnimation, NativeAnim
 	 */
 	public boolean isAnimateScale() {
 		return AssignHelper.check(getDelegated().isAnimateScale(), getDefaultValues().isAnimateScale());
-	}
-	
-	public void setOnComplete(AnimationCompleteCallback callback) {
-		if (isEventEnabled()) {
-			if (callback != null) {
-				completeCallbackProxy.setCallback(callback);
-				getDelegated().setOnComplete(completeCallbackProxy.getProxy());	
-				checkAndAddToParent();
-			} else {
-				remove(Property.onComplete);
-			}
-		} else {
-			throw new UnsupportedOperationException("This 'animation' is not created to configure a chart and unables to set an event callback.");
-		}
-	}
-
-	public void setOnProgress(AnimationProgressCallback callback) {
-		if (isEventEnabled()) {
-			if (callback != null) {
-				progressCallbackProxy.setCallback(callback);
-				getDelegated().setOnProgress(progressCallbackProxy.getProxy());	
-				checkAndAddToParent();
-			} else {
-				remove(Property.onProgress);
-			}
-		} else {
-			throw new UnsupportedOperationException("This 'animation' is not created to configure a chart and unables to set an event callback.");
-		}
 	}
 
 	/* (non-Javadoc)

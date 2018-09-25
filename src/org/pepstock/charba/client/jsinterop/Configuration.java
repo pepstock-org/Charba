@@ -16,8 +16,9 @@
 package org.pepstock.charba.client.jsinterop;
 
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-import org.pepstock.charba.client.jsinterop.configuration.BaseOptions;
+import org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.jsinterop.options.NativeOptions;
 
 import jsinterop.annotations.JsOverlay;
@@ -33,7 +34,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
-public class Configuration extends NativeObject {
+public final class Configuration extends NativeObject {
 	
 	@JsProperty(name = "type")
 	native void setNativeType(String type);
@@ -54,7 +55,7 @@ public class Configuration extends NativeObject {
 	 * @see Type
 	 */
 	@JsOverlay
-	public final void setType(Type type) {
+	void setType(Type type) {
 		setNativeType(type.name());
 	}
 
@@ -64,18 +65,21 @@ public class Configuration extends NativeObject {
 	 * @param options the options of the chart.
 	 */
 	@JsOverlay
-	public final <T extends BaseOptions> void setOptions(T options) {
-		//setNativeOptions(options.getDelegated());
+	final <T extends ConfigurationOptions> void setOptions(T options) {
+		// FIXME
+		setNativeOptions(options.getObject());
 	}
 
-//	/**
-//	 * Sets the data of chart.
-//	 * 
-//	 * @param data the data of chart.
-//	 */
-//	void setData(Data data) {
-//		setValue(Property.data, data);
-//	}
+	/**
+	 * Sets the data of chart.
+	 * 
+	 * @param data the data of chart.
+	 */
+	@JsOverlay
+	void setData(Data data) {
+		// FIXME
+		setNativeData(data.getObject());
+	}
 //
 //	/**
 //	 * Sets the plugins of chart.

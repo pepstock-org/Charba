@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.configuration.scales.CartesianCategoryAxis;
 import org.pepstock.charba.client.jsinterop.configuration.scales.CartesianLinearAxis;
 import org.pepstock.charba.client.jsinterop.configuration.scales.Scales;
@@ -29,7 +29,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class StackedOptions extends BaseOptions {
+public final class StackedOptions extends ConfigurationOptions {
 
 	private final StackedScales scales;
 

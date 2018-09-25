@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -74,5 +76,11 @@ final class NativeLegendLabels extends NativeFontItem {
 	 */
 	@JsProperty
 	native int getPadding();
+	
+	@JsProperty
+	native void setGenerateLabels(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setFilter(CallbackProxy.Proxy proxy);
 
 }

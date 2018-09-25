@@ -15,15 +15,16 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.enums.Easing;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.events.AnimationCompleteEvent;
 import org.pepstock.charba.client.jsinterop.events.AnimationProgressEvent;
 import org.pepstock.charba.client.jsinterop.items.AnimationItem;
 import org.pepstock.charba.client.jsinterop.items.AnimationObject;
-import org.pepstock.charba.client.jsinterop.options.Animation.AnimationCompleteCallback;
-import org.pepstock.charba.client.jsinterop.options.Animation.AnimationProgressCallback;
-import org.pepstock.charba.client.jsinterop.options.Options;
+import org.pepstock.charba.client.jsinterop.items.ChartNode;
+import org.pepstock.charba.client.jsinterop.options.EventableAnimation.AnimationCompleteCallback;
+import org.pepstock.charba.client.jsinterop.options.EventableAnimation.AnimationProgressCallback;
+import org.pepstock.charba.client.jsinterop.options.EventableOptions;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;
@@ -37,7 +38,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Animation extends EventProvider<Options> {
+public final class Animation extends EventProvider<EventableOptions> {
 
 	// amount of handlers
 	private int onCompleteHandlers = 0;
@@ -53,7 +54,7 @@ public final class Animation extends EventProvider<Options> {
 	 * 
 	 * @param chart chart instance
 	 */
-	Animation(AbstractChart<?, ?> chart, Options options) {
+	Animation(AbstractChart<?, ?> chart, EventableOptions options) {
 		super(chart, options);
 
 		completeCallback = new AnimationCompleteCallback() {
@@ -66,7 +67,7 @@ public final class Animation extends EventProvider<Options> {
 			 * org.pepstock.charba.client.jsinterop.items.AnimationObject)
 			 */
 			@Override
-			public void call(Object context, AnimationObject animationObject) {
+			public void call(ChartNode context, AnimationObject animationObject) {
 				if (animationObject != null && animationObject.getAnimationItem() != null) {
 					onComplete(animationObject.getAnimationItem());
 				}
@@ -82,7 +83,7 @@ public final class Animation extends EventProvider<Options> {
 			 * org.pepstock.charba.client.jsinterop.items.AnimationObject)
 			 */
 			@Override
-			public void call(Object context, AnimationObject animationObject) {
+			public void call(ChartNode context, AnimationObject animationObject) {
 				if (animationObject != null && animationObject.getAnimationItem() != null) {
 					onProgress(animationObject.getAnimationItem());
 				}

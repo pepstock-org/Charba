@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration.scales;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.jsinterop.options.Options;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.options.EventableOptions;
 
 /**
  * Specific scales for stacked charts.
@@ -33,7 +33,7 @@ public final class StackedScales extends Scales {
 	 * 
 	 * @param chart chart instance.
 	 */
-	public StackedScales(AbstractChart<?, ?> chart, Options options) {
+	public StackedScales(AbstractChart<?, ?> chart, EventableOptions options) {
 		super(chart, options);
 	}
 

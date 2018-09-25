@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration.scales;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.enums.ScaleBounds;

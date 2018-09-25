@@ -6,7 +6,7 @@ import org.pepstock.charba.client.enums.ScaleBounds;
 import org.pepstock.charba.client.enums.ScaleDistribution;
 
 public final class DefaultScale implements IsDefaultScale{
-
+	
 	private static final boolean DEFAULT_DISPLAY = true;
 	// default offset
 	private static final boolean DEFAULT_OFFSET = false;
@@ -35,7 +35,6 @@ public final class DefaultScale implements IsDefaultScale{
 	private final DefaultTicks ticks = new DefaultTicks();
 	
 	private final DefaultTime time = new DefaultTime();
-
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getAngleLines()

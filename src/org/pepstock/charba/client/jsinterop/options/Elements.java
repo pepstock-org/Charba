@@ -24,7 +24,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Elements extends BaseModel<Options, IsDefaultOptions, NativeElements> {
+public class Elements extends BaseModel<BaseOptions<?,?>, IsDefaultOptions, NativeElements> {
 
 	private Arc arc;
 	
@@ -34,7 +34,7 @@ public class Elements extends BaseModel<Options, IsDefaultOptions, NativeElement
 	
 	private Rectangle rectangle;
 
-	Elements(Options options,IsDefaultOptions defaultOptions, NativeElements delegated) {
+	Elements(BaseOptions<?,?> options,IsDefaultOptions defaultOptions, NativeElements delegated) {
 		super(options, defaultOptions, delegated == null ? new NativeElements() : delegated);
 		arc = new Arc(this,defaultOptions.getArc(), getDelegated().getArc());
 		line = new Line(this, defaultOptions.getLine(), getDelegated().getLine());

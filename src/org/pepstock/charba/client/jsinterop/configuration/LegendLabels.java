@@ -15,16 +15,16 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.callbacks.LegendFilterHandler;
-import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
-import org.pepstock.charba.client.items.LegendItem;
-import org.pepstock.charba.client.items.LegendLabelItem;
-import org.pepstock.charba.client.jsinterop.options.Options;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.callbacks.LegendFilterHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.LegendLabelsCallback;
+import org.pepstock.charba.client.jsinterop.items.LegendItem;
+import org.pepstock.charba.client.jsinterop.items.LegendLabelItem;
+import org.pepstock.charba.client.jsinterop.options.EventableOptions;
+import org.pepstock.charba.client.jsinterop.options.LegendLabels.FilterCallback;
+import org.pepstock.charba.client.jsinterop.options.LegendLabels.GenerateLabelsCallback;
 
 /**
  * This is the labels configuration of the legend.
@@ -32,35 +32,80 @@ import org.pepstock.charba.client.jsinterop.options.Options;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LegendLabels extends ChartContainer<Options> {
+public final class LegendLabels extends ConfigurationContainer<EventableOptions> {
 
+	private final GenerateLabelsCallback generateLabelsCallback;
+	
+	private final FilterCallback filterCallback;
+	
 	private LegendLabelsCallback labelsCallBack = null;
 
 	private LegendFilterHandler filterHandler = null;
-
-	/**
-	 * Name of fields of JavaScript object.
-	 */
-	private enum Property implements Key
-	{
-		fontSize,
-		fontStyle,
-		fontColor,
-		fontFamily,
-		boxWidth,
-		padding,
-		usePointStyle,
-		generateLabels,
-		filter
-	}
-
+	
 	/**
 	 * Builds the object storing the chart instance.
 	 * 
 	 * @param chart chart instance
 	 */
-	LegendLabels(AbstractChart<?, ?> chart, Options options) {
+	LegendLabels(AbstractChart<?, ?> chart, EventableOptions options) {
 		super(chart, options);
+		
+		generateLabelsCallback = new GenerateLabelsCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.LegendLabels.GenerateLabelsCallback#call(java.lang.Object, java.lang.Object)
+			 */
+			@Override
+			public LegendLabelItem[] call(Object context, Object chart) {
+				// checks if callback is consistent
+				if (labelsCallBack != null) {
+					// calls callback
+					LegendLabelItem[] result = labelsCallBack.generateLegendLabels(getChart());
+					// if result is null..
+					if (result == null) {
+						// .. returns a empty array.
+						return new LegendLabelItem[0];
+					}
+					// returns the generated array of legend items.
+					return result;
+				}
+				// returns a empty array
+				return new LegendLabelItem[0];
+			}
+			//FIXME
+//	    	var self = this;
+//		    options.generateLabels = function(chart){
+//		    	// calls the default generateLabels function
+//		    	// to get the default.
+//		    	var labels = $wnd.Chart.defaults.global.legend.labels.generateLabels(chart);
+//		        var newLabels = self.@org.pepstock.charba.client.options.LegendLabels::generateLegendLabels()();
+//		        // checke if array is empty
+//		        // if empty, returns the default labels.
+//		        if (newLabels.length == 0){
+//		        	return labels;
+//		        } else {
+//		        	return newLabels;
+//		        }
+//		    }
+
+		};
+		
+		filterCallback = new FilterCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.LegendLabels.FilterCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.LegendItem)
+			 */
+			@Override
+			public boolean call(Object context, LegendItem item) {
+				// checks if callback is consistent
+				if (filterHandler != null) {
+					// calls callback
+					return filterHandler.onFilter(getChart(), item);
+				}
+				return true;
+			}
+			
+		};
 	}
 
 	/**
@@ -73,14 +118,13 @@ public final class LegendLabels extends ChartContainer<Options> {
 	/**
 	 * @param legendLabelsCallBack the legendCallBack to set
 	 */
-	public void setLabelsCallBack(LegendLabelsCallback legendLabelsCallBack) {
-// FIXME		
-//		// checks if the callback is already set into java script object
-//		if (hasToBeRegistered(legendLabelsCallBack, Property.generateLabels)) {
-//			// registers the handler into java script object
-//			registerNativeLegendLabelsHandler(getJavaScriptObject());
-//		}
-		this.labelsCallBack = legendLabelsCallBack;
+	public void setLabelsCallBack(LegendLabelsCallback labelsCallBack) {
+		if (labelsCallBack == null) {
+			getConfiguration().getLegend().getLabels().setGenerateLabelsCallback(null);
+		} else {
+			getConfiguration().getLegend().getLabels().setGenerateLabelsCallback(generateLabelsCallback);
+		}
+		this.labelsCallBack = labelsCallBack;
 	}
 
 	/**
@@ -94,12 +138,11 @@ public final class LegendLabels extends ChartContainer<Options> {
 	 * @param filterHandler the legendFilterHandler to set
 	 */
 	public void setLegendFilterHandler(LegendFilterHandler filterHandler) {
-// FIXME		
-//		// checks if the callback is already set into java script object
-//		if (hasToBeRegistered(filterHandler, Property.filter)) {
-//			// registers the handler into java script object
-//			registerNativeFilterLabelsHandler(getJavaScriptObject());
-//		}
+		if (filterHandler == null) {
+			getConfiguration().getLegend().getLabels().setFilterCallback(null);
+		} else {
+			getConfiguration().getLegend().getLabels().setFilterCallback(filterCallback);
+		}
 		this.filterHandler = filterHandler;
 	}
 	
@@ -248,79 +291,5 @@ public final class LegendLabels extends ChartContainer<Options> {
 	public int getPadding() {
 		return getConfiguration().getLegend().getLabels().getPadding();
 	}
-
-	/**
-	 * Called to generate legend items for each thing in the legend. Default implementation returns the text + styling for the color box.
-	 * 
-	 * @return array of legend items.
-	 */
-	protected LegendLabelItem[] generateLegendLabels() {
-		// checks if callback is consistent
-		if (labelsCallBack != null) {
-			// calls callback
-			LegendLabelItem[] result = labelsCallBack.generateLegendLabels(getChart());
-			// if result is null..
-			if (result == null) {
-				// .. returns a empty array.
-				return new LegendLabelItem[0];
-			}
-			// returns the generated array of legend items.
-			return result;
-		}
-		// returns a empty array
-		return new LegendLabelItem[0];
-	}
-
-	/**
-	 * Called to filter legend items out of the legend. Receives 1 parameter, a Legend Item.
-	 * 
-	 * @param item legend item to check.
-	 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
-	 */
-	protected boolean onFilter(GenericJavaScriptObject item) {
-		// checks if callback is consistent
-		if (filterHandler != null) {
-			// calls callback
-			return filterHandler.onFilter(getChart(), new LegendItem(item));
-		}
-		return true;
-	}
-	
-	// FIXME
-//	/**
-//	 * Sets the java script code to activate the call back, adding functions.
-//	 * 
-//	 * @param options
-//	 *            java script object where adding new functions definition.
-//	 */
-//    private native void registerNativeLegendLabelsHandler(GenericJavaScriptObject options)/*-{
-//    	var self = this;
-//	    options.generateLabels = function(chart){
-//	    	// calls the default generateLabels function
-//	    	// to get the default.
-//	    	var labels = $wnd.Chart.defaults.global.legend.labels.generateLabels(chart);
-//	        var newLabels = self.@org.pepstock.charba.client.options.LegendLabels::generateLegendLabels()();
-//	        // checke if array is empty
-//	        // if empty, returns the default labels.
-//	        if (newLabels.length == 0){
-//	        	return labels;
-//	        } else {
-//	        	return newLabels;
-//	        }
-//	    }
-//	}-*/;
-//
-//	/**
-//	 * Sets the java script code to activate the call back, adding functions.
-//	 * 
-//	 * @param options
-//	 *            java script object where adding new functions definition.
-//	 */
-//    private native void registerNativeFilterLabelsHandler(GenericJavaScriptObject options)/*-{
-//		var self = this;
-//	    options.filter = function(legendItem){
-//	    	return self.@org.pepstock.charba.client.options.LegendLabels::onFilter(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(legendItem);
-//	    }
-//	}-*/;
 
 }

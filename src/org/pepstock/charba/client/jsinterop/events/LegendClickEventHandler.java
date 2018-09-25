@@ -13,41 +13,21 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client;
-
-import org.pepstock.charba.client.data.Dataset;
-import org.pepstock.charba.client.options.BaseOptions;
+package org.pepstock.charba.client.jsinterop.events;
 
 /**
- * Interface which defines a chart.
+ * Event handler for clicking on the chart legend.
  * 
  * @author Andrea "Stock" Stocchero
  *
- * @param <O> Options type for the specific chart
- * @param <D> Dataset type for the specific chart
  */
-public interface Chart<O extends BaseOptions, D extends Dataset> {
+public interface LegendClickEventHandler extends ChartEventHandler {
 
 	/**
-	 * Returns the type of chart.
+	 * Invoked when the user clicks on the chart legend.
 	 * 
-	 * @return the type of chart.
-	 * @see Type
+	 * @param event legend click event
 	 */
-	Type getType();
-
-	/**
-	 * Returns the options of chart.
-	 * 
-	 * @return the options of chart.
-	 */
-	O getOptions();
-
-	/**
-	 * Creates a new dataset related to chart type.
-	 * 
-	 * @return a new dataset related to chart type.
-	 */
-	D newDataset();
+	void onClick(LegendClickEvent event);
 
 }

@@ -7,20 +7,16 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 public abstract class BaseModel<P extends BaseModel<?,?,?>, D,  O extends NativeObject> extends NativeObjectContainer<O> {
 	
-//	private final O delegated;
-	
 	private final D defaultValues;
 	
 	private final P parent;
-	
-	private final boolean eventEnabled;
 	
 	/**
 	 * @param delegated
 	 * @param defaultValues
 	 */
-	protected BaseModel(D defaultValues, O delegated, boolean eventEnabled) {
-		this(null, defaultValues, delegated, eventEnabled);
+	protected BaseModel(D defaultValues, O delegated) {
+		this(null, defaultValues, delegated);
 	}
 	
 	/**
@@ -28,18 +24,9 @@ public abstract class BaseModel<P extends BaseModel<?,?,?>, D,  O extends Native
 	 * @param defaultValues
 	 */
 	protected BaseModel(P parent, D defaultValues, O delegated) {
-		this(parent, defaultValues, delegated, false);
-	}
-
-	/**
-	 * @param delegated
-	 * @param defaultValues
-	 */
-	protected BaseModel(P parent, D defaultValues, O delegated, boolean eventEnabled) {
 		super(delegated);
 		this.parent = parent;
 		this.defaultValues = defaultValues;
-		this.eventEnabled = eventEnabled;
 	}
 	
 	/**
@@ -59,13 +46,6 @@ public abstract class BaseModel<P extends BaseModel<?,?,?>, D,  O extends Native
 	
 	protected final D getDefaultValues() {
 		return defaultValues;
-	}
-	
-	/**
-	 * @return the eventEnabled
-	 */
-	protected final boolean isEventEnabled() {
-		return eventEnabled;
 	}
 
 	/**

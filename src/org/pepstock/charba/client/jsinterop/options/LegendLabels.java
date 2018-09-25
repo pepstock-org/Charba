@@ -15,8 +15,15 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
+import org.pepstock.charba.client.jsinterop.commons.JsFactory;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels;
+import org.pepstock.charba.client.jsinterop.items.LegendItem;
+import org.pepstock.charba.client.jsinterop.items.LegendLabelItem;
+
+import jsinterop.annotations.JsFunction;
 
 /**
  * This is the labels configuration of the legend.
@@ -25,7 +32,43 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels;
  *
  */
 public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels, NativeLegendLabels> {
+	
+	/**
+	 * Called to generate legend items for each thing in the legend. Default implementation returns the text + styling for the color box.
+	 * 
+	 * @return array of legend items.
+	 */
+	@JsFunction
+	public interface GenerateLabelsCallback {
 
+		LegendLabelItem[] call(Object context, Object chart);
+	}
+
+	/**
+	 * Called to filter legend items out of the legend. Receives 1 parameter, a Legend Item.
+	 * 
+	 * @param item legend item to check.
+	 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
+	 */
+	@JsFunction
+	public interface FilterCallback {
+
+		boolean call(Object context, LegendItem item);
+	}
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		generateLabels,
+		filter
+	}
+	
+	private final CallbackProxy<GenerateLabelsCallback> generateLabelsCallbackProxy = JsFactory.newCallbackProxy();
+
+	private final CallbackProxy<FilterCallback> filterCallbackProxy = JsFactory.newCallbackProxy();
+	
 	LegendLabels(Legend legend, IsDefaultLegendLabels defaultValues, NativeLegendLabels delegated) {
 		super(legend, defaultValues, delegated == null ? new NativeLegendLabels() : delegated);
 	}
@@ -88,6 +131,34 @@ public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels, Native
 	 */
 	public int getPadding() {
 		return AssignHelper.check(getDelegated().getPadding(), getDefaultValues().getPadding());
+	}
+	
+	/**
+	 * @param legendCallBack the legendCallBack to set
+	 */
+	public void setGenerateLabelsCallback(GenerateLabelsCallback legendCallBack) {
+		if (legendCallBack != null) {
+			generateLabelsCallbackProxy.setCallback(legendCallBack);
+			getDelegated().setGenerateLabels(generateLabelsCallbackProxy.getProxy());
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		} else {
+			remove(Property.generateLabels);
+		}
+	}
+
+	/**
+	 * @param filterCallBack the legendCallBack to set
+	 */
+	public void setFilterCallback(FilterCallback filterCallBack) {
+		if (filterCallBack != null) {
+			filterCallbackProxy.setCallback(filterCallBack);
+			getDelegated().setFilter(filterCallbackProxy.getProxy());
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		} else {
+			remove(Property.filter);
+		}
 	}
 	
 	/* (non-Javadoc)

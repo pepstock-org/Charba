@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration.scales;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
 
 /**
  * This a cartesian axis for BAR chart.<br>

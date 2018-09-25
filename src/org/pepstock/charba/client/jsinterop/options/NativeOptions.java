@@ -2,8 +2,11 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
+import org.pepstock.charba.client.jsinterop.commons.NativeDescriptor;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.options.BaseOptions.GenerateLegendCallback;
 
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -312,5 +315,18 @@ public final class NativeOptions extends NativeObject{
 
 	@JsProperty
 	native void setOnHover(CallbackProxy.Proxy proxy);
+	
+	@JsProperty
+	native void setLegendCallback(CallbackProxy.Proxy proxy);
+	
+	@JsOverlay
+	final GenerateLegendCallback getOriginGenerateLegendCallback() {
+		NativeDescriptor<GenerateLegendCallback> descriptor = getProperty(this, BaseOptions.Property.legendCallback);
+		if (descriptor != null) {
+			return descriptor.getValue();
+		} else {
+			return null;
+		}
+	}
 
 }

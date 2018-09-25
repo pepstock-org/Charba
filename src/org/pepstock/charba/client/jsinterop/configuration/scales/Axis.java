@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration.scales;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.callbacks.AxisBuildTicksCallback;
 import org.pepstock.charba.client.callbacks.AxisCalculateTickRotationCallback;
 import org.pepstock.charba.client.callbacks.AxisDataLimitsCallback;
@@ -25,7 +25,7 @@ import org.pepstock.charba.client.callbacks.AxisTickToLabelConversionCallback;
 import org.pepstock.charba.client.callbacks.AxisUpdateCallback;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.enums.AxisType;
-import org.pepstock.charba.client.jsinterop.configuration.ChartContainer;
+import org.pepstock.charba.client.jsinterop.configuration.ConfigurationContainer;
 import org.pepstock.charba.client.jsinterop.defaults.DefaultScale;
 import org.pepstock.charba.client.jsinterop.options.Scale;
 
@@ -37,7 +37,7 @@ import org.pepstock.charba.client.jsinterop.options.Scale;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class Axis extends ChartContainer<Scale> {
+public abstract class Axis extends ConfigurationContainer<Scale> {
 
 //	private AbstractChart<?, ?> chart = null;
 

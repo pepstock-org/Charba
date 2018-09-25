@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration.layout;
 
-import org.pepstock.charba.client.jsinterop.options.Options;
+import org.pepstock.charba.client.jsinterop.options.EventableOptions;
 
 /**
  * It is applied to all sides of the chart (left, top, right, bottom).
@@ -25,14 +25,14 @@ import org.pepstock.charba.client.jsinterop.options.Options;
  */
 public final class Padding {
 	
-	private final Options options;
+	private final EventableOptions options;
 
 	/**
 	 * Builds the object setting the java script padding object.
 	 * 
 	 * @param chart chart instance
 	 */
-	public Padding(Options options) {
+	public Padding(EventableOptions options) {
 		this.options = options;
 	}
 	

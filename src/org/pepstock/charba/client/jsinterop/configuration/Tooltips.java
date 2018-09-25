@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.callbacks.TooltipCustomCallback;
 import org.pepstock.charba.client.callbacks.TooltipFilterHandler;
 import org.pepstock.charba.client.callbacks.TooltipItemSortHandler;
@@ -25,9 +24,8 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TooltipPosition;
-import org.pepstock.charba.client.items.TooltipItem;
-import org.pepstock.charba.client.items.TooltipModel;
-import org.pepstock.charba.client.jsinterop.options.Options;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.options.EventableOptions;
 
 /**
  * Configuration element to set all attributes and features of the tooltip.
@@ -35,9 +33,9 @@ import org.pepstock.charba.client.jsinterop.options.Options;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Tooltips extends ChartContainer<Options> {
+public final class Tooltips extends ConfigurationContainer<EventableOptions> {
 
-//	private final TooltipsCallbacks callbacks;
+	private final TooltipsCallbacks callbacks;
 
 	private TooltipCustomCallback customCallback = null;
 
@@ -96,19 +94,19 @@ public final class Tooltips extends ChartContainer<Options> {
 	 * 
 	 * @param chart chart instance
 	 */
-	Tooltips(AbstractChart<?, ?> chart, Options options) {
+	Tooltips(AbstractChart<?, ?> chart, EventableOptions options) {
 		super(chart, options);
 		// sets callbacks container
 		// FIXME
-//		callbacks = new TooltipsCallbacks(this);
+		callbacks = new TooltipsCallbacks(this);
 	}
 
-//	/**
-//	 * @return the callbacks
-//	 */
-//	public TooltipsCallbacks getCallbacks() {
-//		return callbacks;
-//	}
+	/**
+	 * @return the callbacks
+	 */
+	public TooltipsCallbacks getCallbacks() {
+		return callbacks;
+	}
 
 	/**
 	 * @return the customCallback
@@ -910,7 +908,8 @@ public final class Tooltips extends ChartContainer<Options> {
 		// checks if callback is consistent
 		if (customCallback != null) {
 			// calls callback
-			customCallback.onCustom(getChart(), new TooltipModel(model));
+			//FIXME
+//			customCallback.onCustom(getChart(), new TooltipModel(model));
 		}
 	}
 
@@ -926,7 +925,8 @@ public final class Tooltips extends ChartContainer<Options> {
 		// checks if callback is consistent
 		if (itemSortHandler != null) {
 			// calls callback
-			return itemSortHandler.onItemSort(getChart(), new TooltipItem(o1), new TooltipItem(o2));
+			//FIXME
+//			return itemSortHandler.onItemSort(getChart(), new TooltipItem(o1), new TooltipItem(o2));
 		}
 		// default is 0
 		return 0;
@@ -942,7 +942,8 @@ public final class Tooltips extends ChartContainer<Options> {
 		// checks if callback is consistent
 		if (filterHandler != null) {
 			// calls callback
-			return filterHandler.onFilter(getChart(), new TooltipItem(item));
+			//FIXME
+//			return filterHandler.onFilter(getChart(), new TooltipItem(item));
 		}
 		// default is true
 		return true;

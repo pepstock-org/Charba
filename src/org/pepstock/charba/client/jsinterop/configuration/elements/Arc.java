@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration.elements;
 
-import org.pepstock.charba.client.jsinterop.options.Options;
+import org.pepstock.charba.client.jsinterop.options.EventableOptions;
 
 /**
  * Arcs are used in the polar area, doughnut and pie charts.
@@ -32,7 +32,7 @@ public final class Arc extends BaseElement {
 	 * 
 	 * @param chart chart instance
 	 */
-	public Arc(Options options) {
+	public Arc(EventableOptions options) {
 		super(options, options.getElements().getArc());
 	}
 

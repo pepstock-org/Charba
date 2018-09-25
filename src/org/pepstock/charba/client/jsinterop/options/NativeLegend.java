@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsPackage;
@@ -107,4 +108,11 @@ final class NativeLegend extends NativeObject {
 	 */
 	@JsProperty
 	native String getPosition();
+	
+
+	@JsProperty
+	native void setOnClick(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setOnHover(CallbackProxy.Proxy proxy);
 }

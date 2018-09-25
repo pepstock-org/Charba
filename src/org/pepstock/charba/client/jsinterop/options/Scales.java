@@ -18,6 +18,7 @@ package org.pepstock.charba.client.jsinterop.options;
 import java.util.List;
 
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
+import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory;
 import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
@@ -29,7 +30,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Scales extends BaseModel<Options, IsDefaultScale, NativeScales>{
+public class Scales extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeScales>{
 	
 	private final ScaleListFactory factory = new ScaleListFactory();
 
@@ -38,7 +39,7 @@ public class Scales extends BaseModel<Options, IsDefaultScale, NativeScales>{
 		this(null, defaultValues, null);
 	}
 
-	Scales(Options options, IsDefaultScale defaultValues, NativeScales delegated) {
+	Scales(BaseOptions<?,?> options, IsDefaultScale defaultValues, NativeScales delegated) {
 		super(options, defaultValues, delegated == null ? new NativeScales(): delegated);
 	}
 
@@ -63,7 +64,7 @@ public class Scales extends BaseModel<Options, IsDefaultScale, NativeScales>{
 	}
 
 	public void setXAxes(Scale... scales) {
-		getDelegated().setXAxes(ArrayListHelper.of(scales));
+		getDelegated().setXAxes(ArrayObject.of(scales));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -76,7 +77,7 @@ public class Scales extends BaseModel<Options, IsDefaultScale, NativeScales>{
 	}
 
 	public void setYAxes(Scale... scales) {
-		getDelegated().setYAxes(ArrayListHelper.of(scales));
+		getDelegated().setYAxes(ArrayObject.of(scales));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}

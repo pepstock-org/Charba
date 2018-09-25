@@ -46,7 +46,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @param <O> Options type for the specific chart
  * @param <D> Dataset type for the specific chart
  */
-public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> extends Widget implements Chart<O, D> {
+public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> extends Widget implements IsChart<O, D> {
 	
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";

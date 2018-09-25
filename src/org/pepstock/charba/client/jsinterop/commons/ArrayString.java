@@ -15,6 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.commons;
 
+import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Key;
+
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -28,9 +31,54 @@ import jsinterop.annotations.JsType;
  * @see com.google.gwt.core.client.JsArrayString
  */
 @JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
-public class ArrayString {
+public final class ArrayString {
 
 	public static native ArrayString of(String... items);
+	
+	/**
+	 * Creates a JavaScript array list of strings.
+	 * @param values array of elements to load when the list is creating.
+	 * @return a array list of strings instance or <code>null</code> if the elements are null.
+	 * @see org.pepstock.charba.client.commons.JsStringArrayList
+	 */
+	@JsOverlay
+	public static ArrayString of(IsColor... values){
+		// creates the list
+		ArrayString result = new ArrayString();
+		// checks if array is null
+		if (values == null){
+			return result;
+		}
+		for (IsColor color : values) {
+			// adds all elements
+			result.push(color.toRGBA());
+		}
+		// returns the list
+		return result;
+	}
+	
+
+	/**
+	 * Creates a JavaScript array list of strings.
+	 * @param values array of elements to load when the list is creating.
+	 * @return a array list of strings instance or <code>null</code> if the elements are null.
+	 * @see org.pepstock.charba.client.commons.JsStringArrayList
+	 */
+	@JsOverlay
+	public static ArrayString of(Key... values){
+		// creates the list
+		ArrayString result = new ArrayString();
+		// checks if array is null
+		if (values == null){
+			return result;
+		}
+		for (Key key : values) {
+			// adds all elements
+			result.push(key.name());
+		}
+		// returns the list
+		return result;
+	}
 	
 	@JsProperty(name = "length")
 	public native int length();
@@ -43,7 +91,7 @@ public class ArrayString {
 	 * @return the index of the last occurrence of the specified element in this object, or -1 if this object does not contain
 	 *         the element
 	 */
-	public native int lastIndexOf(String value);
+	native int lastIndexOf(String value);
 
 	/**
 	 * Returns the index of the first occurrence of the specified element in this object, or -1 if this object does not contain
@@ -53,21 +101,21 @@ public class ArrayString {
 	 * @return the index of the first occurrence of the specified element in this object, or -1 if this object does not contain
 	 *         the element
 	 */
-	public native int indexOf(String value);
+	native int indexOf(String value);
 
-	public native ArrayString slice(int start, int end);
+	native ArrayString slice(int start, int end);
 	
-	public native ArrayString splice(int start);
+	native ArrayString splice(int start);
 
-	public native ArrayString splice(int start, int deleteCounts);
+	native ArrayString splice(int start, int deleteCounts);
 
-	public native ArrayString splice(int start, int deleteCounts, String item);
+	native ArrayString splice(int start, int deleteCounts, String item);
 
 	/**
 	 * Removes all of the elements from this object. The object will be empty after this call returns.
 	 */
 	@JsOverlay
-	public final void clear() {
+	 void clear() {
 		splice(0, length());
 	};
 
@@ -79,7 +127,7 @@ public class ArrayString {
 	 * @return the element previously at the specified position
 	 */
 	@JsOverlay
-	public final String remove(int index) {
+	 String remove(int index) {
 		return splice(index, 1).get(0);
 	}
 
@@ -91,7 +139,7 @@ public class ArrayString {
 	 * @param value element to be inserted
 	 */
 	@JsOverlay
-	public final void insertAt(int index, String item) {
+	 void insertAt(int index, String item) {
 		splice(index, 0, item);
 	};
 
@@ -106,24 +154,24 @@ public class ArrayString {
 	 * @return the value at the given index
 	 */
 	@JsOverlay
-	public final String get(int index) {
+	 public String get(int index) {
 		return slice(index, index+1).pop();
 	}
 
 	/**
 	 * Pushes the given integer onto the end of the array.
 	 */
-	public native void fill(String item, int start, int end);
+	native void fill(String item, int start, int end);
 
 	/**
 	 * Pushes the given integer onto the end of the array.
 	 */
-	public native void push(String item);
+	native void push(String item);
 	
 	/**
 	 * Pushes the given integer onto the end of the array.
 	 */
-	public native String pop();
+	native String pop();
 
 	/**
 	 * Sets the value value at a given index.
@@ -135,7 +183,7 @@ public class ArrayString {
 	 * @param value the value to be stored
 	 */
 	@JsOverlay
-	public final void set(int index, String item){
+	 void set(int index, String item){
 		fill(item, index, index+1);
 	}
 }

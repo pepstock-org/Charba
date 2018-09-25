@@ -30,9 +30,9 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Tooltips extends BaseModel<Options, IsDefaultTooltips, NativeTooltips> {
+public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltips, NativeTooltips> {
 
-	Tooltips(Options options, IsDefaultTooltips defaultValues, NativeTooltips delegated) {
+	Tooltips(BaseOptions<?,?> options, IsDefaultTooltips defaultValues, NativeTooltips delegated) {
 		super(options, defaultValues, delegated == null ? new NativeTooltips() : delegated);
 	}
 

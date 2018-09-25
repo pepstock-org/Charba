@@ -23,17 +23,11 @@ import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.events.AnimationCompleteEvent;
 import org.pepstock.charba.client.events.AnimationProgressEvent;
 import org.pepstock.charba.client.items.AnimationItem;
-import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
-import org.pepstock.charba.client.jsinterop.commons.JsFactory;
-import org.pepstock.charba.client.jsinterop.items.AnimationObject;
-import org.pepstock.charba.client.jsinterop.utils.Window;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
-
-import jsinterop.annotations.JsFunction;
 
 /**
  * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it takes.
@@ -48,12 +42,6 @@ public final class Animation extends EventProvider {
 	// amount of handlers
 	private int onProgressHandlers = 0;
 	
-	@JsFunction
-	public interface VoidCallback {
-	    void call(Object context, AnimationObject animationObject);
-	}
-
-
 	/**
 	 * Name of fields of JavaScript object.
 	 */
@@ -162,18 +150,7 @@ public final class Animation extends EventProvider {
 			// checks if property exist
 			if (!has(Property.onComplete)) {
 				// sets the java script code to get the event
-				//registerNativeCompleteHandler(getJavaScriptObject());
-				// FIXME
-				CallbackProxy cp = JsFactory.newCallbackProxy();
-				cp.setCallback(new VoidCallback() {
-					
-					@Override
-					public void call(Object context, AnimationObject animationObject) {
-						Window.getConsole().log(context);
-						Window.getConsole().log(animationObject.getAnimationItem());
-					}
-				});
-				registerNativeCompleteHandler(getJavaScriptObject(), cp.getProxy());
+				registerNativeCompleteHandler(getJavaScriptObject());
 			}
 			// increments amount of handlers
 			onCompleteHandlers++;
@@ -267,16 +244,4 @@ public final class Animation extends EventProvider {
 	    }
 	}-*/;
     
-	/**
-	 * Sets the java script code to activate the call back, adding functions.
-	 * 
-	 * @param options
-	 *            java script object where adding new functions definition.
-	 */
-    private native void registerNativeCompleteHandler(GenericJavaScriptObject options, Object proxy)/*-{
-    	console.log(proxy);
-    	console.log(typeof proxy);
-	    options.onComplete = proxy;
-	}-*/;
-
 }

@@ -78,7 +78,7 @@ public final class ArrayListHelper {
 		// creates the list
 		return new ArrayStringList(values);
 	}
-
+	
 	/**
 	 * Creates a JavaScript array list of strings.
 	 * @param values array of elements to load when the list is creating.
@@ -99,29 +99,7 @@ public final class ArrayListHelper {
 		// returns the list
 		return result;
 	}
-	
 
-	/**
-	 * Creates a JavaScript array list of strings.
-	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of strings instance or <code>null</code> if the elements are null.
-	 * @see org.pepstock.charba.client.commons.JsStringArrayList
-	 */
-	public static ArrayString of(IsColor... values){
-		// creates the list
-		ArrayString result = new ArrayString();
-		// checks if array is null
-		if (values == null){
-			return result;
-		}
-		for (IsColor color : values) {
-			// adds all elements
-			result.push(color.toRGBA());
-		}
-		// returns the list
-		return result;
-	}
-	
 	/**
 	 * Creates a JavaScript array list of EnumValues.
 	 * @param clazz Enum class with all possible values of enumeration
@@ -195,28 +173,4 @@ public final class ArrayListHelper {
 		}
 		return new ArrayObjectContainerList<>(array, factory);
 	}
-	
-	/**
-	 * FIXME
-	 * Creates a JavaScript array list of strings.
-	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of strings instance or <code>null</code> if the elements are null.
-	 * @see org.pepstock.charba.client.commons.JsStringArrayList
-	 */
-	public static <E extends NativeObjectContainer<O>, O extends NativeObject> ArrayObject<O> of(E[] values){
-		// creates the list
-		ArrayObject<O> result = new ArrayObject<>();
-		// checks if array is null
-		if (values == null){
-			return result;
-		}
-		for (E value : values) {
-			// adds all elements
-			result.push(value.getNativeObject());
-		}
-		// returns the list
-		return result;
-	}
-	
-
 }

@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.jsinterop.options.Options;
+import org.pepstock.charba.client.jsinterop.options.EventableOptions;
 import org.pepstock.charba.client.plugins.InvalidPluginIdException;
 
 /**
@@ -28,12 +28,12 @@ import org.pepstock.charba.client.plugins.InvalidPluginIdException;
  */
 public final class Plugins {
 
-	private final Options options;
+	private final EventableOptions options;
 	
 	/**
 	 * Empty constructor to reduce its visibility
 	 */
-	Plugins(Options options) {
+	Plugins(EventableOptions options) {
 		this.options = options;
 	}
 

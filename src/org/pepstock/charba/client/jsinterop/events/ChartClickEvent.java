@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.pepstock.charba.client.jsinterop.items.DatasetItem;
-import org.pepstock.charba.client.jsinterop.items.DatasetMetaItem;
 
 import com.google.gwt.dom.client.NativeEvent;
 
@@ -58,9 +57,9 @@ public final class ChartClickEvent extends AbstractEvent<ChartClickEventHandler>
 	 * @param items a list of items with dataset metadata related to the click
 	 * @see org.pepstock.charba.client.items.DatasetItem
 	 */
-	public ChartClickEvent(NativeEvent nativeEvent, DatasetMetaItem items) {
+	public ChartClickEvent(NativeEvent nativeEvent, List<DatasetItem> items) {
 		super(nativeEvent);
-		this.items = items.getDatasets();
+		this.items = items;
 	}
 
 	/**

@@ -38,7 +38,7 @@ import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Scale extends BaseModel<Options, IsDefaultScale, NativeScale>{
+public class Scale extends Root<BaseOptions<?,?>, IsDefaultScale, NativeScale>{
 	
 	private final GridLines gridLines;
 
@@ -57,7 +57,12 @@ public class Scale extends BaseModel<Options, IsDefaultScale, NativeScale>{
 		this(null, defaultValues, null);
 	}
 
-	Scale(Options options, IsDefaultScale defaultValues, NativeScale delegated) {
+	// here scale is ROOT
+	protected Scale(IsDefaultScale defaultValues, NativeScale delegated) {
+		this(null, defaultValues, delegated);
+	}
+	
+	Scale(BaseOptions<?,?> options, IsDefaultScale defaultValues, NativeScale delegated) {
 		super(options, defaultValues, delegated == null ? new NativeScale(): delegated);
 		angleLines = new AngleLines(this, getDefaultValues().getAngleLines(), getDelegated().getAngleLines());
 		gridLines = new GridLines(this, getDefaultValues().getGrideLines(), getDelegated().getGridLines());

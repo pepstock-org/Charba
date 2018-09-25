@@ -19,7 +19,7 @@ import org.pepstock.charba.client.jsinterop.configuration.elements.Arc;
 import org.pepstock.charba.client.jsinterop.configuration.elements.Line;
 import org.pepstock.charba.client.jsinterop.configuration.elements.Point;
 import org.pepstock.charba.client.jsinterop.configuration.elements.Rectangle;
-import org.pepstock.charba.client.jsinterop.options.Options;
+import org.pepstock.charba.client.jsinterop.options.EventableOptions;
 
 
 /**
@@ -44,7 +44,7 @@ public final class Elements {
 	 * 
 	 * @param chart chart instance
 	 */
-	Elements(Options options) {
+	Elements(EventableOptions options) {
 		// creates the sub-options objects
 		point = new Point(options);
 		line = new Line(options);

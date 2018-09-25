@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.commons;
 
+import java.util.List;
+
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -28,9 +30,26 @@ import jsinterop.annotations.JsType;
  * @see com.google.gwt.core.client.JsArrayInteger
  */
 @JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
-public class ArrayInteger {
+public final class ArrayInteger {
 
 	public static native ArrayInteger of(int... items);
+
+	@JsOverlay
+	public static ArrayInteger of(List<Integer> values){
+		// creates the list
+		ArrayInteger result = new ArrayInteger();
+		// checks if array is null
+		if (values == null){
+			return result;
+		}
+		for (Integer value : values) {
+			// adds all elements
+			result.push(value.intValue());
+		}
+		// returns the list
+		return result;
+	}
+
 
 	@JsProperty(name = "length")
 	public native int length();
@@ -43,7 +62,7 @@ public class ArrayInteger {
 	 * @return the index of the last occurrence of the specified element in this object, or -1 if this object does not contain
 	 *         the element
 	 */
-	public native int lastIndexOf(int value);
+	native int lastIndexOf(int value);
 
 	/**
 	 * Returns the index of the first occurrence of the specified element in this object, or -1 if this object does not contain
@@ -53,21 +72,21 @@ public class ArrayInteger {
 	 * @return the index of the first occurrence of the specified element in this object, or -1 if this object does not contain
 	 *         the element
 	 */
-	public native int indexOf(int value);
+	native int indexOf(int value);
 
-	public native ArrayInteger slice(int start, int end);
+	native ArrayInteger slice(int start, int end);
 	
-	public native ArrayInteger splice(int start);
+	native ArrayInteger splice(int start);
 
-	public native ArrayInteger splice(int start, int deleteCounts);
+	native ArrayInteger splice(int start, int deleteCounts);
 
-	public native ArrayInteger splice(int start, int deleteCounts, int item);
+	native ArrayInteger splice(int start, int deleteCounts, int item);
 
 	/**
 	 * Removes all of the elements from this object. The object will be empty after this call returns.
 	 */
 	@JsOverlay
-	public final void clear() {
+	void clear() {
 		splice(0, length());
 	};
 
@@ -79,7 +98,7 @@ public class ArrayInteger {
 	 * @return the element previously at the specified position
 	 */
 	@JsOverlay
-	public final int remove(int index) {
+	int remove(int index) {
 		return splice(index, 1).get(0);
 	}
 
@@ -91,7 +110,7 @@ public class ArrayInteger {
 	 * @param value element to be inserted
 	 */
 	@JsOverlay
-	public final void insertAt(int index, int item) {
+	void insertAt(int index, int item) {
 		splice(index, 0, item);
 	};
 
@@ -106,24 +125,24 @@ public class ArrayInteger {
 	 * @return the value at the given index
 	 */
 	@JsOverlay
-	public final int get(int index) {
+	public int get(int index) {
 		return slice(index, index+1).pop();
 	}
 
 	/**
 	 * Pushes the given integer onto the end of the array.
 	 */
-	public native void fill(int item, int start, int end);
+	native void fill(int item, int start, int end);
 
 	/**
 	 * Pushes the given integer onto the end of the array.
 	 */
-	public native void push(int item);
+	native void push(int item);
 	
 	/**
 	 * Pushes the given integer onto the end of the array.
 	 */
-	public native int pop();
+	native int pop();
 
 	/**
 	 * Sets the value value at a given index.
@@ -135,7 +154,7 @@ public class ArrayInteger {
 	 * @param value the value to be stored
 	 */
 	@JsOverlay
-	public final void set(int index, int item){
+	void set(int index, int item){
 		fill(item, index, index+1);
 	}
 

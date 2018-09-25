@@ -31,9 +31,9 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Title extends FontItem<Options, IsDefaultTitle, NativeTitle> {
+public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitle> {
 
-	Title(Options options, IsDefaultTitle defaultValues, NativeTitle delegated) {
+	Title(BaseOptions<?,?> options, IsDefaultTitle defaultValues, NativeTitle delegated) {
 		super(options, defaultValues, delegated == null ? new NativeTitle() : delegated);
 	}
 	

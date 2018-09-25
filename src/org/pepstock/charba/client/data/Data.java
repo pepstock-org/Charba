@@ -156,4 +156,7 @@ public final class Data extends JavaScriptObjectContainer{
 		return this.datasets;
 	}
 	
+	public Object getObject() {
+		return super.getJavaScriptObject();
+	}
 }

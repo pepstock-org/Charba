@@ -27,6 +27,7 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -128,7 +129,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * @return the dataset label. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
 	 * @see org.pepstock.charba.client.data.Dataset#setLabel(String)
 	 */
-	@JsProperty
+	@JsOverlay
 	public final String getDatasetLabel() {
 		return AssignHelper.check(getNativeDatasetLabel(), UndefinedValues.STRING);
 	}
@@ -138,7 +139,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return the label. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final String getLabel() {
 		return AssignHelper.check(getNativeLabel(), UndefinedValues.STRING);
 	}
@@ -148,7 +149,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return the edge to skip drawing the border for.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final Position getBorderSkipped() {
 		return AssignHelper.deserialize(AssignHelper.check(getNativeBorderSkipped(), Position.top.name()), Position.class, Position.top);
 	}
@@ -158,7 +159,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return list of the fill color of the dataset item.  Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final String getBackgroundColorAsString() {
 		return AssignHelper.check(getNativeBackgroundColor(), UndefinedValues.STRING);
 	}
@@ -168,7 +169,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return list of the fill color of the dataset item.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
@@ -178,7 +179,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return list of the color of the dataset item border. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final String getBorderColorAsString() {
 		return AssignHelper.check(getNativeBorderColor(), UndefinedValues.STRING);
 	}
@@ -188,7 +189,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return list of the color of the dataset item border
 	 */
-	@JsProperty
+	@JsOverlay
 	public final IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
 	}
@@ -198,7 +199,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return list of the stroke width of the dataset item in pixels. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final int getBorderWidth() {
 		return AssignHelper.check(getNativeBorderWidth(), UndefinedValues.INTEGER);
 	}
@@ -208,7 +209,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return <code>true</code> if is an horizontal view. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final boolean isHorizontal() {
 		return AssignHelper.check(isNativeHorizontal(), UndefinedValues.BOOLEAN);
 	}
@@ -218,7 +219,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return the base value of dataset. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final double getBase() {
 		return AssignHelper.check(getNativeBase(), UndefinedValues.DOUBLE);
 	}
@@ -228,7 +229,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return the X location of dataset item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final double getX() {
 		return AssignHelper.check(getNativeX(), UndefinedValues.DOUBLE);
 	}
@@ -238,7 +239,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return the Y location of dataset item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final double getY() {
 		return AssignHelper.check(getNativeY(), UndefinedValues.DOUBLE);
 	}
@@ -248,7 +249,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return the width of dataset item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final double getWidth() {
 		return AssignHelper.check(getNativeWidth(), UndefinedValues.DOUBLE);
 	}
@@ -258,7 +259,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return the height of dataset item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final double getHeight() {
 		return AssignHelper.check(getNativeHeight(), UndefinedValues.DOUBLE);
 	}
@@ -268,7 +269,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return <code>true</code> if skipped. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final boolean isSkipped() {
 		return AssignHelper.check(isNativeSkipped(), UndefinedValues.BOOLEAN);
 	}
@@ -278,7 +279,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return the radius of dataset item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final double getRadius() {
 		return AssignHelper.check(getNativeRadius(), UndefinedValues.DOUBLE);
 	}
@@ -289,7 +290,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * @return the style of the legend box
 	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
-	@JsProperty
+	@JsOverlay
 	public final List<PointStyle> getPointStyle() {
 		// creates result
 		Object objectNative = getNativePointStyle();
@@ -307,7 +308,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return  the Bezier curve tension (0 for no Bezier curves). Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final double getTension() {
 		return AssignHelper.check(getNativeTension(), UndefinedValues.DOUBLE);
 	}
@@ -317,7 +318,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return the hit radius. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final double getHitRadius() {
 		return AssignHelper.check(getNativeHitRadius(), UndefinedValues.DOUBLE);
 	}
@@ -327,7 +328,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return the previous X control point of dataset item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final double getControlPointPreviousX() {
 		return AssignHelper.check(getNativeControlPointPreviousX(), UndefinedValues.DOUBLE);
 	}
@@ -337,7 +338,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return the previous Y control point of dataset item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final double getControlPointPreviousY() {
 		return AssignHelper.check(getNativeControlPointPreviousY(), UndefinedValues.DOUBLE);
 	}
@@ -347,7 +348,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return the next X control point of dataset item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final double getControlPointNextX() {
 		return AssignHelper.check(getNativeControlPointNextX(), UndefinedValues.DOUBLE);
 	}
@@ -357,7 +358,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return the next Y control point of dataset item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final double getControlPointNextY() {
 		return AssignHelper.check(getNativeControlPointNextY(), UndefinedValues.DOUBLE);
 	}
@@ -367,7 +368,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return <code>true</code> if stepped line has been selected. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final boolean isSteppedLine() {
 		return AssignHelper.check(isNativeSteppedLine(), UndefinedValues.BOOLEAN);
 	}
@@ -377,7 +378,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return the start angle of dataset item. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final double getStartAngle() {
 		return AssignHelper.check(getNativeStartAngle(), UndefinedValues.DOUBLE);
 	}
@@ -387,7 +388,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return the end angle of dataset item. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final double getEndAngle() {
 		return AssignHelper.check(getNativeEndAngle(), UndefinedValues.DOUBLE);
 	}
@@ -397,7 +398,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return the circumference of dataset item. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final double getCircumference() {
 		return AssignHelper.check(getNativeCircumference(), UndefinedValues.DOUBLE);
 	}
@@ -407,7 +408,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return the outer radius of dataset item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final double getOuterRadius() {
 		return AssignHelper.check(getNativeOuterRadius(), UndefinedValues.DOUBLE);
 	}
@@ -417,7 +418,7 @@ public final class DatasetViewItem extends NativeObject {
 	 * 
 	 * @return the inner radius of dataset item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsProperty
+	@JsOverlay
 	public final double getInnerRadius() {
 		return AssignHelper.check(getNativeInnerRadius(), UndefinedValues.DOUBLE);
 	}

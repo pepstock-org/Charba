@@ -30,7 +30,7 @@ abstract class AxisContainer{
 	/**
 	 * Creates the chart configuration object with the chart instance
 	 * @param chart chart instance
-	 * @see org.pepstock.charba.client.AbstractChart
+	 * @see org.pepstock.charba.client.jsinterop.AbstractChart
 	 */
 	public AxisContainer(Axis axis) {
 		this.axis = axis;
