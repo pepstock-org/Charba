@@ -18,7 +18,8 @@ package org.pepstock.charba.client.jsinterop.options;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.enums.FontStyle;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.Enumer;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
 
 /**
@@ -50,7 +51,7 @@ public abstract class FontItem<P extends BaseModel<?,?,?>, D extends IsDefaultFo
 	 * @return the font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
 	 */
 	public int getFontSize() {
-		return AssignHelper.check(getDelegated().getFontSize(), getDefaultValues().getFontSize());
+		return Checker.check(getDelegated().getFontSize(), getDefaultValues().getFontSize());
 	}
 
 	/**
@@ -73,7 +74,7 @@ public abstract class FontItem<P extends BaseModel<?,?,?>, D extends IsDefaultFo
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getFontStyle(), getDefaultValues().getFontStyle()), FontStyle.class, FontStyle.normal);
+		return Enumer.deserialize(getDelegated().getFontStyle(), getDefaultValues().getFontStyle(), FontStyle.class, FontStyle.normal);
 	}
 
 	/**
@@ -102,7 +103,7 @@ public abstract class FontItem<P extends BaseModel<?,?,?>, D extends IsDefaultFo
 	 * @return Font color. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontColor()}.
 	 */
 	public String getFontColorAsString() {
-		return AssignHelper.check(getDelegated().getFontColor(), getDefaultValues().getFontColor());
+		return Checker.check(getDelegated().getFontColor(), getDefaultValues().getFontColor());
 	}
 
 	/**
@@ -132,7 +133,7 @@ public abstract class FontItem<P extends BaseModel<?,?,?>, D extends IsDefaultFo
 	 *         {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
 	 */
 	public String getFontFamily() {
-		return AssignHelper.check(getDelegated().getFontFamily(), getDefaultValues().getFontFamily());
+		return Checker.check(getDelegated().getFontFamily(), getDefaultValues().getFontFamily());
 	}
 
 }

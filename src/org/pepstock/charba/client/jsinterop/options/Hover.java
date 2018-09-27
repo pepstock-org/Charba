@@ -17,7 +17,8 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.Enumer;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover;
 
 /**
@@ -52,7 +53,7 @@ public class Hover extends BaseModel<BaseOptions<?,?>, IsDefaultHover, NativeHov
 	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
 	public InteractionMode getMode() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getMode(), getDefaultValues().getMode()), InteractionMode.class, InteractionMode.nearest);
+		return Enumer.deserialize(getDelegated().getMode(), getDefaultValues().getMode(), InteractionMode.class, InteractionMode.nearest);
 	}
 
 	/**
@@ -72,7 +73,7 @@ public class Hover extends BaseModel<BaseOptions<?,?>, IsDefaultHover, NativeHov
 	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart. Default is true.
 	 */
 	public boolean isIntersect() {
-		return AssignHelper.check(getDelegated().isIntersect(), getDefaultValues().isIntersect());
+		return Checker.check(getDelegated().isIntersect(), getDefaultValues().isIntersect());
 	}
 
 	/**
@@ -92,7 +93,7 @@ public class Hover extends BaseModel<BaseOptions<?,?>, IsDefaultHover, NativeHov
 	 * @return duration in milliseconds it takes to animate hover style changes. Default is 400.
 	 */
 	public int getAnimationDuration() {
-		return AssignHelper.check(getDelegated().getAnimationDuration(), getDefaultValues().getAnimationDuration());
+		return Checker.check(getDelegated().getAnimationDuration(), getDefaultValues().getAnimationDuration());
 	}
 	
 	/**
@@ -115,7 +116,7 @@ public class Hover extends BaseModel<BaseOptions<?,?>, IsDefaultHover, NativeHov
 	 * @see org.pepstock.charba.client.enums.InteractionAxis
 	 */
 	public InteractionAxis getAxis() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getAxis(), getDefaultValues().getAxis()), InteractionAxis.class, InteractionAxis.x);
+		return Enumer.deserialize(getDelegated().getAxis(), getDefaultValues().getAxis(), InteractionAxis.class, InteractionAxis.x);
 	}
 	
 	/* (non-Javadoc)

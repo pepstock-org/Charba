@@ -16,7 +16,8 @@
 package org.pepstock.charba.client.jsinterop.items;
 
 import org.pepstock.charba.client.enums.Easing;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.Enumer;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsOverlay;
@@ -66,7 +67,7 @@ public final class AnimationItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getCurrentStep() {
-		return AssignHelper.check(getNativeCurrentStep(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeCurrentStep(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -76,7 +77,7 @@ public final class AnimationItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getNumSteps() {
-		return AssignHelper.check(getNativeNumSteps(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeNumSteps(), UndefinedValues.DOUBLE);
 	}
 	
 	/**
@@ -87,7 +88,7 @@ public final class AnimationItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final Easing getEasing() {
-		return AssignHelper.deserialize(AssignHelper.check(getNativeEasing(), Easing.easeOutQuart.name()), Easing.class, Easing.easeOutQuart);
+		return Enumer.deserialize(getNativeEasing(), Easing.class, Easing.easeOutQuart);
 	}
 
 }

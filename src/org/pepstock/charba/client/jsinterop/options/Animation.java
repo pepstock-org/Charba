@@ -16,7 +16,8 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.enums.Easing;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.Enumer;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
 
 /**
@@ -51,7 +52,7 @@ public class Animation extends BaseModel<BaseOptions<?,?>, IsDefaultAnimation, N
 	 * @see org.pepstock.charba.client.enums.Easing
 	 */
 	public Easing getEasing() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getEasing(), getDefaultValues().getEasing()), Easing.class, Easing.easeOutQuart);
+		return Enumer.deserialize(getDelegated().getEasing(), getDefaultValues().getEasing(), Easing.class, Easing.easeOutQuart);
 	}
 
 	/**
@@ -71,7 +72,7 @@ public class Animation extends BaseModel<BaseOptions<?,?>, IsDefaultAnimation, N
 	 * @return the number of milliseconds an animation takes. Default is 1000 (1 second).
 	 */
 	public int getDuration() {
-		return AssignHelper.check(getDelegated().getDuration(), getDefaultValues().getDuration());
+		return Checker.check(getDelegated().getDuration(), getDefaultValues().getDuration());
 	}
 	
 	/**
@@ -91,7 +92,7 @@ public class Animation extends BaseModel<BaseOptions<?,?>, IsDefaultAnimation, N
 	 * @return If true, the chart will animate in with a rotation animation. Default is true.
 	 */
 	public boolean isAnimateRotate() {
-		return AssignHelper.check(getDelegated().isAnimateRotate(), getDefaultValues().isAnimateRotate());
+		return Checker.check(getDelegated().isAnimateRotate(), getDefaultValues().isAnimateRotate());
 	}
 
 	/**
@@ -111,7 +112,7 @@ public class Animation extends BaseModel<BaseOptions<?,?>, IsDefaultAnimation, N
 	 * @return If true, will animate scaling the chart from the center outwards. Default is false.
 	 */
 	public boolean isAnimateScale() {
-		return AssignHelper.check(getDelegated().isAnimateScale(), getDefaultValues().isAnimateScale());
+		return Checker.check(getDelegated().isAnimateScale(), getDefaultValues().isAnimateScale());
 	}
 
 	/* (non-Javadoc)

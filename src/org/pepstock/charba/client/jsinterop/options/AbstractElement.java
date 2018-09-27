@@ -17,7 +17,7 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc;
 
 /**
@@ -63,7 +63,7 @@ public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc
 	 * @return the background color. Default is rgba(0,0,0,0.1).
 	 */
 	public String getBackgroundColorAsString() {
-		return AssignHelper.check(getDelegated().getBackgroundColor(), getDefaultValues().getBackgroundColor());
+		return Checker.check(getDelegated().getBackgroundColor(), getDefaultValues().getBackgroundColor());
 	}
 
 
@@ -93,7 +93,7 @@ public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc
 	 * @return the border width. Default is 2.
 	 */
 	public int getBorderWidth() {
-		return AssignHelper.check(getDelegated().getBorderWidth(), getDefaultValues().getBorderWidth());
+		return Checker.check(getDelegated().getBorderWidth(), getDefaultValues().getBorderWidth());
 	}
 
 	/**
@@ -122,7 +122,7 @@ public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc
 	 * @return the border color. Default is #fff.
 	 */
 	public String getBorderColorAsString() {
-		return AssignHelper.check(getDelegated().getBorderColor(), getDefaultValues().getBorderColor());
+		return Checker.check(getDelegated().getBorderColor(), getDefaultValues().getBorderColor());
 	}
 
 	/**

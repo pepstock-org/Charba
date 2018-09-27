@@ -15,14 +15,12 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -82,7 +80,7 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 */
 	@JsOverlay
 	public boolean isDoughnutMode() {
-		return AssignHelper.check(isNativeDoughnutMode(), UndefinedValues.BOOLEAN);
+		return Checker.check(isNativeDoughnutMode(), UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -92,8 +90,7 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 */
 	@JsOverlay
 	public List<Integer> getLineWidths() {
-		List<Integer> result = ArrayListHelper.build(getNativeLineWidths());
-		return result == null ? Collections.unmodifiableList(new ArrayList<Integer>()) : Collections.unmodifiableList(result);
+		return ArrayListHelper.unmodifiableList(getNativeLineWidths());
 	}
 
 	/**
@@ -103,8 +100,7 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 */
 	@JsOverlay
 	public List<Integer> getColumnWidths() {
-		List<Integer> result = ArrayListHelper.build(getNativeColumnWidths());
-		return result == null ? Collections.unmodifiableList(new ArrayList<Integer>()) : Collections.unmodifiableList(result);
+		return ArrayListHelper.unmodifiableList(getNativeColumnWidths());
 	}
 
 	/**
@@ -114,8 +110,7 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 */
 	@JsOverlay
 	public List<LegendHitBoxItem> getHitBoxes() {
-		List<LegendHitBoxItem> result = ArrayListHelper.build(getNativeHitBoxes());
-		return result == null ? Collections.unmodifiableList(new ArrayList<LegendHitBoxItem>()) : Collections.unmodifiableList(result);
+		return ArrayListHelper.unmodifiableList(getNativeHitBoxes());
 	}
 
 	/**
@@ -125,7 +120,6 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 */
 	@JsOverlay
 	public List<LegendItem> getItems() {
-		List<LegendItem> result = ArrayListHelper.build(getNativeItems());
-		return result == null ? Collections.unmodifiableList(new ArrayList<LegendItem>()) : Collections.unmodifiableList(result);
+		return ArrayListHelper.unmodifiableList(getNativeItems());
 	}
 }

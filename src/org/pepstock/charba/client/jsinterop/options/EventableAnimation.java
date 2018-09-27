@@ -16,6 +16,8 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.events.AnimationCompleteCallbackHandler;
+import org.pepstock.charba.client.events.AnimationProgressCallbackHandler;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.JsFactory;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
@@ -34,18 +36,22 @@ import jsinterop.annotations.JsFunction;
 public class EventableAnimation extends Animation {
 	
 	@JsFunction
-	public interface AnimationCompleteCallback {
+	interface ProxyAnimationCompleteCallback {
 		void call(ChartNode context, AnimationObject animationObject);
 	}
 
 	@JsFunction
-	public interface AnimationProgressCallback {
+	interface ProxyAnimationProgressCallback {
 		void call(ChartNode context, AnimationObject animationObject);
 	}
 
-	private final CallbackProxy<AnimationCompleteCallback> completeCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyAnimationCompleteCallback> completeCallbackProxy = JsFactory.newCallbackProxy();
 
-	private final CallbackProxy<AnimationProgressCallback> progressCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyAnimationProgressCallback> progressCallbackProxy = JsFactory.newCallbackProxy();
+	
+	private AnimationCompleteCallbackHandler completeCallbackHandler = null;
+	
+	private AnimationProgressCallbackHandler progressCallbackHandler = null;
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -58,26 +64,72 @@ public class EventableAnimation extends Animation {
 
 	EventableAnimation(BaseOptions<EventableAnimation, EventableLegend> options, IsDefaultAnimation defaultValues, NativeAnimation delegated) {
 		super(options, defaultValues, delegated);
+		completeCallbackProxy.setCallback(new ProxyAnimationCompleteCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.EventableAnimation.ProxyAnimationCompleteCallback#call(org.pepstock.charba.client.jsinterop.items.ChartNode, org.pepstock.charba.client.jsinterop.items.AnimationObject)
+			 */
+			@Override
+			public void call(ChartNode context, AnimationObject animationObject) {
+				if (completeCallbackHandler != null) {
+					completeCallbackHandler.onComplete(context, animationObject);
+				}
+			}
+			
+		});
+		progressCallbackProxy.setCallback(new ProxyAnimationProgressCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.EventableAnimation.ProxyAnimationProgressCallback#call(org.pepstock.charba.client.jsinterop.items.ChartNode, org.pepstock.charba.client.jsinterop.items.AnimationObject)
+			 */
+			@Override
+			public void call(ChartNode context, AnimationObject animationObject) {
+				if (progressCallbackHandler != null) {
+					progressCallbackHandler.onProgress(context, animationObject);
+				}
+			}
+
+		});
 	}
 	
-	public void setOnComplete(AnimationCompleteCallback callback) {
-		if (callback != null) {
-			completeCallbackProxy.setCallback(callback);
+	/**
+	 * @return the completeCallbackHandler
+	 */
+	public AnimationCompleteCallbackHandler getCompleteCallbackHandler() {
+		return completeCallbackHandler;
+	}
+
+	/**
+	 * @param completeCallbackHandler the completeCallbackHandler to set
+	 */
+	public void setCompleteCallbackHandler(AnimationCompleteCallbackHandler completeCallbackHandler) {
+		if (completeCallbackHandler != null) {
 			getDelegated().setOnComplete(completeCallbackProxy.getProxy());
 			checkAndAddToParent();
 		} else {
 			remove(Property.onComplete);
 		}
+		this.completeCallbackHandler = completeCallbackHandler;
+		
 	}
 
-	public void setOnProgress(AnimationProgressCallback callback) {
-		if (callback != null) {
-			progressCallbackProxy.setCallback(callback);
+	/**
+	 * @return the progressCallbackHandler
+	 */
+	public AnimationProgressCallbackHandler getProgressCallbackHandler() {
+		return progressCallbackHandler;
+	}
+
+	/**
+	 * @param progressCallbackHandler the progressCallbackHandler to set
+	 */
+	public void setProgressCallbackHandler(AnimationProgressCallbackHandler progressCallbackHandler) {
+		if (progressCallbackHandler != null) {
 			getDelegated().setOnProgress(progressCallbackProxy.getProxy());
 			checkAndAddToParent();
 		} else {
 			remove(Property.onProgress);
 		}
+		this.progressCallbackHandler = progressCallbackHandler;
 	}
-	
 }

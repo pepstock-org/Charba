@@ -25,7 +25,7 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayIntegerList;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.ArrayStringList;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines;
 
 /**
@@ -57,7 +57,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return If false, do not display grid lines for this axis. Default is true.
 	 */
 	public boolean isDisplay() {
-		return AssignHelper.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
+		return Checker.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -115,11 +115,11 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 				result = new ArrayStringList();
 				result.add(getDefaultValues().getColor());
 			} else {
-				result = ArrayListHelper.build(array);
+				result = ArrayListHelper.list(array);
 			}
 		} else {
 			result = new ArrayStringList();
-			result.add(AssignHelper.check((String)values, getDefaultValues().getColor()));
+			result.add(Checker.check(values, getDefaultValues().getColor()));
 		}
 		return result;
 	}
@@ -163,7 +163,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return the line dash pattern used when stroking lines
 	 */
 	public List<Integer> getBorderDash() {
-		return ArrayListHelper.build(getDelegated().getBorderDash());
+		return ArrayListHelper.list(getDelegated().getBorderDash());
 	}
 
 	/**
@@ -183,7 +183,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return Offset for line dashes. If not set, default is 0
 	 */
 	public int getBorderDashOffset() {
-		return AssignHelper.check(getDelegated().getBorderDashOffset(), getDefaultValues().getBorderDashOffset());
+		return Checker.check(getDelegated().getBorderDashOffset(), getDefaultValues().getBorderDashOffset());
 	}
 
 	/**
@@ -219,18 +219,17 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 		ArrayIntegerList result = null;
 		// loads stored data
 		Object values = getDelegated().getLineWidth();
-		
 		if (Array.isArray(values)) {
 			ArrayInteger array = (ArrayInteger)values;
 			if (array.length() == 0) {
 				result = new ArrayIntegerList();
 				result.add(getDefaultValues().getLineWidth());
 			} else {
-				result = ArrayListHelper.build(array);
+				result = ArrayListHelper.list(array);
 			}
 		} else {
 			result = new ArrayIntegerList();
-			result.add(AssignHelper.check(values, getDefaultValues().getLineWidth()));
+			result.add(Checker.check(values, getDefaultValues().getLineWidth()));
 		}
 		return result;
 	}
@@ -252,7 +251,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return If true, draw border at the edge between the axis and the chart area. If not set, default is true
 	 */
 	public boolean isDrawBorder() {
-		return AssignHelper.check(getDelegated().isDrawBorder(), getDefaultValues().isDrawBorder());
+		return Checker.check(getDelegated().isDrawBorder(), getDefaultValues().isDrawBorder());
 	}
 
 	/**
@@ -276,7 +275,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 *         need to control which grid lines are drawn. If not set, default is true
 	 */
 	public boolean isDrawOnChartArea() {
-		return AssignHelper.check(getDelegated().isDrawOnChartArea(), getDefaultValues().isDrawOnChartArea());
+		return Checker.check(getDelegated().isDrawOnChartArea(), getDefaultValues().isDrawOnChartArea());
 	}
 
 	/**
@@ -296,7 +295,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return If true, draw lines beside the ticks in the axis area beside the chart. If not set, default is true
 	 */
 	public boolean isDrawTicks() {
-		return AssignHelper.check(getDelegated().isDrawTicks(), getDefaultValues().isDrawTicks());
+		return Checker.check(getDelegated().isDrawTicks(), getDefaultValues().isDrawTicks());
 	}
 
 	/**
@@ -316,7 +315,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return Length in pixels that the grid lines will draw into the axis area. If not set, default is 10
 	 */
 	public int getTickMarkLength() {
-		return AssignHelper.check(getDelegated().getTickMarkLength(), getDefaultValues().getTickMarkLength());
+		return Checker.check(getDelegated().getTickMarkLength(), getDefaultValues().getTickMarkLength());
 	}
 
 	/**
@@ -336,7 +335,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return Stroke width of the grid line for the first index (index 0). If not set, default is 1
 	 */
 	public int getZeroLineWidth() {
-		return AssignHelper.check(getDelegated().getZeroLineWidth(), getDefaultValues().getZeroLineWidth());
+		return Checker.check(getDelegated().getZeroLineWidth(), getDefaultValues().getZeroLineWidth());
 	}
 
 	/**
@@ -365,7 +364,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return Stroke color of the grid line for the first index (index 0). If not set, default is 'rgba(0, 0, 0, 0.25)'
 	 */
 	public String getZeroLineColorAsString() {
-		return AssignHelper.check(getDelegated().getZeroLineColor(), getDefaultValues().getZeroLineColor());
+		return Checker.check(getDelegated().getZeroLineColor(), getDefaultValues().getZeroLineColor());
 	}
 
 	/**
@@ -403,7 +402,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return the length and spacing of dashes of the grid line for the first index (index 0).
 	 */
 	public List<Integer> getZeroLineBorderDash() {
-		return ArrayListHelper.build(getDelegated().getZeroLineBorderDash());
+		return ArrayListHelper.list(getDelegated().getZeroLineBorderDash());
 	}
 
 	/**
@@ -423,7 +422,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return the offset for line dashes of the grid line for the first index (index 0). if not set, default is 0
 	 */
 	public int getZeroLineBorderDashOffset() {
-		return AssignHelper.check(getDelegated().getZeroLineBorderDashOffset(), getDefaultValues().getZeroLineBorderDashOffset());
+		return Checker.check(getDelegated().getZeroLineBorderDashOffset(), getDefaultValues().getZeroLineBorderDashOffset());
 	}
 
 	/**
@@ -443,7 +442,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return If true, grid lines will be shifted to be between labels. If not set, default is false.
 	 */
 	public boolean isOffsetGridLines() {
-		return AssignHelper.check(getDelegated().isOffsetGridLines(), getDefaultValues().isOffsetGridLines());
+		return Checker.check(getDelegated().isOffsetGridLines(), getDefaultValues().isOffsetGridLines());
 	}
 	
 	/* (non-Javadoc)

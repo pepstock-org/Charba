@@ -21,7 +21,8 @@ import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.jsinterop.commons.Array;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.Enumer;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle;
 
 /**
@@ -54,7 +55,7 @@ public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitl
 	 * @return if the title is shown. Default is true.
 	 */
 	public boolean isDisplay() {
-		return AssignHelper.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
+		return Checker.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -76,7 +77,7 @@ public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitl
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getPosition(), getDefaultValues().getPosition()), Position.class, Position.top);
+		return Enumer.deserialize(getDelegated().getPosition(), getDefaultValues().getPosition(), Position.class, Position.top);
 	}
 	
 	/**
@@ -96,7 +97,7 @@ public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitl
 	 * @return Padding to apply around labels. Only top and bottom are implemented. Default is 10.
 	 */
 	public int getPadding() {
-		return AssignHelper.check(getDelegated().getPadding(), getDefaultValues().getPadding());
+		return Checker.check(getDelegated().getPadding(), getDefaultValues().getPadding());
 	}
 
 	/**
@@ -116,7 +117,7 @@ public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitl
 	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). Default is true.
 	 */
 	public boolean isFullWidth() {
-		return AssignHelper.check(getDelegated().isFullWidth(), getDefaultValues().isFullWidth());
+		return Checker.check(getDelegated().isFullWidth(), getDefaultValues().isFullWidth());
 	}
 
 	/**
@@ -136,7 +137,7 @@ public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitl
 	 * @return the height of an individual line of text. Default is 1.2
 	 */
 	public double getLineHeight() {
-		return AssignHelper.check(getDelegated().getLineHeight(), getDefaultValues().getLineHeight());
+		return Checker.check(getDelegated().getLineHeight(), getDefaultValues().getLineHeight());
 	}
 	
 	/**
@@ -164,9 +165,9 @@ public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitl
 	public List<String> getText() {
 		Object value = getDelegated().getText();
 		if (Array.isArray(value)) {
-			return ArrayListHelper.build((ArrayString)value);
+			return ArrayListHelper.list((ArrayString)value);
 		} else if (value != null ){
-			return ArrayListHelper.build(ArrayString.of(value.toString()));
+			return ArrayListHelper.list(ArrayString.of(value.toString()));
 		}
 		return null;
 	}

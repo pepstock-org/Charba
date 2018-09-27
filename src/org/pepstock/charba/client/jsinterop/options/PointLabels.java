@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPointLabels;
 
 /**
@@ -48,7 +48,7 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels, Nat
 	 * @return if true, labels are shown. Default is true.
 	 */
 	public boolean isDisplay() {
-		return AssignHelper.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
+		return Checker.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
 	}	
 	
 	/* (non-Javadoc)

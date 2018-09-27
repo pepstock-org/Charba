@@ -22,7 +22,8 @@ import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.Enumer;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine;
 
 /**
@@ -59,7 +60,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @return the Bezier curve tension (0 for no Bezier curves). Default is 0.4F.
 	 */
 	public double getTension() {
-		return AssignHelper.check(getDelegated().getTension(), getDefaultValues().getTension());
+		return Checker.check(getDelegated().getTension(), getDefaultValues().getTension());
 	}
 
 	/**
@@ -83,7 +84,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public CapStyle getBorderCapStyle() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getBorderCapStyle(), getDefaultValues().getBorderCapStyle()), CapStyle.class, CapStyle.butt);
+		return Enumer.deserialize(getDelegated().getBorderCapStyle(), getDefaultValues().getBorderCapStyle(), CapStyle.class, CapStyle.butt);
 	}
 
 	/**
@@ -118,7 +119,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 *         lines and gaps which describe the pattern.
 	 */
 	public List<Integer> getBorderDash() {
-		return ArrayListHelper.build(getDelegated().getBorderDash());
+		return ArrayListHelper.list(getDelegated().getBorderDash());
 	}
 
 	/**
@@ -138,7 +139,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @return the line dash pattern offset or "phase". Default is 0.
 	 */
 	public int getBorderDashOffset() {
-		return AssignHelper.check(getDelegated().getBorderDashOffset(), getDefaultValues().getBorderDashOffset());
+		return Checker.check(getDelegated().getBorderDashOffset(), getDefaultValues().getBorderDashOffset());
 	}
 
 	/**
@@ -168,7 +169,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public JoinStyle getBorderJoinStyle() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getBorderJoinStyle(), getDefaultValues().getBorderJoinStyle()), JoinStyle.class, JoinStyle.miter);
+		return Enumer.deserialize(getDelegated().getBorderJoinStyle(), getDefaultValues().getBorderJoinStyle(), JoinStyle.class, JoinStyle.miter);
 	}
 
 	/**
@@ -188,7 +189,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction. Default is <code>true</code>.
 	 */
 	public boolean isCapBezierPoints() {
-		return AssignHelper.check(getDelegated().isCapBezierPoints(), getDefaultValues().isCapBezierPoints());
+		return Checker.check(getDelegated().isCapBezierPoints(), getDefaultValues().isCapBezierPoints());
 	}
 
 	/**
@@ -238,7 +239,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 		} else if (value.equalsIgnoreCase(Boolean.TRUE.toString())) {
 			return Fill.origin;
 		}
-		return AssignHelper.deserialize(value, Fill.class, Fill.origin);
+		return Enumer.deserialize(value, Fill.class, Fill.origin);
 	}
 	/**
 	 * Sets <code>true</code> to show the line as a stepped line (tension will be ignored).
@@ -257,7 +258,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored). Default is <code>false</code>.
 	 */
 	public boolean isStepped() {
-		return AssignHelper.check(getDelegated().isStepped(), getDefaultValues().isStepped());
+		return Checker.check(getDelegated().isStepped(), getDefaultValues().isStepped());
 	}
 	
 	/* (non-Javadoc)

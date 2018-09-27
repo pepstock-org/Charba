@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsOverlay;
@@ -65,7 +65,7 @@ public final class DatasetItem extends NativeObject{
 	 */
 	@JsOverlay
 	public final int getDatasetIndex() {
-		return AssignHelper.check(getNativeDatasetIndex(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeDatasetIndex(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -77,7 +77,7 @@ public final class DatasetItem extends NativeObject{
 	 */
 	@JsOverlay
 	public final int getIndex() {
-		return AssignHelper.check(getNativeIndex(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeIndex(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -87,7 +87,7 @@ public final class DatasetItem extends NativeObject{
 	 */
 	@JsOverlay
 	public final boolean isHidden() {
-		return AssignHelper.check(isNativeHidden(), UndefinedValues.BOOLEAN);
+		return Checker.check(isNativeHidden(), UndefinedValues.BOOLEAN);
 	}
 
 	/**

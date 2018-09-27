@@ -9,10 +9,12 @@ import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.Enumer;
 import org.pepstock.charba.client.jsinterop.commons.JsFactory;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 
 import jsinterop.annotations.JsFunction;
 
@@ -24,7 +26,7 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 *
 	 */
 	@JsFunction
-	public interface GenerateLegendCallback {
+	public interface ProxyGenerateLegendCallback {
 		/**
 		 * Called to generate an HTML legend.
 		 * 
@@ -57,25 +59,23 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	
 	private final Scales scales;
 	
-	private final GenerateLegendCallback originLegendCallback;
+	private final ProxyGenerateLegendCallback originLegendCallback;
 	
-	private final CallbackProxy<GenerateLegendCallback> legendCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyGenerateLegendCallback> legendCallbackProxy = JsFactory.newCallbackProxy();
 
-	public BaseOptions(IsDefaultOptions defaultValues) {
+	BaseOptions(IsDefaultOptions defaultValues) {
 		this(defaultValues, null);
 	}
 
-	protected BaseOptions(IsDefaultOptions defaultValues, NativeOptions delegated) {
+	BaseOptions(IsDefaultOptions defaultValues, NativeOptions delegated) {
 		// if delegated == null, is global or chart, noit config
-		super(defaultValues, delegated == null ? new NativeOptions() : delegated, delegated == null);
-		//animation = new Animation(this, getDefaultValues().getAnimation(), getDelegated().getAnimation());
+		super(defaultValues, delegated == null ? new NativeOptions() : delegated);
 		elements = new Elements(this, defaultValues, getDelegated().getElements());
 		hover = new Hover(this, getDefaultValues().getHover(), getDelegated().getHover());
 		layout = new Layout(this, defaultValues, getDelegated().getLayout());
 		title = new Title(this, getDefaultValues().getTitle(), getDelegated().getTitle());
-		//legend = new Legend(this, getDefaultValues().getLegend(),getDelegated().getLegend());
 		tooltips = new Tooltips(this, getDefaultValues().getTooltips(), getDelegated().getTooltips());
-		// FIXME check
+		// FIXME check visibilita
 		scale = new Scale(this, getDefaultValues().getScale(), getDelegated().getScale());
 		scales = new Scales(this, getDefaultValues().getScale(), getDelegated().getScales());
 		plugins = new Plugins(this, getDelegated().getPlugins());
@@ -159,8 +159,12 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	/**
 	 * @return the originLegendCallback
 	 */
-	public GenerateLegendCallback getOriginLegendCallback() {
+	public ProxyGenerateLegendCallback getOriginLegendCallback() {
 		return originLegendCallback;
+	}
+	
+	public String getCharbaId() {
+		return Checker.check(getDelegated().getCharbaId(), UndefinedValues.STRING);
 	}
 
 	/**
@@ -175,7 +179,7 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 			// remove java script property
 			getDelegated().setEvents(new ArrayString());
 		} else {
-			getDelegated().setEvents(AssignHelper.serialize(events));
+			getDelegated().setEvents(ArrayString.of(events));
 		}
 	}
 
@@ -185,7 +189,7 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 * @return the browser events that the chart should listen to for tooltips and hovering.
 	 */
 	public List<Event> getEvents() {
-		return ArrayListHelper.build(Event.class, getDelegated().getEvents());
+		return ArrayListHelper.list(Event.class, getDelegated().getEvents());
 	}
 
 	/**
@@ -213,7 +217,7 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 * @return the resizing of the chart canvas when its container does. Default is true.
 	 */
 	public boolean isResponsive() {
-		return AssignHelper.check(getDelegated().isResponsive(), getDefaultValues().isResponsive());
+		return Checker.check(getDelegated().isResponsive(), getDefaultValues().isResponsive());
 	}
 
 	/**
@@ -231,7 +235,7 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 * @return the duration in milliseconds it takes to animate to new size after a resize event. Default is 0.
 	 */
 	public int getResponsiveAnimationDuration() {
-		return AssignHelper.check(getDelegated().getResponsiveAnimationDuration(), getDefaultValues().getResponsiveAnimationDuration());
+		return Checker.check(getDelegated().getResponsiveAnimationDuration(), getDefaultValues().getResponsiveAnimationDuration());
 	}
 
 	/**
@@ -249,7 +253,7 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 * @return the maintaining of the original canvas aspect ratio (width / height) when resizing. Default is true.
 	 */
 	public boolean isMaintainAspectRatio() {
-		return AssignHelper.check(getDelegated().isMaintainAspectRatio(), getDefaultValues().isMaintainAspectRatio());
+		return Checker.check(getDelegated().isMaintainAspectRatio(), getDefaultValues().isMaintainAspectRatio());
 	}
 	
 	/**
@@ -270,7 +274,7 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 * @return  the pixel ratio. Default is <code>window.devicePixelRatio</code>.
 	 */
 	public double getDevicePixelRatio() {
-		return AssignHelper.check(getDelegated().getDevicePixelRatio(), getDefaultValues().getDevicePixelRatio());
+		return Checker.check(getDelegated().getDevicePixelRatio(), getDefaultValues().getDevicePixelRatio());
 	}
 
 	/**
@@ -294,7 +298,7 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 * @return color to use into chart. Default is "rgba(0,0,0,0.1)"
 	 */
 	public String getDefaultColorAsString() {
-		return AssignHelper.check(getDelegated().getDefaultColor(), getDefaultValues().getDefaultColor());
+		return Checker.check(getDelegated().getDefaultColor(), getDefaultValues().getDefaultColor());
 	}
 
 	/**
@@ -326,7 +330,7 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 * @return  font color to use into chart. Default is #666.
 	 */
 	public String getDefaultFontColorAsString() {
-		return AssignHelper.check(getDelegated().getDefaultFontColor(), getDefaultValues().getDefaultFontColor());
+		return Checker.check(getDelegated().getDefaultFontColor(), getDefaultValues().getDefaultFontColor());
 	}
 
 	/**
@@ -352,7 +356,7 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 * @return Font size into chart. Default is 12.
 	 */
 	public int getDefaultFontSize() {
-		return AssignHelper.check(getDelegated().getDefaultFontSize(), getDefaultValues().getDefaultFontSize());
+		return Checker.check(getDelegated().getDefaultFontSize(), getDefaultValues().getDefaultFontSize());
 	}
 
 	/**
@@ -374,7 +378,7 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getDefaultFontStyle() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getDefaultFontStyle(), getDefaultValues().getDefaultFontStyle()), FontStyle.class, FontStyle.normal);
+		return Enumer.deserialize(getDelegated().getDefaultFontStyle(), getDefaultValues().getDefaultFontStyle(), FontStyle.class, FontStyle.normal);
 	}
 
 	/**
@@ -393,7 +397,7 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 *         sans-serif
 	 */
 	public String getDefaultFontFamily() {
-		return AssignHelper.check(getDelegated().getDefaultFontFamily(), getDefaultValues().getDefaultFontFamily());
+		return Checker.check(getDelegated().getDefaultFontFamily(), getDefaultValues().getDefaultFontFamily());
 	}
 
 	/**
@@ -411,7 +415,7 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 * @return If false, the lines between points are not drawn. Default is true.
 	 */
 	public boolean isShowLines() {
-		return AssignHelper.check(getDelegated().isShowLines(), getDefaultValues().isShowLines());
+		return Checker.check(getDelegated().isShowLines(), getDefaultValues().isShowLines());
 	}
 	
 	/**
@@ -429,7 +433,7 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 * @return If false, NaN data causes a break in the line. Default is false.
 	 */
 	public boolean isSpanGaps() {
-		return AssignHelper.check(getDelegated().isSpanGaps(), getDefaultValues().isSpanGaps());
+		return Checker.check(getDelegated().isSpanGaps(), getDefaultValues().isSpanGaps());
 	}
 	
 	/**
@@ -447,7 +451,7 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 * @return the percentage of the chart that is cut out of the middle. Default is 0.
 	 */
 	public double getCutoutPercentage() {
-		return AssignHelper.check(getDelegated().getCutoutPercentage(), getDefaultValues().getCutoutPercentage());
+		return Checker.check(getDelegated().getCutoutPercentage(), getDefaultValues().getCutoutPercentage());
 	}
 
 	/**
@@ -465,7 +469,7 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 * @return starting angle to draw arcs from. Default is <code>-0.5 * Math.PI</code>.
 	 */
 	public double getRotation() {
-		return AssignHelper.check(getDelegated().getRotation(), getDefaultValues().getRotation());
+		return Checker.check(getDelegated().getRotation(), getDefaultValues().getRotation());
 	}
 
 	/**
@@ -483,7 +487,7 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 * @return the sweep to allow arcs to cover. Default is <code>2 * Math.PI</code>.
 	 */
 	public double getCircumference() {
-		return AssignHelper.check(getDelegated().getCircumference(), getDefaultValues().getCircumference());
+		return Checker.check(getDelegated().getCircumference(), getDefaultValues().getCircumference());
 	}
 
 	/**
@@ -501,14 +505,14 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 * @return starting angle to draw arcs for the first item in a dataset. Default is <code>-0.5 * Math.PI</code>.
 	 */
 	public double getStartAngle() {
-		return AssignHelper.check(getDelegated().getStartAngle(), getDefaultValues().getStartAngle());
+		return Checker.check(getDelegated().getStartAngle(), getDefaultValues().getStartAngle());
 	}
 	
 	
 	/**
 	 * @param legendCallBack the legendCallBack to set
 	 */
-	public void setLegendCallBack(GenerateLegendCallback legendCallBack) {
+	public void setLegendCallBack(ProxyGenerateLegendCallback legendCallBack) {
 		if (legendCallBack != null) {
 			legendCallbackProxy.setCallback(legendCallBack);
 			getDelegated().setLegendCallback(legendCallbackProxy.getProxy());

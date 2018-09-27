@@ -446,7 +446,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		if (chart != null && event != null) {
 			// gets elements
 			// returns the array
-			return ArrayListHelper.build(chart.getElementsAtEvent(event));
+			return ArrayListHelper.unmodifiableList(chart.getElementsAtEvent(event));
 		}
 		// returns null;
 		return null;

@@ -16,7 +16,8 @@
 package org.pepstock.charba.client.jsinterop;
 
 import org.pepstock.charba.client.enums.Easing;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.Enumer;
 import org.pepstock.charba.client.jsinterop.defaults.DefaultOptions;
 
 import jsinterop.annotations.JsMethod;
@@ -70,7 +71,7 @@ public final class UpdateConfiguration {
 	 */
 	@JsMethod
 	public Easing getEasing() {
-		return AssignHelper.deserialize(AssignHelper.check(getNativeDuration(), DefaultOptions.get().getAnimation().getEasing()), Easing.class, Easing.easeOutQuart);
+		return Enumer.deserialize(getNativeEasing(), DefaultOptions.get().getAnimation().getEasing(), Easing.class, Easing.easeOutQuart);
 	}
 
 	/**
@@ -90,7 +91,7 @@ public final class UpdateConfiguration {
 	 */
 	@JsMethod
 	public int getDuration() {
-		return AssignHelper.check(getNativeDuration(), DefaultOptions.get().getAnimation().getDuration());
+		return Checker.check(getNativeDuration(), DefaultOptions.get().getAnimation().getDuration());
 	}
 
 	/**
@@ -110,7 +111,7 @@ public final class UpdateConfiguration {
 	 */
 	@JsMethod
 	public boolean isLazy() {
-		return AssignHelper.check(isNativeLazy(), false);
+		return Checker.check(isNativeLazy(), false);
 	}
 
 }

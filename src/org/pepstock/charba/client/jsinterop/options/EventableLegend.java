@@ -20,6 +20,8 @@ import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.JsFactory;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
+import org.pepstock.charba.client.jsinterop.events.LegendClickCallbackHandler;
+import org.pepstock.charba.client.jsinterop.events.LegendHoverCallbackHandler;
 import org.pepstock.charba.client.jsinterop.items.LegendItem;
 
 import jsinterop.annotations.JsFunction;
@@ -33,18 +35,22 @@ import jsinterop.annotations.JsFunction;
 public class EventableLegend extends Legend {
 	
 	@JsFunction
-	public interface LegendClickCallback {
+	interface ProxyLegendClickCallback {
 		void call(Object context, ChartNativeEvent event, LegendItem item);
 	}
 
 	@JsFunction
-	public interface LegendHoverCallback {
+	public interface ProxyLegendHoverCallback {
 		void call(Object context, ChartNativeEvent event, LegendItem item);
 	}
 	
-	private final CallbackProxy<LegendClickCallback> clickCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyLegendClickCallback> clickCallbackProxy = JsFactory.newCallbackProxy();
 
-	private final CallbackProxy<LegendHoverCallback> hoverCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyLegendHoverCallback> hoverCallbackProxy = JsFactory.newCallbackProxy();
+	
+	private LegendClickCallbackHandler clickCallbackHandler = null;
+	
+	private LegendHoverCallbackHandler hoverCallbackHandler = null;
 	
 	/**
 	 * Name of fields of JavaScript object.
@@ -57,27 +63,72 @@ public class EventableLegend extends Legend {
 	
 	EventableLegend(BaseOptions<EventableAnimation, EventableLegend> options, IsDefaultLegend defaultValues, NativeLegend delegated) {
 		super(options, defaultValues, delegated);
-	}
-	
+		clickCallbackProxy.setCallback(new ProxyLegendClickCallback() {
 
-	public void setOnClick(LegendClickCallback callback) {
-		if (callback != null) {
-			clickCallbackProxy.setCallback(callback);
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.EventableLegend.ProxyLegendClickCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.items.LegendItem)
+			 */
+			@Override
+			public void call(Object context, ChartNativeEvent event, LegendItem item) {
+				if (clickCallbackHandler != null) {
+					clickCallbackHandler.onClick(context, event, item);
+				}
+			}
+			
+		});
+		hoverCallbackProxy.setCallback(new ProxyLegendHoverCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.EventableLegend.ProxyLegendHoverCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.items.LegendItem)
+			 */
+			@Override
+			public void call(Object context, ChartNativeEvent event, LegendItem item) {
+				if (hoverCallbackHandler != null) {
+					hoverCallbackHandler.onHover(context, event, item);
+				}
+			}
+			
+		});
+	}
+
+	/**
+	 * @return the clickCallbackHandler
+	 */
+	public LegendClickCallbackHandler getClickCallbackHandler() {
+		return clickCallbackHandler;
+	}
+
+	/**
+	 * @param clickCallbackHandler the clickCallbackHandler to set
+	 */
+	public void setClickCallbackHandler(LegendClickCallbackHandler clickCallbackHandler) {
+		if (clickCallbackHandler != null) {
 			getDelegated().setOnClick(clickCallbackProxy.getProxy());
 			checkAndAddToParent();
 		} else {
 			remove(Property.onClick);
 		}
+		this.clickCallbackHandler = clickCallbackHandler;
 	}
 
-	public void setOnHover(LegendHoverCallback callback) {
-		if (callback != null) {
-			hoverCallbackProxy.setCallback(callback);
+	/**
+	 * @return the hoverCallbackHandler
+	 */
+	public LegendHoverCallbackHandler getHoverCallbackHandler() {
+		return hoverCallbackHandler;
+	}
+
+	/**
+	 * @param hoverCallbackHandler the hoverCallbackHandler to set
+	 */
+	public void setHoverCallbackHandler(LegendHoverCallbackHandler hoverCallbackHandler) {
+		if (hoverCallbackHandler != null) {
 			getDelegated().setOnHover(hoverCallbackProxy.getProxy());	
 			checkAndAddToParent();
 		} else {
 			remove(Property.onHover);
 		}
+		this.hoverCallbackHandler = hoverCallbackHandler;
 	}
 
 }

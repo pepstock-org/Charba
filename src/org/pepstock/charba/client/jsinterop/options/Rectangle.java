@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Enumer;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultRectangle;
 
 /**
@@ -54,7 +54,7 @@ public class Rectangle extends AbstractElement<Elements, IsDefaultRectangle, Nat
 	 * @see  org.pepstock.charba.client.enums.Position
 	 */
 	public Position getBorderSkipped() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getBorderSkipped(), getDefaultValues().getBorderSkipped()), Position.class, Position.bottom);
+		return Enumer.deserialize(getDelegated().getBorderSkipped(), getDefaultValues().getBorderSkipped(), Position.class, Position.bottom);
 	}
 	
 	/* (non-Javadoc)

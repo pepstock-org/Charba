@@ -22,7 +22,8 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.enums.TickSource;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.Enumer;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks;
 
 /**
@@ -74,7 +75,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return if true, scale will include 0 if it is not already included.. Default is false
 	 */
 	public boolean isBeginAtZero() {
-		return AssignHelper.check(getDelegated().isBeginAtZero(), getDefaultValues().isBeginAtZero());
+		return Checker.check(getDelegated().isBeginAtZero(), getDefaultValues().isBeginAtZero());
 	}
 
 	/**
@@ -94,7 +95,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return if true, show tick marks. Default is true.
 	 */
 	public boolean isDisplay() {
-		return AssignHelper.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
+		return Checker.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -114,7 +115,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return reverses order of tick labels. Default is false.
 	 */
 	public boolean isReverse() {
-		return AssignHelper.check(getDelegated().isReverse(), getDefaultValues().isReverse());
+		return Checker.check(getDelegated().isReverse(), getDefaultValues().isReverse());
 	}
 	
 	/**
@@ -138,7 +139,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 *         show all labels no matter what. Default is true
 	 */
 	public boolean isAutoSkip() {
-		return AssignHelper.check(getDelegated().isAutoSkip(), getDefaultValues().isAutoSkip());
+		return Checker.check(getDelegated().isAutoSkip(), getDefaultValues().isAutoSkip());
 	}
 
 	/**
@@ -162,7 +163,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 *         scales. Defualt is 0.
 	 */
 	public int getAutoSkipPadding() {
-		return AssignHelper.check(getDelegated().getAutoSkipPadding(), getDefaultValues().getAutoSkipPadding());
+		return Checker.check(getDelegated().getAutoSkipPadding(), getDefaultValues().getAutoSkipPadding());
 	}
 
 	/**
@@ -188,7 +189,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 *         and the x direction for the y axis). Default is 0.
 	 */
 	public int getLabelOffset() {
-		return AssignHelper.check(getDelegated().getLabelOffset(), getDefaultValues().getLabelOffset());
+		return Checker.check(getDelegated().getLabelOffset(), getDefaultValues().getLabelOffset());
 	}
 
 	/**
@@ -212,7 +213,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 *         Note: Only applicable to horizontal scales. Default is 90
 	 */
 	public int getMaxRotation() {
-		return AssignHelper.check(getDelegated().getMaxRotation(), getDefaultValues().getMaxRotation());
+		return Checker.check(getDelegated().getMaxRotation(), getDefaultValues().getMaxRotation());
 	}
 
 	/**
@@ -232,7 +233,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return minimum rotation for tick labels. Note: Only applicable to horizontal scales.. Default is 0.
 	 */
 	public int getMinRotation() {
-		return AssignHelper.check(getDelegated().getMinRotation(), getDefaultValues().getMinRotation());
+		return Checker.check(getDelegated().getMinRotation(), getDefaultValues().getMinRotation());
 	}
 
 	/**
@@ -256,7 +257,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 *         to vertical scales. Default is false.
 	 */
 	public boolean isMirror() {
-		return AssignHelper.check(getDelegated().isMirror(), getDefaultValues().isMirror());
+		return Checker.check(getDelegated().isMirror(), getDefaultValues().isMirror());
 	}
 
 	/**
@@ -280,7 +281,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 *         direction. When set on a horizontal axis, this applies in the vertical (Y) direction. Default is 10.
 	 */
 	public int getPadding() {
-		return AssignHelper.check(getDelegated().getPadding(), getDefaultValues().getPadding());
+		return Checker.check(getDelegated().getPadding(), getDefaultValues().getPadding());
 	}
 	
 	/**
@@ -300,7 +301,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return the user defined minimum number for the scale, overrides minimum value from data. Default is Double.MIN_VALUE.
 	 */
 	public double getMin() {
-		return AssignHelper.check(getDelegated().getMin(), getDefaultValues().getMin());
+		return Checker.check(getDelegated().getMin(), getDefaultValues().getMin());
 	}
 
 	/**
@@ -320,7 +321,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return user defined maximum number for the scale, overrides maximum value from data. Default is Double.MAX_VALUE.
 	 */
 	public double getMax() {
-		return AssignHelper.check(getDelegated().getMax(), getDefaultValues().getMax());
+		return Checker.check(getDelegated().getMax(), getDefaultValues().getMax());
 	}
 
 	/**
@@ -340,7 +341,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return the user defined minimum number for the scale, overrides minimum value from data. Default is Double.MIN_VALUE.
 	 */
 	public String getMinAsString() {
-		return AssignHelper.check(getDelegated().getMin(), String.valueOf(getDefaultValues().getMin()));
+		return Checker.check(getDelegated().getMin(), String.valueOf(getDefaultValues().getMin()));
 	}
 
 	/**
@@ -360,7 +361,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return user defined maximum number for the scale, overrides maximum value from data. Default is Double.MAX_VALUE.
 	 */
 	public String getMaxAsString() {
-		return AssignHelper.check(getDelegated().getMax(), String.valueOf(getDefaultValues().getMax()));
+		return Checker.check(getDelegated().getMax(), String.valueOf(getDefaultValues().getMax()));
 	}
 	
 	/**
@@ -380,7 +381,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return maximum number of ticks and gridlines to show. Default is 11.
 	 */
 	public int getMaxTicksLimit() {
-		return AssignHelper.check(getDelegated().getMaxTicksLimit(), getDefaultValues().getMaxTicksLimit());
+		return Checker.check(getDelegated().getMaxTicksLimit(), getDefaultValues().getMaxTicksLimit());
 	}
 
 	/**
@@ -400,7 +401,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return user defined fixed step size for the scale. Default is Double.MIN_VALUE.
 	 */
 	public double getStepSize() {
-		return AssignHelper.check(getDelegated().getStepSize(), getDefaultValues().getStepSize());
+		return Checker.check(getDelegated().getStepSize(), getDefaultValues().getStepSize());
 	}
 
 	/**
@@ -420,7 +421,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return adjustment used when calculating the maximum data value.
 	 */
 	public double getSuggestedMax() {
-		return AssignHelper.check(getDelegated().getSuggestedMax(), getDefaultValues().getSuggestedMax());
+		return Checker.check(getDelegated().getSuggestedMax(), getDefaultValues().getSuggestedMax());
 	}
 
 	/**
@@ -440,7 +441,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return adjustment used when calculating the minimum data value.
 	 */
 	public double getSuggestedMin() {
-		return AssignHelper.check(getDelegated().getSuggestedMin(), getDefaultValues().getSuggestedMin());
+		return Checker.check(getDelegated().getSuggestedMin(), getDefaultValues().getSuggestedMin());
 	}
 
 	/**
@@ -469,7 +470,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return color of label backdrops. Default is 'rgba(255, 255, 255, 0.75)'
 	 */
 	public String getBackdropColorAsString() {
-		return AssignHelper.check(getDelegated().getBackdropColor(), getDefaultValues().getBackdropColor());
+		return Checker.check(getDelegated().getBackdropColor(), getDefaultValues().getBackdropColor());
 	}
 
 	/**
@@ -498,7 +499,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return horizontal padding of label backdrop. Default is 2.
 	 */
 	public int getBackdropPaddingX() {
-		return AssignHelper.check(getDelegated().getBackdropPaddingX(), getDefaultValues().getBackdropPaddingX());
+		return Checker.check(getDelegated().getBackdropPaddingX(), getDefaultValues().getBackdropPaddingX());
 	}
 
 	/**
@@ -518,7 +519,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return vertical padding of label backdrop. Default is 2.
 	 */
 	public int getBackdropPaddingY() {
-		return AssignHelper.check(getDelegated().getBackdropPaddingY(), getDefaultValues().getBackdropPaddingY());
+		return Checker.check(getDelegated().getBackdropPaddingY(), getDefaultValues().getBackdropPaddingY());
 	}
 
 	/**
@@ -538,7 +539,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return if true, draw a background behind the tick labels. Default is true.
 	 */
 	public boolean isShowLabelBackdrop() {
-		return AssignHelper.check(getDelegated().isShowLabelBackdrop(), getDefaultValues().isShowLabelBackdrop());
+		return Checker.check(getDelegated().isShowLabelBackdrop(), getDefaultValues().isShowLabelBackdrop());
 	}
 	
 	/**
@@ -567,7 +568,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return the array of labels to display.
 	 */
 	public List<String> getLabels() {
-		return ArrayListHelper.build(getDelegated().getLabels());
+		return ArrayListHelper.list(getDelegated().getLabels());
 	}
 	
 	/**
@@ -589,7 +590,7 @@ public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
 	 * @see org.pepstock.charba.client.enums.TickSource
 	 */
 	public TickSource getSource() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getSource(), getDefaultValues().getSource()), TickSource.class, TickSource.auto);
+		return Enumer.deserialize(getDelegated().getSource(), getDefaultValues().getSource(), TickSource.class, TickSource.auto);
 	}
 
 	/* (non-Javadoc)

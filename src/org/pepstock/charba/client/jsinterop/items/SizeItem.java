@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsOverlay;
@@ -58,7 +58,7 @@ public class SizeItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final int getWidth() {
-		return AssignHelper.check(getNativeWidth(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeWidth(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class SizeItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final int getHeight() {
-		return AssignHelper.check(getNativeHeight(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeHeight(), UndefinedValues.INTEGER);
 	}
 
 }

@@ -16,7 +16,8 @@
 package org.pepstock.charba.client.jsinterop.items;
 
 import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.Enumer;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -143,7 +144,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 */
 	@JsOverlay
 	public final boolean isFullWidth() {
-		return AssignHelper.check(isNativeFullWidth(), UndefinedValues.BOOLEAN);
+		return Checker.check(isNativeFullWidth(), UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -153,7 +154,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 */
 	@JsOverlay
 	public final Position getPosition() {
-		return AssignHelper.deserialize(AssignHelper.check(getNativePosition(), Position.top.name()), Position.class, Position.top);
+		return Enumer.deserialize(getNativePosition(), Position.class, Position.top);
 	}
 
 	/**
@@ -163,7 +164,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 */
 	@JsOverlay
 	public final double getWeight() {
-		return AssignHelper.check(getNativeWeight(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeWeight(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -173,7 +174,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 */
 	@JsOverlay
 	public final int getWidth() {
-		return AssignHelper.check(getNativeWidth(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeWidth(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -183,7 +184,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 */
 	@JsOverlay
 	public final int getHeight() {
-		return AssignHelper.check(getNativeHeight(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeHeight(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -193,7 +194,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 */
 	@JsOverlay
 	public final double getMaxWidth() {
-		return AssignHelper.check(getNativeMaxWidth(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeMaxWidth(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -203,7 +204,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 */
 	@JsOverlay
 	public final double getMaxHeight() {
-		return AssignHelper.check(getNativeMaxHeight(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeMaxHeight(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -213,7 +214,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 */
 	@JsOverlay
 	public final int getPaddingTop() {
-		return AssignHelper.check(getNativePaddingTop(), UndefinedValues.INTEGER);
+		return Checker.check(getNativePaddingTop(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -223,7 +224,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 */
 	@JsOverlay
 	public final int getPaddingRight() {
-		return AssignHelper.check(getNativePaddingRight(), UndefinedValues.INTEGER);
+		return Checker.check(getNativePaddingRight(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -233,7 +234,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 */
 	@JsOverlay
 	public final int getPaddingBottom() {
-		return AssignHelper.check(getNativePaddingBottom(), UndefinedValues.INTEGER);
+		return Checker.check(getNativePaddingBottom(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -243,7 +244,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 */
 	@JsOverlay
 	public final int getPaddingLeft() {
-		return AssignHelper.check(getNativePaddingLeft(), UndefinedValues.INTEGER);
+		return Checker.check(getNativePaddingLeft(), UndefinedValues.INTEGER);
 	}
 
 }

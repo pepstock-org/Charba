@@ -29,7 +29,8 @@ import org.pepstock.charba.client.jsinterop.commons.Array;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.Enumer;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsOverlay;
@@ -93,7 +94,7 @@ public class LegendItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final int getDatasetIndex() {
-		return AssignHelper.check(getNativeDatasetIndex(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeDatasetIndex(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -104,7 +105,7 @@ public class LegendItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final int getIndex() {
-		return AssignHelper.check(getNativeIndex(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeIndex(), UndefinedValues.INTEGER);
 	}
 	
 	/**
@@ -114,7 +115,7 @@ public class LegendItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final String getText() {
-		return AssignHelper.check(getNativeText(), UndefinedValues.STRING);
+		return Checker.check(getNativeText(), UndefinedValues.STRING);
 	}
 
 	/**
@@ -124,7 +125,7 @@ public class LegendItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final IsColor getFillStyle() {
-		return ColorBuilder.parse(AssignHelper.check(getNativeFillStyle(), Chart.defaults().global().getDefaultColorAsString()));
+		return ColorBuilder.parse(Checker.check(getNativeFillStyle(), Chart.defaults().global().getDefaultColorAsString()));
 	}
 
 	/**
@@ -135,7 +136,7 @@ public class LegendItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final boolean isHidden() {
-		return AssignHelper.check(isNativeHidden(), UndefinedValues.BOOLEAN);
+		return Checker.check(isNativeHidden(), UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -157,7 +158,7 @@ public class LegendItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final CapStyle getLineCap() {
-		return AssignHelper.deserialize(AssignHelper.check(getNativeLineCap(), CapStyle.butt.name()), CapStyle.class, CapStyle.butt);
+		return Enumer.deserialize(getNativeLineCap(), CapStyle.class, CapStyle.butt);
 	}
 
 	/**
@@ -169,7 +170,7 @@ public class LegendItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final List<Integer> getLineDash() {
-		return Collections.unmodifiableList(ArrayListHelper.build(getNativeLineDash()));
+		return ArrayListHelper.unmodifiableList(getNativeLineDash());
 	}
 
 	/**
@@ -179,7 +180,7 @@ public class LegendItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final int getLineDashOffset() {
-		return AssignHelper.check(getNativeLineDashOffset(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeLineDashOffset(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -193,7 +194,7 @@ public class LegendItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final JoinStyle getLineJoin() {
-		return AssignHelper.deserialize(AssignHelper.check(getNativeLineJoin(), JoinStyle.miter.name()), JoinStyle.class, JoinStyle.miter);
+		return Enumer.deserialize(getNativeLineJoin(), JoinStyle.class, JoinStyle.miter);
 	}
 
 	/**
@@ -206,10 +207,9 @@ public class LegendItem extends NativeObject {
 		// loads stored data
 		Object values = getNativeLineWidth();
 		if (Array.isArray(values)) {
-			ArrayInteger array = (ArrayInteger)values;
-			return Collections.unmodifiableList(ArrayListHelper.build(array));
+			return Collections.unmodifiableList(ArrayListHelper.unmodifiableList((ArrayInteger)values));
 		} else {
-			return Collections.unmodifiableList(ArrayListHelper.build(ArrayInteger.of(AssignHelper.check(values, UndefinedValues.INTEGER))));
+			return Collections.unmodifiableList(ArrayListHelper.unmodifiableList(ArrayInteger.of(Checker.check(values, UndefinedValues.INTEGER))));
 		}
 	}
 
@@ -232,7 +232,7 @@ public class LegendItem extends NativeObject {
 				result.add(ColorBuilder.parse(array.get(i)));
 			}
 		} else {
-			result.add(ColorBuilder.parse(AssignHelper.check(values, Chart.defaults().global().getDefaultColorAsString())));
+			result.add(ColorBuilder.parse(Checker.check(values, Chart.defaults().global().getDefaultColorAsString())));
 		}
 		return Collections.unmodifiableList(result);
 	}
@@ -248,10 +248,10 @@ public class LegendItem extends NativeObject {
 		// loads stored data
 		Object values = getNativePointStyle();
 		if (Array.isArray(values)) {
-			ArrayString array = (ArrayString)values;
-			return Collections.unmodifiableList(ArrayListHelper.build(PointStyle.class, array));
+			;
+			return ArrayListHelper.unmodifiableList(PointStyle.class, (ArrayString)values);
 		} else {
-			return Collections.unmodifiableList(ArrayListHelper.build(PointStyle.class, ArrayString.of(AssignHelper.check(values, Chart.defaults().global().getElements().getPoint().getPointStyle().name()))));
+			return ArrayListHelper.unmodifiableList(PointStyle.class, ArrayString.of(Checker.check(values, Chart.defaults().global().getElements().getPoint().getPointStyle().name())));
 		}
 	}
 	

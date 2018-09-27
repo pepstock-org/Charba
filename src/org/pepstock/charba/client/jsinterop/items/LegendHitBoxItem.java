@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -44,7 +44,7 @@ public final class LegendHitBoxItem extends SizeItem{
 	 */
 	@JsOverlay
 	public int getLeft() {
-		return AssignHelper.check(getNativeLeft(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeLeft(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -54,7 +54,7 @@ public final class LegendHitBoxItem extends SizeItem{
 	 */
 	@JsOverlay
 	public int getTop() {
-		return AssignHelper.check(getNativeTop(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeTop(), UndefinedValues.INTEGER);
 	}
 
 }

@@ -16,7 +16,8 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.Enumer;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend;
 
 /**
@@ -58,7 +59,7 @@ public class Legend extends BaseModel<BaseOptions<?,?>, IsDefaultLegend, NativeL
 	 * @return if the legend is shown. Default is true.
 	 */
 	public boolean isDisplay() {
-		return AssignHelper.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
+		return Checker.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -78,7 +79,7 @@ public class Legend extends BaseModel<BaseOptions<?,?>, IsDefaultLegend, NativeL
 	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). Default is true.
 	 */
 	public boolean isFullWidth() {
-		return AssignHelper.check(getDelegated().isFullWidth(), getDefaultValues().isFullWidth());
+		return Checker.check(getDelegated().isFullWidth(), getDefaultValues().isFullWidth());
 	}
 
 	/**
@@ -98,7 +99,7 @@ public class Legend extends BaseModel<BaseOptions<?,?>, IsDefaultLegend, NativeL
 	 * @return Legend will show datasets in reverse order. Default is false.
 	 */
 	public boolean isReverse() {
-		return AssignHelper.check(getDelegated().isReverse(), getDefaultValues().isReverse());
+		return Checker.check(getDelegated().isReverse(), getDefaultValues().isReverse());
 	}
 
 	/**
@@ -120,7 +121,7 @@ public class Legend extends BaseModel<BaseOptions<?,?>, IsDefaultLegend, NativeL
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getPosition(), getDefaultValues().getPosition()), Position.class, Position.top);
+		return Enumer.deserialize(getDelegated().getPosition(), getDefaultValues().getPosition(), Position.class, Position.top);
 	}
 	
 	/* (non-Javadoc)

@@ -19,7 +19,8 @@ import java.util.Date;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.TimeUnit;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.Enumer;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime;
 
 import com.google.gwt.core.client.JsDate;
@@ -78,7 +79,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @return If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday. Default is <code>true</code>.
 	 */
 	public boolean isIsoWeekday() {
-		return AssignHelper.check(getDelegated().isIsoWeekday(), getDefaultValues().isIsoWeekday());
+		return Checker.check(getDelegated().isIsoWeekday(), getDefaultValues().isIsoWeekday());
 	}
 	
 	/**
@@ -98,7 +99,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @return If defined, this will override the data maximum. Default is <code>null</code>.
 	 */
 	public Date getMax() {
-		return toDate(AssignHelper.check(getDelegated().getMax(), getDefaultValues().getMax()));
+		return toDate(Checker.check(getDelegated().getMax(), getDefaultValues().getMax()));
 	}
 
 	/**
@@ -118,7 +119,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @return If defined, this will override the data minimum. Default is <code>null</code>.
 	 */
 	public Date getMin() {
-		return toDate(AssignHelper.check(getDelegated().getMin(), getDefaultValues().getMin()));
+		return toDate(Checker.check(getDelegated().getMin(), getDefaultValues().getMin()));
 	}
 	
 	/**
@@ -152,7 +153,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 */
 	public TimeUnit getRound() {
 		// gets value
-		String value = AssignHelper.check(getDelegated().getRound(), getDefaultValues().getRound());
+		String value = Checker.check(getDelegated().getRound(), getDefaultValues().getRound());
 		if (value == null){
 			// returns no unit
 			return null;
@@ -161,7 +162,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 			// returns no unit
 			return null;
 		}
-		return AssignHelper.deserialize(value, TimeUnit.class, TimeUnit.millisecond);
+		return Enumer.deserialize(value, TimeUnit.class, TimeUnit.millisecond);
 	}
 	
 	/**
@@ -181,7 +182,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @return The moment js format string to use for the tooltip. Default is <code>null</code>.
 	 */
 	public String getTooltipFormat() {
-		return AssignHelper.check(getDelegated().getTooltipFormat(), getDefaultValues().getTooltipFormat());
+		return Checker.check(getDelegated().getTooltipFormat(), getDefaultValues().getTooltipFormat());
 	}
 
 	/**
@@ -215,7 +216,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 */
 	public TimeUnit getUnit() {
 		// gets value
-		String value = AssignHelper.check(getDelegated().getUnit(), getDefaultValues().getUnit());
+		String value = Checker.check(getDelegated().getUnit(), getDefaultValues().getUnit());
 		if (value == null){
 			// returns no unit
 			return null;
@@ -224,7 +225,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 			// returns no unit
 			return null;
 		}
-		return AssignHelper.deserialize(value, TimeUnit.class, TimeUnit.millisecond);
+		return Enumer.deserialize(value, TimeUnit.class, TimeUnit.millisecond);
 	}
 	
 	/**
@@ -244,7 +245,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @return The number of units between grid lines. Default is <code>1</code>.
 	 */
 	public int getStepSize() {
-		return AssignHelper.check(getDelegated().getStepSize(), getDefaultValues().getStepSize());
+		return Checker.check(getDelegated().getStepSize(), getDefaultValues().getStepSize());
 	}
 	
 	/**
@@ -266,7 +267,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @see org.pepstock.charba.client.enums.TimeUnit
 	 */
 	public TimeUnit getMinUnit() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getMinUnit(), getDefaultValues().getMinUnit()), TimeUnit.class, TimeUnit.millisecond);
+		return Enumer.deserialize(getDelegated().getMinUnit(), getDefaultValues().getMinUnit(), TimeUnit.class, TimeUnit.millisecond);
 	}
 	
 	/**
@@ -286,7 +287,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @return Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.  Default is <code>null</code>.
 	 */
 	public String getParser() {
-		return AssignHelper.check(getDelegated().getParser(), getDefaultValues().getParser());
+		return Checker.check(getDelegated().getParser(), getDefaultValues().getParser());
 	}
 	
 	/**

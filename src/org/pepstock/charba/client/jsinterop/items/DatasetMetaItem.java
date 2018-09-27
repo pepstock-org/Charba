@@ -22,7 +22,7 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsOverlay;
@@ -68,7 +68,7 @@ public final class DatasetMetaItem extends NativeObject {
 	@JsOverlay
 	public final Type getType() {
 		// gets string value from java script object
-		String value = AssignHelper.check(getNativeType(), ChartType.bar.name());
+		String value = Checker.check(getNativeType(), ChartType.bar.name());
 		// checks if consistent with out of the box chart types
 		Type type = ChartType.get(value);
 		// if not, creates new type being a controller.
@@ -82,7 +82,7 @@ public final class DatasetMetaItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final boolean isHidden() {
-		return AssignHelper.check(isNativeHidden(), UndefinedValues.BOOLEAN);
+		return Checker.check(isNativeHidden(), UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -103,7 +103,7 @@ public final class DatasetMetaItem extends NativeObject {
 	@JsOverlay
 	public final String getYAxisID() {
 		// FIXME
-		return AssignHelper.check(getNativeYAxisID(), UndefinedValues.STRING);
+		return Checker.check(getNativeYAxisID(), UndefinedValues.STRING);
 	}
 	
 	/**
@@ -114,7 +114,7 @@ public final class DatasetMetaItem extends NativeObject {
 	@JsOverlay
 	public final String getXAxisID() {
 		// FIXME
-		return AssignHelper.check(getNativeXAxisID(), UndefinedValues.STRING);
+		return Checker.check(getNativeXAxisID(), UndefinedValues.STRING);
 	}
 
 	/**
@@ -125,7 +125,7 @@ public final class DatasetMetaItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final List<DatasetItem> getDatasets() {
-		return ArrayListHelper.build(getNativeData());
+		return ArrayListHelper.unmodifiableList(getNativeData());
 	}
 
 }

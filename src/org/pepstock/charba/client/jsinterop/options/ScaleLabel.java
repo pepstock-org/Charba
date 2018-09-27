@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel;
 
 /**
@@ -58,7 +58,7 @@ public class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel, NativeScale
 	 * @return f true, display the axis title. Default is false
 	 */
 	public boolean isDisplay() {
-		return AssignHelper.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
+		return Checker.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel, NativeScale
 	 * @return The text for the scale string. Default is "".
 	 */
 	public String getLabelString() {
-		return AssignHelper.check(getDelegated().getLabelString(), getDefaultValues().getLabelString());
+		return Checker.check(getDelegated().getLabelString(), getDefaultValues().getLabelString());
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel, NativeScale
 	 * @return the height of an individual line of text. Default is 1.2
 	 */
 	public double getLineHeight() {
-		return AssignHelper.check(getDelegated().getLineHeight(), getDefaultValues().getLineHeight());
+		return Checker.check(getDelegated().getLineHeight(), getDefaultValues().getLineHeight());
 	}
 	
 	/* (non-Javadoc)

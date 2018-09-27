@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.JsFactory;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels;
@@ -90,7 +90,7 @@ public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels, Native
 	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case). Default is false.
 	 */
 	public boolean isUsePointStyle() {
-		return AssignHelper.check(getDelegated().isUsePointStyle(), getDefaultValues().isUsePointStyle());
+		return Checker.check(getDelegated().isUsePointStyle(), getDefaultValues().isUsePointStyle());
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels, Native
 	 * @return width of coloured box. Default is 40.
 	 */
 	public int getBoxWidth() {
-		return AssignHelper.check(getDelegated().getBoxWidth(), getDefaultValues().getBoxWidth());
+		return Checker.check(getDelegated().getBoxWidth(), getDefaultValues().getBoxWidth());
 	}
 
 	/**
@@ -130,7 +130,7 @@ public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels, Native
 	 * @return Padding to apply around labels. Only top and bottom are implemented. Default is 10.
 	 */
 	public int getPadding() {
-		return AssignHelper.check(getDelegated().getPadding(), getDefaultValues().getPadding());
+		return Checker.check(getDelegated().getPadding(), getDefaultValues().getPadding());
 	}
 	
 	/**

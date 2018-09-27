@@ -2,14 +2,15 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.JsFactory;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.jsinterop.events.ChartClickCallbackHandler;
+import org.pepstock.charba.client.jsinterop.events.ChartHoverCallbackHandler;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
+import org.pepstock.charba.client.jsinterop.events.ChartResizeCallbackHandler;
 import org.pepstock.charba.client.jsinterop.items.DatasetItem;
 import org.pepstock.charba.client.jsinterop.items.SizeItem;
-import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 
 import jsinterop.annotations.JsFunction;
 
@@ -22,7 +23,7 @@ public class EventableOptions extends BaseOptions<EventableAnimation,EventableLe
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	public interface ChartClickCallback {
+	interface ProxyChartClickCallback {
 		/**
 		 * Called if the event is of type 'mouseup' or 'click'. Called in the context of the chart and passed the event and an array
 		 * of active elements.
@@ -40,7 +41,7 @@ public class EventableOptions extends BaseOptions<EventableAnimation,EventableLe
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	public interface ChartHoverCallback {
+	interface ProxyChartHoverCallback {
 		
 		/**
 		 * Called when any of the events fire. Called in the context of the chart and passed the event and an array of active
@@ -58,7 +59,7 @@ public class EventableOptions extends BaseOptions<EventableAnimation,EventableLe
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	public interface ChartResizeCallback {
+	interface ProxyChartResizeCallback {
 		
 		/**
 		 * Called when a resize occurs. Gets passed the new size.
@@ -72,11 +73,17 @@ public class EventableOptions extends BaseOptions<EventableAnimation,EventableLe
 	
 	private final EventableLegend legend;
 	
-	private final CallbackProxy<ChartResizeCallback> resizeCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyChartResizeCallback> resizeCallbackProxy = JsFactory.newCallbackProxy();
 
-	private final CallbackProxy<ChartClickCallback> clickCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyChartClickCallback> clickCallbackProxy = JsFactory.newCallbackProxy();
 
-	private final CallbackProxy<ChartHoverCallback> hoverCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyChartHoverCallback> hoverCallbackProxy = JsFactory.newCallbackProxy();
+	
+	private ChartClickCallbackHandler clickCallbackHandler = null;
+	
+	private ChartHoverCallbackHandler hoverCallbackHandler = null;
+	
+	private ChartResizeCallbackHandler resizeCallbackHandler = null;
 	
 	/**
 	 * Name of fields of JavaScript object.
@@ -89,22 +96,54 @@ public class EventableOptions extends BaseOptions<EventableAnimation,EventableLe
 	}
 
 	public EventableOptions(IsDefaultOptions defaultValues) {
-		this(defaultValues, null);
-	}
-
-	protected EventableOptions(IsDefaultOptions defaultValues, NativeOptions delegated) {
-		// if delegated == null, is global or chart, noit config
-		super(defaultValues, delegated);
+		super(defaultValues);
 		animation = new EventableAnimation(this, getDefaultValues().getAnimation(), getDelegated().getAnimation());
 		legend = new EventableLegend(this, getDefaultValues().getLegend(),getDelegated().getLegend());
+		// events
+		clickCallbackProxy.setCallback(new ProxyChartClickCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.EventableOptions.ChartClickCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 */
+			@Override
+			public void call(Object context, ChartNativeEvent event, ArrayObject<DatasetItem> items) {
+				if (clickCallbackHandler != null) {
+					clickCallbackHandler.onClick(context, event, items);
+				}
+			}
+		});
+		
+		hoverCallbackProxy.setCallback(new ProxyChartHoverCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.EventableOptions.ProxyChartHoverCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 */
+			@Override
+			public void call(Object context, ChartNativeEvent event, ArrayObject<DatasetItem> items) {
+				if (hoverCallbackHandler != null) {
+					hoverCallbackHandler.onHover(context, event, items);
+				}
+			}
+
+		});
+		
+		resizeCallbackProxy.setCallback(new ProxyChartResizeCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.EventableOptions.ProxyChartResizeCallback#call(java.lang.Object, java.lang.Object, org.pepstock.charba.client.jsinterop.items.SizeItem)
+			 */
+			@Override
+			public void call(Object context, Object chart, SizeItem size) {
+				if (resizeCallbackHandler != null) {
+					resizeCallbackHandler.onResize(context, chart, size);
+				}
+			}
+			
+		});
 	}
 	
 	public void setCharbaId(String id) {
 		getDelegated().setCharbaId(id);
-	}
-
-	public String getCharbaId() {
-		return AssignHelper.check(getDelegated().getCharbaId(), UndefinedValues.STRING);
 	}
 
 	/* (non-Javadoc)
@@ -121,32 +160,63 @@ public class EventableOptions extends BaseOptions<EventableAnimation,EventableLe
 	@Override
 	public EventableLegend getLegend() {
 		return legend;
+	}	
+
+	/**
+	 * @return the hoverCallbackHandler
+	 */
+	public ChartHoverCallbackHandler getHoverCallbackHandler() {
+		return hoverCallbackHandler;
 	}
 
-	public void setOnResize(ChartResizeCallback callback) {
-		if (callback != null) {
-			resizeCallbackProxy.setCallback(callback);
-			getDelegated().setOnResize(resizeCallbackProxy.getProxy());	
-		} else {
-			remove(Property.onResize);
-		}
-	}
-
-	public void setOnClick(ChartClickCallback callback) {
-		if (callback != null) {
-			clickCallbackProxy.setCallback(callback);
-			getDelegated().setOnClick(clickCallbackProxy.getProxy());
-		} else {
-			remove(Property.onClick);
-		}
-	}
-
-	public void setOnHover(ChartHoverCallback callback) {
-		if (callback != null) {
-			hoverCallbackProxy.setCallback(callback);
+	/**
+	 * @param hoverCallbackHandler the hoverCallbackHandler to set
+	 */
+	public void setHoverCallbackHandler(ChartHoverCallbackHandler hoverCallbackHandler) {
+		if (hoverCallbackHandler != null) {
 			getDelegated().setOnHover(hoverCallbackProxy.getProxy());	
 		} else {
 			remove(Property.onHover);
 		}
+		this.hoverCallbackHandler = hoverCallbackHandler;
 	}
+
+	/**
+	 * @return the resizeCallbackHandler
+	 */
+	public ChartResizeCallbackHandler getResizeCallbackHandler() {
+		return resizeCallbackHandler;
+	}
+
+	/**
+	 * @param resizeCallbackHandler the resizeCallbackHandler to set
+	 */
+	public void setResizeCallbackHandler(ChartResizeCallbackHandler resizeCallbackHandler) {
+		if (resizeCallbackHandler != null) {
+			getDelegated().setOnResize(resizeCallbackProxy.getProxy());	
+		} else {
+			remove(Property.onResize);
+		}
+		this.resizeCallbackHandler = resizeCallbackHandler;
+	}
+
+	/**
+	 * @return the clickCallbackHandler
+	 */
+	public ChartClickCallbackHandler getClickCallbackHandler() {
+		return clickCallbackHandler;
+	}
+
+	/**
+	 * @param clickCallbackHandler the clickCallbackHandler to set
+	 */
+	public void setClickCallbackHandler(ChartClickCallbackHandler clickCallbackHandler) {
+		if (clickCallbackHandler != null) {
+			getDelegated().setOnClick(clickCallbackProxy.getProxy());
+		} else {
+			remove(Property.onClick);
+		}
+		this.clickCallbackHandler = clickCallbackHandler;
+	}
+	
 }

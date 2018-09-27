@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,7 +25,8 @@ import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.Enumer;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsOverlay;
@@ -131,7 +133,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final String getDatasetLabel() {
-		return AssignHelper.check(getNativeDatasetLabel(), UndefinedValues.STRING);
+		return Checker.check(getNativeDatasetLabel(), UndefinedValues.STRING);
 	}
 
 	/**
@@ -141,7 +143,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final String getLabel() {
-		return AssignHelper.check(getNativeLabel(), UndefinedValues.STRING);
+		return Checker.check(getNativeLabel(), UndefinedValues.STRING);
 	}
 
 	/**
@@ -151,7 +153,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final Position getBorderSkipped() {
-		return AssignHelper.deserialize(AssignHelper.check(getNativeBorderSkipped(), Position.top.name()), Position.class, Position.top);
+		return Enumer.deserialize(getNativeBorderSkipped(), Position.class, Position.top);
 	}
 
 	/**
@@ -161,7 +163,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final String getBackgroundColorAsString() {
-		return AssignHelper.check(getNativeBackgroundColor(), UndefinedValues.STRING);
+		return Checker.check(getNativeBackgroundColor(), UndefinedValues.STRING);
 	}
 
 	/**
@@ -181,7 +183,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final String getBorderColorAsString() {
-		return AssignHelper.check(getNativeBorderColor(), UndefinedValues.STRING);
+		return Checker.check(getNativeBorderColor(), UndefinedValues.STRING);
 	}
 
 	/**
@@ -201,7 +203,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final int getBorderWidth() {
-		return AssignHelper.check(getNativeBorderWidth(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeBorderWidth(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -211,7 +213,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final boolean isHorizontal() {
-		return AssignHelper.check(isNativeHorizontal(), UndefinedValues.BOOLEAN);
+		return Checker.check(isNativeHorizontal(), UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -221,7 +223,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getBase() {
-		return AssignHelper.check(getNativeBase(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeBase(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -231,7 +233,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getX() {
-		return AssignHelper.check(getNativeX(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeX(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -241,7 +243,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getY() {
-		return AssignHelper.check(getNativeY(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeY(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -251,7 +253,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getWidth() {
-		return AssignHelper.check(getNativeWidth(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeWidth(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -261,7 +263,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getHeight() {
-		return AssignHelper.check(getNativeHeight(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeHeight(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -271,7 +273,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final boolean isSkipped() {
-		return AssignHelper.check(isNativeSkipped(), UndefinedValues.BOOLEAN);
+		return Checker.check(isNativeSkipped(), UndefinedValues.BOOLEAN);
 	}
 	
 	/**
@@ -281,7 +283,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getRadius() {
-		return AssignHelper.check(getNativeRadius(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeRadius(), UndefinedValues.DOUBLE);
 	}
 	
 	/**
@@ -296,10 +298,10 @@ public final class DatasetViewItem extends NativeObject {
 		Object objectNative = getNativePointStyle();
 		if (objectNative instanceof String) {
 			List<PointStyle> result = new LinkedList<>();
-			result.add(AssignHelper.deserialize(AssignHelper.check((String)objectNative, PointStyle.circle.name()), PointStyle.class, PointStyle.circle));
-			return result;
+			result.add(Enumer.deserialize((String)objectNative, PointStyle.class, PointStyle.circle));
+			return Collections.unmodifiableList(result);
 		} else {
-			return ArrayListHelper.build(PointStyle.class, (ArrayString) objectNative);
+			return ArrayListHelper.unmodifiableList(PointStyle.class, (ArrayString) objectNative);
 		}
 	}
 	
@@ -310,7 +312,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getTension() {
-		return AssignHelper.check(getNativeTension(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeTension(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -320,7 +322,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getHitRadius() {
-		return AssignHelper.check(getNativeHitRadius(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeHitRadius(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -330,7 +332,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getControlPointPreviousX() {
-		return AssignHelper.check(getNativeControlPointPreviousX(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeControlPointPreviousX(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -340,7 +342,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getControlPointPreviousY() {
-		return AssignHelper.check(getNativeControlPointPreviousY(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeControlPointPreviousY(), UndefinedValues.DOUBLE);
 	}
 	
 	/**
@@ -350,7 +352,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getControlPointNextX() {
-		return AssignHelper.check(getNativeControlPointNextX(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeControlPointNextX(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -360,7 +362,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getControlPointNextY() {
-		return AssignHelper.check(getNativeControlPointNextY(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeControlPointNextY(), UndefinedValues.DOUBLE);
 	}
 	
 	/**
@@ -370,7 +372,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final boolean isSteppedLine() {
-		return AssignHelper.check(isNativeSteppedLine(), UndefinedValues.BOOLEAN);
+		return Checker.check(isNativeSteppedLine(), UndefinedValues.BOOLEAN);
 	}
 	
 	/**
@@ -380,7 +382,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getStartAngle() {
-		return AssignHelper.check(getNativeStartAngle(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeStartAngle(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -390,7 +392,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getEndAngle() {
-		return AssignHelper.check(getNativeEndAngle(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeEndAngle(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -400,7 +402,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getCircumference() {
-		return AssignHelper.check(getNativeCircumference(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeCircumference(), UndefinedValues.DOUBLE);
 	}
 	
 	/**
@@ -410,7 +412,7 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getOuterRadius() {
-		return AssignHelper.check(getNativeOuterRadius(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeOuterRadius(), UndefinedValues.DOUBLE);
 	}
 	
 	/**
@@ -420,6 +422,6 @@ public final class DatasetViewItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final double getInnerRadius() {
-		return AssignHelper.check(getNativeInnerRadius(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeInnerRadius(), UndefinedValues.DOUBLE);
 	}
 }

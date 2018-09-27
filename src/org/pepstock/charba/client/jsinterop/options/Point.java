@@ -16,7 +16,8 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.Enumer;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint;
 
 /**
@@ -52,7 +53,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint, NativePoint
 	 * @return list of the radius of the point when hovered. Default is 3.
 	 */
 	public int getRadius() {
-		return AssignHelper.check(getDelegated().getRadius(), getDefaultValues().getRadius());
+		return Checker.check(getDelegated().getRadius(), getDefaultValues().getRadius());
 	}
 
 	/**
@@ -74,7 +75,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint, NativePoint
 	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public PointStyle getPointStyle() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getPointStyle(), getDefaultValues().getPointStyle()), PointStyle.class, PointStyle.circle);
+		return Enumer.deserialize(getDelegated().getPointStyle(), getDefaultValues().getPointStyle(), PointStyle.class, PointStyle.circle);
 	}
 
 	/**
@@ -94,7 +95,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint, NativePoint
 	 * @return the pixel size of the non-displayed point. Default is 1.
 	 */
 	public int getHitRadius() {
-		return AssignHelper.check(getDelegated().getHitRadius(), getDefaultValues().getHitRadius());
+		return Checker.check(getDelegated().getHitRadius(), getDefaultValues().getHitRadius());
 	}
 
 	/**
@@ -114,7 +115,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint, NativePoint
 	 * @return the radius of the point when hovered. Default is 4.
 	 */
 	public int getHoverRadius() {
-		return AssignHelper.check(getDelegated().getHoverRadius(), getDefaultValues().getHoverRadius());
+		return Checker.check(getDelegated().getHoverRadius(), getDefaultValues().getHoverRadius());
 	}
 
 	/**
@@ -134,7 +135,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint, NativePoint
 	 * @return the border width of point when hovered.Default is 1.
 	 */
 	public int getHoverBorderWidth() {
-		return AssignHelper.check(getDelegated().getHoverBorderWidth(), getDefaultValues().getHoverBorderWidth());
+		return Checker.check(getDelegated().getHoverBorderWidth(), getDefaultValues().getHoverBorderWidth());
 	}
 	
 	/* (non-Javadoc)

@@ -8,8 +8,8 @@ public abstract class Root<P extends BaseModel<?,?,?>, D,  O extends NativeObjec
 	 * @param delegated
 	 * @param defaultValues
 	 */
-	protected Root(D defaultValues, O delegated, boolean eventEnabled) {
-		this(null, defaultValues, delegated, eventEnabled);
+	protected Root(D defaultValues, O delegated) {
+		this(null, defaultValues, delegated);
 	}
 	
 	/**
@@ -17,14 +17,6 @@ public abstract class Root<P extends BaseModel<?,?,?>, D,  O extends NativeObjec
 	 * @param defaultValues
 	 */
 	protected Root(P parent, D defaultValues, O delegated) {
-		this(parent, defaultValues, delegated, false);
-	}
-
-	/**
-	 * @param delegated
-	 * @param defaultValues
-	 */
-	protected Root(P parent, D defaultValues, O delegated, boolean eventEnabled) {
 		super(parent, defaultValues, delegated);
 	}
 	

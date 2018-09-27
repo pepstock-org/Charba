@@ -17,7 +17,7 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines;
 
 /**
@@ -48,7 +48,7 @@ public final class AngleLines extends BaseModel<Scale, IsDefaultAngleLines, Nati
 	 * @return if true, angle lines are shown. Default is true.
 	 */
 	public boolean isDisplay() {
-		return AssignHelper.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
+		return Checker.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -75,7 +75,7 @@ public final class AngleLines extends BaseModel<Scale, IsDefaultAngleLines, Nati
 	 * @return color of angled lines. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultColor()}.
 	 */
 	public String getColorAsString() {
-		return AssignHelper.check(getDelegated().getColor(), getDefaultValues().getColor());
+		return Checker.check(getDelegated().getColor(), getDefaultValues().getColor());
 	}
 
 	/**
@@ -102,7 +102,7 @@ public final class AngleLines extends BaseModel<Scale, IsDefaultAngleLines, Nati
 	 * @return width of angled lines. Default is 1.
 	 */
 	public int getLineWidth() {
-		return AssignHelper.check(getDelegated().getLineWidth(), getDefaultValues().getLineWidth());
+		return Checker.check(getDelegated().getLineWidth(), getDefaultValues().getLineWidth());
 	}
 	
 	/* (non-Javadoc)

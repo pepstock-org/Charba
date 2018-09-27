@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsOverlay;
@@ -52,7 +52,7 @@ public abstract class BaseBoxItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final int getTop() {
-		return AssignHelper.check(getNativeTop(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeTop(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -62,7 +62,7 @@ public abstract class BaseBoxItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final int getRight() {
-		return AssignHelper.check(getNativeRight(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeRight(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -72,7 +72,7 @@ public abstract class BaseBoxItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final int getBottom() {
-		return AssignHelper.check(getNativeBottom(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeBottom(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -82,7 +82,7 @@ public abstract class BaseBoxItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final int getLeft() {
-		return AssignHelper.check(getNativeLeft(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeLeft(), UndefinedValues.INTEGER);
 	}
 
 }

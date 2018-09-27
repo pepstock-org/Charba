@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding;
 
 /**
@@ -47,7 +47,7 @@ public class ScaleLabelPadding extends BaseModel<ScaleLabel, IsDefaultPadding, N
 	 * @return the padding left in pixel. Default is 0.
 	 */
 	public int getLeft() {
-		return AssignHelper.check(getDelegated().getLeft(), getDefaultValues().getLeft());
+		return Checker.check(getDelegated().getLeft(), getDefaultValues().getLeft());
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class ScaleLabelPadding extends BaseModel<ScaleLabel, IsDefaultPadding, N
 	 * @return the padding right in pixel. Default is 0.
 	 */
 	public int getRight() {
-		return AssignHelper.check(getDelegated().getRight(), getDefaultValues().getRight());
+		return Checker.check(getDelegated().getRight(), getDefaultValues().getRight());
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class ScaleLabelPadding extends BaseModel<ScaleLabel, IsDefaultPadding, N
 	 * @return the padding top in pixel. Default is 0.
 	 */
 	public int getTop() {
-		return AssignHelper.check(getDelegated().getTop(), getDefaultValues().getTop());
+		return Checker.check(getDelegated().getTop(), getDefaultValues().getTop());
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class ScaleLabelPadding extends BaseModel<ScaleLabel, IsDefaultPadding, N
 	 * @return the padding bottom in pixel. Default is 0.
 	 */
 	public int getBottom() {
-		return AssignHelper.check(getDelegated().getBottom(), getDefaultValues().getBottom());
+		return Checker.check(getDelegated().getBottom(), getDefaultValues().getBottom());
 	}
 	
 	/* (non-Javadoc)

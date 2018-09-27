@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.enums.TimeUnit;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
 
 /**
  * The following display formats are used to configure how different time units are formed into strings for the axis tick marks.
@@ -55,7 +55,7 @@ public final class DisplayFormats extends BaseModel<Time, Void, NativeDisplayFor
 	 */
 	public String getDisplayFormat(TimeUnit unit){
 		// returns the configuration creating a key.
-		return AssignHelper.check(getDelegated().getDisplayFormat(unit), unit.getDefaultFormat());
+		return Checker.check(getDelegated().getDisplayFormat(unit), unit.getDefaultFormat());
 	}
 	
 	/* (non-Javadoc)

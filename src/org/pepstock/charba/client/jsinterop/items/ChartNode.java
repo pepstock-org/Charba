@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsOverlay;
@@ -152,7 +152,7 @@ public final class ChartNode extends NativeObject {
 	 */
 	@JsOverlay
 	public int getId() {
-		return AssignHelper.check(getNativeId(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeId(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -162,7 +162,7 @@ public final class ChartNode extends NativeObject {
 	 */
 	@JsOverlay
 	public int getWidth() {
-		return AssignHelper.check(getNativeWidth(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeWidth(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -172,7 +172,7 @@ public final class ChartNode extends NativeObject {
 	 */
 	@JsOverlay
 	public int getHeight() {
-		return AssignHelper.check(getNativeHeight(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeHeight(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -182,7 +182,7 @@ public final class ChartNode extends NativeObject {
 	 */
 	@JsOverlay
 	public double getAspectRatio() {
-		return AssignHelper.check(getNativeAspectRatio(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeAspectRatio(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -192,7 +192,7 @@ public final class ChartNode extends NativeObject {
 	 */
 	@JsOverlay
 	public double getCurrentDevicePixelRatio() {
-		return AssignHelper.check(getNativeCurrentDevicePixelRatio(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeCurrentDevicePixelRatio(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -202,7 +202,7 @@ public final class ChartNode extends NativeObject {
 	 */
 	@JsOverlay
 	public boolean isAnimating() {
-		return AssignHelper.check(isNativeAnimating(), UndefinedValues.BOOLEAN);
+		return Checker.check(isNativeAnimating(), UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -212,7 +212,7 @@ public final class ChartNode extends NativeObject {
 	 */
 	@JsOverlay
 	public int getBorderWidth() {
-		return AssignHelper.check(getNativeBorderWidth(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeBorderWidth(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -222,7 +222,7 @@ public final class ChartNode extends NativeObject {
 	 */
 	@JsOverlay
 	public double getOuterRadius() {
-		return AssignHelper.check(getNativeOuterRadius(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeOuterRadius(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -232,7 +232,7 @@ public final class ChartNode extends NativeObject {
 	 */
 	@JsOverlay
 	public double getInnerRadius() {
-		return AssignHelper.check(getNativeInnerRadius(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeInnerRadius(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -242,7 +242,7 @@ public final class ChartNode extends NativeObject {
 	 */
 	@JsOverlay
 	public double getRadiusLength() {
-		return AssignHelper.check(getNativeRadiusLength(), UndefinedValues.DOUBLE);
+		return Checker.check(getNativeRadiusLength(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -252,7 +252,7 @@ public final class ChartNode extends NativeObject {
 	 */
 	@JsOverlay
 	public int getOffsetX() {
-		return AssignHelper.check(getNativeOffsetX(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeOffsetX(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -262,7 +262,7 @@ public final class ChartNode extends NativeObject {
 	 */
 	@JsOverlay
 	public int getOffsetY() {
-		return AssignHelper.check(getNativeOffsetY(), UndefinedValues.INTEGER);
+		return Checker.check(getNativeOffsetY(), UndefinedValues.INTEGER);
 	}
 
 }

@@ -21,7 +21,8 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TooltipPosition;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.Enumer;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
 
 /**
@@ -53,7 +54,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return if tooltips are enabled.. Default is true.
 	 */
 	public boolean isEnabled() {
-		return AssignHelper.check(getDelegated().isEnabled(), getDefaultValues().isEnabled());
+		return Checker.check(getDelegated().isEnabled(), getDefaultValues().isEnabled());
 	}
 
 	/**
@@ -76,7 +77,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
 	public InteractionMode getMode() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getMode(), getDefaultValues().getMode()), InteractionMode.class, InteractionMode.nearest);
+		return Enumer.deserialize(getDelegated().getMode(), getDefaultValues().getMode(), InteractionMode.class, InteractionMode.nearest);
 	}
 
 	/**
@@ -100,7 +101,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 *         will be applied at all times. Default is true.
 	 */
 	public boolean isIntersect() {
-		return AssignHelper.check(getDelegated().isIntersect(), getDefaultValues().isIntersect());
+		return Checker.check(getDelegated().isIntersect(), getDefaultValues().isIntersect());
 	}
 
 	/**
@@ -122,7 +123,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.TooltipPosition
 	 */
 	public TooltipPosition getPosition() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getPosition(), getDefaultValues().getPosition()), TooltipPosition.class, TooltipPosition.average);
+		return Enumer.deserialize(getDelegated().getPosition(), getDefaultValues().getPosition(), TooltipPosition.class, TooltipPosition.average);
 	}
 
 	/**
@@ -151,7 +152,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return Background color of the tooltip. Default is "rgba(0,0,0,0.8)".
 	 */
 	public String getBackgroundColorAsString() {
-		return AssignHelper.check(getDelegated().getBackgroundColor(), getDefaultValues().getBackgroundColor());
+		return Checker.check(getDelegated().getBackgroundColor(), getDefaultValues().getBackgroundColor());
 	}
 
 	/**
@@ -180,7 +181,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return the title font. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
 	 */
 	public String getTitleFontFamily() {
-		return AssignHelper.check(getDelegated().getTitleFontFamily(), getDefaultValues().getTitleFontFamily());
+		return Checker.check(getDelegated().getTitleFontFamily(), getDefaultValues().getTitleFontFamily());
 	}
 
 	/**
@@ -200,7 +201,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return Title font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
 	 */
 	public int getTitleFontSize() {
-		return AssignHelper.check(getDelegated().getTitleFontSize(), getDefaultValues().getTitleFontSize());
+		return Checker.check(getDelegated().getTitleFontSize(), getDefaultValues().getTitleFontSize());
 	}
 
 	/**
@@ -222,7 +223,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getTitleFontStyle() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getTitleFontStyle(), getDefaultValues().getTitleFontStyle()), FontStyle.class, FontStyle.bold);
+		return Enumer.deserialize(getDelegated().getTitleFontStyle(), getDefaultValues().getTitleFontStyle(), FontStyle.class, FontStyle.bold);
 	}
 
 	/**
@@ -244,7 +245,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.TextAlign
 	 */
 	public TextAlign getTitleAlign() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getTitleAlign(), getDefaultValues().getTitleAlign()), TextAlign.class, TextAlign.left);
+		return Enumer.deserialize(getDelegated().getTitleAlign(), getDefaultValues().getTitleAlign(), TextAlign.class, TextAlign.left);
 	}
 
 	/**
@@ -273,7 +274,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return title font color.Default is '#fff'.
 	 */
 	public String getTitleFontColorAsString() {
-		return AssignHelper.check(getDelegated().getTitleFontColor(), getDefaultValues().getTitleFontColor());
+		return Checker.check(getDelegated().getTitleFontColor(), getDefaultValues().getTitleFontColor());
 	}
 
 	/**
@@ -302,7 +303,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return spacing to add to top and bottom of each title line. Default is 2.
 	 */
 	public int getTitleSpacing() {
-		return AssignHelper.check(getDelegated().getTitleSpacing(), getDefaultValues().getTitleSpacing());
+		return Checker.check(getDelegated().getTitleSpacing(), getDefaultValues().getTitleSpacing());
 	}
 
 	/**
@@ -322,7 +323,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return margin to add on bottom of title section. Default is 6.
 	 */
 	public int getTitleMarginBottom() {
-		return AssignHelper.check(getDelegated().getTitleMarginBottom(), getDefaultValues().getTitleMarginBottom());
+		return Checker.check(getDelegated().getTitleMarginBottom(), getDefaultValues().getTitleMarginBottom());
 	}
 
 	/**
@@ -342,7 +343,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return body line font. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
 	 */
 	public String getBodyFontFamily() {
-		return AssignHelper.check(getDelegated().getBodyFontFamily(), getDefaultValues().getBodyFontFamily());
+		return Checker.check(getDelegated().getBodyFontFamily(), getDefaultValues().getBodyFontFamily());
 	}
 
 	/**
@@ -362,7 +363,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return body font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
 	 */
 	public int getBodyFontSize() {
-		return AssignHelper.check(getDelegated().getBodyFontSize(), getDefaultValues().getBodyFontSize());
+		return Checker.check(getDelegated().getBodyFontSize(), getDefaultValues().getBodyFontSize());
 	}
 
 	/**
@@ -384,7 +385,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getBodyFontStyle() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getBodyFontStyle(), getDefaultValues().getBodyFontStyle()), FontStyle.class, FontStyle.normal);
+		return Enumer.deserialize(getDelegated().getBodyFontStyle(), getDefaultValues().getBodyFontStyle(), FontStyle.class, FontStyle.normal);
 	}
 
 	/**
@@ -406,7 +407,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.TextAlign
 	 */
 	public TextAlign getBodyAlign() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getBodyAlign(), getDefaultValues().getBodyAlign()), TextAlign.class, TextAlign.left);
+		return Enumer.deserialize(getDelegated().getBodyAlign(), getDefaultValues().getBodyAlign(), TextAlign.class, TextAlign.left);
 	}
 
 	/**
@@ -435,7 +436,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return body font color. Default is '#fff'.
 	 */
 	public String getBodyFontColorAsString() {
-		return AssignHelper.check(getDelegated().getBodyFontColor(), getDefaultValues().getBodyFontColor());
+		return Checker.check(getDelegated().getBodyFontColor(), getDefaultValues().getBodyFontColor());
 	}
 
 	/**
@@ -464,7 +465,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return spacing to add to top and bottom of each tooltip item. Default is 2.
 	 */
 	public int getBodySpacing() {
-		return AssignHelper.check(getDelegated().getBodySpacing(), getDefaultValues().getBodySpacing());
+		return Checker.check(getDelegated().getBodySpacing(), getDefaultValues().getBodySpacing());
 	}
 
 	/**
@@ -484,7 +485,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return footer font. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
 	 */
 	public String getFooterFontFamily() {
-		return AssignHelper.check(getDelegated().getFooterFontFamily(), getDefaultValues().getFooterFontFamily());
+		return Checker.check(getDelegated().getFooterFontFamily(), getDefaultValues().getFooterFontFamily());
 	}
 
 	/**
@@ -504,7 +505,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return footer font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
 	 */
 	public int getFooterFontSize() {
-		return AssignHelper.check(getDelegated().getFooterFontSize(), getDefaultValues().getFooterFontSize());
+		return Checker.check(getDelegated().getFooterFontSize(), getDefaultValues().getFooterFontSize());
 	}
 
 	/**
@@ -525,7 +526,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFooterFontStyle() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getFooterFontStyle(), getDefaultValues().getFooterFontStyle()), FontStyle.class, FontStyle.bold);
+		return Enumer.deserialize(getDelegated().getFooterFontStyle(), getDefaultValues().getFooterFontStyle(), FontStyle.class, FontStyle.bold);
 	}
 
 	/**
@@ -547,7 +548,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.TextAlign
 	 */
 	public TextAlign getFooterAlign() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getFooterAlign(), getDefaultValues().getFooterAlign()), TextAlign.class, TextAlign.left);
+		return Enumer.deserialize(getDelegated().getFooterAlign(), getDefaultValues().getFooterAlign(), TextAlign.class, TextAlign.left);
 	}
 
 	/**
@@ -576,7 +577,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return footer font color. Default is '#fff'.
 	 */
 	public String getFooterFontColorAsString() {
-		return AssignHelper.check(getDelegated().getFooterFontColor(), getDefaultValues().getFooterFontColor());
+		return Checker.check(getDelegated().getFooterFontColor(), getDefaultValues().getFooterFontColor());
 	}
 
 	/**
@@ -605,7 +606,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return spacing to add to top and bottom of each footer line. Default is 2.
 	 */
 	public int getFooterSpacing() {
-		return AssignHelper.check(getDelegated().getFooterSpacing(), getDefaultValues().getFooterSpacing());
+		return Checker.check(getDelegated().getFooterSpacing(), getDefaultValues().getFooterSpacing());
 	}
 
 	/**
@@ -625,7 +626,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return margin to add before drawing the footer. Default is 6.
 	 */
 	public int getFooterMarginTop() {
-		return AssignHelper.check(getDelegated().getFooterMarginTop(), getDefaultValues().getFooterMarginTop());
+		return Checker.check(getDelegated().getFooterMarginTop(), getDefaultValues().getFooterMarginTop());
 	}
 
 	/**
@@ -645,7 +646,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return padding to add on left and right of tooltip. Default is 6.
 	 */
 	public int getXPadding() {
-		return AssignHelper.check(getDelegated().getXPadding(), getDefaultValues().getXPadding());
+		return Checker.check(getDelegated().getXPadding(), getDefaultValues().getXPadding());
 	}
 
 	/**
@@ -665,7 +666,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return padding to add on top and bottom of tooltip. Default is 6.
 	 */
 	public int getYPadding() {
-		return AssignHelper.check(getDelegated().getYPadding(), getDefaultValues().getYPadding());
+		return Checker.check(getDelegated().getYPadding(), getDefaultValues().getYPadding());
 	}
 
 	/**
@@ -685,7 +686,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return extra distance to move the end of the tooltip arrow away from the tooltip point. Default is 2.
 	 */
 	public int getCaretPadding() {
-		return AssignHelper.check(getDelegated().getCaretPadding(), getDefaultValues().getCaretPadding());
+		return Checker.check(getDelegated().getCaretPadding(), getDefaultValues().getCaretPadding());
 	}
 
 	/**
@@ -705,7 +706,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return size, in px, of the tooltip arrow. Default is 5.
 	 */
 	public int getCaretSize() {
-		return AssignHelper.check(getDelegated().getCaretSize(), getDefaultValues().getCaretSize());
+		return Checker.check(getDelegated().getCaretSize(), getDefaultValues().getCaretSize());
 	}
 
 	/**
@@ -725,7 +726,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return radius of tooltip corner curves. Default is 6.
 	 */
 	public int getCornerRadius() {
-		return AssignHelper.check(getDelegated().getCornerRadius(), getDefaultValues().getCornerRadius());
+		return Checker.check(getDelegated().getCornerRadius(), getDefaultValues().getCornerRadius());
 	}
 
 	/**
@@ -754,7 +755,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return color to draw behind the colored boxes when multiple items are in the tooltip. Default is '#fff'.
 	 */
 	public String getMultiKeyBackgroundAsString() {
-		return AssignHelper.check(getDelegated().getMultiKeyBackground(), getDefaultValues().getMultiKeyBackground());
+		return Checker.check(getDelegated().getMultiKeyBackground(), getDefaultValues().getMultiKeyBackground());
 	}
 
 	/**
@@ -783,7 +784,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return if true, color boxes are shown in the tooltip. Default is true.
 	 */
 	public boolean isDisplayColors() {
-		return AssignHelper.check(getDelegated().isDisplayColors(), getDefaultValues().isDisplayColors());
+		return Checker.check(getDelegated().isDisplayColors(), getDefaultValues().isDisplayColors());
 	}
 
 	/**
@@ -812,7 +813,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return color of the border. Default is 'rgba(0,0,0,0)'.
 	 */
 	public String getBorderColorAsString() {
-		return AssignHelper.check(getDelegated().getBorderColor(), getDefaultValues().getBorderColor());
+		return Checker.check(getDelegated().getBorderColor(), getDefaultValues().getBorderColor());
 	}
 
 	/**
@@ -841,7 +842,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return size of the border. Default is 0.
 	 */
 	public int getBorderWidth() {
-		return AssignHelper.check(getDelegated().getBorderWidth(), getDefaultValues().getBorderWidth());
+		return Checker.check(getDelegated().getBorderWidth(), getDefaultValues().getBorderWidth());
 	}
 	
 	/* (non-Javadoc)

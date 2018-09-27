@@ -19,7 +19,8 @@ import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
 import org.pepstock.charba.client.enums.ScaleDistribution;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.Enumer;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
 import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 
@@ -140,7 +141,7 @@ public class Scale extends Root<BaseOptions<?,?>, IsDefaultScale, NativeScale>{
 	 * @return The ID is used to link datasets and scale axes together or <code>null</code> if not set
 	 */
 	public String getId() {
-		return AssignHelper.check(getDelegated().getId(), UndefinedValues.STRING);
+		return Checker.check(getDelegated().getId(), UndefinedValues.STRING);
 	}
 	
 	/**
@@ -160,7 +161,7 @@ public class Scale extends Root<BaseOptions<?,?>, IsDefaultScale, NativeScale>{
 	 * @return if the axis are stacked or not. Default is <code>false</code>.
 	 */
 	public boolean isStacked() {
-		return AssignHelper.check(getDelegated().isStacked(), getDefaultValues().isStacked());
+		return Checker.check(getDelegated().isStacked(), getDefaultValues().isStacked());
 	}
 	
 	/**
@@ -182,7 +183,7 @@ public class Scale extends Root<BaseOptions<?,?>, IsDefaultScale, NativeScale>{
 	 * @see org.pepstock.charba.client.enums.AxisType
 	 */
 	public AxisType getType() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getType(), getDefaultValues().getType()), AxisType.class, AxisType.linear);
+		return Enumer.deserialize(getDelegated().getType(), getDefaultValues().getType(), AxisType.class, AxisType.linear);
 	}
 
 	/**
@@ -202,7 +203,7 @@ public class Scale extends Root<BaseOptions<?,?>, IsDefaultScale, NativeScale>{
 	 * @return weight of axis. Default is 0.
 	 */
 	public int getWeight() {
-		return AssignHelper.check(getDelegated().getWeight(), getDefaultValues().getWeight());
+		return Checker.check(getDelegated().getWeight(), getDefaultValues().getWeight());
 	}
 
 	/**
@@ -222,7 +223,7 @@ public class Scale extends Root<BaseOptions<?,?>, IsDefaultScale, NativeScale>{
 	 * @return if true, shows the axis. Default is true.
 	 */
 	public boolean isDisplay() {
-		return AssignHelper.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
+		return Checker.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
 	}
 	/**
 	 * If true, extra space is added to the both edges and the axis is scaled to fit into the chart area.
@@ -241,7 +242,7 @@ public class Scale extends Root<BaseOptions<?,?>, IsDefaultScale, NativeScale>{
 	 * @return extra space of axis. Default is <code>false</code>.
 	 */
 	public boolean isOffset() {
-		return AssignHelper.check(getDelegated().isOffset(), getDefaultValues().isOffset());
+		return Checker.check(getDelegated().isOffset(), getDefaultValues().isOffset());
 	}
 
 	/**
@@ -263,7 +264,7 @@ public class Scale extends Root<BaseOptions<?,?>, IsDefaultScale, NativeScale>{
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getPosition(), getDefaultValues().getPosition()), Position.class, Position.top);
+		return Enumer.deserialize(getDelegated().getPosition(), getDefaultValues().getPosition(), Position.class, Position.top);
 	}
 
 	/**
@@ -287,7 +288,7 @@ public class Scale extends Root<BaseOptions<?,?>, IsDefaultScale, NativeScale>{
 	 *         category width and put the bars right next to each other. Default is 0.9.
 	 */
 	public double getBarPercentage() {
-		return AssignHelper.check(getDelegated().getBarPercentage(), getDefaultValues().getBarPercentage());
+		return Checker.check(getDelegated().getBarPercentage(), getDefaultValues().getBarPercentage());
 	}
 
 	/**
@@ -307,7 +308,7 @@ public class Scale extends Root<BaseOptions<?,?>, IsDefaultScale, NativeScale>{
 	 * @return the percent (0-1) of the available width each category should be within the sample width. Default is 0.8.
 	 */
 	public double getCategoryPercentage() {
-		return AssignHelper.check(getDelegated().getCategoryPercentage(), getDefaultValues().getCategoryPercentage());
+		return Checker.check(getDelegated().getCategoryPercentage(), getDefaultValues().getCategoryPercentage());
 	}
 
 	/**
@@ -333,7 +334,7 @@ public class Scale extends Root<BaseOptions<?,?>, IsDefaultScale, NativeScale>{
 	 *         Default is 0.
 	 */
 	public int getBarThickness() {
-		return AssignHelper.check(getDelegated().getBarThickness(), getDefaultValues().getBarThickness());
+		return Checker.check(getDelegated().getBarThickness(), getDefaultValues().getBarThickness());
 	}
 
 	/**
@@ -353,7 +354,7 @@ public class Scale extends Root<BaseOptions<?,?>, IsDefaultScale, NativeScale>{
 	 * @return the maximum bar thickness. Default is 0.
 	 */
 	public int getMaxBarThickness() {
-		return AssignHelper.check(getDelegated().getMaxBarThickness(), getDefaultValues().getMaxBarThickness());
+		return Checker.check(getDelegated().getMaxBarThickness(), getDefaultValues().getMaxBarThickness());
 	}
 	
 	/**
@@ -375,7 +376,7 @@ public class Scale extends Root<BaseOptions<?,?>, IsDefaultScale, NativeScale>{
 	 * @see org.pepstock.charba.client.enums.ScaleDistribution
 	 */
 	public ScaleDistribution getDistribution() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getDistribution(), getDefaultValues().getDistribution()), ScaleDistribution.class, ScaleDistribution.linear);
+		return Enumer.deserialize(getDelegated().getDistribution(), getDefaultValues().getDistribution(), ScaleDistribution.class, ScaleDistribution.linear);
 	}
 	
 	/**
@@ -397,7 +398,7 @@ public class Scale extends Root<BaseOptions<?,?>, IsDefaultScale, NativeScale>{
 	 * @see org.pepstock.charba.client.enums.ScaleBounds
 	 */
 	public ScaleBounds getBounds() {
-		return AssignHelper.deserialize(AssignHelper.check(getDelegated().getBounds(), getDefaultValues().getBounds()), ScaleBounds.class, ScaleBounds.data);
+		return Enumer.deserialize(getDelegated().getBounds(), getDefaultValues().getBounds(), ScaleBounds.class, ScaleBounds.data);
 	}
 	
 	/* (non-Javadoc)

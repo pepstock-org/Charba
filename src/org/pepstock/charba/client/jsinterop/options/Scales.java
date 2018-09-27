@@ -20,7 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory;
-import org.pepstock.charba.client.jsinterop.commons.AssignHelper;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
 
 /**
@@ -60,7 +60,7 @@ public class Scales extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSc
 	 * @return the scales are shown. Default is true.
 	 */
 	public boolean isDisplay() {
-		return AssignHelper.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
+		return Checker.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
 	}
 
 	public void setXAxes(Scale... scales) {
@@ -73,7 +73,7 @@ public class Scales extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSc
 	 * @return the xAxes
 	 */
 	public List<Scale> getXAxes() {
-		return ArrayListHelper.build(getDelegated().getXAxes(), factory);
+		return ArrayListHelper.list(getDelegated().getXAxes(), factory);
 	}
 
 	public void setYAxes(Scale... scales) {
@@ -86,7 +86,7 @@ public class Scales extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSc
 	 * @return the xAxes
 	 */
 	public List<Scale> getYAxes() {
-		return ArrayListHelper.build(getDelegated().getYAxes(), factory);
+		return ArrayListHelper.list(getDelegated().getYAxes(), factory);
 	}
 	
 
