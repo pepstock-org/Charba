@@ -19,7 +19,9 @@ import java.util.List;
 
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.callbacks.LegendCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.LegendHandler;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
@@ -33,7 +35,6 @@ import org.pepstock.charba.client.jsinterop.events.ChartResizeEvent;
 import org.pepstock.charba.client.jsinterop.events.DatasetSelectionEvent;
 import org.pepstock.charba.client.jsinterop.items.DatasetItem;
 import org.pepstock.charba.client.jsinterop.items.SizeItem;
-import org.pepstock.charba.client.jsinterop.options.BaseOptions.ProxyGenerateLegendCallback;
 import org.pepstock.charba.client.jsinterop.options.EventableOptions;
 import org.pepstock.charba.client.jsinterop.options.NativeOptions;
 
@@ -61,10 +62,8 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class ConfigurationOptions extends EventProvider<EventableOptions> implements ChartClickCallbackHandler, ChartHoverCallbackHandler, ChartResizeCallbackHandler {
+public abstract class ConfigurationOptions extends EventProvider<EventableOptions> implements ChartClickCallbackHandler, ChartHoverCallbackHandler, ChartResizeCallbackHandler, LegendHandler {
 	
-	// legend error
-	private static final String LEGEND_CALLBACK_ERROR = "Unable to execute LegendCallback";
 	
 	private final Animation animation;
 
@@ -81,10 +80,6 @@ public abstract class ConfigurationOptions extends EventProvider<EventableOption
 	private final Elements elements;
 	
 	private final Plugins plugins;
-	
-	private final ProxyGenerateLegendCallback generateLegendCallback;
-	
-	private LegendCallback legendCallback = null;
 	
 	// amount of click event handlers
 	private int onClickHandlers = 0;
@@ -112,26 +107,9 @@ public abstract class ConfigurationOptions extends EventProvider<EventableOption
 		// sets charba ID
 		getConfiguration().setCharbaId(chart.getId());
 		// callbacks
-		generateLegendCallback = new ProxyGenerateLegendCallback() {
-
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.EventableOptions.GenerateLegendCallback#call(java.lang.Object)
-			 */
-			@Override
-			public String call(Object context) {
-				// checks if legend callback is set
-				if (legendCallback != null) {
-					// creates the safe html to be sure about the right HTML to send back
-					SafeHtmlBuilder builder = new SafeHtmlBuilder();
-					// calls callback
-					legendCallback.generateLegend(getChart(), builder);
-					// returns safe html
-					return builder.toSafeHtml().asString();
-				}
-				return LEGEND_CALLBACK_ERROR;
-			}
-			
-		};
+		if (hasGlobalLegendCallback()) {
+			getConfiguration().setLegendHandler(this);
+		}
 	}
 
 	/**
@@ -444,24 +422,52 @@ public abstract class ConfigurationOptions extends EventProvider<EventableOption
 //			self.@org.pepstock.charba.client.options.BaseOptions::onHover(Lorg/pepstock/charba/client/events/ChartNativeEvent;Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(event, myItems);
 //		}
 //	}
-	
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.LegendHandler#generateLegend(java.lang.Object)
+	 */
+	@Override
+	public String generateLegend(Object context) {
+		// creates the safe html to be sure about the right HTML to send back
+		SafeHtmlBuilder builder = new SafeHtmlBuilder();
+		// checks if callback is consistent
+		if (getLegendCallback() != null) {
+			// calls callback
+			getLegendCallback().generateLegend(getChart(), builder);
+		} else if (Chart.defaults().chart(getChart()).getLegendCallback() != null) {
+			// calls callback
+			Chart.defaults().chart(getChart()).getLegendCallback().generateLegend(getChart(), builder);;
+		} else if (Chart.defaults().global().getLegend().getLabels().getFilterCallback() != null) {
+			// calls callback
+			Chart.defaults().global().getLegendCallback().generateLegend(getChart(), builder);
+		}
+		return builder.toSafeHtml().asString();
+	}
+
+	private boolean hasGlobalLegendCallback() {
+		return Chart.defaults().global().getLegendCallback() != null ||
+		       Chart.defaults().chart(getChart()).getLegendCallback() != null;  
+	}
 	/**
 	 * @return the legendCallBack
 	 */
-	public LegendCallback getLegendCallBack() {
-		return legendCallback;
+	public LegendCallback getLegendCallback() {
+		return getConfiguration().getLegendCallback();
 	}
+
 
 	/**
 	 * @param legendCallBack the legendCallBack to set
 	 */
-	public void setLegendCallBack(LegendCallback legendCallBack) {
-		if (legendCallBack == null) {
-			getConfiguration().setLegendCallBack(null);
-		} else {
-			getConfiguration().setLegendCallBack(generateLegendCallback);
+	public void setLegendCallback(LegendCallback legendCallBack) {
+		getConfiguration().setLegendCallback(legendCallBack);
+		if (!hasGlobalLegendCallback()) {
+			if (legendCallBack == null) {
+				getConfiguration().setLegendHandler(null);
+			} else {
+				getConfiguration().setLegendHandler(this);
+			}
 		}
-		this.legendCallback = legendCallBack;
 	}
 	
 	public NativeOptions getObject() {

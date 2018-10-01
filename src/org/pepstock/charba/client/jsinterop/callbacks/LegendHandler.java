@@ -15,18 +15,21 @@
 */
 package org.pepstock.charba.client.jsinterop.callbacks;
 
-import org.pepstock.charba.client.jsinterop.items.LegendItem;
-
 /**
- * Filters legend items out of the legend. Receives 2 parameters, a Legend Item and the chart.
+ * Sometimes you need a very complex legend. In these cases, it makes sense to generate an HTML legend. Charts provide a
+ * {@link org.pepstock.charba.client.AbstractChart#generateLegend()} method that returns an HTML string for the legend.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.items.LegendItem
- * @see org.pepstock.charba.client.options.LegendLabels
- * @see org.pepstock.charba.client.callbacks.FilterHandler
+ * @see org.pepstock.charba.client.AbstractChart#generateLegend()
  */
-public interface LegendFilterHandler {
-	
-	boolean onFilter(Object context, LegendItem item);
+public interface LegendHandler {
+
+	/**
+	 * Creates HTML representation of legend.
+	 * 
+	 * @param chart chart instance
+	 * @param builder uses SafeHTML builder to create HTML
+	 */
+	String generateLegend(Object context);
 
 }

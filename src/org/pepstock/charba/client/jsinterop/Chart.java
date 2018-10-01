@@ -8,17 +8,23 @@ import org.pepstock.charba.client.jsinterop.items.DatasetMetaItem;
 import com.google.gwt.canvas.dom.client.Context2d;
 
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 @JsType(isNative = true, name = "Chart", namespace = JsPackage.GLOBAL)
 public final class Chart {
-	@JsProperty(name = "defaults")
-	public static native Defaults defaults();
+	@JsProperty
+	static native NativeDefaults getDefaults();
 
 	@JsProperty(name = "helpers")
 	public static native Helpers helpers();
+	
+	@JsOverlay
+	public static Defaults defaults() {
+		return Defaults.get(getDefaults());
+	}
 	
 	/**
 	 * 

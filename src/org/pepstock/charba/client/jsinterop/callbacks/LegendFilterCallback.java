@@ -25,8 +25,6 @@ import org.pepstock.charba.client.jsinterop.items.LegendItem;
  * @see org.pepstock.charba.client.options.LegendLabels
  * @see org.pepstock.charba.client.callbacks.FilterHandler
  */
-public interface LegendFilterHandler {
-	
-	boolean onFilter(Object context, LegendItem item);
+public interface LegendFilterCallback extends FilterCallback<LegendItem> {
 
 }

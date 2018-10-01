@@ -16,8 +16,12 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.callbacks.LegendFilterCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.LegendFilterHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.LegendLabelsCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.LegendLabelsHandler;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
+import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.commons.JsFactory;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels;
 import org.pepstock.charba.client.jsinterop.items.LegendItem;
@@ -39,8 +43,7 @@ public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels, Native
 	 * @return array of legend items.
 	 */
 	@JsFunction
-	public interface GenerateLabelsCallback {
-
+	interface ProxyGenerateLabelsCallback {
 		LegendLabelItem[] call(Object context, Object chart);
 	}
 
@@ -51,8 +54,7 @@ public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels, Native
 	 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
 	 */
 	@JsFunction
-	public interface FilterCallback {
-
+	interface ProxyFilterCallback {
 		boolean call(Object context, LegendItem item);
 	}
 	
@@ -65,12 +67,44 @@ public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels, Native
 		filter
 	}
 	
-	private final CallbackProxy<GenerateLabelsCallback> generateLabelsCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyGenerateLabelsCallback> labelsCallbackProxy = JsFactory.newCallbackProxy();
 
-	private final CallbackProxy<FilterCallback> filterCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyFilterCallback> filterCallbackProxy = JsFactory.newCallbackProxy();
+	
+	private LegendFilterHandler filterHandler = null;
+	
+	private LegendFilterCallback filterCallback = null;
+	
+	private LegendLabelsHandler labelsHandler = null;
+	
+	private LegendLabelsCallback labelsCallback = null;
 	
 	LegendLabels(Legend legend, IsDefaultLegendLabels defaultValues, NativeLegendLabels delegated) {
 		super(legend, defaultValues, delegated == null ? new NativeLegendLabels() : delegated);
+		
+		filterCallbackProxy.setCallback(new ProxyFilterCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.LegendLabels.ProxyFilterCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.LegendItem)
+			 */
+			@Override
+			public boolean call(Object context, LegendItem item) {
+				return filterHandler != null ? filterHandler.onFilter(context, item) : true;
+			}
+			
+		});
+		
+		labelsCallbackProxy.setCallback(new ProxyGenerateLabelsCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.LegendLabels.ProxyGenerateLabelsCallback#call(java.lang.Object, java.lang.Object)
+			 */
+			@Override
+			public LegendLabelItem[] call(Object context, Object chart) {
+				return labelsHandler != null ? labelsHandler.generateLegendLabels(context, chart) : new LegendLabelItem[0];
+			}
+			
+		});
 	}
 
 	/**
@@ -132,35 +166,84 @@ public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels, Native
 	public int getPadding() {
 		return Checker.check(getDelegated().getPadding(), getDefaultValues().getPadding());
 	}
-	
+
+	// -------------------
+	// LABELS
+	// -------------------
 	/**
-	 * @param legendCallBack the legendCallBack to set
+	 * @return the labelsCallback
 	 */
-	public void setGenerateLabelsCallback(GenerateLabelsCallback legendCallBack) {
-		if (legendCallBack != null) {
-			generateLabelsCallbackProxy.setCallback(legendCallBack);
-			getDelegated().setGenerateLabels(generateLabelsCallbackProxy.getProxy());
+	public LegendLabelsCallback getLabelsCallback() {
+		return labelsCallback;
+	}
+
+	/**
+	 * @param labelsCallback the labelsCallback to set
+	 */
+	public void setLabelsCallback(LegendLabelsCallback labelsCallback) {
+		this.labelsCallback = labelsCallback;
+	}
+	
+
+	/**
+	 * @return the labelsHandler
+	 */
+	public LegendLabelsHandler getLabelsHandler() {
+		return labelsHandler;
+	}
+
+	/**
+	 * @param labelsHandler the labelsHandler to set
+	 */
+	public void setLabelsHandler(LegendLabelsHandler labelsHandler) {
+		if (labelsHandler != null) {
+			getDelegated().setFilter(labelsCallbackProxy.getProxy());
 			// checks if the node is already added to parent
 			checkAndAddToParent();
 		} else {
 			remove(Property.generateLabels);
 		}
+		this.labelsHandler = labelsHandler;
+	}
+
+	// -------------------
+	// FILTER
+	// -------------------
+	/**
+	 * @return the filterHandler
+	 */
+	public LegendFilterHandler getFilterHandler() {
+		return filterHandler;
 	}
 
 	/**
-	 * @param filterCallBack the legendCallBack to set
+	 * @param filterHandler the filterHandler to set
 	 */
-	public void setFilterCallback(FilterCallback filterCallBack) {
-		if (filterCallBack != null) {
-			filterCallbackProxy.setCallback(filterCallBack);
+	public void setFilterHandler(LegendFilterHandler filterHandler) {
+		if (filterHandler != null) {
 			getDelegated().setFilter(filterCallbackProxy.getProxy());
 			// checks if the node is already added to parent
 			checkAndAddToParent();
 		} else {
 			remove(Property.filter);
 		}
+		this.filterHandler = filterHandler;
 	}
-	
+
+	/**
+	 * @return the filterCallback
+	 */
+	public LegendFilterCallback getFilterCallback() {
+		return filterCallback;
+	}
+
+	/**
+	 * @param filterCallback the filterCallback to set
+	 */
+	public void setFilterCallback(LegendFilterCallback filterCallback) {
+		this.filterCallback = filterCallback;
+	}
+
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
 	 */

@@ -7,6 +7,8 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.jsinterop.callbacks.LegendCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.LegendHandler;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
@@ -19,6 +21,9 @@ import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 import jsinterop.annotations.JsFunction;
 
 public abstract class BaseOptions<A extends Animation, L extends Legend> extends Root<BaseOptions<A,L>, IsDefaultOptions, NativeOptions>{
+	
+	// legend error
+	private static final String LEGEND_CALLBACK_ERROR = "Unable to execute LegendCallback";
 
 	/**
 	 * Called to generate an HTML legend.
@@ -26,7 +31,7 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 *
 	 */
 	@JsFunction
-	public interface ProxyGenerateLegendCallback {
+	interface ProxyGenerateLegendCallback {
 		/**
 		 * Called to generate an HTML legend.
 		 * 
@@ -59,7 +64,9 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	
 	private final Scales scales;
 	
-	private final ProxyGenerateLegendCallback originLegendCallback;
+	private LegendCallback legendCallback = null;
+	
+	private LegendHandler legendHandler = null;
 	
 	private final CallbackProxy<ProxyGenerateLegendCallback> legendCallbackProxy = JsFactory.newCallbackProxy();
 
@@ -80,7 +87,15 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 		scales = new Scales(this, getDefaultValues().getScale(), getDelegated().getScales());
 		plugins = new Plugins(this, getDelegated().getPlugins());
 		
-		originLegendCallback = getDelegated().getOriginGenerateLegendCallback();
+		legendCallbackProxy.setCallback(new ProxyGenerateLegendCallback() {
+			
+			@Override
+			public String call(Object context) {
+				return legendHandler != null ? legendHandler.generateLegend(context) : LEGEND_CALLBACK_ERROR;
+			}
+		});
+		
+//		originLegendCallback = getDelegated().getOriginGenerateLegendCallback();
 	}
 	
 	/**
@@ -155,13 +170,42 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	public final Plugins getPlugins() {
 		return plugins;
 	}
+	
+	/**
+	 * @return the legendCallBack
+	 */
+	public LegendCallback getLegendCallback() {
+		return legendCallback;
+	}
 
 	/**
-	 * @return the originLegendCallback
+	 * @param legendCallBack the legendCallBack to set
 	 */
-	public ProxyGenerateLegendCallback getOriginLegendCallback() {
-		return originLegendCallback;
+	public void setLegendCallback(LegendCallback legendCallBack) {
+		this.legendCallback = legendCallBack;
 	}
+
+	/**
+	 * @return the legendHandler
+	 */
+	public LegendHandler getLegendHandler() {
+		return legendHandler;
+	}
+
+	/**
+	 * @param legendHandler the legendHandler to set
+	 */
+	public void setLegendHandler(LegendHandler legendHandler) {
+		if (legendHandler == null) {
+			getDelegated().setLegendCallback(legendCallbackProxy.getProxy());
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		} else {
+			remove(Property.legendCallback);
+		}
+		this.legendHandler = legendHandler;
+	}
+
 	
 	public String getCharbaId() {
 		return Checker.check(getDelegated().getCharbaId(), UndefinedValues.STRING);
@@ -506,19 +550,6 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	 */
 	public double getStartAngle() {
 		return Checker.check(getDelegated().getStartAngle(), getDefaultValues().getStartAngle());
-	}
-	
-	
-	/**
-	 * @param legendCallBack the legendCallBack to set
-	 */
-	public void setLegendCallBack(ProxyGenerateLegendCallback legendCallBack) {
-		if (legendCallBack != null) {
-			legendCallbackProxy.setCallback(legendCallBack);
-			getDelegated().setLegendCallback(legendCallbackProxy.getProxy());
-		} else {
-			remove(Property.legendCallback);
-		}
 	}
 	
 	/* (non-Javadoc)

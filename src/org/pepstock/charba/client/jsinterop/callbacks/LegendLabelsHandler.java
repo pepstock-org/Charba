@@ -15,18 +15,24 @@
 */
 package org.pepstock.charba.client.jsinterop.callbacks;
 
-import org.pepstock.charba.client.jsinterop.items.LegendItem;
+import org.pepstock.charba.client.jsinterop.items.LegendLabelItem;
 
 /**
- * Filters legend items out of the legend. Receives 2 parameters, a Legend Item and the chart.
+ * Generates legend items for each thing in the legend.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.items.LegendItem
  * @see org.pepstock.charba.client.options.LegendLabels
- * @see org.pepstock.charba.client.callbacks.FilterHandler
  */
-public interface LegendFilterHandler {
-	
-	boolean onFilter(Object context, LegendItem item);
+public interface LegendLabelsHandler {
+
+	/**
+	 * Generates legend items for each thing in the legend. Default implementation returns the text + styling for the color box.
+	 * 
+	 * @param chart chart instance
+	 * @return an array of legend items. if <code>null</code>, uses the default implementation
+	 * @see org.pepstock.charba.client.AbstractChart
+	 * @see org.pepstock.charba.client.items.LegendLabelItem
+	 */
+	LegendLabelItem[] generateLegendLabels(Object context, Object chart);
 
 }

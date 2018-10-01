@@ -23,7 +23,7 @@ import org.pepstock.charba.client.jsinterop.AbstractChart;
  * @author Andrea "Stock" Stocchero
  * @param <T> type of item to be filtered
  */
-interface FilterHandler<T> {
+interface FilterCallback<T> {
 
 	/**
 	 * Callback that runs before ticks are created.
