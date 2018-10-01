@@ -1,6 +1,9 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.callbacks.LegendFilterHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.LegendHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.LegendLabelsHandler;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.JsFactory;
@@ -14,7 +17,10 @@ import org.pepstock.charba.client.jsinterop.items.SizeItem;
 
 import jsinterop.annotations.JsFunction;
 
-public class EventableOptions extends BaseOptions<EventableAnimation,EventableLegend>{
+public final class EventableOptions extends BaseOptions<EventableAnimation,EventableLegend>{
+	
+	// legend error
+	private static final String LEGEND_CALLBACK_ERROR = "Unable to execute LegendCallback";
 	
 	/**
 	 * Called if the event is of type 'mouseup' or 'click'. Called in the context of the chart and passed the event and an array
@@ -79,17 +85,22 @@ public class EventableOptions extends BaseOptions<EventableAnimation,EventableLe
 
 	private final CallbackProxy<ProxyChartHoverCallback> hoverCallbackProxy = JsFactory.newCallbackProxy();
 	
+	private final CallbackProxy<ProxyGenerateLegendCallback> legendCallbackProxy = JsFactory.newCallbackProxy();
+	
 	private ChartClickCallbackHandler clickCallbackHandler = null;
 	
 	private ChartHoverCallbackHandler hoverCallbackHandler = null;
 	
 	private ChartResizeCallbackHandler resizeCallbackHandler = null;
 	
+	private LegendHandler legendHandler = null;
+	
 	/**
 	 * Name of fields of JavaScript object.
 	 */
 	private enum Property implements Key
 	{
+		legendCallback,
 		onResize,
 		onClick,
 		onHover
@@ -140,6 +151,16 @@ public class EventableOptions extends BaseOptions<EventableAnimation,EventableLe
 			}
 			
 		});
+		
+		legendCallbackProxy.setCallback(new ProxyGenerateLegendCallback() {
+			
+			@Override
+			public String call(Object context) {
+				return legendHandler != null ? legendHandler.generateLegend(context) : LEGEND_CALLBACK_ERROR;
+			}
+		});
+		
+
 	}
 	
 	public void setCharbaId(String id) {
@@ -217,6 +238,55 @@ public class EventableOptions extends BaseOptions<EventableAnimation,EventableLe
 			remove(Property.onClick);
 		}
 		this.clickCallbackHandler = clickCallbackHandler;
+	}
+	
+	/**
+	 * @return the legendHandler
+	 */
+	public LegendHandler getLegendHandler() {
+		return legendHandler;
+	}
+
+	/**
+	 * @param legendHandler the legendHandler to set
+	 */
+	public void setLegendHandler(LegendHandler legendHandler) {
+		if (legendHandler == null) {
+			getDelegated().setLegendCallback(legendCallbackProxy.getProxy());
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		} else {
+			remove(Property.legendCallback);
+		}
+		this.legendHandler = legendHandler;
+	}
+	
+	/**
+	 * @return the filterHandler
+	 */
+	public LegendFilterHandler getFilterHandler() {
+		return getLegend().getLabels().getFilterHandler();
+	}
+
+	/**
+	 * @param filterHandler the filterHandler to set
+	 */
+	public void setFilterHandler(LegendFilterHandler filterHandler) {
+		getLegend().getLabels().setFilterHandler(filterHandler);
+	}
+	
+	/**
+	 * @return the labelsHandler
+	 */
+	public LegendLabelsHandler getLabelsHandler() {
+		return getLegend().getLabels().getLabelsHandler();
+	}
+
+	/**
+	 * @param labelsHandler the labelsHandler to set
+	 */
+	public void setLabelsHandler(LegendLabelsHandler labelsHandler) {
+		getLegend().getLabels().setLabelsHandler(labelsHandler);
 	}
 	
 }

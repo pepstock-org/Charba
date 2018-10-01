@@ -23,8 +23,6 @@ import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.commons.Enumer;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime;
 
-import com.google.gwt.core.client.JsDate;
-
 /**
  * The following display formats are used to configure how different time units are formed into strings for the axis tick marks.
  * 
@@ -88,7 +86,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @param max If defined, this will override the data maximum.
 	 */
 	public void setMax(Date max) {
-		getDelegated().setMax(fromDate(max));
+		getDelegated().setMax(Checker.fromDate(max));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -99,7 +97,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @return If defined, this will override the data maximum. Default is <code>null</code>.
 	 */
 	public Date getMax() {
-		return toDate(Checker.check(getDelegated().getMax(), getDefaultValues().getMax()));
+		return Checker.toDate(Checker.check(getDelegated().getMax(), getDefaultValues().getMax()));
 	}
 
 	/**
@@ -108,7 +106,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @param min If defined, this will override the data minimum.
 	 */
 	public void setMin(Date min) {
-		getDelegated().setMin(fromDate(min));
+		getDelegated().setMin(Checker.fromDate(min));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -119,7 +117,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @return If defined, this will override the data minimum. Default is <code>null</code>.
 	 */
 	public Date getMin() {
-		return toDate(Checker.check(getDelegated().getMin(), getDefaultValues().getMin()));
+		return Checker.toDate(Checker.check(getDelegated().getMin(), getDefaultValues().getMin()));
 	}
 	
 	/**
@@ -290,23 +288,6 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 		return Checker.check(getDelegated().getParser(), getDefaultValues().getParser());
 	}
 	
-	/**
-	 * FIXME
-	 * @param date
-	 * @return
-	 */
-	private JsDate fromDate(Date date) {
-		return date != null ? JsDate.create((double) date.getTime()) : null;
-	}
-	
-	/**
-	 * FIXME
-	 * @param date
-	 * @return
-	 */
-	private Date toDate(JsDate date) {
-		return date != null ? new Date((long)date.getTime()) : null;
-	}
 	
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()

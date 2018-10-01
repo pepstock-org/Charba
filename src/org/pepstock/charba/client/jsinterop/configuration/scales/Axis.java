@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration.scales;
 
-import org.pepstock.charba.client.jsinterop.AbstractChart;
+import java.util.List;
+
 import org.pepstock.charba.client.callbacks.AxisBuildTicksCallback;
 import org.pepstock.charba.client.callbacks.AxisCalculateTickRotationCallback;
 import org.pepstock.charba.client.callbacks.AxisDataLimitsCallback;
@@ -25,8 +26,14 @@ import org.pepstock.charba.client.callbacks.AxisTickToLabelConversionCallback;
 import org.pepstock.charba.client.callbacks.AxisUpdateCallback;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.CartesianAxisType;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.Chart;
+import org.pepstock.charba.client.jsinterop.ChartOptions;
 import org.pepstock.charba.client.jsinterop.configuration.ConfigurationContainer;
-import org.pepstock.charba.client.jsinterop.defaults.DefaultScale;
+import org.pepstock.charba.client.jsinterop.configuration.MultiScalesOptions;
+import org.pepstock.charba.client.jsinterop.configuration.SingleScaleOptions;
+import org.pepstock.charba.client.jsinterop.defaults.chart.DefaultChartScale;
 import org.pepstock.charba.client.jsinterop.options.Scale;
 
 /**
@@ -40,7 +47,7 @@ import org.pepstock.charba.client.jsinterop.options.Scale;
 public abstract class Axis extends ConfigurationContainer<Scale> {
 
 //	private AbstractChart<?, ?> chart = null;
-
+	
 	private AxisUpdateCallback updateCallback = null;
 
 	private AxisDimensionsCallback dimensionsCallback = null;
@@ -86,9 +93,9 @@ public abstract class Axis extends ConfigurationContainer<Scale> {
 	 */
 	protected Axis(AbstractChart<?, ?> chart) {
 		// FIXME default
-		super(chart, new Scale(new DefaultScale()));
+		super(chart);
+		setConfiguration(new Scale(new DefaultChartScale(getDefaultScale())));
 	}
-
 	/**
 	 * Type of scale being employed.
 	 * 
@@ -96,7 +103,7 @@ public abstract class Axis extends ConfigurationContainer<Scale> {
 	 * @see org.pepstock.charba.client.enums.AxisType
 	 */
 	public void setType(AxisType type) {
-		getConfiguration().setType(type);
+		getScale().setType(type);
 	}
 
 	/**
@@ -106,7 +113,7 @@ public abstract class Axis extends ConfigurationContainer<Scale> {
 	 * @see org.pepstock.charba.client.enums.AxisType
 	 */
 	public AxisType getType() {
-		return getConfiguration().getType();
+		return getScale().getType();
 	}
 
 	/**
@@ -115,7 +122,7 @@ public abstract class Axis extends ConfigurationContainer<Scale> {
 	 * @param display If set to false the axis is hidden from view. Overrides gridLines.display, scaleLabel.display, and ticks.display.
 	 */
 	public void setDisplay(boolean display) {
-		getConfiguration().setDisplay(display);
+		getScale().setDisplay(display);
 	}
 
 	/**
@@ -124,7 +131,7 @@ public abstract class Axis extends ConfigurationContainer<Scale> {
 	 * @return <code>false</code> if axis is hidden, otherwise <code>true</code>. 
 	 */
 	public boolean isDisplay() {
-		return getConfiguration().isDisplay();
+		return getScale().isDisplay();
 	}
 
 	/**
@@ -133,7 +140,7 @@ public abstract class Axis extends ConfigurationContainer<Scale> {
 	 * @param weight weight of axis
 	 */
 	public void setWeight(int weight) {
-		getConfiguration().setWeight(weight);
+		getScale().setWeight(weight);
 	}
 
 	/**
@@ -142,7 +149,7 @@ public abstract class Axis extends ConfigurationContainer<Scale> {
 	 * @return weight of axis
 	 */
 	public int getWeight() {
-		return getConfiguration().getWeight();
+		return getScale().getWeight();
 	}
 
 	/**
@@ -157,53 +164,51 @@ public abstract class Axis extends ConfigurationContainer<Scale> {
 	 * 
 	 * @return the global options for this chart.
 	 */
-//	protected Scale getScale() {
-//		// gets the gloabl option for the chart.
-//		GlobalOptions options = getChart().getGlobal();
-//		// if is a multi scale chart
-//		if (getChart().getOptions() instanceof MultiScalesOptions) {
-//			// gets scales
-//			Scales scales = options.getScales();
-//			CartesianAxisType type = null;
-//			// checks if is cartesian axis
-//			// only cartesian axis has got the mutli scale
-//			if (this instanceof CartesianAxis<?>) {
-//				CartesianAxis<?> cAxis = (CartesianAxis<?>) this;
-//				// gets cartesian type
-//				type = cAxis.getCartesianType();
-//			}
-//			// if type is consistent
-//			if (type != null) {
-//				// returns the option for x or y scale.
-//				return getCartesianScale(CartesianAxisType.x.equals(type) ? scales.getXAxes() : scales.getYAxes());
-//			}
-//		} else if (getChart().getOptions() instanceof SingleScaleOptions) {
-//			// being a single escale
-//			// returns scale otpion
-//			return options.getScale();
-//		}
-//		// returns default scale
-//		return Defaults.getScale();
-//	}
+	private Scale getDefaultScale() {
+		// gets the gloabl option for the chart.
+		ChartOptions options = Chart.defaults().options(getChart().getType());
+		// if is a multi scale chart
+		if (getChart().getOptions() instanceof MultiScalesOptions) {
+			CartesianAxisType type = null;
+			// checks if is cartesian axis
+			// only cartesian axis has got the mutli scale
+			if (this instanceof CartesianAxis<?>) {
+				CartesianAxis<?> cAxis = (CartesianAxis<?>) this;
+				// gets cartesian type
+				type = cAxis.getCartesianType();
+			}
+			// if type is consistent
+			if (type != null) {
+				// returns the option for x or y scale.
+				return getCartesianScale(CartesianAxisType.x.equals(type) ? options.getScales().getXAxes() : options.getScales().getYAxes());
+			}
+		} else if (getChart().getOptions() instanceof SingleScaleOptions) {
+			// being a single escale
+			// returns scale otpion
+			return options.getScale();
+		}
+		// returns default scale
+		return Chart.defaults().scale();
+	}
 
-//	/**
-//	 * Returns the scale option for multi scale chart using the axis type.
-//	 * 
-//	 * @param scales X or Y scale option.
-//	 * @return a scale object with axis configuration
-//	 */
-//	private Scale getCartesianScale(List<Scale> scales) {
-//		// scan all configuration axes
-//		for (Scale axis : scales) {
-//			// if configuration type equals to this axis
-//			if (getType().equals(axis.getType())) {
-//				// returns scale config
-//				return axis;
-//			}
-//		}
-//		// returns default scale
-//		return Defaults.getScale();
-//	}
+	/**
+	 * Returns the scale option for multi scale chart using the axis type.
+	 * 
+	 * @param scales X or Y scale option.
+	 * @return a scale object with axis configuration
+	 */
+	private Scale getCartesianScale(List<Scale> scales) {
+		// scan all configuration axes
+		for (Scale axis : scales) {
+			// if configuration type equals to this axis
+			if (getType().equals(axis.getType())) {
+				// returns scale config
+				return axis;
+			}
+		}
+		// returns default scale
+		return Chart.defaults().scale();
+	}
 
 //	/**
 //	 * @return the axisUpdateCallback

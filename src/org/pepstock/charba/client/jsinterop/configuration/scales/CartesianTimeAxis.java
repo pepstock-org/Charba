@@ -15,11 +15,11 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration.scales;
 
-import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.enums.ScaleBounds;
 import org.pepstock.charba.client.enums.ScaleDistribution;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
 
 /**
  * This object is used to map defined axis as time.
@@ -80,7 +80,7 @@ public final class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @see org.pepstock.charba.client.enums.ScaleDistribution
 	 */
 	public void setDistribution(ScaleDistribution distribution) {
-		getConfiguration().setDistribution(distribution);
+		getScale().setDistribution(distribution);
 	}
 
 	/**
@@ -90,7 +90,7 @@ public final class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @see org.pepstock.charba.client.enums.ScaleDistribution
 	 */
 	public ScaleDistribution getDistribution() {
-		return getConfiguration().getDistribution();
+		return getScale().getDistribution();
 	}
 	
 	/**
@@ -100,7 +100,7 @@ public final class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @see org.pepstock.charba.client.enums.ScaleBounds
 	 */
 	public void setBounds(ScaleBounds bounds) {
-		getConfiguration().setBounds(bounds);
+		getScale().setBounds(bounds);
 	}
 
 	/**
@@ -110,6 +110,6 @@ public final class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @see org.pepstock.charba.client.enums.ScaleBounds
 	 */
 	public ScaleBounds getBounds() {
-		return getConfiguration().getBounds();
+		return getScale().getBounds();
 	}
 }

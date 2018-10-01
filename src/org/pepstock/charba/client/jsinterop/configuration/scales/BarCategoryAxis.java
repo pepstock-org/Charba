@@ -46,7 +46,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 *            whole category width and put the bars right next to each other.
 	 */
 	public void setBarPercentage(double barPercentage) {
-		getConfiguration().setBarPercentage(barPercentage);
+		getScale().setBarPercentage(barPercentage);
 	}
 
 	/**
@@ -57,7 +57,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 *         category width and put the bars right next to each other. 
 	 */
 	public double getBarPercentage() {
-		return getConfiguration().getBarPercentage();
+		return getScale().getBarPercentage();
 	}
 
 	/**
@@ -66,7 +66,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 * @param categoryPercentage percent (0-1) of the available width each category should be within the sample width.
 	 */
 	public void setCategoryPercentage(double categoryPercentage) {
-		getConfiguration().setCategoryPercentage(categoryPercentage);
+		getScale().setCategoryPercentage(categoryPercentage);
 	}
 
 	/**
@@ -75,7 +75,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 * @return the percent (0-1) of the available width each category should be within the sample width.
 	 */
 	public double getCategoryPercentage() {
-		return getConfiguration().getCategoryPercentage();
+		return getScale().getCategoryPercentage();
 	}
 
 	/**
@@ -87,7 +87,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 *            categoryPercentage.
 	 */
 	public void setBarThickness(int barThickness) {
-		getConfiguration().setBarThickness(barThickness);
+		getScale().setBarThickness(barThickness);
 	}
 
 	/**
@@ -98,7 +98,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 *         the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
 	 */
 	public int getBarThickness() {
-		return getConfiguration().getBarThickness();
+		return getScale().getBarThickness();
 	}
 
 	/**
@@ -107,7 +107,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 * @param maxBarThickness the maximum bar thickness.
 	 */
 	public void setMaxBarThickness(int maxBarThickness) {
-		getConfiguration().setMaxBarThickness(maxBarThickness);
+		getScale().setMaxBarThickness(maxBarThickness);
 	}
 
 	/**
@@ -116,7 +116,7 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 * @return the maximum bar thickness.
 	 */
 	public int getMaxBarThickness() {
-		return getConfiguration().getMaxBarThickness();
+		return getScale().getMaxBarThickness();
 	}
 
 	/*

@@ -1,5 +1,9 @@
 package org.pepstock.charba.client.jsinterop.commons;
 
+import java.util.Date;
+
+import com.google.gwt.core.client.JsDate;
+
 public final class Checker {
 	
 	private static final String UNDEFINED = "undefined";
@@ -38,6 +42,24 @@ public final class Checker {
 
 	public static String check(Object value, String defaultValue) {
 		return value == null ? defaultValue : value.toString();
+	}
+	
+	/**
+	 * FIXME
+	 * @param date
+	 * @return
+	 */
+	public static JsDate fromDate(Date date) {
+		return date != null ? JsDate.create((double) date.getTime()) : null;
+	}
+	
+	/**
+	 * FIXME
+	 * @param date
+	 * @return
+	 */
+	public static Date toDate(JsDate date) {
+		return date != null ? new Date((long)date.getTime()) : null;
 	}
 
 }

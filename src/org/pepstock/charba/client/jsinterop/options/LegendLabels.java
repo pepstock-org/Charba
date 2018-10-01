@@ -184,18 +184,17 @@ public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels, Native
 		this.labelsCallback = labelsCallback;
 	}
 	
-
 	/**
 	 * @return the labelsHandler
 	 */
-	public LegendLabelsHandler getLabelsHandler() {
+	LegendLabelsHandler getLabelsHandler() {
 		return labelsHandler;
 	}
 
 	/**
 	 * @param labelsHandler the labelsHandler to set
 	 */
-	public void setLabelsHandler(LegendLabelsHandler labelsHandler) {
+	void setLabelsHandler(LegendLabelsHandler labelsHandler) {
 		if (labelsHandler != null) {
 			getDelegated().setFilter(labelsCallbackProxy.getProxy());
 			// checks if the node is already added to parent
@@ -212,14 +211,14 @@ public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels, Native
 	/**
 	 * @return the filterHandler
 	 */
-	public LegendFilterHandler getFilterHandler() {
+	LegendFilterHandler getFilterHandler() {
 		return filterHandler;
 	}
 
 	/**
 	 * @param filterHandler the filterHandler to set
 	 */
-	public void setFilterHandler(LegendFilterHandler filterHandler) {
+	void setFilterHandler(LegendFilterHandler filterHandler) {
 		if (filterHandler != null) {
 			getDelegated().setFilter(filterCallbackProxy.getProxy());
 			// checks if the node is already added to parent

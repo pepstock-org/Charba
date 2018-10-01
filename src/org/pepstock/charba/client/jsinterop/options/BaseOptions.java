@@ -4,17 +4,13 @@ import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.callbacks.LegendCallback;
-import org.pepstock.charba.client.jsinterop.callbacks.LegendHandler;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
-import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.commons.Enumer;
-import org.pepstock.charba.client.jsinterop.commons.JsFactory;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 
@@ -22,9 +18,6 @@ import jsinterop.annotations.JsFunction;
 
 public abstract class BaseOptions<A extends Animation, L extends Legend> extends Root<BaseOptions<A,L>, IsDefaultOptions, NativeOptions>{
 	
-	// legend error
-	private static final String LEGEND_CALLBACK_ERROR = "Unable to execute LegendCallback";
-
 	/**
 	 * Called to generate an HTML legend.
 	 * @author Andrea "Stock" Stocchero
@@ -38,14 +31,6 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 		 * @return an HTML string which represents the legend.
 		 */
 		String call(Object context);
-	}
-	
-	/**
-	 * Name of fields of JavaScript object.
-	 */
-	enum Property implements Key
-	{
-		legendCallback
 	}
 	
 	private final Hover hover;
@@ -66,10 +51,6 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	
 	private LegendCallback legendCallback = null;
 	
-	private LegendHandler legendHandler = null;
-	
-	private final CallbackProxy<ProxyGenerateLegendCallback> legendCallbackProxy = JsFactory.newCallbackProxy();
-
 	BaseOptions(IsDefaultOptions defaultValues) {
 		this(defaultValues, null);
 	}
@@ -86,16 +67,6 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 		scale = new Scale(this, getDefaultValues().getScale(), getDelegated().getScale());
 		scales = new Scales(this, getDefaultValues().getScale(), getDelegated().getScales());
 		plugins = new Plugins(this, getDelegated().getPlugins());
-		
-		legendCallbackProxy.setCallback(new ProxyGenerateLegendCallback() {
-			
-			@Override
-			public String call(Object context) {
-				return legendHandler != null ? legendHandler.generateLegend(context) : LEGEND_CALLBACK_ERROR;
-			}
-		});
-		
-//		originLegendCallback = getDelegated().getOriginGenerateLegendCallback();
 	}
 	
 	/**
@@ -184,28 +155,6 @@ public abstract class BaseOptions<A extends Animation, L extends Legend> extends
 	public void setLegendCallback(LegendCallback legendCallBack) {
 		this.legendCallback = legendCallBack;
 	}
-
-	/**
-	 * @return the legendHandler
-	 */
-	public LegendHandler getLegendHandler() {
-		return legendHandler;
-	}
-
-	/**
-	 * @param legendHandler the legendHandler to set
-	 */
-	public void setLegendHandler(LegendHandler legendHandler) {
-		if (legendHandler == null) {
-			getDelegated().setLegendCallback(legendCallbackProxy.getProxy());
-			// checks if the node is already added to parent
-			checkAndAddToParent();
-		} else {
-			remove(Property.legendCallback);
-		}
-		this.legendHandler = legendHandler;
-	}
-
 	
 	public String getCharbaId() {
 		return Checker.check(getDelegated().getCharbaId(), UndefinedValues.STRING);

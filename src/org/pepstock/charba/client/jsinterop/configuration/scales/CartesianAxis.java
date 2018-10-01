@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration.scales;
 
-import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
 
 /**
  * Axes are an integral part of a chart. They are used to determine how data maps to a pixel value on the chart. <br>
@@ -92,14 +92,14 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @param stacked if the axis are stacked or not.
 	 */
 	public void setStacked(boolean stacked) {
-		getConfiguration().setStacked(stacked);
+		getScale().setStacked(stacked);
 	}
 
 	/**
 	 * @return the stacked
 	 */
 	public boolean isStacked() {
-		return getConfiguration().isStacked();
+		return getScale().isStacked();
 	}
 
 	/**
@@ -108,7 +108,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @param offset extra space of axis
 	 */
 	public void setOffset(boolean offset) {
-		getConfiguration().setOffset(offset);
+		getScale().setOffset(offset);
 	}
 
 	/**
@@ -117,7 +117,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @return extra space of axis. 
 	 */
 	public boolean isOffset() {
-		return getConfiguration().isOffset();
+		return getScale().isOffset();
 	}
 
 	/**
@@ -127,7 +127,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @param id The ID is used to link datasets and scale axes together
 	 */
 	public void setId(String id) {
-		getConfiguration().setId(id);
+		getScale().setId(id);
 	}
 
 	/**
@@ -137,7 +137,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @return The ID is used to link datasets and scale axes together 
 	 */
 	public String getId() {
-		return getConfiguration().getId();
+		return getScale().getId();
 	}
 
 	/**
@@ -147,7 +147,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public void setPosition(Position position) {
-		getConfiguration().setPosition(position);
+		getScale().setPosition(position);
 	}
 
 	/**
@@ -157,6 +157,6 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {
-		return getConfiguration().getPosition();
+		return getScale().getPosition();
 	}
 }
