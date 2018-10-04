@@ -32,7 +32,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class EventableLegend extends Legend {
+public final class EventableLegend extends Legend {
 	
 	@JsFunction
 	interface ProxyLegendClickCallback {

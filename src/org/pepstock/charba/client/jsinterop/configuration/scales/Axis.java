@@ -28,8 +28,8 @@ import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
-import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.ChartOptions;
+import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.configuration.ConfigurationContainer;
 import org.pepstock.charba.client.jsinterop.configuration.MultiScalesOptions;
 import org.pepstock.charba.client.jsinterop.configuration.SingleScaleOptions;
@@ -166,7 +166,7 @@ public abstract class Axis extends ConfigurationContainer<Scale> {
 	 */
 	private Scale getDefaultScale() {
 		// gets the gloabl option for the chart.
-		ChartOptions options = Chart.defaults().options(getChart().getType());
+		ChartOptions options = Defaults.options(getChart().getType());
 		// if is a multi scale chart
 		if (getChart().getOptions() instanceof MultiScalesOptions) {
 			CartesianAxisType type = null;
@@ -188,7 +188,7 @@ public abstract class Axis extends ConfigurationContainer<Scale> {
 			return options.getScale();
 		}
 		// returns default scale
-		return Chart.defaults().scale();
+		return Defaults.getScale();
 	}
 
 	/**
@@ -207,7 +207,7 @@ public abstract class Axis extends ConfigurationContainer<Scale> {
 			}
 		}
 		// returns default scale
-		return Chart.defaults().scale();
+		return Defaults.getScale();
 	}
 
 //	/**

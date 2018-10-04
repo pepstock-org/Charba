@@ -41,7 +41,7 @@ public final class TooltipModel extends JavaScriptObjectContainer {
 	/**
 	 * Needed for GWt injection
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
 		dataPoints,
 		xPadding,

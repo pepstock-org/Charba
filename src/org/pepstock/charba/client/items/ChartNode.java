@@ -78,7 +78,7 @@ public final class ChartNode extends JavaScriptObjectContainer {
 		scales = new ScalesNode((GenericJavaScriptObject) getValue(Property.scales));
 		chartArea = new ChartAreaItem((GenericJavaScriptObject) getValue(Property.chartArea));
 		title = new TitleNode((GenericJavaScriptObject) getValue(Property.titleBlock));
-		tooltip = new TooltipNode((GenericJavaScriptObject) getValue(Property.titleBlock));
+		tooltip = new TooltipNode((GenericJavaScriptObject) getValue(Property.tooltip));
 	}
 
 	/**

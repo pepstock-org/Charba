@@ -18,11 +18,11 @@ package org.pepstock.charba.client.jsinterop.options;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.events.AnimationCompleteCallbackHandler;
 import org.pepstock.charba.client.events.AnimationProgressCallbackHandler;
+import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.JsFactory;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.jsinterop.items.AnimationObject;
-import org.pepstock.charba.client.jsinterop.items.ChartNode;
 
 import jsinterop.annotations.JsFunction;
 
@@ -33,16 +33,16 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class EventableAnimation extends Animation {
+public final class EventableAnimation extends Animation {
 	
 	@JsFunction
 	interface ProxyAnimationCompleteCallback {
-		void call(ChartNode context, AnimationObject animationObject);
+		void call(Chart context, AnimationObject animationObject);
 	}
 
 	@JsFunction
 	interface ProxyAnimationProgressCallback {
-		void call(ChartNode context, AnimationObject animationObject);
+		void call(Chart context, AnimationObject animationObject);
 	}
 
 	private final CallbackProxy<ProxyAnimationCompleteCallback> completeCallbackProxy = JsFactory.newCallbackProxy();
@@ -70,7 +70,7 @@ public class EventableAnimation extends Animation {
 			 * @see org.pepstock.charba.client.jsinterop.options.EventableAnimation.ProxyAnimationCompleteCallback#call(org.pepstock.charba.client.jsinterop.items.ChartNode, org.pepstock.charba.client.jsinterop.items.AnimationObject)
 			 */
 			@Override
-			public void call(ChartNode context, AnimationObject animationObject) {
+			public void call(Chart context, AnimationObject animationObject) {
 				if (completeCallbackHandler != null) {
 					completeCallbackHandler.onComplete(context, animationObject);
 				}
@@ -83,7 +83,7 @@ public class EventableAnimation extends Animation {
 			 * @see org.pepstock.charba.client.jsinterop.options.EventableAnimation.ProxyAnimationProgressCallback#call(org.pepstock.charba.client.jsinterop.items.ChartNode, org.pepstock.charba.client.jsinterop.items.AnimationObject)
 			 */
 			@Override
-			public void call(ChartNode context, AnimationObject animationObject) {
+			public void call(Chart context, AnimationObject animationObject) {
 				if (progressCallbackHandler != null) {
 					progressCallbackHandler.onProgress(context, animationObject);
 				}

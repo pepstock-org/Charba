@@ -19,11 +19,11 @@ import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.events.AnimationCompleteCallbackHandler;
 import org.pepstock.charba.client.events.AnimationProgressCallbackHandler;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.events.AnimationCompleteEvent;
 import org.pepstock.charba.client.jsinterop.events.AnimationProgressEvent;
 import org.pepstock.charba.client.jsinterop.items.AnimationItem;
 import org.pepstock.charba.client.jsinterop.items.AnimationObject;
-import org.pepstock.charba.client.jsinterop.items.ChartNode;
 import org.pepstock.charba.client.jsinterop.options.EventableOptions;
 
 import com.google.gwt.dom.client.Document;
@@ -190,7 +190,7 @@ public final class Animation extends EventProvider<EventableOptions> implements 
 	 * @see org.pepstock.charba.client.events.AnimationProgressCallbackHandler#onProgress(org.pepstock.charba.client.jsinterop.items.ChartNode, org.pepstock.charba.client.jsinterop.items.AnimationObject)
 	 */
 	@Override
-	public void onProgress(ChartNode context, AnimationObject animationObject) {
+	public void onProgress(Chart context, AnimationObject animationObject) {
 		if (animationObject != null && animationObject.getAnimationItem() != null) {
 			onProgress(animationObject.getAnimationItem());
 		}
@@ -200,7 +200,7 @@ public final class Animation extends EventProvider<EventableOptions> implements 
 	 * @see org.pepstock.charba.client.events.AnimationCompleteCallbackHandler#onComplete(org.pepstock.charba.client.jsinterop.items.ChartNode, org.pepstock.charba.client.jsinterop.items.AnimationObject)
 	 */
 	@Override
-	public void onComplete(ChartNode context, AnimationObject animationObject) {
+	public void onComplete(Chart context, AnimationObject animationObject) {
 		if (animationObject != null && animationObject.getAnimationItem() != null) {
 			onComplete(animationObject.getAnimationItem());
 		}

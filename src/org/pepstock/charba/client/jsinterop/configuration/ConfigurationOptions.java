@@ -19,11 +19,14 @@ import java.util.List;
 
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
-import org.pepstock.charba.client.jsinterop.Chart;
+import org.pepstock.charba.client.jsinterop.Configuration;
+import org.pepstock.charba.client.jsinterop.ConfigurationElement;
+import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.callbacks.LegendCallback;
 import org.pepstock.charba.client.jsinterop.callbacks.LegendHandler;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
+import org.pepstock.charba.client.jsinterop.commons.ConfigurationLoader;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.jsinterop.events.ChartClickCallbackHandler;
 import org.pepstock.charba.client.jsinterop.events.ChartClickEvent;
@@ -36,7 +39,6 @@ import org.pepstock.charba.client.jsinterop.events.DatasetSelectionEvent;
 import org.pepstock.charba.client.jsinterop.items.DatasetItem;
 import org.pepstock.charba.client.jsinterop.items.SizeItem;
 import org.pepstock.charba.client.jsinterop.options.EventableOptions;
-import org.pepstock.charba.client.jsinterop.options.NativeOptions;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;
@@ -62,8 +64,7 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class ConfigurationOptions extends EventProvider<EventableOptions> implements ChartClickCallbackHandler, ChartHoverCallbackHandler, ChartResizeCallbackHandler, LegendHandler {
-	
+public abstract class ConfigurationOptions extends EventProvider<EventableOptions> implements ConfigurationElement, ChartClickCallbackHandler, ChartHoverCallbackHandler, ChartResizeCallbackHandler, LegendHandler {
 	
 	private final Animation animation;
 
@@ -434,19 +435,19 @@ public abstract class ConfigurationOptions extends EventProvider<EventableOption
 		if (getLegendCallback() != null) {
 			// calls callback
 			getLegendCallback().generateLegend(getChart(), builder);
-		} else if (Chart.defaults().chart(getChart()).getLegendCallback() != null) {
+		} else if (Defaults.chart(getChart()).getLegendCallback() != null) {
 			// calls callback
-			Chart.defaults().chart(getChart()).getLegendCallback().generateLegend(getChart(), builder);;
-		} else if (Chart.defaults().global().getLegend().getLabels().getFilterCallback() != null) {
+			Defaults.chart(getChart()).getLegendCallback().generateLegend(getChart(), builder);;
+		} else if (Defaults.getGlobal().getLegend().getLabels().getFilterCallback() != null) {
 			// calls callback
-			Chart.defaults().global().getLegendCallback().generateLegend(getChart(), builder);
+			Defaults.getGlobal().getLegendCallback().generateLegend(getChart(), builder);
 		}
 		return builder.toSafeHtml().asString();
 	}
 
 	private boolean hasGlobalLegendCallback() {
-		return Chart.defaults().global().getLegendCallback() != null ||
-		       Chart.defaults().chart(getChart()).getLegendCallback() != null;  
+		return Defaults.getGlobal().getLegendCallback() != null ||
+				Defaults.chart(getChart()).getLegendCallback() != null;  
 	}
 	/**
 	 * @return the legendCallBack
@@ -470,8 +471,12 @@ public abstract class ConfigurationOptions extends EventProvider<EventableOption
 		}
 	}
 	
-	public NativeOptions getObject() {
-		return super.getConfiguration().getNode();
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.ConfigurationElement#load(org.pepstock.charba.client.jsinterop.Configuration)
+	 */
+	@Override
+	public void load(Configuration configuration) {
+		ConfigurationLoader.loadOptions(configuration, getConfiguration());
 	}
 	
 }

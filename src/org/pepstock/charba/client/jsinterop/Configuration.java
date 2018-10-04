@@ -16,9 +16,10 @@
 package org.pepstock.charba.client.jsinterop;
 
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions;
+import org.pepstock.charba.client.jsinterop.data.Data;
+import org.pepstock.charba.client.jsinterop.data.NativeData;
 import org.pepstock.charba.client.jsinterop.options.NativeOptions;
 
 import jsinterop.annotations.JsOverlay;
@@ -39,11 +40,11 @@ public final class Configuration extends NativeObject {
 	@JsProperty(name = "type")
 	native void setNativeType(String type);
 
-	@JsProperty(name = "options")
-	native void setNativeOptions(NativeOptions options);
+	@JsProperty
+	public native void setOptions(NativeOptions options);
 
-	@JsProperty(name = "data") // FIXME
-	native void setNativeData(Object data);
+	@JsProperty
+	public native void setData(NativeData data);
 
 //	@JsProperty(name = "plugins") // FIXME
 //	native void setNativePlugins(Object plugins);
@@ -66,8 +67,7 @@ public final class Configuration extends NativeObject {
 	 */
 	@JsOverlay
 	final <T extends ConfigurationOptions> void setOptions(T options) {
-		// FIXME
-		setNativeOptions(options.getObject());
+		options.load(this);
 	}
 
 	/**
@@ -77,8 +77,7 @@ public final class Configuration extends NativeObject {
 	 */
 	@JsOverlay
 	void setData(Data data) {
-		// FIXME
-		setNativeData(data.getObject());
+		data.load(this);
 	}
 //
 //	/**

@@ -32,6 +32,12 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
  *
  */
 public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltips, NativeTooltips> {
+	
+//	custom,
+//	callbacks,
+//	itemSort,
+//	filter,
+
 
 	Tooltips(BaseOptions<?,?> options, IsDefaultTooltips defaultValues, NativeTooltips delegated) {
 		super(options, defaultValues, delegated == null ? new NativeTooltips() : delegated);

@@ -68,6 +68,25 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer<O>, 
 	}
 
 	/**
+	 * @return the array
+	 */
+	public ArrayObject<O> getArray() {
+		return array;
+	}
+	
+	/**
+	 * Loads an array of elements into the list
+	 * @param values an array of elements to be loaded
+	 */
+	public void addAll(E[] values){
+		// scans all elements 
+		for (E val : values){
+			// adds
+			add(val);
+		}
+	}
+
+	/**
 	 * Returns the number of elements in this list.
 	 */
 	@Override

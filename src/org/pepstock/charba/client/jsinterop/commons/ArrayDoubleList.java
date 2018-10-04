@@ -70,14 +70,6 @@ public final class ArrayDoubleList implements List<Double> {
 	}
 
 	/**
-	 * Returns the JS array to be able to store it in another object (internally used).
-	 * @return the JS array
-	 */
-	ArrayDouble getJsArray() {
-		return array;
-	}
-
-	/**
 	 * Returns the number of elements in this list.
 	 */
 	@Override

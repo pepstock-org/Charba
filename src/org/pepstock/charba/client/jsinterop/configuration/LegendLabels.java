@@ -18,7 +18,7 @@ package org.pepstock.charba.client.jsinterop.configuration;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
-import org.pepstock.charba.client.jsinterop.Chart;
+import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.callbacks.LegendFilterCallback;
 import org.pepstock.charba.client.jsinterop.callbacks.LegendFilterHandler;
 import org.pepstock.charba.client.jsinterop.callbacks.LegendLabelsCallback;
@@ -55,8 +55,8 @@ public final class LegendLabels extends ConfigurationContainer<EventableOptions>
 	// LABELS
 	// ---------------
 	private boolean hasGlobalLabelsCallback() {
-		return Chart.defaults().global().getLegend().getLabels().getLabelsCallback() != null ||
-		       Chart.defaults().chart(getChart()).getLegend().getLabels().getLabelsCallback() != null;  
+		return Defaults.getGlobal().getLegend().getLabels().getLabelsCallback() != null ||
+		       Defaults.chart(getChart()).getLegend().getLabels().getLabelsCallback() != null;  
 	}
 
 	/**
@@ -84,8 +84,8 @@ public final class LegendLabels extends ConfigurationContainer<EventableOptions>
 	// FILTER
 	// ---------------
 	private boolean hasGlobalFilterCallback() {
-		return Chart.defaults().global().getLegend().getLabels().getFilterCallback() != null ||
-		       Chart.defaults().chart(getChart()).getLegend().getLabels().getFilterCallback() != null;  
+		return Defaults.getGlobal().getLegend().getLabels().getFilterCallback() != null ||
+		       Defaults.chart(getChart()).getLegend().getLabels().getFilterCallback() != null;  
 	}
 
 	/**
@@ -264,12 +264,12 @@ public final class LegendLabels extends ConfigurationContainer<EventableOptions>
 		if (getFilterCallback() != null) {
 			// calls callback
 			return getFilterCallback().onFilter(getChart(), item);
-		} else if (Chart.defaults().chart(getChart()).getLegend().getLabels().getFilterCallback() != null) {
+		} else if (Defaults.chart(getChart()).getLegend().getLabels().getFilterCallback() != null) {
 			// calls callback
-			return Chart.defaults().chart(getChart()).getLegend().getLabels().getFilterCallback().onFilter(getChart(), item);
-		} else if (Chart.defaults().global().getLegend().getLabels().getFilterCallback() != null) {
+			return Defaults.chart(getChart()).getLegend().getLabels().getFilterCallback().onFilter(getChart(), item);
+		} else if (Defaults.getGlobal().getLegend().getLabels().getFilterCallback() != null) {
 			// calls callback
-			return Chart.defaults().global().getLegend().getLabels().getFilterCallback().onFilter(getChart(), item);
+			return Defaults.getGlobal().getLegend().getLabels().getFilterCallback().onFilter(getChart(), item);
 		}
 		return true;
 	}
@@ -284,12 +284,12 @@ public final class LegendLabels extends ConfigurationContainer<EventableOptions>
 		if (getLabelsCallback() != null) {
 			// calls callback
 			result = getLabelsCallback().generateLegendLabels(getChart());
-		} else if (Chart.defaults().chart(getChart()).getLegend().getLabels().getLabelsCallback() != null) {
+		} else if (Defaults.chart(getChart()).getLegend().getLabels().getLabelsCallback() != null) {
 			// calls callback
-			result = Chart.defaults().chart(getChart()).getLegend().getLabels().getLabelsCallback().generateLegendLabels(getChart());
-		} else if (Chart.defaults().global().getLegend().getLabels().getLabelsCallback() != null) {
+			result = Defaults.chart(getChart()).getLegend().getLabels().getLabelsCallback().generateLegendLabels(getChart());
+		} else if (Defaults.getGlobal().getLegend().getLabels().getLabelsCallback() != null) {
 			// calls callback
-			result = Chart.defaults().global().getLegend().getLabels().getLabelsCallback().generateLegendLabels(getChart());
+			result = Defaults.getGlobal().getLegend().getLabels().getLabelsCallback().generateLegendLabels(getChart());
 		}
 		return result != null ? result : new LegendLabelItem[0];
 	}

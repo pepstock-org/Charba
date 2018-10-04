@@ -39,7 +39,7 @@ import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Scale extends Root<BaseOptions<?,?>, IsDefaultScale, NativeScale>{
+public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeScale>{
 	
 	private final GridLines gridLines;
 

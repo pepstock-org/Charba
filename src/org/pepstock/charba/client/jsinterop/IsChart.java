@@ -16,8 +16,8 @@
 package org.pepstock.charba.client.jsinterop;
 
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions;
+import org.pepstock.charba.client.jsinterop.data.Dataset;
 
 /**
  * Interface which defines a chart.

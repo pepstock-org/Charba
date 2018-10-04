@@ -3,6 +3,7 @@ package org.pepstock.charba.client.jsinterop.options;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.ChartOptions;
+import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.GlobalOptions;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 
@@ -16,9 +17,9 @@ public final class ChartOptionsBuilder {
 	}
 
 	public static NativeOptions get(Type type) {
-		ChartOptions base = Chart.defaults().chart(type);
-		Scale scale = Chart.defaults().scale();
-		GlobalOptions global = Chart.defaults().global();
+		ChartOptions base = Defaults.chart(type);
+		Scale scale = Defaults.getScale();
+		GlobalOptions global = Defaults.getGlobal();
 
 		NativeOptions chartOptions = Chart.helpers().clone(base.getDelegated());
 		NativeScale scaleOptions = Chart.helpers().clone(scale.getDelegated());

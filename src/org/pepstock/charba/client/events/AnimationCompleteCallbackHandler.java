@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.events;
 
+import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.items.AnimationObject;
-import org.pepstock.charba.client.jsinterop.items.ChartNode;
 
 /**
  * Event handler for chart animation complete event.
@@ -31,6 +31,6 @@ public interface AnimationCompleteCallbackHandler {
 	 * 
 	 * @param event animation event
 	 */
-	void onComplete(ChartNode context, AnimationObject animationObject);
+	void onComplete(Chart context, AnimationObject animationObject);
 
 }

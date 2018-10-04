@@ -58,14 +58,6 @@ public final class ArrayObjectList<E extends NativeObject> implements List<E> {
 	}
 
 	/**
-	 * Returns the JS array to be able to store it in another object (internally used).
-	 * @return the JS array
-	 */
-	ArrayObject<E> getJsArray() {
-		return array;
-	}
-
-	/**
 	 * Loads an array of elements into the list
 	 * @param values an array of elements to be loaded
 	 */

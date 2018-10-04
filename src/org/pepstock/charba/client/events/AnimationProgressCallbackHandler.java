@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.events;
 
+import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.items.AnimationObject;
-import org.pepstock.charba.client.jsinterop.items.ChartNode;
 
 /**
  * Event handler for chart animation progress event.
@@ -32,6 +32,6 @@ public interface AnimationProgressCallbackHandler {
 	 * 
 	 * @param event animation event
 	 */
-	void onProgress(ChartNode context, AnimationObject animationObject);
+	void onProgress(Chart context, AnimationObject animationObject);
 
 }

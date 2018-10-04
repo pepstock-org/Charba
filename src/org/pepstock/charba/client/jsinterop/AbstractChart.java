@@ -18,11 +18,11 @@ package org.pepstock.charba.client.jsinterop;
 import java.util.List;
 
 import org.pepstock.charba.client.Injector;
-import org.pepstock.charba.client.data.Data;
-import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions;
+import org.pepstock.charba.client.jsinterop.data.Data;
+import org.pepstock.charba.client.jsinterop.data.Dataset;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
 import org.pepstock.charba.client.jsinterop.items.DatasetItem;
 import org.pepstock.charba.client.jsinterop.items.DatasetMetaItem;
@@ -120,7 +120,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		//FIXME
 //		plugins = new Plugins(this);
 		// creates global options
-		options = Chart.defaults().options(getType());
+		options = Defaults.options(getType());
 	}
 
 	/*
@@ -161,10 +161,9 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * Returns the chart node with runtime data.
 	 * @return the chart node.
 	 */
-	// FIXME
-//	public final ChartNode getChartNode(){
-//		return new ChartNode((GenericJavaScriptObject)chart);
-//	}
+	public final Chart getNode(){
+		return chart;
+	}
 
 	/**
 	 * @return the data configuration object
@@ -465,8 +464,8 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			// sets all items to configuration item
 			configuration.setType(getType());
 			configuration.setOptions(options);
-			// FIXME
 			configuration.setData(data);
+			// FIXME
 //			configuration.setPlugins(plugins);
 			// destroy chart if chart is already instantiated
 			destroy();

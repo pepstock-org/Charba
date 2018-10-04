@@ -70,14 +70,6 @@ public final class ArrayIntegerList implements List<Integer> {
 	}
 
 	/**
-	 * Returns the JS array to be able to store it in another object (internally used).
-	 * @return the JS array
-	 */
-	ArrayInteger getJsArray() {
-		return array;
-	}
-
-	/**
 	 * Returns the number of elements in this list.
 	 */
 	@Override

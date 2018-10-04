@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.commons;
 
+import java.util.List;
+
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 
@@ -34,6 +36,22 @@ import jsinterop.annotations.JsType;
 public final class ArrayString {
 
 	public static native ArrayString of(String... items);
+	
+	@JsOverlay
+	public static ArrayString of(List<String> items) {
+		// creates the list
+		ArrayString result = new ArrayString();
+		// checks if array is null
+		if (items == null){
+			return result;
+		}
+		for (String value : items) {
+			// adds all elements
+			result.push(value);
+		}
+		// returns the list
+		return result;
+	}
 	
 	/**
 	 * Creates a JavaScript array list of strings.

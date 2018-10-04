@@ -24,7 +24,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.jsinterop.Chart;
+import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.commons.Array;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
@@ -125,7 +125,7 @@ public class LegendItem extends NativeObject {
 	 */
 	@JsOverlay
 	public final IsColor getFillStyle() {
-		return ColorBuilder.parse(Checker.check(getNativeFillStyle(), Chart.defaults().global().getDefaultColorAsString()));
+		return ColorBuilder.parse(Checker.check(getNativeFillStyle(), Defaults.getGlobal().getDefaultColorAsString()));
 	}
 
 	/**
@@ -207,9 +207,9 @@ public class LegendItem extends NativeObject {
 		// loads stored data
 		Object values = getNativeLineWidth();
 		if (Array.isArray(values)) {
-			return Collections.unmodifiableList(ArrayListHelper.unmodifiableList((ArrayInteger)values));
+			return ArrayListHelper.unmodifiableList((ArrayInteger)values);
 		} else {
-			return Collections.unmodifiableList(ArrayListHelper.unmodifiableList(ArrayInteger.of(Checker.check(values, UndefinedValues.INTEGER))));
+			return ArrayListHelper.unmodifiableList(ArrayInteger.of(Checker.check(values, UndefinedValues.INTEGER)));
 		}
 	}
 
@@ -232,7 +232,7 @@ public class LegendItem extends NativeObject {
 				result.add(ColorBuilder.parse(array.get(i)));
 			}
 		} else {
-			result.add(ColorBuilder.parse(Checker.check(values, Chart.defaults().global().getDefaultColorAsString())));
+			result.add(ColorBuilder.parse(Checker.check(values, Defaults.getGlobal().getDefaultColorAsString())));
 		}
 		return Collections.unmodifiableList(result);
 	}
@@ -251,7 +251,7 @@ public class LegendItem extends NativeObject {
 			;
 			return ArrayListHelper.unmodifiableList(PointStyle.class, (ArrayString)values);
 		} else {
-			return ArrayListHelper.unmodifiableList(PointStyle.class, ArrayString.of(Checker.check(values, Chart.defaults().global().getElements().getPoint().getPointStyle().name())));
+			return ArrayListHelper.unmodifiableList(PointStyle.class, ArrayString.of(Checker.check(values, Defaults.getGlobal().getElements().getPoint().getPointStyle().name())));
 		}
 	}
 	

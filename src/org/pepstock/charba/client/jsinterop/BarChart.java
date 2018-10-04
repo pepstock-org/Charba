@@ -17,8 +17,8 @@ package org.pepstock.charba.client.jsinterop;
 
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.jsinterop.configuration.BarOptions;
+import org.pepstock.charba.client.jsinterop.data.BarDataset;
 import org.pepstock.charba.client.jsinterop.defaults.DefaultOptions;
 
 
@@ -37,6 +37,7 @@ public class BarChart extends AbstractChart<BarOptions, BarDataset>{
 	 */
 	public BarChart() {
 		// creates the options
+		// FIXME
 		options = new BarOptions(this, DefaultOptions.get());
 	}
 

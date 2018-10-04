@@ -1,5 +1,9 @@
 package org.pepstock.charba.client.jsinterop.commons;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.pepstock.charba.client.commons.Key;
 
 import jsinterop.annotations.JsOverlay;
@@ -18,6 +22,8 @@ public class NativeObject {
 	static native <T> void defineProperty(NativeObject source, String key, NativeDescriptor<T> descriptor);
 	
 	static native <T, S extends NativeObject> NativeDescriptor<T> getOwnPropertyDescriptor(S source, String key);
+	
+	static native ArrayString keys(NativeObject source);
 	
 	native boolean hasOwnProperty(String key);
 
@@ -63,7 +69,20 @@ public class NativeObject {
 		}
 		return null;
 	}
-
+	
+	@JsOverlay
+	protected static final <T, S extends NativeObject> Map<String, T> getObjectAsMap(S source) {
+		Map<String, T> result = new HashMap<String, T>();
+		ArrayString keys = keys(source);
+		if (keys != null && keys.length() > 0) {
+			for (int i=0; i<keys.length(); i++) {
+				String keyToAdd = keys.get(i);
+				NativeDescriptor<T> descriptor = getOwnPropertyDescriptor(source, keyToAdd);
+				result.put(keyToAdd, descriptor.getValue());
+			}
+		}
+		return Collections.unmodifiableMap(result);
+	}
 	
 	@JsOverlay
 	protected static final <T extends NativeObject> void defineObject(NativeObject source, Key key, T object) {

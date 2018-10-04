@@ -3,14 +3,14 @@ package org.pepstock.charba.client.jsinterop;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.DefaultOptions;
 import org.pepstock.charba.client.jsinterop.options.ChartOptionsBuilder;
 
-public final class Defaults extends NativeObject {
+public final class Defaults {
 	
-	private static Defaults INSTANCE = null;
+	private static final Defaults INSTANCE = new Defaults();
 	
 	private final NativeDefaults nativeObject;
 	
@@ -23,40 +23,35 @@ public final class Defaults extends NativeObject {
 	/**
 	 * @param nativeObject
 	 */
-	Defaults(NativeDefaults nativeObject) {
-		this.nativeObject = nativeObject;
+	Defaults() {
+		// to be sure that chart.js has been injected
+		Injector.ensureInjected();
+		this.nativeObject = Chart.getDefaults();
 		this.options = new GlobalOptions(DefaultOptions.get(), nativeObject.getGlobal());
 		this.scale = new GlobalScale(nativeObject.getScale());
 	}
 	
-	static Defaults get(NativeDefaults nativeObject) {
-		if (INSTANCE == null) {
-			INSTANCE = new Defaults(nativeObject);
-		}
-		return INSTANCE;
+	public static GlobalOptions getGlobal() {
+		return INSTANCE.options;
 	}
 
-	public GlobalOptions global() {
-		return options;
+	public static GlobalScale getScale() {
+		return INSTANCE.scale;
 	}
 
-	public GlobalScale scale() {
-		return scale;
-	}
-
-	public ChartOptions options(Type type) {
+	public static ChartOptions options(Type type) {
 		return new ChartOptions(ChartOptionsBuilder.get(type));
 	}
 
-	public ChartOptions chart(AbstractChart<?, ?> chart) {
+	public static ChartOptions chart(AbstractChart<?, ?> chart) {
 		return chart(chart.getType());
 	}
 
-	public ChartOptions chart(Type type) {
-		if (!chartOptions.containsKey(type.name())) {
-			chartOptions.put(type.name(), nativeObject.chart(type));
+	public static ChartOptions chart(Type type) {
+		if (!INSTANCE.chartOptions.containsKey(type.name())) {
+			INSTANCE.chartOptions.put(type.name(), INSTANCE.nativeObject.chart(type));
 		}
-		return chartOptions.get(type.name());
+		return INSTANCE.chartOptions.get(type.name());
 	}
 
 	

@@ -32,6 +32,21 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
  */
 public class Scales extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeScales>{
 	
+	/**
+	 * Default name of X axis
+	 */
+	public static final String DEFAULT_X_AXIS_ID = "x-axis-0";
+
+	/**
+	 * Default name of Y axis
+	 */
+	public static final String DEFAULT_Y_AXIS_ID = "y-axis-0";
+
+	/**
+	 * Default name of axis when the chart has got only 1 scale (polar, radar)
+	 */
+	public static final String DEFAULT_SINGLE_AXIS_ID = "scale";
+	
 	private final ScaleListFactory factory = new ScaleListFactory();
 
 	// here scale is ROOT
