@@ -38,7 +38,7 @@ public abstract class EventProvider<T extends NativeObjectContainer<?>> extends 
 	 * @param chart chart instance
 	 * @see org.pepstock.charba.client.jsinterop.AbstractChart
 	 */
-	public EventProvider(AbstractChart<?, ?> chart, T configuration) {
+	EventProvider(AbstractChart<?, ?> chart, T configuration) {
 		super(chart, configuration);
 		chart.addHandler(this, AddHandlerEvent.TYPE);
 		chart.addHandler(this, RemoveHandlerEvent.TYPE);

@@ -39,6 +39,7 @@ import org.pepstock.charba.client.jsinterop.events.DatasetSelectionEvent;
 import org.pepstock.charba.client.jsinterop.items.DatasetItem;
 import org.pepstock.charba.client.jsinterop.items.SizeItem;
 import org.pepstock.charba.client.jsinterop.options.EventableOptions;
+import org.pepstock.charba.client.jsinterop.options.NativeOptions;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;
@@ -95,7 +96,7 @@ public abstract class ConfigurationOptions extends EventProvider<EventableOption
 	 * 
 	 * @param chart chart instance
 	 */
-	protected ConfigurationOptions(AbstractChart<?, ?> chart, IsDefaultOptions defaultValues) {
+	ConfigurationOptions(AbstractChart<?, ?> chart, IsDefaultOptions defaultValues) {
 		super(chart, new EventableOptions(defaultValues));
 		animation = new Animation(chart, getConfiguration());
 		elements = new Elements(getConfiguration());
@@ -478,5 +479,11 @@ public abstract class ConfigurationOptions extends EventProvider<EventableOption
 	public void load(Configuration configuration) {
 		ConfigurationLoader.loadOptions(configuration, getConfiguration());
 	}
+	
+	// FIXME to be removed
+	public NativeOptions getObject() {
+		return getConfiguration().getObject();
+	}
+	
 	
 }

@@ -437,7 +437,7 @@ final class NativeTooltips extends NativeObject {
 	 * 
 	 * @param xPadding padding to add on left and right of tooltip.
 	 */
-	@JsProperty
+	@JsProperty(name = "xPadding")
 	native void setXPadding(int xPadding);
 
 	/**
@@ -445,7 +445,7 @@ final class NativeTooltips extends NativeObject {
 	 * 
 	 * @return padding to add on left and right of tooltip.
 	 */
-	@JsProperty
+	@JsProperty(name = "xPadding")
 	native int getXPadding();
 
 	/**
@@ -453,7 +453,7 @@ final class NativeTooltips extends NativeObject {
 	 * 
 	 * @param yPadding padding to add on top and bottom of tooltip.
 	 */
-	@JsProperty
+	@JsProperty(name = "yPadding")
 	native void setYPadding(int yPadding);
 
 	/**
@@ -461,7 +461,7 @@ final class NativeTooltips extends NativeObject {
 	 * 
 	 * @return padding to add on top and bottom of tooltip.
 	 */
-	@JsProperty
+	@JsProperty(name = "yPadding")
 	native int getYPadding();
 
 	/**

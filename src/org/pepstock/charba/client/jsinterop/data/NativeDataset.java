@@ -31,6 +31,20 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
 final class NativeDataset extends NativeObject{
+	
+	/**
+	 * Sets if the dataset will appear or not.
+	 * @param hidden if the dataset will appear or not.
+	 */
+	@JsProperty
+	native void setHidden(boolean hidden);
+
+	/**
+	 * Returns if the dataset will appear or not.
+	 * @return if the dataset will appear or not. Default is <code>false</code>
+	 */
+	@JsProperty
+	native boolean isHidden();
 
 	/**
 	 * Sets the label for the dataset which appears in the legend and tooltips.
@@ -93,28 +107,28 @@ final class NativeDataset extends NativeObject{
 	 * Sets the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
-	@JsProperty
+	@JsProperty(name = "xAxisID")
 	native void setXAxisID(String xAxisID);
 
 	/**
 	 * Returns the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
-	@JsProperty
+	@JsProperty(name = "xAxisID")
 	native String getXAxisID();
 
 	/**
 	 * Sets the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
 	 * @param yAxisID the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
 	 */
-	@JsProperty
+	@JsProperty(name = "yAxisID")
 	native void setYAxisID(String yAxisID);
 
 	/**
 	 * Returns the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
 	 * @return the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
 	 */
-	@JsProperty
+	@JsProperty(name = "yAxisID")
 	native String getYAxisID();
 	
 

@@ -25,6 +25,7 @@ import org.pepstock.charba.client.items.TooltipItem;
  * @see org.pepstock.charba.client.options.Tooltips
  * @see org.pepstock.charba.client.callbacks.FilterHandler
  */
+//FIXME
 public interface TooltipFilterHandler extends FilterCallback<TooltipItem> {
 
 }

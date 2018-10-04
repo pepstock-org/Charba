@@ -31,6 +31,7 @@ import org.pepstock.charba.client.items.TooltipItem;
  * @see org.pepstock.charba.client.options.TooltipsCallbacks
  *
  */
+//FIXME
 public interface TooltipTitleCallback {
 
 	/**

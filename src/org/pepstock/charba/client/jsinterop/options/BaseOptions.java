@@ -16,7 +16,7 @@ import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 
 import jsinterop.annotations.JsFunction;
 
-public abstract class BaseOptions<A extends Animation, L extends Legend> extends BaseModel<BaseOptions<A,L>, IsDefaultOptions, NativeOptions>{
+abstract class BaseOptions<A extends Animation, L extends Legend> extends BaseModel<BaseOptions<A,L>, IsDefaultOptions, NativeOptions>{
 	
 	/**
 	 * Called to generate an HTML legend.

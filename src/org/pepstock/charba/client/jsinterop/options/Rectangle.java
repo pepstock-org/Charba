@@ -62,8 +62,8 @@ public class Rectangle extends AbstractElement<Elements, IsDefaultRectangle, Nat
 	 */
 	@Override
 	protected void addToParent() {
-		if (getParent().getDelegated().getArc() == null) {
-			getParent().getDelegated().setArc(getDelegated());
+		if (getParent().getDelegated().getRectangle() == null) {
+			getParent().getDelegated().setRectangle(getDelegated());
 		}
 	}
 

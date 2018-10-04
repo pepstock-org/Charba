@@ -34,7 +34,7 @@ public abstract class ChartContainer{
 	 * @param chart chart instance
 	 * @see org.pepstock.charba.client.jsinterop.AbstractChart
 	 */
-	public ChartContainer(AbstractChart<?, ?> chart) {
+	ChartContainer(AbstractChart<?, ?> chart) {
 		this.chart = chart;
 	}
 

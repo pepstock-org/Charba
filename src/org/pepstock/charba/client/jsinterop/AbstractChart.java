@@ -27,6 +27,7 @@ import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
 import org.pepstock.charba.client.jsinterop.items.DatasetItem;
 import org.pepstock.charba.client.jsinterop.items.DatasetMetaItem;
 import org.pepstock.charba.client.jsinterop.utils.JSON;
+import org.pepstock.charba.client.jsinterop.utils.Window;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.dom.client.CanvasElement;
@@ -465,6 +466,9 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			configuration.setType(getType());
 			configuration.setOptions(options);
 			configuration.setData(data);
+			
+			Window.getConsole().log(configuration);
+
 			// FIXME
 //			configuration.setPlugins(plugins);
 			// destroy chart if chart is already instantiated

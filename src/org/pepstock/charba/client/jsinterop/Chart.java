@@ -29,8 +29,8 @@ public final class Chart{
 	@JsProperty
 	static native NativeDefaults getDefaults();
 
-	@JsProperty(name = "helpers")
-	public static native Helpers helpers();
+	@JsProperty
+	static native NativeHelpers getHelpers();
 	
 	/**
 	 * 
@@ -80,30 +80,6 @@ public final class Chart{
 	
 	@JsMethod
 	native DatasetMetaItem getDatasetMeta(int index);
-	
-	@JsProperty
-	public native ChartAreaItem getChartArea();
-
-	@JsProperty
-	public native LegendNode getLegend();
-
-	@JsProperty(name ="titleBlock")
-	public native TitleNode getTitle();
-	
-	@JsProperty(name ="options")
-	native NativeOptions getNativeOptions();
-	
-	@JsProperty
-	public native ScalesNode getScales();
-
-	@JsProperty
-	public native TooltipNode getTooltip();
-
-	@JsOverlay
-	public final OptionsNode getOptions() {
-		// FIXME default to be fixed
-		return new OptionsNode(DefaultOptions.get(), getNativeOptions());
-	}
 	
 	/**
 	 * Returns the CHART JS chart ID.
@@ -200,6 +176,32 @@ public final class Chart{
 	 */
 	@JsProperty	(name = "offsetY")
 	native int getNativeOffsetY();
+	
+	@JsProperty
+	public native ChartAreaItem getChartArea();
+
+	@JsProperty
+	public native LegendNode getLegend();
+
+	@JsProperty(name ="titleBlock")
+	public native TitleNode getTitle();
+	
+	@JsProperty(name ="options")
+	native NativeOptions getNativeOptions();
+	
+	@JsProperty
+	public native ScalesNode getScales();
+
+	@JsProperty
+	public native TooltipNode getTooltip();
+
+	@JsOverlay
+	public final OptionsNode getOptions() {
+		// FIXME default to be fixed
+		return new OptionsNode(DefaultOptions.get(), getNativeOptions());
+	}
+	
+
 
 
 	/**

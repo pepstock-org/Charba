@@ -32,13 +32,36 @@ import org.pepstock.charba.client.commons.Key;
  */
 public abstract class Dataset extends JavaScriptObjectContainer{
 	
+	private static final boolean DEFAULT_HIDDEN = false;
+	
 	/**
 	 * Name of fields of JavaScript object. 
 	 */
 	private enum Property implements Key {
 		label,
 		data,
-		type
+		type,
+		hidden
+	}
+	
+	/**
+	 * Sets if the dataset will appear or not.
+	 * @param hidden if the dataset will appear or not.
+	 */
+	public void setHidden(boolean hidden){
+		if (hidden) {
+		  setValue(Property.hidden, hidden);
+		} else {
+			remove(Property.hidden);
+		}
+	}
+
+	/**
+	 * Returns if the dataset will appear or not.
+	 * @return if the dataset will appear or not. Default is <code>false</code>
+	 */
+	public boolean isHidden(){
+		  return getValue(Property.hidden, DEFAULT_HIDDEN);
 	}
 	
 	/**

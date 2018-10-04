@@ -1,10 +1,10 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.ChartOptions;
 import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.GlobalOptions;
+import org.pepstock.charba.client.jsinterop.Helpers;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 
 public final class ChartOptionsBuilder {
@@ -21,27 +21,27 @@ public final class ChartOptionsBuilder {
 		Scale scale = Defaults.getScale();
 		GlobalOptions global = Defaults.getGlobal();
 
-		NativeOptions chartOptions = Chart.helpers().clone(base.getDelegated());
-		NativeScale scaleOptions = Chart.helpers().clone(scale.getDelegated());
-		NativeOptions globalOptions = Chart.helpers().clone(global.getDelegated());
+		NativeOptions chartOptions = Helpers.clone(base.getDelegated());
+		NativeScale scaleOptions = Helpers.clone(scale.getDelegated());
+		NativeOptions globalOptions = Helpers.clone(global.getDelegated());
 		
 		if (chartOptions.getScale() != null) {
-			Chart.helpers().mergeIf(chartOptions.getScale(), scaleOptions);
+			Helpers.mergeIf(chartOptions.getScale(), scaleOptions);
 		} else if (chartOptions.getScales() != null) {
 			if (chartOptions.getScales().getXAxes() != null) {
 				ArrayObject<NativeScale> xAxes = chartOptions.getScales().getXAxes();
 				for (int i=0; i<xAxes.length(); i++){
-					Chart.helpers().mergeIf(xAxes.get(i), scaleOptions);
+					Helpers.mergeIf(xAxes.get(i), scaleOptions);
 				}
 			}
 			if (chartOptions.getScales().getYAxes() != null) {
 				ArrayObject<NativeScale> yAxes = chartOptions.getScales().getYAxes();
 				for (int i=0; i<yAxes.length(); i++){
-					Chart.helpers().mergeIf(yAxes.get(i), scaleOptions);
+					Helpers.mergeIf(yAxes.get(i), scaleOptions);
 				}
 			}
 		}
-		return Chart.helpers().mergeIf(chartOptions, globalOptions);
+		return Helpers.mergeIf(chartOptions, globalOptions);
 	}
 	
 //	var chartOptions = new Object();

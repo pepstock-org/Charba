@@ -51,7 +51,7 @@ public final class NativeData extends NativeObject{
 	 * Sets the labels for X axes of the data 
 	 * @param labels array of labels
 	 */
-	@JsProperty
+	@JsProperty(name = "xLabels")
 	native void setXLabels(ArrayMixedObject labels);
 
 	/**
@@ -59,14 +59,14 @@ public final class NativeData extends NativeObject{
 	 * @return the labels for X axes
 	 * @see org.pepstock.charba.client.data.Labels
 	 */
-	@JsProperty
+	@JsProperty(name = "xLabels")
 	native ArrayMixedObject getXLabels();
 
 	/**
 	 * Sets the labels for Y axes of the data
 	 * @param labels array of labels
 	 */
-	@JsProperty
+	@JsProperty(name = "yLabels")
 	native void setYLabels(ArrayMixedObject labels);
 
 	/**
@@ -74,7 +74,7 @@ public final class NativeData extends NativeObject{
 	 * @return the labels for Y axes
 	 * @see org.pepstock.charba.client.data.Labels
 	 */
-	@JsProperty
+	@JsProperty(name = "yLabels")
 	native ArrayMixedObject getYLabels();
 
 	/**

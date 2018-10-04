@@ -48,22 +48,22 @@ final class NativeScales extends NativeObject {
 	@JsProperty
 	native boolean isDisplay();
 
-	@JsProperty
+	@JsProperty(name = "xAxes")
 	native void setXAxes(ArrayObject<NativeScale> xAxes);
 	
 	/**
 	 * @return the xAxes
 	 */
-	@JsProperty
+	@JsProperty(name = "xAxes")
 	native ArrayObject<NativeScale> getXAxes();
 	
-	@JsProperty
+	@JsProperty(name = "yAxes")
 	native void setYAxes(ArrayObject<NativeScale> yAxes);
 
 	/**
 	 * @return the yAxes
 	 */
-	@JsProperty
+	@JsProperty(name = "yAxes")
 	native ArrayObject<NativeScale> getYAxes();
 
 }

@@ -27,6 +27,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.callbacks.TooltipLabelColor
  */
+//FIXME
 public final class TooltipLabelColor extends JavaScriptObjectContainer {
 
 	// default background color

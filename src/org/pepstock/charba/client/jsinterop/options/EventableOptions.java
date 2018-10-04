@@ -289,4 +289,8 @@ public final class EventableOptions extends BaseOptions<EventableAnimation,Event
 		getLegend().getLabels().setLabelsHandler(labelsHandler);
 	}
 	
+	// FIXME to be removed
+	public NativeOptions getObject() {
+		return getDelegated();
+	}
 }

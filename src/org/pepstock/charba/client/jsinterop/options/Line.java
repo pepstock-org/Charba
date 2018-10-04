@@ -266,8 +266,8 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 */
 	@Override
 	protected void addToParent() {
-		if (getParent().getDelegated().getArc() == null) {
-			getParent().getDelegated().setArc(getDelegated());
+		if (getParent().getDelegated().getLine() == null) {
+			getParent().getDelegated().setLine(getDelegated());
 		}
 	}
 

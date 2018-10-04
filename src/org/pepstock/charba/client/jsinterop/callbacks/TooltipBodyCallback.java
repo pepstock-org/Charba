@@ -31,6 +31,7 @@ import org.pepstock.charba.client.jsinterop.items.TooltipItem;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.options.TooltipsCallbacks
  */
+// FIXME
 public interface TooltipBodyCallback {
 
 	/**

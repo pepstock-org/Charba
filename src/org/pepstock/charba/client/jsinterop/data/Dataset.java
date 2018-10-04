@@ -34,9 +34,28 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
  */
 public abstract class Dataset extends NativeObjectContainer<NativeDataset>{
 	
+	private static final boolean DEFAULT_HIDDEN = false;
+	
 	public Dataset() {
 		super(new NativeDataset());
 	}
+	
+	/**
+	 * Sets if the dataset will appear or not.
+	 * @param hidden if the dataset will appear or not.
+	 */
+	public void setHidden(boolean hidden) {
+		getNativeObject().setHidden(hidden);
+	}
+
+	/**
+	 * Returns if the dataset will appear or not.
+	 * @return if the dataset will appear or not. Default is <code>false</code>
+	 */
+	public boolean isHidden() {
+		return Checker.check(getNativeObject().isHidden(), DEFAULT_HIDDEN);
+	}
+
 	
 	/**
 	 * Sets the label for the dataset which appears in the legend and tooltips.

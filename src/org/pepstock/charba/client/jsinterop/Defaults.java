@@ -14,9 +14,9 @@ public final class Defaults {
 	
 	private final NativeDefaults nativeObject;
 	
-	private GlobalOptions options;
+	private final GlobalOptions options;
 	
-	private GlobalScale scale;
+	private final GlobalScale scale;
 	
 	private final Map<String, ChartOptions> chartOptions = new HashMap<>();
 

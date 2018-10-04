@@ -39,14 +39,14 @@ public final class NativeDataPoint extends NativeObject{
 	 * Sets X value.
 	 * @param x X value.
 	 */
-	@JsProperty
+	@JsProperty(name = "x")
 	native void setX(double x);
 
 	/**
 	 * Returns X value.
 	 * @return X value.
 	 */
-	@JsProperty
+	@JsProperty(name = "x")
 	native double getX();
 
 
@@ -54,14 +54,14 @@ public final class NativeDataPoint extends NativeObject{
 	 * Sets Y value.
 	 * @param y Y value.
 	 */
-	@JsProperty
+	@JsProperty(name = "y")
 	native void setY(double y);
 
 	/**
 	 * Returns Y value.
 	 * @return Y value.
 	 */
-	@JsProperty
+	@JsProperty(name = "y")
 	native double getY();
 
 	/**
@@ -69,28 +69,28 @@ public final class NativeDataPoint extends NativeObject{
 	 * It is not scaled by the chart, it is the raw radius in pixels of the bubble that is drawn on the canvas.
 	 * @param r the bubble radius in pixels (not scaled).
 	 */
-	@JsProperty
+	@JsProperty(name = "r")
 	native void setR(double r);
 
 	/** 
 	 * Returns the bubble radius in pixels (not scaled).
 	 * @return the bubble radius in pixels (not scaled).
 	 */
-	@JsProperty
+	@JsProperty(name = "r")
 	native double getR();
 
 	/**
 	 * Sets T value, is the date for time series.
 	 * @param t T value.
 	 */
-	@JsProperty
+	@JsProperty(name = "t")
 	native void setT(JsDate t);
 
 	/** 
 	 * Returns T value, is the date for time series.
 	 * @return T value. <code>null</code> is not set.
 	 */
-	@JsProperty
+	@JsProperty(name = "t")
 	native JsDate getT();
 
 	/**
