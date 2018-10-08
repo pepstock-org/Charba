@@ -4,6 +4,9 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.callbacks.LegendFilterHandler;
 import org.pepstock.charba.client.jsinterop.callbacks.LegendHandler;
 import org.pepstock.charba.client.jsinterop.callbacks.LegendLabelsHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.TooltipCustomHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.TooltipFilterHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.TooltipItemSortHandler;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.JsFactory;
@@ -264,29 +267,71 @@ public final class EventableOptions extends BaseOptions<EventableAnimation,Event
 	/**
 	 * @return the filterHandler
 	 */
-	public LegendFilterHandler getFilterHandler() {
+	public LegendFilterHandler getLegendFilterHandler() {
 		return getLegend().getLabels().getFilterHandler();
 	}
 
 	/**
 	 * @param filterHandler the filterHandler to set
 	 */
-	public void setFilterHandler(LegendFilterHandler filterHandler) {
+	public void setLegendFilterHandler(LegendFilterHandler filterHandler) {
 		getLegend().getLabels().setFilterHandler(filterHandler);
 	}
 	
 	/**
 	 * @return the labelsHandler
 	 */
-	public LegendLabelsHandler getLabelsHandler() {
+	public LegendLabelsHandler getLegendLabelsHandler() {
 		return getLegend().getLabels().getLabelsHandler();
 	}
 
 	/**
 	 * @param labelsHandler the labelsHandler to set
 	 */
-	public void setLabelsHandler(LegendLabelsHandler labelsHandler) {
+	public void setLegendLabelsHandler(LegendLabelsHandler labelsHandler) {
 		getLegend().getLabels().setLabelsHandler(labelsHandler);
+	}
+	
+	/**
+	 * @return the customHandler
+	 */
+	public TooltipCustomHandler getTooltipCustomHandler() {
+		return getTooltips().getCustomHandler();
+	}
+
+	/**
+	 * @param customHandler the customHandler to set
+	 */
+	public void setTooltipCustomHandler(TooltipCustomHandler customHandler) {
+		getTooltips().setCustomHandler(customHandler);
+	}
+	
+	/**
+	 * @return the itemSortHandler
+	 */
+	public TooltipItemSortHandler getTooltipItemSortHandler() {
+		return getTooltips().getItemSortHandler();
+	}
+
+	/**
+	 * @param itemSortHandler the itemSortHandler to set
+	 */
+	public void setTooltipItemSortHandler(TooltipItemSortHandler itemSortHandler) {
+		getTooltips().setItemSortHandler(itemSortHandler);
+	}
+	
+	/**
+	 * @return the filterHandler
+	 */
+	public TooltipFilterHandler getTooltipFilterHandler() {
+		return getTooltips().getFilterHandler();
+	}
+
+	/**
+	 * @param filterHandler the filterHandler to set
+	 */
+	public void setTooltipFilterHandler(TooltipFilterHandler filterHandler) {
+		getTooltips().setFilterHandler(filterHandler);
 	}
 	
 	// FIXME to be removed

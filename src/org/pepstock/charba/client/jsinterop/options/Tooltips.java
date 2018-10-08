@@ -17,13 +17,26 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TooltipPosition;
+import org.pepstock.charba.client.jsinterop.callbacks.TooltipCustomCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.TooltipCustomHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.TooltipFilterCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.TooltipFilterHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.TooltipItemSortCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.TooltipItemSortHandler;
+import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.commons.Enumer;
+import org.pepstock.charba.client.jsinterop.commons.JsFactory;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
+import org.pepstock.charba.client.jsinterop.items.TooltipItem;
+import org.pepstock.charba.client.jsinterop.items.TooltipModel;
+
+import jsinterop.annotations.JsFunction;
 
 /**
  * Configuration element to set all attributes and features of the default tooltip.
@@ -33,14 +46,130 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
  */
 public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltips, NativeTooltips> {
 	
-//	custom,
-//	callbacks,
-//	itemSort,
-//	filter,
+	/**
+	 * Custom tooltips allow you to hook into the tooltip rendering process so that you can render the tooltip in your own
+	 * custom way.
+	 * 
+	 * @param chart chart instance
+	 * @param model all info about tooltip to create own HTML tooltip.
+	 */
+	@JsFunction
+	interface ProxyCustomCallback {
+		void call(Object context, TooltipModel model);
+	}
+	
+	/**
+	 * Called to filter tooltip items. Receives 1 parameter, a tooltip Item.
+	 * 
+	 * @param item tooltip item to check.
+	 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
+	 */
+	@JsFunction
+	interface ProxyFilterCallback {
+		boolean call(Object context, TooltipItem item);
+	}
+	
+	/**
+	 * Allows sorting of tooltip items.
+	 * 
+	 * @param chart chart instance
+	 * @param item1 the first object to be compared.
+	 * @param item2 the second object to be compared.
+	 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the
+	 *         second.
+	 *FIXME la chiamata JS passa anche un oggetto DATA        
+	 */
+	@JsFunction
+	interface ProxyItemSortCallback {
+		int call(Object context, TooltipItem item1, TooltipItem item2);
+	}
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		custom,
+		itemSort,
+		filter
+	}
+	
+	private final CallbackProxy<ProxyCustomCallback> customCallbackProxy = JsFactory.newCallbackProxy();
+	
+	private final CallbackProxy<ProxyItemSortCallback> itemSortCallbackProxy = JsFactory.newCallbackProxy();
+	
+	private final CallbackProxy<ProxyFilterCallback> filterCallbackProxy = JsFactory.newCallbackProxy();
+	
+	private TooltipCustomCallback customCallback = null;
 
+	private TooltipCustomHandler customHandler = null;
+
+	private TooltipItemSortCallback itemSortCallback = null;
+
+	private TooltipItemSortHandler itemSortHandler = null;
+
+	private TooltipFilterCallback filterCallback = null;
+
+	private TooltipFilterHandler filterHandler = null;
+	
+	private final TooltipsCallbacks callbacks;
 
 	Tooltips(BaseOptions<?,?> options, IsDefaultTooltips defaultValues, NativeTooltips delegated) {
 		super(options, defaultValues, delegated == null ? new NativeTooltips() : delegated);
+		
+		customCallbackProxy.setCallback(new ProxyCustomCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.Tooltips.ProxyCustomCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipModel)
+			 */
+			@Override
+			public void call(Object context, TooltipModel model) {
+				if (customHandler != null) {
+					customHandler.onCustom(context, model);
+				}
+			}
+	
+		});
+		
+		itemSortCallbackProxy.setCallback(new ProxyItemSortCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.Tooltips.ProxyItemSortCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+			 */
+			@Override
+			public int call(Object context, TooltipItem item1, TooltipItem item2) {
+				if (itemSortHandler != null) {
+					return itemSortHandler.onItemSort(context, item1, item2);
+				}
+				// default is 0 - equals
+				return 0;
+			}
+			
+		});
+		
+		filterCallbackProxy.setCallback(new ProxyFilterCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.Tooltips.ProxyFilterCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+			 */
+			@Override
+			public boolean call(Object context, TooltipItem item) {
+				if (filterHandler != null) {
+					filterHandler.onFilter(context, item);
+				}
+				// default is true
+				return true;
+			}
+			
+		});
+		this.callbacks = new TooltipsCallbacks(this, defaultValues, getDelegated().getCallbacks());
+	}
+
+	/**
+	 * @return the callbacks
+	 */
+	public TooltipsCallbacks getCallbacks() {
+		return callbacks;
 	}
 
 	/**
@@ -851,6 +980,124 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 		return Checker.check(getDelegated().getBorderWidth(), getDefaultValues().getBorderWidth());
 	}
 	
+	// --------------------------
+	// CUSTOM callback
+	// --------------------------
+	
+	/**
+	 * @return the customCallback
+	 */
+	public TooltipCustomCallback getCustomCallback() {
+		return customCallback;
+	}
+
+	/**
+	 * @param customCallback the customCallback to set
+	 */
+	public void setCustomCallback(TooltipCustomCallback customCallback) {
+		this.customCallback = customCallback;
+	}
+
+	/**
+	 * @return the customHandler
+	 */
+	TooltipCustomHandler getCustomHandler() {
+		return customHandler;
+	}
+
+	/**
+	 * @param customHandler the customHandler to set
+	 */
+	void setCustomHandler(TooltipCustomHandler customHandler) {
+		if (customHandler != null) {
+			getDelegated().setCustom(customCallbackProxy.getProxy());
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		} else {
+			remove(Property.custom);
+		}
+		this.customHandler = customHandler;
+	}
+
+	// --------------------------
+	// ITEM SORT callback
+	// --------------------------
+	
+	/**
+	 * @return the itemSortCallback
+	 */
+	public TooltipItemSortCallback getItemSortCallback() {
+		return itemSortCallback;
+	}
+
+	/**
+	 * @param itemSortCallback the itemSortCallback to set
+	 */
+	public void setItemSortCallback(TooltipItemSortCallback itemSortCallback) {
+		this.itemSortCallback = itemSortCallback;
+	}
+
+	/**
+	 * @return the itemSortHandler
+	 */
+	TooltipItemSortHandler getItemSortHandler() {
+		return itemSortHandler;
+	}
+
+	/**
+	 * @param itemSortHandler the itemSortHandler to set
+	 */
+	void setItemSortHandler(TooltipItemSortHandler itemSortHandler) {
+		if (itemSortHandler != null) {
+			getDelegated().setItemSort(itemSortCallbackProxy.getProxy());
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		} else {
+			remove(Property.itemSort);
+		}
+		this.itemSortHandler = itemSortHandler;
+	}
+
+	// --------------------------
+	// FILTER callback
+	// --------------------------
+
+	
+	/**
+	 * @return the filterCallback
+	 */
+	public TooltipFilterCallback getFilterCallback() {
+		return filterCallback;
+	}
+
+	/**
+	 * @param filterCallback the filterCallback to set
+	 */
+	public void setFilterCallback(TooltipFilterCallback filterCallback) {
+		this.filterCallback = filterCallback;
+	}
+
+	/**
+	 * @return the filterHandler
+	 */
+	TooltipFilterHandler getFilterHandler() {
+		return filterHandler;
+	}
+
+	/**
+	 * @param filterHandler the filterHandler to set
+	 */
+	void setFilterHandler(TooltipFilterHandler filterHandler) {
+		if (filterHandler != null) {
+			getDelegated().setFilter(filterCallbackProxy.getProxy());
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		} else {
+			remove(Property.filter);
+		}
+		this.filterHandler = filterHandler;
+	}
+
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
 	 */

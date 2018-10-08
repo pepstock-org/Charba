@@ -17,52 +17,41 @@ package org.pepstock.charba.client.jsinterop.callbacks;
 
 import java.util.List;
 
-import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.items.TooltipItem;
+
 
 /**
  * The tooltip label configuration is nested below the tooltip configuration using the callbacks key.<br>
  * The tooltip has the following callbacks for providing text.<br>
  * All functions must return either a string or an array of strings. Arrays of strings are treated as multiple lines of
  * text.<br>
- * This interface takes care about labels to apply to the footer.
+ * This interface takes care about labels to apply to the body.
  * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.options.TooltipsCallbacks
  */
-public interface TooltipFooterCallback {
+public interface TooltipBodyHandler {
 
 	/**
-	 * Returns text to render before the footer section.
+	 * Returns text to render before the body section.
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return an array of labels to apply to the footer. If returns <code>null</code>, it will be ignored.
+	 * @return an array of labels to apply to the body. If returns <code>null</code>, it will be ignored.
 	 * @see org.pepstock.charba.client.AbstractChart
 	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
-	String[] onBeforeFooter(AbstractChart<?, ?> chart, List<TooltipItem> items);
+	String[] onBeforeBody(Object context, List<TooltipItem> items);
 
 	/**
-	 * Returns text to render as the footer of the tooltip.
+	 * Returns text to render after the body section.
 	 * 
 	 * @param chart chart instance
-	 * @param items list of all tooltip items
-	 * @return an array of labels to apply to the footer. If returns <code>null</code>, it will be ignored.
+	 * @param items list of all tooltips items
+	 * @return an array of labels to apply to the body. If returns <code>null</code>, it will be ignored.
 	 * @see org.pepstock.charba.client.AbstractChart
 	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
-	String[] onFooter(AbstractChart<?, ?> chart, List<TooltipItem> items);
-
-	/**
-	 * Text to render after the footer section.
-	 * 
-	 * @param chart chart instance
-	 * @param items list of all tooltip items
-	 * @return an array of labels to apply to the footer. If returns <code>null</code>, it will be ignored.
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.TooltipItem
-	 */
-	String[] onAfterFooter(AbstractChart<?, ?> chart, List<TooltipItem> items);
+	String[] onAfterBody(Object context, List<TooltipItem> items);
 
 }

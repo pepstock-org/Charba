@@ -43,10 +43,10 @@ public final class LegendLabels extends ConfigurationContainer<EventableOptions>
 	LegendLabels(AbstractChart<?, ?> chart, EventableOptions options) {
 		super(chart, options);
 		if (hasGlobalFilterCallback()) {
-			getConfiguration().setFilterHandler(this);
+			getConfiguration().setLegendFilterHandler(this);
 		}
 		if (hasGlobalLabelsCallback()) {
-			getConfiguration().setLabelsHandler(this);
+			getConfiguration().setLegendLabelsHandler(this);
 		}
 		
 	}
@@ -73,9 +73,9 @@ public final class LegendLabels extends ConfigurationContainer<EventableOptions>
 		getConfiguration().getLegend().getLabels().setLabelsCallback(labelsCallback);
 		if (!hasGlobalLabelsCallback()) {
 			if (labelsCallback == null) {
-				getConfiguration().setLabelsHandler(null);;
+				getConfiguration().setLegendLabelsHandler(null);;
 			} else {
-				getConfiguration().setLabelsHandler(this);
+				getConfiguration().setLegendLabelsHandler(this);
 			}
 		}
 	}
@@ -102,9 +102,9 @@ public final class LegendLabels extends ConfigurationContainer<EventableOptions>
 		getConfiguration().getLegend().getLabels().setFilterCallback(filterCallback);
 		if (!hasGlobalFilterCallback()) {
 			if (filterCallback == null) {
-				getConfiguration().setFilterHandler(null);
+				getConfiguration().setLegendFilterHandler(null);
 			} else {
-				getConfiguration().setFilterHandler(this);
+				getConfiguration().setLegendFilterHandler(this);
 			}
 		}
 	}

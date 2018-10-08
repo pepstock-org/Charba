@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsPackage;
@@ -29,6 +30,12 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
 final class NativeTooltips extends NativeObject {
+	
+	@JsProperty
+	native void setCallbacks(NativeTooltipsCallbacks callbacks);
+
+	@JsProperty
+	native NativeTooltipsCallbacks getCallbacks();
 
 	/**
 	 * Sets if tooltips are enabled.
@@ -574,4 +581,13 @@ final class NativeTooltips extends NativeObject {
 	 */
 	@JsProperty
 	native int getBorderWidth();
+	
+	@JsProperty
+	native void setCustom(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setItemSort(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setFilter(CallbackProxy.Proxy proxy);
 }

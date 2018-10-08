@@ -35,13 +35,39 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
 public final class TooltipLabelColor extends NativeObject {
-	
+
+	@JsProperty(name = "backgroundColor")
+	native void setNativeBackgroundColor(String backgroundColor);
+
 	@JsProperty(name = "backgroundColor")
 	native String getNativeBackgroundColor();
 
 	@JsProperty(name = "borderColor")
+	native void setNativeBorderColor(String borderColor);
+
+	@JsProperty(name = "borderColor")
 	native String getNativeBorderColor();
 
+	/**
+	 * Sets background color as string
+	 * 
+	 * @param backgroundColor background color
+	 */
+	@JsOverlay
+	public void setBackgroundColor(String backgroundColor) {
+		setNativeBackgroundColor(backgroundColor);
+	}
+
+	/**
+	 * Sets background color
+	 * 
+	 * @param backgroundColor background color
+	 */
+	@JsOverlay
+	public void setBackgroundColor(IsColor backgroundColor) {
+		setNativeBackgroundColor(backgroundColor.toRGBA());
+	}
+	
 	/**
 	 * Returns the background color of the label.
 	 * 
@@ -60,6 +86,26 @@ public final class TooltipLabelColor extends NativeObject {
 	@JsOverlay
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
+	}
+	
+	/**
+	 * Sets border color as string
+	 * 
+	 * @param borderColor border color
+	 */
+	@JsOverlay
+	public void setBorderColor(String borderColor) {
+		setNativeBorderColor(borderColor);
+	}
+
+	/**
+	 * Sets border color
+	 * 
+	 * @param borderColor border color
+	 */
+	@JsOverlay
+	public void setBorderColor(IsColor borderColor) {
+		setNativeBorderColor(borderColor.toRGBA());
 	}
 
 	/**
