@@ -19,7 +19,6 @@ import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.jsinterop.configuration.PolarAreaOptions;
 import org.pepstock.charba.client.jsinterop.data.PolarAreaDataset;
-import org.pepstock.charba.client.jsinterop.defaults.DefaultOptions;
 
 /**
  * POLAR AREA chart implementation.
@@ -35,7 +34,7 @@ public final class PolarAreaChart extends AbstractChart<PolarAreaOptions, PolarA
 	 * Builds the object.
 	 */
 	public PolarAreaChart() {
-		options = new PolarAreaOptions(this, DefaultOptions.get());
+		options = new PolarAreaOptions(this, Defaults.options(getType()));
 	}
 
 	/*

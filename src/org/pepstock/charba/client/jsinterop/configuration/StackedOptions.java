@@ -16,11 +16,11 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.ChartOptions;
 import org.pepstock.charba.client.jsinterop.configuration.scales.CartesianCategoryAxis;
 import org.pepstock.charba.client.jsinterop.configuration.scales.CartesianLinearAxis;
 import org.pepstock.charba.client.jsinterop.configuration.scales.Scales;
 import org.pepstock.charba.client.jsinterop.configuration.scales.StackedScales;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
 
 /**
  * Configuration of chart which could be stacked.<br>
@@ -39,7 +39,7 @@ public final class StackedOptions extends ConfigurationOptions {
 	 * @param chart chart instance
 	 * @param onlyYScaled <code>true</code> if only Y axis is scaled.
 	 */
-	public StackedOptions(AbstractChart<?, ?> chart, IsDefaultOptions defaultValues, boolean onlyYScaled) {
+	public StackedOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues, boolean onlyYScaled) {
 		super(chart, defaultValues);
 		// creates scales for stacked chart
 		scales = new StackedScales(chart, getConfiguration());
@@ -57,7 +57,7 @@ public final class StackedOptions extends ConfigurationOptions {
 	 * 
 	 * @param chart chart instance
 	 */
-	public StackedOptions(AbstractChart<?, ?> chart, IsDefaultOptions defaultValues) {
+	public StackedOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		this(chart, defaultValues, false);
 	}
 

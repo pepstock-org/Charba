@@ -19,7 +19,6 @@ import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.jsinterop.configuration.PieOptions;
 import org.pepstock.charba.client.jsinterop.data.PieDataset;
-import org.pepstock.charba.client.jsinterop.defaults.DefaultOptions;
 
 /**
  * PIE chart implementation.
@@ -35,7 +34,7 @@ public final class PieChart extends AbstractChart<PieOptions, PieDataset> {
 	 * Builds the object.
 	 */
 	public PieChart() {
-		options = new PieOptions(this, DefaultOptions.get());
+		options = new PieOptions(this, Defaults.options(getType()));
 	}
 
 	/*

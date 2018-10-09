@@ -19,7 +19,6 @@ import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.jsinterop.configuration.StackedOptions;
 import org.pepstock.charba.client.jsinterop.data.StackedAreaDataset;
-import org.pepstock.charba.client.jsinterop.defaults.DefaultOptions;
 
 /**
  * STACKED AREA chart implementation.
@@ -35,7 +34,7 @@ public final class StackedAreaChart extends AbstractChart<StackedOptions, Stacke
 	 * Builds the object.
 	 */
 	public StackedAreaChart() {
-		options = new StackedOptions(this, DefaultOptions.get(), true);
+		options = new StackedOptions(this, Defaults.options(getType()), true);
 	}
 
 	/*

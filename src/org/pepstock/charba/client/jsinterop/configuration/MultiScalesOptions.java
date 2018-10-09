@@ -16,8 +16,8 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.ChartOptions;
 import org.pepstock.charba.client.jsinterop.configuration.scales.Scales;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
 
 /**
  * Configuration of chart with multiple scales.
@@ -35,7 +35,7 @@ public abstract class MultiScalesOptions extends ConfigurationOptions {
 	 * 
 	 * @param chart chart instance
 	 */
-	protected MultiScalesOptions(AbstractChart<?, ?> chart, IsDefaultOptions defaultValues) {
+	protected MultiScalesOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
 		scales = new Scales(chart, getConfiguration());
 	}

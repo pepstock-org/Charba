@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.jsinterop.AbstractChart;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.jsinterop.ChartOptions;
 
 /**
  * Abstract options for PIE chart. It contains all properties for this kind of chart.
@@ -31,7 +31,7 @@ abstract class AbstractPieOptions extends ConfigurationOptions {
 	 * 
 	 * @param chart chart instance
 	 */
-	protected AbstractPieOptions(AbstractChart<?, ?> chart, IsDefaultOptions defaultvalues) {
+	protected AbstractPieOptions(AbstractChart<?, ?> chart, ChartOptions defaultvalues) {
 		super(chart, defaultvalues);
 	}
 

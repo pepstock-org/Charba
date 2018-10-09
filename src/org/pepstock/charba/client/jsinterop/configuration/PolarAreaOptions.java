@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.jsinterop.AbstractChart;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.jsinterop.ChartOptions;
 
 /**
  * pecific options for POLAR AREA chart. It contains all properties for this kind of chart.
@@ -31,7 +31,7 @@ public final class PolarAreaOptions extends SingleScaleOptions {
 	 * 
 	 * @param chart chart instance
 	 */
-	public PolarAreaOptions(AbstractChart<?, ?> chart, IsDefaultOptions defaultValues) {
+	public PolarAreaOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
 	}
 

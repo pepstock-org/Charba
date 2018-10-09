@@ -19,7 +19,6 @@ import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.jsinterop.configuration.RadarOptions;
 import org.pepstock.charba.client.jsinterop.data.RadarDataset;
-import org.pepstock.charba.client.jsinterop.defaults.DefaultOptions;
 
 /**
  * RADAR chart implementation.
@@ -35,7 +34,7 @@ public class RadarChart extends AbstractChart<RadarOptions, RadarDataset> {
 	 * Builds the object.
 	 */
 	public RadarChart() {
-		options = new RadarOptions(this, DefaultOptions.get());
+		options = new RadarOptions(this, Defaults.options(getType()));
 	}
 
 	/*

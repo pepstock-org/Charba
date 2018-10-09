@@ -19,7 +19,6 @@ import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.jsinterop.configuration.DoughnutOptions;
 import org.pepstock.charba.client.jsinterop.data.DoughnutDataset;
-import org.pepstock.charba.client.jsinterop.defaults.DefaultOptions;
 
 /**
  * DOUGHNUT chart implementation.
@@ -35,8 +34,7 @@ public final class DoughnutChart extends AbstractChart<DoughnutOptions, Doughnut
 	 * Builds the object.
 	 */
 	public DoughnutChart() {
-		//FIXME
-		options = new DoughnutOptions(this, DefaultOptions.get());
+		options = new DoughnutOptions(this, Defaults.options(getType()));
 	}
 
 	/*

@@ -19,7 +19,6 @@ import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.jsinterop.configuration.ScatterOptions;
 import org.pepstock.charba.client.jsinterop.data.ScatterDataset;
-import org.pepstock.charba.client.jsinterop.defaults.DefaultOptions;
 
 /**
  * SCATTER chart implementation.
@@ -35,7 +34,7 @@ public class ScatterChart extends AbstractChart<ScatterOptions, ScatterDataset> 
 	 * Builds the object.
 	 */
 	public ScatterChart() {
-		options = new ScatterOptions(this, DefaultOptions.get());
+		options = new ScatterOptions(this, Defaults.options(getType()));
 	}
 
 	/*

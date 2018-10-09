@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.ChartOptions;
 import org.pepstock.charba.client.jsinterop.Configuration;
 import org.pepstock.charba.client.jsinterop.ConfigurationElement;
 import org.pepstock.charba.client.jsinterop.Defaults;
@@ -27,7 +28,7 @@ import org.pepstock.charba.client.jsinterop.callbacks.handlers.LegendHandler;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.ConfigurationLoader;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.jsinterop.defaults.chart.DefaultChartOptions;
 import org.pepstock.charba.client.jsinterop.events.ChartClickCallbackHandler;
 import org.pepstock.charba.client.jsinterop.events.ChartClickEvent;
 import org.pepstock.charba.client.jsinterop.events.ChartHoverCallbackHandler;
@@ -96,8 +97,8 @@ public abstract class ConfigurationOptions extends EventProvider<EventableOption
 	 * 
 	 * @param chart chart instance
 	 */
-	ConfigurationOptions(AbstractChart<?, ?> chart, IsDefaultOptions defaultValues) {
-		super(chart, new EventableOptions(defaultValues));
+	ConfigurationOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
+		super(chart, new EventableOptions(new DefaultChartOptions(defaultValues)));
 		animation = new Animation(chart, getConfiguration());
 		elements = new Elements(getConfiguration());
 		legend = new Legend(chart, getConfiguration());

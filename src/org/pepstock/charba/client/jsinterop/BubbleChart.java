@@ -19,7 +19,6 @@ import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.jsinterop.configuration.BubbleOptions;
 import org.pepstock.charba.client.jsinterop.data.BubbleDataset;
-import org.pepstock.charba.client.jsinterop.defaults.DefaultOptions;
 
 /**
  * BUBBLE chart implementation.
@@ -36,8 +35,7 @@ public class BubbleChart extends AbstractChart<BubbleOptions, BubbleDataset> {
 	 */
 	public BubbleChart() {
 		// creates the options
-		// FIXME 
-		options = new BubbleOptions(this, DefaultOptions.get());
+		options = new BubbleOptions(this, Defaults.options(getType()));
 	}
 
 	/*

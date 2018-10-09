@@ -16,8 +16,8 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.ChartOptions;
 import org.pepstock.charba.client.jsinterop.configuration.scales.Axis;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
 
 /**
  * Configuration of chart with only 1 scale.
@@ -32,7 +32,7 @@ public abstract class SingleScaleOptions extends ConfigurationOptions{
 	 * 
 	 * @param chart chart instance
 	 */
-	public SingleScaleOptions(AbstractChart<?, ?> chart, IsDefaultOptions defaultValues) {
+	public SingleScaleOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
 	}
 

@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.jsinterop.AbstractChart;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.jsinterop.ChartOptions;
 
 /**
  * Specific options for DOUGHNUT chart. 
@@ -31,7 +31,7 @@ public final class DoughnutOptions extends AbstractPieOptions {
 	 * 
 	 * @param chart chart instance
 	 */
-	public DoughnutOptions(AbstractChart<?, ?> chart, IsDefaultOptions defaultValues) {
+	public DoughnutOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
 	}
 

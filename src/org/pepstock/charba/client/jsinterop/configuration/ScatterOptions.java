@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.jsinterop.AbstractChart;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.jsinterop.ChartOptions;
 
 /**
  * Specific options for SCATTER chart. It contains all properties for this kind of chart.
@@ -31,7 +31,7 @@ public final class ScatterOptions extends AbstractLineOptions {
 	 * 
 	 * @param chart chart instance
 	 */
-	public ScatterOptions(AbstractChart<?, ?> chart, IsDefaultOptions defaultValues) {
+	public ScatterOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
 	}
 

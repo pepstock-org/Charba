@@ -19,7 +19,6 @@ import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.jsinterop.configuration.LineOptions;
 import org.pepstock.charba.client.jsinterop.data.LineDataset;
-import org.pepstock.charba.client.jsinterop.defaults.DefaultOptions;
 
 /**
  * LINE chart implementation.
@@ -35,8 +34,7 @@ public class LineChart extends AbstractChart<LineOptions, LineDataset> {
 	 * Builds the object.
 	 */
 	public LineChart() {
-		//FIXME
-		options = new LineOptions(this, DefaultOptions.get());
+		options = new LineOptions(this, Defaults.options(getType()));
 	}
 
 	/*

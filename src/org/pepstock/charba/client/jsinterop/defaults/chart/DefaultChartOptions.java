@@ -17,14 +17,46 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
 public final class DefaultChartOptions implements IsDefaultOptions{
 	
 	private final ChartOptions chartOptions;
+	
+	private final DefaultChartAnimation animation;
+	
+	private final DefaultChartScale scale;
+	
+	private final DefaultChartHover hover;
 
+	private final DefaultChartTitle title;
+	
+	private final DefaultChartLegend legend;
+	
+	private final DefaultChartTooltips tooltips;
+	
+	private final DefaultChartPadding padding;
+	
+	private final DefaultChartArc arc;
+	
+	private final DefaultChartLine line;
+	
+	private final DefaultChartPoint point;
+	
+	private final DefaultChartRectangle rectangle;
+	
 	/**
 	 * @param chartOptions
 	 */
 	public DefaultChartOptions(ChartOptions chartOptions) {
 		this.chartOptions = chartOptions;
+		animation = new DefaultChartAnimation(chartOptions.getAnimation());
+		scale = new DefaultChartScale(chartOptions.getScale());
+		hover = new DefaultChartHover(chartOptions.getHover());
+		title = new DefaultChartTitle(chartOptions.getTitle());
+		legend = new DefaultChartLegend(chartOptions.getLegend());
+		tooltips = new DefaultChartTooltips(chartOptions.getTooltips());
+		padding = new DefaultChartPadding(chartOptions.getLayout().getPadding());
+		arc = new DefaultChartArc(chartOptions.getElements().getArc());
+		line = new DefaultChartLine(chartOptions.getElements().getLine());
+		point = new DefaultChartPoint(chartOptions.getElements().getPoint());
+		rectangle = new DefaultChartRectangle(chartOptions.getElements().getRectangle());
 	}
-	
 
 	/**
 	 * @return the chartOptions
@@ -33,13 +65,12 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return chartOptions;
 	}
 
-	// FIXME
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getScale()
 	 */
 	@Override
 	public IsDefaultScale getScale() {
-		return null;
+		return scale;
 	}
 
 	/* (non-Javadoc)
@@ -47,7 +78,7 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 	 */
 	@Override
 	public IsDefaultAnimation getAnimation() {
-		return null;
+		return animation;
 	}
 
 	/* (non-Javadoc)
@@ -55,7 +86,7 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 	 */
 	@Override
 	public IsDefaultHover getHover() {
-		return null;
+		return hover;
 	}
 
 	/* (non-Javadoc)
@@ -63,7 +94,7 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 	 */
 	@Override
 	public IsDefaultTitle getTitle() {
-		return null;
+		return title;
 	}
 
 	/* (non-Javadoc)
@@ -71,7 +102,7 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 	 */
 	@Override
 	public IsDefaultLegend getLegend() {
-		return null;
+		return legend;
 	}
 
 	/* (non-Javadoc)
@@ -79,7 +110,7 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 	 */
 	@Override
 	public IsDefaultTooltips getTooltips() {
-		return null;
+		return tooltips;
 	}
 
 	/* (non-Javadoc)
@@ -87,7 +118,7 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 	 */
 	@Override
 	public IsDefaultPadding getPadding() {
-		return null;
+		return padding;
 	}
 
 	/* (non-Javadoc)
@@ -95,7 +126,7 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 	 */
 	@Override
 	public IsDefaultArc getArc() {
-		return null;
+		return arc;
 	}
 
 	/* (non-Javadoc)
@@ -103,7 +134,7 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 	 */
 	@Override
 	public IsDefaultLine getLine() {
-		return null;
+		return line;
 	}
 
 	/* (non-Javadoc)
@@ -111,7 +142,7 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 	 */
 	@Override
 	public IsDefaultPoint getPoint() {
-		return null;
+		return point;
 	}
 
 	/* (non-Javadoc)
@@ -119,7 +150,7 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 	 */
 	@Override
 	public IsDefaultRectangle getRectangle() {
-		return null;
+		return rectangle;
 	}
 
 	/* (non-Javadoc)
