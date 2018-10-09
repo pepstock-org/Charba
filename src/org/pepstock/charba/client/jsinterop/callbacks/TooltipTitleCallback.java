@@ -17,8 +17,9 @@ package org.pepstock.charba.client.jsinterop.callbacks;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.items.TooltipItem;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.items.TooltipItem;
+
 
 /**
  * The tooltip label configuration is nested below the tooltip configuration using the callbacks key.<br>

@@ -23,7 +23,7 @@ import org.pepstock.charba.client.jsinterop.Configuration;
 import org.pepstock.charba.client.jsinterop.ConfigurationElement;
 import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.callbacks.LegendCallback;
-import org.pepstock.charba.client.jsinterop.callbacks.LegendHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.LegendHandler;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.ConfigurationLoader;

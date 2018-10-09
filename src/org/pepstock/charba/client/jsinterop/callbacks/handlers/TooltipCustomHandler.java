@@ -13,28 +13,30 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.jsinterop.callbacks;
+package org.pepstock.charba.client.jsinterop.callbacks.handlers;
 
-import org.pepstock.charba.client.jsinterop.items.TooltipItem;
+import org.pepstock.charba.client.jsinterop.items.TooltipModel;
 
 /**
- * Allows sorting of tooltip items.
+ * Custom tooltips allow you to hook into the tooltip rendering process so that you can render the tooltip in your own custom
+ * way.<br>
+ * Generally this is used to create an HTML tooltip instead of an on canvas one.
  * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.options.Tooltips
  */
 //FIXME
-public interface TooltipItemSortHandler {
+public interface TooltipCustomHandler {
 
 	/**
-	 * Allows sorting of tooltip items.
+	 * Custom tooltips allow you to hook into the tooltip rendering process so that you can render the tooltip in your own
+	 * custom way.
 	 * 
 	 * @param chart chart instance
-	 * @param item1 the first object to be compared.
-	 * @param item2 the second object to be compared.
-	 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the
-	 *         second.
+	 * @param model all info about tooltip to create own HTML tooltip.
+	 * @see org.pepstock.charba.client.AbstractChart
+	 * @see org.pepstock.charba.client.items.TooltipModel
 	 */
-	int onItemSort(Object context, TooltipItem item1, TooltipItem item2);
+	void onCustom(Object context, TooltipModel model);
 
 }

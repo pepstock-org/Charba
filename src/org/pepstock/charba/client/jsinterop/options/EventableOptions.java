@@ -1,12 +1,16 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.jsinterop.callbacks.LegendFilterHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.LegendHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.LegendLabelsHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.TooltipCustomHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.TooltipFilterHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.TooltipItemSortHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.LegendFilterHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.LegendHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.LegendLabelsHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipBodyHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipCustomHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipFilterHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipFooterHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipItemSortHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipLabelHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipTitleHandler;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.JsFactory;
@@ -332,6 +336,56 @@ public final class EventableOptions extends BaseOptions<EventableAnimation,Event
 	 */
 	public void setTooltipFilterHandler(TooltipFilterHandler filterHandler) {
 		getTooltips().setFilterHandler(filterHandler);
+	}
+	
+	/**
+	 * @param titleHandler the titleHandler to set
+	 */
+	public void setTooltipTitleHandler(TooltipTitleHandler titleHandler) {
+		getTooltips().getCallbacks().setTitleHandler(titleHandler);
+	}
+
+	/**
+	 * @return the bodyHandler
+	 */
+	public TooltipBodyHandler getTooltipBodyHandler() {
+		return getTooltips().getCallbacks().getBodyHandler();
+	}
+
+	/**
+	 * @param bodyHandler the bodyHandler to set
+	 */
+	public void setTooltipBodyHandler(TooltipBodyHandler bodyHandler) {
+		getTooltips().getCallbacks().setBodyHandler(bodyHandler);
+	}
+
+	/**
+	 * @return the labelHandler
+	 */
+	public TooltipLabelHandler getTooltipLabelHandler() {
+		return getTooltips().getCallbacks().getLabelHandler();
+	}
+
+	/**
+	 * @param labelHandler the labelHandler to set
+	 */
+	public void setTooltipLabelHandler(TooltipLabelHandler labelHandler) {
+		getTooltips().getCallbacks().setLabelHandler(labelHandler);
+
+	}
+	
+	/**
+	 * @return the footerHandler
+	 */
+	public TooltipFooterHandler getTooltipFooterHandler() {
+		return getTooltips().getCallbacks().getFooterHandler();
+	}
+
+	/**
+	 * @param footerHandler the footerHandler to set
+	 */
+	public void setTooltipFooterHandler(TooltipFooterHandler footerHandler) {
+		getTooltips().getCallbacks().setFooterHandler(footerHandler);
 	}
 	
 	// FIXME to be removed

@@ -23,11 +23,11 @@ import org.pepstock.charba.client.enums.TooltipPosition;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.callbacks.TooltipCustomCallback;
-import org.pepstock.charba.client.jsinterop.callbacks.TooltipCustomHandler;
 import org.pepstock.charba.client.jsinterop.callbacks.TooltipFilterCallback;
-import org.pepstock.charba.client.jsinterop.callbacks.TooltipFilterHandler;
 import org.pepstock.charba.client.jsinterop.callbacks.TooltipItemSortCallback;
-import org.pepstock.charba.client.jsinterop.callbacks.TooltipItemSortHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipCustomHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipFilterHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipItemSortHandler;
 import org.pepstock.charba.client.jsinterop.items.TooltipItem;
 import org.pepstock.charba.client.jsinterop.items.TooltipModel;
 import org.pepstock.charba.client.jsinterop.options.EventableOptions;
@@ -39,6 +39,8 @@ import org.pepstock.charba.client.jsinterop.options.EventableOptions;
  *
  */
 public final class Tooltips extends ConfigurationContainer<EventableOptions> implements TooltipCustomHandler, TooltipItemSortHandler, TooltipFilterHandler{
+	
+	private final TooltipsCallbacks callbacks;
 
 	/**
 	 * Builds the object storing the chart instance.<br>
@@ -49,8 +51,7 @@ public final class Tooltips extends ConfigurationContainer<EventableOptions> imp
 	Tooltips(AbstractChart<?, ?> chart, EventableOptions options) {
 		super(chart, options);
 		// sets callbacks container
-		// FIXME
-		//callbacks = new TooltipsCallbacks(this);
+		callbacks = new TooltipsCallbacks(chart, options);
 		if (hasGlobalCustomCallback()) {
 			getConfiguration().setTooltipCustomHandler(this);
 		}
@@ -62,13 +63,13 @@ public final class Tooltips extends ConfigurationContainer<EventableOptions> imp
 		}
 	}
 
-//	/**
-//	 * @return the callbacks
-//	 */
-//	public TooltipsCallbacks getCallbacks() {
-//		return callbacks;
-//	}
-//
+	/**
+	 * @return the callbacks
+	 */
+	public TooltipsCallbacks getCallbacks() {
+		return callbacks;
+	}
+
 	
 	// ------------
 	// CUSTOM

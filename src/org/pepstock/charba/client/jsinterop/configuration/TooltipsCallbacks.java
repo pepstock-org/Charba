@@ -15,15 +15,22 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.callbacks.TooltipBodyCallback;
-import org.pepstock.charba.client.callbacks.TooltipFooterCallback;
-import org.pepstock.charba.client.callbacks.TooltipLabelCallback;
-import org.pepstock.charba.client.callbacks.TooltipLabelColor;
-import org.pepstock.charba.client.callbacks.TooltipTitleCallback;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.items.TooltipItem;
-import org.pepstock.charba.client.items.TooltipItemArray;
+import java.util.List;
+
+import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.Defaults;
+import org.pepstock.charba.client.jsinterop.callbacks.TooltipBodyCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.TooltipFooterCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.TooltipTitleCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipBodyHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipFooterHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipLabelHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipTitleHandler;
+import org.pepstock.charba.client.jsinterop.items.TooltipItem;
+import org.pepstock.charba.client.jsinterop.items.TooltipLabelColor;
+import org.pepstock.charba.client.jsinterop.options.EventableOptions;
 
 /**
  * Contains all callbacks defined for a toolitp.
@@ -31,425 +38,375 @@ import org.pepstock.charba.client.items.TooltipItemArray;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TooltipsCallbacks {
+public final class TooltipsCallbacks extends ConfigurationContainer<EventableOptions> implements TooltipTitleHandler, TooltipFooterHandler, TooltipLabelHandler, TooltipBodyHandler{
 
-	// empty string 
-	private static final String EMPTY = "";
-	
-	private static final TooltipLabelColor DEFAULT_LABEL_COLOR = new TooltipLabelColor();
-	
-	private final Tooltips tooltips;
-	
-	private TooltipTitleCallback titleCallback = null;
-	
-	private TooltipBodyCallback bodyCallback = null;
-	
-	private TooltipLabelCallback labelCallback = null;
-	
-	private TooltipFooterCallback footerCallback = null;
-
-	private enum Property implements Key{
-	    beforeTitle,
-	    title,
-	    afterTitle,
-	    beforeBody,
-	    beforeLabel,
-	    label,
-	    labelColor,
-	    labelTextColor,
-	    afterLabel,
-	    afterBody,
-	    beforeFooter,
-	    footer,
-	    afterFooter
+	/**
+	 * @param chart
+	 * @param configuration
+	 */
+	TooltipsCallbacks(AbstractChart<?, ?> chart, EventableOptions configuration) {
+		super(chart, configuration);
+		if (hasGlobalBodyCallback()) {
+			getConfiguration().setTooltipBodyHandler(this);
+		}
+		if (hasGlobalTitleCallback()) {
+			getConfiguration().setTooltipTitleHandler(this);
+		}
+		if (hasGlobalFooterCallback()) {
+			getConfiguration().setTooltipFooterHandler(this);
+		}
+		if (hasGlobalLabelCallback()) {
+			getConfiguration().setTooltipLabelHandler(this);
+		}
 	}
 	
-	/**
-	 * Creates the object using the tooltip one.
-	 * 
-	 * @param tooltips tooltip object
-	 */
-	TooltipsCallbacks(Tooltips tooltips) {
-		this.tooltips = tooltips;
-		// sets the colors getting from tooltip
-		DEFAULT_LABEL_COLOR.setBackgroundColor(tooltips.getBackgroundColor());
-		DEFAULT_LABEL_COLOR.setBackgroundColor(tooltips.getBorderColor());
+	private boolean hasGlobalTitleCallback() {
+		return Defaults.getGlobal().getTooltips().getCallbacks().getTitleCallback() != null ||
+		       Defaults.chart(getChart()).getTooltips().getCallbacks().getTitleCallback()!= null;  
 	}
 	
 	/**
 	 * @return the titleCallback
 	 */
 	public TooltipTitleCallback getTitleCallback() {
-		return titleCallback;
+		return getConfiguration().getTooltips().getCallbacks().getTitleCallback();
 	}
 
 	/**
 	 * @param titleCallback the titleCallback to set
 	 */
 	public void setTitleCallback(TooltipTitleCallback titleCallback) {
-//		if (hasToBeRegistered(titleCallback, Property.beforeTitle, Property.afterTitle, Property.title)){
-//			registerNativeTitleHandlers(getJavaScriptObject());
-//		}
-		this.titleCallback = titleCallback;
+		getConfiguration().getTooltips().getCallbacks().setTitleCallback(titleCallback);
+		if (!hasGlobalTitleCallback()) {
+			if (titleCallback == null) {
+				getConfiguration().setTooltipTitleHandler(null);
+			} else {
+				getConfiguration().setTooltipTitleHandler(this);
+			}
+		}
+	}
+
+	private boolean hasGlobalBodyCallback() {
+		return Defaults.getGlobal().getTooltips().getCallbacks().getBodyCallback() != null ||
+		       Defaults.chart(getChart()).getTooltips().getCallbacks().getBodyCallback()!= null;  
 	}
 
 	/**
 	 * @return the bodyCallback
 	 */
 	public TooltipBodyCallback getBodyCallback() {
-		return bodyCallback;
+		return getConfiguration().getTooltips().getCallbacks().getBodyCallback();
 	}
 
 	/**
 	 * @param bodyCallback the bodyCallback to set
 	 */
 	public void setBodyCallback(TooltipBodyCallback bodyCallback) {
-//		if (hasToBeRegistered(bodyCallback, Property.beforeBody, Property.afterBody)){
-//			registerNativeBodyHandlers(getJavaScriptObject());
-//		}
-		this.bodyCallback = bodyCallback;
+		getConfiguration().getTooltips().getCallbacks().setBodyCallback(bodyCallback);
+		if (!hasGlobalBodyCallback()) {
+			if (bodyCallback == null) {
+				getConfiguration().setTooltipBodyHandler(null);
+			} else {
+				getConfiguration().setTooltipBodyHandler(this);
+			}
+		}
 	}
 
+	private boolean hasGlobalLabelCallback() {
+		return Defaults.getGlobal().getTooltips().getCallbacks().getLabelCallback() != null ||
+		       Defaults.chart(getChart()).getTooltips().getCallbacks().getLabelCallback()!= null;  
+	}
+	
 	/**
 	 * @return the labelCallback
 	 */
 	public TooltipLabelCallback getLabelCallback() {
-		return labelCallback;
+		return getConfiguration().getTooltips().getCallbacks().getLabelCallback();
 	}
 
 	/**
 	 * @param labelCallback the labelCallback to set
 	 */
 	public void setLabelCallback(TooltipLabelCallback labelCallback) {
-//		if (hasToBeRegistered(labelCallback, Property.beforeLabel, Property.afterLabel, Property.label, Property.labelColor, Property.labelTextColor)){
-//			registerNativeLabelHandlers(getJavaScriptObject());
-//		}
-		this.labelCallback = labelCallback;
+		getConfiguration().getTooltips().getCallbacks().setLabelCallback(labelCallback);
+		if (!hasGlobalLabelCallback()) {
+			if (labelCallback == null) {
+				getConfiguration().setTooltipLabelHandler(null);
+			} else {
+				getConfiguration().setTooltipLabelHandler(this);
+			}
+		}
 	}
 
+	private boolean hasGlobalFooterCallback() {
+		return Defaults.getGlobal().getTooltips().getCallbacks().getFooterCallback() != null ||
+		       Defaults.chart(getChart()).getTooltips().getCallbacks().getFooterCallback()!= null;  
+	}
+	
 	/**
 	 * @return the footerCallback
 	 */
 	public TooltipFooterCallback getFooterCallback() {
-		return footerCallback;
+		return getConfiguration().getTooltips().getCallbacks().getFooterCallback();
 	}
 
 	/**
 	 * @param footerCallback the footerCallback to set
 	 */
 	public void setFooterCallback(TooltipFooterCallback footerCallback) {
-//		if (hasToBeRegistered(footerCallback, Property.beforeFooter, Property.afterFooter, Property.footer)){
-//			registerNativeFooterHandlers(getJavaScriptObject());
-//		}
-		this.footerCallback = footerCallback;
-	}
-
-	/**
-	 * Called before body creation.
-	 * @param object java script object tooltips items
-	 * @return array of strings for body. Default is an empty array.
-	 */
-	protected String[] onBeforeBody(GenericJavaScriptObject object){
-		// checks if callbacks is set
-		if (bodyCallback != null){
-			TooltipItemArray items = new TooltipItemArray(object);
-			//FIXME
-//			return bodyCallback.onBeforeBody(tooltips.getChart(), items.getItems());
+		getConfiguration().getTooltips().getCallbacks().setFooterCallback(footerCallback);
+		if (!hasGlobalFooterCallback()) {
+			if (footerCallback == null) {
+				getConfiguration().setTooltipFooterHandler(null);
+			} else {
+				getConfiguration().setTooltipFooterHandler(this);
+			}
 		}
-		return new String[0];
 	}
 	
-	/**
-	 * Called after body creation.
-	 * @param object java script object tooltips items
-	 * @return array of strings for body. Default is an empty array.
-	 */
-	protected String[] onAfterBody(GenericJavaScriptObject object){
-		// checks if callbacks is set
-		if (bodyCallback != null){
-			TooltipItemArray items = new TooltipItemArray(object);
-			//FIXME
-//			return bodyCallback.onAfterBody(tooltips.getChart(), items.getItems());
+	private TooltipBodyCallback getBodyCallbackToInvoke() {
+		// checks if callback is consistent
+		if (getBodyCallback() != null) {
+			// calls callback
+			return getBodyCallback();
+		} else if (Defaults.chart(getChart()).getTooltips().getCallbacks().getBodyCallback() != null) {
+			// calls callback
+			return Defaults.chart(getChart()).getTooltips().getCallbacks().getBodyCallback();
+		} else if (Defaults.getGlobal().getTooltips().getCallbacks().getBodyCallback() != null) {
+			// calls callback
+			return Defaults.getGlobal().getTooltips().getCallbacks().getBodyCallback();
 		}
-		// empty array
-		return new String[0];
+		return null;
 	}
 
-	/**
-	 * Called before title creation.
-	 * @param object java script object tooltips items
-	 * @return array of strings for body. Default is an empty array.
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipBodyHandler#onBeforeBody(java.lang.Object, java.util.List)
 	 */
-	protected String[] onBeforeTitle(GenericJavaScriptObject object){
-		// checks if callbacks is set
-		if (titleCallback != null){
-			TooltipItemArray items = new TooltipItemArray(object);
-			//FIXME
-//			return titleCallback.onBeforeTitle(tooltips.getChart(), items.getItems());
+	@Override
+	public String[] onBeforeBody(Object context, List<TooltipItem> items) {
+		TooltipBodyCallback toInvoke = getBodyCallbackToInvoke();
+		// checks if callback is consistent
+		if (toInvoke != null) {
+			// calls callback
+			return toInvoke.onBeforeBody(getChart(), items);
 		}
-		// empty array
-		return new String[0];
+		return null;
 	}
 
-	/**
-	 * Called title creation
-	 * @param object java script object tooltips items
-	 * @return array of strings for body. Default is an empty array.
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipBodyHandler#onAfterBody(java.lang.Object, java.util.List)
 	 */
-	protected String[] onTitle(GenericJavaScriptObject object){
-		// checks if callbacks is set
-		if (titleCallback != null){
-			TooltipItemArray items = new TooltipItemArray(object);
-			//FIXME
-//			return titleCallback.onTitle(tooltips.getChart(), items.getItems());
+	@Override
+	public String[] onAfterBody(Object context, List<TooltipItem> items) {
+		TooltipBodyCallback toInvoke = getBodyCallbackToInvoke();
+		// checks if callback is consistent
+		if (toInvoke != null) {
+			// calls callback
+			return toInvoke.onAfterBody(getChart(), items);
 		}
-		// empty array
-		return new String[0];
-	}
-
-	/**
-	 * Called after title creation.
-	 * @param object java script object tooltips items
-	 * @return array of strings for body. Default is an empty array.
-	 */
-	protected String[] onAfterTitle(GenericJavaScriptObject object){
-		// checks if callbacks is set
-		if (titleCallback != null){
-			TooltipItemArray items = new TooltipItemArray(object);
-			//FIXME
-//			return titleCallback.onAfterTitle(tooltips.getChart(), items.getItems());
-		}
-		// empty array
-		return new String[0];
-	}
-
-	/**
-	 * Called before footer creation.
-	 * @param object java script object tooltips items
-	 * @return array of strings for body. Default is an empty array.
-	 */
-	protected String[] onBeforeFooter(GenericJavaScriptObject object){
-		// checks if callbacks is set
-		if (footerCallback != null){
-			TooltipItemArray items = new TooltipItemArray(object);
-			//FIXME
-//			return footerCallback.onBeforeFooter(tooltips.getChart(), items.getItems());
-		}
-		// empty array
-		return new String[0];
-	}
-
-	/**
-	 * Called footer creation.
-	 * @param object java script object tooltips items
-	 * @return array of strings for body. Default is an empty array.
-	 */
-	protected String[] onFooter(GenericJavaScriptObject object){
-		// checks if callbacks is set
-		if (footerCallback != null){
-			TooltipItemArray items = new TooltipItemArray(object);
-			//FIXME
-//			return footerCallback.onFooter(tooltips.getChart(), items.getItems());
-		}
-		// empty array
-		return new String[0];
-	}
-
-	/**
-	 * Called after footer creation.
-	 * @param object java script object tooltips items
-	 * @return array of strings for body. Default is an empty array.
-	 */
-	protected String[] onAfterFooter(GenericJavaScriptObject object){
-		// checks if callbacks is set
-		if (footerCallback != null){
-			TooltipItemArray items = new TooltipItemArray(object);
-			//FIXME
-//			return footerCallback.onAfterFooter(tooltips.getChart(), items.getItems());
-		}
-		// empty array
-		return new String[0];
-	}
-
-	/**
-	 * Called before label creation.
-	 * @param object java script object tooltips items
-	 * @return string for label. Default is an empty string.
-	 */
-	protected String onBeforeLabel(GenericJavaScriptObject object){
-		// checks if callbacks is set
-		if (labelCallback != null){
-			TooltipItem item = new TooltipItem(object);
-			//FIXME
-//			return labelCallback.onBeforeLabel(tooltips.getChart(), item);
-		}
-		// empty string
-		return EMPTY;
-	}
-
-	/**
-	 * Called label creation.
-	 * @param object java script object tooltips items
-	 * @return string for label. Default is an empty string.
-	 */
-	protected String onLabel(GenericJavaScriptObject object){
-		// checks if callbacks is set
-		if (labelCallback != null){
-			TooltipItem item = new TooltipItem(object);
-			//FIXME
-//			return labelCallback.onLabel(tooltips.getChart(), item);
-		}
-		// empty string
-		return EMPTY;
+		return null;
 	}
 	
-	/**
-	 * Called text label color creation.
-	 * @param object java script object tooltips items
-	 * @return string for label color.
-	 */
-	protected String onLabelTextColor(GenericJavaScriptObject object){
-		// checks if callbacks is set
-		if (labelCallback != null){
-			TooltipItem item = new TooltipItem(object);
-			//FIXME
-//			IsColor color = labelCallback.onLabelTextColor(tooltips.getChart(), item); 
-//			return color != null ? color.toRGBA() : null;
+	private TooltipLabelCallback getLabelCallbackToInvoke() {
+		// checks if callback is consistent
+		if (getLabelCallback() != null) {
+			// calls callback
+			return getLabelCallback();
+		} else if (Defaults.chart(getChart()).getTooltips().getCallbacks().getLabelCallback() != null) {
+			// calls callback
+			return Defaults.chart(getChart()).getTooltips().getCallbacks().getLabelCallback();
+		} else if (Defaults.getGlobal().getTooltips().getCallbacks().getLabelCallback() != null) {
+			// calls callback
+			return Defaults.getGlobal().getTooltips().getCallbacks().getLabelCallback();
 		}
-		// empty string
-		return EMPTY;
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onBeforeLabel(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+	 */
+	@Override
+	public String onBeforeLabel(Object context, TooltipItem item) {
+		TooltipLabelCallback toInvoke = getLabelCallbackToInvoke();
+		// checks if callback is consistent
+		if (toInvoke != null) {
+			// calls callback
+			return toInvoke.onBeforeLabel(getChart(), item);
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onLabel(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+	 */
+	@Override
+	public String onLabel(Object context, TooltipItem item) {
+		TooltipLabelCallback toInvoke = getLabelCallbackToInvoke();
+		// checks if callback is consistent
+		if (toInvoke != null) {
+			// calls callback
+			return toInvoke.onLabel(getChart(), item);
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onLabelColor(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+	 */
+	@Override
+	public TooltipLabelColor onLabelColor(Object context, TooltipItem item) {
+		TooltipLabelCallback toInvoke = getLabelCallbackToInvoke();
+		// checks if callback is consistent
+		if (toInvoke != null) {
+			// calls callback
+			return toInvoke.onLabelColor(getChart(), item);
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onLabelTextColor(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+	 */
+	@Override
+	public IsColor onLabelTextColor(Object context, TooltipItem item) {
+		TooltipLabelCallback toInvoke = getLabelCallbackToInvoke();
+		// checks if callback is consistent
+		if (toInvoke != null) {
+			// calls callback
+			return toInvoke.onLabelTextColor(getChart(), item);
+		}
+		return null;
+
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onAfterLabel(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+	 */
+	@Override
+	public String onAfterLabel(Object context, TooltipItem item) {
+		TooltipLabelCallback toInvoke = getLabelCallbackToInvoke();
+		// checks if callback is consistent
+		if (toInvoke != null) {
+			// calls callback
+			return toInvoke.onAfterLabel(getChart(), item);
+		}
+		return null;
+	}
+
+	private TooltipFooterCallback getFooterCallbackToInvoke() {
+		// checks if callback is consistent
+		if (getFooterCallback() != null) {
+			// calls callback
+			return getFooterCallback();
+		} else if (Defaults.chart(getChart()).getTooltips().getCallbacks().getFooterCallback() != null) {
+			// calls callback
+			return Defaults.chart(getChart()).getTooltips().getCallbacks().getFooterCallback();
+		} else if (Defaults.getGlobal().getTooltips().getCallbacks().getFooterCallback() != null) {
+			// calls callback
+			return Defaults.getGlobal().getTooltips().getCallbacks().getFooterCallback();
+		}
+		return null;
+	}
+
+	
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipFooterHandler#onBeforeFooter(java.lang.Object, java.util.List)
+	 */
+	@Override
+	public String[] onBeforeFooter(Object context, List<TooltipItem> items) {
+		TooltipFooterCallback toInvoke = getFooterCallbackToInvoke();
+		// checks if callback is consistent
+		if (toInvoke != null) {
+			// calls callback
+			return toInvoke.onBeforeFooter(getChart(), items);
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipFooterHandler#onFooter(java.lang.Object, java.util.List)
+	 */
+	@Override
+	public String[] onFooter(Object context, List<TooltipItem> items) {
+		TooltipFooterCallback toInvoke = getFooterCallbackToInvoke();
+		// checks if callback is consistent
+		if (toInvoke != null) {
+			// calls callback
+			return toInvoke.onFooter(getChart(), items);
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipFooterHandler#onAfterFooter(java.lang.Object, java.util.List)
+	 */
+	@Override
+	public String[] onAfterFooter(Object context, List<TooltipItem> items) {
+		TooltipFooterCallback toInvoke = getFooterCallbackToInvoke();
+		// checks if callback is consistent
+		if (toInvoke != null) {
+			// calls callback
+			return toInvoke.onAfterFooter(getChart(), items);
+		}
+		return null;
+	}
+
+	private TooltipTitleCallback getTitleCallbackToInvoke() {
+		// checks if callback is consistent
+		if (getTitleCallback() != null) {
+			// calls callback
+			return getTitleCallback();
+		} else if (Defaults.chart(getChart()).getTooltips().getCallbacks().getTitleCallback() != null) {
+			// calls callback
+			return Defaults.chart(getChart()).getTooltips().getCallbacks().getTitleCallback();
+		} else if (Defaults.getGlobal().getTooltips().getCallbacks().getTitleCallback() != null) {
+			// calls callback
+			return Defaults.getGlobal().getTooltips().getCallbacks().getTitleCallback();
+		}
+		return null;
 	}
 	
-	/**
-	 * Called label color creation.
-	 * @param object java script object tooltips items
-	 * @return label color object.
-	 * @see org.pepstock.charba.client.callbacks.TooltipLabelColor
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipTitleHandler#onBeforeTitle(java.lang.Object, java.util.List)
 	 */
-	protected GenericJavaScriptObject onLabelColor(GenericJavaScriptObject object){
-		// checks if callbacks is set
-		if (labelCallback != null){
-			TooltipItem item = new TooltipItem(object);
-			//FIXME
-//			TooltipLabelColor result = labelCallback.onLabelColor(tooltips.getChart(), item);
-//			if (result != null){
-//				return result.getObject();
-//			}
+	@Override
+	public String[] onBeforeTitle(Object context, List<TooltipItem> items) {
+		TooltipTitleCallback toInvoke = getTitleCallbackToInvoke();
+		// checks if callback is consistent
+		if (toInvoke != null) {
+			// calls callback
+			return toInvoke.onBeforeTitle(getChart(), items);
 		}
-		// default color
-		return DEFAULT_LABEL_COLOR.getObject();
+		return null;
 	}
 
-	/**
-	 * Called after label creation.
-	 * @param object java script object tooltips items
-	 * @return string for label.
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipTitleHandler#onTitle(java.lang.Object, java.util.List)
 	 */
-	protected String onAfterLabel(GenericJavaScriptObject object){
-		// checks if callbacks is set
-		if (labelCallback != null){
-			TooltipItem item = new TooltipItem(object);
-			//FIXME
-//			return labelCallback.onAfterLabel(tooltips.getChart(), item);
+	@Override
+	public String[] onTitle(Object context, List<TooltipItem> items) {
+		TooltipTitleCallback toInvoke = getTitleCallbackToInvoke();
+		// checks if callback is consistent
+		if (toInvoke != null) {
+			// calls callback
+			return toInvoke.onTitle(getChart(), items);
 		}
-		// empty string
-		return EMPTY;
+		return null;
 	}
 
-//	/**
-//	 * Sets the java script code to activate the call back, adding functions.
-//	 * 
-//	 * @param options
-//	 *            java script object where adding new functions definition.
-//	 */
-//    private native void registerNativeTitleHandlers(GenericJavaScriptObject options)/*-{
-//		var self = this;
-//	    options.title = function(items, data){
-//	    	var myItems = new Object();
-//	    	myItems.items = items;
-//        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onTitle(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(myItems);
-//	    }
-//	    options.beforeTitle = function(items, data){
-//	    	var myItems = new Object();
-//	    	myItems.items = items;
-//        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onBeforeTitle(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(myItems);
-//	    }
-//	    options.afterTitle = function(items, data){
-//	    	var myItems = new Object();
-//	    	myItems.items = items;
-//        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onAfterTitle(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(myItems);
-//	    }
-//	}-*/;
-//
-//	/**
-//	 * Sets the java script code to activate the call back, adding functions.
-//	 * 
-//	 * @param options
-//	 *            java script object where adding new functions definition.
-//	 */
-//    private native void registerNativeBodyHandlers(GenericJavaScriptObject options)/*-{
-//		var self = this;
-//	    options.beforeBody = function(items, data){
-//	    	var myItems = new Object();
-//	    	myItems.items = items;
-//        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onBeforeBody(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(myItems);
-//	    }
-//	    options.afterBody = function(items, data){
-//	    	var myItems = new Object();
-//	    	myItems.items = items;
-//        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onAfterBody(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(myItems);
-//	    }
-//	}-*/;
-//
-//	/**
-//	 * Sets the java script code to activate the call back, adding functions.
-//	 * 
-//	 * @param options
-//	 *            java script object where adding new functions definition.
-//	 */
-//    private native void registerNativeFooterHandlers(GenericJavaScriptObject options)/*-{
-//		var self = this;
-//	    options.footer = function(items, data){
-//	    	var myItems = new Object();
-//	    	myItems.items = items;
-//        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onFooter(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(myItems);
-//	    }
-//	    options.beforeFooter = function(items, data){
-//	    	var myItems = new Object();
-//	    	myItems.items = items;
-//        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onBeforeFooter(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(myItems);
-//	    }
-//	    options.afterFooter = function(items, data){
-//	    	var myItems = new Object();
-//	    	myItems.items = items;
-//        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onAfterFooter(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(myItems);
-//	    }
-//	}-*/;
-//    
-//   
-//	/**
-//	 * Sets the java script code to activate the call back, adding functions.
-//	 * 
-//	 * @param options
-//	 *            java script object where adding new functions definition.
-//	 */
-//    private native void registerNativeLabelHandlers(GenericJavaScriptObject options)/*-{
-//		var self = this;
-//	    options.label = function(item, data){
-//        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onLabel(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(item);
-//	    }
-//	    options.beforeLabel = function(item, data){
-//        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onBeforeLabel(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(item);
-//	    }
-//	    options.afterLabel = function(item, chart){
-//        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onAfterLabel(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(item);
-//	    }
-//	    options.labelColor = function(item, chart){
-//        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onLabelColor(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(item);
-//	    }
-//	    options.labelTextColor = function(item, data){
-//        	return self.@org.pepstock.charba.client.options.TooltipsCallbacks::onLabelTextColor(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(item);
-//	    }
-//	}-*/;
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipTitleHandler#onAfterTitle(java.lang.Object, java.util.List)
+	 */
+	@Override
+	public String[] onAfterTitle(Object context, List<TooltipItem> items) {
+		TooltipTitleCallback toInvoke = getTitleCallbackToInvoke();
+		// checks if callback is consistent
+		if (toInvoke != null) {
+			// calls callback
+			return toInvoke.onAfterTitle(getChart(), items);
+		}
+		return null;
+
+	}
 
 }

@@ -13,45 +13,49 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.jsinterop.callbacks;
+package org.pepstock.charba.client.jsinterop.callbacks.handlers;
 
 import java.util.List;
 
 import org.pepstock.charba.client.jsinterop.items.TooltipItem;
-
 
 /**
  * The tooltip label configuration is nested below the tooltip configuration using the callbacks key.<br>
  * The tooltip has the following callbacks for providing text.<br>
  * All functions must return either a string or an array of strings. Arrays of strings are treated as multiple lines of
  * text.<br>
- * This interface takes care about labels to apply to the body.
+ * This interface takes care about labels to apply to the title.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.options.TooltipsCallbacks
+ *
  */
-public interface TooltipBodyHandler {
+public interface TooltipTitleHandler {
 
 	/**
-	 * Returns text to render before the body section.
+	 * Returns the text to render before the title.
 	 * 
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
-	 * @return an array of labels to apply to the body. If returns <code>null</code>, it will be ignored.
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.TooltipItem
+	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored.
 	 */
-	String[] onBeforeBody(Object context, List<TooltipItem> items);
+	String[] onBeforeTitle(Object context, List<TooltipItem> items);
 
 	/**
-	 * Returns text to render after the body section.
+	 * Returns text to render as the title of the tooltip.
 	 * 
 	 * @param chart chart instance
-	 * @param items list of all tooltips items
-	 * @return an array of labels to apply to the body. If returns <code>null</code>, it will be ignored.
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.TooltipItem
+	 * @param items list of all tooltip items
+	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored.
 	 */
-	String[] onAfterBody(Object context, List<TooltipItem> items);
+	String[] onTitle(Object context, List<TooltipItem> items);
+
+	/**
+	 * Returns text to render after the title.
+	 * 
+	 * @param chart chart instance
+	 * @param items list of all tooltip items
+	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored.
+	 */
+	String[] onAfterTitle(Object context, List<TooltipItem> items);
 
 }

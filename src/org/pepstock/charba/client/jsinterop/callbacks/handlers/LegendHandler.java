@@ -13,17 +13,23 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.jsinterop.callbacks;
-
-import org.pepstock.charba.client.jsinterop.items.TooltipItem;
+package org.pepstock.charba.client.jsinterop.callbacks.handlers;
 
 /**
- * Allows filtering of tooltip items.
+ * Sometimes you need a very complex legend. In these cases, it makes sense to generate an HTML legend. Charts provide a
+ * {@link org.pepstock.charba.client.AbstractChart#generateLegend()} method that returns an HTML string for the legend.
  * 
  * @author Andrea "Stock" Stocchero
+ * @see org.pepstock.charba.client.AbstractChart#generateLegend()
  */
-public interface TooltipFilterHandler {
+public interface LegendHandler {
 
-	boolean onFilter(Object context, TooltipItem item);
-	
+	/**
+	 * Creates HTML representation of legend.
+	 * 
+	 * @param chart chart instance
+	 * @param builder uses SafeHTML builder to create HTML
+	 */
+	String generateLegend(Object context);
+
 }

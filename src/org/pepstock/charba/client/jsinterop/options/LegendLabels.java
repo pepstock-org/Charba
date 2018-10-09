@@ -17,9 +17,9 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.callbacks.LegendFilterCallback;
-import org.pepstock.charba.client.jsinterop.callbacks.LegendFilterHandler;
 import org.pepstock.charba.client.jsinterop.callbacks.LegendLabelsCallback;
-import org.pepstock.charba.client.jsinterop.callbacks.LegendLabelsHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.LegendFilterHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.LegendLabelsHandler;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.commons.JsFactory;
