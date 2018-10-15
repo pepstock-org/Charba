@@ -8,6 +8,9 @@
     JsFactory.remove = function(obj, key) {
     	delete obj[key];
     }
+    JsFactory.property = function(obj, key) {
+    	return obj[key];
+    }
     JsFactory.newCallbackProxy = function() {
     	var obj = new Object();
     	obj.callback = null;

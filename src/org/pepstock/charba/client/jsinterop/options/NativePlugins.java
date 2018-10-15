@@ -18,7 +18,7 @@ package org.pepstock.charba.client.jsinterop.options;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeDescriptor;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-import org.pepstock.charba.client.plugins.InvalidPluginIdException;
+import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -66,7 +66,7 @@ final class NativePlugins extends NativeObject {
 	 * @throws InvalidPluginIdException  occurs if the plugin id is invalid.
 	 */
 	@JsOverlay
-	final boolean isEnabled(Key pluginId) throws InvalidPluginIdException{
+	final boolean isEnabled(Key pluginId) {
 		// returns the enablement creating a key by plugin id.
 		return !hasProperty(pluginId);
 	}
@@ -78,9 +78,14 @@ final class NativePlugins extends NativeObject {
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
 	@JsOverlay
-	final <T> void setOptions(Key pluginId, T options) throws InvalidPluginIdException {
+	final <T> void setOptions(Key pluginId, T options) {
 		// stores configuration
 		defineProperty(this, pluginId, options);
+	}
+	
+	@JsOverlay
+	final boolean hasOptions(Key pluginId) {
+		return hasProperty(pluginId);
 	}
 
 	/**
@@ -90,7 +95,7 @@ final class NativePlugins extends NativeObject {
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
 	@JsOverlay
-	final <T> T getOptions(Key pluginId) throws InvalidPluginIdException{
+	final <T> T getOptions(Key pluginId) {
 		// returns the configuration creating a key by plugin id.
 		NativeDescriptor<T> descriptor = getProperty(this, pluginId);
 		if (descriptor != null) {

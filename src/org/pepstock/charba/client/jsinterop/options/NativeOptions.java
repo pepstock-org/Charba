@@ -75,7 +75,7 @@ public final class NativeOptions extends NativeObject{
 	native void setCharbaId(String id);
 
 	@JsProperty
-	native String getCharbaId();
+	public native String getCharbaId();
 
 	@JsProperty
 	native void setResponsive(boolean responsive);

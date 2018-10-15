@@ -22,9 +22,7 @@ import org.pepstock.charba.client.jsinterop.items.TooltipItem;
  * Allows sorting of tooltip items.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.options.Tooltips
  */
-//FIXME
 public interface TooltipItemSortCallback {
 
 	/**
@@ -35,8 +33,6 @@ public interface TooltipItemSortCallback {
 	 * @param item2 the second object to be compared.
 	 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the
 	 *         second.
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
 	int onItemSort(AbstractChart<?, ?> chart, TooltipItem item1, TooltipItem item2);
 

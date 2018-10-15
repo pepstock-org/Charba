@@ -13,15 +13,14 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.plugins.impl;
+package org.pepstock.charba.client.jsinterop.plugins.impl;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.plugins.AbstractPlugin;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.plugins.AbstractPlugin;
 
 import com.google.gwt.canvas.dom.client.Context2d;
-import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * Default plugin implementation to set the background color of chart.<br>
@@ -94,10 +93,15 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDraw(org.pepstock.charba.client.AbstractChart, double)
 	 */
 	@Override
-	public boolean onBeforeDraw(AbstractChart<?, ?> chart, double easing, JavaScriptObject options) {
+	public boolean onBeforeDraw(AbstractChart<?, ?> chart, double easing, Object options) {
+		ChartBackgroundColorOptions bgOptions = null;
 		// creates the plugin options using the java script object
 		// passing also the default color set at constructor.
-		ChartBackgroundColorOptions bgOptions  = new ChartBackgroundColorOptions(options, color);
+		if (options instanceof ChartBackgroundColorOptions) {
+			bgOptions  = (ChartBackgroundColorOptions) options;
+		} else {
+			bgOptions = new ChartBackgroundColorOptions(color);
+		}
 		// gets the canvas
 		Context2d ctx = chart.getCanvas().getContext2d();
 		// set fill canvas color

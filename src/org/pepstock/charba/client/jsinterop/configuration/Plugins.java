@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.jsinterop.options.EventableOptions;
-import org.pepstock.charba.client.plugins.InvalidPluginIdException;
+import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
 
 /**
  * Definitions about plugins options. This is used to configure plugins (mainly the global ones).<br>
@@ -65,6 +65,10 @@ public final class Plugins {
 	 */
 	public <T> void setOptions(String pluginId, T object) throws InvalidPluginIdException {
 		options.getPlugins().setOptions(pluginId, object);
+	}
+	
+	public boolean hasOptions(String pluginId) throws InvalidPluginIdException{
+		return options.getPlugins().hasOptions(pluginId);
 	}
 
 	/**

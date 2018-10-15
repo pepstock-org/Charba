@@ -7,6 +7,7 @@ import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.jsinterop.defaults.DefaultOptions;
 import org.pepstock.charba.client.jsinterop.options.ChartOptionsBuilder;
+import org.pepstock.charba.client.jsinterop.plugins.GlobalPlugins;
 
 public final class Defaults {
 	
@@ -18,8 +19,10 @@ public final class Defaults {
 	
 	private final GlobalScale scale;
 	
+	private final GlobalPlugins plugins;
+	
 	private final Map<String, ChartOptions> chartOptions = new HashMap<>();
-
+	
 	/**
 	 * @param nativeObject
 	 */
@@ -29,6 +32,7 @@ public final class Defaults {
 		this.nativeObject = Chart.getDefaults();
 		this.options = new GlobalOptions(DefaultOptions.get(), nativeObject.getGlobal());
 		this.scale = new GlobalScale(nativeObject.getScale());
+		this.plugins = new GlobalPlugins(Chart.getPlugins());
 	}
 	
 	public static GlobalOptions getGlobal() {
@@ -37,6 +41,10 @@ public final class Defaults {
 
 	public static GlobalScale getScale() {
 		return INSTANCE.scale;
+	}
+	
+	public static GlobalPlugins getPlugins() {
+		return INSTANCE.plugins;
 	}
 
 	public static ChartOptions options(Type type) {
@@ -54,40 +62,6 @@ public final class Defaults {
 		return INSTANCE.chartOptions.get(type.name());
 	}
 
-	
-//	@JsProperty(name = "stock")
-//	native void setInternalStock(Object value);
-//
-//	@JsProperty(name = "stock")
-//	native Object getInternalStock();
-//
-//	@JsOverlay
-//	public final Object getObject(Type type) {
-//		if (hasOwnProperty(type.name())) {
-//			return BaseObject.getOwnPropertyDescriptor(this, type.name()).getValue();
-//		}
-//		return null;
-//	}
-//	
-//	
-//	@JsOverlay
-//	public final void setStock(double... values) {
-//		setInternalStock(values);
-//	}
-//	
-//	@JsOverlay
-//	public final void setStock(double value) {
-//		setInternalStock(value);
-//	}
-//	
-//	@JsOverlay
-//	public final double[] getStock() {
-//		Object obj = getInternalStock();
-//		if (Array.isArray(obj)) {
-//			return (double[]) obj;
-//		} else {
-//			return new double[] {(double)obj};
-//		}
-//	}
+
 	
 }

@@ -24,9 +24,7 @@ import org.pepstock.charba.client.jsinterop.items.TooltipModel;
  * Generally this is used to create an HTML tooltip instead of an on canvas one.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.options.Tooltips
  */
-//FIXME
 public interface TooltipCustomCallback {
 
 	/**
@@ -35,8 +33,6 @@ public interface TooltipCustomCallback {
 	 * 
 	 * @param chart chart instance
 	 * @param model all info about tooltip to create own HTML tooltip.
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.TooltipModel
 	 */
 	void onCustom(AbstractChart<?, ?> chart, TooltipModel model);
 

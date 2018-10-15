@@ -21,6 +21,8 @@ import org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.jsinterop.data.Data;
 import org.pepstock.charba.client.jsinterop.data.NativeData;
 import org.pepstock.charba.client.jsinterop.options.NativeOptions;
+import org.pepstock.charba.client.jsinterop.plugins.ArrayPlugin;
+import org.pepstock.charba.client.jsinterop.plugins.Plugins;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -46,8 +48,8 @@ public final class Configuration extends NativeObject {
 	@JsProperty
 	public native void setData(NativeData data);
 
-//	@JsProperty(name = "plugins") // FIXME
-//	native void setNativePlugins(Object plugins);
+	@JsProperty 
+	public native void setPlugins(ArrayPlugin plugins);
 
 	/**
 	 * Sets the type of chart.
@@ -79,14 +81,15 @@ public final class Configuration extends NativeObject {
 	void setData(Data data) {
 		data.load(this);
 	}
-//
-//	/**
-//	 * Sets the plugins of chart.
-//	 * 
-//	 * @param plugins the plugins of chart.
-//	 */
-//	void setPlugins(Plugins plugins) {
-//		setObjectArray(Property.plugins, plugins.getArrayList());
-//	}
+
+	/**
+	 * Sets the plugins of chart.
+	 * 
+	 * @param plugins the plugins of chart.
+	 */
+	@JsOverlay
+	void setPlugins(Plugins plugins) {
+		plugins.load(this);
+	}
 
 }

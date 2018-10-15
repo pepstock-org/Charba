@@ -22,10 +22,7 @@ import org.pepstock.charba.client.jsinterop.items.TooltipItem;
  * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.items.TooltipItem
- * @see org.pepstock.charba.client.options.Tooltips
- * @see org.pepstock.charba.client.callbacks.FilterHandler
  */
-//FIXME
 public interface TooltipFilterCallback extends FilterCallback<TooltipItem> {
 
 }

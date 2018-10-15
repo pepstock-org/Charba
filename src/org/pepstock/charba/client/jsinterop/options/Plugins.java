@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
-import org.pepstock.charba.client.plugins.InvalidPluginIdException;
-import org.pepstock.charba.client.plugins.PluginIdChecker;
+import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
+import org.pepstock.charba.client.jsinterop.plugins.PluginIdChecker;
 
 /**
  * Definitions about plugins options. This is used to configure plugins (mainly the global ones).<br>
@@ -79,6 +79,10 @@ public final class Plugins extends BaseModel<BaseOptions<?,?>, Void, NativePlugi
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
+	
+	public boolean hasOptions(String pluginId) throws InvalidPluginIdException{
+		return getDelegated().hasOptions(PluginIdChecker.key(pluginId));
+	}
 
 	/**
 	 * Returns the plugin options, if exist.
@@ -87,7 +91,6 @@ public final class Plugins extends BaseModel<BaseOptions<?,?>, Void, NativePlugi
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
 	public <T> T getOptions(String pluginId) throws InvalidPluginIdException{
-		// returns the configuration creating a key by plugin id.
 		return getDelegated().getOptions(PluginIdChecker.key(pluginId));
 	}
 	

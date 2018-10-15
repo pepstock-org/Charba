@@ -13,18 +13,14 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.plugins;
+package org.pepstock.charba.client.jsinterop.plugins;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Plugin;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.events.ChartNativeEvent;
-import org.pepstock.charba.client.items.SizeItem;
-import org.pepstock.charba.client.items.TooltipModel;
-
-import com.google.gwt.core.client.JavaScriptObject;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.Plugin;
+import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
+import org.pepstock.charba.client.jsinterop.items.DatasetPluginItem;
+import org.pepstock.charba.client.jsinterop.items.SizeItem;
+import org.pepstock.charba.client.jsinterop.items.TooltipPluginItem;
 
 /**
  * Wraps a plugin, delegating the execution of all hooks to it.<br>
@@ -33,17 +29,11 @@ import com.google.gwt.core.client.JavaScriptObject;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class WrapperPlugin extends JavaScriptObjectContainer {
-
+abstract class WrapperPlugin {
+	
 	private final Plugin delegation;
-
-	/**
-	 * Name of fields of JavaScript object.
-	 */
-	private enum Property implements Key
-	{
-		id
-	}
+	
+	private final NativePlugin nativeObject;
 
 	/**
 	 * Builds the object with plugin instance
@@ -54,9 +44,8 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 		// stores the plugin
 		this.delegation = delegation;
 		// sets the plugin ID
-		setValue(Property.id, delegation.getId());
-		// registers itself with all methods of plugin definition
-		registerNativePluginsHandler(getJavaScriptObject());
+		nativeObject = new NativePlugin(this);
+		nativeObject.setId(delegation.getId());
 	}
 
 	/**
@@ -75,6 +64,13 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	final String getId() {
 		return delegation.getId();
 	}
+	
+	/**
+	 * @return the nativeObject
+	 */
+	NativePlugin getNativeObject() {
+		return nativeObject;
+	}
 
 	/**
 	 * Returns the options that the user specified into the chart option
@@ -82,10 +78,14 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param chart chart instance
 	 * @return the java script object with options or <code>null</code> if not exist.
 	 */
-	private JavaScriptObject getOptions(AbstractChart<?, ?> chart) {
+	private Object getOptions(AbstractChart<?, ?> chart) {
 		try {
-			// returns the options of chart, stored by plugin id
-			return chart.getOptions().getPlugins().getOptions(getId());
+			if (chart.getOptions().getPlugins().hasOptions(getId())) {
+				// returns the options of chart, stored by plugin id
+				return chart.getOptions().getPlugins().getOptions(getId());
+			} else {
+				return null;
+			}
 		} catch (InvalidPluginIdException e) {
 			// plugin id is invalid
 			// returns null
@@ -219,12 +219,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param datasetIndex The dataset index.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	protected boolean onBeforeDatasetUpdate(String chartId, int datasetIndex) {
+	protected boolean onBeforeDatasetUpdate(String chartId, DatasetPluginItem item) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			return delegation.onBeforeDatasetUpdate(chart, datasetIndex, getOptions(chart));
+			return delegation.onBeforeDatasetUpdate(chart, item, getOptions(chart));
 		}
 		return true;
 	}
@@ -236,12 +236,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param chartId chart id.
 	 * @param datasetIndex The dataset index.
 	 */
-	protected void onAfterDatasetUpdate(String chartId, int datasetIndex) {
+	protected void onAfterDatasetUpdate(String chartId, DatasetPluginItem item) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onAfterDatasetUpdate(chart, datasetIndex, getOptions(chart));
+			delegation.onAfterDatasetUpdate(chart, item, getOptions(chart));
 		}
 	}
 
@@ -284,12 +284,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart drawing.
 	 */
-	protected boolean onBeforeDraw(String chartId, String easing) {
+	protected boolean onBeforeDraw(String chartId, double easing) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			return delegation.onBeforeDraw(chart, Double.valueOf(easing), getOptions(chart));
+			return delegation.onBeforeDraw(chart, easing, getOptions(chart));
 		}
 		return true;
 	}
@@ -301,12 +301,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param chartId chart id.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	protected void onAfterDraw(String chartId, String easing) {
+	protected void onAfterDraw(String chartId, double easing) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onAfterDraw(chart, Double.valueOf(easing), getOptions(chart));
+			delegation.onAfterDraw(chart, easing, getOptions(chart));
 		}
 	}
 
@@ -318,12 +318,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	protected boolean onBeforeDatasetsDraw(String chartId, String easing) {
+	protected boolean onBeforeDatasetsDraw(String chartId, double easing) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			return delegation.onBeforeDatasetsDraw(chart, Double.valueOf(easing), getOptions(chart));
+			return delegation.onBeforeDatasetsDraw(chart, easing, getOptions(chart));
 		}
 		return true;
 	}
@@ -335,12 +335,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param chartId chart id.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	protected void onAfterDatasetsDraw(String chartId, String easing) {
+	protected void onAfterDatasetsDraw(String chartId, double easing) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onAfterDatasetsDraw(chart, Double.valueOf(easing), getOptions(chart));
+			delegation.onAfterDatasetsDraw(chart, easing, getOptions(chart));
 		}
 	}
 
@@ -353,12 +353,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	protected boolean onBeforeDatasetDraw(String chartId, int datasetIndex, String easing) {
+	protected boolean onBeforeDatasetDraw(String chartId, DatasetPluginItem item) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			return delegation.onBeforeDatasetDraw(chart, datasetIndex, Double.valueOf(easing), getOptions(chart));
+			return delegation.onBeforeDatasetDraw(chart, item, getOptions(chart));
 		}
 		return true;
 	}
@@ -371,12 +371,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param datasetIndex The dataset index.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	protected void onAfterDatasetDraw(String chartId, int datasetIndex, String easing) {
+	protected void onAfterDatasetDraw(String chartId, DatasetPluginItem item) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onAfterDatasetDraw(chart, datasetIndex, Double.valueOf(easing), getOptions(chart));
+			delegation.onAfterDatasetDraw(chart, item, getOptions(chart));
 		}
 	}
 
@@ -389,13 +389,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart tooltip drawing.
 	 */
-	protected boolean onBeforeTooltipDraw(String chartId, GenericJavaScriptObject object, String easing) {
+	protected boolean onBeforeTooltipDraw(String chartId, TooltipPluginItem item) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			TooltipModel model = new TooltipModel(object);
-			return delegation.onBeforeTooltipDraw(chart, model, Double.valueOf(easing), getOptions(chart));
+			return delegation.onBeforeTooltipDraw(chart, item, getOptions(chart));
 		}
 		return true;
 	}
@@ -408,13 +407,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param object The tooltip model instance as java script object.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	protected void onAfterTooltipDraw(String chartId, GenericJavaScriptObject object, String easing) {
+	protected void onAfterTooltipDraw(String chartId, TooltipPluginItem item) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			TooltipModel model = new TooltipModel(object);
-			delegation.onAfterTooltipDraw(chart, model, Double.valueOf(easing), getOptions(chart));
+			delegation.onAfterTooltipDraw(chart, item, getOptions(chart));
 		}
 	}
 
@@ -457,12 +455,12 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 	 * @param chartId chart id.
 	 * @param item The new canvas display size (eq. canvas.style width & height).
 	 */
-	protected void onResize(String chartId, GenericJavaScriptObject item) {
+	protected void onResize(String chartId, SizeItem item) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onResize(chart, new SizeItem(item), getOptions(chart));
+			delegation.onResize(chart, item, getOptions(chart));
 		}
 	}
 
@@ -478,142 +476,5 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 			delegation.onDestroy(chart, getOptions(chart));
 		}
 	}
-
-	/**
-	 * Wraps the protected method to get the java script object.
-	 * 
-	 * @return the java script object.
-	 */
-	GenericJavaScriptObject getObject() {
-		return getJavaScriptObject();
-	}
-	
-	/**
-	 * Creates the java script functions to get the control when the hook is invoked.
-	 * 
-	 * @param config java script object of plugin.
-	 */
-	private native void registerNativePluginsHandler(GenericJavaScriptObject config)/*-{
-	var self = this;
-
-	// init
-	config.beforeInit = function(chart, option) {
-		self.@org.pepstock.charba.client.plugins.WrapperPlugin::onBeforeInit(Ljava/lang/String;)(chart.options.charbaId);
-		return;
-	}
-	config.afterInit = function(chart, option) {
-		self.@org.pepstock.charba.client.plugins.WrapperPlugin::onAfterInit(Ljava/lang/String;)(chart.options.charbaId);
-		return;
-	}
-
-	// update
-	config.beforeUpdate = function(chart, option) {
-		return self.@org.pepstock.charba.client.plugins.WrapperPlugin::onBeforeUpdate(Ljava/lang/String;)(chart.options.charbaId);
-	}
-	config.afterUpdate = function(chart, option) {
-		self.@org.pepstock.charba.client.plugins.WrapperPlugin::onAfterUpdate(Ljava/lang/String;)(chart.options.charbaId);
-		return;
-	}
-	
-	// layout
-	config.beforeLayout = function(chart, option) {
-		return self.@org.pepstock.charba.client.plugins.WrapperPlugin::onBeforeLayout(Ljava/lang/String;)(chart.options.charbaId);
-	}
-	config.afterLayout = function(chart, option) {
-		self.@org.pepstock.charba.client.plugins.WrapperPlugin::onAfterLayout(Ljava/lang/String;)(chart.options.charbaId);
-		return;
-	}
-	
-	// datasets
-	config.beforeDatasetsUpdate = function(chart, option) {
-		return self.@org.pepstock.charba.client.plugins.WrapperPlugin::onBeforeDatasetsUpdate(Ljava/lang/String;)(chart.options.charbaId);
-	}
-	config.afterDatasetsUpdate = function(chart, option) {
-		self.@org.pepstock.charba.client.plugins.WrapperPlugin::onAfterDatasetsUpdate(Ljava/lang/String;)(chart.options.charbaId);
-		return;
-	}
-	
-	// dataset
-	config.beforeDatasetUpdate = function(chart, args, option) {
-		return self.@org.pepstock.charba.client.plugins.WrapperPlugin::onBeforeDatasetUpdate(Ljava/lang/String;I)(chart.options.charbaId, args.index);
-	}
-	config.afterDatasetUpdate = function(chart, args, option) {
-		self.@org.pepstock.charba.client.plugins.WrapperPlugin::onAfterDatasetUpdate(Ljava/lang/String;I)(chart.options.charbaId, args.index);
-		return;
-	}
-
-	// render
-	config.beforeRender = function(chart, option) {
-		return self.@org.pepstock.charba.client.plugins.WrapperPlugin::onBeforeRender(Ljava/lang/String;)(chart.options.charbaId);
-	}
-	config.afterRender = function(chart, option) {
-		self.@org.pepstock.charba.client.plugins.WrapperPlugin::onAfterRender(Ljava/lang/String;)(chart.options.charbaId);
-		return;
-	}
-	
-	// draw
-	config.beforeDraw = function(chart, easing) {
-		return self.@org.pepstock.charba.client.plugins.WrapperPlugin::onBeforeDraw(Ljava/lang/String;Ljava/lang/String;)(chart.options.charbaId, easing);
-	}
-	config.afterDraw = function(chart, easing) {
-		self.@org.pepstock.charba.client.plugins.WrapperPlugin::onAfterDraw(Ljava/lang/String;Ljava/lang/String;)(chart.options.charbaId, easing);
-		return;
-	}
-
-	// datasets draw
-	config.beforeDatasetsDraw = function(chart, easing) {
-		return self.@org.pepstock.charba.client.plugins.WrapperPlugin::onBeforeDatasetsDraw(Ljava/lang/String;Ljava/lang/String;)(chart.options.charbaId, easing);
-	}
-	config.afterDatasetsDraw = function(chart, easing) {
-		self.@org.pepstock.charba.client.plugins.WrapperPlugin::onAfterDatasetsDraw(Ljava/lang/String;Ljava/lang/String;)(chart.options.charbaId, easing);
-		return;
-	}
-
-	// dataset draw
-	config.beforeDatasetDraw = function(chart, args, option) {
-		return self.@org.pepstock.charba.client.plugins.WrapperPlugin::onBeforeDatasetDraw(Ljava/lang/String;ILjava/lang/String;)(chart.options.charbaId, args.index, args.easingValue);
-	}
-	config.afterDatasetDraw = function(chart, args, option) {
-		self.@org.pepstock.charba.client.plugins.WrapperPlugin::onAfterDatasetDraw(Ljava/lang/String;ILjava/lang/String;)(chart.options.charbaId, args.index, args.easingValue);
-		return;
-	}
-
-	// tooltip draw
-	config.beforeTooltipDraw = function(chart, args, option) {
-		return self.@org.pepstock.charba.client.plugins.WrapperPlugin::onBeforeTooltipDraw(Ljava/lang/String;Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;Ljava/lang/String;)(chart.options.charbaId, args.tooltip._model, args.easingValue);
-	}
-	config.afterTooltipDraw = function(chart, args, option) {
-		self.@org.pepstock.charba.client.plugins.WrapperPlugin::onAfterTooltipDraw(Ljava/lang/String;Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;Ljava/lang/String;)(chart.options.charbaId, args.tooltip._model, args.easingValue);
-		return;
-	}
-
-	// event
-	config.beforeEvent = function(chart, event, option) {
-		//console.log("--- event ---");
-		//console.log(event);
-		// uses the syntax ["native"] because . syntaz is not accepted
-		return self.@org.pepstock.charba.client.plugins.WrapperPlugin::onBeforeEvent(Ljava/lang/String;Lorg/pepstock/charba/client/events/ChartNativeEvent;)(chart.options.charbaId, event["native"]);
-	}
-	config.afterEvent = function(chart, event, option) {
-		// uses the syntax ["native"] because . syntaz is not accepted
-		self.@org.pepstock.charba.client.plugins.WrapperPlugin::onAfterEvent(Ljava/lang/String;Lorg/pepstock/charba/client/events/ChartNativeEvent;)(chart.options.charbaId, event["native"]);
-		return;
-	}
-
-	// resize
-	config.resize = function(chart, size, option) {
-		self.@org.pepstock.charba.client.plugins.WrapperPlugin::onResize(Ljava/lang/String;Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(chart.options.charbaId, size);
-		return;
-	}
-
-
-	// destroy
-	config.destroy = function(chart, option) {
-		self.@org.pepstock.charba.client.plugins.WrapperPlugin::onDestroy(Ljava/lang/String;)(chart.options.charbaId);
-		return;
-	}
-
-
-	}-*/;
 
 }

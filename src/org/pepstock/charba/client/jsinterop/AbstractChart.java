@@ -26,6 +26,7 @@ import org.pepstock.charba.client.jsinterop.data.Dataset;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
 import org.pepstock.charba.client.jsinterop.items.DatasetItem;
 import org.pepstock.charba.client.jsinterop.items.DatasetMetaItem;
+import org.pepstock.charba.client.jsinterop.plugins.Plugins;
 import org.pepstock.charba.client.jsinterop.utils.JSON;
 import org.pepstock.charba.client.jsinterop.utils.Window;
 
@@ -61,6 +62,8 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	// reference to Chart.js chart instance
 	private Chart chart = null;
 	
+	private ChartNode node = null;
+	
 	// chart ID using GWT unique id
 	private final String id = Document.get().createUniqueId();
 	
@@ -75,7 +78,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	// Data element of configuration
 	private final Data data = new Data();
 	// plugins of this chart
-//	private final Plugins plugins;
+	private final Plugins plugins;
 	// flag if must be draw on attach
 	private boolean drawOnAttach = true;
 	// flag if must be destroy on detach
@@ -119,7 +122,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		Injector.ensureInjected();
 		// creates plugins container
 		//FIXME
-//		plugins = new Plugins(this);
+		plugins = new Plugins(this);
 		// creates global options
 		options = Defaults.options(getType());
 	}
@@ -162,8 +165,8 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * Returns the chart node with runtime data.
 	 * @return the chart node.
 	 */
-	public final Chart getNode(){
-		return chart;
+	public final ChartNode getNode(){
+		return node;
 	}
 
 	/**
@@ -176,10 +179,9 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	/**
 	 * @return the plugins configuration object
 	 */
-	//FIXME
-//	public final Plugins getPlugins() {
-//		return plugins;
-//	}
+	public final Plugins getPlugins() {
+		return plugins;
+	}
 
 	/**
 	 * @return the options
@@ -467,16 +469,18 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			configuration.setOptions(options);
 			configuration.setData(data);
 			
-			Window.getConsole().log(configuration);
-
-			// FIXME
-//			configuration.setPlugins(plugins);
+			configuration.setPlugins(plugins);
 			// destroy chart if chart is already instantiated
 			destroy();
 			// stores teh chart instance into collection
 			Charts.add(this);
+
+			Window.getConsole().log(configuration);
+
 			// draws chart with configuration
 			chart = new Chart(canvas.getContext2d(), configuration);
+			// stores the chart to node wrapper
+			node = new ChartNode(chart);
 		}
 	}
 
