@@ -232,6 +232,8 @@ public final class Legend extends EventProvider {
     private native void registerNativeClickHandler(GenericJavaScriptObject options)/*-{
 		var self = this;
 	    options.onClick = function(event, legendItem){
+	    console.log("THIS");
+	    console.log(this);
 	    	self.@org.pepstock.charba.client.options.Legend::onClick(Lorg/pepstock/charba/client/events/ChartNativeEvent;Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(event, legendItem);
 	    }
 	}-*/;
@@ -245,6 +247,9 @@ public final class Legend extends EventProvider {
     private native void registerNativeHoverHandler(GenericJavaScriptObject options)/*-{
 		var self = this;
 	    options.onHover = function(event, legendItem){
+   	    	console.log("THIS");
+	    	console.log(this);
+
 	    	self.@org.pepstock.charba.client.options.Legend::onHover(Lorg/pepstock/charba/client/events/ChartNativeEvent;Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(event, legendItem);
 	    }
 	}-*/;

@@ -1,7 +1,7 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.jsinterop.commons.JsFactory;
+import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
@@ -37,7 +37,7 @@ public abstract class BaseModel<P extends BaseModel<?,?,?>, D,  O extends Native
 	}
 
 	protected final void remove(Key key) {
-		JsFactory.remove(getNativeObject(), key.name());
+		JsHelper.remove(getNativeObject(), key.name());
 	}
 
 	protected final O getDelegated() {

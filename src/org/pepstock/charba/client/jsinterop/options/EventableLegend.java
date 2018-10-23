@@ -16,12 +16,13 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
-import org.pepstock.charba.client.jsinterop.commons.JsFactory;
+import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
-import org.pepstock.charba.client.jsinterop.events.LegendClickCallbackHandler;
-import org.pepstock.charba.client.jsinterop.events.LegendHoverCallbackHandler;
+import org.pepstock.charba.client.jsinterop.events.handlers.LegendClickCallbackHandler;
+import org.pepstock.charba.client.jsinterop.events.handlers.LegendHoverCallbackHandler;
 import org.pepstock.charba.client.jsinterop.items.LegendItem;
 
 import jsinterop.annotations.JsFunction;
@@ -36,17 +37,17 @@ public final class EventableLegend extends Legend {
 	
 	@JsFunction
 	interface ProxyLegendClickCallback {
-		void call(Object context, ChartNativeEvent event, LegendItem item);
+		void call(Chart chart, ChartNativeEvent event, LegendItem item);
 	}
 
 	@JsFunction
 	public interface ProxyLegendHoverCallback {
-		void call(Object context, ChartNativeEvent event, LegendItem item);
+		void call(Chart chart, ChartNativeEvent event, LegendItem item);
 	}
 	
-	private final CallbackProxy<ProxyLegendClickCallback> clickCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyLegendClickCallback> clickCallbackProxy = JsHelper.newCallbackProxy();
 
-	private final CallbackProxy<ProxyLegendHoverCallback> hoverCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyLegendHoverCallback> hoverCallbackProxy = JsHelper.newCallbackProxy();
 	
 	private LegendClickCallbackHandler clickCallbackHandler = null;
 	
@@ -69,9 +70,9 @@ public final class EventableLegend extends Legend {
 			 * @see org.pepstock.charba.client.jsinterop.options.EventableLegend.ProxyLegendClickCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.items.LegendItem)
 			 */
 			@Override
-			public void call(Object context, ChartNativeEvent event, LegendItem item) {
+			public void call(Chart chart, ChartNativeEvent event, LegendItem item) {
 				if (clickCallbackHandler != null) {
-					clickCallbackHandler.onClick(context, event, item);
+					clickCallbackHandler.onClick(chart, event, item);
 				}
 			}
 			
@@ -82,9 +83,9 @@ public final class EventableLegend extends Legend {
 			 * @see org.pepstock.charba.client.jsinterop.options.EventableLegend.ProxyLegendHoverCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.items.LegendItem)
 			 */
 			@Override
-			public void call(Object context, ChartNativeEvent event, LegendItem item) {
+			public void call(Chart chart, ChartNativeEvent event, LegendItem item) {
 				if (hoverCallbackHandler != null) {
-					hoverCallbackHandler.onHover(context, event, item);
+					hoverCallbackHandler.onHover(chart, event, item);
 				}
 			}
 			

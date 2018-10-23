@@ -17,7 +17,6 @@ package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.ChartOptions;
-import org.pepstock.charba.client.jsinterop.configuration.scales.Axis;
 
 /**
  * Configuration of chart with only 1 scale.

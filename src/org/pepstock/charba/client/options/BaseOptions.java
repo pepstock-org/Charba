@@ -493,6 +493,8 @@ public abstract class BaseOptions extends EventProvider {
 	private native void registerNativeResizeHandler(GenericJavaScriptObject options)/*-{
 		var self = this;
 		options.onResize = function(chart, size) {
+		console.log("THIS");
+		console.log(this);
 			self.@org.pepstock.charba.client.options.BaseOptions::onResize(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(size);
 			return;
 		}
@@ -507,6 +509,8 @@ public abstract class BaseOptions extends EventProvider {
 	private native void registerNativeLegendHandler(GenericJavaScriptObject options)/*-{
 		var self = this;
 		options.legendCallback = function(chart) {
+		console.log("THIS");
+		console.log(this);
 			return self.@org.pepstock.charba.client.options.BaseOptions::generateLegend()();
 		}
 	}-*/;

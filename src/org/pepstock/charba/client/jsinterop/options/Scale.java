@@ -15,14 +15,35 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
 import org.pepstock.charba.client.enums.ScaleDistribution;
+import org.pepstock.charba.client.jsinterop.callbacks.AxisBuildTicksCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.AxisCalculateTickRotationCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.AxisDataLimitsCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.AxisDimensionsCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.AxisFitCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.AxisTickToLabelConversionCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.AxisUpdateCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisBuildTicksHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisCalculateTickRotationHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisDataLimitsHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisDimensionsHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisFitHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisTickToLabelConversionHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisUpdateHandler;
+import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.commons.Enumer;
+import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
+import org.pepstock.charba.client.jsinterop.items.AxisItem;
 import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
+import org.pepstock.charba.client.jsinterop.utils.Window;
+
+import jsinterop.annotations.JsFunction;
 
 /**
  * Axes are an integral part of a chart. They are used to determine how data maps to a pixel value on the chart. <br>
@@ -41,6 +62,76 @@ import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
  */
 public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeScale>{
 	
+	@JsFunction
+	interface ProxyBeforeUpdateCallback {
+		void call(Window window, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyBeforeSetDimensionsCallback {
+		void call(Window window, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyAfterSetDimensionsCallback {
+		void call(Window window, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyBeforeDataLimitsCallback {
+		void call(Window window, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyAfterDataLimitsCallback {
+		void call(Window window, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyBeforeBuildTicksCallback {
+		void call(Window window, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyAfterBuildTicksCallback {
+		void call(Window window, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyBeforeTickToLabelConversionCallback {
+		void call(Window window, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyAfterTickToLabelConversionCallback {
+		void call(Window window, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyBeforeCalculateTickRotationCallback {
+		void call(Window window, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyAfterCalculateTickRotationCallback {
+		void call(Window window, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyBeforeFitCallback {
+		void call(Window window, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyAfterFitCallback {
+		void call(Window window, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyAfterUpdateCallback {
+		void call(Window window, AxisItem item);
+	}
+
 	private final GridLines gridLines;
 
 	private final Ticks ticks;
@@ -52,6 +143,83 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 	private final PointLabels pointLabels;
 	
 	private final Time time;
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	enum Property implements Key
+	{
+		beforeUpdate,
+		beforeSetDimensions,
+		afterSetDimensions,
+		beforeDataLimits,
+		afterDataLimits,
+		beforeBuildTicks,
+		afterBuildTicks,
+		beforeTickToLabelConversion,
+		afterTickToLabelConversion,
+		beforeCalculateTickRotation,
+		afterCalculateTickRotation,
+		beforeFit,
+		afterFit,
+		afterUpdate
+	}
+
+	private final CallbackProxy<ProxyBeforeUpdateCallback> beforeUpdateCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyBeforeSetDimensionsCallback> beforeSetDimensionsCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyAfterSetDimensionsCallback> afterSetDimensionsCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyBeforeDataLimitsCallback> beforeDataLimitsCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyAfterDataLimitsCallback> afterDataLimitsCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyBeforeBuildTicksCallback> beforeBuildTicksCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyAfterBuildTicksCallback> afterBuildTicksCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyBeforeTickToLabelConversionCallback> beforeTickToLabelConversionCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyAfterTickToLabelConversionCallback> afterTickToLabelConversionCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyBeforeCalculateTickRotationCallback> beforeCalculateTickRotationCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyAfterCalculateTickRotationCallback> afterCalculateTickRotationCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyBeforeFitCallback> beforeFitCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyAfterFitCallback> afterFitCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyAfterUpdateCallback> afterUpdateCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private AxisBuildTicksCallback axisBuildTicksCallback = null;
+	
+	private AxisCalculateTickRotationCallback axisCalculateTickRotationCallback = null;
+	
+	private AxisDataLimitsCallback axisDataLimitsCallback = null;
+	
+	private AxisDimensionsCallback axisDimensionsCallback = null;
+	
+	private AxisFitCallback axisFitCallback = null;
+	
+	private AxisTickToLabelConversionCallback axisTickToLabelConversionCallback = null;
+	
+	private AxisUpdateCallback axisUpdateCallback = null;
+	
+	private AxisBuildTicksHandler axisBuildTicksHandler = null;
+	
+	private AxisCalculateTickRotationHandler axisCalculateTickRotationHandler = null;
+	
+	private AxisDataLimitsHandler axisDataLimitsHandler = null;
+	
+	private AxisDimensionsHandler axisDimensionsHandler = null;
+	
+	private AxisFitHandler axisFitHandler = null;
+	
+	private AxisTickToLabelConversionHandler axisTickToLabelConversionHandler = null;
+	
+	private AxisUpdateHandler axisUpdateHandler = null;
 
 	// here scale is ROOT
 	public Scale(IsDefaultScale defaultValues) {
@@ -71,6 +239,145 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 		scaleLabel = new ScaleLabel(this, getDefaultValues().getScaleLabel(), getDelegated().getScaleLabel());
 		ticks = new Ticks(this, getDefaultValues().getTicks(), getDelegated().getTicks());
 		time = new Time(this, getDefaultValues().getTime(), getDelegated().getTime());
+		beforeUpdateCallbackProxy.setCallback(new ProxyBeforeUpdateCallback() {
+
+			@Override
+			public void call(Window window, AxisItem item) {
+				if (axisUpdateHandler != null) {
+					axisUpdateHandler.onBeforeUpdate(window, item);
+				}
+			}
+		});
+
+		beforeSetDimensionsCallbackProxy.setCallback(new ProxyBeforeSetDimensionsCallback() {
+
+			@Override
+			public void call(Window window, AxisItem item) {
+				if (axisDimensionsHandler != null) {
+					axisDimensionsHandler.onBeforeSetDimensions(window, item);
+				}
+			}
+		});
+
+		afterSetDimensionsCallbackProxy.setCallback(new ProxyAfterSetDimensionsCallback() {
+
+			@Override
+			public void call(Window window, AxisItem item) {
+				if (axisDimensionsHandler != null) {
+					axisDimensionsHandler.onAfterSetDimensions(window, item);
+				}
+			}
+		});
+
+		beforeDataLimitsCallbackProxy.setCallback(new ProxyBeforeDataLimitsCallback() {
+
+			@Override
+			public void call(Window window, AxisItem item) {
+				if (axisDataLimitsHandler != null) {
+					axisDataLimitsHandler.onBeforeDataLimits(window, item);
+				}
+			}
+		});
+
+		afterDataLimitsCallbackProxy.setCallback(new ProxyAfterDataLimitsCallback() {
+
+			@Override
+			public void call(Window window, AxisItem item) {
+				if (axisDataLimitsHandler != null) {
+					axisDataLimitsHandler.onAfterDataLimits(window, item);
+				}
+			}
+		});
+
+		beforeBuildTicksCallbackProxy.setCallback(new ProxyBeforeBuildTicksCallback() {
+
+			@Override
+			public void call(Window window, AxisItem item) {
+				if (axisBuildTicksHandler != null) {
+					axisBuildTicksHandler.onBeforeBuildTicks(window, item);
+				}
+			}
+		});
+
+		afterBuildTicksCallbackProxy.setCallback(new ProxyAfterBuildTicksCallback() {
+
+			@Override
+			public void call(Window window, AxisItem item) {
+				if (axisBuildTicksHandler != null) {
+					axisBuildTicksHandler.onAfterBuildTicks(window, item);
+				}
+			}
+		});
+
+		beforeTickToLabelConversionCallbackProxy.setCallback(new ProxyBeforeTickToLabelConversionCallback() {
+
+			@Override
+			public void call(Window window, AxisItem item) {
+				if (axisTickToLabelConversionHandler != null) {
+					axisTickToLabelConversionHandler.onBeforeTickToLabelConversion(window, item);
+				}
+			}
+		});
+
+		afterTickToLabelConversionCallbackProxy.setCallback(new ProxyAfterTickToLabelConversionCallback() {
+
+			@Override
+			public void call(Window window, AxisItem item) {
+				if (axisTickToLabelConversionHandler != null) {
+					axisTickToLabelConversionHandler.onAfterTickToLabelConversion(window, item);
+				}
+			}
+		});
+
+		beforeCalculateTickRotationCallbackProxy.setCallback(new ProxyBeforeCalculateTickRotationCallback() {
+
+			@Override
+			public void call(Window window, AxisItem item) {
+				if (axisCalculateTickRotationHandler != null) {
+					axisCalculateTickRotationHandler.onBeforeCalculateTickRotation(window, item);
+				}
+			}
+		});
+
+		afterCalculateTickRotationCallbackProxy.setCallback(new ProxyAfterCalculateTickRotationCallback() {
+
+			@Override
+			public void call(Window window, AxisItem item) {
+				if (axisCalculateTickRotationHandler != null) {
+					axisCalculateTickRotationHandler.onAfterCalculateTickRotation(window, item);
+				}
+			}
+		});
+
+		beforeFitCallbackProxy.setCallback(new ProxyBeforeFitCallback() {
+
+			@Override
+			public void call(Window window, AxisItem item) {
+				if (axisFitHandler != null) {
+					axisFitHandler.onBeforeFit(window, item);
+				}
+			}
+		});
+
+		afterFitCallbackProxy.setCallback(new ProxyAfterFitCallback() {
+
+			@Override
+			public void call(Window window, AxisItem item) {
+				if (axisFitHandler != null) {
+					axisFitHandler.onAfterFit(window, item);
+				}
+			}
+		});
+
+		afterUpdateCallbackProxy.setCallback(new ProxyAfterUpdateCallback() {
+
+			@Override
+			public void call(Window window, AxisItem item) {
+				if (axisUpdateHandler != null) {
+					axisUpdateHandler.onAfterUpdate(window, item);
+				}
+			}
+		});
 	}
 
 	/**
@@ -401,6 +708,265 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 		return Enumer.deserialize(getDelegated().getBounds(), getDefaultValues().getBounds(), ScaleBounds.class, ScaleBounds.data);
 	}
 	
+	/**
+	 * @return the axisBuildTicksCallback
+	 */
+	public AxisBuildTicksCallback getAxisBuildTicksCallback() {
+		return axisBuildTicksCallback;
+	}
+
+	/**
+	 * @param axisBuildTicksCallback the axisBuildTicksCallback to set
+	 */
+	public void setAxisBuildTicksCallback(AxisBuildTicksCallback axisBuildTicksCallback) {
+		this.axisBuildTicksCallback = axisBuildTicksCallback;
+	}
+
+	/**
+	 * @return the axisCalculateTickRotationCallback
+	 */
+	public AxisCalculateTickRotationCallback getAxisCalculateTickRotationCallback() {
+		return axisCalculateTickRotationCallback;
+	}
+
+	/**
+	 * @param axisCalculateTickRotationCallback the axisCalculateTickRotationCallback to set
+	 */
+	public void setAxisCalculateTickRotationCallback(AxisCalculateTickRotationCallback axisCalculateTickRotationCallback) {
+		this.axisCalculateTickRotationCallback = axisCalculateTickRotationCallback;
+	}
+
+	/**
+	 * @return the axisDataLimitsCallback
+	 */
+	public AxisDataLimitsCallback getAxisDataLimitsCallback() {
+		return axisDataLimitsCallback;
+	}
+
+	/**
+	 * @param axisDataLimitsCallback the axisDataLimitsCallback to set
+	 */
+	public void setAxisDataLimitsCallback(AxisDataLimitsCallback axisDataLimitsCallback) {
+		this.axisDataLimitsCallback = axisDataLimitsCallback;
+	}
+
+	/**
+	 * @return the axisDimensionsCallback
+	 */
+	public AxisDimensionsCallback getAxisDimensionsCallback() {
+		return axisDimensionsCallback;
+	}
+
+	/**
+	 * @param axisDimensionsCallback the axisDimensionsCallback to set
+	 */
+	public void setAxisDimensionsCallback(AxisDimensionsCallback axisDimensionsCallback) {
+		this.axisDimensionsCallback = axisDimensionsCallback;
+	}
+
+	/**
+	 * @return the axisFitCallback
+	 */
+	public AxisFitCallback getAxisFitCallback() {
+		return axisFitCallback;
+	}
+
+	/**
+	 * @param axisFitCallback the axisFitCallback to set
+	 */
+	public void setAxisFitCallback(AxisFitCallback axisFitCallback) {
+		this.axisFitCallback = axisFitCallback;
+	}
+
+	/**
+	 * @return the axisTickToLabelConversionCallback
+	 */
+	public AxisTickToLabelConversionCallback getAxisTickToLabelConversionCallback() {
+		return axisTickToLabelConversionCallback;
+	}
+
+	/**
+	 * @param axisTickToLabelConversionCallback the axisTickToLabelConversionCallback to set
+	 */
+	public void setAxisTickToLabelConversionCallback(AxisTickToLabelConversionCallback axisTickToLabelConversionCallback) {
+		this.axisTickToLabelConversionCallback = axisTickToLabelConversionCallback;
+	}
+
+	/**
+	 * @return the axisUpdateCallback
+	 */
+	public AxisUpdateCallback getAxisUpdateCallback() {
+		return axisUpdateCallback;
+	}
+
+	/**
+	 * @param axisUpdateCallback the axisUpdateCallback to set
+	 */
+	public void setAxisUpdateCallback(AxisUpdateCallback axisUpdateCallback) {
+		this.axisUpdateCallback = axisUpdateCallback;
+	}
+
+	/**
+	 * @return the axisBuildTicksHandler
+	 */
+	AxisBuildTicksHandler getAxisBuildTicksHandler() {
+		return axisBuildTicksHandler;
+	}
+
+	/**
+	 * @param axisBuildTicksHandler the axisBuildTicksHandler to set
+	 */
+	void setAxisBuildTicksHandler(AxisBuildTicksHandler axisBuildTicksHandler) {
+		if (axisBuildTicksHandler != null) {
+			getDelegated().setBeforeBuildTicks(beforeBuildTicksCallbackProxy.getProxy());
+			getDelegated().setAfterBuildTicks(afterBuildTicksCallbackProxy.getProxy());
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		} else {
+			remove(Property.beforeBuildTicks);
+			remove(Property.afterBuildTicks);
+		}
+		this.axisBuildTicksHandler = axisBuildTicksHandler;
+	}
+
+	/**
+	 * @return the axisCalculateTickRotationHandler
+	 */
+	AxisCalculateTickRotationHandler getAxisCalculateTickRotationHandler() {
+		return axisCalculateTickRotationHandler;
+	}
+
+	/**
+	 * @param axisCalculateTickRotationHandler the axisCalculateTickRotationHandler to set
+	 */
+	void setAxisCalculateTickRotationHandler(AxisCalculateTickRotationHandler axisCalculateTickRotationHandler) {
+		if (axisCalculateTickRotationHandler != null) {
+			getDelegated().setBeforeCalculateTickRotation(beforeCalculateTickRotationCallbackProxy.getProxy());
+			getDelegated().setAfterCalculateTickRotation(afterCalculateTickRotationCallbackProxy.getProxy());
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		} else {
+			remove(Property.beforeCalculateTickRotation);
+			remove(Property.afterCalculateTickRotation);
+		}
+		this.axisCalculateTickRotationHandler = axisCalculateTickRotationHandler;
+	}
+
+	/**
+	 * @return the axisDataLimitsHandler
+	 */
+	AxisDataLimitsHandler getAxisDataLimitsHandler() {
+		return axisDataLimitsHandler;
+	}
+
+	/**
+	 * @param axisDataLimitsHandler the axisDataLimitsHandler to set
+	 */
+	void setAxisDataLimitsHandler(AxisDataLimitsHandler axisDataLimitsHandler) {
+		if (axisDataLimitsHandler != null) {
+			getDelegated().setBeforeDataLimits(beforeDataLimitsCallbackProxy.getProxy());
+			getDelegated().setAfterDataLimits(afterDataLimitsCallbackProxy.getProxy());
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		} else {
+			remove(Property.beforeDataLimits);
+			remove(Property.afterDataLimits);
+		}
+		this.axisDataLimitsHandler = axisDataLimitsHandler;
+	}
+
+	/**
+	 * @return the axisDimensionsHandler
+	 */
+	AxisDimensionsHandler getAxisDimensionsHandler() {
+		return axisDimensionsHandler;
+	}
+
+	/**
+	 * @param axisDimensionsHandler the axisDimensionsHandler to set
+	 */
+	void setAxisDimensionsHandler(AxisDimensionsHandler axisDimensionsHandler) {
+		if (axisDimensionsHandler != null) {
+			getDelegated().setBeforeSetDimensions(beforeSetDimensionsCallbackProxy.getProxy());
+			getDelegated().setAfterSetDimensions(afterSetDimensionsCallbackProxy.getProxy());
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		} else {
+			remove(Property.beforeSetDimensions);
+			remove(Property.afterSetDimensions);
+		}
+		this.axisDimensionsHandler = axisDimensionsHandler;
+	}
+
+	/**
+	 * @return the axisFitHandler
+	 */
+	AxisFitHandler getAxisFitHandler() {
+		return axisFitHandler;
+	}
+
+	/**
+	 * @param axisFitHandler the axisFitHandler to set
+	 */
+	void setAxisFitHandler(AxisFitHandler axisFitHandler) {
+		if (axisFitHandler != null) {
+			getDelegated().setBeforeFit(beforeFitCallbackProxy.getProxy());
+			getDelegated().setAfterFit(afterFitCallbackProxy.getProxy());
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		} else {
+			remove(Property.beforeFit);
+			remove(Property.afterFit);
+		}
+		this.axisFitHandler = axisFitHandler;
+	}
+
+	/**
+	 * @return the axisTickToLabelConversionHandler
+	 */
+	AxisTickToLabelConversionHandler getAxisTickToLabelConversionHandler() {
+		return axisTickToLabelConversionHandler;
+	}
+
+	/**
+	 * @param axisTickToLabelConversionHandler the axisTickToLabelConversionHandler to set
+	 */
+	void setAxisTickToLabelConversionHandler(AxisTickToLabelConversionHandler axisTickToLabelConversionHandler) {
+		if (axisTickToLabelConversionHandler != null) {
+			getDelegated().setBeforeTickToLabelConversion(beforeTickToLabelConversionCallbackProxy.getProxy());
+			getDelegated().setAfterTickToLabelConversion(afterTickToLabelConversionCallbackProxy.getProxy());
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		} else {
+			remove(Property.beforeTickToLabelConversion);
+			remove(Property.afterTickToLabelConversion);
+		}
+		this.axisTickToLabelConversionHandler = axisTickToLabelConversionHandler;
+	}
+	
+	/**
+	 * @return the axisUpdateHandler
+	 */
+	AxisUpdateHandler getAxisUpdateHandler() {
+		return axisUpdateHandler;
+	}
+
+	/**
+	 * @param axisUpdateHandler the axisUpdateHandler to set
+	 */
+	void setAxisUpdateHandler(AxisUpdateHandler axisUpdateHandler) {
+		if (axisUpdateHandler != null) {
+			getDelegated().setBeforeUpdate(beforeUpdateCallbackProxy.getProxy());
+			getDelegated().setAfterUpdate(afterUpdateCallbackProxy.getProxy());
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		} else {
+			remove(Property.beforeUpdate);
+			remove(Property.afterUpdate);
+		}
+		this.axisUpdateHandler = axisUpdateHandler;
+	}
+
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
 	 */

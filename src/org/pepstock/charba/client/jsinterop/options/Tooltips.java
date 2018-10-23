@@ -31,7 +31,7 @@ import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipItemSortHa
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.commons.Enumer;
-import org.pepstock.charba.client.jsinterop.commons.JsFactory;
+import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.jsinterop.items.TooltipItem;
 import org.pepstock.charba.client.jsinterop.items.TooltipModel;
@@ -94,11 +94,11 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 		filter
 	}
 	
-	private final CallbackProxy<ProxyCustomCallback> customCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyCustomCallback> customCallbackProxy = JsHelper.newCallbackProxy();
 	
-	private final CallbackProxy<ProxyItemSortCallback> itemSortCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyItemSortCallback> itemSortCallbackProxy = JsHelper.newCallbackProxy();
 	
-	private final CallbackProxy<ProxyFilterCallback> filterCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyFilterCallback> filterCallbackProxy = JsHelper.newCallbackProxy();
 	
 	private TooltipCustomCallback customCallback = null;
 
@@ -999,13 +999,6 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	}
 
 	/**
-	 * @return the customHandler
-	 */
-	TooltipCustomHandler getCustomHandler() {
-		return customHandler;
-	}
-
-	/**
 	 * @param customHandler the customHandler to set
 	 */
 	void setCustomHandler(TooltipCustomHandler customHandler) {
@@ -1035,13 +1028,6 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 */
 	public void setItemSortCallback(TooltipItemSortCallback itemSortCallback) {
 		this.itemSortCallback = itemSortCallback;
-	}
-
-	/**
-	 * @return the itemSortHandler
-	 */
-	TooltipItemSortHandler getItemSortHandler() {
-		return itemSortHandler;
 	}
 
 	/**
@@ -1075,13 +1061,6 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 */
 	public void setFilterCallback(TooltipFilterCallback filterCallback) {
 		this.filterCallback = filterCallback;
-	}
-
-	/**
-	 * @return the filterHandler
-	 */
-	TooltipFilterHandler getFilterHandler() {
-		return filterHandler;
 	}
 
 	/**

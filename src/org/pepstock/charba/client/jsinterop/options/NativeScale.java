@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsPackage;
@@ -306,6 +307,47 @@ public final class NativeScale extends NativeObject {
 	@JsProperty
 	native String getBounds();
 	
-	
+	@JsProperty
+	native void setBeforeUpdate(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setBeforeSetDimensions(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setAfterSetDimensions(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setBeforeDataLimits(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setAfterDataLimits(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setBeforeBuildTicks(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setAfterBuildTicks(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setBeforeTickToLabelConversion(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setAfterTickToLabelConversion(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setBeforeCalculateTickRotation(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setAfterCalculateTickRotation(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setBeforeFit(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setAfterFit(CallbackProxy.Proxy proxy);
+
+	@JsProperty
+	native void setAfterUpdate(CallbackProxy.Proxy proxy);
+
 
 }

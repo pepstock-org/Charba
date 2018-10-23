@@ -33,7 +33,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public final class ScaleItem extends BaseBoxNodeItem {
+public class ScaleItem extends BaseBoxNodeItem {
 	
 	///private final  longestTextCache;
 	@JsProperty
@@ -98,7 +98,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return the id of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
 	 */
 	@JsOverlay
-	public String getId() {
+	public final String getId() {
 		return Checker.check(getNativeId(), UndefinedValues.STRING);
 	}
 
@@ -108,7 +108,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return <code>true</code> if this item represents a hidden scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
 	 */
 	@JsOverlay
-	public boolean isHidden() {
+	public final boolean isHidden() {
 		return Checker.check(isNativeHidden(), UndefinedValues.BOOLEAN);
 	}
 
@@ -118,7 +118,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return the max index of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	@JsOverlay
-	public int getMaxIndex() {
+	public final int getMaxIndex() {
 		return Checker.check(getNativeMaxIndex(), UndefinedValues.INTEGER);
 	}
 
@@ -128,7 +128,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return the min index of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	@JsOverlay
-	public int getMinIndex() {
+	public final int getMinIndex() {
 		return Checker.check(getNativeMaxIndex(), UndefinedValues.INTEGER);
 	}
 
@@ -138,7 +138,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return the max value of scale.
 	 */
 	@JsOverlay
-	public int getMax() {
+	public final int getMax() {
 		return Checker.check(getNativeMax(), UndefinedValues.INTEGER);
 	}
 
@@ -148,7 +148,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return the max value of scale.
 	 */
 	@JsOverlay
-	public String getMaxAsString() {
+	public final String getMaxAsString() {
 		return Checker.check(getNativeMax(), UndefinedValues.STRING);
 	}
 
@@ -158,7 +158,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return the min value of scale.
 	 */
 	@JsOverlay
-	public int getMin() {
+	public final int getMin() {
 		return Checker.check(getNativeMin(), UndefinedValues.INTEGER);
 	}
 
@@ -168,7 +168,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return the min value of scale.
 	 */
 	@JsOverlay
-	public String getMinAsString() {
+	public final String getMinAsString() {
 		return Checker.check(getNativeMin(), UndefinedValues.STRING);
 	}
 
@@ -178,7 +178,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return the list of ticks.
 	 */
 	@JsOverlay
-	public List<String> getTicks() {
+	public final List<String> getTicks() {
 		return ArrayListHelper.unmodifiableList(getNativeTicks());
 	}
 
@@ -188,7 +188,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return the label rotation ratio. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
 	@JsOverlay
-	public double getLabelRotation() {
+	public final double getLabelRotation() {
 		return Checker.check(getNativeLabelRotation(), UndefinedValues.DOUBLE);
 	}
 
@@ -198,7 +198,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return the longest width of label of ticks.Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	@JsOverlay
-	public int getLongestLabelWidth() {
+	public final int getLongestLabelWidth() {
 		return Checker.check(getNativeLongestLabelWidth(), UndefinedValues.INTEGER);
 	}
 
@@ -208,7 +208,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return the start value of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
 	@JsOverlay
-	public double getStart() {
+	public final double getStart() {
 		return Checker.check(getNativeStart(), UndefinedValues.DOUBLE);
 	}
 
@@ -218,7 +218,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return the end value of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
 	@JsOverlay
-	public double getEnd() {
+	public final double getEnd() {
 		return Checker.check(getNativeEnd(), UndefinedValues.DOUBLE);
 	}
 
@@ -228,7 +228,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return the list of ticks as number.
 	 */
 	@JsOverlay
-	public List<Double> getTicksAsNumber() {
+	public final List<Double> getTicksAsNumber() {
 		return ArrayListHelper.unmodifiableList(getNativeTicksAsNumber());
 	}
 
@@ -238,7 +238,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return the zero line index of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	@JsOverlay
-	public int getZeroLineIndex() {
+	public final int getZeroLineIndex() {
 		return Checker.check(getNativeZeroLineIndex(), UndefinedValues.INTEGER);
 	}
 
@@ -248,7 +248,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return the X center of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	@JsOverlay
-	public int getXCenter() {
+	public final int getXCenter() {
 		return Checker.check(getNativeXCenter(), UndefinedValues.INTEGER);
 	}
 
@@ -258,7 +258,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return the Y center of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	@JsOverlay
-	public int getYCenter() {
+	public final int getYCenter() {
 		return Checker.check(getNativeYCenter(), UndefinedValues.INTEGER);
 	}
 
@@ -268,7 +268,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return the drawing area dimension of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	@JsOverlay
-	public int getDrawingArea() {
+	public final int getDrawingArea() {
 		return Checker.check(getNativeDrawingArea(), UndefinedValues.INTEGER);
 	}
 
@@ -278,7 +278,7 @@ public final class ScaleItem extends BaseBoxNodeItem {
 	 * @return the list of point labels of scale.
 	 */
 	@JsOverlay
-	public List<String> getPointLabels() {
+	public final List<String> getPointLabels() {
 		return ArrayListHelper.unmodifiableList(getNativePointLabels());
 	}
 

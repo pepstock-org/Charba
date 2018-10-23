@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.jsinterop.events;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.jsinterop.commons.JsFactory;
+import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 
 import com.google.gwt.dom.client.NativeEvent;
 
@@ -51,7 +51,7 @@ public class ChartNativeEvent extends NativeEvent {
 	 * @return the layer X property
 	 */
 	public final int getLayerX() {
-		return JsFactory.property(this, Property.layerX.name());
+		return JsHelper.propertyAsInt(this, Property.layerX.name());
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class ChartNativeEvent extends NativeEvent {
 	 * @return the layer Y property
 	 */
 	public final int getLayerY() {
-		return JsFactory.property(this, Property.layerY.name());
+		return JsHelper.propertyAsInt(this, Property.layerY.name());
 	}
 	
 }

@@ -29,7 +29,7 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
-import org.pepstock.charba.client.jsinterop.commons.JsFactory;
+import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.jsinterop.items.TooltipItem;
 import org.pepstock.charba.client.jsinterop.items.TooltipLabelColor;
@@ -117,31 +117,31 @@ public final class TooltipsCallbacks extends BaseModel<Tooltips, IsDefaultToolti
 		String call(Object context, TooltipItem item);
 	}
 
-	private final CallbackProxy<ProxyBeforeTitleCallback> beforeTitleCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyBeforeTitleCallback> beforeTitleCallbackProxy = JsHelper.newCallbackProxy();
 	
-	private final CallbackProxy<ProxyTitleCallback> titleCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyTitleCallback> titleCallbackProxy = JsHelper.newCallbackProxy();
 	
-	private final CallbackProxy<ProxyAfterTitleCallback> afterTitleCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyAfterTitleCallback> afterTitleCallbackProxy = JsHelper.newCallbackProxy();
 	
-	private final CallbackProxy<ProxyBeforeBodyCallback> beforeBodyCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyBeforeBodyCallback> beforeBodyCallbackProxy = JsHelper.newCallbackProxy();
 	
-	private final CallbackProxy<ProxyAfterBodyCallback> afterBodyCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyAfterBodyCallback> afterBodyCallbackProxy = JsHelper.newCallbackProxy();
 	
-	private final CallbackProxy<ProxyBeforeLabelCallback> beforeLabelCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyBeforeLabelCallback> beforeLabelCallbackProxy = JsHelper.newCallbackProxy();
 	
-	private final CallbackProxy<ProxyLabelCallback> labelCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyLabelCallback> labelCallbackProxy = JsHelper.newCallbackProxy();
 	
-	private final CallbackProxy<ProxyLabelColorCallback> labelColorCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyLabelColorCallback> labelColorCallbackProxy = JsHelper.newCallbackProxy();
 	
-	private final CallbackProxy<ProxyLabelTextColorCallback> labelTextColorCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyLabelTextColorCallback> labelTextColorCallbackProxy = JsHelper.newCallbackProxy();
 	
-	private final CallbackProxy<ProxyAfterLabelCallback> afterLabelCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyAfterLabelCallback> afterLabelCallbackProxy = JsHelper.newCallbackProxy();
 	
-	private final CallbackProxy<ProxyBeforeFooterCallback> beforeFooterCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyBeforeFooterCallback> beforeFooterCallbackProxy = JsHelper.newCallbackProxy();
 	
-	private final CallbackProxy<ProxyFooterCallback> footerCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyFooterCallback> footerCallbackProxy = JsHelper.newCallbackProxy();
 	
-	private final CallbackProxy<ProxyAfterFooterCallback> afterFooterCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyAfterFooterCallback> afterFooterCallbackProxy = JsHelper.newCallbackProxy();
 	
 	private TooltipTitleCallback titleCallback = null;
 	
@@ -468,13 +468,6 @@ public final class TooltipsCallbacks extends BaseModel<Tooltips, IsDefaultToolti
 	}
 
 	/**
-	 * @return the titleHandler
-	 */
-	TooltipTitleHandler getTitleHandler() {
-		return titleHandler;
-	}
-
-	/**
 	 * @param titleHandler the titleHandler to set
 	 */
 	void setTitleHandler(TooltipTitleHandler titleHandler) {
@@ -493,13 +486,6 @@ public final class TooltipsCallbacks extends BaseModel<Tooltips, IsDefaultToolti
 	}
 
 	/**
-	 * @return the bodyHandler
-	 */
-	TooltipBodyHandler getBodyHandler() {
-		return bodyHandler;
-	}
-
-	/**
 	 * @param bodyHandler the bodyHandler to set
 	 */
 	void setBodyHandler(TooltipBodyHandler bodyHandler) {
@@ -513,13 +499,6 @@ public final class TooltipsCallbacks extends BaseModel<Tooltips, IsDefaultToolti
 			remove(Property.afterBody);
 		}
 		this.bodyHandler = bodyHandler;
-	}
-
-	/**
-	 * @return the labelHandler
-	 */
-	TooltipLabelHandler getLabelHandler() {
-		return labelHandler;
 	}
 
 	/**
@@ -544,13 +523,6 @@ public final class TooltipsCallbacks extends BaseModel<Tooltips, IsDefaultToolti
 		this.labelHandler = labelHandler;
 	}
 	
-	/**
-	 * @return the footerHandler
-	 */
-	TooltipFooterHandler getFooterHandler() {
-		return footerHandler;
-	}
-
 	/**
 	 * @param footerHandler the footerHandler to set
 	 */

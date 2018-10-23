@@ -25,7 +25,7 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer
  */
-public abstract class ConfigurationContainer<T extends NativeObjectContainer<?>> extends ChartContainer{
+abstract class ConfigurationContainer<T extends NativeObjectContainer<?>> extends ChartContainer{
 
 	private T configuration;
 	
@@ -34,7 +34,7 @@ public abstract class ConfigurationContainer<T extends NativeObjectContainer<?>>
 	 * @param chart chart instance
 	 * @see org.pepstock.charba.client.jsinterop.AbstractChart
 	 */
-	public ConfigurationContainer(AbstractChart<?, ?> chart) {
+	protected ConfigurationContainer(AbstractChart<?, ?> chart) {
 		super(chart);
 	}
 	

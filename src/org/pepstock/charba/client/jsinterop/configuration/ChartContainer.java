@@ -24,7 +24,7 @@ import org.pepstock.charba.client.jsinterop.AbstractChart;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer
  */
-public abstract class ChartContainer{
+abstract class ChartContainer{
 
 	// chart instance
 	private final AbstractChart<?, ?> chart;

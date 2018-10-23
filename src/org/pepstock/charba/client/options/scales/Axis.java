@@ -401,7 +401,6 @@ public abstract class Axis extends ChartContainer {
 		// checks if callback and chart are consistent
 		if (dataLimitsCallback != null && chart != null) {
 			dataLimitsCallback.onBeforeDataLimits(chart, new AxisItem(item));
-			;
 		}
 	}
 

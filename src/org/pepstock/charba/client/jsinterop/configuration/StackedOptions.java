@@ -17,10 +17,6 @@ package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.ChartOptions;
-import org.pepstock.charba.client.jsinterop.configuration.scales.CartesianCategoryAxis;
-import org.pepstock.charba.client.jsinterop.configuration.scales.CartesianLinearAxis;
-import org.pepstock.charba.client.jsinterop.configuration.scales.Scales;
-import org.pepstock.charba.client.jsinterop.configuration.scales.StackedScales;
 
 /**
  * Configuration of chart which could be stacked.<br>

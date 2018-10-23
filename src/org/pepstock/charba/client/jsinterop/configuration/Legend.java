@@ -18,10 +18,10 @@ package org.pepstock.charba.client.jsinterop.configuration;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
-import org.pepstock.charba.client.jsinterop.events.LegendClickCallbackHandler;
 import org.pepstock.charba.client.jsinterop.events.LegendClickEvent;
-import org.pepstock.charba.client.jsinterop.events.LegendHoverCallbackHandler;
 import org.pepstock.charba.client.jsinterop.events.LegendHoverEvent;
+import org.pepstock.charba.client.jsinterop.events.handlers.LegendClickCallbackHandler;
+import org.pepstock.charba.client.jsinterop.events.handlers.LegendHoverCallbackHandler;
 import org.pepstock.charba.client.jsinterop.items.LegendItem;
 import org.pepstock.charba.client.jsinterop.options.EventableOptions;
 

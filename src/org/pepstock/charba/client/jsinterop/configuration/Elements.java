@@ -15,10 +15,6 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.jsinterop.configuration.elements.Arc;
-import org.pepstock.charba.client.jsinterop.configuration.elements.Line;
-import org.pepstock.charba.client.jsinterop.configuration.elements.Point;
-import org.pepstock.charba.client.jsinterop.configuration.elements.Rectangle;
 import org.pepstock.charba.client.jsinterop.options.EventableOptions;
 
 

@@ -16,12 +16,12 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.events.AnimationCompleteCallbackHandler;
-import org.pepstock.charba.client.events.AnimationProgressCallbackHandler;
 import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
-import org.pepstock.charba.client.jsinterop.commons.JsFactory;
+import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
+import org.pepstock.charba.client.jsinterop.events.handlers.AnimationCompleteCallbackHandler;
+import org.pepstock.charba.client.jsinterop.events.handlers.AnimationProgressCallbackHandler;
 import org.pepstock.charba.client.jsinterop.items.AnimationObject;
 
 import jsinterop.annotations.JsFunction;
@@ -45,9 +45,9 @@ public final class EventableAnimation extends Animation {
 		void call(Chart context, AnimationObject animationObject);
 	}
 
-	private final CallbackProxy<ProxyAnimationCompleteCallback> completeCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyAnimationCompleteCallback> completeCallbackProxy = JsHelper.newCallbackProxy();
 
-	private final CallbackProxy<ProxyAnimationProgressCallback> progressCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyAnimationProgressCallback> progressCallbackProxy = JsHelper.newCallbackProxy();
 	
 	private AnimationCompleteCallbackHandler completeCallbackHandler = null;
 	

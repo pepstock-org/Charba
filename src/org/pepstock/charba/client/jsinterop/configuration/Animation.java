@@ -16,12 +16,12 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.enums.Easing;
-import org.pepstock.charba.client.events.AnimationCompleteCallbackHandler;
-import org.pepstock.charba.client.events.AnimationProgressCallbackHandler;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.events.AnimationCompleteEvent;
 import org.pepstock.charba.client.jsinterop.events.AnimationProgressEvent;
+import org.pepstock.charba.client.jsinterop.events.handlers.AnimationCompleteCallbackHandler;
+import org.pepstock.charba.client.jsinterop.events.handlers.AnimationProgressCallbackHandler;
 import org.pepstock.charba.client.jsinterop.items.AnimationItem;
 import org.pepstock.charba.client.jsinterop.items.AnimationObject;
 import org.pepstock.charba.client.jsinterop.options.EventableOptions;

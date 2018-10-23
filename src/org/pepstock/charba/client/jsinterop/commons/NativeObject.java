@@ -34,7 +34,7 @@ public class NativeObject {
 	
 	@JsOverlay
 	protected static final void remove(NativeObject object, Key key) {
-		JsFactory.remove(object, key.name());
+		JsHelper.remove(object, key.name());
 	}
 
 //	@JsOverlay

@@ -22,7 +22,7 @@ import org.pepstock.charba.client.jsinterop.callbacks.handlers.LegendFilterHandl
 import org.pepstock.charba.client.jsinterop.callbacks.handlers.LegendLabelsHandler;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.JsFactory;
+import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels;
 import org.pepstock.charba.client.jsinterop.items.LegendItem;
 import org.pepstock.charba.client.jsinterop.items.LegendLabelItem;
@@ -67,9 +67,9 @@ public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels, Native
 		filter
 	}
 	
-	private final CallbackProxy<ProxyGenerateLabelsCallback> labelsCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyGenerateLabelsCallback> labelsCallbackProxy = JsHelper.newCallbackProxy();
 
-	private final CallbackProxy<ProxyFilterCallback> filterCallbackProxy = JsFactory.newCallbackProxy();
+	private final CallbackProxy<ProxyFilterCallback> filterCallbackProxy = JsHelper.newCallbackProxy();
 	
 	private LegendFilterHandler filterHandler = null;
 	
@@ -183,13 +183,6 @@ public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels, Native
 	public void setLabelsCallback(LegendLabelsCallback labelsCallback) {
 		this.labelsCallback = labelsCallback;
 	}
-	
-	/**
-	 * @return the labelsHandler
-	 */
-	LegendLabelsHandler getLabelsHandler() {
-		return labelsHandler;
-	}
 
 	/**
 	 * @param labelsHandler the labelsHandler to set
@@ -208,12 +201,6 @@ public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels, Native
 	// -------------------
 	// FILTER
 	// -------------------
-	/**
-	 * @return the filterHandler
-	 */
-	LegendFilterHandler getFilterHandler() {
-		return filterHandler;
-	}
 
 	/**
 	 * @param filterHandler the filterHandler to set

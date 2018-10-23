@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.jsinterop.configuration.layout.Padding;
 import org.pepstock.charba.client.jsinterop.options.EventableOptions;
 
 /**
