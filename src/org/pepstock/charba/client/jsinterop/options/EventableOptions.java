@@ -12,6 +12,7 @@ import org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisUpdateHandler
 import org.pepstock.charba.client.jsinterop.callbacks.handlers.LegendFilterHandler;
 import org.pepstock.charba.client.jsinterop.callbacks.handlers.LegendHandler;
 import org.pepstock.charba.client.jsinterop.callbacks.handlers.LegendLabelsHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.TickHandler;
 import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipBodyHandler;
 import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipCustomHandler;
 import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipFilterHandler;
@@ -360,7 +361,14 @@ public final class EventableOptions extends BaseOptions<EventableAnimation,Event
 	public void setAxisUpdateHandler(Scale scale, AxisUpdateHandler axisUpdateHandler) {
 		scale.setAxisUpdateHandler(axisUpdateHandler);
 	}
-	
+
+	/**
+	 * @param callbackHandler the callbackHandler to set
+	 */
+	public void setTickCallbackHandler(BaseTick<?,?,?> tick, TickHandler callbackHandler) {
+		tick.setCallbackHandler(callbackHandler);
+	}
+
 	// FIXME to be removed
 	public NativeOptions getObject() {
 		return getDelegated();

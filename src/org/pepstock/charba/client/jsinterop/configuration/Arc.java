@@ -25,7 +25,7 @@ import org.pepstock.charba.client.jsinterop.options.EventableOptions;
  * @see org.pepstock.charba.client.DoughnutChart
  * @see org.pepstock.charba.client.PieChart
  */
-public final class Arc extends BaseElement {
+public final class Arc extends AbstractConfigurationElement {
 
 	/**
 	 * Builds the object setting the java script padding object.

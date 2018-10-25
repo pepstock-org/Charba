@@ -25,7 +25,7 @@ import org.pepstock.charba.client.jsinterop.options.EventableOptions;
  * @see org.pepstock.charba.client.LineChart
  * @see org.pepstock.charba.client.BubbleChart
  */
-public final class Point extends BaseElement {
+public final class Point extends AbstractConfigurationElement {
 	
 	/**
 	 * Builds the object storing the chart instance.

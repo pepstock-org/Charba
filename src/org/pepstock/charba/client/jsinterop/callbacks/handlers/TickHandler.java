@@ -15,8 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.callbacks.handlers;
 
-import org.pepstock.charba.client.jsinterop.AbstractChart;
-import org.pepstock.charba.client.jsinterop.items.TickItem;
+import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 
 /**
  * Interface to implement if wants to change the tick marks to include information about the data type.
@@ -29,12 +28,7 @@ public interface TickHandler {
 	/**
 	 * Changes the tick marks to include information about the data type.
 	 * 
-	 * @param chart chart instance
-	 * @param item tick item to be changed
-	 * @return the tick to apply or if the callback returns <code>null</code> the associated grid line will be hidden.
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.TickItem
 	 */
-	String onCallback(AbstractChart<?, ?> chart, TickItem item);
+	String onCallback(Object context, double value, int index, ArrayDouble values);
 
 }

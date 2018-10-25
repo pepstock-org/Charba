@@ -28,7 +28,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-final class NativeTicks extends NativeFontItem {
+final class NativeTicks extends NativeTickItem {
 
 	@JsProperty 
 	native void setMinor(NativeTickItem minor);

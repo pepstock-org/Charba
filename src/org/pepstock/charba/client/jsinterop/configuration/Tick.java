@@ -25,13 +25,13 @@ import org.pepstock.charba.client.jsinterop.options.Ticks;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class Tick extends BaseTick<Ticks> {
+abstract class Tick extends AbstractTick<Ticks> {
 	
 //	private final Axis axis;
 
-	private final BaseTick<TickMinor> minor;
+	private final BaseTickMinor minor;
 
-	private final BaseTick<TickMajor> major;
+	private final BaseTickMajor major;
 
 	/**
 	 * Builds the object storing the chart instance.
@@ -40,21 +40,29 @@ abstract class Tick extends BaseTick<Ticks> {
 	 */
 	Tick(Axis axis) {
 		super(axis, axis.getScale().getTicks());
-		minor = new BaseTick<>(axis, axis.getScale().getTicks().getMinor());
-		major = new BaseTick<>(axis, axis.getScale().getTicks().getMajor());
+		minor = new BaseTickMinor(axis, axis.getScale().getTicks().getMinor());
+		major = new BaseTickMajor(axis, axis.getScale().getTicks().getMajor());
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.configuration.AbstractTick#getTick()
+	 */
+	@Override
+	Ticks getDefaultTick() {
+		return getAxis().getDefaultScale().getTicks();
 	}
 
 	/**
 	 * @return the minor
 	 */
-	public BaseTick<TickMinor> getMinor() {
+	public AbstractTick<TickMinor> getMinor() {
 		return minor;
 	}
 
 	/**
 	 * @return the major
 	 */
-	public BaseTick<TickMajor> getMajor() {
+	public AbstractTick<TickMajor> getMajor() {
 		return major;
 	}
 

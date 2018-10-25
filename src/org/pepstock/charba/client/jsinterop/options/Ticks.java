@@ -32,7 +32,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Ticks extends FontItem<Scale, IsDefaultTicks, NativeTicks> {
+public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 
 	private final TickMinor minor;
 

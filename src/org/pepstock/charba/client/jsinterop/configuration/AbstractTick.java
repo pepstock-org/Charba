@@ -15,11 +15,13 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.callbacks.TickCallback;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.enums.FontStyle;
-import org.pepstock.charba.client.jsinterop.options.FontItem;
+import org.pepstock.charba.client.jsinterop.callbacks.TickCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.TickHandler;
+import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
+import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
+import org.pepstock.charba.client.jsinterop.options.BaseTick;
 
 /**
  * Base object to map an axis tick.<br>
@@ -30,7 +32,7 @@ import org.pepstock.charba.client.jsinterop.options.FontItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class BaseTick<T extends FontItem<?,?,?>> extends AxisContainer {
+abstract class AbstractTick<T extends BaseTick<?,?,?>> extends AxisContainer implements TickHandler {
 
 	// the axis instance, owner of this tick
 	private T configuration;
@@ -42,21 +44,26 @@ public class BaseTick<T extends FontItem<?,?,?>> extends AxisContainer {
 	 * 
 	 * @param chart chart instance
 	 */
-	BaseTick(Axis axis, T configuration) {
+	AbstractTick(Axis axis, T configuration) {
 		super(axis);
 		this.configuration = configuration;
-//		super(chart);
-//		// registers callback
-//		registerNativeTickCallbacktHandler(getJavaScriptObject());
+		if (hasGlobalCallback()) {
+			axis.getChart().getOptions().getConfiguration().setTickCallbackHandler(getDefaultTick(), this);
+		}
 	}
-
+	
+	abstract T getDefaultTick();
+	
+	private boolean hasGlobalCallback() {
+		return getDefaultTick().getCallback() != null;
+	}
+	
 	/**
 	 * @return the configuration
 	 */
 	final T getConfiguration() {
 		return configuration;
 	}
-
 
 	/**
 	 * Sets the font size for tick.
@@ -161,48 +168,27 @@ public class BaseTick<T extends FontItem<?,?,?>> extends AxisContainer {
 	 * @param callback the callback to set
 	 */
 	public void setCallback(TickCallback callback) {
-		// FIXME
-//		// checks if callback has been already set
-//		if (hasToBeRegistered(callback, Property.callback)) {
-//			// registers the callback
-//			registerNativeTickCallbacktHandler(getJavaScriptObject());
-//		}
-//		this.callback = callback;
-	}
-
-	/**
-	 * Called to change the tick marks to include information about the data type.
-	 * 
-	 * @param object java script object element of a single tick.
-	 * @return if the callback returns null or undefined the associated grid line will be hidden.
-	 * @see org.pepstock.charba.client.items.TickItem
-	 */
-	protected String onCallback(GenericJavaScriptObject object) {
-		// FIXME
-//		TickItem item = new TickItem(object);
-//		AbstractChart<?, ?> chart = getChart();
-//		if (callback != null && chart != null) {
-//			return callback.onCallback(chart, item);
-//		}
-//		return String.valueOf(item.getValue());
-		return null;
-	}
-
-	/**
-	 * Sets the java script code to activate the call back, adding functions.
-	 * 
-	 * @param options
-	 *            java script object where adding new functions definition.
-	 */
-	private native void registerNativeTickCallbacktHandler(GenericJavaScriptObject options)/*-{
-		var self = this;
-		options.callback = function(value, index, values){
-			var myItem = new Object();
-			myItem.value = value;
-			myItem.index = index;
-			myItem.values = values;
-			return self.@org.pepstock.charba.client.options.scales.BaseTick::onCallback(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(myItem);
+		getConfiguration().setCallback(callback);
+		if (!hasGlobalCallback()) {
+			if (callback == null) {
+				getAxis().getChart().getOptions().getConfiguration().setTickCallbackHandler(getDefaultTick(), null);
+			} else {
+				getAxis().getChart().getOptions().getConfiguration().setTickCallbackHandler(getDefaultTick(), this);
+			}
 		}
-	}-*/;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.TickHandler#onCallback(java.lang.Object, double, int, org.pepstock.charba.client.jsinterop.commons.ArrayDouble)
+	 */
+	@Override
+	public String onCallback(Object context, double value, int index, ArrayDouble values) {
+		if (getConfiguration().getCallback() != null) {
+			return getConfiguration().getCallback().onCallback(getAxis().getChart(), value, index, ArrayListHelper.unmodifiableList(values));
+		} else if (hasGlobalCallback()) {
+			return getDefaultTick().getCallback().onCallback(getAxis().getChart(), value, index, ArrayListHelper.unmodifiableList(values));
+		}
+		return String.valueOf(value);
+	}
 
 }

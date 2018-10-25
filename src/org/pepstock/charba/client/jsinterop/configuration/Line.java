@@ -28,7 +28,7 @@ import org.pepstock.charba.client.jsinterop.options.EventableOptions;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.LineChart
  */
-public final class Line extends BaseElement {
+public final class Line extends AbstractConfigurationElement {
 
 	/**
 	 * Builds the object storing the chart instance.

@@ -24,7 +24,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TickMinor extends FontItem<Ticks, IsDefaultFontItem, NativeTickItem> {
+public final class TickMinor extends BaseTick<Ticks, IsDefaultFontItem, NativeTickItem> {
 
 	TickMinor(Ticks ticks, IsDefaultFontItem defaultValues, NativeTickItem delegated) {
 		super(ticks, defaultValues, delegated == null ? new NativeTickItem() : delegated);

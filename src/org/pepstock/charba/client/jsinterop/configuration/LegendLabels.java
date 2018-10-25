@@ -73,7 +73,7 @@ public final class LegendLabels extends ConfigurationContainer<EventableOptions>
 		getConfiguration().getLegend().getLabels().setLabelsCallback(labelsCallback);
 		if (!hasGlobalLabelsCallback()) {
 			if (labelsCallback == null) {
-				getConfiguration().setLegendLabelsHandler(null);;
+				getConfiguration().setLegendLabelsHandler(null);
 			} else {
 				getConfiguration().setLegendLabelsHandler(this);
 			}

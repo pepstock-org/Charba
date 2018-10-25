@@ -26,7 +26,7 @@ import org.pepstock.charba.client.jsinterop.options.EventableOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-abstract class BaseElement {
+abstract class AbstractConfigurationElement {
 	
 	private final EventableOptions options;
 	
@@ -36,7 +36,7 @@ abstract class BaseElement {
 	 * Builds the object with  options
 	 * @param options
 	 */
-	BaseElement(EventableOptions options, AbstractElement<?, ?, ?> configuration) {
+	AbstractConfigurationElement(EventableOptions options, AbstractElement<?, ?, ?> configuration) {
 		this.options = options;
 		this.configuration = configuration;
 	}

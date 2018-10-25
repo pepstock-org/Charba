@@ -15,8 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.callbacks;
 
+import java.util.List;
+
 import org.pepstock.charba.client.jsinterop.AbstractChart;
-import org.pepstock.charba.client.jsinterop.items.TickItem;
 
 /**
  * Interface to implement if wants to change the tick marks to include information about the data type.
@@ -35,6 +36,6 @@ public interface TickCallback {
 	 * @see org.pepstock.charba.client.AbstractChart
 	 * @see org.pepstock.charba.client.items.TickItem
 	 */
-	String onCallback(AbstractChart<?, ?> chart, TickItem item);
+	String onCallback(AbstractChart<?, ?> chart, double value, int index, List<Double> values);
 
 }

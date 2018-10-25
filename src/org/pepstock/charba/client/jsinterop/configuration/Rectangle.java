@@ -24,7 +24,7 @@ import org.pepstock.charba.client.jsinterop.options.EventableOptions;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.BarChart
  */
-public final class Rectangle extends BaseElement {
+public final class Rectangle extends AbstractConfigurationElement {
 
 	/**
 	 * Builds the object storing the chart instance.
