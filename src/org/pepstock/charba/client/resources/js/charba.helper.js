@@ -1,10 +1,4 @@
     function JsHelper() {};
-    JsHelper.newArray = function() {
-    	return new Array()
-    }
-    JsHelper.newObject = function() {
-    	return new Object()
-    }
     JsHelper.remove = function(obj, key) {
     	delete obj[key];
     }

@@ -12,6 +12,7 @@ import org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisUpdateHandler
 import org.pepstock.charba.client.jsinterop.callbacks.handlers.LegendFilterHandler;
 import org.pepstock.charba.client.jsinterop.callbacks.handlers.LegendHandler;
 import org.pepstock.charba.client.jsinterop.callbacks.handlers.LegendLabelsHandler;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.RadialPointLabelHandler;
 import org.pepstock.charba.client.jsinterop.callbacks.handlers.TickHandler;
 import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipBodyHandler;
 import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipCustomHandler;
@@ -367,6 +368,13 @@ public final class EventableOptions extends BaseOptions<EventableAnimation,Event
 	 */
 	public void setTickCallbackHandler(BaseTick<?,?,?> tick, TickHandler callbackHandler) {
 		tick.setCallbackHandler(callbackHandler);
+	}
+	
+	/**
+	 * @param callbackHandler the callbackHandler to set
+	 */
+	public void setRadialPointLabelCallbackHandler(Scale scale, RadialPointLabelHandler callbackHandler) {
+		scale.getPointLabels().setCallbackHandler(callbackHandler);
 	}
 
 	// FIXME to be removed

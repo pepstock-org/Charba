@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -40,6 +41,7 @@ public final class AxisMinSizeItem extends SizeItem {
 	 * 
 	 * @param width the minimum width of axis in pixel.
 	 */
+	@JsOverlay
 	public final void setWidth(int width) {
 		setNativeWidth(width);
 	}
@@ -49,6 +51,7 @@ public final class AxisMinSizeItem extends SizeItem {
 	 * 
 	 * @param height the minimum height of axis in pixel.
 	 */
+	@JsOverlay
 	public final void setHeight(int height) {
 		setNativeHeight(height);
 	}

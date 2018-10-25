@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.jsinterop.callbacks.handlers;
 
-import org.pepstock.charba.client.jsinterop.AbstractChart;
-
 /**
  * Callback function to transform data labels to point labels.
  * 
@@ -33,6 +31,6 @@ public interface RadialPointLabelHandler {
 	 * @return new label to apply to point label
 	 * @see org.pepstock.charba.client.AbstractChart
 	 */
-	String onCallback(AbstractChart<?, ?> chart, String item);
+	String onCallback(Object context, String item);
 
 }

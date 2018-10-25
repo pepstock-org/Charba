@@ -15,10 +15,10 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.callbacks.RadialPointLabelCallback;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.jsinterop.callbacks.RadialPointLabelCallback;
+import org.pepstock.charba.client.jsinterop.callbacks.handlers.RadialPointLabelHandler;
 
 /**
  * It is used to configure the point labels that are shown on the perimeter of the scale.<br>
@@ -27,25 +27,7 @@ import org.pepstock.charba.client.enums.FontStyle;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class RadialPointLabels {
-	
-	private final Axis axis;
-
-	private RadialPointLabelCallback callback = null;
-
-//	/**
-//	 * Name of fields of JavaScript object.
-//	 */
-//	private enum Property implements Key
-//	{
-//		display,
-//		callback,
-//		fontSize,
-//		fontStyle,
-//		fontColor,
-//		fontFamily,
-//	}
-
+public final class RadialPointLabels extends AxisContainer implements RadialPointLabelHandler {
 	/**
 	 * Builds the object storing the chart instance and the axis which this point labels belongs to.
 	 * 
@@ -53,8 +35,14 @@ public final class RadialPointLabels {
 	 * @param axis axis which this point labels belongs to.
 	 */
 	RadialPointLabels(Axis axis) {
-		this.axis = axis;
-//		registerNativePointLabelCallbacktHandler(getJavaScriptObject();
+		super(axis);
+		if (hasGlobalCallback()) {
+			getAxis().getChart().getOptions().getConfiguration().setRadialPointLabelCallbackHandler(getAxis().getScale(), this);
+		}
+	}
+	
+	private boolean hasGlobalCallback() {
+		return getAxis().getDefaultScale().getPointLabels().getCallback() != null;  
 	}
 
 	/**
@@ -63,7 +51,7 @@ public final class RadialPointLabels {
 	 * @param display if true, labels are shown
 	 */
 	public void setDisplay(boolean display) {
-		axis.getScale().getPointLabels().setDisplay(display);
+		getAxis().getScale().getPointLabels().setDisplay(display);
 	}
 
 	/**
@@ -72,7 +60,7 @@ public final class RadialPointLabels {
 	 * @return if true, labels are shown. 
 	 */
 	public boolean isDisplay() {
-		return axis.getScale().getPointLabels().isDisplay();
+		return getAxis().getScale().getPointLabels().isDisplay();
 	}
 
 	/**
@@ -81,7 +69,7 @@ public final class RadialPointLabels {
 	 * @param fontSize font size for the tick labels.
 	 */
 	public void setFontSize(int fontSize) {
-		axis.getScale().getPointLabels().setFontSize(fontSize);
+		getAxis().getScale().getPointLabels().setFontSize(fontSize);
 	}
 
 	/**
@@ -90,7 +78,7 @@ public final class RadialPointLabels {
 	 * @return font size for the tick labels. 
 	 */
 	public int getFontSize() {
-		return axis.getScale().getPointLabels().getFontSize();
+		return getAxis().getScale().getPointLabels().getFontSize();
 	}
 
 	/**
@@ -101,7 +89,7 @@ public final class RadialPointLabels {
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
-		axis.getScale().getPointLabels().setFontStyle(fontStyle);
+		getAxis().getScale().getPointLabels().setFontStyle(fontStyle);
 	}
 
 	/**
@@ -112,7 +100,7 @@ public final class RadialPointLabels {
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
-		return axis.getScale().getPointLabels().getFontStyle();
+		return getAxis().getScale().getPointLabels().getFontStyle();
 	}
 
 	/**
@@ -121,7 +109,7 @@ public final class RadialPointLabels {
 	 * @param fontColor font color for tick labels.
 	 */
 	public void setFontColor(IsColor fontColor) {
-		axis.getScale().getPointLabels().setFontColor(fontColor);
+		getAxis().getScale().getPointLabels().setFontColor(fontColor);
 	}
 
 	/**
@@ -130,7 +118,7 @@ public final class RadialPointLabels {
 	 * @param fontColor font color for tick labels.
 	 */
 	public void setFontColor(String fontColor) {
-		axis.getScale().getPointLabels().setFontColor(fontColor);
+		getAxis().getScale().getPointLabels().setFontColor(fontColor);
 	}
 
 	/**
@@ -139,7 +127,7 @@ public final class RadialPointLabels {
 	 * @return font color for tick labels. 
 	 */
 	public String getFontColorAsString() {
-		return axis.getScale().getPointLabels().getFontColorAsString();
+		return getAxis().getScale().getPointLabels().getFontColorAsString();
 	}
 
 	/**
@@ -148,7 +136,7 @@ public final class RadialPointLabels {
 	 * @return font color for tick labels. 
 	 */
 	public IsColor getFontColor() {
-		return axis.getScale().getPointLabels().getFontColor();
+		return getAxis().getScale().getPointLabels().getFontColor();
 	}
 
 	/**
@@ -157,7 +145,7 @@ public final class RadialPointLabels {
 	 * @param fontFamily font family for the tick labels, follows CSS font-family options.
 	 */
 	public void setFontFamily(String fontFamily) {
-		axis.getScale().getPointLabels().setFontFamily(fontFamily);
+		getAxis().getScale().getPointLabels().setFontFamily(fontFamily);
 	}
 
 	/**
@@ -166,58 +154,40 @@ public final class RadialPointLabels {
 	 * @return font family for the tick labels, follows CSS font-family options. 
 	 */
 	public String getFontFamily() {
-		return axis.getScale().getPointLabels().getFontFamily();
+		return getAxis().getScale().getPointLabels().getFontFamily();
 	}
 
 	/**
 	 * @return the callback
 	 */
 	public RadialPointLabelCallback getCallback() {
-		return callback;
+		return getAxis().getConfiguration().getPointLabels().getCallback();
+	}
+	
+	/**
+	 * set the callback
+	 */
+	public void getCallback(RadialPointLabelCallback callback) {
+		getAxis().getConfiguration().getPointLabels().setCallback(callback);
+		if (!hasGlobalCallback()) {
+			if (callback == null) {
+				getAxis().getChart().getOptions().getConfiguration().setRadialPointLabelCallbackHandler(getAxis().getScale(), null);
+			} else {
+				getAxis().getChart().getOptions().getConfiguration().setRadialPointLabelCallbackHandler(getAxis().getScale(), this);
+			}
+		}
 	}
 
-	/**
-	 * @param callback the callback to set
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.RadialPointLabelHandler#onCallback(java.lang.Object, java.lang.String)
 	 */
-	public void setCallback(RadialPointLabelCallback callback) {
-//		// checks if property is already set
-//		if (hasToBeRegistered(callback, Property.callback)) {
-//			// registers the property
-//			registerNativePointLabelCallbacktHandler(getJavaScriptObject();
-//		}
-//		this.callback = callback;
+	@Override
+	public String onCallback(Object context, String item) {
+		if (getCallback() != null) {
+			return getCallback().onCallback(getAxis().getChart(), item);
+		} else if (hasGlobalCallback()) {
+			getAxis().getDefaultScale().getPointLabels().getCallback().onCallback(getAxis().getChart(), item);
+		}
+		return item;
 	}
-
-	/**
-	 * Returns the string representation of the tick value as it should be displayed on the chart.
-	 * 
-	 * @param item tick item to be shown
-	 * @return string representation of the tick value
-	 */
-	protected String onCallback(String item) {
-//		FIXME
-//		// gets the chart instance
-//		AbstractChart<?, ?> chart = getChart();
-//		// checks if callback and chart are consistent
-//		if (callback != null && chart != null) {
-//			// invokes callback and returns new value
-//			return callback.onCallback(chart, item);
-//		}
-//		// returns the item passed because no changed
-//		return item;
-		return null;
-	}
-
-	/**
-	 * Sets the java script code to activate the call back, adding functions.
-	 * 
-	 * @param options
-	 *            java script object where adding new functions definition.
-	 */
-    private native void registerNativePointLabelCallbacktHandler(GenericJavaScriptObject options)/*-{
-		var self = this;
-	    options.callback = function(item){
-	    	return self.@org.pepstock.charba.client.options.scales.RadialPointLabels::onCallback(Ljava/lang/String;)(item);
-	    }
-	}-*/;
 }

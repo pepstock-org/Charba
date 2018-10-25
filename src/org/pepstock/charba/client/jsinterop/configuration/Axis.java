@@ -50,14 +50,14 @@ import org.pepstock.charba.client.jsinterop.utils.Window;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class Axis extends ConfigurationContainer<Scale> implements AxisBuildTicksHandler, AxisCalculateTickRotationHandler, AxisDataLimitsHandler, AxisDimensionsHandler, AxisFitHandler, AxisTickToLabelConversionHandler, AxisUpdateHandler {
+public abstract class Axis extends ConfigurationContainer<Scale> implements AxisBuildTicksHandler, AxisCalculateTickRotationHandler, AxisDataLimitsHandler, AxisDimensionsHandler, AxisFitHandler, AxisTickToLabelConversionHandler, AxisUpdateHandler {
 
 	/**
 	 * Builds the object storing the chart instance.
 	 * 
 	 * @param chart chart instance
 	 */
-	protected Axis(AbstractChart<?, ?> chart) {
+	Axis(AbstractChart<?, ?> chart) {
 		super(chart);
 		setConfiguration(new Scale(new DefaultChartScale(getDefaultScale())));
 		if (hasGlobalBuildTicksCallback()) {
@@ -523,9 +523,9 @@ abstract class Axis extends ConfigurationContainer<Scale> implements AxisBuildTi
 	@Override
 	public void onBeforeBuildTicks(Window window, AxisItem item) {
 		if (getConfiguration().getAxisBuildTicksCallback() != null) {
-			getConfiguration().getAxisBuildTicksCallback().onBeforeBuildTicks(getChart(), item);
+			getConfiguration().getAxisBuildTicksCallback().onBeforeBuildTicks(this, item);
 		} else if (hasGlobalBuildTicksCallback()) {
-			getDefaultScale().getAxisBuildTicksCallback().onBeforeBuildTicks(getChart(), item);
+			getDefaultScale().getAxisBuildTicksCallback().onBeforeBuildTicks(this, item);
 		}
 	}
 
@@ -535,9 +535,9 @@ abstract class Axis extends ConfigurationContainer<Scale> implements AxisBuildTi
 	@Override
 	public void onAfterBuildTicks(Window window, AxisItem item) {
 		if (getConfiguration().getAxisBuildTicksCallback() != null) {
-			getConfiguration().getAxisBuildTicksCallback().onAfterBuildTicks(getChart(), item);
+			getConfiguration().getAxisBuildTicksCallback().onAfterBuildTicks(this, item);
 		} else if (hasGlobalBuildTicksCallback()) {
-			getDefaultScale().getAxisBuildTicksCallback().onAfterBuildTicks(getChart(), item);
+			getDefaultScale().getAxisBuildTicksCallback().onAfterBuildTicks(this, item);
 		}
 	}
 }

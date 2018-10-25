@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -44,4 +46,7 @@ final class NativePointLabels extends NativeFontItem {
 	 */
 	@JsProperty
 	native boolean isDisplay();
+	
+	@JsProperty
+	native void setCallback(CallbackProxy.Proxy proxy);
 }

@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.jsinterop.callbacks;
 
 
-import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.configuration.Axis;
 import org.pepstock.charba.client.jsinterop.items.AxisItem;
 
 /**
@@ -35,7 +35,7 @@ public interface AxisBuildTicksCallback {
 	 * @see org.pepstock.charba.client.AbstractChart
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
-	void onBeforeBuildTicks(AbstractChart<?, ?> chart, AxisItem item);
+	void onBeforeBuildTicks(Axis axis, AxisItem item);
 
 	/**
 	 * Callback that runs after ticks are created. Useful for filtering ticks.
@@ -45,6 +45,6 @@ public interface AxisBuildTicksCallback {
 	 * @see org.pepstock.charba.client.AbstractChart
 	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
-	void onAfterBuildTicks(AbstractChart<?, ?> chart, AxisItem item);
+	void onAfterBuildTicks(Axis axis, AxisItem item);
 
 }

@@ -27,8 +27,6 @@ import org.pepstock.charba.client.jsinterop.options.Ticks;
  */
 abstract class Tick extends AbstractTick<Ticks> {
 	
-//	private final Axis axis;
-
 	private final BaseTickMinor minor;
 
 	private final BaseTickMajor major;
