@@ -108,7 +108,6 @@
 				</section>
 			</manifest>
 		</jar>
-		<copy file="${bin.archive.file}" todir="../Charba-Showcase/war/WEB-INF/lib"/>
 	</target>
 
 	<target name="compile" depends="clean, ivyRetrieve">
