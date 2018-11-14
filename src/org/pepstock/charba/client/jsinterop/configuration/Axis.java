@@ -39,7 +39,6 @@ import org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisUpdateHandler
 import org.pepstock.charba.client.jsinterop.defaults.chart.DefaultChartScale;
 import org.pepstock.charba.client.jsinterop.items.AxisItem;
 import org.pepstock.charba.client.jsinterop.options.Scale;
-import org.pepstock.charba.client.jsinterop.utils.Window;
 
 /**
  * Axes are an integral part of a chart.<br>
@@ -374,154 +373,154 @@ public abstract class Axis extends ConfigurationContainer<Scale> implements Axis
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisUpdateHandler#onBeforeUpdate(org.pepstock.charba.client.jsinterop.utils.Window, org.pepstock.charba.client.jsinterop.items.AxisItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisUpdateHandler#onBeforeUpdate(org.pepstock.charba.client.jsinterop.items.AxisItem)
 	 */
 	@Override
-	public void onBeforeUpdate(Window window, AxisItem item) {
+	public void onBeforeUpdate(AxisItem item) {
 		if (getConfiguration().getAxisUpdateCallback() != null) {
-			getConfiguration().getAxisUpdateCallback().onBeforeUpdate(getChart(), item);
+			getConfiguration().getAxisUpdateCallback().onBeforeUpdate(this, item);
 		} else if (hasGlobalUpdateCallback()) {
-			getDefaultScale().getAxisUpdateCallback().onBeforeUpdate(getChart(), item);
+			getDefaultScale().getAxisUpdateCallback().onBeforeUpdate(this, item);
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisUpdateHandler#onAfterUpdate(org.pepstock.charba.client.jsinterop.utils.Window, org.pepstock.charba.client.jsinterop.items.AxisItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisUpdateHandler#onAfterUpdate(org.pepstock.charba.client.jsinterop.items.AxisItem)
 	 */
 	@Override
-	public void onAfterUpdate(Window window, AxisItem item) {
+	public void onAfterUpdate(AxisItem item) {
 		if (getConfiguration().getAxisUpdateCallback() != null) {
-			getConfiguration().getAxisUpdateCallback().onAfterUpdate(getChart(), item);
+			getConfiguration().getAxisUpdateCallback().onAfterUpdate(this, item);
 		} else if (hasGlobalUpdateCallback()) {
-			getDefaultScale().getAxisUpdateCallback().onAfterUpdate(getChart(), item);
+			getDefaultScale().getAxisUpdateCallback().onAfterUpdate(this, item);
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisTickToLabelConversionHandler#onBeforeTickToLabelConversion(org.pepstock.charba.client.jsinterop.utils.Window, org.pepstock.charba.client.jsinterop.items.AxisItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisTickToLabelConversionHandler#onBeforeTickToLabelConversion(org.pepstock.charba.client.jsinterop.items.AxisItem)
 	 */
 	@Override
-	public void onBeforeTickToLabelConversion(Window window, AxisItem item) {
+	public void onBeforeTickToLabelConversion(AxisItem item) {
 		if (getConfiguration().getAxisTickToLabelConversionCallback() != null) {
-			getConfiguration().getAxisTickToLabelConversionCallback().onBeforeTickToLabelConversion(getChart(), item);
+			getConfiguration().getAxisTickToLabelConversionCallback().onBeforeTickToLabelConversion(this, item);
 		} else if (hasGlobalTickToLabelConversionCallback()) {
-			getDefaultScale().getAxisTickToLabelConversionCallback().onBeforeTickToLabelConversion(getChart(), item);
+			getDefaultScale().getAxisTickToLabelConversionCallback().onBeforeTickToLabelConversion(this, item);
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisTickToLabelConversionHandler#onAfterTickToLabelConversion(org.pepstock.charba.client.jsinterop.utils.Window, org.pepstock.charba.client.jsinterop.items.AxisItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisTickToLabelConversionHandler#onAfterTickToLabelConversion(org.pepstock.charba.client.jsinterop.items.AxisItem)
 	 */
 	@Override
-	public void onAfterTickToLabelConversion(Window window, AxisItem item) {
+	public void onAfterTickToLabelConversion(AxisItem item) {
 		if (getConfiguration().getAxisTickToLabelConversionCallback() != null) {
-			getConfiguration().getAxisTickToLabelConversionCallback().onAfterTickToLabelConversion(getChart(), item);
+			getConfiguration().getAxisTickToLabelConversionCallback().onAfterTickToLabelConversion(this, item);
 		} else if (hasGlobalTickToLabelConversionCallback()) {
-			getDefaultScale().getAxisTickToLabelConversionCallback().onAfterTickToLabelConversion(getChart(), item);
+			getDefaultScale().getAxisTickToLabelConversionCallback().onAfterTickToLabelConversion(this, item);
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisFitHandler#onBeforeFit(org.pepstock.charba.client.jsinterop.utils.Window, org.pepstock.charba.client.jsinterop.items.AxisItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisFitHandler#onBeforeFit(org.pepstock.charba.client.jsinterop.items.AxisItem)
 	 */
 	@Override
-	public void onBeforeFit(Window window, AxisItem item) {
+	public void onBeforeFit(AxisItem item) {
 		if (getConfiguration().getAxisFitCallback() != null) {
-			getConfiguration().getAxisFitCallback().onBeforeFit(getChart(), item);
+			getConfiguration().getAxisFitCallback().onBeforeFit(this, item);
 		} else if (hasGlobalFitCallback()) {
-			getDefaultScale().getAxisFitCallback().onBeforeFit(getChart(), item);
+			getDefaultScale().getAxisFitCallback().onBeforeFit(this, item);
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisFitHandler#onAfterFit(org.pepstock.charba.client.jsinterop.utils.Window, org.pepstock.charba.client.jsinterop.items.AxisItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisFitHandler#onAfterFit(org.pepstock.charba.client.jsinterop.items.AxisItem)
 	 */
 	@Override
-	public void onAfterFit(Window window, AxisItem item) {
+	public void onAfterFit(AxisItem item) {
 		if (getConfiguration().getAxisFitCallback() != null) {
-			getConfiguration().getAxisFitCallback().onAfterFit(getChart(), item);
+			getConfiguration().getAxisFitCallback().onAfterFit(this, item);
 		} else if (hasGlobalFitCallback()) {
-			getDefaultScale().getAxisFitCallback().onAfterFit(getChart(), item);
+			getDefaultScale().getAxisFitCallback().onAfterFit(this, item);
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisDimensionsHandler#onBeforeSetDimensions(org.pepstock.charba.client.jsinterop.utils.Window, org.pepstock.charba.client.jsinterop.items.AxisItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisDimensionsHandler#onBeforeSetDimensions(org.pepstock.charba.client.jsinterop.items.AxisItem)
 	 */
 	@Override
-	public void onBeforeSetDimensions(Window window, AxisItem item) {
+	public void onBeforeSetDimensions(AxisItem item) {
 		if (getConfiguration().getAxisDimensionsCallback() != null) {
-			getConfiguration().getAxisDimensionsCallback().onBeforeSetDimensions(getChart(), item);
+			getConfiguration().getAxisDimensionsCallback().onBeforeSetDimensions(this, item);
 		} else if (hasGlobalDimensionsCallback()) {
-			getDefaultScale().getAxisDimensionsCallback().onBeforeSetDimensions(getChart(), item);
+			getDefaultScale().getAxisDimensionsCallback().onBeforeSetDimensions(this, item);
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisDimensionsHandler#onAfterSetDimensions(org.pepstock.charba.client.jsinterop.utils.Window, org.pepstock.charba.client.jsinterop.items.AxisItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisDimensionsHandler#onAfterSetDimensions(org.pepstock.charba.client.jsinterop.items.AxisItem)
 	 */
 	@Override
-	public void onAfterSetDimensions(Window window, AxisItem item) {
+	public void onAfterSetDimensions(AxisItem item) {
 		if (getConfiguration().getAxisDimensionsCallback() != null) {
-			getConfiguration().getAxisDimensionsCallback().onAfterSetDimensions(getChart(), item);
+			getConfiguration().getAxisDimensionsCallback().onAfterSetDimensions(this, item);
 		} else if (hasGlobalDimensionsCallback()) {
-			getDefaultScale().getAxisDimensionsCallback().onAfterSetDimensions(getChart(), item);
+			getDefaultScale().getAxisDimensionsCallback().onAfterSetDimensions(this, item);
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisDataLimitsHandler#onBeforeDataLimits(org.pepstock.charba.client.jsinterop.utils.Window, org.pepstock.charba.client.jsinterop.items.AxisItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisDataLimitsHandler#onBeforeDataLimits(org.pepstock.charba.client.jsinterop.items.AxisItem)
 	 */
 	@Override
-	public void onBeforeDataLimits(Window window, AxisItem item) {
+	public void onBeforeDataLimits(AxisItem item) {
 		if (getConfiguration().getAxisDataLimitsCallback() != null) {
-			getConfiguration().getAxisDataLimitsCallback().onBeforeDataLimits(getChart(), item);
+			getConfiguration().getAxisDataLimitsCallback().onBeforeDataLimits(this, item);
 		} else if (hasGlobalDataLimitsCallback()) {
-			getDefaultScale().getAxisDataLimitsCallback().onBeforeDataLimits(getChart(), item);
+			getDefaultScale().getAxisDataLimitsCallback().onBeforeDataLimits(this, item);
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisDataLimitsHandler#onAfterDataLimits(org.pepstock.charba.client.jsinterop.utils.Window, org.pepstock.charba.client.jsinterop.items.AxisItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisDataLimitsHandler#onAfterDataLimits(org.pepstock.charba.client.jsinterop.items.AxisItem)
 	 */
 	@Override
-	public void onAfterDataLimits(Window window, AxisItem item) {
+	public void onAfterDataLimits(AxisItem item) {
 		if (getConfiguration().getAxisDataLimitsCallback() != null) {
-			getConfiguration().getAxisDataLimitsCallback().onAfterDataLimits(getChart(), item);
+			getConfiguration().getAxisDataLimitsCallback().onAfterDataLimits(this, item);
 		} else if (hasGlobalDataLimitsCallback()) {
-			getDefaultScale().getAxisDataLimitsCallback().onAfterDataLimits(getChart(), item);
+			getDefaultScale().getAxisDataLimitsCallback().onAfterDataLimits(this, item);
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisCalculateTickRotationHandler#onBeforeCalculateTickRotation(org.pepstock.charba.client.jsinterop.utils.Window, org.pepstock.charba.client.jsinterop.items.AxisItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisCalculateTickRotationHandler#onBeforeCalculateTickRotation(org.pepstock.charba.client.jsinterop.items.AxisItem)
 	 */
 	@Override
-	public void onBeforeCalculateTickRotation(Window window, AxisItem item) {
+	public void onBeforeCalculateTickRotation(AxisItem item) {
 		if (getConfiguration().getAxisCalculateTickRotationCallback() != null) {
-			getConfiguration().getAxisCalculateTickRotationCallback().onBeforeCalculateTickRotation(getChart(), item);
+			getConfiguration().getAxisCalculateTickRotationCallback().onBeforeCalculateTickRotation(this, item);
 		} else if (hasGlobalCalculateTickRotationCallback()) {
-			getDefaultScale().getAxisCalculateTickRotationCallback().onBeforeCalculateTickRotation(getChart(), item);
+			getDefaultScale().getAxisCalculateTickRotationCallback().onBeforeCalculateTickRotation(this, item);
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisCalculateTickRotationHandler#onAfterCalculateTickRotation(org.pepstock.charba.client.jsinterop.utils.Window, org.pepstock.charba.client.jsinterop.items.AxisItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisCalculateTickRotationHandler#onAfterCalculateTickRotation(org.pepstock.charba.client.jsinterop.items.AxisItem)
 	 */
 	@Override
-	public void onAfterCalculateTickRotation(Window window, AxisItem item) {
+	public void onAfterCalculateTickRotation(AxisItem item) {
 		if (getConfiguration().getAxisCalculateTickRotationCallback() != null) {
-			getConfiguration().getAxisCalculateTickRotationCallback().onAfterCalculateTickRotation(getChart(), item);
+			getConfiguration().getAxisCalculateTickRotationCallback().onAfterCalculateTickRotation(this, item);
 		} else if (hasGlobalCalculateTickRotationCallback()) {
-			getDefaultScale().getAxisCalculateTickRotationCallback().onAfterCalculateTickRotation(getChart(), item);
+			getDefaultScale().getAxisCalculateTickRotationCallback().onAfterCalculateTickRotation(this, item);
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisBuildTicksHandler#onBeforeBuildTicks(org.pepstock.charba.client.jsinterop.utils.Window, org.pepstock.charba.client.jsinterop.items.AxisItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisBuildTicksHandler#onBeforeBuildTicks(org.pepstock.charba.client.jsinterop.items.AxisItem)
 	 */
 	@Override
-	public void onBeforeBuildTicks(Window window, AxisItem item) {
+	public void onBeforeBuildTicks(AxisItem item) {
 		if (getConfiguration().getAxisBuildTicksCallback() != null) {
 			getConfiguration().getAxisBuildTicksCallback().onBeforeBuildTicks(this, item);
 		} else if (hasGlobalBuildTicksCallback()) {
@@ -530,10 +529,10 @@ public abstract class Axis extends ConfigurationContainer<Scale> implements Axis
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisBuildTicksHandler#onAfterBuildTicks(org.pepstock.charba.client.jsinterop.utils.Window, org.pepstock.charba.client.jsinterop.items.AxisItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisBuildTicksHandler#onAfterBuildTicks(org.pepstock.charba.client.jsinterop.items.AxisItem)
 	 */
 	@Override
-	public void onAfterBuildTicks(Window window, AxisItem item) {
+	public void onAfterBuildTicks(AxisItem item) {
 		if (getConfiguration().getAxisBuildTicksCallback() != null) {
 			getConfiguration().getAxisBuildTicksCallback().onAfterBuildTicks(this, item);
 		} else if (hasGlobalBuildTicksCallback()) {

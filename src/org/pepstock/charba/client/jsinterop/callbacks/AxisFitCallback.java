@@ -15,35 +15,36 @@
 */
 package org.pepstock.charba.client.jsinterop.callbacks;
 
-import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.configuration.Axis;
 import org.pepstock.charba.client.jsinterop.items.AxisItem;
 
 /**
  * Interface to be implemented which can be used to change parameters in the scale during fitting phase.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.options.scales.Axis
+ * @see org.pepstock.charba.client.jsinterop.configuration.Axis
+ * @since 2.0
  */
 public interface AxisFitCallback {
 
 	/**
 	 * Callback that runs before the scale fits to the canvas.
 	 * 
-	 * @param chart chart instance
-	 * @param item axis item instance instance
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem
+	 * @param axis axis instance where this callback as been defined
+	 * @param item axis item instance
+	 * @see org.pepstock.charba.client.jsinterop.configuration.Axis
+	 * @see org.pepstock.charba.client.jsinterop.items.AxisItem
 	 */
-	void onBeforeFit(AbstractChart<?, ?> chart, AxisItem item);
+	void onBeforeFit(Axis axis, AxisItem item);
 
 	/**
 	 * Callback that runs after the scale fits to the canvas.
 	 * 
-	 * @param chart chart instance
-	 * @param item axis item instance instance
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem
+	 * @param axis axis instance where this callback as been defined
+	 * @param item axis item instance
+	 * @see org.pepstock.charba.client.jsinterop.configuration.Axis
+	 * @see org.pepstock.charba.client.jsinterop.items.AxisItem
 	 */
-	void onAfterFit(AbstractChart<?, ?> chart, AxisItem item);
+	void onAfterFit(Axis axis, AxisItem item);
 
 }

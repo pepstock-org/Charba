@@ -18,15 +18,19 @@ package org.pepstock.charba.client.jsinterop.callbacks.handlers;
 import org.pepstock.charba.client.jsinterop.items.LegendItem;
 
 /**
- * Filters legend items out of the legend. Receives 2 parameters, a Legend Item and the chart.
+ * Interface to be implemented from configuration item to be engaged when a legend filter callback has been invoked.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.items.LegendItem
- * @see org.pepstock.charba.client.options.LegendLabels
- * @see org.pepstock.charba.client.callbacks.FilterHandler
+ * @since 2.0
  */
 public interface LegendFilterHandler {
-	
-	boolean onFilter(Object context, LegendItem item);
+
+	/**
+	 * Callback to filter legend items.
+	 * 
+	 * @param item item to be filtered
+	 * @return <code>false</code> to remove the item from the container, otherwise <code>true</code>.
+	 */
+	boolean onFilter(LegendItem item);
 
 }

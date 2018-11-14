@@ -22,7 +22,8 @@ import org.pepstock.charba.client.jsinterop.items.LegendLabelItem;
  * Generates legend items for each thing in the legend.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.options.LegendLabels
+ * @see org.pepstock.charba.client.jsinterop.configuration.LegendLabels
+ * @since 2.0
  */
 public interface LegendLabelsCallback {
 
@@ -31,8 +32,7 @@ public interface LegendLabelsCallback {
 	 * 
 	 * @param chart chart instance
 	 * @return an array of legend items. if <code>null</code>, uses the default implementation
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.LegendLabelItem
+	 * @see org.pepstock.charba.client.jsinterop.items.LegendLabelItem
 	 */
 	LegendLabelItem[] generateLegendLabels(AbstractChart<?, ?> chart);
 

@@ -36,7 +36,6 @@ public abstract class BaseTick<P extends BaseModel<?,?,?>, D extends IsDefaultFo
 
 	@JsFunction
 	interface ProxyTickCallback {
-		// FIXME context
 		String call(Object context, double value, int index, ArrayDouble values);
 	}
 	
@@ -65,7 +64,7 @@ public abstract class BaseTick<P extends BaseModel<?,?,?>, D extends IsDefaultFo
 			@Override
 			public String call(Object context, double value, int index, ArrayDouble values) {
 				if (callbackHandler != null) {
-					return callbackHandler.onCallback(context, value, index, values);
+					return callbackHandler.onCallback(value, index, values);
 				}
 				return String.valueOf(value);
 			}

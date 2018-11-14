@@ -16,20 +16,17 @@
 package org.pepstock.charba.client.jsinterop.callbacks.handlers;
 
 /**
- * Sometimes you need a very complex legend. In these cases, it makes sense to generate an HTML legend. Charts provide a
- * {@link org.pepstock.charba.client.AbstractChart#generateLegend()} method that returns an HTML string for the legend.
+ * Interface to be implemented from configuration item to be engaged when a legend callback has been invoked.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.AbstractChart#generateLegend()
+ * @since 2.0
  */
 public interface LegendHandler {
 
 	/**
 	 * Creates HTML representation of legend.
-	 * 
-	 * @param chart chart instance
-	 * @param builder uses SafeHTML builder to create HTML
+	 * @return the HTML representation of legend.
 	 */
-	String generateLegend(Object context);
+	String generateLegend();
 
 }

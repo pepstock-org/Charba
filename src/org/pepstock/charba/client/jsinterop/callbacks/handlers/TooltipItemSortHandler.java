@@ -18,21 +18,21 @@ package org.pepstock.charba.client.jsinterop.callbacks.handlers;
 import org.pepstock.charba.client.jsinterop.items.TooltipItem;
 
 /**
- * Allows sorting of tooltip items.
+ * Interface to be implemented from configuration item to be engaged when a tooltip item sort callback has been invoked.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  */
 public interface TooltipItemSortHandler {
 
 	/**
 	 * Allows sorting of tooltip items.
 	 * 
-	 * @param chart chart instance
 	 * @param item1 the first object to be compared.
 	 * @param item2 the second object to be compared.
 	 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the
 	 *         second.
 	 */
-	int onItemSort(Object context, TooltipItem item1, TooltipItem item2);
+	int onItemSort(TooltipItem item1, TooltipItem item2);
 
 }

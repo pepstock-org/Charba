@@ -20,42 +20,35 @@ import java.util.List;
 import org.pepstock.charba.client.jsinterop.items.TooltipItem;
 
 /**
- * The tooltip label configuration is nested below the tooltip configuration using the callbacks key.<br>
- * The tooltip has the following callbacks for providing text.<br>
- * All functions must return either a string or an array of strings. Arrays of strings are treated as multiple lines of
- * text.<br>
- * This interface takes care about labels to apply to the title.
+ * Interface to be implemented from configuration item to be engaged when a tooltip title callback has been invoked.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public interface TooltipTitleHandler {
 
 	/**
 	 * Returns the text to render before the title.
 	 * 
-	 * @param chart chart instance
 	 * @param items list of all tooltip items
 	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored.
 	 */
-	String[] onBeforeTitle(Object context, List<TooltipItem> items);
+	String[] onBeforeTitle(List<TooltipItem> items);
 
 	/**
 	 * Returns text to render as the title of the tooltip.
 	 * 
-	 * @param chart chart instance
 	 * @param items list of all tooltip items
 	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored.
 	 */
-	String[] onTitle(Object context, List<TooltipItem> items);
+	String[] onTitle(List<TooltipItem> items);
 
 	/**
 	 * Returns text to render after the title.
 	 * 
-	 * @param chart chart instance
 	 * @param items list of all tooltip items
 	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored.
 	 */
-	String[] onAfterTitle(Object context, List<TooltipItem> items);
+	String[] onAfterTitle(List<TooltipItem> items);
 
 }

@@ -361,10 +361,10 @@ public abstract class ConfigurationOptions extends EventProvider<EventableOption
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.LegendHandler#generateLegend(java.lang.Object)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.LegendHandler#generateLegend()
 	 */
 	@Override
-	public String generateLegend(Object context) {
+	public String generateLegend() {
 		// creates the safe html to be sure about the right HTML to send back
 		SafeHtmlBuilder builder = new SafeHtmlBuilder();
 		// checks if callback is consistent

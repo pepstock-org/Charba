@@ -125,7 +125,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 			@Override
 			public void call(Object context, TooltipModel model) {
 				if (customHandler != null) {
-					customHandler.onCustom(context, model);
+					customHandler.onCustom(model);
 				}
 			}
 	
@@ -139,7 +139,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 			@Override
 			public int call(Object context, TooltipItem item1, TooltipItem item2) {
 				if (itemSortHandler != null) {
-					return itemSortHandler.onItemSort(context, item1, item2);
+					return itemSortHandler.onItemSort(item1, item2);
 				}
 				// default is 0 - equals
 				return 0;
@@ -155,7 +155,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 			@Override
 			public boolean call(Object context, TooltipItem item) {
 				if (filterHandler != null) {
-					filterHandler.onFilter(context, item);
+					filterHandler.onFilter(item);
 				}
 				// default is true
 				return true;

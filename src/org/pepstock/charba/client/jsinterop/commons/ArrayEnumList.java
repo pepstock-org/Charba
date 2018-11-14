@@ -25,12 +25,13 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.utils.JSON;
 
 /**
- * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each element is inserted. <br>
+ * The user of this interface has precise control over where in the list each element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
- * This implementation uses a GWT JsArray as backend to store objects (enum values).
+ * This implementation uses a java script object as backend to store objects (enum values).
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.commons.JsArrayStringImpl
+ * @since 2.0
+ * @see org.pepstock.charba.client.jsinterop.commons.ArrayString
  */
 public final class ArrayEnumList<E extends Key> implements List<E> {
 	
@@ -40,14 +41,14 @@ public final class ArrayEnumList<E extends Key> implements List<E> {
 	private final E[] definedValues;
 
 	/**
-	 * Internal constructor used to load a JSArray already in another object.
+	 * Internal constructor used to load an array already in another object.
 	 * @param values all values of an enumeration
-	 * @param array JS array instance
+	 * @param array array instance
 	 */
 	ArrayEnumList(E[] values, ArrayString array) {
 		// sets all enumeration values
 		this.definedValues = values;
-		// if null, creates a new JS array
+		// if null, creates a new array
 		if (array == null){
 			this.array = new ArrayString();
 		} else {

@@ -64,7 +64,7 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels, Nat
 			@Override
 			public String call(Object context, String item) {
 				if (callbackHandler != null) {
-					return callbackHandler.onCallback(context, item);
+					return callbackHandler.onCallback(item);
 				}
 				return item;
 			}

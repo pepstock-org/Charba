@@ -18,11 +18,10 @@ package org.pepstock.charba.client.jsinterop.callbacks.handlers;
 import org.pepstock.charba.client.jsinterop.items.TooltipModel;
 
 /**
- * Custom tooltips allow you to hook into the tooltip rendering process so that you can render the tooltip in your own custom
- * way.<br>
- * Generally this is used to create an HTML tooltip instead of an on canvas one.
+ * Interface to be implemented from configuration item to be engaged when a tooltip custom callback has been invoked.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  */
 public interface TooltipCustomHandler {
 
@@ -30,9 +29,8 @@ public interface TooltipCustomHandler {
 	 * Custom tooltips allow you to hook into the tooltip rendering process so that you can render the tooltip in your own
 	 * custom way.
 	 * 
-	 * @param chart chart instance
 	 * @param model all info about tooltip to create own HTML tooltip.
 	 */
-	void onCustom(Object context, TooltipModel model);
+	void onCustom(TooltipModel model);
 
 }

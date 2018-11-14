@@ -15,35 +15,36 @@
 */
 package org.pepstock.charba.client.jsinterop.callbacks;
 
-import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.configuration.Axis;
 import org.pepstock.charba.client.jsinterop.items.AxisItem;
 
 /**
  * Interface to be implemented which can be used to change parameters in the scale during ticks label conversion.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.options.scales.Axis
+ * @see org.pepstock.charba.client.jsinterop.configuration.Axis
+ * @since 2.0
  */
 public interface AxisTickToLabelConversionCallback {
 
 	/**
 	 * Callback that runs before ticks are converted into strings.
 	 * 
-	 * @param chart chart instance
+	 * @param axis axis instance where this callback as been defined
 	 * @param item axis item instance
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem
+	 * @see org.pepstock.charba.client.jsinterop.configuration.Axis
+	 * @see org.pepstock.charba.client.jsinterop.items.AxisItem
 	 */
-	void onBeforeTickToLabelConversion(AbstractChart<?, ?> chart, AxisItem item);
+	void onBeforeTickToLabelConversion(Axis axis, AxisItem item);
 
 	/**
 	 * Callback that runs after ticks are converted into strings.
 	 * 
-	 * @param chart chart instance
+	 * @param axis axis instance where this callback as been defined
 	 * @param item axis item instance
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem
+	 * @see org.pepstock.charba.client.jsinterop.configuration.Axis
+	 * @see org.pepstock.charba.client.jsinterop.items.AxisItem
 	 */
-	void onAfterTickToLabelConversion(AbstractChart<?, ?> chart, AxisItem item);
+	void onAfterTickToLabelConversion(Axis axis, AxisItem item);
 
 }

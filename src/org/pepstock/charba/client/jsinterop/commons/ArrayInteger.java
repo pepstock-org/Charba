@@ -23,63 +23,129 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * A simple wrapper around a homogeneous native array of numeric (integers) values.<br>
- * Extends GWint implementation adding additional methods, helpful to manage the array as a list.
+ *  Array object which maps the java script object.<br>
+ *  A simple wrapper around a homogeneous native array of numeric (int) values.
  *  
  * @author Andrea "Stock" Stocchero
- * @see com.google.gwt.core.client.JsArrayInteger
+ * @since 2.0
  */
 @JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
 public final class ArrayInteger {
 
+	/**
+	 * This method creates new array instance with a variable number of <code>int</code> arguments.
+	 * @param items int items to create new array
+	 * @return new array instance of ints.
+	 */
 	public static native ArrayInteger of(int... items);
 
+	/**
+	 * Creates a java script array of ints starting from list of ints. 
+	 * @param items list of ints to load into new java script array.
+	 * @return new array instance of ints.
+	 */
 	@JsOverlay
 	public static ArrayInteger of(List<Integer> values){
-		// creates the list
+		// creates the array
 		ArrayInteger result = new ArrayInteger();
-		// checks if array is null
+		// checks if list is null
 		if (values == null){
 			return result;
 		}
+		// scans all items of list
 		for (Integer value : values) {
-			// adds all elements
+			// adds elements
 			result.push(value.intValue());
 		}
-		// returns the list
+		// returns the array
 		return result;
 	}
 
-
+	/**
+	 * Returns the number of elements in this array.
+	 * @return the number of elements in this array.
+	 */
 	@JsProperty(name = "length")
 	public native int length();
 
 	/**
-	 * Returns the index of the last occurrence of the specified element in this object, or -1 if this object does not contain
+	 * Returns the index of the last occurrence of the specified element in this array, or -1 if this array does not contain
 	 * the element.
 	 * 
 	 * @param value element to search for
-	 * @return the index of the last occurrence of the specified element in this object, or -1 if this object does not contain
+	 * @return the index of the last occurrence of the specified element in this array, or -1 if this array does not contain
 	 *         the element
 	 */
 	native int lastIndexOf(int value);
 
 	/**
-	 * Returns the index of the first occurrence of the specified element in this object, or -1 if this object does not contain
+	 * Returns the index of the first occurrence of the specified element in this array, or -1 if this array does not contain
 	 * the element.
 	 * 
 	 * @param value element to search for
-	 * @return the index of the first occurrence of the specified element in this object, or -1 if this object does not contain
+	 * @return the index of the first occurrence of the specified element in this array, or -1 if this array does not contain
 	 *         the element
 	 */
 	native int indexOf(int value);
 
+	/**
+	 * Returns a shallow copy of a portion of an array into a new array object selected from begin to end (end not included).<br>
+	 * The original array will not be modified.
+	 * @param start  Zero-based index at which to begin extraction.<br>
+	 *               A negative index can be used, indicating an offset from the end of the sequence.<br>
+	 *               If begin is undefined, slice begins from index 0.<br>
+	 *               If begin is greater than the length of the sequence, an empty array is returned.
+	 * @param end  Zero-based index before which to end extraction. <code>slice</code> extracts up to but not including end.<br>
+	 *             A negative index can be used, indicating an offset from the end of the sequence.<br>
+	 *             If end is omitted, slice extracts through the end of the sequence (array.length()).
+	 *             If end is greater than the length of the sequence, <code>slice</code> extracts through to the end of the sequence (array.length()).
+	 * @return A new array containing the extracted elements.
+	 */
 	native ArrayInteger slice(int start, int end);
 	
+	/**
+	 * This method changes the contents of an array by removing existing elements and/or adding new elements.
+	 * @param start index at which to start changing the array (with origin 0).<br>
+	 *              If greater than the length of the array, actual starting index will be set to the length of the array.<br>
+	 *              If negative, will begin that many elements from the end of the array (with origin -1) and <br>
+	 *              will be set to 0 if absolute value is greater than the length of the array.
+	 * @return an array containing the deleted elements.<br>
+	 *         If only one element is removed, an array of one element is returned.<br>
+	 *         If no elements are removed, an empty array is returned.
+	 */
 	native ArrayInteger splice(int start);
 
+	/**
+	 * This method changes the contents of an array by removing existing elements and/or adding new elements.
+	 * @param start index at which to start changing the array (with origin 0).<br>
+	 *              If greater than the length of the array, actual starting index will be set to the length of the array.<br>
+	 *              If negative, will begin that many elements from the end of the array (with origin -1) and <br>
+	 *              will be set to 0 if absolute value is greater than the length of the array.
+	 * @param deleteCounts indicating the number of old array elements to remove.<br>
+	 * 					   If deleteCount is omitted, or if its value is larger than array.length() - start (that is, if it is greater than the number of elements left in the array,
+	 *                     starting at start), then all of the elements from start through the end of the array will be deleted.<br>
+	 *                     If deleteCount is 0 or negative, no elements are removed.
+	 * @return an array containing the deleted elements.<br>
+	 *         If only one element is removed, an array of one element is returned.<br>
+	 *         If no elements are removed, an empty array is returned.
+	 */
 	native ArrayInteger splice(int start, int deleteCounts);
 
+	/**
+	 * This method changes the contents of an array by removing existing elements and/or adding new elements.
+	 * @param start index at which to start changing the array (with origin 0).<br>
+	 *              If greater than the length of the array, actual starting index will be set to the length of the array.<br>
+	 *              If negative, will begin that many elements from the end of the array (with origin -1) and <br>
+	 *              will be set to 0 if absolute value is greater than the length of the array.
+	 * @param deleteCounts indicating the number of old array elements to remove.<br>
+	 * 					   If deleteCount is omitted, or if its value is larger than array.length() - start (that is, if it is greater than the number of elements left in the array,
+	 *                     starting at start), then all of the elements from start through the end of the array will be deleted.<br>
+	 *                     If deleteCount is 0 or negative, no elements are removed.
+	 * @param item the element to add to the array, beginning at the start index. If you don't specify any elements, will only remove elements from the array.
+	 * @return an array containing the deleted elements.<br>
+	 *         If only one element is removed, an array of one element is returned.<br>
+	 *         If no elements are removed, an empty array is returned.
+	 */
 	native ArrayInteger splice(int start, int deleteCounts, int item);
 
 	/**
@@ -91,8 +157,8 @@ public final class ArrayInteger {
 	};
 
 	/**
-	 * Removes the element at the specified position in this object. Shifts any subsequent elements to the left (subtracts one
-	 * from their indices). Returns the element that was removed from the object.
+	 * Removes the element at the specified position in this array. Shifts any subsequent elements to the left (subtracts one
+	 * from their indices). Returns the element that was removed from the array.
 	 * 
 	 * @param index the index of the element to be removed
 	 * @return the element previously at the specified position
@@ -103,7 +169,7 @@ public final class ArrayInteger {
 	}
 
 	/**
-	 * Inserts the specified element at the specified position in this object. Shifts the element currently at that position (if
+	 * Inserts the specified element at the specified position in this array. Shifts the element currently at that position (if
 	 * any) and any subsequent elements to the right (adds one to their indices).
 	 * 
 	 * @param index index at which the specified element is to be inserted
@@ -130,17 +196,23 @@ public final class ArrayInteger {
 	}
 
 	/**
-	 * Pushes the given integer onto the end of the array.
+	 * Fills all the elements of an array from a start index to an end index with a passed value. The end index is not included.
+	 * @param item value to fill an array. 
+	 * @param start Start index, defaults to 0.
+	 * @param end End index, defaults to array.length().
 	 */
 	native void fill(int item, int start, int end);
 
 	/**
-	 * Pushes the given integer onto the end of the array.
+	 * Adds one element to the end of an array and returns the new length of the array.
+	 * @param item The element to add to the end of the array.
+	 * @return The new length of the array upon which the method was called.
 	 */
 	native void push(int item);
 	
 	/**
-	 * Pushes the given integer onto the end of the array.
+	 * Removes the last element from an array and returns that element. This method changes the length of the array.
+	 * @return The removed element from the array; <code>null</code> if the array is empty.
 	 */
 	native int pop();
 
@@ -156,7 +228,5 @@ public final class ArrayInteger {
 	@JsOverlay
 	void set(int index, int item){
 		fill(item, index, index+1);
-	}
-
-	
+	}	
 }

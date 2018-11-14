@@ -41,7 +41,6 @@ import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
 import org.pepstock.charba.client.jsinterop.items.AxisItem;
 import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
-import org.pepstock.charba.client.jsinterop.utils.Window;
 
 import jsinterop.annotations.JsFunction;
 
@@ -64,72 +63,72 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 	
 	@JsFunction
 	interface ProxyBeforeUpdateCallback {
-		void call(Window window, AxisItem item);
+		void call(Object context, AxisItem item);
 	}
 
 	@JsFunction
 	interface ProxyBeforeSetDimensionsCallback {
-		void call(Window window, AxisItem item);
+		void call(Object context, AxisItem item);
 	}
 
 	@JsFunction
 	interface ProxyAfterSetDimensionsCallback {
-		void call(Window window, AxisItem item);
+		void call(Object context, AxisItem item);
 	}
 
 	@JsFunction
 	interface ProxyBeforeDataLimitsCallback {
-		void call(Window window, AxisItem item);
+		void call(Object context, AxisItem item);
 	}
 
 	@JsFunction
 	interface ProxyAfterDataLimitsCallback {
-		void call(Window window, AxisItem item);
+		void call(Object context, AxisItem item);
 	}
 
 	@JsFunction
 	interface ProxyBeforeBuildTicksCallback {
-		void call(Window window, AxisItem item);
+		void call(Object context, AxisItem item);
 	}
 
 	@JsFunction
 	interface ProxyAfterBuildTicksCallback {
-		void call(Window window, AxisItem item);
+		void call(Object context, AxisItem item);
 	}
 
 	@JsFunction
 	interface ProxyBeforeTickToLabelConversionCallback {
-		void call(Window window, AxisItem item);
+		void call(Object context, AxisItem item);
 	}
 
 	@JsFunction
 	interface ProxyAfterTickToLabelConversionCallback {
-		void call(Window window, AxisItem item);
+		void call(Object context, AxisItem item);
 	}
 
 	@JsFunction
 	interface ProxyBeforeCalculateTickRotationCallback {
-		void call(Window window, AxisItem item);
+		void call(Object context, AxisItem item);
 	}
 
 	@JsFunction
 	interface ProxyAfterCalculateTickRotationCallback {
-		void call(Window window, AxisItem item);
+		void call(Object context, AxisItem item);
 	}
 
 	@JsFunction
 	interface ProxyBeforeFitCallback {
-		void call(Window window, AxisItem item);
+		void call(Object context, AxisItem item);
 	}
 
 	@JsFunction
 	interface ProxyAfterFitCallback {
-		void call(Window window, AxisItem item);
+		void call(Object context, AxisItem item);
 	}
 
 	@JsFunction
 	interface ProxyAfterUpdateCallback {
-		void call(Window window, AxisItem item);
+		void call(Object context, AxisItem item);
 	}
 
 	private final GridLines gridLines;
@@ -220,7 +219,7 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 	private AxisTickToLabelConversionHandler axisTickToLabelConversionHandler = null;
 	
 	private AxisUpdateHandler axisUpdateHandler = null;
-
+	
 	// here scale is ROOT
 	public Scale(IsDefaultScale defaultValues) {
 		this(null, defaultValues, null);
@@ -242,9 +241,9 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 		beforeUpdateCallbackProxy.setCallback(new ProxyBeforeUpdateCallback() {
 
 			@Override
-			public void call(Window window, AxisItem item) {
+			public void call(Object context, AxisItem item) {
 				if (axisUpdateHandler != null) {
-					axisUpdateHandler.onBeforeUpdate(window, item);
+					axisUpdateHandler.onBeforeUpdate(item);
 				}
 			}
 		});
@@ -252,9 +251,9 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 		beforeSetDimensionsCallbackProxy.setCallback(new ProxyBeforeSetDimensionsCallback() {
 
 			@Override
-			public void call(Window window, AxisItem item) {
+			public void call(Object context, AxisItem item) {
 				if (axisDimensionsHandler != null) {
-					axisDimensionsHandler.onBeforeSetDimensions(window, item);
+					axisDimensionsHandler.onBeforeSetDimensions(item);
 				}
 			}
 		});
@@ -262,9 +261,9 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 		afterSetDimensionsCallbackProxy.setCallback(new ProxyAfterSetDimensionsCallback() {
 
 			@Override
-			public void call(Window window, AxisItem item) {
+			public void call(Object context, AxisItem item) {
 				if (axisDimensionsHandler != null) {
-					axisDimensionsHandler.onAfterSetDimensions(window, item);
+					axisDimensionsHandler.onAfterSetDimensions(item);
 				}
 			}
 		});
@@ -272,9 +271,9 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 		beforeDataLimitsCallbackProxy.setCallback(new ProxyBeforeDataLimitsCallback() {
 
 			@Override
-			public void call(Window window, AxisItem item) {
+			public void call(Object context, AxisItem item) {
 				if (axisDataLimitsHandler != null) {
-					axisDataLimitsHandler.onBeforeDataLimits(window, item);
+					axisDataLimitsHandler.onBeforeDataLimits(item);
 				}
 			}
 		});
@@ -282,9 +281,9 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 		afterDataLimitsCallbackProxy.setCallback(new ProxyAfterDataLimitsCallback() {
 
 			@Override
-			public void call(Window window, AxisItem item) {
+			public void call(Object context, AxisItem item) {
 				if (axisDataLimitsHandler != null) {
-					axisDataLimitsHandler.onAfterDataLimits(window, item);
+					axisDataLimitsHandler.onAfterDataLimits(item);
 				}
 			}
 		});
@@ -292,9 +291,9 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 		beforeBuildTicksCallbackProxy.setCallback(new ProxyBeforeBuildTicksCallback() {
 
 			@Override
-			public void call(Window window, AxisItem item) {
+			public void call(Object context, AxisItem item) {
 				if (axisBuildTicksHandler != null) {
-					axisBuildTicksHandler.onBeforeBuildTicks(window, item);
+					axisBuildTicksHandler.onBeforeBuildTicks(item);
 				}
 			}
 		});
@@ -302,9 +301,9 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 		afterBuildTicksCallbackProxy.setCallback(new ProxyAfterBuildTicksCallback() {
 
 			@Override
-			public void call(Window window, AxisItem item) {
+			public void call(Object context, AxisItem item) {
 				if (axisBuildTicksHandler != null) {
-					axisBuildTicksHandler.onAfterBuildTicks(window, item);
+					axisBuildTicksHandler.onAfterBuildTicks(item);
 				}
 			}
 		});
@@ -312,9 +311,9 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 		beforeTickToLabelConversionCallbackProxy.setCallback(new ProxyBeforeTickToLabelConversionCallback() {
 
 			@Override
-			public void call(Window window, AxisItem item) {
+			public void call(Object context, AxisItem item) {
 				if (axisTickToLabelConversionHandler != null) {
-					axisTickToLabelConversionHandler.onBeforeTickToLabelConversion(window, item);
+					axisTickToLabelConversionHandler.onBeforeTickToLabelConversion(item);
 				}
 			}
 		});
@@ -322,9 +321,9 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 		afterTickToLabelConversionCallbackProxy.setCallback(new ProxyAfterTickToLabelConversionCallback() {
 
 			@Override
-			public void call(Window window, AxisItem item) {
+			public void call(Object context, AxisItem item) {
 				if (axisTickToLabelConversionHandler != null) {
-					axisTickToLabelConversionHandler.onAfterTickToLabelConversion(window, item);
+					axisTickToLabelConversionHandler.onAfterTickToLabelConversion(item);
 				}
 			}
 		});
@@ -332,9 +331,9 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 		beforeCalculateTickRotationCallbackProxy.setCallback(new ProxyBeforeCalculateTickRotationCallback() {
 
 			@Override
-			public void call(Window window, AxisItem item) {
+			public void call(Object context, AxisItem item) {
 				if (axisCalculateTickRotationHandler != null) {
-					axisCalculateTickRotationHandler.onBeforeCalculateTickRotation(window, item);
+					axisCalculateTickRotationHandler.onBeforeCalculateTickRotation(item);
 				}
 			}
 		});
@@ -342,9 +341,9 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 		afterCalculateTickRotationCallbackProxy.setCallback(new ProxyAfterCalculateTickRotationCallback() {
 
 			@Override
-			public void call(Window window, AxisItem item) {
+			public void call(Object context, AxisItem item) {
 				if (axisCalculateTickRotationHandler != null) {
-					axisCalculateTickRotationHandler.onAfterCalculateTickRotation(window, item);
+					axisCalculateTickRotationHandler.onAfterCalculateTickRotation(item);
 				}
 			}
 		});
@@ -352,9 +351,9 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 		beforeFitCallbackProxy.setCallback(new ProxyBeforeFitCallback() {
 
 			@Override
-			public void call(Window window, AxisItem item) {
+			public void call(Object context, AxisItem item) {
 				if (axisFitHandler != null) {
-					axisFitHandler.onBeforeFit(window, item);
+					axisFitHandler.onBeforeFit(item);
 				}
 			}
 		});
@@ -362,9 +361,9 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 		afterFitCallbackProxy.setCallback(new ProxyAfterFitCallback() {
 
 			@Override
-			public void call(Window window, AxisItem item) {
+			public void call(Object context, AxisItem item) {
 				if (axisFitHandler != null) {
-					axisFitHandler.onAfterFit(window, item);
+					axisFitHandler.onAfterFit(item);
 				}
 			}
 		});
@@ -372,9 +371,9 @@ public class Scale extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSca
 		afterUpdateCallbackProxy.setCallback(new ProxyAfterUpdateCallback() {
 
 			@Override
-			public void call(Window window, AxisItem item) {
+			public void call(Object context, AxisItem item) {
 				if (axisUpdateHandler != null) {
-					axisUpdateHandler.onAfterUpdate(window, item);
+					axisUpdateHandler.onAfterUpdate(item);
 				}
 			}
 		});

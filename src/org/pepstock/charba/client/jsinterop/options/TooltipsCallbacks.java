@@ -193,7 +193,7 @@ public final class TooltipsCallbacks extends BaseModel<Tooltips, IsDefaultToolti
 			@Override
 			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
 				if (titleHandler != null) {
-					String[] result = titleHandler.onBeforeTitle(context, ArrayListHelper.unmodifiableList(items));
+					String[] result = titleHandler.onBeforeTitle(ArrayListHelper.unmodifiableList(items));
 					if (result != null && result.length > 0) {
 						return ArrayString.of(result);
 					}
@@ -211,7 +211,7 @@ public final class TooltipsCallbacks extends BaseModel<Tooltips, IsDefaultToolti
 			@Override
 			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
 				if (titleHandler != null) {
-					String[] result = titleHandler.onTitle(context, ArrayListHelper.unmodifiableList(items));
+					String[] result = titleHandler.onTitle(ArrayListHelper.unmodifiableList(items));
 					if (result != null && result.length > 0) {
 						return ArrayString.of(result);
 					}
@@ -229,7 +229,7 @@ public final class TooltipsCallbacks extends BaseModel<Tooltips, IsDefaultToolti
 			@Override
 			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
 				if (titleHandler != null) {
-					String[] result = titleHandler.onAfterTitle(context, ArrayListHelper.unmodifiableList(items));
+					String[] result = titleHandler.onAfterTitle(ArrayListHelper.unmodifiableList(items));
 					if (result != null && result.length > 0) {
 						return ArrayString.of(result);
 					}
@@ -247,7 +247,7 @@ public final class TooltipsCallbacks extends BaseModel<Tooltips, IsDefaultToolti
 			@Override
 			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
 				if (bodyHandler != null) {
-					String[] result = bodyHandler.onBeforeBody(context, ArrayListHelper.unmodifiableList(items));
+					String[] result = bodyHandler.onBeforeBody(ArrayListHelper.unmodifiableList(items));
 					if (result != null && result.length > 0) {
 						return ArrayString.of(result);
 					}
@@ -265,7 +265,7 @@ public final class TooltipsCallbacks extends BaseModel<Tooltips, IsDefaultToolti
 			@Override
 			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
 				if (bodyHandler != null) {
-					String[] result = bodyHandler.onAfterBody(context, ArrayListHelper.unmodifiableList(items));
+					String[] result = bodyHandler.onAfterBody(ArrayListHelper.unmodifiableList(items));
 					if (result != null && result.length > 0) {
 						return ArrayString.of(result);
 					}
@@ -283,7 +283,7 @@ public final class TooltipsCallbacks extends BaseModel<Tooltips, IsDefaultToolti
 			@Override
 			public String call(Object context, TooltipItem item) {
 				if (labelHandler != null) {
-					String result = labelHandler.onBeforeLabel(context, item);
+					String result = labelHandler.onBeforeLabel(item);
 					return result != null ? result : EMPTY;
 				}
 				return EMPTY;
@@ -299,7 +299,7 @@ public final class TooltipsCallbacks extends BaseModel<Tooltips, IsDefaultToolti
 			@Override
 			public String call(Object context, TooltipItem item) {
 				if (labelHandler != null) {
-					String result = labelHandler.onLabel(context, item);
+					String result = labelHandler.onLabel(item);
 					return result != null ? result : EMPTY;
 				}
 				return EMPTY;
@@ -315,7 +315,7 @@ public final class TooltipsCallbacks extends BaseModel<Tooltips, IsDefaultToolti
 			@Override
 			public TooltipLabelColor call(Object context, TooltipItem item) {
 				if (labelHandler != null) {
-					TooltipLabelColor result = labelHandler.onLabelColor(context, item);
+					TooltipLabelColor result = labelHandler.onLabelColor(item);
 					return result != null ? result : DEFAULT_LABEL_COLOR;
 				}
 				return DEFAULT_LABEL_COLOR;
@@ -331,7 +331,7 @@ public final class TooltipsCallbacks extends BaseModel<Tooltips, IsDefaultToolti
 			@Override
 			public String call(Object context, TooltipItem item) {
 				if (labelHandler != null) {
-					IsColor result = labelHandler.onLabelTextColor(context, item);
+					IsColor result = labelHandler.onLabelTextColor(item);
 					return result != null ? result.toRGBA() : EMPTY;
 				}
 				//FIXME color
@@ -348,7 +348,7 @@ public final class TooltipsCallbacks extends BaseModel<Tooltips, IsDefaultToolti
 			@Override
 			public String call(Object context, TooltipItem item) {
 				if (labelHandler != null) {
-					String result = labelHandler.onAfterLabel(context, item);
+					String result = labelHandler.onAfterLabel(item);
 					return result != null ? result : EMPTY;
 				}
 				return EMPTY;
@@ -364,7 +364,7 @@ public final class TooltipsCallbacks extends BaseModel<Tooltips, IsDefaultToolti
 			@Override
 			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
 				if (footerHandler != null) {
-					String[] result = footerHandler.onBeforeFooter(context, ArrayListHelper.unmodifiableList(items));
+					String[] result = footerHandler.onBeforeFooter(ArrayListHelper.unmodifiableList(items));
 					if (result != null && result.length > 0) {
 						return ArrayString.of(result);
 					}
@@ -382,7 +382,7 @@ public final class TooltipsCallbacks extends BaseModel<Tooltips, IsDefaultToolti
 			@Override
 			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
 				if (footerHandler != null) {
-					String[] result = footerHandler.onFooter(context, ArrayListHelper.unmodifiableList(items));
+					String[] result = footerHandler.onFooter(ArrayListHelper.unmodifiableList(items));
 					if (result != null && result.length > 0) {
 						return ArrayString.of(result);
 					}
@@ -400,7 +400,7 @@ public final class TooltipsCallbacks extends BaseModel<Tooltips, IsDefaultToolti
 			@Override
 			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
 				if (footerHandler != null) {
-					String[] result = footerHandler.onAfterFooter(context, ArrayListHelper.unmodifiableList(items));
+					String[] result = footerHandler.onAfterFooter(ArrayListHelper.unmodifiableList(items));
 					if (result != null && result.length > 0) {
 						return ArrayString.of(result);
 					}

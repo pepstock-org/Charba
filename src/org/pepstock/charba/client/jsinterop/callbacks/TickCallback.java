@@ -17,25 +17,26 @@ package org.pepstock.charba.client.jsinterop.callbacks;
 
 import java.util.List;
 
-import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.configuration.Axis;
 
 /**
  * Interface to implement if wants to change the tick marks to include information about the data type.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.options.scales.BaseTick
+ * @see org.pepstock.charba.client.jsinterop.configuration.Axis
+ * @since 2.0
  */
 public interface TickCallback {
 
 	/**
 	 * Changes the tick marks to include information about the data type.
 	 * 
-	 * @param chart chart instance
-	 * @param item tick item to be changed
+	 * @param axis axis instance where this callback as been defined
+	 * @param value value of tick
+	 * @param index index of tick
+	 * @param values list of all tick values
 	 * @return the tick to apply or if the callback returns <code>null</code> the associated grid line will be hidden.
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.TickItem
 	 */
-	String onCallback(AbstractChart<?, ?> chart, double value, int index, List<Double> values);
+	String onCallback(Axis axis, double value, int index, List<Double> values);
 
 }

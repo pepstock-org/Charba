@@ -23,27 +23,28 @@ import org.pepstock.charba.client.jsinterop.items.AxisItem;
  * Interface to be implemented which can be used to change parameters in the scale during ticks building.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.options.scales.Axis
+ * @see org.pepstock.charba.client.jsinterop.configuration.Axis
+ * @since 2.0
  */
 public interface AxisBuildTicksCallback {
 
 	/**
 	 * Callback that runs before ticks are created.
 	 * 
-	 * @param chart chart instance
+	 * @param axis axis instance where this callback as been defined
 	 * @param item axis item instance
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem
+	 * @see org.pepstock.charba.client.jsinterop.configuration.Axis
+	 * @see org.pepstock.charba.client.jsinterop.items.AxisItem
 	 */
 	void onBeforeBuildTicks(Axis axis, AxisItem item);
 
 	/**
 	 * Callback that runs after ticks are created. Useful for filtering ticks.
 	 * 
-	 * @param chart chart instance
+	 * @param axis axis instance where this callback as been defined
 	 * @param item axis item instance
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem
+	 * @see org.pepstock.charba.client.jsinterop.configuration.Axis
+	 * @see org.pepstock.charba.client.jsinterop.items.AxisItem
 	 */
 	void onAfterBuildTicks(Axis axis, AxisItem item);
 

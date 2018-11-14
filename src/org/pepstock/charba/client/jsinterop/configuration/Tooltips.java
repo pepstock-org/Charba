@@ -901,10 +901,10 @@ public final class Tooltips extends ConfigurationContainer<EventableOptions> imp
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipFilterHandler#onFilter(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipFilterHandler#onFilter(org.pepstock.charba.client.jsinterop.items.TooltipItem)
 	 */
 	@Override
-	public boolean onFilter(Object context, TooltipItem item) {
+	public boolean onFilter(TooltipItem item) {
 		// checks if callback is consistent
 		if (getFilterCallback() != null) {
 			// calls callback
@@ -920,10 +920,10 @@ public final class Tooltips extends ConfigurationContainer<EventableOptions> imp
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipItemSortHandler#onItemSort(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipItemSortHandler#onItemSort(org.pepstock.charba.client.jsinterop.items.TooltipItem, org.pepstock.charba.client.jsinterop.items.TooltipItem)
 	 */
 	@Override
-	public int onItemSort(Object context, TooltipItem item1, TooltipItem item2) {
+	public int onItemSort(TooltipItem item1, TooltipItem item2) {
 		// checks if callback is consistent
 		if (getItemSortCallback() != null) {
 			// calls callback
@@ -939,10 +939,10 @@ public final class Tooltips extends ConfigurationContainer<EventableOptions> imp
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipCustomHandler#onCustom(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipModel)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipCustomHandler#onCustom(org.pepstock.charba.client.jsinterop.items.TooltipModel)
 	 */
 	@Override
-	public void onCustom(Object context, TooltipModel model) {
+	public void onCustom(TooltipModel model) {
 		// checks if callback is consistent
 		if (getCustomCallback() != null) {
 			// calls callback

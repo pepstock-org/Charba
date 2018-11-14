@@ -180,10 +180,10 @@ public final class TooltipsCallbacks extends ConfigurationContainer<EventableOpt
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipBodyHandler#onBeforeBody(java.lang.Object, java.util.List)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipBodyHandler#onBeforeBody(java.util.List)
 	 */
 	@Override
-	public String[] onBeforeBody(Object context, List<TooltipItem> items) {
+	public String[] onBeforeBody(List<TooltipItem> items) {
 		TooltipBodyCallback toInvoke = getBodyCallbackToInvoke();
 		// checks if callback is consistent
 		if (toInvoke != null) {
@@ -194,10 +194,10 @@ public final class TooltipsCallbacks extends ConfigurationContainer<EventableOpt
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipBodyHandler#onAfterBody(java.lang.Object, java.util.List)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipBodyHandler#onAfterBody(java.util.List)
 	 */
 	@Override
-	public String[] onAfterBody(Object context, List<TooltipItem> items) {
+	public String[] onAfterBody(List<TooltipItem> items) {
 		TooltipBodyCallback toInvoke = getBodyCallbackToInvoke();
 		// checks if callback is consistent
 		if (toInvoke != null) {
@@ -223,10 +223,10 @@ public final class TooltipsCallbacks extends ConfigurationContainer<EventableOpt
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onBeforeLabel(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onBeforeLabel(org.pepstock.charba.client.jsinterop.items.TooltipItem)
 	 */
 	@Override
-	public String onBeforeLabel(Object context, TooltipItem item) {
+	public String onBeforeLabel(TooltipItem item) {
 		TooltipLabelCallback toInvoke = getLabelCallbackToInvoke();
 		// checks if callback is consistent
 		if (toInvoke != null) {
@@ -237,10 +237,10 @@ public final class TooltipsCallbacks extends ConfigurationContainer<EventableOpt
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onLabel(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onLabel(org.pepstock.charba.client.jsinterop.items.TooltipItem)
 	 */
 	@Override
-	public String onLabel(Object context, TooltipItem item) {
+	public String onLabel(TooltipItem item) {
 		TooltipLabelCallback toInvoke = getLabelCallbackToInvoke();
 		// checks if callback is consistent
 		if (toInvoke != null) {
@@ -251,10 +251,10 @@ public final class TooltipsCallbacks extends ConfigurationContainer<EventableOpt
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onLabelColor(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onLabelColor(org.pepstock.charba.client.jsinterop.items.TooltipItem)
 	 */
 	@Override
-	public TooltipLabelColor onLabelColor(Object context, TooltipItem item) {
+	public TooltipLabelColor onLabelColor(TooltipItem item) {
 		TooltipLabelCallback toInvoke = getLabelCallbackToInvoke();
 		// checks if callback is consistent
 		if (toInvoke != null) {
@@ -265,10 +265,10 @@ public final class TooltipsCallbacks extends ConfigurationContainer<EventableOpt
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onLabelTextColor(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onLabelTextColor(org.pepstock.charba.client.jsinterop.items.TooltipItem)
 	 */
 	@Override
-	public IsColor onLabelTextColor(Object context, TooltipItem item) {
+	public IsColor onLabelTextColor(TooltipItem item) {
 		TooltipLabelCallback toInvoke = getLabelCallbackToInvoke();
 		// checks if callback is consistent
 		if (toInvoke != null) {
@@ -280,10 +280,10 @@ public final class TooltipsCallbacks extends ConfigurationContainer<EventableOpt
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onAfterLabel(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onAfterLabel(org.pepstock.charba.client.jsinterop.items.TooltipItem)
 	 */
 	@Override
-	public String onAfterLabel(Object context, TooltipItem item) {
+	public String onAfterLabel(TooltipItem item) {
 		TooltipLabelCallback toInvoke = getLabelCallbackToInvoke();
 		// checks if callback is consistent
 		if (toInvoke != null) {
@@ -310,10 +310,10 @@ public final class TooltipsCallbacks extends ConfigurationContainer<EventableOpt
 
 	
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipFooterHandler#onBeforeFooter(java.lang.Object, java.util.List)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipFooterHandler#onBeforeFooter(java.util.List)
 	 */
 	@Override
-	public String[] onBeforeFooter(Object context, List<TooltipItem> items) {
+	public String[] onBeforeFooter(List<TooltipItem> items) {
 		TooltipFooterCallback toInvoke = getFooterCallbackToInvoke();
 		// checks if callback is consistent
 		if (toInvoke != null) {
@@ -324,10 +324,10 @@ public final class TooltipsCallbacks extends ConfigurationContainer<EventableOpt
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipFooterHandler#onFooter(java.lang.Object, java.util.List)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipFooterHandler#onFooter(java.util.List)
 	 */
 	@Override
-	public String[] onFooter(Object context, List<TooltipItem> items) {
+	public String[] onFooter(List<TooltipItem> items) {
 		TooltipFooterCallback toInvoke = getFooterCallbackToInvoke();
 		// checks if callback is consistent
 		if (toInvoke != null) {
@@ -338,10 +338,10 @@ public final class TooltipsCallbacks extends ConfigurationContainer<EventableOpt
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipFooterHandler#onAfterFooter(java.lang.Object, java.util.List)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipFooterHandler#onAfterFooter(java.util.List)
 	 */
 	@Override
-	public String[] onAfterFooter(Object context, List<TooltipItem> items) {
+	public String[] onAfterFooter(List<TooltipItem> items) {
 		TooltipFooterCallback toInvoke = getFooterCallbackToInvoke();
 		// checks if callback is consistent
 		if (toInvoke != null) {
@@ -367,10 +367,10 @@ public final class TooltipsCallbacks extends ConfigurationContainer<EventableOpt
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipTitleHandler#onBeforeTitle(java.lang.Object, java.util.List)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipTitleHandler#onBeforeTitle(java.util.List)
 	 */
 	@Override
-	public String[] onBeforeTitle(Object context, List<TooltipItem> items) {
+	public String[] onBeforeTitle(List<TooltipItem> items) {
 		TooltipTitleCallback toInvoke = getTitleCallbackToInvoke();
 		// checks if callback is consistent
 		if (toInvoke != null) {
@@ -381,10 +381,10 @@ public final class TooltipsCallbacks extends ConfigurationContainer<EventableOpt
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipTitleHandler#onTitle(java.lang.Object, java.util.List)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipTitleHandler#onTitle(java.util.List)
 	 */
 	@Override
-	public String[] onTitle(Object context, List<TooltipItem> items) {
+	public String[] onTitle(List<TooltipItem> items) {
 		TooltipTitleCallback toInvoke = getTitleCallbackToInvoke();
 		// checks if callback is consistent
 		if (toInvoke != null) {
@@ -395,10 +395,10 @@ public final class TooltipsCallbacks extends ConfigurationContainer<EventableOpt
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipTitleHandler#onAfterTitle(java.lang.Object, java.util.List)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipTitleHandler#onAfterTitle(java.util.List)
 	 */
 	@Override
-	public String[] onAfterTitle(Object context, List<TooltipItem> items) {
+	public String[] onAfterTitle(List<TooltipItem> items) {
 		TooltipTitleCallback toInvoke = getTitleCallbackToInvoke();
 		// checks if callback is consistent
 		if (toInvoke != null) {

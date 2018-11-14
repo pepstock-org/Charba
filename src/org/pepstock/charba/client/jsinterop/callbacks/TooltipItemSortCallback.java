@@ -22,6 +22,8 @@ import org.pepstock.charba.client.jsinterop.items.TooltipItem;
  * Allows sorting of tooltip items.
  * 
  * @author Andrea "Stock" Stocchero
+ * @see org.pepstock.charba.client.jsinterop.items.TooltipItem
+ * @since 2.0
  */
 public interface TooltipItemSortCallback {
 

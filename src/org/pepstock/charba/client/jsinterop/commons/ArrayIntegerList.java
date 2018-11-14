@@ -24,12 +24,13 @@ import java.util.ListIterator;
 import org.pepstock.charba.client.jsinterop.utils.JSON;
 
 /**
- * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each element is inserted. <br>
+ *The user of this interface has precise control over where in the list each element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
- * This implementation uses a GWT JsArray as backend to store objects (integers).
+ * This implementation uses a java script array as backend to store objects (integers).
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.commons.JsArrayIntegerImpl
+ * @since 2.0
+ * @see org.pepstock.charba.client.jsinterop.commons.ArrayInteger
  */
 public final class ArrayIntegerList implements List<Integer> {
 	
@@ -37,7 +38,7 @@ public final class ArrayIntegerList implements List<Integer> {
 	private final ArrayInteger array;
 
 	/**
-	 * Internal constructor used to load a JSArray already in another object.
+	 * Internal constructor used to load an array already in another object.
 	 * @param array JS array instance
 	 */
 	ArrayIntegerList(ArrayInteger array) {

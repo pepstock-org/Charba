@@ -173,7 +173,7 @@ public final class EventableOptions extends BaseOptions<EventableAnimation,Event
 			
 			@Override
 			public String call(Object context) {
-				return legendHandler != null ? legendHandler.generateLegend(context) : LEGEND_CALLBACK_ERROR;
+				return legendHandler != null ? legendHandler.generateLegend() : LEGEND_CALLBACK_ERROR;
 			}
 		});
 		

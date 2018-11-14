@@ -20,41 +20,35 @@ import java.util.List;
 import org.pepstock.charba.client.jsinterop.items.TooltipItem;
 
 /**
- * The tooltip label configuration is nested below the tooltip configuration using the callbacks key.<br>
- * The tooltip has the following callbacks for providing text.<br>
- * All functions must return either a string or an array of strings. Arrays of strings are treated as multiple lines of
- * text.<br>
- * This interface takes care about labels to apply to the footer.
+ * Interface to be implemented from configuration item to be engaged when a tooltip footer callback has been invoked.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  */
 public interface TooltipFooterHandler {
 
 	/**
 	 * Returns text to render before the footer section.
 	 * 
-	 * @param chart chart instance
 	 * @param items list of all tooltip items
 	 * @return an array of labels to apply to the footer. If returns <code>null</code>, it will be ignored.
 	 */
-	String[] onBeforeFooter(Object context, List<TooltipItem> items);
+	String[] onBeforeFooter(List<TooltipItem> items);
 
 	/**
 	 * Returns text to render as the footer of the tooltip.
 	 * 
-	 * @param chart chart instance
 	 * @param items list of all tooltip items
 	 * @return an array of labels to apply to the footer. If returns <code>null</code>, it will be ignored.
 	 */
-	String[] onFooter(Object context, List<TooltipItem> items);
+	String[] onFooter(List<TooltipItem> items);
 
 	/**
 	 * Text to render after the footer section.
 	 * 
-	 * @param chart chart instance
 	 * @param items list of all tooltip items
 	 * @return an array of labels to apply to the footer. If returns <code>null</code>, it will be ignored.
 	 */
-	String[] onAfterFooter(Object context, List<TooltipItem> items);
+	String[] onAfterFooter(List<TooltipItem> items);
 
 }

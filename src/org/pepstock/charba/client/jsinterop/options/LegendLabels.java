@@ -89,7 +89,7 @@ public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels, Native
 			 */
 			@Override
 			public boolean call(Object context, LegendItem item) {
-				return filterHandler != null ? filterHandler.onFilter(context, item) : true;
+				return filterHandler != null ? filterHandler.onFilter(item) : true;
 			}
 			
 		});
@@ -101,7 +101,7 @@ public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels, Native
 			 */
 			@Override
 			public LegendLabelItem[] call(Object context, Object chart) {
-				return labelsHandler != null ? labelsHandler.generateLegendLabels(context, chart) : new LegendLabelItem[0];
+				return labelsHandler != null ? labelsHandler.generateLegendLabels() : new LegendLabelItem[0];
 			}
 			
 		});

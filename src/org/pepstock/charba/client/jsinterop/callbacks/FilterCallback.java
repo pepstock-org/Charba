@@ -22,16 +22,16 @@ import org.pepstock.charba.client.jsinterop.AbstractChart;
  * 
  * @author Andrea "Stock" Stocchero
  * @param <T> type of item to be filtered
+ * @since 2.0
  */
 interface FilterCallback<T> {
 
 	/**
-	 * Callback that runs before ticks are created.
+	 * Callback that filter items on chart components.
 	 * 
 	 * @param chart chart instance
 	 * @param item item to be filtered
 	 * @return <code>false</code> to remove the item from the container, otherwise <code>true</code>.
-	 * @see org.pepstock.charba.client.AbstractChart
 	 */
 	boolean onFilter(AbstractChart<?, ?> chart, T item);
 

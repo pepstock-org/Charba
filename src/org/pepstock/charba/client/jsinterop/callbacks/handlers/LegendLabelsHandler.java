@@ -18,21 +18,18 @@ package org.pepstock.charba.client.jsinterop.callbacks.handlers;
 import org.pepstock.charba.client.jsinterop.items.LegendLabelItem;
 
 /**
- * Generates legend items for each thing in the legend.
+ * Interface to be implemented from configuration item to be engaged when a legend label callback has been invoked.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.options.LegendLabels
+ * @since 2.0
  */
 public interface LegendLabelsHandler {
 
 	/**
 	 * Generates legend items for each thing in the legend. Default implementation returns the text + styling for the color box.
 	 * 
-	 * @param chart chart instance
 	 * @return an array of legend items. if <code>null</code>, uses the default implementation
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.LegendLabelItem
 	 */
-	LegendLabelItem[] generateLegendLabels(Object context, Object chart);
+	LegendLabelItem[] generateLegendLabels();
 
 }

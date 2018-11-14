@@ -256,10 +256,10 @@ public final class LegendLabels extends ConfigurationContainer<EventableOptions>
 		
 	}
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.LegendFilterHandler#onFilter(java.lang.Object, org.pepstock.charba.client.jsinterop.items.LegendItem)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.LegendFilterHandler#onFilter(org.pepstock.charba.client.jsinterop.items.LegendItem)
 	 */
 	@Override
-	public boolean onFilter(Object context, LegendItem item) {
+	public boolean onFilter(LegendItem item) {
 		// checks if callback is consistent
 		if (getFilterCallback() != null) {
 			// calls callback
@@ -275,10 +275,10 @@ public final class LegendLabels extends ConfigurationContainer<EventableOptions>
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.LegendLabelsHandler#generateLegendLabels(java.lang.Object, java.lang.Object)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.LegendLabelsHandler#generateLegendLabels()
 	 */
 	@Override
-	public LegendLabelItem[] generateLegendLabels(Object context, Object chart) {
+	public LegendLabelItem[] generateLegendLabels() {
 		LegendLabelItem[] result = null;
 		// checks if callback is consistent
 		if (getLabelsCallback() != null) {

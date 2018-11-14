@@ -179,14 +179,14 @@ public final class RadialPointLabels extends AxisContainer implements RadialPoin
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.RadialPointLabelHandler#onCallback(java.lang.Object, java.lang.String)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.RadialPointLabelHandler#onCallback(java.lang.String)
 	 */
 	@Override
-	public String onCallback(Object context, String item) {
+	public String onCallback(String item) {
 		if (getCallback() != null) {
-			return getCallback().onCallback(getAxis().getChart(), item);
+			return getCallback().onCallback(getAxis(), item);
 		} else if (hasGlobalCallback()) {
-			getAxis().getDefaultScale().getPointLabels().getCallback().onCallback(getAxis().getChart(), item);
+			getAxis().getDefaultScale().getPointLabels().getCallback().onCallback(getAxis(), item);
 		}
 		return item;
 	}

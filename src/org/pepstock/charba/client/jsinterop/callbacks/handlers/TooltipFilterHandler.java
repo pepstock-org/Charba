@@ -18,12 +18,19 @@ package org.pepstock.charba.client.jsinterop.callbacks.handlers;
 import org.pepstock.charba.client.jsinterop.items.TooltipItem;
 
 /**
- * Allows filtering of tooltip items.
+ * Interface to be implemented from configuration item to be engaged when a tooltip filter callback has been invoked.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  */
 public interface TooltipFilterHandler {
 
-	boolean onFilter(Object context, TooltipItem item);
+	/**
+	 * Callback to filter tooltip items.
+	 * 
+	 * @param item item to be filtered
+	 * @return <code>false</code> to remove the item from the container, otherwise <code>true</code>.
+	 */
+	boolean onFilter(TooltipItem item);
 	
 }

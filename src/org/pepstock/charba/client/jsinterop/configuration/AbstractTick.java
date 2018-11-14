@@ -179,14 +179,14 @@ abstract class AbstractTick<T extends BaseTick<?,?,?>> extends AxisContainer imp
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.TickHandler#onCallback(java.lang.Object, double, int, org.pepstock.charba.client.jsinterop.commons.ArrayDouble)
+	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.TickHandler#onCallback(double, int, org.pepstock.charba.client.jsinterop.commons.ArrayDouble)
 	 */
 	@Override
-	public String onCallback(Object context, double value, int index, ArrayDouble values) {
+	public String onCallback(double value, int index, ArrayDouble values) {
 		if (getConfiguration().getCallback() != null) {
-			return getConfiguration().getCallback().onCallback(getAxis().getChart(), value, index, ArrayListHelper.unmodifiableList(values));
+			return getConfiguration().getCallback().onCallback(getAxis(), value, index, ArrayListHelper.unmodifiableList(values));
 		} else if (hasGlobalCallback()) {
-			return getDefaultTick().getCallback().onCallback(getAxis().getChart(), value, index, ArrayListHelper.unmodifiableList(values));
+			return getDefaultTick().getCallback().onCallback(getAxis(), value, index, ArrayListHelper.unmodifiableList(values));
 		}
 		return String.valueOf(value);
 	}

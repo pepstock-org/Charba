@@ -18,17 +18,20 @@ package org.pepstock.charba.client.jsinterop.callbacks.handlers;
 import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 
 /**
- * Interface to implement if wants to change the tick marks to include information about the data type.
+ * Interface to be implemented from configuration item to be engaged when a tick callback has been invoked.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.options.scales.BaseTick
+ * @since 2.0
  */
 public interface TickHandler {
 
 	/**
 	 * Changes the tick marks to include information about the data type.
-	 * 
+	 * @param value value of tick
+	 * @param index index of tick
+	 * @param values list of ticks values
+	 * @return the string representation of tick
 	 */
-	String onCallback(Object context, double value, int index, ArrayDouble values);
+	String onCallback(double value, int index, ArrayDouble values);
 
 }

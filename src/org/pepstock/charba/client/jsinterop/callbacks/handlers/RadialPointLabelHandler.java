@@ -16,21 +16,19 @@
 package org.pepstock.charba.client.jsinterop.callbacks.handlers;
 
 /**
- * Callback function to transform data labels to point labels.
+ * Interface to be implemented from configuration item to be engaged when a point label callback has been invoked.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.options.scales.RadialPointLabels
+ * @since 2.0
  */
 public interface RadialPointLabelHandler {
 
 	/**
 	 * Callback function to transform data labels to point labels. The default implementation simply returns the current string.
 	 * 
-	 * @param chart chart instance
 	 * @param item label of current label
 	 * @return new label to apply to point label
-	 * @see org.pepstock.charba.client.AbstractChart
 	 */
-	String onCallback(Object context, String item);
+	String onCallback(String item);
 
 }
