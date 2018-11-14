@@ -23,6 +23,7 @@ import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.items.ChartNode;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
+import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.BaseOptions;
 import org.pepstock.charba.client.plugins.Plugins;
 
@@ -403,7 +404,57 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 		// returns null
 		return null;
 	}
-
+	
+	/**
+	 * Looks for the dataset that matches the event and returns that metadata.
+	 * 
+	 * @param event event of chart.
+	 * @return dataset meta data item.
+	 */
+	public DatasetMetaItem getDatasetAtEvent(ChartNativeEvent event) {
+		// checks consistency of chart and event
+		if (chart != null && event != null) {
+			// gets dataset
+			DatasetMetaItem array = new DatasetMetaItem(getChartDatasetAtEvent(event));
+			// returns the array
+			return array;
+		}
+		// returns null;
+		return null;
+	}
+	
+	/**
+	 * Looks for the dataset if it's visible or not, selected by index.
+	 * 
+	 * @param index dataset index
+	 * @return <code>true</code> if dataset is visible otherwise <code>false</code>.
+	 */
+	public boolean isDatasetVisible(int index) {
+		// checks consistency of chart and datasets
+		if (chart != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size()) {
+			// gets if dataset is visible or not
+			return isChartDatasetVisible(index);
+		}
+		// returns false
+		return false;
+	}
+	
+	/**
+	 * Returns the amount of datasets which are visible
+	 * 
+	 * @return the amount of datasets which are visible. If chart is not initialized, return {@link org.pepstock.charba.client.items.UndefinedValues.INTEGER}.
+	 */
+	public int getVisibleDatasetCount() {
+		// checks consistency of chart and datasets
+		if (chart != null) {
+			// gets if dataset is visible or not
+			return getChartVisibleDatasetCount();
+		}
+		// returns false
+		return UndefinedValues.INTEGER;
+	}
+	
+	
 	/**
 	 * Calling on your chart instance passing an argument of an event, will return the single element at the event position.<br>
 	 * If there are multiple items within range, only the first is returned.<br>
@@ -609,13 +660,42 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	}-*/;
 
 	/**
-	 * Gets the dataset meta data array of the chart, selected by event.
+	 * Gets the dataset of the chart, selected by event.
+	 * @param event event of get the dataset.
+	 * @return dataset meta data items.
+	 */
+	private native GenericJavaScriptObject getChartDatasetAtEvent(JavaScriptObject event)/*-{
+	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+		return chart.getDatasetAtEvent(event);
+	}-*/;
+	
+	/**
+	 * Gets the dataset meta data array of the chart, selected by index.
 	 * @param datasetIndex dataset index
 	 * @return dataset meta data items.
 	 */
 	private native GenericJavaScriptObject getChartDatasetMeta(int datasetIndex)/*-{
 	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
 		return chart.getDatasetMeta(datasetIndex);
+	}-*/;
+
+	/**
+	 * Gets if the dataset is visible or not, selected by index.
+	 * @param datasetIndex dataset index
+	 * @return <code>true</code> if dataset is visible otherwise <code>false</code>.
+	 */
+	private native boolean isChartDatasetVisible(int datasetIndex)/*-{
+	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+		return chart.isDatasetVisible(datasetIndex);
+	}-*/;
+
+	/**
+	 * Gets the amount of datasets which are visible
+	 * @return the amount of datasets which are visible
+	 */
+	private native int getChartVisibleDatasetCount()/*-{
+	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+		return chart.getVisibleDatasetCount();
 	}-*/;
 
 	
