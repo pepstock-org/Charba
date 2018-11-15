@@ -32,7 +32,7 @@ import org.pepstock.charba.client.enums.PointStyle;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class BubbleDataset extends HovingDataset{
+public class BubbleDataset extends HovingDataset{
 	
 	// set of boolean flags to know if the value has been set as single value or as array
 	private boolean isHitRadiusArray = false;

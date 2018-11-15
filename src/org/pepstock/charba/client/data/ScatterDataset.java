@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.Fill;
  * @see org.pepstock.charba.client.data.LineDataset
  * @see org.pepstock.charba.client.data.DataPoint
  */
-public final class ScatterDataset extends LineDataset {
+public class ScatterDataset extends LineDataset {
 
 	/**
 	 * Builds the object setting fixed properties

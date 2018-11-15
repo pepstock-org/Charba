@@ -148,6 +148,14 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	public final CanvasElement getCanvas() {
 		return canvas;
 	}
+	
+	/**
+	 * Returns <code>true</code> if CHART.JS chart has been initialized, otherwise <code>false</code>.
+	 * @return <code>true</code> if CHART.JS chart has been initialized, otherwise <code>false</code>.
+	 */
+	public boolean isInitialized() {
+		return chart != null;
+	}
 
 	/**
 	 * @return the chart container HTML element

@@ -24,7 +24,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PolarAreaOptions extends SingleScaleOptions {
+public class PolarAreaOptions extends SingleScaleOptions {
 
 	/**
 	 * Name of fields of JavaScript object.
