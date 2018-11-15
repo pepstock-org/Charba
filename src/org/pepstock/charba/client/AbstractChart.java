@@ -152,6 +152,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	/**
 	 * Returns <code>true</code> if CHART.JS chart has been initialized, otherwise <code>false</code>.
 	 * @return <code>true</code> if CHART.JS chart has been initialized, otherwise <code>false</code>.
+	 * FIXME to add to JSINTEROP impl
 	 */
 	public boolean isInitialized() {
 		return chart != null;
@@ -418,6 +419,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 * 
 	 * @param event event of chart.
 	 * @return dataset meta data item.
+	 * FIXME to add to JSINTEROP impl
 	 */
 	public DatasetMetaItem getDatasetAtEvent(ChartNativeEvent event) {
 		// checks consistency of chart and event
@@ -436,6 +438,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 * 
 	 * @param index dataset index
 	 * @return <code>true</code> if dataset is visible otherwise <code>false</code>.
+	 * FIXME to add to JSINTEROP impl
 	 */
 	public boolean isDatasetVisible(int index) {
 		// checks consistency of chart and datasets
@@ -451,6 +454,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 * Returns the amount of datasets which are visible
 	 * 
 	 * @return the amount of datasets which are visible. If chart is not initialized, return {@link org.pepstock.charba.client.items.UndefinedValues.INTEGER}.
+	 * FIXME to add to JSINTEROP impl
 	 */
 	public int getVisibleDatasetCount() {
 		// checks consistency of chart and datasets
