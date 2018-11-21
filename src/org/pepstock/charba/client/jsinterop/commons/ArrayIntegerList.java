@@ -24,7 +24,7 @@ import java.util.ListIterator;
 import org.pepstock.charba.client.jsinterop.utils.JSON;
 
 /**
- *The user of this interface has precise control over where in the list each element is inserted. <br>
+ * The user of this interface has precise control over where in the list each element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
  * This implementation uses a java script array as backend to store objects (integers).
  * 
@@ -38,8 +38,8 @@ public final class ArrayIntegerList implements List<Integer> {
 	private final ArrayInteger array;
 
 	/**
-	 * Internal constructor used to load an array already in another object.
-	 * @param array JS array instance
+	 * Internal constructor used to set an array instance as backend of the list.
+	 * @param array java script array instance. If <code>null</code>, new empty array has been created
 	 */
 	ArrayIntegerList(ArrayInteger array) {
 		// if null, creates a new JS array

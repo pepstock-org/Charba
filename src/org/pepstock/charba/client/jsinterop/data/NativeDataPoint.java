@@ -17,6 +17,7 @@ package org.pepstock.charba.client.jsinterop.data;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeDescriptor;
+import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import com.google.gwt.core.client.JsDate;
@@ -32,7 +33,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  * 
  */
-@JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class NativeDataPoint extends NativeObject{
 	
 	/**
@@ -100,7 +101,7 @@ public final class NativeDataPoint extends NativeObject{
 	 */
 	@JsOverlay
 	void setAttribute(Key key, double value){
-		defineProperty(this, key, value);
+		defineProperty(key, value);
 	}
 
 	/** 
@@ -110,6 +111,6 @@ public final class NativeDataPoint extends NativeObject{
 	 */
 	@JsOverlay
 	NativeDescriptor<Double> getAttribute(Key key){
-		return getProperty(this, key);
+		return getProperty(key);
 	}
 }

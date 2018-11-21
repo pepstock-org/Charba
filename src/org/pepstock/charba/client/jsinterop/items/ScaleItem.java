@@ -21,6 +21,7 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.NativeName;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -32,7 +33,7 @@ import jsinterop.annotations.JsType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
 public class ScaleItem extends BaseBoxNodeItem {
 	
 	///private final  longestTextCache;

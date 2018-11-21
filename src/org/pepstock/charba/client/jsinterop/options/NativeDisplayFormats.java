@@ -17,6 +17,7 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.enums.TimeUnit;
 import org.pepstock.charba.client.jsinterop.commons.NativeDescriptor;
+import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsOverlay;
@@ -29,7 +30,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
 final class NativeDisplayFormats extends NativeObject {
 	
 	/**
@@ -41,7 +42,7 @@ final class NativeDisplayFormats extends NativeObject {
 	@JsOverlay
 	final void setDisplayFormat(TimeUnit unit, String format){
 		// FIXME visibility
-		defineProperty(this, unit, format);
+		defineProperty(unit, format);
 	}
 
 	/**
@@ -51,7 +52,7 @@ final class NativeDisplayFormats extends NativeObject {
 	 */
 	@JsOverlay
 	final String getDisplayFormat(TimeUnit unit){
-		NativeDescriptor<String> descriptor = getProperty(this, unit);
+		NativeDescriptor<String> descriptor = getProperty(unit);
 		if (descriptor != null) {
 			return descriptor.getValue();
 		} else {

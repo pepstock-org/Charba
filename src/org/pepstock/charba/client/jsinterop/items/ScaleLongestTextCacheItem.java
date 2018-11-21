@@ -21,6 +21,7 @@ import java.util.Map;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsOverlay;
@@ -34,7 +35,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
 public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	
 	
@@ -77,6 +78,6 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	@JsOverlay
 	public Map<String, Integer> getData() {
 		// creates result
-		return getObjectAsMap(getNativeData());
+		return getNativeData().getObjectAsMap();
 	}
 }

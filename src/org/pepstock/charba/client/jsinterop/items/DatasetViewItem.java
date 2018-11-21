@@ -27,6 +27,7 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.commons.Enumer;
+import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsOverlay;
@@ -41,7 +42,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
 public final class DatasetViewItem extends NativeObject {
 	
 	@JsProperty(name="backgroundColor")

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import com.google.gwt.core.client.JsDate;
@@ -30,7 +31,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
 final class NativeTime extends NativeObject {
 
 	/**
@@ -110,7 +111,7 @@ final class NativeTime extends NativeObject {
 	 */
 	@JsOverlay
 	final void removeRound() {
-		remove(this, Time.Property.round);
+		removeProperty(Time.Property.round);
 	}
 
 	/**
@@ -152,7 +153,7 @@ final class NativeTime extends NativeObject {
 	 */
 	@JsOverlay
 	final void removeUnit() {
-		remove(this, Time.Property.unit);
+		removeProperty(Time.Property.unit);
 	}
 
 	/**

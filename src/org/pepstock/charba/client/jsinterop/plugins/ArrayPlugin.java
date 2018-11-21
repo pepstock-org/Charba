@@ -17,6 +17,8 @@ package org.pepstock.charba.client.jsinterop.plugins;
 
 import java.util.List;
 
+import org.pepstock.charba.client.jsinterop.commons.NativeName;
+
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -29,7 +31,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  * @see com.google.gwt.core.client.JsArrayString
  */
-@JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.ARRAY, namespace = JsPackage.GLOBAL)
 public final class ArrayPlugin {
 
 	static native ArrayPlugin of(NativePlugin... items);

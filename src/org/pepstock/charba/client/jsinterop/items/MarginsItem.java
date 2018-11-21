@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
+import org.pepstock.charba.client.jsinterop.commons.NativeName;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -24,7 +26,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
 public class MarginsItem extends BaseBoxItem {
 
 

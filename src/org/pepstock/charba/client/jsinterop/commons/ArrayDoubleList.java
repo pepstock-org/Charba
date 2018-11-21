@@ -38,8 +38,8 @@ public final class ArrayDoubleList implements List<Double> {
 	private final ArrayDouble array;
 
 	/**
-	 * Internal constructor used to load an array already in another object.
-	 * @param array java script array instance
+	 * Internal constructor used to set an array instance as backend of the list.
+	 * @param array java script array instance. If <code>null</code>, new empty array has been created
 	 */
 	ArrayDoubleList(ArrayDouble array) {
 		// if null, creates a new JS array

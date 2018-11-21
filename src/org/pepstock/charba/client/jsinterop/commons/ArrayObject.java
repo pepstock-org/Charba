@@ -29,7 +29,7 @@ import jsinterop.annotations.JsType;
  *
  * @param <T> extension of native objects, import a type from an external script
  */
-@JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.ARRAY, namespace = JsPackage.GLOBAL)
 public final class ArrayObject<T extends NativeObject> {
 	
 	/**

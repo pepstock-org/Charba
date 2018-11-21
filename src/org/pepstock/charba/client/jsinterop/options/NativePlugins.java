@@ -17,6 +17,7 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeDescriptor;
+import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
 
@@ -32,7 +33,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
 final class NativePlugins extends NativeObject {
 	
 	/**
@@ -44,7 +45,7 @@ final class NativePlugins extends NativeObject {
 	@JsOverlay
 	final void remove(Key pluginId) {
 		// removes configuration if exists
-		remove(this, pluginId);
+		removeProperty(pluginId);
 	}
 
 	/**
@@ -56,7 +57,7 @@ final class NativePlugins extends NativeObject {
 	@JsOverlay
 	final void setEnabled(Key pluginId) {
 		// stores configuration
-		defineProperty(this, pluginId, false);
+		defineProperty(pluginId, false);
 	}
 	
 	/**
@@ -80,7 +81,7 @@ final class NativePlugins extends NativeObject {
 	@JsOverlay
 	final <T> void setOptions(Key pluginId, T options) {
 		// stores configuration
-		defineProperty(this, pluginId, options);
+		defineProperty(pluginId, options);
 	}
 	
 	@JsOverlay
@@ -97,7 +98,7 @@ final class NativePlugins extends NativeObject {
 	@JsOverlay
 	final <T> T getOptions(Key pluginId) {
 		// returns the configuration creating a key by plugin id.
-		NativeDescriptor<T> descriptor = getProperty(this, pluginId);
+		NativeDescriptor<T> descriptor = getProperty(pluginId);
 		if (descriptor != null) {
 			return descriptor.getValue();
 		} else {

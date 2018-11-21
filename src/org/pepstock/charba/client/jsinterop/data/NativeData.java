@@ -17,6 +17,7 @@ package org.pepstock.charba.client.jsinterop.data;
 
 import org.pepstock.charba.client.jsinterop.commons.ArrayMixedObject;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
+import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsPackage;
@@ -30,7 +31,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class NativeData extends NativeObject{
 
 	/**

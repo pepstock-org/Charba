@@ -27,11 +27,15 @@ import org.pepstock.charba.client.jsinterop.utils.JSON;
 /**
  * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
- * This implementation uses a GWT JsArray as backend to store objects (JavaScript object containers).
+ * This implementation uses a javascript array as backend to store objects (native object containers).<br>
+ * Elements are instances of {@link org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer}.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.commons.JsArrayObjectImpl
- * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer
+ * @param <E> extension of {@link org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer}
+ * @param <O> extension of native objects, import a type from an external script
+ * @see org.pepstock.charba.client.jsinterop.commons.NativeObject
+ * @see org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer
+ * 
  */
 public final class ArrayObjectContainerList<E extends NativeObjectContainer<O>, O extends NativeObject> implements List<E> {
 	
@@ -42,19 +46,24 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer<O>, 
 	private final List<E> delegate = new LinkedList<E>();
 
 	/**
-	 * Internal constructor used to load a JSArray already in another object.
-	 * @param array JS array instance
+	 * Internal constructor used to set an array instance as backend of the list.
+	 * @param array java script array instance. If <code>null</code>, new empty array has been created
+	 * @param factory factory instance to create the object from a native one.
 	 */
 	ArrayObjectContainerList(ArrayObject<O> array, Factory<E, O> factory) {
-		// if null, creates a new JS array
+		// if null, creates a new array
 		if (array == null){
 			this.array = new ArrayObject<>();
 		} else if (factory == null){
+			// factory is not consistent and array is consistent EXCEPTION
+			// factory is mandatory to initialize the list creating the elements from native object
 			throw new UnsupportedOperationException("Unable to create NativeObjectContainer without a factory");
 		} else {
 			// uses an existing array
 			this.array = array;
+			// scans the array
 			for (int i=0; i<array.length(); i++) {
+				// uses teh factory to creates all elements
 				delegate.add(factory.create(array.get(i)));
 			}
 		}
@@ -400,12 +409,18 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer<O>, 
 	}
 	
 	/**
-	 * 
+	 * Interface to be implemented to load elements from an array of native object
+	 *  
 	 * @author Andrea "Stock" Stocchero
-	 *
+	 * 
 	 */
 	public interface Factory<E extends NativeObjectContainer<O>, O extends NativeObject> {
 		
+		/**
+		 * Creates an element to store into list by a native object
+		 * @param nativeObject native object, element of an array
+		 * @return element instance
+		 */
 		E create(O nativeObject);
 		
 	}

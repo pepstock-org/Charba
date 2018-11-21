@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.jsinterop;
 
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.jsinterop.data.Data;
@@ -36,7 +37,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
 public final class Configuration extends NativeObject {
 	
 	@JsProperty(name = "type")

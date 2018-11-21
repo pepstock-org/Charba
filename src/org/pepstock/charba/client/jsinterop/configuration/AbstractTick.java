@@ -37,8 +37,6 @@ abstract class AbstractTick<T extends BaseTick<?,?,?>> extends AxisContainer imp
 	// the axis instance, owner of this tick
 	private T configuration;
 
-	private TickCallback callback = null;
-
 	/**
 	 * Builds the object storing the chart instance.
 	 * 
@@ -161,14 +159,14 @@ abstract class AbstractTick<T extends BaseTick<?,?,?>> extends AxisContainer imp
 	 * @return the callback
 	 */
 	public TickCallback getCallback() {
-		return callback;
+		return configuration.getCallback();
 	}
 
 	/**
 	 * @param callback the callback to set
 	 */
 	public void setCallback(TickCallback callback) {
-		getConfiguration().setCallback(callback);
+		configuration.setCallback(callback);
 		if (!hasGlobalCallback()) {
 			if (callback == null) {
 				getAxis().getChart().getOptions().getConfiguration().setTickCallbackHandler(getDefaultTick(), null);

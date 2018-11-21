@@ -24,6 +24,7 @@ import org.pepstock.charba.client.jsinterop.Helpers;
  * Utility to merge java script object into another one.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public final class Merger {
@@ -134,7 +135,7 @@ public final class Merger {
 		// creates a key using property
 		Key key = new StandardKey(property);
 		// stores configuration
-		NativeObject.defineObject(newObject, key, source);
+		newObject.defineObject(key, source);
 		// invokes CHART.JS to merge
 		mergeJavaScriptObject(target, newObject);
 		// return the object

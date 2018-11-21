@@ -23,7 +23,7 @@ final class NativeDefaults extends NativeObject {
 	@JsOverlay
 	ChartOptions chart(Type type) {
 		// returns the configuration creating a key by plugin id.
-		NativeDescriptor<NativeOptions> descriptor = getProperty(this, type);
+		NativeDescriptor<NativeOptions> descriptor = getProperty(type);
 		if (descriptor != null) {
 			return new ChartOptions(descriptor.getValue());
 		} else {

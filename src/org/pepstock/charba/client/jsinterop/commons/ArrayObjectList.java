@@ -39,11 +39,11 @@ public final class ArrayObjectList<E extends NativeObject> implements List<E> {
 	private final ArrayObject<E> array;
 
 	/**
-	 * Internal constructor used to load an array already in another object.
-	 * @param array JS array instance
+	 * Internal constructor used to set an array instance as backend of the list.
+	 * @param array java script array instance. If <code>null</code>, new empty array has been created
 	 */
 	ArrayObjectList(ArrayObject<E> array) {
-		// if null, creates a new JS array
+		// if null, creates a new array
 		if (array == null){
 			this.array = new ArrayObject<E>();
 		} else {

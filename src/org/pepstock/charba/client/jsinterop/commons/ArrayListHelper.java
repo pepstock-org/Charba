@@ -23,10 +23,10 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory;
 
 /**
- * Utility to create array list objects based on GWT JavaScript objects.
+ * Utility to create array list objects from java script arrays.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public final class ArrayListHelper {
 
@@ -38,10 +38,9 @@ public final class ArrayListHelper {
 	}
 
 	/**
-	 * Creates a JavaScript array list of doubles.
+	 * Creates a array list of doubles by a java script array of doubles.
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of doubles instance or <code>null</code> if the elements are null.
-	 * @see org.pepstock.charba.client.commons.JsDoubleArrayList
+	 * @return a array list of doubles instance or <code>null</code> if the array is null.
 	 */
 	public static ArrayDoubleList list(ArrayDouble values){
 		// checks if array is null
@@ -53,10 +52,9 @@ public final class ArrayListHelper {
 	}
 
 	/**
-	 * Creates a JavaScript array list of integers.
+	 * Creates a array list of integers by a java script array of integers.
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of integers instance or <code>null</code> if the elements are null.
-	 * @see org.pepstock.charba.client.commons.JsIntegerArrayList
+	 * @return a array list of integers instance or <code>null</code> if the array is null.
 	 */
 	public static ArrayIntegerList list(ArrayInteger values){
 		// checks if array is null
@@ -68,10 +66,9 @@ public final class ArrayListHelper {
 	}
 
 	/**
-	 * Creates a JavaScript array list of strings.
+	 * Creates a array list of strings by a java script array of strings.
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of strings instance or <code>null</code> if the elements are null.
-	 * @see org.pepstock.charba.client.commons.JsStringArrayList
+	 * @return a array list of strings instance or <code>null</code> if the array is null.
 	 */
 	public static ArrayStringList list(ArrayString values){
 		// checks if array is null
@@ -83,10 +80,9 @@ public final class ArrayListHelper {
 	}
 	
 	/**
-	 * Creates a JavaScript array list of strings.
+	 * Creates a array list of strings by an  array of colors (instance of {@link org.pepstock.charba.client.colors.IsColor}).
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of strings instance or <code>null</code> if the elements are null.
-	 * @see org.pepstock.charba.client.commons.JsStringArrayList
+	 * @return a array list of strings instance or <code>null</code> if the array is null.
 	 */
 	public static ArrayStringList list(IsColor... values){
 		// creates the list
@@ -95,21 +91,21 @@ public final class ArrayListHelper {
 		if (values == null){
 			return result;
 		}
+		// scans all colors 
 		for (IsColor color : values) {
-			// adds all elements
-			result.addAll(color.toRGBA());
+			// adds RGBA value as element
+			result.add(color.toRGBA());
 		}
 		// returns the list
 		return result;
 	}
 
 	/**
-	 * Creates a JavaScript array list of EnumValues.
-	 * @param clazz Enum class with all possible values of enumeration
+	 * Creates a array list of enumeration values (instance of {@link org.pepstock.charba.client.commons.Key}).
+	 * @param clazz enumeration class with all possible values of enumeration
 	 * @param values array of elements to load when the list is creating.
 	 * @param <E> type of key
-	 * @return a array list of values or <code>null</code> if the elements are null.
-	 * @see org.pepstock.charba.client.commons.JsEnumValueArrayList
+	 * @return a array list of values or <code>null</code> if the array is null.
 	 */
 	public static <E extends Key> ArrayEnumList<E> list(Class<E> clazz, E[] values){
 		// checks if array is null
@@ -125,13 +121,12 @@ public final class ArrayListHelper {
 	}
 
 	/**
-	 * Creates a JavaScript array list of EnumValues.
-	 * @param clazz Enum class with all possible values of enumeration
+	 * Creates a array list of enumeration values by an java script array of strings.
+	 * @param clazz enumeration class with all possible values of enumeration
+	 * @param array array of strings to load when the list is creating.
 	 * @param list a string array list 
 	 * @param <E> type of key
-	 * @return a array list of values  or <code>null</code> if the list is null.
-	 * @see org.pepstock.charba.client.commons.JsEnumValueArrayList
-	 * @see org.pepstock.charba.client.commons.JsStringArrayList
+	 * @return a array list of values  or <code>null</code> if the array is null.
 	 */
 	public static <E extends Key> ArrayEnumList<E> list(Class<E> clazz, ArrayString array){
 		// checks if array is null
@@ -139,16 +134,16 @@ public final class ArrayListHelper {
 			return null;
 		}
 		// returns the list adding the string array list to initialize it
+		// PAY ATTENTION: no checks if the values of strings are 
+		// consistent with the enumeration values
 		return new ArrayEnumList<E>(clazz.getEnumConstants(), array);
 	}
 	
 	/**
-	 * Creates a JavaScript array list of generic javaScript objects.
+	 * Creates a array list of generic java script objects by a java script array.
 	 * @param values array of elements to load when the list is creating.
 	 * @param <E> type of java script object
-	 * @return a array list of strings instance or <code>null</code> if the elements are null.
-	 * @see org.pepstock.charba.client.commons.GenericJavaScriptObject
-	 * @see org.pepstock.charba.client.commons.JsObjectArrayList
+	 * @return a array list of strings instance or <code>null</code> if the array is null.
 	 */
 	public static <E extends NativeObject> ArrayObjectList<E> list(ArrayObject<E> values){
 		// checks if array is null
@@ -160,108 +155,98 @@ public final class ArrayListHelper {
 	}
 
 	/**
-	 * FIXME
-	 * Loads an existing list of JavaScript object container.
-	 * @param container list instance of JavaScript object container
+	 * Creates a array list of  java script native object container by a java script array and a factory.
 	 * @param values array of elements to load when the list is creating.
-	 * @param <E> type of key
-	 * @return the instance of updated list
-	 * @see org.pepstock.charba.client.commons.AbstractList
-	 * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer
+	 * @param factory factory implementation to create containers by a single native object of the array.
+	 * @param <E> type of native object container
+	 * @param <O> type of native object
+	 * @return the instance of updated list or <code>null</code> if the array is null.
 	 */
 	public static <E extends NativeObjectContainer<O>, O extends NativeObject> ArrayObjectContainerList<E, O> list(ArrayObject<O> array, Factory<E, O> factory){
 		// checks if array is null
 		if (array == null){
 			return null;
 		}
+		// creates the list
 		return new ArrayObjectContainerList<>(array, factory);
 	}
 	
 	/**
-	 * Creates a JavaScript array list of doubles.
+	 * Creates an unmodifiable array list of doubles by a java script array of doubles.
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of doubles instance or <code>null</code> if the elements are null.
-	 * @see org.pepstock.charba.client.commons.JsDoubleArrayList
+	 * @return a array list of doubles instance or <code>null</code> if the array is null.
 	 */
 	public static List<Double> unmodifiableList(ArrayDouble values){
 		return unmodifiableList(list(values));
 	}
 
 	/**
-	 * Creates a JavaScript array list of integers.
+	 * Creates an unmodifiable array list of integers by a java script array of integers.
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of integers instance or <code>null</code> if the elements are null.
-	 * @see org.pepstock.charba.client.commons.JsIntegerArrayList
+	 * @return a array list of integers instance or <code>null</code> if the array is null.
 	 */
 	public static List<Integer> unmodifiableList(ArrayInteger values){
 		return unmodifiableList(list(values));
 	}
 
 	/**
-	 * Creates a JavaScript array list of strings.
+	 * Creates a array list of strings by a java script array of strings.
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of strings instance or <code>null</code> if the elements are null.
-	 * @see org.pepstock.charba.client.commons.JsStringArrayList
+	 * @return a array list of strings instance or <code>null</code> if the array is null.
 	 */
 	public static List<String> unmodifiableList(ArrayString values){
 		return unmodifiableList(list(values));
 	}
 	
 	/**
-	 * Creates a JavaScript array list of EnumValues.
-	 * @param clazz Enum class with all possible values of enumeration
+	 * Creates an unmodifiable array list of enumeration values (instance of {@link org.pepstock.charba.client.commons.Key}).
+	 * @param clazz enumeration class with all possible values of enumeration
 	 * @param values array of elements to load when the list is creating.
 	 * @param <E> type of key
-	 * @return a array list of values or <code>null</code> if the elements are null.
-	 * @see org.pepstock.charba.client.commons.JsEnumValueArrayList
+	 * @return a array list of values or <code>null</code> if the array is null.
 	 */
 	public static <E extends Key> List<E> unmodifiableList(Class<E> clazz, E[] values){
 		return unmodifiableList(list(clazz, values));
 	}
 
 	/**
-	 * Creates a JavaScript array list of EnumValues.
-	 * @param clazz Enum class with all possible values of enumeration
+	 * Creates an unmodifiable array list of enumeration values by an java script array of strings.
+	 * @param clazz enumeration class with all possible values of enumeration
+	 * @param array array of strings to load when the list is creating.
 	 * @param list a string array list 
 	 * @param <E> type of key
-	 * @return a array list of values  or <code>null</code> if the list is null.
-	 * @see org.pepstock.charba.client.commons.JsEnumValueArrayList
-	 * @see org.pepstock.charba.client.commons.JsStringArrayList
+	 * @return a array list of values or <code>null</code> if the array is null.
 	 */
 	public static <E extends Key> List<E> unmodifiableList(Class<E> clazz, ArrayString array){
 		return unmodifiableList(list(clazz, array));
 	}
 	
 	/**
-	 * Creates a JavaScript array list of generic javaScript objects.
+	 * Creates an unmodifiable array list of generic java script objects by a java script array.
 	 * @param values array of elements to load when the list is creating.
 	 * @param <E> type of java script object
-	 * @return a array list of strings instance or <code>null</code> if the elements are null.
-	 * @see org.pepstock.charba.client.commons.GenericJavaScriptObject
-	 * @see org.pepstock.charba.client.commons.JsObjectArrayList
+	 * @return a array list of strings instance or <code>null</code> if the array is null.
 	 */
 	public static <E extends NativeObject> List<E> unmodifiableList(ArrayObject<E> values){
 		return unmodifiableList(list(values));
 	}
 
 	/**
-	 * FIXME
-	 * Loads an existing list of JavaScript object container.
-	 * @param container list instance of JavaScript object container
+	 * Creates an unmodifiable array list of  java script native object container by a java script array and a factory.
 	 * @param values array of elements to load when the list is creating.
-	 * @param <E> type of key
-	 * @return the instance of updated list
-	 * @see org.pepstock.charba.client.commons.AbstractList
-	 * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer
+	 * @param factory factory implementation to create containers by a single native object of the array.
+	 * @param <E> type of native object container
+	 * @param <O> type of native object
+	 * @return the instance of updated list or <code>null</code> if the array is null.
 	 */
 	public static <E extends NativeObjectContainer<O>, O extends NativeObject> List<E> unmodifiableList(ArrayObject<O> array, Factory<E, O> factory){
 		return unmodifiableList(list(array, factory));
 	}
 	
 	/**
-	 * FIXME
-	 * @param list
-	 * @return
+	 * Returns an unmodifiable list by another list.
+	 * @param list array list to wrap into an unmodifiable list
+	 * @return an unmodifiable list or <code>null</code> if the list is null.
 	 */
 	private static <E> List<E> unmodifiableList(List<E> list){
 		// checks if null

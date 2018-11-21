@@ -26,10 +26,10 @@ import org.pepstock.charba.client.jsinterop.utils.JSON;
 /**
  * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
- * This implementation uses a GWT JsArray as backend to store objects (strings).
+ * This implementation uses a java script array as backend to store objects (strings).
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.commons.JsArrayStringImpl
+ * @see org.pepstock.charba.client.jsinterop.commons.ArrayString
  */
 public final class ArrayStringList implements List<String> {
 	
@@ -37,11 +37,11 @@ public final class ArrayStringList implements List<String> {
 	private final ArrayString array;
 
 	/**
-	 * Internal constructor used to load a JSArray already in another object.
-	 * @param array JS array instance
+	 * Internal constructor used to set an array instance as backend of the list.
+	 * @param array java script array instance. If <code>null</code>, new empty array has been created
 	 */
 	ArrayStringList(ArrayString array) {
-		// if null, creates a new JS array
+		// if null, creates a new array
 		if (array == null){
 			this.array = new ArrayString();
 		} else {

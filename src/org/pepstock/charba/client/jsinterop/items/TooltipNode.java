@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
+import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsPackage;
@@ -27,7 +28,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
 public final class TooltipNode extends NativeObject {
 
 	@JsProperty(name = "_model")

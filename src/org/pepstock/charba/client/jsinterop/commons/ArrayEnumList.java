@@ -41,11 +41,16 @@ public final class ArrayEnumList<E extends Key> implements List<E> {
 	private final E[] definedValues;
 
 	/**
-	 * Internal constructor used to load an array already in another object.
+	 * Internal constructor used to set an array instance as backend of the list.
 	 * @param values all values of an enumeration
-	 * @param array array instance
+	 * @param array java script array instance. If <code>null</code>, new empty array has been created
 	 */
 	ArrayEnumList(E[] values, ArrayString array) {
+		// checks if values are consistent
+		if (values == null) {
+			// otherwise exception
+			throw new UnsupportedOperationException("Enumeration values are null. Check the class if is a enum");
+		}
 		// sets all enumeration values
 		this.definedValues = values;
 		// if null, creates a new array
@@ -58,8 +63,8 @@ public final class ArrayEnumList<E extends Key> implements List<E> {
 	}
 
 	/**
-	 * Creates an empty list
-	 * @param vdefinedValues all values of an enumeration
+	 * Creates an empty list by a class which is a enum 
+	 * @param clazz enumeration class with all values of an enumeration
 	 */
 	ArrayEnumList(Class<E> clazz) {
 		this(clazz.getEnumConstants(), null);

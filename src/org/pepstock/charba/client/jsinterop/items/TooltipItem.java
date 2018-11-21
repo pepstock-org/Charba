@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.jsinterop.items;
 
 import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsOverlay;
@@ -37,7 +38,7 @@ import jsinterop.annotations.JsType;
  * @see org.pepstock.charba.client.callbacks.TooltipTitleCallback
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
 public final class TooltipItem extends NativeObject {
 	
 	@JsProperty(name = "xLabel")

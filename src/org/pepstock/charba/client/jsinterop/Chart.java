@@ -1,6 +1,7 @@
 package org.pepstock.charba.client.jsinterop;
 
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
+import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
 import org.pepstock.charba.client.jsinterop.items.ChartAreaItem;
 import org.pepstock.charba.client.jsinterop.items.DatasetItem;
@@ -20,7 +21,7 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
-@JsType(isNative = true, name = "Chart", namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.CHART, namespace = JsPackage.GLOBAL)
 public final class Chart{
 	
 	@JsProperty

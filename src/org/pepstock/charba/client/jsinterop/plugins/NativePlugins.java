@@ -1,13 +1,14 @@
 package org.pepstock.charba.client.jsinterop.plugins;
 
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
+import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-@JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class NativePlugins extends NativeObject {
 	
 	/**
