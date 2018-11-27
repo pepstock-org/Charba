@@ -1,13 +1,13 @@
 package org.pepstock.charba.client.jsinterop;
 
-import org.pepstock.charba.client.jsinterop.defaults.DefaultOptions;
-import org.pepstock.charba.client.jsinterop.options.NativeScale;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
 import org.pepstock.charba.client.jsinterop.options.Scale;
 
 public final class GlobalScale extends Scale {
 
-	GlobalScale(NativeScale delegated) {
-		super(DefaultOptions.get().getScale(), delegated);
+	GlobalScale(NativeObject nativeObject) {
+		super(DefaultOptions.get().getScale(), nativeObject);
 	}
 
 }

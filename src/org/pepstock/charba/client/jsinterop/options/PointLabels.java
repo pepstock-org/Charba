@@ -16,14 +16,8 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.jsinterop.callbacks.RadialPointLabelCallback;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.RadialPointLabelHandler;
-import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.JsHelper;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPointLabels;
-
-import jsinterop.annotations.JsFunction;
 
 /**
  * It is used to configure the point labels that are shown on the perimeter of the scale.<br>
@@ -32,43 +26,18 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels, NativePointLabels> {
-
-	@JsFunction
-	interface ProxyPointLabelCallback {
-		// FIXME context
-		String call(Object context, String item);
-	}
-	
-	private final CallbackProxy<ProxyPointLabelCallback> pointLabelCallbackProxy = JsHelper.newCallbackProxy();
-	
-	private RadialPointLabelCallback callback = null;
-	
-	private RadialPointLabelHandler callbackHandler = null;;
+public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> implements IsDefaultPointLabels{
 
 	/**
 	 * Name of fields of JavaScript object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
-		callback
+		display
 	}
 	
-	PointLabels(Scale scale, IsDefaultPointLabels defaultValues, NativePointLabels delegated) {
-		super(scale, defaultValues, delegated == null ? new NativePointLabels() : delegated);
-		pointLabelCallbackProxy.setCallback(new ProxyPointLabelCallback() {
-
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.PointLabels.ProxyPointLabelCallback#call(java.lang.Object, java.lang.String)
-			 */
-			@Override
-			public String call(Object context, String item) {
-				if (callbackHandler != null) {
-					return callbackHandler.onCallback(item);
-				}
-				return item;
-			}
-		});
+	PointLabels(Scale scale, Key childKey, IsDefaultPointLabels defaultValues, NativeObject nativeObject) {
+		super(scale, childKey, defaultValues, nativeObject);
 	}
 
 	/**
@@ -77,7 +46,7 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels, Nat
 	 * @param display if true, labels are shown.
 	 */
 	public void setDisplay(boolean display) {
-		getDelegated().setDisplay(display);
+		setValue(Property.display, display);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -88,52 +57,6 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels, Nat
 	 * @return if true, labels are shown. Default is true.
 	 */
 	public boolean isDisplay() {
-		return Checker.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
+		return getValue(Property.display, getDefaultValues().isDisplay());
 	}	
-	
-	/**
-	 * @return the pointLabelcallback
-	 */
-	public RadialPointLabelCallback getCallback() {
-		return callback;
-	}
-
-	/**
-	 * @param pointLabelCallback the pointLabelcallback to set
-	 */
-	public void setCallback(RadialPointLabelCallback pointLabelCallback) {
-		this.callback = pointLabelCallback;
-	}
-	
-	/**
-	 * @return the callbackHandler
-	 */
-	RadialPointLabelHandler getCallbackHandler() {
-		return callbackHandler;
-	}
-
-
-	/**
-	 * @param callbackHandler the callbackHandler to set
-	 */
-	void setCallbackHandler(RadialPointLabelHandler callbackHandler) {
-		if (callbackHandler != null) {
-			getDelegated().setCallback(pointLabelCallbackProxy.getProxy());
-			// checks if the node is already added to parent
-			checkAndAddToParent();
-		} else {
-			remove(Property.callback);
-		}
-		this.callbackHandler = callbackHandler;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getPointLabels() == null) {
-			getParent().getDelegated().setPointLabels(getDelegated());
-		}
-	}
 }

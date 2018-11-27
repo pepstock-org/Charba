@@ -23,6 +23,7 @@ import org.pepstock.charba.client.jsinterop.items.AxisItem;
  * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.jsinterop.configuration.Axis
+ * @see org.pepstock.charba.client.jsinterop.items.AxisItem
  * @since 2.0
  */
 public interface AxisCalculateTickRotationCallback {
@@ -32,8 +33,6 @@ public interface AxisCalculateTickRotationCallback {
 	 * 
 	 * @param axis axis instance where this callback as been defined
 	 * @param item axis item instance
-	 * @see org.pepstock.charba.client.jsinterop.configuration.Axis
-	 * @see org.pepstock.charba.client.jsinterop.items.AxisItem
 	 */
 	void onBeforeCalculateTickRotation(Axis axis, AxisItem item);
 
@@ -42,8 +41,6 @@ public interface AxisCalculateTickRotationCallback {
 	 * 
 	 * @param axis axis instance where this callback as been defined
 	 * @param item axis item instance
-	 * @see org.pepstock.charba.client.jsinterop.configuration.Axis
-	 * @see org.pepstock.charba.client.jsinterop.items.AxisItem
 	 */
 	void onAfterCalculateTickRotation(Axis axis, AxisItem item);
 

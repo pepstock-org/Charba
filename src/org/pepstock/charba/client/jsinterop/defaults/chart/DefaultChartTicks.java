@@ -1,5 +1,7 @@
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
+import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.TickSource;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.jsinterop.options.Ticks;
@@ -25,7 +27,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontColor()
 	 */
 	@Override
-	public String getFontColor() {
+	public String getFontColorAsString() {
 		return ticks.getFontColorAsString();
 	}
 
@@ -41,8 +43,8 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontStyle()
 	 */
 	@Override
-	public String getFontStyle() {
-		return ticks.getFontStyle().name();
+	public FontStyle getFontStyle() {
+		return ticks.getFontStyle();
 	}
 
 	/* (non-Javadoc)
@@ -201,7 +203,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getBackdropColor()
 	 */
 	@Override
-	public String getBackdropColor() {
+	public String getBackdropColorAsString() {
 		return ticks.getBackdropColorAsString();
 	}
 
@@ -233,8 +235,8 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getSource()
 	 */
 	@Override
-	public String getSource() {
-		return ticks.getSource().name();
+	public TickSource getSource() {
+		return ticks.getSource();
 	}
 
 }

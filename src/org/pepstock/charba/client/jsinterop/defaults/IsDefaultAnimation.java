@@ -1,5 +1,7 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
+import org.pepstock.charba.client.enums.Easing;
+
 public interface IsDefaultAnimation {
 	
 	/**
@@ -7,7 +9,7 @@ public interface IsDefaultAnimation {
 	 * 
 	 * @return animation easing. Default value is {@link org.pepstock.charba.client.enums.Easing#easeOutQuart}.
 	 */
-	String getEasing();
+	Easing getEasing();
 
 	/**
 	 * Returns the number of milliseconds an animation takes.

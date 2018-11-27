@@ -26,8 +26,8 @@ public final class DefaultChartGridLines implements IsDefaultGridLines{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getColor()
 	 */
 	@Override
-	public String getColor() {
-		return gridLines.getColorAsString().get(0);
+	public String getColorAsString() {
+		return gridLines.getColorAsString();
 	}
 
 	/* (non-Javadoc)
@@ -43,7 +43,7 @@ public final class DefaultChartGridLines implements IsDefaultGridLines{
 	 */
 	@Override
 	public int getLineWidth() {
-		return gridLines.getLineWidth().get(0);
+		return gridLines.getLineWidth();
 	}
 
 	/* (non-Javadoc)
@@ -90,7 +90,7 @@ public final class DefaultChartGridLines implements IsDefaultGridLines{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getZeroLineColor()
 	 */
 	@Override
-	public String getZeroLineColor() {
+	public String getZeroLineColorAsString() {
 		return gridLines.getZeroLineColorAsString();
 	}
 

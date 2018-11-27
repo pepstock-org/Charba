@@ -17,13 +17,14 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import java.util.List;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.Enumer;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.commons.ObjectType;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine;
 
 /**
@@ -37,10 +38,25 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
+public class Line extends AbstractElement<Elements, IsDefaultLine> implements IsDefaultLine{
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	enum Property implements Key
+	{
+		tension,
+		borderCapStyle,
+		borderDash,
+		borderDashOffset,
+		borderJoinStyle,
+		capBezierPoints,
+		fill,
+		stepped
+	}
 
-	Line(Elements elements, IsDefaultLine defaultValues, NativeLine delegated) {
-		super(elements, defaultValues, delegated == null ? new NativeLine(): delegated);
+	Line(Elements elements, Key childKey, IsDefaultLine defaultValues, NativeObject nativeObject) {
+		super(elements, childKey, defaultValues, nativeObject);
 	}
 	
 	/**
@@ -49,7 +65,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @param tension the Bezier curve tension (0 for no Bezier curves).
 	 */
 	public void setTension(double tension) {
-		getDelegated().setTension(tension);
+		setValue(Property.tension, tension);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -60,7 +76,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @return the Bezier curve tension (0 for no Bezier curves). Default is 0.4F.
 	 */
 	public double getTension() {
-		return Checker.check(getDelegated().getTension(), getDefaultValues().getTension());
+		return getValue(Property.tension, getDefaultValues().getTension());
 	}
 
 	/**
@@ -71,7 +87,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public void setBorderCapStyle(CapStyle borderCapStyle) {
-		getDelegated().setBorderCapStyle(borderCapStyle.name());
+		setValue(Property.borderCapStyle, borderCapStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -84,7 +100,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public CapStyle getBorderCapStyle() {
-		return Enumer.deserialize(getDelegated().getBorderCapStyle(), getDefaultValues().getBorderCapStyle(), CapStyle.class, CapStyle.butt);
+		return getValue(Property.borderCapStyle, CapStyle.class, getDefaultValues().getBorderCapStyle());
 	}
 
 	/**
@@ -95,18 +111,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 *            lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
-		setBorderDash(ArrayInteger.of(borderDash));
-	}
-
-	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
-	 * and gaps which describe the pattern.
-	 * 
-	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating
-	 *            lengths of lines and gaps which describe the pattern.
-	 */
-	private void setBorderDash(ArrayInteger borderDash) {
-		getDelegated().setBorderDash(borderDash);
+		setArrayValue(Property.borderDash, ArrayInteger.of(borderDash));
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -119,7 +124,8 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 *         lines and gaps which describe the pattern.
 	 */
 	public List<Integer> getBorderDash() {
-		return ArrayListHelper.list(getDelegated().getBorderDash());
+		ArrayInteger array = getArrayValue(Property.borderDash);
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -128,7 +134,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @param borderDashOffset the line dash pattern offset or "phase".
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
-		getDelegated().setBorderDashOffset(borderDashOffset);
+		setValue(Property.borderDashOffset, borderDashOffset);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -139,7 +145,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @return the line dash pattern offset or "phase". Default is 0.
 	 */
 	public int getBorderDashOffset() {
-		return Checker.check(getDelegated().getBorderDashOffset(), getDefaultValues().getBorderDashOffset());
+		return getValue(Property.borderDashOffset, getDefaultValues().getBorderDashOffset());
 	}
 
 	/**
@@ -153,7 +159,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
-		getDelegated().setBorderJoinStyle(borderJoinStyle.name());
+		setValue(Property.borderJoinStyle, borderJoinStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -169,7 +175,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public JoinStyle getBorderJoinStyle() {
-		return Enumer.deserialize(getDelegated().getBorderJoinStyle(), getDefaultValues().getBorderJoinStyle(), JoinStyle.class, JoinStyle.miter);
+		return getValue(Property.borderJoinStyle, JoinStyle.class, getDefaultValues().getBorderJoinStyle());
 	}
 
 	/**
@@ -178,7 +184,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @param capBezierPoints <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
 	 */
 	public void setCapBezierPoints(boolean capBezierPoints) {
-		getDelegated().setCapBezierPoints(capBezierPoints);
+		setValue(Property.capBezierPoints, capBezierPoints);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -189,7 +195,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction. Default is <code>true</code>.
 	 */
 	public boolean isCapBezierPoints() {
-		return Checker.check(getDelegated().isCapBezierPoints(), getDefaultValues().isCapBezierPoints());
+		return getValue(Property.capBezierPoints, getDefaultValues().isCapBezierPoints());
 	}
 
 	/**
@@ -198,7 +204,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @param fill how to fill the area under the line.
 	 */
 	public void setFill(boolean fill) {
-		getDelegated().setFill(fill);
+		setValue(Property.fill, fill);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -213,15 +219,14 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 		// checks if is no fill
 		if (Fill.nofill.equals(fill)) {
 			// sets the boolean value instead of string one
-			getDelegated().setFill(false);
-			// checks if the node is already added to parent
-			checkAndAddToParent();
+			setValue(Property.fill, false);
 		} else {
 			// sets value
-			getDelegated().setFill(fill.name());
-			// checks if the node is already added to parent
-			checkAndAddToParent();
+			setValue(Property.fill, fill);
 		}
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+
 	}
 
 	/**
@@ -231,23 +236,24 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @see org.pepstock.charba.client.enums.Fill
 	 */
 	public Fill getFill() {
-		String value = getDelegated().getFill() != null ? getDelegated().getFill().toString() : getDefaultValues().getFill();
+		// gets value type
+		ObjectType type = type(Property.fill);
+		//String value = getValue(Property.fill, getDefaultValues().getFill());
 		// if is a boolean FALSE value
-		if (value.equalsIgnoreCase(Boolean.FALSE.toString())) {
+		if (ObjectType.Boolean.equals(type)) {
 			// returns no fill
-			return Fill.nofill;
-		} else if (value.equalsIgnoreCase(Boolean.TRUE.toString())) {
-			return Fill.origin;
+			return getValue(Property.fill, false) ? Fill.origin : Fill.nofill;
 		}
-		return Enumer.deserialize(value, Fill.class, Fill.origin);
+		return getValue(Property.fill, Fill.class, getDefaultValues().getFill());
 	}
+	
 	/**
 	 * Sets <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 * 
 	 * @param stepped <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 */
 	public void setStepped(boolean stepped) {
-		getDelegated().setStepped(stepped);
+		setValue(Property.stepped, stepped);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -258,17 +264,6 @@ public class Line extends AbstractElement<Elements, IsDefaultLine, NativeLine>{
 	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored). Default is <code>false</code>.
 	 */
 	public boolean isStepped() {
-		return Checker.check(getDelegated().isStepped(), getDefaultValues().isStepped());
+		return getValue(Property.stepped, getDefaultValues().isStepped());
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getLine() == null) {
-			getParent().getDelegated().setLine(getDelegated());
-		}
-	}
-
 }

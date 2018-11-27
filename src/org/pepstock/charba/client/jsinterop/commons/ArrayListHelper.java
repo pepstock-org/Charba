@@ -26,7 +26,7 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Fac
  * Utility to create array list objects from java script arrays.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class ArrayListHelper {
 

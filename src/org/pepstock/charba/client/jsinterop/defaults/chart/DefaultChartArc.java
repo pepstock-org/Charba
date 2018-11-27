@@ -18,7 +18,7 @@ public final class DefaultChartArc implements IsDefaultArc {
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBackgroundColor()
 	 */
 	@Override
-	public String getBackgroundColor() {
+	public String getBackgroundColorAsString() {
 		return arc.getBackgroundColorAsString();
 	}
 
@@ -34,7 +34,7 @@ public final class DefaultChartArc implements IsDefaultArc {
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBorderColor()
 	 */
 	@Override
-	public String getBorderColor() {
+	public String getBorderColorAsString() {
 		return arc.getBorderColorAsString();
 	}
 	

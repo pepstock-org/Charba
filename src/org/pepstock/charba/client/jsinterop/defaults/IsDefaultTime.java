@@ -15,7 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults;
 
-import com.google.gwt.core.client.JsDate;
+import java.util.Date;
+
+import org.pepstock.charba.client.enums.TimeUnit;
 
 /**
  * The following display formats are used to configure how different time units are formed into strings for the axis tick marks.
@@ -48,21 +50,21 @@ public interface IsDefaultTime {
 	 * 
 	 * @return If defined, this will override the data maximum.
 	 */
-	JsDate getMax();
+	Date getMax();
 
 	/**
 	 * If defined, this will override the data minimum.
 	 * 
 	 * @return If defined, this will override the data minimum.
 	 */
-	JsDate getMin();
+	Date getMin();
 
 	/**
 	 * If defined, dates will be rounded to the start of this unit.
 	 * 
 	 * @return If defined, dates will be rounded to the start of this unit.
 	 */
-	String getRound();
+	TimeUnit getRound();
 
 	/**
 	 * The moment js format string to use for the tooltip.
@@ -76,7 +78,7 @@ public interface IsDefaultTime {
 	 * 
 	 * @return If defined, will force the unit to be a certain type.
 	 */
-	String getUnit();
+	TimeUnit getUnit();
 
 	/**
 	 * The number of units between grid lines.
@@ -90,7 +92,7 @@ public interface IsDefaultTime {
 	 * 
 	 * @return The minimum display format to be used for a time unit. 
 	 */
-	String getMinUnit();
+	TimeUnit getMinUnit();
 
 	/**
 	 * Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.

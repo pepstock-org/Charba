@@ -17,9 +17,9 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.Enumer;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
 
 /**
@@ -28,10 +28,21 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class FontItem<P extends BaseModel<?,?,?>, D extends IsDefaultFontItem, O extends NativeFontItem> extends BaseModel<P, D, O>{
+public abstract class FontItem<P extends AbstractModel<?,?>, D extends IsDefaultFontItem> extends AbstractModel<P, D> implements IsDefaultFontItem{
 	
-	FontItem(P parent, D defaultValues, O delegated) {
-		super(parent, defaultValues, delegated);
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	enum Property implements Key
+	{
+		fontSize,
+		fontStyle,
+		fontColor,
+		fontFamily,
+	}
+	
+	FontItem(P parent, Key childKey,  D defaultValues, NativeObject nativeObject) {
+		super(parent, childKey, defaultValues, nativeObject);
 	}
 	
 	/**
@@ -40,7 +51,7 @@ public abstract class FontItem<P extends BaseModel<?,?,?>, D extends IsDefaultFo
 	 * @param fontSize the font size.
 	 */
 	public void setFontSize(int fontSize) {
-		getDelegated().setFontSize(fontSize);
+		setValue(Property.fontSize, fontSize);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -51,7 +62,7 @@ public abstract class FontItem<P extends BaseModel<?,?,?>, D extends IsDefaultFo
 	 * @return the font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
 	 */
 	public int getFontSize() {
-		return Checker.check(getDelegated().getFontSize(), getDefaultValues().getFontSize());
+		return getValue(Property.fontSize, getDefaultValues().getFontSize());
 	}
 
 	/**
@@ -61,7 +72,7 @@ public abstract class FontItem<P extends BaseModel<?,?,?>, D extends IsDefaultFo
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
-		getDelegated().setFontStyle(fontStyle.name());
+		setValue(Property.fontStyle, fontStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -74,7 +85,7 @@ public abstract class FontItem<P extends BaseModel<?,?,?>, D extends IsDefaultFo
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
-		return Enumer.deserialize(getDelegated().getFontStyle(), getDefaultValues().getFontStyle(), FontStyle.class, FontStyle.normal);
+		return getValue(Property.fontStyle, FontStyle.class, getDefaultValues().getFontStyle());
 	}
 
 	/**
@@ -92,7 +103,7 @@ public abstract class FontItem<P extends BaseModel<?,?,?>, D extends IsDefaultFo
 	 * @param fontColor Font color
 	 */
 	public void setFontColor(String fontColor) {
-		getDelegated().setFontColor(fontColor);
+		setValue(Property.fontColor, fontColor);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -103,7 +114,7 @@ public abstract class FontItem<P extends BaseModel<?,?,?>, D extends IsDefaultFo
 	 * @return Font color. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontColor()}.
 	 */
 	public String getFontColorAsString() {
-		return Checker.check(getDelegated().getFontColor(), getDefaultValues().getFontColor());
+		return getValue(Property.fontColor, getDefaultValues().getFontColorAsString());
 	}
 
 	/**
@@ -121,7 +132,7 @@ public abstract class FontItem<P extends BaseModel<?,?,?>, D extends IsDefaultFo
 	 * @param fontFamily Font family, follows CSS font-family options.
 	 */
 	public void setFontFamily(String fontFamily) {
-		getDelegated().setFontFamily(fontFamily);
+		setValue(Property.fontFamily, fontFamily);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -133,7 +144,7 @@ public abstract class FontItem<P extends BaseModel<?,?,?>, D extends IsDefaultFo
 	 *         {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
 	 */
 	public String getFontFamily() {
-		return Checker.check(getDelegated().getFontFamily(), getDefaultValues().getFontFamily());
+		return getValue(Property.fontFamily, getDefaultValues().getFontFamily());
 	}
 
 }

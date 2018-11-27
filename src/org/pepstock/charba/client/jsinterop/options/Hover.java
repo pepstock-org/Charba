@@ -15,10 +15,10 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.Enumer;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover;
 
 /**
@@ -27,10 +27,21 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Hover extends BaseModel<BaseOptions<?,?>, IsDefaultHover, NativeHover>{
+public class Hover extends AbstractModel<Options, IsDefaultHover> implements IsDefaultHover{
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		mode,
+		axis,
+		intersect,
+		animationDuration
+	}
 
-	Hover(BaseOptions<?,?> options, IsDefaultHover defaultValues, NativeHover delegated) {
-		super(options, defaultValues, delegated == null ? new NativeHover() : delegated);
+	Hover(Options options, Key childKey, IsDefaultHover defaultValues, NativeObject nativeObject) {
+		super(options, childKey, defaultValues, nativeObject);
 	}
 
 	/**
@@ -40,7 +51,7 @@ public class Hover extends BaseModel<BaseOptions<?,?>, IsDefaultHover, NativeHov
 	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
 	public void setMode(InteractionMode mode) {
-		getDelegated().setMode(mode.name());
+		setValue(Property.mode, mode);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -53,7 +64,7 @@ public class Hover extends BaseModel<BaseOptions<?,?>, IsDefaultHover, NativeHov
 	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
 	public InteractionMode getMode() {
-		return Enumer.deserialize(getDelegated().getMode(), getDefaultValues().getMode(), InteractionMode.class, InteractionMode.nearest);
+		return getValue(Property.mode, InteractionMode.class, getDefaultValues().getMode());
 	}
 
 	/**
@@ -62,7 +73,7 @@ public class Hover extends BaseModel<BaseOptions<?,?>, IsDefaultHover, NativeHov
 	 * @param intersect if true, the hover mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public void setIntersect(boolean intersect) {
-		getDelegated().setIntersect(intersect);
+		setValue(Property.intersect, intersect);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -73,7 +84,7 @@ public class Hover extends BaseModel<BaseOptions<?,?>, IsDefaultHover, NativeHov
 	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart. Default is true.
 	 */
 	public boolean isIntersect() {
-		return Checker.check(getDelegated().isIntersect(), getDefaultValues().isIntersect());
+		return getValue(Property.intersect, getDefaultValues().isIntersect());
 	}
 
 	/**
@@ -82,7 +93,7 @@ public class Hover extends BaseModel<BaseOptions<?,?>, IsDefaultHover, NativeHov
 	 * @param milliseconds duration in milliseconds it takes to animate hover style changes.
 	 */
 	public void setAnimationDuration(int milliseconds) {
-		getDelegated().setAnimationDuration(milliseconds);
+		setValue(Property.animationDuration, milliseconds);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -93,7 +104,7 @@ public class Hover extends BaseModel<BaseOptions<?,?>, IsDefaultHover, NativeHov
 	 * @return duration in milliseconds it takes to animate hover style changes. Default is 400.
 	 */
 	public int getAnimationDuration() {
-		return Checker.check(getDelegated().getAnimationDuration(), getDefaultValues().getAnimationDuration());
+		return getValue(Property.animationDuration, getDefaultValues().getAnimationDuration());
 	}
 	
 	/**
@@ -104,7 +115,7 @@ public class Hover extends BaseModel<BaseOptions<?,?>, IsDefaultHover, NativeHov
 	 * @see org.pepstock.charba.client.enums.InteractionAxis
 	 */
 	public void setAxis(InteractionAxis axis) {
-		getDelegated().setAxis(axis.name());
+		setValue(Property.axis, axis);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -116,16 +127,7 @@ public class Hover extends BaseModel<BaseOptions<?,?>, IsDefaultHover, NativeHov
 	 * @see org.pepstock.charba.client.enums.InteractionAxis
 	 */
 	public InteractionAxis getAxis() {
-		return Enumer.deserialize(getDelegated().getAxis(), getDefaultValues().getAxis(), InteractionAxis.class, InteractionAxis.x);
+		return getValue(Property.axis, InteractionAxis.class, getDefaultValues().getAxis());
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getHover() == null) {
-			getParent().getDelegated().setHover(getDelegated());
-		}
-	}
 }

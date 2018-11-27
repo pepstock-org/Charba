@@ -19,8 +19,8 @@ import java.util.Date;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.TimeUnit;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.Enumer;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.commons.ObjectType;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime;
 
 /**
@@ -29,18 +29,29 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
+public final class Time extends AbstractModel<Scale, IsDefaultTime> implements IsDefaultTime{
 
 	private final DisplayFormats displayFormats;
 	
 	/**
 	 * Name of fields of JavaScript object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
+		// sub elements,
+		displayFormats,
+		// properties
+		isoWeekday,
+		max,
+		min,
+		parser,
 		round,
+		tooltipFormat,
 		unit,
+		stepSize,
+		minUnit
 	}
+
 
 	/**
 	 * Builds the object storing the chart instance and the axis which this grid lines belongs to.
@@ -48,9 +59,9 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @param chart chart instance.
 	 * @param axis axis which this grid lines belongs to.
 	 */
-	Time(Scale scale, IsDefaultTime defaultValues, NativeTime delegated) {
-		super(scale, defaultValues, delegated == null ? new NativeTime(): delegated);
-		displayFormats = new DisplayFormats(this, getDelegated().getDisplayFormats());
+	Time(Scale scale, Key childKey, IsDefaultTime defaultValues, NativeObject nativeObject) {
+		super(scale, childKey, defaultValues, nativeObject);
+		displayFormats = new DisplayFormats(this, Property.displayFormats, getValue(Property.displayFormats));
 	}
 
 	/**
@@ -66,7 +77,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @param isoWeekday If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
 	 */
 	public void setIsoWeekday(boolean isoWeekday) {
-		getDelegated().setIsoWeekday(isoWeekday);
+		setValue(Property.isoWeekday, isoWeekday);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -77,7 +88,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @return If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday. Default is <code>true</code>.
 	 */
 	public boolean isIsoWeekday() {
-		return Checker.check(getDelegated().isIsoWeekday(), getDefaultValues().isIsoWeekday());
+		return getValue(Property.isoWeekday, getDefaultValues().isIsoWeekday());
 	}
 	
 	/**
@@ -86,7 +97,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @param max If defined, this will override the data maximum.
 	 */
 	public void setMax(Date max) {
-		getDelegated().setMax(Checker.fromDate(max));
+		setValue(Property.max, max);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -97,7 +108,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @return If defined, this will override the data maximum. Default is <code>null</code>.
 	 */
 	public Date getMax() {
-		return Checker.toDate(Checker.check(getDelegated().getMax(), getDefaultValues().getMax()));
+		return getValue(Property.max, getDefaultValues().getMax());
 	}
 
 	/**
@@ -106,7 +117,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @param min If defined, this will override the data minimum.
 	 */
 	public void setMin(Date min) {
-		getDelegated().setMin(Checker.fromDate(min));
+		setValue(Property.min, min);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -117,7 +128,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @return If defined, this will override the data minimum. Default is <code>null</code>.
 	 */
 	public Date getMin() {
-		return Checker.toDate(Checker.check(getDelegated().getMin(), getDefaultValues().getMin()));
+		return getValue(Property.min, getDefaultValues().getMin());
 	}
 	
 	/**
@@ -127,7 +138,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 */
 	public void setRound(boolean round) {
 		if (!round){
-			getDelegated().removeRound();
+			remove(Property.round);
 		}
 	}
 	
@@ -138,7 +149,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @see org.pepstock.charba.client.enums.TimeUnit
 	 */
 	public void setRound(TimeUnit round) {
-		getDelegated().setRound(round.name());
+		setValue(Property.round, round);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -150,17 +161,12 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @see org.pepstock.charba.client.enums.TimeUnit
 	 */
 	public TimeUnit getRound() {
-		// gets value
-		String value = Checker.check(getDelegated().getRound(), getDefaultValues().getRound());
-		if (value == null){
-			// returns no unit
-			return null;
-		} else if (value.equalsIgnoreCase(Boolean.FALSE.toString())){
+		if (ObjectType.Boolean.equals(type(Property.round))){
 			// if is a boolean FALSE value
 			// returns no unit
-			return null;
+			return getDefaultValues().getRound();
 		}
-		return Enumer.deserialize(value, TimeUnit.class, TimeUnit.millisecond);
+		return getValue(Property.round, TimeUnit.class, getDefaultValues().getRound());
 	}
 	
 	/**
@@ -169,7 +175,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @param tooltipFormat The moment js format string to use for the tooltip.
 	 */
 	public void setTooltipFormat(String tooltipFormat) {
-		getDelegated().setTooltipFormat(tooltipFormat);
+		setValue(Property.tooltipFormat, tooltipFormat);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -180,7 +186,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @return The moment js format string to use for the tooltip. Default is <code>null</code>.
 	 */
 	public String getTooltipFormat() {
-		return Checker.check(getDelegated().getTooltipFormat(), getDefaultValues().getTooltipFormat());
+		return getValue(Property.tooltipFormat, getDefaultValues().getTooltipFormat());
 	}
 
 	/**
@@ -190,7 +196,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 */
 	public void setUnit(boolean unit) {
 		if (!unit){
-			getDelegated().removeUnit();
+			remove(Property.unit);
 		}
 	}
 	
@@ -201,7 +207,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @see org.pepstock.charba.client.enums.TimeUnit
 	 */
 	public void setUnit(TimeUnit unit) {
-		getDelegated().setUnit(unit.name());
+		setValue(Property.unit, unit);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -213,17 +219,12 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @see org.pepstock.charba.client.enums.TimeUnit
 	 */
 	public TimeUnit getUnit() {
-		// gets value
-		String value = Checker.check(getDelegated().getUnit(), getDefaultValues().getUnit());
-		if (value == null){
-			// returns no unit
-			return null;
-		} else if (value.equalsIgnoreCase(Boolean.FALSE.toString())){
+		if (ObjectType.Boolean.equals(type(Property.unit))){
 			// if is a boolean FALSE value
 			// returns no unit
-			return null;
+			return getDefaultValues().getUnit();
 		}
-		return Enumer.deserialize(value, TimeUnit.class, TimeUnit.millisecond);
+		return getValue(Property.unit, TimeUnit.class, getDefaultValues().getUnit());
 	}
 	
 	/**
@@ -232,7 +233,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @param stepSize The number of units between grid lines.
 	 */
 	public void setStepSize(int stepSize) {
-		getDelegated().setStepSize(stepSize);
+		setValue(Property.stepSize, stepSize);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -243,7 +244,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @return The number of units between grid lines. Default is <code>1</code>.
 	 */
 	public int getStepSize() {
-		return Checker.check(getDelegated().getStepSize(), getDefaultValues().getStepSize());
+		return getValue(Property.stepSize, getDefaultValues().getStepSize());
 	}
 	
 	/**
@@ -253,7 +254,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @see org.pepstock.charba.client.enums.TimeUnit
 	 */
 	public void setMinUnit(TimeUnit unit) {
-		getDelegated().setMinUnit(unit.name());
+		setValue(Property.minUnit, unit);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -265,7 +266,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @see org.pepstock.charba.client.enums.TimeUnit
 	 */
 	public TimeUnit getMinUnit() {
-		return Enumer.deserialize(getDelegated().getMinUnit(), getDefaultValues().getMinUnit(), TimeUnit.class, TimeUnit.millisecond);
+		return getValue(Property.minUnit, TimeUnit.class, getDefaultValues().getMinUnit());
 	}
 	
 	/**
@@ -274,7 +275,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @param parser Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
 	 */
 	public void setParser(String parser) {
-		getDelegated().setParser(parser);
+		setValue(Property.parser, parser);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -285,18 +286,7 @@ public final class Time extends BaseModel<Scale, IsDefaultTime, NativeTime>{
 	 * @return Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.  Default is <code>null</code>.
 	 */
 	public String getParser() {
-		return Checker.check(getDelegated().getParser(), getDefaultValues().getParser());
+		return getValue(Property.parser, getDefaultValues().getParser());
 	}
 	
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getTime() == null) {
-			getParent().getDelegated().setTime(getDelegated());
-		}
-	}
-
 }

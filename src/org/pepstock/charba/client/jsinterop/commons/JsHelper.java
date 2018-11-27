@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.commons;
 
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -23,7 +24,7 @@ import jsinterop.annotations.JsType;
  * This script will be injected with CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 @JsType(isNative = true, name = NativeName.JSHELPER, namespace = JsPackage.GLOBAL)
@@ -34,6 +35,33 @@ public final class JsHelper {
 	 */
 	JsHelper() {
 		// do nothing
+	}
+
+	/**
+	 * 
+	 * @param object
+	 * @param key
+	 * @return
+	 */
+	static native String type(Object object, String key);
+
+	/**
+	 * 
+	 * @param object
+	 * @param key
+	 * @return
+	 */
+	static native boolean isArray(Object object, String key);
+
+	/**
+	 * 
+	 * @param object
+	 * @param key
+	 * @return
+	 */
+	@JsOverlay
+	public final static ObjectType typeOf(Object object, String key) {
+		return ObjectType.getType(type(object, key), isArray(object, key)); 
 	}
 
 	/**
@@ -48,7 +76,7 @@ public final class JsHelper {
 	 * @param key property key to be removed.
 	 */
 	public static native <T extends NativeObject> void remove(T object, String key);
-	
+
 	/**
 	 * Returns a property of java script object as integer.
 	 * @param object object to be queried

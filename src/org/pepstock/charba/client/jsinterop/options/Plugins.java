@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
 import org.pepstock.charba.client.jsinterop.plugins.PluginIdChecker;
 
@@ -26,10 +28,10 @@ import org.pepstock.charba.client.jsinterop.plugins.PluginIdChecker;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Plugins extends BaseModel<BaseOptions<?,?>, Void, NativePlugins> {
+public final class Plugins extends AbstractModel<Options, Void> {
 
-	Plugins(BaseOptions<?,?> options, NativePlugins delegated) {
-		super(options, null, delegated == null ? new NativePlugins() : delegated);
+	Plugins(Options options, Key childKey, NativeObject nativeObject) {
+		super(options, childKey, null, nativeObject);
 	}
 
 	/**
@@ -42,10 +44,10 @@ public final class Plugins extends BaseModel<BaseOptions<?,?>, Void, NativePlugi
 		// if null, removes the configuration
 		if (enabled){
 			// removes configuration if exists
-			getDelegated().remove(PluginIdChecker.key(pluginId));
+			remove(PluginIdChecker.key(pluginId));
 		} else {
 			// stores configuration
-			getDelegated().setEnabled(PluginIdChecker.key(pluginId));
+			setValue(PluginIdChecker.key(pluginId), true);
 		}
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -58,7 +60,7 @@ public final class Plugins extends BaseModel<BaseOptions<?,?>, Void, NativePlugi
 	 * @throws InvalidPluginIdException  occurs if the plugin id is invalid.
 	 */
 	public boolean isEnabled(String pluginId) throws InvalidPluginIdException{
-		return getDelegated().isEnabled(PluginIdChecker.key(pluginId));
+		return getValue(PluginIdChecker.key(pluginId), true);
 	}
 	
 	/**
@@ -67,21 +69,21 @@ public final class Plugins extends BaseModel<BaseOptions<?,?>, Void, NativePlugi
 	 * @param options java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if exist.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public <T> void setOptions(String pluginId, T options) throws InvalidPluginIdException {
+	public <T extends NativeObject> void setOptions(String pluginId, T options) throws InvalidPluginIdException {
 		// if null, removes the configuration
 		if (options == null){
 			// removes configuration if exists
-			getDelegated().remove(PluginIdChecker.key(pluginId));
+			remove(PluginIdChecker.key(pluginId));
 		} else {
 			// stores configuration
-			getDelegated().setOptions(PluginIdChecker.key(pluginId), options);
+			setValue(PluginIdChecker.key(pluginId), options);
 		}
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
 	
 	public boolean hasOptions(String pluginId) throws InvalidPluginIdException{
-		return getDelegated().hasOptions(PluginIdChecker.key(pluginId));
+		return has(PluginIdChecker.key(pluginId));
 	}
 
 	/**
@@ -90,19 +92,8 @@ public final class Plugins extends BaseModel<BaseOptions<?,?>, Void, NativePlugi
 	 * @return java script object used to configure the plugin or <code>null</code> if not exist.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public <T> T getOptions(String pluginId) throws InvalidPluginIdException{
-		return getDelegated().getOptions(PluginIdChecker.key(pluginId));
+	public <T extends NativeObject> T getOptions(String pluginId) throws InvalidPluginIdException{
+		return getValue(PluginIdChecker.key(pluginId));
 	}
 	
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getPlugins() == null) {
-			getParent().getDelegated().setPlugins(getDelegated());
-		}
-	}
-
 }

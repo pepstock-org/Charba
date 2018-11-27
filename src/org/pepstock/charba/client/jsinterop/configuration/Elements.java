@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.jsinterop.options.EventableOptions;
+import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 
 
 /**
@@ -40,7 +40,7 @@ public final class Elements {
 	 * 
 	 * @param chart chart instance
 	 */
-	Elements(EventableOptions options) {
+	Elements(ExtendedOptions options) {
 		// creates the sub-options objects
 		point = new Point(options);
 		line = new Line(options);

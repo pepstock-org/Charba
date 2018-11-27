@@ -17,14 +17,13 @@ package org.pepstock.charba.client.jsinterop.commons;
 
 import org.pepstock.charba.client.jsinterop.Configuration;
 import org.pepstock.charba.client.jsinterop.data.NativeData;
-import org.pepstock.charba.client.jsinterop.options.NativeOptions;
 
 /**
  * Utility to load java script object into CHART-JS configuration.<br>
  * This utility needs to reduce visibility on java script objects for configuration.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class ConfigurationLoader {
 	
@@ -40,7 +39,7 @@ public final class ConfigurationLoader {
 	 * @param configuration CHART.JS object for configuration
 	 * @param options chart options
 	 */
-	public static void loadOptions(Configuration configuration, NativeObjectContainer<NativeOptions> options) {
+	public static void loadOptions(Configuration configuration, NativeObjectContainer<NativeObject> options) {
 		configuration.setOptions(options.getNativeObject());
 	}
 

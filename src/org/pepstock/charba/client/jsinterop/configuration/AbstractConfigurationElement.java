@@ -17,7 +17,7 @@ package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.jsinterop.options.AbstractElement;
-import org.pepstock.charba.client.jsinterop.options.EventableOptions;
+import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 
 /**
  * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the same way.<br>
@@ -28,15 +28,15 @@ import org.pepstock.charba.client.jsinterop.options.EventableOptions;
  */
 abstract class AbstractConfigurationElement {
 	
-	private final EventableOptions options;
+	private final ExtendedOptions options;
 	
-	private final AbstractElement<?, ?, ?> configuration;
+	private final AbstractElement<?, ?> configuration;
 
 	/**
 	 * Builds the object with  options
 	 * @param options
 	 */
-	AbstractConfigurationElement(EventableOptions options, AbstractElement<?, ?, ?> configuration) {
+	AbstractConfigurationElement(ExtendedOptions options, AbstractElement<?, ?> configuration) {
 		this.options = options;
 		this.configuration = configuration;
 	}
@@ -44,7 +44,7 @@ abstract class AbstractConfigurationElement {
 	/**
 	 * @return the options
 	 */
-	final EventableOptions getOptions() {
+	final ExtendedOptions getOptions() {
 		return options;
 	}
 

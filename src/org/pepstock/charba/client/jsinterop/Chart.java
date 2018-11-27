@@ -2,6 +2,8 @@ package org.pepstock.charba.client.jsinterop;
 
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeName;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.commons.NativeStringDescriptor;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
 import org.pepstock.charba.client.jsinterop.items.ChartAreaItem;
 import org.pepstock.charba.client.jsinterop.items.DatasetItem;
@@ -10,7 +12,8 @@ import org.pepstock.charba.client.jsinterop.items.LegendNode;
 import org.pepstock.charba.client.jsinterop.items.ScalesNode;
 import org.pepstock.charba.client.jsinterop.items.TitleNode;
 import org.pepstock.charba.client.jsinterop.items.TooltipNode;
-import org.pepstock.charba.client.jsinterop.options.NativeOptions;
+import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
+import org.pepstock.charba.client.jsinterop.options.Options;
 import org.pepstock.charba.client.jsinterop.plugins.NativePlugins;
 
 import com.google.gwt.canvas.dom.client.Context2d;
@@ -188,7 +191,7 @@ public final class Chart{
 	native TitleNode getTitleBlock();
 	
 	@JsProperty
-	native NativeOptions getOptions();
+	native NativeObject getOptions();
 	
 	@JsProperty
 	native ScalesNode getScales();
@@ -198,7 +201,8 @@ public final class Chart{
 	
 	@JsOverlay
 	public String getCharbaId() {
-		return getOptions().getCharbaId();
+		NativeStringDescriptor descriptor = getOptions().getStringProperty(Options.CharbaProperty.charbaId.name());
+		return descriptor != null ? descriptor.getValue() : UndefinedValues.STRING;
 	}
 
 }

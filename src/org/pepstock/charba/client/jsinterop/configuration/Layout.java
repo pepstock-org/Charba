@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.jsinterop.options.EventableOptions;
+import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 
 /**
  * The layout configuration is needed to set the padidng.
@@ -32,7 +32,7 @@ public final class Layout {
 	 * 
 	 * @param chart chart instance
 	 */
-	Layout(EventableOptions options) {
+	Layout(ExtendedOptions options) {
 		// sets the padding object
 		padding = new Padding(options);
 	}

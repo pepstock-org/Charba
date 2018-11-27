@@ -1,5 +1,6 @@
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
+import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel;
 import org.pepstock.charba.client.jsinterop.options.ScaleLabel;
@@ -22,7 +23,7 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontColor()
 	 */
 	@Override
-	public String getFontColor() {
+	public String getFontColorAsString() {
 		return scaleLabel.getFontColorAsString();
 	}
 
@@ -38,8 +39,8 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontStyle()
 	 */
 	@Override
-	public String getFontStyle() {
-		return scaleLabel.getFontStyle().name();
+	public FontStyle getFontStyle() {
+		return scaleLabel.getFontStyle();
 	}
 
 	/* (non-Javadoc)

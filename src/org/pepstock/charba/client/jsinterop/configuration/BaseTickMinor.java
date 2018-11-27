@@ -2,7 +2,7 @@ package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.jsinterop.options.TickMinor;
 
-public class BaseTickMinor extends AbstractTick<TickMinor> {
+public class BaseTickMinor extends BaseTick<TickMinor> {
 
 	BaseTickMinor(Axis axis, TickMinor configuration) {
 		super(axis, configuration);

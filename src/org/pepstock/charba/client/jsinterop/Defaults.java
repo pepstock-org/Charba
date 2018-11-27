@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.jsinterop.defaults.DefaultOptions;
+import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
 import org.pepstock.charba.client.jsinterop.options.ChartOptionsBuilder;
 import org.pepstock.charba.client.jsinterop.plugins.GlobalPlugins;
 

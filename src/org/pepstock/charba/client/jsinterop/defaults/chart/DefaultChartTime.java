@@ -1,10 +1,10 @@
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
-import org.pepstock.charba.client.jsinterop.commons.Checker;
+import java.util.Date;
+
+import org.pepstock.charba.client.enums.TimeUnit;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime;
 import org.pepstock.charba.client.jsinterop.options.Time;
-
-import com.google.gwt.core.client.JsDate;
 
 public final class DefaultChartTime implements IsDefaultTime{
 	
@@ -29,24 +29,24 @@ public final class DefaultChartTime implements IsDefaultTime{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getMax()
 	 */
 	@Override
-	public JsDate getMax() {
-		return Checker.fromDate(time.getMax());
+	public Date getMax() {
+		return time.getMax();
 	}
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getMin()
 	 */
 	@Override
-	public JsDate getMin() {
-		return Checker.fromDate(time.getMin());
+	public Date getMin() {
+		return time.getMin();
 	}
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getRound()
 	 */
 	@Override
-	public String getRound() {
-		return time.getRound() != null ? time.getRound().name() : null;
+	public TimeUnit getRound() {
+		return time.getRound() != null ? time.getRound() : null;
 	}
 
 	/* (non-Javadoc)
@@ -61,8 +61,8 @@ public final class DefaultChartTime implements IsDefaultTime{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getUnit()
 	 */
 	@Override
-	public String getUnit() {
-		return time.getUnit() != null ? time.getUnit().name() : null ;
+	public TimeUnit getUnit() {
+		return time.getUnit() != null ? time.getUnit() : null ;
 	}
 
 	/* (non-Javadoc)
@@ -77,8 +77,8 @@ public final class DefaultChartTime implements IsDefaultTime{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getMinUnit()
 	 */
 	@Override
-	public String getMinUnit() {
-		return time.getMinUnit().name();
+	public TimeUnit getMinUnit() {
+		return time.getMinUnit();
 	}
 
 	/* (non-Javadoc)

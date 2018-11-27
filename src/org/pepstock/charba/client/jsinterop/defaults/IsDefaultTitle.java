@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults;
 
+import org.pepstock.charba.client.enums.Position;
+
 /**
  * Configures the default chart title which defines text to draw at the top of the chart.<br>
  * "weight"property is not present.
@@ -37,7 +39,7 @@ public interface IsDefaultTitle extends IsDefaultFontItem {
 	 * @return the position of title. 
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
-	String getPosition();
+	Position getPosition();
 	
 	/**
 	 * Returns the padding to apply around labels. Only top and bottom are implemented.

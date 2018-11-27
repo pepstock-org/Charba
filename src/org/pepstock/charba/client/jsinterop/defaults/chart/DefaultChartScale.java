@@ -1,5 +1,9 @@
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
+import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.enums.ScaleBounds;
+import org.pepstock.charba.client.enums.ScaleDistribution;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPointLabels;
@@ -98,8 +102,8 @@ public final class DefaultChartScale implements IsDefaultScale{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getType()
 	 */
 	@Override
-	public String getType() {
-		return scale.getType().name();
+	public AxisType getType() {
+		return scale.getType();
 	}
 
 	/* (non-Javadoc)
@@ -130,8 +134,8 @@ public final class DefaultChartScale implements IsDefaultScale{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getPosition()
 	 */
 	@Override
-	public String getPosition() {
-		return scale.getPosition().name();
+	public Position getPosition() {
+		return scale.getPosition();
 	}
 
 	/* (non-Javadoc)
@@ -170,16 +174,16 @@ public final class DefaultChartScale implements IsDefaultScale{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getDistribution()
 	 */
 	@Override
-	public String getDistribution() {
-		return scale.getDistribution().name();
+	public ScaleDistribution getDistribution() {
+		return scale.getDistribution();
 	}
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getBounds()
 	 */
 	@Override
-	public String getBounds() {
-		return scale.getBounds().name();
+	public ScaleBounds getBounds() {
+		return scale.getBounds();
 	}
 
 }

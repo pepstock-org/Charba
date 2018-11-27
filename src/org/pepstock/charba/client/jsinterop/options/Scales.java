@@ -17,10 +17,11 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import java.util.List;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
 
 /**
@@ -30,7 +31,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Scales extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeScales>{
+public class Scales extends AbstractModel<Options, IsDefaultScale>{
 	
 	/**
 	 * Default name of X axis
@@ -48,14 +49,25 @@ public class Scales extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSc
 	public static final String DEFAULT_SINGLE_AXIS_ID = "scale";
 	
 	private final ScaleListFactory factory = new ScaleListFactory();
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	enum Property implements Key
+	{
+		display,
+		xAxes,
+		yAxes
+	}
+
 
 	// here scale is ROOT
 	public Scales(IsDefaultScale defaultValues) {
-		this(null, defaultValues, null);
+		this(null, null, defaultValues, null);
 	}
 
-	Scales(BaseOptions<?,?> options, IsDefaultScale defaultValues, NativeScales delegated) {
-		super(options, defaultValues, delegated == null ? new NativeScales(): delegated);
+	Scales(Options options, Key childKey, IsDefaultScale defaultValues, NativeObject delegated) {
+		super(options, childKey, defaultValues, delegated == null ? new NativeObject(): delegated);
 	}
 
 	/**
@@ -64,7 +76,7 @@ public class Scales extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSc
 	 * @param display if the scales are shown.
 	 */
 	public void setDisplay(boolean display) {
-		getDelegated().setDisplay(display);
+		setValue(Property.display, display);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -75,11 +87,11 @@ public class Scales extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSc
 	 * @return the scales are shown. Default is true.
 	 */
 	public boolean isDisplay() {
-		return Checker.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
+		return getValue(Property.display, getDefaultValues().isDisplay());
 	}
 
 	public void setXAxes(Scale... scales) {
-		getDelegated().setXAxes(ArrayObject.of(scales));
+		setArrayValue(Property.xAxes, ArrayObject.of(scales));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -88,11 +100,12 @@ public class Scales extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSc
 	 * @return the xAxes
 	 */
 	public List<Scale> getXAxes() {
-		return ArrayListHelper.list(getDelegated().getXAxes(), factory);
+		ArrayObject<NativeObject> array = getArrayValue(Property.xAxes);
+		return ArrayListHelper.list(array, factory);
 	}
 
 	public void setYAxes(Scale... scales) {
-		getDelegated().setYAxes(ArrayObject.of(scales));
+		setArrayValue(Property.yAxes, ArrayObject.of(scales));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -101,18 +114,7 @@ public class Scales extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSc
 	 * @return the xAxes
 	 */
 	public List<Scale> getYAxes() {
-		return ArrayListHelper.list(getDelegated().getYAxes(), factory);
-	}
-	
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getScales() == null) {
-			getParent().getDelegated().setScales(getDelegated());
-		}
+		return ArrayListHelper.list(getArrayValue(Property.yAxes), factory);
 	}
 	
 	/**
@@ -120,14 +122,14 @@ public class Scales extends BaseModel<BaseOptions<?,?>, IsDefaultScale, NativeSc
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private class ScaleListFactory implements Factory<Scale, NativeScale> {
+	private class ScaleListFactory implements Factory<Scale, NativeObject> {
 
 		/* (non-Javadoc)
 		 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)
 		 */
 		@Override
-		public Scale create(NativeScale nativeObject) {
-			return new Scale(getParent(), getDefaultValues(), nativeObject);
+		public Scale create(NativeObject nativeObject) {
+			return new Scale(getParent(), Options.Property.scale, getDefaultValues(), nativeObject);
 		}
 
 	}

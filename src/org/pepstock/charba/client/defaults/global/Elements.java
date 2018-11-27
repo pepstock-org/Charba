@@ -38,7 +38,7 @@ public final class Elements extends AbstractItem {
 	/**
 	 * Name of fields of JavaScript object.
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
 		point,
 		line,

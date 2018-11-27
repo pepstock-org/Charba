@@ -1,7 +1,7 @@
 package org.pepstock.charba.client.jsinterop;
 
 import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.defaults.DefaultOptions;
+import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
 import org.pepstock.charba.client.jsinterop.items.ChartAreaItem;
 import org.pepstock.charba.client.jsinterop.items.LegendNode;
 import org.pepstock.charba.client.jsinterop.items.OptionsNode;

@@ -1,5 +1,6 @@
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
+import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPointLabels;
 import org.pepstock.charba.client.jsinterop.options.PointLabels;
 
@@ -18,7 +19,7 @@ public final class DefaultChartPointLabels implements IsDefaultPointLabels{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontColor()
 	 */
 	@Override
-	public String getFontColor() {
+	public String getFontColorAsString() {
 		return pointLabels.getFontColorAsString();
 	}
 
@@ -34,8 +35,8 @@ public final class DefaultChartPointLabels implements IsDefaultPointLabels{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontStyle()
 	 */
 	@Override
-	public String getFontStyle() {
-		return pointLabels.getFontStyle().name();
+	public FontStyle getFontStyle() {
+		return pointLabels.getFontStyle();
 	}
 
 	/* (non-Javadoc)

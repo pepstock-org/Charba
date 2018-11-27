@@ -15,7 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.defaults.IsDefaultElements;
 
 /**
  * Options can be configured for four different types of elements: arc, lines, points, and rectangles. When set, these options
@@ -24,22 +26,33 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Elements extends BaseModel<BaseOptions<?,?>, IsDefaultOptions, NativeElements> {
+public class Elements extends AbstractModel<Options, IsDefaultElements> implements IsDefaultElements{
 
-	private Arc arc;
+	private final Arc arc;
 	
-	private Line line;
+	private final Line line;
 	
-	private Point point;
+	private final Point point;
 	
-	private Rectangle rectangle;
+	private final Rectangle rectangle;
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		point,
+		line,
+		rectangle,
+		arc
+	}
 
-	Elements(BaseOptions<?,?> options,IsDefaultOptions defaultOptions, NativeElements delegated) {
-		super(options, defaultOptions, delegated == null ? new NativeElements() : delegated);
-		arc = new Arc(this,defaultOptions.getArc(), getDelegated().getArc());
-		line = new Line(this, defaultOptions.getLine(), getDelegated().getLine());
-		point = new Point(this, defaultOptions.getPoint(),getDelegated().getPoint());
-		rectangle = new Rectangle(this, defaultOptions.getRectangle(), getDelegated().getRectangle());
+	Elements(Options options, Key childKey, IsDefaultElements defaultOptions, NativeObject nativeObject) {
+		super(options, childKey, defaultOptions, nativeObject == null ? new NativeObject() : nativeObject);
+		arc = new Arc(this, Property.arc, defaultOptions.getArc(), getValue(Property.arc));
+		line = new Line(this, Property.line, defaultOptions.getLine(), getValue(Property.line));
+		point = new Point(this, Property.point, defaultOptions.getPoint(), getValue(Property.point));
+		rectangle = new Rectangle(this, Property.rectangle, defaultOptions.getRectangle(), getValue(Property.rectangle));
 	}
 
 	/**
@@ -69,14 +82,5 @@ public class Elements extends BaseModel<BaseOptions<?,?>, IsDefaultOptions, Nati
 	public Rectangle getRectangle() {
 		return rectangle;
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getElements() == null) {
-			getParent().getDelegated().setElements(getDelegated());
-		}
-	}
+
 }

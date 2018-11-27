@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.jsinterop.commons;
 
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
@@ -25,7 +26,7 @@ import jsinterop.annotations.JsType;
  * @since 2.0
  */
 @JsType(isNative = true, name = NativeName.ARRAY, namespace = JsPackage.GLOBAL)
-public final class Array {
+public class Array {
 	
 	/**
 	 * This method determines whether the passed value is an Array.
@@ -33,6 +34,13 @@ public final class Array {
 	 * @return <code>true</code> if the value is an Array; otherwise, <code>false</code>.
 	 */
 	public static native boolean isArray(Object object);
+	
+	/**
+	 * Returns the number of elements in this array.
+	 * @return the number of elements in this array.
+	 */
+	@JsProperty(name = "length")
+	public final native int length();
 
 }
 

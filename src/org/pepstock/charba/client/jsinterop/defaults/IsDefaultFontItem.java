@@ -1,5 +1,7 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
+import org.pepstock.charba.client.enums.FontStyle;
+
 public interface IsDefaultFontItem {
 	
 	/**
@@ -7,7 +9,7 @@ public interface IsDefaultFontItem {
 	 * 
 	 * @return Font color
 	 */
-	String getFontColor();
+	String getFontColorAsString();
 
 	/**
 	 * Returns the font size.
@@ -21,7 +23,7 @@ public interface IsDefaultFontItem {
 	 * 
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). 
 	 */
-	String getFontStyle();
+	FontStyle getFontStyle();
 
 	/**
 	 * Returns the font family, follows CSS font-family options.

@@ -15,8 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.jsinterop.commons.Enumer;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultRectangle;
 
 /**
@@ -29,10 +30,18 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultRectangle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Rectangle extends AbstractElement<Elements, IsDefaultRectangle, NativeRectangle>{
+public class Rectangle extends AbstractElement<Elements, IsDefaultRectangle> implements IsDefaultRectangle{
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	enum Property implements Key
+	{
+		borderSkipped
+	}
 
-	Rectangle(Elements elements, IsDefaultRectangle defaultValues, NativeRectangle delegated) {
-		super(elements, defaultValues, delegated == null ? new NativeRectangle() : delegated);
+	Rectangle(Elements elements, Key childKey, IsDefaultRectangle defaultValues, NativeObject nativeObject) {
+		super(elements, childKey, defaultValues, nativeObject);
 	}
 
 	/**
@@ -42,7 +51,7 @@ public class Rectangle extends AbstractElement<Elements, IsDefaultRectangle, Nat
 	 * @see  org.pepstock.charba.client.enums.Position
 	 */
 	public void setBorderSkipped(Position borderSkipped) {
-		getDelegated().setBorderSkipped(borderSkipped.name());
+		setValue(Property.borderSkipped, borderSkipped);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -54,17 +63,7 @@ public class Rectangle extends AbstractElement<Elements, IsDefaultRectangle, Nat
 	 * @see  org.pepstock.charba.client.enums.Position
 	 */
 	public Position getBorderSkipped() {
-		return Enumer.deserialize(getDelegated().getBorderSkipped(), getDefaultValues().getBorderSkipped(), Position.class, Position.bottom);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getRectangle() == null) {
-			getParent().getDelegated().setRectangle(getDelegated());
-		}
+		return getValue(Property.borderSkipped, Position.class, getDefaultValues().getBorderSkipped());
 	}
 
 }

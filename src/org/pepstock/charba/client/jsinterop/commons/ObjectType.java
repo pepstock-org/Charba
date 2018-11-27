@@ -76,4 +76,28 @@ public enum ObjectType
 	 */
 	Array;
 	
+	/**
+	 * Returns the java script property type. 
+	 * @param value value of java script type.
+	 * @param isArray <code>true</code> if is array
+	 * @return teh java script field type
+	 */
+	static final ObjectType getType(String value, boolean isArray) {
+		// if is array, returns array
+		if (isArray) {
+			return Array;
+		}
+		// if value is not null
+		if (value != null) {
+			// scans all types
+			for (ObjectType type : values()) {
+				// checks if equals by name
+				if (type.name().equalsIgnoreCase(value)) {
+					return type;
+				}
+			}
+		}
+		// if here the default is object
+		return Object;
+	}
 }

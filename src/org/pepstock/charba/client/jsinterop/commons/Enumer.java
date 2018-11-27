@@ -21,7 +21,7 @@ import org.pepstock.charba.client.commons.Key;
  * Utility to deserialize enumeration values, passed by string.
  *  
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  * @see org.pepstock.charba.client.commons.Key
  */
 public final class Enumer {

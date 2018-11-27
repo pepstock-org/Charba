@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults;
 
+import org.pepstock.charba.client.enums.PointStyle;
+
 public interface IsDefaultPoint extends IsDefaultArc {
 
 	/**
@@ -29,7 +31,7 @@ public interface IsDefaultPoint extends IsDefaultArc {
 	 * 
 	 * @return the style of the point. 
 	 */
-	 String getPointStyle();
+	 PointStyle getPointStyle();
 
 	/**
 	 * Returns the pixel size of the non-displayed point that reacts to mouse events.

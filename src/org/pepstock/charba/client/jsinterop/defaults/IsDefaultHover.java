@@ -1,5 +1,8 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
+import org.pepstock.charba.client.enums.InteractionAxis;
+import org.pepstock.charba.client.enums.InteractionMode;
+
 public interface IsDefaultHover {
 	
 	/**
@@ -8,7 +11,7 @@ public interface IsDefaultHover {
 	 * @return which elements appear in the tooltip. 
 	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
-	String getMode();
+	InteractionMode getMode();
 	
 	/**
 	 * if true, the hover mode only applies when the mouse position intersects an item on the chart.
@@ -30,7 +33,7 @@ public interface IsDefaultHover {
 	 * @return define which directions are used in calculating distances. 
 	 * @see org.pepstock.charba.client.enums.InteractionAxis
 	 */
-	String getAxis();
+	InteractionAxis getAxis();
 
 	
 }

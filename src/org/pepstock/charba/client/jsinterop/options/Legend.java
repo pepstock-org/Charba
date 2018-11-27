@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.Enumer;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend;
 
 /**
@@ -26,13 +26,27 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Legend extends BaseModel<BaseOptions<?,?>, IsDefaultLegend, NativeLegend> {
+public class Legend extends AbstractModel<Options, IsDefaultLegend> implements IsDefaultLegend{
 	
 	private LegendLabels labels;
 	
-	Legend(BaseOptions<?, ?> options, IsDefaultLegend defaultValues, NativeLegend delegated) {
-		super(options, defaultValues, delegated == null ? new NativeLegend() : delegated);
-		labels = new LegendLabels(this, getDefaultValues().getLabels(), getDelegated().getLabels());
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	enum Property implements Key
+	{
+		// sub elements
+		labels,
+		// properties
+		display,
+		position,
+		fullWidth,
+		reverse
+	}
+	
+	Legend(Options options, Key childKey, IsDefaultLegend defaultValues, NativeObject nativeObject) {
+		super(options, childKey, defaultValues, nativeObject);
+		labels = new LegendLabels(this, Property.labels, getDefaultValues().getLabels(), getValue(Property.labels));
 	}
 
 	/**
@@ -48,7 +62,7 @@ public class Legend extends BaseModel<BaseOptions<?,?>, IsDefaultLegend, NativeL
 	 * @param display if the legend is shown.
 	 */
 	public void setDisplay(boolean display) {
-		getDelegated().setDisplay(display);
+		setValue(Property.display, display);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -59,7 +73,7 @@ public class Legend extends BaseModel<BaseOptions<?,?>, IsDefaultLegend, NativeL
 	 * @return if the legend is shown. Default is true.
 	 */
 	public boolean isDisplay() {
-		return Checker.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
+		return getValue(Property.display, getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -68,7 +82,7 @@ public class Legend extends BaseModel<BaseOptions<?,?>, IsDefaultLegend, NativeL
 	 * @param fullWidth Marks that this box should take the full width of the canvas (pushing down other boxes)
 	 */
 	public void setFullWidth(boolean fullWidth) {
-		getDelegated().setFullWidth(fullWidth);
+		setValue(Property.fullWidth, fullWidth);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -79,7 +93,7 @@ public class Legend extends BaseModel<BaseOptions<?,?>, IsDefaultLegend, NativeL
 	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). Default is true.
 	 */
 	public boolean isFullWidth() {
-		return Checker.check(getDelegated().isFullWidth(), getDefaultValues().isFullWidth());
+		return getValue(Property.fullWidth, getDefaultValues().isFullWidth());
 	}
 
 	/**
@@ -88,7 +102,7 @@ public class Legend extends BaseModel<BaseOptions<?,?>, IsDefaultLegend, NativeL
 	 * @param reverse legend will show datasets in reverse order.
 	 */
 	public void setReverse(boolean reverse) {
-		getDelegated().setReverse(reverse);
+		setValue(Property.reverse, reverse);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -99,7 +113,7 @@ public class Legend extends BaseModel<BaseOptions<?,?>, IsDefaultLegend, NativeL
 	 * @return Legend will show datasets in reverse order. Default is false.
 	 */
 	public boolean isReverse() {
-		return Checker.check(getDelegated().isReverse(), getDefaultValues().isReverse());
+		return getValue(Property.reverse, getDefaultValues().isReverse());
 	}
 
 	/**
@@ -109,7 +123,7 @@ public class Legend extends BaseModel<BaseOptions<?,?>, IsDefaultLegend, NativeL
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public void setPosition(Position position) {
-		getDelegated().setPosition(position.name());
+		setValue(Property.position, position);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -121,17 +135,6 @@ public class Legend extends BaseModel<BaseOptions<?,?>, IsDefaultLegend, NativeL
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {
-		return Enumer.deserialize(getDelegated().getPosition(), getDefaultValues().getPosition(), Position.class, Position.top);
+		return getValue(Property.position, Position.class, getDefaultValues().getPosition());
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getLegend() == null) {
-			getParent().getDelegated().setLegend(getDelegated());
-		}
-	}
-
 }

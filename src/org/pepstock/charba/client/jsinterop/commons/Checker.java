@@ -23,7 +23,7 @@ import com.google.gwt.core.client.JsDate;
  * Utility class to check values setting the right values between the provided value and default. 
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class Checker {
 	

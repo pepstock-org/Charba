@@ -20,7 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.JoinStyle;
-import org.pepstock.charba.client.jsinterop.options.EventableOptions;
+import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 
 /**
  * Line elements are used to represent the line in a line chart.
@@ -35,7 +35,7 @@ public final class Line extends AbstractConfigurationElement {
 	 * 
 	 * @param chart chart instance
 	 */
-	Line(EventableOptions options) {
+	Line(ExtendedOptions options) {
 		super(options, options.getElements().getLine());
 	}
 

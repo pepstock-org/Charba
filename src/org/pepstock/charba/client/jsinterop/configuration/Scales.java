@@ -20,7 +20,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.jsinterop.AbstractChart;
-import org.pepstock.charba.client.jsinterop.options.EventableOptions;
+import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 import org.pepstock.charba.client.jsinterop.options.Scale;
 
 /**
@@ -29,7 +29,7 @@ import org.pepstock.charba.client.jsinterop.options.Scale;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Scales extends ConfigurationContainer<EventableOptions> {
+public class Scales extends ConfigurationContainer<ExtendedOptions> {
 
 	// buffer to maintain axes
 	private final List<Axis> yAxes = new LinkedList<>();
@@ -41,7 +41,7 @@ public class Scales extends ConfigurationContainer<EventableOptions> {
 	 * 
 	 * @param chart chart instance
 	 */
-	Scales(AbstractChart<?, ?> chart, EventableOptions options) {
+	Scales(AbstractChart<?, ?> chart, ExtendedOptions options) {
 		super(chart, options);
 	}
 

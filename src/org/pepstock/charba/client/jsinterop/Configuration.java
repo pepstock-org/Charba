@@ -21,7 +21,6 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.jsinterop.data.Data;
 import org.pepstock.charba.client.jsinterop.data.NativeData;
-import org.pepstock.charba.client.jsinterop.options.NativeOptions;
 import org.pepstock.charba.client.jsinterop.plugins.ArrayPlugin;
 import org.pepstock.charba.client.jsinterop.plugins.Plugins;
 
@@ -44,7 +43,7 @@ public final class Configuration extends NativeObject {
 	native void setNativeType(String type);
 
 	@JsProperty
-	public native void setOptions(NativeOptions options);
+	public native void setOptions(NativeObject options);
 
 	@JsProperty
 	public native void setData(NativeData data);

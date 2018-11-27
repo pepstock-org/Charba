@@ -1,5 +1,9 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
+import org.pepstock.charba.client.enums.CapStyle;
+import org.pepstock.charba.client.enums.Fill;
+import org.pepstock.charba.client.enums.JoinStyle;
+
 public interface IsDefaultLine extends IsDefaultArc{
 	
 	/**
@@ -16,7 +20,7 @@ public interface IsDefaultLine extends IsDefaultArc{
 	 * @return how the end points of every line are drawn. Default is {@link org.pepstock.charba.client.enums.CapStyle#butt}.
 	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
-	String getBorderCapStyle();
+	CapStyle getBorderCapStyle();
 
 	/**
 	 * Returns the line dash pattern offset or "phase".
@@ -35,7 +39,7 @@ public interface IsDefaultLine extends IsDefaultArc{
 	 *         miter. Default is {@link org.pepstock.charba.client.enums.JoinStyle#miter}.
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
-	String getBorderJoinStyle();
+	JoinStyle getBorderJoinStyle();
 
 	/**
 	 * Returns <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
@@ -50,7 +54,7 @@ public interface IsDefaultLine extends IsDefaultArc{
 	 * @return how to fill the area under the line. Default is {@link org.pepstock.charba.client.enums.Fill#origin}.
 	 * @see org.pepstock.charba.client.enums.Fill
 	 */
-	String getFill();
+	Fill getFill();
 
 	/**
 	 * Returns <code>true</code> to show the line as a stepped line (tension will be ignored).

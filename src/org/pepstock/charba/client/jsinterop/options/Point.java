@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.Enumer;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint;
 
 /**
@@ -30,10 +30,22 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Point extends AbstractElement<Elements, IsDefaultPoint, NativePoint>{
+public class Point extends AbstractElement<Elements, IsDefaultPoint> implements IsDefaultPoint{
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	enum Property implements Key
+	{
+		radius,
+		pointStyle,
+		hitRadius,
+		hoverRadius,
+		hoverBorderWidth
+	}
 
-	Point(Elements elements, IsDefaultPoint defaultValues, NativePoint delegated) {
-		super(elements, defaultValues,delegated == null ? new NativePoint() : delegated);
+	Point(Elements elements, Key childKey, IsDefaultPoint defaultValues, NativeObject nativeObject) {
+		super(elements, childKey, defaultValues, nativeObject);
 	}
 
 	/**
@@ -42,7 +54,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint, NativePoint
 	 * @param radius array of the radius of the point shape.
 	 */
 	public void setRadius(int radius) {
-		getDelegated().setRadius(radius);
+		setValue(Property.radius, radius);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -53,7 +65,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint, NativePoint
 	 * @return list of the radius of the point when hovered. Default is 3.
 	 */
 	public int getRadius() {
-		return Checker.check(getDelegated().getRadius(), getDefaultValues().getRadius());
+		return getValue(Property.radius, getDefaultValues().getRadius());
 	}
 
 	/**
@@ -63,7 +75,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint, NativePoint
 	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
-		getDelegated().setPointStyle(pointStyle.name());
+		setValue(Property.pointStyle, pointStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -75,7 +87,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint, NativePoint
 	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public PointStyle getPointStyle() {
-		return Enumer.deserialize(getDelegated().getPointStyle(), getDefaultValues().getPointStyle(), PointStyle.class, PointStyle.circle);
+		return getValue(Property.pointStyle, PointStyle.class, getDefaultValues().getPointStyle());
 	}
 
 	/**
@@ -84,7 +96,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint, NativePoint
 	 * @param hitRadius the pixel size of the non-displayed point.
 	 */
 	public void setHitRadius(int hitRadius) {
-		getDelegated().setHitRadius(hitRadius);
+		setValue(Property.hitRadius, hitRadius);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -95,7 +107,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint, NativePoint
 	 * @return the pixel size of the non-displayed point. Default is 1.
 	 */
 	public int getHitRadius() {
-		return Checker.check(getDelegated().getHitRadius(), getDefaultValues().getHitRadius());
+		return getValue(Property.hitRadius, getDefaultValues().getHitRadius());
 	}
 
 	/**
@@ -104,7 +116,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint, NativePoint
 	 * @param hoverRadius the radius of the point when hovered.
 	 */
 	public void setHoverRadius(int hoverRadius) {
-		getDelegated().setHoverRadius(hoverRadius);
+		setValue(Property.hoverRadius, hoverRadius);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -115,7 +127,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint, NativePoint
 	 * @return the radius of the point when hovered. Default is 4.
 	 */
 	public int getHoverRadius() {
-		return Checker.check(getDelegated().getHoverRadius(), getDefaultValues().getHoverRadius());
+		return getValue(Property.hoverRadius, getDefaultValues().getHoverRadius());
 	}
 
 	/**
@@ -124,7 +136,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint, NativePoint
 	 * @param hoverBorderWidth the border width of point when hovered.
 	 */
 	public void setHoverBorderWidth(int hoverBorderWidth) {
-		getDelegated().setHoverBorderWidth(hoverBorderWidth);
+		setValue(Property.hoverBorderWidth, hoverBorderWidth);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -135,17 +147,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint, NativePoint
 	 * @return the border width of point when hovered.Default is 1.
 	 */
 	public int getHoverBorderWidth() {
-		return Checker.check(getDelegated().getHoverBorderWidth(), getDefaultValues().getHoverBorderWidth());
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getPoint() == null) {
-			getParent().getDelegated().setPoint(getDelegated());
-		}
+		return getValue(Property.hoverBorderWidth, getDefaultValues().getHoverBorderWidth());
 	}
 
 }

@@ -84,7 +84,7 @@ public class GridLines extends AxisContainer{
 	 * @return the list of colors of the grid lines. 
 	 */
 	public List<String> getColorAsString() {
-		return getAxis().getScale().getGrideLines().getColorAsString();
+		return getAxis().getScale().getGrideLines().getColorsAsString();
 	}
 
 	/**
@@ -150,7 +150,7 @@ public class GridLines extends AxisContainer{
 	 * @return lineWidth stroke widths of grid lines. 
 	 */
 	public List<Integer> getLineWidth() {
-		return getAxis().getScale().getGrideLines().getLineWidth();
+		return getAxis().getScale().getGrideLines().getLinesWidth();
 	}
 
 	/***

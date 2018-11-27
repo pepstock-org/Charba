@@ -40,7 +40,9 @@ public final class ScalesNode extends NativeObject {
 	@JsOverlay
 	public Map<String, ScaleItem> getItems() {
 		// creates result
-		return getObjectAsMap();
+		// FIXME
+//		return getObjectAsMap();
+		return null;
 	}
 
 }

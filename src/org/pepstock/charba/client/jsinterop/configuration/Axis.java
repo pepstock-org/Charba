@@ -17,6 +17,7 @@ package org.pepstock.charba.client.jsinterop.configuration;
 
 import java.util.List;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
@@ -29,16 +30,14 @@ import org.pepstock.charba.client.jsinterop.callbacks.AxisDimensionsCallback;
 import org.pepstock.charba.client.jsinterop.callbacks.AxisFitCallback;
 import org.pepstock.charba.client.jsinterop.callbacks.AxisTickToLabelConversionCallback;
 import org.pepstock.charba.client.jsinterop.callbacks.AxisUpdateCallback;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisBuildTicksHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisCalculateTickRotationHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisDataLimitsHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisDimensionsHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisFitHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisTickToLabelConversionHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisUpdateHandler;
+import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
+import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.defaults.chart.DefaultChartScale;
 import org.pepstock.charba.client.jsinterop.items.AxisItem;
+import org.pepstock.charba.client.jsinterop.options.ExtendedScale;
 import org.pepstock.charba.client.jsinterop.options.Scale;
+
+import jsinterop.annotations.JsFunction;
 
 /**
  * Axes are an integral part of a chart.<br>
@@ -49,7 +48,142 @@ import org.pepstock.charba.client.jsinterop.options.Scale;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class Axis extends ConfigurationContainer<Scale> implements AxisBuildTicksHandler, AxisCalculateTickRotationHandler, AxisDataLimitsHandler, AxisDimensionsHandler, AxisFitHandler, AxisTickToLabelConversionHandler, AxisUpdateHandler {
+public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
+	
+	@JsFunction
+	interface ProxyBeforeUpdateCallback {
+		void call(Object context, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyBeforeSetDimensionsCallback {
+		void call(Object context, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyAfterSetDimensionsCallback {
+		void call(Object context, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyBeforeDataLimitsCallback {
+		void call(Object context, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyAfterDataLimitsCallback {
+		void call(Object context, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyBeforeBuildTicksCallback {
+		void call(Object context, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyAfterBuildTicksCallback {
+		void call(Object context, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyBeforeTickToLabelConversionCallback {
+		void call(Object context, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyAfterTickToLabelConversionCallback {
+		void call(Object context, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyBeforeCalculateTickRotationCallback {
+		void call(Object context, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyAfterCalculateTickRotationCallback {
+		void call(Object context, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyBeforeFitCallback {
+		void call(Object context, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyAfterFitCallback {
+		void call(Object context, AxisItem item);
+	}
+
+	@JsFunction
+	interface ProxyAfterUpdateCallback {
+		void call(Object context, AxisItem item);
+	}
+	
+	private final CallbackProxy<ProxyBeforeUpdateCallback> beforeUpdateCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyBeforeSetDimensionsCallback> beforeSetDimensionsCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyAfterSetDimensionsCallback> afterSetDimensionsCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyBeforeDataLimitsCallback> beforeDataLimitsCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyAfterDataLimitsCallback> afterDataLimitsCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyBeforeBuildTicksCallback> beforeBuildTicksCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyAfterBuildTicksCallback> afterBuildTicksCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyBeforeTickToLabelConversionCallback> beforeTickToLabelConversionCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyAfterTickToLabelConversionCallback> afterTickToLabelConversionCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyBeforeCalculateTickRotationCallback> beforeCalculateTickRotationCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyAfterCalculateTickRotationCallback> afterCalculateTickRotationCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyBeforeFitCallback> beforeFitCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyAfterFitCallback> afterFitCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyAfterUpdateCallback> afterUpdateCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private AxisBuildTicksCallback axisBuildTicksCallback = null;
+	
+	private AxisCalculateTickRotationCallback axisCalculateTickRotationCallback = null;
+	
+	private AxisDataLimitsCallback axisDataLimitsCallback = null;
+	
+	private AxisDimensionsCallback axisDimensionsCallback = null;
+	
+	private AxisFitCallback axisFitCallback = null;
+	
+	private AxisTickToLabelConversionCallback axisTickToLabelConversionCallback = null;
+	
+	private AxisUpdateCallback axisUpdateCallback = null;
+
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		//--- CALL BACKS
+		beforeUpdate,
+		afterUpdate,
+		beforeSetDimensions,
+		afterSetDimensions,
+		beforeDataLimits,
+		afterDataLimits,
+		beforeBuildTicks,
+		afterBuildTicks,
+		beforeTickToLabelConversion,
+		afterTickToLabelConversion,
+		beforeCalculateTickRotation,
+		afterCalculateTickRotation,
+		beforeFit,
+		afterFit
+	}
 
 	/**
 	 * Builds the object storing the chart instance.
@@ -58,56 +192,147 @@ public abstract class Axis extends ConfigurationContainer<Scale> implements Axis
 	 */
 	Axis(AbstractChart<?, ?> chart) {
 		super(chart);
-		setConfiguration(new Scale(new DefaultChartScale(getDefaultScale())));
-		if (hasGlobalBuildTicksCallback()) {
-			chart.getOptions().getConfiguration().setAxisBuildTicksHandler(getScale(), this);
-		}
-		if (hasGlobalCalculateTickRotationCallback()) {
-			chart.getOptions().getConfiguration().setAxisCalculateTickRotationHandler(getScale(), this);
-		}
-		if (hasGlobalDataLimitsCallback()) {
-			chart.getOptions().getConfiguration().setAxisDataLimitsHandler(getScale(), this);
-		}
-		if (hasGlobalDimensionsCallback()) {
-			chart.getOptions().getConfiguration().setAxisDimensionsHandler(getScale(), this);
-		}
-		if (hasGlobalFitCallback()) {
-			chart.getOptions().getConfiguration().setAxisFitHandler(getScale(), this);
-		}
-		if (hasGlobalTickToLabelConversionCallback()) {
-			chart.getOptions().getConfiguration().setAxisTickToLabelConversionHandler(getScale(), this);
-		}
-		if (hasGlobalUpdateCallback()) {
-			chart.getOptions().getConfiguration().setAxisUpdateHandler(getScale(), this);
-		}
-	}
+		setConfiguration(new ExtendedScale(new DefaultChartScale(getDefaultScale())));
+		// callbacks
+		beforeUpdateCallbackProxy.setCallback(new ProxyBeforeUpdateCallback() {
 
-	private boolean hasGlobalBuildTicksCallback() {
-		return getDefaultScale().getAxisBuildTicksCallback() != null;  
-	}
-	
-	private boolean hasGlobalCalculateTickRotationCallback() {
-		return getDefaultScale().getAxisCalculateTickRotationCallback() != null;  
-	}
+			@Override
+			public void call(Object context, AxisItem item) {
+				if (axisUpdateCallback != null) {
+					axisUpdateCallback.onBeforeUpdate(Axis.this, item);
+				}
+			}
+		});
 
-	private boolean hasGlobalDataLimitsCallback() {
-		return getDefaultScale().getAxisDataLimitsCallback() != null;  
-	}
+		beforeSetDimensionsCallbackProxy.setCallback(new ProxyBeforeSetDimensionsCallback() {
 
-	private boolean hasGlobalDimensionsCallback() {
-		return getDefaultScale().getAxisDimensionsCallback() != null;  
-	}
+			@Override
+			public void call(Object context, AxisItem item) {
+				if (axisDimensionsCallback != null) {
+					axisDimensionsCallback.onBeforeSetDimensions(Axis.this, item);
+				}
+			}
+		});
 
-	private boolean hasGlobalFitCallback() {
-		return getDefaultScale().getAxisFitCallback() != null;  
-	}
+		afterSetDimensionsCallbackProxy.setCallback(new ProxyAfterSetDimensionsCallback() {
 
-	private boolean hasGlobalTickToLabelConversionCallback() {
-		return getDefaultScale().getAxisTickToLabelConversionCallback() != null;  
-	}
+			@Override
+			public void call(Object context, AxisItem item) {
+				if (axisDimensionsCallback != null) {
+					axisDimensionsCallback.onAfterSetDimensions(Axis.this, item);
+				}
+			}
+		});
 
-	private boolean hasGlobalUpdateCallback() {
-		return getDefaultScale().getAxisUpdateCallback() != null;  
+		beforeDataLimitsCallbackProxy.setCallback(new ProxyBeforeDataLimitsCallback() {
+
+			@Override
+			public void call(Object context, AxisItem item) {
+				if (axisDataLimitsCallback != null) {
+					axisDataLimitsCallback.onBeforeDataLimits(Axis.this, item);
+				}
+			}
+		});
+
+		afterDataLimitsCallbackProxy.setCallback(new ProxyAfterDataLimitsCallback() {
+
+			@Override
+			public void call(Object context, AxisItem item) {
+				if (axisDataLimitsCallback != null) {
+					axisDataLimitsCallback.onAfterDataLimits(Axis.this, item);
+				}
+			}
+		});
+
+		beforeBuildTicksCallbackProxy.setCallback(new ProxyBeforeBuildTicksCallback() {
+
+			@Override
+			public void call(Object context, AxisItem item) {
+				if (axisBuildTicksCallback != null) {
+					axisBuildTicksCallback.onBeforeBuildTicks(Axis.this, item);
+				}
+			}
+		});
+
+		afterBuildTicksCallbackProxy.setCallback(new ProxyAfterBuildTicksCallback() {
+
+			@Override
+			public void call(Object context, AxisItem item) {
+				if (axisBuildTicksCallback != null) {
+					axisBuildTicksCallback.onAfterBuildTicks(Axis.this, item);
+				}
+			}
+		});
+
+		beforeTickToLabelConversionCallbackProxy.setCallback(new ProxyBeforeTickToLabelConversionCallback() {
+
+			@Override
+			public void call(Object context, AxisItem item) {
+				if (axisTickToLabelConversionCallback != null) {
+					axisTickToLabelConversionCallback.onBeforeTickToLabelConversion(Axis.this, item);
+				}
+			}
+		});
+
+		afterTickToLabelConversionCallbackProxy.setCallback(new ProxyAfterTickToLabelConversionCallback() {
+
+			@Override
+			public void call(Object context, AxisItem item) {
+				if (axisTickToLabelConversionCallback != null) {
+					axisTickToLabelConversionCallback.onAfterTickToLabelConversion(Axis.this, item);
+				}
+			}
+		});
+
+		beforeCalculateTickRotationCallbackProxy.setCallback(new ProxyBeforeCalculateTickRotationCallback() {
+
+			@Override
+			public void call(Object context, AxisItem item) {
+				if (axisCalculateTickRotationCallback != null) {
+					axisCalculateTickRotationCallback.onBeforeCalculateTickRotation(Axis.this, item);
+				}
+			}
+		});
+
+		afterCalculateTickRotationCallbackProxy.setCallback(new ProxyAfterCalculateTickRotationCallback() {
+
+			@Override
+			public void call(Object context, AxisItem item) {
+				if (axisCalculateTickRotationCallback != null) {
+					axisCalculateTickRotationCallback.onAfterCalculateTickRotation(Axis.this, item);
+				}
+			}
+		});
+
+		beforeFitCallbackProxy.setCallback(new ProxyBeforeFitCallback() {
+
+			@Override
+			public void call(Object context, AxisItem item) {
+				if (axisFitCallback != null) {
+					axisFitCallback.onBeforeFit(Axis.this, item);
+				}
+			}
+		});
+
+		afterFitCallbackProxy.setCallback(new ProxyAfterFitCallback() {
+
+			@Override
+			public void call(Object context, AxisItem item) {
+				if (axisFitCallback != null) {
+					axisFitCallback.onAfterFit(Axis.this, item);
+				}
+			}
+		});
+
+		afterUpdateCallbackProxy.setCallback(new ProxyAfterUpdateCallback() {
+
+			@Override
+			public void call(Object context, AxisItem item) {
+				if (axisUpdateCallback != null) {
+					axisUpdateCallback.onAfterUpdate(Axis.this, item);
+				}
+			}
+		});
 	}
 	
 	/**
@@ -180,7 +405,7 @@ public abstract class Axis extends ConfigurationContainer<Scale> implements Axis
 	 * @return the global options for this chart.
 	 */
 	Scale getDefaultScale() {
-		// gets the gloabl option for the chart.
+		// gets the global option for the chart.
 		ChartOptions options = Defaults.options(getChart().getType());
 		// if is a multi scale chart
 		if (getChart().getOptions() instanceof MultiScalesOptions) {
@@ -198,8 +423,8 @@ public abstract class Axis extends ConfigurationContainer<Scale> implements Axis
 				return getCartesianScale(CartesianAxisType.x.equals(type) ? options.getScales().getXAxes() : options.getScales().getYAxes());
 			}
 		} else if (getChart().getOptions() instanceof SingleScaleOptions) {
-			// being a single escale
-			// returns scale otpion
+			// being a single scale
+			// returns scale option
 			return options.getScale();
 		}
 		// returns default scale
@@ -224,25 +449,25 @@ public abstract class Axis extends ConfigurationContainer<Scale> implements Axis
 		// returns default scale
 		return Defaults.getScale();
 	}
-	
+
 	/**
 	 * @return the axisBuildTicksCallback
 	 */
 	public AxisBuildTicksCallback getAxisBuildTicksCallback() {
-		return getConfiguration().getAxisBuildTicksCallback();
+		return axisBuildTicksCallback;
 	}
-
+	
 	/**
 	 * @param axisBuildTicksCallback the axisBuildTicksCallback to set
 	 */
 	public void setAxisBuildTicksCallback(AxisBuildTicksCallback axisBuildTicksCallback) {
-		getConfiguration().setAxisBuildTicksCallback(axisBuildTicksCallback);
-		if (!hasGlobalBuildTicksCallback()) {
-			if (axisBuildTicksCallback == null) {
-				getChart().getOptions().getConfiguration().setAxisBuildTicksHandler(getScale(), null);
-			} else {
-				getChart().getOptions().getConfiguration().setAxisBuildTicksHandler(getScale(), this);
-			}
+		this.axisBuildTicksCallback = axisBuildTicksCallback;
+		if (axisBuildTicksCallback != null) {
+			getConfiguration().setCallback(Property.beforeBuildTicks, beforeBuildTicksCallbackProxy.getProxy());
+			getConfiguration().setCallback(Property.afterBuildTicks, afterBuildTicksCallbackProxy.getProxy());
+		} else {
+			getConfiguration().setCallback(Property.beforeBuildTicks, null);
+			getConfiguration().setCallback(Property.afterBuildTicks, null);
 		}
 	}
 
@@ -250,20 +475,20 @@ public abstract class Axis extends ConfigurationContainer<Scale> implements Axis
 	 * @return the axisCalculateTickRotationCallback
 	 */
 	public AxisCalculateTickRotationCallback getAxisCalculateTickRotationCallback() {
-		return getConfiguration().getAxisCalculateTickRotationCallback();
+		return axisCalculateTickRotationCallback;
 	}
 
 	/**
 	 * @param axisCalculateTickRotationCallback the axisCalculateTickRotationCallback to set
 	 */
 	public void setAxisCalculateTickRotationCallback(AxisCalculateTickRotationCallback axisCalculateTickRotationCallback) {
-		getConfiguration().setAxisCalculateTickRotationCallback(axisCalculateTickRotationCallback);
-		if (!hasGlobalCalculateTickRotationCallback()) {
-			if (axisCalculateTickRotationCallback == null) {
-				getChart().getOptions().getConfiguration().setAxisCalculateTickRotationHandler(getScale(), null);
-			} else {
-				getChart().getOptions().getConfiguration().setAxisCalculateTickRotationHandler(getScale(), this);
-			}
+		this.axisCalculateTickRotationCallback = axisCalculateTickRotationCallback;
+		if (axisCalculateTickRotationCallback != null) {
+			getConfiguration().setCallback(Property.beforeCalculateTickRotation, beforeCalculateTickRotationCallbackProxy.getProxy());
+			getConfiguration().setCallback(Property.afterCalculateTickRotation, afterCalculateTickRotationCallbackProxy.getProxy());
+		} else {
+			getConfiguration().setCallback(Property.beforeCalculateTickRotation, null);
+			getConfiguration().setCallback(Property.afterCalculateTickRotation, null);
 		}
 	}
 
@@ -271,20 +496,20 @@ public abstract class Axis extends ConfigurationContainer<Scale> implements Axis
 	 * @return the axisDataLimitsCallback
 	 */
 	public AxisDataLimitsCallback getAxisDataLimitsCallback() {
-		return getConfiguration().getAxisDataLimitsCallback();
+		return axisDataLimitsCallback;
 	}
 
 	/**
 	 * @param axisDataLimitsCallback the axisDataLimitsCallback to set
 	 */
 	public void setAxisDataLimitsCallback(AxisDataLimitsCallback axisDataLimitsCallback) {
-		getConfiguration().setAxisDataLimitsCallback(axisDataLimitsCallback);
-		if (!hasGlobalDataLimitsCallback()) {
-			if (axisDataLimitsCallback == null) {
-				getChart().getOptions().getConfiguration().setAxisDataLimitsHandler(getScale(), null);
-			} else {
-				getChart().getOptions().getConfiguration().setAxisDataLimitsHandler(getScale(), this);
-			}
+		this.axisDataLimitsCallback = axisDataLimitsCallback;
+		if (axisDataLimitsCallback != null) {
+			getConfiguration().setCallback(Property.beforeDataLimits, beforeDataLimitsCallbackProxy.getProxy());
+			getConfiguration().setCallback(Property.afterDataLimits, afterDataLimitsCallbackProxy.getProxy());
+		} else {
+			getConfiguration().setCallback(Property.beforeDataLimits, null);
+			getConfiguration().setCallback(Property.afterDataLimits, null);
 		}
 	}
 
@@ -292,20 +517,20 @@ public abstract class Axis extends ConfigurationContainer<Scale> implements Axis
 	 * @return the axisDimensionsCallback
 	 */
 	public AxisDimensionsCallback getAxisDimensionsCallback() {
-		return getConfiguration().getAxisDimensionsCallback();
+		return axisDimensionsCallback;
 	}
 
 	/**
 	 * @param axisDimensionsCallback the axisDimensionsCallback to set
 	 */
 	public void setAxisDimensionsCallback(AxisDimensionsCallback axisDimensionsCallback) {
-		getConfiguration().setAxisDimensionsCallback(axisDimensionsCallback);
-		if (!hasGlobalDimensionsCallback()) {
-			if (axisDimensionsCallback == null) {
-				getChart().getOptions().getConfiguration().setAxisDimensionsHandler(getScale(), null);
-			} else {
-				getChart().getOptions().getConfiguration().setAxisDimensionsHandler(getScale(), this);
-			}
+		this.axisDimensionsCallback = axisDimensionsCallback;
+		if (axisDimensionsCallback != null) {
+			getConfiguration().setCallback(Property.beforeSetDimensions, beforeSetDimensionsCallbackProxy.getProxy());
+			getConfiguration().setCallback(Property.afterSetDimensions, afterSetDimensionsCallbackProxy.getProxy());
+		} else {
+			getConfiguration().setCallback(Property.beforeSetDimensions, null);
+			getConfiguration().setCallback(Property.afterSetDimensions, null);
 		}
 	}
 
@@ -313,20 +538,20 @@ public abstract class Axis extends ConfigurationContainer<Scale> implements Axis
 	 * @return the axisFitCallback
 	 */
 	public AxisFitCallback getAxisFitCallback() {
-		return getConfiguration().getAxisFitCallback();
+		return axisFitCallback;
 	}
 
 	/**
 	 * @param axisFitCallback the axisFitCallback to set
 	 */
 	public void setAxisFitCallback(AxisFitCallback axisFitCallback) {
-		getConfiguration().setAxisFitCallback(axisFitCallback);
-		if (!hasGlobalFitCallback()) {
-			if (axisFitCallback == null) {
-				getChart().getOptions().getConfiguration().setAxisFitHandler(getScale(), null);
-			} else {
-				getChart().getOptions().getConfiguration().setAxisFitHandler(getScale(), this);
-			}
+		this.axisFitCallback = axisFitCallback;
+		if (axisFitCallback != null) {
+			getConfiguration().setCallback(Property.beforeFit, beforeFitCallbackProxy.getProxy());
+			getConfiguration().setCallback(Property.afterFit, afterFitCallbackProxy.getProxy());
+		} else {
+			getConfiguration().setCallback(Property.beforeFit, null);
+			getConfiguration().setCallback(Property.afterFit, null);
 		}
 	}
 
@@ -334,20 +559,20 @@ public abstract class Axis extends ConfigurationContainer<Scale> implements Axis
 	 * @return the axisTickToLabelConversionCallback
 	 */
 	public AxisTickToLabelConversionCallback getAxisTickToLabelConversionCallback() {
-		return getConfiguration().getAxisTickToLabelConversionCallback();
+		return axisTickToLabelConversionCallback;
 	}
 
 	/**
 	 * @param axisTickToLabelConversionCallback the axisTickToLabelConversionCallback to set
 	 */
 	public void setAxisTickToLabelConversionCallback(AxisTickToLabelConversionCallback axisTickToLabelConversionCallback) {
-		getConfiguration().setAxisTickToLabelConversionCallback(axisTickToLabelConversionCallback);
-		if (!hasGlobalTickToLabelConversionCallback()) {
-			if (axisTickToLabelConversionCallback == null) {
-				getChart().getOptions().getConfiguration().setAxisTickToLabelConversionHandler(getScale(), null);
-			} else {
-				getChart().getOptions().getConfiguration().setAxisTickToLabelConversionHandler(getScale(), this);
-			}
+		this.axisTickToLabelConversionCallback = axisTickToLabelConversionCallback;
+		if (axisTickToLabelConversionCallback != null) {
+			getConfiguration().setCallback(Property.beforeTickToLabelConversion, beforeTickToLabelConversionCallbackProxy.getProxy());
+			getConfiguration().setCallback(Property.afterTickToLabelConversion, afterTickToLabelConversionCallbackProxy.getProxy());
+		} else {
+			getConfiguration().setCallback(Property.beforeTickToLabelConversion, null);
+			getConfiguration().setCallback(Property.afterTickToLabelConversion, null);
 		}
 	}
 
@@ -355,188 +580,21 @@ public abstract class Axis extends ConfigurationContainer<Scale> implements Axis
 	 * @return the axisUpdateCallback
 	 */
 	public AxisUpdateCallback getAxisUpdateCallback() {
-		return getConfiguration().getAxisUpdateCallback();
+		return axisUpdateCallback;
 	}
 
 	/**
 	 * @param axisUpdateCallback the axisUpdateCallback to set
 	 */
 	public void setAxisUpdateCallback(AxisUpdateCallback axisUpdateCallback) {
-		getConfiguration().setAxisUpdateCallback(axisUpdateCallback);
-		if (!hasGlobalUpdateCallback()) {
-			if (axisUpdateCallback == null) {
-				getChart().getOptions().getConfiguration().setAxisUpdateHandler(getScale(), null);
-			} else {
-				getChart().getOptions().getConfiguration().setAxisUpdateHandler(getScale(), this);
-			}
+		this.axisUpdateCallback = axisUpdateCallback;
+		if (axisUpdateCallback != null) {
+			getConfiguration().setCallback(Property.beforeUpdate, beforeUpdateCallbackProxy.getProxy());
+			getConfiguration().setCallback(Property.afterUpdate, afterUpdateCallbackProxy.getProxy());
+		} else {
+			getConfiguration().setCallback(Property.beforeUpdate, null);
+			getConfiguration().setCallback(Property.afterUpdate, null);
 		}
 	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisUpdateHandler#onBeforeUpdate(org.pepstock.charba.client.jsinterop.items.AxisItem)
-	 */
-	@Override
-	public void onBeforeUpdate(AxisItem item) {
-		if (getConfiguration().getAxisUpdateCallback() != null) {
-			getConfiguration().getAxisUpdateCallback().onBeforeUpdate(this, item);
-		} else if (hasGlobalUpdateCallback()) {
-			getDefaultScale().getAxisUpdateCallback().onBeforeUpdate(this, item);
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisUpdateHandler#onAfterUpdate(org.pepstock.charba.client.jsinterop.items.AxisItem)
-	 */
-	@Override
-	public void onAfterUpdate(AxisItem item) {
-		if (getConfiguration().getAxisUpdateCallback() != null) {
-			getConfiguration().getAxisUpdateCallback().onAfterUpdate(this, item);
-		} else if (hasGlobalUpdateCallback()) {
-			getDefaultScale().getAxisUpdateCallback().onAfterUpdate(this, item);
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisTickToLabelConversionHandler#onBeforeTickToLabelConversion(org.pepstock.charba.client.jsinterop.items.AxisItem)
-	 */
-	@Override
-	public void onBeforeTickToLabelConversion(AxisItem item) {
-		if (getConfiguration().getAxisTickToLabelConversionCallback() != null) {
-			getConfiguration().getAxisTickToLabelConversionCallback().onBeforeTickToLabelConversion(this, item);
-		} else if (hasGlobalTickToLabelConversionCallback()) {
-			getDefaultScale().getAxisTickToLabelConversionCallback().onBeforeTickToLabelConversion(this, item);
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisTickToLabelConversionHandler#onAfterTickToLabelConversion(org.pepstock.charba.client.jsinterop.items.AxisItem)
-	 */
-	@Override
-	public void onAfterTickToLabelConversion(AxisItem item) {
-		if (getConfiguration().getAxisTickToLabelConversionCallback() != null) {
-			getConfiguration().getAxisTickToLabelConversionCallback().onAfterTickToLabelConversion(this, item);
-		} else if (hasGlobalTickToLabelConversionCallback()) {
-			getDefaultScale().getAxisTickToLabelConversionCallback().onAfterTickToLabelConversion(this, item);
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisFitHandler#onBeforeFit(org.pepstock.charba.client.jsinterop.items.AxisItem)
-	 */
-	@Override
-	public void onBeforeFit(AxisItem item) {
-		if (getConfiguration().getAxisFitCallback() != null) {
-			getConfiguration().getAxisFitCallback().onBeforeFit(this, item);
-		} else if (hasGlobalFitCallback()) {
-			getDefaultScale().getAxisFitCallback().onBeforeFit(this, item);
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisFitHandler#onAfterFit(org.pepstock.charba.client.jsinterop.items.AxisItem)
-	 */
-	@Override
-	public void onAfterFit(AxisItem item) {
-		if (getConfiguration().getAxisFitCallback() != null) {
-			getConfiguration().getAxisFitCallback().onAfterFit(this, item);
-		} else if (hasGlobalFitCallback()) {
-			getDefaultScale().getAxisFitCallback().onAfterFit(this, item);
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisDimensionsHandler#onBeforeSetDimensions(org.pepstock.charba.client.jsinterop.items.AxisItem)
-	 */
-	@Override
-	public void onBeforeSetDimensions(AxisItem item) {
-		if (getConfiguration().getAxisDimensionsCallback() != null) {
-			getConfiguration().getAxisDimensionsCallback().onBeforeSetDimensions(this, item);
-		} else if (hasGlobalDimensionsCallback()) {
-			getDefaultScale().getAxisDimensionsCallback().onBeforeSetDimensions(this, item);
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisDimensionsHandler#onAfterSetDimensions(org.pepstock.charba.client.jsinterop.items.AxisItem)
-	 */
-	@Override
-	public void onAfterSetDimensions(AxisItem item) {
-		if (getConfiguration().getAxisDimensionsCallback() != null) {
-			getConfiguration().getAxisDimensionsCallback().onAfterSetDimensions(this, item);
-		} else if (hasGlobalDimensionsCallback()) {
-			getDefaultScale().getAxisDimensionsCallback().onAfterSetDimensions(this, item);
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisDataLimitsHandler#onBeforeDataLimits(org.pepstock.charba.client.jsinterop.items.AxisItem)
-	 */
-	@Override
-	public void onBeforeDataLimits(AxisItem item) {
-		if (getConfiguration().getAxisDataLimitsCallback() != null) {
-			getConfiguration().getAxisDataLimitsCallback().onBeforeDataLimits(this, item);
-		} else if (hasGlobalDataLimitsCallback()) {
-			getDefaultScale().getAxisDataLimitsCallback().onBeforeDataLimits(this, item);
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisDataLimitsHandler#onAfterDataLimits(org.pepstock.charba.client.jsinterop.items.AxisItem)
-	 */
-	@Override
-	public void onAfterDataLimits(AxisItem item) {
-		if (getConfiguration().getAxisDataLimitsCallback() != null) {
-			getConfiguration().getAxisDataLimitsCallback().onAfterDataLimits(this, item);
-		} else if (hasGlobalDataLimitsCallback()) {
-			getDefaultScale().getAxisDataLimitsCallback().onAfterDataLimits(this, item);
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisCalculateTickRotationHandler#onBeforeCalculateTickRotation(org.pepstock.charba.client.jsinterop.items.AxisItem)
-	 */
-	@Override
-	public void onBeforeCalculateTickRotation(AxisItem item) {
-		if (getConfiguration().getAxisCalculateTickRotationCallback() != null) {
-			getConfiguration().getAxisCalculateTickRotationCallback().onBeforeCalculateTickRotation(this, item);
-		} else if (hasGlobalCalculateTickRotationCallback()) {
-			getDefaultScale().getAxisCalculateTickRotationCallback().onBeforeCalculateTickRotation(this, item);
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisCalculateTickRotationHandler#onAfterCalculateTickRotation(org.pepstock.charba.client.jsinterop.items.AxisItem)
-	 */
-	@Override
-	public void onAfterCalculateTickRotation(AxisItem item) {
-		if (getConfiguration().getAxisCalculateTickRotationCallback() != null) {
-			getConfiguration().getAxisCalculateTickRotationCallback().onAfterCalculateTickRotation(this, item);
-		} else if (hasGlobalCalculateTickRotationCallback()) {
-			getDefaultScale().getAxisCalculateTickRotationCallback().onAfterCalculateTickRotation(this, item);
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisBuildTicksHandler#onBeforeBuildTicks(org.pepstock.charba.client.jsinterop.items.AxisItem)
-	 */
-	@Override
-	public void onBeforeBuildTicks(AxisItem item) {
-		if (getConfiguration().getAxisBuildTicksCallback() != null) {
-			getConfiguration().getAxisBuildTicksCallback().onBeforeBuildTicks(this, item);
-		} else if (hasGlobalBuildTicksCallback()) {
-			getDefaultScale().getAxisBuildTicksCallback().onBeforeBuildTicks(this, item);
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.AxisBuildTicksHandler#onAfterBuildTicks(org.pepstock.charba.client.jsinterop.items.AxisItem)
-	 */
-	@Override
-	public void onAfterBuildTicks(AxisItem item) {
-		if (getConfiguration().getAxisBuildTicksCallback() != null) {
-			getConfiguration().getAxisBuildTicksCallback().onAfterBuildTicks(this, item);
-		} else if (hasGlobalBuildTicksCallback()) {
-			getDefaultScale().getAxisBuildTicksCallback().onAfterBuildTicks(this, item);
-		}
-	}
+	
 }

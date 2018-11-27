@@ -15,22 +15,23 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import java.util.List;
-
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
-import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.callbacks.TooltipBodyCallback;
 import org.pepstock.charba.client.jsinterop.callbacks.TooltipFooterCallback;
 import org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelCallback;
 import org.pepstock.charba.client.jsinterop.callbacks.TooltipTitleCallback;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipBodyHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipFooterHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipLabelHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipTitleHandler;
+import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
+import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
+import org.pepstock.charba.client.jsinterop.commons.ArrayString;
+import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
+import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.items.TooltipItem;
 import org.pepstock.charba.client.jsinterop.items.TooltipLabelColor;
-import org.pepstock.charba.client.jsinterop.options.EventableOptions;
+import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
+
+import jsinterop.annotations.JsFunction;
 
 /**
  * Contains all callbacks defined for a toolitp.
@@ -38,375 +39,457 @@ import org.pepstock.charba.client.jsinterop.options.EventableOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TooltipsCallbacks extends ConfigurationContainer<EventableOptions> implements TooltipTitleHandler, TooltipFooterHandler, TooltipLabelHandler, TooltipBodyHandler{
+public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 
+	// empty string 
+	private static final String EMPTY = "";
+
+	// empty string 
+	private static final ArrayString EMPTY_ARRAY = new ArrayString();
+
+	private static final TooltipLabelColor DEFAULT_LABEL_COLOR = new TooltipLabelColor();
+	
+	@JsFunction
+	interface ProxyBeforeTitleCallback {
+		ArrayString call(Object context, ArrayObject<TooltipItem> items);
+	}
+
+	@JsFunction
+	interface ProxyTitleCallback {
+		ArrayString call(Object context, ArrayObject<TooltipItem> items);
+	}
+
+	@JsFunction
+	interface ProxyAfterTitleCallback {
+		ArrayString call(Object context, ArrayObject<TooltipItem> items);
+	}
+	
+	@JsFunction
+	interface ProxyBeforeFooterCallback {
+		ArrayString call(Object context, ArrayObject<TooltipItem> items);
+	}
+
+	@JsFunction
+	interface ProxyFooterCallback {
+		ArrayString call(Object context, ArrayObject<TooltipItem> items);
+	}
+
+	@JsFunction
+	interface ProxyAfterFooterCallback {
+		ArrayString call(Object context, ArrayObject<TooltipItem> items);
+	}
+
+	@JsFunction
+	interface ProxyBeforeBodyCallback {
+		ArrayString call(Object context, ArrayObject<TooltipItem> items);
+	}
+
+	@JsFunction
+	interface ProxyAfterBodyCallback {
+		ArrayString call(Object context, ArrayObject<TooltipItem> items);
+	}
+
+	@JsFunction
+	interface ProxyBeforeLabelCallback {
+		String call(Object context, TooltipItem item);
+	}
+
+	@JsFunction
+	interface ProxyAfterLabelCallback {
+		String call(Object context, TooltipItem item);
+	}
+
+	@JsFunction
+	interface ProxyLabelCallback {
+		String call(Object context, TooltipItem item);
+	}
+
+	@JsFunction
+	interface ProxyLabelColorCallback {
+		TooltipLabelColor call(Object context, TooltipItem item);
+	}
+
+	@JsFunction
+	interface ProxyLabelTextColorCallback {
+		String call(Object context, TooltipItem item);
+	}
+
+	private final CallbackProxy<ProxyBeforeTitleCallback> beforeTitleCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private final CallbackProxy<ProxyTitleCallback> titleCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private final CallbackProxy<ProxyAfterTitleCallback> afterTitleCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private final CallbackProxy<ProxyBeforeBodyCallback> beforeBodyCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private final CallbackProxy<ProxyAfterBodyCallback> afterBodyCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private final CallbackProxy<ProxyBeforeLabelCallback> beforeLabelCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private final CallbackProxy<ProxyLabelCallback> labelCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private final CallbackProxy<ProxyLabelColorCallback> labelColorCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private final CallbackProxy<ProxyLabelTextColorCallback> labelTextColorCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private final CallbackProxy<ProxyAfterLabelCallback> afterLabelCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private final CallbackProxy<ProxyBeforeFooterCallback> beforeFooterCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private final CallbackProxy<ProxyFooterCallback> footerCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private final CallbackProxy<ProxyAfterFooterCallback> afterFooterCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private TooltipTitleCallback titleCallback = null;
+	
+	private TooltipBodyCallback bodyCallback = null;
+	
+	private TooltipLabelCallback labelCallback = null;
+	
+	private TooltipFooterCallback footerCallback = null;
+	
+	private enum Property implements Key{
+	    beforeTitle,
+	    title,
+	    afterTitle,
+	    beforeBody,
+	    afterBody,
+	    beforeLabel,
+	    label,
+	    labelColor,
+	    labelTextColor,
+	    afterLabel,
+	    beforeFooter,
+	    footer,
+	    afterFooter
+	}
+	
 	/**
 	 * @param chart
 	 * @param configuration
 	 */
-	TooltipsCallbacks(AbstractChart<?, ?> chart, EventableOptions configuration) {
+	TooltipsCallbacks(AbstractChart<?, ?> chart, ExtendedOptions configuration) {
 		super(chart, configuration);
-		if (hasGlobalBodyCallback()) {
-			getConfiguration().setTooltipBodyHandler(this);
-		}
-		if (hasGlobalTitleCallback()) {
-			getConfiguration().setTooltipTitleHandler(this);
-		}
-		if (hasGlobalFooterCallback()) {
-			getConfiguration().setTooltipFooterHandler(this);
-		}
-		if (hasGlobalLabelCallback()) {
-			getConfiguration().setTooltipLabelHandler(this);
-		}
+		// sets the colors getting from tooltip
+		DEFAULT_LABEL_COLOR.setBackgroundColor(configuration.getTooltips().getBackgroundColor());
+		DEFAULT_LABEL_COLOR.setBackgroundColor(configuration.getTooltips().getBorderColor());
+		beforeTitleCallbackProxy.setCallback(new ProxyBeforeTitleCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyBeforeTitleCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 */
+			@Override
+			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
+				if (titleCallback != null) {
+					String[] result = titleCallback.onBeforeTitle(getChart(), ArrayListHelper.unmodifiableList(items));
+					if (result != null && result.length > 0) {
+						return ArrayString.of(result);
+					}
+				}
+				return EMPTY_ARRAY;
+			}
+			
+		});
+		
+		titleCallbackProxy.setCallback(new ProxyTitleCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyTitleCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 */
+			@Override
+			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
+				if (titleCallback != null) {
+					String[] result = titleCallback.onTitle(getChart(), ArrayListHelper.unmodifiableList(items));
+					if (result != null && result.length > 0) {
+						return ArrayString.of(result);
+					}
+				}
+				return EMPTY_ARRAY;
+			}
+			
+		});
+		
+		afterTitleCallbackProxy.setCallback(new ProxyAfterTitleCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyAfterTitleCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 */
+			@Override
+			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
+				if (titleCallback != null) {
+					String[] result = titleCallback.onAfterTitle(getChart(), ArrayListHelper.unmodifiableList(items));
+					if (result != null && result.length > 0) {
+						return ArrayString.of(result);
+					}
+				}
+				return EMPTY_ARRAY;
+			}
+			
+		});
+		
+		beforeBodyCallbackProxy.setCallback(new ProxyBeforeBodyCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyBeforeBodyCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 */
+			@Override
+			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
+				if (bodyCallback != null) {
+					String[] result = bodyCallback.onBeforeBody(getChart(), ArrayListHelper.unmodifiableList(items));
+					if (result != null && result.length > 0) {
+						return ArrayString.of(result);
+					}
+				}
+				return EMPTY_ARRAY;
+			}
+			
+		});
+		
+		afterBodyCallbackProxy.setCallback(new ProxyAfterBodyCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyAfterBodyCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 */
+			@Override
+			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
+				if (bodyCallback != null) {
+					String[] result = bodyCallback.onAfterBody(getChart(), ArrayListHelper.unmodifiableList(items));
+					if (result != null && result.length > 0) {
+						return ArrayString.of(result);
+					}
+				}
+				return EMPTY_ARRAY;
+			}
+			
+		});
+		
+		beforeLabelCallbackProxy.setCallback(new ProxyBeforeLabelCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyBeforeLabelCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+			 */
+			@Override
+			public String call(Object context, TooltipItem item) {
+				if (labelCallback != null) {
+					String result = labelCallback.onBeforeLabel(getChart(), item);
+					return result != null ? result : EMPTY;
+				}
+				return EMPTY;
+			}
+			
+		});
+		
+		labelCallbackProxy.setCallback(new ProxyLabelCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyLabelCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+			 */
+			@Override
+			public String call(Object context, TooltipItem item) {
+				if (labelCallback != null) {
+					String result = labelCallback.onLabel(getChart(), item);
+					return result != null ? result : EMPTY;
+				}
+				return EMPTY;
+			}
+			
+		});
+		
+		labelColorCallbackProxy.setCallback(new ProxyLabelColorCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyLabelColorCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+			 */
+			@Override
+			public TooltipLabelColor call(Object context, TooltipItem item) {
+				if (labelCallback != null) {
+					TooltipLabelColor result = labelCallback.onLabelColor(getChart(), item);
+					return result != null ? result : DEFAULT_LABEL_COLOR;
+				}
+				return DEFAULT_LABEL_COLOR;
+			}
+			
+		});
+		
+		labelTextColorCallbackProxy.setCallback(new ProxyLabelTextColorCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyLabelTextColorCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+			 */
+			@Override
+			public String call(Object context, TooltipItem item) {
+				if (labelCallback != null) {
+					IsColor result = labelCallback.onLabelTextColor(getChart(), item);
+					return result != null ? result.toRGBA() : EMPTY;
+				}
+				//FIXME color
+				return EMPTY;
+			}
+			
+		});
+		
+		afterLabelCallbackProxy.setCallback(new ProxyAfterLabelCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyAfterLabelCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+			 */
+			@Override
+			public String call(Object context, TooltipItem item) {
+				if (labelCallback != null) {
+					String result = labelCallback.onAfterLabel(getChart(), item);
+					return result != null ? result : EMPTY;
+				}
+				return EMPTY;
+			}
+			
+		});
+		
+		beforeFooterCallbackProxy.setCallback(new ProxyBeforeFooterCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyBeforeFooterCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 */
+			@Override
+			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
+				if (footerCallback != null) {
+					String[] result = footerCallback.onBeforeFooter(getChart(), ArrayListHelper.unmodifiableList(items));
+					if (result != null && result.length > 0) {
+						return ArrayString.of(result);
+					}
+				}
+				return EMPTY_ARRAY;
+			}
+			
+		});
+		
+		footerCallbackProxy.setCallback(new ProxyFooterCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyFooterCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 */
+			@Override
+			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
+				if (footerCallback != null) {
+					String[] result = footerCallback.onFooter(getChart(), ArrayListHelper.unmodifiableList(items));
+					if (result != null && result.length > 0) {
+						return ArrayString.of(result);
+					}
+				}
+				return EMPTY_ARRAY;
+			}
+			
+		});
+		
+		afterFooterCallbackProxy.setCallback(new ProxyAfterFooterCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyAfterFooterCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 */
+			@Override
+			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
+				if (footerCallback != null) {
+					String[] result = footerCallback.onAfterFooter(getChart(), ArrayListHelper.unmodifiableList(items));
+					if (result != null && result.length > 0) {
+						return ArrayString.of(result);
+					}
+				}
+				return EMPTY_ARRAY;
+			}
+			
+		});
 	}
-	
-	private boolean hasGlobalTitleCallback() {
-		return Defaults.getGlobal().getTooltips().getCallbacks().getTitleCallback() != null ||
-		       Defaults.chart(getChart()).getTooltips().getCallbacks().getTitleCallback()!= null;  
-	}
-	
+
 	/**
 	 * @return the titleCallback
 	 */
 	public TooltipTitleCallback getTitleCallback() {
-		return getConfiguration().getTooltips().getCallbacks().getTitleCallback();
+		return titleCallback;
 	}
 
 	/**
 	 * @param titleCallback the titleCallback to set
 	 */
 	public void setTitleCallback(TooltipTitleCallback titleCallback) {
-		getConfiguration().getTooltips().getCallbacks().setTitleCallback(titleCallback);
-		if (!hasGlobalTitleCallback()) {
-			if (titleCallback == null) {
-				getConfiguration().setTooltipTitleHandler(null);
-			} else {
-				getConfiguration().setTooltipTitleHandler(this);
-			}
+		this.titleCallback = titleCallback;
+		if (titleCallback != null) {
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.beforeTitle, beforeTitleCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.title, titleCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.afterTitle, afterTitleCallbackProxy.getProxy());
+		} else {
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.beforeTitle, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.title, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.afterTitle, null);
 		}
-	}
-
-	private boolean hasGlobalBodyCallback() {
-		return Defaults.getGlobal().getTooltips().getCallbacks().getBodyCallback() != null ||
-		       Defaults.chart(getChart()).getTooltips().getCallbacks().getBodyCallback()!= null;  
 	}
 
 	/**
 	 * @return the bodyCallback
 	 */
 	public TooltipBodyCallback getBodyCallback() {
-		return getConfiguration().getTooltips().getCallbacks().getBodyCallback();
+		return bodyCallback;
 	}
 
 	/**
 	 * @param bodyCallback the bodyCallback to set
 	 */
 	public void setBodyCallback(TooltipBodyCallback bodyCallback) {
-		getConfiguration().getTooltips().getCallbacks().setBodyCallback(bodyCallback);
-		if (!hasGlobalBodyCallback()) {
-			if (bodyCallback == null) {
-				getConfiguration().setTooltipBodyHandler(null);
-			} else {
-				getConfiguration().setTooltipBodyHandler(this);
-			}
+		this.bodyCallback = bodyCallback;
+		if (bodyCallback != null) {
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.beforeBody, beforeBodyCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.afterBody, afterBodyCallbackProxy.getProxy());
+		} else {
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.beforeBody, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.afterBody, null);
 		}
 	}
 
-	private boolean hasGlobalLabelCallback() {
-		return Defaults.getGlobal().getTooltips().getCallbacks().getLabelCallback() != null ||
-		       Defaults.chart(getChart()).getTooltips().getCallbacks().getLabelCallback()!= null;  
-	}
-	
 	/**
 	 * @return the labelCallback
 	 */
 	public TooltipLabelCallback getLabelCallback() {
-		return getConfiguration().getTooltips().getCallbacks().getLabelCallback();
+		return labelCallback;
 	}
 
 	/**
 	 * @param labelCallback the labelCallback to set
 	 */
 	public void setLabelCallback(TooltipLabelCallback labelCallback) {
-		getConfiguration().getTooltips().getCallbacks().setLabelCallback(labelCallback);
-		if (!hasGlobalLabelCallback()) {
-			if (labelCallback == null) {
-				getConfiguration().setTooltipLabelHandler(null);
-			} else {
-				getConfiguration().setTooltipLabelHandler(this);
-			}
+		this.labelCallback = labelCallback;
+		if (labelCallback != null) {
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.beforeLabel, beforeLabelCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.label, labelCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.labelColor, labelColorCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.labelTextColor, labelTextColorCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.afterLabel, afterLabelCallbackProxy.getProxy());
+		} else {
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.beforeLabel, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.label, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.labelColor, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.labelTextColor, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.afterLabel, null);
 		}
 	}
 
-	private boolean hasGlobalFooterCallback() {
-		return Defaults.getGlobal().getTooltips().getCallbacks().getFooterCallback() != null ||
-		       Defaults.chart(getChart()).getTooltips().getCallbacks().getFooterCallback()!= null;  
-	}
-	
 	/**
 	 * @return the footerCallback
 	 */
 	public TooltipFooterCallback getFooterCallback() {
-		return getConfiguration().getTooltips().getCallbacks().getFooterCallback();
+		return footerCallback;
 	}
 
 	/**
 	 * @param footerCallback the footerCallback to set
 	 */
 	public void setFooterCallback(TooltipFooterCallback footerCallback) {
-		getConfiguration().getTooltips().getCallbacks().setFooterCallback(footerCallback);
-		if (!hasGlobalFooterCallback()) {
-			if (footerCallback == null) {
-				getConfiguration().setTooltipFooterHandler(null);
-			} else {
-				getConfiguration().setTooltipFooterHandler(this);
-			}
+		this.footerCallback = footerCallback;
+		if (footerCallback != null) {
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.beforeFooter, beforeFooterCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.footer, footerCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.afterFooter, afterFooterCallbackProxy.getProxy());
+		} else {
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.beforeFooter, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.footer, null);
+			getConfiguration().setCallback(getConfiguration().getTooltips().getCallbacks(), Property.afterFooter, null);
 		}
 	}
-	
-	private TooltipBodyCallback getBodyCallbackToInvoke() {
-		// checks if callback is consistent
-		if (getBodyCallback() != null) {
-			// calls callback
-			return getBodyCallback();
-		} else if (Defaults.chart(getChart()).getTooltips().getCallbacks().getBodyCallback() != null) {
-			// calls callback
-			return Defaults.chart(getChart()).getTooltips().getCallbacks().getBodyCallback();
-		} else if (Defaults.getGlobal().getTooltips().getCallbacks().getBodyCallback() != null) {
-			// calls callback
-			return Defaults.getGlobal().getTooltips().getCallbacks().getBodyCallback();
-		}
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipBodyHandler#onBeforeBody(java.util.List)
-	 */
-	@Override
-	public String[] onBeforeBody(List<TooltipItem> items) {
-		TooltipBodyCallback toInvoke = getBodyCallbackToInvoke();
-		// checks if callback is consistent
-		if (toInvoke != null) {
-			// calls callback
-			return toInvoke.onBeforeBody(getChart(), items);
-		}
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipBodyHandler#onAfterBody(java.util.List)
-	 */
-	@Override
-	public String[] onAfterBody(List<TooltipItem> items) {
-		TooltipBodyCallback toInvoke = getBodyCallbackToInvoke();
-		// checks if callback is consistent
-		if (toInvoke != null) {
-			// calls callback
-			return toInvoke.onAfterBody(getChart(), items);
-		}
-		return null;
-	}
-	
-	private TooltipLabelCallback getLabelCallbackToInvoke() {
-		// checks if callback is consistent
-		if (getLabelCallback() != null) {
-			// calls callback
-			return getLabelCallback();
-		} else if (Defaults.chart(getChart()).getTooltips().getCallbacks().getLabelCallback() != null) {
-			// calls callback
-			return Defaults.chart(getChart()).getTooltips().getCallbacks().getLabelCallback();
-		} else if (Defaults.getGlobal().getTooltips().getCallbacks().getLabelCallback() != null) {
-			// calls callback
-			return Defaults.getGlobal().getTooltips().getCallbacks().getLabelCallback();
-		}
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onBeforeLabel(org.pepstock.charba.client.jsinterop.items.TooltipItem)
-	 */
-	@Override
-	public String onBeforeLabel(TooltipItem item) {
-		TooltipLabelCallback toInvoke = getLabelCallbackToInvoke();
-		// checks if callback is consistent
-		if (toInvoke != null) {
-			// calls callback
-			return toInvoke.onBeforeLabel(getChart(), item);
-		}
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onLabel(org.pepstock.charba.client.jsinterop.items.TooltipItem)
-	 */
-	@Override
-	public String onLabel(TooltipItem item) {
-		TooltipLabelCallback toInvoke = getLabelCallbackToInvoke();
-		// checks if callback is consistent
-		if (toInvoke != null) {
-			// calls callback
-			return toInvoke.onLabel(getChart(), item);
-		}
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onLabelColor(org.pepstock.charba.client.jsinterop.items.TooltipItem)
-	 */
-	@Override
-	public TooltipLabelColor onLabelColor(TooltipItem item) {
-		TooltipLabelCallback toInvoke = getLabelCallbackToInvoke();
-		// checks if callback is consistent
-		if (toInvoke != null) {
-			// calls callback
-			return toInvoke.onLabelColor(getChart(), item);
-		}
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onLabelTextColor(org.pepstock.charba.client.jsinterop.items.TooltipItem)
-	 */
-	@Override
-	public IsColor onLabelTextColor(TooltipItem item) {
-		TooltipLabelCallback toInvoke = getLabelCallbackToInvoke();
-		// checks if callback is consistent
-		if (toInvoke != null) {
-			// calls callback
-			return toInvoke.onLabelTextColor(getChart(), item);
-		}
-		return null;
-
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelHandler#onAfterLabel(org.pepstock.charba.client.jsinterop.items.TooltipItem)
-	 */
-	@Override
-	public String onAfterLabel(TooltipItem item) {
-		TooltipLabelCallback toInvoke = getLabelCallbackToInvoke();
-		// checks if callback is consistent
-		if (toInvoke != null) {
-			// calls callback
-			return toInvoke.onAfterLabel(getChart(), item);
-		}
-		return null;
-	}
-
-	private TooltipFooterCallback getFooterCallbackToInvoke() {
-		// checks if callback is consistent
-		if (getFooterCallback() != null) {
-			// calls callback
-			return getFooterCallback();
-		} else if (Defaults.chart(getChart()).getTooltips().getCallbacks().getFooterCallback() != null) {
-			// calls callback
-			return Defaults.chart(getChart()).getTooltips().getCallbacks().getFooterCallback();
-		} else if (Defaults.getGlobal().getTooltips().getCallbacks().getFooterCallback() != null) {
-			// calls callback
-			return Defaults.getGlobal().getTooltips().getCallbacks().getFooterCallback();
-		}
-		return null;
-	}
-
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipFooterHandler#onBeforeFooter(java.util.List)
-	 */
-	@Override
-	public String[] onBeforeFooter(List<TooltipItem> items) {
-		TooltipFooterCallback toInvoke = getFooterCallbackToInvoke();
-		// checks if callback is consistent
-		if (toInvoke != null) {
-			// calls callback
-			return toInvoke.onBeforeFooter(getChart(), items);
-		}
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipFooterHandler#onFooter(java.util.List)
-	 */
-	@Override
-	public String[] onFooter(List<TooltipItem> items) {
-		TooltipFooterCallback toInvoke = getFooterCallbackToInvoke();
-		// checks if callback is consistent
-		if (toInvoke != null) {
-			// calls callback
-			return toInvoke.onFooter(getChart(), items);
-		}
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipFooterHandler#onAfterFooter(java.util.List)
-	 */
-	@Override
-	public String[] onAfterFooter(List<TooltipItem> items) {
-		TooltipFooterCallback toInvoke = getFooterCallbackToInvoke();
-		// checks if callback is consistent
-		if (toInvoke != null) {
-			// calls callback
-			return toInvoke.onAfterFooter(getChart(), items);
-		}
-		return null;
-	}
-
-	private TooltipTitleCallback getTitleCallbackToInvoke() {
-		// checks if callback is consistent
-		if (getTitleCallback() != null) {
-			// calls callback
-			return getTitleCallback();
-		} else if (Defaults.chart(getChart()).getTooltips().getCallbacks().getTitleCallback() != null) {
-			// calls callback
-			return Defaults.chart(getChart()).getTooltips().getCallbacks().getTitleCallback();
-		} else if (Defaults.getGlobal().getTooltips().getCallbacks().getTitleCallback() != null) {
-			// calls callback
-			return Defaults.getGlobal().getTooltips().getCallbacks().getTitleCallback();
-		}
-		return null;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipTitleHandler#onBeforeTitle(java.util.List)
-	 */
-	@Override
-	public String[] onBeforeTitle(List<TooltipItem> items) {
-		TooltipTitleCallback toInvoke = getTitleCallbackToInvoke();
-		// checks if callback is consistent
-		if (toInvoke != null) {
-			// calls callback
-			return toInvoke.onBeforeTitle(getChart(), items);
-		}
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipTitleHandler#onTitle(java.util.List)
-	 */
-	@Override
-	public String[] onTitle(List<TooltipItem> items) {
-		TooltipTitleCallback toInvoke = getTitleCallbackToInvoke();
-		// checks if callback is consistent
-		if (toInvoke != null) {
-			// calls callback
-			return toInvoke.onTitle(getChart(), items);
-		}
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipTitleHandler#onAfterTitle(java.util.List)
-	 */
-	@Override
-	public String[] onAfterTitle(List<TooltipItem> items) {
-		TooltipTitleCallback toInvoke = getTitleCallbackToInvoke();
-		// checks if callback is consistent
-		if (toInvoke != null) {
-			// calls callback
-			return toInvoke.onAfterTitle(getChart(), items);
-		}
-		return null;
-
-	}
-
 }

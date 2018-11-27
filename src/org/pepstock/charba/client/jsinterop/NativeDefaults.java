@@ -1,10 +1,8 @@
 package org.pepstock.charba.client.jsinterop;
 
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.jsinterop.commons.NativeDescriptor;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-import org.pepstock.charba.client.jsinterop.options.NativeOptions;
-import org.pepstock.charba.client.jsinterop.options.NativeScale;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectDescriptor;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -15,19 +13,18 @@ import jsinterop.annotations.JsType;
 final class NativeDefaults extends NativeObject {
 
 	@JsProperty
-	native NativeOptions getGlobal();
+	native NativeObject getGlobal();
 
 	@JsProperty
-	native NativeScale getScale();
+	native NativeObject getScale();
 
 	@JsOverlay
 	ChartOptions chart(Type type) {
-		// returns the configuration creating a key by plugin id.
-		NativeDescriptor<NativeOptions> descriptor = getProperty(type);
-		if (descriptor != null) {
+		if (hasProperty(type.name())) {
+			NativeObjectDescriptor<NativeObject> descriptor = getObjectProperty(type.name());
 			return new ChartOptions(descriptor.getValue());
 		} else {
-			return new ChartOptions();
+		  return new ChartOptions();
 		}
 	}
 }

@@ -24,6 +24,7 @@ import org.pepstock.charba.client.jsinterop.items.AxisItem;
  * 
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.jsinterop.configuration.Axis
+ * @see org.pepstock.charba.client.jsinterop.items.AxisItem
  * @since 2.0
  */
 public interface AxisBuildTicksCallback {
@@ -33,8 +34,6 @@ public interface AxisBuildTicksCallback {
 	 * 
 	 * @param axis axis instance where this callback as been defined
 	 * @param item axis item instance
-	 * @see org.pepstock.charba.client.jsinterop.configuration.Axis
-	 * @see org.pepstock.charba.client.jsinterop.items.AxisItem
 	 */
 	void onBeforeBuildTicks(Axis axis, AxisItem item);
 
@@ -43,8 +42,6 @@ public interface AxisBuildTicksCallback {
 	 * 
 	 * @param axis axis instance where this callback as been defined
 	 * @param item axis item instance
-	 * @see org.pepstock.charba.client.jsinterop.configuration.Axis
-	 * @see org.pepstock.charba.client.jsinterop.items.AxisItem
 	 */
 	void onAfterBuildTicks(Axis axis, AxisItem item);
 

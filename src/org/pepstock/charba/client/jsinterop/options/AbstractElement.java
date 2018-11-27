@@ -17,7 +17,8 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc;
 
 /**
@@ -31,10 +32,20 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc, O extends NativeArc> extends BaseModel<P, D, O>{
+public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc> extends AbstractModel<P, D>{
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		backgroundColor,
+		borderWidth,
+		borderColor
+	}
 
-	AbstractElement(P parent, D defaultValues, O delegated) {
-		super(parent, defaultValues, delegated);
+	AbstractElement(P parent, Key childKey, D defaultValues, NativeObject nativeObject) {
+		super(parent, childKey, defaultValues, nativeObject);
 	}
 
 	/**
@@ -52,7 +63,7 @@ public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc
 	 * @param backgroundColor the background color.
 	 */
 	public void setBackgroundColor(String backgroundColor) {
-		getDelegated().setBackgroundColor(backgroundColor);
+		setValue(Property.backgroundColor, backgroundColor);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -63,7 +74,7 @@ public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc
 	 * @return the background color. Default is rgba(0,0,0,0.1).
 	 */
 	public String getBackgroundColorAsString() {
-		return Checker.check(getDelegated().getBackgroundColor(), getDefaultValues().getBackgroundColor());
+		return getValue(Property.backgroundColor, getDefaultValues().getBackgroundColorAsString());
 	}
 
 
@@ -82,7 +93,7 @@ public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc
 	 * @param borderWidth the border width.
 	 */
 	public void setBorderWidth(int borderWidth) {
-		getDelegated().setBorderWidth(borderWidth);
+		setValue(Property.borderWidth, borderWidth);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -93,7 +104,7 @@ public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc
 	 * @return the border width. Default is 2.
 	 */
 	public int getBorderWidth() {
-		return Checker.check(getDelegated().getBorderWidth(), getDefaultValues().getBorderWidth());
+		return getValue(Property.borderWidth, getDefaultValues().getBorderWidth());
 	}
 
 	/**
@@ -111,7 +122,7 @@ public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc
 	 * @param borderColor the border color.
 	 */
 	public void setBorderColor(String borderColor) {
-		getDelegated().setBorderColor(borderColor);
+		setValue(Property.borderColor, borderColor);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -122,7 +133,7 @@ public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc
 	 * @return the border color. Default is #fff.
 	 */
 	public String getBorderColorAsString() {
-		return Checker.check(getDelegated().getBorderColor(), getDefaultValues().getBorderColor());
+		return getValue(Property.borderColor, getDefaultValues().getBorderColorAsString());
 	}
 
 	/**

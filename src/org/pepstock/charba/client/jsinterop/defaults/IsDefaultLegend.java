@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults;
 
+import org.pepstock.charba.client.enums.Position;
+
 /**
  * The chart legend displays data about the datasets that area appearing on the chart.
  * 
@@ -55,5 +57,5 @@ public interface IsDefaultLegend {
 	 * @return Position of the legend. Default is {@link org.pepstock.charba.client.enums.Position#top}.
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
-	String getPosition();
+	Position getPosition();
 }

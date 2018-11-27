@@ -16,15 +16,13 @@
 package org.pepstock.charba.client.jsinterop.commons;
 
 import org.pepstock.charba.client.Injector;
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.StandardKey;
 import org.pepstock.charba.client.jsinterop.Helpers;
 
 /**
  * Utility to merge java script object into another one.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public final class Merger {
@@ -132,10 +130,8 @@ public final class Merger {
 	public static NativeObject merge(NativeObject target, NativeObject source, String property) {
 		// creates new root object
 		NativeObject newObject = new NativeObject();
-		// creates a key using property
-		Key key = new StandardKey(property);
 		// stores configuration
-		newObject.defineObject(key, source);
+		newObject.defineObjectProperty(property, source);
 		// invokes CHART.JS to merge
 		mergeJavaScriptObject(target, newObject);
 		// return the object

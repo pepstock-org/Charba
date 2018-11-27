@@ -15,7 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
-import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding;
 
 /**
@@ -24,10 +26,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class ScaleLabelPadding extends BaseModel<ScaleLabel, IsDefaultPadding, NativePadding>{
+public class ScaleLabelPadding extends AbstractModel<ScaleLabel, IsDefaultPadding> implements IsDefaultPadding{
 
-	ScaleLabelPadding(ScaleLabel scaleLabel, IsDefaultPadding defaultValues, NativePadding delegated) {
-		super(scaleLabel, defaultValues, delegated == null ? new NativePadding() : delegated);
+	ScaleLabelPadding(ScaleLabel scaleLabel, Key childKey, IsDefaultPadding defaultValues, NativeObject delegated) {
+		super(scaleLabel, childKey, defaultValues, delegated);
 	}
 	
 	/**
@@ -36,8 +38,8 @@ public class ScaleLabelPadding extends BaseModel<ScaleLabel, IsDefaultPadding, N
 	 * @param padding the padding left in pixel.
 	 */
 	public void setLeft(int padding) {
-		getDelegated().setLeft(padding);
-		// checks if the node is already added to parent
+		setValue(Position.left, padding);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -47,7 +49,7 @@ public class ScaleLabelPadding extends BaseModel<ScaleLabel, IsDefaultPadding, N
 	 * @return the padding left in pixel. Default is 0.
 	 */
 	public int getLeft() {
-		return Checker.check(getDelegated().getLeft(), getDefaultValues().getLeft());
+		return getValue(Position.left, getDefaultValues().getLeft());
 	}
 
 	/**
@@ -56,8 +58,8 @@ public class ScaleLabelPadding extends BaseModel<ScaleLabel, IsDefaultPadding, N
 	 * @param padding the padding right in pixel. Default is 0.
 	 */
 	public void setRight(int padding) {
-		getDelegated().setRight(padding);
-		// checks if the node is already added to parent
+		setValue(Position.right, padding);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -67,7 +69,7 @@ public class ScaleLabelPadding extends BaseModel<ScaleLabel, IsDefaultPadding, N
 	 * @return the padding right in pixel. Default is 0.
 	 */
 	public int getRight() {
-		return Checker.check(getDelegated().getRight(), getDefaultValues().getRight());
+		return getValue(Position.right, getDefaultValues().getRight());
 	}
 
 	/**
@@ -76,8 +78,8 @@ public class ScaleLabelPadding extends BaseModel<ScaleLabel, IsDefaultPadding, N
 	 * @param padding the padding top in pixel. Default is 0.
 	 */
 	public void setTop(int padding) {
-		getDelegated().setTop(padding);
-		// checks if the node is already added to parent
+		setValue(Position.top, padding);
+		// checks if all parents are attached
 		checkAndAddToParent();
  	}
 
@@ -87,7 +89,7 @@ public class ScaleLabelPadding extends BaseModel<ScaleLabel, IsDefaultPadding, N
 	 * @return the padding top in pixel. Default is 0.
 	 */
 	public int getTop() {
-		return Checker.check(getDelegated().getTop(), getDefaultValues().getTop());
+		return getValue(Position.top, getDefaultValues().getTop());
 	}
 
 	/**
@@ -96,8 +98,8 @@ public class ScaleLabelPadding extends BaseModel<ScaleLabel, IsDefaultPadding, N
 	 * @param padding the padding bottom in pixel. Default is 0.
 	 */
 	public void setBottom(int padding) {
-		getDelegated().setBottom(padding);
-		// checks if the node is already added to parent
+		setValue(Position.bottom, padding);
+		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
@@ -107,16 +109,6 @@ public class ScaleLabelPadding extends BaseModel<ScaleLabel, IsDefaultPadding, N
 	 * @return the padding bottom in pixel. Default is 0.
 	 */
 	public int getBottom() {
-		return Checker.check(getDelegated().getBottom(), getDefaultValues().getBottom());
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getPadding() == null) {
-			getParent().getDelegated().setPadding(getDelegated());
-		}
+		return getValue(Position.bottom, getDefaultValues().getBottom());
 	}
 }

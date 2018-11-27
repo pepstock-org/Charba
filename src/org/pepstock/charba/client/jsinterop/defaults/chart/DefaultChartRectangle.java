@@ -1,5 +1,6 @@
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
+import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultRectangle;
 import org.pepstock.charba.client.jsinterop.options.Rectangle;
 
@@ -18,7 +19,7 @@ public final class DefaultChartRectangle implements IsDefaultRectangle {
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBackgroundColor()
 	 */
 	@Override
-	public String getBackgroundColor() {
+	public String getBackgroundColorAsString() {
 		return rectangle.getBackgroundColorAsString();
 	}
 
@@ -34,7 +35,7 @@ public final class DefaultChartRectangle implements IsDefaultRectangle {
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBorderColor()
 	 */
 	@Override
-	public String getBorderColor() {
+	public String getBorderColorAsString() {
 		return rectangle.getBorderColorAsString();
 	}
 
@@ -42,10 +43,8 @@ public final class DefaultChartRectangle implements IsDefaultRectangle {
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultRectangle#getBorderSkipped()
 	 */
 	@Override
-	public String getBorderSkipped() {
-		return rectangle.getBorderSkipped().name();
-	}
-	
-	
+	public Position getBorderSkipped() {
+		return rectangle.getBorderSkipped();
+	}	
 
 }

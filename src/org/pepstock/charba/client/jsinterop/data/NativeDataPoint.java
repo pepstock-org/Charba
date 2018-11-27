@@ -15,8 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.data;
 
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.jsinterop.commons.NativeDescriptor;
+import org.pepstock.charba.client.jsinterop.commons.NativeDoubleDescriptor;
 import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
@@ -100,8 +99,8 @@ public final class NativeDataPoint extends NativeObject{
 	 * @param value value to set.
 	 */
 	@JsOverlay
-	void setAttribute(Key key, double value){
-		defineProperty(key, value);
+	void setAttribute(String key, double value){
+		defineDoubleProperty(key, value);
 	}
 
 	/** 
@@ -110,7 +109,7 @@ public final class NativeDataPoint extends NativeObject{
 	 * @return custom field value from data point. Default is {@link java.lang.Double#MIN_VALUE}.
 	 */
 	@JsOverlay
-	NativeDescriptor<Double> getAttribute(Key key){
-		return getProperty(key);
+	NativeDoubleDescriptor getAttribute(String key){
+		return getDoubleProperty(key);
 	}
 }

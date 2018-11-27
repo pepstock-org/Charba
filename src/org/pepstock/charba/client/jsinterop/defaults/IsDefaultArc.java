@@ -7,7 +7,7 @@ public interface IsDefaultArc {
 	 * 
 	 * @return the background color. 
 	 */
-	String getBackgroundColor();
+	String getBackgroundColorAsString();
 
 	/**
 	 * Returns the border width.
@@ -21,5 +21,5 @@ public interface IsDefaultArc {
 	 * 
 	 * @return the border color. 
 	 */
-	String getBorderColor();
+	String getBorderColorAsString();
 }

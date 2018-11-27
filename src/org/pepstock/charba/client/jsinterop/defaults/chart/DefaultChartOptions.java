@@ -1,15 +1,13 @@
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
+import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.ChartOptions;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc;
+import org.pepstock.charba.client.jsinterop.defaults.IsDefaultElements;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover;
+import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLayout;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultRectangle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
@@ -30,15 +28,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 	
 	private final DefaultChartTooltips tooltips;
 	
-	private final DefaultChartPadding padding;
+	private final DefaultChartLayout layout;
 	
-	private final DefaultChartArc arc;
-	
-	private final DefaultChartLine line;
-	
-	private final DefaultChartPoint point;
-	
-	private final DefaultChartRectangle rectangle;
+	private final DefaultChartElements elements;
 	
 	/**
 	 * @param chartOptions
@@ -51,11 +43,8 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		title = new DefaultChartTitle(chartOptions.getTitle());
 		legend = new DefaultChartLegend(chartOptions.getLegend());
 		tooltips = new DefaultChartTooltips(chartOptions.getTooltips());
-		padding = new DefaultChartPadding(chartOptions.getLayout().getPadding());
-		arc = new DefaultChartArc(chartOptions.getElements().getArc());
-		line = new DefaultChartLine(chartOptions.getElements().getLine());
-		point = new DefaultChartPoint(chartOptions.getElements().getPoint());
-		rectangle = new DefaultChartRectangle(chartOptions.getElements().getRectangle());
+		layout = new DefaultChartLayout(chartOptions.getLayout());
+		elements = new DefaultChartElements(chartOptions.getElements());
 	}
 
 	/**
@@ -63,6 +52,22 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 	 */
 	final ChartOptions getChartOptions() {
 		return chartOptions;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getLayout()
+	 */
+	@Override
+	public IsDefaultLayout getLayout() {
+		return layout;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getElements()
+	 */
+	@Override
+	public IsDefaultElements getElements() {
+		return elements;
 	}
 
 	/* (non-Javadoc)
@@ -114,46 +119,6 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getPadding()
-	 */
-	@Override
-	public IsDefaultPadding getPadding() {
-		return padding;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getArc()
-	 */
-	@Override
-	public IsDefaultArc getArc() {
-		return arc;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getLine()
-	 */
-	@Override
-	public IsDefaultLine getLine() {
-		return line;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getPoint()
-	 */
-	@Override
-	public IsDefaultPoint getPoint() {
-		return point;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getRectangle()
-	 */
-	@Override
-	public IsDefaultRectangle getRectangle() {
-		return rectangle;
-	}
-
-	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#isResponsive()
 	 */
 	@Override
@@ -189,7 +154,7 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getDefaultColor()
 	 */
 	@Override
-	public String getDefaultColor() {
+	public String getDefaultColorAsString() {
 		return chartOptions.getDefaultColorAsString();
 	}
 
@@ -197,7 +162,7 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getDefaultFontColor()
 	 */
 	@Override
-	public String getDefaultFontColor() {
+	public String getDefaultFontColorAsString() {
 		return chartOptions.getDefaultFontColorAsString();
 	}
 
@@ -213,8 +178,8 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getDefaultFontStyle()
 	 */
 	@Override
-	public String getDefaultFontStyle() {
-		return chartOptions.getDefaultFontStyle().name();
+	public FontStyle getDefaultFontStyle() {
+		return chartOptions.getDefaultFontStyle();
 	}
 
 	/* (non-Javadoc)

@@ -17,7 +17,7 @@ package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
-import org.pepstock.charba.client.jsinterop.options.EventableOptions;
+import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 
 /**
  * Definitions about how elements appear in the tooltip, hovering the chart.
@@ -27,14 +27,14 @@ import org.pepstock.charba.client.jsinterop.options.EventableOptions;
  */
 public final class Hover {
 	
-	private final EventableOptions options;
+	private final ExtendedOptions options;
 
 	/**
 	 * Builds the object storing the chart instance.
 	 * 
 	 * @param chart chart instance
 	 */
-	Hover(EventableOptions options) {
+	Hover(ExtendedOptions options) {
 		this.options = options;
 	}
 

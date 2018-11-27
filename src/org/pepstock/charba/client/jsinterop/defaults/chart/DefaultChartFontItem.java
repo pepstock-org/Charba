@@ -1,16 +1,17 @@
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
+import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
 import org.pepstock.charba.client.jsinterop.options.FontItem;
 
 public final class DefaultChartFontItem implements IsDefaultFontItem{
 
-	private final FontItem<?, ?, ?> item;
+	private final FontItem<?, ?> item;
 
 	/**
 	 * @param item
 	 */
-	DefaultChartFontItem(FontItem<?, ?, ?> item) {
+	DefaultChartFontItem(FontItem<?, ?> item) {
 		this.item = item;
 	}
 
@@ -18,7 +19,7 @@ public final class DefaultChartFontItem implements IsDefaultFontItem{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontColor()
 	 */
 	@Override
-	public String getFontColor() {
+	public String getFontColorAsString() {
 		return item.getFontColorAsString();
 	}
 
@@ -34,8 +35,8 @@ public final class DefaultChartFontItem implements IsDefaultFontItem{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontStyle()
 	 */
 	@Override
-	public String getFontStyle() {
-		return item.getFontStyle().name();
+	public FontStyle getFontStyle() {
+		return item.getFontStyle();
 	}
 
 	/* (non-Javadoc)

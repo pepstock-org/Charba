@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Easing;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.Enumer;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
 
 /**
@@ -27,10 +27,21 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Animation extends BaseModel<BaseOptions<?,?>, IsDefaultAnimation, NativeAnimation> {
+public class Animation extends AbstractModel<Options, IsDefaultAnimation> implements IsDefaultAnimation {
 	
-	Animation(BaseOptions<?,?> options, IsDefaultAnimation defaultValues, NativeAnimation delegated) {
-		super(options, defaultValues, delegated == null ? new NativeAnimation() : delegated);
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	enum Property implements Key
+	{
+		animateRotate,
+		animateScale,
+		duration,
+		easing
+	}
+	
+	Animation(Options options, Key childKey, IsDefaultAnimation defaultValues, NativeObject nativeObject) {
+		super(options, childKey, defaultValues, nativeObject);
 	}
 	
 	/**
@@ -40,7 +51,7 @@ public class Animation extends BaseModel<BaseOptions<?,?>, IsDefaultAnimation, N
 	 * @see org.pepstock.charba.client.enums.Easing
 	 */
 	public void setEasing(Easing easing) {
-		getDelegated().setEasing(easing.name());
+		setValue(Property.easing, easing);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -52,7 +63,7 @@ public class Animation extends BaseModel<BaseOptions<?,?>, IsDefaultAnimation, N
 	 * @see org.pepstock.charba.client.enums.Easing
 	 */
 	public Easing getEasing() {
-		return Enumer.deserialize(getDelegated().getEasing(), getDefaultValues().getEasing(), Easing.class, Easing.easeOutQuart);
+		return getValue(Property.easing, Easing.class, getDefaultValues().getEasing());
 	}
 
 	/**
@@ -61,7 +72,7 @@ public class Animation extends BaseModel<BaseOptions<?,?>, IsDefaultAnimation, N
 	 * @param milliseconds the number of milliseconds an animation takes.
 	 */
 	public void setDuration(int milliseconds) {
-		getDelegated().setDuration(milliseconds);
+		setValue(Property.duration, milliseconds);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -72,7 +83,7 @@ public class Animation extends BaseModel<BaseOptions<?,?>, IsDefaultAnimation, N
 	 * @return the number of milliseconds an animation takes. Default is 1000 (1 second).
 	 */
 	public int getDuration() {
-		return Checker.check(getDelegated().getDuration(), getDefaultValues().getDuration());
+		return getValue(Property.duration, getDefaultValues().getDuration());
 	}
 	
 	/**
@@ -81,7 +92,7 @@ public class Animation extends BaseModel<BaseOptions<?,?>, IsDefaultAnimation, N
 	 * @param animateRotate If true, the chart will animate in with a rotation animation.
 	 */
 	public void setAnimateRotate(boolean animateRotate) {
-		getDelegated().setAnimateRotate(animateRotate);
+		setValue(Property.animateRotate, animateRotate);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -92,7 +103,7 @@ public class Animation extends BaseModel<BaseOptions<?,?>, IsDefaultAnimation, N
 	 * @return If true, the chart will animate in with a rotation animation. Default is true.
 	 */
 	public boolean isAnimateRotate() {
-		return Checker.check(getDelegated().isAnimateRotate(), getDefaultValues().isAnimateRotate());
+		return getValue(Property.animateRotate, getDefaultValues().isAnimateRotate());
 	}
 
 	/**
@@ -101,7 +112,7 @@ public class Animation extends BaseModel<BaseOptions<?,?>, IsDefaultAnimation, N
 	 * @param animateScale If true, will animate scaling the chart from the center outwards.
 	 */
 	public void setAnimateScale(boolean animateScale) {
-		getDelegated().setAnimateScale(animateScale);
+		setValue(Property.animateScale, animateScale);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -112,17 +123,7 @@ public class Animation extends BaseModel<BaseOptions<?,?>, IsDefaultAnimation, N
 	 * @return If true, will animate scaling the chart from the center outwards. Default is false.
 	 */
 	public boolean isAnimateScale() {
-		return Checker.check(getDelegated().isAnimateScale(), getDefaultValues().isAnimateScale());
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getAnimation() == null) {
-			getParent().getDelegated().setAnimation(getDelegated());
-		}
+		return getValue(Property.animateScale, getDefaultValues().isAnimateScale());
 	}
 	
 }

@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.jsinterop.options.EventableOptions;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
 
 /**
@@ -28,12 +29,12 @@ import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
  */
 public final class Plugins {
 
-	private final EventableOptions options;
+	private final ExtendedOptions options;
 	
 	/**
 	 * Empty constructor to reduce its visibility
 	 */
-	Plugins(EventableOptions options) {
+	Plugins(ExtendedOptions options) {
 		this.options = options;
 	}
 
@@ -63,7 +64,7 @@ public final class Plugins {
 	 * @param options java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if exist.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public <T> void setOptions(String pluginId, T object) throws InvalidPluginIdException {
+	public <T extends NativeObject> void setOptions(String pluginId, T object) throws InvalidPluginIdException {
 		options.getPlugins().setOptions(pluginId, object);
 	}
 	
@@ -77,7 +78,7 @@ public final class Plugins {
 	 * @return java script object used to configure the plugin or <code>null</code> if not exist.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public <T> T getOptions(String pluginId) throws InvalidPluginIdException{
+	public <T extends NativeObject> T getOptions(String pluginId) throws InvalidPluginIdException{
 		// returns the configuration creating a key by plugin id.
 		return options.getPlugins().getOptions(pluginId);
 	}

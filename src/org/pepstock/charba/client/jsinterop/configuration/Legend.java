@@ -15,18 +15,22 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.Chart;
+import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
+import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
 import org.pepstock.charba.client.jsinterop.events.LegendClickEvent;
 import org.pepstock.charba.client.jsinterop.events.LegendHoverEvent;
-import org.pepstock.charba.client.jsinterop.events.handlers.LegendClickCallbackHandler;
-import org.pepstock.charba.client.jsinterop.events.handlers.LegendHoverCallbackHandler;
 import org.pepstock.charba.client.jsinterop.items.LegendItem;
-import org.pepstock.charba.client.jsinterop.options.EventableOptions;
+import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
+
+import jsinterop.annotations.JsFunction;
 
 /**
  * The chart legend displays data about the datasets that area appearing on the chart.
@@ -34,7 +38,21 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Legend extends EventProvider<EventableOptions> implements LegendClickCallbackHandler, LegendHoverCallbackHandler {
+public final class Legend extends EventProvider<ExtendedOptions> {
+	
+	@JsFunction
+	interface ProxyLegendClickCallback {
+		void call(Chart chart, ChartNativeEvent event, LegendItem item);
+	}
+
+	@JsFunction
+	interface ProxyLegendHoverCallback {
+		void call(Chart chart, ChartNativeEvent event, LegendItem item);
+	}
+	
+	private final CallbackProxy<ProxyLegendClickCallback> clickCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyLegendHoverCallback> hoverCallbackProxy = JsHelper.newCallbackProxy();
 	
 	private final LegendLabels labels;
 	
@@ -42,15 +60,47 @@ public final class Legend extends EventProvider<EventableOptions> implements Leg
 	private int onClickHandlers = 0;
 	// amount of hover handlers
 	private int onHoverHandlers = 0;
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	enum Property implements Key
+	{
+		onClick,
+		onHover
+	}
 
 	/**
 	 * Builds the object storing the chart instance.
 	 * 
 	 * @param chart chart instance
 	 */
-	Legend(AbstractChart<?, ?> chart, EventableOptions options) {
+	Legend(AbstractChart<?, ?> chart, ExtendedOptions options) {
 		super(chart, options);
 		labels = new LegendLabels(chart, options);
+		
+		clickCallbackProxy.setCallback(new ProxyLegendClickCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.EventableLegend.ProxyLegendClickCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.items.LegendItem)
+			 */
+			@Override
+			public void call(Chart chart, ChartNativeEvent event, LegendItem item) {
+				getChart().fireEvent(new LegendClickEvent(event, item));
+			}
+			
+		});
+		hoverCallbackProxy.setCallback(new ProxyLegendHoverCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.EventableLegend.ProxyLegendHoverCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.items.LegendItem)
+			 */
+			@Override
+			public void call(Chart chart, ChartNativeEvent event, LegendItem item) {
+				getChart().fireEvent(new LegendHoverEvent(event, item));
+			}
+			
+		});
 	}
 
 	/**
@@ -72,7 +122,7 @@ public final class Legend extends EventProvider<EventableOptions> implements Leg
 			// if java script property is missing
 			if (onClickHandlers == 0) {
 				// adds the java script function to catch the event
-				getConfiguration().getLegend().setClickCallbackHandler(this);
+				getConfiguration().setEvent(getConfiguration().getLegend(), Property.onClick, clickCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onClickHandlers++;
@@ -80,7 +130,7 @@ public final class Legend extends EventProvider<EventableOptions> implements Leg
 			// if java script property is missing
 			if (onHoverHandlers == 0) {
 				// adds the java script function to catch the event
-				getConfiguration().getLegend().setHoverCallbackHandler(this);
+				getConfiguration().setEvent(getConfiguration().getLegend(), Property.onHover, hoverCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onHoverHandlers++;
@@ -101,7 +151,7 @@ public final class Legend extends EventProvider<EventableOptions> implements Leg
 			// if there is not any handler
 			if (onClickHandlers == 0) {
 				// removes the java script object
-				getConfiguration().getLegend().setClickCallbackHandler(null);
+				getConfiguration().setEvent(getConfiguration().getLegend(), Property.onClick, null);
 				//remove(Property.onClick);
 			}
 		} else if (type.equals(LegendHoverEvent.TYPE)) {
@@ -110,7 +160,7 @@ public final class Legend extends EventProvider<EventableOptions> implements Leg
 			// if there is not any handler
 			if (onHoverHandlers == 0) {
 				// removes the java script object
-				getConfiguration().getLegend().setHoverCallbackHandler(null);
+				getConfiguration().setEvent(getConfiguration().getLegend(), Property.onHover, null);
 			}
 		}
 	}
@@ -188,21 +238,4 @@ public final class Legend extends EventProvider<EventableOptions> implements Leg
 	public Position getPosition() {
 		return getConfiguration().getLegend().getPosition();
 	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.events.LegendHoverCallbackHandler#onHover(java.lang.Object, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.items.LegendItem)
-	 */
-	@Override
-	public void onHover(Object context, ChartNativeEvent event, LegendItem item) {
-		getChart().fireEvent(new LegendHoverEvent(event, item));
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.events.LegendClickCallbackHandler#onClick(java.lang.Object, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.items.LegendItem)
-	 */
-	@Override
-	public void onClick(Object context, ChartNativeEvent event, LegendItem item) {
-		getChart().fireEvent(new LegendClickEvent(event, item));
-	}	
-
 }

@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
-import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel;
 
 /**
@@ -25,13 +26,27 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel, NativeScaleLabel> {
+public class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> implements IsDefaultScaleLabel{
 	
 	private final ScaleLabelPadding padding;
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		// sub elements
+		padding,
+		// properties
+		display,
+		labelString,
+		lineHeight
+	}
 
-	ScaleLabel(Scale scale, IsDefaultScaleLabel defaultValues, NativeScaleLabel delegated) {
-		super(scale, defaultValues, delegated == null ? new NativeScaleLabel() : delegated);
-		padding = new ScaleLabelPadding(this, getDefaultValues().getPadding(), getDelegated().getPadding());
+
+	ScaleLabel(Scale scale, Key childKey, IsDefaultScaleLabel defaultValues, NativeObject delegated) {
+		super(scale, childKey, defaultValues, delegated);
+		padding = new ScaleLabelPadding(this, Property.padding, getDefaultValues().getPadding(), getValue(Property.padding));
 	}
 	
 	/**
@@ -47,7 +62,7 @@ public class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel, NativeScale
 	 * @param display if true, display the axis title.
 	 */
 	public void setDisplay(boolean display) {
-		getDelegated().setDisplay(display);
+		setValue(Property.display, display);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -58,7 +73,7 @@ public class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel, NativeScale
 	 * @return f true, display the axis title. Default is false
 	 */
 	public boolean isDisplay() {
-		return Checker.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
+		return getValue(Property.display, getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -67,7 +82,7 @@ public class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel, NativeScale
 	 * @param labelString The text for the scale string.
 	 */
 	public void setLabelString(String labelString) {
-		getDelegated().setLabelString(labelString);
+		setValue(Property.labelString, labelString);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -78,7 +93,7 @@ public class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel, NativeScale
 	 * @return The text for the scale string. Default is "".
 	 */
 	public String getLabelString() {
-		return Checker.check(getDelegated().getLabelString(), getDefaultValues().getLabelString());
+		return getValue(Property.labelString, getDefaultValues().getLabelString());
 	}
 
 	/**
@@ -87,7 +102,7 @@ public class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel, NativeScale
 	 * @param lineHeight Height of an individual line of text.
 	 */
 	public void setLineHeight(double lineHeight) {
-		getDelegated().setLineHeight(lineHeight);
+		setValue(Property.lineHeight, lineHeight);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -98,16 +113,6 @@ public class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel, NativeScale
 	 * @return the height of an individual line of text. Default is 1.2
 	 */
 	public double getLineHeight() {
-		return Checker.check(getDelegated().getLineHeight(), getDefaultValues().getLineHeight());
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getScaleLabel() == null) {
-			getParent().getDelegated().setScaleLabel(getDelegated());
-		}
+		return getValue(Property.lineHeight, getDefaultValues().getLineHeight());
 	}
 }

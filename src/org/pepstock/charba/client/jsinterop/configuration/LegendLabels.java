@@ -16,16 +16,18 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
-import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.callbacks.LegendFilterCallback;
 import org.pepstock.charba.client.jsinterop.callbacks.LegendLabelsCallback;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.LegendFilterHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.LegendLabelsHandler;
+import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
+import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.items.LegendItem;
 import org.pepstock.charba.client.jsinterop.items.LegendLabelItem;
-import org.pepstock.charba.client.jsinterop.options.EventableOptions;
+import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
+
+import jsinterop.annotations.JsFunction;
 
 /**
  * This is the labels configuration of the legend.
@@ -33,80 +35,88 @@ import org.pepstock.charba.client.jsinterop.options.EventableOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LegendLabels extends ConfigurationContainer<EventableOptions> implements LegendFilterHandler, LegendLabelsHandler{
+public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
+	
+	/**
+	 * Called to generate legend items for each thing in the legend. Default implementation returns the text + styling for the color box.
+	 * 
+	 * @return array of legend items.
+	 */
+	@JsFunction
+	interface ProxyGenerateLabelsCallback {
+		LegendLabelItem[] call(Object context, Object chart);
+	}
+
+	/**
+	 * Called to filter legend items out of the legend. Receives 1 parameter, a Legend Item.
+	 * 
+	 * @param item legend item to check.
+	 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
+	 */
+	@JsFunction
+	interface ProxyFilterCallback {
+		boolean call(Object context, LegendItem item);
+	}
+	
+	private final CallbackProxy<ProxyGenerateLabelsCallback> labelsCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyFilterCallback> filterCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private LegendFilterCallback filterCallback = null;
+	
+	private LegendLabelsCallback labelsCallback = null;
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	enum Property implements Key
+	{
+		// CALLBACKS
+		generateLabels,
+		filter
+	}
 
 	/**
 	 * Builds the object storing the chart instance.
 	 * 
 	 * @param chart chart instance
 	 */
-	LegendLabels(AbstractChart<?, ?> chart, EventableOptions options) {
+	LegendLabels(AbstractChart<?, ?> chart, ExtendedOptions options) {
 		super(chart, options);
-		if (hasGlobalFilterCallback()) {
-			getConfiguration().setLegendFilterHandler(this);
-		}
-		if (hasGlobalLabelsCallback()) {
-			getConfiguration().setLegendLabelsHandler(this);
-		}
+		filterCallbackProxy.setCallback(new ProxyFilterCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.LegendLabels.ProxyFilterCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.LegendItem)
+			 */
+			@Override
+			public boolean call(Object context, LegendItem item) {
+				// checks if callback is consistent
+				if (filterCallback != null) {
+					// calls callback
+					return filterCallback.onFilter(getChart(), item);
+				}
+				return true;
+			}
+			
+		});
 		
-	}
-	
-	// --------------
-	// LABELS
-	// ---------------
-	private boolean hasGlobalLabelsCallback() {
-		return Defaults.getGlobal().getLegend().getLabels().getLabelsCallback() != null ||
-		       Defaults.chart(getChart()).getLegend().getLabels().getLabelsCallback() != null;  
-	}
+		labelsCallbackProxy.setCallback(new ProxyGenerateLabelsCallback() {
 
-	/**
-	 * @return the legendCallBack
-	 */
-	public LegendLabelsCallback getLabelsCallback() {
-		return getConfiguration().getLegend().getLabels().getLabelsCallback();
-	}
-
-	/**
-	 * @param legendLabelsCallBack the legendCallBack to set
-	 */
-	public void setLabelsCallback(LegendLabelsCallback labelsCallback) {
-		getConfiguration().getLegend().getLabels().setLabelsCallback(labelsCallback);
-		if (!hasGlobalLabelsCallback()) {
-			if (labelsCallback == null) {
-				getConfiguration().setLegendLabelsHandler(null);
-			} else {
-				getConfiguration().setLegendLabelsHandler(this);
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.LegendLabels.ProxyGenerateLabelsCallback#call(java.lang.Object, java.lang.Object)
+			 */
+			@Override
+			public LegendLabelItem[] call(Object context, Object chart) {
+				LegendLabelItem[] result = null;
+				// checks if callback is consistent
+				if (labelsCallback != null) {
+					// calls callback
+					result = labelsCallback.generateLegendLabels(getChart());
+				}
+				return result != null ? result : new LegendLabelItem[0];
 			}
-		}
-	}
-
-	// --------------
-	// FILTER
-	// ---------------
-	private boolean hasGlobalFilterCallback() {
-		return Defaults.getGlobal().getLegend().getLabels().getFilterCallback() != null ||
-		       Defaults.chart(getChart()).getLegend().getLabels().getFilterCallback() != null;  
-	}
-
-	/**
-	 * @return the legendFilterHandler
-	 */
-	public LegendFilterCallback getFilterCallback() {
-		return getConfiguration().getLegend().getLabels().getFilterCallback();
-	}
-
-	/**
-	 * @param filterHandler the legendFilterHandler to set
-	 */
-	public void setLegendFilterCallback(LegendFilterCallback filterCallback) {
-		getConfiguration().getLegend().getLabels().setFilterCallback(filterCallback);
-		if (!hasGlobalFilterCallback()) {
-			if (filterCallback == null) {
-				getConfiguration().setLegendFilterHandler(null);
-			} else {
-				getConfiguration().setLegendFilterHandler(this);
-			}
-		}
+			
+		});
 	}
 	
 	/**
@@ -253,62 +263,47 @@ public final class LegendLabels extends ConfigurationContainer<EventableOptions>
 	 */
 	public int getPadding() {
 		return getConfiguration().getLegend().getLabels().getPadding();
-		
 	}
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.LegendFilterHandler#onFilter(org.pepstock.charba.client.jsinterop.items.LegendItem)
+
+	// --------------
+	// callbacks
+	// ---------------
+
+	/**
+	 * @return the filterCallback
 	 */
-	@Override
-	public boolean onFilter(LegendItem item) {
-		// checks if callback is consistent
-		if (getFilterCallback() != null) {
-			// calls callback
-			return getFilterCallback().onFilter(getChart(), item);
-		} else if (Defaults.chart(getChart()).getLegend().getLabels().getFilterCallback() != null) {
-			// calls callback
-			return Defaults.chart(getChart()).getLegend().getLabels().getFilterCallback().onFilter(getChart(), item);
-		} else if (Defaults.getGlobal().getLegend().getLabels().getFilterCallback() != null) {
-			// calls callback
-			return Defaults.getGlobal().getLegend().getLabels().getFilterCallback().onFilter(getChart(), item);
-		}
-		return true;
+	public LegendFilterCallback getFilterCallback() {
+		return filterCallback;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.LegendLabelsHandler#generateLegendLabels()
+	/**
+	 * @param filterCallback the filterCallback to set
 	 */
-	@Override
-	public LegendLabelItem[] generateLegendLabels() {
-		LegendLabelItem[] result = null;
-		// checks if callback is consistent
-		if (getLabelsCallback() != null) {
-			// calls callback
-			result = getLabelsCallback().generateLegendLabels(getChart());
-		} else if (Defaults.chart(getChart()).getLegend().getLabels().getLabelsCallback() != null) {
-			// calls callback
-			result = Defaults.chart(getChart()).getLegend().getLabels().getLabelsCallback().generateLegendLabels(getChart());
-		} else if (Defaults.getGlobal().getLegend().getLabels().getLabelsCallback() != null) {
-			// calls callback
-			result = Defaults.getGlobal().getLegend().getLabels().getLabelsCallback().generateLegendLabels(getChart());
+	public void setFilterCallback(LegendFilterCallback filterCallback) {
+		this.filterCallback = filterCallback;
+		if (filterCallback != null) {
+			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.filter, filterCallbackProxy.getProxy());
+		} else {
+			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.filter, null);
 		}
-		return result != null ? result : new LegendLabelItem[0];
 	}
-//		//FIXME
-//    	var self = this;
-//	    options.generateLabels = function(chart){
-//	    	// calls the default generateLabels function
-//	    	// to get the default.
-//	    	var labels = $wnd.Chart.defaults.global.legend.labels.generateLabels(chart);
-//	        var newLabels = self.@org.pepstock.charba.client.options.LegendLabels::generateLegendLabels()();
-//	        // checke if array is empty
-//	        // if empty, returns the default labels.
-//	        if (newLabels.length == 0){
-//	        	return labels;
-//	        } else {
-//	        	return newLabels;
-//	        }
-//	    }
 
-//	};
+	/**
+	 * @return the labelsCallback
+	 */
+	public LegendLabelsCallback getLabelsCallback() {
+		return labelsCallback;
+	}
 
+	/**
+	 * @param labelsCallback the labelsCallback to set
+	 */
+	public void setLabelsCallback(LegendLabelsCallback labelsCallback) {
+		this.labelsCallback = labelsCallback;
+		if (labelsCallback != null) {
+			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.generateLabels, labelsCallbackProxy.getProxy());
+		} else {
+			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.generateLabels, null);
+		}
+	}
 }

@@ -1,5 +1,7 @@
 package org.pepstock.charba.client.jsinterop.utils;
 
+import org.pepstock.charba.client.jsinterop.commons.NativeName;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -7,7 +9,7 @@ import jsinterop.annotations.JsType;
 /**
  * The window object represents an open window in a browser.
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "window")
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.WINDOW)
 public class Window {
 
     /**

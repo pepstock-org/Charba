@@ -17,7 +17,6 @@ package org.pepstock.charba.client.jsinterop.commons;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
@@ -30,7 +29,7 @@ import jsinterop.annotations.JsType;
  * @param <T> extension of native objects, import a type from an external script
  */
 @JsType(isNative = true, name = NativeName.ARRAY, namespace = JsPackage.GLOBAL)
-public final class ArrayObject<T extends NativeObject> {
+public final class ArrayObject<T extends NativeObject> extends Array{
 	
 	/**
 	 * This method creates new array instance with a variable number of <code>objects</code> arguments.
@@ -59,13 +58,6 @@ public final class ArrayObject<T extends NativeObject> {
 		// returns the array
 		return result;
 	}
-
-	/**
-	 * Returns the number of elements in this array.
-	 * @return the number of elements in this array.
-	 */
-	@JsProperty(name = "length")
-	public native int length();
 
 	/**
 	 * Returns the index of the last occurrence of the specified element in this array, or -1 if this array does not contain

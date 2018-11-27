@@ -15,6 +15,11 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults;
 
+import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.enums.ScaleBounds;
+import org.pepstock.charba.client.enums.ScaleDistribution;
+
 public interface IsDefaultScale {
 
 	/**
@@ -69,7 +74,7 @@ public interface IsDefaultScale {
 	 * @return the type of axis. If not set, the default is {@link org.pepstock.charba.client.enums.AxisType#linear}.
 	 * @see org.pepstock.charba.client.enums.AxisType
 	 */
-	String getType();
+	AxisType getType();
 
 	/**
 	 * The weight used to sort the axis. Higher weights are further away from the chart area.
@@ -98,7 +103,7 @@ public interface IsDefaultScale {
 	 * @return position of axis. Default is {@link org.pepstock.charba.client.enums.Position#top}.
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
-	String getPosition();
+	Position getPosition();
 
 	/**
 	 * Returns the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
@@ -138,13 +143,13 @@ public interface IsDefaultScale {
 	 * 
 	 * @return property controls the data distribution along the scale.
 	 */
-	String getDistribution();
+	ScaleDistribution getDistribution();
 
 	/**
 	 * Returns the property controls the scale boundary strategy (bypassed by min/max time options).
 	 * 
 	 * @return property controls the scale boundary strategy (bypassed by min/max time options).
 	 */
-	String getBounds();
+	ScaleBounds getBounds();
 
 }

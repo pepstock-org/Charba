@@ -17,12 +17,13 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import java.util.List;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.jsinterop.commons.Array;
+import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.Enumer;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.commons.ObjectType;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle;
 
 /**
@@ -32,10 +33,24 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitle> {
+public class Title extends FontItem<Options, IsDefaultTitle> implements IsDefaultTitle{
 
-	Title(BaseOptions<?,?> options, IsDefaultTitle defaultValues, NativeTitle delegated) {
-		super(options, defaultValues, delegated == null ? new NativeTitle() : delegated);
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	enum Property implements Key
+	{
+		display,
+		fontStyle,
+		position,
+		padding,
+		fullWidth,
+		lineHeight,
+		text
+	}
+	
+	Title(Options options, Key childKey, IsDefaultTitle defaultValues, NativeObject nativeObject) {
+		super(options, childKey, defaultValues, nativeObject);
 	}
 	
 	/**
@@ -44,7 +59,7 @@ public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitl
 	 * @param display if the title is shown.
 	 */
 	public void setDisplay(boolean display) {
-		getDelegated().setDisplay(display);
+		setValue(Property.display, display);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -55,7 +70,7 @@ public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitl
 	 * @return if the title is shown. Default is true.
 	 */
 	public boolean isDisplay() {
-		return Checker.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
+		return getValue(Property.display, getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -65,7 +80,7 @@ public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitl
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public void setPosition(Position position) {
-		getDelegated().setPosition(position.name());
+		setValue(Property.position, position);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -77,7 +92,7 @@ public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitl
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {
-		return Enumer.deserialize(getDelegated().getPosition(), getDefaultValues().getPosition(), Position.class, Position.top);
+		return getValue(Property.position, Position.class, getDefaultValues().getPosition());
 	}
 	
 	/**
@@ -86,7 +101,7 @@ public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitl
 	 * @param padding Padding to apply around labels. Only top and bottom are implemented.
 	 */
 	public void setPadding(int padding) {
-		getDelegated().setPadding(padding);
+		setValue(Property.padding, padding);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -97,7 +112,7 @@ public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitl
 	 * @return Padding to apply around labels. Only top and bottom are implemented. Default is 10.
 	 */
 	public int getPadding() {
-		return Checker.check(getDelegated().getPadding(), getDefaultValues().getPadding());
+		return getValue(Property.padding, getDefaultValues().getPadding());
 	}
 
 	/**
@@ -106,7 +121,7 @@ public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitl
 	 * @param fullWidth Marks that this box should take the full width of the canvas (pushing down other boxes)
 	 */
 	public void setFullWidth(boolean fullWidth) {
-		getDelegated().setFullWidth(fullWidth);
+		setValue(Property.fullWidth, fullWidth);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -117,7 +132,7 @@ public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitl
 	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). Default is true.
 	 */
 	public boolean isFullWidth() {
-		return Checker.check(getDelegated().isFullWidth(), getDefaultValues().isFullWidth());
+		return getValue(Property.fullWidth, getDefaultValues().isFullWidth());
 	}
 
 	/**
@@ -126,7 +141,7 @@ public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitl
 	 * @param lineHeight Height of an individual line of text.
 	 */
 	public void setLineHeight(double lineHeight) {
-		getDelegated().setLineHeight(lineHeight);
+		setValue(Property.lineHeight, lineHeight);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -137,7 +152,7 @@ public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitl
 	 * @return the height of an individual line of text. Default is 1.2
 	 */
 	public double getLineHeight() {
-		return Checker.check(getDelegated().getLineHeight(), getDefaultValues().getLineHeight());
+		return getValue(Property.lineHeight, getDefaultValues().getLineHeight());
 	}
 	
 	/**
@@ -148,9 +163,9 @@ public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitl
 	public void setText(String... text) {
 		if (text != null) {
 			if (text.length > 1) {
-				getDelegated().setText(ArrayString.of(text));
+				setArrayValue(Property.text, ArrayString.of(text));
 			} else {
-				getDelegated().setText(text[0]);
+				setValue(Property.text, text[0]);
 			}
 			// checks if the node is already added to parent
 			checkAndAddToParent();
@@ -163,24 +178,13 @@ public class Title extends FontItem<BaseOptions<?,?>, IsDefaultTitle, NativeTitl
 	 * @return a list of strings
 	 */
 	public List<String> getText() {
-		Object value = getDelegated().getText();
-		if (Array.isArray(value)) {
-			return ArrayListHelper.list((ArrayString)value);
-		} else if (value != null ){
-			return ArrayListHelper.list(ArrayString.of(value.toString()));
+		ObjectType type = type(Property.text);
+		if (ObjectType.Array.equals(type)) {
+			ArrayString array = getArrayValue(Property.text);
+			return ArrayListHelper.list(array);
+		} else if (has(Property.text)){
+			return ArrayListHelper.list(ArrayString.of(getValue(Property.text, UndefinedValues.STRING)));
 		}
 		return null;
 	}
-
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getTitle() == null) {
-			getParent().getDelegated().setTitle(getDelegated());
-		}
-	}
-
 }

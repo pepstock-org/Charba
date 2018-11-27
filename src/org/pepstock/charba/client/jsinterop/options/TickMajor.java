@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
 
 /**
@@ -24,20 +26,11 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TickMajor extends BaseTick<Ticks, IsDefaultFontItem, NativeTickItem> {
+public final class TickMajor extends AbstractTick<Ticks, IsDefaultFontItem> {
 
-	TickMajor(Ticks ticks, IsDefaultFontItem defaultValues, NativeTickItem delegated) {
-		super(ticks, defaultValues, delegated == null ? new NativeTickItem() : delegated);
+	TickMajor(Ticks ticks, Key childKey, IsDefaultFontItem defaultValues, NativeObject nativeObject) {
+		super(ticks, childKey, defaultValues, nativeObject);
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getMajor() == null) {
-			getParent().getDelegated().setMajor(getDelegated());
-		}
-	}
 
 }

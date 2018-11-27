@@ -78,6 +78,8 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	@JsOverlay
 	public Map<String, Integer> getData() {
 		// creates result
-		return getNativeData().getObjectAsMap();
+		// FIXME
+//		return getNativeData().getObjectAsMap();
+		return null;
 	}
 }

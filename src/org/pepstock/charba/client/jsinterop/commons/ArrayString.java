@@ -22,7 +22,6 @@ import org.pepstock.charba.client.commons.Key;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
@@ -33,7 +32,7 @@ import jsinterop.annotations.JsType;
  * @since 2.0
  */
 @JsType(isNative = true, name = NativeName.ARRAY, namespace = JsPackage.GLOBAL)
-public final class ArrayString {
+public final class ArrayString extends Array{
 
 	/**
 	 * This method creates new array instance with a variable number of <code>string</code> arguments.
@@ -106,12 +105,6 @@ public final class ArrayString {
 		return result;
 	}
 	
-	/**
-	 * Returns the number of elements in this array.
-	 * @return the number of elements in this array.
-	 */
-	@JsProperty(name = "length")
-	public native int length();
 
 	/**
 	 * Returns the index of the last occurrence of the specified element in this array, or -1 if this array does not contain

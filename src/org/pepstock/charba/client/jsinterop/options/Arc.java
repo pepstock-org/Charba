@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc;
 
 /**
@@ -28,20 +30,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public class Arc extends AbstractElement<Elements, IsDefaultArc, NativeArc>{
+public class Arc extends AbstractElement<Elements, IsDefaultArc> implements IsDefaultArc{
 
-	Arc(Elements elements, IsDefaultArc defaultValues,NativeArc delegated) {
-		super(elements, defaultValues, delegated == null ? new NativeArc(): delegated);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getArc() == null) {
-			getParent().getDelegated().setArc(getDelegated());
-		}
+	Arc(Elements elements, Key childKey, IsDefaultArc defaultValues, NativeObject nativeObject) {
+		super(elements, childKey, defaultValues, nativeObject == null ? new NativeObject(): nativeObject);
 	}
 
 }

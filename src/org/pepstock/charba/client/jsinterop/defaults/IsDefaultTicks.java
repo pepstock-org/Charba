@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults;
 
+import org.pepstock.charba.client.enums.TickSource;
+
 /**
  * All configuration for ticks of a chart.
  * 
@@ -163,7 +165,7 @@ public interface IsDefaultTicks extends IsDefaultFontItem {
 	 * 
 	 * @return color of label backdrops. Default is 'rgba(255, 255, 255, 0.75)'
 	 */
-	String getBackdropColor();
+	String getBackdropColorAsString();
 
 	/**
 	 * Returns the horizontal padding of label backdrop.
@@ -191,5 +193,5 @@ public interface IsDefaultTicks extends IsDefaultFontItem {
 	 * 
 	 * @return property controls the ticks generation.
 	 */
-	String getSource();
+	TickSource getSource();
 }

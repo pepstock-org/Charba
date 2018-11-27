@@ -19,7 +19,7 @@ package org.pepstock.charba.client.jsinterop.commons;
  * Constants with java script object name to use into {@link jsinterop.annotations.JsType} native objects.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class NativeName {
 	
@@ -42,6 +42,11 @@ public final class NativeName {
 	 * Constant to bind java script object as Chart (internal of CHART.JS)
 	 */
 	public static final String CHART = "Chart";
+
+	/**
+	 * Constant to bind java script object as window
+	 */
+	public static final String WINDOW = "window";
 
 	/**
 	 * To avoid any instantiation

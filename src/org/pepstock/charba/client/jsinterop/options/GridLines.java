@@ -19,13 +19,14 @@ import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.jsinterop.commons.Array;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.commons.ArrayIntegerList;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.ArrayStringList;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.commons.ObjectType;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines;
 
 /**
@@ -34,10 +35,31 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, NativeGridLines> {
+public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> implements IsDefaultGridLines {
 
-	GridLines(Scale scale, IsDefaultGridLines defaultValues, NativeGridLines delegated) {
-		super(scale, defaultValues, delegated == null ? new NativeGridLines(): delegated);
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		display,
+		color,
+		borderDash,
+		borderDashOffset,
+		lineWidth,
+		drawBorder,
+		drawOnChartArea,
+		drawTicks,
+		tickMarkLength,
+		zeroLineWidth,
+		zeroLineColor,
+		zeroLineBorderDash,
+		zeroLineBorderDashOffset,
+		offsetGridLines
+	}
+	
+	GridLines(Scale scale, Key childKey, IsDefaultGridLines defaultValues, NativeObject nativeObject) {
+		super(scale, childKey, defaultValues, nativeObject);
 	}
 
 	/**
@@ -46,7 +68,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @param display If false, do not display grid lines for this axis.
 	 */
 	public void setDisplay(boolean display) {
-		getDelegated().setDisplay(display);
+		setValue(Property.display, display);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -57,7 +79,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return If false, do not display grid lines for this axis. Default is true.
 	 */
 	public boolean isDisplay() {
-		return Checker.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
+		return getValue(Property.display, getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -91,12 +113,26 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 */
 	private void setColor(ArrayString color) {
 		if (color.length() == 1) {
-			getDelegated().setColor(color.get(0));
+			setValue(Property.color, color.get(0));
 		} else {
-			getDelegated().setColor(color);
+			setArrayValue(Property.color, color);
 		}
 		// checks if all parents are attached
 		checkAndAddToParent();
+	}
+	
+	/**
+	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
+	 * second grid line and so on.
+	 * 
+	 * @return the list of colors of the grid lines. If not set, default is only 1 value 'rgba(0, 0, 0, 0.1)'
+	 */
+	public String getColorAsString() {
+		if (ObjectType.String.equals(type(Property.color)) || !has(Property.color)) {
+			return getValue(Property.color, getDefaultValues().getColorAsString());
+		} else{
+			return getDefaultValues().getColorAsString();
+		}
 	}
 
 	/**
@@ -105,21 +141,15 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * 
 	 * @return the list of colors of the grid lines. If not set, default is only 1 value 'rgba(0, 0, 0, 0.1)'
 	 */
-	public List<String> getColorAsString() {
+	public List<String> getColorsAsString() {
 		ArrayStringList result = null;
 		// loads stored data
-		Object values = getDelegated().getColor();
-		if (Array.isArray(values)) {
-			ArrayString array = (ArrayString)values;
-			if (array.length() == 0) {
-				result = new ArrayStringList();
-				result.add(getDefaultValues().getColor());
-			} else {
-				result = ArrayListHelper.list(array);
-			}
-		} else {
+		if (ObjectType.String.equals(type(Property.color)) || !has(Property.color)) {
 			result = new ArrayStringList();
-			result.add(Checker.check(values, getDefaultValues().getColor()));
+			result.add(getValue(Property.color, getDefaultValues().getColorAsString()));
+		} else if (ObjectType.Array.equals(type(Property.color))) {
+			ArrayString array = getArrayValue(Property.color);
+			result = ArrayListHelper.list(array);
 		}
 		return result;
 	}
@@ -131,7 +161,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return the list of colors of the grid lines. If not set, default is only 1 value 'rgba(0, 0, 0, 0.1)'
 	 */
 	public List<IsColor> getColor() {
-		return ColorBuilder.parse(getColorAsString());
+		return ColorBuilder.parse(getColorsAsString());
 	}
 
 	/**
@@ -151,7 +181,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @param borderDash the line dash pattern used when stroking lines
 	 */
 	private void setBorderDash(ArrayInteger borderDash) {
-		getDelegated().setBorderDash(borderDash);
+		setArrayValue(Property.borderDash, borderDash);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -163,7 +193,8 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return the line dash pattern used when stroking lines
 	 */
 	public List<Integer> getBorderDash() {
-		return ArrayListHelper.list(getDelegated().getBorderDash());
+		ArrayInteger array = getArrayValue(Property.borderDash);
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -172,7 +203,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @param borderDashOffset Offset for line dashes.
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
-		getDelegated().setBorderDashOffset(borderDashOffset);
+		setValue(Property.borderDashOffset, borderDashOffset);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -183,7 +214,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return Offset for line dashes. If not set, default is 0
 	 */
 	public int getBorderDashOffset() {
-		return Checker.check(getDelegated().getBorderDashOffset(), getDefaultValues().getBorderDashOffset());
+		return getValue(Property.borderDashOffset, getDefaultValues().getBorderDashOffset());
 	}
 
 	/**
@@ -202,34 +233,41 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 */
 	private void setLineWidth(ArrayInteger lineWidth) {
 		if (lineWidth.length() == 1) {
-			getDelegated().setLineWidth(lineWidth.get(0));
+			setValue(Property.lineWidth, lineWidth.get(0));
 		} else {
-			getDelegated().setLineWidth(lineWidth);
+			setArrayValue(Property.lineWidth, lineWidth);
 		}
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
+	/**
+	 * Returns the stroke widths of grid lines.
+	 * 
+	 * @return lineWidth stroke widths of grid lines. If not set, default is 1.
+	 */
+	public int getLineWidth() {
+		if (ObjectType.Number.equals(type(Property.lineWidth)) || !has(Property.lineWidth)) {
+			return getValue(Property.lineWidth, getDefaultValues().getLineWidth());
+		} else {
+			return getDefaultValues().getLineWidth();
+		}
+	}
+
 
 	/**
 	 * Returns the stroke widths of grid lines.
 	 * 
 	 * @return lineWidth stroke widths of grid lines. If not set, default is 1.
 	 */
-	public List<Integer> getLineWidth() {
+	public List<Integer> getLinesWidth() {
 		ArrayIntegerList result = null;
 		// loads stored data
-		Object values = getDelegated().getLineWidth();
-		if (Array.isArray(values)) {
-			ArrayInteger array = (ArrayInteger)values;
-			if (array.length() == 0) {
-				result = new ArrayIntegerList();
-				result.add(getDefaultValues().getLineWidth());
-			} else {
-				result = ArrayListHelper.list(array);
-			}
-		} else {
+		if (ObjectType.Number.equals(type(Property.lineWidth)) || !has(Property.lineWidth)) {
 			result = new ArrayIntegerList();
-			result.add(Checker.check(values, getDefaultValues().getLineWidth()));
+			result.add(getValue(Property.lineWidth, getDefaultValues().getLineWidth()));
+		} else if (ObjectType.Array.equals(type(Property.lineWidth))) {
+			ArrayInteger array = getArrayValue(Property.lineWidth);
+			result = ArrayListHelper.list(array);
 		}
 		return result;
 	}
@@ -240,7 +278,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @param drawBorder If true, draw border at the edge between the axis and the chart area.
 	 */
 	public void setDrawBorder(boolean drawBorder) {
-		getDelegated().setDrawBorder(drawBorder);
+		setValue(Property.drawBorder, drawBorder);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -251,7 +289,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return If true, draw border at the edge between the axis and the chart area. If not set, default is true
 	 */
 	public boolean isDrawBorder() {
-		return Checker.check(getDelegated().isDrawBorder(), getDefaultValues().isDrawBorder());
+		return getValue(Property.drawBorder, getDefaultValues().isDrawBorder());
 	}
 
 	/**
@@ -262,7 +300,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 *            multiple axes and you need to control which grid lines are drawn.
 	 */
 	public void setDrawOnChartArea(boolean drawOnChartArea) {
-		getDelegated().setDrawOnChartArea(drawOnChartArea);
+		setValue(Property.drawOnChartArea, drawOnChartArea);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -275,7 +313,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 *         need to control which grid lines are drawn. If not set, default is true
 	 */
 	public boolean isDrawOnChartArea() {
-		return Checker.check(getDelegated().isDrawOnChartArea(), getDefaultValues().isDrawOnChartArea());
+		return getValue(Property.drawOnChartArea, getDefaultValues().isDrawOnChartArea());
 	}
 
 	/**
@@ -284,7 +322,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @param drawTicks If true, draw lines beside the ticks in the axis area beside the chart.
 	 */
 	public void setDrawTicks(boolean drawTicks) {
-		getDelegated().setDrawTicks(drawTicks);
+		setValue(Property.drawTicks, drawTicks);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -295,7 +333,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return If true, draw lines beside the ticks in the axis area beside the chart. If not set, default is true
 	 */
 	public boolean isDrawTicks() {
-		return Checker.check(getDelegated().isDrawTicks(), getDefaultValues().isDrawTicks());
+		return getValue(Property.drawTicks, getDefaultValues().isDrawTicks());
 	}
 
 	/**
@@ -304,7 +342,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @param tickMarkLength Length in pixels that the grid lines will draw into the axis area.
 	 */
 	public void setTickMarkLength(int tickMarkLength) {
-		getDelegated().setTickMarkLength(tickMarkLength);
+		setValue(Property.tickMarkLength, tickMarkLength);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -315,7 +353,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return Length in pixels that the grid lines will draw into the axis area. If not set, default is 10
 	 */
 	public int getTickMarkLength() {
-		return Checker.check(getDelegated().getTickMarkLength(), getDefaultValues().getTickMarkLength());
+		return getValue(Property.tickMarkLength, getDefaultValues().getTickMarkLength());
 	}
 
 	/**
@@ -324,7 +362,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @param zeroLineWidth Stroke width of the grid line for the first index (index 0).
 	 */
 	public void setZeroLineWidth(int zeroLineWidth) {
-		getDelegated().setZeroLineWidth(zeroLineWidth);
+		setValue(Property.zeroLineWidth, zeroLineWidth);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -335,7 +373,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return Stroke width of the grid line for the first index (index 0). If not set, default is 1
 	 */
 	public int getZeroLineWidth() {
-		return Checker.check(getDelegated().getZeroLineWidth(), getDefaultValues().getZeroLineWidth());
+		return getValue(Property.zeroLineWidth, getDefaultValues().getZeroLineWidth());
 	}
 
 	/**
@@ -353,7 +391,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @param zeroLineColor Stroke color of the grid line for the first index (index 0).
 	 */
 	public void setZeroLineColor(String zeroLineColor) {
-		getDelegated().setZeroLineColor(zeroLineColor);
+		setValue(Property.zeroLineColor, zeroLineColor);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -364,7 +402,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return Stroke color of the grid line for the first index (index 0). If not set, default is 'rgba(0, 0, 0, 0.25)'
 	 */
 	public String getZeroLineColorAsString() {
-		return Checker.check(getDelegated().getZeroLineColor(), getDefaultValues().getZeroLineColor());
+		return getValue(Property.zeroLineColor, getDefaultValues().getZeroLineColorAsString());
 	}
 
 	/**
@@ -391,7 +429,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @param zeroLineBorderDash length and spacing of dashes of the grid line for the first index (index 0).
 	 */
 	private void setZeroLineBorderDash(ArrayInteger zeroLineBorderDash) {
-		getDelegated().setZeroLineBorderDash(zeroLineBorderDash);
+		setArrayValue(Property.zeroLineBorderDash, zeroLineBorderDash);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -402,7 +440,8 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return the length and spacing of dashes of the grid line for the first index (index 0).
 	 */
 	public List<Integer> getZeroLineBorderDash() {
-		return ArrayListHelper.list(getDelegated().getZeroLineBorderDash());
+		ArrayInteger array = getArrayValue(Property.zeroLineBorderDash);
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -411,7 +450,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @param zeroLineBorderDashOffset the offset for line dashes of the grid line for the first index (index 0).
 	 */
 	public void setZeroLineBorderDashOffset(int zeroLineBorderDashOffset) {
-		getDelegated().setZeroLineBorderDashOffset(zeroLineBorderDashOffset);
+		setValue(Property.zeroLineBorderDashOffset, zeroLineBorderDashOffset);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -422,7 +461,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return the offset for line dashes of the grid line for the first index (index 0). if not set, default is 0
 	 */
 	public int getZeroLineBorderDashOffset() {
-		return Checker.check(getDelegated().getZeroLineBorderDashOffset(), getDefaultValues().getZeroLineBorderDashOffset());
+		return getValue(Property.zeroLineBorderDashOffset, getDefaultValues().getZeroLineBorderDashOffset());
 	}
 
 	/**
@@ -431,7 +470,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @param offsetGridLines If true, grid lines will be shifted to be between labels.
 	 */
 	public void setOffsetGridLines(boolean offsetGridLines) {
-		getDelegated().setOffsetGridLines(offsetGridLines);
+		setValue(Property.offsetGridLines, offsetGridLines);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -442,17 +481,7 @@ public final class GridLines extends BaseModel<Scale, IsDefaultGridLines, Native
 	 * @return If true, grid lines will be shifted to be between labels. If not set, default is false.
 	 */
 	public boolean isOffsetGridLines() {
-		return Checker.check(getDelegated().isOffsetGridLines(), getDefaultValues().isOffsetGridLines());
+		return getValue(Property.offsetGridLines, getDefaultValues().isOffsetGridLines());
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getGridLines() == null) {
-			getParent().getDelegated().setGridLines(getDelegated());
-		}
-	}
-
 }

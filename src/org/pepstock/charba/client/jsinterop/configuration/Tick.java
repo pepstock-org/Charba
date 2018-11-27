@@ -25,7 +25,7 @@ import org.pepstock.charba.client.jsinterop.options.Ticks;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class Tick extends AbstractTick<Ticks> {
+abstract class Tick extends BaseTick<Ticks> {
 	
 	private final BaseTickMinor minor;
 
@@ -53,14 +53,14 @@ abstract class Tick extends AbstractTick<Ticks> {
 	/**
 	 * @return the minor
 	 */
-	public AbstractTick<TickMinor> getMinor() {
+	public BaseTick<TickMinor> getMinor() {
 		return minor;
 	}
 
 	/**
 	 * @return the major
 	 */
-	public AbstractTick<TickMajor> getMajor() {
+	public BaseTick<TickMajor> getMajor() {
 		return major;
 	}
 

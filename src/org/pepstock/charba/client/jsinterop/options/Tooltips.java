@@ -22,21 +22,8 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TooltipPosition;
-import org.pepstock.charba.client.jsinterop.callbacks.TooltipCustomCallback;
-import org.pepstock.charba.client.jsinterop.callbacks.TooltipFilterCallback;
-import org.pepstock.charba.client.jsinterop.callbacks.TooltipItemSortCallback;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipCustomHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipFilterHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipItemSortHandler;
-import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.Enumer;
-import org.pepstock.charba.client.jsinterop.commons.JsHelper;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
-import org.pepstock.charba.client.jsinterop.items.TooltipItem;
-import org.pepstock.charba.client.jsinterop.items.TooltipModel;
-
-import jsinterop.annotations.JsFunction;
 
 /**
  * Configuration element to set all attributes and features of the default tooltip.
@@ -44,125 +31,57 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltips, NativeTooltips> {
+public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> implements IsDefaultTooltips{
 	
-	/**
-	 * Custom tooltips allow you to hook into the tooltip rendering process so that you can render the tooltip in your own
-	 * custom way.
-	 * 
-	 * @param chart chart instance
-	 * @param model all info about tooltip to create own HTML tooltip.
-	 */
-	@JsFunction
-	interface ProxyCustomCallback {
-		void call(Object context, TooltipModel model);
-	}
-	
-	/**
-	 * Called to filter tooltip items. Receives 1 parameter, a tooltip Item.
-	 * 
-	 * @param item tooltip item to check.
-	 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
-	 */
-	@JsFunction
-	interface ProxyFilterCallback {
-		boolean call(Object context, TooltipItem item);
-	}
-	
-	/**
-	 * Allows sorting of tooltip items.
-	 * 
-	 * @param chart chart instance
-	 * @param item1 the first object to be compared.
-	 * @param item2 the second object to be compared.
-	 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the
-	 *         second.
-	 *FIXME la chiamata JS passa anche un oggetto DATA        
-	 */
-	@JsFunction
-	interface ProxyItemSortCallback {
-		int call(Object context, TooltipItem item1, TooltipItem item2);
-	}
+	private final TooltipsCallbacks callbacks;
 	
 	/**
 	 * Name of fields of JavaScript object.
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
-		custom,
-		itemSort,
-		filter
+		// sub elements
+		callbacks,
+		// properties
+		enabled,
+		mode,
+		intersect,
+		position,
+		backgroundColor,
+		titleFontFamily,
+		titleFontSize,
+		titleFontStyle,
+		titleFontColor,
+		titleSpacing,
+		titleMarginBottom,
+		titleAlign,
+		bodyFontFamily,
+		bodyFontSize,
+		bodyFontStyle,
+		bodyFontColor,
+		bodySpacing,
+		bodyAlign,
+		footerFontFamily,
+		footerFontSize,
+		footerFontStyle,
+		footerFontColor,
+		footerSpacing,
+		footerMarginTop,
+		footerAlign,
+		xPadding,
+		yPadding,
+		caretPadding,
+		caretSize,
+		cornerRadius,
+		multiKeyBackground,
+		displayColors,
+		borderColor,
+		borderWidth,
 	}
 	
-	private final CallbackProxy<ProxyCustomCallback> customCallbackProxy = JsHelper.newCallbackProxy();
-	
-	private final CallbackProxy<ProxyItemSortCallback> itemSortCallbackProxy = JsHelper.newCallbackProxy();
-	
-	private final CallbackProxy<ProxyFilterCallback> filterCallbackProxy = JsHelper.newCallbackProxy();
-	
-	private TooltipCustomCallback customCallback = null;
-
-	private TooltipCustomHandler customHandler = null;
-
-	private TooltipItemSortCallback itemSortCallback = null;
-
-	private TooltipItemSortHandler itemSortHandler = null;
-
-	private TooltipFilterCallback filterCallback = null;
-
-	private TooltipFilterHandler filterHandler = null;
-	
-	private final TooltipsCallbacks callbacks;
-
-	Tooltips(BaseOptions<?,?> options, IsDefaultTooltips defaultValues, NativeTooltips delegated) {
-		super(options, defaultValues, delegated == null ? new NativeTooltips() : delegated);
-		
-		customCallbackProxy.setCallback(new ProxyCustomCallback() {
-
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.Tooltips.ProxyCustomCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipModel)
-			 */
-			@Override
-			public void call(Object context, TooltipModel model) {
-				if (customHandler != null) {
-					customHandler.onCustom(model);
-				}
-			}
-	
-		});
-		
-		itemSortCallbackProxy.setCallback(new ProxyItemSortCallback() {
-
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.Tooltips.ProxyItemSortCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem, org.pepstock.charba.client.jsinterop.items.TooltipItem)
-			 */
-			@Override
-			public int call(Object context, TooltipItem item1, TooltipItem item2) {
-				if (itemSortHandler != null) {
-					return itemSortHandler.onItemSort(item1, item2);
-				}
-				// default is 0 - equals
-				return 0;
-			}
-			
-		});
-		
-		filterCallbackProxy.setCallback(new ProxyFilterCallback() {
-
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.Tooltips.ProxyFilterCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
-			 */
-			@Override
-			public boolean call(Object context, TooltipItem item) {
-				if (filterHandler != null) {
-					filterHandler.onFilter(item);
-				}
-				// default is true
-				return true;
-			}
-			
-		});
-		this.callbacks = new TooltipsCallbacks(this, defaultValues, getDelegated().getCallbacks());
+	Tooltips(Options options, Key childKey, IsDefaultTooltips defaultValues, NativeObject nativeObject) {
+		super(options, childKey, defaultValues, nativeObject);
+		this.callbacks = new TooltipsCallbacks(this, Property.callbacks, defaultValues, getValue(Property.callbacks));
 	}
 
 	/**
@@ -178,7 +97,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param enabled if tooltips are enabled.
 	 */
 	public void setEnabled(boolean enabled) {
-		getDelegated().setEnabled(enabled);
+		setValue(Property.enabled, enabled);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -189,7 +108,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return if tooltips are enabled.. Default is true.
 	 */
 	public boolean isEnabled() {
-		return Checker.check(getDelegated().isEnabled(), getDefaultValues().isEnabled());
+		return getValue(Property.enabled, getDefaultValues().isEnabled());
 	}
 
 	/**
@@ -199,7 +118,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
 	public void setMode(InteractionMode mode) {
-		getDelegated().setMode(mode.name());
+		setValue(Property.mode, mode);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -212,7 +131,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
 	public InteractionMode getMode() {
-		return Enumer.deserialize(getDelegated().getMode(), getDefaultValues().getMode(), InteractionMode.class, InteractionMode.nearest);
+		return getValue(Property.mode, InteractionMode.class, getDefaultValues().getMode());
 	}
 
 	/**
@@ -223,7 +142,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 *            mode will be applied at all times.
 	 */
 	public void setIntersect(boolean intersect) {
-		getDelegated().setIntersect(intersect);;
+		setValue(Property.intersect, intersect);;
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -236,7 +155,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 *         will be applied at all times. Default is true.
 	 */
 	public boolean isIntersect() {
-		return Checker.check(getDelegated().isIntersect(), getDefaultValues().isIntersect());
+		return getValue(Property.intersect, getDefaultValues().isIntersect());
 	}
 
 	/**
@@ -246,7 +165,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.TooltipPosition
 	 */
 	public void setPosition(TooltipPosition position) {
-		getDelegated().setPosition(position.name());
+		setValue(Property.position, position);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -258,7 +177,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.TooltipPosition
 	 */
 	public TooltipPosition getPosition() {
-		return Enumer.deserialize(getDelegated().getPosition(), getDefaultValues().getPosition(), TooltipPosition.class, TooltipPosition.average);
+		return getValue(Property.position, TooltipPosition.class, getDefaultValues().getPosition());
 	}
 
 	/**
@@ -276,7 +195,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param backgroundColor background color of the tooltip.
 	 */
 	public void setBackgroundColor(String backgroundColor) {
-		getDelegated().setBackgroundColor(backgroundColor);
+		setValue(Property.backgroundColor, backgroundColor);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -287,7 +206,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return Background color of the tooltip. Default is "rgba(0,0,0,0.8)".
 	 */
 	public String getBackgroundColorAsString() {
-		return Checker.check(getDelegated().getBackgroundColor(), getDefaultValues().getBackgroundColor());
+		return getValue(Property.backgroundColor, getDefaultValues().getBackgroundColorAsString());
 	}
 
 	/**
@@ -305,7 +224,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param titleFontFamily title font.
 	 */
 	public void setTitleFontFamily(String titleFontFamily) {
-		getDelegated().setTitleFontFamily(titleFontFamily);
+		setValue(Property.titleFontFamily, titleFontFamily);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -316,7 +235,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return the title font. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
 	 */
 	public String getTitleFontFamily() {
-		return Checker.check(getDelegated().getTitleFontFamily(), getDefaultValues().getTitleFontFamily());
+		return getValue(Property.titleFontFamily, getDefaultValues().getTitleFontFamily());
 	}
 
 	/**
@@ -325,7 +244,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param titleFontSize Title font size.
 	 */
 	public void setTitleFontSize(int titleFontSize) {
-		getDelegated().setTitleFontSize(titleFontSize);
+		setValue(Property.titleFontSize, titleFontSize);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -336,7 +255,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return Title font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
 	 */
 	public int getTitleFontSize() {
-		return Checker.check(getDelegated().getTitleFontSize(), getDefaultValues().getTitleFontSize());
+		return getValue(Property.titleFontSize, getDefaultValues().getTitleFontSize());
 	}
 
 	/**
@@ -346,7 +265,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public void setTitleFontStyle(FontStyle titleFontStyle) {
-		getDelegated().setTitleFontStyle(titleFontStyle.name());
+		setValue(Property.titleFontStyle, titleFontStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -358,7 +277,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getTitleFontStyle() {
-		return Enumer.deserialize(getDelegated().getTitleFontStyle(), getDefaultValues().getTitleFontStyle(), FontStyle.class, FontStyle.bold);
+		return getValue(Property.titleFontStyle, FontStyle.class, getDefaultValues().getTitleFontStyle());
 	}
 
 	/**
@@ -368,7 +287,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.TextAlign
 	 */
 	public void setTitleAlign(TextAlign align) {
-		getDelegated().setTitleAlign(align.name());
+		setValue(Property.titleAlign, align);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -380,7 +299,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.TextAlign
 	 */
 	public TextAlign getTitleAlign() {
-		return Enumer.deserialize(getDelegated().getTitleAlign(), getDefaultValues().getTitleAlign(), TextAlign.class, TextAlign.left);
+		return getValue(Property.titleAlign, TextAlign.class, getDefaultValues().getTitleAlign());
 	}
 
 	/**
@@ -398,7 +317,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param titleFontColor title font color.
 	 */
 	public void setTitleFontColor(String titleFontColor) {
-		getDelegated().setTitleFontColor(titleFontColor);
+		setValue(Property.titleFontColor, titleFontColor);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -409,7 +328,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return title font color.Default is '#fff'.
 	 */
 	public String getTitleFontColorAsString() {
-		return Checker.check(getDelegated().getTitleFontColor(), getDefaultValues().getTitleFontColor());
+		return getValue(Property.titleFontColor, getDefaultValues().getTitleFontColorAsString());
 	}
 
 	/**
@@ -427,7 +346,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param titleSpacing spacing to add to top and bottom of each title line.
 	 */
 	public void setTitleSpacing(int titleSpacing) {
-		getDelegated().setTitleSpacing(titleSpacing);
+		setValue(Property.titleSpacing, titleSpacing);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -438,7 +357,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return spacing to add to top and bottom of each title line. Default is 2.
 	 */
 	public int getTitleSpacing() {
-		return Checker.check(getDelegated().getTitleSpacing(), getDefaultValues().getTitleSpacing());
+		return getValue(Property.titleSpacing, getDefaultValues().getTitleSpacing());
 	}
 
 	/**
@@ -447,7 +366,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param titleMarginBottom margin to add on bottom of title section.
 	 */
 	public void setTitleMarginBottom(int titleMarginBottom) {
-		getDelegated().setTitleMarginBottom(titleMarginBottom);
+		setValue(Property.titleMarginBottom, titleMarginBottom);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -458,7 +377,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return margin to add on bottom of title section. Default is 6.
 	 */
 	public int getTitleMarginBottom() {
-		return Checker.check(getDelegated().getTitleMarginBottom(), getDefaultValues().getTitleMarginBottom());
+		return getValue(Property.titleMarginBottom, getDefaultValues().getTitleMarginBottom());
 	}
 
 	/**
@@ -467,7 +386,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param bodyFontFamily body line font.
 	 */
 	public void setBodyFontFamily(String bodyFontFamily) {
-		getDelegated().setBodyFontFamily(bodyFontFamily);
+		setValue(Property.bodyFontFamily, bodyFontFamily);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -478,7 +397,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return body line font. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
 	 */
 	public String getBodyFontFamily() {
-		return Checker.check(getDelegated().getBodyFontFamily(), getDefaultValues().getBodyFontFamily());
+		return getValue(Property.bodyFontFamily, getDefaultValues().getBodyFontFamily());
 	}
 
 	/**
@@ -487,7 +406,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param bodyFontSize body font size.
 	 */
 	public void setBodyFontSize(int bodyFontSize) {
-		getDelegated().setBodyFontSize(bodyFontSize);
+		setValue(Property.bodyFontSize, bodyFontSize);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -498,7 +417,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return body font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
 	 */
 	public int getBodyFontSize() {
-		return Checker.check(getDelegated().getBodyFontSize(), getDefaultValues().getBodyFontSize());
+		return getValue(Property.bodyFontSize, getDefaultValues().getBodyFontSize());
 	}
 
 	/**
@@ -508,7 +427,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public void setBodyFontStyle(FontStyle bodyFontStyle) {
-		getDelegated().setBodyFontStyle(bodyFontStyle.name());
+		setValue(Property.bodyFontStyle, bodyFontStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -520,7 +439,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getBodyFontStyle() {
-		return Enumer.deserialize(getDelegated().getBodyFontStyle(), getDefaultValues().getBodyFontStyle(), FontStyle.class, FontStyle.normal);
+		return getValue(Property.bodyFontStyle, FontStyle.class, getDefaultValues().getBodyFontStyle());
 	}
 
 	/**
@@ -530,7 +449,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.TextAlign
 	 */
 	public void setBodyAlign(TextAlign align) {
-		getDelegated().setBodyAlign(align.name());
+		setValue(Property.bodyAlign, align);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -542,7 +461,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.TextAlign
 	 */
 	public TextAlign getBodyAlign() {
-		return Enumer.deserialize(getDelegated().getBodyAlign(), getDefaultValues().getBodyAlign(), TextAlign.class, TextAlign.left);
+		return getValue(Property.bodyAlign, TextAlign.class, getDefaultValues().getBodyAlign());
 	}
 
 	/**
@@ -560,7 +479,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param bodyFontColor body font color.
 	 */
 	public void setBodyFontColor(String bodyFontColor) {
-		getDelegated().setBodyFontColor(bodyFontColor);
+		setValue(Property.bodyFontColor, bodyFontColor);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -571,7 +490,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return body font color. Default is '#fff'.
 	 */
 	public String getBodyFontColorAsString() {
-		return Checker.check(getDelegated().getBodyFontColor(), getDefaultValues().getBodyFontColor());
+		return getValue(Property.bodyFontColor, getDefaultValues().getBodyFontColorAsString());
 	}
 
 	/**
@@ -589,7 +508,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param bodySpacing spacing to add to top and bottom of each tooltip item.
 	 */
 	public void setBodySpacing(int bodySpacing) {
-		getDelegated().setBodySpacing(bodySpacing);
+		setValue(Property.bodySpacing, bodySpacing);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -600,7 +519,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return spacing to add to top and bottom of each tooltip item. Default is 2.
 	 */
 	public int getBodySpacing() {
-		return Checker.check(getDelegated().getBodySpacing(), getDefaultValues().getBodySpacing());
+		return getValue(Property.bodySpacing, getDefaultValues().getBodySpacing());
 	}
 
 	/**
@@ -609,7 +528,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param footerFontFamily footer font.
 	 */
 	public void setFooterFontFamily(String footerFontFamily) {
-		getDelegated().setFooterFontFamily(footerFontFamily);
+		setValue(Property.footerFontFamily, footerFontFamily);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -620,7 +539,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return footer font. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
 	 */
 	public String getFooterFontFamily() {
-		return Checker.check(getDelegated().getFooterFontFamily(), getDefaultValues().getFooterFontFamily());
+		return getValue(Property.footerFontFamily, getDefaultValues().getFooterFontFamily());
 	}
 
 	/**
@@ -629,7 +548,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param footerFontSize footer font size.
 	 */
 	public void setFooterFontSize(int footerFontSize) {
-		getDelegated().setFooterFontSize(footerFontSize);
+		setValue(Property.footerFontSize, footerFontSize);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -640,7 +559,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return footer font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
 	 */
 	public int getFooterFontSize() {
-		return Checker.check(getDelegated().getFooterFontSize(), getDefaultValues().getFooterFontSize());
+		return getValue(Property.footerFontSize, getDefaultValues().getFooterFontSize());
 	}
 
 	/**
@@ -649,7 +568,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param footerFontStyle the footer font style.
 	 */
 	public void setFooterFontStyle(FontStyle footerFontStyle) {
-		getDelegated().setFooterFontStyle(footerFontStyle.name());
+		setValue(Property.footerFontStyle, footerFontStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -661,7 +580,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFooterFontStyle() {
-		return Enumer.deserialize(getDelegated().getFooterFontStyle(), getDefaultValues().getFooterFontStyle(), FontStyle.class, FontStyle.bold);
+		return getValue(Property.footerFontStyle, FontStyle.class, getDefaultValues().getFooterFontStyle());
 	}
 
 	/**
@@ -671,7 +590,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.TextAlign
 	 */
 	public void setFooterAlign(TextAlign align) {
-		getDelegated().setFooterAlign(align.name());
+		setValue(Property.footerAlign, align);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -683,7 +602,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @see org.pepstock.charba.client.enums.TextAlign
 	 */
 	public TextAlign getFooterAlign() {
-		return Enumer.deserialize(getDelegated().getFooterAlign(), getDefaultValues().getFooterAlign(), TextAlign.class, TextAlign.left);
+		return getValue(Property.footerAlign, TextAlign.class, getDefaultValues().getFooterAlign());
 	}
 
 	/**
@@ -701,7 +620,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param footerFontColor footer font color.
 	 */
 	public void setFooterFontColor(String footerFontColor) {
-		getDelegated().setFooterFontColor(footerFontColor);
+		setValue(Property.footerFontColor, footerFontColor);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -712,7 +631,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return footer font color. Default is '#fff'.
 	 */
 	public String getFooterFontColorAsString() {
-		return Checker.check(getDelegated().getFooterFontColor(), getDefaultValues().getFooterFontColor());
+		return getValue(Property.footerFontColor, getDefaultValues().getFooterFontColorAsString());
 	}
 
 	/**
@@ -730,7 +649,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param footerSpacing spacing to add to top and bottom of each footer line.
 	 */
 	public void setFooterSpacing(int footerSpacing) {
-		getDelegated().setFooterSpacing(footerSpacing);
+		setValue(Property.footerSpacing, footerSpacing);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -741,7 +660,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return spacing to add to top and bottom of each footer line. Default is 2.
 	 */
 	public int getFooterSpacing() {
-		return Checker.check(getDelegated().getFooterSpacing(), getDefaultValues().getFooterSpacing());
+		return getValue(Property.footerSpacing, getDefaultValues().getFooterSpacing());
 	}
 
 	/**
@@ -750,7 +669,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param footerMarginTop margin to add before drawing the footer.
 	 */
 	public void setFooterMarginTop(int footerMarginTop) {
-		getDelegated().setFooterMarginTop(footerMarginTop);
+		setValue(Property.footerMarginTop, footerMarginTop);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -761,7 +680,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return margin to add before drawing the footer. Default is 6.
 	 */
 	public int getFooterMarginTop() {
-		return Checker.check(getDelegated().getFooterMarginTop(), getDefaultValues().getFooterMarginTop());
+		return getValue(Property.footerMarginTop, getDefaultValues().getFooterMarginTop());
 	}
 
 	/**
@@ -770,7 +689,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param xPadding padding to add on left and right of tooltip.
 	 */
 	public void setXPadding(int xPadding) {
-		getDelegated().setXPadding(xPadding);
+		setValue(Property.xPadding, xPadding);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -781,7 +700,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return padding to add on left and right of tooltip. Default is 6.
 	 */
 	public int getXPadding() {
-		return Checker.check(getDelegated().getXPadding(), getDefaultValues().getXPadding());
+		return getValue(Property.xPadding, getDefaultValues().getXPadding());
 	}
 
 	/**
@@ -790,7 +709,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param yPadding padding to add on top and bottom of tooltip.
 	 */
 	public void setYPadding(int yPadding) {
-		getDelegated().setYPadding(yPadding);
+		setValue(Property.yPadding, yPadding);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -801,7 +720,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return padding to add on top and bottom of tooltip. Default is 6.
 	 */
 	public int getYPadding() {
-		return Checker.check(getDelegated().getYPadding(), getDefaultValues().getYPadding());
+		return getValue(Property.yPadding, getDefaultValues().getYPadding());
 	}
 
 	/**
@@ -810,7 +729,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param caretPadding extra distance to move the end of the tooltip arrow away from the tooltip point.
 	 */
 	public void setCaretPadding(int caretPadding) {
-		getDelegated().setCaretPadding(caretPadding);
+		setValue(Property.caretPadding, caretPadding);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -821,7 +740,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return extra distance to move the end of the tooltip arrow away from the tooltip point. Default is 2.
 	 */
 	public int getCaretPadding() {
-		return Checker.check(getDelegated().getCaretPadding(), getDefaultValues().getCaretPadding());
+		return getValue(Property.caretPadding, getDefaultValues().getCaretPadding());
 	}
 
 	/**
@@ -830,7 +749,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param caretSize size, in px, of the tooltip arrow.
 	 */
 	public void setCaretSize(int caretSize) {
-		getDelegated().setCaretSize(caretSize);
+		setValue(Property.caretSize, caretSize);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -841,7 +760,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return size, in px, of the tooltip arrow. Default is 5.
 	 */
 	public int getCaretSize() {
-		return Checker.check(getDelegated().getCaretSize(), getDefaultValues().getCaretSize());
+		return getValue(Property.caretSize, getDefaultValues().getCaretSize());
 	}
 
 	/**
@@ -850,7 +769,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param cornerRadius radius of tooltip corner curves.
 	 */
 	public void setCornerRadius(int cornerRadius) {
-		getDelegated().setCornerRadius(cornerRadius);
+		setValue(Property.cornerRadius, cornerRadius);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -861,7 +780,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return radius of tooltip corner curves. Default is 6.
 	 */
 	public int getCornerRadius() {
-		return Checker.check(getDelegated().getCornerRadius(), getDefaultValues().getCornerRadius());
+		return getValue(Property.cornerRadius, getDefaultValues().getCornerRadius());
 	}
 
 	/**
@@ -879,7 +798,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param multiKeyBackground color to draw behind the colored boxes when multiple items are in the tooltip.
 	 */
 	public void setMultiKeyBackground(String multiKeyBackground) {
-		getDelegated().setMultiKeyBackground(multiKeyBackground);
+		setValue(Property.multiKeyBackground, multiKeyBackground);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -890,7 +809,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return color to draw behind the colored boxes when multiple items are in the tooltip. Default is '#fff'.
 	 */
 	public String getMultiKeyBackgroundAsString() {
-		return Checker.check(getDelegated().getMultiKeyBackground(), getDefaultValues().getMultiKeyBackground());
+		return getValue(Property.multiKeyBackground, getDefaultValues().getMultiKeyBackgroundAsString());
 	}
 
 	/**
@@ -908,7 +827,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param displayColors if true, color boxes are shown in the tooltip.
 	 */
 	public void setDisplayColors(boolean displayColors) {
-		getDelegated().setDisplayColors(displayColors);
+		setValue(Property.displayColors, displayColors);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -919,7 +838,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return if true, color boxes are shown in the tooltip. Default is true.
 	 */
 	public boolean isDisplayColors() {
-		return Checker.check(getDelegated().isDisplayColors(), getDefaultValues().isDisplayColors());
+		return getValue(Property.displayColors, getDefaultValues().isDisplayColors());
 	}
 
 	/**
@@ -937,7 +856,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param borderColor color of the border.
 	 */
 	public void setBorderColor(String borderColor) {
-		getDelegated().setBorderColor(borderColor);
+		setValue(Property.borderColor, borderColor);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -948,7 +867,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return color of the border. Default is 'rgba(0,0,0,0)'.
 	 */
 	public String getBorderColorAsString() {
-		return Checker.check(getDelegated().getBorderColor(), getDefaultValues().getBorderColor());
+		return getValue(Property.borderColor, getDefaultValues().getBorderColorAsString());
 	}
 
 	/**
@@ -966,7 +885,7 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @param borderWidth size of the border.
 	 */
 	public void setBorderWidth(int borderWidth) {
-		getDelegated().setBorderWidth(borderWidth);
+		setValue(Property.borderWidth, borderWidth);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -977,113 +896,6 @@ public final class Tooltips extends BaseModel<BaseOptions<?,?>, IsDefaultTooltip
 	 * @return size of the border. Default is 0.
 	 */
 	public int getBorderWidth() {
-		return Checker.check(getDelegated().getBorderWidth(), getDefaultValues().getBorderWidth());
-	}
-	
-	// --------------------------
-	// CUSTOM callback
-	// --------------------------
-	
-	/**
-	 * @return the customCallback
-	 */
-	public TooltipCustomCallback getCustomCallback() {
-		return customCallback;
-	}
-
-	/**
-	 * @param customCallback the customCallback to set
-	 */
-	public void setCustomCallback(TooltipCustomCallback customCallback) {
-		this.customCallback = customCallback;
-	}
-
-	/**
-	 * @param customHandler the customHandler to set
-	 */
-	void setCustomHandler(TooltipCustomHandler customHandler) {
-		if (customHandler != null) {
-			getDelegated().setCustom(customCallbackProxy.getProxy());
-			// checks if the node is already added to parent
-			checkAndAddToParent();
-		} else {
-			remove(Property.custom);
-		}
-		this.customHandler = customHandler;
-	}
-
-	// --------------------------
-	// ITEM SORT callback
-	// --------------------------
-	
-	/**
-	 * @return the itemSortCallback
-	 */
-	public TooltipItemSortCallback getItemSortCallback() {
-		return itemSortCallback;
-	}
-
-	/**
-	 * @param itemSortCallback the itemSortCallback to set
-	 */
-	public void setItemSortCallback(TooltipItemSortCallback itemSortCallback) {
-		this.itemSortCallback = itemSortCallback;
-	}
-
-	/**
-	 * @param itemSortHandler the itemSortHandler to set
-	 */
-	void setItemSortHandler(TooltipItemSortHandler itemSortHandler) {
-		if (itemSortHandler != null) {
-			getDelegated().setItemSort(itemSortCallbackProxy.getProxy());
-			// checks if the node is already added to parent
-			checkAndAddToParent();
-		} else {
-			remove(Property.itemSort);
-		}
-		this.itemSortHandler = itemSortHandler;
-	}
-
-	// --------------------------
-	// FILTER callback
-	// --------------------------
-
-	
-	/**
-	 * @return the filterCallback
-	 */
-	public TooltipFilterCallback getFilterCallback() {
-		return filterCallback;
-	}
-
-	/**
-	 * @param filterCallback the filterCallback to set
-	 */
-	public void setFilterCallback(TooltipFilterCallback filterCallback) {
-		this.filterCallback = filterCallback;
-	}
-
-	/**
-	 * @param filterHandler the filterHandler to set
-	 */
-	void setFilterHandler(TooltipFilterHandler filterHandler) {
-		if (filterHandler != null) {
-			getDelegated().setFilter(filterCallbackProxy.getProxy());
-			// checks if the node is already added to parent
-			checkAndAddToParent();
-		} else {
-			remove(Property.filter);
-		}
-		this.filterHandler = filterHandler;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getTooltips()== null) {
-			getParent().getDelegated().setTooltips(getDelegated());
-		}
+		return getValue(Property.borderWidth, getDefaultValues().getBorderWidth());
 	}
 }

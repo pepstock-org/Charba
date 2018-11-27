@@ -1,5 +1,8 @@
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
+import org.pepstock.charba.client.enums.CapStyle;
+import org.pepstock.charba.client.enums.Fill;
+import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine;
 import org.pepstock.charba.client.jsinterop.options.Line;
 
@@ -18,7 +21,7 @@ public final class DefaultChartLine implements IsDefaultLine{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBackgroundColor()
 	 */
 	@Override
-	public String getBackgroundColor() {
+	public String getBackgroundColorAsString() {
 		return line.getBackgroundColorAsString();
 	}
 
@@ -34,7 +37,7 @@ public final class DefaultChartLine implements IsDefaultLine{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBorderColor()
 	 */
 	@Override
-	public String getBorderColor() {
+	public String getBorderColorAsString() {
 		return line.getBorderColorAsString();
 	}
 
@@ -50,8 +53,8 @@ public final class DefaultChartLine implements IsDefaultLine{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine#getBorderCapStyle()
 	 */
 	@Override
-	public String getBorderCapStyle() {
-		return line.getBorderCapStyle().name();
+	public CapStyle getBorderCapStyle() {
+		return line.getBorderCapStyle();
 	}
 
 	/* (non-Javadoc)
@@ -66,8 +69,8 @@ public final class DefaultChartLine implements IsDefaultLine{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine#getBorderJoinStyle()
 	 */
 	@Override
-	public String getBorderJoinStyle() {
-		return line.getBorderJoinStyle().name();
+	public JoinStyle getBorderJoinStyle() {
+		return line.getBorderJoinStyle();
 	}
 
 	/* (non-Javadoc)
@@ -82,8 +85,8 @@ public final class DefaultChartLine implements IsDefaultLine{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine#getFill()
 	 */
 	@Override
-	public String getFill() {
-		return line.getFill().name();
+	public Fill getFill() {
+		return line.getFill();
 	}
 
 	/* (non-Javadoc)

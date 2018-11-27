@@ -17,7 +17,8 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines;
 
 /**
@@ -27,10 +28,20 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class AngleLines extends BaseModel<Scale, IsDefaultAngleLines, NativeAngleLines> {
+public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> implements IsDefaultAngleLines {
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		display,
+		color,
+		lineWidth
+	}
 
-	AngleLines(Scale scale, IsDefaultAngleLines defaultValues, NativeAngleLines delegated) {
-		super(scale, defaultValues, delegated == null ? new NativeAngleLines(): delegated);
+	AngleLines(Scale scale, Key childKey, IsDefaultAngleLines defaultValues, NativeObject nativeObject) {
+		super(scale, childKey, defaultValues, nativeObject);
 	}
 
 	/**
@@ -39,7 +50,9 @@ public final class AngleLines extends BaseModel<Scale, IsDefaultAngleLines, Nati
 	 * @param display if true, angle lines are shown
 	 */
 	public void setDisplay(boolean display) {
-		getDelegated().setDisplay(display);
+		setValue(Property.display, display);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
@@ -48,7 +61,7 @@ public final class AngleLines extends BaseModel<Scale, IsDefaultAngleLines, Nati
 	 * @return if true, angle lines are shown. Default is true.
 	 */
 	public boolean isDisplay() {
-		return Checker.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
+		return getValue(Property.display, getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -66,7 +79,9 @@ public final class AngleLines extends BaseModel<Scale, IsDefaultAngleLines, Nati
 	 * @param color color of angled lines.
 	 */
 	public void setColor(String color) {
-		getDelegated().setColor(color);
+		setValue(Property.color, color);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
@@ -75,7 +90,7 @@ public final class AngleLines extends BaseModel<Scale, IsDefaultAngleLines, Nati
 	 * @return color of angled lines. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultColor()}.
 	 */
 	public String getColorAsString() {
-		return Checker.check(getDelegated().getColor(), getDefaultValues().getColor());
+		return getValue(Property.color, getDefaultValues().getColorAsString());
 	}
 
 	/**
@@ -93,7 +108,9 @@ public final class AngleLines extends BaseModel<Scale, IsDefaultAngleLines, Nati
 	 * @param lineWidth width of angled lines.
 	 */
 	public void setLineWidth(int lineWidth) {
-		getDelegated().setLineWidth(lineWidth);
+		setValue(Property.lineWidth, lineWidth);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
@@ -102,17 +119,6 @@ public final class AngleLines extends BaseModel<Scale, IsDefaultAngleLines, Nati
 	 * @return width of angled lines. Default is 1.
 	 */
 	public int getLineWidth() {
-		return Checker.check(getDelegated().getLineWidth(), getDefaultValues().getLineWidth());
+		return getValue(Property.lineWidth, getDefaultValues().getLineWidth());
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getAngleLines() == null) {
-			getParent().getDelegated().setAngleLines(getDelegated());
-		}
-	}
-
 }

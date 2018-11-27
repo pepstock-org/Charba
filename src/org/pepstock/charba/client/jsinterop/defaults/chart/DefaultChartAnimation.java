@@ -1,5 +1,6 @@
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
+import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.jsinterop.options.Animation;
 
@@ -18,8 +19,8 @@ public final class DefaultChartAnimation implements IsDefaultAnimation{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation#getEasing()
 	 */
 	@Override
-	public String getEasing() {
-		return animation.getEasing().name();
+	public Easing getEasing() {
+		return animation.getEasing();
 	}
 
 	/* (non-Javadoc)

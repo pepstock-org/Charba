@@ -1,5 +1,6 @@
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
+import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels;
 import org.pepstock.charba.client.jsinterop.options.LegendLabels;
 
@@ -18,7 +19,7 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontColor()
 	 */
 	@Override
-	public String getFontColor() {
+	public String getFontColorAsString() {
 		return labels.getFontColorAsString();
 	}
 
@@ -34,8 +35,8 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontStyle()
 	 */
 	@Override
-	public String getFontStyle() {
-		return labels.getFontStyle().name();
+	public FontStyle getFontStyle() {
+		return labels.getFontStyle();
 	}
 
 	/* (non-Javadoc)

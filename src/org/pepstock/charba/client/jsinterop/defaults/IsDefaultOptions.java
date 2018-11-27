@@ -1,5 +1,7 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
+import org.pepstock.charba.client.enums.FontStyle;
+
 public interface IsDefaultOptions {
 	
 	IsDefaultScale getScale();
@@ -14,15 +16,9 @@ public interface IsDefaultOptions {
 	
 	IsDefaultTooltips getTooltips();
 
-	IsDefaultPadding getPadding();
+	IsDefaultLayout getLayout();
 	
-	IsDefaultArc getArc();
-	
-	IsDefaultLine getLine();
-	
-	IsDefaultPoint getPoint();
-	
-	IsDefaultRectangle getRectangle();
+	IsDefaultElements getElements();
 	
 	boolean isResponsive();
 
@@ -53,13 +49,13 @@ public interface IsDefaultOptions {
 	 * Returns the default color to use in the chart, on all objects, if not override by the specific configuration.
 	 * @return color to use into chart. Default is "rgba(0,0,0,0.1)"
 	 */
-	String getDefaultColor();
+	String getDefaultColorAsString();
 
 	/**
 	 * Returns the default font color to use in the chart, on all objects, if not override by the specific configuration.
 	 * @return  font color to use into chart. Default is #666.
 	 */
-	String getDefaultFontColor();
+	String getDefaultFontColorAsString();
 
 	/**
 	 * Returns the font size to use in the chart, on all objects, if not override by the specific configuration.
@@ -68,7 +64,7 @@ public interface IsDefaultOptions {
 	 */
 	int getDefaultFontSize();
 
-	String getDefaultFontStyle();
+	FontStyle getDefaultFontStyle();
 
 	/**
 	 * Returns the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.

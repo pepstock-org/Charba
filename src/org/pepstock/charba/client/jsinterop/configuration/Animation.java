@@ -15,21 +15,24 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.Chart;
+import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
+import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.events.AnimationCompleteEvent;
 import org.pepstock.charba.client.jsinterop.events.AnimationProgressEvent;
-import org.pepstock.charba.client.jsinterop.events.handlers.AnimationCompleteCallbackHandler;
-import org.pepstock.charba.client.jsinterop.events.handlers.AnimationProgressCallbackHandler;
 import org.pepstock.charba.client.jsinterop.items.AnimationItem;
 import org.pepstock.charba.client.jsinterop.items.AnimationObject;
-import org.pepstock.charba.client.jsinterop.options.EventableOptions;
+import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
+
+import jsinterop.annotations.JsFunction;
 
 /**
  * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it
@@ -38,20 +41,69 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Animation extends EventProvider<EventableOptions> implements AnimationCompleteCallbackHandler, AnimationProgressCallbackHandler{
+public final class Animation extends EventProvider<ExtendedOptions> {
+	
+	@JsFunction
+	interface ProxyAnimationCompleteCallback {
+		void call(Chart context, AnimationObject animationObject);
+	}
 
+	@JsFunction
+	interface ProxyAnimationProgressCallback {
+		void call(Chart context, AnimationObject animationObject);
+	}
+
+	private final CallbackProxy<ProxyAnimationCompleteCallback> completeCallbackProxy = JsHelper.newCallbackProxy();
+
+	private final CallbackProxy<ProxyAnimationProgressCallback> progressCallbackProxy = JsHelper.newCallbackProxy();
+	
 	// amount of handlers
 	private int onCompleteHandlers = 0;
 	// amount of handlers
 	private int onProgressHandlers = 0;
-
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	enum Property implements Key
+	{
+		onProgress,
+		onComplete
+	}
+	
 	/**
 	 * Builds the object storing the chart instance.
 	 * 
 	 * @param chart chart instance
 	 */
-	Animation(AbstractChart<?, ?> chart, EventableOptions options) {
+	Animation(AbstractChart<?, ?> chart, ExtendedOptions options) {
 		super(chart, options);
+		completeCallbackProxy.setCallback(new ProxyAnimationCompleteCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.EventableAnimation.ProxyAnimationCompleteCallback#call(org.pepstock.charba.client.jsinterop.items.ChartNode, org.pepstock.charba.client.jsinterop.items.AnimationObject)
+			 */
+			@Override
+			public void call(Chart context, AnimationObject animationObject) {
+				if (animationObject != null && animationObject.getAnimationItem() != null) {
+					onComplete(animationObject.getAnimationItem());
+				}
+			}
+			
+		});
+		progressCallbackProxy.setCallback(new ProxyAnimationProgressCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.EventableAnimation.ProxyAnimationProgressCallback#call(org.pepstock.charba.client.jsinterop.items.ChartNode, org.pepstock.charba.client.jsinterop.items.AnimationObject)
+			 */
+			@Override
+			public void call(Chart context, AnimationObject animationObject) {
+				if (animationObject != null && animationObject.getAnimationItem() != null) {
+					onProgress(animationObject.getAnimationItem());
+				}
+			}
+
+		});
 	}
 
 	/**
@@ -143,7 +195,7 @@ public final class Animation extends EventProvider<EventableOptions> implements 
 			// checks if property exist
 			if (onCompleteHandlers == 0) {
 				// sets the java script code to get the event
-				getConfiguration().getAnimation().setCompleteCallbackHandler(this);
+				getConfiguration().setEvent(getConfiguration().getAnimation(), Property.onComplete, completeCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onCompleteHandlers++;
@@ -151,7 +203,7 @@ public final class Animation extends EventProvider<EventableOptions> implements 
 			// checks if property exist
 			if (onProgressHandlers == 0) {
 				// sets the java script code to get the event
-				getConfiguration().getAnimation().setProgressCallbackHandler(this);
+				getConfiguration().setEvent(getConfiguration().getAnimation(), Property.onProgress, progressCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onProgressHandlers++;
@@ -172,7 +224,8 @@ public final class Animation extends EventProvider<EventableOptions> implements 
 			// if zero, no handler
 			if (onCompleteHandlers == 0) {
 				// therefore remove property
-				getConfiguration().getAnimation().setCompleteCallbackHandler(null);
+				getConfiguration().setEvent(getConfiguration().getAnimation(), Property.onComplete, null);
+				
 			}
 		} else if (type.equals(AnimationProgressEvent.TYPE)) {
 			// decrements amount of handlers
@@ -181,28 +234,8 @@ public final class Animation extends EventProvider<EventableOptions> implements 
 			if (onProgressHandlers == 0) {
 				// therefore remove property
 				// therefore remove property
-				getConfiguration().getAnimation().setProgressCallbackHandler(null);
+				getConfiguration().setEvent(getConfiguration().getAnimation(), Property.onProgress, null);
 			}
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.events.AnimationProgressCallbackHandler#onProgress(org.pepstock.charba.client.jsinterop.items.ChartNode, org.pepstock.charba.client.jsinterop.items.AnimationObject)
-	 */
-	@Override
-	public void onProgress(Chart context, AnimationObject animationObject) {
-		if (animationObject != null && animationObject.getAnimationItem() != null) {
-			onProgress(animationObject.getAnimationItem());
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.events.AnimationCompleteCallbackHandler#onComplete(org.pepstock.charba.client.jsinterop.items.ChartNode, org.pepstock.charba.client.jsinterop.items.AnimationObject)
-	 */
-	@Override
-	public void onComplete(Chart context, AnimationObject animationObject) {
-		if (animationObject != null && animationObject.getAnimationItem() != null) {
-			onComplete(animationObject.getAnimationItem());
 		}
 	}
 

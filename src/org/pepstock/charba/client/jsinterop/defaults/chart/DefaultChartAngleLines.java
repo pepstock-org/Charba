@@ -26,7 +26,7 @@ public final class DefaultChartAngleLines implements IsDefaultAngleLines{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines#getColor()
 	 */
 	@Override
-	public String getColor() {
+	public String getColorAsString() {
 		return angleLines.getColorAsString();
 	}
 

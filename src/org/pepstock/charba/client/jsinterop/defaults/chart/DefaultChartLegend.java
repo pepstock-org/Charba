@@ -1,5 +1,6 @@
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
+import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels;
 import org.pepstock.charba.client.jsinterop.options.Legend;
@@ -54,8 +55,8 @@ public final class DefaultChartLegend implements IsDefaultLegend {
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend#getPosition()
 	 */
 	@Override
-	public String getPosition() {
-		return legend.getPosition().name();
+	public Position getPosition() {
+		return legend.getPosition();
 	}
 	
 }

@@ -18,7 +18,7 @@ package org.pepstock.charba.client.jsinterop;
 import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.commons.Enumer;
-import org.pepstock.charba.client.jsinterop.defaults.DefaultOptions;
+import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
@@ -29,26 +29,56 @@ import jsinterop.annotations.JsType;
  * This is useful when update is manually called inside an event handler and some different animation is desired.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 @JsType
 public final class UpdateConfiguration {
 
+	/**
+	 * Sets the animation easing function.
+	 * 
+	 * @param easing animation easing function.
+	 */
 	@JsProperty(name = "easing")
 	native void setNativeEasing(String easing);
 
+	/**
+	 * Returns the animation easing function.
+	 * 
+	 * @return the animation easing function.
+	 */
 	@JsProperty(name = "easing")
 	native String getNativeEasing();
 
+	/**
+	 * Sets the time for the animation of the redraw in milliseconds.
+	 * 
+	 * @param milliseconds time for the animation of the redraw in milliseconds.
+	 */
 	@JsProperty(name = "duration")
 	native void setNativeDuration(int duration);
 
+	/**
+	 * Returns the time for the animation of the redraw in milliseconds.
+	 * 
+	 * @return time for the animation of the redraw in milliseconds
+	 */
 	@JsProperty(name = "duration")
 	native int getNativeDuration();
 
+	/**
+	 * If true, the animation can be interrupted by other animations.
+	 * 
+	 * @param intersect if true, the animation can be interrupted by other animations.
+	 */
 	@JsProperty(name = "lazy")
 	native void setNativeLazy(boolean lazy);
 
+	/**
+	 * If true, the animation can be interrupted by other animations
+	 * 
+	 * @return if true, the animation can be interrupted by other animations.
+	 */
 	@JsProperty(name = "lazy")
 	native boolean isNativeLazy();
 
@@ -71,7 +101,7 @@ public final class UpdateConfiguration {
 	 */
 	@JsMethod
 	public Easing getEasing() {
-		return Enumer.deserialize(getNativeEasing(), DefaultOptions.get().getAnimation().getEasing(), Easing.class, Easing.easeOutQuart);
+		return Enumer.deserialize(getNativeEasing(), Easing.class, DefaultOptions.get().getAnimation().getEasing());
 	}
 
 	/**

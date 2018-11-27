@@ -15,7 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLayout;
 
 /**
  * The layout configuration is needed to set the padding.
@@ -23,13 +25,21 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Layout extends BaseModel<BaseOptions<?,?>, IsDefaultOptions, NativeLayout> {
+public final class Layout extends AbstractModel<Options, IsDefaultLayout> implements IsDefaultLayout {
 
 	private final Padding padding;
 	
-	Layout(BaseOptions<?,?> options, IsDefaultOptions defaultOptions, NativeLayout delegated) {
-		super(options, defaultOptions, delegated == null ? new NativeLayout() : delegated);
-		padding = new Padding(this, defaultOptions.getPadding(), getDelegated().getPadding());
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		padding
+	}
+	
+	Layout(Options options, Key childKey, IsDefaultLayout defaultOptions, NativeObject nativeObject) {
+		super(options, childKey, defaultOptions, nativeObject);
+		padding = new Padding(this, Property.padding, defaultOptions.getPadding(), getValue(Property.padding));
 	}
 
 	/**
@@ -39,13 +49,4 @@ public class Layout extends BaseModel<BaseOptions<?,?>, IsDefaultOptions, Native
 		return padding;
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getLayout() == null) {
-			getParent().getDelegated().setLayout(getDelegated());
-		}
-	}
 }

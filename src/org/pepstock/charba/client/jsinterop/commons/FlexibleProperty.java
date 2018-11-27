@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.Key;
  * a possible java array into a single java script property value or an java script array.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class FlexibleProperty {
 

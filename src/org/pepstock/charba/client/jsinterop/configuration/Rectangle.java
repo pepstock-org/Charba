@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.jsinterop.options.EventableOptions;
+import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 
 /**
  * Rectangle elements are used to represent the bars in a bar chart.
@@ -31,7 +31,7 @@ public final class Rectangle extends AbstractConfigurationElement {
 	 * 
 	 * @param chart chart instance
 	 */
-	Rectangle(EventableOptions options) {
+	Rectangle(ExtendedOptions options) {
 		super(options, options.getElements().getRectangle());
 	}
 	

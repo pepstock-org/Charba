@@ -15,6 +15,11 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults;
 
+import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.TextAlign;
+import org.pepstock.charba.client.enums.TooltipPosition;
+
 /**
  * Configuration element to set all attributes and features of the default tooltip.
  * 
@@ -35,7 +40,7 @@ public interface IsDefaultTooltips{
 	 * 
 	 * @return which elements appear in the tooltip. 
 	 */
-	String getMode();
+	InteractionMode getMode();
 
 	/**
 	 * if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be
@@ -51,14 +56,14 @@ public interface IsDefaultTooltips{
 	 * 
 	 * @return mode for positioning the tooltip.
 	 */
-	String getPosition();
+	TooltipPosition getPosition();
 
 	/**
 	 * Returns the background color of the tooltip.
 	 * 
 	 * @return Background color of the tooltip. 
 	 */
-	String getBackgroundColor();
+	String getBackgroundColorAsString();
 
 	/**
 	 * Returns the title font.
@@ -79,21 +84,21 @@ public interface IsDefaultTooltips{
 	 * 
 	 * @return title font style. 
 	 */
-	String getTitleFontStyle();
+	FontStyle getTitleFontStyle();
 	
 	/**
 	 * Returns the title alignment.
 	 * 
 	 * @return title alignment. 
 	 */
-	String getTitleAlign();
+	TextAlign getTitleAlign();
 
 	/**
 	 * Returns the title font color.
 	 * 
 	 * @return title font color.
 	 */
-	String getTitleFontColor();
+	String getTitleFontColorAsString();
 
 	/**
 	 * Returns the spacing to add to top and bottom of each title line.
@@ -128,21 +133,21 @@ public interface IsDefaultTooltips{
 	 * 
 	 * @return body font style.
 	 */
-	String getBodyFontStyle();
+	FontStyle getBodyFontStyle();
 
 	/**
 	 * Returns the body alignment.
 	 * 
 	 * @return body alignment. 
 	 */
-	String getBodyAlign();
+	TextAlign getBodyAlign();
 
 	/**
 	 * Returns the body font color.
 	 * 
 	 * @return body font color.
 	 */
-	String getBodyFontColor();
+	String getBodyFontColorAsString();
 	
 	/**
 	 * Returns the spacing to add to top and bottom of each tooltip item.
@@ -170,21 +175,21 @@ public interface IsDefaultTooltips{
 	 * 
 	 * @return footer font style. 
 	 */
-	String getFooterFontStyle();
+	FontStyle getFooterFontStyle();
 
 	/**
 	 * Returns the body alignment.
 	 * 
 	 * @return footer alignment. 
 	 */
-	String getFooterAlign();
+	TextAlign getFooterAlign();
 
 	/**
 	 * Returns the footer font color.
 	 * 
 	 * @return footer font color. 
 	 */
-	String getFooterFontColor();
+	String getFooterFontColorAsString();
 	
 	/**
 	 * Returns the spacing to add to top and bottom of each footer line.
@@ -240,7 +245,7 @@ public interface IsDefaultTooltips{
 	 * 
 	 * @return color to draw behind the colored boxes when multiple items are in the tooltip.
 	 */
-	String getMultiKeyBackground();
+	String getMultiKeyBackgroundAsString();
 
 	/**
 	 * If true, color boxes are shown in the tooltip.
@@ -254,7 +259,7 @@ public interface IsDefaultTooltips{
 	 * 
 	 * @return color of the border.
 	 */
-	String getBorderColor();
+	String getBorderColorAsString();
 
 	/**
 	 * Returns the size of the border.

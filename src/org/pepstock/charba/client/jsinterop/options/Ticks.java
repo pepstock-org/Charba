@@ -19,11 +19,11 @@ import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.TickSource;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.Enumer;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks;
 
 /**
@@ -32,16 +32,49 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
+public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements IsDefaultTicks {
 
 	private final TickMinor minor;
 
 	private final TickMajor major;
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		// sub elements
+		minor,
+		major,
+		// properties
+		display,
+		reverse,
+		autoSkip,
+		autoSkipPadding,
+		labelOffset,
+		maxRotation,
+		minRotation,
+		mirror,
+		padding,
+		beginAtZero,
+		min,
+		max,
+		maxTicksLimit,
+		stepSize,
+		suggestedMax,
+		suggestedMin,
+		backdropColor,
+		backdropPaddingX,
+		backdropPaddingY,
+		showLabelBackdrop,
+		labels,
+		source
+	}
 
-	Ticks(Scale scale, IsDefaultTicks defaultValues, NativeTicks delegated) {
-		super(scale, defaultValues, delegated == null ? new NativeTicks() : delegated);
-		minor = new TickMinor(this, getDefaultValues().getMinor(), getDelegated().getMinor());
-		major = new TickMajor(this, getDefaultValues().getMajor(), getDelegated().getMajor());
+	Ticks(Scale scale, Key childKey, IsDefaultTicks defaultValues, NativeObject nativeObject) {
+		super(scale, childKey, defaultValues, nativeObject);
+		minor = new TickMinor(this, Property.minor, getDefaultValues().getMinor(), getValue(Property.minor));
+		major = new TickMajor(this, Property.major, getDefaultValues().getMajor(), getValue(Property.major));
 	}
 	
 	/**
@@ -64,7 +97,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @param beginAtZero if true, scale will include 0 if it is not already included.
 	 */
 	public void setBeginAtZero(boolean beginAtZero) {
-		getDelegated().setBeginAtZero(beginAtZero);
+		setValue(Property.beginAtZero, beginAtZero);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -75,7 +108,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return if true, scale will include 0 if it is not already included.. Default is false
 	 */
 	public boolean isBeginAtZero() {
-		return Checker.check(getDelegated().isBeginAtZero(), getDefaultValues().isBeginAtZero());
+		return getValue(Property.beginAtZero, getDefaultValues().isBeginAtZero());
 	}
 
 	/**
@@ -84,7 +117,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @param display if true, show tick marks
 	 */
 	public void setDisplay(boolean display) {
-		getDelegated().setDisplay(display);
+		setValue(Property.display, display);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -95,7 +128,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return if true, show tick marks. Default is true.
 	 */
 	public boolean isDisplay() {
-		return Checker.check(getDelegated().isDisplay(), getDefaultValues().isDisplay());
+		return getValue(Property.display, getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -104,7 +137,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @param reverse reverses order of tick labels.
 	 */
 	public void setReverse(boolean reverse) {
-		getDelegated().setReverse(reverse);
+		setValue(Property.reverse, reverse);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -115,7 +148,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return reverses order of tick labels. Default is false.
 	 */
 	public boolean isReverse() {
-		return Checker.check(getDelegated().isReverse(), getDefaultValues().isReverse());
+		return getValue(Property.reverse, getDefaultValues().isReverse());
 	}
 	
 	/**
@@ -126,7 +159,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 *            off to show all labels no matter what
 	 */
 	public void setAutoSkip(boolean autoSkip) {
-		getDelegated().setAutoSkip(autoSkip);
+		setValue(Property.autoSkip, autoSkip);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -139,7 +172,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 *         show all labels no matter what. Default is true
 	 */
 	public boolean isAutoSkip() {
-		return Checker.check(getDelegated().isAutoSkip(), getDefaultValues().isAutoSkip());
+		return getValue(Property.autoSkip, getDefaultValues().isAutoSkip());
 	}
 
 	/**
@@ -150,7 +183,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 *            to horizontal scales.
 	 */
 	public void setAutoSkipPadding(int autoSkipPadding) {
-		getDelegated().setAutoSkipPadding(autoSkipPadding);
+		setValue(Property.autoSkipPadding, autoSkipPadding);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -163,7 +196,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 *         scales. Defualt is 0.
 	 */
 	public int getAutoSkipPadding() {
-		return Checker.check(getDelegated().getAutoSkipPadding(), getDefaultValues().getAutoSkipPadding());
+		return getValue(Property.autoSkipPadding, getDefaultValues().getAutoSkipPadding());
 	}
 
 	/**
@@ -175,7 +208,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 *            the x axis, and the x direction for the y axis)
 	 */
 	public void setLabelOffset(int labelOffset) {
-		getDelegated().setLabelOffset(labelOffset);
+		setValue(Property.labelOffset, labelOffset);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -189,7 +222,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 *         and the x direction for the y axis). Default is 0.
 	 */
 	public int getLabelOffset() {
-		return Checker.check(getDelegated().getLabelOffset(), getDefaultValues().getLabelOffset());
+		return getValue(Property.labelOffset, getDefaultValues().getLabelOffset());
 	}
 
 	/**
@@ -200,7 +233,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 *            necessary. Note: Only applicable to horizontal scales.
 	 */
 	public void setMaxRotation(int maxRotation) {
-		getDelegated().setMaxRotation(maxRotation);
+		setValue(Property.maxRotation, maxRotation);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -213,7 +246,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 *         Note: Only applicable to horizontal scales. Default is 90
 	 */
 	public int getMaxRotation() {
-		return Checker.check(getDelegated().getMaxRotation(), getDefaultValues().getMaxRotation());
+		return getValue(Property.maxRotation, getDefaultValues().getMaxRotation());
 	}
 
 	/**
@@ -222,7 +255,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @param minRotation minimum rotation for tick labels. Note: Only applicable to horizontal scales.
 	 */
 	public void setMinRotation(int minRotation) {
-		getDelegated().setMinRotation(minRotation);
+		setValue(Property.minRotation, minRotation);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -233,7 +266,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return minimum rotation for tick labels. Note: Only applicable to horizontal scales.. Default is 0.
 	 */
 	public int getMinRotation() {
-		return Checker.check(getDelegated().getMinRotation(), getDefaultValues().getMinRotation());
+		return getValue(Property.minRotation, getDefaultValues().getMinRotation());
 	}
 
 	/**
@@ -244,7 +277,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 *            applicable to vertical scales.
 	 */
 	public void setMirror(boolean mirror) {
-		getDelegated().setMirror(mirror);
+		setValue(Property.mirror, mirror);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -257,7 +290,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 *         to vertical scales. Default is false.
 	 */
 	public boolean isMirror() {
-		return Checker.check(getDelegated().isMirror(), getDefaultValues().isMirror());
+		return getValue(Property.mirror, getDefaultValues().isMirror());
 	}
 
 	/**
@@ -268,7 +301,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 *            (X) direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
 	 */
 	public void setPadding(int padding) {
-		getDelegated().setPadding(padding);
+		setValue(Property.padding, padding);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -281,7 +314,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 *         direction. When set on a horizontal axis, this applies in the vertical (Y) direction. Default is 10.
 	 */
 	public int getPadding() {
-		return Checker.check(getDelegated().getPadding(), getDefaultValues().getPadding());
+		return getValue(Property.padding, getDefaultValues().getPadding());
 	}
 	
 	/**
@@ -290,7 +323,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	public void setMin(double min) {
-		getDelegated().setMin(min);
+		setValue(Property.min, min);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -301,7 +334,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return the user defined minimum number for the scale, overrides minimum value from data. Default is Double.MIN_VALUE.
 	 */
 	public double getMin() {
-		return Checker.check(getDelegated().getMin(), getDefaultValues().getMin());
+		return getValue(Property.min, getDefaultValues().getMin());
 	}
 
 	/**
@@ -310,7 +343,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @param max user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	public void setMax(double max) {
-		getDelegated().setMax(max);
+		setValue(Property.max, max);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -321,7 +354,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return user defined maximum number for the scale, overrides maximum value from data. Default is Double.MAX_VALUE.
 	 */
 	public double getMax() {
-		return Checker.check(getDelegated().getMax(), getDefaultValues().getMax());
+		return getValue(Property.max, getDefaultValues().getMax());
 	}
 
 	/**
@@ -330,7 +363,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	public void setMin(String min) {
-		getDelegated().setMin(min);
+		setValue(Property.min, min);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -341,7 +374,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return the user defined minimum number for the scale, overrides minimum value from data. Default is Double.MIN_VALUE.
 	 */
 	public String getMinAsString() {
-		return Checker.check(getDelegated().getMin(), String.valueOf(getDefaultValues().getMin()));
+		return getValue(Property.min, String.valueOf(getDefaultValues().getMin()));
 	}
 
 	/**
@@ -350,7 +383,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @param max user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	public void setMax(String max) {
-		getDelegated().setMax(max);
+		setValue(Property.max, max);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -361,7 +394,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return user defined maximum number for the scale, overrides maximum value from data. Default is Double.MAX_VALUE.
 	 */
 	public String getMaxAsString() {
-		return Checker.check(getDelegated().getMax(), String.valueOf(getDefaultValues().getMax()));
+		return getValue(Property.max, String.valueOf(getDefaultValues().getMax()));
 	}
 	
 	/**
@@ -370,7 +403,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @param maxTicksLimit maximum number of ticks and gridlines to show.
 	 */
 	public void setMaxTicksLimit(int maxTicksLimit) {
-		getDelegated().setMaxTicksLimit(maxTicksLimit);
+		setValue(Property.maxTicksLimit, maxTicksLimit);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -381,7 +414,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return maximum number of ticks and gridlines to show. Default is 11.
 	 */
 	public int getMaxTicksLimit() {
-		return Checker.check(getDelegated().getMaxTicksLimit(), getDefaultValues().getMaxTicksLimit());
+		return getValue(Property.maxTicksLimit, getDefaultValues().getMaxTicksLimit());
 	}
 
 	/**
@@ -390,7 +423,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @param stepSize user defined fixed step size for the scale.
 	 */
 	public void setStepSize(double stepSize) {
-		getDelegated().setStepSize(stepSize);
+		setValue(Property.stepSize, stepSize);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -401,7 +434,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return user defined fixed step size for the scale. Default is Double.MIN_VALUE.
 	 */
 	public double getStepSize() {
-		return Checker.check(getDelegated().getStepSize(), getDefaultValues().getStepSize());
+		return getValue(Property.stepSize, getDefaultValues().getStepSize());
 	}
 
 	/**
@@ -410,7 +443,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @param suggestedMax adjustment used when calculating the maximum data value.
 	 */
 	public void setSuggestedMax(double suggestedMax) {
-		getDelegated().setSuggestedMax(suggestedMax);
+		setValue(Property.suggestedMax, suggestedMax);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -421,7 +454,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return adjustment used when calculating the maximum data value.
 	 */
 	public double getSuggestedMax() {
-		return Checker.check(getDelegated().getSuggestedMax(), getDefaultValues().getSuggestedMax());
+		return getValue(Property.suggestedMax, getDefaultValues().getSuggestedMax());
 	}
 
 	/**
@@ -430,7 +463,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @param suggestedMin adjustment used when calculating the minimum data value.
 	 */
 	public void setSuggestedMin(double suggestedMin) {
-		getDelegated().setSuggestedMin(suggestedMin);
+		setValue(Property.suggestedMin, suggestedMin);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -441,7 +474,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return adjustment used when calculating the minimum data value.
 	 */
 	public double getSuggestedMin() {
-		return Checker.check(getDelegated().getSuggestedMin(), getDefaultValues().getSuggestedMin());
+		return getValue(Property.suggestedMin, getDefaultValues().getSuggestedMin());
 	}
 
 	/**
@@ -459,7 +492,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @param backdropColor color of label backdrops.
 	 */
 	public void setBackdropColor(String backdropColor) {
-		getDelegated().setBackdropColor(backdropColor);
+		setValue(Property.backdropColor, backdropColor);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -470,7 +503,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return color of label backdrops. Default is 'rgba(255, 255, 255, 0.75)'
 	 */
 	public String getBackdropColorAsString() {
-		return Checker.check(getDelegated().getBackdropColor(), getDefaultValues().getBackdropColor());
+		return getValue(Property.backdropColor, getDefaultValues().getBackdropColorAsString());
 	}
 
 	/**
@@ -488,7 +521,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @param backdropPaddingX horizontal padding of label backdrop.
 	 */
 	public void setBackdropPaddingX(int backdropPaddingX) {
-		getDelegated().setBackdropPaddingX(backdropPaddingX);
+		setValue(Property.backdropPaddingX, backdropPaddingX);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -499,7 +532,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return horizontal padding of label backdrop. Default is 2.
 	 */
 	public int getBackdropPaddingX() {
-		return Checker.check(getDelegated().getBackdropPaddingX(), getDefaultValues().getBackdropPaddingX());
+		return getValue(Property.backdropPaddingX, getDefaultValues().getBackdropPaddingX());
 	}
 
 	/**
@@ -508,7 +541,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @param backdropPaddingY vertical padding of label backdrop.
 	 */
 	public void setBackdropPaddingY(int backdropPaddingY) {
-		getDelegated().setBackdropPaddingY(backdropPaddingY);
+		setValue(Property.backdropPaddingY, backdropPaddingY);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -519,7 +552,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return vertical padding of label backdrop. Default is 2.
 	 */
 	public int getBackdropPaddingY() {
-		return Checker.check(getDelegated().getBackdropPaddingY(), getDefaultValues().getBackdropPaddingY());
+		return getValue(Property.backdropPaddingY, getDefaultValues().getBackdropPaddingY());
 	}
 
 	/**
@@ -528,7 +561,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @param showLabelBackdrop if true, draw a background behind the tick labels.
 	 */
 	public void setShowLabelBackdrop(boolean showLabelBackdrop) {
-		getDelegated().setShowLabelBackdrop(showLabelBackdrop);
+		setValue(Property.showLabelBackdrop, showLabelBackdrop);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -539,7 +572,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return if true, draw a background behind the tick labels. Default is true.
 	 */
 	public boolean isShowLabelBackdrop() {
-		return Checker.check(getDelegated().isShowLabelBackdrop(), getDefaultValues().isShowLabelBackdrop());
+		return getValue(Property.showLabelBackdrop, getDefaultValues().isShowLabelBackdrop());
 	}
 	
 	/**
@@ -548,7 +581,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @param labels An array of labels to display.
 	 */
 	public void setLabels(String... labels) {
-		getDelegated().setLabels(ArrayString.of(labels));
+		setArrayValue(Property.labels, ArrayString.of(labels));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -568,7 +601,8 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @return the array of labels to display.
 	 */
 	public List<String> getLabels() {
-		return ArrayListHelper.list(getDelegated().getLabels());
+		ArrayString array = getArrayValue(Property.labels);
+		return ArrayListHelper.list(array);
 	}
 	
 	/**
@@ -578,7 +612,7 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @see org.pepstock.charba.client.enums.TickSource
 	 */
 	public void setSource(TickSource source) {
-		getDelegated().setSource(source.name());
+		setValue(Property.source, source);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -590,16 +624,6 @@ public final class Ticks extends BaseTick<Scale, IsDefaultTicks, NativeTicks> {
 	 * @see org.pepstock.charba.client.enums.TickSource
 	 */
 	public TickSource getSource() {
-		return Enumer.deserialize(getDelegated().getSource(), getDefaultValues().getSource(), TickSource.class, TickSource.auto);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.BaseModel#addToParent()
-	 */
-	@Override
-	protected void addToParent() {
-		if (getParent().getDelegated().getTicks() == null) {
-			getParent().getDelegated().setTicks(getDelegated());
-		}
+		return getValue(Property.source, TickSource.class, getDefaultValues().getSource());
 	}
 }

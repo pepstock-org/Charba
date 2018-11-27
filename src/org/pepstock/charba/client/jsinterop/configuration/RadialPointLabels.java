@@ -16,9 +16,13 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.callbacks.RadialPointLabelCallback;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.RadialPointLabelHandler;
+import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
+import org.pepstock.charba.client.jsinterop.commons.JsHelper;
+
+import jsinterop.annotations.JsFunction;
 
 /**
  * It is used to configure the point labels that are shown on the perimeter of the scale.<br>
@@ -27,7 +31,26 @@ import org.pepstock.charba.client.jsinterop.callbacks.handlers.RadialPointLabelH
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class RadialPointLabels extends AxisContainer implements RadialPointLabelHandler {
+public final class RadialPointLabels extends AxisContainer {
+	
+	@JsFunction
+	interface ProxyPointLabelCallback {
+		// FIXME context
+		String call(Object context, String item);
+	}
+	
+	private final CallbackProxy<ProxyPointLabelCallback> pointLabelCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private RadialPointLabelCallback callback = null;
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	enum Property implements Key
+	{
+		callback
+	}
+	
 	/**
 	 * Builds the object storing the chart instance and the axis which this point labels belongs to.
 	 * 
@@ -36,15 +59,20 @@ public final class RadialPointLabels extends AxisContainer implements RadialPoin
 	 */
 	RadialPointLabels(Axis axis) {
 		super(axis);
-		if (hasGlobalCallback()) {
-			getAxis().getChart().getOptions().getConfiguration().setRadialPointLabelCallbackHandler(getAxis().getScale(), this);
-		}
-	}
-	
-	private boolean hasGlobalCallback() {
-		return getAxis().getDefaultScale().getPointLabels().getCallback() != null;  
-	}
+		pointLabelCallbackProxy.setCallback(new ProxyPointLabelCallback() {
 
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.PointLabels.ProxyPointLabelCallback#call(java.lang.Object, java.lang.String)
+			 */
+			@Override
+			public String call(Object context, String item) {
+				if (callback != null) {
+					return callback.onCallback(getAxis(), item);
+				}
+				return item;
+			}
+		});
+	}
 	/**
 	 * If true, labels are shown
 	 * 
@@ -156,38 +184,57 @@ public final class RadialPointLabels extends AxisContainer implements RadialPoin
 	public String getFontFamily() {
 		return getAxis().getScale().getPointLabels().getFontFamily();
 	}
-
+	
+	
 	/**
 	 * @return the callback
 	 */
 	public RadialPointLabelCallback getCallback() {
-		return getAxis().getConfiguration().getPointLabels().getCallback();
+		return callback;
 	}
-	
 	/**
-	 * set the callback
+	 * @param callback the callback to set
 	 */
-	public void getCallback(RadialPointLabelCallback callback) {
-		getAxis().getConfiguration().getPointLabels().setCallback(callback);
-		if (!hasGlobalCallback()) {
-			if (callback == null) {
-				getAxis().getChart().getOptions().getConfiguration().setRadialPointLabelCallbackHandler(getAxis().getScale(), null);
-			} else {
-				getAxis().getChart().getOptions().getConfiguration().setRadialPointLabelCallbackHandler(getAxis().getScale(), this);
-			}
+	public void setCallback(RadialPointLabelCallback callback) {
+		this.callback = callback;
+		if (callback != null) {
+			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.callback, pointLabelCallbackProxy.getProxy());
+		} else {
+			getAxis().getConfiguration().setCallback(getAxis().getConfiguration().getPointLabels(), Property.callback, null);
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.RadialPointLabelHandler#onCallback(java.lang.String)
-	 */
-	@Override
-	public String onCallback(String item) {
-		if (getCallback() != null) {
-			return getCallback().onCallback(getAxis(), item);
-		} else if (hasGlobalCallback()) {
-			getAxis().getDefaultScale().getPointLabels().getCallback().onCallback(getAxis(), item);
-		}
-		return item;
-	}
+//	/**
+//	 * @return the callback
+//	 */
+//	public RadialPointLabelCallback getCallback() {
+//		return getAxis().getConfiguration().getPointLabels().getCallback();
+//	}
+//	
+//	/**
+//	 * set the callback
+//	 */
+//	public void getCallback(RadialPointLabelCallback callback) {
+//		getAxis().getConfiguration().getPointLabels().setCallback(callback);
+//		if (!hasGlobalCallback()) {
+//			if (callback == null) {
+//				getAxis().getChart().getOptions().getConfiguration().setRadialPointLabelCallbackHandler(getAxis().getScale(), null);
+//			} else {
+//				getAxis().getChart().getOptions().getConfiguration().setRadialPointLabelCallbackHandler(getAxis().getScale(), this);
+//			}
+//		}
+//	}
+//
+//	/* (non-Javadoc)
+//	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.RadialPointLabelHandler#onCallback(java.lang.String)
+//	 */
+//	@Override
+//	public String onCallback(String item) {
+//		if (getCallback() != null) {
+//			return getCallback().onCallback(getAxis(), item);
+//		} else if (hasGlobalCallback()) {
+//			getAxis().getDefaultScale().getPointLabels().getCallback().onCallback(getAxis(), item);
+//		}
+//		return item;
+//	}
 }

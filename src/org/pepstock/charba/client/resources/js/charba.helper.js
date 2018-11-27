@@ -2,6 +2,12 @@
     JsHelper.remove = function(obj, key) {
     	delete obj[key];
     }
+    JsHelper.type = function(obj, key) {
+    	return typeof obj[key];
+    }
+    JsHelper.isArray = function(obj, key) {
+	    return Array.isArray(obj[key]);
+    }    
     JsHelper.propertyAsString = function(obj, key) {
     	return obj[key];
     }

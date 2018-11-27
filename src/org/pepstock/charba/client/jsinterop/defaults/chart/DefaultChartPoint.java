@@ -1,5 +1,6 @@
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
+import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint;
 import org.pepstock.charba.client.jsinterop.options.Point;
 
@@ -18,7 +19,7 @@ public final class DefaultChartPoint implements IsDefaultPoint{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBackgroundColor()
 	 */
 	@Override
-	public String getBackgroundColor() {
+	public String getBackgroundColorAsString() {
 		return point.getBackgroundColorAsString();
 	}
 
@@ -34,7 +35,7 @@ public final class DefaultChartPoint implements IsDefaultPoint{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBorderColor()
 	 */
 	@Override
-	public String getBorderColor() {
+	public String getBorderColorAsString() {
 		return point.getBorderColorAsString();
 	}
 
@@ -50,8 +51,8 @@ public final class DefaultChartPoint implements IsDefaultPoint{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint#getPointStyle()
 	 */
 	@Override
-	public String getPointStyle() {
-		return point.getPointStyle().name();
+	public PointStyle getPointStyle() {
+		return point.getPointStyle();
 	}
 
 	/* (non-Javadoc)

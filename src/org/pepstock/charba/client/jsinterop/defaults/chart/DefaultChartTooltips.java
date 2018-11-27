@@ -1,5 +1,9 @@
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
+import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.TextAlign;
+import org.pepstock.charba.client.enums.TooltipPosition;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.jsinterop.options.Tooltips;
 
@@ -26,8 +30,8 @@ public final class DefaultChartTooltips implements IsDefaultTooltips{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getMode()
 	 */
 	@Override
-	public String getMode() {
-		return tooltips.getMode().name();
+	public InteractionMode getMode() {
+		return tooltips.getMode();
 	}
 
 	/* (non-Javadoc)
@@ -42,15 +46,15 @@ public final class DefaultChartTooltips implements IsDefaultTooltips{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getPosition()
 	 */
 	@Override
-	public String getPosition() {
-		return tooltips.getPosition().name();
+	public TooltipPosition getPosition() {
+		return tooltips.getPosition();
 	}
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getBackgroundColor()
 	 */
 	@Override
-	public String getBackgroundColor() {
+	public String getBackgroundColorAsString() {
 		return tooltips.getBackgroundColorAsString();
 	}
 
@@ -74,23 +78,23 @@ public final class DefaultChartTooltips implements IsDefaultTooltips{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getTitleFontStyle()
 	 */
 	@Override
-	public String getTitleFontStyle() {
-		return tooltips.getTitleFontStyle().name();
+	public FontStyle getTitleFontStyle() {
+		return tooltips.getTitleFontStyle();
 	}
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getTitleAlign()
 	 */
 	@Override
-	public String getTitleAlign() {
-		return tooltips.getTitleAlign().name();
+	public TextAlign getTitleAlign() {
+		return tooltips.getTitleAlign();
 	}
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getTitleFontColor()
 	 */
 	@Override
-	public String getTitleFontColor() {
+	public String getTitleFontColorAsString() {
 		return tooltips.getTitleFontColorAsString();
 	}
 
@@ -130,23 +134,23 @@ public final class DefaultChartTooltips implements IsDefaultTooltips{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getBodyFontStyle()
 	 */
 	@Override
-	public String getBodyFontStyle() {
-		return tooltips.getBodyFontStyle().name();
+	public FontStyle getBodyFontStyle() {
+		return tooltips.getBodyFontStyle();
 	}
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getBodyAlign()
 	 */
 	@Override
-	public String getBodyAlign() {
-		return tooltips.getBodyAlign().name();
+	public TextAlign getBodyAlign() {
+		return tooltips.getBodyAlign();
 	}
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getBodyFontColor()
 	 */
 	@Override
-	public String getBodyFontColor() {
+	public String getBodyFontColorAsString() {
 		return tooltips.getBodyFontColorAsString();
 	}
 
@@ -178,23 +182,23 @@ public final class DefaultChartTooltips implements IsDefaultTooltips{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getFooterFontStyle()
 	 */
 	@Override
-	public String getFooterFontStyle() {
-		return tooltips.getFooterFontStyle().name();
+	public FontStyle getFooterFontStyle() {
+		return tooltips.getFooterFontStyle();
 	}
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getFooterAlign()
 	 */
 	@Override
-	public String getFooterAlign() {
-		return tooltips.getFooterAlign().name();
+	public TextAlign getFooterAlign() {
+		return tooltips.getFooterAlign();
 	}
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getFooterFontColor()
 	 */
 	@Override
-	public String getFooterFontColor() {
+	public String getFooterFontColorAsString() {
 		return tooltips.getFooterFontColorAsString();
 	}
 
@@ -258,7 +262,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getMultiKeyBackground()
 	 */
 	@Override
-	public String getMultiKeyBackground() {
+	public String getMultiKeyBackgroundAsString() {
 		return tooltips.getMultiKeyBackgroundAsString();
 	}
 
@@ -274,7 +278,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getBorderColor()
 	 */
 	@Override
-	public String getBorderColor() {
+	public String getBorderColorAsString() {
 		return tooltips.getBorderColorAsString();
 	}
 

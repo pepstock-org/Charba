@@ -16,21 +16,22 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TooltipPosition;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
-import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.callbacks.TooltipCustomCallback;
 import org.pepstock.charba.client.jsinterop.callbacks.TooltipFilterCallback;
 import org.pepstock.charba.client.jsinterop.callbacks.TooltipItemSortCallback;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipCustomHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipFilterHandler;
-import org.pepstock.charba.client.jsinterop.callbacks.handlers.TooltipItemSortHandler;
+import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
+import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.items.TooltipItem;
 import org.pepstock.charba.client.jsinterop.items.TooltipModel;
-import org.pepstock.charba.client.jsinterop.options.EventableOptions;
+import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
+
+import jsinterop.annotations.JsFunction;
 
 /**
  * Configuration element to set all attributes and features of the tooltip.
@@ -38,9 +39,66 @@ import org.pepstock.charba.client.jsinterop.options.EventableOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Tooltips extends ConfigurationContainer<EventableOptions> implements TooltipCustomHandler, TooltipItemSortHandler, TooltipFilterHandler{
+public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	
+	/**
+	 * Custom tooltips allow you to hook into the tooltip rendering process so that you can render the tooltip in your own
+	 * custom way.
+	 * 
+	 * @param chart chart instance
+	 * @param model all info about tooltip to create own HTML tooltip.
+	 */
+	@JsFunction
+	interface ProxyCustomCallback {
+		void call(Object context, TooltipModel model);
+	}
+	
+	/**
+	 * Called to filter tooltip items. Receives 1 parameter, a tooltip Item.
+	 * 
+	 * @param item tooltip item to check.
+	 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
+	 */
+	@JsFunction
+	interface ProxyFilterCallback {
+		boolean call(Object context, TooltipItem item);
+	}
+	
+	/**
+	 * Allows sorting of tooltip items.
+	 * 
+	 * @param chart chart instance
+	 * @param item1 the first object to be compared.
+	 * @param item2 the second object to be compared.
+	 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the
+	 *         second.
+	 *FIXME la chiamata JS passa anche un oggetto DATA        
+	 */
+	@JsFunction
+	interface ProxyItemSortCallback {
+		int call(Object context, TooltipItem item1, TooltipItem item2);
+	}
+	
+	private final CallbackProxy<ProxyCustomCallback> customCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private final CallbackProxy<ProxyItemSortCallback> itemSortCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private final CallbackProxy<ProxyFilterCallback> filterCallbackProxy = JsHelper.newCallbackProxy();
+	
+	private TooltipCustomCallback customCallback = null;
+
+	private TooltipItemSortCallback itemSortCallback = null;
+
+	private TooltipFilterCallback filterCallback = null;
+
 	private final TooltipsCallbacks callbacks;
+	
+	enum Property implements Key
+	{
+		custom,
+		itemSort,
+		filter,
+	}
 
 	/**
 	 * Builds the object storing the chart instance.<br>
@@ -48,19 +106,62 @@ public final class Tooltips extends ConfigurationContainer<EventableOptions> imp
 	 * 
 	 * @param chart chart instance
 	 */
-	Tooltips(AbstractChart<?, ?> chart, EventableOptions options) {
+	Tooltips(AbstractChart<?, ?> chart, ExtendedOptions options) {
 		super(chart, options);
 		// sets callbacks container
 		callbacks = new TooltipsCallbacks(chart, options);
-		if (hasGlobalCustomCallback()) {
-			getConfiguration().setTooltipCustomHandler(this);
-		}
-		if (hasGlobalItemSortCallback()) {
-			getConfiguration().setTooltipItemSortHandler(this);
-		}
-		if (hasGlobalFilterCallback()) {
-			getConfiguration().setTooltipFilterHandler(this);
-		}
+		// sets callbacks PROXies
+		customCallbackProxy.setCallback(new ProxyCustomCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.Tooltips.ProxyCustomCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipModel)
+			 */
+			@Override
+			public void call(Object context, TooltipModel model) {
+				// checks if callback is consistent
+				if (customCallback != null) {
+					// calls callback
+					customCallback.onCustom(getChart(), model);
+				}
+			}
+	
+		});
+		
+		itemSortCallbackProxy.setCallback(new ProxyItemSortCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.Tooltips.ProxyItemSortCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+			 */
+			@Override
+			public int call(Object context, TooltipItem item1, TooltipItem item2) {
+				// checks if callback is consistent
+				if (itemSortCallback != null) {
+					// calls callback
+					return itemSortCallback.onItemSort(getChart(), item1, item2);
+				}
+				// default is 0 - equals
+				return 0;				
+			}
+			
+		});
+		
+		filterCallbackProxy.setCallback(new ProxyFilterCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.jsinterop.options.Tooltips.ProxyFilterCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+			 */
+			@Override
+			public boolean call(Object context, TooltipItem item) {
+				// checks if callback is consistent
+				if (filterCallback != null) {
+					// calls callback
+					return filterCallback.onFilter(getChart(), item);
+				}
+				// default is true
+				return true;
+			}
+			
+		});
 	}
 
 	/**
@@ -68,98 +169,6 @@ public final class Tooltips extends ConfigurationContainer<EventableOptions> imp
 	 */
 	public TooltipsCallbacks getCallbacks() {
 		return callbacks;
-	}
-
-	
-	// ------------
-	// CUSTOM
-	// ------------
-	private boolean hasGlobalCustomCallback() {
-		return Defaults.getGlobal().getTooltips().getCustomCallback() != null || 
-				Defaults.chart(getChart()).getTooltips().getCustomCallback() != null;
-	}
-
-	/**
-	 * @return the customCallback
-	 */
-	public TooltipCustomCallback getCustomCallback() {
-		return getConfiguration().getTooltips().getCustomCallback();
-	}
-
-	/**
-	 * @param customCallback the customCallback to set
-	 */
-	public void setCustomCallback(TooltipCustomCallback customCallback) {
-		getConfiguration().getTooltips().setCustomCallback(customCallback);
-		if (!hasGlobalCustomCallback()) {
-			if (customCallback == null) {
-				getConfiguration().setTooltipCustomHandler(null);
-				;
-			} else {
-				getConfiguration().setTooltipCustomHandler(this);
-			}
-		}
-	}
-
-	// ------------
-	// ITEM SORTER
-	// ------------
-
-	private boolean hasGlobalItemSortCallback() {
-		return Defaults.getGlobal().getTooltips().getItemSortCallback() != null || 
-				Defaults.chart(getChart()).getTooltips().getItemSortCallback() != null;
-	}
-	
-	/**
-	 * @return the itemSortHandler
-	 */
-	public TooltipItemSortCallback getItemSortCallback() {
-		return getConfiguration().getTooltips().getItemSortCallback();
-	}
-
-	/**
-	 * @param itemSortHandler the itemSortHandler to set
-	 */
-	public void setItemSortCallback(TooltipItemSortCallback itemSortCallback) {
-		getConfiguration().getTooltips().setItemSortCallback(itemSortCallback);
-		if (!hasGlobalItemSortCallback()) {
-			if (itemSortCallback == null) {
-				getConfiguration().setTooltipItemSortHandler(null);
-				;
-			} else {
-				getConfiguration().setTooltipItemSortHandler(this);
-			}
-		}
-	}
-	
-	// ------------
-	// FILTER
-	// ------------
-
-	private boolean hasGlobalFilterCallback() {
-		return Defaults.getGlobal().getTooltips().getFilterCallback() != null || 
-				Defaults.chart(getChart()).getTooltips().getFilterCallback() != null;
-	}
-
-	/**
-	 * @return the filterHandler
-	 */
-	public TooltipFilterCallback getFilterCallback() {
-		return getConfiguration().getTooltips().getFilterCallback();
-	}
-
-	/**
-	 * @param filterHandler the filterHandler to set
-	 */
-	public void setFilterCallback(TooltipFilterCallback filterCallback) {
-		getConfiguration().getTooltips().setFilterCallback(filterCallback);
-		if (!hasGlobalFilterCallback()) {
-			if (filterCallback == null) {
-				getConfiguration().setTooltipFilterHandler(null);
-			} else {
-				getConfiguration().setTooltipFilterHandler(this);
-			}
-		}
 	}
 
 	/**
@@ -900,60 +909,123 @@ public final class Tooltips extends ConfigurationContainer<EventableOptions> imp
 		return getConfiguration().getTooltips().getBorderWidth();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipFilterHandler#onFilter(org.pepstock.charba.client.jsinterop.items.TooltipItem)
+	// ----------------------
+	// CALLBACKS
+	// ----------------------
+
+	/**
+	 * @return the customCallback
 	 */
-	@Override
-	public boolean onFilter(TooltipItem item) {
-		// checks if callback is consistent
-		if (getFilterCallback() != null) {
-			// calls callback
-			return getFilterCallback().onFilter(getChart(), item);
-		} else if (Defaults.chart(getChart()).getTooltips().getFilterCallback() != null) {
-			// calls callback
-			return Defaults.chart(getChart()).getTooltips().getFilterCallback().onFilter(getChart(), item);
-		} else if (Defaults.getGlobal().getTooltips().getFilterCallback() != null) {
-			// calls callback
-			return Defaults.getGlobal().getTooltips().getFilterCallback().onFilter(getChart(), item);
-		}
-		return true;
+	public TooltipCustomCallback getCustomCallback() {
+		return customCallback;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipItemSortHandler#onItemSort(org.pepstock.charba.client.jsinterop.items.TooltipItem, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+	/**
+	 * @param customCallback the customCallback to set
 	 */
-	@Override
-	public int onItemSort(TooltipItem item1, TooltipItem item2) {
-		// checks if callback is consistent
-		if (getItemSortCallback() != null) {
-			// calls callback
-			return getItemSortCallback().onItemSort(getChart(), item1, item2);
-		} else if (Defaults.chart(getChart()).getTooltips().getItemSortCallback() != null) {
-			// calls callback
-			return Defaults.chart(getChart()).getTooltips().getItemSortCallback().onItemSort(getChart(), item1, item2);
-		} else if (Defaults.getGlobal().getTooltips().getItemSortCallback() != null) {
-			// calls callback
-			return Defaults.getGlobal().getTooltips().getItemSortCallback().onItemSort(getChart(), item1, item2);
+	public void setCustomCallback(TooltipCustomCallback customCallback) {
+		this.customCallback = customCallback;
+		if (customCallback != null) {
+			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.custom, customCallbackProxy.getProxy());
+		} else {
+			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.custom, null);
 		}
-		return 0;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipCustomHandler#onCustom(org.pepstock.charba.client.jsinterop.items.TooltipModel)
+	/**
+	 * @return the itemSortCallback
 	 */
-	@Override
-	public void onCustom(TooltipModel model) {
-		// checks if callback is consistent
-		if (getCustomCallback() != null) {
-			// calls callback
-			getCustomCallback().onCustom(getChart(), model);
-		} else if (Defaults.chart(getChart()).getTooltips().getCustomCallback() != null) {
-			// calls callback
-			Defaults.chart(getChart()).getTooltips().getCustomCallback().onCustom(getChart(), model);
-		} else if (Defaults.getGlobal().getTooltips().getCustomCallback() != null) {
-			// calls callback
-			Defaults.getGlobal().getTooltips().getCustomCallback().onCustom(getChart(), model);
+	public TooltipItemSortCallback getItemSortCallback() {
+		return itemSortCallback;
+	}
+
+	/**
+	 * @param itemSortCallback the itemSortCallback to set
+	 */
+	public void setItemSortCallback(TooltipItemSortCallback itemSortCallback) {
+		this.itemSortCallback = itemSortCallback;
+		if (itemSortCallback != null) {
+			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.itemSort, itemSortCallbackProxy.getProxy());
+		} else {
+			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.itemSort, null);
+		}
+
+	}
+
+	/**
+	 * @return the filterCallback
+	 */
+	public TooltipFilterCallback getFilterCallback() {
+		return filterCallback;
+	}
+
+	/**
+	 * @param filterCallback the filterCallback to set
+	 */
+	public void setFilterCallback(TooltipFilterCallback filterCallback) {
+		this.filterCallback = filterCallback;
+		if (filterCallback != null) {
+			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.filter, filterCallbackProxy.getProxy());
+		} else {
+			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.filter, null);
 		}
 	}
+	
+
+//	/* (non-Javadoc)
+//	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipFilterHandler#onFilter(org.pepstock.charba.client.jsinterop.items.TooltipItem)
+//	 */
+//	@Override
+//	public boolean onFilter(TooltipItem item) {
+//		// checks if callback is consistent
+//		if (getFilterCallback() != null) {
+//			// calls callback
+//			return getFilterCallback().onFilter(getChart(), item);
+//		} else if (Defaults.chart(getChart()).getTooltips().getFilterCallback() != null) {
+//			// calls callback
+//			return Defaults.chart(getChart()).getTooltips().getFilterCallback().onFilter(getChart(), item);
+//		} else if (Defaults.getGlobal().getTooltips().getFilterCallback() != null) {
+//			// calls callback
+//			return Defaults.getGlobal().getTooltips().getFilterCallback().onFilter(getChart(), item);
+//		}
+//		return true;
+//	}
+//
+//	/* (non-Javadoc)
+//	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipItemSortHandler#onItemSort(org.pepstock.charba.client.jsinterop.items.TooltipItem, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+//	 */
+//	@Override
+//	public int onItemSort(TooltipItem item1, TooltipItem item2) {
+//		// checks if callback is consistent
+//		if (getItemSortCallback() != null) {
+//			// calls callback
+//			return getItemSortCallback().onItemSort(getChart(), item1, item2);
+//		} else if (Defaults.chart(getChart()).getTooltips().getItemSortCallback() != null) {
+//			// calls callback
+//			return Defaults.chart(getChart()).getTooltips().getItemSortCallback().onItemSort(getChart(), item1, item2);
+//		} else if (Defaults.getGlobal().getTooltips().getItemSortCallback() != null) {
+//			// calls callback
+//			return Defaults.getGlobal().getTooltips().getItemSortCallback().onItemSort(getChart(), item1, item2);
+//		}
+//		return 0;
+//	}
+//
+//	/* (non-Javadoc)
+//	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipCustomHandler#onCustom(org.pepstock.charba.client.jsinterop.items.TooltipModel)
+//	 */
+//	@Override
+//	public void onCustom(TooltipModel model) {
+//		// checks if callback is consistent
+//		if (getCustomCallback() != null) {
+//			// calls callback
+//			getCustomCallback().onCustom(getChart(), model);
+//		} else if (Defaults.chart(getChart()).getTooltips().getCustomCallback() != null) {
+//			// calls callback
+//			Defaults.chart(getChart()).getTooltips().getCustomCallback().onCustom(getChart(), model);
+//		} else if (Defaults.getGlobal().getTooltips().getCustomCallback() != null) {
+//			// calls callback
+//			Defaults.getGlobal().getTooltips().getCustomCallback().onCustom(getChart(), model);
+//		}
+//	}
 
 }

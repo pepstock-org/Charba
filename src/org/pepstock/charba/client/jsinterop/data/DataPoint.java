@@ -17,9 +17,8 @@ package org.pepstock.charba.client.jsinterop.data;
 
 import java.util.Date;
 
-import org.pepstock.charba.client.commons.StandardKey;
 import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.NativeDescriptor;
+import org.pepstock.charba.client.jsinterop.commons.NativeDoubleDescriptor;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
@@ -122,7 +121,7 @@ public final class DataPoint extends NativeObjectContainer<NativeDataPoint>{
 	 * @param value value to set.
 	 */
 	public void setAttribute(String key, double value){
-		  getNativeObject().setAttribute(new StandardKey(key), value);
+		  getNativeObject().setAttribute(key, value);
 	}
 
 	/** 
@@ -131,9 +130,9 @@ public final class DataPoint extends NativeObjectContainer<NativeDataPoint>{
 	 * @return custom field value from data point. Default is {@link java.lang.Double#MIN_VALUE}.
 	 */
 	public double getAttribute(String key){
-		NativeDescriptor<Double> descriptor = getNativeObject().getAttribute(new StandardKey(key));
+		NativeDoubleDescriptor descriptor = getNativeObject().getAttribute(key);
 		if (descriptor != null) {
-			return descriptor.getValue().doubleValue();
+			return descriptor.getValue();
 		}
 		return Double.NaN;
 	}

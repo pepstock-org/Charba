@@ -2,7 +2,7 @@ package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.jsinterop.options.TickMajor;
 
-public class BaseTickMajor extends AbstractTick<TickMajor> {
+public class BaseTickMajor extends BaseTick<TickMajor> {
 
 	BaseTickMajor(Axis axis, TickMajor configuration) {
 		super(axis, configuration);

@@ -20,7 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.jsinterop.options.EventableOptions;
+import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 
 /**
  * Configures the chart title which defines text to draw at the top of the chart.
@@ -30,14 +30,14 @@ import org.pepstock.charba.client.jsinterop.options.EventableOptions;
  */
 public final class Title {
 	
-	private final EventableOptions options;
+	private final ExtendedOptions options;
 
 	/**
 	 * Builds the object storing the chart instance.
 	 * 
 	 * @param chart chart instance
 	 */
-	Title(EventableOptions options) {
+	Title(ExtendedOptions options) {
 		this.options = options;
 	}
 

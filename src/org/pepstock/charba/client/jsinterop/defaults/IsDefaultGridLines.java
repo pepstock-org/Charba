@@ -36,7 +36,7 @@ public interface IsDefaultGridLines {
 	 * 
 	 * @return the list of colors of the grid lines. If not set, default is only 1 value 'rgba(0, 0, 0, 0.1)'
 	 */
-	String getColor();
+	String getColorAsString();
 
 	/**
 	 * Returns the line dash pattern offset or "phase".
@@ -94,7 +94,7 @@ public interface IsDefaultGridLines {
 	 * 
 	 * @return Stroke color of the grid line for the first index (index 0). If not set, default is 'rgba(0, 0, 0, 0.25)'
 	 */
-	String getZeroLineColor();
+	String getZeroLineColorAsString();
 
 	/**
 	 * Returns the offset for line dashes of the grid line for the first index (index 0).

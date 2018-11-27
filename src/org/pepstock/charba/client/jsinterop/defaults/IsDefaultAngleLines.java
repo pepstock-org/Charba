@@ -14,7 +14,7 @@ public interface IsDefaultAngleLines {
 	 * 
 	 * @return color of angled lines. 
 	 */
-	String getColor();
+	String getColorAsString();
 	
 	/**
 	 * Returns the width of angled lines.

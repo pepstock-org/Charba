@@ -6,6 +6,7 @@ import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.GlobalOptions;
 import org.pepstock.charba.client.jsinterop.Helpers;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 public final class ChartOptionsBuilder {
 
@@ -16,16 +17,16 @@ public final class ChartOptionsBuilder {
 		// do nothing
 	}
 
-	public static NativeOptions get(Type type) {
+	public static NativeObject get(Type type) {
 		ChartOptions base = Defaults.chart(type);
 		Scale scale = Defaults.getScale();
 		GlobalOptions global = Defaults.getGlobal();
 
-		NativeOptions chartOptions = Helpers.clone(base.getDelegated());
-		NativeScale scaleOptions = Helpers.clone(scale.getDelegated());
-		NativeOptions globalOptions = Helpers.clone(global.getDelegated());
+		NativeObject chartOptions = base.cloneNativeObject();
+		NativeObject scaleOptions = scale.cloneNativeObject();
+		NativeObject globalOptions = global.cloneNativeObject();
 		
-		if (chartOptions.getScale() != null) {
+		if (base.getScale()..hasProperty(key).getScale() != null) {
 			Helpers.mergeIf(chartOptions.getScale(), scaleOptions);
 		} else if (chartOptions.getScales() != null) {
 			if (chartOptions.getScales().getXAxes() != null) {

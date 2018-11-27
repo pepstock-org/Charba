@@ -1,5 +1,7 @@
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
+import org.pepstock.charba.client.enums.InteractionAxis;
+import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover;
 import org.pepstock.charba.client.jsinterop.options.Hover;
 
@@ -18,8 +20,8 @@ public final class DefaultChartHover implements IsDefaultHover {
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover#getMode()
 	 */
 	@Override
-	public String getMode() {
-		return hover.getMode().name();
+	public InteractionMode getMode() {
+		return hover.getMode();
 	}
 
 	/* (non-Javadoc)
@@ -42,11 +44,8 @@ public final class DefaultChartHover implements IsDefaultHover {
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover#getAxis()
 	 */
 	@Override
-	public String getAxis() {
-		return hover.getAxis().name();
+	public InteractionAxis getAxis() {
+		return hover.getAxis();
 	}
-
-	
-	
 
 }

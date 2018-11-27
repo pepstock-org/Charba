@@ -1,5 +1,7 @@
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
+import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.jsinterop.options.Title;
 
@@ -18,7 +20,7 @@ public final class DefaultChartTitle implements IsDefaultTitle{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontColor()
 	 */
 	@Override
-	public String getFontColor() {
+	public String getFontColorAsString() {
 		return title.getFontColorAsString();
 	}
 
@@ -34,8 +36,8 @@ public final class DefaultChartTitle implements IsDefaultTitle{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontStyle()
 	 */
 	@Override
-	public String getFontStyle() {
-		return title.getFontStyle().name();
+	public FontStyle getFontStyle() {
+		return title.getFontStyle();
 	}
 
 	/* (non-Javadoc)
@@ -58,8 +60,8 @@ public final class DefaultChartTitle implements IsDefaultTitle{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle#getPosition()
 	 */
 	@Override
-	public String getPosition() {
-		return title.getPosition().name();
+	public Position getPosition() {
+		return title.getPosition();
 	}
 
 	/* (non-Javadoc)
