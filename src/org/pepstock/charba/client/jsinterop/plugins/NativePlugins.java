@@ -2,14 +2,13 @@ package org.pepstock.charba.client.jsinterop.plugins;
 
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeName;
-import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class NativePlugins extends NativeObject {
+public final class NativePlugins {
 	
 	/**
 	 * Registers the given plugin(s) if not already registered.
@@ -23,7 +22,7 @@ public final class NativePlugins extends NativeObject {
 	 * @param {Array|Object} plugins plugin instance(s).
 	 */
 	@JsMethod
-	native void unregister(NativePluginReference plugin); 
+	native void unregister(PluginReference plugin); 
 
 	/**
 	 * Remove all registered plugins.
@@ -43,6 +42,6 @@ public final class NativePlugins extends NativeObject {
 	 * @since 2.1.5
 	 */
 	@JsMethod
-	native ArrayObject<NativePluginReference> getAll(); 
+	native ArrayObject getAll(); 
 
 }

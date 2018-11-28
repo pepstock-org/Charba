@@ -15,10 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
-
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**
  * It is applied to all sides of the chart (left, top, right, bottom).
@@ -26,9 +23,13 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
 public class MarginsItem extends BaseBoxItem {
 
-
+	/**
+	 * @param nativeObject
+	 */
+	MarginsItem(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
 }

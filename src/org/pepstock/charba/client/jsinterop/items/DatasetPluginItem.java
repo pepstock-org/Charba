@@ -15,14 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
  * This object is just a proxy object, created from JavaScript side, to wrap an JavaScript array.<br>
@@ -31,30 +26,37 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
-public final class DatasetPluginItem extends NativeObject {
+public final class DatasetPluginItem extends NativeObjectContainer {
 
-	@JsProperty(name = "easing")
-	native double getNativeEasing();
-	
-	@JsProperty(name = "index")
-	native int getNativeIndex();
-	
-	@JsProperty(name = "meta")
-	native DatasetMetaItem getNativeMeta();
-
-	@JsOverlay
-	public final double getEasing() {
-		return Checker.check(getNativeEasing(), UndefinedValues.DOUBLE);
+	/**
+	 * Needed for GWt injection
+	 */
+	private enum Property implements Key
+	{
+		easing,
+		index,
+		meta
 	}
 
-	@JsOverlay
-	public final int getIndex() {
-		return Checker.check(getNativeIndex(), UndefinedValues.INTEGER);
+	/**
+	 * @param nativeObject
+	 */
+	public DatasetPluginItem(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
-	@JsOverlay
-	public final DatasetMetaItem getMeta() {
-		return getNativeMeta();
+	public double getEasing() {
+		return getValue(Property.easing, UndefinedValues.DOUBLE);
+	}
+
+	public int getIndex() {
+		return getValue(Property.index, UndefinedValues.INTEGER);
+	}
+
+	public DatasetMetaItem getMeta() {
+		if (has(Property.meta)) {
+			return new DatasetMetaItem(getValue(Property.meta));
+		}
+		return new DatasetMetaItem();
 	}
 }

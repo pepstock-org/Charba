@@ -5,13 +5,6 @@ import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeStringDescriptor;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
-import org.pepstock.charba.client.jsinterop.items.ChartAreaItem;
-import org.pepstock.charba.client.jsinterop.items.DatasetItem;
-import org.pepstock.charba.client.jsinterop.items.DatasetMetaItem;
-import org.pepstock.charba.client.jsinterop.items.LegendNode;
-import org.pepstock.charba.client.jsinterop.items.ScalesNode;
-import org.pepstock.charba.client.jsinterop.items.TitleNode;
-import org.pepstock.charba.client.jsinterop.items.TooltipNode;
 import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 import org.pepstock.charba.client.jsinterop.options.Options;
 import org.pepstock.charba.client.jsinterop.plugins.NativePlugins;
@@ -77,13 +70,13 @@ public final class Chart{
 	native String generateLegend();
 	
 	@JsMethod
-	native ArrayObject<DatasetItem> getElementAtEvent(ChartNativeEvent event);
+	native ArrayObject getElementAtEvent(ChartNativeEvent event);
 
 	@JsMethod
-	native ArrayObject<DatasetItem> getElementsAtEvent(ChartNativeEvent event);
+	native ArrayObject getElementsAtEvent(ChartNativeEvent event);
 	
 	@JsMethod
-	native DatasetMetaItem getDatasetMeta(int index);
+	native NativeObject getDatasetMeta(int index);
 	
 	/**
 	 * Returns the CHART JS chart ID.
@@ -182,22 +175,22 @@ public final class Chart{
 	native int getOffsetY();
 	
 	@JsProperty
-	native ChartAreaItem getChartArea();
+	native NativeObject getChartArea();
 
 	@JsProperty
-	native LegendNode getLegend();
+	native NativeObject getLegend();
 
 	@JsProperty
-	native TitleNode getTitleBlock();
+	native NativeObject getTitleBlock();
 	
 	@JsProperty
 	native NativeObject getOptions();
 	
 	@JsProperty
-	native ScalesNode getScales();
+	native NativeObject getScales();
 
 	@JsProperty
-	native TooltipNode getTooltip();
+	native NativeObject getTooltip();
 	
 	@JsOverlay
 	public String getCharbaId() {

@@ -145,13 +145,13 @@ public final class ArrayListHelper {
 	 * @param <E> type of java script object
 	 * @return a array list of strings instance or <code>null</code> if the array is null.
 	 */
-	public static <E extends NativeObject> ArrayObjectList<E> list(ArrayObject<E> values){
+	public static ArrayObjectList list(ArrayObject values){
 		// checks if array is null
 		if (values == null){
 			return null;
 		}
 		// creates the list
-		return new ArrayObjectList<E>(values);
+		return new ArrayObjectList(values);
 	}
 
 	/**
@@ -162,13 +162,13 @@ public final class ArrayListHelper {
 	 * @param <O> type of native object
 	 * @return the instance of updated list or <code>null</code> if the array is null.
 	 */
-	public static <E extends NativeObjectContainer<O>, O extends NativeObject> ArrayObjectContainerList<E, O> list(ArrayObject<O> array, Factory<E, O> factory){
+	public static <E extends NativeObjectContainer> ArrayObjectContainerList<E> list(ArrayObject array, Factory<E> factory){
 		// checks if array is null
 		if (array == null){
 			return null;
 		}
 		// creates the list
-		return new ArrayObjectContainerList<>(array, factory);
+		return new ArrayObjectContainerList<E>(array, factory);
 	}
 	
 	/**
@@ -227,7 +227,7 @@ public final class ArrayListHelper {
 	 * @param <E> type of java script object
 	 * @return a array list of strings instance or <code>null</code> if the array is null.
 	 */
-	public static <E extends NativeObject> List<E> unmodifiableList(ArrayObject<E> values){
+	public static List<NativeObject> unmodifiableList(ArrayObject values){
 		return unmodifiableList(list(values));
 	}
 
@@ -239,7 +239,7 @@ public final class ArrayListHelper {
 	 * @param <O> type of native object
 	 * @return the instance of updated list or <code>null</code> if the array is null.
 	 */
-	public static <E extends NativeObjectContainer<O>, O extends NativeObject> List<E> unmodifiableList(ArrayObject<O> array, Factory<E, O> factory){
+	public static <E extends NativeObjectContainer> List<E> unmodifiableList(ArrayObject array, Factory<E> factory){
 		return unmodifiableList(list(array, factory));
 	}
 	

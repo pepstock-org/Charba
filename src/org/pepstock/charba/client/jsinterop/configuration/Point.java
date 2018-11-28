@@ -41,7 +41,7 @@ public final class Point extends AbstractConfigurationElement {
 	 * 
 	 * @param radius array of the radius of the point shape.
 	 */
-	public void setRadius(int radius) {
+	public void setRadius(double radius) {
 		getOptions().getElements().getPoint().setRadius(radius);
 	}
 
@@ -50,7 +50,7 @@ public final class Point extends AbstractConfigurationElement {
 	 * 
 	 * @return list of the radius of the point when hovered.
 	 */
-	public int getRadius() {
+	public double getRadius() {
 		return getOptions().getElements().getPoint().getRadius();
 	}
 
@@ -79,7 +79,7 @@ public final class Point extends AbstractConfigurationElement {
 	 * 
 	 * @param hitRadius the pixel size of the non-displayed point.
 	 */
-	public void setHitRadius(int hitRadius) {
+	public void setHitRadius(double hitRadius) {
 		getOptions().getElements().getPoint().setHitRadius(hitRadius);
 	}
 
@@ -88,7 +88,7 @@ public final class Point extends AbstractConfigurationElement {
 	 * 
 	 * @return the pixel size of the non-displayed point. 
 	 */
-	public int getHitRadius() {
+	public double getHitRadius() {
 		return getOptions().getElements().getPoint().getHitRadius();
 	}
 
@@ -97,7 +97,7 @@ public final class Point extends AbstractConfigurationElement {
 	 * 
 	 * @param hoverRadius the radius of the point when hovered.
 	 */
-	public void setHoverRadius(int hoverRadius) {
+	public void setHoverRadius(double hoverRadius) {
 		getOptions().getElements().getPoint().setHoverRadius(hoverRadius);
 	}
 
@@ -106,7 +106,7 @@ public final class Point extends AbstractConfigurationElement {
 	 * 
 	 * @return the radius of the point when hovered. 
 	 */
-	public int getHoverRadius() {
+	public double getHoverRadius() {
 		return getOptions().getElements().getPoint().getHoverRadius();
 	}
 

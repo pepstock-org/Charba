@@ -19,7 +19,10 @@ import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.jsinterop.commons.FlexibleProperty;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
+import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
+import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 
 /**
  * This dataset is managing some common properties of Bar and Bubble datasets where every property can be set as a single value or an array.<br>
@@ -30,11 +33,29 @@ import org.pepstock.charba.client.jsinterop.commons.FlexibleProperty;
 abstract class HovingFlexDataset extends Dataset{
 	
 	/**
+	 * Name of fields of JavaScript object. 
+	 */
+	private enum Property implements Key {
+		backgroundColor,
+		borderColor,
+		borderWidth,
+		hoverBackgroundColor,
+		hoverBorderColor,
+		hoverBorderWidth
+	}
+	
+	abstract String getDefaultBackgroundColorAsString();
+	
+	abstract String getDefaultBorderColorAsString();
+	
+	abstract int getDefaultBorderWidth();
+
+	/**
 	 * Sets the fill colors of the elements.
 	 * @param backgroundColor the fill colors of the elements.
 	 */
 	public void setBackgroundColor(IsColor... backgroundColor) {
-		getNativeObject().setBackgroundColor(FlexibleProperty.fromColors(backgroundColor));	
+		setValueOrArray(Property.backgroundColor, backgroundColor);
 	}
 
 	/**
@@ -42,7 +63,7 @@ abstract class HovingFlexDataset extends Dataset{
 	 * @param backgroundColor the fill colors of the elements.
 	 */
 	public void setBackgroundColor(String... backgroundColor) {
-		getNativeObject().setBackgroundColor(FlexibleProperty.fromStrings(backgroundColor));	
+		setValueOrArray(Property.backgroundColor, backgroundColor);
 	}
 
 	/**
@@ -50,7 +71,8 @@ abstract class HovingFlexDataset extends Dataset{
 	 * @return list of the fill colors of the elements
 	 */
 	public List<String> getBackgroundColorAsString() {
-		return FlexibleProperty.toStrings(getNativeObject().getBackgroundColor());
+		ArrayString array = getValueOrArray(Property.backgroundColor, getDefaultBackgroundColorAsString());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -66,7 +88,7 @@ abstract class HovingFlexDataset extends Dataset{
 	 * @param borderColor the color of the bar border
 	 */
 	public void setBorderColor(IsColor... borderColor) {
-		getNativeObject().setBorderColor(FlexibleProperty.fromColors(borderColor));
+		setValueOrArray(Property.borderColor, borderColor);
 	}
 
 	/**
@@ -74,7 +96,7 @@ abstract class HovingFlexDataset extends Dataset{
 	 * @param borderColor the color of the bar border
 	 */
 	public void setBorderColor(String... borderColor) {
-		getNativeObject().setBorderColor(FlexibleProperty.fromStrings(borderColor));
+		setValueOrArray(Property.borderColor, borderColor);
 	}
 	
 	/**
@@ -82,7 +104,8 @@ abstract class HovingFlexDataset extends Dataset{
 	 * @return list of the color of the bar border
 	 */
 	public List<String> getBorderColorAsString() {
-		return FlexibleProperty.toStrings(getNativeObject().getBorderColor());
+		ArrayString array = getValueOrArray(Property.borderColor, getDefaultBorderColorAsString());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -98,7 +121,7 @@ abstract class HovingFlexDataset extends Dataset{
 	 * @param borderWidth the stroke width of the bar in pixels.
 	 */
 	public void setBorderWidth(int... borderWidth) {
-		getNativeObject().setBorderWidth(FlexibleProperty.fromIntegers(borderWidth));
+		setValueOrArray(Property.borderWidth, borderWidth);
 	}
 
 	/**
@@ -106,7 +129,8 @@ abstract class HovingFlexDataset extends Dataset{
 	 * @return list of the stroke width of the bar in pixels.
 	 */
 	public List<Integer> getBorderWidth() {
-		return FlexibleProperty.toIntegers(getNativeObject().getBorderWidth());
+		ArrayInteger array = getValueOrArray(Property.borderWidth, getDefaultBorderWidth());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -114,7 +138,7 @@ abstract class HovingFlexDataset extends Dataset{
 	 * @param colors the fill color of the elements when hovered
 	 */
 	public void setHoverBackgroundColor(IsColor... colors){
-		getNativeObject().setHoverBackgroundColor(FlexibleProperty.fromColors(colors));
+		setValueOrArray(Property.hoverBackgroundColor, colors);
 	}
 
 	/**
@@ -122,7 +146,7 @@ abstract class HovingFlexDataset extends Dataset{
 	 * @param colors the fill color of the elements when hovered
 	 */
 	public void setHoverBackgroundColor(String... colors){
-		getNativeObject().setHoverBackgroundColor(FlexibleProperty.fromStrings(colors));
+		setValueOrArray(Property.hoverBackgroundColor, colors);
 	}
 	
 	/**
@@ -130,7 +154,8 @@ abstract class HovingFlexDataset extends Dataset{
 	 * @return list of the fill color of the elements when hovered
 	 */
 	public List<String> getHoverBackgroundColorAsString(){
-		return FlexibleProperty.toStrings(getNativeObject().getHoverBackgroundColor());
+		ArrayString array = getValueOrArray(Property.hoverBackgroundColor, getDefaultBackgroundColorAsString());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -146,7 +171,7 @@ abstract class HovingFlexDataset extends Dataset{
 	 * @param colors the stroke color of the elements when hovered
 	 */
 	public void setHoverBorderColor(IsColor... colors){
-		getNativeObject().setHoverBorderColor(FlexibleProperty.fromColors(colors));
+		setValueOrArray(Property.hoverBorderColor, colors);
 	}
 
 	/**
@@ -154,7 +179,7 @@ abstract class HovingFlexDataset extends Dataset{
 	 * @param colors the stroke color of the elements when hovered
 	 */
 	public void setHoverBorderColor(String... colors){
-		getNativeObject().setHoverBorderColor(FlexibleProperty.fromStrings(colors));
+		setValueOrArray(Property.hoverBorderColor, colors);;
 	}
 	
 	/**
@@ -162,7 +187,9 @@ abstract class HovingFlexDataset extends Dataset{
 	 * @return list of the stroke color of the elements when hovered
 	 */
 	public List<String> getHoverBorderColorAsString(){
-		return FlexibleProperty.toStrings(getNativeObject().getHoverBorderColor());
+		ArrayString array = getValueOrArray(Property.hoverBorderColor, getDefaultBorderColorAsString());
+		return ArrayListHelper.list(array);
+
 	}
 
 	/**
@@ -178,7 +205,7 @@ abstract class HovingFlexDataset extends Dataset{
 	 * @param widths the stroke width of the elements when hovered.
 	 */
 	public void setHoverBorderWidth(int... widths){
-		getNativeObject().setHoverBorderWidth(FlexibleProperty.fromIntegers(widths));
+		setValueOrArray(Property.hoverBorderWidth, widths);
 	}
 
 	/**
@@ -186,7 +213,8 @@ abstract class HovingFlexDataset extends Dataset{
 	 * @return list of the stroke width of the elements when hovered.
 	 */
 	public List<Integer> getHoverBorderWidth(){
-		return FlexibleProperty.toIntegers(getNativeObject().getHoverBorderWidth());
+		ArrayInteger array = getValueOrArray(Property.hoverBorderWidth, getDefaultBorderWidth());
+		return ArrayListHelper.list(array);
 	}
 
 }

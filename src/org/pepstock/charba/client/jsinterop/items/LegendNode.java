@@ -17,16 +17,13 @@ package org.pepstock.charba.client.jsinterop.items;
 
 import java.util.List;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.items.LegendHitBoxItem.LegendHitBoxItemFactory;
+import org.pepstock.charba.client.jsinterop.items.LegendItem.LegendItemFactory;
 
 /**
  * Wrapper of legend node of CHART.JS.
@@ -34,54 +31,38 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
 public final class LegendNode extends BaseBoxNodeItem {
 	
 	/**
-	 * Returns if it is in doughnut mode.
-	 * 
-	 * @return <code>true</code> it is in doughnut mode. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 * Name of fields of JavaScript object.
 	 */
-	@JsProperty(name = "doughnutMode")
-	native boolean isNativeDoughnutMode();
+	private enum Property implements Key
+	{
+		doughnutMode,
+		legendItems,
+		legendHitBoxes,
+		lineWidths,
+		columnWidths
+	}
+	
+	private final LegendItemFactory legendItemFactory = new LegendItemFactory();
+	
+	private final LegendHitBoxItemFactory legendHitBoxItemFactory = new LegendHitBoxItemFactory();
+	
 	/**
-	 * Returns the list of line widths.
-	 * 
-	 * @return the list of line widths.
+	 * @param nativeObject
 	 */
-	@JsProperty(name = "lineWidths")
-	native ArrayInteger getNativeLineWidths();
-	/**
-	 * Returns the list of columns widths.
-	 * 
-	 * @return the list of columns widths.
-	 */
-	@JsProperty(name = "columnWidths")
-	native ArrayInteger getNativeColumnWidths();
-
-	/**
-	 * Returns the list of hit boxes of the legend.
-	 * 
-	 * @return the list of hit boxes of the legend.
-	 */
-	@JsProperty(name = "legendHitBoxes")
-	native ArrayObject<LegendHitBoxItem> getNativeHitBoxes();
-	/**
-	 * Returns the list of items of the legend.
-	 * 
-	 * @return the list of items of the legend.
-	 */
-	@JsProperty(name = "legendItems")
-	native ArrayObject<LegendItem> getNativeItems();
+	public LegendNode(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
 	/**
 	 * Returns if it is in doughnut mode.
 	 * 
 	 * @return <code>true</code> it is in doughnut mode. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
 	 */
-	@JsOverlay
 	public boolean isDoughnutMode() {
-		return Checker.check(isNativeDoughnutMode(), UndefinedValues.BOOLEAN);
+		return getValue(Property.doughnutMode, UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -89,9 +70,9 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * 
 	 * @return the list of line widths.
 	 */
-	@JsOverlay
 	public List<Integer> getLineWidths() {
-		return ArrayListHelper.unmodifiableList(getNativeLineWidths());
+		ArrayInteger array = getArrayValue(Property.lineWidths);
+		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	/**
@@ -99,9 +80,9 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * 
 	 * @return the list of columns widths.
 	 */
-	@JsOverlay
 	public List<Integer> getColumnWidths() {
-		return ArrayListHelper.unmodifiableList(getNativeColumnWidths());
+		ArrayInteger array = getArrayValue(Property.columnWidths);
+		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	/**
@@ -109,9 +90,9 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * 
 	 * @return the list of hit boxes of the legend.
 	 */
-	@JsOverlay
 	public List<LegendHitBoxItem> getHitBoxes() {
-		return ArrayListHelper.unmodifiableList(getNativeHitBoxes());
+		ArrayObject array = getArrayValue(Property.legendHitBoxes);
+		return ArrayListHelper.unmodifiableList(array, legendHitBoxItemFactory);
 	}
 
 	/**
@@ -119,8 +100,8 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * 
 	 * @return the list of items of the legend.
 	 */
-	@JsOverlay
 	public List<LegendItem> getItems() {
-		return ArrayListHelper.unmodifiableList(getNativeItems());
+		ArrayObject array = getArrayValue(Property.legendItems);
+		return ArrayListHelper.unmodifiableList(array, legendItemFactory);
 	}
 }

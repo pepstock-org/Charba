@@ -15,14 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
  * Base object which maps the CHART.JS chart items which represents a box.
@@ -30,30 +25,33 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public abstract class BaseBoxItem extends NativeObject {
+public abstract class BaseBoxItem extends NativeObjectContainer {
 
-	@JsProperty(name = "top")
-	native int getNativeTop();
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	protected enum Property implements Key
+	{
+		top,
+		right,
+		bottom,
+		left
+	}
 	
-	@JsProperty(name = "right")
-	native int getNativeRight();
+	/**
+	 * @param nativeObject
+	 */
+	BaseBoxItem(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
-	@JsProperty(name = "bottom")
-	native int getNativeBottom();
-
-	@JsProperty(name = "left")
-	native int getNativeLeft();
-	
-	
 	/**
 	 * Returns the top of chart area.
 	 * 
 	 * @return the top of chart area.
 	 */
-	@JsOverlay
 	public final int getTop() {
-		return Checker.check(getNativeTop(), UndefinedValues.INTEGER);
+		return getValue(Property.top, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -61,9 +59,8 @@ public abstract class BaseBoxItem extends NativeObject {
 	 * 
 	 * @return the right of chart area.
 	 */
-	@JsOverlay
 	public final int getRight() {
-		return Checker.check(getNativeRight(), UndefinedValues.INTEGER);
+		return getValue(Property.right, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -71,9 +68,8 @@ public abstract class BaseBoxItem extends NativeObject {
 	 * 
 	 * @return the bottom of chart area.
 	 */
-	@JsOverlay
 	public final int getBottom() {
-		return Checker.check(getNativeBottom(), UndefinedValues.INTEGER);
+		return getValue(Property.bottom, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -81,9 +77,7 @@ public abstract class BaseBoxItem extends NativeObject {
 	 * 
 	 * @return the left of chart area.
 	 */
-	@JsOverlay
 	public final int getLeft() {
-		return Checker.check(getNativeLeft(), UndefinedValues.INTEGER);
+		return getValue(Property.left, UndefinedValues.INTEGER);
 	}
-
 }

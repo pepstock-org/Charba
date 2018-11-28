@@ -33,19 +33,19 @@ import org.pepstock.charba.client.jsinterop.utils.JSON;
  * @see org.pepstock.charba.client.jsinterop.commons.ArrayObject
  * @param <E> extension of native objects, import a type from an external script
  */
-public final class ArrayObjectList<E extends NativeObject> implements List<E> {
+public final class ArrayObjectList implements List<NativeObject> {
 	
 	// delegated array to store objects
-	private final ArrayObject<E> array;
+	private final ArrayObject array;
 
 	/**
 	 * Internal constructor used to set an array instance as backend of the list.
 	 * @param array java script array instance. If <code>null</code>, new empty array has been created
 	 */
-	ArrayObjectList(ArrayObject<E> array) {
+	ArrayObjectList(ArrayObject array) {
 		// if null, creates a new array
 		if (array == null){
-			this.array = new ArrayObject<E>();
+			this.array = new ArrayObject();
 		} else {
 			// uses an existing array
 			this.array = array;
@@ -63,9 +63,9 @@ public final class ArrayObjectList<E extends NativeObject> implements List<E> {
 	 * Loads an array of elements into the list
 	 * @param values an array of elements to be loaded
 	 */
-	public void addAll(E[] values){
+	public void addAll(NativeObject... values){
 		// scans all elements 
-		for (E val : values){
+		for (NativeObject val : values){
 			// adds
 			add(val);
 		}
@@ -102,8 +102,8 @@ public final class ArrayObjectList<E extends NativeObject> implements List<E> {
 	 * Returns an iterator over the elements in this list in proper sequence.
 	 */
 	@Override
-	public Iterator<E> iterator() {
-		return new IteratorImpl<E>(this);
+	public Iterator<NativeObject> iterator() {
+		return new IteratorImpl<NativeObject>(this);
 	}
 
 	/**
@@ -126,7 +126,7 @@ public final class ArrayObjectList<E extends NativeObject> implements List<E> {
 	 * Appends the specified element to the end of this list
 	 */
 	@Override
-	public boolean add(E e) {
+	public boolean add(NativeObject e) {
 		array.push(e);
 		return true;
 	}
@@ -168,10 +168,10 @@ public final class ArrayObjectList<E extends NativeObject> implements List<E> {
 	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by the specified collection's iterator
 	 */
 	@Override
-	public boolean addAll(Collection<? extends E> c) {
+	public boolean addAll(Collection<? extends NativeObject> c) {
 		// set modified checking if collection is empty
 		boolean modified = !c.isEmpty();
-		Iterator<? extends E> e = c.iterator();
+		Iterator<? extends NativeObject> e = c.iterator();
 		// scans all elements
 		while (e.hasNext()) {
 			// if adds
@@ -191,14 +191,14 @@ public final class ArrayObjectList<E extends NativeObject> implements List<E> {
 	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (increases their indices). 
 	 */
 	@Override
-	public boolean addAll(int index, Collection<? extends E> c) {
+	public boolean addAll(int index, Collection<? extends NativeObject> c) {
 		// set modified checking if collection is empty
 		boolean modified = !c.isEmpty();
 		// checks if continue
 		if (modified && checkRange(index)){
 			// saves index
 			int myIndex = index;
-			Iterator<? extends E> e = c.iterator();
+			Iterator<? extends NativeObject> e = c.iterator();
 			// scans all elements
 			while (e.hasNext()) {
 				// adds to the stored new index
@@ -238,10 +238,10 @@ public final class ArrayObjectList<E extends NativeObject> implements List<E> {
 		boolean modified = !c.isEmpty();
 		if (modified){
 			// creates a copy of elements
-			List<E> contained = new ArrayList<E>();
+			List<NativeObject> contained = new ArrayList<NativeObject>();
 			// scans all current elements
 			for (int i=0; i<size(); i++){
-				E value = get(i);
+				NativeObject value = get(i);
 				// checks if not present into
 				// passed collection
 				if (!c.contains(get(i))){
@@ -252,7 +252,7 @@ public final class ArrayObjectList<E extends NativeObject> implements List<E> {
 			// if temporary list is not empty
 			if (!contained.isEmpty()){
 				// scans all elements
-				for (E toRemove : contained){
+				for (NativeObject toRemove : contained){
 					// removes and checks if modified
 					modified = modified && remove(toRemove);
 				}
@@ -273,7 +273,7 @@ public final class ArrayObjectList<E extends NativeObject> implements List<E> {
 	 * Returns the element at the specified position in this list. If index out of range, returns null
 	 */
 	@Override
-	public E get(int index) {
+	public NativeObject get(int index) {
 		// checks range
 		if (checkRange(index)){
 			return array.get(index);
@@ -285,11 +285,11 @@ public final class ArrayObjectList<E extends NativeObject> implements List<E> {
 	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns null
 	 */
 	@Override
-	public E set(int index, E element) {
+	public NativeObject set(int index, NativeObject element) {
 		// checks range
 		if (checkRange(index)){
 			// gets current element at that index
-			E old = array.get(index);
+			NativeObject old = array.get(index);
 			// replaces with new element
 			array.set(index, element);
 			// returns old
@@ -303,7 +303,7 @@ public final class ArrayObjectList<E extends NativeObject> implements List<E> {
 	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
 	 */
 	@Override
-	public void add(int index, E element) {
+	public void add(int index, NativeObject element) {
 		array.insertAt(index, element);
 	}
 
@@ -312,7 +312,7 @@ public final class ArrayObjectList<E extends NativeObject> implements List<E> {
 	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from the list.
 	 */
 	@Override
-	public E remove(int index) {
+	public NativeObject remove(int index) {
 		// checks range
 		if (checkRange(index)){
 			return array.remove(index);
@@ -340,8 +340,8 @@ public final class ArrayObjectList<E extends NativeObject> implements List<E> {
 	 * Returns a list iterator over the elements in this list
 	 */
 	@Override
-	public ListIterator<E> listIterator() {
-		return new ListIteratorImpl<E>(0, this);
+	public ListIterator<NativeObject> listIterator() {
+		return new ListIteratorImpl<NativeObject>(0, this);
 	}
 
 	/**
@@ -350,19 +350,19 @@ public final class ArrayObjectList<E extends NativeObject> implements List<E> {
 	 * An initial call to previous would return the element with the specified index minus one.
 	 */
 	@Override
-	public ListIterator<E> listIterator(int index) {
+	public ListIterator<NativeObject> listIterator(int index) {
 		// if index is out of range, EXCEPTION
 		if (!checkRange(index)){
             throw new IndexOutOfBoundsException("Index: "+index);
 		}
-        return new ListIteratorImpl<E>(index, this);
+        return new ListIteratorImpl<NativeObject>(index, this);
 	}
 
 	/**
 	 * Not implemented
 	 */
 	@Override
-	public List<E> subList(int fromIndex, int toIndex) {
+	public List<NativeObject> subList(int fromIndex, int toIndex) {
 		throw new UnsupportedOperationException("Unable to copy into an array");
 	}
 

@@ -19,15 +19,17 @@ import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.Enumer;
-import org.pepstock.charba.client.jsinterop.commons.FlexibleProperty;
+import org.pepstock.charba.client.jsinterop.commons.ArrayString;
+import org.pepstock.charba.client.jsinterop.commons.ObjectType;
+import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
 
 /**
  * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
@@ -37,16 +39,30 @@ import org.pepstock.charba.client.jsinterop.commons.FlexibleProperty;
  */
 abstract class LiningDataset extends Dataset{
 	
-	// default value of border color
-	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0.1)";
-	// default value of border width
-	private static final int DEFAULT_BORDER_WIDTH = 3;
-	// default value of background color
-	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
-	// default value of line tension
-	private static final double DEFAULT_LINE_TENSION = 0.4F;
-	// default value of border dash offset
-	private static final int DEFAULT_BORDER_DASH_OFFSET = 0;
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
+	private enum Property implements Key {
+		backgroundColor,
+		borderColor,
+		borderDash,
+		borderDashOffset,
+		borderCapStyle,
+		borderJoinStyle,
+		borderWidth,
+		fill,
+		lineTension,
+		pointBackgroundColor,
+		pointBorderColor,
+		pointBorderWidth,
+		pointRadius,
+		pointStyle,
+		pointHitRadius,
+		pointHoverBackgroundColor,
+		pointHoverBorderColor,
+		pointHoverBorderWidth,
+		pointHoverRadius
+	}
 
 	/**
 	 * Sets the fill color under the line. 
@@ -61,7 +77,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param backgroundColor the fill color under the line.
 	 */
 	public void setBackgroundColor(String backgroundColor) {
-		getNativeObject().setBackgroundColor(backgroundColor);
+		setValue(Property.backgroundColor, backgroundColor);
 	}
 
 	/**
@@ -69,7 +85,7 @@ abstract class LiningDataset extends Dataset{
 	 * @return the fill color under the line. Default is <code>rgba(0,0,0,0.1)</code>
 	 */
 	public String getBackgroundColorAsString() {
-		return Checker.check(getNativeObject().getBackgroundColor(), DEFAULT_BACKGROUND_COLOR);
+		return getValue(Property.backgroundColor, DefaultOptions.get().getElements().getLine().getBackgroundColorAsString());
 	}
 
 	/**
@@ -93,7 +109,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param borderColor the color of the line.
 	 */
 	public void setBorderColor(String borderColor) {
-		getNativeObject().setBorderColor(borderColor);
+		setValue(Property.borderColor, borderColor);
 	}
 
 	/**
@@ -101,7 +117,7 @@ abstract class LiningDataset extends Dataset{
 	 * @return the color of the line. Default is <code>rgba(0,0,0,0.1)</code>
 	 */
 	public String getBorderColorAsString() {
-		return Checker.check(getNativeObject().getBorderColor(), DEFAULT_BORDER_COLOR);
+		return getValue(Property.borderColor, DefaultOptions.get().getElements().getLine().getBorderColorAsString());
 	}
 
 	/**
@@ -116,7 +132,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param borderWidth the width of the line in pixels.
 	 */
 	public void setBorderWidth(int borderWidth) {
-		getNativeObject().setBorderWidth(borderWidth);
+		setValue(Property.borderWidth, borderWidth);
 	}
 
 	/**
@@ -124,7 +140,7 @@ abstract class LiningDataset extends Dataset{
 	 * @return the width of the line in pixels. Default is <code>3</code>
 	 */
 	public int getBorderWidth() {
-		return Checker.check(getNativeObject().getBorderWidth(), DEFAULT_BORDER_WIDTH);
+		return getValue(Property.borderWidth, DefaultOptions.get().getElements().getLine().getBorderWidth());
 	}
 
 	/**
@@ -132,7 +148,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
-		getNativeObject().setBorderDash(ArrayInteger.of(borderDash));
+		setArrayValue(Property.borderDash, ArrayInteger.of(borderDash));
 	}
 
 	/**
@@ -140,8 +156,8 @@ abstract class LiningDataset extends Dataset{
 	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
 	 */
 	public List<Integer> getBorderDash() {
-		// FIXME che valga la pena non restituire NULL!
-		return ArrayListHelper.list(getNativeObject().getBorderDash());
+		ArrayInteger array = getArrayValue(Property.borderDash);
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -149,7 +165,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param borderDashOffset the line dash pattern offset or "phase". 
 	 */
 	public void setBorderDashOffset(int borderDashOffset){
-		 getNativeObject().setBorderDashOffset(borderDashOffset);
+		 setValue(Property.borderDashOffset, borderDashOffset);
 	}
 
 	/**
@@ -157,7 +173,7 @@ abstract class LiningDataset extends Dataset{
 	 * @return the line dash pattern offset or "phase". Default is <code>0</code>
 	 */
 	public int getBorderDashOffset(){
-		  return Checker.check(getNativeObject().getBorderDashOffset(), DEFAULT_BORDER_DASH_OFFSET);
+		  return getValue(Property.borderDashOffset, DefaultOptions.get().getElements().getLine().getBorderDashOffset());
 	}
 
 	/**
@@ -166,7 +182,7 @@ abstract class LiningDataset extends Dataset{
 	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public void setBorderCapStyle(CapStyle borderCapStyle) {
-		getNativeObject().setBorderCapStyle(borderCapStyle.name());
+		setValue(Property.borderCapStyle, borderCapStyle);
 	}
 
 	/**
@@ -175,7 +191,7 @@ abstract class LiningDataset extends Dataset{
 	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public CapStyle getBorderCapStyle(){
-		return Enumer.deserialize(getNativeObject().getBorderCapStyle(), CapStyle.class, CapStyle.butt);
+		return getValue(Property.borderCapStyle, CapStyle.class, DefaultOptions.get().getElements().getLine().getBorderCapStyle());
 	}
 
 	/**
@@ -185,7 +201,7 @@ abstract class LiningDataset extends Dataset{
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
-		getNativeObject().setBorderJoinStyle(borderJoinStyle.name());
+		setValue(Property.borderJoinStyle, borderJoinStyle);
 	}
 
 	/**
@@ -195,7 +211,7 @@ abstract class LiningDataset extends Dataset{
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public JoinStyle getBorderJoinStyle() {
-		return Enumer.deserialize(getNativeObject().getBorderJoinStyle(),JoinStyle.class, JoinStyle.miter);
+		return getValue(Property.borderJoinStyle, JoinStyle.class, DefaultOptions.get().getElements().getLine().getBorderJoinStyle());
 	}
 
 	/**
@@ -207,10 +223,10 @@ abstract class LiningDataset extends Dataset{
 		// checks if is no fill
 		if (Fill.nofill.equals(fill)){
 			// sets the boolean value instead of string one
-			getNativeObject().setFill(false);
+			setValue(Property.fill, false);
 		} else {
 			// sets value
-			getNativeObject().setFill(fill.name());
+			setValue(Property.fill, fill);
 		}
 	}
 	
@@ -220,19 +236,15 @@ abstract class LiningDataset extends Dataset{
 	 * @see org.pepstock.charba.client.enums.Fill
 	 */
 	public Fill getFill(){
-		// gets value
-		Object value = getNativeObject().getFill();
-		if (value != null) {
-			String valueAsString = (String) value;
-			// if is a boolean FALSE value
-			if (valueAsString.equalsIgnoreCase(Boolean.FALSE.toString())){
-				// returns no fill
-				return Fill.nofill;
-			}
-			return Enumer.deserialize(valueAsString, Fill.class, Fill.origin);
+		// gets value type
+		ObjectType type = type(Property.fill);
+		//String value = getValue(Property.fill, getDefaultValues().getFill());
+		// if is a boolean FALSE value
+		if (ObjectType.Boolean.equals(type)) {
+			// returns no fill
+			return getValue(Property.fill, false) ? Fill.origin : Fill.nofill;
 		}
-		// returns this as default
-		return Fill.origin;
+		return getValue(Property.fill, Fill.class, DefaultOptions.get().getElements().getLine().getFill());
 	}
 
 	/**
@@ -240,7 +252,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param lineTension curve tension of the line
 	 */
 	public void setLineTension(double lineTension){
-		getNativeObject().setLineTension(lineTension);
+		setValue(Property.lineTension, lineTension);
 	}
 
 	/**
@@ -248,7 +260,7 @@ abstract class LiningDataset extends Dataset{
 	 * @return curve tension of the line. Default is <code>0.4</code>
 	 */
 	public double getLineTension(){
-		return Checker.check(getNativeObject().getLineTension(), DEFAULT_LINE_TENSION);
+		return getValue(Property.lineTension, DefaultOptions.get().getElements().getLine().getTension());
 	}
 
 	/**
@@ -256,7 +268,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param pointBackgroundColor array of the fill color for points.
 	 */
 	public void setPointBackgroundColor(IsColor... pointBackgroundColor) {
-		getNativeObject().setPointBackgroundColor(FlexibleProperty.fromColors(pointBackgroundColor));
+		setValueOrArray(Property.pointBackgroundColor, pointBackgroundColor);
 	}
 
 	/**
@@ -264,7 +276,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param pointBackgroundColor array of the fill color for points.
 	 */
 	public void setPointBackgroundColor(String... pointBackgroundColor) {
-		getNativeObject().setPointBackgroundColor(FlexibleProperty.fromStrings(pointBackgroundColor));
+		setValueOrArray(Property.pointBackgroundColor, pointBackgroundColor);
 	}
 
 	/**
@@ -272,7 +284,8 @@ abstract class LiningDataset extends Dataset{
 	 * @return list of the fill color for points.
 	 */
 	public List<String> getPointBackgroundColorAsString() {
-	    return FlexibleProperty.toStrings(getNativeObject().getPointBackgroundColor());
+		ArrayString array = getValueOrArray(Property.pointBackgroundColor, DefaultOptions.get().getElements().getPoint().getBackgroundColorAsString());;
+	    return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -288,7 +301,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param pointBorderColor array of the border color for points.
 	 */
 	public void setPointBorderColor(IsColor... pointBorderColor) {
-		getNativeObject().setPointBorderColor(FlexibleProperty.fromColors(pointBorderColor));
+		setValueOrArray(Property.pointBorderColor, pointBorderColor);
 	}
 
 	/**
@@ -296,7 +309,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param pointBorderColor array of the border color for points.
 	 */
 	public void setPointBorderColor(String... pointBorderColor) {
-		getNativeObject().setPointBorderColor(FlexibleProperty.fromStrings(pointBorderColor));
+		setValueOrArray(Property.pointBorderColor, pointBorderColor);
 	}
 
 	/**
@@ -304,7 +317,8 @@ abstract class LiningDataset extends Dataset{
 	 * @return list of the border color for points.
 	 */
 	public List<String> getPointBorderColorAsString() {
-	    return FlexibleProperty.toStrings(getNativeObject().getPointBorderColor());
+		ArrayString array = getValueOrArray(Property.pointBorderColor, DefaultOptions.get().getElements().getPoint().getBorderColorAsString());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -320,7 +334,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param pointBorderWidth array of the width of the point border in pixels.
 	 */
 	public void setPointBorderWidth(int... pointBorderWidth) {
-		getNativeObject().setPointBorderWidth(FlexibleProperty.fromIntegers(pointBorderWidth));
+		setValueOrArray(Property.pointBorderWidth, pointBorderWidth);
 	}
 
 	/**
@@ -328,7 +342,8 @@ abstract class LiningDataset extends Dataset{
 	 * @return list of the width of the point border in pixels.
 	 */
 	public List<Integer> getPointBorderWidth() {
-	    return FlexibleProperty.toIntegers(getNativeObject().getPointBorderWidth());
+		ArrayInteger array = getValueOrArray(Property.pointBorderWidth, DefaultOptions.get().getElements().getPoint().getBorderWidth());
+	    return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -336,7 +351,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param pointHitRadius array of the pixel size of the non-displayed point.
 	 */
 	public void setPointHitRadius(double... pointHitRadius) {
-		getNativeObject().setPointHitRadius(FlexibleProperty.fromDoubles(pointHitRadius));
+		setValueOrArray(Property.pointHitRadius, pointHitRadius);
 	}
 
 	/**
@@ -344,7 +359,8 @@ abstract class LiningDataset extends Dataset{
 	 * @return list of the pixel size of the non-displayed point.
 	 */
 	public List<Double> getPointHitRadius() {
-	    return FlexibleProperty.toDoubles(getNativeObject().getPointHitRadius());
+		ArrayDouble array = getValueOrArray(Property.pointHitRadius, DefaultOptions.get().getElements().getPoint().getHitRadius());
+	    return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -352,7 +368,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param pointHoverBackgroundColor array of the point background color when hovered.
 	 */
 	public void setPointHoverBackgroundColor(IsColor... pointHoverBackgroundColor) {
-		getNativeObject().setPointHoverBackgroundColor(FlexibleProperty.fromColors(pointHoverBackgroundColor));
+		setValueOrArray(Property.pointHoverBackgroundColor, pointHoverBackgroundColor);
 	}
 	
 	/**
@@ -360,7 +376,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param pointHoverBackgroundColor array of the point background color when hovered.
 	 */
 	public void setPointHoverBackgroundColor(String... pointHoverBackgroundColor) {
-		getNativeObject().setPointHoverBackgroundColor(FlexibleProperty.fromStrings(pointHoverBackgroundColor));
+		setValueOrArray(Property.pointHoverBackgroundColor, pointHoverBackgroundColor);
 	}
 
 	/**
@@ -368,7 +384,8 @@ abstract class LiningDataset extends Dataset{
 	 * @return list of the point background color when hovered.
 	 */
 	public List<String> getPointHoverBackgroundColorAsString() {
-	    return FlexibleProperty.toStrings(getNativeObject().getPointHoverBackgroundColor());
+		ArrayString array = getValueOrArray(Property.pointBackgroundColor, DefaultOptions.get().getElements().getPoint().getBackgroundColorAsString());
+	    return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -384,7 +401,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param pointHoverBorderColor array of the point border color when hovered.
 	 */
 	public void setPointHoverBorderColor(IsColor... pointHoverBorderColor) {
-		getNativeObject().setPointHoverBorderColor(FlexibleProperty.fromColors(pointHoverBorderColor));
+		setValueOrArray(Property.pointHoverBorderColor, pointHoverBorderColor);
 	}
 
 	/**
@@ -392,7 +409,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param pointHoverBorderColor array of the point border color when hovered.
 	 */
 	public void setPointHoverBorderColor(String... pointHoverBorderColor) {
-		getNativeObject().setPointHoverBorderColor(FlexibleProperty.fromStrings(pointHoverBorderColor));
+		setValueOrArray(Property.pointHoverBorderColor, pointHoverBorderColor);
 	}
 
 	/**
@@ -400,7 +417,8 @@ abstract class LiningDataset extends Dataset{
 	 * @return list of the point border color when hovered.
 	 */
 	public List<String> getPointHoverBorderColorAsString() {
-	    return FlexibleProperty.toStrings(getNativeObject().getPointHoverBorderColor());
+		ArrayString array = getValueOrArray(Property.pointHoverBorderColor, DefaultOptions.get().getElements().getPoint().getBorderColorAsString());
+	    return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -416,7 +434,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param pointHoverBorderWidth array of the border width of point when hovered.
 	 */
 	public void setPointHoverBorderWidth(int... pointHoverBorderWidth) {
-		getNativeObject().setPointHoverBorderWidth(FlexibleProperty.fromIntegers(pointHoverBorderWidth));
+		setValueOrArray(Property.pointHoverBorderWidth, pointHoverBorderWidth);
 	}
 
 	/**
@@ -424,7 +442,8 @@ abstract class LiningDataset extends Dataset{
 	 * @return list of the border width of point when hovered.
 	 */
 	public List<Integer> getPointHoverBorderWidth() {
-	    return FlexibleProperty.toIntegers(getNativeObject().getPointHoverBorderWidth());
+		ArrayInteger array = getValueOrArray(Property.pointHoverBorderWidth, DefaultOptions.get().getElements().getPoint().getHoverBorderWidth());
+	    return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -432,7 +451,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param pointHoverRadius array of the radius of the point when hovered.
 	 */
 	public void setPointHoverRadius(double... pointHoverRadius) {
-		getNativeObject().setPointHoverRadius(FlexibleProperty.fromDoubles(pointHoverRadius));
+		setValueOrArray(Property.pointHoverRadius, pointHoverRadius);
 	}
 
 	/**
@@ -440,7 +459,8 @@ abstract class LiningDataset extends Dataset{
 	 * @return list of the radius of the point when hovered.
 	 */
 	public List<Double> getPointHoverRadius() {
-	    return FlexibleProperty.toDoubles(getNativeObject().getPointHoverRadius());
+		ArrayDouble array = getValueOrArray(Property.pointHoverRadius, DefaultOptions.get().getElements().getPoint().getHoverRadius());
+	    return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -448,7 +468,7 @@ abstract class LiningDataset extends Dataset{
 	 * @param pointRadius array of the radius of the point shape.
 	 */
 	public void setPointRadius(double...  pointRadius) {
-		getNativeObject().setPointRadius(FlexibleProperty.fromDoubles(pointRadius));
+		setValueOrArray(Property.pointRadius, pointRadius);
 	}
 
 	/**
@@ -456,7 +476,8 @@ abstract class LiningDataset extends Dataset{
 	 * @return list of the radius of the point shape.
 	 */
 	public List<Double> getPointRadius() {
-	    return FlexibleProperty.toDoubles(getNativeObject().getPointRadius());
+		ArrayDouble array = getValueOrArray(Property.pointRadius, DefaultOptions.get().getElements().getPoint().getRadius());
+	    return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -465,7 +486,7 @@ abstract class LiningDataset extends Dataset{
 	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public void setPointStyle(PointStyle... pointStyle) {
-		getNativeObject().setPointStyle(FlexibleProperty.fromKeys(pointStyle));
+		setValueOrArray(Property.pointStyle, pointStyle);
 	}
 
 	/**
@@ -474,12 +495,8 @@ abstract class LiningDataset extends Dataset{
 	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public List<PointStyle> getPointStyle() {
-		List<PointStyle> result = FlexibleProperty.toKeys(getNativeObject().getPointStyle(), PointStyle.class);
-		if (result.isEmpty()) {
-			//FIXME e corretto?
-			result.add(PointStyle.circle);
-		}
-		return result;
+		ArrayString array = getValueOrArray(Property.pointStyle, DefaultOptions.get().getElements().getPoint().getPointStyle());
+		return ArrayListHelper.list(PointStyle.class, array);
 	}
 
 }

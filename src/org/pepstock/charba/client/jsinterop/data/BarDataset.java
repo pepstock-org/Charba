@@ -17,12 +17,12 @@ package org.pepstock.charba.client.jsinterop.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.Enumer;
-import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
+import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
+import org.pepstock.charba.client.jsinterop.options.Scales;
 
 /**
  * The bar chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
@@ -34,13 +34,23 @@ import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 public class BarDataset extends HovingFlexDataset{
 	
 	private final DataPointListFactory factory = new DataPointListFactory();
+	
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
+	private enum Property implements Key {
+		xAxisID,
+		yAxisID,
+		borderSkipped,
+		data
+	}
 
 	/**
 	 * Sets the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
 	public void setXAxisID(String xAxisID){
-		getNativeObject().setXAxisID(xAxisID);
+		setValue(Property.xAxisID, xAxisID);
 	}
 
 	/**
@@ -48,7 +58,7 @@ public class BarDataset extends HovingFlexDataset{
 	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
 	public String getXAxisID(){
-		 return Checker.check(getNativeObject().getXAxisID(), UndefinedValues.STRING);
+		 return getValue(Property.xAxisID, Scales.DEFAULT_X_AXIS_ID);
 	}
 
 	/**
@@ -56,7 +66,7 @@ public class BarDataset extends HovingFlexDataset{
 	 * @param yAxisID the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
 	 */
 	public void setYAxisID(String yAxisID){
-		getNativeObject().setYAxisID(yAxisID);
+		setValue(Property.yAxisID, yAxisID);
 	}
 
 	/**
@@ -64,7 +74,7 @@ public class BarDataset extends HovingFlexDataset{
 	 * @return the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
 	 */
 	public String getYAxisID(){
-		return Checker.check(getNativeObject().getYAxisID(), UndefinedValues.STRING);
+		return getValue(Property.yAxisID, Scales.DEFAULT_Y_AXIS_ID);
 	}
 
 	/**
@@ -72,7 +82,7 @@ public class BarDataset extends HovingFlexDataset{
 	 * @param position the edge to skip drawing the border for.
 	 */
 	public void setBorderSkipped(Position position){
-		getNativeObject().setBorderSkipped(position.name());
+		setValue(Property.borderSkipped, position);
 	}
 	
 	/**
@@ -80,7 +90,7 @@ public class BarDataset extends HovingFlexDataset{
 	 * @return the edge to skip drawing the border for.
 	 */
 	public Position getBorderSkipped(){
-		return Enumer.deserialize(getNativeObject().getBorderSkipped(), Position.class, Position.top);
+		return getValue(Property.borderSkipped, Position.class, DefaultOptions.get().getElements().getRectangle().getBorderSkipped());
 	}
 	
 	/**
@@ -89,7 +99,7 @@ public class BarDataset extends HovingFlexDataset{
 	 * @see org.pepstock.charba.client.data.DataPoint
 	 */
 	public void setDataPoints(DataPoint... datapoints){
-		getNativeObject().setData(ArrayObject.of(datapoints));
+		setArrayValue(Property.data, ArrayObject.of(datapoints));
 	}
 	
 	/**
@@ -97,9 +107,33 @@ public class BarDataset extends HovingFlexDataset{
 	 * @return a list of data points
 	 * @see org.pepstock.charba.client.data.DataPoint
 	 */
-	@SuppressWarnings("unchecked")
 	public List<DataPoint> getDataPoints(){
-		return ArrayListHelper.list((ArrayObject<NativeDataPoint>)getNativeObject().getData(), factory);
+		ArrayObject array = getArrayValue(Property.data);
+		return ArrayListHelper.list(array, factory);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.data.HovingFlexDataset#getDefaultBackgroundColorAsString()
+	 */
+	@Override
+	String getDefaultBackgroundColorAsString() {
+		return DefaultOptions.get().getElements().getRectangle().getBackgroundColorAsString();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.data.HovingFlexDataset#getDefaultBorderColorAsString()
+	 */
+	@Override
+	String getDefaultBorderColorAsString() {
+		return DefaultOptions.get().getElements().getRectangle().getBorderColorAsString();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.data.HovingFlexDataset#getDefaultBorderWidth()
+	 */
+	@Override
+	int getDefaultBorderWidth() {
+		return DefaultOptions.get().getElements().getRectangle().getBorderWidth();
 	}
 
 }

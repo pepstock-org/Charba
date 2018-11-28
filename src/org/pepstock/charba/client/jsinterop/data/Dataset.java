@@ -19,11 +19,12 @@ import java.util.List;
 
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
+import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 
 /**
  * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
@@ -32,12 +33,18 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class Dataset extends NativeObjectContainer<NativeDataset>{
+public abstract class Dataset extends NativeObjectContainer{
 	
 	private static final boolean DEFAULT_HIDDEN = false;
 	
-	public Dataset() {
-		super(new NativeDataset());
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
+	private enum Property implements Key {
+		label,
+		data,
+		type,
+		hidden
 	}
 	
 	/**
@@ -45,7 +52,11 @@ public abstract class Dataset extends NativeObjectContainer<NativeDataset>{
 	 * @param hidden if the dataset will appear or not.
 	 */
 	public void setHidden(boolean hidden) {
-		getNativeObject().setHidden(hidden);
+		if (hidden) {
+			setValue(Property.hidden, hidden);
+		} else {
+			remove(Property.hidden);
+		}
 	}
 
 	/**
@@ -53,7 +64,7 @@ public abstract class Dataset extends NativeObjectContainer<NativeDataset>{
 	 * @return if the dataset will appear or not. Default is <code>false</code>
 	 */
 	public boolean isHidden() {
-		return Checker.check(getNativeObject().isHidden(), DEFAULT_HIDDEN);
+		return getValue(Property.hidden, DEFAULT_HIDDEN);
 	}
 
 	
@@ -62,7 +73,7 @@ public abstract class Dataset extends NativeObjectContainer<NativeDataset>{
 	 * @param label the label for the dataset which appears in the legend and tooltips.
 	 */
 	public void setLabel(String label){
-		getNativeObject().setLabel(label);
+		setValue(Property.label, label);
 	}
 
 	/**
@@ -70,7 +81,7 @@ public abstract class Dataset extends NativeObjectContainer<NativeDataset>{
 	 * @return the label for the dataset which appears in the legend and tooltips.
 	 */
 	public String getLabel(){
-		  return Checker.check(getNativeObject().getLabel(), (String)null);
+		  return getValue(Property.label, UndefinedValues.STRING);
 	}
 
 	/**
@@ -78,7 +89,7 @@ public abstract class Dataset extends NativeObjectContainer<NativeDataset>{
 	 * @param values an array of numbers
 	 */
 	public void setData(double... values){
-		getNativeObject().setData(ArrayDouble.of(values));
+		setArrayValue(Property.data, ArrayDouble.of(values));
 	}
 	
 	/**
@@ -87,7 +98,7 @@ public abstract class Dataset extends NativeObjectContainer<NativeDataset>{
 	 * @see org.pepstock.charba.client.commons.JsDoubleArrayList
 	 */
 	public void setData(List<Double> values){
-		getNativeObject().setData(ArrayDouble.of(values));
+		setArrayValue(Property.data, ArrayDouble.of(values));
 	}
 
 	/**
@@ -96,7 +107,8 @@ public abstract class Dataset extends NativeObjectContainer<NativeDataset>{
 	 * @see org.pepstock.charba.client.commons.JsDoubleArrayList
 	 */
 	public List<Double> getData(){
-		return ArrayListHelper.list((ArrayDouble)getNativeObject().getData());
+		ArrayDouble array = getArrayValue(Property.data);
+		return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -104,7 +116,7 @@ public abstract class Dataset extends NativeObjectContainer<NativeDataset>{
 	 * @param type type of dataset.
 	 */
 	public void setType(Type type){
-		getNativeObject().setType(type.name());
+		setValue(Property.type, type);
 	}
 
 	/**
@@ -113,7 +125,7 @@ public abstract class Dataset extends NativeObjectContainer<NativeDataset>{
 	 */
 	public Type getType(){
 		// gets string value from java script object
-		String value = Checker.check(getNativeObject().getType(), ChartType.bar.name());
+		String value = getValue(Property.type, ChartType.bar.name());
 		// checks if consistent with out of the box chart types
 		Type type = ChartType.get(value);
 		// if not, creates new type being a controller.

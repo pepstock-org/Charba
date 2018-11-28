@@ -17,15 +17,12 @@ package org.pepstock.charba.client.jsinterop.items;
 
 import java.util.List;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
+import org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
  * This object is passed by CHART.JS to the callback to manage tooltip body.
@@ -33,26 +30,33 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.items.TooltipModel
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
-public final class TooltipBodyItem extends NativeObject {
+public final class TooltipBodyItem extends NativeObjectContainer {
 	
-	@JsProperty(name = "before")
-	native ArrayString getNativeBefore();
-	
-	@JsProperty(name = "lines")
-	native ArrayString getNativeLines();
-	
-	@JsProperty(name = "after")
-	native ArrayString getNativeAfter();
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		before,
+		lines,
+		after
+	}
+
+	/**
+	 * @param nativeObject
+	 */
+	public TooltipBodyItem(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
 	/**
 	 * Returns text to render before the body section.
 	 * 
 	 * @return text to render before the body section.
 	 */
-	@JsOverlay
 	public List<String> getBefore() {
-		return ArrayListHelper.unmodifiableList(getNativeBefore());
+		ArrayString array = getArrayValue(Property.before);
+		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	/**
@@ -60,9 +64,9 @@ public final class TooltipBodyItem extends NativeObject {
 	 * 
 	 * @return all lines of body section.
 	 */
-	@JsOverlay
 	public List<String> getLines() {
-		return ArrayListHelper.unmodifiableList(getNativeLines());
+		ArrayString array = getArrayValue(Property.lines);
+		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	/**
@@ -70,9 +74,19 @@ public final class TooltipBodyItem extends NativeObject {
 	 * 
 	 * @return text to render after the body section
 	 */
-	@JsOverlay
 	public List<String> getAfter() {
-		return ArrayListHelper.unmodifiableList(getNativeAfter());
+		ArrayString array = getArrayValue(Property.after);
+		return ArrayListHelper.unmodifiableList(array);
+	}
+	
+	static class TooltipBodyItemFactory implements Factory<TooltipBodyItem>{
+		/* (non-Javadoc)
+		 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)
+		 */
+		@Override
+		public TooltipBodyItem create(NativeObject nativeObject) {
+			return new TooltipBodyItem(nativeObject);
+		}
 	}
 
 }

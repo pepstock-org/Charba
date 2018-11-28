@@ -34,7 +34,7 @@ public final class PieChart extends AbstractChart<PieOptions, PieDataset> {
 	 * Builds the object.
 	 */
 	public PieChart() {
-		options = new PieOptions(this, Defaults.options(getType()));
+		options = new PieOptions(this, Defaults.get().options(getType()));
 	}
 
 	/*

@@ -17,10 +17,13 @@ package org.pepstock.charba.client.jsinterop.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
-import org.pepstock.charba.client.jsinterop.commons.FlexibleProperty;
+import org.pepstock.charba.client.jsinterop.commons.ArrayString;
+import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
 
 /**
  * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
@@ -31,6 +34,17 @@ import org.pepstock.charba.client.jsinterop.commons.FlexibleProperty;
 public final class BubbleDataset extends HovingDataset{
 	
 	private final DataPointListFactory factory = new DataPointListFactory();
+	
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
+	private enum Property implements Key {
+		data,
+		hoverRadius,
+		hitRadius,
+		pointStyle,
+		radius
+	}
 
 	/**
 	 * Sets the style of the point.
@@ -38,7 +52,7 @@ public final class BubbleDataset extends HovingDataset{
 	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public void setPointStyle(PointStyle... pointStyle) {
-		getNativeObject().setPointStyle(FlexibleProperty.fromKeys(pointStyle));
+		setValueOrArray(Property.pointStyle, pointStyle);
 	}
 
 	/**
@@ -47,12 +61,8 @@ public final class BubbleDataset extends HovingDataset{
 	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public List<PointStyle> getPointStyle() {
-		List<PointStyle> result = FlexibleProperty.toKeys(getNativeObject().getPointStyle(), PointStyle.class);
-		if (result.isEmpty()) {
-			//FIXME e corretto?
-			result.add(PointStyle.circle);
-		}
-		return result;
+		ArrayString array = getValueOrArray(Property.pointStyle, DefaultOptions.get().getElements().getPoint().getPointStyle());
+		return ArrayListHelper.list(PointStyle.class, array);
 	}
 	
 	/**
@@ -60,7 +70,7 @@ public final class BubbleDataset extends HovingDataset{
 	 * @param hitRadius array of the pixel size of the non-displayed point.
 	 */
 	public void setHitRadius(double... hitRadius) {
-		getNativeObject().setHitRadius(FlexibleProperty.fromDoubles(hitRadius));
+		setValueOrArray(Property.hitRadius, hitRadius);
 	}
 
 	/**
@@ -68,7 +78,8 @@ public final class BubbleDataset extends HovingDataset{
 	 * @return list of the pixel size of the non-displayed point.
 	 */
 	public List<Double> getHitRadius() {
-	    return FlexibleProperty.toDoubles(getNativeObject().getHitRadius());
+		ArrayDouble array = getValueOrArray(Property.hitRadius, DefaultOptions.get().getElements().getPoint().getHitRadius());
+	    return ArrayListHelper.list(array);
 	}
 
 	/**
@@ -76,7 +87,7 @@ public final class BubbleDataset extends HovingDataset{
 	 * @param hoverRadius array of the radius of the point when hovered.
 	 */
 	public void setHoverRadius(double... hoverRadius) {
-		getNativeObject().setHoverRadius(FlexibleProperty.fromDoubles(hoverRadius));
+		setValueOrArray(Property.hoverRadius, hoverRadius);
 	}
 
 	/**
@@ -84,7 +95,8 @@ public final class BubbleDataset extends HovingDataset{
 	 * @return list of the radius of the point when hovered.
 	 */
 	public List<Double> getHoverRadius() {
-	    return FlexibleProperty.toDoubles(getNativeObject().getHoverRadius());
+		ArrayDouble array = getValueOrArray(Property.hoverRadius, DefaultOptions.get().getElements().getPoint().getHoverRadius());
+	    return ArrayListHelper.list(array);
 	}
 	
 	/**
@@ -92,7 +104,7 @@ public final class BubbleDataset extends HovingDataset{
 	 * @param radius array of the radius of the point shape.
 	 */
 	public void setRadius(double...  radius) {
-		getNativeObject().setRadius(FlexibleProperty.fromDoubles(radius));
+		setValueOrArray(Property.radius, radius);
 	}
 
 	/**
@@ -100,7 +112,8 @@ public final class BubbleDataset extends HovingDataset{
 	 * @return list of the radius of the point shape.
 	 */
 	public List<Double> getRadius(){
-		return FlexibleProperty.toDoubles(getNativeObject().getRadius());
+		ArrayDouble array = getValueOrArray(Property.radius,DefaultOptions.get().getElements().getPoint().getRadius());
+	    return ArrayListHelper.list(array);
 	}
 	
 	/**
@@ -109,7 +122,7 @@ public final class BubbleDataset extends HovingDataset{
 	 * @see org.pepstock.charba.client.data.DataPoint
 	 */
 	public void setDataPoints(DataPoint... datapoints){
-		getNativeObject().setData(ArrayObject.of(datapoints));
+		setArrayValue(Property.data, ArrayObject.of(datapoints));
 	}
 	
 	/**
@@ -117,9 +130,9 @@ public final class BubbleDataset extends HovingDataset{
 	 * @return a list of data points
 	 * @see org.pepstock.charba.client.data.DataPoint
 	 */
-	@SuppressWarnings("unchecked")
 	public List<DataPoint> getDataPoints(){
-		return ArrayListHelper.list((ArrayObject<NativeDataPoint>)getNativeObject().getData(), factory);
+		ArrayObject array = getArrayValue(Property.data);
+		return ArrayListHelper.list(array, factory);
 	}
 	
 	/* (non-Javadoc)

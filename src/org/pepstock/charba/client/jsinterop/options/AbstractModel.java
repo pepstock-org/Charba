@@ -7,7 +7,7 @@ import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
-public abstract class AbstractModel<P extends AbstractModel<?,?>, D> extends NativeObjectContainer<NativeObject> {
+public abstract class AbstractModel<P extends AbstractModel<?,?>, D> extends NativeObjectContainer {
 	
 	private final D defaultValues;
 	

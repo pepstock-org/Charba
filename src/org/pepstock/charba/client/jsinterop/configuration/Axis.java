@@ -406,7 +406,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	Scale getDefaultScale() {
 		// gets the global option for the chart.
-		ChartOptions options = Defaults.options(getChart().getType());
+		ChartOptions options = Defaults.get().options(getChart().getType());
 		// if is a multi scale chart
 		if (getChart().getOptions() instanceof MultiScalesOptions) {
 			CartesianAxisType type = null;
@@ -428,7 +428,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			return options.getScale();
 		}
 		// returns default scale
-		return Defaults.getScale();
+		return Defaults.get().getScale();
 	}
 
 	/**
@@ -447,7 +447,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			}
 		}
 		// returns default scale
-		return Defaults.getScale();
+		return Defaults.get().getScale();
 	}
 
 	/**

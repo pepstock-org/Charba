@@ -17,16 +17,11 @@ package org.pepstock.charba.client.jsinterop.items;
 
 import java.util.List;
 
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
  * This item contains the tick info item.<br>
@@ -34,26 +29,32 @@ import jsinterop.annotations.JsType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class TickItem extends JavaScriptObjectContainer {
+public final class TickItem extends NativeObjectContainer {
 	
-	@JsProperty(name = "value")
-	native double getNativeValue();
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		value,
+		index,
+		values
+	}
 
-	@JsProperty(name = "index")
-	native int getNativeIndex();
-
-	@JsProperty(name = "values")
-	native ArrayDouble getNativeValues();
+	/**
+	 * @param nativeObject
+	 */
+	public TickItem(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
 	/**
 	 * Returns the value of the tick.
 	 * 
 	 * @return the value of the tick. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsOverlay
 	public double getValue() {
-		return Checker.check(getNativeValue(), UndefinedValues.DOUBLE);
+		return getValue(Property.value, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -61,9 +62,8 @@ public final class TickItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return the index of the tick. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	@JsOverlay
 	public int getIndex() {
-		return Checker.check(getNativeIndex(), UndefinedValues.INTEGER);
+		return getValue(Property.index, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -71,9 +71,9 @@ public final class TickItem extends JavaScriptObjectContainer {
 	 * 
 	 * @return the complete list of ticks.
 	 */
-	@JsOverlay
 	public List<Double> getValues() {
-		return ArrayListHelper.unmodifiableList(getNativeValues());
+		ArrayDouble array = getArrayValue(Property.values);
+		return ArrayListHelper.unmodifiableList(array);
 	}
 
 }

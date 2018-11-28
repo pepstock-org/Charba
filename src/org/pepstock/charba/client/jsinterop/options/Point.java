@@ -53,7 +53,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint> implements 
 	 * 
 	 * @param radius array of the radius of the point shape.
 	 */
-	public void setRadius(int radius) {
+	public void setRadius(double radius) {
 		setValue(Property.radius, radius);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -64,7 +64,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint> implements 
 	 * 
 	 * @return list of the radius of the point when hovered. Default is 3.
 	 */
-	public int getRadius() {
+	public double getRadius() {
 		return getValue(Property.radius, getDefaultValues().getRadius());
 	}
 
@@ -95,7 +95,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint> implements 
 	 * 
 	 * @param hitRadius the pixel size of the non-displayed point.
 	 */
-	public void setHitRadius(int hitRadius) {
+	public void setHitRadius(double hitRadius) {
 		setValue(Property.hitRadius, hitRadius);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -106,7 +106,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint> implements 
 	 * 
 	 * @return the pixel size of the non-displayed point. Default is 1.
 	 */
-	public int getHitRadius() {
+	public double getHitRadius() {
 		return getValue(Property.hitRadius, getDefaultValues().getHitRadius());
 	}
 
@@ -115,7 +115,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint> implements 
 	 * 
 	 * @param hoverRadius the radius of the point when hovered.
 	 */
-	public void setHoverRadius(int hoverRadius) {
+	public void setHoverRadius(double hoverRadius) {
 		setValue(Property.hoverRadius, hoverRadius);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -126,7 +126,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint> implements 
 	 * 
 	 * @return the radius of the point when hovered. Default is 4.
 	 */
-	public int getHoverRadius() {
+	public double getHoverRadius() {
 		return getValue(Property.hoverRadius, getDefaultValues().getHoverRadius());
 	}
 

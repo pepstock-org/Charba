@@ -22,13 +22,6 @@ import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
-import org.pepstock.charba.client.jsinterop.commons.ArrayString;
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * This object is created by CHART.JS and passed to all callbacks and events handlers related to legend entity.
@@ -36,50 +29,22 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
 public final class LegendLabelItem extends LegendItem {
 	
-	@JsProperty(name = "datasetIndex")
-	native void setNativeDatasetIndex(int datasetIndex);
-
-	@JsProperty(name = "index")
-	native void setNativeIndex(int index);
-
-	@JsProperty(name = "text")
-	native void setNativeText(String text);
-
-	@JsProperty(name = "fillStyle")
-	native void setNativeFillStyle(String fillStyle);
-
-	@JsProperty(name = "lineCap")
-	native void setNativeLineCap(String lineCap);
-
-	@JsProperty(name = "lineDash")
-	native void setNativeLineDash(ArrayInteger lineDash);
-
-	@JsProperty(name = "lineDashOffset")
-	native void setNativeLineDashOffset(int lineDashOffset);
-
-	@JsProperty(name = "lineJoin")
-	native void setNativeLineJoin(String lineJoin);
-
-	@JsProperty(name = "lineWidth")
-	native void setNativeLineWidth(Object lineWidth);
-
-	@JsProperty(name = "strokeStyle")
-	native void setNativeStrokeStyle(Object strokeStyle);
-
-	@JsProperty(name = "pointStyle")
-	native void setNativePointStyle(Object pointStyle);
+	/**
+	 * Standard constructor which wraps a new java script object.
+	 */
+	public LegendLabelItem() {
+		super();
+	}
 
 	/**
 	 * Sets the dataset index of the chart
 	 * 
 	 * @param datasetIndex the dataset index of the chart
 	 */
-	@JsOverlay
 	public void setDatasetIndex(int datasetIndex) {
-		setNativeDatasetIndex(datasetIndex);
+		setValue(LegendItem.Property.datasetIndex, datasetIndex);
 	}
 
 	/**
@@ -87,9 +52,8 @@ public final class LegendLabelItem extends LegendItem {
 	 * 
 	 * @param index the dataset index of the chart (for POLAR and PIE charts)
 	 */
-	@JsOverlay
 	public void setIndex(int index) {
-		setNativeIndex(index);
+		setValue(LegendItem.Property.index, index);
 	}
 
 	/**
@@ -97,9 +61,8 @@ public final class LegendLabelItem extends LegendItem {
 	 * 
 	 * @param text the label that will be displayed
 	 */
-	@JsOverlay
 	public void setText(String text) {
-		setNativeText(text);
+		setValue(LegendItem.Property.text, text);
 	}
 
 	/**
@@ -112,9 +75,17 @@ public final class LegendLabelItem extends LegendItem {
 	 * 
 	 * @param color the fill style of the legend box
 	 */
-	@JsOverlay
 	public void setFillStyle(IsColor color) {
-		setNativeFillStyle(color.toRGBA());
+		setValue(LegendItem.Property.fillStyle, color.toRGBA());
+	}
+
+	/**
+	 * Sets true if this item represents a hidden dataset. Label will be rendered with a strike-through effect
+	 * 
+	 * @param hidden true if this item represents a hidden dataset. Label will be rendered with a strike-through effect
+	 */
+	public void setHidden(boolean hidden) {
+		setValue(LegendItem.Property.hidden, hidden);
 	}
 
 	/**
@@ -124,9 +95,8 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param style how the end points of every box border are drawn.
 	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
-	@JsOverlay
-	public void setLineCap(CapStyle capstyle) {
-		setNativeLineCap(capstyle.name());
+	public void setLineCap(CapStyle style) {
+		setValue(LegendItem.Property.lineCap, style);
 	}
 
 	/**
@@ -136,9 +106,8 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param lineDash the box border dash pattern used when stroking lines, using an array of values which specify alternating
 	 *            lengths of lines and gaps which describe the pattern.
 	 */
-	@JsOverlay
 	public void setLineDash(List<Integer> lineDash) {
-		setNativeLineDash(ArrayInteger.of(lineDash));
+		setArrayValue(LegendItem.Property.lineDash, ArrayInteger.of(lineDash));
 	}
 
 	/**
@@ -146,9 +115,8 @@ public final class LegendLabelItem extends LegendItem {
 	 * 
 	 * @param lineDashOffset the box border dash pattern offset or "phase".
 	 */
-	@JsOverlay
 	public void setLineDashOffset(int lineDashOffset) {
-		setNativeLineDashOffset(lineDashOffset);
+		setValue(LegendItem.Property.lineDashOffset, lineDashOffset);
 	}
 
 	/**
@@ -160,9 +128,8 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param style There are three possible values for this property: round, bevel and miter.
 	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
-	@JsOverlay
-	public void setLineJoin(JoinStyle join) {
-		setNativeLineJoin(join.name());
+	public void setLineJoin(JoinStyle style) {
+		setValue(LegendItem.Property.lineJoin, style);
 	}
 
 	/**
@@ -170,19 +137,8 @@ public final class LegendLabelItem extends LegendItem {
 	 * 
 	 * @param lineWidths the width of box border in pixels.
 	 */
-	@JsOverlay
-	public void setLineWidth(int lineWidth) {
-		setNativeLineWidth(lineWidth);
-	}
-
-	/**
-	 * Sets the width of box border in pixels.
-	 * 
-	 * @param lineWidths the width of box border in pixels.
-	 */
-	@JsOverlay
-	public void setLineWidth(int... lineWidths) {
-		setNativeLineWidth(ArrayInteger.of(lineWidths));
+	public void setLineWidth(int lineWidths) {
+		setValue(LegendItem.Property.lineWidth, lineWidths);
 	}
 
 	/**
@@ -190,19 +146,8 @@ public final class LegendLabelItem extends LegendItem {
 	 * 
 	 * @param color the stroke style of the legend box
 	 */
-	@JsOverlay
 	public void setStrokeStyle(IsColor color) {
-		setNativeStrokeStyle(color.toRGBA());
-	}
-
-	/**
-	 * Sets the stroke style of the legend box
-	 * 
-	 * @param color the stroke style of the legend box
-	 */
-	@JsOverlay
-	public void setStrokeStyle(IsColor... colors) {
-		setNativeStrokeStyle(ArrayString.of(colors));
+		setValue(LegendItem.Property.strokeStyle, color.toRGBA());
 	}
 
 	/**
@@ -211,20 +156,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param style the style of the legend box
 	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
-	@JsOverlay
 	public void setPointStyle(PointStyle style) {
-		setNativePointStyle(style);
+		setValue(LegendItem.Property.pointStyle, style);
 	}
-	
-	/**
-	 * Sets the style of the legend box (only used if usePointStyle is true)
-	 * 
-	 * @param style the style of the legend box
-	 * @see org.pepstock.charba.client.enums.PointStyle
-	 */
-	@JsOverlay
-	public void setPointStyle(PointStyle... styles) {
-		setNativePointStyle(ArrayString.of(styles));
-	}
-
 }

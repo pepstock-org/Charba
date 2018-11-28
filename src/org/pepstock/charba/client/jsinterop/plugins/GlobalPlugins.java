@@ -77,10 +77,10 @@ public final class GlobalPlugins {
 			return false;
 		}
 		// gets plugins ids requesting to CHART.JS.
-		ArrayObject<NativePluginReference> existingPlugins = plugins.getAll();
+		ArrayObject existingPlugins = plugins.getAll();
 		// scans ids
 		for (int i=0; i<existingPlugins.length(); i++){
-			NativePluginReference reference = existingPlugins.get(i);
+			PluginReference reference = new PluginReference(existingPlugins.get(i));
 			if (reference.getId() != null && reference.getId().equalsIgnoreCase(pluginId)) {
 				plugins.unregister(reference);
 				// stores the id into a set
@@ -97,14 +97,15 @@ public final class GlobalPlugins {
 	 */
 	public Set<String> getIds(){
 		// gets plugins ids requesting to CHART.JS.
-		ArrayObject<NativePluginReference> existingPlugins = plugins.getAll();
+		ArrayObject existingPlugins = plugins.getAll();
 		// creates a set of strings
 		final Set<String> pluginsIds = new HashSet<String>();
 		// checks teh result from CHART.JS
 		if (existingPlugins != null && existingPlugins.length() > 0){
 			// scans ids
 			for (int i=0; i<existingPlugins.length(); i++){
-				pluginsIds.add(existingPlugins.get(i).getId());
+				PluginReference reference = new PluginReference(existingPlugins.get(i));
+				pluginsIds.add(reference.getId());
 			}
 		}
 		return pluginsIds;

@@ -19,17 +19,14 @@ import java.util.List;
 
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
+import org.pepstock.charba.client.jsinterop.items.DatasetItem.DatasetItemFactory;
+import org.pepstock.charba.client.jsinterop.options.Scales;
 
 /**
  * This object is just a proxy object, created from JavaScript side, to wrap an JavaScript array.<br>
@@ -38,38 +35,44 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
-public final class DatasetMetaItem extends NativeObject {
-
-	@JsProperty(name = "type")
-	native String getNativeType();
+public final class DatasetMetaItem extends NativeObjectContainer {
 	
-	@JsProperty(name = "hidden")
-	native boolean isNativeHidden();
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		hidden,
+		type,
+		data,
+		yAxisID,
+		xAxisID
+	}
 	
-	@JsProperty(name = "hidden")
-	native void setNativeHidden(boolean hidden);
-
-	@JsProperty(name = "yAxisID")
-	native String getNativeYAxisID();
-
-	@JsProperty(name = "xAxisID")
-	native String getNativeXAxisID();
+	private final DatasetItemFactory datasetItemFactory = new DatasetItemFactory();
 	
-	@JsProperty(name = "data")
-	native ArrayObject<DatasetItem> getNativeData();
+	/**
+	 * 
+	 */
+	DatasetMetaItem() {
+	}
 
-	
+	/**
+	 * @param nativeObject
+	 */
+	public DatasetMetaItem(NativeObject nativeObject) {
+		super(nativeObject);
+	}
+
 	/**
 	 * Returns the type of dataset. If not set, the default is <code>bar</code>.
 	 * 
 	 * @return the type of dataset
 	 * @see org.pepstock.charba.client.Type
 	 */
-	@JsOverlay
-	public final Type getType() {
+	public Type getType() {
 		// gets string value from java script object
-		String value = Checker.check(getNativeType(), ChartType.bar.name());
+		String value = getValue(Property.type, ChartType.bar.name());
 		// checks if consistent with out of the box chart types
 		Type type = ChartType.get(value);
 		// if not, creates new type being a controller.
@@ -81,9 +84,8 @@ public final class DatasetMetaItem extends NativeObject {
 	 * 
 	 * @return <code>true</code> if the dataset is hidden, otherwise is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
 	 */
-	@JsOverlay
-	public final boolean isHidden() {
-		return Checker.check(isNativeHidden(), UndefinedValues.BOOLEAN);
+	public boolean isHidden() {
+		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -91,9 +93,8 @@ public final class DatasetMetaItem extends NativeObject {
 	 * 
 	 * @param hidden <code>true</code> if the dataset must be hidden, otherwise is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
 	 */
-	@JsOverlay
-	public final void setHidden(boolean hidden) {
-		setNativeHidden(hidden);
+	public void setHidden(boolean hidden) {
+		setValue(Property.hidden, hidden);
 	}
 	
 	/**
@@ -101,10 +102,8 @@ public final class DatasetMetaItem extends NativeObject {
 	 * 
 	 * @return the Y axis ID. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
 	 */
-	@JsOverlay
-	public final String getYAxisID() {
-		// FIXME
-		return Checker.check(getNativeYAxisID(), UndefinedValues.STRING);
+	public String getYAxisID() {
+		return getValue(Property.yAxisID, Scales.DEFAULT_Y_AXIS_ID);
 	}
 	
 	/**
@@ -112,10 +111,8 @@ public final class DatasetMetaItem extends NativeObject {
 	 * 
 	 * @return the X axis ID. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
 	 */
-	@JsOverlay
-	public final String getXAxisID() {
-		// FIXME
-		return Checker.check(getNativeXAxisID(), UndefinedValues.STRING);
+	public String getXAxisID() {
+		return getValue(Property.xAxisID, Scales.DEFAULT_X_AXIS_ID);
 	}
 
 	/**
@@ -124,9 +121,9 @@ public final class DatasetMetaItem extends NativeObject {
 	 * @return a list of dataset metadata items.
 	 * @see org.pepstock.charba.client.items.DatasetItem
 	 */
-	@JsOverlay
-	public final List<DatasetItem> getDatasets() {
-		return ArrayListHelper.unmodifiableList(getNativeData());
+	public List<DatasetItem> getDatasets() {
+		ArrayObject array = getArrayValue(Property.data);
+		return ArrayListHelper.unmodifiableList(array, datasetItemFactory);
 	}
-
+	
 }

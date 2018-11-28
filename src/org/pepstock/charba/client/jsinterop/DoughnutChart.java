@@ -34,7 +34,7 @@ public final class DoughnutChart extends AbstractChart<DoughnutOptions, Doughnut
 	 * Builds the object.
 	 */
 	public DoughnutChart() {
-		options = new DoughnutOptions(this, Defaults.options(getType()));
+		options = new DoughnutOptions(this, Defaults.get().options(getType()));
 	}
 
 	/*

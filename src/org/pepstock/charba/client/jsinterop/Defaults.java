@@ -6,7 +6,6 @@ import java.util.Map;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
-import org.pepstock.charba.client.jsinterop.options.ChartOptionsBuilder;
 import org.pepstock.charba.client.jsinterop.plugins.GlobalPlugins;
 
 public final class Defaults {
@@ -35,31 +34,37 @@ public final class Defaults {
 		this.plugins = new GlobalPlugins(Chart.getPlugins());
 	}
 	
-	public static GlobalOptions getGlobal() {
-		return INSTANCE.options;
-	}
-
-	public static GlobalScale getScale() {
-		return INSTANCE.scale;
+	public static Defaults get() {
+		return INSTANCE;
 	}
 	
-	public static GlobalPlugins getPlugins() {
-		return INSTANCE.plugins;
+	public GlobalOptions getGlobal() {
+		return options;
 	}
 
-	public static ChartOptions options(Type type) {
-		return new ChartOptions(ChartOptionsBuilder.get(type));
+	public GlobalScale getScale() {
+		return scale;
+	}
+	
+	public GlobalPlugins getPlugins() {
+		return plugins;
 	}
 
-	public static ChartOptions chart(AbstractChart<?, ?> chart) {
+	public ChartOptions options(Type type) {
+		//FIXME
+		//return new ChartOptions(ChartOptionsBuilder.get(type));
+		return new ChartOptions();
+	}
+
+	public ChartOptions chart(AbstractChart<?, ?> chart) {
 		return chart(chart.getType());
 	}
 
-	public static ChartOptions chart(Type type) {
-		if (!INSTANCE.chartOptions.containsKey(type.name())) {
-			INSTANCE.chartOptions.put(type.name(), INSTANCE.nativeObject.chart(type));
+	public ChartOptions chart(Type type) {
+		if (!chartOptions.containsKey(type.name())) {
+			chartOptions.put(type.name(), nativeObject.chart(type));
 		}
-		return INSTANCE.chartOptions.get(type.name());
+		return chartOptions.get(type.name());
 	}
 
 

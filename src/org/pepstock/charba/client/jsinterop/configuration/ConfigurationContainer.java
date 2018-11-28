@@ -25,7 +25,7 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer
  */
-abstract class ConfigurationContainer<T extends NativeObjectContainer<?>> extends ChartContainer{
+abstract class ConfigurationContainer<T extends NativeObjectContainer> extends ChartContainer{
 
 	private T configuration;
 	

@@ -36,7 +36,7 @@ public class BarChart extends AbstractChart<BarOptions, BarDataset>{
 	 */
 	public BarChart() {
 		// creates the options
-		options = new BarOptions(this, Defaults.options(getType()));
+		options = new BarOptions(this, Defaults.get().options(getType()));
 	}
 
 	/*

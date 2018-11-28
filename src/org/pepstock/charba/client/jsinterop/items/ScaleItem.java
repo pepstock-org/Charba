@@ -17,90 +17,73 @@ package org.pepstock.charba.client.jsinterop.items;
 
 import java.util.List;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**
  * Wraps the scale item of CHART JS chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
 public class ScaleItem extends BaseBoxNodeItem {
 	
-	///private final  longestTextCache;
-	@JsProperty
-	public native ScaleLongestTextCacheItem getLongestTextCache();
+	private final ScaleLongestTextCacheItem longestTextCache;
 	
-	@JsProperty(name = "id")
-	native String getNativeId();
-
-	@JsProperty(name = "hidden")
-	native boolean isNativeHidden();
-
-	@JsProperty(name = "maxIndex")
-	native int getNativeMaxIndex();
-
-	@JsProperty(name = "minIndex")
-	native int getNativeMinIndex();
-
-	@JsProperty(name = "max")
-	native Object getNativeMax();
-
-	@JsProperty(name = "min")
-	native Object getNativeMin();
-
-	@JsProperty(name = "ticks")
-	native ArrayString getNativeTicks();
-
-	@JsProperty(name = "labelRotation")
-	native double getNativeLabelRotation();
-	
-	@JsProperty(name = "longestLabelWidth")
-	native int getNativeLongestLabelWidth();
-	
-	@JsProperty(name = "start")
-	native double getNativeStart();
-	
-	@JsProperty(name = "end")
-	native double getNativeEnd();
-
-	@JsProperty(name = "ticksAsNumbers")
-	native ArrayDouble getNativeTicksAsNumber();
-
-	@JsProperty(name = "zeroLineIndex")
-	native int getNativeZeroLineIndex();
-
-	@JsProperty(name = "xCenter")
-	native int getNativeXCenter();
-
-	@JsProperty(name = "yCenter")
-	native int getNativeYCenter();
-
-	@JsProperty(name = "drawingArea")
-	native int getNativeDrawingArea();
-
-	@JsProperty(name = "pointLabels")
-	native ArrayString getNativePointLabels();
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	protected enum Property implements Key
+	{
+		id,
+		hidden,
+		longestTextCache,
+		minIndex,
+		maxIndex,
+		min,
+		max,
+		ticks,
+		labelRotation,
+		longestLabelWidth,
+		start,
+		end,
+		ticksAsNumbers,
+		zeroLineIndex,
+		xCenter,
+		yCenter,
+		drawingArea,
+		pointLabels
+	}
 	
 	//-----------------------------------------------//
+
+	/**
+	 * @param nativeObject
+	 */
+	public ScaleItem(NativeObject nativeObject) {
+		super(nativeObject);
+		// initializes sub objects
+		longestTextCache = new ScaleLongestTextCacheItem(getValue(Property.longestTextCache));
+	}
+
+	/**
+	 * Returns the longest text cache item.
+	 * 
+	 * @return the longest text cache item.
+	 */
+	public final ScaleLongestTextCacheItem getLongestTextCache() {
+		return longestTextCache;
+	}
 
 	/**
 	 * Returns the id of scale
 	 * 
 	 * @return the id of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
 	 */
-	@JsOverlay
 	public final String getId() {
-		return Checker.check(getNativeId(), UndefinedValues.STRING);
+		return getValue(Property.id, UndefinedValues.STRING);
 	}
 
 	/**
@@ -108,9 +91,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * 
 	 * @return <code>true</code> if this item represents a hidden scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
 	 */
-	@JsOverlay
 	public final boolean isHidden() {
-		return Checker.check(isNativeHidden(), UndefinedValues.BOOLEAN);
+		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -118,9 +100,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * 
 	 * @return the max index of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	@JsOverlay
 	public final int getMaxIndex() {
-		return Checker.check(getNativeMaxIndex(), UndefinedValues.INTEGER);
+		return getValue(Property.maxIndex, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -128,49 +109,44 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * 
 	 * @return the min index of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	@JsOverlay
 	public final int getMinIndex() {
-		return Checker.check(getNativeMaxIndex(), UndefinedValues.INTEGER);
+		return getValue(Property.minIndex, UndefinedValues.INTEGER);
 	}
 
 	/**
-	 * Returns the max value of scale. Base on scale type, it could return a String or an Integer.
+	 * Returns the max value of scale. 
 	 * 
 	 * @return the max value of scale.
 	 */
-	@JsOverlay
 	public final int getMax() {
-		return Checker.check(getNativeMax(), UndefinedValues.INTEGER);
+		return getValue(Property.max, UndefinedValues.INTEGER);
 	}
 
 	/**
-	 * Returns the max value of scale. Base on scale type, it could return a String or an Integer.
+	 * Returns the min value of scale.
+	 * 
+	 * @return the min value of scale.
+	 */
+	public final int getMin() {
+		return getValue(Property.min, UndefinedValues.INTEGER);
+	}
+
+	/**
+	 * Returns the max value of scale. 
 	 * 
 	 * @return the max value of scale.
 	 */
-	@JsOverlay
 	public final String getMaxAsString() {
-		return Checker.check(getNativeMax(), UndefinedValues.STRING);
+		return getValue(Property.max, UndefinedValues.STRING);
 	}
 
 	/**
-	 * Returns the min value of scale. Base on scale type, it could return a String or an Integer.
+	 * Returns the min value of scale. 
 	 * 
 	 * @return the min value of scale.
 	 */
-	@JsOverlay
-	public final int getMin() {
-		return Checker.check(getNativeMin(), UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * Returns the min value of scale. Base on scale type, it could return a String or an Integer.
-	 * 
-	 * @return the min value of scale.
-	 */
-	@JsOverlay
 	public final String getMinAsString() {
-		return Checker.check(getNativeMin(), UndefinedValues.STRING);
+		return getValue(Property.min, UndefinedValues.STRING);
 	}
 
 	/**
@@ -178,9 +154,9 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * 
 	 * @return the list of ticks.
 	 */
-	@JsOverlay
 	public final List<String> getTicks() {
-		return ArrayListHelper.unmodifiableList(getNativeTicks());
+		ArrayString array = getArrayValue(Property.ticks);
+		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	/**
@@ -188,9 +164,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * 
 	 * @return the label rotation ratio. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsOverlay
 	public final double getLabelRotation() {
-		return Checker.check(getNativeLabelRotation(), UndefinedValues.DOUBLE);
+		return getValue(Property.labelRotation, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -198,9 +173,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * 
 	 * @return the longest width of label of ticks.Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	@JsOverlay
 	public final int getLongestLabelWidth() {
-		return Checker.check(getNativeLongestLabelWidth(), UndefinedValues.INTEGER);
+		return getValue(Property.longestLabelWidth, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -208,9 +182,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * 
 	 * @return the start value of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsOverlay
 	public final double getStart() {
-		return Checker.check(getNativeStart(), UndefinedValues.DOUBLE);
+		return getValue(Property.start, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -218,9 +191,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * 
 	 * @return the end value of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsOverlay
 	public final double getEnd() {
-		return Checker.check(getNativeEnd(), UndefinedValues.DOUBLE);
+		return getValue(Property.end, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -228,9 +200,9 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * 
 	 * @return the list of ticks as number.
 	 */
-	@JsOverlay
 	public final List<Double> getTicksAsNumber() {
-		return ArrayListHelper.unmodifiableList(getNativeTicksAsNumber());
+		ArrayDouble array = getArrayValue(Property.ticksAsNumbers);
+		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	/**
@@ -238,9 +210,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * 
 	 * @return the zero line index of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	@JsOverlay
 	public final int getZeroLineIndex() {
-		return Checker.check(getNativeZeroLineIndex(), UndefinedValues.INTEGER);
+		return getValue(Property.zeroLineIndex, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -248,9 +219,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * 
 	 * @return the X center of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	@JsOverlay
 	public final int getXCenter() {
-		return Checker.check(getNativeXCenter(), UndefinedValues.INTEGER);
+		return getValue(Property.xCenter, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -258,9 +228,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * 
 	 * @return the Y center of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	@JsOverlay
 	public final int getYCenter() {
-		return Checker.check(getNativeYCenter(), UndefinedValues.INTEGER);
+		return getValue(Property.yCenter, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -268,9 +237,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * 
 	 * @return the drawing area dimension of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	@JsOverlay
 	public final int getDrawingArea() {
-		return Checker.check(getNativeDrawingArea(), UndefinedValues.INTEGER);
+		return getValue(Property.drawingArea, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -278,9 +246,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * 
 	 * @return the list of point labels of scale.
 	 */
-	@JsOverlay
 	public final List<String> getPointLabels() {
-		return ArrayListHelper.unmodifiableList(getNativePointLabels());
+		ArrayString array = getArrayValue(Property.pointLabels);
+		return ArrayListHelper.unmodifiableList(array);
 	}
-
 }

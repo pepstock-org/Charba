@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.StandardKey;
 import org.pepstock.charba.client.jsinterop.utils.JSON;
@@ -33,17 +34,24 @@ import com.google.gwt.core.client.JsDate;
  *
  * @param <O> type of native object wraps by this class
  */
-public abstract class NativeObjectContainer<O extends NativeObject> {
+public abstract class NativeObjectContainer {
 	
 	// native object instance
-	private final O nativeObject;
+	private final NativeObject nativeObject;
 
+	/**
+	 * Creates the object with an empty native object instance.
+	 */
+	protected NativeObjectContainer() {
+		this(new NativeObject());
+	}
+	
 	/**
 	 * Creates the object with native object instance to be wrapped.
 	 * @param nativeObject native object instance to be wrapped.
 	 */
-	protected NativeObjectContainer(O nativeObject) {
-		this.nativeObject = nativeObject;
+	protected NativeObjectContainer(NativeObject nativeObject) {
+		this.nativeObject = (nativeObject == null ? new NativeObject() : nativeObject);
 	}
 	
 	/**
@@ -307,17 +315,40 @@ public abstract class NativeObjectContainer<O extends NativeObject> {
      * @return value of the property or <code>null</code> if not there
      * @see org.pepstock.charba.client.commons.Key
      */
-    protected <T extends NativeObject> T getValue(Key key){
+    protected NativeObject getValue(Key key){
     	// checks if the property exists
     	if (!has(key)){
     		// if no, returns the default value
     		return null;
     	}
     	// gets descriptor
-    	NativeObjectDescriptor<T> descriptor = nativeObject.getObjectProperty(key.name());
+    	NativeObjectDescriptor descriptor = nativeObject.getObjectProperty(key.name());
     	// returns value
     	return descriptor == null ? null : descriptor.getValue();
     }
+    
+	/**
+	 * Sets a value (JavaScript Object) into embedded JavaScript object at specific property. FIXME comment
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 * @see com.google.gwt.core.client.JavaScriptObject
+	 * @see org.pepstock.charba.client.commons.Key
+	 */
+    protected void setValue(Key key, NativeObjectContainer value){
+    	// if value is null
+    	// try to remove the reference if exists
+    	if (value == null){
+    		// checks if the property exists
+    		if (has(key)){
+    			// removes property
+    			remove(key);
+    		}
+    	} else {
+    		// sets value
+    		nativeObject.defineObjectProperty(key.name(), value.getNativeObject());	
+    	}
+    }
+    
     
 	/**
 	 * Sets a value (JavaScript Object) into embedded JavaScript object at specific property.
@@ -326,7 +357,7 @@ public abstract class NativeObjectContainer<O extends NativeObject> {
 	 * @see com.google.gwt.core.client.JavaScriptObject
 	 * @see org.pepstock.charba.client.commons.Key
 	 */
-    protected <T extends NativeObject> void setValue(Key key, T value){
+    protected void setValue(Key key, NativeObject value){
     	// if value is null
     	// try to remove the reference if exists
     	if (value == null){
@@ -441,12 +472,103 @@ public abstract class NativeObjectContainer<O extends NativeObject> {
     	// returns value
     	return descriptor == null ? null : descriptor.getValue();
     }
-	
+
+    protected void setValueOrArray(Key key, IsColor... values) {
+		if (values != null) {
+			if (values.length == 1) {
+				setValue(key, values[0].toRGBA());
+			} else {
+				setArrayValue(key, ArrayString.of(values));
+			}
+		} else {
+			removeIfExists(key);
+		}
+    }
+
+    protected void setValueOrArray(Key key, Key... values) {
+		if (values != null) {
+			if (values.length == 1) {
+				setValue(key, values[0]);
+			} else {
+				setArrayValue(key, ArrayString.of(values));
+			}
+		} else {
+			removeIfExists(key);
+		}
+    }
+
+    protected void setValueOrArray(Key key, int... values) {
+		if (values != null) {
+			if (values.length == 1) {
+				setValue(key, values[0]);
+			} else {
+				setArrayValue(key, ArrayInteger.of(values));
+			}
+		} else {
+			removeIfExists(key);
+		}
+    }
+
+    protected ArrayInteger getValueOrArray(Key key, int defaultValue) {
+    	if (ObjectType.Number.equals(type(key))) {
+    		return ArrayInteger.of(getValue(key, defaultValue));
+    	} else if (ObjectType.Array.equals(type(key))) {
+    		return getArrayValue(key);
+    	}
+    	return null;
+    }
+    
+    protected void setValueOrArray(Key key, double... values) {
+		if (values != null) {
+			if (values.length == 1) {
+				setValue(key, values[0]);
+			} else {
+				setArrayValue(key, ArrayDouble.of(values));
+			}
+		} else {
+			removeIfExists(key);
+		}
+    }
+
+    protected ArrayDouble getValueOrArray(Key key, double defautValue) {
+    	if (ObjectType.Number.equals(type(key))) {
+    		return ArrayDouble.of(getValue(key, defautValue));
+    	} else if (ObjectType.Array.equals(type(key))) {
+    		return getArrayValue(key);
+    	}
+    	return null;
+    }
+
+    protected void setValueOrArray(Key key, String... values) {
+		if (values != null) {
+			if (values.length == 1) {
+				setValue(key, values[0]);
+			} else {
+				setArrayValue(key, ArrayString.of(values));
+			}
+		} else {
+			removeIfExists(key);
+		}
+    }
+
+    protected ArrayString getValueOrArray(Key key, String defaultValue) {
+    	if (ObjectType.String.equals(type(key))) {
+    		return ArrayString.of(getValue(key, defaultValue));
+    	} else if (ObjectType.Array.equals(type(key))) {
+    		return getArrayValue(key);
+    	}
+    	return null;
+    }
+
+    protected ArrayString getValueOrArray(Key key, Key defaultValue) {
+    	return getValueOrArray(key, defaultValue.name());
+    }
+
 	/**
 	 * Returns the native object instance.
 	 * @return the native object instance.
 	 */
-	protected final O getNativeObject() {
+	protected final NativeObject getNativeObject() {
 		return nativeObject;
 	}
 	

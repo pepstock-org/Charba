@@ -15,12 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
  * Wrapper of tooltip node of CHART.JS.
@@ -28,11 +25,34 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
-public final class TooltipNode extends NativeObject {
-
-	@JsProperty(name = "_model")
-	public native TooltipModel getModel();
+public final class TooltipNode extends NativeObjectContainer {
 	
+	private final TooltipModel model;
+
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		_model
+	}
+	
+	/**
+	 * @param nativeObject
+	 */
+	public TooltipNode(NativeObject nativeObject) {
+		super(nativeObject);
+		model = new TooltipModel(getValue(Property._model));
+	}
+
+
+	/**
+	 * Returns the tooltip model
+	 * 
+	 * @return the model
+	 */
+	public TooltipModel getModel() {
+		return model;
+	}	
 
 }

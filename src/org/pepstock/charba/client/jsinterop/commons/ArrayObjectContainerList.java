@@ -37,10 +37,10 @@ import org.pepstock.charba.client.jsinterop.utils.JSON;
  * @see org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer
  * 
  */
-public final class ArrayObjectContainerList<E extends NativeObjectContainer<O>, O extends NativeObject> implements List<E> {
+public final class ArrayObjectContainerList<E extends NativeObjectContainer> implements List<E> {
 	
 	// delegated array to store objects
-	private final ArrayObject<O> array;
+	private final ArrayObject array;
 	
 	// delegated linked list to store Java objects
 	private final List<E> delegate = new LinkedList<E>();
@@ -50,10 +50,10 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer<O>, 
 	 * @param array java script array instance. If <code>null</code>, new empty array has been created
 	 * @param factory factory instance to create the object from a native one.
 	 */
-	ArrayObjectContainerList(ArrayObject<O> array, Factory<E, O> factory) {
+	ArrayObjectContainerList(ArrayObject array, Factory<E> factory) {
 		// if null, creates a new array
 		if (array == null){
-			this.array = new ArrayObject<>();
+			this.array = new ArrayObject();
 		} else if (factory == null){
 			// factory is not consistent and array is consistent EXCEPTION
 			// factory is mandatory to initialize the list creating the elements from native object
@@ -79,7 +79,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer<O>, 
 	/**
 	 * @return the array
 	 */
-	public ArrayObject<O> getArray() {
+	public ArrayObject getArray() {
 		return array;
 	}
 	
@@ -414,14 +414,14 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer<O>, 
 	 * @author Andrea "Stock" Stocchero
 	 * 
 	 */
-	public interface Factory<E extends NativeObjectContainer<O>, O extends NativeObject> {
+	public interface Factory<E extends NativeObjectContainer> {
 		
 		/**
 		 * Creates an element to store into list by a native object
 		 * @param nativeObject native object, element of an array
 		 * @return element instance
 		 */
-		E create(O nativeObject);
+		E create(NativeObject nativeObject);
 		
 	}
 }

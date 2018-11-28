@@ -30,14 +30,13 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
-public final class AnimationObject extends NativeObject {
+public final class AnimationObject {
 	
 	/**
-	 * Returns the current Animation frame number.
-	 * 
-	 * @return the current Animation frame number. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * FIXME
+	 * @return
 	 */
 	@JsProperty (name = "animationObject")
-	public native AnimationItem getAnimationItem();
+	public native NativeObject getAnimationItem();
 
 }

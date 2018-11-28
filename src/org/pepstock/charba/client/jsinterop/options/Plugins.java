@@ -17,6 +17,7 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
 import org.pepstock.charba.client.jsinterop.plugins.PluginIdChecker;
 
@@ -69,7 +70,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * @param options java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if exist.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public <T extends NativeObject> void setOptions(String pluginId, T options) throws InvalidPluginIdException {
+	public <T extends NativeObjectContainer> void setOptions(String pluginId, T options) throws InvalidPluginIdException {
 		// if null, removes the configuration
 		if (options == null){
 			// removes configuration if exists
@@ -92,8 +93,10 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * @return java script object used to configure the plugin or <code>null</code> if not exist.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public <T extends NativeObject> T getOptions(String pluginId) throws InvalidPluginIdException{
-		return getValue(PluginIdChecker.key(pluginId));
+	public <T extends NativeObjectContainer> T getOptions(String pluginId) throws InvalidPluginIdException{
+		// FIXME
+		//return getValue(PluginIdChecker.key(pluginId));
+		return null;
 	}
 	
 }

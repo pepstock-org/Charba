@@ -43,7 +43,7 @@ public final class DefaultChartPoint implements IsDefaultPoint{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint#getRadius()
 	 */
 	@Override
-	public int getRadius() {
+	public double getRadius() {
 		return point.getRadius();
 	}
 
@@ -59,7 +59,7 @@ public final class DefaultChartPoint implements IsDefaultPoint{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint#getHitRadius()
 	 */
 	@Override
-	public int getHitRadius() {
+	public double getHitRadius() {
 		return point.getHitRadius();
 	}
 
@@ -67,7 +67,7 @@ public final class DefaultChartPoint implements IsDefaultPoint{
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint#getHoverRadius()
 	 */
 	@Override
-	public int getHoverRadius() {
+	public double getHoverRadius() {
 		return point.getHoverRadius();
 	}
 

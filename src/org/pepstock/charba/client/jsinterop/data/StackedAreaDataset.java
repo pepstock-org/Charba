@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.data;
 
-import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 
 /**
@@ -26,13 +26,20 @@ import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
  * @see org.pepstock.charba.client.data.LineDataset
  */
 public class StackedAreaDataset extends LineDataset{
+	
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
+	private enum Property implements Key {
+		stack
+	}
 
 	/**
 	 * Sets the name of stack group.
 	 * @param stackGroup name of stack group.
 	 */
 	public void setStackGroup(String stackGroup){
-		getNativeObject().setStack(stackGroup);
+		setValue(Property.stack, stackGroup);
 	}
 
 	/**
@@ -40,7 +47,7 @@ public class StackedAreaDataset extends LineDataset{
 	 * @return the name of stack group.
 	 */
 	public String getStackGroup(){
-		return Checker.check(getNativeObject().getStack(), UndefinedValues.STRING);
+		return getValue(Property.stack, UndefinedValues.STRING);
 	}
 
 }

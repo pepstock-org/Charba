@@ -15,12 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**
  * JavaScript object which contains the minimum size of an axis.<br>
@@ -29,23 +24,22 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
 public final class AxisMinSizeItem extends SizeItem {
-	
-	@JsProperty (name = "width")
-	native void setNativeWidth(int width);
 
-	@JsProperty (name = "height")
-	native void setNativeHeight(int height);
+	/**
+	 * @param nativeObject
+	 */
+	public AxisMinSizeItem(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
 	/**
 	 * Returns the minimum width of axis in pixel.
 	 * 
 	 * @param width the minimum width of axis in pixel.
 	 */
-	@JsOverlay
-	public final void setWidth(int width) {
-		setNativeWidth(width);
+	public void setWidth(int width) {
+		setValue(Property.width, width);
 	}
 
 	/**
@@ -53,9 +47,7 @@ public final class AxisMinSizeItem extends SizeItem {
 	 * 
 	 * @param height the minimum height of axis in pixel.
 	 */
-	@JsOverlay
-	public final void setHeight(int height) {
-		setNativeHeight(height);
+	public void setHeight(int height) {
+		setValue(Property.height, height);
 	}
-
 }

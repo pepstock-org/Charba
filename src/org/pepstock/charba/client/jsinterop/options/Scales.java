@@ -100,7 +100,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScale>{
 	 * @return the xAxes
 	 */
 	public List<Scale> getXAxes() {
-		ArrayObject<NativeObject> array = getArrayValue(Property.xAxes);
+		ArrayObject array = getArrayValue(Property.xAxes);
 		return ArrayListHelper.list(array, factory);
 	}
 
@@ -114,7 +114,8 @@ public class Scales extends AbstractModel<Options, IsDefaultScale>{
 	 * @return the xAxes
 	 */
 	public List<Scale> getYAxes() {
-		return ArrayListHelper.list(getArrayValue(Property.yAxes), factory);
+		ArrayObject array = getArrayValue(Property.yAxes);
+		return ArrayListHelper.list(array, factory);
 	}
 	
 	/**
@@ -122,7 +123,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScale>{
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private class ScaleListFactory implements Factory<Scale, NativeObject> {
+	private class ScaleListFactory implements Factory<Scale> {
 
 		/* (non-Javadoc)
 		 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)

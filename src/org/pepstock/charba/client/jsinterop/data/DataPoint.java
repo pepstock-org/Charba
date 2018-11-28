@@ -17,8 +17,9 @@ package org.pepstock.charba.client.jsinterop.data;
 
 import java.util.Date;
 
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.NativeDoubleDescriptor;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.StandardKey;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
@@ -27,7 +28,7 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public final class DataPoint extends NativeObjectContainer<NativeDataPoint>{
+public final class DataPoint extends NativeObjectContainer{
 	
 	// default value for X
 	private static final double DEFAULT_X = Double.NaN;
@@ -36,24 +37,33 @@ public final class DataPoint extends NativeObjectContainer<NativeDataPoint>{
 	// default value for R
 	private static final double DEFAULT_R = Double.NaN;
 	
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
+	private enum Property implements Key {
+		x,
+		y,
+		r,
+		t
+	}
+	
 	public DataPoint() {
-		this(new NativeDataPoint());
+		super();
 	}
 	
 	/**
 	 * @param nativeObject
 	 */
-	DataPoint(NativeDataPoint nativeObject) {
+	DataPoint(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
-	
 	/**
 	 * Sets X value.
 	 * @param x X value.
 	 */
 	public void setX(double x){
-		getNativeObject().setX(x);
+		  setValue(Property.x, x);
 	}
 
 	/**
@@ -61,7 +71,7 @@ public final class DataPoint extends NativeObjectContainer<NativeDataPoint>{
 	 * @return X value.
 	 */
 	public double getX(){
-		return Checker.check(getNativeObject().getX(), DEFAULT_X);
+		return getValue(Property.x, DEFAULT_X);
 	}
 
 	/**
@@ -69,7 +79,7 @@ public final class DataPoint extends NativeObjectContainer<NativeDataPoint>{
 	 * @param y Y value.
 	 */
 	public void setY(double y){
-		getNativeObject().setY(y);
+		  setValue(Property.y, y);
 	}
 
 	/** 
@@ -77,7 +87,7 @@ public final class DataPoint extends NativeObjectContainer<NativeDataPoint>{
 	 * @return Y value.
 	 */
 	public double getY(){
-		return Checker.check(getNativeObject().getY(), DEFAULT_Y);
+		return getValue(Property.y, DEFAULT_Y);
 	}
 
 	/**
@@ -86,7 +96,7 @@ public final class DataPoint extends NativeObjectContainer<NativeDataPoint>{
 	 * @param r the bubble radius in pixels (not scaled).
 	 */
 	public void setR(double r){
-		getNativeObject().setR(r);
+		  setValue(Property.r, r);
 	}
 
 	/** 
@@ -94,7 +104,7 @@ public final class DataPoint extends NativeObjectContainer<NativeDataPoint>{
 	 * @return the bubble radius in pixels (not scaled).
 	 */
 	public double getR(){
-		return Checker.check(getNativeObject().getR(), DEFAULT_R);
+		return getValue(Property.r, DEFAULT_R);
 	}
 
 	/**
@@ -102,9 +112,7 @@ public final class DataPoint extends NativeObjectContainer<NativeDataPoint>{
 	 * @param t T value.
 	 */
 	public void setT(Date t){
-		if (t != null) {
-			getNativeObject().setT(Checker.fromDate(t));
-		}
+		  setValue(Property.t, t);
 	}
 
 	/** 
@@ -112,7 +120,7 @@ public final class DataPoint extends NativeObjectContainer<NativeDataPoint>{
 	 * @return T value. <code>null</code> is not set.
 	 */
 	public Date getT(){
-		return Checker.toDate(getNativeObject().getT());
+		return getValue(Property.t, (Date)null);
 	}
 	
 	/**
@@ -121,19 +129,15 @@ public final class DataPoint extends NativeObjectContainer<NativeDataPoint>{
 	 * @param value value to set.
 	 */
 	public void setAttribute(String key, double value){
-		  getNativeObject().setAttribute(key, value);
+		  setValue(new StandardKey(key), value);
 	}
 
 	/** 
 	 * Returns a custom field value from data point.
 	 * @param key key of java script object to get.
-	 * @return custom field value from data point. Default is {@link java.lang.Double#MIN_VALUE}.
+	 * @return custom field value from data point. Default is {@link java.lang.Double#NaN}.
 	 */
 	public double getAttribute(String key){
-		NativeDoubleDescriptor descriptor = getNativeObject().getAttribute(key);
-		if (descriptor != null) {
-			return descriptor.getValue();
-		}
-		return Double.NaN;
+		return getValue(new StandardKey(key), Double.NaN);
 	}
 }

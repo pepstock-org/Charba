@@ -15,51 +15,42 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
  * This item contains the new size of the chart after it has been resized.<br>
  * This object has been created ONLY when a resize event occurs.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.events.ChartResizeEvent
- * @see org.pepstock.charba.client.events.ChartResizeEventHandler
+
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
-public class SizeItem extends NativeObject {
+public class SizeItem extends NativeObjectContainer {
+	
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	protected enum Property implements Key
+	{
+		width,
+		height
+	}
 
 	/**
-	 * Returns the current Animation frame number.
-	 * 
-	 * @return the current Animation frame number. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @param nativeObject
 	 */
-	@JsProperty (name = "width")
-	native int getNativeWidth();
+	public SizeItem(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
-	/**
-	 * Returns the total number of animation frames.
-	 * 
-	 * @return the total number of animation frames. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
-	 */
-	@JsProperty (name = "height")
-	native int getNativeHeight();
-	
-	
 	/**
 	 * Returns the width of the chart item in pixel.
 	 * 
 	 * @return the width of the chart item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	@JsOverlay
 	public final int getWidth() {
-		return Checker.check(getNativeWidth(), UndefinedValues.INTEGER);
+		return getValue(Property.width, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -67,9 +58,9 @@ public class SizeItem extends NativeObject {
 	 * 
 	 * @return the height of the chart item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	@JsOverlay
 	public final int getHeight() {
-		return Checker.check(getNativeHeight(), UndefinedValues.INTEGER);
+		return getValue(Property.height, UndefinedValues.INTEGER);
 	}
+
 
 }

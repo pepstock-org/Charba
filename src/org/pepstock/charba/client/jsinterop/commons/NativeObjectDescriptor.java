@@ -28,20 +28,20 @@ import jsinterop.annotations.JsType;
  * @param <T> type of property
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class NativeObjectDescriptor<T extends NativeObject> extends NativeAbstractDescriptor {
+public final class NativeObjectDescriptor extends NativeAbstractDescriptor {
 
 	/**
 	 * Sets the value associated with the property.
 	 * @param value the value associated with the property
 	 */
 	@JsProperty
-	native void setValue(T value);
+	native void setValue(NativeObject value);
 
 	/**
 	 * Gets the value associated with the property.
 	 * @return the value associated with the property
 	 */
 	@JsProperty
-	public native T getValue();
+	public native NativeObject getValue();
 
 }

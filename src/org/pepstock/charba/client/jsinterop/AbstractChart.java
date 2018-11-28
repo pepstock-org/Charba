@@ -25,10 +25,10 @@ import org.pepstock.charba.client.jsinterop.data.Data;
 import org.pepstock.charba.client.jsinterop.data.Dataset;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
 import org.pepstock.charba.client.jsinterop.items.DatasetItem;
+import org.pepstock.charba.client.jsinterop.items.DatasetItem.DatasetItemFactory;
 import org.pepstock.charba.client.jsinterop.items.DatasetMetaItem;
 import org.pepstock.charba.client.jsinterop.plugins.Plugins;
 import org.pepstock.charba.client.jsinterop.utils.JSON;
-import org.pepstock.charba.client.jsinterop.utils.Window;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.dom.client.CanvasElement;
@@ -87,6 +87,8 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	private final boolean isCanvasSupported = Canvas.isSupported();
 	// merged options of defaults
 	private final ChartOptions options;
+	
+	private final DatasetItemFactory datasetItemFactory = new DatasetItemFactory();
 
 	/**
 	 * Initializes HTMl elements (DIV and Canvas).<br>
@@ -124,7 +126,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		//FIXME
 		plugins = new Plugins(this);
 		// creates global options
-		options = Defaults.options(getType());
+		options = Defaults.get().options(getType());
 	}
 
 	/*
@@ -410,7 +412,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		// checks consistency of chart and datasets
 		if (chart != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size()) {
 			// returns the array
-			return chart.getDatasetMeta(index);
+			return new DatasetMetaItem(chart.getDatasetMeta(index));
 		}
 		// returns null
 		return null;
@@ -427,9 +429,9 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		// checks consistency of chart and event
 		if (chart != null && event != null) {
 			// gets element
-			ArrayObject<DatasetItem> result = chart.getElementAtEvent(event);
+			ArrayObject result = chart.getElementAtEvent(event);
 			if (result != null && result.length() > 0) {
-				return result.get(0);
+				return new DatasetItem(result.get(0));
 			}
 		}
 		return null;
@@ -447,8 +449,9 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		// checks consistency of chart and event
 		if (chart != null && event != null) {
 			// gets elements
+			ArrayObject array = chart.getElementsAtEvent(event);
 			// returns the array
-			return ArrayListHelper.unmodifiableList(chart.getElementsAtEvent(event));
+			return ArrayListHelper.unmodifiableList(array, datasetItemFactory);
 		}
 		// returns null;
 		return null;
@@ -474,8 +477,6 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			destroy();
 			// stores teh chart instance into collection
 			Charts.add(this);
-
-			Window.getConsole().log(configuration);
 
 			// draws chart with configuration
 			chart = new Chart(canvas.getContext2d(), configuration);

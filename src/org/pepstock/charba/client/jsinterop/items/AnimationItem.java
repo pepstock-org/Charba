@@ -15,16 +15,10 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Easing;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.Enumer;
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
  * The onProgress and onComplete event are useful for synchronizing an external draw to the chart animation.<br>
@@ -33,42 +27,32 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class AnimationItem extends NativeObject {
+public final class AnimationItem extends NativeObjectContainer {
 	
 	/**
-	 * Returns the current Animation frame number.
-	 * 
-	 * @return the current Animation frame number. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * Name of fields of JavaScript object.
 	 */
-	@JsProperty (name = "currentStep")
-	native double getNativeCurrentStep();
-
-	/**
-	 * Returns the total number of animation frames.
-	 * 
-	 * @return the total number of animation frames. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
-	 */
-	@JsProperty (name = "numSteps")
-	native double getNativeNumSteps();
+	private enum Property implements Key
+	{
+		currentStep,
+		numSteps,
+		easing
+	}
 	
 	/**
-	 * Returns the animation easing to use.
-	 * 
-	 * @return the animation easing to use.
-	 * @see org.pepstock.charba.client.enums.Easing
+	 * @param nativeObject
 	 */
-	@JsProperty (name = "easing")
-	native String getNativeEasing();
+	public AnimationItem(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
 	/**
 	 * Returns the current Animation frame number.
 	 * 
 	 * @return the current Animation frame number. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsOverlay
-	public final double getCurrentStep() {
-		return Checker.check(getNativeCurrentStep(), UndefinedValues.DOUBLE);
+	public double getCurrentStep() {
+		return getValue(Property.currentStep, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -76,20 +60,17 @@ public final class AnimationItem extends NativeObject {
 	 * 
 	 * @return the total number of animation frames. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
-	@JsOverlay
-	public final double getNumSteps() {
-		return Checker.check(getNativeNumSteps(), UndefinedValues.DOUBLE);
+	public double getNumSteps() {
+		return getValue(Property.numSteps, UndefinedValues.DOUBLE);
 	}
-	
+
 	/**
 	 * Returns the animation easing to use.
 	 * 
 	 * @return the animation easing to use.
 	 * @see org.pepstock.charba.client.enums.Easing
 	 */
-	@JsOverlay
-	public final Easing getEasing() {
-		return Enumer.deserialize(getNativeEasing(), Easing.class, Easing.easeOutQuart);
+	public Easing getEasing() {
+		return getValue(Property.easing, Easing.class, Easing.easeOutQuart);
 	}
-
 }

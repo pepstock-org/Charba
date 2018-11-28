@@ -7,7 +7,7 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 @JsType(isNative = true, namespace = JsPackage.GLOBAL)
-public final class NativeHelpers extends NativeObject {
+public final class NativeHelpers {
 	
 	/**
 	 * Recursively deep copies `source` properties into `target` with the given `options`.
@@ -24,10 +24,10 @@ public final class NativeHelpers extends NativeObject {
 //	public native <T extends NativeObject> T merge(T target, Object source);
 
 	@JsMethod
-	native <T extends NativeObject> T mergeIf(T target, Object source);
+	native NativeObject mergeIf(NativeObject target, NativeObject source);
 
 	@JsMethod
-	native <T extends NativeObject> T clone(T target);
+	native NativeObject clone(NativeObject target);
 	
 
 }

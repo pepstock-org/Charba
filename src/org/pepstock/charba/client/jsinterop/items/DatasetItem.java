@@ -15,14 +15,10 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
  * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event
@@ -34,29 +30,31 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
-public final class DatasetItem extends NativeObject{
+public final class DatasetItem extends NativeObjectContainer{
+	
+	private final DatasetViewItem view;
 	
 	/**
-	 * Returns all view information about the dataset.
-	 * 
-	 * @return all view information about the dataset.
-	 * @see org.pepstock.charba.client.items.DatasetViewItem
+	 * Needed for GWt injection
 	 */
-	@JsProperty(name = "_view")
-	public native DatasetViewItem getView();
-
-	@JsProperty(name = "_datasetIndex")
-	native int getNativeDatasetIndex();
+	private enum Property implements Key
+	{
+		_datasetIndex,
+		_index,
+		_view,
+		hidden
+	}
 	
-	@JsProperty(name = "_index")
-	native int getNativeIndex();
-	
-	@JsProperty(name = "hidden")
-	native boolean isNativeHidden();
-	
-	@JsProperty(name = "hidden")
-	native void setNativeHidden(boolean hidden);
+	/**
+	 * Wraps the CHART.JS java script object.
+	 * 
+	 * @param javaScriptObject CHART.JS java script object
+	 */
+	public DatasetItem(NativeObject javaScriptObject) {
+		super(javaScriptObject);
+		// initializes the sub objects
+		view = new DatasetViewItem(getValue(Property._view));
+	}
 
 	/**
 	 * Returns the dataset index of the chart
@@ -64,9 +62,8 @@ public final class DatasetItem extends NativeObject{
 	 * @return the dataset index of the chart
 	 * @see org.pepstock.charba.client.data.Data#getDatasets()
 	 */
-	@JsOverlay
-	public final int getDatasetIndex() {
-		return Checker.check(getNativeDatasetIndex(), UndefinedValues.INTEGER);
+	public int getDatasetIndex() {
+		return getValue(Property._datasetIndex, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -76,9 +73,8 @@ public final class DatasetItem extends NativeObject{
 	 * @see org.pepstock.charba.client.data.Dataset#getData()
 	 * @see org.pepstock.charba.client.data.Data#getLabels()
 	 */
-	@JsOverlay
-	public final int getIndex() {
-		return Checker.check(getNativeIndex(), UndefinedValues.INTEGER);
+	public int getIndex() {
+		return getValue(Property._index, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -86,9 +82,8 @@ public final class DatasetItem extends NativeObject{
 	 * 
 	 * @return <code>true</code> if the dataset is hidden, otherwise <code>false</code>.
 	 */
-	@JsOverlay
-	public final boolean isHidden() {
-		return Checker.check(isNativeHidden(), UndefinedValues.BOOLEAN);
+	public boolean isHidden() {
+		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -96,9 +91,28 @@ public final class DatasetItem extends NativeObject{
 	 * 
 	 * @param hidden <code>true</code> if the dataset must be hidden, otherwise <code>false</code>.
 	 */
-	@JsOverlay
-	public final void setHidden(boolean hidden) {
-		setNativeHidden(hidden);
+	public void setHidden(boolean hidden) {
+		setValue(Property.hidden, hidden);
 	}
 
+	/**
+	 * Returns all view information about the dataset.
+	 * 
+	 * @return all view information about the dataset.
+	 * @see org.pepstock.charba.client.items.DatasetViewItem
+	 */
+	public DatasetViewItem getView() {
+		return view;
+	}
+
+	public static class DatasetItemFactory implements Factory<DatasetItem>{
+		/* (non-Javadoc)
+		 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)
+		 */
+		@Override
+		public DatasetItem create(NativeObject nativeObject) {
+			return new DatasetItem(nativeObject);
+		}
+	}
+	
 }

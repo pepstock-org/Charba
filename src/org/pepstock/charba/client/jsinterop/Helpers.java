@@ -18,11 +18,11 @@ public final class Helpers {
 		this.nativeObject = Chart.getHelpers();
 	}
 
-	public static <T extends NativeObject> T mergeIf(T target, Object source) {
+	public static NativeObject mergeIf(NativeObject target, NativeObject source) {
 		return INSTANCE.nativeObject.mergeIf(target, source);
 	}
 
-	public static <T extends NativeObject> T clone(T target) {
+	public static NativeObject clone(NativeObject target) {
 		return INSTANCE.nativeObject.clone(target);
 	}
 

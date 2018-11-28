@@ -984,9 +984,9 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 //		} else if (Defaults.chart(getChart()).getTooltips().getFilterCallback() != null) {
 //			// calls callback
 //			return Defaults.chart(getChart()).getTooltips().getFilterCallback().onFilter(getChart(), item);
-//		} else if (Defaults.getGlobal().getTooltips().getFilterCallback() != null) {
+//		} else if (Defaults.get().getGlobal().getTooltips().getFilterCallback() != null) {
 //			// calls callback
-//			return Defaults.getGlobal().getTooltips().getFilterCallback().onFilter(getChart(), item);
+//			return Defaults.get().getGlobal().getTooltips().getFilterCallback().onFilter(getChart(), item);
 //		}
 //		return true;
 //	}
@@ -1003,9 +1003,9 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 //		} else if (Defaults.chart(getChart()).getTooltips().getItemSortCallback() != null) {
 //			// calls callback
 //			return Defaults.chart(getChart()).getTooltips().getItemSortCallback().onItemSort(getChart(), item1, item2);
-//		} else if (Defaults.getGlobal().getTooltips().getItemSortCallback() != null) {
+//		} else if (Defaults.get().getGlobal().getTooltips().getItemSortCallback() != null) {
 //			// calls callback
-//			return Defaults.getGlobal().getTooltips().getItemSortCallback().onItemSort(getChart(), item1, item2);
+//			return Defaults.get().getGlobal().getTooltips().getItemSortCallback().onItemSort(getChart(), item1, item2);
 //		}
 //		return 0;
 //	}
@@ -1022,9 +1022,9 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 //		} else if (Defaults.chart(getChart()).getTooltips().getCustomCallback() != null) {
 //			// calls callback
 //			Defaults.chart(getChart()).getTooltips().getCustomCallback().onCustom(getChart(), model);
-//		} else if (Defaults.getGlobal().getTooltips().getCustomCallback() != null) {
+//		} else if (Defaults.get().getGlobal().getTooltips().getCustomCallback() != null) {
 //			// calls callback
-//			Defaults.getGlobal().getTooltips().getCustomCallback().onCustom(getChart(), model);
+//			Defaults.get().getGlobal().getTooltips().getCustomCallback().onCustom(getChart(), model);
 //		}
 //	}
 

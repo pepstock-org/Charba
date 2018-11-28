@@ -17,13 +17,14 @@ package org.pepstock.charba.client.jsinterop.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.SteppedLine;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.Enumer;
-import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
+import org.pepstock.charba.client.jsinterop.commons.ObjectType;
+import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
+import org.pepstock.charba.client.jsinterop.options.Scales;
 
 /**
  * The line chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
@@ -36,19 +37,28 @@ public class LineDataset extends LiningDataset{
 
 	// default value for cubic interpolation mode
 	private static final String DEFAULT_CUBIC_INTERPOLATION_MODE = "default";
-	// default value for show line
-	private static final boolean DEFAULT_SHOW_LINES = true;
-	// default value for span gaps
-	private static final boolean DEFAULT_SPAN_GAPS = false;
 	
 	private final DataPointListFactory factory = new DataPointListFactory();
 
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
+	private enum Property implements Key {
+		xAxisID,
+		yAxisID,
+		cubicInterpolationMode,
+		showLines,
+		spanGaps,
+		steppedLine,
+		data
+	}
+	
 	/**
 	 * Sets the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
 	public void setXAxisID(String xAxisID){
-		getNativeObject().setXAxisID(xAxisID);
+		setValue(Property.xAxisID, xAxisID);
 	}
 
 	/**
@@ -56,7 +66,7 @@ public class LineDataset extends LiningDataset{
 	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 */
 	public String getXAxisID(){
-		 return Checker.check(getNativeObject().getXAxisID(), UndefinedValues.STRING);
+		 return getValue(Property.xAxisID, Scales.DEFAULT_X_AXIS_ID);
 	}
 
 	/**
@@ -64,7 +74,7 @@ public class LineDataset extends LiningDataset{
 	 * @param yAxisID the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
 	 */
 	public void setYAxisID(String yAxisID){
-		getNativeObject().setYAxisID(yAxisID);
+		setValue(Property.yAxisID, yAxisID);
 	}
 
 	/**
@@ -72,7 +82,7 @@ public class LineDataset extends LiningDataset{
 	 * @return the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
 	 */
 	public String getYAxisID(){
-		return Checker.check(getNativeObject().getYAxisID(), UndefinedValues.STRING);
+		return getValue(Property.yAxisID, Scales.DEFAULT_X_AXIS_ID);
 	}
 
 	/**
@@ -90,7 +100,7 @@ public class LineDataset extends LiningDataset{
 	 * @param mode algorithm used to interpolate a smooth curve from the discrete data points
 	 */
 	public void setCubicInterpolationMode(String mode){
-		getNativeObject().setCubicInterpolationMode(mode);
+		setValue(Property.cubicInterpolationMode, mode);
 	}
 	
 	/**
@@ -98,7 +108,7 @@ public class LineDataset extends LiningDataset{
 	 * @return algorithm used to interpolate a smooth curve from the discrete data points. Default is <code>'default'</code>.
 	 */
 	public String getCubicInterpolationMode(){
-		 return Checker.check(getNativeObject().getCubicInterpolationMode(), DEFAULT_CUBIC_INTERPOLATION_MODE);
+		 return getValue(Property.cubicInterpolationMode, DEFAULT_CUBIC_INTERPOLATION_MODE);
 	}
 
 	/**
@@ -106,7 +116,7 @@ public class LineDataset extends LiningDataset{
 	 * @param showLine <code>false</code> if the line is not drawn for this dataset.
 	 */
 	public void setShowLines(boolean showLine){
-		getNativeObject().setShowLines(showLine);
+		setValue(Property.showLines, showLine);
 	}
 
 	/**
@@ -114,7 +124,7 @@ public class LineDataset extends LiningDataset{
 	 * @return <code>false</code> if the line is not drawn for this dataset. Default is <code>true</code>
 	 */
 	public boolean isShowLines(){
-		  return Checker.check(getNativeObject().isShowLines(), DEFAULT_SHOW_LINES);
+		  return getValue(Property.showLines, DefaultOptions.get().isShowLines());
 	}
 
 	/**
@@ -122,7 +132,7 @@ public class LineDataset extends LiningDataset{
 	 * @param spanGaps <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in the line
 	 */
 	public void setSpanGaps(boolean spanGaps){
-		getNativeObject().setSpanGaps(spanGaps);
+		setValue(Property.spanGaps, spanGaps);
 	}
 
 	/**
@@ -130,7 +140,7 @@ public class LineDataset extends LiningDataset{
 	 * @return <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in the line. Default is <code>false</code>
 	 */
 	public boolean isSpanGaps(){
-		  return Checker.check(getNativeObject().isSpanGaps(), DEFAULT_SPAN_GAPS);
+		  return getValue(Property.spanGaps, DefaultOptions.get().isSpanGaps());
 	}
 
 	/**
@@ -143,10 +153,10 @@ public class LineDataset extends LiningDataset{
 		// checks if no stepped line
 		if (SteppedLine.nosteppedline.equals(line)){
 			// sets boolean value instead of string one
-			getNativeObject().setSteppedLine(false);
+			setValue(Property.steppedLine, false);
 		} else {
 			// sets value
-			getNativeObject().setSteppedLine(line.name());
+			setValue(Property.steppedLine, line);
 		}
 	}
 	
@@ -156,19 +166,11 @@ public class LineDataset extends LiningDataset{
 	 * @see org.pepstock.charba.client.enums.SteppedLine
 	 */
 	public SteppedLine getSteppedLine(){
-		// gets value
-		Object value = getNativeObject().getSteppedLine();
-		if (value != null) {
-			String valueAsString = (String) value;
-			// if is a boolean FALSE value
-			if (valueAsString.equalsIgnoreCase(Boolean.FALSE.toString())){
-				// returns no stepped line
-				return SteppedLine.nosteppedline;
-			}
-			return Enumer.deserialize(valueAsString, SteppedLine.class, SteppedLine.nosteppedline);
+		if (ObjectType.Boolean.equals(type(Property.steppedLine))) {
+			return SteppedLine.nosteppedline;
+		} else {
+			return getValue(Property.steppedLine, SteppedLine.class, SteppedLine.nosteppedline);
 		}
-		// returns this as default
-		return SteppedLine.nosteppedline;
 	}
 
 	/**
@@ -176,7 +178,7 @@ public class LineDataset extends LiningDataset{
 	 * @param data an array of strings
 	 */
 	public void setDataString(String... data){
-		getNativeObject().setData(ArrayString.of(data));
+		setArrayValue(Property.data, ArrayString.of(data));
 	}
 
 	/**
@@ -184,7 +186,7 @@ public class LineDataset extends LiningDataset{
 	 * @param data a list of strings
 	 */
 	public void setDataString(List<String> data){
-		getNativeObject().setData(ArrayString.of(data));
+		setArrayValue(Property.data, ArrayString.of(data));
 	}
 
 	/**
@@ -192,25 +194,25 @@ public class LineDataset extends LiningDataset{
 	 * @return a list of strings
 	 */
 	public List<String> getDataString(){
-		return ArrayListHelper.list((ArrayString)getNativeObject().getData());
+		ArrayString array = getArrayValue(Property.data);
+		return ArrayListHelper.list(array);
 	}
 	
 	/**
 	 * Sets the data property of a dataset for a chart is specified as an array of data points.
 	 * @param datapoints an array of data points
-	 * @see org.pepstock.charba.client.data.DataPoint
 	 */
 	public void setDataPoints(DataPoint... datapoints){
-		getNativeObject().setData(ArrayObject.of(datapoints));
+		setArrayValue(Property.data, ArrayObject.of(datapoints));
 	}
 	
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
 	 * @return a list of data points
-	 * @see org.pepstock.charba.client.data.DataPoint
 	 */
-	@SuppressWarnings("unchecked")
 	public List<DataPoint> getDataPoints(){
-		return ArrayListHelper.list((ArrayObject<NativeDataPoint>)getNativeObject().getData(), factory);
+		ArrayObject array = getArrayValue(Property.data);
+		return ArrayListHelper.list(array, factory);
 	}
+
 }

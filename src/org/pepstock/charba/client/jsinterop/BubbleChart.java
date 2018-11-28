@@ -35,7 +35,7 @@ public class BubbleChart extends AbstractChart<BubbleOptions, BubbleDataset> {
 	 */
 	public BubbleChart() {
 		// creates the options
-		options = new BubbleOptions(this, Defaults.options(getType()));
+		options = new BubbleOptions(this, Defaults.get().options(getType()));
 	}
 
 	/*

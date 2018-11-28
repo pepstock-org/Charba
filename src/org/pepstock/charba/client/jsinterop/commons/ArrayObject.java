@@ -29,14 +29,14 @@ import jsinterop.annotations.JsType;
  * @param <T> extension of native objects, import a type from an external script
  */
 @JsType(isNative = true, name = NativeName.ARRAY, namespace = JsPackage.GLOBAL)
-public final class ArrayObject<T extends NativeObject> extends Array{
+public final class ArrayObject extends Array{
 	
 	/**
 	 * This method creates new array instance with a variable number of <code>objects</code> arguments.
 	 * @param items objects items to create new array
 	 * @return new array instance of objects.
 	 */
-	public static native <T extends NativeObject> ArrayObject<T> of(T[] items);
+	public static native ArrayObject of(NativeObject... items);
 
 	/**
 	 * Creates a java script array of objects starting from an array of native object containers. 
@@ -44,9 +44,9 @@ public final class ArrayObject<T extends NativeObject> extends Array{
 	 * @return new array instance of objects.
 	 */
 	@JsOverlay
-	public static <E extends NativeObjectContainer<T>, T extends NativeObject> ArrayObject<T> of(E[] items){
+	public static <E extends NativeObjectContainer> ArrayObject of(E[] items){
 		// creates the array
-		ArrayObject<T> result = new ArrayObject<>();
+		ArrayObject result = new ArrayObject();
 		// checks if array is null
 		if (items == null){
 			return result;
@@ -92,7 +92,7 @@ public final class ArrayObject<T extends NativeObject> extends Array{
 	 *             If end is greater than the length of the sequence, <code>slice</code> extracts through to the end of the sequence (array.length()).
 	 * @return A new array containing the extracted elements.
 	 */
-	native ArrayObject<T> slice(int start, int end);
+	native ArrayObject slice(int start, int end);
 	
 	/**
 	 * This method changes the contents of an array by removing existing elements and/or adding new elements.
@@ -104,7 +104,7 @@ public final class ArrayObject<T extends NativeObject> extends Array{
 	 *         If only one element is removed, an array of one element is returned.<br>
 	 *         If no elements are removed, an empty array is returned.
 	 */
-	native ArrayObject<T> splice(int start);
+	native ArrayObject splice(int start);
 
 	/**
 	 * This method changes the contents of an array by removing existing elements and/or adding new elements.
@@ -120,7 +120,7 @@ public final class ArrayObject<T extends NativeObject> extends Array{
 	 *         If only one element is removed, an array of one element is returned.<br>
 	 *         If no elements are removed, an empty array is returned.
 	 */
-	native ArrayObject<T> splice(int start, int deleteCounts);
+	native ArrayObject splice(int start, int deleteCounts);
 
 	/**
 	 * This method changes the contents of an array by removing existing elements and/or adding new elements.
@@ -137,7 +137,7 @@ public final class ArrayObject<T extends NativeObject> extends Array{
 	 *         If only one element is removed, an array of one element is returned.<br>
 	 *         If no elements are removed, an empty array is returned.
 	 */
-	native ArrayObject<T> splice(int start, int deleteCounts, T item);
+	native ArrayObject splice(int start, int deleteCounts, NativeObject item);
 
 	/**
 	 * Removes all of the elements from this array. The object will be empty after this call returns.
@@ -155,7 +155,7 @@ public final class ArrayObject<T extends NativeObject> extends Array{
 	 * @return the element previously at the specified position
 	 */
 	@JsOverlay
-	T remove(int index) {
+	NativeObject remove(int index) {
 		return splice(index, 1).get(0);
 	}
 
@@ -167,7 +167,7 @@ public final class ArrayObject<T extends NativeObject> extends Array{
 	 * @param value element to be inserted
 	 */
 	@JsOverlay
-	void insertAt(int index, T item) {
+	void insertAt(int index, NativeObject item) {
 		splice(index, 0, item);
 	};
 
@@ -182,7 +182,7 @@ public final class ArrayObject<T extends NativeObject> extends Array{
 	 * @return the value at the given index
 	 */
 	@JsOverlay
-	public T get(int index) {
+	public NativeObject get(int index) {
 		return slice(index, index+1).pop();
 	}
 
@@ -192,20 +192,20 @@ public final class ArrayObject<T extends NativeObject> extends Array{
 	 * @param start Start index, defaults to 0.
 	 * @param end End index, defaults to array.length().
 	 */
-	native void fill(T item, int start, int end);
+	native void fill(NativeObject item, int start, int end);
 
 	/**
 	 * Adds one element to the end of an array and returns the new length of the array.
 	 * @param item The element to add to the end of the array.
 	 * @return The new length of the array upon which the method was called.
 	 */
-	native void push(T item);
+	native void push(NativeObject item);
 	
 	/**
 	 * Removes the last element from an array and returns that element. This method changes the length of the array.
 	 * @return The removed element from the array; <code>null</code> if the array is empty.
 	 */
-	native T pop();
+	native NativeObject pop();
 
 	/**
 	 * Sets the value value at a given index.
@@ -217,7 +217,7 @@ public final class ArrayObject<T extends NativeObject> extends Array{
 	 * @param value the value to be stored
 	 */
 	@JsOverlay
-	void set(int index, T item){
+	void set(int index, NativeObject item){
 		fill(item, index, index+1);
 	}
 }

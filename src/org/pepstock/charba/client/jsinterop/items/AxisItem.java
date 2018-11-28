@@ -15,17 +15,10 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import java.util.List;
-
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**
  * There are a number of configuration callbacks that can be used to change parameters in the scale at different points in the
@@ -35,98 +28,32 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
 public final class AxisItem extends ScaleItem {
 	
-	@JsProperty
-	public native AxisMarginsItem getMargins();
+	private final AxisMarginsItem margins;
 	
-	@JsProperty
-	public native AxisMinSizeItem getMinSize();
-	
-	@JsProperty(name = "top")
-	native void setNativeTop(int top);
-	
-	@JsProperty(name = "right")
-	native void setNativeRight(int right);
-
-	@JsProperty(name = "bottom")
-	native void setNativeBottom(int bottom);
-
-	@JsProperty(name = "left")
-	native void setNativeLeft(int left);
-	
-	@JsProperty(name = "fullWidth")
-	native void setNativeFullWidth(boolean fullWidth);
-
-	@JsProperty(name = "position")
-	native void setNativePosition(String position);
-
-	@JsProperty(name = "weight")
-	native void setNativeWeight(double weight);
-
-	@JsProperty(name = "width")
-	native void setNativeWidth(int width);
-
-	@JsProperty(name = "height")
-	native void setNativeHeight(int height);
-
-	@JsProperty(name = "maxWidth")
-	native void setNativeMaxWidth(double maxWidth);
-
-	@JsProperty(name = "maxHeight")
-	native void setNativeMaxHeight(double maxHeight);
-
-	@JsProperty(name = "paddingTop")
-	native void setNativePaddingTop(int paddingTop);
-
-	@JsProperty(name = "paddingRight")
-	native void setNativePaddingRight(int paddingRight);
-
-	@JsProperty(name = "paddingBottom")
-	native void setNativePaddingBottom(int paddingBottom);
-
-	@JsProperty(name = "paddingLeft")
-	native void setNativePaddingLeft(int paddingLeft);
-	
-	@JsProperty(name = "hidden")
-	native void setNativeHidden(boolean hidden);
-
-	@JsProperty(name = "max")
-	native void setNativeMax(Object max);
-
-	@JsProperty(name = "min")
-	native void setNativeMin(Object min);
-
-	@JsProperty(name = "ticks")
-	native void setNativeTicks(ArrayString ticks);
-
-	@JsProperty(name = "labelRotation")
-	native void setNativeLabelRotation(double labelRotation);
-	
-	@JsProperty(name = "start")
-	native void setNativeStart(double start);
-	
-	@JsProperty(name = "end")
-	native void setNativeEnd(double end);
-
-	@JsProperty(name = "ticksAsNumbers")
-	native void setNativeTicksAsNumber(ArrayDouble ticks);
-
-	@JsProperty(name = "zeroLineIndex")
-	native void setNativeZeroLineIndex(int zeroLineIndex);
+	private final AxisMinSizeItem minSize;	
 	
 	//-----------------------------------------------//
 
+
+	/**
+	 * @param nativeObject
+	 */
+	public AxisItem(NativeObject nativeObject) {
+		super(nativeObject);
+		// initializes the sub objects
+		margins = new AxisMarginsItem(getValue(BaseBoxNodeItem.Property.margins));
+		minSize= new AxisMinSizeItem(getValue(BaseBoxNodeItem.Property.minSize));
+	}
 
 	/**
 	 * Sets if the axis must be hidden.
 	 * 
 	 * @param hidden <code>true</code> if the axis must be hidden, otherwise <code>false</code>.
 	 */
-	@JsOverlay
 	public void setHidden(boolean hidden) {
-		setNativeHidden(hidden);
+		setValue(Property.hidden, hidden);
 	}
 
 	/**
@@ -134,9 +61,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param fullWidth the full width of axis
 	 */
-	@JsOverlay
 	public void setFullWidth(boolean fullWidth) {
-		setNativeFullWidth(fullWidth);
+		setValue(BaseBoxNodeItem.Property.fullWidth, fullWidth);
 	}
 
 	/**
@@ -144,9 +70,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param weight the weight of axis
 	 */
-	@JsOverlay
 	public void setWeight(int weight) {
-		setNativeWeight(weight);
+		setValue(BaseBoxNodeItem.Property.weight, weight);
 	}
 
 	/**
@@ -154,9 +79,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param maxWidth the max width of axis in pixel.
 	 */
-	@JsOverlay
 	public void setMaxWidth(int maxWidth) {
-		setNativeMaxWidth(maxWidth);
+		setValue(BaseBoxNodeItem.Property.maxWidth, maxWidth);
 	}
 
 	/**
@@ -164,9 +88,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param maxHeight the max height of the axis in pixel
 	 */
-	@JsOverlay
 	public void setMaxHeight(int maxHeight) {
-		setNativeMaxHeight(maxHeight);
+		setValue(BaseBoxNodeItem.Property.maxHeight, maxHeight);
 	}
 
 	/**
@@ -174,9 +97,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param height the height of axis in pixel.
 	 */
-	@JsOverlay
 	public void setHeight(int height) {
-		setNativeHeight(height);
+		setValue(BaseBoxNodeItem.Property.height, height);
 	}
 
 	/**
@@ -184,9 +106,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param top the top location in pixel
 	 */
-	@JsOverlay
 	public void setTop(int top) {
-		setNativeTop(top);
+		setValue(BaseBoxItem.Property.top, top);
 	}
 
 	/**
@@ -194,9 +115,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param bottom the bottom location in pixel
 	 */
-	@JsOverlay
 	public void setBottom(int bottom) {
-		setNativeBottom(bottom);
+		setValue(BaseBoxItem.Property.bottom, bottom);
 	}
 
 	/**
@@ -204,9 +124,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param paddingLeft the padding left in pixel
 	 */
-	@JsOverlay
 	public void setPaddingLeft(int paddingLeft) {
-		setNativePaddingLeft(paddingLeft);
+		setValue(BaseBoxNodeItem.Property.paddingLeft, paddingLeft);
 	}
 
 	/**
@@ -214,9 +133,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param paddingTop the padding top in pixel
 	 */
-	@JsOverlay
 	public void setPaddingTop(int paddingTop) {
-		setNativePaddingTop(paddingTop);
+		setValue(BaseBoxNodeItem.Property.paddingTop, paddingTop);
 	}
 
 	/**
@@ -224,9 +142,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param paddingRight the padding right in pixel
 	 */
-	@JsOverlay
 	public void setPaddingRight(int paddingRight) {
-		setNativePaddingRight(paddingRight);
+		setValue(BaseBoxNodeItem.Property.paddingRight, paddingRight);
 	}
 
 	/**
@@ -234,9 +151,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param paddingBottom the padding bottom in pixel
 	 */
-	@JsOverlay
 	public void setPaddingBottom(int paddingBottom) {
-		setNativePaddingBottom(paddingBottom);
+		setValue(BaseBoxNodeItem.Property.paddingBottom, paddingBottom);
 	}
 
 	/**
@@ -244,9 +160,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param min the minimum value of axis
 	 */
-	@JsOverlay
 	public void setMin(String min) {
-		setNativeMin(min);
+		setValue(Property.min, min);
 	}
 
 	/**
@@ -254,9 +169,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param max the maximum value of axis
 	 */
-	@JsOverlay
 	public void setMax(String max) {
-		setNativeMax(max);
+		setValue(Property.max, max);
 	}
 
 	/**
@@ -264,9 +178,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param min the minimum value of axis
 	 */
-	@JsOverlay
-	public void setMinAsNumber(int min) {
-		setNativeMin(min);
+	public void setMin(int min) {
+		setValue(Property.min, min);
 	}
 
 	/**
@@ -274,9 +187,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param max the maximum value of axis
 	 */
-	@JsOverlay
-	public void setMaxAsNumber(int max) {
-		setNativeMax(max);
+	public void setMax(int max) {
+		setValue(Property.max, max);
 	}
 
 	/**
@@ -284,9 +196,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param ticks the array of ticks
 	 */
-	@JsOverlay
 	public void setTicks(String... ticks) {
-		setNativeTicks(ArrayString.of(ticks));
+		setArrayValue(Property.ticks, ArrayString.of(ticks));
 	}
 
 	/**
@@ -294,9 +205,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param start the start value of the axis
 	 */
-	@JsOverlay
 	public void setStart(int start) {
-		setNativeStart(start);
+		setValue(Property.start, start);
 	}
 
 	/**
@@ -304,9 +214,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param end the end value of the axis
 	 */
-	@JsOverlay
 	public void setEnd(int end) {
-		setNativeEnd(end);
+		setValue(Property.end, end);
 	}
 
 	/**
@@ -314,19 +223,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param ticksAsNumbers the array of ticks
 	 */
-	@JsOverlay
 	public void setTicksAsNumbers(double... ticksAsNumbers) {
-		setNativeTicksAsNumber(ArrayDouble.of(ticksAsNumbers));
-	}
-
-	/**
-	 * Sets the list of ticks
-	 * 
-	 * @param ticksAsNumbers the list of ticks
-	 */
-	@JsOverlay
-	public void setTicksAsNumbers(List<Double> ticksAsNumbers) {
-		setNativeTicksAsNumber(ArrayDouble.of(ticksAsNumbers));
+		setArrayValue(Property.ticksAsNumbers, ArrayDouble.of(ticksAsNumbers));
 	}
 
 	/**
@@ -334,9 +232,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param zeroLineIndex the index of line 0 of axis
 	 */
-	@JsOverlay
 	public void setZeroLineIndex(int zeroLineIndex) {
-		setNativeZeroLineIndex(zeroLineIndex);
+		setValue(Property.zeroLineIndex, zeroLineIndex);
 	}
 
 	/**
@@ -344,9 +241,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param labelRotation the label rotation value
 	 */
-	@JsOverlay
 	public void setLabelRotation(double labelRotation) {
-		setNativeLabelRotation(labelRotation);
+		setValue(Property.labelRotation, labelRotation);
 	}
 
 	/**
@@ -354,9 +250,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param width the width of axis
 	 */
-	@JsOverlay
 	public void setWidth(int width) {
-		setNativeWidth(width);
+		setValue(BaseBoxNodeItem.Property.width, width);
 	}
 
 	/**
@@ -364,9 +259,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param left the left location in pixel
 	 */
-	@JsOverlay
 	public void setLeft(int left) {
-		setNativeLeft(left);
+		setValue(BaseBoxItem.Property.left, left);
 	}
 
 	/**
@@ -374,9 +268,8 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param right the right location in pixel
 	 */
-	@JsOverlay
 	public void setRight(int right) {
-		setNativeRight(right);
+		setValue(BaseBoxItem.Property.right, right);
 	}
 
 	/**
@@ -385,9 +278,28 @@ public final class AxisItem extends ScaleItem {
 	 * @param position the position of axis
 	 * @see org.pepstock.charba.client.enums.Position
 	 */
-	@JsOverlay
 	public void setPosition(Position position) {
-		setNativePosition(position.name());
+		setValue(BaseBoxNodeItem.Property.position, position);
+	}
+
+	/**
+	 * Returns the margins of axis
+	 * 
+	 * @return the margins of axis
+	 * @see org.pepstock.charba.client.items.AxisMarginsItem
+	 */
+	public AxisMarginsItem getAxisMargins() {
+		return margins;
+	}
+
+	/**
+	 * Returns the minimum size of axis
+	 * 
+	 * @return the minimum size of axis
+	 * @see org.pepstock.charba.client.items.AxisMinSizeItem
+	 */
+	public AxisMinSizeItem getAxisMinSize() {
+		return minSize;
 	}
 
 }

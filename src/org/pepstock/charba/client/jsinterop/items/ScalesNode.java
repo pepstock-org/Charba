@@ -15,34 +15,48 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
  * Wrapper of scales node of CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
-public final class ScalesNode extends NativeObject {
+public final class ScalesNode extends NativeObjectContainer {
+
+	/**
+	 * @param nativeObject
+	 */
+	ScalesNode(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
 	/**
 	 * Returns a map with all defined axis. Key is the scale ID and value is scale item.
 	 * 
 	 * @return a map with all defined axis. Key is the scale ID and value is scale item.
 	 */
-	@JsOverlay
 	public Map<String, ScaleItem> getItems() {
 		// creates result
-		// FIXME
-//		return getObjectAsMap();
-		return null;
+		Map<String, ScaleItem> result = new HashMap<>();
+		// gets all keys
+		List<Key> keys = keys();
+		// if keys are consistent
+		if (!keys.isEmpty()) {
+			// scans all keys
+			for (Key key : keys) {
+				// loads scale item
+				result.put(key.name(), new ScaleItem(getValue(key)));
+			}
+		}
+		return Collections.unmodifiableMap(result);
 	}
 
 }

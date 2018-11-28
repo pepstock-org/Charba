@@ -31,7 +31,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.commons.ChartContainer
  */
-public abstract class EventProvider<T extends NativeObjectContainer<?>> extends ConfigurationContainer<T> implements AddHandlerEventHandler, RemoveHandlerEventHandler{
+public abstract class EventProvider<T extends NativeObjectContainer> extends ConfigurationContainer<T> implements AddHandlerEventHandler, RemoveHandlerEventHandler{
 
 	/**
 	 * Creates the chart configuration object with the chart instance 

@@ -51,42 +51,42 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 	
 	@JsFunction
 	interface ProxyBeforeTitleCallback {
-		ArrayString call(Object context, ArrayObject<TooltipItem> items);
+		ArrayString call(Object context, ArrayObject items);
 	}
 
 	@JsFunction
 	interface ProxyTitleCallback {
-		ArrayString call(Object context, ArrayObject<TooltipItem> items);
+		ArrayString call(Object context, ArrayObject items);
 	}
 
 	@JsFunction
 	interface ProxyAfterTitleCallback {
-		ArrayString call(Object context, ArrayObject<TooltipItem> items);
+		ArrayString call(Object context, ArrayObject items);
 	}
 	
 	@JsFunction
 	interface ProxyBeforeFooterCallback {
-		ArrayString call(Object context, ArrayObject<TooltipItem> items);
+		ArrayString call(Object context, ArrayObject items);
 	}
 
 	@JsFunction
 	interface ProxyFooterCallback {
-		ArrayString call(Object context, ArrayObject<TooltipItem> items);
+		ArrayString call(Object context, ArrayObject items);
 	}
 
 	@JsFunction
 	interface ProxyAfterFooterCallback {
-		ArrayString call(Object context, ArrayObject<TooltipItem> items);
+		ArrayString call(Object context, ArrayObject items);
 	}
 
 	@JsFunction
 	interface ProxyBeforeBodyCallback {
-		ArrayString call(Object context, ArrayObject<TooltipItem> items);
+		ArrayString call(Object context, ArrayObject items);
 	}
 
 	@JsFunction
 	interface ProxyAfterBodyCallback {
-		ArrayString call(Object context, ArrayObject<TooltipItem> items);
+		ArrayString call(Object context, ArrayObject items);
 	}
 
 	@JsFunction
@@ -179,7 +179,7 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyBeforeTitleCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
 			 */
 			@Override
-			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
+			public ArrayString call(Object context, ArrayObject items) {
 				if (titleCallback != null) {
 					String[] result = titleCallback.onBeforeTitle(getChart(), ArrayListHelper.unmodifiableList(items));
 					if (result != null && result.length > 0) {
@@ -197,7 +197,7 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyTitleCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
 			 */
 			@Override
-			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
+			public ArrayString call(Object context, ArrayObject items) {
 				if (titleCallback != null) {
 					String[] result = titleCallback.onTitle(getChart(), ArrayListHelper.unmodifiableList(items));
 					if (result != null && result.length > 0) {
@@ -215,7 +215,7 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyAfterTitleCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
 			 */
 			@Override
-			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
+			public ArrayString call(Object context, ArrayObject items) {
 				if (titleCallback != null) {
 					String[] result = titleCallback.onAfterTitle(getChart(), ArrayListHelper.unmodifiableList(items));
 					if (result != null && result.length > 0) {
@@ -233,7 +233,7 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyBeforeBodyCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
 			 */
 			@Override
-			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
+			public ArrayString call(Object context, ArrayObject items) {
 				if (bodyCallback != null) {
 					String[] result = bodyCallback.onBeforeBody(getChart(), ArrayListHelper.unmodifiableList(items));
 					if (result != null && result.length > 0) {
@@ -251,7 +251,7 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyAfterBodyCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
 			 */
 			@Override
-			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
+			public ArrayString call(Object context, ArrayObject items) {
 				if (bodyCallback != null) {
 					String[] result = bodyCallback.onAfterBody(getChart(), ArrayListHelper.unmodifiableList(items));
 					if (result != null && result.length > 0) {
@@ -350,7 +350,7 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyBeforeFooterCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
 			 */
 			@Override
-			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
+			public ArrayString call(Object context, ArrayObject items) {
 				if (footerCallback != null) {
 					String[] result = footerCallback.onBeforeFooter(getChart(), ArrayListHelper.unmodifiableList(items));
 					if (result != null && result.length > 0) {
@@ -368,7 +368,7 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyFooterCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
 			 */
 			@Override
-			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
+			public ArrayString call(Object context, ArrayObject items) {
 				if (footerCallback != null) {
 					String[] result = footerCallback.onFooter(getChart(), ArrayListHelper.unmodifiableList(items));
 					if (result != null && result.length > 0) {
@@ -386,7 +386,7 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyAfterFooterCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
 			 */
 			@Override
-			public ArrayString call(Object context, ArrayObject<TooltipItem> items) {
+			public ArrayString call(Object context, ArrayObject items) {
 				if (footerCallback != null) {
 					String[] result = footerCallback.onAfterFooter(getChart(), ArrayListHelper.unmodifiableList(items));
 					if (result != null && result.length > 0) {

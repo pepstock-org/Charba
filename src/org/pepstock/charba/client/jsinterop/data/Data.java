@@ -17,10 +17,13 @@ package org.pepstock.charba.client.jsinterop.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.Configuration;
 import org.pepstock.charba.client.jsinterop.ConfigurationElement;
+import org.pepstock.charba.client.jsinterop.commons.ArrayMixedObject;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.jsinterop.commons.ConfigurationLoader;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
@@ -30,16 +33,26 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer
  */
-public final class Data extends NativeObjectContainer<NativeData> implements ConfigurationElement{
+public final class Data extends NativeObjectContainer implements ConfigurationElement{
 	
 	// maintains the list of datasets
-	private final ArrayObjectContainerList<Dataset, NativeDataset> currentDatasets = new ArrayObjectContainerList<Dataset, NativeDataset>();
+	private final ArrayObjectContainerList<Dataset> currentDatasets = new ArrayObjectContainerList<Dataset>();
+	
+	/**
+	 * Name of fields of JavaScript object. 
+	 */
+	private enum Property implements Key {
+		labels,
+		datasets,
+		xLabels,
+		yLabels
+	}
 	
 	/**
 	 * @param nativeObject
 	 */
 	public Data() {
-		super(new NativeData());
+		super(new NativeObject());
 	}
 	
 	/**
@@ -61,7 +74,7 @@ public final class Data extends NativeObjectContainer<NativeData> implements Con
 	 * @see org.pepstock.charba.client.data.Labels
 	 */
 	public void setLabels(Labels labels){
-		getNativeObject().setLabels(labels.getArray());
+		setArrayValue(Property.labels, labels.getArray());
 	}
 
 	/**
@@ -70,7 +83,8 @@ public final class Data extends NativeObjectContainer<NativeData> implements Con
 	 * @see org.pepstock.charba.client.data.Labels
 	 */
 	public Labels getLabels(){
-		return Labels.load(getNativeObject().getLabels());
+		ArrayMixedObject array = getArrayValue(Property.labels);
+		return Labels.load(array);
 	}
 
 	/**
@@ -92,7 +106,7 @@ public final class Data extends NativeObjectContainer<NativeData> implements Con
 	 * @see org.pepstock.charba.client.data.Labels
 	 */
 	public void setXLabels(Labels labels){
-		getNativeObject().setXLabels(labels.getArray());
+		setArrayValue(Property.xLabels, labels.getArray());
 	}
 
 	/**
@@ -101,7 +115,8 @@ public final class Data extends NativeObjectContainer<NativeData> implements Con
 	 * @see org.pepstock.charba.client.data.Labels
 	 */
 	public Labels getXLabels(){
-		return Labels.load(getNativeObject().getXLabels());
+		ArrayMixedObject array = getArrayValue(Property.xLabels);
+		return Labels.load(array);
 	}
 
 	/**
@@ -123,7 +138,7 @@ public final class Data extends NativeObjectContainer<NativeData> implements Con
 	 * @see org.pepstock.charba.client.data.Labels
 	 */
 	public void setYLabels(Labels labels){
-		getNativeObject().setYLabels(labels.getArray());
+		setArrayValue(Property.yLabels, labels.getArray());
 	}
 
 	/**
@@ -132,7 +147,8 @@ public final class Data extends NativeObjectContainer<NativeData> implements Con
 	 * @see org.pepstock.charba.client.data.Labels
 	 */
 	public Labels getYLabels(){
-		return Labels.load(getNativeObject().getYLabels());
+		ArrayMixedObject array = getArrayValue(Property.yLabels);
+		return Labels.load(array);
 	}
 
 	/**
@@ -144,7 +160,7 @@ public final class Data extends NativeObjectContainer<NativeData> implements Con
 		if (datasets != null) {
 			this.currentDatasets.clear();
 			this.currentDatasets.addAll(datasets);
-			getNativeObject().setDatasets(this.currentDatasets.getArray());
+			setArrayValue(Property.datasets, this.currentDatasets.getArray());
 		}
 	}
 
@@ -163,8 +179,6 @@ public final class Data extends NativeObjectContainer<NativeData> implements Con
 	@Override
 	public void load(Configuration configuration) {
 		ConfigurationLoader.loadData(configuration, this);
-	}
-	
-	
+	}	
 	
 }

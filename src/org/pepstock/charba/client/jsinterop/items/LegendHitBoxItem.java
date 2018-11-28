@@ -15,13 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**
  * JavaScript object which contains the legends hit box size.
@@ -29,23 +25,22 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
 public final class LegendHitBoxItem extends SizeItem{
-	
-	@JsProperty(name = "left")
-	native int getNativeLeft();
 
-	@JsProperty(name = "top")
-	native int getNativeTop();
+	/**
+	 * @param nativeObject
+	 */
+	LegendHitBoxItem(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
 	/**
 	 * Returns the padding left in pixel.
 	 * 
 	 * @return the padding left in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	@JsOverlay
 	public int getLeft() {
-		return Checker.check(getNativeLeft(), UndefinedValues.INTEGER);
+		return getValue(Position.left, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -53,9 +48,20 @@ public final class LegendHitBoxItem extends SizeItem{
 	 * 
 	 * @return the padding top in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	@JsOverlay
 	public int getTop() {
-		return Checker.check(getNativeTop(), UndefinedValues.INTEGER);
+		return getValue(Position.top, UndefinedValues.INTEGER);
 	}
 
+	static class LegendHitBoxItemFactory implements Factory<LegendHitBoxItem>{
+
+		/* (non-Javadoc)
+		 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)
+		 */
+		@Override
+		public LegendHitBoxItem create(NativeObject nativeObject) {
+			return new LegendHitBoxItem(nativeObject);
+		}
+		
+	}
+	
 }

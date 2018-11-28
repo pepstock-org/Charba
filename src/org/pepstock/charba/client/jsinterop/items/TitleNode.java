@@ -15,10 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
-
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**
  * Wrapper of title node of CHART.JS.
@@ -26,7 +23,13 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  *
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
 public final class TitleNode extends BaseBoxNodeItem {
+
+	/**
+	 * @param nativeObject
+	 */
+	public TitleNode(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
 }

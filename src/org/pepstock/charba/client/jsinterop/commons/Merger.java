@@ -41,7 +41,7 @@ public final class Merger {
 	 * @param target The target object in which <code>source</code> is merged into.
 	 * @param source  Object to merge into <code>target</code>.
 	 */
-	public static void merge(NativeObjectContainer<?> target, NativeObjectContainer<?> source) {
+	public static void merge(NativeObjectContainer target, NativeObjectContainer source) {
 		merge(target.getNativeObject(), source.getNativeObject());
 	}
 
@@ -51,7 +51,7 @@ public final class Merger {
 	 * @param target The target object in which <code>source</code> is merged into.
 	 * @param source  Object to merge into <code>target</code>.
 	 */
-	public static void merge(NativeObject target, NativeObjectContainer<?> source) {
+	public static void merge(NativeObject target, NativeObjectContainer source) {
 		merge(target, source.getNativeObject());
 	}
 
@@ -61,7 +61,7 @@ public final class Merger {
 	 * @param target The target object in which <code>source</code> is merged into.
 	 * @param source  Object to merge into <code>target</code>.
 	 */
-	public static void merge(NativeObjectContainer<?> target, NativeObject source) {
+	public static void merge(NativeObjectContainer target, NativeObject source) {
 		merge(target.getNativeObject(), source);
 	}
 
@@ -85,7 +85,7 @@ public final class Merger {
 	 * @param property property of root java script object to add
 	 * @return the added java script object
 	 */
-	public static NativeObject merge(NativeObjectContainer<?> target, NativeObjectContainer<?> source, String property) {
+	public static NativeObject merge(NativeObjectContainer target, NativeObjectContainer source, String property) {
 		return merge(target.getNativeObject(), source.getNativeObject(), property);
 	}
 
@@ -99,7 +99,7 @@ public final class Merger {
 	 * @param property property of root java script object to add
 	 * @return the added java script object
 	 */
-	public static NativeObject merge(NativeObject target, NativeObjectContainer<?> source, String property) {
+	public static NativeObject merge(NativeObject target, NativeObjectContainer source, String property) {
 		return merge(target, source.getNativeObject(), property);
 	}
 
@@ -113,7 +113,7 @@ public final class Merger {
 	 * @param property property of root java script object to add
 	 * @return the added java script object
 	 */
-	public static NativeObject merge(NativeObjectContainer<?> target, NativeObject source, String property) {
+	public static NativeObject merge(NativeObjectContainer target, NativeObject source, String property) {
 		return merge(target.getNativeObject(), source, property);
 	}
 

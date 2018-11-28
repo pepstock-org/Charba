@@ -15,17 +15,20 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
-
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**
  * Object which maps the chart area item of CHART.JS chart java script object.
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.AbstractChart
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
 public final class ChartAreaItem extends BaseBoxItem {
+
+	/**
+	 * @param nativeObject
+	 */
+	ChartAreaItem(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
 }

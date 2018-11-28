@@ -17,46 +17,43 @@ package org.pepstock.charba.client.jsinterop.items;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.Defaults;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.NativeName;
+import org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-
-import jsinterop.annotations.JsOverlay;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
  * This object contains the color info when a label into tooltip.<br>
  * It must be used into label tooltip callback.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.callbacks.TooltipLabelCallback
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
-public final class TooltipLabelColor extends NativeObject {
+public final class TooltipLabelColor extends NativeObjectContainer {
 
-	@JsProperty(name = "backgroundColor")
-	native void setNativeBackgroundColor(String backgroundColor);
-
-	@JsProperty(name = "backgroundColor")
-	native String getNativeBackgroundColor();
-
-	@JsProperty(name = "borderColor")
-	native void setNativeBorderColor(String borderColor);
-
-	@JsProperty(name = "borderColor")
-	native String getNativeBorderColor();
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
+	{
+		backgroundColor,
+		borderColor
+	}	
+	
+	/**
+	 * @param nativeObject
+	 */
+	public TooltipLabelColor(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
 	/**
 	 * Sets background color as string
 	 * 
 	 * @param backgroundColor background color
 	 */
-	@JsOverlay
 	public void setBackgroundColor(String backgroundColor) {
-		setNativeBackgroundColor(backgroundColor);
+		setValue(Property.backgroundColor, backgroundColor);
 	}
 
 	/**
@@ -64,9 +61,8 @@ public final class TooltipLabelColor extends NativeObject {
 	 * 
 	 * @param backgroundColor background color
 	 */
-	@JsOverlay
 	public void setBackgroundColor(IsColor backgroundColor) {
-		setNativeBackgroundColor(backgroundColor.toRGBA());
+		setValue(Property.backgroundColor, backgroundColor.toRGBA());
 	}
 	
 	/**
@@ -74,9 +70,8 @@ public final class TooltipLabelColor extends NativeObject {
 	 * 
 	 * @return the background color of the label.
 	 */
-	@JsOverlay
 	public String getBackgroundColorAsString() {
-		return Checker.check(getNativeBackgroundColor(), Defaults.getGlobal().getTooltips().getBackgroundColorAsString());
+		return getValue(Property.backgroundColor, Defaults.get().getGlobal().getTooltips().getBackgroundColorAsString());
 	}
 
 	/**
@@ -84,7 +79,6 @@ public final class TooltipLabelColor extends NativeObject {
 	 * 
 	 * @return the background color of the label.
 	 */
-	@JsOverlay
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
@@ -94,9 +88,8 @@ public final class TooltipLabelColor extends NativeObject {
 	 * 
 	 * @param borderColor border color
 	 */
-	@JsOverlay
 	public void setBorderColor(String borderColor) {
-		setNativeBorderColor(borderColor);
+		setValue(Property.borderColor, borderColor);
 	}
 
 	/**
@@ -104,9 +97,8 @@ public final class TooltipLabelColor extends NativeObject {
 	 * 
 	 * @param borderColor border color
 	 */
-	@JsOverlay
 	public void setBorderColor(IsColor borderColor) {
-		setNativeBorderColor(borderColor.toRGBA());
+		setValue(Property.borderColor, borderColor.toRGBA());
 	}
 
 	/**
@@ -114,9 +106,8 @@ public final class TooltipLabelColor extends NativeObject {
 	 * 
 	 * @return the border color of the label.
 	 */
-	@JsOverlay
 	public String getBorderColorAsString() {
-		return Checker.check(getNativeBorderColor(),  Defaults.getGlobal().getTooltips().getBorderColorAsString());
+		return getValue(Property.borderColor,  Defaults.get().getGlobal().getTooltips().getBorderColorAsString());
 	}
 	
 	/**
@@ -124,9 +115,18 @@ public final class TooltipLabelColor extends NativeObject {
 	 * 
 	 * @return the border color of the label.
 	 */
-	@JsOverlay
 	public IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
+	}
+	
+	static class TooltipLabelColorFactory implements Factory<TooltipLabelColor>{
+		/* (non-Javadoc)
+		 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)
+		 */
+		@Override
+		public TooltipLabelColor create(NativeObject nativeObject) {
+			return new TooltipLabelColor(nativeObject);
+		}
 	}
 
 }
