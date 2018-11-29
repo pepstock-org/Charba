@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.jsinterop.items;
 
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
 import org.pepstock.charba.client.jsinterop.options.Options;
 
 /**
@@ -27,8 +27,8 @@ import org.pepstock.charba.client.jsinterop.options.Options;
  */
 public final class OptionsNode extends Options {
 
-	public OptionsNode(IsDefaultOptions defaultValues, NativeObject delegated) {
-		super(defaultValues, delegated);
+	public OptionsNode(NativeObject delegated) {
+		super(DefaultOptions.get(), delegated);
 	}
 
 }

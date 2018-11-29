@@ -42,7 +42,7 @@ public final class AnimationItem extends NativeObjectContainer {
 	/**
 	 * @param nativeObject
 	 */
-	public AnimationItem(NativeObject nativeObject) {
+	AnimationItem(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

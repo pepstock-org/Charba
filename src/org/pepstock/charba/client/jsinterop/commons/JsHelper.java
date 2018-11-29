@@ -34,6 +34,7 @@ public final class JsHelper {
 	 * To avoid any instantiation
 	 */
 	JsHelper() {
+		// FIXME manca Inject
 		// do nothing
 	}
 
@@ -75,7 +76,7 @@ public final class JsHelper {
 	 * @param object object to be modified.
 	 * @param key property key to be removed.
 	 */
-	public static native <T extends NativeObject> void remove(T object, String key);
+	public static native void remove(NativeObject object, String key);
 
 	/**
 	 * Returns a property of java script object as integer.

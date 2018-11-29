@@ -20,7 +20,6 @@ import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.jsinterop.data.Data;
-import org.pepstock.charba.client.jsinterop.data.NativeData;
 import org.pepstock.charba.client.jsinterop.plugins.ArrayPlugin;
 import org.pepstock.charba.client.jsinterop.plugins.Plugins;
 
@@ -37,7 +36,7 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
-public final class Configuration extends NativeObject {
+public final class Configuration{
 	
 	@JsProperty(name = "type")
 	native void setNativeType(String type);
@@ -46,7 +45,7 @@ public final class Configuration extends NativeObject {
 	public native void setOptions(NativeObject options);
 
 	@JsProperty
-	public native void setData(NativeData data);
+	public native void setData(NativeObject data);
 
 	@JsProperty 
 	public native void setPlugins(ArrayPlugin plugins);

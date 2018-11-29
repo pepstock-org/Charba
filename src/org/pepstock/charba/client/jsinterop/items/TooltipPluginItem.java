@@ -37,11 +37,14 @@ public final class TooltipPluginItem extends NativeObjectContainer {
 		tooltip
 	}
 	
+	private final TooltipNode node;
+	
 	/**
 	 * @param nativeObject
 	 */
 	public TooltipPluginItem(NativeObject nativeObject) {
 		super(nativeObject);
+		node = new TooltipNode(getValue(Property.tooltip));
 	}
 
 	public double getEasing() {
@@ -49,6 +52,6 @@ public final class TooltipPluginItem extends NativeObjectContainer {
 	}
 
 	public TooltipNode getTooltip() {
-		return new TooltipNode(getValue(Property.tooltip));
+		return node;
 	}
 }

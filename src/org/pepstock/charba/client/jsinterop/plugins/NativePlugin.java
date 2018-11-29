@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.jsinterop.plugins;
 
 import org.pepstock.charba.client.jsinterop.Chart;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
 import org.pepstock.charba.client.jsinterop.items.DatasetPluginItem;
 import org.pepstock.charba.client.jsinterop.items.SizeItem;
@@ -94,13 +95,13 @@ final class NativePlugin {
 	
 	// dataset
 	@JsMethod	
-	public boolean beforeDatasetUpdate(Chart chart, DatasetPluginItem item, Object option){
-		return wrapper.onBeforeDatasetUpdate(chart.getCharbaId(), item);
+	public boolean beforeDatasetUpdate(Chart chart, NativeObject item, Object option){
+		return wrapper.onBeforeDatasetUpdate(chart.getCharbaId(), new DatasetPluginItem(item));
 	}
 	
 	@JsMethod	
-	public void afterDatasetUpdate(Chart chart, DatasetPluginItem item, Object option){
-		wrapper.onAfterDatasetUpdate(chart.getCharbaId(), item);
+	public void afterDatasetUpdate(Chart chart, NativeObject item, Object option){
+		wrapper.onAfterDatasetUpdate(chart.getCharbaId(), new DatasetPluginItem(item));
 	}
 
 	// render
@@ -135,22 +136,22 @@ final class NativePlugin {
 
 	// dataset draw
 	@JsMethod	
-	public boolean beforeDatasetDraw(Chart chart, DatasetPluginItem item, Object option){
-		return wrapper.onBeforeDatasetDraw(chart.getCharbaId(), item);
+	public boolean beforeDatasetDraw(Chart chart, NativeObject item, Object option){
+		return wrapper.onBeforeDatasetDraw(chart.getCharbaId(), new DatasetPluginItem(item));
 	}
 	@JsMethod
-	public void afterDatasetDraw(Chart chart, DatasetPluginItem item, Object option){
-		wrapper.onAfterDatasetDraw(chart.getCharbaId(), item);
+	public void afterDatasetDraw(Chart chart, NativeObject item, Object option){
+		wrapper.onAfterDatasetDraw(chart.getCharbaId(), new DatasetPluginItem(item));
 	}
 
 	// tooltip draw
 	@JsMethod	
-	public boolean beforeTooltipDraw(Chart chart, TooltipPluginItem item, Object option){
-		return wrapper.onBeforeTooltipDraw(chart.getCharbaId(), item);
+	public boolean beforeTooltipDraw(Chart chart, NativeObject item, Object option){
+		return wrapper.onBeforeTooltipDraw(chart.getCharbaId(), new TooltipPluginItem(item));
 	}
 	@JsMethod
-	public void afterTooltipDraw(Chart chart, TooltipPluginItem item, Object option){
-		wrapper.onAfterTooltipDraw(chart.getCharbaId(), item);
+	public void afterTooltipDraw(Chart chart, NativeObject item, Object option){
+		wrapper.onAfterTooltipDraw(chart.getCharbaId(),  new TooltipPluginItem(item));
 	}
 
 	// event
@@ -165,8 +166,8 @@ final class NativePlugin {
 
 	// resize
 	@JsMethod	
-	public void resize(Chart chart, SizeItem size, Object option){
-		wrapper.onResize(chart.getCharbaId(), size);
+	public void resize(Chart chart, NativeObject size, Object option){
+		wrapper.onResize(chart.getCharbaId(), new SizeItem(size));
 	}
 
 	// destroy

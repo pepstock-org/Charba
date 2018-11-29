@@ -38,6 +38,7 @@ import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
 import org.pepstock.charba.client.jsinterop.events.ChartResizeEvent;
 import org.pepstock.charba.client.jsinterop.events.DatasetSelectionEvent;
 import org.pepstock.charba.client.jsinterop.items.DatasetItem;
+import org.pepstock.charba.client.jsinterop.items.DatasetItem.DatasetItemFactory;
 import org.pepstock.charba.client.jsinterop.items.SizeItem;
 import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 
@@ -119,7 +120,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 		 * 
 		 * @param item the new size item.
 		 */
-		void call(NativeObject context, Chart chart, SizeItem size); 
+		void call(NativeObject context, Chart chart, NativeObject size); 
 	}
 	
 	/**
@@ -180,6 +181,8 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 		onHover
 	}
 
+	private final DatasetItemFactory datasetItemFactory = new DatasetItemFactory();
+	
 	/**
 	 * Builds the object storing the chart instance.<br>
 	 * Sets also the internal parts of getConfiguration().
@@ -211,7 +214,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 				if (item != null) {
 					getChart().fireEvent(new DatasetSelectionEvent(event, item));
 				}
-				getChart().fireEvent(new ChartClickEvent(event, ArrayListHelper.unmodifiableList(items)));			
+				getChart().fireEvent(new ChartClickEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));			
 			}
 		});
 		
@@ -222,7 +225,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			 */
 			@Override
 			public void call(Chart chart, ChartNativeEvent event, ArrayObject items) {
-				getChart().fireEvent(new ChartHoverEvent(event, ArrayListHelper.unmodifiableList(items)));
+				getChart().fireEvent(new ChartHoverEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));	
 			}
 
 		});
@@ -233,9 +236,9 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			 * @see org.pepstock.charba.client.jsinterop.options.EventableOptions.ProxyChartResizeCallback#call(java.lang.Object, java.lang.Object, org.pepstock.charba.client.jsinterop.items.SizeItem)
 			 */
 			@Override
-			public void call(NativeObject context, Chart chart, SizeItem size) {
+			public void call(NativeObject context, Chart chart, NativeObject size) {
 				NativeEvent event = Document.get().createChangeEvent();
-				getChart().fireEvent(new ChartResizeEvent(event, size));
+				getChart().fireEvent(new ChartResizeEvent(event, new SizeItem(size)));
 			}
 			
 		});

@@ -18,6 +18,7 @@ package org.pepstock.charba.client.jsinterop.items;
 import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -33,10 +34,20 @@ import jsinterop.annotations.JsType;
 public final class AnimationObject {
 	
 	/**
+	 * To avoid any user creation
+	 */
+	protected AnimationObject() {}
+
+	/**
 	 * FIXME
 	 * @return
 	 */
-	@JsProperty (name = "animationObject")
-	public native NativeObject getAnimationItem();
+	@JsProperty
+	native NativeObject getAnimationObject();
+	
+	@JsOverlay
+	public final AnimationItem getAnimationItem() {
+		return new AnimationItem(getAnimationObject());
+	}
 
 }

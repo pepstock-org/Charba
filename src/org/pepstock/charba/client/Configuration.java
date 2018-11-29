@@ -59,7 +59,6 @@ class Configuration extends JavaScriptObjectContainer {
 	 */
 	void setOptions(BaseOptions options) {
 		setValue(Property.options, options);
-		;
 	}
 
 	/**

@@ -37,12 +37,15 @@ public final class DatasetPluginItem extends NativeObjectContainer {
 		index,
 		meta
 	}
+	
+	private final DatasetMetaItem meta;
 
 	/**
 	 * @param nativeObject
 	 */
 	public DatasetPluginItem(NativeObject nativeObject) {
 		super(nativeObject);
+		meta = has(Property.meta) ? new DatasetMetaItem(getValue(Property.meta)) : new DatasetMetaItem();
 	}
 
 	public double getEasing() {
@@ -54,9 +57,6 @@ public final class DatasetPluginItem extends NativeObjectContainer {
 	}
 
 	public DatasetMetaItem getMeta() {
-		if (has(Property.meta)) {
-			return new DatasetMetaItem(getValue(Property.meta));
-		}
-		return new DatasetMetaItem();
+		return meta;
 	}
 }

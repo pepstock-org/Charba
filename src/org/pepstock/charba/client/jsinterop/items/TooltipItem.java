@@ -113,7 +113,7 @@ public final class TooltipItem extends NativeObjectContainer {
 		return getValue(Property.y, UndefinedValues.INTEGER);
 	}
 	
-	static class TooltipItemFactory implements Factory<TooltipItem>{
+	public static class TooltipItemFactory implements Factory<TooltipItem>{
 		/* (non-Javadoc)
 		 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)
 		 */

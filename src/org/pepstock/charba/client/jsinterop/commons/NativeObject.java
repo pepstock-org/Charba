@@ -236,7 +236,7 @@ public final class NativeObject {
 	@JsOverlay
 	final NativeBooleanDescriptor getBooleanProperty(String key) {
 		// checks if the property is present
-		if (hasProperty(key) && ObjectType.Boolean.equals(JsHelper.typeOf(this, key))) {
+		if (ObjectType.Boolean.equals(JsHelper.typeOf(this, key))) {
 			// returns the descriptor
 			return getOwnPropertyDescriptor(this, key);
 		}
@@ -252,7 +252,7 @@ public final class NativeObject {
 	@JsOverlay
 	final NativeIntegerDescriptor getIntProperty(String key) {
 		// checks if the property is present
-		if (hasProperty(key) && ObjectType.Number.equals(JsHelper.typeOf(this, key))) {
+		if (ObjectType.Number.equals(JsHelper.typeOf(this, key))) {
 			// returns the descriptor
 			return getOwnPropertyDescriptor(this, key);
 		}
@@ -268,7 +268,7 @@ public final class NativeObject {
 	@JsOverlay
 	final NativeDoubleDescriptor getDoubleProperty(String key) {
 		// checks if the property is present
-		if (hasProperty(key) && ObjectType.Number.equals(JsHelper.typeOf(this, key))) {
+		if (ObjectType.Number.equals(JsHelper.typeOf(this, key))) {
 			// returns the descriptor
 			return getOwnPropertyDescriptor(this, key);
 		}
@@ -284,7 +284,7 @@ public final class NativeObject {
 	@JsOverlay
 	public final NativeStringDescriptor getStringProperty(String key) {
 		// checks if the property is present
-		if (hasProperty(key) && ObjectType.String.equals(JsHelper.typeOf(this, key))) {
+		if (ObjectType.String.equals(JsHelper.typeOf(this, key))) {
 			// returns the descriptor
 			return getOwnPropertyDescriptor(this, key);
 		}
@@ -300,7 +300,7 @@ public final class NativeObject {
 	@JsOverlay
 	final NativeDateDescriptor getDateProperty(String key) {
 		// checks if the property is present
-		if (hasProperty(key) && ObjectType.Object.equals(JsHelper.typeOf(this, key))) {
+		if (ObjectType.Object.equals(JsHelper.typeOf(this, key))) {
 			// returns the descriptor
 			return getOwnPropertyDescriptor(this, key);
 		}
@@ -316,7 +316,7 @@ public final class NativeObject {
 	@JsOverlay
 	final NativeObjectDescriptor getObjectProperty(String key) {
 		// checks if the property is present
-		if (hasProperty(key) && ObjectType.Object.equals(JsHelper.typeOf(this, key))) {
+		if (ObjectType.Object.equals(JsHelper.typeOf(this, key))) {
 			// returns the descriptor
 			return getOwnPropertyDescriptor(this, key);
 		}
@@ -332,7 +332,7 @@ public final class NativeObject {
 	@JsOverlay
 	final <T extends Array> NativeArrayDescriptor<T> getArrayProperty(String key) {
 		// checks if the property is present
-		if (hasProperty(key) && ObjectType.Array.equals(JsHelper.typeOf(this, key))) {
+		if (ObjectType.Array.equals(JsHelper.typeOf(this, key))) {
 			// returns the descriptor
 			return getOwnPropertyDescriptor(this, key);
 		}

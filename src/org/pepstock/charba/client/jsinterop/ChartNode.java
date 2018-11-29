@@ -1,8 +1,7 @@
 package org.pepstock.charba.client.jsinterop;
 
 import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
-import org.pepstock.charba.client.jsinterop.items.ChartAreaItem;
+import org.pepstock.charba.client.jsinterop.items.ChartAreaNode;
 import org.pepstock.charba.client.jsinterop.items.LegendNode;
 import org.pepstock.charba.client.jsinterop.items.OptionsNode;
 import org.pepstock.charba.client.jsinterop.items.ScalesNode;
@@ -10,24 +9,45 @@ import org.pepstock.charba.client.jsinterop.items.TitleNode;
 import org.pepstock.charba.client.jsinterop.items.TooltipNode;
 import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 
-public class ChartNode {
+public final class ChartNode{
 	
 	private final Chart chart;
 	
 	private final OptionsNode options;
 	
+	private final LegendNode legend;
+	
+	private final ScalesNode scales;
+	
+	private final ChartAreaNode chartArea;
+	
+	private final TitleNode title;
+	
+	private final TooltipNode tooltip;
+	
+	private final boolean initialized;
+	
 	/**
 	 * @param chart
 	 */
-	protected ChartNode(Chart chart) {
+	ChartNode(Chart chart) {
 		this.chart = chart;
-		if (chart != null) {
-			options = new OptionsNode(DefaultOptions.get(), chart.getOptions());
-		} else {
-			options = null;
-		}
+		options = new OptionsNode(chart != null ? chart.getOptions() : null);
+		legend = new LegendNode(chart != null ? chart.getLegend() : null);
+		scales = new ScalesNode(chart != null ? chart.getScales() : null);
+		chartArea = new ChartAreaNode(chart != null ? chart.getChartArea() : null);
+		title = new TitleNode(chart != null ? chart.getTitleBlock() : null);
+		tooltip = new TooltipNode(chart != null ? chart.getTooltip() : null);
+		initialized = getId() != UndefinedValues.INTEGER;
 	}
 	
+	/**
+	 * @return the initialized
+	 */
+	public boolean isInitialized() {
+		return initialized;
+	}
+
 	/**
 	 * Returns the options item.
 	 * 
@@ -43,7 +63,7 @@ public class ChartNode {
 	 * @return the legend item.
 	 */
 	public LegendNode getLegend() {
-		return chart.getLegend();
+		return legend;
 	}
 
 	/**
@@ -52,7 +72,7 @@ public class ChartNode {
 	 * @return the scales item.
 	 */
 	public ScalesNode getScales() {
-		return chart.getScales();
+		return scales;
 	}
 
 	/**
@@ -60,8 +80,8 @@ public class ChartNode {
 	 * 
 	 * @return the chart area item.
 	 */
-	public ChartAreaItem getChartArea() {
-		return chart.getChartArea();
+	public ChartAreaNode getChartArea() {
+		return chartArea;
 	}
 
 	/**
@@ -70,7 +90,7 @@ public class ChartNode {
 	 * @return the title item.
 	 */
 	public TitleNode getTitle() {
-		return chart.getTitleBlock();
+		return title;
 	}
 
 	/**
@@ -79,7 +99,7 @@ public class ChartNode {
 	 * @return the tooltip item.
 	 */
 	public TooltipNode getTooltip() {
-		return chart.getTooltip();
+		return tooltip;
 	}
 
 	/**

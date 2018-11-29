@@ -52,10 +52,9 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	private final DatasetItemFactory datasetItemFactory = new DatasetItemFactory();
 	
 	/**
-	 * 
+	 * To avoid any user creation
 	 */
-	DatasetMetaItem() {
-	}
+	DatasetMetaItem() {}
 
 	/**
 	 * @param nativeObject

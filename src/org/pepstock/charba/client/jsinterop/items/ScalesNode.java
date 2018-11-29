@@ -34,7 +34,7 @@ public final class ScalesNode extends NativeObjectContainer {
 	/**
 	 * @param nativeObject
 	 */
-	ScalesNode(NativeObject nativeObject) {
+	public ScalesNode(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

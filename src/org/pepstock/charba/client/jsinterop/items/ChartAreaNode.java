@@ -22,12 +22,12 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  * @see org.pepstock.charba.client.AbstractChart
  */
-public final class ChartAreaItem extends BaseBoxItem {
+public final class ChartAreaNode extends BaseBoxItem {
 
 	/**
 	 * @param nativeObject
 	 */
-	ChartAreaItem(NativeObject nativeObject) {
+	public ChartAreaNode(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

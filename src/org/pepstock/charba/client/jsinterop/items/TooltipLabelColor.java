@@ -38,12 +38,19 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	{
 		backgroundColor,
 		borderColor
-	}	
+	}
 	
+	/**
+	 * 
+	 */
+	public TooltipLabelColor() {
+		super();
+	}
+
 	/**
 	 * @param nativeObject
 	 */
-	public TooltipLabelColor(NativeObject nativeObject) {
+	TooltipLabelColor(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

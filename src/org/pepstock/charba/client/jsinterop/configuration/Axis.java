@@ -32,6 +32,7 @@ import org.pepstock.charba.client.jsinterop.callbacks.AxisTickToLabelConversionC
 import org.pepstock.charba.client.jsinterop.callbacks.AxisUpdateCallback;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.JsHelper;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.chart.DefaultChartScale;
 import org.pepstock.charba.client.jsinterop.items.AxisItem;
 import org.pepstock.charba.client.jsinterop.options.ExtendedScale;
@@ -52,72 +53,72 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	
 	@JsFunction
 	interface ProxyBeforeUpdateCallback {
-		void call(Object context, AxisItem item);
+		void call(Object context, NativeObject item);
 	}
 
 	@JsFunction
 	interface ProxyBeforeSetDimensionsCallback {
-		void call(Object context, AxisItem item);
+		void call(Object context, NativeObject item);
 	}
 
 	@JsFunction
 	interface ProxyAfterSetDimensionsCallback {
-		void call(Object context, AxisItem item);
+		void call(Object context, NativeObject item);
 	}
 
 	@JsFunction
 	interface ProxyBeforeDataLimitsCallback {
-		void call(Object context, AxisItem item);
+		void call(Object context, NativeObject item);
 	}
 
 	@JsFunction
 	interface ProxyAfterDataLimitsCallback {
-		void call(Object context, AxisItem item);
+		void call(Object context, NativeObject item);
 	}
 
 	@JsFunction
 	interface ProxyBeforeBuildTicksCallback {
-		void call(Object context, AxisItem item);
+		void call(Object context, NativeObject item);
 	}
 
 	@JsFunction
 	interface ProxyAfterBuildTicksCallback {
-		void call(Object context, AxisItem item);
+		void call(Object context, NativeObject item);
 	}
 
 	@JsFunction
 	interface ProxyBeforeTickToLabelConversionCallback {
-		void call(Object context, AxisItem item);
+		void call(Object context, NativeObject item);
 	}
 
 	@JsFunction
 	interface ProxyAfterTickToLabelConversionCallback {
-		void call(Object context, AxisItem item);
+		void call(Object context, NativeObject item);
 	}
 
 	@JsFunction
 	interface ProxyBeforeCalculateTickRotationCallback {
-		void call(Object context, AxisItem item);
+		void call(Object context, NativeObject item);
 	}
 
 	@JsFunction
 	interface ProxyAfterCalculateTickRotationCallback {
-		void call(Object context, AxisItem item);
+		void call(Object context, NativeObject item);
 	}
 
 	@JsFunction
 	interface ProxyBeforeFitCallback {
-		void call(Object context, AxisItem item);
+		void call(Object context, NativeObject item);
 	}
 
 	@JsFunction
 	interface ProxyAfterFitCallback {
-		void call(Object context, AxisItem item);
+		void call(Object context, NativeObject item);
 	}
 
 	@JsFunction
 	interface ProxyAfterUpdateCallback {
-		void call(Object context, AxisItem item);
+		void call(Object context, NativeObject item);
 	}
 	
 	private final CallbackProxy<ProxyBeforeUpdateCallback> beforeUpdateCallbackProxy = JsHelper.newCallbackProxy();
@@ -197,9 +198,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		beforeUpdateCallbackProxy.setCallback(new ProxyBeforeUpdateCallback() {
 
 			@Override
-			public void call(Object context, AxisItem item) {
+			public void call(Object context, NativeObject item) {
 				if (axisUpdateCallback != null) {
-					axisUpdateCallback.onBeforeUpdate(Axis.this, item);
+					axisUpdateCallback.onBeforeUpdate(Axis.this, new AxisItem(item));
 				}
 			}
 		});
@@ -207,9 +208,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		beforeSetDimensionsCallbackProxy.setCallback(new ProxyBeforeSetDimensionsCallback() {
 
 			@Override
-			public void call(Object context, AxisItem item) {
+			public void call(Object context, NativeObject item) {
 				if (axisDimensionsCallback != null) {
-					axisDimensionsCallback.onBeforeSetDimensions(Axis.this, item);
+					axisDimensionsCallback.onBeforeSetDimensions(Axis.this, new AxisItem(item));
 				}
 			}
 		});
@@ -217,9 +218,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		afterSetDimensionsCallbackProxy.setCallback(new ProxyAfterSetDimensionsCallback() {
 
 			@Override
-			public void call(Object context, AxisItem item) {
+			public void call(Object context, NativeObject item) {
 				if (axisDimensionsCallback != null) {
-					axisDimensionsCallback.onAfterSetDimensions(Axis.this, item);
+					axisDimensionsCallback.onAfterSetDimensions(Axis.this, new AxisItem(item));
 				}
 			}
 		});
@@ -227,9 +228,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		beforeDataLimitsCallbackProxy.setCallback(new ProxyBeforeDataLimitsCallback() {
 
 			@Override
-			public void call(Object context, AxisItem item) {
+			public void call(Object context, NativeObject item) {
 				if (axisDataLimitsCallback != null) {
-					axisDataLimitsCallback.onBeforeDataLimits(Axis.this, item);
+					axisDataLimitsCallback.onBeforeDataLimits(Axis.this, new AxisItem(item));
 				}
 			}
 		});
@@ -237,9 +238,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		afterDataLimitsCallbackProxy.setCallback(new ProxyAfterDataLimitsCallback() {
 
 			@Override
-			public void call(Object context, AxisItem item) {
+			public void call(Object context, NativeObject item) {
 				if (axisDataLimitsCallback != null) {
-					axisDataLimitsCallback.onAfterDataLimits(Axis.this, item);
+					axisDataLimitsCallback.onAfterDataLimits(Axis.this, new AxisItem(item));
 				}
 			}
 		});
@@ -247,9 +248,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		beforeBuildTicksCallbackProxy.setCallback(new ProxyBeforeBuildTicksCallback() {
 
 			@Override
-			public void call(Object context, AxisItem item) {
+			public void call(Object context, NativeObject item) {
 				if (axisBuildTicksCallback != null) {
-					axisBuildTicksCallback.onBeforeBuildTicks(Axis.this, item);
+					axisBuildTicksCallback.onBeforeBuildTicks(Axis.this, new AxisItem(item));
 				}
 			}
 		});
@@ -257,9 +258,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		afterBuildTicksCallbackProxy.setCallback(new ProxyAfterBuildTicksCallback() {
 
 			@Override
-			public void call(Object context, AxisItem item) {
+			public void call(Object context, NativeObject item) {
 				if (axisBuildTicksCallback != null) {
-					axisBuildTicksCallback.onAfterBuildTicks(Axis.this, item);
+					axisBuildTicksCallback.onAfterBuildTicks(Axis.this, new AxisItem(item));
 				}
 			}
 		});
@@ -267,9 +268,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		beforeTickToLabelConversionCallbackProxy.setCallback(new ProxyBeforeTickToLabelConversionCallback() {
 
 			@Override
-			public void call(Object context, AxisItem item) {
+			public void call(Object context, NativeObject item) {
 				if (axisTickToLabelConversionCallback != null) {
-					axisTickToLabelConversionCallback.onBeforeTickToLabelConversion(Axis.this, item);
+					axisTickToLabelConversionCallback.onBeforeTickToLabelConversion(Axis.this, new AxisItem(item));
 				}
 			}
 		});
@@ -277,9 +278,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		afterTickToLabelConversionCallbackProxy.setCallback(new ProxyAfterTickToLabelConversionCallback() {
 
 			@Override
-			public void call(Object context, AxisItem item) {
+			public void call(Object context, NativeObject item) {
 				if (axisTickToLabelConversionCallback != null) {
-					axisTickToLabelConversionCallback.onAfterTickToLabelConversion(Axis.this, item);
+					axisTickToLabelConversionCallback.onAfterTickToLabelConversion(Axis.this, new AxisItem(item));
 				}
 			}
 		});
@@ -287,9 +288,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		beforeCalculateTickRotationCallbackProxy.setCallback(new ProxyBeforeCalculateTickRotationCallback() {
 
 			@Override
-			public void call(Object context, AxisItem item) {
+			public void call(Object context, NativeObject item) {
 				if (axisCalculateTickRotationCallback != null) {
-					axisCalculateTickRotationCallback.onBeforeCalculateTickRotation(Axis.this, item);
+					axisCalculateTickRotationCallback.onBeforeCalculateTickRotation(Axis.this, new AxisItem(item));
 				}
 			}
 		});
@@ -297,9 +298,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		afterCalculateTickRotationCallbackProxy.setCallback(new ProxyAfterCalculateTickRotationCallback() {
 
 			@Override
-			public void call(Object context, AxisItem item) {
+			public void call(Object context, NativeObject item) {
 				if (axisCalculateTickRotationCallback != null) {
-					axisCalculateTickRotationCallback.onAfterCalculateTickRotation(Axis.this, item);
+					axisCalculateTickRotationCallback.onAfterCalculateTickRotation(Axis.this, new AxisItem(item));
 				}
 			}
 		});
@@ -307,9 +308,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		beforeFitCallbackProxy.setCallback(new ProxyBeforeFitCallback() {
 
 			@Override
-			public void call(Object context, AxisItem item) {
+			public void call(Object context, NativeObject item) {
 				if (axisFitCallback != null) {
-					axisFitCallback.onBeforeFit(Axis.this, item);
+					axisFitCallback.onBeforeFit(Axis.this, new AxisItem(item));
 				}
 			}
 		});
@@ -317,9 +318,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		afterFitCallbackProxy.setCallback(new ProxyAfterFitCallback() {
 
 			@Override
-			public void call(Object context, AxisItem item) {
+			public void call(Object context, NativeObject item) {
 				if (axisFitCallback != null) {
-					axisFitCallback.onAfterFit(Axis.this, item);
+					axisFitCallback.onAfterFit(Axis.this, new AxisItem(item));
 				}
 			}
 		});
@@ -327,9 +328,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		afterUpdateCallbackProxy.setCallback(new ProxyAfterUpdateCallback() {
 
 			@Override
-			public void call(Object context, AxisItem item) {
+			public void call(Object context, NativeObject item) {
 				if (axisUpdateCallback != null) {
-					axisUpdateCallback.onAfterUpdate(Axis.this, item);
+					axisUpdateCallback.onAfterUpdate(Axis.this, new AxisItem(item));
 				}
 			}
 		});

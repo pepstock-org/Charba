@@ -21,6 +21,7 @@ import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.JsHelper;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
 import org.pepstock.charba.client.jsinterop.events.LegendClickEvent;
 import org.pepstock.charba.client.jsinterop.events.LegendHoverEvent;
@@ -42,12 +43,12 @@ public final class Legend extends EventProvider<ExtendedOptions> {
 	
 	@JsFunction
 	interface ProxyLegendClickCallback {
-		void call(Chart chart, ChartNativeEvent event, LegendItem item);
+		void call(Chart chart, ChartNativeEvent event, NativeObject item);
 	}
 
 	@JsFunction
 	interface ProxyLegendHoverCallback {
-		void call(Chart chart, ChartNativeEvent event, LegendItem item);
+		void call(Chart chart, ChartNativeEvent event, NativeObject item);
 	}
 	
 	private final CallbackProxy<ProxyLegendClickCallback> clickCallbackProxy = JsHelper.newCallbackProxy();
@@ -85,8 +86,8 @@ public final class Legend extends EventProvider<ExtendedOptions> {
 			 * @see org.pepstock.charba.client.jsinterop.options.EventableLegend.ProxyLegendClickCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.items.LegendItem)
 			 */
 			@Override
-			public void call(Chart chart, ChartNativeEvent event, LegendItem item) {
-				getChart().fireEvent(new LegendClickEvent(event, item));
+			public void call(Chart chart, ChartNativeEvent event, NativeObject item) {
+				getChart().fireEvent(new LegendClickEvent(event, new LegendItem(item)));
 			}
 			
 		});
@@ -96,8 +97,8 @@ public final class Legend extends EventProvider<ExtendedOptions> {
 			 * @see org.pepstock.charba.client.jsinterop.options.EventableLegend.ProxyLegendHoverCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.items.LegendItem)
 			 */
 			@Override
-			public void call(Chart chart, ChartNativeEvent event, LegendItem item) {
-				getChart().fireEvent(new LegendHoverEvent(event, item));
+			public void call(Chart chart, ChartNativeEvent event, NativeObject item) {
+				getChart().fireEvent(new LegendHoverEvent(event, new LegendItem(item)));
 			}
 			
 		});

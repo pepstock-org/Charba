@@ -27,6 +27,7 @@ import org.pepstock.charba.client.jsinterop.callbacks.TooltipFilterCallback;
 import org.pepstock.charba.client.jsinterop.callbacks.TooltipItemSortCallback;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.JsHelper;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.items.TooltipItem;
 import org.pepstock.charba.client.jsinterop.items.TooltipModel;
 import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
@@ -50,7 +51,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	 */
 	@JsFunction
 	interface ProxyCustomCallback {
-		void call(Object context, TooltipModel model);
+		void call(Object context, NativeObject model);
 	}
 	
 	/**
@@ -61,7 +62,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	 */
 	@JsFunction
 	interface ProxyFilterCallback {
-		boolean call(Object context, TooltipItem item);
+		boolean call(Object context, NativeObject item);
 	}
 	
 	/**
@@ -76,7 +77,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	 */
 	@JsFunction
 	interface ProxyItemSortCallback {
-		int call(Object context, TooltipItem item1, TooltipItem item2);
+		int call(Object context, NativeObject item1, NativeObject item2);
 	}
 	
 	private final CallbackProxy<ProxyCustomCallback> customCallbackProxy = JsHelper.newCallbackProxy();
@@ -117,11 +118,11 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 			 * @see org.pepstock.charba.client.jsinterop.options.Tooltips.ProxyCustomCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipModel)
 			 */
 			@Override
-			public void call(Object context, TooltipModel model) {
+			public void call(Object context, NativeObject model) {
 				// checks if callback is consistent
 				if (customCallback != null) {
 					// calls callback
-					customCallback.onCustom(getChart(), model);
+					customCallback.onCustom(getChart(), new TooltipModel(model));
 				}
 			}
 	
@@ -133,11 +134,11 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 			 * @see org.pepstock.charba.client.jsinterop.options.Tooltips.ProxyItemSortCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem, org.pepstock.charba.client.jsinterop.items.TooltipItem)
 			 */
 			@Override
-			public int call(Object context, TooltipItem item1, TooltipItem item2) {
+			public int call(Object context, NativeObject item1, NativeObject item2) {
 				// checks if callback is consistent
 				if (itemSortCallback != null) {
 					// calls callback
-					return itemSortCallback.onItemSort(getChart(), item1, item2);
+					return itemSortCallback.onItemSort(getChart(), new TooltipItem(item1), new TooltipItem(item2));
 				}
 				// default is 0 - equals
 				return 0;				
@@ -151,11 +152,11 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 			 * @see org.pepstock.charba.client.jsinterop.options.Tooltips.ProxyFilterCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
 			 */
 			@Override
-			public boolean call(Object context, TooltipItem item) {
+			public boolean call(Object context, NativeObject item) {
 				// checks if callback is consistent
 				if (filterCallback != null) {
 					// calls callback
-					return filterCallback.onFilter(getChart(), item);
+					return filterCallback.onFilter(getChart(), new TooltipItem(item));
 				}
 				// default is true
 				return true;

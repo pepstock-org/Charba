@@ -29,7 +29,7 @@ public final class AxisMinSizeItem extends SizeItem {
 	/**
 	 * @param nativeObject
 	 */
-	public AxisMinSizeItem(NativeObject nativeObject) {
+	AxisMinSizeItem(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 

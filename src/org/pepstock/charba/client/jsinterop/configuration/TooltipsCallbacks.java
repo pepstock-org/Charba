@@ -27,7 +27,9 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.JsHelper;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.items.TooltipItem;
+import org.pepstock.charba.client.jsinterop.items.TooltipItem.TooltipItemFactory;
 import org.pepstock.charba.client.jsinterop.items.TooltipLabelColor;
 import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 
@@ -48,6 +50,8 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 	private static final ArrayString EMPTY_ARRAY = new ArrayString();
 
 	private static final TooltipLabelColor DEFAULT_LABEL_COLOR = new TooltipLabelColor();
+	
+	private final TooltipItemFactory tooltipItemFactory = new TooltipItemFactory();
 	
 	@JsFunction
 	interface ProxyBeforeTitleCallback {
@@ -91,27 +95,27 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 
 	@JsFunction
 	interface ProxyBeforeLabelCallback {
-		String call(Object context, TooltipItem item);
+		String call(Object context, NativeObject item);
 	}
 
 	@JsFunction
 	interface ProxyAfterLabelCallback {
-		String call(Object context, TooltipItem item);
+		String call(Object context, NativeObject item);
 	}
 
 	@JsFunction
 	interface ProxyLabelCallback {
-		String call(Object context, TooltipItem item);
+		String call(Object context, NativeObject item);
 	}
 
 	@JsFunction
 	interface ProxyLabelColorCallback {
-		TooltipLabelColor call(Object context, TooltipItem item);
+		TooltipLabelColor call(Object context, NativeObject item);
 	}
 
 	@JsFunction
 	interface ProxyLabelTextColorCallback {
-		String call(Object context, TooltipItem item);
+		String call(Object context, NativeObject item);
 	}
 
 	private final CallbackProxy<ProxyBeforeTitleCallback> beforeTitleCallbackProxy = JsHelper.newCallbackProxy();
@@ -181,7 +185,7 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 			@Override
 			public ArrayString call(Object context, ArrayObject items) {
 				if (titleCallback != null) {
-					String[] result = titleCallback.onBeforeTitle(getChart(), ArrayListHelper.unmodifiableList(items));
+					String[] result = titleCallback.onBeforeTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 					if (result != null && result.length > 0) {
 						return ArrayString.of(result);
 					}
@@ -199,7 +203,7 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 			@Override
 			public ArrayString call(Object context, ArrayObject items) {
 				if (titleCallback != null) {
-					String[] result = titleCallback.onTitle(getChart(), ArrayListHelper.unmodifiableList(items));
+					String[] result = titleCallback.onTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 					if (result != null && result.length > 0) {
 						return ArrayString.of(result);
 					}
@@ -217,7 +221,7 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 			@Override
 			public ArrayString call(Object context, ArrayObject items) {
 				if (titleCallback != null) {
-					String[] result = titleCallback.onAfterTitle(getChart(), ArrayListHelper.unmodifiableList(items));
+					String[] result = titleCallback.onAfterTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 					if (result != null && result.length > 0) {
 						return ArrayString.of(result);
 					}
@@ -235,7 +239,7 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 			@Override
 			public ArrayString call(Object context, ArrayObject items) {
 				if (bodyCallback != null) {
-					String[] result = bodyCallback.onBeforeBody(getChart(), ArrayListHelper.unmodifiableList(items));
+					String[] result = bodyCallback.onBeforeBody(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 					if (result != null && result.length > 0) {
 						return ArrayString.of(result);
 					}
@@ -253,7 +257,7 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 			@Override
 			public ArrayString call(Object context, ArrayObject items) {
 				if (bodyCallback != null) {
-					String[] result = bodyCallback.onAfterBody(getChart(), ArrayListHelper.unmodifiableList(items));
+					String[] result = bodyCallback.onAfterBody(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 					if (result != null && result.length > 0) {
 						return ArrayString.of(result);
 					}
@@ -266,12 +270,12 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 		beforeLabelCallbackProxy.setCallback(new ProxyBeforeLabelCallback() {
 
 			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyBeforeLabelCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyBeforeLabelCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.NativeObject)
 			 */
 			@Override
-			public String call(Object context, TooltipItem item) {
+			public String call(Object context, NativeObject item) {
 				if (labelCallback != null) {
-					String result = labelCallback.onBeforeLabel(getChart(), item);
+					String result = labelCallback.onBeforeLabel(getChart(), new TooltipItem(item));
 					return result != null ? result : EMPTY;
 				}
 				return EMPTY;
@@ -282,12 +286,12 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 		labelCallbackProxy.setCallback(new ProxyLabelCallback() {
 
 			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyLabelCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyLabelCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.NativeObject)
 			 */
 			@Override
-			public String call(Object context, TooltipItem item) {
+			public String call(Object context, NativeObject item) {
 				if (labelCallback != null) {
-					String result = labelCallback.onLabel(getChart(), item);
+					String result = labelCallback.onLabel(getChart(), new TooltipItem(item));
 					return result != null ? result : EMPTY;
 				}
 				return EMPTY;
@@ -298,12 +302,12 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 		labelColorCallbackProxy.setCallback(new ProxyLabelColorCallback() {
 
 			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyLabelColorCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyLabelColorCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.NativeObject)
 			 */
 			@Override
-			public TooltipLabelColor call(Object context, TooltipItem item) {
+			public TooltipLabelColor call(Object context, NativeObject item) {
 				if (labelCallback != null) {
-					TooltipLabelColor result = labelCallback.onLabelColor(getChart(), item);
+					TooltipLabelColor result = labelCallback.onLabelColor(getChart(), new TooltipItem(item));
 					return result != null ? result : DEFAULT_LABEL_COLOR;
 				}
 				return DEFAULT_LABEL_COLOR;
@@ -314,12 +318,12 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 		labelTextColorCallbackProxy.setCallback(new ProxyLabelTextColorCallback() {
 
 			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyLabelTextColorCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyLabelTextColorCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.NativeObject)
 			 */
 			@Override
-			public String call(Object context, TooltipItem item) {
+			public String call(Object context, NativeObject item) {
 				if (labelCallback != null) {
-					IsColor result = labelCallback.onLabelTextColor(getChart(), item);
+					IsColor result = labelCallback.onLabelTextColor(getChart(), new TooltipItem(item));
 					return result != null ? result.toRGBA() : EMPTY;
 				}
 				//FIXME color
@@ -331,12 +335,12 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 		afterLabelCallbackProxy.setCallback(new ProxyAfterLabelCallback() {
 
 			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyAfterLabelCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyAfterLabelCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.NativeObject)
 			 */
 			@Override
-			public String call(Object context, TooltipItem item) {
+			public String call(Object context, NativeObject item) {
 				if (labelCallback != null) {
-					String result = labelCallback.onAfterLabel(getChart(), item);
+					String result = labelCallback.onAfterLabel(getChart(), new TooltipItem(item));
 					return result != null ? result : EMPTY;
 				}
 				return EMPTY;
@@ -352,7 +356,7 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 			@Override
 			public ArrayString call(Object context, ArrayObject items) {
 				if (footerCallback != null) {
-					String[] result = footerCallback.onBeforeFooter(getChart(), ArrayListHelper.unmodifiableList(items));
+					String[] result = footerCallback.onBeforeFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 					if (result != null && result.length > 0) {
 						return ArrayString.of(result);
 					}
@@ -370,7 +374,7 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 			@Override
 			public ArrayString call(Object context, ArrayObject items) {
 				if (footerCallback != null) {
-					String[] result = footerCallback.onFooter(getChart(), ArrayListHelper.unmodifiableList(items));
+					String[] result = footerCallback.onFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 					if (result != null && result.length > 0) {
 						return ArrayString.of(result);
 					}
@@ -388,7 +392,7 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 			@Override
 			public ArrayString call(Object context, ArrayObject items) {
 				if (footerCallback != null) {
-					String[] result = footerCallback.onAfterFooter(getChart(), ArrayListHelper.unmodifiableList(items));
+					String[] result = footerCallback.onAfterFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 					if (result != null && result.length > 0) {
 						return ArrayString.of(result);
 					}

@@ -86,7 +86,7 @@ public final class Animation extends EventProvider<ExtendedOptions> {
 			@Override
 			public void call(Chart context, AnimationObject animationObject) {
 				if (animationObject != null && animationObject.getAnimationItem() != null) {
-					onComplete(new AnimationItem(animationObject.getAnimationItem()));
+					onComplete(animationObject.getAnimationItem());
 				}
 			}
 			
@@ -99,7 +99,7 @@ public final class Animation extends EventProvider<ExtendedOptions> {
 			@Override
 			public void call(Chart context, AnimationObject animationObject) {
 				if (animationObject != null && animationObject.getAnimationItem() != null) {
-					onProgress(new AnimationItem(animationObject.getAnimationItem()));
+					onProgress(animationObject.getAnimationItem());
 				}
 			}
 
