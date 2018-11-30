@@ -65,7 +65,7 @@ public abstract class AbstractModel<P extends AbstractModel<?,?>, D> extends Nat
 	}
 
 	protected final void remove(Key key) {
-		JsHelper.remove(getNativeObject(), key.name());
+		JsHelper.get().remove(getNativeObject(), key.name());
 	}
 	
 	public final D getDefaultValues() {
@@ -83,7 +83,7 @@ public abstract class AbstractModel<P extends AbstractModel<?,?>, D> extends Nat
 	}
 	
 	public final NativeObject cloneNativeObject() {
-		return Helpers.clone(getNativeObject());
+		return Helpers.get().clone(getNativeObject());
 	}
 
 	/**

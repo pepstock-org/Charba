@@ -17,13 +17,17 @@ public final class Helpers {
 		Injector.ensureInjected();
 		this.nativeObject = Chart.getHelpers();
 	}
-
-	public static NativeObject mergeIf(NativeObject target, NativeObject source) {
-		return INSTANCE.nativeObject.mergeIf(target, source);
+	
+	public static Helpers get() {
+		return INSTANCE;
 	}
 
-	public static NativeObject clone(NativeObject target) {
-		return INSTANCE.nativeObject.clone(target);
+	public NativeObject mergeIf(NativeObject target, NativeObject source) {
+		return nativeObject.mergeIf(target, source);
+	}
+
+	public NativeObject clone(NativeObject target) {
+		return nativeObject.clone(target);
 	}
 
 }

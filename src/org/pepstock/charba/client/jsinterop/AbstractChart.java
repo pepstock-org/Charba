@@ -368,7 +368,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			if (config == null) {
 				chart.update();
 			} else {
-				chart.update(config);
+				chart.update(config.getObject());
 			}
 		}
 	}
@@ -397,7 +397,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			if (config == null) {
 				chart.render();
 			} else {
-				chart.render(config);
+				chart.render(config.getObject());
 			}
 		}
 	}

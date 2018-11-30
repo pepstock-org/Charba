@@ -103,7 +103,7 @@ public abstract class NativeObjectContainer {
 	 * @return the java script type of the property.
 	 */
 	protected ObjectType type(Key key) {
-		return JsHelper.typeOf(nativeObject, key.name());
+		return JsHelper.get().typeOf(nativeObject, key.name());
 	}
 	
 	/**

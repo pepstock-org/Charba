@@ -110,7 +110,7 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 
 	@JsFunction
 	interface ProxyLabelColorCallback {
-		TooltipLabelColor call(Object context, NativeObject item);
+		NativeObject call(Object context, NativeObject item);
 	}
 
 	@JsFunction
@@ -118,31 +118,31 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 		String call(Object context, NativeObject item);
 	}
 
-	private final CallbackProxy<ProxyBeforeTitleCallback> beforeTitleCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyBeforeTitleCallback> beforeTitleCallbackProxy = JsHelper.get().newCallbackProxy();
 	
-	private final CallbackProxy<ProxyTitleCallback> titleCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyTitleCallback> titleCallbackProxy = JsHelper.get().newCallbackProxy();
 	
-	private final CallbackProxy<ProxyAfterTitleCallback> afterTitleCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyAfterTitleCallback> afterTitleCallbackProxy = JsHelper.get().newCallbackProxy();
 	
-	private final CallbackProxy<ProxyBeforeBodyCallback> beforeBodyCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyBeforeBodyCallback> beforeBodyCallbackProxy = JsHelper.get().newCallbackProxy();
 	
-	private final CallbackProxy<ProxyAfterBodyCallback> afterBodyCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyAfterBodyCallback> afterBodyCallbackProxy = JsHelper.get().newCallbackProxy();
 	
-	private final CallbackProxy<ProxyBeforeLabelCallback> beforeLabelCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyBeforeLabelCallback> beforeLabelCallbackProxy = JsHelper.get().newCallbackProxy();
 	
-	private final CallbackProxy<ProxyLabelCallback> labelCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyLabelCallback> labelCallbackProxy = JsHelper.get().newCallbackProxy();
 	
-	private final CallbackProxy<ProxyLabelColorCallback> labelColorCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyLabelColorCallback> labelColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	
-	private final CallbackProxy<ProxyLabelTextColorCallback> labelTextColorCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyLabelTextColorCallback> labelTextColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	
-	private final CallbackProxy<ProxyAfterLabelCallback> afterLabelCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyAfterLabelCallback> afterLabelCallbackProxy = JsHelper.get().newCallbackProxy();
 	
-	private final CallbackProxy<ProxyBeforeFooterCallback> beforeFooterCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyBeforeFooterCallback> beforeFooterCallbackProxy = JsHelper.get().newCallbackProxy();
 	
-	private final CallbackProxy<ProxyFooterCallback> footerCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyFooterCallback> footerCallbackProxy = JsHelper.get().newCallbackProxy();
 	
-	private final CallbackProxy<ProxyAfterFooterCallback> afterFooterCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyAfterFooterCallback> afterFooterCallbackProxy = JsHelper.get().newCallbackProxy();
 	
 	private TooltipTitleCallback titleCallback = null;
 	
@@ -305,12 +305,12 @@ public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOpti
 			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyLabelColorCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.NativeObject)
 			 */
 			@Override
-			public TooltipLabelColor call(Object context, NativeObject item) {
+			public NativeObject call(Object context, NativeObject item) {
 				if (labelCallback != null) {
 					TooltipLabelColor result = labelCallback.onLabelColor(getChart(), new TooltipItem(item));
-					return result != null ? result : DEFAULT_LABEL_COLOR;
+					return result != null ? result.getObject() : DEFAULT_LABEL_COLOR.getObject();
 				}
-				return DEFAULT_LABEL_COLOR;
+				return DEFAULT_LABEL_COLOR.getObject();
 			}
 			
 		});

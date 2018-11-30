@@ -80,11 +80,11 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 		int call(Object context, NativeObject item1, NativeObject item2);
 	}
 	
-	private final CallbackProxy<ProxyCustomCallback> customCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyCustomCallback> customCallbackProxy = JsHelper.get().newCallbackProxy();
 	
-	private final CallbackProxy<ProxyItemSortCallback> itemSortCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyItemSortCallback> itemSortCallbackProxy = JsHelper.get().newCallbackProxy();
 	
-	private final CallbackProxy<ProxyFilterCallback> filterCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyFilterCallback> filterCallbackProxy = JsHelper.get().newCallbackProxy();
 	
 	private TooltipCustomCallback customCallback = null;
 

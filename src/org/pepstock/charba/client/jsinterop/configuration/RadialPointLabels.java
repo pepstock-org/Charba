@@ -39,7 +39,7 @@ public final class RadialPointLabels extends AxisContainer {
 		String call(Object context, String item);
 	}
 	
-	private final CallbackProxy<ProxyPointLabelCallback> pointLabelCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyPointLabelCallback> pointLabelCallbackProxy = JsHelper.get().newCallbackProxy();
 	
 	private RadialPointLabelCallback callback = null;
 	

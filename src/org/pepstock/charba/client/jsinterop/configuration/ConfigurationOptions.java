@@ -139,13 +139,13 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 		String call(Object context);
 	}
 
-	private final CallbackProxy<ProxyChartResizeCallback> resizeCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyChartResizeCallback> resizeCallbackProxy = JsHelper.get().newCallbackProxy();
 
-	private final CallbackProxy<ProxyChartClickCallback> clickCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyChartClickCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
 
-	private final CallbackProxy<ProxyChartHoverCallback> hoverCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyChartHoverCallback> hoverCallbackProxy = JsHelper.get().newCallbackProxy();
 	
-	private final CallbackProxy<ProxyGenerateLegendCallback> legendCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyGenerateLegendCallback> legendCallbackProxy = JsHelper.get().newCallbackProxy();
 	
 	private final Animation animation;
 

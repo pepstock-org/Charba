@@ -19,10 +19,13 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.callbacks.LegendFilterCallback;
 import org.pepstock.charba.client.jsinterop.callbacks.LegendLabelsCallback;
+import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.JsHelper;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.items.LegendItem;
 import org.pepstock.charba.client.jsinterop.items.LegendLabelItem;
 import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
@@ -44,7 +47,7 @@ public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> 
 	 */
 	@JsFunction
 	interface ProxyGenerateLabelsCallback {
-		LegendLabelItem[] call(Object context, Object chart);
+		ArrayObject call(Object context, Chart chart);
 	}
 
 	/**
@@ -55,12 +58,12 @@ public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> 
 	 */
 	@JsFunction
 	interface ProxyFilterCallback {
-		boolean call(Object context, LegendItem item);
+		boolean call(Object context, NativeObject item);
 	}
 	
-	private final CallbackProxy<ProxyGenerateLabelsCallback> labelsCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyGenerateLabelsCallback> labelsCallbackProxy = JsHelper.get().newCallbackProxy();
 
-	private final CallbackProxy<ProxyFilterCallback> filterCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyFilterCallback> filterCallbackProxy = JsHelper.get().newCallbackProxy();
 	
 	private LegendFilterCallback filterCallback = null;
 	
@@ -89,11 +92,11 @@ public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> 
 			 * @see org.pepstock.charba.client.jsinterop.options.LegendLabels.ProxyFilterCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.LegendItem)
 			 */
 			@Override
-			public boolean call(Object context, LegendItem item) {
+			public boolean call(Object context, NativeObject item) {
 				// checks if callback is consistent
 				if (filterCallback != null) {
 					// calls callback
-					return filterCallback.onFilter(getChart(), item);
+					return filterCallback.onFilter(getChart(), new LegendItem(item));
 				}
 				return true;
 			}
@@ -106,14 +109,14 @@ public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> 
 			 * @see org.pepstock.charba.client.jsinterop.options.LegendLabels.ProxyGenerateLabelsCallback#call(java.lang.Object, java.lang.Object)
 			 */
 			@Override
-			public LegendLabelItem[] call(Object context, Object chart) {
-				LegendLabelItem[] result = null;
+			public ArrayObject call(Object context, Chart chart) {
 				// checks if callback is consistent
 				if (labelsCallback != null) {
 					// calls callback
-					result = labelsCallback.generateLegendLabels(getChart());
+					LegendLabelItem[] result = labelsCallback.generateLegendLabels(getChart());
+					return ArrayObject.of(result);
 				}
-				return result != null ? result : new LegendLabelItem[0];
+				return ArrayObject.of();
 			}
 			
 		});

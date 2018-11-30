@@ -43,7 +43,7 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 		String call(Object context, double value, int index, ArrayDouble values);
 	}
 	
-	private final CallbackProxy<ProxyTickCallback> tickCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyTickCallback> tickCallbackProxy = JsHelper.get().newCallbackProxy();
 	
 	private TickCallback callback = null;
 	

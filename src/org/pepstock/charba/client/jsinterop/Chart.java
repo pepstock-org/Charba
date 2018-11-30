@@ -3,10 +3,7 @@ package org.pepstock.charba.client.jsinterop;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-import org.pepstock.charba.client.jsinterop.commons.NativeStringDescriptor;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
-import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
-import org.pepstock.charba.client.jsinterop.options.Options;
 import org.pepstock.charba.client.jsinterop.plugins.NativePlugins;
 
 import com.google.gwt.canvas.dom.client.Context2d;
@@ -43,13 +40,13 @@ public final class Chart{
 	native void update();
 	
 	@JsMethod
-	native void update(UpdateConfiguration config);
+	native void update(NativeObject config);
 
 	@JsMethod
 	native void render();
 
 	@JsMethod
-	native void render(UpdateConfiguration config);
+	native void render(NativeObject config);
 
 	@JsMethod
 	native void destroy();
@@ -194,8 +191,7 @@ public final class Chart{
 	
 	@JsOverlay
 	public String getCharbaId() {
-		NativeStringDescriptor descriptor = getOptions().getStringProperty(Options.CharbaProperty.charbaId.name());
-		return descriptor != null ? descriptor.getValue() : UndefinedValues.STRING;
+		return getOptions().getCharbaId();
 	}
 
 }

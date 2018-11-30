@@ -31,7 +31,7 @@ final class NativeDefaults {
 	@JsOverlay
 	ChartOptions chart(Type type) {
 		// checks if the property is present
-		if (ObjectType.Object.equals(JsHelper.typeOf(this, type.name()))) {
+		if (ObjectType.Object.equals(JsHelper.get().typeOf(this, type.name()))) {
 			// returns the descriptor
 			NativeObjectDescriptor descriptor = getOwnPropertyDescriptor(this, type.name());
 			return new ChartOptions(descriptor.getValue());

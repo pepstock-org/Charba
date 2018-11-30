@@ -51,9 +51,9 @@ public final class Legend extends EventProvider<ExtendedOptions> {
 		void call(Chart chart, ChartNativeEvent event, NativeObject item);
 	}
 	
-	private final CallbackProxy<ProxyLegendClickCallback> clickCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyLegendClickCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
 
-	private final CallbackProxy<ProxyLegendHoverCallback> hoverCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyLegendHoverCallback> hoverCallbackProxy = JsHelper.get().newCallbackProxy();
 	
 	private final LegendLabels labels;
 	

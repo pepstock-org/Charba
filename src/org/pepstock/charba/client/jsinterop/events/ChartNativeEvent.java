@@ -51,7 +51,7 @@ public class ChartNativeEvent extends NativeEvent {
 	 * @return the layer X property
 	 */
 	public final int getLayerX() {
-		return JsHelper.propertyAsInt(this, Property.layerX.name());
+		return JsHelper.get().propertyAsInt(this, Property.layerX.name());
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class ChartNativeEvent extends NativeEvent {
 	 * @return the layer Y property
 	 */
 	public final int getLayerY() {
-		return JsHelper.propertyAsInt(this, Property.layerY.name());
+		return JsHelper.get().propertyAsInt(this, Property.layerY.name());
 	}
 	
 }

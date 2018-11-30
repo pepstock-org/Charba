@@ -15,10 +15,6 @@
 */
 package org.pepstock.charba.client.jsinterop.commons;
 
-import java.util.Date;
-
-import com.google.gwt.core.client.JsDate;
-
 /**
  * Utility class to check values setting the right values between the provided value and default. 
  * 
@@ -26,10 +22,7 @@ import com.google.gwt.core.client.JsDate;
  * @since 2.0
  */
 public final class Checker {
-	
-	// internal label to know if java script instance is undefined
-	private static final String UNDEFINED = "undefined";
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -67,7 +60,7 @@ public final class Checker {
 		// transforms the value into string because a boolean can not be null
 		String stringValue = String.valueOf(value);
 		// by java script, if value is null, to string you have "undefined"
-		return UNDEFINED.equalsIgnoreCase(stringValue) ? defaultValue : value;
+		return ObjectType.Undefined.name().equalsIgnoreCase(stringValue) ? defaultValue : value;
 	}
 
 	/**
@@ -90,56 +83,4 @@ public final class Checker {
 		return Double.isNaN(value) ? defaultValue : value;
 	}
 
-	/**
-	 * Checks an object which could represents a integer and returns the no-null one.<br>
-	 * This kind of check is mandatory because in a java script a property could have different types.
-	 * @param value original value
-	 * @param defaultValue default value
-	 * @return returns the no-null one.
-	 */
-	public static int check(Object value, int defaultValue) {
-		return value == null ? defaultValue : (int)value;
-	}
-
-	/**
-	 * Checks an object which could represents a double and returns the no-null one.<br>
-	 * This kind of check is mandatory because in a java script a property could have different types.
-	 * @param value original value
-	 * @param defaultValue default value
-	 * @return returns the no-null one.
-	 */
-	public static double check(Object value, double defaultValue) {
-		return value == null ? defaultValue : (double)value;
-	}
-
-	/**
-	 * Checks an object which could represents a string and returns the no-null one.<br>
-	 * This kind of check is mandatory because in a java script a property could have different types.
-	 * @param value original value
-	 * @param defaultValue default value
-	 * @return returns the no-null one.
-	 */
-	public static String check(Object value, String defaultValue) {
-		return value == null ? defaultValue : value.toString();
-	}
-	
-	/**
-	 * Transforms a JAVA date into a java script date.
-	 * @param date date to be transformed
-	 * @return java script date or <code>null</code> if passed date is <code>null</code>.
-	 */
-	public static JsDate fromDate(Date date) {
-		// creates a java script date casting long to double
-		return date != null ? JsDate.create((double) date.getTime()) : null;
-	}
-	
-	/**
-	 * Transforms a java script date into a JAVA date.
-	 * @param date date to be transformed
-	 * @return java date or <code>null</code> if passed date is <code>null</code>.
-	 */
-	public static Date toDate(JsDate date) {
-		// creates a java date casting double to long
-		return date != null ? new Date((long)date.getTime()) : null;
-	}
 }

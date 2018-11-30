@@ -15,14 +15,11 @@
 */
 package org.pepstock.charba.client.jsinterop;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Easing;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-import org.pepstock.charba.client.jsinterop.commons.Enumer;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
-
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
 
 /**
  * Object can be provided with additional configuration for the update/render process.<br>
@@ -31,56 +28,19 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-@JsType
-public final class UpdateConfiguration {
-
+public final class UpdateConfiguration extends NativeObjectContainer{
+	
+	private static final boolean DEFAULT_LAZY = false;
+	
 	/**
-	 * Sets the animation easing function.
-	 * 
-	 * @param easing animation easing function.
+	 * Name of fields of JavaScript object.
 	 */
-	@JsProperty(name = "easing")
-	native void setNativeEasing(String easing);
-
-	/**
-	 * Returns the animation easing function.
-	 * 
-	 * @return the animation easing function.
-	 */
-	@JsProperty(name = "easing")
-	native String getNativeEasing();
-
-	/**
-	 * Sets the time for the animation of the redraw in milliseconds.
-	 * 
-	 * @param milliseconds time for the animation of the redraw in milliseconds.
-	 */
-	@JsProperty(name = "duration")
-	native void setNativeDuration(int duration);
-
-	/**
-	 * Returns the time for the animation of the redraw in milliseconds.
-	 * 
-	 * @return time for the animation of the redraw in milliseconds
-	 */
-	@JsProperty(name = "duration")
-	native int getNativeDuration();
-
-	/**
-	 * If true, the animation can be interrupted by other animations.
-	 * 
-	 * @param intersect if true, the animation can be interrupted by other animations.
-	 */
-	@JsProperty(name = "lazy")
-	native void setNativeLazy(boolean lazy);
-
-	/**
-	 * If true, the animation can be interrupted by other animations
-	 * 
-	 * @return if true, the animation can be interrupted by other animations.
-	 */
-	@JsProperty(name = "lazy")
-	native boolean isNativeLazy();
+	private enum Property implements Key
+	{
+		duration,
+		lazy,
+		easing
+	}
 
 	/**
 	 * Sets the animation easing function.
@@ -88,9 +48,8 @@ public final class UpdateConfiguration {
 	 * @param easing animation easing function.
 	 * @see org.pepstock.charba.client.enums.Easing
 	 */
-	@JsMethod
 	public void setEasing(Easing easing) {
-		setNativeEasing(easing.name());
+		setValue(Property.easing, easing);
 	}
 
 	/**
@@ -99,9 +58,8 @@ public final class UpdateConfiguration {
 	 * @return the animation easing function. Default is {@link org.pepstock.charba.client.enums.Easing#easeOutQuart}.
 	 * @see org.pepstock.charba.client.enums.Easing
 	 */
-	@JsMethod
 	public Easing getEasing() {
-		return Enumer.deserialize(getNativeEasing(), Easing.class, DefaultOptions.get().getAnimation().getEasing());
+		return getValue(Property.easing, Easing.class, DefaultOptions.get().getAnimation().getEasing());
 	}
 
 	/**
@@ -109,9 +67,8 @@ public final class UpdateConfiguration {
 	 * 
 	 * @param milliseconds time for the animation of the redraw in milliseconds.
 	 */
-	@JsMethod
 	public void setDuration(int milliseconds) {
-		setNativeDuration(milliseconds);
+		setValue(Property.duration, milliseconds);
 	}
 
 	/**
@@ -119,9 +76,8 @@ public final class UpdateConfiguration {
 	 * 
 	 * @return time for the animation of the redraw in milliseconds. Default is 1000.
 	 */
-	@JsMethod
 	public int getDuration() {
-		return Checker.check(getNativeDuration(), DefaultOptions.get().getAnimation().getDuration());
+		return getValue(Property.duration, DefaultOptions.get().getAnimation().getDuration());
 	}
 
 	/**
@@ -129,9 +85,8 @@ public final class UpdateConfiguration {
 	 * 
 	 * @param intersect if true, the animation can be interrupted by other animations.
 	 */
-	@JsMethod
-	public void setLazy(boolean lazy) {
-		setNativeLazy(lazy);
+	public void setLazy(boolean intersect) {
+		setValue(Property.lazy, intersect);
 	}
 
 	/**
@@ -139,9 +94,17 @@ public final class UpdateConfiguration {
 	 * 
 	 * @return if true, the animation can be interrupted by other animations. Default is false.
 	 */
-	@JsMethod
 	public boolean isLazy() {
-		return Checker.check(isNativeLazy(), false);
+		return getValue(Property.lazy, DEFAULT_LAZY);
+	}
+	
+	/**
+	 * Wraps the protected method to get the java script object in order to consume it to configure the chart update or render.
+	 * 
+	 * @return the java script object in order to consume it to configure the chart update or render.
+	 */
+	NativeObject getObject() {
+		return getNativeObject();
 	}
 
 }

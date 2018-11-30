@@ -126,6 +126,15 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 		return ColorBuilder.parse(getBorderColorAsString());
 	}
 	
+	/**
+	 * Wraps the protected method to get the java script object in order to consume it.
+	 * 
+	 * @return the java script object in order to consume it.
+	 */
+	public NativeObject getObject() {
+		return getNativeObject();
+	}
+	
 	static class TooltipLabelColorFactory implements Factory<TooltipLabelColor>{
 		/* (non-Javadoc)
 		 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)

@@ -145,7 +145,7 @@ public final class Merger {
 	 * @param source  Object to merge into <code>target</code>.
 	 */
 	private static void mergeJavaScriptObject(NativeObject target, NativeObject source) {
-		Helpers.mergeIf(target, source);
+		Helpers.get().mergeIf(target, source);
 	}
 	
 }

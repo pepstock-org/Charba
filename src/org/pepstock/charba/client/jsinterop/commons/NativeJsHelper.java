@@ -15,34 +15,25 @@
 */
 package org.pepstock.charba.client.jsinterop.commons;
 
-import org.pepstock.charba.client.Injector;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 /**
- * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script pbjects.<br>
- * This wrapper is necessary to ensure that script is injected with CHART.JS.
+ * Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script projects.<br>
+ * This script will be injected with CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  *
  */
-public final class JsHelper {
-	
-	private static final JsHelper INSTANCE = new JsHelper();
+@JsType(isNative = true, name = NativeName.JSHELPER, namespace = JsPackage.GLOBAL)
+final class NativeJsHelper {
 
 	/**
 	 * To avoid any instantiation
 	 */
-	JsHelper() {
-		// to be sure that CHARBA java script object is injected
-		Injector.ensureInjected();
-	}
-	
-	/**
-	 * Singleton object to get the helper instance
-	 * @return jsHelper instance.
-	 */
-	public static JsHelper get() {
-		return INSTANCE;
+	NativeJsHelper() {
+		// do nothing
 	}
 
 	/**
@@ -51,26 +42,28 @@ public final class JsHelper {
 	 * @param key
 	 * @return
 	 */
-	public final ObjectType typeOf(Object object, String key) {
-		return ObjectType.getType(NativeJsHelper.type(object, key), NativeJsHelper.isArray(object, key)); 
-	}
+	static native String type(Object object, String key);
+
+	/**
+	 * 
+	 * @param object
+	 * @param key
+	 * @return
+	 */
+	static native boolean isArray(Object object, String key);
 
 	/**
 	 * Creates new proxy for callback which will pass <code>this</code> environment of java script as first argument of callback method.
 	 * @return new proxy for callback.
 	 */
-	public <T> CallbackProxy<T> newCallbackProxy(){
-		return NativeJsHelper.newCallbackProxy();
-	}
+	static native <T> CallbackProxy<T> newCallbackProxy();
 	
 	/**
 	 * Removes a property from a java script object.
 	 * @param object object to be modified.
 	 * @param key property key to be removed.
 	 */
-	public void remove(NativeObject object, String key) {
-		NativeJsHelper.remove(object, key);
-	}
+	static native void remove(NativeObject object, String key);
 
 	/**
 	 * Returns a property of java script object as integer.
@@ -78,9 +71,7 @@ public final class JsHelper {
 	 * @param key property key
 	 * @return integer value
 	 */
-	public int propertyAsInt(Object object, String key) {
-		return NativeJsHelper.propertyAsInt(object, key);
-	}
+	static native int propertyAsInt(Object object, String key);
 	
 	/**
 	 * Returns a property of java script object as double.
@@ -88,9 +79,7 @@ public final class JsHelper {
 	 * @param key property key
 	 * @return double value
 	 */
-	public double propertyAsDouble(Object object, String key) {
-		return NativeJsHelper.propertyAsDouble(object, key);
-	}
+	static native double propertyAsDouble(Object object, String key);
 
 	/**
 	 * Returns a property of java script object as string.
@@ -98,8 +87,6 @@ public final class JsHelper {
 	 * @param key property key
 	 * @return string value
 	 */
-	public String propertyAsString(Object object, String key) {
-		return NativeJsHelper.propertyAsString(object, key);
-	}
+	static native String propertyAsString(Object object, String key);
 
 }

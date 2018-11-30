@@ -53,9 +53,9 @@ public final class Animation extends EventProvider<ExtendedOptions> {
 		void call(Chart context, AnimationObject animationObject);
 	}
 
-	private final CallbackProxy<ProxyAnimationCompleteCallback> completeCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyAnimationCompleteCallback> completeCallbackProxy = JsHelper.get().newCallbackProxy();
 
-	private final CallbackProxy<ProxyAnimationProgressCallback> progressCallbackProxy = JsHelper.newCallbackProxy();
+	private final CallbackProxy<ProxyAnimationProgressCallback> progressCallbackProxy = JsHelper.get().newCallbackProxy();
 	
 	// amount of handlers
 	private int onCompleteHandlers = 0;

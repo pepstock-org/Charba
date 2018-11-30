@@ -17,6 +17,9 @@ package org.pepstock.charba.client.jsinterop.commons;
 
 import java.util.List;
 
+import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
+import org.pepstock.charba.client.jsinterop.options.Options;
+
 import com.google.gwt.core.client.JsDate;
 
 import jsinterop.annotations.JsOverlay;
@@ -69,7 +72,7 @@ public final class NativeObject {
 	 * @return list of strings that represent all the enumerable properties of the given object.
 	 */
 	@JsOverlay
-	final List<String> propertyKeys(){
+	List<String> propertyKeys(){
 		return ArrayListHelper.unmodifiableList(keys(this));
 	}
 
@@ -79,7 +82,7 @@ public final class NativeObject {
 	 * @return boolean indicating whether or not the object has the specified property as own property.
 	 */
 	@JsOverlay
-	final boolean hasProperty(String key) {
+	boolean hasProperty(String key) {
 		return hasOwnProperty(key);
 	}
 	
@@ -88,8 +91,8 @@ public final class NativeObject {
 	 * @param key property key to be removed.
 	 */
 	@JsOverlay
-	final void removeProperty(String key) {
-		JsHelper.remove(this, key);
+	void removeProperty(String key) {
+		JsHelper.get().remove(this, key);
 	}
 	
 	/**
@@ -98,7 +101,7 @@ public final class NativeObject {
 	 * @param object the object associated with the property.
 	 */
 	@JsOverlay
-	final void defineBooleanProperty(String key, boolean value) {
+	void defineBooleanProperty(String key, boolean value) {
 		// creates a descriptor
 		NativeBooleanDescriptor descriptor = new NativeBooleanDescriptor();
 		// sets value
@@ -115,7 +118,7 @@ public final class NativeObject {
 	 * @param object the object associated with the property.
 	 */
 	@JsOverlay
-	final void defineIntProperty(String key, int value) {
+	void defineIntProperty(String key, int value) {
 		// creates a descriptor
 		NativeIntegerDescriptor descriptor = new NativeIntegerDescriptor();
 		// sets value
@@ -132,7 +135,7 @@ public final class NativeObject {
 	 * @param object the object associated with the property.
 	 */
 	@JsOverlay
-	final void defineDoubleProperty(String key, double value) {
+	void defineDoubleProperty(String key, double value) {
 		// creates a descriptor
 		NativeDoubleDescriptor descriptor = new NativeDoubleDescriptor();
 		// sets value
@@ -149,7 +152,7 @@ public final class NativeObject {
 	 * @param object the object associated with the property.
 	 */
 	@JsOverlay
-	final void defineStringProperty(String key, String value) {
+	void defineStringProperty(String key, String value) {
 		// creates a descriptor
 		NativeStringDescriptor descriptor = new NativeStringDescriptor();
 		// sets value
@@ -166,7 +169,7 @@ public final class NativeObject {
 	 * @param object the object associated with the property.
 	 */
 	@JsOverlay
-	final void defineDateProperty(String key, JsDate value) {
+	void defineDateProperty(String key, JsDate value) {
 		// creates a descriptor
 		NativeDateDescriptor descriptor = new NativeDateDescriptor();
 		// sets value
@@ -183,7 +186,7 @@ public final class NativeObject {
 	 * @param object the object associated with the property.
 	 */
 	@JsOverlay
-	final void defineCallbackProperty(String key, CallbackProxy.Proxy value) {
+	void defineCallbackProperty(String key, CallbackProxy.Proxy value) {
 		// creates a descriptor
 		NativeCallbackProxyDescriptor descriptor = new NativeCallbackProxyDescriptor();
 		// sets value
@@ -200,7 +203,7 @@ public final class NativeObject {
 	 * @param object the object associated with the property.
 	 */
 	@JsOverlay
-	final void defineObjectProperty(String key, NativeObject value) {
+	void defineObjectProperty(String key, NativeObject value) {
 		// creates a descriptor
 		NativeObjectDescriptor descriptor = new NativeObjectDescriptor();
 		// sets value
@@ -217,7 +220,7 @@ public final class NativeObject {
 	 * @param object the object associated with the property.
 	 */
 	@JsOverlay
-	final <T extends Array> void defineArrayProperty(String key, T value) {
+	<T extends Array> void defineArrayProperty(String key, T value) {
 		// creates a descriptor
 		NativeArrayDescriptor<T> descriptor = new NativeArrayDescriptor<T>();
 		// sets value
@@ -234,9 +237,9 @@ public final class NativeObject {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	final NativeBooleanDescriptor getBooleanProperty(String key) {
+	NativeBooleanDescriptor getBooleanProperty(String key) {
 		// checks if the property is present
-		if (ObjectType.Boolean.equals(JsHelper.typeOf(this, key))) {
+		if (ObjectType.Boolean.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
 			return getOwnPropertyDescriptor(this, key);
 		}
@@ -250,9 +253,9 @@ public final class NativeObject {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	final NativeIntegerDescriptor getIntProperty(String key) {
+	NativeIntegerDescriptor getIntProperty(String key) {
 		// checks if the property is present
-		if (ObjectType.Number.equals(JsHelper.typeOf(this, key))) {
+		if (ObjectType.Number.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
 			return getOwnPropertyDescriptor(this, key);
 		}
@@ -266,9 +269,9 @@ public final class NativeObject {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	final NativeDoubleDescriptor getDoubleProperty(String key) {
+	NativeDoubleDescriptor getDoubleProperty(String key) {
 		// checks if the property is present
-		if (ObjectType.Number.equals(JsHelper.typeOf(this, key))) {
+		if (ObjectType.Number.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
 			return getOwnPropertyDescriptor(this, key);
 		}
@@ -282,9 +285,9 @@ public final class NativeObject {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	public final NativeStringDescriptor getStringProperty(String key) {
+	NativeStringDescriptor getStringProperty(String key) {
 		// checks if the property is present
-		if (ObjectType.String.equals(JsHelper.typeOf(this, key))) {
+		if (ObjectType.String.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
 			return getOwnPropertyDescriptor(this, key);
 		}
@@ -298,9 +301,9 @@ public final class NativeObject {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	final NativeDateDescriptor getDateProperty(String key) {
+	NativeDateDescriptor getDateProperty(String key) {
 		// checks if the property is present
-		if (ObjectType.Object.equals(JsHelper.typeOf(this, key))) {
+		if (ObjectType.Object.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
 			return getOwnPropertyDescriptor(this, key);
 		}
@@ -314,9 +317,9 @@ public final class NativeObject {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	final NativeObjectDescriptor getObjectProperty(String key) {
+	NativeObjectDescriptor getObjectProperty(String key) {
 		// checks if the property is present
-		if (ObjectType.Object.equals(JsHelper.typeOf(this, key))) {
+		if (ObjectType.Object.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
 			return getOwnPropertyDescriptor(this, key);
 		}
@@ -330,9 +333,9 @@ public final class NativeObject {
 	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
 	 */
 	@JsOverlay
-	final <T extends Array> NativeArrayDescriptor<T> getArrayProperty(String key) {
+	<T extends Array> NativeArrayDescriptor<T> getArrayProperty(String key) {
 		// checks if the property is present
-		if (ObjectType.Array.equals(JsHelper.typeOf(this, key))) {
+		if (ObjectType.Array.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
 			return getOwnPropertyDescriptor(this, key);
 		}
@@ -340,40 +343,18 @@ public final class NativeObject {
 		return null;
 	}
 	
-//	/**
-//	 * Returns an immutable map with all properties (name and value) of the object.<br>
-//	 * The key is name of property, element is the value of the property
-//	 * @return an immutable map with all properties (name and value) of the object.
-//	 */
-//	@JsOverlay
-//	public final <T> Map<String, T> getObjectAsMap() {
-//		// creates the map
-//		Map<String, T> result = new HashMap<String, T>();
-//		// gets all keys of object
-//		ArrayString keys = keys(this);
-//		// checks if array of keys is consistent
-//		if (keys != null && keys.length() > 0) {
-//			// scans all properties
-//			for (int i=0; i<keys.length(); i++) {
-//				// gets the property key
-//				String keyToAdd = keys.get(i);
-//				// gets the descriptor by key
-//				// FIXME!!!
-//				//NativeAbstractDescriptor<T> descriptor = getOwnPropertyDescriptor(this, keyToAdd);
-//				// adds to the map
-//				//result.put(keyToAdd, descriptor.getValue());
-//			}
-//		}
-//		// returns immutable map
-//		return Collections.unmodifiableMap(result);
-//	}
+	@JsOverlay
+	public String getCharbaId() {
+		NativeStringDescriptor descriptor = getStringProperty(Options.CharbaProperty.charbaId.name());
+		return descriptor != null ? descriptor.getValue() : UndefinedValues.STRING;
+	}
 
 	/**
 	 * 
 	 * @param descriptor
 	 */
 	@JsOverlay
-	private final void resetPropertyDescriptor(NativeAbstractDescriptor descriptor) {
+	private void resetPropertyDescriptor(NativeAbstractDescriptor descriptor) {
 		// configures the property
 		descriptor.setConfigurable(true);
 		descriptor.setEnumerable(true);
