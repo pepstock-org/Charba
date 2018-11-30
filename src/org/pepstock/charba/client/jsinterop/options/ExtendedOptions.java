@@ -2,6 +2,7 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
+import org.pepstock.charba.client.jsinterop.commons.Id;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
 
 public final class ExtendedOptions extends Options {
@@ -14,7 +15,7 @@ public final class ExtendedOptions extends Options {
 	// OPTIONS properties
 	// ---------------
 	public void setCharbaId(String id) {
-		setValue(Options.CharbaProperty.charbaId, id);
+		setValue(Id.charbaId, id);
 	}
 	
 	// ---------------

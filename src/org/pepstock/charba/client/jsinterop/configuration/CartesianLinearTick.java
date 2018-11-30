@@ -22,14 +22,15 @@ package org.pepstock.charba.client.jsinterop.configuration;
  * As the name suggests, linear interpolation is used to determine where a value lies on the axis.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class CartesianLinearTick extends CartesianTick {
+public class CartesianLinearTick extends CartesianTick {
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the axis instance.
 	 * 
-	 * @param chart chart instance
+	 * @param axis axis instance
 	 */
 	CartesianLinearTick(Axis axis) {
 		super(axis);
@@ -90,7 +91,7 @@ public final class CartesianLinearTick extends CartesianTick {
 	}
 
 	/**
-	 * Sets the maximum number of ticks and gridlines to show.
+	 * Sets the maximum number of ticks and grid lines to show.
 	 * 
 	 * @param maxTicksLimit maximum number of ticks and gridlines to show.
 	 */
@@ -99,9 +100,9 @@ public final class CartesianLinearTick extends CartesianTick {
 	}
 
 	/**
-	 * Returns the maximum number of ticks and gridlines to show.
+	 * Returns the maximum number of ticks and grid lines to show.
 	 * 
-	 * @return maximum number of ticks and gridlines to show.
+	 * @return maximum number of ticks and grid lines to show.
 	 */
 	public int getMaxTicksLimit() {
 		return getConfiguration().getMaxTicksLimit();

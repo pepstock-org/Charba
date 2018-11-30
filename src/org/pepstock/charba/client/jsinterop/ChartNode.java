@@ -1,6 +1,6 @@
 package org.pepstock.charba.client.jsinterop;
 
-import org.pepstock.charba.client.jsinterop.commons.Checker;
+import org.pepstock.charba.client.jsinterop.commons.ObjectType;
 import org.pepstock.charba.client.jsinterop.items.ChartAreaNode;
 import org.pepstock.charba.client.jsinterop.items.LegendNode;
 import org.pepstock.charba.client.jsinterop.items.OptionsNode;
@@ -108,7 +108,7 @@ public final class ChartNode{
 	 * @return the CHART JS chart ID. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public int getId() {
-		return Checker.check(chart.getId(), UndefinedValues.INTEGER);
+		return check(chart.getId(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -117,7 +117,7 @@ public final class ChartNode{
 	 * @return the width in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public int getWidth() {
-		return Checker.check(chart.getWidth(), UndefinedValues.INTEGER);
+		return check(chart.getWidth(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -126,7 +126,7 @@ public final class ChartNode{
 	 * @return the height in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public int getHeight() {
-		return Checker.check(chart.getHeight(), UndefinedValues.INTEGER);
+		return check(chart.getHeight(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -135,7 +135,7 @@ public final class ChartNode{
 	 * @return the aspect ratio. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getAspectRatio() {
-		return Checker.check(chart.getAspectRatio(), UndefinedValues.DOUBLE);
+		return check(chart.getAspectRatio(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -144,7 +144,7 @@ public final class ChartNode{
 	 * @return the current device pixel ratio. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getCurrentDevicePixelRatio() {
-		return Checker.check(chart.getCurrentDevicePixelRatio(), UndefinedValues.DOUBLE);
+		return check(chart.getCurrentDevicePixelRatio(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -153,7 +153,7 @@ public final class ChartNode{
 	 * @return if the chart is animating or not. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isAnimating() {
-		return Checker.check(chart.isAnimating(), UndefinedValues.BOOLEAN);
+		return check(chart.isAnimating(), UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -162,7 +162,7 @@ public final class ChartNode{
 	 * @return the border width value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public int getBorderWidth() {
-		return Checker.check(chart.getBorderWidth(), UndefinedValues.INTEGER);
+		return check(chart.getBorderWidth(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -171,7 +171,7 @@ public final class ChartNode{
 	 * @return the outer radius value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getOuterRadius() {
-		return Checker.check(chart.getOuterRadius(), UndefinedValues.DOUBLE);
+		return check(chart.getOuterRadius(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -180,7 +180,7 @@ public final class ChartNode{
 	 * @return the inner radius value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getInnerRadius() {
-		return Checker.check(chart.getInnerRadius(), UndefinedValues.DOUBLE);
+		return check(chart.getInnerRadius(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -189,7 +189,7 @@ public final class ChartNode{
 	 * @return the radius length value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getRadiusLength() {
-		return Checker.check(chart.getRadiusLength(), UndefinedValues.DOUBLE);
+		return check(chart.getRadiusLength(), UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -198,7 +198,7 @@ public final class ChartNode{
 	 * @return the offset X value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public int getOffsetX() {
-		return Checker.check(chart.getOffsetX(), UndefinedValues.INTEGER);
+		return check(chart.getOffsetX(), UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -207,7 +207,40 @@ public final class ChartNode{
 	 * @return the offset Y value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public int getOffsetY() {
-		return Checker.check(chart.getOffsetY(), UndefinedValues.INTEGER);
+		return check(chart.getOffsetY(), UndefinedValues.INTEGER);
+	}
+	
+	/**
+	 * Checks 2 booleans and returns the no-null one.
+	 * @param value original value
+	 * @param defaultValue default value
+	 * @return returns the no-null one.
+	 */
+	private boolean check(boolean value, boolean defaultValue) {
+		// transforms the value into string because a boolean can not be null
+		String stringValue = String.valueOf(value);
+		// by java script, if value is null, to string you have "undefined"
+		return ObjectType.Undefined.name().equalsIgnoreCase(stringValue) ? defaultValue : value;
+	}
+
+	/**
+	 * Checks 2 integers and returns the no-null one.
+	 * @param value original value
+	 * @param defaultValue default value
+	 * @return returns the no-null one.
+	 */
+	private int check(int value, int defaultValue) {
+		return Double.isNaN(value) ? defaultValue : value;
+	}
+
+	/**
+	 * Checks 2 doubles and returns the no-null one.
+	 * @param value original value
+	 * @param defaultValue default value
+	 * @return returns the no-null one.
+	 */
+	private double check(double value, double defaultValue) {
+		return Double.isNaN(value) ? defaultValue : value;
 	}
 
 }

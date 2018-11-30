@@ -32,7 +32,6 @@ import com.google.gwt.core.client.JsDate;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  *
- * @param <O> type of native object wraps by this class
  */
 public abstract class NativeObjectContainer {
 	
@@ -58,7 +57,6 @@ public abstract class NativeObjectContainer {
 	 * Returns true if the embedded JavaScript object contains an element at specific property. 
 	 * @param key key of the property of JavaScript object.
 	 * @return <code>true</code> if the embedded JavaScript object contains an element at specific property
-	 * @see org.pepstock.charba.client.commons.Key
 	 */
 	protected boolean has(Key key){
 		return nativeObject.hasProperty(key.name());
@@ -68,7 +66,6 @@ public abstract class NativeObjectContainer {
 	 * Returns true if the embedded JavaScript object contains an element at all properties. 
 	 * @param keys set of keys of the properties of JavaScript object.
 	 * @return <code>true</code> if the embedded JavaScript object contains an element at all properties. 
-	 * @see org.pepstock.charba.client.commons.Key
 	 */
 	protected boolean has(Key... keys){
 		// scans keys
@@ -109,7 +106,6 @@ public abstract class NativeObjectContainer {
 	/**
 	 * Removes an element (by key) from the embedded JavaScript object if exists.
 	 * @param key key of the property of JavaScript object.
-	 * @see org.pepstock.charba.client.commons.Key
 	 */
 	protected void removeIfExists(Key key){
 		// checks if there is
@@ -122,7 +118,6 @@ public abstract class NativeObjectContainer {
 	/**
 	 * Removes an element (by key) from the embedded JavaScript object. 
 	 * @param key key of the property of JavaScript object.
-	 * @see org.pepstock.charba.client.commons.Key
 	 */
 	protected void remove(Key key){
 		nativeObject.removeProperty(key.name());
@@ -131,7 +126,6 @@ public abstract class NativeObjectContainer {
 	/**
 	 * Removes a set of elements (by keys) from the embedded JavaScript object. 
 	 * @param keys set of keys of the properties of JavaScript object.
-	 * @see org.pepstock.charba.client.commons.Key
 	 */
 	protected void remove(Key... keys){
 		// scans all keys
@@ -145,7 +139,6 @@ public abstract class NativeObjectContainer {
 	 * Sets a value (int) into embedded JavaScript object at specific property.
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
-	 * @see org.pepstock.charba.client.commons.Key
 	 */
     protected void setValue(Key key, int value){
        	nativeObject.defineIntProperty(key.name(), value);
@@ -156,7 +149,6 @@ public abstract class NativeObjectContainer {
      * @param key key of the property of JavaScript object.
      * @param defaultValue default value if the property is missing
      * @return value of the property
-     * @see org.pepstock.charba.client.commons.Key
      */
     protected int getValue(Key key, int defaultValue){
     	// checks if the property exists
@@ -174,7 +166,6 @@ public abstract class NativeObjectContainer {
 	 * Sets a value (double) into embedded JavaScript object at specific property.
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
-	 * @see org.pepstock.charba.client.commons.Key
 	 */
     protected void setValue(Key key, double value){
        	nativeObject.defineDoubleProperty(key.name(), value);
@@ -185,7 +176,6 @@ public abstract class NativeObjectContainer {
      * @param key key of the property of JavaScript object.
      * @param defaultValue default value if the property is missing
      * @return value of the property
-     * @see org.pepstock.charba.client.commons.Key
      */
     protected double getValue(Key key, double defaultValue){
     	// checks if the property exists
@@ -203,7 +193,6 @@ public abstract class NativeObjectContainer {
 	 * Sets a value (boolean) into embedded JavaScript object at specific property.
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
-	 * @see org.pepstock.charba.client.commons.Key
 	 */
     protected void setValue(Key key, boolean value){
        	nativeObject.defineBooleanProperty(key.name(), value);
@@ -214,7 +203,6 @@ public abstract class NativeObjectContainer {
      * @param key key of the property of JavaScript object.
      * @param defaultValue default value if the property is missing
      * @return value of the property
-     * @see org.pepstock.charba.client.commons.Key
      */
     protected boolean getValue(Key key, boolean defaultValue){
     	// checks if the property exists
@@ -233,7 +221,6 @@ public abstract class NativeObjectContainer {
      * @param key key of the property of JavaScript object.
      * @param defaultValue default value if the property is missing
      * @return value of the property
-     * @see org.pepstock.charba.client.commons.Key
      */
     protected String getValue(Key key, String defaultValue){
     	// checks if the property exists
@@ -251,7 +238,6 @@ public abstract class NativeObjectContainer {
 	 * Sets a value (string) into embedded JavaScript object at specific property.
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
-	 * @see org.pepstock.charba.client.commons.Key
 	 */
     protected void setValue(Key key, String value){
     	// if value is null
@@ -273,7 +259,6 @@ public abstract class NativeObjectContainer {
      * @param key key of the property of JavaScript object.
      * @param defaultValue default value if the property is missing
      * @return value of the property
-     * @see org.pepstock.charba.client.commons.Key
      */
     protected Date getValue(Key key, Date defaultValue){
     	// checks if the property exists
@@ -291,7 +276,6 @@ public abstract class NativeObjectContainer {
 	 * Sets a value (date) into embedded JavaScript object at specific property.
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
-	 * @see org.pepstock.charba.client.commons.Key
 	 */
     protected void setValue(Key key, Date value){
     	// if value is null
@@ -311,9 +295,7 @@ public abstract class NativeObjectContainer {
     /**
      * Returns a value (JavaScript Object) into embedded JavaScript object at specific property.
      * @param key key of the property of JavaScript object.
-     * @param <T> type of java script object
      * @return value of the property or <code>null</code> if not there
-     * @see org.pepstock.charba.client.commons.Key
      */
     protected NativeObject getValue(Key key){
     	// checks if the property exists
@@ -328,11 +310,9 @@ public abstract class NativeObjectContainer {
     }
     
 	/**
-	 * Sets a value (JavaScript Object) into embedded JavaScript object at specific property. FIXME comment
+	 * Sets a value (JavaScript Object) into embedded JavaScript object at specific property by object container.
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
-	 * @see com.google.gwt.core.client.JavaScriptObject
-	 * @see org.pepstock.charba.client.commons.Key
 	 */
     protected void setValue(Key key, NativeObjectContainer value){
     	// if value is null
@@ -354,8 +334,6 @@ public abstract class NativeObjectContainer {
 	 * Sets a value (JavaScript Object) into embedded JavaScript object at specific property.
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
-	 * @see com.google.gwt.core.client.JavaScriptObject
-	 * @see org.pepstock.charba.client.commons.Key
 	 */
     protected void setValue(Key key, NativeObject value){
     	// if value is null
@@ -373,11 +351,9 @@ public abstract class NativeObjectContainer {
     }
     
 	/**
-	 * Sets a value (JavaScript Object) into embedded JavaScript object at specific property.
+	 * Sets a value (callback proxy function) into embedded JavaScript object at specific property.
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
-	 * @see com.google.gwt.core.client.JavaScriptObject
-	 * @see org.pepstock.charba.client.commons.Key
 	 */
     protected void setValue(Key key, CallbackProxy.Proxy value){
     	// if value is null
@@ -401,7 +377,6 @@ public abstract class NativeObjectContainer {
      * @param defaultValue default value if the property is missing
      * @param <T> type of key
      * @return value of the property
-     * @see org.pepstock.charba.client.commons.Key
      */
     protected <T extends Key> T getValue(Key key, Class<T> clazz, T defaultValue){
     	// checks if the property exists
@@ -429,7 +404,6 @@ public abstract class NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 * @param value value to be set
 	 * @param <T> type of key
-	 * @see org.pepstock.charba.client.commons.Key
 	 */
     protected <T extends Key> void setValue(Key key, T value){
     	// if value is null
@@ -446,6 +420,12 @@ public abstract class NativeObjectContainer {
         }
     }
     
+	/**
+	 * Sets a value (Array) into embedded JavaScript object at specific property.
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 * @param <T> type of array
+	 */
     protected <T extends Array> void setArrayValue(Key key, T value){
     	// if value is null
     	// try to remove the reference if exists
@@ -461,6 +441,12 @@ public abstract class NativeObjectContainer {
         }
     }
     
+    /**
+     * Returns a value (array) into embedded JavaScript object at specific property.
+     * @param key key of the property of JavaScript object.
+     * @param <T> type of array
+     * @return value of the property or <code>null</code> if not exist
+     */
     protected <T extends Array> T getArrayValue(Key key){
     	// checks if the property exists
     	if (!has(key)){
@@ -473,94 +459,189 @@ public abstract class NativeObjectContainer {
     	return descriptor == null ? null : descriptor.getValue();
     }
 
+    /**
+	 * Sets a value (Array or string by colors) into embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a string.
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
     protected void setValueOrArray(Key key, IsColor... values) {
+    	// checks if values are consistent
 		if (values != null) {
+			// checks if there is only 1 element
 			if (values.length == 1) {
+				// if 1 element, sets the object
 				setValue(key, values[0].toRGBA());
 			} else {
+				// if more than 1 element, sets the array
 				setArrayValue(key, ArrayString.of(values));
 			}
 		} else {
+			// if not consistent, remove the property
 			removeIfExists(key);
 		}
     }
 
+    /**
+ 	 * Sets a value (Array or string by keys) into embedded JavaScript object at specific property.<br>
+ 	 * This must be used when a java script property can contain an array or a string.
+ 	 * @param key key of the property of JavaScript object.
+ 	 * @param value value to be set
+ 	 */
     protected void setValueOrArray(Key key, Key... values) {
+    	// checks if values are consistent
 		if (values != null) {
+			// checks if there is only 1 element
 			if (values.length == 1) {
+				// if 1 element, sets the object
 				setValue(key, values[0]);
 			} else {
+				// if more than 1 element, sets the array
 				setArrayValue(key, ArrayString.of(values));
 			}
 		} else {
+			// if not consistent, remove the property
 			removeIfExists(key);
 		}
     }
 
+    /**
+  	 * Sets a value (Array or integer) into embedded JavaScript object at specific property.<br>
+  	 * This must be used when a java script property can contain an array or a integer.
+  	 * @param key key of the property of JavaScript object.
+  	 * @param value value to be set
+  	 */
     protected void setValueOrArray(Key key, int... values) {
+    	// checks if values are consistent
 		if (values != null) {
+			// checks if there is only 1 element
 			if (values.length == 1) {
+				// if 1 element, sets the object
 				setValue(key, values[0]);
 			} else {
+				// if more than 1 element, sets the array
 				setArrayValue(key, ArrayInteger.of(values));
 			}
 		} else {
+			// if not consistent, remove the property
 			removeIfExists(key);
 		}
     }
 
-    protected ArrayInteger getValueOrArray(Key key, int defaultValue) {
-    	if (ObjectType.Number.equals(type(key))) {
-    		return ArrayInteger.of(getValue(key, defaultValue));
-    	} else if (ObjectType.Array.equals(type(key))) {
-    		return getArrayValue(key);
-    	}
-    	return null;
-    }
-    
+    /**
+  	 * Sets a value (Array or double) into embedded JavaScript object at specific property.<br>
+  	 * This must be used when a java script property can contain an array or a double.
+  	 * @param key key of the property of JavaScript object.
+  	 * @param value value to be set
+  	 */
     protected void setValueOrArray(Key key, double... values) {
+    	// checks if values are consistent
 		if (values != null) {
+			// checks if there is only 1 element
 			if (values.length == 1) {
+				// if 1 element, sets the object
 				setValue(key, values[0]);
 			} else {
+				// if more than 1 element, sets the array
 				setArrayValue(key, ArrayDouble.of(values));
 			}
 		} else {
+			// if not consistent, remove the property
 			removeIfExists(key);
 		}
     }
 
-    protected ArrayDouble getValueOrArray(Key key, double defautValue) {
-    	if (ObjectType.Number.equals(type(key))) {
-    		return ArrayDouble.of(getValue(key, defautValue));
-    	} else if (ObjectType.Array.equals(type(key))) {
-    		return getArrayValue(key);
-    	}
-    	return null;
-    }
-
+    /**
+   	 * Sets a value (Array or string) into embedded JavaScript object at specific property.<br>
+   	 * This must be used when a java script property can contain an array or a string.
+   	 * @param key key of the property of JavaScript object.
+   	 * @param value value to be set
+   	 */
     protected void setValueOrArray(Key key, String... values) {
+    	// checks if values are consistent
 		if (values != null) {
+			// checks if there is only 1 element
 			if (values.length == 1) {
+				// if 1 element, sets the object
 				setValue(key, values[0]);
 			} else {
+				// if more than 1 element, sets the array
 				setArrayValue(key, ArrayString.of(values));
 			}
 		} else {
+			// if not consistent, remove the property
 			removeIfExists(key);
 		}
     }
 
-    protected ArrayString getValueOrArray(Key key, String defaultValue) {
-    	if (ObjectType.String.equals(type(key))) {
-    		return ArrayString.of(getValue(key, defaultValue));
+    /**
+     * Returns a value (array) into embedded JavaScript object at specific property.<br>
+   	 * This must be used when a java script property can contain an array or a integer.
+     * @param key key of the property of JavaScript object.
+     * @return value of the property (by array) or <code>null</code> if not exist
+     */
+    protected ArrayInteger getValueOrArray(Key key, int defaultValue) {
+    	// checks if property type
+    	if (ObjectType.Number.equals(type(key))) {
+    		// if here, is a single value, therefore creates an array
+    		// with only 1 element
+    		return ArrayInteger.of(getValue(key, defaultValue));
     	} else if (ObjectType.Array.equals(type(key))) {
+    		// if here, is an array, therefore return it
     		return getArrayValue(key);
     	}
+    	// if here the property doesn't exist or has got a wrong type
+    	return null;
+    }
+    
+    /**
+     * Returns a value (array) into embedded JavaScript object at specific property.<br>
+   	 * This must be used when a java script property can contain an array or a double.
+     * @param key key of the property of JavaScript object.
+     * @return value of the property (by array) or <code>null</code> if not exist
+     */
+    protected ArrayDouble getValueOrArray(Key key, double defautValue) {
+    	// checks if property type
+    	if (ObjectType.Number.equals(type(key))) {
+    		// if here, is a single value, therefore creates an array
+    		// with only 1 element
+    		return ArrayDouble.of(getValue(key, defautValue));
+    	} else if (ObjectType.Array.equals(type(key))) {
+    		// if here, is an array, therefore return it
+    		return getArrayValue(key);
+    	}
+    	// if here the property doesn't exist or has got a wrong type
     	return null;
     }
 
+    /**
+     * Returns a value (array) into embedded JavaScript object at specific property.<br>
+   	 * This must be used when a java script property can contain an array or a string.
+     * @param key key of the property of JavaScript object.
+     * @return value of the property (by array) or <code>null</code> if not exist
+     */
+    protected ArrayString getValueOrArray(Key key, String defaultValue) {
+    	// checks if property type
+    	if (ObjectType.String.equals(type(key))) {
+    		// if here, is a single value, therefore creates an array
+    		// with only 1 element
+    		return ArrayString.of(getValue(key, defaultValue));
+    	} else if (ObjectType.Array.equals(type(key))) {
+    		// if here, is an array, therefore return it
+    		return getArrayValue(key);
+    	}
+    	// if here the property doesn't exist or has got a wrong type
+    	return null;
+    }
+
+    /**
+     * Returns a value (array) into embedded JavaScript object at specific property.<br>
+   	 * This must be used when a java script property can contain an array or a key.
+     * @param key key of the property of JavaScript object.
+     * @return value of the property (by array) or <code>null</code> if not exist
+     */
     protected ArrayString getValueOrArray(Key key, Key defaultValue) {
+    	// the same logic as a string
     	return getValueOrArray(key, defaultValue.name());
     }
 

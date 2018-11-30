@@ -22,6 +22,7 @@ import org.pepstock.charba.client.jsinterop.ChartOptions;
  * Abstract options for LINE chart. It contains all properties for this kind of chart.
  *
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 abstract class AbstractLineOptions extends MultiScalesOptions {
@@ -47,7 +48,7 @@ abstract class AbstractLineOptions extends MultiScalesOptions {
 	/**
 	 * If false, the lines between points are not drawn.
 	 * 
-	 * @return If false, the lines between points are not drawn. Default is {@link org.pepstock.charba.client.GlobalOptions#isShowLines()}.
+	 * @return If false, the lines between points are not drawn. 
 	 */
 	public boolean isShowLines() {
 		return getConfiguration().isShowLines();
@@ -65,7 +66,7 @@ abstract class AbstractLineOptions extends MultiScalesOptions {
 	/**
 	 * If false, NaN data causes a break in the line.
 	 * 
-	 * @return If false, NaN data causes a break in the line. Default is {@link org.pepstock.charba.client.GlobalOptions#isSpanGaps()}.
+	 * @return If false, NaN data causes a break in the line.
 	 */
 	public boolean isSpanGaps() {
 		return getConfiguration().isSpanGaps();

@@ -21,9 +21,10 @@ import org.pepstock.charba.client.jsinterop.AbstractChart;
  * This a cartesian axis for BAR chart.<br>
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class BarCategoryAxis extends CartesianCategoryAxis {
+public class BarCategoryAxis extends CartesianCategoryAxis {
 
 	// specific gridlines for BAR charts
 	private final BarGridLines barGridLines;
@@ -137,10 +138,16 @@ public final class BarCategoryAxis extends CartesianCategoryAxis {
 	 * If false, the grid line will go right down the middle of the bars.
 	 * 
 	 * @author Andrea "Stock" Stocchero
+	 * @version 2.0
 	 *
 	 */
 	private static class BarGridLines extends GridLines {
 
+		/**
+		 * Builds the object by an axis.
+		 * 
+		 * @param axis axis instance
+		 */
 		BarGridLines(Axis axis) {
 			super(axis);
 		}

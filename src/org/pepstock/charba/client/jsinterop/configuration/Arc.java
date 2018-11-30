@@ -21,16 +21,14 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  * Arcs are used in the polar area, doughnut and pie charts.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.PolarAreaChart
- * @see org.pepstock.charba.client.DoughnutChart
- * @see org.pepstock.charba.client.PieChart
+ * @version 2.0
  */
-public final class Arc extends AbstractConfigurationElement {
+public class Arc extends AbstractConfigurationElement {
 
 	/**
-	 * Builds the object setting the java script padding object.
+	 * Builds the object setting the java script options object and defaults options for arc.
 	 * 
-	 * @param chart chart instance
+	 * @param options root options of chart
 	 */
 	Arc(ExtendedOptions options) {
 		super(options, options.getElements().getArc());

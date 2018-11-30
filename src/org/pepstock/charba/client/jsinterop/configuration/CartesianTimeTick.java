@@ -22,14 +22,15 @@ import org.pepstock.charba.client.enums.TickSource;
  * It can be placed on either the x or y axis.<br>
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class CartesianTimeTick extends CartesianTick {
+public class CartesianTimeTick extends CartesianTick {
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the axis instance.
 	 * 
-	 * @param chart chart instance
+	 * @param axis axis instance
 	 */
 	CartesianTimeTick(Axis axis) {
 		super(axis);
@@ -39,7 +40,6 @@ public final class CartesianTimeTick extends CartesianTick {
 	 * Sets the property controls the ticks generation.
 	 * 
 	 * @param source property controls the ticks generation.
-	 * @see org.pepstock.charba.client.enums.TickSource
 	 */
 	public void setSource(TickSource source) {
 		getConfiguration().setSource(source);
@@ -49,7 +49,6 @@ public final class CartesianTimeTick extends CartesianTick {
 	 * Returns the property controls the ticks generation.
 	 * 
 	 * @return property controls the ticks generation.
-	 * @see org.pepstock.charba.client.enums.TickSource
 	 */
 	public TickSource getSource() {
 		return getConfiguration().getSource();

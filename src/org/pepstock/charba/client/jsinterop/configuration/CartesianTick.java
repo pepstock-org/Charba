@@ -16,17 +16,18 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 /**
- * Common tick configuration.
+ * Common tick configuration, for cartesian axes.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 abstract class CartesianTick extends Tick {
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the axis instance.
 	 * 
-	 * @param chart chart instance
+	 * @param axis axis instance
 	 */
 	CartesianTick(Axis axis) {
 		super(axis);

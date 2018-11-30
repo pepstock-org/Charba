@@ -19,40 +19,38 @@ import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
- * Extends a JavaScript object container for all entities which needs the chart instance.<br>
- * This class is used for all entities which will trigger events or callbacks to pass the chart instance as parameter of implemented interface.
+ * Extends a JavaScript object container for all entities which need the options instance to store the configuration of chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer
+ * @version 2.0
  */
 abstract class ConfigurationContainer<T extends NativeObjectContainer> extends ChartContainer{
 
+	// options instance
 	private T configuration;
 	
 	/**
 	 * Creates the chart configuration object with the chart instance
 	 * @param chart chart instance
-	 * @see org.pepstock.charba.client.jsinterop.AbstractChart
 	 */
 	protected ConfigurationContainer(AbstractChart<?, ?> chart) {
 		super(chart);
 	}
 	
 	/**
-	 * Creates the chart configuration object with the chart instance
+	 * Creates the chart configuration object with the chart instance and the options 
 	 * @param chart chart instance
-	 * @see org.pepstock.charba.client.jsinterop.AbstractChart
+	 * @param configuration options instance to store the configuration of chart.
 	 */
 	public ConfigurationContainer(AbstractChart<?, ?> chart, T configuration) {
 		super(chart);
 		this.configuration = configuration;
 	}
 
-	
 	/**
 	 * @param configuration the configuration to set
 	 */
-	protected void setConfiguration(T configuration) {
+	protected final void setConfiguration(T configuration) {
 		this.configuration = configuration;
 	}
 
@@ -61,6 +59,14 @@ abstract class ConfigurationContainer<T extends NativeObjectContainer> extends C
 	 */
 	protected final T getConfiguration() {
 		return configuration;
+	}
+	
+	/**
+	 * Returns the JSON representation of the object.
+	 * @return the JSON representation of the object.
+	 */
+	public final String toJSON() {
+		return configuration.toJSON();
 	}
 
 }

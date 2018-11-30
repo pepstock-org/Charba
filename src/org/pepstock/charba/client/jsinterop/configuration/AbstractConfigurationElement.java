@@ -25,16 +25,19 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a dataset.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  */
 abstract class AbstractConfigurationElement {
 	
+	// root options
 	private final ExtendedOptions options;
-	
+	// options element
 	private final AbstractElement<?, ?> configuration;
 
-	/**
-	 * Builds the object with  options
-	 * @param options
+	/***
+	 * Builds the object with options, root and element ones.
+	 * @param options options instance
+	 * @param configuration element instance
 	 */
 	AbstractConfigurationElement(ExtendedOptions options, AbstractElement<?, ?> configuration) {
 		this.options = options;
@@ -42,6 +45,8 @@ abstract class AbstractConfigurationElement {
 	}
 
 	/**
+	 * Returns the root options.
+	 * 
 	 * @return the options
 	 */
 	final ExtendedOptions getOptions() {

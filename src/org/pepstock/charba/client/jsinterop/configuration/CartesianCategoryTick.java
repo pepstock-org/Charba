@@ -22,14 +22,15 @@ import java.util.List;
  * The labels are drawn from one of the label arrays included in the chart data.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class CartesianCategoryTick extends CartesianTick {
+public class CartesianCategoryTick extends CartesianTick {
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the axis instance.
 	 * 
-	 * @param chart chart instance
+	 * @param axis axis instance
 	 */
 	CartesianCategoryTick(Axis axis) {
 		super(axis);

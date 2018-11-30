@@ -9,9 +9,9 @@ import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
+import org.pepstock.charba.client.jsinterop.commons.Id;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
-import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 
 public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions{
 	
@@ -34,14 +34,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	private Scale scale;
 	
 	private final Scales scales;
-	/**
-	 * Name of fields of JavaScript object.
-	 */
-	public enum CharbaProperty implements Key
-	{
-		// properties
-		charbaId,
-	}
+
 	/**
 	 * Name of fields of JavaScript object.
 	 */
@@ -174,7 +167,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 	
 	public String getCharbaId() {
-		return getValue(CharbaProperty.charbaId, UndefinedValues.STRING);
+		return Id.get(this);
 	}
 
 	/**

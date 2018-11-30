@@ -19,7 +19,7 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script projects.<br>
+ * Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script objects.<br>
  * This script will be injected with CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
@@ -37,18 +37,18 @@ final class NativeJsHelper {
 	}
 
 	/**
-	 * 
-	 * @param object
-	 * @param key
-	 * @return
+	 * Returns the java script object type of a property. 
+	 * @param object the object on which to search the property.
+	 * @param key  the string name of the property to test.
+	 * @return the object type
 	 */
 	static native String type(Object object, String key);
 
 	/**
-	 * 
-	 * @param object
-	 * @param key
-	 * @return
+	 * This method determines whether the passed property of passed object is an Array.
+	 * @param object the object on which to test the property.
+	 * @param key the string name of the property to test.
+	 * @return <code>true</code> if the value is an Array; otherwise, <code>false</code>.
 	 */
 	static native boolean isArray(Object object, String key);
 
@@ -60,31 +60,31 @@ final class NativeJsHelper {
 	
 	/**
 	 * Removes a property from a java script object.
-	 * @param object object to be modified.
-	 * @param key property key to be removed.
+	 * @param object the object on which to remove the property.
+	 * @param key the string name of the property to remove.
 	 */
 	static native void remove(NativeObject object, String key);
 
 	/**
 	 * Returns a property of java script object as integer.
-	 * @param object object to be queried
-	 * @param key property key
+	 * @param object the object on which to define the property.
+	 * @param key the string name of the property to be defined or modified..
 	 * @return integer value
 	 */
 	static native int propertyAsInt(Object object, String key);
 	
 	/**
 	 * Returns a property of java script object as double.
-	 * @param object object to be queried
-	 * @param key property key
+	 * @param object the object on which to define the property.
+	 * @param key the string name of the property to be defined or modified..
 	 * @return double value
 	 */
 	static native double propertyAsDouble(Object object, String key);
 
 	/**
 	 * Returns a property of java script object as string.
-	 * @param object object to be queried
-	 * @param key property key
+	 * @param object the object on which to define the property.
+	 * @param key the string name of the property to be defined or modified..
 	 * @return string value
 	 */
 	static native String propertyAsString(Object object, String key);

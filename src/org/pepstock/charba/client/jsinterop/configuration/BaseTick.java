@@ -34,39 +34,67 @@ import jsinterop.annotations.JsFunction;
  * If the callback returns null or undefined the associated grid line will be hidden.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 
+	// ---------------------------
+	// -- JAVASCRIPT FUNCTIONS ---
+	// ---------------------------
+	
+	/**
+	 * Java script FUNCTION callback when tick is created.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @version 2.0
+	 */
 	@JsFunction
 	interface ProxyTickCallback {
+		
+		/**
+		 * Method of function to be called when tick is created.
+		 * @param context value of <code>this</code> to the execution context of function.
+		 * @param value value of the tick
+		 * @param index index of tick
+		 * @param values array with all values of ticks
+		 * @return string representation of tick
+		 */
 		String call(Object context, double value, int index, ArrayDouble values);
 	}
 	
+	// ---------------------------
+	// -- CALLBACKS PROXIES    ---
+	// ---------------------------
+	
+	// callback proxy to invoke the tick function
 	private final CallbackProxy<ProxyTickCallback> tickCallbackProxy = JsHelper.get().newCallbackProxy();
-	
+	// user callback instance
 	private TickCallback callback = null;
-	
 	// the axis instance, owner of this tick
-	private T configuration;
+	private final T configuration;
 	
 	/**
 	 * Name of fields of JavaScript object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		callback
 	}
 
 	/**
-	 * Builds the object storing the chart instance.
-	 * 
-	 * @param chart chart instance
+	 * Builds the object storing the axis instance and options element, based on different kind of axis.
+	 * @param axis axis instance
+	 * @param configuration options element, based on different kind of axis.
 	 */
 	BaseTick(Axis axis, T configuration) {
 		super(axis);
+		// stores the options element
 		this.configuration = configuration;
-		// callbacks
+		
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
 		tickCallbackProxy.setCallback(new ProxyTickCallback() {
 
 			/* (non-Javadoc)
@@ -74,19 +102,20 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 			 */
 			@Override
 			public String call(Object context, double value, int index, ArrayDouble values) {
+				// checks if user callback is consistent
 				if (callback != null) {
+					// then calls user callback
 					return callback.onCallback(getAxis(), value, index, ArrayListHelper.unmodifiableList(values));
 				}
+				// default tick is the string representation of the tick value
 				return String.valueOf(value);
 			}
-			
 		});
-		
 	}
 	
-	abstract T getDefaultTick();
-	
 	/**
+	 * Returns the options element for tick.
+	 * 
 	 * @return the configuration
 	 */
 	final T getConfiguration() {
@@ -115,7 +144,6 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	 * Sets the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
 	 * @param fontStyle Font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
 		configuration.setFontStyle(fontStyle);
@@ -125,7 +153,6 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	 * Returns the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
 	 * @return the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). 
-	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFontStyle() {
 		return configuration.getFontStyle();
@@ -186,6 +213,8 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	}
 
 	/**
+	 * Returns the user callback instance. 
+	 * 
 	 * @return the callback
 	 */
 	public TickCallback getCallback() {
@@ -193,51 +222,20 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	}
 
 	/**
+	 * Sets the user callback instance.
+	 * 
 	 * @param callback the callback to set
 	 */
 	public void setCallback(TickCallback callback) {
+		// sets the callback
 		this.callback = callback;
+		// checks if callback is consistent
 		if (callback != null) {
+			// adds the callback proxy function to java script object
 			getAxis().getConfiguration().setCallback(configuration, Property.callback, tickCallbackProxy.getProxy());
 		} else {
+			// otherwise sets null which removes the properties from java script object
 			getAxis().getConfiguration().setCallback(configuration, Property.callback, null);
 		}
 	}
-	
-	
-
-//	/**
-//	 * @return the callback
-//	 */
-//	public TickCallback getCallback() {
-//		return configuration.getCallback();
-//	}
-//
-//	/**
-//	 * @param callback the callback to set
-//	 */
-//	public void setCallback(TickCallback callback) {
-//		configuration.setCallback(callback);
-//		if (!hasGlobalCallback()) {
-//			if (callback == null) {
-//				getAxis().getChart().getOptions().getConfiguration().setTickCallbackHandler(getDefaultTick(), null);
-//			} else {
-//				getAxis().getChart().getOptions().getConfiguration().setTickCallbackHandler(getDefaultTick(), this);
-//			}
-//		}
-//	}
-//
-//	/* (non-Javadoc)
-//	 * @see org.pepstock.charba.client.jsinterop.callbacks.handlers.TickHandler#onCallback(double, int, org.pepstock.charba.client.jsinterop.commons.ArrayDouble)
-//	 */
-//	@Override
-//	public String onCallback(double value, int index, ArrayDouble values) {
-//		if (getConfiguration().getCallback() != null) {
-//			return getConfiguration().getCallback().onCallback(getAxis(), value, index, ArrayListHelper.unmodifiableList(values));
-//		} else if (hasGlobalCallback()) {
-//			return getDefaultTick().getCallback().onCallback(getAxis(), value, index, ArrayListHelper.unmodifiableList(values));
-//		}
-//		return String.valueOf(value);
-//	}
-
 }

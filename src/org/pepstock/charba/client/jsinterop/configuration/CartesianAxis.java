@@ -31,6 +31,7 @@ import org.pepstock.charba.client.jsinterop.AbstractChart;
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  * @param <T> type of tick to apply to axis
  */
@@ -43,13 +44,13 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	private final CartesianAxisType cartesianType;
 
 	/**
-	 * Builds the object storing the chart instance, ticks and cartesian axis type.
+	 * Builds the object storing the chart instance and cartesian axis type.
 	 * @param chart chart instance
-	 * @param ticks ticks instance
 	 * @param cartesianType cartesian type
 	 */
 	CartesianAxis(AbstractChart<?, ?> chart, CartesianAxisType cartesianType) {
 		super(chart);
+		// stores the axis type
 		this.cartesianType = cartesianType;
 		// sets to the objects
 		grideLines = new GridLines(this);
@@ -58,7 +59,6 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 
 	/**
 	 * @return the scaleLabel
-	 * @see CartesianScaleLabel
 	 */
 	public CartesianScaleLabel getScaleLabel() {
 		return scaleLabel;
@@ -66,13 +66,11 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 
 	/**
 	 * @return the ticks
-	 * @see Tick
 	 */
 	public abstract T getTicks();
 
 	/**
 	 * @return the grideLines
-	 * @see GridLines
 	 */
 	public GridLines getGrideLines() {
 		return grideLines;
@@ -80,7 +78,6 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	
 	/**
 	 * @return the cartesianType
-	 * @see org.pepstock.charba.client.enums.CartesianAxisType
 	 */
 	public CartesianAxisType getCartesianType() {
 		return cartesianType;
@@ -96,7 +93,9 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	}
 
 	/**
-	 * @return the stacked
+	 * Gets if the axis are stacked or not.
+	 * 
+	 * @return if the axis are stacked or not.
 	 */
 	public boolean isStacked() {
 		return getScale().isStacked();
@@ -144,7 +143,6 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * Position of the axis in the chart. Possible values are: 'top', 'left', 'bottom', 'right'
 	 * 
 	 * @param position position of axis
-	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public void setPosition(Position position) {
 		getScale().setPosition(position);
@@ -154,7 +152,6 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * Position of the axis in the chart. Possible values are: 'top', 'left', 'bottom', 'right'
 	 * 
 	 * @return position of axis.
-	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public Position getPosition() {
 		return getScale().getPosition();

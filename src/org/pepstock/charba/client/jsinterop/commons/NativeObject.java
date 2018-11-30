@@ -17,9 +17,6 @@ package org.pepstock.charba.client.jsinterop.commons;
 
 import java.util.List;
 
-import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
-import org.pepstock.charba.client.jsinterop.options.Options;
-
 import com.google.gwt.core.client.JsDate;
 
 import jsinterop.annotations.JsOverlay;
@@ -342,16 +339,10 @@ public final class NativeObject {
 		// if here, property does not exist
 		return null;
 	}
-	
-	@JsOverlay
-	public String getCharbaId() {
-		NativeStringDescriptor descriptor = getStringProperty(Options.CharbaProperty.charbaId.name());
-		return descriptor != null ? descriptor.getValue() : UndefinedValues.STRING;
-	}
 
 	/**
-	 * 
-	 * @param descriptor
+	 * Sets the properties of a descriptor to <code>true</code>, as default in java script when you use <code>obj[key] = value</code>
+	 * @param descriptor the descriptor to be set
 	 */
 	@JsOverlay
 	private void resetPropertyDescriptor(NativeAbstractDescriptor descriptor) {

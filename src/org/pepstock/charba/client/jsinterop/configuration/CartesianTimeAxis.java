@@ -22,12 +22,13 @@ import org.pepstock.charba.client.enums.ScaleDistribution;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 
 /**
- * This object is used to map defined axis as time.
+ * This object is used to map defined axis as time. This is used to have time series charts.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
+public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	
 	private final CartesianTimeTick ticks;
 	
@@ -37,7 +38,6 @@ public final class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * Builds the object storing the chart instance. Axis type is X by default.
 	 * 
 	 * @param chart chart instance
-	 * @see CartesianAxisType#x
 	 */
 	public CartesianTimeAxis(AbstractChart<?, ?> chart) {
 		this(chart, CartesianAxisType.x);
@@ -48,13 +48,14 @@ public final class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * 
 	 * @param chart chart instance
 	 * @param cartesianType cartesian axis type.
-	 * @see CartesianAxisType
 	 */
 	public CartesianTimeAxis(AbstractChart<?, ?> chart, CartesianAxisType cartesianType) {
 		super(chart, cartesianType);
 		// sets axis type
 		super.setType(AxisType.time);
-		time = new Time(this);
+		// creates the time object
+		this.time = new Time(this);
+		// creates the ticks instance
 		this.ticks = new CartesianTimeTick(this); 
 	}
 
@@ -77,7 +78,6 @@ public final class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * Sets property controls the data distribution along the scale.
 	 * 
 	 * @param distribution property controls the data distribution along the scale.
-	 * @see org.pepstock.charba.client.enums.ScaleDistribution
 	 */
 	public void setDistribution(ScaleDistribution distribution) {
 		getScale().setDistribution(distribution);
@@ -87,7 +87,6 @@ public final class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * Returns the property controls the data distribution along the scale.
 	 * 
 	 * @return property controls the data distribution along the scale.
-	 * @see org.pepstock.charba.client.enums.ScaleDistribution
 	 */
 	public ScaleDistribution getDistribution() {
 		return getScale().getDistribution();
@@ -97,7 +96,6 @@ public final class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * Sets the property controls the scale boundary strategy (bypassed by min/max time options).
 	 * 
 	 * @param bounds property controls the scale boundary strategy (bypassed by min/max time options).
-	 * @see org.pepstock.charba.client.enums.ScaleBounds
 	 */
 	public void setBounds(ScaleBounds bounds) {
 		getScale().setBounds(bounds);
@@ -107,7 +105,6 @@ public final class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * Returns the property controls the scale boundary strategy (bypassed by min/max time options).
 	 * 
 	 * @return property controls the scale boundary strategy (bypassed by min/max time options).
-	 * @see org.pepstock.charba.client.enums.ScaleBounds
 	 */
 	public ScaleBounds getBounds() {
 		return getScale().getBounds();

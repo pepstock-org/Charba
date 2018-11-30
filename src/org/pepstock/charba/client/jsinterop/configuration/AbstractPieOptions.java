@@ -22,14 +22,15 @@ import org.pepstock.charba.client.jsinterop.ChartOptions;
  * Abstract options for PIE chart. It contains all properties for this kind of chart.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 abstract class AbstractPieOptions extends ConfigurationOptions {
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the chart instance and defaults.
 	 * 
 	 * @param chart chart instance
+	 * @param defaultvalues defaults of chart
 	 */
 	protected AbstractPieOptions(AbstractChart<?, ?> chart, ChartOptions defaultvalues) {
 		super(chart, defaultvalues);
@@ -47,7 +48,7 @@ abstract class AbstractPieOptions extends ConfigurationOptions {
 	/**
 	 * Returns the the percentage of the chart that is cut out of the middle.
 	 * 
-	 * @return the percentage of the chart that is cut out of the middle. Default is {@link org.pepstock.charba.client.GlobalOptions#getCutoutPercentage()}.
+	 * @return the percentage of the chart that is cut out of the middle.
 	 */
 	public double getCutoutPercentage() {
 		return getConfiguration().getCutoutPercentage();
@@ -63,9 +64,9 @@ abstract class AbstractPieOptions extends ConfigurationOptions {
 	}
 
 	/**
-	 * returns the starting angle to draw arcs from.
+	 * Returns the starting angle to draw arcs from.
 	 * 
-	 * @return starting angle to draw arcs from. Default is {@link org.pepstock.charba.client.GlobalOptions#getRotation()}.
+	 * @return starting angle to draw arcs from. 
 	 */
 	public double getRotation() {
 		return getConfiguration().getRotation();
@@ -83,7 +84,7 @@ abstract class AbstractPieOptions extends ConfigurationOptions {
 	/**
 	 * Returns the the sweep to allow arcs to cover.
 	 * 
-	 * @return the sweep to allow arcs to cover. Default is {@link org.pepstock.charba.client.GlobalOptions#getCircumference()}.
+	 * @return the sweep to allow arcs to cover.
 	 */
 	public double getCircumference() {
 		return getConfiguration().getCircumference();

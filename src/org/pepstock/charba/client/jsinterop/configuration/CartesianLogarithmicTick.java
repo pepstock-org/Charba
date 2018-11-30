@@ -20,14 +20,15 @@ package org.pepstock.charba.client.jsinterop.configuration;
  * As the name suggests, logarithmic interpolation is used to determine where a value lies on the axis.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class CartesianLogarithmicTick extends CartesianTick {
+public class CartesianLogarithmicTick extends CartesianTick {
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the axis instance.
 	 * 
-	 * @param chart chart instance
+	 * @param axis axis instance
 	 */
 	CartesianLogarithmicTick(Axis axis) {
 		super(axis);
@@ -38,7 +39,7 @@ public final class CartesianLogarithmicTick extends CartesianTick {
 	 * 
 	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
 	 */
-	public void setMin(int min) {
+	public void setMin(double min) {
 		getConfiguration().setMin(min);
 	}
 

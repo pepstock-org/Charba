@@ -15,17 +15,18 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
 
 /**
  * This object is used to map defined axis as logarithmic.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmicTick> {
+public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmicTick> {
 	
 	private final CartesianLogarithmicTick ticks;
 
@@ -33,7 +34,6 @@ public final class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogar
 	 * Builds the object storing the chart instance. Axis type is Y by default.
 	 * 
 	 * @param chart chart instance
-	 * @see CartesianAxisType#y
 	 */
 	public CartesianLogarithmicAxis(AbstractChart<?, ?> chart) {
 		this(chart, CartesianAxisType.y);
@@ -44,12 +44,12 @@ public final class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogar
 	 * 
 	 * @param chart chart instance
 	 * @param cartesianType cartesian axis type.
-	 * @see CartesianAxisType
 	 */
 	public CartesianLogarithmicAxis(AbstractChart<?, ?> chart, CartesianAxisType cartesianType) {
 		super(chart, cartesianType);
 		// sets axis type
 		super.setType(AxisType.logarithmic);
+		// creates the ticks instance
 		this.ticks = new CartesianLogarithmicTick(this);
 	}
 

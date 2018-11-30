@@ -39,24 +39,58 @@ import jsinterop.annotations.JsFunction;
  * takes.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
-public final class Animation extends EventProvider<ExtendedOptions> {
+public class Animation extends EventProvider<ExtendedOptions> {
 	
+	// ---------------------------
+	// -- JAVASCRIPT FUNCTIONS ---
+	// ---------------------------
+	
+	/**
+	 * Java script FUNCTION callback when animation is completed.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @version 2.0
+	 */
 	@JsFunction
 	interface ProxyAnimationCompleteCallback {
+		
+		/**
+		 * Method of function to be called when animation is completed.
+		 * @param context Value of <code>this</code> to the execution context of function.
+		 * @param animationObject java script object which contains animation object
+		 */
 		void call(Chart context, AnimationObject animationObject);
 	}
 
+	/**
+	 * Java script FUNCTION callback when animation is in progress.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @version 2.0
+	 */
 	@JsFunction
 	interface ProxyAnimationProgressCallback {
+		
+		/**
+		 * Method of function to be called when animation is completed.
+		 * @param context Value of <code>this</code> to the execution context of function.
+		 * @param animationObject java script object which contains animation object
+		 */
 		void call(Chart context, AnimationObject animationObject);
 	}
-
-	private final CallbackProxy<ProxyAnimationCompleteCallback> completeCallbackProxy = JsHelper.get().newCallbackProxy();
-
-	private final CallbackProxy<ProxyAnimationProgressCallback> progressCallbackProxy = JsHelper.get().newCallbackProxy();
 	
+	// ---------------------------
+	// -- CALLBACKS PROXIES    ---
+	// ---------------------------
+	
+	// callback proxy to invoke the animation complete function
+	private final CallbackProxy<ProxyAnimationCompleteCallback> completeCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the animation in progress function
+	private final CallbackProxy<ProxyAnimationProgressCallback> progressCallbackProxy = JsHelper.get().newCallbackProxy();
 	// amount of handlers
 	private int onCompleteHandlers = 0;
 	// amount of handlers
@@ -65,44 +99,51 @@ public final class Animation extends EventProvider<ExtendedOptions> {
 	/**
 	 * Name of fields of JavaScript object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		onProgress,
 		onComplete
 	}
 	
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the chart instance and root options.
 	 * 
-	 * @param chart chart instance
+	 * @param chart chart instance.
+	 * @param options root options of chart.
 	 */
 	Animation(AbstractChart<?, ?> chart, ExtendedOptions options) {
 		super(chart, options);
+		
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
 		completeCallbackProxy.setCallback(new ProxyAnimationCompleteCallback() {
 
 			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.EventableAnimation.ProxyAnimationCompleteCallback#call(org.pepstock.charba.client.jsinterop.items.ChartNode, org.pepstock.charba.client.jsinterop.items.AnimationObject)
+			 * @see org.pepstock.charba.client.jsinterop.configuration.Animation.ProxyAnimationCompleteCallback#call(org.pepstock.charba.client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.items.AnimationObject)
 			 */
 			@Override
 			public void call(Chart context, AnimationObject animationObject) {
+				// checks consistency of argument
 				if (animationObject != null && animationObject.getAnimationItem() != null) {
+					// invokes the custom callback
 					onComplete(animationObject.getAnimationItem());
 				}
 			}
-			
 		});
 		progressCallbackProxy.setCallback(new ProxyAnimationProgressCallback() {
 
 			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.EventableAnimation.ProxyAnimationProgressCallback#call(org.pepstock.charba.client.jsinterop.items.ChartNode, org.pepstock.charba.client.jsinterop.items.AnimationObject)
+			 * @see org.pepstock.charba.client.jsinterop.configuration.Animation.ProxyAnimationProgressCallback#call(org.pepstock.charba.client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.items.AnimationObject)
 			 */
 			@Override
 			public void call(Chart context, AnimationObject animationObject) {
+				// checks consistency of argument
 				if (animationObject != null && animationObject.getAnimationItem() != null) {
+					// invokes the custom callback
 					onProgress(animationObject.getAnimationItem());
 				}
 			}
-
 		});
 	}
 
@@ -110,7 +151,6 @@ public final class Animation extends EventProvider<ExtendedOptions> {
 	 * Sets the animation easing.
 	 * 
 	 * @param easing animation easing.
-	 * @see org.pepstock.charba.client.enums.Easing
 	 */
 	public void setEasing(Easing easing) {
 		getConfiguration().getAnimation().setEasing(easing);
@@ -119,8 +159,7 @@ public final class Animation extends EventProvider<ExtendedOptions> {
 	/**
 	 * Returns the animation easing.
 	 * 
-	 * @return animation easing. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getAnimation()}.
-	 * @see org.pepstock.charba.client.enums.Easing
+	 * @return animation easing.
 	 */
 	public Easing getEasing() {
 		return getConfiguration().getAnimation().getEasing();
@@ -138,8 +177,7 @@ public final class Animation extends EventProvider<ExtendedOptions> {
 	/**
 	 * Returns the number of milliseconds an animation takes.
 	 * 
-	 * @return the number of milliseconds an animation takes. For default value, see
-	 *         {@link org.pepstock.charba.client.GlobalOptions#getAnimation()}.
+	 * @return the number of milliseconds an animation takes.
 	 */
 	public int getDuration() {
 		return getConfiguration().getAnimation().getDuration();
@@ -157,8 +195,7 @@ public final class Animation extends EventProvider<ExtendedOptions> {
 	/**
 	 * If true, the chart will animate in with a rotation animation.
 	 * 
-	 * @return If true, the chart will animate in with a rotation animation. For default value, see
-	 *         {@link org.pepstock.charba.client.GlobalOptions#getAnimation()}.
+	 * @return If true, the chart will animate in with a rotation animation.
 	 */
 	public boolean isAnimateRotate() {
 		return getConfiguration().getAnimation().isAnimateRotate();
@@ -176,8 +213,7 @@ public final class Animation extends EventProvider<ExtendedOptions> {
 	/**
 	 * If true, will animate scaling the chart from the center outwards.
 	 * 
-	 * @return If true, will animate scaling the chart from the center outwards. For default value, see
-	 *         {@link org.pepstock.charba.client.GlobalOptions#getAnimation()}.
+	 * @return If true, will animate scaling the chart from the center outwards.
 	 */
 	public boolean isAnimateScale() {
 		return getConfiguration().getAnimation().isAnimateScale();
@@ -232,7 +268,6 @@ public final class Animation extends EventProvider<ExtendedOptions> {
 			onProgressHandlers--;
 			// if zero, no handler
 			if (onProgressHandlers == 0) {
-				// therefore remove property
 				// therefore remove property
 				getConfiguration().setEvent(getConfiguration().getAnimation(), Property.onProgress, null);
 			}

@@ -18,11 +18,11 @@ package org.pepstock.charba.client.jsinterop.configuration;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 
 /**
- * Extends a JavaScript object container for all entities which needs the chart instance.<br>
- * This class is used for all entities which will trigger events or callbacks to pass the chart instance as parameter of implemented interface.
+ * Container of a chart instance. Must be extended for all other entities which 
+ * will trigger events or callbacks to pass the chart instance as parameter of implemented interface.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer
+ * @version 2.0
  */
 abstract class ChartContainer{
 
@@ -32,7 +32,6 @@ abstract class ChartContainer{
 	/**
 	 * Creates the chart configuration object with the chart instance
 	 * @param chart chart instance
-	 * @see org.pepstock.charba.client.jsinterop.AbstractChart
 	 */
 	ChartContainer(AbstractChart<?, ?> chart) {
 		this.chart = chart;

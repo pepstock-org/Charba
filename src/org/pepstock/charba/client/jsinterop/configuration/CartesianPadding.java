@@ -19,14 +19,14 @@ package org.pepstock.charba.client.jsinterop.configuration;
  * It is applied to all sides of the chart (left, top, right, bottom).
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class CartesianPadding extends AxisContainer{
+public class CartesianPadding extends AxisContainer{
 	
 	/**
-	 * Builds the object storing the chart instance and the axis which this padding belongs to.
+	 * Builds the object storing the axis which this padding belongs to.
 	 * 
-	 * @param chart chart instance.
 	 * @param axis axis which this padding belongs to.
 	 */
 	CartesianPadding(Axis axis) {

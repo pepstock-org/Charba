@@ -16,11 +16,10 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 /**
- * Extends a JavaScript object container for all entities which needs the chart instance.<br>
- * This class is used for all entities which will trigger events or callbacks to pass the chart instance as parameter of implemented interface.
+ * Container of a axis. Must be extended for all other entities which is sub element of an axis.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer
+ * @version 2.0
  */
 abstract class AxisContainer{
 
@@ -28,9 +27,8 @@ abstract class AxisContainer{
 	private final Axis axis;
 	
 	/**
-	 * Creates the chart configuration object with the chart instance
-	 * @param chart chart instance
-	 * @see org.pepstock.charba.client.jsinterop.AbstractChart
+	 * Creates the object with the axis instance
+	 * @param axis axis instance
 	 */
 	AxisContainer(Axis axis) {
 		this.axis = axis;

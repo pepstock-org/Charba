@@ -20,7 +20,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * A property descriptor is a record which describes a java script property (object).<br>
+ * A property descriptor is a record which describes a java script property (callback proxy function).<br>
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0

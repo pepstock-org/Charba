@@ -17,10 +17,8 @@ package org.pepstock.charba.client.jsinterop.plugins.impl;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.jsinterop.commons.Checker;
-
-import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsProperty;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
  * Configuration options of background color plugin.
@@ -28,21 +26,23 @@ import jsinterop.annotations.JsProperty;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ChartBackgroundColorOptions{
+public final class ChartBackgroundColorOptions extends NativeObjectContainer{
 	
-	@JsProperty(name = "backgroundColor")
-	native String getNativeBackgroundColor();
+	private final String color;
 	
-	@JsProperty(name = "backgroundColor")
-	native void setNativeBackgroundColor(String color);
-
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key{
+		backGroundColor
+	}
 	
 	/**
 	 * Builds the object with a new java script object setting the default value of plugin.
 	 */
-	@JsConstructor
 	public ChartBackgroundColorOptions() {
-		setBackgroundColor(ChartBackgroundColor.DEFAULT_BACKGROUND_COLOR);
+		super();
+		this.color = ChartBackgroundColor.DEFAULT_BACKGROUND_COLOR;
 	}
 
 	/**
@@ -62,8 +62,8 @@ public final class ChartBackgroundColorOptions{
 	 * 
 	 * @return the background color.
 	 */
-	public String getBackgroundColorAsString() {
-		return Checker.check(getNativeBackgroundColor(), ChartBackgroundColor.DEFAULT_BACKGROUND_COLOR); 
+	public String getBackgroundColorAsString(){
+		return getValue(Property.backGroundColor, color);
 	}
 	
 	/**
@@ -79,8 +79,8 @@ public final class ChartBackgroundColorOptions{
 	 * Sets the background color.
 	 * @param color the background color.
 	 */
-	public void setBackgroundColor(String color) {
-		setNativeBackgroundColor(color);
+	public void setBackgroundColor(String color){
+		setValue(Property.backGroundColor, color);
 	}
 
 	/**
@@ -88,6 +88,6 @@ public final class ChartBackgroundColorOptions{
 	 * @param color the background color.
 	 */
 	public void setBackgroundColor(IsColor color){
-		setNativeBackgroundColor(color.toRGBA());
+		setBackgroundColor(color.toRGBA());
 	}
 }

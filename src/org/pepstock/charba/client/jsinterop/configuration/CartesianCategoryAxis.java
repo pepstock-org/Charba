@@ -15,15 +15,15 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
 
 /**
  * This object is used to map defined axis as category.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> {
 	
@@ -33,7 +33,6 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 * Builds the object storing the chart instance. Axis type is X by default.
 	 * 
 	 * @param chart chart instance
-	 * @see CartesianAxisType#x
 	 */
 	public CartesianCategoryAxis(AbstractChart<?, ?> chart) {
 		this(chart, CartesianAxisType.x);
@@ -44,12 +43,12 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 * 
 	 * @param chart chart instance
 	 * @param cartesianType cartesian axis type.
-	 * @see CartesianAxisType
 	 */
 	public CartesianCategoryAxis(AbstractChart<?, ?> chart, CartesianAxisType cartesianType) {
 		super(chart, cartesianType);
 		// sets axis type
 		super.setType(AxisType.category);
+		// creates the ticks instance
 		this.ticks = new CartesianCategoryTick(this);
 	}
 

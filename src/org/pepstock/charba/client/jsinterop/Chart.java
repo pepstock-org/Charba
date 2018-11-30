@@ -1,6 +1,7 @@
 package org.pepstock.charba.client.jsinterop;
 
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
+import org.pepstock.charba.client.jsinterop.commons.Id;
 import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
@@ -191,7 +192,7 @@ public final class Chart{
 	
 	@JsOverlay
 	public String getCharbaId() {
-		return getOptions().getCharbaId();
+		return Id.get(getOptions());
 	}
 
 }

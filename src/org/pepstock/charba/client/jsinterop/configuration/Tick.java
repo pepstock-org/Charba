@@ -42,14 +42,6 @@ abstract class Tick extends BaseTick<Ticks> {
 		major = new BaseTickMajor(axis, axis.getScale().getTicks().getMajor());
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.configuration.AbstractTick#getTick()
-	 */
-	@Override
-	Ticks getDefaultTick() {
-		return getAxis().getDefaultScale().getTicks();
-	}
-
 	/**
 	 * @return the minor
 	 */
