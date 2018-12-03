@@ -43,6 +43,8 @@ public class BubbleDataset extends HovingDataset{
 	
 	private boolean isPointStyleArray = false;
 	
+	private boolean isPointRotationArray = false;
+	
 	// list of data points
 	private final AbstractList<DataPoint> dataPoints = new JsObjectContainerArrayList<DataPoint>();
 
@@ -55,7 +57,8 @@ public class BubbleDataset extends HovingDataset{
 		hoverRadius,
 		hitRadius,
 		pointStyle,
-		radius
+		radius,
+		rotation
 	}
 
 	/**
@@ -180,6 +183,30 @@ public class BubbleDataset extends HovingDataset{
 	 */
 	public List<DataPoint> getDataPoints(){
 		return dataPoints;
+	}
+	
+	/**
+	 * Sets the rotation of the point in degrees.
+	 * @param pointRotation array of the rotation of the point in degrees.
+	 */
+	public void setPointRotation(double...  pointRotation) {
+		setPointRotation(ArrayListHelper.build(pointRotation));
+	}
+
+	/**
+	 * Sets the rotation of the point in degrees.
+	 * @param pointRotation the rotation of the point in degrees.
+	 */
+	private void setPointRotation(JsDoubleArrayList pointRotation) {
+	    isPointRotationArray= checkAndSetDoubleValues(Property.rotation, pointRotation);
+	}
+
+	/**
+	 * Returns the rotation of the point in degrees.
+	 * @return list of the rotation of the point in degrees.
+	 */
+	public List<Double> getPointRotation() {
+	    return checkAndGetDoubleValues(Property.rotation, isPointRotationArray);
 	}
 	
 	/* (non-Javadoc)

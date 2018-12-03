@@ -56,6 +56,8 @@ public final class GridLines extends AbstractItem {
 	private static final int DEFAULT_ZERO_LINE_BORDER_DASH_OFFSET = 0;
 
 	private static final boolean DEFAULT_OFFSET_GRID_LINES = false;
+	
+	private static final boolean DEFAULT_CIRCULAR = false;
 
 	private boolean isColorArray = false;
 
@@ -67,6 +69,7 @@ public final class GridLines extends AbstractItem {
 	private enum Property implements Key
 	{
 		display,
+		circular,
 		color,
 		borderDash,
 		borderDashOffset,
@@ -110,6 +113,24 @@ public final class GridLines extends AbstractItem {
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, DEFAULT_DISPLAY);
+	}
+	
+	/**
+	 * If true, gridlines are circular (on radar chart only).
+	 * 
+	 * @param circular If true, gridlines are circular (on radar chart only).
+	 */
+	public void setCircular(boolean circular) {
+		setValue(Property.circular, circular);
+	}
+
+	/**
+	 * If true, gridlines are circular (on radar chart only).
+	 * 
+	 * @return If true, gridlines are circular (on radar chart only).
+	 */
+	public boolean isCircular() {
+		return getValue(Property.circular, DEFAULT_CIRCULAR);
 	}
 
 	/**

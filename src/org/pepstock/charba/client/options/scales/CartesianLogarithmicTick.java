@@ -50,7 +50,7 @@ public final class CartesianLogarithmicTick extends CartesianTick {
 	 * 
 	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
 	 */
-	public void setMin(int min) {
+	public void setMin(double min) {
 		setValue(Property.min, min);
 	}
 

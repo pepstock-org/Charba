@@ -37,7 +37,8 @@ public final class Point extends AbstractElement {
 		pointStyle,
 		hitRadius,
 		hoverRadius,
-		hoverBorderWidth
+		hoverBorderWidth,
+		rotation
 	}
 	
 	/**
@@ -169,6 +170,24 @@ public final class Point extends AbstractElement {
 	 */
 	public int getHoverBorderWidth() {
 		return getValue(Property.hoverBorderWidth,  getChart().getGlobal().getElements().getPoint().getBorderWidth());
+	}
+	
+	/**
+	 * Sets the point rotation (in degrees).
+	 * 
+	 * @param rotation the point rotation (in degrees).
+	 */
+	public void setRotation(double rotation) {
+		setValue(Property.rotation, rotation);
+	}
+
+	/**
+	 * Returns the point rotation (in degrees).
+	 * 
+	 * @return the point rotation (in degrees).
+	 */
+	public double getRotation() {
+		return getValue(Property.rotation,  getChart().getGlobal().getElements().getPoint().getRotation());
 	}
 
 }

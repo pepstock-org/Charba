@@ -103,6 +103,7 @@ public abstract class BaseOptions extends EventProvider {
 		responsive,
 		responsiveAnimationDuration,
 		maintainAspectRatio,
+		aspectRatio,
 		devicePixelRatio,
 		onResize,
 		legendCallback,
@@ -329,6 +330,26 @@ public abstract class BaseOptions extends EventProvider {
 	 */
 	public boolean isMaintainAspectRatio() {
 		return getValue(Property.maintainAspectRatio, getChart().getGlobal().isMaintainAspectRatio());
+	}
+	
+	/**
+	 * Canvas aspect ratio (i.e. width / height, a value of 1 representing a square canvas).<br>
+	 * Note that this option is ignored if the height is explicitly defined either as attribute or via the style.
+	 * 
+	 * @param ratio the aspect ratio.
+	 */
+	public void setAspectRatio(double ratio) {
+		setValue(Property.aspectRatio, ratio);
+	}
+
+	/**
+	 * Canvas aspect ratio (i.e. width / height, a value of 1 representing a square canvas).<br>
+	 * Note that this option is ignored if the height is explicitly defined either as attribute or via the style.
+	 * Returns  the aspect ratio.
+	 * @return  the aspect ratio. Default is Default is {@link org.pepstock.charba.client.GlobalOptions#getAspectRatio()}.
+	 */
+	public double getAspectRatio() {
+		return getValue(Property.aspectRatio, getChart().getGlobal().getAspectRatio());
 	}
 
 	/**

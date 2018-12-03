@@ -40,7 +40,8 @@ public final class CartesianLinearTick extends CartesianTick {
 		maxTicksLimit,
 		stepSize,
 		suggestedMax,
-		suggestedMin
+		suggestedMin,
+		precision
 	}
 
 	/**
@@ -176,6 +177,24 @@ public final class CartesianLinearTick extends CartesianTick {
 	 */
 	public double getSuggestedMin() {
 		return getValue(Property.suggestedMin, getAxis().getScale().getTicks().getSuggestedMin());
+	}
+	
+	/**
+	 * if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
+	 * 
+	 * @param precision if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
+	 */
+	public void setPrecision(int precision) {
+		setValue(Property.precision, precision);
+	}
+
+	/**
+	 * if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
+	 * 
+	 * @return if defined and stepSize is not specified, the step size will be rounded to this many decimal places. 
+	 */
+	public int getPrecision() {
+		return getValue(Property.precision, getAxis().getScale().getTicks().getPrecision());
 	}
 
 }
