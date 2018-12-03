@@ -18,41 +18,45 @@ package org.pepstock.charba.client.jsinterop.defaults;
 import org.pepstock.charba.client.enums.TickSource;
 
 /**
- * All configuration for ticks of a chart.
+ * Interface to define ticks object defaults.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public interface IsDefaultTicks extends IsDefaultFontItem {
 
-	 /**
-	 * @return the minor
+	/**
+	 * Returns the minor tick defaults.
+	 * 
+	 * @return the minor tick defaults.
 	 */
-	 IsDefaultFontItem getMinor();
-	
-	 /**
-	 * @return the major
+	IsDefaultFontItem getMinor();
+
+	/**
+	 * Returns the major tick defaults.
+	 * 
+	 * @return the major tick defaults.
 	 */
-	 IsDefaultFontItem getMajor();
-	 
+	IsDefaultFontItem getMajor();
+
 	/**
 	 * If true, scale will include 0 if it is not already included.
 	 * 
-	 * @return if true, scale will include 0 if it is not already included.. Default is false
+	 * @return if true, scale will include 0 if it is not already included.
 	 */
 	boolean isBeginAtZero();
 
 	/**
 	 * If true, show tick marks
 	 * 
-	 * @return if true, show tick marks. Default is true.
+	 * @return if true, show tick marks.
 	 */
 	boolean isDisplay();
 
 	/**
 	 * Returns the reverses order of tick labels.
 	 * 
-	 * @return reverses order of tick labels. Default is false.
+	 * @return reverses order of tick labels.
 	 */
 	boolean isReverse();
 
@@ -61,7 +65,7 @@ public interface IsDefaultTicks extends IsDefaultFontItem {
 	 * labels no matter what
 	 * 
 	 * @return If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to
-	 *         show all labels no matter what. Default is true
+	 *         show all labels no matter what.
 	 */
 	boolean isAutoSkip();
 
@@ -70,7 +74,7 @@ public interface IsDefaultTicks extends IsDefaultFontItem {
 	 * horizontal scales.
 	 * 
 	 * @return padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal
-	 *         scales. Defualt is 0.
+	 *         scales.
 	 */
 	int getAutoSkipPadding();
 
@@ -80,7 +84,7 @@ public interface IsDefaultTicks extends IsDefaultFontItem {
 	 * Note: this can cause labels at the edges to be cropped by the edge of the canvas.
 	 * 
 	 * @return the distance in pixels to offset the label from the centre point of the tick (in the y direction for the x axis,
-	 *         and the x direction for the y axis). Default is 0.
+	 *         and the x direction for the y axis).
 	 */
 	int getLabelOffset();
 
@@ -89,14 +93,14 @@ public interface IsDefaultTicks extends IsDefaultFontItem {
 	 * necessary. Note: Only applicable to horizontal scales.
 	 * 
 	 * @return maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary.
-	 *         Note: Only applicable to horizontal scales. Default is 90
+	 *         Note: Only applicable to horizontal scales.
 	 */
 	int getMaxRotation();
 
 	/**
 	 * Returns the minimum rotation for tick labels. Note: Only applicable to horizontal scales.
 	 * 
-	 * @return minimum rotation for tick labels. Note: Only applicable to horizontal scales.. Default is 0.
+	 * @return minimum rotation for tick labels. Note: Only applicable to horizontal scales.
 	 */
 	int getMinRotation();
 
@@ -105,7 +109,7 @@ public interface IsDefaultTicks extends IsDefaultFontItem {
 	 * applicable to vertical scales.
 	 * 
 	 * @return flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable
-	 *         to vertical scales. Default is false.
+	 *         to vertical scales.
 	 */
 	boolean isMirror();
 
@@ -114,35 +118,35 @@ public interface IsDefaultTicks extends IsDefaultFontItem {
 	 * direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
 	 * 
 	 * @return padding between the tick label and the axis. When set on a vertical axis, this applies in the horizontal (X)
-	 *         direction. When set on a horizontal axis, this applies in the vertical (Y) direction. Default is 10.
+	 *         direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
 	 */
 	int getPadding();
 
 	/**
 	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
 	 * 
-	 * @return the user defined minimum number for the scale, overrides minimum value from data. Default is Double.MIN_VALUE.
+	 * @return the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	double getMin();
 
 	/**
 	 * Returns the user defined maximum number for the scale, overrides maximum value from data.
 	 * 
-	 * @return user defined maximum number for the scale, overrides maximum value from data. Default is Double.MAX_VALUE.
+	 * @return user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	double getMax();
 
 	/**
 	 * Returns the maximum number of ticks and gridlines to show.
 	 * 
-	 * @return maximum number of ticks and gridlines to show. Default is 11.
+	 * @return maximum number of ticks and gridlines to show.
 	 */
 	int getMaxTicksLimit();
 
 	/**
 	 * Returns the user defined fixed step size for the scale.
 	 * 
-	 * @return user defined fixed step size for the scale. Default is Double.MIN_VALUE.
+	 * @return user defined fixed step size for the scale.
 	 */
 	double getStepSize();
 
@@ -163,31 +167,31 @@ public interface IsDefaultTicks extends IsDefaultFontItem {
 	/**
 	 * Returns the color of label backdrops.
 	 * 
-	 * @return color of label backdrops. Default is 'rgba(255, 255, 255, 0.75)'
+	 * @return color of label backdrops.
 	 */
 	String getBackdropColorAsString();
 
 	/**
 	 * Returns the horizontal padding of label backdrop.
 	 * 
-	 * @return horizontal padding of label backdrop. Default is 2.
+	 * @return horizontal padding of label backdrop.
 	 */
 	int getBackdropPaddingX();
 
 	/**
 	 * Returns the vertical padding of label backdrop.
 	 * 
-	 * @return vertical padding of label backdrop. Default is 2.
+	 * @return vertical padding of label backdrop.
 	 */
 	int getBackdropPaddingY();
 
 	/**
 	 * If true, draw a background behind the tick labels.
 	 * 
-	 * @return if true, draw a background behind the tick labels. Default is true.
+	 * @return if true, draw a background behind the tick labels.
 	 */
 	boolean isShowLabelBackdrop();
-	
+
 	/**
 	 * Returns the property controls the ticks generation.
 	 * 

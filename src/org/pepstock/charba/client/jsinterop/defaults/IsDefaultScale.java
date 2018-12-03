@@ -20,88 +20,94 @@ import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
 import org.pepstock.charba.client.enums.ScaleDistribution;
 
+/**
+ * Interface to define scale/axis object defaults.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public interface IsDefaultScale {
 
 	/**
-	 * @return the scaleLabel
-	 * @see ScaleLabel
+	 * Returns the scale label defaults
+	 * 
+	 * @return the scaleLabel defaults.
 	 */
-
 	IsDefaultScaleLabel getScaleLabel();
 
 	/**
-	 * @return the ticks
-	 * @see Ticks
+	 * Returns the ticks defaults.
+	 * 
+	 * @return the ticks defaults.
 	 */
-
 	IsDefaultTicks getTicks();
 
 	/**
-	 * @return the grideLines
-	 * @see GridLines
+	 * Returns the grid lines defaults.
+	 * 
+	 * @return the grideLines defaults.
 	 */
-
 	IsDefaultGridLines getGrideLines();
 
 	/**
-	 * @return the angleLines
-	 * @see AngleLines
+	 * Returns the angle lines default.
+	 * 
+	 * @return the angleLines defaults.
 	 */
 	IsDefaultAngleLines getAngleLines();
 
 	/**
-	 * @return the pointLabels
-	 * @see PointLabels
+	 * Returns the point labels defaults.
+	 * 
+	 * @return the pointLabels defaults.
 	 */
 	IsDefaultPointLabels getPointLabels();
 
 	/**
-	 * @return the pointLabels
-	 * @see PointLabels
+	 * Returns the time defaults. 
+	 * @return the time defaults. 
 	 */
 	IsDefaultTime getTime();
 
 	/**
 	 * Returns if the axis are stacked or not.
 	 * 
-	 * @return if the axis are stacked or not. Default is <code>false</code>.
+	 * @return if the axis are stacked or not.
 	 */
 	boolean isStacked();
 
 	/**
 	 * Returns the type of axis.
 	 * 
-	 * @return the type of axis. If not set, the default is {@link org.pepstock.charba.client.enums.AxisType#linear}.
-	 * @see org.pepstock.charba.client.enums.AxisType
+	 * @return the type of axis.
 	 */
 	AxisType getType();
 
 	/**
 	 * The weight used to sort the axis. Higher weights are further away from the chart area.
 	 * 
-	 * @return weight of axis. Default is 0.
+	 * @return weight of axis.
 	 */
 	int getWeight();
 
 	/**
 	 * If true, shows the axis.
 	 * 
-	 * @return if true, shows the axis. Default is true.
+	 * @return if true, shows the axis.
 	 */
 	boolean isDisplay();
 
 	/**
 	 * If true, extra space is added to the both edges and the axis is scaled to fit into the chart area.
 	 * 
-	 * @return extra space of axis. Default is <code>false</code>.
+	 * @return extra space of axis.
 	 */
 	boolean isOffset();
 
 	/**
 	 * Position of the axis in the chart. Possible values are: 'top', 'left', 'bottom', 'right'
 	 * 
-	 * @return position of axis. Default is {@link org.pepstock.charba.client.enums.Position#top}.
-	 * @see org.pepstock.charba.client.enums.Position
+	 * @return position of axis.
 	 */
 	Position getPosition();
 
@@ -110,14 +116,14 @@ public interface IsDefaultScale {
 	 * category width and put the bars right next to each other.
 	 * 
 	 * @return percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
-	 *         category width and put the bars right next to each other. Default is 0.9.
+	 *         category width and put the bars right next to each other.
 	 */
 	double getBarPercentage();
 
 	/**
 	 * Returns the percent (0-1) of the available width each category should be within the sample width.
 	 * 
-	 * @return the percent (0-1) of the available width each category should be within the sample width. Default is 0.8.
+	 * @return the percent (0-1) of the available width each category should be within the sample width.
 	 */
 	double getCategoryPercentage();
 
@@ -127,14 +133,13 @@ public interface IsDefaultScale {
 	 * 
 	 * @return width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take
 	 *         the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
-	 *         Default is 0.
 	 */
 	int getBarThickness();
 
 	/**
 	 * Returns the maximum bar thickness.
 	 * 
-	 * @return the maximum bar thickness. Default is 0.
+	 * @return the maximum bar thickness.
 	 */
 	int getMaxBarThickness();
 

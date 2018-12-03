@@ -15,6 +15,12 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults;
 
+/**
+ * Interface to define padding object defaults.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public interface IsDefaultPadding {
 
 	/**

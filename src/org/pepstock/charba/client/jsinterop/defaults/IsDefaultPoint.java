@@ -17,6 +17,12 @@ package org.pepstock.charba.client.jsinterop.defaults;
 
 import org.pepstock.charba.client.enums.PointStyle;
 
+/**
+ * Interface to define point object defaults.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public interface IsDefaultPoint extends IsDefaultArc {
 
 	/**

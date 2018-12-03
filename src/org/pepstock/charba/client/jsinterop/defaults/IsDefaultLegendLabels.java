@@ -16,9 +16,10 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
 /**
- * This is the labels configuration of the legend.
+ * Interface to define legend labels object defaults.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public interface IsDefaultLegendLabels extends IsDefaultFontItem {

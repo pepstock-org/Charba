@@ -21,17 +21,17 @@ import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TooltipPosition;
 
 /**
- * Configuration element to set all attributes and features of the default tooltip.
+ * Interface to define tooltips object defaults.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public interface IsDefaultTooltips{
 
 	/**
 	 * Returns if tooltips are enabled.
 	 * 
-	 * @return if tooltips are enabled.. Default is true.
+	 * @return if tooltips are enabled.
 	 */
 	boolean isEnabled();
 
@@ -178,7 +178,7 @@ public interface IsDefaultTooltips{
 	FontStyle getFooterFontStyle();
 
 	/**
-	 * Returns the body alignment.
+	 * Returns the footer alignment.
 	 * 
 	 * @return footer alignment. 
 	 */

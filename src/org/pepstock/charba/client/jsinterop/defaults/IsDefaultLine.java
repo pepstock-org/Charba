@@ -1,31 +1,51 @@
+/**
+    Copyright 2017 Andrea "Stock" Stocchero
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+	    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
 package org.pepstock.charba.client.jsinterop.defaults;
 
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.JoinStyle;
 
+/**
+ * Interface to define line object defaults.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public interface IsDefaultLine extends IsDefaultArc{
 	
 	/**
 	 * Returns the Bezier curve tension (0 for no Bezier curves).
 	 * 
-	 * @return the Bezier curve tension (0 for no Bezier curves). Default is 0.4F.
+	 * @return the Bezier curve tension (0 for no Bezier curves).
 	 */
 	double getTension();
 
 	/**
 	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are:
-	 * butt, round and square. By default this property is set to butt.
+	 * butt, round and square. 
 	 * 
-	 * @return how the end points of every line are drawn. Default is {@link org.pepstock.charba.client.enums.CapStyle#butt}.
-	 * @see org.pepstock.charba.client.enums.CapStyle
+	 * @return how the end points of every line are drawn. 
 	 */
 	CapStyle getBorderCapStyle();
 
 	/**
 	 * Returns the line dash pattern offset or "phase".
 	 * 
-	 * @return the line dash pattern offset or "phase". Default is 0.
+	 * @return the line dash pattern offset or "phase".
 	 */
 	int getBorderDashOffset();
 
@@ -33,33 +53,30 @@ public interface IsDefaultLine extends IsDefaultArc{
 	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
 	 * (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position,
 	 * are skipped).<br>
-	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
+	 * There are three possible values for this property: round, bevel and miter. 
 	 * 
-	 * @return There are three possible values for this property: round, bevel and miter. By default this property is set to
-	 *         miter. Default is {@link org.pepstock.charba.client.enums.JoinStyle#miter}.
-	 * @see org.pepstock.charba.client.enums.JoinStyle
+	 * @return There are three possible values for this property: round, bevel and miter. 
 	 */
 	JoinStyle getBorderJoinStyle();
 
 	/**
 	 * Returns <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
 	 * 
-	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction. Default is <code>true</code>.
+	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction. 
 	 */
 	boolean isCapBezierPoints();
 
 	/**
 	 * Returns how to fill the area under the line.
 	 * 
-	 * @return how to fill the area under the line. Default is {@link org.pepstock.charba.client.enums.Fill#origin}.
-	 * @see org.pepstock.charba.client.enums.Fill
+	 * @return how to fill the area under the line. 
 	 */
 	Fill getFill();
 
 	/**
 	 * Returns <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 * 
-	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored). Default is <code>false</code>.
+	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored). 
 	 */
 	boolean isStepped();
 

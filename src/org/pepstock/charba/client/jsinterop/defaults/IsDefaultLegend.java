@@ -18,14 +18,16 @@ package org.pepstock.charba.client.jsinterop.defaults;
 import org.pepstock.charba.client.enums.Position;
 
 /**
- * The chart legend displays data about the datasets that area appearing on the chart.
+ * Interface to define legends object defaults.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public interface IsDefaultLegend {
 
 	/**
+	 * Returns labels object defaults.
+	 * 
 	 * @return the labels
 	 */
 	IsDefaultLegendLabels getLabels();
@@ -33,29 +35,28 @@ public interface IsDefaultLegend {
 	/**
 	 * Returns if the legend is shown.
 	 * 
-	 * @return if the legend is shown. Default is true.
+	 * @return if the legend is shown.
 	 */
 	boolean isDisplay();
 
 	/**
 	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
 	 * 
-	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). Default is true.
+	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). 
 	 */
 	boolean isFullWidth();
 
 	/**
 	 * Returns if the legend will show datasets in reverse order.
 	 * 
-	 * @return Legend will show datasets in reverse order. Default is false.
+	 * @return Legend will show datasets in reverse order.
 	 */
 	boolean isReverse();
 	
 	/**
 	 * Returns the position of the legend.
 	 * 
-	 * @return Position of the legend. Default is {@link org.pepstock.charba.client.enums.Position#top}.
-	 * @see org.pepstock.charba.client.enums.Position
+	 * @return Position of the legend. 
 	 */
 	Position getPosition();
 }

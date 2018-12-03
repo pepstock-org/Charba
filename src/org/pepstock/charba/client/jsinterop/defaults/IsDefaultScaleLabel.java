@@ -16,14 +16,18 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
 /**
- * Configures the default chart title which defines text to draw at the top of the chart.<br>
- * "weight"property is not present.
+ * Interface to define scale label object defaults.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public interface IsDefaultScaleLabel extends IsDefaultFontItem {
 	
+	/**
+	 * Returns the padding defaults.
+	 * 
+	 * @return the padding defaults.
+	 */
 	IsDefaultPadding getPadding();
 
 	/**
@@ -35,14 +39,14 @@ public interface IsDefaultScaleLabel extends IsDefaultFontItem {
 	/**
 	 * Returns the text for the scale string.
 	 * 
-	 * @return The text for the scale string. Default is "".
+	 * @return The text for the scale string.
 	 */
 	String getLabelString();
 
 	/**
 	 * Returns the height of an individual line of text.
 	 * 
-	 * @return the height of an individual line of text. Default is 1.2
+	 * @return the height of an individual line of text.
 	 */
 	double getLineHeight();
 

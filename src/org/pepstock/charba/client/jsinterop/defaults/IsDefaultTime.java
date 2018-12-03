@@ -20,22 +20,12 @@ import java.util.Date;
 import org.pepstock.charba.client.enums.TimeUnit;
 
 /**
- * The following display formats are used to configure how different time units are formed into strings for the axis tick marks.
+ * Interface to define time object defaults.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public interface IsDefaultTime {
-
-	// private final DisplayFormats displayFormats = new DisplayFormats();
-
-	// /**
-	// * @return the displayFormats
-	// */
-	// @JsProperty
-//DisplayFormats getDisplayFormats() {
-//		return displayFormats;
-//	}
 
 	/**
 	 * If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.

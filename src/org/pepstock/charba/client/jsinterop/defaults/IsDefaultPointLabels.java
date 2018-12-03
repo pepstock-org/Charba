@@ -16,11 +16,10 @@
 package org.pepstock.charba.client.jsinterop.defaults;
 
 /**
- * Configures the default chart title which defines text to draw at the top of the chart.<br>
- * "weight"property is not present.
+ * Interface to define point labels object defaults.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public interface IsDefaultPointLabels extends IsDefaultFontItem {
 
