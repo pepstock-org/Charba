@@ -27,7 +27,7 @@ import org.pepstock.charba.client.jsinterop.options.Scale;
  * The configuration element which contains all axes definitions.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public class Scales extends ConfigurationContainer<ExtendedOptions> {
 
@@ -37,9 +37,10 @@ public class Scales extends ConfigurationContainer<ExtendedOptions> {
 	private final List<Axis> xAxes = new LinkedList<>();
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the chart instance and the root options element.
 	 * 
 	 * @param chart chart instance
+	 * @param options root options element.
 	 */
 	Scales(AbstractChart<?, ?> chart, ExtendedOptions options) {
 		super(chart, options);
@@ -51,19 +52,28 @@ public class Scales extends ConfigurationContainer<ExtendedOptions> {
 	 * @param axes an array of axes.
 	 */
 	public void setXAxes(Axis... axes) {
+		// checks consistency of arguments
 		if (axes != null && axes.length > 0) {
+			// clears the buffer
 			xAxes.clear();
+			// creates the array 
 			Scale[] scales = new Scale[axes.length];
+			// scans all scale arguments
 			for (int i=0; i<axes.length; i++) {
+				// adds to array
 				scales[i] = axes[i].getScale();
+				// adds to buffer
 				xAxes.add(axes[i]);
 			}
+			// sets the array
 			getConfiguration().getScales().setXAxes(scales);
 		}
 	}
 
 	/**
-	 * @return the xAxes
+	 * Returns the list of X axes.
+	 * 
+	 * @return the xAxes by a unmodifiable list
 	 */
 	public List<Axis> getXAxes() {
 		return xAxes.isEmpty() ? null : Collections.unmodifiableList(xAxes);
@@ -75,19 +85,28 @@ public class Scales extends ConfigurationContainer<ExtendedOptions> {
 	 * @param axes an array of axes.
 	 */
 	public void setYAxes(Axis... axes) {
+		// checks consistency of arguments
 		if (axes != null && axes.length > 0) {
+			// clears the buffer
 			yAxes.clear();
+			// creates the array
 			Scale[] scales = new Scale[axes.length];
+			// scans all scale arguments
 			for (int i=0; i<axes.length; i++) {
+				// adds to array
 				scales[i] = axes[i].getScale();
+				// adds to buffer
 				yAxes.add(axes[i]);
 			}
+			// sets the array
 			getConfiguration().getScales().setYAxes(scales);
 		}
 	}
 
 	/**
-	 * @return the yAxes
+	 * Returns the list of Y axes.
+	 * 
+	 * @return the yAxes by a unmodifiable list
 	 */
 	public List<Axis> getYAxes() {
 		return yAxes.isEmpty() ? null : Collections.unmodifiableList(yAxes);

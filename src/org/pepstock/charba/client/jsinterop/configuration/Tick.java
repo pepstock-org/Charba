@@ -23,6 +23,7 @@ import org.pepstock.charba.client.jsinterop.options.Ticks;
  * Specific tick with min and max sub ticks.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 abstract class Tick extends BaseTick<Ticks> {
@@ -32,12 +33,13 @@ abstract class Tick extends BaseTick<Ticks> {
 	private final BaseTickMajor major;
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the axis which this tick belongs to.
 	 * 
-	 * @param chart chart instance
+	 * @param axis axis which this tick belongs to.
 	 */
 	Tick(Axis axis) {
 		super(axis, axis.getScale().getTicks());
+		// creates sub element, min and max
 		minor = new BaseTickMinor(axis, axis.getScale().getTicks().getMinor());
 		major = new BaseTickMajor(axis, axis.getScale().getTicks().getMajor());
 	}

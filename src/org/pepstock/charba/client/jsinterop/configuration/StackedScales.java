@@ -22,6 +22,7 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  * Specific scales for stacked charts.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public final class StackedScales extends Scales {
@@ -29,9 +30,10 @@ public final class StackedScales extends Scales {
 	private boolean isOnlyYAxis = false;
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the chart instance and root options.
 	 * 
-	 * @param chart chart instance.
+	 * @param chart chart instance
+	 * @param options root options 
 	 */
 	StackedScales(AbstractChart<?, ?> chart, ExtendedOptions options) {
 		super(chart, options);

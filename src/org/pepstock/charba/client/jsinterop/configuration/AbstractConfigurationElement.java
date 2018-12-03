@@ -36,6 +36,7 @@ abstract class AbstractConfigurationElement {
 
 	/***
 	 * Builds the object with options, root and element ones.
+	 * 
 	 * @param options options instance
 	 * @param configuration element instance
 	 */

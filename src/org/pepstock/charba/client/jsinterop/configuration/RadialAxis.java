@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.jsinterop.AbstractChart;
 
 /**
  * Radial axes are used specifically for the radar and polar area chart types.<br>
@@ -25,10 +25,12 @@ import org.pepstock.charba.client.enums.AxisType;
  * As the name suggests, linear interpolation is used to determine where a value lies in relation the center of the axis.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class RadialAxis extends Axis {
+public class RadialAxis extends Axis {
 
+	// sub elements of axis
 	private final GridLines grideLines;
 
 	private final RadialLinearTick ticks;
@@ -47,7 +49,7 @@ public final class RadialAxis extends Axis {
 		super(chart);
 		// sets type
 		setType(AxisType.radialLinear);
-		// initialize POINT labels
+		// initialize subelements
 		pointLabels = new RadialPointLabels(this);
 		grideLines = new GridLines(this);
 		ticks = new RadialLinearTick(this);

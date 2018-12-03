@@ -19,13 +19,16 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 
 
 /**
- * Options can be configured for four different types of elements: arc, lines, points, and rectangles. When set, these options apply to the configuration attached to a dataset.
+ * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
+ * When set, these options apply to the configuration attached to a dataset.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class Elements {
+public class Elements {
 
+	// sub elements
 	private final Point point;
 
 	private final Line line;
@@ -36,9 +39,9 @@ public final class Elements {
 
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the default root options.
 	 * 
-	 * @param chart chart instance
+	 * @param options default root options.
 	 */
 	Elements(ExtendedOptions options) {
 		// creates the sub-options objects

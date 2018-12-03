@@ -27,7 +27,7 @@ import org.pepstock.charba.client.jsinterop.ChartOptions;
 public class BarOptions extends MultiScalesOptions {
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the chart instance and default values.
 	 * 
 	 * @param chart chart instance
 	 * @param defaultValues defaults options of bar chart 

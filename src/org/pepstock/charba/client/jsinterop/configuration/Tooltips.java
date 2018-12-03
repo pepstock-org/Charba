@@ -38,63 +38,101 @@ import jsinterop.annotations.JsFunction;
  * Configuration element to set all attributes and features of the tooltip.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
+public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
+	
+	// ---------------------------
+	// -- JAVASCRIPT FUNCTIONS ---
+	// ---------------------------
 	
 	/**
-	 * Custom tooltips allow you to hook into the tooltip rendering process so that you can render the tooltip in your own
-	 * custom way.
+	 * Java script FUNCTION callback called to hook into the tooltip rendering process so that you can render the tooltip in your own
+	 * custom way.<br>
+	 * Must be an interface with only 1 method.
 	 * 
-	 * @param chart chart instance
-	 * @param model all info about tooltip to create own HTML tooltip.
+	 * @author Andrea "Stock" Stocchero
+	 * @version 2.0
 	 */
 	@JsFunction
 	interface ProxyCustomCallback {
+		
+		/**
+		 * Method of function to be called to hook into the tooltip rendering process so that you can render the tooltip in your own
+		 * custom way. 
+		 * @param context context Value of <code>this</code> to the execution context of function. 
+		 * @param model all info about tooltip to create own HTML tooltip.
+		 */
 		void call(Object context, NativeObject model);
 	}
 	
 	/**
-	 * Called to filter tooltip items. Receives 1 parameter, a tooltip Item.
+	 * Java script FUNCTION callback called to filter tooltip items. Receives 1 parameter, a tooltip Item.<br>
+	 * Must be an interface with only 1 method.
 	 * 
-	 * @param item tooltip item to check.
-	 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
+	 * @author Andrea "Stock" Stocchero
+	 * @version 2.0
 	 */
 	@JsFunction
 	interface ProxyFilterCallback {
+		
+		/**
+		 * Method of function to be called to filter tooltip items. Receives 1 parameter, a tooltip Item.
+		 * @param context context Value of <code>this</code> to the execution context of function. 
+		 * @param item tooltip item to check.
+		 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
+		 */
 		boolean call(Object context, NativeObject item);
 	}
-	
+
 	/**
-	 * Allows sorting of tooltip items.
+	 * Java script FUNCTION callback called to allow sorting of tooltip items.<br>
+	 * Must be an interface with only 1 method.
 	 * 
-	 * @param chart chart instance
-	 * @param item1 the first object to be compared.
-	 * @param item2 the second object to be compared.
-	 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the
-	 *         second.
-	 *FIXME la chiamata JS passa anche un oggetto DATA        
+	 * @author Andrea "Stock" Stocchero
+	 * @version 2.0
 	 */
 	@JsFunction
 	interface ProxyItemSortCallback {
+		
+		/**
+		 * Method of function to be called to allow sorting of tooltip items.
+		 * @param context context context Value of <code>this</code> to the execution context of function. 
+		 * @param item1 the first object to be compared.
+		 * @param item2 the second object to be compared.
+		 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
+		 */
 		int call(Object context, NativeObject item1, NativeObject item2);
 	}
 	
+	// ---------------------------
+	// -- CALLBACKS PROXIES    ---
+	// ---------------------------
+	// callback proxy to invoke the custom function
 	private final CallbackProxy<ProxyCustomCallback> customCallbackProxy = JsHelper.get().newCallbackProxy();
-	
+	// callback proxy to invoke the item sort function
 	private final CallbackProxy<ProxyItemSortCallback> itemSortCallbackProxy = JsHelper.get().newCallbackProxy();
-	
+	// callback proxy to invoke the filter function
 	private final CallbackProxy<ProxyFilterCallback> filterCallbackProxy = JsHelper.get().newCallbackProxy();
 	
+	// ---------------------------
+	// -- USERS CALLBACKS      ---
+	// ---------------------------
+	// user callbacks implementation for custom tooltip
 	private TooltipCustomCallback customCallback = null;
-
+	// user callbacks implementation for item sort tooltip
 	private TooltipItemSortCallback itemSortCallback = null;
-
+	// user callbacks implementation for filtering tooltip items
 	private TooltipFilterCallback filterCallback = null;
-
+	
+	// sub element of tooltip
 	private final TooltipsCallbacks callbacks;
 	
-	enum Property implements Key
+	/**
+	 * Name of fields of JavaScript object.
+	 */
+	private enum Property implements Key
 	{
 		custom,
 		itemSort,
@@ -102,20 +140,22 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	}
 
 	/**
-	 * Builds the object storing the chart instance.<br>
-	 * Sets also the internal parts of options.
+	 * Builds the object storing the chart instance and the root options element.
 	 * 
 	 * @param chart chart instance
+	 * @param options root options element.
 	 */
 	Tooltips(AbstractChart<?, ?> chart, ExtendedOptions options) {
 		super(chart, options);
-		// sets callbacks container
+		// sets callbacks sub element
 		callbacks = new TooltipsCallbacks(chart, options);
-		// sets callbacks PROXies
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
 		customCallbackProxy.setCallback(new ProxyCustomCallback() {
 
 			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.Tooltips.ProxyCustomCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipModel)
+			 * @see org.pepstock.charba.client.jsinterop.configuration.Tooltips.ProxyCustomCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject model) {
@@ -125,13 +165,11 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 					customCallback.onCustom(getChart(), new TooltipModel(model));
 				}
 			}
-	
 		});
-		
 		itemSortCallbackProxy.setCallback(new ProxyItemSortCallback() {
 
 			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.Tooltips.ProxyItemSortCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+			 * @see org.pepstock.charba.client.jsinterop.configuration.Tooltips.ProxyItemSortCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject, org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public int call(Object context, NativeObject item1, NativeObject item2) {
@@ -142,14 +180,12 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 				}
 				// default is 0 - equals
 				return 0;				
-			}
-			
-		});
-		
+			}			
+		});		
 		filterCallbackProxy.setCallback(new ProxyFilterCallback() {
 
 			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.Tooltips.ProxyFilterCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.TooltipItem)
+			 * @see org.pepstock.charba.client.jsinterop.configuration.Tooltips.ProxyFilterCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public boolean call(Object context, NativeObject item) {
@@ -160,8 +196,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 				}
 				// default is true
 				return true;
-			}
-			
+			}			
 		});
 	}
 
@@ -184,7 +219,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns if tooltips are enabled.
 	 * 
-	 * @return if tooltips are enabled. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return if tooltips are enabled. 
 	 */
 	public boolean isEnabled() {
 		return getConfiguration().getTooltips().isEnabled();
@@ -194,7 +229,6 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	 * Sets which elements appear in the tooltip.
 	 * 
 	 * @param mode which elements appear in the tooltip.
-	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
 	public void setMode(InteractionMode mode) {
 		getConfiguration().getTooltips().setMode(mode);
@@ -203,8 +237,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns which elements appear in the tooltip.
 	 * 
-	 * @return which elements appear in the tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
-	 * @see org.pepstock.charba.client.enums.InteractionMode
+	 * @return which elements appear in the tooltip. 
 	 */
 	public InteractionMode getMode() {
 		return getConfiguration().getTooltips().getMode();
@@ -226,7 +259,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	 * applied at all times.
 	 * 
 	 * @return if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode
-	 *         will be applied at all times. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 *         will be applied at all times. 
 	 */
 	public boolean isIntersect() {
 		return getConfiguration().getTooltips().isIntersect();
@@ -236,7 +269,6 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	 * Sets the mode for positioning the tooltip.
 	 * 
 	 * @param position the mode for positioning the tooltip.
-	 * @see org.pepstock.charba.client.enums.TooltipPosition
 	 */
 	public void setPosition(TooltipPosition position) {
 		getConfiguration().getTooltips().setPosition(position);
@@ -245,8 +277,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the mode for positioning the tooltip.
 	 * 
-	 * @return mode for positioning the tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
-	 * @see org.pepstock.charba.client.enums.TooltipPosition
+	 * @return mode for positioning the tooltip. 
 	 */
 	public TooltipPosition getPosition() {
 		return getConfiguration().getTooltips().getPosition();
@@ -273,7 +304,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the background color of the tooltip.
 	 * 
-	 * @return Background color of the tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return Background color of the tooltip. 
 	 */
 	public String getBackgroundColorAsString() {
 		return getConfiguration().getTooltips().getBackgroundColorAsString();
@@ -282,7 +313,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the background color of the tooltip.
 	 * 
-	 * @return Background color of the tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return Background color of the tooltip.
 	 */
 	public IsColor getBackgroundColor() {
 		return getConfiguration().getTooltips().getBackgroundColor();
@@ -299,7 +330,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the title font.
 	 * 
-	 * @return the title font. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return the title font.
 	 */
 	public String getTitleFontFamily() {
 		return getConfiguration().getTooltips().getTitleFontFamily();
@@ -308,7 +339,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Sets the title font size.
 	 * 
-	 * @param titleFontSize Title font size.
+	 * @param titleFontSize title font size.
 	 */
 	public void setTitleFontSize(int titleFontSize) {
 		getConfiguration().getTooltips().setTitleFontSize(titleFontSize);
@@ -317,7 +348,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the title font size.
 	 * 
-	 * @return Title font size. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return Title font size.
 	 */
 	public int getTitleFontSize() {
 		return getConfiguration().getTooltips().getTitleFontSize();
@@ -327,7 +358,6 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	 * Sets the title font style.
 	 * 
 	 * @param titleFontStyle title font style.
-	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public void setTitleFontStyle(FontStyle titleFontStyle) {
 		getConfiguration().getTooltips().setTitleFontStyle(titleFontStyle);
@@ -336,8 +366,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the title font style.
 	 * 
-	 * @return title font style. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
-	 * @see org.pepstock.charba.client.enums.FontStyle
+	 * @return title font style. 
 	 */
 	public FontStyle getTitleFontStyle() {
 		return getConfiguration().getTooltips().getTitleFontStyle();
@@ -347,7 +376,6 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	 * Sets the title alignment.
 	 * 
 	 * @param align title alignment.
-	 * @see org.pepstock.charba.client.enums.TextAlign
 	 */
 	public void setTitleAlign(TextAlign align) {
 		getConfiguration().getTooltips().setTitleAlign(align);
@@ -356,8 +384,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the title alignment.
 	 * 
-	 * @return title alignment. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
-	 * @see org.pepstock.charba.client.enums.TextAlign
+	 * @return title alignment. 
 	 */
 	public TextAlign getTitleAlign() {
 		return getConfiguration().getTooltips().getTitleAlign();
@@ -384,7 +411,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the title font color.
 	 * 
-	 * @return title font color. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return title font color. 
 	 */
 	public String getTitleFontColorAsString() {
 		return getConfiguration().getTooltips().getTitleFontColorAsString();
@@ -393,7 +420,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the title font color.
 	 * 
-	 * @return title font color. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return title font color. 
 	 */
 	public IsColor getTitleFontColor() {
 		return getConfiguration().getTooltips().getTitleFontColor();
@@ -411,7 +438,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the spacing to add to top and bottom of each title line.
 	 * 
-	 * @return spacing to add to top and bottom of each title line. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return spacing to add to top and bottom of each title line. 
 	 */
 	public int getTitleSpacing() {
 		return getConfiguration().getTooltips().getTitleSpacing();
@@ -429,7 +456,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the margin to add on bottom of title section.
 	 * 
-	 * @return margin to add on bottom of title section. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return margin to add on bottom of title section.
 	 */
 	public int getTitleMarginBottom() {
 		return getConfiguration().getTooltips().getTitleMarginBottom();
@@ -447,7 +474,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the body line font.
 	 * 
-	 * @return body line font. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return body line font. 
 	 */
 	public String getBodyFontFamily() {
 		return getConfiguration().getTooltips().getBodyFontFamily();
@@ -465,7 +492,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the body font size.
 	 * 
-	 * @return body font size. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return body font size.
 	 */
 	public int getBodyFontSize() {
 		return getConfiguration().getTooltips().getBodyFontSize();
@@ -484,8 +511,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the body font style.
 	 * 
-	 * @return body font style. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
-	 * @see org.pepstock.charba.client.enums.FontStyle
+	 * @return body font style. 
 	 */
 	public FontStyle getBodyFontStyle() {
 		return getConfiguration().getTooltips().getBodyFontStyle();
@@ -495,7 +521,6 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	 * Sets the body alignment.
 	 * 
 	 * @param align body alignment.
-	 * @see org.pepstock.charba.client.enums.TextAlign
 	 */
 	public void setBodyAlign(TextAlign align) {
 		getConfiguration().getTooltips().setBodyAlign(align);
@@ -504,8 +529,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the body alignment.
 	 * 
-	 * @return body alignment. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
-	 * @see org.pepstock.charba.client.enums.TextAlign
+	 * @return body alignment. 
 	 */
 	public TextAlign getBodyAlign() {
 		return getConfiguration().getTooltips().getBodyAlign();
@@ -532,7 +556,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the body font color.
 	 * 
-	 * @return body font color. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return body font color.
 	 */
 	public String getBodyFontColorAsString() {
 		return getConfiguration().getTooltips().getBodyFontColorAsString();
@@ -541,7 +565,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the body font color.
 	 * 
-	 * @return body font color. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return body font color. 
 	 */
 	public IsColor getBodyFontColor() {
 		return getConfiguration().getTooltips().getBodyFontColor();
@@ -559,7 +583,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the spacing to add to top and bottom of each tooltip item.
 	 * 
-	 * @return spacing to add to top and bottom of each tooltip item. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return spacing to add to top and bottom of each tooltip item.
 	 */
 	public int getBodySpacing() {
 		return getConfiguration().getTooltips().getBodySpacing();
@@ -577,7 +601,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the footer font.
 	 * 
-	 * @return footer font. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return footer font.
 	 */
 	public String getFooterFontFamily() {
 		return getConfiguration().getTooltips().getBodyFontFamily();
@@ -595,7 +619,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the footer font size.
 	 * 
-	 * @return footer font size. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return footer font size. 
 	 */
 	public int getFooterFontSize() {
 		return getConfiguration().getTooltips().getFooterFontSize();
@@ -613,8 +637,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the footer font style.
 	 * 
-	 * @return footer font style. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
-	 * @see org.pepstock.charba.client.enums.FontStyle
+	 * @return footer font style.
 	 */
 	public FontStyle getFooterFontStyle() {
 		return getConfiguration().getTooltips().getFooterFontStyle();
@@ -624,7 +647,6 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	 * Sets the footer alignment.
 	 * 
 	 * @param align footer alignment.
-	 * @see org.pepstock.charba.client.enums.TextAlign
 	 */
 	public void setFooterAlign(TextAlign align) {
 		getConfiguration().getTooltips().setFooterAlign(align);
@@ -633,8 +655,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the footer alignment.
 	 * 
-	 * @return footer alignment. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
-	 * @see org.pepstock.charba.client.enums.TextAlign
+	 * @return footer alignment.
 	 */
 	public TextAlign getFooterAlign() {
 		return getConfiguration().getTooltips().getFooterAlign();
@@ -661,7 +682,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the footer font color.
 	 * 
-	 * @return footer font color. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return footer font color. 
 	 */
 	public String getFooterFontColorAsString() {
 		return getConfiguration().getTooltips().getFooterFontColorAsString();
@@ -670,7 +691,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the footer font color.
 	 * 
-	 * @return footer font color. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return footer font color.
 	 */
 	public IsColor getFooterFontColor() {
 		return getConfiguration().getTooltips().getFooterFontColor();
@@ -688,7 +709,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the spacing to add to top and bottom of each footer line.
 	 * 
-	 * @return spacing to add to top and bottom of each footer line. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return spacing to add to top and bottom of each footer line.
 	 */
 	public int getFooterSpacing() {
 		return getConfiguration().getTooltips().getFooterSpacing();
@@ -706,7 +727,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the margin to add before drawing the footer.
 	 * 
-	 * @return margin to add before drawing the footer. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return margin to add before drawing the footer.
 	 */
 	public int getFooterMarginTop() {
 		return getConfiguration().getTooltips().getFooterMarginTop();
@@ -724,7 +745,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the padding to add on left and right of tooltip.
 	 * 
-	 * @return padding to add on left and right of tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return padding to add on left and right of tooltip. 
 	 */
 	public int getXPadding() {
 		return getConfiguration().getTooltips().getXPadding();
@@ -742,7 +763,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the padding to add on top and bottom of tooltip.
 	 * 
-	 * @return padding to add on top and bottom of tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return padding to add on top and bottom of tooltip. 
 	 */
 	public int getYPadding() {
 		return getConfiguration().getTooltips().getYPadding();
@@ -760,7 +781,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the extra distance to move the end of the tooltip arrow away from the tooltip point.
 	 * 
-	 * @return extra distance to move the end of the tooltip arrow away from the tooltip point. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return extra distance to move the end of the tooltip arrow away from the tooltip point.
 	 */
 	public int getCaretPadding() {
 		return getConfiguration().getTooltips().getCaretPadding();
@@ -778,7 +799,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the size, in px, of the tooltip arrow.
 	 * 
-	 * @return size, in px, of the tooltip arrow. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return size, in px, of the tooltip arrow.
 	 */
 	public int getCaretSize() {
 		return getConfiguration().getTooltips().getCaretSize();
@@ -796,7 +817,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the radius of tooltip corner curves.
 	 * 
-	 * @return radius of tooltip corner curves. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return radius of tooltip corner curves. 
 	 */
 	public int getCornerRadius() {
 		return getConfiguration().getTooltips().getCornerRadius();
@@ -823,7 +844,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the color to draw behind the colored boxes when multiple items are in the tooltip.
 	 * 
-	 * @return color to draw behind the colored boxes when multiple items are in the tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return color to draw behind the colored boxes when multiple items are in the tooltip.
 	 */
 	public String getMultiKeyBackgroundAsString() {
 		return getConfiguration().getTooltips().getMultiKeyBackgroundAsString();
@@ -832,7 +853,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the color to draw behind the colored boxes when multiple items are in the tooltip.
 	 * 
-	 * @return color to draw behind the colored boxes when multiple items are in the tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return color to draw behind the colored boxes when multiple items are in the tooltip.
 	 */
 	public IsColor getMultiKeyBackground() {
 		return getConfiguration().getTooltips().getMultiKeyBackground();
@@ -850,7 +871,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * If true, color boxes are shown in the tooltip.
 	 * 
-	 * @return if true, color boxes are shown in the tooltip. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return if true, color boxes are shown in the tooltip.
 	 */
 	public boolean isDisplayColors() {
 		return getConfiguration().getTooltips().isDisplayColors();
@@ -877,7 +898,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the color of the border.
 	 * 
-	 * @return color of the border. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return color of the border.
 	 */
 	public String getBorderColorAsString() {
 		return getConfiguration().getTooltips().getBorderColorAsString();
@@ -886,7 +907,7 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the color of the border.
 	 * 
-	 * @return color of the border. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return color of the border.
 	 */
 	public IsColor getBorderColor() {
 		return getConfiguration().getTooltips().getBorderColor();
@@ -904,17 +925,15 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the size of the border.
 	 * 
-	 * @return size of the border. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTooltips()}.
+	 * @return size of the border.
 	 */
 	public int getBorderWidth() {
 		return getConfiguration().getTooltips().getBorderWidth();
 	}
 
-	// ----------------------
-	// CALLBACKS
-	// ----------------------
-
 	/**
+	 * Returns the user custom callback.
+	 * 
 	 * @return the customCallback
 	 */
 	public TooltipCustomCallback getCustomCallback() {
@@ -922,18 +941,26 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	}
 
 	/**
+	 * Sets the user custom callback.
+	 * 
 	 * @param customCallback the customCallback to set
 	 */
 	public void setCustomCallback(TooltipCustomCallback customCallback) {
+		// sets the callback
 		this.customCallback = customCallback;
+		// checks if callback is consistent
 		if (customCallback != null) {
+			// adds the callback proxy function to java script object
 			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.custom, customCallbackProxy.getProxy());
 		} else {
+			// otherwise sets null which removes the properties from java script object
 			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.custom, null);
 		}
 	}
 
 	/**
+	 * Returns the user item sort callback.
+	 * 
 	 * @return the itemSortCallback
 	 */
 	public TooltipItemSortCallback getItemSortCallback() {
@@ -941,19 +968,27 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	}
 
 	/**
+	 * Sets the user item sort callback.
+	 * 
 	 * @param itemSortCallback the itemSortCallback to set
 	 */
 	public void setItemSortCallback(TooltipItemSortCallback itemSortCallback) {
+		// sets the callback
 		this.itemSortCallback = itemSortCallback;
+		// checks if callback is consistent
 		if (itemSortCallback != null) {
+			// adds the callback proxy function to java script object
 			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.itemSort, itemSortCallbackProxy.getProxy());
 		} else {
+			// otherwise sets null which removes the properties from java script object
 			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.itemSort, null);
 		}
 
 	}
 
 	/**
+	 * Returns the user filter callback.
+	 * 
 	 * @return the filterCallback
 	 */
 	public TooltipFilterCallback getFilterCallback() {
@@ -961,72 +996,20 @@ public final class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	}
 
 	/**
+	 * Sets the user filter callback.
+	 * 
 	 * @param filterCallback the filterCallback to set
 	 */
 	public void setFilterCallback(TooltipFilterCallback filterCallback) {
+		// sets the callback
 		this.filterCallback = filterCallback;
+		// checks if callback is consistent
 		if (filterCallback != null) {
+			// adds the callback proxy function to java script object
 			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.filter, filterCallbackProxy.getProxy());
 		} else {
+			// otherwise sets null which removes the properties from java script object
 			getConfiguration().setCallback(getConfiguration().getTooltips(), Property.filter, null);
 		}
 	}
-	
-
-//	/* (non-Javadoc)
-//	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipFilterHandler#onFilter(org.pepstock.charba.client.jsinterop.items.TooltipItem)
-//	 */
-//	@Override
-//	public boolean onFilter(TooltipItem item) {
-//		// checks if callback is consistent
-//		if (getFilterCallback() != null) {
-//			// calls callback
-//			return getFilterCallback().onFilter(getChart(), item);
-//		} else if (Defaults.chart(getChart()).getTooltips().getFilterCallback() != null) {
-//			// calls callback
-//			return Defaults.chart(getChart()).getTooltips().getFilterCallback().onFilter(getChart(), item);
-//		} else if (Defaults.get().getGlobal().getTooltips().getFilterCallback() != null) {
-//			// calls callback
-//			return Defaults.get().getGlobal().getTooltips().getFilterCallback().onFilter(getChart(), item);
-//		}
-//		return true;
-//	}
-//
-//	/* (non-Javadoc)
-//	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipItemSortHandler#onItemSort(org.pepstock.charba.client.jsinterop.items.TooltipItem, org.pepstock.charba.client.jsinterop.items.TooltipItem)
-//	 */
-//	@Override
-//	public int onItemSort(TooltipItem item1, TooltipItem item2) {
-//		// checks if callback is consistent
-//		if (getItemSortCallback() != null) {
-//			// calls callback
-//			return getItemSortCallback().onItemSort(getChart(), item1, item2);
-//		} else if (Defaults.chart(getChart()).getTooltips().getItemSortCallback() != null) {
-//			// calls callback
-//			return Defaults.chart(getChart()).getTooltips().getItemSortCallback().onItemSort(getChart(), item1, item2);
-//		} else if (Defaults.get().getGlobal().getTooltips().getItemSortCallback() != null) {
-//			// calls callback
-//			return Defaults.get().getGlobal().getTooltips().getItemSortCallback().onItemSort(getChart(), item1, item2);
-//		}
-//		return 0;
-//	}
-//
-//	/* (non-Javadoc)
-//	 * @see org.pepstock.charba.client.jsinterop.callbacks.TooltipCustomHandler#onCustom(org.pepstock.charba.client.jsinterop.items.TooltipModel)
-//	 */
-//	@Override
-//	public void onCustom(TooltipModel model) {
-//		// checks if callback is consistent
-//		if (getCustomCallback() != null) {
-//			// calls callback
-//			getCustomCallback().onCustom(getChart(), model);
-//		} else if (Defaults.chart(getChart()).getTooltips().getCustomCallback() != null) {
-//			// calls callback
-//			Defaults.chart(getChart()).getTooltips().getCustomCallback().onCustom(getChart(), model);
-//		} else if (Defaults.get().getGlobal().getTooltips().getCustomCallback() != null) {
-//			// calls callback
-//			Defaults.get().getGlobal().getTooltips().getCustomCallback().onCustom(getChart(), model);
-//		}
-//	}
-
 }

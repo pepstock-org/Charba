@@ -23,16 +23,17 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  * Definitions about how elements appear in the tooltip, hovering the chart.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class Hover {
+public class Hover {
 	
 	private final ExtendedOptions options;
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the root options element.
 	 * 
-	 * @param chart chart instance
+	 * @param options root options element.
 	 */
 	Hover(ExtendedOptions options) {
 		this.options = options;
@@ -42,7 +43,6 @@ public final class Hover {
 	 * Sets which elements appear in the tooltip.
 	 * 
 	 * @param mode which elements appear in the tooltip.
-	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
 	public void setMode(InteractionMode mode) {
 		options.getHover().setMode(mode);
@@ -51,8 +51,7 @@ public final class Hover {
 	/**
 	 * Returns which elements appear in the tooltip.
 	 * 
-	 * @return which elements appear in the tooltip. For default see {@link org.pepstock.charba.client.GlobalOptions#getHover()}.
-	 * @see org.pepstock.charba.client.enums.InteractionMode
+	 * @return which elements appear in the tooltip. 
 	 */
 	public InteractionMode getMode() {
 		return options.getHover().getMode();
@@ -70,7 +69,7 @@ public final class Hover {
 	/**
 	 * if true, the hover mode only applies when the mouse position intersects an item on the chart.
 	 * 
-	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart.  For default see {@link org.pepstock.charba.client.GlobalOptions#getHover()}.
+	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public boolean isIntersect() {
 		return options.getHover().isIntersect();
@@ -88,7 +87,7 @@ public final class Hover {
 	/**
 	 * Returns the duration in milliseconds it takes to animate hover style changes.
 	 * 
-	 * @return duration in milliseconds it takes to animate hover style changes.  For default see {@link org.pepstock.charba.client.GlobalOptions#getHover()}.
+	 * @return duration in milliseconds it takes to animate hover style changes.
 	 */
 	public int getAnimationDuration() {
 		return options.getHover().getAnimationDuration();
@@ -99,7 +98,6 @@ public final class Hover {
 	 * Defaults to 'x' for index mode and 'xy' in dataset and nearest modes.
 	 * 
 	 * @param axis define which directions are used in calculating distances.
-	 * @see org.pepstock.charba.client.enums.InteractionAxis
 	 */
 	public void setAxis(InteractionAxis axis) {
 		options.getHover().setAxis(axis);
@@ -108,8 +106,7 @@ public final class Hover {
 	/**
 	 * Returns to 'x', 'y', or 'xy' to define which directions are used in calculating distances.
 	 * 
-	 * @return define which directions are used in calculating distances.  For default see {@link org.pepstock.charba.client.GlobalOptions#getHover()}.
-	 * @see org.pepstock.charba.client.enums.InteractionAxis
+	 * @return define which directions are used in calculating distances.
 	 */
 	public InteractionAxis getAxis() {
 		return options.getHover().getAxis();

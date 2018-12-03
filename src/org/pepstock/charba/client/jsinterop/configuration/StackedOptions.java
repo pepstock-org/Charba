@@ -23,16 +23,18 @@ import org.pepstock.charba.client.jsinterop.ChartOptions;
  * It uses Category axis for X axis and Linear for Y axis.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class StackedOptions extends ConfigurationOptions {
+public class StackedOptions extends ConfigurationOptions {
 
 	private final StackedScales scales;
 
 	/**
-	 * Builds the object storing the chart instance and if only Y axis is scaled.
+	 * Builds the object storing the chart instance, default values and if only Y axis is scaled.
 	 * 
 	 * @param chart chart instance
+	 * @param defaultValues defaults options of stacked chart 
 	 * @param onlyYScaled <code>true</code> if only Y axis is scaled.
 	 */
 	public StackedOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues, boolean onlyYScaled) {
@@ -49,9 +51,10 @@ public final class StackedOptions extends ConfigurationOptions {
 	}
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the chart instance and default values.
 	 * 
 	 * @param chart chart instance
+	 * @param defaultValues defaults options of bar chart 
 	 */
 	public StackedOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		this(chart, defaultValues, false);

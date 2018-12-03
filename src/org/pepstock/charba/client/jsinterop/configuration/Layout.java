@@ -18,19 +18,20 @@ package org.pepstock.charba.client.jsinterop.configuration;
 import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 
 /**
- * The layout configuration is needed to set the padidng.
+ * The layout configuration is needed to set the padding.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class Layout {
+public class Layout {
 
 	private final Padding padding;
 
 	/**
-	 * Builds the object setting the java script padding object.
+	 * Builds the object storing the root options element.
 	 * 
-	 * @param chart chart instance
+	 * @param options root options element.
 	 */
 	Layout(ExtendedOptions options) {
 		// sets the padding object

@@ -23,14 +23,14 @@ import org.pepstock.charba.client.colors.IsColor;
  * The grid line configuration defines options for the grid lines that run perpendicular to the getAxis().
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public class GridLines extends AxisContainer{
 
 	/**
-	 * Builds the object storing the chart instance and the axis which this grid lines belongs to.
+	 * Builds the object storing the axis which this grid lines belongs to.
 	 * 
-	 * @param chart chart instance.
 	 * @param axis axis which this grid lines belongs to.
 	 */
 	GridLines(Axis axis) {
@@ -38,18 +38,18 @@ public class GridLines extends AxisContainer{
 	}
 
 	/**
-	 * If false, do not display grid lines for this getAxis().
+	 * If false, do not display grid lines for this axis.
 	 * 
-	 * @param display If false, do not display grid lines for this getAxis().
+	 * @param display If false, do not display grid lines for this axis.
 	 */
 	public void setDisplay(boolean display) {
 		getAxis().getScale().getGrideLines().setDisplay(display);
 	}
 
 	/**
-	 * If false, do not display grid lines for this getAxis().
+	 * If false, do not display grid lines for this axis.
 	 * 
-	 * @return If false, do not display grid lines for this getAxis().
+	 * @return If false, do not display grid lines for this axis.
 	 */
 	public boolean isDisplay() {
 		return getAxis().getScale().getGrideLines().isDisplay();

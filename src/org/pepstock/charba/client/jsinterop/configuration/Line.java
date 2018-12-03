@@ -26,14 +26,14 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  * Line elements are used to represent the line in a line chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.LineChart
+ * @version 2.0
  */
-public final class Line extends AbstractConfigurationElement {
+public class Line extends AbstractConfigurationElement {
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object with options, root and setting the line element.
 	 * 
-	 * @param chart chart instance
+	 * @param options options instance
 	 */
 	Line(ExtendedOptions options) {
 		super(options, options.getElements().getLine());
@@ -61,7 +61,6 @@ public final class Line extends AbstractConfigurationElement {
 	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square.
 	 * 
 	 * @param borderCapStyle how the end points of every line are drawn.
-	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public void setBorderCapStyle(CapStyle borderCapStyle) {
 		getOptions().getElements().getLine().setBorderCapStyle(borderCapStyle);
@@ -71,7 +70,6 @@ public final class Line extends AbstractConfigurationElement {
 	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square. By default this property is set to butt.
 	 * 
 	 * @return how the end points of every line are drawn.
-	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public CapStyle getBorderCapStyle() {
 		return getOptions().getElements().getLine().getBorderCapStyle();
@@ -119,7 +117,6 @@ public final class Line extends AbstractConfigurationElement {
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
 	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter. 
-	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
 		getOptions().getElements().getLine().setBorderJoinStyle(borderJoinStyle);
@@ -131,7 +128,6 @@ public final class Line extends AbstractConfigurationElement {
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
 	 * @return There are three possible values for this property: round, bevel and miter. 
-	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public JoinStyle getBorderJoinStyle() {
 		return getOptions().getElements().getLine().getBorderJoinStyle();
@@ -168,7 +164,6 @@ public final class Line extends AbstractConfigurationElement {
 	 * Sets how to fill the area under the line.
 	 * 
 	 * @param fill how to fill the area under the line.
-	 * @see org.pepstock.charba.client.enums.Fill
 	 */
 	public void setFill(Fill fill) {
 		getOptions().getElements().getLine().setFill(fill);
@@ -178,7 +173,6 @@ public final class Line extends AbstractConfigurationElement {
 	 * Returns how to fill the area under the line.
 	 * 
 	 * @return how to fill the area under the line.
-	 * @see org.pepstock.charba.client.enums.Fill
 	 */
 	public Fill getFill() {
 		return getOptions().getElements().getLine().getFill();

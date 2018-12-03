@@ -21,16 +21,17 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  * It is applied to all sides of the chart (left, top, right, bottom).
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class Padding {
+public class Padding {
 	
 	private final ExtendedOptions options;
 
 	/**
-	 * Builds the object setting the java script padding object.
+	 * Builds the object storing the root options element.
 	 * 
-	 * @param chart chart instance
+	 * @param options root options element.
 	 */
 	Padding(ExtendedOptions options) {
 		this.options = options;

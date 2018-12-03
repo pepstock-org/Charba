@@ -22,6 +22,7 @@ import org.pepstock.charba.client.jsinterop.ChartOptions;
  * Configuration of chart with multiple scales.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 abstract class MultiScalesOptions extends ConfigurationOptions {
@@ -29,13 +30,14 @@ abstract class MultiScalesOptions extends ConfigurationOptions {
 	private final Scales scales;
 
 	/**
-	 * Builds the object storing the chart instance.<br>
-	 * Sets also the scales object.
+	 * Builds the object storing the chart instance and default values.
 	 * 
 	 * @param chart chart instance
+	 * @param defaultValues defaults options
 	 */
 	protected MultiScalesOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
+		// new scales creation
 		scales = new Scales(chart, getConfiguration());
 	}
 

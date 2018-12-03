@@ -25,6 +25,7 @@ import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
  * The java script object key is the plugin id.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public final class Plugins {
@@ -32,7 +33,9 @@ public final class Plugins {
 	private final ExtendedOptions options;
 	
 	/**
-	 * Empty constructor to reduce its visibility
+	 * Builds the object storing the root options element.
+	 * 
+	 * @param options root options element.
 	 */
 	Plugins(ExtendedOptions options) {
 		this.options = options;
@@ -40,6 +43,7 @@ public final class Plugins {
 
 	/**
 	 * Sets if a global plugin must be enabled or not.
+	 * 
 	 * @param pluginId plugin id.
 	 * @param enabled <code>false</code> disable a gloabl plugin.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
@@ -47,39 +51,51 @@ public final class Plugins {
 	public void setEnabled(String pluginId, boolean enabled) throws InvalidPluginIdException {
 		options.getPlugins().setEnabled(pluginId, enabled);
 	}
-	
+
 	/**
 	 * Returns if a global plugin is enabled or not.
+	 * 
 	 * @param pluginId plugin id.
-	 * @return  <code>false</code> if a gloabl plugin is not enabled otherwise <code>true</code>.
-	 * @throws InvalidPluginIdException  occurs if the plugin id is invalid.
+	 * @return <code>false</code> if a gloabl plugin is not enabled otherwise <code>true</code>.
+	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public boolean isEnabled(String pluginId) throws InvalidPluginIdException{
+	public boolean isEnabled(String pluginId) throws InvalidPluginIdException {
 		return options.getPlugins().isEnabled(pluginId);
 	}
-	
+
 	/**
 	 * Sets the plugin options. If passed otpions is null, the configuration of plugin will be removed.
+	 * 
 	 * @param pluginId plugin id.
-	 * @param options java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if exist.
+	 * @param options java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if
+	 *            exist.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
 	public <T extends NativeObjectContainer> void setOptions(String pluginId, T object) throws InvalidPluginIdException {
 		options.getPlugins().setOptions(pluginId, object);
 	}
-	
-	public boolean hasOptions(String pluginId) throws InvalidPluginIdException{
+
+	/**
+	 * Checks if there is any options for a specific pugin, by its id.
+	 * 
+	 * @param pluginId plugin id.
+	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
+	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
+	 */
+	public boolean hasOptions(String pluginId) throws InvalidPluginIdException {
 		return options.getPlugins().hasOptions(pluginId);
 	}
 
 	/**
 	 * Returns the plugin options, if exist.
+	 * 
 	 * @param pluginId plugin id.
 	 * @return java script object used to configure the plugin or <code>null</code> if not exist.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public <T extends NativeObjectContainer> T getOptions(String pluginId) throws InvalidPluginIdException{
+	public <T extends NativeObjectContainer> T getOptions(String pluginId) throws InvalidPluginIdException {
 		// returns the configuration creating a key by plugin id.
+		// FIXME sbagliato
 		return options.getPlugins().getOptions(pluginId);
 	}
 

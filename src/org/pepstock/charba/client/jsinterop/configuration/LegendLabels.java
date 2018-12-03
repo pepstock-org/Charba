@@ -36,56 +36,89 @@ import jsinterop.annotations.JsFunction;
  * This is the labels configuration of the legend.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
+public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
+	
+	// ---------------------------
+	// -- JAVASCRIPT FUNCTIONS ---
+	// ---------------------------
 	
 	/**
-	 * Called to generate legend items for each thing in the legend. Default implementation returns the text + styling for the color box.
+	 * Java script FUNCTION callback called to generate legend items for each thing in the legend. Default implementation returns the text + styling for the color box.<br>
+	 * Must be an interface with only 1 method.
 	 * 
-	 * @return array of legend items.
+	 * @author Andrea "Stock" Stocchero
+	 * @version 2.0
 	 */
 	@JsFunction
 	interface ProxyGenerateLabelsCallback {
+		
+		/**
+		 * Method of function to be called to generate legend items for each thing in the legend. Default implementation returns the text + styling for the color box.
+		 * @param context context Value of <code>this</code> to the execution context of function. 
+		 * @param chart chart instance.
+		 * @return array of legend items.
+		 */
 		ArrayObject call(Object context, Chart chart);
 	}
 
 	/**
-	 * Called to filter legend items out of the legend. Receives 1 parameter, a Legend Item.
+	 * Java script FUNCTION callback called to filter legend items out of the legend. Receives 1 parameter, a Legend Item.<br>
+	 * Must be an interface with only 1 method.
 	 * 
-	 * @param item legend item to check.
-	 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
+	 * @author Andrea "Stock" Stocchero
+	 * @version 2.0
 	 */
 	@JsFunction
 	interface ProxyFilterCallback {
+		
+		/**
+		 * Method of function to be called to filter legend items out of the legend. Receives 1 parameter, a Legend Item.
+		 * @param context context Value of <code>this</code> to the execution context of function. 
+		 * @param item legend item to check.
+		 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
+		 */
 		boolean call(Object context, NativeObject item);
 	}
 	
+	// ---------------------------
+	// -- CALLBACKS PROXIES    ---
+	// ---------------------------
+	// callback proxy to invoke the generate labels function
 	private final CallbackProxy<ProxyGenerateLabelsCallback> labelsCallbackProxy = JsHelper.get().newCallbackProxy();
-
+	// callback proxy to invoke the filter function
 	private final CallbackProxy<ProxyFilterCallback> filterCallbackProxy = JsHelper.get().newCallbackProxy();
 	
+	// ---------------------------
+	// -- USERS CALLBACKS      ---
+	// ---------------------------
+	// user callbacks implementation for filtering legend labels
 	private LegendFilterCallback filterCallback = null;
-	
+	// user callbacks implementation for generating labels
 	private LegendLabelsCallback labelsCallback = null;
 	
 	/**
 	 * Name of fields of JavaScript object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
-		// CALLBACKS
 		generateLabels,
 		filter
 	}
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the chart instance and the root options element.
 	 * 
 	 * @param chart chart instance
+	 * @param options root options element.
 	 */
 	LegendLabels(AbstractChart<?, ?> chart, ExtendedOptions options) {
 		super(chart, options);
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
 		filterCallbackProxy.setCallback(new ProxyFilterCallback() {
 
 			/* (non-Javadoc)
@@ -100,7 +133,6 @@ public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> 
 				}
 				return true;
 			}
-			
 		});
 		
 		labelsCallbackProxy.setCallback(new ProxyGenerateLabelsCallback() {
@@ -114,8 +146,10 @@ public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> 
 				if (labelsCallback != null) {
 					// calls callback
 					LegendLabelItem[] result = labelsCallback.generateLegendLabels(getChart());
+					// tranforms into a native array
 					return ArrayObject.of(result);
 				}
+				// empty array
 				return ArrayObject.of();
 			}
 			
@@ -134,7 +168,7 @@ public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> 
 	/**
 	 * Returns the font size for label.
 	 * 
-	 * @return Font size for label. For default see {@link org.pepstock.charba.client.GlobalOptions#getLegend()}.
+	 * @return Font size for label. 
 	 */
 	public int getFontSize() {
 		return getConfiguration().getLegend().getLabels().getFontSize();
@@ -144,7 +178,6 @@ public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> 
 	 * Sets the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
 	 * @param fontStyle Font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
 		getConfiguration().getLegend().getLabels().setFontStyle(fontStyle);
@@ -153,8 +186,7 @@ public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> 
 	/**
 	 * Returns the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). For default see {@link org.pepstock.charba.client.GlobalOptions#getLegend()}.
-	 * @see org.pepstock.charba.client.enums.FontStyle
+	 * @return the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). 
 	 */
 	public FontStyle getFontStyle() {
 		return getConfiguration().getLegend().getLabels().getFontStyle();
@@ -181,7 +213,7 @@ public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> 
 	/**
 	 * Returns the font color for label
 	 * 
-	 * @return Font color for label. For default see {@link org.pepstock.charba.client.GlobalOptions#getLegend()}.
+	 * @return Font color for label. 
 	 */
 	public String getFontColorAsString() {
 		return getConfiguration().getLegend().getLabels().getFontColorAsString();
@@ -190,7 +222,7 @@ public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> 
 	/**
 	 * Returns the font color for label
 	 * 
-	 * @return Font color for label. For default see {@link org.pepstock.charba.client.GlobalOptions#getLegend()}.
+	 * @return Font color for label. 
 	 */
 	public IsColor getFontColor() {
 		return getConfiguration().getLegend().getLabels().getFontColor();
@@ -208,7 +240,7 @@ public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> 
 	/**
 	 * Returns the font family for the label, follows CSS font-family options.
 	 * 
-	 * @return Font family for the label, follows CSS font-family options. For default see {@link org.pepstock.charba.client.GlobalOptions#getLegend()}.
+	 * @return Font family for the label, follows CSS font-family options. 
 	 */
 	public String getFontFamily() {
 		return getConfiguration().getLegend().getLabels().getFontFamily();
@@ -226,7 +258,7 @@ public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> 
 	/**
 	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 * 
-	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case). For default see {@link org.pepstock.charba.client.GlobalOptions#getLegend()}.
+	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 */
 	public boolean isUsePointStyle() {
 		return getConfiguration().getLegend().getLabels().isUsePointStyle();
@@ -244,7 +276,7 @@ public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> 
 	/**
 	 * Returns the width of coloured box.
 	 * 
-	 * @return width of coloured box. For default see {@link org.pepstock.charba.client.GlobalOptions#getLegend()}.
+	 * @return width of coloured box. 
 	 */
 	public int getBoxWidth() {
 		return getConfiguration().getLegend().getLabels().getBoxWidth();
@@ -262,17 +294,15 @@ public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> 
 	/**
 	 * Returns the padding to apply around labels. Only top and bottom are implemented.
 	 * 
-	 * @return Padding to apply around labels. Only top and bottom are implemented. For default see {@link org.pepstock.charba.client.GlobalOptions#getLegend()}.
+	 * @return Padding to apply around labels. Only top and bottom are implemented. 
 	 */
 	public int getPadding() {
 		return getConfiguration().getLegend().getLabels().getPadding();
 	}
 
-	// --------------
-	// callbacks
-	// ---------------
-
 	/**
+	 * Returns the user filter callback.
+	 *  
 	 * @return the filterCallback
 	 */
 	public LegendFilterCallback getFilterCallback() {
@@ -280,18 +310,26 @@ public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> 
 	}
 
 	/**
+	 * Sets the user filter callback.
+	 * 
 	 * @param filterCallback the filterCallback to set
 	 */
 	public void setFilterCallback(LegendFilterCallback filterCallback) {
+		// sets the callback
 		this.filterCallback = filterCallback;
+		// checks if callback is consistent
 		if (filterCallback != null) {
+			// adds the callback proxy function to java script object
 			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.filter, filterCallbackProxy.getProxy());
 		} else {
+			// otherwise sets null which removes the properties from java script object
 			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.filter, null);
 		}
 	}
 
 	/**
+	 * Returns the user callback to generate labels.
+	 * 
 	 * @return the labelsCallback
 	 */
 	public LegendLabelsCallback getLabelsCallback() {
@@ -299,13 +337,19 @@ public final class LegendLabels extends ConfigurationContainer<ExtendedOptions> 
 	}
 
 	/**
+	 * Sets the user callback to generate labels.
+	 * 
 	 * @param labelsCallback the labelsCallback to set
 	 */
 	public void setLabelsCallback(LegendLabelsCallback labelsCallback) {
+		// sets the callback
 		this.labelsCallback = labelsCallback;
+		// checks if callback is consistent
 		if (labelsCallback != null) {
+			// adds the callback proxy function to java script object
 			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.generateLabels, labelsCallbackProxy.getProxy());
 		} else {
+			// otherwise sets null which removes the properties from java script object
 			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.generateLabels, null);
 		}
 	}

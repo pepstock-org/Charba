@@ -22,15 +22,14 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  * Point elements are used to represent the points in a line chart or a bubble chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.LineChart
- * @see org.pepstock.charba.client.BubbleChart
+ * @version 2.0
  */
-public final class Point extends AbstractConfigurationElement {
+public class Point extends AbstractConfigurationElement {
 	
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the root options element.
 	 * 
-	 * @param chart chart instance
+	 * @param options root options element.
 	 */
 	Point(ExtendedOptions options) {
 		super(options, options.getElements().getPoint());

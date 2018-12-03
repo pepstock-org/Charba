@@ -22,14 +22,15 @@ import org.pepstock.charba.client.jsinterop.ChartOptions;
  * Specific options for RADAR chart. It contains all properties for this kind of chart.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public final class RadarOptions extends SingleScaleOptions {
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the chart instance and default values.
 	 * 
 	 * @param chart chart instance
+	 * @param defaultValues defaults options of radar chart 
 	 */
 	public RadarOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);

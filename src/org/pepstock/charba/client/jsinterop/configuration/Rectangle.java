@@ -22,14 +22,14 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  * Rectangle elements are used to represent the bars in a bar chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.BarChart
+ * @version 2.0
  */
-public final class Rectangle extends AbstractConfigurationElement {
+public class Rectangle extends AbstractConfigurationElement {
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object with options, root and setting the rectangle element.
 	 * 
-	 * @param chart chart instance
+	 * @param options options instance
 	 */
 	Rectangle(ExtendedOptions options) {
 		super(options, options.getElements().getRectangle());

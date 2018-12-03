@@ -23,20 +23,21 @@ import org.pepstock.charba.client.enums.TimeUnit;
  * The following display formats are used to configure how different time units are formed into strings for the axis tick marks.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class Time extends AxisContainer{
+public final class Time extends AxisContainer {
 
 	private final DisplayFormats displayFormats;
 
 	/**
-	 * Builds the object storing the chart instance and the axis which this grid lines belongs to.
+	 * Builds the object storing the axis which this grid lines belongs to.
 	 * 
-	 * @param chart chart instance.
 	 * @param axis axis which this grid lines belongs to.
 	 */
 	Time(Axis axis) {
 		super(axis);
+		// creates sub element
 		displayFormats = new DisplayFormats(axis);
 	}
 
@@ -50,7 +51,8 @@ public final class Time extends AxisContainer{
 	/**
 	 * If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
 	 * 
-	 * @param isoWeekday If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
+	 * @param isoWeekday If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it
+	 *            will be Sunday.
 	 */
 	public void setIsoWeekday(boolean isoWeekday) {
 		getAxis().getScale().getTime().setIsoWeekday(isoWeekday);
@@ -59,12 +61,13 @@ public final class Time extends AxisContainer{
 	/**
 	 * If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
 	 * 
-	 * @return If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday. Default is <code>true</code>.
+	 * @return If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be
+	 *         Sunday.
 	 */
 	public boolean isIsoWeekday() {
 		return getAxis().getScale().getTime().isIsoWeekday();
 	}
-	
+
 	/**
 	 * If defined, this will override the data maximum.
 	 * 
@@ -77,7 +80,7 @@ public final class Time extends AxisContainer{
 	/**
 	 * If defined, this will override the data maximum.
 	 * 
-	 * @return If defined, this will override the data maximum. Default is <code>null</code>.
+	 * @return If defined, this will override the data maximum.
 	 */
 	public Date getMax() {
 		return getAxis().getScale().getTime().getMax();
@@ -95,12 +98,12 @@ public final class Time extends AxisContainer{
 	/**
 	 * If defined, this will override the data minimum.
 	 * 
-	 * @return If defined, this will override the data minimum. Default is <code>null</code>.
+	 * @return If defined, this will override the data minimum.
 	 */
 	public Date getMin() {
 		return getAxis().getScale().getTime().getMin();
 	}
-	
+
 	/**
 	 * If defined, dates will be rounded to the start of this unit.
 	 * 
@@ -109,12 +112,11 @@ public final class Time extends AxisContainer{
 	public void setRound(boolean round) {
 		getAxis().getScale().getTime().setRound(round);
 	}
-	
+
 	/**
 	 * If defined, dates will be rounded to the start of this unit.
 	 * 
 	 * @param round If defined, this will override the data minimum.
-	 * @see org.pepstock.charba.client.enums.TimeUnit
 	 */
 	public void setRound(TimeUnit round) {
 		getAxis().getScale().getTime().setRound(round);
@@ -123,13 +125,12 @@ public final class Time extends AxisContainer{
 	/**
 	 * If defined, dates will be rounded to the start of this unit.
 	 * 
-	 * @return If defined, dates will be rounded to the start of this unit. Default is <code>null</code>.
-	 * @see org.pepstock.charba.client.enums.TimeUnit
+	 * @return If defined, dates will be rounded to the start of this unit.
 	 */
 	public TimeUnit getRound() {
 		return getAxis().getScale().getTime().getRound();
 	}
-	
+
 	/**
 	 * The moment js format string to use for the tooltip.
 	 * 
@@ -142,7 +143,7 @@ public final class Time extends AxisContainer{
 	/**
 	 * The moment js format string to use for the tooltip.
 	 * 
-	 * @return The moment js format string to use for the tooltip. Default is <code>null</code>.
+	 * @return The moment js format string to use for the tooltip.
 	 */
 	public String getTooltipFormat() {
 		return getAxis().getScale().getTime().getTooltipFormat();
@@ -151,17 +152,16 @@ public final class Time extends AxisContainer{
 	/**
 	 * If defined, will force the unit to be a certain type.
 	 * 
-	 * @param unit If defined, will force the unit to be a certain type..
+	 * @param unit If defined, will force the unit to be a certain type.
 	 */
 	public void setUnit(boolean unit) {
 		getAxis().getScale().getTime().setUnit(unit);
 	}
-	
+
 	/**
 	 * If defined, will force the unit to be a certain type.
 	 * 
 	 * @param unit If defined, will force the unit to be a certain type.
-	 * @see org.pepstock.charba.client.enums.TimeUnit
 	 */
 	public void setUnit(TimeUnit unit) {
 		getAxis().getScale().getTime().setUnit(unit);
@@ -170,13 +170,12 @@ public final class Time extends AxisContainer{
 	/**
 	 * If defined, will force the unit to be a certain type.
 	 * 
-	 * @return If defined, will force the unit to be a certain type. Default is <code>null</code>.
-	 * @see org.pepstock.charba.client.enums.TimeUnit
+	 * @return If defined, will force the unit to be a certain type.
 	 */
 	public TimeUnit getUnit() {
 		return getAxis().getScale().getTime().getUnit();
 	}
-	
+
 	/**
 	 * The number of units between grid lines.
 	 * 
@@ -189,17 +188,16 @@ public final class Time extends AxisContainer{
 	/**
 	 * The number of units between grid lines.
 	 * 
-	 * @return The number of units between grid lines. Default is <code>1</code>.
+	 * @return The number of units between grid lines.
 	 */
 	public int getStepSize() {
 		return getAxis().getScale().getTime().getStepSize();
 	}
-	
+
 	/**
 	 * The minimum display format to be used for a time unit.
 	 * 
 	 * @param unit The minimum display format to be used for a time unit.
-	 * @see org.pepstock.charba.client.enums.TimeUnit
 	 */
 	public void setMinUnit(TimeUnit unit) {
 		getAxis().getScale().getTime().setMinUnit(unit);
@@ -208,13 +206,12 @@ public final class Time extends AxisContainer{
 	/**
 	 * The minimum display format to be used for a time unit.
 	 * 
-	 * @return The minimum display format to be used for a time unit. Default is {@link org.pepstock.charba.client.enums.TimeUnit#millisecond}.
-	 * @see org.pepstock.charba.client.enums.TimeUnit
+	 * @return The minimum display format to be used for a time unit.
 	 */
 	public TimeUnit getMinUnit() {
 		return getAxis().getScale().getTime().getMinUnit();
 	}
-	
+
 	/**
 	 * Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
 	 * 
@@ -227,7 +224,7 @@ public final class Time extends AxisContainer{
 	/**
 	 * Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
 	 * 
-	 * @return Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.  Default is <code>null</code>.
+	 * @return Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
 	 */
 	public String getParser() {
 		return getAxis().getScale().getTime().getParser();

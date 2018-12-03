@@ -22,14 +22,16 @@ import org.pepstock.charba.client.jsinterop.ChartOptions;
  * Specific options for PIE chart. It contains all properties for this kind of chart.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class PieOptions extends AbstractPieOptions {
+public class PieOptions extends AbstractPieOptions {
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the chart instance and default values.
 	 * 
 	 * @param chart chart instance
+	 * @param defaultValues defaults options of pie chart 
 	 */
 	public PieOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);

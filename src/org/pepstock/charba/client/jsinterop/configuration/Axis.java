@@ -391,7 +391,6 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// sets the options (scale) to map attributes
 		// getting the defaults values for scales 
 		setConfiguration(new ExtendedScale(new DefaultChartScale(getDefaultScale())));
-		
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------

@@ -22,14 +22,14 @@ import org.pepstock.charba.client.colors.IsColor;
  * Note that these options only apply if display is true.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class RadialAngleLines extends AxisContainer{
+public class RadialAngleLines extends AxisContainer{
 
 	/**
-	 * Builds the object storing the chart instance and the axis which this angle lines belongs to.
+	 * Builds the object storing the axis which this angle lines belongs to.
 	 * 
-	 * @param chart chart instance.
 	 * @param axis axis which this angle lines belongs to.
 	 */
 	RadialAngleLines(Axis axis) {

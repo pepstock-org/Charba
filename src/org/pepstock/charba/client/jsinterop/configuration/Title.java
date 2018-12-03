@@ -26,6 +26,7 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  * Configures the chart title which defines text to draw at the top of the chart.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public final class Title {
@@ -33,9 +34,9 @@ public final class Title {
 	private final ExtendedOptions options;
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the root options element.
 	 * 
-	 * @param chart chart instance
+	 * @param options root options element.
 	 */
 	Title(ExtendedOptions options) {
 		this.options = options;
@@ -53,7 +54,7 @@ public final class Title {
 	/**
 	 * Returns the font size for title.
 	 * 
-	 * @return Font size for title. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
+	 * @return Font size for title. 
 	 */
 	public int getFontSize() {
 		return options.getTitle().getFontSize();
@@ -63,7 +64,6 @@ public final class Title {
 	 * Sets the font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
 	 * @param fontStyle Font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
 		options.getTitle().setFontStyle(fontStyle);
@@ -72,9 +72,7 @@ public final class Title {
 	/**
 	 * Returns the font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). For
-	 *         default value, see {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
-	 * @see org.pepstock.charba.client.enums.FontStyle
+	 * @return the font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). 
 	 */
 	public FontStyle getFontStyle() {
 		return options.getTitle().getFontStyle();
@@ -101,7 +99,7 @@ public final class Title {
 	/**
 	 * Returns the font color for title
 	 * 
-	 * @return Font color for title. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
+	 * @return Font color for title. 
 	 */
 	public String getFontColorAsString() {
 		return options.getTitle().getFontColorAsString();
@@ -110,7 +108,7 @@ public final class Title {
 	/**
 	 * Returns the font color for title
 	 * 
-	 * @return Font color for title. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
+	 * @return Font color for title. 
 	 */
 	public IsColor getFontColor() {
 		return options.getTitle().getFontColor();
@@ -128,8 +126,7 @@ public final class Title {
 	/**
 	 * Returns the font family for title, follows CSS font-family options.
 	 * 
-	 * @return Font family for title, follows CSS font-family options. For default value, see
-	 *         {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
+	 * @return Font family for title, follows CSS font-family options. 
 	 */
 	public String getFontFamily() {
 		return options.getTitle().getFontFamily();
@@ -147,7 +144,7 @@ public final class Title {
 	/**
 	 * Returns if the title is shown.
 	 * 
-	 * @return if the title is shown. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
+	 * @return if the title is shown.
 	 */
 	public boolean isDisplay() {
 		return options.getTitle().isDisplay();
@@ -175,7 +172,6 @@ public final class Title {
 	 * Sets the position of title.
 	 * 
 	 * @param position the position of title.
-	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public void setPosition(Position position) {
 		options.getTitle().setPosition(position);
@@ -184,8 +180,7 @@ public final class Title {
 	/**
 	 * Returns the position of title.
 	 * 
-	 * @return the position of title. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
-	 * @see org.pepstock.charba.client.enums.Position
+	 * @return the position of title. 
 	 */
 	public Position getPosition() {
 		return options.getTitle().getPosition();
@@ -203,8 +198,7 @@ public final class Title {
 	/**
 	 * Returns the padding to apply around title. Only top and bottom are implemented.
 	 * 
-	 * @return Padding to apply around title. Only top and bottom are implemented. For default value, see
-	 *         {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
+	 * @return Padding to apply around title. Only top and bottom are implemented. 
 	 */
 	public int getPadding() {
 		return options.getTitle().getPadding();
@@ -222,8 +216,7 @@ public final class Title {
 	/**
 	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
 	 * 
-	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). For default see
-	 *         {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
+	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes).
 	 */
 	public boolean isFullWidth() {
 		return options.getTitle().isFullWidth();
@@ -241,8 +234,7 @@ public final class Title {
 	/**
 	 * Returns the height of an individual line of text.
 	 * 
-	 * @return height of an individual line of text. For default see
-	 *         {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
+	 * @return height of an individual line of text.
 	 */
 	public double getLineHeight() {
 		return options.getTitle().getLineHeight();

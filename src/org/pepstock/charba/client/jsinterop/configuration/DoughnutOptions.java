@@ -22,14 +22,16 @@ import org.pepstock.charba.client.jsinterop.ChartOptions;
  * Specific options for DOUGHNUT chart. 
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class DoughnutOptions extends AbstractPieOptions {
+public class DoughnutOptions extends AbstractPieOptions {
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the chart instance and default options.
 	 * 
 	 * @param chart chart instance
+	 * @param defaultValues default options
 	 */
 	public DoughnutOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
