@@ -1,7 +1,7 @@
 Charba - GWT wrapper for CHART.JS
 ===============================================
 
-Version 1.5
+Version 2.0
 
 What's Charba
 --------
@@ -36,20 +36,20 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>1.5</version>
+    <version>2.0</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="1.5"/>
+<dependency org="org.pepstock" name="charba" rev="2.0"/>
 ```
 
 If you are using [Gradle](https://gradle.org/):
 
 ```json
-compile group: 'org.pepstock', name: 'charba', version: '1.5'
+compile group: 'org.pepstock', name: 'charba', version: '2.0'
 ```
 
 To install in your GWT project, you must the following configuration into your GWT project module configuration:
@@ -59,6 +59,14 @@ To install in your GWT project, you must the following configuration into your G
     <inherits name="org.pepstock.charba.Charba"/>
 ...
 ```
+
+**Charba** version 1.x is based on [JSNI](http://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJSNI.html) method to integrate javascript objects. 
+**Charba** version 2.x contains the package to use [JSINTEROP](http://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJsInterop.html), package `org.pepstock.charba.jsinterop`.
+
+JSNI will be removed with GWT 3.
+
+JsInterop is one of the core features of GWT 2.8. As the name suggests, JsInterop is a way of interoperating Java with JavaScript. It offers a better way of communication between the two using annotations instead of having to write JavaScript in your classes (using JSNI).
+Pay attention that GWT compiler (you are using for your project) requires `-generateJsInteropExport` to be passed.
 
 Documentation
 -------------
