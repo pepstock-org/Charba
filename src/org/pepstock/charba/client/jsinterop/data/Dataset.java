@@ -31,10 +31,10 @@ import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
  * This is the base implementation for all datasets with common fields.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @vresion 2.0
  */
 public abstract class Dataset extends NativeObjectContainer{
-	
+	// default for hidden property
 	private static final boolean DEFAULT_HIDDEN = false;
 	
 	/**
@@ -52,9 +52,13 @@ public abstract class Dataset extends NativeObjectContainer{
 	 * @param hidden if the dataset will appear or not.
 	 */
 	public void setHidden(boolean hidden) {
+		// checks if is hidden
 		if (hidden) {
+			// then sets it
 			setValue(Property.hidden, hidden);
 		} else {
+			// if is not hidden
+			// remove the property
 			remove(Property.hidden);
 		}
 	}
@@ -95,7 +99,6 @@ public abstract class Dataset extends NativeObjectContainer{
 	/**
 	 * Sets the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array corresponds to the label at the same index on the x axis.
 	 * @param values list of numbers. 
-	 * @see org.pepstock.charba.client.commons.JsDoubleArrayList
 	 */
 	public void setData(List<Double> values){
 		setArrayValue(Property.data, ArrayDouble.of(values));
@@ -104,7 +107,6 @@ public abstract class Dataset extends NativeObjectContainer{
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array corresponds to the label at the same index on the x axis.
 	 * @return list of numbers.
-	 * @see org.pepstock.charba.client.commons.JsDoubleArrayList
 	 */
 	public List<Double> getData(){
 		ArrayDouble array = getArrayValue(Property.data);

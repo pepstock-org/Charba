@@ -32,7 +32,7 @@ import jsinterop.annotations.JsFunction;
  * @version 2.0
  *
  */
-public final class RadialPointLabels extends AxisContainer {
+public class RadialPointLabels extends AxisContainer {
 	
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---

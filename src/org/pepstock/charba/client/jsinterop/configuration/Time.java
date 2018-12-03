@@ -26,7 +26,7 @@ import org.pepstock.charba.client.enums.TimeUnit;
  * @version 2.0
  *
  */
-public final class Time extends AxisContainer {
+public class Time extends AxisContainer {
 
 	private final DisplayFormats displayFormats;
 

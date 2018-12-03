@@ -24,7 +24,7 @@ import org.pepstock.charba.client.jsinterop.ChartOptions;
  * @author Andrea "Stock" Stocchero
  * @version 2.0
  */
-public final class RadarOptions extends SingleScaleOptions {
+public class RadarOptions extends SingleScaleOptions {
 
 	/**
 	 * Builds the object storing the chart instance and default values.

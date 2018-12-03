@@ -25,15 +25,14 @@ import org.pepstock.charba.client.jsinterop.commons.ObjectType;
  * Is able to manage also multi-line labels.
  * 
  * @author Andrea "Stock" Stocchero
- * @see com.google.gwt.core.client.JavaScriptObject
- * @see com.google.gwt.core.client.JsArrayMixed
+ * @version 2.0
  */
 public final class Labels {
 	
 	private final ArrayMixedObject array;
 	
 	/**
-	 * Needed for GWT injection
+	 * To avoid any instantiations
 	 */
 	private Labels(ArrayMixedObject array) {
 		this.array = array != null ? array : new ArrayMixedObject();
@@ -54,6 +53,11 @@ public final class Labels {
 		return new Labels(new ArrayMixedObject());
 	}
 
+	/**
+	 * Loads the labels form a native array.
+	 * @param array native array.
+	 * @return a labels instance
+	 */
 	static Labels load(ArrayMixedObject array){
 		return new Labels(array);
 	}
@@ -87,7 +91,7 @@ public final class Labels {
 	
 	/**
 	 * Adds a multi line label
-	 * @param values array ofstring which represents a multi line label
+	 * @param values array of string which represents a multi line label
 	 */
 	public final void add(String... values){
 		// checks if is a valid array

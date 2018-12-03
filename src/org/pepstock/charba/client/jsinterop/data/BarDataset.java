@@ -29,10 +29,11 @@ import org.pepstock.charba.client.jsinterop.options.Scales;
  * Some properties can be specified as an array. If these are set to an array value, the first value applies to the first bar, the second value to the second bar, and so on.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.data.Dataset
+ * @version 2.0
  */
 public class BarDataset extends HovingFlexDataset{
 	
+	// data point factory
 	private final DataPointListFactory factory = new DataPointListFactory();
 	
 	/**

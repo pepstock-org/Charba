@@ -25,7 +25,7 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  * @version 2.0
  *
  */
-public final class StackedScales extends Scales {
+public class StackedScales extends Scales {
 
 	private boolean isOnlyYAxis = false;
 

@@ -29,7 +29,7 @@ import org.pepstock.charba.client.colors.IsColor;
  * 
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.data.DoughnutDataset
+ * @version 2.0
  */
 public class MeterDataset extends DoughnutDataset{
 	

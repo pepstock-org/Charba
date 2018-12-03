@@ -31,7 +31,7 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
  * It contains labels and datasets.
  *  
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer
+ * @version 2.0
  */
 public final class Data extends NativeObjectContainer implements ConfigurationElement{
 	
@@ -49,7 +49,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	}
 	
 	/**
-	 * @param nativeObject
+	 * Creates the objetc with an empty native object
 	 */
 	public Data() {
 		super(new NativeObject());
@@ -70,8 +70,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 
 	/**
 	 * Sets the labels of the data
-	 * @param labels labels object to manage also multiline labels.
-	 * @see org.pepstock.charba.client.data.Labels
+	 * @param labels labels object to manage also multi-line labels.
 	 */
 	public void setLabels(Labels labels){
 		setArrayValue(Property.labels, labels.getArray());
@@ -80,7 +79,6 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	/**
 	 * Returns the labels 
 	 * @return the labels
-	 * @see org.pepstock.charba.client.data.Labels
 	 */
 	public Labels getLabels(){
 		ArrayMixedObject array = getArrayValue(Property.labels);
@@ -102,8 +100,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 
 	/**
 	 * Sets the labels for X axes of the data 
-	 * @param labels labels object to manage also multiline labels.
-	 * @see org.pepstock.charba.client.data.Labels
+	 * @param labels labels object to manage also multi-line labels.
 	 */
 	public void setXLabels(Labels labels){
 		setArrayValue(Property.xLabels, labels.getArray());
@@ -112,7 +109,6 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	/**
 	 * Returns the labels for X axes
 	 * @return the labels for X axes
-	 * @see org.pepstock.charba.client.data.Labels
 	 */
 	public Labels getXLabels(){
 		ArrayMixedObject array = getArrayValue(Property.xLabels);
@@ -134,8 +130,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 
 	/**
 	 * Sets the labels for Y axes of the data
-	 * @param labels labels object to manage also multiline labels.
-	 * @see org.pepstock.charba.client.data.Labels
+	 * @param labels labels object to manage also multi-line labels.
 	 */
 	public void setYLabels(Labels labels){
 		setArrayValue(Property.yLabels, labels.getArray());
@@ -144,7 +139,6 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	/**
 	 * Returns the labels for Y axes
 	 * @return the labels for Y axes
-	 * @see org.pepstock.charba.client.data.Labels
 	 */
 	public Labels getYLabels(){
 		ArrayMixedObject array = getArrayValue(Property.yLabels);
@@ -154,12 +148,15 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	/**
 	 * Sets a set of datasets for chart
 	 * @param datasets set of dataset
-	 * @see org.pepstock.charba.client.data.Dataset
 	 */
 	public void setDatasets(Dataset... datasets){
+		// checks if arguments is consistent
 		if (datasets != null) {
+			// clear buffer
 			this.currentDatasets.clear();
+			// adds all datasets
 			this.currentDatasets.addAll(datasets);
+			// sets datasets to native object
 			setArrayValue(Property.datasets, this.currentDatasets.getArray());
 		}
 	}
@@ -167,7 +164,6 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	/**
 	 * Returns the list of datasets
 	 * @return the list of datasets
-	 * @see org.pepstock.charba.client.data.Dataset
 	 */
 	public List<Dataset> getDatasets(){
 		return this.currentDatasets;

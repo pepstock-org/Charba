@@ -35,6 +35,7 @@ import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
  * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
  * This class collects a set of common field for Line and Radar charts.
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 abstract class LiningDataset extends Dataset{
@@ -82,7 +83,7 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the fill color under the line.
-	 * @return the fill color under the line. Default is <code>rgba(0,0,0,0.1)</code>
+	 * @return the fill color under the line. 
 	 */
 	public String getBackgroundColorAsString() {
 		return getValue(Property.backgroundColor, DefaultOptions.get().getElements().getLine().getBackgroundColorAsString());
@@ -90,7 +91,7 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the fill color under the line.
-	 * @return the fill color under the line. Default is <code>rgba(0,0,0,0.1)</code>
+	 * @return the fill color under the line. 
 	 */
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
@@ -114,7 +115,7 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the color of the line.
-	 * @return the color of the line. Default is <code>rgba(0,0,0,0.1)</code>
+	 * @return the color of the line. 
 	 */
 	public String getBorderColorAsString() {
 		return getValue(Property.borderColor, DefaultOptions.get().getElements().getLine().getBorderColorAsString());
@@ -122,7 +123,7 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the color of the line.
-	 * @return the color of the line. Default is <code>rgba(0,0,0,0.1)</code>
+	 * @return the color of the line.
 	 */
 	public IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
@@ -137,7 +138,7 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the width of the line in pixels.
-	 * @return the width of the line in pixels. Default is <code>3</code>
+	 * @return the width of the line in pixels. 
 	 */
 	public int getBorderWidth() {
 		return getValue(Property.borderWidth, DefaultOptions.get().getElements().getLine().getBorderWidth());
@@ -170,7 +171,7 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the line dash pattern offset or "phase". 
-	 * @return the line dash pattern offset or "phase". Default is <code>0</code>
+	 * @return the line dash pattern offset or "phase". 
 	 */
 	public int getBorderDashOffset(){
 		  return getValue(Property.borderDashOffset, DefaultOptions.get().getElements().getLine().getBorderDashOffset());
@@ -179,7 +180,6 @@ abstract class LiningDataset extends Dataset{
 	/**
 	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square. 
 	 * @param borderCapStyle how the end points of every line are drawn.
-	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public void setBorderCapStyle(CapStyle borderCapStyle) {
 		setValue(Property.borderCapStyle, borderCapStyle);
@@ -188,7 +188,6 @@ abstract class LiningDataset extends Dataset{
 	/**
 	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square. By default this property is set to butt.
 	 * @return how the end points of every line are drawn.
-	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public CapStyle getBorderCapStyle(){
 		return getValue(Property.borderCapStyle, CapStyle.class, DefaultOptions.get().getElements().getLine().getBorderCapStyle());
@@ -197,8 +196,7 @@ abstract class LiningDataset extends Dataset{
 	/**
 	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
-	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
-	 * @see org.pepstock.charba.client.enums.JoinStyle
+	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter. 
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
 		setValue(Property.borderJoinStyle, borderJoinStyle);
@@ -207,8 +205,7 @@ abstract class LiningDataset extends Dataset{
 	/**
 	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
-	 * @return There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
-	 * @see org.pepstock.charba.client.enums.JoinStyle
+	 * @return There are three possible values for this property: round, bevel and miter. 
 	 */
 	public JoinStyle getBorderJoinStyle() {
 		return getValue(Property.borderJoinStyle, JoinStyle.class, DefaultOptions.get().getElements().getLine().getBorderJoinStyle());
@@ -217,7 +214,6 @@ abstract class LiningDataset extends Dataset{
 	/**
 	 * Sets how to fill the area under the line.
 	 * @param fill how to fill the area under the line.
-	 * @see org.pepstock.charba.client.enums.Fill
 	 */
 	public void setFill(Fill fill){
 		// checks if is no fill
@@ -233,7 +229,6 @@ abstract class LiningDataset extends Dataset{
 	/**
 	 * Returns how to fill the area under the line.
 	 * @return how to fill the area under the line.
-	 * @see org.pepstock.charba.client.enums.Fill
 	 */
 	public Fill getFill(){
 		// gets value type
@@ -483,7 +478,6 @@ abstract class LiningDataset extends Dataset{
 	/**
 	 * Sets the style of the point.
 	 * @param pointStyle array of the style of the point.
-	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public void setPointStyle(PointStyle... pointStyle) {
 		setValueOrArray(Property.pointStyle, pointStyle);
@@ -491,8 +485,7 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the style of the point.
-	 * @return list of the style of the point. Default is <code>PointStyle.circle</code>
-	 * @see org.pepstock.charba.client.enums.PointStyle
+	 * @return list of the style of the point. 
 	 */
 	public List<PointStyle> getPointStyle() {
 		ArrayString array = getValueOrArray(Property.pointStyle, DefaultOptions.get().getElements().getPoint().getPointStyle());

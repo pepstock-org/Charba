@@ -24,7 +24,7 @@ import org.pepstock.charba.client.colors.IsColor;
  * @version 2.0
  *
  */
-public final class RadialLinearTick extends Tick {
+public class RadialLinearTick extends Tick {
 
 	/**
 	 * Builds the object storing the axis which this tick belongs to.

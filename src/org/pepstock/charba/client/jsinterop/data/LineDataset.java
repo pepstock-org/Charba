@@ -31,7 +31,7 @@ import org.pepstock.charba.client.jsinterop.options.Scales;
  * All point* properties can be specified as an array. If these are set to an array value, the first value applies to the first point, the second value to the second point, and so on.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public class LineDataset extends LiningDataset{
 
@@ -54,32 +54,32 @@ public class LineDataset extends LiningDataset{
 	}
 	
 	/**
-	 * Sets the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
-	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
+	 * Sets the ID of the x axis to plot this dataset on. 
+	 * @param xAxisID the ID of the x axis to plot this dataset on. 
 	 */
 	public void setXAxisID(String xAxisID){
 		setValue(Property.xAxisID, xAxisID);
 	}
 
 	/**
-	 * Returns the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
-	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
+	 * Returns the ID of the x axis to plot this dataset on. 
+	 * @return the ID of the x axis to plot this dataset on. 
 	 */
 	public String getXAxisID(){
 		 return getValue(Property.xAxisID, Scales.DEFAULT_X_AXIS_ID);
 	}
 
 	/**
-	 * Sets the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
-	 * @param yAxisID the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
+	 * Sets the ID of the y axis to plot this dataset on. 
+	 * @param yAxisID the ID of the y axis to plot this dataset on. 
 	 */
 	public void setYAxisID(String yAxisID){
 		setValue(Property.yAxisID, yAxisID);
 	}
 
 	/**
-	 * Returns the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
-	 * @return the ID of the y axis to plot this dataset on. If not specified, this defaults to the ID of the first found y axis.
+	 * Returns the ID of the y axis to plot this dataset on.
+	 * @return the ID of the y axis to plot this dataset on.
 	 */
 	public String getYAxisID(){
 		return getValue(Property.yAxisID, Scales.DEFAULT_X_AXIS_ID);
@@ -147,7 +147,6 @@ public class LineDataset extends LiningDataset{
 	 * Sets If the line is shown as a stepped line.<br>
 	 * If the steppedLine value is set to anything other than false, lineTension will be ignored. 
 	 * @param line If the line is shown as a stepped line. 
-	 * @see org.pepstock.charba.client.enums.SteppedLine
 	 */
 	public void setSteppedLine(SteppedLine line){
 		// checks if no stepped line
@@ -163,12 +162,13 @@ public class LineDataset extends LiningDataset{
 	/**
 	 * Returns If the line is shown as a stepped line. 
 	 * @return If the line is shown as a stepped line. 
-	 * @see org.pepstock.charba.client.enums.SteppedLine
 	 */
 	public SteppedLine getSteppedLine(){
+		// checks if value of stepped line is a boolean
 		if (ObjectType.Boolean.equals(type(Property.steppedLine))) {
 			return SteppedLine.nosteppedline;
 		} else {
+			// otherwise returns the steppedline
 			return getValue(Property.steppedLine, SteppedLine.class, SteppedLine.nosteppedline);
 		}
 	}

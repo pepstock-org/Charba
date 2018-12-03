@@ -26,6 +26,7 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
  * Used for sparse datasets, such as those in scatter charts. Each data point is specified using an object containing x and y properties.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  * 
  */
 public final class DataPoint extends NativeObjectContainer{
@@ -47,12 +48,16 @@ public final class DataPoint extends NativeObjectContainer{
 		t
 	}
 	
+	/**
+	 * Creates the object with an empty native object.
+	 */
 	public DataPoint() {
 		super();
 	}
 	
 	/**
-	 * @param nativeObject
+	 * Creates the object with a native object passed as argument.
+	 * @param nativeObject native object which maps a data point
 	 */
 	DataPoint(NativeObject nativeObject) {
 		super(nativeObject);

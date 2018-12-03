@@ -27,12 +27,14 @@ import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
 
 /**
  * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
- * T
+ * The location of the bubble is determined by the first two dimensions and the corresponding horizontal and vertical axes.<br>
+ * The third dimension is represented by the size of the individual bubbles.
+ * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public final class BubbleDataset extends HovingDataset{
-	
+	// data point factory
 	private final DataPointListFactory factory = new DataPointListFactory();
 	
 	/**
@@ -49,7 +51,6 @@ public final class BubbleDataset extends HovingDataset{
 	/**
 	 * Sets the style of the point.
 	 * @param pointStyle array of the style of the point.
-	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public void setPointStyle(PointStyle... pointStyle) {
 		setValueOrArray(Property.pointStyle, pointStyle);
@@ -57,8 +58,7 @@ public final class BubbleDataset extends HovingDataset{
 
 	/**
 	 * Returns the style of the point.
-	 * @return list of the style of the point. Default is <code>PointStyle.circle</code>
-	 * @see org.pepstock.charba.client.enums.PointStyle
+	 * @return list of the style of the point.
 	 */
 	public List<PointStyle> getPointStyle() {
 		ArrayString array = getValueOrArray(Property.pointStyle, DefaultOptions.get().getElements().getPoint().getPointStyle());
@@ -119,7 +119,6 @@ public final class BubbleDataset extends HovingDataset{
 	/**
 	 * Sets the data property of a dataset for a chart is specified as an array of data points.
 	 * @param datapoints an array of data points
-	 * @see org.pepstock.charba.client.data.DataPoint
 	 */
 	public void setDataPoints(DataPoint... datapoints){
 		setArrayValue(Property.data, ArrayObject.of(datapoints));
@@ -128,7 +127,6 @@ public final class BubbleDataset extends HovingDataset{
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
 	 * @return a list of data points
-	 * @see org.pepstock.charba.client.data.DataPoint
 	 */
 	public List<DataPoint> getDataPoints(){
 		ArrayObject array = getArrayValue(Property.data);

@@ -23,7 +23,7 @@ import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
  * Extends the bar dataset setting <code>stack</code> property.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.data.BarDataset
+ * @version 2.0
  */
 public class StackedBarDataset extends BarDataset{
 

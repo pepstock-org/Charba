@@ -43,7 +43,7 @@ import jsinterop.annotations.JsFunction;
  * @version 2.0
  *
  */
-public final class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
+public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 
 	// empty string 
 	private static final String EMPTY = "";

@@ -28,7 +28,7 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayString;
  * This dataset is managing some common properties of Bar and Bubble datasets where every property can be set as a single value or an array.<br>
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.data.Dataset
+ * @version 2.0
  */
 abstract class HovingFlexDataset extends Dataset{
 	
@@ -44,10 +44,22 @@ abstract class HovingFlexDataset extends Dataset{
 		hoverBorderWidth
 	}
 	
+	/**
+	 * Returns default background color value based on type of chart.
+	 * @return default background color value based on type of chart.
+	 */
 	abstract String getDefaultBackgroundColorAsString();
 	
+	/**
+	 * Returns default border color value based on type of chart.
+	 * @return default border color value based on type of chart.
+	 */
 	abstract String getDefaultBorderColorAsString();
 	
+	/**
+	 * Returns default border width value based on type of chart.
+	 * @return default border width value based on type of chart.
+	 */
 	abstract int getDefaultBorderWidth();
 
 	/**
@@ -189,7 +201,6 @@ abstract class HovingFlexDataset extends Dataset{
 	public List<String> getHoverBorderColorAsString(){
 		ArrayString array = getValueOrArray(Property.hoverBorderColor, getDefaultBorderColorAsString());
 		return ArrayListHelper.list(array);
-
 	}
 
 	/**
