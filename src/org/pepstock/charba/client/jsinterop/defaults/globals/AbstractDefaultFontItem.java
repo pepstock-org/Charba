@@ -18,6 +18,12 @@ package org.pepstock.charba.client.jsinterop.defaults.globals;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
 
+/**
+ * CHART.JS default values for font items.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 abstract class AbstractDefaultFontItem implements IsDefaultFontItem{
 
 	/* (non-Javadoc)

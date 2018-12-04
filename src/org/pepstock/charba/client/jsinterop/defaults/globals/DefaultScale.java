@@ -27,12 +27,18 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime;
 
+/**
+ * CHART.JS default values for scale/axis element.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public final class DefaultScale implements IsDefaultScale{
 	
 	private static final boolean DEFAULT_DISPLAY = true;
-	// default offset
+
 	private static final boolean DEFAULT_OFFSET = false;
-	// default weight
+
 	private static final int DEFAULT_WEIGHT = 0;
 	
 	private static final double DEFAULT_BAR_PERCENTAGE = 0.9F;
@@ -43,7 +49,6 @@ public final class DefaultScale implements IsDefaultScale{
 
 	private static final int DEFAULT_MAX_BAR_THICKNESS = 0;
 
-	// default if is stacked
 	private static final boolean DEFAULT_STACKED = false;
 	
 	private final DefaultAngleLines angleLines = new DefaultAngleLines();

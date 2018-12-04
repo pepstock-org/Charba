@@ -21,6 +21,12 @@ import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TooltipPosition;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
 
+/**
+ * CHART.JS default values for TOOLTIPS element.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public final class DefaultTooltips implements IsDefaultTooltips{
 
 	private static final boolean DEFAULT_ENABLED = true;
@@ -96,7 +102,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getBackgroundColor()
+	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getBackgroundColorAsString()
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
@@ -136,7 +142,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getTitleFontColor()
+	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getTitleFontColorAsString()
 	 */
 	@Override
 	public String getTitleFontColorAsString() {
@@ -192,7 +198,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getBodyFontColor()
+	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getBodyFontColorAsString()
 	 */
 	@Override
 	public String getBodyFontColorAsString() {
@@ -240,7 +246,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getFooterFontColor()
+	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getFooterFontColorAsString()
 	 */
 	@Override
 	public String getFooterFontColorAsString() {
@@ -304,7 +310,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getMultiKeyBackground()
+	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getMultiKeyBackgroundAsString()
 	 */
 	@Override
 	public String getMultiKeyBackgroundAsString() {
@@ -320,7 +326,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getBorderColor()
+	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getBorderColorAsString()
 	 */
 	@Override
 	public String getBorderColorAsString() {

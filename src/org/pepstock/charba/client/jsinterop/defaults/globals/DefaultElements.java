@@ -21,8 +21,13 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultRectangle;
 
+/**
+ * CHART.JS default values for ELEMENTS element.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public final class DefaultElements implements IsDefaultElements{
-	
 	
 	private final DefaultArc arc = new DefaultArc();
 	

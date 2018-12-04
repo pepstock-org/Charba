@@ -17,12 +17,17 @@ package org.pepstock.charba.client.jsinterop.defaults.globals;
 
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines;
 
-public class DefaultAngleLines implements IsDefaultAngleLines {
+/**
+ * CHART.JS default values for ANGLELINES element.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
+public final class DefaultAngleLines implements IsDefaultAngleLines {
 	
 	private static final boolean DEFAULT_DISPLAY = true;
 
 	private static final int DEFAULT_LINE_WIDTH = 1;
-
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines#isDisplay()
@@ -33,7 +38,7 @@ public class DefaultAngleLines implements IsDefaultAngleLines {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines#getColor()
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines#getColorAsString()
 	 */
 	@Override
 	public String getColorAsString() {

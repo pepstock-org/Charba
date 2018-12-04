@@ -18,6 +18,12 @@ package org.pepstock.charba.client.jsinterop.defaults.globals;
 import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
 
+/**
+ * CHART.JS default values for ANIMATION element.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public final class DefaultAnimation implements IsDefaultAnimation{
 
 	private static final int DEFAULT_DURATION = 1000;

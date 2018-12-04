@@ -18,17 +18,22 @@ package org.pepstock.charba.client.jsinterop.defaults.globals;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultRectangle;
 
+/**
+ * CHART.JS default values for RECTANGLE element.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public final class DefaultRectangle extends DefaultArc implements IsDefaultRectangle{
 	
-	// default background color
 	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
-	// default border with
+
 	private static final int DEFAULT_BORDER_WIDTH = 0;
-	// default border color
+	
 	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0.1)";
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBackgroundColor()
+	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBackgroundColorAsString()
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
@@ -44,7 +49,7 @@ public final class DefaultRectangle extends DefaultArc implements IsDefaultRecta
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBorderColor()
+	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBorderColorAsString()
 	 */
 	@Override
 	public String getBorderColorAsString() {

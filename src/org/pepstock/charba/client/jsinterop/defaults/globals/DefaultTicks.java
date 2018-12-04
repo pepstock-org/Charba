@@ -19,6 +19,12 @@ import org.pepstock.charba.client.enums.TickSource;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks;
 
+/**
+ * CHART.JS default values for TICKS element.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTicks {
 	
 	private static final boolean DEFAULT_DISPLAY = true;
@@ -210,7 +216,7 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getBackdropColor()
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getBackdropColorAsString()
 	 */
 	@Override
 	public String getBackdropColorAsString() {

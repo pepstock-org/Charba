@@ -18,6 +18,12 @@ package org.pepstock.charba.client.jsinterop.defaults.globals;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel;
 
+/**
+ * CHART.JS default values for SCALELABEL element.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public final class DefaultScaleLabel extends AbstractDefaultFontItem implements IsDefaultScaleLabel {
 	
 	private static final boolean DEFAULT_DISPLAY = false;

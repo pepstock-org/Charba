@@ -20,6 +20,12 @@ import java.util.Date;
 import org.pepstock.charba.client.enums.TimeUnit;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime;
 
+/**
+ * CHART.JS default values for TIME element.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public class DefaultTime implements IsDefaultTime {
 	
 	private static final boolean DEFAULT_ISO_WEEKDAY = true;

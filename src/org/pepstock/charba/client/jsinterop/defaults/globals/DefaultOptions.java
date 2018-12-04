@@ -27,11 +27,18 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.jsinterop.utils.Window;
 
+
+/**
+ * CHART.JS default values for OPTIONS element. THIS IS THE ROOT OF ALL ELEMENTS DEFAULTS.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public final class DefaultOptions implements IsDefaultOptions{
-	
+
+	// singleton instance
 	private static final DefaultOptions INSTANCE = new DefaultOptions();
 	
-	// default values
 	private static final boolean DEFAULT_RESPONSIVE = true;
 
 	private static final int DEFAULT_RESPONSIVE_ANIMATION_DURATION = 0;
@@ -75,11 +82,16 @@ public final class DefaultOptions implements IsDefaultOptions{
 	private final DefaultScale scale = new DefaultScale();
 
 	/**
-	 * 
+	 * Creates the object. Protected to avoid any instantiation
 	 */
 	protected DefaultOptions() {
+		// do nothing
 	}
 	
+	/**
+	 * Singleton method to return the instance
+	 * @return default option instance
+	 */
 	public static final DefaultOptions get() {
 		return INSTANCE;
 	}
@@ -182,7 +194,7 @@ public final class DefaultOptions implements IsDefaultOptions{
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.DefaultOptions#getDefaultColor()
+	 * @see org.pepstock.charba.client.jsinterop.options.DefaultOptions#getDefaultColorAsString()
 	 */
 	@Override
 	public String getDefaultColorAsString() {
@@ -190,7 +202,7 @@ public final class DefaultOptions implements IsDefaultOptions{
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.options.DefaultOptions#getDefaultFontColor()
+	 * @see org.pepstock.charba.client.jsinterop.options.DefaultOptions#getDefaultFontColorAsString()
 	 */
 	@Override
 	public String getDefaultFontColorAsString() {

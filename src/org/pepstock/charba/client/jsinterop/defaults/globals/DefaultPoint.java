@@ -18,25 +18,30 @@ package org.pepstock.charba.client.jsinterop.defaults.globals;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint;
 
+/**
+ * CHART.JS default values for POINT element.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public final class DefaultPoint extends DefaultArc implements IsDefaultPoint{
 	
-	/// default radius
 	private static final double DEFAULT_RADIUS = 3;
-	// default background color
+
 	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
-	// default border with
+	
 	private static final int DEFAULT_BORDER_WIDTH = 1;
-	// default border color
+	
 	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0.1)";
-	// default hit radius
+	
 	private static final double DEFAULT_HIT_RADIUS = 1;
-	// default hover radius
+	
 	private static final double DEFAULT_HOVER_RADIUS = 4;
-	// default hover border width
+	
 	private static final int DEFAULT_HOVER_BORDER_WIDTH = 1;
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBackgroundColor()
+	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBackgroundColorAsString()
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
@@ -52,7 +57,7 @@ public final class DefaultPoint extends DefaultArc implements IsDefaultPoint{
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBorderColor()
+	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBorderColorAsString()
 	 */
 	@Override
 	public String getBorderColorAsString() {

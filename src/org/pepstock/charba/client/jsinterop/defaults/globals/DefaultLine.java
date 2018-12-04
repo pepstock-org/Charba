@@ -20,6 +20,12 @@ import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine;
 
+/**
+ * CHART.JS default values for LINE element.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public final class DefaultLine extends DefaultArc implements IsDefaultLine{
 	
 	// default line tension
@@ -38,7 +44,7 @@ public final class DefaultLine extends DefaultArc implements IsDefaultLine{
 	private static final boolean DEFAULT_STEPPED = false;
 	
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBackgroundColor()
+	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBackgroundColorAsString()
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
@@ -54,7 +60,7 @@ public final class DefaultLine extends DefaultArc implements IsDefaultLine{
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBorderColor()
+	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBorderColorAsString()
 	 */
 	@Override
 	public String getBorderColorAsString() {

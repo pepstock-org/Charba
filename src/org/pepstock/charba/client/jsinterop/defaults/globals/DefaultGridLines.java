@@ -17,6 +17,12 @@ package org.pepstock.charba.client.jsinterop.defaults.globals;
 
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines;
 
+/**
+ * CHART.JS default values for GRIDLINES element.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public final class DefaultGridLines implements IsDefaultGridLines{
 	
 	private static final boolean DEFAULT_DISPLAY = true;
@@ -52,7 +58,7 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getColor()
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getColorAsString()
 	 */
 	@Override
 	public String getColorAsString() {
@@ -116,7 +122,7 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getZeroLineColor()
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getZeroLineColorAsString()
 	 */
 	@Override
 	public String getZeroLineColorAsString() {

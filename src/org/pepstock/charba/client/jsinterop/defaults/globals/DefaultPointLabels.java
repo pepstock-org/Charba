@@ -17,6 +17,12 @@ package org.pepstock.charba.client.jsinterop.defaults.globals;
 
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPointLabels;
 
+/**
+ * CHART.JS default values for POINTLABELS element.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public final class DefaultPointLabels extends AbstractDefaultFontItem implements IsDefaultPointLabels {
 	
 	private static final boolean DEFAULT_DISPLAY = true;
@@ -27,7 +33,5 @@ public final class DefaultPointLabels extends AbstractDefaultFontItem implements
 	@Override
 	public boolean isDisplay() {
 		return DEFAULT_DISPLAY;
-	}
-
-	
+	}	
 }
