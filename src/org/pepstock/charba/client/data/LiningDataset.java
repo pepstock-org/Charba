@@ -69,6 +69,8 @@ abstract class LiningDataset extends Dataset{
 	private boolean isPointRadiusArray = false;
 	
 	private boolean isPointStyleArray = false;
+	
+	private boolean isPointRotationArray = false;
 
 	/**
 	 * Name of fields of JavaScript object. 
@@ -92,7 +94,8 @@ abstract class LiningDataset extends Dataset{
 		pointHoverBackgroundColor,
 		pointHoverBorderColor,
 		pointHoverBorderWidth,
-		pointHoverRadius
+		pointHoverRadius,
+		pointRotation
 	}
 
 	/**
@@ -622,5 +625,30 @@ abstract class LiningDataset extends Dataset{
 			return ArrayListHelper.build(PointStyle.class, sValues);
 		}
 	}
+	
+	/**
+	 * Sets the rotation of the point in degrees.
+	 * @param pointRotation array of the rotation of the point in degrees.
+	 */
+	public void setPointRotation(double...  pointRotation) {
+		setPointRotation(ArrayListHelper.build(pointRotation));
+	}
+
+	/**
+	 * Sets the rotation of the point in degrees.
+	 * @param pointRotation the rotation of the point in degrees.
+	 */
+	private void setPointRotation(JsDoubleArrayList pointRotation) {
+	    isPointRotationArray= checkAndSetDoubleValues(Property.pointRotation, pointRotation);
+	}
+
+	/**
+	 * Returns the rotation of the point in degrees.
+	 * @return list of the rotation of the point in degrees.
+	 */
+	public List<Double> getPointRotation() {
+	    return checkAndGetDoubleValues(Property.pointRotation, isPointRotationArray);
+	}
+
 
 }

@@ -24,7 +24,7 @@ import org.pepstock.charba.client.options.PolarAreaOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PolarAreaChart extends AbstractChart<PolarAreaOptions, PolarAreaDataset> {
+public class PolarAreaChart extends AbstractChart<PolarAreaOptions, PolarAreaDataset> {
 
 	private final PolarAreaOptions options;
 

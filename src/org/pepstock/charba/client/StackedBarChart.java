@@ -24,7 +24,7 @@ import org.pepstock.charba.client.options.StackedOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class StackedBarChart extends AbstractChart<StackedOptions, StackedBarDataset> {
+public class StackedBarChart extends AbstractChart<StackedOptions, StackedBarDataset> {
 
 	private final StackedOptions options;
 

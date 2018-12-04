@@ -51,6 +51,8 @@ public class Options extends AbstractItem {
 	private static final int DEFAULT_RESPONSIVE_ANIMATION_DURATION = 0;
 
 	private static final boolean DEFAULT_MAINTAIN_ASPECT_RATIO = true;
+	
+	private static final double DEFAULT_ASPECT_RATIO = 2D;
 
 	private static final String DEFAULT_COLOR = "rgba(0,0,0,0.1)";
 
@@ -99,6 +101,7 @@ public class Options extends AbstractItem {
 		responsive,
 		responsiveAnimationDuration,
 		maintainAspectRatio,
+		aspectRatio,
 		events,
 		defaultColor,
 		defaultFontColor,
@@ -300,6 +303,26 @@ public class Options extends AbstractItem {
 	 */
 	public boolean isMaintainAspectRatio() {
 		return getValue(Property.maintainAspectRatio, DEFAULT_MAINTAIN_ASPECT_RATIO);
+	}
+	
+	/**
+	 * Canvas aspect ratio (i.e. width / height, a value of 1 representing a square canvas).<br>
+	 * Note that this option is ignored if the height is explicitly defined either as attribute or via the style.
+	 * 
+	 * @param ratio the aspect ratio.
+	 */
+	public void setAspectRatio(double ratio) {
+		setValue(Property.aspectRatio, ratio);
+	}
+
+	/**
+	 * Canvas aspect ratio (i.e. width / height, a value of 1 representing a square canvas).<br>
+	 * Note that this option is ignored if the height is explicitly defined either as attribute or via the style.
+	 * Returns  the aspect ratio.
+	 * @return  the aspect ratio. Default is 2.
+	 */
+	public double getAspectRatio() {
+		return getValue(Property.aspectRatio, DEFAULT_ASPECT_RATIO);
 	}
 	
 	/**

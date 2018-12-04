@@ -68,6 +68,8 @@ public final class Ticks extends FontItem {
 	private static final int DEFAULT_BACKDROP_PADDING_Y = 2;
 
 	private static final boolean DEFAULT_SHOW_LABEL_BACKDROP = true;
+	
+	private static final int DEFAULT_PRECISION = 0;
 
 	private final FontItem minor;
 
@@ -99,7 +101,8 @@ public final class Ticks extends FontItem {
 		backdropColor,
 		backdropPaddingX,
 		backdropPaddingY,
-		showLabelBackdrop
+		showLabelBackdrop,
+		precision		
 	}
 
 	/**
@@ -572,6 +575,25 @@ public final class Ticks extends FontItem {
 	public boolean isShowLabelBackdrop() {
 		return getValue(Property.showLabelBackdrop, DEFAULT_SHOW_LABEL_BACKDROP);
 	}
+	
+	/**
+	 * if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
+	 * 
+	 * @param precision if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
+	 */
+	public void setPrecision(int precision) {
+		setValue(Property.precision, precision);
+	}
+
+	/**
+	 * if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
+	 * 
+	 * @return if defined and stepSize is not specified, the step size will be rounded to this many decimal places. Default is 0.
+	 */
+	public int getPrecision() {
+		return getValue(Property.precision, DEFAULT_PRECISION);
+	}
+
 
 	/**
 	 * Internal class to extend the configuration item enabling the protected methods.

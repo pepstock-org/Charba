@@ -24,7 +24,7 @@ import org.pepstock.charba.client.options.PieOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PieChart extends AbstractChart<PieOptions, PieDataset> {
+public class PieChart extends AbstractChart<PieOptions, PieDataset> {
 
 	private final PieOptions options;
 

@@ -23,7 +23,7 @@ import org.pepstock.charba.client.AbstractChart;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LineOptions extends AbstractLineOptions {
+public class LineOptions extends AbstractLineOptions {
 
 	/**
 	 * Builds the object storing the chart instance.

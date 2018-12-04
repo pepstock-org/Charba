@@ -38,7 +38,4 @@ public interface Resources extends ClientBundle {
 	@Source("js/chart.bundle.min.js")
 	TextResource chartJsSource();
 	
-	@Source("js/charba.helper.js")
-	TextResource charbaHelper();
-
 }

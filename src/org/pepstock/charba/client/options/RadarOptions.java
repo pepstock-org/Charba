@@ -23,7 +23,7 @@ import org.pepstock.charba.client.AbstractChart;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class RadarOptions extends SingleScaleOptions {
+public class RadarOptions extends SingleScaleOptions {
 
 	/**
 	 * Builds the object storing the chart instance.

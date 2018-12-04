@@ -47,7 +47,7 @@ public final class Line extends AbstractElement {
 		fill,
 		stepped
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance.
 	 * 

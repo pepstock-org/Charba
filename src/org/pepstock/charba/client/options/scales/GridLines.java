@@ -46,6 +46,7 @@ public class GridLines extends ChartContainer {
 	private enum Property implements Key
 	{
 		display,
+		circular,
 		color,
 		borderDash,
 		borderDashOffset,
@@ -88,6 +89,24 @@ public class GridLines extends ChartContainer {
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, axis.getScale().getGrideLines().isDisplay());
+	}
+	
+	/**
+	 * If true, gridlines are circular (on radar chart only).
+	 * 
+	 * @param circular If true, gridlines are circular (on radar chart only).
+	 */
+	public void setCircular(boolean circular) {
+		setValue(Property.circular, circular);
+	}
+
+	/**
+	 * If true, gridlines are circular (on radar chart only).
+	 * 
+	 * @return If true, gridlines are circular (on radar chart only).
+	 */
+	public boolean isCircular() {
+		return getValue(Property.circular, axis.getScale().getGrideLines().isCircular());
 	}
 
 	/**

@@ -45,6 +45,8 @@ public final class Point extends Arc {
 	private static final int DEFAULT_HOVER_RADIUS = 4;
 	// default hover border width
 	private static final int DEFAULT_HOVER_BORDER_WIDTH = 1;
+	/// default rotation
+	private static final double DEFAULT_ROTATION = 0D;
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -55,7 +57,8 @@ public final class Point extends Arc {
 		pointStyle,
 		hitRadius,
 		hoverRadius,
-		hoverBorderWidth
+		hoverBorderWidth,
+		rotation
 	}
 
 	/**
@@ -198,6 +201,24 @@ public final class Point extends Arc {
 	 */
 	public int getHoverBorderWidth() {
 		return getValue(Property.hoverBorderWidth, DEFAULT_HOVER_BORDER_WIDTH);
+	}
+	
+	/**
+	 * Sets the point rotation (in degrees).
+	 * 
+	 * @param rotation the point rotation (in degrees).
+	 */
+	public void setRotation(double rotation) {
+		setValue(Property.rotation, rotation);
+	}
+
+	/**
+	 * Returns the point rotation (in degrees).
+	 * 
+	 * @return the point rotation (in degrees).
+	 */
+	public double getRotation() {
+		return getValue(Property.rotation, DEFAULT_ROTATION);
 	}
 
 }
