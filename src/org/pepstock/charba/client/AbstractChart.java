@@ -453,7 +453,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	/**
 	 * Returns the amount of datasets which are visible
 	 * 
-	 * @return the amount of datasets which are visible. If chart is not initialized, return {@link org.pepstock.charba.client.items.UndefinedValues.INTEGER}.
+	 * @return the amount of datasets which are visible. If chart is not initialized, return {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 * FIXME to add to JSINTEROP impl
 	 */
 	public int getVisibleDatasetCount() {

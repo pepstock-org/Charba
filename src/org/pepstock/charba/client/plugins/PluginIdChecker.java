@@ -88,6 +88,7 @@ public final class PluginIdChecker {
 	 * </ul>
 	 * 
 	 * @param id plugin id to be checked.
+	 * @return the plugin id as {@link org.pepstock.charba.client.commons.Key} 
 	 * @throws InvalidPluginIdException if the plugin is not compliant
 	 */
 	public static Key key(String id) throws InvalidPluginIdException {
