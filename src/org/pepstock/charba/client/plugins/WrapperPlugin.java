@@ -589,8 +589,6 @@ abstract class WrapperPlugin extends JavaScriptObjectContainer {
 
 	// event
 	config.beforeEvent = function(chart, event, option) {
-		//console.log("--- event ---");
-		//console.log(event);
 		// uses the syntax ["native"] because . syntaz is not accepted
 		return self.@org.pepstock.charba.client.plugins.WrapperPlugin::onBeforeEvent(Ljava/lang/String;Lorg/pepstock/charba/client/events/ChartNativeEvent;)(chart.options.charbaId, event["native"]);
 	}
