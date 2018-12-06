@@ -20,14 +20,15 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.jsinterop.configuration.BarOptions;
 import org.pepstock.charba.client.jsinterop.data.BarDataset;
 
-
 /**
- * BAR chart implementation.
+ * BAR chart implementation.<br>
+ * A bar chart provides a way of showing data values represented as vertical bars.<br>
+ * It is sometimes used to show trend data, and the comparison of multiple data sets side by side.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
-public class BarChart extends AbstractChart<BarOptions, BarDataset>{
+public class BarChart extends AbstractChart<BarOptions, BarDataset> {
 
 	private final BarOptions options;
 
@@ -36,13 +37,14 @@ public class BarChart extends AbstractChart<BarOptions, BarDataset>{
 	 */
 	public BarChart() {
 		// creates the options
+		// FIXME change into getChartOptions()
 		options = new BarOptions(this, Defaults.get().options(getType()));
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getType()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -52,7 +54,7 @@ public class BarChart extends AbstractChart<BarOptions, BarDataset>{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getOptions()
 	 */
 	@Override
 	public BarOptions getOptions() {
@@ -62,7 +64,7 @@ public class BarChart extends AbstractChart<BarOptions, BarDataset>{
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#newDataset()
 	 */
 	@Override
 	public BarDataset newDataset() {

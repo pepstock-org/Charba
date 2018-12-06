@@ -25,7 +25,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * It has been created mapping the native event provided by CHART.JS interfaces.
  * 
  * @author Andrea "Stock" Stocchero
- * @see com.google.gwt.dom.client.NativeEvent
+ * @version 2.0
  */
 public class ChartNativeEvent extends NativeEvent {
 	

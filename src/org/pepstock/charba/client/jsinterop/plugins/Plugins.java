@@ -29,9 +29,10 @@ import org.pepstock.charba.client.jsinterop.Plugin;
  * configuration.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public final class Plugins implements ConfigurationElement{
+public final class Plugins implements ConfigurationElement {
 	// chart instance
 	private final AbstractChart<?, ?> chart;
 	// list of added plugins
@@ -82,17 +83,22 @@ public final class Plugins implements ConfigurationElement{
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.ConfigurationElement#load(org.pepstock.charba.client.jsinterop.Configuration)
 	 */
 	@Override
 	public void load(Configuration configuration) {
+		// checks if there is any plugin to configured to chart.js
 		if (!plugins.isEmpty()) {
+			// new array
 			ArrayPlugin array = new ArrayPlugin();
 			// adds all java script object of the plugin wrapper
 			for (InlinePlugin plugin : plugins) {
 				array.push(plugin.getNativeObject());
 			}
+			// sets it to configuration object
 			configuration.setPlugins(array);
 		}
 	}

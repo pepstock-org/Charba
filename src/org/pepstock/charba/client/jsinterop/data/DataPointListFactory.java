@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.data;
 
-import org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
 
 /**
  * Factory to create a datapoint from a native object, used for arra container lists.
@@ -24,7 +24,7 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  * @version 2.0
  */
-class DataPointListFactory implements Factory<DataPoint> {
+class DataPointListFactory implements NativeObjectContainerFactory<DataPoint> {
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)

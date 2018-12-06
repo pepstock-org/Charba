@@ -18,18 +18,28 @@ package org.pepstock.charba.client.jsinterop.defaults.chart;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines;
 import org.pepstock.charba.client.jsinterop.options.AngleLines;
 
-public final class DefaultChartAngleLines implements IsDefaultAngleLines{
-	
+/**
+ * Defaults for angle lines option element, based on chart type.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
+public final class DefaultChartAngleLines implements IsDefaultAngleLines {
+
 	private final AngleLines angleLines;
 
 	/**
-	 * @param ang
+	 * Creates the object by angle lines option element instance.
+	 * 
+	 * @param angleLines option element instance.
 	 */
 	DefaultChartAngleLines(AngleLines angleLines) {
 		this.angleLines = angleLines;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines#isDisplay()
 	 */
 	@Override
@@ -37,15 +47,19 @@ public final class DefaultChartAngleLines implements IsDefaultAngleLines{
 		return angleLines.isDisplay();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines#getColor()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines#getColorAsString()
 	 */
 	@Override
 	public String getColorAsString() {
 		return angleLines.getColorAsString();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines#getLineWidth()
 	 */
 	@Override

@@ -18,15 +18,18 @@ package org.pepstock.charba.client.jsinterop.items;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**
- * It is applied to all sides of the chart (left, top, right, bottom).
+ * It is applied to all sides of the chart (left, top, right, bottom).<br>
+ * This is a wrapper of the CHART.JS item
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public class MarginsItem extends BaseBoxItem {
 
 	/**
-	 * @param nativeObject
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
 	MarginsItem(NativeObject nativeObject) {
 		super(nativeObject);

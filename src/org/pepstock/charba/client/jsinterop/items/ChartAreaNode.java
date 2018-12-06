@@ -18,14 +18,18 @@ package org.pepstock.charba.client.jsinterop.items;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**
- * Object which maps the chart area item of CHART.JS chart java script object.
+ * Object which maps the chart area item of CHART.JS chart java script object.<br>
+ * This is a wrapper of the CHART.JS item with all needed info.
+ * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.AbstractChart
+ * @version 2.0
  */
 public final class ChartAreaNode extends BaseBoxItem {
 
 	/**
-	 * @param nativeObject
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
 	public ChartAreaNode(NativeObject nativeObject) {
 		super(nativeObject);

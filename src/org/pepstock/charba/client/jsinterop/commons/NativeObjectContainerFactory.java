@@ -13,41 +13,21 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.jsinterop.items;
+package org.pepstock.charba.client.jsinterop.commons;
 
 /**
- * Class with default values when the java script object returns an UNDEFINED value.
- * 
+ * Interface to be implemented to load elements from an array of native object
+ *  
  * @author Andrea "Stock" Stocchero
  * @version 2.0
- *
  */
-public final class UndefinedValues {
-
-	/**
-	 * Default value for INTEGER instances
-	 */
-	public static final int INTEGER = Integer.MIN_VALUE;
-
-	/**
-	 * Default value for DOUBLE instances
-	 */
-	public static final double DOUBLE = Double.NaN;
+public interface NativeObjectContainerFactory <T extends NativeObjectContainer> {
 	
 	/**
-	 * Default value for STRING instances
+	 * Creates a native object container instance by a native object
+	 * @param nativeObject native object
+	 * @return native object container element instance
 	 */
-	public static final String STRING = null;
-
-	/**
-	 * Default value for BOOLEAN instances
-	 */
-	public static final boolean BOOLEAN = Boolean.FALSE;
-
-	/**
-	 * To avoid any instantiation
-	 */
-	private UndefinedValues() {
-		// do nothing
-	}
- }
+	T create(final NativeObject nativeObject);
+	
+}

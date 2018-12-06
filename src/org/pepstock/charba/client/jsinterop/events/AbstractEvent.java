@@ -26,6 +26,7 @@ import com.google.gwt.event.shared.GwtEvent;
  * This event contains the chart instance as source.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  * @param <H> GWT event object
  */

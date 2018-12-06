@@ -24,18 +24,20 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**
- * Wraps the scale item of CHART JS chart.
+ * Wraps the scale item of CHART JS chart.<br>
+ * This is a wrapper of scale of Chart (of CHART.JS).
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  */
 public class ScaleItem extends BaseBoxNodeItem {
 	
 	private final ScaleLongestTextCacheItem longestTextCache;
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
-	protected enum Property implements Key
+	enum Property implements Key
 	{
 		id,
 		hidden,
@@ -56,11 +58,11 @@ public class ScaleItem extends BaseBoxNodeItem {
 		drawingArea,
 		pointLabels
 	}
-	
-	//-----------------------------------------------//
 
 	/**
-	 * @param nativeObject
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
 	public ScaleItem(NativeObject nativeObject) {
 		super(nativeObject);
@@ -80,7 +82,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the id of scale
 	 * 
-	 * @return the id of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return the id of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#STRING}.
 	 */
 	public final String getId() {
 		return getValue(Property.id, UndefinedValues.STRING);
@@ -89,7 +91,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns true if this item represents a hidden scale.
 	 * 
-	 * @return <code>true</code> if this item represents a hidden scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 * @return <code>true</code> if this item represents a hidden scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#BOOLEAN}.
 	 */
 	public final boolean isHidden() {
 		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
@@ -98,7 +100,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the max index of scale.
 	 * 
-	 * @return the max index of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the max index of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getMaxIndex() {
 		return getValue(Property.maxIndex, UndefinedValues.INTEGER);
@@ -107,7 +109,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the min index of scale.
 	 * 
-	 * @return the min index of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the min index of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getMinIndex() {
 		return getValue(Property.minIndex, UndefinedValues.INTEGER);
@@ -116,7 +118,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the max value of scale. 
 	 * 
-	 * @return the max value of scale.
+	 * @return the max value of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getMax() {
 		return getValue(Property.max, UndefinedValues.INTEGER);
@@ -125,7 +127,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the min value of scale.
 	 * 
-	 * @return the min value of scale.
+	 * @return the min value of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getMin() {
 		return getValue(Property.min, UndefinedValues.INTEGER);
@@ -134,7 +136,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the max value of scale. 
 	 * 
-	 * @return the max value of scale.
+	 * @return the max value of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#STRING}.
 	 */
 	public final String getMaxAsString() {
 		return getValue(Property.max, UndefinedValues.STRING);
@@ -143,7 +145,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the min value of scale. 
 	 * 
-	 * @return the min value of scale.
+	 * @return the min value of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#STRING}.
 	 */
 	public final String getMinAsString() {
 		return getValue(Property.min, UndefinedValues.STRING);
@@ -155,14 +157,16 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the list of ticks.
 	 */
 	public final List<String> getTicks() {
+		// gets array from native object
 		ArrayString array = getArrayValue(Property.ticks);
+		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	/**
 	 * Returns the label rotation ratio.
 	 * 
-	 * @return the label rotation ratio. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the label rotation ratio. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#DOUBLE}.
 	 */
 	public final double getLabelRotation() {
 		return getValue(Property.labelRotation, UndefinedValues.DOUBLE);
@@ -171,7 +175,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the longest width of label of ticks.
 	 * 
-	 * @return the longest width of label of ticks.Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the longest width of label of ticks.Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getLongestLabelWidth() {
 		return getValue(Property.longestLabelWidth, UndefinedValues.INTEGER);
@@ -180,7 +184,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the start value of scale.
 	 * 
-	 * @return the start value of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the start value of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#DOUBLE}.
 	 */
 	public final double getStart() {
 		return getValue(Property.start, UndefinedValues.DOUBLE);
@@ -189,7 +193,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the end value of scale.
 	 * 
-	 * @return the end value of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the end value of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#DOUBLE}.
 	 */
 	public final double getEnd() {
 		return getValue(Property.end, UndefinedValues.DOUBLE);
@@ -208,7 +212,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the zero line index of scale.
 	 * 
-	 * @return the zero line index of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the zero line index of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getZeroLineIndex() {
 		return getValue(Property.zeroLineIndex, UndefinedValues.INTEGER);
@@ -217,7 +221,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the X center of scale.
 	 * 
-	 * @return the X center of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the X center of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getXCenter() {
 		return getValue(Property.xCenter, UndefinedValues.INTEGER);
@@ -226,7 +230,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the Y center of scale.
 	 * 
-	 * @return the Y center of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the Y center of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getYCenter() {
 		return getValue(Property.yCenter, UndefinedValues.INTEGER);
@@ -235,7 +239,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the drawing area dimension of scale.
 	 * 
-	 * @return the drawing area dimension of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the drawing area dimension of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getDrawingArea() {
 		return getValue(Property.drawingArea, UndefinedValues.INTEGER);
@@ -247,7 +251,9 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the list of point labels of scale.
 	 */
 	public final List<String> getPointLabels() {
+		// gets array from native object
 		ArrayString array = getArrayValue(Property.pointLabels);
+		// returns the list
 		return ArrayListHelper.unmodifiableList(array);
 	}
 }

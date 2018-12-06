@@ -50,7 +50,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> imp
 	 * @param array java script array instance. If <code>null</code>, new empty array has been created
 	 * @param factory factory instance to create the object from a native one.
 	 */
-	ArrayObjectContainerList(ArrayObject array, Factory<E> factory) {
+	ArrayObjectContainerList(ArrayObject array, NativeObjectContainerFactory<E> factory) {
 		// if null, creates a new array
 		if (array == null){
 			this.array = new ArrayObject();
@@ -407,21 +407,6 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> imp
 	private boolean checkRange(int index){
 		return index >= 0 && index < array.length();
 	}
-	
-	/**
-	 * Interface to be implemented to load elements from an array of native object
-	 *  
-	 * @author Andrea "Stock" Stocchero
-	 * 
-	 */
-	public interface Factory<E extends NativeObjectContainer> {
-		
-		/**
-		 * Creates an element to store into list by a native object
-		 * @param nativeObject native object, element of an array
-		 * @return element instance
-		 */
-		E create(NativeObject nativeObject);
-		
-	}
+
+
 }

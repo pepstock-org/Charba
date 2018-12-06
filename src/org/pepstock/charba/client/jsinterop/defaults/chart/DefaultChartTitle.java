@@ -20,26 +20,38 @@ import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.jsinterop.options.Title;
 
-public final class DefaultChartTitle implements IsDefaultTitle{
-	
+/**
+ * Defaults for title option element, based on chart type.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
+public final class DefaultChartTitle implements IsDefaultTitle {
+
 	private final Title title;
 
 	/**
-	 * @param title
+	 * Creates the object by title option element instance.
+	 * 
+	 * @param title title option element instance.
 	 */
 	DefaultChartTitle(Title title) {
 		this.title = title;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontColor()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontColorAsString()
 	 */
 	@Override
 	public String getFontColorAsString() {
 		return title.getFontColorAsString();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontSize()
 	 */
 	@Override
@@ -47,7 +59,9 @@ public final class DefaultChartTitle implements IsDefaultTitle{
 		return title.getFontSize();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontStyle()
 	 */
 	@Override
@@ -55,7 +69,9 @@ public final class DefaultChartTitle implements IsDefaultTitle{
 		return title.getFontStyle();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontFamily()
 	 */
 	@Override
@@ -63,7 +79,9 @@ public final class DefaultChartTitle implements IsDefaultTitle{
 		return title.getFontFamily();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle#isDisplay()
 	 */
 	@Override
@@ -71,7 +89,9 @@ public final class DefaultChartTitle implements IsDefaultTitle{
 		return title.isDisplay();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle#getPosition()
 	 */
 	@Override
@@ -79,7 +99,9 @@ public final class DefaultChartTitle implements IsDefaultTitle{
 		return title.getPosition();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle#getPadding()
 	 */
 	@Override
@@ -87,7 +109,9 @@ public final class DefaultChartTitle implements IsDefaultTitle{
 		return title.getPadding();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle#isFullWidth()
 	 */
 	@Override
@@ -95,12 +119,14 @@ public final class DefaultChartTitle implements IsDefaultTitle{
 		return title.isFullWidth();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle#getLineHeight()
 	 */
 	@Override
 	public double getLineHeight() {
 		return title.getLineHeight();
 	}
-	
+
 }

@@ -26,10 +26,11 @@ import com.google.gwt.safehtml.shared.UriUtils;
  * This utility checks if the plug ID is acceptable or not.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public final class PluginIdChecker {
 
+	// static messages to apply to the exception when the plugin ID is not correct.
 	private static final String INVALID_PLUGIN__ID_NULL = "Plugin id can not be null ";
 
 	private static final String INVALID_PLUGIN__ID_FIRST_CHAR = "Plugin id can not start with a dot or an underscore ";
@@ -59,7 +60,7 @@ public final class PluginIdChecker {
 	 * </ul>
 	 * 
 	 * @param id plugin id to be checked.
-	 * @throws InvalidPluginIdException if the plugin is not compliant
+	 * @throws InvalidPluginIdException if the plugin id is not compliant
 	 */
 	public static void check(String id) throws InvalidPluginIdException {
 		// checks if is null
@@ -78,17 +79,10 @@ public final class PluginIdChecker {
 	}
 	
 	/**
-	 * Checks if the plugin is compliant with the constraints of plugin id.<br>
-	 * A plugin id <br>
-	 * <ul>
-	 * <li>can not start with a dot or an underscore
-	 * <li>can not contain any non-URL-safe characters
-	 * <li>cannot contain uppercase letters
-	 * <li>should be something short, but also reasonably descriptive
-	 * </ul>
-	 * 
-	 * @param id plugin id to be checked.
-	 * @throws InvalidPluginIdException if the plugin is not compliant
+	 * Creates a key by the plugin id as string
+	 * @param id the plugin id as string
+	 * @return a key by the plugin id as string
+	 * @throws InvalidPluginIdException if the plugin id is not compliant
 	 */
 	public static Key key(String id) throws InvalidPluginIdException {
 		// checks

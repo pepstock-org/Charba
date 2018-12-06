@@ -22,27 +22,37 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultRectangle;
 import org.pepstock.charba.client.jsinterop.options.Elements;
 
-public final class DefaultChartElements implements IsDefaultElements{
+/**
+ * Defaults for elements option element, based on chart type.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
+public final class DefaultChartElements implements IsDefaultElements {
 
 	private final DefaultChartArc arc;
-	
+
 	private final DefaultChartLine line;
-	
+
 	private final DefaultChartPoint point;
-	
+
 	private final DefaultChartRectangle rectangle;
-	
+
 	/**
-	 * @param chartOptions
+	 * Creates the object by elements option element instance.
+	 * 
+	 * @param elements elements option element instance.
 	 */
-	public DefaultChartElements(Elements elements) {
+	DefaultChartElements(Elements elements) {
 		arc = new DefaultChartArc(elements.getArc());
 		line = new DefaultChartLine(elements.getLine());
 		point = new DefaultChartPoint(elements.getPoint());
 		rectangle = new DefaultChartRectangle(elements.getRectangle());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultElements#getArc()
 	 */
 	@Override
@@ -50,7 +60,9 @@ public final class DefaultChartElements implements IsDefaultElements{
 		return arc;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultElements#getLine()
 	 */
 	@Override
@@ -58,7 +70,9 @@ public final class DefaultChartElements implements IsDefaultElements{
 		return line;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultElements#getPoint()
 	 */
 	@Override
@@ -66,7 +80,9 @@ public final class DefaultChartElements implements IsDefaultElements{
 		return point;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultElements#getRectangle()
 	 */
 	@Override

@@ -30,31 +30,51 @@ import jsinterop.annotations.JsType;
 
 /**
  * This is the configuration object of a chart.<br>
- * It contains always teh type, options, plugins and data.
+ * It contains always the type, options, plugins and data.<br>
+ * THIS IS AN EXPORTED OBJECT.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @vresion 2.0
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
-public final class Configuration{
-	
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
+public final class Configuration {
+
+	/**
+	 * Sets the type of chart by the <code>type</code> property into native object.
+	 * 
+	 * @param type type of chart as string.
+	 */
 	@JsProperty(name = "type")
 	native void setNativeType(String type);
 
+	/**
+	 * Sets the options of chart by the <code>options</code> property into native object.
+	 * 
+	 * @param options options of chart as native object.
+	 */
 	@JsProperty
 	public native void setOptions(NativeObject options);
 
+	/**
+	 * Sets the data of chart by the <code>data</code> property into native object.
+	 * 
+	 * @param data data of chart as native object.
+	 */
 	@JsProperty
 	public native void setData(NativeObject data);
 
-	@JsProperty 
+	/**
+	 * Sets the inline plugins of chart by the <code>plugins</code> property into native object.
+	 * 
+	 * @param plugins inline plugins of chart as array of plugin native object.
+	 */
+	@JsProperty
 	public native void setPlugins(ArrayPlugin plugins);
 
 	/**
 	 * Sets the type of chart.
 	 * 
 	 * @param type type of chart.
-	 * @see Type
 	 */
 	@JsOverlay
 	void setType(Type type) {

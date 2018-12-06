@@ -18,26 +18,38 @@ package org.pepstock.charba.client.jsinterop.defaults.chart;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc;
 import org.pepstock.charba.client.jsinterop.options.Arc;
 
+/**
+ * Defaults for arc option element, based on chart type.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public final class DefaultChartArc implements IsDefaultArc {
-	
+
 	private final Arc arc;
 
 	/**
-	 * @param arc
+	 * Creates the object by arc option element instance.
+	 * 
+	 * @param arc arc option element instance.
 	 */
 	DefaultChartArc(Arc arc) {
 		this.arc = arc;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBackgroundColor()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBackgroundColorAsString()
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
 		return arc.getBackgroundColorAsString();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBorderWidth()
 	 */
 	@Override
@@ -45,14 +57,14 @@ public final class DefaultChartArc implements IsDefaultArc {
 		return arc.getBorderWidth();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBorderColor()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBorderColorAsString()
 	 */
 	@Override
 	public String getBorderColorAsString() {
 		return arc.getBorderColorAsString();
 	}
-	
-	
 
 }

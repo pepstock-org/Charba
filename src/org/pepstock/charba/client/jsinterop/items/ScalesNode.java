@@ -25,14 +25,18 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
- * Wrapper of scales node of CHART.JS.
+ * Wrapper of scales node of CHART.JS.<br>
+ * This is a wrapper of scale node of Chart (of CHART.JS).
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  */
 public final class ScalesNode extends NativeObjectContainer {
 
 	/**
-	 * @param nativeObject
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
 	public ScalesNode(NativeObject nativeObject) {
 		super(nativeObject);

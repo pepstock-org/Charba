@@ -20,16 +20,16 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
- * This object is just a proxy object, created from JavaScript side, to wrap an JavaScript array.<br>
- * Created and passed by CHART.JS.
+ * This is a wrapper of java script object which represents a dataset.<br>
+ * This object is used in the plugins methods of CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public final class DatasetPluginItem extends NativeObjectContainer {
 
 	/**
-	 * Needed for GWt injection
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -37,25 +37,47 @@ public final class DatasetPluginItem extends NativeObjectContainer {
 		index,
 		meta
 	}
-	
+
+	// meta data reference
 	private final DatasetMetaItem meta;
 
 	/**
-	 * @param nativeObject
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
 	public DatasetPluginItem(NativeObject nativeObject) {
 		super(nativeObject);
+		// checks if meta data are present
+		// creating it or setting an empty object
 		meta = has(Property.meta) ? new DatasetMetaItem(getValue(Property.meta)) : new DatasetMetaItem();
 	}
 
+	/**
+	 * Returns the current animation frame number.
+	 * 
+	 * @return the current animation frame number. Default is
+	 *         {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#DOUBLE}.
+	 */
 	public double getEasing() {
 		return getValue(Property.easing, UndefinedValues.DOUBLE);
 	}
 
+	/**
+	 * Returns the index of the data inside the dataset.
+	 * 
+	 * @return the index of the data inside the dataset. Default is
+	 *         {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
+	 */
 	public int getIndex() {
 		return getValue(Property.index, UndefinedValues.INTEGER);
 	}
 
+	/**
+	 * Returns the dataset meta data item.
+	 * 
+	 * @return the dataset meta data item.
+	 */
 	public DatasetMetaItem getMeta() {
 		return meta;
 	}

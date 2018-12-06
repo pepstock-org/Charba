@@ -20,9 +20,11 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
- * Wrapper of tooltip node of CHART.JS.
+ * Wrapper of tooltip node of CHART.JS.<br>
+ * This is a wrapper of title node of Chart (of CHART.JS).
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public final class TooltipNode extends NativeObjectContainer {
@@ -30,7 +32,7 @@ public final class TooltipNode extends NativeObjectContainer {
 	private final TooltipModel model;
 
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -38,10 +40,13 @@ public final class TooltipNode extends NativeObjectContainer {
 	}
 	
 	/**
-	 * @param nativeObject
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
 	public TooltipNode(NativeObject nativeObject) {
 		super(nativeObject);
+		// creates sub element
 		model = new TooltipModel(getValue(Property._model));
 	}
 

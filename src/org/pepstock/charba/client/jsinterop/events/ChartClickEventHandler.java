@@ -19,7 +19,7 @@ package org.pepstock.charba.client.jsinterop.events;
  * Event handler for clicking on the chart.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0 *
  */
 public interface ChartClickEventHandler extends ChartEventHandler {
 

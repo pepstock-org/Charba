@@ -16,9 +16,9 @@
 package org.pepstock.charba.client.jsinterop.items;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
 
 /**
  * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event
@@ -28,14 +28,14 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
  * handler or callbacks to apply own logic.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public final class DatasetItem extends NativeObjectContainer{
 	
 	private final DatasetViewItem view;
 	
 	/**
-	 * Needed for GWt injection
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -46,12 +46,12 @@ public final class DatasetItem extends NativeObjectContainer{
 	}
 	
 	/**
-	 * Wraps the CHART.JS java script object.
+	 * Creates the item using a native java script object which contains all properties.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * @param nativeObject native java script object which contains all properties.
 	 */
-	public DatasetItem(NativeObject javaScriptObject) {
-		super(javaScriptObject);
+	public DatasetItem(NativeObject nativeObject) {
+		super(nativeObject);
 		// initializes the sub objects
 		view = new DatasetViewItem(getValue(Property._view));
 	}
@@ -59,8 +59,7 @@ public final class DatasetItem extends NativeObjectContainer{
 	/**
 	 * Returns the dataset index of the chart
 	 * 
-	 * @return the dataset index of the chart
-	 * @see org.pepstock.charba.client.data.Data#getDatasets()
+	 * @return the dataset index of the chart. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getDatasetIndex() {
 		return getValue(Property._datasetIndex, UndefinedValues.INTEGER);
@@ -69,9 +68,7 @@ public final class DatasetItem extends NativeObjectContainer{
 	/**
 	 * Returns the index of the data inside the dataset.
 	 * 
-	 * @return the index of the data inside the dataset.
-	 * @see org.pepstock.charba.client.data.Dataset#getData()
-	 * @see org.pepstock.charba.client.data.Data#getLabels()
+	 * @return the index of the data inside the dataset. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getIndex() {
 		return getValue(Property._index, UndefinedValues.INTEGER);
@@ -80,7 +77,7 @@ public final class DatasetItem extends NativeObjectContainer{
 	/**
 	 * Returns if the dataset is hidden.
 	 * 
-	 * @return <code>true</code> if the dataset is hidden, otherwise <code>false</code>.
+	 * @return <code>true</code> if the dataset is hidden, otherwise <code>false</code>. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isHidden() {
 		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
@@ -99,13 +96,18 @@ public final class DatasetItem extends NativeObjectContainer{
 	 * Returns all view information about the dataset.
 	 * 
 	 * @return all view information about the dataset.
-	 * @see org.pepstock.charba.client.items.DatasetViewItem
 	 */
 	public DatasetViewItem getView() {
 		return view;
 	}
 
-	public static class DatasetItemFactory implements Factory<DatasetItem>{
+	/**
+	 * Inner class to create dataset item by a native object to use in {@link org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList}.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @version 2.0
+	 */
+	public static class DatasetItemFactory implements NativeObjectContainerFactory<DatasetItem>{
 		/* (non-Javadoc)
 		 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)
 		 */

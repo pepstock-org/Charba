@@ -21,10 +21,13 @@ import org.pepstock.charba.client.jsinterop.configuration.BubbleOptions;
 import org.pepstock.charba.client.jsinterop.data.BubbleDataset;
 
 /**
- * BUBBLE chart implementation.
+ * BUBBLE chart implementation.<br>
+ * A bubble chart is used to display three dimensions of data at the same time.<br>
+ * The location of the bubble is determined by the first two dimensions and the corresponding horizontal and vertical axes.<br>
+ * The third dimension is represented by the size of the individual bubbles.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public class BubbleChart extends AbstractChart<BubbleOptions, BubbleDataset> {
 
@@ -41,7 +44,7 @@ public class BubbleChart extends AbstractChart<BubbleOptions, BubbleDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getType()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -51,7 +54,7 @@ public class BubbleChart extends AbstractChart<BubbleOptions, BubbleDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getOptions()
 	 */
 	@Override
 	public BubbleOptions getOptions() {
@@ -61,7 +64,7 @@ public class BubbleChart extends AbstractChart<BubbleOptions, BubbleDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#newDataset()
 	 */
 	@Override
 	public BubbleDataset newDataset() {

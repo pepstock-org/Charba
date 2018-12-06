@@ -25,7 +25,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * Event which is fired when the user hovers on the chart.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public final class ChartHoverEvent extends AbstractEvent<ChartHoverEventHandler> {
 
@@ -42,7 +42,6 @@ public final class ChartHoverEvent extends AbstractEvent<ChartHoverEventHandler>
 	 * 
 	 * @param nativeEvent native event of this custom event
 	 * @param items a list of items with dataset metadata related to the hover
-	 * @see org.pepstock.charba.client.items.DatasetItem
 	 */
 	public ChartHoverEvent(NativeEvent nativeEvent, List<DatasetItem> items) {
 		super(nativeEvent);
@@ -53,7 +52,6 @@ public final class ChartHoverEvent extends AbstractEvent<ChartHoverEventHandler>
 	 * Returns a list of items with dataset metadata related to the hover
 	 * 
 	 * @return a list of items with dataset metadata related to the hover
-	 * @see org.pepstock.charba.client.items.DatasetItem
 	 */
 	public List<DatasetItem> getItems() {
 		return items;

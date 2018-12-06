@@ -26,15 +26,16 @@ import org.pepstock.charba.client.jsinterop.items.LegendHitBoxItem.LegendHitBoxI
 import org.pepstock.charba.client.jsinterop.items.LegendItem.LegendItemFactory;
 
 /**
- * Wrapper of legend node of CHART.JS.
+ * Wrapper of legend node of CHART.JS.<br>
+ * This is a wrapper of legend node of Chart (of CHART.JS).
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public final class LegendNode extends BaseBoxNodeItem {
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -45,12 +46,15 @@ public final class LegendNode extends BaseBoxNodeItem {
 		columnWidths
 	}
 	
+	// factory to create legend items for array container list
 	private final LegendItemFactory legendItemFactory = new LegendItemFactory();
-	
+	// factory to create legend hit box items for array container list
 	private final LegendHitBoxItemFactory legendHitBoxItemFactory = new LegendHitBoxItemFactory();
 	
 	/**
-	 * @param nativeObject
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
 	public LegendNode(NativeObject nativeObject) {
 		super(nativeObject);
@@ -71,7 +75,9 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * @return the list of line widths.
 	 */
 	public List<Integer> getLineWidths() {
+		// gets array from native object
 		ArrayInteger array = getArrayValue(Property.lineWidths);
+		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}
 
@@ -81,7 +87,9 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * @return the list of columns widths.
 	 */
 	public List<Integer> getColumnWidths() {
+		// gets array from native object
 		ArrayInteger array = getArrayValue(Property.columnWidths);
+		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}
 
@@ -91,7 +99,9 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * @return the list of hit boxes of the legend.
 	 */
 	public List<LegendHitBoxItem> getHitBoxes() {
+		// gets array from native object
 		ArrayObject array = getArrayValue(Property.legendHitBoxes);
+		// returns list
 		return ArrayListHelper.unmodifiableList(array, legendHitBoxItemFactory);
 	}
 
@@ -101,7 +111,9 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * @return the list of items of the legend.
 	 */
 	public List<LegendItem> getItems() {
+		// gets array from native object
 		ArrayObject array = getArrayValue(Property.legendItems);
+		// returns list
 		return ArrayListHelper.unmodifiableList(array, legendItemFactory);
 	}
 }

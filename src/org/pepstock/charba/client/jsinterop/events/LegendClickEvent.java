@@ -23,7 +23,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * Event which is fired when the user clicks on the legend of the chart.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public final class LegendClickEvent extends AbstractEvent<LegendClickEventHandler> {
 
@@ -39,7 +39,6 @@ public final class LegendClickEvent extends AbstractEvent<LegendClickEventHandle
 	 * 
 	 * @param nativeEvent native event of this custom event
 	 * @param item legend item related to the click
-	 * @see org.pepstock.charba.client.items.LegendItem
 	 */
 	public LegendClickEvent(NativeEvent nativeEvent, LegendItem item) {
 		super(nativeEvent);

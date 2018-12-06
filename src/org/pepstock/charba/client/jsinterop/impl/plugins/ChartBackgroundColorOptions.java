@@ -13,48 +13,59 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.jsinterop.plugins.impl;
+package org.pepstock.charba.client.jsinterop.impl.plugins;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
  * Configuration options of background color plugin.
- *  
+ * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
-public final class ChartBackgroundColorOptions extends NativeObjectContainer{
-	
-	private final String color;
-	
+public final class ChartBackgroundColorOptions extends NativeObjectContainer {
+
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
-	private enum Property implements Key{
-		backGroundColor
+	private enum Property implements Key
+	{
+		backgroundColor
 	}
-	
+
 	/**
-	 * Builds the object with a new java script object setting the default value of plugin.
+	 * Builds the object with new java script object setting the default value of plugin.
 	 */
 	public ChartBackgroundColorOptions() {
-		super();
-		this.color = ChartBackgroundColor.DEFAULT_BACKGROUND_COLOR;
+		this(null);
 	}
 
 	/**
-	 * Builds the object using the java script object of options, set by user.<br>
-	 * Used internally to call the plugin.
+	 * Builds the object with a java script object stored into options.
 	 * 
-	 * @param javaScriptObject configuration of plugin.
-	 * @param color default color to use.
+	 * @param nativeObject native object into options
 	 */
-	ChartBackgroundColorOptions(String color) {
-		this();
-		setBackgroundColor(color);
+	ChartBackgroundColorOptions(NativeObject nativeObject) {
+		super(nativeObject);
+		// checks if background color exists
+		// it could happens only when the object has been created
+		// by a native object
+		if (!has(Property.backgroundColor)) {
+			setBackgroundColor(ChartBackgroundColor.DEFAULT_BACKGROUND_COLOR);
+		}
+	}
+
+	/**
+	 * Returns the background color.
+	 * 
+	 * @return the background color. Default is "white".
+	 */
+	public String getBackgroundColorAsString() {
+		return getValue(Property.backgroundColor, ChartBackgroundColor.DEFAULT_BACKGROUND_COLOR);
 	}
 
 	/**
@@ -62,32 +73,25 @@ public final class ChartBackgroundColorOptions extends NativeObjectContainer{
 	 * 
 	 * @return the background color.
 	 */
-	public String getBackgroundColorAsString(){
-		return getValue(Property.backGroundColor, color);
-	}
-	
-	/**
-	 * Returns the background color.
-	 * 
-	 * @return the background color.
-	 */
-	public IsColor getBackgroundColor(){
+	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
-	
+
 	/**
 	 * Sets the background color.
+	 * 
 	 * @param color the background color.
 	 */
-	public void setBackgroundColor(String color){
-		setValue(Property.backGroundColor, color);
+	public void setBackgroundColor(String color) {
+		setValue(Property.backgroundColor, color);
 	}
 
 	/**
 	 * Sets the background color.
+	 * 
 	 * @param color the background color.
 	 */
-	public void setBackgroundColor(IsColor color){
+	public void setBackgroundColor(IsColor color) {
 		setBackgroundColor(color.toRGBA());
 	}
 }

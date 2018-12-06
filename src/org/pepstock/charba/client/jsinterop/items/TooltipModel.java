@@ -33,19 +33,17 @@ import org.pepstock.charba.client.jsinterop.items.TooltipLabelColor.TooltipLabel
 
 /**
  * This object is passed by CHART.JS to the callback to manage tooltip custom callback.<br>
- * The tooltip label configuration is nested below the tooltip configuration using the callbacks key. The tooltip has the
- * following callbacks for providing text.<br>
- * All methods must return either a string or an array of strings. Arrays of strings are treated as multiple lines of text.
+ * The tooltip label configuration is nested below the tooltip configuration using the callbacks key. 
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.callbacks.TooltipCustomCallback
+ * @version 2.0
  */
 public final class TooltipModel extends NativeObjectContainer {
 	
 	/**
-	 * Needed for GWt injection
+	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		dataPoints,
 		xPadding,
@@ -91,15 +89,17 @@ public final class TooltipModel extends NativeObjectContainer {
 		legendColorBackground,
 		displayColors
 	}
-
+	// instance of tooltip items factory
 	private final TooltipItemFactory tooltipItemFactory = new TooltipItemFactory();
-	
+	// instance of tooltip body items factory
 	private final TooltipBodyItemFactory tooltipBodyItemFactory = new TooltipBodyItemFactory();
-	
+	// instance of tooltip label color factory
 	private final TooltipLabelColorFactory tooltipLabelColorFactory = new TooltipLabelColorFactory();
 	
 	/**
-	 * @param nativeObject
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
 	public TooltipModel(NativeObject nativeObject) {
 		super(nativeObject);
@@ -109,10 +109,11 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * Returns the list of tooltip items related to data points.
 	 * 
 	 * @return the list of tooltip items related to data points.
-	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
 	public List<TooltipItem> getDataPoints() {
+		// gets array from native object
 		ArrayObject array = getArrayValue(Property.dataPoints);
+		// returns as list
 		return ArrayListHelper.unmodifiableList(array, tooltipItemFactory);
 	}
 
@@ -137,7 +138,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the X align location.
 	 * 
-	 * @return the X align location. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return the X align location. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#STRING}.
 	 */
 	public String getXAlign() {
 		return getValue(Property.xAlign, UndefinedValues.STRING);
@@ -146,7 +147,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the Y align location.
 	 * 
-	 * @return the Y align location. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return the Y align location. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#STRING}.
 	 */
 	public String getYAlign() {
 		return getValue(Property.yAlign, UndefinedValues.STRING);
@@ -155,7 +156,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the X location of tooltip.
 	 * 
-	 * @return the X location of tooltip. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the X location of tooltip. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getX() {
 		return getValue(Property.x, UndefinedValues.INTEGER);
@@ -164,7 +165,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the Y location of tooltip.
 	 * 
-	 * @return the Y location of tooltip. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the Y location of tooltip. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getY() {
 		return getValue(Property.y, UndefinedValues.INTEGER);
@@ -173,7 +174,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the width of tooltip.
 	 * 
-	 * @return the width of tooltip. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the width of tooltip. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getWidth() {
 		return getValue(Property.width, UndefinedValues.INTEGER);
@@ -182,7 +183,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the height of tooltip.
 	 * 
-	 * @return the height of tooltip. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the height of tooltip. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getHeight() {
 		return getValue(Property.height, UndefinedValues.INTEGER);
@@ -191,7 +192,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the X location of the tooltip arrow.
 	 * 
-	 * @return the X location of the tooltip arrow. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the X location of the tooltip arrow. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getCaretX() {
 		return getValue(Property.caretX, UndefinedValues.INTEGER);
@@ -200,7 +201,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the Y location of the tooltip arrow.
 	 * 
-	 * @return the Y location of the tooltip arrow. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the Y location of the tooltip arrow. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getCaretY() {
 		return getValue(Property.caretY, UndefinedValues.INTEGER);
@@ -210,10 +211,11 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * Returns the list of items which belong to the tooltip body section.
 	 * 
 	 * @return the list of items which belong to the tooltip body section.
-	 * @see org.pepstock.charba.client.items.TooltipBodyItem
 	 */
 	public List<TooltipBodyItem> getBody() {
+		// gets array from native object
 		ArrayObject array = getArrayValue(Property.body);
+		// returns as list
 		return ArrayListHelper.unmodifiableList(array, tooltipBodyItemFactory);
 	}
 
@@ -266,7 +268,6 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * Returns the font style of the tooltip body section.
 	 * 
 	 * @return the font style of the tooltip body section.
-	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getBodyFontStyle() {
 		return getValue(Property._bodyFontStyle, FontStyle.class, Defaults.get().getGlobal().getTooltips().getBodyFontStyle());
@@ -339,7 +340,6 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * Returns the font style of the tooltip title section.
 	 * 
 	 * @return the font style of the tooltip title section.
-	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getTitleFontStyle() {
 		return getValue(Property._titleFontStyle, FontStyle.class, Defaults.get().getGlobal().getTooltips().getTitleFontStyle());
@@ -421,7 +421,6 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * Returns the font style of the tooltip footer section.
 	 * 
 	 * @return the font style of the tooltip footer section.
-	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public FontStyle getFooterFontStyle() {
 		return getValue(Property._footerFontStyle, FontStyle.class, Defaults.get().getGlobal().getTooltips().getFooterFontStyle());
@@ -503,17 +502,18 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * Returns the list of labels color of tooltip.
 	 * 
 	 * @return the list of labels color of tooltip.
-	 * @see org.pepstock.charba.client.items.TooltipLabelColor
 	 */
 	public List<TooltipLabelColor> getLabelColors() {
+		// gets array from native object
 		ArrayObject array = getArrayValue(Property.labelColors);
+		// returns as list
 		return ArrayListHelper.unmodifiableList(array, tooltipLabelColorFactory);
 	}
 
 	/**
 	 * Returns the opacity of tooltip.
 	 * 
-	 * @return the opacity of tooltip. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the opacity of tooltip. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getOpacity() {
 		return getValue(Property.opacity, UndefinedValues.DOUBLE);
@@ -539,10 +539,10 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the display of colors of tooltip.
 	 * 
-	 * @return the display of colors of tooltip. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 * @return the display of colors of tooltip.
 	 */
-	public Boolean getDisplayColors() {
-		return getValue(Property.displayColors, UndefinedValues.BOOLEAN);
+	public boolean isDisplayColors() {
+		return getValue(Property.displayColors, Defaults.get().getGlobal().getTooltips().isDisplayColors());
 	}
 
 }

@@ -22,12 +22,16 @@ import java.util.Map;
  * Is a static reference which collects all chart instances to be able to enable global plugins.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public final class Charts {
 
+	// buffer with all charts instances
+	// K = CHART id (CHARBA ID)
+	// V = chart instance
 	private static final Map<String, AbstractChart<?, ?>> CHARTS = new HashMap<String, AbstractChart<?, ?>>();
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -36,28 +40,30 @@ public final class Charts {
 
 	/**
 	 * Adds new charts instance into collection.
+	 * 
 	 * @param chart chart instance
 	 */
-	static void add(AbstractChart<?, ?> chart){
+	static void add(AbstractChart<?, ?> chart) {
 		CHARTS.put(chart.getId(), chart);
 	}
-	
+
 	/**
 	 * Returns the chart instance by its id.
+	 * 
 	 * @param chartId chart id
 	 * @return chart instance or <code>null</code> if not exist.
-	 * @see AbstractChart#getId()
 	 */
-	public static AbstractChart<?, ?> get(String chartId){
+	public static AbstractChart<?, ?> get(String chartId) {
 		return CHARTS.get(chartId);
 	}
-	
+
 	/**
 	 * Removes a chart instance by its id.
+	 * 
 	 * @param chartId chart id
 	 */
-	static void remove(String chartId){
+	static void remove(String chartId) {
 		CHARTS.remove(chartId);
 	}
-	
+
 }

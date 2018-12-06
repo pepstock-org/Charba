@@ -24,12 +24,13 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
  * This object has been created ONLY when a resize event occurs.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
 
  */
 public class SizeItem extends NativeObjectContainer {
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	protected enum Property implements Key
 	{
@@ -38,7 +39,9 @@ public class SizeItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * @param nativeObject
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
 	public SizeItem(NativeObject nativeObject) {
 		super(nativeObject);
@@ -47,7 +50,7 @@ public class SizeItem extends NativeObjectContainer {
 	/**
 	 * Returns the width of the chart item in pixel.
 	 * 
-	 * @return the width of the chart item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the width of the chart item in pixel. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getWidth() {
 		return getValue(Property.width, UndefinedValues.INTEGER);
@@ -56,11 +59,10 @@ public class SizeItem extends NativeObjectContainer {
 	/**
 	 * Returns the height of the chart item in pixel.
 	 * 
-	 * @return the height of the chart item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the height of the chart item in pixel. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getHeight() {
 		return getValue(Property.height, UndefinedValues.INTEGER);
 	}
-
 
 }

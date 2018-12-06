@@ -24,11 +24,11 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * The onProgress and onComplete event are useful for synchronizing an external draw to the chart animation.<br>
+ * This is native java script object, passed by CHART.JS during the animation events, which contains the animation item.<br>
  * This is the CHART.JS item with all needed info.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
 public final class AnimationObject {
@@ -39,12 +39,18 @@ public final class AnimationObject {
 	protected AnimationObject() {}
 
 	/**
-	 * FIXME
-	 * @return
+	 * Returns the native property of java script object related to animation item.
+	 * 
+	 * @return java script object related to animation item.
 	 */
 	@JsProperty
 	native NativeObject getAnimationObject();
 	
+	/**
+	 * Returns the animation item, by the native java script object.
+	 * 
+	 * @return the animation item, by the native java script object.
+	 */
 	@JsOverlay
 	public final AnimationItem getAnimationItem() {
 		return new AnimationItem(getAnimationObject());

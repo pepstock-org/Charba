@@ -18,18 +18,28 @@ package org.pepstock.charba.client.jsinterop.defaults.chart;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines;
 import org.pepstock.charba.client.jsinterop.options.GridLines;
 
-public final class DefaultChartGridLines implements IsDefaultGridLines{
+/**
+ * Defaults for grid lines option element, based on chart type.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
+public final class DefaultChartGridLines implements IsDefaultGridLines {
 
 	private final GridLines gridLines;
 
 	/**
-	 * @param gridLines
+	 * Creates the object by grid lines option element instance.
+	 * 
+	 * @param gridLines grid lines option element instance.
 	 */
 	DefaultChartGridLines(GridLines gridLines) {
 		this.gridLines = gridLines;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#isDisplay()
 	 */
 	@Override
@@ -37,15 +47,19 @@ public final class DefaultChartGridLines implements IsDefaultGridLines{
 		return gridLines.isDisplay();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getColor()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getColorAsString()
 	 */
 	@Override
 	public String getColorAsString() {
 		return gridLines.getColorAsString();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getBorderDashOffset()
 	 */
 	@Override
@@ -53,7 +67,9 @@ public final class DefaultChartGridLines implements IsDefaultGridLines{
 		return gridLines.getBorderDashOffset();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getLineWidth()
 	 */
 	@Override
@@ -61,7 +77,9 @@ public final class DefaultChartGridLines implements IsDefaultGridLines{
 		return gridLines.getLineWidth();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#isDrawBorder()
 	 */
 	@Override
@@ -69,7 +87,9 @@ public final class DefaultChartGridLines implements IsDefaultGridLines{
 		return gridLines.isDrawBorder();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#isDrawOnChartArea()
 	 */
 	@Override
@@ -77,7 +97,9 @@ public final class DefaultChartGridLines implements IsDefaultGridLines{
 		return gridLines.isDrawOnChartArea();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#isDrawTicks()
 	 */
 	@Override
@@ -85,7 +107,9 @@ public final class DefaultChartGridLines implements IsDefaultGridLines{
 		return gridLines.isDrawTicks();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getTickMarkLength()
 	 */
 	@Override
@@ -93,7 +117,9 @@ public final class DefaultChartGridLines implements IsDefaultGridLines{
 		return gridLines.getTickMarkLength();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getZeroLineWidth()
 	 */
 	@Override
@@ -101,15 +127,19 @@ public final class DefaultChartGridLines implements IsDefaultGridLines{
 		return gridLines.getZeroLineWidth();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getZeroLineColor()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getZeroLineColorAsString()
 	 */
 	@Override
 	public String getZeroLineColorAsString() {
 		return gridLines.getZeroLineColorAsString();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getZeroLineBorderDashOffset()
 	 */
 	@Override
@@ -117,12 +147,14 @@ public final class DefaultChartGridLines implements IsDefaultGridLines{
 		return gridLines.getZeroLineBorderDash().get(0);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#isOffsetGridLines()
 	 */
 	@Override
 	public boolean isOffsetGridLines() {
 		return gridLines.isOffsetGridLines();
 	}
-	
+
 }

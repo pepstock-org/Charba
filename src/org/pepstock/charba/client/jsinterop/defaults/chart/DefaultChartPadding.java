@@ -18,18 +18,28 @@ package org.pepstock.charba.client.jsinterop.defaults.chart;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.jsinterop.options.Padding;
 
-public final class DefaultChartPadding implements IsDefaultPadding{
-	
+/**
+ * Defaults for padding option element, based on chart type.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
+public final class DefaultChartPadding implements IsDefaultPadding {
+
 	private final Padding padding;
 
 	/**
-	 * @param padding
+	 * Creates the object by padding option element instance.
+	 * 
+	 * @param padding padding option element instance.
 	 */
 	DefaultChartPadding(Padding padding) {
 		this.padding = padding;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding#getLeft()
 	 */
 	@Override
@@ -37,7 +47,9 @@ public final class DefaultChartPadding implements IsDefaultPadding{
 		return padding.getLeft();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding#getRight()
 	 */
 	@Override
@@ -45,7 +57,9 @@ public final class DefaultChartPadding implements IsDefaultPadding{
 		return padding.getRight();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding#getTop()
 	 */
 	@Override
@@ -53,7 +67,9 @@ public final class DefaultChartPadding implements IsDefaultPadding{
 		return padding.getTop();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding#getBottom()
 	 */
 	@Override
@@ -61,5 +77,4 @@ public final class DefaultChartPadding implements IsDefaultPadding{
 		return padding.getBottom();
 	}
 
-	
 }

@@ -27,6 +27,7 @@ import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
 import org.pepstock.charba.client.jsinterop.items.DatasetItem;
 import org.pepstock.charba.client.jsinterop.items.DatasetItem.DatasetItemFactory;
 import org.pepstock.charba.client.jsinterop.items.DatasetMetaItem;
+import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 import org.pepstock.charba.client.jsinterop.plugins.Plugins;
 import org.pepstock.charba.client.jsinterop.utils.JSON;
 
@@ -45,12 +46,13 @@ import com.google.gwt.user.client.ui.Widget;
  * It contains Chart.js initialization.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  * @param <O> Options type for the specific chart
  * @param <D> Dataset type for the specific chart
  */
 public abstract class AbstractChart<O extends ConfigurationOptions, D extends Dataset> extends Widget implements IsChart<O, D> {
-	
+
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
 	// constant for WIDTH property
@@ -61,12 +63,12 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	private static final double DEFAULT_PCT_WIDTH = 90D;
 	// reference to Chart.js chart instance
 	private Chart chart = null;
-	
+	// reference to CHART java script objetc wrapper to map all properties at runtime
 	private ChartNode node = null;
-	
+
 	// chart ID using GWT unique id
 	private final String id = Document.get().createUniqueId();
-	
+
 	// chart container
 	final DivElement div;
 
@@ -87,7 +89,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	private final boolean isCanvasSupported = Canvas.isSupported();
 	// merged options of defaults
 	private final ChartOptions options;
-	
+	// instance of dataset items factory.
 	private final DatasetItemFactory datasetItemFactory = new DatasetItemFactory();
 
 	/**
@@ -123,7 +125,6 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		// injects Chart.js java script source
 		Injector.ensureInjected();
 		// creates plugins container
-		//FIXME
 		plugins = new Plugins(this);
 		// creates global options
 		options = Defaults.get().options(getType());
@@ -135,21 +136,23 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * @see com.google.gwt.user.client.ui.Widget#createHandlerManager()
 	 */
 	@Override
-	protected HandlerManager createHandlerManager() {
+	protected final HandlerManager createHandlerManager() {
 		return new ChartHandlerManager(this);
 	}
-	
+
 	/**
 	 * Returns the ID of chart.<br>
 	 * It could be considered as chart unique ID.
 	 * 
 	 * @return the ID of chart
 	 */
-	public final String getId(){
+	public final String getId() {
 		return id;
 	}
-	
+
 	/**
+	 * Returns the canvas element used to draw the chart.
+	 * 
 	 * @return the canvas
 	 */
 	public final CanvasElement getCanvas() {
@@ -157,21 +160,26 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	}
 
 	/**
-	 * @return the chart container HTML element
+	 * Returns the DIV element which contains the canvas.
+	 * 
+	 * @return the chart container DIV element
 	 */
 	public final DivElement getContainer() {
 		return div;
 	}
-	
+
 	/**
 	 * Returns the chart node with runtime data.
+	 * 
 	 * @return the chart node.
 	 */
-	public final ChartNode getNode(){
+	public final ChartNode getNode() {
 		return node;
 	}
 
 	/**
+	 * Returns the data object with all passed datasets.
+	 * 
 	 * @return the data configuration object
 	 */
 	public final Data getData() {
@@ -179,6 +187,8 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	}
 
 	/**
+	 * Returns the plugins element to manage inline plugins.
+	 * 
 	 * @return the plugins configuration object
 	 */
 	public final Plugins getPlugins() {
@@ -186,7 +196,9 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	}
 
 	/**
-	 * @return the options
+	 * Returns the default options created based on chart type.
+	 * 
+	 * @return the default options of the chart
 	 */
 	public final ChartOptions getChartOptions() {
 		return options;
@@ -213,30 +225,43 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	}
 
 	/**
-	 * @return the drawOnAttach
+	 * Returns <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
+	 * <code>false</code>.
+	 * 
+	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
+	 *         <code>false</code>. Default is <code>true</code>.
 	 */
-	public boolean isDrawOnAttach() {
+	public final boolean isDrawOnAttach() {
 		return drawOnAttach;
 	}
 
 	/**
+	 * Sets <code>true</code> if the chart is configured to be draw on the attach of DIV element, otherwise <code>false</code>.
+	 * 
 	 * @param drawOnAttach the drawOnAttach to set
 	 */
-	public void setDrawOnAttach(boolean drawOnAttach) {
+	public final void setDrawOnAttach(boolean drawOnAttach) {
 		this.drawOnAttach = drawOnAttach;
 	}
 
 	/**
-	 * @return the destroyOnDetach
+	 * Returns <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise
+	 * <code>false</code>.
+	 * 
+	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the attach of DIV element,
+	 *         otherwise <code>false</code>. Default is <code>true</code>.
 	 */
-	public boolean isDestroyOnDetach() {
+	public final boolean isDestroyOnDetach() {
 		return destroyOnDetach;
 	}
 
 	/**
+	 * Sets <code>true</code> if the chart is configured to be destroyed on the attach of DIV element, otherwise
+	 * <code>false</code>.
+	 * 
 	 * @param destroyOnDetach the destroyOnDetach to set
 	 */
-	public void setDestroyOnDetach(boolean destroyOnDetach) {
+	public final void setDestroyOnDetach(boolean destroyOnDetach) {
 		this.destroyOnDetach = destroyOnDetach;
 	}
 
@@ -266,6 +291,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		super.onDetach();
 		// if is not to be destroyed on detach, doesn't destroy
 		if (isDestroyOnDetach()) {
+			// then destroy
 			destroy();
 		}
 	}
@@ -274,22 +300,24 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object
 	 * within Chart.js, along with any associated event listeners attached by Chart.js.
 	 */
-	public void destroy() {
+	public final void destroy() {
+		// checks if chart is created
 		if (chart != null) {
+			// then destroy
 			chart.destroy();
-			// removes chart instance from collection
-			Charts.remove(getId());
 		}
+		// removes chart instance from collection
+		Charts.remove(getId());
 	}
 
 	/**
 	 * Use this to stop any current animation loop. This will pause the chart during any current animation frame. Call
 	 * <code>.render()</code> to re-animate.
-	 * 
-	 * @see AbstractChart#render()
 	 */
-	public void stop() {
+	public final void stop() {
+		// checks if chart is created
 		if (chart != null) {
+			// then stop
 			chart.stop();
 		}
 	}
@@ -297,8 +325,10 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	/**
 	 * Will clear the chart canvas. Used extensively internally between animation frames.
 	 */
-	public void clear() {
+	public final void clear() {
+		// checks if chart is created
 		if (chart != null) {
+			// then clear
 			chart.clear();
 		}
 	}
@@ -306,43 +336,54 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	/**
 	 * Reset the chart to it's state before the initial animation. A new animation can then be triggered using update.
 	 */
-	public void reset() {
+	public final void reset() {
+		// checks if chart is created
 		if (chart != null) {
+			// then reset
 			chart.reset();
 		}
 	}
 
 	/**
-	 * his returns a base 64 encoded string of the chart in it's current state.
+	 * Returns a base 64 encoded string of the chart in it's current state.
 	 * 
-	 * @return base 64 image or null if chart is not initialized
+	 * @return base 64 image or {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#STRING} if chart is not
+	 *         initialized.
 	 */
-	public String toBase64Image() {
+	public final String toBase64Image() {
+		// checks if chart is created
 		if (chart != null) {
+			// then get the image
 			return chart.toBase64Image();
 		}
-		return null;
+		// default
+		return UndefinedValues.STRING;
 	}
 
 	/**
 	 * Returns an HTML string of a legend for that chart. The legend is generated from the legendCallback in the options.
 	 * 
-	 * @return the HTML legend or null if chart is not initialized
-	 * @see LegendCallback
+	 * @return the HTML legend or {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#STRING} if chart is not
+	 *         initialized.
 	 */
-	public String generateLegend() {
+	public final String generateLegend() {
+		// checks if chart is created
 		if (chart != null) {
+			// returns legend
 			return chart.generateLegend();
 		}
-		return null;
+		// default
+		return UndefinedValues.STRING;
 	}
 
 	/**
 	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called
 	 * this method manually if you change the size of the canvas nodes container element.
 	 */
-	public void resize() {
+	public final void resize() {
+		// checks if chart is created
 		if (chart != null) {
+			// resize!
 			chart.resize();
 		}
 	}
@@ -351,7 +392,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales,
 	 * legends, and then re-render the chart.
 	 */
-	public void update() {
+	public final void update() {
 		update(null);
 	}
 
@@ -360,14 +401,17 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * legends, and then re-render the chart. A config object can be provided with additional configuration for the update
 	 * process. This is useful when update is manually called inside an event handler and some different animation is desired.
 	 * 
-	 * @param config A config object can be provided with additional configuration for the update process
-	 * @see UpdateConfiguration
+	 * @param config a config object can be provided with additional configuration for the update process
 	 */
-	public void update(UpdateConfiguration config) {
+	public final void update(UpdateConfiguration config) {
+		// checks if chart is created
 		if (chart != null) {
+			// if config is not passed..
 			if (config == null) {
+				// .. calls the update
 				chart.update();
 			} else {
+				// .. otherwise calls the update with config
 				chart.update(config.getObject());
 			}
 		}
@@ -376,10 +420,8 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	/**
 	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in
 	 * that case.
-	 * 
-	 * @see AbstractChart#update()
 	 */
-	public void render() {
+	public final void render() {
 		render(null);
 	}
 
@@ -388,15 +430,17 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * that case. A config object can be provided with additional configuration for the render process. This is useful when
 	 * update is manually called inside an event handler and some different animation is desired.
 	 * 
-	 * @param config A config object can be provided with additional configuration for the render process
-	 * @see AbstractChart#update()
-	 * @see UpdateConfiguration
+	 * @param config a config object can be provided with additional configuration for the render process
 	 */
-	public void render(UpdateConfiguration config) {
+	public final void render(UpdateConfiguration config) {
+		// checks if chart is created
 		if (chart != null) {
+			// if config is not passed..
 			if (config == null) {
+				// .. calls the render
 				chart.render();
 			} else {
+				// .. otherwise calls the render with config
 				chart.render(config.getObject());
 			}
 		}
@@ -408,7 +452,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * @param index dataset index
 	 * @return dataset meta data item.
 	 */
-	public DatasetMetaItem getDatasetMeta(int index) {
+	public final DatasetMetaItem getDatasetMeta(int index) {
 		// checks consistency of chart and datasets
 		if (chart != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size()) {
 			// returns the array
@@ -420,12 +464,12 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 
 	/**
 	 * Calling on your chart instance passing an argument of an event, will return the single element at the event position.<br>
-	 * If there are multiple items within range, only the first is returned.<br>
+	 * If there are multiple items within range, only the first is returned.
 	 * 
 	 * @param event event of chart.
 	 * @return single element at the event position or null.
 	 */
-	public DatasetItem getElementAtEvent(ChartNativeEvent event) {
+	public final DatasetItem getElementAtEvent(ChartNativeEvent event) {
 		// checks consistency of chart and event
 		if (chart != null && event != null) {
 			// gets element
@@ -445,7 +489,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * @param event event of chart.
 	 * @return all elements at the same data index or an empty list.
 	 */
-	public List<DatasetItem> getElementsAtEvent(ChartNativeEvent event) {
+	public final List<DatasetItem> getElementsAtEvent(ChartNativeEvent event) {
 		// checks consistency of chart and event
 		if (chart != null && event != null) {
 			// gets elements
@@ -458,9 +502,9 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	}
 
 	/**
-	 * 
+	 * Draws the chart
 	 */
-	public void draw() {
+	public final void draw() {
 		// checks if canvas is supported
 		if (isCanvasSupported) {
 			// gets options
@@ -471,13 +515,12 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			configuration.setType(getType());
 			configuration.setOptions(options);
 			configuration.setData(data);
-			
+			// sets plugins
 			configuration.setPlugins(plugins);
 			// destroy chart if chart is already instantiated
 			destroy();
-			// stores teh chart instance into collection
+			// stores the chart instance into collection
 			Charts.add(this);
-
 			// draws chart with configuration
 			chart = new Chart(canvas.getContext2d(), configuration);
 			// stores the chart to node wrapper
@@ -490,9 +533,9 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @return the chart configuration in JSON format.
 	 */
-	public String toJSONString() {
+	public final String toJSONString() {
 		// returns on JSON format
 		return JSON.stringify(configuration);
 	}
 
- }
+}

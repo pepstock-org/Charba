@@ -19,26 +19,38 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPointLabels;
 import org.pepstock.charba.client.jsinterop.options.PointLabels;
 
-public final class DefaultChartPointLabels implements IsDefaultPointLabels{
+/**
+ * Defaults for point labels option element, based on chart type.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
+public final class DefaultChartPointLabels implements IsDefaultPointLabels {
 
 	private final PointLabels pointLabels;
 
 	/**
-	 * @param pointLabels
+	 * Creates the object by point labels option element instance.
+	 * 
+	 * @param pointLabels point labels option element instance.
 	 */
 	DefaultChartPointLabels(PointLabels pointLabels) {
 		this.pointLabels = pointLabels;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontColor()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontColorAsString()
 	 */
 	@Override
 	public String getFontColorAsString() {
 		return pointLabels.getFontColorAsString();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontSize()
 	 */
 	@Override
@@ -46,7 +58,9 @@ public final class DefaultChartPointLabels implements IsDefaultPointLabels{
 		return pointLabels.getFontSize();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontStyle()
 	 */
 	@Override
@@ -54,7 +68,9 @@ public final class DefaultChartPointLabels implements IsDefaultPointLabels{
 		return pointLabels.getFontStyle();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontFamily()
 	 */
 	@Override
@@ -62,12 +78,14 @@ public final class DefaultChartPointLabels implements IsDefaultPointLabels{
 		return pointLabels.getFontFamily();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPointLabels#isDisplay()
 	 */
 	@Override
 	public boolean isDisplay() {
 		return pointLabels.isDisplay();
 	}
-	
+
 }

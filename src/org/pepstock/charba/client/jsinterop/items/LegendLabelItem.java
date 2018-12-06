@@ -24,15 +24,16 @@ import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 
 /**
- * This object is created by CHART.JS and passed to all callbacks and events handlers related to legend entity.
+ * This object is created by callbacks and returned to HCART.JS as native object to configure the legend.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public final class LegendLabelItem extends LegendItem {
 	
 	/**
-	 * Standard constructor which wraps a new java script object.
+	 * Standard constructor which wraps a new native java script object.
 	 */
 	public LegendLabelItem() {
 		super();
@@ -66,11 +67,6 @@ public final class LegendLabelItem extends LegendItem {
 	}
 
 	/**
-	 * Returns the fill style of the legend box
-	 * 
-	 * @return the fill style of the legend box
-	 */
-	/**
 	 * Sets the fill style of the legend box
 	 * 
 	 * @param color the fill style of the legend box
@@ -93,7 +89,6 @@ public final class LegendLabelItem extends LegendItem {
 	 * butt, round and square.
 	 * 
 	 * @param style how the end points of every box border are drawn.
-	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public void setLineCap(CapStyle style) {
 		setValue(LegendItem.Property.lineCap, style);
@@ -126,7 +121,6 @@ public final class LegendLabelItem extends LegendItem {
 	 * There are three possible values for this property: round, bevel and miter.
 	 * 
 	 * @param style There are three possible values for this property: round, bevel and miter.
-	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public void setLineJoin(JoinStyle style) {
 		setValue(LegendItem.Property.lineJoin, style);
@@ -154,7 +148,6 @@ public final class LegendLabelItem extends LegendItem {
 	 * Sets the style of the legend box (only used if usePointStyle is true)
 	 * 
 	 * @param style the style of the legend box
-	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public void setPointStyle(PointStyle style) {
 		setValue(LegendItem.Property.pointStyle, style);

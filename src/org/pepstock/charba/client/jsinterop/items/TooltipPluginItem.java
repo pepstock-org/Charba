@@ -20,16 +20,17 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
- * This object is just a proxy object, created from JavaScript side, to wrap an JavaScript array.<br>
- * Created and passed by CHART.JS.
+ * Contains all info for every item of tooltip.<br>
+ * Created and passed by CHART.JS.<br>
+ * It uses into the PLUGINS.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @vesion 2.0
  */
 public final class TooltipPluginItem extends NativeObjectContainer {
 
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -40,17 +41,30 @@ public final class TooltipPluginItem extends NativeObjectContainer {
 	private final TooltipNode node;
 	
 	/**
-	 * @param nativeObject
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
 	public TooltipPluginItem(NativeObject nativeObject) {
 		super(nativeObject);
+		// creates sub element
 		node = new TooltipNode(getValue(Property.tooltip));
 	}
 
+	/**
+	 * Returns the total number of animation frames.
+	 * 
+	 * @return the total number of animation frames. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#DOUBLE}.
+	 */
 	public double getEasing() {
 		return getValue(Property.easing, UndefinedValues.DOUBLE);
 	}
 
+	/**
+	 * Returns the tooltip model.
+	 * 
+	 * @return the tooltip model.
+	 */
 	public TooltipNode getTooltip() {
 		return node;
 	}

@@ -24,7 +24,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * This event doesn't suppress the click event on the chart.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionEventHandler> {
 
@@ -39,7 +39,7 @@ public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionE
 	 * Creates the event with dataset metadata item related to the click
 	 * 
 	 * @param nativeEvent native event of this custom event
-	 * @param item dataset metadata item related to the click org.pepstock.charba.client.items.DatasetMetaItem
+	 * @param item dataset metadata item related to the click 
 	 */
 	public DatasetSelectionEvent(NativeEvent nativeEvent, DatasetItem item) {
 		super(nativeEvent);
@@ -49,7 +49,7 @@ public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionE
 	/**
 	 * Returns the item with dataset metadata related to the click
 	 * 
-	 * @return the item with dataset metadata related to the click org.pepstock.charba.client.items.DatasetMetaItem
+	 * @return the item with dataset metadata related to the click
 	 */
 	public DatasetItem getItem() {
 		return item;

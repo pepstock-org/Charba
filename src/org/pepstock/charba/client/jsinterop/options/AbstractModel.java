@@ -1,7 +1,6 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.jsinterop.Helpers;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
@@ -68,7 +67,7 @@ public abstract class AbstractModel<P extends AbstractModel<?,?>, D> extends Nat
 		JsHelper.get().remove(getNativeObject(), key.name());
 	}
 	
-	public final D getDefaultValues() {
+	protected final D getDefaultValues() {
 		return defaultValues;
 	}
 	
@@ -82,10 +81,6 @@ public abstract class AbstractModel<P extends AbstractModel<?,?>, D> extends Nat
 		model.checkAndAddToParent();
 	}
 	
-	public final NativeObject cloneNativeObject() {
-		return Helpers.get().clone(getNativeObject());
-	}
-
 	/**
 	 * Called recursively when a property has been set in the item.<br>
 	 * This is mandatory because it could happen that the parent item is not present, therefore it must be added.

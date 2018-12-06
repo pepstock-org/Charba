@@ -16,19 +16,21 @@
 package org.pepstock.charba.client.jsinterop.items;
 
 import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
 
 /**
- * JavaScript object which contains the legends hit box size.
+ * This is a wrapper of the CHART.JS item which contains the legends hit box.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public final class LegendHitBoxItem extends SizeItem{
 
 	/**
-	 * @param nativeObject
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
 	LegendHitBoxItem(NativeObject nativeObject) {
 		super(nativeObject);
@@ -37,7 +39,7 @@ public final class LegendHitBoxItem extends SizeItem{
 	/**
 	 * Returns the padding left in pixel.
 	 * 
-	 * @return the padding left in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the padding left in pixel. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getLeft() {
 		return getValue(Position.left, UndefinedValues.INTEGER);
@@ -46,13 +48,19 @@ public final class LegendHitBoxItem extends SizeItem{
 	/**
 	 * Returns the padding top in pixel.
 	 * 
-	 * @return the padding top in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the padding top in pixel. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getTop() {
 		return getValue(Position.top, UndefinedValues.INTEGER);
 	}
 
-	static class LegendHitBoxItemFactory implements Factory<LegendHitBoxItem>{
+	/**
+	 * Inner class to create legend hit box item by a native object to use in {@link org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList}.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @version 2.0
+	 */
+	static class LegendHitBoxItemFactory implements NativeObjectContainerFactory<LegendHitBoxItem>{
 
 		/* (non-Javadoc)
 		 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)

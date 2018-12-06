@@ -22,15 +22,15 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
  * The onProgress and onComplete event are useful for synchronizing an external draw to the chart animation.<br>
- * This is the CHART.JS item with all needed info.
+ * This is a wrapper of the CHART.JS item with all needed info.<br>
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public final class AnimationItem extends NativeObjectContainer {
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -40,16 +40,18 @@ public final class AnimationItem extends NativeObjectContainer {
 	}
 	
 	/**
-	 * @param nativeObject
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
 	AnimationItem(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
 	/**
-	 * Returns the current Animation frame number.
+	 * Returns the current animation frame number.
 	 * 
-	 * @return the current Animation frame number. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the current animation frame number. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getCurrentStep() {
 		return getValue(Property.currentStep, UndefinedValues.DOUBLE);
@@ -58,7 +60,7 @@ public final class AnimationItem extends NativeObjectContainer {
 	/**
 	 * Returns the total number of animation frames.
 	 * 
-	 * @return the total number of animation frames. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the total number of animation frames. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getNumSteps() {
 		return getValue(Property.numSteps, UndefinedValues.DOUBLE);
@@ -67,8 +69,7 @@ public final class AnimationItem extends NativeObjectContainer {
 	/**
 	 * Returns the animation easing to use.
 	 * 
-	 * @return the animation easing to use.
-	 * @see org.pepstock.charba.client.enums.Easing
+	 * @return the animation easing to use. Default is {@link org.pepstock.charba.client.enums.Easing#easeInOutQuart}
 	 */
 	public Easing getEasing() {
 		return getValue(Property.easing, Easing.class, Easing.easeOutQuart);

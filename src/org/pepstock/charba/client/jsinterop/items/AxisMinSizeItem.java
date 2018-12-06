@@ -19,15 +19,18 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**
  * JavaScript object which contains the minimum size of an axis.<br>
- * This object reflects the object created by CHART.JS and is provided to Axis callbacks.
+ * This object reflects the object created by CHART.JS and is provided to Axis callbacks.<br>
+ * Implements all <code>set</code> methods to change java script object properties.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public final class AxisMinSizeItem extends SizeItem {
 
 	/**
-	 * @param nativeObject
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
 	AxisMinSizeItem(NativeObject nativeObject) {
 		super(nativeObject);

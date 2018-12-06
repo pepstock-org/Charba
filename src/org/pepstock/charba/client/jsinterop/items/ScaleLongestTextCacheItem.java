@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,15 +26,17 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**
- * Legend internal object to get data about ticks and their length in pixels.
+ * Legend internal object to get data about ticks and their length in pixels.<br>
+ * This is a wrapper of scale text item of Chart (of CHART.JS).
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -42,7 +46,9 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	}
 	
 	/**
-	 * @param nativeObject
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
 	ScaleLongestTextCacheItem(NativeObject nativeObject) {
 		super(nativeObject);
@@ -51,7 +57,7 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the font of scale.
 	 * 
-	 * @return the font of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}
+	 * @return the font of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#STRING}
 	 */
 	public String getFont() {
 		return getValue(Property.font, UndefinedValues.STRING);
@@ -63,7 +69,9 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	 * @return the list of ticks in garbage collect item
 	 */
 	public List<String> getGarbageCollect() {
+		// gets array from native object
 		ArrayString array = getArrayValue(Property.garbageCollect);
+		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}
 	
@@ -75,8 +83,17 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	 */
 	public Map<String, Integer> getData() {
 		// creates result
-		// FIXME
-//		return getNativeData().getObjectAsMap();
-		return null;
+		Map<String, Integer> result = new HashMap<>();
+		// gets all keys
+		List<Key> keys = keys();
+		// if keys are consistent
+		if (!keys.isEmpty()) {
+			// scans all keys
+			for (Key key : keys) {
+				// loads data item
+				result.put(key.name(), getValue(key, UndefinedValues.INTEGER));
+			}
+		}
+		return Collections.unmodifiableMap(result);
 	}
 }

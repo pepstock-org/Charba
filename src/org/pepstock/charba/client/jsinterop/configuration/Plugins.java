@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
 
@@ -87,16 +88,16 @@ public final class Plugins {
 	}
 
 	/**
-	 * Returns the plugin options, if exist.
+	 * Returns the plugin options, if exist. It uses a factory instance to create a native object container.
 	 * 
 	 * @param pluginId plugin id.
+	 * * @param factory factory instance to create a native object container.
 	 * @return java script object used to configure the plugin or <code>null</code> if not exist.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public <T extends NativeObjectContainer> T getOptions(String pluginId) throws InvalidPluginIdException {
-		// returns the configuration creating a key by plugin id.
-		// FIXME sbagliato
-		return options.getPlugins().getOptions(pluginId);
+	public <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) throws InvalidPluginIdException {
+		// returns the configuration by plugin id.
+		return options.getPlugins().getOptions(pluginId, factory);
 	}
 
 }

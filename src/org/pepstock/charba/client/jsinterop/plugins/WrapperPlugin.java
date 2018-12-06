@@ -27,12 +27,13 @@ import org.pepstock.charba.client.jsinterop.items.TooltipPluginItem;
  * The wrapper is mandatory to able to catch all hooks of chart even if the plugin implements just a part of the hooks.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 abstract class WrapperPlugin {
-	
+	// user plugin implementation
 	private final Plugin delegation;
-	
+	// native object which will be added to chart.js
 	private final NativePlugin nativeObject;
 
 	/**
@@ -73,27 +74,6 @@ abstract class WrapperPlugin {
 	}
 
 	/**
-	 * Returns the options that the user specified into the chart option
-	 * 
-	 * @param chart chart instance
-	 * @return the java script object with options or <code>null</code> if not exist.
-	 */
-	private Object getOptions(AbstractChart<?, ?> chart) {
-		try {
-			if (chart.getOptions().getPlugins().hasOptions(getId())) {
-				// returns the options of chart, stored by plugin id
-				return chart.getOptions().getPlugins().getOptions(getId());
-			} else {
-				return null;
-			}
-		} catch (InvalidPluginIdException e) {
-			// plugin id is invalid
-			// returns null
-			return null;
-		}
-	}
-
-	/**
 	 * Called before initializing 'chart'.
 	 * @param chartId chart id.
 	 */
@@ -102,7 +82,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onBeforeInit(chart, getOptions(chart));
+			delegation.onBeforeInit(chart);
 		}
 	}
 
@@ -115,7 +95,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onAfterInit(chart, getOptions(chart));
+			delegation.onAfterInit(chart);
 		}
 	}
 
@@ -131,7 +111,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			return delegation.onBeforeUpdate(chart, getOptions(chart));
+			return delegation.onBeforeUpdate(chart);
 		}
 		return true;
 	}
@@ -146,7 +126,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onAfterUpdate(chart, getOptions(chart));
+			delegation.onAfterUpdate(chart);
 		}
 	}
 
@@ -162,7 +142,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			return delegation.onBeforeLayout(chart, getOptions(chart));
+			return delegation.onBeforeLayout(chart);
 		}
 		return true;
 	}
@@ -177,7 +157,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onAfterLayout(chart, getOptions(chart));
+			delegation.onAfterLayout(chart);
 		}
 	}
 
@@ -193,7 +173,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			return delegation.onBeforeDatasetsUpdate(chart, getOptions(chart));
+			return delegation.onBeforeDatasetsUpdate(chart);
 		}
 		return true;
 	}
@@ -208,7 +188,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onAfterDatasetsUpdate(chart, getOptions(chart));
+			delegation.onAfterDatasetsUpdate(chart);
 		}
 	}
 
@@ -224,7 +204,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			return delegation.onBeforeDatasetUpdate(chart, item, getOptions(chart));
+			return delegation.onBeforeDatasetUpdate(chart, item);
 		}
 		return true;
 	}
@@ -241,7 +221,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onAfterDatasetUpdate(chart, item, getOptions(chart));
+			delegation.onAfterDatasetUpdate(chart, item);
 		}
 	}
 
@@ -257,7 +237,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			return delegation.onBeforeRender(chart, getOptions(chart));
+			return delegation.onBeforeRender(chart);
 		}
 		return true;
 	}
@@ -272,7 +252,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onAfterRender(chart, getOptions(chart));
+			delegation.onAfterRender(chart);
 		}
 	}
 
@@ -289,7 +269,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			return delegation.onBeforeDraw(chart, easing, getOptions(chart));
+			return delegation.onBeforeDraw(chart, easing);
 		}
 		return true;
 	}
@@ -306,7 +286,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onAfterDraw(chart, easing, getOptions(chart));
+			delegation.onAfterDraw(chart, easing);
 		}
 	}
 
@@ -323,7 +303,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			return delegation.onBeforeDatasetsDraw(chart, easing, getOptions(chart));
+			return delegation.onBeforeDatasetsDraw(chart, easing);
 		}
 		return true;
 	}
@@ -340,7 +320,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onAfterDatasetsDraw(chart, easing, getOptions(chart));
+			delegation.onAfterDatasetsDraw(chart, easing);
 		}
 	}
 
@@ -358,7 +338,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			return delegation.onBeforeDatasetDraw(chart, item, getOptions(chart));
+			return delegation.onBeforeDatasetDraw(chart, item);
 		}
 		return true;
 	}
@@ -376,7 +356,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onAfterDatasetDraw(chart, item, getOptions(chart));
+			delegation.onAfterDatasetDraw(chart, item);
 		}
 	}
 
@@ -394,7 +374,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			return delegation.onBeforeTooltipDraw(chart, item, getOptions(chart));
+			return delegation.onBeforeTooltipDraw(chart, item);
 		}
 		return true;
 	}
@@ -412,7 +392,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onAfterTooltipDraw(chart, item, getOptions(chart));
+			delegation.onAfterTooltipDraw(chart, item);
 		}
 	}
 
@@ -428,7 +408,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			return delegation.onBeforeEvent(chart, event, getOptions(chart));
+			return delegation.onBeforeEvent(chart, event);
 		}
 		return true;
 	}
@@ -445,7 +425,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onAfterEvent(chart, event, getOptions(chart));
+			delegation.onAfterEvent(chart, event);
 		}
 	}
 
@@ -460,7 +440,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onResize(chart, item, getOptions(chart));
+			delegation.onResize(chart, item);
 		}
 	}
 
@@ -473,7 +453,7 @@ abstract class WrapperPlugin {
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onDestroy(chart, getOptions(chart));
+			delegation.onDestroy(chart);
 		}
 	}
 

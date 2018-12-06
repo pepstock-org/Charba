@@ -23,22 +23,22 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 /**
  * There are a number of configuration callbacks that can be used to change parameters in the scale at different points in the
  * update process.<br>
- * This is the CHART.JS item with all needed info about an axis.
+ * This is a wrapper of the CHART.JS item with all needed info about an axis.<br>
+ * Implements all <code>set</code> methods to change java script object properties.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public final class AxisItem extends ScaleItem {
 	
 	private final AxisMarginsItem margins;
 	
 	private final AxisMinSizeItem minSize;	
-	
-	//-----------------------------------------------//
-
 
 	/**
-	 * @param nativeObject
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
 	public AxisItem(NativeObject nativeObject) {
 		super(nativeObject);
@@ -276,7 +276,6 @@ public final class AxisItem extends ScaleItem {
 	 * Sets the position of axis
 	 * 
 	 * @param position the position of axis
-	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public void setPosition(Position position) {
 		setValue(BaseBoxNodeItem.Property.position, position);
@@ -286,7 +285,6 @@ public final class AxisItem extends ScaleItem {
 	 * Returns the margins of axis
 	 * 
 	 * @return the margins of axis
-	 * @see org.pepstock.charba.client.items.AxisMarginsItem
 	 */
 	public AxisMarginsItem getAxisMargins() {
 		return margins;
@@ -296,7 +294,6 @@ public final class AxisItem extends ScaleItem {
 	 * Returns the minimum size of axis
 	 * 
 	 * @return the minimum size of axis
-	 * @see org.pepstock.charba.client.items.AxisMinSizeItem
 	 */
 	public AxisMinSizeItem getAxisMinSize() {
 		return minSize;

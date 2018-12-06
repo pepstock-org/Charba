@@ -19,18 +19,28 @@ import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.jsinterop.options.Animation;
 
-public final class DefaultChartAnimation implements IsDefaultAnimation{
+/**
+ * Defaults for animation option element, based on chart type.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
+public final class DefaultChartAnimation implements IsDefaultAnimation {
 
 	private final Animation animation;
 
 	/**
-	 * @param animation
+	 * Creates the object by animation option element instance.
+	 * 
+	 * @param animation animation option element instance.
 	 */
 	DefaultChartAnimation(Animation animation) {
 		this.animation = animation;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation#getEasing()
 	 */
 	@Override
@@ -38,7 +48,9 @@ public final class DefaultChartAnimation implements IsDefaultAnimation{
 		return animation.getEasing();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation#getDuration()
 	 */
 	@Override
@@ -46,7 +58,9 @@ public final class DefaultChartAnimation implements IsDefaultAnimation{
 		return animation.getDuration();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation#isAnimateRotate()
 	 */
 	@Override
@@ -54,7 +68,9 @@ public final class DefaultChartAnimation implements IsDefaultAnimation{
 		return animation.isAnimateRotate();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation#isAnimateScale()
 	 */
 	@Override

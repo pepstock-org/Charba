@@ -19,18 +19,28 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLayout;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.jsinterop.options.Layout;
 
-public final class DefaultChartLayout implements IsDefaultLayout{
+/**
+ * Defaults for layout option element, based on chart type.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
+public final class DefaultChartLayout implements IsDefaultLayout {
 
 	private final DefaultChartPadding padding;
-	
+
 	/**
-	 * @param chartOptions
+	 * Creates the object by layout option element instance.
+	 * 
+	 * @param layout layout option element instance.
 	 */
-	public DefaultChartLayout(Layout layout) {
+	DefaultChartLayout(Layout layout) {
 		padding = new DefaultChartPadding(layout.getPadding());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLayout#getPadding()
 	 */
 	@Override

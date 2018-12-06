@@ -1,3 +1,18 @@
+/**
+    Copyright 2017 Andrea "Stock" Stocchero
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+	    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
 package org.pepstock.charba.client.jsinterop;
 
 import org.pepstock.charba.client.jsinterop.commons.ObjectType;
@@ -9,38 +24,49 @@ import org.pepstock.charba.client.jsinterop.items.TitleNode;
 import org.pepstock.charba.client.jsinterop.items.TooltipNode;
 import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 
-public final class ChartNode{
-	
+/**
+ * This is a wrapper of CHART.JS CHART instance in order to provide all properties of chart java script instance, set at
+ * runtime.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
+public final class ChartNode {
+
 	private final Chart chart;
-	
+
 	private final OptionsNode options;
-	
+
 	private final LegendNode legend;
-	
+
 	private final ScalesNode scales;
-	
+
 	private final ChartAreaNode chartArea;
-	
+
 	private final TitleNode title;
-	
+
 	private final TooltipNode tooltip;
-	
+
 	private final boolean initialized;
-	
+
 	/**
-	 * @param chart
+	 * Creates the object wrapping a CHART instance.
+	 * 
+	 * @param chart CHART.JS CHART instance
 	 */
 	ChartNode(Chart chart) {
 		this.chart = chart;
+		// creates all sub elements
 		options = new OptionsNode(chart != null ? chart.getOptions() : null);
 		legend = new LegendNode(chart != null ? chart.getLegend() : null);
 		scales = new ScalesNode(chart != null ? chart.getScales() : null);
 		chartArea = new ChartAreaNode(chart != null ? chart.getChartArea() : null);
 		title = new TitleNode(chart != null ? chart.getTitleBlock() : null);
 		tooltip = new TooltipNode(chart != null ? chart.getTooltip() : null);
+		// sets if is initialized checking the CHART id
 		initialized = getId() != UndefinedValues.INTEGER;
 	}
-	
+
 	/**
 	 * @return the initialized
 	 */
@@ -105,7 +131,7 @@ public final class ChartNode{
 	/**
 	 * Returns the CHART JS chart ID.
 	 * 
-	 * @return the CHART JS chart ID. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the CHART JS chart ID. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getId() {
 		return check(chart.getId(), UndefinedValues.INTEGER);
@@ -114,7 +140,7 @@ public final class ChartNode{
 	/**
 	 * Returns the width in pixel.
 	 * 
-	 * @return the width in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the width in pixel. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getWidth() {
 		return check(chart.getWidth(), UndefinedValues.INTEGER);
@@ -123,7 +149,7 @@ public final class ChartNode{
 	/**
 	 * Returns the height in pixel.
 	 * 
-	 * @return the height in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the height in pixel. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getHeight() {
 		return check(chart.getHeight(), UndefinedValues.INTEGER);
@@ -132,7 +158,7 @@ public final class ChartNode{
 	/**
 	 * Returns the aspect ratio.
 	 * 
-	 * @return the aspect ratio. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the aspect ratio. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getAspectRatio() {
 		return check(chart.getAspectRatio(), UndefinedValues.DOUBLE);
@@ -141,7 +167,8 @@ public final class ChartNode{
 	/**
 	 * Returns the current device pixel ratio.
 	 * 
-	 * @return the current device pixel ratio. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the current device pixel ratio. Default is
+	 *         {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getCurrentDevicePixelRatio() {
 		return check(chart.getCurrentDevicePixelRatio(), UndefinedValues.DOUBLE);
@@ -150,7 +177,8 @@ public final class ChartNode{
 	/**
 	 * Returns if the chart is animating or not.
 	 * 
-	 * @return if the chart is animating or not. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 * @return if the chart is animating or not. Default is
+	 *         {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isAnimating() {
 		return check(chart.isAnimating(), UndefinedValues.BOOLEAN);
@@ -159,7 +187,7 @@ public final class ChartNode{
 	/**
 	 * Returns the border width value.
 	 * 
-	 * @return the border width value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the border width value. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getBorderWidth() {
 		return check(chart.getBorderWidth(), UndefinedValues.INTEGER);
@@ -168,7 +196,7 @@ public final class ChartNode{
 	/**
 	 * Returns the outer radius value.
 	 * 
-	 * @return the outer radius value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the outer radius value. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getOuterRadius() {
 		return check(chart.getOuterRadius(), UndefinedValues.DOUBLE);
@@ -177,7 +205,7 @@ public final class ChartNode{
 	/**
 	 * Returns the inner radius value.
 	 * 
-	 * @return the inner radius value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the inner radius value. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getInnerRadius() {
 		return check(chart.getInnerRadius(), UndefinedValues.DOUBLE);
@@ -186,7 +214,7 @@ public final class ChartNode{
 	/**
 	 * Returns the radius length value.
 	 * 
-	 * @return the radius length value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the radius length value. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getRadiusLength() {
 		return check(chart.getRadiusLength(), UndefinedValues.DOUBLE);
@@ -195,7 +223,7 @@ public final class ChartNode{
 	/**
 	 * Returns the offset X value.
 	 * 
-	 * @return the offset X value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the offset X value. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getOffsetX() {
 		return check(chart.getOffsetX(), UndefinedValues.INTEGER);
@@ -204,14 +232,15 @@ public final class ChartNode{
 	/**
 	 * Returns the offset Y value.
 	 * 
-	 * @return the offset Y value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the offset Y value. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getOffsetY() {
 		return check(chart.getOffsetY(), UndefinedValues.INTEGER);
 	}
-	
+
 	/**
 	 * Checks 2 booleans and returns the no-null one.
+	 * 
 	 * @param value original value
 	 * @param defaultValue default value
 	 * @return returns the no-null one.
@@ -225,6 +254,7 @@ public final class ChartNode{
 
 	/**
 	 * Checks 2 integers and returns the no-null one.
+	 * 
 	 * @param value original value
 	 * @param defaultValue default value
 	 * @return returns the no-null one.
@@ -235,6 +265,7 @@ public final class ChartNode{
 
 	/**
 	 * Checks 2 doubles and returns the no-null one.
+	 * 
 	 * @param value original value
 	 * @param defaultValue default value
 	 * @return returns the no-null one.

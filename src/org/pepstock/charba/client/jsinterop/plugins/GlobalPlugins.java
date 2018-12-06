@@ -26,33 +26,37 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
  * It maps the CHART.JS object of default, <code>chart.plugins</code>.<br>
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public final class GlobalPlugins {
 
 	// list of global plugins set by user (not OOTB)
 	private final Set<String> pluginIds = new HashSet<String>();
-	
+	// native object of plugins
 	private final NativePlugins plugins;
 
 	/**
-	 * @param plugins
+	 * Builds the object by the native object which maps <code>chart.plugins</code>
+	 * 
+	 * @param plugins the native object which maps <code>chart.plugins</code>
 	 */
 	public GlobalPlugins(NativePlugins plugins) {
 		this.plugins = plugins;
 	}
 
 	/**
-	 * Registers a plugin as global, to apply to all charts. 
+	 * Registers a plugin as global, to apply to all charts.
+	 * 
 	 * @param plugin plugin instance
-	 * @return <code>true</code> if registered, otherwise <code>false</code> if the plugin is already registered with the plugin id of plugin instance.
-	 * @throws InvalidPluginIdException  if the plugin id is not correct.
+	 * @return <code>true</code> if registered, otherwise <code>false</code> if the plugin is already registered with the plugin
+	 *         id of plugin instance.
+	 * @throws InvalidPluginIdException if the plugin id is not correct.
 	 */
-	public boolean register(Plugin plugin) throws InvalidPluginIdException{
+	public boolean register(Plugin plugin) throws InvalidPluginIdException {
 		// checks the plugin id
 		PluginIdChecker.check(plugin.getId());
 		// checks if ID is already registered
-		if (getIds().contains(plugin.getId())){
+		if (getIds().contains(plugin.getId())) {
 			return false;
 		}
 		// creates a java script object, wrapper of the plugin
@@ -64,22 +68,24 @@ public final class GlobalPlugins {
 	}
 
 	/**
-	 * Unregisters a global plugin. THis is possible ONLY for plugins added as custom ones. 
+	 * Unregisters a global plugin. THis is possible ONLY for plugins added as custom ones.
+	 * 
 	 * @param pluginId plugin instance
 	 * @return <code>true</code> if unregistered, otherwise <code>false</code> if the plugin is not a custom one.
 	 * @throws InvalidPluginIdException if the plugin id is not correct.
 	 */
-	public boolean unregister(String pluginId) throws InvalidPluginIdException{
+	public boolean unregister(String pluginId) throws InvalidPluginIdException {
 		// checks the plugin id
 		PluginIdChecker.check(pluginId);
 		// checks if ID is already registered on custom one
-		if (!pluginIds.contains(pluginId)){
+		if (!pluginIds.contains(pluginId)) {
 			return false;
 		}
 		// gets plugins ids requesting to CHART.JS.
 		ArrayObject existingPlugins = plugins.getAll();
 		// scans ids
-		for (int i=0; i<existingPlugins.length(); i++){
+		for (int i = 0; i < existingPlugins.length(); i++) {
+			// creates the plugin reference
 			PluginReference reference = new PluginReference(existingPlugins.get(i));
 			if (reference.getId() != null && reference.getId().equalsIgnoreCase(pluginId)) {
 				plugins.unregister(reference);
@@ -93,17 +99,19 @@ public final class GlobalPlugins {
 
 	/**
 	 * Gets all global registered plugins ids.
+	 * 
 	 * @return all global registered plugins ids.
 	 */
-	public Set<String> getIds(){
+	public Set<String> getIds() {
 		// gets plugins ids requesting to CHART.JS.
 		ArrayObject existingPlugins = plugins.getAll();
 		// creates a set of strings
 		final Set<String> pluginsIds = new HashSet<String>();
 		// checks teh result from CHART.JS
-		if (existingPlugins != null && existingPlugins.length() > 0){
+		if (existingPlugins != null && existingPlugins.length() > 0) {
 			// scans ids
-			for (int i=0; i<existingPlugins.length(); i++){
+			for (int i = 0; i < existingPlugins.length(); i++) {
+				// creates the reference
 				PluginReference reference = new PluginReference(existingPlugins.get(i));
 				pluginsIds.add(reference.getId());
 			}

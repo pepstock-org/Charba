@@ -28,24 +28,24 @@ import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
-import org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.jsinterop.commons.ObjectType;
 
 /**
- * JavaScript object which contains the legends hit box size.
+ * This is a wrapper of the CHART.JS item which contains the legend item.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public class LegendItem extends NativeObjectContainer {
 
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
-	protected enum Property implements Key
+	enum Property implements Key
 	{
 		datasetIndex, 
 		index,
@@ -62,13 +62,16 @@ public class LegendItem extends NativeObjectContainer {
 	}
 	
 	/**
-	 * 
+	 * To avoid any user creation but provides an empty object
 	 */
 	LegendItem() {
+		// do nothing
 	}
 
 	/**
-	 * @param nativeObject
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
 	public LegendItem(NativeObject nativeObject) {
 		super(nativeObject);
@@ -77,8 +80,7 @@ public class LegendItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset index of the chart
 	 * 
-	 * @return the dataset index of the chart. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
-	 * @see org.pepstock.charba.client.data.Data#getDatasets()
+	 * @return the dataset index of the chart. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getDatasetIndex() {
 		return getValue(Property.datasetIndex, UndefinedValues.INTEGER);
@@ -87,7 +89,7 @@ public class LegendItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset index of the chart (for POLAR and PIE charts)
 	 * 
-	 * @return the dataset index of the chart (for POLAR and PIE charts). Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the dataset index of the chart (for POLAR and PIE charts). Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 * @see org.pepstock.charba.client.data.Data#getDatasets()
 	 */
 	public final int getIndex() {
@@ -97,7 +99,7 @@ public class LegendItem extends NativeObjectContainer {
 	/**
 	 * Returns the label that will be displayed
 	 * 
-	 * @return the label that will be displayed. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return the label that will be displayed. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#STRING}.
 	 */
 	public final String getText() {
 		return getValue(Property.text, UndefinedValues.STRING);
@@ -116,7 +118,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * Returns true if this item represents a hidden dataset. Label will be rendered with a strike-through effect
 	 * 
 	 * @return <code>true</code> if this item represents a hidden dataset. Label will be rendered with a strike-through effect.<br>
-	 * Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 * Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#BOOLEAN}.
 	 */
 	public final boolean isHidden() {
 		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
@@ -126,11 +128,10 @@ public class LegendItem extends NativeObjectContainer {
 	 * Returns how the end points of every box border are drawn. There are three possible values for this property and those
 	 * are: butt, round and square.
 	 * 
-	 * @return how the end points of every box border are drawn.
-	 * @see org.pepstock.charba.client.enums.CapStyle
+	 * @return how the end points of every box border are drawn. 
 	 */
 	public final CapStyle getLineCap() {
-		return getValue(Property.lineCap, CapStyle.class, CapStyle.butt);
+		return getValue(Property.lineCap, CapStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderCapStyle()); 
 	}
 
 	/**
@@ -141,17 +142,19 @@ public class LegendItem extends NativeObjectContainer {
 	 *         of lines and gaps which describe the pattern.
 	 */
 	public final List<Integer> getLineDash() {
+		// gets the array from native object
 		ArrayInteger array = getArrayValue(Property.lineDash);
+		// returns the list
 		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	/**
 	 * Returns the box border dash pattern offset or "phase".
 	 * 
-	 * @return the box border dash pattern offset or "phase". Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the box border dash pattern offset or "phase".
 	 */
 	public final int getLineDashOffset() {
-		return getValue(Property.lineDashOffset, UndefinedValues.INTEGER);
+		return getValue(Property.lineDashOffset, Defaults.get().getGlobal().getElements().getLine().getBorderDashOffset());
 	}
 
 	/**
@@ -161,10 +164,9 @@ public class LegendItem extends NativeObjectContainer {
 	 * There are three possible values for this property: round, bevel and miter.
 	 * 
 	 * @return There are three possible values for this property: round, bevel and miter.
-	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public final JoinStyle getLineJoin() {
-		return getValue(Property.lineJoin, JoinStyle.class, JoinStyle.miter);
+		return getValue(Property.lineJoin, JoinStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderJoinStyle());
 	}
 
 	/**
@@ -173,13 +175,15 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return the width of line in pixels.
 	 */
 	public final List<Integer> getLineWidth() {
-		// checks if the value into object is an arrray
+		// checks if the value into object is an array
 		if (ObjectType.Array.equals(type(Property.lineWidth))) {
+			// gets the array from native object
 			ArrayInteger array = getArrayValue(Property.lineWidth);
+			// returns list
 			return ArrayListHelper.unmodifiableList(array);
 		} else {
 			// returns an array with 1 element
-			return Collections.unmodifiableList(Arrays.asList(getValue(Property.lineWidth, UndefinedValues.INTEGER)));
+			return Collections.unmodifiableList(Arrays.asList(getValue(Property.lineWidth, Defaults.get().getGlobal().getElements().getLine().getBorderWidth())));
 		}
 	}
 
@@ -191,7 +195,9 @@ public class LegendItem extends NativeObjectContainer {
 	public final List<IsColor> getStrokeStyle() {
 		// checks if is an array 
 		if (ObjectType.Array.equals(type(Property.strokeStyle))) {
+			// gets the array from native object
 			ArrayString array = getArrayValue(Property.strokeStyle);
+			// returns list
 			return Collections.unmodifiableList(ColorBuilder.parse(ArrayListHelper.list(array)));
 		} else {
 			// returns an array with 1 element
@@ -203,18 +209,27 @@ public class LegendItem extends NativeObjectContainer {
 	 * Returns the style of the legend box (only used if usePointStyle is true)
 	 * 
 	 * @return the style of the legend box
-	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public final List<PointStyle> getPointStyle() {
+		// checks if is an array 
 		if (ObjectType.Array.equals(type(Property.pointStyle))) {
+			// gets the array from native object
 			ArrayString array = getArrayValue(Property.pointStyle);
+			// returns list
 			return ArrayListHelper.unmodifiableList(PointStyle.class, array);
 		} else {
-			return Collections.unmodifiableList(Arrays.asList(getValue(Property.pointStyle, PointStyle.class, PointStyle.circle)));
+			// returns an array with 1 element
+			return Collections.unmodifiableList(Arrays.asList(getValue(Property.pointStyle, PointStyle.class, Defaults.get().getGlobal().getElements().getPoint().getPointStyle())));
 		}
 	}
 	
-	static class LegendItemFactory implements Factory<LegendItem>{
+	/**
+	 * Inner class to create legend item by a native object to use in {@link org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList}.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @version 2.0
+	 */
+	static class LegendItemFactory implements NativeObjectContainerFactory<LegendItem>{
 		/* (non-Javadoc)
 		 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)
 		 */

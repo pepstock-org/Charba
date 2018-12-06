@@ -13,12 +13,15 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.jsinterop.plugins.impl;
+package org.pepstock.charba.client.jsinterop.impl.plugins;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.jsinterop.plugins.AbstractPlugin;
+import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
 
 import com.google.gwt.canvas.dom.client.Context2d;
 
@@ -27,6 +30,7 @@ import com.google.gwt.canvas.dom.client.Context2d;
  * If added to defaults, without any configuration, the chart will have a WHITE background color.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public final class ChartBackgroundColor extends AbstractPlugin {
@@ -38,6 +42,8 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 * Plugin ID 
 	 */
 	public static final String ID = "backgroundcolor";
+	
+	private final OptionsFactory factory = new OptionsFactory();
 	
 	private final String color;
 	
@@ -93,14 +99,23 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDraw(org.pepstock.charba.client.AbstractChart, double)
 	 */
 	@Override
-	public boolean onBeforeDraw(AbstractChart<?, ?> chart, double easing, Object options) {
-		ChartBackgroundColorOptions bgOptions = null;
-		// creates the plugin options using the java script object
-		// passing also the default color set at constructor.
-		if (options instanceof ChartBackgroundColorOptions) {
-			bgOptions  = (ChartBackgroundColorOptions) options;
-		} else {
-			bgOptions = new ChartBackgroundColorOptions(color);
+	public boolean onBeforeDraw(AbstractChart<?, ?> chart, double easing) {
+		ChartBackgroundColorOptions bgOptions;
+		try {
+			bgOptions = null;
+			// creates the plugin options using the java script object
+			// passing also the default color set at constructor.
+			if (chart.getOptions().getPlugins().hasOptions(ID)) {
+				bgOptions = chart.getOptions().getPlugins().getOptions(ID, factory);
+			} else {
+				bgOptions = new ChartBackgroundColorOptions();
+				bgOptions.setBackgroundColor(color);
+			}
+		} catch (InvalidPluginIdException e) {
+			// ignore message
+			// and use the default
+			bgOptions = new ChartBackgroundColorOptions();
+			bgOptions.setBackgroundColor(color);
 		}
 		// gets the canvas
 		Context2d ctx = chart.getCanvas().getContext2d();
@@ -110,6 +125,18 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		ctx.fillRect(0, 0, chart.getCanvas().getWidth(), chart.getCanvas().getHeight());
 		// always TRUE
 		return true;
+	}
+	
+	private static class OptionsFactory implements NativeObjectContainerFactory<ChartBackgroundColorOptions>{
+
+		/* (non-Javadoc)
+		 * @see org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)
+		 */
+		@Override
+		public ChartBackgroundColorOptions create(NativeObject nativeObject) {
+			return new ChartBackgroundColorOptions(nativeObject);
+		}
+		
 	}
 
 }

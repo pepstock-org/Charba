@@ -19,9 +19,12 @@ import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 
 /**
- * HORIZONTAL BAR chart implementation.
+ * HORIZONTAL BAR chart implementation.<br>
+ * A horizontal bar chart is a variation on a bar chart.<br>
+ * It is sometimes used to show trend data, and the comparison of multiple data sets side by side.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public class HorizontalBarChart extends BarChart {
@@ -29,7 +32,7 @@ public class HorizontalBarChart extends BarChart {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.BarChart#getType()
+	 * @see org.pepstock.charba.client.jsinterop.BarChart#getType()
 	 */
 	@Override
 	public Type getType() {

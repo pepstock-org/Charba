@@ -20,29 +20,42 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel;
 import org.pepstock.charba.client.jsinterop.options.ScaleLabel;
 
+/**
+ * Defaults for scale label option element, based on chart type.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
-	
+
 	private final ScaleLabel scaleLabel;
-	
+
 	private final DefaultChartScaleLabelPadding padding;
 
 	/**
-	 * @param scaleLabel
+	 * Creates the object by scale label option element instance.
+	 * 
+	 * @param scaleLabel scale label option element instance.
 	 */
 	DefaultChartScaleLabel(ScaleLabel scaleLabel) {
 		this.scaleLabel = scaleLabel;
+		// creates sub element
 		this.padding = new DefaultChartScaleLabelPadding(scaleLabel.getPadding());
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontColor()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontColorAsString()
 	 */
 	@Override
 	public String getFontColorAsString() {
 		return scaleLabel.getFontColorAsString();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontSize()
 	 */
 	@Override
@@ -50,7 +63,9 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 		return scaleLabel.getFontSize();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontStyle()
 	 */
 	@Override
@@ -58,7 +73,9 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 		return scaleLabel.getFontStyle();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontFamily()
 	 */
 	@Override
@@ -66,7 +83,9 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 		return scaleLabel.getFontFamily();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel#getPadding()
 	 */
 	@Override
@@ -74,7 +93,9 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 		return padding;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel#isDisplay()
 	 */
 	@Override
@@ -82,7 +103,9 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 		return scaleLabel.isDisplay();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel#getLabelString()
 	 */
 	@Override
@@ -90,7 +113,9 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 		return scaleLabel.getLabelString();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel#getLineHeight()
 	 */
 	@Override

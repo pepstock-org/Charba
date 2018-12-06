@@ -19,15 +19,19 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**
  * JavaScript object which contains the margins sizes of an axis.<br>
- * This object reflects the object created by CHART.JS and is provided to Axis callbacks.
+ * This object reflects the object created by CHART.JS and is provided to Axis callbacks.<br>
+ * Implements all <code>set</code> methods to change java script object properties.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public final class AxisMarginsItem extends MarginsItem {
 
 	/**
-	 * @param nativeObject
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
 	AxisMarginsItem(NativeObject nativeObject) {
 		super(nativeObject);
@@ -47,7 +51,7 @@ public final class AxisMarginsItem extends MarginsItem {
 	 * 
 	 * @param bottom the bottom margin in pixel
 	 */
-	public final void setBottom(int bottom) {
+	public void setBottom(int bottom) {
 		setValue(Property.bottom, bottom);
 	}
 
@@ -56,7 +60,7 @@ public final class AxisMarginsItem extends MarginsItem {
 	 * 
 	 * @param left the left margin in pixel
 	 */
-	public final void setLeft(int left) {
+	public void setLeft(int left) {
 		setValue(Property.left, left);
 	}
 
@@ -65,7 +69,7 @@ public final class AxisMarginsItem extends MarginsItem {
 	 * 
 	 * @param right the right margin in pixel
 	 */
-	public final void setRight(int right) {
+	public void setRight(int right) {
 		setValue(Property.right, right);
 	}
 	

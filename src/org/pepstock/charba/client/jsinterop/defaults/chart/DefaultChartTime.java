@@ -21,18 +21,28 @@ import org.pepstock.charba.client.enums.TimeUnit;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime;
 import org.pepstock.charba.client.jsinterop.options.Time;
 
-public final class DefaultChartTime implements IsDefaultTime{
-	
+/**
+ * Defaults for time option element, based on chart type.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
+public final class DefaultChartTime implements IsDefaultTime {
+
 	private final Time time;
 
 	/**
-	 * @param time
+	 * Creates the object by time option element instance.
+	 * 
+	 * @param time time option element instance.
 	 */
 	DefaultChartTime(Time time) {
 		this.time = time;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#isIsoWeekday()
 	 */
 	@Override
@@ -40,7 +50,9 @@ public final class DefaultChartTime implements IsDefaultTime{
 		return time.isIsoWeekday();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getMax()
 	 */
 	@Override
@@ -48,7 +60,9 @@ public final class DefaultChartTime implements IsDefaultTime{
 		return time.getMax();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getMin()
 	 */
 	@Override
@@ -56,7 +70,9 @@ public final class DefaultChartTime implements IsDefaultTime{
 		return time.getMin();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getRound()
 	 */
 	@Override
@@ -64,7 +80,9 @@ public final class DefaultChartTime implements IsDefaultTime{
 		return time.getRound() != null ? time.getRound() : null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getTooltipFormat()
 	 */
 	@Override
@@ -72,15 +90,19 @@ public final class DefaultChartTime implements IsDefaultTime{
 		return time.getTooltipFormat();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getUnit()
 	 */
 	@Override
 	public TimeUnit getUnit() {
-		return time.getUnit() != null ? time.getUnit() : null ;
+		return time.getUnit() != null ? time.getUnit() : null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getStepSize()
 	 */
 	@Override
@@ -88,7 +110,9 @@ public final class DefaultChartTime implements IsDefaultTime{
 		return time.getStepSize();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getMinUnit()
 	 */
 	@Override
@@ -96,7 +120,9 @@ public final class DefaultChartTime implements IsDefaultTime{
 		return time.getMinUnit();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getParser()
 	 */
 	@Override

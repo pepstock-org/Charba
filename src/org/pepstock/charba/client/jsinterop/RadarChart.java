@@ -21,10 +21,12 @@ import org.pepstock.charba.client.jsinterop.configuration.RadarOptions;
 import org.pepstock.charba.client.jsinterop.data.RadarDataset;
 
 /**
- * RADAR chart implementation.
+ * RADAR chart implementation.<br>
+ * A radar chart is a way of showing multiple data points and the variation between them.<br>
+ * They are often useful for comparing the points of two or more different data sets.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public class RadarChart extends AbstractChart<RadarOptions, RadarDataset> {
 
@@ -40,7 +42,7 @@ public class RadarChart extends AbstractChart<RadarOptions, RadarDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getType()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -50,7 +52,7 @@ public class RadarChart extends AbstractChart<RadarOptions, RadarDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getOptions()
 	 */
 	@Override
 	public RadarOptions getOptions() {
@@ -60,7 +62,7 @@ public class RadarChart extends AbstractChart<RadarOptions, RadarDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#newDataset()
 	 */
 	@Override
 	public RadarDataset newDataset() {

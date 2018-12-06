@@ -19,26 +19,38 @@ import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint;
 import org.pepstock.charba.client.jsinterop.options.Point;
 
-public final class DefaultChartPoint implements IsDefaultPoint{
-	
+/**
+ * Defaults for point option element, based on chart type.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
+public final class DefaultChartPoint implements IsDefaultPoint {
+
 	private final Point point;
 
 	/**
-	 * @param point
+	 * Creates the object by point option element instance.
+	 * 
+	 * @param point point option element instance.
 	 */
 	DefaultChartPoint(Point point) {
 		this.point = point;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBackgroundColor()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBackgroundColorAsString()
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
 		return point.getBackgroundColorAsString();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBorderWidth()
 	 */
 	@Override
@@ -46,15 +58,19 @@ public final class DefaultChartPoint implements IsDefaultPoint{
 		return point.getBorderWidth();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBorderColor()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBorderColorAsString()
 	 */
 	@Override
 	public String getBorderColorAsString() {
 		return point.getBorderColorAsString();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint#getRadius()
 	 */
 	@Override
@@ -62,7 +78,9 @@ public final class DefaultChartPoint implements IsDefaultPoint{
 		return point.getRadius();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint#getPointStyle()
 	 */
 	@Override
@@ -70,7 +88,9 @@ public final class DefaultChartPoint implements IsDefaultPoint{
 		return point.getPointStyle();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint#getHitRadius()
 	 */
 	@Override
@@ -78,7 +98,9 @@ public final class DefaultChartPoint implements IsDefaultPoint{
 		return point.getHitRadius();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint#getHoverRadius()
 	 */
 	@Override
@@ -86,7 +108,9 @@ public final class DefaultChartPoint implements IsDefaultPoint{
 		return point.getHoverRadius();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint#getHoverBorderWidth()
 	 */
 	@Override

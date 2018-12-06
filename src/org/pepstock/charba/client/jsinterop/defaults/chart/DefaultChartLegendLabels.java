@@ -19,26 +19,38 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels;
 import org.pepstock.charba.client.jsinterop.options.LegendLabels;
 
+/**
+ * Defaults for legend labels option element, based on chart type.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
-	
+
 	private final LegendLabels labels;
 
 	/**
-	 * @param labels
+	 * Creates the object by legend labels option element instance.
+	 * 
+	 * @param labels legend labels option element instance.
 	 */
 	DefaultChartLegendLabels(LegendLabels labels) {
 		this.labels = labels;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontColor()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontColorAsString()
 	 */
 	@Override
 	public String getFontColorAsString() {
 		return labels.getFontColorAsString();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontSize()
 	 */
 	@Override
@@ -46,7 +58,9 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 		return labels.getFontSize();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontStyle()
 	 */
 	@Override
@@ -54,7 +68,9 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 		return labels.getFontStyle();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontFamily()
 	 */
 	@Override
@@ -62,7 +78,9 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 		return labels.getFontFamily();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels#isUsePointStyle()
 	 */
 	@Override
@@ -70,7 +88,9 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 		return labels.isUsePointStyle();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels#getBoxWidth()
 	 */
 	@Override
@@ -78,7 +98,9 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 		return labels.getBoxWidth();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels#getPadding()
 	 */
 	@Override

@@ -7,41 +7,52 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
+/**
+ * This is the java script native object which is the plugins utility of CHART.JS.<br>
+ * It maps the java script object chart.plugins.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class NativePlugins {
-	
-	/**
-	 * Registers the given plugin(s) if not already registered.
-	 * @param {Array|Object} plugins plugin instance(s).
-	 */
-	@JsMethod
-	native void register(NativePlugin plugin); 
 
 	/**
-	 * Unregisters the given plugin(s) only if registered.
-	 * @param {Array|Object} plugins plugin instance(s).
+	 * Registers the given plugin if not already registered.
+	 * 
+	 * @param plugin plugin instance.
 	 */
 	@JsMethod
-	native void unregister(PluginReference plugin); 
+	native void register(NativePlugin plugin);
+
+	/**
+	 * Unregisters the given plugin only if registered.
+	 * 
+	 * @param plugin plugin instance reference.
+	 */
+	@JsMethod
+	native void unregister(PluginReference plugin);
 
 	/**
 	 * Remove all registered plugins.
 	 */
 	@JsMethod
-	native void clear(); //FIXME
+	native void clear();
+
 	/**
-	 * Returns the number of registered plugins?
-	 * @returns {Number}
+	 * Returns the number of registered plugins
+	 * 
+	 * @returns amount of registered plugins
 	 */
 	@JsMethod
-	native int count(); //FIXME
+	native int count();
 
 	/**
 	 * Returns all registered plugin instances.
-	 * @returns {Array} array of plugin objects.
-	 * @since 2.1.5
+	 * 
+	 * @returns array of plugin objects.
 	 */
 	@JsMethod
-	native ArrayObject getAll(); 
+	native ArrayObject getAll();
 
 }

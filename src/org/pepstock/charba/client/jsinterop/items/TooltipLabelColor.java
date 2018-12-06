@@ -19,20 +19,21 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.Defaults;
-import org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
 
 /**
  * This object contains the color info when a label into tooltip.<br>
  * It must be used into label tooltip callback.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  */
 public final class TooltipLabelColor extends NativeObjectContainer {
 
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -41,14 +42,16 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	}
 	
 	/**
-	 * 
+	 * Creates the object with an empty native object
 	 */
 	public TooltipLabelColor() {
 		super();
 	}
 
 	/**
-	 * @param nativeObject
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
 	TooltipLabelColor(NativeObject nativeObject) {
 		super(nativeObject);
@@ -135,7 +138,13 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 		return getNativeObject();
 	}
 	
-	static class TooltipLabelColorFactory implements Factory<TooltipLabelColor>{
+	/**
+	 * Inner class to create tooltip label color by a native object to use in {@link org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList}.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @version 2.0
+	 */
+	static class TooltipLabelColorFactory implements NativeObjectContainerFactory<TooltipLabelColor>{
 		/* (non-Javadoc)
 		 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)
 		 */

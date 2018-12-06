@@ -20,7 +20,6 @@ import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory;
 
 /**
  * Utility to create array list objects from java script arrays.
@@ -162,7 +161,7 @@ public final class ArrayListHelper {
 	 * @param <O> type of native object
 	 * @return the instance of updated list or <code>null</code> if the array is null.
 	 */
-	public static <E extends NativeObjectContainer> ArrayObjectContainerList<E> list(ArrayObject array, Factory<E> factory){
+	public static <E extends NativeObjectContainer> ArrayObjectContainerList<E> list(ArrayObject array, NativeObjectContainerFactory<E> factory){
 		// checks if array is null
 		if (array == null){
 			return null;
@@ -239,7 +238,7 @@ public final class ArrayListHelper {
 	 * @param <O> type of native object
 	 * @return the instance of updated list or <code>null</code> if the array is null.
 	 */
-	public static <E extends NativeObjectContainer> List<E> unmodifiableList(ArrayObject array, Factory<E> factory){
+	public static <E extends NativeObjectContainer> List<E> unmodifiableList(ArrayObject array, NativeObjectContainerFactory<E> factory){
 		return unmodifiableList(list(array, factory));
 	}
 	

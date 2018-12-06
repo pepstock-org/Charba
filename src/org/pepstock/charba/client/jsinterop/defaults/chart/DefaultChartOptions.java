@@ -27,31 +27,40 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
 
-public final class DefaultChartOptions implements IsDefaultOptions{
-	
+/**
+ * Defaults for options element, based on chart type. THIS IS THE ROOT OF ALL ELEMENTS DEFAULTS.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
+public final class DefaultChartOptions implements IsDefaultOptions {
+
 	private final ChartOptions chartOptions;
-	
+
 	private final DefaultChartAnimation animation;
-	
+
 	private final DefaultChartScale scale;
-	
+
 	private final DefaultChartHover hover;
 
 	private final DefaultChartTitle title;
-	
+
 	private final DefaultChartLegend legend;
-	
+
 	private final DefaultChartTooltips tooltips;
-	
+
 	private final DefaultChartLayout layout;
-	
+
 	private final DefaultChartElements elements;
-	
+
 	/**
-	 * @param chartOptions
+	 * Creates the object by options element instance.
+	 * 
+	 * @param chartOptions chart options instance.
 	 */
 	public DefaultChartOptions(ChartOptions chartOptions) {
 		this.chartOptions = chartOptions;
+		// creates sub elements
 		animation = new DefaultChartAnimation(chartOptions.getAnimation());
 		scale = new DefaultChartScale(chartOptions.getScale());
 		hover = new DefaultChartHover(chartOptions.getHover());
@@ -62,14 +71,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		elements = new DefaultChartElements(chartOptions.getElements());
 	}
 
-	/**
-	 * @return the chartOptions
-	 */
-	final ChartOptions getChartOptions() {
-		return chartOptions;
-	}
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getLayout()
 	 */
 	@Override
@@ -77,7 +81,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return layout;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getElements()
 	 */
 	@Override
@@ -85,7 +91,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return elements;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getScale()
 	 */
 	@Override
@@ -93,7 +101,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return scale;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getAnimation()
 	 */
 	@Override
@@ -101,7 +111,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return animation;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getHover()
 	 */
 	@Override
@@ -109,7 +121,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return hover;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getTitle()
 	 */
 	@Override
@@ -117,7 +131,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return title;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getLegend()
 	 */
 	@Override
@@ -125,7 +141,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return legend;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getTooltips()
 	 */
 	@Override
@@ -133,7 +151,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return tooltips;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#isResponsive()
 	 */
 	@Override
@@ -141,7 +161,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return chartOptions.isResponsive();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getResponsiveAnimationDuration()
 	 */
 	@Override
@@ -149,7 +171,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return chartOptions.getResponsiveAnimationDuration();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#isMaintainAspectRatio()
 	 */
 	@Override
@@ -157,7 +181,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return chartOptions.isMaintainAspectRatio();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getDevicePixelRatio()
 	 */
 	@Override
@@ -165,23 +191,29 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return chartOptions.getDevicePixelRatio();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getDefaultColor()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getDefaultColorAsString()
 	 */
 	@Override
 	public String getDefaultColorAsString() {
 		return chartOptions.getDefaultColorAsString();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getDefaultFontColor()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getDefaultFontColorAsString()
 	 */
 	@Override
 	public String getDefaultFontColorAsString() {
 		return chartOptions.getDefaultFontColorAsString();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getDefaultFontSize()
 	 */
 	@Override
@@ -189,7 +221,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return chartOptions.getDefaultFontSize();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getDefaultFontStyle()
 	 */
 	@Override
@@ -197,7 +231,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return chartOptions.getDefaultFontStyle();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getDefaultFontFamily()
 	 */
 	@Override
@@ -205,7 +241,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return chartOptions.getDefaultFontFamily();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#isShowLines()
 	 */
 	@Override
@@ -213,7 +251,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return chartOptions.isShowLines();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#isSpanGaps()
 	 */
 	@Override
@@ -221,7 +261,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return chartOptions.isSpanGaps();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getCutoutPercentage()
 	 */
 	@Override
@@ -229,7 +271,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return chartOptions.getCutoutPercentage();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getRotation()
 	 */
 	@Override
@@ -237,7 +281,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return chartOptions.getRotation();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getCircumference()
 	 */
 	@Override
@@ -245,7 +291,9 @@ public final class DefaultChartOptions implements IsDefaultOptions{
 		return chartOptions.getCircumference();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getStartAngle()
 	 */
 	@Override

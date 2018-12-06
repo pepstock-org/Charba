@@ -20,8 +20,8 @@ import java.util.List;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
-import org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
 
 /**
@@ -123,7 +123,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScale>{
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private class ScaleListFactory implements Factory<Scale> {
+	private class ScaleListFactory implements NativeObjectContainerFactory<Scale> {
 
 		/* (non-Javadoc)
 		 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)

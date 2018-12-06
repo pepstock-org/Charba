@@ -20,21 +20,32 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels;
 import org.pepstock.charba.client.jsinterop.options.Legend;
 
+/**
+ * Defaults for legend option element, based on chart type.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public final class DefaultChartLegend implements IsDefaultLegend {
 
 	private final Legend legend;
-	
+
 	private final DefaultChartLegendLabels labels;
 
 	/**
-	 * @param legend
+	 * Creates the object by legend option element instance.
+	 * 
+	 * @param legend legend option element instance.
 	 */
 	DefaultChartLegend(Legend legend) {
 		this.legend = legend;
+		// creates sub element
 		labels = new DefaultChartLegendLabels(legend.getLabels());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend#getLabels()
 	 */
 	@Override
@@ -42,7 +53,9 @@ public final class DefaultChartLegend implements IsDefaultLegend {
 		return labels;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend#isDisplay()
 	 */
 	@Override
@@ -50,7 +63,9 @@ public final class DefaultChartLegend implements IsDefaultLegend {
 		return legend.isDisplay();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend#isFullWidth()
 	 */
 	@Override
@@ -58,7 +73,9 @@ public final class DefaultChartLegend implements IsDefaultLegend {
 		return legend.isFullWidth();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend#isReverse()
 	 */
 	@Override
@@ -66,12 +83,14 @@ public final class DefaultChartLegend implements IsDefaultLegend {
 		return legend.isReverse();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend#getPosition()
 	 */
 	@Override
 	public Position getPosition() {
 		return legend.getPosition();
 	}
-	
+
 }

@@ -20,18 +20,28 @@ import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover;
 import org.pepstock.charba.client.jsinterop.options.Hover;
 
+/**
+ * Defaults for hover option element, based on chart type.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 public final class DefaultChartHover implements IsDefaultHover {
-	
+
 	private final Hover hover;
 
 	/**
-	 * @param hover
+	 * Creates the object by hover option element instance.
+	 * 
+	 * @param hover hover option element instance.
 	 */
 	DefaultChartHover(Hover hover) {
 		this.hover = hover;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover#getMode()
 	 */
 	@Override
@@ -39,7 +49,9 @@ public final class DefaultChartHover implements IsDefaultHover {
 		return hover.getMode();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover#isIntersect()
 	 */
 	@Override
@@ -47,7 +59,9 @@ public final class DefaultChartHover implements IsDefaultHover {
 		return hover.isIntersect();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover#getAnimationDuration()
 	 */
 	@Override
@@ -55,7 +69,9 @@ public final class DefaultChartHover implements IsDefaultHover {
 		return hover.getAnimationDuration();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover#getAxis()
 	 */
 	@Override
