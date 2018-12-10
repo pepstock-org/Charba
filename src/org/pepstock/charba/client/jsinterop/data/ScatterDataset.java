@@ -18,8 +18,10 @@ package org.pepstock.charba.client.jsinterop.data;
 import java.util.List;
 
 import org.pepstock.charba.client.enums.Fill;
+
 /**
- * The scatter chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
+ * The scatter chart allows a number of properties to be specified for each dataset. These are used to set display properties
+ * for a specific dataset.<br>
  * Extends the line dataset to set fixed properties for scatter chart.<br>
  * The scatter dataset can use ONLY datapoints. If you try to use array of data numbers, an exception will be thrown.
  * 
@@ -38,7 +40,9 @@ public final class ScatterDataset extends LineDataset {
 		super.setShowLines(false);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.LineDataset#setShowLine(boolean)
 	 */
 	@Override
@@ -47,7 +51,9 @@ public final class ScatterDataset extends LineDataset {
 		super.setShowLines(false);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.LiningDataset#setFill(org.pepstock.charba.client.enums.Fill)
 	 */
 	@Override
@@ -56,7 +62,9 @@ public final class ScatterDataset extends LineDataset {
 		super.setFill(Fill.nofill);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.Dataset#setData(double[])
 	 */
 	@Override
@@ -64,7 +72,9 @@ public final class ScatterDataset extends LineDataset {
 		throw new UnsupportedOperationException("Use datapoints instead of data for scatter chart");
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.Dataset#getData()
 	 */
 	@Override

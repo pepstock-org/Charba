@@ -104,7 +104,7 @@ public final class Defaults {
 	 * @return the default options
 	 */
 	public ChartOptions options(Type type) {
-		return new ChartOptions(Merger.get().get(type));
+		return new ChartOptions(type, Merger.get().get(type));
 	}
 
 	/**

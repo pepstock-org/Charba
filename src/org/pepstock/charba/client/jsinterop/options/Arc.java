@@ -20,20 +20,25 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc;
 
 /**
- * Arcs are used in the polar area, doughnut and pie charts.<br>
- * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the
- * same way.<br>
- * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
- * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a
- * dataset.
+ * Arcs are used in the polar area, doughnut and pie charts.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  * 
  */
-public class Arc extends AbstractElement<Elements, IsDefaultArc> implements IsDefaultArc{
+public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc{
 
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param elements parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
 	Arc(Elements elements, Key childKey, IsDefaultArc defaultValues, NativeObject nativeObject) {
-		super(elements, childKey, defaultValues, nativeObject == null ? new NativeObject(): nativeObject);
+		super(elements, childKey, defaultValues, nativeObject);
 	}
 
 }

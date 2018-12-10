@@ -24,9 +24,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultElements;
  * apply to the configuration attached to a dataset.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public class Elements extends AbstractModel<Options, IsDefaultElements> implements IsDefaultElements{
+public final class Elements extends AbstractModel<Options, IsDefaultElements> implements IsDefaultElements{
 
 	private final Arc arc;
 	
@@ -37,7 +38,7 @@ public class Elements extends AbstractModel<Options, IsDefaultElements> implemen
 	private final Rectangle rectangle;
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -47,12 +48,22 @@ public class Elements extends AbstractModel<Options, IsDefaultElements> implemen
 		arc
 	}
 
-	Elements(Options options, Key childKey, IsDefaultElements defaultOptions, NativeObject nativeObject) {
-		super(options, childKey, defaultOptions, nativeObject == null ? new NativeObject() : nativeObject);
-		arc = new Arc(this, Property.arc, defaultOptions.getArc(), getValue(Property.arc));
-		line = new Line(this, Property.line, defaultOptions.getLine(), getValue(Property.line));
-		point = new Point(this, Property.point, defaultOptions.getPoint(), getValue(Property.point));
-		rectangle = new Rectangle(this, Property.rectangle, defaultOptions.getRectangle(), getValue(Property.rectangle));
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param options options of the chart.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
+	Elements(Options options, Key childKey, IsDefaultElements defaultValues, NativeObject nativeObject) {
+		super(options, childKey, defaultValues, nativeObject);
+		// gets all sub elements
+		arc = new Arc(this, Property.arc, defaultValues.getArc(), getValue(Property.arc));
+		line = new Line(this, Property.line, defaultValues.getLine(), getValue(Property.line));
+		point = new Point(this, Property.point, defaultValues.getPoint(), getValue(Property.point));
+		rectangle = new Rectangle(this, Property.rectangle, defaultValues.getRectangle(), getValue(Property.rectangle));
 	}
 
 	/**

@@ -80,6 +80,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 		// checks if consistent with out of the box chart types
 		Type type = ChartType.get(value);
 		// if not, creates new type being a controller.
+		// FIXME the scaletype could be wrong
 		return type == null ? new ControllerType(value) : type;
 	}
 

@@ -24,26 +24,29 @@ import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.ObjectType;
-import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
 
 /**
- * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
+ * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
+ * specific dataset.<br>
  * This class collects a set of common field for Line and Radar charts.
+ * 
  * @author Andrea "Stock" Stocchero
  * @version 2.0
  *
  */
-abstract class LiningDataset extends Dataset{
-	
+abstract class LiningDataset extends Dataset {
+
 	/**
-	 * Name of fields of JavaScript object. 
+	 * Name of properties of native object.
 	 */
-	private enum Property implements Key {
+	private enum Property implements Key
+	{
 		backgroundColor,
 		borderColor,
 		borderDash,
@@ -66,7 +69,8 @@ abstract class LiningDataset extends Dataset{
 	}
 
 	/**
-	 * Sets the fill color under the line. 
+	 * Sets the fill color under the line.
+	 * 
 	 * @param backgroundColor the fill color under the line.
 	 */
 	public void setBackgroundColor(IsColor backgroundColor) {
@@ -74,7 +78,8 @@ abstract class LiningDataset extends Dataset{
 	}
 
 	/**
-	 * Sets the fill color under the line. 
+	 * Sets the fill color under the line.
+	 * 
 	 * @param backgroundColor the fill color under the line.
 	 */
 	public void setBackgroundColor(String backgroundColor) {
@@ -83,22 +88,25 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the fill color under the line.
-	 * @return the fill color under the line. 
+	 * 
+	 * @return the fill color under the line.
 	 */
 	public String getBackgroundColorAsString() {
-		return getValue(Property.backgroundColor, DefaultOptions.get().getElements().getLine().getBackgroundColorAsString());
+		return getValue(Property.backgroundColor, Defaults.get().getGlobal().getElements().getLine().getBackgroundColorAsString());
 	}
 
 	/**
 	 * Returns the fill color under the line.
-	 * @return the fill color under the line. 
+	 * 
+	 * @return the fill color under the line.
 	 */
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
 	/**
-	 * Sets the color of the line. 
+	 * Sets the color of the line.
+	 * 
 	 * @param borderColor the color of the line.
 	 */
 	public void setBorderColor(IsColor borderColor) {
@@ -106,7 +114,8 @@ abstract class LiningDataset extends Dataset{
 	}
 
 	/**
-	 * Sets the color of the line. 
+	 * Sets the color of the line.
+	 * 
 	 * @param borderColor the color of the line.
 	 */
 	public void setBorderColor(String borderColor) {
@@ -115,21 +124,25 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the color of the line.
-	 * @return the color of the line. 
+	 * 
+	 * @return the color of the line.
 	 */
 	public String getBorderColorAsString() {
-		return getValue(Property.borderColor, DefaultOptions.get().getElements().getLine().getBorderColorAsString());
+		return getValue(Property.borderColor, Defaults.get().getGlobal().getElements().getLine().getBorderColorAsString());
 	}
 
 	/**
 	 * Returns the color of the line.
+	 * 
 	 * @return the color of the line.
 	 */
 	public IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
 	}
+
 	/**
 	 * Sets the width of the line in pixels.
+	 * 
 	 * @param borderWidth the width of the line in pixels.
 	 */
 	public void setBorderWidth(int borderWidth) {
@@ -138,23 +151,30 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the width of the line in pixels.
-	 * @return the width of the line in pixels. 
+	 * 
+	 * @return the width of the line in pixels.
 	 */
 	public int getBorderWidth() {
-		return getValue(Property.borderWidth, DefaultOptions.get().getElements().getLine().getBorderWidth());
+		return getValue(Property.borderWidth, Defaults.get().getGlobal().getElements().getLine().getBorderWidth());
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
+	 * and gaps which describe the pattern.
+	 * 
+	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating
+	 *            lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
 		setArrayValue(Property.borderDash, ArrayInteger.of(borderDash));
 	}
 
 	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
+	 * lines and gaps which describe the pattern.
+	 * 
+	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
+	 *         lines and gaps which describe the pattern.
 	 */
 	public List<Integer> getBorderDash() {
 		ArrayInteger array = getArrayValue(Property.borderDash);
@@ -162,23 +182,27 @@ abstract class LiningDataset extends Dataset{
 	}
 
 	/**
-	 * Sets the line dash pattern offset or "phase". 
-	 * @param borderDashOffset the line dash pattern offset or "phase". 
+	 * Sets the line dash pattern offset or "phase".
+	 * 
+	 * @param borderDashOffset the line dash pattern offset or "phase".
 	 */
-	public void setBorderDashOffset(int borderDashOffset){
-		 setValue(Property.borderDashOffset, borderDashOffset);
+	public void setBorderDashOffset(int borderDashOffset) {
+		setValue(Property.borderDashOffset, borderDashOffset);
 	}
 
 	/**
-	 * Returns the line dash pattern offset or "phase". 
-	 * @return the line dash pattern offset or "phase". 
+	 * Returns the line dash pattern offset or "phase".
+	 * 
+	 * @return the line dash pattern offset or "phase".
 	 */
-	public int getBorderDashOffset(){
-		  return getValue(Property.borderDashOffset, DefaultOptions.get().getElements().getLine().getBorderDashOffset());
+	public int getBorderDashOffset() {
+		return getValue(Property.borderDashOffset, Defaults.get().getGlobal().getElements().getLine().getBorderDashOffset());
 	}
 
 	/**
-	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square. 
+	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt,
+	 * round and square.
+	 * 
 	 * @param borderCapStyle how the end points of every line are drawn.
 	 */
 	public void setBorderCapStyle(CapStyle borderCapStyle) {
@@ -186,38 +210,47 @@ abstract class LiningDataset extends Dataset{
 	}
 
 	/**
-	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square. By default this property is set to butt.
+	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are:
+	 * butt, round and square. By default this property is set to butt.
+	 * 
 	 * @return how the end points of every line are drawn.
 	 */
-	public CapStyle getBorderCapStyle(){
-		return getValue(Property.borderCapStyle, CapStyle.class, DefaultOptions.get().getElements().getLine().getBorderCapStyle());
+	public CapStyle getBorderCapStyle() {
+		return getValue(Property.borderCapStyle, CapStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderCapStyle());
 	}
 
 	/**
-	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are skipped).<br>
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 * (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position,
+	 * are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
-	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter. 
+	 * 
+	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter.
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
 		setValue(Property.borderJoinStyle, borderJoinStyle);
 	}
 
 	/**
-	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are skipped).<br>
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 * (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position,
+	 * are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
-	 * @return There are three possible values for this property: round, bevel and miter. 
+	 * 
+	 * @return There are three possible values for this property: round, bevel and miter.
 	 */
 	public JoinStyle getBorderJoinStyle() {
-		return getValue(Property.borderJoinStyle, JoinStyle.class, DefaultOptions.get().getElements().getLine().getBorderJoinStyle());
+		return getValue(Property.borderJoinStyle, JoinStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderJoinStyle());
 	}
 
 	/**
 	 * Sets how to fill the area under the line.
+	 * 
 	 * @param fill how to fill the area under the line.
 	 */
-	public void setFill(Fill fill){
+	public void setFill(Fill fill) {
 		// checks if is no fill
-		if (Fill.nofill.equals(fill)){
+		if (Fill.nofill.equals(fill)) {
 			// sets the boolean value instead of string one
 			setValue(Property.fill, false);
 		} else {
@@ -225,41 +258,47 @@ abstract class LiningDataset extends Dataset{
 			setValue(Property.fill, fill);
 		}
 	}
-	
+
 	/**
 	 * Returns how to fill the area under the line.
+	 * 
 	 * @return how to fill the area under the line.
 	 */
-	public Fill getFill(){
+	public Fill getFill() {
 		// gets value type
 		ObjectType type = type(Property.fill);
-		//String value = getValue(Property.fill, getDefaultValues().getFill());
+		// String value = getValue(Property.fill, getDefaultValues().getFill());
 		// if is a boolean FALSE value
 		if (ObjectType.Boolean.equals(type)) {
 			// returns no fill
 			return getValue(Property.fill, false) ? Fill.origin : Fill.nofill;
 		}
-		return getValue(Property.fill, Fill.class, DefaultOptions.get().getElements().getLine().getFill());
+		return getValue(Property.fill, Fill.class, Defaults.get().getGlobal().getElements().getLine().getFill());
 	}
 
 	/**
-	 * Sets curve tension of the line. Set to 0 to draw straight lines. This option is ignored if monotone cubic interpolation is used.
+	 * Sets curve tension of the line. Set to 0 to draw straight lines. This option is ignored if monotone cubic interpolation
+	 * is used.
+	 * 
 	 * @param lineTension curve tension of the line
 	 */
-	public void setLineTension(double lineTension){
+	public void setLineTension(double lineTension) {
 		setValue(Property.lineTension, lineTension);
 	}
 
 	/**
-	 * Returns curve tension of the line. Set to 0 to draw straight lines. This option is ignored if monotone cubic interpolation is used.
+	 * Returns curve tension of the line. Set to 0 to draw straight lines. This option is ignored if monotone cubic
+	 * interpolation is used.
+	 * 
 	 * @return curve tension of the line. Default is <code>0.4</code>
 	 */
-	public double getLineTension(){
-		return getValue(Property.lineTension, DefaultOptions.get().getElements().getLine().getTension());
+	public double getLineTension() {
+		return getValue(Property.lineTension, Defaults.get().getGlobal().getElements().getLine().getTension());
 	}
 
 	/**
 	 * Sets the fill color for points.
+	 * 
 	 * @param pointBackgroundColor array of the fill color for points.
 	 */
 	public void setPointBackgroundColor(IsColor... pointBackgroundColor) {
@@ -268,6 +307,7 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Sets the fill color for points.
+	 * 
 	 * @param pointBackgroundColor array of the fill color for points.
 	 */
 	public void setPointBackgroundColor(String... pointBackgroundColor) {
@@ -276,23 +316,27 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the fill color for points.
+	 * 
 	 * @return list of the fill color for points.
 	 */
 	public List<String> getPointBackgroundColorAsString() {
-		ArrayString array = getValueOrArray(Property.pointBackgroundColor, DefaultOptions.get().getElements().getPoint().getBackgroundColorAsString());;
-	    return ArrayListHelper.list(array);
+		ArrayString array = getValueOrArray(Property.pointBackgroundColor, Defaults.get().getGlobal().getElements().getPoint().getBackgroundColorAsString());
+		;
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Returns the fill color for points.
+	 * 
 	 * @return list of the fill color for points.
 	 */
 	public List<IsColor> getPointBackgroundColor() {
-	    return ColorBuilder.parse(getPointBackgroundColorAsString());
+		return ColorBuilder.parse(getPointBackgroundColorAsString());
 	}
 
 	/**
 	 * Sets the border color for points.
+	 * 
 	 * @param pointBorderColor array of the border color for points.
 	 */
 	public void setPointBorderColor(IsColor... pointBorderColor) {
@@ -301,6 +345,7 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Sets the border color for points.
+	 * 
 	 * @param pointBorderColor array of the border color for points.
 	 */
 	public void setPointBorderColor(String... pointBorderColor) {
@@ -309,23 +354,26 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the border color for points.
+	 * 
 	 * @return list of the border color for points.
 	 */
 	public List<String> getPointBorderColorAsString() {
-		ArrayString array = getValueOrArray(Property.pointBorderColor, DefaultOptions.get().getElements().getPoint().getBorderColorAsString());
+		ArrayString array = getValueOrArray(Property.pointBorderColor, Defaults.get().getGlobal().getElements().getPoint().getBorderColorAsString());
 		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Returns the border color for points.
+	 * 
 	 * @return list of the border color for points.
 	 */
 	public List<IsColor> getPointBorderColor() {
-	    return ColorBuilder.parse(getPointBorderColorAsString());
+		return ColorBuilder.parse(getPointBorderColorAsString());
 	}
 
 	/**
 	 * Sets the width of the point border in pixels.
+	 * 
 	 * @param pointBorderWidth array of the width of the point border in pixels.
 	 */
 	public void setPointBorderWidth(int... pointBorderWidth) {
@@ -334,15 +382,17 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the width of the point border in pixels.
+	 * 
 	 * @return list of the width of the point border in pixels.
 	 */
 	public List<Integer> getPointBorderWidth() {
-		ArrayInteger array = getValueOrArray(Property.pointBorderWidth, DefaultOptions.get().getElements().getPoint().getBorderWidth());
-	    return ArrayListHelper.list(array);
+		ArrayInteger array = getValueOrArray(Property.pointBorderWidth, Defaults.get().getGlobal().getElements().getPoint().getBorderWidth());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Sets the pixel size of the non-displayed point that reacts to mouse events.
+	 * 
 	 * @param pointHitRadius array of the pixel size of the non-displayed point.
 	 */
 	public void setPointHitRadius(double... pointHitRadius) {
@@ -351,23 +401,26 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the pixel size of the non-displayed point that reacts to mouse events.
+	 * 
 	 * @return list of the pixel size of the non-displayed point.
 	 */
 	public List<Double> getPointHitRadius() {
-		ArrayDouble array = getValueOrArray(Property.pointHitRadius, DefaultOptions.get().getElements().getPoint().getHitRadius());
-	    return ArrayListHelper.list(array);
+		ArrayDouble array = getValueOrArray(Property.pointHitRadius, Defaults.get().getGlobal().getElements().getPoint().getHitRadius());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Sets the point background color when hovered.
+	 * 
 	 * @param pointHoverBackgroundColor array of the point background color when hovered.
 	 */
 	public void setPointHoverBackgroundColor(IsColor... pointHoverBackgroundColor) {
 		setValueOrArray(Property.pointHoverBackgroundColor, pointHoverBackgroundColor);
 	}
-	
+
 	/**
 	 * Sets the point background color when hovered.
+	 * 
 	 * @param pointHoverBackgroundColor array of the point background color when hovered.
 	 */
 	public void setPointHoverBackgroundColor(String... pointHoverBackgroundColor) {
@@ -376,23 +429,26 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the point background color when hovered.
+	 * 
 	 * @return list of the point background color when hovered.
 	 */
 	public List<String> getPointHoverBackgroundColorAsString() {
-		ArrayString array = getValueOrArray(Property.pointBackgroundColor, DefaultOptions.get().getElements().getPoint().getBackgroundColorAsString());
-	    return ArrayListHelper.list(array);
+		ArrayString array = getValueOrArray(Property.pointBackgroundColor, Defaults.get().getGlobal().getElements().getPoint().getBackgroundColorAsString());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Returns the point background color when hovered.
+	 * 
 	 * @return list of the point background color when hovered.
 	 */
 	public List<IsColor> getPointHoverBackgroundColor() {
-	    return ColorBuilder.parse(getPointHoverBackgroundColorAsString());
+		return ColorBuilder.parse(getPointHoverBackgroundColorAsString());
 	}
 
 	/**
 	 * Sets the point border color when hovered.
+	 * 
 	 * @param pointHoverBorderColor array of the point border color when hovered.
 	 */
 	public void setPointHoverBorderColor(IsColor... pointHoverBorderColor) {
@@ -401,6 +457,7 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Sets the point border color when hovered.
+	 * 
 	 * @param pointHoverBorderColor array of the point border color when hovered.
 	 */
 	public void setPointHoverBorderColor(String... pointHoverBorderColor) {
@@ -409,23 +466,26 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the point border color when hovered.
+	 * 
 	 * @return list of the point border color when hovered.
 	 */
 	public List<String> getPointHoverBorderColorAsString() {
-		ArrayString array = getValueOrArray(Property.pointHoverBorderColor, DefaultOptions.get().getElements().getPoint().getBorderColorAsString());
-	    return ArrayListHelper.list(array);
+		ArrayString array = getValueOrArray(Property.pointHoverBorderColor, Defaults.get().getGlobal().getElements().getPoint().getBorderColorAsString());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Returns the point border color when hovered.
+	 * 
 	 * @return list of the point border color when hovered.
 	 */
 	public List<IsColor> getPointHoverBorderColor() {
-	    return ColorBuilder.parse(getPointHoverBorderColorAsString());
+		return ColorBuilder.parse(getPointHoverBorderColorAsString());
 	}
 
 	/**
 	 * Sets the border width of point when hovered.
+	 * 
 	 * @param pointHoverBorderWidth array of the border width of point when hovered.
 	 */
 	public void setPointHoverBorderWidth(int... pointHoverBorderWidth) {
@@ -434,15 +494,17 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the border width of point when hovered.
+	 * 
 	 * @return list of the border width of point when hovered.
 	 */
 	public List<Integer> getPointHoverBorderWidth() {
-		ArrayInteger array = getValueOrArray(Property.pointHoverBorderWidth, DefaultOptions.get().getElements().getPoint().getHoverBorderWidth());
-	    return ArrayListHelper.list(array);
+		ArrayInteger array = getValueOrArray(Property.pointHoverBorderWidth, Defaults.get().getGlobal().getElements().getPoint().getHoverBorderWidth());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Sets the radius of the point when hovered.
+	 * 
 	 * @param pointHoverRadius array of the radius of the point when hovered.
 	 */
 	public void setPointHoverRadius(double... pointHoverRadius) {
@@ -451,32 +513,36 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the radius of the point when hovered.
+	 * 
 	 * @return list of the radius of the point when hovered.
 	 */
 	public List<Double> getPointHoverRadius() {
-		ArrayDouble array = getValueOrArray(Property.pointHoverRadius, DefaultOptions.get().getElements().getPoint().getHoverRadius());
-	    return ArrayListHelper.list(array);
+		ArrayDouble array = getValueOrArray(Property.pointHoverRadius, Defaults.get().getGlobal().getElements().getPoint().getHoverRadius());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Sets the radius of the point shape. If set to 0, the point is not rendered.
+	 * 
 	 * @param pointRadius array of the radius of the point shape.
 	 */
-	public void setPointRadius(double...  pointRadius) {
+	public void setPointRadius(double... pointRadius) {
 		setValueOrArray(Property.pointRadius, pointRadius);
 	}
 
 	/**
 	 * Returns the radius of the point shape.
+	 * 
 	 * @return list of the radius of the point shape.
 	 */
 	public List<Double> getPointRadius() {
-		ArrayDouble array = getValueOrArray(Property.pointRadius, DefaultOptions.get().getElements().getPoint().getRadius());
-	    return ArrayListHelper.list(array);
+		ArrayDouble array = getValueOrArray(Property.pointRadius, Defaults.get().getGlobal().getElements().getPoint().getRadius());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Sets the style of the point.
+	 * 
 	 * @param pointStyle array of the style of the point.
 	 */
 	public void setPointStyle(PointStyle... pointStyle) {
@@ -485,10 +551,11 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the style of the point.
-	 * @return list of the style of the point. 
+	 * 
+	 * @return list of the style of the point.
 	 */
 	public List<PointStyle> getPointStyle() {
-		ArrayString array = getValueOrArray(Property.pointStyle, DefaultOptions.get().getElements().getPoint().getPointStyle());
+		ArrayString array = getValueOrArray(Property.pointStyle, Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
 		return ArrayListHelper.list(PointStyle.class, array);
 	}
 

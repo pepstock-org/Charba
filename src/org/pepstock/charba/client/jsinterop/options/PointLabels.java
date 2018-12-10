@@ -24,18 +24,28 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPointLabels;
  * Note that these options only apply if display is true.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> implements IsDefaultPointLabels{
 
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
 		display
 	}
 	
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param scale scale/axis of this object.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
 	PointLabels(Scale scale, Key childKey, IsDefaultPointLabels defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 	}
@@ -54,7 +64,7 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 	/**
 	 * If true, labels are shown.
 	 * 
-	 * @return if true, labels are shown. Default is true.
+	 * @return if true, labels are shown.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.jsinterop.commons;
 
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.ChartOptions;
@@ -90,12 +91,28 @@ public final class Merger {
 		NativeObject globalOptions = Helpers.get().clone(global.getNativeObject());
 		// checks if the chart options has got scale (only 1)
 		// chart without scales don't do anything
-		if (chartOptions.hasProperty(Property.scale.name())) {
-			// if has got scale
-			// apply the default scale to single scale of chart options
-			NativeObjectDescriptor descriptor = chartOptions.getObjectProperty(Property.scale.name());
-			merge(descriptor.getValue(), scaleOptions);
-		} else if (chartOptions.hasProperty(Property.scales.name())) {
+		if (ScaleType.single.equals(type.scaleType())) {
+			// manages single scale chart type
+			handleSingleScalesType(chartOptions, scaleOptions);
+		} else if (ScaleType.multi.equals(type.scaleType())) {
+			// manages multi scale chart type
+			handleMultiScalesType(chartOptions, scaleOptions);
+		}
+		// merges chart options (maybe already updated by scales)
+		// and the global ones
+		merge(chartOptions, globalOptions);
+		return chartOptions;
+	}
+
+	/**
+	 * Manages the merge of options for chart with multiple scales.
+	 * 
+	 * @param chartOptions default chart options
+	 * @param scaleOptions default scale options
+	 */
+	private void handleMultiScalesType(NativeObject chartOptions, NativeObject scaleOptions) {
+		// checks if scales object is present
+		if (chartOptions.hasProperty(Property.scales.name())) {
 			// if here, the chart has got 2 or more scales
 			// gets the native object for scales
 			NativeObjectDescriptor descriptor = chartOptions.getObjectProperty(Property.scales.name());
@@ -121,10 +138,22 @@ public final class Merger {
 				}
 			}
 		}
-		// merges chart options (maybe already updated by scales)
-		// and the global ones
-		merge(chartOptions, globalOptions);
-		return chartOptions;
+	}
+
+	/**
+	 * Manages the merge of options for chart with single scale.
+	 * 
+	 * @param chartOptions default chart options
+	 * @param scaleOptions default scale options
+	 */
+	private void handleSingleScalesType(NativeObject chartOptions, NativeObject scaleOptions) {
+		// checks if scale object is present
+		if (chartOptions.hasProperty(Property.scale.name())) {
+			// if has got scale
+			// apply the default scale to single scale of chart options
+			NativeObjectDescriptor descriptor = chartOptions.getObjectProperty(Property.scale.name());
+			merge(descriptor.getValue(), scaleOptions);
+		}
 	}
 
 	/**

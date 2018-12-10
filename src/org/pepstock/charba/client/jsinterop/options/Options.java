@@ -1,3 +1,18 @@
+/**
+    Copyright 2017 Andrea "Stock" Stocchero
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+	    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
 package org.pepstock.charba.client.jsinterop.options;
 
 import java.util.List;
@@ -13,34 +28,35 @@ import org.pepstock.charba.client.jsinterop.commons.Id;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
 
-public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions{
-	
+/**
+ * Base object which maps chart options.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
+public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions {
+
 	private final Animation animation;
 
 	private final Legend legend;
-	
+
 	private final Hover hover;
-	
+
 	private final Layout layout;
-	
+
 	private final Elements elements;
-	
+
 	private final Title title;
 
 	private final Tooltips tooltips;
-	
+
 	private final Plugins plugins;
-	
-	private Scale scale;
-	
-	private final Scales scales;
 
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
-		// sub objects
 		hover,
 		elements,
 		layout,
@@ -48,8 +64,6 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		tooltips,
 		legend,
 		title,
-		scale,
-		scales,
 		plugins,
 		responsive,
 		responsiveAnimationDuration,
@@ -68,14 +82,26 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		circumference,
 		startAngle
 	}
-	
+
+	/**
+	 * Creates the object only with default provider. This is used as the root element.<br>
+	 * New native java script object is created and it's empty.
+	 * 
+	 * @param defaultValues default provider instance.
+	 */
 	protected Options(IsDefaultOptions defaultValues) {
 		this(defaultValues, null);
 	}
 
+	/**
+	 * Creates the object only with default provider and native object. This is used as the root element.
+	 * 
+	 * @param defaultValues default provider instance.
+	 * @param nativeObject native object to store properties.
+	 */
 	protected Options(IsDefaultOptions defaultValues, NativeObject nativeObject) {
-		// if delegated == null, is global or chart, noit config
 		super(defaultValues, nativeObject);
+		// gets all sub elements
 		animation = new Animation(this, Property.animation, getDefaultValues().getAnimation(), getValue(Property.animation));
 		legend = new Legend(this, Property.legend, getDefaultValues().getLegend(), getValue(Property.legend));
 		elements = new Elements(this, Property.elements, defaultValues.getElements(), getValue(Property.elements));
@@ -83,12 +109,9 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		layout = new Layout(this, Property.layout, defaultValues.getLayout(), getValue(Property.layout));
 		title = new Title(this, Property.title, getDefaultValues().getTitle(), getValue(Property.title));
 		tooltips = new Tooltips(this, Property.tooltips, getDefaultValues().getTooltips(), getValue(Property.tooltips));
-		// FIXME check visibilita
-		scale = new Scale(this, Property.scale, getDefaultValues().getScale(), getValue(Property.scale));
-		scales = new Scales(this, Property.scales, getDefaultValues().getScale(), getValue(Property.scales));
 		plugins = new Plugins(this, Property.plugins, getValue(Property.plugins));
 	}
-	
+
 	/**
 	 * @return the animation
 	 */
@@ -101,27 +124,6 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	public Legend getLegend() {
 		return legend;
-	}
-
-	/**
-	 * @return the scales
-	 */
-	public final Scales getScales() {
-		return scales;
-	}
-
-	/**
-	 * @return the scale
-	 */
-	public final Scale getScale() {
-		return scale;
-	}
-	
-	/**
-	 * @param scale the scale to set
-	 */
-	public final void setScale(Scale scale) {
-		this.scale = scale;
 	}
 
 	/**
@@ -165,7 +167,13 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	public final Plugins getPlugins() {
 		return plugins;
 	}
-	
+
+	/**
+	 * Returns the CHARBA id when the options are related to a chart instance.
+	 * 
+	 * @return the CHARBA id when the options are related to a chart instance otherwise
+	 *         {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#STRING}.
+	 */
 	public String getCharbaId() {
 		return Id.get(this);
 	}
@@ -182,6 +190,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 			// remove java script property
 			remove(Property.events);
 		} else {
+			// sets the array of events
 			setArrayValue(Property.events, ArrayString.of(events));
 		}
 	}
@@ -198,9 +207,10 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Returns if should chart be animated or not.
 	 * 
-	 * @return if should chart be animated or not. Default value is <code>true</code>.
+	 * @return if should chart be animated or not. 
 	 */
 	public boolean isAnimationEnable() {
+		// FIXME WORNG
 		return has(Property.animation);
 	}
 
@@ -216,7 +226,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Returns the resizing of the chart canvas when its container does.
 	 * 
-	 * @return the resizing of the chart canvas when its container does. Default is true.
+	 * @return the resizing of the chart canvas when its container does.
 	 */
 	public boolean isResponsive() {
 		return getValue(Property.responsive, getDefaultValues().isResponsive());
@@ -234,7 +244,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Returns the duration in milliseconds it takes to animate to new size after a resize event.
 	 * 
-	 * @return the duration in milliseconds it takes to animate to new size after a resize event. Default is 0.
+	 * @return the duration in milliseconds it takes to animate to new size after a resize event.
 	 */
 	public int getResponsiveAnimationDuration() {
 		return getValue(Property.responsiveAnimationDuration, getDefaultValues().getResponsiveAnimationDuration());
@@ -252,15 +262,15 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Returns the the maintaining of the original canvas aspect ratio (width / height) when resizing.
 	 * 
-	 * @return the maintaining of the original canvas aspect ratio (width / height) when resizing. Default is true.
+	 * @return the maintaining of the original canvas aspect ratio (width / height) when resizing.
 	 */
 	public boolean isMaintainAspectRatio() {
 		return getValue(Property.maintainAspectRatio, getDefaultValues().isMaintainAspectRatio());
 	}
-	
+
 	/**
-	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina displays).
-	 * Setting devicePixelRatio to a value other than 1 will force the canvas size to be scaled by that amount.
+	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina
+	 * displays). Setting devicePixelRatio to a value other than 1 will force the canvas size to be scaled by that amount.
 	 * 
 	 * @param ratio the pixel ratio.
 	 */
@@ -269,11 +279,11 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
-	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina displays).
-	 * Setting devicePixelRatio to a value other than 1 will force the canvas size to be scaled by that amount.
-	 * Returns  the pixel ratio.
+	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina
+	 * displays). Setting devicePixelRatio to a value other than 1 will force the canvas size to be scaled by that amount.
+	 * Returns the pixel ratio.
 	 * 
-	 * @return  the pixel ratio. Default is <code>window.devicePixelRatio</code>.
+	 * @return the pixel ratio.
 	 */
 	public double getDevicePixelRatio() {
 		return getValue(Property.devicePixelRatio, getDefaultValues().getDevicePixelRatio());
@@ -281,7 +291,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 
 	/**
 	 * Sets the default color to use in the chart, on all objects, if not override by the specific configuration.
-	 * @param defaultColor color to use into chart. 
+	 * 
+	 * @param defaultColor color to use into chart.
 	 */
 	public void setDefaultColor(IsColor defaultColor) {
 		setDefaultColor(defaultColor.toRGBA());
@@ -289,7 +300,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 
 	/**
 	 * Sets the default color to use in the chart, on all objects, if not override by the specific configuration.
-	 * @param defaultColor color to use into chart. 
+	 * 
+	 * @param defaultColor color to use into chart.
 	 */
 	public void setDefaultColor(String defaultColor) {
 		setValue(Property.defaultColor, defaultColor);
@@ -297,7 +309,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 
 	/**
 	 * Returns the default color to use in the chart, on all objects, if not override by the specific configuration.
-	 * @return color to use into chart. Default is "rgba(0,0,0,0.1)"
+	 * 
+	 * @return color to use into chart.
 	 */
 	public String getDefaultColorAsString() {
 		return getValue(Property.defaultColor, getDefaultValues().getDefaultColorAsString());
@@ -305,7 +318,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 
 	/**
 	 * Returns the default color to use in the chart, on all objects, if not override by the specific configuration.
-	 * @return color to use into chart. Default is "rgba(0,0,0,0.1)"
+	 * 
+	 * @return color to use into chart.
 	 */
 	public IsColor getDefaultColor() {
 		return ColorBuilder.parse(getDefaultColorAsString());
@@ -313,7 +327,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 
 	/**
 	 * Sets the default font color to use in the chart, on all objects, if not override by the specific configuration.
-	 * @param defaultFontColor font color to use into chart. 
+	 * 
+	 * @param defaultFontColor font color to use into chart.
 	 */
 	public void setDefaultFontColor(IsColor defaultFontColor) {
 		setDefaultFontColor(defaultFontColor.toRGBA());
@@ -321,7 +336,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 
 	/**
 	 * Sets the default font color to use in the chart, on all objects, if not override by the specific configuration.
-	 * @param defaultFontColor font color to use into chart. 
+	 * 
+	 * @param defaultFontColor font color to use into chart.
 	 */
 	public void setDefaultFontColor(String defaultFontColor) {
 		setValue(Property.defaultFontColor, defaultFontColor);
@@ -329,7 +345,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 
 	/**
 	 * Returns the default font color to use in the chart, on all objects, if not override by the specific configuration.
-	 * @return  font color to use into chart. Default is #666.
+	 * 
+	 * @return font color to use into chart.
 	 */
 	public String getDefaultFontColorAsString() {
 		return getValue(Property.defaultFontColor, getDefaultValues().getDefaultFontColorAsString());
@@ -337,7 +354,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 
 	/**
 	 * Returns the default font color to use in the chart, on all objects, if not override by the specific configuration.
-	 * @return  font color to use into chart. Default is #666.
+	 * 
+	 * @return font color to use into chart.
 	 */
 	public IsColor getDefaultFontColor() {
 		return ColorBuilder.parse(getDefaultFontColorAsString());
@@ -355,48 +373,51 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Returns the font size to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @return Font size into chart. Default is 12.
+	 * @return Font size into chart.
 	 */
 	public int getDefaultFontSize() {
 		return getValue(Property.defaultFontSize, getDefaultValues().getDefaultFontSize());
 	}
 
 	/**
-	 * Sets the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * Sets the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS
+	 * font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @param fontStyle Font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-style options (i.e. normal, italic, oblique, initial,
-	 *            inherit).
-	 * @see org.pepstock.charba.client.enums.FontStyle
+	 * @param fontStyle Font style to use in the chart, on all objects, if not override by the specific configuration, follows
+	 *            CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public void setDefaultFontStyle(FontStyle fontStyle) {
 		setValue(Property.defaultFontStyle, fontStyle.name());
 	}
 
 	/**
-	 * Returns the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * Returns the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS
+	 * font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font styleto use in the chart, on all objects, if not override by the specific configuration, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 *         Default is {@link org.pepstock.charba.client.enums.FontStyle#normal}.
-	 * @see org.pepstock.charba.client.enums.FontStyle
+	 * @return the font styleto use in the chart, on all objects, if not override by the specific configuration, follows CSS
+	 *         font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getDefaultFontStyle() {
 		return getValue(Property.defaultFontStyle, FontStyle.class, getDefaultValues().getDefaultFontStyle());
 	}
 
 	/**
-	 * Sets the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
+	 * Sets the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS
+	 * font-family options.
 	 * 
-	 * @param fontFamily Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
+	 * @param fontFamily Font family to use in the chart, on all objects, if not override by the specific configuration, follows
+	 *            CSS font-family options.
 	 */
 	public void setDefaultFontFamily(String fontFamily) {
 		setValue(Property.defaultFontFamily, fontFamily);
 	}
 
 	/**
-	 * Returns the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options.
+	 * Returns the font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS
+	 * font-family options.
 	 * 
-	 * @return Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS font-family options. Default is 'Helvetica Neue', 'Helvetica', 'Arial',
-	 *         sans-serif
+	 * @return Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS
+	 *         font-family options. Default is 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
 	 */
 	public String getDefaultFontFamily() {
 		return getValue(Property.defaultFontFamily, getDefaultValues().getDefaultFontFamily());
@@ -414,12 +435,12 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * If false, the lines between points are not drawn.
 	 * 
-	 * @return If false, the lines between points are not drawn. Default is true.
+	 * @return If false, the lines between points are not drawn..
 	 */
 	public boolean isShowLines() {
 		return getValue(Property.showLines, getDefaultValues().isShowLines());
 	}
-	
+
 	/**
 	 * If false, NaN data causes a break in the line.
 	 * 
@@ -432,12 +453,12 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * If false, NaN data causes a break in the line.
 	 * 
-	 * @return If false, NaN data causes a break in the line. Default is false.
+	 * @return If false, NaN data causes a break in the line.
 	 */
 	public boolean isSpanGaps() {
 		return getValue(Property.spanGaps, getDefaultValues().isSpanGaps());
 	}
-	
+
 	/**
 	 * Sets the percentage of the chart that is cut out of the middle.
 	 * 
@@ -450,7 +471,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Returns the the percentage of the chart that is cut out of the middle.
 	 * 
-	 * @return the percentage of the chart that is cut out of the middle. Default is 0.
+	 * @return the percentage of the chart that is cut out of the middle.
 	 */
 	public double getCutoutPercentage() {
 		return getValue(Property.cutoutPercentage, getDefaultValues().getCutoutPercentage());
@@ -468,7 +489,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Returns the starting angle to draw arcs from.
 	 * 
-	 * @return starting angle to draw arcs from. Default is <code>-0.5 * Math.PI</code>.
+	 * @return starting angle to draw arcs from.
 	 */
 	public double getRotation() {
 		return getValue(Property.rotation, getDefaultValues().getRotation());
@@ -486,7 +507,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Returns the the sweep to allow arcs to cover.
 	 * 
-	 * @return the sweep to allow arcs to cover. Default is <code>2 * Math.PI</code>.
+	 * @return the sweep to allow arcs to cover.
 	 */
 	public double getCircumference() {
 		return getValue(Property.circumference, getDefaultValues().getCircumference());
@@ -504,7 +525,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Returns the starting angle to draw arcs for the first item in a dataset.
 	 * 
-	 * @return starting angle to draw arcs for the first item in a dataset. Default is <code>-0.5 * Math.PI</code>.
+	 * @return starting angle to draw arcs for the first item in a dataset.
 	 */
 	public double getStartAngle() {
 		return getValue(Property.startAngle, getDefaultValues().getStartAngle());

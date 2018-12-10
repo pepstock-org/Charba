@@ -22,7 +22,6 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLayout;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.jsinterop.utils.Window;
@@ -34,10 +33,10 @@ import org.pepstock.charba.client.jsinterop.utils.Window;
  * @author Andrea "Stock" Stocchero
  * @version 2.0
  */
-public final class DefaultOptions implements IsDefaultOptions{
+public class DefaultOptions implements IsDefaultOptions{
 
 	// singleton instance
-	private static final DefaultOptions INSTANCE = new DefaultOptions();
+//	private static final DefaultOptions INSTANCE = new DefaultOptions();
 	
 	private static final boolean DEFAULT_RESPONSIVE = true;
 
@@ -78,8 +77,8 @@ public final class DefaultOptions implements IsDefaultOptions{
 	private final DefaultLegend legend = new DefaultLegend();
 	
 	private final DefaultTooltips tooltips = new DefaultTooltips();
-	
-	private final DefaultScale scale = new DefaultScale();
+//	
+//	private final DefaultScale scale = new DefaultScale();
 
 	/**
 	 * Creates the object. Protected to avoid any instantiation
@@ -88,21 +87,21 @@ public final class DefaultOptions implements IsDefaultOptions{
 		// do nothing
 	}
 	
-	/**
-	 * Singleton method to return the instance
-	 * @return default option instance
-	 */
-	public static final DefaultOptions get() {
-		return INSTANCE;
-	}
+//	/**
+//	 * Singleton method to return the instance
+//	 * @return default option instance
+//	 */
+//	public static final DefaultOptions get() {
+//		return INSTANCE;
+//	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getScale()
-	 */
-	@Override
-	public IsDefaultScale getScale() {
-		return scale;
-	}
+//	/* (non-Javadoc)
+//	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getScale()
+//	 */
+//	@Override
+//	public IsDefaultScale getScale() {
+//		return scale;
+//	}
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultOptions#getAnimation()

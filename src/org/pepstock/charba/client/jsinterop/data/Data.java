@@ -29,37 +29,39 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 /**
  * CHART.JS entity object to configure the data options of a chart.<br>
  * It contains labels and datasets.
- *  
+ * 
  * @author Andrea "Stock" Stocchero
  * @version 2.0
  */
-public final class Data extends NativeObjectContainer implements ConfigurationElement{
-	
+public final class Data extends NativeObjectContainer implements ConfigurationElement {
+
 	// maintains the list of datasets
 	private final ArrayObjectContainerList<Dataset> currentDatasets = new ArrayObjectContainerList<Dataset>();
-	
+
 	/**
-	 * Name of fields of JavaScript object. 
+	 * Name of properties of native object.
 	 */
-	private enum Property implements Key {
+	private enum Property implements Key
+	{
 		labels,
 		datasets,
 		xLabels,
 		yLabels
 	}
-	
+
 	/**
 	 * Creates the objetc with an empty native object
 	 */
 	public Data() {
 		super(new NativeObject());
 	}
-	
+
 	/**
-	 * Sets the labels of the data 
+	 * Sets the labels of the data
+	 * 
 	 * @param labels array of labels
 	 */
-	public void setLabels(String... labels){
+	public void setLabels(String... labels) {
 		// creates a label object
 		Labels l = Labels.build();
 		// loads
@@ -70,26 +72,29 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 
 	/**
 	 * Sets the labels of the data
+	 * 
 	 * @param labels labels object to manage also multi-line labels.
 	 */
-	public void setLabels(Labels labels){
+	public void setLabels(Labels labels) {
 		setArrayValue(Property.labels, labels.getArray());
 	}
 
 	/**
-	 * Returns the labels 
+	 * Returns the labels
+	 * 
 	 * @return the labels
 	 */
-	public Labels getLabels(){
+	public Labels getLabels() {
 		ArrayMixedObject array = getArrayValue(Property.labels);
 		return Labels.load(array);
 	}
 
 	/**
-	 * Sets the labels for X axes of the data 
+	 * Sets the labels for X axes of the data
+	 * 
 	 * @param labels array of labels
 	 */
-	public void setXLabels(String... labels){
+	public void setXLabels(String... labels) {
 		// creates a label object
 		Labels l = Labels.build();
 		// loads
@@ -99,27 +104,30 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	}
 
 	/**
-	 * Sets the labels for X axes of the data 
+	 * Sets the labels for X axes of the data
+	 * 
 	 * @param labels labels object to manage also multi-line labels.
 	 */
-	public void setXLabels(Labels labels){
+	public void setXLabels(Labels labels) {
 		setArrayValue(Property.xLabels, labels.getArray());
 	}
 
 	/**
 	 * Returns the labels for X axes
+	 * 
 	 * @return the labels for X axes
 	 */
-	public Labels getXLabels(){
+	public Labels getXLabels() {
 		ArrayMixedObject array = getArrayValue(Property.xLabels);
 		return Labels.load(array);
 	}
 
 	/**
 	 * Sets the labels for Y axes of the data
+	 * 
 	 * @param labels array of labels
 	 */
-	public void setYLabels(String... labels){
+	public void setYLabels(String... labels) {
 		// creates a label object
 		Labels l = Labels.build();
 		// loads
@@ -130,26 +138,29 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 
 	/**
 	 * Sets the labels for Y axes of the data
+	 * 
 	 * @param labels labels object to manage also multi-line labels.
 	 */
-	public void setYLabels(Labels labels){
+	public void setYLabels(Labels labels) {
 		setArrayValue(Property.yLabels, labels.getArray());
 	}
 
 	/**
 	 * Returns the labels for Y axes
+	 * 
 	 * @return the labels for Y axes
 	 */
-	public Labels getYLabels(){
+	public Labels getYLabels() {
 		ArrayMixedObject array = getArrayValue(Property.yLabels);
 		return Labels.load(array);
 	}
 
 	/**
 	 * Sets a set of datasets for chart
+	 * 
 	 * @param datasets set of dataset
 	 */
-	public void setDatasets(Dataset... datasets){
+	public void setDatasets(Dataset... datasets) {
 		// checks if arguments is consistent
 		if (datasets != null) {
 			// clear buffer
@@ -163,18 +174,21 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 
 	/**
 	 * Returns the list of datasets
+	 * 
 	 * @return the list of datasets
 	 */
-	public List<Dataset> getDatasets(){
+	public List<Dataset> getDatasets() {
 		return this.currentDatasets;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.ConfigurationElement#load(org.pepstock.charba.client.jsinterop.Configuration)
 	 */
 	@Override
 	public void load(Configuration configuration) {
 		ConfigurationLoader.loadData(configuration, this);
-	}	
-	
+	}
+
 }

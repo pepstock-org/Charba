@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
+import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.ChartOptions;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
@@ -22,10 +23,12 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultElements;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLayout;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
+import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaledOptions;
+import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
+import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultsBuilder;
 
 /**
  * Defaults for options element, based on chart type. THIS IS THE ROOT OF ALL ELEMENTS DEFAULTS.
@@ -33,25 +36,27 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
  * @author Andrea "Stock" Stocchero
  * @version 2.0
  */
-public final class DefaultChartOptions implements IsDefaultOptions {
+public final class DefaultChartOptions implements IsDefaultScaledOptions {
 
 	private final ChartOptions chartOptions;
 
-	private final DefaultChartAnimation animation;
+	private final IsDefaultAnimation animation;
 
-	private final DefaultChartScale scale;
+	private final IsDefaultScale scale;
+	
+	private final IsDefaultScales scales;
 
-	private final DefaultChartHover hover;
+	private final IsDefaultHover hover;
 
-	private final DefaultChartTitle title;
+	private final IsDefaultTitle title;
 
-	private final DefaultChartLegend legend;
+	private final IsDefaultLegend legend;
 
-	private final DefaultChartTooltips tooltips;
+	private final IsDefaultTooltips tooltips;
 
-	private final DefaultChartLayout layout;
+	private final IsDefaultLayout layout;
 
-	private final DefaultChartElements elements;
+	private final IsDefaultElements elements;
 
 	/**
 	 * Creates the object by options element instance.
@@ -62,13 +67,29 @@ public final class DefaultChartOptions implements IsDefaultOptions {
 		this.chartOptions = chartOptions;
 		// creates sub elements
 		animation = new DefaultChartAnimation(chartOptions.getAnimation());
-		scale = new DefaultChartScale(chartOptions.getScale());
 		hover = new DefaultChartHover(chartOptions.getHover());
 		title = new DefaultChartTitle(chartOptions.getTitle());
 		legend = new DefaultChartLegend(chartOptions.getLegend());
 		tooltips = new DefaultChartTooltips(chartOptions.getTooltips());
 		layout = new DefaultChartLayout(chartOptions.getLayout());
 		elements = new DefaultChartElements(chartOptions.getElements());
+		// checks if the chart options is related to axes
+		// checks if single scale
+		if (ScaleType.single.equals(chartOptions.getType().scaleType())){
+			// gets scale
+			scale = new DefaultChartScale(chartOptions.getScale());
+		} else {
+			// uses the default scale
+			scale = DefaultsBuilder.get().getScaledOptions().getScale();
+		}
+		// checks if multi scale
+		if (ScaleType.multi.equals(chartOptions.getType().scaleType())){
+			// gets scale
+			scales = new DefaultChartScales(chartOptions.getScales());
+		} else {
+			// uses the default scales
+			scales = DefaultsBuilder.get().getScaledOptions().getScales();
+		}
 	}
 
 	/*
@@ -99,6 +120,14 @@ public final class DefaultChartOptions implements IsDefaultOptions {
 	@Override
 	public IsDefaultScale getScale() {
 		return scale;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaledOptions#getScales()
+	 */
+	@Override
+	public IsDefaultScales getScales() {
+		return scales;
 	}
 
 	/*

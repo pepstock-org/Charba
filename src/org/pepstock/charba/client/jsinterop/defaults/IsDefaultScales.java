@@ -13,23 +13,35 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client;
-
-import org.pepstock.charba.client.commons.Key;
+package org.pepstock.charba.client.jsinterop.defaults;
 
 /**
- * Interface to set the type of a chart.
+ * Interface to define scales/axes object defaults.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
+ * @version 2.0
  */
-public interface Type extends Key {
+public interface IsDefaultScales {
 
 	/**
-	 * Returns the scale type of the chart.
+	 * If true, shows the axis.
 	 * 
-	 * @return the scale type of the chart.
+	 * @return if true, shows the axis.
 	 */
-	ScaleType scaleType();
+	boolean isDisplay();
+
+	/**
+	 * Returns the default configuration for x axis.
+	 * 
+	 * @return the default configuration for x axis.
+	 */
+	IsDefaultScale getXAxis();
+	
+	/**
+	 * Returns the default configuration for y axis.
+	 * 
+	 * @return the default configuration for y axis.
+	 */
+	IsDefaultScale getYAxis();
 
 }

@@ -20,17 +20,28 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
 
 /**
- * Configures the default chart title which defines text to draw at the top of the chart.<br>
- * "weight"property is not present.
+ * Configures the ticks of an axis.<br>
+ * Common base class for ticks.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * version 2.0
+ * 
+ * @param <P> parent node class
+ * @param <D> defaults provider class
  */
 public abstract class AbstractTick<P extends AbstractModel<?,?>, D extends IsDefaultFontItem> extends FontItem<P, D> {
 
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param parent parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
 	AbstractTick(P ticks, Key childKey, D defaultValues, NativeObject nativeObject) {
 		super(ticks, childKey, defaultValues, nativeObject);
-	}
-	
+	}	
 
 }

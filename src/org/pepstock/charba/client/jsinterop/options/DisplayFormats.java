@@ -23,38 +23,43 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
  * The following display formats are used to configure how different time units are formed into strings for the axis tick marks.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public final class DisplayFormats extends AbstractModel<Time, Void> {
 
 	/**
-	 * Builds the object storing the chart instance and the axis which this grid lines belongs to.
+	 * Creates the object with the parent, the key of this element and native object to map java script properties.<br>
+	 * This element does not have any default values.
 	 * 
-	 * @param chart chart instance.
-	 * @param axis axis which this grid lines belongs to.
+	 * @param time time element as parent of this node.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param nativeObject native object to map java script properties
 	 */
 	DisplayFormats(Time time, Key childKey, NativeObject nativeObject) {
+		// no default values
 		super(time, childKey, null, nativeObject);
 	}
-	
+
 	/**
 	 * Sets the display formats are used to configure how different time units are formed into strings for the axis tick marks.
+	 * 
 	 * @param unit time unit.
 	 * @param format display format
-	 * @see org.pepstock.charba.client.enums.TimeUnit 
 	 */
-	public void setDisplayFormat(TimeUnit unit, String format){
+	public void setDisplayFormat(TimeUnit unit, String format) {
 		setValue(unit, format);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
-	 * Returns the display formats are used to configure how different time units are formed into strings for the axis tick marks.
+	 * Returns the display formats are used to configure how different time units are formed into strings for the axis tick
+	 * marks.
+	 * 
 	 * @param unit time unit.
 	 * @return display format
 	 */
-	public String getDisplayFormat(TimeUnit unit){
+	public String getDisplayFormat(TimeUnit unit) {
 		// returns the configuration creating a key.
 		return getValue(unit, unit.getDefaultFormat());
 	}

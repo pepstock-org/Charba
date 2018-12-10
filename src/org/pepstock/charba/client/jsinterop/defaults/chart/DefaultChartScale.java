@@ -29,7 +29,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime;
 import org.pepstock.charba.client.jsinterop.options.Scale;
 
 /**
- * Defaults for sclae/axis option element, based on chart type.
+ * Defaults for scale/axis option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
  * @version 2.0

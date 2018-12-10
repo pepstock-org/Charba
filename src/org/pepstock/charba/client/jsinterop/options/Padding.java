@@ -24,10 +24,20 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding;
  * It is applied to all sides of the chart (left, top, right, bottom).
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public final class Padding extends AbstractModel<Layout, IsDefaultPadding> implements IsDefaultPadding{
 
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param layout options layout of the chart.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
 	Padding(Layout layout, Key childKey, IsDefaultPadding defaultValues, NativeObject nativeObject) {
 		super(layout, childKey, defaultValues, nativeObject);
 	}
@@ -46,7 +56,7 @@ public final class Padding extends AbstractModel<Layout, IsDefaultPadding> imple
 	/**
 	 * Returns the padding left in pixel.
 	 * 
-	 * @return the padding left in pixel. Default is 0.
+	 * @return the padding left in pixel.
 	 */
 	public int getLeft() {
 		return getValue(Position.left, getDefaultValues().getLeft());
@@ -55,7 +65,7 @@ public final class Padding extends AbstractModel<Layout, IsDefaultPadding> imple
 	/**
 	 * Sets the padding right in pixel.
 	 * 
-	 * @param padding the padding right in pixel. Default is 0.
+	 * @param padding the padding right in pixel.
 	 */
 	public void setRight(int padding) {
 		setValue(Position.right, padding);
@@ -66,7 +76,7 @@ public final class Padding extends AbstractModel<Layout, IsDefaultPadding> imple
 	/**
 	 * Returns the padding right in pixel.
 	 * 
-	 * @return the padding right in pixel. Default is 0.
+	 * @return the padding right in pixel.
 	 */
 	public int getRight() {
 		return getValue(Position.right, getDefaultValues().getRight());
@@ -75,7 +85,7 @@ public final class Padding extends AbstractModel<Layout, IsDefaultPadding> imple
 	/**
 	 * Sets the padding top in pixel.
 	 * 
-	 * @param padding the padding top in pixel. Default is 0.
+	 * @param padding the padding top in pixel.
 	 */
 	public void setTop(int padding) {
 		setValue(Position.top, padding);
@@ -86,7 +96,7 @@ public final class Padding extends AbstractModel<Layout, IsDefaultPadding> imple
 	/**
 	 * Returns the padding top in pixel.
 	 * 
-	 * @return the padding top in pixel. Default is 0.
+	 * @return the padding top in pixel.
 	 */
 	public int getTop() {
 		return getValue(Position.top, getDefaultValues().getTop());
@@ -95,7 +105,7 @@ public final class Padding extends AbstractModel<Layout, IsDefaultPadding> imple
 	/**
 	 * Sets the padding bottom in pixel.
 	 * 
-	 * @param padding the padding bottom in pixel. Default is 0.
+	 * @param padding the padding bottom in pixel.
 	 */
 	public void setBottom(int padding) {
 		setValue(Position.bottom, padding);
@@ -106,7 +116,7 @@ public final class Padding extends AbstractModel<Layout, IsDefaultPadding> imple
 	/**
 	 * Returns the padding bottom in pixel.
 	 * 
-	 * @return the padding bottom in pixel. Default is 0.
+	 * @return the padding bottom in pixel.
 	 */
 	public int getBottom() {
 		return getValue(Position.bottom, getDefaultValues().getBottom());

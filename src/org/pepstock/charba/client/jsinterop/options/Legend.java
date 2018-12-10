@@ -24,28 +24,37 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend;
  * The chart legend displays data about the datasets that area appearing on the chart.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public class Legend extends AbstractModel<Options, IsDefaultLegend> implements IsDefaultLegend{
+public final class Legend extends AbstractModel<Options, IsDefaultLegend> implements IsDefaultLegend{
 	
 	private LegendLabels labels;
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
-		// sub elements
 		labels,
-		// properties
 		display,
 		position,
 		fullWidth,
 		reverse
 	}
 	
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param options options of the chart.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
 	Legend(Options options, Key childKey, IsDefaultLegend defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
+		// gets sub element
 		labels = new LegendLabels(this, Property.labels, getDefaultValues().getLabels(), getValue(Property.labels));
 	}
 
@@ -70,7 +79,7 @@ public class Legend extends AbstractModel<Options, IsDefaultLegend> implements I
 	/**
 	 * Returns if the legend is shown.
 	 * 
-	 * @return if the legend is shown. Default is true.
+	 * @return if the legend is shown.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());
@@ -90,7 +99,7 @@ public class Legend extends AbstractModel<Options, IsDefaultLegend> implements I
 	/**
 	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
 	 * 
-	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). Default is true.
+	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes).
 	 */
 	public boolean isFullWidth() {
 		return getValue(Property.fullWidth, getDefaultValues().isFullWidth());
@@ -110,7 +119,7 @@ public class Legend extends AbstractModel<Options, IsDefaultLegend> implements I
 	/**
 	 * Returns if the legend will show datasets in reverse order.
 	 * 
-	 * @return Legend will show datasets in reverse order. Default is false.
+	 * @return Legend will show datasets in reverse order.
 	 */
 	public boolean isReverse() {
 		return getValue(Property.reverse, getDefaultValues().isReverse());
@@ -120,7 +129,6 @@ public class Legend extends AbstractModel<Options, IsDefaultLegend> implements I
 	 * Sets the position of the legend.
 	 * 
 	 * @param position Position of the legend.
-	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public void setPosition(Position position) {
 		setValue(Property.position, position);
@@ -131,8 +139,7 @@ public class Legend extends AbstractModel<Options, IsDefaultLegend> implements I
 	/**
 	 * Returns the position of the legend.
 	 * 
-	 * @return Position of the legend. Default is {@link org.pepstock.charba.client.enums.Position#top}.
-	 * @see org.pepstock.charba.client.enums.Position
+	 * @return Position of the legend.
 	 */
 	public Position getPosition() {
 		return getValue(Property.position, Position.class, getDefaultValues().getPosition());

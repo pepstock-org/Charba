@@ -23,6 +23,7 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
+import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales;
 
 /**
  * The configuration element which contains all axes definitions.<br>
@@ -31,7 +32,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Scales extends AbstractModel<Options, IsDefaultScale>{
+public class Scales extends AbstractModel<Options, IsDefaultScales> implements IsDefaultScales{
 	
 	/**
 	 * Default name of X axis
@@ -48,7 +49,9 @@ public class Scales extends AbstractModel<Options, IsDefaultScale>{
 	 */
 	public static final String DEFAULT_SINGLE_AXIS_ID = "scale";
 	
-	private final ScaleListFactory factory = new ScaleListFactory();
+	private final ScaleListFactory xAxisFactory = new ScaleListFactory(Property.xAxes);
+	
+	private final ScaleListFactory yAxisfactory = new ScaleListFactory(Property.yAxes);
 	
 	/**
 	 * Name of fields of JavaScript object.
@@ -62,12 +65,12 @@ public class Scales extends AbstractModel<Options, IsDefaultScale>{
 
 
 	// here scale is ROOT
-	public Scales(IsDefaultScale defaultValues) {
+	public Scales(IsDefaultScales defaultValues) {
 		this(null, null, defaultValues, null);
 	}
 
-	Scales(Options options, Key childKey, IsDefaultScale defaultValues, NativeObject delegated) {
-		super(options, childKey, defaultValues, delegated == null ? new NativeObject(): delegated);
+	Scales(Options options, Key childKey, IsDefaultScales defaultValues, NativeObject delegated) {
+		super(options, childKey, defaultValues, delegated);
 	}
 
 	/**
@@ -97,11 +100,12 @@ public class Scales extends AbstractModel<Options, IsDefaultScale>{
 	}
 	
 	/**
+	 * FIXME
 	 * @return the xAxes
 	 */
 	public List<Scale> getXAxes() {
 		ArrayObject array = getArrayValue(Property.xAxes);
-		return ArrayListHelper.list(array, factory);
+		return ArrayListHelper.list(array, xAxisFactory);
 	}
 
 	public void setYAxes(Scale... scales) {
@@ -111,26 +115,53 @@ public class Scales extends AbstractModel<Options, IsDefaultScale>{
 	}
 
 	/**
+	 * FIXME
 	 * @return the xAxes
 	 */
 	public List<Scale> getYAxes() {
 		ArrayObject array = getArrayValue(Property.yAxes);
-		return ArrayListHelper.list(array, factory);
+		return ArrayListHelper.list(array, yAxisfactory);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales#getXAxis()
+	 */
+	@Override
+	public IsDefaultScale getXAxis() {
+		return getDefaultValues().getXAxis();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales#getYAxis()
+	 */
+	@Override
+	public IsDefaultScale getYAxis() {
+		return getDefaultValues().getYAxis();
+	}
+
 	/**
-	 * 
+	 * FIXME
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
 	private class ScaleListFactory implements NativeObjectContainerFactory<Scale> {
+		
+		private final Key property;
+
+		/**
+		 * @param property
+		 */
+		public ScaleListFactory(Key property) {
+			this.property = property;
+		}
 
 		/* (non-Javadoc)
 		 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)
 		 */
 		@Override
 		public Scale create(NativeObject nativeObject) {
-			return new Scale(getParent(), Options.Property.scale, getDefaultValues(), nativeObject);
+			IsDefaultScale defaultValue = Property.xAxes.equals(property) ? getXAxis(): getYAxis(); 
+			return new Scale(defaultValue, nativeObject);
 		}
 
 	}

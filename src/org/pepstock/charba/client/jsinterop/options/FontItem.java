@@ -23,15 +23,18 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
 
 /**
- * Base object to map font options of globals.
+ * Base object to map font options for configuration.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
+ * 
+ * @param <P> parent node class
+ * @param <D> defaults provider class
  */
-public abstract class FontItem<P extends AbstractModel<?,?>, D extends IsDefaultFontItem> extends AbstractModel<P, D> implements IsDefaultFontItem{
-	
+public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaultFontItem> extends AbstractModel<P, D> implements IsDefaultFontItem {
+
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	enum Property implements Key
 	{
@@ -40,11 +43,20 @@ public abstract class FontItem<P extends AbstractModel<?,?>, D extends IsDefault
 		fontColor,
 		fontFamily,
 	}
-	
-	FontItem(P parent, Key childKey,  D defaultValues, NativeObject nativeObject) {
+
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param parent parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
+	FontItem(P parent, Key childKey, D defaultValues, NativeObject nativeObject) {
 		super(parent, childKey, defaultValues, nativeObject);
 	}
-	
+
 	/**
 	 * Sets the font size.
 	 * 
@@ -59,7 +71,7 @@ public abstract class FontItem<P extends AbstractModel<?,?>, D extends IsDefault
 	/**
 	 * Returns the font size.
 	 * 
-	 * @return the font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
+	 * @return the font size.
 	 */
 	public int getFontSize() {
 		return getValue(Property.fontSize, getDefaultValues().getFontSize());
@@ -69,7 +81,6 @@ public abstract class FontItem<P extends AbstractModel<?,?>, D extends IsDefault
 	 * Sets the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
 	 * @param fontStyle Font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
 		setValue(Property.fontStyle, fontStyle);
@@ -80,9 +91,7 @@ public abstract class FontItem<P extends AbstractModel<?,?>, D extends IsDefault
 	/**
 	 * Returns the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). Default is
-	 *         {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontStyle()}.
-	 * @see org.pepstock.charba.client.enums.FontStyle
+	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getFontStyle() {
 		return getValue(Property.fontStyle, FontStyle.class, getDefaultValues().getFontStyle());
@@ -96,7 +105,7 @@ public abstract class FontItem<P extends AbstractModel<?,?>, D extends IsDefault
 	public void setFontColor(IsColor fontColor) {
 		setFontColor(fontColor.toRGBA());
 	}
-	
+
 	/**
 	 * Sets the font color
 	 * 
@@ -111,7 +120,7 @@ public abstract class FontItem<P extends AbstractModel<?,?>, D extends IsDefault
 	/**
 	 * Returns the font color
 	 * 
-	 * @return Font color. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontColor()}.
+	 * @return Font color.
 	 */
 	public String getFontColorAsString() {
 		return getValue(Property.fontColor, getDefaultValues().getFontColorAsString());
@@ -120,12 +129,12 @@ public abstract class FontItem<P extends AbstractModel<?,?>, D extends IsDefault
 	/**
 	 * Returns the font color
 	 * 
-	 * @return Font color. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontColor()}.
+	 * @return Font color.
 	 */
 	public IsColor getFontColor() {
 		return ColorBuilder.parse(getFontColorAsString());
 	}
-	
+
 	/**
 	 * Sets the font family, follows CSS font-family options.
 	 * 
@@ -140,8 +149,7 @@ public abstract class FontItem<P extends AbstractModel<?,?>, D extends IsDefault
 	/**
 	 * Returns the font family, follows CSS font-family options.
 	 * 
-	 * @return Font family, follows CSS font-family options. Default is
-	 *         {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
+	 * @return Font family, follows CSS font-family options.
 	 */
 	public String getFontFamily() {
 		return getValue(Property.fontFamily, getDefaultValues().getFontFamily());

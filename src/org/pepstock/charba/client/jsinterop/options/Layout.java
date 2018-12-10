@@ -23,6 +23,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLayout;
  * The layout configuration is needed to set the padding.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public final class Layout extends AbstractModel<Options, IsDefaultLayout> implements IsDefaultLayout {
@@ -30,16 +31,26 @@ public final class Layout extends AbstractModel<Options, IsDefaultLayout> implem
 	private final Padding padding;
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
 		padding
 	}
 	
-	Layout(Options options, Key childKey, IsDefaultLayout defaultOptions, NativeObject nativeObject) {
-		super(options, childKey, defaultOptions, nativeObject);
-		padding = new Padding(this, Property.padding, defaultOptions.getPadding(), getValue(Property.padding));
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param options options of the chart.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
+	Layout(Options options, Key childKey, IsDefaultLayout defaultvalues, NativeObject nativeObject) {
+		super(options, childKey, defaultvalues, nativeObject);
+		// gets sub element
+		padding = new Padding(this, Property.padding, defaultvalues.getPadding(), getValue(Property.padding));
 	}
 
 	/**

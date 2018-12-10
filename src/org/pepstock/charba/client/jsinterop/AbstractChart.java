@@ -200,7 +200,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @return the default options of the chart
 	 */
-	public final ChartOptions getChartOptions() {
+	final ChartOptions getChartOptions() {
 		return options;
 	}
 

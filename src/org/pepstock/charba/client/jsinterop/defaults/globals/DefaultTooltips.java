@@ -114,7 +114,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	 */
 	@Override
 	public String getTitleFontFamily() {
-		return DefaultOptions.get().getDefaultFontFamily();
+		return DefaultsBuilder.get().getOptions().getDefaultFontFamily();
 	}
 
 	/* (non-Javadoc)
@@ -122,7 +122,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	 */
 	@Override
 	public int getTitleFontSize() {
-		return DefaultOptions.get().getDefaultFontSize();
+		return DefaultsBuilder.get().getOptions().getDefaultFontSize();
 	}
 
 	/* (non-Javadoc)
@@ -170,7 +170,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	 */
 	@Override
 	public String getBodyFontFamily() {
-		return DefaultOptions.get().getDefaultFontFamily();
+		return DefaultsBuilder.get().getOptions().getDefaultFontFamily();
 	}
 
 	/* (non-Javadoc)
@@ -178,7 +178,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	 */
 	@Override
 	public int getBodyFontSize() {
-		return DefaultOptions.get().getDefaultFontSize();
+		return DefaultsBuilder.get().getOptions().getDefaultFontSize();
 	}
 
 	/* (non-Javadoc)
@@ -218,7 +218,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	 */
 	@Override
 	public String getFooterFontFamily() {
-		return DefaultOptions.get().getDefaultFontFamily();
+		return DefaultsBuilder.get().getOptions().getDefaultFontFamily();
 	}
 
 	/* (non-Javadoc)
@@ -226,7 +226,7 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	 */
 	@Override
 	public int getFooterFontSize() {
-		return DefaultOptions.get().getDefaultFontSize();
+		return DefaultsBuilder.get().getOptions().getDefaultFontSize();
 	}
 
 	/* (non-Javadoc)

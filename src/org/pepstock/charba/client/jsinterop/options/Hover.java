@@ -25,12 +25,13 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover;
  * Definitions about how elements appear in the tooltip, hovering the chart.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public class Hover extends AbstractModel<Options, IsDefaultHover> implements IsDefaultHover{
+public final class Hover extends AbstractModel<Options, IsDefaultHover> implements IsDefaultHover{
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -40,6 +41,15 @@ public class Hover extends AbstractModel<Options, IsDefaultHover> implements IsD
 		animationDuration
 	}
 
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param options options of the chart.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
 	Hover(Options options, Key childKey, IsDefaultHover defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 	}
@@ -48,7 +58,6 @@ public class Hover extends AbstractModel<Options, IsDefaultHover> implements IsD
 	 * Sets which elements appear in the tooltip.
 	 * 
 	 * @param mode which elements appear in the tooltip.
-	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
 	public void setMode(InteractionMode mode) {
 		setValue(Property.mode, mode);
@@ -59,9 +68,7 @@ public class Hover extends AbstractModel<Options, IsDefaultHover> implements IsD
 	/**
 	 * Returns which elements appear in the tooltip.
 	 * 
-	 * @return which elements appear in the tooltip. Default is
-	 *         {@link org.pepstock.charba.client.enums.InteractionMode#nearest}.
-	 * @see org.pepstock.charba.client.enums.InteractionMode
+	 * @return which elements appear in the tooltip.
 	 */
 	public InteractionMode getMode() {
 		return getValue(Property.mode, InteractionMode.class, getDefaultValues().getMode());
@@ -81,7 +88,7 @@ public class Hover extends AbstractModel<Options, IsDefaultHover> implements IsD
 	/**
 	 * if true, the hover mode only applies when the mouse position intersects an item on the chart.
 	 * 
-	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart. Default is true.
+	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public boolean isIntersect() {
 		return getValue(Property.intersect, getDefaultValues().isIntersect());
@@ -101,7 +108,7 @@ public class Hover extends AbstractModel<Options, IsDefaultHover> implements IsD
 	/**
 	 * Returns the duration in milliseconds it takes to animate hover style changes.
 	 * 
-	 * @return duration in milliseconds it takes to animate hover style changes. Default is 400.
+	 * @return duration in milliseconds it takes to animate hover style changes.
 	 */
 	public int getAnimationDuration() {
 		return getValue(Property.animationDuration, getDefaultValues().getAnimationDuration());
@@ -112,7 +119,6 @@ public class Hover extends AbstractModel<Options, IsDefaultHover> implements IsD
 	 * Defaults to 'x' for index mode and 'xy' in dataset and nearest modes.
 	 * 
 	 * @param axis define which directions are used in calculating distances.
-	 * @see org.pepstock.charba.client.enums.InteractionAxis
 	 */
 	public void setAxis(InteractionAxis axis) {
 		setValue(Property.axis, axis);
@@ -123,8 +129,7 @@ public class Hover extends AbstractModel<Options, IsDefaultHover> implements IsD
 	/**
 	 * Returns to 'x', 'y', or 'xy' to define which directions are used in calculating distances.
 	 * 
-	 * @return define which directions are used in calculating distances. Default is {@link org.pepstock.charba.client.enums.InteractionAxis#x}.
-	 * @see org.pepstock.charba.client.enums.InteractionAxis
+	 * @return define which directions are used in calculating distances.
 	 */
 	public InteractionAxis getAxis() {
 		return getValue(Property.axis, InteractionAxis.class, getDefaultValues().getAxis());

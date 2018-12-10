@@ -25,18 +25,27 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> implements IsDefaultLegendLabels{
+public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> implements IsDefaultLegendLabels{
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		boxWidth,
 		padding,
 		usePointStyle
 	}
 	
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param legend legend of the chart.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
 	LegendLabels(Legend legend, Key childKey, IsDefaultLegendLabels defaultValues, NativeObject nativeObject) {
 		super(legend, childKey, defaultValues, nativeObject);
 	}
@@ -55,7 +64,7 @@ public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> implem
 	/**
 	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 * 
-	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case). Default is false.
+	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 */
 	public boolean isUsePointStyle() {
 		return getValue(Property.usePointStyle, getDefaultValues().isUsePointStyle());
@@ -95,7 +104,7 @@ public class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> implem
 	/**
 	 * Returns the padding to apply around labels. Only top and bottom are implemented.
 	 * 
-	 * @return Padding to apply around labels. Only top and bottom are implemented. Default is 10.
+	 * @return Padding to apply around labels. Only top and bottom are implemented.
 	 */
 	public int getPadding() {
 		return getValue(Property.padding, getDefaultValues().getPadding());

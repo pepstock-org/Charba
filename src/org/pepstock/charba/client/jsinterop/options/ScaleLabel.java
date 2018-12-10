@@ -24,9 +24,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel;
  * The scale label configuration defines options for the scale title. Note that this only applies to cartesian axes.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> implements IsDefaultScaleLabel{
+public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> implements IsDefaultScaleLabel{
 	
 	private final ScaleLabelPadding padding;
 	
@@ -35,17 +36,24 @@ public class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> implements 
 	 */
 	private enum Property implements Key
 	{
-		// sub elements
 		padding,
-		// properties
 		display,
 		labelString,
 		lineHeight
 	}
 
-
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param scale scale/axis of this object.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
 	ScaleLabel(Scale scale, Key childKey, IsDefaultScaleLabel defaultValues, NativeObject delegated) {
 		super(scale, childKey, defaultValues, delegated);
+		// gets sub element
 		padding = new ScaleLabelPadding(this, Property.padding, getDefaultValues().getPadding(), getValue(Property.padding));
 	}
 	
@@ -70,7 +78,7 @@ public class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> implements 
 	/**
 	 * If true, display the axis title.
 	 * 
-	 * @return f true, display the axis title. Default is false
+	 * @return f true, display the axis title. 
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());
@@ -90,7 +98,7 @@ public class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> implements 
 	/**
 	 * Returns the text for the scale string.
 	 * 
-	 * @return The text for the scale string. Default is "".
+	 * @return The text for the scale string.
 	 */
 	public String getLabelString() {
 		return getValue(Property.labelString, getDefaultValues().getLabelString());
@@ -110,7 +118,7 @@ public class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> implements 
 	/**
 	 * Returns the height of an individual line of text.
 	 * 
-	 * @return the height of an individual line of text. Default is 1.2
+	 * @return the height of an individual line of text.
 	 */
 	public double getLineHeight() {
 		return getValue(Property.lineHeight, getDefaultValues().getLineHeight());

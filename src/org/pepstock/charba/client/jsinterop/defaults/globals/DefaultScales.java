@@ -15,42 +15,41 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults.globals;
 
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines;
+import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
+import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales;
 
 /**
- * CHART.JS default values for ANGLELINES element.
+ * CHART.JS default values for scale/axis element.
  * 
  * @author Andrea "Stock" Stocchero
  * @version 2.0
  */
-public final class DefaultAngleLines implements IsDefaultAngleLines {
+public final class DefaultScales implements IsDefaultScales{
 	
-	private static final boolean DEFAULT_DISPLAY = true;
-
-	private static final int DEFAULT_LINE_WIDTH = 1;
+	private final DefaultScale scale = new DefaultScale();
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines#isDisplay()
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales#isDisplay()
 	 */
 	@Override
 	public boolean isDisplay() {
-		return DEFAULT_DISPLAY;
+		return scale.isDisplay();
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines#getColorAsString()
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales#getXAxis()
 	 */
 	@Override
-	public String getColorAsString() {
-		return DefaultsBuilder.get().getOptions().getDefaultColorAsString();
+	public IsDefaultScale getXAxis() {
+		return scale;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines#getLineWidth()
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales#getYAxis()
 	 */
 	@Override
-	public int getLineWidth() {
-		return DEFAULT_LINE_WIDTH;
+	public IsDefaultScale getYAxis() {
+		return scale;
 	}
-
+	
 }

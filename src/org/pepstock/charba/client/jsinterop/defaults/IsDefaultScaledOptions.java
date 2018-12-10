@@ -13,29 +13,28 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.jsinterop.data;
-
-import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
+package org.pepstock.charba.client.jsinterop.defaults;
 
 /**
- * Factory to create a datapoint from a native object, used for arra container lists.
+ * Interface to define options defaults. THIS IS THE ROOT OF ALL INTERFACE DEFAULTS.
  * 
  * @author Andrea "Stock" Stocchero
  * @version 2.0
  */
-class DataPointListFactory implements NativeObjectContainerFactory<DataPoint> {
+public interface IsDefaultScaledOptions extends IsDefaultOptions{
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns the scale/axis defaults.
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop
-	 * .commons.NativeObject)
+	 * @return the scale/axis defaults.
 	 */
-	@Override
-	public DataPoint create(NativeObject nativeObject) {
-		return new DataPoint(nativeObject);
-	}
+	IsDefaultScales getScales();
+
+	/**
+	 * Returns the scale/axis defaults.
+	 * 
+	 * @return the scale/axis defaults.
+	 */
+	IsDefaultScale getScale();
 
 }

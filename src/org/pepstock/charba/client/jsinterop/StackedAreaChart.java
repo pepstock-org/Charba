@@ -36,7 +36,7 @@ public class StackedAreaChart extends AbstractChart<StackedOptions, StackedAreaD
 	 * Builds the object.
 	 */
 	public StackedAreaChart() {
-		options = new StackedOptions(this, Defaults.get().options(getType()), true);
+		options = new StackedOptions(this, getChartOptions(), true);
 	}
 
 	/*

@@ -37,7 +37,7 @@ public class LineChart extends AbstractChart<LineOptions, LineDataset> {
 	 * Builds the object.
 	 */
 	public LineChart() {
-		options = new LineOptions(this, Defaults.get().options(getType()));
+		options = new LineOptions(this, getChartOptions());
 	}
 
 	/*

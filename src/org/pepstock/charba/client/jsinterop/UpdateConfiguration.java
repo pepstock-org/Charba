@@ -19,7 +19,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Easing;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
-import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
 
 /**
  * Object can be provided with additional configuration for the update/render process.<br>
@@ -57,7 +56,7 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * @return the animation easing function.
 	 */
 	public Easing getEasing() {
-		return getValue(Property.easing, Easing.class, DefaultOptions.get().getAnimation().getEasing());
+		return getValue(Property.easing, Easing.class, Defaults.get().getGlobal().getAnimation().getEasing());
 	}
 
 	/**
@@ -75,7 +74,7 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * @return time for the animation of the redraw in milliseconds.
 	 */
 	public int getDuration() {
-		return getValue(Property.duration, DefaultOptions.get().getAnimation().getDuration());
+		return getValue(Property.duration, Defaults.get().getGlobal().getAnimation().getDuration());
 	}
 
 	/**

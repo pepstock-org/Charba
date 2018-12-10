@@ -36,7 +36,7 @@ public class RadarChart extends AbstractChart<RadarOptions, RadarDataset> {
 	 * Builds the object.
 	 */
 	public RadarChart() {
-		options = new RadarOptions(this, Defaults.get().options(getType()));
+		options = new RadarOptions(this, getChartOptions());
 	}
 
 	/*

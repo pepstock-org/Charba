@@ -15,14 +15,22 @@
 */
 package org.pepstock.charba.client.controllers;
 
+import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.Type;
 
 public final class ControllerType implements Type {
 	
 	private final String type;
-
+	
+	private final ScaleType scaleType;
+	
 	public ControllerType(String type) {
+		this(type, ScaleType.multi);
+	}
+
+	public ControllerType(String type, ScaleType scaleType) {
 		this.type = type;
+		this.scaleType = scaleType;
 	}
 
 	/* (non-Javadoc)
@@ -31,6 +39,14 @@ public final class ControllerType implements Type {
 	@Override
 	public String name() {
 		return type;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.Type#scaleType()
+	 */
+	@Override
+	public ScaleType scaleType() {
+		return scaleType;
 	}
 
 	/* (non-Javadoc)

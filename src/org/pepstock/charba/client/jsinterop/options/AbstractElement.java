@@ -22,20 +22,20 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc;
 
 /**
- * Arcs are used in the polar area, doughnut and pie charts.<br>
- * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the
- * same way.<br>
  * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
  * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a
  * dataset.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  * 
+ * @param <P> parent node class
+ * @param <D> defaults provider class
  */
-public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc> extends AbstractModel<P, D>{
-	
+public abstract class AbstractElement<D extends IsDefaultArc> extends AbstractModel<Elements, D> {
+
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -44,8 +44,17 @@ public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc
 		borderColor
 	}
 
-	AbstractElement(P parent, Key childKey, D defaultValues, NativeObject nativeObject) {
-		super(parent, childKey, defaultValues, nativeObject);
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param elements elements node of the chart options.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
+	AbstractElement(Elements elements, Key childKey, D defaultValues, NativeObject nativeObject) {
+		super(elements, childKey, defaultValues, nativeObject);
 	}
 
 	/**
@@ -53,16 +62,16 @@ public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc
 	 * 
 	 * @param backgroundColor the background color.
 	 */
-	public void setBackgroundColor(IsColor backgroundColor) {
+	public final void setBackgroundColor(IsColor backgroundColor) {
 		setBackgroundColor(backgroundColor.toRGBA());
 	}
-	
+
 	/**
 	 * Sets the background color.
 	 * 
 	 * @param backgroundColor the background color.
 	 */
-	public void setBackgroundColor(String backgroundColor) {
+	public final void setBackgroundColor(String backgroundColor) {
 		setValue(Property.backgroundColor, backgroundColor);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -71,19 +80,18 @@ public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc
 	/**
 	 * Returns the background color.
 	 * 
-	 * @return the background color. Default is rgba(0,0,0,0.1).
+	 * @return the background color.
 	 */
-	public String getBackgroundColorAsString() {
+	public final String getBackgroundColorAsString() {
 		return getValue(Property.backgroundColor, getDefaultValues().getBackgroundColorAsString());
 	}
-
 
 	/**
 	 * Returns the background color.
 	 * 
-	 * @return the background color. Default is rgba(0,0,0,0.1).
+	 * @return the background color. 
 	 */
-	public IsColor getBackgroundColor() {
+	public final IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
@@ -92,7 +100,7 @@ public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc
 	 * 
 	 * @param borderWidth the border width.
 	 */
-	public void setBorderWidth(int borderWidth) {
+	public final void setBorderWidth(int borderWidth) {
 		setValue(Property.borderWidth, borderWidth);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -101,9 +109,9 @@ public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc
 	/**
 	 * Returns the border width.
 	 * 
-	 * @return the border width. Default is 2.
+	 * @return the border width.
 	 */
-	public int getBorderWidth() {
+	public final int getBorderWidth() {
 		return getValue(Property.borderWidth, getDefaultValues().getBorderWidth());
 	}
 
@@ -112,7 +120,7 @@ public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc
 	 * 
 	 * @param borderColor the border color.
 	 */
-	public void setBorderColor(IsColor borderColor) {
+	public final void setBorderColor(IsColor borderColor) {
 		setBorderColor(borderColor.toRGBA());
 	}
 
@@ -121,7 +129,7 @@ public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc
 	 * 
 	 * @param borderColor the border color.
 	 */
-	public void setBorderColor(String borderColor) {
+	public final void setBorderColor(String borderColor) {
 		setValue(Property.borderColor, borderColor);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -130,18 +138,18 @@ public abstract class AbstractElement<P extends Elements, D extends IsDefaultArc
 	/**
 	 * Returns the border color.
 	 * 
-	 * @return the border color. Default is #fff.
+	 * @return the border color.
 	 */
-	public String getBorderColorAsString() {
+	public final String getBorderColorAsString() {
 		return getValue(Property.borderColor, getDefaultValues().getBorderColorAsString());
 	}
 
 	/**
 	 * Returns the border color.
 	 * 
-	 * @return the border color. Default is #fff.
+	 * @return the border color.
 	 */
-	public IsColor getBorderColor() {
+	public final IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
 	}
 

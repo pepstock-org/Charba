@@ -28,23 +28,34 @@ import org.pepstock.charba.client.jsinterop.plugins.PluginIdChecker;
  * The java script object key is the plugin id.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public final class Plugins extends AbstractModel<Options, Void> {
 
+	/**
+	 * Creates the object with the parent, the key of this element and native object to map java script properties.<br>
+	 * No default values for this element.
+	 * 
+	 * @param options options of the chart.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param nativeObject native object to map java script properties
+	 */
 	Plugins(Options options, Key childKey, NativeObject nativeObject) {
+		// no default values for this element
 		super(options, childKey, null, nativeObject);
 	}
 
 	/**
 	 * Sets if a global plugin must be enabled or not.
+	 * 
 	 * @param pluginId plugin id.
 	 * @param enabled <code>false</code> disable a gloabl plugin.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
 	public void setEnabled(String pluginId, boolean enabled) throws InvalidPluginIdException {
 		// if null, removes the configuration
-		if (enabled){
+		if (enabled) {
 			// removes configuration if exists
 			remove(PluginIdChecker.key(pluginId));
 		} else {
@@ -54,26 +65,29 @@ public final class Plugins extends AbstractModel<Options, Void> {
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Returns if a global plugin is enabled or not.
+	 * 
 	 * @param pluginId plugin id.
-	 * @return  <code>false</code> if a gloabl plugin is not enabled otherwise <code>true</code>.
-	 * @throws InvalidPluginIdException  occurs if the plugin id is invalid.
+	 * @return <code>false</code> if a global plugin is not enabled otherwise <code>true</code>.
+	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public boolean isEnabled(String pluginId) throws InvalidPluginIdException{
+	public boolean isEnabled(String pluginId) throws InvalidPluginIdException {
 		return getValue(PluginIdChecker.key(pluginId), true);
 	}
-	
+
 	/**
-	 * Sets the plugin options. If passed otpions is null, the configuration of plugin will be removed.
+	 * Sets the plugin options. If passed options is null, the configuration of plugin will be removed.
+	 * 
 	 * @param pluginId plugin id.
-	 * @param options java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if exist.
+	 * @param options java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if
+	 *            exist.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
 	public <T extends NativeObjectContainer> void setOptions(String pluginId, T options) throws InvalidPluginIdException {
 		// if null, removes the configuration
-		if (options == null){
+		if (options == null) {
 			// removes configuration if exists
 			remove(PluginIdChecker.key(pluginId));
 		} else {
@@ -83,8 +97,15 @@ public final class Plugins extends AbstractModel<Options, Void> {
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
-	
-	public boolean hasOptions(String pluginId) throws InvalidPluginIdException{
+
+	/**
+	 * Checks if there is any options for a specific plugin, by its id.
+	 * 
+	 * @param pluginId plugin id.
+	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
+	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
+	 */
+	public boolean hasOptions(String pluginId) throws InvalidPluginIdException {
 		return has(PluginIdChecker.key(pluginId));
 	}
 
@@ -96,8 +117,8 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * @return java script object used to configure the plugin or <code>null</code> if not exist.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) throws InvalidPluginIdException{
+	public <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) throws InvalidPluginIdException {
 		return factory.create(getValue(PluginIdChecker.key(pluginId)));
 	}
-	
+
 }

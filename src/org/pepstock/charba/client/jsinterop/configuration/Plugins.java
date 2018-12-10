@@ -57,7 +57,7 @@ public final class Plugins {
 	 * Returns if a global plugin is enabled or not.
 	 * 
 	 * @param pluginId plugin id.
-	 * @return <code>false</code> if a gloabl plugin is not enabled otherwise <code>true</code>.
+	 * @return <code>false</code> if a global plugin is not enabled otherwise <code>true</code>.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
 	public boolean isEnabled(String pluginId) throws InvalidPluginIdException {
@@ -65,7 +65,7 @@ public final class Plugins {
 	}
 
 	/**
-	 * Sets the plugin options. If passed otpions is null, the configuration of plugin will be removed.
+	 * Sets the plugin options. If passed options is null, the configuration of plugin will be removed.
 	 * 
 	 * @param pluginId plugin id.
 	 * @param options java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if
@@ -77,7 +77,7 @@ public final class Plugins {
 	}
 
 	/**
-	 * Checks if there is any options for a specific pugin, by its id.
+	 * Checks if there is any options for a specific plugin, by its id.
 	 * 
 	 * @param pluginId plugin id.
 	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.

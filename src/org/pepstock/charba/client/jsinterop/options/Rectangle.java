@@ -21,25 +21,30 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultRectangle;
 
 /**
- * Rectangle elements are used to represent the bars in a bar chart.<br>
- * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the
- * same way.<br>
- * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
- * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a
- * dataset.
+ * Rectangle elements are used to represent the bars in a bar chart.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  */
-public class Rectangle extends AbstractElement<Elements, IsDefaultRectangle> implements IsDefaultRectangle{
+public class Rectangle extends AbstractElement<IsDefaultRectangle> implements IsDefaultRectangle{
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		borderSkipped
 	}
 
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param elements parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
 	Rectangle(Elements elements, Key childKey, IsDefaultRectangle defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
 	}

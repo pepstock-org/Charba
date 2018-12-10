@@ -33,12 +33,13 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines;
  * The grid line configuration defines options for the grid lines that run perpendicular to the axis.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> implements IsDefaultGridLines {
 
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -58,6 +59,15 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 		offsetGridLines
 	}
 	
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param scale scale/axis of this object.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
 	GridLines(Scale scale, Key childKey, IsDefaultGridLines defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 	}
@@ -76,7 +86,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	/**
 	 * If false, do not display grid lines for this axis.
 	 * 
-	 * @return If false, do not display grid lines for this axis. Default is true.
+	 * @return If false, do not display grid lines for this axis.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());
@@ -112,9 +122,13 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 *            second to the second grid line and so on.
 	 */
 	private void setColor(ArrayString color) {
+		// checks if there is only 1 element
 		if (color.length() == 1) {
+			// if 1 element, sets the value as string
+			// the same for all lines
 			setValue(Property.color, color.get(0));
 		} else {
+			// otherwise uses an array for all lines
 			setArrayValue(Property.color, color);
 		}
 		// checks if all parents are attached
@@ -125,12 +139,15 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
 	 * second grid line and so on.
 	 * 
-	 * @return the list of colors of the grid lines. If not set, default is only 1 value 'rgba(0, 0, 0, 0.1)'
+	 * @return the list of colors of the grid lines. 
 	 */
 	public String getColorAsString() {
+		// checks if the stored value is a string
 		if (ObjectType.String.equals(type(Property.color)) || !has(Property.color)) {
+			// returns a string
 			return getValue(Property.color, getDefaultValues().getColorAsString());
-		} else{
+		} else {
+			// returns the default
 			return getDefaultValues().getColorAsString();
 		}
 	}
@@ -139,15 +156,19 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
 	 * second grid line and so on.
 	 * 
-	 * @return the list of colors of the grid lines. If not set, default is only 1 value 'rgba(0, 0, 0, 0.1)'
+	 * @return the list of colors of the grid lines.
 	 */
 	public List<String> getColorsAsString() {
 		ArrayStringList result = null;
-		// loads stored data
+		// checks if the stored value is a string
 		if (ObjectType.String.equals(type(Property.color)) || !has(Property.color)) {
+			// creates new list
 			result = new ArrayStringList();
+			// adds the string value
 			result.add(getValue(Property.color, getDefaultValues().getColorAsString()));
 		} else if (ObjectType.Array.equals(type(Property.color))) {
+			// if array
+			// loads the array 
 			ArrayString array = getArrayValue(Property.color);
 			result = ArrayListHelper.list(array);
 		}
@@ -158,7 +179,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
 	 * second grid line and so on.
 	 * 
-	 * @return the list of colors of the grid lines. If not set, default is only 1 value 'rgba(0, 0, 0, 0.1)'
+	 * @return the list of colors of the grid lines. 
 	 */
 	public List<IsColor> getColor() {
 		return ColorBuilder.parse(getColorsAsString());
@@ -211,7 +232,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	/**
 	 * Returns the line dash pattern offset or "phase".
 	 * 
-	 * @return Offset for line dashes. If not set, default is 0
+	 * @return Offset for line dashes.
 	 */
 	public int getBorderDashOffset() {
 		return getValue(Property.borderDashOffset, getDefaultValues().getBorderDashOffset());
@@ -225,30 +246,38 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	public void setLineWidth(int... lineWidth) {
 		setLineWidth(ArrayInteger.of(lineWidth));
 	}
-
+	
 	/**
 	 * Sets the stroke widths of grid lines.
 	 * 
 	 * @param lineWidth stroke widths of grid lines.
 	 */
 	private void setLineWidth(ArrayInteger lineWidth) {
+		// checks if there is only 1 element
 		if (lineWidth.length() == 1) {
+			// if 1 element, sets the value as string
+			// the same for all lines
 			setValue(Property.lineWidth, lineWidth.get(0));
 		} else {
+			// otherwise uses an array for all lines
 			setArrayValue(Property.lineWidth, lineWidth);
 		}
 		// checks if all parents are attached
 		checkAndAddToParent();
-	}
+	}	
+	
 	/**
 	 * Returns the stroke widths of grid lines.
 	 * 
-	 * @return lineWidth stroke widths of grid lines. If not set, default is 1.
+	 * @return lineWidth stroke widths of grid lines. 
 	 */
 	public int getLineWidth() {
+		// checks if the stored value is a number
 		if (ObjectType.Number.equals(type(Property.lineWidth)) || !has(Property.lineWidth)) {
+			// returns a number
 			return getValue(Property.lineWidth, getDefaultValues().getLineWidth());
 		} else {
+			// returns the default
 			return getDefaultValues().getLineWidth();
 		}
 	}
@@ -257,15 +286,19 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	/**
 	 * Returns the stroke widths of grid lines.
 	 * 
-	 * @return lineWidth stroke widths of grid lines. If not set, default is 1.
+	 * @return lineWidth stroke widths of grid lines.
 	 */
 	public List<Integer> getLinesWidth() {
 		ArrayIntegerList result = null;
-		// loads stored data
+		// checks if the stored value is a number
 		if (ObjectType.Number.equals(type(Property.lineWidth)) || !has(Property.lineWidth)) {
+			// creates new list
 			result = new ArrayIntegerList();
+			// adds the number value
 			result.add(getValue(Property.lineWidth, getDefaultValues().getLineWidth()));
 		} else if (ObjectType.Array.equals(type(Property.lineWidth))) {
+			// if array
+			// loads the array 
 			ArrayInteger array = getArrayValue(Property.lineWidth);
 			result = ArrayListHelper.list(array);
 		}
@@ -286,7 +319,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	/**
 	 * If true, draw border at the edge between the axis and the chart area.
 	 * 
-	 * @return If true, draw border at the edge between the axis and the chart area. If not set, default is true
+	 * @return If true, draw border at the edge between the axis and the chart area.
 	 */
 	public boolean isDrawBorder() {
 		return getValue(Property.drawBorder, getDefaultValues().isDrawBorder());
@@ -310,7 +343,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * control which grid lines are drawn.
 	 * 
 	 * @return If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you
-	 *         need to control which grid lines are drawn. If not set, default is true
+	 *         need to control which grid lines are drawn.
 	 */
 	public boolean isDrawOnChartArea() {
 		return getValue(Property.drawOnChartArea, getDefaultValues().isDrawOnChartArea());
@@ -330,7 +363,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	/**
 	 * If true, draw lines beside the ticks in the axis area beside the chart.
 	 * 
-	 * @return If true, draw lines beside the ticks in the axis area beside the chart. If not set, default is true
+	 * @return If true, draw lines beside the ticks in the axis area beside the chart.
 	 */
 	public boolean isDrawTicks() {
 		return getValue(Property.drawTicks, getDefaultValues().isDrawTicks());
@@ -350,7 +383,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	/**
 	 * Returns the length in pixels that the grid lines will draw into the axis area.
 	 * 
-	 * @return Length in pixels that the grid lines will draw into the axis area. If not set, default is 10
+	 * @return Length in pixels that the grid lines will draw into the axis area.
 	 */
 	public int getTickMarkLength() {
 		return getValue(Property.tickMarkLength, getDefaultValues().getTickMarkLength());
@@ -370,7 +403,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	/**
 	 * Returns the stroke width of the grid line for the first index (index 0).
 	 * 
-	 * @return Stroke width of the grid line for the first index (index 0). If not set, default is 1
+	 * @return Stroke width of the grid line for the first index (index 0).
 	 */
 	public int getZeroLineWidth() {
 		return getValue(Property.zeroLineWidth, getDefaultValues().getZeroLineWidth());
@@ -399,7 +432,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	/**
 	 * Returns the stroke color of the grid line for the first index (index 0).
 	 * 
-	 * @return Stroke color of the grid line for the first index (index 0). If not set, default is 'rgba(0, 0, 0, 0.25)'
+	 * @return Stroke color of the grid line for the first index (index 0).
 	 */
 	public String getZeroLineColorAsString() {
 		return getValue(Property.zeroLineColor, getDefaultValues().getZeroLineColorAsString());
@@ -408,7 +441,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	/**
 	 * Returns the stroke color of the grid line for the first index (index 0).
 	 * 
-	 * @return Stroke color of the grid line for the first index (index 0). If not set, default is 'rgba(0, 0, 0, 0.25)'
+	 * @return Stroke color of the grid line for the first index (index 0).
 	 */
 	public IsColor getZeroLineColor() {
 		return ColorBuilder.parse(getZeroLineColorAsString());
@@ -458,7 +491,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	/**
 	 * Returns the offset for line dashes of the grid line for the first index (index 0).
 	 * 
-	 * @return the offset for line dashes of the grid line for the first index (index 0). if not set, default is 0
+	 * @return the offset for line dashes of the grid line for the first index (index 0).
 	 */
 	public int getZeroLineBorderDashOffset() {
 		return getValue(Property.zeroLineBorderDashOffset, getDefaultValues().getZeroLineBorderDashOffset());
@@ -478,7 +511,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	/**
 	 * If true, grid lines will be shifted to be between labels. This is set to true in the bar chart by default.
 	 * 
-	 * @return If true, grid lines will be shifted to be between labels. If not set, default is false.
+	 * @return If true, grid lines will be shifted to be between labels.
 	 */
 	public boolean isOffsetGridLines() {
 		return getValue(Property.offsetGridLines, getDefaultValues().isOffsetGridLines());

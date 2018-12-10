@@ -32,7 +32,7 @@ abstract class AbstractConfigurationElement {
 	// root options
 	private final ExtendedOptions options;
 	// options element
-	private final AbstractElement<?, ?> configuration;
+	private final AbstractElement<?> configuration;
 
 	/***
 	 * Builds the object with options, root and element ones.
@@ -40,7 +40,7 @@ abstract class AbstractConfigurationElement {
 	 * @param options options instance
 	 * @param configuration element instance
 	 */
-	AbstractConfigurationElement(ExtendedOptions options, AbstractElement<?, ?> configuration) {
+	AbstractConfigurationElement(ExtendedOptions options, AbstractElement<?> configuration) {
 		this.options = options;
 		this.configuration = configuration;
 	}

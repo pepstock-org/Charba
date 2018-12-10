@@ -25,12 +25,13 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
  * takes.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public class Animation extends AbstractModel<Options, IsDefaultAnimation> implements IsDefaultAnimation {
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	enum Property implements Key
 	{
@@ -40,6 +41,15 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 		easing
 	}
 	
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param options options of the chart.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
 	Animation(Options options, Key childKey, IsDefaultAnimation defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 	}
@@ -48,7 +58,6 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * Sets the animation easing.
 	 * 
 	 * @param easing animation easing.
-	 * @see org.pepstock.charba.client.enums.Easing
 	 */
 	public void setEasing(Easing easing) {
 		setValue(Property.easing, easing);
@@ -59,8 +68,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	/**
 	 * Returns the animation easing.
 	 * 
-	 * @return animation easing. Default value is {@link org.pepstock.charba.client.enums.Easing#easeOutQuart}.
-	 * @see org.pepstock.charba.client.enums.Easing
+	 * @return animation easing.
 	 */
 	public Easing getEasing() {
 		return getValue(Property.easing, Easing.class, getDefaultValues().getEasing());
@@ -80,7 +88,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	/**
 	 * Returns the number of milliseconds an animation takes.
 	 * 
-	 * @return the number of milliseconds an animation takes. Default is 1000 (1 second).
+	 * @return the number of milliseconds an animation takes.
 	 */
 	public int getDuration() {
 		return getValue(Property.duration, getDefaultValues().getDuration());
@@ -100,7 +108,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	/**
 	 * If true, the chart will animate in with a rotation animation.
 	 * 
-	 * @return If true, the chart will animate in with a rotation animation. Default is true.
+	 * @return If true, the chart will animate in with a rotation animation.
 	 */
 	public boolean isAnimateRotate() {
 		return getValue(Property.animateRotate, getDefaultValues().isAnimateRotate());
@@ -120,7 +128,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	/**
 	 * If true, will animate scaling the chart from the center outwards.
 	 * 
-	 * @return If true, will animate scaling the chart from the center outwards. Default is false.
+	 * @return If true, will animate scaling the chart from the center outwards.
 	 */
 	public boolean isAnimateScale() {
 		return getValue(Property.animateScale, getDefaultValues().isAnimateScale());

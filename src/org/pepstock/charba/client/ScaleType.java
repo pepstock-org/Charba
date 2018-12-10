@@ -13,29 +13,28 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.jsinterop.data;
-
-import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
+package org.pepstock.charba.client;
 
 /**
- * Factory to create a datapoint from a native object, used for arra container lists.
+ * Interface to set the scale type of a chart.<br>
+ * Every chart could have scale(s) or not and it depends on chart type.
  * 
  * @author Andrea "Stock" Stocchero
  * @version 2.0
  */
-class DataPointListFactory implements NativeObjectContainerFactory<DataPoint> {
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop
-	 * .commons.NativeObject)
+public enum ScaleType
+{
+	/**
+	 * Multiple scales are defined for the chart, based on its type.
 	 */
-	@Override
-	public DataPoint create(NativeObject nativeObject) {
-		return new DataPoint(nativeObject);
-	}
+	multi,
+	/**
+	 * A single scale is defined for the chart, based on its type.
+	 */
+	single,
+	/**
+	 * No scale is defined for the chart, based on its type.
+	 */
+	none
 
 }

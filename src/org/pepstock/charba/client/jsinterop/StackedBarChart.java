@@ -37,7 +37,7 @@ public class StackedBarChart extends AbstractChart<StackedOptions, StackedBarDat
 	 * Builds the object.
 	 */
 	public StackedBarChart() {
-		options = new StackedOptions(this, Defaults.get().options(getType()));
+		options = new StackedOptions(this, getChartOptions());
 	}
 
 	/*

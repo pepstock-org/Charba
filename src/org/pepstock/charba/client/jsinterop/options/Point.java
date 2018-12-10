@@ -21,21 +21,17 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint;
 
 /**
- * Point elements are used to represent the points in a line chart or a bubble chart.<br>
- * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the
- * same way.<br>
- * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
- * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a
- * dataset.
+ * Point elements are used to represent the points in a line chart or a bubble chart.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  */
-public class Point extends AbstractElement<Elements, IsDefaultPoint> implements IsDefaultPoint{
-	
+public final class Point extends AbstractElement<IsDefaultPoint> implements IsDefaultPoint {
+
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		radius,
 		pointStyle,
@@ -44,6 +40,15 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint> implements 
 		hoverBorderWidth
 	}
 
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param elements parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
 	Point(Elements elements, Key childKey, IsDefaultPoint defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
 	}
@@ -62,7 +67,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint> implements 
 	/**
 	 * Returns the radius of the point when hovered.
 	 * 
-	 * @return list of the radius of the point when hovered. Default is 3.
+	 * @return list of the radius of the point when hovered.
 	 */
 	public double getRadius() {
 		return getValue(Property.radius, getDefaultValues().getRadius());
@@ -83,8 +88,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint> implements 
 	/**
 	 * Returns the style of the point.
 	 * 
-	 * @return the style of the point. Default is {@link org.pepstock.charba.client.enums.PointStyle#circle}.
-	 * @see org.pepstock.charba.client.enums.PointStyle
+	 * @return the style of the point.
 	 */
 	public PointStyle getPointStyle() {
 		return getValue(Property.pointStyle, PointStyle.class, getDefaultValues().getPointStyle());
@@ -104,7 +108,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint> implements 
 	/**
 	 * Returns the pixel size of the non-displayed point that reacts to mouse events.
 	 * 
-	 * @return the pixel size of the non-displayed point. Default is 1.
+	 * @return the pixel size of the non-displayed point.
 	 */
 	public double getHitRadius() {
 		return getValue(Property.hitRadius, getDefaultValues().getHitRadius());
@@ -124,7 +128,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint> implements 
 	/**
 	 * Returns the radius of the point when hovered.
 	 * 
-	 * @return the radius of the point when hovered. Default is 4.
+	 * @return the radius of the point when hovered.
 	 */
 	public double getHoverRadius() {
 		return getValue(Property.hoverRadius, getDefaultValues().getHoverRadius());
@@ -144,7 +148,7 @@ public class Point extends AbstractElement<Elements, IsDefaultPoint> implements 
 	/**
 	 * Returns the border width of point when hovered.
 	 * 
-	 * @return the border width of point when hovered.Default is 1.
+	 * @return the border width of point when hovered.
 	 */
 	public int getHoverBorderWidth() {
 		return getValue(Property.hoverBorderWidth, getDefaultValues().getHoverBorderWidth());

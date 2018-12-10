@@ -19,28 +19,30 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
-import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
 
 /**
- * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
+ * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
+ * specific dataset.<br>
  * The location of the bubble is determined by the first two dimensions and the corresponding horizontal and vertical axes.<br>
  * The third dimension is represented by the size of the individual bubbles.
  * 
  * @author Andrea "Stock" Stocchero
  * @version 2.0
  */
-public final class BubbleDataset extends HovingDataset{
+public final class BubbleDataset extends HovingDataset {
 	// data point factory
 	private final DataPointListFactory factory = new DataPointListFactory();
-	
+
 	/**
-	 * Name of fields of JavaScript object. 
+	 * Name of properties of native object.
 	 */
-	private enum Property implements Key {
+	private enum Property implements Key
+	{
 		data,
 		hoverRadius,
 		hitRadius,
@@ -50,6 +52,7 @@ public final class BubbleDataset extends HovingDataset{
 
 	/**
 	 * Sets the style of the point.
+	 * 
 	 * @param pointStyle array of the style of the point.
 	 */
 	public void setPointStyle(PointStyle... pointStyle) {
@@ -58,15 +61,17 @@ public final class BubbleDataset extends HovingDataset{
 
 	/**
 	 * Returns the style of the point.
+	 * 
 	 * @return list of the style of the point.
 	 */
 	public List<PointStyle> getPointStyle() {
-		ArrayString array = getValueOrArray(Property.pointStyle, DefaultOptions.get().getElements().getPoint().getPointStyle());
+		ArrayString array = getValueOrArray(Property.pointStyle, Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
 		return ArrayListHelper.list(PointStyle.class, array);
 	}
-	
+
 	/**
 	 * Sets the pixel size of the non-displayed point that reacts to mouse events.
+	 * 
 	 * @param hitRadius array of the pixel size of the non-displayed point.
 	 */
 	public void setHitRadius(double... hitRadius) {
@@ -75,15 +80,17 @@ public final class BubbleDataset extends HovingDataset{
 
 	/**
 	 * Returns the pixel size of the non-displayed point that reacts to mouse events.
+	 * 
 	 * @return list of the pixel size of the non-displayed point.
 	 */
 	public List<Double> getHitRadius() {
-		ArrayDouble array = getValueOrArray(Property.hitRadius, DefaultOptions.get().getElements().getPoint().getHitRadius());
-	    return ArrayListHelper.list(array);
+		ArrayDouble array = getValueOrArray(Property.hitRadius, Defaults.get().getGlobal().getElements().getPoint().getHitRadius());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Sets the radius of the point when hovered.
+	 * 
 	 * @param hoverRadius array of the radius of the point when hovered.
 	 */
 	public void setHoverRadius(double... hoverRadius) {
@@ -92,48 +99,55 @@ public final class BubbleDataset extends HovingDataset{
 
 	/**
 	 * Returns the radius of the point when hovered.
+	 * 
 	 * @return list of the radius of the point when hovered.
 	 */
 	public List<Double> getHoverRadius() {
-		ArrayDouble array = getValueOrArray(Property.hoverRadius, DefaultOptions.get().getElements().getPoint().getHoverRadius());
-	    return ArrayListHelper.list(array);
+		ArrayDouble array = getValueOrArray(Property.hoverRadius, Defaults.get().getGlobal().getElements().getPoint().getHoverRadius());
+		return ArrayListHelper.list(array);
 	}
-	
+
 	/**
 	 * Sets the radius of the point shape. If set to 0, the point is not rendered.
+	 * 
 	 * @param radius array of the radius of the point shape.
 	 */
-	public void setRadius(double...  radius) {
+	public void setRadius(double... radius) {
 		setValueOrArray(Property.radius, radius);
 	}
 
 	/**
 	 * Returns the radius of the point shape.
+	 * 
 	 * @return list of the radius of the point shape.
 	 */
-	public List<Double> getRadius(){
-		ArrayDouble array = getValueOrArray(Property.radius,DefaultOptions.get().getElements().getPoint().getRadius());
-	    return ArrayListHelper.list(array);
+	public List<Double> getRadius() {
+		ArrayDouble array = getValueOrArray(Property.radius, Defaults.get().getGlobal().getElements().getPoint().getRadius());
+		return ArrayListHelper.list(array);
 	}
-	
+
 	/**
 	 * Sets the data property of a dataset for a chart is specified as an array of data points.
+	 * 
 	 * @param datapoints an array of data points
 	 */
-	public void setDataPoints(DataPoint... datapoints){
+	public void setDataPoints(DataPoint... datapoints) {
 		setArrayValue(Property.data, ArrayObject.of(datapoints));
 	}
-	
+
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
+	 * 
 	 * @return a list of data points
 	 */
-	public List<DataPoint> getDataPoints(){
+	public List<DataPoint> getDataPoints() {
 		ArrayObject array = getArrayValue(Property.data);
 		return ArrayListHelper.list(array, factory);
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.Dataset#setData(double[])
 	 */
 	@Override
@@ -141,7 +155,9 @@ public final class BubbleDataset extends HovingDataset{
 		throw new UnsupportedOperationException("Use datapoints instead of data for scatter chart");
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.Dataset#setData(java.util.List)
 	 */
 	@Override
@@ -149,7 +165,9 @@ public final class BubbleDataset extends HovingDataset{
 		throw new UnsupportedOperationException("Use datapoints instead of data for scatter chart");
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.Dataset#getData()
 	 */
 	@Override

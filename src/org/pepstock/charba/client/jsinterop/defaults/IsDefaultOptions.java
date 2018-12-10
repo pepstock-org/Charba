@@ -26,13 +26,6 @@ import org.pepstock.charba.client.enums.FontStyle;
 public interface IsDefaultOptions {
 
 	/**
-	 * Returns the scale/axis defaults.
-	 * 
-	 * @return the scale/axis defaults.
-	 */
-	IsDefaultScale getScale();
-
-	/**
 	 * Returns the animation defaults.
 	 * 
 	 * @return the animation defaults.
@@ -132,6 +125,11 @@ public interface IsDefaultOptions {
 	 */
 	int getDefaultFontSize();
 
+	/**
+	 * Returns the font style to use in the chart, on all objects, if not override by the specific configuration.
+	 * 
+	 * @return Font style into chart.
+	 */
 	FontStyle getDefaultFontStyle();
 
 	/**

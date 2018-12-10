@@ -28,22 +28,17 @@ import org.pepstock.charba.client.jsinterop.commons.ObjectType;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine;
 
 /**
- * Arcs are used in the polar area, doughnut and pie charts.<br>
- * While chart types provide settings to configure the styling of each dataset, you sometimes want to style all datasets the
- * same way.<br>
- * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
- * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a
- * dataset.
+ * Line elements are used to represent the line in a line chart.
  * 
  * @author Andrea "Stock" Stocchero
  * 
  */
-public class Line extends AbstractElement<Elements, IsDefaultLine> implements IsDefaultLine{
+public final class Line extends AbstractElement<IsDefaultLine> implements IsDefaultLine{
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		tension,
 		borderCapStyle,
@@ -55,6 +50,15 @@ public class Line extends AbstractElement<Elements, IsDefaultLine> implements Is
 		stepped
 	}
 
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param elements parent node to use to add this element where changed
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
 	Line(Elements elements, Key childKey, IsDefaultLine defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
 	}
@@ -73,7 +77,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine> implements Is
 	/**
 	 * Returns the Bezier curve tension (0 for no Bezier curves).
 	 * 
-	 * @return the Bezier curve tension (0 for no Bezier curves). Default is 0.4F.
+	 * @return the Bezier curve tension (0 for no Bezier curves). 
 	 */
 	public double getTension() {
 		return getValue(Property.tension, getDefaultValues().getTension());
@@ -84,7 +88,6 @@ public class Line extends AbstractElement<Elements, IsDefaultLine> implements Is
 	 * round and square.
 	 * 
 	 * @param borderCapStyle how the end points of every line are drawn.
-	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public void setBorderCapStyle(CapStyle borderCapStyle) {
 		setValue(Property.borderCapStyle, borderCapStyle);
@@ -96,8 +99,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine> implements Is
 	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are:
 	 * butt, round and square. By default this property is set to butt.
 	 * 
-	 * @return how the end points of every line are drawn. Default is {@link org.pepstock.charba.client.enums.CapStyle#butt}.
-	 * @see org.pepstock.charba.client.enums.CapStyle
+	 * @return how the end points of every line are drawn.
 	 */
 	public CapStyle getBorderCapStyle() {
 		return getValue(Property.borderCapStyle, CapStyle.class, getDefaultValues().getBorderCapStyle());
@@ -142,7 +144,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine> implements Is
 	/**
 	 * Returns the line dash pattern offset or "phase".
 	 * 
-	 * @return the line dash pattern offset or "phase". Default is 0.
+	 * @return the line dash pattern offset or "phase".
 	 */
 	public int getBorderDashOffset() {
 		return getValue(Property.borderDashOffset, getDefaultValues().getBorderDashOffset());
@@ -154,9 +156,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine> implements Is
 	 * are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
-	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter. By default this
-	 *            property is set to miter.
-	 * @see org.pepstock.charba.client.enums.JoinStyle
+	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter.
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
 		setValue(Property.borderJoinStyle, borderJoinStyle);
@@ -170,9 +170,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine> implements Is
 	 * are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
-	 * @return There are three possible values for this property: round, bevel and miter. By default this property is set to
-	 *         miter. Default is {@link org.pepstock.charba.client.enums.JoinStyle#miter}.
-	 * @see org.pepstock.charba.client.enums.JoinStyle
+	 * @return There are three possible values for this property: round, bevel and miter. 
 	 */
 	public JoinStyle getBorderJoinStyle() {
 		return getValue(Property.borderJoinStyle, JoinStyle.class, getDefaultValues().getBorderJoinStyle());
@@ -192,7 +190,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine> implements Is
 	/**
 	 * Returns <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
 	 * 
-	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction. Default is <code>true</code>.
+	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
 	 */
 	public boolean isCapBezierPoints() {
 		return getValue(Property.capBezierPoints, getDefaultValues().isCapBezierPoints());
@@ -213,7 +211,6 @@ public class Line extends AbstractElement<Elements, IsDefaultLine> implements Is
 	 * Sets how to fill the area under the line.
 	 * 
 	 * @param fill how to fill the area under the line.
-	 * @see org.pepstock.charba.client.enums.Fill
 	 */
 	public void setFill(Fill fill) {
 		// checks if is no fill
@@ -232,8 +229,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine> implements Is
 	/**
 	 * Returns how to fill the area under the line.
 	 * 
-	 * @return how to fill the area under the line. Default is {@link org.pepstock.charba.client.enums.Fill#origin}.
-	 * @see org.pepstock.charba.client.enums.Fill
+	 * @return how to fill the area under the line.
 	 */
 	public Fill getFill() {
 		// gets value type
@@ -244,6 +240,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine> implements Is
 			// returns no fill
 			return getValue(Property.fill, false) ? Fill.origin : Fill.nofill;
 		}
+		// returns the fill value
 		return getValue(Property.fill, Fill.class, getDefaultValues().getFill());
 	}
 	
@@ -261,7 +258,7 @@ public class Line extends AbstractElement<Elements, IsDefaultLine> implements Is
 	/**
 	 * Returns <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 * 
-	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored). Default is <code>false</code>.
+	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 */
 	public boolean isStepped() {
 		return getValue(Property.stepped, getDefaultValues().isStepped());

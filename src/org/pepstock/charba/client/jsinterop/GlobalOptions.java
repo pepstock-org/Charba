@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.jsinterop;
 
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
+import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.jsinterop.options.Options;
 
 /**
@@ -34,6 +34,6 @@ public final class GlobalOptions extends Options {
 	 */
 	GlobalOptions(NativeObject nativeObject) {
 		// uses the CHART.JS default options as default one
-		super(DefaultOptions.get(), nativeObject);
+		super(DefaultsBuilder.get().getOptions(), nativeObject);
 	}
 }

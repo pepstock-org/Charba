@@ -37,8 +37,7 @@ public class BarChart extends AbstractChart<BarOptions, BarDataset> {
 	 */
 	public BarChart() {
 		// creates the options
-		// FIXME change into getChartOptions()
-		options = new BarOptions(this, Defaults.get().options(getType()));
+		options = new BarOptions(this, getChartOptions());
 	}
 
 	/*

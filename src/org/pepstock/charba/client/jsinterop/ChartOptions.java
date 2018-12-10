@@ -15,9 +15,13 @@
 */
 package org.pepstock.charba.client.jsinterop;
 
+import org.pepstock.charba.client.ScaleType;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultOptions;
-import org.pepstock.charba.client.jsinterop.options.Options;
+import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultsBuilder;
+import org.pepstock.charba.client.jsinterop.options.Scale;
+import org.pepstock.charba.client.jsinterop.options.ScaledOptions;
+import org.pepstock.charba.client.jsinterop.options.Scales;
 
 /**
  * This object is mapping the default options related to the chart type.
@@ -25,22 +29,63 @@ import org.pepstock.charba.client.jsinterop.options.Options;
  * @author Andrea "Stock" Stocchero
  * @version 2.0
  */
-public final class ChartOptions extends Options {
+public final class ChartOptions extends ScaledOptions {
+	
+	private final Type type;
 
 	/**
 	 * Creates the object with a empty native object.
+	 * @param type chart type
 	 */
-	ChartOptions() {
-		this(null);
+	ChartOptions(Type type) {
+		this(type, null);
 	}
 
 	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
+	 * @param type chart type
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	ChartOptions(NativeObject nativeObject) {
+	ChartOptions(Type type, NativeObject nativeObject) {
 		// the default of chart default ones are the CHART.JS one
-		super(DefaultOptions.get(), nativeObject);
+		super(DefaultsBuilder.get().getScaledOptions(), nativeObject);
+		this.type = type;
 	}
+
+	/**
+	 * Chart type.
+	 * 
+	 * @return the type
+	 */
+	public Type getType() {
+		return type;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.options.ScaledOptions#getScales()
+	 */
+	public Scales getScales() {
+		// checks if the chart is multi-scales
+		if (ScaleType.multi.equals(type.scaleType())) {
+			// returns the scales
+			return super.getScales();
+		}
+		// if here, the chart is not multi scales therefore exception
+		throw new UnsupportedOperationException("The options is not referring to a multi scaled chart!");
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.options.ScaledOptions#getScale()
+	 */
+	public Scale getScale() {
+		// checks if the chart is single-scales
+		if (ScaleType.single.equals(type.scaleType())) {
+			// returns the scale
+			return super.getScale();
+		}
+		// if here, the chart is not single scale therefore exception
+		throw new UnsupportedOperationException("The options is not referring to a single scaled chart!");
+	}
+	
 }

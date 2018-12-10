@@ -74,11 +74,11 @@ final class NativeDefaults {
 		if (ObjectType.Object.equals(JsHelper.get().typeOf(this, type.name()))) {
 			// returns the descriptor
 			NativeObjectDescriptor descriptor = getOwnPropertyDescriptor(this, type.name());
-			return new ChartOptions(descriptor.getValue());
+			return new ChartOptions(type, descriptor.getValue());
 		} else {
 			// if here, the chart type is not defined (could be a controller)
 			// therefore returns an empty options
-			return new ChartOptions();
+			return new ChartOptions(type);
 		}
 	}
 }
