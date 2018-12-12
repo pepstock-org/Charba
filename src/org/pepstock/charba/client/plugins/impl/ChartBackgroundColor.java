@@ -31,17 +31,17 @@ import com.google.gwt.core.client.JavaScriptObject;
  *
  */
 public final class ChartBackgroundColor extends AbstractPlugin {
-	
+
 	// default background color
 	static final String DEFAULT_BACKGROUND_COLOR = "white";
-	
+
 	/**
-	 * Plugin ID 
+	 * Plugin ID
 	 */
 	public static final String ID = "backgroundcolor";
-	
+
 	private final String color;
-	
+
 	/**
 	 * Default constructor with WIHITE background color.
 	 */
@@ -82,7 +82,9 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		return ColorBuilder.parse(getColorAsString());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.Plugin#getId()
 	 */
 	@Override
@@ -90,20 +92,22 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		return ID;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDraw(org.pepstock.charba.client.AbstractChart, double)
 	 */
 	@Override
 	public boolean onBeforeDraw(AbstractChart<?, ?> chart, double easing, JavaScriptObject options) {
 		// creates the plugin options using the java script object
 		// passing also the default color set at constructor.
-		ChartBackgroundColorOptions bgOptions  = new ChartBackgroundColorOptions(options, color);
+		ChartBackgroundColorOptions bgOptions = new ChartBackgroundColorOptions(options, color);
 		// gets the canvas
 		Context2d ctx = chart.getCanvas().getContext2d();
 		// set fill canvas color
 		ctx.setFillStyle(bgOptions.getBackgroundColorAsString());
 		// fills back ground
-		ctx.fillRect(0, 0, chart.getCanvas().getWidth(), chart.getCanvas().getHeight());
+		ctx.fillRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
 		// always TRUE
 		return true;
 	}

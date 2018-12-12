@@ -29,14 +29,12 @@ import org.pepstock.charba.client.plugins.Plugins;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.dom.client.CanvasElement;
-import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.SimplePanel;
 
 /**
  * Base class of all charts.<br>
@@ -47,7 +45,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @param <O> Options type for the specific chart
  * @param <D> Dataset type for the specific chart
  */
-public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> extends Widget implements IsChart<O, D> {
+public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> extends SimplePanel implements IsChart<O, D> {
 	
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
@@ -64,10 +62,11 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	private final String id = Document.get().createUniqueId();
 	
 	// chart container
-	final DivElement div;
+//	final DivElement div;
 
 	// canvas where Chart.js draws the chart
-	final CanvasElement canvas;
+	final Canvas canvas;
+//	final CanvasElement canvas;
 
 	// CHart configuration object
 	private final Configuration configuration = new Configuration();
@@ -90,30 +89,32 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 */
 	public AbstractChart() {
 		// creates DIV
-		div = Document.get().createDivElement();
-		div.setId(id);
+//		div = Document.get().createDivElement();
+		getElement().setId(id);
 		// sets relative position
-		div.getStyle().setPosition(Position.RELATIVE);
+		getElement().getStyle().setPosition(Position.RELATIVE);
 		// sets default width values
-		div.getStyle().setWidth(DEFAULT_PCT_WIDTH, Unit.PCT);
-		div.getStyle().setHeight(100, Unit.PCT);
+		getElement().getStyle().setWidth(DEFAULT_PCT_WIDTH, Unit.PCT);
+		getElement().getStyle().setHeight(100, Unit.PCT);
 		// checks if canvas is supported
 		if (isCanvasSupported) {
 			// creates a canvas and add to DIV
-			canvas = Document.get().createCanvasElement();
-			div.appendChild(canvas);
+			//canvas = Document.get().createCanvasElement();
+			canvas = Canvas.createIfSupported();
+			add(canvas);
+			//div.appendChild(canvas);
 		} else {
 			// creates a header element
 			HeadingElement h = Document.get().createHElement(3);
 			// to show the error message
 			// because canvas is not supported
 			h.setInnerText(CANVAS_NOT_SUPPORTED_MESSAGE);
-			div.appendChild(h);
+			getElement().appendChild(h);
 			// resets canvas
 			canvas = null;
 		}
 		// sets DIV as element of the widget
-		setElement(div);
+//		setElement(div);
 		// injects Chart.js java script source
 		Injector.ensureInjected();
 		// creates plugins container
@@ -145,7 +146,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	/**
 	 * @return the canvas
 	 */
-	public final CanvasElement getCanvas() {
+	public final Canvas getCanvas() {
 		return canvas;
 	}
 	
@@ -158,13 +159,13 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 		return chart != null;
 	}
 
-	/**
-	 * @return the chart container HTML element
-	 */
-	public final DivElement getContainer() {
-		return div;
-	}
-	
+//	/**
+//	 * @return the chart container HTML element
+//	 */
+//	public final DivElement getContainer() {
+//		return div;
+//	}
+//	
 	/**
 	 * Returns the chart node with runtime data.
 	 * @return the chart node.
@@ -194,25 +195,25 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 		return options;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.user.client.ui.UIObject#setHeight(java.lang.String)
-	 */
-	@Override
-	public void setHeight(String height) {
-		div.getStyle().setProperty(HEIGHT_PROPERTY, height);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.user.client.ui.UIObject#setWidth(java.lang.String)
-	 */
-	@Override
-	public void setWidth(String width) {
-		div.getStyle().setProperty(WIDTH_PROPERTY, width);
-	}
+//	/*
+//	 * (non-Javadoc)
+//	 * 
+//	 * @see com.google.gwt.user.client.ui.UIObject#setHeight(java.lang.String)
+//	 */
+//	@Override
+//	public void setHeight(String height) {
+//		div.getStyle().setProperty(HEIGHT_PROPERTY, height);
+//	}
+//
+//	/*
+//	 * (non-Javadoc)
+//	 * 
+//	 * @see com.google.gwt.user.client.ui.UIObject#setWidth(java.lang.String)
+//	 */
+//	@Override
+//	public void setWidth(String width) {
+//		div.getStyle().setProperty(WIDTH_PROPERTY, width);
+//	}
 
 	/**
 	 * @return the drawOnAttach
