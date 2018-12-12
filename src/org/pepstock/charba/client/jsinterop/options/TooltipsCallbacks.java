@@ -20,149 +20,26 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
 
 /**
- * Contains all callbacks defined for a toolitp.
+ * Contains all callbacks defined for a tooltips.<br>
+ * Is empty because this is only the container of all properties related to callbacks which
+ * must be defined into chart configuration.  
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public final class TooltipsCallbacks extends AbstractModel<Tooltips, IsDefaultTooltips> {
 
 	/**
-	 * @param parent
-	 * @param defaultValues
-	 * @param nativeObject
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param tooltips tooltips of the chart.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
 	 */
-	TooltipsCallbacks(Tooltips parent, Key childKey, IsDefaultTooltips defaultValues, NativeObject nativeObject) {
-		super(parent, childKey, defaultValues, nativeObject);
+	TooltipsCallbacks(Tooltips tooltips, Key childKey, IsDefaultTooltips defaultValues, NativeObject nativeObject) {
+		super(tooltips, childKey, defaultValues, nativeObject);
 	}
-
-//	/**
-//	 * @return the titleCallback
-//	 */
-//	public TooltipTitleCallback getTitleCallback() {
-//		return titleCallback;
-//	}
-//
-//	/**
-//	 * @param titleCallback the titleCallback to set
-//	 */
-//	public void setTitleCallback(TooltipTitleCallback titleCallback) {
-//		this.titleCallback = titleCallback;
-//	}
-//
-//	/**
-//	 * @return the bodyCallback
-//	 */
-//	public TooltipBodyCallback getBodyCallback() {
-//		return bodyCallback;
-//	}
-//
-//	/**
-//	 * @param bodyCallback the bodyCallback to set
-//	 */
-//	public void setBodyCallback(TooltipBodyCallback bodyCallback) {
-//		this.bodyCallback = bodyCallback;
-//	}
-//
-//	/**
-//	 * @return the labelCallback
-//	 */
-//	public TooltipLabelCallback getLabelCallback() {
-//		return labelCallback;
-//	}
-//
-//	/**
-//	 * @param labelCallback the labelCallback to set
-//	 */
-//	public void setLabelCallback(TooltipLabelCallback labelCallback) {
-//		this.labelCallback = labelCallback;
-//	}
-//
-//	/**
-//	 * @return the footerCallback
-//	 */
-//	public TooltipFooterCallback getFooterCallback() {
-//		return footerCallback;
-//	}
-//
-//	/**
-//	 * @param footerCallback the footerCallback to set
-//	 */
-//	public void setFooterCallback(TooltipFooterCallback footerCallback) {
-//		this.footerCallback = footerCallback;
-//	}
-//
-//	/**
-//	 * @param titleHandler the titleHandler to set
-//	 */
-//	void setTitleHandler(TooltipTitleHandler titleHandler) {
-//		if (titleHandler != null) {
-//			getNativeObject().setBeforeTitle(beforeTitleCallbackProxy.getProxy());
-//			getNativeObject().setTitle(titleCallbackProxy.getProxy());
-//			getNativeObject().setAfterTitle(afterTitleCallbackProxy.getProxy());
-//			// checks if the node is already added to parent
-//			checkAndAddToParent();
-//		} else {
-//			remove(Property.beforeTitle);
-//			remove(Property.title);
-//			remove(Property.afterTitle);
-//		}
-//		this.titleHandler = titleHandler;
-//	}
-//
-//	/**
-//	 * @param bodyHandler the bodyHandler to set
-//	 */
-//	void setBodyHandler(TooltipBodyHandler bodyHandler) {
-//		if (bodyHandler != null) {
-//			getNativeObject().setBeforeBody(beforeBodyCallbackProxy.getProxy());
-//			getNativeObject().setAfterBody(afterBodyCallbackProxy.getProxy());
-//			// checks if the node is already added to parent
-//			checkAndAddToParent();
-//		} else {
-//			remove(Property.beforeBody);
-//			remove(Property.afterBody);
-//		}
-//		this.bodyHandler = bodyHandler;
-//	}
-//
-//	/**
-//	 * @param labelHandler the labelHandler to set
-//	 */
-//	void setLabelHandler(TooltipLabelHandler labelHandler) {
-//		if (labelHandler != null) {
-//			getNativeObject().setBeforeLabel(beforeLabelCallbackProxy.getProxy());
-//			getNativeObject().setLabel(labelCallbackProxy.getProxy());
-//			getNativeObject().setLabelColor(labelColorCallbackProxy.getProxy());
-//			getNativeObject().setLabelTextColor(labelTextColorCallbackProxy.getProxy());
-//			getNativeObject().setAfterLabel(afterLabelCallbackProxy.getProxy());
-//			// checks if the node is already added to parent
-//			checkAndAddToParent();
-//		} else {
-//			remove(Property.beforeLabel);
-//			remove(Property.label);
-//			remove(Property.labelColor);
-//			remove(Property.labelTextColor);
-//			remove(Property.afterLabel);
-//		}
-//		this.labelHandler = labelHandler;
-//	}
-//	
-//	/**
-//	 * @param footerHandler the footerHandler to set
-//	 */
-//	void setFooterHandler(TooltipFooterHandler footerHandler) {
-//		if (footerHandler != null) {
-//			getNativeObject().setBeforeFooter(beforeFooterCallbackProxy.getProxy());
-//			getNativeObject().setFooter(footerCallbackProxy.getProxy());
-//			getNativeObject().setAfterFooter(afterFooterCallbackProxy.getProxy());
-//			// checks if the node is already added to parent
-//			checkAndAddToParent();
-//		} else {
-//			remove(Property.beforeFooter);
-//			remove(Property.footer);
-//			remove(Property.afterFooter);
-//		}
-//		this.footerHandler = footerHandler;
-//	}
 }

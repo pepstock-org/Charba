@@ -34,7 +34,7 @@ public final class ExtendedScale extends Scale {
 	 * 
 	 * @param defaultValues default provider.
 	 */
-	ExtendedScale(IsDefaultScale defaultValues) {
+	public ExtendedScale(IsDefaultScale defaultValues) {
 		super(defaultValues);
 	}
 

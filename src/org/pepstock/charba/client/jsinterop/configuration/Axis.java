@@ -17,6 +17,7 @@ package org.pepstock.charba.client.jsinterop.configuration;
 
 import java.util.List;
 
+import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
@@ -663,7 +664,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// gets the global option for the chart.
 		ChartOptions options = Defaults.get().options(getChart().getType());
 		// if is a multi scale chart
-		if (getChart().getOptions() instanceof MultiScalesOptions) {
+		if (ScaleType.multi.equals(getChart().getType().scaleType())) {
 			CartesianAxisType type = null;
 			// checks if is cartesian axis
 			// only cartesian axis has got the mutli scale
@@ -677,7 +678,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 				// returns the option for x or y scale.
 				return getCartesianScale(CartesianAxisType.x.equals(type) ? options.getScales().getXAxes() : options.getScales().getYAxes());
 			}
-		} else if (getChart().getOptions() instanceof SingleScaleOptions) {
+		} else if (ScaleType.single.equals(getChart().getType().scaleType())) {
 			// being a single scale
 			// returns scale option
 			return options.getScale();

@@ -27,16 +27,16 @@ import org.pepstock.charba.client.jsinterop.commons.ObjectType;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle;
 
 /**
- * Configures the default chart title which defines text to draw at the top of the chart.<br>
- * "weight"property is not present.
+ * Configures the default chart title which defines text to draw at the top of the chart.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
-public class Title extends FontItem<Options, IsDefaultTitle> implements IsDefaultTitle{
+public final class Title extends FontItem<Options, IsDefaultTitle> implements IsDefaultTitle{
 
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	enum Property implements Key
 	{
@@ -49,6 +49,15 @@ public class Title extends FontItem<Options, IsDefaultTitle> implements IsDefaul
 		text
 	}
 	
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param options options of the chart.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
 	Title(Options options, Key childKey, IsDefaultTitle defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 	}
@@ -67,7 +76,7 @@ public class Title extends FontItem<Options, IsDefaultTitle> implements IsDefaul
 	/**
 	 * Returns if the title is shown.
 	 * 
-	 * @return if the title is shown. Default is true.
+	 * @return if the title is shown.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());
@@ -77,7 +86,6 @@ public class Title extends FontItem<Options, IsDefaultTitle> implements IsDefaul
 	 * Sets the position of title.
 	 * 
 	 * @param position the position of title.
-	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public void setPosition(Position position) {
 		setValue(Property.position, position);
@@ -88,8 +96,7 @@ public class Title extends FontItem<Options, IsDefaultTitle> implements IsDefaul
 	/**
 	 * Returns the position of title.
 	 * 
-	 * @return the position of title. Default is {@link org.pepstock.charba.client.enums.Position#top}.
-	 * @see org.pepstock.charba.client.enums.Position
+	 * @return the position of title.
 	 */
 	public Position getPosition() {
 		return getValue(Property.position, Position.class, getDefaultValues().getPosition());
@@ -109,7 +116,7 @@ public class Title extends FontItem<Options, IsDefaultTitle> implements IsDefaul
 	/**
 	 * Returns the padding to apply around labels. Only top and bottom are implemented.
 	 * 
-	 * @return Padding to apply around labels. Only top and bottom are implemented. Default is 10.
+	 * @return Padding to apply around labels. Only top and bottom are implemented.
 	 */
 	public int getPadding() {
 		return getValue(Property.padding, getDefaultValues().getPadding());
@@ -129,7 +136,7 @@ public class Title extends FontItem<Options, IsDefaultTitle> implements IsDefaul
 	/**
 	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
 	 * 
-	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). Default is true.
+	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes).
 	 */
 	public boolean isFullWidth() {
 		return getValue(Property.fullWidth, getDefaultValues().isFullWidth());
@@ -161,30 +168,46 @@ public class Title extends FontItem<Options, IsDefaultTitle> implements IsDefaul
 	 * @param text the title text to display. If specified as an array, text is rendered on multiple lines.
 	 */
 	public void setText(String... text) {
+		// check if text is consistent
 		if (text != null) {
+			// checks if there is more than 1 element
 			if (text.length > 1) {
+				// stores the array
 				setArrayValue(Property.text, ArrayString.of(text));
 			} else {
+				// in this case there is only 1 element and then 
+				// stores as string
 				setValue(Property.text, text[0]);
 			}
 			// checks if the node is already added to parent
 			checkAndAddToParent();
+		} else {
+			// being null
+			// remove the key if exists
+			removeIfExists(Property.text);
 		}
 	}
 
 	/**
 	 * Returns the title text to display, as a list of strings.
 	 * 
-	 * @return a list of strings
+	 * @return a list of strings or <code>null</code> if not exist
 	 */
 	public List<String> getText() {
+		// gets the type of the property
 		ObjectType type = type(Property.text);
+		// if it's an array
 		if (ObjectType.Array.equals(type)) {
+			// reads as array 
+			// and returns it
 			ArrayString array = getArrayValue(Property.text);
 			return ArrayListHelper.list(array);
 		} else if (has(Property.text)){
+			// if there is the property
+			// and we are here, loads it as string
 			return ArrayListHelper.list(ArrayString.of(getValue(Property.text, UndefinedValues.STRING)));
 		}
+		// if not exists, null.
 		return null;
 	}
 }

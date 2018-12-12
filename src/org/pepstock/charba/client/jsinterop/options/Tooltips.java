@@ -29,6 +29,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
  * Configuration element to set all attributes and features of the default tooltip.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> implements IsDefaultTooltips{
@@ -36,13 +37,11 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	private final TooltipsCallbacks callbacks;
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	enum Property implements Key
 	{
-		// sub elements
 		callbacks,
-		// properties
 		enabled,
 		mode,
 		intersect,
@@ -79,8 +78,18 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 		borderWidth,
 	}
 	
+	/**
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
+	 * 
+	 * @param options options of the chart.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
+	 */
 	Tooltips(Options options, Key childKey, IsDefaultTooltips defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
+		// gets sub element
 		this.callbacks = new TooltipsCallbacks(this, Property.callbacks, defaultValues, getValue(Property.callbacks));
 	}
 
@@ -105,7 +114,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns if tooltips are enabled.
 	 * 
-	 * @return if tooltips are enabled.. Default is true.
+	 * @return if tooltips are enabled.
 	 */
 	public boolean isEnabled() {
 		return getValue(Property.enabled, getDefaultValues().isEnabled());
@@ -115,7 +124,6 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * Sets which elements appear in the tooltip.
 	 * 
 	 * @param mode which elements appear in the tooltip.
-	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
 	public void setMode(InteractionMode mode) {
 		setValue(Property.mode, mode);
@@ -126,9 +134,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns which elements appear in the tooltip.
 	 * 
-	 * @return which elements appear in the tooltip. Default is
-	 *         {@link org.pepstock.charba.client.enums.InteractionMode#nearest}.
-	 * @see org.pepstock.charba.client.enums.InteractionMode
+	 * @return which elements appear in the tooltip.
 	 */
 	public InteractionMode getMode() {
 		return getValue(Property.mode, InteractionMode.class, getDefaultValues().getMode());
@@ -152,7 +158,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * applied at all times.
 	 * 
 	 * @return if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode
-	 *         will be applied at all times. Default is true.
+	 *         will be applied at all times.
 	 */
 	public boolean isIntersect() {
 		return getValue(Property.intersect, getDefaultValues().isIntersect());
@@ -162,7 +168,6 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * Sets the mode for positioning the tooltip.
 	 * 
 	 * @param position the mode for positioning the tooltip.
-	 * @see org.pepstock.charba.client.enums.TooltipPosition
 	 */
 	public void setPosition(TooltipPosition position) {
 		setValue(Property.position, position);
@@ -173,8 +178,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the mode for positioning the tooltip.
 	 * 
-	 * @return mode for positioning the tooltip. Default is {@link org.pepstock.charba.client.enums.TooltipPosition#average}.
-	 * @see org.pepstock.charba.client.enums.TooltipPosition
+	 * @return mode for positioning the tooltip.
 	 */
 	public TooltipPosition getPosition() {
 		return getValue(Property.position, TooltipPosition.class, getDefaultValues().getPosition());
@@ -203,7 +207,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the background color of the tooltip.
 	 * 
-	 * @return Background color of the tooltip. Default is "rgba(0,0,0,0.8)".
+	 * @return Background color of the tooltip.
 	 */
 	public String getBackgroundColorAsString() {
 		return getValue(Property.backgroundColor, getDefaultValues().getBackgroundColorAsString());
@@ -212,7 +216,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the background color of the tooltip.
 	 * 
-	 * @return Background color of the tooltip. Default is "rgba(0,0,0,0.8)".
+	 * @return Background color of the tooltip.
 	 */
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
@@ -232,7 +236,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the title font.
 	 * 
-	 * @return the title font. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
+	 * @return the title font.
 	 */
 	public String getTitleFontFamily() {
 		return getValue(Property.titleFontFamily, getDefaultValues().getTitleFontFamily());
@@ -252,7 +256,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the title font size.
 	 * 
-	 * @return Title font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
+	 * @return Title font size.
 	 */
 	public int getTitleFontSize() {
 		return getValue(Property.titleFontSize, getDefaultValues().getTitleFontSize());
@@ -262,7 +266,6 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * Sets the title font style.
 	 * 
 	 * @param titleFontStyle title font style.
-	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public void setTitleFontStyle(FontStyle titleFontStyle) {
 		setValue(Property.titleFontStyle, titleFontStyle);
@@ -273,8 +276,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the title font style.
 	 * 
-	 * @return title font style. Default is {@link org.pepstock.charba.client.enums.FontStyle#bold}.
-	 * @see org.pepstock.charba.client.enums.FontStyle
+	 * @return title font style.
 	 */
 	public FontStyle getTitleFontStyle() {
 		return getValue(Property.titleFontStyle, FontStyle.class, getDefaultValues().getTitleFontStyle());
@@ -284,7 +286,6 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * Sets the title alignment.
 	 * 
 	 * @param align title alignment.
-	 * @see org.pepstock.charba.client.enums.TextAlign
 	 */
 	public void setTitleAlign(TextAlign align) {
 		setValue(Property.titleAlign, align);
@@ -295,8 +296,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the title alignment.
 	 * 
-	 * @return title alignment. Default is {@link org.pepstock.charba.client.enums.TextAlign#left}.
-	 * @see org.pepstock.charba.client.enums.TextAlign
+	 * @return title alignment.
 	 */
 	public TextAlign getTitleAlign() {
 		return getValue(Property.titleAlign, TextAlign.class, getDefaultValues().getTitleAlign());
@@ -325,7 +325,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the title font color.
 	 * 
-	 * @return title font color.Default is '#fff'.
+	 * @return title font color.
 	 */
 	public String getTitleFontColorAsString() {
 		return getValue(Property.titleFontColor, getDefaultValues().getTitleFontColorAsString());
@@ -334,7 +334,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the title font color.
 	 * 
-	 * @return title font color.Default is '#fff'.
+	 * @return title font color.
 	 */
 	public IsColor getTitleFontColor() {
 		return ColorBuilder.parse(getTitleFontColorAsString());
@@ -354,7 +354,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the spacing to add to top and bottom of each title line.
 	 * 
-	 * @return spacing to add to top and bottom of each title line. Default is 2.
+	 * @return spacing to add to top and bottom of each title line.
 	 */
 	public int getTitleSpacing() {
 		return getValue(Property.titleSpacing, getDefaultValues().getTitleSpacing());
@@ -374,7 +374,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the margin to add on bottom of title section.
 	 * 
-	 * @return margin to add on bottom of title section. Default is 6.
+	 * @return margin to add on bottom of title section.
 	 */
 	public int getTitleMarginBottom() {
 		return getValue(Property.titleMarginBottom, getDefaultValues().getTitleMarginBottom());
@@ -394,7 +394,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the body line font.
 	 * 
-	 * @return body line font. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
+	 * @return body line font.
 	 */
 	public String getBodyFontFamily() {
 		return getValue(Property.bodyFontFamily, getDefaultValues().getBodyFontFamily());
@@ -414,7 +414,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the body font size.
 	 * 
-	 * @return body font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
+	 * @return body font size.
 	 */
 	public int getBodyFontSize() {
 		return getValue(Property.bodyFontSize, getDefaultValues().getBodyFontSize());
@@ -424,7 +424,6 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * Sets the body font style.
 	 * 
 	 * @param bodyFontStyle body font style.
-	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public void setBodyFontStyle(FontStyle bodyFontStyle) {
 		setValue(Property.bodyFontStyle, bodyFontStyle);
@@ -435,8 +434,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the body font style.
 	 * 
-	 * @return body font style. Default is {@link org.pepstock.charba.client.enums.FontStyle#normal}.
-	 * @see org.pepstock.charba.client.enums.FontStyle
+	 * @return body font style.
 	 */
 	public FontStyle getBodyFontStyle() {
 		return getValue(Property.bodyFontStyle, FontStyle.class, getDefaultValues().getBodyFontStyle());
@@ -446,7 +444,6 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * Sets the body alignment.
 	 * 
 	 * @param align body alignment.
-	 * @see org.pepstock.charba.client.enums.TextAlign
 	 */
 	public void setBodyAlign(TextAlign align) {
 		setValue(Property.bodyAlign, align);
@@ -457,8 +454,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the body alignment.
 	 * 
-	 * @return body alignment. Default is {@link org.pepstock.charba.client.enums.TextAlign#left}.
-	 * @see org.pepstock.charba.client.enums.TextAlign
+	 * @return body alignment.
 	 */
 	public TextAlign getBodyAlign() {
 		return getValue(Property.bodyAlign, TextAlign.class, getDefaultValues().getBodyAlign());
@@ -487,7 +483,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the body font color.
 	 * 
-	 * @return body font color. Default is '#fff'.
+	 * @return body font color.
 	 */
 	public String getBodyFontColorAsString() {
 		return getValue(Property.bodyFontColor, getDefaultValues().getBodyFontColorAsString());
@@ -496,7 +492,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the body font color.
 	 * 
-	 * @return body font color. Default is '#fff'.
+	 * @return body font color.
 	 */
 	public IsColor getBodyFontColor() {
 		return ColorBuilder.parse(getBodyFontColorAsString());
@@ -516,7 +512,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the spacing to add to top and bottom of each tooltip item.
 	 * 
-	 * @return spacing to add to top and bottom of each tooltip item. Default is 2.
+	 * @return spacing to add to top and bottom of each tooltip item.
 	 */
 	public int getBodySpacing() {
 		return getValue(Property.bodySpacing, getDefaultValues().getBodySpacing());
@@ -536,7 +532,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the footer font.
 	 * 
-	 * @return footer font. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontFamily()}.
+	 * @return footer font.
 	 */
 	public String getFooterFontFamily() {
 		return getValue(Property.footerFontFamily, getDefaultValues().getFooterFontFamily());
@@ -556,7 +552,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the footer font size.
 	 * 
-	 * @return footer font size. Default is {@link org.pepstock.charba.client.defaults.global.Options#getDefaultFontSize()}.
+	 * @return footer font size.
 	 */
 	public int getFooterFontSize() {
 		return getValue(Property.footerFontSize, getDefaultValues().getFooterFontSize());
@@ -576,8 +572,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the footer font style.
 	 * 
-	 * @return footer font style. Default is {@link org.pepstock.charba.client.enums.FontStyle#normal}.
-	 * @see org.pepstock.charba.client.enums.FontStyle
+	 * @return footer font style.
 	 */
 	public FontStyle getFooterFontStyle() {
 		return getValue(Property.footerFontStyle, FontStyle.class, getDefaultValues().getFooterFontStyle());
@@ -587,7 +582,6 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * Sets the footer alignment.
 	 * 
 	 * @param align footer alignment.
-	 * @see org.pepstock.charba.client.enums.TextAlign
 	 */
 	public void setFooterAlign(TextAlign align) {
 		setValue(Property.footerAlign, align);
@@ -598,8 +592,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the body alignment.
 	 * 
-	 * @return footer alignment. Default is {@link org.pepstock.charba.client.enums.TextAlign#left}.
-	 * @see org.pepstock.charba.client.enums.TextAlign
+	 * @return footer alignment.
 	 */
 	public TextAlign getFooterAlign() {
 		return getValue(Property.footerAlign, TextAlign.class, getDefaultValues().getFooterAlign());
@@ -628,7 +621,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the footer font color.
 	 * 
-	 * @return footer font color. Default is '#fff'.
+	 * @return footer font color.
 	 */
 	public String getFooterFontColorAsString() {
 		return getValue(Property.footerFontColor, getDefaultValues().getFooterFontColorAsString());
@@ -637,7 +630,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the footer font color.
 	 * 
-	 * @return footer font color. Default is '#fff'.
+	 * @return footer font color.
 	 */
 	public IsColor getFooterFontColor() {
 		return ColorBuilder.parse(getFooterFontColorAsString());
@@ -657,7 +650,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the spacing to add to top and bottom of each footer line.
 	 * 
-	 * @return spacing to add to top and bottom of each footer line. Default is 2.
+	 * @return spacing to add to top and bottom of each footer line.
 	 */
 	public int getFooterSpacing() {
 		return getValue(Property.footerSpacing, getDefaultValues().getFooterSpacing());
@@ -677,7 +670,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the margin to add before drawing the footer.
 	 * 
-	 * @return margin to add before drawing the footer. Default is 6.
+	 * @return margin to add before drawing the footer.
 	 */
 	public int getFooterMarginTop() {
 		return getValue(Property.footerMarginTop, getDefaultValues().getFooterMarginTop());
@@ -697,7 +690,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the padding to add on left and right of tooltip.
 	 * 
-	 * @return padding to add on left and right of tooltip. Default is 6.
+	 * @return padding to add on left and right of tooltip.
 	 */
 	public int getXPadding() {
 		return getValue(Property.xPadding, getDefaultValues().getXPadding());
@@ -717,7 +710,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the padding to add on top and bottom of tooltip.
 	 * 
-	 * @return padding to add on top and bottom of tooltip. Default is 6.
+	 * @return padding to add on top and bottom of tooltip.
 	 */
 	public int getYPadding() {
 		return getValue(Property.yPadding, getDefaultValues().getYPadding());
@@ -737,7 +730,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the extra distance to move the end of the tooltip arrow away from the tooltip point.
 	 * 
-	 * @return extra distance to move the end of the tooltip arrow away from the tooltip point. Default is 2.
+	 * @return extra distance to move the end of the tooltip arrow away from the tooltip point.
 	 */
 	public int getCaretPadding() {
 		return getValue(Property.caretPadding, getDefaultValues().getCaretPadding());
@@ -757,7 +750,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the size, in px, of the tooltip arrow.
 	 * 
-	 * @return size, in px, of the tooltip arrow. Default is 5.
+	 * @return size, in px, of the tooltip arrow.
 	 */
 	public int getCaretSize() {
 		return getValue(Property.caretSize, getDefaultValues().getCaretSize());
@@ -777,7 +770,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the radius of tooltip corner curves.
 	 * 
-	 * @return radius of tooltip corner curves. Default is 6.
+	 * @return radius of tooltip corner curves.
 	 */
 	public int getCornerRadius() {
 		return getValue(Property.cornerRadius, getDefaultValues().getCornerRadius());
@@ -806,7 +799,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the color to draw behind the colored boxes when multiple items are in the tooltip.
 	 * 
-	 * @return color to draw behind the colored boxes when multiple items are in the tooltip. Default is '#fff'.
+	 * @return color to draw behind the colored boxes when multiple items are in the tooltip.
 	 */
 	public String getMultiKeyBackgroundAsString() {
 		return getValue(Property.multiKeyBackground, getDefaultValues().getMultiKeyBackgroundAsString());
@@ -815,7 +808,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the color to draw behind the colored boxes when multiple items are in the tooltip.
 	 * 
-	 * @return color to draw behind the colored boxes when multiple items are in the tooltip. Default is '#fff'.
+	 * @return color to draw behind the colored boxes when multiple items are in the tooltip.
 	 */
 	public IsColor getMultiKeyBackground() {
 		return ColorBuilder.parse(getMultiKeyBackgroundAsString());
@@ -835,7 +828,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * If true, color boxes are shown in the tooltip.
 	 * 
-	 * @return if true, color boxes are shown in the tooltip. Default is true.
+	 * @return if true, color boxes are shown in the tooltip.
 	 */
 	public boolean isDisplayColors() {
 		return getValue(Property.displayColors, getDefaultValues().isDisplayColors());
@@ -864,7 +857,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the color of the border.
 	 * 
-	 * @return color of the border. Default is 'rgba(0,0,0,0)'.
+	 * @return color of the border.
 	 */
 	public String getBorderColorAsString() {
 		return getValue(Property.borderColor, getDefaultValues().getBorderColorAsString());
@@ -873,7 +866,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the color of the border.
 	 * 
-	 * @return color of the border. Default is 'rgba(0,0,0,0)'.
+	 * @return color of the border.
 	 */
 	public IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
@@ -893,7 +886,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the size of the border.
 	 * 
-	 * @return size of the border. Default is 0.
+	 * @return size of the border.
 	 */
 	public int getBorderWidth() {
 		return getValue(Property.borderWidth, getDefaultValues().getBorderWidth());
