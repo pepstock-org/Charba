@@ -32,4 +32,5 @@ public final class ChartAreaItem extends BaseBoxItem {
 	ChartAreaItem(GenericJavaScriptObject javaScriptObject) {
 		super(javaScriptObject);
 	}
+	
 }

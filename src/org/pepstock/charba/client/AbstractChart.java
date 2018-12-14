@@ -28,6 +28,7 @@ import org.pepstock.charba.client.options.BaseOptions;
 import org.pepstock.charba.client.plugins.Plugins;
 
 import com.google.gwt.canvas.client.Canvas;
+import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.HeadingElement;
@@ -102,6 +103,18 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 			//canvas = Document.get().createCanvasElement();
 			canvas = Canvas.createIfSupported();
 			add(canvas);
+			// FIXME SELECTION
+//			canvas.addMouseDownHandler(new MouseDownHandler() {
+//
+//				/* (non-Javadoc)
+//				 * @see com.google.gwt.event.dom.client.MouseDownHandler#onMouseDown(com.google.gwt.event.dom.client.MouseDownEvent)
+//				 */
+//				@Override
+//				public void onMouseDown(MouseDownEvent event) {
+//					event.preventDefault();
+//				}
+//				
+//			});
 			//div.appendChild(canvas);
 		} else {
 			// creates a header element
@@ -524,7 +537,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 			// stores teh chart instance into collection
 			Charts.add(this);
 			// draws chart with configuration
-			drawChart(configuration.getObject());
+			drawChart(configuration.getObject(), canvas.getContext2d());
 		}
 	}
 
@@ -552,11 +565,12 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 * 
 	 * @param config configuration java script object.
 	 */
-	private native int drawChart(JavaScriptObject config)/*-{
+	private native int drawChart(JavaScriptObject config, Context2d context)/*-{
 	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-	    var canvas = this.@org.pepstock.charba.client.AbstractChart::canvas;
-	    var ctx = canvas.getContext("2d");
-	    chart = new $wnd.Chart(ctx, config);
+//	    var canvas = this.@org.pepstock.charba.client.AbstractChart::canvas;
+//	    console.log(canvas);
+//	    var ctx = canvas.getContext("2d");
+	    chart = new $wnd.Chart(context, config);
 	    this.@org.pepstock.charba.client.AbstractChart::chart = chart;
 	    return chart.id;
 	}-*/;
