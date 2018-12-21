@@ -15,11 +15,15 @@
 */
 package org.pepstock.charba.client.plugins.impl;
 
+import java.util.List;
+
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.GwtMaterialColor;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
+import org.pepstock.charba.client.commons.JsIntegerArrayList;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.items.ScalesNode;
 
@@ -44,20 +48,32 @@ public final class DatasetsItemsSelectorOptions extends JavaScriptObjectContaine
 	/**
 	 * Default color for area
 	 */
-	public static final IsColor DEFAULT_COLOR = GwtMaterialColor.ORANGE_LIGHTEN_3.alpha(DEFAULT_ALPHA);
-
+	private static final IsColor DEFAULT_COLOR = GwtMaterialColor.ORANGE_LIGHTEN_3.alpha(DEFAULT_ALPHA);
 
 	/**
 	 * Default X axis id
 	 */
-	public static final String DEFAULT_AXIS_ID = ScalesNode.DEFAULT_X_AXIS_ID;
-	
+	private  static final String DEFAULT_AXIS_ID = ScalesNode.DEFAULT_X_AXIS_ID;
+
+	/**
+	 * Default border width of selection area
+	 */
+	private  static final int DEFAULT_BORDER_WIDTH = 0;
+
+	/**
+	 * Default border color for area
+	 */
+	private static final IsColor DEFAULT_BORDER_COLOR = GwtMaterialColor.GREY_DARKEN_2;
+
 	/**
 	 * Name of fields of JavaScript object.
 	 */
 	private enum Property implements Key{
 		color,
-		xAxisID
+		xAxisID,
+		borderColor,
+		borderDash,
+		borderWidth
 	}
 	
 	/**
@@ -124,6 +140,96 @@ public final class DatasetsItemsSelectorOptions extends JavaScriptObjectContaine
 	 * @param color the  color.
 	 */
 	public void setColor(IsColor color){
+		setColor(color.toRGBA());
+	}
+	
+	/**
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
+	 * and gaps which describe the pattern.
+	 * 
+	 * @param borderDash the line dash pattern used when stroking lines
+	 */
+	public void setBorderDash(int... borderDash) {
+		setBorderDash(ArrayListHelper.build(borderDash));
+	}
+
+	/**
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
+	 * and gaps which describe the pattern.
+	 * 
+	 * @param borderDash the line dash pattern used when stroking lines
+	 */
+	private void setBorderDash(JsIntegerArrayList borderDash) {
+		setIntegerArray(Property.borderDash, borderDash);
+	}
+
+	/**
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
+	 * lines and gaps which describe the pattern.
+	 * 
+	 * @return the line dash pattern used when stroking lines. 
+	 */
+	public List<Integer> getBorderDash() {
+		return getIntegerArray(Property.borderDash);
+	}
+	
+	/**
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
+	 * lines and gaps which describe the pattern.
+	 * 
+	 * @return the line dash pattern used when stroking lines. 
+	 */
+	JavaScriptObject getBorderDashAsJavaScriptObject() {
+		return getValue(Property.borderDash);
+	}
+	
+	/**
+	 * Sets the border width of the selection.
+	 * @param borderWidth the border width of the selection.
+	 */
+	public void setBorderWidth(int borderWidth) {
+		setValue(Property.borderWidth, borderWidth);
+	}
+
+	/**
+	 * Returns the border width of the selection.
+	 * @return list of the border width of the selection.
+	 */
+	public int getBorderWidth() {
+		return getValue(Property.borderWidth, DEFAULT_BORDER_WIDTH);
+	}
+	
+	/**
+	 * Returns the  color.
+	 * 
+	 * @return the  color.
+	 */
+	public String getBorderColorAsString(){
+		return getValue(Property.color, DEFAULT_BORDER_COLOR.toRGBA());
+	}
+	
+	/**
+	 * Returns the  color.
+	 * 
+	 * @return the  color.
+	 */
+	public IsColor getBorderColor(){
+		return ColorBuilder.parse(getColorAsString());
+	}
+	
+	/**
+	 * Sets the  color.
+	 * @param color the  color.
+	 */
+	public void setBorderColor(String color){
+		setValue(Property.borderColor, color);
+	}
+
+	/**
+	 * Sets the  color.
+	 * @param color the  color.
+	 */
+	public void setBorderColor(IsColor color){
 		setColor(color.toRGBA());
 	}
 

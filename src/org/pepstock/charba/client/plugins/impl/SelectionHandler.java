@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.plugins.impl;
 
+import java.util.List;
+
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.enums.AxisType;
@@ -23,6 +25,8 @@ import org.pepstock.charba.client.items.ChartAreaItem;
 import org.pepstock.charba.client.items.ChartNode;
 import org.pepstock.charba.client.items.ScaleItem;
 
+import com.google.gwt.canvas.dom.client.Context2d;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.NativeEvent;
@@ -263,9 +267,20 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			scaleTickX = scaleTickX + scaleTickLength;
 		}
 		// sets the selecting color into canvas
-		chart.getCanvas().getContext2d().setFillStyle(options.getColor().toRGBA());
+		chart.getCanvas().getContext2d().setFillStyle(options.getColorAsString());
 		// draws the rectangle of area selection
 		chart.getCanvas().getContext2d().fillRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
+		// borders
+		if (options.getBorderWidth() > 0) {
+			chart.getCanvas().getContext2d().setLineWidth(options.getBorderWidth());
+			List<Integer> borderDash = options.getBorderDash();
+			// sets the selecting color into canvas
+			chart.getCanvas().getContext2d().setStrokeStyle(options.getBorderColorAsString());
+			if (!borderDash.isEmpty()) {
+				setLineDash(chart.getCanvas().getContext2d(), options.getBorderDashAsJavaScriptObject());
+			}
+			chart.getCanvas().getContext2d().strokeRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
+		}
 	}
 
 	/**
@@ -348,5 +363,13 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		boolean isY = event.getY() >= area.getTop() && event.getY() <= area.getBottom();
 		return isX && isY;
 	}
+	
+	/**
+	 * Returns a JSON representation of this object.
+	 * @return a JSON representation of this object
+	 */
+    private final native void setLineDash(Context2d context, JavaScriptObject object)/*-{
+    	context.setLineDash(object);
+    }-*/;
 
 }
