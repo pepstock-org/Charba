@@ -23,6 +23,8 @@ import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.JsDoubleArrayList;
 import org.pepstock.charba.client.commons.Key;
 
+import com.google.gwt.core.client.JavaScriptObject;
+
 /**
  * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
  * This is the base implementation for all datasets with common fields.
@@ -141,5 +143,22 @@ public abstract class Dataset extends JavaScriptObjectContainer{
 	public Type getType(){
 		  return getValue(Property.type, Type.class, (Type)null);
 	}
+	
+	/**
+	 * Returns the data property in JSON format.
+	 * 
+	 * @return the data property in JSON format.
+	 */
+	final String getDataAsString() {
+		return toJSON(getValue(Property.data));
+	}
+	
+	/**
+	 * Returns a JSON representation of this object.
+	 * @return a JSON representation of this object
+	 */
+    private final native String toJSON(JavaScriptObject object)/*-{
+    	return JSON.stringify(object);
+    }-*/;
 
 }

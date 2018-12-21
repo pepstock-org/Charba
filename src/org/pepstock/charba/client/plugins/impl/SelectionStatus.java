@@ -16,52 +16,24 @@
 package org.pepstock.charba.client.plugins.impl;
 
 /**
- * Bean which contains the start and end index of the selected dataset items.<br>
- * This values will be passed to the user by an event.
+ * Enumerates the status of a selection.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 1.8
  */
-final class SelectionDatasetItems {
-
-	private int start = 0;
-	
-	private int end = 0;
-
+enum SelectionStatus
+{
 	/**
-	 * @return the start
+	 * Ready for selection
 	 */
-	int getStart() {
-		return start;
-	}
-
+	ready,
 	/**
-	 * @param start the start to set
+	 * The selection is running but not completed
 	 */
-	void setStart(int start) {
-		this.start = start;
-	}
-
+	selecting,
 	/**
-	 * @return the end
+	 * The selection has been completed
 	 */
-	int getEnd() {
-		return end;
-	}
-
-	/**
-	 * @param end the end to set
-	 */
-	void setEnd(int end) {
-		this.end = end;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "SelectionDatasetItems [start=" + start + ", end=" + end + "]";
-	}
+	selected,
 	
 }

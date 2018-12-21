@@ -34,6 +34,13 @@ import com.google.gwt.core.client.JavaScriptObject;
 public abstract class AbstractPlugin implements Plugin {
 
 	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client.AbstractChart)
+	 */
+	@Override
+	public void onConfigure(AbstractChart<?, ?> chart) {
+	}
+
+	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.Plugin#onBeforeInit(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override

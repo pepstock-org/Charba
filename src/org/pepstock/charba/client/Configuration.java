@@ -29,7 +29,7 @@ import org.pepstock.charba.client.plugins.Plugins;
  * @author Andrea "Stock" Stocchero
  *
  */
-class Configuration extends JavaScriptObjectContainer {
+public final class Configuration extends JavaScriptObjectContainer {
 
 	/**
 	 * Name of fields of JavaScript object.
@@ -40,6 +40,13 @@ class Configuration extends JavaScriptObjectContainer {
 		options,
 		plugins,
 		data
+	}
+
+	/**
+	 * To avoid any instantiation outside of the package 
+	 */
+	Configuration() {
+		super();
 	}
 
 	/**
@@ -59,7 +66,6 @@ class Configuration extends JavaScriptObjectContainer {
 	 */
 	void setOptions(BaseOptions options) {
 		setValue(Property.options, options);
-		;
 	}
 
 	/**

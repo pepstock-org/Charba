@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.AbstractList;
@@ -154,6 +155,22 @@ public final class Data extends JavaScriptObjectContainer{
 	 */
 	public List<Dataset> getDatasets(){
 		return this.datasets;
+	}
+	
+	/**
+	 * Returns a list of string for each datasets, in JSON format.
+	 * 
+	 * @return a list of string for each datasets, in JSON format
+	 */
+	public List<String> getDatasetsAsStrings(){
+		// creates the result 
+		List<String> result = new LinkedList<>();
+		// scans all datasets
+		for (Dataset ds: datasets) {
+			// adds to list the data in JSON string format
+			result.add(ds.getDataAsString());
+		}
+		return result;
 	}
 	
 	public Object getObject() {

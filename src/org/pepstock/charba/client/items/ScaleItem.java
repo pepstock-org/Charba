@@ -20,6 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.JavaScriptFieldType;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.enums.AxisType;
 
 /**
  * Wraps the scale item of CHART JS chart.
@@ -52,7 +53,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 		xCenter,
 		yCenter,
 		drawingArea,
-		pointLabels
+		pointLabels,
+		type
 	}
 
 	/**
@@ -73,6 +75,15 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 */
 	public final ScaleLongestTextCacheItem getLongestTextCache() {
 		return longestTextCache;
+	}
+	
+	/**
+	 * Returns the type of scale
+	 * 
+	 * @return the type of scale. Default is {@link org.pepstock.charba.client.enums.AxisType#category}.
+	 */
+	public final AxisType getType() {
+		return getValue(Property.type, AxisType.class, AxisType.category);
 	}
 
 	/**

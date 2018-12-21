@@ -34,7 +34,10 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.MouseDownEvent;
+import com.google.gwt.event.dom.client.MouseDownHandler;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.SimplePanel;
 
 /**
@@ -62,13 +65,10 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	// chart ID using GWT unique id
 	private final String id = Document.get().createUniqueId();
 	
-	// chart container
-//	final DivElement div;
-
+	// canvas prevent default handler 
+	private final HandlerRegistration preventDisplayHandler;
 	// canvas where Chart.js draws the chart
 	final Canvas canvas;
-//	final CanvasElement canvas;
-
 	// CHart configuration object
 	private final Configuration configuration = new Configuration();
 	// Data element of configuration
@@ -90,7 +90,6 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 */
 	public AbstractChart() {
 		// creates DIV
-//		div = Document.get().createDivElement();
 		getElement().setId(id);
 		// sets relative position
 		getElement().getStyle().setPosition(Position.RELATIVE);
@@ -103,18 +102,19 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 			//canvas = Document.get().createCanvasElement();
 			canvas = Canvas.createIfSupported();
 			add(canvas);
-			// FIXME SELECTION
-//			canvas.addMouseDownHandler(new MouseDownHandler() {
-//
-//				/* (non-Javadoc)
-//				 * @see com.google.gwt.event.dom.client.MouseDownHandler#onMouseDown(com.google.gwt.event.dom.client.MouseDownEvent)
-//				 */
-//				@Override
-//				public void onMouseDown(MouseDownEvent event) {
-//					event.preventDefault();
-//				}
-//				
-//			});
+			// adds the listener to disable canvas selection
+			preventDisplayHandler = canvas.addMouseDownHandler(new MouseDownHandler() {
+
+				/* (non-Javadoc)
+				 * @see com.google.gwt.event.dom.client.MouseDownHandler#onMouseDown(com.google.gwt.event.dom.client.MouseDownEvent)
+				 */
+				@Override
+				public void onMouseDown(MouseDownEvent event) {
+					// removes the default behavior
+					event.preventDefault();
+				}
+				
+			});
 			//div.appendChild(canvas);
 		} else {
 			// creates a header element
@@ -125,9 +125,8 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 			getElement().appendChild(h);
 			// resets canvas
 			canvas = null;
+			preventDisplayHandler = null;
 		}
-		// sets DIV as element of the widget
-//		setElement(div);
 		// injects Chart.js java script source
 		Injector.ensureInjected();
 		// creates plugins container
@@ -157,10 +156,23 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	}
 	
 	/**
+	 * Returns the canvas element
 	 * @return the canvas
 	 */
 	public final Canvas getCanvas() {
 		return canvas;
+	}
+	
+	/**
+	 * Remove the registration of prevent default mouse listener from canvas.<br>
+	 * This is necessary when you will add your mouse down listeber.
+	 */
+	public void removeCanvasPreventDefault() {
+		// checks if consistent
+		if (preventDisplayHandler != null) {
+			// cleans up the handler for mouse listener
+			preventDisplayHandler.removeHandler();
+		}
 	}
 	
 	/**
@@ -172,13 +184,6 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 		return chart != null;
 	}
 
-//	/**
-//	 * @return the chart container HTML element
-//	 */
-//	public final DivElement getContainer() {
-//		return div;
-//	}
-//	
 	/**
 	 * Returns the chart node with runtime data.
 	 * @return the chart node.
@@ -207,27 +212,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	public GlobalOptions getGlobal() {
 		return options;
 	}
-
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see com.google.gwt.user.client.ui.UIObject#setHeight(java.lang.String)
-//	 */
-//	@Override
-//	public void setHeight(String height) {
-//		div.getStyle().setProperty(HEIGHT_PROPERTY, height);
-//	}
-//
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see com.google.gwt.user.client.ui.UIObject#setWidth(java.lang.String)
-//	 */
-//	@Override
-//	public void setWidth(String width) {
-//		div.getStyle().setProperty(WIDTH_PROPERTY, width);
-//	}
-
+	
 	/**
 	 * @return the drawOnAttach
 	 */
@@ -292,6 +277,8 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 */
 	public void destroy() {
 		if (chart != null) {
+			// checks if handler is consistent
+			removeCanvasPreventDefault();
 			destroyChart();
 			// removes chart instance from collection
 			Charts.remove(getId());
@@ -523,6 +510,9 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	public void draw() {
 		// checks if canvas is supported
 		if (isCanvasSupported) {
+			// calls plugins for onConfigure method
+			Defaults.getPlugins().onChartConfigure(configuration, this);
+			plugins.onChartConfigure(configuration, this);
 			// gets options
 			BaseOptions options = getOptions();
 			// gets data
@@ -567,9 +557,6 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 */
 	private native int drawChart(JavaScriptObject config, Context2d context)/*-{
 	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-//	    var canvas = this.@org.pepstock.charba.client.AbstractChart::canvas;
-//	    console.log(canvas);
-//	    var ctx = canvas.getContext("2d");
 	    chart = new $wnd.Chart(context, config);
 	    this.@org.pepstock.charba.client.AbstractChart::chart = chart;
 	    return chart.id;
