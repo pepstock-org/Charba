@@ -28,15 +28,17 @@ import org.pepstock.charba.client.options.BaseOptions;
 import org.pepstock.charba.client.plugins.Plugins;
 
 import com.google.gwt.canvas.client.Canvas;
+import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.dom.client.CanvasElement;
-import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.MouseDownEvent;
+import com.google.gwt.event.dom.client.MouseDownHandler;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.SimplePanel;
 
 /**
  * Base class of all charts.<br>
@@ -47,7 +49,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @param <O> Options type for the specific chart
  * @param <D> Dataset type for the specific chart
  */
-public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> extends Widget implements IsChart<O, D> {
+public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> extends SimplePanel implements IsChart<O, D> {
 	
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
@@ -63,12 +65,10 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	// chart ID using GWT unique id
 	private final String id = Document.get().createUniqueId();
 	
-	// chart container
-	final DivElement div;
-
+	// canvas prevent default handler 
+	private final HandlerRegistration preventDisplayHandler;
 	// canvas where Chart.js draws the chart
-	final CanvasElement canvas;
-
+	final Canvas canvas;
 	// CHart configuration object
 	private final Configuration configuration = new Configuration();
 	// Data element of configuration
@@ -90,30 +90,43 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 */
 	public AbstractChart() {
 		// creates DIV
-		div = Document.get().createDivElement();
-		div.setId(id);
+		getElement().setId(id);
 		// sets relative position
-		div.getStyle().setPosition(Position.RELATIVE);
+		getElement().getStyle().setPosition(Position.RELATIVE);
 		// sets default width values
-		div.getStyle().setWidth(DEFAULT_PCT_WIDTH, Unit.PCT);
-		div.getStyle().setHeight(100, Unit.PCT);
+		getElement().getStyle().setWidth(DEFAULT_PCT_WIDTH, Unit.PCT);
+		getElement().getStyle().setHeight(100, Unit.PCT);
 		// checks if canvas is supported
 		if (isCanvasSupported) {
 			// creates a canvas and add to DIV
-			canvas = Document.get().createCanvasElement();
-			div.appendChild(canvas);
+			//canvas = Document.get().createCanvasElement();
+			canvas = Canvas.createIfSupported();
+			add(canvas);
+			// adds the listener to disable canvas selection
+			preventDisplayHandler = canvas.addMouseDownHandler(new MouseDownHandler() {
+
+				/* (non-Javadoc)
+				 * @see com.google.gwt.event.dom.client.MouseDownHandler#onMouseDown(com.google.gwt.event.dom.client.MouseDownEvent)
+				 */
+				@Override
+				public void onMouseDown(MouseDownEvent event) {
+					// removes the default behavior
+					event.preventDefault();
+				}
+				
+			});
+			//div.appendChild(canvas);
 		} else {
 			// creates a header element
 			HeadingElement h = Document.get().createHElement(3);
 			// to show the error message
 			// because canvas is not supported
 			h.setInnerText(CANVAS_NOT_SUPPORTED_MESSAGE);
-			div.appendChild(h);
+			getElement().appendChild(h);
 			// resets canvas
 			canvas = null;
+			preventDisplayHandler = null;
 		}
-		// sets DIV as element of the widget
-		setElement(div);
 		// injects Chart.js java script source
 		Injector.ensureInjected();
 		// creates plugins container
@@ -143,10 +156,23 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	}
 	
 	/**
+	 * Returns the canvas element
 	 * @return the canvas
 	 */
-	public final CanvasElement getCanvas() {
+	public final Canvas getCanvas() {
 		return canvas;
+	}
+	
+	/**
+	 * Remove the registration of prevent default mouse listener from canvas.<br>
+	 * This is necessary when you will add your mouse down listeber.
+	 */
+	public void removeCanvasPreventDefault() {
+		// checks if consistent
+		if (preventDisplayHandler != null) {
+			// cleans up the handler for mouse listener
+			preventDisplayHandler.removeHandler();
+		}
 	}
 	
 	/**
@@ -158,13 +184,6 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 		return chart != null;
 	}
 
-	/**
-	 * @return the chart container HTML element
-	 */
-	public final DivElement getContainer() {
-		return div;
-	}
-	
 	/**
 	 * Returns the chart node with runtime data.
 	 * @return the chart node.
@@ -193,27 +212,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	public GlobalOptions getGlobal() {
 		return options;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.user.client.ui.UIObject#setHeight(java.lang.String)
-	 */
-	@Override
-	public void setHeight(String height) {
-		div.getStyle().setProperty(HEIGHT_PROPERTY, height);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.user.client.ui.UIObject#setWidth(java.lang.String)
-	 */
-	@Override
-	public void setWidth(String width) {
-		div.getStyle().setProperty(WIDTH_PROPERTY, width);
-	}
-
+	
 	/**
 	 * @return the drawOnAttach
 	 */
@@ -278,6 +277,8 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 */
 	public void destroy() {
 		if (chart != null) {
+			// checks if handler is consistent
+			removeCanvasPreventDefault();
 			destroyChart();
 			// removes chart instance from collection
 			Charts.remove(getId());
@@ -509,6 +510,9 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	public void draw() {
 		// checks if canvas is supported
 		if (isCanvasSupported) {
+			// calls plugins for onConfigure method
+			Defaults.getPlugins().onChartConfigure(configuration, this);
+			plugins.onChartConfigure(configuration, this);
 			// gets options
 			BaseOptions options = getOptions();
 			// gets data
@@ -523,7 +527,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 			// stores teh chart instance into collection
 			Charts.add(this);
 			// draws chart with configuration
-			drawChart(configuration.getObject());
+			drawChart(configuration.getObject(), canvas.getContext2d());
 		}
 	}
 
@@ -551,11 +555,9 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 * 
 	 * @param config configuration java script object.
 	 */
-	private native int drawChart(JavaScriptObject config)/*-{
+	private native int drawChart(JavaScriptObject config, Context2d context)/*-{
 	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-	    var canvas = this.@org.pepstock.charba.client.AbstractChart::canvas;
-	    var ctx = canvas.getContext("2d");
-	    chart = new $wnd.Chart(ctx, config);
+	    chart = new $wnd.Chart(context, config);
 	    this.@org.pepstock.charba.client.AbstractChart::chart = chart;
 	    return chart.id;
 	}-*/;

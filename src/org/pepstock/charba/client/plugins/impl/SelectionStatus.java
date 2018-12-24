@@ -13,24 +13,27 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.items;
-
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+package org.pepstock.charba.client.plugins.impl;
 
 /**
- * Object which maps the chart area item of CHART.JS chart java script object.
+ * Enumerates the status of a selection.
+ * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.AbstractChart
+ * @since 1.8
  */
-public final class ChartAreaItem extends BaseBoxItem {
-
+enum SelectionStatus
+{
 	/**
-	 * Wraps the CHART.JS java script object.
-	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * Ready for selection
 	 */
-	ChartAreaItem(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
-	}
+	ready,
+	/**
+	 * The selection is running but not completed
+	 */
+	selecting,
+	/**
+	 * The selection has been completed
+	 */
+	selected,
 	
 }
