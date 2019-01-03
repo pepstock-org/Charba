@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.commons.Merger;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
@@ -59,6 +60,15 @@ abstract class ConfigurationContainer<T extends NativeObjectContainer> extends C
 	 */
 	protected final T getConfiguration() {
 		return configuration;
+	}
+	
+	/**
+	 * FIXME
+	 * @param source
+	 * @param property
+	 */
+	public final void merge(NativeObjectContainer source, String property) {
+		Merger.get().merge(getConfiguration(), source, property);
 	}
 	
 	/**
