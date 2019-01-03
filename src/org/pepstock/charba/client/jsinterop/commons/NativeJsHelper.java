@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.commons;
 
+import com.google.gwt.canvas.dom.client.Context2d;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -88,5 +90,12 @@ final class NativeJsHelper {
 	 * @return string value
 	 */
 	static native String propertyAsString(Object object, String key);
+	
+	/**
+	 * Sets the line dash pattern used when stroking lines. It uses an array of values that specify alternating lengths of lines and gaps which describe the pattern.
+	 * @param context context of canvas
+	 * @param object array of values that specify alternating lengths of lines and gaps which describe the pattern
+	 */
+	static native void setLineDash(Context2d context, ArrayInteger object);
 
 }

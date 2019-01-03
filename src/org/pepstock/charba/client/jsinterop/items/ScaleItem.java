@@ -18,6 +18,7 @@ package org.pepstock.charba.client.jsinterop.items;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
@@ -56,7 +57,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 		xCenter,
 		yCenter,
 		drawingArea,
-		pointLabels
+		pointLabels,
+		type
 	}
 
 	/**
@@ -86,6 +88,15 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 */
 	public final String getId() {
 		return getValue(Property.id, UndefinedValues.STRING);
+	}
+	
+	/**
+	 * Returns the type of scale
+	 * 
+	 * @return the type of scale. Default is {@link org.pepstock.charba.client.enums.AxisType#category}.
+	 */
+	public final AxisType getType() {
+		return getValue(Property.type, AxisType.class, AxisType.category);
 	}
 
 	/**

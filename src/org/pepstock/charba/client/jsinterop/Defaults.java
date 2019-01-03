@@ -18,9 +18,16 @@ package org.pepstock.charba.client.jsinterop;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.Merger;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
+import org.pepstock.charba.client.jsinterop.commons.ObjectType;
+import org.pepstock.charba.client.jsinterop.controllers.ControllerType;
+import org.pepstock.charba.client.jsinterop.controllers.Controllers;
 import org.pepstock.charba.client.jsinterop.plugins.GlobalPlugins;
 
 /**
@@ -34,7 +41,7 @@ public final class Defaults {
 	// singleton instance
 	private static final Defaults INSTANCE = new Defaults();
 	// native defaults java script object
-	private final NativeDefaults nativeObject;
+	private final WrapperDefaults wrapperDefaults;
 	// global options
 	private final GlobalOptions options;
 	// global scale
@@ -43,6 +50,8 @@ public final class Defaults {
 	private final GlobalPlugins plugins;
 	// cache for chart options already implemented to improve performance
 	private final Map<String, ChartOptions> chartOptions = new HashMap<>();
+	// controllers
+	private final Controllers controllers;
 
 	/**
 	 * To avoid any instantiation.<br>
@@ -52,13 +61,15 @@ public final class Defaults {
 		// to be sure that chart.js has been injected
 		Injector.ensureInjected();
 		// gets defaults from CHART.JS
-		this.nativeObject = Chart.getDefaults();
+		wrapperDefaults = new WrapperDefaults(Chart.getDefaults());
 		// creates global options wrapping the global property of CHART
-		this.options = new GlobalOptions(nativeObject.getGlobal());
+		this.options = new GlobalOptions(wrapperDefaults.getGlobal());
 		// creates global scale wrapping the scale property of CHART
-		this.scale = new GlobalScale(nativeObject.getScale());
+		this.scale = new GlobalScale(wrapperDefaults.getScale());
 		// creates global plugins wrapping the plugins property of CHART
 		this.plugins = new GlobalPlugins(Chart.getPlugins());
+		// creates the controller object
+		this.controllers = new Controllers(Chart.getControllers(), Chart.getDatasetController());
 	}
 
 	/**
@@ -96,6 +107,19 @@ public final class Defaults {
 	public GlobalPlugins getPlugins() {
 		return plugins;
 	}
+	
+	/**
+	 * Returns the controllers.
+	 * 
+	 * @return the controllers.
+	 */
+	public Controllers getControllers() {
+		return controllers;
+	}
+	
+	public void addControllerOptions(ControllerType type, ChartType parent) {
+		wrapperDefaults.addControllerOptions(type, parent);
+	}
 
 	/**
 	 * Returns the default options by a chart type, for a existing chart instance
@@ -117,10 +141,62 @@ public final class Defaults {
 		// checks if the options have already stored
 		if (!chartOptions.containsKey(type.name())) {
 			// if not, creates and stores new options by chart type
-			chartOptions.put(type.name(), nativeObject.chart(type));
+			chartOptions.put(type.name(), wrapperDefaults.chart(type));
 		}
 		// returns the existing options
 		return chartOptions.get(type.name());
+	}
+	
+	private static final class WrapperDefaults extends NativeObjectContainer{
+		
+		/**
+		 * Name of properties of native object.
+		 */
+		private enum Property implements Key
+		{
+			global,
+			scale
+		}
+
+		/**
+		 * @param nativeObject
+		 */
+		WrapperDefaults(NativeObject nativeObject) {
+			super(nativeObject);
+		}
+		
+		NativeObject getGlobal() {
+			return getValue(Property.global);
+		}
+		
+		NativeObject getScale() {
+			return getValue(Property.scale);
+			
+		}
+		
+		void addControllerOptions(ControllerType type, ChartType parent) {
+			if (has(parent)) {
+				setValue(type, getValue(parent));
+			}
+		}
+		
+		/**
+		 * Returns an options instance, to use as default options, based of type of chart.
+		 * 
+		 * @param type chart type.
+		 * @return default options.
+		 */
+		ChartOptions chart(Type type) {
+			// checks if the property is present
+			if (ObjectType.Object.equals(type(type))) {
+				return new ChartOptions(type, getValue(type));
+			} else {
+				// if here, the chart type is not defined (could be a controller)
+				// therefore returns an empty options
+				return new ChartOptions(type);
+			}
+		}
+		
 	}
 
 }

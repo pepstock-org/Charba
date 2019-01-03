@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.data;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.Key;
@@ -179,6 +180,22 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 */
 	public List<Dataset> getDatasets() {
 		return this.currentDatasets;
+	}
+	
+	/**
+	 * Returns a list of string for each datasets, in JSON format.
+	 * 
+	 * @return a list of string for each datasets, in JSON format
+	 */
+	public List<String> getDatasetsAsStrings(){
+		// creates the result 
+		List<String> result = new LinkedList<>();
+		// scans all datasets
+		for (Dataset ds: currentDatasets) {
+			// adds to list the data in JSON string format
+			result.add(ds.getDataAsString());
+		}
+		return result;
 	}
 
 	/*

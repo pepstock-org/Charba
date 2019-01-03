@@ -32,6 +32,15 @@ import org.pepstock.charba.client.jsinterop.items.TooltipPluginItem;
  *
  */
 public abstract class AbstractPlugin implements Plugin {
+	
+	
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.Plugin#onConfigure(org.pepstock.charba.client.AbstractChart)
+	 */
+	@Override
+	public void onConfigure(AbstractChart<?, ?> chart) {
+	}
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.Plugin#onBeforeInit(org.pepstock.charba.client.jsinterop.AbstractChart)

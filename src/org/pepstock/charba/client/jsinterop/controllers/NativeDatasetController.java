@@ -13,10 +13,10 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.jsinterop.plugins;
+package org.pepstock.charba.client.jsinterop.controllers;
 
-import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeName;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -30,7 +30,7 @@ import jsinterop.annotations.JsType;
  * @version 2.0
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class NativePlugins {
+public final class NativeDatasetController {
 
 	/**
 	 * Registers the given plugin if not already registered.
@@ -38,36 +38,7 @@ public final class NativePlugins {
 	 * @param plugin plugin instance.
 	 */
 	@JsMethod
-	native void register(NativePlugin plugin);
+	native NativeObject extend(NativeObject controller);
 
-	/**
-	 * Unregisters the given plugin only if registered.
-	 * 
-	 * @param plugin plugin instance reference.
-	 */
-	@JsMethod
-	native void unregister(PluginReference plugin);
-
-	/**
-	 * Remove all registered plugins.
-	 */
-	@JsMethod
-	native void clear();
-
-	/**
-	 * Returns the number of registered plugins
-	 * 
-	 * @returns amount of registered plugins
-	 */
-	@JsMethod
-	native int count();
-
-	/**
-	 * Returns all registered plugin instances.
-	 * 
-	 * @returns array of plugin objects.
-	 */
-	@JsMethod
-	native ArrayObject getAll();
 
 }

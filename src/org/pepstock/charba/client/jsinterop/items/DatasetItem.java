@@ -30,7 +30,7 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory
  * @author Andrea "Stock" Stocchero
  * @version 2.0
  */
-public final class DatasetItem extends NativeObjectContainer{
+public class DatasetItem extends NativeObjectContainer{
 	
 	private final DatasetViewItem view;
 	

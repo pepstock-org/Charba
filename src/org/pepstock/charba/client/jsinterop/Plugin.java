@@ -43,6 +43,13 @@ public interface Plugin {
 	 * @return the plugin id.
 	 */
 	String getId();
+	
+	/**
+	 * Called before initializing configuration of 'chart'.
+	 * 
+	 * @param chart The chart instance.
+	 */
+	void onConfigure(AbstractChart<?, ?> chart);
 
 	/**
 	 * Called before initializing 'chart'.

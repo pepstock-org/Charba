@@ -17,6 +17,9 @@
     JsHelper.propertyAsInt = function(obj, key) {
     	return obj[key];
     }    
+    JsHelper.setLineDash = function(context, values) {
+    	context.setLineDash(values);
+    }
     JsHelper.newCallbackProxy = function() {
     	var obj = new Object();
     	obj.callback = null;
@@ -38,4 +41,26 @@
     		}
 		};
     	return obj;
+    }
+    function JsControllerHelper() {};
+    JsControllerHelper.initialize = function(controllerType, context, datasetIndex) {
+    	Chart.controllers[controllerType].prototype.initialize.call(context, context.chart, datasetIndex);
+    }
+    JsControllerHelper.addElements = function(controllerType, context) {
+    	Chart.controllers[controllerType].prototype.addElements.call(context);
+    }
+    JsControllerHelper.addElementAndReset = function(controllerType, context, index) {
+    	Chart.controllers[controllerType].prototype.addElementAndReset.call(context, index);
+    }
+    JsControllerHelper.draw = function(controllerType, context, ease) {
+    	Chart.controllers[controllerType].prototype.draw.call(context, ease);
+    }
+    JsControllerHelper.removeHoverStyle = function(controllerType, context, element) {
+    	Chart.controllers[controllerType].prototype.removeHoverStyle.call(context, element);
+    }
+    JsControllerHelper.setHoverStyle = function(controllerType, context, element) {
+    	Chart.controllers[controllerType].prototype.setHoverStyle.call(context, element);
+    }
+    JsControllerHelper.update = function(controllerType, context, reset) {
+    	Chart.controllers[controllerType].prototype.update.call(context, reset);
     }

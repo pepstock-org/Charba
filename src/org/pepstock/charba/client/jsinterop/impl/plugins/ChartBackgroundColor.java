@@ -100,9 +100,8 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 */
 	@Override
 	public boolean onBeforeDraw(AbstractChart<?, ?> chart, double easing) {
-		ChartBackgroundColorOptions bgOptions;
+		ChartBackgroundColorOptions bgOptions = null;
 		try {
-			bgOptions = null;
 			// creates the plugin options using the java script object
 			// passing also the default color set at constructor.
 			if (chart.getOptions().getPlugins().hasOptions(ID)) {
@@ -122,7 +121,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		// set fill canvas color
 		ctx.setFillStyle(bgOptions.getBackgroundColorAsString());
 		// fills back ground
-		ctx.fillRect(0, 0, chart.getCanvas().getWidth(), chart.getCanvas().getHeight());
+		ctx.fillRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
 		// always TRUE
 		return true;
 	}

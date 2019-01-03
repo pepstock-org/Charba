@@ -82,6 +82,21 @@ public final class Plugins implements ConfigurationElement {
 			}
 		}
 	}
+	
+	
+	/**
+	 * Invokes the on configuration method to inform the plugins that the chart is going to be initialized.
+	 * 
+	 * @param config configuration item. Added only to reduce visibility of public method.
+	 * @param chart instance of the chart
+	 */
+	public void onChartConfigure(Configuration config, AbstractChart<?, ?> chart) {
+		// scans all plugins
+		for (InlinePlugin entry : plugins) {
+			// calls on configure method
+			entry.onConfigure(chart);
+		}
+	}
 
 	/*
 	 * (non-Javadoc)

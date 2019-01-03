@@ -19,6 +19,7 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.Id;
 import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.controllers.NativeDatasetController;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
 import org.pepstock.charba.client.jsinterop.plugins.NativePlugins;
 
@@ -46,7 +47,7 @@ public final class Chart {
 	 * @return the <code>defaults</code> property by native object.
 	 */
 	@JsProperty
-	static native NativeDefaults getDefaults();
+	static native NativeObject getDefaults();
 
 	/**
 	 * Returns the <code>helpers</code> property by native object.
@@ -63,7 +64,23 @@ public final class Chart {
 	 */
 	@JsProperty
 	static native NativePlugins getPlugins();
-
+	
+	/**
+	 * Returns the <code>datasetController</code> property by native object.
+	 * 
+	 * @return the <code>datasetController</code> property by native object.
+	 */
+	@JsProperty
+	static native NativeDatasetController getDatasetController();
+	
+	/**
+	 * Returns the <code>controllers</code> property by native object.
+	 * 
+	 * @return the <code>controllers</code> property by native object.
+	 */
+	@JsProperty
+	static native NativeObject getControllers();
+	
 	/**
 	 * Builds CHART object at CHART.JS level.<br>
 	 * This constructor MUST be empty.
@@ -187,6 +204,29 @@ public final class Chart {
 	 */
 	@JsMethod
 	native NativeObject getDatasetMeta(int index);
+	
+	/**
+	 * Gets if the dataset is visible or not, selected by index.
+	 * @param index dataset index
+	 * @return <code>true</code> if dataset is visible otherwise <code>false</code>.
+	 */
+	@JsMethod
+	native boolean isDatasetVisible(int index);
+	
+	/**
+	 * Gets the amount of datasets which are visible
+	 * @return the amount of datasets which are visible
+	 */
+	@JsMethod
+	native int getVisibleDatasetCount();
+	
+	/**
+	 * Gets the dataset of the chart, selected by event.
+	 * @param event event of get the dataset.
+	 * @return dataset meta data items.
+	 */
+	@JsMethod
+	native NativeObject getDatasetAtEvent(ChartNativeEvent event);
 
 	/**
 	 * Returns the CHART JS chart ID.

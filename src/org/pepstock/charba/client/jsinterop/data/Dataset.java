@@ -20,11 +20,12 @@ import java.util.List;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.controllers.ControllerType;
+import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
+import org.pepstock.charba.client.jsinterop.utils.JSON;
 
 /**
  * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
@@ -136,7 +137,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	/**
 	 * Returns the type of dataset, based on type of chart.
 	 * 
-	 * @return type of dataset or null if not set.
+	 * @return type of dataset or null if not set. If not set or invalid, the default is {@link org.pepstock.charba.client.ChartType#bar}.
 	 */
 	public Type getType() {
 		// gets string value from java script object
@@ -144,8 +145,20 @@ public abstract class Dataset extends NativeObjectContainer {
 		// checks if consistent with out of the box chart types
 		Type type = ChartType.get(value);
 		// if not, creates new type being a controller.
-		// FIXME the scaletype could be wrong
-		return type == null ? new ControllerType(value) : type;
+		if (type == null) {
+			// gets type from controllers
+			type = Defaults.get().getControllers().getTypeByString(value);
+		}
+		return type == null ? ChartType.bar : type;
+	}
+	
+	/**
+	 * Returns the data property in JSON format.
+	 * 
+	 * @return the data property in JSON format.
+	 */
+	final String getDataAsString() {
+		return JSON.stringify(getValue(Property.data));
 	}
 
 }

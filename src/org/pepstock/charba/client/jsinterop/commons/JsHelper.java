@@ -17,8 +17,11 @@ package org.pepstock.charba.client.jsinterop.commons;
 
 import org.pepstock.charba.client.Injector;
 
+import com.google.gwt.canvas.dom.client.Context2d;
+
 /**
- * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script objects.<br>
+ * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
+ * utilities to act on java script objects.<br>
  * This wrapper is necessary to ensure that script is injected with CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
@@ -36,9 +39,10 @@ public final class JsHelper {
 		// to be sure that CHARBA java script object is injected
 		Injector.ensureInjected();
 	}
-	
+
 	/**
 	 * Singleton object to get the helper instance
+	 * 
 	 * @return jsHelper instance.
 	 */
 	public static JsHelper get() {
@@ -46,26 +50,30 @@ public final class JsHelper {
 	}
 
 	/**
-	 * Returns the java script object type of a property. 
+	 * Returns the java script object type of a property.
+	 * 
 	 * @param object the object on which to search the property.
-	 * @param key  the string name of the property to test.
+	 * @param key the string name of the property to test.
 	 * @return the object type
 	 */
 	public final ObjectType typeOf(Object object, String key) {
 		// gets the object type by javascript type and checking if is an array
-		return ObjectType.getType(NativeJsHelper.type(object, key), NativeJsHelper.isArray(object, key)); 
+		return ObjectType.getType(NativeJsHelper.type(object, key), NativeJsHelper.isArray(object, key));
 	}
 
 	/**
-	 * Creates new proxy for callback which will pass <code>this</code> environment of java script as first argument of callback method.
+	 * Creates new proxy for callback which will pass <code>this</code> environment of java script as first argument of callback
+	 * method.
+	 * 
 	 * @return new proxy for callback.
 	 */
-	public <T> CallbackProxy<T> newCallbackProxy(){
+	public <T> CallbackProxy<T> newCallbackProxy() {
 		return NativeJsHelper.newCallbackProxy();
 	}
-	
+
 	/**
 	 * Removes a property from a java script object.
+	 * 
 	 * @param object the object on which to remove the property.
 	 * @param key the string name of the property to remove.
 	 */
@@ -75,6 +83,7 @@ public final class JsHelper {
 
 	/**
 	 * Returns a property of java script object as integer.
+	 * 
 	 * @param object the object on which to define the property.
 	 * @param key the string name of the property to be defined or modified..
 	 * @return integer value
@@ -82,9 +91,10 @@ public final class JsHelper {
 	public int propertyAsInt(Object object, String key) {
 		return NativeJsHelper.propertyAsInt(object, key);
 	}
-	
+
 	/**
 	 * Returns a property of java script object as double.
+	 * 
 	 * @param object the object on which to define the property.
 	 * @param key the string name of the property to be defined or modified..
 	 * @return double value
@@ -95,6 +105,7 @@ public final class JsHelper {
 
 	/**
 	 * Returns a property of java script object as string.
+	 * 
 	 * @param object the object on which to define the property.
 	 * @param key the string name of the property to be defined or modified..
 	 * @return string value
@@ -103,4 +114,16 @@ public final class JsHelper {
 		return NativeJsHelper.propertyAsString(object, key);
 	}
 
+	/**
+	 * Sets the line dash pattern used when stroking lines. It uses an array of values that specify alternating lengths of lines
+	 * and gaps which describe the pattern.
+	 * 
+	 * @param context context of canvas
+	 * @param object array of values that specify alternating lengths of lines and gaps which describe the pattern
+	 */
+	public void setLineDash(Context2d context, ArrayInteger object) {
+		if (context != null && object != null) {
+			NativeJsHelper.setLineDash(context, object);
+		}
+	}
 }

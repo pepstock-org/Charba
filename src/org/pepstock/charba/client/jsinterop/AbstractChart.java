@@ -32,14 +32,15 @@ import org.pepstock.charba.client.jsinterop.plugins.Plugins;
 import org.pepstock.charba.client.jsinterop.utils.JSON;
 
 import com.google.gwt.canvas.client.Canvas;
-import com.google.gwt.dom.client.CanvasElement;
-import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.MouseDownEvent;
+import com.google.gwt.event.dom.client.MouseDownHandler;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.SimplePanel;
 
 /**
  * Base class of all charts.<br>
@@ -51,14 +52,10 @@ import com.google.gwt.user.client.ui.Widget;
  * @param <O> Options type for the specific chart
  * @param <D> Dataset type for the specific chart
  */
-public abstract class AbstractChart<O extends ConfigurationOptions, D extends Dataset> extends Widget implements IsChart<O, D> {
+public abstract class AbstractChart<O extends ConfigurationOptions, D extends Dataset> extends SimplePanel implements IsChart<O, D> {
 
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
-	// constant for WIDTH property
-	private static final String WIDTH_PROPERTY = "width";
-	// constant for HEIGHT property
-	private static final String HEIGHT_PROPERTY = "height";
 	// PCT standard for width
 	private static final double DEFAULT_PCT_WIDTH = 90D;
 	// reference to Chart.js chart instance
@@ -69,11 +66,10 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	// chart ID using GWT unique id
 	private final String id = Document.get().createUniqueId();
 
-	// chart container
-	final DivElement div;
-
+	// canvas prevent default handler 
+	private final HandlerRegistration preventDisplayHandler;
 	// canvas where Chart.js draws the chart
-	final CanvasElement canvas;
+	private final Canvas canvas;
 
 	// CHart configuration object
 	private final Configuration configuration = new Configuration();
@@ -98,30 +94,43 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 */
 	public AbstractChart() {
 		// creates DIV
-		div = Document.get().createDivElement();
-		div.setId(id);
+		getElement().setId(id);
 		// sets relative position
-		div.getStyle().setPosition(Position.RELATIVE);
+		getElement().getStyle().setPosition(Position.RELATIVE);
 		// sets default width values
-		div.getStyle().setWidth(DEFAULT_PCT_WIDTH, Unit.PCT);
-		div.getStyle().setHeight(100, Unit.PCT);
+		getElement().getStyle().setWidth(DEFAULT_PCT_WIDTH, Unit.PCT);
+		getElement().getStyle().setHeight(100, Unit.PCT);
 		// checks if canvas is supported
 		if (isCanvasSupported) {
 			// creates a canvas and add to DIV
-			canvas = Document.get().createCanvasElement();
-			div.appendChild(canvas);
+			//canvas = Document.get().createCanvasElement();
+			canvas = Canvas.createIfSupported();
+			add(canvas);
+			// adds the listener to disable canvas selection
+			preventDisplayHandler = canvas.addMouseDownHandler(new MouseDownHandler() {
+
+				/* (non-Javadoc)
+				 * @see com.google.gwt.event.dom.client.MouseDownHandler#onMouseDown(com.google.gwt.event.dom.client.MouseDownEvent)
+				 */
+				@Override
+				public void onMouseDown(MouseDownEvent event) {
+					// removes the default behavior
+					event.preventDefault();
+				}
+				
+			});
+			//div.appendChild(canvas);
 		} else {
 			// creates a header element
 			HeadingElement h = Document.get().createHElement(3);
 			// to show the error message
 			// because canvas is not supported
 			h.setInnerText(CANVAS_NOT_SUPPORTED_MESSAGE);
-			div.appendChild(h);
+			getElement().appendChild(h);
 			// resets canvas
 			canvas = null;
+			preventDisplayHandler = null;
 		}
-		// sets DIV as element of the widget
-		setElement(div);
 		// injects Chart.js java script source
 		Injector.ensureInjected();
 		// creates plugins container
@@ -155,19 +164,30 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @return the canvas
 	 */
-	public final CanvasElement getCanvas() {
+	public final Canvas getCanvas() {
 		return canvas;
 	}
 
 	/**
-	 * Returns the DIV element which contains the canvas.
-	 * 
-	 * @return the chart container DIV element
+	 * Remove the registration of prevent default mouse listener from canvas.<br>
+	 * This is necessary when you will add your mouse down listeber.
 	 */
-	public final DivElement getContainer() {
-		return div;
+	public final void removeCanvasPreventDefault() {
+		// checks if consistent
+		if (preventDisplayHandler != null) {
+			// cleans up the handler for mouse listener
+			preventDisplayHandler.removeHandler();
+		}
 	}
-
+	
+	/**
+	 * Returns <code>true</code> if CHART.JS chart has been initialized, otherwise <code>false</code>.
+	 * @return <code>true</code> if CHART.JS chart has been initialized, otherwise <code>false</code>.
+	 */
+	public boolean isInitialized() {
+		return chart != null;
+	}
+	
 	/**
 	 * Returns the chart node with runtime data.
 	 * 
@@ -202,26 +222,6 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 */
 	final ChartOptions getChartOptions() {
 		return options;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.user.client.ui.UIObject#setHeight(java.lang.String)
-	 */
-	@Override
-	public void setHeight(String height) {
-		div.getStyle().setProperty(HEIGHT_PROPERTY, height);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.user.client.ui.UIObject#setWidth(java.lang.String)
-	 */
-	@Override
-	public void setWidth(String width) {
-		div.getStyle().setProperty(WIDTH_PROPERTY, width);
 	}
 
 	/**
@@ -461,7 +461,56 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		// returns null
 		return null;
 	}
+	
+	/**
+	 * Looks for the dataset that matches the event and returns that metadata.
+	 * 
+	 * @param event event of chart.
+	 * @return dataset meta data item.
+	 */
+	public DatasetMetaItem getDatasetAtEvent(ChartNativeEvent event) {
+		// checks consistency of chart and event
+		if (chart != null && event != null) {
+			// gets dataset
+			DatasetMetaItem array = new DatasetMetaItem(chart.getDatasetAtEvent(event));
+			// returns the array
+			return array;
+		}
+		// returns null;
+		return null;
+	}
 
+	/**
+	 * Looks for the dataset if it's visible or not, selected by index.
+	 * 
+	 * @param index dataset index
+	 * @return <code>true</code> if dataset is visible otherwise <code>false</code>.
+	 */
+	public boolean isDatasetVisible(int index) {
+		// checks consistency of chart and datasets
+		if (chart != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size()) {
+			// gets if dataset is visible or not
+			return chart.isDatasetVisible(index);
+		}
+		// returns false
+		return false;
+	}
+	
+	/**
+	 * Returns the amount of datasets which are visible
+	 * 
+	 * @return the amount of datasets which are visible. If chart is not initialized, return {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
+	 */
+	public int getVisibleDatasetCount() {
+		// checks consistency of chart and datasets
+		if (chart != null) {
+			// gets if dataset is visible or not
+			return chart.getVisibleDatasetCount();
+		}
+		// returns undefined
+		return UndefinedValues.INTEGER;
+	}
+	
 	/**
 	 * Calling on your chart instance passing an argument of an event, will return the single element at the event position.<br>
 	 * If there are multiple items within range, only the first is returned.
@@ -507,6 +556,9 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	public final void draw() {
 		// checks if canvas is supported
 		if (isCanvasSupported) {
+			// calls plugins for onConfigure method
+			Defaults.get().getPlugins().onChartConfigure(configuration, this);
+			plugins.onChartConfigure(configuration, this);
 			// gets options
 			ConfigurationOptions options = getOptions();
 			// gets data

@@ -20,7 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.controllers.ControllerType;
+import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
@@ -72,7 +72,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	/**
 	 * Returns the type of dataset. 
 	 * 
-	 * @return the type of dataset. If not set, the default is {@link org.pepstock.charba.client.ChartType#bar}.
+	 * @return the type of dataset. If not set or invalid, the default is {@link org.pepstock.charba.client.ChartType#bar}.
 	 */
 	public Type getType() {
 		// gets string value from java script object
@@ -80,8 +80,11 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 		// checks if consistent with out of the box chart types
 		Type type = ChartType.get(value);
 		// if not, creates new type being a controller.
-		// FIXME the scaletype could be wrong
-		return type == null ? new ControllerType(value) : type;
+		if (type == null) {
+			// gets type from controllers
+			type = Defaults.get().getControllers().getTypeByString(value);
+		}
+		return type == null ? ChartType.bar : type;
 	}
 
 	/**

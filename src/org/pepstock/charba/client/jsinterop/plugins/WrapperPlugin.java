@@ -72,6 +72,17 @@ abstract class WrapperPlugin {
 	NativePlugin getNativeObject() {
 		return nativeObject;
 	}
+	
+	/**
+	 * Called before initializing 'chart'.
+	 * @param chartId chart id.
+	 */
+	protected void onConfigure(AbstractChart<?, ?> chart) {
+		// if consistent, calls plugin
+		if (chart != null) {
+			delegation.onConfigure(chart);
+		}
+	}
 
 	/**
 	 * Called before initializing 'chart'.

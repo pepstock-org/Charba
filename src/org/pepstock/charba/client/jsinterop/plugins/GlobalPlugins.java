@@ -15,9 +15,14 @@
 */
 package org.pepstock.charba.client.jsinterop.plugins;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
+import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.Configuration;
 import org.pepstock.charba.client.jsinterop.Plugin;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 
@@ -31,7 +36,7 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 public final class GlobalPlugins {
 
 	// list of global plugins set by user (not OOTB)
-	private final Set<String> pluginIds = new HashSet<String>();
+	private final Map<String, GlobalPlugin> pluginIds = new HashMap<String, GlobalPlugin>();
 	// native object of plugins
 	private final NativePlugins plugins;
 
@@ -63,7 +68,7 @@ public final class GlobalPlugins {
 		GlobalPlugin wPlugin = new GlobalPlugin(plugin);
 		plugins.register(wPlugin.getNativeObject());
 		// stores the id into a set
-		pluginIds.add(plugin.getId());
+		pluginIds.put(plugin.getId(), wPlugin);
 		return true;
 	}
 
@@ -78,7 +83,7 @@ public final class GlobalPlugins {
 		// checks the plugin id
 		PluginIdChecker.check(pluginId);
 		// checks if ID is already registered on custom one
-		if (!pluginIds.contains(pluginId)) {
+		if (!pluginIds.containsKey(pluginId)) {
 			return false;
 		}
 		// gets plugins ids requesting to CHART.JS.
@@ -117,5 +122,27 @@ public final class GlobalPlugins {
 			}
 		}
 		return pluginsIds;
+	}
+	
+	
+	/**
+	 * Invokes the on configuration method to inform the plugins that the chart is going to be initialized.
+	 * 
+	 * @param config configuration item. Added only to reduce visibility of public method.
+	 * @param chart instance of the chart
+	 */
+	public void onChartConfigure(Configuration config, AbstractChart<?, ?> chart) {
+		// scans all plugins
+		for (Entry<String, GlobalPlugin> entry : pluginIds.entrySet()) {
+			try {
+				// checks if plugin is enabled 
+				if (chart.getOptions().getPlugins().isEnabled(entry.getKey())) {
+					// calls on configure method
+					entry.getValue().onConfigure(chart);
+				}
+			} catch (InvalidPluginIdException e) {
+				// do nothing
+			}
+		}
 	}
 }
