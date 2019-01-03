@@ -25,6 +25,7 @@ import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
+import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 import org.pepstock.charba.client.jsinterop.items.TooltipBodyItem.TooltipBodyItemFactory;
@@ -225,7 +226,10 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the list of lines before body section.
 	 */
 	public List<String> getBeforeBody() {
-		return getArrayValue(Property.beforeBody);
+		// gets array from native object
+		ArrayString array = getArrayValue(Property.beforeBody);
+		// returns list
+		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	/**
@@ -234,7 +238,10 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the list of lines after body section.
 	 */
 	public List<String> getAfterBody() {
-		return getArrayValue(Property.afterBody);
+		// gets array from native object
+		ArrayString array = getArrayValue(Property.afterBody);
+		// returns list
+		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	/**
@@ -306,7 +313,10 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the title of the tooltip.
 	 */
 	public List<String> getTitle() {
-		return getArrayValue(Property.title);
+		// gets array from native object
+		ArrayString array = getArrayValue(Property.title);
+		// returns list
+		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	/**
@@ -387,7 +397,10 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the footer of the tooltip.
 	 */
 	public List<String> getFooter() {
-		return getArrayValue(Property.footer);
+		// gets array from native object
+		ArrayString array = getArrayValue(Property.footer);
+		// returns list
+		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	/**
