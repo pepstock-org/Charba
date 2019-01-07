@@ -37,7 +37,8 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 		pointStyle,
 		hitRadius,
 		hoverRadius,
-		hoverBorderWidth
+		hoverBorderWidth,
+		rotation
 	}
 
 	/**
@@ -152,6 +153,26 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 */
 	public int getHoverBorderWidth() {
 		return getValue(Property.hoverBorderWidth, getDefaultValues().getHoverBorderWidth());
+	}
+	
+	/**
+	 * Sets the point rotation (in degrees).
+	 * 
+	 * @param rotation the point rotation (in degrees).
+	 */
+	public void setRotation(double rotation) {
+		setValue(Property.rotation, rotation);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the point rotation (in degrees).
+	 * 
+	 * @return the point rotation (in degrees).
+	 */
+	public double getRotation() {
+		return getValue(Property.rotation, getDefaultValues().getRotation());
 	}
 
 }

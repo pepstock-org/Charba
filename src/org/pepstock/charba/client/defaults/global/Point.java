@@ -45,7 +45,7 @@ public final class Point extends Arc {
 	private static final int DEFAULT_HOVER_RADIUS = 4;
 	// default hover border width
 	private static final int DEFAULT_HOVER_BORDER_WIDTH = 1;
-	/// default rotation
+	// default rotation
 	private static final double DEFAULT_ROTATION = 0D;
 
 	/**

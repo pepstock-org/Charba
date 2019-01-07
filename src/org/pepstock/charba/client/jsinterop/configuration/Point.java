@@ -126,5 +126,23 @@ public class Point extends AbstractConfigurationElement {
 	public int getHoverBorderWidth() {
 		return getOptions().getElements().getPoint().getBorderWidth();
 	}
+	
+	/**
+	 * Sets the point rotation (in degrees).
+	 * 
+	 * @param rotation the point rotation (in degrees).
+	 */
+	public void setRotation(double rotation) {
+		getOptions().getElements().getPoint().setRotation(rotation);
+	}
+
+	/**
+	 * Returns the point rotation (in degrees).
+	 * 
+	 * @return the point rotation (in degrees).
+	 */
+	public double getRotation() {
+		return getOptions().getElements().getPoint().getRotation();
+	}
 
 }

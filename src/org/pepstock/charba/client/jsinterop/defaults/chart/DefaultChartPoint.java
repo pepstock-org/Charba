@@ -118,4 +118,11 @@ public final class DefaultChartPoint implements IsDefaultPoint {
 		return point.getHoverBorderWidth();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint#getRotation()
+	 */
+	@Override
+	public double getRotation() {
+		return point.getRotation();
+	}
 }

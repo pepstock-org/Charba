@@ -59,5 +59,12 @@ public interface IsDefaultPoint extends IsDefaultArc {
 	 * @return the border width of point when hovered.
 	 */
 	 int getHoverBorderWidth();
+	 
+	 /**
+	  * Returns the point rotation (in degrees).
+	  * 
+	  * @return the point rotation (in degrees).
+	  */
+	 double getRotation();
 
 }

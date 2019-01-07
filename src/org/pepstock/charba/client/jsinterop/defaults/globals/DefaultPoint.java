@@ -40,6 +40,8 @@ public final class DefaultPoint extends DefaultArc implements IsDefaultPoint{
 	
 	private static final int DEFAULT_HOVER_BORDER_WIDTH = 1;
 
+	private static final double DEFAULT_ROTATION = 0D;
+
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBackgroundColorAsString()
 	 */
@@ -102,6 +104,14 @@ public final class DefaultPoint extends DefaultArc implements IsDefaultPoint{
 	@Override
 	public int getHoverBorderWidth() {
 		return DEFAULT_HOVER_BORDER_WIDTH;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint#getRotation()
+	 */
+	@Override
+	public double getRotation() {
+		return DEFAULT_ROTATION;
 	}
 
 }
