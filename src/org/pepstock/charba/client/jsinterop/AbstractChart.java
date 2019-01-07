@@ -66,7 +66,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	// chart ID using GWT unique id
 	private final String id = Document.get().createUniqueId();
 
-	// canvas prevent default handler 
+	// canvas prevent default handler
 	private final HandlerRegistration preventDisplayHandler;
 	// canvas where Chart.js draws the chart
 	private final Canvas canvas;
@@ -103,23 +103,26 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		// checks if canvas is supported
 		if (isCanvasSupported) {
 			// creates a canvas and add to DIV
-			//canvas = Document.get().createCanvasElement();
+			// canvas = Document.get().createCanvasElement();
 			canvas = Canvas.createIfSupported();
 			add(canvas);
 			// adds the listener to disable canvas selection
 			preventDisplayHandler = canvas.addMouseDownHandler(new MouseDownHandler() {
 
-				/* (non-Javadoc)
-				 * @see com.google.gwt.event.dom.client.MouseDownHandler#onMouseDown(com.google.gwt.event.dom.client.MouseDownEvent)
+				/*
+				 * (non-Javadoc)
+				 * 
+				 * @see
+				 * com.google.gwt.event.dom.client.MouseDownHandler#onMouseDown(com.google.gwt.event.dom.client.MouseDownEvent)
 				 */
 				@Override
 				public void onMouseDown(MouseDownEvent event) {
 					// removes the default behavior
 					event.preventDefault();
 				}
-				
+
 			});
-			//div.appendChild(canvas);
+			// div.appendChild(canvas);
 		} else {
 			// creates a header element
 			HeadingElement h = Document.get().createHElement(3);
@@ -179,15 +182,16 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			preventDisplayHandler.removeHandler();
 		}
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if CHART.JS chart has been initialized, otherwise <code>false</code>.
+	 * 
 	 * @return <code>true</code> if CHART.JS chart has been initialized, otherwise <code>false</code>.
 	 */
 	public boolean isInitialized() {
 		return chart != null;
 	}
-	
+
 	/**
 	 * Returns the chart node with runtime data.
 	 * 
@@ -214,12 +218,12 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	public final Plugins getPlugins() {
 		return plugins;
 	}
-	
+
 	/**
 	 * Creates the chart options based on type of chart.<br>
 	 * It can be override when a controller is implemented.
-	 *  
-	 * @return  the chart options based on type of chart.
+	 * 
+	 * @return the chart options based on type of chart.
 	 */
 	protected ChartOptions createChartOptions() {
 		return Defaults.get().options(getType());
@@ -471,7 +475,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		// returns null
 		return null;
 	}
-	
+
 	/**
 	 * Looks for the dataset that matches the event and returns that metadata.
 	 * 
@@ -505,11 +509,12 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		// returns false
 		return false;
 	}
-	
+
 	/**
 	 * Returns the amount of datasets which are visible
 	 * 
-	 * @return the amount of datasets which are visible. If chart is not initialized, return {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
+	 * @return the amount of datasets which are visible. If chart is not initialized, return
+	 *         {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getVisibleDatasetCount() {
 		// checks consistency of chart and datasets
@@ -520,7 +525,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		// returns undefined
 		return UndefinedValues.INTEGER;
 	}
-	
+
 	/**
 	 * Calling on your chart instance passing an argument of an event, will return the single element at the event position.<br>
 	 * If there are multiple items within range, only the first is returned.

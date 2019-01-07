@@ -68,6 +68,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		responsive,
 		responsiveAnimationDuration,
 		maintainAspectRatio,
+		aspectRatio,
 		events,
 		defaultColor,
 		defaultFontColor,
@@ -205,16 +206,6 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
-	 * Returns if should chart be animated or not.
-	 * 
-	 * @return if should chart be animated or not. 
-	 */
-	public boolean isAnimationEnable() {
-		// FIXME WORNG
-		return has(Property.animation);
-	}
-
-	/**
 	 * Sets the resizing of the chart canvas when its container does.
 	 * 
 	 * @param responsive the resizing of the chart canvas when its container does.
@@ -266,6 +257,26 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	public boolean isMaintainAspectRatio() {
 		return getValue(Property.maintainAspectRatio, getDefaultValues().isMaintainAspectRatio());
+	}
+	
+	/**
+	 * Canvas aspect ratio (i.e. width / height, a value of 1 representing a square canvas).<br>
+	 * Note that this option is ignored if the height is explicitly defined either as attribute or via the style.
+	 * 
+	 * @param ratio the aspect ratio.
+	 */
+	public void setAspectRatio(double ratio) {
+		setValue(Property.aspectRatio, ratio);
+	}
+
+	/**
+	 * Canvas aspect ratio (i.e. width / height, a value of 1 representing a square canvas).<br>
+	 * Note that this option is ignored if the height is explicitly defined either as attribute or via the style.
+	 * 
+	 * @return  the aspect ratio. 
+	 */
+	public double getAspectRatio() {
+		return getValue(Property.aspectRatio, getDefaultValues().getAspectRatio());
 	}
 
 	/**

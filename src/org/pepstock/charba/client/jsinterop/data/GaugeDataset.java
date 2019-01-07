@@ -67,12 +67,14 @@ public final class GaugeDataset extends MeterDataset {
 	};
 
 	/**
-	 * FIXME
+	 * Creates a gauge dataset with the maximum value of the data.
 	 * 
-	 * @param max
+	 * @param max the maximum value of the data.
 	 */
 	public GaugeDataset(double max) {
 		super(max);
+		// scans all defaults thresholds of gauge
+		// adding them
 		for (GaugeThreshold t : GaugeThreshold.values()) {
 			thresholds.add(t.getThreshold());
 		}
@@ -196,10 +198,10 @@ public final class GaugeDataset extends MeterDataset {
 	private Threshold checkLevel() {
 		// checks if the thresholds are set
 		if (!thresholds.isEmpty()) {
-			// sorts teh thresholds by value
+			// sorts the thresholds by value
 			Collections.sort(thresholds, COMPARATOR);
 			// if the percentage value must be used to compare the threshold
-			// or to use teh absolute value
+			// or to use the absolute value
 			final double valueToCheck = isPercentageThreshold() ? getValue() / getMax() * 100 : getValue();
 			double lowLimit = 0;
 			// scans all thresholds

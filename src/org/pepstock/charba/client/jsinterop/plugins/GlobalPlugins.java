@@ -36,6 +36,7 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 public final class GlobalPlugins {
 
 	// list of global plugins set by user (not OOTB)
+	// K = plugin id, V = plugin instance
 	private final Map<String, GlobalPlugin> pluginIds = new HashMap<String, GlobalPlugin>();
 	// native object of plugins
 	private final NativePlugins plugins;

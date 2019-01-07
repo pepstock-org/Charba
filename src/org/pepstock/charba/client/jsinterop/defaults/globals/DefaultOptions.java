@@ -43,6 +43,8 @@ public class DefaultOptions implements IsDefaultOptions{
 	private static final int DEFAULT_RESPONSIVE_ANIMATION_DURATION = 0;
 
 	private static final boolean DEFAULT_MAINTAIN_ASPECT_RATIO = true;
+	
+	private static final double DEFAULT_ASPECT_RATIO = 2D;
 
 	private static final String DEFAULT_COLOR = "rgba(0,0,0,0.1)";
 
@@ -77,8 +79,6 @@ public class DefaultOptions implements IsDefaultOptions{
 	private final DefaultLegend legend = new DefaultLegend();
 	
 	private final DefaultTooltips tooltips = new DefaultTooltips();
-//	
-//	private final DefaultScale scale = new DefaultScale();
 
 	/**
 	 * Creates the object. Protected to avoid any instantiation
@@ -86,22 +86,6 @@ public class DefaultOptions implements IsDefaultOptions{
 	protected DefaultOptions() {
 		// do nothing
 	}
-	
-//	/**
-//	 * Singleton method to return the instance
-//	 * @return default option instance
-//	 */
-//	public static final DefaultOptions get() {
-//		return INSTANCE;
-//	}
-
-//	/* (non-Javadoc)
-//	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getScale()
-//	 */
-//	@Override
-//	public IsDefaultScale getScale() {
-//		return scale;
-//	}
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultOptions#getAnimation()
@@ -182,6 +166,14 @@ public class DefaultOptions implements IsDefaultOptions{
 	@Override
 	public boolean isMaintainAspectRatio() {
 		return DEFAULT_MAINTAIN_ASPECT_RATIO;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getAspectRatio()
+	 */
+	@Override
+	public double getAspectRatio() {
+		return DEFAULT_ASPECT_RATIO;
 	}
 
 	/* (non-Javadoc)

@@ -125,7 +125,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 			@Override
 			public void call(Chart context, AnimationObject animationObject) {
 				// checks consistency of argument
-				if (animationObject != null && animationObject.getAnimationItem() != null) {
+				if (animationObject != null) {
 					// invokes the custom callback
 					onComplete(animationObject.getAnimationItem());
 				}
@@ -139,7 +139,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 			@Override
 			public void call(Chart context, AnimationObject animationObject) {
 				// checks consistency of argument
-				if (animationObject != null && animationObject.getAnimationItem() != null) {
+				if (animationObject != null) {
 					// invokes the custom callback
 					onProgress(animationObject.getAnimationItem());
 				}

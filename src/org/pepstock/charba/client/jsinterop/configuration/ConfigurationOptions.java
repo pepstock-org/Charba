@@ -416,6 +416,26 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	public boolean isMaintainAspectRatio() {
 		return getConfiguration().isMaintainAspectRatio();
 	}
+	
+	/**
+	 * Canvas aspect ratio (i.e. width / height, a value of 1 representing a square canvas).<br>
+	 * Note that this option is ignored if the height is explicitly defined either as attribute or via the style.
+	 * 
+	 * @param ratio the aspect ratio.
+	 */
+	public void setAspectRatio(double ratio) {
+		getConfiguration().setAspectRatio(ratio);
+	}
+
+	/**
+	 * Canvas aspect ratio (i.e. width / height, a value of 1 representing a square canvas).<br>
+	 * Note that this option is ignored if the height is explicitly defined either as attribute or via the style.
+	 * 
+	 * @return  the aspect ratio. 
+	 */
+	public double getAspectRatio() {
+		return getConfiguration().getAspectRatio();
+	}
 
 	/**
 	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina displays).

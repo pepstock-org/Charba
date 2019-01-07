@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.jsinterop.Controller;
 
 /**
@@ -29,10 +30,29 @@ import org.pepstock.charba.client.jsinterop.Controller;
  * @version 2.0
  */
 public final class Controllers {
+	
+	private static final Controllers INSTANCE =new Controllers();
 
 	// list of global controllers set by user (not OOTB)
 	// K = controller type name as string, V = controller instance
 	private final Map<String, Controller> controllers = new HashMap<>();
+
+	/**
+	 * To avoid any instantiation 
+	 */
+	private Controllers() {
+		// to be sure that chart.js has been injected
+		Injector.ensureInjected();
+	}
+	
+	/**
+	 * Singleton method to get static instance.
+	 * 
+	 * @return controller instance
+	 */
+	public static Controllers get() {
+		return INSTANCE;
+	}
 
 	/**
 	 * Registers a controller as global, to apply to all charts.

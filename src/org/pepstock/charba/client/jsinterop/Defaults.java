@@ -53,7 +53,7 @@ public final class Defaults {
 
 	/**
 	 * To avoid any instantiation.<br>
-	 * This gets from other objects 8by static references) the defaults of CHART.JS.
+	 * This gets from other objects (by static references) the defaults of CHART.JS.
 	 */
 	Defaults() {
 		// to be sure that chart.js has been injected
@@ -67,7 +67,7 @@ public final class Defaults {
 		// creates global plugins wrapping the plugins property of CHART
 		this.plugins = new GlobalPlugins(Chart.getPlugins());
 		// creates the controller object
-		this.controllers = new Controllers();
+		this.controllers = Controllers.get();
 	}
 
 	/**
@@ -105,7 +105,7 @@ public final class Defaults {
 	public GlobalPlugins getPlugins() {
 		return plugins;
 	}
-	
+
 	/**
 	 * Returns the controllers.
 	 * 
@@ -114,7 +114,7 @@ public final class Defaults {
 	public Controllers getControllers() {
 		return controllers;
 	}
-	
+
 	/**
 	 * Returns the default options by a chart type, for a existing chart instance
 	 * 
@@ -140,9 +140,9 @@ public final class Defaults {
 		// returns the existing options
 		return chartOptions.get(type.name());
 	}
-	
-	private static final class WrapperDefaults extends NativeObjectContainer{
-		
+
+	private static final class WrapperDefaults extends NativeObjectContainer {
+
 		/**
 		 * Name of properties of native object.
 		 */
@@ -158,16 +158,16 @@ public final class Defaults {
 		WrapperDefaults(NativeObject nativeObject) {
 			super(nativeObject);
 		}
-		
+
 		NativeObject getGlobal() {
 			return getValue(Property.global);
 		}
-		
+
 		NativeObject getScale() {
 			return getValue(Property.scale);
-			
+
 		}
-		
+
 		/**
 		 * Returns an options instance, to use as default options, based of type of chart.
 		 * 
@@ -184,7 +184,7 @@ public final class Defaults {
 				return new ChartOptions(type);
 			}
 		}
-		
+
 	}
 
 }

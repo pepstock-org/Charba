@@ -173,11 +173,9 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @param id The ID is used to link datasets and scale axes together
 	 */
 	public final void setId(String id) {
-		if (id != null) {
-			setValue(Property.id, id);
-			// checks if all parents are attached
-			checkAndAddToParent();
-		}
+		setValue(Property.id, id);
+		// checks if all parents are attached
+		checkAndAddToParent();
 	}
 
 	/**

@@ -21,7 +21,9 @@ import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.ChartNode;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
+import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.commons.NativeName;
+import org.pepstock.charba.client.jsinterop.commons.ObjectType;
 import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 
 import jsinterop.annotations.JsOverlay;
@@ -84,8 +86,11 @@ public final class Context {
 	 */
 	@JsOverlay
 	public final int getIndex() {
-		int value = getNativeIndex();
-		return value == Double.NaN ? UndefinedValues.INTEGER : value;
+		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "index"))){
+			return UndefinedValues.INTEGER;
+		} else {
+			return getNativeIndex();
+		}
 	}
 
 	/**
@@ -99,8 +104,9 @@ public final class Context {
 	}
 	
 	/**
-	 * FIXME
-	 * @return
+	 * Returns the chart node with runtime data.
+	 * 
+	 * @return the chart node.
 	 */
 	@JsOverlay
 	public final ChartNode getNode() {

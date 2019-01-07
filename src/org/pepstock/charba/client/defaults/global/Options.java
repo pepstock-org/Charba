@@ -318,8 +318,8 @@ public class Options extends AbstractItem {
 	/**
 	 * Canvas aspect ratio (i.e. width / height, a value of 1 representing a square canvas).<br>
 	 * Note that this option is ignored if the height is explicitly defined either as attribute or via the style.
-	 * Returns  the aspect ratio.
-	 * @return  the aspect ratio. Default is 2.
+	 * 
+	 * @return  the aspect ratio.
 	 */
 	public double getAspectRatio() {
 		return getValue(Property.aspectRatio, DEFAULT_ASPECT_RATIO);

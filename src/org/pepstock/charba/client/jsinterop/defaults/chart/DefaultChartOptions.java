@@ -209,6 +209,15 @@ public final class DefaultChartOptions implements IsDefaultScaledOptions {
 	public boolean isMaintainAspectRatio() {
 		return chartOptions.isMaintainAspectRatio();
 	}
+	
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getAspectRatio()
+	 */
+	@Override
+	public double getAspectRatio() {
+		return chartOptions.getAspectRatio();
+	}
 
 	/*
 	 * (non-Javadoc)

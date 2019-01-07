@@ -50,7 +50,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
  * @param <D> Dataset type for the specific chart
  */
 public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> extends SimplePanel implements IsChart<O, D> {
-	
+
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
 	// constant for WIDTH property
@@ -61,11 +61,11 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	private static final double DEFAULT_PCT_WIDTH = 90D;
 	// reference to Chart.js chart instance
 	private JavaScriptObject chart = null;
-	
+
 	// chart ID using GWT unique id
 	private final String id = Document.get().createUniqueId();
-	
-	// canvas prevent default handler 
+
+	// canvas prevent default handler
 	private final HandlerRegistration preventDisplayHandler;
 	// canvas where Chart.js draws the chart
 	final Canvas canvas;
@@ -99,23 +99,26 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 		// checks if canvas is supported
 		if (isCanvasSupported) {
 			// creates a canvas and add to DIV
-			//canvas = Document.get().createCanvasElement();
+			// canvas = Document.get().createCanvasElement();
 			canvas = Canvas.createIfSupported();
 			add(canvas);
 			// adds the listener to disable canvas selection
 			preventDisplayHandler = canvas.addMouseDownHandler(new MouseDownHandler() {
 
-				/* (non-Javadoc)
-				 * @see com.google.gwt.event.dom.client.MouseDownHandler#onMouseDown(com.google.gwt.event.dom.client.MouseDownEvent)
+				/*
+				 * (non-Javadoc)
+				 * 
+				 * @see
+				 * com.google.gwt.event.dom.client.MouseDownHandler#onMouseDown(com.google.gwt.event.dom.client.MouseDownEvent)
 				 */
 				@Override
 				public void onMouseDown(MouseDownEvent event) {
 					// removes the default behavior
 					event.preventDefault();
 				}
-				
+
 			});
-			//div.appendChild(canvas);
+			// div.appendChild(canvas);
 		} else {
 			// creates a header element
 			HeadingElement h = Document.get().createHElement(3);
@@ -144,25 +147,26 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	protected HandlerManager createHandlerManager() {
 		return new ChartHandlerManager(this);
 	}
-	
+
 	/**
 	 * Returns the ID of chart.<br>
 	 * It could be considered as chart unique ID.
 	 * 
 	 * @return the ID of chart
 	 */
-	public final String getId(){
+	public final String getId() {
 		return id;
 	}
-	
+
 	/**
 	 * Returns the canvas element
+	 * 
 	 * @return the canvas
 	 */
 	public final Canvas getCanvas() {
 		return canvas;
 	}
-	
+
 	/**
 	 * Remove the registration of prevent default mouse listener from canvas.<br>
 	 * This is necessary when you will add your mouse down listeber.
@@ -174,11 +178,11 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 			preventDisplayHandler.removeHandler();
 		}
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if CHART.JS chart has been initialized, otherwise <code>false</code>.
+	 * 
 	 * @return <code>true</code> if CHART.JS chart has been initialized, otherwise <code>false</code>.
-	 * FIXME to add to JSINTEROP impl
 	 */
 	public boolean isInitialized() {
 		return chart != null;
@@ -186,10 +190,11 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 
 	/**
 	 * Returns the chart node with runtime data.
+	 * 
 	 * @return the chart node.
 	 */
-	public final ChartNode getChartNode(){
-		return new ChartNode((GenericJavaScriptObject)chart);
+	public final ChartNode getChartNode() {
+		return new ChartNode((GenericJavaScriptObject) chart);
 	}
 
 	/**
@@ -212,7 +217,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	public GlobalOptions getGlobal() {
 		return options;
 	}
-	
+
 	/**
 	 * @return the drawOnAttach
 	 */
@@ -414,13 +419,12 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 		// returns null
 		return null;
 	}
-	
+
 	/**
 	 * Looks for the dataset that matches the event and returns that metadata.
 	 * 
 	 * @param event event of chart.
 	 * @return dataset meta data item.
-	 * FIXME to add to JSINTEROP impl
 	 */
 	public DatasetMetaItem getDatasetAtEvent(ChartNativeEvent event) {
 		// checks consistency of chart and event
@@ -433,13 +437,12 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 		// returns null;
 		return null;
 	}
-	
+
 	/**
 	 * Looks for the dataset if it's visible or not, selected by index.
 	 * 
 	 * @param index dataset index
-	 * @return <code>true</code> if dataset is visible otherwise <code>false</code>.
-	 * FIXME to add to JSINTEROP impl
+	 * @return <code>true</code> if dataset is visible otherwise <code>false</code>. 
 	 */
 	public boolean isDatasetVisible(int index) {
 		// checks consistency of chart and datasets
@@ -450,12 +453,12 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 		// returns false
 		return false;
 	}
-	
+
 	/**
 	 * Returns the amount of datasets which are visible
 	 * 
-	 * @return the amount of datasets which are visible. If chart is not initialized, return {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
-	 * FIXME to add to JSINTEROP impl
+	 * @return the amount of datasets which are visible. If chart is not initialized, return
+	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}. 
 	 */
 	public int getVisibleDatasetCount() {
 		// checks consistency of chart and datasets
@@ -466,8 +469,7 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 		// returns false
 		return UndefinedValues.INTEGER;
 	}
-	
-	
+
 	/**
 	 * Calling on your chart instance passing an argument of an event, will return the single element at the event position.<br>
 	 * If there are multiple items within range, only the first is returned.<br>
@@ -556,163 +558,172 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 * @param config configuration java script object.
 	 */
 	private native int drawChart(JavaScriptObject config, Context2d context)/*-{
-	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-	    chart = new $wnd.Chart(context, config);
-	    this.@org.pepstock.charba.client.AbstractChart::chart = chart;
-	    return chart.id;
-	}-*/;
+																			var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+																			chart = new $wnd.Chart(context, config);
+																			this.@org.pepstock.charba.client.AbstractChart::chart = chart;
+																			return chart.id;
+																			}-*/;
 
 	/**
 	 * Resizes the chart.
 	 */
 	private native void resizeChart()/*-{
-	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-	    chart.resize();
-	}-*/;
+										var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+										chart.resize();
+										}-*/;
 
 	/**
 	 * Updates the chart
+	 * 
 	 * @param config update configuration java script object.
 	 */
 	private native void updateChart(JavaScriptObject config)/*-{
-	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-	    if (config == null){
-	    	chart.update();
-	    } else {
-	    	chart.update(config);
-	    }
-	}-*/;
+															var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+															if (config == null){
+															chart.update();
+															} else {
+															chart.update(config);
+															}
+															}-*/;
 
 	/**
 	 * Renders the chart.
+	 * 
 	 * @param config update configuration java script object.
 	 */
 	private native void renderChart(JavaScriptObject config)/*-{
-	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-	    if (config == null){
-	    	chart.render();
-	    } else {
-	    	chart.render(config);
-	    }
-	}-*/;
+															var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+															if (config == null){
+															chart.render();
+															} else {
+															chart.render(config);
+															}
+															}-*/;
 
 	/**
 	 * Destroys the chart.
 	 */
 	private native void destroyChart()/*-{
-	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-	    chart.destroy();
-	}-*/;
+										var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+										chart.destroy();
+										}-*/;
 
 	/**
 	 * Stops the chart.
 	 */
 	private native void stopChart()/*-{
-	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-	    chart.stop();
-	}-*/;
+									var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+									chart.stop();
+									}-*/;
 
 	/**
 	 * Resets the chart.
 	 */
 	private native void resetChart()/*-{
-	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-	    chart.reset();
-	}-*/;
+									var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+									chart.reset();
+									}-*/;
 
 	/**
 	 * Clears the chart,
 	 */
 	private native void clearChart()/*-{
-	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-	    chart.clear();
-	}-*/;
+									var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+									chart.clear();
+									}-*/;
 
 	/**
 	 * Generates the legend of chart.
+	 * 
 	 * @return the legend of chart.
 	 */
 	private native String generateLegendChart()/*-{
-	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-	    return chart.generateLegend();
-	}-*/;
+												var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+												return chart.generateLegend();
+												}-*/;
 
 	/**
 	 * Gets the image (base 64) of the chart.
+	 * 
 	 * @return the image (base 64) of the chart.
 	 */
-    private native String toBase64ImageChart()/*-{
-		var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-	    if (chart != null){
-	        return chart.toBase64Image();
-	    }
-	    return null;
-	}-*/;
-    
-    /**
-     * Gets the element of the chart, selected by event.
-     * @param event event of get the element.
-     * @return dataset meta data item.
-     */
+	private native String toBase64ImageChart()/*-{
+												var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+												if (chart != null){
+												return chart.toBase64Image();
+												}
+												return null;
+												}-*/;
+
+	/**
+	 * Gets the element of the chart, selected by event.
+	 * 
+	 * @param event event of get the element.
+	 * @return dataset meta data item.
+	 */
 	private native GenericJavaScriptObject getChartElementAtEvent(JavaScriptObject event)/*-{
-	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-		var items = chart.getElementAtEvent(event);
-		if (items.length == 1){
-			return items[0];
-	    }
-	    return null;
-	}-*/;
+																							var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+																							var items = chart.getElementAtEvent(event);
+																							if (items.length == 1){
+																							return items[0];
+																							}
+																							return null;
+																							}-*/;
 
 	/**
 	 * Gets the elements of the chart, selected by event.
+	 * 
 	 * @param event event of get the elements.
 	 * @return dataset meta data items.
 	 */
 	private native GenericJavaScriptObject getChartElementsAtEvent(JavaScriptObject event)/*-{
-	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-		return chart.getElementsAtEvent(event);
-	}-*/;
+																							var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+																							return chart.getElementsAtEvent(event);
+																							}-*/;
 
 	/**
 	 * Gets the dataset of the chart, selected by event.
+	 * 
 	 * @param event event of get the dataset.
 	 * @return dataset meta data items.
 	 */
 	private native GenericJavaScriptObject getChartDatasetAtEvent(JavaScriptObject event)/*-{
-	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-		return chart.getDatasetAtEvent(event);
-	}-*/;
-	
+																							var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+																							return chart.getDatasetAtEvent(event);
+																							}-*/;
+
 	/**
 	 * Gets the dataset meta data array of the chart, selected by index.
+	 * 
 	 * @param datasetIndex dataset index
 	 * @return dataset meta data items.
 	 */
 	private native GenericJavaScriptObject getChartDatasetMeta(int datasetIndex)/*-{
-	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-		return chart.getDatasetMeta(datasetIndex);
-	}-*/;
+																				var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+																				return chart.getDatasetMeta(datasetIndex);
+																				}-*/;
 
 	/**
 	 * Gets if the dataset is visible or not, selected by index.
+	 * 
 	 * @param datasetIndex dataset index
 	 * @return <code>true</code> if dataset is visible otherwise <code>false</code>.
 	 */
 	private native boolean isChartDatasetVisible(int datasetIndex)/*-{
-	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-		return chart.isDatasetVisible(datasetIndex);
-	}-*/;
+																	var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+																	return chart.isDatasetVisible(datasetIndex);
+																	}-*/;
 
 	/**
 	 * Gets the amount of datasets which are visible
+	 * 
 	 * @return the amount of datasets which are visible
 	 */
 	private native int getChartVisibleDatasetCount()/*-{
-	    var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
-		return chart.getVisibleDatasetCount();
-	}-*/;
+													var chart = this.@org.pepstock.charba.client.AbstractChart::chart;
+													return chart.getVisibleDatasetCount();
+													}-*/;
 
-	
 	/**
 	 * Builds the configuration using the defaults global both for chart and for the specific chart.
 	 * 
@@ -720,27 +731,27 @@ public abstract class AbstractChart<O extends BaseOptions, D extends Dataset> ex
 	 * @return java script object with merged configuration.
 	 */
 	private native GenericJavaScriptObject createGlobalOptions(String chartType) /*-{
-		var chartOptions = new Object();
-		if ($wnd.Chart.defaults.hasOwnProperty(chartType)){
-			chartOptions = $wnd.Chart.helpers.clone($wnd.Chart.defaults[chartType]);
-		}
-		var scaleOptions = $wnd.Chart.helpers.clone($wnd.Chart.defaults.scale);
-	    var globalOptions = $wnd.Chart.helpers.clone($wnd.Chart.defaults.global);
-		
-		if (chartOptions.hasOwnProperty("scale")){
-			var scaleChartOptions = $wnd.Chart.helpers.mergeIf(chartOptions.scale, scaleOptions);
-		} else if (chartOptions.hasOwnProperty("scales")){
-			var xAxes = chartOptions.scales.xAxes;
-			for (var i=0; i<xAxes.length; i++){
-				$wnd.Chart.helpers.mergeIf(xAxes[i], scaleOptions, xAxes[i]);
-			}
-			var yAxes = chartOptions.scales.yAxes;
-			for (var i=0; i<yAxes.length; i++){
-				$wnd.Chart.helpers.mergeIf(yAxes[i], scaleOptions);
-			}
-		}
-	    $wnd.Chart.helpers.mergeIf(chartOptions, globalOptions);
-	    return chartOptions;
-	}-*/;
+																					var chartOptions = new Object();
+																					if ($wnd.Chart.defaults.hasOwnProperty(chartType)){
+																					chartOptions = $wnd.Chart.helpers.clone($wnd.Chart.defaults[chartType]);
+																					}
+																					var scaleOptions = $wnd.Chart.helpers.clone($wnd.Chart.defaults.scale);
+																					var globalOptions = $wnd.Chart.helpers.clone($wnd.Chart.defaults.global);
+																					
+																					if (chartOptions.hasOwnProperty("scale")){
+																					var scaleChartOptions = $wnd.Chart.helpers.mergeIf(chartOptions.scale, scaleOptions);
+																					} else if (chartOptions.hasOwnProperty("scales")){
+																					var xAxes = chartOptions.scales.xAxes;
+																					for (var i=0; i<xAxes.length; i++){
+																					$wnd.Chart.helpers.mergeIf(xAxes[i], scaleOptions, xAxes[i]);
+																					}
+																					var yAxes = chartOptions.scales.yAxes;
+																					for (var i=0; i<yAxes.length; i++){
+																					$wnd.Chart.helpers.mergeIf(yAxes[i], scaleOptions);
+																					}
+																					}
+																					$wnd.Chart.helpers.mergeIf(chartOptions, globalOptions);
+																					return chartOptions;
+																					}-*/;
 
- }
+}

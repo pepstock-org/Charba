@@ -63,9 +63,12 @@ abstract class ConfigurationContainer<T extends NativeObjectContainer> extends C
 	}
 	
 	/**
-	 * FIXME
-	 * @param source
-	 * @param property
+	 * Merge a native object into this one with a specific property name.<br>
+	 * This is used by plugins implementation (antive java script ones) when tehy are not using
+	 * the standard way to add puglin configuration into options of chart.
+	 * 
+	 * @param source native object container to add
+	 * @param property property name 
 	 */
 	public final void merge(NativeObjectContainer source, String property) {
 		Merger.get().merge(getConfiguration(), source, property);

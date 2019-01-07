@@ -534,7 +534,7 @@ public abstract class BaseOptions extends EventProvider {
 	
 	/**
 	 * Sets the java script code to activate the call back, adding functions.
-	 * FIXME it could be great that even if no datasets are selected, the event will fire anyway
+	 * 
 	 * @param options
 	 *            java script object where adding new functions definition.
 	 */
