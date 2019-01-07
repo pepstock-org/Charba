@@ -54,7 +54,7 @@ public final class ChartNode {
 	 * 
 	 * @param chart CHART.JS CHART instance
 	 */
-	ChartNode(Chart chart) {
+	public ChartNode(Chart chart) {
 		this.chart = chart;
 		// creates all sub elements
 		options = new OptionsNode(chart != null ? chart.getOptions() : null);

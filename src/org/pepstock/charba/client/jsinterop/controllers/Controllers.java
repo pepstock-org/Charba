@@ -19,73 +19,64 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.jsinterop.Controller;
-import org.pepstock.charba.client.jsinterop.Defaults;
-import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 /**
- * Glabal configuration to set controllers at global level.<br>
+ * Global configuration to set controllers at global level.<br>
  * It maps the CHART.JS object of controller, <code>chart.controllers</code>.<br>
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
-public final class Controllers extends NativeObjectContainer {
+public final class Controllers {
 
 	// list of global controllers set by user (not OOTB)
+	// K = controller type name as string, V = controller instance
 	private final Map<String, Controller> controllers = new HashMap<>();
-	// CHART.JS dataset controller
-	private final NativeDatasetController datasetController;
 
 	/**
-	 * @param datasetController
-	 */
-	public Controllers(NativeObject controllers, NativeDatasetController datasetController) {
-		super(controllers);
-		this.datasetController = datasetController;
-	}
-
-	/**
-	 * Registers a controller as global, to apply to all charts. 
+	 * Registers a controller as global, to apply to all charts.
+	 * 
 	 * @param controller controller instance
-	 * @return <code>true</code> if registered, otherwise <code>false</code> if the controller is already registered with the controller type of controller instance.
-	 * @throws InvalidControllerTypeException  if the controller type is not correct.
+	 * @return <code>true</code> if registered, otherwise <code>false</code> if the controller is already registered with the
+	 *         controller type of controller instance.
+	 * @throws InvalidControllerTypeException if the controller type is not correct.
 	 */
-	public boolean extend(Controller controller) throws InvalidControllerTypeException{
+	public boolean extend(Controller controller) throws InvalidControllerTypeException {
 		// checks the consistency of controller
 		// and creates a java script object, wrapper of the controller
 		WrapperController wController = check(controller);
 		// checks if consistent
 		if (wController != null) {
-			// gets the chart type to extend
-			ChartType chartType = controller.getChartType();
+			// gets the controller type
+			ControllerType type = controller.getType();
 			// if not null, the controller extends an existing chart
-			if (chartType != null) {
-				extendController(controller.getType(), chartType, wController.getObject());
+			if (type.isExtended()) {
+				// extends an existing chart
+				JsControllerHelper.get().extend(type, type.getChartType(), wController.getObject());
 				return true;
 			} else {
 				// if here, the controller is new TYPE (no extend)
-				registerController(controller.getType(), wController.getObject());
+				JsControllerHelper.get().register(type, wController.getObject());
 				return true;
 			}
 		}
 		// controller already exists
 		return false;
 	}
-	
+
 	/**
 	 * Checks the consistency of controller type and creates a wrapper.
+	 * 
 	 * @param controller controller implementation
-	 * @return 
+	 * @return the wrapper controller instance or <code>null</code> if there is any error.
 	 * @throws InvalidControllerTypeException if the controller type is not correct.
 	 */
 	private WrapperController check(Controller controller) throws InvalidControllerTypeException {
 		// checks the controller type
 		ControllerTypeChecker.check(controller.getType());
 		// checks if type is already registered
-		if (controllers.containsKey(controller.getType().name())){
+		if (controllers.containsKey(controller.getType().name())) {
 			return null;
 		}
 		// stores the type into a set
@@ -95,42 +86,38 @@ public final class Controllers extends NativeObjectContainer {
 	}
 
 	/**
-	 * Gets all global registered controllers ids.
-	 * @return all global registered controllers ids.
+	 * Checks if the controller is registered by its type.
+	 * 
+	 * @param type type of new chart as string.
+	 * @return <code>true</code> if registered, otherwise <code>false</code>.
 	 */
-	public Set<String> getTypeNames(){
-		return controllers.keySet();
+	public boolean isRegistered(String type) {
+		return controllers.containsKey(type);
 	}
 	
+	/**
+	 * Gets all global registered controllers ids.
+	 * 
+	 * @return all global registered controllers ids.
+	 */
+	public Set<String> getTypeNames() {
+		return controllers.keySet();
+	}
+
+	/**
+	 * Returns the controller type by name as string.
+	 * 
+	 * @param type controller type as string.
+	 * @return the controller type if exists or <code>null</code> if does not exist.
+	 */
 	public ControllerType getTypeByString(String type) {
+		// checks in the map of controller
 		if (controllers.containsKey(type)) {
+			// gets controller
 			Controller controller = controllers.get(type);
+			// returns controller type
 			return controller.getType();
 		}
 		return null;
 	}
-
-	/**
-	 * Calls <code>Chart.DatasetController.extend</code> function to register a controller.
-	 * 
-	 * @param instance controller instance.
-	 */
-	private void registerController(ControllerType controllerType, NativeObject instance) {
-		setValue(controllerType, datasetController.extend(instance));
-	}
-
-	/**
-	 * Calls <code>Chart.controllers[chartType].extend</code> function to register a controller, extending an existing chart type.
-	 * 
-	 * @param instance controller instance.
-	 */
-	private void extendController(ControllerType controllerType, ChartType chartType, NativeObject instance) {
-		Defaults.get().addControllerOptions(controllerType, chartType);
-		registerController(controllerType, instance);
-	}
-//	
-//		$wnd.Chart.defaults[controllerType] = $wnd.Chart.defaults[chartType];
-//		$wnd.Chart.controllers[controllerType] = $wnd.Chart.controllers[chartType].extend(instance);
-//	}-*/;
-
 }

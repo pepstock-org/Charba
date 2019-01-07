@@ -136,7 +136,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		// creates plugins container
 		plugins = new Plugins(this);
 		// creates global options
-		options = Defaults.get().options(getType());
+		options = createChartOptions();
 	}
 
 	/*
@@ -214,13 +214,23 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	public final Plugins getPlugins() {
 		return plugins;
 	}
+	
+	/**
+	 * Creates the chart options based on type of chart.<br>
+	 * It can be override when a controller is implemented.
+	 *  
+	 * @return  the chart options based on type of chart.
+	 */
+	protected ChartOptions createChartOptions() {
+		return Defaults.get().options(getType());
+	}
 
 	/**
 	 * Returns the default options created based on chart type.
 	 * 
 	 * @return the default options of the chart
 	 */
-	final ChartOptions getChartOptions() {
+	protected final ChartOptions getChartOptions() {
 		return options;
 	}
 

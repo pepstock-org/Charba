@@ -13,30 +13,28 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.jsinterop.controllers;
+package org.pepstock.charba.client.jsinterop.impl.charts;
+
+import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.ChartOptions;
 
 /**
- * Exception created when the controller type is not valid.<br>
- * A controller type <br>
- * <ul>
- * <li>can not start with a dot or an underscore
- * <li>can not contain any non-URL-safe characters
- * </ul>
+ * Specific options for GAUGE chart. This chart doesn't allow any legend, hover, layout and tooltips components.
  * 
  * @author Andrea "Stock" Stocchero
  * @version 2.0
  *
  */
-public class InvalidControllerTypeException extends Exception {
-
-	private static final long serialVersionUID = 1L;
+public class GaugeOptions extends MeterOptions {
 
 	/**
-	 * Builds the exception using the message explaining why the type is not valid.
+	 * Builds the object storing the chart instance.
 	 * 
-	 * @param message explaination why the type is not valid.
+	 * @param chart chart instance
 	 */
-	public InvalidControllerTypeException(String message) {
-		super(message);
+	public GaugeOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
+		super(chart, defaultValues);
 	}
+
+
 }

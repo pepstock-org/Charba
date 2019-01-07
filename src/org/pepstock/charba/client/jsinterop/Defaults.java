@@ -18,7 +18,6 @@ package org.pepstock.charba.client.jsinterop;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.Key;
@@ -26,7 +25,6 @@ import org.pepstock.charba.client.jsinterop.commons.Merger;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 import org.pepstock.charba.client.jsinterop.commons.ObjectType;
-import org.pepstock.charba.client.jsinterop.controllers.ControllerType;
 import org.pepstock.charba.client.jsinterop.controllers.Controllers;
 import org.pepstock.charba.client.jsinterop.plugins.GlobalPlugins;
 
@@ -69,7 +67,7 @@ public final class Defaults {
 		// creates global plugins wrapping the plugins property of CHART
 		this.plugins = new GlobalPlugins(Chart.getPlugins());
 		// creates the controller object
-		this.controllers = new Controllers(Chart.getControllers(), Chart.getDatasetController());
+		this.controllers = new Controllers();
 	}
 
 	/**
@@ -117,10 +115,6 @@ public final class Defaults {
 		return controllers;
 	}
 	
-	public void addControllerOptions(ControllerType type, ChartType parent) {
-		wrapperDefaults.addControllerOptions(type, parent);
-	}
-
 	/**
 	 * Returns the default options by a chart type, for a existing chart instance
 	 * 
@@ -172,12 +166,6 @@ public final class Defaults {
 		NativeObject getScale() {
 			return getValue(Property.scale);
 			
-		}
-		
-		void addControllerOptions(ControllerType type, ChartType parent) {
-			if (has(parent)) {
-				setValue(type, getValue(parent));
-			}
 		}
 		
 		/**

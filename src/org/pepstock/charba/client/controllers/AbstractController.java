@@ -131,6 +131,8 @@ public abstract class AbstractController implements Controller {
 	 */
 	private native void invokeAddElements(String controllerType, GenericJavaScriptObject jsThis)/*-{
 		$wnd.Chart.controllers[controllerType].prototype.addElements.call(jsThis);
+		console.log(jsThis);
+		jsThis.pippo.pluto();
 	}-*/;
 	
 	/**

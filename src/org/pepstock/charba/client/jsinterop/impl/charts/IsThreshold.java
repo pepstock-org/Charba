@@ -13,30 +13,34 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.jsinterop.controllers;
+package org.pepstock.charba.client.jsinterop.impl.charts;
+
+import org.pepstock.charba.client.colors.IsColor;
 
 /**
- * Exception created when the controller type is not valid.<br>
- * A controller type <br>
- * <ul>
- * <li>can not start with a dot or an underscore
- * <li>can not contain any non-URL-safe characters
- * </ul>
+ * Interface tomap a threshold. Needed for standard ones.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
- *
+ * @see GaugeThreshold
  */
-public class InvalidControllerTypeException extends Exception {
-
-	private static final long serialVersionUID = 1L;
-
+public interface IsThreshold {
+	
 	/**
-	 * Builds the exception using the message explaining why the type is not valid.
-	 * 
-	 * @param message explaination why the type is not valid.
+	 * Returns the name of threshold.
+	 * @return the name of threshold.
 	 */
-	public InvalidControllerTypeException(String message) {
-		super(message);
-	}
+	String getName();
+	
+	/**
+	 * Returns the value of threshold.
+	 * @return the value of threshold.
+	 */
+	double getValue();
+	
+	/**
+	 * Returns the color of threshold.
+	 * @return the color of threshold.
+	 */
+	IsColor getColor();
+
 }

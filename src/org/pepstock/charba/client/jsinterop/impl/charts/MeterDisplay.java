@@ -13,30 +13,33 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.jsinterop.controllers;
+package org.pepstock.charba.client.jsinterop.impl.charts;
+
+import org.pepstock.charba.client.commons.Key;
 
 /**
- * Exception created when the controller type is not valid.<br>
- * A controller type <br>
- * <ul>
- * <li>can not start with a dot or an underscore
- * <li>can not contain any non-URL-safe characters
- * </ul>
+ * Determines which information must be displaied into meter or gauge chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
  *
  */
-public class InvalidControllerTypeException extends Exception {
-
-	private static final long serialVersionUID = 1L;
-
+public enum MeterDisplay implements Key
+{
 	/**
-	 * Builds the exception using the message explaining why the type is not valid.
-	 * 
-	 * @param message explaination why the type is not valid.
+	 * Shows only the value
 	 */
-	public InvalidControllerTypeException(String message) {
-		super(message);
-	}
+	value,
+	/**
+	 * Shows the percentage 
+	 */
+	percentage,
+	/**
+	 * Shows value and label
+	 */
+	valueAndLabel,
+	/**
+	 * Shows percentage and label
+	 */
+	percentageAndLabel
+
 }

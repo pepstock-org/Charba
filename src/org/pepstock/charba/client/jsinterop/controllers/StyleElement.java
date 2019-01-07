@@ -21,20 +21,21 @@ import org.pepstock.charba.client.jsinterop.items.DatasetItem;
 import org.pepstock.charba.client.jsinterop.items.ScaleItem;
 
 /**
- * Element used by controller by <code>removeHoverStyle</code> and <code>setHoverStyle</code> methods.
- * It contrians information about the dataset, chart and scales to use.
+ * Element used by controller by <code>removeHoverStyle</code> and <code>setHoverStyle</code> methods. It contrians information
+ * about the dataset, chart and scales to use.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public final class StyleElement extends DatasetItem {
-	
+
 	private final InternalScaleItem xScale;
-	
+
 	private final InternalScaleItem yScale;
 
 	/**
-	 * Needed for GWt injection
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -45,7 +46,7 @@ public final class StyleElement extends DatasetItem {
 	/**
 	 * Wraps the CHART.JS java script object.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * @param nativeObject CHART.JS java script object
 	 */
 	StyleElement(NativeObject nativeObject) {
 		super(nativeObject);
@@ -65,7 +66,8 @@ public final class StyleElement extends DatasetItem {
 
 	/**
 	 * Returns the X scale instance.
-	 * @return  the X scale instance otherwise <code>null</code> if not exists.
+	 * 
+	 * @return the X scale instance otherwise <code>null</code> if not exists.
 	 */
 	public ScaleItem getXScale() {
 		return xScale;
@@ -73,37 +75,39 @@ public final class StyleElement extends DatasetItem {
 
 	/**
 	 * Returns the Y scale instance.
-	 * @return  the Y scale instance otherwise <code>null</code> if not exists.
+	 * 
+	 * @return the Y scale instance otherwise <code>null</code> if not exists.
 	 */
 	public ScaleItem getYScale() {
 		return yScale;
 	}
-	
+
 	/**
-	 * FIXME
-	 * @return
+	 * Returns the native object of this element.
+	 * 
+	 * @return the native object.
 	 */
 	NativeObject getObject() {
 		return super.getNativeObject();
 	}
-	
+
 	/**
 	 * Internal class to extend scale items.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	protected static class InternalScaleItem extends ScaleItem{
+	protected static class InternalScaleItem extends ScaleItem {
 
 		/**
 		 * Wraps the CHART.JS java script object.
 		 * 
-		 * @param javaScriptObject CHART.JS java script object
+		 * @param nativeObject CHART.JS java script object
 		 */
 		protected InternalScaleItem(NativeObject javaScriptObject) {
 			super(javaScriptObject);
 		}
-		
+
 	}
-	
+
 }

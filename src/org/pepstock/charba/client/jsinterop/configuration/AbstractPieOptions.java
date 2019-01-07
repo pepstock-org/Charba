@@ -24,7 +24,7 @@ import org.pepstock.charba.client.jsinterop.ChartOptions;
  * @author Andrea "Stock" Stocchero
  * @version 2.0
  */
-abstract class AbstractPieOptions extends ConfigurationOptions {
+public abstract class AbstractPieOptions extends ConfigurationOptions {
 
 	/**
 	 * Builds the object storing the chart instance and defaults.

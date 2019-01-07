@@ -22,8 +22,9 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script objects.<br>
- * This script will be injected with CHART.JS.
+ * This is a Java native object which is wrapping a CHARBA java script object implementation with some utilities to manage
+ * CHART.JS controllers.<br>
+ * This wrapper is necessary to ensure that script is injected with CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
@@ -40,8 +41,26 @@ final class NativeJsControllerHelper {
 	}
 
 	/**
+	 * Register the controller which does not extend any existing one.
+	 * 
+	 * @param controllerType controller type
+	 * @param instance controller java script instance
+	 */
+	static native void register(String controllerType, NativeObject object);
+
+	/**
+	 * Extends an existing chart with a controller implementation.
+	 * 
+	 * @param controllerType controller type
+	 * @param chartType type of extended chart
+	 * @param instance controller java script instance
+	 */
+	static native void extend(String controllerType, String chartType, NativeObject object);
+
+	/**
 	 * Invokes the default <code>initialize</code> method.
-	 * @param chartType extended chart type 
+	 * 
+	 * @param chartType extended chart type
 	 * @param context context of controller
 	 * @param datasetIndex dataset index
 	 */
@@ -49,14 +68,16 @@ final class NativeJsControllerHelper {
 
 	/**
 	 * Invokes the default <code>AddElements</code> method.
-	 * @param chartType extended chart type 
+	 * 
+	 * @param chartType extended chart type
 	 * @param context context of controller
 	 */
 	static native void addElements(String chartType, Context context);
-	
+
 	/**
 	 * Invokes the default <code>addElementAndReset</code> method.
-	 * @param chartType extended chart type 
+	 * 
+	 * @param chartType extended chart type
 	 * @param context context of controller
 	 * @param index dataset index
 	 */
@@ -64,7 +85,8 @@ final class NativeJsControllerHelper {
 
 	/**
 	 * Invokes the default <code>draw</code> method.
-	 * @param chartType extended chart type 
+	 * 
+	 * @param chartType extended chart type
 	 * @param context context of controller
 	 * @param ease if specified, this number represents how far to transition elements.
 	 */
@@ -72,7 +94,8 @@ final class NativeJsControllerHelper {
 
 	/**
 	 * Invokes the default <code>removeHoverStyle</code> method.
-	 * @param chartType extended chart type 
+	 * 
+	 * @param chartType extended chart type
 	 * @param context context of controller
 	 * @param element element to be remove.
 	 */
@@ -80,7 +103,8 @@ final class NativeJsControllerHelper {
 
 	/**
 	 * Invokes the default <code>setHoverStyle</code> method.
-	 * @param chartType extended chart type 
+	 * 
+	 * @param chartType extended chart type
 	 * @param context context of controller
 	 * @param element element to be set.
 	 */
@@ -88,9 +112,10 @@ final class NativeJsControllerHelper {
 
 	/**
 	 * Invokes the default <code>update</code> method.
-	 * @param chartType extended chart type 
+	 * 
+	 * @param chartType extended chart type
 	 * @param context context of controller
-	 * @param reset if true, put the elements into a reset state so they can animate to their final values 
+	 * @param reset if true, put the elements into a reset state so they can animate to their final values
 	 */
 	static native void update(String chartType, Context context, boolean reset);
 

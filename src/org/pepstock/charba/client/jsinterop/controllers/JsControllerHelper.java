@@ -21,7 +21,7 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**
  * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
- * utilities to act on java script objects.<br>
+ * utilities to manage CHART.JS controllers.<br>
  * This wrapper is necessary to ensure that script is injected with CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
@@ -47,6 +47,27 @@ final class JsControllerHelper {
 	 */
 	static JsControllerHelper get() {
 		return INSTANCE;
+	}
+	
+	/**
+	 * Register the controller which does not extend any existing one.
+	 * 
+	 * @param controllerType controller type
+	 * @param instance controller java script instance
+	 */
+	void register(ControllerType controllerType, NativeObject instance) {
+		NativeJsControllerHelper.register(controllerType.name(), instance);
+	}
+
+	/**
+	 * Extends an existing chart with a controller implementation.
+	 * 
+	 * @param controllerType controller type
+	 * @param chartType type of extended chart
+	 * @param instance controller java script instance
+	 */
+	void extend(ControllerType controllerType, ChartType chartType, NativeObject instance) {
+		NativeJsControllerHelper.extend(controllerType.name(), chartType.name(), instance);
 	}
 
 	/**

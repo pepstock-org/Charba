@@ -25,7 +25,6 @@
     	obj.callback = null;
     	obj.proxy = function() {
         	if (obj.callback != null && typeof obj.callback === 'function'){
-        	    //console.log(this);
 				var args = Array.of(this).concat(Array.prototype.slice.call(arguments));
 				var result = obj.callback.apply(this, args);
 				if (result === null){
@@ -43,11 +42,18 @@
     	return obj;
     }
     function JsControllerHelper() {};
+    JsControllerHelper.register = function(controllerType, instance) {
+    	Chart.controllers[controllerType] = Chart.DatasetController.extend(instance);
+    }
+    JsControllerHelper.extend = function(controllerType, chartType, instance) {
+		Chart.defaults[controllerType] = Chart.defaults[chartType];
+		Chart.controllers[controllerType] = Chart.controllers[chartType].extend(instance);
+    }
     JsControllerHelper.initialize = function(controllerType, context, datasetIndex) {
     	Chart.controllers[controllerType].prototype.initialize.call(context, context.chart, datasetIndex);
     }
     JsControllerHelper.addElements = function(controllerType, context) {
-    	Chart.controllers[controllerType].prototype.addElements.call(context);
+       	Chart.controllers[controllerType].prototype.addElements.call(context);
     }
     JsControllerHelper.addElementAndReset = function(controllerType, context, index) {
     	Chart.controllers[controllerType].prototype.addElementAndReset.call(context, index);

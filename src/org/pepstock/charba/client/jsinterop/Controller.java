@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.jsinterop;
 
-import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.jsinterop.controllers.Context;
 import org.pepstock.charba.client.jsinterop.controllers.ControllerType;
 import org.pepstock.charba.client.jsinterop.controllers.StyleElement;
@@ -37,14 +36,6 @@ public interface Controller {
 	 */
 	ControllerType getType();
 	
-	/**
-	 * Controller must define the extended chart to use.<br>
-	 * If the controller does not extend any existing chart, returns <code>null</code>
-	 * 
-	 * @return chart type extended by controller. <code>null</code> if the controller does not extend any chart.
-	 */
-	ChartType getChartType();
-
 	/**
 	 * Initializes the controller.
 	 * 

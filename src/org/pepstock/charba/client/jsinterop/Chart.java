@@ -19,7 +19,6 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.Id;
 import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-import org.pepstock.charba.client.jsinterop.controllers.NativeDatasetController;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
 import org.pepstock.charba.client.jsinterop.plugins.NativePlugins;
 
@@ -64,22 +63,6 @@ public final class Chart {
 	 */
 	@JsProperty
 	static native NativePlugins getPlugins();
-	
-	/**
-	 * Returns the <code>datasetController</code> property by native object.
-	 * 
-	 * @return the <code>datasetController</code> property by native object.
-	 */
-	@JsProperty
-	static native NativeDatasetController getDatasetController();
-	
-	/**
-	 * Returns the <code>controllers</code> property by native object.
-	 * 
-	 * @return the <code>controllers</code> property by native object.
-	 */
-	@JsProperty
-	static native NativeObject getControllers();
 	
 	/**
 	 * Builds CHART object at CHART.JS level.<br>

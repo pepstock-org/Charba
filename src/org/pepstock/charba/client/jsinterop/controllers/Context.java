@@ -18,6 +18,7 @@ package org.pepstock.charba.client.jsinterop.controllers;
 import java.util.List;
 
 import org.pepstock.charba.client.jsinterop.Chart;
+import org.pepstock.charba.client.jsinterop.ChartNode;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.NativeName;
@@ -50,7 +51,15 @@ public final class Context {
 	 * @return the <code>chart</code> property by native object.
 	 */
 	@JsProperty(name = "chart")
-	static native Chart getNativeChart();
+	native Chart getNativeChart();
+	
+	/**
+	 * Sets the <code>chart</code> property by native object.
+	 * 
+	 * @param chart the <code>chart</code> property by native object.
+	 */
+	@JsProperty(name = "chart")
+	native void setNativeChart(Chart chart);
 
 	/**
 	 * Returns the <code>index</code> property by native object.
@@ -58,7 +67,7 @@ public final class Context {
 	 * @return the <code>index</code> property by native object.
 	 */
 	@JsProperty(name = "index")
-	static native int getNativeIndex();
+	native int getNativeIndex();
 
 	/**
 	 * Returns the <code>_data</code> property by native object.
@@ -66,7 +75,7 @@ public final class Context {
 	 * @return the <code>_data</code> property by native object.
 	 */
 	@JsProperty(name = "_data")
-	static native ArrayInteger getNativeData();
+	native ArrayInteger getNativeData();
 
 	/**
 	 * Returns the index of the data inside the dataset.
@@ -87,6 +96,15 @@ public final class Context {
 	@JsOverlay
 	public final String getCharbaId() {
 		return getNativeChart().getCharbaId();
+	}
+	
+	/**
+	 * FIXME
+	 * @return
+	 */
+	@JsOverlay
+	public final ChartNode getNode() {
+		return new ChartNode(getNativeChart());
 	}
 
 	/**

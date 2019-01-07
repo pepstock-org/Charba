@@ -23,19 +23,20 @@ import org.pepstock.charba.client.jsinterop.Controller;
  * the default implementation of parent chart.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  *
  */
 public abstract class AbstractController implements Controller {
-
+	
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.Controller#initialize(org.pepstock.charba.client.controllers.Context, org.pepstock.charba.client.AbstractChart, int)
 	 */
 	@Override
 	public void initialize(Context context, AbstractChart<?, ?> chart, int datasetIndex) {
 		// if chart type is consistent
-		if (getChartType() != null) {
+		if (getType().isExtended()) {
 			// invokes default 
-			JsControllerHelper.get().initialize(getChartType(), context, datasetIndex);
+			JsControllerHelper.get().initialize(getType().getChartType(), context, datasetIndex);
 		}
 	}
 
@@ -45,9 +46,9 @@ public abstract class AbstractController implements Controller {
 	@Override
 	public void addElements(Context context, AbstractChart<?, ?> chart) {
 		// if chart type is consistent
-		if (getChartType() != null) {
+		if (getType().isExtended()) {
 			// invokes default 
-			JsControllerHelper.get().addElements(getChartType(), context);
+			JsControllerHelper.get().addElements(getType().getChartType(), context);
 		}
 	}
 
@@ -57,9 +58,9 @@ public abstract class AbstractController implements Controller {
 	@Override
 	public void addElementAndReset(Context context, AbstractChart<?, ?> chart, int index) {
 		// if chart type is consistent
-		if (getChartType() != null) {
+		if (getType().isExtended()) {
 			// invokes default 
-			JsControllerHelper.get().addElementAndReset(getChartType(), context, index);
+			JsControllerHelper.get().addElementAndReset(getType().getChartType(), context, index);
 		}
 	}
 
@@ -69,9 +70,9 @@ public abstract class AbstractController implements Controller {
 	@Override
 	public void draw(Context context, AbstractChart<?, ?> chart, double ease) {
 		// if chart type is consistent
-		if (getChartType() != null) {
+		if (getType().isExtended()) {
 			// invokes default 
-			JsControllerHelper.get().draw(getChartType(), context, ease);
+			JsControllerHelper.get().draw(getType().getChartType(), context, ease);
 		}
 	}
 
@@ -81,9 +82,9 @@ public abstract class AbstractController implements Controller {
 	@Override
 	public void removeHoverStyle(Context context, AbstractChart<?, ?> chart, StyleElement element) {
 		// if chart type is consistent
-		if (getChartType() != null) {
+		if (getType().isExtended()) {
 			// invokes default 
-			JsControllerHelper.get().removeHoverStyle(getChartType(), context, element.getObject());
+			JsControllerHelper.get().removeHoverStyle(getType().getChartType(), context, element.getObject());
 		}
 	}
 
@@ -93,9 +94,9 @@ public abstract class AbstractController implements Controller {
 	@Override
 	public void setHoverStyle(Context context, AbstractChart<?, ?> chart, StyleElement element) {
 		// if chart type is consistent
-		if (getChartType() != null) {
+		if (getType().isExtended()) {
 			// invokes default 
-			JsControllerHelper.get().setHoverStyle(getChartType(), context, element.getObject());
+			JsControllerHelper.get().setHoverStyle(getType().getChartType(), context, element.getObject());
 		}
 	}
 
@@ -105,9 +106,9 @@ public abstract class AbstractController implements Controller {
 	@Override
 	public void update(Context context, AbstractChart<?, ?> chart, boolean reset) {
 		// if chart type is consistent
-		if (getChartType() != null) {
+		if (getType().isExtended()) {
 			// invokes default 
-			JsControllerHelper.get().update(getChartType(), context, reset);
+			JsControllerHelper.get().update(getType().getChartType(), context, reset);
 		}
 	}
 }
