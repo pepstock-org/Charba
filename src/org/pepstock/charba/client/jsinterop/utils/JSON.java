@@ -13,7 +13,7 @@ public class JSON {
     
     @JsOverlay
     public static String stringify(Object obj) {
-    	return stringify(obj, null, 2);
+    	return stringify(obj, null, -1);
     }
     
     @JsOverlay

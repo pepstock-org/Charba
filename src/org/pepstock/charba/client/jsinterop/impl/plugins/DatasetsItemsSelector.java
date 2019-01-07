@@ -43,6 +43,8 @@ import com.google.gwt.user.client.ui.Image;
  */
 public final class DatasetsItemsSelector extends AbstractPlugin {
 	
+	//FIXME global(multicharts) is missing
+	
 	// handler of selection on canvas
 	private SelectionHandler handler = null;
 	// event handler registration
@@ -235,7 +237,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			previousChartAreaAsString = chartAreaAsString;
 			return true;
 		}
-		// checks if teh amount of datasets remained the same
+		// checks if the amount of datasets remained the same
 		if (previousDatasetsAsString.size() != datasetsAsString.size()) {
 			// saves the current datasets and dimensions of chart
 			previousDatasetsAsString = datasetsAsString;

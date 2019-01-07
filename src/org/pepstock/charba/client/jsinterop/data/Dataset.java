@@ -158,7 +158,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @return the data property in JSON format.
 	 */
 	final String getDataAsString() {
-		return JSON.stringify(getValue(Property.data));
+		return JSON.stringify(getArrayValue(Property.data));
 	}
 
 }
