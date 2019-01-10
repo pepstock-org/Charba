@@ -329,7 +329,7 @@ final class WrapperController extends NativeObjectContainer {
 			}
 
 		});
-		// adds all proxy function to call the functions to the native object
+		// adds all proxy functions to call the functions to the native object
 		setValue(Property.initialize, initializeCallbackProxy.getProxy());
 		setValue(Property.addElements, addElementsCallbackProxy.getProxy());
 		setValue(Property.addElementAndReset, addElementAndResetCallbackProxy.getProxy());

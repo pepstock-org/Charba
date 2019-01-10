@@ -54,7 +54,7 @@ public final class Context {
 	 */
 	@JsProperty(name = "chart")
 	native Chart getNativeChart();
-	
+
 	/**
 	 * Sets the <code>chart</code> property by native object.
 	 * 
@@ -86,7 +86,7 @@ public final class Context {
 	 */
 	@JsOverlay
 	public final int getIndex() {
-		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "index"))){
+		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "index"))) {
 			return UndefinedValues.INTEGER;
 		} else {
 			return getNativeIndex();
@@ -102,7 +102,7 @@ public final class Context {
 	public final String getCharbaId() {
 		return getNativeChart().getCharbaId();
 	}
-	
+
 	/**
 	 * Returns the chart node with runtime data.
 	 * 

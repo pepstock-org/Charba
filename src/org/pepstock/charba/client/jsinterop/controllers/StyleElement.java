@@ -21,7 +21,7 @@ import org.pepstock.charba.client.jsinterop.items.DatasetItem;
 import org.pepstock.charba.client.jsinterop.items.ScaleItem;
 
 /**
- * Element used by controller by <code>removeHoverStyle</code> and <code>setHoverStyle</code> methods. It contrians information
+ * Element used by controller by <code>removeHoverStyle</code> and <code>setHoverStyle</code> methods. It contains information
  * about the dataset, chart and scales to use.
  * 
  * @author Andrea "Stock" Stocchero
@@ -95,7 +95,7 @@ public final class StyleElement extends DatasetItem {
 	 * Internal class to extend scale items.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 *
+	 * @since 2.0
 	 */
 	protected static class InternalScaleItem extends ScaleItem {
 
@@ -104,8 +104,8 @@ public final class StyleElement extends DatasetItem {
 		 * 
 		 * @param nativeObject CHART.JS java script object
 		 */
-		protected InternalScaleItem(NativeObject javaScriptObject) {
-			super(javaScriptObject);
+		protected InternalScaleItem(NativeObject nativeObject) {
+			super(nativeObject);
 		}
 
 	}

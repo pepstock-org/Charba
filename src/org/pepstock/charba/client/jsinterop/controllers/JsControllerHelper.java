@@ -48,7 +48,7 @@ final class JsControllerHelper {
 	static JsControllerHelper get() {
 		return INSTANCE;
 	}
-	
+
 	/**
 	 * Register the controller which does not extend any existing one.
 	 * 

@@ -19,95 +19,114 @@ import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.Controller;
 
 /**
- * Abstract implementation of a controller. If the chart type is implemented without returning a <code>null</code>, every method will invoke
- * the default implementation of parent chart.
+ * Abstract implementation of a controller. If the chart type is implemented without returning a <code>null</code>, every method
+ * will invoke the default implementation of parent chart.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  *
  */
 public abstract class AbstractController implements Controller {
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.Controller#initialize(org.pepstock.charba.client.controllers.Context, org.pepstock.charba.client.AbstractChart, int)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.Controller#initialize(org.pepstock.charba.client.controllers.Context,
+	 * org.pepstock.charba.client.AbstractChart, int)
 	 */
 	@Override
 	public void initialize(Context context, AbstractChart<?, ?> chart, int datasetIndex) {
 		// if chart type is consistent
 		if (getType().isExtended()) {
-			// invokes default 
+			// invokes default
 			JsControllerHelper.get().initialize(getType().getChartType(), context, datasetIndex);
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.controllers.AbstractController#addElements(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
 	public void addElements(Context context, AbstractChart<?, ?> chart) {
 		// if chart type is consistent
 		if (getType().isExtended()) {
-			// invokes default 
+			// invokes default
 			JsControllerHelper.get().addElements(getType().getChartType(), context);
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.controllers.AbstractController#addElementAndReset(org.pepstock.charba.client.AbstractChart, int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.pepstock.charba.client.controllers.AbstractController#addElementAndReset(org.pepstock.charba.client.AbstractChart,
+	 * int)
 	 */
 	@Override
 	public void addElementAndReset(Context context, AbstractChart<?, ?> chart, int index) {
 		// if chart type is consistent
 		if (getType().isExtended()) {
-			// invokes default 
+			// invokes default
 			JsControllerHelper.get().addElementAndReset(getType().getChartType(), context, index);
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.controllers.AbstractController#draw(org.pepstock.charba.client.AbstractChart, double)
 	 */
 	@Override
 	public void draw(Context context, AbstractChart<?, ?> chart, double ease) {
 		// if chart type is consistent
 		if (getType().isExtended()) {
-			// invokes default 
+			// invokes default
 			JsControllerHelper.get().draw(getType().getChartType(), context, ease);
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.controllers.AbstractController#removeHoverStyle(org.pepstock.charba.client.AbstractChart, com.google.gwt.core.client.JavaScriptObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.controllers.AbstractController#removeHoverStyle(org.pepstock.charba.client.AbstractChart,
+	 * com.google.gwt.core.client.JavaScriptObject)
 	 */
 	@Override
 	public void removeHoverStyle(Context context, AbstractChart<?, ?> chart, StyleElement element) {
 		// if chart type is consistent
 		if (getType().isExtended()) {
-			// invokes default 
+			// invokes default
 			JsControllerHelper.get().removeHoverStyle(getType().getChartType(), context, element.getObject());
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.controllers.AbstractController#setHoverStyle(org.pepstock.charba.client.AbstractChart, com.google.gwt.core.client.JavaScriptObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.controllers.AbstractController#setHoverStyle(org.pepstock.charba.client.AbstractChart,
+	 * com.google.gwt.core.client.JavaScriptObject)
 	 */
 	@Override
 	public void setHoverStyle(Context context, AbstractChart<?, ?> chart, StyleElement element) {
 		// if chart type is consistent
 		if (getType().isExtended()) {
-			// invokes default 
+			// invokes default
 			JsControllerHelper.get().setHoverStyle(getType().getChartType(), context, element.getObject());
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.controllers.AbstractController#update(org.pepstock.charba.client.AbstractChart, boolean)
 	 */
 	@Override
 	public void update(Context context, AbstractChart<?, ?> chart, boolean reset) {
 		// if chart type is consistent
 		if (getType().isExtended()) {
-			// invokes default 
+			// invokes default
 			JsControllerHelper.get().update(getType().getChartType(), context, reset);
 		}
 	}
