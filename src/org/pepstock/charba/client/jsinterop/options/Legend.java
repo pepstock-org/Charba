@@ -24,7 +24,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend;
  * The chart legend displays data about the datasets that area appearing on the chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public final class Legend extends AbstractModel<Options, IsDefaultLegend> implements IsDefaultLegend{

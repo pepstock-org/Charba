@@ -23,7 +23,7 @@ import org.pepstock.charba.client.enums.TimeUnit;
  * Interface to define time object defaults.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public interface IsDefaultTime {
 

@@ -34,7 +34,7 @@ import jsinterop.annotations.JsFunction;
  * If the callback returns null or undefined the associated grid line will be hidden.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 
@@ -47,7 +47,7 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyTickCallback {

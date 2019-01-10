@@ -22,7 +22,7 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  * Point elements are used to represent the points in a line chart or a bubble chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public class Point extends AbstractConfigurationElement {
 	

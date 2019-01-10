@@ -26,7 +26,7 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory
  * It uses into the tooltips callbacks.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public final class TooltipItem extends NativeObjectContainer {
@@ -112,7 +112,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	 * Inner class to create tooltip item by a native object to use in {@link org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList}.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	public static class TooltipItemFactory implements NativeObjectContainerFactory<TooltipItem>{
 		/* (non-Javadoc)

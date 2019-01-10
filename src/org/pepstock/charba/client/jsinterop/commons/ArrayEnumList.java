@@ -19,29 +19,28 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.jsinterop.utils.JSON;
 
 /**
  * The user of this interface has precise control over where in the list each element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
- * This implementation uses a java script object as backend to store objects (enum values).
+ * This implementation uses a java script object as back-end to store objects (enumeration values).
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  * @see org.pepstock.charba.client.jsinterop.commons.ArrayString
  */
-public final class ArrayEnumList<E extends Key> implements List<E> {
-	
+public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, ArrayString> {
+
 	// delegated array to store objects
 	private final ArrayString array;
 	// array of all enumeration
 	private final E[] definedValues;
 
 	/**
-	 * Internal constructor used to set an array instance as backend of the list.
+	 * Internal constructor used to set an array instance as back-end of the list.
+	 * 
 	 * @param values all values of an enumeration
 	 * @param array java script array instance. If <code>null</code>, new empty array has been created
 	 */
@@ -54,7 +53,7 @@ public final class ArrayEnumList<E extends Key> implements List<E> {
 		// sets all enumeration values
 		this.definedValues = values;
 		// if null, creates a new array
-		if (array == null){
+		if (array == null) {
 			this.array = new ArrayString();
 		} else {
 			// uses an existing array
@@ -63,74 +62,33 @@ public final class ArrayEnumList<E extends Key> implements List<E> {
 	}
 
 	/**
-	 * Creates an empty list by a class which is a enum 
+	 * Creates an empty list by a class which is a enum
+	 * 
 	 * @param clazz enumeration class with all values of an enumeration
 	 */
 	ArrayEnumList(Class<E> clazz) {
 		this(clazz.getEnumConstants(), null);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.commons.AbstractArrayList#getArray()
+	 */
+	@Override
+	ArrayString getArray() {
+		return array;
+	}
+
 	/**
 	 * Loads an array of elements into the list
+	 * 
 	 * @param values an array of elements to be loaded
 	 */
-	public void addAll(E[] values){
-		// scans all elements 
-		for (E val : values){
+	public void addAll(E[] values) {
+		// scans all elements
+		for (E val : values) {
 			// adds
 			add(val);
 		}
-	}
-	
-	/**
-	 * Returns the number of elements in this list.
-	 */
-	@Override
-	public int size() {
-		// returns the size of JS array
-		return array.length();
-	}
-
-	/**
-	 * Returns true if this list contains no elements
-	 */
-	@Override
-	public boolean isEmpty() {
-		// checks if the size of JS array is ZERO
-		return size() == 0;
-	}
-
-	/**
-	 * Returns true if this list contains the specified element.
-	 */
-	@Override
-	public boolean contains(Object o) {
-		// checks if index of the object in JS array is not equals to -1
-		return indexOf(o) != -1;
-	}
-
-	/**
-	 * Returns an iterator over the elements in this list in proper sequence.
-	 */
-	@Override
-	public Iterator<E> iterator() {
-		return new IteratorImpl<E>(this);
-	}
-
-	/**
-	 * Not implemented
-	 */
-	@Override
-	public Object[] toArray() {
-		throw new UnsupportedOperationException("Unable to copy into an array");
-	}
-
-	/**
-	 * Not implemented
-	 */
-	@Override
-	public <T> T[] toArray(T[] a) {
-		throw new UnsupportedOperationException("Unable to copy into an array");
 	}
 
 	/**
@@ -143,14 +101,15 @@ public final class ArrayEnumList<E extends Key> implements List<E> {
 	}
 
 	/**
-	 * Removes the first occurrence of the specified element from this list, if it is present. If this list does not contain the element, it is unchanged.
+	 * Removes the first occurrence of the specified element from this list, if it is present. If this list does not contain the
+	 * element, it is unchanged.
 	 */
 	@Override
 	public boolean remove(Object o) {
 		// gets index of object
 		int index = indexOf(o);
 		// if is in the right range
-		if (checkRange(index)){
+		if (checkRange(index)) {
 			// removes by index
 			remove(index);
 			return true;
@@ -165,9 +124,9 @@ public final class ArrayEnumList<E extends Key> implements List<E> {
 	public boolean containsAll(Collection<?> c) {
 		Iterator<?> e = c.iterator();
 		// scans all elements
-		while (e.hasNext()){
+		while (e.hasNext()) {
 			// if does not contain return false
-			if (!contains(e.next())){
+			if (!contains(e.next())) {
 				return false;
 			}
 		}
@@ -176,7 +135,8 @@ public final class ArrayEnumList<E extends Key> implements List<E> {
 	}
 
 	/**
-	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by the specified collection's iterator
+	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by
+	 * the specified collection's iterator
 	 */
 	@Override
 	public boolean addAll(Collection<? extends E> c) {
@@ -186,8 +146,8 @@ public final class ArrayEnumList<E extends Key> implements List<E> {
 		// scans all elements
 		while (e.hasNext()) {
 			// if adds
-			if (add(e.next())){
-				// sets modified 
+			if (add(e.next())) {
+				// sets modified
 				modified &= true;
 			} else {
 				// sets false!
@@ -196,17 +156,18 @@ public final class ArrayEnumList<E extends Key> implements List<E> {
 		}
 		return modified;
 	}
-	
+
 	/**
 	 * Inserts all of the elements in the specified collection into this list at the specified position.<br>
-	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (increases their indices). 
+	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (increases their
+	 * indices).
 	 */
 	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
 		// set modified checking if collection is empty
 		boolean modified = !c.isEmpty();
 		// checks if continue
-		if (modified && checkRange(index)){
+		if (modified && checkRange(index)) {
 			// saves index
 			int myIndex = index;
 			Iterator<? extends E> e = c.iterator();
@@ -247,23 +208,23 @@ public final class ArrayEnumList<E extends Key> implements List<E> {
 	public boolean retainAll(Collection<?> c) {
 		// set modified checking if collection is empty
 		boolean modified = !c.isEmpty();
-		if (modified){
+		if (modified) {
 			// creates a copy of elements
 			List<E> contained = new ArrayList<E>();
 			// scans all current elements
-			for (int i=0; i<size(); i++){
+			for (int i = 0; i < size(); i++) {
 				E value = get(i);
 				// checks if not present into
 				// passed collection
-				if (!c.contains(get(i))){
+				if (!c.contains(get(i))) {
 					// adds to temporary list
 					contained.add(value);
 				}
 			}
 			// if temporary list is not empty
-			if (!contained.isEmpty()){
+			if (!contained.isEmpty()) {
 				// scans all elements
-				for (E toRemove : contained){
+				for (E toRemove : contained) {
 					// removes and checks if modified
 					modified = modified && remove(toRemove);
 				}
@@ -286,7 +247,7 @@ public final class ArrayEnumList<E extends Key> implements List<E> {
 	@Override
 	public E get(int index) {
 		// checks range
-		if (checkRange(index)){
+		if (checkRange(index)) {
 			String value = array.get(index);
 			return getByName(value);
 		}
@@ -294,12 +255,13 @@ public final class ArrayEnumList<E extends Key> implements List<E> {
 	}
 
 	/**
-	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns null
+	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns
+	 * null
 	 */
 	@Override
 	public E set(int index, E element) {
 		// checks range
-		if (checkRange(index)){
+		if (checkRange(index)) {
 			// gets current element at that index
 			String old = array.get(index);
 			E oldValue = getByName(old);
@@ -307,13 +269,14 @@ public final class ArrayEnumList<E extends Key> implements List<E> {
 			array.set(index, element.name());
 			// returns old
 			return oldValue;
-		}		
+		}
 		return null;
 	}
 
 	/**
 	 * Inserts the specified element at the specified position in this list.<br>
-	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
+	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their
+	 * indices).
 	 */
 	@Override
 	public void add(int index, E element) {
@@ -322,12 +285,13 @@ public final class ArrayEnumList<E extends Key> implements List<E> {
 
 	/**
 	 * Removes the element at the specified position in this list.<br>
-	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from the list.
+	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from
+	 * the list.
 	 */
 	@Override
 	public E remove(int index) {
 		// checks range
-		if (checkRange(index)){
+		if (checkRange(index)) {
 			String value = array.remove(index);
 			return getByName(value);
 		}
@@ -335,12 +299,13 @@ public final class ArrayEnumList<E extends Key> implements List<E> {
 	}
 
 	/**
-	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.
+	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the
+	 * element.
 	 */
 	@Override
 	public int indexOf(Object o) {
 		// checks if EnumValue
-		if (o instanceof Key){
+		if (o instanceof Key) {
 			// cast
 			Key val = (Key) o;
 			// search
@@ -350,12 +315,13 @@ public final class ArrayEnumList<E extends Key> implements List<E> {
 	}
 
 	/**
-	 * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the element. 
+	 * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the
+	 * element.
 	 */
 	@Override
 	public int lastIndexOf(Object o) {
 		// checks if EnumValue
-		if (o instanceof Key){
+		if (o instanceof Key) {
 			// cast
 			Key val = (Key) o;
 			// search
@@ -365,67 +331,20 @@ public final class ArrayEnumList<E extends Key> implements List<E> {
 	}
 
 	/**
-	 * Returns a list iterator over the elements in this list
-	 */
-	@Override
-	public ListIterator<E> listIterator() {
-		return new ListIteratorImpl<E>(0, this);
-	}
-
-	/**
-	 * Returns a list iterator over the elements in this list (in proper sequence), starting at the specified position in the list.<br>
-	 * The specified index indicates the first element that would be returned by an initial call to next.<br>
-	 * An initial call to previous would return the element with the specified index minus one.
-	 */
-	@Override
-	public ListIterator<E> listIterator(int index) {
-		// if index is out of range, EXCEPTION
-		if (!checkRange(index)){
-            throw new IndexOutOfBoundsException("Index: "+index);
-		}
-		return new ListIteratorImpl<E>(index, this);
-	}
-
-	/**
-	 * Not implemented
-	 */
-	@Override
-	public List<E> subList(int fromIndex, int toIndex) {
-		throw new UnsupportedOperationException("Unable to copy into an array");
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "EnumvalueArrayList [array=" + JSON.stringify(array) + "]";
-	}
-	
-	/**
-	 * Checks if the index is in the right range.
-	 * @param index index to be checked
-	 * @return <code>true</code> if the index is in the right range otherwise false
-	 */
-	private boolean checkRange(int index){
-		return index >= 0 && index < array.length();
-	}
-
-	/**
 	 * Gets EnumValue by its name
+	 * 
 	 * @param name name to search
 	 * @return EnumValue instance or null if not found
 	 */
-	private E getByName(String name){
+	private E getByName(String name) {
 		// scans all EnumValues
-		for (E value : definedValues){
+		for (E value : definedValues) {
 			// if equals returns it
-			if (value.name().equalsIgnoreCase(name)){
+			if (value.name().equalsIgnoreCase(name)) {
 				return value;
 			}
 		}
 		return null;
 	}
-	
 
 }

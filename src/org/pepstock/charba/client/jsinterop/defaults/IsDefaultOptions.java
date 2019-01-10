@@ -21,7 +21,7 @@ import org.pepstock.charba.client.enums.FontStyle;
  * Interface to define options defaults. THIS IS THE ROOT OF ALL INTERFACE DEFAULTS.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public interface IsDefaultOptions {
 

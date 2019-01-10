@@ -23,7 +23,7 @@ import org.pepstock.charba.client.jsinterop.data.Dataset;
  * Interface which defines a chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  * @param <O> Options type for the specific chart
  * @param <D> Dataset type for the specific chart

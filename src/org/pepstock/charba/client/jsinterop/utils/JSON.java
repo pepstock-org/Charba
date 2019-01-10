@@ -48,7 +48,9 @@ public final class JSON {
 	/**
 	 * Make a deep copy of an object or array, assuring that there is at most one instance of each object or array in the
 	 * resulting structure.<br>
-	 * The duplicate references (which might be forming cycles) are replaced with an object of the form.
+	 * The duplicate references (which might be forming cycles) are replaced with an object of the form.<br>
+	 * To do that, it is including <code>cycle2.js</code>.<br>
+	 * See https://github.com/douglascrockford/JSON-js/blob/master/cycle.js. 
 	 * 
 	 * @param obj The value to convert to a JSON string.
 	 * @return an object with cycle removed, ready to be stringfy.

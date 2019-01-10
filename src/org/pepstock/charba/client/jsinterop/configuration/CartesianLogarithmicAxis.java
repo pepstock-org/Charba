@@ -23,7 +23,7 @@ import org.pepstock.charba.client.jsinterop.AbstractChart;
  * This object is used to map defined axis as logarithmic.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmicTick> {

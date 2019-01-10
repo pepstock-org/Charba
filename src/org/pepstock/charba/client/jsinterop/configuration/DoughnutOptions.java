@@ -22,7 +22,7 @@ import org.pepstock.charba.client.jsinterop.ChartOptions;
  * Specific options for DOUGHNUT chart. 
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class DoughnutOptions extends AbstractPieOptions {

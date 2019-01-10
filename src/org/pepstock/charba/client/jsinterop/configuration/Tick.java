@@ -23,7 +23,7 @@ import org.pepstock.charba.client.jsinterop.options.Ticks;
  * Specific tick with min and max sub ticks.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 abstract class Tick extends BaseTick<Ticks> {

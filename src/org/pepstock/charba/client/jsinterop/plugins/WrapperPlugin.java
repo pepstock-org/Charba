@@ -27,7 +27,7 @@ import org.pepstock.charba.client.jsinterop.items.TooltipPluginItem;
  * The wrapper is mandatory to able to catch all hooks of chart even if the plugin implements just a part of the hooks.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 abstract class WrapperPlugin {

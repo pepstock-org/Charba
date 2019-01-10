@@ -21,8 +21,10 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * This is a native object which wraps a java script object created by {@link org.pepstock.charba.client.jsinterop.commons.JsHelper}.<br>
- * This object is used to get a proxy instance which is able to call a java script function passing laso <code>this</code> java script value, to maintain the environment when required.<br>
+ * This is a native object which wraps a java script object created by
+ * {@link org.pepstock.charba.client.jsinterop.commons.JsHelper}.<br>
+ * This object is used to get a proxy instance which is able to call a java script function passing laso <code>this</code> java
+ * script value, to maintain the environment when required.<br>
  * <br>
  * <code>
  * var obj = new Object();
@@ -65,28 +67,31 @@ public final class CallbackProxy<T> {
 		/**
 		 * Call method the function <code>proxy</code> implemented into additional java script source.
 		 */
-	    void call();
+		void call();
 	}
 
 	/**
 	 * Gets the function <code>proxy</code> implemented into additional java script source.
+	 * 
 	 * @return the proxy function <code>proxy</code> implemented into additional java script source.
 	 */
 	@JsProperty
 	public native Proxy getProxy();
-	
+
 	/**
 	 * Returns the function <code>callback</code> implemented into additional java script source.
+	 * 
 	 * @return the function <code>callback</code> implemented into additional java script source.
 	 */
 	@JsProperty
 	public native T getCallback();
 
 	/**
-	 * Set the function <code>callback</code> implemented into additional java script source.
+	 * Sets the function <code>callback</code> implemented into additional java script source.
+	 * 
 	 * @param callback the function <code>callback</code> implemented into additional java script source.
 	 */
 	@JsProperty
 	public native void setCallback(T callback);
-	
+
 }

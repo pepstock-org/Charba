@@ -26,7 +26,7 @@ import com.google.gwt.safehtml.shared.UriUtils;
  * This utility checks if the plug ID is acceptable or not.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class PluginIdChecker {
 

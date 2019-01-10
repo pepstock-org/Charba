@@ -22,7 +22,7 @@ import org.pepstock.charba.client.jsinterop.options.ScaleLabelPadding;
  * Defaults for scale label padding option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class DefaultChartScaleLabelPadding implements IsDefaultPadding {
 

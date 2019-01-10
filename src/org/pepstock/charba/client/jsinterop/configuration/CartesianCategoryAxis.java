@@ -23,7 +23,7 @@ import org.pepstock.charba.client.jsinterop.AbstractChart;
  * This object is used to map defined axis as category.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> {
 	

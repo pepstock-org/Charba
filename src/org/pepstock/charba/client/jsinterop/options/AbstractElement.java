@@ -27,7 +27,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc;
  * dataset.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  * 
  * @param <P> parent node class
  * @param <D> defaults provider class

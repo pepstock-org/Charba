@@ -26,7 +26,7 @@ import org.pepstock.charba.client.jsinterop.data.StackedBarDataset;
  * Stacked bar charts can be used to show how one data series is made up of a number of smaller pieces.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class StackedBarChart extends AbstractChart<StackedOptions, StackedBarDataset> {

@@ -23,7 +23,7 @@ import org.pepstock.charba.client.jsinterop.Controller;
  * the default implementation of parent chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public abstract class AbstractController implements Controller {

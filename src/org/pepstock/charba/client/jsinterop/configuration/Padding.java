@@ -21,7 +21,7 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  * It is applied to all sides of the chart (left, top, right, bottom).
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class Padding {

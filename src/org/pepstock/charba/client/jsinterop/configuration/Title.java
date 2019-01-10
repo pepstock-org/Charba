@@ -26,7 +26,7 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  * Configures the chart title which defines text to draw at the top of the chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class Title {

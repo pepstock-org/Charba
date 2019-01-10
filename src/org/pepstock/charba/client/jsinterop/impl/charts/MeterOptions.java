@@ -32,7 +32,7 @@ import org.pepstock.charba.client.jsinterop.configuration.Tooltips;
  * Specific options for METER chart. This chart doesn't allow any legend, hover, layout and tooltips components.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class MeterOptions extends AbstractPieOptions {

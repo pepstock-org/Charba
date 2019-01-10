@@ -47,7 +47,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
  * It contains Chart.js initialization.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  * @param <O> Options type for the specific chart
  * @param <D> Dataset type for the specific chart

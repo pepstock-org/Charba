@@ -34,7 +34,7 @@ import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultsBuilder;
  * Defaults for options element, based on chart type. THIS IS THE ROOT OF ALL ELEMENTS DEFAULTS.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class DefaultChartOptions implements IsDefaultScaledOptions {
 

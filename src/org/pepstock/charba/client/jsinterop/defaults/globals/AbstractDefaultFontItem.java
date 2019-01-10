@@ -22,7 +22,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
  * CHART.JS default values for font items.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 abstract class AbstractDefaultFontItem implements IsDefaultFontItem{
 

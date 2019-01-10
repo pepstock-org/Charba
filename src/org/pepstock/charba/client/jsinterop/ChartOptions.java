@@ -27,7 +27,7 @@ import org.pepstock.charba.client.jsinterop.options.Scales;
  * This object is mapping the default options related to the chart type.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class ChartOptions extends ScaledOptions {
 	

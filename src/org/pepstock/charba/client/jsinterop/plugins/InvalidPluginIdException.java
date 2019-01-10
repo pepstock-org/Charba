@@ -26,7 +26,7 @@ package org.pepstock.charba.client.jsinterop.plugins;
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class InvalidPluginIdException extends Exception {

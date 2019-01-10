@@ -24,7 +24,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPointLabels;
  * Note that these options only apply if display is true.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> implements IsDefaultPointLabels{

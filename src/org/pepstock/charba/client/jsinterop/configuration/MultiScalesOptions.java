@@ -22,7 +22,7 @@ import org.pepstock.charba.client.jsinterop.ChartOptions;
  * Configuration of chart with multiple scales.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 abstract class MultiScalesOptions extends ConfigurationOptions {

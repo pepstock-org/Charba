@@ -25,7 +25,7 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  * When set, these options apply to all objects of that type unless specifically overridden by the configuration attached to a dataset.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 abstract class AbstractConfigurationElement {
 	

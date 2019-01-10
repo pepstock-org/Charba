@@ -20,7 +20,7 @@ package org.pepstock.charba.client.jsinterop.data;
  * for a specific dataset.<br>
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public class PolarAreaDataset extends HovingDataset {
 

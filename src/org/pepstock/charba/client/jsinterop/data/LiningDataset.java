@@ -37,7 +37,7 @@ import org.pepstock.charba.client.jsinterop.commons.ObjectType;
  * This class collects a set of common field for Line and Radar charts.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 abstract class LiningDataset extends Dataset {

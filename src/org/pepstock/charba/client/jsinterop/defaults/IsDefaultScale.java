@@ -24,7 +24,7 @@ import org.pepstock.charba.client.enums.ScaleDistribution;
  * Interface to define scale/axis object defaults.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public interface IsDefaultScale {
 

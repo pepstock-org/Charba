@@ -40,7 +40,7 @@ import jsinterop.annotations.JsFunction;
  * Contains all callbacks defined for a toolitp.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
@@ -63,7 +63,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyBeforeTitleCallback {
@@ -82,7 +82,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyTitleCallback {
@@ -101,7 +101,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyAfterTitleCallback {
@@ -120,7 +120,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyBeforeFooterCallback {
@@ -139,7 +139,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyFooterCallback {
@@ -158,7 +158,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyAfterFooterCallback {
@@ -177,7 +177,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyBeforeBodyCallback {
@@ -196,7 +196,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyAfterBodyCallback {
@@ -215,7 +215,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyBeforeLabelCallback {
@@ -234,7 +234,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyAfterLabelCallback {
@@ -253,7 +253,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyLabelCallback {
@@ -272,7 +272,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyLabelColorCallback {
@@ -291,7 +291,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyLabelTextColorCallback {

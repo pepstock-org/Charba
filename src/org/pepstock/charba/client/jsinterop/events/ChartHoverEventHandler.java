@@ -19,7 +19,7 @@ package org.pepstock.charba.client.jsinterop.events;
  * Event handler for hovering on the chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public interface ChartHoverEventHandler extends ChartEventHandler {
 

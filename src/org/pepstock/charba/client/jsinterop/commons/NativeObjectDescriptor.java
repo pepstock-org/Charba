@@ -20,7 +20,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * A property descriptor is a record which describes a java script property (object).<br>
+ * A property descriptor is a record which describes a java script property (object).
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
@@ -32,6 +32,7 @@ public final class NativeObjectDescriptor extends NativeAbstractDescriptor {
 
 	/**
 	 * Sets the value associated with the property.
+	 * 
 	 * @param value the value associated with the property
 	 */
 	@JsProperty
@@ -39,6 +40,7 @@ public final class NativeObjectDescriptor extends NativeAbstractDescriptor {
 
 	/**
 	 * Gets the value associated with the property.
+	 * 
 	 * @return the value associated with the property
 	 */
 	@JsProperty

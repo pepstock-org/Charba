@@ -25,7 +25,7 @@ import org.pepstock.charba.client.jsinterop.items.ScaleItem;
  * about the dataset, chart and scales to use.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public final class StyleElement extends DatasetItem {

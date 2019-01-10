@@ -22,7 +22,7 @@ import org.pepstock.charba.client.jsinterop.ChartOptions;
  * pecific options for POLAR AREA chart. It contains all properties for this kind of chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class PolarAreaOptions extends SingleScaleOptions {

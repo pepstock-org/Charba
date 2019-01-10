@@ -30,7 +30,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle;
  * Configures the default chart title which defines text to draw at the top of the chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public final class Title extends FontItem<Options, IsDefaultTitle> implements IsDefaultTitle{

@@ -26,7 +26,7 @@ import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
  * The java script object key is the plugin id.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public final class Plugins {

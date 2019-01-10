@@ -20,7 +20,7 @@ package org.pepstock.charba.client.jsinterop.configuration;
  * As the name suggests, logarithmic interpolation is used to determine where a value lies on the axis.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class CartesianLogarithmicTick extends CartesianTick {

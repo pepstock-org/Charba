@@ -33,7 +33,7 @@ import org.pepstock.charba.client.jsinterop.options.Scales;
  * point, the second value to the second point, and so on.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public class LineDataset extends LiningDataset {
 

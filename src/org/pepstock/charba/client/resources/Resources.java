@@ -20,10 +20,10 @@ import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Client bundle to reference CHART.JS java script code.
+ * Client bundle to reference CHART.JS and other java script codes, always needed to CHARBA.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public interface Resources extends ClientBundle {
 
@@ -37,11 +37,25 @@ public interface Resources extends ClientBundle {
 	 */
 	@Source("js/chart.bundle.min.js")
 	TextResource chartJsSource();
-	
+
+	/**
+	 * This java script with a set of static methods used as utility and needed to improve JSINTEROP adoption for CHARBA,
+	 * because JSINTEROP is not able to address all java script model.
+	 * 
+	 * @return charba java script code.
+	 */
 	@Source("js/charba.helper.js")
 	TextResource charbaHelper();
-	
+
+	/**
+	 * This file contains two functions, JSON.decycle and JSON.retrocycle, which make it possible to encode cyclical structures
+	 * and dags in JSON, and to then recover them. This is a capability that is not provided by ES5.<br>
+	 * JSONPath is used to represent the links.<br>
+	 * See https://github.com/douglascrockford/JSON-js/blob/master/cycle.js.
+	 * 
+	 * @return cycle2 java script code.
+	 */
 	@Source("js/json.cycle.js")
 	TextResource jsonCycle();
-	
+
 }

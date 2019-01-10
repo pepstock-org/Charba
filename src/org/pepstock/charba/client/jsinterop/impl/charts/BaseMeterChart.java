@@ -25,7 +25,7 @@ import org.pepstock.charba.client.jsinterop.controllers.InvalidControllerTypeExc
  * This is an abstract meter chart, inherited by a meter and gauge charts.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  * @param <O> Options type for the specific chart, extends MeterOptions
  * @param <D> Dataset type for the specific chart, extends MeterDataset

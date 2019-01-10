@@ -26,7 +26,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
  * Base object to map font options for configuration.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  * 
  * @param <P> parent node class
  * @param <D> defaults provider class

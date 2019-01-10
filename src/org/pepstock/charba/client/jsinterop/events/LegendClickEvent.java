@@ -23,7 +23,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * Event which is fired when the user clicks on the legend of the chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class LegendClickEvent extends AbstractEvent<LegendClickEventHandler> {
 

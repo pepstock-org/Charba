@@ -24,7 +24,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine;
  * CHART.JS default values for LINE element.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class DefaultLine extends DefaultArc implements IsDefaultLine{
 	

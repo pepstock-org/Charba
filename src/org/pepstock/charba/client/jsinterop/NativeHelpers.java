@@ -27,7 +27,7 @@ import jsinterop.annotations.JsType;
  * It maps the java script object chart.helpers.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class NativeHelpers {

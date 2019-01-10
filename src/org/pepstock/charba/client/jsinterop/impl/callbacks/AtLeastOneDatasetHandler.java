@@ -29,7 +29,7 @@ import org.pepstock.charba.client.jsinterop.items.DatasetMetaItem;
  * In this way, always a dataset is showed.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 

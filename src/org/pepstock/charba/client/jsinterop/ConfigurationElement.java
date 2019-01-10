@@ -20,7 +20,7 @@ package org.pepstock.charba.client.jsinterop;
  * The chart configuration are items options, data and plugins.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  * 
  * @see Configuration
  */

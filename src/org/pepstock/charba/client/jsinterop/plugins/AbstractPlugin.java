@@ -28,7 +28,7 @@ import org.pepstock.charba.client.jsinterop.items.TooltipPluginItem;
  * All <code>onBefore*</code> cancellable methods return <code>true</code>.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public abstract class AbstractPlugin implements Plugin {

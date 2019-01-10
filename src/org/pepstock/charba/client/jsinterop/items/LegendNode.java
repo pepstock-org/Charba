@@ -30,7 +30,7 @@ import org.pepstock.charba.client.jsinterop.items.LegendItem.LegendItemFactory;
  * This is a wrapper of legend node of Chart (of CHART.JS).
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class LegendNode extends BaseBoxNodeItem {
 	

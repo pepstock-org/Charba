@@ -22,7 +22,7 @@ import org.pepstock.charba.client.jsinterop.ChartOptions;
  * Configuration of chart with only 1 scale.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public abstract class SingleScaleOptions extends ConfigurationOptions{

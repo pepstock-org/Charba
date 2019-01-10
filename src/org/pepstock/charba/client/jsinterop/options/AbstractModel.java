@@ -17,7 +17,6 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
-import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
@@ -27,7 +26,7 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
  * Provides also a set of methods to manages callbacks and events.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  * 
  * @param <P> parent node class
  * @param <D> defaults provider class
@@ -106,16 +105,7 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Na
 	protected final P getParent() {
 		return parent;
 	}
-
-	/**
-	 * Removes a property from native java script object by a key.
-	 * 
-	 * @param key property name to remove the content from native java script object.
-	 */
-	protected final void remove(Key key) {
-		JsHelper.get().remove(getNativeObject(), key.name());
-	}
-
+	
 	/**
 	 * Returns the default provider instance.
 	 * 
@@ -132,7 +122,7 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Na
 	 * @param key property name to use to add the function proxy
 	 * @param proxy the function proxy instance to add
 	 */
-	protected void setEventToModel(AbstractModel<?, ?> model, Key key, CallbackProxy.Proxy proxy) {
+	protected final void setEventToModel(AbstractModel<?, ?> model, Key key, CallbackProxy.Proxy proxy) {
 		model.setValue(key, proxy);
 		// checks if the node is already added to parent
 		model.checkAndAddToParent();
@@ -145,7 +135,7 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Na
 	 * @param key property name to use to add the function proxy
 	 * @param proxy the function proxy instance to add
 	 */
-	protected void setCallbackToModel(AbstractModel<?, ?> model, Key key, CallbackProxy.Proxy proxy) {
+	protected final void setCallbackToModel(AbstractModel<?, ?> model, Key key, CallbackProxy.Proxy proxy) {
 		model.setValue(key, proxy);
 		// checks if the node is already added to parent
 		model.checkAndAddToParent();
@@ -155,7 +145,7 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Na
 	 * Called recursively when a property has been set in the item.<br>
 	 * This is mandatory because it could happen that the parent item is not present, therefore it must be added.
 	 */
-	protected void checkAndAddToParent() {
+	protected final void checkAndAddToParent() {
 		// checks if we are at root element
 		// or if the parent hasn't got the key
 		if (parent != null && !parent.has(childKey)) {

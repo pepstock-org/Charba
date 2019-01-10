@@ -90,7 +90,7 @@ public final class TooltipBodyItem extends NativeObjectContainer {
 	 * Inner class to create tooltip body item by a native object to use in {@link org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList}.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	static class TooltipBodyItemFactory implements NativeObjectContainerFactory<TooltipBodyItem>{
 		/* (non-Javadoc)

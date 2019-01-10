@@ -29,7 +29,7 @@ import org.pepstock.charba.client.jsinterop.Plugin;
  * configuration.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public final class Plugins implements ConfigurationElement {

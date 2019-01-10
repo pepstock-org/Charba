@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.jsinterop.callbacks;
 
-
 import org.pepstock.charba.client.jsinterop.configuration.Axis;
 import org.pepstock.charba.client.jsinterop.items.AxisItem;
 

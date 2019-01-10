@@ -36,7 +36,7 @@ import jsinterop.annotations.JsType;
  * controller when it's extending an existing chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class Context {

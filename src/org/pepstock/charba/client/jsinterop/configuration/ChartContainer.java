@@ -22,7 +22,7 @@ import org.pepstock.charba.client.jsinterop.AbstractChart;
  * will trigger events or callbacks to pass the chart instance as parameter of implemented interface.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 abstract class ChartContainer{
 

@@ -23,7 +23,7 @@ import org.pepstock.charba.client.jsinterop.options.Scale;
  * Default global scale (maps the java script object chart.defaults.scale).
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class GlobalScale extends Scale {
 

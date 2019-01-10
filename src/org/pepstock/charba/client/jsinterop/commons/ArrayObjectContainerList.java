@@ -22,12 +22,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.pepstock.charba.client.jsinterop.utils.JSON;
-
 /**
- * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each element is inserted. <br>
+ * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each
+ * element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
- * This implementation uses a javascript array as backend to store objects (native object containers).<br>
+ * This implementation uses a java script array as back-end to store objects (native object containers).<br>
  * Elements are instances of {@link org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer}.
  * 
  * @author Andrea "Stock" Stocchero
@@ -37,24 +36,25 @@ import org.pepstock.charba.client.jsinterop.utils.JSON;
  * @see org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer
  * 
  */
-public final class ArrayObjectContainerList<E extends NativeObjectContainer> implements List<E> {
-	
+public final class ArrayObjectContainerList<E extends NativeObjectContainer> extends AbstractArrayList<E, ArrayObject> {
+
 	// delegated array to store objects
 	private final ArrayObject array;
-	
+
 	// delegated linked list to store Java objects
 	private final List<E> delegate = new LinkedList<E>();
 
 	/**
-	 * Internal constructor used to set an array instance as backend of the list.
+	 * Internal constructor used to set an array instance as back-end of the list.
+	 * 
 	 * @param array java script array instance. If <code>null</code>, new empty array has been created
 	 * @param factory factory instance to create the object from a native one.
 	 */
 	ArrayObjectContainerList(ArrayObject array, NativeObjectContainerFactory<E> factory) {
 		// if null, creates a new array
-		if (array == null){
+		if (array == null) {
 			this.array = new ArrayObject();
-		} else if (factory == null){
+		} else if (factory == null) {
 			// factory is not consistent and array is consistent EXCEPTION
 			// factory is mandatory to initialize the list creating the elements from native object
 			throw new UnsupportedOperationException("Unable to create NativeObjectContainer without a factory");
@@ -62,7 +62,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> imp
 			// uses an existing array
 			this.array = array;
 			// scans the array
-			for (int i=0; i<array.length(); i++) {
+			for (int i = 0; i < array.length(); i++) {
 				// uses teh factory to creates all elements
 				delegate.add(factory.create(array.get(i)));
 			}
@@ -76,20 +76,22 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> imp
 		this(null, null);
 	}
 
-	/**
-	 * @return the array
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.commons.AbstractArrayList#getArray()
 	 */
-	public ArrayObject getArray() {
+	@Override
+	ArrayObject getArray() {
 		return array;
 	}
-	
+
 	/**
 	 * Loads an array of elements into the list
+	 * 
 	 * @param values an array of elements to be loaded
 	 */
-	public void addAll(E[] values){
-		// scans all elements 
-		for (E val : values){
+	public void addAll(E[] values) {
+		// scans all elements
+		for (E val : values) {
 			// adds
 			add(val);
 		}
@@ -128,30 +130,14 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> imp
 	}
 
 	/**
-	 * Not implemented
-	 */
-	@Override
-	public Object[] toArray() {
-		throw new UnsupportedOperationException("Unable to copy into an array");
-	}
-
-	/**
-	 * Not implemented
-	 */
-	@Override
-	public <T> T[] toArray(T[] a) {
-		throw new UnsupportedOperationException("Unable to copy into an array");
-	}
-
-	/**
 	 * Appends the specified element to the end of this list
 	 */
 	@Override
 	public boolean add(E e) {
-		// adds to linkedlist
+		// adds to linked list
 		boolean added = delegate.add(e);
 		// if added
-		if (added){
+		if (added) {
 			// adds to JS array
 			array.push(e.getNativeObject());
 		}
@@ -159,14 +145,15 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> imp
 	}
 
 	/**
-	 * Removes the first occurrence of the specified element from this list, if it is present. If this list does not contain the element, it is unchanged.
+	 * Removes the first occurrence of the specified element from this list, if it is present. If this list does not contain the
+	 * element, it is unchanged.
 	 */
 	@Override
 	public boolean remove(Object o) {
 		// gets index of object
 		int index = indexOf(o);
 		// if is in the right range
-		if (checkRange(index)){
+		if (checkRange(index)) {
 			// removes by index
 			remove(index);
 			return true;
@@ -183,7 +170,8 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> imp
 	}
 
 	/**
-	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by the specified collection's iterator
+	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by
+	 * the specified collection's iterator
 	 */
 	@Override
 	public boolean addAll(Collection<? extends E> c) {
@@ -193,8 +181,8 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> imp
 		// scans all elements
 		while (e.hasNext()) {
 			// if adds
-			if (add(e.next())){
-				// sets modified 
+			if (add(e.next())) {
+				// sets modified
 				modified &= true;
 			} else {
 				// sets false!
@@ -206,14 +194,15 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> imp
 
 	/**
 	 * Inserts all of the elements in the specified collection into this list at the specified position.<br>
-	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (increases their indices). 
+	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (increases their
+	 * indices).
 	 */
 	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
 		// set modified checking if collection is empty
 		boolean modified = !c.isEmpty();
 		// checks if continue
-		if (modified && checkRange(index)){
+		if (modified && checkRange(index)) {
 			// saves index
 			int myIndex = index;
 			Iterator<? extends E> e = c.iterator();
@@ -229,7 +218,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> imp
 		}
 		return modified;
 	}
-	
+
 	/**
 	 * Removes from this list all of its elements that are contained in the specified collection.
 	 */
@@ -254,23 +243,23 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> imp
 	public boolean retainAll(Collection<?> c) {
 		// set modified checking if collection is empty
 		boolean modified = !c.isEmpty();
-		if (modified){
+		if (modified) {
 			// creates a copy of elements
 			List<E> contained = new ArrayList<E>();
 			// scans all current elements
-			for (int i=0; i<size(); i++){
+			for (int i = 0; i < size(); i++) {
 				E value = get(i);
 				// checks if not present into
 				// passed collection
-				if (!c.contains(get(i))){
+				if (!c.contains(get(i))) {
 					// adds to temporary list
 					contained.add(value);
 				}
 			}
 			// if temporary list is not empty
-			if (!contained.isEmpty()){
+			if (!contained.isEmpty()) {
 				// scans all elements
-				for (E toRemove : contained){
+				for (E toRemove : contained) {
 					// removes and checks if modified
 					modified = modified && remove(toRemove);
 				}
@@ -294,32 +283,34 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> imp
 	@Override
 	public E get(int index) {
 		// checks range
-		if (checkRange(index)){
+		if (checkRange(index)) {
 			return delegate.get(index);
 		}
 		return null;
 	}
 
 	/**
-	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns null
+	 * Replaces the element at the specified position in this list with the specified element. If index out of range, returns
+	 * null
 	 */
 	@Override
 	public E set(int index, E element) {
 		// checks range
-		if (checkRange(index)){
+		if (checkRange(index)) {
 			// sets to linked list
 			E old = delegate.set(index, element);
 			// sets on JS array
 			array.set(index, element.getNativeObject());
 			// returns old value
 			return old;
-		}		
+		}
 		return null;
 	}
 
 	/**
 	 * Inserts the specified element at the specified position in this list.<br>
-	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
+	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their
+	 * indices).
 	 */
 	@Override
 	public void add(int index, E element) {
@@ -329,12 +320,13 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> imp
 
 	/**
 	 * Removes the element at the specified position in this list.<br>
-	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from the list.
+	 * Shifts any subsequent elements to the left (subtracts one from their indices). Returns the element that was removed from
+	 * the list.
 	 */
 	@Override
 	public E remove(int index) {
 		// checks range
-		if (checkRange(index)){
+		if (checkRange(index)) {
 			// removes from LinkedList
 			E elem = delegate.remove(index);
 			// removes from JS array
@@ -346,7 +338,8 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> imp
 	}
 
 	/**
-	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.
+	 * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the
+	 * element.
 	 */
 	@Override
 	public int indexOf(Object o) {
@@ -354,7 +347,8 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> imp
 	}
 
 	/**
-	 * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the element. 
+	 * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the
+	 * element.
 	 */
 	@Override
 	public int lastIndexOf(Object o) {
@@ -370,17 +364,18 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> imp
 	}
 
 	/**
-	 * Returns a list iterator over the elements in this list (in proper sequence), starting at the specified position in the list.<br>
+	 * Returns a list iterator over the elements in this list (in proper sequence), starting at the specified position in the
+	 * list.<br>
 	 * The specified index indicates the first element that would be returned by an initial call to next.<br>
 	 * An initial call to previous would return the element with the specified index minus one.
 	 */
 	@Override
 	public ListIterator<E> listIterator(int index) {
 		// if index is out of range, EXCEPTION
-		if (!checkRange(index)){
-            throw new IndexOutOfBoundsException("Index: "+index);
+		if (!checkRange(index)) {
+			throw new IndexOutOfBoundsException("Index: " + index);
 		}
-        return new ListIteratorImpl<E>(index, this);
+		return new ListIteratorImpl<E>(index, this);
 	}
 
 	/**
@@ -388,25 +383,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> imp
 	 */
 	@Override
 	public List<E> subList(int fromIndex, int toIndex) {
-		throw new UnsupportedOperationException("Unable to copy into an array");
+		throw new UnsupportedOperationException(UNABLE_COPY_ARRAY_MESSAGE);
 	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "ObjectContainerArrayList [array=" + JSON.stringify(array) + "]";
-	}
-
-	/**
-	 * Checks if the index is in the right range.
-	 * @param index index to be checked
-	 * @return <code>true</code> if the index is in the right range otherwise false
-	 */
-	private boolean checkRange(int index){
-		return index >= 0 && index < array.length();
-	}
-
 
 }

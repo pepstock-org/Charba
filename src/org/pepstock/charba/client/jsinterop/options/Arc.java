@@ -23,7 +23,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc;
  * Arcs are used in the polar area, doughnut and pie charts.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  * 
  */
 public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc{

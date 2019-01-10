@@ -31,7 +31,7 @@ import org.pepstock.charba.client.jsinterop.AbstractChart;
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  * @param <T> type of tick to apply to axis
  */

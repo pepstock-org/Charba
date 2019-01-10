@@ -37,7 +37,7 @@ import com.google.gwt.i18n.client.NumberFormat;
  * Controller implementation to create charts like meter of gauges, extending doughnut chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 final class BaseMeterController extends AbstractController {
 

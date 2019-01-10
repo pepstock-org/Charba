@@ -21,7 +21,7 @@ import org.pepstock.charba.client.enums.Position;
  * Interface to define title object defaults.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public interface IsDefaultTitle extends IsDefaultFontItem {
 

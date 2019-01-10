@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.jsinterop.commons;
 
 /**
- * Enums all java script types.<br>
+ * Enumerates all java script types.<br>
  * The latest ECMAScript standard defines seven data types:<br>
  * Six data types that are primitives:<br>
  * <ul>
@@ -37,12 +37,12 @@ package org.pepstock.charba.client.jsinterop.commons;
  * See https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Operators/typeof
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public enum ObjectType
 {
 	/**
-	 * A variable that has not been assigned a value 
+	 * A variable that has not been assigned a value
 	 */
 	Undefined,
 	/**
@@ -50,9 +50,10 @@ public enum ObjectType
 	 */
 	Boolean,
 	/**
-	 * According to the ECMAScript standard, there is only one number type: the double-precision 64-bit binary format IEEE 754 value 
-	 * (numbers between -(2^53 -1) and 2^53 -1). There is no specific type for integers. 
-	 * In addition to being able to represent floating-point numbers, the number type has three symbolic values: +Infinity, -Infinity, and NaN (not-a-number).
+	 * According to the ECMAScript standard, there is only one number type: the double-precision 64-bit binary format IEEE 754
+	 * value (numbers between -(2^53 -1) and 2^53 -1). There is no specific type for integers. In addition to being able to
+	 * represent floating-point numbers, the number type has three symbolic values: +Infinity, -Infinity, and NaN
+	 * (not-a-number).
 	 */
 	Number,
 	/**
@@ -68,19 +69,21 @@ public enum ObjectType
 	 */
 	Function,
 	/**
-	 * Objects can be seen as a collection of properties. 
+	 * Objects can be seen as a collection of properties.
 	 */
 	Object,
 	/**
-	 * Arrays are regular objects for which there is a particular relationship between integer-key-ed properties and the 'length' property.
+	 * Arrays are regular objects for which there is a particular relationship between integer-key-ed properties and the
+	 * 'length' property.
 	 */
 	Array;
-	
+
 	/**
-	 * Returns the java script property type. 
+	 * Returns the java script property type.
+	 * 
 	 * @param value value of java script type.
 	 * @param isArray <code>true</code> if is array
-	 * @return teh java script field type
+	 * @return the java script field type
 	 */
 	static final ObjectType getType(String value, boolean isArray) {
 		// if is array, returns array

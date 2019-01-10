@@ -23,7 +23,7 @@ import org.pepstock.charba.client.enums.JoinStyle;
  * Interface to define line object defaults.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public interface IsDefaultLine extends IsDefaultArc{
 	

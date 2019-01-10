@@ -21,7 +21,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc;
  * CHART.JS default values for ARC element.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public class DefaultArc implements IsDefaultArc{
 

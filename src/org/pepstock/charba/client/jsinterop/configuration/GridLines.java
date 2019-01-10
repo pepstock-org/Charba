@@ -23,7 +23,7 @@ import org.pepstock.charba.client.colors.IsColor;
  * The grid line configuration defines options for the grid lines that run perpendicular to the getAxis().
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class GridLines extends AxisContainer{

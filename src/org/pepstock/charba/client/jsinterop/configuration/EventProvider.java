@@ -29,7 +29,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * Is a JavaScript object container, which contains the chart instance and options element to store chart configuration, which will manage chart events to events handlers.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  * 
  * @param <T> options element to store chart configuration
  */

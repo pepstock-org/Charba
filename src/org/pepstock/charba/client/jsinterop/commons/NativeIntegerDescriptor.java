@@ -24,13 +24,13 @@ import jsinterop.annotations.JsType;
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
- *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class NativeIntegerDescriptor extends NativeAbstractDescriptor {
 
 	/**
 	 * Sets the value associated with the property.
+	 * 
 	 * @param value the value associated with the property
 	 */
 	@JsProperty
@@ -38,6 +38,7 @@ public final class NativeIntegerDescriptor extends NativeAbstractDescriptor {
 
 	/**
 	 * Gets the value associated with the property.
+	 * 
 	 * @return the value associated with the property
 	 */
 	@JsProperty

@@ -26,7 +26,7 @@ import org.pepstock.charba.client.jsinterop.data.PieDataset;
  * They are excellent at showing the relational proportions between data.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class PieChart extends AbstractChart<PieOptions, PieDataset> {

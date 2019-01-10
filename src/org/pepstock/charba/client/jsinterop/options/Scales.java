@@ -30,7 +30,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales;
  * It maps the CHART.JS object of default, <code>chart.defaults.[chart_type].scales</code>.<br>
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class Scales extends AbstractModel<Options, IsDefaultScales> implements IsDefaultScales {
@@ -171,7 +171,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	 * Inner class to create scale item by a native object to use in {@link org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList}.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 *
 	 */
 	private class ScaleListFactory implements NativeObjectContainerFactory<Scale> {

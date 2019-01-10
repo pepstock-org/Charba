@@ -22,7 +22,7 @@ import org.pepstock.charba.client.enums.InteractionMode;
  * Interface to define hover object defaults.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public interface IsDefaultHover {
 	

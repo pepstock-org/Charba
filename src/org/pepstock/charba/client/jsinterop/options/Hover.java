@@ -25,7 +25,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover;
  * Definitions about how elements appear in the tooltip, hovering the chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public final class Hover extends AbstractModel<Options, IsDefaultHover> implements IsDefaultHover{

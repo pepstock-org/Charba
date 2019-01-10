@@ -19,7 +19,7 @@ package org.pepstock.charba.client.jsinterop.commons;
  * Interface to be implemented to load elements from an array of native object
  *  
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public interface NativeObjectContainerFactory <T extends NativeObjectContainer> {
 	

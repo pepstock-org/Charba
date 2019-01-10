@@ -19,13 +19,14 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 
 /**
- * Enums the property ID used by charba to identify the chart.
+ * Enums the property ID used by CHARBA to identify the chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
-public enum Id implements Key {
-	
+public enum Id implements Key
+{
+
 	/**
 	 * Name of java script property
 	 */
@@ -33,8 +34,9 @@ public enum Id implements Key {
 
 	/**
 	 * Returns the property value from java script object.
+	 * 
 	 * @param nativeObjectContainer java script object container
-	 * @return the property value or {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#STRING} if not exist 
+	 * @return the property value or {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#STRING} if not exist
 	 */
 	public static String get(NativeObjectContainer nativeObjectContainer) {
 		return get(nativeObjectContainer.getNativeObject());
@@ -42,19 +44,20 @@ public enum Id implements Key {
 
 	/**
 	 * Returns the property value from java script object.
+	 * 
 	 * @param nativeObject java script object
-	 * @return the property value or {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#STRING} if not exist 
+	 * @return the property value or {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#STRING} if not exist
 	 */
 	public static String get(NativeObject nativeObject) {
 		// checks if property exists
 		if (nativeObject.hasProperty(charbaId.name())) {
 			// gets descriptor
 			NativeStringDescriptor descriptor = nativeObject.getStringProperty(charbaId.name());
-			// if descriptor is consistent, return value 
+			// if descriptor is consistent, return value
 			return descriptor != null ? descriptor.getValue() : UndefinedValues.STRING;
 		}
 		// property doesn't exist
 		return UndefinedValues.STRING;
 	}
-	
+
 }

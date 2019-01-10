@@ -23,7 +23,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle;
  * CHART.JS default values for TITLE element.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class DefaultTitle extends AbstractDefaultFontItem implements IsDefaultTitle {
 

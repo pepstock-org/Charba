@@ -22,7 +22,7 @@ import org.pepstock.charba.client.colors.IsColor;
  * Note that these options only apply if display is true.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class RadialAngleLines extends AxisContainer{

@@ -28,7 +28,7 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory
  * handler or callbacks to apply own logic.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public class DatasetItem extends NativeObjectContainer{
 	
@@ -105,7 +105,7 @@ public class DatasetItem extends NativeObjectContainer{
 	 * Inner class to create dataset item by a native object to use in {@link org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList}.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	public static class DatasetItemFactory implements NativeObjectContainerFactory<DatasetItem>{
 		/* (non-Javadoc)

@@ -23,7 +23,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaledOptions;
  * Base object which maps chart options, with scales elements to set axes configurations.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public class ScaledOptions extends Options implements IsDefaultScaledOptions{
 	

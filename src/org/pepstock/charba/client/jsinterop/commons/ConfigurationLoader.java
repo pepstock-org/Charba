@@ -25,7 +25,7 @@ import org.pepstock.charba.client.jsinterop.Configuration;
  * @since 2.0
  */
 public final class ConfigurationLoader {
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -35,6 +35,7 @@ public final class ConfigurationLoader {
 
 	/**
 	 * Loads the OPTIONS into configuration CHART.JS object.
+	 * 
 	 * @param configuration CHART.JS object for configuration
 	 * @param options chart options
 	 */
@@ -44,6 +45,7 @@ public final class ConfigurationLoader {
 
 	/**
 	 * Loads the DATA into configuration CHART.JS object.
+	 * 
 	 * @param configuration CHART.JS object for configuration
 	 * @param data datasets configuration
 	 */

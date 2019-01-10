@@ -25,7 +25,7 @@ import org.pepstock.charba.client.jsinterop.AbstractChart;
  * This object is used to map defined axis as time. This is used to have time series charts.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {

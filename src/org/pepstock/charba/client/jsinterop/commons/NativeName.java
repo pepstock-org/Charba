@@ -22,7 +22,7 @@ package org.pepstock.charba.client.jsinterop.commons;
  * @since 2.0
  */
 public final class NativeName {
-	
+
 	/**
 	 * Constant to bind java script object as object
 	 */
@@ -37,7 +37,6 @@ public final class NativeName {
 	 * Constant to bind java script object as JsHelper (internal of Charba)
 	 */
 	public static final String JSHELPER = "JsHelper";
-	
 
 	/**
 	 * Constant to bind java script object as JsControllerHelper (internal of Charba)
@@ -60,7 +59,5 @@ public final class NativeName {
 	private NativeName() {
 		// do nothing
 	}
-	
-	
 
 }

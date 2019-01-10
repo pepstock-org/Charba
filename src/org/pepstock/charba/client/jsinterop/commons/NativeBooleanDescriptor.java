@@ -20,17 +20,17 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * A property descriptor is a record which describes a java script property (boolean).<br>
+ * A property descriptor is a record which describes a java script property (boolean).
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
-
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class NativeBooleanDescriptor extends NativeAbstractDescriptor {
 
 	/**
 	 * Sets the value associated with the property.
+	 * 
 	 * @param value the value associated with the property
 	 */
 	@JsProperty
@@ -38,10 +38,10 @@ public final class NativeBooleanDescriptor extends NativeAbstractDescriptor {
 
 	/**
 	 * Gets the value associated with the property.
+	 * 
 	 * @return the value associated with the property
 	 */
 	@JsProperty
 	public native boolean getValue();
 
-	
 }

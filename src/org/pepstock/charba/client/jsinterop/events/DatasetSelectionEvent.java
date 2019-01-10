@@ -24,7 +24,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * This event doesn't suppress the click event on the chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionEventHandler> {
 

@@ -26,7 +26,7 @@ import org.pepstock.charba.client.jsinterop.data.ScatterDataset;
  * To use a scatter chart, data must be passed as objects containing X and Y properties.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class ScatterChart extends AbstractChart<ScatterOptions, ScatterDataset> {

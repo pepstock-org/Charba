@@ -24,7 +24,7 @@ package org.pepstock.charba.client.jsinterop.controllers;
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class InvalidControllerTypeException extends Exception {

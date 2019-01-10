@@ -32,7 +32,7 @@ import org.pepstock.charba.client.jsinterop.plugins.GlobalPlugins;
  * This singleton is a wrapper to <code>defaults</code> object that CHART.JS (by CHART object) provides to get defaults values.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class Defaults {
 
@@ -55,7 +55,7 @@ public final class Defaults {
 	 * To avoid any instantiation.<br>
 	 * This gets from other objects (by static references) the defaults of CHART.JS.
 	 */
-	Defaults() {
+	private Defaults() {
 		// to be sure that chart.js has been injected
 		Injector.ensureInjected();
 		// gets defaults from CHART.JS

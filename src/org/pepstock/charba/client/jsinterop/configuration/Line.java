@@ -26,7 +26,7 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  * Line elements are used to represent the line in a line chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public class Line extends AbstractConfigurationElement {
 

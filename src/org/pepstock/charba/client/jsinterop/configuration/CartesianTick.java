@@ -19,7 +19,7 @@ package org.pepstock.charba.client.jsinterop.configuration;
  * Common tick configuration, for cartesian axes.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 abstract class CartesianTick extends Tick {

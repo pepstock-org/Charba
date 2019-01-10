@@ -40,7 +40,7 @@ import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
  * It maps the CHART.JS object of default, <code>chart.defaults.scale</code>.<br>
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsDefaultScale {

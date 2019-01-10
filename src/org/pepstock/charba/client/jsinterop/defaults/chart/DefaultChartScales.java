@@ -24,7 +24,7 @@ import org.pepstock.charba.client.jsinterop.options.Scales;
  * Defaults for scales/axes option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class DefaultChartScales implements IsDefaultScales {
 

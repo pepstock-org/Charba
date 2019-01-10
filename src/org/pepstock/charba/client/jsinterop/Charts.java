@@ -22,7 +22,7 @@ import java.util.Map;
  * Is a static reference which collects all chart instances to be able to enable global plugins.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public final class Charts {

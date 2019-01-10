@@ -27,7 +27,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime;
  * The following display formats are used to configure how different time units are formed into strings for the axis tick marks.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public final class Time extends AbstractModel<Scale, IsDefaultTime> implements IsDefaultTime{

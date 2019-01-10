@@ -25,7 +25,7 @@ import org.pepstock.charba.client.jsinterop.data.DoughnutDataset;
  * A doughnut charts are divided into segments, the arc of each segment shows the proportional value of each piece of data.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public class DoughnutChart extends AbstractChart<DoughnutOptions, DoughnutDataset> {
 

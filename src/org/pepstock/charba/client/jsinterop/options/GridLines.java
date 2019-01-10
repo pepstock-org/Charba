@@ -33,7 +33,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines;
  * The grid line configuration defines options for the grid lines that run perpendicular to the axis.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> implements IsDefaultGridLines {

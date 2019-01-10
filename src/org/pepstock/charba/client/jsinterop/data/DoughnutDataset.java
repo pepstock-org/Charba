@@ -21,7 +21,7 @@ package org.pepstock.charba.client.jsinterop.data;
  * Is equals of Pie dataset.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public class DoughnutDataset extends PieDataset {
 

@@ -24,7 +24,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel;
  * The scale label configuration defines options for the scale title. Note that this only applies to cartesian axes.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> implements IsDefaultScaleLabel{

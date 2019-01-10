@@ -33,7 +33,7 @@ import jsinterop.annotations.JsFunction;
  * The wrapper is mandatory to able to catch all hooks of chart even if the controller implements just a part of the hooks.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 final class WrapperController extends NativeObjectContainer {
@@ -45,7 +45,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * Java script FUNCTION callback called to catch the chart initialization.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyInitializeCallback {
@@ -63,7 +63,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * Java script FUNCTION callback called to catch the chart add elements.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyAddElementsCallback {
@@ -81,7 +81,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * Java script FUNCTION callback called to catch the chart add element and reset.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyAddElementAndResetCallback {
@@ -99,7 +99,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * Java script FUNCTION callback called to catch the chart drawing.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyDrawCallback {
@@ -117,7 +117,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * Java script FUNCTION callback called to catch the chart remove hover.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyRemoveHoverStyleCallback {
@@ -135,7 +135,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * Java script FUNCTION callback called to catch the chart set hover.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxySetHoverStyleCallback {
@@ -153,7 +153,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * Java script FUNCTION callback called to catch the chart updating.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyUpdateCallback {

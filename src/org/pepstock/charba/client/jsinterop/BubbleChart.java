@@ -27,7 +27,7 @@ import org.pepstock.charba.client.jsinterop.data.BubbleDataset;
  * The third dimension is represented by the size of the individual bubbles.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public class BubbleChart extends AbstractChart<BubbleOptions, BubbleDataset> {
 

@@ -26,13 +26,14 @@ import jsinterop.annotations.JsType;
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
-
+ * @see com.google.gwt.core.client.JsDate
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class NativeDateDescriptor extends NativeAbstractDescriptor {
 
 	/**
 	 * Sets the value associated with the property.
+	 * 
 	 * @param value the value associated with the property
 	 */
 	@JsProperty
@@ -40,10 +41,10 @@ public final class NativeDateDescriptor extends NativeAbstractDescriptor {
 
 	/**
 	 * Gets the value associated with the property.
+	 * 
 	 * @return the value associated with the property
 	 */
 	@JsProperty
 	public native JsDate getValue();
 
-	
 }

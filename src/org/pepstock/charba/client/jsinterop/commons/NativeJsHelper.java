@@ -27,7 +27,6 @@ import jsinterop.annotations.JsType;
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
- *
  */
 @JsType(isNative = true, name = NativeName.JSHELPER, namespace = JsPackage.GLOBAL)
 final class NativeJsHelper {

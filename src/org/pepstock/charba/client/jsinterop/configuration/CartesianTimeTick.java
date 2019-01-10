@@ -22,7 +22,7 @@ import org.pepstock.charba.client.enums.TickSource;
  * It can be placed on either the x or y axis.<br>
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class CartesianTimeTick extends CartesianTick {

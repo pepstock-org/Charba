@@ -27,7 +27,7 @@ import org.pepstock.charba.client.jsinterop.options.Scale;
  * The configuration element which contains all axes definitions.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public class Scales extends ConfigurationContainer<ExtendedOptions> {
 

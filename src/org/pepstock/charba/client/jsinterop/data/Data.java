@@ -32,7 +32,7 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
  * It contains labels and datasets.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class Data extends NativeObjectContainer implements ConfigurationElement {
 
@@ -169,7 +169,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 			// adds all datasets
 			this.currentDatasets.addAll(datasets);
 			// sets datasets to native object
-			setArrayValue(Property.datasets, this.currentDatasets.getArray());
+			setArrayValue(Property.datasets, this.currentDatasets);
 		}
 	}
 

@@ -22,7 +22,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultRectangle;
  * CHART.JS default values for RECTANGLE element.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class DefaultRectangle extends DefaultArc implements IsDefaultRectangle{
 	

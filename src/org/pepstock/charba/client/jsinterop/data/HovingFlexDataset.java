@@ -29,7 +29,7 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayString;
  * or an array.<br>
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 abstract class HovingFlexDataset extends Dataset {
 

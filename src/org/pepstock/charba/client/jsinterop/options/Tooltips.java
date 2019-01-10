@@ -29,7 +29,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
  * Configuration element to set all attributes and features of the default tooltip.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> implements IsDefaultTooltips{

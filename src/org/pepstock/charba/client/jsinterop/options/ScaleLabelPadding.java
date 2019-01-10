@@ -24,7 +24,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding;
  * It is applied to all sides of the scale label objetc of axes (left, top, right, bottom).
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0 
+ * @since 2.0 
  *
  */
 public final class ScaleLabelPadding extends AbstractModel<ScaleLabel, IsDefaultPadding> implements IsDefaultPadding{

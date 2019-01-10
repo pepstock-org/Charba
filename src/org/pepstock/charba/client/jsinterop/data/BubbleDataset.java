@@ -32,7 +32,7 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayString;
  * The third dimension is represented by the size of the individual bubbles.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class BubbleDataset extends HovingDataset {
 	// data point factory

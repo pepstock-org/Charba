@@ -27,20 +27,21 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, name = NativeName.ARRAY, namespace = JsPackage.GLOBAL)
 public class Array {
-	
+
 	/**
 	 * This method determines whether the passed value is an Array.
+	 * 
 	 * @param object object to be checked.
 	 * @return <code>true</code> if the value is an Array; otherwise, <code>false</code>.
 	 */
 	public static native boolean isArray(Object object);
-	
+
 	/**
 	 * Returns the number of elements in this array.
+	 * 
 	 * @return the number of elements in this array.
 	 */
 	@JsProperty(name = "length")
 	public final native int length();
 
 }
-

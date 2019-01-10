@@ -20,18 +20,17 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * A property descriptor is a record which describes a java script property (callback proxy function).<br>
+ * A property descriptor is a record which describes a java script property (callback proxy function).
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
- *
- * @param <T> type of property
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class NativeCallbackProxyDescriptor extends NativeAbstractDescriptor {
 
 	/**
 	 * Sets the value associated with the property.
+	 * 
 	 * @param value the value associated with the property
 	 */
 	@JsProperty
@@ -39,6 +38,7 @@ public final class NativeCallbackProxyDescriptor extends NativeAbstractDescripto
 
 	/**
 	 * Gets the value associated with the property.
+	 * 
 	 * @return the value associated with the property
 	 */
 	@JsProperty

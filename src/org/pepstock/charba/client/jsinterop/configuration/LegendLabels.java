@@ -36,7 +36,7 @@ import jsinterop.annotations.JsFunction;
  * This is the labels configuration of the legend.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
@@ -50,7 +50,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyGenerateLabelsCallback {
@@ -69,7 +69,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyFilterCallback {

@@ -31,7 +31,7 @@ import jsinterop.annotations.JsType;
  * This is the object which will be set to CHART.JS to add a plugin.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 @JsType
 final class NativePlugin {

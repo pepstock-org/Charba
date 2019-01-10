@@ -20,18 +20,19 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * A property descriptor is a record which describes a java script property (object).<br>
+ * A property descriptor is a record which describes a java script property (array).
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
- *
- * @param <T> type of property
+ * @see Array
+ * @param <T> type of property which extends an array
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class NativeArrayDescriptor<T extends Array> extends NativeAbstractDescriptor {
 
 	/**
 	 * Sets the value associated with the property.
+	 * 
 	 * @param value the value associated with the property
 	 */
 	@JsProperty
@@ -39,6 +40,7 @@ public final class NativeArrayDescriptor<T extends Array> extends NativeAbstract
 
 	/**
 	 * Gets the value associated with the property.
+	 * 
 	 * @return the value associated with the property
 	 */
 	@JsProperty

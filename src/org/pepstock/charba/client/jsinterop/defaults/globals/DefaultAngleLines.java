@@ -21,7 +21,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines;
  * CHART.JS default values for ANGLELINES element.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class DefaultAngleLines implements IsDefaultAngleLines {
 	

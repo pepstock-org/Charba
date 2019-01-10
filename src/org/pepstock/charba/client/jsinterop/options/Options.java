@@ -32,7 +32,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
  * Base object which maps chart options.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions {
 

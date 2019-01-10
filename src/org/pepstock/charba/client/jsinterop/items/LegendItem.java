@@ -38,7 +38,7 @@ import org.pepstock.charba.client.jsinterop.commons.ObjectType;
  * This is a wrapper of the CHART.JS item which contains the legend item.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public class LegendItem extends NativeObjectContainer {
 
@@ -227,7 +227,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * Inner class to create legend item by a native object to use in {@link org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList}.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	static class LegendItemFactory implements NativeObjectContainerFactory<LegendItem>{
 		/* (non-Javadoc)

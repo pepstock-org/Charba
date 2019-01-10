@@ -21,7 +21,7 @@ import org.pepstock.charba.client.colors.IsColor;
  * This object is used to map defined radial axis as linear.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class RadialLinearTick extends Tick {

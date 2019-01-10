@@ -22,7 +22,7 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  * Specific scales for stacked charts.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  *
  */
 public class StackedScales extends Scales {

@@ -30,7 +30,7 @@ import com.google.gwt.i18n.client.NumberFormat;
  * a wrong double precision.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public class NoSelectedDatasetTicksCallback implements TickCallback {
 

@@ -39,7 +39,7 @@ import jsinterop.annotations.JsFunction;
  * takes.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public class Animation extends EventProvider<ExtendedOptions> {
 	
@@ -52,7 +52,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyAnimationCompleteCallback {
@@ -70,7 +70,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	@JsFunction
 	interface ProxyAnimationProgressCallback {

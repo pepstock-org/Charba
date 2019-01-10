@@ -22,7 +22,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint;
  * CHART.JS default values for POINT element.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class DefaultPoint extends DefaultArc implements IsDefaultPoint{
 	

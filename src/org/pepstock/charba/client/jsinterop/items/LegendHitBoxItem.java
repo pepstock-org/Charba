@@ -23,7 +23,7 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory
  * This is a wrapper of the CHART.JS item which contains the legends hit box.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
+ * @since 2.0
  */
 public final class LegendHitBoxItem extends SizeItem{
 
@@ -58,7 +58,7 @@ public final class LegendHitBoxItem extends SizeItem{
 	 * Inner class to create legend hit box item by a native object to use in {@link org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList}.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @version 2.0
+	 * @since 2.0
 	 */
 	static class LegendHitBoxItemFactory implements NativeObjectContainerFactory<LegendHitBoxItem>{
 
