@@ -44,7 +44,7 @@ public class CartesianTimeTick extends CartesianTick {
 	public void setSource(TickSource source) {
 		getConfiguration().setSource(source);
 	}
-	
+
 	/**
 	 * Returns the property controls the ticks generation.
 	 * 

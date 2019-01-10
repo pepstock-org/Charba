@@ -41,11 +41,11 @@ import jsinterop.annotations.JsFunction;
  *
  */
 public class Legend extends EventProvider<ExtendedOptions> {
-	
+
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
-	
+
 	/**
 	 * Java script FUNCTION callback called when a click event on the legend is raised.<br>
 	 * Must be an interface with only 1 method.
@@ -55,11 +55,12 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	 */
 	@JsFunction
 	interface ProxyLegendClickCallback {
-		
+
 		/**
 		 * Method of function to be called when a click event on the legend is raised.
+		 * 
 		 * @param chart context Value of <code>this</code> to the execution context of function. It is the chart instance.
-		 * @param event native event 
+		 * @param event native event
 		 * @param item legend item affected by event
 		 */
 		void call(Chart chart, ChartNativeEvent event, NativeObject item);
@@ -74,18 +75,19 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	 */
 	@JsFunction
 	interface ProxyLegendHoverCallback {
-		
+
 		/**
 		 * Method of function to be called when a hover event on the legend is raised.
+		 * 
 		 * @param chart context Value of <code>this</code> to the execution context of function. It is the chart instance.
-		 * @param event native event 
+		 * @param event native event
 		 * @param item legend item affected by event
 		 */
 		void call(Chart chart, ChartNativeEvent event, NativeObject item);
 	}
-	
+
 	// ---------------------------
-	// -- CALLBACKS PROXIES    ---
+	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the click function
 	private final CallbackProxy<ProxyLegendClickCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
@@ -97,7 +99,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	private int onClickHandlers = 0;
 	// amount of hover handlers
 	private int onHoverHandlers = 0;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -122,25 +124,33 @@ public class Legend extends EventProvider<ExtendedOptions> {
 		// -------------------------------
 		clickCallbackProxy.setCallback(new ProxyLegendClickCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Legend.ProxyLegendClickCallback#call(org.pepstock.charba.client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.configuration.Legend.ProxyLegendClickCallback#call(org.pepstock.charba.
+			 * client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent,
+			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(Chart chart, ChartNativeEvent event, NativeObject item) {
 				// fires the event
 				getChart().fireEvent(new LegendClickEvent(event, new LegendItem(item)));
-			}			
+			}
 		});
 		hoverCallbackProxy.setCallback(new ProxyLegendHoverCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Legend.ProxyLegendHoverCallback#call(org.pepstock.charba.client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.configuration.Legend.ProxyLegendHoverCallback#call(org.pepstock.charba.
+			 * client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent,
+			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(Chart chart, ChartNativeEvent event, NativeObject item) {
 				// fires the event
 				getChart().fireEvent(new LegendHoverEvent(event, new LegendItem(item)));
-			}			
+			}
 		});
 	}
 
@@ -219,7 +229,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	/**
 	 * Returns if the legend is shown.
 	 * 
-	 * @return if the legend is shown. 
+	 * @return if the legend is shown.
 	 */
 	public boolean isDisplay() {
 		return getConfiguration().getLegend().isDisplay();
@@ -237,7 +247,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	/**
 	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
 	 * 
-	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). 
+	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes).
 	 */
 	public boolean isFullWidth() {
 		return getConfiguration().getLegend().isFullWidth();
@@ -255,7 +265,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	/**
 	 * Returns if the legend will show datasets in reverse order.
 	 * 
-	 * @return Legend will show datasets in reverse order. 
+	 * @return Legend will show datasets in reverse order.
 	 */
 	public boolean isReverse() {
 		return getConfiguration().getLegend().isReverse();
@@ -273,7 +283,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	/**
 	 * Returns the position of the legend.
 	 * 
-	 * @return Position of the legend. 
+	 * @return Position of the legend.
 	 */
 	public Position getPosition() {
 		return getConfiguration().getLegend().getPosition();

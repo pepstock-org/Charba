@@ -26,7 +26,7 @@ import org.pepstock.charba.client.colors.IsColor;
  * @since 2.0
  *
  */
-public class GridLines extends AxisContainer{
+public class GridLines extends AxisContainer {
 
 	/**
 	 * Builds the object storing the axis which this grid lines belongs to.
@@ -54,7 +54,7 @@ public class GridLines extends AxisContainer{
 	public boolean isDisplay() {
 		return getAxis().getScale().getGrideLines().isDisplay();
 	}
-	
+
 	/**
 	 * If true, gridlines are circular (on radar chart only).
 	 * 
@@ -72,7 +72,6 @@ public class GridLines extends AxisContainer{
 	public boolean isCircular() {
 		return getAxis().getScale().getGrideLines().isCircular();
 	}
-
 
 	/**
 	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
@@ -100,7 +99,7 @@ public class GridLines extends AxisContainer{
 	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
 	 * second grid line and so on.
 	 * 
-	 * @return the list of colors of the grid lines. 
+	 * @return the list of colors of the grid lines.
 	 */
 	public List<String> getColorAsString() {
 		return getAxis().getScale().getGrideLines().getColorsAsString();
@@ -110,7 +109,7 @@ public class GridLines extends AxisContainer{
 	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
 	 * second grid line and so on.
 	 * 
-	 * @return the list of colors of the grid lines. 
+	 * @return the list of colors of the grid lines.
 	 */
 	public List<IsColor> getColor() {
 		return getAxis().getScale().getGrideLines().getColor();
@@ -130,7 +129,7 @@ public class GridLines extends AxisContainer{
 	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
 	 * lines and gaps which describe the pattern.
 	 * 
-	 * @return the line dash pattern used when stroking lines. 
+	 * @return the line dash pattern used when stroking lines.
 	 */
 	public List<Integer> getBorderDash() {
 		return getAxis().getScale().getGrideLines().getBorderDash();
@@ -148,7 +147,7 @@ public class GridLines extends AxisContainer{
 	/**
 	 * Returns the line dash pattern offset or "phase".
 	 * 
-	 * @return Offset for line dashes. 
+	 * @return Offset for line dashes.
 	 */
 	public int getBorderDashOffset() {
 		return getAxis().getScale().getGrideLines().getBorderDashOffset();
@@ -166,7 +165,7 @@ public class GridLines extends AxisContainer{
 	/**
 	 * Returns the stroke widths of grid lines.
 	 * 
-	 * @return lineWidth stroke widths of grid lines. 
+	 * @return lineWidth stroke widths of grid lines.
 	 */
 	public List<Integer> getLineWidth() {
 		return getAxis().getScale().getGrideLines().getLinesWidth();
@@ -184,7 +183,7 @@ public class GridLines extends AxisContainer{
 	/**
 	 * If true, draw border at the edge between the axis and the chart area.
 	 * 
-	 * @return If true, draw border at the edge between the axis and the chart area. 
+	 * @return If true, draw border at the edge between the axis and the chart area.
 	 */
 	public boolean isDrawBorder() {
 		return getAxis().getScale().getGrideLines().isDrawBorder();
@@ -206,7 +205,7 @@ public class GridLines extends AxisContainer{
 	 * control which grid lines are drawn.
 	 * 
 	 * @return If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you
-	 *         need to control which grid lines are drawn. 
+	 *         need to control which grid lines are drawn.
 	 */
 	public boolean isDrawOnChartArea() {
 		return getAxis().getScale().getGrideLines().isDrawOnChartArea();
@@ -224,7 +223,7 @@ public class GridLines extends AxisContainer{
 	/**
 	 * If true, draw lines beside the ticks in the axis area beside the chart.
 	 * 
-	 * @return If true, draw lines beside the ticks in the axis area beside the chart. 
+	 * @return If true, draw lines beside the ticks in the axis area beside the chart.
 	 */
 	public boolean isDrawTicks() {
 		return getAxis().getScale().getGrideLines().isDrawTicks();
@@ -242,7 +241,7 @@ public class GridLines extends AxisContainer{
 	/**
 	 * Returns the length in pixels that the grid lines will draw into the axis area.
 	 * 
-	 * @return Length in pixels that the grid lines will draw into the axis area. 
+	 * @return Length in pixels that the grid lines will draw into the axis area.
 	 */
 	public int getTickMarkLength() {
 		return getAxis().getScale().getGrideLines().getTickMarkLength();
@@ -260,7 +259,7 @@ public class GridLines extends AxisContainer{
 	/**
 	 * Returns the stroke width of the grid line for the first index (index 0).
 	 * 
-	 * @return Stroke width of the grid line for the first index (index 0). 
+	 * @return Stroke width of the grid line for the first index (index 0).
 	 */
 	public int getZeroLineWidth() {
 		return getAxis().getScale().getGrideLines().getZeroLineWidth();
@@ -314,7 +313,7 @@ public class GridLines extends AxisContainer{
 	/**
 	 * Returns the length and spacing of dashes of the grid line for the first index (index 0).
 	 * 
-	 * @return the length and spacing of dashes of the grid line for the first index (index 0). 
+	 * @return the length and spacing of dashes of the grid line for the first index (index 0).
 	 */
 	public List<Integer> getZeroLineBorderDash() {
 		return getAxis().getScale().getGrideLines().getZeroLineBorderDash();

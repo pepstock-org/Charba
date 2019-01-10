@@ -24,10 +24,11 @@ import org.pepstock.charba.client.enums.TimeUnit;
  * @since 2.0
  *
  */
-public class DisplayFormats extends AxisContainer{
+public class DisplayFormats extends AxisContainer {
 
 	/**
 	 * Builds the object by axis instance.
+	 * 
 	 * @param axis axis instance
 	 */
 	DisplayFormats(Axis axis) {
@@ -36,19 +37,22 @@ public class DisplayFormats extends AxisContainer{
 
 	/**
 	 * Sets the display formats are used to configure how different time units are formed into strings for the axis tick marks.
+	 * 
 	 * @param unit time unit.
 	 * @param format display format
 	 */
-	public void setDisplayFormat(TimeUnit unit, String format){
+	public void setDisplayFormat(TimeUnit unit, String format) {
 		getAxis().getScale().getTime().getDisplayFormats().setDisplayFormat(unit, format);
 	}
 
 	/**
-	 * Returns the display formats are used to configure how different time units are formed into strings for the axis tick marks.
+	 * Returns the display formats are used to configure how different time units are formed into strings for the axis tick
+	 * marks.
+	 * 
 	 * @param unit time unit.
 	 * @return display format
 	 */
-	public String getDisplayFormat(TimeUnit unit){
+	public String getDisplayFormat(TimeUnit unit) {
 		return getAxis().getScale().getTime().getDisplayFormats().getDisplayFormat(unit);
 	}
 

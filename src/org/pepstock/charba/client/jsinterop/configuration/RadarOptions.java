@@ -30,7 +30,7 @@ public class RadarOptions extends SingleScaleOptions {
 	 * Builds the object storing the chart instance and default values.
 	 * 
 	 * @param chart chart instance
-	 * @param defaultValues defaults options of radar chart 
+	 * @param defaultValues defaults options of radar chart
 	 */
 	public RadarOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);

@@ -21,13 +21,14 @@ package org.pepstock.charba.client.jsinterop.configuration;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-abstract class AxisContainer{
+abstract class AxisContainer {
 
 	// axis instance
 	private final Axis axis;
-	
+
 	/**
 	 * Creates the object with the axis instance
+	 * 
 	 * @param axis axis instance
 	 */
 	AxisContainer(Axis axis) {
@@ -35,10 +36,12 @@ abstract class AxisContainer{
 	}
 
 	/**
+	 * Returns the axis instance.
+	 * 
 	 * @return the axis
 	 */
 	final Axis getAxis() {
 		return axis;
 	}
-	
+
 }

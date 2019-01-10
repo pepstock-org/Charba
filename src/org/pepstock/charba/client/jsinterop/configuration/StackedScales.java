@@ -33,7 +33,7 @@ public class StackedScales extends Scales {
 	 * Builds the object storing the chart instance and root options.
 	 * 
 	 * @param chart chart instance
-	 * @param options root options 
+	 * @param options root options
 	 */
 	StackedScales(AbstractChart<?, ?> chart, ExtendedOptions options) {
 		super(chart, options);
@@ -92,7 +92,7 @@ public class StackedScales extends Scales {
 	private void setStackedProperty(Axis... axes) {
 		// scans axes
 		for (Axis ax : axes) {
-			// ONLY cartesina axes can be managed
+			// ONLY cartesian axes can be managed
 			if (ax instanceof CartesianAxis) {
 				// sets the stacked field
 				CartesianAxis<?> cax = (CartesianAxis<?>) ax;

@@ -25,7 +25,7 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  *
  */
 public class Padding {
-	
+
 	private final ExtendedOptions options;
 
 	/**
@@ -36,7 +36,7 @@ public class Padding {
 	Padding(ExtendedOptions options) {
 		this.options = options;
 	}
-	
+
 	/**
 	 * Sets the padding left in pixel.
 	 * 
@@ -103,7 +103,7 @@ public class Padding {
 	/**
 	 * Returns the padding bottom in pixel.
 	 * 
-	 * @return the padding bottom in pixel. 
+	 * @return the padding bottom in pixel.
 	 */
 	public int getBottom() {
 		return options.getLayout().getPadding().getBottom();

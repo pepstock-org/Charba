@@ -30,7 +30,7 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  *
  */
 public class Title {
-	
+
 	private final ExtendedOptions options;
 
 	/**
@@ -54,7 +54,7 @@ public class Title {
 	/**
 	 * Returns the font size for title.
 	 * 
-	 * @return Font size for title. 
+	 * @return Font size for title.
 	 */
 	public int getFontSize() {
 		return options.getTitle().getFontSize();
@@ -72,7 +72,7 @@ public class Title {
 	/**
 	 * Returns the font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). 
+	 * @return the font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getFontStyle() {
 		return options.getTitle().getFontStyle();
@@ -99,7 +99,7 @@ public class Title {
 	/**
 	 * Returns the font color for title
 	 * 
-	 * @return Font color for title. 
+	 * @return Font color for title.
 	 */
 	public String getFontColorAsString() {
 		return options.getTitle().getFontColorAsString();
@@ -108,7 +108,7 @@ public class Title {
 	/**
 	 * Returns the font color for title
 	 * 
-	 * @return Font color for title. 
+	 * @return Font color for title.
 	 */
 	public IsColor getFontColor() {
 		return options.getTitle().getFontColor();
@@ -126,7 +126,7 @@ public class Title {
 	/**
 	 * Returns the font family for title, follows CSS font-family options.
 	 * 
-	 * @return Font family for title, follows CSS font-family options. 
+	 * @return Font family for title, follows CSS font-family options.
 	 */
 	public String getFontFamily() {
 		return options.getTitle().getFontFamily();
@@ -180,7 +180,7 @@ public class Title {
 	/**
 	 * Returns the position of title.
 	 * 
-	 * @return the position of title. 
+	 * @return the position of title.
 	 */
 	public Position getPosition() {
 		return options.getTitle().getPosition();
@@ -198,7 +198,7 @@ public class Title {
 	/**
 	 * Returns the padding to apply around title. Only top and bottom are implemented.
 	 * 
-	 * @return Padding to apply around title. Only top and bottom are implemented. 
+	 * @return Padding to apply around title. Only top and bottom are implemented.
 	 */
 	public int getPadding() {
 		return options.getTitle().getPadding();

@@ -21,8 +21,10 @@ import org.pepstock.charba.client.jsinterop.AbstractChart;
 
 /**
  * Axes are an integral part of a chart. They are used to determine how data maps to a pixel value on the chart. <br>
- * In a cartesian chart, there is 1 or more X axis and 1 or more Y axis to map points onto the 2 dimensional canvas. These axes are know as 'cartesian axes'.<br>
- * Axes that follow a cartesian grid are known as 'Cartesian Axes'. Cartesian axes are used for line, bar, and bubble charts. Four cartesian axes are included by default.<br>
+ * In a cartesian chart, there is 1 or more X axis and 1 or more Y axis to map points onto the 2 dimensional canvas. These axes
+ * are know as 'cartesian axes'.<br>
+ * Axes that follow a cartesian grid are known as 'Cartesian Axes'. Cartesian axes are used for line, bar, and bubble charts.
+ * Four cartesian axes are included by default.<br>
  * <ul>
  * <li>linear
  * <li>logarithmic
@@ -40,11 +42,12 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	private final GridLines grideLines;
 
 	private final CartesianScaleLabel scaleLabel;
-	
+
 	private final CartesianAxisType cartesianType;
 
 	/**
 	 * Builds the object storing the chart instance and cartesian axis type.
+	 * 
 	 * @param chart chart instance
 	 * @param cartesianType cartesian type
 	 */
@@ -75,7 +78,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	public GridLines getGrideLines() {
 		return grideLines;
 	}
-	
+
 	/**
 	 * @return the cartesianType
 	 */
@@ -113,7 +116,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	/**
 	 * If true, extra space is added to the both edges and the axis is scaled to fit into the chart area.
 	 * 
-	 * @return extra space of axis. 
+	 * @return extra space of axis.
 	 */
 	public boolean isOffset() {
 		return getScale().isOffset();
@@ -133,7 +136,7 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * The ID is used to link datasets and scale axes together.<br>
 	 * This is especially needed if multi-axes charts are used.
 	 * 
-	 * @return The ID is used to link datasets and scale axes together 
+	 * @return The ID is used to link datasets and scale axes together
 	 */
 	public String getId() {
 		return getScale().getId();

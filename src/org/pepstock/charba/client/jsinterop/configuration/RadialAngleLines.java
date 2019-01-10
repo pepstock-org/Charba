@@ -25,7 +25,7 @@ import org.pepstock.charba.client.colors.IsColor;
  * @since 2.0
  *
  */
-public class RadialAngleLines extends AxisContainer{
+public class RadialAngleLines extends AxisContainer {
 
 	/**
 	 * Builds the object storing the axis which this angle lines belongs to.
@@ -48,7 +48,7 @@ public class RadialAngleLines extends AxisContainer{
 	/**
 	 * If true, angle lines are shown
 	 * 
-	 * @return if true, angle lines are shown. 
+	 * @return if true, angle lines are shown.
 	 */
 	public boolean isDisplay() {
 		return getAxis().getScale().getAngleLines().isDisplay();
@@ -75,7 +75,7 @@ public class RadialAngleLines extends AxisContainer{
 	/**
 	 * Returns the color of angled lines.
 	 * 
-	 * @return color of angled lines. 
+	 * @return color of angled lines.
 	 */
 	public String getColorAsString() {
 		return getAxis().getScale().getAngleLines().getColorAsString();
@@ -84,7 +84,7 @@ public class RadialAngleLines extends AxisContainer{
 	/**
 	 * Returns the color of angled lines.
 	 * 
-	 * @return color of angled lines. 
+	 * @return color of angled lines.
 	 */
 	public IsColor getColor() {
 		return getAxis().getScale().getAngleLines().getColor();

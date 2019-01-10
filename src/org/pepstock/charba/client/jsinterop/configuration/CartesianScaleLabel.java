@@ -19,17 +19,18 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
- * When creating a chart, you want to tell the viewer what data they are viewing. To do this, you need to label the getAxis().<br>
+ * When creating a chart, you want to tell the viewer what data they are viewing. To do this, you need to label the
+ * getAxis().<br>
  * The scale label configuration defines options for the scale label. Note that this only applies to cartesian axes.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  *
  */
-public class CartesianScaleLabel extends AxisContainer{
+public class CartesianScaleLabel extends AxisContainer {
 
 	private final CartesianPadding padding;
-	
+
 	/**
 	 * Builds the object storing the axis which this scale label belongs to.
 	 * 
@@ -39,7 +40,7 @@ public class CartesianScaleLabel extends AxisContainer{
 		super(axis);
 		padding = new CartesianPadding(axis);
 	}
-	
+
 	/**
 	 * @return the padding
 	 */
@@ -77,7 +78,7 @@ public class CartesianScaleLabel extends AxisContainer{
 	/**
 	 * Returns the text for the label.
 	 * 
-	 * @return The text for the label. 
+	 * @return The text for the label.
 	 */
 	public String getLabelString() {
 		return getAxis().getScale().getScaleLabel().getLabelString();
@@ -122,16 +123,19 @@ public class CartesianScaleLabel extends AxisContainer{
 	/**
 	 * Sets the font style for the scale label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @param fontStyle Font style for the scale label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * @param fontStyle Font style for the scale label, follows CSS font-style options (i.e. normal, italic, oblique, initial,
+	 *            inherit).
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
 		getAxis().getScale().getScaleLabel().setFontStyle(fontStyle);
 	}
 
 	/**
-	 * Returns the font style for the scale label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * Returns the font style for the scale label, follows CSS font-style options (i.e. normal, italic, oblique, initial,
+	 * inherit).
 	 * 
-	 * @return the font style for the scale label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). 
+	 * @return the font style for the scale label, follows CSS font-style options (i.e. normal, italic, oblique, initial,
+	 *         inherit).
 	 */
 	public FontStyle getFontStyle() {
 		return getAxis().getScale().getScaleLabel().getFontStyle();
@@ -158,7 +162,7 @@ public class CartesianScaleLabel extends AxisContainer{
 	/**
 	 * Returns the font color for scale label
 	 * 
-	 * @return Font color for scale label. 
+	 * @return Font color for scale label.
 	 */
 	public String getFontColorAsString() {
 		return getAxis().getScale().getScaleLabel().getFontColorAsString();
@@ -167,7 +171,7 @@ public class CartesianScaleLabel extends AxisContainer{
 	/**
 	 * Returns the font color for scale label
 	 * 
-	 * @return Font color for scale label. 
+	 * @return Font color for scale label.
 	 */
 	public IsColor getFontColor() {
 		return getAxis().getScale().getScaleLabel().getFontColor();
@@ -185,7 +189,7 @@ public class CartesianScaleLabel extends AxisContainer{
 	/**
 	 * Returns the font family for the scale label, follows CSS font-family options.
 	 * 
-	 * @return Font family for the scale label, follows CSS font-family options. 
+	 * @return Font family for the scale label, follows CSS font-family options.
 	 */
 	public String getFontFamily() {
 		return getAxis().getScale().getScaleLabel().getFontFamily();

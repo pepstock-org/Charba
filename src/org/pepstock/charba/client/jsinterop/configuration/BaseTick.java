@@ -41,7 +41,7 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
-	
+
 	/**
 	 * Java script FUNCTION callback when tick is created.<br>
 	 * Must be an interface with only 1 method.
@@ -51,9 +51,10 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	 */
 	@JsFunction
 	interface ProxyTickCallback {
-		
+
 		/**
 		 * Method of function to be called when tick is created.
+		 * 
 		 * @param context value of <code>this</code> to the execution context of function.
 		 * @param value value of the tick
 		 * @param index index of tick
@@ -62,18 +63,18 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 		 */
 		String call(Object context, double value, int index, ArrayDouble values);
 	}
-	
+
 	// ---------------------------
-	// -- CALLBACKS PROXIES    ---
+	// -- CALLBACKS PROXIES ---
 	// ---------------------------
-	
+
 	// callback proxy to invoke the tick function
 	private final CallbackProxy<ProxyTickCallback> tickCallbackProxy = JsHelper.get().newCallbackProxy();
 	// user callback instance
 	private TickCallback callback = null;
 	// the axis instance, owner of this tick
 	private final T configuration;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -84,6 +85,7 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 
 	/**
 	 * Builds the object storing the axis instance and options element, based on different kind of axis.
+	 * 
 	 * @param axis axis instance
 	 * @param configuration options element, based on different kind of axis.
 	 */
@@ -91,14 +93,17 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 		super(axis);
 		// stores the options element
 		this.configuration = configuration;
-		
+
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		tickCallbackProxy.setCallback(new ProxyTickCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.BaseTick.ProxyTickCallback#call(java.lang.Object, double, int, org.pepstock.charba.client.jsinterop.commons.ArrayDouble)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.options.BaseTick.ProxyTickCallback#call(java.lang.Object, double, int,
+			 * org.pepstock.charba.client.jsinterop.commons.ArrayDouble)
 			 */
 			@Override
 			public String call(Object context, double value, int index, ArrayDouble values) {
@@ -112,7 +117,7 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 			}
 		});
 	}
-	
+
 	/**
 	 * Returns the options element for tick.
 	 * 
@@ -134,7 +139,7 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	/**
 	 * Returns the font size for tick.
 	 * 
-	 * @return the font size for tick. 
+	 * @return the font size for tick.
 	 */
 	public int getFontSize() {
 		return configuration.getFontSize();
@@ -143,7 +148,8 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	/**
 	 * Sets the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @param fontStyle Font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * @param fontStyle Font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial,
+	 *            inherit).
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
 		configuration.setFontStyle(fontStyle);
@@ -152,7 +158,7 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	/**
 	 * Returns the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). 
+	 * @return the font style for the tick, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getFontStyle() {
 		return configuration.getFontStyle();
@@ -206,14 +212,14 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	/**
 	 * Returns the font family for the tick, follows CSS font-family options.
 	 * 
-	 * @return Font family for the tick, follows CSS font-family options. 
+	 * @return Font family for the tick, follows CSS font-family options.
 	 */
 	public String getFontFamily() {
 		return configuration.getFontFamily();
 	}
 
 	/**
-	 * Returns the user callback instance. 
+	 * Returns the user callback instance.
 	 * 
 	 * @return the callback
 	 */

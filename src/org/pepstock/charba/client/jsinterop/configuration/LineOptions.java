@@ -31,7 +31,7 @@ public class LineOptions extends AbstractLineOptions {
 	 * Builds the object storing the chart instance and default values.
 	 * 
 	 * @param chart chart instance
-	 * @param defaultValues defaults options of line chart 
+	 * @param defaultValues defaults options of line chart
 	 */
 	public LineOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);

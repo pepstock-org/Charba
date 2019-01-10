@@ -27,11 +27,12 @@ public class BaseTickMajor extends BaseTick<TickMajor> {
 
 	/**
 	 * Creates the major tick
+	 * 
 	 * @param axis axis instance
 	 * @param configuration options element of the major tick
 	 */
 	BaseTickMajor(Axis axis, TickMajor configuration) {
 		super(axis, configuration);
 	}
-	
+
 }

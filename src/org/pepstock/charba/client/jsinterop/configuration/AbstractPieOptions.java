@@ -66,7 +66,7 @@ public abstract class AbstractPieOptions extends ConfigurationOptions {
 	/**
 	 * Returns the starting angle to draw arcs from.
 	 * 
-	 * @return starting angle to draw arcs from. 
+	 * @return starting angle to draw arcs from.
 	 */
 	public double getRotation() {
 		return getConfiguration().getRotation();

@@ -17,7 +17,6 @@ package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 
-
 /**
  * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
  * When set, these options apply to the configuration attached to a dataset.
@@ -36,7 +35,6 @@ public class Elements {
 	private final Arc arc;
 
 	private final Rectangle rectangle;
-
 
 	/**
 	 * Builds the object storing the default root options.

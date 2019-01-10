@@ -22,8 +22,8 @@ package org.pepstock.charba.client.jsinterop.configuration;
  * @since 2.0
  *
  */
-public class CartesianPadding extends AxisContainer{
-	
+public class CartesianPadding extends AxisContainer {
+
 	/**
 	 * Builds the object storing the axis which this padding belongs to.
 	 * 
@@ -45,7 +45,7 @@ public class CartesianPadding extends AxisContainer{
 	/**
 	 * Returns the padding left in pixel.
 	 * 
-	 * @return the padding left in pixel. 
+	 * @return the padding left in pixel.
 	 */
 	public int getLeft() {
 		return getAxis().getScale().getScaleLabel().getPadding().getLeft();
@@ -63,7 +63,7 @@ public class CartesianPadding extends AxisContainer{
 	/**
 	 * Returns the padding right in pixel.
 	 * 
-	 * @return the padding right in pixel. 
+	 * @return the padding right in pixel.
 	 */
 	public int getRight() {
 		return getAxis().getScale().getScaleLabel().getPadding().getRight();

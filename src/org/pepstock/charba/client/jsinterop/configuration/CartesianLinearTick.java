@@ -23,7 +23,6 @@ package org.pepstock.charba.client.jsinterop.configuration;
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
- *
  */
 public class CartesianLinearTick extends CartesianTick {
 
@@ -66,7 +65,7 @@ public class CartesianLinearTick extends CartesianTick {
 	/**
 	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
 	 * 
-	 * @return the user defined minimum number for the scale, overrides minimum value from data. 
+	 * @return the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	public double getMin() {
 		return getConfiguration().getMin();
@@ -120,7 +119,7 @@ public class CartesianLinearTick extends CartesianTick {
 	/**
 	 * Returns the user defined fixed step size for the scale.
 	 * 
-	 * @return user defined fixed step size for the scale. 
+	 * @return user defined fixed step size for the scale.
 	 */
 	public double getStepSize() {
 		return getConfiguration().getStepSize();
@@ -161,7 +160,7 @@ public class CartesianLinearTick extends CartesianTick {
 	public double getSuggestedMin() {
 		return getConfiguration().getSuggestedMin();
 	}
-	
+
 	/**
 	 * If defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 * 
@@ -174,7 +173,7 @@ public class CartesianLinearTick extends CartesianTick {
 	/**
 	 * If defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 * 
-	 * @return if defined and stepSize is not specified, the step size will be rounded to this many decimal places. 
+	 * @return if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 */
 	public int getPrecision() {
 		return getConfiguration().getPrecision();

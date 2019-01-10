@@ -29,9 +29,9 @@ import org.pepstock.charba.client.jsinterop.AbstractChart;
  *
  */
 public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
-	
+
 	private final CartesianTimeTick ticks;
-	
+
 	private final Time time;
 
 	/**
@@ -56,10 +56,12 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 		// creates the time object
 		this.time = new Time(this);
 		// creates the ticks instance
-		this.ticks = new CartesianTimeTick(this); 
+		this.ticks = new CartesianTimeTick(this);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.configuration.scales.CartesianAxis#getTicks()
 	 */
 	@Override
@@ -91,7 +93,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	public ScaleDistribution getDistribution() {
 		return getScale().getDistribution();
 	}
-	
+
 	/**
 	 * Sets the property controls the scale boundary strategy (bypassed by min/max time options).
 	 * 

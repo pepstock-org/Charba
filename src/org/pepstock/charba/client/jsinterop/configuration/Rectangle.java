@@ -34,7 +34,7 @@ public class Rectangle extends AbstractConfigurationElement {
 	Rectangle(ExtendedOptions options) {
 		super(options, options.getElements().getRectangle());
 	}
-	
+
 	/**
 	 * Sets the edge to skip drawing the border for.
 	 * 

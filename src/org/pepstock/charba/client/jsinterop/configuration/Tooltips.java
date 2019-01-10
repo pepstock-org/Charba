@@ -41,15 +41,15 @@ import jsinterop.annotations.JsFunction;
  * @since 2.0
  *
  */
-public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
-	
+public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
+
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
-	
+
 	/**
-	 * Java script FUNCTION callback called to hook into the tooltip rendering process so that you can render the tooltip in your own
-	 * custom way.<br>
+	 * Java script FUNCTION callback called to hook into the tooltip rendering process so that you can render the tooltip in
+	 * your own custom way.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -57,16 +57,17 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	 */
 	@JsFunction
 	interface ProxyCustomCallback {
-		
+
 		/**
-		 * Method of function to be called to hook into the tooltip rendering process so that you can render the tooltip in your own
-		 * custom way. 
-		 * @param context context Value of <code>this</code> to the execution context of function. 
+		 * Method of function to be called to hook into the tooltip rendering process so that you can render the tooltip in your
+		 * own custom way.
+		 * 
+		 * @param context context Value of <code>this</code> to the execution context of function.
 		 * @param model all info about tooltip to create own HTML tooltip.
 		 */
 		void call(Object context, NativeObject model);
 	}
-	
+
 	/**
 	 * Java script FUNCTION callback called to filter tooltip items. Receives 1 parameter, a tooltip Item.<br>
 	 * Must be an interface with only 1 method.
@@ -76,10 +77,11 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	 */
 	@JsFunction
 	interface ProxyFilterCallback {
-		
+
 		/**
 		 * Method of function to be called to filter tooltip items. Receives 1 parameter, a tooltip Item.
-		 * @param context context Value of <code>this</code> to the execution context of function. 
+		 * 
+		 * @param context context Value of <code>this</code> to the execution context of function.
 		 * @param item tooltip item to check.
 		 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
 		 */
@@ -95,19 +97,21 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	 */
 	@JsFunction
 	interface ProxyItemSortCallback {
-		
+
 		/**
 		 * Method of function to be called to allow sorting of tooltip items.
-		 * @param context context context Value of <code>this</code> to the execution context of function. 
+		 * 
+		 * @param context context context Value of <code>this</code> to the execution context of function.
 		 * @param item1 the first object to be compared.
 		 * @param item2 the second object to be compared.
-		 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
+		 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than
+		 *         the second.
 		 */
 		int call(Object context, NativeObject item1, NativeObject item2);
 	}
-	
+
 	// ---------------------------
-	// -- CALLBACKS PROXIES    ---
+	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the custom function
 	private final CallbackProxy<ProxyCustomCallback> customCallbackProxy = JsHelper.get().newCallbackProxy();
@@ -115,9 +119,9 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	private final CallbackProxy<ProxyItemSortCallback> itemSortCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the filter function
 	private final CallbackProxy<ProxyFilterCallback> filterCallbackProxy = JsHelper.get().newCallbackProxy();
-	
+
 	// ---------------------------
-	// -- USERS CALLBACKS      ---
+	// -- USERS CALLBACKS ---
 	// ---------------------------
 	// user callbacks implementation for custom tooltip
 	private TooltipCustomCallback customCallback = null;
@@ -125,10 +129,10 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	private TooltipItemSortCallback itemSortCallback = null;
 	// user callbacks implementation for filtering tooltip items
 	private TooltipFilterCallback filterCallback = null;
-	
+
 	// sub element of tooltip
 	private final TooltipsCallbacks callbacks;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -154,8 +158,11 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 		// -------------------------------
 		customCallbackProxy.setCallback(new ProxyCustomCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Tooltips.ProxyCustomCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.configuration.Tooltips.ProxyCustomCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject model) {
@@ -168,8 +175,12 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 		});
 		itemSortCallbackProxy.setCallback(new ProxyItemSortCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Tooltips.ProxyItemSortCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.configuration.Tooltips.ProxyItemSortCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.jsinterop.commons.NativeObject,
+			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public int call(Object context, NativeObject item1, NativeObject item2) {
@@ -179,13 +190,16 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 					return itemSortCallback.onItemSort(getChart(), new TooltipItem(item1), new TooltipItem(item2));
 				}
 				// default is 0 - equals
-				return 0;				
-			}			
-		});		
+				return 0;
+			}
+		});
 		filterCallbackProxy.setCallback(new ProxyFilterCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Tooltips.ProxyFilterCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.configuration.Tooltips.ProxyFilterCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public boolean call(Object context, NativeObject item) {
@@ -196,7 +210,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 				}
 				// default is true
 				return true;
-			}			
+			}
 		});
 	}
 
@@ -219,7 +233,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns if tooltips are enabled.
 	 * 
-	 * @return if tooltips are enabled. 
+	 * @return if tooltips are enabled.
 	 */
 	public boolean isEnabled() {
 		return getConfiguration().getTooltips().isEnabled();
@@ -237,7 +251,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns which elements appear in the tooltip.
 	 * 
-	 * @return which elements appear in the tooltip. 
+	 * @return which elements appear in the tooltip.
 	 */
 	public InteractionMode getMode() {
 		return getConfiguration().getTooltips().getMode();
@@ -259,7 +273,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	 * applied at all times.
 	 * 
 	 * @return if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode
-	 *         will be applied at all times. 
+	 *         will be applied at all times.
 	 */
 	public boolean isIntersect() {
 		return getConfiguration().getTooltips().isIntersect();
@@ -277,7 +291,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the mode for positioning the tooltip.
 	 * 
-	 * @return mode for positioning the tooltip. 
+	 * @return mode for positioning the tooltip.
 	 */
 	public TooltipPosition getPosition() {
 		return getConfiguration().getTooltips().getPosition();
@@ -304,7 +318,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the background color of the tooltip.
 	 * 
-	 * @return Background color of the tooltip. 
+	 * @return Background color of the tooltip.
 	 */
 	public String getBackgroundColorAsString() {
 		return getConfiguration().getTooltips().getBackgroundColorAsString();
@@ -318,6 +332,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	public IsColor getBackgroundColor() {
 		return getConfiguration().getTooltips().getBackgroundColor();
 	}
+
 	/**
 	 * Sets the title font.
 	 * 
@@ -366,12 +381,12 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the title font style.
 	 * 
-	 * @return title font style. 
+	 * @return title font style.
 	 */
 	public FontStyle getTitleFontStyle() {
 		return getConfiguration().getTooltips().getTitleFontStyle();
 	}
-	
+
 	/**
 	 * Sets the title alignment.
 	 * 
@@ -384,7 +399,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the title alignment.
 	 * 
-	 * @return title alignment. 
+	 * @return title alignment.
 	 */
 	public TextAlign getTitleAlign() {
 		return getConfiguration().getTooltips().getTitleAlign();
@@ -398,7 +413,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	public void setTitleFontColor(IsColor titleFontColor) {
 		getConfiguration().getTooltips().setTitleFontColor(titleFontColor);
 	}
-	
+
 	/**
 	 * Sets the title font color.
 	 * 
@@ -411,7 +426,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the title font color.
 	 * 
-	 * @return title font color. 
+	 * @return title font color.
 	 */
 	public String getTitleFontColorAsString() {
 		return getConfiguration().getTooltips().getTitleFontColorAsString();
@@ -420,7 +435,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the title font color.
 	 * 
-	 * @return title font color. 
+	 * @return title font color.
 	 */
 	public IsColor getTitleFontColor() {
 		return getConfiguration().getTooltips().getTitleFontColor();
@@ -438,7 +453,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the spacing to add to top and bottom of each title line.
 	 * 
-	 * @return spacing to add to top and bottom of each title line. 
+	 * @return spacing to add to top and bottom of each title line.
 	 */
 	public int getTitleSpacing() {
 		return getConfiguration().getTooltips().getTitleSpacing();
@@ -474,7 +489,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the body line font.
 	 * 
-	 * @return body line font. 
+	 * @return body line font.
 	 */
 	public String getBodyFontFamily() {
 		return getConfiguration().getTooltips().getBodyFontFamily();
@@ -502,7 +517,6 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	 * Sets the body font style.
 	 * 
 	 * @param bodyFontStyle body font style.
-	 * @see org.pepstock.charba.client.enums.FontStyle
 	 */
 	public void setBodyFontStyle(FontStyle bodyFontStyle) {
 		getConfiguration().getTooltips().setBodyFontStyle(bodyFontStyle);
@@ -511,7 +525,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the body font style.
 	 * 
-	 * @return body font style. 
+	 * @return body font style.
 	 */
 	public FontStyle getBodyFontStyle() {
 		return getConfiguration().getTooltips().getBodyFontStyle();
@@ -529,7 +543,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the body alignment.
 	 * 
-	 * @return body alignment. 
+	 * @return body alignment.
 	 */
 	public TextAlign getBodyAlign() {
 		return getConfiguration().getTooltips().getBodyAlign();
@@ -543,7 +557,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	public void setBodyFontColor(IsColor bodyFontColor) {
 		getConfiguration().getTooltips().setBodyFontColor(bodyFontColor);
 	}
-	
+
 	/**
 	 * Sets the body font color.
 	 * 
@@ -565,12 +579,12 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the body font color.
 	 * 
-	 * @return body font color. 
+	 * @return body font color.
 	 */
 	public IsColor getBodyFontColor() {
 		return getConfiguration().getTooltips().getBodyFontColor();
 	}
-	
+
 	/**
 	 * Sets the spacing to add to top and bottom of each tooltip item.
 	 * 
@@ -619,7 +633,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the footer font size.
 	 * 
-	 * @return footer font size. 
+	 * @return footer font size.
 	 */
 	public int getFooterFontSize() {
 		return getConfiguration().getTooltips().getFooterFontSize();
@@ -660,7 +674,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	public TextAlign getFooterAlign() {
 		return getConfiguration().getTooltips().getFooterAlign();
 	}
-	
+
 	/**
 	 * Sets the footer font color.
 	 * 
@@ -669,7 +683,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	public void setFooterFontColor(IsColor footerFontColor) {
 		getConfiguration().getTooltips().setFooterFontColor(footerFontColor);
 	}
-	
+
 	/**
 	 * Sets the footer font color.
 	 * 
@@ -682,7 +696,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the footer font color.
 	 * 
-	 * @return footer font color. 
+	 * @return footer font color.
 	 */
 	public String getFooterFontColorAsString() {
 		return getConfiguration().getTooltips().getFooterFontColorAsString();
@@ -745,7 +759,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the padding to add on left and right of tooltip.
 	 * 
-	 * @return padding to add on left and right of tooltip. 
+	 * @return padding to add on left and right of tooltip.
 	 */
 	public int getXPadding() {
 		return getConfiguration().getTooltips().getXPadding();
@@ -763,7 +777,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the padding to add on top and bottom of tooltip.
 	 * 
-	 * @return padding to add on top and bottom of tooltip. 
+	 * @return padding to add on top and bottom of tooltip.
 	 */
 	public int getYPadding() {
 		return getConfiguration().getTooltips().getYPadding();
@@ -817,7 +831,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	/**
 	 * Returns the radius of tooltip corner curves.
 	 * 
-	 * @return radius of tooltip corner curves. 
+	 * @return radius of tooltip corner curves.
 	 */
 	public int getCornerRadius() {
 		return getConfiguration().getTooltips().getCornerRadius();
@@ -885,7 +899,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	public void setBorderColor(IsColor borderColor) {
 		getConfiguration().getTooltips().setBorderColor(borderColor);
 	}
-	
+
 	/**
 	 * Sets the color of the border.
 	 * 

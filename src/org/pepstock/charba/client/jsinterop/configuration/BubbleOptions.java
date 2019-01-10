@@ -30,7 +30,7 @@ public class BubbleOptions extends AbstractLineOptions {
 	 * Builds the object storing the chart instance.
 	 * 
 	 * @param chart chart instance
-	 * @param defaultValues defaults options of bubble chart 
+	 * @param defaultValues defaults options of bubble chart
 	 */
 	public BubbleOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);

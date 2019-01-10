@@ -26,17 +26,19 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
- * Is a JavaScript object container, which contains the chart instance and options element to store chart configuration, which will manage chart events to events handlers.
+ * Is a JavaScript object container, which contains the chart instance and options element to store chart configuration, which
+ * will manage chart events to events handlers.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  * 
  * @param <T> options element to store chart configuration
  */
-public abstract class EventProvider<T extends NativeObjectContainer> extends ConfigurationContainer<T> implements AddHandlerEventHandler, RemoveHandlerEventHandler{
+public abstract class EventProvider<T extends NativeObjectContainer> extends ConfigurationContainer<T> implements AddHandlerEventHandler, RemoveHandlerEventHandler {
 
 	/**
 	 * Creates the chart configuration object with the chart instance and options element to store chart configuration.
+	 * 
 	 * @param chart chart instance
 	 * @param configuration options element.
 	 */
@@ -46,15 +48,20 @@ public abstract class EventProvider<T extends NativeObjectContainer> extends Con
 		chart.addHandler(this, RemoveHandlerEvent.TYPE);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.charba.client.events.RemoveHandlerEvent)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.charba.client.events.
+	 * RemoveHandlerEvent)
 	 */
 	@Override
 	public void onRemove(RemoveHandlerEvent event) {
 		removeHandler(event.getType());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.events.AddHandlerEventHandler#onAdd(org.pepstock.charba.client.events.AddHandlerEvent)
 	 */
 	@Override
@@ -64,13 +71,15 @@ public abstract class EventProvider<T extends NativeObjectContainer> extends Con
 
 	/**
 	 * Notifies the event provider when a new handler has been added.
+	 * 
 	 * @param type type of event
 	 * @param <H> type of event handler
 	 */
 	protected abstract <H extends EventHandler> void addHandler(Type<H> type);
-	
+
 	/**
 	 * Notifies the event provider when a new handler has been deregistered
+	 * 
 	 * @param type type of event handler
 	 * @param <H> type of event handler
 	 */

@@ -30,7 +30,7 @@ public class BarOptions extends MultiScalesOptions {
 	 * Builds the object storing the chart instance and default values.
 	 * 
 	 * @param chart chart instance
-	 * @param defaultValues defaults options of bar chart 
+	 * @param defaultValues defaults options of bar chart
 	 */
 	public BarOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);

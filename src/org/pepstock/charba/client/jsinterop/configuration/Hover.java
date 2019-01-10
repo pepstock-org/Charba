@@ -27,7 +27,7 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  *
  */
 public class Hover {
-	
+
 	private final ExtendedOptions options;
 
 	/**
@@ -51,7 +51,7 @@ public class Hover {
 	/**
 	 * Returns which elements appear in the tooltip.
 	 * 
-	 * @return which elements appear in the tooltip. 
+	 * @return which elements appear in the tooltip.
 	 */
 	public InteractionMode getMode() {
 		return options.getHover().getMode();
@@ -92,7 +92,7 @@ public class Hover {
 	public int getAnimationDuration() {
 		return options.getHover().getAnimationDuration();
 	}
-	
+
 	/**
 	 * Sets to 'x', 'y', or 'xy' to define which directions are used in calculating distances.<br>
 	 * Defaults to 'x' for index mode and 'xy' in dataset and nearest modes.

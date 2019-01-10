@@ -25,7 +25,7 @@ import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
  * @since 2.0
  */
 public class Point extends AbstractConfigurationElement {
-	
+
 	/**
 	 * Builds the object storing the root options element.
 	 * 
@@ -85,7 +85,7 @@ public class Point extends AbstractConfigurationElement {
 	/**
 	 * Returns the pixel size of the non-displayed point that reacts to mouse events.
 	 * 
-	 * @return the pixel size of the non-displayed point. 
+	 * @return the pixel size of the non-displayed point.
 	 */
 	public double getHitRadius() {
 		return getOptions().getElements().getPoint().getHitRadius();
@@ -103,7 +103,7 @@ public class Point extends AbstractConfigurationElement {
 	/**
 	 * Returns the radius of the point when hovered.
 	 * 
-	 * @return the radius of the point when hovered. 
+	 * @return the radius of the point when hovered.
 	 */
 	public double getHoverRadius() {
 		return getOptions().getElements().getPoint().getHoverRadius();
@@ -126,7 +126,7 @@ public class Point extends AbstractConfigurationElement {
 	public int getHoverBorderWidth() {
 		return getOptions().getElements().getPoint().getBorderWidth();
 	}
-	
+
 	/**
 	 * Sets the point rotation (in degrees).
 	 * 

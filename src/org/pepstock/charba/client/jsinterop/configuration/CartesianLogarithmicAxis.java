@@ -27,7 +27,7 @@ import org.pepstock.charba.client.jsinterop.AbstractChart;
  *
  */
 public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmicTick> {
-	
+
 	private final CartesianLogarithmicTick ticks;
 
 	/**
@@ -53,7 +53,9 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 		this.ticks = new CartesianLogarithmicTick(this);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.configuration.scales.CartesianAxis#getTicks()
 	 */
 	@Override

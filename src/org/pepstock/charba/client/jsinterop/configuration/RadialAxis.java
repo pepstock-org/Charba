@@ -39,7 +39,6 @@ public class RadialAxis extends Axis {
 
 	private final RadialPointLabels pointLabels;
 
-
 	/**
 	 * Builds the object storing the chart instance.
 	 * 

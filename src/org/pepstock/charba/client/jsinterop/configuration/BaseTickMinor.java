@@ -27,11 +27,12 @@ public class BaseTickMinor extends BaseTick<TickMinor> {
 
 	/**
 	 * Creates the minor tick
+	 * 
 	 * @param axis axis instance
 	 * @param configuration options element of the minor tick
 	 */
 	BaseTickMinor(Axis axis, TickMinor configuration) {
 		super(axis, configuration);
 	}
-	
+
 }

@@ -40,13 +40,14 @@ import jsinterop.annotations.JsFunction;
  *
  */
 public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
-	
+
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
-	
+
 	/**
-	 * Java script FUNCTION callback called to generate legend items for each thing in the legend. Default implementation returns the text + styling for the color box.<br>
+	 * Java script FUNCTION callback called to generate legend items for each thing in the legend. Default implementation
+	 * returns the text + styling for the color box.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -54,10 +55,12 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	 */
 	@JsFunction
 	interface ProxyGenerateLabelsCallback {
-		
+
 		/**
-		 * Method of function to be called to generate legend items for each thing in the legend. Default implementation returns the text + styling for the color box.
-		 * @param context context Value of <code>this</code> to the execution context of function. 
+		 * Method of function to be called to generate legend items for each thing in the legend. Default implementation returns
+		 * the text + styling for the color box.
+		 * 
+		 * @param context context Value of <code>this</code> to the execution context of function.
 		 * @param chart chart instance.
 		 * @return array of legend items.
 		 */
@@ -73,32 +76,33 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	 */
 	@JsFunction
 	interface ProxyFilterCallback {
-		
+
 		/**
 		 * Method of function to be called to filter legend items out of the legend. Receives 1 parameter, a Legend Item.
-		 * @param context context Value of <code>this</code> to the execution context of function. 
+		 * 
+		 * @param context context Value of <code>this</code> to the execution context of function.
 		 * @param item legend item to check.
 		 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
 		 */
 		boolean call(Object context, NativeObject item);
 	}
-	
+
 	// ---------------------------
-	// -- CALLBACKS PROXIES    ---
+	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the generate labels function
 	private final CallbackProxy<ProxyGenerateLabelsCallback> labelsCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the filter function
 	private final CallbackProxy<ProxyFilterCallback> filterCallbackProxy = JsHelper.get().newCallbackProxy();
-	
+
 	// ---------------------------
-	// -- USERS CALLBACKS      ---
+	// -- USERS CALLBACKS ---
 	// ---------------------------
 	// user callbacks implementation for filtering legend labels
 	private LegendFilterCallback filterCallback = null;
 	// user callbacks implementation for generating labels
 	private LegendLabelsCallback labelsCallback = null;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -121,8 +125,11 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 		// -------------------------------
 		filterCallbackProxy.setCallback(new ProxyFilterCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.LegendLabels.ProxyFilterCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.items.LegendItem)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.options.LegendLabels.ProxyFilterCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.jsinterop.items.LegendItem)
 			 */
 			@Override
 			public boolean call(Object context, NativeObject item) {
@@ -134,11 +141,14 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 				return true;
 			}
 		});
-		
+
 		labelsCallbackProxy.setCallback(new ProxyGenerateLabelsCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.LegendLabels.ProxyGenerateLabelsCallback#call(java.lang.Object, java.lang.Object)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.options.LegendLabels.ProxyGenerateLabelsCallback#call(java.lang.Object,
+			 * java.lang.Object)
 			 */
 			@Override
 			public ArrayObject call(Object context, Chart chart) {
@@ -152,10 +162,10 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 				// empty array
 				return ArrayObject.of();
 			}
-			
+
 		});
 	}
-	
+
 	/**
 	 * Sets the font size for label.
 	 * 
@@ -168,7 +178,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	/**
 	 * Returns the font size for label.
 	 * 
-	 * @return Font size for label. 
+	 * @return Font size for label.
 	 */
 	public int getFontSize() {
 		return getConfiguration().getLegend().getLabels().getFontSize();
@@ -177,7 +187,8 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	/**
 	 * Sets the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @param fontStyle Font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
+	 * @param fontStyle Font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial,
+	 *            inherit).
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
 		getConfiguration().getLegend().getLabels().setFontStyle(fontStyle);
@@ -186,7 +197,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	/**
 	 * Returns the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). 
+	 * @return the font style for the label, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getFontStyle() {
 		return getConfiguration().getLegend().getLabels().getFontStyle();
@@ -213,7 +224,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	/**
 	 * Returns the font color for label
 	 * 
-	 * @return Font color for label. 
+	 * @return Font color for label.
 	 */
 	public String getFontColorAsString() {
 		return getConfiguration().getLegend().getLabels().getFontColorAsString();
@@ -222,7 +233,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	/**
 	 * Returns the font color for label
 	 * 
-	 * @return Font color for label. 
+	 * @return Font color for label.
 	 */
 	public IsColor getFontColor() {
 		return getConfiguration().getLegend().getLabels().getFontColor();
@@ -240,7 +251,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	/**
 	 * Returns the font family for the label, follows CSS font-family options.
 	 * 
-	 * @return Font family for the label, follows CSS font-family options. 
+	 * @return Font family for the label, follows CSS font-family options.
 	 */
 	public String getFontFamily() {
 		return getConfiguration().getLegend().getLabels().getFontFamily();
@@ -249,16 +260,19 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	/**
 	 * Sets if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 * 
-	 * @param usePointStyle if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
+	 * @param usePointStyle if label style will match corresponding point style (size is based on fontSize, boxWidth is not used
+	 *            in this case).
 	 */
 	public void setUsePointStyle(boolean usePointStyle) {
 		getConfiguration().getLegend().getLabels().setUsePointStyle(usePointStyle);
 	}
 
 	/**
-	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
+	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this
+	 * case).
 	 * 
-	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
+	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this
+	 *         case).
 	 */
 	public boolean isUsePointStyle() {
 		return getConfiguration().getLegend().getLabels().isUsePointStyle();
@@ -276,12 +290,12 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	/**
 	 * Returns the width of coloured box.
 	 * 
-	 * @return width of coloured box. 
+	 * @return width of coloured box.
 	 */
 	public int getBoxWidth() {
 		return getConfiguration().getLegend().getLabels().getBoxWidth();
 	}
-	
+
 	/**
 	 * Sets the padding to apply around labels. Only top and bottom are implemented.
 	 * 
@@ -294,7 +308,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	/**
 	 * Returns the padding to apply around labels. Only top and bottom are implemented.
 	 * 
-	 * @return Padding to apply around labels. Only top and bottom are implemented. 
+	 * @return Padding to apply around labels. Only top and bottom are implemented.
 	 */
 	public int getPadding() {
 		return getConfiguration().getLegend().getLabels().getPadding();
@@ -302,7 +316,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 
 	/**
 	 * Returns the user filter callback.
-	 *  
+	 * 
 	 * @return the filterCallback
 	 */
 	public LegendFilterCallback getFilterCallback() {

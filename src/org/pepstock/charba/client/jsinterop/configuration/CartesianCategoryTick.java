@@ -23,7 +23,6 @@ import java.util.List;
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
- *
  */
 public class CartesianCategoryTick extends CartesianTick {
 

@@ -34,7 +34,7 @@ public class StackedOptions extends ConfigurationOptions {
 	 * Builds the object storing the chart instance, default values and if only Y axis is scaled.
 	 * 
 	 * @param chart chart instance
-	 * @param defaultValues defaults options of stacked chart 
+	 * @param defaultValues defaults options of stacked chart
 	 * @param onlyYScaled <code>true</code> if only Y axis is scaled.
 	 */
 	public StackedOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues, boolean onlyYScaled) {
@@ -54,7 +54,7 @@ public class StackedOptions extends ConfigurationOptions {
 	 * Builds the object storing the chart instance and default values.
 	 * 
 	 * @param chart chart instance
-	 * @param defaultValues defaults options of bar chart 
+	 * @param defaultValues defaults options of bar chart
 	 */
 	public StackedOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		this(chart, defaultValues, false);

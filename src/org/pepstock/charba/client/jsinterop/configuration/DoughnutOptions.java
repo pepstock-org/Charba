@@ -19,7 +19,7 @@ import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.ChartOptions;
 
 /**
- * Specific options for DOUGHNUT chart. 
+ * Specific options for DOUGHNUT chart.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0

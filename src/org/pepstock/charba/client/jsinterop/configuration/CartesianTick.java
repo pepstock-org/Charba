@@ -95,7 +95,7 @@ abstract class CartesianTick extends Tick {
 	 * Note: this can cause labels at the edges to be cropped by the edge of the canvas.
 	 * 
 	 * @return the distance in pixels to offset the label from the centre point of the tick (in the y direction for the x axis,
-	 *         and the x direction for the y axis). 
+	 *         and the x direction for the y axis).
 	 */
 	public int getLabelOffset() {
 		return getConfiguration().getLabelOffset();
@@ -117,7 +117,7 @@ abstract class CartesianTick extends Tick {
 	 * necessary. Note: Only applicable to horizontal scales.
 	 * 
 	 * @return maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary.
-	 *         Note: Only applicable to horizontal scales. 
+	 *         Note: Only applicable to horizontal scales.
 	 */
 	public int getMaxRotation() {
 		return getConfiguration().getMaxRotation();
@@ -135,7 +135,7 @@ abstract class CartesianTick extends Tick {
 	/**
 	 * Returns the minimum rotation for tick labels. Note: Only applicable to horizontal scales.
 	 * 
-	 * @return minimum rotation for tick labels. Note: Only applicable to horizontal scales. 
+	 * @return minimum rotation for tick labels. Note: Only applicable to horizontal scales.
 	 */
 	public int getMinRotation() {
 		return getConfiguration().getMinRotation();

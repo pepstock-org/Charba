@@ -56,10 +56,10 @@ public class Scales extends ConfigurationContainer<ExtendedOptions> {
 		if (axes != null && axes.length > 0) {
 			// clears the buffer
 			xAxes.clear();
-			// creates the array 
+			// creates the array
 			Scale[] scales = new Scale[axes.length];
 			// scans all scale arguments
-			for (int i=0; i<axes.length; i++) {
+			for (int i = 0; i < axes.length; i++) {
 				// adds to array
 				scales[i] = axes[i].getScale();
 				// adds to buffer
@@ -92,7 +92,7 @@ public class Scales extends ConfigurationContainer<ExtendedOptions> {
 			// creates the array
 			Scale[] scales = new Scale[axes.length];
 			// scans all scale arguments
-			for (int i=0; i<axes.length; i++) {
+			for (int i = 0; i < axes.length; i++) {
 				// adds to array
 				scales[i] = axes[i].getScale();
 				// adds to buffer

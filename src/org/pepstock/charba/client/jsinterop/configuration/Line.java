@@ -58,7 +58,8 @@ public class Line extends AbstractConfigurationElement {
 	}
 
 	/**
-	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square.
+	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt,
+	 * round and square.
 	 * 
 	 * @param borderCapStyle how the end points of every line are drawn.
 	 */
@@ -67,7 +68,8 @@ public class Line extends AbstractConfigurationElement {
 	}
 
 	/**
-	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square. By default this property is set to butt.
+	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are:
+	 * butt, round and square. By default this property is set to butt.
 	 * 
 	 * @return how the end points of every line are drawn.
 	 */
@@ -76,18 +78,22 @@ public class Line extends AbstractConfigurationElement {
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
+	 * and gaps which describe the pattern.
 	 * 
-	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating
+	 *            lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
 		getOptions().getElements().getLine().setBorderDash(borderDash);
 	}
 
 	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
+	 * lines and gaps which describe the pattern.
 	 * 
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
+	 *         lines and gaps which describe the pattern.
 	 */
 	public List<Integer> getBorderDash() {
 		return getOptions().getElements().getLine().getBorderDash();
@@ -105,29 +111,31 @@ public class Line extends AbstractConfigurationElement {
 	/**
 	 * Returns the line dash pattern offset or "phase".
 	 * 
-	 * @return the line dash pattern offset or "phase". 
+	 * @return the line dash pattern offset or "phase".
 	 */
 	public int getBorderDashOffset() {
 		return getOptions().getElements().getLine().getBorderDashOffset();
 	}
 
 	/**
-	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are
-	 * skipped).<br>
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 * (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position,
+	 * are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
-	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter. 
+	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter.
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
 		getOptions().getElements().getLine().setBorderJoinStyle(borderJoinStyle);
 	}
 
 	/**
-	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are
-	 * skipped).<br>
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 * (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position,
+	 * are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
-	 * @return There are three possible values for this property: round, bevel and miter. 
+	 * @return There are three possible values for this property: round, bevel and miter.
 	 */
 	public JoinStyle getBorderJoinStyle() {
 		return getOptions().getElements().getLine().getBorderJoinStyle();
@@ -150,14 +158,14 @@ public class Line extends AbstractConfigurationElement {
 	public boolean isCapBezierPoints() {
 		return getOptions().getElements().getLine().isCapBezierPoints();
 	}
-	
+
 	/**
 	 * Sets how to fill the area under the line.
 	 * 
 	 * @param fill how to fill the area under the line.
 	 */
 	public void setFill(boolean fill) {
-		 getOptions().getElements().getLine().setFill(fill);
+		getOptions().getElements().getLine().setFill(fill);
 	}
 
 	/**

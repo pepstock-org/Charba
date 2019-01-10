@@ -51,7 +51,8 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import jsinterop.annotations.JsFunction;
 
 /**
- * Base object which maps chart configuration.<br>Charba stores the unique chart ID into CHART.JS chart options using <code>charbaId</code> property key.<br>
+ * Base object which maps chart configuration.<br>
+ * Charba stores the unique chart ID into CHART.JS chart options using <code>charbaId</code> property key.<br>
  * Important topics to take care:<br>
  * <b> Responsive </b><br>
  * When it comes to change the chart size based on the window size, a major limitation is that the canvas render size
@@ -70,11 +71,11 @@ import jsinterop.annotations.JsFunction;
  *
  */
 public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions> implements ConfigurationElement {
-	
+
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
-	
+
 	/**
 	 * Java script FUNCTION callback when a click event on chart is triggered.<br>
 	 * Must be an interface with only 1 method.
@@ -87,7 +88,8 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 
 		/**
 		 * Method of function to be called when a click event on chart is triggered.
-		 * @param chart  Value of <code>this</code> to the execution context of function. It's the java script chart.
+		 * 
+		 * @param chart Value of <code>this</code> to the execution context of function. It's the java script chart.
 		 * @param event native event
 		 * @param items array of chart elements affected by the event
 		 */
@@ -103,9 +105,10 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 */
 	@JsFunction
 	interface ProxyChartHoverCallback {
-		
+
 		/**
 		 * Method of function to be called when a hover event on chart is triggered.
+		 * 
 		 * @param chart value of <code>this</code> to the execution context of function. It's the java script chart.
 		 * @param event native event
 		 * @param items array of chart elements affected by the event
@@ -122,16 +125,17 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 */
 	@JsFunction
 	interface ProxyChartResizeCallback {
-		
+
 		/**
 		 * Method of function to be called when a resize event on chart is triggered.
+		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param chart java script chart instance
 		 * @param size new size of chart
 		 */
-		void call(NativeObject context, Chart chart, NativeObject size); 
+		void call(NativeObject context, Chart chart, NativeObject size);
 	}
-	
+
 	/**
 	 * Java script FUNCTION callback when runs it generates an HTML legend.<br>
 	 * Must be an interface with only 1 method.
@@ -141,19 +145,20 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 */
 	@JsFunction
 	interface ProxyGenerateLegendCallback {
-		
+
 		/**
 		 * Method of function to be called to generate an HTML legend.
+		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @return an HTML string which represents the legend.
 		 */
 		String call(Object context);
 	}
-	
+
 	// ---------------------------
-	// -- CALLBACKS PROXIES    ---
+	// -- CALLBACKS PROXIES ---
 	// ---------------------------
-	
+
 	// callback proxy to invoke the resize function
 	private final CallbackProxy<ProxyChartResizeCallback> resizeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the click function
@@ -162,7 +167,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	private final CallbackProxy<ProxyChartHoverCallback> hoverCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the generate legend function
 	private final CallbackProxy<ProxyGenerateLegendCallback> legendCallbackProxy = JsHelper.get().newCallbackProxy();
-	
+
 	private final Animation animation;
 
 	private final Legend legend;
@@ -176,18 +181,18 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	private final Layout layout;
 
 	private final Elements elements;
-	
+
 	private final Plugins plugins;
-	
+
 	private LegendCallback legendCallback = null;
-	
+
 	// amount of click event handlers
 	private int onClickHandlers = 0;
 	// amount of hover event handlers
 	private int onHoverHandlers = 0;
 	// amount of resize event handlers
 	private int onResizeHandlers = 0;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -199,9 +204,9 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 		onHover
 	}
 
-	// factore to transform a native object into a dataset item
+	// factory to transform a native object into a dataset item
 	private final DatasetItemFactory datasetItemFactory = new DatasetItemFactory();
-	
+
 	/**
 	 * Builds the object storing the chart instance and defaults options.
 	 * 
@@ -222,14 +227,19 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 		tooltips = new Tooltips(chart, getConfiguration());
 		// sets charba ID
 		getConfiguration().setCharbaId(chart.getId());
-		
+
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		clickCallbackProxy.setCallback(new ProxyChartClickCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions.ProxyChartClickCallback#call(org.pepstock.charba.client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions.ProxyChartClickCallback#call(org.pepstock
+			 * .charba.client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent,
+			 * org.pepstock.charba.client.jsinterop.commons.ArrayObject)
 			 */
 			@Override
 			public void call(Chart chart, ChartNativeEvent event, ArrayObject items) {
@@ -241,25 +251,34 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 					getChart().fireEvent(new DatasetSelectionEvent(event, item));
 				}
 				// fires the click event on the chart
-				getChart().fireEvent(new ChartClickEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));			
+				getChart().fireEvent(new ChartClickEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
 			}
 		});
 		hoverCallbackProxy.setCallback(new ProxyChartHoverCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions.ProxyChartHoverCallback#call(org.pepstock.charba.client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent, org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions.ProxyChartHoverCallback#call(org.pepstock
+			 * .charba.client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent,
+			 * org.pepstock.charba.client.jsinterop.commons.ArrayObject)
 			 */
 			@Override
 			public void call(Chart chart, ChartNativeEvent event, ArrayObject items) {
-				// fires the hover hover on the chart 
-				getChart().fireEvent(new ChartHoverEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));	
+				// fires the hover hover on the chart
+				getChart().fireEvent(new ChartHoverEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
 			}
 
 		});
 		resizeCallbackProxy.setCallback(new ProxyChartResizeCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions.ProxyChartResizeCallback#call(org.pepstock.charba.client.jsinterop.commons.NativeObject, org.pepstock.charba.client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions.ProxyChartResizeCallback#call(org.
+			 * pepstock.charba.client.jsinterop.commons.NativeObject, org.pepstock.charba.client.jsinterop.Chart,
+			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(NativeObject context, Chart chart, NativeObject size) {
@@ -268,12 +287,16 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 				// fires the resize event on chart
 				getChart().fireEvent(new ChartResizeEvent(event, new SizeItem(size)));
 			}
-			
+
 		});
 		legendCallbackProxy.setCallback(new ProxyGenerateLegendCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions.ProxyGenerateLegendCallback#call(java.lang.Object)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions.ProxyGenerateLegendCallback#call(java.
+			 * lang.Object)
 			 */
 			@Override
 			public String call(Object context) {
@@ -283,7 +306,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 				if (legendCallback != null) {
 					// calls callback
 					legendCallback.generateLegend(getChart(), builder);
-				} 
+				}
 				return builder.toSafeHtml().asString();
 			}
 		});
@@ -337,7 +360,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	public Elements getElements() {
 		return elements;
 	}
-	
+
 	/**
 	 * @return the plugins
 	 */
@@ -357,7 +380,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	/**
 	 * Returns the browser events that the chart should listen to for tooltips and hovering.
 	 * 
-	 * @return the browser events that the chart should listen to for tooltips and hovering. 
+	 * @return the browser events that the chart should listen to for tooltips and hovering.
 	 */
 	public List<Event> getEvents() {
 		return getConfiguration().getEvents();
@@ -375,7 +398,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	/**
 	 * Returns the resizing of the chart canvas when its container does.
 	 * 
-	 * @return the resizing of the chart canvas when its container does. 
+	 * @return the resizing of the chart canvas when its container does.
 	 */
 	public boolean isResponsive() {
 		return getConfiguration().isResponsive();
@@ -393,7 +416,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	/**
 	 * Returns the duration in milliseconds it takes to animate to new size after a resize event.
 	 * 
-	 * @return the duration in milliseconds it takes to animate to new size after a resize event. 
+	 * @return the duration in milliseconds it takes to animate to new size after a resize event.
 	 */
 	public int getResponsiveAnimationDuration() {
 		return getConfiguration().getResponsiveAnimationDuration();
@@ -411,12 +434,12 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	/**
 	 * Returns the the maintaining of the original canvas aspect ratio (width / height) when resizing.
 	 * 
-	 * @return the maintaining of the original canvas aspect ratio (width / height) when resizing. 
+	 * @return the maintaining of the original canvas aspect ratio (width / height) when resizing.
 	 */
 	public boolean isMaintainAspectRatio() {
 		return getConfiguration().isMaintainAspectRatio();
 	}
-	
+
 	/**
 	 * Canvas aspect ratio (i.e. width / height, a value of 1 representing a square canvas).<br>
 	 * Note that this option is ignored if the height is explicitly defined either as attribute or via the style.
@@ -431,15 +454,15 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 * Canvas aspect ratio (i.e. width / height, a value of 1 representing a square canvas).<br>
 	 * Note that this option is ignored if the height is explicitly defined either as attribute or via the style.
 	 * 
-	 * @return  the aspect ratio. 
+	 * @return the aspect ratio.
 	 */
 	public double getAspectRatio() {
 		return getConfiguration().getAspectRatio();
 	}
 
 	/**
-	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina displays).
-	 * Setting devicePixelRatio to a value other than 1 will force the canvas size to be scaled by that amount.
+	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina
+	 * displays). Setting devicePixelRatio to a value other than 1 will force the canvas size to be scaled by that amount.
 	 * 
 	 * @param ratio the pixel ratio.
 	 */
@@ -448,41 +471,45 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	}
 
 	/**
-	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina displays).
-	 * Setting devicePixelRatio to a value other than 1 will force the canvas size to be scaled by that amount.
-	 * Returns  the pixel ratio.
-	 * @return  the pixel ratio..
+	 * The chart's canvas will use a 1:1 pixel ratio, unless the physical display has a higher pixel ratio (e.g. Retina
+	 * displays). Setting devicePixelRatio to a value other than 1 will force the canvas size to be scaled by that amount.
+	 * Returns the pixel ratio.
+	 * 
+	 * @return the pixel ratio..
 	 */
 	public double getDevicePixelRatio() {
 		return getConfiguration().getDevicePixelRatio();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.configuration.EventProvider#addHandler(com.google.gwt.event.shared.GwtEvent.Type)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.pepstock.charba.client.jsinterop.configuration.EventProvider#addHandler(com.google.gwt.event.shared.GwtEvent.Type)
 	 */
 	@Override
 	protected <H extends EventHandler> void addHandler(Type<H> type) {
 		// checks if type of added event handler is dataset selection or click
 		if (type.equals(DatasetSelectionEvent.TYPE) || type.equals(ChartClickEvent.TYPE)) {
-			// if there is not any click event handler 
+			// if there is not any click event handler
 			if (onClickHandlers == 0) {
-				// sets the callback proxy in order to call the user event interface 
+				// sets the callback proxy in order to call the user event interface
 				getConfiguration().setEvent(Property.onClick, clickCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onClickHandlers++;
 		} else if (type.equals(ChartHoverEvent.TYPE)) {
-			// if there is not any hover event handler 
+			// if there is not any hover event handler
 			if (onHoverHandlers == 0) {
-				// sets the callback proxy in order to call the user event interface 
+				// sets the callback proxy in order to call the user event interface
 				getConfiguration().setEvent(Property.onHover, hoverCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onHoverHandlers++;
 		} else if (type.equals(ChartResizeEvent.TYPE)) {
-			// if there is not any resize event handler 
+			// if there is not any resize event handler
 			if (onResizeHandlers == 0) {
-				// sets the callback proxy in order to call the user event interface 
+				// sets the callback proxy in order to call the user event interface
 				getConfiguration().setEvent(Property.onResize, resizeCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
@@ -490,8 +517,11 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.configuration.EventProvider#removeHandler(com.google.gwt.event.shared.GwtEvent.Type)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.pepstock.charba.client.jsinterop.configuration.EventProvider#removeHandler(com.google.gwt.event.shared.GwtEvent.Type)
 	 */
 	@Override
 	protected <H extends EventHandler> void removeHandler(Type<H> type) {
@@ -522,7 +552,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			}
 		}
 	}
-	
+
 	/**
 	 * Returns the legend callback instance
 	 * 
@@ -531,7 +561,6 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	public LegendCallback getLegendCallback() {
 		return legendCallback;
 	}
-
 
 	/**
 	 * Sets the legend callback instance
@@ -550,8 +579,10 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			getConfiguration().setCallback(Property.legendCallback, null);
 		}
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.ConfigurationElement#load(org.pepstock.charba.client.jsinterop.Configuration)
 	 */
 	@Override
@@ -559,5 +590,5 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 		// loads the native object into configuration to pass to chart
 		ConfigurationLoader.loadOptions(configuration, getConfiguration());
 	}
-	
+
 }

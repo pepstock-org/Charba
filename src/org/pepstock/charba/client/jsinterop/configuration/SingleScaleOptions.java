@@ -25,13 +25,13 @@ import org.pepstock.charba.client.jsinterop.ChartOptions;
  * @since 2.0
  *
  */
-public abstract class SingleScaleOptions extends ConfigurationOptions{
+public abstract class SingleScaleOptions extends ConfigurationOptions {
 
 	/**
 	 * Builds the object storing the chart instance and default values.
 	 * 
 	 * @param chart chart instance
-	 * @param defaultValues defaults options 
+	 * @param defaultValues defaults options
 	 */
 	public SingleScaleOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);

@@ -20,14 +20,14 @@ import org.pepstock.charba.client.jsinterop.options.TickMinor;
 import org.pepstock.charba.client.jsinterop.options.Ticks;
 
 /**
- * Specific tick with min and max sub ticks.
+ * Specific tick with minimum and maximum sub ticks.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  *
  */
 abstract class Tick extends BaseTick<Ticks> {
-	
+
 	private final BaseTickMinor minor;
 
 	private final BaseTickMajor major;
@@ -70,7 +70,7 @@ abstract class Tick extends BaseTick<Ticks> {
 	/**
 	 * If true, show tick marks
 	 * 
-	 * @return if true, show tick marks. 
+	 * @return if true, show tick marks.
 	 */
 	public boolean isDisplay() {
 		return getConfiguration().isDisplay();

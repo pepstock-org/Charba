@@ -25,21 +25,23 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-abstract class ConfigurationContainer<T extends NativeObjectContainer> extends ChartContainer{
+abstract class ConfigurationContainer<T extends NativeObjectContainer> extends ChartContainer {
 
 	// options instance
 	private T configuration;
-	
+
 	/**
 	 * Creates the chart configuration object with the chart instance
+	 * 
 	 * @param chart chart instance
 	 */
 	protected ConfigurationContainer(AbstractChart<?, ?> chart) {
 		super(chart);
 	}
-	
+
 	/**
-	 * Creates the chart configuration object with the chart instance and the options 
+	 * Creates the chart configuration object with the chart instance and the options
+	 * 
 	 * @param chart chart instance
 	 * @param configuration options instance to store the configuration of chart.
 	 */
@@ -61,21 +63,23 @@ abstract class ConfigurationContainer<T extends NativeObjectContainer> extends C
 	protected final T getConfiguration() {
 		return configuration;
 	}
-	
+
 	/**
 	 * Merge a native object into this one with a specific property name.<br>
-	 * This is used by plugins implementation (antive java script ones) when tehy are not using
-	 * the standard way to add puglin configuration into options of chart.
+	 * This is used by plugins implementation (antive java script ones) when tehy are not using the standard way to add puglin
+	 * configuration into options of chart.
+	 * FIXME needs anymore?
 	 * 
 	 * @param source native object container to add
-	 * @param property property name 
+	 * @param property property name
 	 */
 	public final void merge(NativeObjectContainer source, String property) {
 		Merger.get().merge(getConfiguration(), source, property);
 	}
-	
+
 	/**
 	 * Returns the JSON representation of the object.
+	 * 
 	 * @return the JSON representation of the object.
 	 */
 	public final String toJSON() {

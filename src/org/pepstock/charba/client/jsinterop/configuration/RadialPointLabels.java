@@ -33,13 +33,14 @@ import jsinterop.annotations.JsFunction;
  *
  */
 public class RadialPointLabels extends AxisContainer {
-	
+
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
-	
+
 	/**
-	 * Java script FUNCTION callback called to transform data labels to point labels. The default implementation simply returns the current string.<br>
+	 * Java script FUNCTION callback called to transform data labels to point labels. The default implementation simply returns
+	 * the current string.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -47,29 +48,31 @@ public class RadialPointLabels extends AxisContainer {
 	 */
 	@JsFunction
 	interface ProxyPointLabelCallback {
-		
+
 		/**
-		 * Method of function to be called to transform data labels to point labels. The default implementation simply returns the current string.
-		 * @param context context context Value of <code>this</code> to the execution context of function. 
+		 * Method of function to be called to transform data labels to point labels. The default implementation simply returns
+		 * the current string.
+		 * 
+		 * @param context context context Value of <code>this</code> to the execution context of function.
 		 * @param item label of the point
 		 * @return new label to show.
 		 */
 		String call(Object context, String item);
 	}
-	
+
 	// ---------------------------
-	// -- CALLBACKS PROXIES    ---
+	// -- CALLBACKS PROXIES ---
 	// ---------------------------
-	
+
 	// callback proxy to invoke the point labels function
 	private final CallbackProxy<ProxyPointLabelCallback> pointLabelCallbackProxy = JsHelper.get().newCallbackProxy();
-	
+
 	// ---------------------------
-	// -- USERS CALLBACKS      ---
+	// -- USERS CALLBACKS ---
 	// ---------------------------
 	// user callbacks implementation for point labels
 	private RadialPointLabelCallback callback = null;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -77,7 +80,7 @@ public class RadialPointLabels extends AxisContainer {
 	{
 		callback
 	}
-	
+
 	/**
 	 * Builds the object storing the axis which this point labels belongs to.
 	 * 
@@ -90,8 +93,11 @@ public class RadialPointLabels extends AxisContainer {
 		// -------------------------------
 		pointLabelCallbackProxy.setCallback(new ProxyPointLabelCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.options.PointLabels.ProxyPointLabelCallback#call(java.lang.Object, java.lang.String)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.options.PointLabels.ProxyPointLabelCallback#call(java.lang.Object,
+			 * java.lang.String)
 			 */
 			@Override
 			public String call(Object context, String item) {
@@ -100,12 +106,12 @@ public class RadialPointLabels extends AxisContainer {
 					// invokes callback
 					return callback.onCallback(getAxis(), item);
 				}
-				// returns passed item 
+				// returns passed item
 				return item;
 			}
 		});
 	}
-	
+
 	/**
 	 * If true, labels are shown
 	 * 
@@ -118,7 +124,7 @@ public class RadialPointLabels extends AxisContainer {
 	/**
 	 * If true, labels are shown
 	 * 
-	 * @return if true, labels are shown. 
+	 * @return if true, labels are shown.
 	 */
 	public boolean isDisplay() {
 		return getAxis().getScale().getPointLabels().isDisplay();
@@ -136,7 +142,7 @@ public class RadialPointLabels extends AxisContainer {
 	/**
 	 * Returns the font size for the tick labels.
 	 * 
-	 * @return font size for the tick labels. 
+	 * @return font size for the tick labels.
 	 */
 	public int getFontSize() {
 		return getAxis().getScale().getPointLabels().getFontSize();
@@ -183,7 +189,7 @@ public class RadialPointLabels extends AxisContainer {
 	/**
 	 * Returns the font color for tick labels.
 	 * 
-	 * @return font color for tick labels. 
+	 * @return font color for tick labels.
 	 */
 	public String getFontColorAsString() {
 		return getAxis().getScale().getPointLabels().getFontColorAsString();
@@ -192,7 +198,7 @@ public class RadialPointLabels extends AxisContainer {
 	/**
 	 * Returns the font color for tick labels.
 	 * 
-	 * @return font color for tick labels. 
+	 * @return font color for tick labels.
 	 */
 	public IsColor getFontColor() {
 		return getAxis().getScale().getPointLabels().getFontColor();
@@ -210,22 +216,23 @@ public class RadialPointLabels extends AxisContainer {
 	/**
 	 * Returns the font family for the tick labels, follows CSS font-family options.
 	 * 
-	 * @return font family for the tick labels, follows CSS font-family options. 
+	 * @return font family for the tick labels, follows CSS font-family options.
 	 */
 	public String getFontFamily() {
 		return getAxis().getScale().getPointLabels().getFontFamily();
 	}
-	
+
 	/**
-	 * Returns the user callback to change point labels. 
+	 * Returns the user callback to change point labels.
 	 * 
 	 * @return the callback
 	 */
 	public RadialPointLabelCallback getCallback() {
 		return callback;
 	}
+
 	/**
-	 * Sets the user callback to change point labels. 
+	 * Sets the user callback to change point labels.
 	 * 
 	 * @param callback the callback to set
 	 */

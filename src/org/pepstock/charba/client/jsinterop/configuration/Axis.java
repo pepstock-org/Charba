@@ -52,11 +52,11 @@ import jsinterop.annotations.JsFunction;
  *
  */
 public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
-	
+
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
-	
+
 	/**
 	 * Java script FUNCTION callback called before the update process starts.<br>
 	 * Must be an interface with only 1 method.
@@ -66,9 +66,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	@JsFunction
 	interface ProxyBeforeUpdateCallback {
-		
+
 		/**
 		 * Method of function to be called before the update process starts.
+		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param item native object of axis
 		 */
@@ -84,9 +85,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	@JsFunction
 	interface ProxyBeforeSetDimensionsCallback {
-		
+
 		/**
 		 * Method of function to be called that runs before dimensions are set.
+		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param item native object of axis
 		 */
@@ -102,9 +104,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	@JsFunction
 	interface ProxyAfterSetDimensionsCallback {
-		
+
 		/**
 		 * Method of function to be called that runs after dimensions are set.
+		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param item native object of axis
 		 */
@@ -120,9 +123,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	@JsFunction
 	interface ProxyBeforeDataLimitsCallback {
-		
+
 		/**
 		 * Method of function to be called that runs before data limits are determined.
+		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param item native object of axis
 		 */
@@ -138,9 +142,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	@JsFunction
 	interface ProxyAfterDataLimitsCallback {
-		
+
 		/**
 		 * Method of function to be called that runs after data limits are determined.
+		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param item native object of axis
 		 */
@@ -156,9 +161,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	@JsFunction
 	interface ProxyBeforeBuildTicksCallback {
-		
+
 		/**
 		 * Method of function to be called that runs before ticks are created.
+		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param item native object of axis
 		 */
@@ -174,9 +180,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	@JsFunction
 	interface ProxyAfterBuildTicksCallback {
-		
+
 		/**
 		 * Method of function to be called that runs after ticks are created. Useful for filtering ticks.
+		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param item native object of axis
 		 */
@@ -192,27 +199,29 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	@JsFunction
 	interface ProxyBeforeTickToLabelConversionCallback {
-		
+
 		/**
 		 * Method of function to be called that runs before ticks are converted into strings.
+		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param item native object of axis
 		 */
 		void call(Object context, NativeObject item);
 	}
-	 
+
 	/**
 	 * Java script FUNCTION callback that runs after ticks are converted into strings.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 * @since 2.0
-	 */ 
+	 */
 	@JsFunction
 	interface ProxyAfterTickToLabelConversionCallback {
-		
+
 		/**
 		 * Method of function to be called that runs after ticks are converted into strings.
+		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param item native object of axis
 		 */
@@ -225,12 +234,13 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 * @since 2.0
-	 */ 
+	 */
 	@JsFunction
 	interface ProxyBeforeCalculateTickRotationCallback {
-		
+
 		/**
 		 * Method of function to be called that runs before tick rotation is determined.
+		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param item native object of axis
 		 */
@@ -243,12 +253,13 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 * @since 2.0
-	 */ 
+	 */
 	@JsFunction
 	interface ProxyAfterCalculateTickRotationCallback {
-		
+
 		/**
 		 * Method of function to be called that runs before tick rotation is determined.
+		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param item native object of axis
 		 */
@@ -264,9 +275,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	@JsFunction
 	interface ProxyBeforeFitCallback {
-		
+
 		/**
 		 * Method of function to be called that runs before the scale fits to the canvas.
+		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param item native object of axis
 		 */
@@ -282,15 +294,16 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	@JsFunction
 	interface ProxyAfterFitCallback {
-		
+
 		/**
 		 * Method of function to be called that runs after the scale fits to the canvas.
+		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param item native object of axis
 		 */
 		void call(Object context, NativeObject item);
 	}
-	
+
 	/**
 	 * Java script FUNCTION callback that runs at the end of the update process.<br>
 	 * Must be an interface with only 1 method.
@@ -300,19 +313,20 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	@JsFunction
 	interface ProxyAfterUpdateCallback {
-		
+
 		/**
 		 * Method of function to be called that runs at the end of the update process.
+		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param item native object of axis
-		 */		
+		 */
 		void call(Object context, NativeObject item);
 	}
-	
+
 	// ---------------------------
-	// -- CALLBACKS PROXIES    ---
+	// -- CALLBACKS PROXIES ---
 	// ---------------------------
-	
+
 	// callback proxy to invoke the before update function
 	private final CallbackProxy<ProxyBeforeUpdateCallback> beforeUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before set dimension function
@@ -341,9 +355,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	private final CallbackProxy<ProxyAfterFitCallback> afterFitCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after update function
 	private final CallbackProxy<ProxyAfterUpdateCallback> afterUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
-	
+
 	// ---------------------------
-	// -- USERS CALLBACKS      ---
+	// -- USERS CALLBACKS ---
 	// ---------------------------
 
 	// user callbacks implementation for build ticks
@@ -360,7 +374,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	private AxisTickToLabelConversionCallback axisTickToLabelConversionCallback = null;
 	// user callbacks implementation for update
 	private AxisUpdateCallback axisUpdateCallback = null;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -390,15 +404,18 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	Axis(AbstractChart<?, ?> chart) {
 		super(chart);
 		// sets the options (scale) to map attributes
-		// getting the defaults values for scales 
+		// getting the defaults values for scales
 		setConfiguration(new ExtendedScale(new DefaultChartScale(getDefaultScale())));
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		beforeUpdateCallbackProxy.setCallback(new ProxyBeforeUpdateCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeUpdateCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeUpdateCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -410,9 +427,13 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			}
 		});
 		beforeSetDimensionsCallbackProxy.setCallback(new ProxyBeforeSetDimensionsCallback() {
-			
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeSetDimensionsCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeSetDimensionsCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -425,8 +446,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		});
 		afterSetDimensionsCallbackProxy.setCallback(new ProxyAfterSetDimensionsCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterSetDimensionsCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterSetDimensionsCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -439,8 +464,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		});
 		beforeDataLimitsCallbackProxy.setCallback(new ProxyBeforeDataLimitsCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeDataLimitsCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeDataLimitsCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -453,8 +481,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		});
 		afterDataLimitsCallbackProxy.setCallback(new ProxyAfterDataLimitsCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterDataLimitsCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterDataLimitsCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -467,8 +498,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		});
 		beforeBuildTicksCallbackProxy.setCallback(new ProxyBeforeBuildTicksCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeBuildTicksCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeBuildTicksCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -481,8 +515,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		});
 		afterBuildTicksCallbackProxy.setCallback(new ProxyAfterBuildTicksCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterBuildTicksCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterBuildTicksCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -495,8 +532,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		});
 		beforeTickToLabelConversionCallbackProxy.setCallback(new ProxyBeforeTickToLabelConversionCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeTickToLabelConversionCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeTickToLabelConversionCallback#call(java.lang.
+			 * Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -509,8 +550,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		});
 		afterTickToLabelConversionCallbackProxy.setCallback(new ProxyAfterTickToLabelConversionCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterTickToLabelConversionCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterTickToLabelConversionCallback#call(java.lang.
+			 * Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -523,8 +568,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		});
 		beforeCalculateTickRotationCallbackProxy.setCallback(new ProxyBeforeCalculateTickRotationCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeCalculateTickRotationCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeCalculateTickRotationCallback#call(java.lang.
+			 * Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -537,8 +586,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		});
 		afterCalculateTickRotationCallbackProxy.setCallback(new ProxyAfterCalculateTickRotationCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterCalculateTickRotationCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterCalculateTickRotationCallback#call(java.lang.
+			 * Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -551,8 +604,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		});
 		beforeFitCallbackProxy.setCallback(new ProxyBeforeFitCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeFitCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeFitCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -565,8 +621,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		});
 		afterFitCallbackProxy.setCallback(new ProxyAfterFitCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterFitCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterFitCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -579,8 +638,11 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		});
 		afterUpdateCallbackProxy.setCallback(new ProxyAfterUpdateCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterUpdateCallback#call(java.lang.Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterUpdateCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -592,7 +654,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			}
 		});
 	}
-	
+
 	/**
 	 * Type of scale being employed.
 	 * 
@@ -709,12 +771,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Returns the user callback that runs before/after ticks are created.
 	 * 
-	 * @return the axisBuildTicksCallback 
+	 * @return the axisBuildTicksCallback
 	 */
 	public AxisBuildTicksCallback getAxisBuildTicksCallback() {
 		return axisBuildTicksCallback;
 	}
-	
+
 	/**
 	 * Sets the user callback that runs before/after ticks are created.
 	 * 
@@ -908,5 +970,5 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			getConfiguration().setCallback(Property.afterUpdate, null);
 		}
 	}
-	
+
 }

@@ -18,7 +18,7 @@ package org.pepstock.charba.client.jsinterop.configuration;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 
 /**
- * This a cartesian axis for BAR chart.<br>
+ * This a cartesian axis for BAR chart.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
@@ -36,6 +36,7 @@ public class BarCategoryAxis extends CartesianCategoryAxis {
 	 */
 	public BarCategoryAxis(AbstractChart<?, ?> chart) {
 		super(chart);
+		// creates girlines
 		barGridLines = new BarGridLines(this);
 	}
 

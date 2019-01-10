@@ -42,11 +42,11 @@ import jsinterop.annotations.JsFunction;
  * @since 2.0
  */
 public class Animation extends EventProvider<ExtendedOptions> {
-	
+
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
-	
+
 	/**
 	 * Java script FUNCTION callback when animation is completed.<br>
 	 * Must be an interface with only 1 method.
@@ -56,9 +56,10 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	 */
 	@JsFunction
 	interface ProxyAnimationCompleteCallback {
-		
+
 		/**
 		 * Method of function to be called when animation is completed.
+		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param animationObject java script object which contains animation object
 		 */
@@ -74,19 +75,20 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	 */
 	@JsFunction
 	interface ProxyAnimationProgressCallback {
-		
+
 		/**
 		 * Method of function to be called when animation is completed.
+		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param animationObject java script object which contains animation object
 		 */
 		void call(Chart context, AnimationObject animationObject);
 	}
-	
+
 	// ---------------------------
-	// -- CALLBACKS PROXIES    ---
+	// -- CALLBACKS PROXIES ---
 	// ---------------------------
-	
+
 	// callback proxy to invoke the animation complete function
 	private final CallbackProxy<ProxyAnimationCompleteCallback> completeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the animation in progress function
@@ -95,7 +97,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	private int onCompleteHandlers = 0;
 	// amount of handlers
 	private int onProgressHandlers = 0;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -104,7 +106,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 		onProgress,
 		onComplete
 	}
-	
+
 	/**
 	 * Builds the object storing the chart instance and root options.
 	 * 
@@ -113,14 +115,18 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	 */
 	Animation(AbstractChart<?, ?> chart, ExtendedOptions options) {
 		super(chart, options);
-		
+
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		completeCallbackProxy.setCallback(new ProxyAnimationCompleteCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Animation.ProxyAnimationCompleteCallback#call(org.pepstock.charba.client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.items.AnimationObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.jsinterop.configuration.Animation.ProxyAnimationCompleteCallback#call(org.pepstock.
+			 * charba.client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.items.AnimationObject)
 			 */
 			@Override
 			public void call(Chart context, AnimationObject animationObject) {
@@ -133,8 +139,12 @@ public class Animation extends EventProvider<ExtendedOptions> {
 		});
 		progressCallbackProxy.setCallback(new ProxyAnimationProgressCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Animation.ProxyAnimationProgressCallback#call(org.pepstock.charba.client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.items.AnimationObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.jsinterop.configuration.Animation.ProxyAnimationProgressCallback#call(org.pepstock.
+			 * charba.client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.items.AnimationObject)
 			 */
 			@Override
 			public void call(Chart context, AnimationObject animationObject) {
@@ -261,7 +271,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 			if (onCompleteHandlers == 0) {
 				// therefore remove property
 				getConfiguration().setEvent(getConfiguration().getAnimation(), Property.onComplete, null);
-				
+
 			}
 		} else if (type.equals(AnimationProgressEvent.TYPE)) {
 			// decrements amount of handlers

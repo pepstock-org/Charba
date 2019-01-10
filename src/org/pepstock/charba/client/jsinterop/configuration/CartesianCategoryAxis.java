@@ -26,9 +26,9 @@ import org.pepstock.charba.client.jsinterop.AbstractChart;
  * @since 2.0
  */
 public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> {
-	
+
 	private final CartesianCategoryTick ticks;
-	
+
 	/**
 	 * Builds the object storing the chart instance. Axis type is X by default.
 	 * 
@@ -52,12 +52,14 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 		this.ticks = new CartesianCategoryTick(this);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.configuration.scales.CartesianAxis#getTicks()
 	 */
 	@Override
 	public CartesianCategoryTick getTicks() {
 		return ticks;
-	}	
-	
+	}
+
 }
