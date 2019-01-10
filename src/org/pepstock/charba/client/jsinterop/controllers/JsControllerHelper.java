@@ -35,7 +35,7 @@ final class JsControllerHelper {
 	/**
 	 * To avoid any instantiation
 	 */
-	JsControllerHelper() {
+	private JsControllerHelper() {
 		// to be sure that CHARBA java script object is injected
 		Injector.ensureInjected();
 	}

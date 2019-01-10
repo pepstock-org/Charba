@@ -21,7 +21,8 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script objects.<br>
+ * Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script
+ * objects.<br>
  * This script will be injected with CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
@@ -39,15 +40,17 @@ final class NativeJsHelper {
 	}
 
 	/**
-	 * Returns the java script object type of a property. 
+	 * Returns the java script object type of a property.
+	 * 
 	 * @param object the object on which to search the property.
-	 * @param key  the string name of the property to test.
+	 * @param key the string name of the property to test.
 	 * @return the object type
 	 */
 	static native String type(Object object, String key);
 
 	/**
 	 * This method determines whether the passed property of passed object is an Array.
+	 * 
 	 * @param object the object on which to test the property.
 	 * @param key the string name of the property to test.
 	 * @return <code>true</code> if the value is an Array; otherwise, <code>false</code>.
@@ -55,13 +58,16 @@ final class NativeJsHelper {
 	static native boolean isArray(Object object, String key);
 
 	/**
-	 * Creates new proxy for callback which will pass <code>this</code> environment of java script as first argument of callback method.
+	 * Creates new proxy for callback which will pass <code>this</code> environment of java script as first argument of callback
+	 * method.
+	 * 
 	 * @return new proxy for callback.
 	 */
 	static native <T> CallbackProxy<T> newCallbackProxy();
-	
+
 	/**
 	 * Removes a property from a java script object.
+	 * 
 	 * @param object the object on which to remove the property.
 	 * @param key the string name of the property to remove.
 	 */
@@ -69,14 +75,16 @@ final class NativeJsHelper {
 
 	/**
 	 * Returns a property of java script object as integer.
+	 * 
 	 * @param object the object on which to define the property.
 	 * @param key the string name of the property to be defined or modified..
 	 * @return integer value
 	 */
 	static native int propertyAsInt(Object object, String key);
-	
+
 	/**
 	 * Returns a property of java script object as double.
+	 * 
 	 * @param object the object on which to define the property.
 	 * @param key the string name of the property to be defined or modified..
 	 * @return double value
@@ -85,14 +93,17 @@ final class NativeJsHelper {
 
 	/**
 	 * Returns a property of java script object as string.
+	 * 
 	 * @param object the object on which to define the property.
 	 * @param key the string name of the property to be defined or modified..
 	 * @return string value
 	 */
 	static native String propertyAsString(Object object, String key);
-	
+
 	/**
-	 * Sets the line dash pattern used when stroking lines. It uses an array of values that specify alternating lengths of lines and gaps which describe the pattern.
+	 * Sets the line dash pattern used when stroking lines. It uses an array of values that specify alternating lengths of lines
+	 * and gaps which describe the pattern.
+	 * 
 	 * @param context context of canvas
 	 * @param object array of values that specify alternating lengths of lines and gaps which describe the pattern
 	 */

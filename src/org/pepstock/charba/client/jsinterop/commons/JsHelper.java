@@ -35,7 +35,7 @@ public final class JsHelper {
 	/**
 	 * To avoid any instantiation
 	 */
-	JsHelper() {
+	private JsHelper() {
 		// to be sure that CHARBA java script object is injected
 		Injector.ensureInjected();
 	}
