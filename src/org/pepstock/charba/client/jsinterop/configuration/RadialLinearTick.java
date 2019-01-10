@@ -250,5 +250,23 @@ public class RadialLinearTick extends Tick {
 	public boolean isShowLabelBackdrop() {
 		return getConfiguration().isShowLabelBackdrop();
 	}
+	
+	/**
+	 * If defined and stepSize is not specified, the step size will be rounded to this many decimal places.
+	 * 
+	 * @param precision if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
+	 */
+	public void setPrecision(int precision) {
+		getConfiguration().setPrecision(precision);
+	}
+
+	/**
+	 * If defined and stepSize is not specified, the step size will be rounded to this many decimal places.
+	 * 
+	 * @return if defined and stepSize is not specified, the step size will be rounded to this many decimal places. 
+	 */
+	public int getPrecision() {
+		return getConfiguration().getPrecision();
+	}
 
 }

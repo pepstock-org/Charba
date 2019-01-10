@@ -68,7 +68,8 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 		backdropPaddingY,
 		showLabelBackdrop,
 		labels,
-		source
+		source,
+		precision
 	}
 
 	/**
@@ -633,5 +634,25 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 */
 	public TickSource getSource() {
 		return getValue(Property.source, TickSource.class, getDefaultValues().getSource());
+	}
+	
+	/**
+	 * If defined and stepSize is not specified, the step size will be rounded to this many decimal places.
+	 * 
+	 * @param precision if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
+	 */
+	public void setPrecision(int precision) {
+		setValue(Property.precision, precision);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * If defined and stepSize is not specified, the step size will be rounded to this many decimal places.
+	 * 
+	 * @return if defined and stepSize is not specified, the step size will be rounded to this many decimal places. 
+	 */
+	public int getPrecision() {
+		return getValue(Property.precision, getDefaultValues().getPrecision());
 	}
 }

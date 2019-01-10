@@ -33,6 +33,11 @@ import jsinterop.annotations.JsType;
 public final class NativePlugins {
 
 	/**
+	 * To avoid any instantiation
+	 */
+	NativePlugins() {}
+
+	/**
 	 * Registers the given plugin if not already registered.
 	 * 
 	 * @param plugin plugin instance.

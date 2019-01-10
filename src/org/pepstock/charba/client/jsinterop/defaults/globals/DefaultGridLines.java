@@ -48,6 +48,8 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 	private static final int DEFAULT_ZERO_LINE_BORDER_DASH_OFFSET = 0;
 
 	private static final boolean DEFAULT_OFFSET_GRID_LINES = false;
+	
+	private static final boolean DEFAULT_CIRCULAR = false;
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#isDisplay()
@@ -143,6 +145,14 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 	@Override
 	public boolean isOffsetGridLines() {
 		return DEFAULT_OFFSET_GRID_LINES;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#isCircular()
+	 */
+	@Override
+	public boolean isCircular() {
+		return DEFAULT_CIRCULAR;
 	}
 	
 }

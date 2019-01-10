@@ -189,7 +189,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	private int onResizeHandlers = 0;
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{

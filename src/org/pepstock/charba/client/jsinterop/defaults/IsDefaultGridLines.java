@@ -109,5 +109,12 @@ public interface IsDefaultGridLines {
 	 * @return If true, grid lines will be shifted to be between labels. 
 	 */
 	boolean isOffsetGridLines();
+	
+	/**
+	 * If true, gridlines are circular (on radar chart only).
+	 * 
+	 * @return If true, gridlines are circular (on radar chart only).
+	 */
+	boolean isCircular();
 
 }

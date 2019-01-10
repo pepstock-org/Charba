@@ -1,3 +1,18 @@
+/**
+    Copyright 2017 Andrea "Stock" Stocchero
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+	    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
 package org.pepstock.charba.client.jsinterop.impl.charts;
 
 import java.util.List;
@@ -18,6 +33,12 @@ import com.google.gwt.canvas.dom.client.Context2d.TextBaseline;
 import com.google.gwt.canvas.dom.client.TextMetrics;
 import com.google.gwt.i18n.client.NumberFormat;
 
+/**
+ * Controller implementation to create charts like meter of gauges, extending doughnut chart.
+ * 
+ * @author Andrea "Stock" Stocchero
+ * @version 2.0
+ */
 final class BaseMeterController extends AbstractController {
 
 	// default font increment
@@ -32,13 +53,15 @@ final class BaseMeterController extends AbstractController {
 	private static final String FONT_TEMPLATE = "{0} {1}px {2}";
 	// SQRT of 2 to calculate the sqare inside the doughnut
 	private static final double SQRT_2 = Math.sqrt(2);
-	
+	// controller type
 	private final ControllerType type;
 
 	/**
-	 * @param type
+	 * Creates the controller using the type passed as argument.
+	 * 
+	 * @param type controller type, could be meter or gauge.
 	 */
-	public BaseMeterController(ControllerType type) {
+	BaseMeterController(ControllerType type) {
 		this.type = type;
 	}
 
@@ -59,6 +82,7 @@ final class BaseMeterController extends AbstractController {
 	 */
 	@Override
 	public void draw(Context context, AbstractChart<?, ?> chart, double ease) {
+		// draw the doughnut chart
 		super.draw(context, chart, ease);
 		// gets the list of datasets
 		List<Dataset> datasets = chart.getData().getDatasets();
@@ -74,12 +98,15 @@ final class BaseMeterController extends AbstractController {
 	}
 
 	/**
+	 */
+	/**
 	 * Draws the value inside the inner radius of doughnut.
 	 * 
 	 * @param chart chart instance
 	 * @param item chart item with CHART.JS properties needed to calculate the area where to drwan the value
 	 * @param dataset the dataset instance
 	 * @param options the chart options
+	 * @param ease easing of drawing (between 0 and 1) for animation
 	 */
 	private void execute(AbstractChart<?, ?> chart, ChartNode item, MeterDataset dataset, MeterOptions options, double ease) {
 		// calculate the side of the square where to draw the value
@@ -95,9 +122,9 @@ final class BaseMeterController extends AbstractController {
 		final double maxValue = MeterDisplay.percentage.equals(options.getDisplay()) || MeterDisplay.percentageAndLabel.equals(options.getDisplay()) ? MAX_PERCENTAGE : dataset.getMax();
 		// gets value
 		final double valueToCalculate = MeterDisplay.percentage.equals(options.getDisplay()) || MeterDisplay.percentageAndLabel.equals(options.getDisplay()) ? dataset.getValue() / dataset.getMax() : dataset.getValue();
-		
-		final double value = valueToCalculate * ease;
-		
+		// here is calculating the value to showed 
+		// based on easing of drawing
+		final double value = options.isAnimatedDisplay() ? valueToCalculate * ease : valueToCalculate;
 		// gets max value into string to check font size
 		final String maxValueToShow = getFormattedValue(maxValue, options.getFormat());
 		// value to show with format required

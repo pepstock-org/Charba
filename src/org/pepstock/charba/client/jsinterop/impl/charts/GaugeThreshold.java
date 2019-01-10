@@ -28,7 +28,7 @@ import org.pepstock.charba.client.colors.IsColor;
 public enum GaugeThreshold implements IsThreshold
 {
 	/**
-	 * the normal threshold 
+	 * the normal threshold
 	 */
 	normal(75D, new Color(140, 214, 16)),
 	/**
@@ -39,23 +39,26 @@ public enum GaugeThreshold implements IsThreshold
 	 * the critical threshold.
 	 */
 	critical(Double.MAX_VALUE, new Color(231, 24, 49));
-	
+
 	// value
 	private final double value;
 	// color
 	private final IsColor color;
-	
+
 	/**
 	 * Creates the threshold value using value and color
+	 * 
 	 * @param value threshold value
-	 * @param color threshold value
+	 * @param color threshold color
 	 */
 	private GaugeThreshold(double value, IsColor color) {
 		this.value = value;
 		this.color = color;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.enums.IsThreshold#getValue()
 	 */
 	@Override
@@ -63,7 +66,9 @@ public enum GaugeThreshold implements IsThreshold
 		return value;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.enums.IsThreshold#getColor()
 	 */
 	@Override
@@ -71,7 +76,9 @@ public enum GaugeThreshold implements IsThreshold
 		return color;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.enums.IsThreshold#getName()
 	 */
 	@Override
@@ -81,6 +88,7 @@ public enum GaugeThreshold implements IsThreshold
 
 	/**
 	 * Creates a new threshold cloning the constant one. This is helpful to change standard color or value.
+	 * 
 	 * @return the threshold
 	 */
 	public Threshold getThreshold() {

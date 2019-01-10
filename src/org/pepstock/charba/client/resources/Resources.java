@@ -41,4 +41,7 @@ public interface Resources extends ClientBundle {
 	@Source("js/charba.helper.js")
 	TextResource charbaHelper();
 	
+	@Source("js/json.cycle.js")
+	TextResource jsonCycle();
+	
 }

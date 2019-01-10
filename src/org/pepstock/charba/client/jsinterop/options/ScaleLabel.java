@@ -32,7 +32,7 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 	private final ScaleLabelPadding padding;
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{

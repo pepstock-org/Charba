@@ -18,10 +18,10 @@ package org.pepstock.charba.client.jsinterop.impl.charts;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Determines which information must be displaied into meter or gauge chart.
+ * Determines which information must be displayed into meter or gauge chart.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public enum MeterDisplay implements Key
 {

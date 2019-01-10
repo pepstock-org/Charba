@@ -100,7 +100,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	private LegendLabelsCallback labelsCallback = null;
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{

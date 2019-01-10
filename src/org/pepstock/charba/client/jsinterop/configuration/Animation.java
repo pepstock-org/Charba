@@ -97,7 +97,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	private int onProgressHandlers = 0;
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{

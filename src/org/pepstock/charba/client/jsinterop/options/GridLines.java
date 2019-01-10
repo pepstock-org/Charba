@@ -44,6 +44,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	private enum Property implements Key
 	{
 		display,
+		circular,
 		color,
 		borderDash,
 		borderDashOffset,
@@ -90,6 +91,26 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());
+	}
+	
+	/**
+	 * If true, gridlines are circular (on radar chart only).
+	 * 
+	 * @param circular If true, gridlines are circular (on radar chart only).
+	 */
+	public void setCircular(boolean circular) {
+		setValue(Property.circular, circular);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * If true, gridlines are circular (on radar chart only).
+	 * 
+	 * @return If true, gridlines are circular (on radar chart only).
+	 */
+	public boolean isCircular() {
+		return getValue(Property.circular, getDefaultValues().isCircular());
 	}
 
 	/**

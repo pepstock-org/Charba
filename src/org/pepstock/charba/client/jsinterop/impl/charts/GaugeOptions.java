@@ -25,16 +25,16 @@ import org.pepstock.charba.client.jsinterop.ChartOptions;
  * @version 2.0
  *
  */
-public class GaugeOptions extends MeterOptions {
+public final class GaugeOptions extends MeterOptions {
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Builds the object storing the chart instance and defaults.
 	 * 
 	 * @param chart chart instance
+	 * @param defaultvalues defaults of chart
 	 */
 	public GaugeOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
 	}
-
 
 }

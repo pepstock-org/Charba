@@ -130,7 +130,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions>{
 	private final TooltipsCallbacks callbacks;
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{

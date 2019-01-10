@@ -75,7 +75,7 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	private final T configuration;
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{

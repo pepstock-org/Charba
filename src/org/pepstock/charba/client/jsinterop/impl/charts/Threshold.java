@@ -21,38 +21,40 @@ import org.pepstock.charba.client.colors.IsColor;
  * Is the threshold to use for gauge chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.data.GaugeDataset#setThresholds(Threshold...)
- *
+ * @version 2.0
  */
-public final class Threshold implements IsThreshold{
-	
+public final class Threshold implements IsThreshold {
 	/**
 	 * Default color value.
+	 * 
 	 * @see GaugeThreshold#normal
 	 */
 	public static final IsColor DEFAULT_VALUE_COLOR = GaugeThreshold.normal.getColor();
-	
+
 	/**
 	 * Default value (see {@link java.lang.Double#MAX_VALUE}).
 	 */
 	private static final double DEFAULT_VALUE = Double.MAX_VALUE;
-	
+
 	private final String name;
-	
+
 	private double value = DEFAULT_VALUE;
-	
+
 	private IsColor color = DEFAULT_VALUE_COLOR;
 
 	/**
-	 * Creates a threshold with standard color ({@link org.pepstock.charba.client.enums.Threshold#DEFAULT_VALUE_COLOR}) and value ({@link java.lang.Double#MAX_VALUE}).
+	 * Creates a threshold with standard color ({@link Threshold#DEFAULT_VALUE_COLOR}) and value
+	 * ({@link java.lang.Double#MAX_VALUE}).
+	 * 
 	 * @param name name of threshold
 	 */
 	public Threshold(String name) {
 		this(name, DEFAULT_VALUE, DEFAULT_VALUE_COLOR);
 	}
-	
+
 	/**
 	 * Creates a threshold with standard value ({@link java.lang.Double#MAX_VALUE}).
+	 * 
 	 * @param name name of threshold
 	 * @param color color of threshold
 	 */
@@ -61,7 +63,8 @@ public final class Threshold implements IsThreshold{
 	}
 
 	/**
-	 * Creates a threshold with standard color ({@link org.pepstock.charba.client.enums.Threshold#DEFAULT_VALUE_COLOR}).
+	 * Creates a threshold with standard color ({@link Threshold#DEFAULT_VALUE_COLOR}).
+	 * 
 	 * @param name name of threshold
 	 * @param value value of threshold
 	 */
@@ -71,6 +74,7 @@ public final class Threshold implements IsThreshold{
 
 	/**
 	 * Creates a threshold
+	 * 
 	 * @param name name of threshold
 	 * @param value value of threshold
 	 * @param color color of threshold
@@ -81,7 +85,9 @@ public final class Threshold implements IsThreshold{
 		this.color = color;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.enums.IsThreshold#getName()
 	 */
 	@Override
@@ -89,7 +95,9 @@ public final class Threshold implements IsThreshold{
 		return name;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.enums.IsThreshold#getValue()
 	 */
 	@Override
@@ -97,7 +105,9 @@ public final class Threshold implements IsThreshold{
 		return value;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.enums.IsThreshold#getColor()
 	 */
 	@Override
@@ -122,15 +132,16 @@ public final class Threshold implements IsThreshold{
 		this.color = color;
 		return this;
 	}
-	
+
 	/**
 	 * Checks if the value passed is into threshold.
+	 * 
 	 * @param valueToCheck value to check
 	 * @param lowLimit the low limit
 	 * @return <code>true</code> is the value is inside the range, otherwise <code>false</code>.
 	 */
-	public boolean isInRange(double valueToCheck, double lowLimit){
-		return valueToCheck >= lowLimit && valueToCheck < getValue(); 
+	public boolean isInRange(double valueToCheck, double lowLimit) {
+		return valueToCheck >= lowLimit && valueToCheck < getValue();
 	}
-	
+
 }

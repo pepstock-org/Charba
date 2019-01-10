@@ -67,6 +67,8 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 
 	private static final boolean DEFAULT_SHOW_LABEL_BACKDROP = true;
 	
+	private static final int DEFAULT_PRECISION = 0;
+	
 	private final DefaultTickItem minor = new DefaultTickItem();
 	
 	private final DefaultTickItem major = new DefaultTickItem();
@@ -253,6 +255,14 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 	@Override
 	public TickSource getSource() {
 		return TickSource.auto;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getPrecision()
+	 */
+	@Override
+	public int getPrecision() {
+		return DEFAULT_PRECISION;
 	}
 	
 }

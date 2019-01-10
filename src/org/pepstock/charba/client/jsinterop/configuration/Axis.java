@@ -362,7 +362,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	private AxisUpdateCallback axisUpdateCallback = null;
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{

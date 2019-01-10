@@ -348,7 +348,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	private TooltipFooterCallback footerCallback = null;
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key{
 	    beforeTitle,

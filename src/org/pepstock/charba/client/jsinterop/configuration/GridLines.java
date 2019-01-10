@@ -54,6 +54,25 @@ public class GridLines extends AxisContainer{
 	public boolean isDisplay() {
 		return getAxis().getScale().getGrideLines().isDisplay();
 	}
+	
+	/**
+	 * If true, gridlines are circular (on radar chart only).
+	 * 
+	 * @param circular If true, gridlines are circular (on radar chart only).
+	 */
+	public void setCircular(boolean circular) {
+		getAxis().getScale().getGrideLines().setCircular(circular);
+	}
+
+	/**
+	 * If true, gridlines are circular (on radar chart only).
+	 * 
+	 * @return If true, gridlines are circular (on radar chart only).
+	 */
+	public boolean isCircular() {
+		return getAxis().getScale().getGrideLines().isCircular();
+	}
+
 
 	/**
 	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the

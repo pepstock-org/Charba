@@ -317,4 +317,11 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 		return ticks.getSource();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getPrecision()
+	 */
+	@Override
+	public int getPrecision() {
+		return ticks.getPrecision();
+	}
 }

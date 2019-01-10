@@ -23,19 +23,25 @@ import org.pepstock.charba.client.jsinterop.controllers.ControllerType;
  * GAUGE chart implementation.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @version 2.0
  */
 public final class GaugeChart extends BaseMeterChart<GaugeOptions, GaugeDataset> {
 	
+	/**
+	 * Name of chart type for gauge
+	 */
+	public static final String TYPE = "gauge";
+	// static reference to controller type
+	private final static ControllerType CONTROLLER_TYPE = new ControllerType(TYPE, ChartType.doughnut);
+	// chart options
 	private final GaugeOptions options;
-	
-	private final static ControllerType TYPE = new ControllerType("gauge", ChartType.doughnut);
-	
+
 	/**
 	 * Builds the object.
 	 */
 	public GaugeChart() {
 		super();
+		// creates options
 		options = new GaugeOptions(this, getChartOptions());
 	}
 
@@ -46,7 +52,7 @@ public final class GaugeChart extends BaseMeterChart<GaugeOptions, GaugeDataset>
 	 */
 	@Override
 	public Type getType() {
-		return TYPE;
+		return CONTROLLER_TYPE;
 	}
 
 	/*
@@ -82,7 +88,7 @@ public final class GaugeChart extends BaseMeterChart<GaugeOptions, GaugeDataset>
 	 */
 	@Override
 	ControllerType getControllerType() {
-		return TYPE;
+		return CONTROLLER_TYPE;
 	}
 
 }

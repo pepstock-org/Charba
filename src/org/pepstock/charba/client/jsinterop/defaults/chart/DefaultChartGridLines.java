@@ -157,4 +157,14 @@ public final class DefaultChartGridLines implements IsDefaultGridLines {
 		return gridLines.isOffsetGridLines();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#isCircular()
+	 */
+	@Override
+	public boolean isCircular() {
+		return gridLines.isCircular();
+	}
+
 }

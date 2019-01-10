@@ -65,7 +65,8 @@ abstract class LiningDataset extends Dataset {
 		pointHoverBackgroundColor,
 		pointHoverBorderColor,
 		pointHoverBorderWidth,
-		pointHoverRadius
+		pointHoverRadius,
+		pointRotation
 	}
 
 	/**
@@ -557,6 +558,24 @@ abstract class LiningDataset extends Dataset {
 	public List<PointStyle> getPointStyle() {
 		ArrayString array = getValueOrArray(Property.pointStyle, Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
 		return ArrayListHelper.list(PointStyle.class, array);
+	}
+	
+	
+	/**
+	 * Sets the rotation of the point in degrees.
+	 * @param pointRotation array of the rotation of the point in degrees.
+	 */
+	public void setPointRotation(double...  pointRotation) {
+		setValueOrArray(Property.pointRotation, pointRotation);
+	}
+
+	/**
+	 * Returns the rotation of the point in degrees.
+	 * @return list of the rotation of the point in degrees.
+	 */
+	public List<Double> getPointRotation() {
+		ArrayDouble array = getValueOrArray(Property.pointRotation, Defaults.get().getGlobal().getElements().getPoint().getRotation());
+		return ArrayListHelper.list(array);
 	}
 
 }

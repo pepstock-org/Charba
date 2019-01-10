@@ -180,7 +180,7 @@ public final class CartesianLinearTick extends CartesianTick {
 	}
 	
 	/**
-	 * if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
+	 * If defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 * 
 	 * @param precision if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 */
@@ -189,7 +189,7 @@ public final class CartesianLinearTick extends CartesianTick {
 	}
 
 	/**
-	 * if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
+	 * If defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 * 
 	 * @return if defined and stepSize is not specified, the step size will be rounded to this many decimal places. 
 	 */

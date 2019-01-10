@@ -47,7 +47,8 @@ public final class BubbleDataset extends HovingDataset {
 		hoverRadius,
 		hitRadius,
 		pointStyle,
-		radius
+		radius,
+		rotation
 	}
 
 	/**
@@ -123,6 +124,25 @@ public final class BubbleDataset extends HovingDataset {
 	 */
 	public List<Double> getRadius() {
 		ArrayDouble array = getValueOrArray(Property.radius, Defaults.get().getGlobal().getElements().getPoint().getRadius());
+		return ArrayListHelper.list(array);
+	}
+
+	/**
+	 * Sets the rotation of the point in degrees.
+	 * 
+	 * @param rotation array of the rotation of the point in degrees.
+	 */
+	public void setRotation(double... rotation) {
+		setValueOrArray(Property.rotation, rotation);
+	}
+
+	/**
+	 * Returns the rotation of the point in degrees.
+	 * 
+	 * @return list of the rotation of the point in degrees.
+	 */
+	public List<Double> getRotation() {
+		ArrayDouble array = getValueOrArray(Property.rotation, Defaults.get().getGlobal().getElements().getPoint().getRotation());
 		return ArrayListHelper.list(array);
 	}
 

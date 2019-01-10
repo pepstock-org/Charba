@@ -24,18 +24,20 @@ import java.util.List;
 import org.pepstock.charba.client.colors.IsColor;
 
 /**
- * The Gauge chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
+ * The Gauge chart allows a number of properties to be specified for each dataset. These are used to set display properties for
+ * a specific dataset.<br>
  * Is equals of Meter dataset.<br>
  * The minimum value of data is 0 (see {@link org.pepstock.charba.client.data.MeterDataset#MINIMUM_VALUE}).<br>
  * The dataset will have always 2 data and setting the color of data (set by thresholds), only the first is the empty value.<br>
- * To set the data, is mandatory to use {@link org.pepstock.charba.client.data.MeterDataset#setValue(double)}) method instead of {@link org.pepstock.charba.client.data.Dataset#setData(double...)}) one. 
+ * To set the data, is mandatory to use {@link org.pepstock.charba.client.data.MeterDataset#setValue(double)}) method instead of
+ * {@link org.pepstock.charba.client.data.Dataset#setData(double...)}) one.
  * 
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.data.MeterDataset
+ * @version 2.0
  */
-public final class GaugeDataset extends MeterDataset{
-	
+public final class GaugeDataset extends MeterDataset {
+
 	// list if thresholds
 	private final List<Threshold> thresholds = new LinkedList<Threshold>();
 	// current status related to threshold
@@ -49,23 +51,34 @@ public final class GaugeDataset extends MeterDataset{
 	 */
 	private final static Comparator<Threshold> COMPARATOR = new Comparator<Threshold>() {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 		 */
 		@Override
 		public int compare(Threshold o1, Threshold o2) {
 			// ascending order
-			return (int)(o1.getValue() - o2.getValue());
+			return (int) (o1.getValue() - o2.getValue());
 		}
 	};
-	
+
+	/**
+	 * Creates a dataset for gauge with maximum value of data.
+	 * 
+	 * @param max maximum value of data.
+	 */
 	public GaugeDataset(double max) {
 		super(max);
-		for (GaugeThreshold t: GaugeThreshold.values()){
+		// loads all gauge thresholds by default
+		for (GaugeThreshold t : GaugeThreshold.values()) {
 			thresholds.add(t.getThreshold());
 		}
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.HovingDataset#setBackgroundColor(java.lang.String[])
 	 */
 	@Override
@@ -76,7 +89,9 @@ public final class GaugeDataset extends MeterDataset{
 		checkAndSetColor();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.HovingDataset#setBackgroundColor(java.lang.String[])
 	 */
 	@Override
@@ -112,13 +127,13 @@ public final class GaugeDataset extends MeterDataset{
 		// checks and sets color
 		checkAndSetColor();
 	}
-	
+
 	/**
 	 * Sets all thresholds to use for this gauge.
+	 * 
 	 * @param thres thresholds array.
-	 * @see org.pepstock.charba.client.enums.Threshold
 	 */
-	public void setThresholds(Threshold... thres){
+	public void setThresholds(Threshold... thres) {
 		// clears existing thresholds
 		thresholds.clear();
 		// adds all new ones
@@ -128,16 +143,19 @@ public final class GaugeDataset extends MeterDataset{
 		// checks and sets color
 		checkAndSetColor();
 	}
-	
+
 	/**
 	 * Gets all thresholds.
+	 * 
 	 * @return all thresholds
 	 */
-	public List<Threshold> getThresholds(){
+	public List<Threshold> getThresholds() {
 		return thresholds;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.MeterDataset#setValue(double)
 	 */
 	@Override
@@ -149,16 +167,16 @@ public final class GaugeDataset extends MeterDataset{
 		// checks and sets color
 		checkAndSetColor();
 	}
-	
+
 	/**
 	 * Checks which color should used based on the current threshold
 	 */
-	private void checkAndSetColor(){
+	private void checkAndSetColor() {
 		// gets all colors
-		// to get the color for empty value 
+		// to get the color for empty value
 		List<IsColor> colors = getBackgroundColor();
 		// if empty
-		if (colors.isEmpty()){
+		if (colors.isEmpty()) {
 			// it sets the threshold color for value and the default value for empty one
 			super.setBackgroundColor(getCurrent().getColor(), DEFAULT_EMPTY_VALUE_COLOR);
 		} else {
@@ -166,24 +184,25 @@ public final class GaugeDataset extends MeterDataset{
 			super.setBackgroundColor(getCurrent().getColor(), colors.get(1));
 		}
 	}
-	
+
 	/**
 	 * Checks the threshold status for this dataset, comparing the value with thresholds.
+	 * 
 	 * @return the current threshold of this dataset.
 	 */
-	private Threshold checkLevel(){
+	private Threshold checkLevel() {
 		// checks if the thresholds are set
-		if (!thresholds.isEmpty()){
-			// sorts teh thresholds by value
+		if (!thresholds.isEmpty()) {
+			// sorts the thresholds by value
 			Collections.sort(thresholds, COMPARATOR);
 			// if the percentage value must be used to compare the threshold
-			// or to use teh absolute value
-			final double valueToCheck = isPercentageThreshold() ? getValue() / getMax() * 100 : getValue() ;
+			// or to use the absolute value
+			final double valueToCheck = isPercentageThreshold() ? getValue() / getMax() * 100 : getValue();
 			double lowLimit = 0;
 			// scans all thresholds
-			for (Threshold t : thresholds){
+			for (Threshold t : thresholds) {
 				// checks if value is in the threshold
-				if (t.isInRange(valueToCheck, lowLimit)){
+				if (t.isInRange(valueToCheck, lowLimit)) {
 					// returns threshold
 					return t;
 				}
@@ -192,7 +211,7 @@ public final class GaugeDataset extends MeterDataset{
 				lowLimit = t.getValue();
 			}
 			// if here, doesn't match and then the last threshold is returned
-			return ((LinkedList<Threshold>)thresholds).getLast();
+			return ((LinkedList<Threshold>) thresholds).getLast();
 		}
 		// default threshold is returned
 		return GaugeThreshold.normal.getThreshold();

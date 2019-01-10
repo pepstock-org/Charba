@@ -30,7 +30,7 @@ import com.google.gwt.dom.client.NativeEvent;
 public class ChartNativeEvent extends NativeEvent {
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{

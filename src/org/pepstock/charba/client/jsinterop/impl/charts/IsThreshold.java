@@ -18,27 +18,30 @@ package org.pepstock.charba.client.jsinterop.impl.charts;
 import org.pepstock.charba.client.colors.IsColor;
 
 /**
- * Interface tomap a threshold. Needed for standard ones.
+ * Interface to map a threshold. Needed for standard ones.
  * 
  * @author Andrea "Stock" Stocchero
- * @see GaugeThreshold
+ * @version 2.0
  */
 public interface IsThreshold {
-	
+
 	/**
 	 * Returns the name of threshold.
+	 * 
 	 * @return the name of threshold.
 	 */
 	String getName();
-	
+
 	/**
 	 * Returns the value of threshold.
+	 * 
 	 * @return the value of threshold.
 	 */
 	double getValue();
-	
+
 	/**
 	 * Returns the color of threshold.
+	 * 
 	 * @return the color of threshold.
 	 */
 	IsColor getColor();

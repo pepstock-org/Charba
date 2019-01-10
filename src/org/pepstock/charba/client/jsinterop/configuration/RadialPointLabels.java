@@ -71,7 +71,7 @@ public class RadialPointLabels extends AxisContainer {
 	private RadialPointLabelCallback callback = null;
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
