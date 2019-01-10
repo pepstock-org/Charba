@@ -25,7 +25,7 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
  * It uses into the PLUGINS.
  * 
  * @author Andrea "Stock" Stocchero
- * @vesion 2.0
+ * @since 2.0
  */
 public final class TooltipPluginItem extends NativeObjectContainer {
 

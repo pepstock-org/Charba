@@ -42,7 +42,7 @@ public interface IsDefaultLegend {
 	/**
 	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
 	 * 
-	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). 
+	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes).
 	 */
 	boolean isFullWidth();
 
@@ -52,11 +52,11 @@ public interface IsDefaultLegend {
 	 * @return Legend will show datasets in reverse order.
 	 */
 	boolean isReverse();
-	
+
 	/**
 	 * Returns the position of the legend.
 	 * 
-	 * @return Position of the legend. 
+	 * @return Position of the legend.
 	 */
 	Position getPosition();
 }

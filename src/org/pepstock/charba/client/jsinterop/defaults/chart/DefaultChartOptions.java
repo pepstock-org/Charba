@@ -43,7 +43,7 @@ public final class DefaultChartOptions implements IsDefaultScaledOptions {
 	private final IsDefaultAnimation animation;
 
 	private final IsDefaultScale scale;
-	
+
 	private final IsDefaultScales scales;
 
 	private final IsDefaultHover hover;
@@ -75,7 +75,7 @@ public final class DefaultChartOptions implements IsDefaultScaledOptions {
 		elements = new DefaultChartElements(chartOptions.getElements());
 		// checks if the chart options is related to axes
 		// checks if single scale
-		if (ScaleType.single.equals(chartOptions.getType().scaleType())){
+		if (ScaleType.single.equals(chartOptions.getType().scaleType())) {
 			// gets scale
 			scale = new DefaultChartScale(chartOptions.getScale());
 		} else {
@@ -83,7 +83,7 @@ public final class DefaultChartOptions implements IsDefaultScaledOptions {
 			scale = DefaultsBuilder.get().getScaledOptions().getScale();
 		}
 		// checks if multi scale
-		if (ScaleType.multi.equals(chartOptions.getType().scaleType())){
+		if (ScaleType.multi.equals(chartOptions.getType().scaleType())) {
 			// gets scale
 			scales = new DefaultChartScales(chartOptions.getScales());
 		} else {
@@ -122,7 +122,9 @@ public final class DefaultChartOptions implements IsDefaultScaledOptions {
 		return scale;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaledOptions#getScales()
 	 */
 	@Override
@@ -209,9 +211,10 @@ public final class DefaultChartOptions implements IsDefaultScaledOptions {
 	public boolean isMaintainAspectRatio() {
 		return chartOptions.isMaintainAspectRatio();
 	}
-	
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getAspectRatio()
 	 */
 	@Override

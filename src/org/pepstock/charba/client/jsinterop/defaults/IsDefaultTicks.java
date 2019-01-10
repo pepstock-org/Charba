@@ -198,11 +198,11 @@ public interface IsDefaultTicks extends IsDefaultFontItem {
 	 * @return property controls the ticks generation.
 	 */
 	TickSource getSource();
-	
+
 	/**
 	 * If defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 * 
-	 * @return if defined and stepSize is not specified, the step size will be rounded to this many decimal places. 
+	 * @return if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 */
 	int getPrecision();
 }

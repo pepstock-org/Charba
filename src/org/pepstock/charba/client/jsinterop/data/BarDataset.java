@@ -113,7 +113,6 @@ public class BarDataset extends HovingFlexDataset {
 	 * Sets the data property of a dataset for a chart is specified as an array of data points.
 	 * 
 	 * @param datapoints an array of data points
-	 * @see org.pepstock.charba.client.data.DataPoint
 	 */
 	public void setDataPoints(DataPoint... datapoints) {
 		setArrayValue(Property.data, ArrayObject.of(datapoints));
@@ -123,7 +122,6 @@ public class BarDataset extends HovingFlexDataset {
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
 	 * 
 	 * @return a list of data points
-	 * @see org.pepstock.charba.client.data.DataPoint
 	 */
 	public List<DataPoint> getDataPoints() {
 		ArrayObject array = getArrayValue(Property.data);

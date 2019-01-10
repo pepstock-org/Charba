@@ -29,6 +29,8 @@ import org.pepstock.charba.client.enums.Fill;
  * @since 2.0
  */
 public final class ScatterDataset extends LineDataset {
+	// exception message when it's not using data points
+	private static final String DATA_USAGE_MESSAGE = "Use datapoints instead of data for scatter chart";
 
 	/**
 	 * Builds the object setting fixed properties
@@ -69,7 +71,7 @@ public final class ScatterDataset extends LineDataset {
 	 */
 	@Override
 	public void setData(double... values) {
-		throw new UnsupportedOperationException("Use datapoints instead of data for scatter chart");
+		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
 	}
 
 	/*
@@ -79,6 +81,6 @@ public final class ScatterDataset extends LineDataset {
 	 */
 	@Override
 	public List<Double> getData() {
-		throw new UnsupportedOperationException("Use datapoints instead of data for scatter chart");
+		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
 	}
 }

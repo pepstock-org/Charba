@@ -26,7 +26,7 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 
 /**
  * This dataset is managing some common properties of Bar and Bubble datasets where every property can be set as a single value
- * or an array.<br>
+ * or an array.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0

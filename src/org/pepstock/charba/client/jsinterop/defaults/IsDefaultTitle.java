@@ -35,21 +35,21 @@ public interface IsDefaultTitle extends IsDefaultFontItem {
 	/**
 	 * Returns the position of title.
 	 * 
-	 * @return the position of title. 
+	 * @return the position of title.
 	 */
 	Position getPosition();
-	
+
 	/**
 	 * Returns the padding to apply around labels. Only top and bottom are implemented.
 	 * 
-	 * @return Padding to apply around labels. Only top and bottom are implemented. 
+	 * @return Padding to apply around labels. Only top and bottom are implemented.
 	 */
 	int getPadding();
 
 	/**
 	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
 	 * 
-	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). 
+	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes).
 	 */
 	boolean isFullWidth();
 

@@ -64,8 +64,9 @@ public interface IsDefaultScale {
 	IsDefaultPointLabels getPointLabels();
 
 	/**
-	 * Returns the time defaults. 
-	 * @return the time defaults. 
+	 * Returns the time defaults.
+	 * 
+	 * @return the time defaults.
 	 */
 	IsDefaultTime getTime();
 

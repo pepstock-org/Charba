@@ -559,18 +559,19 @@ abstract class LiningDataset extends Dataset {
 		ArrayString array = getValueOrArray(Property.pointStyle, Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
 		return ArrayListHelper.list(PointStyle.class, array);
 	}
-	
-	
+
 	/**
 	 * Sets the rotation of the point in degrees.
+	 * 
 	 * @param pointRotation array of the rotation of the point in degrees.
 	 */
-	public void setPointRotation(double...  pointRotation) {
+	public void setPointRotation(double... pointRotation) {
 		setValueOrArray(Property.pointRotation, pointRotation);
 	}
 
 	/**
 	 * Returns the rotation of the point in degrees.
+	 * 
 	 * @return list of the rotation of the point in degrees.
 	 */
 	public List<Double> getPointRotation() {

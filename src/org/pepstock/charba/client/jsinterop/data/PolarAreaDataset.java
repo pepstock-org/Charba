@@ -17,7 +17,7 @@ package org.pepstock.charba.client.jsinterop.data;
 
 /**
  * The polar area chart allows a number of properties to be specified for each dataset. These are used to set display properties
- * for a specific dataset.<br>
+ * for a specific dataset.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0

@@ -36,7 +36,7 @@ public interface IsDefaultScales {
 	 * @return the default configuration for x axis.
 	 */
 	IsDefaultScale getXAxis();
-	
+
 	/**
 	 * Returns the default configuration for y axis.
 	 * 

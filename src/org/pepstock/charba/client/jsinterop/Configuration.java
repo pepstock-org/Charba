@@ -34,7 +34,7 @@ import jsinterop.annotations.JsType;
  * THIS IS AN EXPORTED OBJECT.
  * 
  * @author Andrea "Stock" Stocchero
- * @vresion 2.0
+ * @version 2.0
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
 public final class Configuration {

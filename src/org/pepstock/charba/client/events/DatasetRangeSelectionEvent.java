@@ -39,7 +39,8 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRange
 	 * Creates the event with dataset metadata item related to the click
 	 * 
 	 * @param nativeEvent native event of this custom event
-	 * @param item dataset metadata item related to the click org.pepstock.charba.client.items.DatasetMetaItem
+	 * @param from starting index of selected dataset 
+	 * @param to ending index of selected dataset 
 	 */
 	public DatasetRangeSelectionEvent(NativeEvent nativeEvent, int from, int to) {
 		super(nativeEvent);

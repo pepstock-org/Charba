@@ -69,7 +69,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * Builds the object storing the chart instance and defaults.
 	 * 
 	 * @param chart chart instance
-	 * @param defaultvalues defaults of chart
+	 * @param defaultValues defaults of chart
 	 */
 	public MeterOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);

@@ -214,7 +214,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	/**
 	 * Returns <code>true</code> if skipped.
 	 * 
-	 * @return <code>true</code> if skipped. Default is {@link org.pepstock.charba.client.items.jsinterop.UndefinedValues#BOOLEAN}.
+	 * @return <code>true</code> if skipped. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isSkipped() {
 		return getValue(Property.skip, UndefinedValues.BOOLEAN);

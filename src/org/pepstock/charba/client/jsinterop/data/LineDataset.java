@@ -68,7 +68,7 @@ public class LineDataset extends LiningDataset {
 	/**
 	 * Returns the ID of the x axis to plot this dataset on.
 	 * 
-	 * @return the ID of the x axis to plot this dataset on.
+	 * @return the ID of the x axis to plot this dataset on. Default is {@link org.pepstock.charba.client.jsinterop.options.Scales#DEFAULT_X_AXIS_ID}
 	 */
 	public String getXAxisID() {
 		return getValue(Property.xAxisID, Scales.DEFAULT_X_AXIS_ID);
@@ -86,10 +86,10 @@ public class LineDataset extends LiningDataset {
 	/**
 	 * Returns the ID of the y axis to plot this dataset on.
 	 * 
-	 * @return the ID of the y axis to plot this dataset on.
+	 * @return the ID of the y axis to plot this dataset on. Default is {@link org.pepstock.charba.client.jsinterop.options.Scales#DEFAULT_Y_AXIS_ID}
 	 */
 	public String getYAxisID() {
-		return getValue(Property.yAxisID, Scales.DEFAULT_X_AXIS_ID);
+		return getValue(Property.yAxisID, Scales.DEFAULT_Y_AXIS_ID);
 	}
 
 	/**
@@ -135,7 +135,7 @@ public class LineDataset extends LiningDataset {
 	/**
 	 * Returns if the line is not drawn for this dataset.
 	 * 
-	 * @return <code>false</code> if the line is not drawn for this dataset. Default is <code>true</code>
+	 * @return <code>false</code> if the line is not drawn for this dataset. 
 	 */
 	public boolean isShowLines() {
 		return getValue(Property.showLines, Defaults.get().getGlobal().isShowLines());
@@ -157,7 +157,7 @@ public class LineDataset extends LiningDataset {
 	 * the line.
 	 * 
 	 * @return <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN data will
-	 *         create a break in the line. Default is <code>false</code>
+	 *         create a break in the line. 
 	 */
 	public boolean isSpanGaps() {
 		return getValue(Property.spanGaps, Defaults.get().getGlobal().isSpanGaps());

@@ -32,7 +32,7 @@ public final class ArrayMixedObject extends Array {
 	/**
 	 * This method creates new array instance with a variable number of <code>objects</code> arguments.
 	 * 
-	 * @param items objects items to create new array
+	 * @param objects objects items to create new array
 	 * @return new array instance of objects.
 	 */
 	public static native ArrayMixedObject of(Object[] objects);
@@ -185,7 +185,6 @@ public final class ArrayMixedObject extends Array {
 	 * Adds one element to the end of an array and returns the new length of the array.
 	 * 
 	 * @param item The element to add to the end of the array.
-	 * @return The new length of the array upon which the method was called.
 	 */
 	public native void push(Object item);
 

@@ -57,7 +57,7 @@ public final class Helpers {
 	 * 
 	 * @param target the target object in which all sources are merged into.
 	 * @param source object to merge into target.
-	 * @returns the target object. If target and source are nulls, an empty native object is returned is returned.
+	 * @return the target object. If target and source are nulls, an empty native object is returned is returned.
 	 */
 	public NativeObject mergeIf(NativeObject target, NativeObject source) {
 		// checks target is not null
@@ -83,11 +83,11 @@ public final class Helpers {
 	/**
 	 * Returns a deep copy of source without keeping references on objects and arrays.
 	 * 
-	 * @param source the value to clone.
-	 * @returns a clone of source object
+	 * @param source the object to clone.
+	 * @return a clone of source object
 	 */
-	public NativeObject clone(NativeObject target) {
-		return nativeObject.clone(target);
+	public NativeObject clone(NativeObject source) {
+		return nativeObject.clone(source);
 	}
 
 }

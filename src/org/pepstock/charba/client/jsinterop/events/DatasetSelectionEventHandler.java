@@ -24,7 +24,7 @@ package org.pepstock.charba.client.jsinterop.events;
 public interface DatasetSelectionEventHandler extends ChartEventHandler {
 
 	/**
-	 * Invoked when the user clicks on the chart to select a dataet.
+	 * Invoked when the user clicks on the chart to select a dataset.
 	 * 
 	 * @param event chart dataset selection event
 	 */

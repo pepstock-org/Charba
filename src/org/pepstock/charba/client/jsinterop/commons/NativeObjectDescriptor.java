@@ -25,7 +25,6 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  *
- * @param <T> type of property
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class NativeObjectDescriptor extends NativeAbstractDescriptor {

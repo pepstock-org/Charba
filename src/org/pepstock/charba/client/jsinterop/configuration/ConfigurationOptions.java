@@ -565,7 +565,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	/**
 	 * Sets the legend callback instance
 	 * 
-	 * @param legendCallBack the legendCallBack to set
+	 * @param legendCallback the legendCallBack to set
 	 */
 	public void setLegendCallback(LegendCallback legendCallback) {
 		// sets the callback

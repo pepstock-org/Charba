@@ -26,7 +26,7 @@ public interface IsDefaultGridLines {
 	/**
 	 * If false, do not display grid lines for this axis.
 	 * 
-	 * @return If false, do not display grid lines for this axis. 
+	 * @return If false, do not display grid lines for this axis.
 	 */
 	boolean isDisplay();
 
@@ -34,7 +34,7 @@ public interface IsDefaultGridLines {
 	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
 	 * second grid line and so on.
 	 * 
-	 * @return the list of colors of the grid lines. 
+	 * @return the list of colors of the grid lines.
 	 */
 	String getColorAsString();
 
@@ -55,7 +55,7 @@ public interface IsDefaultGridLines {
 	/**
 	 * If true, draw border at the edge between the axis and the chart area.
 	 * 
-	 * @return If true, draw border at the edge between the axis and the chart area. 
+	 * @return If true, draw border at the edge between the axis and the chart area.
 	 */
 	boolean isDrawBorder();
 
@@ -78,38 +78,38 @@ public interface IsDefaultGridLines {
 	/**
 	 * Returns the length in pixels that the grid lines will draw into the axis area.
 	 * 
-	 * @return Length in pixels that the grid lines will draw into the axis area. 
+	 * @return Length in pixels that the grid lines will draw into the axis area.
 	 */
 	int getTickMarkLength();
 
 	/**
 	 * Returns the stroke width of the grid line for the first index (index 0).
 	 * 
-	 * @return Stroke width of the grid line for the first index (index 0). 
+	 * @return Stroke width of the grid line for the first index (index 0).
 	 */
 	int getZeroLineWidth();
 
 	/**
 	 * Returns the stroke color of the grid line for the first index (index 0).
 	 * 
-	 * @return Stroke color of the grid line for the first index (index 0). 
+	 * @return Stroke color of the grid line for the first index (index 0).
 	 */
 	String getZeroLineColorAsString();
 
 	/**
 	 * Returns the offset for line dashes of the grid line for the first index (index 0).
 	 * 
-	 * @return the offset for line dashes of the grid line for the first index (index 0). 
+	 * @return the offset for line dashes of the grid line for the first index (index 0).
 	 */
 	int getZeroLineBorderDashOffset();
 
 	/**
 	 * If true, grid lines will be shifted to be between labels. This is set to true in the bar chart by default.
 	 * 
-	 * @return If true, grid lines will be shifted to be between labels. 
+	 * @return If true, grid lines will be shifted to be between labels.
 	 */
 	boolean isOffsetGridLines();
-	
+
 	/**
 	 * If true, gridlines are circular (on radar chart only).
 	 * 

@@ -25,8 +25,8 @@ import org.pepstock.charba.client.enums.JoinStyle;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-public interface IsDefaultLine extends IsDefaultArc{
-	
+public interface IsDefaultLine extends IsDefaultArc {
+
 	/**
 	 * Returns the Bezier curve tension (0 for no Bezier curves).
 	 * 
@@ -36,9 +36,9 @@ public interface IsDefaultLine extends IsDefaultArc{
 
 	/**
 	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are:
-	 * butt, round and square. 
+	 * butt, round and square.
 	 * 
-	 * @return how the end points of every line are drawn. 
+	 * @return how the end points of every line are drawn.
 	 */
 	CapStyle getBorderCapStyle();
 
@@ -53,30 +53,30 @@ public interface IsDefaultLine extends IsDefaultArc{
 	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
 	 * (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position,
 	 * are skipped).<br>
-	 * There are three possible values for this property: round, bevel and miter. 
+	 * There are three possible values for this property: round, bevel and miter.
 	 * 
-	 * @return There are three possible values for this property: round, bevel and miter. 
+	 * @return There are three possible values for this property: round, bevel and miter.
 	 */
 	JoinStyle getBorderJoinStyle();
 
 	/**
 	 * Returns <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
 	 * 
-	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction. 
+	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
 	 */
 	boolean isCapBezierPoints();
 
 	/**
 	 * Returns how to fill the area under the line.
 	 * 
-	 * @return how to fill the area under the line. 
+	 * @return how to fill the area under the line.
 	 */
 	Fill getFill();
 
 	/**
 	 * Returns <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 * 
-	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored). 
+	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 */
 	boolean isStepped();
 

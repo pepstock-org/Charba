@@ -28,7 +28,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * @since 2.0
  */
 public class ChartNativeEvent extends NativeEvent {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -37,7 +37,7 @@ public class ChartNativeEvent extends NativeEvent {
 		layerX,
 		layerY
 	}
-	
+
 	/**
 	 * Needed for GWt injection
 	 */
@@ -62,5 +62,5 @@ public class ChartNativeEvent extends NativeEvent {
 	public final int getLayerY() {
 		return JsHelper.get().propertyAsInt(this, Property.layerY.name());
 	}
-	
+
 }

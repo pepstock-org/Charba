@@ -22,7 +22,7 @@ package org.pepstock.charba.client.jsinterop.defaults;
  * @since 2.0
  */
 public interface IsDefaultLayout {
-	
+
 	/**
 	 * Returns padding object defaults.
 	 * 

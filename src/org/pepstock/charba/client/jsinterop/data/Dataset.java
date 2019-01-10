@@ -33,7 +33,7 @@ import org.pepstock.charba.client.jsinterop.utils.JSON;
  * This is the base implementation for all datasets with common fields.
  * 
  * @author Andrea "Stock" Stocchero
- * @vresion 2.0
+ * @since 2.0
  */
 public abstract class Dataset extends NativeObjectContainer {
 	// default for hidden property
@@ -137,7 +137,8 @@ public abstract class Dataset extends NativeObjectContainer {
 	/**
 	 * Returns the type of dataset, based on type of chart.
 	 * 
-	 * @return type of dataset or null if not set. If not set or invalid, the default is {@link org.pepstock.charba.client.ChartType#bar}.
+	 * @return type of dataset or null if not set. If not set or invalid, the default is
+	 *         {@link org.pepstock.charba.client.ChartType#bar}.
 	 */
 	public Type getType() {
 		// gets string value from java script object
@@ -151,7 +152,7 @@ public abstract class Dataset extends NativeObjectContainer {
 		}
 		return type == null ? ChartType.bar : type;
 	}
-	
+
 	/**
 	 * Returns the data property in JSON format.
 	 * 

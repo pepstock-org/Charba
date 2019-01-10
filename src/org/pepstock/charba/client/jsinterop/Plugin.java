@@ -121,7 +121,7 @@ public interface Plugin {
 	 * datasets update is cancelled until another 'update' is triggered.
 	 * 
 	 * @param chart The chart instance.
-	 * @param datasetIndex The dataset index.
+	 * @param item the dataset item.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
 	boolean onBeforeDatasetUpdate(AbstractChart<?, ?> chart, DatasetPluginItem item);
@@ -131,7 +131,7 @@ public interface Plugin {
 	 * the datasets update has been previously cancelled.
 	 * 
 	 * @param chart The chart instance.
-	 * @param datasetIndex The dataset index.
+	 * @param item the dataset item.
 	 */
 	void onAfterDatasetUpdate(AbstractChart<?, ?> chart, DatasetPluginItem item);
 
@@ -195,8 +195,7 @@ public interface Plugin {
 	 * plugin returns <code>false</code>, the datasets drawing is cancelled until another 'render' is triggered.
 	 * 
 	 * @param chart The chart instance.
-	 * @param datasetIndex The dataset index.
-	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @param item the dataset item.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
 	boolean onBeforeDatasetDraw(AbstractChart<?, ?> chart, DatasetPluginItem item);
@@ -206,8 +205,7 @@ public interface Plugin {
 	 * Note that this hook will not be called if the datasets drawing has been previously cancelled.
 	 * 
 	 * @param chart The chart instance.
-	 * @param datasetIndex The dataset index.
-	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @param item the dataset item.
 	 */
 	void onAfterDatasetDraw(AbstractChart<?, ?> chart, DatasetPluginItem item);
 
@@ -216,8 +214,7 @@ public interface Plugin {
 	 * another 'render' is triggered.
 	 * 
 	 * @param chart The chart instance.
-	 * @param tooltip The tooltip instance.
-	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @param item The tooltip instance.
 	 * @return <code>false</code> to cancel the chart tooltip drawing.
 	 */
 	boolean onBeforeTooltipDraw(AbstractChart<?, ?> chart, TooltipPluginItem item);
@@ -227,8 +224,7 @@ public interface Plugin {
 	 * cancelled.
 	 * 
 	 * @param chart The chart instance.
-	 * @param tooltip The tooltip instance.
-	 * @param easing The current animation value, between 0.0 and 1.0.
+	 * @param  item The tooltip instance.
 	 */
 	void onAfterTooltipDraw(AbstractChart<?, ?> chart, TooltipPluginItem item);
 

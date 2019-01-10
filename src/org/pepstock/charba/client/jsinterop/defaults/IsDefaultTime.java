@@ -80,7 +80,7 @@ public interface IsDefaultTime {
 	/**
 	 * The minimum display format to be used for a time unit.
 	 * 
-	 * @return The minimum display format to be used for a time unit. 
+	 * @return The minimum display format to be used for a time unit.
 	 */
 	TimeUnit getMinUnit();
 

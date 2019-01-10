@@ -30,7 +30,7 @@ import com.google.gwt.event.shared.GwtEvent;
  *
  * @param <H> GWT event object
  */
-public abstract class AbstractEvent<H extends EventHandler> extends GwtEvent<H> {
+abstract class AbstractEvent<H extends EventHandler> extends GwtEvent<H> {
 
 	// native event
 	private final NativeEvent nativeEvent;

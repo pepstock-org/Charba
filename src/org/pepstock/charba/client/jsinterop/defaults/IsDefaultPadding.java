@@ -26,28 +26,28 @@ public interface IsDefaultPadding {
 	/**
 	 * Returns the padding left in pixel.
 	 * 
-	 * @return the padding left in pixel. 
+	 * @return the padding left in pixel.
 	 */
 	int getLeft();
 
 	/**
 	 * Returns the padding right in pixel.
 	 * 
-	 * @return the padding right in pixel. 
+	 * @return the padding right in pixel.
 	 */
 	int getRight();
 
 	/**
 	 * Returns the padding top in pixel.
 	 * 
-	 * @return the padding top in pixel. 
+	 * @return the padding top in pixel.
 	 */
 	int getTop();
 
 	/**
 	 * Returns the padding bottom in pixel.
 	 * 
-	 * @return the padding bottom in pixel. 
+	 * @return the padding bottom in pixel.
 	 */
 	int getBottom();
 

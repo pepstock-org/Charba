@@ -24,7 +24,7 @@ import org.pepstock.charba.client.enums.Easing;
  * @since 2.0
  */
 public interface IsDefaultAnimation {
-	
+
 	/**
 	 * Returns the animation easing.
 	 * 
@@ -35,14 +35,14 @@ public interface IsDefaultAnimation {
 	/**
 	 * Returns the number of milliseconds an animation takes.
 	 * 
-	 * @return the number of milliseconds an animation takes. 
+	 * @return the number of milliseconds an animation takes.
 	 */
 	int getDuration();
-	
+
 	/**
 	 * If true, the chart will animate in with a rotation animation.
 	 * 
-	 * @return If true, the chart will animate in with a rotation animation. 
+	 * @return If true, the chart will animate in with a rotation animation.
 	 */
 	boolean isAnimateRotate();
 

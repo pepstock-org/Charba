@@ -181,17 +181,17 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	public List<Dataset> getDatasets() {
 		return this.currentDatasets;
 	}
-	
+
 	/**
 	 * Returns a list of string for each datasets, in JSON format.
 	 * 
 	 * @return a list of string for each datasets, in JSON format
 	 */
-	public List<String> getDatasetsAsStrings(){
-		// creates the result 
+	public List<String> getDatasetsAsStrings() {
+		// creates the result
 		List<String> result = new LinkedList<>();
 		// scans all datasets
-		for (Dataset ds: currentDatasets) {
+		for (Dataset ds : currentDatasets) {
 			// adds to list the data in JSON string format
 			result.add(ds.getDataAsString());
 		}

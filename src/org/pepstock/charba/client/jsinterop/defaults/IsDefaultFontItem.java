@@ -24,7 +24,7 @@ import org.pepstock.charba.client.enums.FontStyle;
  * @since 2.0
  */
 public interface IsDefaultFontItem {
-	
+
 	/**
 	 * Returns the font color
 	 * 
@@ -42,7 +42,7 @@ public interface IsDefaultFontItem {
 	/**
 	 * Returns the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). 
+	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	FontStyle getFontStyle();
 

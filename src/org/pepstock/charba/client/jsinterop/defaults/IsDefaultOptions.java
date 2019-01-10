@@ -94,12 +94,12 @@ public interface IsDefaultOptions {
 	 * @return the maintaining of the original canvas aspect ratio (width / height) when resizing.
 	 */
 	boolean isMaintainAspectRatio();
-	
+
 	/**
 	 * Canvas aspect ratio (i.e. width / height, a value of 1 representing a square canvas).<br>
 	 * Note that this option is ignored if the height is explicitly defined either as attribute or via the style.
 	 * 
-	 * @return  the aspect ratio.
+	 * @return the aspect ratio.
 	 */
 	double getAspectRatio();
 

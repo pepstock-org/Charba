@@ -22,25 +22,25 @@ package org.pepstock.charba.client.jsinterop.defaults;
  * @since 2.0
  */
 public interface IsDefaultArc {
-	
+
 	/**
 	 * Returns the background color.
 	 * 
-	 * @return the background color. 
+	 * @return the background color.
 	 */
 	String getBackgroundColorAsString();
 
 	/**
 	 * Returns the border width.
 	 * 
-	 * @return the border width. 
+	 * @return the border width.
 	 */
 	int getBorderWidth();
 
 	/**
 	 * Returns the border color.
 	 * 
-	 * @return the border color. 
+	 * @return the border color.
 	 */
 	String getBorderColorAsString();
 }

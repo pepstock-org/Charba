@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.jsinterop.events;
 
-
 import org.pepstock.charba.client.jsinterop.items.LegendItem;
 
 import com.google.gwt.dom.client.NativeEvent;

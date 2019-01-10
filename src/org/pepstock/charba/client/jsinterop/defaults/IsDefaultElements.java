@@ -22,33 +22,33 @@ package org.pepstock.charba.client.jsinterop.defaults;
  * @since 2.0
  */
 public interface IsDefaultElements {
-	
+
 	/**
 	 * Returns ARC object defaults.
 	 * 
 	 * @return ARC object defaults.
 	 */
 	IsDefaultArc getArc();
-	
+
 	/**
 	 * Returns LINE object defaults.
 	 * 
 	 * @return LINE object defaults.
 	 */
 	IsDefaultLine getLine();
-	
+
 	/**
 	 * Returns POINT object defaults.
 	 * 
 	 * @return POINT object defaults.
 	 */
 	IsDefaultPoint getPoint();
-	
+
 	/**
 	 * Returns RECTANGLE object defaults.
 	 * 
 	 * @return RECTANGLE object defaults.
 	 */
 	IsDefaultRectangle getRectangle();
-	
+
 }

@@ -29,7 +29,6 @@ import java.util.List;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  * @see org.pepstock.charba.client.jsinterop.commons.ArrayObject
- * @param <E> extension of native objects, import a type from an external script
  */
 public final class ArrayObjectList extends AbstractArrayList<NativeObject, ArrayObject> {
 

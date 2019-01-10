@@ -26,7 +26,6 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  *
- * @param <T> extension of native objects, import a type from an external script
  */
 @JsType(isNative = true, name = NativeName.ARRAY, namespace = JsPackage.GLOBAL)
 public final class ArrayObject extends Array {
@@ -43,6 +42,7 @@ public final class ArrayObject extends Array {
 	 * Creates a java script array of objects starting from an array of native object containers.
 	 * 
 	 * @param items list of objects to load into new java script array.
+	 * @param <E> type of native object containers
 	 * @return new array instance of objects.
 	 */
 	@JsOverlay

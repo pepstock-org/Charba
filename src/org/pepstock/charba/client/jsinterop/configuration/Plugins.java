@@ -68,8 +68,9 @@ public final class Plugins {
 	 * Sets the plugin options. If passed options is null, the configuration of plugin will be removed.
 	 * 
 	 * @param pluginId plugin id.
-	 * @param options java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if
+	 * @param object java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if
 	 *            exist.
+	 * @param <T> type of native object container to store           
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
 	public <T extends NativeObjectContainer> void setOptions(String pluginId, T object) throws InvalidPluginIdException {
@@ -90,7 +91,9 @@ public final class Plugins {
 	/**
 	 * Returns the plugin options, if exist. It uses a factory instance to create a native object container.
 	 * 
-	 * @param pluginId plugin id. * @param factory factory instance to create a native object container.
+	 * @param pluginId plugin id. 
+	 * @param factory factory instance to create a native object container.
+	 * @param <T> type of native object container to return
 	 * @return java script object used to configure the plugin or <code>null</code> if not exist.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */

@@ -31,9 +31,6 @@ import java.util.ListIterator;
  * 
  * @author Andrea "Stock" Stocchero
  * @param <E> extension of {@link org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer}
- * @param <O> extension of native objects, import a type from an external script
- * @see org.pepstock.charba.client.jsinterop.commons.NativeObject
- * @see org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer
  * 
  */
 public final class ArrayObjectContainerList<E extends NativeObjectContainer> extends AbstractArrayList<E, ArrayObject> {

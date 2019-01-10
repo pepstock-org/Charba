@@ -35,6 +35,8 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayString;
  * @since 2.0
  */
 public final class BubbleDataset extends HovingDataset {
+	// exception message when it's not using data points
+	private static final String DATA_USAGE_MESSAGE = "Use datapoints instead of data for bubble chart";
 	// data point factory
 	private final DataPointListFactory factory = new DataPointListFactory();
 
@@ -172,7 +174,7 @@ public final class BubbleDataset extends HovingDataset {
 	 */
 	@Override
 	public void setData(double... values) {
-		throw new UnsupportedOperationException("Use datapoints instead of data for scatter chart");
+		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
 	}
 
 	/*
@@ -182,7 +184,7 @@ public final class BubbleDataset extends HovingDataset {
 	 */
 	@Override
 	public void setData(List<Double> values) {
-		throw new UnsupportedOperationException("Use datapoints instead of data for scatter chart");
+		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
 	}
 
 	/*
@@ -192,6 +194,6 @@ public final class BubbleDataset extends HovingDataset {
 	 */
 	@Override
 	public List<Double> getData() {
-		throw new UnsupportedOperationException("Use datapoints instead of data for scatter chart");
+		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
 	}
 }

@@ -39,7 +39,7 @@ public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionE
 	 * Creates the event with dataset metadata item related to the click
 	 * 
 	 * @param nativeEvent native event of this custom event
-	 * @param item dataset metadata item related to the click 
+	 * @param item dataset metadata item related to the click
 	 */
 	public DatasetSelectionEvent(NativeEvent nativeEvent, DatasetItem item) {
 		super(nativeEvent);

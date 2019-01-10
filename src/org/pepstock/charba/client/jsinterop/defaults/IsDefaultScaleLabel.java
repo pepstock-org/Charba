@@ -22,7 +22,7 @@ package org.pepstock.charba.client.jsinterop.defaults;
  * @since 2.0
  */
 public interface IsDefaultScaleLabel extends IsDefaultFontItem {
-	
+
 	/**
 	 * Returns the padding defaults.
 	 * 
@@ -36,6 +36,7 @@ public interface IsDefaultScaleLabel extends IsDefaultFontItem {
 	 * @return if the title is shown.
 	 */
 	boolean isDisplay();
+
 	/**
 	 * Returns the text for the scale string.
 	 * 

@@ -21,7 +21,7 @@ package org.pepstock.charba.client.jsinterop.defaults;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-public interface IsDefaultScaledOptions extends IsDefaultOptions{
+public interface IsDefaultScaledOptions extends IsDefaultOptions {
 
 	/**
 	 * Returns the scale/axis defaults.

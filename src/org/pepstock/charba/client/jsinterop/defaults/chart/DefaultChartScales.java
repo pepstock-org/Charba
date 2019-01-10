@@ -29,15 +29,15 @@ import org.pepstock.charba.client.jsinterop.options.Scales;
 public final class DefaultChartScales implements IsDefaultScales {
 
 	private final Scales scales;
-	
+
 	private final IsDefaultScale xAxis;
-	
+
 	private final IsDefaultScale yAxis;
 
 	/**
 	 * Creates the object by scales option element instance.
 	 * 
-	 * @param scale scales option element instance.
+	 * @param scales scales option element instance.
 	 */
 	public DefaultChartScales(Scales scales) {
 		this.scales = scales;
@@ -59,7 +59,9 @@ public final class DefaultChartScales implements IsDefaultScales {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales#isDisplay()
 	 */
 	@Override
@@ -67,7 +69,9 @@ public final class DefaultChartScales implements IsDefaultScales {
 		return scales.isDisplay();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales#getXAxis()
 	 */
 	@Override
@@ -75,7 +79,9 @@ public final class DefaultChartScales implements IsDefaultScales {
 		return xAxis;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales#getYAxis()
 	 */
 	@Override

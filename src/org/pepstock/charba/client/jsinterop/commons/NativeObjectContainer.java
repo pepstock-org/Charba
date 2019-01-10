@@ -465,16 +465,15 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Sets a value (Array) into embedded JavaScript object at specific property.
+	 * Sets a value (Array from a container list) into embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
-	 * @param value value to be set
-	 * @param <T> type of array
+	 * @param container container of array
 	 */
-	protected final void setArrayValue(Key key, ArrayObjectContainerList<?> value) {
+	protected final void setArrayValue(Key key, ArrayObjectContainerList<?> container) {
 		// if value is null
 		// try to remove the reference if exists
-		if (value == null) {
+		if (container == null) {
 			// checks if the property exists
 			if (has(key)) {
 				// removes property
@@ -482,7 +481,7 @@ public abstract class NativeObjectContainer {
 			}
 		} else {
 			// sets value
-			nativeObject.defineArrayProperty(key.name(), value.getArray());
+			nativeObject.defineArrayProperty(key.name(), container.getArray());
 		}
 	}
 	
@@ -510,7 +509,7 @@ public abstract class NativeObjectContainer {
 	 * This must be used when a java script property can contain an array or a string.
 	 * 
 	 * @param key key of the property of JavaScript object.
-	 * @param value value to be set
+	 * @param values values of colors to be set
 	 */
 	protected final void setValueOrArray(Key key, IsColor... values) {
 		// checks if values are consistent
@@ -534,7 +533,7 @@ public abstract class NativeObjectContainer {
 	 * This must be used when a java script property can contain an array or a string.
 	 * 
 	 * @param key key of the property of JavaScript object.
-	 * @param value value to be set
+	 * @param values value of keys to be set
 	 */
 	protected final void setValueOrArray(Key key, Key... values) {
 		// checks if values are consistent
@@ -558,7 +557,7 @@ public abstract class NativeObjectContainer {
 	 * This must be used when a java script property can contain an array or a integer.
 	 * 
 	 * @param key key of the property of JavaScript object.
-	 * @param value value to be set
+	 * @param values values of integers to be set
 	 */
 	protected final void setValueOrArray(Key key, int... values) {
 		// checks if values are consistent
@@ -582,7 +581,7 @@ public abstract class NativeObjectContainer {
 	 * This must be used when a java script property can contain an array or a double.
 	 * 
 	 * @param key key of the property of JavaScript object.
-	 * @param value value to be set
+	 * @param values values of doubles to be set
 	 */
 	protected final void setValueOrArray(Key key, double... values) {
 		// checks if values are consistent
@@ -606,7 +605,7 @@ public abstract class NativeObjectContainer {
 	 * This must be used when a java script property can contain an array or a string.
 	 * 
 	 * @param key key of the property of JavaScript object.
-	 * @param value value to be set
+	 * @param values values of strings to be set
 	 */
 	protected final void setValueOrArray(Key key, String... values) {
 		// checks if values are consistent
@@ -630,6 +629,7 @@ public abstract class NativeObjectContainer {
 	 * This must be used when a java script property can contain an array or a integer.
 	 * 
 	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value if the value was stored as single number value
 	 * @return value of the property (by array) or <code>null</code> if not exist
 	 */
 	protected final ArrayInteger getValueOrArray(Key key, int defaultValue) {
@@ -651,14 +651,15 @@ public abstract class NativeObjectContainer {
 	 * This must be used when a java script property can contain an array or a double.
 	 * 
 	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value if the value was stored as single number value
 	 * @return value of the property (by array) or <code>null</code> if not exist
 	 */
-	protected final ArrayDouble getValueOrArray(Key key, double defautValue) {
+	protected final ArrayDouble getValueOrArray(Key key, double defaultValue) {
 		// checks if property type
 		if (ObjectType.Number.equals(type(key))) {
 			// if here, is a single value, therefore creates an array
 			// with only 1 element
-			return ArrayDouble.of(getValue(key, defautValue));
+			return ArrayDouble.of(getValue(key, defaultValue));
 		} else if (ObjectType.Array.equals(type(key))) {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
@@ -672,6 +673,7 @@ public abstract class NativeObjectContainer {
 	 * This must be used when a java script property can contain an array or a string.
 	 * 
 	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value if the value was stored as single string value
 	 * @return value of the property (by array) or <code>null</code> if not exist
 	 */
 	protected final ArrayString getValueOrArray(Key key, String defaultValue) {
@@ -693,6 +695,7 @@ public abstract class NativeObjectContainer {
 	 * This must be used when a java script property can contain an array or a key.
 	 * 
 	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value if the value was stored as single key value
 	 * @return value of the property (by array) or <code>null</code> if not exist
 	 */
 	protected final ArrayString getValueOrArray(Key key, Key defaultValue) {

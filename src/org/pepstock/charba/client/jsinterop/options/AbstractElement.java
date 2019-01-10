@@ -29,7 +29,6 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  * 
- * @param <P> parent node class
  * @param <D> defaults provider class
  */
 public abstract class AbstractElement<D extends IsDefaultArc> extends AbstractModel<Elements, D> {

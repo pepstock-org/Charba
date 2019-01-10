@@ -26,7 +26,7 @@ import org.pepstock.charba.client.enums.TooltipPosition;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-public interface IsDefaultTooltips{
+public interface IsDefaultTooltips {
 
 	/**
 	 * Returns if tooltips are enabled.
@@ -38,7 +38,7 @@ public interface IsDefaultTooltips{
 	/**
 	 * Returns which elements appear in the tooltip.
 	 * 
-	 * @return which elements appear in the tooltip. 
+	 * @return which elements appear in the tooltip.
 	 */
 	InteractionMode getMode();
 
@@ -47,7 +47,7 @@ public interface IsDefaultTooltips{
 	 * applied at all times.
 	 * 
 	 * @return if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode
-	 *         will be applied at all times. 
+	 *         will be applied at all times.
 	 */
 	boolean isIntersect();
 
@@ -61,14 +61,14 @@ public interface IsDefaultTooltips{
 	/**
 	 * Returns the background color of the tooltip.
 	 * 
-	 * @return Background color of the tooltip. 
+	 * @return Background color of the tooltip.
 	 */
 	String getBackgroundColorAsString();
 
 	/**
 	 * Returns the title font.
 	 * 
-	 * @return the title font. 
+	 * @return the title font.
 	 */
 	String getTitleFontFamily();
 
@@ -82,14 +82,14 @@ public interface IsDefaultTooltips{
 	/**
 	 * Returns the title font style.
 	 * 
-	 * @return title font style. 
+	 * @return title font style.
 	 */
 	FontStyle getTitleFontStyle();
-	
+
 	/**
 	 * Returns the title alignment.
 	 * 
-	 * @return title alignment. 
+	 * @return title alignment.
 	 */
 	TextAlign getTitleAlign();
 
@@ -110,21 +110,21 @@ public interface IsDefaultTooltips{
 	/**
 	 * Returns the margin to add on bottom of title section.
 	 * 
-	 * @return margin to add on bottom of title section. 
+	 * @return margin to add on bottom of title section.
 	 */
 	int getTitleMarginBottom();
 
 	/**
 	 * Returns the body line font.
 	 * 
-	 * @return body line font. 
+	 * @return body line font.
 	 */
 	String getBodyFontFamily();
 
 	/**
 	 * Returns the body font size.
 	 * 
-	 * @return body font size. 
+	 * @return body font size.
 	 */
 	int getBodyFontSize();
 
@@ -138,7 +138,7 @@ public interface IsDefaultTooltips{
 	/**
 	 * Returns the body alignment.
 	 * 
-	 * @return body alignment. 
+	 * @return body alignment.
 	 */
 	TextAlign getBodyAlign();
 
@@ -148,7 +148,7 @@ public interface IsDefaultTooltips{
 	 * @return body font color.
 	 */
 	String getBodyFontColorAsString();
-	
+
 	/**
 	 * Returns the spacing to add to top and bottom of each tooltip item.
 	 * 
@@ -159,7 +159,7 @@ public interface IsDefaultTooltips{
 	/**
 	 * Returns the footer font.
 	 * 
-	 * @return footer font. 
+	 * @return footer font.
 	 */
 	String getFooterFontFamily();
 
@@ -173,28 +173,28 @@ public interface IsDefaultTooltips{
 	/**
 	 * Returns the footer font style.
 	 * 
-	 * @return footer font style. 
+	 * @return footer font style.
 	 */
 	FontStyle getFooterFontStyle();
 
 	/**
 	 * Returns the footer alignment.
 	 * 
-	 * @return footer alignment. 
+	 * @return footer alignment.
 	 */
 	TextAlign getFooterAlign();
 
 	/**
 	 * Returns the footer font color.
 	 * 
-	 * @return footer font color. 
+	 * @return footer font color.
 	 */
 	String getFooterFontColorAsString();
-	
+
 	/**
 	 * Returns the spacing to add to top and bottom of each footer line.
 	 * 
-	 * @return spacing to add to top and bottom of each footer line. 
+	 * @return spacing to add to top and bottom of each footer line.
 	 */
 	int getFooterSpacing();
 
@@ -208,31 +208,32 @@ public interface IsDefaultTooltips{
 	/**
 	 * Returns the padding to add on left and right of tooltip.
 	 * 
-	 * @return padding to add on left and right of tooltip. 
+	 * @return padding to add on left and right of tooltip.
 	 */
 	int getXPadding();
 
 	/**
 	 * Returns the padding to add on top and bottom of tooltip.
 	 * 
-	 * @return padding to add on top and bottom of tooltip. 
+	 * @return padding to add on top and bottom of tooltip.
 	 */
 	int getYPadding();
 
 	/**
 	 * Returns the extra distance to move the end of the tooltip arrow away from the tooltip point.
 	 * 
-	 * @return extra distance to move the end of the tooltip arrow away from the tooltip point. 
+	 * @return extra distance to move the end of the tooltip arrow away from the tooltip point.
 	 */
 	int getCaretPadding();
 
 	/**
 	 * Returns the size, in px, of the tooltip arrow.
 	 * 
-	 * @return size, in px, of the tooltip arrow. 
+	 * @return size, in px, of the tooltip arrow.
 	 */
 
 	int getCaretSize();
+
 	/**
 	 * Returns the radius of tooltip corner curves.
 	 * 
@@ -250,7 +251,7 @@ public interface IsDefaultTooltips{
 	/**
 	 * If true, color boxes are shown in the tooltip.
 	 * 
-	 * @return if true, color boxes are shown in the tooltip. 
+	 * @return if true, color boxes are shown in the tooltip.
 	 */
 	boolean isDisplayColors();
 

@@ -30,41 +30,41 @@ public interface IsDefaultPoint extends IsDefaultArc {
 	 * 
 	 * @return list of the radius of the point when hovered.
 	 */
-	 double getRadius();
+	double getRadius();
 
 	/**
 	 * Returns the style of the point.
 	 * 
-	 * @return the style of the point. 
+	 * @return the style of the point.
 	 */
-	 PointStyle getPointStyle();
+	PointStyle getPointStyle();
 
 	/**
 	 * Returns the pixel size of the non-displayed point that reacts to mouse events.
 	 * 
 	 * @return the pixel size of the non-displayed point.
 	 */
-	 double getHitRadius();
+	double getHitRadius();
 
 	/**
 	 * Returns the radius of the point when hovered.
 	 * 
-	 * @return the radius of the point when hovered. 
+	 * @return the radius of the point when hovered.
 	 */
-	 double getHoverRadius();
+	double getHoverRadius();
 
 	/**
 	 * Returns the border width of point when hovered.
 	 * 
 	 * @return the border width of point when hovered.
 	 */
-	 int getHoverBorderWidth();
-	 
-	 /**
-	  * Returns the point rotation (in degrees).
-	  * 
-	  * @return the point rotation (in degrees).
-	  */
-	 double getRotation();
+	int getHoverBorderWidth();
+
+	/**
+	 * Returns the point rotation (in degrees).
+	 * 
+	 * @return the point rotation (in degrees).
+	 */
+	double getRotation();
 
 }

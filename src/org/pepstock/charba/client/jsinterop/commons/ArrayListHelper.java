@@ -129,7 +129,6 @@ public final class ArrayListHelper {
 	 * 
 	 * @param clazz enumeration class with all possible values of enumeration
 	 * @param array array of strings to load when the list is creating.
-	 * @param list a string array list
 	 * @param <E> type of key
 	 * @return a array list of values or <code>null</code> if the array is null.
 	 */
@@ -148,7 +147,6 @@ public final class ArrayListHelper {
 	 * Creates a array list of generic java script objects by a java script array.
 	 * 
 	 * @param values array of elements to load when the list is creating.
-	 * @param <E> type of java script object
 	 * @return a array list of strings instance or <code>null</code> if the array is null.
 	 */
 	public static ArrayObjectList list(ArrayObject values) {
@@ -163,10 +161,9 @@ public final class ArrayListHelper {
 	/**
 	 * Creates a array list of java script native object container by a java script array and a factory.
 	 * 
-	 * @param values array of elements to load when the list is creating.
+	 * @param array array of elements to load when the list is creating.
 	 * @param factory factory implementation to create containers by a single native object of the array.
 	 * @param <E> type of native object container
-	 * @param <O> type of native object
 	 * @return the instance of updated list or <code>null</code> if the array is null.
 	 */
 	public static <E extends NativeObjectContainer> ArrayObjectContainerList<E> list(ArrayObject array, NativeObjectContainerFactory<E> factory) {
@@ -225,7 +222,6 @@ public final class ArrayListHelper {
 	 * 
 	 * @param clazz enumeration class with all possible values of enumeration
 	 * @param array array of strings to load when the list is creating.
-	 * @param list a string array list
 	 * @param <E> type of key
 	 * @return a array list of values or <code>null</code> if the array is null.
 	 */
@@ -237,7 +233,6 @@ public final class ArrayListHelper {
 	 * Creates an unmodifiable array list of generic java script objects by a java script array.
 	 * 
 	 * @param values array of elements to load when the list is creating.
-	 * @param <E> type of java script object
 	 * @return a array list of strings instance or <code>null</code> if the array is null.
 	 */
 	public static List<NativeObject> unmodifiableList(ArrayObject values) {
@@ -247,10 +242,9 @@ public final class ArrayListHelper {
 	/**
 	 * Creates an unmodifiable array list of java script native object container by a java script array and a factory.
 	 * 
-	 * @param values array of elements to load when the list is creating.
+	 * @param array array of elements to load when the list is creating.
 	 * @param factory factory implementation to create containers by a single native object of the array.
 	 * @param <E> type of native object container
-	 * @param <O> type of native object
 	 * @return the instance of updated list or <code>null</code> if the array is null.
 	 */
 	public static <E extends NativeObjectContainer> List<E> unmodifiableList(ArrayObject array, NativeObjectContainerFactory<E> factory) {
@@ -261,6 +255,7 @@ public final class ArrayListHelper {
 	 * Returns an unmodifiable list by another list.
 	 * 
 	 * @param list array list to wrap into an unmodifiable list
+	 * @param <E> type of element
 	 * @return an unmodifiable list or <code>null</code> if the list is null.
 	 */
 	private static <E> List<E> unmodifiableList(List<E> list) {

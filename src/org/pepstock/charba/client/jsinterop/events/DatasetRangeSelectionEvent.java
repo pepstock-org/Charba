@@ -18,11 +18,10 @@ package org.pepstock.charba.client.jsinterop.events;
 import com.google.gwt.dom.client.NativeEvent;
 
 /**
- * Event which is fired when the user clicks on the chart and selects a dataset.<br>
- * This event doesn't suppress the click event on the chart.
+ * Event which is fired when the user selects an area on the chart.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRangeSelectionEventHandler> {
 
@@ -30,16 +29,17 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRange
 	 * Event type
 	 */
 	public static final Type<DatasetRangeSelectionEventHandler> TYPE = new Type<DatasetRangeSelectionEventHandler>();
-
+	// starting index of selected dataset
 	private final int from;
-	
+	// ending index of selected dataset
 	private final int to;
-	
+
 	/**
-	 * Creates the event with dataset metadata item related to the click
+	 * Creates the event with start and end index of selected datasets.
 	 * 
 	 * @param nativeEvent native event of this custom event
-	 * @param item dataset metadata item related to the click org.pepstock.charba.client.items.DatasetMetaItem
+	 * @param from starting index of selected dataset
+	 * @param to ending index of selected dataset
 	 */
 	public DatasetRangeSelectionEvent(NativeEvent nativeEvent, int from, int to) {
 		super(nativeEvent);

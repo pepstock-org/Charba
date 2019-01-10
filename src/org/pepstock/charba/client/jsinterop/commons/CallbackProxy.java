@@ -30,7 +30,7 @@ import jsinterop.annotations.JsType;
  * var obj = new Object();
  * obj.callback = null;
  *  obj.proxy = function() {
- *  	  if (obj.callback != null && typeof obj.callback === 'function'){
+ *  	  if (obj.callback != null and typeof obj.callback === 'function'){
  *       //console.log(this);
  *		var args = Array.of(this).concat(Array.prototype.slice.call(arguments));
  *		var result = obj.callback.apply(this, args);
