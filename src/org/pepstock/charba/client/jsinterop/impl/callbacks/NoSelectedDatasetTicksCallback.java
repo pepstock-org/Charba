@@ -26,8 +26,8 @@ import org.pepstock.charba.client.jsinterop.items.DatasetMetaItem;
 import com.google.gwt.i18n.client.NumberFormat;
 
 /**
- * Implementation of tick callback in order to avoid that when all datasets are hidden, the ticks will get
- * a wrong double precision.
+ * Implementation of tick callback in order to avoid that when all datasets are hidden, the ticks will get a wrong double
+ * precision.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
@@ -36,9 +36,13 @@ public class NoSelectedDatasetTicksCallback implements TickCallback {
 
 	// it formats the ticks with 1 digits of precision
 	private final static NumberFormat FORMAT = NumberFormat.getFormat("0.0");
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.callbacks.TickCallback#onCallback(org.pepstock.charba.client.jsinterop.configuration.Axis, double, int, java.util.List)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.pepstock.charba.client.jsinterop.callbacks.TickCallback#onCallback(org.pepstock.charba.client.jsinterop.configuration
+	 * .Axis, double, int, java.util.List)
 	 */
 	@Override
 	public String onCallback(Axis axis, double value, int index, List<Double> values) {
@@ -48,9 +52,9 @@ public class NoSelectedDatasetTicksCallback implements TickCallback {
 		boolean allHidden = false;
 		// gets datasets
 		List<Dataset> dss = chart.getData().getDatasets();
-		// scans them by for cycle to have the index for retrieving 
+		// scans them by for cycle to have the index for retrieving
 		// the dataset metadata
-		for (int i=0; i<dss.size(); i++){
+		for (int i = 0; i < dss.size(); i++) {
 			// gets metadata to know if is hidden
 			DatasetMetaItem metadata = chart.getDatasetMeta(i);
 			// checks if metadata is null.

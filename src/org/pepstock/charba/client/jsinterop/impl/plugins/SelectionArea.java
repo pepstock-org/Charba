@@ -24,11 +24,11 @@ package org.pepstock.charba.client.jsinterop.impl.plugins;
 final class SelectionArea {
 
 	private double top = 0;
-	
+
 	private double left = 0;
-	
+
 	private double right = 0;
-	
+
 	private double bottom = 0;
 
 	/**
@@ -87,12 +87,14 @@ final class SelectionArea {
 		this.bottom = bottom;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "SelectionArea [top=" + top + ", left=" + left + ", right=" + right + ", bottom=" + bottom + "]";
 	}
-	
+
 }

@@ -66,12 +66,12 @@ abstract class BaseMeterChart<O extends MeterOptions, D extends MeterDataset> ex
 		// because before creating chart options
 		// new chart (by controller) must be defined
 		try {
-			// gets the controller type 
+			// gets the controller type
 			// could be gauge or meter
 			ControllerType type = getControllerType();
 			// checks if already registered
 			if (!Defaults.get().getControllers().isRegistered(type.name())) {
-				// if not, adds a controller 
+				// if not, adds a controller
 				Defaults.get().getControllers().extend(new BaseMeterController(type));
 			}
 			// calls super chart options creations

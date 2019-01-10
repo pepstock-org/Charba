@@ -34,19 +34,19 @@ import com.google.gwt.canvas.dom.client.Context2d;
  *
  */
 public final class ChartBackgroundColor extends AbstractPlugin {
-	
+
 	// default background color
 	static final String DEFAULT_BACKGROUND_COLOR = "white";
-	
+
 	/**
-	 * Plugin ID 
+	 * Plugin ID
 	 */
 	public static final String ID = "backgroundcolor";
-	
+	// factory to create options (native object container)
 	private final OptionsFactory factory = new OptionsFactory();
-	
+	// color instance
 	private final String color;
-	
+
 	/**
 	 * Default constructor with WIHITE background color.
 	 */
@@ -87,7 +87,9 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		return ColorBuilder.parse(getColorAsString());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.Plugin#getId()
 	 */
 	@Override
@@ -95,7 +97,9 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		return ID;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDraw(org.pepstock.charba.client.AbstractChart, double)
 	 */
 	@Override
@@ -125,17 +129,28 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		// always TRUE
 		return true;
 	}
-	
-	private static class OptionsFactory implements NativeObjectContainerFactory<ChartBackgroundColorOptions>{
 
-		/* (non-Javadoc)
-		 * @see org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)
+	/**
+	 * Inner class to create options by a native object to use in
+	 * {@link org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList}.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @since 2.0
+	 */
+	private static class OptionsFactory implements NativeObjectContainerFactory<ChartBackgroundColorOptions> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
+		 * .commons.NativeObject)
 		 */
 		@Override
 		public ChartBackgroundColorOptions create(NativeObject nativeObject) {
 			return new ChartBackgroundColorOptions(nativeObject);
 		}
-		
+
 	}
 
 }

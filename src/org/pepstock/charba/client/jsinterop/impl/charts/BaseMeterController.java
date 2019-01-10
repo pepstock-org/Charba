@@ -65,7 +65,9 @@ final class BaseMeterController extends AbstractController {
 		this.type = type;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.Controller#getType()
 	 */
 	@Override
@@ -103,7 +105,7 @@ final class BaseMeterController extends AbstractController {
 	 * Draws the value inside the inner radius of doughnut.
 	 * 
 	 * @param chart chart instance
-	 * @param item chart item with CHART.JS properties needed to calculate the area where to drwan the value
+	 * @param item chart item with CHART.JS properties needed to calculate the area where to drawn the value
 	 * @param dataset the dataset instance
 	 * @param options the chart options
 	 * @param ease easing of drawing (between 0 and 1) for animation
@@ -122,7 +124,7 @@ final class BaseMeterController extends AbstractController {
 		final double maxValue = MeterDisplay.percentage.equals(options.getDisplay()) || MeterDisplay.percentageAndLabel.equals(options.getDisplay()) ? MAX_PERCENTAGE : dataset.getMax();
 		// gets value
 		final double valueToCalculate = MeterDisplay.percentage.equals(options.getDisplay()) || MeterDisplay.percentageAndLabel.equals(options.getDisplay()) ? dataset.getValue() / dataset.getMax() : dataset.getValue();
-		// here is calculating the value to showed 
+		// here is calculating the value to showed
 		// based on easing of drawing
 		final double value = options.isAnimatedDisplay() ? valueToCalculate * ease : valueToCalculate;
 		// gets max value into string to check font size
@@ -204,7 +206,7 @@ final class BaseMeterController extends AbstractController {
 	}
 
 	/**
-	 * Formats the value to disply
+	 * Formats the value to display
 	 * 
 	 * @param value value to display
 	 * @param format number format to use

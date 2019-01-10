@@ -26,7 +26,7 @@ import org.pepstock.charba.client.jsinterop.controllers.ControllerType;
  * @since 2.0
  */
 public final class MeterChart extends BaseMeterChart<MeterOptions, MeterDataset> {
-    
+
 	/**
 	 * Name of chart type for meter
 	 */
@@ -35,7 +35,7 @@ public final class MeterChart extends BaseMeterChart<MeterOptions, MeterDataset>
 	private final static ControllerType CONTROLLER_TYPE = new ControllerType(TYPE, ChartType.doughnut);
 	// chart options
 	private final MeterOptions options;
-	
+
 	/**
 	 * Builds the object.
 	 */
@@ -44,7 +44,7 @@ public final class MeterChart extends BaseMeterChart<MeterOptions, MeterDataset>
 		// creates options
 		options = new MeterOptions(this, getChartOptions());
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -74,8 +74,10 @@ public final class MeterChart extends BaseMeterChart<MeterOptions, MeterDataset>
 	public MeterDataset newDataset() {
 		return newDataset(DEFAULT_MAX);
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.BaseMeterChart#newDataset(double)
 	 */
 	@Override
@@ -83,12 +85,14 @@ public final class MeterChart extends BaseMeterChart<MeterOptions, MeterDataset>
 		return new MeterDataset(max);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.impl.charts.BaseMeterChart#getControllerType()
 	 */
 	@Override
 	ControllerType getControllerType() {
 		return CONTROLLER_TYPE;
 	}
-	
+
 }

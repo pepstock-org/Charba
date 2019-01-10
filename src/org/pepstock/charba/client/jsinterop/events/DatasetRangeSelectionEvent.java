@@ -22,6 +22,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
+ * @see org.pepstock.charba.client.jsinterop.impl.plugins.DatasetsItemsSelector
  */
 public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRangeSelectionEventHandler> {
 

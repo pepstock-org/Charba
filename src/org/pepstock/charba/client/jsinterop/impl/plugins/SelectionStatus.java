@@ -35,5 +35,5 @@ enum SelectionStatus
 	 * The selection has been completed
 	 */
 	selected,
-	
+
 }

@@ -50,7 +50,7 @@ public class MeterOptions extends AbstractPieOptions {
 	public static final IsColor DEFAULT_DISPLAY_COLOR = new Color(128, 128, 128);
 
 	private static final double DEFAULT_CUTOUT_PERCENTAGE = 90D;
-	
+
 	private static final boolean DEFAULT_ANIMATED_DISPLAY = false;
 
 	private MeterDisplay display = MeterDisplay.value;
@@ -62,7 +62,7 @@ public class MeterOptions extends AbstractPieOptions {
 	private FontStyle fontStyle = FontStyle.normal;
 
 	private IsColor displayFontColor = DEFAULT_DISPLAY_COLOR;
-	
+
 	private boolean animatedDisplay = DEFAULT_ANIMATED_DISPLAY;
 
 	/**
@@ -244,14 +244,12 @@ public class MeterOptions extends AbstractPieOptions {
 	}
 
 	/**
-	 * Sets if the display will be shown based on the animation of chart. 
+	 * Sets if the display will be shown based on the animation of chart.
 	 * 
 	 * @param animatedDisplay the animatedDisplay to set, <code>true</code> if animated, otherwise <code>false</code>
 	 */
 	public final void setAnimatedDisplay(boolean animatedDisplay) {
 		this.animatedDisplay = animatedDisplay;
 	}
-	
-	
 
 }

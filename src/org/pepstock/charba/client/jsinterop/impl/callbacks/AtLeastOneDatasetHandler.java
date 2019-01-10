@@ -23,7 +23,6 @@ import org.pepstock.charba.client.jsinterop.events.LegendClickEvent;
 import org.pepstock.charba.client.jsinterop.events.LegendClickEventHandler;
 import org.pepstock.charba.client.jsinterop.items.DatasetMetaItem;
 
-
 /**
  * Implementation of legend click handler which disable the capability to hide the last visible dataset.<br>
  * In this way, always a dataset is showed.
@@ -33,8 +32,12 @@ import org.pepstock.charba.client.jsinterop.items.DatasetMetaItem;
  */
 public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.events.LegendClickEventHandler#onClick(org.pepstock.charba.client.jsinterop.events.LegendClickEvent)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.pepstock.charba.client.jsinterop.events.LegendClickEventHandler#onClick(org.pepstock.charba.client.jsinterop.events.
+	 * LegendClickEvent)
 	 */
 	@Override
 	public void onClick(LegendClickEvent event) {
@@ -51,9 +54,9 @@ public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 			int count = 0;
 			// gets all datasets
 			List<Dataset> dss = chart.getData().getDatasets();
-			// scans them by for cycle to have the index for retrieving 
+			// scans them by for cycle to have the index for retrieving
 			// the dataset metadata
-			for (int i=0; i<dss.size(); i++){
+			for (int i = 0; i < dss.size(); i++) {
 				// gets metadata to know if is hidden
 				DatasetMetaItem metadataItem = chart.getDatasetMeta(i);
 				// if visible increments counter
@@ -61,7 +64,7 @@ public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 					count++;
 				}
 			}
-			// checks if there is ONLY 1 visible dataset 
+			// checks if there is ONLY 1 visible dataset
 			if (count > 1) {
 				// if not, it can hide it
 				metadata.setHidden(true);

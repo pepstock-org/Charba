@@ -37,6 +37,7 @@ import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.gwt.event.dom.client.MouseUpEvent;
 import com.google.gwt.event.dom.client.MouseUpHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
  * MAnages the selection on canvas, drawing selection area and implementing mouse listeners for canvas.
@@ -45,7 +46,7 @@ import com.google.gwt.event.dom.client.MouseUpHandler;
  * @since 1.8
  */
 final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHandler {
-	
+
 	// chart instance
 	private final AbstractChart<?, ?> chart;
 	// plugin options
@@ -62,6 +63,16 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	private ImageElement snapshot = null;
 	// amount of datasets items
 	private int datasetsItemsCount = 0;
+	// event handler registration
+	private HandlerRegistration mouseDown = null;
+	// event handler registration
+	private HandlerRegistration mouseUp = null;
+	// event handler registration
+	private HandlerRegistration mouseMove = null;
+	// previous chart area
+	private String previousChartAreaAsString = null;
+	// previous datasets
+	private List<String> previousDatasetsAsString = null;
 
 	/**
 	 * Creates the selection handler with chart instance and the options (if exist) into chart options.
@@ -178,6 +189,48 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 */
 	void setDatasetsItemsCount(int datasetsItemsCount) {
 		this.datasetsItemsCount = datasetsItemsCount;
+	}
+
+	/**
+	 * @return the mouseDown
+	 */
+	HandlerRegistration getMouseDown() {
+		return mouseDown;
+	}
+
+	/**
+	 * @param mouseDown the mouseDown to set
+	 */
+	void setMouseDown(HandlerRegistration mouseDown) {
+		this.mouseDown = mouseDown;
+	}
+
+	/**
+	 * @return the mouseUp
+	 */
+	HandlerRegistration getMouseUp() {
+		return mouseUp;
+	}
+
+	/**
+	 * @param mouseUp the mouseUp to set
+	 */
+	void setMouseUp(HandlerRegistration mouseUp) {
+		this.mouseUp = mouseUp;
+	}
+
+	/**
+	 * @return the mouseMove
+	 */
+	HandlerRegistration getMouseMove() {
+		return mouseMove;
+	}
+
+	/**
+	 * @param mouseMove the mouseMove to set
+	 */
+	void setMouseMove(HandlerRegistration mouseMove) {
+		this.mouseMove = mouseMove;
 	}
 
 	/**
@@ -298,7 +351,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID());
 		// checks the type of chart and scale
 		// LINE and axis TIME must be added by 1 end of datasets
-		if (chart.getType().equals(ChartType.line) ||  AxisType.time.equals(scaleItem.getType())) {
+		if (chart.getType().equals(ChartType.line) || AxisType.time.equals(scaleItem.getType())) {
 			// fires the event that dataset items selection
 			chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd() + 1));
 		} else if (chart.getType().equals(ChartType.bar)) {
@@ -310,7 +363,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	/**
 	 * Recalculates the selection area and track and draws the area when a chart is updated or resized.
 	 */
-	void refresh() {		
+	void refresh() {
 		// gets chart AREA
 		ChartNode node = chart.getNode();
 		ChartAreaNode chartArea = node.getChartArea();
@@ -346,6 +399,61 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// then complete the selection
 		endSelection(Document.get().createChangeEvent());
 	}
+	
+	/**
+	 * Checks if the chart is changed.<br>
+	 * It checks:<br>
+	 * <ul>
+	 * <li>the dimension of chart
+	 * <li>the number of datasets
+	 * <li>the data of each dataset
+	 * </ul>
+	 * 
+	 * @param chart chart instance
+	 * @return <code>true</code> if chart is changed, otherwise <code>false</code>.
+	 */
+	boolean isChartChanged() {
+		// gets the chart area in json format
+		String chartAreaAsString = chart.getNode().getChartArea().toString();
+		// gets the list of datasets data as list of JSON string
+		List<String> datasetsAsString = chart.getData().getDatasetsAsStrings();
+		// if the fields are null, this is the first call and draw of chart
+		// because chart is changed
+		if (previousDatasetsAsString == null && previousChartAreaAsString == null) {
+			// saves the current datasets and dimensions of chart
+			previousDatasetsAsString = datasetsAsString;
+			previousChartAreaAsString = chartAreaAsString;
+			return true;
+		}
+		// checks if dimension of chart is changed
+		if (!chartAreaAsString.equalsIgnoreCase(previousChartAreaAsString)) {
+			// saves the current datasets and dimensions of chart
+			previousDatasetsAsString = datasetsAsString;
+			previousChartAreaAsString = chartAreaAsString;
+			return true;
+		}
+		// checks if the amount of datasets remained the same
+		if (previousDatasetsAsString.size() != datasetsAsString.size()) {
+			// saves the current datasets and dimensions of chart
+			previousDatasetsAsString = datasetsAsString;
+			previousChartAreaAsString = chartAreaAsString;
+			return true;
+		}
+		// checks if all data of all datasets remained the same
+		for (int i = 0; i < previousDatasetsAsString.size(); i++) {
+			// gets the datasets data as string
+			String datasetAsString = previousDatasetsAsString.get(i);
+			// checks if changed
+			if (!datasetAsString.equalsIgnoreCase(datasetsAsString.get(i))) {
+				// saves the current datasets and dimensions of chart
+				previousDatasetsAsString = datasetsAsString;
+				previousChartAreaAsString = chartAreaAsString;
+				return true;
+			}
+		}
+		// if here the chart is NOT changed
+		return false;
+	}
 
 	/**
 	 * Checks if the coordinate of event is inside teh chart area.
@@ -362,5 +470,5 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		boolean isY = event.getY() >= area.getTop() && event.getY() <= area.getBottom();
 		return isX && isY;
 	}
-	
+
 }

@@ -31,18 +31,18 @@ import org.pepstock.charba.client.jsinterop.options.Scales;
  * Configuration options of selection plugin.<br>
  * It is managing:<br>
  * <ul>
- * <li> the selection color
- * <li> the X axis ID
+ * <li>the selection color
+ * <li>the X axis ID
  * </ul>
- *  
+ * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-public final class DatasetsItemsSelectorOptions  extends NativeObjectContainer {
-	
+public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
+
 	// default alpha of selecting/selection colors
 	private static final double DEFAULT_ALPHA = 0.3D;
-	
+
 	/**
 	 * Default color for area
 	 */
@@ -51,12 +51,12 @@ public final class DatasetsItemsSelectorOptions  extends NativeObjectContainer {
 	/**
 	 * Default X axis id
 	 */
-	private  static final String DEFAULT_AXIS_ID = Scales.DEFAULT_X_AXIS_ID;
+	private static final String DEFAULT_AXIS_ID = Scales.DEFAULT_X_AXIS_ID;
 
 	/**
 	 * Default border width of selection area
 	 */
-	private  static final int DEFAULT_BORDER_WIDTH = 0;
+	private static final int DEFAULT_BORDER_WIDTH = 0;
 
 	/**
 	 * Default border color for area
@@ -66,14 +66,15 @@ public final class DatasetsItemsSelectorOptions  extends NativeObjectContainer {
 	/**
 	 * Name of properties of native object.
 	 */
-	private enum Property implements Key{
+	private enum Property implements Key
+	{
 		color,
 		xAxisID,
 		borderColor,
 		borderDash,
 		borderWidth
 	}
-	
+
 	/**
 	 * Builds the object with a new java script object setting the default value of plugin.
 	 */
@@ -93,54 +94,61 @@ public final class DatasetsItemsSelectorOptions  extends NativeObjectContainer {
 
 	/**
 	 * Sets the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
-	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
+	 * 
+	 * @param xAxisID the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found
+	 *            x axis.
 	 */
-	public void setXAxisID(String xAxisID){
-		  setValue(Property.xAxisID, xAxisID);
+	public void setXAxisID(String xAxisID) {
+		setValue(Property.xAxisID, xAxisID);
 	}
 
 	/**
-	 * Returns the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
-	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
-	 */
-	public String getXAxisID(){
-		  return getValue(Property.xAxisID, DEFAULT_AXIS_ID);
-	}
-	
-	/**
-	 * Returns the  color.
+	 * Returns the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x
+	 * axis.
 	 * 
-	 * @return the  color.
+	 * @return the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x
+	 *         axis.
 	 */
-	public String getColorAsString(){
+	public String getXAxisID() {
+		return getValue(Property.xAxisID, DEFAULT_AXIS_ID);
+	}
+
+	/**
+	 * Returns the color.
+	 * 
+	 * @return the color.
+	 */
+	public String getColorAsString() {
 		return getValue(Property.color, DEFAULT_COLOR.toRGBA());
 	}
-	
+
 	/**
-	 * Returns the  color.
+	 * Returns the color.
 	 * 
-	 * @return the  color.
+	 * @return the color.
 	 */
-	public IsColor getColor(){
+	public IsColor getColor() {
 		return ColorBuilder.parse(getColorAsString());
 	}
-	
+
 	/**
-	 * Sets the  color.
-	 * @param color the  color.
+	 * Sets the color.
+	 * 
+	 * @param color the color.
 	 */
-	public void setColor(String color){
+	public void setColor(String color) {
 		setValue(Property.color, color);
 	}
 
 	/**
-	 * Sets the  color.
-	 * @param color the  color.
+	 * Sets the color.
+	 * 
+	 * @param color the color.
 	 */
-	public void setColor(IsColor color){
+	public void setColor(IsColor color) {
 		setColor(color.toRGBA());
 	}
-	
+
 	/**
 	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
 	 * and gaps which describe the pattern.
@@ -155,25 +163,26 @@ public final class DatasetsItemsSelectorOptions  extends NativeObjectContainer {
 	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
 	 * lines and gaps which describe the pattern.
 	 * 
-	 * @return the line dash pattern used when stroking lines. 
+	 * @return the line dash pattern used when stroking lines.
 	 */
 	public List<Integer> getBorderDash() {
 		ArrayInteger array = getArrayValue(Property.borderDash);
 		return ArrayListHelper.list(array);
 	}
-	
+
 	/**
 	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
 	 * lines and gaps which describe the pattern.
 	 * 
-	 * @return the line dash pattern used when stroking lines. 
+	 * @return the line dash pattern used when stroking lines.
 	 */
 	ArrayInteger getBorderDashAsJavaScriptObject() {
 		return getArrayValue(Property.borderDash);
 	}
-	
+
 	/**
 	 * Sets the border width of the selection.
+	 * 
 	 * @param borderWidth the border width of the selection.
 	 */
 	public void setBorderWidth(int borderWidth) {
@@ -182,43 +191,46 @@ public final class DatasetsItemsSelectorOptions  extends NativeObjectContainer {
 
 	/**
 	 * Returns the border width of the selection.
+	 * 
 	 * @return list of the border width of the selection.
 	 */
 	public int getBorderWidth() {
 		return getValue(Property.borderWidth, DEFAULT_BORDER_WIDTH);
 	}
-	
+
 	/**
-	 * Returns the  color.
+	 * Returns the color.
 	 * 
-	 * @return the  color.
+	 * @return the color.
 	 */
-	public String getBorderColorAsString(){
+	public String getBorderColorAsString() {
 		return getValue(Property.color, DEFAULT_BORDER_COLOR.toRGBA());
 	}
-	
+
 	/**
-	 * Returns the  color.
+	 * Returns the color.
 	 * 
-	 * @return the  color.
+	 * @return the color.
 	 */
-	public IsColor getBorderColor(){
+	public IsColor getBorderColor() {
 		return ColorBuilder.parse(getColorAsString());
 	}
-	
+
 	/**
-	 * Sets the  color.
-	 * @param color the  color.
+	 * Sets the color.
+	 * 
+	 * @param color the color.
 	 */
-	public void setBorderColor(String color){
+	public void setBorderColor(String color) {
 		setValue(Property.borderColor, color);
 	}
 
 	/**
-	 * Sets the  color.
-	 * @param color the  color.
+	 * Sets the color.
+	 * 
+	 * @param color the color.
 	 */
-	public void setBorderColor(IsColor color){
+	public void setBorderColor(IsColor color) {
 		setColor(color.toRGBA());
 	}
 
@@ -227,7 +239,7 @@ public final class DatasetsItemsSelectorOptions  extends NativeObjectContainer {
 	 * 
 	 * @return the java script object of this options.
 	 */
-	public NativeObject getObject(){
+	public NativeObject getObject() {
 		return super.getNativeObject();
 	}
 

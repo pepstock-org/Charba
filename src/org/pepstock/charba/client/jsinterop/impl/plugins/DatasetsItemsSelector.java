@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.impl.plugins;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.enums.Event;
@@ -28,7 +29,6 @@ import org.pepstock.charba.client.jsinterop.plugins.AbstractPlugin;
 import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
 
 import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Image;
 
 /**
@@ -42,30 +42,19 @@ import com.google.gwt.user.client.ui.Image;
  * @since 2.0
  */
 public final class DatasetsItemsSelector extends AbstractPlugin {
-	
-	//FIXME global(multicharts) is missing
-	
-	// handler of selection on canvas
-	private SelectionHandler handler = null;
-	// event handler registration
-	private HandlerRegistration mouseDown = null;
-	// event handler registration
-	private HandlerRegistration mouseUp = null;
-	// event handler registration
-	private HandlerRegistration mouseMove = null;
-	// previous chart area
-	private String previousChartAreaAsString = null;
-	// previous datasets
-	private List<String> previousDatasetsAsString = null;
-	
+
 	/**
-	 * Plugin ID 
+	 * Plugin ID
 	 */
 	public static final String ID = "datasetsitemsselector";
+	// FIXME global(multicharts) is missing
+	private static final Map<String, SelectionHandler> HANDLERS = new HashMap<>();
 	// factory to read options
 	private final OptionsFactory factory = new OptionsFactory();
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.Plugin#getId()
 	 */
 	@Override
@@ -73,7 +62,9 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		return ID;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onConfigure(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
@@ -87,8 +78,11 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client.AbstractChart, com.google.gwt.core.client.JavaScriptObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client.AbstractChart,
+	 * com.google.gwt.core.client.JavaScriptObject)
 	 */
 	@Override
 	public void onAfterInit(AbstractChart<?, ?> chart) {
@@ -108,44 +102,55 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 				// and use the default
 				pOptions = new DatasetsItemsSelectorOptions();
 			}
-
+			// checks if chart has got already an handler
+			if (HANDLERS.containsKey(chart.getId())) {
+				// removes previous handler
+				HANDLERS.remove(chart.getId());
+			}
 			// creates the handler of selection
 			// by chart instance and the options stored into options (if exists).
-			handler = new SelectionHandler(chart, pOptions);
+			SelectionHandler handler = new SelectionHandler(chart, pOptions);
 			// removes the default mouse down listener
 			chart.removeCanvasPreventDefault();
 			// adds all mouse listeners to canvas
-			mouseDown = chart.getCanvas().addMouseDownHandler(handler);
-			mouseUp = chart.getCanvas().addMouseUpHandler(handler);		
-			mouseMove = chart.getCanvas().addMouseMoveHandler(handler);
+			handler.setMouseDown(chart.getCanvas().addMouseDownHandler(handler));
+			handler.setMouseUp(chart.getCanvas().addMouseUpHandler(handler));
+			handler.setMouseMove(chart.getCanvas().addMouseMoveHandler(handler));
+			// stores selection handler
+			HANDLERS.put(chart.getId(), handler);
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterDraw(org.pepstock.charba.client.AbstractChart, double, com.google.gwt.core.client.JavaScriptObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterDraw(org.pepstock.charba.client.AbstractChart, double,
+	 * com.google.gwt.core.client.JavaScriptObject)
 	 */
 	@Override
 	public void onAfterDraw(AbstractChart<?, ?> chart, double easing) {
 		// checks if the plugin has been invoked for LINE or BAR charts
 		if (chart.getType().equals(ChartType.line) || chart.getType().equals(ChartType.bar)) {
+			// gets selection handler
+			SelectionHandler handler = HANDLERS.get(chart.getId());
 			// checks if the draw if at the end of animation
 			// and if the selection is not already started
 			if (easing == 1D) {
 				// gets the width of canvas
 				// here is already attached to the parent
-				int limitRight = chart.getCanvas().getOffsetWidth(); 
+				int limitRight = chart.getCanvas().getOffsetWidth();
 				// datasets items count
 				int itemsCount = 0;
 				// gets the amount of datasets
 				int datasetsCount = chart.getData().getDatasets().size();
 				// scans all datasets
-				for (int i=0 ; i < datasetsCount ; i++ ) {
-					// checks if dataset is visible and 
+				for (int i = 0; i < datasetsCount; i++) {
+					// checks if dataset is visible and
 					// it didn't start count the dataset items (first cycle)
 					if (chart.isDatasetVisible(i) && itemsCount == 0) {
-						// gets dataset meta data 
+						// gets dataset meta data
 						DatasetMetaItem items = chart.getDatasetMeta(i);
-						if (chart.getType().equals(items.getType())){
+						if (chart.getType().equals(items.getType())) {
 							// scans all datasets items
 							for (DatasetItem item : items.getDatasets()) {
 								// if the chart is line
@@ -154,7 +159,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 									itemsCount++;
 								}
 								// if the chart is line
-								// and X coordinate is less the width of canvas 
+								// and X coordinate is less the width of canvas
 								// and the width of bar is less of width of canvas (item is inside of canvas)
 								if (chart.getType().equals(ChartType.bar) && (item.getView().getX() <= limitRight || (item.getView().getX() + item.getView().getWidth()) <= limitRight)) {
 									itemsCount++;
@@ -166,7 +171,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 					}
 				}
 				// checks if chart is changed
-				if (isChartChanged(chart)) {
+				if (handler.isChartChanged()) {
 					// gets the image from canvas
 					// this is necessary to apply every time the handler
 					// will draw directly into canvas
@@ -182,82 +187,33 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.AbstractChart, com.google.gwt.core.client.JavaScriptObject)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.AbstractChart,
+	 * com.google.gwt.core.client.JavaScriptObject)
 	 */
 	@Override
 	public void onDestroy(AbstractChart<?, ?> chart) {
 		// checks if the plugin has been invoked for LINE or BAR charts
 		if (chart.getType().equals(ChartType.line) || chart.getType().equals(ChartType.bar)) {
+			// gets selection handler
+			SelectionHandler handler = HANDLERS.get(chart.getId());
 			// at chart destroy phase, all handler will be removed form canvas
 			// removes mouse handler if consistent
-			if (mouseDown != null) { 
-				mouseDown.removeHandler();
+			if (handler.getMouseDown() != null) {
+				handler.getMouseDown().removeHandler();
 			}
 			// removes mouse handler if consistent
-			if (mouseUp != null) { 
-				mouseUp.removeHandler();
+			if (handler.getMouseUp() != null) {
+				handler.getMouseUp().removeHandler();
 			}
 			// removes mouse handler if consistent
-			if (mouseMove != null) { 
-				mouseMove.removeHandler();
+			if (handler.getMouseMove() != null) {
+				handler.getMouseMove().removeHandler();
 			}
+			HANDLERS.remove(chart.getId());
 		}
-	}
-	
-	/**
-	 * Checks if the chart is changed.<br>
-	 * It checks:<br>
-	 * <ul>
-	 * <li> the dimension of chart
-	 * <li> the number of datasets
-	 * <li> the data of each dataset
-	 * </ul>
-	 * 
-	 * @param chart chart instance
-	 * @return <code>true</code> if chart is changed, otherwise <code>false</code>.
-	 */
-	private boolean isChartChanged(AbstractChart<?, ?> chart) {
-		// gets the chart area in json format
-		String chartAreaAsString = chart.getNode().getChartArea().toString();
-		// gets the list of datasets data as list of JSON string
-		List<String> datasetsAsString = chart.getData().getDatasetsAsStrings();
-		// if the fields are null, this is the first call and draw of chart
-		// because chart is changed
-		if (previousDatasetsAsString == null && previousChartAreaAsString == null) {
-			// saves the current datasets and dimensions of chart
-			previousDatasetsAsString = datasetsAsString;
-			previousChartAreaAsString = chartAreaAsString;
-			return true;
-		}
-		// checks if dimension of chart is changed
-		if (!chartAreaAsString.equalsIgnoreCase(previousChartAreaAsString)) {
-			// saves the current datasets and dimensions of chart
-			previousDatasetsAsString = datasetsAsString;
-			previousChartAreaAsString = chartAreaAsString;
-			return true;
-		}
-		// checks if the amount of datasets remained the same
-		if (previousDatasetsAsString.size() != datasetsAsString.size()) {
-			// saves the current datasets and dimensions of chart
-			previousDatasetsAsString = datasetsAsString;
-			previousChartAreaAsString = chartAreaAsString;
-			return true;
-		}
-		// checks if all data of all datasets remained the same
-		for (int i=0; i<previousDatasetsAsString.size(); i++) {
-			// gets the datasets data as string
-			String datasetAsString = previousDatasetsAsString.get(i);
-			// checks if changed
-			if (!datasetAsString.equalsIgnoreCase(datasetsAsString.get(i))) {
-				// saves the current datasets and dimensions of chart
-				previousDatasetsAsString = datasetsAsString;
-				previousChartAreaAsString = chartAreaAsString;
-				return true;
-			}
-		}
-		// if here the chart is NOT changed
-		return false;
 	}
 
 	/**
@@ -266,16 +222,20 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * @author Andrea "Stock" Stocchero
 	 * @since 2.0
 	 */
-	private static class OptionsFactory implements NativeObjectContainerFactory<DatasetsItemsSelectorOptions>{
+	private static class OptionsFactory implements NativeObjectContainerFactory<DatasetsItemsSelectorOptions> {
 
-		/* (non-Javadoc)
-		 * @see org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
+		 * .commons.NativeObject)
 		 */
 		@Override
 		public DatasetsItemsSelectorOptions create(NativeObject nativeObject) {
 			return new DatasetsItemsSelectorOptions(nativeObject);
 		}
-		
+
 	}
-	
+
 }

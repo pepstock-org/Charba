@@ -30,7 +30,7 @@ public enum MeterDisplay implements Key
 	 */
 	value,
 	/**
-	 * Shows the percentage 
+	 * Shows the percentage
 	 */
 	percentage,
 	/**
