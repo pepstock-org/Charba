@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.jsinterop.items;
 
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.utils.JSON;
 
 /**
  * Object which maps the chart area item of CHART.JS chart java script object.<br>
@@ -33,6 +34,16 @@ public final class ChartAreaNode extends BaseBoxItem {
 	 */
 	public ChartAreaNode(NativeObject nativeObject) {
 		super(nativeObject);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return JSON.stringify(getNativeObject());
 	}
 
 }

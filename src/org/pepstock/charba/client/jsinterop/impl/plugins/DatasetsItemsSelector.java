@@ -172,6 +172,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	public void onAfterDraw(AbstractChart<?, ?> chart, double easing) {
 		// checks if the plugin has been invoked for LINE or BAR charts
 		if (chart.getType().equals(ChartType.line) || chart.getType().equals(ChartType.bar)) {
+			// sets cursor wait because the chart is drawing and not selectable
 			chart.getCanvas().getElement().getStyle().setCursor(Cursor.WAIT);
 			// gets selection handler
 			SelectionHandler handler = HANDLERS.get(chart.getId());
@@ -212,6 +213,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 						}
 					}
 				}
+				
 				// checks if chart is changed
 				if (handler.isChartChanged()) {
 					// gets the image from canvas
@@ -225,8 +227,9 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 				if (handler.getStatus().equals(SelectionStatus.selected) && itemsCount > 0) {
 					handler.refresh();
 				}
+				// the drawing of chart is completed and set the default cursor
+				// removing the "wait" one.
 				chart.getCanvas().getElement().getStyle().setCursor(Cursor.DEFAULT);
-
 			}
 		}
 	}

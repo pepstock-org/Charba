@@ -59,8 +59,6 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	private static final double DEFAULT_PCT_WIDTH = 90D;
 	// reference to Chart.js chart instance
 	private Chart chart = null;
-	// reference to CHART java script object wrapper to map all properties at runtime
-	private ChartNode node = null;
 
 	// chart ID using GWT unique id
 	private final String id = Document.get().createUniqueId();
@@ -197,7 +195,9 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * @return the chart node.
 	 */
 	public final ChartNode getNode() {
-		return node;
+		//return node;
+		// stores the chart to node wrapper
+		return new ChartNode(chart);
 	}
 
 	/**
@@ -589,8 +589,6 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			Charts.add(this);
 			// draws chart with configuration
 			chart = new Chart(canvas.getContext2d(), configuration);
-			// stores the chart to node wrapper
-			node = new ChartNode(chart);
 		}
 	}
 

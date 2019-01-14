@@ -56,15 +56,16 @@ public final class ChartNode {
 	 */
 	public ChartNode(Chart chart) {
 		this.chart = chart;
+		// sets if is initialized checking the CHART instance
+		initialized = chart != null;
+
 		// creates all sub elements
-		options = new OptionsNode(chart != null ? chart.getOptions() : null);
-		legend = new LegendNode(chart != null ? chart.getLegend() : null);
-		scales = new ScalesNode(chart != null ? chart.getScales() : null);
-		chartArea = new ChartAreaNode(chart != null ? chart.getChartArea() : null);
-		title = new TitleNode(chart != null ? chart.getTitleBlock() : null);
-		tooltip = new TooltipNode(chart != null ? chart.getTooltip() : null);
-		// sets if is initialized checking the CHART id
-		initialized = getId() != UndefinedValues.INTEGER;
+		options = new OptionsNode(initialized ? chart.getOptions() : null);
+		legend = new LegendNode(initialized ? chart.getLegend() : null);
+		scales = new ScalesNode(initialized ? chart.getScales() : null);
+		chartArea = new ChartAreaNode(initialized ? chart.getChartArea() : null);
+		title = new TitleNode(initialized ? chart.getTitleBlock() : null);
+		tooltip = new TooltipNode(initialized ? chart.getTooltip() : null);
 	}
 
 	/**
@@ -134,7 +135,7 @@ public final class ChartNode {
 	 * @return the CHART JS chart ID. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getId() {
-		return check(chart.getId(), UndefinedValues.INTEGER);
+		return initialized ? check(chart.getId(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
 	}
 
 	/**
@@ -143,7 +144,7 @@ public final class ChartNode {
 	 * @return the width in pixel. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getWidth() {
-		return check(chart.getWidth(), UndefinedValues.INTEGER);
+		return initialized ? check(chart.getWidth(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
 	}
 
 	/**
@@ -152,7 +153,7 @@ public final class ChartNode {
 	 * @return the height in pixel. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getHeight() {
-		return check(chart.getHeight(), UndefinedValues.INTEGER);
+		return initialized ? check(chart.getHeight(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
 	}
 
 	/**
@@ -161,7 +162,7 @@ public final class ChartNode {
 	 * @return the aspect ratio. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getAspectRatio() {
-		return check(chart.getAspectRatio(), UndefinedValues.DOUBLE);
+		return initialized ? check(chart.getAspectRatio(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
 	}
 
 	/**
@@ -171,7 +172,7 @@ public final class ChartNode {
 	 *         {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getCurrentDevicePixelRatio() {
-		return check(chart.getCurrentDevicePixelRatio(), UndefinedValues.DOUBLE);
+		return initialized ? check(chart.getCurrentDevicePixelRatio(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
 	}
 
 	/**
@@ -181,7 +182,7 @@ public final class ChartNode {
 	 *         {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isAnimating() {
-		return check(chart.isAnimating(), UndefinedValues.BOOLEAN);
+		return initialized ? check(chart.isAnimating(), UndefinedValues.BOOLEAN) : UndefinedValues.BOOLEAN;
 	}
 
 	/**
@@ -190,7 +191,7 @@ public final class ChartNode {
 	 * @return the border width value. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getBorderWidth() {
-		return check(chart.getBorderWidth(), UndefinedValues.INTEGER);
+		return initialized ? check(chart.getBorderWidth(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
 	}
 
 	/**
@@ -199,7 +200,7 @@ public final class ChartNode {
 	 * @return the outer radius value. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getOuterRadius() {
-		return check(chart.getOuterRadius(), UndefinedValues.DOUBLE);
+		return initialized ? check(chart.getOuterRadius(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
 	}
 
 	/**
@@ -208,7 +209,7 @@ public final class ChartNode {
 	 * @return the inner radius value. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getInnerRadius() {
-		return check(chart.getInnerRadius(), UndefinedValues.DOUBLE);
+		return initialized ? check(chart.getInnerRadius(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
 	}
 
 	/**
@@ -217,7 +218,7 @@ public final class ChartNode {
 	 * @return the radius length value. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getRadiusLength() {
-		return check(chart.getRadiusLength(), UndefinedValues.DOUBLE);
+		return initialized ? check(chart.getRadiusLength(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
 	}
 
 	/**
@@ -226,7 +227,7 @@ public final class ChartNode {
 	 * @return the offset X value. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getOffsetX() {
-		return check(chart.getOffsetX(), UndefinedValues.INTEGER);
+		return initialized ? check(chart.getOffsetX(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
 	}
 
 	/**
@@ -235,7 +236,7 @@ public final class ChartNode {
 	 * @return the offset Y value. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public int getOffsetY() {
-		return check(chart.getOffsetY(), UndefinedValues.INTEGER);
+		return initialized ? check(chart.getOffsetY(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
 	}
 
 	/**
