@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.jsinterop.enums.AxisType;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 
 /**

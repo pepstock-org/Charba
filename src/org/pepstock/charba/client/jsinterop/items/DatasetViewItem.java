@@ -21,9 +21,9 @@ import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.enums.PointStyle;
+import org.pepstock.charba.client.jsinterop.enums.Position;
 import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
@@ -106,7 +106,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	/**
 	 * Returns the edge to skip drawing the border for.
 	 * 
-	 * @return the edge to skip drawing the border for. Default is {@link org.pepstock.charba.client.enums.Position#top}.
+	 * @return the edge to skip drawing the border for. Default is {@link org.pepstock.charba.client.jsinterop.enums.Position#top}.
 	 */
 	public Position getBorderSkipped() {
 		return getValue(Property.borderSkipped, Position.class, Position.top);

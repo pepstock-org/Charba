@@ -18,17 +18,17 @@ package org.pepstock.charba.client.jsinterop.impl.plugins;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.pepstock.charba.client.ChartType;
-import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
-import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.jsinterop.ChartType;
+import org.pepstock.charba.client.jsinterop.enums.Event;
 import org.pepstock.charba.client.jsinterop.items.DatasetItem;
 import org.pepstock.charba.client.jsinterop.items.DatasetMetaItem;
 import org.pepstock.charba.client.jsinterop.plugins.AbstractPlugin;
 import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
 
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ImageElement;
+import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.user.client.ui.Image;
 
 /**
@@ -47,15 +47,55 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * Plugin ID
 	 */
 	public static final String ID = "datasetsitemsselector";
-	// FIXME global(multicharts) is missing
+	// maps to maintain the selectors handler for every chart 
 	private static final Map<String, SelectionHandler> HANDLERS = new HashMap<>();
 	// factory to read options
-	private final OptionsFactory factory = new OptionsFactory();
+	private final DatasetsItemsSelectorOptionsFactory factory = new DatasetsItemsSelectorOptionsFactory();
+
+	/**
+	 * Reset the selection on the chart. With this method, it don't fire any reset event.
+	 * 
+	 * @param chart chart instance to reset the selection
+	 */
+	public void reset(AbstractChart<?, ?> chart) {
+		reset(chart, false);
+	}
+	/**
+	 * Reset the selection on the chart and set if an event should fire on reset action.
+	 * 
+	 * @param chart chart instance to reset the selection
+	 * @param fireEvent if <code>true</code> an event is fired otherwise not.
+	 */
+	public void reset(AbstractChart<?, ?> chart, boolean fireEvent) {
+		// flag to know if the chart must eb updated
+		boolean mustBeUpodated = false;
+		// checks if we have already an handler
+		if (HANDLERS.containsKey(chart.getId())) {
+			// gets selection handler
+			SelectionHandler handler = HANDLERS.get(chart.getId());
+			// checks if the selection was done
+			mustBeUpodated = !SelectionStatus.ready.equals(handler.getStatus());
+		}
+		// destroy the current configuration
+		onDestroy(chart);
+		// recreates the selections handler
+		onAfterInit(chart);
+		// checks if it must foire the event
+		if (fireEvent) {
+			// fires the reset event
+			chart.fireEvent(new DatasetRangeSelectionEvent(Document.get().createChangeEvent()));
+		}
+		// updates the chart only if the selection was done
+		if (mustBeUpodated) {
+			// refresh the chart
+			chart.update();
+		}
+	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#getId()
+	 * @see org.pepstock.charba.client.jsinterop.Plugin#getId()
 	 */
 	@Override
 	public String getId() {
@@ -65,7 +105,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onConfigure(org.pepstock.charba.client.AbstractChart)
+	 * @see org.pepstock.charba.client.jsinterop.plugins.AbstractPlugin#onConfigure(org.pepstock.charba.client.jsinterop.
+	 * AbstractChart)
 	 */
 	@Override
 	public void onConfigure(AbstractChart<?, ?> chart) {
@@ -81,8 +122,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client.AbstractChart,
-	 * com.google.gwt.core.client.JavaScriptObject)
+	 * @see org.pepstock.charba.client.jsinterop.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client.jsinterop.
+	 * AbstractChart)
 	 */
 	@Override
 	public void onAfterInit(AbstractChart<?, ?> chart) {
@@ -124,13 +165,14 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterDraw(org.pepstock.charba.client.AbstractChart, double,
-	 * com.google.gwt.core.client.JavaScriptObject)
+	 * @see org.pepstock.charba.client.jsinterop.plugins.AbstractPlugin#onAfterDraw(org.pepstock.charba.client.jsinterop.
+	 * AbstractChart, double)
 	 */
 	@Override
 	public void onAfterDraw(AbstractChart<?, ?> chart, double easing) {
 		// checks if the plugin has been invoked for LINE or BAR charts
 		if (chart.getType().equals(ChartType.line) || chart.getType().equals(ChartType.bar)) {
+			chart.getCanvas().getElement().getStyle().setCursor(Cursor.WAIT);
 			// gets selection handler
 			SelectionHandler handler = HANDLERS.get(chart.getId());
 			// checks if the draw if at the end of animation
@@ -183,6 +225,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 				if (handler.getStatus().equals(SelectionStatus.selected) && itemsCount > 0) {
 					handler.refresh();
 				}
+				chart.getCanvas().getElement().getStyle().setCursor(Cursor.DEFAULT);
+
 			}
 		}
 	}
@@ -190,52 +234,32 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.AbstractChart,
-	 * com.google.gwt.core.client.JavaScriptObject)
+	 * @see
+	 * org.pepstock.charba.client.jsinterop.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.jsinterop.AbstractChart)
 	 */
 	@Override
 	public void onDestroy(AbstractChart<?, ?> chart) {
 		// checks if the plugin has been invoked for LINE or BAR charts
 		if (chart.getType().equals(ChartType.line) || chart.getType().equals(ChartType.bar)) {
-			// gets selection handler
-			SelectionHandler handler = HANDLERS.get(chart.getId());
-			// at chart destroy phase, all handler will be removed form canvas
-			// removes mouse handler if consistent
-			if (handler.getMouseDown() != null) {
-				handler.getMouseDown().removeHandler();
+			// checks if we have already an handler
+			if (HANDLERS.containsKey(chart.getId())) {
+				// gets selection handler
+				SelectionHandler handler = HANDLERS.get(chart.getId());
+				// at chart destroy phase, all handler will be removed form canvas
+				// removes mouse handler if consistent
+				if (handler.getMouseDown() != null) {
+					handler.getMouseDown().removeHandler();
+				}
+				// removes mouse handler if consistent
+				if (handler.getMouseUp() != null) {
+					handler.getMouseUp().removeHandler();
+				}
+				// removes mouse handler if consistent
+				if (handler.getMouseMove() != null) {
+					handler.getMouseMove().removeHandler();
+				}
+				HANDLERS.remove(chart.getId());
 			}
-			// removes mouse handler if consistent
-			if (handler.getMouseUp() != null) {
-				handler.getMouseUp().removeHandler();
-			}
-			// removes mouse handler if consistent
-			if (handler.getMouseMove() != null) {
-				handler.getMouseMove().removeHandler();
-			}
-			HANDLERS.remove(chart.getId());
 		}
 	}
-
-	/**
-	 * Factory to get the options from chart ones.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
-	private static class OptionsFactory implements NativeObjectContainerFactory<DatasetsItemsSelectorOptions> {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
-		 * .commons.NativeObject)
-		 */
-		@Override
-		public DatasetsItemsSelectorOptions create(NativeObject nativeObject) {
-			return new DatasetsItemsSelectorOptions(nativeObject);
-		}
-
-	}
-
 }

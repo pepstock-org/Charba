@@ -15,10 +15,10 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.enums.AxisType;
-import org.pepstock.charba.client.enums.CartesianAxisType;
-import org.pepstock.charba.client.enums.ScaleBounds;
-import org.pepstock.charba.client.enums.ScaleDistribution;
+import org.pepstock.charba.client.jsinterop.enums.AxisType;
+import org.pepstock.charba.client.jsinterop.enums.CartesianAxisType;
+import org.pepstock.charba.client.jsinterop.enums.ScaleBounds;
+import org.pepstock.charba.client.jsinterop.enums.ScaleDistribution;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 
 /**

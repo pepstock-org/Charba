@@ -121,10 +121,8 @@ public class BarCategoryAxis extends CartesianCategoryAxis {
 		return getScale().getMaxBarThickness();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.scales.CartesianAxis#getGrideLines()
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.configuration.CartesianAxis#getGrideLines()
 	 */
 	@Override
 	public GridLines getGrideLines() {
@@ -153,14 +151,12 @@ public class BarCategoryAxis extends CartesianCategoryAxis {
 			super(axis);
 		}
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.options.scales.GridLines# setOffsetGridLines(boolean)
+		/* (non-Javadoc)
+		 * @see org.pepstock.charba.client.jsinterop.configuration.GridLines#setOffsetGridLines(boolean)
 		 */
 		@Override
 		public void setOffsetGridLines(boolean offsetGridLines) {
-			// sets always true
+				// sets always true
 			super.setOffsetGridLines(true);
 		}
 	}

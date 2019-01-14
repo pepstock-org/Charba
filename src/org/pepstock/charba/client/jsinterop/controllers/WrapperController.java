@@ -15,12 +15,12 @@
 */
 package org.pepstock.charba.client.jsinterop.controllers;
 
-import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.Charts;
 import org.pepstock.charba.client.jsinterop.Controller;
+import org.pepstock.charba.client.jsinterop.Type;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;

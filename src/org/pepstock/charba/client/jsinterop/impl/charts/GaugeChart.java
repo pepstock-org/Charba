@@ -15,8 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.impl.charts;
 
-import org.pepstock.charba.client.ChartType;
-import org.pepstock.charba.client.Type;
+
+import org.pepstock.charba.client.jsinterop.ChartType;
+import org.pepstock.charba.client.jsinterop.Type;
 import org.pepstock.charba.client.jsinterop.controllers.ControllerType;
 
 /**
@@ -48,7 +49,7 @@ public final class GaugeChart extends BaseMeterChart<GaugeOptions, GaugeDataset>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getType()
+	 * @see org.pepstock.charba.client.jsinterop.Chart#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -58,7 +59,7 @@ public final class GaugeChart extends BaseMeterChart<GaugeOptions, GaugeDataset>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 * @see org.pepstock.charba.client.jsinterop.Chart#getOptions()
 	 */
 	@Override
 	public GaugeOptions getOptions() {
@@ -68,17 +69,15 @@ public final class GaugeChart extends BaseMeterChart<GaugeOptions, GaugeDataset>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 * @see org.pepstock.charba.client.jsinterop.Chart#newDataset()
 	 */
 	@Override
 	public GaugeDataset newDataset() {
 		return newDataset(MeterDataset.DEFAULT_MAXIMUM_VALUE);
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.BaseMeterChart#newDataset(double)
+	
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.impl.charts.BaseMeterChart#newDataset(double)
 	 */
 	@Override
 	public GaugeDataset newDataset(double max) {

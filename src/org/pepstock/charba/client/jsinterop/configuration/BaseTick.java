@@ -16,8 +16,8 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.callbacks.TickCallback;
 import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;

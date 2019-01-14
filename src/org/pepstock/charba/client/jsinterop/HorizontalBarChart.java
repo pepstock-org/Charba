@@ -15,9 +15,6 @@
 */
 package org.pepstock.charba.client.jsinterop;
 
-import org.pepstock.charba.client.ChartType;
-import org.pepstock.charba.client.Type;
-
 /**
  * HORIZONTAL BAR chart implementation.<br>
  * A horizontal bar chart is a variation on a bar chart.<br>

@@ -19,9 +19,9 @@ import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.Event;
-import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.enums.Event;
+import org.pepstock.charba.client.jsinterop.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.Id;

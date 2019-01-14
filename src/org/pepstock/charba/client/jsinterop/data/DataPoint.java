@@ -17,10 +17,10 @@ package org.pepstock.charba.client.jsinterop.data;
 
 import java.util.Date;
 
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.StandardKey;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
+import org.pepstock.charba.client.jsinterop.commons.StandardKey;
 
 /**
  * Used for sparse datasets, such as those in scatter charts. Each data point is specified using an object containing x and y

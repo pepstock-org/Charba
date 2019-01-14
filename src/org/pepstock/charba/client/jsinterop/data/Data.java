@@ -18,7 +18,7 @@ package org.pepstock.charba.client.jsinterop.data;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.Configuration;
 import org.pepstock.charba.client.jsinterop.ConfigurationElement;
 import org.pepstock.charba.client.jsinterop.commons.ArrayMixedObject;

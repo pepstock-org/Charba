@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.jsinterop;
 
-import org.pepstock.charba.client.ChartType;
-import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.jsinterop.configuration.DoughnutOptions;
 import org.pepstock.charba.client.jsinterop.data.DoughnutDataset;
 

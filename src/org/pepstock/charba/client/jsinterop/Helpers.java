@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.jsinterop;
 
-import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**

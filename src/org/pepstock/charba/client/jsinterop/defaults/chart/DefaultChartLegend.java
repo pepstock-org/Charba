@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
-import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.jsinterop.enums.Position;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels;
 import org.pepstock.charba.client.jsinterop.options.Legend;

@@ -17,8 +17,8 @@ package org.pepstock.charba.client.jsinterop.data;
 
 import java.util.List;
 
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.enums.Position;
 import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;

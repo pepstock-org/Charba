@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 

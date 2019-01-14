@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.impl.charts;
 
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 
 /**
  * Determines which information must be displayed into meter or gauge chart.

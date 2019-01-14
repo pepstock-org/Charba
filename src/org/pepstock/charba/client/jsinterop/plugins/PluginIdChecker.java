@@ -17,8 +17,8 @@ package org.pepstock.charba.client.jsinterop.plugins;
 
 import java.util.Locale;
 
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.StandardKey;
+import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.StandardKey;
 
 import com.google.gwt.safehtml.shared.UriUtils;
 

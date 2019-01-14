@@ -17,9 +17,9 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import java.util.List;
 
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
@@ -168,18 +168,19 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	}
 
 	/**
-	 * Inner class to create scale item by a native object to use in {@link org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList}.
+	 * Inner class to create scale item by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 * @since 2.0
 	 *
 	 */
-	private class ScaleListFactory implements NativeObjectContainerFactory<Scale> {
+	private final class ScaleListFactory implements NativeObjectContainerFactory<Scale> {
 
 		private final Key property;
 
 		/**
-		 * Creates the factory with the key to use 
+		 * Creates the factory with the key to use
+		 * 
 		 * @param property property of native object.
 		 */
 		public ScaleListFactory(Key property) {
@@ -189,14 +190,15 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.
-		 * jsinterop.commons.NativeObject)
+		 * @see
+		 * org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
+		 * .commons.NativeObject)
 		 */
 		@Override
 		public Scale create(NativeObject nativeObject) {
 			// gets default value based on key of the object
 			IsDefaultScale defaultValue = Property.xAxes.equals(property) ? getXAxis() : getYAxis();
-			// creates the scale 
+			// creates the scale
 			return new Scale(defaultValue, nativeObject);
 		}
 

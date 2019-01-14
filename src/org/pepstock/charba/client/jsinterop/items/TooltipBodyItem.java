@@ -17,9 +17,9 @@ package org.pepstock.charba.client.jsinterop.items;
 
 import java.util.List;
 
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
@@ -30,7 +30,7 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory
  * @author Andrea "Stock" Stocchero
  */
 public final class TooltipBodyItem extends NativeObjectContainer {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -85,16 +85,21 @@ public final class TooltipBodyItem extends NativeObjectContainer {
 		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}
-	
+
 	/**
-	 * Inner class to create tooltip body item by a native object to use in {@link org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList}.
+	 * Inner class to create tooltip body item by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 * @since 2.0
 	 */
-	static class TooltipBodyItemFactory implements NativeObjectContainerFactory<TooltipBodyItem>{
-		/* (non-Javadoc)
-		 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)
+	static final class TooltipBodyItemFactory implements NativeObjectContainerFactory<TooltipBodyItem> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
+		 * .commons.NativeObject)
 		 */
 		@Override
 		public TooltipBodyItem create(NativeObject nativeObject) {

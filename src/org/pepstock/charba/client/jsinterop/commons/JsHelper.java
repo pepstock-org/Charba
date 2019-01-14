@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.commons;
 
-import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.jsinterop.Injector;
 
 import com.google.gwt.canvas.dom.client.Context2d;
 

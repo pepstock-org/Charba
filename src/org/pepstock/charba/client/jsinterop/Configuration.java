@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.jsinterop;
 
-import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.jsinterop.commons.NativeName;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions;

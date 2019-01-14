@@ -17,8 +17,8 @@ package org.pepstock.charba.client.jsinterop.configuration;
 
 import java.util.List;
 
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.enums.Event;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.ChartOptions;

@@ -88,7 +88,7 @@ public final class Threshold implements IsThreshold {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.enums.IsThreshold#getName()
+	 * @see org.pepstock.charba.client.jsinterop.enums.IsThreshold#getName()
 	 */
 	@Override
 	public String getName() {
@@ -98,7 +98,7 @@ public final class Threshold implements IsThreshold {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.enums.IsThreshold#getValue()
+	 * @see org.pepstock.charba.client.jsinterop.enums.IsThreshold#getValue()
 	 */
 	@Override
 	public double getValue() {
@@ -108,7 +108,7 @@ public final class Threshold implements IsThreshold {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.enums.IsThreshold#getColor()
+	 * @see org.pepstock.charba.client.jsinterop.enums.IsThreshold#getColor()
 	 */
 	@Override
 	public IsColor getColor() {

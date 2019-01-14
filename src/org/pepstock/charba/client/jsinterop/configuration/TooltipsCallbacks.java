@@ -15,10 +15,10 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.callbacks.TooltipBodyCallback;
 import org.pepstock.charba.client.jsinterop.callbacks.TooltipFooterCallback;
 import org.pepstock.charba.client.jsinterop.callbacks.TooltipLabelCallback;
@@ -593,10 +593,10 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 					// invokes callback
 					IsColor result = labelCallback.onLabelTextColor(getChart(), new TooltipItem(item));
 					// checks if result is consistent
-					return result != null ? result.toRGBA() : Defaults.getGlobal().getTooltips().getBodyFontColor().toRGBA();
+					return result != null ? result.toRGBA() : Defaults.get().getGlobal().getTooltips().getBodyFontColor().toRGBA();
 				}
 				// default result
-				return Defaults.getGlobal().getTooltips().getBodyFontColor().toRGBA();
+				return Defaults.get().getGlobal().getTooltips().getBodyFontColor().toRGBA();
 			}
 		});
 		afterLabelCallbackProxy.setCallback(new ProxyAfterLabelCallback() {

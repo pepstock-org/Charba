@@ -17,14 +17,17 @@ package org.pepstock.charba.client.jsinterop.data;
 
 import java.util.List;
 
-import org.pepstock.charba.client.ChartType;
-import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.ChartType;
 import org.pepstock.charba.client.jsinterop.Defaults;
+import org.pepstock.charba.client.jsinterop.Type;
 import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
+import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
+import org.pepstock.charba.client.jsinterop.plugins.PluginIdChecker;
 import org.pepstock.charba.client.jsinterop.utils.JSON;
 
 /**
@@ -130,7 +133,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * 
 	 * @param type type of dataset.
 	 */
-	public void setType(Type type) {
+	public final void setType(Type type) {
 		setValue(Property.type, type);
 	}
 
@@ -138,9 +141,9 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * Returns the type of dataset, based on type of chart.
 	 * 
 	 * @return type of dataset or null if not set. If not set or invalid, the default is
-	 *         {@link org.pepstock.charba.client.ChartType#bar}.
+	 *         {@link org.pepstock.charba.client.jsinterop.ChartType#bar}.
 	 */
-	public Type getType() {
+	public final Type getType() {
 		// gets string value from java script object
 		String value = getValue(Property.type, ChartType.bar.name());
 		// checks if consistent with out of the box chart types
@@ -151,6 +154,50 @@ public abstract class Dataset extends NativeObjectContainer {
 			type = Defaults.get().getControllers().getTypeByString(value);
 		}
 		return type == null ? ChartType.bar : type;
+	}
+
+	/**
+	 * Sets the plugin dataset configuration. If dataset configuration options is null, the configuration of plugin will be removed.
+	 * 
+	 * @param pluginId plugin id.
+	 * @param options java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if
+	 *            exist.
+	 * @param <T> type of native object container to store
+	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
+	 */
+	public final <T extends NativeObjectContainer> void setPluginConfiguration(String pluginId, T options) throws InvalidPluginIdException {
+		// if null, removes the configuration
+		if (options == null) {
+			// removes configuration if exists
+			remove(PluginIdChecker.key(pluginId));
+		} else {
+			// stores configuration
+			setValue(PluginIdChecker.key(pluginId), options);
+		}
+	}
+
+	/**
+	 * Checks if there is any dataset configuration for a specific plugin, by its id.
+	 * 
+	 * @param pluginId plugin id.
+	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
+	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
+	 */
+	public final boolean hasPluginConfiguration(String pluginId) throws InvalidPluginIdException {
+		return has(PluginIdChecker.key(pluginId));
+	}
+
+	/**
+	 * Returns the plugin dataset configuration, if exist. It uses a factory instance to create a native object container.
+	 * 
+	 * @param pluginId plugin id.
+	 * @param factory factory instance to create a native object container.
+	 * @param <T> type of native object container to return
+	 * @return java script object used to configure the plugin or <code>null</code> if not exist.
+	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
+	 */
+	public final <T extends NativeObjectContainer> T getPluginConfiguration(String pluginId, NativeObjectContainerFactory<T> factory) throws InvalidPluginIdException {
+		return factory.create(getValue(PluginIdChecker.key(pluginId)));
 	}
 
 	/**

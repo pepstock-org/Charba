@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults;
 
-import org.pepstock.charba.client.enums.InteractionAxis;
-import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.jsinterop.enums.InteractionAxis;
+import org.pepstock.charba.client.jsinterop.enums.InteractionMode;
 
 /**
  * Interface to define hover object defaults.

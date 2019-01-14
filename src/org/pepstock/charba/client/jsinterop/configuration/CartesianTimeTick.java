@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.enums.TickSource;
+import org.pepstock.charba.client.jsinterop.enums.TickSource;
 
 /**
  * The time scale is use to chart time data.<br>

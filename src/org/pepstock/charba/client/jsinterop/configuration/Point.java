@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.jsinterop.enums.PointStyle;
 import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 
 /**
@@ -57,7 +57,7 @@ public class Point extends AbstractConfigurationElement {
 	 * Sets the style of the point.
 	 * 
 	 * @param pointStyle array of the style of the point.
-	 * @see org.pepstock.charba.client.enums.PointStyle
+	 * @see org.pepstock.charba.client.jsinterop.enums.PointStyle
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
 		getOptions().getElements().getPoint().setPointStyle(pointStyle);
@@ -67,7 +67,7 @@ public class Point extends AbstractConfigurationElement {
 	 * Returns the style of the point.
 	 * 
 	 * @return the style of the point.
-	 * @see org.pepstock.charba.client.enums.PointStyle
+	 * @see org.pepstock.charba.client.jsinterop.enums.PointStyle
 	 */
 	public PointStyle getPointStyle() {
 		return getOptions().getElements().getPoint().getPointStyle();

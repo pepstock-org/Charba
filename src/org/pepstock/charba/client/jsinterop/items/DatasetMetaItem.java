@@ -17,10 +17,10 @@ package org.pepstock.charba.client.jsinterop.items;
 
 import java.util.List;
 
-import org.pepstock.charba.client.ChartType;
-import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.ChartType;
 import org.pepstock.charba.client.jsinterop.Defaults;
+import org.pepstock.charba.client.jsinterop.Type;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
@@ -72,7 +72,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	/**
 	 * Returns the type of dataset. 
 	 * 
-	 * @return the type of dataset. If not set or invalid, the default is {@link org.pepstock.charba.client.ChartType#bar}.
+	 * @return the type of dataset. If not set or invalid, the default is {@link org.pepstock.charba.client.jsinterop.ChartType#bar}.
 	 */
 	public Type getType() {
 		// gets string value from java script object

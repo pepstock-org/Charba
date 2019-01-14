@@ -17,7 +17,7 @@ package org.pepstock.charba.client.jsinterop.configuration;
 
 import java.util.Date;
 
-import org.pepstock.charba.client.enums.TimeUnit;
+import org.pepstock.charba.client.jsinterop.enums.TimeUnit;
 
 /**
  * The following display formats are used to configure how different time units are formed into strings for the axis tick marks.

@@ -13,21 +13,30 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.jsinterop.events;
+package org.pepstock.charba.client.jsinterop.enums;
+
+import org.pepstock.charba.client.jsinterop.commons.Key;
 
 /**
- * Event handler for chart area selecting.
+ * Property to set if the line is shown as a stepped line.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
+ *
  */
-public interface DatasetRangeSelectionEventHandler extends ChartEventHandler {
+public enum SteppedLine implements Key
+{
 
 	/**
-	 * Invoked when the user selects an area on the chart.
-	 * 
-	 * @param event chart dataset selection event
+	 * Step-before Interpolation
 	 */
-	void onSelect(DatasetRangeSelectionEvent event);
+	before,
+	/**
+	 * Step-after Interpolation
+	 */
+	after,
+	/**
+	 * No Step Interpolation (default)
+	 */
+	nosteppedline;
 
 }

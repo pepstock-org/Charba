@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.impl.charts;
 
-import org.pepstock.charba.client.ChartType;
-import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.jsinterop.ChartType;
+import org.pepstock.charba.client.jsinterop.Type;
 import org.pepstock.charba.client.jsinterop.controllers.ControllerType;
 
 /**
@@ -48,7 +48,7 @@ public final class MeterChart extends BaseMeterChart<MeterOptions, MeterDataset>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getType()
+	 * @see org.pepstock.charba.client.jsinterop.Chart#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -58,7 +58,7 @@ public final class MeterChart extends BaseMeterChart<MeterOptions, MeterDataset>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 * @see org.pepstock.charba.client.jsinterop.Chart#getOptions()
 	 */
 	@Override
 	public MeterOptions getOptions() {
@@ -68,17 +68,15 @@ public final class MeterChart extends BaseMeterChart<MeterOptions, MeterDataset>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 * @see org.pepstock.charba.client.jsinterop.Chart#newDataset()
 	 */
 	@Override
 	public MeterDataset newDataset() {
 		return newDataset(DEFAULT_MAX);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.BaseMeterChart#newDataset(double)
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.impl.charts.BaseMeterChart#newDataset(double)
 	 */
 	@Override
 	public MeterDataset newDataset(double max) {

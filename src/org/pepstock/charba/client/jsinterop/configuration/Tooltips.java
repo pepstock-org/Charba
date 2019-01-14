@@ -16,11 +16,11 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.FontStyle;
-import org.pepstock.charba.client.enums.InteractionMode;
-import org.pepstock.charba.client.enums.TextAlign;
-import org.pepstock.charba.client.enums.TooltipPosition;
+import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.enums.FontStyle;
+import org.pepstock.charba.client.jsinterop.enums.InteractionMode;
+import org.pepstock.charba.client.jsinterop.enums.TextAlign;
+import org.pepstock.charba.client.jsinterop.enums.TooltipPosition;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.callbacks.TooltipCustomCallback;
 import org.pepstock.charba.client.jsinterop.callbacks.TooltipFilterCallback;

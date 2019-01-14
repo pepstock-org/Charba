@@ -17,7 +17,7 @@ package org.pepstock.charba.client.jsinterop.defaults;
 
 import java.util.Date;
 
-import org.pepstock.charba.client.enums.TimeUnit;
+import org.pepstock.charba.client.jsinterop.enums.TimeUnit;
 
 /**
  * Interface to define time object defaults.

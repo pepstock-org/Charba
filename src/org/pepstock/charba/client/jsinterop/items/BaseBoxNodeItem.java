@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.enums.Position;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**
@@ -95,7 +95,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the position of node.
 	 * 
-	 * @return the position of node. Default is {@link org.pepstock.charba.client.enums.Position#top}.
+	 * @return the position of node. Default is {@link org.pepstock.charba.client.jsinterop.enums.Position#top}.
 	 */
 	public final Position getPosition() {
 		return getValue(Property.position, Position.class, Position.top);

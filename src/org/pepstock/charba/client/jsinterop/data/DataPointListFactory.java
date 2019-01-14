@@ -24,14 +24,14 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-class DataPointListFactory implements NativeObjectContainerFactory<DataPoint> {
+final class DataPointListFactory implements NativeObjectContainerFactory<DataPoint> {
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop
-	 * .commons.NativeObject)
+	 * org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop.
+	 * commons.NativeObject)
 	 */
 	@Override
 	public DataPoint create(NativeObject nativeObject) {

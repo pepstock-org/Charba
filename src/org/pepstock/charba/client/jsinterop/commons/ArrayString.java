@@ -18,7 +18,7 @@ package org.pepstock.charba.client.jsinterop.commons;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;

@@ -17,7 +17,7 @@ package org.pepstock.charba.client.jsinterop.items;
 
 import java.util.List;
 
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
@@ -63,7 +63,7 @@ public final class LegendNode extends BaseBoxNodeItem {
 	/**
 	 * Returns if it is in doughnut mode.
 	 * 
-	 * @return <code>true</code> it is in doughnut mode. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 * @return <code>true</code> it is in doughnut mode. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isDoughnutMode() {
 		return getValue(Property.doughnutMode, UndefinedValues.BOOLEAN);

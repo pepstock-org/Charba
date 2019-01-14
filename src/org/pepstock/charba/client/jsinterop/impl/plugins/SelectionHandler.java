@@ -17,12 +17,11 @@ package org.pepstock.charba.client.jsinterop.impl.plugins;
 
 import java.util.List;
 
-import org.pepstock.charba.client.ChartType;
-import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.jsinterop.enums.AxisType;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.ChartNode;
+import org.pepstock.charba.client.jsinterop.ChartType;
 import org.pepstock.charba.client.jsinterop.commons.JsHelper;
-import org.pepstock.charba.client.jsinterop.events.DatasetRangeSelectionEvent;
 import org.pepstock.charba.client.jsinterop.items.ChartAreaNode;
 import org.pepstock.charba.client.jsinterop.items.ScaleItem;
 

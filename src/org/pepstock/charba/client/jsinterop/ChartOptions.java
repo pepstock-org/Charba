@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.jsinterop;
 
-import org.pepstock.charba.client.ScaleType;
-import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.jsinterop.options.Scale;

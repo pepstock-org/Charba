@@ -18,9 +18,9 @@ package org.pepstock.charba.client.jsinterop.items;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.enums.CapStyle;
-import org.pepstock.charba.client.enums.JoinStyle;
-import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.jsinterop.enums.CapStyle;
+import org.pepstock.charba.client.jsinterop.enums.JoinStyle;
+import org.pepstock.charba.client.jsinterop.enums.PointStyle;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 
 /**

@@ -18,9 +18,7 @@ package org.pepstock.charba.client.jsinterop;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.pepstock.charba.client.Injector;
-import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.Merger;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;

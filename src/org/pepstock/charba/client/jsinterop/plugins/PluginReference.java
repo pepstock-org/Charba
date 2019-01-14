@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.plugins;
 
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 import org.pepstock.charba.client.jsinterop.items.UndefinedValues;

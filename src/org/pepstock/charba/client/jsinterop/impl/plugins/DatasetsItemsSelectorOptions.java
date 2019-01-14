@@ -20,19 +20,24 @@ import java.util.List;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.GwtMaterialColor;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 import org.pepstock.charba.client.jsinterop.options.Scales;
+import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
 
 /**
  * Configuration options of selection plugin.<br>
  * It is managing:<br>
  * <ul>
- * <li>the selection color
  * <li>the X axis ID
+ * <li>the selection color
+ * <li>the border color
+ * <li>the border width
+ * <li>the border dash
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
@@ -79,7 +84,7 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	 * Builds the object with a new java script object setting the default value of plugin.
 	 */
 	public DatasetsItemsSelectorOptions() {
-		super();
+		this(null);
 	}
 
 	/**
@@ -90,6 +95,13 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	 */
 	DatasetsItemsSelectorOptions(NativeObject nativeObject) {
 		super(nativeObject);
+		try {
+			if (Defaults.get().getGlobal().getPlugins().hasOptions(DatasetsItemsSelector.ID)) {
+				// FIXME
+			}
+		} catch (InvalidPluginIdException e) {
+			// do nothing
+		}
 	}
 
 	/**

@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults;
 
-import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.jsinterop.enums.Position;
 
 /**
  * Interface to define title object defaults.

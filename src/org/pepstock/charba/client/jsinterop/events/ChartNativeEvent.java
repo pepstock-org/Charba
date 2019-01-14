@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.events;
 
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.JsHelper;
 
 import com.google.gwt.dom.client.NativeEvent;

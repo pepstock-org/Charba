@@ -17,7 +17,7 @@ package org.pepstock.charba.client.jsinterop.impl.charts;
 
 import java.util.List;
 
-import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.jsinterop.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.ChartNode;
 import org.pepstock.charba.client.jsinterop.Defaults;

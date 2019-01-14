@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.jsinterop.enums.FontStyle;
 
 /**
  * When creating a chart, you want to tell the viewer what data they are viewing. To do this, you need to label the

@@ -15,10 +15,10 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
-import org.pepstock.charba.client.enums.FontStyle;
-import org.pepstock.charba.client.enums.InteractionMode;
-import org.pepstock.charba.client.enums.TextAlign;
-import org.pepstock.charba.client.enums.TooltipPosition;
+import org.pepstock.charba.client.jsinterop.enums.FontStyle;
+import org.pepstock.charba.client.jsinterop.enums.InteractionMode;
+import org.pepstock.charba.client.jsinterop.enums.TextAlign;
+import org.pepstock.charba.client.jsinterop.enums.TooltipPosition;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.jsinterop.options.Tooltips;
 

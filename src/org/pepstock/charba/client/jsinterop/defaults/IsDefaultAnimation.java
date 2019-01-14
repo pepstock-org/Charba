@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults;
 
-import org.pepstock.charba.client.enums.Easing;
+import org.pepstock.charba.client.jsinterop.enums.Easing;
 
 /**
  * Interface to define animation object defaults.

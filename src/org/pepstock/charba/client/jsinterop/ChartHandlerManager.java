@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop;
 
-import org.pepstock.charba.client.events.AddHandlerEvent;
-import org.pepstock.charba.client.events.RemoveHandlerEvent;
+import org.pepstock.charba.client.jsinterop.events.AddHandlerEvent;
+import org.pepstock.charba.client.jsinterop.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.jsinterop.events.ChartEventHandler;
 
 import com.google.gwt.event.shared.EventHandler;

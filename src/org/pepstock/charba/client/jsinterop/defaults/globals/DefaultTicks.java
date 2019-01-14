@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults.globals;
 
-import org.pepstock.charba.client.enums.TickSource;
+import org.pepstock.charba.client.jsinterop.enums.TickSource;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks;
 

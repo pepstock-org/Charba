@@ -15,10 +15,10 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.events.AddHandlerEvent;
-import org.pepstock.charba.client.events.AddHandlerEventHandler;
-import org.pepstock.charba.client.events.RemoveHandlerEvent;
-import org.pepstock.charba.client.events.RemoveHandlerEventHandler;
+import org.pepstock.charba.client.jsinterop.events.AddHandlerEvent;
+import org.pepstock.charba.client.jsinterop.events.AddHandlerEventHandler;
+import org.pepstock.charba.client.jsinterop.events.RemoveHandlerEvent;
+import org.pepstock.charba.client.jsinterop.events.RemoveHandlerEventHandler;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
@@ -51,7 +51,7 @@ public abstract class EventProvider<T extends NativeObjectContainer> extends Con
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.charba.client.events.
+	 * @see org.pepstock.charba.client.jsinterop.events.RemoveHandlerEventHandler#onRemove(org.pepstock.charba.client.events.
 	 * RemoveHandlerEvent)
 	 */
 	@Override
@@ -62,7 +62,7 @@ public abstract class EventProvider<T extends NativeObjectContainer> extends Con
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.events.AddHandlerEventHandler#onAdd(org.pepstock.charba.client.events.AddHandlerEvent)
+	 * @see org.pepstock.charba.client.jsinterop.events.AddHandlerEventHandler#onAdd(org.pepstock.charba.client.jsinterop.events.AddHandlerEvent)
 	 */
 	@Override
 	public final void onAdd(AddHandlerEvent event) {

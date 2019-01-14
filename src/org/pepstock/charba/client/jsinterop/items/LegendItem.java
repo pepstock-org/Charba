@@ -21,18 +21,18 @@ import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.CapStyle;
-import org.pepstock.charba.client.enums.JoinStyle;
-import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.jsinterop.commons.ObjectType;
+import org.pepstock.charba.client.jsinterop.enums.CapStyle;
+import org.pepstock.charba.client.jsinterop.enums.JoinStyle;
+import org.pepstock.charba.client.jsinterop.enums.PointStyle;
 
 /**
  * This is a wrapper of the CHART.JS item which contains the legend item.
@@ -47,7 +47,7 @@ public class LegendItem extends NativeObjectContainer {
 	 */
 	enum Property implements Key
 	{
-		datasetIndex, 
+		datasetIndex,
 		index,
 		text,
 		fillStyle,
@@ -60,7 +60,7 @@ public class LegendItem extends NativeObjectContainer {
 		strokeStyle,
 		pointStyle
 	}
-	
+
 	/**
 	 * To avoid any user creation but provides an empty object
 	 */
@@ -80,7 +80,8 @@ public class LegendItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset index of the chart
 	 * 
-	 * @return the dataset index of the chart. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
+	 * @return the dataset index of the chart. Default is
+	 *         {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getDatasetIndex() {
 		return getValue(Property.datasetIndex, UndefinedValues.INTEGER);
@@ -89,17 +90,18 @@ public class LegendItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset index of the chart (for POLAR and PIE charts)
 	 * 
-	 * @return the dataset index of the chart (for POLAR and PIE charts). Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
-	 * @see org.pepstock.charba.client.data.Data#getDatasets()
+	 * @return the dataset index of the chart (for POLAR and PIE charts). Default is
+	 *         {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getIndex() {
 		return getValue(Property.index, UndefinedValues.INTEGER);
 	}
-	
+
 	/**
 	 * Returns the label that will be displayed
 	 * 
-	 * @return the label that will be displayed. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#STRING}.
+	 * @return the label that will be displayed. Default is
+	 *         {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#STRING}.
 	 */
 	public final String getText() {
 		return getValue(Property.text, UndefinedValues.STRING);
@@ -117,8 +119,9 @@ public class LegendItem extends NativeObjectContainer {
 	/**
 	 * Returns true if this item represents a hidden dataset. Label will be rendered with a strike-through effect
 	 * 
-	 * @return <code>true</code> if this item represents a hidden dataset. Label will be rendered with a strike-through effect.<br>
-	 * Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#BOOLEAN}.
+	 * @return <code>true</code> if this item represents a hidden dataset. Label will be rendered with a strike-through
+	 *         effect.<br>
+	 *         Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#BOOLEAN}.
 	 */
 	public final boolean isHidden() {
 		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
@@ -128,10 +131,10 @@ public class LegendItem extends NativeObjectContainer {
 	 * Returns how the end points of every box border are drawn. There are three possible values for this property and those
 	 * are: butt, round and square.
 	 * 
-	 * @return how the end points of every box border are drawn. 
+	 * @return how the end points of every box border are drawn.
 	 */
 	public final CapStyle getLineCap() {
-		return getValue(Property.lineCap, CapStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderCapStyle()); 
+		return getValue(Property.lineCap, CapStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderCapStyle());
 	}
 
 	/**
@@ -193,7 +196,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return the stroke style of the legend box
 	 */
 	public final List<IsColor> getStrokeStyle() {
-		// checks if is an array 
+		// checks if is an array
 		if (ObjectType.Array.equals(type(Property.strokeStyle))) {
 			// gets the array from native object
 			ArrayString array = getArrayValue(Property.strokeStyle);
@@ -211,7 +214,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return the style of the legend box
 	 */
 	public final List<PointStyle> getPointStyle() {
-		// checks if is an array 
+		// checks if is an array
 		if (ObjectType.Array.equals(type(Property.pointStyle))) {
 			// gets the array from native object
 			ArrayString array = getArrayValue(Property.pointStyle);
@@ -222,16 +225,21 @@ public class LegendItem extends NativeObjectContainer {
 			return Collections.unmodifiableList(Arrays.asList(getValue(Property.pointStyle, PointStyle.class, Defaults.get().getGlobal().getElements().getPoint().getPointStyle())));
 		}
 	}
-	
+
 	/**
-	 * Inner class to create legend item by a native object to use in {@link org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList}.
+	 * Inner class to create legend item by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 * @since 2.0
 	 */
-	static class LegendItemFactory implements NativeObjectContainerFactory<LegendItem>{
-		/* (non-Javadoc)
-		 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)
+	static final class LegendItemFactory implements NativeObjectContainerFactory<LegendItem> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
+		 * .commons.NativeObject)
 		 */
 		@Override
 		public LegendItem create(NativeObject nativeObject) {

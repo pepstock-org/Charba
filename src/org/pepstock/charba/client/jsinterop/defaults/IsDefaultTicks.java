@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults;
 
-import org.pepstock.charba.client.enums.TickSource;
+import org.pepstock.charba.client.jsinterop.enums.TickSource;
 
 /**
  * Interface to define ticks object defaults.

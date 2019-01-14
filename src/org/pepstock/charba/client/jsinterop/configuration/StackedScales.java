@@ -52,15 +52,14 @@ public class StackedScales extends Scales {
 	public void setOnlyYAxis(boolean isOnlyYAxis) {
 		this.isOnlyYAxis = isOnlyYAxis;
 	}
+	
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.Scales#setXAxes(org.pepstock.charba.client.options.scales.Axis[])
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.configuration.Scales#setXAxes(org.pepstock.charba.client.jsinterop.configuration.Axis[])
 	 */
 	@Override
 	public void setXAxes(Axis... axes) {
-		// if not ONLY yaxis
+		// if not ONLY X axis
 		if (!isOnlyYAxis) {
 			// changes the stacked field
 			// for all axes
@@ -70,10 +69,8 @@ public class StackedScales extends Scales {
 		super.setXAxes(axes);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.Scales#setYAxes(org.pepstock.charba.client.options.scales.Axis[])
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.configuration.Scales#setYAxes(org.pepstock.charba.client.jsinterop.configuration.Axis[])
 	 */
 	@Override
 	public void setYAxes(Axis... axes) {

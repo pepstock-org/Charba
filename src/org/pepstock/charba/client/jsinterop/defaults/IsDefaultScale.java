@@ -15,10 +15,10 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults;
 
-import org.pepstock.charba.client.enums.AxisType;
-import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.enums.ScaleBounds;
-import org.pepstock.charba.client.enums.ScaleDistribution;
+import org.pepstock.charba.client.jsinterop.enums.AxisType;
+import org.pepstock.charba.client.jsinterop.enums.Position;
+import org.pepstock.charba.client.jsinterop.enums.ScaleBounds;
+import org.pepstock.charba.client.jsinterop.enums.ScaleDistribution;
 
 /**
  * Interface to define scale/axis object defaults.

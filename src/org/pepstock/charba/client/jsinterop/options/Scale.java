@@ -15,11 +15,11 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.AxisType;
-import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.enums.ScaleBounds;
-import org.pepstock.charba.client.enums.ScaleDistribution;
+import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.enums.AxisType;
+import org.pepstock.charba.client.jsinterop.enums.Position;
+import org.pepstock.charba.client.jsinterop.enums.ScaleBounds;
+import org.pepstock.charba.client.jsinterop.enums.ScaleDistribution;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
 import org.pepstock.charba.client.jsinterop.items.UndefinedValues;

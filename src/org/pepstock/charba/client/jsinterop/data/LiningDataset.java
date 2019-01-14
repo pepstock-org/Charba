@@ -19,11 +19,11 @@ import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.CapStyle;
-import org.pepstock.charba.client.enums.Fill;
-import org.pepstock.charba.client.enums.JoinStyle;
-import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.enums.CapStyle;
+import org.pepstock.charba.client.jsinterop.enums.Fill;
+import org.pepstock.charba.client.jsinterop.enums.JoinStyle;
+import org.pepstock.charba.client.jsinterop.enums.PointStyle;
 import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;

@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults.globals;
 
-import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.jsinterop.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultElements;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover;

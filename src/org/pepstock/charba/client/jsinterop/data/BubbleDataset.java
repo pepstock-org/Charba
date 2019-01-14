@@ -17,13 +17,13 @@ package org.pepstock.charba.client.jsinterop.data;
 
 import java.util.List;
 
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
+import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.enums.PointStyle;
 
 /**
  * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
@@ -170,7 +170,7 @@ public final class BubbleDataset extends HovingDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setData(double[])
+	 * @see org.pepstock.charba.client.jsinterop.data.Dataset#setData(double[])
 	 */
 	@Override
 	public void setData(double... values) {
@@ -180,7 +180,7 @@ public final class BubbleDataset extends HovingDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setData(java.util.List)
+	 * @see org.pepstock.charba.client.jsinterop.data.Dataset#setData(java.util.List)
 	 */
 	@Override
 	public void setData(List<Double> values) {
@@ -190,7 +190,7 @@ public final class BubbleDataset extends HovingDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#getData()
+	 * @see org.pepstock.charba.client.jsinterop.data.Dataset#getData()
 	 */
 	@Override
 	public List<Double> getData() {

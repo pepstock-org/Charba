@@ -17,13 +17,13 @@ package org.pepstock.charba.client.jsinterop.configuration;
 
 import java.util.List;
 
-import org.pepstock.charba.client.ScaleType;
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.AxisType;
-import org.pepstock.charba.client.enums.CartesianAxisType;
+import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.enums.AxisType;
+import org.pepstock.charba.client.jsinterop.enums.CartesianAxisType;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.ChartOptions;
 import org.pepstock.charba.client.jsinterop.Defaults;
+import org.pepstock.charba.client.jsinterop.ScaleType;
 import org.pepstock.charba.client.jsinterop.callbacks.AxisBuildTicksCallback;
 import org.pepstock.charba.client.jsinterop.callbacks.AxisCalculateTickRotationCallback;
 import org.pepstock.charba.client.jsinterop.callbacks.AxisDataLimitsCallback;

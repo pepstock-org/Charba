@@ -90,7 +90,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Plugin#getId()
+	 * @see org.pepstock.charba.client.jsinterop.Plugin#getId()
 	 */
 	@Override
 	public String getId() {
@@ -100,7 +100,8 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDraw(org.pepstock.charba.client.AbstractChart, double)
+	 * @see org.pepstock.charba.client.jsinterop.plugins.AbstractPlugin#onBeforeDraw(org.pepstock.charba.client.jsinterop.
+	 * AbstractChart, double)
 	 */
 	@Override
 	public boolean onBeforeDraw(AbstractChart<?, ?> chart, double easing) {
@@ -131,13 +132,12 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	}
 
 	/**
-	 * Inner class to create options by a native object to use in
-	 * {@link org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList}.
+	 * Inner class to create options by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 * @since 2.0
 	 */
-	private static class OptionsFactory implements NativeObjectContainerFactory<ChartBackgroundColorOptions> {
+	private static final class OptionsFactory implements NativeObjectContainerFactory<ChartBackgroundColorOptions> {
 
 		/*
 		 * (non-Javadoc)

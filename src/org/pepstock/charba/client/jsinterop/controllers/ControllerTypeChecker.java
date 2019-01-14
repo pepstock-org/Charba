@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.controllers;
 
-import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.jsinterop.Type;
 
 import com.google.gwt.safehtml.shared.UriUtils;
 

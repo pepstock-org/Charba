@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
-import org.pepstock.charba.client.enums.Easing;
+import org.pepstock.charba.client.jsinterop.enums.Easing;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.jsinterop.options.Animation;
 

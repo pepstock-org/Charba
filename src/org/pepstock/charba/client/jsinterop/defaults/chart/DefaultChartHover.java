@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
-import org.pepstock.charba.client.enums.InteractionAxis;
-import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.jsinterop.enums.InteractionAxis;
+import org.pepstock.charba.client.jsinterop.enums.InteractionMode;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover;
 import org.pepstock.charba.client.jsinterop.options.Hover;
 

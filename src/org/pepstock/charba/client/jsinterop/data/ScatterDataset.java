@@ -17,7 +17,7 @@ package org.pepstock.charba.client.jsinterop.data;
 
 import java.util.List;
 
-import org.pepstock.charba.client.enums.Fill;
+import org.pepstock.charba.client.jsinterop.enums.Fill;
 
 /**
  * The scatter chart allows a number of properties to be specified for each dataset. These are used to set display properties
@@ -45,7 +45,7 @@ public final class ScatterDataset extends LineDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.LineDataset#setShowLine(boolean)
+	 * @see org.pepstock.charba.client.jsinterop.data.LineDataset#setShowLine(boolean)
 	 */
 	@Override
 	public void setShowLines(boolean showLine) {
@@ -56,7 +56,7 @@ public final class ScatterDataset extends LineDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.LiningDataset#setFill(org.pepstock.charba.client.enums.Fill)
+	 * @see org.pepstock.charba.client.jsinterop.data.LiningDataset#setFill(org.pepstock.charba.client.jsinterop.enums.Fill)
 	 */
 	@Override
 	public void setFill(Fill fill) {
@@ -67,7 +67,7 @@ public final class ScatterDataset extends LineDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setData(double[])
+	 * @see org.pepstock.charba.client.jsinterop.data.Dataset#setData(double[])
 	 */
 	@Override
 	public void setData(double... values) {
@@ -77,7 +77,7 @@ public final class ScatterDataset extends LineDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#getData()
+	 * @see org.pepstock.charba.client.jsinterop.data.Dataset#getData()
 	 */
 	@Override
 	public List<Double> getData() {

@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
-import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.jsinterop.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels;
 import org.pepstock.charba.client.jsinterop.options.LegendLabels;
 

@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults.globals;
 
-import org.pepstock.charba.client.enums.FontStyle;
-import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.jsinterop.enums.FontStyle;
+import org.pepstock.charba.client.jsinterop.enums.Position;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle;
 
 /**

@@ -15,13 +15,13 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.JsHelper;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.enums.Position;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
 import org.pepstock.charba.client.jsinterop.events.LegendClickEvent;
 import org.pepstock.charba.client.jsinterop.events.LegendHoverEvent;
@@ -166,7 +166,8 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.ChartContainer#addHandler(com.google. gwt.event.shared.GwtEvent.Type)
+	 * @see
+	 * org.pepstock.charba.client.jsinterop.configuration.EventProvider#addHandler(com.google.gwt.event.shared.GwtEvent.Type)
 	 */
 	@Override
 	protected <H extends EventHandler> void addHandler(Type<H> type) {
@@ -193,7 +194,8 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.ChartContainer#removeHandler(org. pepstock.charba.client.commons.Key)
+	 * @see
+	 * org.pepstock.charba.client.jsinterop.configuration.EventProvider#removeHandler(com.google.gwt.event.shared.GwtEvent.Type)
 	 */
 	@Override
 	protected <H extends EventHandler> void removeHandler(Type<H> type) {

@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.jsinterop.enums.Position;
 import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;

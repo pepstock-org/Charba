@@ -20,8 +20,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.StandardKey;
 import org.pepstock.charba.client.jsinterop.utils.JSON;
 
 import com.google.gwt.core.client.JsDate;

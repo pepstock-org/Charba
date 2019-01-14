@@ -17,7 +17,6 @@ package org.pepstock.charba.client.jsinterop;
 
 import java.util.List;
 
-import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions;
@@ -60,7 +59,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	private static final double DEFAULT_PCT_WIDTH = 90D;
 	// reference to Chart.js chart instance
 	private Chart chart = null;
-	// reference to CHART java script objetc wrapper to map all properties at runtime
+	// reference to CHART java script object wrapper to map all properties at runtime
 	private ChartNode node = null;
 
 	// chart ID using GWT unique id
@@ -173,7 +172,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 
 	/**
 	 * Remove the registration of prevent default mouse listener from canvas.<br>
-	 * This is necessary when you will add your mouse down listeber.
+	 * This is necessary when you will add your mouse down listener.
 	 */
 	public final void removeCanvasPreventDefault() {
 		// checks if consistent

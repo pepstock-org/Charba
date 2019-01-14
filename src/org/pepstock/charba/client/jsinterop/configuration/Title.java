@@ -18,8 +18,8 @@ package org.pepstock.charba.client.jsinterop.configuration;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.enums.FontStyle;
-import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.jsinterop.enums.FontStyle;
+import org.pepstock.charba.client.jsinterop.enums.Position;
 import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
 
 /**

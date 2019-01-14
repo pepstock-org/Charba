@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 
 /**
  * Utility to create array list objects from java script arrays.
@@ -104,7 +104,7 @@ public final class ArrayListHelper {
 	}
 
 	/**
-	 * Creates a array list of enumeration values (instance of {@link org.pepstock.charba.client.commons.Key}).
+	 * Creates a array list of enumeration values (instance of {@link org.pepstock.charba.client.jsinterop.commons.Key}).
 	 * 
 	 * @param clazz enumeration class with all possible values of enumeration
 	 * @param values array of elements to load when the list is creating.
@@ -206,7 +206,7 @@ public final class ArrayListHelper {
 	}
 
 	/**
-	 * Creates an unmodifiable array list of enumeration values (instance of {@link org.pepstock.charba.client.commons.Key}).
+	 * Creates an unmodifiable array list of enumeration values (instance of {@link org.pepstock.charba.client.jsinterop.commons.Key}).
 	 * 
 	 * @param clazz enumeration class with all possible values of enumeration
 	 * @param values array of elements to load when the list is creating.

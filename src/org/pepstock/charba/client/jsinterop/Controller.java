@@ -39,63 +39,63 @@ public interface Controller {
 	/**
 	 * Initializes the controller.
 	 * 
-	 * @param jsThis context of controller 
+	 * @param context context of controller 
 	 * @param chart chart instance
 	 * @param datasetIndex dataset index
 	 */
-	void initialize(Context jsThis, AbstractChart<?, ?> chart, int datasetIndex);
+	void initialize(Context context, AbstractChart<?, ?> chart, int datasetIndex);
 
 	/**
 	 * Create elements for each piece of data in the dataset. Store elements in an array on the dataset.
 	 * 
-	 * @param jsThis context of controller
+	 * @param context context of controller
 	 * @param chart chart instance
 	 */
-	void addElements(Context jsThis, AbstractChart<?, ?> chart);
+	void addElements(Context context, AbstractChart<?, ?> chart);
 
 	/**
 	 * Create a single element for the data at the given index and reset its state.
 	 * 
-	 * @param jsThis context of controller
+	 * @param context context of controller
 	 * @param chart chart instance
 	 * @param index dataset index
 	 */
-	void addElementAndReset(Context jsThis, AbstractChart<?, ?> chart, int index);
+	void addElementAndReset(Context context, AbstractChart<?, ?> chart, int index);
 
 	/**
 	 * Draw the representation of the dataset.
 	 * 
-	 * @param jsThis context of controller
+	 * @param context context of controller
 	 * @param chart chart instance
 	 * @param ease if specified, this number represents how far to transition elements.
 	 */
-	void draw(Context jsThis, AbstractChart<?, ?> chart, double ease);
+	void draw(Context context, AbstractChart<?, ?> chart, double ease);
 
 	/**
 	 * Remove hover styling from the given element.
 	 * 
-	 * @param jsThis context of controller
+	 * @param context context of controller
 	 * @param chart chart instance
 	 * @param element element to be removed.
 	 */
-	void removeHoverStyle(Context jsThis, AbstractChart<?, ?> chart, StyleElement element);
+	void removeHoverStyle(Context context, AbstractChart<?, ?> chart, StyleElement element);
 
 	/**
 	 * Add hover styling to the given element.
 	 * 
-	 * @param jsThis context of controller
+	 * @param context context of controller
 	 * @param chart chart instance
 	 * @param element element to be set.
 	 */
-	void setHoverStyle(Context jsThis, AbstractChart<?, ?> chart, StyleElement element);
+	void setHoverStyle(Context context, AbstractChart<?, ?> chart, StyleElement element);
 
 	/**
 	 * Update the elements in response to new data.
 	 * 
-	 * @param jsThis context of controller
+	 * @param context context of controller
 	 * @param chart chart instance
 	 * @param reset if true, put the elements into a reset state so they can animate to their final values
 	 */
-	void update(Context jsThis, AbstractChart<?, ?> chart, boolean reset);
+	void update(Context context, AbstractChart<?, ?> chart, boolean reset);
 
 }

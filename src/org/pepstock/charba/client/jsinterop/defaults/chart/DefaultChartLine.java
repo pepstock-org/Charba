@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults.chart;
 
-import org.pepstock.charba.client.enums.CapStyle;
-import org.pepstock.charba.client.enums.Fill;
-import org.pepstock.charba.client.enums.JoinStyle;
+import org.pepstock.charba.client.jsinterop.enums.CapStyle;
+import org.pepstock.charba.client.jsinterop.enums.Fill;
+import org.pepstock.charba.client.jsinterop.enums.JoinStyle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine;
 import org.pepstock.charba.client.jsinterop.options.Line;
 

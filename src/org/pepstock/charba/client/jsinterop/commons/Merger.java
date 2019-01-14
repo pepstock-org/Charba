@@ -15,14 +15,14 @@
 */
 package org.pepstock.charba.client.jsinterop.commons;
 
-import org.pepstock.charba.client.Injector;
-import org.pepstock.charba.client.ScaleType;
-import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.ChartOptions;
 import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.GlobalOptions;
 import org.pepstock.charba.client.jsinterop.Helpers;
+import org.pepstock.charba.client.jsinterop.Injector;
+import org.pepstock.charba.client.jsinterop.ScaleType;
+import org.pepstock.charba.client.jsinterop.Type;
 import org.pepstock.charba.client.jsinterop.options.Scale;
 
 /**

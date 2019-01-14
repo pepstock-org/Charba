@@ -15,8 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.controllers;
 
-import org.pepstock.charba.client.ChartType;
-import org.pepstock.charba.client.Injector;
+
+import org.pepstock.charba.client.jsinterop.ChartType;
+import org.pepstock.charba.client.jsinterop.Injector;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**

@@ -30,7 +30,7 @@ import com.google.gwt.event.shared.GwtEvent;
  *
  * @param <H> GWT event object
  */
-abstract class AbstractEvent<H extends EventHandler> extends GwtEvent<H> {
+public abstract class AbstractEvent<H extends EventHandler> extends GwtEvent<H> {
 
 	// native event
 	private final NativeEvent nativeEvent;
@@ -41,7 +41,7 @@ abstract class AbstractEvent<H extends EventHandler> extends GwtEvent<H> {
 	 * @param nativeEvent native event of this custom event
 	 * @see com.google.gwt.dom.client.NativeEvent
 	 */
-	AbstractEvent(NativeEvent nativeEvent) {
+	protected AbstractEvent(NativeEvent nativeEvent) {
 		super();
 		this.nativeEvent = nativeEvent;
 	}

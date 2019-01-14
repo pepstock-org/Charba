@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.Easing;
+import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.enums.Easing;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
@@ -69,7 +69,7 @@ public final class AnimationItem extends NativeObjectContainer {
 	/**
 	 * Returns the animation easing to use.
 	 * 
-	 * @return the animation easing to use. Default is {@link org.pepstock.charba.client.enums.Easing#easeInOutQuart}
+	 * @return the animation easing to use. Default is {@link org.pepstock.charba.client.jsinterop.enums.Easing#easeInOutQuart}
 	 */
 	public Easing getEasing() {
 		return getValue(Property.easing, Easing.class, Easing.easeOutQuart);

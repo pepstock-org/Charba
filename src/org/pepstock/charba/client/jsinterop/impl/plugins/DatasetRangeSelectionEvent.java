@@ -13,7 +13,9 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.jsinterop.events;
+package org.pepstock.charba.client.jsinterop.impl.plugins;
+
+import org.pepstock.charba.client.jsinterop.events.AbstractEvent;
 
 import com.google.gwt.dom.client.NativeEvent;
 
@@ -25,6 +27,11 @@ import com.google.gwt.dom.client.NativeEvent;
  * @see org.pepstock.charba.client.jsinterop.impl.plugins.DatasetsItemsSelector
  */
 public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRangeSelectionEventHandler> {
+	
+	/**
+	 * Value of FROM and TO when the event is representing a reset of selection
+	 */
+	public static final int RESET_SELECTION = Integer.MIN_VALUE;
 
 	/**
 	 * Event type
@@ -34,6 +41,15 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRange
 	private final int from;
 	// ending index of selected dataset
 	private final int to;
+	
+	/**
+	 * Creates the event when the reset of current selection has been requested.
+	 * 
+	 * @param nativeEvent native event of this custom event
+	 */
+	public DatasetRangeSelectionEvent(NativeEvent nativeEvent) {
+		this(nativeEvent, RESET_SELECTION, RESET_SELECTION);
+	}
 
 	/**
 	 * Creates the event with start and end index of selected datasets.

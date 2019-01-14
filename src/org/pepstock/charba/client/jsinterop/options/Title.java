@@ -17,14 +17,14 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import java.util.List;
 
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.enums.Position;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.ObjectType;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle;
+import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 
 /**
  * Configures the default chart title which defines text to draw at the top of the chart.

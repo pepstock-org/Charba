@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.commons;
 
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 
 /**

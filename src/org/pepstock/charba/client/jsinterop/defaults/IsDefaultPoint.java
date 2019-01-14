@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults;
 
-import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.jsinterop.enums.PointStyle;
 
 /**
  * Interface to define point object defaults.

@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.enums.PointStyle;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint;
 
@@ -78,7 +78,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * Sets the style of the point.
 	 * 
 	 * @param pointStyle array of the style of the point.
-	 * @see org.pepstock.charba.client.enums.PointStyle
+	 * @see org.pepstock.charba.client.jsinterop.enums.PointStyle
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
 		setValue(Property.pointStyle, pointStyle);

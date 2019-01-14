@@ -17,8 +17,8 @@ package org.pepstock.charba.client.jsinterop.items;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.jsinterop.Defaults;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
@@ -40,7 +40,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 		backgroundColor,
 		borderColor
 	}
-	
+
 	/**
 	 * Creates the object with an empty native object
 	 */
@@ -74,7 +74,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	public void setBackgroundColor(IsColor backgroundColor) {
 		setValue(Property.backgroundColor, backgroundColor.toRGBA());
 	}
-	
+
 	/**
 	 * Returns the background color of the label.
 	 * 
@@ -92,7 +92,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
-	
+
 	/**
 	 * Sets border color as string
 	 * 
@@ -117,9 +117,9 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * @return the border color of the label.
 	 */
 	public String getBorderColorAsString() {
-		return getValue(Property.borderColor,  Defaults.get().getGlobal().getTooltips().getBorderColorAsString());
+		return getValue(Property.borderColor, Defaults.get().getGlobal().getTooltips().getBorderColorAsString());
 	}
-	
+
 	/**
 	 * Returns the border color of the label.
 	 * 
@@ -128,7 +128,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	public IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
 	}
-	
+
 	/**
 	 * Wraps the protected method to get the java script object in order to consume it.
 	 * 
@@ -137,16 +137,21 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	public NativeObject getObject() {
 		return getNativeObject();
 	}
-	
+
 	/**
-	 * Inner class to create tooltip label color by a native object to use in {@link org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList}.
+	 * Inner class to create tooltip label color by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 * @since 2.0
 	 */
-	static class TooltipLabelColorFactory implements NativeObjectContainerFactory<TooltipLabelColor>{
-		/* (non-Javadoc)
-		 * @see org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList.Factory#create(org.pepstock.charba.client.jsinterop.commons.NativeObject)
+	static final class TooltipLabelColorFactory implements NativeObjectContainerFactory<TooltipLabelColor> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
+		 * .commons.NativeObject)
 		 */
 		@Override
 		public TooltipLabelColor create(NativeObject nativeObject) {

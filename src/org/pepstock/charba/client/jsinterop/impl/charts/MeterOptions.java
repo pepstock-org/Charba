@@ -17,7 +17,6 @@ package org.pepstock.charba.client.jsinterop.impl.charts;
 
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.ChartOptions;
 import org.pepstock.charba.client.jsinterop.Defaults;
@@ -27,6 +26,7 @@ import org.pepstock.charba.client.jsinterop.configuration.Hover;
 import org.pepstock.charba.client.jsinterop.configuration.Layout;
 import org.pepstock.charba.client.jsinterop.configuration.Legend;
 import org.pepstock.charba.client.jsinterop.configuration.Tooltips;
+import org.pepstock.charba.client.jsinterop.enums.FontStyle;
 
 /**
  * Specific options for METER chart. This chart doesn't allow any legend, hover, layout and tooltips components.
@@ -80,32 +80,28 @@ public class MeterOptions extends AbstractPieOptions {
 		// sets the 90% of cutout
 		super.setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.AbstractPieOptions#setCutoutPercentage(double)
+	
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.configuration.AbstractPieOptions#setCutoutPercentage(double)
 	 */
 	@Override
-	public final void setCutoutPercentage(double cutoutPercentage) {
+	public void setCutoutPercentage(double cutoutPercentage) {
 		// ignore the passed value. is ALWAYS 90
 		super.setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.BaseOptions#getHover()
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions#getHover()
 	 */
 	@Override
-	public final Hover getHover() {
+	public Hover getHover() {
 		throw new UnsupportedOperationException(INVALID__CALL);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.BaseOptions#getLayout()
+	 * @see org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions#getLayout()
 	 */
 	@Override
 	public final Layout getLayout() {
@@ -115,7 +111,7 @@ public class MeterOptions extends AbstractPieOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.BaseOptions#getLegend()
+	 * @see org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions#getLegend()
 	 */
 	@Override
 	public final Legend getLegend() {
@@ -125,7 +121,7 @@ public class MeterOptions extends AbstractPieOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.BaseOptions#getTooltips()
+	 * @see org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions#getTooltips()
 	 */
 	@Override
 	public final Tooltips getTooltips() {

@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.controllers;
 
-import org.pepstock.charba.client.ChartType;
-import org.pepstock.charba.client.ScaleType;
-import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.jsinterop.ChartType;
+import org.pepstock.charba.client.jsinterop.ScaleType;
+import org.pepstock.charba.client.jsinterop.Type;
 
 /**
  * Represent the type of new controller. Must be created for every controller implementation.<br>
@@ -80,7 +80,7 @@ public final class ControllerType implements Type {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.Key#name()
+	 * @see org.pepstock.charba.client.jsinterop.commons.Key#name()
 	 */
 	@Override
 	public String name() {
@@ -90,7 +90,7 @@ public final class ControllerType implements Type {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Type#scaleType()
+	 * @see org.pepstock.charba.client.jsinterop.Type#scaleType()
 	 */
 	@Override
 	public ScaleType scaleType() {

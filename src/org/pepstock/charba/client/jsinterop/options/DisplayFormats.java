@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.TimeUnit;
+import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.enums.TimeUnit;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**

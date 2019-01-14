@@ -19,8 +19,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.jsinterop.Controller;
+import org.pepstock.charba.client.jsinterop.Injector;
 
 /**
  * Global configuration to set controllers at global level.<br>

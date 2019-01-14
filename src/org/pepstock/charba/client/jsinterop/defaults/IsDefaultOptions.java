@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults;
 
-import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.jsinterop.enums.FontStyle;
 
 /**
  * Interface to define options defaults. THIS IS THE ROOT OF ALL INTERFACE DEFAULTS.
