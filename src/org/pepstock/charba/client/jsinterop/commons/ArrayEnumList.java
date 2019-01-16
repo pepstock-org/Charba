@@ -20,8 +20,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.pepstock.charba.client.jsinterop.commons.Key;
-
 /**
  * The user of this interface has precise control over where in the list each element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
@@ -153,33 +151,6 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, Arr
 				// sets false!
 				modified = false;
 			}
-		}
-		return modified;
-	}
-
-	/**
-	 * Inserts all of the elements in the specified collection into this list at the specified position.<br>
-	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (increases their
-	 * indices).
-	 */
-	@Override
-	public boolean addAll(int index, Collection<? extends E> c) {
-		// set modified checking if collection is empty
-		boolean modified = !c.isEmpty();
-		// checks if continue
-		if (modified && checkRange(index)) {
-			// saves index
-			int myIndex = index;
-			Iterator<? extends E> e = c.iterator();
-			// scans all elements
-			while (e.hasNext()) {
-				// adds to the stored new index
-				add(myIndex, e.next());
-				// increments new index
-				myIndex++;
-			}
-			// sets modified
-			modified = true;
 		}
 		return modified;
 	}

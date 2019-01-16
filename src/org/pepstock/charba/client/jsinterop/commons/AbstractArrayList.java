@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.jsinterop.commons;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -98,6 +99,20 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 	@Override
 	public ListIterator<E> listIterator() {
 		return new ListIteratorImpl<E>(0, this);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.List#addAll(int, java.util.Collection)
+	 */
+	@Override
+	public final boolean addAll(int index, Collection<? extends E> c) {
+		// Warnings in com/google/gwt/emul/java/util/List.java
+		// [WARN] [unusable-by-js] Type of parameter 'c' in 'boolean List.addAll(int, Collection)' (exposed by
+		// 'AbstractArrayList') is not usable by but exposed to JavaScript.
+		// for this reason return false
+		return false;
 	}
 
 	/**

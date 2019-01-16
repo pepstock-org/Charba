@@ -65,9 +65,9 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 
 	// canvas prevent default handler
 	private final HandlerRegistration preventDisplayHandler;
+
 	// canvas where Chart.js draws the chart
 	private final Canvas canvas;
-
 	// CHart configuration object
 	private final Configuration configuration = new Configuration();
 	// Data element of configuration
@@ -86,7 +86,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	private final DatasetItemFactory datasetItemFactory = new DatasetItemFactory();
 
 	/**
-	 * Initializes HTMl elements (DIV and Canvas).<br>
+	 * Initializes simple panel and canvas which are used by CHART.JS.<br>
 	 * It sets also some default behaviors (width in percentage) for resizing
 	 */
 	public AbstractChart() {
@@ -99,9 +99,9 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		getElement().getStyle().setHeight(100, Unit.PCT);
 		// checks if canvas is supported
 		if (isCanvasSupported) {
-			// creates a canvas and add to DIV
-			// canvas = Document.get().createCanvasElement();
+			// creates a canvas
 			canvas = Canvas.createIfSupported();
+			// adds to panel
 			add(canvas);
 			// adds the listener to disable canvas selection
 			preventDisplayHandler = canvas.addMouseDownHandler(new MouseDownHandler() {
@@ -119,7 +119,6 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 				}
 
 			});
-			// div.appendChild(canvas);
 		} else {
 			// creates a header element
 			HeadingElement h = Document.get().createHElement(3);
@@ -195,8 +194,6 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * @return the chart node.
 	 */
 	public final ChartNode getNode() {
-		//return node;
-		// stores the chart to node wrapper
 		return new ChartNode(chart);
 	}
 
@@ -319,6 +316,8 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			// then destroy
 			chart.destroy();
 		}
+		// remove handler of mouse event handler
+		removeCanvasPreventDefault();
 		// removes chart instance from collection
 		Charts.remove(getId());
 	}

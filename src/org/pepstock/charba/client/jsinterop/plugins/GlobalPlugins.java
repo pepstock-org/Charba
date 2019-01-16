@@ -94,8 +94,9 @@ public final class GlobalPlugins {
 			// creates the plugin reference
 			PluginReference reference = new PluginReference(existingPlugins.get(i));
 			if (reference.getId() != null && reference.getId().equalsIgnoreCase(pluginId)) {
+				// unregister the plugin
 				plugins.unregister(reference);
-				// stores the id into a set
+				// removes the plugin
 				pluginIds.remove(pluginId);
 				return true;
 			}
@@ -119,6 +120,7 @@ public final class GlobalPlugins {
 			for (int i = 0; i < existingPlugins.length(); i++) {
 				// creates the reference
 				PluginReference reference = new PluginReference(existingPlugins.get(i));
+				// adds plugin id
 				pluginsIds.add(reference.getId());
 			}
 		}

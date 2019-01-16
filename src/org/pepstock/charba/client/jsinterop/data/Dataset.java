@@ -165,7 +165,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @param <T> type of native object container to store
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public final <T extends NativeObjectContainer> void setPluginConfiguration(String pluginId, T options) throws InvalidPluginIdException {
+	public final <T extends NativeObjectContainer> void setOptions(String pluginId, T options) throws InvalidPluginIdException {
 		// if null, removes the configuration
 		if (options == null) {
 			// removes configuration if exists
@@ -183,7 +183,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public final boolean hasPluginConfiguration(String pluginId) throws InvalidPluginIdException {
+	public final boolean hasOptions(String pluginId) throws InvalidPluginIdException {
 		return has(PluginIdChecker.key(pluginId));
 	}
 
@@ -196,7 +196,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @return java script object used to configure the plugin or <code>null</code> if not exist.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public final <T extends NativeObjectContainer> T getPluginConfiguration(String pluginId, NativeObjectContainerFactory<T> factory) throws InvalidPluginIdException {
+	public final <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) throws InvalidPluginIdException {
 		return factory.create(getValue(PluginIdChecker.key(pluginId)));
 	}
 

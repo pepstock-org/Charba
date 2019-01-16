@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.jsinterop;
 
 /**
- * Enumerates all possible available types of a chart.
+ * Enumerates all out-of-the-box types of a chart.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0

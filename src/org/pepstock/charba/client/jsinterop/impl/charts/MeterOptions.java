@@ -77,6 +77,7 @@ public class MeterOptions extends AbstractPieOptions {
 		super.getLegend().setDisplay(false);
 		super.getTitle().setDisplay(false);
 		super.getTooltips().setEnabled(false);
+		super.getHover().setAnimationDuration(0);
 		// sets the 90% of cutout
 		super.setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
 	}

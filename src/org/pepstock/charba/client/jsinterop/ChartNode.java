@@ -51,7 +51,7 @@ public final class ChartNode {
 
 	/**
 	 * Creates the object wrapping a CHART instance.
-	 * 
+	 *FIXME
 	 * @param chart CHART.JS CHART instance
 	 */
 	public ChartNode(Chart chart) {

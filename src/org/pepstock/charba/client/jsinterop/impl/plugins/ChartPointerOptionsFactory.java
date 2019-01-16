@@ -21,15 +21,15 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory
 import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
 
 /**
- * Factory to get the options (form chart or from default global ones) related to dataset selection plugin.
+ * Factory to get the options (form chart or from default global ones) related to pointer plugin.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-public final class DatasetsItemsSelectorOptionsFactory implements NativeObjectContainerFactory<DatasetsItemsSelectorOptions> {
+public final class ChartPointerOptionsFactory implements NativeObjectContainerFactory<ChartPointerOptions> {
 
 	// factory instance to read the options from default global
-	private final DatasetsItemsSelectorDefaultsOptionsFactory defaultsFactory = new DatasetsItemsSelectorDefaultsOptionsFactory();
+	private final ChartPointerDefaultsOptionsFactory defaultsFactory = new ChartPointerDefaultsOptionsFactory();
 
 	/*
 	 * (non-Javadoc)
@@ -39,26 +39,26 @@ public final class DatasetsItemsSelectorOptionsFactory implements NativeObjectCo
 	 * .commons.NativeObject)
 	 */
 	@Override
-	public DatasetsItemsSelectorOptions create(NativeObject nativeObject) {
+	public ChartPointerOptions create(NativeObject nativeObject) {
 		// defaults global options instance
-		DatasetsItemsSelectorDefaultsOptions defaultsOptions = null;
+		ChartPointerDefaultsOptions defaultsOptions = null;
 		try {
 			// checks if the default global options has been added for the plugin
-			if (Defaults.get().getGlobal().getPlugins().hasOptions(DatasetsItemsSelector.ID)) {
+			if (Defaults.get().getGlobal().getPlugins().hasOptions(ChartPointer.ID)) {
 				// reads the default default global options
-				defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(DatasetsItemsSelector.ID, defaultsFactory);
+				defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(ChartPointer.ID, defaultsFactory);
 			} else {
 				// if here, no default global option
 				// then the plugin will use the static defaults
-				defaultsOptions = new DatasetsItemsSelectorDefaultsOptions(null);
+				defaultsOptions = new ChartPointerDefaultsOptions(null);
 			}
 		} catch (InvalidPluginIdException e) {
 			// creates an empty default global option
 			// then the plugin will use the static defaults
-			defaultsOptions = new DatasetsItemsSelectorDefaultsOptions(null);
+			defaultsOptions = new ChartPointerDefaultsOptions(null);
 		}
 		// creates the options by the native object and the defaults
-		return new DatasetsItemsSelectorOptions(nativeObject, defaultsOptions);
+		return new ChartPointerOptions(nativeObject, defaultsOptions);
 	}
 
 	/**
@@ -67,7 +67,7 @@ public final class DatasetsItemsSelectorOptionsFactory implements NativeObjectCo
 	 * @author Andrea "Stock" Stocchero
 	 * @since 2.0
 	 */
-	static class DatasetsItemsSelectorDefaultsOptionsFactory implements NativeObjectContainerFactory<DatasetsItemsSelectorDefaultsOptions> {
+	static class ChartPointerDefaultsOptionsFactory implements NativeObjectContainerFactory<ChartPointerDefaultsOptions> {
 
 		/*
 		 * (non-Javadoc)
@@ -77,9 +77,9 @@ public final class DatasetsItemsSelectorOptionsFactory implements NativeObjectCo
 		 * .commons.NativeObject)
 		 */
 		@Override
-		public DatasetsItemsSelectorDefaultsOptions create(NativeObject nativeObject) {
+		public ChartPointerDefaultsOptions create(NativeObject nativeObject) {
 			// creates the default global option by native object
-			return new DatasetsItemsSelectorDefaultsOptions(nativeObject);
+			return new ChartPointerDefaultsOptions(nativeObject);
 		}
 
 	}

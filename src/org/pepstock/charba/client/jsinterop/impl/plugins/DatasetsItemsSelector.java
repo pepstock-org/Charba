@@ -67,7 +67,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * @param fireEvent if <code>true</code> an event is fired otherwise not.
 	 */
 	public void reset(AbstractChart<?, ?> chart, boolean fireEvent) {
-		// flag to know if the chart must eb updated
+		// flag to know if the chart must be updated
 		boolean mustBeUpodated = false;
 		// checks if we have already an handler
 		if (HANDLERS.containsKey(chart.getId())) {
@@ -80,7 +80,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		onDestroy(chart);
 		// recreates the selections handler
 		onAfterInit(chart);
-		// checks if it must foire the event
+		// checks if it must fire the event
 		if (fireEvent) {
 			// fires the reset event
 			chart.fireEvent(new DatasetRangeSelectionEvent(Document.get().createChangeEvent()));

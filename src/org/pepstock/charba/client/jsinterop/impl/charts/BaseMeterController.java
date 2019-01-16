@@ -17,7 +17,6 @@ package org.pepstock.charba.client.jsinterop.impl.charts;
 
 import java.util.List;
 
-import org.pepstock.charba.client.jsinterop.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.ChartNode;
 import org.pepstock.charba.client.jsinterop.Defaults;
@@ -25,6 +24,7 @@ import org.pepstock.charba.client.jsinterop.controllers.AbstractController;
 import org.pepstock.charba.client.jsinterop.controllers.Context;
 import org.pepstock.charba.client.jsinterop.controllers.ControllerType;
 import org.pepstock.charba.client.jsinterop.data.Dataset;
+import org.pepstock.charba.client.jsinterop.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.items.ChartAreaNode;
 
 import com.google.gwt.canvas.dom.client.Context2d;

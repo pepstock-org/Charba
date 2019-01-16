@@ -18,7 +18,6 @@ package org.pepstock.charba.client.jsinterop.impl.plugins;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
-import org.pepstock.charba.client.colors.GwtMaterialColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
@@ -26,7 +25,7 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
-import org.pepstock.charba.client.jsinterop.options.Scales;
+import org.pepstock.charba.client.jsinterop.impl.plugins.DatasetsItemsSelectorOptionsFactory.DatasetsItemsSelectorDefaultsOptionsFactory;
 import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
 
 /**
@@ -45,33 +44,15 @@ import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
  */
 public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 
-	// default alpha of selecting/selection colors
-	private static final double DEFAULT_ALPHA = 0.3D;
-
-	/**
-	 * Default color for area
-	 */
-	private static final IsColor DEFAULT_COLOR = GwtMaterialColor.ORANGE_LIGHTEN_3.alpha(DEFAULT_ALPHA);
-
-	/**
-	 * Default X axis id
-	 */
-	private static final String DEFAULT_AXIS_ID = Scales.DEFAULT_X_AXIS_ID;
-
-	/**
-	 * Default border width of selection area
-	 */
-	private static final int DEFAULT_BORDER_WIDTH = 0;
-
-	/**
-	 * Default border color for area
-	 */
-	private static final IsColor DEFAULT_BORDER_COLOR = GwtMaterialColor.GREY_DARKEN_2;
-
+	// defaults global options instance
+	private DatasetsItemsSelectorDefaultsOptions defaultsOptions;
+	// defaults global options  factory
+	private final DatasetsItemsSelectorDefaultsOptionsFactory defaultsFactory = new DatasetsItemsSelectorDefaultsOptionsFactory();
+	
 	/**
 	 * Name of properties of native object.
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
 		color,
 		xAxisID,
@@ -84,24 +65,36 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	 * Builds the object with a new java script object setting the default value of plugin.
 	 */
 	public DatasetsItemsSelectorOptions() {
-		this(null);
+		super(null);
+		// this constructor is used by user to set options for plugin
+		// both default global or chart one. 
+		try {
+			// checks if the default global options has been added for the plugin
+			if (Defaults.get().getGlobal().getPlugins().hasOptions(DatasetsItemsSelector.ID)) {
+				// reads the default default global options
+				defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(DatasetsItemsSelector.ID, defaultsFactory);
+			} else {
+				// if here, no default global option
+				// then the plugin will use the static defaults
+				defaultsOptions = new DatasetsItemsSelectorDefaultsOptions(null);
+			}
+		} catch (InvalidPluginIdException e) {
+			// creates an empty default global option
+			// then the plugin will use the static defaults
+			defaultsOptions = new DatasetsItemsSelectorDefaultsOptions(null);
+		}
 	}
 
 	/**
-	 * Builds the object using the java script object of options, set by user.<br>
+	 * Builds the object using the java script object of options and the defaults, set by user.<br>
 	 * Used internally to call the plugin.
 	 * 
 	 * @param nativeObject configuration of plugin.
+	 * @param defaultsOptions default options, which must be stored into default global.
 	 */
-	DatasetsItemsSelectorOptions(NativeObject nativeObject) {
+	DatasetsItemsSelectorOptions(NativeObject nativeObject, DatasetsItemsSelectorDefaultsOptions defaultsOptions) {
 		super(nativeObject);
-		try {
-			if (Defaults.get().getGlobal().getPlugins().hasOptions(DatasetsItemsSelector.ID)) {
-				// FIXME
-			}
-		} catch (InvalidPluginIdException e) {
-			// do nothing
-		}
+		this.defaultsOptions = defaultsOptions;
 	}
 
 	/**
@@ -122,7 +115,7 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	 *         axis.
 	 */
 	public String getXAxisID() {
-		return getValue(Property.xAxisID, DEFAULT_AXIS_ID);
+		return getValue(Property.xAxisID, defaultsOptions.getXAxisID());
 	}
 
 	/**
@@ -131,7 +124,7 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	 * @return the color.
 	 */
 	public String getColorAsString() {
-		return getValue(Property.color, DEFAULT_COLOR.toRGBA());
+		return getValue(Property.color, defaultsOptions.getColorAsString());
 	}
 
 	/**
@@ -178,8 +171,7 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	 * @return the line dash pattern used when stroking lines.
 	 */
 	public List<Integer> getBorderDash() {
-		ArrayInteger array = getArrayValue(Property.borderDash);
-		return ArrayListHelper.list(array);
+		return ArrayListHelper.list(getBorderDashAsJavaScriptObject());
 	}
 
 	/**
@@ -189,7 +181,13 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	 * @return the line dash pattern used when stroking lines.
 	 */
 	ArrayInteger getBorderDashAsJavaScriptObject() {
-		return getArrayValue(Property.borderDash);
+		ArrayInteger array = null;
+		if (has(Property.borderDash)) {
+			array = getArrayValue(Property.borderDash);
+		} else {
+			array = defaultsOptions.getBorderDash();
+		}
+		return array;
 	}
 
 	/**
@@ -207,7 +205,7 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	 * @return list of the border width of the selection.
 	 */
 	public int getBorderWidth() {
-		return getValue(Property.borderWidth, DEFAULT_BORDER_WIDTH);
+		return getValue(Property.borderWidth, defaultsOptions.getBorderWidth());
 	}
 
 	/**
@@ -216,7 +214,7 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	 * @return the color.
 	 */
 	public String getBorderColorAsString() {
-		return getValue(Property.color, DEFAULT_BORDER_COLOR.toRGBA());
+		return getValue(Property.borderColor, defaultsOptions.getBorderColorAsString());
 	}
 
 	/**

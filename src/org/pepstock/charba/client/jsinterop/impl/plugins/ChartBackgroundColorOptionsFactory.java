@@ -13,27 +13,30 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.jsinterop.items;
+package org.pepstock.charba.client.jsinterop.impl.plugins;
 
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-import org.pepstock.charba.client.jsinterop.defaults.globals.DefaultsBuilder;
-import org.pepstock.charba.client.jsinterop.options.ScaledOptions;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
 
 /**
- *  Wrapper of options node of CHART.JS.
+ * Factory to get the options (ONLY form chart) related to background color plugin.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
-public final class OptionsNode extends ScaledOptions {
+public final class ChartBackgroundColorOptionsFactory implements NativeObjectContainerFactory<ChartBackgroundColorOptions> {
 
-	/**
-	 * Creates the item using a native java script object which contains all properties.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param nativeObject native java script object which contains all properties.
+	 * @see
+	 * org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
+	 * .commons.NativeObject)
 	 */
-	public OptionsNode(NativeObject delegated) {
-		super(DefaultsBuilder.get().getScaledOptions(), delegated);
+	@Override
+	public ChartBackgroundColorOptions create(NativeObject nativeObject) {
+		return new ChartBackgroundColorOptions(nativeObject);
 	}
 
 }
+

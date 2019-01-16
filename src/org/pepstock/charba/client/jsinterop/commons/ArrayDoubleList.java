@@ -144,33 +144,6 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 	}
 
 	/**
-	 * Inserts all of the elements in the specified collection into this list at the specified position.<br>
-	 * Shifts the element currently at that position (if any) and any subsequent elements to the right (increases their
-	 * indices).
-	 */
-	@Override
-	public boolean addAll(int index, Collection<? extends Double> c) {
-		// set modified checking if collection is empty
-		boolean modified = !c.isEmpty();
-		// checks if continue
-		if (modified && checkRange(index)) {
-			// saves index
-			int myIndex = index;
-			Iterator<? extends Double> e = c.iterator();
-			// scans all elements
-			while (e.hasNext()) {
-				// adds to the stored new index
-				add(myIndex, e.next());
-				// increments new index
-				myIndex++;
-			}
-			// sets modified
-			modified = true;
-		}
-		return modified;
-	}
-
-	/**
 	 * Removes from this list all of its elements that are contained in the specified collection.
 	 */
 	@Override

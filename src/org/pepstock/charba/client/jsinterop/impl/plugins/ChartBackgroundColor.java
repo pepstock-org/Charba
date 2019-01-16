@@ -18,8 +18,6 @@ package org.pepstock.charba.client.jsinterop.impl.plugins;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
-import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.jsinterop.plugins.AbstractPlugin;
 import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
 
@@ -43,7 +41,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 */
 	public static final String ID = "backgroundcolor";
 	// factory to create options (native object container)
-	private final OptionsFactory factory = new OptionsFactory();
+	private final ChartBackgroundColorOptionsFactory factory = new ChartBackgroundColorOptionsFactory();
 	// color instance
 	private final String color;
 
@@ -130,27 +128,4 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		// always TRUE
 		return true;
 	}
-
-	/**
-	 * Inner class to create options by a native object.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
-	private static final class OptionsFactory implements NativeObjectContainerFactory<ChartBackgroundColorOptions> {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
-		 * .commons.NativeObject)
-		 */
-		@Override
-		public ChartBackgroundColorOptions create(NativeObject nativeObject) {
-			return new ChartBackgroundColorOptions(nativeObject);
-		}
-
-	}
-
 }

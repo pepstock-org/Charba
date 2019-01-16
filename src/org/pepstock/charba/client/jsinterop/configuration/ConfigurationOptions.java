@@ -17,8 +17,6 @@ package org.pepstock.charba.client.jsinterop.configuration;
 
 import java.util.List;
 
-import org.pepstock.charba.client.jsinterop.commons.Key;
-import org.pepstock.charba.client.jsinterop.enums.Event;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.ChartOptions;
@@ -30,8 +28,10 @@ import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.ConfigurationLoader;
 import org.pepstock.charba.client.jsinterop.commons.JsHelper;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.chart.DefaultChartOptions;
+import org.pepstock.charba.client.jsinterop.enums.Event;
 import org.pepstock.charba.client.jsinterop.events.ChartClickEvent;
 import org.pepstock.charba.client.jsinterop.events.ChartHoverEvent;
 import org.pepstock.charba.client.jsinterop.events.ChartNativeEvent;
@@ -186,6 +186,8 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 
 	private LegendCallback legendCallback = null;
 
+	// amount of dataset selection event handlers
+	private int onDatasetSelectionHandlers = 0;
 	// amount of click event handlers
 	private int onClickHandlers = 0;
 	// amount of hover event handlers
@@ -481,6 +483,15 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 		return getConfiguration().getDevicePixelRatio();
 	}
 
+	/**
+	 * Returns <code>true</code> if there is any dataset selection handler, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if there is any dataset selection handler, otherwise <code>false</code>.
+	 */
+	public final boolean hasDatasetSelectionHandlers() {
+		return onDatasetSelectionHandlers > 0;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -488,7 +499,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 * org.pepstock.charba.client.jsinterop.configuration.EventProvider#addHandler(com.google.gwt.event.shared.GwtEvent.Type)
 	 */
 	@Override
-	protected <H extends EventHandler> void addHandler(Type<H> type) {
+	protected final <H extends EventHandler> void addHandler(Type<H> type) {
 		// checks if type of added event handler is dataset selection or click
 		if (type.equals(DatasetSelectionEvent.TYPE) || type.equals(ChartClickEvent.TYPE)) {
 			// if there is not any click event handler
@@ -498,6 +509,11 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			}
 			// increments amount of handlers
 			onClickHandlers++;
+			// check if a dataset selection handler has been added
+			if (type.equals(DatasetSelectionEvent.TYPE)) {
+				// increments handlers of dataset selection
+				onDatasetSelectionHandlers++;
+			}
 		} else if (type.equals(ChartHoverEvent.TYPE)) {
 			// if there is not any hover event handler
 			if (onHoverHandlers == 0) {
@@ -524,7 +540,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 * org.pepstock.charba.client.jsinterop.configuration.EventProvider#removeHandler(com.google.gwt.event.shared.GwtEvent.Type)
 	 */
 	@Override
-	protected <H extends EventHandler> void removeHandler(Type<H> type) {
+	protected final <H extends EventHandler> void removeHandler(Type<H> type) {
 		// checks if type of removed event handler is dataset selection or click
 		if (type.equals(DatasetSelectionEvent.TYPE) || type.equals(ChartClickEvent.TYPE)) {
 			// decrements the amount of handlers
@@ -533,6 +549,11 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			if (onClickHandlers == 0) {
 				// removes the java script object
 				getConfiguration().setEvent(Property.onClick, null);
+			}
+			// check if a dataset selection handler has been removed
+			if (type.equals(DatasetSelectionEvent.TYPE)) {
+				// decrements handlers of dataset selection
+				onDatasetSelectionHandlers--;
 			}
 		} else if (type.equals(ChartHoverEvent.TYPE)) {
 			// decrements the amount of handlers

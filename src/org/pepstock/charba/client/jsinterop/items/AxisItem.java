@@ -15,10 +15,10 @@
 */
 package org.pepstock.charba.client.jsinterop.items;
 
-import org.pepstock.charba.client.jsinterop.enums.Position;
 import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.enums.Position;
 
 /**
  * There are a number of configuration callbacks that can be used to change parameters in the scale at different points in the
@@ -33,7 +33,7 @@ public final class AxisItem extends ScaleItem {
 	
 	private final AxisMarginsItem margins;
 	
-	private final AxisMinSizeItem minSize;	
+	private final AxisMinSizeItem minSize;
 
 	/**
 	 * Creates the item using a native java script object which contains all properties.
