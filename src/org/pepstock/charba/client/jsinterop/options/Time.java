@@ -30,10 +30,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime;
  * @since 2.0
  *
  */
-public final class Time extends AbstractModel<Scale, IsDefaultTime> implements IsDefaultTime{
+public final class Time extends AbstractModel<Scale, IsDefaultTime> implements IsDefaultTime {
 
 	private final DisplayFormats displayFormats;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -76,7 +76,8 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
 	 * 
-	 * @param isoWeekday If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
+	 * @param isoWeekday If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it
+	 *            will be Sunday.
 	 */
 	public void setIsoWeekday(boolean isoWeekday) {
 		setValue(Property.isoWeekday, isoWeekday);
@@ -87,12 +88,13 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
 	 * 
-	 * @return If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
+	 * @return If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be
+	 *         Sunday.
 	 */
 	public boolean isIsoWeekday() {
 		return getValue(Property.isoWeekday, getDefaultValues().isIsoWeekday());
 	}
-	
+
 	/**
 	 * If defined, this will override the data maximum.
 	 * 
@@ -132,7 +134,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	public Date getMin() {
 		return getValue(Property.min, getDefaultValues().getMin());
 	}
-	
+
 	/**
 	 * If defined, dates will be rounded to the start of this unit.
 	 * 
@@ -140,12 +142,12 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 */
 	public void setRound(boolean round) {
 		// if is setting false
-		if (!round){
+		if (!round) {
 			// removes property, using default
 			remove(Property.round);
 		}
 	}
-	
+
 	/**
 	 * If defined, dates will be rounded to the start of this unit.
 	 * 
@@ -164,7 +166,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 */
 	public TimeUnit getRound() {
 		// checks if value is a boolean
-		if (ObjectType.Boolean.equals(type(Property.round))){
+		if (ObjectType.Boolean.equals(type(Property.round))) {
 			// if is a boolean FALSE value
 			// returns no unit
 			return getDefaultValues().getRound();
@@ -172,7 +174,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 		// gets the value
 		return getValue(Property.round, TimeUnit.class, getDefaultValues().getRound());
 	}
-	
+
 	/**
 	 * The moment js format string to use for the tooltip.
 	 * 
@@ -200,12 +202,12 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 */
 	public void setUnit(boolean unit) {
 		// if is setting false
-		if (!unit){
+		if (!unit) {
 			// removes property, using default
 			remove(Property.unit);
 		}
 	}
-	
+
 	/**
 	 * If defined, will force the unit to be a certain type.
 	 * 
@@ -224,7 +226,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 */
 	public TimeUnit getUnit() {
 		// checks if value is a boolean
-		if (ObjectType.Boolean.equals(type(Property.unit))){
+		if (ObjectType.Boolean.equals(type(Property.unit))) {
 			// if is a boolean FALSE value
 			// returns no unit
 			return getDefaultValues().getUnit();
@@ -232,7 +234,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 		// returns the value
 		return getValue(Property.unit, TimeUnit.class, getDefaultValues().getUnit());
 	}
-	
+
 	/**
 	 * The number of units between grid lines.
 	 * 
@@ -252,7 +254,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	public int getStepSize() {
 		return getValue(Property.stepSize, getDefaultValues().getStepSize());
 	}
-	
+
 	/**
 	 * The minimum display format to be used for a time unit.
 	 * 
@@ -272,7 +274,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	public TimeUnit getMinUnit() {
 		return getValue(Property.minUnit, TimeUnit.class, getDefaultValues().getMinUnit());
 	}
-	
+
 	/**
 	 * Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
 	 * 
@@ -287,10 +289,10 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
 	 * 
-	 * @return Defined as a string, it is interpreted as a custom format to be used by moment to parse the date. 
+	 * @return Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
 	 */
 	public String getParser() {
 		return getValue(Property.parser, getDefaultValues().getParser());
 	}
-	
+
 }

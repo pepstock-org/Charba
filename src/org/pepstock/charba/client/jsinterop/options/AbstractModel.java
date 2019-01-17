@@ -105,7 +105,7 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Na
 	protected final P getParent() {
 		return parent;
 	}
-	
+
 	/**
 	 * Returns the default provider instance.
 	 * 

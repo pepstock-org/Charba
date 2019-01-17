@@ -32,9 +32,9 @@ import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
  *
  */
 public final class ChartPointer extends AbstractPlugin {
-	
+	// factory to create options for plugin
 	private final ChartPointerOptionsFactory factory = new ChartPointerOptionsFactory();
-	
+	// cache to store options in order do not lod every time the options
 	private static final Map<String, ChartPointerOptions> OPTIONS = new HashMap<>();
 
 	/**
@@ -62,8 +62,11 @@ public final class ChartPointer extends AbstractPlugin {
 	public void onAfterEvent(AbstractChart<?, ?> chart, ChartNativeEvent event) {
 		// checks if chart has got any dataset selection handler
 		if (chart.getOptions().hasDatasetSelectionHandlers()) {
+			// creates options instance
 			ChartPointerOptions pOptions = null;
+			// checks if is cached
 			if (!OPTIONS.containsKey(chart.getId())) {
+				// if not, loads and cache
 				try {
 					// creates the plugin options using the java script object
 					// passing also the default color set at constructor.
@@ -79,6 +82,7 @@ public final class ChartPointer extends AbstractPlugin {
 				}
 				OPTIONS.put(chart.getId(), pOptions);
 			} else {
+				// if here, options were already cached
 				pOptions = OPTIONS.get(chart.getId());
 			}
 			// if yes, asks the dataset item by event

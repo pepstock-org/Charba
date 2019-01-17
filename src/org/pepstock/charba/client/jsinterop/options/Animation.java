@@ -29,7 +29,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
  *
  */
 public class Animation extends AbstractModel<Options, IsDefaultAnimation> implements IsDefaultAnimation {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -40,7 +40,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 		duration,
 		easing
 	}
-	
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script
 	 * properties.
@@ -53,7 +53,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	Animation(Options options, Key childKey, IsDefaultAnimation defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 	}
-	
+
 	/**
 	 * Sets the animation easing.
 	 * 
@@ -93,7 +93,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	public int getDuration() {
 		return getValue(Property.duration, getDefaultValues().getDuration());
 	}
-	
+
 	/**
 	 * If true, the chart will animate in with a rotation animation.
 	 * 
@@ -133,5 +133,5 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	public boolean isAnimateScale() {
 		return getValue(Property.animateScale, getDefaultValues().isAnimateScale());
 	}
-	
+
 }

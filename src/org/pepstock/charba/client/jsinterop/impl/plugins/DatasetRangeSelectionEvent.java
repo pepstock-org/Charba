@@ -27,7 +27,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * @see org.pepstock.charba.client.jsinterop.impl.plugins.DatasetsItemsSelector
  */
 public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRangeSelectionEventHandler> {
-	
+
 	/**
 	 * Value of FROM and TO when the event is representing a reset of selection
 	 */
@@ -41,7 +41,7 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRange
 	private final int from;
 	// ending index of selected dataset
 	private final int to;
-	
+
 	/**
 	 * Creates the event when the reset of current selection has been requested.
 	 * 

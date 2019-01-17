@@ -40,6 +40,5 @@ public final class TickMajor extends AbstractTick<Ticks, IsDefaultFontItem> {
 	TickMajor(Ticks ticks, Key childKey, IsDefaultFontItem defaultValues, NativeObject nativeObject) {
 		super(ticks, childKey, defaultValues, nativeObject);
 	}
-	
 
 }

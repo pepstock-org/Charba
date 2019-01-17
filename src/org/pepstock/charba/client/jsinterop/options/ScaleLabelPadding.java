@@ -24,10 +24,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding;
  * It is applied to all sides of the scale label objetc of axes (left, top, right, bottom).
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0 
+ * @since 2.0
  *
  */
-public final class ScaleLabelPadding extends AbstractModel<ScaleLabel, IsDefaultPadding> implements IsDefaultPadding{
+public final class ScaleLabelPadding extends AbstractModel<ScaleLabel, IsDefaultPadding> implements IsDefaultPadding {
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script
@@ -41,7 +41,7 @@ public final class ScaleLabelPadding extends AbstractModel<ScaleLabel, IsDefault
 	ScaleLabelPadding(ScaleLabel scaleLabel, Key childKey, IsDefaultPadding defaultValues, NativeObject delegated) {
 		super(scaleLabel, childKey, defaultValues, delegated);
 	}
-	
+
 	/**
 	 * Sets the padding left in pixel.
 	 * 
@@ -91,7 +91,7 @@ public final class ScaleLabelPadding extends AbstractModel<ScaleLabel, IsDefault
 		setValue(Position.top, padding);
 		// checks if all parents are attached
 		checkAndAddToParent();
- 	}
+	}
 
 	/**
 	 * Returns the padding top in pixel.

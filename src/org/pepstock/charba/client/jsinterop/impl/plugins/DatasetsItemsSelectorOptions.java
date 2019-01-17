@@ -46,9 +46,9 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 
 	// defaults global options instance
 	private DatasetsItemsSelectorDefaultsOptions defaultsOptions;
-	// defaults global options  factory
+	// defaults global options factory
 	private final DatasetsItemsSelectorDefaultsOptionsFactory defaultsFactory = new DatasetsItemsSelectorDefaultsOptionsFactory();
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -67,7 +67,7 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	public DatasetsItemsSelectorOptions() {
 		super(null);
 		// this constructor is used by user to set options for plugin
-		// both default global or chart one. 
+		// both default global or chart one.
 		try {
 			// checks if the default global options has been added for the plugin
 			if (Defaults.get().getGlobal().getPlugins().hasOptions(DatasetsItemsSelector.ID)) {

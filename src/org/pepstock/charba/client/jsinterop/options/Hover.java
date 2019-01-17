@@ -28,8 +28,8 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover;
  * @since 2.0
  *
  */
-public final class Hover extends AbstractModel<Options, IsDefaultHover> implements IsDefaultHover{
-	
+public final class Hover extends AbstractModel<Options, IsDefaultHover> implements IsDefaultHover {
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -113,7 +113,7 @@ public final class Hover extends AbstractModel<Options, IsDefaultHover> implemen
 	public int getAnimationDuration() {
 		return getValue(Property.animationDuration, getDefaultValues().getAnimationDuration());
 	}
-	
+
 	/**
 	 * Sets to 'x', 'y', or 'xy' to define which directions are used in calculating distances.<br>
 	 * Defaults to 'x' for index mode and 'xy' in dataset and nearest modes.
@@ -134,5 +134,5 @@ public final class Hover extends AbstractModel<Options, IsDefaultHover> implemen
 	public InteractionAxis getAxis() {
 		return getValue(Property.axis, InteractionAxis.class, getDefaultValues().getAxis());
 	}
-	
+
 }

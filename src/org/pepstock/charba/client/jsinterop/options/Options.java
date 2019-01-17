@@ -258,7 +258,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	public boolean isMaintainAspectRatio() {
 		return getValue(Property.maintainAspectRatio, getDefaultValues().isMaintainAspectRatio());
 	}
-	
+
 	/**
 	 * Canvas aspect ratio (i.e. width / height, a value of 1 representing a square canvas).<br>
 	 * Note that this option is ignored if the height is explicitly defined either as attribute or via the style.
@@ -273,7 +273,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * Canvas aspect ratio (i.e. width / height, a value of 1 representing a square canvas).<br>
 	 * Note that this option is ignored if the height is explicitly defined either as attribute or via the style.
 	 * 
-	 * @return  the aspect ratio. 
+	 * @return the aspect ratio.
 	 */
 	public double getAspectRatio() {
 		return getValue(Property.aspectRatio, getDefaultValues().getAspectRatio());

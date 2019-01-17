@@ -22,19 +22,22 @@ package org.pepstock.charba.client.jsinterop.commons;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class StandardKey implements Key{
-	
+public class StandardKey implements Key {
+
 	private final String id;
 
 	/**
 	 * Builds the object with the key id as string
+	 * 
 	 * @param id id of key as String
 	 */
 	public StandardKey(String id) {
 		this.id = id;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.commons.Key#name()
 	 */
 	@Override

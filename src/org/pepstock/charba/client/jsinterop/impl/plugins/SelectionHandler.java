@@ -398,7 +398,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// then complete the selection
 		endSelection(Document.get().createChangeEvent());
 	}
-	
+
 	/**
 	 * Checks if the chart is changed.<br>
 	 * It checks:<br>

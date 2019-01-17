@@ -29,7 +29,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLayout;
 public final class Layout extends AbstractModel<Options, IsDefaultLayout> implements IsDefaultLayout {
 
 	private final Padding padding;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -37,7 +37,7 @@ public final class Layout extends AbstractModel<Options, IsDefaultLayout> implem
 	{
 		padding
 	}
-	
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script
 	 * properties.
@@ -59,5 +59,5 @@ public final class Layout extends AbstractModel<Options, IsDefaultLayout> implem
 	public Padding getPadding() {
 		return padding;
 	}
-	
+
 }

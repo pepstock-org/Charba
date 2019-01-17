@@ -27,16 +27,16 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultElements;
  * @since 2.0
  *
  */
-public final class Elements extends AbstractModel<Options, IsDefaultElements> implements IsDefaultElements{
+public final class Elements extends AbstractModel<Options, IsDefaultElements> implements IsDefaultElements {
 
 	private final Arc arc;
-	
+
 	private final Line line;
-	
+
 	private final Point point;
-	
+
 	private final Rectangle rectangle;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -79,7 +79,7 @@ public final class Elements extends AbstractModel<Options, IsDefaultElements> im
 	public Line getLine() {
 		return line;
 	}
-	
+
 	/**
 	 * @return the line
 	 */

@@ -75,7 +75,9 @@ public final class MeterChart extends BaseMeterChart<MeterOptions, MeterDataset>
 		return newDataset(DEFAULT_MAX);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.impl.charts.BaseMeterChart#newDataset(double)
 	 */
 	@Override

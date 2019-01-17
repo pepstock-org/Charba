@@ -35,7 +35,7 @@ public final class UndefinedValues {
 	public static final double DOUBLE = Double.NaN;
 	
 	/**
-	 * Default value for STRING instances. FIXME null probably is not right value to return
+	 * Default value for STRING instances.
 	 */
 	public static final String STRING = null;
 

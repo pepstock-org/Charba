@@ -25,8 +25,8 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> implements IsDefaultLegendLabels{
-	
+public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> implements IsDefaultLegendLabels {
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -36,7 +36,7 @@ public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> 
 		padding,
 		usePointStyle
 	}
-	
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script
 	 * properties.
@@ -53,7 +53,8 @@ public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> 
 	/**
 	 * Sets if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
 	 * 
-	 * @param usePointStyle if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
+	 * @param usePointStyle if label style will match corresponding point style (size is based on fontSize, boxWidth is not used
+	 *            in this case).
 	 */
 	public void setUsePointStyle(boolean usePointStyle) {
 		setValue(Property.usePointStyle, usePointStyle);
@@ -62,9 +63,11 @@ public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> 
 	}
 
 	/**
-	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
+	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this
+	 * case).
 	 * 
-	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
+	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this
+	 *         case).
 	 */
 	public boolean isUsePointStyle() {
 		return getValue(Property.usePointStyle, getDefaultValues().isUsePointStyle());

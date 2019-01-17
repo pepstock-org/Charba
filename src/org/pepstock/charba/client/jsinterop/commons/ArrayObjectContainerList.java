@@ -73,7 +73,9 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 		this(null, null);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.commons.AbstractArrayList#getArray()
 	 */
 	@Override

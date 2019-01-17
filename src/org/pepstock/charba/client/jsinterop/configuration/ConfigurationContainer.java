@@ -66,9 +66,9 @@ abstract class ConfigurationContainer<T extends NativeObjectContainer> extends C
 
 	/**
 	 * Merge a native object into this one with a specific property name.<br>
-	 * This is used by plugins implementation (antive java script ones) when tehy are not using the standard way to add puglin
+	 * This is used by plugins implementation (native java script ones) when they are not using the standard way to add plugin
 	 * configuration into options of chart.
-	 * FIXME needs anymore?
+	 * FIXME should be removed (see piecelabel import)
 	 * 
 	 * @param source native object container to add
 	 * @param property property name

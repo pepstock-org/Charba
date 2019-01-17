@@ -61,7 +61,7 @@ final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
 	 * Default border color for area
 	 */
 	private static final IsColor DEFAULT_BORDER_COLOR = GwtMaterialColor.GREY_DARKEN_2;
-	
+
 	/**
 	 * Builds the object using the java script object of options, set by user.<br>
 	 * 

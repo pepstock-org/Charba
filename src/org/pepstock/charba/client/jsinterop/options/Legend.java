@@ -27,10 +27,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend;
  * @since 2.0
  *
  */
-public final class Legend extends AbstractModel<Options, IsDefaultLegend> implements IsDefaultLegend{
-	
+public final class Legend extends AbstractModel<Options, IsDefaultLegend> implements IsDefaultLegend {
+
 	private LegendLabels labels;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -42,7 +42,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 		fullWidth,
 		reverse
 	}
-	
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script
 	 * properties.

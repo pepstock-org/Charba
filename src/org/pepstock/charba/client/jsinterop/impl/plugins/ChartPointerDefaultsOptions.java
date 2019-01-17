@@ -21,17 +21,18 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 import com.google.gwt.dom.client.Style.Cursor;
 
 /**
- * Configuration options of point plugin.
+ * Configuration options of pointer plugin. This is mapping the configuration set into default global, used as default of the
+ * chart one, if exist.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
 final class ChartPointerDefaultsOptions extends NativeObjectContainer {
-
+	// default cursor type when the cursor is over the dataset item
 	static final Cursor DEFAULT_CURSOR_POINTER = Cursor.POINTER;
-	
+	// default cursor type when the cursor is out of the dataset item
 	static final Cursor DEFAULT_CURSOR_DEFAULT = Cursor.DEFAULT;
-	
+
 	/**
 	 * Builds the object with a java script object stored into options.
 	 * 
@@ -40,11 +41,21 @@ final class ChartPointerDefaultsOptions extends NativeObjectContainer {
 	ChartPointerDefaultsOptions(NativeObject nativeObject) {
 		super(nativeObject);
 	}
-	
+
+	/**
+	 * Returns the cursor type as string when the cursor is over the dataset item.
+	 * 
+	 * @return cursor type as string
+	 */
 	String getCursorPointerAsString() {
 		return getValue(ChartPointerOptions.Property.cursorPointer, DEFAULT_CURSOR_POINTER.name());
 	}
 
+	/**
+	 * Returns the cursor type as string when the cursor is out of the dataset item.
+	 * 
+	 * @return cursor type as string
+	 */
 	String getCursorDefaultAsString() {
 		return getValue(ChartPointerOptions.Property.cursorDefault, DEFAULT_CURSOR_DEFAULT.name());
 	}

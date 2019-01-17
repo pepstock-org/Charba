@@ -88,7 +88,7 @@ public abstract class AbstractElement<D extends IsDefaultArc> extends AbstractMo
 	/**
 	 * Returns the background color.
 	 * 
-	 * @return the background color. 
+	 * @return the background color.
 	 */
 	public final IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
