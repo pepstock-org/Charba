@@ -19,14 +19,14 @@ import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.jsinterop.commons.Key;
-import org.pepstock.charba.client.jsinterop.enums.Event;
-import org.pepstock.charba.client.jsinterop.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.Id;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.jsinterop.enums.Event;
+import org.pepstock.charba.client.jsinterop.enums.FontStyle;
 
 /**
  * Base object which maps chart options.
@@ -202,7 +202,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return the browser events that the chart should listen to for tooltips and hovering.
 	 */
 	public List<Event> getEvents() {
-		return ArrayListHelper.list(Event.class, getArrayValue(Property.events));
+		ArrayString array = getArrayValue(Property.events);
+		return ArrayListHelper.list(Event.class, array);
 	}
 
 	/**
