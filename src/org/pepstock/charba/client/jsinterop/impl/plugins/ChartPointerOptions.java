@@ -25,16 +25,17 @@ import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
 import com.google.gwt.dom.client.Style.Cursor;
 
 /**
- * Configuration options of point plugin.
+ * Configuration options of pointer plugin.<br>
+ * It manages the cursor to adopt when the cursor is over the dataset item and when not.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
 public final class ChartPointerOptions extends NativeObjectContainer {
-	
+
 	// defaults global options instance
 	private ChartPointerDefaultsOptions defaultsOptions;
-	// defaults global options  factory
+	// defaults global options factory
 	private final ChartPointerDefaultsOptionsFactory defaultsFactory = new ChartPointerDefaultsOptionsFactory();
 
 	/**
@@ -50,6 +51,7 @@ public final class ChartPointerOptions extends NativeObjectContainer {
 	 * Builds the object with new java script object setting the default value of plugin.
 	 */
 	public ChartPointerOptions() {
+		// creates an empty object
 		super(null);
 		try {
 			// checks if the default global options has been added for the plugin
@@ -69,28 +71,53 @@ public final class ChartPointerOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Builds the object with a java script object stored into options.
+	 * Builds the object with a java script object stored into options and the default global ones
 	 * 
 	 * @param nativeObject native object into options
+	 * @param defaultsOptions default options stored into defaults global
 	 */
 	ChartPointerOptions(NativeObject nativeObject, ChartPointerDefaultsOptions defaultsOptions) {
 		super(nativeObject);
 		this.defaultsOptions = defaultsOptions;
 	}
-	
+
+	/**
+	 * Sets the cursor type when the cursor is over the dataset item.
+	 * 
+	 * @param cursor cursor type
+	 * @see com.google.gwt.dom.client.Style.Cursor
+	 */
 	public void setCursorPointer(Cursor cursor) {
 		setValue(Property.cursorPointer, cursor.name());
 	}
-	
+
+	/**
+	 * Returns the cursor type when the cursor is over the dataset item.
+	 * 
+	 * @return cursor type
+	 * @see com.google.gwt.dom.client.Style.Cursor
+	 */
 	public Cursor getCursorPointer() {
 		String name = getValue(Property.cursorPointer, defaultsOptions.getCursorPointerAsString());
 		return Cursor.valueOf(name);
 	}
 
+	/**
+	 * Sets the cursor type when the cursor is out of the dataset item.
+	 * 
+	 * @param cursor cursor type
+	 * @see com.google.gwt.dom.client.Style.Cursor
+	 */
 	public void setCursorDefault(Cursor cursor) {
 		setValue(Property.cursorDefault, cursor.name());
 	}
-	
+
+	/**
+	 * Returns the cursor type when the cursor is out of the dataset item.
+	 * 
+	 * @return cursor type
+	 * @see com.google.gwt.dom.client.Style.Cursor
+	 */
 	public Cursor getCursorDefault() {
 		String name = getValue(Property.cursorDefault, defaultsOptions.getCursorDefaultAsString());
 		return Cursor.valueOf(name);

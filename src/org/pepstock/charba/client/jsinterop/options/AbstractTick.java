@@ -23,13 +23,12 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
  * Configures the ticks of an axis.<br>
  * Common base class for ticks.
  * 
- * @author Andrea "Stock" Stocchero
- * version 2.0
+ * @author Andrea "Stock" Stocchero version 2.0
  * 
  * @param <P> parent node class
  * @param <D> defaults provider class
  */
-public abstract class AbstractTick<P extends AbstractModel<?,?>, D extends IsDefaultFontItem> extends FontItem<P, D> {
+public abstract class AbstractTick<P extends AbstractModel<?, ?>, D extends IsDefaultFontItem> extends FontItem<P, D> {
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script
@@ -42,6 +41,6 @@ public abstract class AbstractTick<P extends AbstractModel<?,?>, D extends IsDef
 	 */
 	AbstractTick(P ticks, Key childKey, D defaultValues, NativeObject nativeObject) {
 		super(ticks, childKey, defaultValues, nativeObject);
-	}	
+	}
 
 }

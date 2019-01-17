@@ -33,7 +33,7 @@ import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
  * @since 2.0
  *
  */
-public final class Title extends FontItem<Options, IsDefaultTitle> implements IsDefaultTitle{
+public final class Title extends FontItem<Options, IsDefaultTitle> implements IsDefaultTitle {
 
 	/**
 	 * Name of properties of native object.
@@ -48,7 +48,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 		lineHeight,
 		text
 	}
-	
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script
 	 * properties.
@@ -61,7 +61,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	Title(Options options, Key childKey, IsDefaultTitle defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 	}
-	
+
 	/**
 	 * Sets if the title is shown.
 	 * 
@@ -101,7 +101,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	public Position getPosition() {
 		return getValue(Property.position, Position.class, getDefaultValues().getPosition());
 	}
-	
+
 	/**
 	 * Sets the padding to apply around labels. Only top and bottom are implemented.
 	 * 
@@ -161,7 +161,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	public double getLineHeight() {
 		return getValue(Property.lineHeight, getDefaultValues().getLineHeight());
 	}
-	
+
 	/**
 	 * Sets the title text to display. If specified as an array, text is rendered on multiple lines.
 	 * 
@@ -175,7 +175,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 				// stores the array
 				setArrayValue(Property.text, ArrayString.of(text));
 			} else {
-				// in this case there is only 1 element and then 
+				// in this case there is only 1 element and then
 				// stores as string
 				setValue(Property.text, text[0]);
 			}
@@ -198,11 +198,11 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 		ObjectType type = type(Property.text);
 		// if it's an array
 		if (ObjectType.Array.equals(type)) {
-			// reads as array 
+			// reads as array
 			// and returns it
 			ArrayString array = getArrayValue(Property.text);
 			return ArrayListHelper.list(array);
-		} else if (has(Property.text)){
+		} else if (has(Property.text)) {
 			// if there is the property
 			// and we are here, loads it as string
 			return ArrayListHelper.list(ArrayString.of(getValue(Property.text, UndefinedValues.STRING)));

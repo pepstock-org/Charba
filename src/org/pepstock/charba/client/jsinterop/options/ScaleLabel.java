@@ -27,10 +27,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel;
  * @since 2.0
  *
  */
-public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> implements IsDefaultScaleLabel{
-	
+public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> implements IsDefaultScaleLabel {
+
 	private final ScaleLabelPadding padding;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -56,7 +56,7 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 		// gets sub element
 		padding = new ScaleLabelPadding(this, Property.padding, getDefaultValues().getPadding(), getValue(Property.padding));
 	}
-	
+
 	/**
 	 * @return the padding
 	 */
@@ -78,7 +78,7 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 	/**
 	 * If true, display the axis title.
 	 * 
-	 * @return f true, display the axis title. 
+	 * @return f true, display the axis title.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());

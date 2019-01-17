@@ -56,7 +56,9 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 		this(null);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.commons.AbstractArrayList#getArray()
 	 */
 	@Override

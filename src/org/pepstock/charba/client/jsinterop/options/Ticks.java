@@ -39,7 +39,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	private final TickMinor minor;
 
 	private final TickMajor major;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -87,7 +87,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 		minor = new TickMinor(this, Property.minor, getDefaultValues().getMinor(), getValue(Property.minor));
 		major = new TickMajor(this, Property.major, getDefaultValues().getMajor(), getValue(Property.major));
 	}
-	
+
 	/**
 	 * @return the minor
 	 */
@@ -161,7 +161,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	public boolean isReverse() {
 		return getValue(Property.reverse, getDefaultValues().isReverse());
 	}
-	
+
 	/**
 	 * If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all
 	 * labels no matter what
@@ -327,7 +327,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	public int getPadding() {
 		return getValue(Property.padding, getDefaultValues().getPadding());
 	}
-	
+
 	/**
 	 * Sets the user defined minimum number for the scale, overrides minimum value from data.
 	 * 
@@ -407,7 +407,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	public String getMaxAsString() {
 		return getValue(Property.max, String.valueOf(getDefaultValues().getMax()));
 	}
-	
+
 	/**
 	 * Sets the maximum number of ticks and gridlines to show.
 	 * 
@@ -585,7 +585,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	public boolean isShowLabelBackdrop() {
 		return getValue(Property.showLabelBackdrop, getDefaultValues().isShowLabelBackdrop());
 	}
-	
+
 	/**
 	 * Sets an array of labels to display.
 	 * 
@@ -596,7 +596,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets an array of labels to display.
 	 * 
@@ -615,7 +615,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 		ArrayString array = getArrayValue(Property.labels);
 		return ArrayListHelper.list(array);
 	}
-	
+
 	/**
 	 * Sets the property controls the ticks generation.
 	 * 
@@ -635,7 +635,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	public TickSource getSource() {
 		return getValue(Property.source, TickSource.class, getDefaultValues().getSource());
 	}
-	
+
 	/**
 	 * If defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 * 
@@ -650,7 +650,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	/**
 	 * If defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 * 
-	 * @return if defined and stepSize is not specified, the step size will be rounded to this many decimal places. 
+	 * @return if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 */
 	public int getPrecision() {
 		return getValue(Property.precision, getDefaultValues().getPrecision());

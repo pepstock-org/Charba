@@ -154,7 +154,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	public int getHoverBorderWidth() {
 		return getValue(Property.hoverBorderWidth, getDefaultValues().getHoverBorderWidth());
 	}
-	
+
 	/**
 	 * Sets the point rotation (in degrees).
 	 * 

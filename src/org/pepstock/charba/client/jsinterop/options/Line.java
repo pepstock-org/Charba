@@ -33,8 +33,8 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine;
  * @author Andrea "Stock" Stocchero
  * 
  */
-public final class Line extends AbstractElement<IsDefaultLine> implements IsDefaultLine{
-	
+public final class Line extends AbstractElement<IsDefaultLine> implements IsDefaultLine {
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -62,7 +62,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	Line(Elements elements, Key childKey, IsDefaultLine defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
 	}
-	
+
 	/**
 	 * Returns the Bezier curve tension (0 for no Bezier curves).
 	 * 
@@ -77,7 +77,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	/**
 	 * Returns the Bezier curve tension (0 for no Bezier curves).
 	 * 
-	 * @return the Bezier curve tension (0 for no Bezier curves). 
+	 * @return the Bezier curve tension (0 for no Bezier curves).
 	 */
 	public double getTension() {
 		return getValue(Property.tension, getDefaultValues().getTension());
@@ -170,7 +170,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
-	 * @return There are three possible values for this property: round, bevel and miter. 
+	 * @return There are three possible values for this property: round, bevel and miter.
 	 */
 	public JoinStyle getBorderJoinStyle() {
 		return getValue(Property.borderJoinStyle, JoinStyle.class, getDefaultValues().getBorderJoinStyle());
@@ -234,7 +234,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	public Fill getFill() {
 		// gets value type
 		ObjectType type = type(Property.fill);
-		//String value = getValue(Property.fill, getDefaultValues().getFill());
+		// String value = getValue(Property.fill, getDefaultValues().getFill());
 		// if is a boolean FALSE value
 		if (ObjectType.Boolean.equals(type)) {
 			// returns no fill
@@ -243,7 +243,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 		// returns the fill value
 		return getValue(Property.fill, Fill.class, getDefaultValues().getFill());
 	}
-	
+
 	/**
 	 * Sets <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 * 

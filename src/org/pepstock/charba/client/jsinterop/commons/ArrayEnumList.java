@@ -68,7 +68,9 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, Arr
 		this(clazz.getEnumConstants(), null);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.commons.AbstractArrayList#getArray()
 	 */
 	@Override

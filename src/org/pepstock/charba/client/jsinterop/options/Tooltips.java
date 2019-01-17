@@ -32,10 +32,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
  * @since 2.0
  *
  */
-public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> implements IsDefaultTooltips{
-	
+public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> implements IsDefaultTooltips {
+
 	private final TooltipsCallbacks callbacks;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -77,7 +77,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 		borderColor,
 		borderWidth,
 	}
-	
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script
 	 * properties.
@@ -148,7 +148,8 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 *            mode will be applied at all times.
 	 */
 	public void setIntersect(boolean intersect) {
-		setValue(Property.intersect, intersect);;
+		setValue(Property.intersect, intersect);
+		;
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -635,7 +636,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	public IsColor getFooterFontColor() {
 		return ColorBuilder.parse(getFooterFontColorAsString());
 	}
-	
+
 	/**
 	 * Sets the spacing to add to top and bottom of each footer line.
 	 * 

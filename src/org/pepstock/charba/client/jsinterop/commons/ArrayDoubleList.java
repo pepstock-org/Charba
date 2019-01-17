@@ -49,7 +49,9 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.commons.AbstractArrayList#getArray()
 	 */
 	@Override

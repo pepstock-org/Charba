@@ -56,7 +56,9 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 		this(null);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.commons.AbstractArrayList#getArray()
 	 */
 	@Override

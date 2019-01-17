@@ -81,8 +81,10 @@ public class MeterOptions extends AbstractPieOptions {
 		// sets the 90% of cutout
 		super.setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.configuration.AbstractPieOptions#setCutoutPercentage(double)
 	 */
 	@Override
@@ -91,7 +93,9 @@ public class MeterOptions extends AbstractPieOptions {
 		super.setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions#getHover()
 	 */
 	@Override

@@ -26,7 +26,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc;
  * @since 2.0
  * 
  */
-public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc{
+public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script

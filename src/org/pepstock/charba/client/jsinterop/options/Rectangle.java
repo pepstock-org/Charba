@@ -26,8 +26,8 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultRectangle;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-public class Rectangle extends AbstractElement<IsDefaultRectangle> implements IsDefaultRectangle{
-	
+public class Rectangle extends AbstractElement<IsDefaultRectangle> implements IsDefaultRectangle {
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -53,7 +53,7 @@ public class Rectangle extends AbstractElement<IsDefaultRectangle> implements Is
 	 * Sets the edge to skip drawing the border for.
 	 * 
 	 * @param borderSkipped the edge to skip drawing the border for.
-	 * @see  org.pepstock.charba.client.jsinterop.enums.Position
+	 * @see org.pepstock.charba.client.jsinterop.enums.Position
 	 */
 	public void setBorderSkipped(Position borderSkipped) {
 		setValue(Property.borderSkipped, borderSkipped);
@@ -64,8 +64,9 @@ public class Rectangle extends AbstractElement<IsDefaultRectangle> implements Is
 	/**
 	 * Returns the edge to skip drawing the border for.
 	 * 
-	 * @return the edge to skip drawing the border for. Default is {@link  org.pepstock.charba.client.jsinterop.enums.Position#bottom}.
-	 * @see  org.pepstock.charba.client.jsinterop.enums.Position
+	 * @return the edge to skip drawing the border for. Default is
+	 *         {@link org.pepstock.charba.client.jsinterop.enums.Position#bottom}.
+	 * @see org.pepstock.charba.client.jsinterop.enums.Position
 	 */
 	public Position getBorderSkipped() {
 		return getValue(Property.borderSkipped, Position.class, getDefaultValues().getBorderSkipped());

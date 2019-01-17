@@ -51,14 +51,13 @@ public final class ChartNode {
 
 	/**
 	 * Creates the object wrapping a CHART instance.
-	 *FIXME
+	 *
 	 * @param chart CHART.JS CHART instance
 	 */
 	public ChartNode(Chart chart) {
 		this.chart = chart;
 		// sets if is initialized checking the CHART instance
 		initialized = chart != null;
-
 		// creates all sub elements
 		options = new OptionsNode(initialized ? chart.getOptions() : null);
 		legend = new LegendNode(initialized ? chart.getLegend() : null);
@@ -69,7 +68,9 @@ public final class ChartNode {
 	}
 
 	/**
-	 * @return the initialized
+	 * Returns if CHART.JS chart instance has been initialized.
+	 * 
+	 * @return <code>true</code> if initialized, otherwise <code>false</code>
 	 */
 	public boolean isInitialized() {
 		return initialized;

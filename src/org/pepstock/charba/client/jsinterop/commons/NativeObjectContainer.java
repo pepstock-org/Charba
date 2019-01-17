@@ -482,7 +482,7 @@ public abstract class NativeObjectContainer {
 			nativeObject.defineArrayProperty(key.name(), container.getArray());
 		}
 	}
-	
+
 	/**
 	 * Returns a value (array) into embedded JavaScript object at specific property.
 	 * 

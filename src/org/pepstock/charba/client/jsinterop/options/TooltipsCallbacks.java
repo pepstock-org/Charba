@@ -21,8 +21,8 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
 
 /**
  * Contains all callbacks defined for a tooltips.<br>
- * Is empty because this is only the container of all properties related to callbacks which
- * must be defined into chart configuration.  
+ * Is empty because this is only the container of all properties related to callbacks which must be defined into chart
+ * configuration.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0

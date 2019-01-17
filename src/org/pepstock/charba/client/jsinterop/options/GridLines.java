@@ -59,7 +59,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 		zeroLineBorderDashOffset,
 		offsetGridLines
 	}
-	
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script
 	 * properties.
@@ -92,7 +92,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());
 	}
-	
+
 	/**
 	 * If true, gridlines are circular (on radar chart only).
 	 * 
@@ -155,12 +155,12 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
-	
+
 	/**
 	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
 	 * second grid line and so on.
 	 * 
-	 * @return the list of colors of the grid lines. 
+	 * @return the list of colors of the grid lines.
 	 */
 	public String getColorAsString() {
 		// checks if the stored value is a string
@@ -189,7 +189,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 			result.add(getValue(Property.color, getDefaultValues().getColorAsString()));
 		} else if (ObjectType.Array.equals(type(Property.color))) {
 			// if array
-			// loads the array 
+			// loads the array
 			ArrayString array = getArrayValue(Property.color);
 			result = ArrayListHelper.list(array);
 		}
@@ -200,7 +200,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
 	 * second grid line and so on.
 	 * 
-	 * @return the list of colors of the grid lines. 
+	 * @return the list of colors of the grid lines.
 	 */
 	public List<IsColor> getColor() {
 		return ColorBuilder.parse(getColorsAsString());
@@ -267,7 +267,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	public void setLineWidth(int... lineWidth) {
 		setLineWidth(ArrayInteger.of(lineWidth));
 	}
-	
+
 	/**
 	 * Sets the stroke widths of grid lines.
 	 * 
@@ -285,12 +285,12 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 		}
 		// checks if all parents are attached
 		checkAndAddToParent();
-	}	
-	
+	}
+
 	/**
 	 * Returns the stroke widths of grid lines.
 	 * 
-	 * @return lineWidth stroke widths of grid lines. 
+	 * @return lineWidth stroke widths of grid lines.
 	 */
 	public int getLineWidth() {
 		// checks if the stored value is a number
@@ -302,7 +302,6 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 			return getDefaultValues().getLineWidth();
 		}
 	}
-
 
 	/**
 	 * Returns the stroke widths of grid lines.
@@ -319,7 +318,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 			result.add(getValue(Property.lineWidth, getDefaultValues().getLineWidth()));
 		} else if (ObjectType.Array.equals(type(Property.lineWidth))) {
 			// if array
-			// loads the array 
+			// loads the array
 			ArrayInteger array = getArrayValue(Property.lineWidth);
 			result = ArrayListHelper.list(array);
 		}
@@ -537,5 +536,5 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	public boolean isOffsetGridLines() {
 		return getValue(Property.offsetGridLines, getDefaultValues().isOffsetGridLines());
 	}
-	
+
 }

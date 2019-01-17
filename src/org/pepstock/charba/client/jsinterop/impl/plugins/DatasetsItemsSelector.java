@@ -25,6 +25,7 @@ import org.pepstock.charba.client.jsinterop.items.DatasetItem;
 import org.pepstock.charba.client.jsinterop.items.DatasetMetaItem;
 import org.pepstock.charba.client.jsinterop.plugins.AbstractPlugin;
 import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
+import org.pepstock.charba.client.jsinterop.utils.Window;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ImageElement;
@@ -47,7 +48,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * Plugin ID
 	 */
 	public static final String ID = "datasetsitemsselector";
-	// maps to maintain the selectors handler for every chart 
+	// maps to maintain the selectors handler for every chart
 	private static final Map<String, SelectionHandler> HANDLERS = new HashMap<>();
 	// factory to read options
 	private final DatasetsItemsSelectorOptionsFactory factory = new DatasetsItemsSelectorOptionsFactory();
@@ -60,6 +61,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	public void reset(AbstractChart<?, ?> chart) {
 		reset(chart, false);
 	}
+
 	/**
 	 * Reset the selection on the chart and set if an event should fire on reset action.
 	 * 
@@ -213,7 +215,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 						}
 					}
 				}
-				
+
 				// checks if chart is changed
 				if (handler.isChartChanged()) {
 					// gets the image from canvas
@@ -222,6 +224,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 					Image img = new Image(chart.getCanvas().toDataUrl());
 					handler.setSnapshot(ImageElement.as(img.getElement()));
 				}
+				Window.getConsole().log("seleect "+handler.getStatus());
 				// if the selections is already present
 				// it refreshes all the calculation of existing selection
 				if (handler.getStatus().equals(SelectionStatus.selected) && itemsCount > 0) {

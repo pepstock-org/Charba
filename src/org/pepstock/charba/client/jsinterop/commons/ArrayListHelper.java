@@ -206,7 +206,8 @@ public final class ArrayListHelper {
 	}
 
 	/**
-	 * Creates an unmodifiable array list of enumeration values (instance of {@link org.pepstock.charba.client.jsinterop.commons.Key}).
+	 * Creates an unmodifiable array list of enumeration values (instance of
+	 * {@link org.pepstock.charba.client.jsinterop.commons.Key}).
 	 * 
 	 * @param clazz enumeration class with all possible values of enumeration
 	 * @param values array of elements to load when the list is creating.

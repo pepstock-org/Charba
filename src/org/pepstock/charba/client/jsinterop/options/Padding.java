@@ -27,7 +27,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding;
  * @since 2.0
  *
  */
-public final class Padding extends AbstractModel<Layout, IsDefaultPadding> implements IsDefaultPadding{
+public final class Padding extends AbstractModel<Layout, IsDefaultPadding> implements IsDefaultPadding {
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script
@@ -41,7 +41,7 @@ public final class Padding extends AbstractModel<Layout, IsDefaultPadding> imple
 	Padding(Layout layout, Key childKey, IsDefaultPadding defaultValues, NativeObject nativeObject) {
 		super(layout, childKey, defaultValues, nativeObject);
 	}
-	
+
 	/**
 	 * Sets the padding left in pixel.
 	 * 
@@ -91,7 +91,7 @@ public final class Padding extends AbstractModel<Layout, IsDefaultPadding> imple
 		setValue(Position.top, padding);
 		// checks if all parents are attached
 		checkAndAddToParent();
- 	}
+	}
 
 	/**
 	 * Returns the padding top in pixel.

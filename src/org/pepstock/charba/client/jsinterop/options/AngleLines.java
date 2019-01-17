@@ -30,7 +30,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines;
  *
  */
 public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> implements IsDefaultAngleLines {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -82,7 +82,7 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	public void setColor(IsColor color) {
 		setColor(color.toRGBA());
 	}
-	
+
 	/**
 	 * Sets the color of angled lines.
 	 * 
@@ -111,7 +111,7 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	public IsColor getColor() {
 		return ColorBuilder.parse(getColorAsString());
 	}
-	
+
 	/**
 	 * Sets the width of angled lines.
 	 * 
