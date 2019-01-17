@@ -72,6 +72,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	private String previousChartAreaAsString = null;
 	// previous datasets
 	private List<String> previousDatasetsAsString = null;
+	// flag if do not send any event after refresh
+	private boolean skipNextFireEvent = false;
 
 	/**
 	 * Creates the selection handler with chart instance and the options (if exist) into chart options.
@@ -160,6 +162,13 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 */
 	private void setStatus(SelectionStatus status) {
 		this.status = status;
+	}
+
+	/**
+	 * @param skipNextFireEvent the skipNextFireEvent to set
+	 */
+	void setSkipNextFireEvent(boolean skipNextFireEvent) {
+		this.skipNextFireEvent = skipNextFireEvent;
 	}
 
 	/**
@@ -333,7 +342,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			chart.getCanvas().getContext2d().strokeRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
 		}
 	}
-
+	
 	/**
 	 * Complete an existing selection on canvas by an event.<br>
 	 * Can be invokes by mouse up or refresh of chart (like resizing).
@@ -341,21 +350,35 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 * @param event event which will complete the selection
 	 */
 	void endSelection(NativeEvent event) {
+		endSelection(event, false);
+	}
+
+	/**
+	 * Complete an existing selection on canvas by an event.<br>
+	 * Can be invokes by mouse up or refresh of chart (like resizing).
+	 * 
+	 * @param event event which will complete the selection
+	 * @param skipNextFireEvent if <code>true</code>, does not send any event
+	 */
+	void endSelection(NativeEvent event, boolean skipNextFireEvent) {
 		// sets status
 		setStatus(SelectionStatus.selected);
-		// gets chart node
-		ChartNode node = chart.getNode();
-		// gets the scale element of chart
-		// using the X axis id of plugin options
-		ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID());
-		// checks the type of chart and scale
-		// LINE and axis TIME must be added by 1 end of datasets
-		if (chart.getType().equals(ChartType.line) || AxisType.time.equals(scaleItem.getType())) {
-			// fires the event that dataset items selection
-			chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd() + 1));
-		} else if (chart.getType().equals(ChartType.bar)) {
-			// fires the event that dataset items selection
-			chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd()));
+		// checks if it must send event
+		if (!skipNextFireEvent) {
+			// gets chart node
+			ChartNode node = chart.getNode();
+			// gets the scale element of chart
+			// using the X axis id of plugin options
+			ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID());
+			// checks the type of chart and scale
+			// LINE and axis TIME must be added by 1 end of datasets
+			if (chart.getType().equals(ChartType.line) || AxisType.time.equals(scaleItem.getType())) {
+				// fires the event that dataset items selection
+				chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd() + 1));
+			} else if (chart.getType().equals(ChartType.bar)) {
+				// fires the event that dataset items selection
+				chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd()));
+			}
 		}
 	}
 
@@ -396,7 +419,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		}
 		// when here, the area has been draw
 		// then complete the selection
-		endSelection(Document.get().createChangeEvent());
+		endSelection(Document.get().createChangeEvent(), skipNextFireEvent);
+		skipNextFireEvent = false;
 	}
 
 	/**

@@ -25,7 +25,6 @@ import org.pepstock.charba.client.jsinterop.items.DatasetItem;
 import org.pepstock.charba.client.jsinterop.items.DatasetMetaItem;
 import org.pepstock.charba.client.jsinterop.plugins.AbstractPlugin;
 import org.pepstock.charba.client.jsinterop.plugins.InvalidPluginIdException;
-import org.pepstock.charba.client.jsinterop.utils.Window;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ImageElement;
@@ -91,6 +90,24 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		if (mustBeUpodated) {
 			// refresh the chart
 			chart.update();
+		}
+	}
+	
+	/**
+	 * Sets a flag to skip to send event after refresh. This is helpful for drill down implementation.
+	 * 
+	 * @param chart chart instance to apply the fire events skipping.
+	 */
+	public void skipNextRefreshFireEvent(AbstractChart<?, ?> chart) {
+		// checks if the plugin has been invoked for LINE or BAR charts
+		if (chart.getType().equals(ChartType.line) || chart.getType().equals(ChartType.bar)) {
+			// checks if we have already an handler
+			if (HANDLERS.containsKey(chart.getId())) {
+				// gets selection handler
+				SelectionHandler handler = HANDLERS.get(chart.getId());
+				// sets the flag to skip next event after refresh
+				handler.setSkipNextFireEvent(true);
+			}
 		}
 	}
 
@@ -224,7 +241,6 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 					Image img = new Image(chart.getCanvas().toDataUrl());
 					handler.setSnapshot(ImageElement.as(img.getElement()));
 				}
-				Window.getConsole().log("seleect "+handler.getStatus());
 				// if the selections is already present
 				// it refreshes all the calculation of existing selection
 				if (handler.getStatus().equals(SelectionStatus.selected) && itemsCount > 0) {
