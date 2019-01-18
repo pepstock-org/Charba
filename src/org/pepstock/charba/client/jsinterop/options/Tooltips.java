@@ -18,12 +18,12 @@ package org.pepstock.charba.client.jsinterop.options;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.jsinterop.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.enums.InteractionMode;
 import org.pepstock.charba.client.jsinterop.enums.TextAlign;
 import org.pepstock.charba.client.jsinterop.enums.TooltipPosition;
-import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
 
 /**
  * Configuration element to set all attributes and features of the default tooltip.
@@ -39,7 +39,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		callbacks,
 		enabled,

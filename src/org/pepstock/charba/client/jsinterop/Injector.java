@@ -45,8 +45,6 @@ public final class Injector {
 	public static void ensureInjected() {
 		// use default chart.js
 		ensureInjected(Resources.INSTANCE.chartJsSource());
-		// use JSON cycle 
-		ensureInjected(Resources.INSTANCE.jsonCycle());
 		// use CHARBA helper
 		ensureInjected(Resources.INSTANCE.charbaHelper());
 	}

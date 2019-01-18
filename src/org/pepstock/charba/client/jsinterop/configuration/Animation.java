@@ -236,7 +236,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	 * org.pepstock.charba.client.jsinterop.configuration.EventProvider#addHandler(com.google.gwt.event.shared.GwtEvent.Type)
 	 */
 	@Override
-	protected <H extends EventHandler> void addHandler(Type<H> type) {
+	protected final <H extends EventHandler> void addHandler(Type<H> type) {
 		// checks which kind of handler has been added
 		if (type.equals(AnimationCompleteEvent.TYPE)) {
 			// checks if property exist
@@ -264,7 +264,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	 * org.pepstock.charba.client.jsinterop.configuration.EventProvider#removeHandler(com.google.gwt.event.shared.GwtEvent.Type)
 	 */
 	@Override
-	protected <H extends EventHandler> void removeHandler(Type<H> type) {
+	protected final <H extends EventHandler> void removeHandler(Type<H> type) {
 		// checks which kind of handler has been removed
 		if (type.equals(AnimationCompleteEvent.TYPE)) {
 			// decrements amount of handlers

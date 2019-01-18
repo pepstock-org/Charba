@@ -27,16 +27,16 @@ package org.pepstock.charba.client.jsinterop.controllers;
  * @since 2.0
  *
  */
-public class InvalidControllerTypeException extends Exception {
+public final class InvalidControllerTypeException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Builds the exception using the message explaining why the type is not valid.
 	 * 
-	 * @param message explaination why the type is not valid.
+	 * @param message explanation why the type is not valid.
 	 */
-	public InvalidControllerTypeException(String message) {
+	InvalidControllerTypeException(String message) {
 		super(message);
 	}
 }

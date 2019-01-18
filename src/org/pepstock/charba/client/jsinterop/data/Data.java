@@ -18,12 +18,12 @@ package org.pepstock.charba.client.jsinterop.data;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.Configuration;
 import org.pepstock.charba.client.jsinterop.ConfigurationElement;
 import org.pepstock.charba.client.jsinterop.commons.ArrayMixedObject;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.jsinterop.commons.ConfigurationLoader;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
@@ -51,7 +51,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	}
 
 	/**
-	 * Creates the objetc with an empty native object
+	 * Creates the object with an empty native object
 	 */
 	public Data() {
 		super(new NativeObject());

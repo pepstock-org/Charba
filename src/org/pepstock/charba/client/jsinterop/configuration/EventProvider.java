@@ -15,12 +15,12 @@
 */
 package org.pepstock.charba.client.jsinterop.configuration;
 
+import org.pepstock.charba.client.jsinterop.AbstractChart;
+import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 import org.pepstock.charba.client.jsinterop.events.AddHandlerEvent;
 import org.pepstock.charba.client.jsinterop.events.AddHandlerEventHandler;
 import org.pepstock.charba.client.jsinterop.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.jsinterop.events.RemoveHandlerEventHandler;
-import org.pepstock.charba.client.jsinterop.AbstractChart;
-import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
@@ -78,7 +78,7 @@ public abstract class EventProvider<T extends NativeObjectContainer> extends Con
 	protected abstract <H extends EventHandler> void addHandler(Type<H> type);
 
 	/**
-	 * Notifies the event provider when a new handler has been deregistered
+	 * Notifies the event provider when a new handler has been unregistered
 	 * 
 	 * @param type type of event handler
 	 * @param <H> type of event handler

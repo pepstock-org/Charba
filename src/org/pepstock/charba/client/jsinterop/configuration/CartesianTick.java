@@ -78,11 +78,11 @@ abstract class CartesianTick extends Tick {
 	}
 
 	/**
-	 * Sets the distance in pixels to offset the label from the centre point of the tick (in the y direction for the x axis, and
+	 * Sets the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis, and
 	 * the x direction for the y axis).<br>
 	 * Note: this can cause labels at the edges to be cropped by the edge of the canvas.
 	 * 
-	 * @param labelOffset the distance in pixels to offset the label from the centre point of the tick (in the y direction for
+	 * @param labelOffset the distance in pixels to offset the label from the center point of the tick (in the y direction for
 	 *            the x axis, and the x direction for the y axis)
 	 */
 	public void setLabelOffset(int labelOffset) {
@@ -90,11 +90,11 @@ abstract class CartesianTick extends Tick {
 	}
 
 	/**
-	 * Returns the distance in pixels to offset the label from the centre point of the tick (in the y direction for the x axis,
+	 * Returns the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis,
 	 * and the x direction for the y axis).<br>
 	 * Note: this can cause labels at the edges to be cropped by the edge of the canvas.
 	 * 
-	 * @return the distance in pixels to offset the label from the centre point of the tick (in the y direction for the x axis,
+	 * @return the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis,
 	 *         and the x direction for the y axis).
 	 */
 	public int getLabelOffset() {

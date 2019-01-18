@@ -27,21 +27,22 @@ import com.google.gwt.safehtml.shared.UriUtils;
  *
  */
 final class ControllerTypeChecker {
-
+	// exception text when controller type is null
 	private static final String INVALID_CONTROLLER_TYPE_NULL = "Controller type can not be null ";
-
-	private static final String INVALID_CONTROLLER_TYPE_FIRST_CHAR = "Controller type can not start with a dot or an underscore ";
-
-	private static final String INVALID_CONTROLLER_TYPE_URL_SAFE = "Controller type can not contain any non-URL-safe characters ";
-
+	// exception text when controller type starts with dot or underscore
+	private static final String INVALID_CONTROLLER_TYPE_INVALID_FIRST_CHAR = "Controller type can not start with a dot or an underscore ";
+	// exception text when controller type is not URL safe
+	private static final String INVALID_CONTROLLER_TYPE_NOT_URL_SAFE = "Controller type can not contain any non-URL-safe characters ";
+	// DOT constant
 	private static final char DOT = '.';
-
+	// underscore constant
 	private static final char UNDERSCORE = '_';
 
 	/**
 	 * To avoid any instantiation
 	 */
 	private ControllerTypeChecker() {
+		// do nothing
 	}
 
 	/**
@@ -64,10 +65,10 @@ final class ControllerTypeChecker {
 			throw new InvalidControllerTypeException(INVALID_CONTROLLER_TYPE_NULL);
 		} else if (type.name().charAt(0) == DOT || type.name().charAt(0) == UNDERSCORE) {
 			// checks if is starting with DOT or underscore
-			throw new InvalidControllerTypeException(buildMessage(type.name(), INVALID_CONTROLLER_TYPE_FIRST_CHAR));
+			throw new InvalidControllerTypeException(buildMessage(type.name(), INVALID_CONTROLLER_TYPE_INVALID_FIRST_CHAR));
 		} else if (!UriUtils.isSafeUri(type.name())) {
 			// checks if is not safe URL
-			throw new InvalidControllerTypeException(buildMessage(type.name(), INVALID_CONTROLLER_TYPE_URL_SAFE));
+			throw new InvalidControllerTypeException(buildMessage(type.name(), INVALID_CONTROLLER_TYPE_NOT_URL_SAFE));
 		}
 	}
 

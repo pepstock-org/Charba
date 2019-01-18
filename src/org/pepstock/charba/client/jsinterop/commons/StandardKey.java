@@ -22,7 +22,7 @@ package org.pepstock.charba.client.jsinterop.commons;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class StandardKey implements Key {
+public final class StandardKey implements Key {
 
 	private final String id;
 

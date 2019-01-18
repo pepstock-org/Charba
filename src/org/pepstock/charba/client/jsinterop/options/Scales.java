@@ -57,7 +57,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		display,
 		xAxes,

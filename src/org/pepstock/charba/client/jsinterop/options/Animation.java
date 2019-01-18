@@ -16,9 +16,9 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.jsinterop.commons.Key;
-import org.pepstock.charba.client.jsinterop.enums.Easing;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
+import org.pepstock.charba.client.jsinterop.enums.Easing;
 
 /**
  * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it
@@ -33,7 +33,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	private enum Property implements Key
 	{
 		animateRotate,
 		animateScale,

@@ -32,7 +32,7 @@ public class SizeItem extends NativeObjectContainer {
 	/**
 	 * Name of properties of native object.
 	 */
-	protected enum Property implements Key
+	enum Property implements Key
 	{
 		width,
 		height

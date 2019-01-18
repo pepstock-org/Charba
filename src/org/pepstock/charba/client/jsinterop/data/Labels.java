@@ -69,7 +69,7 @@ public final class Labels {
 	 * 
 	 * @param values array of labels
 	 */
-	public final void load(String... values) {
+	public void load(String... values) {
 		// checks if is a valid array
 		if (values != null && values.length > 0) {
 			// scans values
@@ -85,7 +85,7 @@ public final class Labels {
 	 * 
 	 * @param value a single label
 	 */
-	public final void add(String value) {
+	public void add(String value) {
 		// if consistent
 		if (value != null) {
 			// pushes to JS array
@@ -98,7 +98,7 @@ public final class Labels {
 	 * 
 	 * @param values array of string which represents a multi line label
 	 */
-	public final void add(String... values) {
+	public void add(String... values) {
 		// checks if is a valid array
 		if (values != null && values.length > 0) {
 			// creates new JS array
@@ -112,7 +112,7 @@ public final class Labels {
 	 * @param index index of label
 	 * @return an array of strings
 	 */
-	public final String[] getStrings(int index) {
+	public String[] getStrings(int index) {
 		// checks range
 		if (checkRange(index)) {
 			// gets multi line array
@@ -148,7 +148,7 @@ public final class Labels {
 	 * @param index index of label
 	 * @return the type of label or null if out of range
 	 */
-	public final ObjectType getType(int index) {
+	public ObjectType getType(int index) {
 		// checks range
 		if (checkRange(index)) {
 			// gets type of label
@@ -163,7 +163,7 @@ public final class Labels {
 	 * @param index index to be checked
 	 * @return <code>true</code> if the index is in the right range otherwise false
 	 */
-	private final boolean checkRange(int index) {
+	private boolean checkRange(int index) {
 		return index >= 0 && index < array.length();
 	}
 

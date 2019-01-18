@@ -20,7 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.colors.IsColor;
 
 /**
- * The grid line configuration defines options for the grid lines that run perpendicular to the getAxis().
+ * The grid line configuration defines options for the grid lines that run perpendicular to the axis.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0

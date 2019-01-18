@@ -16,8 +16,6 @@
 package org.pepstock.charba.client.jsinterop.configuration;
 
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.jsinterop.commons.Key;
-import org.pepstock.charba.client.jsinterop.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.AbstractChart;
 import org.pepstock.charba.client.jsinterop.Chart;
 import org.pepstock.charba.client.jsinterop.callbacks.LegendFilterCallback;
@@ -25,7 +23,9 @@ import org.pepstock.charba.client.jsinterop.callbacks.LegendLabelsCallback;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.JsHelper;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.items.LegendItem;
 import org.pepstock.charba.client.jsinterop.items.LegendLabelItem;
 import org.pepstock.charba.client.jsinterop.options.ExtendedOptions;
@@ -156,7 +156,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 				if (labelsCallback != null) {
 					// calls callback
 					LegendLabelItem[] result = labelsCallback.generateLegendLabels(getChart());
-					// tranforms into a native array
+					// transforms into a native array
 					return ArrayObject.of(result);
 				}
 				// empty array
@@ -279,18 +279,18 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	}
 
 	/**
-	 * Sets the width of coloured box.
+	 * Sets the width of colored box.
 	 * 
-	 * @param boxWidth width of coloured box.
+	 * @param boxWidth width of colored box.
 	 */
 	public void setBoxWidth(int boxWidth) {
 		getConfiguration().getLegend().getLabels().setBoxWidth(boxWidth);
 	}
 
 	/**
-	 * Returns the width of coloured box.
+	 * Returns the width of colored box.
 	 * 
-	 * @return width of coloured box.
+	 * @return width of colored box.
 	 */
 	public int getBoxWidth() {
 		return getConfiguration().getLegend().getLabels().getBoxWidth();

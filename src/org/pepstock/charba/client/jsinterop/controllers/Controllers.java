@@ -31,8 +31,8 @@ import org.pepstock.charba.client.jsinterop.Injector;
  */
 public final class Controllers {
 
+	// singleton instance
 	private static final Controllers INSTANCE = new Controllers();
-
 	// list of global controllers set by user (not OOTB)
 	// K = controller type name as string, V = controller instance
 	private final Map<String, Controller> controllers = new HashMap<>();

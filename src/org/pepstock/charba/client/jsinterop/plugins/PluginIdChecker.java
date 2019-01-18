@@ -30,23 +30,24 @@ import com.google.gwt.safehtml.shared.UriUtils;
  */
 public final class PluginIdChecker {
 
-	// static messages to apply to the exception when the plugin ID is not correct.
+	// exception text when plugin id is null
 	private static final String INVALID_PLUGIN__ID_NULL = "Plugin id can not be null ";
-
-	private static final String INVALID_PLUGIN__ID_FIRST_CHAR = "Plugin id can not start with a dot or an underscore ";
-
-	private static final String INVALID_PLUGIN__ID_URL_SAFE = "Plugin id can not contain any non-URL-safe characters ";
-
-	private static final String INVALID_PLUGIN__ID_UPPERCASE = "Plugin id can not contain uppercase letters ";
-
+	// exception text when plugin starts with dot or underscore
+	private static final String INVALID_PLUGIN__ID_INVALID_FIRST_CHAR = "Plugin id can not start with a dot or an underscore ";
+	// exception text when plugin id is not URL safe
+	private static final String INVALID_PLUGIN__ID_NOT_URL_SAFE = "Plugin id can not contain any non-URL-safe characters ";
+	// exception text when plugin id is not lower case
+	private static final String INVALID_PLUGIN__ID_NOT_LOWERCASE_UPPERCASE = "Plugin id can not contain uppercase letters ";
+	// DOT constant
 	private static final char DOT = '.';
-
+	// underscore constant
 	private static final char UNDERSCORE = '_';
 
 	/**
 	 * To avoid any instantiation
 	 */
 	private PluginIdChecker() {
+		// do nothing
 	}
 
 	/**
@@ -55,7 +56,7 @@ public final class PluginIdChecker {
 	 * <ul>
 	 * <li>can not start with a dot or an underscore
 	 * <li>can not contain any non-URL-safe characters
-	 * <li>cannot contain uppercase letters
+	 * <li>cannot contain upper case letters
 	 * <li>should be something short, but also reasonably descriptive
 	 * </ul>
 	 * 
@@ -68,13 +69,13 @@ public final class PluginIdChecker {
 			throw new InvalidPluginIdException(INVALID_PLUGIN__ID_NULL);
 		} else if (id.charAt(0) == DOT || id.charAt(0) == UNDERSCORE) {
 			// checks if is starting with DOT or underscore
-			throw new InvalidPluginIdException(buildMessage(id, INVALID_PLUGIN__ID_FIRST_CHAR));
+			throw new InvalidPluginIdException(buildMessage(id, INVALID_PLUGIN__ID_INVALID_FIRST_CHAR));
 		} else if (!UriUtils.isSafeUri(id)) {
 			// checks if is not safe URL
-			throw new InvalidPluginIdException(buildMessage(id, INVALID_PLUGIN__ID_URL_SAFE));
+			throw new InvalidPluginIdException(buildMessage(id, INVALID_PLUGIN__ID_NOT_URL_SAFE));
 		} else if (!id.toLowerCase(Locale.getDefault()).equals(id)) {
 			// checks if contains uppercase letters
-			throw new InvalidPluginIdException(buildMessage(id, INVALID_PLUGIN__ID_UPPERCASE));
+			throw new InvalidPluginIdException(buildMessage(id, INVALID_PLUGIN__ID_NOT_LOWERCASE_UPPERCASE));
 		}
 	}
 	

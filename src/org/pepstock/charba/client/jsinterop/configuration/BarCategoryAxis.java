@@ -156,7 +156,7 @@ public class BarCategoryAxis extends CartesianCategoryAxis {
 		 */
 		@Override
 		public void setOffsetGridLines(boolean offsetGridLines) {
-				// sets always true
+			// sets always true
 			super.setOffsetGridLines(true);
 		}
 	}

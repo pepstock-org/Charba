@@ -20,7 +20,6 @@ import java.util.Date;
 import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.NativeObjectContainer;
-import org.pepstock.charba.client.jsinterop.commons.StandardKey;
 
 /**
  * Used for sparse datasets, such as those in scatter charts. Each data point is specified using an object containing x and y
@@ -145,8 +144,8 @@ public final class DataPoint extends NativeObjectContainer {
 	 * @param key key of java script object to set.
 	 * @param value value to set.
 	 */
-	public void setAttribute(String key, double value) {
-		setValue(new StandardKey(key), value);
+	public void setAttribute(Key key, double value) {
+		setValue(key, value);
 	}
 
 	/**
@@ -155,7 +154,7 @@ public final class DataPoint extends NativeObjectContainer {
 	 * @param key key of java script object to get.
 	 * @return custom field value from data point. Default is {@link java.lang.Double#NaN}.
 	 */
-	public double getAttribute(String key) {
-		return getValue(new StandardKey(key), Double.NaN);
+	public double getAttribute(Key key) {
+		return getValue(key, Double.NaN);
 	}
 }

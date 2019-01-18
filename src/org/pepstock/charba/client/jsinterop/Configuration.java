@@ -37,6 +37,13 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
 public final class Configuration {
+	
+	/**
+	 * To avoid any instantiation
+	 */
+	Configuration() {
+		// do nothing
+	}
 
 	/**
 	 * Sets the type of chart by the <code>type</code> property into native object.

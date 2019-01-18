@@ -17,13 +17,13 @@ package org.pepstock.charba.client.jsinterop.data;
 
 import java.util.List;
 
-import org.pepstock.charba.client.jsinterop.commons.Key;
-import org.pepstock.charba.client.jsinterop.enums.SteppedLine;
 import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.ObjectType;
+import org.pepstock.charba.client.jsinterop.enums.SteppedLine;
 import org.pepstock.charba.client.jsinterop.options.Scales;
 
 /**
@@ -39,7 +39,7 @@ public class LineDataset extends LiningDataset {
 
 	// default value for cubic interpolation mode
 	private static final String DEFAULT_CUBIC_INTERPOLATION_MODE = "default";
-
+	// factory to create data points
 	private final DataPointListFactory factory = new DataPointListFactory();
 
 	/**

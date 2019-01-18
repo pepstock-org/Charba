@@ -170,7 +170,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	 * org.pepstock.charba.client.jsinterop.configuration.EventProvider#addHandler(com.google.gwt.event.shared.GwtEvent.Type)
 	 */
 	@Override
-	protected <H extends EventHandler> void addHandler(Type<H> type) {
+	protected final <H extends EventHandler> void addHandler(Type<H> type) {
 		// checks if type of added event handler is dataset selection or click
 		if (type.equals(LegendClickEvent.TYPE)) {
 			// if java script property is missing
@@ -198,7 +198,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	 * org.pepstock.charba.client.jsinterop.configuration.EventProvider#removeHandler(com.google.gwt.event.shared.GwtEvent.Type)
 	 */
 	@Override
-	protected <H extends EventHandler> void removeHandler(Type<H> type) {
+	protected final <H extends EventHandler> void removeHandler(Type<H> type) {
 		// checks if type of removed event handler is dataset selection or click
 		if (type.equals(LegendClickEvent.TYPE)) {
 			// decrements the amount of handlers

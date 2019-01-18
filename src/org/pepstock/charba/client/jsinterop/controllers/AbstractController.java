@@ -28,8 +28,11 @@ import org.pepstock.charba.client.jsinterop.Controller;
  */
 public abstract class AbstractController implements Controller {
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.Controller#initialize(org.pepstock.charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.jsinterop.AbstractChart, int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.Controller#initialize(org.pepstock.charba.client.jsinterop.controllers.Context,
+	 * org.pepstock.charba.client.jsinterop.AbstractChart, int)
 	 */
 	@Override
 	public void initialize(Context context, AbstractChart<?, ?> chart, int datasetIndex) {
@@ -39,9 +42,13 @@ public abstract class AbstractController implements Controller {
 			JsControllerHelper.get().initialize(getType().getChartType(), context, datasetIndex);
 		}
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.Controller#addElements(org.pepstock.charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.jsinterop.AbstractChart)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.pepstock.charba.client.jsinterop.Controller#addElements(org.pepstock.charba.client.jsinterop.controllers.Context,
+	 * org.pepstock.charba.client.jsinterop.AbstractChart)
 	 */
 	@Override
 	public void addElements(Context context, AbstractChart<?, ?> chart) {
@@ -52,8 +59,11 @@ public abstract class AbstractController implements Controller {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.Controller#addElementAndReset(org.pepstock.charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.jsinterop.AbstractChart, int)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.Controller#addElementAndReset(org.pepstock.charba.client.jsinterop.controllers.
+	 * Context, org.pepstock.charba.client.jsinterop.AbstractChart, int)
 	 */
 	@Override
 	public void addElementAndReset(Context context, AbstractChart<?, ?> chart, int index) {
@@ -64,8 +74,11 @@ public abstract class AbstractController implements Controller {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.Controller#draw(org.pepstock.charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.jsinterop.AbstractChart, double)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.Controller#draw(org.pepstock.charba.client.jsinterop.controllers.Context,
+	 * org.pepstock.charba.client.jsinterop.AbstractChart, double)
 	 */
 	@Override
 	public void draw(Context context, AbstractChart<?, ?> chart, double ease) {
@@ -76,8 +89,12 @@ public abstract class AbstractController implements Controller {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.Controller#removeHoverStyle(org.pepstock.charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.jsinterop.AbstractChart, org.pepstock.charba.client.jsinterop.controllers.StyleElement)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.Controller#removeHoverStyle(org.pepstock.charba.client.jsinterop.controllers.
+	 * Context, org.pepstock.charba.client.jsinterop.AbstractChart,
+	 * org.pepstock.charba.client.jsinterop.controllers.StyleElement)
 	 */
 	@Override
 	public void removeHoverStyle(Context context, AbstractChart<?, ?> chart, StyleElement element) {
@@ -88,8 +105,12 @@ public abstract class AbstractController implements Controller {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.Controller#setHoverStyle(org.pepstock.charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.jsinterop.AbstractChart, org.pepstock.charba.client.jsinterop.controllers.StyleElement)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.pepstock.charba.client.jsinterop.Controller#setHoverStyle(org.pepstock.charba.client.jsinterop.controllers.Context,
+	 * org.pepstock.charba.client.jsinterop.AbstractChart, org.pepstock.charba.client.jsinterop.controllers.StyleElement)
 	 */
 	@Override
 	public void setHoverStyle(Context context, AbstractChart<?, ?> chart, StyleElement element) {
@@ -100,8 +121,11 @@ public abstract class AbstractController implements Controller {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.Controller#update(org.pepstock.charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.jsinterop.AbstractChart, boolean)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.Controller#update(org.pepstock.charba.client.jsinterop.controllers.Context,
+	 * org.pepstock.charba.client.jsinterop.AbstractChart, boolean)
 	 */
 	@Override
 	public void update(Context context, AbstractChart<?, ?> chart, boolean reset) {

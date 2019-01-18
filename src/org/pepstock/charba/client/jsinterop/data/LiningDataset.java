@@ -19,17 +19,17 @@ import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.jsinterop.commons.Key;
-import org.pepstock.charba.client.jsinterop.enums.CapStyle;
-import org.pepstock.charba.client.jsinterop.enums.Fill;
-import org.pepstock.charba.client.jsinterop.enums.JoinStyle;
-import org.pepstock.charba.client.jsinterop.enums.PointStyle;
 import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.ObjectType;
+import org.pepstock.charba.client.jsinterop.enums.CapStyle;
+import org.pepstock.charba.client.jsinterop.enums.Fill;
+import org.pepstock.charba.client.jsinterop.enums.JoinStyle;
+import org.pepstock.charba.client.jsinterop.enums.PointStyle;
 
 /**
  * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
@@ -222,7 +222,7 @@ abstract class LiningDataset extends Dataset {
 
 	/**
 	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position,
+	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
 	 * are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
@@ -234,7 +234,7 @@ abstract class LiningDataset extends Dataset {
 
 	/**
 	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position,
+	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
 	 * are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
@@ -268,12 +268,12 @@ abstract class LiningDataset extends Dataset {
 	public Fill getFill() {
 		// gets value type
 		ObjectType type = type(Property.fill);
-		// String value = getValue(Property.fill, getDefaultValues().getFill());
 		// if is a boolean FALSE value
 		if (ObjectType.Boolean.equals(type)) {
 			// returns no fill
 			return getValue(Property.fill, false) ? Fill.origin : Fill.nofill;
 		}
+		// returns the fill object because was not stored as boolean
 		return getValue(Property.fill, Fill.class, Defaults.get().getGlobal().getElements().getLine().getFill());
 	}
 
@@ -291,7 +291,7 @@ abstract class LiningDataset extends Dataset {
 	 * Returns curve tension of the line. Set to 0 to draw straight lines. This option is ignored if monotone cubic
 	 * interpolation is used.
 	 * 
-	 * @return curve tension of the line. Default is <code>0.4</code>
+	 * @return curve tension of the line.
 	 */
 	public double getLineTension() {
 		return getValue(Property.lineTension, Defaults.get().getGlobal().getElements().getLine().getTension());

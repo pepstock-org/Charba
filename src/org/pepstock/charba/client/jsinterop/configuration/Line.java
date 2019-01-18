@@ -119,7 +119,7 @@ public class Line extends AbstractConfigurationElement {
 
 	/**
 	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position,
+	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
 	 * are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
@@ -131,7 +131,7 @@ public class Line extends AbstractConfigurationElement {
 
 	/**
 	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position,
+	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
 	 * are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 

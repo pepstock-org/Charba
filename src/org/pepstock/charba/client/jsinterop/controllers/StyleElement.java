@@ -97,14 +97,14 @@ public final class StyleElement extends DatasetItem {
 	 * @author Andrea "Stock" Stocchero
 	 * @since 2.0
 	 */
-	protected static class InternalScaleItem extends ScaleItem {
+	static class InternalScaleItem extends ScaleItem {
 
 		/**
 		 * Wraps the CHART.JS java script object.
 		 * 
 		 * @param nativeObject CHART.JS java script object
 		 */
-		protected InternalScaleItem(NativeObject nativeObject) {
+		InternalScaleItem(NativeObject nativeObject) {
 			super(nativeObject);
 		}
 

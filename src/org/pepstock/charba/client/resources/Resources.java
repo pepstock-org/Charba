@@ -47,15 +47,4 @@ public interface Resources extends ClientBundle {
 	@Source("js/charba.helper.js")
 	TextResource charbaHelper();
 
-	/**
-	 * This file contains two functions, JSON.decycle and JSON.retrocycle, which make it possible to encode cyclical structures
-	 * and dags in JSON, and to then recover them. This is a capability that is not provided by ES5.<br>
-	 * JSONPath is used to represent the links.<br>
-	 * See https://github.com/douglascrockford/JSON-js/blob/master/cycle.js.
-	 * 
-	 * @return cycle2 java script code.
-	 */
-	@Source("js/json.cycle.js")
-	TextResource jsonCycle();
-
 }
