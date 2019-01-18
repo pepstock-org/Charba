@@ -21,7 +21,6 @@ import org.pepstock.charba.client.jsinterop.configuration.Axis;
  * Callback function to transform data labels to point labels.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.jsinterop.configuration.RadialPointLabels
  * @since 2.0
  */
 public interface RadialPointLabelCallback {
@@ -32,7 +31,6 @@ public interface RadialPointLabelCallback {
 	 * @param axis axis instance where this callback as been defined
 	 * @param item label of current label
 	 * @return new label to apply to point label
-	 * @see org.pepstock.charba.client.jsinterop.configuration.Axis
 	 */
 	String onCallback(Axis axis, String item);
 

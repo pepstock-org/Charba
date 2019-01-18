@@ -61,7 +61,6 @@ public abstract class AbstractEvent<H extends EventHandler> extends GwtEvent<H> 
 	 * Returns the chart instance, stored in the event as source.
 	 * 
 	 * @return the chart instance
-	 * @see org.pepstock.charba.client.jsinterop.AbstractChart
 	 */
 	public final AbstractChart<?, ?> getChart() {
 		return (AbstractChart<?, ?>) getSource();

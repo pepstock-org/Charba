@@ -23,7 +23,6 @@ import org.pepstock.charba.client.jsinterop.configuration.Axis;
  * Interface to implement if wants to change the tick marks to include information about the data type.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.jsinterop.configuration.Axis
  * @since 2.0
  */
 public interface TickCallback {

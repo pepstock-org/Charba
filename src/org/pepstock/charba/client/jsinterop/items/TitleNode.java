@@ -23,7 +23,6 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
- *
  */
 public final class TitleNode extends BaseBoxNodeItem {
 

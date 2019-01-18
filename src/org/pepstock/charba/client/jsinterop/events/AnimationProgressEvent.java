@@ -24,7 +24,6 @@ import com.google.gwt.dom.client.NativeEvent;
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
- *
  */
 public final class AnimationProgressEvent extends AbstractEvent<AnimationProgressEventHandler> {
 

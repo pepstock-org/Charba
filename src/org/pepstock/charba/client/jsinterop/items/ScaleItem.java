@@ -17,12 +17,12 @@ package org.pepstock.charba.client.jsinterop.items;
 
 import java.util.List;
 
-import org.pepstock.charba.client.jsinterop.commons.Key;
-import org.pepstock.charba.client.jsinterop.enums.AxisType;
 import org.pepstock.charba.client.jsinterop.commons.ArrayDouble;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.enums.AxisType;
 
 /**
  * Wraps the scale item of CHART JS chart.<br>
@@ -118,9 +118,9 @@ public class ScaleItem extends BaseBoxNodeItem {
 	}
 
 	/**
-	 * Returns the min index of scale.
+	 * Returns the minimum index of scale.
 	 * 
-	 * @return the min index of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
+	 * @return the minimum index of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getMinIndex() {
 		return getValue(Property.minIndex, UndefinedValues.INTEGER);
@@ -136,9 +136,9 @@ public class ScaleItem extends BaseBoxNodeItem {
 	}
 
 	/**
-	 * Returns the min value of scale.
+	 * Returns the minimum value of scale.
 	 * 
-	 * @return the min value of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
+	 * @return the minimum value of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getMin() {
 		return getValue(Property.min, UndefinedValues.INTEGER);
@@ -154,9 +154,9 @@ public class ScaleItem extends BaseBoxNodeItem {
 	}
 
 	/**
-	 * Returns the min value of scale. 
+	 * Returns the minimum value of scale. 
 	 * 
-	 * @return the min value of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#STRING}.
+	 * @return the minimum value of scale. Default is {@link org.pepstock.charba.client.jsinterop.items.UndefinedValues#STRING}.
 	 */
 	public final String getMinAsString() {
 		return getValue(Property.min, UndefinedValues.STRING);

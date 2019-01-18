@@ -21,11 +21,10 @@ import org.pepstock.charba.client.jsinterop.commons.Key;
  * Style of the point.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public enum PointStyle implements Key
 {
-
 	circle,
 	cross,
 	crossRot,
@@ -36,5 +35,4 @@ public enum PointStyle implements Key
 	rectRot,
 	star,
 	triangle;
-
 }

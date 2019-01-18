@@ -60,6 +60,7 @@ public final class ScalesNode extends NativeObjectContainer {
 				result.put(key.name(), new ScaleItem(getValue(key)));
 			}
 		}
+		// returns a unmodifiable map
 		return Collections.unmodifiableMap(result);
 	}
 

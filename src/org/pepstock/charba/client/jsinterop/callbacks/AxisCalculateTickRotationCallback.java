@@ -22,8 +22,6 @@ import org.pepstock.charba.client.jsinterop.items.AxisItem;
  * Interface to be implemented which can be used to change parameters in the scale during tick rotation.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.jsinterop.configuration.Axis
- * @see org.pepstock.charba.client.jsinterop.items.AxisItem
  * @since 2.0
  */
 public interface AxisCalculateTickRotationCallback {

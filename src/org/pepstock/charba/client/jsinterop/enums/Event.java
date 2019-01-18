@@ -18,10 +18,10 @@ package org.pepstock.charba.client.jsinterop.enums;
 import org.pepstock.charba.client.jsinterop.commons.Key;
 
 /**
- * The events option defines the browser events that the chart should listen to for tooltips and hovering.
+ * The events option defines the browser events that the chart should listen to.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public enum Event implements Key
 {

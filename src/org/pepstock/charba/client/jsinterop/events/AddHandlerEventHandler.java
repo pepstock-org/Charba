@@ -21,7 +21,7 @@ import com.google.gwt.event.shared.EventHandler;
  * Event handler for new event handler.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public interface AddHandlerEventHandler extends EventHandler {
 

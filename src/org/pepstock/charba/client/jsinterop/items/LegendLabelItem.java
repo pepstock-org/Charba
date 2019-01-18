@@ -18,10 +18,10 @@ package org.pepstock.charba.client.jsinterop.items;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.enums.CapStyle;
 import org.pepstock.charba.client.jsinterop.enums.JoinStyle;
 import org.pepstock.charba.client.jsinterop.enums.PointStyle;
-import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 
 /**
  * This object is created by callbacks and returned to HCART.JS as native object to configure the legend.
@@ -116,7 +116,7 @@ public final class LegendLabelItem extends LegendItem {
 
 	/**
 	 * Sets how two connecting segments (of box border) with non-zero lengths in a shape are joined together (degenerate
-	 * segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are
+	 * segments with zero lengths, whose specified end points and control points are exactly at the same position, are
 	 * skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter.
 	 * 

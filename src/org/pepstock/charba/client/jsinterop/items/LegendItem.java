@@ -162,7 +162,7 @@ public class LegendItem extends NativeObjectContainer {
 
 	/**
 	 * Returns how two connecting segments (of box border) with non-zero lengths in a shape are joined together (degenerate
-	 * segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are
+	 * segments with zero lengths, whose specified end points and control points are exactly at the same position, are
 	 * skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter.
 	 * 

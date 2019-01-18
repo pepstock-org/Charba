@@ -20,7 +20,6 @@ package org.pepstock.charba.client.jsinterop.events;
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
- *
  */
 public interface AnimationCompleteEventHandler extends ChartEventHandler {
 

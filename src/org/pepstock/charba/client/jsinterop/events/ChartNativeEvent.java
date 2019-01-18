@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.events;
 
-import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.JsHelper;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 
 import com.google.gwt.dom.client.NativeEvent;
 
@@ -39,7 +39,7 @@ public class ChartNativeEvent extends NativeEvent {
 	}
 
 	/**
-	 * Needed for GWt injection
+	 * Needed for GWT injection
 	 */
 	protected ChartNativeEvent() {
 		// do nothing

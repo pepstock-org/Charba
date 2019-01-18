@@ -25,7 +25,6 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
  * legend.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.jsinterop.AbstractChart#generateLegend()
  * @since 2.0
  */
 public interface LegendCallback {

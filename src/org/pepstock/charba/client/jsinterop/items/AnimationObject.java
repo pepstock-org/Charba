@@ -36,7 +36,7 @@ public final class AnimationObject {
 	/**
 	 * To avoid any user creation
 	 */
-	protected AnimationObject() {}
+	AnimationObject() {}
 
 	/**
 	 * Returns the native property of java script object related to animation item.

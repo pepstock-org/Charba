@@ -22,7 +22,6 @@ import org.pepstock.charba.client.jsinterop.items.AxisItem;
  * Interface to be implemented which can be used to change parameters in the scale during setting dimensions.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.jsinterop.configuration.Axis
  * @since 2.0
  */
 public interface AxisDimensionsCallback {
@@ -32,8 +31,6 @@ public interface AxisDimensionsCallback {
 	 * 
 	 * @param axis axis instance where this callback as been defined
 	 * @param item axis item instance
-	 * @see org.pepstock.charba.client.jsinterop.configuration.Axis
-	 * @see org.pepstock.charba.client.jsinterop.items.AxisItem
 	 */
 	void onBeforeSetDimensions(Axis axis, AxisItem item);
 
@@ -42,8 +39,6 @@ public interface AxisDimensionsCallback {
 	 * 
 	 * @param axis axis instance where this callback as been defined
 	 * @param item axis item instance
-	 * @see org.pepstock.charba.client.jsinterop.configuration.Axis
-	 * @see org.pepstock.charba.client.jsinterop.items.AxisItem
 	 */
 	void onAfterSetDimensions(Axis axis, AxisItem item);
 

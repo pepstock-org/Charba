@@ -20,9 +20,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**
@@ -94,6 +94,7 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 				result.put(key.name(), getValue(key, UndefinedValues.INTEGER));
 			}
 		}
+		// returns a unmodifiable map
 		return Collections.unmodifiableMap(result);
 	}
 }

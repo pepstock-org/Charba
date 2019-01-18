@@ -21,7 +21,7 @@ import org.pepstock.charba.client.jsinterop.commons.Key;
  * The font-style property specifies the font style for a text.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public enum FontStyle implements Key
 {

@@ -27,7 +27,6 @@ import org.pepstock.charba.client.jsinterop.items.TooltipLabelColor;
  * This interface takes care about labels.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.jsinterop.items.TooltipItem
  * @since 2.0
  */
 public interface TooltipLabelCallback {
@@ -56,7 +55,6 @@ public interface TooltipLabelCallback {
 	 * @param chart chart instance
 	 * @param item tooltip item
 	 * @return label color to be applied. If returns <code>null</code>, it will be ignored.
-	 * @see org.pepstock.charba.client.jsinterop.items.TooltipLabelColor
 	 */
 	TooltipLabelColor onLabelColor(AbstractChart<?, ?> chart, TooltipItem item);
 
