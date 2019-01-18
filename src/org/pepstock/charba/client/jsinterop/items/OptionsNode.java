@@ -32,8 +32,8 @@ public final class OptionsNode extends ScaledOptions {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	public OptionsNode(NativeObject delegated) {
-		super(DefaultsBuilder.get().getScaledOptions(), delegated);
+	public OptionsNode(NativeObject nativeObject) {
+		super(DefaultsBuilder.get().getScaledOptions(), nativeObject);
 	}
 
 }

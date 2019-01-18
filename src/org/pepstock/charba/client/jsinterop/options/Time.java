@@ -249,7 +249,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * The number of units between grid lines.
 	 * 
-	 * @returnnumber of units between grid lines.
+	 * @return number of units between grid lines.
 	 */
 	public int getStepSize() {
 		return getValue(Property.stepSize, getDefaultValues().getStepSize());
