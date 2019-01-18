@@ -19,12 +19,12 @@ import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.jsinterop.commons.Key;
-import org.pepstock.charba.client.jsinterop.enums.TickSource;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks;
+import org.pepstock.charba.client.jsinterop.enums.TickSource;
 
 /**
  * All configuration for ticks of a chart.<br>
@@ -103,9 +103,9 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * If true, scale will include 0 if it is not already included.
+	 * If <code>true</code>, scale will include 0 if it is not already included.
 	 * 
-	 * @param beginAtZero if true, scale will include 0 if it is not already included.
+	 * @param beginAtZero if <code>true</code>, scale will include 0 if it is not already included.
 	 */
 	public void setBeginAtZero(boolean beginAtZero) {
 		setValue(Property.beginAtZero, beginAtZero);
@@ -114,18 +114,18 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * If true, scale will include 0 if it is not already included.
+	 * If <code>true</code>, scale will include 0 if it is not already included.
 	 * 
-	 * @return if true, scale will include 0 if it is not already included.
+	 * @return if <code>true</code>, scale will include 0 if it is not already included.
 	 */
 	public boolean isBeginAtZero() {
 		return getValue(Property.beginAtZero, getDefaultValues().isBeginAtZero());
 	}
 
 	/**
-	 * If true, show tick marks.
+	 * If <code>true</code>, show tick marks.
 	 * 
-	 * @param display if true, show tick marks.
+	 * @param display if <code>true</code>, show tick marks.
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
@@ -134,9 +134,9 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * If true, show tick marks.
+	 * If <code>true</code>, show tick marks.
 	 * 
-	 * @return if true, show tick marks.
+	 * @return if <code>true</code>, show tick marks.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());
@@ -156,17 +156,17 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	/**
 	 * Returns the reverses order of tick labels.
 	 * 
-	 * @return reverses order of tick labels.
+	 * @return if <code>true</code> reverses order of tick labels.
 	 */
 	public boolean isReverse() {
 		return getValue(Property.reverse, getDefaultValues().isReverse());
 	}
 
 	/**
-	 * If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all
+	 * If <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all
 	 * labels no matter what
 	 * 
-	 * @param autoSkip If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it
+	 * @param autoSkip if <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it
 	 *            off to show all labels no matter what
 	 */
 	public void setAutoSkip(boolean autoSkip) {
@@ -176,10 +176,10 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all
+	 * If <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all
 	 * labels no matter what
 	 * 
-	 * @return If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to
+	 * @return if <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to
 	 *         show all labels no matter what.
 	 */
 	public boolean isAutoSkip() {
@@ -211,11 +211,11 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * Sets the distance in pixels to offset the label from the centre point of the tick (in the y direction for the x axis, and
+	 * Sets the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis, and
 	 * the x direction for the y axis).<br>
 	 * Note: this can cause labels at the edges to be cropped by the edge of the canvas.
 	 * 
-	 * @param labelOffset the distance in pixels to offset the label from the centre point of the tick (in the y direction for
+	 * @param labelOffset the distance in pixels to offset the label from the center point of the tick (in the y direction for
 	 *            the x axis, and the x direction for the y axis)
 	 */
 	public void setLabelOffset(int labelOffset) {
@@ -225,11 +225,11 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * Returns the distance in pixels to offset the label from the centre point of the tick (in the y direction for the x axis,
+	 * Returns the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis,
 	 * and the x direction for the y axis).<br>
 	 * Note: this can cause labels at the edges to be cropped by the edge of the canvas.
 	 * 
-	 * @return the distance in pixels to offset the label from the centre point of the tick (in the y direction for the x axis,
+	 * @return the distance in pixels to offset the label from the center point of the tick (in the y direction for the x axis,
 	 *         and the x direction for the y axis).
 	 */
 	public int getLabelOffset() {
@@ -567,9 +567,9 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * If true, draw a background behind the tick labels.
+	 * If <code>true</code>, draw a background behind the tick labels.
 	 * 
-	 * @param showLabelBackdrop if true, draw a background behind the tick labels.
+	 * @param showLabelBackdrop if <code>true</code>, draw a background behind the tick labels.
 	 */
 	public void setShowLabelBackdrop(boolean showLabelBackdrop) {
 		setValue(Property.showLabelBackdrop, showLabelBackdrop);
@@ -578,9 +578,9 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * If true, draw a background behind the tick labels.
+	 * If <code>true</code>, draw a background behind the tick labels.
 	 * 
-	 * @return if true, draw a background behind the tick labels.
+	 * @return if <code>true</code>, draw a background behind the tick labels.
 	 */
 	public boolean isShowLabelBackdrop() {
 		return getValue(Property.showLabelBackdrop, getDefaultValues().isShowLabelBackdrop());

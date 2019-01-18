@@ -18,10 +18,10 @@ package org.pepstock.charba.client.jsinterop.options;
 import java.util.Date;
 
 import org.pepstock.charba.client.jsinterop.commons.Key;
-import org.pepstock.charba.client.jsinterop.enums.TimeUnit;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.ObjectType;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime;
+import org.pepstock.charba.client.jsinterop.enums.TimeUnit;
 
 /**
  * The following display formats are used to configure how different time units are formed into strings for the axis tick marks.
@@ -74,9 +74,9 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	}
 
 	/**
-	 * If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
+	 * If <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
 	 * 
-	 * @param isoWeekday If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it
+	 * @param isoWeekday if <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it
 	 *            will be Sunday.
 	 */
 	public void setIsoWeekday(boolean isoWeekday) {
@@ -86,9 +86,9 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	}
 
 	/**
-	 * If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
+	 * If <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
 	 * 
-	 * @return If true and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be
+	 * @return if <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be
 	 *         Sunday.
 	 */
 	public boolean isIsoWeekday() {
@@ -98,7 +98,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * If defined, this will override the data maximum.
 	 * 
-	 * @param max If defined, this will override the data maximum.
+	 * @param max if defined, this will override the data maximum.
 	 */
 	public void setMax(Date max) {
 		setValue(Property.max, max);
@@ -109,7 +109,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * If defined, this will override the data maximum.
 	 * 
-	 * @return If defined, this will override the data maximum.
+	 * @return if defined, this will override the data maximum.
 	 */
 	public Date getMax() {
 		return getValue(Property.max, getDefaultValues().getMax());
@@ -118,7 +118,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * If defined, this will override the data minimum.
 	 * 
-	 * @param min If defined, this will override the data minimum.
+	 * @param min if defined, this will override the data minimum.
 	 */
 	public void setMin(Date min) {
 		setValue(Property.min, min);
@@ -129,7 +129,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * If defined, this will override the data minimum.
 	 * 
-	 * @return If defined, this will override the data minimum.
+	 * @return if defined, this will override the data minimum.
 	 */
 	public Date getMin() {
 		return getValue(Property.min, getDefaultValues().getMin());
@@ -138,7 +138,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * If defined, dates will be rounded to the start of this unit.
 	 * 
-	 * @param round If defined, this will override the data minimum.
+	 * @param round if defined, this will override the data minimum.
 	 */
 	public void setRound(boolean round) {
 		// if is setting false
@@ -151,7 +151,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * If defined, dates will be rounded to the start of this unit.
 	 * 
-	 * @param round If defined, this will override the data minimum.
+	 * @param round if defined, this will override the data minimum.
 	 */
 	public void setRound(TimeUnit round) {
 		setValue(Property.round, round);
@@ -162,7 +162,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * If defined, dates will be rounded to the start of this unit.
 	 * 
-	 * @return If defined, dates will be rounded to the start of this unit.
+	 * @return if defined, dates will be rounded to the start of this unit.
 	 */
 	public TimeUnit getRound() {
 		// checks if value is a boolean
@@ -176,9 +176,9 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	}
 
 	/**
-	 * The moment js format string to use for the tooltip.
+	 * The format string to use for the tooltip.
 	 * 
-	 * @param tooltipFormat The moment js format string to use for the tooltip.
+	 * @param tooltipFormat format string to use for the tooltip.
 	 */
 	public void setTooltipFormat(String tooltipFormat) {
 		setValue(Property.tooltipFormat, tooltipFormat);
@@ -187,9 +187,9 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	}
 
 	/**
-	 * The moment js format string to use for the tooltip.
+	 * The format string to use for the tooltip.
 	 * 
-	 * @return The moment js format string to use for the tooltip.
+	 * @return the format string to use for the tooltip.
 	 */
 	public String getTooltipFormat() {
 		return getValue(Property.tooltipFormat, getDefaultValues().getTooltipFormat());
@@ -211,7 +211,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * If defined, will force the unit to be a certain type.
 	 * 
-	 * @param unit If defined, will force the unit to be a certain type.
+	 * @param unit if defined, will force the unit to be a certain type.
 	 */
 	public void setUnit(TimeUnit unit) {
 		setValue(Property.unit, unit);
@@ -222,7 +222,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * If defined, will force the unit to be a certain type.
 	 * 
-	 * @return If defined, will force the unit to be a certain type.
+	 * @return if defined, will force the unit to be a certain type.
 	 */
 	public TimeUnit getUnit() {
 		// checks if value is a boolean
@@ -238,7 +238,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * The number of units between grid lines.
 	 * 
-	 * @param stepSize The number of units between grid lines.
+	 * @param stepSize number of units between grid lines.
 	 */
 	public void setStepSize(int stepSize) {
 		setValue(Property.stepSize, stepSize);
@@ -249,7 +249,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * The number of units between grid lines.
 	 * 
-	 * @return The number of units between grid lines.
+	 * @returnnumber of units between grid lines.
 	 */
 	public int getStepSize() {
 		return getValue(Property.stepSize, getDefaultValues().getStepSize());
@@ -258,7 +258,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * The minimum display format to be used for a time unit.
 	 * 
-	 * @param unit The minimum display format to be used for a time unit.
+	 * @param unit minimum display format to be used for a time unit.
 	 */
 	public void setMinUnit(TimeUnit unit) {
 		setValue(Property.minUnit, unit);
@@ -269,7 +269,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * The minimum display format to be used for a time unit.
 	 * 
-	 * @return The minimum display format to be used for a time unit.
+	 * @return minimum display format to be used for a time unit.
 	 */
 	public TimeUnit getMinUnit() {
 		return getValue(Property.minUnit, TimeUnit.class, getDefaultValues().getMinUnit());
@@ -278,7 +278,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
 	 * 
-	 * @param parser Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
+	 * @param parser defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
 	 */
 	public void setParser(String parser) {
 		setValue(Property.parser, parser);
@@ -289,7 +289,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	/**
 	 * Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
 	 * 
-	 * @return Defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
+	 * @return defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
 	 */
 	public String getParser() {
 		return getValue(Property.parser, getDefaultValues().getParser());

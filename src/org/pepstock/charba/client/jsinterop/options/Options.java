@@ -35,7 +35,8 @@ import org.pepstock.charba.client.jsinterop.enums.FontStyle;
  * @since 2.0
  */
 public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions {
-
+	
+	// all sub elements
 	private final Animation animation;
 
 	private final Legend legend;
@@ -385,7 +386,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Returns the font size to use in the chart, on all objects, if not override by the specific configuration.
 	 * 
-	 * @return Font size into chart.
+	 * @return font size into chart.
 	 */
 	public int getDefaultFontSize() {
 		return getValue(Property.defaultFontSize, getDefaultValues().getDefaultFontSize());
@@ -395,7 +396,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * Sets the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS
 	 * font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @param fontStyle Font style to use in the chart, on all objects, if not override by the specific configuration, follows
+	 * @param fontStyle font style to use in the chart, on all objects, if not override by the specific configuration, follows
 	 *            CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public void setDefaultFontStyle(FontStyle fontStyle) {
@@ -406,7 +407,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * Returns the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS
 	 * font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 * 
-	 * @return the font styleto use in the chart, on all objects, if not override by the specific configuration, follows CSS
+	 * @return the font style to use in the chart, on all objects, if not override by the specific configuration, follows CSS
 	 *         font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getDefaultFontStyle() {
@@ -429,43 +430,43 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * font-family options.
 	 * 
 	 * @return Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS
-	 *         font-family options. Default is 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
+	 *         font-family options. 
 	 */
 	public String getDefaultFontFamily() {
 		return getValue(Property.defaultFontFamily, getDefaultValues().getDefaultFontFamily());
 	}
 
 	/**
-	 * If false, the lines between points are not drawn.
+	 * If <code>false</code>, the lines between points are not drawn.
 	 * 
-	 * @param showLine If false, the lines between points are not drawn.
+	 * @param showLine if <code>false</code>, the lines between points are not drawn.
 	 */
 	public void setShowLines(boolean showLine) {
 		setValue(Property.showLines, showLine);
 	}
 
 	/**
-	 * If false, the lines between points are not drawn.
+	 * If <code>false</code>, the lines between points are not drawn.
 	 * 
-	 * @return If false, the lines between points are not drawn..
+	 * @return if <code>false</code>, the lines between points are not drawn..
 	 */
 	public boolean isShowLines() {
 		return getValue(Property.showLines, getDefaultValues().isShowLines());
 	}
 
 	/**
-	 * If false, NaN data causes a break in the line.
+	 * If <code>false</code>, <code>NaN</code> data causes a break in the line.
 	 * 
-	 * @param spanGaps If false, NaN data causes a break in the line.
+	 * @param spanGaps if <code>false</code>, <code>NaN</code> data causes a break in the line.
 	 */
 	public void setSpanGaps(boolean spanGaps) {
 		setValue(Property.spanGaps, spanGaps);
 	}
 
 	/**
-	 * If false, NaN data causes a break in the line.
+	 * If <code>false</code>, <code>NaN</code> data causes a break in the line.
 	 * 
-	 * @return If false, NaN data causes a break in the line.
+	 * @return if <code>false</code>, <code>NaN</code> data causes a break in the line.
 	 */
 	public boolean isSpanGaps() {
 		return getValue(Property.spanGaps, getDefaultValues().isSpanGaps());

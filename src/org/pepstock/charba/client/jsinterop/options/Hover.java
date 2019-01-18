@@ -75,9 +75,9 @@ public final class Hover extends AbstractModel<Options, IsDefaultHover> implemen
 	}
 
 	/**
-	 * if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
 	 * 
-	 * @param intersect if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * @param intersect if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public void setIntersect(boolean intersect) {
 		setValue(Property.intersect, intersect);
@@ -86,9 +86,9 @@ public final class Hover extends AbstractModel<Options, IsDefaultHover> implemen
 	}
 
 	/**
-	 * if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
 	 * 
-	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * @return if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public boolean isIntersect() {
 		return getValue(Property.intersect, getDefaultValues().isIntersect());

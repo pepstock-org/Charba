@@ -21,7 +21,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPointLabels;
 
 /**
  * It is used to configure the point labels that are shown on the perimeter of the scale.<br>
- * Note that these options only apply if display is true.
+ * Note that these options only apply if display is <code>true</code>.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
@@ -51,9 +51,9 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 	}
 
 	/**
-	 * If true, labels are shown.
+	 * If <code>true</code>, labels are shown.
 	 * 
-	 * @param display if true, labels are shown.
+	 * @param display if <code>true</code>, labels are shown.
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
@@ -62,9 +62,9 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 	}
 
 	/**
-	 * If true, labels are shown.
+	 * If <code>true</code>, labels are shown.
 	 * 
-	 * @return if true, labels are shown.
+	 * @return if <code>true</code>, labels are shown.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());

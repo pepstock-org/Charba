@@ -16,12 +16,12 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.commons.NativeObject;
+import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
 import org.pepstock.charba.client.jsinterop.enums.AxisType;
 import org.pepstock.charba.client.jsinterop.enums.Position;
 import org.pepstock.charba.client.jsinterop.enums.ScaleBounds;
 import org.pepstock.charba.client.jsinterop.enums.ScaleDistribution;
-import org.pepstock.charba.client.jsinterop.commons.NativeObject;
-import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
 import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
 
 /**
@@ -34,10 +34,9 @@ import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
  * <li>linear
  * <li>logarithmic
  * <li>category
- * <li>time (not implemented yet)
+ * <li>time
  * </ul>
  * <br>
- * It maps the CHART.JS object of default, <code>chart.defaults.scale</code>.<br>
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
@@ -45,6 +44,7 @@ import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
  */
 public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsDefaultScale {
 
+	// adds sub elements
 	private final GridLines gridLines;
 
 	private final Ticks ticks;
@@ -250,9 +250,9 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	}
 
 	/**
-	 * If true, shows the axis.
+	 * If <code>true</code>, shows the axis.
 	 * 
-	 * @param display if true, shows the axes.
+	 * @param display if <code>true</code>, shows the axes.
 	 */
 	public final void setDisplay(boolean display) {
 		setValue(Property.display, display);
@@ -261,16 +261,16 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	}
 
 	/**
-	 * If true, shows the axis.
+	 * If <code>true</code>, shows the axis.
 	 * 
-	 * @return if true, shows the axis.
+	 * @return if <code>true</code>, shows the axis.
 	 */
 	public final boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());
 	}
 
 	/**
-	 * If true, extra space is added to the both edges and the axis is scaled to fit into the chart area.
+	 * If <code>true</code>, extra space is added to the both edges and the axis is scaled to fit into the chart area.
 	 * 
 	 * @param offset extra space of axis
 	 */
@@ -281,7 +281,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	}
 
 	/**
-	 * If true, extra space is added to the both edges and the axis is scaled to fit into the chart area.
+	 * If <code>true</code>, extra space is added to the both edges and the axis is scaled to fit into the chart area.
 	 * 
 	 * @return extra space of axis.
 	 */

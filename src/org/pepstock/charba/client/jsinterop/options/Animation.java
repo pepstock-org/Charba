@@ -95,9 +95,9 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	}
 
 	/**
-	 * If true, the chart will animate in with a rotation animation.
+	 * If <code>true</code>, the chart will animate in with a rotation animation.
 	 * 
-	 * @param animateRotate If true, the chart will animate in with a rotation animation.
+	 * @param animateRotate If <code>true</code>, the chart will animate in with a rotation animation.
 	 */
 	public void setAnimateRotate(boolean animateRotate) {
 		setValue(Property.animateRotate, animateRotate);
@@ -106,18 +106,18 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	}
 
 	/**
-	 * If true, the chart will animate in with a rotation animation.
+	 * If <code>true</code>, the chart will animate in with a rotation animation.
 	 * 
-	 * @return If true, the chart will animate in with a rotation animation.
+	 * @return If <code>true</code>, the chart will animate in with a rotation animation.
 	 */
 	public boolean isAnimateRotate() {
 		return getValue(Property.animateRotate, getDefaultValues().isAnimateRotate());
 	}
 
 	/**
-	 * If true, will animate scaling the chart from the center outwards.
+	 * If <code>true</code>, will animate scaling the chart from the center outwards.
 	 * 
-	 * @param animateScale If true, will animate scaling the chart from the center outwards.
+	 * @param animateScale If <code>true</code>, will animate scaling the chart from the center outwards.
 	 */
 	public void setAnimateScale(boolean animateScale) {
 		setValue(Property.animateScale, animateScale);
@@ -126,9 +126,9 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	}
 
 	/**
-	 * If true, will animate scaling the chart from the center outwards.
+	 * If <code>true</code>, will animate scaling the chart from the center outwards.
 	 * 
-	 * @return If true, will animate scaling the chart from the center outwards.
+	 * @return If <code>true</code>, will animate scaling the chart from the center outwards.
 	 */
 	public boolean isAnimateScale() {
 		return getValue(Property.animateScale, getDefaultValues().isAnimateScale());

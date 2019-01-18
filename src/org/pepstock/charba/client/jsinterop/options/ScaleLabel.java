@@ -65,9 +65,9 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 	}
 
 	/**
-	 * If true, display the axis title.
+	 * If <code>true</code>, display the axis title.
 	 * 
-	 * @param display if true, display the axis title.
+	 * @param display if <code>true</code>, display the axis title.
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
@@ -76,9 +76,9 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 	}
 
 	/**
-	 * If true, display the axis title.
+	 * If <code>true</code>, display the axis title.
 	 * 
-	 * @return f true, display the axis title.
+	 * @return if <code>true</code>, display the axis title.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());
@@ -87,7 +87,7 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 	/**
 	 * Sets the text for the scale string.
 	 * 
-	 * @param labelString The text for the scale string.
+	 * @param labelString the text for the scale string.
 	 */
 	public void setLabelString(String labelString) {
 		setValue(Property.labelString, labelString);
@@ -98,7 +98,7 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 	/**
 	 * Returns the text for the scale string.
 	 * 
-	 * @return The text for the scale string.
+	 * @return the text for the scale string.
 	 */
 	public String getLabelString() {
 		return getValue(Property.labelString, getDefaultValues().getLabelString());
@@ -107,7 +107,7 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 	/**
 	 * Sets the height of an individual line of text.
 	 * 
-	 * @param lineHeight Height of an individual line of text.
+	 * @param lineHeight height of an individual line of text.
 	 */
 	public void setLineHeight(double lineHeight) {
 		setValue(Property.lineHeight, lineHeight);

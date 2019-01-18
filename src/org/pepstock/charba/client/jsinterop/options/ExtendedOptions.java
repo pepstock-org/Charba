@@ -15,10 +15,9 @@
 */
 package org.pepstock.charba.client.jsinterop.options;
 
-import org.pepstock.charba.client.jsinterop.commons.Key;
-import org.pepstock.charba.client.jsinterop.ChartOptions;
 import org.pepstock.charba.client.jsinterop.commons.CallbackProxy;
 import org.pepstock.charba.client.jsinterop.commons.Id;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaledOptions;
 
 /**
@@ -35,7 +34,7 @@ public final class ExtendedOptions extends ScaledOptions {
 	/**
 	 * Creates an options with default provider. The native object is created empty.
 	 * 
-	 * @param defaultValues default provider. See {@link ChartOptions}.
+	 * @param defaultValues default provider.
 	 */
 	public ExtendedOptions(IsDefaultScaledOptions defaultValues) {
 		super(defaultValues);

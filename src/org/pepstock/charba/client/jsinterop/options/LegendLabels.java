@@ -23,7 +23,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels;
  * This is the labels configuration of the legend.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> implements IsDefaultLegendLabels {
 
@@ -66,7 +66,7 @@ public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> 
 	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this
 	 * case).
 	 * 
-	 * @return if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this
+	 * @return <code>true</code> if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this
 	 *         case).
 	 */
 	public boolean isUsePointStyle() {
@@ -74,9 +74,9 @@ public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> 
 	}
 
 	/**
-	 * Sets the width of coloured box.
+	 * Sets the width of colored box.
 	 * 
-	 * @param boxWidth width of coloured box.
+	 * @param boxWidth width of colored box.
 	 */
 	public void setBoxWidth(int boxWidth) {
 		setValue(Property.boxWidth, boxWidth);
@@ -85,9 +85,9 @@ public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> 
 	}
 
 	/**
-	 * Returns the width of coloured box.
+	 * Returns the width of colored box.
 	 * 
-	 * @return width of coloured box. Default is 40.
+	 * @return width of colored box.
 	 */
 	public int getBoxWidth() {
 		return getValue(Property.boxWidth, getDefaultValues().getBoxWidth());
@@ -96,7 +96,7 @@ public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> 
 	/**
 	 * Sets the padding to apply around labels. Only top and bottom are implemented.
 	 * 
-	 * @param padding Padding to apply around labels. Only top and bottom are implemented.
+	 * @param padding padding to apply around labels. Only top and bottom are implemented.
 	 */
 	public void setPadding(int padding) {
 		setValue(Property.padding, padding);
@@ -107,7 +107,7 @@ public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> 
 	/**
 	 * Returns the padding to apply around labels. Only top and bottom are implemented.
 	 * 
-	 * @return Padding to apply around labels. Only top and bottom are implemented.
+	 * @return padding to apply around labels. Only top and bottom are implemented.
 	 */
 	public int getPadding() {
 		return getValue(Property.padding, getDefaultValues().getPadding());

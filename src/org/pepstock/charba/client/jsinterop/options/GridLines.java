@@ -19,12 +19,12 @@ import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.commons.ArrayIntegerList;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayString;
 import org.pepstock.charba.client.jsinterop.commons.ArrayStringList;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.ObjectType;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines;
@@ -74,9 +74,9 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	}
 
 	/**
-	 * If false, do not display grid lines for this axis.
+	 * If <code>false</code>, do not display grid lines for this axis.
 	 * 
-	 * @param display If false, do not display grid lines for this axis.
+	 * @param display If <code>false</code>, do not display grid lines for this axis.
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
@@ -85,18 +85,18 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	}
 
 	/**
-	 * If false, do not display grid lines for this axis.
+	 * If <code>false</code>, do not display grid lines for this axis.
 	 * 
-	 * @return If false, do not display grid lines for this axis.
+	 * @return If <code>false</code>, do not display grid lines for this axis.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());
 	}
 
 	/**
-	 * If true, gridlines are circular (on radar chart only).
+	 * If <code>true</code>, gridlines are circular (on radar chart only).
 	 * 
-	 * @param circular If true, gridlines are circular (on radar chart only).
+	 * @param circular If <code>true</code>, gridlines are circular (on radar chart only).
 	 */
 	public void setCircular(boolean circular) {
 		setValue(Property.circular, circular);
@@ -105,9 +105,9 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	}
 
 	/**
-	 * If true, gridlines are circular (on radar chart only).
+	 * If <code>true</code>, gridlines are circular (on radar chart only).
 	 * 
-	 * @return If true, gridlines are circular (on radar chart only).
+	 * @return If <code>true</code>, gridlines are circular (on radar chart only).
 	 */
 	public boolean isCircular() {
 		return getValue(Property.circular, getDefaultValues().isCircular());
@@ -326,9 +326,9 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	}
 
 	/***
-	 * If true, draw border at the edge between the axis and the chart area.
+	 * If <code>true</code>, draw border at the edge between the axis and the chart area.
 	 * 
-	 * @param drawBorder If true, draw border at the edge between the axis and the chart area.
+	 * @param drawBorder If <code>true</code>, draw border at the edge between the axis and the chart area.
 	 */
 	public void setDrawBorder(boolean drawBorder) {
 		setValue(Property.drawBorder, drawBorder);
@@ -337,19 +337,19 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	}
 
 	/**
-	 * If true, draw border at the edge between the axis and the chart area.
+	 * If <code>true</code>, draw border at the edge between the axis and the chart area.
 	 * 
-	 * @return If true, draw border at the edge between the axis and the chart area.
+	 * @return If <code>true</code>, draw border at the edge between the axis and the chart area.
 	 */
 	public boolean isDrawBorder() {
 		return getValue(Property.drawBorder, getDefaultValues().isDrawBorder());
 	}
 
 	/**
-	 * If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to
+	 * If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to
 	 * control which grid lines are drawn.
 	 * 
-	 * @param drawOnChartArea If true, draw lines on the chart area inside the axis lines. This is useful when there are
+	 * @param drawOnChartArea If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are
 	 *            multiple axes and you need to control which grid lines are drawn.
 	 */
 	public void setDrawOnChartArea(boolean drawOnChartArea) {
@@ -359,10 +359,10 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	}
 
 	/**
-	 * If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to
+	 * If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to
 	 * control which grid lines are drawn.
 	 * 
-	 * @return If true, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you
+	 * @return If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you
 	 *         need to control which grid lines are drawn.
 	 */
 	public boolean isDrawOnChartArea() {
@@ -370,9 +370,9 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	}
 
 	/**
-	 * If true, draw lines beside the ticks in the axis area beside the chart.
+	 * If <code>true</code>, draw lines beside the ticks in the axis area beside the chart.
 	 * 
-	 * @param drawTicks If true, draw lines beside the ticks in the axis area beside the chart.
+	 * @param drawTicks If <code>true</code>, draw lines beside the ticks in the axis area beside the chart.
 	 */
 	public void setDrawTicks(boolean drawTicks) {
 		setValue(Property.drawTicks, drawTicks);
@@ -381,9 +381,9 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	}
 
 	/**
-	 * If true, draw lines beside the ticks in the axis area beside the chart.
+	 * If <code>true</code>, draw lines beside the ticks in the axis area beside the chart.
 	 * 
-	 * @return If true, draw lines beside the ticks in the axis area beside the chart.
+	 * @return If <code>true</code>, draw lines beside the ticks in the axis area beside the chart.
 	 */
 	public boolean isDrawTicks() {
 		return getValue(Property.drawTicks, getDefaultValues().isDrawTicks());
@@ -518,9 +518,9 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	}
 
 	/**
-	 * If true, grid lines will be shifted to be between labels. This is set to true in the bar chart by default.
+	 * If <code>true</code>, grid lines will be shifted to be between labels. This is set to <code>true</code> in the bar chart by default.
 	 * 
-	 * @param offsetGridLines If true, grid lines will be shifted to be between labels.
+	 * @param offsetGridLines if <code>true</code>, grid lines will be shifted to be between labels.
 	 */
 	public void setOffsetGridLines(boolean offsetGridLines) {
 		setValue(Property.offsetGridLines, offsetGridLines);
@@ -529,9 +529,9 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	}
 
 	/**
-	 * If true, grid lines will be shifted to be between labels. This is set to true in the bar chart by default.
+	 * If <code>true</code>, grid lines will be shifted to be between labels. This is set to <code>true</code> in the bar chart by default.
 	 * 
-	 * @return If true, grid lines will be shifted to be between labels.
+	 * @return if <code>true</code>, grid lines will be shifted to be between labels.
 	 */
 	public boolean isOffsetGridLines() {
 		return getValue(Property.offsetGridLines, getDefaultValues().isOffsetGridLines());

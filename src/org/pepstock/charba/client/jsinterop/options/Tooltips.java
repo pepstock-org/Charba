@@ -101,9 +101,9 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	}
 
 	/**
-	 * Sets if tooltips are enabled.
+	 * Sets <code>true</code> if tooltips are enabled.
 	 * 
-	 * @param enabled if tooltips are enabled.
+	 * @param enabled <code>true</code> if tooltips are enabled.
 	 */
 	public void setEnabled(boolean enabled) {
 		setValue(Property.enabled, enabled);
@@ -112,9 +112,9 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	}
 
 	/**
-	 * Returns if tooltips are enabled.
+	 * Returns <code>true</code> if tooltips are enabled.
 	 * 
-	 * @return if tooltips are enabled.
+	 * @return <code>true</code> if tooltips are enabled.
 	 */
 	public boolean isEnabled() {
 		return getValue(Property.enabled, getDefaultValues().isEnabled());
@@ -141,11 +141,11 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	}
 
 	/**
-	 * if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be
-	 * applied at all times.
+	 * If <code>true</code>, the tooltip mode applies only when the mouse position intersects with an element. If
+	 * <code>false</code>, the mode will be applied at all times.
 	 * 
-	 * @param intersect if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the
-	 *            mode will be applied at all times.
+	 * @param intersect if <code>true</code>, the tooltip mode applies only when the mouse position intersects with an element.
+	 *            If <code>false</code>, the mode will be applied at all times.
 	 */
 	public void setIntersect(boolean intersect) {
 		setValue(Property.intersect, intersect);
@@ -155,10 +155,10 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	}
 
 	/**
-	 * if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be
+	 * If <code>true</code>, the tooltip mode applies only when the mouse position intersects with an element. If <code>false</code>, the mode will be
 	 * applied at all times.
 	 * 
-	 * @return if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode
+	 * @return if <code>true</code>, the tooltip mode applies only when the mouse position intersects with an element. If <code>false</code>, the mode
 	 *         will be applied at all times.
 	 */
 	public boolean isIntersect() {
@@ -208,7 +208,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the background color of the tooltip.
 	 * 
-	 * @return Background color of the tooltip.
+	 * @return background color of the tooltip.
 	 */
 	public String getBackgroundColorAsString() {
 		return getValue(Property.backgroundColor, getDefaultValues().getBackgroundColorAsString());
@@ -217,7 +217,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the background color of the tooltip.
 	 * 
-	 * @return Background color of the tooltip.
+	 * @return background color of the tooltip.
 	 */
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
@@ -246,7 +246,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Sets the title font size.
 	 * 
-	 * @param titleFontSize Title font size.
+	 * @param titleFontSize title font size.
 	 */
 	public void setTitleFontSize(int titleFontSize) {
 		setValue(Property.titleFontSize, titleFontSize);
@@ -257,7 +257,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	/**
 	 * Returns the title font size.
 	 * 
-	 * @return Title font size.
+	 * @return title font size.
 	 */
 	public int getTitleFontSize() {
 		return getValue(Property.titleFontSize, getDefaultValues().getTitleFontSize());
@@ -738,9 +738,9 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	}
 
 	/**
-	 * Sets the size, in px, of the tooltip arrow.
+	 * Sets the size, in pixels, of the tooltip arrow.
 	 * 
-	 * @param caretSize size, in px, of the tooltip arrow.
+	 * @param caretSize size, in pixels, of the tooltip arrow.
 	 */
 	public void setCaretSize(int caretSize) {
 		setValue(Property.caretSize, caretSize);
@@ -749,9 +749,9 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	}
 
 	/**
-	 * Returns the size, in px, of the tooltip arrow.
+	 * Returns the size, in pixels, of the tooltip arrow.
 	 * 
-	 * @return size, in px, of the tooltip arrow.
+	 * @return size, in pixels, of the tooltip arrow.
 	 */
 	public int getCaretSize() {
 		return getValue(Property.caretSize, getDefaultValues().getCaretSize());
@@ -816,9 +816,9 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	}
 
 	/**
-	 * If true, color boxes are shown in the tooltip.
+	 * If <code>true</code>, color boxes are shown in the tooltip.
 	 * 
-	 * @param displayColors if true, color boxes are shown in the tooltip.
+	 * @param displayColors if <code>true</code>, color boxes are shown in the tooltip.
 	 */
 	public void setDisplayColors(boolean displayColors) {
 		setValue(Property.displayColors, displayColors);
@@ -827,9 +827,9 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	}
 
 	/**
-	 * If true, color boxes are shown in the tooltip.
+	 * If <code>true</code>, color boxes are shown in the tooltip.
 	 * 
-	 * @return if true, color boxes are shown in the tooltip.
+	 * @return if <code>true</code>, color boxes are shown in the tooltip.
 	 */
 	public boolean isDisplayColors() {
 		return getValue(Property.displayColors, getDefaultValues().isDisplayColors());

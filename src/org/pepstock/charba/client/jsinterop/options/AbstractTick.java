@@ -23,7 +23,8 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
  * Configures the ticks of an axis.<br>
  * Common base class for ticks.
  * 
- * @author Andrea "Stock" Stocchero version 2.0
+ * @author Andrea "Stock" Stocchero
+ * @since 2.0
  * 
  * @param <P> parent node class
  * @param <D> defaults provider class

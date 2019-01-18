@@ -50,7 +50,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * Sets if a global plugin must be enabled or not.
 	 * 
 	 * @param pluginId plugin id.
-	 * @param enabled <code>false</code> disable a gloabl plugin.
+	 * @param enabled <code>false</code> disable a global plugin.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
 	public void setEnabled(String pluginId, boolean enabled) throws InvalidPluginIdException {

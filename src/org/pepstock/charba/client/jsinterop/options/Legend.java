@@ -16,9 +16,9 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.jsinterop.commons.Key;
-import org.pepstock.charba.client.jsinterop.enums.Position;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend;
+import org.pepstock.charba.client.jsinterop.enums.Position;
 
 /**
  * The chart legend displays data about the datasets that area appearing on the chart.
@@ -79,7 +79,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	/**
 	 * Returns if the legend is shown.
 	 * 
-	 * @return if the legend is shown.
+	 * @return <code>true</code> if the legend is shown.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());
@@ -99,7 +99,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	/**
 	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
 	 * 
-	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes).
+	 * @return <code>true</code> if marks that this box should take the full width of the canvas (pushing down other boxes).
 	 */
 	public boolean isFullWidth() {
 		return getValue(Property.fullWidth, getDefaultValues().isFullWidth());
@@ -119,7 +119,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	/**
 	 * Returns if the legend will show datasets in reverse order.
 	 * 
-	 * @return Legend will show datasets in reverse order.
+	 * @return <code>true</code> if legend will show datasets in reverse order.
 	 */
 	public boolean isReverse() {
 		return getValue(Property.reverse, getDefaultValues().isReverse());
@@ -139,7 +139,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	/**
 	 * Returns the position of the legend.
 	 * 
-	 * @return Position of the legend.
+	 * @return position of the legend.
 	 */
 	public Position getPosition() {
 		return getValue(Property.position, Position.class, getDefaultValues().getPosition());

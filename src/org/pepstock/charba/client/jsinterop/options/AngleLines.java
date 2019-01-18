@@ -23,11 +23,10 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines;
 
 /**
  * It is used to configure angled lines that radiate from the center of the chart to the point labels.<br>
- * Note that these options only apply if display is true.
+ * Note that these options only apply if display is <code>true</code>.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
- *
  */
 public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> implements IsDefaultAngleLines {
 
@@ -55,9 +54,9 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	}
 
 	/**
-	 * If true, angle lines are shown
+	 * If <code>true</code>, angle lines are shown
 	 * 
-	 * @param display if true, angle lines are shown
+	 * @param display if <code>true</code>, angle lines are shown
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
@@ -66,9 +65,9 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	}
 
 	/**
-	 * If true, angle lines are shown
+	 * If <code>true</code>, angle lines are shown
 	 * 
-	 * @return if true, angle lines are shown.
+	 * @return if <code>true</code>, angle lines are shown.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());

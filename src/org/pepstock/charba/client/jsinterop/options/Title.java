@@ -63,9 +63,9 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	}
 
 	/**
-	 * Sets if the title is shown.
+	 * Sets <code>true</code> if the title is shown.
 	 * 
-	 * @param display if the title is shown.
+	 * @param display if <code>true</code> the title is shown.
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
@@ -74,9 +74,9 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	}
 
 	/**
-	 * Returns if the title is shown.
+	 * Returns <code>true</code> if the title is shown.
 	 * 
-	 * @return if the title is shown.
+	 * @return if <code>true</code> the title is shown.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());
@@ -105,7 +105,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	/**
 	 * Sets the padding to apply around labels. Only top and bottom are implemented.
 	 * 
-	 * @param padding Padding to apply around labels. Only top and bottom are implemented.
+	 * @param padding padding to apply around labels. Only top and bottom are implemented.
 	 */
 	public void setPadding(int padding) {
 		setValue(Property.padding, padding);
@@ -116,16 +116,16 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	/**
 	 * Returns the padding to apply around labels. Only top and bottom are implemented.
 	 * 
-	 * @return Padding to apply around labels. Only top and bottom are implemented.
+	 * @return padding to apply around labels. Only top and bottom are implemented.
 	 */
 	public int getPadding() {
 		return getValue(Property.padding, getDefaultValues().getPadding());
 	}
 
 	/**
-	 * Marks that this box should take the full width of the canvas (pushing down other boxes).
+	 * If <code>true</code>, marks that this box should take the full width of the canvas (pushing down other boxes).
 	 * 
-	 * @param fullWidth Marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * @param fullWidth if <code>true</code>, marks that this box should take the full width of the canvas (pushing down other boxes)
 	 */
 	public void setFullWidth(boolean fullWidth) {
 		setValue(Property.fullWidth, fullWidth);
@@ -134,9 +134,9 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	}
 
 	/**
-	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * Returns <code>true</code> if marks that this box should take the full width of the canvas (pushing down other boxes)
 	 * 
-	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes).
+	 * @return <code>true</code> if marks that this box should take the full width of the canvas (pushing down other boxes).
 	 */
 	public boolean isFullWidth() {
 		return getValue(Property.fullWidth, getDefaultValues().isFullWidth());
@@ -145,7 +145,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	/**
 	 * Sets the height of an individual line of text.
 	 * 
-	 * @param lineHeight Height of an individual line of text.
+	 * @param lineHeight height of an individual line of text.
 	 */
 	public void setLineHeight(double lineHeight) {
 		setValue(Property.lineHeight, lineHeight);
@@ -156,7 +156,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	/**
 	 * Returns the height of an individual line of text.
 	 * 
-	 * @return the height of an individual line of text. Default is 1.2
+	 * @return the height of an individual line of text.
 	 */
 	public double getLineHeight() {
 		return getValue(Property.lineHeight, getDefaultValues().getLineHeight());

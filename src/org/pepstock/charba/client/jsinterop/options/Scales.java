@@ -26,8 +26,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales;
 
 /**
- * The configuration element which contains all axes definitions.<br>
- * It maps the CHART.JS object of default, <code>chart.defaults.[chart_type].scales</code>.<br>
+ * The configuration element which contains all axes definitions.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
@@ -88,7 +87,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	/**
 	 * Sets if the scales are shown.
 	 * 
-	 * @param display if the scales are shown.
+	 * @param display <code>true</code> if the scales are shown.
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
@@ -99,7 +98,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	/**
 	 * Returns if the scales are shown.
 	 * 
-	 * @return the scales are shown. Default is true.
+	 * @return <code>true</code> if the scales are shown.
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());

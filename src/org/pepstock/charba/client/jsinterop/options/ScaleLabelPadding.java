@@ -16,12 +16,12 @@
 package org.pepstock.charba.client.jsinterop.options;
 
 import org.pepstock.charba.client.jsinterop.commons.Key;
-import org.pepstock.charba.client.jsinterop.enums.Position;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding;
+import org.pepstock.charba.client.jsinterop.enums.Position;
 
 /**
- * It is applied to all sides of the scale label objetc of axes (left, top, right, bottom).
+ * It is applied to all sides of the scale label object of axes (left, top, right, bottom).
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0

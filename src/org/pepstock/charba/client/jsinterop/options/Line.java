@@ -17,21 +17,21 @@ package org.pepstock.charba.client.jsinterop.options;
 
 import java.util.List;
 
-import org.pepstock.charba.client.jsinterop.commons.Key;
-import org.pepstock.charba.client.jsinterop.enums.CapStyle;
-import org.pepstock.charba.client.jsinterop.enums.Fill;
-import org.pepstock.charba.client.jsinterop.enums.JoinStyle;
 import org.pepstock.charba.client.jsinterop.commons.ArrayInteger;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
+import org.pepstock.charba.client.jsinterop.commons.Key;
 import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 import org.pepstock.charba.client.jsinterop.commons.ObjectType;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine;
+import org.pepstock.charba.client.jsinterop.enums.CapStyle;
+import org.pepstock.charba.client.jsinterop.enums.Fill;
+import org.pepstock.charba.client.jsinterop.enums.JoinStyle;
 
 /**
  * Line elements are used to represent the line in a line chart.
  * 
  * @author Andrea "Stock" Stocchero
- * 
+ * @since 2.0
  */
 public final class Line extends AbstractElement<IsDefaultLine> implements IsDefaultLine {
 
@@ -152,11 +152,11 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 
 	/**
 	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position,
+	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
 	 * are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
-	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter.
+	 * @param borderJoinStyle there are three possible values for this property: round, bevel and miter.
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
 		setValue(Property.borderJoinStyle, borderJoinStyle);
@@ -166,11 +166,11 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 
 	/**
 	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
-	 * (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position,
+	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
 	 * are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
 	 * 
-	 * @return There are three possible values for this property: round, bevel and miter.
+	 * @return there are three possible values for this property: round, bevel and miter.
 	 */
 	public JoinStyle getBorderJoinStyle() {
 		return getValue(Property.borderJoinStyle, JoinStyle.class, getDefaultValues().getBorderJoinStyle());
