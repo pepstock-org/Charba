@@ -25,11 +25,13 @@ import com.google.gwt.dom.client.ScriptElement;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * This utility injects ChartJS javascript into the web page of GWT.<br>
+ * This utility injects ChartJS java script and CHARBA custom java script implementation (for some utilities) into the web page
+ * of GWT.<br>
  * If ChartJS is already injected, it does nothing.<br>
  * It enables also to inject other script into web page, necessary when you want to use some Chart.JS plugins.
  * 
  * @author Andrea "Stock" Stocchero
+ * @version 2.0
  * 
  */
 public final class Injector {
@@ -40,15 +42,18 @@ public final class Injector {
 	private static final Set<String> ELEMENTS_INJECTED = new HashSet<String>();
 
 	/**
-	 * Injects ChartJS if not injected yet.
+	 * Injects ChartJS and Charba utilities if not injected yet.
 	 */
 	public static void ensureInjected() {
 		// use default chart.js
 		ensureInjected(Resources.INSTANCE.chartJsSource());
+		// use CHARBA helper
+		ensureInjected(Resources.INSTANCE.charbaHelper());
 	}
 
 	/**
 	 * Injects a script resource if not injected yet.
+	 * 
 	 * @param resource script resource
 	 */
 	public static void ensureInjected(TextResource resource) {
@@ -57,7 +62,7 @@ public final class Injector {
 			// creates a script element
 			ScriptElement scriptElement = Document.get().createScriptElement();
 			// sets ID
-			scriptElement.setId(CHARBA_PREFIX_SCRIPT_ELEMENT_ID+resource.getName());
+			scriptElement.setId(CHARBA_PREFIX_SCRIPT_ELEMENT_ID + resource.getName());
 			// sets the script content with ChartJS source
 			scriptElement.setInnerText(resource.getText());
 			// appends to the body

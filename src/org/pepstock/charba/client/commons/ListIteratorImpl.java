@@ -20,7 +20,8 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 /**
- * An iterator for lists that allows the programmer to traverse the list in either direction, modify the list during iteration, and obtain the iterator's current position in the list. 
+ * An iterator for lists that allows the programmer to traverse the list in either direction, modify the list during iteration,
+ * and obtain the iterator's current position in the list.
  * 
  * @author Andrea "Stock" Stocchero
  * @param <E> type of list
@@ -29,6 +30,7 @@ public class ListIteratorImpl<E> extends IteratorImpl<E> implements ListIterator
 
 	/**
 	 * Creates an iterator of a list
+	 * 
 	 * @param index start index of parent list
 	 * @param parent list of this iterator
 	 */
@@ -70,7 +72,7 @@ public class ListIteratorImpl<E> extends IteratorImpl<E> implements ListIterator
 		int i = cursor - 1;
 		// if less than ZERO
 		// EXCEPTION
-		if (i < 0){
+		if (i < 0) {
 			throw new NoSuchElementException();
 		}
 		// sets new cursor
@@ -87,7 +89,7 @@ public class ListIteratorImpl<E> extends IteratorImpl<E> implements ListIterator
 	@Override
 	public void set(E e) {
 		// if last return less than ZERO, EXCEPTION
-		if (lastReturn < 0){
+		if (lastReturn < 0) {
 			throw new IllegalStateException();
 		}
 		// sets element

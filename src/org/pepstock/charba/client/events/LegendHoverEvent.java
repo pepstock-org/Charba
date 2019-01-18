@@ -23,7 +23,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * Event which is fired when the user hovers on the legend of the chart.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public final class LegendHoverEvent extends AbstractEvent<LegendHoverEventHandler> {
 
@@ -39,7 +39,6 @@ public final class LegendHoverEvent extends AbstractEvent<LegendHoverEventHandle
 	 * 
 	 * @param nativeEvent native event of this custom event
 	 * @param item legend item related to the hover
-	 * @see org.pepstock.charba.client.items.LegendItem
 	 */
 	public LegendHoverEvent(NativeEvent nativeEvent, LegendItem item) {
 		super(nativeEvent);

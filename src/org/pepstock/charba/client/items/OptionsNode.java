@@ -15,24 +15,25 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.defaults.global.Options;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
+import org.pepstock.charba.client.options.ScaledOptions;
 
 /**
  *  Wrapper of options node of CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
-public final class OptionsNode extends Options {
+public final class OptionsNode extends ScaledOptions {
 
 	/**
-	 * Wraps the CHART.JS java script object.
+	 * Creates the item using a native java script object which contains all properties.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * @param nativeObject native java script object which contains all properties.
 	 */
-	OptionsNode(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	public OptionsNode(NativeObject nativeObject) {
+		super(DefaultsBuilder.get().getScaledOptions(), nativeObject);
 	}
 
 }

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.events;
 
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 
 import com.google.gwt.dom.client.NativeEvent;
@@ -24,12 +25,12 @@ import com.google.gwt.dom.client.NativeEvent;
  * It has been created mapping the native event provided by CHART.JS interfaces.
  * 
  * @author Andrea "Stock" Stocchero
- * @see com.google.gwt.dom.client.NativeEvent
+ * @since 2.0
  */
 public class ChartNativeEvent extends NativeEvent {
 
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -38,10 +39,10 @@ public class ChartNativeEvent extends NativeEvent {
 	}
 
 	/**
-	 * Needed for GWt injection
+	 * Needed for GWT injection
 	 */
 	protected ChartNativeEvent() {
-		// do notnihg
+		// do nothing
 	}
 
 	/**
@@ -50,7 +51,7 @@ public class ChartNativeEvent extends NativeEvent {
 	 * @return the layer X property
 	 */
 	public final int getLayerX() {
-		return getInt(Property.layerX.name());
+		return JsHelper.get().propertyAsInt(this, Property.layerX.name());
 	}
 
 	/**
@@ -59,26 +60,7 @@ public class ChartNativeEvent extends NativeEvent {
 	 * @return the layer Y property
 	 */
 	public final int getLayerY() {
-		return getInt(Property.layerY.name());
+		return JsHelper.get().propertyAsInt(this, Property.layerY.name());
 	}
 
-	/**
-	 * Returns the string representation of the object content.
-	 * 
-	 * @return the string representation of the object content.
-	 */
-	public final String toContentString() {
-		return "ChartEvent [getLayerX()=" + getLayerX() + ", getLayerY()=" + getLayerY() + ", toString()=" + super.toString() + "]";
-	}
-
-	/**
-	 * Native method to get the integer value of layers properties.
-	 * 
-	 * @param key name of JavaScript object field
-	 * @return integer value of the property
-	 */
-	private final native int getInt(String key)/*-{
-    	return this[key];
-	}-*/;
-	
 }

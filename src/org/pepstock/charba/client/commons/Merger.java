@@ -15,20 +15,38 @@
 */
 package org.pepstock.charba.client.commons;
 
+import org.pepstock.charba.client.ChartOptions;
+import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.GlobalOptions;
+import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.Injector;
-
-import com.google.gwt.core.client.JavaScriptObject;
+import org.pepstock.charba.client.ScaleType;
+import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.options.Scale;
 
 /**
- * Utility to merge java script object into another one.
+ * Singleton utility to merge java script object into another one and provide teh service to get the chart options with all
+ * defaults.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
 public final class Merger {
-	
-	// static instance
+	// singleton instance
 	private static final Merger INSTANCE = new Merger();
+
+	/**
+	 * Name of properties of native objects to use to creates defaults for chart by its type.
+	 */
+	private enum Property implements Key
+	{
+		scale,
+		scales,
+		xAxes,
+		yAxes
+	}
 
 	/**
 	 * To avoid any instantiation
@@ -39,106 +57,212 @@ public final class Merger {
 	}
 
 	/**
-	 * Copies <code>source</code> properties into <code>target</code> only if not defined in target.<br>
-	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.
-	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source  Object to merge into <code>target</code>.
+	 * Singleton method to get the instance
+	 * 
+	 * @return merger instance
 	 */
-	public static void merge(JavaScriptObjectContainer target, JavaScriptObjectContainer source) {
-		merge(target.getJavaScriptObject(), source.getJavaScriptObject());
+	public static Merger get() {
+		return INSTANCE;
+	}
+
+	/**
+	 * Merges chart default options (by chart.defaults[type]), default scale options (by chart.defaults.scale) and global
+	 * options (by chart.defaults.global).<br>
+	 * The chain of priority is:<br>
+	 * <ul>
+	 * <li>chart default options (by chart.defaults[type])
+	 * <li>default scale options (by chart.defaults.scale)
+	 * <li>global options (by chart.defaults.global)
+	 * </ul>
+	 * 
+	 * @param type chart type
+	 * @return a native object to be mapped with all defaults for that chart type.
+	 */
+	public NativeObject get(Type type) {
+		// gets chart.defaults[type]
+		ChartOptions base = Defaults.get().chart(type);
+		// gets chart.defaults.scale
+		Scale scale = Defaults.get().getScale();
+		// gets chart.defaults.global
+		GlobalOptions global = Defaults.get().getGlobal();
+		// clones all native object to avoid to changes the sources
+		NativeObject chartOptions = Helpers.get().clone(base.getNativeObject());
+		NativeObject scaleOptions = Helpers.get().clone(scale.getNativeObject());
+		NativeObject globalOptions = Helpers.get().clone(global.getNativeObject());
+		// checks if the chart options has got scale (only 1)
+		// chart without scales don't do anything
+		if (ScaleType.single.equals(type.scaleType())) {
+			// manages single scale chart type
+			handleSingleScalesType(chartOptions, scaleOptions);
+		} else if (ScaleType.multi.equals(type.scaleType())) {
+			// manages multi scale chart type
+			handleMultiScalesType(chartOptions, scaleOptions);
+		}
+		// merges chart options (maybe already updated by scales)
+		// and the global ones
+		merge(chartOptions, globalOptions);
+		return chartOptions;
+	}
+
+	/**
+	 * Manages the merge of options for chart with multiple scales.
+	 * 
+	 * @param chartOptions default chart options
+	 * @param scaleOptions default scale options
+	 */
+	private void handleMultiScalesType(NativeObject chartOptions, NativeObject scaleOptions) {
+		// checks if scales object is present
+		if (chartOptions.hasProperty(Property.scales.name())) {
+			// if here, the chart has got 2 or more scales
+			// gets the native object for scales
+			NativeObjectDescriptor descriptor = chartOptions.getObjectProperty(Property.scales.name());
+			NativeObject scales = descriptor.getValue();
+			// checks if there is x axes
+			if (scales.hasProperty(Property.xAxes.name())) {
+				// gets the array about x axes
+				NativeArrayDescriptor<ArrayObject> xScalesDescriptor = scales.getArrayProperty(Property.xAxes.name());
+				ArrayObject xScales = xScalesDescriptor.getValue();
+				// scans all x axes applying the default scale
+				for (int i = 0; i < xScales.length(); i++) {
+					merge(xScales.get(i), scaleOptions);
+				}
+			}
+			// checks if there is y axes
+			if (scales.hasProperty(Property.yAxes.name())) {
+				// gets the array about y axes
+				NativeArrayDescriptor<ArrayObject> yScalesDescriptor = scales.getArrayProperty(Property.yAxes.name());
+				ArrayObject yScales = yScalesDescriptor.getValue();
+				// scans all x axes applying the default scale
+				for (int i = 0; i < yScales.length(); i++) {
+					merge(yScales.get(i), scaleOptions);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Manages the merge of options for chart with single scale.
+	 * 
+	 * @param chartOptions default chart options
+	 * @param scaleOptions default scale options
+	 */
+	private void handleSingleScalesType(NativeObject chartOptions, NativeObject scaleOptions) {
+		// checks if scale object is present
+		if (chartOptions.hasProperty(Property.scale.name())) {
+			// if has got scale
+			// apply the default scale to single scale of chart options
+			NativeObjectDescriptor descriptor = chartOptions.getObjectProperty(Property.scale.name());
+			merge(descriptor.getValue(), scaleOptions);
+		}
 	}
 
 	/**
 	 * Copies <code>source</code> properties into <code>target</code> only if not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.
+	 * 
 	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source  Object to merge into <code>target</code>.
+	 * @param source Object to merge into <code>target</code>.
 	 */
-	public static void merge(JavaScriptObject target, JavaScriptObjectContainer source) {
-		merge(target, source.getJavaScriptObject());
+	public void merge(NativeObjectContainer target, NativeObjectContainer source) {
+		merge(target.getNativeObject(), source.getNativeObject());
 	}
 
 	/**
 	 * Copies <code>source</code> properties into <code>target</code> only if not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.
+	 * 
 	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source  Object to merge into <code>target</code>.
+	 * @param source Object to merge into <code>target</code>.
 	 */
-	public static void merge(JavaScriptObjectContainer target, JavaScriptObject source) {
-		merge(target.getJavaScriptObject(), source);
+	public void merge(NativeObject target, NativeObjectContainer source) {
+		merge(target, source.getNativeObject());
 	}
 
 	/**
 	 * Copies <code>source</code> properties into <code>target</code> only if not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.
+	 * 
 	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source  Object to merge into <code>target</code>.
+	 * @param source Object to merge into <code>target</code>.
 	 */
-	public static void merge(JavaScriptObject target, JavaScriptObject source) {
-		INSTANCE.mergeJavaScriptObject(target, source);
+	public void merge(NativeObjectContainer target, NativeObject source) {
+		merge(target.getNativeObject(), source);
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) 
-	 * into <code>target</code> only if not defined in target.<br>
-	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
-	 * The property is 
+	 * Copies <code>source</code> properties into <code>target</code> only if not defined in target.<br>
+	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.
+	 * 
 	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source  Object to merge into <code>target</code>.
-	 * @param property property of root java script object to add
-	 * @return the added java script object
+	 * @param source Object to merge into <code>target</code>.
 	 */
-	public static JavaScriptObjectContainer merge(JavaScriptObjectContainer target, JavaScriptObjectContainer source, String property) {
-		return merge(target.getJavaScriptObject(), source.getJavaScriptObject(), property);
+	public void merge(NativeObject target, NativeObject source) {
+		mergeNativeObjects(target, source);
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) 
-	 * into <code>target</code> only if not defined in target.<br>
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the
+	 * property argument) into <code>target</code> only if not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
-	 * The property is 
+	 * The property is
+	 * 
 	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source  Object to merge into <code>target</code>.
+	 * @param source Object to merge into <code>target</code>.
 	 * @param property property of root java script object to add
 	 * @return the added java script object
 	 */
-	public static JavaScriptObjectContainer merge(JavaScriptObject target, JavaScriptObjectContainer source, String property) {
-		return merge(target, source.getJavaScriptObject(), property);
+	public NativeObject merge(NativeObjectContainer target, NativeObjectContainer source, String property) {
+		return merge(target.getNativeObject(), source.getNativeObject(), property);
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) 
-	 * into <code>target</code> only if not defined in target.<br>
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the
+	 * property argument) into <code>target</code> only if not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
-	 * The property is 
+	 * The property is
+	 * 
 	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source  Object to merge into <code>target</code>.
+	 * @param source Object to merge into <code>target</code>.
 	 * @param property property of root java script object to add
 	 * @return the added java script object
 	 */
-	public static JavaScriptObjectContainer merge(JavaScriptObjectContainer target, JavaScriptObject source, String property) {
-		return merge(target.getJavaScriptObject(), source, property);
+	public NativeObject merge(NativeObject target, NativeObjectContainer source, String property) {
+		return merge(target, source.getNativeObject(), property);
 	}
 
 	/**
-	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the property argument) 
-	 * into <code>target</code> only if not defined in target.<br>
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the
+	 * property argument) into <code>target</code> only if not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
-	 * The property is 
+	 * The property is
+	 * 
 	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source  Object to merge into <code>target</code>.
+	 * @param source Object to merge into <code>target</code>.
 	 * @param property property of root java script object to add
 	 * @return the added java script object
 	 */
-	public static JavaScriptObjectContainer merge(JavaScriptObject target, JavaScriptObject source, String property) {
+	public NativeObject merge(NativeObjectContainer target, NativeObject source, String property) {
+		return merge(target.getNativeObject(), source, property);
+	}
+
+	/**
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the
+	 * property argument) into <code>target</code> only if not defined in target.<br>
+	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
+	 * The property is
+	 * 
+	 * @param target The target object in which <code>source</code> is merged into.
+	 * @param source Object to merge into <code>target</code>.
+	 * @param property property of root java script object to add
+	 * @return the added java script object
+	 */
+	public NativeObject merge(NativeObject target, NativeObject source, String property) {
 		// creates new root object
-		JavaScriptObjectContainer newObject = new JavaScriptObjectContainer();
-		// creates a key using property
-		Key key = new StandardKey(property);
+		NativeObject newObject = new NativeObject();
 		// stores configuration
-		newObject.setValue(key, source);
+		newObject.defineObjectProperty(property, source);
 		// invokes CHART.JS to merge
-		INSTANCE.mergeJavaScriptObject(target, newObject.getJavaScriptObject());
+		mergeNativeObjects(target, newObject);
 		// return the object
 		return newObject;
 	}
@@ -146,11 +270,12 @@ public final class Merger {
 	/**
 	 * Copies <code>source</code> properties into <code>target</code> only if not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.
+	 * 
 	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source  Object to merge into <code>target</code>.
+	 * @param source Object to merge into <code>target</code>.
 	 */
-	private native void mergeJavaScriptObject(JavaScriptObject target, JavaScriptObject source) /*-{
-	    $wnd.Chart.helpers.mergeIf(target, source);
-	}-*/;
-	
+	private void mergeNativeObjects(NativeObject target, NativeObject source) {
+		Helpers.get().mergeIf(target, source);
+	}
+
 }

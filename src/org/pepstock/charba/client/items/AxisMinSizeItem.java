@@ -15,24 +15,25 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.commons.NativeObject;
 
 /**
  * JavaScript object which contains the minimum size of an axis.<br>
- * This object reflects the object created by CHART.JS and is provided to Axis callbacks.
+ * This object reflects the object created by CHART.JS and is provided to Axis callbacks.<br>
+ * Implements all <code>set</code> methods to change java script object properties.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public final class AxisMinSizeItem extends SizeItem {
 
 	/**
-	 * Wraps the CHART.JS java script object.
+	 * Creates the item using a native java script object which contains all properties.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * @param nativeObject native java script object which contains all properties.
 	 */
-	AxisMinSizeItem(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	AxisMinSizeItem(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
 	/**
@@ -40,7 +41,7 @@ public final class AxisMinSizeItem extends SizeItem {
 	 * 
 	 * @param width the minimum width of axis in pixel.
 	 */
-	public final void setWidth(int width) {
+	public void setWidth(int width) {
 		setValue(Property.width, width);
 	}
 
@@ -49,8 +50,7 @@ public final class AxisMinSizeItem extends SizeItem {
 	 * 
 	 * @param height the minimum height of axis in pixel.
 	 */
-	public final void setHeight(int height) {
+	public void setHeight(int height) {
 		setValue(Property.height, height);
 	}
-
 }

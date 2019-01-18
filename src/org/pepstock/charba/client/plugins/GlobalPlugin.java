@@ -24,6 +24,7 @@ import org.pepstock.charba.client.Plugin;
  * The wrapper is mandatory to able to catch all hooks of chart even if the plugin implements just a part of the hooks.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
 class GlobalPlugin extends WrapperPlugin {
@@ -36,9 +37,11 @@ class GlobalPlugin extends WrapperPlugin {
 	GlobalPlugin(Plugin delegation) {
 		super(delegation);
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.plugins.WrapperPlugin#getChart(java.lang.String)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.plugins.WrapperPlugin#getChart(java.lang.String)
 	 */
 	@Override
 	AbstractChart<?, ?> getChart(String chartId) {

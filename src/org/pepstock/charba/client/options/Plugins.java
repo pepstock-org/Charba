@@ -15,13 +15,12 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.StandardKey;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.plugins.InvalidPluginIdException;
 import org.pepstock.charba.client.plugins.PluginIdChecker;
-
-import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * Definitions about plugins options. This is used to configure plugins (mainly the global ones).<br>
@@ -29,82 +28,99 @@ import com.google.gwt.core.client.JavaScriptObject;
  * The java script object key is the plugin id.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
-public final class Plugins extends JavaScriptObjectContainer {
+public final class Plugins extends AbstractModel<Options, Void> {
 
 	/**
-	 * Empty constructor to reduce its visibility
+	 * Creates the object with the parent, the key of this element and native object to map java script properties.<br>
+	 * No default values for this element.
+	 * 
+	 * @param options options of the chart.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param nativeObject native object to map java script properties
 	 */
-	Plugins() {
+	Plugins(Options options, Key childKey, NativeObject nativeObject) {
+		// no default values for this element
+		super(options, childKey, null, nativeObject);
 	}
 
 	/**
 	 * Sets if a global plugin must be enabled or not.
+	 * 
 	 * @param pluginId plugin id.
-	 * @param enabled <code>false</code> disable a gloabl plugin.
+	 * @param enabled <code>false</code> disable a global plugin.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
 	public void setEnabled(String pluginId, boolean enabled) throws InvalidPluginIdException {
-		// checks the plugin id
-		PluginIdChecker.check(pluginId);
-		// creates a key using plugin ID
-		Key key = new StandardKey(pluginId);
 		// if null, removes the configuration
-		if (enabled){
+		if (enabled) {
 			// removes configuration if exists
-			removeIfExists(key);
+			remove(PluginIdChecker.key(pluginId));
 		} else {
 			// stores configuration
-			setValue(key, enabled);
+			setValue(PluginIdChecker.key(pluginId), true);
 		}
-	}
-	
-	/**
-	 * Returns if a global plugin is enabled or not.
-	 * @param pluginId plugin id.
-	 * @return  <code>false</code> if a gloabl plugin is not enabled otherwise <code>true</code>.
-	 * @throws InvalidPluginIdException  occurs if the plugin id is invalid.
-	 */
-	public boolean isEnabled(String pluginId) throws InvalidPluginIdException{
-		// checks the plugin id
-		PluginIdChecker.check(pluginId);
-		// returns the enablement creating a key by plugin id.
-		return getValue(new StandardKey(pluginId), true);
-	}
-	
-	/**
-	 * Sets the plugin options. If passed otpions is null, the configuration of plugin will be removed.
-	 * @param pluginId plugin id.
-	 * @param options java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if exist.
-	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
-	 */
-	public void setOptions(String pluginId, JavaScriptObject options) throws InvalidPluginIdException {
-		// checks the plugin id
-		PluginIdChecker.check(pluginId);
-		// creates a key using plugin ID
-		Key key = new StandardKey(pluginId);
-		// if null, removes the configuration
-		if (options == null){
-			// removes configuration if exists
-			removeIfExists(key);
-		} else {
-			// stores configuration
-			setValue(key, options);
-		}
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
-	 * Returns the plugin options, if exist.
+	 * Returns if a global plugin is enabled or not.
+	 * 
 	 * @param pluginId plugin id.
+	 * @return <code>false</code> if a global plugin is not enabled otherwise <code>true</code>.
+	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
+	 */
+	public boolean isEnabled(String pluginId) throws InvalidPluginIdException {
+		return getValue(PluginIdChecker.key(pluginId), true);
+	}
+
+	/**
+	 * Sets the plugin options. If passed options is null, the configuration of plugin will be removed.
+	 * 
+	 * @param pluginId plugin id.
+	 * @param options java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if
+	 *            exist.
+	 * @param <T> type of native object container to store
+	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
+	 */
+	public <T extends NativeObjectContainer> void setOptions(String pluginId, T options) throws InvalidPluginIdException {
+		// if null, removes the configuration
+		if (options == null) {
+			// removes configuration if exists
+			remove(PluginIdChecker.key(pluginId));
+		} else {
+			// stores configuration
+			setValue(PluginIdChecker.key(pluginId), options);
+		}
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Checks if there is any options for a specific plugin, by its id.
+	 * 
+	 * @param pluginId plugin id.
+	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
+	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
+	 */
+	public boolean hasOptions(String pluginId) throws InvalidPluginIdException {
+		return has(PluginIdChecker.key(pluginId));
+	}
+
+	/**
+	 * Returns the plugin options, if exist. It uses a factory instance to create a native object container.
+	 * 
+	 * @param pluginId plugin id.
+	 * @param factory factory instance to create a native object container.
+	 * @param <T> type of native object container to return
 	 * @return java script object used to configure the plugin or <code>null</code> if not exist.
 	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public JavaScriptObject getOptions(String pluginId) throws InvalidPluginIdException{
-		// checks the plugin id
-		PluginIdChecker.check(pluginId);
-		// returns the configuration creating a key by plugin id.
-		return getValue(new StandardKey(pluginId));
+	public <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) throws InvalidPluginIdException {
+		return factory.create(getValue(PluginIdChecker.key(pluginId)));
 	}
 
 }

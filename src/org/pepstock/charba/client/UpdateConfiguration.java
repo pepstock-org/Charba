@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.enums.Easing;
 
 /**
@@ -25,16 +25,14 @@ import org.pepstock.charba.client.enums.Easing;
  * This is useful when update is manually called inside an event handler and some different animation is desired.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
-public final class UpdateConfiguration extends JavaScriptObjectContainer {
+public final class UpdateConfiguration extends NativeObjectContainer {
 
 	private static final boolean DEFAULT_LAZY = false;
 
-	private static final int DEFAULT_DURATION = 1000;
-
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -47,7 +45,6 @@ public final class UpdateConfiguration extends JavaScriptObjectContainer {
 	 * Sets the animation easing function.
 	 * 
 	 * @param easing animation easing function.
-	 * @see org.pepstock.charba.client.enums.Easing
 	 */
 	public void setEasing(Easing easing) {
 		setValue(Property.easing, easing);
@@ -56,11 +53,10 @@ public final class UpdateConfiguration extends JavaScriptObjectContainer {
 	/**
 	 * Returns the animation easing function.
 	 * 
-	 * @return the animation easing function. Default is {@link org.pepstock.charba.client.enums.Easing#easeOutQuart}.
-	 * @see org.pepstock.charba.client.enums.Easing
+	 * @return the animation easing function.
 	 */
 	public Easing getEasing() {
-		return getValue(Property.easing, Easing.class, Easing.easeOutQuart);
+		return getValue(Property.easing, Easing.class, Defaults.get().getGlobal().getAnimation().getEasing());
 	}
 
 	/**
@@ -75,10 +71,10 @@ public final class UpdateConfiguration extends JavaScriptObjectContainer {
 	/**
 	 * Returns the time for the animation of the redraw in milliseconds.
 	 * 
-	 * @return time for the animation of the redraw in milliseconds. Default is 1000.
+	 * @return time for the animation of the redraw in milliseconds.
 	 */
 	public int getDuration() {
-		return getValue(Property.duration, DEFAULT_DURATION);
+		return getValue(Property.duration, Defaults.get().getGlobal().getAnimation().getDuration());
 	}
 
 	/**
@@ -104,8 +100,8 @@ public final class UpdateConfiguration extends JavaScriptObjectContainer {
 	 * 
 	 * @return the java script object in order to consume it to configure the chart update or render.
 	 */
-	GenericJavaScriptObject getObject() {
-		return getJavaScriptObject();
+	NativeObject getObject() {
+		return getNativeObject();
 	}
 
 }

@@ -15,22 +15,27 @@
 */
 package org.pepstock.charba.client.items;
 
-import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.commons.ArrayInteger;
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.items.LegendHitBoxItem.LegendHitBoxItemFactory;
+import org.pepstock.charba.client.items.LegendItem.LegendItemFactory;
 
 /**
- * Wrapper of legend node of CHART.JS.
+ * Wrapper of legend node of CHART.JS.<br>
+ * This is a wrapper of legend node of Chart (of CHART.JS).
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public final class LegendNode extends BaseBoxNodeItem {
-
+	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -40,14 +45,19 @@ public final class LegendNode extends BaseBoxNodeItem {
 		lineWidths,
 		columnWidths
 	}
-
+	
+	// factory to create legend items for array container list
+	private final LegendItemFactory legendItemFactory = new LegendItemFactory();
+	// factory to create legend hit box items for array container list
+	private final LegendHitBoxItemFactory legendHitBoxItemFactory = new LegendHitBoxItemFactory();
+	
 	/**
-	 * Wraps the CHART.JS java script object.
+	 * Creates the item using a native java script object which contains all properties.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * @param nativeObject native java script object which contains all properties.
 	 */
-	LegendNode(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	public LegendNode(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
 	/**
@@ -65,7 +75,10 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * @return the list of line widths.
 	 */
 	public List<Integer> getLineWidths() {
-		return getIntegerArray(Property.lineWidths);
+		// gets array from native object
+		ArrayInteger array = getArrayValue(Property.lineWidths);
+		// returns list
+		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	/**
@@ -74,7 +87,10 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * @return the list of columns widths.
 	 */
 	public List<Integer> getColumnWidths() {
-		return getIntegerArray(Property.columnWidths);
+		// gets array from native object
+		ArrayInteger array = getArrayValue(Property.columnWidths);
+		// returns list
+		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	/**
@@ -83,19 +99,10 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * @return the list of hit boxes of the legend.
 	 */
 	public List<LegendHitBoxItem> getHitBoxes() {
-		// creates result
-		List<LegendHitBoxItem> result = new LinkedList<>();
-		// checks if the property exists
-		if (has(Property.legendHitBoxes)) {
-			// scans all objects array
-			for (GenericJavaScriptObject object : getObjectArray(Property.legendHitBoxes)) {
-				// creates hit box
-				LegendHitBoxItem item = new LegendHitBoxItem(object);
-				// adds it
-				result.add(item);
-			}
-		}
-		return result;
+		// gets array from native object
+		ArrayObject array = getArrayValue(Property.legendHitBoxes);
+		// returns list
+		return ArrayListHelper.unmodifiableList(array, legendHitBoxItemFactory);
 	}
 
 	/**
@@ -104,18 +111,9 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * @return the list of items of the legend.
 	 */
 	public List<LegendItem> getItems() {
-		// creates result
-		List<LegendItem> result = new LinkedList<>();
-		// checks if the property exists
-		if (has(Property.legendItems)) {
-			// scans all objects array
-			for (GenericJavaScriptObject object : getObjectArray(Property.legendItems)) {
-				// creates item
-				LegendItem item = new LegendItem(object);
-				// adds it
-				result.add(item);
-			}
-		}
-		return result;
+		// gets array from native object
+		ArrayObject array = getArrayValue(Property.legendItems);
+		// returns list
+		return ArrayListHelper.unmodifiableList(array, legendItemFactory);
 	}
 }

@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.defaults.IsDefaultHover;
 import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
 
@@ -25,66 +25,73 @@ import org.pepstock.charba.client.enums.InteractionMode;
  * Definitions about how elements appear in the tooltip, hovering the chart.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
-public final class Hover extends ChartContainer {
+public final class Hover extends AbstractModel<Options, IsDefaultHover> implements IsDefaultHover {
 
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
 		mode,
-		intersect,
 		axis,
+		intersect,
 		animationDuration
 	}
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
 	 * 
-	 * @param chart chart instance
+	 * @param options options of the chart.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
 	 */
-	Hover(AbstractChart<?, ?> chart) {
-		super(chart);
+	Hover(Options options, Key childKey, IsDefaultHover defaultValues, NativeObject nativeObject) {
+		super(options, childKey, defaultValues, nativeObject);
 	}
 
 	/**
 	 * Sets which elements appear in the tooltip.
 	 * 
 	 * @param mode which elements appear in the tooltip.
-	 * @see org.pepstock.charba.client.enums.InteractionMode
 	 */
 	public void setMode(InteractionMode mode) {
 		setValue(Property.mode, mode);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns which elements appear in the tooltip.
 	 * 
-	 * @return which elements appear in the tooltip. For default see {@link org.pepstock.charba.client.GlobalOptions#getHover()}.
-	 * @see org.pepstock.charba.client.enums.InteractionMode
+	 * @return which elements appear in the tooltip.
 	 */
 	public InteractionMode getMode() {
-		return getValue(Property.mode, InteractionMode.class, getChart().getGlobal().getHover().getMode());
+		return getValue(Property.mode, InteractionMode.class, getDefaultValues().getMode());
 	}
 
 	/**
-	 * if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
 	 * 
-	 * @param intersect if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * @param intersect if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public void setIntersect(boolean intersect) {
 		setValue(Property.intersect, intersect);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
-	 * if true, the hover mode only applies when the mouse position intersects an item on the chart.
+	 * if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
 	 * 
-	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart.  For default see {@link org.pepstock.charba.client.GlobalOptions#getHover()}.
+	 * @return if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public boolean isIntersect() {
-		return getValue(Property.intersect, getChart().getGlobal().getHover().isIntersect());
+		return getValue(Property.intersect, getDefaultValues().isIntersect());
 	}
 
 	/**
@@ -94,35 +101,38 @@ public final class Hover extends ChartContainer {
 	 */
 	public void setAnimationDuration(int milliseconds) {
 		setValue(Property.animationDuration, milliseconds);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the duration in milliseconds it takes to animate hover style changes.
 	 * 
-	 * @return duration in milliseconds it takes to animate hover style changes.  For default see {@link org.pepstock.charba.client.GlobalOptions#getHover()}.
+	 * @return duration in milliseconds it takes to animate hover style changes.
 	 */
 	public int getAnimationDuration() {
-		return getValue(Property.animationDuration, getChart().getGlobal().getHover().getAnimationDuration());
+		return getValue(Property.animationDuration, getDefaultValues().getAnimationDuration());
 	}
-	
+
 	/**
 	 * Sets to 'x', 'y', or 'xy' to define which directions are used in calculating distances.<br>
 	 * Defaults to 'x' for index mode and 'xy' in dataset and nearest modes.
 	 * 
 	 * @param axis define which directions are used in calculating distances.
-	 * @see org.pepstock.charba.client.enums.InteractionAxis
 	 */
 	public void setAxis(InteractionAxis axis) {
 		setValue(Property.axis, axis);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns to 'x', 'y', or 'xy' to define which directions are used in calculating distances.
 	 * 
-	 * @return define which directions are used in calculating distances.  For default see {@link org.pepstock.charba.client.GlobalOptions#getHover()}.
-	 * @see org.pepstock.charba.client.enums.InteractionAxis
+	 * @return define which directions are used in calculating distances.
 	 */
 	public InteractionAxis getAxis() {
-		return getValue(Property.axis, InteractionAxis.class, getChart().getGlobal().getHover().getAxis());
+		return getValue(Property.axis, InteractionAxis.class, getDefaultValues().getAxis());
 	}
+
 }

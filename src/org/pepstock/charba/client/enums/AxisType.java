@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.Key;
  * These are the possible types of an axis.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public enum AxisType implements Key
 {
@@ -54,6 +54,6 @@ public enum AxisType implements Key
 	 * The linear scale is use to chart numerical data.<br>
 	 * The linear interpolation is used to determine where a value lies in relation the center of the axis.
 	 */
-	radialLinear;
+	radialLinear
 
 }

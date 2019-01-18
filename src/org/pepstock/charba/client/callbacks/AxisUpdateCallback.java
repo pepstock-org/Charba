@@ -15,35 +15,31 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.items.AxisItem;
 
 /**
  * Interface to be implemented which can be used to change parameters in the scale during updating.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.options.scales.Axis
+ * @since 2.0
  */
 public interface AxisUpdateCallback {
 
 	/**
 	 * Callback called before the update process starts.
 	 * 
-	 * @param chart chart instance
+	 * @param axis axis instance where this callback as been defined
 	 * @param item axis item instance
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
-	void onBeforeUpdate(AbstractChart<?, ?> chart, AxisItem item);
+	void onBeforeUpdate(Axis axis, AxisItem item);
 
 	/**
 	 * Callback that runs at the end of the update process.
 	 * 
-	 * @param chart chart instance
+	 * @param axis axis instance where this callback as been defined
 	 * @param item axis item instance
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem
 	 */
-	void onAfterUpdate(AbstractChart<?, ?> chart, AxisItem item);
+	void onAfterUpdate(Axis axis, AxisItem item);
 
 }

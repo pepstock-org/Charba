@@ -22,7 +22,7 @@ import org.pepstock.charba.client.commons.Key;
  * elements appear via tooltip or hover.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public enum InteractionMode implements Key
 {

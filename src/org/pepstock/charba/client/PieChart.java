@@ -15,13 +15,16 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.configuration.PieOptions;
 import org.pepstock.charba.client.data.PieDataset;
-import org.pepstock.charba.client.options.PieOptions;
 
 /**
- * PIE chart implementation.
+ * PIE chart implementation.<br>
+ * A pie charts are divided into segments, the arc of each segment shows the proportional value of each piece of data.<br>
+ * They are excellent at showing the relational proportions between data.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
 public class PieChart extends AbstractChart<PieOptions, PieDataset> {
@@ -32,13 +35,13 @@ public class PieChart extends AbstractChart<PieOptions, PieDataset> {
 	 * Builds the object.
 	 */
 	public PieChart() {
-		options = new PieOptions(this);
+		options = new PieOptions(this, getChartOptions());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getType()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -48,7 +51,7 @@ public class PieChart extends AbstractChart<PieOptions, PieDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getOptions()
 	 */
 	@Override
 	public PieOptions getOptions() {
@@ -58,7 +61,7 @@ public class PieChart extends AbstractChart<PieOptions, PieDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#newDataset()
 	 */
 	@Override
 	public PieDataset newDataset() {

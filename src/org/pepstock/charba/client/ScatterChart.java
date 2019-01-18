@@ -15,13 +15,16 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.configuration.ScatterOptions;
 import org.pepstock.charba.client.data.ScatterDataset;
-import org.pepstock.charba.client.options.ScatterOptions;
 
 /**
- * SCATTER chart implementation.
+ * SCATTER chart implementation.<br>
+ * Scatter charts are based on basic line charts with the x axis changed to a linear axis.<br>
+ * To use a scatter chart, data must be passed as objects containing X and Y properties.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
 public class ScatterChart extends AbstractChart<ScatterOptions, ScatterDataset> {
@@ -32,13 +35,13 @@ public class ScatterChart extends AbstractChart<ScatterOptions, ScatterDataset> 
 	 * Builds the object.
 	 */
 	public ScatterChart() {
-		options = new ScatterOptions(this);
+		options = new ScatterOptions(this, getChartOptions());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getType()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -48,7 +51,7 @@ public class ScatterChart extends AbstractChart<ScatterOptions, ScatterDataset> 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getOptions()
 	 */
 	@Override
 	public ScatterOptions getOptions() {
@@ -58,7 +61,7 @@ public class ScatterChart extends AbstractChart<ScatterOptions, ScatterDataset> 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#newDataset()
 	 */
 	@Override
 	public ScatterDataset newDataset() {

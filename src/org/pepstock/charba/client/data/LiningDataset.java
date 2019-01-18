@@ -17,65 +17,36 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.ArrayDouble;
+import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.JsDoubleArrayList;
-import org.pepstock.charba.client.commons.JsEnumValueArrayList;
-import org.pepstock.charba.client.commons.JsIntegerArrayList;
-import org.pepstock.charba.client.commons.JsStringArrayList;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
- * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
+ * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
+ * specific dataset.<br>
  * This class collects a set of common field for Line and Radar charts.
+ * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
-abstract class LiningDataset extends Dataset{
-	
-	// default value of border color
-	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0.1)";
-	// default value of border width
-	private static final int DEFAULT_BORDER_WIDTH = 3;
-	// default value of background color
-	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
-	// default value of line tension
-	private static final double DEFAULT_LINE_TENSION = 0.4F;
-	// default value of border dash offset
-	private static final int DEFAULT_BORDER_DASH_OFFSET = 0;
-	
-	// set of boolean flags to know if the value has been set as single value or as array
-	private boolean isPointBackgroundColorArray = false;
-	
-	private boolean isPointBorderColorArray = false;
-	
-	private boolean isPointBorderWidthArray = false;
-	
-	private boolean isPointHitRadiusArray = false;
-	
-	private boolean isPointHoverBackgroundColorArray = false;
-	
-	private boolean isPointHoverBorderColorArray = false;
-	
-	private boolean isPointHoverBorderWidthArray = false;
-	
-	private boolean isPointHoverRadiusArray = false;
-	
-	private boolean isPointRadiusArray = false;
-	
-	private boolean isPointStyleArray = false;
-	
-	private boolean isPointRotationArray = false;
+abstract class LiningDataset extends Dataset {
 
 	/**
-	 * Name of fields of JavaScript object. 
+	 * Name of properties of native object.
 	 */
-	private enum Property implements Key {
+	private enum Property implements Key
+	{
 		backgroundColor,
 		borderColor,
 		borderDash,
@@ -99,7 +70,8 @@ abstract class LiningDataset extends Dataset{
 	}
 
 	/**
-	 * Sets the fill color under the line. 
+	 * Sets the fill color under the line.
+	 * 
 	 * @param backgroundColor the fill color under the line.
 	 */
 	public void setBackgroundColor(IsColor backgroundColor) {
@@ -107,7 +79,8 @@ abstract class LiningDataset extends Dataset{
 	}
 
 	/**
-	 * Sets the fill color under the line. 
+	 * Sets the fill color under the line.
+	 * 
 	 * @param backgroundColor the fill color under the line.
 	 */
 	public void setBackgroundColor(String backgroundColor) {
@@ -116,22 +89,25 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the fill color under the line.
-	 * @return the fill color under the line. Default is <code>rgba(0,0,0,0.1)</code>
+	 * 
+	 * @return the fill color under the line.
 	 */
 	public String getBackgroundColorAsString() {
-		return getValue(Property.backgroundColor, DEFAULT_BACKGROUND_COLOR);
+		return getValue(Property.backgroundColor, Defaults.get().getGlobal().getElements().getLine().getBackgroundColorAsString());
 	}
 
 	/**
 	 * Returns the fill color under the line.
-	 * @return the fill color under the line. Default is <code>rgba(0,0,0,0.1)</code>
+	 * 
+	 * @return the fill color under the line.
 	 */
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
 	/**
-	 * Sets the color of the line. 
+	 * Sets the color of the line.
+	 * 
 	 * @param borderColor the color of the line.
 	 */
 	public void setBorderColor(IsColor borderColor) {
@@ -139,7 +115,8 @@ abstract class LiningDataset extends Dataset{
 	}
 
 	/**
-	 * Sets the color of the line. 
+	 * Sets the color of the line.
+	 * 
 	 * @param borderColor the color of the line.
 	 */
 	public void setBorderColor(String borderColor) {
@@ -148,21 +125,25 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the color of the line.
-	 * @return the color of the line. Default is <code>rgba(0,0,0,0.1)</code>
+	 * 
+	 * @return the color of the line.
 	 */
 	public String getBorderColorAsString() {
-		return getValue(Property.borderColor, DEFAULT_BORDER_COLOR);
+		return getValue(Property.borderColor, Defaults.get().getGlobal().getElements().getLine().getBorderColorAsString());
 	}
 
 	/**
 	 * Returns the color of the line.
-	 * @return the color of the line. Default is <code>rgba(0,0,0,0.1)</code>
+	 * 
+	 * @return the color of the line.
 	 */
 	public IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
 	}
+
 	/**
 	 * Sets the width of the line in pixels.
+	 * 
 	 * @param borderWidth the width of the line in pixels.
 	 */
 	public void setBorderWidth(int borderWidth) {
@@ -171,484 +152,431 @@ abstract class LiningDataset extends Dataset{
 
 	/**
 	 * Returns the width of the line in pixels.
-	 * @return the width of the line in pixels. Default is <code>3</code>
+	 * 
+	 * @return the width of the line in pixels.
 	 */
 	public int getBorderWidth() {
-		return getValue(Property.borderWidth, DEFAULT_BORDER_WIDTH);
+		return getValue(Property.borderWidth, Defaults.get().getGlobal().getElements().getLine().getBorderWidth());
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
+	 * and gaps which describe the pattern.
+	 * 
+	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating
+	 *            lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
-		setBorderDash(ArrayListHelper.build(borderDash));
+		setArrayValue(Property.borderDash, ArrayInteger.of(borderDash));
 	}
 
 	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 * @param borderDash the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 */
-	private void setBorderDash(JsIntegerArrayList borderDash) {
-		setIntegerArray(Property.borderDash, borderDash);
-	}
-
-	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
-	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines and gaps which describe the pattern.
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
+	 * lines and gaps which describe the pattern.
+	 * 
+	 * @return the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
+	 *         lines and gaps which describe the pattern.
 	 */
 	public List<Integer> getBorderDash() {
-		return getIntegerArray(Property.borderDashOffset);
+		ArrayInteger array = getArrayValue(Property.borderDash);
+		return ArrayListHelper.list(array);
 	}
 
 	/**
-	 * Sets the line dash pattern offset or "phase". 
-	 * @param borderDashOffset the line dash pattern offset or "phase". 
+	 * Sets the line dash pattern offset or "phase".
+	 * 
+	 * @param borderDashOffset the line dash pattern offset or "phase".
 	 */
-	public void setBorderDashOffset(int borderDashOffset){
-		  setValue(Property.borderDashOffset, borderDashOffset);
+	public void setBorderDashOffset(int borderDashOffset) {
+		setValue(Property.borderDashOffset, borderDashOffset);
 	}
 
 	/**
-	 * Returns the line dash pattern offset or "phase". 
-	 * @return the line dash pattern offset or "phase". Default is <code>0</code>
+	 * Returns the line dash pattern offset or "phase".
+	 * 
+	 * @return the line dash pattern offset or "phase".
 	 */
-	public int getBorderDashOffset(){
-		  return getValue(Property.borderDashOffset, DEFAULT_BORDER_DASH_OFFSET);
+	public int getBorderDashOffset() {
+		return getValue(Property.borderDashOffset, Defaults.get().getGlobal().getElements().getLine().getBorderDashOffset());
 	}
 
 	/**
-	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square. 
+	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt,
+	 * round and square.
+	 * 
 	 * @param borderCapStyle how the end points of every line are drawn.
-	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public void setBorderCapStyle(CapStyle borderCapStyle) {
 		setValue(Property.borderCapStyle, borderCapStyle);
 	}
 
 	/**
-	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are: butt, round and square. By default this property is set to butt.
+	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are:
+	 * butt, round and square. By default this property is set to butt.
+	 * 
 	 * @return how the end points of every line are drawn.
-	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
-	public CapStyle getBorderCapStyle(){
-		  return getValue(Property.borderCapStyle, CapStyle.class, CapStyle.butt);
+	public CapStyle getBorderCapStyle() {
+		return getValue(Property.borderCapStyle, CapStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderCapStyle());
 	}
 
 	/**
-	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are skipped).<br>
+	 * Sets how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
+	 * are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
-	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
-	 * @see org.pepstock.charba.client.enums.JoinStyle
+	 * 
+	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter.
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
 		setValue(Property.borderJoinStyle, borderJoinStyle);
 	}
 
 	/**
-	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together (degenerate segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are skipped).<br>
+	 * Returns how two connecting segments (of lines, arcs or curves) with non-zero lengths in a shape are joined together
+	 * (degenerate segments with zero lengths, whose specified end points and control points are exactly at the same position,
+	 * are skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
-	 * @return There are three possible values for this property: round, bevel and miter. By default this property is set to miter.
-	 * @see org.pepstock.charba.client.enums.JoinStyle
+	 * 
+	 * @return There are three possible values for this property: round, bevel and miter.
 	 */
 	public JoinStyle getBorderJoinStyle() {
-		return getValue(Property.borderJoinStyle, JoinStyle.class, JoinStyle.miter);
+		return getValue(Property.borderJoinStyle, JoinStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderJoinStyle());
 	}
 
 	/**
 	 * Sets how to fill the area under the line.
+	 * 
 	 * @param fill how to fill the area under the line.
-	 * @see org.pepstock.charba.client.enums.Fill
 	 */
-	public void setFill(Fill fill){
+	public void setFill(Fill fill) {
 		// checks if is no fill
-		if (Fill.nofill.equals(fill)){
+		if (Fill.nofill.equals(fill)) {
 			// sets the boolean value instead of string one
 			setValue(Property.fill, false);
 		} else {
 			// sets value
-			setValue(Property.fill, fill.name());
+			setValue(Property.fill, fill);
 		}
 	}
-	
+
 	/**
 	 * Returns how to fill the area under the line.
+	 * 
 	 * @return how to fill the area under the line.
-	 * @see org.pepstock.charba.client.enums.Fill
 	 */
-	public Fill getFill(){
-		// gets value
-		String value = getValue(Property.fill, Fill.origin.name());
+	public Fill getFill() {
+		// gets value type
+		ObjectType type = type(Property.fill);
 		// if is a boolean FALSE value
-		if (value.equalsIgnoreCase(Boolean.FALSE.toString())){
+		if (ObjectType.Boolean.equals(type)) {
 			// returns no fill
-			return Fill.nofill;
+			return getValue(Property.fill, false) ? Fill.origin : Fill.nofill;
 		}
-		// scans all enums
-		for (Fill enumValue : Fill.values()){
-			// if enum is equals to value
-			if (enumValue.name().equalsIgnoreCase(value)){
-				// returns enum
-				return enumValue;
-			}
-		}
-		// returns this as default
-		return Fill.origin;
+		// returns the fill object because was not stored as boolean
+		return getValue(Property.fill, Fill.class, Defaults.get().getGlobal().getElements().getLine().getFill());
 	}
 
 	/**
-	 * Sets curve tension of the line. Set to 0 to draw straight lines. This option is ignored if monotone cubic interpolation is used.
+	 * Sets curve tension of the line. Set to 0 to draw straight lines. This option is ignored if monotone cubic interpolation
+	 * is used.
+	 * 
 	 * @param lineTension curve tension of the line
 	 */
-	public void setLineTension(double lineTension){
-		  setValue(Property.lineTension, lineTension);
+	public void setLineTension(double lineTension) {
+		setValue(Property.lineTension, lineTension);
 	}
 
 	/**
-	 * Returns curve tension of the line. Set to 0 to draw straight lines. This option is ignored if monotone cubic interpolation is used.
-	 * @return curve tension of the line. Default is <code>0.4</code>
+	 * Returns curve tension of the line. Set to 0 to draw straight lines. This option is ignored if monotone cubic
+	 * interpolation is used.
+	 * 
+	 * @return curve tension of the line.
 	 */
-	public double getLineTension(){
-		  return getValue(Property.lineTension, DEFAULT_LINE_TENSION);
+	public double getLineTension() {
+		return getValue(Property.lineTension, Defaults.get().getGlobal().getElements().getLine().getTension());
 	}
 
 	/**
 	 * Sets the fill color for points.
+	 * 
 	 * @param pointBackgroundColor array of the fill color for points.
 	 */
 	public void setPointBackgroundColor(IsColor... pointBackgroundColor) {
-	    setPointBackgroundColor(ArrayListHelper.build(pointBackgroundColor));
+		setValueOrArray(Property.pointBackgroundColor, pointBackgroundColor);
 	}
 
 	/**
 	 * Sets the fill color for points.
+	 * 
 	 * @param pointBackgroundColor array of the fill color for points.
 	 */
 	public void setPointBackgroundColor(String... pointBackgroundColor) {
-	    setPointBackgroundColor(ArrayListHelper.build(pointBackgroundColor));
-	}
-
-	/**
-	 * Sets the fill color for points.
-	 * @param pointBackgroundColor the fill color for points.
-	 */
-	private void setPointBackgroundColor(JsStringArrayList pointBackgroundColor) {
-	    isPointBackgroundColorArray = checkAndSetStringValues(Property.pointBackgroundColor, pointBackgroundColor);
+		setValueOrArray(Property.pointBackgroundColor, pointBackgroundColor);
 	}
 
 	/**
 	 * Returns the fill color for points.
+	 * 
 	 * @return list of the fill color for points.
 	 */
 	public List<String> getPointBackgroundColorAsString() {
-	    return checkAndGetStringValues(Property.pointBackgroundColor, isPointBackgroundColorArray);
+		ArrayString array = getValueOrArray(Property.pointBackgroundColor, Defaults.get().getGlobal().getElements().getPoint().getBackgroundColorAsString());
+		;
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Returns the fill color for points.
+	 * 
 	 * @return list of the fill color for points.
 	 */
 	public List<IsColor> getPointBackgroundColor() {
-	    return ColorBuilder.parse(getPointBackgroundColorAsString());
+		return ColorBuilder.parse(getPointBackgroundColorAsString());
 	}
 
 	/**
 	 * Sets the border color for points.
+	 * 
 	 * @param pointBorderColor array of the border color for points.
 	 */
 	public void setPointBorderColor(IsColor... pointBorderColor) {
-		setPointBorderColor(ArrayListHelper.build(pointBorderColor));
+		setValueOrArray(Property.pointBorderColor, pointBorderColor);
 	}
 
 	/**
 	 * Sets the border color for points.
+	 * 
 	 * @param pointBorderColor array of the border color for points.
 	 */
 	public void setPointBorderColor(String... pointBorderColor) {
-		setPointBorderColor(ArrayListHelper.build(pointBorderColor));
-	}
-
-	/**
-	 * Sets the border color for points.
-	 * @param pointBorderColor the border color for points.
-	 */
-	private void setPointBorderColor(JsStringArrayList pointBorderColor) {
-	    isPointBorderColorArray = checkAndSetStringValues(Property.pointBorderColor, pointBorderColor);
+		setValueOrArray(Property.pointBorderColor, pointBorderColor);
 	}
 
 	/**
 	 * Returns the border color for points.
+	 * 
 	 * @return list of the border color for points.
 	 */
 	public List<String> getPointBorderColorAsString() {
-	    return checkAndGetStringValues(Property.pointBorderColor, isPointBorderColorArray);
+		ArrayString array = getValueOrArray(Property.pointBorderColor, Defaults.get().getGlobal().getElements().getPoint().getBorderColorAsString());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Returns the border color for points.
+	 * 
 	 * @return list of the border color for points.
 	 */
 	public List<IsColor> getPointBorderColor() {
-	    return ColorBuilder.parse(getPointBorderColorAsString());
+		return ColorBuilder.parse(getPointBorderColorAsString());
 	}
 
 	/**
 	 * Sets the width of the point border in pixels.
+	 * 
 	 * @param pointBorderWidth array of the width of the point border in pixels.
 	 */
 	public void setPointBorderWidth(int... pointBorderWidth) {
-		setPointBorderWidth(ArrayListHelper.build(pointBorderWidth));
-	}
-
-	/**
-	 * Sets the width of the point border in pixels.
-	 * @param pointBorderWidth the width of the point border in pixels.
-	 */
-	private void setPointBorderWidth(JsIntegerArrayList pointBorderWidth) {
-	    isPointBorderWidthArray = checkAndSetIntegerValues(Property.pointBorderWidth, pointBorderWidth);
+		setValueOrArray(Property.pointBorderWidth, pointBorderWidth);
 	}
 
 	/**
 	 * Returns the width of the point border in pixels.
+	 * 
 	 * @return list of the width of the point border in pixels.
 	 */
 	public List<Integer> getPointBorderWidth() {
-	    return checkAndGetIntegerValues(Property.pointBorderWidth, isPointBorderWidthArray);
+		ArrayInteger array = getValueOrArray(Property.pointBorderWidth, Defaults.get().getGlobal().getElements().getPoint().getBorderWidth());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Sets the pixel size of the non-displayed point that reacts to mouse events.
+	 * 
 	 * @param pointHitRadius array of the pixel size of the non-displayed point.
 	 */
 	public void setPointHitRadius(double... pointHitRadius) {
-		setPointHitRadius(ArrayListHelper.build(pointHitRadius));
-	}
-	
-	/**
-	 * Sets the pixel size of the non-displayed point that reacts to mouse events.
-	 * @param pointHitRadius the pixel size of the non-displayed point.
-	 */
-	private void setPointHitRadius(JsDoubleArrayList pointHitRadius) {
-	    isPointHitRadiusArray = checkAndSetDoubleValues(Property.pointHitRadius, pointHitRadius);
+		setValueOrArray(Property.pointHitRadius, pointHitRadius);
 	}
 
 	/**
 	 * Returns the pixel size of the non-displayed point that reacts to mouse events.
+	 * 
 	 * @return list of the pixel size of the non-displayed point.
 	 */
 	public List<Double> getPointHitRadius() {
-	    return checkAndGetDoubleValues(Property.pointHitRadius, isPointHitRadiusArray);
+		ArrayDouble array = getValueOrArray(Property.pointHitRadius, Defaults.get().getGlobal().getElements().getPoint().getHitRadius());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Sets the point background color when hovered.
+	 * 
 	 * @param pointHoverBackgroundColor array of the point background color when hovered.
 	 */
 	public void setPointHoverBackgroundColor(IsColor... pointHoverBackgroundColor) {
-		setPointHoverBackgroundColor(ArrayListHelper.build(pointHoverBackgroundColor));
+		setValueOrArray(Property.pointHoverBackgroundColor, pointHoverBackgroundColor);
 	}
-	
+
 	/**
 	 * Sets the point background color when hovered.
+	 * 
 	 * @param pointHoverBackgroundColor array of the point background color when hovered.
 	 */
 	public void setPointHoverBackgroundColor(String... pointHoverBackgroundColor) {
-		setPointHoverBackgroundColor(ArrayListHelper.build(pointHoverBackgroundColor));
-	}
-
-	/**
-	 * Sets the point background color when hovered.
-	 * @param pointHoverBackgroundColor the point background color when hovered.
-	 */
-	private void setPointHoverBackgroundColor(JsStringArrayList pointHoverBackgroundColor) {
-	    isPointHoverBackgroundColorArray = checkAndSetStringValues(Property.pointHoverBackgroundColor, pointHoverBackgroundColor);
+		setValueOrArray(Property.pointHoverBackgroundColor, pointHoverBackgroundColor);
 	}
 
 	/**
 	 * Returns the point background color when hovered.
+	 * 
 	 * @return list of the point background color when hovered.
 	 */
 	public List<String> getPointHoverBackgroundColorAsString() {
-	    return checkAndGetStringValues(Property.pointHoverBackgroundColor, isPointHoverBackgroundColorArray);
+		ArrayString array = getValueOrArray(Property.pointBackgroundColor, Defaults.get().getGlobal().getElements().getPoint().getBackgroundColorAsString());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Returns the point background color when hovered.
+	 * 
 	 * @return list of the point background color when hovered.
 	 */
 	public List<IsColor> getPointHoverBackgroundColor() {
-	    return ColorBuilder.parse(getPointHoverBackgroundColorAsString());
+		return ColorBuilder.parse(getPointHoverBackgroundColorAsString());
 	}
 
 	/**
 	 * Sets the point border color when hovered.
+	 * 
 	 * @param pointHoverBorderColor array of the point border color when hovered.
 	 */
 	public void setPointHoverBorderColor(IsColor... pointHoverBorderColor) {
-		setPointHoverBorderColor(ArrayListHelper.build(pointHoverBorderColor));
+		setValueOrArray(Property.pointHoverBorderColor, pointHoverBorderColor);
 	}
 
 	/**
 	 * Sets the point border color when hovered.
+	 * 
 	 * @param pointHoverBorderColor array of the point border color when hovered.
 	 */
 	public void setPointHoverBorderColor(String... pointHoverBorderColor) {
-		setPointHoverBorderColor(ArrayListHelper.build(pointHoverBorderColor));
-	}
-
-	/**
-	 * Sets the point border color when hovered.
-	 * @param pointHoverBorderColor the point border color when hovered.
-	 */
-	private void setPointHoverBorderColor(JsStringArrayList pointHoverBorderColor) {
-	    isPointHoverBorderColorArray = checkAndSetStringValues(Property.pointHoverBorderColor, pointHoverBorderColor);
+		setValueOrArray(Property.pointHoverBorderColor, pointHoverBorderColor);
 	}
 
 	/**
 	 * Returns the point border color when hovered.
+	 * 
 	 * @return list of the point border color when hovered.
 	 */
 	public List<String> getPointHoverBorderColorAsString() {
-	    return checkAndGetStringValues(Property.pointHoverBorderColor, isPointHoverBorderColorArray);
+		ArrayString array = getValueOrArray(Property.pointHoverBorderColor, Defaults.get().getGlobal().getElements().getPoint().getBorderColorAsString());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Returns the point border color when hovered.
+	 * 
 	 * @return list of the point border color when hovered.
 	 */
 	public List<IsColor> getPointHoverBorderColor() {
-	    return ColorBuilder.parse(getPointHoverBorderColorAsString());
+		return ColorBuilder.parse(getPointHoverBorderColorAsString());
 	}
 
 	/**
 	 * Sets the border width of point when hovered.
+	 * 
 	 * @param pointHoverBorderWidth array of the border width of point when hovered.
 	 */
 	public void setPointHoverBorderWidth(int... pointHoverBorderWidth) {
-		setPointHoverBorderWidth(ArrayListHelper.build(pointHoverBorderWidth));
-	}
-
-	/**
-	 * Sets the border width of point when hovered.
-	 * @param pointHoverBorderWidth  the border width of point when hovered.
-	 */
-	private void setPointHoverBorderWidth(JsIntegerArrayList pointHoverBorderWidth) {
-	    isPointHoverBorderWidthArray = checkAndSetIntegerValues(Property.pointHoverBorderWidth, pointHoverBorderWidth);
+		setValueOrArray(Property.pointHoverBorderWidth, pointHoverBorderWidth);
 	}
 
 	/**
 	 * Returns the border width of point when hovered.
+	 * 
 	 * @return list of the border width of point when hovered.
 	 */
 	public List<Integer> getPointHoverBorderWidth() {
-	    return checkAndGetIntegerValues(Property.pointHoverBorderWidth, isPointHoverBorderWidthArray);
+		ArrayInteger array = getValueOrArray(Property.pointHoverBorderWidth, Defaults.get().getGlobal().getElements().getPoint().getHoverBorderWidth());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Sets the radius of the point when hovered.
+	 * 
 	 * @param pointHoverRadius array of the radius of the point when hovered.
 	 */
 	public void setPointHoverRadius(double... pointHoverRadius) {
-		setPointHoverRadius(ArrayListHelper.build(pointHoverRadius));
-	}
-
-	/**
-	 * Sets the radius of the point when hovered.
-	 * @param pointHoverRadius the radius of the point when hovered.
-	 */
-	private void setPointHoverRadius(JsDoubleArrayList pointHoverRadius) {
-	    isPointHoverRadiusArray = checkAndSetDoubleValues(Property.pointHoverRadius, pointHoverRadius);
+		setValueOrArray(Property.pointHoverRadius, pointHoverRadius);
 	}
 
 	/**
 	 * Returns the radius of the point when hovered.
+	 * 
 	 * @return list of the radius of the point when hovered.
 	 */
 	public List<Double> getPointHoverRadius() {
-	    return checkAndGetDoubleValues(Property.pointHoverRadius, isPointHoverRadiusArray);
+		ArrayDouble array = getValueOrArray(Property.pointHoverRadius, Defaults.get().getGlobal().getElements().getPoint().getHoverRadius());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Sets the radius of the point shape. If set to 0, the point is not rendered.
+	 * 
 	 * @param pointRadius array of the radius of the point shape.
 	 */
-	public void setPointRadius(double...  pointRadius) {
-		setPointRadius(ArrayListHelper.build(pointRadius));
-	}
-
-	/**
-	 * Sets the radius of the point shape. If set to 0, the point is not rendered.
-	 * @param pointRadius the radius of the point shape.
-	 */
-	private void setPointRadius(JsDoubleArrayList pointRadius) {
-	    isPointRadiusArray = checkAndSetDoubleValues(Property.pointRadius, pointRadius);
+	public void setPointRadius(double... pointRadius) {
+		setValueOrArray(Property.pointRadius, pointRadius);
 	}
 
 	/**
 	 * Returns the radius of the point shape.
+	 * 
 	 * @return list of the radius of the point shape.
 	 */
 	public List<Double> getPointRadius() {
-	    return checkAndGetDoubleValues(Property.pointRadius, isPointRadiusArray);
+		ArrayDouble array = getValueOrArray(Property.pointRadius, Defaults.get().getGlobal().getElements().getPoint().getRadius());
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Sets the style of the point.
+	 * 
 	 * @param pointStyle array of the style of the point.
-	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public void setPointStyle(PointStyle... pointStyle) {
-		setPointStyle(ArrayListHelper.build(PointStyle.class, pointStyle));
-	}
-
-	/**
-	 * Sets the style of the point.
-	 * @param pointStyle the style of the point.
-	 * @see org.pepstock.charba.client.enums.PointStyle
-	 */
-	private void setPointStyle(JsEnumValueArrayList<PointStyle> pointStyle) {
-		isPointStyleArray = checkAndSetEnumValues(Property.pointStyle, pointStyle);
+		setValueOrArray(Property.pointStyle, pointStyle);
 	}
 
 	/**
 	 * Returns the style of the point.
-	 * @return list of the style of the point. Default is <code>PointStyle.circle</code>
-	 * @see org.pepstock.charba.client.enums.PointStyle
+	 * 
+	 * @return list of the style of the point.
 	 */
-	public JsEnumValueArrayList<PointStyle> getPointStyle() {
-		// gets the list of values in string format
-		JsStringArrayList sValues = checkAndGetStringValues(Property.pointStyle, isPointStyleArray);
-		// if empty, returns the default
-		if (sValues.isEmpty()){
-			return ArrayListHelper.build(PointStyle.class, new PointStyle[]{PointStyle.circle});
-		} else {
-			return ArrayListHelper.build(PointStyle.class, sValues);
-		}
-	}
-	
-	/**
-	 * Sets the rotation of the point in degrees.
-	 * @param pointRotation array of the rotation of the point in degrees.
-	 */
-	public void setPointRotation(double...  pointRotation) {
-		setPointRotation(ArrayListHelper.build(pointRotation));
+	public List<PointStyle> getPointStyle() {
+		ArrayString array = getValueOrArray(Property.pointStyle, Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
+		return ArrayListHelper.list(PointStyle.class, array);
 	}
 
 	/**
 	 * Sets the rotation of the point in degrees.
-	 * @param pointRotation the rotation of the point in degrees.
+	 * 
+	 * @param pointRotation array of the rotation of the point in degrees.
 	 */
-	private void setPointRotation(JsDoubleArrayList pointRotation) {
-	    isPointRotationArray= checkAndSetDoubleValues(Property.pointRotation, pointRotation);
+	public void setPointRotation(double... pointRotation) {
+		setValueOrArray(Property.pointRotation, pointRotation);
 	}
 
 	/**
 	 * Returns the rotation of the point in degrees.
+	 * 
 	 * @return list of the rotation of the point in degrees.
 	 */
 	public List<Double> getPointRotation() {
-	    return checkAndGetDoubleValues(Property.pointRotation, isPointRotationArray);
+		ArrayDouble array = getValueOrArray(Property.pointRotation, Defaults.get().getGlobal().getElements().getPoint().getRotation());
+		return ArrayListHelper.list(array);
 	}
-
 
 }

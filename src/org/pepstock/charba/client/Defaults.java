@@ -18,137 +18,171 @@ package org.pepstock.charba.client;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.Merger;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.controllers.Controllers;
-import org.pepstock.charba.client.defaults.global.Options;
-import org.pepstock.charba.client.defaults.scale.Scale;
 import org.pepstock.charba.client.plugins.GlobalPlugins;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 /**
- * Is a singleton which is mapping the default of CHART.JS.<br>
- * It maps the CHART.JS object of default, <code>chart.defaults</code>.<br>
+ * This singleton is a wrapper to <code>defaults</code> object that CHART.JS (by CHART object) provides to get defaults values.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public final class Defaults {
 
-	// private instance
+	// singleton instance
 	private static final Defaults INSTANCE = new Defaults();
-	
-	private final Options global;
-	
-	private final Scale scale;
-	
-	// cache for chart options
-	private final Map<Type, Options> chartOptions = new HashMap<Type, Options>();
-	
+	// native defaults java script object
+	private final WrapperDefaults wrapperDefaults;
+	// global options
+	private final GlobalOptions options;
+	// global scale
+	private final GlobalScale scale;
 	// global plugins
-	private final GlobalPlugins plugins = new GlobalPlugins();
-	
-	// controller
-	private final Controllers controllers = new Controllers();
-	
+	private final GlobalPlugins plugins;
+	// cache for chart options already implemented to improve performance
+	private final Map<String, ChartOptions> chartOptions = new HashMap<>();
+	// controllers
+	private final Controllers controllers;
+
 	/**
-	 * To avoid any instantiation
+	 * To avoid any instantiation.<br>
+	 * This gets from other objects (by static references) the defaults of CHART.JS.
 	 */
 	private Defaults() {
-		// injects CHART.JS script is not done
+		// to be sure that chart.js has been injected
 		Injector.ensureInjected();
-		// loads global options
-		global = new Options((GenericJavaScriptObject)getGlobalOptions());
-		// loads scale options
-		scale = new Scale((GenericJavaScriptObject)getGlobalScale());
-		// loads all charts options
-		for (Type type : ChartType.values()){
-			chartOptions.put(type, new Options((GenericJavaScriptObject)getChart(type.name())));
-		}
+		// gets defaults from CHART.JS
+		wrapperDefaults = new WrapperDefaults(Chart.getDefaults());
+		// creates global options wrapping the global property of CHART
+		this.options = new GlobalOptions(wrapperDefaults.getGlobal());
+		// creates global scale wrapping the scale property of CHART
+		this.scale = new GlobalScale(wrapperDefaults.getScale());
+		// creates global plugins wrapping the plugins property of CHART
+		this.plugins = new GlobalPlugins(Chart.getPlugins());
+		// creates the controller object
+		this.controllers = Controllers.get();
 	}
-	
+
 	/**
-	 * Returns the global options.<br>
-	 * It maps the CHART.JS object of default, <code>chart.defaults.global</code>.
+	 * Singleton method to get static instance.
+	 * 
+	 * @return defaults instance
+	 */
+	public static Defaults get() {
+		return INSTANCE;
+	}
+
+	/**
+	 * Returns the global options.
 	 * 
 	 * @return the global options.
-	 * @see org.pepstock.charba.client.defaults.global.Options
 	 */
-	public static Options getGlobal(){
-		return INSTANCE.global;
+	public GlobalOptions getGlobal() {
+		return options;
 	}
-	
+
 	/**
-	 * Returns the global scale options.<br>
-	 * It maps the CHART.JS object of default, <code>chart.defaults.scale</code>.
+	 * Returns the global scale.
 	 * 
-	 * @return the global scale options.
-	 * @see org.pepstock.charba.client.defaults.scale.Scale
+	 * @return the global scale.
 	 */
-	public static Scale getScale(){
-		return INSTANCE.scale;
+	public GlobalScale getScale() {
+		return scale;
 	}
-	
+
 	/**
-	 * Returns the global plugins wrapper.
-	 *  
-	 * @return the global plugins wrapper.
-	 * @see org.pepstock.charba.client.plugins.GlobalPlugins
+	 * Returns the global plugins manager.
+	 * 
+	 * @return the global plugins manager.
 	 */
-	public static GlobalPlugins getPlugins(){
-		return INSTANCE.plugins;
+	public GlobalPlugins getPlugins() {
+		return plugins;
 	}
-	
+
 	/**
-	 * Returns the controllers managers.
-	 *  
-	 * @return the controllers managers.
-	 * @see org.pepstock.charba.client.controllers.Controllers
+	 * Returns the controllers.
+	 * 
+	 * @return the controllers.
 	 */
-	public static Controllers getControllers(){
-		return INSTANCE.controllers;
+	public Controllers getControllers() {
+		return controllers;
 	}
-	
+
 	/**
-	 * Returns the global options by chart type.
+	 * Returns the default options by a chart type, for a existing chart instance
 	 * 
 	 * @param type chart type.
-	 * @return the global options by chart type. if type not exist, returns the options of BAR chart.
-	 * @see org.pepstock.charba.client.defaults.global.Options
-	 * @see Type
+	 * @return the default options
 	 */
-	public static Options getChartGlobal(Type type){
-		if (INSTANCE.chartOptions.containsKey(type)){
-			return INSTANCE.chartOptions.get(type);
-		}
-		// if type not exist
-		// returns the options for BAR chart.
-		return INSTANCE.chartOptions.get(ChartType.bar);
+	public ChartOptions options(Type type) {
+		return new ChartOptions(type, Merger.get().get(type));
 	}
-	
-	/**
-	 * Returns the GLOBAL options of CHART.JS.
-	 * @return java script object with GLOBAl configuration.
-	 */
-	private native JavaScriptObject getGlobalOptions()/*-{
-	    return $wnd.Chart.defaults.global;
-	}-*/;
 
 	/**
-	 * Returns the GLOBAL SCALE options of CHART.JS.
-	 * @return java script object with GLOBAl SCLAE configuration.
+	 * Returns the default options by a chart type, by defaults of CHART.JS
+	 * 
+	 * @param type chart type.
+	 * @return the default options
 	 */
-	private native JavaScriptObject getGlobalScale()/*-{
-    	return $wnd.Chart.defaults.scale;
-	}-*/;
+	public ChartOptions chart(Type type) {
+		// checks if the options have already stored
+		if (!chartOptions.containsKey(type.name())) {
+			// if not, creates and stores new options by chart type
+			chartOptions.put(type.name(), wrapperDefaults.chart(type));
+		}
+		// returns the existing options
+		return chartOptions.get(type.name());
+	}
 
-	/**
-	 * Returns the GLOBAL options of CHART.JS by chart type.
-	 * @param type chart type
-	 * @return ava script object with GLOBAL configuration for chart type.
-	 */
-	private native JavaScriptObject getChart(String type)/*-{
-		return $wnd.Chart.defaults[type];
-	}-*/;
-	
+	private static final class WrapperDefaults extends NativeObjectContainer {
+
+		/**
+		 * Name of properties of native object.
+		 */
+		private enum Property implements Key
+		{
+			global,
+			scale
+		}
+
+		/**
+		 * @param nativeObject
+		 */
+		WrapperDefaults(NativeObject nativeObject) {
+			super(nativeObject);
+		}
+
+		NativeObject getGlobal() {
+			return getValue(Property.global);
+		}
+
+		NativeObject getScale() {
+			return getValue(Property.scale);
+
+		}
+
+		/**
+		 * Returns an options instance, to use as default options, based of type of chart.
+		 * 
+		 * @param type chart type.
+		 * @return default options.
+		 */
+		ChartOptions chart(Type type) {
+			// checks if the property is present
+			if (ObjectType.Object.equals(type(type))) {
+				return new ChartOptions(type, getValue(type));
+			} else {
+				// if here, the chart type is not defined (could be a controller)
+				// therefore returns an empty options
+				return new ChartOptions(type);
+			}
+		}
+
+	}
+
 }

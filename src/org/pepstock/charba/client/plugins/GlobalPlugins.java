@@ -24,83 +24,109 @@ import java.util.Set;
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.Plugin;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JsArrayStringImpl;
-
-import com.google.gwt.core.client.JavaScriptObject;
+import org.pepstock.charba.client.commons.ArrayObject;
 
 /**
- * Glabal configuration to set plugins at global level.<br>
+ * Global configuration to set plugins at global level.<br>
  * It maps the CHART.JS object of default, <code>chart.plugins</code>.<br>
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public final class GlobalPlugins {
 
 	// list of global plugins set by user (not OOTB)
+	// K = plugin id, V = plugin instance
 	private final Map<String, GlobalPlugin> pluginIds = new HashMap<String, GlobalPlugin>();
+	// native object of plugins
+	private final NativePlugins plugins;
 
 	/**
-	 * Registers a plugin as global, to apply to all charts. 
-	 * @param plugin plugin instance
-	 * @return <code>true</code> if registered, otherwise <code>false</code> if the plugin is already registered with the plugin id of plugin instance.
-	 * @throws InvalidPluginIdException  if the plugin id is not correct.
+	 * Builds the object by the native object which maps <code>chart.plugins</code>
+	 * 
+	 * @param plugins the native object which maps <code>chart.plugins</code>
 	 */
-	public boolean register(Plugin plugin) throws InvalidPluginIdException{
+	public GlobalPlugins(NativePlugins plugins) {
+		this.plugins = plugins;
+	}
+
+	/**
+	 * Registers a plugin as global, to apply to all charts.
+	 * 
+	 * @param plugin plugin instance
+	 * @return <code>true</code> if registered, otherwise <code>false</code> if the plugin is already registered with the plugin
+	 *         id of plugin instance.
+	 * @throws InvalidPluginIdException if the plugin id is not correct.
+	 */
+	public boolean register(Plugin plugin) throws InvalidPluginIdException {
 		// checks the plugin id
 		PluginIdChecker.check(plugin.getId());
 		// checks if ID is already registered
-		if (getIds().contains(plugin.getId())){
+		if (getIds().contains(plugin.getId())) {
 			return false;
 		}
 		// creates a java script object, wrapper of the plugin
 		GlobalPlugin wPlugin = new GlobalPlugin(plugin);
-		registerPlugin(wPlugin.getObject());
-		// stores the id into a set
+		plugins.register(wPlugin.getNativeObject());
+		// stores the id and object into a map
 		pluginIds.put(plugin.getId(), wPlugin);
 		return true;
 	}
 
 	/**
-	 * Unregisters a global plugin. THis is possible ONLY for plugins added as custom ones. 
+	 * Unregisters a global plugin. This is possible ONLY for plugins added as custom ones.
+	 * 
 	 * @param pluginId plugin instance
 	 * @return <code>true</code> if unregistered, otherwise <code>false</code> if the plugin is not a custom one.
 	 * @throws InvalidPluginIdException if the plugin id is not correct.
 	 */
-	public boolean unregister(String pluginId) throws InvalidPluginIdException{
+	public boolean unregister(String pluginId) throws InvalidPluginIdException {
 		// checks the plugin id
 		PluginIdChecker.check(pluginId);
 		// checks if ID is already registered on custom one
-		if (!pluginIds.containsKey(pluginId)){
+		if (!pluginIds.containsKey(pluginId)) {
 			return false;
 		}
-		// creates a java script object, wrapper of the plugin
-		unregisterPlugin(pluginId);
-		// stores the id into a set
-		pluginIds.remove(pluginId);
-		return true;
+		// gets plugins ids requesting to CHART.JS.
+		ArrayObject existingPlugins = plugins.getAll();
+		// scans ids
+		for (int i = 0; i < existingPlugins.length(); i++) {
+			// creates the plugin reference
+			PluginReference reference = new PluginReference(existingPlugins.get(i));
+			if (reference.getId() != null && reference.getId().equalsIgnoreCase(pluginId)) {
+				// unregister the plugin
+				plugins.unregister(reference);
+				// removes the plugin
+				pluginIds.remove(pluginId);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
 	 * Gets all global registered plugins ids.
+	 * 
 	 * @return all global registered plugins ids.
 	 */
-	public Set<String> getIds(){
+	public Set<String> getIds() {
 		// gets plugins ids requesting to CHART.JS.
-		JsArrayStringImpl impl = (JsArrayStringImpl)getPluginsIds();
+		ArrayObject existingPlugins = plugins.getAll();
 		// creates a set of strings
 		final Set<String> pluginsIds = new HashSet<String>();
-		// checks teh result from CHART.JS
-		if (impl != null && impl.length() > 0){
+		// checks the result from CHART.JS
+		if (existingPlugins != null && existingPlugins.length() > 0) {
 			// scans ids
-			for (int i=0; i<impl.length(); i++){
-				pluginsIds.add(impl.get(i));
+			for (int i = 0; i < existingPlugins.length(); i++) {
+				// creates the reference
+				PluginReference reference = new PluginReference(existingPlugins.get(i));
+				// adds plugin id
+				pluginsIds.add(reference.getId());
 			}
 		}
 		return pluginsIds;
 	}
-	
+
 	/**
 	 * Invokes the on configuration method to inform the plugins that the chart is going to be initialized.
 	 * 
@@ -111,7 +137,7 @@ public final class GlobalPlugins {
 		// scans all plugins
 		for (Entry<String, GlobalPlugin> entry : pluginIds.entrySet()) {
 			try {
-				// checks if plugin is enabled 
+				// checks if plugin is enabled
 				if (chart.getOptions().getPlugins().isEnabled(entry.getKey())) {
 					// calls on configure method
 					entry.getValue().onConfigure(chart);
@@ -121,44 +147,4 @@ public final class GlobalPlugins {
 			}
 		}
 	}
-	
-	/**
-	 * Calls <code>Chart.plugins.getAll</code> function to get all registered plugins ids. 
-	 *  
-	 * @return all registered plugins ids.
-	 */
-	private native JavaScriptObject getPluginsIds()/*-{
-	    return $wnd.Chart.plugins.getAll().map(function(element) { 
-			return element.id;
-		});
-	}-*/;
-
-
-	/**
-	 * Calls <code>Chart.plugins.register</code> function to register a global plugin.
-	 * 
-	 * @param instance plugin instance.
-	 */
-	private native void registerPlugin(GenericJavaScriptObject instance)/*-{
-		$wnd.Chart.plugins.register(instance);
-	}-*/;
-
-
-	/**
-	 * Calls <code>Chart.plugins.unregister</code> function to unregister a global plugin.
-	 * 
-	 * @param instanceId plugin id
-	 */
-	private native void unregisterPlugin(String instanceId)/*-{
-		// gets array position
-		var position = $wnd.Chart.plugins.getAll().map(function(element) { 
-			return element.id;
-		}).indexOf(instanceId);
-		// if position is consistent
-		if (position >= 0){
-			// unregister the object
-			$wnd.Chart.plugins.unregister($wnd.Chart.plugins.getAll()[position]);
-		}
-	}-*/;
-
 }

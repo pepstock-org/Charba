@@ -15,24 +15,28 @@
 */
 package org.pepstock.charba.client.items;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 
 /**
- * Legend internal object to get data about ticks and their length in pixels.
+ * Legend internal object to get data about ticks and their length in pixels.<br>
+ * This is a wrapper of scale text item of Chart (of CHART.JS).
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
 public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -40,14 +44,14 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 		garbageCollect,
 		font
 	}
-
+	
 	/**
-	 * Wraps the CHART.JS java script object.
+	 * Creates the item using a native java script object which contains all properties.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * @param nativeObject native java script object which contains all properties.
 	 */
-	ScaleLongestTextCacheItem(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	ScaleLongestTextCacheItem(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
 	/**
@@ -65,9 +69,12 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	 * @return the list of ticks in garbage collect item
 	 */
 	public List<String> getGarbageCollect() {
-		return getStringArray(Property.garbageCollect);
+		// gets array from native object
+		ArrayString array = getArrayValue(Property.garbageCollect);
+		// returns list
+		return ArrayListHelper.unmodifiableList(array);
 	}
-
+	
 	/**
 	 * Returns a map with all ticks and max lengths in pixel of ticks.<br>
 	 * Key is the value of tick in string format, value is the max length in pixels.
@@ -77,60 +84,17 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	public Map<String, Integer> getData() {
 		// creates result
 		Map<String, Integer> result = new HashMap<>();
-		// checks if data is present
-		if (has(Property.data)) {
-			// creates data object
-			Data data = new Data((GenericJavaScriptObject) getValue(Property.data));
-			// gets all keys
-			List<Key> keys = data.keys();
-			// checks if has got items
-			if (!keys.isEmpty()) {
-				// scans all properties
-				for (Key key : keys) {
-					// loads map
-					result.put(key.name(), data.getValue(key, UndefinedValues.INTEGER));
-				}
+		// gets all keys
+		List<Key> keys = keys();
+		// if keys are consistent
+		if (!keys.isEmpty()) {
+			// scans all keys
+			for (Key key : keys) {
+				// loads data item
+				result.put(key.name(), getValue(key, UndefinedValues.INTEGER));
 			}
 		}
-		return result;
-	}
-
-	/**
-	 * Internal class to expose keys and getValue form generic java script object.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 *
-	 */
-	private static class Data extends JavaScriptObjectContainer {
-
-		/**
-		 * Wraps the CHART.JS java script object.
-		 * 
-		 * @param javaScriptObject CHART.JS java script object
-		 */
-		Data(GenericJavaScriptObject javaScriptObject) {
-			super(javaScriptObject);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer#keys()
-		 */
-		@Override
-		protected List<Key> keys() {
-			return super.keys();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer#getValue(org.pepstock.charba.client.commons.Key,
-		 * int)
-		 */
-		@Override
-		protected int getValue(Key key, int defaultValue) {
-			return super.getValue(key, defaultValue);
-		}
+		// returns a unmodifiable map
+		return Collections.unmodifiableMap(result);
 	}
 }

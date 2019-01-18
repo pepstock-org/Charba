@@ -15,22 +15,24 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * Wrapper of tooltip node of CHART.JS.
+ * Wrapper of tooltip node of CHART.JS.<br>
+ * This is a wrapper of title node of Chart (of CHART.JS).
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
-public final class TooltipNode extends JavaScriptObjectContainer {
+public final class TooltipNode extends NativeObjectContainer {
 	
 	private final TooltipModel model;
-	
+
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -38,14 +40,16 @@ public final class TooltipNode extends JavaScriptObjectContainer {
 	}
 	
 	/**
-	 * Wraps the CHART.JS java script object.
+	 * Creates the item using a native java script object which contains all properties.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * @param nativeObject native java script object which contains all properties.
 	 */
-	TooltipNode(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
-		model = new TooltipModel((GenericJavaScriptObject) getValue(Property._model));
+	public TooltipNode(NativeObject nativeObject) {
+		super(nativeObject);
+		// creates sub element
+		model = new TooltipModel(getValue(Property._model));
 	}
+
 
 	/**
 	 * Returns the tooltip model
@@ -54,6 +58,6 @@ public final class TooltipNode extends JavaScriptObjectContainer {
 	 */
 	public TooltipModel getModel() {
 		return model;
-	}
+	}	
 
 }

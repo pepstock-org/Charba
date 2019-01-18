@@ -16,30 +16,191 @@
 package org.pepstock.charba.client.controllers;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.Controller;
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+
+import jsinterop.annotations.JsFunction;
 
 /**
  * Wraps a controller, delegating the execution of all hooks to it.<br>
  * The wrapper is mandatory to able to catch all hooks of chart even if the controller implements just a part of the hooks.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
-final class WrapperController extends JavaScriptObjectContainer {
+final class WrapperController extends NativeObjectContainer {
 
+	// ---------------------------
+	// -- JAVASCRIPT FUNCTIONS ---
+	// ---------------------------
+	/**
+	 * Java script FUNCTION callback called to catch the chart initialization.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @since 2.0
+	 */
+	@JsFunction
+	interface ProxyInitializeCallback {
+		/**
+		 * Initializes the controller.
+		 * 
+		 * @param context java script <code>this</code> function context.
+		 * @param chart CHART.JS chart instance
+		 * @param datasetIndex dataset index
+		 */
+		void call(Context context, Chart chart, int datasetIndex);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to catch the chart add elements.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @since 2.0
+	 */
+	@JsFunction
+	interface ProxyAddElementsCallback {
+
+		/**
+		 * Create elements for each piece of data in the dataset.<br>
+		 * Store elements in an array on the dataset as dataset.metaData.
+		 * 
+		 * @param context java script <code>this</code> function context.
+		 */
+		void call(Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to catch the chart add element and reset.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @since 2.0
+	 */
+	@JsFunction
+	interface ProxyAddElementAndResetCallback {
+
+		/**
+		 * Create a single element for the data at the given index and reset its state.
+		 * 
+		 * @param context java script <code>this</code> function context.
+		 * @param index dataset index
+		 */
+		void call(Context context, int index);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to catch the chart drawing.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @since 2.0
+	 */
+	@JsFunction
+	interface ProxyDrawCallback {
+
+		/**
+		 * Draw the representation of the dataset.
+		 * 
+		 * @param context java script <code>this</code> function context.
+		 * @param ease if specified, this number represents how far to transition elements.
+		 */
+		void call(Context context, double ease);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to catch the chart remove hover.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @since 2.0
+	 */
+	@JsFunction
+	interface ProxyRemoveHoverStyleCallback {
+
+		/**
+		 * Remove hover styling from the given element.
+		 * 
+		 * @param context java script <code>this</code> function context.
+		 * @param element element to be removed.
+		 */
+		void call(Context context, NativeObject element);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to catch the chart set hover.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @since 2.0
+	 */
+	@JsFunction
+	interface ProxySetHoverStyleCallback {
+
+		/**
+		 * Add hover styling to the given element.
+		 * 
+		 * @param context java script <code>this</code> function context.
+		 * @param element element to be set.
+		 */
+		void call(Context context, NativeObject element);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to catch the chart updating.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @since 2.0
+	 */
+	@JsFunction
+	interface ProxyUpdateCallback {
+
+		/**
+		 * Update the elements in response to new data.
+		 * 
+		 * @param context java script <code>this</code> function context.
+		 * @param reset if true, put the elements into a reset state so they can animate to their final values
+		 */
+		void call(Context context, boolean reset);
+	}
+
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the initialize function
+	private final CallbackProxy<ProxyInitializeCallback> initializeCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the add elements function
+	private final CallbackProxy<ProxyAddElementsCallback> addElementsCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the add element and reset function
+	private final CallbackProxy<ProxyAddElementAndResetCallback> addElementAndResetCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the draw function
+	private final CallbackProxy<ProxyDrawCallback> drawCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the remove hover function
+	private final CallbackProxy<ProxyRemoveHoverStyleCallback> removeHoverStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the set hover function
+	private final CallbackProxy<ProxySetHoverStyleCallback> setHoverStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the update function
+	private final CallbackProxy<ProxyUpdateCallback> updateCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// user implementation of controller
 	private final Controller delegation;
 
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		type
+		type,
+		initialize,
+		addElements,
+		addElementAndReset,
+		draw,
+		removeHoverStyle,
+		setHoverStyle,
+		update
 	}
 
 	/**
@@ -52,8 +213,130 @@ final class WrapperController extends JavaScriptObjectContainer {
 		this.delegation = delegation;
 		// sets the controller type
 		setValue(Property.type, delegation.getType());
-		// registers itself with all methods of controller definition
-		registerNativeControllersHandler(getJavaScriptObject());
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		initializeCallbackProxy.setCallback(new ProxyInitializeCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.jsinterop.controllers.WrapperController.ProxyInitializeCallback#call(org.pepstock.
+			 * charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.jsinterop.Chart, int)
+			 */
+			@Override
+			public void call(Context context, Chart chart, int datasetIndex) {
+				// adds the chart instance to the context
+				// PAY ATTENTION: this is mandatory
+				context.setNativeChart(chart);
+				// invoke user method implementation
+				onInitialize(context, chart.getCharbaId(), datasetIndex);
+			}
+
+		});
+		addElementsCallbackProxy.setCallback(new ProxyAddElementsCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.jsinterop.controllers.WrapperController.ProxyAddElementsCallback#call(org.pepstock.
+			 * charba.client.jsinterop.controllers.Context)
+			 */
+			@Override
+			public void call(Context context) {
+				// invoke user method implementation
+				onAddElements(context, context.getCharbaId());
+			}
+
+		});
+		addElementAndResetCallbackProxy.setCallback(new ProxyAddElementAndResetCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.controllers.WrapperController.ProxyAddElementAndResetCallback#call(org.
+			 * pepstock.charba.client.jsinterop.controllers.Context, int)
+			 */
+			@Override
+			public void call(Context context, int index) {
+				// invoke user method implementation
+				onAddElementAndReset(context, context.getCharbaId(), index);
+			}
+
+		});
+		drawCallbackProxy.setCallback(new ProxyDrawCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.jsinterop.controllers.WrapperController.ProxyDrawCallback#call(org.pepstock.charba.
+			 * client.jsinterop.controllers.Context, double)
+			 */
+			@Override
+			public void call(Context context, double ease) {
+				// invoke user method implementation
+				onDraw(context, context.getCharbaId(), ease);
+			}
+
+		});
+		removeHoverStyleCallbackProxy.setCallback(new ProxyRemoveHoverStyleCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.jsinterop.controllers.WrapperController.ProxyRemoveHoverStyleCallback#call(org.
+			 * pepstock.charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 */
+			@Override
+			public void call(Context context, NativeObject element) {
+				// invoke user method implementation
+				onRemoveHoverStyle(context, context.getCharbaId(), element);
+			}
+
+		});
+		setHoverStyleCallbackProxy.setCallback(new ProxySetHoverStyleCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.jsinterop.controllers.WrapperController.ProxySetHoverStyleCallback#call(org.pepstock.
+			 * charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 */
+			@Override
+			public void call(Context context, NativeObject element) {
+				// invoke user method implementation
+				onSetHoverStyle(context, context.getCharbaId(), element);
+			}
+
+		});
+		updateCallbackProxy.setCallback(new ProxyUpdateCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.jsinterop.controllers.WrapperController.ProxyUpdateCallback#call(org.pepstock.charba.
+			 * client.jsinterop.controllers.Context, boolean)
+			 */
+			@Override
+			public void call(Context context, boolean reset) {
+				// invoke user method implementation
+				onUpdate(context, context.getCharbaId(), reset);
+			}
+
+		});
+		// adds all proxy functions to call the functions to the native object
+		setValue(Property.initialize, initializeCallbackProxy.getProxy());
+		setValue(Property.addElements, addElementsCallbackProxy.getProxy());
+		setValue(Property.addElementAndReset, addElementAndResetCallbackProxy.getProxy());
+		setValue(Property.draw, drawCallbackProxy.getProxy());
+		setValue(Property.removeHoverStyle, removeHoverStyleCallbackProxy.getProxy());
+		setValue(Property.setHoverStyle, setHoverStyleCallbackProxy.getProxy());
+		setValue(Property.update, updateCallbackProxy.getProxy());
 	}
 
 	/**
@@ -74,112 +357,115 @@ final class WrapperController extends JavaScriptObjectContainer {
 	final Type getType() {
 		return delegation.getType();
 	}
-	
+
 	/**
 	 * Initializes the controller.
-	 * @param jsThis context of controller 
+	 * 
+	 * @param context context of controller
 	 * @param chartId chartId chart id.
 	 * @param datasetIndex dataset index
 	 */
-	protected void onInitialize(GenericJavaScriptObject jsThis, String chartId, int datasetIndex) {
+	protected void onInitialize(Context context, String chartId, int datasetIndex) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls controller
 		if (chart != null) {
-			delegation.initialize(new Context(jsThis), chart, datasetIndex);
+			delegation.initialize(context, chart, datasetIndex);
 		}
 	}
 
 	/**
 	 * Create elements for each piece of data in the dataset. Store elements in an array on the dataset.
-	 * @param jsThis context of controller 
+	 * 
+	 * @param context context of controller
 	 * @param chartId chartId chart id.
 	 */
-	protected void onAddElements(GenericJavaScriptObject jsThis, String chartId) {
+	protected void onAddElements(Context context, String chartId) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls controller
 		if (chart != null) {
-			delegation.addElements(new Context(jsThis), chart);
+			delegation.addElements(context, chart);
 		}
 	}
 
 	/**
 	 * Create a single element for the data at the given index and reset its state.
-	 * @param jsThis context of controller 
+	 * 
+	 * @param context context of controller
 	 * @param chartId chartId chart id.
 	 * @param index dataset index
 	 */
-	protected void onAddElementAndReset(GenericJavaScriptObject jsThis, String chartId, int index) {
+	protected void onAddElementAndReset(Context context, String chartId, int index) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls controller
 		if (chart != null) {
-			delegation.addElementAndReset(new Context(jsThis), chart, index);
+			delegation.addElementAndReset(context, chart, index);
 		}
 	}
 
 	/**
 	 * Draw the representation of the dataset.
 	 * 
-	 * @param jsThis context of controller 
+	 * @param context context of controller
 	 * @param chartId chartId chart id.
 	 * @param ease if specified, this number represents how far to transition elements.
 	 */
-	protected void onDraw(GenericJavaScriptObject jsThis, String chartId, String ease) {
+	protected void onDraw(Context context, String chartId, double ease) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls controller
 		if (chart != null) {
-			delegation.draw(new Context(jsThis), chart, Double.valueOf(ease));
+			delegation.draw(context, chart, ease);
 		}
 	}
 
 	/**
 	 * Remove hover styling from the given element.
 	 * 
-	 * @param jsThis context of controller 
+	 * @param context context of controller
 	 * @param chartId chartId chart id.
 	 * @param object element to be removed.
 	 */
-	protected void onRemoveHoverStyle(GenericJavaScriptObject jsThis, String chartId, GenericJavaScriptObject object) {
+	protected void onRemoveHoverStyle(Context context, String chartId, NativeObject object) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls controller
 		if (chart != null) {
-			delegation.removeHoverStyle(new Context(jsThis), chart, new StyleElement(object));
+			delegation.removeHoverStyle(context, chart, new StyleElement(object));
 		}
 	}
 
 	/**
 	 * Add hover styling to the given element.
 	 * 
-	 * @param jsThis context of controller 
+	 * @param context context of controller
 	 * @param chartId chartId chart id.
 	 * @param object element to be set.
 	 */
-	protected void onSetHoverStyle(GenericJavaScriptObject jsThis, String chartId, GenericJavaScriptObject object) {
+	protected void onSetHoverStyle(Context context, String chartId, NativeObject object) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls controller
 		if (chart != null) {
-			delegation.setHoverStyle(new Context(jsThis), chart, new StyleElement(object));
+			delegation.setHoverStyle(context, chart, new StyleElement(object));
 		}
 	}
 
 	/**
 	 * Update the elements in response to new data.
 	 * 
-	 * @param jsThis context of controller 
+	 * @param context context of controller
 	 * @param chartId chartId chart id.
 	 * @param reset if true, put the elements into a reset state so they can animate to their final values
 	 */
-	protected void onUpdate(GenericJavaScriptObject jsThis, String chartId, boolean reset) {
+	protected void onUpdate(Context context, String chartId, boolean reset) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
 		// if consistent, calls controller
 		if (chart != null) {
-			delegation.update(new Context(jsThis), chart, reset);
+			delegation.update(context, chart, reset);
 		}
 	}
 
@@ -188,50 +474,8 @@ final class WrapperController extends JavaScriptObjectContainer {
 	 * 
 	 * @return the java script object.
 	 */
-	GenericJavaScriptObject getObject() {
-		return getJavaScriptObject();
+	NativeObject getObject() {
+		return super.getNativeObject();
 	}
-	
-	/**
-	 * Registers all hooks of the controller to the wrapper.
-	 * @param config java script object where adding the new function and link of java code.
-	 */
-	private native void registerNativeControllersHandler(GenericJavaScriptObject config)/*-{
-	var self = this;
-
-	// Initializes the controller
-    config.initialize = function(chart, datasetIndex) {
-		this.chart = chart;
-		this.datasetIndex = datasetIndex;
-		self.@org.pepstock.charba.client.controllers.WrapperController::onInitialize(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;Ljava/lang/String;I)(this, chart.options.charbaId, datasetIndex);
-	};
-    // Create elements for each piece of data in the dataset. Store elements in an array on the dataset as dataset.metaData
-    config.addElements = function() {
-		self.@org.pepstock.charba.client.controllers.WrapperController::onAddElements(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;Ljava/lang/String;)(this, this.chart.options.charbaId);
-	}
-    // Create a single element for the data at the given index and reset its state
-    config.addElementAndReset = function(index) {
-		self.@org.pepstock.charba.client.controllers.WrapperController::onAddElementAndReset(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;Ljava/lang/String;I)(this, this.chart.options.charbaId, index);
-	}
-    // Draw the representation of the dataset
-    // @param ease  = if specified this number represents how far to transition elements. See the implementation of draw() in any of the provided controllers to see how this should be used
-    config.draw = function(ease) {
-		self.@org.pepstock.charba.client.controllers.WrapperController::onDraw(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;Ljava/lang/String;Ljava/lang/String;)(this, this.chart.options.charbaId, ease);
-	}
-    // Remove hover styling from the given element
-    config.removeHoverStyle = function(element) {
-		self.@org.pepstock.charba.client.controllers.WrapperController::onRemoveHoverStyle(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;Ljava/lang/String;Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(this, this.chart.options.charbaId, element);
-	}
-    // Add hover styling to the given element
-    config.setHoverStyle = function(element) {
-		self.@org.pepstock.charba.client.controllers.WrapperController::onSetHoverStyle(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;Ljava/lang/String;Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(this, this.chart.options.charbaId, element);
-	}
-    // Update the elements in response to new data
-    // @param reset  = if true put the elements into a reset state so they can animate to their final values
-    config.update = function(reset) {
-		self.@org.pepstock.charba.client.controllers.WrapperController::onUpdate(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;Ljava/lang/String;Z)(this, this.chart.options.charbaId, reset);
-	}
-
-	}-*/;
 
 }

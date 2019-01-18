@@ -15,13 +15,16 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.configuration.StackedOptions;
 import org.pepstock.charba.client.data.StackedBarDataset;
-import org.pepstock.charba.client.options.StackedOptions;
 
 /**
- * STACKED BAR chart implementation.
+ * STACKED BAR chart implementation.<br>
+ * Stacked bar charts can be configured like bar charts and changes the settings on the X and Y axes to enable stacking.<br>
+ * Stacked bar charts can be used to show how one data series is made up of a number of smaller pieces.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
 public class StackedBarChart extends AbstractChart<StackedOptions, StackedBarDataset> {
@@ -32,13 +35,13 @@ public class StackedBarChart extends AbstractChart<StackedOptions, StackedBarDat
 	 * Builds the object.
 	 */
 	public StackedBarChart() {
-		options = new StackedOptions(this);
+		options = new StackedOptions(this, getChartOptions());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getType()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -48,7 +51,7 @@ public class StackedBarChart extends AbstractChart<StackedOptions, StackedBarDat
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getOptions()
 	 */
 	@Override
 	public StackedOptions getOptions() {
@@ -58,11 +61,10 @@ public class StackedBarChart extends AbstractChart<StackedOptions, StackedBarDat
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#newDataset()
 	 */
 	@Override
 	public StackedBarDataset newDataset() {
 		return new StackedBarDataset();
 	}
-
 }

@@ -21,11 +21,12 @@ package org.pepstock.charba.client.plugins;
  * <ul>
  * <li>can not start with a dot or an underscore
  * <li>can not contain any non-URL-safe characters
- * <li>cannot contain uppercase letters
+ * <li>cannot contain upper-case letters
  * <li>should be something short, but also reasonably descriptive
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
 public class InvalidPluginIdException extends Exception {
@@ -35,7 +36,7 @@ public class InvalidPluginIdException extends Exception {
 	/**
 	 * Builds the exception using the message explaining why the id is not valid.
 	 * 
-	 * @param message explaination why the id is not valid.
+	 * @param message explanation why the id is not valid.
 	 */
 	public InvalidPluginIdException(String message) {
 		super(message);

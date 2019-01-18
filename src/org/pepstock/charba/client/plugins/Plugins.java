@@ -21,18 +21,18 @@ import java.util.List;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Configuration;
+import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.Plugin;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JsObjectArrayList;
 
 /**
  * Is the manager of plugins which can manage the list of plugins and returns them as java script object to store into chart
  * configuration.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
-public final class Plugins {
+public final class Plugins implements ConfigurationElement {
 	// chart instance
 	private final AbstractChart<?, ?> chart;
 	// list of added plugins
@@ -49,7 +49,7 @@ public final class Plugins {
 
 	/**
 	 * Adds a new plugin to the chart.<br>
-	 * If the chart is already initialized, to get this update teh chart must be drawn again.
+	 * If the chart is already initialized, to get this update the chart must be drawn again.
 	 * 
 	 * @param plugin plugin instance
 	 * @throws InvalidPluginIdException if the plugin id is not correct.
@@ -57,7 +57,7 @@ public final class Plugins {
 	public void add(Plugin plugin) throws InvalidPluginIdException {
 		// checks the plugin id
 		PluginIdChecker.check(plugin.getId());
-		// creates a java script object, wrapper of teh plugin
+		// creates a java script object, wrapper of the plugin
 		InlinePlugin wPlugin = new InlinePlugin(chart, plugin);
 		// stores the wrapper into a list
 		plugins.add(wPlugin);
@@ -65,7 +65,7 @@ public final class Plugins {
 
 	/**
 	 * Removes a plugin from the chart.<br>
-	 * If the chart is already initialized, to get this update teh chart must be drawn again.
+	 * If the chart is already initialized, to get this update the chart must be drawn again.
 	 * 
 	 * @param id plugin id to remove.
 	 */
@@ -82,7 +82,7 @@ public final class Plugins {
 			}
 		}
 	}
-	
+
 	/**
 	 * Invokes the on configuration method to inform the plugins that the chart is going to be initialized.
 	 * 
@@ -97,19 +97,24 @@ public final class Plugins {
 		}
 	}
 
-	/**
-	 * Creates a java script array (mapped into a list) with all plugins added to the chart.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return a java script array (mapped into a list) with all plugins added to the chart.
+	 * @see org.pepstock.charba.client.jsinterop.ConfigurationElement#load(org.pepstock.charba.client.jsinterop.Configuration)
 	 */
-	public JsObjectArrayList<GenericJavaScriptObject> getArrayList() {
-		// creates list
-		JsObjectArrayList<GenericJavaScriptObject> list = new JsObjectArrayList<GenericJavaScriptObject>();
-		// adds all java script object of the plugin wrapper
-		for (InlinePlugin plugin : plugins) {
-			list.add(plugin.getObject());
+	@Override
+	public void load(Configuration configuration) {
+		// checks if there is any plugin to configured to chart.js
+		if (!plugins.isEmpty()) {
+			// new array
+			ArrayPlugin array = new ArrayPlugin();
+			// adds all java script object of the plugin wrapper
+			for (InlinePlugin plugin : plugins) {
+				array.push(plugin.getNativeObject());
+			}
+			// sets it to configuration object
+			configuration.setPlugins(array);
 		}
-		return list;
 	}
 
 }

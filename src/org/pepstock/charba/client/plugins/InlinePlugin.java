@@ -23,14 +23,14 @@ import org.pepstock.charba.client.Plugin;
  * The wrapper is mandatory to able to catch all hooks of chart even if the plugin implements just a part of the hooks.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 final class InlinePlugin extends GlobalPlugin {
-	
+
 	private final AbstractChart<?, ?> chart;
 
 	/**
-	 * Builds the object with the chart and plugin instances
+	 * Builds the object with the chart and plugin instance.
 	 * 
 	 * @param chart chart instance
 	 * @param delegation plugin instance
@@ -39,17 +39,20 @@ final class InlinePlugin extends GlobalPlugin {
 		super(delegation);
 		this.chart = chart;
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.plugins.GlobalPlugin#getChart(java.lang.String)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.plugins.GlobalPlugin#getChart(java.lang.String)
 	 */
 	@Override
 	AbstractChart<?, ?> getChart(String chartId) {
 		// checks if the chart id is the same of INLINE plugin
-		if (chart.getId().equalsIgnoreCase(chartId)){
-			return chart;			
+		if (chart.getId().equalsIgnoreCase(chartId)) {
+			return chart;
 		}
 		// calls to collection of charts
 		return super.getChart(chartId);
 	}
+
 }

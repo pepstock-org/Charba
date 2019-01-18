@@ -19,6 +19,7 @@ package org.pepstock.charba.client.items;
  * Class with default values when the java script object returns an UNDEFINED value.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
 public final class UndefinedValues {
@@ -34,7 +35,7 @@ public final class UndefinedValues {
 	public static final double DOUBLE = Double.NaN;
 	
 	/**
-	 * Default value for STRING instances
+	 * Default value for STRING instances.
 	 */
 	public static final String STRING = null;
 

@@ -16,9 +16,12 @@
 package org.pepstock.charba.client.data;
 
 /**
- * The pie chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
+ * The pie chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
+ * specific dataset.
+ * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  */
-public class PieDataset extends HovingDataset{
+public class PieDataset extends HovingDataset {
 
 }

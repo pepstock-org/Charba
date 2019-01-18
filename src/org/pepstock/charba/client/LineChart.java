@@ -15,13 +15,16 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.configuration.LineOptions;
 import org.pepstock.charba.client.data.LineDataset;
-import org.pepstock.charba.client.options.LineOptions;
 
 /**
- * LINE chart implementation.
+ * LINE chart implementation.<br>
+ * A line chart is a way of plotting data points on a line.<br>
+ * Often, it is used to show trend data, or the comparison of two data sets.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
 public class LineChart extends AbstractChart<LineOptions, LineDataset> {
@@ -32,13 +35,13 @@ public class LineChart extends AbstractChart<LineOptions, LineDataset> {
 	 * Builds the object.
 	 */
 	public LineChart() {
-		options = new LineOptions(this);
+		options = new LineOptions(this, getChartOptions());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getType()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -48,7 +51,7 @@ public class LineChart extends AbstractChart<LineOptions, LineDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getOptions()
 	 */
 	@Override
 	public LineOptions getOptions() {
@@ -58,7 +61,7 @@ public class LineChart extends AbstractChart<LineOptions, LineDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#newDataset()
 	 */
 	@Override
 	public LineDataset newDataset() {

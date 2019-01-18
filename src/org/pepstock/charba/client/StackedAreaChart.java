@@ -15,14 +15,16 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.configuration.StackedOptions;
 import org.pepstock.charba.client.data.StackedAreaDataset;
-import org.pepstock.charba.client.options.StackedOptions;
 
 /**
- * STACKED AREA chart implementation.
+ * STACKED AREA chart implementation.<br>
+ * A stacked area chart is a way of plotting data points on a line.<br>
+ * Often, it is used to show trend data, or the comparison of two data sets.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public class StackedAreaChart extends AbstractChart<StackedOptions, StackedAreaDataset> {
 
@@ -32,13 +34,13 @@ public class StackedAreaChart extends AbstractChart<StackedOptions, StackedAreaD
 	 * Builds the object.
 	 */
 	public StackedAreaChart() {
-		options = new StackedOptions(this, true);
+		options = new StackedOptions(this, getChartOptions(), true);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getType()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -48,7 +50,7 @@ public class StackedAreaChart extends AbstractChart<StackedOptions, StackedAreaD
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getOptions()
 	 */
 	@Override
 	public StackedOptions getOptions() {
@@ -58,7 +60,7 @@ public class StackedAreaChart extends AbstractChart<StackedOptions, StackedAreaD
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#newDataset()
 	 */
 	@Override
 	public StackedAreaDataset newDataset() {

@@ -18,21 +18,22 @@ package org.pepstock.charba.client.items;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
  * This object contains the color info when a label into tooltip.<br>
  * It must be used into label tooltip callback.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.callbacks.TooltipLabelCallback
+ * @since 2.0
  */
-public final class TooltipLabelColor extends JavaScriptObjectContainer {
+public final class TooltipLabelColor extends NativeObjectContainer {
 
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -41,12 +42,37 @@ public final class TooltipLabelColor extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * Wraps the CHART.JS java script object.
-	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * Creates the object with an empty native object
 	 */
-	TooltipLabelColor(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	public TooltipLabelColor() {
+		super();
+	}
+
+	/**
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
+	 */
+	TooltipLabelColor(NativeObject nativeObject) {
+		super(nativeObject);
+	}
+
+	/**
+	 * Sets background color as string
+	 * 
+	 * @param backgroundColor background color
+	 */
+	public void setBackgroundColor(String backgroundColor) {
+		setValue(Property.backgroundColor, backgroundColor);
+	}
+
+	/**
+	 * Sets background color
+	 * 
+	 * @param backgroundColor background color
+	 */
+	public void setBackgroundColor(IsColor backgroundColor) {
+		setValue(Property.backgroundColor, backgroundColor.toRGBA());
 	}
 
 	/**
@@ -55,7 +81,7 @@ public final class TooltipLabelColor extends JavaScriptObjectContainer {
 	 * @return the background color of the label.
 	 */
 	public String getBackgroundColorAsString() {
-		return getValue(Property.backgroundColor, Defaults.getGlobal().getTooltips().getBackgroundColorAsString());
+		return getValue(Property.backgroundColor, Defaults.get().getGlobal().getTooltips().getBackgroundColorAsString());
 	}
 
 	/**
@@ -68,14 +94,32 @@ public final class TooltipLabelColor extends JavaScriptObjectContainer {
 	}
 
 	/**
+	 * Sets border color as string
+	 * 
+	 * @param borderColor border color
+	 */
+	public void setBorderColor(String borderColor) {
+		setValue(Property.borderColor, borderColor);
+	}
+
+	/**
+	 * Sets border color
+	 * 
+	 * @param borderColor border color
+	 */
+	public void setBorderColor(IsColor borderColor) {
+		setValue(Property.borderColor, borderColor.toRGBA());
+	}
+
+	/**
 	 * Returns the border color of the label.
 	 * 
 	 * @return the border color of the label.
 	 */
 	public String getBorderColorAsString() {
-		return getValue(Property.borderColor,  Defaults.getGlobal().getTooltips().getBorderColorAsString());
+		return getValue(Property.borderColor, Defaults.get().getGlobal().getTooltips().getBorderColorAsString());
 	}
-	
+
 	/**
 	 * Returns the border color of the label.
 	 * 
@@ -83,6 +127,36 @@ public final class TooltipLabelColor extends JavaScriptObjectContainer {
 	 */
 	public IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
+	}
+
+	/**
+	 * Wraps the protected method to get the java script object in order to consume it.
+	 * 
+	 * @return the java script object in order to consume it.
+	 */
+	public NativeObject getObject() {
+		return getNativeObject();
+	}
+
+	/**
+	 * Inner class to create tooltip label color by a native object.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @since 2.0
+	 */
+	static final class TooltipLabelColorFactory implements NativeObjectContainerFactory<TooltipLabelColor> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
+		 * .commons.NativeObject)
+		 */
+		@Override
+		public TooltipLabelColor create(NativeObject nativeObject) {
+			return new TooltipLabelColor(nativeObject);
+		}
 	}
 
 }

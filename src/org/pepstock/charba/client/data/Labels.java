@@ -15,111 +15,124 @@
 */
 package org.pepstock.charba.client.data;
 
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.JsArrayMixed;
-import com.google.gwt.core.client.JsArrayString;
+import org.pepstock.charba.client.commons.Array;
+import org.pepstock.charba.client.commons.ArrayMixedObject;
+import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.ObjectType;
 
 /**
  * Contains the labels of the chart.<br>
  * Is able to manage also multi-line labels.
  * 
  * @author Andrea "Stock" Stocchero
- * @see com.google.gwt.core.client.JavaScriptObject
- * @see com.google.gwt.core.client.JsArrayMixed
+ * @since 2.0
  */
-public final class Labels extends JavaScriptObject {
-	
+public final class Labels {
+
+	private final ArrayMixedObject array;
+
 	/**
-	 * Types of different elements of internal array.<br>
-	 * String is single line label, array is multi-line label.
+	 * To avoid any instantiations
 	 */
-	public enum Type {
-		string,
-		array
+	private Labels(ArrayMixedObject array) {
+		this.array = array != null ? array : new ArrayMixedObject();
 	}
 
 	/**
-	 * Needed for GWT injection
+	 * @return the array
 	 */
-	protected Labels() {
-		// do nothing
+	ArrayMixedObject getArray() {
+		return array;
 	}
-	
+
 	/**
 	 * Builds new label object
+	 * 
 	 * @return new label object
 	 */
-	public static Labels build(){
-		return JsArrayMixed.createArray().cast();
+	public static Labels build() {
+		return new Labels(new ArrayMixedObject());
+	}
+
+	/**
+	 * Loads the labels form a native array.
+	 * 
+	 * @param array native array.
+	 * @return a labels instance
+	 */
+	static Labels load(ArrayMixedObject array) {
+		return new Labels(array);
 	}
 
 	/**
 	 * Loads single line labels.
+	 * 
 	 * @param values array of labels
 	 */
-	public final void load(String... values){
+	public void load(String... values) {
 		// checks if is a valid array
-		if (values != null && values.length > 0){
+		if (values != null && values.length > 0) {
 			// scans values
-			for(String value: values){
-				// pushes to JS array 
-				push(value);
+			for (String value : values) {
+				// pushes to JS array
+				array.push(value);
 			}
 		}
 	}
-	
+
 	/**
 	 * Adds a single line label
+	 * 
 	 * @param value a single label
 	 */
-	public final void add(String value){
+	public void add(String value) {
 		// if consistent
-		if (value != null){
+		if (value != null) {
 			// pushes to JS array
-			push(value);
+			array.push(value);
 		}
 	}
-	
+
 	/**
 	 * Adds a multi line label
-	 * @param values array ofstring which represents a multi line label
+	 * 
+	 * @param values array of string which represents a multi line label
 	 */
-	public final void add(String... values){
+	public void add(String... values) {
 		// checks if is a valid array
-		if (values != null && values.length > 0){
+		if (values != null && values.length > 0) {
 			// creates new JS array
-			JsArrayString multiValues = JsArrayString.createArray().cast();
-			// scans values
-			for(String value: values){
-				// adds to JS array string
-				multiValues.push(value);
-			}
-			// pushes array to JS array
-			push(multiValues);
+			array.push(ArrayString.of(values));
 		}
 	}
-	
+
 	/**
-	 * Returns a multi line label at a specific index. An array of strings is returned. 
+	 * Returns a multi line label at a specific index. An array of strings is returned.
+	 * 
 	 * @param index index of label
 	 * @return an array of strings
 	 */
-	public final String[] getStrings(int index){
+	public String[] getStrings(int index) {
 		// checks range
-		if (checkRange(index)){
+		if (checkRange(index)) {
 			// gets multi line array
-			JsArrayString multiValues = getObject(index);
+			Object multiValues = array.get(index);
 			// if consistent
-			if (multiValues != null){
-				// creates an string array
-				String[] result = new String[multiValues.length()];
-				// scans all values
-				for (int i=0; i<multiValues.length(); i++){
-					// adds to java array
-					result[i] = multiValues.get(i);
+			if (multiValues != null) {
+				if (Array.isArray(multiValues)) {
+					ArrayString internalArray = (ArrayString) multiValues;
+					// creates an string array
+					String[] result = new String[internalArray.length()];
+					// scans all values
+					for (int i = 0; i < internalArray.length(); i++) {
+						// adds to java array
+						result[i] = internalArray.get(i);
+					}
+					// returns array
+					return result;
+				} else {
+					return new String[] { (String) multiValues };
 				}
-				// returns array
-				return result;
 			} else {
 				// returns an empty array
 				return new String[0];
@@ -128,108 +141,30 @@ public final class Labels extends JavaScriptObject {
 		// returns an empty array
 		return new String[0];
 	}
-	
+
 	/**
 	 * Returns the type of a label at specific index.
+	 * 
 	 * @param index index of label
 	 * @return the type of label or null if out of range
 	 */
-	public final Type getType(int index){
+	public ObjectType getType(int index) {
 		// checks range
-		if (checkRange(index)){
+		if (checkRange(index)) {
 			// gets type of label
-			String type = typeOf(index);
-			// checks if is a single line or multi.
-			if (Type.string.name().equalsIgnoreCase(type)){
-				return Type.string;
-			} else {
-				return Type.array;
-			}
+			return Array.isArray(array.get(index)) ? ObjectType.Array : ObjectType.String;
 		}
-		return null;
+		return ObjectType.Undefined;
 	}
-	
+
 	/**
 	 * Checks if the index is in the right range.
+	 * 
 	 * @param index index to be checked
 	 * @return <code>true</code> if the index is in the right range otherwise false
 	 */
-	private final boolean checkRange(int index){
-		return index >= 0 && index < length();
+	private boolean checkRange(int index) {
+		return index >= 0 && index < array.length();
 	}
 
-    /**
-     * Returns the type of element in this object.<br>
-     * <table>
-     * <tr><th>Type</th><th>Result</th></tr>
-     * <tr><td>Undefined</td><td>"undefined"</td></tr>
-     * <tr><td>Null</td><td>"object"</td></tr>
-     * <tr><td>Boolean</td><td>"boolean"</td></tr>
-     * <tr><td>Number</td><td>"number"</td></tr>
-     * <tr><td>String</td><td>"string"</td></tr>
-     * <tr><td>Function</td><td>"function"</td></tr>
-     * <tr><td>Any other object</td><td>"object"</td></tr>
-     * </table>
-     * <br>
-     * For further information, refer to this JavaScript documentation: https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Operators/typeof
-     * @param key name of the property of JavaScript object.
-     * @return a string value which represents the type of property
-     */
-    private final native String typeOf(int index) /*-{
-	    return typeof this[index];
-	 }-*/;
-
-    /**
-     * Gets the {@link JavaScriptObject} at a given index.
-     * 
-     * @param index the index to be retrieved
-     * @return the {@code JavaScriptObject} at the given index, or
-     *         <code>null</code> if none exists
-     */
-    private final native <T extends JavaScriptObject> T getObject(int index) /*-{
-       return this[index] != null ? Object(this[index]) : null;
-    }-*/;
-    
-    /**
-     * Gets the String at a given index.
-     * 
-     * @param index the index to be retrieved
-     * @return the object at the given index, or <code>null</code> if none exists
-     */
-    public final native String getString(int index) /*-{
-       var value = this[index];
-       return value == null ? null : String(value);
-    }-*/;
-
-    /**
-     * Gets the length of the array.
-     * 
-     * @return the array length
-     */
-    public final native int length() /*-{
-       return this.length;
-    }-*/;
-    
-    /**
-     * Pushes the given {@link JavaScriptObject} onto the end of the array.
-     */
-    private final native void push(JavaScriptObject value) /*-{
-       this[this.length] = value;
-    }-*/;
-
-    /**
-     * Pushes the given String onto the end of the array.
-     */
-    private final native void push(String value) /*-{
-       this[this.length] = value;
-    }-*/;
-	
-    public final native String toJSON()/*-{
-		return JSON.stringify(this, function(key, val) {
-				if (typeof val === 'function') {
-				return val + '';
-				}
-				return val;
-		}, 3);
-	}-*/;
 }

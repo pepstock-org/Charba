@@ -23,7 +23,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * Event which is fired when the animation of the chart is progressing.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public final class AnimationProgressEvent extends AbstractEvent<AnimationProgressEventHandler> {
 

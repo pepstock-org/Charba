@@ -15,27 +15,25 @@
 */
 package org.pepstock.charba.client;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.defaults.global.Options;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
+import org.pepstock.charba.client.options.Options;
 
 /**
- * Contains the GLOBAL options for a specific chart instance.<br>
- * Loaded when a new chart instance is created.<br>
- * It's the result of merging of different global options.
+ * Default global options (maps the java script object chart.defaults.global).
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public final class GlobalOptions extends Options {
 
-
 	/**
-	 * Creates the object using the java script object with the defaults provided by merging global options.
+	 * Creates the object with the native object which maps the java script object chart.defaults.global.
 	 * 
-	 * @param javaScriptObject the java script object with the merged defaults.
+	 * @param nativeObject native object which maps the java script object chart.defaults.global
 	 */
-	GlobalOptions(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	GlobalOptions(NativeObject nativeObject) {
+		// uses the CHART.JS default options as default one
+		super(DefaultsBuilder.get().getOptions(), nativeObject);
 	}
-
 }

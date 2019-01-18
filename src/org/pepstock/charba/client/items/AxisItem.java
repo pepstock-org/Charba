@@ -15,21 +15,19 @@
 */
 package org.pepstock.charba.client.items;
 
-import java.util.List;
-
-import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JsDoubleArrayList;
-import org.pepstock.charba.client.commons.JsStringArrayList;
+import org.pepstock.charba.client.commons.ArrayDouble;
+import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.Position;
 
 /**
  * There are a number of configuration callbacks that can be used to change parameters in the scale at different points in the
  * update process.<br>
- * This is the CHART.JS item with all needed info about an axis.
+ * This is a wrapper of the CHART.JS item with all needed info about an axis.<br>
+ * Implements all <code>set</code> methods to change java script object properties.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public final class AxisItem extends ScaleItem {
 	
@@ -38,15 +36,15 @@ public final class AxisItem extends ScaleItem {
 	private final AxisMinSizeItem minSize;
 
 	/**
-	 * Wraps the CHART.JS java script object.
+	 * Creates the item using a native java script object which contains all properties.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * @param nativeObject native java script object which contains all properties.
 	 */
-	public AxisItem(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	public AxisItem(NativeObject nativeObject) {
+		super(nativeObject);
 		// initializes the sub objects
-		margins = new AxisMarginsItem((GenericJavaScriptObject)getValue(BaseBoxNodeItem.Property.margins));
-		minSize= new AxisMinSizeItem((GenericJavaScriptObject)getValue(BaseBoxNodeItem.Property.minSize));
+		margins = new AxisMarginsItem(getValue(BaseBoxNodeItem.Property.margins));
+		minSize= new AxisMinSizeItem(getValue(BaseBoxNodeItem.Property.minSize));
 	}
 
 	/**
@@ -180,7 +178,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param min the minimum value of axis
 	 */
-	public void setMinAsNumber(int min) {
+	public void setMin(int min) {
 		setValue(Property.min, min);
 	}
 
@@ -189,7 +187,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param max the maximum value of axis
 	 */
-	public void setMaxAsNumber(int max) {
+	public void setMax(int max) {
 		setValue(Property.max, max);
 	}
 
@@ -199,16 +197,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param ticks the array of ticks
 	 */
 	public void setTicks(String... ticks) {
-		setTicks(ArrayListHelper.build(ticks));
-	}
-
-	/**
-	 * Sets the list of ticks
-	 * 
-	 * @param ticks the list of ticks
-	 */
-	private final void setTicks(JsStringArrayList ticks) {
-		setStringArray(Property.ticks, ticks);
+		setArrayValue(Property.ticks, ArrayString.of(ticks));
 	}
 
 	/**
@@ -235,36 +224,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param ticksAsNumbers the array of ticks
 	 */
 	public void setTicksAsNumbers(double... ticksAsNumbers) {
-		setInternalTicksAsNumbers(ArrayListHelper.build(ticksAsNumbers));
-	}
-
-	/**
-	 * Sets the list of ticks
-	 * 
-	 * @param ticksAsNumbers the list of ticks
-	 */
-	public void setTicksAsNumbers(List<Double> ticksAsNumbers) {
-		// checks if is already a JavaScript object wrapper
-		if (ticksAsNumbers instanceof JsDoubleArrayList) {
-			// sets directly
-			setInternalTicksAsNumbers((JsDoubleArrayList) ticksAsNumbers);
-		} else {
-			// creates a JavaScript list
-			JsDoubleArrayList list = new JsDoubleArrayList();
-			// adds all values
-			list.addAll(ticksAsNumbers);
-			// sets list
-			setInternalTicksAsNumbers(list);
-		}
-	}
-
-	/**
-	 * Sets the list of ticks
-	 * 
-	 * @param ticksAsNumbers the list of ticks
-	 */
-	private void setInternalTicksAsNumbers(JsDoubleArrayList ticksAsNumbers) {
-		setDoubleArray(Property.ticksAsNumbers, ticksAsNumbers);
+		setArrayValue(Property.ticksAsNumbers, ArrayDouble.of(ticksAsNumbers));
 	}
 
 	/**
@@ -316,7 +276,6 @@ public final class AxisItem extends ScaleItem {
 	 * Sets the position of axis
 	 * 
 	 * @param position the position of axis
-	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public void setPosition(Position position) {
 		setValue(BaseBoxNodeItem.Property.position, position);
@@ -326,7 +285,6 @@ public final class AxisItem extends ScaleItem {
 	 * Returns the margins of axis
 	 * 
 	 * @return the margins of axis
-	 * @see org.pepstock.charba.client.items.AxisMarginsItem
 	 */
 	public AxisMarginsItem getAxisMargins() {
 		return margins;
@@ -336,7 +294,6 @@ public final class AxisItem extends ScaleItem {
 	 * Returns the minimum size of axis
 	 * 
 	 * @return the minimum size of axis
-	 * @see org.pepstock.charba.client.items.AxisMinSizeItem
 	 */
 	public AxisMinSizeItem getAxisMinSize() {
 		return minSize;

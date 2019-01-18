@@ -28,8 +28,7 @@ import org.pepstock.charba.client.items.TooltipItem;
  * This interface takes care about labels to apply to the title.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.options.TooltipsCallbacks
- *
+ * @since 2.0
  */
 public interface TooltipTitleCallback {
 
@@ -39,8 +38,6 @@ public interface TooltipTitleCallback {
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
 	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored.
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
 	String[] onBeforeTitle(AbstractChart<?, ?> chart, List<TooltipItem> items);
 
@@ -50,8 +47,6 @@ public interface TooltipTitleCallback {
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
 	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored.
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
 	String[] onTitle(AbstractChart<?, ?> chart, List<TooltipItem> items);
 
@@ -61,8 +56,6 @@ public interface TooltipTitleCallback {
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
 	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored.
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
 	String[] onAfterTitle(AbstractChart<?, ?> chart, List<TooltipItem> items);
 

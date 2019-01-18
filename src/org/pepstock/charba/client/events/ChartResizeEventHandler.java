@@ -19,7 +19,7 @@ package org.pepstock.charba.client.events;
  * Event handler for chart resize event managing.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public interface ChartResizeEventHandler extends ChartEventHandler {
 

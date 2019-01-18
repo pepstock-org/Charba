@@ -19,24 +19,27 @@ import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.JsIntegerArrayList;
-import org.pepstock.charba.client.commons.JsStringArrayList;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
+ * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
+ * specific dataset.<br>
  * This class collects a set of common field for Pie and Polar charts.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
-abstract class HovingDataset extends Dataset{
+abstract class HovingDataset extends Dataset {
 
 	/**
-	 * Name of fields of JavaScript object. 
+	 * Name of properties of native object.
 	 */
-	private enum Property implements Key {
+	private enum Property implements Key
+	{
 		backgroundColor,
 		borderColor,
 		borderWidth,
@@ -47,38 +50,35 @@ abstract class HovingDataset extends Dataset{
 
 	/**
 	 * Sets the fill color of the arcs in the dataset.
+	 * 
 	 * @param backgroundColor the fill color of the arcs in the dataset.
 	 */
 	public void setBackgroundColor(IsColor... backgroundColor) {
-		setBackgroundColor(ArrayListHelper.build(backgroundColor));
+		setArrayValue(Property.backgroundColor, ArrayString.of(backgroundColor));
 	}
 
 	/**
 	 * Sets the fill color of the arcs in the dataset.
+	 * 
 	 * @param backgroundColor the fill color of the arcs in the dataset.
 	 */
 	public void setBackgroundColor(String... backgroundColor) {
-		setBackgroundColor(ArrayListHelper.build(backgroundColor));
-	}
-
-	/**
-	 * Sets the fill color of the arcs in the dataset.
-	 * @param backgroundColor the fill color of the arcs in the dataset.
-	 */
-	private void setBackgroundColor(JsStringArrayList backgroundColor) {
-		setStringArray(Property.backgroundColor, backgroundColor);
+		setArrayValue(Property.backgroundColor, ArrayString.of(backgroundColor));
 	}
 
 	/**
 	 * Returns the fill color of the arcs in the dataset as string.
+	 * 
 	 * @return list of the fill color of the arcs in the dataset as string.
 	 */
 	public List<String> getBackgroundColorAsString() {
-		return getStringArray(Property.backgroundColor);
+		ArrayString array = getArrayValue(Property.backgroundColor);
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Returns the fill color of the arcs in the dataset.
+	 * 
 	 * @return list of the fill color of the arcs in the dataset.
 	 */
 	public List<IsColor> getBackgroundColor() {
@@ -86,40 +86,37 @@ abstract class HovingDataset extends Dataset{
 	}
 
 	/**
-	 * Sets the border color of the arcs in the dataset. 
-	 * @param borderColor the border color of the arcs in the dataset. 
+	 * Sets the border color of the arcs in the dataset.
+	 * 
+	 * @param borderColor the border color of the arcs in the dataset.
 	 */
 	public void setBorderColor(IsColor... borderColor) {
-		setBorderColor(ArrayListHelper.build(borderColor));
+		setArrayValue(Property.borderColor, ArrayString.of(borderColor));
 	}
 
 	/**
-	 * Sets the border color of the arcs in the dataset as string. 
-	 * @param borderColor the border color of the arcs in the dataset as string. 
+	 * Sets the border color of the arcs in the dataset as string.
+	 * 
+	 * @param borderColor the border color of the arcs in the dataset as string.
 	 */
 	public void setBorderColor(String... borderColor) {
-		setBorderColor(ArrayListHelper.build(borderColor));
+		setArrayValue(Property.borderColor, ArrayString.of(borderColor));
 	}
 
 	/**
-	 * Sets the border color of the arcs in the dataset. 
-	 * @param borderColor the border color of the arcs in the dataset. 
-	 */
-	private void setBorderColor(JsStringArrayList borderColor) {
-		setStringArray(Property.borderColor, borderColor);
-	}
-
-	/**
-	 * Returns the border color of the arcs in the dataset as string. 
-	 * @return list of the border color of the arcs in the dataset as string. 
+	 * Returns the border color of the arcs in the dataset as string.
+	 * 
+	 * @return list of the border color of the arcs in the dataset as string.
 	 */
 	public List<String> getBorderColorAsString() {
-		return getStringArray(Property.borderColor);
+		ArrayString array = getArrayValue(Property.borderColor);
+		return ArrayListHelper.list(array);
 	}
 
 	/**
-	 * Returns the border color of the arcs in the dataset. 
-	 * @return list of the border color of the arcs in the dataset. 
+	 * Returns the border color of the arcs in the dataset.
+	 * 
+	 * @return list of the border color of the arcs in the dataset.
 	 */
 	public List<IsColor> getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
@@ -127,130 +124,114 @@ abstract class HovingDataset extends Dataset{
 
 	/**
 	 * Sets the border width of the arcs in the dataset.
+	 * 
 	 * @param borderWidth the border width of the arcs in the dataset.
 	 */
 	public void setBorderWidth(int... borderWidth) {
-		setBorderWidth(ArrayListHelper.build(borderWidth));
-	}
-
-	/**
-	 * Sets the border width of the arcs in the dataset.
-	 * @param borderWidth the border width of the arcs in the dataset.
-	 */
-	private void setBorderWidth(JsIntegerArrayList borderWidth) {
-		setIntegerArray(Property.borderWidth, borderWidth);
+		setArrayValue(Property.borderWidth, ArrayInteger.of(borderWidth));
 	}
 
 	/**
 	 * Returns the border width of the arcs in the dataset.
+	 * 
 	 * @return list of the border width of the arcs in the dataset.
 	 */
 	public List<Integer> getBorderWidth() {
-		return getIntegerArray(Property.borderWidth);
+		ArrayInteger array = getArrayValue(Property.borderWidth);
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Sets the fill color of the arcs when hovered
+	 * 
 	 * @param colors the fill color of the arcs when hovered
 	 */
-	public void setHoverBackgroundColor(IsColor... colors){
-		setHoverBackgroundColor(ArrayListHelper.build(colors));
+	public void setHoverBackgroundColor(IsColor... colors) {
+		setArrayValue(Property.hoverBackgroundColor, ArrayString.of(colors));
 	}
-	
+
 	/**
 	 * Sets the fill color of the arcs when hovered as string
+	 * 
 	 * @param colors the fill color of the arcs when hovered as string
 	 */
-	public void setHoverBackgroundColor(String... colors){
-		setHoverBackgroundColor(ArrayListHelper.build(colors));
+	public void setHoverBackgroundColor(String... colors) {
+		setArrayValue(Property.hoverBackgroundColor, ArrayString.of(colors));
 	}
 
 	/**
-	 * Sets the fill color of the arcs when hovered
-	 * @param colors the fill color of the arcs when hovered
-	 */
-	private void setHoverBackgroundColor(JsStringArrayList colors){
-		setStringArray(Property.hoverBackgroundColor, colors);
-	}
-	
-	/**
 	 * Returns the fill color of the arcs when hovered as string
+	 * 
 	 * @return list of the fill color of the arcs when hovered as string
 	 */
-	public List<String> getHoverBackgroundColorAsString(){
-		return getStringArray(Property.hoverBackgroundColor);
+	public List<String> getHoverBackgroundColorAsString() {
+		ArrayString array = getArrayValue(Property.hoverBackgroundColor);
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Returns the fill color of the arcs when hovered
+	 * 
 	 * @return list of the fill color of the arcs when hovered
 	 */
-	public List<IsColor> getHoverBackgroundColor(){
+	public List<IsColor> getHoverBackgroundColor() {
 		return ColorBuilder.parse(getHoverBackgroundColorAsString());
 	}
 
 	/**
 	 * Sets the stroke color of the arcs when hovered as string.
+	 * 
 	 * @param colors the stroke color of the arcs when hovered as string.
 	 */
-	public void setHoverBorderColor(IsColor... colors){
-		setHoverBorderColor(ArrayListHelper.build(colors));
+	public void setHoverBorderColor(IsColor... colors) {
+		setArrayValue(Property.hoverBorderColor, ArrayString.of(colors));
 	}
 
 	/**
 	 * Sets the stroke color of the arcs when hovered as string.
+	 * 
 	 * @param colors the stroke color of the arcs when hovered as string.
 	 */
-	public void setHoverBorderColor(String... colors){
-		setHoverBorderColor(ArrayListHelper.build(colors));
-	}
-
-	/**
-	 * Sets the stroke color of the arcs when hovered.
-	 * @param colors the stroke color of the arcs when hovered.
-	 */
-	private void setHoverBorderColor(JsStringArrayList colors){
-		setStringArray(Property.hoverBorderColor, colors);
+	public void setHoverBorderColor(String... colors) {
+		setArrayValue(Property.hoverBorderColor, ArrayString.of(colors));
 	}
 
 	/**
 	 * Returns the stroke color of the arcs when hovered.
+	 * 
 	 * @return list of the stroke color of the arcs when hovered.
 	 */
-	public List<String> getHoverBorderColorAsString(){
-		return getStringArray(Property.hoverBorderColor);
+	public List<String> getHoverBorderColorAsString() {
+		ArrayString array = getArrayValue(Property.hoverBorderColor);
+		return ArrayListHelper.list(array);
 	}
 
 	/**
 	 * Returns the stroke color of the arcs when hovered.
+	 * 
 	 * @return list of the stroke color of the arcs when hovered.
 	 */
-	public List<IsColor> getHoverBorderColor(){
+	public List<IsColor> getHoverBorderColor() {
 		return ColorBuilder.parse(getHoverBorderColorAsString());
 	}
 
 	/**
 	 * Sets the stroke width of the arcs when hovered.
+	 * 
 	 * @param widths the stroke width of the arcs when hovered.
 	 */
-	public void setHoverBorderWidth(int... widths){
-		setHoverBorderWidth(ArrayListHelper.build(widths));
+	public void setHoverBorderWidth(int... widths) {
+		setArrayValue(Property.hoverBorderWidth, ArrayInteger.of(widths));
 	}
 
 	/**
-	 * Sets the stroke width of the arcs when hovered.
-	 * @param widths the stroke width of the arcs when hovered.
-	 */
-	private void setHoverBorderWidth(JsIntegerArrayList widths){
-		setIntegerArray(Property.hoverBorderWidth, widths);
-	}
-	
-	/**
 	 * Returns the stroke width of the arcs when hovered.
+	 * 
 	 * @return list of the stroke width of the arcs when hovered.
 	 */
-	public List<Integer> getHoverBorderWidth(){
-		return getIntegerArray(Property.hoverBorderWidth);
+	public List<Integer> getHoverBorderWidth() {
+		ArrayInteger array = getArrayValue(Property.hoverBorderWidth);
+		return ArrayListHelper.list(array);
 	}
 
 }

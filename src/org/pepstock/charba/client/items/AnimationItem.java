@@ -15,22 +15,22 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.enums.Easing;
 
 /**
  * The onProgress and onComplete event are useful for synchronizing an external draw to the chart animation.<br>
- * This is the CHART.JS item with all needed info.
+ * This is a wrapper of the CHART.JS item with all needed info.<br>
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
-public final class AnimationItem extends JavaScriptObjectContainer {
+public final class AnimationItem extends NativeObjectContainer {
 	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -38,19 +38,20 @@ public final class AnimationItem extends JavaScriptObjectContainer {
 		numSteps,
 		easing
 	}
-
+	
 	/**
-	 * Wraps the CHART.JS java script object.
-	 * @param javaScriptObject CHART.JS java script object
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
-	public AnimationItem(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	AnimationItem(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
 	/**
-	 * Returns the current Animation frame number.
+	 * Returns the current animation frame number.
 	 * 
-	 * @return the current Animation frame number. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the current animation frame number. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getCurrentStep() {
 		return getValue(Property.currentStep, UndefinedValues.DOUBLE);
@@ -68,11 +69,9 @@ public final class AnimationItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the animation easing to use.
 	 * 
-	 * @return the animation easing to use.
-	 * @see org.pepstock.charba.client.enums.Easing
+	 * @return the animation easing to use. Default is {@link org.pepstock.charba.client.enums.Easing#easeInOutQuart}
 	 */
 	public Easing getEasing() {
 		return getValue(Property.easing, Easing.class, Easing.easeOutQuart);
 	}
-
 }

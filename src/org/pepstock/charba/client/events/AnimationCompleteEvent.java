@@ -23,7 +23,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * Event which is fired when the animation of the chart is completed.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public final class AnimationCompleteEvent extends AbstractEvent<AnimationCompleteEventHandler> {
 

@@ -15,11 +15,9 @@
 */
 package org.pepstock.charba.client.events;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.pepstock.charba.client.items.DatasetItem;
-import org.pepstock.charba.client.items.DatasetMetaItem;
 
 import com.google.gwt.dom.client.NativeEvent;
 
@@ -27,7 +25,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * Event which is fired when the user clicks on the chart.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public final class ChartClickEvent extends AbstractEvent<ChartClickEventHandler> {
 
@@ -40,34 +38,20 @@ public final class ChartClickEvent extends AbstractEvent<ChartClickEventHandler>
 	private final List<DatasetItem> items;
 
 	/**
-	 * Creates the event with dataset metadata item related to the click
-	 * 
-	 * @param nativeEvent native event of this custom event
-	 * @param item dataset metadata item related to the click
-	 * @see org.pepstock.charba.client.items.DatasetItem
-	 */
-	public ChartClickEvent(NativeEvent nativeEvent, DatasetItem item) {
-		super(nativeEvent);
-		this.items = Arrays.asList(item);
-	}
-
-	/**
 	 * Creates the event with a list of items with dataset metadata related to the click
 	 * 
 	 * @param nativeEvent native event of this custom event
 	 * @param items a list of items with dataset metadata related to the click
-	 * @see org.pepstock.charba.client.items.DatasetItem
 	 */
-	public ChartClickEvent(NativeEvent nativeEvent, DatasetMetaItem items) {
+	public ChartClickEvent(NativeEvent nativeEvent, List<DatasetItem> items) {
 		super(nativeEvent);
-		this.items = items.getDatasets();
+		this.items = items;
 	}
 
 	/**
 	 * Returns a list of items with dataset metadata related to the click
 	 * 
 	 * @return a list of items with dataset metadata related to the click
-	 * @see org.pepstock.charba.client.items.DatasetItem
 	 */
 	public List<DatasetItem> getItems() {
 		return items;

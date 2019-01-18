@@ -16,11 +16,13 @@
 package org.pepstock.charba.client.data;
 
 /**
- * The doughnut chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
+ * The doughnut chart allows a number of properties to be specified for each dataset. These are used to set display properties
+ * for a specific dataset.<br>
  * Is equals of Pie dataset.
+ * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.data.PieDataset
+ * @since 2.0
  */
-public class DoughnutDataset extends PieDataset{
+public class DoughnutDataset extends PieDataset {
 
 }

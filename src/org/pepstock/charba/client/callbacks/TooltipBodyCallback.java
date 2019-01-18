@@ -28,7 +28,7 @@ import org.pepstock.charba.client.items.TooltipItem;
  * This interface takes care about labels to apply to the body.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.options.TooltipsCallbacks
+ * @since 2.0
  */
 public interface TooltipBodyCallback {
 
@@ -38,8 +38,6 @@ public interface TooltipBodyCallback {
 	 * @param chart chart instance
 	 * @param items list of all tooltip items
 	 * @return an array of labels to apply to the body. If returns <code>null</code>, it will be ignored.
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
 	String[] onBeforeBody(AbstractChart<?, ?> chart, List<TooltipItem> items);
 
@@ -49,8 +47,6 @@ public interface TooltipBodyCallback {
 	 * @param chart chart instance
 	 * @param items list of all tooltips items
 	 * @return an array of labels to apply to the body. If returns <code>null</code>, it will be ignored.
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.TooltipItem
 	 */
 	String[] onAfterBody(AbstractChart<?, ?> chart, List<TooltipItem> items);
 

@@ -15,23 +15,24 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.commons.NativeObject;
 
 /**
- * It is applied to all sides of the chart (left, top, right, bottom).
+ * It is applied to all sides of the chart (left, top, right, bottom).<br>
+ * This is a wrapper of the CHART.JS item
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public class MarginsItem extends BaseBoxItem {
 
 	/**
-	 * Wraps the CHART.JS java script object.
+	 * Creates the item using a native java script object which contains all properties.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * @param nativeObject native java script object which contains all properties.
 	 */
-	MarginsItem(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	MarginsItem(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
 }

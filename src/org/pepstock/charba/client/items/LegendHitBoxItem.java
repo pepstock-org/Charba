@@ -15,24 +15,25 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.enums.Position;
 
 /**
- * JavaScript object which contains the legends hit box size.
+ * This is a wrapper of the CHART.JS item which contains the legends hit box.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
-public final class LegendHitBoxItem extends SizeItem{
-	
+public final class LegendHitBoxItem extends SizeItem {
+
 	/**
-	 * Wraps the CHART.JS java script object.
+	 * Creates the item using a native java script object which contains all properties.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * @param nativeObject native java script object which contains all properties.
 	 */
-	LegendHitBoxItem(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	LegendHitBoxItem(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
 	/**
@@ -51,6 +52,28 @@ public final class LegendHitBoxItem extends SizeItem{
 	 */
 	public int getTop() {
 		return getValue(Position.top, UndefinedValues.INTEGER);
+	}
+
+	/**
+	 * Inner class to create legend hit box item by a native object.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @since 2.0
+	 */
+	static final class LegendHitBoxItemFactory implements NativeObjectContainerFactory<LegendHitBoxItem> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
+		 * .commons.NativeObject)
+		 */
+		@Override
+		public LegendHitBoxItem create(NativeObject nativeObject) {
+			return new LegendHitBoxItem(nativeObject);
+		}
+
 	}
 
 }

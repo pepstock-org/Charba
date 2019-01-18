@@ -15,14 +15,18 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.configuration.PolarAreaOptions;
 import org.pepstock.charba.client.data.PolarAreaDataset;
-import org.pepstock.charba.client.options.PolarAreaOptions;
 
 /**
- * POLAR AREA chart implementation.
+ * POLAR AREA chart implementation.<br>
+ * Polar area charts are similar to pie charts, but each segment has the same angle - the radius of the segment differs
+ * depending on the value.<br>
+ * This type of chart is often useful when we want to show a comparison data similar to a pie chart, but also show a scale of
+ * values for context.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public class PolarAreaChart extends AbstractChart<PolarAreaOptions, PolarAreaDataset> {
 
@@ -32,13 +36,13 @@ public class PolarAreaChart extends AbstractChart<PolarAreaOptions, PolarAreaDat
 	 * Builds the object.
 	 */
 	public PolarAreaChart() {
-		options = new PolarAreaOptions(this);
+		options = new PolarAreaOptions(this, getChartOptions());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getType()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -48,7 +52,7 @@ public class PolarAreaChart extends AbstractChart<PolarAreaOptions, PolarAreaDat
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getOptions()
 	 */
 	@Override
 	public PolarAreaOptions getOptions() {
@@ -58,7 +62,7 @@ public class PolarAreaChart extends AbstractChart<PolarAreaOptions, PolarAreaDat
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#newDataset()
 	 */
 	@Override
 	public PolarAreaDataset newDataset() {

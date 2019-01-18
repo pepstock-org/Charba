@@ -15,24 +15,24 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.configuration.ConfigurationOptions;
 import org.pepstock.charba.client.data.Dataset;
-import org.pepstock.charba.client.options.BaseOptions;
 
 /**
  * Interface which defines a chart.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  * @param <O> Options type for the specific chart
  * @param <D> Dataset type for the specific chart
  */
-public interface IsChart<O extends BaseOptions, D extends Dataset> {
+public interface IsChart<O extends ConfigurationOptions, D extends Dataset> {
 
 	/**
 	 * Returns the type of chart.
 	 * 
 	 * @return the type of chart.
-	 * @see Type
 	 */
 	Type getType();
 

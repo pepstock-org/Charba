@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * Custom iterator over a collection. 
+ * Custom iterator over a collection.
  * 
  * @author Andrea "Stock" Stocchero
  * @see java.util.Iterator
@@ -31,12 +31,13 @@ public class IteratorImpl<E> implements Iterator<E> {
 	// list instance
 	private final List<E> parent;
 	// index of next element to return
-	protected int cursor;  
+	protected int cursor;
 	// index of last element returned; -1 if no such
-	protected int lastReturn = -1; 
+	protected int lastReturn = -1;
 
 	/**
 	 * Builds the iterator, storing the list instance
+	 * 
 	 * @param parent list instance
 	 * @see java.util.List
 	 */
@@ -67,7 +68,7 @@ public class IteratorImpl<E> implements Iterator<E> {
 	public E next() {
 		int i = cursor;
 		// if beyond the end of element, EXCEPTION
-		if (i >= parent.size()){
+		if (i >= parent.size()) {
 			throw new NoSuchElementException();
 		}
 		// increments cursor
@@ -80,18 +81,19 @@ public class IteratorImpl<E> implements Iterator<E> {
 	}
 
 	/**
-	 * Removes from the underlying collection the last element returned by this iterator. This method can be called only once per call to <code>next()</code>. 
+	 * Removes from the underlying collection the last element returned by this iterator. This method can be called only once
+	 * per call to <code>next()</code>.
 	 */
 	@Override
 	public void remove() {
 		// if <0 no next has been called, EXCEPTION
-		if (lastReturn < 0){
+		if (lastReturn < 0) {
 			throw new IllegalStateException();
 		}
 		// removes from parent at
 		// index stored into last return
 		parent.remove(lastReturn);
-		// sets cursor to last return 
+		// sets cursor to last return
 		cursor = lastReturn;
 		// resets last return
 		lastReturn = -1;

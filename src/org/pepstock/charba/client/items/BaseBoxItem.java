@@ -15,22 +15,24 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * Base object which maps the CHART.JS chart items which represents a box.
+ * Base object which maps the CHART.JS chart items which represents a box.<br>
+ * This is a wrapper of the CHART.JS item with all needed info.<br>
+ * Implements all <code>get</code> methods to change java script object properties.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
-public abstract class BaseBoxItem extends JavaScriptObjectContainer {
+public abstract class BaseBoxItem extends NativeObjectContainer {
 
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
-	protected enum Property implements Key
+	enum Property implements Key
 	{
 		top,
 		right,
@@ -39,18 +41,18 @@ public abstract class BaseBoxItem extends JavaScriptObjectContainer {
 	}
 	
 	/**
-	 * Wraps the CHART.JS java script object.
+	 * Creates the item using a native java script object which contains all properties.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * @param nativeObject native java script object which contains all properties.
 	 */
-	protected BaseBoxItem(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	BaseBoxItem(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
 	/**
 	 * Returns the top of chart area.
 	 * 
-	 * @return the top of chart area.
+	 * @return the top of chart area. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getTop() {
 		return getValue(Property.top, UndefinedValues.INTEGER);
@@ -59,7 +61,7 @@ public abstract class BaseBoxItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the right of chart area.
 	 * 
-	 * @return the right of chart area.
+	 * @return the right of chart area. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getRight() {
 		return getValue(Property.right, UndefinedValues.INTEGER);
@@ -68,7 +70,7 @@ public abstract class BaseBoxItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the bottom of chart area.
 	 * 
-	 * @return the bottom of chart area.
+	 * @return the bottom of chart area. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getBottom() {
 		return getValue(Property.bottom, UndefinedValues.INTEGER);
@@ -77,10 +79,9 @@ public abstract class BaseBoxItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the left of chart area.
 	 * 
-	 * @return the left of chart area.
+	 * @return the left of chart area. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getLeft() {
 		return getValue(Property.left, UndefinedValues.INTEGER);
 	}
-
 }

@@ -15,36 +15,36 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
  * This item contains the new size of the chart after it has been resized.<br>
  * This object has been created ONLY when a resize event occurs.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.events.ChartResizeEvent
- * @see org.pepstock.charba.client.events.ChartResizeEventHandler
- */
-public class SizeItem extends JavaScriptObjectContainer {
+ * @since 2.0
 
+ */
+public class SizeItem extends NativeObjectContainer {
+	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
-	protected enum Property implements Key
+	enum Property implements Key
 	{
 		width,
 		height
 	}
 
 	/**
-	 * Wraps the CHART.JS java script object.
+	 * Creates the item using a native java script object which contains all properties.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * @param nativeObject native java script object which contains all properties.
 	 */
-	public SizeItem(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	public SizeItem(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
 	/**

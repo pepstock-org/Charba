@@ -21,7 +21,7 @@ import org.pepstock.charba.client.commons.Key;
  * Property to set the postion's edge of an element to a unit above/below its normal position.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public enum Position implements Key
 {

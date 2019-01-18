@@ -22,13 +22,13 @@ import org.pepstock.charba.client.commons.Key;
  * or a dataset and a boundary.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public enum Fill implements Key
 {
 
 	/**
-	 * Fill the area from the botton X axis
+	 * Fill the area from the bottom X axis
 	 */
 	start,
 	/**

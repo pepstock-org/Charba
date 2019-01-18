@@ -26,6 +26,7 @@ import com.google.gwt.event.shared.GwtEvent;
  * This event contains the chart instance as source.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  * @param <H> GWT event object
  */
@@ -40,7 +41,7 @@ public abstract class AbstractEvent<H extends EventHandler> extends GwtEvent<H> 
 	 * @param nativeEvent native event of this custom event
 	 * @see com.google.gwt.dom.client.NativeEvent
 	 */
-	AbstractEvent(NativeEvent nativeEvent) {
+	protected AbstractEvent(NativeEvent nativeEvent) {
 		super();
 		this.nativeEvent = nativeEvent;
 	}
@@ -60,7 +61,6 @@ public abstract class AbstractEvent<H extends EventHandler> extends GwtEvent<H> 
 	 * Returns the chart instance, stored in the event as source.
 	 * 
 	 * @return the chart instance
-	 * @see org.pepstock.charba.client.AbstractChart
 	 */
 	public final AbstractChart<?, ?> getChart() {
 		return (AbstractChart<?, ?>) getSource();

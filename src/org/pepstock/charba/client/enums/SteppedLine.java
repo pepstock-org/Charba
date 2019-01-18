@@ -21,7 +21,7 @@ import org.pepstock.charba.client.commons.Key;
  * Property to set if the line is shown as a stepped line.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public enum SteppedLine implements Key
 {

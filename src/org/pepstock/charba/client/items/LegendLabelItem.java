@@ -18,21 +18,22 @@ package org.pepstock.charba.client.items;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.JsIntegerArrayList;
+import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
- * This object is created by CHART.JS and passed to all callbacks and events handlers related to legend entity.
+ * This object is created by callbacks and returned to HCART.JS as native object to configure the legend.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
 public final class LegendLabelItem extends LegendItem {
-
+	
 	/**
-	 * Standard constructor which wraps a new java script object.
+	 * Standard constructor which wraps a new native java script object.
 	 */
 	public LegendLabelItem() {
 		super();
@@ -66,11 +67,6 @@ public final class LegendLabelItem extends LegendItem {
 	}
 
 	/**
-	 * Returns the fill style of the legend box
-	 * 
-	 * @return the fill style of the legend box
-	 */
-	/**
 	 * Sets the fill style of the legend box
 	 * 
 	 * @param color the fill style of the legend box
@@ -93,7 +89,6 @@ public final class LegendLabelItem extends LegendItem {
 	 * butt, round and square.
 	 * 
 	 * @param style how the end points of every box border are drawn.
-	 * @see org.pepstock.charba.client.enums.CapStyle
 	 */
 	public void setLineCap(CapStyle style) {
 		setValue(LegendItem.Property.lineCap, style);
@@ -107,29 +102,7 @@ public final class LegendLabelItem extends LegendItem {
 	 *            lengths of lines and gaps which describe the pattern.
 	 */
 	public void setLineDash(List<Integer> lineDash) {
-		// checks if is a internal list, already with JavaScript object
-		if (lineDash instanceof JsIntegerArrayList) {
-			// sets directly
-			setInternalLineDash((JsIntegerArrayList) lineDash);
-		} else {
-			// creates a new JavaScript arraylist
-			JsIntegerArrayList list = new JsIntegerArrayList();
-			// adds all values
-			list.addAll(lineDash);
-			// sets array
-			setInternalLineDash(list);
-		}
-	}
-
-	/**
-	 * Sets the box border dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
-	 * 
-	 * @param list the box border dash pattern used when stroking lines, using an array of values which specify alternating
-	 *            lengths of lines and gaps which describe the pattern.
-	 */
-	private void setInternalLineDash(JsIntegerArrayList list) {
-		setIntegerArray(LegendItem.Property.lineDash, list);
+		setArrayValue(LegendItem.Property.lineDash, ArrayInteger.of(lineDash));
 	}
 
 	/**
@@ -143,12 +116,11 @@ public final class LegendLabelItem extends LegendItem {
 
 	/**
 	 * Sets how two connecting segments (of box border) with non-zero lengths in a shape are joined together (degenerate
-	 * segments with zero lengths, whose specified endpoints and control points are exactly at the same position, are
+	 * segments with zero lengths, whose specified end points and control points are exactly at the same position, are
 	 * skipped).<br>
 	 * There are three possible values for this property: round, bevel and miter.
 	 * 
 	 * @param style There are three possible values for this property: round, bevel and miter.
-	 * @see org.pepstock.charba.client.enums.JoinStyle
 	 */
 	public void setLineJoin(JoinStyle style) {
 		setValue(LegendItem.Property.lineJoin, style);
@@ -176,10 +148,8 @@ public final class LegendLabelItem extends LegendItem {
 	 * Sets the style of the legend box (only used if usePointStyle is true)
 	 * 
 	 * @param style the style of the legend box
-	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public void setPointStyle(PointStyle style) {
 		setValue(LegendItem.Property.pointStyle, style);
 	}
-
 }

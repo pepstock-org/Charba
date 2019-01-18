@@ -15,36 +15,42 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.commons.ChartContainer;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.options.layout.Padding;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.defaults.IsDefaultLayout;
 
 /**
- * The layout configuration is needed to set the padidng.
+ * The layout configuration is needed to set the padding.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
-public final class Layout extends ChartContainer {
+public final class Layout extends AbstractModel<Options, IsDefaultLayout> implements IsDefaultLayout {
 
 	private final Padding padding;
 
+	/**
+	 * Name of properties of native object.
+	 */
 	private enum Property implements Key
 	{
 		padding
 	}
 
 	/**
-	 * Builds the object setting the java script padding object.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
 	 * 
-	 * @param chart chart instance
+	 * @param options options of the chart.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
 	 */
-	Layout(AbstractChart<?, ?> chart) {
-		super(chart);
-		// sets the padding object
-		padding = new Padding(chart);
-		setValue(Property.padding, padding);
+	Layout(Options options, Key childKey, IsDefaultLayout defaultvalues, NativeObject nativeObject) {
+		super(options, childKey, defaultvalues, nativeObject);
+		// gets sub element
+		padding = new Padding(this, Property.padding, defaultvalues.getPadding(), getValue(Property.padding));
 	}
 
 	/**

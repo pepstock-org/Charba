@@ -18,39 +18,51 @@ package org.pepstock.charba.client.data;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.charba.client.commons.AbstractList;
-import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
-import org.pepstock.charba.client.commons.JsObjectContainerArrayList;
+import org.pepstock.charba.client.Configuration;
+import org.pepstock.charba.client.ConfigurationElement;
+import org.pepstock.charba.client.commons.ArrayMixedObject;
+import org.pepstock.charba.client.commons.ArrayObjectContainerList;
+import org.pepstock.charba.client.commons.ConfigurationLoader;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
  * CHART.JS entity object to configure the data options of a chart.<br>
  * It contains labels and datasets.
- *  
+ * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.commons.JavaScriptObjectContainer
+ * @since 2.0
  */
-public final class Data extends JavaScriptObjectContainer{
-	
+public final class Data extends NativeObjectContainer implements ConfigurationElement {
+
 	// maintains the list of datasets
-	private final AbstractList<Dataset> datasets = new JsObjectContainerArrayList<Dataset>();
-	
+	private final ArrayObjectContainerList<Dataset> currentDatasets = new ArrayObjectContainerList<Dataset>();
+
 	/**
-	 * Name of fields of JavaScript object. 
+	 * Name of properties of native object.
 	 */
-	private enum Property implements Key {
+	private enum Property implements Key
+	{
 		labels,
 		datasets,
 		xLabels,
 		yLabels
 	}
-	
+
 	/**
-	 * Sets the labels of the data 
+	 * Creates the object with an empty native object
+	 */
+	public Data() {
+		super(new NativeObject());
+	}
+
+	/**
+	 * Sets the labels of the data
+	 * 
 	 * @param labels array of labels
 	 */
-	public void setLabels(String... labels){
+	public void setLabels(String... labels) {
 		// creates a label object
 		Labels l = Labels.build();
 		// loads
@@ -61,27 +73,29 @@ public final class Data extends JavaScriptObjectContainer{
 
 	/**
 	 * Sets the labels of the data
-	 * @param labels labels object to manage also multiline labels.
-	 * @see org.pepstock.charba.client.data.Labels
+	 * 
+	 * @param labels labels object to manage also multi-line labels.
 	 */
-	public void setLabels(Labels labels){
-		  setValue(Property.labels, labels);
+	public void setLabels(Labels labels) {
+		setArrayValue(Property.labels, labels.getArray());
 	}
 
 	/**
-	 * Returns the labels 
+	 * Returns the labels
+	 * 
 	 * @return the labels
-	 * @see org.pepstock.charba.client.data.Labels
 	 */
-	public Labels getLabels(){
-		return getValue(Property.labels);
+	public Labels getLabels() {
+		ArrayMixedObject array = getArrayValue(Property.labels);
+		return Labels.load(array);
 	}
 
 	/**
-	 * Sets the labels for X axes of the data 
+	 * Sets the labels for X axes of the data
+	 * 
 	 * @param labels array of labels
 	 */
-	public void setXLabels(String... labels){
+	public void setXLabels(String... labels) {
 		// creates a label object
 		Labels l = Labels.build();
 		// loads
@@ -91,28 +105,30 @@ public final class Data extends JavaScriptObjectContainer{
 	}
 
 	/**
-	 * Sets the labels for X axes of the data 
-	 * @param labels labels object to manage also multiline labels.
-	 * @see org.pepstock.charba.client.data.Labels
+	 * Sets the labels for X axes of the data
+	 * 
+	 * @param labels labels object to manage also multi-line labels.
 	 */
-	public void setXLabels(Labels labels){
-		  setValue(Property.xLabels, labels);
+	public void setXLabels(Labels labels) {
+		setArrayValue(Property.xLabels, labels.getArray());
 	}
 
 	/**
 	 * Returns the labels for X axes
+	 * 
 	 * @return the labels for X axes
-	 * @see org.pepstock.charba.client.data.Labels
 	 */
-	public Labels getXLabels(){
-		return getValue(Property.xLabels);
+	public Labels getXLabels() {
+		ArrayMixedObject array = getArrayValue(Property.xLabels);
+		return Labels.load(array);
 	}
 
 	/**
 	 * Sets the labels for Y axes of the data
+	 * 
 	 * @param labels array of labels
 	 */
-	public void setYLabels(String... labels){
+	public void setYLabels(String... labels) {
 		// creates a label object
 		Labels l = Labels.build();
 		// loads
@@ -123,57 +139,73 @@ public final class Data extends JavaScriptObjectContainer{
 
 	/**
 	 * Sets the labels for Y axes of the data
-	 * @param labels labels object to manage also multiline labels.
-	 * @see org.pepstock.charba.client.data.Labels
+	 * 
+	 * @param labels labels object to manage also multi-line labels.
 	 */
-	public void setYLabels(Labels labels){
-		  setValue(Property.yLabels, labels);
+	public void setYLabels(Labels labels) {
+		setArrayValue(Property.yLabels, labels.getArray());
 	}
 
 	/**
 	 * Returns the labels for Y axes
+	 * 
 	 * @return the labels for Y axes
-	 * @see org.pepstock.charba.client.data.Labels
 	 */
-	public Labels getYLabels(){
-		return getValue(Property.yLabels);
+	public Labels getYLabels() {
+		ArrayMixedObject array = getArrayValue(Property.yLabels);
+		return Labels.load(array);
 	}
 
 	/**
 	 * Sets a set of datasets for chart
+	 * 
 	 * @param datasets set of dataset
-	 * @see org.pepstock.charba.client.data.Dataset
 	 */
-	public void setDatasets(Dataset... datasets){
-		setValue(Property.datasets, ArrayListHelper.load(this.datasets, datasets));
+	public void setDatasets(Dataset... datasets) {
+		// checks if arguments is consistent
+		if (datasets != null) {
+			// clear buffer
+			this.currentDatasets.clear();
+			// adds all datasets
+			this.currentDatasets.addAll(datasets);
+			// sets datasets to native object
+			setArrayValue(Property.datasets, this.currentDatasets);
+		}
 	}
 
 	/**
 	 * Returns the list of datasets
+	 * 
 	 * @return the list of datasets
-	 * @see org.pepstock.charba.client.data.Dataset
 	 */
-	public List<Dataset> getDatasets(){
-		return this.datasets;
+	public List<Dataset> getDatasets() {
+		return this.currentDatasets;
 	}
-	
+
 	/**
 	 * Returns a list of string for each datasets, in JSON format.
 	 * 
 	 * @return a list of string for each datasets, in JSON format
 	 */
-	public List<String> getDatasetsAsStrings(){
-		// creates the result 
+	public List<String> getDatasetsAsStrings() {
+		// creates the result
 		List<String> result = new LinkedList<>();
 		// scans all datasets
-		for (Dataset ds: datasets) {
+		for (Dataset ds : currentDatasets) {
 			// adds to list the data in JSON string format
 			result.add(ds.getDataAsString());
 		}
 		return result;
 	}
-	
-	public Object getObject() {
-		return super.getJavaScriptObject();
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.ConfigurationElement#load(org.pepstock.charba.client.jsinterop.Configuration)
+	 */
+	@Override
+	public void load(Configuration configuration) {
+		ConfigurationLoader.loadData(configuration, this);
 	}
+
 }

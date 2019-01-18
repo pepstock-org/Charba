@@ -16,37 +16,42 @@
 package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * The stacked area chart allows a number of properties to be specified for each dataset. These are used to set display properties for a specific dataset.<br>
+ * The stacked area chart allows a number of properties to be specified for each dataset. These are used to set display
+ * properties for a specific dataset.<br>
  * Extends the line dataset setting <code>stack</code> property.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.data.LineDataset
+ * @since 2.0
  */
-public class StackedAreaDataset extends LineDataset{
+public class StackedAreaDataset extends LineDataset {
 
 	/**
-	 * Name of fields of JavaScript object. 
+	 * Name of properties of native object.
 	 */
-	private enum Property implements Key {
+	private enum Property implements Key
+	{
 		stack
 	}
-	
+
 	/**
 	 * Sets the name of stack group.
+	 * 
 	 * @param stackGroup name of stack group.
 	 */
-	public void setStackGroup(String stackGroup){
-		  setValue(Property.stack, stackGroup);
+	public void setStackGroup(String stackGroup) {
+		setValue(Property.stack, stackGroup);
 	}
 
 	/**
-	 * Returns the name of stack group. 
+	 * Returns the name of stack group.
+	 * 
 	 * @return the name of stack group.
 	 */
-	public String getStackGroup(){
-		  return getValue(Property.stack, (String)null);
+	public String getStackGroup() {
+		return getValue(Property.stack, UndefinedValues.STRING);
 	}
 
 }

@@ -22,7 +22,7 @@ import com.google.gwt.event.shared.EventHandler;
  * been activated.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public interface ChartEventHandler extends EventHandler {
 

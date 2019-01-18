@@ -15,35 +15,31 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.items.AxisItem;
 
 /**
  * Interface to be implemented which can be used to change parameters in the scale during setting dimensions.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.options.scales.Axis
+ * @since 2.0
  */
 public interface AxisDimensionsCallback {
 
 	/**
 	 * Callback that runs before dimensions are set.
 	 * 
-	 * @param chart chart instance
-	 * @param item axis item instance instance
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem
+	 * @param axis axis instance where this callback as been defined
+	 * @param item axis item instance
 	 */
-	void onBeforeSetDimensions(AbstractChart<?, ?> chart, AxisItem item);
+	void onBeforeSetDimensions(Axis axis, AxisItem item);
 
 	/**
 	 * Callback that runs after dimensions are set.
 	 * 
-	 * @param chart chart instance
-	 * @param item axis item instance instance
-	 * @see org.pepstock.charba.client.AbstractChart
-	 * @see org.pepstock.charba.client.items.AxisItem
+	 * @param axis axis instance where this callback as been defined
+	 * @param item axis item instance
 	 */
-	void onAfterSetDimensions(AbstractChart<?, ?> chart, AxisItem item);
+	void onAfterSetDimensions(Axis axis, AxisItem item);
 
 }

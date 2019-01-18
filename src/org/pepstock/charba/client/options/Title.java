@@ -17,248 +17,129 @@ package org.pepstock.charba.client.options;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.colors.ColorBuilder;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.ChartContainer;
-import org.pepstock.charba.client.commons.JsStringArrayList;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * Configures the chart title which defines text to draw at the top of the chart.
+ * Configures the default chart title which defines text to draw at the top of the chart.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
-public final class Title extends ChartContainer {
-
-	// flag to check if a multiple line title has been set
-	private boolean isTextArray = false;
+public final class Title extends FontItem<Options, IsDefaultTitle> implements IsDefaultTitle {
 
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		fontSize,
-		fontStyle,
-		fontColor,
-		fontFamily,
 		display,
-		padding,
+		fontStyle,
 		position,
-		lineHeight,
+		padding,
 		fullWidth,
+		lineHeight,
 		text
 	}
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
 	 * 
-	 * @param chart chart instance
+	 * @param options options of the chart.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
 	 */
-	Title(AbstractChart<?, ?> chart) {
-		super(chart);
+	Title(Options options, Key childKey, IsDefaultTitle defaultValues, NativeObject nativeObject) {
+		super(options, childKey, defaultValues, nativeObject);
 	}
 
 	/**
-	 * Sets the font size for title.
+	 * Sets <code>true</code> if the title is shown.
 	 * 
-	 * @param fontSize Font size for title.
-	 */
-	public void setFontSize(int fontSize) {
-		setValue(Property.fontSize, fontSize);
-	}
-
-	/**
-	 * Returns the font size for title.
-	 * 
-	 * @return Font size for title. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
-	 */
-	public int getFontSize() {
-		return getValue(Property.fontSize, getChart().getGlobal().getTitle().getFontSize());
-	}
-
-	/**
-	 * Sets the font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * 
-	 * @param fontStyle Font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * @see org.pepstock.charba.client.enums.FontStyle
-	 */
-	public void setFontStyle(FontStyle fontStyle) {
-		setValue(Property.fontStyle, fontStyle);
-	}
-
-	/**
-	 * Returns the font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
-	 * 
-	 * @return the font style for title, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit). For
-	 *         default value, see {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
-	 * @see org.pepstock.charba.client.enums.FontStyle
-	 */
-	public FontStyle getFontStyle() {
-		return getValue(Property.fontStyle, FontStyle.class, getChart().getGlobal().getTitle().getFontStyle());
-	}
-
-	/**
-	 * Sets the font color for title
-	 * 
-	 * @param fontColor Font color for title
-	 */
-	public void setFontColor(IsColor fontColor) {
-		setFontColor(fontColor.toRGBA());
-	}
-
-	/**
-	 * Sets the font color for title
-	 * 
-	 * @param fontColor Font color for title
-	 */
-	public void setFontColor(String fontColor) {
-		setValue(Property.fontColor, fontColor);
-	}
-
-	/**
-	 * Returns the font color for title
-	 * 
-	 * @return Font color for title. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
-	 */
-	public String getFontColorAsString() {
-		return getValue(Property.fontColor, getChart().getGlobal().getTitle().getFontColorAsString());
-	}
-
-	/**
-	 * Returns the font color for title
-	 * 
-	 * @return Font color for title. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
-	 */
-	public IsColor getFontColor() {
-		return ColorBuilder.parse(getFontColorAsString());
-	}
-
-	/**
-	 * Sets the font family for title, follows CSS font-family options.
-	 * 
-	 * @param fontFamily Font family for title, follows CSS font-family options.
-	 */
-	public void setFontFamily(String fontFamily) {
-		setValue(Property.fontFamily, fontFamily);
-	}
-
-	/**
-	 * Returns the font family for title, follows CSS font-family options.
-	 * 
-	 * @return Font family for title, follows CSS font-family options. For default value, see
-	 *         {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
-	 */
-	public String getFontFamily() {
-		return getValue(Property.fontFamily, getChart().getGlobal().getTitle().getFontFamily());
-	}
-
-	/**
-	 * Sets if the title is shown.
-	 * 
-	 * @param display if the title is shown.
+	 * @param display if <code>true</code> the title is shown.
 	 */
 	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
-	 * Returns if the title is shown.
+	 * Returns <code>true</code> if the title is shown.
 	 * 
-	 * @return if the title is shown. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
+	 * @return if <code>true</code> the title is shown.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, getChart().getGlobal().getTitle().isDisplay());
-	}
-
-	/**
-	 * Sets the title text to display. If specified as an array, text is rendered on multiple lines.
-	 * 
-	 * @param text the title text to display. If specified as an array, text is rendered on multiple lines.
-	 */
-	public void setText(String... text) {
-		setText(ArrayListHelper.build(text));
-	}
-
-	/**
-	 * Sets the title text to display as an array.
-	 * 
-	 * @param text the title text to display as an array.
-	 */
-	private void setText(JsStringArrayList text) {
-		isTextArray = checkAndSetStringValues(Property.text, text);
-	}
-
-	/**
-	 * Returns the title text to display, as a list of strings.
-	 * 
-	 * @return a list of strings
-	 */
-	public List<String> getText() {
-		return checkAndGetStringValues(Property.text, isTextArray);
+		return getValue(Property.display, getDefaultValues().isDisplay());
 	}
 
 	/**
 	 * Sets the position of title.
 	 * 
 	 * @param position the position of title.
-	 * @see org.pepstock.charba.client.enums.Position
 	 */
 	public void setPosition(Position position) {
 		setValue(Property.position, position);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the position of title.
 	 * 
-	 * @return the position of title. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
-	 * @see org.pepstock.charba.client.enums.Position
+	 * @return the position of title.
 	 */
 	public Position getPosition() {
-		return getValue(Property.position, Position.class, getChart().getGlobal().getTitle().getPosition());
+		return getValue(Property.position, Position.class, getDefaultValues().getPosition());
 	}
 
 	/**
-	 * Sets the padding to apply around title. Only top and bottom are implemented.
+	 * Sets the padding to apply around labels. Only top and bottom are implemented.
 	 * 
-	 * @param padding Padding to apply around title. Only top and bottom are implemented.
+	 * @param padding padding to apply around labels. Only top and bottom are implemented.
 	 */
 	public void setPadding(int padding) {
 		setValue(Property.padding, padding);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
-	 * Returns the padding to apply around title. Only top and bottom are implemented.
+	 * Returns the padding to apply around labels. Only top and bottom are implemented.
 	 * 
-	 * @return Padding to apply around title. Only top and bottom are implemented. For default value, see
-	 *         {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
+	 * @return padding to apply around labels. Only top and bottom are implemented.
 	 */
 	public int getPadding() {
-		return getValue(Property.padding, getChart().getGlobal().getTitle().getPadding());
+		return getValue(Property.padding, getDefaultValues().getPadding());
 	}
 
 	/**
-	 * Marks that this box should take the full width of the canvas (pushing down other boxes).
+	 * If <code>true</code>, marks that this box should take the full width of the canvas (pushing down other boxes).
 	 * 
-	 * @param fullWidth Marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * @param fullWidth if <code>true</code>, marks that this box should take the full width of the canvas (pushing down other boxes)
 	 */
 	public void setFullWidth(boolean fullWidth) {
 		setValue(Property.fullWidth, fullWidth);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
-	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * Returns <code>true</code> if marks that this box should take the full width of the canvas (pushing down other boxes)
 	 * 
-	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes). For default see
-	 *         {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
+	 * @return <code>true</code> if marks that this box should take the full width of the canvas (pushing down other boxes).
 	 */
 	public boolean isFullWidth() {
-		return getValue(Property.fullWidth, getChart().getGlobal().getTitle().isFullWidth());
+		return getValue(Property.fullWidth, getDefaultValues().isFullWidth());
 	}
 
 	/**
@@ -268,15 +149,65 @@ public final class Title extends ChartContainer {
 	 */
 	public void setLineHeight(double lineHeight) {
 		setValue(Property.lineHeight, lineHeight);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the height of an individual line of text.
 	 * 
-	 * @return height of an individual line of text. For default see
-	 *         {@link org.pepstock.charba.client.GlobalOptions#getTitle()}.
+	 * @return the height of an individual line of text.
 	 */
 	public double getLineHeight() {
-		return getValue(Property.lineHeight, getChart().getGlobal().getTitle().getLineHeight());
+		return getValue(Property.lineHeight, getDefaultValues().getLineHeight());
+	}
+
+	/**
+	 * Sets the title text to display. If specified as an array, text is rendered on multiple lines.
+	 * 
+	 * @param text the title text to display. If specified as an array, text is rendered on multiple lines.
+	 */
+	public void setText(String... text) {
+		// check if text is consistent
+		if (text != null) {
+			// checks if there is more than 1 element
+			if (text.length > 1) {
+				// stores the array
+				setArrayValue(Property.text, ArrayString.of(text));
+			} else {
+				// in this case there is only 1 element and then
+				// stores as string
+				setValue(Property.text, text[0]);
+			}
+			// checks if the node is already added to parent
+			checkAndAddToParent();
+		} else {
+			// being null
+			// remove the key if exists
+			removeIfExists(Property.text);
+		}
+	}
+
+	/**
+	 * Returns the title text to display, as a list of strings.
+	 * 
+	 * @return a list of strings or <code>null</code> if not exist
+	 */
+	public List<String> getText() {
+		// gets the type of the property
+		ObjectType type = type(Property.text);
+		// if it's an array
+		if (ObjectType.Array.equals(type)) {
+			// reads as array
+			// and returns it
+			ArrayString array = getArrayValue(Property.text);
+			return ArrayListHelper.list(array);
+		} else if (has(Property.text)) {
+			// if there is the property
+			// and we are here, loads it as string
+			return ArrayListHelper.list(ArrayString.of(getValue(Property.text, UndefinedValues.STRING)));
+		}
+		// if not exists, null.
+		return null;
 	}
 }

@@ -15,9 +15,10 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
  * Contains all info for every item of tooltip.<br>
@@ -25,18 +26,13 @@ import org.pepstock.charba.client.commons.Key;
  * It uses into the tooltips callbacks.
  * 
  * @author Andrea "Stock" Stocchero
- * @see org.pepstock.charba.client.callbacks.TooltipLabelCallback
- * @see org.pepstock.charba.client.callbacks.TooltipBodyCallback
- * @see org.pepstock.charba.client.callbacks.TooltipItemSortHandler
- * @see org.pepstock.charba.client.callbacks.TooltipFilterHandler
- * @see org.pepstock.charba.client.callbacks.TooltipFooterCallback
- * @see org.pepstock.charba.client.callbacks.TooltipTitleCallback
+ * @since 2.0
  *
  */
-public final class TooltipItem extends JavaScriptObjectContainer {
+public final class TooltipItem extends NativeObjectContainer {
 
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -49,12 +45,12 @@ public final class TooltipItem extends JavaScriptObjectContainer {
 	}
 
 	/**
-	 * Wraps the CHART.JS java script object.
+	 * Creates the item using a native java script object which contains all properties.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * @param nativeObject native java script object which contains all properties.
 	 */
-	public TooltipItem(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	public TooltipItem(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
 	/**
@@ -78,8 +74,8 @@ public final class TooltipItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the dataset index of the chart
 	 * 
-	 * @return the dataset index of the chart. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
-	 * @see org.pepstock.charba.client.data.Data#getDatasets()
+	 * @return the dataset index of the chart. Default is
+	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public int getDatasetIndex() {
 		return getValue(Property.datasetIndex, UndefinedValues.INTEGER);
@@ -88,9 +84,8 @@ public final class TooltipItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the index of the data inside the dataset.
 	 * 
-	 * @return the index of the data inside the dataset. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
-	 * @see org.pepstock.charba.client.data.Dataset#getData()
-	 * @see org.pepstock.charba.client.data.Data#getLabels()
+	 * @return the index of the data inside the dataset. Default is
+	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public int getIndex() {
 		return getValue(Property.index, UndefinedValues.INTEGER);
@@ -99,7 +94,8 @@ public final class TooltipItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the X location of tooltip item.
 	 * 
-	 * @return the X location of tooltip item. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the X location of tooltip item. Default is
+	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public int getX() {
 		return getValue(Property.x, UndefinedValues.INTEGER);
@@ -108,9 +104,31 @@ public final class TooltipItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the Y location of tooltip item.
 	 * 
-	 * @return the Y location of tooltip item. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the Y location of tooltip item. Default is
+	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public int getY() {
 		return getValue(Property.y, UndefinedValues.INTEGER);
+	}
+
+	/**
+	 * Inner class to create tooltip item by a native object.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @since 2.0
+	 */
+	public static final class TooltipItemFactory implements NativeObjectContainerFactory<TooltipItem> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
+		 * .commons.NativeObject)
+		 */
+		@Override
+		public TooltipItem create(NativeObject nativeObject) {
+			return new TooltipItem(nativeObject);
+		}
 	}
 }

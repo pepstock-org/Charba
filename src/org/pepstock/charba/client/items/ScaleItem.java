@@ -17,24 +17,28 @@ package org.pepstock.charba.client.items;
 
 import java.util.List;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptFieldType;
+import org.pepstock.charba.client.commons.ArrayDouble;
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.AxisType;
 
 /**
- * Wraps the scale item of CHART JS chart.
+ * Wraps the scale item of CHART JS chart.<br>
+ * This is a wrapper of scale of Chart (of CHART.JS).
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  */
 public class ScaleItem extends BaseBoxNodeItem {
 	
 	private final ScaleLongestTextCacheItem longestTextCache;
-
+	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
-	protected enum Property implements Key
+	enum Property implements Key
 	{
 		id,
 		hidden,
@@ -58,14 +62,14 @@ public class ScaleItem extends BaseBoxNodeItem {
 	}
 
 	/**
-	 * Wraps the CHART.JS java script object.
+	 * Creates the item using a native java script object which contains all properties.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * @param nativeObject native java script object which contains all properties.
 	 */
-	protected ScaleItem(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	public ScaleItem(NativeObject nativeObject) {
+		super(nativeObject);
 		// initializes sub objects
-		longestTextCache = new ScaleLongestTextCacheItem((GenericJavaScriptObject) getValue(Property.longestTextCache));
+		longestTextCache = new ScaleLongestTextCacheItem(getValue(Property.longestTextCache));
 	}
 
 	/**
@@ -76,15 +80,6 @@ public class ScaleItem extends BaseBoxNodeItem {
 	public final ScaleLongestTextCacheItem getLongestTextCache() {
 		return longestTextCache;
 	}
-	
-	/**
-	 * Returns the type of scale
-	 * 
-	 * @return the type of scale. Default is {@link org.pepstock.charba.client.enums.AxisType#category}.
-	 */
-	public final AxisType getType() {
-		return getValue(Property.type, AxisType.class, AxisType.category);
-	}
 
 	/**
 	 * Returns the id of scale
@@ -93,6 +88,15 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 */
 	public final String getId() {
 		return getValue(Property.id, UndefinedValues.STRING);
+	}
+	
+	/**
+	 * Returns the type of scale
+	 * 
+	 * @return the type of scale. Default is {@link org.pepstock.charba.client.enums.AxisType#category}.
+	 */
+	public final AxisType getType() {
+		return getValue(Property.type, AxisType.class, AxisType.category);
 	}
 
 	/**
@@ -114,30 +118,48 @@ public class ScaleItem extends BaseBoxNodeItem {
 	}
 
 	/**
-	 * Returns the min index of scale.
+	 * Returns the minimum index of scale.
 	 * 
-	 * @return the min index of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the minimum index of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getMinIndex() {
 		return getValue(Property.minIndex, UndefinedValues.INTEGER);
 	}
 
 	/**
-	 * Returns the max value of scale. Base on scale type, it could return a String or an Integer.
+	 * Returns the max value of scale. 
 	 * 
-	 * @return the max value of scale.
+	 * @return the max value of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	public final Object getMax() {
-		return JavaScriptFieldType.String.equals(type(Property.max)) ? getValue(Property.max, UndefinedValues.STRING) : getValue(Property.max, UndefinedValues.INTEGER);
+	public final int getMax() {
+		return getValue(Property.max, UndefinedValues.INTEGER);
 	}
 
 	/**
-	 * Returns the min value of scale. Base on scale type, it could return a String or an Integer.
+	 * Returns the minimum value of scale.
 	 * 
-	 * @return the min value of scale.
+	 * @return the minimum value of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
-	public final Object getMin() {
-		return JavaScriptFieldType.String.equals(type(Property.min)) ? getValue(Property.min, UndefinedValues.STRING) : getValue(Property.min, UndefinedValues.INTEGER);
+	public final int getMin() {
+		return getValue(Property.min, UndefinedValues.INTEGER);
+	}
+
+	/**
+	 * Returns the max value of scale. 
+	 * 
+	 * @return the max value of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 */
+	public final String getMaxAsString() {
+		return getValue(Property.max, UndefinedValues.STRING);
+	}
+
+	/**
+	 * Returns the minimum value of scale. 
+	 * 
+	 * @return the minimum value of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 */
+	public final String getMinAsString() {
+		return getValue(Property.min, UndefinedValues.STRING);
 	}
 
 	/**
@@ -146,7 +168,10 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the list of ticks.
 	 */
 	public final List<String> getTicks() {
-		return getStringArray(Property.ticks);
+		// gets array from native object
+		ArrayString array = getArrayValue(Property.ticks);
+		// returns list
+		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	/**
@@ -191,7 +216,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the list of ticks as number.
 	 */
 	public final List<Double> getTicksAsNumber() {
-		return getDoubleArray(Property.ticksAsNumbers);
+		ArrayDouble array = getArrayValue(Property.ticksAsNumbers);
+		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	/**
@@ -236,7 +262,9 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the list of point labels of scale.
 	 */
 	public final List<String> getPointLabels() {
-		return getStringArray(Property.pointLabels);
+		// gets array from native object
+		ArrayString array = getArrayValue(Property.pointLabels);
+		// returns the list
+		return ArrayListHelper.unmodifiableList(array);
 	}
-
 }

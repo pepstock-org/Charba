@@ -15,33 +15,30 @@
 */
 package org.pepstock.charba.client.controllers;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.items.ChartNode;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.ScaleItem;
 
 /**
- * Element used by controller by <code>removeHoverStyle</code> and <code>setHoverStyle</code> methods.
- * It contrians information about the dataset, chart and scales to use.
+ * Element used by controller by <code>removeHoverStyle</code> and <code>setHoverStyle</code> methods. It contains information
+ * about the dataset, chart and scales to use.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
 public final class StyleElement extends DatasetItem {
-	
-	private final ChartNode chartNode;
-	
+
 	private final InternalScaleItem xScale;
-	
+
 	private final InternalScaleItem yScale;
 
 	/**
-	 * Needed for GWt injection
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		_chart,
 		_xScale,
 		_yScale
 	}
@@ -49,41 +46,28 @@ public final class StyleElement extends DatasetItem {
 	/**
 	 * Wraps the CHART.JS java script object.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * @param nativeObject CHART.JS java script object
 	 */
-	StyleElement(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
-		// checks and set the chart node if exists
-		if (has(Property._chart)) {
-			chartNode = new ChartNode((GenericJavaScriptObject) getValue(Property._chart));
-		} else {
-			chartNode = null;
-		}
+	StyleElement(NativeObject nativeObject) {
+		super(nativeObject);
 		// checks and set the X scale if exists
 		if (has(Property._xScale)) {
-			xScale = new InternalScaleItem((GenericJavaScriptObject) getValue(Property._xScale));
+			xScale = new InternalScaleItem(getValue(Property._xScale));
 		} else {
 			xScale = null;
 		}
 		// checks and set the Y scale if exists
 		if (has(Property._yScale)) {
-			yScale = new InternalScaleItem((GenericJavaScriptObject) getValue(Property._yScale));
+			yScale = new InternalScaleItem(getValue(Property._yScale));
 		} else {
 			yScale = null;
 		}
 	}
-	
-	/**
-	 * Returns the chart node instance.
-	 * @return  the chart node instance otherwise <code>null</code> if not exists.
-	 */
-	public ChartNode getChartNode() {
-		return chartNode;
-	}
 
 	/**
 	 * Returns the X scale instance.
-	 * @return  the X scale instance otherwise <code>null</code> if not exists.
+	 * 
+	 * @return the X scale instance otherwise <code>null</code> if not exists.
 	 */
 	public ScaleItem getXScale() {
 		return xScale;
@@ -91,37 +75,39 @@ public final class StyleElement extends DatasetItem {
 
 	/**
 	 * Returns the Y scale instance.
-	 * @return  the Y scale instance otherwise <code>null</code> if not exists.
+	 * 
+	 * @return the Y scale instance otherwise <code>null</code> if not exists.
 	 */
 	public ScaleItem getYScale() {
 		return yScale;
 	}
-	
+
 	/**
-	 * Overrides the protected method of the container to export the java script object.
-	 * @return export the java script object.
+	 * Returns the native object of this element.
+	 * 
+	 * @return the native object.
 	 */
-	GenericJavaScriptObject getObject() {
-		return super.getJavaScriptObject();
+	NativeObject getObject() {
+		return super.getNativeObject();
 	}
-	
+
 	/**
 	 * Internal class to extend scale items.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 *
+	 * @since 2.0
 	 */
-	protected static class InternalScaleItem extends ScaleItem{
+	static class InternalScaleItem extends ScaleItem {
 
 		/**
 		 * Wraps the CHART.JS java script object.
 		 * 
-		 * @param javaScriptObject CHART.JS java script object
+		 * @param nativeObject CHART.JS java script object
 		 */
-		protected InternalScaleItem(GenericJavaScriptObject javaScriptObject) {
-			super(javaScriptObject);
+		InternalScaleItem(NativeObject nativeObject) {
+			super(nativeObject);
 		}
-		
+
 	}
-	
+
 }

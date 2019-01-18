@@ -15,15 +15,17 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.Position;
 
 /**
- * Base object which maps the CHART.JS chart items and represents main nodes of chart java script object.
+ * Base object which maps the CHART.JS chart items and represents main nodes of chart java script object.<br>
+ * This is a wrapper of the CHART.JS item with all needed info.<br>
+ * Implements all <code>get</code> methods to change java script object properties.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	
@@ -32,9 +34,9 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	private final SizeItem minSize;
 
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
-	protected enum Property implements Key
+	enum Property implements Key
 	{
 		fullWidth,
 		position,
@@ -50,17 +52,35 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 		paddingBottom,
 		minSize
 	}
+	
+	/**
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
+	 */
+	BaseBoxNodeItem(NativeObject nativeObject) {
+		super(nativeObject);
+		// initializes the sub objects
+		margins = new MarginsItem(getValue(Property.margins));
+		minSize = new SizeItem(getValue(Property.minSize));
+	}
 
 	/**
-	 * Wraps the CHART.JS java script object.
+	 * Returns the margin item.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object.
+	 * @return the margin item.
 	 */
-	protected BaseBoxNodeItem(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
-		// initializes the sub objects
-		margins = new MarginsItem((GenericJavaScriptObject) getValue(Property.margins));
-		minSize = new SizeItem((GenericJavaScriptObject) getValue(Property.minSize));
+	public final MarginsItem getMargins() {
+		return margins;
+	}
+
+	/**
+	 * Returns the min size item.
+	 * 
+	 * @return the min size item.
+	 */
+	public final SizeItem getMinSize() {
+		return minSize;
 	}
 
 	/**
@@ -75,7 +95,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the position of node.
 	 * 
-	 * @return the position of node.
+	 * @return the position of node. Default is {@link org.pepstock.charba.client.enums.Position#top}.
 	 */
 	public final Position getPosition() {
 		return getValue(Property.position, Position.class, Position.top);
@@ -160,24 +180,6 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 */
 	public final int getPaddingLeft() {
 		return getValue(Property.paddingLeft, UndefinedValues.INTEGER);
-	}
-
-	/**
-	 * Returns the margin item.
-	 * 
-	 * @return the margin item.
-	 */
-	public final MarginsItem getMargins() {
-		return margins;
-	}
-
-	/**
-	 * Returns the min size item.
-	 * 
-	 * @return the min size item.
-	 */
-	public final SizeItem getMinSize() {
-		return minSize;
 	}
 
 }

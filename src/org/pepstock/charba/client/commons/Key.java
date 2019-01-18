@@ -20,12 +20,13 @@ package org.pepstock.charba.client.commons;
  * Used for enum.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public interface Key {
-	
+
 	/**
 	 * Returns the name of property
+	 * 
 	 * @return the name of property
 	 */
 	String name();

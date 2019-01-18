@@ -21,7 +21,7 @@ import org.pepstock.charba.client.commons.Key;
  * Controls the ticks generation on cartesian time axis.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public enum TickSource implements Key
 {

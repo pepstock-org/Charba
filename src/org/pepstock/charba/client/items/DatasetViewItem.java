@@ -15,29 +15,35 @@
 */
 package org.pepstock.charba.client.items;
 
-import java.util.LinkedList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptFieldType;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.enums.Position;
 
 /**
  * This item provides all information about the view where a dataset has been displayed.<br>
- * This object has been created and passed to event handler or callbacks to apply own logic.
+ * This object has been created and passed to event handler or callbacks to apply own logic.<br>
+ * This is a wrapper of the CHART.JS item with all needed info.<br>
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
-public final class DatasetViewItem extends JavaScriptObjectContainer {
-
+public final class DatasetViewItem extends NativeObjectContainer {
+	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -69,21 +75,20 @@ public final class DatasetViewItem extends JavaScriptObjectContainer {
 		outerRadius,
 		innerRadius
 	}
-	
+
 	/**
-	 * Wraps the CHART.JS java script object.
+	 * Creates the item using a native java script object which contains all properties.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object. 
+	 * @param nativeObject native java script object which contains all properties.
 	 */
-	DatasetViewItem(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	DatasetViewItem(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
 	/**
 	 * Returns the dataset label.
 	 * 
 	 * @return the dataset label. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
-	 * @see org.pepstock.charba.client.data.Dataset#setLabel(String)
 	 */
 	public String getDatasetLabel() {
 		return getValue(Property.datasetLabel, UndefinedValues.STRING);
@@ -101,7 +106,7 @@ public final class DatasetViewItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the edge to skip drawing the border for.
 	 * 
-	 * @return the edge to skip drawing the border for.
+	 * @return the edge to skip drawing the border for. Default is {@link org.pepstock.charba.client.enums.Position#top}.
 	 */
 	public Position getBorderSkipped() {
 		return getValue(Property.borderSkipped, Position.class, Position.top);
@@ -110,10 +115,10 @@ public final class DatasetViewItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the fill color of the dataset item.
 	 * 
-	 * @return list of the fill color of the dataset item.  Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return list of the fill color of the dataset item.
 	 */
 	public String getBackgroundColorAsString() {
-		return getValue(Property.backgroundColor, UndefinedValues.STRING);
+		return getValue(Property.backgroundColor, Defaults.get().getGlobal().getDefaultColorAsString());
 	}
 
 	/**
@@ -128,10 +133,10 @@ public final class DatasetViewItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the color of the dataset item border
 	 * 
-	 * @return list of the color of the dataset item border. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return list of the color of the dataset item border.
 	 */
 	public String getBorderColorAsString() {
-		return getValue(Property.borderColor, UndefinedValues.STRING);
+		return getValue(Property.borderColor, Defaults.get().getGlobal().getDefaultColorAsString());
 	}
 
 	/**
@@ -221,50 +226,43 @@ public final class DatasetViewItem extends JavaScriptObjectContainer {
 	 * @return the radius of dataset item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getRadius() {
-		return getValue(Property.radius, UndefinedValues.DOUBLE);
+		return getValue(Property.radius, Defaults.get().getGlobal().getElements().getPoint().getRadius());
 	}
 	
 	/**
-	 * Returns the style of the legend box (only used if usePointStyle is true)
+	 * Returns the style of the dataset item.
 	 * 
-	 * @return the style of the legend box
-	 * @see org.pepstock.charba.client.enums.PointStyle
+	 * @return the style of the dataset item.
 	 */
 	public final List<PointStyle> getPointStyle() {
-		// creates result
-		List<PointStyle> result = new LinkedList<>();
-		// checks if is an array 
-		if (JavaScriptFieldType.Array.equals(type(Property.pointStyle))) {
-			// gets all values in string mode
-			List<String> values = getStringArray(Property.pointStyle);
-			// scans all value
-			for (String value : values) {
-				// creates and adds point style
-				result.add(PointStyle.valueOf(value));
-			}
+		// checks if the property is an array
+		if (ObjectType.Array.equals(type(Property.pointStyle))) {
+			// if array, maps into array
+			ArrayString array = getArrayValue(Property.pointStyle);
+			// returns list
+			return ArrayListHelper.unmodifiableList(PointStyle.class, array);
 		} else {
-			// adds to the list the single element
-			result.add(getValue(Property.pointStyle, PointStyle.class, PointStyle.circle));
+			// the property is a string or missing
+			return Collections.unmodifiableList(Arrays.asList(getValue(Property.pointStyle, PointStyle.class, Defaults.get().getGlobal().getElements().getPoint().getPointStyle())));
 		}
-		return result;
 	}
 	
 	/**
 	 * Returns the Bezier curve tension (0 for no Bezier curves).
 	 * 
-	 * @return  the Bezier curve tension (0 for no Bezier curves). Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return  the Bezier curve tension (0 for no Bezier curves).
 	 */
 	public double getTension() {
-		return getValue(Property.tension, UndefinedValues.DOUBLE);
+		return getValue(Property.tension, Defaults.get().getGlobal().getElements().getLine().getTension());
 	}
 
 	/**
 	 * Returns the hit radius.
 	 * 
-	 * @return the hit radius. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the hit radius. 
 	 */
 	public double getHitRadius() {
-		return getValue(Property.hitRadius, UndefinedValues.DOUBLE);
+		return getValue(Property.hitRadius, Defaults.get().getGlobal().getElements().getPoint().getHitRadius());
 	}
 
 	/**
@@ -306,10 +304,10 @@ public final class DatasetViewItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns <code>true</code> if stepped line has been selected.
 	 * 
-	 * @return <code>true</code> if stepped line has been selected. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 * @return <code>true</code> if stepped line has been selected. 
 	 */
 	public boolean isSteppedLine() {
-		return getValue(Property.steppedLine, UndefinedValues.BOOLEAN);
+		return getValue(Property.steppedLine, Defaults.get().getGlobal().getElements().getLine().isStepped());
 	}
 	
 	/**
@@ -333,10 +331,10 @@ public final class DatasetViewItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the circumference of dataset item.
 	 * 
-	 * @return the circumference of dataset item. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the circumference of dataset item.
 	 */
 	public double getCircumference() {
-		return getValue(Property.circumference, UndefinedValues.DOUBLE);
+		return getValue(Property.circumference, Defaults.get().getGlobal().getCircumference());
 	}
 	
 	/**

@@ -15,14 +15,15 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.configuration.DoughnutOptions;
 import org.pepstock.charba.client.data.DoughnutDataset;
-import org.pepstock.charba.client.options.DoughnutOptions;
 
 /**
- * DOUGHNUT chart implementation.
+ * DOUGHNUT chart implementation.<br>
+ * A doughnut charts are divided into segments, the arc of each segment shows the proportional value of each piece of data.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public class DoughnutChart extends AbstractChart<DoughnutOptions, DoughnutDataset> {
 
@@ -32,13 +33,13 @@ public class DoughnutChart extends AbstractChart<DoughnutOptions, DoughnutDatase
 	 * Builds the object.
 	 */
 	public DoughnutChart() {
-		options = new DoughnutOptions(this);
+		options = new DoughnutOptions(this, getChartOptions());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getType()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -48,7 +49,7 @@ public class DoughnutChart extends AbstractChart<DoughnutOptions, DoughnutDatase
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#getOptions()
 	 */
 	@Override
 	public DoughnutOptions getOptions() {
@@ -58,7 +59,7 @@ public class DoughnutChart extends AbstractChart<DoughnutOptions, DoughnutDatase
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 * @see org.pepstock.charba.client.jsinterop.IsChart#newDataset()
 	 */
 	@Override
 	public DoughnutDataset newDataset() {

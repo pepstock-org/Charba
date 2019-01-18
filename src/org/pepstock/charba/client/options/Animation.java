@@ -15,73 +15,63 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.commons.EventProvider;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.defaults.IsDefaultAnimation;
 import org.pepstock.charba.client.enums.Easing;
-import org.pepstock.charba.client.events.AnimationCompleteEvent;
-import org.pepstock.charba.client.events.AnimationProgressEvent;
-import org.pepstock.charba.client.items.AnimationItem;
-
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.NativeEvent;
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
- * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it takes.
+ * It animates charts out of the box. A number of options are provided to configure how the animation looks and how long it
+ * takes.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
-public final class Animation extends EventProvider {
+public class Animation extends AbstractModel<Options, IsDefaultAnimation> implements IsDefaultAnimation {
 
-	// amount of handlers
-	private int onCompleteHandlers = 0;
-	// amount of handlers
-	private int onProgressHandlers = 0;
-	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
 		animateRotate,
 		animateScale,
 		duration,
-		easing,
-		onProgress,
-		onComplete
+		easing
 	}
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Creates the object with the parent, the key of this element, default values and native object to map java script
+	 * properties.
 	 * 
-	 * @param chart chart instance
+	 * @param options options of the chart.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
 	 */
-	Animation(AbstractChart<?, ?> chart) {
-		super(chart);
+	Animation(Options options, Key childKey, IsDefaultAnimation defaultValues, NativeObject nativeObject) {
+		super(options, childKey, defaultValues, nativeObject);
 	}
 
 	/**
 	 * Sets the animation easing.
 	 * 
 	 * @param easing animation easing.
-	 * @see org.pepstock.charba.client.enums.Easing
 	 */
 	public void setEasing(Easing easing) {
 		setValue(Property.easing, easing);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the animation easing.
 	 * 
-	 * @return animation easing. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getAnimation()}.
-	 * @see org.pepstock.charba.client.enums.Easing
+	 * @return animation easing.
 	 */
 	public Easing getEasing() {
-		return getValue(Property.easing, Easing.class, getChart().getGlobal().getAnimation().getEasing());
+		return getValue(Property.easing, Easing.class, getDefaultValues().getEasing());
 	}
 
 	/**
@@ -91,157 +81,57 @@ public final class Animation extends EventProvider {
 	 */
 	public void setDuration(int milliseconds) {
 		setValue(Property.duration, milliseconds);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the number of milliseconds an animation takes.
 	 * 
-	 * @return the number of milliseconds an animation takes. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getAnimation()}.
+	 * @return the number of milliseconds an animation takes.
 	 */
 	public int getDuration() {
-		return getValue(Property.duration, getChart().getGlobal().getAnimation().getDuration());
+		return getValue(Property.duration, getDefaultValues().getDuration());
 	}
 
 	/**
-	 * If true, the chart will animate in with a rotation animation.
+	 * If <code>true</code>, the chart will animate in with a rotation animation.
 	 * 
-	 * @param animateRotate If true, the chart will animate in with a rotation animation.
+	 * @param animateRotate If <code>true</code>, the chart will animate in with a rotation animation.
 	 */
 	public void setAnimateRotate(boolean animateRotate) {
 		setValue(Property.animateRotate, animateRotate);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
-	 * If true, the chart will animate in with a rotation animation.
+	 * If <code>true</code>, the chart will animate in with a rotation animation.
 	 * 
-	 * @return If true, the chart will animate in with a rotation animation. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getAnimation()}.
+	 * @return If <code>true</code>, the chart will animate in with a rotation animation.
 	 */
 	public boolean isAnimateRotate() {
-		return getValue(Property.animateRotate, getChart().getGlobal().getAnimation().isAnimateRotate());
+		return getValue(Property.animateRotate, getDefaultValues().isAnimateRotate());
 	}
 
 	/**
-	 * If true, will animate scaling the chart from the center outwards.
+	 * If <code>true</code>, will animate scaling the chart from the center outwards.
 	 * 
-	 * @param animateScale If true, will animate scaling the chart from the center outwards.
+	 * @param animateScale If <code>true</code>, will animate scaling the chart from the center outwards.
 	 */
 	public void setAnimateScale(boolean animateScale) {
 		setValue(Property.animateScale, animateScale);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
-	 * If true, will animate scaling the chart from the center outwards.
+	 * If <code>true</code>, will animate scaling the chart from the center outwards.
 	 * 
-	 * @return If true, will animate scaling the chart from the center outwards. For default value, see {@link org.pepstock.charba.client.GlobalOptions#getAnimation()}.
+	 * @return If <code>true</code>, will animate scaling the chart from the center outwards.
 	 */
 	public boolean isAnimateScale() {
-		return getValue(Property.animateScale, getChart().getGlobal().getAnimation().isAnimateScale());
+		return getValue(Property.animateScale, getDefaultValues().isAnimateScale());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.commons.ChartContainer#addHandler(com.google.gwt.event.shared.GwtEvent.Type)
-	 */
-	@Override
-	protected <H extends EventHandler> void addHandler(Type<H> type) {
-		// checks which kind of handler has been added
-		if (type.equals(AnimationCompleteEvent.TYPE)) {
-			// checks if property exist
-			if (!has(Property.onComplete)) {
-				// sets the java script code to get the event
-				registerNativeCompleteHandler(getJavaScriptObject());
-			}
-			// increments amount of handlers
-			onCompleteHandlers++;
-		} else if (type.equals(AnimationProgressEvent.TYPE)) {
-			// checks if property exist
-			if (!has(Property.onProgress)) {
-				// sets the java script code to get the event
-				registerNativeProgressHandler(getJavaScriptObject());
-			}
-			// increments amount of handlers
-			onProgressHandlers++;
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.commons.ChartContainer#removeHandler(org.pepstock.charba.client.commons.Key)
-	 */
-	@Override
-	protected <H extends EventHandler> void removeHandler(Type<H> type) {
-		// checks which kind of handler has been removed
-		if (type.equals(AnimationCompleteEvent.TYPE)) {
-			// decrements amount of handlers
-			onCompleteHandlers--;
-			// if zero, no handler
-			if (onCompleteHandlers == 0) {
-				// therefore remove property
-				remove(Property.onComplete);
-			}
-		} else if (type.equals(AnimationProgressEvent.TYPE)) {
-			// decrements amount of handlers
-			onProgressHandlers--;
-			// if zero, no handler
-			if (onProgressHandlers == 0) {
-				// therefore remove property
-				remove(Property.onProgress);
-			}
-		}
-	}
-
-	/**
-	 * Callback called on each step of an animation.
-	 * 
-	 * @param item animation item info.
-	 */
-	protected void onProgress(GenericJavaScriptObject item) {
-		// creates a native event by GWT (change)
-		NativeEvent event = Document.get().createChangeEvent();
-		// fires the event
-		getChart().fireEvent(new AnimationProgressEvent(event, new AnimationItem(item)));
-	}
-
-	/**
-	 * Callback called at the end of an animation.
-	 * 
-	 * @param item animation item info.
-	 */
-	protected void onComplete(GenericJavaScriptObject item) {
-		// creates a native event by GWT (change)
-		NativeEvent event = Document.get().createChangeEvent();
-		// fires the event
-		getChart().fireEvent(new AnimationCompleteEvent(event, new AnimationItem(item)));
-	}
-
-	/**
-	 * Sets the java script code to activate the call back, adding functions.
-	 * 
-	 * @param options
-	 *            java script object where adding new functions definition.
-	 */
-    private native void registerNativeProgressHandler(GenericJavaScriptObject options)/*-{
-    	var self = this;
-        options.onProgress = function(animation){
-            self.@org.pepstock.charba.client.options.Animation::onProgress(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(animation.animationObject);
-            return;
-        }
-    }-*/;
-
-	/**
-	 * Sets the java script code to activate the call back, adding functions.
-	 * 
-	 * @param options
-	 *            java script object where adding new functions definition.
-	 */
-    private native void registerNativeCompleteHandler(GenericJavaScriptObject options)/*-{
-		var self = this;
-	    options.onComplete = function(animation){
-	        self.@org.pepstock.charba.client.options.Animation::onComplete(Lorg/pepstock/charba/client/commons/GenericJavaScriptObject;)(animation.animationObject);
-	        return;
-	    }
-	}-*/;
-    
 }

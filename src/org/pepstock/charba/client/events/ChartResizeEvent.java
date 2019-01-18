@@ -23,7 +23,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * Event which is fired when the chart has been resized.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public final class ChartResizeEvent extends AbstractEvent<ChartResizeEventHandler> {
 

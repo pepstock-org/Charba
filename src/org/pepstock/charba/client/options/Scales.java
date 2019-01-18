@@ -17,77 +17,189 @@ package org.pepstock.charba.client.options;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.commons.AbstractList;
 import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.ChartContainer;
-import org.pepstock.charba.client.commons.JsObjectContainerArrayList;
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.options.scales.Axis;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.defaults.IsDefaultScale;
+import org.pepstock.charba.client.defaults.IsDefaultScales;
 
 /**
  * The configuration element which contains all axes definitions.
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  *
  */
-public class Scales extends ChartContainer {
-
-	// buffer to maintain axes
-	private final AbstractList<Axis> yAxes = new JsObjectContainerArrayList<>();
-	// buffer to maintain axes
-	private final AbstractList<Axis> xAxes = new JsObjectContainerArrayList<>();
+public class Scales extends AbstractModel<Options, IsDefaultScales> implements IsDefaultScales {
 
 	/**
-	 * Name of fields of JavaScript object.
+	 * Default name of X axis
 	 */
-	enum Property implements Key
+	public static final String DEFAULT_X_AXIS_ID = "x-axis-0";
+
+	/**
+	 * Default name of Y axis
+	 */
+	public static final String DEFAULT_Y_AXIS_ID = "y-axis-0";
+
+	/**
+	 * Default name of axis when the chart has got only 1 scale (polar, radar)
+	 */
+	public static final String DEFAULT_SINGLE_AXIS_ID = "scale";
+	// factory to create X scale by native object
+	private final ScaleListFactory xAxisFactory = new ScaleListFactory(Property.xAxes);
+	// factory to create Y scale by native object
+	private final ScaleListFactory yAxisfactory = new ScaleListFactory(Property.yAxes);
+
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
 	{
+		display,
 		xAxes,
 		yAxes
 	}
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Creates a scales object by defaults values. This method is creating the root element of scales.
 	 * 
-	 * @param chart chart instance
+	 * @param defaultValues default values of scales
 	 */
-	protected Scales(AbstractChart<?, ?> chart) {
-		super(chart);
+	public Scales(IsDefaultScales defaultValues) {
+		this(null, null, defaultValues, null);
 	}
 
 	/**
-	 * Sets an array of X axes.
+	 * Creates the scales object as child of the option object.
 	 * 
-	 * @param axes an array of axes.
+	 * @param options options of the chart.
+	 * @param childKey the property name of this element to use to add it to the parent.
+	 * @param defaultValues default provider
+	 * @param nativeObject native object to map java script properties
 	 */
-	public void setXAxes(Axis... axes) {
-		// set java script array
-		setValue(Property.xAxes, ArrayListHelper.load(this.xAxes, axes));
+	Scales(Options options, Key childKey, IsDefaultScales defaultValues, NativeObject nativeObject) {
+		super(options, childKey, defaultValues, nativeObject);
 	}
 
 	/**
-	 * @return the xAxes
-	 */
-	public List<Axis> getXAxes() {
-		return xAxes;
-	}
-
-	/**
-	 * Sets an array of Y axes.
+	 * Sets if the scales are shown.
 	 * 
-	 * @param axes an array of axes.
+	 * @param display <code>true</code> if the scales are shown.
 	 */
-	public void setYAxes(Axis... axes) {
-		// set java script array
-		setValue(Property.yAxes, ArrayListHelper.load(this.yAxes, axes));
+	public void setDisplay(boolean display) {
+		setValue(Property.display, display);
+		// checks if all parents are attached
+		checkAndAddToParent();
 	}
 
 	/**
-	 * @return the yAxes
+	 * Returns if the scales are shown.
+	 * 
+	 * @return <code>true</code> if the scales are shown.
 	 */
-	public List<Axis> getYAxes() {
-		return yAxes;
+	public boolean isDisplay() {
+		return getValue(Property.display, getDefaultValues().isDisplay());
 	}
 
+	/**
+	 * Sets all X axes of chart.
+	 * 
+	 * @param scales array of axes.
+	 */
+	public void setXAxes(Scale... scales) {
+		setArrayValue(Property.xAxes, ArrayObject.of(scales));
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns a list of X axes.
+	 * 
+	 * @return a list of X axes.
+	 */
+	public List<Scale> getXAxes() {
+		ArrayObject array = getArrayValue(Property.xAxes);
+		return ArrayListHelper.list(array, xAxisFactory);
+	}
+
+	/**
+	 * Sets all Y axes of chart.
+	 * 
+	 * @param scales array of axes.
+	 */
+	public void setYAxes(Scale... scales) {
+		setArrayValue(Property.yAxes, ArrayObject.of(scales));
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns a list of Y axes.
+	 * 
+	 * @return a list of Y axes.
+	 */
+	public List<Scale> getYAxes() {
+		ArrayObject array = getArrayValue(Property.yAxes);
+		return ArrayListHelper.list(array, yAxisfactory);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales#getXAxis()
+	 */
+	@Override
+	public IsDefaultScale getXAxis() {
+		return getDefaultValues().getXAxis();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales#getYAxis()
+	 */
+	@Override
+	public IsDefaultScale getYAxis() {
+		return getDefaultValues().getYAxis();
+	}
+
+	/**
+	 * Inner class to create scale item by a native object.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 * @since 2.0
+	 *
+	 */
+	private final class ScaleListFactory implements NativeObjectContainerFactory<Scale> {
+
+		private final Key property;
+
+		/**
+		 * Creates the factory with the key to use
+		 * 
+		 * @param property property of native object.
+		 */
+		public ScaleListFactory(Key property) {
+			this.property = property;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
+		 * .commons.NativeObject)
+		 */
+		@Override
+		public Scale create(NativeObject nativeObject) {
+			// gets default value based on key of the object
+			IsDefaultScale defaultValue = Property.xAxes.equals(property) ? getXAxis() : getYAxis();
+			// creates the scale
+			return new Scale(defaultValue, nativeObject);
+		}
+
+	}
 }

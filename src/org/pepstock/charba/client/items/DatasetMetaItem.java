@@ -15,27 +15,32 @@
 */
 package org.pepstock.charba.client.items;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.ChartType;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.controllers.ControllerType;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.items.DatasetItem.DatasetItemFactory;
+import org.pepstock.charba.client.options.Scales;
 
 /**
- * This object is just a proxy object, created from JavaScript side, to wrap an JavaScript array.<br>
- * Created and passed by CHART.JS.
+ * Calling some methods on your chart instance passing an argument of an event, will return the elements at the event
+ * position.<br>
+ * Created and passed by CHART.JS and provide dataset metadata information.<br>
+ * Contains all data set items.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
-public final class DatasetMetaItem extends JavaScriptObjectContainer {
-
+public final class DatasetMetaItem extends NativeObjectContainer {
+	
 	/**
-	 * Name of fields of JavaScript object.
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
@@ -45,21 +50,29 @@ public final class DatasetMetaItem extends JavaScriptObjectContainer {
 		yAxisID,
 		xAxisID
 	}
+	// instance of dataset items factory.
+	private final DatasetItemFactory datasetItemFactory = new DatasetItemFactory();
 	
 	/**
-	 * Wraps the CHART.JS java script object.
-	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * To avoid any user creation but provides an empty object
 	 */
-	public DatasetMetaItem(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	DatasetMetaItem() {
+		// do noting
 	}
 
 	/**
-	 * Returns the type of dataset. If not set, the default is <code>bar</code>.
+	 * Creates the item using a native java script object which contains all properties.
 	 * 
-	 * @return the type of dataset
-	 * @see org.pepstock.charba.client.Type
+	 * @param nativeObject native java script object which contains all properties.
+	 */
+	public DatasetMetaItem(NativeObject nativeObject) {
+		super(nativeObject);
+	}
+
+	/**
+	 * Returns the type of dataset. 
+	 * 
+	 * @return the type of dataset. If not set or invalid, the default is {@link org.pepstock.charba.client.ChartType#bar}.
 	 */
 	public Type getType() {
 		// gets string value from java script object
@@ -67,7 +80,11 @@ public final class DatasetMetaItem extends JavaScriptObjectContainer {
 		// checks if consistent with out of the box chart types
 		Type type = ChartType.get(value);
 		// if not, creates new type being a controller.
-		return type == null ? new ControllerType(value) : type;
+		if (type == null) {
+			// gets type from controllers
+			type = Defaults.get().getControllers().getTypeByString(value);
+		}
+		return type == null ? ChartType.bar : type;
 	}
 
 	/**
@@ -91,40 +108,29 @@ public final class DatasetMetaItem extends JavaScriptObjectContainer {
 	/**
 	 * Returns the Y axis ID. 
 	 * 
-	 * @return the Y axis ID. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return the Y axis ID. Default is {@link org.pepstock.charba.client.options.Scales#DEFAULT_Y_AXIS_ID}.
 	 */
 	public String getYAxisID() {
-		return getValue(Property.yAxisID, UndefinedValues.STRING);
+		return getValue(Property.yAxisID, Scales.DEFAULT_Y_AXIS_ID);
 	}
 	
 	/**
 	 * Returns the X axis ID. 
 	 * 
-	 * @return the X axis ID. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return the X axis ID. Default is {@link org.pepstock.charba.client.options.Scales#DEFAULT_X_AXIS_ID}.
 	 */
 	public String getXAxisID() {
-		return getValue(Property.xAxisID, UndefinedValues.STRING);
+		return getValue(Property.xAxisID, Scales.DEFAULT_X_AXIS_ID);
 	}
 
 	/**
 	 * Returns a list of dataset metadata items.
 	 * 
 	 * @return a list of dataset metadata items.
-	 * @see org.pepstock.charba.client.items.DatasetItem
 	 */
 	public List<DatasetItem> getDatasets() {
-		// creates the result
-		List<DatasetItem> result = new LinkedList<>();
-		// checks if the object has got the property
-		if (has(Property.data)) {
-			// gets and scans teh array of objects
-			for (GenericJavaScriptObject object : getObjectArray(Property.data)) {
-				// creates dataset item
-				DatasetItem item = new DatasetItem(object);
-				result.add(item);
-			}
-		}
-		return result;
+		ArrayObject array = getArrayValue(Property.data);
+		return ArrayListHelper.unmodifiableList(array, datasetItemFactory);
 	}
-
+	
 }

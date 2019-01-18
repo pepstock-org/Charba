@@ -15,43 +15,31 @@
 */
 package org.pepstock.charba.client.items;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
-import org.pepstock.charba.client.commons.JavaScriptObjectContainer;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * Wrapper of scales node of CHART.JS.
+ * Wrapper of scales node of CHART.JS.<br>
+ * This is a wrapper of scale node of Chart (of CHART.JS).
  * 
  * @author Andrea "Stock" Stocchero
+ * @since 2.0
  */
-public final class ScalesNode extends JavaScriptObjectContainer {
+public final class ScalesNode extends NativeObjectContainer {
 
 	/**
-	 * Default name of X axis
-	 */
-	public static final String DEFAULT_X_AXIS_ID = "x-axis-0";
-
-	/**
-	 * Default name of Y axis
-	 */
-	public static final String DEFAULT_Y_AXIS_ID = "y-axis-0";
-
-	/**
-	 * Default name of axis when the chart has got only 1 scale (polar, radar)
-	 */
-	public static final String DEFAULT_SINGLE_AXIS_ID = "scale";
-
-	/**
-	 * Wraps the CHART.JS java script object.
+	 * Creates the item using a native java script object which contains all properties.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * @param nativeObject native java script object which contains all properties.
 	 */
-	ScalesNode(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	public ScalesNode(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
 	/**
@@ -69,10 +57,11 @@ public final class ScalesNode extends JavaScriptObjectContainer {
 			// scans all keys
 			for (Key key : keys) {
 				// loads scale item
-				result.put(key.name(), new ScaleItem((GenericJavaScriptObject) getValue(key)));
+				result.put(key.name(), new ScaleItem(getValue(key)));
 			}
 		}
-		return result;
+		// returns a unmodifiable map
+		return Collections.unmodifiableMap(result);
 	}
 
 }

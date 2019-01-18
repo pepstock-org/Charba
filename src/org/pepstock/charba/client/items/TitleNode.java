@@ -15,22 +15,24 @@
 */
 package org.pepstock.charba.client.items;
 
-import org.pepstock.charba.client.commons.GenericJavaScriptObject;
+import org.pepstock.charba.client.commons.NativeObject;
 
 /**
- * Wrapper of title node of CHART.JS.
+ * Wrapper of title node of CHART.JS.<br>
+ * This is a wrapper of title node of Chart (of CHART.JS).
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @since 2.0
  */
 public final class TitleNode extends BaseBoxNodeItem {
 
 	/**
-	 * Wraps the CHART.JS java script object.
+	 * Creates the item using a native java script object which contains all properties.
 	 * 
-	 * @param javaScriptObject CHART.JS java script object
+	 * @param nativeObject native java script object which contains all properties.
 	 */
-	TitleNode(GenericJavaScriptObject javaScriptObject) {
-		super(javaScriptObject);
+	public TitleNode(NativeObject nativeObject) {
+		super(nativeObject);
 	}
+
 }
