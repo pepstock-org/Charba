@@ -24,7 +24,7 @@ import jsinterop.annotations.JsType;
 
 /**
  * This is the java script native object which is the helpers utility of CHART.JS.<br>
- * It maps the java script object chart.helpers.
+ * It maps the java script object <code>chart.helpers</code>.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0

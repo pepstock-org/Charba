@@ -26,7 +26,7 @@ import org.pepstock.charba.client.jsinterop.Plugin;
  * @since 2.0
  */
 final class InlinePlugin extends GlobalPlugin {
-	
+
 	private final AbstractChart<?, ?> chart;
 
 	/**
@@ -40,14 +40,16 @@ final class InlinePlugin extends GlobalPlugin {
 		this.chart = chart;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.plugins.GlobalPlugin#getChart(java.lang.String)
 	 */
 	@Override
 	AbstractChart<?, ?> getChart(String chartId) {
 		// checks if the chart id is the same of INLINE plugin
-		if (chart.getId().equalsIgnoreCase(chartId)){
-			return chart;			
+		if (chart.getId().equalsIgnoreCase(chartId)) {
+			return chart;
 		}
 		// calls to collection of charts
 		return super.getChart(chartId);

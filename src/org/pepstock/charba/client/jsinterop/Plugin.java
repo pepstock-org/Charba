@@ -43,7 +43,7 @@ public interface Plugin {
 	 * @return the plugin id.
 	 */
 	String getId();
-	
+
 	/**
 	 * Called before initializing configuration of 'chart'.
 	 * 
@@ -224,7 +224,7 @@ public interface Plugin {
 	 * cancelled.
 	 * 
 	 * @param chart The chart instance.
-	 * @param  item The tooltip instance.
+	 * @param item The tooltip instance.
 	 */
 	void onAfterTooltipDraw(AbstractChart<?, ?> chart, TooltipPluginItem item);
 

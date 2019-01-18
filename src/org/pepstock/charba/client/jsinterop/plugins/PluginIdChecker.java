@@ -78,9 +78,10 @@ public final class PluginIdChecker {
 			throw new InvalidPluginIdException(buildMessage(id, INVALID_PLUGIN__ID_NOT_LOWERCASE_UPPERCASE));
 		}
 	}
-	
+
 	/**
 	 * Creates a key by the plugin id as string
+	 * 
 	 * @param id the plugin id as string
 	 * @return a key by the plugin id as string
 	 * @throws InvalidPluginIdException if the plugin id is not compliant

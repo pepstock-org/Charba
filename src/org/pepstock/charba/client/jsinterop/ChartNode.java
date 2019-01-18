@@ -33,6 +33,7 @@ import org.pepstock.charba.client.jsinterop.items.UndefinedValues;
  */
 public final class ChartNode {
 
+	// all sub elements
 	private final Chart chart;
 
 	private final OptionsNode options;

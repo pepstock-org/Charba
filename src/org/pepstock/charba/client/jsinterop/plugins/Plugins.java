@@ -49,7 +49,7 @@ public final class Plugins implements ConfigurationElement {
 
 	/**
 	 * Adds a new plugin to the chart.<br>
-	 * If the chart is already initialized, to get this update teh chart must be drawn again.
+	 * If the chart is already initialized, to get this update the chart must be drawn again.
 	 * 
 	 * @param plugin plugin instance
 	 * @throws InvalidPluginIdException if the plugin id is not correct.
@@ -57,7 +57,7 @@ public final class Plugins implements ConfigurationElement {
 	public void add(Plugin plugin) throws InvalidPluginIdException {
 		// checks the plugin id
 		PluginIdChecker.check(plugin.getId());
-		// creates a java script object, wrapper of teh plugin
+		// creates a java script object, wrapper of the plugin
 		InlinePlugin wPlugin = new InlinePlugin(chart, plugin);
 		// stores the wrapper into a list
 		plugins.add(wPlugin);
@@ -65,7 +65,7 @@ public final class Plugins implements ConfigurationElement {
 
 	/**
 	 * Removes a plugin from the chart.<br>
-	 * If the chart is already initialized, to get this update teh chart must be drawn again.
+	 * If the chart is already initialized, to get this update the chart must be drawn again.
 	 * 
 	 * @param id plugin id to remove.
 	 */
@@ -82,8 +82,7 @@ public final class Plugins implements ConfigurationElement {
 			}
 		}
 	}
-	
-	
+
 	/**
 	 * Invokes the on configuration method to inform the plugins that the chart is going to be initialized.
 	 * 

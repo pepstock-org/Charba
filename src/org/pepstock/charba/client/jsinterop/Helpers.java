@@ -19,7 +19,7 @@ import org.pepstock.charba.client.jsinterop.commons.NativeObject;
 
 /**
  * Singleton object to use the helpers utility of CHART.JS.<br>
- * It maps the java script object chart.helpers.
+ * It maps the java script object <code>chart.helpers</code>.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
@@ -44,7 +44,7 @@ public final class Helpers {
 	/**
 	 * Singleton method to get the instance
 	 * 
-	 * @return merger instance
+	 * @return helper instance
 	 */
 	public static Helpers get() {
 		return INSTANCE;

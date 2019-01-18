@@ -65,17 +65,18 @@ abstract class WrapperPlugin {
 	final String getId() {
 		return delegation.getId();
 	}
-	
+
 	/**
 	 * @return the nativeObject
 	 */
 	NativePlugin getNativeObject() {
 		return nativeObject;
 	}
-	
+
 	/**
-	 * Called before initializing 'chart'.
-	 * @param chartId chart id.
+	 * Called before creation of 'chart' java script.
+	 * 
+	 * @param chart chart instance.
 	 */
 	protected void onConfigure(AbstractChart<?, ?> chart) {
 		// if consistent, calls plugin
@@ -86,6 +87,7 @@ abstract class WrapperPlugin {
 
 	/**
 	 * Called before initializing 'chart'.
+	 * 
 	 * @param chartId chart id.
 	 */
 	protected void onBeforeInit(String chartId) {
@@ -99,6 +101,7 @@ abstract class WrapperPlugin {
 
 	/**
 	 * Called after 'chart' has been initialized and before the first update.
+	 * 
 	 * @param chartId chart id.
 	 */
 	protected void onAfterInit(String chartId) {
@@ -130,6 +133,7 @@ abstract class WrapperPlugin {
 	/**
 	 * Called after 'chart' has been updated and before rendering. Note that this hook will not be called if the chart update
 	 * has been previously cancelled.
+	 * 
 	 * @param chartId chart id.
 	 */
 	protected void onAfterUpdate(String chartId) {
@@ -151,8 +155,9 @@ abstract class WrapperPlugin {
 	protected boolean onBeforeLayout(String chartId) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
-		// if consistent, calls plugin
+		// if consistent
 		if (chart != null) {
+			// calls plugin
 			return delegation.onBeforeLayout(chart);
 		}
 		return true;
@@ -161,6 +166,7 @@ abstract class WrapperPlugin {
 	/**
 	 * Called after the 'chart' has been layed out. Note that this hook will not be called if the layout update has been
 	 * previously cancelled.
+	 * 
 	 * @param chartId chart id.
 	 */
 	protected void onAfterLayout(String chartId) {
@@ -192,6 +198,7 @@ abstract class WrapperPlugin {
 	/**
 	 * Called after the 'chart' datasets have been updated. Note that this hook will not be called if the datasets update has
 	 * been previously cancelled.
+	 * 
 	 * @param chartId chart id.
 	 */
 	protected void onAfterDatasetsUpdate(String chartId) {
@@ -206,6 +213,7 @@ abstract class WrapperPlugin {
 	/**
 	 * Called before updating the 'chart' dataset at the given 'args.index'. If any plugin returns <code>false</code>, the
 	 * datasets update is cancelled until another 'update' is triggered.
+	 * 
 	 * @param chartId chart id.
 	 * @param datasetIndex The dataset index.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
@@ -256,6 +264,7 @@ abstract class WrapperPlugin {
 	/**
 	 * Called after the 'chart' has been fully rendered (and animation completed). Note that this hook will not be called if the
 	 * rendering has been previously cancelled.
+	 * 
 	 * @param chartId chart id.
 	 */
 	protected void onAfterRender(String chartId) {
@@ -457,6 +466,7 @@ abstract class WrapperPlugin {
 
 	/**
 	 * Called after the chart as been destroyed.
+	 * 
 	 * @param chartId chart id.
 	 */
 	protected void onDestroy(String chartId) {

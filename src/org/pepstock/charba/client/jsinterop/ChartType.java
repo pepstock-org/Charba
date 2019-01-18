@@ -76,18 +76,21 @@ public enum ChartType implements Type
 	 * size of the individual bubbles.
 	 */
 	bubble(ScaleType.multi);
-	
+
 	private final ScaleType scaleType;
-	
+
 	/**
 	 * Creates the type with scale type of this kind of chart.
+	 * 
 	 * @param scaleType scale type of this kind of chart.
 	 */
 	private ChartType(ScaleType scaleType) {
 		this.scaleType = scaleType;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.Type#scaleType()
 	 */
 	@Override
@@ -97,6 +100,7 @@ public enum ChartType implements Type
 
 	/**
 	 * Gets the chart type by a string.
+	 * 
 	 * @param value string value to search
 	 * @return the chart type instance which matches with the string otherwise <code>null</code>.
 	 */

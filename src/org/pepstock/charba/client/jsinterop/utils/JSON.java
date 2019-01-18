@@ -20,7 +20,7 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * This is the wrapper to JSON javascript object.<br>
+ * This is the wrapper to JSON java script object.<br>
  * The JSON object contains methods for parsing JSON and converting values to JSON.
  * 
  * @author Andrea "Stock" Stocchero

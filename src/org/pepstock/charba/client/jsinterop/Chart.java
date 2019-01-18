@@ -63,7 +63,7 @@ public final class Chart {
 	 */
 	@JsProperty
 	static native NativePlugins getPlugins();
-	
+
 	/**
 	 * Builds CHART object at CHART.JS level.<br>
 	 * This constructor MUST be empty.
@@ -187,24 +187,27 @@ public final class Chart {
 	 */
 	@JsMethod
 	native NativeObject getDatasetMeta(int index);
-	
+
 	/**
 	 * Gets if the dataset is visible or not, selected by index.
+	 * 
 	 * @param index dataset index
 	 * @return <code>true</code> if dataset is visible otherwise <code>false</code>.
 	 */
 	@JsMethod
 	native boolean isDatasetVisible(int index);
-	
+
 	/**
 	 * Gets the amount of datasets which are visible
+	 * 
 	 * @return the amount of datasets which are visible
 	 */
 	@JsMethod
 	native int getVisibleDatasetCount();
-	
+
 	/**
 	 * Gets the dataset of the chart, selected by event.
+	 * 
 	 * @param event event of get the dataset.
 	 * @return dataset meta data items.
 	 */

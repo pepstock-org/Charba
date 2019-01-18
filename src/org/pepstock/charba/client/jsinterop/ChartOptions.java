@@ -28,11 +28,12 @@ import org.pepstock.charba.client.jsinterop.options.Scales;
  * @since 2.0
  */
 public final class ChartOptions extends ScaledOptions {
-	
+
 	private final Type type;
 
 	/**
 	 * Creates the object with a empty native object.
+	 * 
 	 * @param type chart type
 	 */
 	ChartOptions(Type type) {
@@ -60,7 +61,9 @@ public final class ChartOptions extends ScaledOptions {
 		return type;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.ScaledOptions#getScales()
 	 */
 	public Scales getScales() {
@@ -73,7 +76,9 @@ public final class ChartOptions extends ScaledOptions {
 		throw new UnsupportedOperationException("The options is not referring to a multi scaled chart!");
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.ScaledOptions#getScale()
 	 */
 	public Scale getScale() {
@@ -85,5 +90,5 @@ public final class ChartOptions extends ScaledOptions {
 		// if here, the chart is not single scale therefore exception
 		throw new UnsupportedOperationException("The options is not referring to a single scaled chart!");
 	}
-	
+
 }

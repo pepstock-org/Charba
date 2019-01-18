@@ -38,7 +38,9 @@ class GlobalPlugin extends WrapperPlugin {
 		super(delegation);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.plugins.WrapperPlugin#getChart(java.lang.String)
 	 */
 	@Override

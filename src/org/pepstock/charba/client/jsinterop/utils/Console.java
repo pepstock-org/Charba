@@ -18,7 +18,7 @@ package org.pepstock.charba.client.jsinterop.utils;
 import jsinterop.annotations.JsType;
 
 /**
- * This object is the wrapper to console javascript object.<br>
+ * This object is the wrapper to console java script object.<br>
  * The console object provides access to the browser's debugging console
  * 
  * @author Andrea "Stock" Stocchero

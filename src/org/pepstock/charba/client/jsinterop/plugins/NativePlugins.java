@@ -24,7 +24,7 @@ import jsinterop.annotations.JsType;
 
 /**
  * This is the java script native object which is the plugins utility of CHART.JS.<br>
- * It maps the java script object chart.plugins.
+ * It maps the java script object <code>chart.plugins</code>.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 2.0
@@ -35,7 +35,8 @@ public final class NativePlugins {
 	/**
 	 * To avoid any instantiation
 	 */
-	NativePlugins() {}
+	NativePlugins() {
+	}
 
 	/**
 	 * Registers the given plugin if not already registered.

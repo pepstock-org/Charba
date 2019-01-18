@@ -35,11 +35,11 @@ public interface Controller {
 	 * @return the controller id.
 	 */
 	ControllerType getType();
-	
+
 	/**
 	 * Initializes the controller.
 	 * 
-	 * @param context context of controller 
+	 * @param context context of controller
 	 * @param chart chart instance
 	 * @param datasetIndex dataset index
 	 */

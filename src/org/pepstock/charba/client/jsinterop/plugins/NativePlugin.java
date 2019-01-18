@@ -55,7 +55,7 @@ final class NativePlugin {
 	 * <ul>
 	 * <li>can not start with a dot or an underscore
 	 * <li>can not contain any non-URL-safe characters
-	 * <li>cannot contain uppercase letters
+	 * <li>cannot contain upper case letters
 	 * <li>should be something short, but also reasonably descriptive
 	 * </ul>
 	 * 
@@ -70,7 +70,7 @@ final class NativePlugin {
 	 * <ul>
 	 * <li>can not start with a dot or an underscore
 	 * <li>can not contain any non-URL-safe characters
-	 * <li>cannot contain uppercase letters
+	 * <li>cannot contain upper case letters
 	 * <li>should be something short, but also reasonably descriptive
 	 * </ul>
 	 * 

@@ -27,7 +27,7 @@ import org.pepstock.charba.client.jsinterop.Plugin;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
 
 /**
- * Glabal configuration to set plugins at global level.<br>
+ * Global configuration to set plugins at global level.<br>
  * It maps the CHART.JS object of default, <code>chart.plugins</code>.<br>
  * 
  * @author Andrea "Stock" Stocchero
@@ -68,13 +68,13 @@ public final class GlobalPlugins {
 		// creates a java script object, wrapper of the plugin
 		GlobalPlugin wPlugin = new GlobalPlugin(plugin);
 		plugins.register(wPlugin.getNativeObject());
-		// stores the id into a set
+		// stores the id and object into a map
 		pluginIds.put(plugin.getId(), wPlugin);
 		return true;
 	}
 
 	/**
-	 * Unregisters a global plugin. THis is possible ONLY for plugins added as custom ones.
+	 * Unregisters a global plugin. This is possible ONLY for plugins added as custom ones.
 	 * 
 	 * @param pluginId plugin instance
 	 * @return <code>true</code> if unregistered, otherwise <code>false</code> if the plugin is not a custom one.
@@ -114,7 +114,7 @@ public final class GlobalPlugins {
 		ArrayObject existingPlugins = plugins.getAll();
 		// creates a set of strings
 		final Set<String> pluginsIds = new HashSet<String>();
-		// checks teh result from CHART.JS
+		// checks the result from CHART.JS
 		if (existingPlugins != null && existingPlugins.length() > 0) {
 			// scans ids
 			for (int i = 0; i < existingPlugins.length(); i++) {
@@ -126,8 +126,7 @@ public final class GlobalPlugins {
 		}
 		return pluginsIds;
 	}
-	
-	
+
 	/**
 	 * Invokes the on configuration method to inform the plugins that the chart is going to be initialized.
 	 * 
@@ -138,7 +137,7 @@ public final class GlobalPlugins {
 		// scans all plugins
 		for (Entry<String, GlobalPlugin> entry : pluginIds.entrySet()) {
 			try {
-				// checks if plugin is enabled 
+				// checks if plugin is enabled
 				if (chart.getOptions().getPlugins().isEnabled(entry.getKey())) {
 					// calls on configure method
 					entry.getValue().onConfigure(chart);
