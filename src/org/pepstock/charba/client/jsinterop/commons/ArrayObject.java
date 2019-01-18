@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.commons;
 
+import java.util.List;
+
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -61,6 +63,29 @@ public final class ArrayObject extends Array {
 		return result;
 	}
 
+	/**
+	 * Creates a java script array of objects starting from a list of native object containers.
+	 * 
+	 * @param items list of objects to load into new java script array.
+	 * @param <E> type of native object containers
+	 * @return new array instance of objects.
+	 */
+	@JsOverlay
+	public static <E extends NativeObjectContainer> ArrayObject of(List<E> items) {
+		// creates the array
+		ArrayObject result = new ArrayObject();
+		// checks if array is null
+		if (items == null) {
+			return result;
+		}
+		for (E value : items) {
+			// adds element
+			result.push(value.getNativeObject());
+		}
+		// returns the array
+		return result;
+	}	
+	
 	/**
 	 * Returns the index of the last occurrence of the specified element in this array, or -1 if this array does not contain the
 	 * element.

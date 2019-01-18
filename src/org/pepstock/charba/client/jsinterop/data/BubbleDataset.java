@@ -158,6 +158,15 @@ public final class BubbleDataset extends HovingDataset {
 	}
 
 	/**
+	 * Sets the data property of a dataset for a chart is specified as an array of data points.
+	 * 
+	 * @param datapoints a list of data points
+	 */
+	public void setDataPoints(List<DataPoint> datapoints) {
+		setArrayValue(Property.data, ArrayObject.of(datapoints));
+	}
+	
+	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
 	 * 
 	 * @return a list of data points

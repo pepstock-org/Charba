@@ -17,11 +17,11 @@ package org.pepstock.charba.client.jsinterop.data;
 
 import java.util.List;
 
-import org.pepstock.charba.client.jsinterop.commons.Key;
-import org.pepstock.charba.client.jsinterop.enums.Position;
 import org.pepstock.charba.client.jsinterop.Defaults;
 import org.pepstock.charba.client.jsinterop.commons.ArrayListHelper;
 import org.pepstock.charba.client.jsinterop.commons.ArrayObject;
+import org.pepstock.charba.client.jsinterop.commons.Key;
+import org.pepstock.charba.client.jsinterop.enums.Position;
 import org.pepstock.charba.client.jsinterop.options.Scales;
 
 /**
@@ -115,6 +115,15 @@ public class BarDataset extends HovingFlexDataset {
 	 * @param datapoints an array of data points
 	 */
 	public void setDataPoints(DataPoint... datapoints) {
+		setArrayValue(Property.data, ArrayObject.of(datapoints));
+	}
+
+	/**
+	 * Sets the data property of a dataset for a chart is specified as an array of data points.
+	 * 
+	 * @param datapoints a list of data points
+	 */
+	public void setDataPoints(List<DataPoint> datapoints) {
 		setArrayValue(Property.data, ArrayObject.of(datapoints));
 	}
 
