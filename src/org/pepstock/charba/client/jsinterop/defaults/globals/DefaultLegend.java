@@ -25,17 +25,19 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-public final class DefaultLegend implements IsDefaultLegend{
+public final class DefaultLegend implements IsDefaultLegend {
 
 	private static final boolean DEFAULT_DISPLAY = true;
 
 	private static final boolean DEFAULT_FULL_WIDTH = true;
 
 	private static final boolean DEFAULT_REVERSE = false;
-	
+
 	private final DefaultLegendLabels legendLabels = new DefaultLegendLabels();
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.legend.IsDefaultLegend#getLabels()
 	 */
 	@Override
@@ -43,7 +45,9 @@ public final class DefaultLegend implements IsDefaultLegend{
 		return legendLabels;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.legend.IsDefaultLegend#isDisplay()
 	 */
 	@Override
@@ -51,7 +55,9 @@ public final class DefaultLegend implements IsDefaultLegend{
 		return DEFAULT_DISPLAY;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.legend.IsDefaultLegend#isFullWidth()
 	 */
 	@Override
@@ -59,7 +65,9 @@ public final class DefaultLegend implements IsDefaultLegend{
 		return DEFAULT_FULL_WIDTH;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.legend.IsDefaultLegend#isReverse()
 	 */
 	@Override
@@ -67,7 +75,9 @@ public final class DefaultLegend implements IsDefaultLegend{
 		return DEFAULT_REVERSE;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.legend.IsDefaultLegend#getPosition()
 	 */
 	@Override

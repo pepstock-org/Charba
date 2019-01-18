@@ -34,9 +34,9 @@ public interface IsDefaultLegendLabels extends IsDefaultFontItem {
 	boolean isUsePointStyle();
 
 	/**
-	 * Returns the width of coloured box.
+	 * Returns the width of colored box.
 	 * 
-	 * @return width of coloured box.
+	 * @return width of colored box.
 	 */
 	int getBoxWidth();
 

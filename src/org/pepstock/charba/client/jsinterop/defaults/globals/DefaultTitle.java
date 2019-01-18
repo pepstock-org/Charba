@@ -28,14 +28,16 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTitle;
 public final class DefaultTitle extends AbstractDefaultFontItem implements IsDefaultTitle {
 
 	private static final int DEFAULT_PADDING = 10;
-	
+
 	private static final boolean DEFAULT_FULL_WIDTH = true;
 
 	private static final double DEFAULT_LINE_HEIGHT = 1.2D;
-	
+
 	private static final boolean DEFAULT_DISPLAY = false;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.title.IsDefaultTitle#isDisplay()
 	 */
 	@Override
@@ -43,7 +45,9 @@ public final class DefaultTitle extends AbstractDefaultFontItem implements IsDef
 		return DEFAULT_DISPLAY;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.title.IsDefaultTitle#getPosition()
 	 */
 	@Override
@@ -51,7 +55,9 @@ public final class DefaultTitle extends AbstractDefaultFontItem implements IsDef
 		return Position.top;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.title.IsDefaultTitle#getPadding()
 	 */
 	@Override
@@ -59,7 +65,9 @@ public final class DefaultTitle extends AbstractDefaultFontItem implements IsDef
 		return DEFAULT_PADDING;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.title.IsDefaultTitle#isFullWidth()
 	 */
 	@Override
@@ -67,7 +75,9 @@ public final class DefaultTitle extends AbstractDefaultFontItem implements IsDef
 		return DEFAULT_FULL_WIDTH;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.title.IsDefaultTitle#getLineHeight()
 	 */
 	@Override
@@ -75,12 +85,14 @@ public final class DefaultTitle extends AbstractDefaultFontItem implements IsDef
 		return DEFAULT_LINE_HEIGHT;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.AbstractDefaultFontItem#getFontStyle()
 	 */
 	@Override
 	public FontStyle getFontStyle() {
 		return FontStyle.bold;
 	}
-	
+
 }

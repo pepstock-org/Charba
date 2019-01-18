@@ -24,12 +24,12 @@ package org.pepstock.charba.client.jsinterop.defaults.globals;
 public final class DefaultsBuilder {
 
 	// singleton instance
-	private static final DefaultsBuilder INSTANCE  =new DefaultsBuilder();
+	private static final DefaultsBuilder INSTANCE = new DefaultsBuilder();
 	// the defaults options without scales
 	private final DefaultOptions noneScale = new DefaultOptions();
 	// the defaults options with scales
 	private final DefaultScaledOptions multiScales = new DefaultScaledOptions();
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -48,16 +48,16 @@ public final class DefaultsBuilder {
 
 	/**
 	 * Returns the default options without scales.
-	 * 	
+	 * 
 	 * @return the default options without scales.
 	 */
 	public DefaultOptions getOptions() {
 		return noneScale;
 	}
-	
+
 	/**
 	 * Returns the default options with scales.
-	 * 	
+	 * 
 	 * @return the default options with scales.
 	 */
 	public DefaultScaledOptions getScaledOptions() {

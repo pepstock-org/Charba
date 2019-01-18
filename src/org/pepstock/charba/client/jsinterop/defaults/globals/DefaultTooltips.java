@@ -27,7 +27,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-public final class DefaultTooltips implements IsDefaultTooltips{
+public final class DefaultTooltips implements IsDefaultTooltips {
 
 	private static final boolean DEFAULT_ENABLED = true;
 
@@ -68,8 +68,10 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0)";
 
 	private static final int DEFAULT_BORDER_WIDTH = 0;
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#isEnabled()
 	 */
 	@Override
@@ -77,7 +79,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_ENABLED;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getMode()
 	 */
 	@Override
@@ -85,7 +89,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return InteractionMode.nearest;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#isIntersect()
 	 */
 	@Override
@@ -93,7 +99,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_INTERSECT;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getPosition()
 	 */
 	@Override
@@ -101,7 +109,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return TooltipPosition.average;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getBackgroundColorAsString()
 	 */
 	@Override
@@ -109,7 +119,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_BACKGROUND_COLOR;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getTitleFontFamily()
 	 */
 	@Override
@@ -117,7 +129,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DefaultsBuilder.get().getOptions().getDefaultFontFamily();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getTitleFontSize()
 	 */
 	@Override
@@ -125,7 +139,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DefaultsBuilder.get().getOptions().getDefaultFontSize();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getTitleFontStyle()
 	 */
 	@Override
@@ -133,7 +149,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return FontStyle.bold;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getTitleAlign()
 	 */
 	@Override
@@ -141,7 +159,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return TextAlign.left;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getTitleFontColorAsString()
 	 */
 	@Override
@@ -149,7 +169,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_TITLE_FONT_COLOR;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getTitleSpacing()
 	 */
 	@Override
@@ -157,7 +179,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_TITLE_SPACING;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getTitleMarginBottom()
 	 */
 	@Override
@@ -165,7 +189,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_TITLE_MARGIN_BOTTOM;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getBodyFontFamily()
 	 */
 	@Override
@@ -173,7 +199,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DefaultsBuilder.get().getOptions().getDefaultFontFamily();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getBodyFontSize()
 	 */
 	@Override
@@ -181,7 +209,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DefaultsBuilder.get().getOptions().getDefaultFontSize();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getBodyFontStyle()
 	 */
 	@Override
@@ -189,7 +219,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return FontStyle.normal;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getBodyAlign()
 	 */
 	@Override
@@ -197,7 +229,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return TextAlign.left;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getBodyFontColorAsString()
 	 */
 	@Override
@@ -205,7 +239,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_BODY_FONT_COLOR;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getBodySpacing()
 	 */
 	@Override
@@ -213,7 +249,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_BODY_SPACING;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getFooterFontFamily()
 	 */
 	@Override
@@ -221,7 +259,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DefaultsBuilder.get().getOptions().getDefaultFontFamily();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getFooterFontSize()
 	 */
 	@Override
@@ -229,7 +269,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DefaultsBuilder.get().getOptions().getDefaultFontSize();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getFooterFontStyle()
 	 */
 	@Override
@@ -237,7 +279,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return FontStyle.bold;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getFooterAlign()
 	 */
 	@Override
@@ -245,7 +289,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return TextAlign.left;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getFooterFontColorAsString()
 	 */
 	@Override
@@ -253,7 +299,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_FOOTER_FONT_COLOR;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getFooterSpacing()
 	 */
 	@Override
@@ -261,7 +309,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_FOOTER_SPACING;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getFooterMarginTop()
 	 */
 	@Override
@@ -269,7 +319,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_FOOTER_MARGIN_TOP;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getXPadding()
 	 */
 	@Override
@@ -277,7 +329,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_X_PADDING;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getYPadding()
 	 */
 	@Override
@@ -285,7 +339,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_Y_PADDING;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getCaretPadding()
 	 */
 	@Override
@@ -293,7 +349,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_CARET_PADDING;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getCaretSize()
 	 */
 	@Override
@@ -301,7 +359,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_CARET_SIZE;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getCornerRadius()
 	 */
 	@Override
@@ -309,7 +369,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_CORNER_RADIUS;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getMultiKeyBackgroundAsString()
 	 */
 	@Override
@@ -317,7 +379,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_MULTI_KEY_BACKGROUND;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#isDisplayColors()
 	 */
 	@Override
@@ -325,7 +389,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_DISPLAY_COLORS;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getBorderColorAsString()
 	 */
 	@Override
@@ -333,7 +399,9 @@ public final class DefaultTooltips implements IsDefaultTooltips{
 		return DEFAULT_BORDER_COLOR;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.tooltips.IsDefaultTooltips#getBorderWidth()
 	 */
 	@Override

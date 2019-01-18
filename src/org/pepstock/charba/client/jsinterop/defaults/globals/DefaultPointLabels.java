@@ -24,14 +24,16 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPointLabels;
  * @since 2.0
  */
 public final class DefaultPointLabels extends AbstractDefaultFontItem implements IsDefaultPointLabels {
-	
+
 	private static final boolean DEFAULT_DISPLAY = true;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPointLabels#isDisplay()
 	 */
 	@Override
 	public boolean isDisplay() {
 		return DEFAULT_DISPLAY;
-	}	
+	}
 }

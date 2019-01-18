@@ -23,8 +23,8 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-public final class DefaultGridLines implements IsDefaultGridLines{
-	
+public final class DefaultGridLines implements IsDefaultGridLines {
+
 	private static final boolean DEFAULT_DISPLAY = true;
 
 	private static final String DEFAULT_COLOR = "rgba(0,0,0,0.1)";
@@ -48,10 +48,12 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 	private static final int DEFAULT_ZERO_LINE_BORDER_DASH_OFFSET = 0;
 
 	private static final boolean DEFAULT_OFFSET_GRID_LINES = false;
-	
+
 	private static final boolean DEFAULT_CIRCULAR = false;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#isDisplay()
 	 */
 	@Override
@@ -59,7 +61,9 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 		return DEFAULT_DISPLAY;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getColorAsString()
 	 */
 	@Override
@@ -67,7 +71,9 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 		return DEFAULT_COLOR;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getBorderDashOffset()
 	 */
 	@Override
@@ -75,7 +81,9 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 		return DEFAULT_BORDER_DASH_OFFSET;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getLineWidth()
 	 */
 	@Override
@@ -83,7 +91,9 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 		return DEFAULT_LINE_WIDTH;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#isDrawBorder()
 	 */
 	@Override
@@ -91,7 +101,9 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 		return DEFAULT_DRAW_BORDER;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#isDrawOnChartArea()
 	 */
 	@Override
@@ -99,7 +111,9 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 		return DEFAULT_DRAW_ON_CHART_AREA;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#isDrawTicks()
 	 */
 	@Override
@@ -107,7 +121,9 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 		return DEFAULT_DRAW_TICKS;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getTickMarkLength()
 	 */
 	@Override
@@ -115,7 +131,9 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 		return DEFAULT_TICK_MARK_LENGTH;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getZeroLineWidth()
 	 */
 	@Override
@@ -123,7 +141,9 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 		return DEFAULT_ZERO_LINE_WIDTH;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getZeroLineColorAsString()
 	 */
 	@Override
@@ -131,7 +151,9 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 		return DEFAULT_ZERO_LINE_COLOR;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#getZeroLineBorderDashOffset()
 	 */
 	@Override
@@ -139,7 +161,9 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 		return DEFAULT_ZERO_LINE_BORDER_DASH_OFFSET;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#isOffsetGridLines()
 	 */
 	@Override
@@ -147,12 +171,14 @@ public final class DefaultGridLines implements IsDefaultGridLines{
 		return DEFAULT_OFFSET_GRID_LINES;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultGridLines#isCircular()
 	 */
 	@Override
 	public boolean isCircular() {
 		return DEFAULT_CIRCULAR;
 	}
-	
+
 }

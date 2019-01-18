@@ -24,7 +24,7 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-public final class DefaultAnimation implements IsDefaultAnimation{
+public final class DefaultAnimation implements IsDefaultAnimation {
 
 	private static final int DEFAULT_DURATION = 1000;
 
@@ -32,7 +32,9 @@ public final class DefaultAnimation implements IsDefaultAnimation{
 
 	private static final boolean DEFAULT_ANIMATE_SCALE = false;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.animation.IsDefaultAnimation#getEasing()
 	 */
 	@Override
@@ -40,7 +42,9 @@ public final class DefaultAnimation implements IsDefaultAnimation{
 		return Easing.easeOutQuart;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.animation.IsDefaultAnimation#getDuration()
 	 */
 	@Override
@@ -48,7 +52,9 @@ public final class DefaultAnimation implements IsDefaultAnimation{
 		return DEFAULT_DURATION;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.animation.IsDefaultAnimation#isAnimateRotate()
 	 */
 	@Override
@@ -56,7 +62,9 @@ public final class DefaultAnimation implements IsDefaultAnimation{
 		return DEFAULT_ANIMATE_ROTATE;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.animation.IsDefaultAnimation#isAnimateScale()
 	 */
 	@Override

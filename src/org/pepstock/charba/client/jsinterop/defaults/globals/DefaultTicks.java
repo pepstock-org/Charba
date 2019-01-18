@@ -26,13 +26,13 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks;
  * @since 2.0
  */
 public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTicks {
-	
+
 	private static final boolean DEFAULT_DISPLAY = true;
-	
+
 	private static final boolean DEFAULT_BEGIN_AT_ZERO = false;
 
 	private static final boolean DEFAULT_REVERSE = false;
-	
+
 	private static final boolean DEFAULT_AUTO_SKIP = true;
 
 	private static final int DEFAULT_AUTO_SKIP_PADDING = 0;
@@ -46,7 +46,7 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 	private static final boolean DEFAULT_MIRROR = false;
 
 	private static final int DEFAULT_PADDING = 0;
-	
+
 	private static final double DEFAULT_MIN = Double.MIN_VALUE;
 
 	private static final double DEFAULT_MAX = Double.MAX_VALUE;
@@ -58,7 +58,7 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 	private static final double DEFAULT_SUGGESTED_MAX = Double.MAX_VALUE;
 
 	private static final double DEFAULT_SUGGESTED_MIN = Double.MIN_VALUE;
-	
+
 	private static final String DEFAULT_BACKDROP_COLOR = "rgba(255,255,255,0.75)";
 
 	private static final int DEFAULT_BACKDROP_PADDING_X = 2;
@@ -66,14 +66,16 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 	private static final int DEFAULT_BACKDROP_PADDING_Y = 2;
 
 	private static final boolean DEFAULT_SHOW_LABEL_BACKDROP = true;
-	
+
 	private static final int DEFAULT_PRECISION = 0;
-	
+
 	private final DefaultTickItem minor = new DefaultTickItem();
-	
+
 	private final DefaultTickItem major = new DefaultTickItem();
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getMinor()
 	 */
 	@Override
@@ -81,7 +83,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return minor;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getMajor()
 	 */
 	@Override
@@ -89,7 +93,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return major;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#isBeginAtZero()
 	 */
 	@Override
@@ -97,7 +103,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_BEGIN_AT_ZERO;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#isDisplay()
 	 */
 	@Override
@@ -105,7 +113,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_DISPLAY;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#isReverse()
 	 */
 	@Override
@@ -113,7 +123,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_REVERSE;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#isAutoSkip()
 	 */
 	@Override
@@ -121,7 +133,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_AUTO_SKIP;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getAutoSkipPadding()
 	 */
 	@Override
@@ -129,7 +143,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_AUTO_SKIP_PADDING;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getLabelOffset()
 	 */
 	@Override
@@ -137,7 +153,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_LABEL_OFFSET;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getMaxRotation()
 	 */
 	@Override
@@ -145,7 +163,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_MAX_ROTATION;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getMinRotation()
 	 */
 	@Override
@@ -153,7 +173,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_MIN_ROTATION;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#isMirror()
 	 */
 	@Override
@@ -161,7 +183,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_MIRROR;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getPadding()
 	 */
 	@Override
@@ -169,7 +193,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_PADDING;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getMin()
 	 */
 	@Override
@@ -177,7 +203,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_MIN;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getMax()
 	 */
 	@Override
@@ -185,7 +213,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_MAX;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getMaxTicksLimit()
 	 */
 	@Override
@@ -193,7 +223,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_MAX_TICKS_LIMIT;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getStepSize()
 	 */
 	@Override
@@ -201,7 +233,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_STEP_SIZE;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getSuggestedMax()
 	 */
 	@Override
@@ -209,7 +243,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_SUGGESTED_MAX;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getSuggestedMin()
 	 */
 	@Override
@@ -217,7 +253,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_SUGGESTED_MIN;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getBackdropColorAsString()
 	 */
 	@Override
@@ -225,7 +263,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_BACKDROP_COLOR;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getBackdropPaddingX()
 	 */
 	@Override
@@ -233,7 +273,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_BACKDROP_PADDING_X;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getBackdropPaddingY()
 	 */
 	@Override
@@ -241,7 +283,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_BACKDROP_PADDING_Y;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#isShowLabelBackdrop()
 	 */
 	@Override
@@ -249,7 +293,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return DEFAULT_SHOW_LABEL_BACKDROP;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getSource()
 	 */
 	@Override
@@ -257,12 +303,14 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 		return TickSource.auto;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getPrecision()
 	 */
 	@Override
 	public int getPrecision() {
 		return DEFAULT_PRECISION;
 	}
-	
+
 }

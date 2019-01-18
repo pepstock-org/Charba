@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.jsinterop.defaults.globals;
 
-import org.pepstock.charba.client.jsinterop.enums.FontStyle;
 import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
+import org.pepstock.charba.client.jsinterop.enums.FontStyle;
 
 /**
  * CHART.JS default values for font items.
@@ -24,9 +24,11 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-abstract class AbstractDefaultFontItem implements IsDefaultFontItem{
+abstract class AbstractDefaultFontItem implements IsDefaultFontItem {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultFontItem#getFontColor()
 	 */
 	@Override
@@ -34,7 +36,9 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem{
 		return DefaultsBuilder.get().getOptions().getDefaultFontColorAsString();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultFontItem#getFontSize()
 	 */
 	@Override
@@ -42,7 +46,9 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem{
 		return DefaultsBuilder.get().getOptions().getDefaultFontSize();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultFontItem#getFontStyle()
 	 */
 	@Override
@@ -50,7 +56,9 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem{
 		return DefaultsBuilder.get().getOptions().getDefaultFontStyle();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultFontItem#getFontFamily()
 	 */
 	@Override

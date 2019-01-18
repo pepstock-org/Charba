@@ -21,5 +21,5 @@ package org.pepstock.charba.client.jsinterop.defaults.globals;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-public final class DefaultTickItem extends AbstractDefaultFontItem  {
+public final class DefaultTickItem extends AbstractDefaultFontItem {
 }

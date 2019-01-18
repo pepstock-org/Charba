@@ -24,11 +24,13 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-public final class DefaultScales implements IsDefaultScales{
-	
+public final class DefaultScales implements IsDefaultScales {
+
 	private final DefaultScale scale = new DefaultScale();
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales#isDisplay()
 	 */
 	@Override
@@ -36,7 +38,9 @@ public final class DefaultScales implements IsDefaultScales{
 		return scale.isDisplay();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales#getXAxis()
 	 */
 	@Override
@@ -44,12 +48,14 @@ public final class DefaultScales implements IsDefaultScales{
 		return scale;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales#getYAxis()
 	 */
 	@Override
 	public IsDefaultScale getYAxis() {
 		return scale;
 	}
-	
+
 }

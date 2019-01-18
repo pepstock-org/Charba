@@ -24,15 +24,17 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultRectangle;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-public final class DefaultRectangle extends DefaultArc implements IsDefaultRectangle{
-	
+public final class DefaultRectangle extends DefaultArc implements IsDefaultRectangle {
+
 	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
 
 	private static final int DEFAULT_BORDER_WIDTH = 0;
-	
+
 	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0.1)";
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBackgroundColorAsString()
 	 */
 	@Override
@@ -40,7 +42,9 @@ public final class DefaultRectangle extends DefaultArc implements IsDefaultRecta
 		return DEFAULT_BACKGROUND_COLOR;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBorderWidth()
 	 */
 	@Override
@@ -48,7 +52,9 @@ public final class DefaultRectangle extends DefaultArc implements IsDefaultRecta
 		return DEFAULT_BORDER_WIDTH;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBorderColorAsString()
 	 */
 	@Override
@@ -56,7 +62,9 @@ public final class DefaultRectangle extends DefaultArc implements IsDefaultRecta
 		return DEFAULT_BORDER_COLOR;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.elements.rectangle.IsDefaultRectangle#getBorderSkipped()
 	 */
 	@Override

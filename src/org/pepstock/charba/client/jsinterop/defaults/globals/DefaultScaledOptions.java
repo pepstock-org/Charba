@@ -48,7 +48,9 @@ public final class DefaultScaledOptions extends DefaultOptions implements IsDefa
 		return scale;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaledOptions#getScales()
 	 */
 	@Override

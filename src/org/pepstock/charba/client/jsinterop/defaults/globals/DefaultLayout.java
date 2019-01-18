@@ -24,11 +24,13 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-public final class DefaultLayout implements IsDefaultLayout{
-	
+public final class DefaultLayout implements IsDefaultLayout {
+
 	private final DefaultPadding padding = new DefaultPadding();
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultOptions#getPadding()
 	 */
 	@Override

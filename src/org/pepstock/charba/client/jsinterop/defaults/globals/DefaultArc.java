@@ -23,29 +23,37 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-public class DefaultArc implements IsDefaultArc{
+public class DefaultArc implements IsDefaultArc {
 
 	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
 
 	private static final int DEFAULT_BORDER_WIDTH = 2;
-	
+
 	private static final String DEFAULT_BORDER_COLOR = "#fff";
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.elements.arc.IsReadableArc#getBackgroundColorAsString()
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
 		return DEFAULT_BACKGROUND_COLOR;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.elements.arc.IsReadableArc#getBorderWidth()
 	 */
 	@Override
 	public int getBorderWidth() {
 		return DEFAULT_BORDER_WIDTH;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.elements.arc.IsReadableArc#getBorderColorAsString()
 	 */
 	@Override

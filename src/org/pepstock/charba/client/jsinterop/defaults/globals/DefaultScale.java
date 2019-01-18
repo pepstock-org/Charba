@@ -33,14 +33,14 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-public final class DefaultScale implements IsDefaultScale{
-	
+public final class DefaultScale implements IsDefaultScale {
+
 	private static final boolean DEFAULT_DISPLAY = true;
 
 	private static final boolean DEFAULT_OFFSET = false;
 
 	private static final int DEFAULT_WEIGHT = 0;
-	
+
 	private static final double DEFAULT_BAR_PERCENTAGE = 0.9F;
 
 	private static final double DEFAULT_CATEGORY_PERCENTAGE = 0.8F;
@@ -50,20 +50,22 @@ public final class DefaultScale implements IsDefaultScale{
 	private static final int DEFAULT_MAX_BAR_THICKNESS = 0;
 
 	private static final boolean DEFAULT_STACKED = false;
-	
+
 	private final DefaultAngleLines angleLines = new DefaultAngleLines();
-	
+
 	private final DefaultGridLines gridLines = new DefaultGridLines();
-	
+
 	private final DefaultPointLabels pointLabels = new DefaultPointLabels();
-	
+
 	private final DefaultScaleLabel scaleLabel = new DefaultScaleLabel();
-	
+
 	private final DefaultTicks ticks = new DefaultTicks();
-	
+
 	private final DefaultTime time = new DefaultTime();
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getAngleLines()
 	 */
 	@Override
@@ -71,7 +73,9 @@ public final class DefaultScale implements IsDefaultScale{
 		return angleLines;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getGrideLines()
 	 */
 	@Override
@@ -79,7 +83,9 @@ public final class DefaultScale implements IsDefaultScale{
 		return gridLines;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getPointLabels()
 	 */
 	@Override
@@ -87,16 +93,19 @@ public final class DefaultScale implements IsDefaultScale{
 		return pointLabels;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getScaleLabel()
 	 */
 	@Override
 	public IsDefaultScaleLabel getScaleLabel() {
 		return scaleLabel;
 	}
-	
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getTicks()
 	 */
 	@Override
@@ -104,7 +113,9 @@ public final class DefaultScale implements IsDefaultScale{
 		return ticks;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getTime()
 	 */
 	@Override
@@ -112,7 +123,9 @@ public final class DefaultScale implements IsDefaultScale{
 		return time;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#isStacked()
 	 */
 	@Override
@@ -120,7 +133,9 @@ public final class DefaultScale implements IsDefaultScale{
 		return DEFAULT_STACKED;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getType()
 	 */
 	@Override
@@ -128,7 +143,9 @@ public final class DefaultScale implements IsDefaultScale{
 		return AxisType.linear;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getWeight()
 	 */
 	@Override
@@ -136,7 +153,9 @@ public final class DefaultScale implements IsDefaultScale{
 		return DEFAULT_WEIGHT;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#isDisplay()
 	 */
 	@Override
@@ -144,7 +163,9 @@ public final class DefaultScale implements IsDefaultScale{
 		return DEFAULT_DISPLAY;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#isOffset()
 	 */
 	@Override
@@ -152,7 +173,9 @@ public final class DefaultScale implements IsDefaultScale{
 		return DEFAULT_OFFSET;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getPosition()
 	 */
 	@Override
@@ -160,7 +183,9 @@ public final class DefaultScale implements IsDefaultScale{
 		return Position.top;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getBarPercentage()
 	 */
 	@Override
@@ -168,7 +193,9 @@ public final class DefaultScale implements IsDefaultScale{
 		return DEFAULT_BAR_PERCENTAGE;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getCategoryPercentage()
 	 */
 	@Override
@@ -176,7 +203,9 @@ public final class DefaultScale implements IsDefaultScale{
 		return DEFAULT_CATEGORY_PERCENTAGE;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getBarThickness()
 	 */
 	@Override
@@ -184,7 +213,9 @@ public final class DefaultScale implements IsDefaultScale{
 		return DEFAULT_BAR_THICKNESS;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getMaxBarThickness()
 	 */
 	@Override
@@ -192,7 +223,9 @@ public final class DefaultScale implements IsDefaultScale{
 		return DEFAULT_MAX_BAR_THICKNESS;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getDistribution()
 	 */
 	@Override
@@ -200,12 +233,14 @@ public final class DefaultScale implements IsDefaultScale{
 		return ScaleDistribution.linear;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScale#getBounds()
 	 */
 	@Override
 	public ScaleBounds getBounds() {
 		return ScaleBounds.data;
 	}
-	
+
 }

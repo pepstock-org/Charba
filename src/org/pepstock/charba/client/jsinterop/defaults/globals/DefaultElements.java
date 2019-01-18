@@ -27,17 +27,19 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultRectangle;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-public final class DefaultElements implements IsDefaultElements{
-	
+public final class DefaultElements implements IsDefaultElements {
+
 	private final DefaultArc arc = new DefaultArc();
-	
+
 	private final DefaultLine line = new DefaultLine();
-	
+
 	private final DefaultPoint point = new DefaultPoint();
 
 	private final DefaultRectangle rectangle = new DefaultRectangle();
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultOptions#getArc()
 	 */
 	@Override
@@ -45,7 +47,9 @@ public final class DefaultElements implements IsDefaultElements{
 		return arc;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultOptions#getLine()
 	 */
 	@Override
@@ -53,7 +57,9 @@ public final class DefaultElements implements IsDefaultElements{
 		return line;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultOptions#getPoint()
 	 */
 	@Override
@@ -61,7 +67,9 @@ public final class DefaultElements implements IsDefaultElements{
 		return point;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultOptions#getRectangle()
 	 */
 	@Override

@@ -24,12 +24,14 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines;
  * @since 2.0
  */
 public final class DefaultAngleLines implements IsDefaultAngleLines {
-	
+
 	private static final boolean DEFAULT_DISPLAY = true;
 
 	private static final int DEFAULT_LINE_WIDTH = 1;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines#isDisplay()
 	 */
 	@Override
@@ -37,7 +39,9 @@ public final class DefaultAngleLines implements IsDefaultAngleLines {
 		return DEFAULT_DISPLAY;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines#getColorAsString()
 	 */
 	@Override
@@ -45,7 +49,9 @@ public final class DefaultAngleLines implements IsDefaultAngleLines {
 		return DefaultsBuilder.get().getOptions().getDefaultColorAsString();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAngleLines#getLineWidth()
 	 */
 	@Override

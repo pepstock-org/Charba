@@ -25,13 +25,15 @@ import org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover;
  * @author Andrea "Stock" Stocchero
  * @since 2.0
  */
-public final class DefaultHover implements IsDefaultHover{
+public final class DefaultHover implements IsDefaultHover {
 
 	private static final boolean DEFAULT_INTERSECT = true;
 
 	private static final int DEFAULT_ANIMATION_DURATION = 400;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.hover.IsDefaultHover#getMode()
 	 */
 	@Override
@@ -39,7 +41,9 @@ public final class DefaultHover implements IsDefaultHover{
 		return InteractionMode.nearest;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.hover.IsDefaultHover#isIntersect()
 	 */
 	@Override
@@ -47,7 +51,9 @@ public final class DefaultHover implements IsDefaultHover{
 		return DEFAULT_INTERSECT;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.hover.IsDefaultHover#getAnimationDuration()
 	 */
 	@Override
@@ -55,7 +61,9 @@ public final class DefaultHover implements IsDefaultHover{
 		return DEFAULT_ANIMATION_DURATION;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.options.hover.IsDefaultHover#getAxis()
 	 */
 	@Override
