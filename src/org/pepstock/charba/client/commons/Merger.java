@@ -22,11 +22,10 @@ import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.options.Scale;
 
 /**
- * Singleton utility to merge java script object into another one and provide teh service to get the chart options with all
+ * Singleton utility to merge java script object into another one and provide the service to get the chart options with all
  * defaults.
  * 
  * @author Andrea "Stock" Stocchero

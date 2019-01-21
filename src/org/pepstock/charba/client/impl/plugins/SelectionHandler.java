@@ -479,7 +479,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	}
 
 	/**
-	 * Checks if the coordinate of event is inside teh chart area.
+	 * Checks if the coordinate of event is inside the chart area.
 	 * 
 	 * @param event event to be checked.
 	 * @return <code>true</code> if inside the area, otherwise <code>false</code>.

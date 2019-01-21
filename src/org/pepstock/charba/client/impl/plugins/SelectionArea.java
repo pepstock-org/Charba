@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.impl.plugins;
 
 /**
- * Which maintains coordinates of the are to be draw on teh canvas as selection area.
+ * Which maintains coordinates of the are to be draw on the canvas as selection area.
  * 
  * @author Andrea "Stock" Stocchero
  */

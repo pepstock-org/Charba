@@ -60,14 +60,15 @@ To install in your GWT project, you must the following configuration into your G
 ...
 ```
 
-**Charba** version 1.x is based on [JSNI](http://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJSNI.html) method to integrate javascript objects. 
-**Charba** version 2.x contains the package to use [JSINTEROP](http://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJsInterop.html), package `org.pepstock.charba.jsinterop`.
+**Charba** version 1.x is based on [JSNI](http://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJSNI.html) method to integrate java script objects. 
+
+**Charba** version 2.x is based on [JSINTEROP](http://www.gwtproject.org/doc/latest/DevGuideCodingBasicsJsInterop.html) method to integrate java script objects.
 
 JSNI will be removed with GWT 3.
 
 JsInterop is one of the core features of GWT 2.8. 
 
-As the name suggests, JsInterop is a way of interoperating Java with JavaScript. It offers a better way of communication between the two using annotations instead of having to write JavaScript in your classes (using JSNI).
+As the name suggests, JsInterop is a way of interoperating Java with JavaScript. It offers a better way of communication between the two using annotations instead of having to write java script in your classes (using JSNI).
 
 **Pay attention** that GWT compiler (you are using for your project) requires `-generateJsInteropExport` to be passed.
 

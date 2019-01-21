@@ -40,7 +40,7 @@ public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 	 */
 	@Override
 	public void onClick(LegendClickEvent event) {
-		// getx teh chart instance form event
+		// get the chart instance form event
 		AbstractChart<?, ?> chart = event.getChart();
 		// gets the dataset by the legend item and its relation with dataset
 		DatasetMetaItem metadata = chart.getDatasetMeta(event.getItem().getDatasetIndex());
