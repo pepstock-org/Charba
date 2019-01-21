@@ -32,7 +32,6 @@ import org.pepstock.charba.client.enums.PointStyle;
  * The third dimension is represented by the size of the individual bubbles.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class BubbleDataset extends HovingDataset {
 	// exception message when it's not using data points

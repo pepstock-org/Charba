@@ -30,7 +30,6 @@ import org.pepstock.charba.client.options.Scale;
  * defaults.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public final class Merger {

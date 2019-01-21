@@ -21,7 +21,6 @@ import org.pepstock.charba.client.commons.Key;
  * Can be set to 'x', 'y' to define which directions are used in axis.<br>
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public enum CartesianAxisType implements Key
 {

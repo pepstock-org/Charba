@@ -28,7 +28,6 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * It must be used into label tooltip callback.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class TooltipLabelColor extends NativeObjectContainer {
 
@@ -142,8 +141,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * Inner class to create tooltip label color by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	static final class TooltipLabelColorFactory implements NativeObjectContainerFactory<TooltipLabelColor> {
 
 		/*

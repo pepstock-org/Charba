@@ -25,7 +25,6 @@ import org.pepstock.charba.client.enums.AxisType;
  * As the name suggests, linear interpolation is used to determine where a value lies in relation the center of the axis.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public class RadialAxis extends Axis {

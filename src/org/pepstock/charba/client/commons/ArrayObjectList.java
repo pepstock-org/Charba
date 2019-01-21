@@ -27,8 +27,7 @@ import java.util.List;
  * This implementation uses a java script array as back-end to store objects (native JavaScript objects).
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
- * @see org.pepstock.charba.client.commons.ArrayObject
+ *
  */
 public final class ArrayObjectList extends AbstractArrayList<NativeObject, ArrayObject> {
 

@@ -38,7 +38,6 @@ import jsinterop.annotations.JsFunction;
  * Configuration element to set all attributes and features of the tooltip.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
@@ -53,8 +52,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyCustomCallback {
 
@@ -73,8 +71,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyFilterCallback {
 
@@ -93,8 +90,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyItemSortCallback {
 

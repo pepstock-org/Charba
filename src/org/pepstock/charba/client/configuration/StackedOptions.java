@@ -23,7 +23,6 @@ import org.pepstock.charba.client.ChartOptions;
  * It uses Category axis for X axis and Linear for Y axis.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public class StackedOptions extends ConfigurationOptions {

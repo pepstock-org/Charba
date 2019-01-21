@@ -22,7 +22,6 @@ import org.pepstock.charba.client.enums.Easing;
  * CHART.JS default values for ANIMATION element.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultAnimation implements IsDefaultAnimation {
 

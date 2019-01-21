@@ -26,7 +26,6 @@ import org.pepstock.charba.client.items.TooltipPluginItem;
  * Plugins are the most efficient way to customize or change the default behavior of a chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface Plugin {
 

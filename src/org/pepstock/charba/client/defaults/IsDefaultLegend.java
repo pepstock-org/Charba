@@ -21,7 +21,6 @@ import org.pepstock.charba.client.enums.Position;
  * Interface to define legends object defaults.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface IsDefaultLegend {
 

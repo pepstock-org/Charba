@@ -22,7 +22,6 @@ import org.pepstock.charba.client.ChartOptions;
  * Specific options for GAUGE chart. This chart doesn't allow any legend, hover, layout and tooltips components.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public final class GaugeOptions extends MeterOptions {

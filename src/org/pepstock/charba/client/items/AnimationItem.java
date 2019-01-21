@@ -25,7 +25,6 @@ import org.pepstock.charba.client.enums.Easing;
  * This is a wrapper of the CHART.JS item with all needed info.<br>
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class AnimationItem extends NativeObjectContainer {
 	

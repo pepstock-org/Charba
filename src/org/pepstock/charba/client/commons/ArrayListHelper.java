@@ -25,7 +25,6 @@ import org.pepstock.charba.client.commons.Key;
  * Utility to create array list objects from java script arrays.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class ArrayListHelper {
 

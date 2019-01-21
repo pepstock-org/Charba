@@ -23,7 +23,6 @@ import org.pepstock.charba.client.enums.TimeUnit;
  * The following display formats are used to configure how different time units are formed into strings for the axis tick marks.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DisplayFormats extends AbstractModel<Time, Void> {
 

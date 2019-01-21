@@ -21,7 +21,6 @@ import org.pepstock.charba.client.commons.Key;
  * These are the different modes for positioning the tooltip.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public enum TooltipPosition implements Key
 {

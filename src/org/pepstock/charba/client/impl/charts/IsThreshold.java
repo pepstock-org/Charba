@@ -21,7 +21,6 @@ import org.pepstock.charba.client.colors.IsColor;
  * Interface to map a threshold. Needed for standard ones.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface IsThreshold {
 

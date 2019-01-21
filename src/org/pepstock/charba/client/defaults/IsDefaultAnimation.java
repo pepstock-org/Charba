@@ -21,7 +21,6 @@ import org.pepstock.charba.client.enums.Easing;
  * Interface to define animation object defaults.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface IsDefaultAnimation {
 

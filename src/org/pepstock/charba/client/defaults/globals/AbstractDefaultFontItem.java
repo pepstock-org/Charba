@@ -22,7 +22,6 @@ import org.pepstock.charba.client.enums.FontStyle;
  * CHART.JS default values for font items.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 abstract class AbstractDefaultFontItem implements IsDefaultFontItem {
 

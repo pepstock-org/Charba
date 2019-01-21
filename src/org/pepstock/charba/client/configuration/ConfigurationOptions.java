@@ -67,7 +67,6 @@ import jsinterop.annotations.JsFunction;
  * generated, you can set the legendCallback.<br>
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions> implements ConfigurationElement {
@@ -81,8 +80,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyChartClickCallback {
 
@@ -101,8 +99,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyChartHoverCallback {
 
@@ -121,8 +118,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyChartResizeCallback {
 
@@ -141,8 +137,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyGenerateLegendCallback {
 

@@ -23,7 +23,6 @@ import org.pepstock.charba.client.options.ScaledOptions;
  *  Wrapper of options node of CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class OptionsNode extends ScaledOptions {
 

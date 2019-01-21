@@ -20,7 +20,6 @@ package org.pepstock.charba.client.data;
  * specific dataset.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class PieDataset extends HovingDataset {
 

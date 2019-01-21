@@ -22,7 +22,6 @@ import org.pepstock.charba.client.ChartOptions;
  * Abstract options for PIE chart. It contains all properties for this kind of chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public abstract class AbstractPieOptions extends ConfigurationOptions {
 

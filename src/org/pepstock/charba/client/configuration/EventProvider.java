@@ -30,8 +30,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * will manage chart events to events handlers.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
- * 
+ *
  * @param <T> options element to store chart configuration
  */
 public abstract class EventProvider<T extends NativeObjectContainer> extends ConfigurationContainer<T> implements AddHandlerEventHandler, RemoveHandlerEventHandler {

@@ -30,7 +30,6 @@ import org.pepstock.charba.client.utils.Window;
  * CHART.JS default values for OPTIONS element. THIS IS THE ROOT OF ALL ELEMENTS DEFAULTS.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class DefaultOptions implements IsDefaultOptions {
 

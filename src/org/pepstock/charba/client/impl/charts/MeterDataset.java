@@ -33,7 +33,6 @@ import org.pepstock.charba.client.data.DoughnutDataset;
  * 
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class MeterDataset extends DoughnutDataset {
 

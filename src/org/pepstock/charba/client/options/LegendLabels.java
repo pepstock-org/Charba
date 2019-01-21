@@ -23,7 +23,6 @@ import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
  * This is the labels configuration of the legend.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> implements IsDefaultLegendLabels {
 

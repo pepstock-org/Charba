@@ -28,7 +28,6 @@ import jsinterop.annotations.JsType;
  * This is the CHART.JS item with all needed info.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
 public final class AnimationObject {

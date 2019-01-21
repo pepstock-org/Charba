@@ -29,7 +29,6 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * This is a wrapper of scale node of Chart (of CHART.JS).
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class ScalesNode extends NativeObjectContainer {
 

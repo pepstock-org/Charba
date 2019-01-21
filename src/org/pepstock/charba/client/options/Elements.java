@@ -24,7 +24,6 @@ import org.pepstock.charba.client.defaults.IsDefaultElements;
  * apply to the configuration attached to a dataset.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public final class Elements extends AbstractModel<Options, IsDefaultElements> implements IsDefaultElements {

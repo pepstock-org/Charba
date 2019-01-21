@@ -22,7 +22,6 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * Factory to create a data point from a native object, used for array container lists.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 final class DataPointListFactory implements NativeObjectContainerFactory<DataPoint> {
 

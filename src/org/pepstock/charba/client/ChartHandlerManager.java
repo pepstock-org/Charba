@@ -28,7 +28,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * Manager responsible for adding handlers to event sources and firing those handlers on passed in events.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 final class ChartHandlerManager extends HandlerManager {

@@ -31,7 +31,6 @@ import org.pepstock.charba.client.options.Scales;
  * the second value to the second bar, and so on.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class BarDataset extends HovingFlexDataset {
 

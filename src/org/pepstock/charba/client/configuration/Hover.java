@@ -23,7 +23,6 @@ import org.pepstock.charba.client.options.ExtendedOptions;
  * Definitions about how elements appear in the tooltip, hovering the chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public class Hover {

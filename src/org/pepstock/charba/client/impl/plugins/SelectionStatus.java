@@ -19,7 +19,6 @@ package org.pepstock.charba.client.impl.plugins;
  * Enumerates the status of a selection.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 enum SelectionStatus
 {

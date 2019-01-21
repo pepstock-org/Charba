@@ -24,7 +24,6 @@ import org.pepstock.charba.client.enums.Position;
  * Rectangle elements are used to represent the bars in a bar chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class Rectangle extends AbstractElement<IsDefaultRectangle> implements IsDefaultRectangle {
 

@@ -22,7 +22,6 @@ import org.pepstock.charba.client.defaults.IsDefaultScales;
  * CHART.JS default values for scale/axis element.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultScales implements IsDefaultScales {
 

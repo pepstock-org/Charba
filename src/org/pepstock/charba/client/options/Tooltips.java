@@ -29,7 +29,6 @@ import org.pepstock.charba.client.enums.TooltipPosition;
  * Configuration element to set all attributes and features of the default tooltip.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> implements IsDefaultTooltips {

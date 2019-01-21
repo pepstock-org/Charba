@@ -29,7 +29,6 @@ import com.google.gwt.dom.client.Style.Cursor;
  * It manages the cursor to adopt when the cursor is over the dataset item and when not.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class ChartPointerOptions extends NativeObjectContainer {
 

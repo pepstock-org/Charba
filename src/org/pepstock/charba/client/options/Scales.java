@@ -29,7 +29,6 @@ import org.pepstock.charba.client.defaults.IsDefaultScales;
  * The configuration element which contains all axes definitions.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public class Scales extends AbstractModel<Options, IsDefaultScales> implements IsDefaultScales {
@@ -170,8 +169,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	 * Inner class to create scale item by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 *
+	 * @	 *
 	 */
 	private final class ScaleListFactory implements NativeObjectContainerFactory<Scale> {
 

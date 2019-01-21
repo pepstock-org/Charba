@@ -27,7 +27,6 @@ import org.pepstock.charba.client.options.ExtendedOptions;
  * dataset.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 abstract class AbstractConfigurationElement {
 

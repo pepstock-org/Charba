@@ -32,7 +32,6 @@ import org.pepstock.charba.client.options.Scale;
  * Defaults for scale/axis option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultChartScale implements IsDefaultScale {
 

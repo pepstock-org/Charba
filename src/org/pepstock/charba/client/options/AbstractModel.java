@@ -26,8 +26,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * Provides also a set of methods to manages callbacks and events.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
- * 
+ *
  * @param <P> parent node class
  * @param <D> defaults provider class
  */

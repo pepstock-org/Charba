@@ -32,7 +32,6 @@ import org.pepstock.charba.client.enums.FontStyle;
  * Base object which maps chart options.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions {
 	

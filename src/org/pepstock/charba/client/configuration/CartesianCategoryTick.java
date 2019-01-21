@@ -22,7 +22,6 @@ import java.util.List;
  * The labels are drawn from one of the label arrays included in the chart data.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class CartesianCategoryTick extends CartesianTick {
 

@@ -23,7 +23,6 @@ import org.pepstock.charba.client.defaults.IsDefaultLayout;
  * The layout configuration is needed to set the padding.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public final class Layout extends AbstractModel<Options, IsDefaultLayout> implements IsDefaultLayout {

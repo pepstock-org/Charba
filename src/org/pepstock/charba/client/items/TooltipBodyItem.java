@@ -28,7 +28,6 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * This object is passed by CHART.JS to the callback to manage tooltip body.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class TooltipBodyItem extends NativeObjectContainer {
 
@@ -91,8 +90,7 @@ public final class TooltipBodyItem extends NativeObjectContainer {
 	 * Inner class to create tooltip body item by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	static final class TooltipBodyItemFactory implements NativeObjectContainerFactory<TooltipBodyItem> {
 
 		/*

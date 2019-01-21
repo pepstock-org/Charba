@@ -20,7 +20,6 @@ package org.pepstock.charba.client.impl.plugins;
  * This values will be passed to the user by an event.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 final class SelectionDatasetItems {
 

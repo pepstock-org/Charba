@@ -23,7 +23,6 @@ import org.pepstock.charba.client.commons.Key;
  * butt.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public enum CapStyle implements Key
 {

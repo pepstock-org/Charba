@@ -25,7 +25,6 @@ import org.pepstock.charba.client.items.ScaleItem;
  * about the dataset, chart and scales to use.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public final class StyleElement extends DatasetItem {
@@ -95,8 +94,7 @@ public final class StyleElement extends DatasetItem {
 	 * Internal class to extend scale items.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	static class InternalScaleItem extends ScaleItem {
 
 		/**

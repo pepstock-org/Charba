@@ -27,7 +27,6 @@ import org.pepstock.charba.client.enums.Position;
  * Implements all <code>set</code> methods to change java script object properties.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class AxisItem extends ScaleItem {
 	

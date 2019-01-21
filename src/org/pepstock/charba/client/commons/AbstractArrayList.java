@@ -26,8 +26,7 @@ import org.pepstock.charba.client.utils.JSON;
  * Abstract list implementation which is wrapping an array (java script native object), providing common methods.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
- * 
+ *
  * @param <E> type of java elements provided by the list
  * @param <A> type of array which is wrapped
  */

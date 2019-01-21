@@ -26,7 +26,6 @@ import org.pepstock.charba.client.defaults.IsDefaultAngleLines;
  * Note that these options only apply if display is <code>true</code>.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> implements IsDefaultAngleLines {
 

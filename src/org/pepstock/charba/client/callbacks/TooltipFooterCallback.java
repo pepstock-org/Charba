@@ -28,7 +28,6 @@ import org.pepstock.charba.client.items.TooltipItem;
  * This interface takes care about labels to apply to the footer.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface TooltipFooterCallback {
 

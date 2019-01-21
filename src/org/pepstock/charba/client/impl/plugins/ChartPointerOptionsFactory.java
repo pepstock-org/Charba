@@ -24,7 +24,6 @@ import org.pepstock.charba.client.plugins.InvalidPluginIdException;
  * Factory to get the options (form chart or from default global ones) related to pointer plugin.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class ChartPointerOptionsFactory implements NativeObjectContainerFactory<ChartPointerOptions> {
 
@@ -65,8 +64,7 @@ public final class ChartPointerOptionsFactory implements NativeObjectContainerFa
 	 * Internal factory to create options from default global option for the plugin
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	static class ChartPointerDefaultsOptionsFactory implements NativeObjectContainerFactory<ChartPointerDefaultsOptions> {
 
 		/*

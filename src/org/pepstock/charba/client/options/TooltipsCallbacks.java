@@ -25,7 +25,6 @@ import org.pepstock.charba.client.defaults.IsDefaultTooltips;
  * configuration.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public final class TooltipsCallbacks extends AbstractModel<Tooltips, IsDefaultTooltips> {

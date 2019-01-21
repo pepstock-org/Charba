@@ -34,7 +34,6 @@ import org.pepstock.charba.client.enums.FontStyle;
  * Defaults for options element, based on chart type. THIS IS THE ROOT OF ALL ELEMENTS DEFAULTS.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultChartOptions implements IsDefaultScaledOptions {
 

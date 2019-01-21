@@ -24,7 +24,6 @@ import org.pepstock.charba.client.data.RadarDataset;
  * They are often useful for comparing the points of two or more different data sets.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class RadarChart extends AbstractChart<RadarOptions, RadarDataset> {
 

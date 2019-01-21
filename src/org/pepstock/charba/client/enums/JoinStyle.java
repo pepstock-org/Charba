@@ -23,7 +23,6 @@ import org.pepstock.charba.client.commons.Key;
  * skipped).
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public enum JoinStyle implements Key
 {

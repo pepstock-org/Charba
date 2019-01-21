@@ -37,7 +37,6 @@ package org.pepstock.charba.client.commons;
  * See https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Operators/typeof
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public enum ObjectType
 {

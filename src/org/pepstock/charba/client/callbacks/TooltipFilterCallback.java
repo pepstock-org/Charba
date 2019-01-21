@@ -21,7 +21,6 @@ import org.pepstock.charba.client.items.TooltipItem;
  * Allows filtering of tooltip items.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface TooltipFilterCallback extends FilterCallback<TooltipItem> {
 

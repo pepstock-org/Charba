@@ -19,7 +19,6 @@ package org.pepstock.charba.client.events;
  * Event handler for chart animation progress event.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface AnimationProgressEventHandler extends ChartEventHandler {
 

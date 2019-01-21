@@ -23,7 +23,6 @@ import org.pepstock.charba.client.Plugin;
  * The wrapper is mandatory to able to catch all hooks of chart even if the plugin implements just a part of the hooks.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 final class InlinePlugin extends GlobalPlugin {
 

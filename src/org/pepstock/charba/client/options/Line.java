@@ -31,7 +31,6 @@ import org.pepstock.charba.client.enums.JoinStyle;
  * Line elements are used to represent the line in a line chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class Line extends AbstractElement<IsDefaultLine> implements IsDefaultLine {
 

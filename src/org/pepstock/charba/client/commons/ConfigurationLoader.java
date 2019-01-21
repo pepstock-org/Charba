@@ -22,7 +22,6 @@ import org.pepstock.charba.client.Configuration;
  * This utility needs to reduce visibility on java script objects for configuration.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class ConfigurationLoader {
 

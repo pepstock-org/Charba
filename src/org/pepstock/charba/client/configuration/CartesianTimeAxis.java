@@ -25,7 +25,6 @@ import org.pepstock.charba.client.enums.ScaleDistribution;
  * This object is used to map defined axis as time. This is used to have time series charts.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {

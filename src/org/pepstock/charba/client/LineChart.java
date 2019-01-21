@@ -24,7 +24,6 @@ import org.pepstock.charba.client.data.LineDataset;
  * Often, it is used to show trend data, or the comparison of two data sets.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public class LineChart extends AbstractChart<LineOptions, LineDataset> {

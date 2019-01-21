@@ -23,7 +23,6 @@ import com.google.gwt.safehtml.shared.UriUtils;
  * This utility checks if the controller type is acceptable or not.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 final class ControllerTypeChecker {

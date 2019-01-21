@@ -24,7 +24,6 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * This object is used in the plugins methods of CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DatasetPluginItem extends NativeObjectContainer {
 

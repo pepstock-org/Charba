@@ -19,7 +19,6 @@ package org.pepstock.charba.client;
  * Enumerates all out-of-the-box types of a chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public enum ChartType implements Type
 {

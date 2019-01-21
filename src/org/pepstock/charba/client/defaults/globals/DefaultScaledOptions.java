@@ -23,7 +23,6 @@ import org.pepstock.charba.client.defaults.IsDefaultScales;
  * CHART.JS default values for OPTIONS element for scaled charts. THIS IS THE ROOT OF ALL ELEMENTS DEFAULTS.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultScaledOptions extends DefaultOptions implements IsDefaultScaledOptions {
 

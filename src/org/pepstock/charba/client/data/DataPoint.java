@@ -26,8 +26,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * properties.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
- * 
+ *
  */
 public final class DataPoint extends NativeObjectContainer {
 

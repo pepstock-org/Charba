@@ -22,7 +22,6 @@ import org.pepstock.charba.client.commons.Key;
  * Defaults to 'x' for index mode and 'xy' in dataset and nearest modes.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public enum InteractionAxis implements Key
 {

@@ -25,7 +25,6 @@ import org.pepstock.charba.client.enums.Easing;
  * This is useful when update is manually called inside an event handler and some different animation is desired.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class UpdateConfiguration extends NativeObjectContainer {
 

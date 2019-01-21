@@ -26,7 +26,6 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  * It provides also the method to set the CHARBA id when new chart is created.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public final class ExtendedOptions extends ScaledOptions {

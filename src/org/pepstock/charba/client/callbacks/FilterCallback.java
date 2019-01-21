@@ -22,7 +22,6 @@ import org.pepstock.charba.client.AbstractChart;
  * 
  * @author Andrea "Stock" Stocchero
  * @param <T> type of item to be filtered
- * @since 2.0
  */
 interface FilterCallback<T> {
 

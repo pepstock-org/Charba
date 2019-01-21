@@ -19,7 +19,6 @@ package org.pepstock.charba.client.impl.plugins;
  * Which maintains the start and end point of mouse selection at X level.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 final class SelectionTrack {
 

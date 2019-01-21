@@ -21,7 +21,6 @@ import org.pepstock.charba.client.commons.Key;
  * The events option defines the browser events that the chart should listen to.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public enum Event implements Key
 {

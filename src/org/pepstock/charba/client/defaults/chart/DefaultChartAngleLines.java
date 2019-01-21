@@ -22,7 +22,6 @@ import org.pepstock.charba.client.options.AngleLines;
  * Defaults for angle lines option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultChartAngleLines implements IsDefaultAngleLines {
 

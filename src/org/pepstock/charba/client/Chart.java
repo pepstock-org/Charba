@@ -35,7 +35,6 @@ import jsinterop.annotations.JsType;
  * The <code>Chart</code> the entry point of CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 @JsType(isNative = true, name = NativeName.CHART, namespace = JsPackage.GLOBAL)
 public final class Chart {

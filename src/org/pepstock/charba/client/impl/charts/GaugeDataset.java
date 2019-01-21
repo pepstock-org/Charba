@@ -33,7 +33,6 @@ import org.pepstock.charba.client.colors.IsColor;
  * {@link org.pepstock.charba.client.data.Dataset#setData(double...)}) one.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class GaugeDataset extends MeterDataset {
 

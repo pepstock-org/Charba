@@ -27,7 +27,6 @@ import org.pepstock.charba.client.Injector;
  * It maps the CHART.JS object of controller, <code>chart.controllers</code>.<br>
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class Controllers {
 

@@ -28,7 +28,6 @@ import com.google.gwt.canvas.dom.client.Context2d;
  * If added to defaults, without any configuration, the chart will have a WHITE background color.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public final class ChartBackgroundColor extends AbstractPlugin {

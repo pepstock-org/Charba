@@ -22,7 +22,6 @@ import org.pepstock.charba.client.enums.Position;
  * CHART.JS default values for RECTANGLE element.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultRectangle extends DefaultArc implements IsDefaultRectangle {
 

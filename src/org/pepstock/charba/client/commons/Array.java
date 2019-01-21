@@ -23,7 +23,6 @@ import jsinterop.annotations.JsType;
  * Array object which maps the java script object.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 @JsType(isNative = true, name = NativeName.ARRAY, namespace = JsPackage.GLOBAL)
 public class Array {

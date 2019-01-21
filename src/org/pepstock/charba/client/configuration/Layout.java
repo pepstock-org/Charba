@@ -21,7 +21,6 @@ import org.pepstock.charba.client.options.ExtendedOptions;
  * The layout configuration is needed to set the padding.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public class Layout {

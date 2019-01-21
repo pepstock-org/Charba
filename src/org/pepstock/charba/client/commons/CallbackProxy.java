@@ -50,8 +50,7 @@ import jsinterop.annotations.JsType;
  * </code>
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
- * @param <T> type of callback to be called
+ *
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
 public final class CallbackProxy<T> {
@@ -60,7 +59,6 @@ public final class CallbackProxy<T> {
 	 * It's a java script function which maps the function <code>proxy</code> implemented into additional java script source.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
 	 */
 	@JsFunction
 	public interface Proxy {

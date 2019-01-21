@@ -22,7 +22,6 @@ import org.pepstock.charba.client.options.Padding;
  * Defaults for padding option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultChartPadding implements IsDefaultPadding {
 

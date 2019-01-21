@@ -27,8 +27,7 @@ import org.pepstock.charba.client.defaults.IsDefaultArc;
  * dataset.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
- * 
+ *
  * @param <D> defaults provider class
  */
 public abstract class AbstractElement<D extends IsDefaultArc> extends AbstractModel<Elements, D> {

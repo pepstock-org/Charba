@@ -24,7 +24,6 @@ import org.pepstock.charba.client.enums.Position;
  * The chart legend displays data about the datasets that area appearing on the chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public final class Legend extends AbstractModel<Options, IsDefaultLegend> implements IsDefaultLegend {

@@ -25,7 +25,6 @@ import org.pepstock.charba.client.enums.Easing;
  * takes.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public class Animation extends AbstractModel<Options, IsDefaultAnimation> implements IsDefaultAnimation {

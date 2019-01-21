@@ -33,7 +33,6 @@ import org.pepstock.charba.client.enums.Position;
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  * @param <T> type of tick to apply to axis
  */

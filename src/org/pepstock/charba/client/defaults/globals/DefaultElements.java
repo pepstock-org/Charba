@@ -25,7 +25,6 @@ import org.pepstock.charba.client.defaults.IsDefaultRectangle;
  * CHART.JS default values for ELEMENTS element.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultElements implements IsDefaultElements {
 

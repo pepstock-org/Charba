@@ -22,7 +22,6 @@ import jsinterop.annotations.JsType;
  * The console object provides access to the browser's debugging console
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 @JsType(isNative = true)
 public interface Console {

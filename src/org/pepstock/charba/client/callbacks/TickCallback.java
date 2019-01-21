@@ -23,7 +23,6 @@ import org.pepstock.charba.client.configuration.Axis;
  * Interface to implement if wants to change the tick marks to include information about the data type.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface TickCallback {
 

@@ -23,7 +23,6 @@ import org.pepstock.charba.client.enums.Position;
  * This is a wrapper of the CHART.JS item which contains the legends hit box.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class LegendHitBoxItem extends SizeItem {
 
@@ -58,8 +57,7 @@ public final class LegendHitBoxItem extends SizeItem {
 	 * Inner class to create legend hit box item by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	static final class LegendHitBoxItemFactory implements NativeObjectContainerFactory<LegendHitBoxItem> {
 
 		/*

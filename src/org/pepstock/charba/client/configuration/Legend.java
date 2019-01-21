@@ -37,7 +37,6 @@ import jsinterop.annotations.JsFunction;
  * The chart legend displays data about the datasets that area appearing on the chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public class Legend extends EventProvider<ExtendedOptions> {
@@ -51,8 +50,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyLegendClickCallback {
 
@@ -71,8 +69,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyLegendHoverCallback {
 

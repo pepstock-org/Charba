@@ -22,7 +22,6 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * Factory to get the options (ONLY form chart) related to background color plugin.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class ChartBackgroundColorOptionsFactory implements NativeObjectContainerFactory<ChartBackgroundColorOptions> {
 

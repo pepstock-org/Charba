@@ -22,7 +22,6 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * Enums the property ID used by CHARBA to identify the chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public enum Id implements Key
 {

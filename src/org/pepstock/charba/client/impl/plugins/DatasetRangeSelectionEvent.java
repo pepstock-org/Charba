@@ -23,8 +23,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * Event which is fired when the user selects an area on the chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
- * @see org.pepstock.charba.client.impl.plugins.DatasetsItemsSelector
+ *
  */
 public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRangeSelectionEventHandler> {
 

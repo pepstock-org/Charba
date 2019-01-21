@@ -26,7 +26,6 @@ import org.pepstock.charba.client.enums.Fill;
  * The scatter dataset can use ONLY data points. If you try to use array of data numbers, an exception will be thrown.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class ScatterDataset extends LineDataset {
 	// exception message when it's not using data points

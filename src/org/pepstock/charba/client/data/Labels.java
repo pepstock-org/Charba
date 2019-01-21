@@ -25,7 +25,6 @@ import org.pepstock.charba.client.commons.ObjectType;
  * Is able to manage also multi-line labels.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class Labels {
 

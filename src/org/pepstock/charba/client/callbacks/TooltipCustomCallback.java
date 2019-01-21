@@ -24,7 +24,6 @@ import org.pepstock.charba.client.items.TooltipModel;
  * Generally this is used to create an HTML tooltip instead of an on canvas one.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface TooltipCustomCallback {
 

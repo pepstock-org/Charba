@@ -23,7 +23,6 @@ import org.pepstock.charba.client.Controller;
  * will invoke the default implementation of parent chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public abstract class AbstractController implements Controller {

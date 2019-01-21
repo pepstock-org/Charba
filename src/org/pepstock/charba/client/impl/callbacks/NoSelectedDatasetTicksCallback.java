@@ -30,7 +30,6 @@ import com.google.gwt.i18n.client.NumberFormat;
  * precision.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class NoSelectedDatasetTicksCallback implements TickCallback {
 

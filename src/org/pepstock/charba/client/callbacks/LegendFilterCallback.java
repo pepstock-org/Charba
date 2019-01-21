@@ -21,7 +21,6 @@ import org.pepstock.charba.client.items.LegendItem;
  * Filters legend items out of the legend. Receives 2 parameters, a Legend Item and the chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface LegendFilterCallback extends FilterCallback<LegendItem> {
 

@@ -29,7 +29,6 @@ import org.pepstock.charba.client.commons.Key;
  * or an array.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 abstract class HovingFlexDataset extends Dataset {
 

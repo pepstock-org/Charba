@@ -21,7 +21,6 @@ import org.pepstock.charba.client.enums.TickSource;
  * Interface to define ticks object defaults.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface IsDefaultTicks extends IsDefaultFontItem {
 

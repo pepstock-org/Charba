@@ -27,7 +27,6 @@ import org.pepstock.charba.client.enums.PointStyle;
  * This object is created by callbacks and returned to HCART.JS as native object to configure the legend.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public final class LegendLabelItem extends LegendItem {

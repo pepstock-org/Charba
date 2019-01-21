@@ -23,7 +23,6 @@ import org.pepstock.charba.client.options.Layout;
  * Defaults for layout option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultChartLayout implements IsDefaultLayout {
 

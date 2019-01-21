@@ -23,7 +23,6 @@ import org.pepstock.charba.client.enums.InteractionMode;
  * CHART.JS default values for HOVER element.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultHover implements IsDefaultHover {
 

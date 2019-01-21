@@ -31,7 +31,6 @@ import org.pepstock.charba.client.commons.ArrayObject;
  * It maps the CHART.JS object of default, <code>chart.plugins</code>.<br>
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class GlobalPlugins {
 

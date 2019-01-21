@@ -21,7 +21,6 @@ import org.pepstock.charba.client.AbstractChart;
  * This a cartesian axis for BAR chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public class BarCategoryAxis extends CartesianCategoryAxis {
@@ -137,8 +136,7 @@ public class BarCategoryAxis extends CartesianCategoryAxis {
 	 * If false, the grid line will go right down the middle of the bars.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 *
+	 * @	 *
 	 */
 	private static class BarGridLines extends GridLines {
 

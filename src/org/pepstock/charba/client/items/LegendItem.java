@@ -38,7 +38,6 @@ import org.pepstock.charba.client.enums.PointStyle;
  * This is a wrapper of the CHART.JS item which contains the legend item.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class LegendItem extends NativeObjectContainer {
 
@@ -230,8 +229,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * Inner class to create legend item by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	static final class LegendItemFactory implements NativeObjectContainerFactory<LegendItem> {
 
 		/*

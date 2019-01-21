@@ -23,7 +23,6 @@ import org.pepstock.charba.client.utils.JSON;
  * This is a wrapper of the CHART.JS item with all needed info.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class ChartAreaNode extends BaseBoxItem {
 

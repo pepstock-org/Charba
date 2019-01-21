@@ -25,7 +25,6 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * Configuration options of background color plugin.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class ChartBackgroundColorOptions extends NativeObjectContainer {
 

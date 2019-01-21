@@ -21,7 +21,6 @@ import org.pepstock.charba.client.options.ExtendedOptions;
  * Arcs are used in the polar area, doughnut and pie charts.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class Arc extends AbstractConfigurationElement {
 

@@ -29,7 +29,6 @@ import org.pepstock.charba.client.enums.AxisType;
  * This is a wrapper of scale of Chart (of CHART.JS).
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class ScaleItem extends BaseBoxNodeItem {
 	

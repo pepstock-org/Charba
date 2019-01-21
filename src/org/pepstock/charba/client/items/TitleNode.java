@@ -22,7 +22,6 @@ import org.pepstock.charba.client.commons.NativeObject;
  * This is a wrapper of title node of Chart (of CHART.JS).
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class TitleNode extends BaseBoxNodeItem {
 

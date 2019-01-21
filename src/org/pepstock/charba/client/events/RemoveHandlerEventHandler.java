@@ -21,7 +21,6 @@ import com.google.gwt.event.shared.EventHandler;
  * Event handler for removing a chart event handler.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface RemoveHandlerEventHandler extends EventHandler {
 

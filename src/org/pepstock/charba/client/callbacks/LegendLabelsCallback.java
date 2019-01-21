@@ -22,7 +22,6 @@ import org.pepstock.charba.client.items.LegendLabelItem;
  * Generates legend items for each thing in the legend.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface LegendLabelsCallback {
 

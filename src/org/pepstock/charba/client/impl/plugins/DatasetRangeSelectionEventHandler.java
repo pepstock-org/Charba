@@ -21,7 +21,6 @@ import org.pepstock.charba.client.events.ChartEventHandler;
  * Event handler for chart area selecting.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface DatasetRangeSelectionEventHandler extends ChartEventHandler {
 

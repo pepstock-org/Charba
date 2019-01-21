@@ -26,7 +26,6 @@ import jsinterop.annotations.JsType;
  * A simple wrapper around a homogeneous native array of numeric (int) values.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 @JsType(isNative = true, name = NativeName.ARRAY, namespace = JsPackage.GLOBAL)
 public final class ArrayInteger extends Array {

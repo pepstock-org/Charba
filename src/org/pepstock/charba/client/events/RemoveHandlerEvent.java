@@ -23,7 +23,6 @@ import com.google.gwt.event.shared.GwtEvent;
  * This event should use only for use internal only to manage internally all handlers.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class RemoveHandlerEvent extends GwtEvent<RemoveHandlerEventHandler> {
 

@@ -25,7 +25,6 @@ import org.pepstock.charba.client.options.Time;
  * Defaults for time option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultChartTime implements IsDefaultTime {
 

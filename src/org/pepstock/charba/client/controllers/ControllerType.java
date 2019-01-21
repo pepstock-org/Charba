@@ -24,7 +24,6 @@ import org.pepstock.charba.client.Type;
  * It can be created extending an existing chart type or new type.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class ControllerType implements Type {
 	// type of chart

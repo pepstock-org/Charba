@@ -19,7 +19,6 @@ package org.pepstock.charba.client.events;
  * Event handler for hovering on the chart legend.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface LegendHoverEventHandler extends ChartEventHandler {
 

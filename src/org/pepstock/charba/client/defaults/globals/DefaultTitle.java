@@ -23,7 +23,6 @@ import org.pepstock.charba.client.enums.Position;
  * CHART.JS default values for TITLE element.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultTitle extends AbstractDefaultFontItem implements IsDefaultTitle {
 

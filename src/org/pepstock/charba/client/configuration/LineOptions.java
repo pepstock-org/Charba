@@ -22,7 +22,6 @@ import org.pepstock.charba.client.ChartOptions;
  * Specific options for LINE chart. It contains all properties for this kind of chart.
  *
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public class LineOptions extends AbstractLineOptions {

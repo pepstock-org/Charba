@@ -20,7 +20,6 @@ package org.pepstock.charba.client.commons;
  * Used for enum.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface Key {
 

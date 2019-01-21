@@ -48,7 +48,6 @@ import jsinterop.annotations.JsFunction;
  * process.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
@@ -62,8 +61,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyBeforeUpdateCallback {
 
@@ -81,8 +79,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyBeforeSetDimensionsCallback {
 
@@ -100,8 +97,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyAfterSetDimensionsCallback {
 
@@ -119,8 +115,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyBeforeDataLimitsCallback {
 
@@ -138,8 +133,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyAfterDataLimitsCallback {
 
@@ -157,8 +151,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyBeforeBuildTicksCallback {
 
@@ -176,8 +169,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyAfterBuildTicksCallback {
 
@@ -195,8 +187,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyBeforeTickToLabelConversionCallback {
 
@@ -214,8 +205,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyAfterTickToLabelConversionCallback {
 
@@ -233,8 +223,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyBeforeCalculateTickRotationCallback {
 
@@ -252,8 +241,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyAfterCalculateTickRotationCallback {
 
@@ -271,8 +259,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyBeforeFitCallback {
 
@@ -290,8 +277,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyAfterFitCallback {
 
@@ -309,8 +295,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyAfterUpdateCallback {
 

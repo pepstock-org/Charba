@@ -22,7 +22,6 @@ import org.pepstock.charba.client.AbstractChart;
  * chart instance as parameter of implemented interface.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 abstract class ChartContainer {
 

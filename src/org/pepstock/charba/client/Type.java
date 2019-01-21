@@ -21,7 +21,6 @@ import org.pepstock.charba.client.commons.Key;
  * Interface to map the type and scale type of a chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface Type extends Key {
 

@@ -21,7 +21,6 @@ import org.pepstock.charba.client.commons.Key;
  * Property to set the text alignment.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public enum TextAlign implements Key
 {

@@ -29,7 +29,6 @@ import jsinterop.annotations.JsFunction;
  * Note that these options only apply if display is true.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public class RadialPointLabels extends AxisContainer {
@@ -44,8 +43,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @since 2.0
-	 */
+	 * @	 */
 	@JsFunction
 	interface ProxyPointLabelCallback {
 

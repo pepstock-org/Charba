@@ -24,7 +24,6 @@ import org.pepstock.charba.client.enums.FontStyle;
  * The scale label configuration defines options for the scale label. Note that this only applies to cartesian axes.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public class CartesianScaleLabel extends AxisContainer {

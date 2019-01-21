@@ -21,7 +21,6 @@ import org.pepstock.charba.client.defaults.IsDefaultGridLines;
  * CHART.JS default values for GRIDLINES element.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultGridLines implements IsDefaultGridLines {
 

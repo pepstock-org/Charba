@@ -30,7 +30,6 @@ import org.pepstock.charba.client.commons.Key;
  * This class collects a set of common field for Pie and Polar charts.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 abstract class HovingDataset extends Dataset {

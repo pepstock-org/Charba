@@ -26,7 +26,6 @@ import jsinterop.annotations.JsType;
  * This script will be injected with CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 @JsType(isNative = true, name = NativeName.JSHELPER, namespace = JsPackage.GLOBAL)
 final class NativeJsHelper {

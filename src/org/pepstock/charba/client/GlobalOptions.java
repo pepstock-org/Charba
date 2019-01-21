@@ -23,7 +23,6 @@ import org.pepstock.charba.client.options.Options;
  * Default global options (maps the java script object chart.defaults.global).
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class GlobalOptions extends Options {
 

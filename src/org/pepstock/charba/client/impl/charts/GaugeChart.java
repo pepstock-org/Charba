@@ -23,7 +23,6 @@ import org.pepstock.charba.client.controllers.ControllerType;
  * GAUGE chart implementation.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class GaugeChart extends BaseMeterChart<GaugeOptions, GaugeDataset> {
 

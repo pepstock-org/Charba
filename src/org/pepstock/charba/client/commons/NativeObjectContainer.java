@@ -28,7 +28,6 @@ import com.google.gwt.core.client.JsDate;
  * Base class for all classes which are wrapping a native java script object.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public abstract class NativeObjectContainer {
 

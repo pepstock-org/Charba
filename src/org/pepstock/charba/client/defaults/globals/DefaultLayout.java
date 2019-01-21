@@ -22,7 +22,6 @@ import org.pepstock.charba.client.defaults.IsDefaultPadding;
  * CHART.JS default values for LAYOUT element.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultLayout implements IsDefaultLayout {
 

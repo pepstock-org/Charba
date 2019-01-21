@@ -29,7 +29,6 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * runtime.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class ChartNode {
 

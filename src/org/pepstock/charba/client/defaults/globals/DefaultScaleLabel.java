@@ -22,7 +22,6 @@ import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
  * CHART.JS default values for SCALELABEL element.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultScaleLabel extends AbstractDefaultFontItem implements IsDefaultScaleLabel {
 

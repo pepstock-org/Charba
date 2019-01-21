@@ -26,8 +26,7 @@ import java.util.List;
  * This implementation uses a java script array as back-end to store objects (integers).
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
- * @see org.pepstock.charba.client.commons.ArrayInteger
+ *
  */
 public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInteger> {
 

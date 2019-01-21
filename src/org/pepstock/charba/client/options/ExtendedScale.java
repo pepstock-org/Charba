@@ -24,7 +24,6 @@ import org.pepstock.charba.client.defaults.IsDefaultScale;
  * Extends the normal scale options with all methods to add callbacks and events.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public final class ExtendedScale extends Scale {

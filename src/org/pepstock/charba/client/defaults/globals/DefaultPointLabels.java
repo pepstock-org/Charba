@@ -21,7 +21,6 @@ import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
  * CHART.JS default values for POINTLABELS element.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultPointLabels extends AbstractDefaultFontItem implements IsDefaultPointLabels {
 

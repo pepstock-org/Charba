@@ -25,7 +25,6 @@ import com.google.gwt.dom.client.NativeEvent;
  * Event which is fired when the user hovers on the chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class ChartHoverEvent extends AbstractEvent<ChartHoverEventHandler> {
 

@@ -23,7 +23,6 @@ import org.pepstock.charba.client.enums.CartesianAxisType;
  * This object is used to map defined axis as category.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> {
 

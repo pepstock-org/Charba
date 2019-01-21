@@ -25,7 +25,6 @@ import jsinterop.annotations.JsType;
  * The window object represents an open window in a browser.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.WINDOW)
 public class Window {

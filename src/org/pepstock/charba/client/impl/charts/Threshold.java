@@ -21,7 +21,6 @@ import org.pepstock.charba.client.colors.IsColor;
  * Is the threshold to use for gauge chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class Threshold implements IsThreshold {
 	/**

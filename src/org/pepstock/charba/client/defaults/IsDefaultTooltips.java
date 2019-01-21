@@ -24,7 +24,6 @@ import org.pepstock.charba.client.enums.TooltipPosition;
  * Interface to define tooltips object defaults.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface IsDefaultTooltips {
 

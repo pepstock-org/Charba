@@ -25,7 +25,6 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * Exposes ONLY the ID of plugin, anything else.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 final class PluginReference extends NativeObjectContainer {
 

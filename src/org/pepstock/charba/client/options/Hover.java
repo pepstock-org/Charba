@@ -25,7 +25,6 @@ import org.pepstock.charba.client.enums.InteractionMode;
  * Definitions about how elements appear in the tooltip, hovering the chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public final class Hover extends AbstractModel<Options, IsDefaultHover> implements IsDefaultHover {

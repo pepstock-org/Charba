@@ -22,7 +22,6 @@ package org.pepstock.charba.client.configuration;
  * As the name suggests, linear interpolation is used to determine where a value lies on the axis.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class CartesianLinearTick extends CartesianTick {
 

@@ -22,7 +22,6 @@ import org.pepstock.charba.client.commons.Key;
  * About available formats, see <a href="http://momentjs.com/docs/#/displaying/format/">moment.js</a>.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public enum TimeUnit implements Key
 {

@@ -22,7 +22,6 @@ import org.pepstock.charba.client.commons.Key;
  * For further details, see <a href="http://www.chartjs.org/docs/latest/configuration/animations.html#easing">here</a>.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public enum Easing implements Key
 {

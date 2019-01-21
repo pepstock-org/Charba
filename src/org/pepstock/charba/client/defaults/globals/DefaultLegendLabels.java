@@ -21,7 +21,6 @@ import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
  * CHART.JS default values for LEGENDLABELS element.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultLegendLabels extends AbstractDefaultFontItem implements IsDefaultLegendLabels {
 

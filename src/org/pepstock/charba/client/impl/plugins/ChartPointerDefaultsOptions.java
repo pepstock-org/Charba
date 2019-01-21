@@ -25,7 +25,6 @@ import com.google.gwt.dom.client.Style.Cursor;
  * chart one, if exist.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 final class ChartPointerDefaultsOptions extends NativeObjectContainer {
 	// default cursor type when the cursor is over the dataset item

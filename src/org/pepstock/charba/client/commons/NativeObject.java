@@ -28,7 +28,6 @@ import jsinterop.annotations.JsType;
  * It implements some common methods and wraps some native methods.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class NativeObject {

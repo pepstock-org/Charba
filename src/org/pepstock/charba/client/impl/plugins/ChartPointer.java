@@ -28,7 +28,6 @@ import org.pepstock.charba.client.plugins.InvalidPluginIdException;
  * This plugin is changing the cursor when mouse over on dataset on canvas if a dataset selection handler has been.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public final class ChartPointer extends AbstractPlugin {

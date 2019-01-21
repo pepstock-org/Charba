@@ -23,7 +23,6 @@ import org.pepstock.charba.client.options.LegendLabels;
  * Defaults for legend labels option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 

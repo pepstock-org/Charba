@@ -22,7 +22,6 @@ import org.pepstock.charba.client.options.ExtendedOptions;
  * When set, these options apply to the configuration attached to a dataset.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public class Elements {

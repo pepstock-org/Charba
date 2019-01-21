@@ -22,7 +22,6 @@ import org.pepstock.charba.client.commons.NativeObject;
  * This is a wrapper of the CHART.JS item
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class MarginsItem extends BaseBoxItem {
 

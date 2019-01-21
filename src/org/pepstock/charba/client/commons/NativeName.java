@@ -19,7 +19,6 @@ package org.pepstock.charba.client.commons;
  * Constants with java script object name to use into {@link jsinterop.annotations.JsType} native objects.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class NativeName {
 

@@ -27,7 +27,6 @@ import jsinterop.annotations.JsType;
  * It maps the java script object <code>chart.plugins</code>.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class NativePlugins {

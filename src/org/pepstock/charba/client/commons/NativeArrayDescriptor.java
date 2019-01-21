@@ -23,8 +23,7 @@ import jsinterop.annotations.JsType;
  * A property descriptor is a record which describes a java script property (array).
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
- * @see Array
+ *
  * @param <T> type of property which extends an array
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)

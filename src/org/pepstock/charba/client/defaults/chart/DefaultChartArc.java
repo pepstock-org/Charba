@@ -22,7 +22,6 @@ import org.pepstock.charba.client.options.Arc;
  * Defaults for arc option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultChartArc implements IsDefaultArc {
 

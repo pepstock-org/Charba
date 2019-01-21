@@ -27,7 +27,6 @@ import org.pepstock.charba.client.items.TooltipLabelColor;
  * This interface takes care about labels.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface TooltipLabelCallback {
 

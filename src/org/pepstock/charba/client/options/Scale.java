@@ -39,7 +39,6 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * <br>
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsDefaultScale {

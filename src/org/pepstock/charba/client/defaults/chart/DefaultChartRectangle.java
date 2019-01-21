@@ -23,7 +23,6 @@ import org.pepstock.charba.client.options.Rectangle;
  * Defaults for rectangle option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultChartRectangle implements IsDefaultRectangle {
 

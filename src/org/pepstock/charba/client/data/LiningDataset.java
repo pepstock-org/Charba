@@ -37,7 +37,6 @@ import org.pepstock.charba.client.enums.PointStyle;
  * This class collects a set of common field for Line and Radar charts.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 abstract class LiningDataset extends Dataset {

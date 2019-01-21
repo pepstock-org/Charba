@@ -19,7 +19,6 @@ package org.pepstock.charba.client.defaults;
  * Interface to define scale label object defaults.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface IsDefaultScaleLabel extends IsDefaultFontItem {
 

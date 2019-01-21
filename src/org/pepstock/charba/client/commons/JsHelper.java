@@ -25,7 +25,6 @@ import com.google.gwt.canvas.dom.client.Context2d;
  * This wrapper is necessary to ensure that script is injected with CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public final class JsHelper {

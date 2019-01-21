@@ -24,7 +24,6 @@ import jsinterop.annotations.JsType;
  * A simple wrapper around a homogeneous array of mixed type of object (extension of java script objects) values.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 @JsType(isNative = true, name = NativeName.ARRAY, namespace = JsPackage.GLOBAL)
 public final class ArrayMixedObject extends Array {

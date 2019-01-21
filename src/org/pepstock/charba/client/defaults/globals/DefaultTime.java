@@ -24,7 +24,6 @@ import org.pepstock.charba.client.enums.TimeUnit;
  * CHART.JS default values for TIME element.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class DefaultTime implements IsDefaultTime {
 

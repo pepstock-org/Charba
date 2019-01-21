@@ -21,7 +21,6 @@ import org.pepstock.charba.client.commons.Key;
  * Controls the scale boundary strategy (bypassed by minimum/maximum time options).
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public enum ScaleBounds implements Key
 {

@@ -23,7 +23,6 @@ import org.pepstock.charba.client.controllers.StyleElement;
  * This interface enables the capability to create a custom chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public interface Controller {

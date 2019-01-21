@@ -19,7 +19,6 @@ package org.pepstock.charba.client.defaults.globals;
  * Singleton builder of defaults options, with or without scales.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultsBuilder {
 

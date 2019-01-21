@@ -19,7 +19,6 @@ package org.pepstock.charba.client.configuration;
  * Container of a axis. Must be extended for all other entities which is sub element of an axis.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 abstract class AxisContainer {
 

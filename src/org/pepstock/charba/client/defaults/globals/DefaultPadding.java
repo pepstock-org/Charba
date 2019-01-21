@@ -21,7 +21,6 @@ import org.pepstock.charba.client.defaults.IsDefaultPadding;
  * CHART.JS default values for PADDING element.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultPadding implements IsDefaultPadding {
 

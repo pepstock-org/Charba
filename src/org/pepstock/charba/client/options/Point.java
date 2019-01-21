@@ -24,7 +24,6 @@ import org.pepstock.charba.client.enums.PointStyle;
  * Point elements are used to represent the points in a line chart or a bubble chart.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class Point extends AbstractElement<IsDefaultPoint> implements IsDefaultPoint {
 

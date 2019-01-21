@@ -24,8 +24,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * This object has been created ONLY when a resize event occurs.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
-
+ * @
  */
 public class SizeItem extends NativeObjectContainer {
 	

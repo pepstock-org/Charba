@@ -25,7 +25,6 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * Implements all <code>get</code> methods to change java script object properties.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public abstract class BaseBoxItem extends NativeObjectContainer {
 

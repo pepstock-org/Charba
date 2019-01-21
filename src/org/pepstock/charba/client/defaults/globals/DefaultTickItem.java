@@ -19,7 +19,6 @@ package org.pepstock.charba.client.defaults.globals;
  * CHART.JS default values for tick element, for MAJOR and MINOR of ticks.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultTickItem extends AbstractDefaultFontItem {
 }

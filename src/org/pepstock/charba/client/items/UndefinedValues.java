@@ -19,7 +19,6 @@ package org.pepstock.charba.client.items;
  * Class with default values when the java script object returns an UNDEFINED value.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public final class UndefinedValues {

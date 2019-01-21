@@ -25,8 +25,7 @@ import jsinterop.annotations.JsType;
  * A property descriptor is a record which describes a java script property (JsDate).<br>
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
- * @see com.google.gwt.core.client.JsDate
+ *
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class NativeDateDescriptor extends NativeAbstractDescriptor {

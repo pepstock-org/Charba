@@ -39,7 +39,6 @@ import com.google.gwt.user.client.ui.Image;
  * Overrides also the events which can be caught (only click and touchstart).
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DatasetsItemsSelector extends AbstractPlugin {
 

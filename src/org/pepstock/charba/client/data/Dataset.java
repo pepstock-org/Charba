@@ -36,7 +36,6 @@ import org.pepstock.charba.client.utils.JSON;
  * This is the base implementation for all datasets with common fields.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public abstract class Dataset extends NativeObjectContainer {
 	// default for hidden property

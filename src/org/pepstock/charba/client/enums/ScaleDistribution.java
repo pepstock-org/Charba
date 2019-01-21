@@ -21,7 +21,6 @@ import org.pepstock.charba.client.commons.Key;
  * Controls the data distribution along the scale.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public enum ScaleDistribution implements Key
 {

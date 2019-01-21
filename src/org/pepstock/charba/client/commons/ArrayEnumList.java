@@ -26,8 +26,7 @@ import java.util.List;
  * This implementation uses a java script object as back-end to store objects (enumeration values).
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
- * @see org.pepstock.charba.client.commons.ArrayString
+ *
  */
 public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, ArrayString> {
 

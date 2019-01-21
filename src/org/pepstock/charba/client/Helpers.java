@@ -22,7 +22,6 @@ import org.pepstock.charba.client.commons.NativeObject;
  * It maps the java script object <code>chart.helpers</code>.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class Helpers {
 

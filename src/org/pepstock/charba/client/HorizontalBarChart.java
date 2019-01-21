@@ -21,7 +21,6 @@ package org.pepstock.charba.client;
  * It is sometimes used to show trend data, and the comparison of multiple data sets side by side.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public class HorizontalBarChart extends BarChart {

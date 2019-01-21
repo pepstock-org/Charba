@@ -26,7 +26,6 @@ import org.pepstock.charba.client.options.Elements;
  * Defaults for elements option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultChartElements implements IsDefaultElements {
 

@@ -25,7 +25,6 @@ import org.pepstock.charba.client.enums.TooltipPosition;
  * CHART.JS default values for TOOLTIPS element.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultTooltips implements IsDefaultTooltips {
 

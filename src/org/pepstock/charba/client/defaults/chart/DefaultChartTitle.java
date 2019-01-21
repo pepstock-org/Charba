@@ -24,7 +24,6 @@ import org.pepstock.charba.client.options.Title;
  * Defaults for title option element, based on chart type.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class DefaultChartTitle implements IsDefaultTitle {
 

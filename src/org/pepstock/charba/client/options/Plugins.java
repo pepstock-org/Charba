@@ -28,7 +28,6 @@ import org.pepstock.charba.client.plugins.PluginIdChecker;
  * The java script object key is the plugin id.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public final class Plugins extends AbstractModel<Options, Void> {

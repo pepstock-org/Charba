@@ -26,7 +26,6 @@ import org.pepstock.charba.client.data.PolarAreaDataset;
  * values for context.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class PolarAreaChart extends AbstractChart<PolarAreaOptions, PolarAreaDataset> {
 

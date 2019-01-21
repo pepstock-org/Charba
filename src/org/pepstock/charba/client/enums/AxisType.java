@@ -22,7 +22,6 @@ import org.pepstock.charba.client.commons.Key;
  * These are the possible types of an axis.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public enum AxisType implements Key
 {

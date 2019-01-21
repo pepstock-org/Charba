@@ -24,7 +24,6 @@ import org.pepstock.charba.client.data.StackedAreaDataset;
  * Often, it is used to show trend data, or the comparison of two data sets.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class StackedAreaChart extends AbstractChart<StackedOptions, StackedAreaDataset> {
 

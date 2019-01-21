@@ -32,7 +32,6 @@ import org.pepstock.charba.client.enums.FontStyle;
  * Specific options for METER chart. This chart doesn't allow any legend, hover, layout and tooltips components.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public class MeterOptions extends AbstractPieOptions {

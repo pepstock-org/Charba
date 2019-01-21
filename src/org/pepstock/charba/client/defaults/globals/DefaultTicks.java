@@ -23,7 +23,6 @@ import org.pepstock.charba.client.enums.TickSource;
  * CHART.JS default values for TICKS element.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTicks {
 

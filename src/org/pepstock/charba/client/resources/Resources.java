@@ -23,7 +23,6 @@ import com.google.gwt.resources.client.TextResource;
  * Client bundle to reference CHART.JS and other java script codes, always needed to CHARBA.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public interface Resources extends ClientBundle {
 

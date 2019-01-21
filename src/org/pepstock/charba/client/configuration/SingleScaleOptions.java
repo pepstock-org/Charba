@@ -22,7 +22,6 @@ import org.pepstock.charba.client.ChartOptions;
  * Configuration of chart with only 1 scale.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public abstract class SingleScaleOptions extends ConfigurationOptions {

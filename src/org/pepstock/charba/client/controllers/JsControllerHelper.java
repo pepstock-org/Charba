@@ -25,7 +25,6 @@ import org.pepstock.charba.client.commons.NativeObject;
  * This wrapper is necessary to ensure that script is injected with CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 final class JsControllerHelper {

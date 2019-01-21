@@ -37,7 +37,6 @@ import org.pepstock.charba.client.items.TooltipLabelColor.TooltipLabelColorFacto
  * The tooltip label configuration is nested below the tooltip configuration using the callbacks key. 
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class TooltipModel extends NativeObjectContainer {
 	

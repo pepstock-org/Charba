@@ -32,7 +32,6 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * It contains labels and datasets.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  */
 public final class Data extends NativeObjectContainer implements ConfigurationElement {
 

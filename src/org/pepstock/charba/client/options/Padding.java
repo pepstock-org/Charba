@@ -24,7 +24,6 @@ import org.pepstock.charba.client.enums.Position;
  * It is applied to all sides of the chart (left, top, right, bottom).
  * 
  * @author Andrea "Stock" Stocchero
- * @since 2.0
  *
  */
 public final class Padding extends AbstractModel<Layout, IsDefaultPadding> implements IsDefaultPadding {
