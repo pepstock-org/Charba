@@ -69,7 +69,7 @@ JsInterop is one of the core features of GWT 2.8.
 
 As the name suggests, JsInterop is a way of interoperating Java with JavaScript. It offers a better way of communication between the two using annotations instead of having to write JavaScript in your classes (using JSNI).
 
-Pay attention that GWT compiler (you are using for your project) requires `-generateJsInteropExport` to be passed.
+**Pay attention** that GWT compiler (you are using for your project) requires `-generateJsInteropExport` to be passed.
 
 Documentation
 -------------
