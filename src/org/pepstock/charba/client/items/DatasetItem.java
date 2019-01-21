@@ -107,7 +107,7 @@ public class DatasetItem extends NativeObjectContainer {
 	 * Inner class to create dataset item by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 */
 	public static final class DatasetItemFactory implements NativeObjectContainerFactory<DatasetItem> {
 
 		/*

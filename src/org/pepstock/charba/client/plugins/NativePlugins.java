@@ -17,6 +17,7 @@ package org.pepstock.charba.client.plugins;
 
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.NativeName;
+import org.pepstock.charba.client.commons.NativeObject;
 
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -51,7 +52,7 @@ public final class NativePlugins {
 	 * @param plugin plugin instance reference.
 	 */
 	@JsMethod
-	native void unregister(PluginReference plugin);
+	native void unregister(NativeObject plugin);
 
 	/**
 	 * Remove all registered plugins.

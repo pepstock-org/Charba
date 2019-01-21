@@ -114,7 +114,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	 * Inner class to create tooltip item by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 */
 	public static final class TooltipItemFactory implements NativeObjectContainerFactory<TooltipItem> {
 
 		/*

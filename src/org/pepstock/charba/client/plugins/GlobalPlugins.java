@@ -94,7 +94,7 @@ public final class GlobalPlugins {
 			PluginReference reference = new PluginReference(existingPlugins.get(i));
 			if (reference.getId() != null && reference.getId().equalsIgnoreCase(pluginId)) {
 				// unregister the plugin
-				plugins.unregister(reference);
+				plugins.unregister(reference.getObject());
 				// removes the plugin
 				pluginIds.remove(pluginId);
 				return true;
