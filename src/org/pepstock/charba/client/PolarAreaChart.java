@@ -35,7 +35,7 @@ public class PolarAreaChart extends AbstractChart<PolarAreaOptions, PolarAreaDat
 	 * Builds the object.
 	 */
 	public PolarAreaChart() {
-		options = new PolarAreaOptions(this, getChartOptions());
+		options = new PolarAreaOptions(this, getDefaultChartOptions());
 	}
 
 	/*

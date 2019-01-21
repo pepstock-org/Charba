@@ -78,7 +78,7 @@ public final class Merger {
 	 */
 	public NativeObject get(Type type) {
 		// gets chart.defaults[type]
-		ChartOptions base = Defaults.get().chart(type);
+		ChartOptions base = Defaults.get().getOptions(type);
 		// gets chart.defaults.scale
 		Scale scale = Defaults.get().getScale();
 		// gets chart.defaults.global

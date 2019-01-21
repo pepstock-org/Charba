@@ -709,7 +709,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 */
 	Scale getDefaultScale() {
 		// gets the global option for the chart.
-		ChartOptions options = Defaults.get().options(getChart().getType());
+		ChartOptions options = getChart().getDefaultChartOptions();
 		// if is a multi scale chart
 		if (ScaleType.multi.equals(getChart().getType().scaleType())) {
 			CartesianAxisType type = null;

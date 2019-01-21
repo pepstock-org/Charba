@@ -118,7 +118,7 @@ public final class Defaults {
 	 * @param type chart type.
 	 * @return the default options
 	 */
-	public ChartOptions options(Type type) {
+	ChartOptions getChartOptions(Type type) {
 		return new ChartOptions(type, Merger.get().get(type));
 	}
 
@@ -128,7 +128,7 @@ public final class Defaults {
 	 * @param type chart type.
 	 * @return the default options
 	 */
-	public ChartOptions chart(Type type) {
+	public ChartOptions getOptions(Type type) {
 		// checks if the options have already stored
 		if (!chartOptions.containsKey(type.name())) {
 			// if not, creates and stores new options by chart type
@@ -138,6 +138,13 @@ public final class Defaults {
 		return chartOptions.get(type.name());
 	}
 
+	/**
+	 * It wraps the defaults object of CHART.JS chart instance.<br>
+	 * It returns the global, scale and chart options.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
 	private static final class WrapperDefaults extends NativeObjectContainer {
 
 		/**
@@ -150,16 +157,28 @@ public final class Defaults {
 		}
 
 		/**
-		 * @param nativeObject
+		 * Creates the wrapper by the default object of chart instance.
+		 * 
+		 * @param nativeObject the default object of chart instance
 		 */
 		WrapperDefaults(NativeObject nativeObject) {
 			super(nativeObject);
 		}
 
+		/**
+		 * Returns the GLOBAL options of chart as native object.
+		 * 
+		 * @return the GLOBAL options
+		 */
 		NativeObject getGlobal() {
 			return getValue(Property.global);
 		}
 
+		/**
+		 * Returns the SCALE global options of chart as native object.
+		 * 
+		 * @return the SCALE global options
+		 */
 		NativeObject getScale() {
 			return getValue(Property.scale);
 

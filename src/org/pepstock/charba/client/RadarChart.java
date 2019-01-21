@@ -33,7 +33,7 @@ public class RadarChart extends AbstractChart<RadarOptions, RadarDataset> {
 	 * Builds the object.
 	 */
 	public RadarChart() {
-		options = new RadarOptions(this, getChartOptions());
+		options = new RadarOptions(this, getDefaultChartOptions());
 	}
 
 	/*

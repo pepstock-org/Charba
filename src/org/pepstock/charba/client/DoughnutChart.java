@@ -32,7 +32,7 @@ public class DoughnutChart extends AbstractChart<DoughnutOptions, DoughnutDatase
 	 * Builds the object.
 	 */
 	public DoughnutChart() {
-		options = new DoughnutOptions(this, getChartOptions());
+		options = new DoughnutOptions(this, getDefaultChartOptions());
 	}
 
 	/*

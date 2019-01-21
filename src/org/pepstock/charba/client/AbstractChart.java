@@ -24,9 +24,9 @@ import org.pepstock.charba.client.data.Data;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.items.DatasetItem;
+import org.pepstock.charba.client.items.DatasetItem.DatasetItemFactory;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.items.DatasetItem.DatasetItemFactory;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.utils.JSON;
 
@@ -133,7 +133,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		Injector.ensureInjected();
 		// creates plugins container
 		plugins = new Plugins(this);
-		// creates global options
+		// creates defaults options for this chart type
 		options = createChartOptions();
 	}
 
@@ -221,7 +221,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * @return the chart options based on type of chart.
 	 */
 	protected ChartOptions createChartOptions() {
-		return Defaults.get().options(getType());
+		return Defaults.get().getChartOptions(getType());
 	}
 
 	/**
@@ -229,7 +229,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @return the default options of the chart
 	 */
-	protected final ChartOptions getChartOptions() {
+	public final ChartOptions getDefaultChartOptions() {
 		return options;
 	}
 

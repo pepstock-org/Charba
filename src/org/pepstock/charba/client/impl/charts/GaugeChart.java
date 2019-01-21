@@ -41,7 +41,7 @@ public final class GaugeChart extends BaseMeterChart<GaugeOptions, GaugeDataset>
 	public GaugeChart() {
 		super();
 		// creates options
-		options = new GaugeOptions(this, getChartOptions());
+		options = new GaugeOptions(this, getDefaultChartOptions());
 	}
 
 	/*

@@ -34,7 +34,7 @@ public class ScatterChart extends AbstractChart<ScatterOptions, ScatterDataset> 
 	 * Builds the object.
 	 */
 	public ScatterChart() {
-		options = new ScatterOptions(this, getChartOptions());
+		options = new ScatterOptions(this, getDefaultChartOptions());
 	}
 
 	/*
