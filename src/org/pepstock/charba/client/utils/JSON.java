@@ -24,7 +24,6 @@ import jsinterop.annotations.JsType;
  * The JSON object contains methods for parsing JSON and converting values to JSON.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL)
 public final class JSON {

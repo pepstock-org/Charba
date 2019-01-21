@@ -31,7 +31,6 @@ import com.google.gwt.resources.client.TextResource;
  * It enables also to inject other script into web page, necessary when you want to use some Chart.JS plugins.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
  * 
  */
 public final class Injector {

@@ -20,7 +20,6 @@ package org.pepstock.charba.client;
  * Every chart could have scale(s) or not and it depends on chart type.
  * 
  * @author Andrea "Stock" Stocchero
- * @version 2.0
  */
 public enum ScaleType
 {
