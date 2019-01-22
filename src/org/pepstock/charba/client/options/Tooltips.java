@@ -74,7 +74,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 		multiKeyBackground,
 		displayColors,
 		borderColor,
-		borderWidth,
+		borderWidth;
 	}
 
 	/**

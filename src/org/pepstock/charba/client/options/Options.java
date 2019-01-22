@@ -81,7 +81,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 		cutoutPercentage,
 		rotation,
 		circumference,
-		startAngle
+		startAngle;
 	}
 
 	/**
