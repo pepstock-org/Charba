@@ -49,8 +49,8 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	 * Java script FUNCTION callback called when a click event on the legend is raised.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyLegendClickCallback {
 
@@ -68,8 +68,8 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	 * Java script FUNCTION callback called when a hover event on the legend is raised.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyLegendHoverCallback {
 
@@ -152,7 +152,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	}
 
 	/**
-	 * Returns the legend labels.
+	 * Returns the legend labels element.
 	 * 
 	 * @return the labels
 	 */

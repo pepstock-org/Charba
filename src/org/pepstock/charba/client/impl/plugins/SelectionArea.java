@@ -31,6 +31,8 @@ final class SelectionArea {
 	private double bottom = 0;
 
 	/**
+	 * Returns the top.
+	 * 
 	 * @return the top
 	 */
 	double getTop() {
@@ -38,6 +40,8 @@ final class SelectionArea {
 	}
 
 	/**
+	 * Sets the top.
+	 * 
 	 * @param top the top to set
 	 */
 	void setTop(double top) {
@@ -45,6 +49,8 @@ final class SelectionArea {
 	}
 
 	/**
+	 * Returns the left.
+	 * 
 	 * @return the left
 	 */
 	double getLeft() {
@@ -52,6 +58,8 @@ final class SelectionArea {
 	}
 
 	/**
+	 * Sets the left.
+	 * 
 	 * @param left the left to set
 	 */
 	void setLeft(double left) {
@@ -59,6 +67,8 @@ final class SelectionArea {
 	}
 
 	/**
+	 * Returns the right.
+	 * 
 	 * @return the right
 	 */
 	double getRight() {
@@ -66,6 +76,8 @@ final class SelectionArea {
 	}
 
 	/**
+	 * Sets the right.
+	 * 
 	 * @param right the right to set
 	 */
 	void setRight(double right) {
@@ -73,6 +85,8 @@ final class SelectionArea {
 	}
 
 	/**
+	 * Returns the bottom.
+	 * 
 	 * @return the bottom
 	 */
 	double getBottom() {
@@ -80,6 +94,8 @@ final class SelectionArea {
 	}
 
 	/**
+	 * Sets the bottom.
+	 * 
 	 * @param bottom the bottom to set
 	 */
 	void setBottom(double bottom) {

@@ -55,8 +55,7 @@ public final class DatasetPluginItem extends NativeObjectContainer {
 	/**
 	 * Returns the current animation frame number.
 	 * 
-	 * @return the current animation frame number. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the current animation frame number. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getEasing() {
 		return getValue(Property.easing, UndefinedValues.DOUBLE);

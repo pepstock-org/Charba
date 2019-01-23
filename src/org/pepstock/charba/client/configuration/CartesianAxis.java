@@ -60,6 +60,8 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	}
 
 	/**
+	 * Returns the scale label element
+	 * 
 	 * @return the scaleLabel
 	 */
 	public CartesianScaleLabel getScaleLabel() {
@@ -67,11 +69,15 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	}
 
 	/**
+	 * Returns the ticks element
+	 * 
 	 * @return the ticks
 	 */
 	public abstract T getTicks();
 
 	/**
+	 * Returns the grid lines element
+	 * 
 	 * @return the grideLines
 	 */
 	public GridLines getGrideLines() {
@@ -79,6 +85,8 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	}
 
 	/**
+	 * Returns the axis type
+	 * 
 	 * @return the cartesianType
 	 */
 	public CartesianAxisType getCartesianType() {

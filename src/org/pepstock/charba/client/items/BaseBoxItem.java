@@ -38,7 +38,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 		bottom,
 		left
 	}
-	
+
 	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 

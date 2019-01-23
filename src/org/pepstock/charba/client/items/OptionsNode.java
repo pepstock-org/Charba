@@ -20,7 +20,7 @@ import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.options.ScaledOptions;
 
 /**
- *  Wrapper of options node of CHART.JS.
+ * Wrapper of options node of CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  */

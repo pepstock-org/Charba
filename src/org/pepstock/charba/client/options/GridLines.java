@@ -345,11 +345,11 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	}
 
 	/**
-	 * If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to
-	 * control which grid lines are drawn.
+	 * If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and
+	 * you need to control which grid lines are drawn.
 	 * 
-	 * @param drawOnChartArea If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are
-	 *            multiple axes and you need to control which grid lines are drawn.
+	 * @param drawOnChartArea If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when
+	 *            there are multiple axes and you need to control which grid lines are drawn.
 	 */
 	public void setDrawOnChartArea(boolean drawOnChartArea) {
 		setValue(Property.drawOnChartArea, drawOnChartArea);
@@ -358,11 +358,11 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	}
 
 	/**
-	 * If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you need to
-	 * control which grid lines are drawn.
+	 * If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and
+	 * you need to control which grid lines are drawn.
 	 * 
-	 * @return If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple axes and you
-	 *         need to control which grid lines are drawn.
+	 * @return If <code>true</code>, draw lines on the chart area inside the axis lines. This is useful when there are multiple
+	 *         axes and you need to control which grid lines are drawn.
 	 */
 	public boolean isDrawOnChartArea() {
 		return getValue(Property.drawOnChartArea, getDefaultValues().isDrawOnChartArea());
@@ -517,7 +517,8 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	}
 
 	/**
-	 * If <code>true</code>, grid lines will be shifted to be between labels. This is set to <code>true</code> in the bar chart by default.
+	 * If <code>true</code>, grid lines will be shifted to be between labels. This is set to <code>true</code> in the bar chart
+	 * by default.
 	 * 
 	 * @param offsetGridLines if <code>true</code>, grid lines will be shifted to be between labels.
 	 */
@@ -528,7 +529,8 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	}
 
 	/**
-	 * If <code>true</code>, grid lines will be shifted to be between labels. This is set to <code>true</code> in the bar chart by default.
+	 * If <code>true</code>, grid lines will be shifted to be between labels. This is set to <code>true</code> in the bar chart
+	 * by default.
 	 * 
 	 * @return if <code>true</code>, grid lines will be shifted to be between labels.
 	 */

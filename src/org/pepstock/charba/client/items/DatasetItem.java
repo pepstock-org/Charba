@@ -58,8 +58,7 @@ public class DatasetItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset index of the chart
 	 * 
-	 * @return the dataset index of the chart. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the dataset index of the chart. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getDatasetIndex() {
 		return getValue(Property._datasetIndex, UndefinedValues.INTEGER);

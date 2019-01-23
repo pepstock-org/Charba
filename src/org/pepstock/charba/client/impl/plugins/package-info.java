@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- *  Contains some plugins implementations, available out-of-the box.
+ * Contains some plugins implementations, available out-of-the box.
  * 
  * @author Andrea "Stock" Stocchero
  *

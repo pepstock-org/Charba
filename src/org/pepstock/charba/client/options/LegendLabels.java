@@ -65,8 +65,8 @@ public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> 
 	 * Returns if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this
 	 * case).
 	 * 
-	 * @return <code>true</code> if label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this
-	 *         case).
+	 * @return <code>true</code> if label style will match corresponding point style (size is based on fontSize, boxWidth is not
+	 *         used in this case).
 	 */
 	public boolean isUsePointStyle() {
 		return getValue(Property.usePointStyle, getDefaultValues().isUsePointStyle());

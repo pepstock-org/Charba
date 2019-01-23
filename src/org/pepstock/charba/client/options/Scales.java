@@ -168,8 +168,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	/**
 	 * Inner class to create scale item by a native object.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 *
+	 * @author Andrea "Stock" Stocchero @ *
 	 */
 	private final class ScaleListFactory implements NativeObjectContainerFactory<Scale> {
 

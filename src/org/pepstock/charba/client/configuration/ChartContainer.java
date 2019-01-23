@@ -38,6 +38,8 @@ abstract class ChartContainer {
 	}
 
 	/**
+	 * Returns the chart instance
+	 * 
 	 * @return the chart
 	 */
 	public final AbstractChart<?, ?> getChart() {

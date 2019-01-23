@@ -32,7 +32,7 @@ public final class UndefinedValues {
 	 * Default value for DOUBLE instances
 	 */
 	public static final double DOUBLE = Double.NaN;
-	
+
 	/**
 	 * Default value for STRING instances.
 	 */
@@ -49,4 +49,4 @@ public final class UndefinedValues {
 	private UndefinedValues() {
 		// do nothing
 	}
- }
+}

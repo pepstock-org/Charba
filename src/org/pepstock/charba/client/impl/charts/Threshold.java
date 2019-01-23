@@ -115,6 +115,8 @@ public final class Threshold implements IsThreshold {
 	}
 
 	/**
+	 * Sets the value of threshold.
+	 * 
 	 * @param value the value to set
 	 * @return the threshold instance
 	 */
@@ -124,6 +126,8 @@ public final class Threshold implements IsThreshold {
 	}
 
 	/**
+	 * Sets the color of threshold.
+	 * 
 	 * @param color the color to set
 	 * @return the threshold instance
 	 */

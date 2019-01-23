@@ -29,13 +29,14 @@ import jsinterop.annotations.JsType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name=NativeName.OBJECT)
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
 public final class AnimationObject {
-	
+
 	/**
 	 * To avoid any user creation
 	 */
-	AnimationObject() {}
+	AnimationObject() {
+	}
 
 	/**
 	 * Returns the native property of java script object related to animation item.
@@ -44,7 +45,7 @@ public final class AnimationObject {
 	 */
 	@JsProperty
 	native NativeObject getAnimationObject();
-	
+
 	/**
 	 * Returns the animation item, by the native java script object.
 	 * 

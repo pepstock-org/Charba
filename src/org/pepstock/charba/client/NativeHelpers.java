@@ -29,7 +29,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class NativeHelpers {
+final class NativeHelpers {
 
 	/**
 	 * Recursively deep copies source properties into target only if not defined in target.<br>

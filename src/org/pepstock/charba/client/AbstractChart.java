@@ -358,8 +358,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	/**
 	 * Returns a base 64 encoded string of the chart in it's current state.
 	 * 
-	 * @return base 64 image or {@link org.pepstock.charba.client.items.UndefinedValues#STRING} if chart is not
-	 *         initialized.
+	 * @return base 64 image or {@link org.pepstock.charba.client.items.UndefinedValues#STRING} if chart is not initialized.
 	 */
 	public final String toBase64Image() {
 		// checks if chart is created
@@ -374,8 +373,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	/**
 	 * Returns an HTML string of a legend for that chart. The legend is generated from the legendCallback in the options.
 	 * 
-	 * @return the HTML legend or {@link org.pepstock.charba.client.items.UndefinedValues#STRING} if chart is not
-	 *         initialized.
+	 * @return the HTML legend or {@link org.pepstock.charba.client.items.UndefinedValues#STRING} if chart is not initialized.
 	 */
 	public final String generateLegend() {
 		// checks if chart is created

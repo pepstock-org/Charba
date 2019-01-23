@@ -124,6 +124,8 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	}
 
 	/**
+	 * Returns the scale label element.
+	 * 
 	 * @return the scaleLabel
 	 */
 	public final ScaleLabel getScaleLabel() {
@@ -131,6 +133,8 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	}
 
 	/**
+	 * Returns the ticks element.
+	 * 
 	 * @return the ticks
 	 */
 	public final Ticks getTicks() {
@@ -138,6 +142,8 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	}
 
 	/**
+	 * Returns the grid lines element.
+	 * 
 	 * @return the grideLines
 	 */
 	public final GridLines getGrideLines() {
@@ -145,6 +151,8 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	}
 
 	/**
+	 * Returns the angle lines element.
+	 * 
 	 * @return the angleLines
 	 */
 	public final AngleLines getAngleLines() {
@@ -152,6 +160,8 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	}
 
 	/**
+	 * Returns the point labels element.
+	 * 
 	 * @return the pointLabels
 	 */
 	public final PointLabels getPointLabels() {
@@ -159,6 +169,8 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	}
 
 	/**
+	 * Returns the time element.
+	 * 
 	 * @return the time
 	 */
 	public final Time getTime() {

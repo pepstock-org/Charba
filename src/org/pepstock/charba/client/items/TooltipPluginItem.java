@@ -36,9 +36,9 @@ public final class TooltipPluginItem extends NativeObjectContainer {
 		easing,
 		tooltip
 	}
-	
+
 	private final TooltipNode node;
-	
+
 	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 

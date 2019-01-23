@@ -43,8 +43,8 @@ final class WrapperController extends NativeObjectContainer {
 	/**
 	 * Java script FUNCTION callback called to catch the chart initialization.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyInitializeCallback {
 		/**
@@ -60,8 +60,8 @@ final class WrapperController extends NativeObjectContainer {
 	/**
 	 * Java script FUNCTION callback called to catch the chart add elements.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyAddElementsCallback {
 
@@ -77,8 +77,8 @@ final class WrapperController extends NativeObjectContainer {
 	/**
 	 * Java script FUNCTION callback called to catch the chart add element and reset.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyAddElementAndResetCallback {
 
@@ -94,8 +94,8 @@ final class WrapperController extends NativeObjectContainer {
 	/**
 	 * Java script FUNCTION callback called to catch the chart drawing.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyDrawCallback {
 
@@ -111,8 +111,8 @@ final class WrapperController extends NativeObjectContainer {
 	/**
 	 * Java script FUNCTION callback called to catch the chart remove hover.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyRemoveHoverStyleCallback {
 
@@ -128,8 +128,8 @@ final class WrapperController extends NativeObjectContainer {
 	/**
 	 * Java script FUNCTION callback called to catch the chart set hover.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxySetHoverStyleCallback {
 
@@ -145,8 +145,8 @@ final class WrapperController extends NativeObjectContainer {
 	/**
 	 * Java script FUNCTION callback called to catch the chart updating.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyUpdateCallback {
 

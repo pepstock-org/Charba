@@ -79,8 +79,7 @@ public class LegendItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset index of the chart
 	 * 
-	 * @return the dataset index of the chart. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the dataset index of the chart. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getDatasetIndex() {
 		return getValue(Property.datasetIndex, UndefinedValues.INTEGER);
@@ -99,8 +98,7 @@ public class LegendItem extends NativeObjectContainer {
 	/**
 	 * Returns the label that will be displayed
 	 * 
-	 * @return the label that will be displayed. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return the label that will be displayed. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
 	 */
 	public final String getText() {
 		return getValue(Property.text, UndefinedValues.STRING);
@@ -228,8 +226,8 @@ public class LegendItem extends NativeObjectContainer {
 	/**
 	 * Inner class to create legend item by a native object.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	static final class LegendItemFactory implements NativeObjectContainerFactory<LegendItem> {
 
 		/*

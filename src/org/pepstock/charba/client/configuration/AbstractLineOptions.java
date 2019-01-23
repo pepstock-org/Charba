@@ -46,7 +46,7 @@ abstract class AbstractLineOptions extends MultiScalesOptions {
 	/**
 	 * If false, the lines between points are not drawn.
 	 * 
-	 * @return If false, the lines between points are not drawn. 
+	 * @return If false, the lines between points are not drawn.
 	 */
 	public boolean isShowLines() {
 		return getConfiguration().isShowLines();

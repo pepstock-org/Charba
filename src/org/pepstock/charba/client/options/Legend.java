@@ -58,6 +58,8 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	}
 
 	/**
+	 * Returns the legend labels element.
+	 * 
 	 * @return the labels
 	 */
 	public LegendLabels getLabels() {

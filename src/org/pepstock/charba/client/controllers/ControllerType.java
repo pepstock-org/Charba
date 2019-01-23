@@ -97,7 +97,9 @@ public final class ControllerType implements Type {
 	}
 
 	/**
-	 * @return the chartType
+	 * Returns the extended chart type of controller, otherwise <code>null</code>.
+	 * 
+	 * @return the extended chart type of controller, otherwise <code>null</code>
 	 */
 	public ChartType getChartType() {
 		return chartType;

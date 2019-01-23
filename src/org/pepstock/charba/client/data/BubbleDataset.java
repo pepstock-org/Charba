@@ -164,7 +164,7 @@ public final class BubbleDataset extends HovingDataset {
 	public void setDataPoints(List<DataPoint> datapoints) {
 		setArrayValue(Property.data, ArrayObject.of(datapoints));
 	}
-	
+
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
 	 * 

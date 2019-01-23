@@ -104,6 +104,8 @@ public class MeterDataset extends DoughnutDataset {
 	}
 
 	/**
+	 * Returns the maximum value of chart.
+	 * 
 	 * @return the max
 	 */
 	public final double getMax() {
@@ -111,6 +113,8 @@ public class MeterDataset extends DoughnutDataset {
 	}
 
 	/**
+	 * Returns the value of the chart.
+	 * 
 	 * @return the value
 	 */
 	public final double getValue() {

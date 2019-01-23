@@ -38,7 +38,9 @@ public final class Labels {
 	}
 
 	/**
-	 * @return the array
+	 * Returns the java script array.
+	 * 
+	 * @return the java script array.
 	 */
 	ArrayMixedObject getArray() {
 		return array;

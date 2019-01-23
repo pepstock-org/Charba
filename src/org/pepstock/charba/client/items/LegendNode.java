@@ -32,7 +32,7 @@ import org.pepstock.charba.client.items.LegendItem.LegendItemFactory;
  * @author Andrea "Stock" Stocchero
  */
 public final class LegendNode extends BaseBoxNodeItem {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -44,12 +44,12 @@ public final class LegendNode extends BaseBoxNodeItem {
 		lineWidths,
 		columnWidths
 	}
-	
+
 	// factory to create legend items for array container list
 	private final LegendItemFactory legendItemFactory = new LegendItemFactory();
 	// factory to create legend hit box items for array container list
 	private final LegendHitBoxItemFactory legendHitBoxItemFactory = new LegendHitBoxItemFactory();
-	
+
 	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
@@ -62,7 +62,8 @@ public final class LegendNode extends BaseBoxNodeItem {
 	/**
 	 * Returns if it is in doughnut mode.
 	 * 
-	 * @return <code>true</code> it is in doughnut mode. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 * @return <code>true</code> it is in doughnut mode. Default is
+	 *         {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isDoughnutMode() {
 		return getValue(Property.doughnutMode, UndefinedValues.BOOLEAN);

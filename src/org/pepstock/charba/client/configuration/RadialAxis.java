@@ -55,6 +55,8 @@ public class RadialAxis extends Axis {
 	}
 
 	/**
+	 * Returns the ticks element.
+	 * 
 	 * @return the ticks
 	 */
 	public RadialLinearTick getTicks() {
@@ -62,6 +64,8 @@ public class RadialAxis extends Axis {
 	}
 
 	/**
+	 * Returns the grid lines element.
+	 * 
 	 * @return the grideLines
 	 */
 	public GridLines getGrideLines() {
@@ -69,6 +73,8 @@ public class RadialAxis extends Axis {
 	}
 
 	/**
+	 * Returns the angle lines element.
+	 * 
 	 * @return the angleLines
 	 */
 	public RadialAngleLines getAngleLines() {
@@ -76,6 +82,8 @@ public class RadialAxis extends Axis {
 	}
 
 	/**
+	 * Returns the point labels element.
+	 * 
 	 * @return the pointLabels
 	 */
 	public RadialPointLabels getPointLabels() {

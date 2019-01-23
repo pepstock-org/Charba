@@ -34,12 +34,12 @@ import org.pepstock.charba.client.items.TooltipLabelColor.TooltipLabelColorFacto
 
 /**
  * This object is passed by CHART.JS to the callback to manage tooltip custom callback.<br>
- * The tooltip label configuration is nested below the tooltip configuration using the callbacks key. 
+ * The tooltip label configuration is nested below the tooltip configuration using the callbacks key.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class TooltipModel extends NativeObjectContainer {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -89,13 +89,14 @@ public final class TooltipModel extends NativeObjectContainer {
 		legendColorBackground,
 		displayColors
 	}
+
 	// instance of tooltip items factory
 	private final TooltipItemFactory tooltipItemFactory = new TooltipItemFactory();
 	// instance of tooltip body items factory
 	private final TooltipBodyItemFactory tooltipBodyItemFactory = new TooltipBodyItemFactory();
 	// instance of tooltip label color factory
 	private final TooltipLabelColorFactory tooltipLabelColorFactory = new TooltipLabelColorFactory();
-	
+
 	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
@@ -537,7 +538,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the legend color of tooltips.
 	 */
 	public String getLegendColorBackgroundAsString() {
-		return getValue(Property.legendColorBackground,  Defaults.get().getGlobal().getDefaultColorAsString());
+		return getValue(Property.legendColorBackground, Defaults.get().getGlobal().getDefaultColorAsString());
 	}
 
 	/**
@@ -548,6 +549,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	public IsColor getLegendColorBackground() {
 		return ColorBuilder.parse(getLegendColorBackgroundAsString());
 	}
+
 	/**
 	 * Returns the display of colors of tooltip.
 	 * 

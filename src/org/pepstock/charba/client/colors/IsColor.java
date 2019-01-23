@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.colors;
 
 /**
- * Defines the color methods.
+ * Defines the methods that all colors must have.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -24,44 +24,59 @@ package org.pepstock.charba.client.colors;
 public interface IsColor {
 
 	/**
+	 * Returns the red value. 
+	 * 
 	 * @return the red
 	 */
-	 int getRed();
+	int getRed();
+
 	/**
+	 * Returns the green value. 
+	 * 
 	 * @return the green
 	 */
-	 int getGreen();
+	int getGreen();
+
 	/**
+	 * Returns the blue value.
+	 * 
 	 * @return the blue
 	 */
-	 int getBlue();
+	int getBlue();
+
 	/**
+	 * Returns the alpha rate.
+	 * 
 	 * @return the alpha
 	 */
-	 double getAlpha();
+	double getAlpha();
 
 	/**
 	 * Clones the color applying the alpha value.
 	 * 
 	 * @param alpha the alpha to set
-	 * @return the color with the alpha value
+	 * @return new color with the alpha value
 	 */
-	 IsColor alpha(double alpha);
+	IsColor alpha(double alpha);
 
 	/**
 	 * Returns RGBA string value which represents the color.
+	 * 
 	 * @return RGBA string value which represents the color
 	 */
-	 String toRGBA();
+	String toRGBA();
+
 	/**
 	 * Returns RGB string value which represents the color.
+	 * 
 	 * @return RGB string value which represents the color
 	 */
-	 String toRGB();
-	
+	String toRGB();
+
 	/**
 	 * Returns HEX string value which represents the color.
+	 * 
 	 * @return HEX string value which represents the color.
 	 */
-	 String toHex();
+	String toHex();
 }

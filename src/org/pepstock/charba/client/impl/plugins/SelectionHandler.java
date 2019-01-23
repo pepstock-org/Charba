@@ -342,7 +342,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			chart.getCanvas().getContext2d().strokeRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
 		}
 	}
-	
+
 	/**
 	 * Complete an existing selection on canvas by an event.<br>
 	 * Can be invokes by mouse up or refresh of chart (like resizing).

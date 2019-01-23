@@ -66,6 +66,8 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	}
 
 	/**
+	 * Returns the displayFormats element.
+	 * 
 	 * @return the displayFormats
 	 */
 	public DisplayFormats getDisplayFormats() {
@@ -73,10 +75,11 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	}
 
 	/**
-	 * If <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
+	 * If <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be
+	 * Sunday.
 	 * 
-	 * @param isoWeekday if <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it
-	 *            will be Sunday.
+	 * @param isoWeekday if <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday.
+	 *            Otherwise, it will be Sunday.
 	 */
 	public void setIsoWeekday(boolean isoWeekday) {
 		setValue(Property.isoWeekday, isoWeekday);
@@ -85,10 +88,11 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	}
 
 	/**
-	 * If <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be Sunday.
+	 * If <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be
+	 * Sunday.
 	 * 
-	 * @return if <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it will be
-	 *         Sunday.
+	 * @return if <code>true</code> and the unit is set to 'week', then the first day of the week will be Monday. Otherwise, it
+	 *         will be Sunday.
 	 */
 	public boolean isIsoWeekday() {
 		return getValue(Property.isoWeekday, getDefaultValues().isIsoWeekday());

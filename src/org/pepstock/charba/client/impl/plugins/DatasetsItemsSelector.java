@@ -91,7 +91,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			chart.update();
 		}
 	}
-	
+
 	/**
 	 * Sets a flag to skip to send event after refresh. This is helpful for drill down implementation.
 	 * 

@@ -41,7 +41,7 @@ public interface Resources extends ClientBundle {
 	 * This java script with a set of static methods used as utility and needed to improve JSINTEROP adoption for CHARBA,
 	 * because JSINTEROP is not able to address all java script model.
 	 * 
-	 * @return charba java script code.
+	 * @return CHARBA java script code.
 	 */
 	@Source("js/charba.helper.js")
 	TextResource charbaHelper();

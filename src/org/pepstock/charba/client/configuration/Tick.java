@@ -44,6 +44,8 @@ abstract class Tick extends BaseTick<Ticks> {
 	}
 
 	/**
+	 * Returns minor tick element.
+	 * 
 	 * @return the minor
 	 */
 	public BaseTick<TickMinor> getMinor() {
@@ -51,6 +53,8 @@ abstract class Tick extends BaseTick<Ticks> {
 	}
 
 	/**
+	 * Returns major tick element.
+	 * 
 	 * @return the major
 	 */
 	public BaseTick<TickMajor> getMajor() {

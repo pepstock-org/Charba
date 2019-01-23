@@ -38,6 +38,8 @@ public class Layout {
 	}
 
 	/**
+	 * Returns the padding element.
+	 * 
 	 * @return the padding
 	 */
 	public Padding getPadding() {

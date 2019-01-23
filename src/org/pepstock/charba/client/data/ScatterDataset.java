@@ -72,10 +72,10 @@ public final class ScatterDataset extends LineDataset {
 	public void setData(double... values) {
 		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
 	}
-	
-	
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.jsinterop.data.Dataset#setData(java.util.List)
 	 */
 	@Override

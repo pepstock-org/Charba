@@ -28,6 +28,8 @@ final class SelectionDatasetItems {
 	private int end = 0;
 
 	/**
+	 * Returns the start.
+	 * 
 	 * @return the start
 	 */
 	int getStart() {
@@ -35,6 +37,8 @@ final class SelectionDatasetItems {
 	}
 
 	/**
+	 * Sets the start.
+	 * 
 	 * @param start the start to set
 	 */
 	void setStart(int start) {
@@ -42,6 +46,8 @@ final class SelectionDatasetItems {
 	}
 
 	/**
+	 * Returns the end.
+	 * 
 	 * @return the end
 	 */
 	int getEnd() {
@@ -49,6 +55,8 @@ final class SelectionDatasetItems {
 	}
 
 	/**
+	 * Sets the end.
+	 * 
 	 * @param end the end to set
 	 */
 	void setEnd(int end) {

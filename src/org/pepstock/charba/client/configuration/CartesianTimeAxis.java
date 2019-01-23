@@ -69,6 +69,8 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	}
 
 	/**
+	 * Returns the time element.
+	 * 
 	 * @return the time
 	 */
 	public Time getTime() {

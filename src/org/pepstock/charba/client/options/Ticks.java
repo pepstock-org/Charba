@@ -88,6 +88,8 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
+	 * Returns the minor tick element.
+	 * 
 	 * @return the minor
 	 */
 	public final TickMinor getMinor() {
@@ -95,6 +97,8 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
+	 * Returns the major element.
+	 * 
 	 * @return the major
 	 */
 	public final TickMajor getMajor() {
@@ -162,11 +166,11 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * If <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all
-	 * labels no matter what
+	 * If <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it
+	 * off to show all labels no matter what
 	 * 
-	 * @param autoSkip if <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it
-	 *            off to show all labels no matter what
+	 * @param autoSkip if <code>true</code>, automatically calculates how many labels that can be shown and hides labels
+	 *            accordingly. Turn it off to show all labels no matter what
 	 */
 	public void setAutoSkip(boolean autoSkip) {
 		setValue(Property.autoSkip, autoSkip);
@@ -175,11 +179,11 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * If <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all
-	 * labels no matter what
+	 * If <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it
+	 * off to show all labels no matter what
 	 * 
-	 * @return if <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to
-	 *         show all labels no matter what.
+	 * @return if <code>true</code>, automatically calculates how many labels that can be shown and hides labels accordingly.
+	 *         Turn it off to show all labels no matter what.
 	 */
 	public boolean isAutoSkip() {
 		return getValue(Property.autoSkip, getDefaultValues().isAutoSkip());

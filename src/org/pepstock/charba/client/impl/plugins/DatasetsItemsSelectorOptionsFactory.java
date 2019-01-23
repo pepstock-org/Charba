@@ -63,8 +63,8 @@ public final class DatasetsItemsSelectorOptionsFactory implements NativeObjectCo
 	/**
 	 * Internal factory to create options from default global option for the plugin
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	static class DatasetsItemsSelectorDefaultsOptionsFactory implements NativeObjectContainerFactory<DatasetsItemsSelectorDefaultsOptions> {
 
 		/*

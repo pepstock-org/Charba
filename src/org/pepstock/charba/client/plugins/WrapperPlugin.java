@@ -66,6 +66,8 @@ abstract class WrapperPlugin {
 	}
 
 	/**
+	 * Returns the native java script object.
+	 * 
 	 * @return the nativeObject
 	 */
 	NativePlugin getNativeObject() {

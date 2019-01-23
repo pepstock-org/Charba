@@ -27,7 +27,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  *
  */
 public final class TooltipNode extends NativeObjectContainer {
-	
+
 	private final TooltipModel model;
 
 	/**
@@ -37,7 +37,7 @@ public final class TooltipNode extends NativeObjectContainer {
 	{
 		_model
 	}
-	
+
 	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
@@ -49,7 +49,6 @@ public final class TooltipNode extends NativeObjectContainer {
 		model = new TooltipModel(getValue(Property._model));
 	}
 
-
 	/**
 	 * Returns the tooltip model
 	 * 
@@ -57,6 +56,6 @@ public final class TooltipNode extends NativeObjectContainer {
 	 */
 	public TooltipModel getModel() {
 		return model;
-	}	
+	}
 
 }

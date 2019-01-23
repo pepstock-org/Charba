@@ -83,8 +83,8 @@ public final class ArrayObject extends Array {
 		}
 		// returns the array
 		return result;
-	}	
-	
+	}
+
 	/**
 	 * Returns the index of the last occurrence of the specified element in this array, or -1 if this array does not contain the
 	 * element.

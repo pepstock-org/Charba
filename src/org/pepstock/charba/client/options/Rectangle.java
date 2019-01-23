@@ -62,7 +62,7 @@ public class Rectangle extends AbstractElement<IsDefaultRectangle> implements Is
 	/**
 	 * Returns the edge to skip drawing the border for.
 	 * 
-	 * @return the edge to skip drawing the border for. 
+	 * @return the edge to skip drawing the border for.
 	 */
 	public Position getBorderSkipped() {
 		return getValue(Property.borderSkipped, Position.class, getDefaultValues().getBorderSkipped());

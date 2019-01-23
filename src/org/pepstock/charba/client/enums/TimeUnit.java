@@ -79,6 +79,8 @@ public enum TimeUnit implements Key
 	}
 
 	/**
+	 * returns the default format for the time unit.
+	 * 
 	 * @return the format
 	 */
 	public String getDefaultFormat() {

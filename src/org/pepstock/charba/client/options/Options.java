@@ -34,7 +34,7 @@ import org.pepstock.charba.client.enums.FontStyle;
  * @author Andrea "Stock" Stocchero
  */
 public class Options extends AbstractModel<Options, IsDefaultOptions> implements IsDefaultOptions {
-	
+
 	// all sub elements
 	private final Animation animation;
 
@@ -114,6 +114,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
+	 * Returns the animation element.
+	 * 
 	 * @return the animation
 	 */
 	public Animation getAnimation() {
@@ -121,6 +123,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
+	 * Returns the legend element.
+	 * 
 	 * @return the legend
 	 */
 	public Legend getLegend() {
@@ -128,6 +132,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
+	 * Returns the hover element.
+	 * 
 	 * @return the hover
 	 */
 	public final Hover getHover() {
@@ -135,6 +141,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
+	 * Returns the layout element.
+	 * 
 	 * @return the layout
 	 */
 	public final Layout getLayout() {
@@ -142,6 +150,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
+	 * Returns the elements element.
+	 * 
 	 * @return the elements
 	 */
 	public final Elements getElements() {
@@ -149,6 +159,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
+	 * Returns the title element.
+	 * 
 	 * @return the title
 	 */
 	public final Title getTitle() {
@@ -156,6 +168,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
+	 * Returns the tooltips element.
+	 * 
 	 * @return the tooltips
 	 */
 	public final Tooltips getTooltips() {
@@ -163,6 +177,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	}
 
 	/**
+	 * Returns the plugins element.
+	 * 
 	 * @return the plugins
 	 */
 	public final Plugins getPlugins() {
@@ -429,7 +445,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * font-family options.
 	 * 
 	 * @return Font family to use in the chart, on all objects, if not override by the specific configuration, follows CSS
-	 *         font-family options. 
+	 *         font-family options.
 	 */
 	public String getDefaultFontFamily() {
 		return getValue(Property.defaultFontFamily, getDefaultValues().getDefaultFontFamily());

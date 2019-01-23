@@ -49,6 +49,8 @@ public class Elements {
 	}
 
 	/**
+	 * Returns the point element.
+	 * 
 	 * @return the point
 	 */
 	public Point getPoint() {
@@ -56,6 +58,8 @@ public class Elements {
 	}
 
 	/**
+	 * Returns the line element.
+	 * 
 	 * @return the line
 	 */
 	public Line getLine() {
@@ -63,6 +67,8 @@ public class Elements {
 	}
 
 	/**
+	 * Returns the arc element.
+	 * 
 	 * @return the arc
 	 */
 	public Arc getArc() {
@@ -70,6 +76,8 @@ public class Elements {
 	}
 
 	/**
+	 * Returns the rectangle element.
+	 * 
 	 * @return the rectangle
 	 */
 	public Rectangle getRectangle() {

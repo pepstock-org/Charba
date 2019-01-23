@@ -169,8 +169,7 @@ public final class ChartNode {
 	/**
 	 * Returns the current device pixel ratio.
 	 * 
-	 * @return the current device pixel ratio. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the current device pixel ratio. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
 	public double getCurrentDevicePixelRatio() {
 		return initialized ? check(chart.getCurrentDevicePixelRatio(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
@@ -179,8 +178,7 @@ public final class ChartNode {
 	/**
 	 * Returns if the chart is animating or not.
 	 * 
-	 * @return if the chart is animating or not. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 * @return if the chart is animating or not. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isAnimating() {
 		return initialized ? check(chart.isAnimating(), UndefinedValues.BOOLEAN) : UndefinedValues.BOOLEAN;

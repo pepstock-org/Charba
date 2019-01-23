@@ -101,6 +101,8 @@ public final class GaugeDataset extends MeterDataset {
 	}
 
 	/**
+	 * Returns the current threshold.
+	 * 
 	 * @return the current
 	 */
 	public IsThreshold getCurrent() {
@@ -108,14 +110,18 @@ public final class GaugeDataset extends MeterDataset {
 	}
 
 	/**
-	 * @return the percentageThresholds
+	 * Returns <code>true</code> if percentage threshold is used, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if percentage threshold is used, otherwise <code>false</code>
 	 */
 	public boolean isPercentageThreshold() {
 		return percentageThreshold;
 	}
 
 	/**
-	 * @param percentageThreshold the percentageThresholds to set
+	 * Sets <code>true</code> if percentage threshold is used, otherwise <code>false</code>.
+	 * 
+	 * @param percentageThreshold <code>true</code> if percentage threshold is used, otherwise <code>false</code>
 	 */
 	public void setPercentageThreshold(boolean percentageThreshold) {
 		// sets to use the value of thresholds as percentage of value

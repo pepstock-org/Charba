@@ -19,6 +19,8 @@ package org.pepstock.charba.client.colors;
  * All modern browsers support the following 140 color names.
  * 
  * @author Andrea "Stock" Stocchero
+ * 
+ * @see <a href="https://www.w3schools.com/colors/colors_names.asp">HTML Color names</a>
  *
  */
 public enum HtmlColor implements IsColor
@@ -82,8 +84,8 @@ public enum HtmlColor implements IsColor
 	GreenYellow("#ADFF2F"),
 	HoneyDew("#F0FFF0"),
 	HotPink("#FF69B4"),
-	IndianRed ("#CD5C5C"),
-	Indigo ("#4B0082"),
+	IndianRed("#CD5C5C"),
+	Indigo("#4B0082"),
 	Ivory("#FFFFF0"),
 	Khaki("#F0E68C"),
 	Lavender("#E6E6FA"),
@@ -171,30 +173,35 @@ public enum HtmlColor implements IsColor
 	WhiteSmoke("#F5F5F5"),
 	Yellow("#FFFF00"),
 	YellowGreen("#9ACD32");
-	
+
+	// color string representation in hex mode
 	private final String hexValue;
-	
+	// color instance
 	private final IsColor color;
 
 	/**
 	 * Creates a color with HEX value.
-	 * @param hexValue
+	 * 
+	 * @param hexValue color string representation in hex mode
 	 */
 	private HtmlColor(String hexValue) {
 		this.hexValue = hexValue;
 		// checks if the HEX value
 		String newHexvalue = hexValue.substring(1);
-		// reads colors
+		// reads colors for RED, GREEN and BLUE
 		String redValue = newHexvalue.substring(0, 2);
 		int red = Integer.parseInt(redValue, 16);
 		String greenValue = newHexvalue.substring(2, 4);
 		int green = Integer.parseInt(greenValue, 16);
 		String blueValue = newHexvalue.substring(4);
 		int blue = Integer.parseInt(blueValue, 16);
+		// by default, using HEX format, transparency is 1
 		color = new Color(red, green, blue, Color.DEFAULT_ALPHA);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.utils.IsColor#getRed()
 	 */
 	@Override
@@ -202,7 +209,9 @@ public enum HtmlColor implements IsColor
 		return color.getRed();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.utils.IsColor#getGreen()
 	 */
 	@Override
@@ -210,7 +219,9 @@ public enum HtmlColor implements IsColor
 		return color.getGreen();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.utils.IsColor#getBlue()
 	 */
 	@Override
@@ -218,7 +229,9 @@ public enum HtmlColor implements IsColor
 		return color.getBlue();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.utils.IsColor#getAlpha()
 	 */
 	@Override
@@ -226,7 +239,9 @@ public enum HtmlColor implements IsColor
 		return color.getAlpha();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.utils.IsColor#alpha(double)
 	 */
 	@Override
@@ -234,7 +249,9 @@ public enum HtmlColor implements IsColor
 		return color.alpha(alpha);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.utils.IsColor#toRGBA()
 	 */
 	@Override
@@ -242,7 +259,9 @@ public enum HtmlColor implements IsColor
 		return color.toRGBA();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.utils.IsColor#toRGB()
 	 */
 	@Override
@@ -250,7 +269,9 @@ public enum HtmlColor implements IsColor
 		return color.toRGB();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.utils.IsColor#toHex()
 	 */
 	@Override

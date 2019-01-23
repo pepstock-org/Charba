@@ -140,8 +140,8 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	/**
 	 * Inner class to create tooltip label color by a native object.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	static final class TooltipLabelColorFactory implements NativeObjectContainerFactory<TooltipLabelColor> {
 
 		/*

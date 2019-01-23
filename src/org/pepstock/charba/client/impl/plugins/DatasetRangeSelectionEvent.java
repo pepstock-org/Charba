@@ -64,14 +64,20 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRange
 	}
 
 	/**
-	 * @return the from
+	 * Returns the starting index of of selected datasets items.<br>
+	 * If equals to {@link RESET_SELECTION}, the event is related to a reset of selection area.
+	 * 
+	 * @return the starting index of of selected datasets items.
 	 */
 	public int getFrom() {
 		return from;
 	}
 
 	/**
-	 * @return the to
+	 * Returns the ending index of of selected datasets items.<br>
+	 * If equals to {@link RESET_SELECTION}, the event is related to a reset of selection area.
+	 * 
+	 * @return the to the ending index of of selected datasets items.
 	 */
 	public int getTo() {
 		return to;

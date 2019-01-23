@@ -71,5 +71,5 @@ public final class AxisMarginsItem extends MarginsItem {
 	public void setRight(int right) {
 		setValue(Property.right, right);
 	}
-	
+
 }

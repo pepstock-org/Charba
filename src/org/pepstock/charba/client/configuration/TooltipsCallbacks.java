@@ -61,8 +61,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Java script FUNCTION callback called to have text before title.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyBeforeTitleCallback {
 
@@ -80,8 +80,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Java script FUNCTION callback called to have text on title.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyTitleCallback {
 
@@ -99,8 +99,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Java script FUNCTION callback called to have text after title.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyAfterTitleCallback {
 
@@ -118,8 +118,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Java script FUNCTION callback called to have text before footer.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyBeforeFooterCallback {
 
@@ -137,8 +137,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Java script FUNCTION callback called to have text on footer.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyFooterCallback {
 
@@ -156,8 +156,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Java script FUNCTION callback called to have text after footer.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyAfterFooterCallback {
 
@@ -175,8 +175,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Java script FUNCTION callback called to have text before body.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyBeforeBodyCallback {
 
@@ -194,8 +194,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Java script FUNCTION callback called to have text after body.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyAfterBodyCallback {
 
@@ -213,8 +213,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Java script FUNCTION callback called to have text before label.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyBeforeLabelCallback {
 
@@ -232,8 +232,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Java script FUNCTION callback called to have text after label.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyAfterLabelCallback {
 
@@ -251,8 +251,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Java script FUNCTION callback called creating label.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyLabelCallback {
 
@@ -270,8 +270,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Java script FUNCTION callback called after creating label color.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyLabelColorCallback {
 
@@ -289,8 +289,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * Java script FUNCTION callback called after creating text label color.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyLabelTextColorCallback {
 

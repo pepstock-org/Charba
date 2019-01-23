@@ -71,6 +71,8 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	}
 
 	/**
+	 * Returns the color as string.
+	 * 
 	 * @return the color
 	 */
 	public String getColorAsString() {
@@ -78,6 +80,8 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	}
 
 	/**
+	 * Returns the color.
+	 * 
 	 * @return the color
 	 */
 	public IsColor getColor() {

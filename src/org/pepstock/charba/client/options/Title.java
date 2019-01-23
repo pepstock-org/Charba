@@ -124,7 +124,8 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	/**
 	 * If <code>true</code>, marks that this box should take the full width of the canvas (pushing down other boxes).
 	 * 
-	 * @param fullWidth if <code>true</code>, marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * @param fullWidth if <code>true</code>, marks that this box should take the full width of the canvas (pushing down other
+	 *            boxes)
 	 */
 	public void setFullWidth(boolean fullWidth) {
 		setValue(Property.fullWidth, fullWidth);

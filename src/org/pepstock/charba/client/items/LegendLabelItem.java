@@ -30,7 +30,7 @@ import org.pepstock.charba.client.enums.PointStyle;
  *
  */
 public final class LegendLabelItem extends LegendItem {
-	
+
 	/**
 	 * Standard constructor which wraps a new native java script object.
 	 */

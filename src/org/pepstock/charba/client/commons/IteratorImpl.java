@@ -31,9 +31,9 @@ public class IteratorImpl<E> implements Iterator<E> {
 	// list instance
 	private final List<E> parent;
 	// index of next element to return
-	protected int cursor;
+	int cursor;
 	// index of last element returned; -1 if no such
-	protected int lastReturn = -1;
+	int lastReturn = -1;
 
 	/**
 	 * Builds the iterator, storing the list instance
@@ -48,7 +48,7 @@ public class IteratorImpl<E> implements Iterator<E> {
 	/**
 	 * @return the parent list
 	 */
-	protected List<E> getParent() {
+	List<E> getParent() {
 		return parent;
 	}
 

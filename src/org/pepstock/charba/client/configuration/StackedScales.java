@@ -39,22 +39,29 @@ public class StackedScales extends Scales {
 	}
 
 	/**
-	 * @return the isOnlyYAxis
+	 * Returns <code>true</code> if there is only a Y axis, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if there is only a Y axis, otherwise <code>false</code>
 	 */
 	public boolean isOnlyYAxis() {
 		return isOnlyYAxis;
 	}
 
 	/**
-	 * @param isOnlyYAxis the isOnlyYAxis to set
+	 * Sets <code>true</code> if there is only a Y axis, otherwise <code>false</code>.
+	 * 
+	 * @param isOnlyYAxis <code>true</code> if there is only a Y axis, otherwise <code>false</code>
 	 */
 	public void setOnlyYAxis(boolean isOnlyYAxis) {
 		this.isOnlyYAxis = isOnlyYAxis;
 	}
-	
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.configuration.Scales#setXAxes(org.pepstock.charba.client.jsinterop.configuration.Axis[])
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.pepstock.charba.client.jsinterop.configuration.Scales#setXAxes(org.pepstock.charba.client.jsinterop.configuration.
+	 * Axis[])
 	 */
 	@Override
 	public void setXAxes(Axis... axes) {
@@ -68,8 +75,12 @@ public class StackedScales extends Scales {
 		super.setXAxes(axes);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.jsinterop.configuration.Scales#setYAxes(org.pepstock.charba.client.jsinterop.configuration.Axis[])
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.pepstock.charba.client.jsinterop.configuration.Scales#setYAxes(org.pepstock.charba.client.jsinterop.configuration.
+	 * Axis[])
 	 */
 	@Override
 	public void setYAxes(Axis... axes) {

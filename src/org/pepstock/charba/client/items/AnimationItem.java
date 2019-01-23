@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.Easing;
  * @author Andrea "Stock" Stocchero
  */
 public final class AnimationItem extends NativeObjectContainer {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -37,7 +37,7 @@ public final class AnimationItem extends NativeObjectContainer {
 		numSteps,
 		easing
 	}
-	
+
 	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 

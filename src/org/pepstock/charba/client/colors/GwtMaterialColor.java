@@ -20,7 +20,7 @@ package org.pepstock.charba.client.colors;
  * 
  * @author Andrea "Stock" Stocchero
  * 
- * @see <a href="http://gwtmaterialdesign.github.io/gwt-material-demo/#colors">Colors</a>
+ * @see <a href="http://gwtmaterialdesign.github.io/gwt-material-demo/#colors">GWT material colors</a>
  *
  */
 public enum GwtMaterialColor implements IsColor
@@ -281,14 +281,16 @@ public enum GwtMaterialColor implements IsColor
 	BLUE_GREY_DARKEN_4("#263238"),
 	BLACK("#000000"),
 	WHITE("#ffffff");
-	
+
+	// color string representation in HEX
 	private final String hexValue;
-	
+	// color instance
 	private final IsColor color;
 
 	/**
 	 * Creates a color with HEX value.
-	 * @param hexValue
+	 * 
+	 * @param hexValue color string representation in HEX
 	 */
 	private GwtMaterialColor(String hexValue) {
 		this.hexValue = hexValue;
@@ -304,7 +306,9 @@ public enum GwtMaterialColor implements IsColor
 		color = new Color(red, green, blue, Color.DEFAULT_ALPHA);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.utils.IsColor#getRed()
 	 */
 	@Override
@@ -312,7 +316,9 @@ public enum GwtMaterialColor implements IsColor
 		return color.getRed();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.utils.IsColor#getGreen()
 	 */
 	@Override
@@ -320,7 +326,9 @@ public enum GwtMaterialColor implements IsColor
 		return color.getGreen();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.utils.IsColor#getBlue()
 	 */
 	@Override
@@ -328,7 +336,9 @@ public enum GwtMaterialColor implements IsColor
 		return color.getBlue();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.utils.IsColor#getAlpha()
 	 */
 	@Override
@@ -336,7 +346,9 @@ public enum GwtMaterialColor implements IsColor
 		return color.getAlpha();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.utils.IsColor#alpha(double)
 	 */
 	@Override
@@ -344,7 +356,9 @@ public enum GwtMaterialColor implements IsColor
 		return color.alpha(alpha);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.utils.IsColor#toRGBA()
 	 */
 	@Override
@@ -352,7 +366,9 @@ public enum GwtMaterialColor implements IsColor
 		return color.toRGBA();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.utils.IsColor#toRGB()
 	 */
 	@Override
@@ -360,7 +376,9 @@ public enum GwtMaterialColor implements IsColor
 		return color.toRGB();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.utils.IsColor#toHex()
 	 */
 	@Override

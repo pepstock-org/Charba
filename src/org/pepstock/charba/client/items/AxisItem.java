@@ -29,9 +29,9 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  */
 public final class AxisItem extends ScaleItem {
-	
+
 	private final AxisMarginsItem margins;
-	
+
 	private final AxisMinSizeItem minSize;
 
 	/**
@@ -43,7 +43,7 @@ public final class AxisItem extends ScaleItem {
 		super(nativeObject);
 		// initializes the sub objects
 		margins = new AxisMarginsItem(getValue(BaseBoxNodeItem.Property.margins));
-		minSize= new AxisMinSizeItem(getValue(BaseBoxNodeItem.Property.minSize));
+		minSize = new AxisMinSizeItem(getValue(BaseBoxNodeItem.Property.minSize));
 	}
 
 	/**

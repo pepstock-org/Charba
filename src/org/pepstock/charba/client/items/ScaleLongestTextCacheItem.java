@@ -33,7 +33,7 @@ import org.pepstock.charba.client.commons.NativeObject;
  *
  */
 public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -43,7 +43,7 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 		garbageCollect,
 		font
 	}
-	
+
 	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 
@@ -73,7 +73,7 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}
-	
+
 	/**
 	 * Returns a map with all ticks and max lengths in pixel of ticks.<br>
 	 * Key is the value of tick in string format, value is the max length in pixels.

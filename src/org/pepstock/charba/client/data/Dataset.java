@@ -156,7 +156,8 @@ public abstract class Dataset extends NativeObjectContainer {
 	}
 
 	/**
-	 * Sets the plugin dataset configuration. If dataset configuration options is null, the configuration of plugin will be removed.
+	 * Sets the plugin dataset configuration. If dataset configuration options is null, the configuration of plugin will be
+	 * removed.
 	 * 
 	 * @param pluginId plugin id.
 	 * @param options java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if

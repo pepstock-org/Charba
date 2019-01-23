@@ -31,9 +31,9 @@ import org.pepstock.charba.client.enums.AxisType;
  * @author Andrea "Stock" Stocchero
  */
 public class ScaleItem extends BaseBoxNodeItem {
-	
+
 	private final ScaleLongestTextCacheItem longestTextCache;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -88,7 +88,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	public final String getId() {
 		return getValue(Property.id, UndefinedValues.STRING);
 	}
-	
+
 	/**
 	 * Returns the type of scale
 	 * 
@@ -101,7 +101,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns true if this item represents a hidden scale.
 	 * 
-	 * @return <code>true</code> if this item represents a hidden scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 * @return <code>true</code> if this item represents a hidden scale. Default is
+	 *         {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
 	 */
 	public final boolean isHidden() {
 		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
@@ -126,7 +127,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	}
 
 	/**
-	 * Returns the max value of scale. 
+	 * Returns the max value of scale.
 	 * 
 	 * @return the max value of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
@@ -144,7 +145,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	}
 
 	/**
-	 * Returns the max value of scale. 
+	 * Returns the max value of scale.
 	 * 
 	 * @return the max value of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
 	 */
@@ -153,7 +154,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	}
 
 	/**
-	 * Returns the minimum value of scale. 
+	 * Returns the minimum value of scale.
 	 * 
 	 * @return the minimum value of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
 	 */

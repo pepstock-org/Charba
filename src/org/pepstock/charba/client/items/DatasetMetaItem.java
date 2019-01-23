@@ -37,7 +37,7 @@ import org.pepstock.charba.client.options.Scales;
  * @author Andrea "Stock" Stocchero
  */
 public final class DatasetMetaItem extends NativeObjectContainer {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -49,9 +49,10 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 		yAxisID,
 		xAxisID
 	}
+
 	// instance of dataset items factory.
 	private final DatasetItemFactory datasetItemFactory = new DatasetItemFactory();
-	
+
 	/**
 	 * To avoid any user creation but provides an empty object
 	 */
@@ -69,7 +70,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the type of dataset. 
+	 * Returns the type of dataset.
 	 * 
 	 * @return the type of dataset. If not set or invalid, the default is {@link org.pepstock.charba.client.ChartType#bar}.
 	 */
@@ -89,7 +90,8 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	/**
 	 * Returns if the dataset is hidden.
 	 * 
-	 * @return <code>true</code> if the dataset is hidden, otherwise is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 * @return <code>true</code> if the dataset is hidden, otherwise is
+	 *         {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isHidden() {
 		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
@@ -98,23 +100,24 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	/**
 	 * Sets if the dataset must be hidden.
 	 * 
-	 * @param hidden <code>true</code> if the dataset must be hidden, otherwise is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 * @param hidden <code>true</code> if the dataset must be hidden, otherwise is
+	 *            {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
 	 */
 	public void setHidden(boolean hidden) {
 		setValue(Property.hidden, hidden);
 	}
-	
+
 	/**
-	 * Returns the Y axis ID. 
+	 * Returns the Y axis ID.
 	 * 
 	 * @return the Y axis ID. Default is {@link org.pepstock.charba.client.options.Scales#DEFAULT_Y_AXIS_ID}.
 	 */
 	public String getYAxisID() {
 		return getValue(Property.yAxisID, Scales.DEFAULT_Y_AXIS_ID);
 	}
-	
+
 	/**
-	 * Returns the X axis ID. 
+	 * Returns the X axis ID.
 	 * 
 	 * @return the X axis ID. Default is {@link org.pepstock.charba.client.options.Scales#DEFAULT_X_AXIS_ID}.
 	 */
@@ -131,5 +134,5 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 		ArrayObject array = getArrayValue(Property.data);
 		return ArrayListHelper.unmodifiableList(array, datasetItemFactory);
 	}
-	
+
 }

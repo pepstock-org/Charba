@@ -41,6 +41,8 @@ public class CartesianScaleLabel extends AxisContainer {
 	}
 
 	/**
+	 * Returns the padding element.
+	 * 
 	 * @return the padding
 	 */
 	public CartesianPadding getPadding() {

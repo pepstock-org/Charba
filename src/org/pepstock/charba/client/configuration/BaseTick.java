@@ -45,8 +45,8 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	 * Java script FUNCTION callback when tick is created.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyTickCallback {
 

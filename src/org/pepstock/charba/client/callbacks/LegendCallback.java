@@ -21,8 +21,7 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 
 /**
  * Sometimes you need a very complex legend. In these cases, it makes sense to generate an HTML legend. Charts provide a
- * {@link org.pepstock.charba.client.AbstractChart#generateLegend()} method that returns an HTML string for the
- * legend.
+ * {@link org.pepstock.charba.client.AbstractChart#generateLegend()} method that returns an HTML string for the legend.
  * 
  * @author Andrea "Stock" Stocchero
  */

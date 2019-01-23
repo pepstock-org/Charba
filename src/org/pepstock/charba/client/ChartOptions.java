@@ -52,7 +52,7 @@ public final class ChartOptions extends ScaledOptions {
 	}
 
 	/**
-	 * Chart type.
+	 * Returns the chart type.
 	 * 
 	 * @return the type
 	 */

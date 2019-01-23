@@ -93,6 +93,8 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	}
 
 	/**
+	 * Returns the callbacks element.
+	 * 
 	 * @return the callbacks
 	 */
 	public TooltipsCallbacks getCallbacks() {
@@ -154,11 +156,11 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	}
 
 	/**
-	 * If <code>true</code>, the tooltip mode applies only when the mouse position intersects with an element. If <code>false</code>, the mode will be
-	 * applied at all times.
+	 * If <code>true</code>, the tooltip mode applies only when the mouse position intersects with an element. If
+	 * <code>false</code>, the mode will be applied at all times.
 	 * 
-	 * @return if <code>true</code>, the tooltip mode applies only when the mouse position intersects with an element. If <code>false</code>, the mode
-	 *         will be applied at all times.
+	 * @return if <code>true</code>, the tooltip mode applies only when the mouse position intersects with an element. If
+	 *         <code>false</code>, the mode will be applied at all times.
 	 */
 	public boolean isIntersect() {
 		return getValue(Property.intersect, getDefaultValues().isIntersect());

@@ -56,8 +56,8 @@ public final class LegendHitBoxItem extends SizeItem {
 	/**
 	 * Inner class to create legend hit box item by a native object.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	static final class LegendHitBoxItemFactory implements NativeObjectContainerFactory<LegendHitBoxItem> {
 
 		/*

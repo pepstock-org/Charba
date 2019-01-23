@@ -57,6 +57,8 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 	}
 
 	/**
+	 * Returns the padding element.
+	 * 
 	 * @return the padding
 	 */
 	public ScaleLabelPadding getPadding() {

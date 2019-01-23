@@ -27,9 +27,9 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  */
 public abstract class BaseBoxNodeItem extends BaseBoxItem {
-	
+
 	private final MarginsItem margins;
-	
+
 	private final SizeItem minSize;
 
 	/**
@@ -51,7 +51,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 		paddingBottom,
 		minSize
 	}
-	
+
 	/**
 	 * Creates the item using a native java script object which contains all properties.
 	 * 

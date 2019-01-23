@@ -66,6 +66,8 @@ public final class Elements extends AbstractModel<Options, IsDefaultElements> im
 	}
 
 	/**
+	 * Returns the arc element.
+	 * 
 	 * @return the arc
 	 */
 	public Arc getArc() {
@@ -73,6 +75,8 @@ public final class Elements extends AbstractModel<Options, IsDefaultElements> im
 	}
 
 	/**
+	 * Returns the line element.
+	 * 
 	 * @return the line
 	 */
 	public Line getLine() {
@@ -80,14 +84,18 @@ public final class Elements extends AbstractModel<Options, IsDefaultElements> im
 	}
 
 	/**
-	 * @return the line
+	 * Returns the point element.
+	 * 
+	 * @return the point
 	 */
 	public Point getPoint() {
 		return point;
 	}
 
 	/**
-	 * @return the line
+	 * Returns the rectangle element.
+	 * 
+	 * @return the rectangle
 	 */
 	public Rectangle getRectangle() {
 		return rectangle;

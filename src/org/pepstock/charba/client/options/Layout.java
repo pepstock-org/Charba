@@ -53,6 +53,8 @@ public final class Layout extends AbstractModel<Options, IsDefaultLayout> implem
 	}
 
 	/**
+	 * Returns the padding elements.
+	 * 
 	 * @return the padding
 	 */
 	public Padding getPadding() {

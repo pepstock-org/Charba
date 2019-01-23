@@ -26,7 +26,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  */
 public class SizeItem extends NativeObjectContainer {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -48,7 +48,8 @@ public class SizeItem extends NativeObjectContainer {
 	/**
 	 * Returns the width of the chart item in pixel.
 	 * 
-	 * @return the width of the chart item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the width of the chart item in pixel. Default is
+	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getWidth() {
 		return getValue(Property.width, UndefinedValues.INTEGER);
@@ -57,7 +58,8 @@ public class SizeItem extends NativeObjectContainer {
 	/**
 	 * Returns the height of the chart item in pixel.
 	 * 
-	 * @return the height of the chart item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the height of the chart item in pixel. Default is
+	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	public final int getHeight() {
 		return getValue(Property.height, UndefinedValues.INTEGER);

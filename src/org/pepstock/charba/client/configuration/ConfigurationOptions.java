@@ -38,8 +38,8 @@ import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.events.ChartResizeEvent;
 import org.pepstock.charba.client.events.DatasetSelectionEvent;
 import org.pepstock.charba.client.items.DatasetItem;
-import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.DatasetItem.DatasetItemFactory;
+import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 import com.google.gwt.dom.client.Document;
@@ -79,8 +79,8 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 * Java script FUNCTION callback when a click event on chart is triggered.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyChartClickCallback {
 
@@ -98,8 +98,8 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 * Java script FUNCTION callback when a hover event on chart is triggered.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyChartHoverCallback {
 
@@ -117,8 +117,8 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 * Java script FUNCTION callback when a resize event on chart is triggered.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyChartResizeCallback {
 
@@ -136,8 +136,8 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 * Java script FUNCTION callback when runs it generates an HTML legend.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero
-	 * @	 */
+	 * @author Andrea "Stock" Stocchero @
+	 */
 	@JsFunction
 	interface ProxyGenerateLegendCallback {
 
@@ -310,6 +310,8 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	}
 
 	/**
+	 * Returns the animation element.
+	 * 
 	 * @return the animation
 	 */
 	public Animation getAnimation() {
@@ -317,6 +319,8 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	}
 
 	/**
+	 * Returns the hover element.
+	 * 
 	 * @return the hover
 	 */
 	public Hover getHover() {
@@ -324,6 +328,8 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	}
 
 	/**
+	 * Returns the layout element.
+	 * 
 	 * @return the layout
 	 */
 	public Layout getLayout() {
@@ -331,6 +337,8 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	}
 
 	/**
+	 * Returns the legend element.
+	 * 
 	 * @return the legend
 	 */
 	public Legend getLegend() {
@@ -338,6 +346,8 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	}
 
 	/**
+	 * Returns the title element.
+	 * 
 	 * @return the title
 	 */
 	public Title getTitle() {
@@ -345,13 +355,17 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	}
 
 	/**
-	 * @return the tooltip
+	 * Returns the tooltips element.
+	 * 
+	 * @return the tooltips
 	 */
 	public Tooltips getTooltips() {
 		return tooltips;
 	}
 
 	/**
+	 * Returns the elements element.
+	 * 
 	 * @return the elements
 	 */
 	public Elements getElements() {
@@ -359,6 +373,8 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	}
 
 	/**
+	 * Returns the plugins element.
+	 * 
 	 * @return the plugins
 	 */
 	public Plugins getPlugins() {

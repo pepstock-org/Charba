@@ -22,10 +22,10 @@ package org.pepstock.charba.client.colors;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Color implements IsColor{
+public final class Color implements IsColor {
 
 	/**
-	 * Default alpha
+	 * Default transparency is 1 (no transparency).
 	 */
 	public static final double DEFAULT_ALPHA = 1F;
 
@@ -39,6 +39,7 @@ public final class Color implements IsColor{
 
 	/**
 	 * Creates the color with RGB values.
+	 * 
 	 * @param r red value
 	 * @param g green value
 	 * @param b blue value
@@ -46,8 +47,10 @@ public final class Color implements IsColor{
 	public Color(int r, int g, int b) {
 		this(r, g, b, DEFAULT_ALPHA);
 	}
+
 	/**
 	 * Creates the color with RGB values.
+	 * 
 	 * @param r red value
 	 * @param g green value
 	 * @param b blue value
@@ -59,79 +62,98 @@ public final class Color implements IsColor{
 		checkChannelWithinBounds(g);
 		checkChannelWithinBounds(b);
 		checkAlphaWithinBounds(a);
-
+		// sets values
 		this.red = r;
 		this.green = g;
 		this.blue = b;
 		this.alpha = a;
 	}
-	
-	/**
-	 * @return the red
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#getRed()
 	 */
+	@Override
 	public int getRed() {
 		return red;
 	}
 
-	/**
-	 * @return the green
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#getGreen()
 	 */
+	@Override
 	public int getGreen() {
 		return green;
 	}
 
-	/**
-	 * @return the blue
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#getBlue()
 	 */
+	@Override
 	public int getBlue() {
 		return blue;
 	}
 
-	/**
-	 * @return the alpha
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#getAlpha()
 	 */
+	@Override
 	public double getAlpha() {
 		return alpha;
 	}
 
-	/**
-	 * Clones the color applying the alpha value.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param alpha the alpha to set
-	 * @return the color with the alpha value
+	 * @see org.pepstock.charba.client.colors.IsColor#alpha(double)
 	 */
+	@Override
 	public IsColor alpha(double alpha) {
 		checkAlphaWithinBounds(alpha);
 		// clones the color
 		return new Color(getRed(), getGreen(), getBlue(), alpha);
 	}
 
-	/**
-	 * Returns RGBA string value which represents the color.
-	 * @return RGBA string value which represents the color
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#toRGBA()
 	 */
+	@Override
 	public String toRGBA() {
-		return ColorBuilder.RGBA_STARTING_CHARS+"("+red+","+green+","+blue+","+alpha+")";
+		return ColorBuilder.RGBA_STARTING_CHARS + "(" + red + "," + green + "," + blue + "," + alpha + ")";
 	}
 
-	/**
-	 * Returns RGB string value which represents the color.
-	 * @return RGB string value which represents the color
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#toRGB()
 	 */
+	@Override
 	public String toRGB() {
-		return ColorBuilder.RGB_STARTING_CHARS+"("+red+","+green+","+blue+")";
+		return ColorBuilder.RGB_STARTING_CHARS + "(" + red + "," + green + "," + blue + ")";
 	}
 
-	/**
-	 * Returns HEX string value which represents the color.
-	 * @return HEX string value which represents the color.
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#toHex()
 	 */
+	@Override
 	public String toHex() {
 		return ColorBuilder.HEX_STARTING_CHAR + pad(Integer.toHexString(red)) + pad(Integer.toHexString(green)) + pad(Integer.toHexString(blue));
 	}
 
 	/**
 	 * Applies the padding to a string to 2 chars.
+	 * 
 	 * @param in string to be pad
 	 * @return result string
 	 */
@@ -159,7 +181,7 @@ public final class Color implements IsColor{
 			throw new IllegalArgumentException("One argument is not within bounds (0-255)");
 		}
 	}
-	
+
 	/**
 	 * Any double between 0.0d and 1.0d (inclusive) is valid.
 	 * 
@@ -172,11 +194,13 @@ public final class Color implements IsColor{
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Color [red=" + red + ", green=" + green + ", blue=" + blue + ", alpha=" + alpha + ", hex="+ toHex() + "]";
+		return "Color [red=" + red + ", green=" + green + ", blue=" + blue + ", alpha=" + alpha + ", hex=" + toHex() + "]";
 	}
 }

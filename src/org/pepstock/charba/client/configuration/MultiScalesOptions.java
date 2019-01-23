@@ -41,6 +41,8 @@ abstract class MultiScalesOptions extends ConfigurationOptions {
 	}
 
 	/**
+	 * Returns the scales element.
+	 * 
 	 * @return the scales
 	 */
 	public Scales getScales() {

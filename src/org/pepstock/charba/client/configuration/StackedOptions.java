@@ -60,6 +60,8 @@ public class StackedOptions extends ConfigurationOptions {
 	}
 
 	/**
+	 * Returns the scales element.
+	 * 
 	 * @return the scales
 	 */
 	public Scales getScales() {

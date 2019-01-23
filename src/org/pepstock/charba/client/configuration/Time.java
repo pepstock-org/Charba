@@ -41,6 +41,8 @@ public class Time extends AxisContainer {
 	}
 
 	/**
+	 * Returns the displayFormats element.
+	 * 
 	 * @return the displayFormats
 	 */
 	public DisplayFormats getDisplayFormats() {
