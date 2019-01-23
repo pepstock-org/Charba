@@ -24,7 +24,8 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Image;
 
 /**
- * Entity to apply a canvas pattern into a dataset as background.
+ * Entity to apply a canvas pattern into a dataset as background.<br>
+ * See <a href="https://www.toptal.com/designers/subtlepatterns/">here</a> some interesting pattern images.
  * 
  * @author Andrea "Stock" Stocchero
  *

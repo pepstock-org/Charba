@@ -36,8 +36,11 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  */
 abstract class HovingFlexDataset extends Dataset {
 
-	// internal cache for patterns
-	private final List<Pattern> patterns = new LinkedList<>();
+	// internal cache for patterns for property background
+	private final List<Pattern> patternsForBackground = new LinkedList<>();
+
+	// internal cache for patterns for property hover background
+	private final List<Pattern> patternsForHoverBackground = new LinkedList<>();
 
 	/**
 	 * Name of properties of native object.
@@ -81,7 +84,7 @@ abstract class HovingFlexDataset extends Dataset {
 	public void setBackgroundColor(IsColor... backgroundColor) {
 		setValueOrArray(Property.backgroundColor, backgroundColor);
 		// clear previous pattern stored if there are
-		patterns.clear();
+		patternsForBackground.clear();
 	}
 
 	/**
@@ -92,7 +95,7 @@ abstract class HovingFlexDataset extends Dataset {
 	public void setBackgroundColor(String... backgroundColor) {
 		setValueOrArray(Property.backgroundColor, backgroundColor);
 		// clear previous pattern stored if there are
-		patterns.clear();
+		patternsForBackground.clear();
 	}
 
 	/**
@@ -102,7 +105,7 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(Pattern... backgroundColor) {
 		// clear previous pattern stored if there are
-		patterns.clear();
+		patternsForBackground.clear();
 		// if argument is consistent
 		if (backgroundColor != null) {
 			// creates array of canvas patterns
@@ -112,7 +115,7 @@ abstract class HovingFlexDataset extends Dataset {
 				// stores into array to store as java script
 				canvasPatterns[i] = backgroundColor[i].getPattern();
 				// adds to internal list
-				patterns.add(backgroundColor[i]);
+				patternsForBackground.add(backgroundColor[i]);
 			}
 			// sets array
 			setValueOrArray(Property.backgroundColor, canvasPatterns);
@@ -131,7 +134,7 @@ abstract class HovingFlexDataset extends Dataset {
 	public List<String> getBackgroundColorAsString() {
 		// checks if the list of pattern is empty
 		// if not, means the property is pattern and not colors
-		if (patterns.isEmpty()) {
+		if (patternsForBackground.isEmpty()) {
 			// returns list of colors
 			ArrayString array = getValueOrArray(Property.backgroundColor, getDefaultBackgroundColorAsString());
 			return ArrayListHelper.list(array);
@@ -157,7 +160,7 @@ abstract class HovingFlexDataset extends Dataset {
 	 * @return list of the fill patterns of elements. If property is missing or not a pattern, returns an empty list.
 	 */
 	public List<Pattern> getBackgroundColorAsPatterns() {
-		return patterns;
+		return patternsForBackground;
 	}
 
 	/**
@@ -223,6 +226,8 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setHoverBackgroundColor(IsColor... colors) {
 		setValueOrArray(Property.hoverBackgroundColor, colors);
+		// clear previous pattern stored if there are
+		patternsForHoverBackground.clear();
 	}
 
 	/**
@@ -232,25 +237,75 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setHoverBackgroundColor(String... colors) {
 		setValueOrArray(Property.hoverBackgroundColor, colors);
+		// clear previous pattern stored if there are
+		patternsForHoverBackground.clear();
 	}
 
 	/**
-	 * Returns the fill color of the elements when hovered
+	 * Sets the fill pattern of the elements when hovered.
 	 * 
-	 * @return list of the fill color of the elements when hovered
+	 * @param colors the fill pattern of element when hovered.
+	 */
+	public void setHoverBackgroundColor(Pattern... colors) {
+		// clear previous pattern stored if there are
+		patternsForHoverBackground.clear();
+		// if argument is consistent
+		if (colors != null) {
+			// creates array of canvas patterns
+			CanvasPattern[] canvasPatterns = new CanvasPattern[colors.length];
+			// scans pattern argument
+			for (int i = 0; i < colors.length; i++) {
+				// stores into array to store as java script
+				canvasPatterns[i] = colors[i].getPattern();
+				// adds to internal list
+				patternsForHoverBackground.add(colors[i]);
+			}
+			// sets array
+			setValueOrArray(Property.hoverBackgroundColor, canvasPatterns);
+		} else {
+			// if argument is null
+			// removes the property
+			remove(Property.hoverBackgroundColor);
+		}
+	}
+
+	/**
+	 * Returns the fill color of the elements when hovered. If property is missing or not a color, returns an empty list.
+	 * 
+	 * @return list of the fill color of the elements when hovered. If property is missing or not a color, returns an empty
+	 *         list.
 	 */
 	public List<String> getHoverBackgroundColorAsString() {
-		ArrayString array = getValueOrArray(Property.hoverBackgroundColor, getDefaultBackgroundColorAsString());
-		return ArrayListHelper.list(array);
+		// checks if the list of pattern is empty
+		// if not, means the property is pattern and not colors
+		if (patternsForHoverBackground.isEmpty()) {
+			// returns list of colors
+			ArrayString array = getValueOrArray(Property.hoverBackgroundColor, getDefaultBackgroundColorAsString());
+			return ArrayListHelper.list(array);
+		} else {
+			// the property is colors
+			// therefore returns an empty list
+			return new ArrayStringList();
+		}
 	}
 
 	/**
-	 * Returns the fill color of the elements when hovered
+	 * Returns the fill color of the elements when hovered. If property is missing or not a color, returns an empty list.
 	 * 
-	 * @return list of the fill color of the elements when hovered
+	 * @return list of the fill color of the elements when hovered.If property is missing or not a color, returns an empty list.
 	 */
 	public List<IsColor> getHoverBackgroundColor() {
 		return ColorBuilder.parse(getHoverBackgroundColorAsString());
+	}
+
+	/**
+	 * Returns the fill patters of elements when hovered. If property is missing or not a pattern, returns an empty list.
+	 * 
+	 * @return list of the fill patterns of elements when hovered. If property is missing or not a pattern, returns an empty
+	 *         list.
+	 */
+	public List<Pattern> getHoverBackgroundColorAsPatterns() {
+		return patternsForBackground;
 	}
 
 	/**

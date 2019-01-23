@@ -38,8 +38,11 @@ import org.pepstock.charba.client.commons.Key;
  */
 abstract class HovingDataset extends Dataset {
 
-	// internal cache for patterns
-	private final List<Pattern> patterns = new LinkedList<>();
+	// internal cache for patterns for property background
+	private final List<Pattern> patternsForBackground = new LinkedList<>();
+
+	// internal cache for patterns for property hover background
+	private final List<Pattern> patternsForHoverBackground = new LinkedList<>();
 
 	/**
 	 * Name of properties of native object.
@@ -62,7 +65,7 @@ abstract class HovingDataset extends Dataset {
 	public void setBackgroundColor(IsColor... backgroundColor) {
 		setArrayValue(Property.backgroundColor, ArrayString.of(backgroundColor));
 		// clear previous pattern stored if there are
-		patterns.clear();
+		patternsForBackground.clear();
 	}
 
 	/**
@@ -73,7 +76,7 @@ abstract class HovingDataset extends Dataset {
 	public void setBackgroundColor(String... backgroundColor) {
 		setArrayValue(Property.backgroundColor, ArrayString.of(backgroundColor));
 		// clear previous pattern stored if there are
-		patterns.clear();
+		patternsForBackground.clear();
 	}
 
 	/**
@@ -84,8 +87,8 @@ abstract class HovingDataset extends Dataset {
 	public void setBackgroundColor(Pattern... backgroundColor) {
 		setArrayValue(Property.backgroundColor, ArrayPattern.of(backgroundColor));
 		// clear previous pattern stored if there are
-		patterns.clear();
-		patterns.addAll(Arrays.asList(backgroundColor));
+		patternsForBackground.clear();
+		patternsForBackground.addAll(Arrays.asList(backgroundColor));
 	}
 
 	/**
@@ -98,7 +101,7 @@ abstract class HovingDataset extends Dataset {
 	public List<String> getBackgroundColorAsString() {
 		// checks if the list of pattern is empty
 		// if not, means the property is pattern and not colors
-		if (patterns.isEmpty()) {
+		if (patternsForBackground.isEmpty()) {
 			// returns list of colors
 			ArrayString array = getArrayValue(Property.backgroundColor);
 			return ArrayListHelper.list(array);
@@ -125,7 +128,7 @@ abstract class HovingDataset extends Dataset {
 	 *         list.
 	 */
 	public List<Pattern> getBackgroundColorAsPatterns() {
-		return patterns;
+		return patternsForBackground;
 	}
 
 	/**
@@ -191,6 +194,8 @@ abstract class HovingDataset extends Dataset {
 	 */
 	public void setHoverBackgroundColor(IsColor... colors) {
 		setArrayValue(Property.hoverBackgroundColor, ArrayString.of(colors));
+		// clear previous pattern stored if there are
+		patternsForHoverBackground.clear();
 	}
 
 	/**
@@ -200,25 +205,60 @@ abstract class HovingDataset extends Dataset {
 	 */
 	public void setHoverBackgroundColor(String... colors) {
 		setArrayValue(Property.hoverBackgroundColor, ArrayString.of(colors));
+		// clear previous pattern stored if there are
+		patternsForHoverBackground.clear();
 	}
 
 	/**
-	 * Returns the fill color of the arcs when hovered as string
+	 * Sets the fill pattern of the arcs in the dataset when hovered.
 	 * 
-	 * @return list of the fill color of the arcs when hovered as string
+	 * @param colors the fill pattern of the arcs in the dataset when hovered.
+	 */
+	public void setHoverBackgroundColor(Pattern... colors) {
+		setArrayValue(Property.hoverBackgroundColor, ArrayPattern.of(colors));
+		// clear previous pattern stored if there are
+		patternsForHoverBackground.clear();
+		patternsForHoverBackground.addAll(Arrays.asList(colors));
+	}
+
+	/**
+	 * Returns the fill color of the arcs when hovered as string. If property is missing or not a color, returns an empty list.
+	 * 
+	 * @return list of the fill color of the arcs when hovered as string. If property is missing or not a color, returns an
+	 *         empty list.
 	 */
 	public List<String> getHoverBackgroundColorAsString() {
-		ArrayString array = getArrayValue(Property.hoverBackgroundColor);
-		return ArrayListHelper.list(array);
+		// checks if the list of pattern is empty
+		// if not, means the property is pattern and not colors
+		if (patternsForHoverBackground.isEmpty()) {
+			// returns list of colors
+			ArrayString array = getArrayValue(Property.hoverBackgroundColor);
+			return ArrayListHelper.list(array);
+		} else {
+			// the property is colors
+			// therefore returns an empty list
+			return new ArrayStringList();
+		}
 	}
 
 	/**
-	 * Returns the fill color of the arcs when hovered
+	 * Returns the fill color of the arcs when hovered. If property is missing or not a color, returns an empty list.
 	 * 
-	 * @return list of the fill color of the arcs when hovered
+	 * @return list of the fill color of the arcs when hovered. If property is missing or not a color, returns an empty list.
 	 */
 	public List<IsColor> getHoverBackgroundColor() {
 		return ColorBuilder.parse(getHoverBackgroundColorAsString());
+	}
+
+	/**
+	 * Returns the fill patters of the arcs in the dataset when hovered. If property is missing or not a pattern, returns an
+	 * empty list.
+	 * 
+	 * @return list of the fill patterns of the arcs in the dataset when hovered. If property is missing or not a pattern,
+	 *         returns an empty list.
+	 */
+	public List<Pattern> getHoverBackgroundColorAsPatterns() {
+		return patternsForHoverBackground;
 	}
 
 	/**
