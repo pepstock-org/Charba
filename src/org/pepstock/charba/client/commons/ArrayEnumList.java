@@ -70,7 +70,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, Arr
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.commons.AbstractArrayList#getArray()
+	 * @see org.pepstock.charba.client.commons.AbstractArrayList#getArray()
 	 */
 	@Override
 	ArrayString getArray() {

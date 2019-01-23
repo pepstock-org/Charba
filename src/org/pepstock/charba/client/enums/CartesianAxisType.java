@@ -26,11 +26,11 @@ public enum CartesianAxisType implements Key
 {
 
 	/**
-	 *  X directions are used in calculating axis. 
+	 * X directions are used in calculating axis.
 	 */
 	x,
 	/**
-	 *  Y directions are used in calculating axis. 
+	 * Y directions are used in calculating axis.
 	 */
 	y
 }

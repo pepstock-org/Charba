@@ -29,7 +29,7 @@ public final class DefaultPointLabels extends AbstractDefaultFontItem implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPointLabels#isDisplay()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#isDisplay()
 	 */
 	@Override
 	public boolean isDisplay() {

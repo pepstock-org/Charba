@@ -40,7 +40,7 @@ class GlobalPlugin extends WrapperPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.plugins.WrapperPlugin#getChart(java.lang.String)
+	 * @see org.pepstock.charba.client.plugins.WrapperPlugin#getChart(java.lang.String)
 	 */
 	@Override
 	AbstractChart<?, ?> getChart(String chartId) {

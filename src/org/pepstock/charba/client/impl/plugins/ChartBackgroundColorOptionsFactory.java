@@ -28,8 +28,7 @@ public final class ChartBackgroundColorOptionsFactory implements NativeObjectCon
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
+	 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
 	 * .commons.NativeObject)
 	 */
 	@Override

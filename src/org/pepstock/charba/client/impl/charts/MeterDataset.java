@@ -84,7 +84,7 @@ public class MeterDataset extends DoughnutDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.data.HovingDataset#setBorderWidth(int[])
+	 * @see org.pepstock.charba.client.data.HovingDataset#setBorderWidth(int[])
 	 */
 	@Override
 	public final void setBorderWidth(int... borderWidth) {
@@ -95,7 +95,7 @@ public class MeterDataset extends DoughnutDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.data.HovingDataset#setHoverBorderWidth(int[])
+	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBorderWidth(int[])
 	 */
 	@Override
 	public final void setHoverBorderWidth(int... widths) {
@@ -134,7 +134,7 @@ public class MeterDataset extends DoughnutDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.data.Dataset#setData(double[])
+	 * @see org.pepstock.charba.client.data.Dataset#setData(double[])
 	 */
 	@Override
 	public final void setData(double... values) {
@@ -144,7 +144,7 @@ public class MeterDataset extends DoughnutDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.data.Dataset#setData(java.util.List)
+	 * @see org.pepstock.charba.client.data.Dataset#setData(java.util.List)
 	 */
 	@Override
 	public final void setData(List<Double> values) {

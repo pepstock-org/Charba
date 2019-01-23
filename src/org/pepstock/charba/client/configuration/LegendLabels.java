@@ -125,8 +125,8 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.options.LegendLabels.ProxyFilterCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.items.LegendItem)
+			 * @see org.pepstock.charba.client.options.LegendLabels.ProxyFilterCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.items.LegendItem)
 			 */
 			@Override
 			public boolean call(Object context, NativeObject item) {
@@ -144,7 +144,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.options.LegendLabels.ProxyGenerateLabelsCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.options.LegendLabels.ProxyGenerateLabelsCallback#call(java.lang.Object,
 			 * java.lang.Object)
 			 */
 			@Override

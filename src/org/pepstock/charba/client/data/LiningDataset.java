@@ -32,6 +32,7 @@ import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
 
+import com.google.gwt.canvas.dom.client.CanvasPattern;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Image;
@@ -45,6 +46,11 @@ import com.google.gwt.user.client.ui.Image;
  *
  */
 abstract class LiningDataset extends Dataset {
+
+	// default instance of image for point style
+	private final static ImageElement DEFAULT_IMAGE_POINT_STYLE = null;
+	// flags to manage image as point style
+	private boolean hasPointStyleAsImage = false;
 
 	/**
 	 * Name of properties of native object.
@@ -92,21 +98,64 @@ abstract class LiningDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the fill color under the line.
+	 * Sets the fill pattern under the line.
 	 * 
-	 * @return the fill color under the line.
+	 * @param backgroundColor the fill pattern under the line.
 	 */
-	public String getBackgroundColorAsString() {
-		return getValue(Property.backgroundColor, Defaults.get().getGlobal().getElements().getLine().getBackgroundColorAsString());
+	public void setBackgroundColor(Pattern backgroundColor) {
+		setValue(Property.backgroundColor, backgroundColor.getPattern());
 	}
 
 	/**
-	 * Returns the fill color under the line.
+	 * Returns the fill color under the line. If property is missing or not a color, returns the default background color.
 	 * 
-	 * @return the fill color under the line.
+	 * @return the fill color under the line. If property is missing or not a color, returns the default background color.
+	 */
+	public String getBackgroundColorAsString() {
+		// gets type of property
+		ObjectType type = type(Property.backgroundColor);
+		// checks if the property is a string (therefore a color)
+		if (ObjectType.String.equals(type)) {
+			// returns color as string
+			return getValue(Property.backgroundColor, Defaults.get().getGlobal().getElements().getLine().getBackgroundColorAsString());
+		} else {
+			// if here, the property is not a string
+			// therefore the property is missing or a pattern
+			// returns default value
+			return Defaults.get().getGlobal().getElements().getLine().getBackgroundColorAsString();
+		}
+	}
+
+	/**
+	 * Returns the fill color under the line. If property is missing or not a color, returns the default background color.
+	 * 
+	 * @return the fill color under the line. If property is missing or not a color, returns the default background color.
 	 */
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
+	}
+
+	/**
+	 * Returns the fill pattern under the line. If property is missing or not a pattern, returns
+	 * {@link Pattern#DEFAULT_PATTERN}.
+	 * 
+	 * @return the fill pattern under the line. If property is missing or not a pattern, returns
+	 *         {@link Pattern#DEFAULT_PATTERN}.
+	 */
+	public Pattern getBackgroundColorAsPattern() {
+		// gets type of property
+		ObjectType type = type(Property.backgroundColor);
+		// checks if the property is a object (therefore a pattern)
+		if (ObjectType.Object.equals(type)) {
+			// returns the pattern
+			CanvasPattern pattern = getValue(Property.backgroundColor, Pattern.DEFAULT_CANVAS_PATTERN);
+			return new Pattern(pattern);
+		} else {
+			// if here, the property is not a object
+			// therefore the property is missing or a color
+			// returns a pattern without canvas pattern
+			return Pattern.DEFAULT_PATTERN;
+		}
 	}
 
 	/**
@@ -326,7 +375,6 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public List<String> getPointBackgroundColorAsString() {
 		ArrayString array = getValueOrArray(Property.pointBackgroundColor, Defaults.get().getGlobal().getElements().getPoint().getBackgroundColorAsString());
-		;
 		return ArrayListHelper.list(array);
 	}
 
@@ -552,18 +600,27 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointStyle(PointStyle... pointStyle) {
 		setValueOrArray(Property.pointStyle, pointStyle);
+		// sets flag
+		hasPointStyleAsImage = false;
 	}
 
 	/**
-	 * Returns the style of the point.
+	 * Returns the style of the point. If property is missing or not a point style, returns <code>null</code>.
 	 * 
-	 * @return list of the style of the point.
+	 * @return list of the style of the point. If property is missing or not a point style, returns <code>null</code>.
 	 */
 	public List<PointStyle> getPointStyle() {
-		ArrayString array = getValueOrArray(Property.pointStyle, Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
-		return ArrayListHelper.list(PointStyle.class, array);
+		// checks if image as point style has been used
+		if (!hasPointStyleAsImage) {
+			// if not, returns point styles
+			ArrayString array = getValueOrArray(Property.pointStyle, Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
+			return ArrayListHelper.list(PointStyle.class, array);
+		} else {
+			// if here, means the point style as stored as images
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Sets the style of the point as image.
 	 * 
@@ -575,15 +632,21 @@ abstract class LiningDataset extends Dataset {
 			// creates a temporary array
 			ImageElement[] array = new ImageElement[pointStyle.length];
 			// scans passed array of images
-			for (int i=0; i<pointStyle.length; i++) {
+			for (int i = 0; i < pointStyle.length; i++) {
 				// transform a image resource into image element by image object
 				// creates image object
 				Image img = new Image(pointStyle[i]);
-				// stores into array changing in inage element
+				// stores into array changing in image element
 				array[i] = ImageElement.as(img.getElement());
 			}
-			// stores
+			// stores it
 			setPointStyle(array);
+		} else {
+			// if here, argument is null
+			// then removes property
+			remove(Property.pointStyle);
+			// sets flag
+			hasPointStyleAsImage = false;
 		}
 	}
 
@@ -594,16 +657,25 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointStyle(ImageElement... pointStyle) {
 		setValueOrArray(Property.pointStyle, pointStyle);
+		// sets flag
+		hasPointStyleAsImage = true;
 	}
 
 	/**
-	 * Returns the style of the point as image.
+	 * Returns the style of the point as image. If property is missing or not an image, returns <code>null</code>.
 	 * 
-	 * @return list of the style of the point as image.
+	 * @return list of the style of the point as image. If property is missing or not a image, returns <code>null</code>.
 	 */
 	public List<ImageElement> getPointStyleAsImages() {
-		ArrayImage array = getValueOrArray(Property.pointStyle, (ImageElement) null);
-		return ArrayListHelper.list(array);
+		// checks if image as point style has been used
+		if (hasPointStyleAsImage) {
+			// gets array
+			ArrayImage array = getValueOrArray(Property.pointStyle, DEFAULT_IMAGE_POINT_STYLE);
+			return ArrayListHelper.list(array);
+		} else {
+			// if here, means the point style as stored as strings
+			return null;
+		}
 	}
 
 	/**

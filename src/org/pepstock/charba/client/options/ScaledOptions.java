@@ -72,7 +72,7 @@ public class ScaledOptions extends Options implements IsDefaultScaledOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaledOptions#getScale()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaledOptions#getScale()
 	 */
 	@Override
 	public Scale getScale() {
@@ -82,7 +82,7 @@ public class ScaledOptions extends Options implements IsDefaultScaledOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaledOptions#getScales()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaledOptions#getScales()
 	 */
 	@Override
 	public Scales getScales() {

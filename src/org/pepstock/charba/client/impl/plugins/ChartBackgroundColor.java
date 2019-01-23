@@ -91,7 +91,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#getId()
+	 * @see org.pepstock.charba.client.Plugin#getId()
 	 */
 	@Override
 	public String getId() {
@@ -101,8 +101,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.plugins.AbstractPlugin#onBeforeDraw(org.pepstock.charba.client.jsinterop.
-	 * AbstractChart, double)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDraw(org.pepstock.charba.client.AbstractChart, double)
 	 */
 	@Override
 	public boolean onBeforeDraw(AbstractChart<?, ?> chart, double easing) {

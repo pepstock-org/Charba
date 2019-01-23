@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -22,7 +23,10 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.ArrayStringList;
 import org.pepstock.charba.client.commons.Key;
+
+import com.google.gwt.canvas.dom.client.CanvasPattern;
 
 /**
  * This dataset is managing some common properties of Bar and Bubble datasets where every property can be set as a single value
@@ -31,6 +35,9 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  */
 abstract class HovingFlexDataset extends Dataset {
+
+	// internal cache for patterns
+	private final List<Pattern> patterns = new LinkedList<>();
 
 	/**
 	 * Name of properties of native object.
@@ -73,6 +80,8 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(IsColor... backgroundColor) {
 		setValueOrArray(Property.backgroundColor, backgroundColor);
+		// clear previous pattern stored if there are
+		patterns.clear();
 	}
 
 	/**
@@ -82,25 +91,73 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(String... backgroundColor) {
 		setValueOrArray(Property.backgroundColor, backgroundColor);
+		// clear previous pattern stored if there are
+		patterns.clear();
 	}
 
 	/**
-	 * Returns the fill colors of the elements
+	 * Sets the fill pattern of the elements.
 	 * 
-	 * @return list of the fill colors of the elements
+	 * @param backgroundColor the fill pattern of element.
+	 */
+	public void setBackgroundColor(Pattern... backgroundColor) {
+		// clear previous pattern stored if there are
+		patterns.clear();
+		// if argument is consistent
+		if (backgroundColor != null) {
+			// creates array of canvas patterns
+			CanvasPattern[] canvasPatterns = new CanvasPattern[backgroundColor.length];
+			// scans pattern argument
+			for (int i = 0; i < backgroundColor.length; i++) {
+				// stores into array to store as java script
+				canvasPatterns[i] = backgroundColor[i].getPattern();
+				// adds to internal list
+				patterns.add(backgroundColor[i]);
+			}
+			// sets array
+			setValueOrArray(Property.backgroundColor, canvasPatterns);
+		} else {
+			// if argument is null
+			// removes the property
+			remove(Property.backgroundColor);
+		}
+	}
+
+	/**
+	 * Returns the fill colors of the elements. If property is missing or not a color, returns an empty list.
+	 * 
+	 * @return list of the fill colors of the elements. If property is missing or not a color, returns an empty list.
 	 */
 	public List<String> getBackgroundColorAsString() {
-		ArrayString array = getValueOrArray(Property.backgroundColor, getDefaultBackgroundColorAsString());
-		return ArrayListHelper.list(array);
+		// checks if the list of pattern is empty
+		// if not, means the property is pattern and not colors
+		if (patterns.isEmpty()) {
+			// returns list of colors
+			ArrayString array = getValueOrArray(Property.backgroundColor, getDefaultBackgroundColorAsString());
+			return ArrayListHelper.list(array);
+		} else {
+			// the property is colors
+			// therefore returns an empty list
+			return new ArrayStringList();
+		}
 	}
 
 	/**
-	 * Returns the fill colors of the elements
+	 * Returns the fill colors of the elements. If property is missing or not a color, returns an empty list.
 	 * 
-	 * @return list of the fill colors of the elements
+	 * @return list of the fill colors of the elements. If property is missing or not a color, returns an empty list.
 	 */
 	public List<IsColor> getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
+	}
+
+	/**
+	 * Returns the fill patters of elements. If property is missing or not a pattern, returns an empty list.
+	 * 
+	 * @return list of the fill patterns of elements. If property is missing or not a pattern, returns an empty list.
+	 */
+	public List<Pattern> getBackgroundColorAsPatterns() {
+		return patterns;
 	}
 
 	/**

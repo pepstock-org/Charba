@@ -45,7 +45,7 @@ public final class DefaultLine extends DefaultArc implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBackgroundColorAsString()
+	 * @see org.pepstock.charba.client.defaults.DefaultArc#getBackgroundColorAsString()
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
@@ -55,7 +55,7 @@ public final class DefaultLine extends DefaultArc implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBorderWidth()
+	 * @see org.pepstock.charba.client.defaults.DefaultArc#getBorderWidth()
 	 */
 	@Override
 	public int getBorderWidth() {
@@ -65,7 +65,7 @@ public final class DefaultLine extends DefaultArc implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBorderColorAsString()
+	 * @see org.pepstock.charba.client.defaults.DefaultArc#getBorderColorAsString()
 	 */
 	@Override
 	public String getBorderColorAsString() {
@@ -75,7 +75,7 @@ public final class DefaultLine extends DefaultArc implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.elements.line.IsDefaultLine#getTension()
+	 * @see org.pepstock.charba.client.options.elements.line.IsDefaultLine#getTension()
 	 */
 	@Override
 	public double getTension() {
@@ -85,7 +85,7 @@ public final class DefaultLine extends DefaultArc implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.elements.line.IsDefaultLine#getBorderCapStyle()
+	 * @see org.pepstock.charba.client.options.elements.line.IsDefaultLine#getBorderCapStyle()
 	 */
 	@Override
 	public CapStyle getBorderCapStyle() {
@@ -95,7 +95,7 @@ public final class DefaultLine extends DefaultArc implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.elements.line.IsDefaultLine#getBorderDashOffset()
+	 * @see org.pepstock.charba.client.options.elements.line.IsDefaultLine#getBorderDashOffset()
 	 */
 	@Override
 	public int getBorderDashOffset() {
@@ -105,7 +105,7 @@ public final class DefaultLine extends DefaultArc implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.elements.line.IsDefaultLine#getBorderJoinStyle()
+	 * @see org.pepstock.charba.client.options.elements.line.IsDefaultLine#getBorderJoinStyle()
 	 */
 	@Override
 	public JoinStyle getBorderJoinStyle() {
@@ -115,7 +115,7 @@ public final class DefaultLine extends DefaultArc implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.elements.line.IsDefaultLine#isCapBezierPoints()
+	 * @see org.pepstock.charba.client.options.elements.line.IsDefaultLine#isCapBezierPoints()
 	 */
 	@Override
 	public boolean isCapBezierPoints() {
@@ -125,7 +125,7 @@ public final class DefaultLine extends DefaultArc implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.elements.line.IsDefaultLine#getFill()
+	 * @see org.pepstock.charba.client.options.elements.line.IsDefaultLine#getFill()
 	 */
 	@Override
 	public Fill getFill() {
@@ -135,7 +135,7 @@ public final class DefaultLine extends DefaultArc implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.elements.line.IsDefaultLine#isStepped()
+	 * @see org.pepstock.charba.client.options.elements.line.IsDefaultLine#isStepped()
 	 */
 	@Override
 	public boolean isStepped() {

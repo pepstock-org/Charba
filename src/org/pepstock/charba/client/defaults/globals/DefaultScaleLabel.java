@@ -36,7 +36,7 @@ public final class DefaultScaleLabel extends AbstractDefaultFontItem implements 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel#getPadding()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getPadding()
 	 */
 	@Override
 	public IsDefaultPadding getPadding() {
@@ -46,7 +46,7 @@ public final class DefaultScaleLabel extends AbstractDefaultFontItem implements 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel#isDisplay()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#isDisplay()
 	 */
 	@Override
 	public boolean isDisplay() {
@@ -56,7 +56,7 @@ public final class DefaultScaleLabel extends AbstractDefaultFontItem implements 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel#getLabelString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getLabelString()
 	 */
 	@Override
 	public String getLabelString() {
@@ -66,7 +66,7 @@ public final class DefaultScaleLabel extends AbstractDefaultFontItem implements 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel#getLineHeight()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getLineHeight()
 	 */
 	@Override
 	public double getLineHeight() {

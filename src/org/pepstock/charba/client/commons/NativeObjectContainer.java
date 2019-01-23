@@ -22,6 +22,7 @@ import java.util.List;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.utils.JSON;
 
+import com.google.gwt.canvas.dom.client.CanvasPattern;
 import com.google.gwt.core.client.JsDate;
 import com.google.gwt.dom.client.ImageElement;
 
@@ -287,25 +288,6 @@ public abstract class NativeObjectContainer {
 	}
 
 	/**
-	 * Returns a value (image) into embedded JavaScript object at specific property.
-	 * 
-	 * @param key key of the property of JavaScript object.
-	 * @param defaultValue default value if the property is missing
-	 * @return value of the property
-	 */
-	protected final ImageElement getValue(Key key, ImageElement defaultValue) {
-		// checks if the property exists
-		if (!has(key)) {
-			// if no, returns the default value
-			return defaultValue;
-		}
-		// gets descriptor
-		NativeImageDescriptor descriptor = nativeObject.getImageProperty(key.name());
-		// returns value
-		return descriptor == null ? defaultValue : descriptor.getValue();
-	}
-
-	/**
 	 * Sets a value (date) into embedded JavaScript object at specific property.
 	 * 
 	 * @param key key of the property of JavaScript object.
@@ -426,6 +408,65 @@ public abstract class NativeObjectContainer {
 			// sets value
 			nativeObject.defineImageProperty(key.name(), value);
 		}
+	}
+
+	/**
+	 * Returns a value (image) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value if the property is missing
+	 * @return value of the property
+	 */
+	protected final ImageElement getValue(Key key, ImageElement defaultValue) {
+		// checks if the property exists
+		if (!has(key)) {
+			// if no, returns the default value
+			return defaultValue;
+		}
+		// gets descriptor
+		NativeImageDescriptor descriptor = nativeObject.getImageProperty(key.name());
+		// returns value
+		return descriptor == null ? defaultValue : descriptor.getValue();
+	}
+
+	/**
+	 * Sets a value (pattern) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param value value to be set
+	 */
+	protected final void setValue(Key key, CanvasPattern value) {
+		// if value is null
+		// try to remove the reference if exists
+		if (value == null) {
+			// checks if the property exists
+			if (has(key)) {
+				// removes property
+				remove(key);
+			}
+		} else {
+			// sets value
+			nativeObject.definePatternProperty(key.name(), value);
+		}
+	}
+
+	/**
+	 * Returns a value (pattern) into embedded JavaScript object at specific property.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value if the property is missing
+	 * @return value of the property
+	 */
+	protected final CanvasPattern getValue(Key key, CanvasPattern defaultValue) {
+		// checks if the property exists
+		if (!has(key)) {
+			// if no, returns the default value
+			return defaultValue;
+		}
+		// gets descriptor
+		NativePatternDescriptor descriptor = nativeObject.getPatternProperty(key.name());
+		// returns value
+		return descriptor == null ? defaultValue : descriptor.getValue();
 	}
 
 	/**
@@ -583,6 +624,30 @@ public abstract class NativeObjectContainer {
 			} else {
 				// if more than 1 element, sets the array
 				setArrayValue(key, ArrayImage.of(values));
+			}
+		} else {
+			// if not consistent, remove the property
+			removeIfExists(key);
+		}
+	}
+
+	/**
+	 * Sets a value (Array or pattern) into embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a pattern.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param values images to be set
+	 */
+	protected final void setValueOrArray(Key key, CanvasPattern... values) {
+		// checks if values are consistent
+		if (values != null) {
+			// checks if there is only 1 element
+			if (values.length == 1) {
+				// if 1 element, sets the object
+				setValue(key, values[0]);
+			} else {
+				// if more than 1 element, sets the array
+				setArrayValue(key, ArrayPattern.of(values));
 			}
 		} else {
 			// if not consistent, remove the property
@@ -766,6 +831,28 @@ public abstract class NativeObjectContainer {
 			// if here, is a single value, therefore creates an array
 			// with only 1 element
 			return ArrayImage.of(getValue(key, defaultValue));
+		} else if (ObjectType.Array.equals(type(key))) {
+			// if here, is an array, therefore return it
+			return getArrayValue(key);
+		}
+		// if here the property doesn't exist or has got a wrong type
+		return null;
+	}
+
+	/**
+	 * Returns a value (array) into embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a image.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value if the value was stored as single image value
+	 * @return value of the property (by array) or <code>null</code> if not exist
+	 */
+	protected final ArrayPattern getValueOrArray(Key key, CanvasPattern defaultValue) {
+		// checks if property type
+		if (ObjectType.Object.equals(type(key))) {
+			// if here, is a single value, therefore creates an array
+			// with only 1 element
+			return ArrayPattern.of(getValue(key, defaultValue));
 		} else if (ObjectType.Array.equals(type(key))) {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);

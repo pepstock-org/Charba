@@ -54,7 +54,7 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.configuration.scales.CartesianAxis#getTicks()
+	 * @see org.pepstock.charba.client.configuration.scales.CartesianAxis#getTicks()
 	 */
 	@Override
 	public CartesianCategoryTick getTicks() {

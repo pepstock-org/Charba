@@ -45,7 +45,7 @@ public final class DefaultChartLegend implements IsDefaultLegend {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend#getLabels()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#getLabels()
 	 */
 	@Override
 	public IsDefaultLegendLabels getLabels() {
@@ -55,7 +55,7 @@ public final class DefaultChartLegend implements IsDefaultLegend {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend#isDisplay()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#isDisplay()
 	 */
 	@Override
 	public boolean isDisplay() {
@@ -65,7 +65,7 @@ public final class DefaultChartLegend implements IsDefaultLegend {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend#isFullWidth()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#isFullWidth()
 	 */
 	@Override
 	public boolean isFullWidth() {
@@ -75,7 +75,7 @@ public final class DefaultChartLegend implements IsDefaultLegend {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend#isReverse()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#isReverse()
 	 */
 	@Override
 	public boolean isReverse() {
@@ -85,7 +85,7 @@ public final class DefaultChartLegend implements IsDefaultLegend {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegend#getPosition()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#getPosition()
 	 */
 	@Override
 	public Position getPosition() {

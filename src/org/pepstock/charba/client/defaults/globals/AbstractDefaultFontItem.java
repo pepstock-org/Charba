@@ -28,7 +28,7 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultFontItem#getFontColor()
+	 * @see org.pepstock.charba.client.options.IsDefaultFontItem#getFontColor()
 	 */
 	@Override
 	public String getFontColorAsString() {
@@ -38,7 +38,7 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultFontItem#getFontSize()
+	 * @see org.pepstock.charba.client.options.IsDefaultFontItem#getFontSize()
 	 */
 	@Override
 	public int getFontSize() {
@@ -48,7 +48,7 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultFontItem#getFontStyle()
+	 * @see org.pepstock.charba.client.options.IsDefaultFontItem#getFontStyle()
 	 */
 	@Override
 	public FontStyle getFontStyle() {
@@ -58,7 +58,7 @@ abstract class AbstractDefaultFontItem implements IsDefaultFontItem {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultFontItem#getFontFamily()
+	 * @see org.pepstock.charba.client.options.IsDefaultFontItem#getFontFamily()
 	 */
 	@Override
 	public String getFontFamily() {

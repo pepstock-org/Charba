@@ -40,7 +40,7 @@ public final class DefaultScaledOptions extends DefaultOptions implements IsDefa
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultOptions#getScale()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getScale()
 	 */
 	@Override
 	public IsDefaultScale getScale() {
@@ -50,7 +50,7 @@ public final class DefaultScaledOptions extends DefaultOptions implements IsDefa
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaledOptions#getScales()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaledOptions#getScales()
 	 */
 	@Override
 	public IsDefaultScales getScales() {

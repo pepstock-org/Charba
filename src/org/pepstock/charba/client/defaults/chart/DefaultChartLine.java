@@ -42,7 +42,7 @@ public final class DefaultChartLine implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBackgroundColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getBackgroundColorAsString()
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
@@ -52,7 +52,7 @@ public final class DefaultChartLine implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBorderWidth()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getBorderWidth()
 	 */
 	@Override
 	public int getBorderWidth() {
@@ -62,7 +62,7 @@ public final class DefaultChartLine implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBorderColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getBorderColorAsString()
 	 */
 	@Override
 	public String getBorderColorAsString() {
@@ -72,7 +72,7 @@ public final class DefaultChartLine implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine#getTension()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#getTension()
 	 */
 	@Override
 	public double getTension() {
@@ -82,7 +82,7 @@ public final class DefaultChartLine implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine#getBorderCapStyle()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#getBorderCapStyle()
 	 */
 	@Override
 	public CapStyle getBorderCapStyle() {
@@ -92,7 +92,7 @@ public final class DefaultChartLine implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine#getBorderDashOffset()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#getBorderDashOffset()
 	 */
 	@Override
 	public int getBorderDashOffset() {
@@ -102,7 +102,7 @@ public final class DefaultChartLine implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine#getBorderJoinStyle()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#getBorderJoinStyle()
 	 */
 	@Override
 	public JoinStyle getBorderJoinStyle() {
@@ -112,7 +112,7 @@ public final class DefaultChartLine implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine#isCapBezierPoints()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#isCapBezierPoints()
 	 */
 	@Override
 	public boolean isCapBezierPoints() {
@@ -122,7 +122,7 @@ public final class DefaultChartLine implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine#getFill()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#getFill()
 	 */
 	@Override
 	public Fill getFill() {
@@ -132,7 +132,7 @@ public final class DefaultChartLine implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLine#isStepped()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#isStepped()
 	 */
 	@Override
 	public boolean isStepped() {

@@ -39,7 +39,7 @@ public final class DefaultChartPadding implements IsDefaultPadding {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding#getLeft()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPadding#getLeft()
 	 */
 	@Override
 	public int getLeft() {
@@ -49,7 +49,7 @@ public final class DefaultChartPadding implements IsDefaultPadding {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding#getRight()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPadding#getRight()
 	 */
 	@Override
 	public int getRight() {
@@ -59,7 +59,7 @@ public final class DefaultChartPadding implements IsDefaultPadding {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding#getTop()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPadding#getTop()
 	 */
 	@Override
 	public int getTop() {
@@ -69,7 +69,7 @@ public final class DefaultChartPadding implements IsDefaultPadding {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPadding#getBottom()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPadding#getBottom()
 	 */
 	@Override
 	public int getBottom() {

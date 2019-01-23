@@ -233,10 +233,9 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions.ProxyChartClickCallback#call(org.pepstock
-			 * .charba.client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent,
-			 * org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 * @see org.pepstock.charba.client.configuration.ConfigurationOptions.ProxyChartClickCallback#call(org.pepstock
+			 * .charba.client.jsinterop.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
+			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
 			public void call(Chart chart, ChartNativeEvent event, ArrayObject items) {
@@ -256,10 +255,9 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions.ProxyChartHoverCallback#call(org.pepstock
-			 * .charba.client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent,
-			 * org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 * @see org.pepstock.charba.client.configuration.ConfigurationOptions.ProxyChartHoverCallback#call(org.pepstock
+			 * .charba.client.jsinterop.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
+			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
 			public void call(Chart chart, ChartNativeEvent event, ArrayObject items) {
@@ -273,9 +271,9 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions.ProxyChartResizeCallback#call(org.
-			 * pepstock.charba.client.jsinterop.commons.NativeObject, org.pepstock.charba.client.jsinterop.Chart,
-			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.ConfigurationOptions.ProxyChartResizeCallback#call(org.
+			 * pepstock.charba.client.jsinterop.commons.NativeObject, org.pepstock.charba.client.Chart,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(NativeObject context, Chart chart, NativeObject size) {
@@ -291,8 +289,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions.ProxyGenerateLegendCallback#call(java.
+			 * @see org.pepstock.charba.client.configuration.ConfigurationOptions.ProxyGenerateLegendCallback#call(java.
 			 * lang.Object)
 			 */
 			@Override
@@ -506,8 +503,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.configuration.EventProvider#addHandler(com.google.gwt.event.shared.GwtEvent.Type)
+	 * @see org.pepstock.charba.client.configuration.EventProvider#addHandler(com.google.gwt.event.shared.GwtEvent.Type)
 	 */
 	@Override
 	protected final <H extends EventHandler> void addHandler(Type<H> type) {
@@ -547,8 +543,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.configuration.EventProvider#removeHandler(com.google.gwt.event.shared.GwtEvent.Type)
+	 * @see org.pepstock.charba.client.configuration.EventProvider#removeHandler(com.google.gwt.event.shared.GwtEvent.Type)
 	 */
 	@Override
 	protected final <H extends EventHandler> void removeHandler(Type<H> type) {
@@ -615,7 +610,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.ConfigurationElement#load(org.pepstock.charba.client.jsinterop.Configuration)
+	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.Configuration)
 	 */
 	@Override
 	public final void load(Configuration configuration) {

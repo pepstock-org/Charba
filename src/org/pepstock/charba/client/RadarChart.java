@@ -39,7 +39,7 @@ public class RadarChart extends AbstractChart<RadarOptions, RadarDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.IsChart#getType()
+	 * @see org.pepstock.charba.client.IsChart#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -49,7 +49,7 @@ public class RadarChart extends AbstractChart<RadarOptions, RadarDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.IsChart#getOptions()
+	 * @see org.pepstock.charba.client.IsChart#getOptions()
 	 */
 	@Override
 	public RadarOptions getOptions() {
@@ -59,7 +59,7 @@ public class RadarChart extends AbstractChart<RadarOptions, RadarDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.IsChart#newDataset()
+	 * @see org.pepstock.charba.client.IsChart#newDataset()
 	 */
 	@Override
 	public RadarDataset newDataset() {

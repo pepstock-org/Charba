@@ -61,7 +61,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.configuration.scales.CartesianAxis#getTicks()
+	 * @see org.pepstock.charba.client.configuration.scales.CartesianAxis#getTicks()
 	 */
 	@Override
 	public CartesianTimeTick getTicks() {

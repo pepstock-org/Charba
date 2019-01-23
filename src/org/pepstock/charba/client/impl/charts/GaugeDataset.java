@@ -77,7 +77,7 @@ public final class GaugeDataset extends MeterDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.data.HovingDataset#setBackgroundColor(java.lang.String[])
+	 * @see org.pepstock.charba.client.data.HovingDataset#setBackgroundColor(java.lang.String[])
 	 */
 	@Override
 	public void setBackgroundColor(IsColor... backgroundColor) {
@@ -90,7 +90,7 @@ public final class GaugeDataset extends MeterDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.data.HovingDataset#setBackgroundColor(java.lang.String[])
+	 * @see org.pepstock.charba.client.data.HovingDataset#setBackgroundColor(java.lang.String[])
 	 */
 	@Override
 	public void setBackgroundColor(String... backgroundColor) {
@@ -160,7 +160,7 @@ public final class GaugeDataset extends MeterDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.data.MeterDataset#setValue(double)
+	 * @see org.pepstock.charba.client.data.MeterDataset#setValue(double)
 	 */
 	@Override
 	public void setValue(double value) {

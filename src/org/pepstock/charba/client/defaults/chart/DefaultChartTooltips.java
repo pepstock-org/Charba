@@ -43,7 +43,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#isEnabled()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#isEnabled()
 	 */
 	@Override
 	public boolean isEnabled() {
@@ -53,7 +53,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getMode()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getMode()
 	 */
 	@Override
 	public InteractionMode getMode() {
@@ -63,7 +63,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#isIntersect()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#isIntersect()
 	 */
 	@Override
 	public boolean isIntersect() {
@@ -73,7 +73,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getPosition()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getPosition()
 	 */
 	@Override
 	public TooltipPosition getPosition() {
@@ -83,7 +83,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getBackgroundColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBackgroundColorAsString()
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
@@ -93,7 +93,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getTitleFontFamily()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getTitleFontFamily()
 	 */
 	@Override
 	public String getTitleFontFamily() {
@@ -103,7 +103,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getTitleFontSize()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getTitleFontSize()
 	 */
 	@Override
 	public int getTitleFontSize() {
@@ -113,7 +113,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getTitleFontStyle()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getTitleFontStyle()
 	 */
 	@Override
 	public FontStyle getTitleFontStyle() {
@@ -123,7 +123,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getTitleAlign()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getTitleAlign()
 	 */
 	@Override
 	public TextAlign getTitleAlign() {
@@ -133,7 +133,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getTitleFontColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getTitleFontColorAsString()
 	 */
 	@Override
 	public String getTitleFontColorAsString() {
@@ -143,7 +143,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getTitleSpacing()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getTitleSpacing()
 	 */
 	@Override
 	public int getTitleSpacing() {
@@ -153,7 +153,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getTitleMarginBottom()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getTitleMarginBottom()
 	 */
 	@Override
 	public int getTitleMarginBottom() {
@@ -163,7 +163,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getBodyFontFamily()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBodyFontFamily()
 	 */
 	@Override
 	public String getBodyFontFamily() {
@@ -173,7 +173,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getBodyFontSize()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBodyFontSize()
 	 */
 	@Override
 	public int getBodyFontSize() {
@@ -183,7 +183,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getBodyFontStyle()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBodyFontStyle()
 	 */
 	@Override
 	public FontStyle getBodyFontStyle() {
@@ -193,7 +193,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getBodyAlign()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBodyAlign()
 	 */
 	@Override
 	public TextAlign getBodyAlign() {
@@ -203,7 +203,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getBodyFontColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBodyFontColorAsString()
 	 */
 	@Override
 	public String getBodyFontColorAsString() {
@@ -213,7 +213,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getBodySpacing()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBodySpacing()
 	 */
 	@Override
 	public int getBodySpacing() {
@@ -223,7 +223,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getFooterFontFamily()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getFooterFontFamily()
 	 */
 	@Override
 	public String getFooterFontFamily() {
@@ -233,7 +233,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getFooterFontSize()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getFooterFontSize()
 	 */
 	@Override
 	public int getFooterFontSize() {
@@ -243,7 +243,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getFooterFontStyle()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getFooterFontStyle()
 	 */
 	@Override
 	public FontStyle getFooterFontStyle() {
@@ -253,7 +253,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getFooterAlign()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getFooterAlign()
 	 */
 	@Override
 	public TextAlign getFooterAlign() {
@@ -263,7 +263,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getFooterFontColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getFooterFontColorAsString()
 	 */
 	@Override
 	public String getFooterFontColorAsString() {
@@ -273,7 +273,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getFooterSpacing()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getFooterSpacing()
 	 */
 	@Override
 	public int getFooterSpacing() {
@@ -283,7 +283,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getFooterMarginTop()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getFooterMarginTop()
 	 */
 	@Override
 	public int getFooterMarginTop() {
@@ -293,7 +293,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getXPadding()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getXPadding()
 	 */
 	@Override
 	public int getXPadding() {
@@ -303,7 +303,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getYPadding()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getYPadding()
 	 */
 	@Override
 	public int getYPadding() {
@@ -313,7 +313,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getCaretPadding()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getCaretPadding()
 	 */
 	@Override
 	public int getCaretPadding() {
@@ -323,7 +323,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getCaretSize()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getCaretSize()
 	 */
 	@Override
 	public int getCaretSize() {
@@ -333,7 +333,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getCornerRadius()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getCornerRadius()
 	 */
 	@Override
 	public int getCornerRadius() {
@@ -343,7 +343,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getMultiKeyBackgroundAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getMultiKeyBackgroundAsString()
 	 */
 	@Override
 	public String getMultiKeyBackgroundAsString() {
@@ -353,7 +353,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#isDisplayColors()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#isDisplayColors()
 	 */
 	@Override
 	public boolean isDisplayColors() {
@@ -363,7 +363,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getBorderColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBorderColorAsString()
 	 */
 	@Override
 	public String getBorderColorAsString() {
@@ -373,7 +373,7 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTooltips#getBorderWidth()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getBorderWidth()
 	 */
 	@Override
 	public int getBorderWidth() {

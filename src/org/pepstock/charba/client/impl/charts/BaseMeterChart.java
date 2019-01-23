@@ -57,7 +57,7 @@ abstract class BaseMeterChart<O extends MeterOptions, D extends MeterDataset> ex
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.AbstractChart#createChartOptions()
+	 * @see org.pepstock.charba.client.AbstractChart#createChartOptions()
 	 */
 	@Override
 	protected final ChartOptions createChartOptions() {

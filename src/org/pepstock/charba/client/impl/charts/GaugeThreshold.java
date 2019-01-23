@@ -59,7 +59,7 @@ public enum GaugeThreshold implements IsThreshold
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.enums.IsThreshold#getValue()
+	 * @see org.pepstock.charba.client.enums.IsThreshold#getValue()
 	 */
 	@Override
 	public double getValue() {
@@ -69,7 +69,7 @@ public enum GaugeThreshold implements IsThreshold
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.enums.IsThreshold#getColor()
+	 * @see org.pepstock.charba.client.enums.IsThreshold#getColor()
 	 */
 	@Override
 	public IsColor getColor() {
@@ -79,7 +79,7 @@ public enum GaugeThreshold implements IsThreshold
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.enums.IsThreshold#getName()
+	 * @see org.pepstock.charba.client.enums.IsThreshold#getName()
 	 */
 	@Override
 	public String getName() {

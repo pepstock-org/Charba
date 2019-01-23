@@ -37,8 +37,8 @@ public enum AxisType implements Key
 	 */
 	logarithmic,
 	/**
-	 * The labels are drawn from one of the label arrays included in the chart data.<br> Where not specified, this is the
-	 * default.
+	 * The labels are drawn from one of the label arrays included in the chart data.<br>
+	 * Where not specified, this is the default.
 	 */
 	category,
 	/**

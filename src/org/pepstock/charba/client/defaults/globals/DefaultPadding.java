@@ -29,7 +29,7 @@ public final class DefaultPadding implements IsDefaultPadding {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.layout.padding.IsDefaultPadding#getLeft()
+	 * @see org.pepstock.charba.client.options.layout.padding.IsDefaultPadding#getLeft()
 	 */
 	@Override
 	public int getLeft() {
@@ -39,7 +39,7 @@ public final class DefaultPadding implements IsDefaultPadding {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.layout.padding.IsDefaultPadding#getRight()
+	 * @see org.pepstock.charba.client.options.layout.padding.IsDefaultPadding#getRight()
 	 */
 	@Override
 	public int getRight() {
@@ -49,7 +49,7 @@ public final class DefaultPadding implements IsDefaultPadding {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.layout.padding.IsDefaultPadding#getTop()
+	 * @see org.pepstock.charba.client.options.layout.padding.IsDefaultPadding#getTop()
 	 */
 	@Override
 	public int getTop() {
@@ -59,7 +59,7 @@ public final class DefaultPadding implements IsDefaultPadding {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.layout.padding.IsDefaultPadding#getBottom()
+	 * @see org.pepstock.charba.client.options.layout.padding.IsDefaultPadding#getBottom()
 	 */
 	@Override
 	public int getBottom() {

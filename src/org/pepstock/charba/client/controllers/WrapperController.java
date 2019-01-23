@@ -213,9 +213,8 @@ final class WrapperController extends NativeObjectContainer {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.controllers.WrapperController.ProxyInitializeCallback#call(org.pepstock.
-			 * charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.jsinterop.Chart, int)
+			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxyInitializeCallback#call(org.pepstock.
+			 * charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.Chart, int)
 			 */
 			@Override
 			public void call(Context context, Chart chart, int datasetIndex) {
@@ -232,8 +231,7 @@ final class WrapperController extends NativeObjectContainer {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.controllers.WrapperController.ProxyAddElementsCallback#call(org.pepstock.
+			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxyAddElementsCallback#call(org.pepstock.
 			 * charba.client.jsinterop.controllers.Context)
 			 */
 			@Override
@@ -248,7 +246,7 @@ final class WrapperController extends NativeObjectContainer {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.controllers.WrapperController.ProxyAddElementAndResetCallback#call(org.
+			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxyAddElementAndResetCallback#call(org.
 			 * pepstock.charba.client.jsinterop.controllers.Context, int)
 			 */
 			@Override
@@ -263,8 +261,7 @@ final class WrapperController extends NativeObjectContainer {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.controllers.WrapperController.ProxyDrawCallback#call(org.pepstock.charba.
+			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxyDrawCallback#call(org.pepstock.charba.
 			 * client.jsinterop.controllers.Context, double)
 			 */
 			@Override
@@ -279,8 +276,8 @@ final class WrapperController extends NativeObjectContainer {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.controllers.WrapperController.ProxyRemoveHoverStyleCallback#call(org.
-			 * pepstock.charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxyRemoveHoverStyleCallback#call(org.
+			 * pepstock.charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Context context, NativeObject element) {
@@ -294,9 +291,8 @@ final class WrapperController extends NativeObjectContainer {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.controllers.WrapperController.ProxySetHoverStyleCallback#call(org.pepstock.
-			 * charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxySetHoverStyleCallback#call(org.pepstock.
+			 * charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Context context, NativeObject element) {
@@ -310,8 +306,7 @@ final class WrapperController extends NativeObjectContainer {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.controllers.WrapperController.ProxyUpdateCallback#call(org.pepstock.charba.
+			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxyUpdateCallback#call(org.pepstock.charba.
 			 * client.jsinterop.controllers.Context, boolean)
 			 */
 			@Override

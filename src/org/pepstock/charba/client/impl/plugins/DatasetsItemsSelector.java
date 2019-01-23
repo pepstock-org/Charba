@@ -113,7 +113,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#getId()
+	 * @see org.pepstock.charba.client.Plugin#getId()
 	 */
 	@Override
 	public String getId() {
@@ -123,8 +123,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.plugins.AbstractPlugin#onConfigure(org.pepstock.charba.client.jsinterop.
-	 * AbstractChart)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onConfigure(org.pepstock.charba.client. AbstractChart)
 	 */
 	@Override
 	public void onConfigure(AbstractChart<?, ?> chart) {
@@ -140,8 +139,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client.jsinterop.
-	 * AbstractChart)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client. AbstractChart)
 	 */
 	@Override
 	public void onAfterInit(AbstractChart<?, ?> chart) {
@@ -183,8 +181,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.plugins.AbstractPlugin#onAfterDraw(org.pepstock.charba.client.jsinterop.
-	 * AbstractChart, double)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterDraw(org.pepstock.charba.client. AbstractChart, double)
 	 */
 	@Override
 	public void onAfterDraw(AbstractChart<?, ?> chart, double easing) {
@@ -255,8 +252,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.jsinterop.AbstractChart)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
 	public void onDestroy(AbstractChart<?, ?> chart) {

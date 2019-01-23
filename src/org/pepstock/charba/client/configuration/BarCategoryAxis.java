@@ -123,7 +123,7 @@ public class BarCategoryAxis extends CartesianCategoryAxis {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.configuration.CartesianAxis#getGrideLines()
+	 * @see org.pepstock.charba.client.configuration.CartesianAxis#getGrideLines()
 	 */
 	@Override
 	public GridLines getGrideLines() {
@@ -153,7 +153,7 @@ public class BarCategoryAxis extends CartesianCategoryAxis {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.jsinterop.configuration.GridLines#setOffsetGridLines(boolean)
+		 * @see org.pepstock.charba.client.configuration.GridLines#setOffsetGridLines(boolean)
 		 */
 		@Override
 		public void setOffsetGridLines(boolean offsetGridLines) {

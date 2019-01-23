@@ -44,7 +44,7 @@ public final class ChartPointer extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#getId()
+	 * @see org.pepstock.charba.client.Plugin#getId()
 	 */
 	@Override
 	public String getId() {
@@ -54,8 +54,8 @@ public final class ChartPointer extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.plugins.AbstractPlugin#onAfterEvent(org.pepstock.charba.client.jsinterop.
-	 * AbstractChart, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterEvent(org.pepstock.charba.client. AbstractChart,
+	 * org.pepstock.charba.client.events.ChartNativeEvent)
 	 */
 	@Override
 	public void onAfterEvent(AbstractChart<?, ?> chart, ChartNativeEvent event) {

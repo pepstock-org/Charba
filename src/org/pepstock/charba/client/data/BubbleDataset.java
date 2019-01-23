@@ -178,7 +178,7 @@ public final class BubbleDataset extends HovingDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.data.Dataset#setData(double[])
+	 * @see org.pepstock.charba.client.data.Dataset#setData(double[])
 	 */
 	@Override
 	public void setData(double... values) {
@@ -188,7 +188,7 @@ public final class BubbleDataset extends HovingDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.data.Dataset#setData(java.util.List)
+	 * @see org.pepstock.charba.client.data.Dataset#setData(java.util.List)
 	 */
 	@Override
 	public void setData(List<Double> values) {
@@ -198,7 +198,7 @@ public final class BubbleDataset extends HovingDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.data.Dataset#getData()
+	 * @see org.pepstock.charba.client.data.Dataset#getData()
 	 */
 	@Override
 	public List<Double> getData() {

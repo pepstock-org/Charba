@@ -26,53 +26,53 @@ import org.pepstock.charba.client.commons.Key;
 public enum TimeUnit implements Key
 {
 	/**
-	 * Millisecond time unit 
+	 * Millisecond time unit
 	 */
 	millisecond("h:mm:ss.SSS a"),
 	/**
-	 * Second time unit 
+	 * Second time unit
 	 */
 	second("h:mm:ss a"),
 	/**
-	 * Minute time unit 
+	 * Minute time unit
 	 */
 	minute("h:mm a"),
 	/**
-	 * Hour time unit 
+	 * Hour time unit
 	 */
 	hour("hA"),
 	/**
-	 * Day time unit 
+	 * Day time unit
 	 */
 	day("MMM D"),
 	/**
-	 * Week time unit 
+	 * Week time unit
 	 */
 	week("ll"),
 	/**
-	 * Month time unit 
+	 * Month time unit
 	 */
 	month("MMM YYYY"),
 	/**
-	 * Quarter time unit 
+	 * Quarter time unit
 	 */
 	quarter("[Q]Q - YYYY"),
 	/**
-	 * Year time unit 
+	 * Year time unit
 	 */
 	year("YYYY"),
 	/**
-	 * Unknown 
+	 * Unknown
 	 */
 	unknown("");
-	
+
 	// default format based on time unit
 	private final String defaultFormat;
 
 	/**
 	 * Creates a time unit with its default format.
 	 * 
-	 * @param format default format based on time unit 
+	 * @param format default format based on time unit
 	 */
 	private TimeUnit(String format) {
 		this.defaultFormat = format;
@@ -86,5 +86,5 @@ public enum TimeUnit implements Key
 	public String getDefaultFormat() {
 		return defaultFormat;
 	}
-	
+
 }

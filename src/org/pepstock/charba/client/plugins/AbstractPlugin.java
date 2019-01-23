@@ -35,7 +35,7 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onConfigure(org.pepstock.charba.client.AbstractChart)
+	 * @see org.pepstock.charba.client.Plugin#onConfigure(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
 	public void onConfigure(AbstractChart<?, ?> chart) {
@@ -44,7 +44,7 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onBeforeInit(org.pepstock.charba.client.jsinterop.AbstractChart)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeInit(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
 	public void onBeforeInit(AbstractChart<?, ?> chart) {
@@ -53,7 +53,7 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onAfterInit(org.pepstock.charba.client.jsinterop.AbstractChart)
+	 * @see org.pepstock.charba.client.Plugin#onAfterInit(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
 	public void onAfterInit(AbstractChart<?, ?> chart) {
@@ -62,7 +62,7 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onBeforeUpdate(org.pepstock.charba.client.jsinterop.AbstractChart)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeUpdate(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
 	public boolean onBeforeUpdate(AbstractChart<?, ?> chart) {
@@ -72,7 +72,7 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onAfterUpdate(org.pepstock.charba.client.jsinterop.AbstractChart)
+	 * @see org.pepstock.charba.client.Plugin#onAfterUpdate(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
 	public void onAfterUpdate(AbstractChart<?, ?> chart) {
@@ -81,7 +81,7 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onBeforeLayout(org.pepstock.charba.client.jsinterop.AbstractChart)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeLayout(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
 	public boolean onBeforeLayout(AbstractChart<?, ?> chart) {
@@ -91,7 +91,7 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onAfterLayout(org.pepstock.charba.client.jsinterop.AbstractChart)
+	 * @see org.pepstock.charba.client.Plugin#onAfterLayout(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
 	public void onAfterLayout(AbstractChart<?, ?> chart) {
@@ -100,8 +100,7 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.Plugin#onBeforeDatasetsUpdate(org.pepstock.charba.client.jsinterop.AbstractChart)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeDatasetsUpdate(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
 	public boolean onBeforeDatasetsUpdate(AbstractChart<?, ?> chart) {
@@ -111,8 +110,7 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.Plugin#onAfterDatasetsUpdate(org.pepstock.charba.client.jsinterop.AbstractChart)
+	 * @see org.pepstock.charba.client.Plugin#onAfterDatasetsUpdate(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
 	public void onAfterDatasetsUpdate(AbstractChart<?, ?> chart) {
@@ -121,9 +119,8 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.Plugin#onBeforeDatasetUpdate(org.pepstock.charba.client.jsinterop.AbstractChart,
-	 * org.pepstock.charba.client.jsinterop.items.DatasetPluginItem)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeDatasetUpdate(org.pepstock.charba.client.AbstractChart,
+	 * org.pepstock.charba.client.items.DatasetPluginItem)
 	 */
 	@Override
 	public boolean onBeforeDatasetUpdate(AbstractChart<?, ?> chart, DatasetPluginItem item) {
@@ -133,8 +130,8 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onAfterDatasetUpdate(org.pepstock.charba.client.jsinterop.AbstractChart,
-	 * org.pepstock.charba.client.jsinterop.items.DatasetPluginItem)
+	 * @see org.pepstock.charba.client.Plugin#onAfterDatasetUpdate(org.pepstock.charba.client.AbstractChart,
+	 * org.pepstock.charba.client.items.DatasetPluginItem)
 	 */
 	@Override
 	public void onAfterDatasetUpdate(AbstractChart<?, ?> chart, DatasetPluginItem item) {
@@ -143,7 +140,7 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onBeforeRender(org.pepstock.charba.client.jsinterop.AbstractChart)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeRender(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
 	public boolean onBeforeRender(AbstractChart<?, ?> chart) {
@@ -153,7 +150,7 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onAfterRender(org.pepstock.charba.client.jsinterop.AbstractChart)
+	 * @see org.pepstock.charba.client.Plugin#onAfterRender(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
 	public void onAfterRender(AbstractChart<?, ?> chart) {
@@ -162,7 +159,7 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onBeforeDraw(org.pepstock.charba.client.jsinterop.AbstractChart, double)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeDraw(org.pepstock.charba.client.AbstractChart, double)
 	 */
 	@Override
 	public boolean onBeforeDraw(AbstractChart<?, ?> chart, double easing) {
@@ -172,7 +169,7 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onAfterDraw(org.pepstock.charba.client.jsinterop.AbstractChart, double)
+	 * @see org.pepstock.charba.client.Plugin#onAfterDraw(org.pepstock.charba.client.AbstractChart, double)
 	 */
 	@Override
 	public void onAfterDraw(AbstractChart<?, ?> chart, double easing) {
@@ -181,8 +178,7 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onBeforeDatasetsDraw(org.pepstock.charba.client.jsinterop.AbstractChart,
-	 * double)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeDatasetsDraw(org.pepstock.charba.client.AbstractChart, double)
 	 */
 	@Override
 	public boolean onBeforeDatasetsDraw(AbstractChart<?, ?> chart, double easing) {
@@ -192,8 +188,7 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onAfterDatasetsDraw(org.pepstock.charba.client.jsinterop.AbstractChart,
-	 * double)
+	 * @see org.pepstock.charba.client.Plugin#onAfterDatasetsDraw(org.pepstock.charba.client.AbstractChart, double)
 	 */
 	@Override
 	public void onAfterDatasetsDraw(AbstractChart<?, ?> chart, double easing) {
@@ -202,8 +197,8 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onBeforeDatasetDraw(org.pepstock.charba.client.jsinterop.AbstractChart,
-	 * org.pepstock.charba.client.jsinterop.items.DatasetPluginItem)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeDatasetDraw(org.pepstock.charba.client.AbstractChart,
+	 * org.pepstock.charba.client.items.DatasetPluginItem)
 	 */
 	@Override
 	public boolean onBeforeDatasetDraw(AbstractChart<?, ?> chart, DatasetPluginItem item) {
@@ -213,8 +208,8 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onAfterDatasetDraw(org.pepstock.charba.client.jsinterop.AbstractChart,
-	 * org.pepstock.charba.client.jsinterop.items.DatasetPluginItem)
+	 * @see org.pepstock.charba.client.Plugin#onAfterDatasetDraw(org.pepstock.charba.client.AbstractChart,
+	 * org.pepstock.charba.client.items.DatasetPluginItem)
 	 */
 	@Override
 	public void onAfterDatasetDraw(AbstractChart<?, ?> chart, DatasetPluginItem item) {
@@ -223,8 +218,8 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onBeforeTooltipDraw(org.pepstock.charba.client.jsinterop.AbstractChart,
-	 * org.pepstock.charba.client.jsinterop.items.TooltipPluginItem)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeTooltipDraw(org.pepstock.charba.client.AbstractChart,
+	 * org.pepstock.charba.client.items.TooltipPluginItem)
 	 */
 	@Override
 	public boolean onBeforeTooltipDraw(AbstractChart<?, ?> chart, TooltipPluginItem item) {
@@ -234,8 +229,8 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onAfterTooltipDraw(org.pepstock.charba.client.jsinterop.AbstractChart,
-	 * org.pepstock.charba.client.jsinterop.items.TooltipPluginItem)
+	 * @see org.pepstock.charba.client.Plugin#onAfterTooltipDraw(org.pepstock.charba.client.AbstractChart,
+	 * org.pepstock.charba.client.items.TooltipPluginItem)
 	 */
 	@Override
 	public void onAfterTooltipDraw(AbstractChart<?, ?> chart, TooltipPluginItem item) {
@@ -244,8 +239,8 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onBeforeEvent(org.pepstock.charba.client.jsinterop.AbstractChart,
-	 * org.pepstock.charba.client.jsinterop.events.ChartNativeEvent)
+	 * @see org.pepstock.charba.client.Plugin#onBeforeEvent(org.pepstock.charba.client.AbstractChart,
+	 * org.pepstock.charba.client.events.ChartNativeEvent)
 	 */
 	@Override
 	public boolean onBeforeEvent(AbstractChart<?, ?> chart, ChartNativeEvent event) {
@@ -255,8 +250,8 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onAfterEvent(org.pepstock.charba.client.jsinterop.AbstractChart,
-	 * org.pepstock.charba.client.jsinterop.events.ChartNativeEvent)
+	 * @see org.pepstock.charba.client.Plugin#onAfterEvent(org.pepstock.charba.client.AbstractChart,
+	 * org.pepstock.charba.client.events.ChartNativeEvent)
 	 */
 	@Override
 	public void onAfterEvent(AbstractChart<?, ?> chart, ChartNativeEvent event) {
@@ -265,8 +260,8 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onResize(org.pepstock.charba.client.jsinterop.AbstractChart,
-	 * org.pepstock.charba.client.jsinterop.items.SizeItem)
+	 * @see org.pepstock.charba.client.Plugin#onResize(org.pepstock.charba.client.AbstractChart,
+	 * org.pepstock.charba.client.items.SizeItem)
 	 */
 	@Override
 	public void onResize(AbstractChart<?, ?> chart, SizeItem size) {
@@ -275,7 +270,7 @@ public abstract class AbstractPlugin implements Plugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Plugin#onDestroy(org.pepstock.charba.client.jsinterop.AbstractChart)
+	 * @see org.pepstock.charba.client.Plugin#onDestroy(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
 	public void onDestroy(AbstractChart<?, ?> chart) {

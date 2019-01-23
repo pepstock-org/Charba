@@ -94,7 +94,7 @@ public class RadialPointLabels extends AxisContainer {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.options.PointLabels.ProxyPointLabelCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.options.PointLabels.ProxyPointLabelCallback#call(java.lang.Object,
 			 * java.lang.String)
 			 */
 			@Override

@@ -24,14 +24,14 @@ package org.pepstock.charba.client.colors;
 public interface IsColor {
 
 	/**
-	 * Returns the red value. 
+	 * Returns the red value.
 	 * 
 	 * @return the red
 	 */
 	int getRed();
 
 	/**
-	 * Returns the green value. 
+	 * Returns the green value.
 	 * 
 	 * @return the green
 	 */

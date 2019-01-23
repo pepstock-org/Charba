@@ -148,7 +148,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales#getXAxis()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getXAxis()
 	 */
 	@Override
 	public IsDefaultScale getXAxis() {
@@ -158,7 +158,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales#getYAxis()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getYAxis()
 	 */
 	@Override
 	public IsDefaultScale getYAxis() {
@@ -186,8 +186,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see
-		 * org.pepstock.charba.client.jsinterop.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
 		 * .commons.NativeObject)
 		 */
 		@Override

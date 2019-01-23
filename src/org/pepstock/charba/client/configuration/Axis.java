@@ -399,8 +399,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeUpdateCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyBeforeUpdateCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -416,9 +416,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeSetDimensionsCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyBeforeSetDimensionsCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -434,9 +433,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterSetDimensionsCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAfterSetDimensionsCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -452,8 +450,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeDataLimitsCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyBeforeDataLimitsCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -469,8 +467,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterDataLimitsCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAfterDataLimitsCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -486,8 +484,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeBuildTicksCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyBeforeBuildTicksCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -503,8 +501,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterBuildTicksCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAfterBuildTicksCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -520,9 +518,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeTickToLabelConversionCallback#call(java.lang.
-			 * Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyBeforeTickToLabelConversionCallback#call(java.lang.
+			 * Object, org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -538,9 +535,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterTickToLabelConversionCallback#call(java.lang.
-			 * Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAfterTickToLabelConversionCallback#call(java.lang.
+			 * Object, org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -556,9 +552,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeCalculateTickRotationCallback#call(java.lang.
-			 * Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyBeforeCalculateTickRotationCallback#call(java.lang.
+			 * Object, org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -574,9 +569,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterCalculateTickRotationCallback#call(java.lang.
-			 * Object, org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAfterCalculateTickRotationCallback#call(java.lang.
+			 * Object, org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -592,8 +586,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyBeforeFitCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyBeforeFitCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -609,8 +603,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterFitCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAfterFitCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -626,8 +620,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Axis.ProxyAfterUpdateCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAfterUpdateCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {

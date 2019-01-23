@@ -40,7 +40,7 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontColorAsString()
 	 */
 	@Override
 	public String getFontColorAsString() {
@@ -50,7 +50,7 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontSize()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontSize()
 	 */
 	@Override
 	public int getFontSize() {
@@ -60,7 +60,7 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontStyle()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontStyle()
 	 */
 	@Override
 	public FontStyle getFontStyle() {
@@ -70,7 +70,7 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontFamily()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontFamily()
 	 */
 	@Override
 	public String getFontFamily() {
@@ -80,7 +80,7 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels#isUsePointStyle()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendLabels#isUsePointStyle()
 	 */
 	@Override
 	public boolean isUsePointStyle() {
@@ -90,7 +90,7 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels#getBoxWidth()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendLabels#getBoxWidth()
 	 */
 	@Override
 	public int getBoxWidth() {
@@ -100,7 +100,7 @@ public final class DefaultChartLegendLabels implements IsDefaultLegendLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLegendLabels#getPadding()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegendLabels#getPadding()
 	 */
 	@Override
 	public int getPadding() {

@@ -79,7 +79,7 @@ public final class ControllerType implements Type {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.commons.Key#name()
+	 * @see org.pepstock.charba.client.commons.Key#name()
 	 */
 	@Override
 	public String name() {
@@ -89,7 +89,7 @@ public final class ControllerType implements Type {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Type#scaleType()
+	 * @see org.pepstock.charba.client.Type#scaleType()
 	 */
 	@Override
 	public ScaleType scaleType() {

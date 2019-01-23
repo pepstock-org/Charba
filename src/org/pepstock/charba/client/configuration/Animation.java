@@ -121,9 +121,8 @@ public class Animation extends EventProvider<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.configuration.Animation.ProxyAnimationCompleteCallback#call(org.pepstock.
-			 * charba.client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.items.AnimationObject)
+			 * @see org.pepstock.charba.client.configuration.Animation.ProxyAnimationCompleteCallback#call(org.pepstock.
+			 * charba.client.jsinterop.Chart, org.pepstock.charba.client.items.AnimationObject)
 			 */
 			@Override
 			public void call(Chart context, AnimationObject animationObject) {
@@ -139,9 +138,8 @@ public class Animation extends EventProvider<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.configuration.Animation.ProxyAnimationProgressCallback#call(org.pepstock.
-			 * charba.client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.items.AnimationObject)
+			 * @see org.pepstock.charba.client.configuration.Animation.ProxyAnimationProgressCallback#call(org.pepstock.
+			 * charba.client.jsinterop.Chart, org.pepstock.charba.client.items.AnimationObject)
 			 */
 			@Override
 			public void call(Chart context, AnimationObject animationObject) {
@@ -229,8 +227,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.configuration.EventProvider#addHandler(com.google.gwt.event.shared.GwtEvent.Type)
+	 * @see org.pepstock.charba.client.configuration.EventProvider#addHandler(com.google.gwt.event.shared.GwtEvent.Type)
 	 */
 	@Override
 	protected final <H extends EventHandler> void addHandler(Type<H> type) {
@@ -257,8 +254,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.configuration.EventProvider#removeHandler(com.google.gwt.event.shared.GwtEvent.Type)
+	 * @see org.pepstock.charba.client.configuration.EventProvider#removeHandler(com.google.gwt.event.shared.GwtEvent.Type)
 	 */
 	@Override
 	protected final <H extends EventHandler> void removeHandler(Type<H> type) {

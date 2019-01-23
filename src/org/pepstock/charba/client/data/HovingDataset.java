@@ -15,13 +15,17 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayPattern;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.ArrayStringList;
 import org.pepstock.charba.client.commons.Key;
 
 /**
@@ -33,6 +37,9 @@ import org.pepstock.charba.client.commons.Key;
  *
  */
 abstract class HovingDataset extends Dataset {
+
+	// internal cache for patterns
+	private final List<Pattern> patterns = new LinkedList<>();
 
 	/**
 	 * Name of properties of native object.
@@ -54,6 +61,8 @@ abstract class HovingDataset extends Dataset {
 	 */
 	public void setBackgroundColor(IsColor... backgroundColor) {
 		setArrayValue(Property.backgroundColor, ArrayString.of(backgroundColor));
+		// clear previous pattern stored if there are
+		patterns.clear();
 	}
 
 	/**
@@ -63,25 +72,60 @@ abstract class HovingDataset extends Dataset {
 	 */
 	public void setBackgroundColor(String... backgroundColor) {
 		setArrayValue(Property.backgroundColor, ArrayString.of(backgroundColor));
+		// clear previous pattern stored if there are
+		patterns.clear();
 	}
 
 	/**
-	 * Returns the fill color of the arcs in the dataset as string.
+	 * Sets the fill pattern of the arcs in the dataset.
 	 * 
-	 * @return list of the fill color of the arcs in the dataset as string.
+	 * @param backgroundColor the fill pattern of the arcs in the dataset.
+	 */
+	public void setBackgroundColor(Pattern... backgroundColor) {
+		setArrayValue(Property.backgroundColor, ArrayPattern.of(backgroundColor));
+		// clear previous pattern stored if there are
+		patterns.clear();
+		patterns.addAll(Arrays.asList(backgroundColor));
+	}
+
+	/**
+	 * Returns the fill color of the arcs in the dataset as string. If property is missing or not a color, returns an empty
+	 * list.
+	 * 
+	 * @return list of the fill color of the arcs in the dataset as string. If property is missing or not a color, returns an
+	 *         empty list.
 	 */
 	public List<String> getBackgroundColorAsString() {
-		ArrayString array = getArrayValue(Property.backgroundColor);
-		return ArrayListHelper.list(array);
+		// checks if the list of pattern is empty
+		// if not, means the property is pattern and not colors
+		if (patterns.isEmpty()) {
+			// returns list of colors
+			ArrayString array = getArrayValue(Property.backgroundColor);
+			return ArrayListHelper.list(array);
+		} else {
+			// the property is colors
+			// therefore returns an empty list
+			return new ArrayStringList();
+		}
 	}
 
 	/**
-	 * Returns the fill color of the arcs in the dataset.
+	 * Returns the fill color of the arcs in the dataset. If property is missing or not a color, returns an empty list.
 	 * 
-	 * @return list of the fill color of the arcs in the dataset.
+	 * @return list of the fill color of the arcs in the dataset. If property is missing or not a color, returns an empty list.
 	 */
 	public List<IsColor> getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
+	}
+
+	/**
+	 * Returns the fill patters of the arcs in the dataset. If property is missing or not a pattern, returns an empty list.
+	 * 
+	 * @return list of the fill patterns of the arcs in the dataset. If property is missing or not a pattern, returns an empty
+	 *         list.
+	 */
+	public List<Pattern> getBackgroundColorAsPatterns() {
+		return patterns;
 	}
 
 	/**

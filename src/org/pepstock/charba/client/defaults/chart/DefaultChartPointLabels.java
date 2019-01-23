@@ -40,7 +40,7 @@ public final class DefaultChartPointLabels implements IsDefaultPointLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontColorAsString()
 	 */
 	@Override
 	public String getFontColorAsString() {
@@ -50,7 +50,7 @@ public final class DefaultChartPointLabels implements IsDefaultPointLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontSize()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontSize()
 	 */
 	@Override
 	public int getFontSize() {
@@ -60,7 +60,7 @@ public final class DefaultChartPointLabels implements IsDefaultPointLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontStyle()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontStyle()
 	 */
 	@Override
 	public FontStyle getFontStyle() {
@@ -70,7 +70,7 @@ public final class DefaultChartPointLabels implements IsDefaultPointLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontFamily()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontFamily()
 	 */
 	@Override
 	public String getFontFamily() {
@@ -80,7 +80,7 @@ public final class DefaultChartPointLabels implements IsDefaultPointLabels {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPointLabels#isDisplay()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#isDisplay()
 	 */
 	@Override
 	public boolean isDisplay() {

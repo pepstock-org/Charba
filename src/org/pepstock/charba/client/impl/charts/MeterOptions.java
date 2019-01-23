@@ -84,7 +84,7 @@ public class MeterOptions extends AbstractPieOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.configuration.AbstractPieOptions#setCutoutPercentage(double)
+	 * @see org.pepstock.charba.client.configuration.AbstractPieOptions#setCutoutPercentage(double)
 	 */
 	@Override
 	public void setCutoutPercentage(double cutoutPercentage) {
@@ -95,7 +95,7 @@ public class MeterOptions extends AbstractPieOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions#getHover()
+	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getHover()
 	 */
 	@Override
 	public Hover getHover() {
@@ -105,7 +105,7 @@ public class MeterOptions extends AbstractPieOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions#getLayout()
+	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getLayout()
 	 */
 	@Override
 	public final Layout getLayout() {
@@ -115,7 +115,7 @@ public class MeterOptions extends AbstractPieOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions#getLegend()
+	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getLegend()
 	 */
 	@Override
 	public final Legend getLegend() {
@@ -125,7 +125,7 @@ public class MeterOptions extends AbstractPieOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions#getTooltips()
+	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getTooltips()
 	 */
 	@Override
 	public final Tooltips getTooltips() {
@@ -135,8 +135,7 @@ public class MeterOptions extends AbstractPieOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.configuration.ConfigurationOptions#setLegendCallback(org.pepstock.charba.client.
+	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#setLegendCallback(org.pepstock.charba.client.
 	 * jsinterop.callbacks.LegendCallback)
 	 */
 	@Override

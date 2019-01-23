@@ -385,9 +385,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyBeforeTitleCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyBeforeTitleCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
 			public ArrayString call(Object context, ArrayObject items) {
@@ -409,8 +408,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyTitleCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyTitleCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
 			public ArrayString call(Object context, ArrayObject items) {
@@ -432,9 +431,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyAfterTitleCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyAfterTitleCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
 			public ArrayString call(Object context, ArrayObject items) {
@@ -456,9 +454,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyBeforeBodyCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyBeforeBodyCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
 			public ArrayString call(Object context, ArrayObject items) {
@@ -480,8 +477,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyAfterBodyCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyAfterBodyCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
 			public ArrayString call(Object context, ArrayObject items) {
@@ -503,9 +500,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyBeforeLabelCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.items.NativeObject)
+			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyBeforeLabelCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.items.NativeObject)
 			 */
 			@Override
 			public String call(Object context, NativeObject item) {
@@ -525,8 +521,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyLabelCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.items.NativeObject)
+			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyLabelCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.items.NativeObject)
 			 */
 			@Override
 			public String call(Object context, NativeObject item) {
@@ -546,9 +542,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyLabelColorCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.items.NativeObject)
+			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyLabelColorCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.items.NativeObject)
 			 */
 			@Override
 			public NativeObject call(Object context, NativeObject item) {
@@ -568,9 +563,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyLabelTextColorCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.items.NativeObject)
+			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyLabelTextColorCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.items.NativeObject)
 			 */
 			@Override
 			public String call(Object context, NativeObject item) {
@@ -590,9 +584,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyAfterLabelCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.items.NativeObject)
+			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyAfterLabelCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.items.NativeObject)
 			 */
 			@Override
 			public String call(Object context, NativeObject item) {
@@ -612,9 +605,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyBeforeFooterCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyBeforeFooterCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
 			public ArrayString call(Object context, ArrayObject items) {
@@ -636,8 +628,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyFooterCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyFooterCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
 			public ArrayString call(Object context, ArrayObject items) {
@@ -659,9 +651,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.jsinterop.options.TooltipsCallbacks.ProxyAfterFooterCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.ArrayObject)
+			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyAfterFooterCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
 			public ArrayString call(Object context, ArrayObject items) {

@@ -55,7 +55,7 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.configuration.scales.CartesianAxis#getTicks()
+	 * @see org.pepstock.charba.client.configuration.scales.CartesianAxis#getTicks()
 	 */
 	@Override
 	public CartesianLogarithmicTick getTicks() {

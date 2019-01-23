@@ -139,7 +139,7 @@ public class BarDataset extends HovingFlexDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.data.HovingFlexDataset#getDefaultBackgroundColorAsString()
+	 * @see org.pepstock.charba.client.data.HovingFlexDataset#getDefaultBackgroundColorAsString()
 	 */
 	@Override
 	String getDefaultBackgroundColorAsString() {
@@ -149,7 +149,7 @@ public class BarDataset extends HovingFlexDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.data.HovingFlexDataset#getDefaultBorderColorAsString()
+	 * @see org.pepstock.charba.client.data.HovingFlexDataset#getDefaultBorderColorAsString()
 	 */
 	@Override
 	String getDefaultBorderColorAsString() {
@@ -159,7 +159,7 @@ public class BarDataset extends HovingFlexDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.data.HovingFlexDataset#getDefaultBorderWidth()
+	 * @see org.pepstock.charba.client.data.HovingFlexDataset#getDefaultBorderWidth()
 	 */
 	@Override
 	int getDefaultBorderWidth() {

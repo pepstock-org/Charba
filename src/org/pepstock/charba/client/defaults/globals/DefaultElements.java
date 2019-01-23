@@ -39,7 +39,7 @@ public final class DefaultElements implements IsDefaultElements {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultOptions#getArc()
+	 * @see org.pepstock.charba.client.options.IsDefaultOptions#getArc()
 	 */
 	@Override
 	public IsDefaultArc getArc() {
@@ -49,7 +49,7 @@ public final class DefaultElements implements IsDefaultElements {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultOptions#getLine()
+	 * @see org.pepstock.charba.client.options.IsDefaultOptions#getLine()
 	 */
 	@Override
 	public IsDefaultLine getLine() {
@@ -59,7 +59,7 @@ public final class DefaultElements implements IsDefaultElements {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultOptions#getPoint()
+	 * @see org.pepstock.charba.client.options.IsDefaultOptions#getPoint()
 	 */
 	@Override
 	public IsDefaultPoint getPoint() {
@@ -69,7 +69,7 @@ public final class DefaultElements implements IsDefaultElements {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultOptions#getRectangle()
+	 * @see org.pepstock.charba.client.options.IsDefaultOptions#getRectangle()
 	 */
 	@Override
 	public IsDefaultRectangle getRectangle() {

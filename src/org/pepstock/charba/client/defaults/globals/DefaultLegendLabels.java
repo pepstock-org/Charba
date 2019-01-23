@@ -33,7 +33,7 @@ public final class DefaultLegendLabels extends AbstractDefaultFontItem implement
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.legend.labels.IsDefaultLegendLabels#isUsePointStyle()
+	 * @see org.pepstock.charba.client.options.legend.labels.IsDefaultLegendLabels#isUsePointStyle()
 	 */
 	@Override
 	public boolean isUsePointStyle() {
@@ -43,7 +43,7 @@ public final class DefaultLegendLabels extends AbstractDefaultFontItem implement
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.legend.labels.IsDefaultLegendLabels#getBoxWidth()
+	 * @see org.pepstock.charba.client.options.legend.labels.IsDefaultLegendLabels#getBoxWidth()
 	 */
 	@Override
 	public int getBoxWidth() {
@@ -53,7 +53,7 @@ public final class DefaultLegendLabels extends AbstractDefaultFontItem implement
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.legend.labels.IsDefaultLegendLabels#getPadding()
+	 * @see org.pepstock.charba.client.options.legend.labels.IsDefaultLegendLabels#getPadding()
 	 */
 	@Override
 	public int getPadding() {

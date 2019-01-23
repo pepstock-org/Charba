@@ -99,7 +99,7 @@ public final class Plugins implements ConfigurationElement {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.ConfigurationElement#load(org.pepstock.charba.client.jsinterop.Configuration)
+	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.Configuration)
 	 */
 	@Override
 	public void load(Configuration configuration) {

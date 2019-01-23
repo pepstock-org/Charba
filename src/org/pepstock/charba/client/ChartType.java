@@ -90,7 +90,7 @@ public enum ChartType implements Type
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Type#scaleType()
+	 * @see org.pepstock.charba.client.Type#scaleType()
 	 */
 	@Override
 	public ScaleType scaleType() {

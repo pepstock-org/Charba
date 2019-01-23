@@ -44,7 +44,7 @@ public final class ScatterDataset extends LineDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.data.LineDataset#setShowLine(boolean)
+	 * @see org.pepstock.charba.client.data.LineDataset#setShowLine(boolean)
 	 */
 	@Override
 	public void setShowLines(boolean showLine) {
@@ -55,7 +55,7 @@ public final class ScatterDataset extends LineDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.data.LiningDataset#setFill(org.pepstock.charba.client.jsinterop.enums.Fill)
+	 * @see org.pepstock.charba.client.data.LiningDataset#setFill(org.pepstock.charba.client.enums.Fill)
 	 */
 	@Override
 	public void setFill(Fill fill) {
@@ -66,7 +66,7 @@ public final class ScatterDataset extends LineDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.data.Dataset#setData(double[])
+	 * @see org.pepstock.charba.client.data.Dataset#setData(double[])
 	 */
 	@Override
 	public void setData(double... values) {
@@ -76,7 +76,7 @@ public final class ScatterDataset extends LineDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.data.Dataset#setData(java.util.List)
+	 * @see org.pepstock.charba.client.data.Dataset#setData(java.util.List)
 	 */
 	@Override
 	public void setData(List<Double> values) {
@@ -86,7 +86,7 @@ public final class ScatterDataset extends LineDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.data.Dataset#getData()
+	 * @see org.pepstock.charba.client.data.Dataset#getData()
 	 */
 	@Override
 	public List<Double> getData() {

@@ -40,7 +40,7 @@ public final class DefaultChartRectangle implements IsDefaultRectangle {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBackgroundColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getBackgroundColorAsString()
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
@@ -50,7 +50,7 @@ public final class DefaultChartRectangle implements IsDefaultRectangle {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBorderWidth()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getBorderWidth()
 	 */
 	@Override
 	public int getBorderWidth() {
@@ -60,7 +60,7 @@ public final class DefaultChartRectangle implements IsDefaultRectangle {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultArc#getBorderColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getBorderColorAsString()
 	 */
 	@Override
 	public String getBorderColorAsString() {
@@ -70,7 +70,7 @@ public final class DefaultChartRectangle implements IsDefaultRectangle {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultRectangle#getBorderSkipped()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultRectangle#getBorderSkipped()
 	 */
 	@Override
 	public Position getBorderSkipped() {

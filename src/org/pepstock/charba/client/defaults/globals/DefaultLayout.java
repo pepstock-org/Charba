@@ -30,7 +30,7 @@ public final class DefaultLayout implements IsDefaultLayout {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.IsDefaultOptions#getPadding()
+	 * @see org.pepstock.charba.client.options.IsDefaultOptions#getPadding()
 	 */
 	@Override
 	public IsDefaultPadding getPadding() {

@@ -44,7 +44,7 @@ public final class DefaultPoint extends DefaultArc implements IsDefaultPoint {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBackgroundColorAsString()
+	 * @see org.pepstock.charba.client.defaults.DefaultArc#getBackgroundColorAsString()
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
@@ -54,7 +54,7 @@ public final class DefaultPoint extends DefaultArc implements IsDefaultPoint {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBorderWidth()
+	 * @see org.pepstock.charba.client.defaults.DefaultArc#getBorderWidth()
 	 */
 	@Override
 	public int getBorderWidth() {
@@ -64,7 +64,7 @@ public final class DefaultPoint extends DefaultArc implements IsDefaultPoint {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.DefaultArc#getBorderColorAsString()
+	 * @see org.pepstock.charba.client.defaults.DefaultArc#getBorderColorAsString()
 	 */
 	@Override
 	public String getBorderColorAsString() {
@@ -74,7 +74,7 @@ public final class DefaultPoint extends DefaultArc implements IsDefaultPoint {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.elements.point.IsDefaultPoint#getRadius()
+	 * @see org.pepstock.charba.client.options.elements.point.IsDefaultPoint#getRadius()
 	 */
 	@Override
 	public double getRadius() {
@@ -84,7 +84,7 @@ public final class DefaultPoint extends DefaultArc implements IsDefaultPoint {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.elements.point.IsDefaultPoint#getPointStyle()
+	 * @see org.pepstock.charba.client.options.elements.point.IsDefaultPoint#getPointStyle()
 	 */
 	@Override
 	public PointStyle getPointStyle() {
@@ -94,7 +94,7 @@ public final class DefaultPoint extends DefaultArc implements IsDefaultPoint {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.elements.point.IsDefaultPoint#getHitRadius()
+	 * @see org.pepstock.charba.client.options.elements.point.IsDefaultPoint#getHitRadius()
 	 */
 	@Override
 	public double getHitRadius() {
@@ -104,7 +104,7 @@ public final class DefaultPoint extends DefaultArc implements IsDefaultPoint {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.elements.point.IsDefaultPoint#getHoverRadius()
+	 * @see org.pepstock.charba.client.options.elements.point.IsDefaultPoint#getHoverRadius()
 	 */
 	@Override
 	public double getHoverRadius() {
@@ -114,7 +114,7 @@ public final class DefaultPoint extends DefaultArc implements IsDefaultPoint {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.elements.point.IsDefaultPoint#getHoverBorderWidth()
+	 * @see org.pepstock.charba.client.options.elements.point.IsDefaultPoint#getHoverBorderWidth()
 	 */
 	@Override
 	public int getHoverBorderWidth() {
@@ -124,7 +124,7 @@ public final class DefaultPoint extends DefaultArc implements IsDefaultPoint {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultPoint#getRotation()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPoint#getRotation()
 	 */
 	@Override
 	public double getRotation() {

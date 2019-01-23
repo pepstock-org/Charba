@@ -157,8 +157,8 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Tooltips.ProxyCustomCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Tooltips.ProxyCustomCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject model) {
@@ -174,9 +174,8 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Tooltips.ProxyItemSortCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.NativeObject,
-			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Tooltips.ProxyItemSortCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject, org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public int call(Object context, NativeObject item1, NativeObject item2) {
@@ -194,8 +193,8 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Tooltips.ProxyFilterCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Tooltips.ProxyFilterCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public boolean call(Object context, NativeObject item) {

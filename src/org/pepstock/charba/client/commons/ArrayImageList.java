@@ -61,7 +61,7 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.commons.AbstractArrayList#getArray()
+	 * @see org.pepstock.charba.client.commons.AbstractArrayList#getArray()
 	 */
 	@Override
 	ArrayImage getArray() {

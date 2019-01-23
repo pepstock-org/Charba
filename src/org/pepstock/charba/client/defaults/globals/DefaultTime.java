@@ -34,7 +34,7 @@ public class DefaultTime implements IsDefaultTime {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#isIsoWeekday()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#isIsoWeekday()
 	 */
 	@Override
 	public boolean isIsoWeekday() {
@@ -44,7 +44,7 @@ public class DefaultTime implements IsDefaultTime {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getMax()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getMax()
 	 */
 	@Override
 	public Date getMax() {
@@ -54,7 +54,7 @@ public class DefaultTime implements IsDefaultTime {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getMin()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getMin()
 	 */
 	@Override
 	public Date getMin() {
@@ -64,7 +64,7 @@ public class DefaultTime implements IsDefaultTime {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getRound()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getRound()
 	 */
 	@Override
 	public TimeUnit getRound() {
@@ -74,7 +74,7 @@ public class DefaultTime implements IsDefaultTime {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getTooltipFormat()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getTooltipFormat()
 	 */
 	@Override
 	public String getTooltipFormat() {
@@ -84,7 +84,7 @@ public class DefaultTime implements IsDefaultTime {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getUnit()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getUnit()
 	 */
 	@Override
 	public TimeUnit getUnit() {
@@ -94,7 +94,7 @@ public class DefaultTime implements IsDefaultTime {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getStepSize()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getStepSize()
 	 */
 	@Override
 	public int getStepSize() {
@@ -104,7 +104,7 @@ public class DefaultTime implements IsDefaultTime {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getMinUnit()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getMinUnit()
 	 */
 	@Override
 	public TimeUnit getMinUnit() {
@@ -114,7 +114,7 @@ public class DefaultTime implements IsDefaultTime {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTime#getParser()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getParser()
 	 */
 	@Override
 	public String getParser() {

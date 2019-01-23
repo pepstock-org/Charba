@@ -37,7 +37,7 @@ public final class DefaultTitle extends AbstractDefaultFontItem implements IsDef
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.title.IsDefaultTitle#isDisplay()
+	 * @see org.pepstock.charba.client.options.title.IsDefaultTitle#isDisplay()
 	 */
 	@Override
 	public boolean isDisplay() {
@@ -47,7 +47,7 @@ public final class DefaultTitle extends AbstractDefaultFontItem implements IsDef
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.title.IsDefaultTitle#getPosition()
+	 * @see org.pepstock.charba.client.options.title.IsDefaultTitle#getPosition()
 	 */
 	@Override
 	public Position getPosition() {
@@ -57,7 +57,7 @@ public final class DefaultTitle extends AbstractDefaultFontItem implements IsDef
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.title.IsDefaultTitle#getPadding()
+	 * @see org.pepstock.charba.client.options.title.IsDefaultTitle#getPadding()
 	 */
 	@Override
 	public int getPadding() {
@@ -67,7 +67,7 @@ public final class DefaultTitle extends AbstractDefaultFontItem implements IsDef
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.title.IsDefaultTitle#isFullWidth()
+	 * @see org.pepstock.charba.client.options.title.IsDefaultTitle#isFullWidth()
 	 */
 	@Override
 	public boolean isFullWidth() {
@@ -77,7 +77,7 @@ public final class DefaultTitle extends AbstractDefaultFontItem implements IsDef
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.title.IsDefaultTitle#getLineHeight()
+	 * @see org.pepstock.charba.client.options.title.IsDefaultTitle#getLineHeight()
 	 */
 	@Override
 	public double getLineHeight() {
@@ -87,7 +87,7 @@ public final class DefaultTitle extends AbstractDefaultFontItem implements IsDef
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.AbstractDefaultFontItem#getFontStyle()
+	 * @see org.pepstock.charba.client.defaults.AbstractDefaultFontItem#getFontStyle()
 	 */
 	@Override
 	public FontStyle getFontStyle() {

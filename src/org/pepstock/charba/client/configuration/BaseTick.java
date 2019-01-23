@@ -100,8 +100,8 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.options.BaseTick.ProxyTickCallback#call(java.lang.Object, double, int,
-			 * org.pepstock.charba.client.jsinterop.commons.ArrayDouble)
+			 * @see org.pepstock.charba.client.options.BaseTick.ProxyTickCallback#call(java.lang.Object, double, int,
+			 * org.pepstock.charba.client.commons.ArrayDouble)
 			 */
 			@Override
 			public String call(Object context, double value, int index, ArrayDouble values) {

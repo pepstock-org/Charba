@@ -41,7 +41,7 @@ public class BubbleChart extends AbstractChart<BubbleOptions, BubbleDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.IsChart#getType()
+	 * @see org.pepstock.charba.client.IsChart#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -51,7 +51,7 @@ public class BubbleChart extends AbstractChart<BubbleOptions, BubbleDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.IsChart#getOptions()
+	 * @see org.pepstock.charba.client.IsChart#getOptions()
 	 */
 	@Override
 	public BubbleOptions getOptions() {
@@ -61,7 +61,7 @@ public class BubbleChart extends AbstractChart<BubbleOptions, BubbleDataset> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.IsChart#newDataset()
+	 * @see org.pepstock.charba.client.IsChart#newDataset()
 	 */
 	@Override
 	public BubbleDataset newDataset() {

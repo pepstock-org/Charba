@@ -67,7 +67,7 @@ final class BaseMeterController extends AbstractController {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.Controller#getType()
+	 * @see org.pepstock.charba.client.Controller#getType()
 	 */
 	@Override
 	public ControllerType getType() {
@@ -77,9 +77,8 @@ final class BaseMeterController extends AbstractController {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.controllers.AbstractController#draw(org.pepstock.charba.client.jsinterop.controllers
-	 * .Context, org.pepstock.charba.client.jsinterop.AbstractChart, double)
+	 * @see org.pepstock.charba.client.controllers.AbstractController#draw(org.pepstock.charba.client.controllers .Context,
+	 * org.pepstock.charba.client.AbstractChart, double)
 	 */
 	@Override
 	public void draw(Context context, AbstractChart<?, ?> chart, double ease) {

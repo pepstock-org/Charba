@@ -37,7 +37,7 @@ public final class DefaultLegend implements IsDefaultLegend {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.legend.IsDefaultLegend#getLabels()
+	 * @see org.pepstock.charba.client.options.legend.IsDefaultLegend#getLabels()
 	 */
 	@Override
 	public IsDefaultLegendLabels getLabels() {
@@ -47,7 +47,7 @@ public final class DefaultLegend implements IsDefaultLegend {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.legend.IsDefaultLegend#isDisplay()
+	 * @see org.pepstock.charba.client.options.legend.IsDefaultLegend#isDisplay()
 	 */
 	@Override
 	public boolean isDisplay() {
@@ -57,7 +57,7 @@ public final class DefaultLegend implements IsDefaultLegend {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.legend.IsDefaultLegend#isFullWidth()
+	 * @see org.pepstock.charba.client.options.legend.IsDefaultLegend#isFullWidth()
 	 */
 	@Override
 	public boolean isFullWidth() {
@@ -67,7 +67,7 @@ public final class DefaultLegend implements IsDefaultLegend {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.legend.IsDefaultLegend#isReverse()
+	 * @see org.pepstock.charba.client.options.legend.IsDefaultLegend#isReverse()
 	 */
 	@Override
 	public boolean isReverse() {
@@ -77,7 +77,7 @@ public final class DefaultLegend implements IsDefaultLegend {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.options.legend.IsDefaultLegend#getPosition()
+	 * @see org.pepstock.charba.client.options.legend.IsDefaultLegend#getPosition()
 	 */
 	@Override
 	public Position getPosition() {

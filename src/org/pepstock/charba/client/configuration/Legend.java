@@ -124,9 +124,9 @@ public class Legend extends EventProvider<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Legend.ProxyLegendClickCallback#call(org.pepstock.charba.
-			 * client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent,
-			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Legend.ProxyLegendClickCallback#call(org.pepstock.charba.
+			 * client.jsinterop.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Chart chart, ChartNativeEvent event, NativeObject item) {
@@ -139,9 +139,9 @@ public class Legend extends EventProvider<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.jsinterop.configuration.Legend.ProxyLegendHoverCallback#call(org.pepstock.charba.
-			 * client.jsinterop.Chart, org.pepstock.charba.client.jsinterop.events.ChartNativeEvent,
-			 * org.pepstock.charba.client.jsinterop.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Legend.ProxyLegendHoverCallback#call(org.pepstock.charba.
+			 * client.jsinterop.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Chart chart, ChartNativeEvent event, NativeObject item) {
@@ -163,8 +163,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.configuration.EventProvider#addHandler(com.google.gwt.event.shared.GwtEvent.Type)
+	 * @see org.pepstock.charba.client.configuration.EventProvider#addHandler(com.google.gwt.event.shared.GwtEvent.Type)
 	 */
 	@Override
 	protected final <H extends EventHandler> void addHandler(Type<H> type) {
@@ -191,8 +190,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.configuration.EventProvider#removeHandler(com.google.gwt.event.shared.GwtEvent.Type)
+	 * @see org.pepstock.charba.client.configuration.EventProvider#removeHandler(com.google.gwt.event.shared.GwtEvent.Type)
 	 */
 	@Override
 	protected final <H extends EventHandler> void removeHandler(Type<H> type) {

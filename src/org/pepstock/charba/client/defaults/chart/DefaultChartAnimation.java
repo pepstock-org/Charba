@@ -40,7 +40,7 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation#getEasing()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getEasing()
 	 */
 	@Override
 	public Easing getEasing() {
@@ -50,7 +50,7 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation#getDuration()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#getDuration()
 	 */
 	@Override
 	public int getDuration() {
@@ -60,7 +60,7 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation#isAnimateRotate()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#isAnimateRotate()
 	 */
 	@Override
 	public boolean isAnimateRotate() {
@@ -70,7 +70,7 @@ public final class DefaultChartAnimation implements IsDefaultAnimation {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultAnimation#isAnimateScale()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAnimation#isAnimateScale()
 	 */
 	@Override
 	public boolean isAnimateScale() {

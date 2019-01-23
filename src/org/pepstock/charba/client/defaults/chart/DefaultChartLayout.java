@@ -40,7 +40,7 @@ public final class DefaultChartLayout implements IsDefaultLayout {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultLayout#getPadding()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLayout#getPadding()
 	 */
 	@Override
 	public IsDefaultPadding getPadding() {

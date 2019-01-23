@@ -41,7 +41,7 @@ public final class DefaultChartHover implements IsDefaultHover {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover#getMode()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultHover#getMode()
 	 */
 	@Override
 	public InteractionMode getMode() {
@@ -51,7 +51,7 @@ public final class DefaultChartHover implements IsDefaultHover {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover#isIntersect()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultHover#isIntersect()
 	 */
 	@Override
 	public boolean isIntersect() {
@@ -61,7 +61,7 @@ public final class DefaultChartHover implements IsDefaultHover {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover#getAnimationDuration()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultHover#getAnimationDuration()
 	 */
 	@Override
 	public int getAnimationDuration() {
@@ -71,7 +71,7 @@ public final class DefaultChartHover implements IsDefaultHover {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultHover#getAxis()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultHover#getAxis()
 	 */
 	@Override
 	public InteractionAxis getAxis() {

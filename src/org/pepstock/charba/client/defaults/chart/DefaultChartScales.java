@@ -61,7 +61,7 @@ public final class DefaultChartScales implements IsDefaultScales {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales#isDisplay()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#isDisplay()
 	 */
 	@Override
 	public boolean isDisplay() {
@@ -71,7 +71,7 @@ public final class DefaultChartScales implements IsDefaultScales {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales#getXAxis()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getXAxis()
 	 */
 	@Override
 	public IsDefaultScale getXAxis() {
@@ -81,7 +81,7 @@ public final class DefaultChartScales implements IsDefaultScales {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScales#getYAxis()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getYAxis()
 	 */
 	@Override
 	public IsDefaultScale getYAxis() {

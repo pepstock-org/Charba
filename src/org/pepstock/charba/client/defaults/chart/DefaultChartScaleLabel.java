@@ -45,7 +45,7 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontColorAsString()
 	 */
 	@Override
 	public String getFontColorAsString() {
@@ -55,7 +55,7 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontSize()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontSize()
 	 */
 	@Override
 	public int getFontSize() {
@@ -65,7 +65,7 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontStyle()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontStyle()
 	 */
 	@Override
 	public FontStyle getFontStyle() {
@@ -75,7 +75,7 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontFamily()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontFamily()
 	 */
 	@Override
 	public String getFontFamily() {
@@ -85,7 +85,7 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel#getPadding()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getPadding()
 	 */
 	@Override
 	public IsDefaultPadding getPadding() {
@@ -95,7 +95,7 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel#isDisplay()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#isDisplay()
 	 */
 	@Override
 	public boolean isDisplay() {
@@ -105,7 +105,7 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel#getLabelString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getLabelString()
 	 */
 	@Override
 	public String getLabelString() {
@@ -115,7 +115,7 @@ public final class DefaultChartScaleLabel implements IsDefaultScaleLabel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultScaleLabel#getLineHeight()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScaleLabel#getLineHeight()
 	 */
 	@Override
 	public double getLineHeight() {

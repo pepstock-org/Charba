@@ -39,9 +39,8 @@ public class NoSelectedDatasetTicksCallback implements TickCallback {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.callbacks.TickCallback#onCallback(org.pepstock.charba.client.jsinterop.configuration
-	 * .Axis, double, int, java.util.List)
+	 * @see org.pepstock.charba.client.callbacks.TickCallback#onCallback(org.pepstock.charba.client.configuration .Axis, double,
+	 * int, java.util.List)
 	 */
 	@Override
 	public String onCallback(Axis axis, double value, int index, List<Double> values) {

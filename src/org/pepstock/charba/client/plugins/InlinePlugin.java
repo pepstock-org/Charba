@@ -42,7 +42,7 @@ final class InlinePlugin extends GlobalPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.plugins.GlobalPlugin#getChart(java.lang.String)
+	 * @see org.pepstock.charba.client.plugins.GlobalPlugin#getChart(java.lang.String)
 	 */
 	@Override
 	AbstractChart<?, ?> getChart(String chartId) {

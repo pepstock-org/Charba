@@ -50,7 +50,7 @@ public abstract class EventProvider<T extends NativeObjectContainer> extends Con
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.events.RemoveHandlerEventHandler#onRemove(org.pepstock.charba.client.events.
+	 * @see org.pepstock.charba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.charba.client.events.
 	 * RemoveHandlerEvent)
 	 */
 	@Override
@@ -61,9 +61,7 @@ public abstract class EventProvider<T extends NativeObjectContainer> extends Con
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.events.AddHandlerEventHandler#onAdd(org.pepstock.charba.client.jsinterop.events.
-	 * AddHandlerEvent)
+	 * @see org.pepstock.charba.client.events.AddHandlerEventHandler#onAdd(org.pepstock.charba.client.events. AddHandlerEvent)
 	 */
 	@Override
 	public final void onAdd(AddHandlerEvent event) {

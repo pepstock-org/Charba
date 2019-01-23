@@ -28,7 +28,7 @@ public class HorizontalBarChart extends BarChart {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.BarChart#getType()
+	 * @see org.pepstock.charba.client.BarChart#getType()
 	 */
 	@Override
 	public Type getType() {

@@ -38,7 +38,7 @@ public final class StandardKey implements Key {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.commons.Key#name()
+	 * @see org.pepstock.charba.client.commons.Key#name()
 	 */
 	@Override
 	public String name() {

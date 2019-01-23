@@ -14,7 +14,8 @@
     limitations under the License.
 */
 /**
- * Contains the enumeration of HTML and GWT Material colors, to consumer out-of-the-box, and utilities to create and manage own colors.
+ * Contains the enumeration of HTML and GWT Material colors, to consumer out-of-the-box, and utilities to create and manage own
+ * colors.
  * 
  * @author Andrea "Stock" Stocchero
  *

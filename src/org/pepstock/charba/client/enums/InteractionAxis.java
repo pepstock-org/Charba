@@ -27,15 +27,15 @@ public enum InteractionAxis implements Key
 {
 
 	/**
-	 *  X directions are used in calculating distances. 
+	 * X directions are used in calculating distances.
 	 */
 	x,
 	/**
-	 *  Y directions are used in calculating distances. 
+	 * Y directions are used in calculating distances.
 	 */
 	y,
 	/**
-	 * XY  directions are used in calculating distances. 
+	 * XY directions are used in calculating distances.
 	 */
 	xy
 }

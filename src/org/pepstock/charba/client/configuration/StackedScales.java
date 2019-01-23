@@ -59,9 +59,7 @@ public class StackedScales extends Scales {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.configuration.Scales#setXAxes(org.pepstock.charba.client.jsinterop.configuration.
-	 * Axis[])
+	 * @see org.pepstock.charba.client.configuration.Scales#setXAxes(org.pepstock.charba.client.configuration. Axis[])
 	 */
 	@Override
 	public void setXAxes(Axis... axes) {
@@ -78,9 +76,7 @@ public class StackedScales extends Scales {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.jsinterop.configuration.Scales#setYAxes(org.pepstock.charba.client.jsinterop.configuration.
-	 * Axis[])
+	 * @see org.pepstock.charba.client.configuration.Scales#setYAxes(org.pepstock.charba.client.configuration. Axis[])
 	 */
 	@Override
 	public void setYAxes(Axis... axes) {

@@ -49,7 +49,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontColorAsString()
 	 */
 	@Override
 	public String getFontColorAsString() {
@@ -59,7 +59,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontSize()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontSize()
 	 */
 	@Override
 	public int getFontSize() {
@@ -69,7 +69,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontStyle()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontStyle()
 	 */
 	@Override
 	public FontStyle getFontStyle() {
@@ -79,7 +79,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultFontItem#getFontFamily()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontFamily()
 	 */
 	@Override
 	public String getFontFamily() {
@@ -89,7 +89,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getMinor()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMinor()
 	 */
 	@Override
 	public IsDefaultFontItem getMinor() {
@@ -99,7 +99,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getMajor()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMajor()
 	 */
 	@Override
 	public IsDefaultFontItem getMajor() {
@@ -109,7 +109,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#isBeginAtZero()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#isBeginAtZero()
 	 */
 	@Override
 	public boolean isBeginAtZero() {
@@ -119,7 +119,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#isDisplay()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#isDisplay()
 	 */
 	@Override
 	public boolean isDisplay() {
@@ -129,7 +129,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#isReverse()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#isReverse()
 	 */
 	@Override
 	public boolean isReverse() {
@@ -139,7 +139,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#isAutoSkip()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#isAutoSkip()
 	 */
 	@Override
 	public boolean isAutoSkip() {
@@ -149,7 +149,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getAutoSkipPadding()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getAutoSkipPadding()
 	 */
 	@Override
 	public int getAutoSkipPadding() {
@@ -159,7 +159,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getLabelOffset()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getLabelOffset()
 	 */
 	@Override
 	public int getLabelOffset() {
@@ -169,7 +169,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getMaxRotation()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMaxRotation()
 	 */
 	@Override
 	public int getMaxRotation() {
@@ -179,7 +179,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getMinRotation()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMinRotation()
 	 */
 	@Override
 	public int getMinRotation() {
@@ -189,7 +189,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#isMirror()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#isMirror()
 	 */
 	@Override
 	public boolean isMirror() {
@@ -199,7 +199,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getPadding()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getPadding()
 	 */
 	@Override
 	public int getPadding() {
@@ -209,7 +209,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getMin()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMin()
 	 */
 	@Override
 	public double getMin() {
@@ -219,7 +219,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getMax()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMax()
 	 */
 	@Override
 	public double getMax() {
@@ -229,7 +229,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getMaxTicksLimit()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMaxTicksLimit()
 	 */
 	@Override
 	public int getMaxTicksLimit() {
@@ -239,7 +239,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getStepSize()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getStepSize()
 	 */
 	@Override
 	public double getStepSize() {
@@ -249,7 +249,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getSuggestedMax()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getSuggestedMax()
 	 */
 	@Override
 	public double getSuggestedMax() {
@@ -259,7 +259,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getSuggestedMin()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getSuggestedMin()
 	 */
 	@Override
 	public double getSuggestedMin() {
@@ -269,7 +269,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getBackdropColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getBackdropColorAsString()
 	 */
 	@Override
 	public String getBackdropColorAsString() {
@@ -279,7 +279,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getBackdropPaddingX()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getBackdropPaddingX()
 	 */
 	@Override
 	public int getBackdropPaddingX() {
@@ -289,7 +289,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getBackdropPaddingY()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getBackdropPaddingY()
 	 */
 	@Override
 	public int getBackdropPaddingY() {
@@ -299,7 +299,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#isShowLabelBackdrop()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#isShowLabelBackdrop()
 	 */
 	@Override
 	public boolean isShowLabelBackdrop() {
@@ -309,7 +309,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getSource()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getSource()
 	 */
 	@Override
 	public TickSource getSource() {
@@ -319,7 +319,7 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.jsinterop.defaults.IsDefaultTicks#getPrecision()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getPrecision()
 	 */
 	@Override
 	public int getPrecision() {
