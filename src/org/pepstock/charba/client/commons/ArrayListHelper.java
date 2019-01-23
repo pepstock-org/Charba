@@ -19,7 +19,8 @@ import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
+
+import com.google.gwt.dom.client.ImageElement;
 
 /**
  * Utility to create array list objects from java script arrays.
@@ -78,6 +79,21 @@ public final class ArrayListHelper {
 		}
 		// creates the list
 		return new ArrayStringList(values);
+	}
+
+	/**
+	 * Creates a array list of images by a java script array of images.
+	 * 
+	 * @param values array of elements to load when the list is creating.
+	 * @return a array list of images instance or <code>null</code> if the array is null.
+	 */
+	public static ArrayImageList list(ArrayImage values) {
+		// checks if array is null
+		if (values == null) {
+			return null;
+		}
+		// creates the list
+		return new ArrayImageList(values);
 	}
 
 	/**
@@ -201,6 +217,16 @@ public final class ArrayListHelper {
 	 * @return a array list of strings instance or <code>null</code> if the array is null.
 	 */
 	public static List<String> unmodifiableList(ArrayString values) {
+		return unmodifiableList(list(values));
+	}
+
+	/**
+	 * Creates a array list of images by a java script array of images.
+	 * 
+	 * @param values array of elements to load when the list is creating.
+	 * @return a array list of strings instance or <code>null</code> if the array is null.
+	 */
+	public static List<ImageElement> unmodifiableList(ArrayImage values) {
 		return unmodifiableList(list(values));
 	}
 

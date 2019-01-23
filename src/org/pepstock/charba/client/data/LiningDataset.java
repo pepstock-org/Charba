@@ -21,6 +21,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayDouble;
+import org.pepstock.charba.client.commons.ArrayImage;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
@@ -30,6 +31,10 @@ import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
+
+import com.google.gwt.dom.client.ImageElement;
+import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.Image;
 
 /**
  * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
@@ -557,6 +562,48 @@ abstract class LiningDataset extends Dataset {
 	public List<PointStyle> getPointStyle() {
 		ArrayString array = getValueOrArray(Property.pointStyle, Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
 		return ArrayListHelper.list(PointStyle.class, array);
+	}
+	
+	/**
+	 * Sets the style of the point as image.
+	 * 
+	 * @param pointStyle array of the style of the point as image.
+	 */
+	public void setPointStyle(ImageResource... pointStyle) {
+		// checks if argument is consistent
+		if (pointStyle != null) {
+			// creates a temporary array
+			ImageElement[] array = new ImageElement[pointStyle.length];
+			// scans passed array of images
+			for (int i=0; i<pointStyle.length; i++) {
+				// transform a image resource into image element by image object
+				// creates image object
+				Image img = new Image(pointStyle[i]);
+				// stores into array changing in inage element
+				array[i] = ImageElement.as(img.getElement());
+			}
+			// stores
+			setPointStyle(array);
+		}
+	}
+
+	/**
+	 * Sets the style of the point as image.
+	 * 
+	 * @param pointStyle array of the style of the point as image.
+	 */
+	public void setPointStyle(ImageElement... pointStyle) {
+		setValueOrArray(Property.pointStyle, pointStyle);
+	}
+
+	/**
+	 * Returns the style of the point as image.
+	 * 
+	 * @return list of the style of the point as image.
+	 */
+	public List<ImageElement> getPointStyleAsImages() {
+		ArrayImage array = getValueOrArray(Property.pointStyle, (ImageElement) null);
+		return ArrayListHelper.list(array);
 	}
 
 	/**
