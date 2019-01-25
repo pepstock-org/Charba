@@ -151,6 +151,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	}
 
 	/**
+	 * Returns the status of selection.
+	 * 
 	 * @return the status
 	 */
 	SelectionStatus getStatus() {
@@ -158,6 +160,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	}
 
 	/**
+	 * Sets the status of selection.
+	 * 
 	 * @param status the status to set
 	 */
 	private void setStatus(SelectionStatus status) {
@@ -165,6 +169,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	}
 
 	/**
+	 * Sets if next event firing should be skipped.
+	 * 
 	 * @param skipNextFireEvent the skipNextFireEvent to set
 	 */
 	void setSkipNextFireEvent(boolean skipNextFireEvent) {
@@ -172,6 +178,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	}
 
 	/**
+	 * Returns the image which is snapshot of chart.
+	 * 
 	 * @return the snapshot
 	 */
 	ImageElement getSnapshot() {
@@ -186,6 +194,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	}
 
 	/**
+	 * Returns the calculated dataset items count.
+	 * 
 	 * @return the datasetsItemsCount
 	 */
 	int getDatasetsItemsCount() {
@@ -193,6 +203,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	}
 
 	/**
+	 * Sets the calculated dataset items count.
+	 * 
 	 * @param datasetsItemsCount the datasetsItemsCount to set
 	 */
 	void setDatasetsItemsCount(int datasetsItemsCount) {
@@ -200,42 +212,54 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	}
 
 	/**
-	 * @return the mouseDown
+	 * Returns the mouse down handler registration.
+	 * 
+	 * @return the mouse down handler registration
 	 */
 	HandlerRegistration getMouseDown() {
 		return mouseDown;
 	}
 
 	/**
-	 * @param mouseDown the mouseDown to set
+	 * Sets the mouse down handler registration.
+	 * 
+	 * @param mouseDown the mouse down handler registration to set
 	 */
 	void setMouseDown(HandlerRegistration mouseDown) {
 		this.mouseDown = mouseDown;
 	}
 
 	/**
-	 * @return the mouseUp
+	 * Returns the mouse up handler registration.
+	 * 
+	 * @return the mouse up handler registration
 	 */
 	HandlerRegistration getMouseUp() {
 		return mouseUp;
 	}
 
 	/**
-	 * @param mouseUp the mouseUp to set
+	 * Sets the mouse up handler registration.
+	 * 
+	 * @param mouseUp the mouse up handler registration to set
 	 */
 	void setMouseUp(HandlerRegistration mouseUp) {
 		this.mouseUp = mouseUp;
 	}
 
 	/**
-	 * @return the mouseMove
+	 * Returns the mouse move handler registration.
+	 * 
+	 * @return the mouse move handler registration
 	 */
 	HandlerRegistration getMouseMove() {
 		return mouseMove;
 	}
 
 	/**
-	 * @param mouseMove the mouseMove to set
+	 * Sets the mouse move handler registration.
+	 * 
+	 * @param mouseMove the mouse move to set
 	 */
 	void setMouseMove(HandlerRegistration mouseMove) {
 		this.mouseMove = mouseMove;
@@ -273,7 +297,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// selection putting the original chart (image snapshot) and then
 		// draws new selection
 		if (snapshot != null) {
-			chart.getCanvas().getContext2d().drawImage(snapshot, 0, 0);
+			// draws a scaled image setting width and height
+			chart.getCanvas().getContext2d().drawImage(snapshot, 0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
 		}
 		// gets chart AREA
 		ChartNode node = chart.getNode();

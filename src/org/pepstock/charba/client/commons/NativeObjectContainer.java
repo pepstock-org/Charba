@@ -429,7 +429,7 @@ public abstract class NativeObjectContainer {
 		// returns value
 		return descriptor == null ? defaultValue : descriptor.getValue();
 	}
-	
+
 	/**
 	 * Sets a value (gradient) into embedded JavaScript object at specific property.
 	 * 
@@ -450,7 +450,7 @@ public abstract class NativeObjectContainer {
 			nativeObject.defineGradientProperty(key.name(), value);
 		}
 	}
-	
+
 	/**
 	 * Returns a value (gradient) into embedded JavaScript object at specific property.
 	 * 

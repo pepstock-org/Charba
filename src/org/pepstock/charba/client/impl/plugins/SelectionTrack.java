@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.impl.plugins;
 
 /**
- * Which maintains the start and end point of mouse selection at X level.
+ * It maintains the start and end point of mouse selection at X level.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -40,6 +40,8 @@ final class SelectionTrack {
 	}
 
 	/**
+	 * Returns the starting point
+	 * 
 	 * @return the starting
 	 */
 	int getStarting() {
@@ -47,13 +49,17 @@ final class SelectionTrack {
 	}
 
 	/**
-	 * @return the start
+	 * Returns the new starting point (new mouse down)
+	 * 
+	 * @return the new starting point
 	 */
 	int getStart() {
 		return start;
 	}
 
 	/**
+	 * Returns the ending point
+	 * 
 	 * @return the end
 	 */
 	int getEnd() {

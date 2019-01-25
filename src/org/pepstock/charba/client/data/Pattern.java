@@ -31,6 +31,8 @@ import com.google.gwt.user.client.ui.Image;
  *
  */
 public final class Pattern {
+	// exception message
+	private static final String IMG_NULL_MESSAGE = "Image instance is null!";
 
 	// default canvas pattern
 	static final CanvasPattern DEFAULT_CANVAS_PATTERN = null;
@@ -82,7 +84,7 @@ public final class Pattern {
 		} else {
 			// if here, image is null
 			// then exception
-			throw new NullPointerException("Image instance is null!");
+			throw new IllegalArgumentException(IMG_NULL_MESSAGE);
 		}
 	}
 
@@ -102,7 +104,7 @@ public final class Pattern {
 		} else {
 			// if here, image is null
 			// then exception
-			throw new NullPointerException("Image instance is null!");
+			throw new IllegalArgumentException(IMG_NULL_MESSAGE);
 		}
 	}
 
@@ -116,9 +118,9 @@ public final class Pattern {
 	}
 
 	/**
-	 * Returns the canvas pattern or <code>null</code> if not created due to image instance was <code>null</code>.
+	 * Returns the canvas pattern.
 	 * 
-	 * @return the pattern or <code>null</code> if not created
+	 * @return the pattern
 	 */
 	public CanvasPattern getPattern() {
 		return pattern;

@@ -31,7 +31,7 @@ import org.pepstock.charba.client.utils.JSON;
  * @param <A> type of array which is wrapped
  */
 abstract class AbstractArrayList<E, A extends Array> implements List<E> {
-	// exception error
+	// exception message
 	final static String UNABLE_COPY_ARRAY_MESSAGE = "Unable to copy into an array";
 
 	/**
