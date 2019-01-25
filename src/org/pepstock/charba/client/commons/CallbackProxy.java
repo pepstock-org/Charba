@@ -23,33 +23,10 @@ import jsinterop.annotations.JsType;
 /**
  * This is a native object which wraps a java script object created by {@link org.pepstock.charba.client.commons.JsHelper}.<br>
  * This object is used to get a proxy instance which is able to call a java script function passing laso <code>this</code> java
- * script value, to maintain the environment when required.<br>
- * <br>
- * <code>
- * var obj = new Object();
- * obj.callback = null;
- *  obj.proxy = function() {
- *  	  if (obj.callback != null and typeof obj.callback === 'function'){
- *       //console.log(this);
- *		var args = Array.of(this).concat(Array.prototype.slice.call(arguments));
- *		var result = obj.callback.apply(this, args);
- *		if (result === null){
- * 			// do nothing console.log("null");
- *		} else if (result === undefined){
- *			//console.log("undefined");
- *		} else {
- * 			//console.log(result);
- * 			return result;
- * 		}
- *  } else {
- *   	//console.log("No caller");
- *   }
- * };
- * return obj;
- * </code>
+ * script value, to maintain the environment when required.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * 
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.OBJECT)
 public final class CallbackProxy<T> {
