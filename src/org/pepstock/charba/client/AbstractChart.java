@@ -163,7 +163,14 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * @return the canvas
 	 */
 	public final Canvas getCanvas() {
-		return canvas;
+		// checks if canvas is initialized
+		if (isCanvasSupported) {
+			// returns it
+			return canvas;
+		} else {
+			// otherwise throws an exxeption
+			throw new NullPointerException(CANVAS_NOT_SUPPORTED_MESSAGE);
+		}
 	}
 
 	/**
