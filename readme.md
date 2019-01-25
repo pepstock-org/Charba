@@ -76,7 +76,8 @@ Documentation
 -------------
 
 All **Charba** documentation will be maintained into [GitHub wiki](https://github.com/pepstock-org/Charba/wiki) of **Charba** project.
- 
+
+API JavaDoc is published [here](http://www.pepstock.org/Charba/2.0/index.html). 
 
 Showcase
 --------
