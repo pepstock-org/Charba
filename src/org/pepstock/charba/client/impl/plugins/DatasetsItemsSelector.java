@@ -235,6 +235,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 					// this is necessary to apply every time the handler
 					// will draw directly into canvas
 					Image img = new Image(chart.getCanvas().toDataUrl());
+					// fix dimension
+					img.setPixelSize(chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
 					handler.setSnapshot(ImageElement.as(img.getElement()));
 				}
 				// if the selections is already present

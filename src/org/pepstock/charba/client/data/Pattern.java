@@ -111,7 +111,7 @@ public final class Pattern {
 	 * 
 	 * @param pattern wrapped canvas pattern
 	 */
-	Pattern(CanvasPattern pattern) {
+	public Pattern(CanvasPattern pattern) {
 		this.pattern = pattern;
 	}
 

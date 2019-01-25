@@ -24,6 +24,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.ScaleItem;
+import org.pepstock.charba.client.utils.Window;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ImageElement;
@@ -39,7 +40,7 @@ import com.google.gwt.event.dom.client.MouseUpHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
- * MAnages the selection on canvas, drawing selection area and implementing mouse listeners for canvas.
+ * Manages the selection on canvas, drawing selection area and implementing mouse listeners for canvas.
  * 
  * @author Andrea "Stock" Stocchero
  * @since 1.8
@@ -183,6 +184,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 */
 	void setSnapshot(ImageElement snapshot) {
 		this.snapshot = snapshot;
+		Window.getConsole().log(snapshot);
+		Window.getConsole().log(chart.getCanvas().getOffsetHeight());
 	}
 
 	/**

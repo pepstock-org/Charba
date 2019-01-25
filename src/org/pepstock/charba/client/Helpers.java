@@ -75,7 +75,7 @@ public final class Helpers {
 		}
 		// arguments are either not consistent
 		// returns an empty object
-		return new NativeObject();
+		return null;
 	}
 
 	/**

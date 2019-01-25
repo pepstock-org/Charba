@@ -24,7 +24,6 @@ import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ConfigurationLoader;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
@@ -53,7 +52,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * Creates the object with an empty native object
 	 */
 	public Data() {
-		super(new NativeObject());
+		// nothing
 	}
 
 	/**

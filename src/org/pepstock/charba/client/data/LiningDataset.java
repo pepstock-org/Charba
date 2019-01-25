@@ -49,8 +49,6 @@ abstract class LiningDataset extends Dataset {
 
 	// default instance of image for point style
 	private final static ImageElement DEFAULT_IMAGE_POINT_STYLE = null;
-	// flags to manage image as point style
-	private boolean hasPointStyleAsImage = false;
 
 	/**
 	 * Name of properties of native object.
@@ -76,7 +74,9 @@ abstract class LiningDataset extends Dataset {
 		pointHoverBorderColor,
 		pointHoverBorderWidth,
 		pointHoverRadius,
-		pointRotation
+		pointRotation,
+		// internal key to store if point style is an image or not
+		_charbaPointStyle
 	}
 
 	/**
@@ -600,8 +600,8 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointStyle(PointStyle... pointStyle) {
 		setValueOrArray(Property.pointStyle, pointStyle);
-		// sets flag
-		hasPointStyleAsImage = false;
+		// remove if exist flag
+		removeIfExists(Property._charbaPointStyle);
 	}
 
 	/**
@@ -611,7 +611,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public List<PointStyle> getPointStyle() {
 		// checks if image as point style has been used
-		if (!hasPointStyleAsImage) {
+		if (!getValue(Property._charbaPointStyle, false)) {
 			// if not, returns point styles
 			ArrayString array = getValueOrArray(Property.pointStyle, Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
 			return ArrayListHelper.list(PointStyle.class, array);
@@ -645,8 +645,8 @@ abstract class LiningDataset extends Dataset {
 			// if here, argument is null
 			// then removes property
 			remove(Property.pointStyle);
-			// sets flag
-			hasPointStyleAsImage = false;
+			// remove flag
+			removeIfExists(Property._charbaPointStyle);
 		}
 	}
 
@@ -658,7 +658,7 @@ abstract class LiningDataset extends Dataset {
 	public void setPointStyle(ImageElement... pointStyle) {
 		setValueOrArray(Property.pointStyle, pointStyle);
 		// sets flag
-		hasPointStyleAsImage = true;
+		setValue(Property._charbaPointStyle, true);
 	}
 
 	/**
@@ -668,7 +668,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public List<ImageElement> getPointStyleAsImages() {
 		// checks if image as point style has been used
-		if (hasPointStyleAsImage) {
+		if (getValue(Property._charbaPointStyle, false)) {
 			// gets array
 			ArrayImage array = getValueOrArray(Property.pointStyle, DEFAULT_IMAGE_POINT_STYLE);
 			return ArrayListHelper.list(array);

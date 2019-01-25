@@ -36,6 +36,12 @@ import jsinterop.annotations.JsType;
 public final class NativeObject {
 
 	/**
+	 * To avoid any instantiation
+	 */
+	NativeObject() {
+	}
+
+	/**
 	 * Defines a new property directly on an object, or modifies an existing property on an object.
 	 * 
 	 * @param source the object on which to define the property.

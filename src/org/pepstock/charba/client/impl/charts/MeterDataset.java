@@ -20,6 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.data.DoughnutDataset;
+import org.pepstock.charba.client.data.Pattern;
 
 /**
  * The Meter chart allows a number of properties to be specified for each dataset. These are used to set display properties for
@@ -36,8 +37,10 @@ import org.pepstock.charba.client.data.DoughnutDataset;
  */
 public class MeterDataset extends DoughnutDataset {
 
-	// exception string message
+	// exception string message for setting data
 	private static final String INVALID_SET_DATA_CALL = "setData method is not invokable by a Meter chart. Use setValue method.";
+	// exception string message for setting pattern
+	private static final String INVALID_PATTERN_CALL = "Pattern is not supported.";
 
 	/**
 	 * Default value color
@@ -79,6 +82,22 @@ public class MeterDataset extends DoughnutDataset {
 		super.setHoverBorderWidth(0, 0);
 		// sets the color of datasets.
 		super.setBackgroundColor(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.data.HovingDataset#setBackgroundColor(org.pepstock.charba.client.data.Pattern[])
+	 */
+	@Override
+	public void setBackgroundColor(Pattern... backgroundColor) {
+		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBackgroundColor(org.pepstock.charba.client.data.Pattern[])
+	 */
+	@Override
+	public void setHoverBackgroundColor(Pattern... colors) {
+		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
 	}
 
 	/*

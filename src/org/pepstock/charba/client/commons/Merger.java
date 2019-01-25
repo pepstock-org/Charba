@@ -195,6 +195,7 @@ public final class Merger {
 	 * @param source Object to merge into <code>target</code>.
 	 */
 	public void merge(NativeObject target, NativeObject source) {
+		// FIXME why doen't it return the value?
 		mergeNativeObjects(target, source);
 	}
 
@@ -260,9 +261,7 @@ public final class Merger {
 		// stores configuration
 		newObject.defineObjectProperty(property, source);
 		// invokes CHART.JS to merge
-		mergeNativeObjects(target, newObject);
-		// return the object
-		return newObject;
+		return mergeNativeObjects(target, newObject);
 	}
 
 	/**
@@ -272,8 +271,9 @@ public final class Merger {
 	 * @param target The target object in which <code>source</code> is merged into.
 	 * @param source Object to merge into <code>target</code>.
 	 */
-	private void mergeNativeObjects(NativeObject target, NativeObject source) {
-		Helpers.get().mergeIf(target, source);
+	private NativeObject mergeNativeObjects(NativeObject target, NativeObject source) {
+		NativeObject newObject = Helpers.get().mergeIf(target, source);
+		return newObject == null ? new NativeObject() : newObject;
 	}
 
 }

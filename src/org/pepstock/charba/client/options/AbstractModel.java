@@ -57,7 +57,7 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Na
 	 * @param defaultValues default provider
 	 */
 	protected AbstractModel(P parent, Key childKey, D defaultValues) {
-		this(parent, childKey, defaultValues, new NativeObject());
+		this(parent, childKey, defaultValues, null);
 	}
 
 	/**
