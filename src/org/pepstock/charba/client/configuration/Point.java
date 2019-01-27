@@ -18,6 +18,9 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
+import com.google.gwt.dom.client.ImageElement;
+import com.google.gwt.resources.client.ImageResource;
+
 /**
  * Point elements are used to represent the points in a line chart or a bubble chart.
  * 
@@ -56,9 +59,26 @@ public class Point extends AbstractConfigurationElement {
 	 * Sets the style of the point.
 	 * 
 	 * @param pointStyle array of the style of the point.
-	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
+		getOptions().getElements().getPoint().setPointStyle(pointStyle);
+	}
+	
+	/**
+	 * Sets the style of the point as image .
+	 * 
+	 * @param pointStyle array of the style of the point.
+	 */
+	public void setPointStyle(ImageResource pointStyle) {
+		getOptions().getElements().getPoint().setPointStyle(pointStyle);
+	}
+	
+	/**
+	 * Sets the style of the point as image .
+	 * 
+	 * @param pointStyle array of the style of the point.
+	 */
+	public void setPointStyle(ImageElement pointStyle) {
 		getOptions().getElements().getPoint().setPointStyle(pointStyle);
 	}
 
@@ -66,10 +86,18 @@ public class Point extends AbstractConfigurationElement {
 	 * Returns the style of the point.
 	 * 
 	 * @return the style of the point.
-	 * @see org.pepstock.charba.client.enums.PointStyle
 	 */
 	public PointStyle getPointStyle() {
 		return getOptions().getElements().getPoint().getPointStyle();
+	}
+	
+	/**
+	 * Returns the style of the point as image.
+	 * 
+	 * @return the style of the point as image.
+	 */
+	public ImageElement getPointStyleAsImage() {
+		return getOptions().getElements().getPoint().getPointStyleAsImages();
 	}
 
 	/**

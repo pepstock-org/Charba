@@ -17,9 +17,11 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.colors.Patterns;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -40,6 +42,8 @@ import org.pepstock.charba.client.utils.JSON;
 public abstract class Dataset extends NativeObjectContainer {
 	// default for hidden property
 	private static final boolean DEFAULT_HIDDEN = false;
+	
+	private final Patterns patterns = new Patterns();
 
 	/**
 	 * Name of properties of native object.
@@ -49,8 +53,35 @@ public abstract class Dataset extends NativeObjectContainer {
 		label,
 		data,
 		type,
-		hidden
+		hidden,
+		// internal key to store patterns
+		_charbaPatterns
 	}
+
+	/**
+	 * XCreates a dataset, adding patterns element.
+	 */
+	Dataset() {
+		setValue(Property._charbaPatterns, patterns);
+	}
+
+	/**
+	 * Returns the patterns element.
+	 * 
+	 * @return the patterns
+	 */
+	Patterns getPatterns() {
+		return patterns;
+	}
+	
+	/**
+	 * It applies all canvas patterns defined into dataset. The canvas pattern
+	 * needs to be created a context 2d of canvas therefore must be created
+	 * by a chart.
+	 * 
+	 * @param chart chart instance 
+	 */
+	abstract void applyPatterns(AbstractChart<?, ?> chart);
 
 	/**
 	 * Sets if the dataset will appear or not.

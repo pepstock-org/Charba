@@ -19,8 +19,8 @@ import java.util.List;
 
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.data.DoughnutDataset;
-import org.pepstock.charba.client.data.Pattern;
 
 /**
  * The Meter chart allows a number of properties to be specified for each dataset. These are used to set display properties for

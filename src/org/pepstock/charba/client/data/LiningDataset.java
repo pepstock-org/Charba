@@ -17,9 +17,11 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayImage;
 import org.pepstock.charba.client.commons.ArrayInteger;
@@ -31,8 +33,10 @@ import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 import com.google.gwt.canvas.dom.client.CanvasPattern;
+import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Image;
@@ -46,9 +50,6 @@ import com.google.gwt.user.client.ui.Image;
  *
  */
 abstract class LiningDataset extends Dataset {
-
-	// default instance of image for point style
-	private final static ImageElement DEFAULT_IMAGE_POINT_STYLE = null;
 
 	/**
 	 * Name of properties of native object.
@@ -76,7 +77,7 @@ abstract class LiningDataset extends Dataset {
 		pointHoverRadius,
 		pointRotation,
 		// internal key to store if point style is an image or not
-		_charbaPointStyle
+		_charbaPointStyle,
 	}
 
 	/**
@@ -95,6 +96,8 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setBackgroundColor(String backgroundColor) {
 		setValue(Property.backgroundColor, backgroundColor);
+		// removes the flag because default is string color
+		getPatterns().removePatterns(Property.backgroundColor);
 	}
 
 	/**
@@ -103,7 +106,10 @@ abstract class LiningDataset extends Dataset {
 	 * @param backgroundColor the fill pattern under the line.
 	 */
 	public void setBackgroundColor(Pattern backgroundColor) {
-		setValue(Property.backgroundColor, backgroundColor.getPattern());
+		// sets value to patterns
+		getPatterns().setPatterns(Property.backgroundColor, backgroundColor);
+		// removes the property
+		removeIfExists(Property.backgroundColor);
 	}
 
 	/**
@@ -112,11 +118,9 @@ abstract class LiningDataset extends Dataset {
 	 * @return the fill color under the line. If property is missing or not a color, returns the default background color.
 	 */
 	public String getBackgroundColorAsString() {
-		// gets type of property
-		ObjectType type = type(Property.backgroundColor);
-		// checks if the property is a string (therefore a color)
-		if (ObjectType.String.equals(type)) {
-			// returns color as string
+		// checks if the property is not a pattern (therefore a color)
+		if (!getPatterns().hasPatterns(Property.backgroundColor)) {
+				// returns color as string
 			return getValue(Property.backgroundColor, Defaults.get().getGlobal().getElements().getLine().getBackgroundColorAsString());
 		} else {
 			// if here, the property is not a string
@@ -137,24 +141,23 @@ abstract class LiningDataset extends Dataset {
 
 	/**
 	 * Returns the fill pattern under the line. If property is missing or not a pattern, returns
-	 * {@link Pattern#DEFAULT_PATTERN}.
+	 * <code>null</code>.
 	 * 
 	 * @return the fill pattern under the line. If property is missing or not a pattern, returns
-	 *         {@link Pattern#DEFAULT_PATTERN}.
+	 *         <code>null</code>.
 	 */
 	public Pattern getBackgroundColorAsPattern() {
-		// gets type of property
-		ObjectType type = type(Property.backgroundColor);
-		// checks if the property is a object (therefore a pattern)
-		if (ObjectType.Object.equals(type)) {
-			// returns the pattern
-			CanvasPattern pattern = getValue(Property.backgroundColor, Pattern.DEFAULT_CANVAS_PATTERN);
-			return new Pattern(pattern);
+		// checks if the property is not a pattern (therefore a color)
+		if (getPatterns().hasPatterns(Property.backgroundColor)) {
+			List<Pattern> patterns = getPatterns().getPatterns(Property.backgroundColor);
+				// returns color as string
+			return patterns.get(0);
 		} else {
 			// if here, the property is not a object
 			// therefore the property is missing or a color
-			// returns a pattern without canvas pattern
-			return Pattern.DEFAULT_PATTERN;
+			// returns null
+			// FIXME verificare nel POINT element delle options
+			return null;
 		}
 	}
 
@@ -670,7 +673,7 @@ abstract class LiningDataset extends Dataset {
 		// checks if image as point style has been used
 		if (getValue(Property._charbaPointStyle, false)) {
 			// gets array
-			ArrayImage array = getValueOrArray(Property.pointStyle, DEFAULT_IMAGE_POINT_STYLE);
+			ArrayImage array = getValueOrArray(Property.pointStyle, UndefinedValues.IMAGE_ELEMENT);
 			return ArrayListHelper.list(array);
 		} else {
 			// if here, means the point style as stored as strings
@@ -695,6 +698,24 @@ abstract class LiningDataset extends Dataset {
 	public List<Double> getPointRotation() {
 		ArrayDouble array = getValueOrArray(Property.pointRotation, Defaults.get().getGlobal().getElements().getPoint().getRotation());
 		return ArrayListHelper.list(array);
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.data.Dataset#applyPatterns(org.pepstock.charba.client.AbstractChart)
+	 */
+	@Override
+	final void applyPatterns(AbstractChart<?, ?> chart) {
+		if (!getPatterns().isEmpty()) {
+			Context2d context = chart.getCanvas().getContext2d();
+			for (Key key : getPatterns().getKeys()) {
+				List<Pattern> patterns = getPatterns().getPatterns(key);
+				if (Property.backgroundColor.name().equalsIgnoreCase(key.name())) {
+					Pattern pattern = patterns.get(0);
+					CanvasPattern canvasPattern = context.createPattern(pattern.getImage(), pattern.getRepetition());
+					setValue(key, canvasPattern);
+				}
+			}
+		}
 	}
 
 }

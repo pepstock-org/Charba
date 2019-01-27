@@ -15,18 +15,23 @@
 */
 package org.pepstock.charba.client.data;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ArrayPattern;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.ArrayStringList;
 import org.pepstock.charba.client.commons.Key;
+
+import com.google.gwt.canvas.dom.client.CanvasPattern;
+import com.google.gwt.canvas.dom.client.Context2d;
 
 /**
  * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
@@ -37,12 +42,6 @@ import org.pepstock.charba.client.commons.Key;
  *
  */
 abstract class HovingDataset extends Dataset {
-
-	// internal cache for patterns for property background
-	private final List<Pattern> patternsForBackground = new LinkedList<>();
-
-	// internal cache for patterns for property hover background
-	private final List<Pattern> patternsForHoverBackground = new LinkedList<>();
 
 	/**
 	 * Name of properties of native object.
@@ -64,8 +63,8 @@ abstract class HovingDataset extends Dataset {
 	 */
 	public void setBackgroundColor(IsColor... backgroundColor) {
 		setArrayValue(Property.backgroundColor, ArrayString.of(backgroundColor));
-		// clear previous pattern stored if there are
-		patternsForBackground.clear();
+		// removes the flag because default is string color
+		getPatterns().removePatterns(Property.backgroundColor);	
 	}
 
 	/**
@@ -75,8 +74,8 @@ abstract class HovingDataset extends Dataset {
 	 */
 	public void setBackgroundColor(String... backgroundColor) {
 		setArrayValue(Property.backgroundColor, ArrayString.of(backgroundColor));
-		// clear previous pattern stored if there are
-		patternsForBackground.clear();
+		// removes the flag because default is string color
+		getPatterns().removePatterns(Property.backgroundColor);	
 	}
 
 	/**
@@ -85,10 +84,10 @@ abstract class HovingDataset extends Dataset {
 	 * @param backgroundColor the fill pattern of the arcs in the dataset.
 	 */
 	public void setBackgroundColor(Pattern... backgroundColor) {
-		setArrayValue(Property.backgroundColor, ArrayPattern.of(backgroundColor));
-		// clear previous pattern stored if there are
-		patternsForBackground.clear();
-		patternsForBackground.addAll(Arrays.asList(backgroundColor));
+		// sets value to patterns
+		getPatterns().setPatterns(Property.backgroundColor, backgroundColor);
+		// removes the property
+		removeIfExists(Property.backgroundColor);
 	}
 
 	/**
@@ -99,9 +98,8 @@ abstract class HovingDataset extends Dataset {
 	 *         empty list.
 	 */
 	public List<String> getBackgroundColorAsString() {
-		// checks if the list of pattern is empty
-		// if not, means the property is pattern and not colors
-		if (patternsForBackground.isEmpty()) {
+		// checks if the property is not a pattern (therefore a color)
+		if (!getPatterns().hasPatterns(Property.backgroundColor)) {
 			// returns list of colors
 			ArrayString array = getArrayValue(Property.backgroundColor);
 			return ArrayListHelper.list(array);
@@ -128,7 +126,16 @@ abstract class HovingDataset extends Dataset {
 	 *         list.
 	 */
 	public List<Pattern> getBackgroundColorAsPatterns() {
-		return patternsForBackground;
+		// checks if the property is not a pattern (therefore a color)
+		if (getPatterns().hasPatterns(Property.backgroundColor)) {
+			return getPatterns().getPatterns(Property.backgroundColor);
+		} else {
+			// if here, the property is not a object
+			// therefore the property is missing or a color
+			// returns null
+			// FIXME verificare nel POINT element delle options
+			return new ArrayObjectContainerList<Pattern>();
+		}	
 	}
 
 	/**
@@ -194,8 +201,8 @@ abstract class HovingDataset extends Dataset {
 	 */
 	public void setHoverBackgroundColor(IsColor... colors) {
 		setArrayValue(Property.hoverBackgroundColor, ArrayString.of(colors));
-		// clear previous pattern stored if there are
-		patternsForHoverBackground.clear();
+		// removes the flag because default is string color
+		getPatterns().removePatterns(Property.hoverBackgroundColor);	
 	}
 
 	/**
@@ -205,8 +212,8 @@ abstract class HovingDataset extends Dataset {
 	 */
 	public void setHoverBackgroundColor(String... colors) {
 		setArrayValue(Property.hoverBackgroundColor, ArrayString.of(colors));
-		// clear previous pattern stored if there are
-		patternsForHoverBackground.clear();
+		// removes the flag because default is string color
+		getPatterns().removePatterns(Property.hoverBackgroundColor);	
 	}
 
 	/**
@@ -215,10 +222,10 @@ abstract class HovingDataset extends Dataset {
 	 * @param colors the fill pattern of the arcs in the dataset when hovered.
 	 */
 	public void setHoverBackgroundColor(Pattern... colors) {
-		setArrayValue(Property.hoverBackgroundColor, ArrayPattern.of(colors));
-		// clear previous pattern stored if there are
-		patternsForHoverBackground.clear();
-		patternsForHoverBackground.addAll(Arrays.asList(colors));
+		// sets value to patterns
+		getPatterns().setPatterns(Property.hoverBackgroundColor, colors);
+		// removes the property
+		removeIfExists(Property.hoverBackgroundColor);
 	}
 
 	/**
@@ -228,9 +235,8 @@ abstract class HovingDataset extends Dataset {
 	 *         empty list.
 	 */
 	public List<String> getHoverBackgroundColorAsString() {
-		// checks if the list of pattern is empty
-		// if not, means the property is pattern and not colors
-		if (patternsForHoverBackground.isEmpty()) {
+		// checks if the property is not a pattern (therefore a color)
+		if (!getPatterns().hasPatterns(Property.hoverBackgroundColor)) {
 			// returns list of colors
 			ArrayString array = getArrayValue(Property.hoverBackgroundColor);
 			return ArrayListHelper.list(array);
@@ -258,7 +264,16 @@ abstract class HovingDataset extends Dataset {
 	 *         returns an empty list.
 	 */
 	public List<Pattern> getHoverBackgroundColorAsPatterns() {
-		return patternsForHoverBackground;
+		// checks if the property is not a pattern (therefore a color)
+		if (getPatterns().hasPatterns(Property.hoverBackgroundColor)) {
+			return getPatterns().getPatterns(Property.hoverBackgroundColor);
+		} else {
+			// if here, the property is not a object
+			// therefore the property is missing or a color
+			// returns null
+			// FIXME verificare nel POINT element delle options
+			return new ArrayObjectContainerList<Pattern>();
+		}	
 	}
 
 	/**
@@ -317,4 +332,23 @@ abstract class HovingDataset extends Dataset {
 		return ArrayListHelper.list(array);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.data.Dataset#applyPatterns(org.pepstock.charba.client.AbstractChart)
+	 */
+	@Override
+	final void applyPatterns(AbstractChart<?, ?> chart) {
+		if (!getPatterns().isEmpty()) {
+			Context2d context = chart.getCanvas().getContext2d();
+			for (Key key : getPatterns().getKeys()) {
+				List<Pattern> patterns = getPatterns().getPatterns(key);
+				List<CanvasPattern> canvasPatternsList = new LinkedList<CanvasPattern>();
+				for (Pattern pattern : patterns) {
+					CanvasPattern canvasPattern = context.createPattern(pattern.getImage(), pattern.getRepetition());
+					canvasPatternsList.add(canvasPattern);
+				}
+				setArrayValue(key, ArrayPattern.of(canvasPatternsList));
+			}
+		}
+	}
+	
 }

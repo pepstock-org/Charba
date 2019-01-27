@@ -18,6 +18,7 @@ package org.pepstock.charba.client.data;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.commons.ArrayMixedObject;
@@ -25,6 +26,7 @@ import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ConfigurationLoader;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.plugins.InvalidPluginIdException;
 
 /**
  * CHART.JS entity object to configure the data options of a chart.<br>
@@ -196,14 +198,33 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.Configuration)
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.AbstractChart, org.pepstock.charba.client.Configuration)
 	 */
 	@Override
-	public void load(Configuration configuration) {
+	public void load(AbstractChart<?, ?> chart, Configuration configuration) {
+		// loads data
 		ConfigurationLoader.loadData(configuration, this);
+		// checks if there is any pattern
+		// scans all datasets
+		for (Dataset ds : currentDatasets) {
+			// checks if dataset has got some patterns
+			if (!ds.getPatterns().isEmpty()) {
+				// if here
+				// there are some patterns to load
+				// checks if the plugin to apply pattern is already loaded
+				if (!chart.getPlugins().has(CanvasObjectHandler.ID)) {
+					try {
+						// adds plugin
+						chart.getPlugins().add(new CanvasObjectHandler());
+					} catch (InvalidPluginIdException e) {
+						// do nothig
+					}
+				}
+				// nothig to do
+				return;
+			}
+		}
 	}
 
 }

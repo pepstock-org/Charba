@@ -582,10 +582,10 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			Data data = getData();
 			// sets all items to configuration item
 			configuration.setType(getType());
-			configuration.setOptions(options);
-			configuration.setData(data);
+			configuration.setOptions(this, options);
+			configuration.setData(this, data);
 			// sets plugins
-			configuration.setPlugins(plugins);
+			configuration.setPlugins(this, plugins);
 			// destroy chart if chart is already instantiated
 			destroy();
 			// stores the chart instance into collection

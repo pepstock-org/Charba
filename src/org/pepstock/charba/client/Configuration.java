@@ -89,31 +89,34 @@ public final class Configuration {
 	/**
 	 * Sets the options of the chart.
 	 * 
+	 * @param chart chart instance
 	 * @param options the options of the chart.
 	 */
 	@JsOverlay
-	final <T extends ConfigurationOptions> void setOptions(T options) {
-		options.load(this);
+	final <T extends ConfigurationOptions> void setOptions(AbstractChart<?, ?> chart, T options) {
+		options.load(chart, this);
 	}
 
 	/**
 	 * Sets the data of chart.
 	 * 
+	 * @param chart chart instance
 	 * @param data the data of chart.
 	 */
 	@JsOverlay
-	void setData(Data data) {
-		data.load(this);
+	void setData(AbstractChart<?, ?> chart, Data data) {
+		data.load(chart, this);
 	}
 
 	/**
 	 * Sets the plugins of chart.
 	 * 
+	 * @param chart chart instance
 	 * @param plugins the plugins of chart.
 	 */
 	@JsOverlay
-	void setPlugins(Plugins plugins) {
-		plugins.load(this);
+	void setPlugins(AbstractChart<?, ?> chart, Plugins plugins) {
+		plugins.load(chart, this);
 	}
 
 }

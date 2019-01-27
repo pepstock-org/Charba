@@ -63,6 +63,27 @@ public final class Plugins implements ConfigurationElement {
 	}
 
 	/**
+	 * Returns <code>true</code> if a plugin is already added, otherwise <code>false</code>.
+	 * 
+	 * @param id plugin id to search.
+	 * @return <code>true</code> if a plugin is already added, otherwise <code>false</code>
+	 */
+	public boolean has(String id) {
+		// scans all plugins
+		Iterator<InlinePlugin> iter = plugins.iterator();
+		while (iter.hasNext()) {
+			// gets wrapper
+			InlinePlugin plugin = iter.next();
+			// if has got the same id
+			if (plugin.getId().equals(id)) {
+				// removes it
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Removes a plugin from the chart.<br>
 	 * If the chart is already initialized, to get this update the chart must be drawn again.
 	 * 
@@ -99,10 +120,11 @@ public final class Plugins implements ConfigurationElement {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.Configuration)
+	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.AbstractChart,
+	 * org.pepstock.charba.client.Configuration)
 	 */
 	@Override
-	public void load(Configuration configuration) {
+	public void load(AbstractChart<?, ?> chart, Configuration configuration) {
 		// checks if there is any plugin to configured to chart.js
 		if (!plugins.isEmpty()) {
 			// new array
