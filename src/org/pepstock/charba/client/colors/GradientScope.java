@@ -18,11 +18,21 @@ package org.pepstock.charba.client.colors;
 import org.pepstock.charba.client.commons.Key;
 
 /**
+ * A gradient needs to have coordinates and/or radius to be created.<br>
+ * The dimension to create a gradient are decided by Charba, automatically based on
+ * canvas or chart area element.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public enum GradientScope implements Key
 {
+	/**
+	 *  The dimension to create a gradient is the chart area.
+	 */
 	chart,
+	/**
+	 *  The dimension to create a gradient is the canvas.
+	 */
 	canvas
 }

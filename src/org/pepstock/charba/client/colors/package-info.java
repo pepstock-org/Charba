@@ -15,7 +15,7 @@
 */
 /**
  * Contains the enumeration of HTML and GWT Material colors, to consumer out-of-the-box, and utilities to create and manage own
- * colors.
+ * colors and all classes to use gradients of patterns on charts.
  * 
  * @author Andrea "Stock" Stocchero
  *

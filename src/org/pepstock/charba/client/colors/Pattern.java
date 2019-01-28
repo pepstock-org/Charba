@@ -40,6 +40,7 @@ public final class Pattern extends CanvasObject {
 
 	/**
 	 * Name of properties of native object.
+	 * ALL INTERNAL USE ONLY
 	 */
 	private enum Property implements Key
 	{

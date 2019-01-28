@@ -19,15 +19,25 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * FIXME
+ * Base object for pattern and gradient instances, based on canvas element.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 abstract class CanvasObject extends NativeObjectContainer {
 
+	/**
+	 * Creates an empty canvas object.
+	 */
 	CanvasObject() {
+		super();
 	}
 
+	/**
+	 * Creates a canvas object by a native object.
+	 * 
+	 * @param nativeObject native object which will be wrapped.
+	 */
 	CanvasObject(NativeObject nativeObject) {
 		super(nativeObject);
 	}
