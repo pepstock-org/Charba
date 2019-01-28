@@ -1,5 +1,7 @@
 language: java
-before_install: ant init-ivy
+before_install: 
+   - ant init-ivy
+   - rm ivysettings.xml
 install: ant
 jdk:
    - oraclejdk8
