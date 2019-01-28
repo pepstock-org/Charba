@@ -2,10 +2,9 @@ language: java
 before_install: 
    - ant init-ivy
    - rm ivysettings.xml
-install: ant
+install: ant build-bin
 jdk:
    - oraclejdk8
-   - openjdk8
 branches:
    only:
      - cuc
