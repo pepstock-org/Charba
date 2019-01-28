@@ -4,16 +4,16 @@
 	<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" />
 
 	<property name="ivy.revision" value="2.0" />
-	
+
 	<!-- 
 		CHARBA project configuration 
 	-->
-	
+
 	<property name="charba.built.by" value="www.pepstock.org" />
 	<tstamp>
 		<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
 	</tstamp>
-	
+
 	<property name="src.dir" value="src" />
 	<property name="classes.dir" value="classes" />
 	<property name="javadoc.dir" value="javadoc" />
@@ -25,7 +25,7 @@
 	<property name="javadoc.archive.file" value="${dist.dir}/charba-${ivy.revision}-javadoc.jar" />
 
 	<property name="artifact.pattern" value="${dist.dir}/[artifact]-[revision](-[classifier]).[ext]" />
-	
+
 	<!-- 
 		JAVA compiler options 
 	-->
@@ -56,7 +56,7 @@
 		<property name="ivy.pom.description" value="Charba, GWT wrapper for CHART.JS"/>
 		<property name="ivy.pom.url" value="www.pepstock.org"/>
 		<property name="ivy.pom.packaging" value="jar"/>
-		
+
 		<ivy:makepom ivyfile="ivy.xml" pomfile="${dist.dir}/charba-${ivy.revision}.pom" templatefile="pom.template" >
 			<mapping conf="default" scope="compile" />
 		</ivy:makepom>
@@ -77,7 +77,7 @@
 	</target>
 
 	<target name="build-all" depends="build-bin, build-sources, build-javadoc" />
-	
+
 	<target name="build-sources">
 		<jar jarfile="${sources.archive.file}">
 			<fileset dir="${src.dir}" />
@@ -136,5 +136,35 @@
 			</packageset>
 		</javadoc>
 	</target>
-	
+
+	<!--
+		IVY targets for Travis CI
+	-->
+	<property name="ivy.install.version" value="2.4.0" />
+	<condition property="ivy.home" value="${env.IVY_HOME}">
+		<isset property="env.IVY_HOME" />
+	</condition>
+	<property name="ivy.home" value="${user.home}/.ant" />
+	<property name="ivy.jar.dir" value="${ivy.home}/lib" />
+	<property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
+
+	<target name="download-ivy" unless="offline">
+		<mkdir dir="${ivy.jar.dir}"/>
+		<!-- download Ivy from web site so that it can be used even without any special installation -->
+		<get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${ivy.install.version}.jar"
+	             dest="${ivy.jar.file}" usetimestamp="true"/>
+	</target>
+
+	<target name="init-ivy" depends="download-ivy">
+		<!-- try to load Ivy here from Ivy home, in case the user has not already dropped
+	              it into Ant's lib dir (note that the latter copy will always take precedence).
+	              We will not fail as long as local lib dir exists (it may be empty) and
+	              Ivy is in at least one of Ant's lib dir or the local lib dir. -->
+		<path id="ivy.lib.path">
+			<fileset dir="${ivy.jar.dir}" includes="*.jar"/>
+
+		</path>
+		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
+	</target>
+
 </project>

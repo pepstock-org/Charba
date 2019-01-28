@@ -1,0 +1,9 @@
+language: java
+before_install: ant init-ivy
+install: ant war
+jdk:
+   - oraclejdk8
+   - openjdk8
+branches:
+   only:
+     - cuc
