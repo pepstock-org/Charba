@@ -4,9 +4,18 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
+/**
+ * FIXME
+ * @author Andrea "Stock" Stocchero
+ *
+ */
 final class CanvasObjectHandler extends AbstractPlugin {
 	
 	static final String ID = "canvasobjecthandler";
+	
+	private boolean checked = false;
+	
+	private boolean patternsChecked = false;
 
 	/**
 	 * To avoid any instantiation
@@ -24,13 +33,23 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client.AbstractChart)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDatasetsDraw(org.pepstock.charba.client.AbstractChart, double)
 	 */
 	@Override
-	public void onAfterInit(AbstractChart<?, ?> chart) {
-		for (Dataset dataset : chart.getData().getDatasets()){
-			dataset.applyPatterns(chart);
+	public boolean onBeforeDatasetsDraw(AbstractChart<?, ?> chart, double easing) {
+		if (!checked) {
+			for (Dataset dataset : chart.getData().getDatasets()){
+				if (!patternsChecked) {
+					dataset.applyPatterns(chart);
+				}
+				dataset.applyGradients(chart);
+			}
+			patternsChecked = true;
+			checked = true;
+			chart.update();
+			return false;
 		}
+    	return true;
 	}
 
 	/* (non-Javadoc)
@@ -38,6 +57,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	 */
 	@Override
 	public void onResize(AbstractChart<?, ?> chart, SizeItem size) {
+		checked = false;
 	}
 
 }

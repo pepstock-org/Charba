@@ -209,7 +209,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		// scans all datasets
 		for (Dataset ds : currentDatasets) {
 			// checks if dataset has got some patterns
-			if (!ds.getPatterns().isEmpty()) {
+			if (!ds.getPatterns().isEmpty() || !ds.getGradients().isEmpty()) {
 				// if here
 				// there are some patterns to load
 				// checks if the plugin to apply pattern is already loaded

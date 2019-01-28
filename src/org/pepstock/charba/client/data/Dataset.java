@@ -21,6 +21,7 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.colors.Gradients;
 import org.pepstock.charba.client.colors.Patterns;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -42,8 +43,10 @@ import org.pepstock.charba.client.utils.JSON;
 public abstract class Dataset extends NativeObjectContainer {
 	// default for hidden property
 	private static final boolean DEFAULT_HIDDEN = false;
-	
+
 	private final Patterns patterns = new Patterns();
+
+	private final Gradients gradients = new Gradients();
 
 	/**
 	 * Name of properties of native object.
@@ -54,15 +57,17 @@ public abstract class Dataset extends NativeObjectContainer {
 		data,
 		type,
 		hidden,
-		// internal key to store patterns
-		_charbaPatterns
+		// internal key to store patterns and gradients
+		_charbaPatterns,
+		_charbaGradients
 	}
 
 	/**
-	 * XCreates a dataset, adding patterns element.
+	 * XCreates a dataset, adding patterns and gradients element.
 	 */
 	Dataset() {
 		setValue(Property._charbaPatterns, patterns);
+		setValue(Property._charbaGradients, gradients);
 	}
 
 	/**
@@ -70,18 +75,67 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * 
 	 * @return the patterns
 	 */
-	Patterns getPatterns() {
+	final Patterns getPatterns() {
 		return patterns;
 	}
-	
+
 	/**
-	 * It applies all canvas patterns defined into dataset. The canvas pattern
-	 * needs to be created a context 2d of canvas therefore must be created
-	 * by a chart.
+	 * Returns the gradients element.
 	 * 
-	 * @param chart chart instance 
+	 * @return the gradients
+	 */
+	final Gradients getGradients() {
+		return gradients;
+	}
+
+	/**
+	 * FIXME
+	 * 
+	 * @param key
+	 * @return
+	 */
+	final boolean hasColors(Key key) {
+		return !getPatterns().hasObjects(key) && !getGradients().hasObjects(key);
+	}
+
+	final boolean hasPatterns(Key key) {
+		return getPatterns().hasObjects(key);
+	}
+
+	final boolean hasGradients(Key key) {
+		return getGradients().hasObjects(key);
+	}
+
+	final void resetBeingColors(Key key) {
+		getPatterns().removeObjects(key);
+		getGradients().removeObjects(key);
+	}
+
+	final void resetBeingPatterns(Key key) {
+		removeIfExists(key);
+		getGradients().removeObjects(key);
+	}
+
+	final void resetBeingGradients(Key key) {
+		removeIfExists(key);
+		getPatterns().removeObjects(key);
+	}
+
+	/**
+	 * It applies all canvas patterns defined into dataset. The canvas pattern needs to be created a context 2d of canvas
+	 * therefore must be created by a chart.
+	 * 
+	 * @param chart chart instance
 	 */
 	abstract void applyPatterns(AbstractChart<?, ?> chart);
+
+	/**
+	 * It applies all canvas gradients defined into dataset. The canvas gradients needs to be created a context 2d of canvas
+	 * therefore must be created by a chart.
+	 * 
+	 * @param chart chart instance
+	 */
+	abstract void applyGradients(AbstractChart<?, ?> chart);
 
 	/**
 	 * Sets if the dataset will appear or not.

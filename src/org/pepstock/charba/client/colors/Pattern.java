@@ -17,7 +17,6 @@ package org.pepstock.charba.client.colors;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 import com.google.gwt.canvas.dom.client.Context2d;
@@ -32,10 +31,10 @@ import com.google.gwt.user.client.ui.Image;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Pattern extends NativeObjectContainer{
+public final class Pattern extends CanvasObject {
 	// exception message
 	private static final String IMG_NULL_MESSAGE = "Image instance is null!";
-	
+
 	// default instance of image. The image SHOULD NOT NEVER BE NULL!
 	private final static ImageElement DEFAULT_IMAGE = null;
 
@@ -47,6 +46,7 @@ public final class Pattern extends NativeObjectContainer{
 		_charbaPatternImg,
 		_charbaPatternRepetition
 	}
+
 	/**
 	 * Creates the object using an image to use in the pattern.<br>
 	 * The repetition used is repeat.
@@ -68,8 +68,7 @@ public final class Pattern extends NativeObjectContainer{
 	}
 
 	/**
-	 * Creates the object using an image to use in the pattern and
-	 * repetition to apply to pattern.
+	 * Creates the object using an image to use in the pattern and repetition to apply to pattern.
 	 * 
 	 * @param image image to use as pattern
 	 * @param repetition repetition value to apply to pattern
@@ -90,8 +89,7 @@ public final class Pattern extends NativeObjectContainer{
 	}
 
 	/**
-	 * Creates the object using an image to use in the pattern and
-	 * repetition to apply to pattern.
+	 * Creates the object using an image to use in the pattern and repetition to apply to pattern.
 	 * 
 	 * @param image image to use as pattern
 	 * @param repetition repetition value to apply to pattern
@@ -117,7 +115,7 @@ public final class Pattern extends NativeObjectContainer{
 	Pattern(NativeObject nativeObject) {
 		super(nativeObject);
 	}
-	
+
 	/**
 	 * Returns the image to use into pattern
 	 * 
@@ -130,28 +128,19 @@ public final class Pattern extends NativeObjectContainer{
 	/**
 	 * Returns the repetition to use into pattern.
 	 * 
-	 * @return  the repetition to use into pattern
+	 * @return the repetition to use into pattern
 	 */
 	public Context2d.Repetition getRepetition() {
 		String value = getValue(Property._charbaPatternRepetition, Context2d.Repetition.REPEAT.name());
 		return Context2d.Repetition.valueOf(value);
 	}
 
-//	/**
-//	 * Returns the canvas pattern.
-//	 * 
-//	 * @return the pattern
-//	 */
-//	public CanvasPattern getPattern() {
-//		return pattern;
-//	}
-	
 	/**
 	 * Inner class to create pattern by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	public static final class PatternFactory implements NativeObjectContainerFactory<Pattern> {
+	static final class PatternFactory implements NativeObjectContainerFactory<Pattern> {
 
 		/*
 		 * (non-Javadoc)

@@ -15,25 +15,21 @@
 */
 package org.pepstock.charba.client.colors;
 
-import org.pepstock.charba.client.colors.Pattern.PatternFactory;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * FIXME javadoc
+ * FIXME
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Patterns extends CanvasObjects<Pattern>{
-	
-	private final PatternFactory factory = new PatternFactory();
+abstract class CanvasObject extends NativeObjectContainer {
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.colors.CanvasObjects#getFactory()
-	 */
-	@Override
-	NativeObjectContainerFactory<Pattern> getFactory() {
-		return factory;
+	CanvasObject() {
 	}
-	
+
+	CanvasObject(NativeObject nativeObject) {
+		super(nativeObject);
+	}
 
 }

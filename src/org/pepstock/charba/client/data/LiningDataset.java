@@ -19,13 +19,16 @@ import java.util.List;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.colors.CanvasGradientFactory;
 import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayImage;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -97,7 +100,7 @@ abstract class LiningDataset extends Dataset {
 	public void setBackgroundColor(String backgroundColor) {
 		setValue(Property.backgroundColor, backgroundColor);
 		// removes the flag because default is string color
-		getPatterns().removePatterns(Property.backgroundColor);
+		resetBeingColors(Property.backgroundColor);
 	}
 
 	/**
@@ -107,19 +110,30 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setBackgroundColor(Pattern backgroundColor) {
 		// sets value to patterns
-		getPatterns().setPatterns(Property.backgroundColor, backgroundColor);
+		getPatterns().setObjects(Property.backgroundColor, ArrayObject.of(backgroundColor));
 		// removes the property
-		removeIfExists(Property.backgroundColor);
+		resetBeingPatterns(Property.backgroundColor);
 	}
 
+	/**
+	 * Sets the fill gradient under the line.
+	 * 
+	 * @param backgroundColor the fill gradient under the line.
+	 */
+	public void setBackgroundColor(Gradient backgroundColor) {
+		// sets value to gradients
+		getGradients().setObjects(Property.backgroundColor, ArrayObject.of(backgroundColor));
+		// removes the property
+		resetBeingGradients(Property.backgroundColor);
+	}
 	/**
 	 * Returns the fill color under the line. If property is missing or not a color, returns the default background color.
 	 * 
 	 * @return the fill color under the line. If property is missing or not a color, returns the default background color.
 	 */
 	public String getBackgroundColorAsString() {
-		// checks if the property is not a pattern (therefore a color)
-		if (!getPatterns().hasPatterns(Property.backgroundColor)) {
+		// checks if the property is not a pattern or gradient (therefore a color)
+		if (hasColors(Property.backgroundColor)) {
 				// returns color as string
 			return getValue(Property.backgroundColor, Defaults.get().getGlobal().getElements().getLine().getBackgroundColorAsString());
 		} else {
@@ -147,10 +161,10 @@ abstract class LiningDataset extends Dataset {
 	 *         <code>null</code>.
 	 */
 	public Pattern getBackgroundColorAsPattern() {
-		// checks if the property is not a pattern (therefore a color)
-		if (getPatterns().hasPatterns(Property.backgroundColor)) {
-			List<Pattern> patterns = getPatterns().getPatterns(Property.backgroundColor);
-				// returns color as string
+		// checks if the property is not a pattern (therefore a color or gradient)
+		if (hasPatterns(Property.backgroundColor)) {
+			List<Pattern> patterns = getPatterns().getObjects(Property.backgroundColor);
+				// returns color as pattern
 			return patterns.get(0);
 		} else {
 			// if here, the property is not a object
@@ -161,6 +175,27 @@ abstract class LiningDataset extends Dataset {
 		}
 	}
 
+	/**
+	 * Returns the fill gradient under the line. If property is missing or not a gradient, returns
+	 * <code>null</code>.
+	 * 
+	 * @return the fill gradient under the line. If property is missing or not a gradient, returns
+	 *         <code>null</code>.
+	 */
+	public Gradient getBackgroundColorAsGradient() {
+		// checks if the property is not a gradient (therefore a color or pattern)
+		if (hasGradients(Property.backgroundColor)) {
+			List<Gradient> gradients = getGradients().getObjects(Property.backgroundColor);
+				// returns color as gradient
+			return gradients.get(0);
+		} else {
+			// if here, the property is not a gradient
+			// therefore the property is missing
+			// returns null
+			// FIXME verificare nel POINT element delle options
+			return null;
+		}
+	}
 	/**
 	 * Sets the color of the line.
 	 * 
@@ -708,11 +743,30 @@ abstract class LiningDataset extends Dataset {
 		if (!getPatterns().isEmpty()) {
 			Context2d context = chart.getCanvas().getContext2d();
 			for (Key key : getPatterns().getKeys()) {
-				List<Pattern> patterns = getPatterns().getPatterns(key);
+				List<Pattern> patterns = getPatterns().getObjects(key);
 				if (Property.backgroundColor.name().equalsIgnoreCase(key.name())) {
 					Pattern pattern = patterns.get(0);
 					CanvasPattern canvasPattern = context.createPattern(pattern.getImage(), pattern.getRepetition());
 					setValue(key, canvasPattern);
+				}
+			}
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.data.Dataset#applyGradients(org.pepstock.charba.client.AbstractChart)
+	 */
+	@Override
+	final void applyGradients(AbstractChart<?, ?> chart) {
+		if (!getGradients().isEmpty()) {
+			
+			for (Key key : getGradients().getKeys()) {
+				List<Gradient> gradients = getGradients().getObjects(key);
+				if (Property.backgroundColor.name().equalsIgnoreCase(key.name())) {
+					Gradient gradient = gradients.get(0);
+					setValue(key, CanvasGradientFactory.createGradient(chart, gradient));
+//					CanvasPattern canvasPattern = context.createPattern(gradient.getImage(), gradient.getRepetition());
+//					setValue(key, canvasPattern);
 				}
 			}
 		}

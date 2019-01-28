@@ -47,6 +47,27 @@ public final class ArrayObject extends Array {
 	 * @return new array instance of objects.
 	 */
 	@JsOverlay
+	public static <E extends NativeObjectContainer> ArrayObject of(E item) {
+		// creates the array
+		ArrayObject result = new ArrayObject();
+		// checks if array is null
+		if (item == null) {
+			return result;
+		}
+		// adds element
+		result.push(item.getNativeObject());
+		// returns the array
+		return result;
+	}
+
+	/**
+	 * Creates a java script array of objects starting from an array of native object containers.
+	 * 
+	 * @param items list of objects to load into new java script array.
+	 * @param <E> type of native object containers
+	 * @return new array instance of objects.
+	 */
+	@JsOverlay
 	public static <E extends NativeObjectContainer> ArrayObject of(E[] items) {
 		// creates the array
 		ArrayObject result = new ArrayObject();
