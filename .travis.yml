@@ -1,6 +1,6 @@
 language: java
 before_install: ant init-ivy
-install: ant war
+install: ant
 jdk:
    - oraclejdk8
    - openjdk8
