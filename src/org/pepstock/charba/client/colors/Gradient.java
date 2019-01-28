@@ -98,6 +98,7 @@ public final class Gradient extends CanvasObject{
 	}
 
 	public void addColorsStartStop(String start, String stop) {
+		colors.clear();
 		addColorStop(GradientColor.OFFSET_START, start);
 		addColorStop(GradientColor.OFFSET_STOP, stop);
 	}

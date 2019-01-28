@@ -3,6 +3,7 @@ package org.pepstock.charba.client.data;
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
+import org.pepstock.charba.client.utils.Window;
 
 /**
  * FIXME
@@ -42,6 +43,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 				if (!patternsChecked) {
 					dataset.applyPatterns(chart);
 				}
+				Window.getConsole().log("apply grtadietns");
 				dataset.applyGradients(chart);
 			}
 			patternsChecked = true;

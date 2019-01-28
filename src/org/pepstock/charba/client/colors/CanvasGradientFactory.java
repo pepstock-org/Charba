@@ -17,6 +17,7 @@ package org.pepstock.charba.client.colors;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.items.ChartAreaNode;
+import org.pepstock.charba.client.utils.Window;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.CanvasGradient;
@@ -122,6 +123,7 @@ public final class CanvasGradientFactory {
         } else {
         	throw new IllegalArgumentException("Gradient orientation is wrong ["+gradient.getOrientation()+"]");
         }
+        Window.getConsole().log(x0+", "+y0+", "+x1+", "+y1);
         return context.createLinearGradient(x0, y0, x1, y1);
 	}
 

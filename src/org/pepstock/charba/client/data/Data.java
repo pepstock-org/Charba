@@ -218,10 +218,10 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 						// adds plugin
 						chart.getPlugins().add(new CanvasObjectHandler());
 					} catch (InvalidPluginIdException e) {
-						// do nothig
+						// do nothing
 					}
 				}
-				// nothig to do
+				// nothing to do
 				return;
 			}
 		}

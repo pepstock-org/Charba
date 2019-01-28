@@ -695,6 +695,30 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		}
 	}
+	
+	/**
+	 * Sets a value (Array or gradient) into embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a gradient.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param values images to be set
+	 */
+	protected final void setValueOrArray(Key key, CanvasGradient... values) {
+		// checks if values are consistent
+		if (values != null) {
+			// checks if there is only 1 element
+			if (values.length == 1) {
+				// if 1 element, sets the object
+				setValue(key, values[0]);
+			} else {
+				// if more than 1 element, sets the array
+				setArrayValue(key, ArrayGradient.of(values));
+			}
+		} else {
+			// if not consistent, remove the property
+			removeIfExists(key);
+		}
+	}
 
 	/**
 	 * Sets a value (Array or string by keys) into embedded JavaScript object at specific property.<br>
@@ -894,6 +918,28 @@ public abstract class NativeObjectContainer {
 			// if here, is a single value, therefore creates an array
 			// with only 1 element
 			return ArrayPattern.of(getValue(key, defaultValue));
+		} else if (ObjectType.Array.equals(type(key))) {
+			// if here, is an array, therefore return it
+			return getArrayValue(key);
+		}
+		// if here the property doesn't exist or has got a wrong type
+		return null;
+	}
+	
+	/**
+	 * Returns a value (array) into embedded JavaScript object at specific property.<br>
+	 * This must be used when a java script property can contain an array or a gradient.
+	 * 
+	 * @param key key of the property of JavaScript object.
+	 * @param defaultValue default value if the value was stored as single gradient value
+	 * @return value of the property (by array) or <code>null</code> if not exist
+	 */
+	protected final ArrayGradient getValueOrArray(Key key, CanvasGradient defaultValue) {
+		// checks if property type
+		if (ObjectType.Object.equals(type(key))) {
+			// if here, is a single value, therefore creates an array
+			// with only 1 element
+			return ArrayGradient.of(getValue(key, defaultValue));
 		} else if (ObjectType.Array.equals(type(key))) {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
