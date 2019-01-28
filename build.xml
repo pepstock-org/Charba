@@ -111,6 +111,7 @@
 	</target>
 
 	<target name="compile" depends="clean, ivyRetrieve">
+		<mkdir dir="${classes.dir}"/>
 		<javac srcdir="${src.dir}" includes="**" encoding="utf-8" destdir="${classes.dir}" includeantruntime="${javac.includeantruntime}" source="${javac.source}" target="${javac.target}" nowarn="${javac.nowarn}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" createMissingPackageInfoClass="false">
 			<classpath refid="ivyPath"/>
 		</javac>
