@@ -1,10 +1,48 @@
+# *********************************
+# * Charba Travis-CI build script *
+# * Copyright © 2019 pepstock.org *
+# *********************************
+
+#
+# CONFIGURATION
+#
+# define the language
 language: java
-before_install: 
-   - ant init-ivy
-   - rm ivysettings.xml
-install: ant build-bin
+# enable container-based build (faster), insted of vm build
+sudo: false
+# cache the Ivy cache directory to avoid download dependencies on each build
+cache:
+   directories:
+   - $HOME/.ivy2
+# specify the JDKs 
 jdk:
    - oraclejdk8
+# specify the brances to build from
 branches:
    only:
      - cuc
+#
+# BUILD phase
+#
+# download Ivy, if needed
+before_install: ant init-ivy
+# remove default ivysettings.xml file used for push (to have default resolvers)
+install: rm ivysettings.xml
+# run the ant main target
+script: ant build-bin
+#
+# DEPLOY phase
+#
+deploy:
+   # do NOT clean the results
+   skip_cleanup: true
+#
+# NOTIFICATIONS
+#
+# notify the team on failures (successes are not notified)
+#notifications:
+#   email:
+#      recipients:
+#      - team@pepstock.org
+#   on_success: never
+#   on_failure: always
