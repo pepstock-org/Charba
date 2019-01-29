@@ -1,22 +1,21 @@
 package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.colors.CanvasObjectFactory;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
-import org.pepstock.charba.client.utils.Window;
 
 /**
  * FIXME
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 final class CanvasObjectHandler extends AbstractPlugin {
-	
+
 	static final String ID = "canvasobjecthandler";
-	
-	private boolean checked = false;
-	
-	private boolean patternsChecked = false;
+
+	private boolean updated = false;
 
 	/**
 	 * To avoid any instantiation
@@ -25,7 +24,9 @@ final class CanvasObjectHandler extends AbstractPlugin {
 		// do nothing
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.Plugin#getId()
 	 */
 	@Override
@@ -33,33 +34,46 @@ final class CanvasObjectHandler extends AbstractPlugin {
 		return ID;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDatasetsDraw(org.pepstock.charba.client.AbstractChart, double)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDatasetsDraw(org.pepstock.charba.client.AbstractChart,
+	 * double)
 	 */
 	@Override
 	public boolean onBeforeDatasetsDraw(AbstractChart<?, ?> chart, double easing) {
-		if (!checked) {
-			for (Dataset dataset : chart.getData().getDatasets()){
-				if (!patternsChecked) {
-					dataset.applyPatterns(chart);
-				}
-				Window.getConsole().log("apply grtadietns");
-				dataset.applyGradients(chart);
+		for (Dataset dataset : chart.getData().getDatasets()) {
+			if (dataset.getPatternsContainer().isChanged()) {
+				dataset.applyPatterns(chart);
+				dataset.getPatternsContainer().setChanged(false);
+				updated = true;
 			}
-			patternsChecked = true;
-			checked = true;
+			if (dataset.getGradientsContainer().isChanged()) {
+				dataset.applyGradients(chart);
+				dataset.getGradientsContainer().setChanged(false);
+				updated = true;
+			}
+		}
+		if (updated) {
+			updated = false;
 			chart.update();
 			return false;
 		}
-    	return true;
+		return true;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onResize(org.pepstock.charba.client.AbstractChart, org.pepstock.charba.client.items.SizeItem)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onResize(org.pepstock.charba.client.AbstractChart,
+	 * org.pepstock.charba.client.items.SizeItem)
 	 */
 	@Override
 	public void onResize(AbstractChart<?, ?> chart, SizeItem size) {
-		checked = false;
+		for (Dataset dataset : chart.getData().getDatasets()) {
+			dataset.getGradientsContainer().setChanged(true);
+		}
+		CanvasObjectFactory.resetGradients(chart);
 	}
 
 }

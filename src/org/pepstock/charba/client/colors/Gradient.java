@@ -119,6 +119,11 @@ public final class Gradient extends CanvasObject {
 		setArrayValue(Property._charbaGradientColors, colors);
 	}
 
+	/**
+	 * Internal constructor to create a gradient, previously stored into a native java script object
+	 * 
+	 * @param nativeObject native java script object wrapped by gradient.
+	 */
 	Gradient(NativeObject nativeObject) {
 		super(nativeObject);
 		ArrayObject array = getArrayValue(Property._charbaGradientColors);

@@ -15,14 +15,18 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.colors.Gradients;
-import org.pepstock.charba.client.colors.Patterns;
+import org.pepstock.charba.client.colors.CanvasObjectFactory;
+import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.GradientsContainer;
+import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.colors.PatternsContainer;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -32,6 +36,9 @@ import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.InvalidPluginIdException;
 import org.pepstock.charba.client.plugins.PluginIdChecker;
 import org.pepstock.charba.client.utils.JSON;
+
+import com.google.gwt.canvas.dom.client.CanvasGradient;
+import com.google.gwt.canvas.dom.client.CanvasPattern;
 
 /**
  * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
@@ -44,9 +51,9 @@ public abstract class Dataset extends NativeObjectContainer {
 	// default for hidden property
 	private static final boolean DEFAULT_HIDDEN = false;
 
-	private final Patterns patterns = new Patterns();
+	private final PatternsContainer patternsContainer = new PatternsContainer();
 
-	private final Gradients gradients = new Gradients();
+	private final GradientsContainer gradientsContainer = new GradientsContainer();
 
 	/**
 	 * Name of properties of native object.
@@ -63,29 +70,29 @@ public abstract class Dataset extends NativeObjectContainer {
 	}
 
 	/**
-	 * XCreates a dataset, adding patterns and gradients element.
+	 * Creates a dataset, adding patterns and gradients element.
 	 */
 	Dataset() {
-		setValue(Property._charbaPatterns, patterns);
-		setValue(Property._charbaGradients, gradients);
+		setValue(Property._charbaPatterns, patternsContainer);
+		setValue(Property._charbaGradients, gradientsContainer);
 	}
 
 	/**
-	 * Returns the patterns element.
+	 * Returns the patterns container element.
 	 * 
-	 * @return the patterns
+	 * @return the patterns container
 	 */
-	final Patterns getPatterns() {
-		return patterns;
+	final PatternsContainer getPatternsContainer() {
+		return patternsContainer;
 	}
 
 	/**
-	 * Returns the gradients element.
+	 * Returns the gradients container element.
 	 * 
-	 * @return the gradients
+	 * @return the gradients container
 	 */
-	final Gradients getGradients() {
-		return gradients;
+	final GradientsContainer getGradientsContainer() {
+		return gradientsContainer;
 	}
 
 	/**
@@ -95,30 +102,30 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @return
 	 */
 	final boolean hasColors(Key key) {
-		return !getPatterns().hasObjects(key) && !getGradients().hasObjects(key);
+		return !getPatternsContainer().hasObjects(key) && !getGradientsContainer().hasObjects(key);
 	}
 
 	final boolean hasPatterns(Key key) {
-		return getPatterns().hasObjects(key);
+		return getPatternsContainer().hasObjects(key);
 	}
 
 	final boolean hasGradients(Key key) {
-		return getGradients().hasObjects(key);
+		return getGradientsContainer().hasObjects(key);
 	}
 
 	final void resetBeingColors(Key key) {
-		getPatterns().removeObjects(key);
-		getGradients().removeObjects(key);
+		getPatternsContainer().removeObjects(key);
+		getGradientsContainer().removeObjects(key);
 	}
 
 	final void resetBeingPatterns(Key key) {
 		removeIfExists(key);
-		getGradients().removeObjects(key);
+		getGradientsContainer().removeObjects(key);
 	}
 
 	final void resetBeingGradients(Key key) {
 		removeIfExists(key);
-		getPatterns().removeObjects(key);
+		getPatternsContainer().removeObjects(key);
 	}
 
 	/**
@@ -127,7 +134,25 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * 
 	 * @param chart chart instance
 	 */
-	abstract void applyPatterns(AbstractChart<?, ?> chart);
+	final void applyPatterns(AbstractChart<?, ?> chart) {
+		if (!getPatternsContainer().isEmpty()) {
+			for (Key key : getPatternsContainer().getKeys()) {
+				List<Pattern> patterns = getPatternsContainer().getObjects(key);
+				List<CanvasPattern> canvasPatternsList = new LinkedList<CanvasPattern>();
+				for (Pattern pattern : patterns) {
+					canvasPatternsList.add(CanvasObjectFactory.createPattern(chart, pattern));
+				}
+				applyPattern(key, canvasPatternsList);
+			}
+		}
+	}
+
+	/**
+	 * FIXME
+	 * @param key
+	 * @param canvasPatternsList
+	 */
+	abstract void applyPattern(Key key, List<CanvasPattern> canvasPatternsList);
 
 	/**
 	 * It applies all canvas gradients defined into dataset. The canvas gradients needs to be created a context 2d of canvas
@@ -135,7 +160,31 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * 
 	 * @param chart chart instance
 	 */
-	abstract void applyGradients(AbstractChart<?, ?> chart);
+	final void applyGradients(AbstractChart<?, ?> chart) {
+		// checks if there is any gradient to be created
+		if (!getGradientsContainer().isEmpty()) {
+			// scans all key of all created gradients
+			for (Key key : getGradientsContainer().getKeys()) {
+				// gets all gradients for the key
+				List<Gradient> gradients = getGradientsContainer().getObjects(key);
+				// creates a temporary list of gradients
+				List<CanvasGradient> canvasGradientsList = new LinkedList<CanvasGradient>();
+				// scans all gradients
+				for (Gradient gradient : gradients) {
+					// creates gradient and adds to the temporary list
+					canvasGradientsList.add(CanvasObjectFactory.createGradient(chart, gradient));
+				}
+				applyGradient(key, canvasGradientsList);
+			}
+		}
+	}
+
+	/**
+	 * FIXME
+	 * @param key
+	 * @param canvasGradientsList
+	 */
+	abstract void applyGradient(Key key, List<CanvasGradient> canvasGradientsList);
 
 	/**
 	 * Sets if the dataset will appear or not.

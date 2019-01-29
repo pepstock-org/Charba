@@ -15,11 +15,15 @@
 */
 package org.pepstock.charba.client.colors;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.items.ChartAreaNode;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.CanvasGradient;
+import com.google.gwt.canvas.dom.client.CanvasPattern;
 import com.google.gwt.canvas.dom.client.Context2d;
 
 /**
@@ -31,13 +35,60 @@ import com.google.gwt.canvas.dom.client.Context2d;
  * @see Gradient
  * @see com.google.gwt.canvas.dom.client.CanvasGradient
  */
-public final class CanvasGradientFactory {
+public final class CanvasObjectFactory {
+
+	// cache for canvas gradients already created
+	// K = chart id, K = gradient id, V = canvas gradient
+	private static final Map<String, Map<Integer, CanvasGradient>> GRADIENTS = new HashMap<String, Map<Integer, CanvasGradient>>();
+
+	// cache for canvas patterns already created
+	// K = chart id, K = pattern id, V = canvas pattern
+	private static final Map<String, Map<Integer, CanvasPattern>> PATTERNS = new HashMap<String, Map<Integer, CanvasPattern>>();
 
 	/**
 	 * To avoid any instantiation
 	 */
-	private CanvasGradientFactory() {
+	private CanvasObjectFactory() {
 		// do nothing
+	}
+
+	/**
+	 * Creates a GWT canvas pattern java script object using a Charba pattern and a chart instance which must provide a canvas
+	 * instance and its context.
+	 * 
+	 * @param chart chart instance which must provide a canvas instance and its context
+	 * @param pattern pattern instance created at configuration level
+	 * @return a GWT canvas pattern
+	 */
+	public static CanvasPattern createPattern(AbstractChart<?, ?> chart, Pattern pattern) {
+		final Map<Integer, CanvasPattern> patternsMap;
+		// checks if the pattern is already created
+		if (PATTERNS.containsKey(chart.getId())) {
+			patternsMap = PATTERNS.get(chart.getId());
+			if (patternsMap.containsKey(pattern.getId())) {
+				// returns the existing canvas pattern
+				return patternsMap.get(pattern.getId());
+			}
+		} else {
+			patternsMap = new HashMap<>();
+			PATTERNS.put(chart.getId(), patternsMap);
+		}
+		// gets canvas and context 2d
+		Canvas canvas = chart.getCanvas();
+		Context2d context = canvas.getContext2d();
+		CanvasPattern result = context.createPattern(pattern.getImage(), pattern.getRepetition());
+		// stores canvas pattern into cache
+		patternsMap.put(pattern.getId(), result);
+		// returns result
+		return result;
+	}
+	
+	/**
+	 * FIXME
+	 * @param chart
+	 */
+	public static void resetGradients(AbstractChart<?, ?> chart) {
+		GRADIENTS.remove(chart.getId());
 	}
 
 	/**
@@ -49,6 +100,19 @@ public final class CanvasGradientFactory {
 	 * @return a GWT canvas gradient
 	 */
 	public static CanvasGradient createGradient(AbstractChart<?, ?> chart, Gradient gradient) {
+		// checks if the gradient is already created
+		final Map<Integer, CanvasGradient> gradientsMap;
+		// checks if the gradient is already created
+		if (GRADIENTS.containsKey(chart.getId())) {
+			gradientsMap = GRADIENTS.get(chart.getId());
+			if (gradientsMap.containsKey(gradient.getId())) {
+				// returns the existing canvas gradient
+				return gradientsMap.get(gradient.getId());
+			}
+		} else {
+			gradientsMap = new HashMap<>();
+			GRADIENTS.put(chart.getId(), gradientsMap);
+		}
 		// checks if chart is initialized
 		if (chart.isInitialized()) {
 			// creates the result instance
@@ -69,6 +133,8 @@ public final class CanvasGradientFactory {
 					result.addColorStop(color.getOffset(), color.getColorAsString());
 				}
 			}
+			// stores canvas gradient into cache
+			gradientsMap.put(gradient.getId(), result);
 			// returns result
 			return result;
 		} else {

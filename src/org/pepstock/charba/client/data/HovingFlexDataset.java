@@ -15,10 +15,8 @@
 */
 package org.pepstock.charba.client.data;
 
-import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
@@ -30,8 +28,8 @@ import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.ArrayStringList;
 import org.pepstock.charba.client.commons.Key;
 
+import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
-import com.google.gwt.canvas.dom.client.Context2d;
 
 /**
  * This dataset is managing some common properties of Bar and Bubble datasets where every property can be set as a single value
@@ -104,7 +102,7 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(Pattern... backgroundColor) {
 		// sets value to patterns
-		getPatterns().setObjects(Property.backgroundColor, ArrayObject.of(backgroundColor));
+		getPatternsContainer().setObjects(Property.backgroundColor, ArrayObject.of(backgroundColor));
 		// removes the property
 		resetBeingPatterns(Property.backgroundColor);	
 	}
@@ -144,7 +142,7 @@ abstract class HovingFlexDataset extends Dataset {
 	public List<Pattern> getBackgroundColorAsPatterns() {
 		// checks if the property is not a pattern (therefore a color)
 		if (hasPatterns(Property.backgroundColor)) {
-			return getPatterns().getObjects(Property.backgroundColor);
+			return getPatternsContainer().getObjects(Property.backgroundColor);
 		} else {
 			// if here, the property is not a object
 			// therefore the property is missing or a color
@@ -239,7 +237,7 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setHoverBackgroundColor(Pattern... colors) {
 		// sets value to patterns
-		getPatterns().setObjects(Property.hoverBackgroundColor, ArrayObject.of(colors));
+		getPatternsContainer().setObjects(Property.hoverBackgroundColor, ArrayObject.of(colors));
 		// removes the property
 		resetBeingPatterns(Property.hoverBackgroundColor);
 	}
@@ -281,7 +279,7 @@ abstract class HovingFlexDataset extends Dataset {
 	public List<Pattern> getHoverBackgroundColorAsPatterns() {
 		// checks if the property is not a pattern (therefore a color)
 		if (hasPatterns(Property.hoverBackgroundColor)) {
-			return getPatterns().getObjects(Property.hoverBackgroundColor);
+			return getPatternsContainer().getObjects(Property.hoverBackgroundColor);
 		} else {
 			// if here, the property is not a object
 			// therefore the property is missing or a color
@@ -349,29 +347,18 @@ abstract class HovingFlexDataset extends Dataset {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.data.Dataset#applyPatterns(org.pepstock.charba.client.AbstractChart)
+	 * @see org.pepstock.charba.client.data.Dataset#applyPattern(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
-	final void applyPatterns(AbstractChart<?, ?> chart) {
-		if (!getPatterns().isEmpty()) {
-			Context2d context = chart.getCanvas().getContext2d();
-			for (Key key : getPatterns().getKeys()) {
-				List<Pattern> patterns = getPatterns().getObjects(key);
-				List<CanvasPattern> canvasPatternsList = new LinkedList<CanvasPattern>();
-				for (Pattern pattern : patterns) {
-					CanvasPattern canvasPattern = context.createPattern(pattern.getImage(), pattern.getRepetition());
-					canvasPatternsList.add(canvasPattern);
-				}
-				setValueOrArray(key, canvasPatternsList.toArray(new CanvasPattern[0]));
-			}
-		}
+	void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
+		setValueOrArray(key, canvasPatternsList.toArray(new CanvasPattern[0]));
 	}
-	
+
 	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.data.Dataset#applyGradients(org.pepstock.charba.client.AbstractChart)
+	 * @see org.pepstock.charba.client.data.Dataset#applyGradient(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
-	final void applyGradients(AbstractChart<?, ?> chart) {
+	void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
 	}
 
 }

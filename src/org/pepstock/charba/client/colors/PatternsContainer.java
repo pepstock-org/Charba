@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.colors;
 
-import org.pepstock.charba.client.colors.Gradient.GradientFactory;
+import org.pepstock.charba.client.colors.Pattern.PatternFactory;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
@@ -23,16 +23,17 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Gradients extends CanvasObjects<Gradient>{
+public final class PatternsContainer extends CanvasObjects<Pattern>{
 	
-	private final GradientFactory factory = new GradientFactory();
+	private final PatternFactory factory = new PatternFactory();
 
 	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.colors.CanvasObjects#getFactory()
 	 */
 	@Override
-	NativeObjectContainerFactory<Gradient> getFactory() {
+	NativeObjectContainerFactory<Pattern> getFactory() {
 		return factory;
 	}
+	
 
 }

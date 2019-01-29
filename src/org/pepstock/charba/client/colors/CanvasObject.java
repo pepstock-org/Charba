@@ -15,8 +15,10 @@
 */
 package org.pepstock.charba.client.colors;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Base object for pattern and gradient instances, based on canvas element.
@@ -25,12 +27,27 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  *
  */
 abstract class CanvasObject extends NativeObjectContainer {
+	
+	private static int counter = 0;
+	
+	/**
+	 * Name of properties of native object. ALL INTERNAL USE ONLY
+	 */
+	private enum Property implements Key
+	{
+		_charbaObjectID
+	}
 
 	/**
 	 * Creates an empty canvas object.
 	 */
 	CanvasObject() {
 		super();
+		// increments the id
+		// unique for every canvas object
+		counter++;
+		// stores the ID
+		setValue(Property._charbaObjectID, counter);
 	}
 
 	/**
@@ -40,6 +57,15 @@ abstract class CanvasObject extends NativeObjectContainer {
 	 */
 	CanvasObject(NativeObject nativeObject) {
 		super(nativeObject);
+	}
+	
+	/**
+	 * Returns the unique canvas id.
+	 * 
+	 * @return the unique canvas id.
+	 */
+	public final int getId() {
+		return getValue(Property._charbaObjectID, UndefinedValues.INTEGER);
 	}
 
 }

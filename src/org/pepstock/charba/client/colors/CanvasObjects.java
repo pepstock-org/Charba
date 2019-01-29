@@ -37,20 +37,41 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * @see Pattern
  * @see Gradient
  * 
- * @see Patterns
- * @see Gradients
+ * @see PatternsContainer
+ * @see GradientsContainer
  */
 abstract class CanvasObjects<T extends CanvasObject> extends NativeObjectContainer {
 
 	// counter to know how many objects are stores. Needs to provide
 	// the is empty method result.
 	private int count = 0;
-
+	// flag to know if some objects are changed
+	// needed to recalculate the canvas object at runtime
+	private boolean changed = false;
+	
 	/**
 	 * Creates the object by an empty native java script object.
 	 */
 	public CanvasObjects() {
 		super();
+	}
+
+	/**
+	 * Returns <code>true</code> if some canvas objects are changed, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if some canvas objects are changed, otherwise <code>false</code>.
+	 */
+	public final boolean isChanged() {
+		return changed;
+	}
+
+	/**
+	 *  Sets <code>true</code> if some canvas objects are changed, otherwise <code>false</code>.
+	 *  
+	 * @param changed the changed to set
+	 */
+	public void setChanged(boolean changed) {
+		this.changed = changed;
 	}
 
 	/**
@@ -78,6 +99,8 @@ abstract class CanvasObjects<T extends CanvasObject> extends NativeObjectContain
 			// if exists
 			removeObjects(key);
 		}
+		// changes the flag 
+		changed = true;
 	}
 
 	/**
@@ -113,6 +136,8 @@ abstract class CanvasObjects<T extends CanvasObject> extends NativeObjectContain
 			remove(key);
 			// decrement amount of elements
 			count--;
+			// changes flag
+			changed = true;
 		}
 	}
 

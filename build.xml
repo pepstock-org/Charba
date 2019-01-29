@@ -134,6 +134,8 @@
 			<packageset dir="${src.dir}" defaultexcludes="yes">
 				<include name="org/pepstock/**" />
 			</packageset>
+			<link offline="false" href="http://docs.oracle.com/javase/8/docs/api/" />
+			<link offline="false" href="http://www.gwtproject.org/javadoc/latest/" />
 		</javadoc>
 	</target>
 	
