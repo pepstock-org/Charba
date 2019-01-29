@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <project name="Charba" default="build-bin" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 
+	<!-- Ivy -->
 	<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" />
-
-	<property name="ivy.revision" value="2.0" />
+	<loadproperties srcfile="ivymoduleconfiguration.properties" />
 
 	<!-- 
 		CHARBA project configuration 
@@ -20,9 +20,9 @@
 
 	<property name="dist.dir" value="dist" />
 
-	<property name="bin.archive.file" value="${dist.dir}/charba-${ivy.revision}.jar" />
-	<property name="sources.archive.file" value="${dist.dir}/charba-${ivy.revision}-sources.jar" />
-	<property name="javadoc.archive.file" value="${dist.dir}/charba-${ivy.revision}-javadoc.jar" />
+	<property name="bin.archive.file" value="${dist.dir}/charba-${ivy.pubrevision}.jar" />
+	<property name="sources.archive.file" value="${dist.dir}/charba-${ivy.pubrevision}-sources.jar" />
+	<property name="javadoc.archive.file" value="${dist.dir}/charba-${ivy.pubrevision}-javadoc.jar" />
 
 	<property name="artifact.pattern" value="${dist.dir}/[artifact]-[revision](-[classifier]).[ext]" />
 
@@ -57,21 +57,21 @@
 		<property name="ivy.pom.url" value="www.pepstock.org"/>
 		<property name="ivy.pom.packaging" value="jar"/>
 
-		<ivy:makepom ivyfile="ivy.xml" pomfile="${dist.dir}/charba-${ivy.revision}.pom" templatefile="pom.template" >
+		<ivy:makepom ivyfile="ivy.xml" pomfile="${dist.dir}/charba-${ivy.pubrevision}.pom" templatefile="pom.template" >
 			<mapping conf="default" scope="compile" />
 		</ivy:makepom>
 	</target>
 
 	<target name="ivyPublish-snapshot">
 		<ivy:resolve />
-		<ivy:publish resolver="nexus-snapshots" pubrevision="${ivy.revision}" forcedeliver="true" overwrite="true" publishivy="false">
+		<ivy:publish resolver="nexus-snapshots" pubrevision="${ivy.pubrevision}-SNAPSHOT" forcedeliver="true" overwrite="true" publishivy="false">
 			<artifacts pattern="${artifact.pattern}" />
 		</ivy:publish>
 	</target>
 
 	<target name="ivyPublish-release">
 		<ivy:resolve />
-		<ivy:publish resolver="nexus-releases" pubrevision="${ivy.revision}" forcedeliver="true" overwrite="true" publishivy="false">
+		<ivy:publish resolver="nexus-releases" pubrevision="${ivy.pubrevision}" forcedeliver="true" overwrite="true" publishivy="false">
 			<artifacts pattern="${artifact.pattern}" />
 		</ivy:publish>
 	</target>
@@ -89,7 +89,7 @@
 			<fileset dir="${javadoc.dir}" />
 			<manifest>
 				<section name="Charba">
-					<attribute name="Version" value="${ivy.revision}" />
+					<attribute name="Version" value="${ivy.pubrevision}" />
 					<attribute name="Built-By" value="${charba.built.by}" />
 					<attribute name="Creation-time" value="${TODAY}" />
 				</section>
@@ -102,7 +102,7 @@
 			<fileset dir="${classes.dir}"/>
 			<manifest>
 				<section name="Charba">
-					<attribute name="Version" value="${ivy.revision}" />
+					<attribute name="Version" value="${ivy.pubrevision}" />
 					<attribute name="Built-By" value="${charba.built.by}" />
 					<attribute name="Creation-time" value="${TODAY}" />
 				</section>
