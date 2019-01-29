@@ -1,28 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivysettings>
 
-	<property name="publish.pattern" value="[artifact]/[artifact]-[revision](-[classifier]).[ext]"/>
-	<property name="file.pattern" value="[module]/ivy-[revision].xml"/>
+	<!-- Ivy module configuration file, contains current version, dependencies versions, ... -->
+	<properties file="ivymoduleconfiguration.properties" />
 
-	<!-- Change username and password to match real credentials -->
-	<credentials host="oss.sonatype.org" realm="Sonatype Nexus Repository Manager" 
-		username="changeIt" passwd="changeIt"/>
-		
-    <property name="nexus-snapshots" value=" https://oss.sonatype.org/content/repositories/snapshots"/>
-    <property name="nexus-releases" value="https://oss.sonatype.org/service/local/staging/deploy/maven2"/>
-
-	<settings defaultResolver="all"/>
-	
-	<resolvers>
-
-		<ibiblio name="nexus-releases" m2compatible="true" root="${nexus-releases}"/>
-		<ibiblio name="nexus-snapshots" m2compatible="true" root="${nexus-snapshots}"/>
-
-		<chain name="all">
-			<resolver ref="nexus-releases" />
-			<resolver ref="nexus-snapshots" />
-		</chain>
-		
-	</resolvers>
+	<settings defaultResolver="default"/>
+	<include url="${ivy.default.settings.dir}/ivysettings-public.xml"/>
+	<include url="${ivy.default.settings.dir}/ivysettings-shared.xml"/>
+	<include url="${ivy.default.settings.dir}/ivysettings-local.xml"/>
+	<include url="${ivy.default.settings.dir}/ivysettings-main-chain.xml"/>
+	<include url="${ivy.default.settings.dir}/ivysettings-default-chain.xml"/>
+	<include file="ivysettings-publish.xml"/>
 	
 </ivysettings>

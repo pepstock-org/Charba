@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivysettings>
+
+	<property name="publish.pattern" value="[artifact]/[artifact]-[revision](-[classifier]).[ext]"/>
+	<property name="file.pattern" value="[module]/ivy-[revision].xml"/>
+
+	<credentials host="oss.sonatype.org" realm="Sonatype Nexus Repository Manager" 
+		username="changeIt" passwd="changeIt"/>
+		
+    <property name="nexus-snapshots" value="https://oss.sonatype.org/content/repositories/snapshots"/>
+    <property name="nexus-releases" value="https://oss.sonatype.org/service/local/staging/deploy/maven2"/>
+
+	<resolvers>
+		<ibiblio name="nexus-releases" m2compatible="true" root="${nexus-releases}"/>
+		<ibiblio name="nexus-snapshots" m2compatible="true" root="${nexus-snapshots}"/>
+	</resolvers>
+	
+</ivysettings>
