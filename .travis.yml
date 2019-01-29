@@ -25,9 +25,7 @@ branches:
 # BUILD phase
 #
 # download Ivy, if needed
-before_install: ant init-ivy
-# remove default ivysettings.xml file used for push (to have default resolvers)
-install: rm ivysettings.xml
+before_install: ant ivyInit
 # run the ant main target
 script: ant build-bin
 #
