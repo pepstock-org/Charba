@@ -29,7 +29,6 @@ import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
-import org.pepstock.charba.client.items.UndefinedValues;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.CanvasGradient;
@@ -321,16 +320,16 @@ final class CanvasObjectFactory {
 			// the center of canvas has the following coordinates:
 			// X - the width divided by 2
 			// Y - the height divided by 2
-			centerX = (canvas.getOffsetWidth() / 2);
-			centerY = (canvas.getOffsetHeight() / 2);
+			centerX = (canvas.getOffsetWidth() / 2D);
+			centerY = (canvas.getOffsetHeight() / 2D);
 			// checks if the radius is already calculated by CHART.JS
 			// depending on chart type
-			if (node.getInnerRadius() != UndefinedValues.DOUBLE && node.getOuterRadius() != UndefinedValues.DOUBLE) {
+			if (!Double.isNaN(node.getInnerRadius()) && !Double.isNaN(node.getOuterRadius())) {
 				// gets meta data
 				DatasetMetaItem metaItem = chart.getDatasetMeta(datasetIndex);
 				DatasetItem item = metaItem.getDatasets().get(index);
 				// checks if chart is circular or not
-				if (item.getView().getInnerRadius() != UndefinedValues.DOUBLE && item.getView().getOuterRadius() != UndefinedValues.DOUBLE) {
+				if (!Double.isNaN(item.getView().getInnerRadius()) && !Double.isNaN(item.getView().getOuterRadius())) {
 					// uses the inner radius
 					radius0 = item.getView().getInnerRadius();
 					// uses the outer radius
@@ -345,7 +344,7 @@ final class CanvasObjectFactory {
 				// by default is the center of chart area
 				radius0 = 0;
 				// radius - if max value between width and height, divided by 2
-				radius1 = (Math.max(canvas.getOffsetWidth(), canvas.getOffsetHeight()) / 2);
+				radius1 = (Math.max(canvas.getOffsetWidth(), canvas.getOffsetHeight()) / 2D);
 			}
 		} else {
 			// gets chart node
@@ -356,16 +355,16 @@ final class CanvasObjectFactory {
 			// the center of canvas has the following coordinates:
 			// X - the difference between right and left, divided by 2 plus left
 			// Y - the difference between bottom and top, divided by 2 plus top
-			centerX = ((chartArea.getRight() - chartArea.getLeft()) / 2) + chartArea.getLeft();
-			centerY = ((chartArea.getBottom() - chartArea.getTop()) / 2) + chartArea.getTop();
+			centerX = ((chartArea.getRight() - chartArea.getLeft()) / 2D) + chartArea.getLeft();
+			centerY = ((chartArea.getBottom() - chartArea.getTop()) / 2D) + chartArea.getTop();
 			// checks if the radius is already calculated by CHART.JS
 			// depending on chart type
-			if (node.getInnerRadius() != UndefinedValues.DOUBLE && node.getOuterRadius() != UndefinedValues.DOUBLE) {
+			if (!Double.isNaN(node.getInnerRadius()) && !Double.isNaN(node.getOuterRadius())) {
 				// gets meta data
 				DatasetMetaItem metaItem = chart.getDatasetMeta(datasetIndex);
 				DatasetItem item = metaItem.getDatasets().get(index);
 				// checks if chart is circular or not
-				if (item.getView().getInnerRadius() != UndefinedValues.DOUBLE && item.getView().getOuterRadius() != UndefinedValues.DOUBLE) {
+				if (!Double.isNaN(item.getView().getInnerRadius()) && !Double.isNaN(item.getView().getOuterRadius())) {
 					// uses the inner radius
 					radius0 = item.getView().getInnerRadius();
 					// uses the outer radius
@@ -382,7 +381,7 @@ final class CanvasObjectFactory {
 				// radius - if max value between the difference between right and left and the difference between bottom and
 				// top,
 				// divided by 2
-				radius1 = (Math.max((chartArea.getRight() - chartArea.getLeft()), (chartArea.getBottom() - chartArea.getTop())) / 2);
+				radius1 = (Math.max((chartArea.getRight() - chartArea.getLeft()), (chartArea.getBottom() - chartArea.getTop())) / 2D);
 			}
 		}
 		// checks the orientation requires by gradient

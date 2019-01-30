@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.colors;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -28,7 +30,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  */
 public abstract class CanvasObject extends NativeObjectContainer {
 
-	private static int counter = 0;
+	private final static AtomicInteger counter = new AtomicInteger(0);
 
 	/**
 	 * Name of properties of native object. ALL INTERNAL USE ONLY
@@ -45,9 +47,8 @@ public abstract class CanvasObject extends NativeObjectContainer {
 		super();
 		// increments the id
 		// unique for every canvas object
-		counter++;
 		// stores the ID
-		setValue(Property._charbaObjectID, counter);
+		setValue(Property._charbaObjectID, counter.incrementAndGet());
 	}
 
 	/**
