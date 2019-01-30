@@ -695,7 +695,7 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		}
 	}
-	
+
 	/**
 	 * Sets a value (Array or gradient) into embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a gradient.
@@ -925,7 +925,7 @@ public abstract class NativeObjectContainer {
 		// if here the property doesn't exist or has got a wrong type
 		return null;
 	}
-	
+
 	/**
 	 * Returns a value (array) into embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a gradient.

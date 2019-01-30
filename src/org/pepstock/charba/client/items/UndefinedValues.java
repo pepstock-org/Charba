@@ -44,12 +44,11 @@ public final class UndefinedValues {
 	 * Default value for BOOLEAN instances
 	 */
 	public static final boolean BOOLEAN = Boolean.FALSE;
-	
+
 	/**
 	 * Default value for ImageElement instances
 	 */
 	public static final ImageElement IMAGE_ELEMENT = null;
-
 
 	/**
 	 * To avoid any instantiation

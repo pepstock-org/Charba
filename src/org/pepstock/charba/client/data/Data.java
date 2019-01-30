@@ -197,8 +197,11 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.AbstractChart, org.pepstock.charba.client.Configuration)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.AbstractChart,
+	 * org.pepstock.charba.client.Configuration)
 	 */
 	@Override
 	public void load(AbstractChart<?, ?> chart, Configuration configuration) {

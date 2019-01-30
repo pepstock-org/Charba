@@ -312,7 +312,7 @@ abstract class HovingFlexDataset extends Dataset {
 		// removes the property
 		resetBeingPatterns(Property.hoverBackgroundColor);
 	}
-	
+
 	/**
 	 * Sets the fill gradient of the elements when hovered.
 	 * 
@@ -371,13 +371,12 @@ abstract class HovingFlexDataset extends Dataset {
 			return new ArrayObjectContainerList<Pattern>();
 		}
 	}
-	
+
 	/**
-	 * Returns the fill gradients of elements when hovered. If property is missing or not a gradient, returns an
-	 * empty list.
+	 * Returns the fill gradients of elements when hovered. If property is missing or not a gradient, returns an empty list.
 	 * 
-	 * @return list of the fill gradients of elements when hovered. If property is missing or not a gradient,
-	 *         returns an empty list.
+	 * @return list of the fill gradients of elements when hovered. If property is missing or not a gradient, returns an empty
+	 *         list.
 	 */
 	public List<Gradient> getHoverBackgroundColorAsGradients() {
 		// checks if the property is not a gradient (therefore a color or pattern)
@@ -424,7 +423,7 @@ abstract class HovingFlexDataset extends Dataset {
 		// removes previous configuration to other containers
 		resetBeingGradients(Property.hoverBorderColor);
 	}
-	
+
 	/**
 	 * Returns the stroke color of the elements when hovered.
 	 * 
@@ -454,11 +453,11 @@ abstract class HovingFlexDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns an
-	 * empty list.
+	 * Returns the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns an empty
+	 * list.
 	 * 
-	 * @return list of the stroke gradients of the elements when hovered. If property is missing or not a pattern,
-	 *         returns an empty list.
+	 * @return list of the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns an
+	 *         empty list.
 	 */
 	public List<Gradient> getHoverBorderColorAsGradients() {
 		// checks if the property is not a gradient (therefore a color)
@@ -471,7 +470,7 @@ abstract class HovingFlexDataset extends Dataset {
 			return new ArrayObjectContainerList<Gradient>();
 		}
 	}
-	
+
 	/**
 	 * Sets the stroke width of the elements when hovered.
 	 * 

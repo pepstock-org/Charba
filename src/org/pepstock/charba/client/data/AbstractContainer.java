@@ -51,7 +51,7 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 	// flag to know if some objects are changed
 	// needed to recalculate the canvas object at runtime
 	private boolean changed = false;
-	
+
 	/**
 	 * Creates the object by an empty native java script object.
 	 */
@@ -69,8 +69,8 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 	}
 
 	/**
-	 *  Sets <code>true</code> if some canvas objects are changed, otherwise <code>false</code>.
-	 *  
+	 * Sets <code>true</code> if some canvas objects are changed, otherwise <code>false</code>.
+	 * 
 	 * @param changed the changed to set
 	 */
 	public void setChanged(boolean changed) {
@@ -102,7 +102,7 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 			// if exists
 			removeObjects(key);
 		}
-		// changes the flag 
+		// changes the flag
 		changed = true;
 	}
 

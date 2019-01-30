@@ -63,7 +63,7 @@ public class Point extends AbstractConfigurationElement {
 	public void setPointStyle(PointStyle pointStyle) {
 		getOptions().getElements().getPoint().setPointStyle(pointStyle);
 	}
-	
+
 	/**
 	 * Sets the style of the point as image .
 	 * 
@@ -72,7 +72,7 @@ public class Point extends AbstractConfigurationElement {
 	public void setPointStyle(ImageResource pointStyle) {
 		getOptions().getElements().getPoint().setPointStyle(pointStyle);
 	}
-	
+
 	/**
 	 * Sets the style of the point as image .
 	 * 
@@ -90,7 +90,7 @@ public class Point extends AbstractConfigurationElement {
 	public PointStyle getPointStyle() {
 		return getOptions().getElements().getPoint().getPointStyle();
 	}
-	
+
 	/**
 	 * Returns the style of the point as image.
 	 * 

@@ -607,15 +607,16 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.AbstractChart, org.pepstock.charba.client.Configuration)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.AbstractChart,
+	 * org.pepstock.charba.client.Configuration)
 	 */
 	@Override
 	public void load(AbstractChart<?, ?> chart, Configuration configuration) {
 		// loads the native object into configuration to pass to chart
 		ConfigurationLoader.loadOptions(configuration, getConfiguration());
 	}
-	
-	
 
 }

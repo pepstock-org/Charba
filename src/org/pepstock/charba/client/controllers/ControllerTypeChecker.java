@@ -54,7 +54,7 @@ final class ControllerTypeChecker {
 	 * 
 	 * @param type controller type to be checked.
 	 */
-	public static void check(Type type){
+	public static void check(Type type) {
 		// checks if is null
 		if (type == null) {
 			throw new IllegalArgumentException(INVALID_CONTROLLER_TYPE_NULL);

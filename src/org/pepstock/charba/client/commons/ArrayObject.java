@@ -40,8 +40,7 @@ public final class ArrayObject extends Array {
 	public static native ArrayObject of(NativeObject... items);
 
 	/**
-	 * Creates a java script array of objects starting from a native object containers and
-	 * the array will have ONE 1 element.
+	 * Creates a java script array of objects starting from a native object containers and the array will have ONE 1 element.
 	 * 
 	 * @param item list of objects to load into new java script array.
 	 * @param <E> type of native object containers

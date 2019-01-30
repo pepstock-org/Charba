@@ -26,13 +26,13 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  *
  */
 public final class GradientColor extends NativeObjectContainer {
-	
+
 	static final double OFFSET_START = 0D;
-	
+
 	static final double OFFSET_STOP = 1D;
-	
+
 	private static final double DEFAULT_OFFSET = OFFSET_START;
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -41,7 +41,7 @@ public final class GradientColor extends NativeObjectContainer {
 		_charbaGradientColorOffset,
 		_charbaGradientColor
 	}
-	
+
 	public GradientColor(double offset, IsColor color) {
 		this(offset, color.toRGBA());
 	}
@@ -55,7 +55,7 @@ public final class GradientColor extends NativeObjectContainer {
 	GradientColor(NativeObject nativeObject) {
 		super(nativeObject);
 	}
-	
+
 	public double getOffset() {
 		return getValue(Property._charbaGradientColorOffset, DEFAULT_OFFSET);
 	}
@@ -77,7 +77,7 @@ public final class GradientColor extends NativeObjectContainer {
 	public IsColor getColor() {
 		return ColorBuilder.parse(getColorAsString());
 	}
-	
+
 	/**
 	 * Any double between 0.0d and 1.0d (inclusive) is valid.
 	 * 
@@ -89,7 +89,7 @@ public final class GradientColor extends NativeObjectContainer {
 			throw new IllegalArgumentException("Offset argument is not within bounds (0D-1D)");
 		}
 	}
-	
+
 	/**
 	 * Inner class to create pattern by a native object.
 	 * 
@@ -108,6 +108,5 @@ public final class GradientColor extends NativeObjectContainer {
 			return new GradientColor(nativeObject);
 		}
 	}
-
 
 }

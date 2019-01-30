@@ -27,9 +27,9 @@ import org.pepstock.charba.client.items.UndefinedValues;
  *
  */
 public abstract class CanvasObject extends NativeObjectContainer {
-	
+
 	private static int counter = 0;
-	
+
 	/**
 	 * Name of properties of native object. ALL INTERNAL USE ONLY
 	 */
@@ -58,7 +58,7 @@ public abstract class CanvasObject extends NativeObjectContainer {
 	CanvasObject(NativeObject nativeObject) {
 		super(nativeObject);
 	}
-	
+
 	/**
 	 * Returns the unique canvas id.
 	 * 

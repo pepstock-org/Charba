@@ -31,7 +31,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Andrea "Stock" Stocchero
  */
 public final class Point extends AbstractElement<IsDefaultPoint> implements IsDefaultPoint {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */

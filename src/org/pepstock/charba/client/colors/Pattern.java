@@ -39,8 +39,7 @@ public final class Pattern extends CanvasObject {
 	private final static ImageElement DEFAULT_IMAGE = null;
 
 	/**
-	 * Name of properties of native object.
-	 * ALL INTERNAL USE ONLY
+	 * Name of properties of native object. ALL INTERNAL USE ONLY
 	 */
 	private enum Property implements Key
 	{
