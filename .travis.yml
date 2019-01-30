@@ -26,6 +26,8 @@ branches:
 #
 # download Ivy, if needed
 before_install: ant ivyInit
+# list the content of Ivy cache dir 
+before_script: ls -R ~/.ivy2 
 # run the ant main target
 script: ant build-bin
 #
