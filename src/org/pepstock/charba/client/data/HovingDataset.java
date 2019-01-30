@@ -118,7 +118,8 @@ abstract class HovingDataset extends Dataset {
 			return ArrayListHelper.list(array);
 		} else {
 			// the property is not color string
-			// therefore returns an empty list
+			// or the property is missing or a pattern or gradient
+			// returns an empty list
 			return new ArrayStringList();
 		}
 	}
@@ -144,7 +145,7 @@ abstract class HovingDataset extends Dataset {
 			return getPatternsContainer().getObjects(Property.backgroundColor);
 		} else {
 			// if here, the property is not a object
-			// therefore the property is missing or a color or gradient
+			// or the property is missing or a color or gradient
 			// returns empty list
 			return new ArrayObjectContainerList<Pattern>();
 		}
@@ -161,7 +162,7 @@ abstract class HovingDataset extends Dataset {
 			return getGradientsContainer().getObjects(Property.backgroundColor);
 		} else {
 			// if here, the property is not a gradient
-			// therefore the property is missing
+			// or the property is missing
 			// returns empty list
 			return new ArrayObjectContainerList<Gradient>();
 		}
@@ -207,13 +208,13 @@ abstract class HovingDataset extends Dataset {
 	 * @return list of the border color of the arcs in the dataset as string.
 	 */
 	public List<String> getBorderColorAsString() {
-		// checks if the property is not a color (therefore a pattern or gradient)
+		// checks if the property is not a color (therefore a gradient)
 		if (hasColors(Property.borderColor)) {
 			ArrayString array = getArrayValue(Property.borderColor);
 			return ArrayListHelper.list(array);
 		} else {
 			// if here, the property is not a string
-			// therefore the property is missing or a pattern or gradient
+			// or the property is missing or a gradient
 			// returns empty list
 			return new ArrayStringList();
 		}
@@ -236,12 +237,12 @@ abstract class HovingDataset extends Dataset {
 	 *         empty list.
 	 */
 	public List<Gradient> getBorderColorAsGradients() {
-		// checks if the property is not a gradient (therefore a color or pattern)
+		// checks if the property is not a gradient (therefore a color)
 		if (hasGradients(Property.borderColor)) {
 			return getGradientsContainer().getObjects(Property.borderColor);
 		} else {
 			// if here, the property is not a gradient
-			// therefore the property is missing
+			// or the property is missing
 			// returns empty list
 			return new ArrayObjectContainerList<Gradient>();
 		}
@@ -326,7 +327,7 @@ abstract class HovingDataset extends Dataset {
 			return ArrayListHelper.list(array);
 		} else {
 			// if here, the property is not a color
-			// therefore the property is missing
+			// or the property is missing
 			// returns empty list
 			return new ArrayStringList();
 		}
@@ -354,7 +355,7 @@ abstract class HovingDataset extends Dataset {
 			return getPatternsContainer().getObjects(Property.hoverBackgroundColor);
 		} else {
 			// if here, the property is not a object
-			// therefore the property is missing or not a pattern
+			// or the property is missing or not a pattern
 			// returns empty string
 			return new ArrayObjectContainerList<Pattern>();
 		}
@@ -373,7 +374,7 @@ abstract class HovingDataset extends Dataset {
 			return getGradientsContainer().getObjects(Property.hoverBackgroundColor);
 		} else {
 			// if here, the property is not a object
-			// therefore the property is missing or not a gradient
+			// or the property is missing or not a gradient
 			// returns empty list
 			return new ArrayObjectContainerList<Gradient>();
 		}
@@ -426,7 +427,7 @@ abstract class HovingDataset extends Dataset {
 			return ArrayListHelper.list(array);
 		} else {
 			// if here, the property is not a object
-			// therefore the property is missing or not a color
+			// or the property is missing or not a color
 			// returns empty list
 			return new ArrayStringList();
 		}
@@ -454,7 +455,7 @@ abstract class HovingDataset extends Dataset {
 			return getGradientsContainer().getObjects(Property.hoverBorderColor);
 		} else {
 			// if here, the property is not a object
-			// therefore the property is missing or not a gradient
+			// or the property is missing or not a gradient
 			// returns empty list
 			return new ArrayObjectContainerList<Gradient>();
 		}

@@ -137,7 +137,7 @@ abstract class LiningDataset extends Dataset {
 			return getValue(Property.backgroundColor, Defaults.get().getGlobal().getElements().getLine().getBackgroundColorAsString());
 		} else {
 			// if here, the property is not a string
-			// therefore the property is missing or a pattern
+			// or the property is missing or a pattern
 			// returns default value
 			return Defaults.get().getGlobal().getElements().getLine().getBackgroundColorAsString();
 		}
@@ -165,7 +165,7 @@ abstract class LiningDataset extends Dataset {
 			return patterns.get(0);
 		} else {
 			// if here, the property is not a object
-			// therefore the property is missing or a color
+			// or the property is missing or a color
 			// returns null
 			// FIXME verificare nel POINT element delle options
 			return null;
@@ -185,7 +185,7 @@ abstract class LiningDataset extends Dataset {
 			return gradients.get(0);
 		} else {
 			// if here, the property is not a gradient
-			// therefore the property is missing
+			// or the property is missing
 			// returns null
 			// FIXME verificare nel POINT element delle options
 			return null;
@@ -236,7 +236,7 @@ abstract class LiningDataset extends Dataset {
 			return getValue(Property.borderColor, Defaults.get().getGlobal().getElements().getLine().getBorderColorAsString());
 		} else {
 			// if here, the property is not a string
-			// therefore the property is missing or a pattern
+			// or the property is missing or a pattern
 			// returns default value
 			return Defaults.get().getGlobal().getElements().getLine().getBorderColorAsString();
 		}
@@ -264,7 +264,7 @@ abstract class LiningDataset extends Dataset {
 			return gradients.get(0);
 		} else {
 			// if here, the property is not a gradient
-			// therefore the property is missing
+			// or the property is missing
 			// returns null
 			// FIXME verificare nel POINT element delle options
 			return null;
@@ -476,7 +476,7 @@ abstract class LiningDataset extends Dataset {
 			return ArrayListHelper.list(array);
 		} else {
 			// if here, the property is not a string
-			// therefore the property is missing or a gradient
+			// or the property is missing or a gradient
 			// returns default value
 			return ArrayListHelper.list(ArrayString.of(Defaults.get().getGlobal().getElements().getPoint().getBackgroundColorAsString()));
 		}
@@ -502,7 +502,7 @@ abstract class LiningDataset extends Dataset {
 			return getGradientsContainer().getObjects(Property.pointBackgroundColor);
 		} else {
 			// if here, the property is not a gradient
-			// therefore the property is missing
+			// or the property is missing
 			// returns null
 			// FIXME verificare nel POINT element delle options
 			return null;
@@ -558,7 +558,7 @@ abstract class LiningDataset extends Dataset {
 			return ArrayListHelper.list(array);
 		} else {
 			// if here, the property is not a string
-			// therefore the property is missing or a pattern
+			// or the property is missing or a pattern
 			// returns default value
 			return ArrayListHelper.list(ArrayString.of(Defaults.get().getGlobal().getElements().getLine().getBorderColorAsString()));
 		}
@@ -585,7 +585,7 @@ abstract class LiningDataset extends Dataset {
 			return getGradientsContainer().getObjects(Property.pointBorderColor);
 		} else {
 			// if here, the property is not a gradient
-			// therefore the property is missing
+			// or the property is missing
 			// returns null
 			// FIXME verificare nel POINT element delle options
 			return null;
@@ -678,7 +678,7 @@ abstract class LiningDataset extends Dataset {
 			return ArrayListHelper.list(array);
 		} else {
 			// if here, the property is not a string
-			// therefore the property is missing or a pattern
+			// or the property is missing or a pattern
 			// returns default value
 			return ArrayListHelper.list(ArrayString.of(Defaults.get().getGlobal().getElements().getPoint().getBackgroundColorAsString()));
 		}
@@ -707,7 +707,7 @@ abstract class LiningDataset extends Dataset {
 			return getGradientsContainer().getObjects(Property.pointHoverBackgroundColor);
 		} else {
 			// if here, the property is not a gradient
-			// therefore the property is missing
+			// or the property is missing
 			// returns null
 			// FIXME verificare nel POINT element delle options
 			return null;
@@ -761,7 +761,7 @@ abstract class LiningDataset extends Dataset {
 			return ArrayListHelper.list(array);
 		} else {
 			// if here, the property is not a string
-			// therefore the property is missing or a pattern
+			// or the property is missing or a pattern
 			// returns default value
 			return ArrayListHelper.list(ArrayString.of(Defaults.get().getGlobal().getElements().getPoint().getBorderColorAsString()));
 		}
@@ -789,7 +789,7 @@ abstract class LiningDataset extends Dataset {
 			return getGradientsContainer().getObjects(Property.pointHoverBorderColor);
 		} else {
 			// if here, the property is not a gradient
-			// therefore the property is missing
+			// or the property is missing
 			// returns null
 			// FIXME verificare nel POINT element delle options
 			return null;

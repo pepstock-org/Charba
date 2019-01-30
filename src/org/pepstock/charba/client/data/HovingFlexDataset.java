@@ -18,6 +18,7 @@ package org.pepstock.charba.client.data;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.ArrayInteger;
@@ -80,8 +81,8 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(IsColor... backgroundColor) {
 		setValueOrArray(Property.backgroundColor, backgroundColor);
-		// removes the flag because default is string color
-		resetBeingColors(Property.backgroundColor);	
+		// removes previous configuration to other containers
+		resetBeingColors(Property.backgroundColor);
 	}
 
 	/**
@@ -91,8 +92,8 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(String... backgroundColor) {
 		setValueOrArray(Property.backgroundColor, backgroundColor);
-		// removes the flag because default is string color
-		resetBeingColors(Property.backgroundColor);	
+		// removes previous configuration to other containers
+		resetBeingColors(Property.backgroundColor);
 	}
 
 	/**
@@ -103,8 +104,20 @@ abstract class HovingFlexDataset extends Dataset {
 	public void setBackgroundColor(Pattern... backgroundColor) {
 		// sets value to patterns
 		getPatternsContainer().setObjects(Property.backgroundColor, ArrayObject.of(backgroundColor));
-		// removes the property
-		resetBeingPatterns(Property.backgroundColor);	
+		// removes previous configuration to other containers
+		resetBeingPatterns(Property.backgroundColor);
+	}
+
+	/**
+	 * Sets the fill gradient of the elements.
+	 * 
+	 * @param backgroundColor the fill gradient of the elements.
+	 */
+	public void setBackgroundColor(Gradient... backgroundColor) {
+		// sets value to gradients
+		getGradientsContainer().setObjects(Property.backgroundColor, ArrayObject.of(backgroundColor));
+		// removes previous configuration to other containers
+		resetBeingGradients(Property.backgroundColor);
 	}
 
 	/**
@@ -113,14 +126,15 @@ abstract class HovingFlexDataset extends Dataset {
 	 * @return list of the fill colors of the elements. If property is missing or not a color, returns an empty list.
 	 */
 	public List<String> getBackgroundColorAsString() {
-		// checks if the property is not a pattern (therefore a color)
+		// checks if the property is not a color (therefore a pattern or gradient)
 		if (hasColors(Property.backgroundColor)) {
 			// returns list of colors
 			ArrayString array = getValueOrArray(Property.backgroundColor, getDefaultBackgroundColorAsString());
 			return ArrayListHelper.list(array);
 		} else {
-			// the property is colors
-			// therefore returns an empty list
+			// if here, the property is not a object
+			// or the property is missing or not a color
+			// returns empty list
 			return new ArrayStringList();
 		}
 	}
@@ -145,11 +159,27 @@ abstract class HovingFlexDataset extends Dataset {
 			return getPatternsContainer().getObjects(Property.backgroundColor);
 		} else {
 			// if here, the property is not a object
-			// therefore the property is missing or a color
-			// returns null
-			// FIXME verificare nel POINT element delle options
+			// or the property is missing or not a pattern
+			// returns empty list
 			return new ArrayObjectContainerList<Pattern>();
-		}	
+		}
+	}
+
+	/**
+	 * Returns the fill gradient of elements. If property is missing or not a gradient, returns an empty list.
+	 * 
+	 * @return the fill gradient of elements. If property is missing or not a gradient, returns an empty list.
+	 */
+	public List<Gradient> getBackgroundColorAsGradients() {
+		// checks if the property is not a gradient (therefore a color or pattern)
+		if (hasGradients(Property.backgroundColor)) {
+			return getGradientsContainer().getObjects(Property.backgroundColor);
+		} else {
+			// if here, the property is not a gradient
+			// or the property is missing
+			// returns empty list
+			return new ArrayObjectContainerList<Gradient>();
+		}
 	}
 
 	/**
@@ -159,6 +189,8 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBorderColor(IsColor... borderColor) {
 		setValueOrArray(Property.borderColor, borderColor);
+		// removes previous configuration to other containers
+		resetBeingColors(Property.borderColor);
 	}
 
 	/**
@@ -168,6 +200,20 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBorderColor(String... borderColor) {
 		setValueOrArray(Property.borderColor, borderColor);
+		// removes previous configuration to other containers
+		resetBeingColors(Property.borderColor);
+	}
+
+	/**
+	 * Sets the gradient of the bar border as gradient.
+	 * 
+	 * @param borderColor the gradient of the bar border as gradient.
+	 */
+	public void setBorderColor(Gradient... borderColor) {
+		// sets value to gradients
+		getGradientsContainer().setObjects(Property.borderColor, ArrayObject.of(borderColor));
+		// removes previous configuration to other containers
+		resetBeingGradients(Property.borderColor);
 	}
 
 	/**
@@ -176,8 +222,16 @@ abstract class HovingFlexDataset extends Dataset {
 	 * @return list of the color of the bar border
 	 */
 	public List<String> getBorderColorAsString() {
-		ArrayString array = getValueOrArray(Property.borderColor, getDefaultBorderColorAsString());
-		return ArrayListHelper.list(array);
+		// checks if the property is not a color (therefore a gradient)
+		if (hasColors(Property.borderColor)) {
+			ArrayString array = getValueOrArray(Property.borderColor, getDefaultBorderColorAsString());
+			return ArrayListHelper.list(array);
+		} else {
+			// if here, the property is not a string
+			// or the property is missing or a gradient
+			// returns empty list
+			return new ArrayStringList();
+		}
 	}
 
 	/**
@@ -187,6 +241,23 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public List<IsColor> getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
+	}
+
+	/**
+	 * Returns the gradient of the bar border. If property is missing or not a gradient, returns an empty list.
+	 * 
+	 * @return the gradient of the bar border. If property is missing or not a gradient, returns an empty list.
+	 */
+	public List<Gradient> getBorderColorAsGradients() {
+		// checks if the property is not a gradient (therefore a color)
+		if (hasGradients(Property.borderColor)) {
+			return getGradientsContainer().getObjects(Property.borderColor);
+		} else {
+			// if here, the property is not a gradient
+			// or the property is missing
+			// returns empty list
+			return new ArrayObjectContainerList<Gradient>();
+		}
 	}
 
 	/**
@@ -241,6 +312,18 @@ abstract class HovingFlexDataset extends Dataset {
 		// removes the property
 		resetBeingPatterns(Property.hoverBackgroundColor);
 	}
+	
+	/**
+	 * Sets the fill gradient of the elements when hovered.
+	 * 
+	 * @param colors the fill gradient of the elements when hovered.
+	 */
+	public void setHoverBackgroundColor(Gradient... colors) {
+		// sets value to gradients
+		getGradientsContainer().setObjects(Property.hoverBackgroundColor, ArrayObject.of(colors));
+		// removes previous configuration to other containers
+		resetBeingGradients(Property.hoverBackgroundColor);
+	}
 
 	/**
 	 * Returns the fill color of the elements when hovered. If property is missing or not a color, returns an empty list.
@@ -249,14 +332,15 @@ abstract class HovingFlexDataset extends Dataset {
 	 *         list.
 	 */
 	public List<String> getHoverBackgroundColorAsString() {
-		// checks if the property is not a pattern (therefore a color)
+		// checks if the property is not a color (therefore a pattern or gradient)
 		if (hasColors(Property.hoverBackgroundColor)) {
 			// returns list of colors
 			ArrayString array = getValueOrArray(Property.hoverBackgroundColor, getDefaultBackgroundColorAsString());
 			return ArrayListHelper.list(array);
 		} else {
-			// the property is colors
-			// therefore returns an empty list
+			// if here, the property is not a color
+			// or the property is missing
+			// returns empty list
 			return new ArrayStringList();
 		}
 	}
@@ -281,12 +365,30 @@ abstract class HovingFlexDataset extends Dataset {
 		if (hasPatterns(Property.hoverBackgroundColor)) {
 			return getPatternsContainer().getObjects(Property.hoverBackgroundColor);
 		} else {
-			// if here, the property is not a object
-			// therefore the property is missing or a color
-			// returns null
-			// FIXME verificare nel POINT element delle options
+			// if here, the property is not a color
+			// or the property is missing
+			// returns empty list
 			return new ArrayObjectContainerList<Pattern>();
-		}	
+		}
+	}
+	
+	/**
+	 * Returns the fill gradients of elements when hovered. If property is missing or not a gradient, returns an
+	 * empty list.
+	 * 
+	 * @return list of the fill gradients of elements when hovered. If property is missing or not a gradient,
+	 *         returns an empty list.
+	 */
+	public List<Gradient> getHoverBackgroundColorAsGradients() {
+		// checks if the property is not a gradient (therefore a color or pattern)
+		if (hasGradients(Property.hoverBackgroundColor)) {
+			return getGradientsContainer().getObjects(Property.hoverBackgroundColor);
+		} else {
+			// if here, the property is not a object
+			// or the property is missing or not a gradient
+			// returns empty list
+			return new ArrayObjectContainerList<Gradient>();
+		}
 	}
 
 	/**
@@ -296,6 +398,8 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setHoverBorderColor(IsColor... colors) {
 		setValueOrArray(Property.hoverBorderColor, colors);
+		// removes previous configuration to other containers
+		resetBeingColors(Property.hoverBorderColor);
 	}
 
 	/**
@@ -305,17 +409,39 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setHoverBorderColor(String... colors) {
 		setValueOrArray(Property.hoverBorderColor, colors);
-		;
+		// removes previous configuration to other containers
+		resetBeingColors(Property.hoverBorderColor);
 	}
 
 	/**
-	 * Returns the stroke color of the elements when hovered
+	 * Sets the stroke gradient of elements when hovered as gradient.
 	 * 
-	 * @return list of the stroke color of the elements when hovered
+	 * @param colors the stroke gradient of elements when hovered as gradient.
+	 */
+	public void setHoverBorderColor(Gradient... colors) {
+		// sets value to gradients
+		getGradientsContainer().setObjects(Property.hoverBorderColor, ArrayObject.of(colors));
+		// removes previous configuration to other containers
+		resetBeingGradients(Property.hoverBorderColor);
+	}
+	
+	/**
+	 * Returns the stroke color of the elements when hovered.
+	 * 
+	 * @return list of the stroke color of the elements when hovered.
 	 */
 	public List<String> getHoverBorderColorAsString() {
-		ArrayString array = getValueOrArray(Property.hoverBorderColor, getDefaultBorderColorAsString());
-		return ArrayListHelper.list(array);
+		// checks if the property is not a color (therefore a gradient)
+		if (hasColors(Property.hoverBorderColor)) {
+			// returns list of colors
+			ArrayString array = getValueOrArray(Property.hoverBorderColor, getDefaultBorderColorAsString());
+			return ArrayListHelper.list(array);
+		} else {
+			// if here, the property is not a object
+			// or the property is missing or not a color
+			// returns empty list
+			return new ArrayStringList();
+		}
 	}
 
 	/**
@@ -327,6 +453,25 @@ abstract class HovingFlexDataset extends Dataset {
 		return ColorBuilder.parse(getHoverBorderColorAsString());
 	}
 
+	/**
+	 * Returns the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns an
+	 * empty list.
+	 * 
+	 * @return list of the stroke gradients of the elements when hovered. If property is missing or not a pattern,
+	 *         returns an empty list.
+	 */
+	public List<Gradient> getHoverBorderColorAsGradients() {
+		// checks if the property is not a gradient (therefore a color)
+		if (hasGradients(Property.hoverBorderColor)) {
+			return getGradientsContainer().getObjects(Property.hoverBorderColor);
+		} else {
+			// if here, the property is not a object
+			// or the property is missing or not a gradient
+			// returns empty list
+			return new ArrayObjectContainerList<Gradient>();
+		}
+	}
+	
 	/**
 	 * Sets the stroke width of the elements when hovered.
 	 * 
@@ -345,8 +490,10 @@ abstract class HovingFlexDataset extends Dataset {
 		ArrayInteger array = getValueOrArray(Property.hoverBorderWidth, getDefaultBorderWidth());
 		return ArrayListHelper.list(array);
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.Dataset#applyPattern(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
@@ -354,11 +501,14 @@ abstract class HovingFlexDataset extends Dataset {
 		setValueOrArray(key, canvasPatternsList.toArray(new CanvasPattern[0]));
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.Dataset#applyGradient(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
 	void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
+		setValueOrArray(key, canvasGradientsList.toArray(new CanvasGradient[0]));
 	}
 
 }
