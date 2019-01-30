@@ -64,7 +64,7 @@ public final class Gradient extends CanvasObject {
 	/**
 	 * Creates a gradient by a type, with <code>chart</code> scope.
 	 * 
-	 * @param gradient type
+	 * @param type gradient type
 	 */
 	public Gradient(GradientType type) {
 		this(type, GradientOrientation.getDefaultByType(type));
@@ -177,7 +177,7 @@ public final class Gradient extends CanvasObject {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static final class GradientFactory implements NativeObjectContainerFactory<Gradient> {
+	public static final class GradientFactory implements NativeObjectContainerFactory<Gradient> {
 
 		/*
 		 * (non-Javadoc)

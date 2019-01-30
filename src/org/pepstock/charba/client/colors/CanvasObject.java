@@ -26,7 +26,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class CanvasObject extends NativeObjectContainer {
+public abstract class CanvasObject extends NativeObjectContainer {
 	
 	private static int counter = 0;
 	

@@ -496,7 +496,7 @@ abstract class LiningDataset extends Dataset {
 	 * 
 	 * @return list of the fill color for points. If property is missing or not a gradient, returns <code>null</code>.
 	 */
-	public List<Gradient> getPointBackgroundColorAsGradient() {
+	public List<Gradient> getPointBackgroundColorAsGradients() {
 		// checks if the property is not a gradient (therefore a color or pattern)
 		if (hasGradients(Property.pointBackgroundColor)) {
 			return getGradientsContainer().getObjects(Property.pointBackgroundColor);
@@ -579,7 +579,7 @@ abstract class LiningDataset extends Dataset {
 	 * 
 	 * @return list of the border gradient for points. If property is missing or not a gradient, returns <code>null</code>.
 	 */
-	public List<Gradient> getPointBorderColorAsGradient() {
+	public List<Gradient> getPointBorderColorAsGradients() {
 		// checks if the property is not a gradient (therefore a color or pattern)
 		if (hasGradients(Property.pointBorderColor)) {
 			return getGradientsContainer().getObjects(Property.pointBorderColor);
@@ -701,7 +701,7 @@ abstract class LiningDataset extends Dataset {
 	 * @return list of the point background color when hovered. If property is missing or not a gradient, returns
 	 *         <code>null</code>.
 	 */
-	public List<Gradient> getPointHoverBackgroundColorAsGradient() {
+	public List<Gradient> getPointHoverBackgroundColorAsGradients() {
 		// checks if the property is not a gradient (therefore a color or pattern)
 		if (hasGradients(Property.pointHoverBackgroundColor)) {
 			return getGradientsContainer().getObjects(Property.pointHoverBackgroundColor);
@@ -783,7 +783,7 @@ abstract class LiningDataset extends Dataset {
 	 * @return list of the point border gradient when hovered. If property is missing or not a gradient, returns
 	 *         <code>null</code>.
 	 */
-	public List<Gradient> getPointHoverBorderColorAsGradient() {
+	public List<Gradient> getPointHoverBorderColorAsGradients() {
 		// checks if the property is not a gradient (therefore a color or pattern)
 		if (hasGradients(Property.pointHoverBorderColor)) {
 			return getGradientsContainer().getObjects(Property.pointHoverBorderColor);
@@ -962,6 +962,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	@Override
 	void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
+		// checks if background color (ONLY one which can be used with patterns)
 		if (Property.backgroundColor.name().equalsIgnoreCase(key.name())) {
 			// gets the first element
 			CanvasPattern pattern = canvasPatternsList.get(0);
@@ -975,6 +976,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	@Override
 	void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
+		// checks if background or border colors which must be set with single value
 		if (Property.backgroundColor.name().equalsIgnoreCase(key.name()) || Property.borderColor.name().equalsIgnoreCase(key.name())) {
 			// gets the first element
 			CanvasGradient gradient = canvasGradientsList.get(0);

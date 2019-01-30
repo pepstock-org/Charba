@@ -141,7 +141,7 @@ public final class Pattern extends CanvasObject {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	static final class PatternFactory implements NativeObjectContainerFactory<Pattern> {
+	public static final class PatternFactory implements NativeObjectContainerFactory<Pattern> {
 
 		/*
 		 * (non-Javadoc)

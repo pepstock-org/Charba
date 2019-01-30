@@ -13,27 +13,35 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.colors;
+package org.pepstock.charba.client.data;
 
+import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.colors.Pattern.PatternFactory;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
- * FIXME javadoc
+ * Utility to manage the patterns inside the configuration item of dataset, setting to the specific properties of the
+ * elements.<br>
+ * It stores the patterns information into a native object added to Charba configuration, on specific property names for
+ * Charba.<br>
+ * The canvas object are stored into native object by the "original" property names to use to configure CHART.JS.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class PatternsContainer extends CanvasObjects<Pattern>{
-	
+final class PatternsContainer extends AbstractContainer<Pattern> {
+
+	// factory to creates pattern form native object
 	private final PatternFactory factory = new PatternFactory();
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.colors.CanvasObjects#getFactory()
 	 */
 	@Override
 	NativeObjectContainerFactory<Pattern> getFactory() {
 		return factory;
 	}
-	
 
 }

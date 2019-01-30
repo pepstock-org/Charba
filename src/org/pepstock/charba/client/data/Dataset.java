@@ -22,18 +22,14 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.colors.CanvasObjectFactory;
 import org.pepstock.charba.client.colors.Gradient;
-import org.pepstock.charba.client.colors.GradientsContainer;
 import org.pepstock.charba.client.colors.Pattern;
-import org.pepstock.charba.client.colors.PatternsContainer;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.items.UndefinedValues;
-import org.pepstock.charba.client.plugins.InvalidPluginIdException;
 import org.pepstock.charba.client.plugins.PluginIdChecker;
 import org.pepstock.charba.client.utils.JSON;
 
@@ -50,9 +46,9 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
 public abstract class Dataset extends NativeObjectContainer {
 	// default for hidden property
 	private static final boolean DEFAULT_HIDDEN = false;
-
+	// patterns container
 	private final PatternsContainer patternsContainer = new PatternsContainer();
-
+	// gradients container
 	private final GradientsContainer gradientsContainer = new GradientsContainer();
 
 	/**
@@ -73,6 +69,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * Creates a dataset, adding patterns and gradients element.
 	 */
 	Dataset() {
+		// sets the Charba containers into dataset java script configuration
 		setValue(Property._charbaPatterns, patternsContainer);
 		setValue(Property._charbaGradients, gradientsContainer);
 	}
@@ -96,71 +93,120 @@ public abstract class Dataset extends NativeObjectContainer {
 	}
 
 	/**
-	 * FIXME
+	 * Returns <code>true</code> if the color (selected by its property name) is not both a gradient not a pattern, otherwise
+	 * <code>false</code>.
 	 * 
-	 * @param key
-	 * @return
+	 * @param key property name to check
+	 * @return <code>true</code> if the color (selected by its property name) is not both a gradient not a pattern.
 	 */
 	final boolean hasColors(Key key) {
 		return !getPatternsContainer().hasObjects(key) && !getGradientsContainer().hasObjects(key);
 	}
 
+	/**
+	 * Returns <code>true</code> if the color (selected by its property name) is a pattern, otherwise <code>false</code>.
+	 * 
+	 * @param key property name to check
+	 * @return <code>true</code> if the color (selected by its property name) is a pattern.
+	 */
 	final boolean hasPatterns(Key key) {
 		return getPatternsContainer().hasObjects(key);
 	}
 
+	/**
+	 * Returns <code>true</code> if the color (selected by its property name) is a gradient, otherwise <code>false</code>.
+	 * 
+	 * @param key property name to check
+	 * @return <code>true</code> if the color (selected by its property name) is a gradient.
+	 */
 	final boolean hasGradients(Key key) {
 		return getGradientsContainer().hasObjects(key);
 	}
 
+	/**
+	 * Removes the property key related to the color from pattern and gradient container if color is selected.
+	 * 
+	 * @param key key property name to remove.
+	 */
 	final void resetBeingColors(Key key) {
+		// remove from patterns
 		getPatternsContainer().removeObjects(key);
+		// remove from gradients
 		getGradientsContainer().removeObjects(key);
 	}
 
+	/**
+	 * Removes the property key related to the color from dataset object and gradient container if pattern is selected.
+	 * 
+	 * @param key key property name to remove.
+	 */
 	final void resetBeingPatterns(Key key) {
+		// removes color key from dataset object
 		removeIfExists(key);
+		// remove from gradients
 		getGradientsContainer().removeObjects(key);
 	}
 
+	/**
+	 * Removes the property key related to the color from dataset object and pattern container if gradient is selected.
+	 * 
+	 * @param key key property name to remove.
+	 */
 	final void resetBeingGradients(Key key) {
+		// removes color key from dataset object
 		removeIfExists(key);
+		// remove from patterns
 		getPatternsContainer().removeObjects(key);
 	}
 
 	/**
 	 * It applies all canvas patterns defined into dataset. The canvas pattern needs to be created a context 2d of canvas
-	 * therefore must be created by a chart.
+	 * therefore must be created by a chart.<br>
+	 * This is called by {@link CanvasObjectHandler}.
 	 * 
 	 * @param chart chart instance
+	 * @see CanvasObjectHandler
 	 */
 	final void applyPatterns(AbstractChart<?, ?> chart) {
+		// checks if there is any pattern
 		if (!getPatternsContainer().isEmpty()) {
+			// gets all keys of pattern containers.
+			// the key is the CHART.JS dataset property to set
 			for (Key key : getPatternsContainer().getKeys()) {
+				// gets list of all patterns
 				List<Pattern> patterns = getPatternsContainer().getObjects(key);
-				List<CanvasPattern> canvasPatternsList = new LinkedList<CanvasPattern>();
+				// creates the list of canvas pattern
+				final List<CanvasPattern> canvasPatternsList = new LinkedList<CanvasPattern>();
+				// scans the patterns
 				for (Pattern pattern : patterns) {
+					// creates the canvas pattern and adds into list
 					canvasPatternsList.add(CanvasObjectFactory.createPattern(chart, pattern));
 				}
+				// asks to dataset implementation to set the property
+				// applying the logic it wants
 				applyPattern(key, canvasPatternsList);
 			}
 		}
 	}
 
 	/**
-	 * FIXME
-	 * @param key
-	 * @param canvasPatternsList
+	 * Stores the canvas patterns into dataset object by property name passed as key.
+	 * 
+	 * @param key key property name to use to store canvas patterns into dataset object.
+	 * @param canvasPatternsList list of canvas patterns
 	 */
 	abstract void applyPattern(Key key, List<CanvasPattern> canvasPatternsList);
 
 	/**
 	 * It applies all canvas gradients defined into dataset. The canvas gradients needs to be created a context 2d of canvas
-	 * therefore must be created by a chart.
+	 * therefore must be created by a chart.<br>
+	 * This is called by {@link CanvasObjectHandler}.
 	 * 
 	 * @param chart chart instance
+	 * @param datasetIndex dataset index related to dataset to be checked
+	 * @see CanvasObjectHandler
 	 */
-	final void applyGradients(AbstractChart<?, ?> chart) {
+	final void applyGradients(AbstractChart<?, ?> chart, int datasetIndex) {
 		// checks if there is any gradient to be created
 		if (!getGradientsContainer().isEmpty()) {
 			// scans all key of all created gradients
@@ -169,20 +215,27 @@ public abstract class Dataset extends NativeObjectContainer {
 				List<Gradient> gradients = getGradientsContainer().getObjects(key);
 				// creates a temporary list of gradients
 				List<CanvasGradient> canvasGradientsList = new LinkedList<CanvasGradient>();
+				// sets internal dataset index
+				int index = 0;
 				// scans all gradients
 				for (Gradient gradient : gradients) {
 					// creates gradient and adds to the temporary list
-					canvasGradientsList.add(CanvasObjectFactory.createGradient(chart, gradient));
+					canvasGradientsList.add(CanvasObjectFactory.createGradient(chart, gradient, datasetIndex, index));
+					// increments the index
+					index++;
 				}
+				// asks to dataset implementation to set the property
+				// applying the logic it wants
 				applyGradient(key, canvasGradientsList);
 			}
 		}
 	}
 
 	/**
-	 * FIXME
-	 * @param key
-	 * @param canvasGradientsList
+	 * Stores the canvas gradients into dataset object by property name passed as key.
+	 * 
+	 * @param key key property name to use to store canvas gradients into dataset object.
+	 * @param canvasGradientsList list of canvas gradients
 	 */
 	abstract void applyGradient(Key key, List<CanvasGradient> canvasGradientsList);
 
@@ -297,9 +350,8 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @param options java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if
 	 *            exist.
 	 * @param <T> type of native object container to store
-	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public final <T extends NativeObjectContainer> void setOptions(String pluginId, T options) throws InvalidPluginIdException {
+	public final <T extends NativeObjectContainer> void setOptions(String pluginId, T options) {
 		// if null, removes the configuration
 		if (options == null) {
 			// removes configuration if exists
@@ -315,9 +367,8 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * 
 	 * @param pluginId plugin id.
 	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
-	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public final boolean hasOptions(String pluginId) throws InvalidPluginIdException {
+	public final boolean hasOptions(String pluginId) {
 		return has(PluginIdChecker.key(pluginId));
 	}
 
@@ -328,9 +379,8 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @param factory factory instance to create a native object container.
 	 * @param <T> type of native object container to return
 	 * @return java script object used to configure the plugin or <code>null</code> if not exist.
-	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public final <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) throws InvalidPluginIdException {
+	public final <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) {
 		return factory.create(getValue(PluginIdChecker.key(pluginId)));
 	}
 

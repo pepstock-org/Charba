@@ -13,13 +13,23 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.colors;
+package org.pepstock.charba.client.data;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.ChartNode;
+import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.GradientColor;
+import org.pepstock.charba.client.colors.GradientOrientation;
+import org.pepstock.charba.client.colors.GradientScope;
+import org.pepstock.charba.client.colors.GradientType;
+import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.items.ChartAreaNode;
+import org.pepstock.charba.client.items.DatasetItem;
+import org.pepstock.charba.client.items.DatasetMetaItem;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.CanvasGradient;
@@ -35,7 +45,7 @@ import com.google.gwt.canvas.dom.client.Context2d;
  * @see Gradient
  * @see com.google.gwt.canvas.dom.client.CanvasGradient
  */
-public final class CanvasObjectFactory {
+final class CanvasObjectFactory {
 
 	// cache for canvas gradients already created
 	// K = chart id, K = gradient id, V = canvas gradient
@@ -60,7 +70,7 @@ public final class CanvasObjectFactory {
 	 * @param pattern pattern instance created at configuration level
 	 * @return a GWT canvas pattern
 	 */
-	public static CanvasPattern createPattern(AbstractChart<?, ?> chart, Pattern pattern) {
+	static CanvasPattern createPattern(AbstractChart<?, ?> chart, Pattern pattern) {
 		final Map<Integer, CanvasPattern> patternsMap;
 		// checks if the pattern is already created
 		if (PATTERNS.containsKey(chart.getId())) {
@@ -70,25 +80,40 @@ public final class CanvasObjectFactory {
 				return patternsMap.get(pattern.getId());
 			}
 		} else {
+			// new chart!
+			// creates the cache for the chart
 			patternsMap = new HashMap<>();
 			PATTERNS.put(chart.getId(), patternsMap);
 		}
 		// gets canvas and context 2d
 		Canvas canvas = chart.getCanvas();
 		Context2d context = canvas.getContext2d();
+		// creates the pattern
 		CanvasPattern result = context.createPattern(pattern.getImage(), pattern.getRepetition());
 		// stores canvas pattern into cache
 		patternsMap.put(pattern.getId(), result);
 		// returns result
 		return result;
 	}
-	
+
 	/**
-	 * FIXME
-	 * @param chart
+	 * Removes from cache all loaded gradients, needed during the resize of chart.
+	 * 
+	 * @param chart chart instance on which removes all loaded gradients
 	 */
-	public static void resetGradients(AbstractChart<?, ?> chart) {
+	static void resetGradients(AbstractChart<?, ?> chart) {
 		GRADIENTS.remove(chart.getId());
+	}
+
+	/**
+	 * Clears the cache of loaded patterns and gradients, needed when a chart is destroy.
+	 * 
+	 * @param chart chart instance on which removes all loaded objects.
+	 */
+	static void clear(AbstractChart<?, ?> chart) {
+		PATTERNS.remove(chart.getId());
+		GRADIENTS.remove(chart.getId());
+
 	}
 
 	/**
@@ -97,9 +122,11 @@ public final class CanvasObjectFactory {
 	 * 
 	 * @param chart chart instance which must provide a canvas instance and its context
 	 * @param gradient gradient instance created at configuration level
+	 * @param datasetIndex dataset index
+	 * @param index index of gradient related to index of dataset item of whole dataset
 	 * @return a GWT canvas gradient
 	 */
-	public static CanvasGradient createGradient(AbstractChart<?, ?> chart, Gradient gradient) {
+	static CanvasGradient createGradient(AbstractChart<?, ?> chart, Gradient gradient, int datasetIndex, int index) {
 		// checks if the gradient is already created
 		final Map<Integer, CanvasGradient> gradientsMap;
 		// checks if the gradient is already created
@@ -110,6 +137,8 @@ public final class CanvasObjectFactory {
 				return gradientsMap.get(gradient.getId());
 			}
 		} else {
+			// new chart!
+			// creates the cache for the chart
 			gradientsMap = new HashMap<>();
 			GRADIENTS.put(chart.getId(), gradientsMap);
 		}
@@ -123,7 +152,7 @@ public final class CanvasObjectFactory {
 				result = createLinearGradient(chart, gradient);
 			} else {
 				// creates a radial
-				result = createRadialGradient(chart, gradient);
+				result = createRadialGradient(chart, gradient, datasetIndex, index);
 			}
 			// checks if result is consistent
 			if (result != null) {
@@ -258,9 +287,11 @@ public final class CanvasObjectFactory {
 	 * 
 	 * @param chart chart instance which must provide a canvas instance and its context
 	 * @param gradient gradient instance created at configuration level
+	 * @param datasetIndex dataset index
+	 * @param index index of gradient related to index of dataset item of whole dataset
 	 * @return a GWT radial canvas gradient
 	 */
-	private static CanvasGradient createRadialGradient(AbstractChart<?, ?> chart, Gradient gradient) {
+	private static CanvasGradient createRadialGradient(AbstractChart<?, ?> chart, Gradient gradient, int datasetIndex, int index) {
 		// gets canvas and context 2d
 		Canvas canvas = chart.getCanvas();
 		Context2d context = canvas.getContext2d();
@@ -280,29 +311,79 @@ public final class CanvasObjectFactory {
 		// these are the coordinates of center and radius of scope
 		final double centerX;
 		final double centerY;
-		final double radius;
+		final double radius0;
+		final double radius1;
 		// depending of scope (canvas or chart area)
 		if (GradientScope.canvas.equals(gradient.getScope())) {
+			// gets chart node
+			ChartNode node = chart.getNode();
 			// CANVAS
 			// the center of canvas has the following coordinates:
 			// X - the width divided by 2
 			// Y - the height divided by 2
 			centerX = (canvas.getOffsetWidth() / 2);
 			centerY = (canvas.getOffsetHeight() / 2);
-			// radius - if max value between width and height, divided by 2
-			radius = (Math.max(canvas.getOffsetWidth(), canvas.getOffsetHeight()) / 2);
+			// checks if the radius is already calculated by CHART.JS
+			// depending on chart type
+			if (node.getInnerRadius() != UndefinedValues.DOUBLE && node.getOuterRadius() != UndefinedValues.DOUBLE) {
+				// gets meta data
+				DatasetMetaItem metaItem = chart.getDatasetMeta(datasetIndex);
+				DatasetItem item = metaItem.getDatasets().get(index);
+				// checks if chart is circular or not
+				if (item.getView().getInnerRadius() != UndefinedValues.DOUBLE && item.getView().getOuterRadius() != UndefinedValues.DOUBLE) {
+					// uses the inner radius
+					radius0 = item.getView().getInnerRadius();
+					// uses the outer radius
+					radius1 = item.getView().getOuterRadius();
+				} else {
+					// uses the inner radius
+					radius0 = node.getInnerRadius();
+					// uses the outer radius
+					radius1 = node.getOuterRadius();
+				}
+			} else {
+				// by default is the center of chart area
+				radius0 = 0;
+				// radius - if max value between width and height, divided by 2
+				radius1 = (Math.max(canvas.getOffsetWidth(), canvas.getOffsetHeight()) / 2);
+			}
 		} else {
+			// gets chart node
+			ChartNode node = chart.getNode();
 			// gets chart area
-			ChartAreaNode chartArea = chart.getNode().getChartArea();
+			ChartAreaNode chartArea = node.getChartArea();
 			// CHART
 			// the center of canvas has the following coordinates:
 			// X - the difference between right and left, divided by 2 plus left
 			// Y - the difference between bottom and top, divided by 2 plus top
 			centerX = ((chartArea.getRight() - chartArea.getLeft()) / 2) + chartArea.getLeft();
 			centerY = ((chartArea.getBottom() - chartArea.getTop()) / 2) + chartArea.getTop();
-			// radius - if max value between the difference between right and left and the difference between bottom and top,
-			// divided by 2
-			radius = (Math.max((chartArea.getRight() - chartArea.getLeft()), (chartArea.getBottom() - chartArea.getTop())) / 2);
+			// checks if the radius is already calculated by CHART.JS
+			// depending on chart type
+			if (node.getInnerRadius() != UndefinedValues.DOUBLE && node.getOuterRadius() != UndefinedValues.DOUBLE) {
+				// gets meta data
+				DatasetMetaItem metaItem = chart.getDatasetMeta(datasetIndex);
+				DatasetItem item = metaItem.getDatasets().get(index);
+				// checks if chart is circular or not
+				if (item.getView().getInnerRadius() != UndefinedValues.DOUBLE && item.getView().getOuterRadius() != UndefinedValues.DOUBLE) {
+					// uses the inner radius
+					radius0 = item.getView().getInnerRadius();
+					// uses the outer radius
+					radius1 = item.getView().getOuterRadius();
+				} else {
+					// uses the inner radius
+					radius0 = node.getInnerRadius();
+					// uses the outer radius
+					radius1 = node.getOuterRadius();
+				}
+			} else {
+				// by default is the center of chart area
+				radius0 = 0;
+				// radius - if max value between the difference between right and left and the difference between bottom and
+				// top,
+				// divided by 2
+				radius1 = (Math.max((chartArea.getRight() - chartArea.getLeft()), (chartArea.getBottom() - chartArea.getTop())) / 2);
+			}
 		}
 		// checks the orientation requires by gradient
 		// and then calculates the coordinates instances of gradient
@@ -310,18 +391,18 @@ public final class CanvasObjectFactory {
 			// from center to border of scope (canvas or chart area) O-->
 			x0 = centerX;
 			y0 = centerY;
-			r0 = 0;
+			r0 = radius0;
 			x1 = centerX;
 			y1 = centerY;
-			r1 = radius;
+			r1 = radius1;
 		} else if (GradientOrientation.outIn.equals(gradient.getOrientation())) {
 			// from border of scope to center (canvas or chart area) -->O
 			x0 = centerX;
 			y0 = centerY;
-			r0 = radius;
+			r0 = radius1;
 			x1 = centerX;
 			y1 = centerY;
-			r1 = 0;
+			r1 = radius0;
 		} else {
 			// if here, the scope is invalid for a linear gradient
 			// then exception

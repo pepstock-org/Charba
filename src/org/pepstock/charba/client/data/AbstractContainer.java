@@ -13,11 +13,14 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.colors;
+package org.pepstock.charba.client.data;
 
 import java.util.Collections;
 import java.util.List;
 
+import org.pepstock.charba.client.colors.CanvasObject;
+import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
@@ -40,7 +43,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  * @see PatternsContainer
  * @see GradientsContainer
  */
-abstract class CanvasObjects<T extends CanvasObject> extends NativeObjectContainer {
+abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectContainer {
 
 	// counter to know how many objects are stores. Needs to provide
 	// the is empty method result.
@@ -52,7 +55,7 @@ abstract class CanvasObjects<T extends CanvasObject> extends NativeObjectContain
 	/**
 	 * Creates the object by an empty native java script object.
 	 */
-	public CanvasObjects() {
+	public AbstractContainer() {
 		super();
 	}
 

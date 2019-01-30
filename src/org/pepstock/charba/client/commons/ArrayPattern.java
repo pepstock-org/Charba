@@ -64,30 +64,6 @@ public final class ArrayPattern extends Array {
 	}
 
 	/**
-	 * Creates a java script array of images starting from list of images.
-	 * 
-	 * @param values list of images to load into new java script array.
-	 * @return new array instance of images.
-	 */
-	// FIXME
-//	@JsOverlay
-//	public static ArrayPattern of(Pattern... values) {
-//		// creates the array
-//		ArrayPattern result = new ArrayPattern();
-//		// checks if list is null
-//		if (values == null) {
-//			return result;
-//		}
-//		// scans all items of list
-//		for (Pattern value : values) {
-//			// adds elements
-//			result.push(value.getPattern());
-//		}
-//		// returns the array
-//		return result;
-//	}
-
-	/**
 	 * Returns the index of the last occurrence of the specified element in this array, or -1 if this array does not contain the
 	 * element.
 	 * 

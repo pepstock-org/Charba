@@ -40,11 +40,12 @@ public final class ArrayObject extends Array {
 	public static native ArrayObject of(NativeObject... items);
 
 	/**
-	 * Creates a java script array of objects starting from an array of native object containers.
+	 * Creates a java script array of objects starting from a native object containers and
+	 * the array will have ONE 1 element.
 	 * 
-	 * @param items list of objects to load into new java script array.
+	 * @param item list of objects to load into new java script array.
 	 * @param <E> type of native object containers
-	 * @return new array instance of objects.
+	 * @return new array instance of ONE 1 element.
 	 */
 	@JsOverlay
 	public static <E extends NativeObjectContainer> ArrayObject of(E item) {
