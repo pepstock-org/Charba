@@ -18,6 +18,7 @@ package org.pepstock.charba.client.impl.charts;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.Color;
+import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.data.DoughnutDataset;
@@ -40,7 +41,7 @@ public class MeterDataset extends DoughnutDataset {
 	// exception string message for setting data
 	private static final String INVALID_SET_DATA_CALL = "setData method is not invokable by a Meter chart. Use setValue method.";
 	// exception string message for setting pattern
-	private static final String INVALID_PATTERN_CALL = "Pattern is not supported.";
+	private static final String INVALID_PATTERN_CALL = "Patterns and gradients are not supported.";
 
 	/**
 	 * Default value color
@@ -84,7 +85,9 @@ public class MeterDataset extends DoughnutDataset {
 		super.setBackgroundColor(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.HovingDataset#setBackgroundColor(org.pepstock.charba.client.data.Pattern[])
 	 */
 	@Override
@@ -92,7 +95,49 @@ public class MeterDataset extends DoughnutDataset {
 		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HovingDataset#setBackgroundColor(org.pepstock.charba.client.colors.Gradient[])
+	 */
+	@Override
+	public void setBackgroundColor(Gradient... backgroundColor) {
+		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HovingDataset#setBorderColor(org.pepstock.charba.client.colors.Gradient[])
+	 */
+	@Override
+	public void setBorderColor(Gradient... borderColor) {
+		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBackgroundColor(org.pepstock.charba.client.colors.Gradient[])
+	 */
+	@Override
+	public void setHoverBackgroundColor(Gradient... colors) {
+		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBorderColor(org.pepstock.charba.client.colors.Gradient[])
+	 */
+	@Override
+	public void setHoverBorderColor(Gradient... colors) {
+		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBackgroundColor(org.pepstock.charba.client.data.Pattern[])
 	 */
 	@Override
