@@ -13,7 +13,7 @@ sudo: false
 # cache the Ivy cache directory to avoid download dependencies on each build
 cache:
    directories:
-   - ~/.ivy2
+   - ~/.ant
 # specify the JDKs 
 jdk:
    - oraclejdk8
@@ -31,7 +31,7 @@ before_script: sh ./scripts/before_script.sh
 # run the ant main target
 script: ant -v build-bin
 # list the content of Ivy cache dir AFTER
-after_script: ls -R ~/.ivy2 
+after_script: ls -R ~/.ant 
 #
 # DEPLOY phase
 #
