@@ -27,10 +27,7 @@ branches:
 # download Ivy, if needed
 before_install: ant ivyInit
 # list the content of Ivy cache dir BEFORE 
-before_script:
-   - echo "Home dir is: $HOME"
-   - ls -lah *ivy* 
-   - ls -R ~/.ivy2
+before_script: ./scripts/before_script.sh
 # run the ant main target
 script: ant build-bin
 # list the content of Ivy cache dir AFTER
