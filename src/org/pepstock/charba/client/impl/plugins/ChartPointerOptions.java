@@ -95,23 +95,23 @@ public final class ChartPointerOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Sets the cursor type when the cursor is out of the dataset item.
+	 * Sets the cursor type before changing it. Needed to set it back.
 	 * 
 	 * @param cursor cursor type
 	 * @see com.google.gwt.dom.client.Style.Cursor
 	 */
-	public void setCursorDefault(Cursor cursor) {
+	void setCurrentCursor(Cursor cursor) {
 		setValue(Property.cursorDefault, cursor.name());
 	}
 
 	/**
-	 * Returns the cursor type when the cursor is out of the dataset item.
+	 * Returns the cursor type before changing it. Needed to set it back.
 	 * 
 	 * @return cursor type
 	 * @see com.google.gwt.dom.client.Style.Cursor
 	 */
-	public Cursor getCursorDefault() {
-		String name = getValue(Property.cursorDefault, defaultsOptions.getCursorDefaultAsString());
+	Cursor getCurrentCursor() {
+		String name = getValue(Property.cursorDefault, Cursor.DEFAULT.name());
 		return Cursor.valueOf(name);
 	}
 

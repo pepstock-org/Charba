@@ -23,6 +23,8 @@ import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
+import com.google.gwt.dom.client.Style.Cursor;
+
 /**
  * This plugin is changing the cursor when mouse over on dataset on canvas if a dataset selection handler has been.
  * 
@@ -32,7 +34,7 @@ import org.pepstock.charba.client.plugins.AbstractPlugin;
 public final class ChartPointer extends AbstractPlugin {
 	// factory to create options for plugin
 	private final ChartPointerOptionsFactory factory = new ChartPointerOptionsFactory();
-	// cache to store options in order do not lod every time the options
+	// cache to store options in order do not load every time the options
 	private static final Map<String, ChartPointerOptions> OPTIONS = new HashMap<>();
 
 	/**
@@ -49,15 +51,12 @@ public final class ChartPointer extends AbstractPlugin {
 	public String getId() {
 		return ID;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterEvent(org.pepstock.charba.client. AbstractChart,
-	 * org.pepstock.charba.client.events.ChartNativeEvent)
+	
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
-	public void onAfterEvent(AbstractChart<?, ?> chart, ChartNativeEvent event) {
+	public void onAfterInit(AbstractChart<?, ?> chart) {
 		// checks if chart has got any dataset selection handler
 		if (chart.getOptions().hasDatasetSelectionHandlers()) {
 			// creates options instance
@@ -77,13 +76,38 @@ public final class ChartPointer extends AbstractPlugin {
 				// if here, options were already cached
 				pOptions = OPTIONS.get(chart.getId());
 			}
+			// scans all cursor to check if any cursor is already set
+			// needs to scan them because with valueOf there is an exception
+			// if the value does not match any element of enumeration
+			for (Cursor cursor : Cursor.values()) {
+				if (cursor.name().equalsIgnoreCase(chart.getElement().getStyle().getCursor())) {
+					// stores the current cursor
+					pOptions.setCurrentCursor(Cursor.valueOf(chart.getElement().getStyle().getCursor()));
+				}
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterEvent(org.pepstock.charba.client. AbstractChart,
+	 * org.pepstock.charba.client.events.ChartNativeEvent)
+	 */
+	@Override
+	public void onAfterEvent(AbstractChart<?, ?> chart, ChartNativeEvent event) {
+		// checks if chart has got any dataset selection handler
+		if (chart.getOptions().hasDatasetSelectionHandlers()) {
+			// gets options instance
+			ChartPointerOptions pOptions = OPTIONS.get(chart.getId());
 			// if yes, asks the dataset item by event
 			DatasetItem item = chart.getElementAtEvent(event);
 			// checks item
 			if (item == null) {
 				// if null, sets the default cursor
-				chart.getElement().getStyle().setCursor(pOptions.getCursorDefault());
+				chart.getElement().getStyle().setCursor(pOptions.getCurrentCursor());
 			} else {
+				
 				// otherwise sets the pointer
 				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
 			}
