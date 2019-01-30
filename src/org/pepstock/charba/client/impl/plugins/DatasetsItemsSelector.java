@@ -24,7 +24,6 @@ import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
-import org.pepstock.charba.client.plugins.InvalidPluginIdException;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ImageElement;
@@ -146,17 +145,11 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		// checks if the plugin has been invoked for LINE or BAR charts
 		if (chart.getType().equals(ChartType.line) || chart.getType().equals(ChartType.bar)) {
 			DatasetsItemsSelectorOptions pOptions = null;
-			try {
-				// creates the plugin options using the java script object
-				// passing also the default color set at constructor.
-				if (chart.getOptions().getPlugins().hasOptions(ID)) {
-					pOptions = chart.getOptions().getPlugins().getOptions(ID, factory);
-				} else {
-					pOptions = new DatasetsItemsSelectorOptions();
-				}
-			} catch (InvalidPluginIdException e) {
-				// ignore message
-				// and use the default
+			// creates the plugin options using the java script object
+			// passing also the default color set at constructor.
+			if (chart.getOptions().getPlugins().hasOptions(ID)) {
+				pOptions = chart.getOptions().getPlugins().getOptions(ID, factory);
+			} else {
 				pOptions = new DatasetsItemsSelectorOptions();
 			}
 			// checks if chart has got already an handler

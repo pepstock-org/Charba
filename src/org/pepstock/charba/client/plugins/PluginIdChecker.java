@@ -60,21 +60,20 @@ public final class PluginIdChecker {
 	 * </ul>
 	 * 
 	 * @param id plugin id to be checked.
-	 * @throws InvalidPluginIdException if the plugin id is not compliant
 	 */
-	public static void check(String id) throws InvalidPluginIdException {
+	public static void check(String id) {
 		// checks if is null
 		if (id == null) {
-			throw new InvalidPluginIdException(INVALID_PLUGIN__ID_NULL);
+			throw new IllegalArgumentException(INVALID_PLUGIN__ID_NULL);
 		} else if (id.charAt(0) == DOT || id.charAt(0) == UNDERSCORE) {
 			// checks if is starting with DOT or underscore
-			throw new InvalidPluginIdException(buildMessage(id, INVALID_PLUGIN__ID_INVALID_FIRST_CHAR));
+			throw new IllegalArgumentException(buildMessage(id, INVALID_PLUGIN__ID_INVALID_FIRST_CHAR));
 		} else if (!UriUtils.isSafeUri(id)) {
 			// checks if is not safe URL
-			throw new InvalidPluginIdException(buildMessage(id, INVALID_PLUGIN__ID_NOT_URL_SAFE));
+			throw new IllegalArgumentException(buildMessage(id, INVALID_PLUGIN__ID_NOT_URL_SAFE));
 		} else if (!id.toLowerCase(Locale.getDefault()).equals(id)) {
 			// checks if contains uppercase letters
-			throw new InvalidPluginIdException(buildMessage(id, INVALID_PLUGIN__ID_NOT_LOWERCASE_UPPERCASE));
+			throw new IllegalArgumentException(buildMessage(id, INVALID_PLUGIN__ID_NOT_LOWERCASE_UPPERCASE));
 		}
 	}
 
@@ -83,9 +82,8 @@ public final class PluginIdChecker {
 	 * 
 	 * @param id the plugin id as string
 	 * @return a key by the plugin id as string
-	 * @throws InvalidPluginIdException if the plugin id is not compliant
 	 */
-	public static Key key(String id) throws InvalidPluginIdException {
+	public static Key key(String id) {
 		// checks
 		check(id);
 		return new StandardKey(id);

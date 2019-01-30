@@ -18,7 +18,6 @@ package org.pepstock.charba.client.configuration;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.options.ExtendedOptions;
-import org.pepstock.charba.client.plugins.InvalidPluginIdException;
 
 /**
  * Definitions about plugins options. This is used to configure plugins (mainly the global ones).<br>
@@ -46,9 +45,8 @@ public final class Plugins {
 	 * 
 	 * @param pluginId plugin id.
 	 * @param enabled <code>false</code> disable a global plugin.
-	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public void setEnabled(String pluginId, boolean enabled) throws InvalidPluginIdException {
+	public void setEnabled(String pluginId, boolean enabled) {
 		options.getPlugins().setEnabled(pluginId, enabled);
 	}
 
@@ -57,9 +55,8 @@ public final class Plugins {
 	 * 
 	 * @param pluginId plugin id.
 	 * @return <code>false</code> if a global plugin is not enabled otherwise <code>true</code>.
-	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public boolean isEnabled(String pluginId) throws InvalidPluginIdException {
+	public boolean isEnabled(String pluginId) {
 		return options.getPlugins().isEnabled(pluginId);
 	}
 
@@ -70,9 +67,8 @@ public final class Plugins {
 	 * @param object java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if
 	 *            exist.
 	 * @param <T> type of native object container to store
-	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public <T extends NativeObjectContainer> void setOptions(String pluginId, T object) throws InvalidPluginIdException {
+	public <T extends NativeObjectContainer> void setOptions(String pluginId, T object) {
 		options.getPlugins().setOptions(pluginId, object);
 	}
 
@@ -81,9 +77,8 @@ public final class Plugins {
 	 * 
 	 * @param pluginId plugin id.
 	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
-	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public boolean hasOptions(String pluginId) throws InvalidPluginIdException {
+	public boolean hasOptions(String pluginId) {
 		return options.getPlugins().hasOptions(pluginId);
 	}
 
@@ -94,9 +89,8 @@ public final class Plugins {
 	 * @param factory factory instance to create a native object container.
 	 * @param <T> type of native object container to return
 	 * @return java script object used to configure the plugin or <code>null</code> if not exist.
-	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) throws InvalidPluginIdException {
+	public <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) {
 		// returns the configuration by plugin id.
 		return options.getPlugins().getOptions(pluginId, factory);
 	}

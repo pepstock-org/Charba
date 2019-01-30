@@ -19,7 +19,6 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
-import org.pepstock.charba.client.plugins.InvalidPluginIdException;
 
 import com.google.gwt.canvas.dom.client.Context2d;
 
@@ -106,18 +105,11 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	@Override
 	public boolean onBeforeDraw(AbstractChart<?, ?> chart, double easing) {
 		ChartBackgroundColorOptions bgOptions = null;
-		try {
-			// creates the plugin options using the java script object
-			// passing also the default color set at constructor.
-			if (chart.getOptions().getPlugins().hasOptions(ID)) {
-				bgOptions = chart.getOptions().getPlugins().getOptions(ID, factory);
-			} else {
-				bgOptions = new ChartBackgroundColorOptions();
-				bgOptions.setBackgroundColor(color);
-			}
-		} catch (InvalidPluginIdException e) {
-			// ignore message
-			// and use the default
+		// creates the plugin options using the java script object
+		// passing also the default color set at constructor.
+		if (chart.getOptions().getPlugins().hasOptions(ID)) {
+			bgOptions = chart.getOptions().getPlugins().getOptions(ID, factory);
+		} else {
 			bgOptions = new ChartBackgroundColorOptions();
 			bgOptions.setBackgroundColor(color);
 		}

@@ -26,7 +26,6 @@ import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ConfigurationLoader;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.plugins.InvalidPluginIdException;
 
 /**
  * CHART.JS entity object to configure the data options of a chart.<br>
@@ -214,14 +213,12 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 				// there are some patterns to load
 				// checks if the plugin to apply pattern is already loaded
 				if (!chart.getPlugins().has(CanvasObjectHandler.ID)) {
-					try {
-						// adds plugin
-						chart.getPlugins().add(new CanvasObjectHandler());
-					} catch (InvalidPluginIdException e) {
-						// do nothing
-					}
+					// adds plugin
+					chart.getPlugins().add(new CanvasObjectHandler());
 				}
-				// nothing to do
+				// if here,
+				// plugin is already added to chart
+				// it shouldn't happen
 				return;
 			}
 		}

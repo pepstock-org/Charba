@@ -55,9 +55,8 @@ public final class GlobalPlugins {
 	 * @param plugin plugin instance
 	 * @return <code>true</code> if registered, otherwise <code>false</code> if the plugin is already registered with the plugin
 	 *         id of plugin instance.
-	 * @throws InvalidPluginIdException if the plugin id is not correct.
 	 */
-	public boolean register(Plugin plugin) throws InvalidPluginIdException {
+	public boolean register(Plugin plugin) {
 		// checks the plugin id
 		PluginIdChecker.check(plugin.getId());
 		// checks if ID is already registered
@@ -77,9 +76,8 @@ public final class GlobalPlugins {
 	 * 
 	 * @param pluginId plugin instance
 	 * @return <code>true</code> if unregistered, otherwise <code>false</code> if the plugin is not a custom one.
-	 * @throws InvalidPluginIdException if the plugin id is not correct.
 	 */
-	public boolean unregister(String pluginId) throws InvalidPluginIdException {
+	public boolean unregister(String pluginId) {
 		// checks the plugin id
 		PluginIdChecker.check(pluginId);
 		// checks if ID is already registered on custom one
@@ -135,14 +133,10 @@ public final class GlobalPlugins {
 	public void onChartConfigure(Configuration config, AbstractChart<?, ?> chart) {
 		// scans all plugins
 		for (Entry<String, GlobalPlugin> entry : pluginIds.entrySet()) {
-			try {
-				// checks if plugin is enabled
-				if (chart.getOptions().getPlugins().isEnabled(entry.getKey())) {
-					// calls on configure method
-					entry.getValue().onConfigure(chart);
-				}
-			} catch (InvalidPluginIdException e) {
-				// do nothing
+			// checks if plugin is enabled
+			if (chart.getOptions().getPlugins().isEnabled(entry.getKey())) {
+				// calls on configure method
+				entry.getValue().onConfigure(chart);
 			}
 		}
 	}

@@ -18,7 +18,6 @@ package org.pepstock.charba.client.impl.plugins;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.charba.client.plugins.InvalidPluginIdException;
 
 /**
  * Factory to get the options (form chart or from default global ones) related to dataset selection plugin.
@@ -40,18 +39,12 @@ public final class DatasetsItemsSelectorOptionsFactory implements NativeObjectCo
 	public DatasetsItemsSelectorOptions create(NativeObject nativeObject) {
 		// defaults global options instance
 		DatasetsItemsSelectorDefaultsOptions defaultsOptions = null;
-		try {
-			// checks if the default global options has been added for the plugin
-			if (Defaults.get().getGlobal().getPlugins().hasOptions(DatasetsItemsSelector.ID)) {
-				// reads the default default global options
-				defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(DatasetsItemsSelector.ID, defaultsFactory);
-			} else {
-				// if here, no default global option
-				// then the plugin will use the static defaults
-				defaultsOptions = new DatasetsItemsSelectorDefaultsOptions(null);
-			}
-		} catch (InvalidPluginIdException e) {
-			// creates an empty default global option
+		// checks if the default global options has been added for the plugin
+		if (Defaults.get().getGlobal().getPlugins().hasOptions(DatasetsItemsSelector.ID)) {
+			// reads the default default global options
+			defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(DatasetsItemsSelector.ID, defaultsFactory);
+		} else {
+			// if here, no default global option
 			// then the plugin will use the static defaults
 			defaultsOptions = new DatasetsItemsSelectorDefaultsOptions(null);
 		}

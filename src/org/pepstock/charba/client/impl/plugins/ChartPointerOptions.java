@@ -20,7 +20,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.impl.plugins.ChartPointerOptionsFactory.ChartPointerDefaultsOptionsFactory;
-import org.pepstock.charba.client.plugins.InvalidPluginIdException;
 
 import com.google.gwt.dom.client.Style.Cursor;
 
@@ -52,18 +51,12 @@ public final class ChartPointerOptions extends NativeObjectContainer {
 	public ChartPointerOptions() {
 		// creates an empty object
 		super(null);
-		try {
-			// checks if the default global options has been added for the plugin
-			if (Defaults.get().getGlobal().getPlugins().hasOptions(ChartPointer.ID)) {
-				// reads the default default global options
-				defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(ChartPointer.ID, defaultsFactory);
-			} else {
-				// if here, no default global option
-				// then the plugin will use the static defaults
-				defaultsOptions = new ChartPointerDefaultsOptions(null);
-			}
-		} catch (InvalidPluginIdException e) {
-			// creates an empty default global option
+		// checks if the default global options has been added for the plugin
+		if (Defaults.get().getGlobal().getPlugins().hasOptions(ChartPointer.ID)) {
+			// reads the default default global options
+			defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(ChartPointer.ID, defaultsFactory);
+		} else {
+			// if here, no default global option
 			// then the plugin will use the static defaults
 			defaultsOptions = new ChartPointerDefaultsOptions(null);
 		}

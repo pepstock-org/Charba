@@ -51,9 +51,8 @@ public final class Plugins implements ConfigurationElement {
 	 * If the chart is already initialized, to get this update the chart must be drawn again.
 	 * 
 	 * @param plugin plugin instance
-	 * @throws InvalidPluginIdException if the plugin id is not correct.
 	 */
-	public void add(Plugin plugin) throws InvalidPluginIdException {
+	public void add(Plugin plugin) {
 		// checks the plugin id
 		PluginIdChecker.check(plugin.getId());
 		// creates a java script object, wrapper of the plugin

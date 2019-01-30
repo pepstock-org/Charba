@@ -22,7 +22,6 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
-import org.pepstock.charba.client.plugins.InvalidPluginIdException;
 
 /**
  * This plugin is changing the cursor when mouse over on dataset on canvas if a dataset selection handler has been.
@@ -66,17 +65,11 @@ public final class ChartPointer extends AbstractPlugin {
 			// checks if is cached
 			if (!OPTIONS.containsKey(chart.getId())) {
 				// if not, loads and cache
-				try {
-					// creates the plugin options using the java script object
-					// passing also the default color set at constructor.
-					if (chart.getOptions().getPlugins().hasOptions(ID)) {
-						pOptions = chart.getOptions().getPlugins().getOptions(ID, factory);
-					} else {
-						pOptions = new ChartPointerOptions();
-					}
-				} catch (InvalidPluginIdException e) {
-					// ignore message
-					// and use the default
+				// creates the plugin options using the java script object
+				// passing also the default color set at constructor.
+				if (chart.getOptions().getPlugins().hasOptions(ID)) {
+					pOptions = chart.getOptions().getPlugins().getOptions(ID, factory);
+				} else {
 					pOptions = new ChartPointerOptions();
 				}
 				OPTIONS.put(chart.getId(), pOptions);
