@@ -13,7 +13,7 @@ sudo: false
 # cache the Ivy cache directory to avoid download dependencies on each build
 cache:
    directories:
-   - $HOME/.ivy2
+   - ~/.ivy2
 # specify the JDKs 
 jdk:
    - oraclejdk8
