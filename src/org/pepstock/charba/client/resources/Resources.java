@@ -37,7 +37,7 @@ public interface Resources extends ClientBundle {
 	 * @return chart.js code
 	 */
 	@Source("js/chart.bundle.min.js")
-	TextResource chartJsSource();
+	TextResource chartJs();
 
 	/**
 	 * This java script with a set of static methods used as utility and needed to improve JSINTEROP adoption for CHARBA,
