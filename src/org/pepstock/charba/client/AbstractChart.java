@@ -185,45 +185,6 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.user.client.ui.UIObject#setHeight(java.lang.String)
-	 */
-	@Override
-	public void setHeight(String height) {
-		super.setHeight(height);
-		// disable the maintain aspect ratio of CHART.JS
-		// because it's setting the fixed dimension
-		getOptions().setMaintainAspectRatio(false);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.user.client.ui.UIObject#setPixelSize(int, int)
-	 */
-	@Override
-	public void setPixelSize(int width, int height) {
-		super.setPixelSize(width, height);
-		// disable the maintain aspect ratio of CHART.JS
-		// because it's setting the fixed dimension
-		getOptions().setMaintainAspectRatio(false);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.google.gwt.user.client.ui.UIObject#setSize(java.lang.String, java.lang.String)
-	 */
-	@Override
-	public void setSize(String width, String height) {
-		super.setSize(width, height);
-		// disable the maintain aspect ratio of CHART.JS
-		// because it's setting the fixed dimension
-		getOptions().setMaintainAspectRatio(false);
-	}
-
 	/**
 	 * Returns <code>true</code> if CHART.JS chart has been initialized, otherwise <code>false</code>.
 	 * 
