@@ -17,12 +17,14 @@ package org.pepstock.charba.client.options;
 
 import java.util.List;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.plugins.PluginIdChecker;
 
 /**
@@ -55,14 +57,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * @param enabled <code>false</code> disable a global plugin.
 	 */
 	public void setEnabled(String pluginId, boolean enabled) {
-		// if null, removes the configuration
-		if (enabled) {
-			// removes configuration if exists
-			remove(PluginIdChecker.key(pluginId));
-		} else {
-			// stores configuration
-			setValue(PluginIdChecker.key(pluginId), false);
-		}
+		setValue(PluginIdChecker.key(pluginId), enabled);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -74,7 +69,19 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * @return <code>false</code> if a global plugin is not enabled otherwise <code>true</code>.
 	 */
 	public boolean isEnabled(String pluginId) {
-		return getValue(PluginIdChecker.key(pluginId), true);
+		// creates the key to avoid many calls to plugin checker
+		Key pluginIdKey = PluginIdChecker.key(pluginId);
+		// gets the type of property
+		ObjectType type = type(pluginIdKey);
+		// if boolean, checks if enable
+		if (ObjectType.Boolean.equals(type)) {
+			// if the property is not found, checks if the plugin was enable to all charts.
+			return getValue(pluginIdKey, Defaults.get().getPlugins().isEnabledAllCharts(pluginId));
+		}
+		// if here, the property can exist or not.
+		// if exist, means that the options have been added
+		// and then it enables the plugin
+		return has(pluginIdKey);
 	}
 
 	/**

@@ -35,7 +35,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	static final String DEFAULT_BACKGROUND_COLOR = "white";
 
 	/**
-	 * Plugin ID
+	 * Plugin ID {@value ID}
 	 */
 	public static final String ID = "backgroundcolor";
 	// factory to create options (native object container)

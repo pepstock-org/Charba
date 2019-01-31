@@ -25,7 +25,7 @@ package org.pepstock.charba.client.colors;
 public final class Color implements IsColor {
 
 	/**
-	 * Default transparency is 1 (no transparency).
+	 * Default transparency is {@value DEFAULT_ALPHA} (no transparency).
 	 */
 	public static final double DEFAULT_ALPHA = 1F;
 

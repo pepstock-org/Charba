@@ -27,7 +27,7 @@ import org.pepstock.charba.client.controllers.ControllerType;
 public final class MeterChart extends BaseMeterChart<MeterOptions, MeterDataset> {
 
 	/**
-	 * Name of chart type for meter
+	 * Name of chart type {@value TYPE} for meter
 	 */
 	public static final String TYPE = "meter";
 	// static reference to controller type

@@ -42,7 +42,7 @@ import com.google.gwt.user.client.ui.Image;
 public final class DatasetsItemsSelector extends AbstractPlugin {
 
 	/**
-	 * Plugin ID
+	 * Plugin ID {@value ID}
 	 */
 	public static final String ID = "datasetsitemsselector";
 	// maps to maintain the selectors handler for every chart

@@ -54,12 +54,12 @@ public class MeterDataset extends DoughnutDataset {
 	public static final IsColor DEFAULT_EMPTY_VALUE_COLOR = new Color(234, 234, 234);
 
 	/**
-	 * Default maximum value.
+	 * Default maximum value is {@value DEFAULT_MAXIMUM_VALUE}
 	 */
 	public static final double DEFAULT_MAXIMUM_VALUE = 100D;
 
 	/**
-	 * Minimum value.
+	 * Minimum value is {@value MINIMUM_VALUE}
 	 */
 	public static final double MINIMUM_VALUE = 0D;
 

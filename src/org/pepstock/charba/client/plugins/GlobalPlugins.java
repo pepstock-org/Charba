@@ -40,7 +40,7 @@ public final class GlobalPlugins {
 	// native object of plugins
 	private final NativePlugins plugins;
 	// set of embedded plugin ids to disable for charts
-	private final Set<String> pluginsToBeDisable = new HashSet<>();
+	private final Set<String> pluginsToBeDisabled = new HashSet<>();
 
 	/**
 	 * Builds the object by the native object which maps <code>chart.plugins</code>
@@ -125,23 +125,45 @@ public final class GlobalPlugins {
 		}
 		return pluginsIds;
 	}
-	
+
 	/**
-	 * FIXME
-	 * @param pluginId
+	 * Setting <code>false</code> for plugin id, the global plugin is disable to all charts and to activate the plugin on a
+	 * specific chart, is it enough to enable the plugin by options.
+	 * 
+	 * @param pluginId plug id to enable
+	 * @param enable <code>true</code> to enable to all charts, otherwise <code>false</code>.
 	 */
-	public void setEnableAllCharts(String pluginId, boolean enable) {
+	public void setEnabledAllCharts(String pluginId, boolean enable) {
+		// gets all global registered plugin
 		Set<String> currentIds = getIds();
+		// scans all
 		for (String id : currentIds) {
+			// if already registered plugin id is the
+			// same of the argument
 			if (id.equalsIgnoreCase(pluginId)) {
+				// if the argument is to enable
 				if (enable) {
-					pluginsToBeDisable.remove(pluginId);
+					// removes the plugin id to the cache to maintain
+					// plugin id to disable to the charts
+					pluginsToBeDisabled.remove(pluginId);
 				} else {
-					pluginsToBeDisable.add(pluginId);
+					// adds to the set and it will disable to all charts
+					pluginsToBeDisabled.add(pluginId);
 				}
+				// finish!
 				return;
 			}
 		}
+	}
+
+	/**
+	 * Returns <code>true</code> if the plugin is enabled to all charts, otherwise <code>false</code>.
+	 * 
+	 * @param pluginId plug id to check
+	 * @return <code>true</code> if the plugin is enabled to all charts, otherwise <code>false</code>.
+	 */
+	public boolean isEnabledAllCharts(String pluginId) {
+		return !pluginsToBeDisabled.contains(pluginId);
 	}
 
 	/**
@@ -152,8 +174,10 @@ public final class GlobalPlugins {
 	 */
 	public void onChartConfigure(Configuration config, AbstractChart<?, ?> chart) {
 		// sets into chart all global plugins to be disable
-		for (String id: pluginsToBeDisable) {
+		for (String id : pluginsToBeDisabled) {
+			// if the plugin does not have any options or is not disable by options
 			if (!chart.getOptions().getPlugins().hasEnabled(id)) {
+				// disables the plugin at chart level
 				chart.getOptions().getPlugins().setEnabled(id, false);
 			}
 		}

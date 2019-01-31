@@ -29,6 +29,9 @@ import org.pepstock.charba.client.ext.Extensions;
  */
 public final class LabelsPlugin {
 
+	/**
+	 * Plugin ID {@value ID}
+	 */
 	public static final String ID = "labels";
 	
 	private static final LabelsOptionsFactory FACTORY = new LabelsOptionsFactory();
@@ -47,7 +50,7 @@ public final class LabelsPlugin {
 	public static void enable(boolean enableToAllCharts) {
 		Injector.ensureInjected();
 		Injector.ensureInjected(Extensions.INSTANCE.labelsPlugin());
-		Defaults.get().getPlugins().setEnableAllCharts(ID, enableToAllCharts);
+		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
 	}
 
 	public static void setOptions(AbstractChart<?, ?> chart, LabelsOptions... labelsOptions) {

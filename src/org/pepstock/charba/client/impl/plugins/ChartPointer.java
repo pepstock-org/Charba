@@ -38,7 +38,7 @@ public final class ChartPointer extends AbstractPlugin {
 	private static final Map<String, ChartPointerOptions> OPTIONS = new HashMap<>();
 
 	/**
-	 * Plugin ID
+	 * Plugin ID {@value ID}
 	 */
 	public static final String ID = "cursorpointer";
 
