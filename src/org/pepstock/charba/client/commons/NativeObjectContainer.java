@@ -835,7 +835,7 @@ public abstract class NativeObjectContainer {
 			return getArrayValue(key);
 		}
 		// if here the property doesn't exist or has got a wrong type
-		return null;
+		return ArrayInteger.of(defaultValue);
 	}
 
 	/**
@@ -857,7 +857,7 @@ public abstract class NativeObjectContainer {
 			return getArrayValue(key);
 		}
 		// if here the property doesn't exist or has got a wrong type
-		return null;
+		return ArrayDouble.of(defaultValue);
 	}
 
 	/**
@@ -878,8 +878,9 @@ public abstract class NativeObjectContainer {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
 		}
-		// if here the property doesn't exist or has got a wrong type
-		return null;
+		// if here the property doesn't exist
+		// returns default
+		return ArrayString.of(defaultValue);
 	}
 
 	/**
@@ -901,7 +902,7 @@ public abstract class NativeObjectContainer {
 			return getArrayValue(key);
 		}
 		// if here the property doesn't exist or has got a wrong type
-		return null;
+		return ArrayImage.of(defaultValue);
 	}
 
 	/**
@@ -923,7 +924,7 @@ public abstract class NativeObjectContainer {
 			return getArrayValue(key);
 		}
 		// if here the property doesn't exist or has got a wrong type
-		return null;
+		return ArrayPattern.of(defaultValue);
 	}
 
 	/**
@@ -945,7 +946,7 @@ public abstract class NativeObjectContainer {
 			return getArrayValue(key);
 		}
 		// if here the property doesn't exist or has got a wrong type
-		return null;
+		return ArrayGradient.of(defaultValue);
 	}
 
 	/**
