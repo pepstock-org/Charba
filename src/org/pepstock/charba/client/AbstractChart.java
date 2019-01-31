@@ -28,7 +28,6 @@ import org.pepstock.charba.client.items.DatasetItem.DatasetItemFactory;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.Plugins;
-import org.pepstock.charba.client.utils.JSON;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.dom.client.Document;
@@ -593,16 +592,6 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			// draws chart with configuration
 			chart = new Chart(canvas.getContext2d(), configuration);
 		}
-	}
-
-	/**
-	 * Returns the chart configuration in JSON format.
-	 * 
-	 * @return the chart configuration in JSON format.
-	 */
-	public final String toJSONString() {
-		// returns on JSON format
-		return JSON.stringify(configuration);
 	}
 
 }
