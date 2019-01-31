@@ -186,7 +186,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * 
 	 * @return a list of string for each datasets, in JSON format
 	 */
-	public List<String> getDatasetsAsStrings() {
+	public List<String> getDatasetsAsString() {
 		// creates the result
 		List<String> result = new LinkedList<>();
 		// scans all datasets

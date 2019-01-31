@@ -23,9 +23,11 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayImage;
+import org.pepstock.charba.client.commons.ArrayImageList;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -184,7 +186,6 @@ abstract class LiningDataset extends Dataset {
 			// if here, the property is not a object
 			// or the property is missing or a color
 			// returns null
-			// FIXME verificare nel POINT element delle options
 			return null;
 		}
 	}
@@ -204,7 +205,6 @@ abstract class LiningDataset extends Dataset {
 			// if here, the property is not a gradient
 			// or the property is missing
 			// returns null
-			// FIXME verificare nel POINT element delle options
 			return null;
 		}
 	}
@@ -283,7 +283,6 @@ abstract class LiningDataset extends Dataset {
 			// if here, the property is not a gradient
 			// or the property is missing
 			// returns null
-			// FIXME verificare nel POINT element delle options
 			return null;
 		}
 	}
@@ -509,20 +508,19 @@ abstract class LiningDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the fill color for points. If property is missing or not a gradient, returns <code>null</code>.
+	 * Returns the fill color for points. If property is missing or not a gradient, returns an empty list.
 	 * 
-	 * @return list of the fill color for points. If property is missing or not a gradient, returns <code>null</code>.
+	 * @return list of the fill color for points. If property is missing or not a gradient, returns an empty list.
 	 */
-	public List<Gradient> getPointBackgroundColorAsGradients() {
+	public List<Gradient> getPointBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
 		if (hasGradients(Property.pointBackgroundColor)) {
 			return getGradientsContainer().getObjects(Property.pointBackgroundColor);
 		} else {
 			// if here, the property is not a gradient
 			// or the property is missing
-			// returns null
-			// FIXME verificare nel POINT element delle options
-			return null;
+			// returns empty list
+			return new ArrayObjectContainerList<Gradient>();
 		}
 	}
 
@@ -535,7 +533,6 @@ abstract class LiningDataset extends Dataset {
 		setValueOrArray(Property.pointBorderColor, pointBorderColor);
 		// removes the flag because default is string color
 		resetBeingColors(Property.pointBorderColor);
-
 	}
 
 	/**
@@ -592,20 +589,19 @@ abstract class LiningDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the border gradient for points. If property is missing or not a gradient, returns <code>null</code>.
+	 * Returns the border gradient for points. If property is missing or not a gradient, returns an empty list.
 	 * 
-	 * @return list of the border gradient for points. If property is missing or not a gradient, returns <code>null</code>.
+	 * @return list of the border gradient for points. If property is missing or not a gradient, returns an empty list.
 	 */
-	public List<Gradient> getPointBorderColorAsGradients() {
+	public List<Gradient> getPointBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
 		if (hasGradients(Property.pointBorderColor)) {
 			return getGradientsContainer().getObjects(Property.pointBorderColor);
 		} else {
 			// if here, the property is not a gradient
 			// or the property is missing
-			// returns null
-			// FIXME verificare nel POINT element delle options
-			return null;
+			// returns empty list
+			return new ArrayObjectContainerList<Gradient>();
 		}
 	}
 
@@ -713,21 +709,20 @@ abstract class LiningDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the point background color when hovered. If property is missing or not a gradient, returns <code>null</code>.
+	 * Returns the point background color when hovered. If property is missing or not a gradient, returns an empty list.
 	 * 
 	 * @return list of the point background color when hovered. If property is missing or not a gradient, returns
-	 *         <code>null</code>.
+	 *         an empty list.
 	 */
-	public List<Gradient> getPointHoverBackgroundColorAsGradients() {
+	public List<Gradient> getPointHoverBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
 		if (hasGradients(Property.pointHoverBackgroundColor)) {
 			return getGradientsContainer().getObjects(Property.pointHoverBackgroundColor);
 		} else {
 			// if here, the property is not a gradient
 			// or the property is missing
-			// returns null
-			// FIXME verificare nel POINT element delle options
-			return null;
+			// returns empty list
+			return new ArrayObjectContainerList<Gradient>();
 		}
 	}
 
@@ -795,21 +790,20 @@ abstract class LiningDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the point border gradient when hovered. If property is missing or not a gradient, returns <code>null</code>.
+	 * Returns the point border gradient when hovered. If property is missing or not a gradient, returns an empty list.
 	 * 
 	 * @return list of the point border gradient when hovered. If property is missing or not a gradient, returns
-	 *         <code>null</code>.
+	 *         an empty list.
 	 */
-	public List<Gradient> getPointHoverBorderColorAsGradients() {
+	public List<Gradient> getPointHoverBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
 		if (hasGradients(Property.pointHoverBorderColor)) {
 			return getGradientsContainer().getObjects(Property.pointHoverBorderColor);
 		} else {
 			// if here, the property is not a gradient
 			// or the property is missing
-			// returns null
-			// FIXME verificare nel POINT element delle options
-			return null;
+			// returns empty list
+			return new ArrayObjectContainerList<Gradient>();
 		}
 	}
 
@@ -882,9 +876,9 @@ abstract class LiningDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the style of the point. If property is missing or not a point style, returns <code>null</code>.
+	 * Returns the style of the point. If property is missing or not a point style, returns an empty list.
 	 * 
-	 * @return list of the style of the point. If property is missing or not a point style, returns <code>null</code>.
+	 * @return list of the style of the point. If property is missing or not a point style, returns an empty list.
 	 */
 	public List<PointStyle> getPointStyle() {
 		// checks if image as point style has been used
@@ -894,7 +888,7 @@ abstract class LiningDataset extends Dataset {
 			return ArrayListHelper.list(PointStyle.class, array);
 		} else {
 			// if here, means the point style as stored as images
-			return null;
+			return ArrayListHelper.list(PointStyle.class, new PointStyle[0]);
 		}
 	}
 
@@ -939,9 +933,9 @@ abstract class LiningDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the style of the point as image. If property is missing or not an image, returns <code>null</code>.
+	 * Returns the style of the point as image. If property is missing or not an image, returns an empty list.
 	 * 
-	 * @return list of the style of the point as image. If property is missing or not a image, returns <code>null</code>.
+	 * @return list of the style of the point as image. If property is missing or not a image, returns an empty list.
 	 */
 	public List<ImageElement> getPointStyleAsImages() {
 		// checks if image as point style has been used
@@ -951,7 +945,7 @@ abstract class LiningDataset extends Dataset {
 			return ArrayListHelper.list(array);
 		} else {
 			// if here, means the point style as stored as strings
-			return null;
+			return new ArrayImageList();
 		}
 	}
 

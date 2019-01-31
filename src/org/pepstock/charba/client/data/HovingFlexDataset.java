@@ -188,7 +188,7 @@ abstract class HovingFlexDataset extends Dataset {
 	 * 
 	 * @return the fill gradient of elements. If property is missing or not a gradient, returns an empty list.
 	 */
-	public List<Gradient> getBackgroundColorAsGradients() {
+	public List<Gradient> getBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
 		if (hasGradients(Property.backgroundColor)) {
 			return getGradientsContainer().getObjects(Property.backgroundColor);
@@ -266,7 +266,7 @@ abstract class HovingFlexDataset extends Dataset {
 	 * 
 	 * @return the gradient of the bar border. If property is missing or not a gradient, returns an empty list.
 	 */
-	public List<Gradient> getBorderColorAsGradients() {
+	public List<Gradient> getBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color)
 		if (hasGradients(Property.borderColor)) {
 			return getGradientsContainer().getObjects(Property.borderColor);
@@ -396,7 +396,7 @@ abstract class HovingFlexDataset extends Dataset {
 	 * @return list of the fill gradients of elements when hovered. If property is missing or not a gradient, returns an empty
 	 *         list.
 	 */
-	public List<Gradient> getHoverBackgroundColorAsGradients() {
+	public List<Gradient> getHoverBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
 		if (hasGradients(Property.hoverBackgroundColor)) {
 			return getGradientsContainer().getObjects(Property.hoverBackgroundColor);
@@ -477,7 +477,7 @@ abstract class HovingFlexDataset extends Dataset {
 	 * @return list of the stroke gradients of the elements when hovered. If property is missing or not a pattern, returns an
 	 *         empty list.
 	 */
-	public List<Gradient> getHoverBorderColorAsGradients() {
+	public List<Gradient> getHoverBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color)
 		if (hasGradients(Property.hoverBorderColor)) {
 			return getGradientsContainer().getObjects(Property.hoverBorderColor);

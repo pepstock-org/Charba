@@ -174,7 +174,7 @@ abstract class HovingDataset extends Dataset {
 	 * 
 	 * @return the fill gradient of the arcs in the dataset. If property is missing or not a gradient, returns an empty list.
 	 */
-	public List<Gradient> getBackgroundColorAsGradients() {
+	public List<Gradient> getBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
 		if (hasGradients(Property.backgroundColor)) {
 			return getGradientsContainer().getObjects(Property.backgroundColor);
@@ -254,7 +254,7 @@ abstract class HovingDataset extends Dataset {
 	 * @return the border gradient of the arcs in the dataset as string. If property is missing or not a gradient, returns an
 	 *         empty list.
 	 */
-	public List<Gradient> getBorderColorAsGradients() {
+	public List<Gradient> getBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color)
 		if (hasGradients(Property.borderColor)) {
 			return getGradientsContainer().getObjects(Property.borderColor);
@@ -386,7 +386,7 @@ abstract class HovingDataset extends Dataset {
 	 * @return list of the fill gradients of the arcs in the dataset when hovered. If property is missing or not a gradient,
 	 *         returns an empty list.
 	 */
-	public List<Gradient> getHoverBackgroundColorAsGradients() {
+	public List<Gradient> getHoverBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
 		if (hasGradients(Property.hoverBackgroundColor)) {
 			return getGradientsContainer().getObjects(Property.hoverBackgroundColor);
@@ -467,7 +467,7 @@ abstract class HovingDataset extends Dataset {
 	 * @return list of the stroke gradients of the arcs in the dataset when hovered. If property is missing or not a pattern,
 	 *         returns an empty list.
 	 */
-	public List<Gradient> getHoverBorderColorAsGradients() {
+	public List<Gradient> getHoverBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color)
 		if (hasGradients(Property.hoverBorderColor)) {
 			return getGradientsContainer().getObjects(Property.hoverBorderColor);
