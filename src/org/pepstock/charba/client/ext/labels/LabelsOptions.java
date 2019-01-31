@@ -15,18 +15,24 @@
 */
 package org.pepstock.charba.client.ext.labels;
 
+import java.util.List;
+
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.ArrayImage;
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.ext.labels.LabelsOptionsFactory.LabelsDefaultsOptionsFactory;
 
-public final class LabelsOptions extends NativeObjectContainer {
+import com.google.gwt.dom.client.ImageElement;
+import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.Image;
 
-	public static final String ID = "labels";
+public final class LabelsOptions extends NativeObjectContainer {
 
 	// defaults global options instance
 	private LabelsDefaultsOptions defaultsOptions;
@@ -66,9 +72,9 @@ public final class LabelsOptions extends NativeObjectContainer {
 		// creates an empty object
 		super(null);
 		// checks if the default global options has been added for the plugin
-		if (Defaults.get().getGlobal().getPlugins().hasOptions(LabelsOptions.ID)) {
+		if (Defaults.get().getGlobal().getPlugins().hasOptions(LabelsPlugin.ID)) {
 			// reads the default default global options
-			defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(LabelsOptions.ID, defaultsFactory);
+			defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(LabelsPlugin.ID, defaultsFactory);
 		} else {
 			// if here, no default global option
 			// then the plugin will use the static defaults
@@ -449,4 +455,50 @@ public final class LabelsOptions extends NativeObjectContainer {
 		return getValue(Property.textMargin, defaultsOptions.getTextMargin());
 	}
 
+	/**
+	 * Sets the images when {@link Render} is {@link Render#image}.
+	 * 
+	 * @param images images when {@link Render} is {@link Render#image}.
+	 */
+	public void setImages(ImageResource... images) {
+		// checks if argument is consistent
+		if (images != null) {
+			// creates a temporary array
+			ImageElement[] array = new ImageElement[images.length];
+			// scans passed array of images
+			for (int i = 0; i < images.length; i++) {
+				// transform a image resource into image element by image object
+				// creates image object
+				Image img = new Image(images[i]);
+				// stores into array changing in image element
+				array[i] = ImageElement.as(img.getElement());
+			}
+			// stores it
+			setImages(array);
+		} else {
+			// if here, argument is null
+			// then removes property
+			remove(Property.images);
+		}
+	}
+
+	/**
+	 * Sets the images when {@link Render} is {@link Render#image}.
+	 * 
+	 * @param images images when {@link Render} is {@link Render#image}.
+	 */
+	public void setImages(ImageElement... images) {
+		setArrayValue(Property.images, ArrayImage.of(images));
+	}
+
+	/**
+	 * Returns the images when {@link Render} is {@link Render#image}.
+	 * 
+	 * @return the images when {@link Render} is {@link Render#image} or an empty list.
+	 */
+	public List<ImageElement> getImages() {
+		// gets array
+		ArrayImage array = getArrayValue(Property.images);
+		return ArrayListHelper.list(array);
+	}
 }

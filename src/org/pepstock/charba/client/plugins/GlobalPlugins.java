@@ -39,6 +39,8 @@ public final class GlobalPlugins {
 	private final Map<String, GlobalPlugin> pluginIds = new HashMap<String, GlobalPlugin>();
 	// native object of plugins
 	private final NativePlugins plugins;
+	// set of embedded plugin ids to disable for charts
+	private final Set<String> pluginsToBeDisable = new HashSet<>();
 
 	/**
 	 * Builds the object by the native object which maps <code>chart.plugins</code>
@@ -123,6 +125,24 @@ public final class GlobalPlugins {
 		}
 		return pluginsIds;
 	}
+	
+	/**
+	 * FIXME
+	 * @param pluginId
+	 */
+	public void setEnableAllCharts(String pluginId, boolean enable) {
+		Set<String> currentIds = getIds();
+		for (String id : currentIds) {
+			if (id.equalsIgnoreCase(pluginId)) {
+				if (enable) {
+					pluginsToBeDisable.remove(pluginId);
+				} else {
+					pluginsToBeDisable.add(pluginId);
+				}
+				return;
+			}
+		}
+	}
 
 	/**
 	 * Invokes the on configuration method to inform the plugins that the chart is going to be initialized.
@@ -131,6 +151,12 @@ public final class GlobalPlugins {
 	 * @param chart instance of the chart
 	 */
 	public void onChartConfigure(Configuration config, AbstractChart<?, ?> chart) {
+		// sets into chart all global plugins to be disable
+		for (String id: pluginsToBeDisable) {
+			if (!chart.getOptions().getPlugins().hasEnabled(id)) {
+				chart.getOptions().getPlugins().setEnabled(id, false);
+			}
+		}
 		// scans all plugins
 		for (Entry<String, GlobalPlugin> entry : pluginIds.entrySet()) {
 			// checks if plugin is enabled

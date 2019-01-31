@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import java.util.List;
+
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.options.ExtendedOptions;
@@ -61,6 +63,16 @@ public final class Plugins {
 	}
 
 	/**
+	 * Returns if a global plugin has been set or not.
+	 * 
+	 * @param pluginId plugin id.
+	 * @return <code>false</code> if a global plugin has not been set otherwise <code>true</code>.
+	 */
+	public boolean hasEnabled(String pluginId) {
+		return options.getPlugins().hasEnabled(pluginId);
+	}
+	
+	/**
 	 * Sets the plugin options. If passed options is null, the configuration of plugin will be removed.
 	 * 
 	 * @param pluginId plugin id.
@@ -70,6 +82,18 @@ public final class Plugins {
 	 */
 	public <T extends NativeObjectContainer> void setOptions(String pluginId, T object) {
 		options.getPlugins().setOptions(pluginId, object);
+	}
+	
+	/**
+	 * Sets the plugin options as array. If passed options is null, the configuration of plugin will be removed.
+	 * 
+	 * @param pluginId plugin id.
+	 * @param objects list of native object container used to configure the plugin. Pass <code>null</code> to remove the configuration if
+	 *            exist.
+	 * @param <T> type of native object container to store
+	 */
+	public <T extends NativeObjectContainer> void setOptions(String pluginId, List<T> objects) {
+		options.getPlugins().setOptions(pluginId, objects);
 	}
 
 	/**
@@ -93,6 +117,18 @@ public final class Plugins {
 	public <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) {
 		// returns the configuration by plugin id.
 		return options.getPlugins().getOptions(pluginId, factory);
+	}
+	
+	/**
+	 * Returns the plugin options as list of object containers, if exist. It uses a factory instance to create a native object container.
+	 * 
+	 * @param pluginId plugin id.
+	 * @param factory factory instance to create a native object container.
+	 * @param <T> type of native object container to return
+	 * @return the plugin options as list of object containers or empty list if not exist.
+	 */
+	public <T extends NativeObjectContainer> List<T> getOptionsAsList(String pluginId, NativeObjectContainerFactory<T> factory) {
+		return options.getPlugins().getOptionsAsList(pluginId, factory);
 	}
 
 }

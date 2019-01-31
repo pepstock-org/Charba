@@ -40,9 +40,9 @@ public final class LabelsOptionsFactory implements NativeObjectContainerFactory<
 		// defaults global options instance
 		LabelsDefaultsOptions defaultsOptions = null;
 		// checks if the default global options has been added for the plugin
-		if (Defaults.get().getGlobal().getPlugins().hasOptions(LabelsOptions.ID)) {
+		if (Defaults.get().getGlobal().getPlugins().hasOptions(LabelsPlugin.ID)) {
 			// reads the default default global options
-			defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(LabelsOptions.ID, defaultsFactory);
+			defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(LabelsPlugin.ID, defaultsFactory);
 		} else {
 			// if here, no default global option
 			// then the plugin will use the static defaults

@@ -15,6 +15,10 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.List;
+
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -57,7 +61,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 			remove(PluginIdChecker.key(pluginId));
 		} else {
 			// stores configuration
-			setValue(PluginIdChecker.key(pluginId), true);
+			setValue(PluginIdChecker.key(pluginId), false);
 		}
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -73,6 +77,16 @@ public final class Plugins extends AbstractModel<Options, Void> {
 		return getValue(PluginIdChecker.key(pluginId), true);
 	}
 
+	/**
+	 * Returns if a global plugin has been set or not.
+	 * 
+	 * @param pluginId plugin id.
+	 * @return <code>false</code> if a global plugin has not been set otherwise <code>true</code>.
+	 */
+	public boolean hasEnabled(String pluginId) {
+		return has(PluginIdChecker.key(pluginId));
+	}
+	
 	/**
 	 * Sets the plugin options. If passed options is null, the configuration of plugin will be removed.
 	 * 
@@ -95,6 +109,27 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	}
 
 	/**
+	 * Sets the plugin options as array. If passed options is null, the configuration of plugin will be removed.
+	 * 
+	 * @param pluginId plugin id.
+	 * @param options list of native object container used to configure the plugin. Pass <code>null</code> to remove the configuration if
+	 *            exist.
+	 * @param <T> type of native object container to store
+	 */
+	public <T extends NativeObjectContainer> void setOptions(String pluginId, List<T> options) {
+		// if null, removes the configuration
+		if (options == null) {
+			// removes configuration if exists
+			remove(PluginIdChecker.key(pluginId));
+		} else {
+			// stores configuration
+			setArrayValue(PluginIdChecker.key(pluginId), ArrayObject.of(options));
+		}
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
 	 * Checks if there is any options for a specific plugin, by its id.
 	 * 
 	 * @param pluginId plugin id.
@@ -114,6 +149,19 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 */
 	public <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) {
 		return factory.create(getValue(PluginIdChecker.key(pluginId)));
+	}
+	
+	/**
+	 * Returns the plugin options as list of object containers, if exist. It uses a factory instance to create a native object container.
+	 * 
+	 * @param pluginId plugin id.
+	 * @param factory factory instance to create a native object container.
+	 * @param <T> type of native object container to return
+	 * @return the plugin options as list of object containers or empty list if not exist.
+	 */
+	public <T extends NativeObjectContainer> List<T> getOptionsAsList(String pluginId, NativeObjectContainerFactory<T> factory) {
+		ArrayObject array = getArrayValue(PluginIdChecker.key(pluginId));
+		return ArrayListHelper.list(array, factory);
 	}
 
 }
