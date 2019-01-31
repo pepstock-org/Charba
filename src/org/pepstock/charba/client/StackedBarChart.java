@@ -64,6 +64,6 @@ public class StackedBarChart extends AbstractChart<StackedOptions, StackedBarDat
 	 */
 	@Override
 	public StackedBarDataset newDataset() {
-		return new StackedBarDataset();
+		return new StackedBarDataset(getDefaultChartOptions());
 	}
 }

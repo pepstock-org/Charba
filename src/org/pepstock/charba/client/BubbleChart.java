@@ -65,7 +65,7 @@ public class BubbleChart extends AbstractChart<BubbleOptions, BubbleDataset> {
 	 */
 	@Override
 	public BubbleDataset newDataset() {
-		return new BubbleDataset();
+		return new BubbleDataset(getDefaultChartOptions());
 	}
 
 }

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -33,6 +34,23 @@ public class StackedBarDataset extends BarDataset {
 	private enum Property implements Key
 	{
 		stack
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 */
+	public StackedBarDataset() {
+		super();
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 */
+	public StackedBarDataset(IsDefaultOptions defaultValues) {
+		super(defaultValues);
 	}
 
 	/**

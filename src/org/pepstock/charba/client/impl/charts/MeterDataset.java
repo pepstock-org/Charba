@@ -17,11 +17,13 @@ package org.pepstock.charba.client.impl.charts;
 
 import java.util.List;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.data.DoughnutDataset;
+import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
  * The Meter chart allows a number of properties to be specified for each dataset. These are used to set display properties for
@@ -68,12 +70,22 @@ public class MeterDataset extends DoughnutDataset {
 	private double value = MINIMUM_VALUE;
 
 	/**
-	 * Creates a dataset setting the maximum value of dataset.
+	 * Creates a dataset setting the maximum value of dataset. It uses the global options has default.
 	 * 
 	 * @param max maximum value of dataset.
 	 */
 	public MeterDataset(double max) {
-		super();
+		this(max, Defaults.get().getGlobal());
+	}
+
+	/**
+	 * Creates a dataset setting the maximum value of dataset and defaults value.
+	 * 
+	 * @param max maximum value of dataset.
+	 * @param defaultValues default options
+	 */
+	public MeterDataset(double max, IsDefaultOptions defaultValues) {
+		super(defaultValues);
 		// sets the max value between the max and minimum value
 		// max value must be higher than 0
 		this.max = Math.max(max, MINIMUM_VALUE);

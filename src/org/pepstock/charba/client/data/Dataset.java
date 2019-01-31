@@ -29,6 +29,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.PluginIdChecker;
 import org.pepstock.charba.client.utils.JSON;
@@ -50,6 +51,8 @@ public abstract class Dataset extends NativeObjectContainer {
 	private final PatternsContainer patternsContainer = new PatternsContainer();
 	// gradients container
 	private final GradientsContainer gradientsContainer = new GradientsContainer();
+	// default options values
+	private final IsDefaultOptions defaultValues;
 
 	/**
 	 * Name of properties of native object.
@@ -66,9 +69,21 @@ public abstract class Dataset extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates a dataset, adding patterns and gradients element.
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
 	 */
 	Dataset() {
+		// creates object with global default
+		this(Defaults.get().getGlobal());
+	}
+
+	/**
+	 * Creates the dataset using a default, adding patterns and gradients element.
+	 * 
+	 * @param defaultValues default options
+	 */
+	Dataset(IsDefaultOptions defaultValues) {
+		this.defaultValues = defaultValues;
 		// sets the Charba containers into dataset java script configuration
 		setValue(Property._charbaPatterns, patternsContainer);
 		setValue(Property._charbaGradients, gradientsContainer);
@@ -90,6 +105,15 @@ public abstract class Dataset extends NativeObjectContainer {
 	 */
 	final GradientsContainer getGradientsContainer() {
 		return gradientsContainer;
+	}
+
+	/**
+	 * Returns the default options instance.
+	 * 
+	 * @return the default options instance.
+	 */
+	final IsDefaultOptions getDefaultValues() {
+		return defaultValues;
 	}
 
 	/**

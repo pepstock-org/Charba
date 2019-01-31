@@ -65,7 +65,7 @@ public class PolarAreaChart extends AbstractChart<PolarAreaOptions, PolarAreaDat
 	 */
 	@Override
 	public PolarAreaDataset newDataset() {
-		return new PolarAreaDataset();
+		return new PolarAreaDataset(getDefaultChartOptions());
 	}
 
 }

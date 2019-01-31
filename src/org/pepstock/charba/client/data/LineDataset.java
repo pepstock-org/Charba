@@ -17,12 +17,12 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.SteppedLine;
 import org.pepstock.charba.client.options.Scales;
 
@@ -53,6 +53,23 @@ public class LineDataset extends LiningDataset {
 		spanGaps,
 		steppedLine,
 		data
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 */
+	public LineDataset() {
+		super();
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 */
+	public LineDataset(IsDefaultOptions defaultValues) {
+		super(defaultValues);
 	}
 
 	/**
@@ -139,7 +156,7 @@ public class LineDataset extends LiningDataset {
 	 * @return <code>false</code> if the line is not drawn for this dataset.
 	 */
 	public boolean isShowLines() {
-		return getValue(Property.showLines, Defaults.get().getGlobal().isShowLines());
+		return getValue(Property.showLines, getDefaultValues().isShowLines());
 	}
 
 	/**
@@ -161,7 +178,7 @@ public class LineDataset extends LiningDataset {
 	 *         create a break in the line.
 	 */
 	public boolean isSpanGaps() {
-		return getValue(Property.spanGaps, Defaults.get().getGlobal().isSpanGaps());
+		return getValue(Property.spanGaps, getDefaultValues().isSpanGaps());
 	}
 
 	/**

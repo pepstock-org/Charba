@@ -64,7 +64,7 @@ public class BarChart extends AbstractChart<BarOptions, BarDataset> {
 	 */
 	@Override
 	public BarDataset newDataset() {
-		return new BarDataset();
+		return new BarDataset(getDefaultChartOptions());
 	}
 
 }

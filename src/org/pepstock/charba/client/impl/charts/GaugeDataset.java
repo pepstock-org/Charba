@@ -21,7 +21,9 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
  * The Gauge chart allows a number of properties to be specified for each dataset. These are used to set display properties for
@@ -62,12 +64,22 @@ public final class GaugeDataset extends MeterDataset {
 	};
 
 	/**
-	 * Creates a dataset for gauge with maximum value of data.
+	 * Creates a dataset for gauge with maximum value of data. It uses the global options has default.
 	 * 
 	 * @param max maximum value of data.
 	 */
 	public GaugeDataset(double max) {
-		super(max);
+		this(max, Defaults.get().getGlobal());
+	}
+
+	/**
+	 * Creates a dataset setting the maximum value of dataset and defaults value.
+	 * 
+	 * @param max maximum value of dataset.
+	 * @param defaultValues default options
+	 */
+	public GaugeDataset(double max, IsDefaultOptions defaultValues) {
+		super(max, defaultValues);
 		// loads all gauge thresholds by default
 		for (GaugeThreshold t : GaugeThreshold.values()) {
 			thresholds.add(t.getThreshold());

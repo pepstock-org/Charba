@@ -48,7 +48,7 @@ public abstract class CanvasObject extends NativeObjectContainer {
 		// increments the id
 		// unique for every canvas object
 		// stores the ID
-		setValue(Property._charbaObjectID, counter.incrementAndGet());
+		setValue(Property._charbaObjectID, counter.getAndIncrement());
 	}
 
 	/**

@@ -63,7 +63,7 @@ public class RadarChart extends AbstractChart<RadarOptions, RadarDataset> {
 	 */
 	@Override
 	public RadarDataset newDataset() {
-		return new RadarDataset();
+		return new RadarDataset(getDefaultChartOptions());
 	}
 
 }

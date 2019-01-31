@@ -30,6 +30,7 @@ import org.pepstock.charba.client.commons.ArrayPattern;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.ArrayStringList;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
@@ -55,6 +56,23 @@ abstract class HovingDataset extends Dataset {
 		hoverBackgroundColor,
 		hoverBorderColor,
 		hoverBorderWidth
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 */
+	HovingDataset() {
+		super();
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 */
+	HovingDataset(IsDefaultOptions defaultValues) {
+		super(defaultValues);
 	}
 
 	/**

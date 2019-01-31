@@ -63,7 +63,7 @@ public class StackedAreaChart extends AbstractChart<StackedOptions, StackedAreaD
 	 */
 	@Override
 	public StackedAreaDataset newDataset() {
-		return new StackedAreaDataset();
+		return new StackedAreaDataset(getDefaultChartOptions());
 	}
 
 }

@@ -17,10 +17,10 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.options.Scales;
 
@@ -46,6 +46,23 @@ public class BarDataset extends HovingFlexDataset {
 		yAxisID,
 		borderSkipped,
 		data
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 */
+	public BarDataset() {
+		super();
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 */
+	public BarDataset(IsDefaultOptions defaultValues) {
+		super(defaultValues);
 	}
 
 	/**
@@ -105,7 +122,7 @@ public class BarDataset extends HovingFlexDataset {
 	 * @return the edge to skip drawing the border for.
 	 */
 	public Position getBorderSkipped() {
-		return getValue(Property.borderSkipped, Position.class, Defaults.get().getGlobal().getElements().getRectangle().getBorderSkipped());
+		return getValue(Property.borderSkipped, Position.class, getDefaultValues().getElements().getRectangle().getBorderSkipped());
 	}
 
 	/**
@@ -143,7 +160,7 @@ public class BarDataset extends HovingFlexDataset {
 	 */
 	@Override
 	String getDefaultBackgroundColorAsString() {
-		return Defaults.get().getGlobal().getElements().getRectangle().getBackgroundColorAsString();
+		return getDefaultValues().getElements().getRectangle().getBackgroundColorAsString();
 	}
 
 	/*
@@ -153,7 +170,7 @@ public class BarDataset extends HovingFlexDataset {
 	 */
 	@Override
 	String getDefaultBorderColorAsString() {
-		return Defaults.get().getGlobal().getElements().getRectangle().getBorderColorAsString();
+		return getDefaultValues().getElements().getRectangle().getBorderColorAsString();
 	}
 
 	/*
@@ -163,7 +180,7 @@ public class BarDataset extends HovingFlexDataset {
 	 */
 	@Override
 	int getDefaultBorderWidth() {
-		return Defaults.get().getGlobal().getElements().getRectangle().getBorderWidth();
+		return getDefaultValues().getElements().getRectangle().getBorderWidth();
 	}
 
 }

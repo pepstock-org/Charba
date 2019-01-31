@@ -17,12 +17,12 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
@@ -53,6 +53,23 @@ public final class BubbleDataset extends HovingDataset {
 	}
 
 	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 */
+	public BubbleDataset() {
+		super();
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 */
+	public BubbleDataset(IsDefaultOptions defaultValues) {
+		super(defaultValues);
+	}
+
+	/**
 	 * Sets the style of the point.
 	 * 
 	 * @param pointStyle array of the style of the point.
@@ -67,7 +84,7 @@ public final class BubbleDataset extends HovingDataset {
 	 * @return list of the style of the point.
 	 */
 	public List<PointStyle> getPointStyle() {
-		ArrayString array = getValueOrArray(Property.pointStyle, Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
+		ArrayString array = getValueOrArray(Property.pointStyle, getDefaultValues().getElements().getPoint().getPointStyle());
 		return ArrayListHelper.list(PointStyle.class, array);
 	}
 
@@ -86,7 +103,7 @@ public final class BubbleDataset extends HovingDataset {
 	 * @return list of the pixel size of the non-displayed point.
 	 */
 	public List<Double> getHitRadius() {
-		ArrayDouble array = getValueOrArray(Property.hitRadius, Defaults.get().getGlobal().getElements().getPoint().getHitRadius());
+		ArrayDouble array = getValueOrArray(Property.hitRadius, getDefaultValues().getElements().getPoint().getHitRadius());
 		return ArrayListHelper.list(array);
 	}
 
@@ -105,7 +122,7 @@ public final class BubbleDataset extends HovingDataset {
 	 * @return list of the radius of the point when hovered.
 	 */
 	public List<Double> getHoverRadius() {
-		ArrayDouble array = getValueOrArray(Property.hoverRadius, Defaults.get().getGlobal().getElements().getPoint().getHoverRadius());
+		ArrayDouble array = getValueOrArray(Property.hoverRadius, getDefaultValues().getElements().getPoint().getHoverRadius());
 		return ArrayListHelper.list(array);
 	}
 
@@ -124,7 +141,7 @@ public final class BubbleDataset extends HovingDataset {
 	 * @return list of the radius of the point shape.
 	 */
 	public List<Double> getRadius() {
-		ArrayDouble array = getValueOrArray(Property.radius, Defaults.get().getGlobal().getElements().getPoint().getRadius());
+		ArrayDouble array = getValueOrArray(Property.radius, getDefaultValues().getElements().getPoint().getRadius());
 		return ArrayListHelper.list(array);
 	}
 
@@ -143,7 +160,7 @@ public final class BubbleDataset extends HovingDataset {
 	 * @return list of the rotation of the point in degrees.
 	 */
 	public List<Double> getRotation() {
-		ArrayDouble array = getValueOrArray(Property.rotation, Defaults.get().getGlobal().getElements().getPoint().getRotation());
+		ArrayDouble array = getValueOrArray(Property.rotation, getDefaultValues().getElements().getPoint().getRotation());
 		return ArrayListHelper.list(array);
 	}
 

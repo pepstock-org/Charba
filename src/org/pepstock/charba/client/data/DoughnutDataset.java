@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.data;
 
+import org.pepstock.charba.client.defaults.IsDefaultOptions;
+
 /**
  * The doughnut chart allows a number of properties to be specified for each dataset. These are used to set display properties
  * for a specific dataset.<br>
@@ -24,4 +26,20 @@ package org.pepstock.charba.client.data;
  */
 public class DoughnutDataset extends PieDataset {
 
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 */
+	public DoughnutDataset() {
+		super();
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 */
+	public DoughnutDataset(IsDefaultOptions defaultValues) {
+		super(defaultValues);
+	}
 }

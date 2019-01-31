@@ -62,7 +62,7 @@ public class DoughnutChart extends AbstractChart<DoughnutOptions, DoughnutDatase
 	 */
 	@Override
 	public DoughnutDataset newDataset() {
-		return new DoughnutDataset();
+		return new DoughnutDataset(getDefaultChartOptions());
 	}
 
 }
