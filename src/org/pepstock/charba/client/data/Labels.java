@@ -28,6 +28,8 @@ import org.pepstock.charba.client.commons.ObjectType;
  */
 public final class Labels {
 
+	private static final char SEPARATOR = '\n';
+	
 	private final ArrayMixedObject array;
 
 	/**
@@ -75,8 +77,11 @@ public final class Labels {
 		if (values != null && values.length > 0) {
 			// scans values
 			for (String value : values) {
-				// pushes to JS array
-				array.push(value);
+				// checks is not null
+				if (value != null) {
+					// pushes to JS array
+					array.push(value);
+				}
 			}
 		}
 	}
@@ -106,41 +111,59 @@ public final class Labels {
 			array.push(ArrayString.of(values));
 		}
 	}
+	
+	/**
+	 * Returns a label at a specific index. If at index there is multi-line label, returns labels with '\n' as separator. If the index is out of bounds, throws an exception.
+	 * 
+	 * @param index index of label
+	 * @return a label at a specific index
+	 */
+	public String getString(int index) {
+		ObjectType type = getType(index);
+		if (ObjectType.Array.equals(type)) {
+			ArrayString internalArray = (ArrayString) array.get(index);
+			// creates an string builder
+			StringBuilder result = new StringBuilder();
+			// scans all values
+			for (int i = 0; i < internalArray.length(); i++) {
+				// adds separator after 1 element
+				if (i > 0) {
+					result.append(SEPARATOR);
+				}
+				// adds to builder
+				result.append(internalArray.get(i));
+			}
+			// returns string
+			return result.toString();
+		} 
+		// returns string
+		// string can not be null, because checked during loading
+		return (String)array.get(index);
+	}
 
 	/**
-	 * Returns a multi line label at a specific index. An array of strings is returned.
+	 * Returns a multi line label at a specific index. An array of strings is returned. If the index is out of bounds, throws an exception.
 	 * 
 	 * @param index index of label
 	 * @return an array of strings
 	 */
 	public String[] getStrings(int index) {
-		// checks range
-		if (checkRange(index)) {
-			// gets multi line array
-			Object multiValues = array.get(index);
-			// if consistent
-			if (multiValues != null) {
-				if (Array.isArray(multiValues)) {
-					ArrayString internalArray = (ArrayString) multiValues;
-					// creates an string array
-					String[] result = new String[internalArray.length()];
-					// scans all values
-					for (int i = 0; i < internalArray.length(); i++) {
-						// adds to java array
-						result[i] = internalArray.get(i);
-					}
-					// returns array
-					return result;
-				} else {
-					return new String[] { (String) multiValues };
-				}
-			} else {
-				// returns an empty array
-				return new String[0];
+		ObjectType type = getType(index);
+		if (ObjectType.Array.equals(type)) {
+			ArrayString internalArray = (ArrayString) array.get(index);
+			// creates an string array
+			String[] result = new String[internalArray.length()];
+			// scans all values
+			for (int i = 0; i < internalArray.length(); i++) {
+				// adds to java array
+				result[i] = internalArray.get(i);
 			}
-		}
-		// returns an empty array
-		return new String[0];
+			// returns array
+			return result;
+		} 
+		// returns the array with single item
+		// string can not be null, because checked during loading
+		return new String[] { (String)array.get(index) };
 	}
 
 	/**
@@ -151,21 +174,20 @@ public final class Labels {
 	 */
 	public ObjectType getType(int index) {
 		// checks range
-		if (checkRange(index)) {
-			// gets type of label
-			return Array.isArray(array.get(index)) ? ObjectType.Array : ObjectType.String;
-		}
-		return ObjectType.Undefined;
+		checkRange(index);
+		// gets type of label
+		return Array.isArray(array.get(index)) ? ObjectType.Array : ObjectType.String;
 	}
 
 	/**
-	 * Checks if the index is in the right range.
+	 * Checks if the index is in the right range. If the index is out of bounds, throws an exception.
 	 * 
 	 * @param index index to be checked
-	 * @return <code>true</code> if the index is in the right range otherwise false
 	 */
-	private boolean checkRange(int index) {
-		return index >= 0 && index < array.length();
+	private void checkRange(int index) {
+		if (index < 0 || index >= array.length()) {
+			throw new IndexOutOfBoundsException("Index "+index+" is out of bouds [0, "+array.length()+"]");
+		}
 	}
 
 }
