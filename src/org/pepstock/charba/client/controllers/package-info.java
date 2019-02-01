@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all classes to manage the controller implementations.
+ * Contains all classes to manage the implementations of controllers.
  * 
  * @author Andrea "Stock" Stocchero
  *

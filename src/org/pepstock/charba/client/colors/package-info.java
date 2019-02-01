@@ -14,8 +14,8 @@
     limitations under the License.
 */
 /**
- * Contains the enumeration of HTML and GWT Material colors, to consumer out-of-the-box, and utilities to create and manage own
- * colors and all classes to use gradients of patterns on charts.
+ * Contains the enumerations of HTML and GWT Material colors, to consume out-of-the-box, and utilities to create and manage own
+ * colors and classes to define gradients of patterns for charts.
  * 
  * @author Andrea "Stock" Stocchero
  *

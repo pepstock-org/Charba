@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Main package with the implementation already exists plugins or other CHARTS.JS java script extensions.
+ * Main package with the CHARTS.JS java script implementations, already exists, provided as add-ons.
  * 
  * @author Andrea "Stock" Stocchero
  *

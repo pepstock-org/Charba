@@ -19,7 +19,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
- * Factory to get the options (ONLY form chart) related to background color plugin.
+ * Factory to get the options (ONLY for chart and not global options) related to background plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */

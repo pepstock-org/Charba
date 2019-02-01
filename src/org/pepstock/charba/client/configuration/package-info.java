@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all elements to use to configure a chart instance (know as chart options at instance level).
+ * Contains all elements to configure a chart instance (know as chart options at instance level).
  * 
  * @author Andrea "Stock" Stocchero
  *

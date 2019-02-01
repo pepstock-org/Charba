@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all enumeration of some chart options where the value can have only a specific set of values.
+ * Contains all enumerations of some chart options where only a specific set of values can be set.
  * 
  * @author Andrea "Stock" Stocchero
  *
