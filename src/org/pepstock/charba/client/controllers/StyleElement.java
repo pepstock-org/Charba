@@ -93,7 +93,7 @@ public final class StyleElement extends DatasetItem {
 	/**
 	 * Internal class to extend scale items.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	static class InternalScaleItem extends ScaleItem {
 

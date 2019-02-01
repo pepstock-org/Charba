@@ -55,7 +55,7 @@ public final class LabelsOptionsFactory implements NativeObjectContainerFactory<
 	/**
 	 * Internal factory to create options from default global option for the plugin
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	static class LabelsDefaultsOptionsFactory implements NativeObjectContainerFactory<LabelsDefaultsOptions> {
 

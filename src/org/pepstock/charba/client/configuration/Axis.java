@@ -60,7 +60,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Java script FUNCTION callback called before the update process starts.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyBeforeUpdateCallback {
@@ -78,7 +78,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Java script FUNCTION callback that runs before dimensions are set.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyBeforeSetDimensionsCallback {
@@ -96,7 +96,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Java script FUNCTION callback that runs after dimensions are set.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyAfterSetDimensionsCallback {
@@ -114,7 +114,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Java script FUNCTION callback that runs before data limits are determined.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyBeforeDataLimitsCallback {
@@ -132,7 +132,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Java script FUNCTION callback that runs after data limits are determined.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyAfterDataLimitsCallback {
@@ -150,7 +150,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Java script FUNCTION callback that runs before ticks are created.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyBeforeBuildTicksCallback {
@@ -168,7 +168,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Java script FUNCTION callback that runs after ticks are created. Useful for filtering ticks.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyAfterBuildTicksCallback {
@@ -186,7 +186,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Java script FUNCTION callback that runs before ticks are converted into strings.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyBeforeTickToLabelConversionCallback {
@@ -204,7 +204,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Java script FUNCTION callback that runs after ticks are converted into strings.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyAfterTickToLabelConversionCallback {
@@ -222,7 +222,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Java script FUNCTION callback that runs before tick rotation is determined.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyBeforeCalculateTickRotationCallback {
@@ -240,7 +240,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Java script FUNCTION callback that runs after tick rotation is determined.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyAfterCalculateTickRotationCallback {
@@ -258,7 +258,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Java script FUNCTION callback that runs before the scale fits to the canvas.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyBeforeFitCallback {
@@ -276,7 +276,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Java script FUNCTION callback that runs after the scale fits to the canvas.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyAfterFitCallback {
@@ -294,7 +294,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Java script FUNCTION callback that runs at the end of the update process.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyAfterUpdateCallback {

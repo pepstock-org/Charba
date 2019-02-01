@@ -79,7 +79,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 * Java script FUNCTION callback when a click event on chart is triggered.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyChartClickCallback {
@@ -98,7 +98,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 * Java script FUNCTION callback when a hover event on chart is triggered.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyChartHoverCallback {
@@ -117,7 +117,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 * Java script FUNCTION callback when a resize event on chart is triggered.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyChartResizeCallback {
@@ -136,7 +136,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 * Java script FUNCTION callback when runs it generates an HTML legend.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyGenerateLegendCallback {

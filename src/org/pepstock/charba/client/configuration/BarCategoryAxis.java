@@ -137,7 +137,7 @@ public class BarCategoryAxis extends CartesianCategoryAxis {
 	 * The grid line will move to the left by one half of the tick interval.<br>
 	 * If false, the grid line will go right down the middle of the bars.
 	 * 
-	 * @author Andrea "Stock" Stocchero @ *
+	 * @author Andrea "Stock" Stocchero *
 	 */
 	private static class BarGridLines extends GridLines {
 

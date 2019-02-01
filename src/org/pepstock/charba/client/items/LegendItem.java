@@ -226,7 +226,7 @@ public class LegendItem extends NativeObjectContainer {
 	/**
 	 * Inner class to create legend item by a native object.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	static final class LegendItemFactory implements NativeObjectContainerFactory<LegendItem> {
 

@@ -50,7 +50,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	 * Java script FUNCTION callback when animation is completed.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyAnimationCompleteCallback {
@@ -68,7 +68,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	 * Java script FUNCTION callback when animation is in progress.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyAnimationProgressCallback {
