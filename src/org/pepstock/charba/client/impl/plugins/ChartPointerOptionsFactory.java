@@ -32,8 +32,8 @@ public final class ChartPointerOptionsFactory implements NativeObjectContainerFa
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
-	 * .commons.NativeObject)
+	 * @see
+	 * org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
 	 */
 	@Override
 	public ChartPointerOptions create(NativeObject nativeObject) {
@@ -46,7 +46,7 @@ public final class ChartPointerOptionsFactory implements NativeObjectContainerFa
 		} else {
 			// if here, no default global option
 			// then the plugin will use the static defaults
-			defaultsOptions = new ChartPointerDefaultsOptions(null);
+			defaultsOptions = new ChartPointerDefaultsOptions();
 		}
 		// creates the options by the native object and the defaults
 		return new ChartPointerOptions(nativeObject, defaultsOptions);
@@ -62,8 +62,8 @@ public final class ChartPointerOptionsFactory implements NativeObjectContainerFa
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
-		 * .commons.NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
+		 * NativeObject)
 		 */
 		@Override
 		public ChartPointerDefaultsOptions create(NativeObject nativeObject) {

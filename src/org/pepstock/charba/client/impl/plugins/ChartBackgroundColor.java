@@ -17,6 +17,7 @@ package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
@@ -32,7 +33,7 @@ import com.google.gwt.canvas.dom.client.Context2d;
 public final class ChartBackgroundColor extends AbstractPlugin {
 
 	// default background color
-	static final String DEFAULT_BACKGROUND_COLOR = "white";
+	static final String DEFAULT_BACKGROUND_COLOR = HtmlColor.White.toRGBA();
 
 	/**
 	 * Plugin ID {@value ID}

@@ -73,7 +73,7 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 		} else {
 			// if here, no default global option
 			// then the plugin will use the static defaults
-			defaultsOptions = new DatasetsItemsSelectorDefaultsOptions(null);
+			defaultsOptions = new DatasetsItemsSelectorDefaultsOptions();
 		}
 	}
 

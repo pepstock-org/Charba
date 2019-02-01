@@ -125,7 +125,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.configuration.Legend.ProxyLegendClickCallback#call(org.pepstock.charba.
-			 * client.jsinterop.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
+			 * client.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
 			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
@@ -140,7 +140,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.configuration.Legend.ProxyLegendHoverCallback#call(org.pepstock.charba.
-			 * client.jsinterop.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
+			 * client.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
 			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override

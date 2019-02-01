@@ -122,7 +122,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.configuration.Animation.ProxyAnimationCompleteCallback#call(org.pepstock.
-			 * charba.client.jsinterop.Chart, org.pepstock.charba.client.items.AnimationObject)
+			 * charba.client.Chart, org.pepstock.charba.client.items.AnimationObject)
 			 */
 			@Override
 			public void call(Chart context, AnimationObject animationObject) {
@@ -139,7 +139,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.configuration.Animation.ProxyAnimationProgressCallback#call(org.pepstock.
-			 * charba.client.jsinterop.Chart, org.pepstock.charba.client.items.AnimationObject)
+			 * charba.client.Chart, org.pepstock.charba.client.items.AnimationObject)
 			 */
 			@Override
 			public void call(Chart context, AnimationObject animationObject) {

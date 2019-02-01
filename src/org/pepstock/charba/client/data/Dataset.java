@@ -88,7 +88,7 @@ public abstract class Dataset extends NativeObjectContainer {
 		setValue(Property._charbaPatterns, patternsContainer);
 		setValue(Property._charbaGradients, gradientsContainer);
 	}
-
+	
 	/**
 	 * Returns the patterns container element.
 	 * 

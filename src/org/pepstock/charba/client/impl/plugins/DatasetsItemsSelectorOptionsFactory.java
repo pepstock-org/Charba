@@ -32,8 +32,8 @@ public final class DatasetsItemsSelectorOptionsFactory implements NativeObjectCo
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
-	 * .commons.NativeObject)
+	 * @see
+	 * org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
 	 */
 	@Override
 	public DatasetsItemsSelectorOptions create(NativeObject nativeObject) {
@@ -46,7 +46,7 @@ public final class DatasetsItemsSelectorOptionsFactory implements NativeObjectCo
 		} else {
 			// if here, no default global option
 			// then the plugin will use the static defaults
-			defaultsOptions = new DatasetsItemsSelectorDefaultsOptions(null);
+			defaultsOptions = new DatasetsItemsSelectorDefaultsOptions();
 		}
 		// creates the options by the native object and the defaults
 		return new DatasetsItemsSelectorOptions(nativeObject, defaultsOptions);
@@ -62,8 +62,8 @@ public final class DatasetsItemsSelectorOptionsFactory implements NativeObjectCo
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
-		 * .commons.NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
+		 * NativeObject)
 		 */
 		@Override
 		public DatasetsItemsSelectorDefaultsOptions create(NativeObject nativeObject) {

@@ -234,7 +234,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.configuration.ConfigurationOptions.ProxyChartClickCallback#call(org.pepstock
-			 * .charba.client.jsinterop.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
+			 * .charba.client.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
 			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
@@ -256,7 +256,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.configuration.ConfigurationOptions.ProxyChartHoverCallback#call(org.pepstock
-			 * .charba.client.jsinterop.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
+			 * .charba.client.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
 			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
@@ -272,7 +272,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.configuration.ConfigurationOptions.ProxyChartResizeCallback#call(org.
-			 * pepstock.charba.client.jsinterop.commons.NativeObject, org.pepstock.charba.client.Chart,
+			 * pepstock.charba.client.commons.NativeObject, org.pepstock.charba.client.Chart,
 			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override

@@ -31,6 +31,13 @@ final class ChartPointerDefaultsOptions extends NativeObjectContainer {
 	static final Cursor DEFAULT_CURSOR_POINTER = Cursor.POINTER;
 
 	/**
+	 * Builds the object with an empty java script object and uses the constants as default.
+	 */
+	ChartPointerDefaultsOptions() {
+		super();
+	}
+	
+	/**
 	 * Builds the object with a java script object stored into options.
 	 * 
 	 * @param nativeObject native object into options
