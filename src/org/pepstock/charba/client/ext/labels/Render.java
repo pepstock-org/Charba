@@ -18,15 +18,27 @@ package org.pepstock.charba.client.ext.labels;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * FIXME
- * 	 // render 'label', 'value', 'percentage', 'image' or custom function, default is 'percentage'
+ * Enumeration of available render to use to configure LABELS plugin.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public enum Render implements Key
 {
+	/**
+	 * The label will be rendered.
+	 */
 	label,
+	/**
+	 * The value will be rendered.
+	 */
 	value,
+	/**
+	 * The percentage will be rendered. Is the default.
+	 */
 	percentage,
+	/**
+	 * The images will be rendered.
+	 */
 	image
 }

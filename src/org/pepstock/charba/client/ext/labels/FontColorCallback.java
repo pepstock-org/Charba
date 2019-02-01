@@ -13,10 +13,25 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
+package org.pepstock.charba.client.ext.labels;
+
+import org.pepstock.charba.client.AbstractChart;
+
 /**
- * Main package with the implementation already exists plugins or other CHARTS.JS java script extensions.
+ * Callback interface of labels plugin to change font color at runtime, using the arguments.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-package org.pepstock.charba.client.ext;
+public interface FontColorCallback {
+
+	/**
+	 * Called to change font color at runtime, using the arguments.
+	 * 
+	 * @param chart chart instance
+	 * @param item font color item, passed by plugin
+	 * @return a string which represent a color. If returns <code>null</code>, it will use the default font color.
+	 */
+	String color(AbstractChart<?, ?> chart, FontColorItem item);
+
+}

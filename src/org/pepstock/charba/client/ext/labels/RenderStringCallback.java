@@ -13,10 +13,25 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
+package org.pepstock.charba.client.ext.labels;
+
+import org.pepstock.charba.client.AbstractChart;
+
 /**
- * Main package with the implementation already exists plugins or other CHARTS.JS java script extensions.
+ * Callback interface of labels plugin to provide the item to be rendered as string at runtime, using the arguments.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-package org.pepstock.charba.client.ext;
+public interface RenderStringCallback {
+
+	/**
+	 * Called to provide the item to be rendered as string at runtime, using the arguments.
+	 * 
+	 * @param chart chart instance
+	 * @param item render item, passed by plugin
+	 * @return a string instance to show as label
+	 */
+	String render(AbstractChart<?, ?> chart, RenderItem item);
+
+}

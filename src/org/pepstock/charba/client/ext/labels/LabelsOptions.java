@@ -32,8 +32,13 @@ import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Image;
 
-public final class LabelsOptions extends NativeObjectContainer {
-
+/**
+ * This is the object to map the LABELS plugin options, both at chart and global level.
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
+public class LabelsOptions extends NativeObjectContainer {
 	// defaults global options instance
 	private LabelsDefaultsOptions defaultsOptions;
 	// defaults global options factory
@@ -66,7 +71,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * 
+	 * Creates an empty object with plugin options.
 	 */
 	public LabelsOptions() {
 		// creates an empty object
@@ -78,15 +83,19 @@ public final class LabelsOptions extends NativeObjectContainer {
 		} else {
 			// if here, no default global option
 			// then the plugin will use the static defaults
-			defaultsOptions = new LabelsDefaultsOptions(null);
+			defaultsOptions = new LabelsDefaultsOptions();
 		}
 	}
 
 	/**
-	 * @param nativeObject
+	 * Creates the object using an existing options instance.<br>
+	 * This is used ONLY to read options instance into global or chart.
+	 * 
+	 * @param nativeObject the object using an existing options instance
 	 */
 	LabelsOptions(NativeObject nativeObject, LabelsDefaultsOptions defaultsOptions) {
 		super(nativeObject);
+		// stores default options
 		this.defaultsOptions = defaultsOptions;
 	}
 
@@ -95,7 +104,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param render what data must be showed.
 	 */
-	public void setRender(Render render) {
+	public final void setRender(Render render) {
 		setValue(Property.render, render);
 	}
 
@@ -104,7 +113,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return what data must be showed. Default is {@link Render#value}.
 	 */
-	public Render getRender() {
+	public final Render getRender() {
 		return getValue(Property.render, Render.class, Render.value);
 	}
 
@@ -113,7 +122,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param precision the precision for percentage
 	 */
-	public void setPrecision(int precision) {
+	public final void setPrecision(int precision) {
 		setValue(Property.precision, precision);
 	}
 
@@ -122,7 +131,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the precision for percentage. Default is 0.
 	 */
-	public int getPrecision() {
+	public final int getPrecision() {
 		return getValue(Property.precision, defaultsOptions.getPrecision());
 	}
 
@@ -131,7 +140,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param showZero whether or not labels of value 0 are displayed.
 	 */
-	public void setShowZero(boolean showZero) {
+	public final void setShowZero(boolean showZero) {
 		setValue(Property.showZero, showZero);
 	}
 
@@ -140,7 +149,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return whether or not labels of value 0 are displayed. Default is false.
 	 */
-	public boolean isShowZero() {
+	public final boolean isShowZero() {
 		return getValue(Property.showZero, defaultsOptions.isShowZero());
 	}
 
@@ -149,7 +158,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param size the font size.
 	 */
-	public void setFontSize(int size) {
+	public final void setFontSize(int size) {
 		setValue(Property.fontSize, size);
 	}
 
@@ -158,7 +167,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the font size. Default is <code>Defaults.get().getGlobal().getDefaultFontSize()</code>.
 	 */
-	public int getFontSize() {
+	public final int getFontSize() {
 		return getValue(Property.fontSize, defaultsOptions.getFontSize());
 	}
 
@@ -167,7 +176,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param color the font color as color.
 	 */
-	public void setFontColor(IsColor color) {
+	public final void setFontColor(IsColor color) {
 		setFontColor(color.toRGBA());
 	}
 
@@ -176,7 +185,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param color the font color as string.
 	 */
-	public void setFontColor(String color) {
+	public final void setFontColor(String color) {
 		setValue(Property.fontColor, color);
 	}
 
@@ -185,7 +194,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the font color. Default is <code>Defaults.get().getGlobal().getDefaultFontColorAsString()</code>.
 	 */
-	public String getFontColorAsString() {
+	public final String getFontColorAsString() {
 		return getValue(Property.fontColor, defaultsOptions.getFontColorAsString());
 	}
 
@@ -194,7 +203,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the font color.
 	 */
-	public IsColor getFontColor() {
+	public final IsColor getFontColor() {
 		return ColorBuilder.parse(getFontColorAsString());
 	}
 
@@ -203,7 +212,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param fontStyle the font style.
 	 */
-	public void setFontStyle(FontStyle fontStyle) {
+	public final void setFontStyle(FontStyle fontStyle) {
 		setValue(Property.fontStyle, fontStyle);
 	}
 
@@ -212,7 +221,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the font style. Default is <code>Defaults.get().getGlobal().getDefaultFontStyle()</code>.
 	 */
-	public FontStyle getFontStyle() {
+	public final FontStyle getFontStyle() {
 		return getValue(Property.fontStyle, FontStyle.class, defaultsOptions.getFontStyle());
 	}
 
@@ -221,7 +230,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param fontFamily the font family
 	 */
-	public void setFontFamily(String fontFamily) {
+	public final void setFontFamily(String fontFamily) {
 		setValue(Property.fontFamily, fontFamily);
 	}
 
@@ -230,7 +239,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the font family. Default is <code>Defaults.get().getGlobal().getDefaultFontFamily()</code>.
 	 */
-	public String getFontFamily() {
+	public final String getFontFamily() {
 		return getValue(Property.fontFamily, defaultsOptions.getFontFamily());
 	}
 
@@ -239,7 +248,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param textShadow <code>true</code> if draws text shadows under labels.
 	 */
-	public void setTextShadow(boolean textShadow) {
+	public final void setTextShadow(boolean textShadow) {
 		setValue(Property.textShadow, textShadow);
 	}
 
@@ -248,7 +257,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return <code>true</code> if draws text shadows under labels. Default is <code>false</code>.
 	 */
-	public boolean isTextShadow() {
+	public final boolean isTextShadow() {
 		return getValue(Property.textShadow, defaultsOptions.isTextShadow());
 	}
 
@@ -257,7 +266,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param shadowBlur the text shadow intensity.
 	 */
-	public void setShadowBlur(int shadowBlur) {
+	public final void setShadowBlur(int shadowBlur) {
 		setValue(Property.shadowBlur, shadowBlur);
 	}
 
@@ -266,7 +275,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the text shadow intensity. Default is 6.
 	 */
-	public int getShadowBlur() {
+	public final int getShadowBlur() {
 		return getValue(Property.shadowBlur, defaultsOptions.getShadowBlur());
 	}
 
@@ -275,7 +284,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param shadowOffsetX the text shadow X offset.
 	 */
-	public void setShadowOffsetX(int shadowOffsetX) {
+	public final void setShadowOffsetX(int shadowOffsetX) {
 		setValue(Property.shadowOffsetX, shadowOffsetX);
 	}
 
@@ -284,7 +293,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the text shadow X offset. Default is 3.
 	 */
-	public int getShadowOffsetX() {
+	public final int getShadowOffsetX() {
 		return getValue(Property.shadowOffsetX, defaultsOptions.getShadowOffsetX());
 	}
 
@@ -293,7 +302,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param shadowOffsetY the text shadow Y offset.
 	 */
-	public void setShadowOffsetY(int shadowOffsetY) {
+	public final void setShadowOffsetY(int shadowOffsetY) {
 		setValue(Property.shadowOffsetY, shadowOffsetY);
 	}
 
@@ -302,7 +311,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the text shadow Y offset. Default is 3.
 	 */
-	public int getShadowOffsetY() {
+	public final int getShadowOffsetY() {
 		return getValue(Property.shadowOffsetY, defaultsOptions.getShadowOffsetY());
 	}
 
@@ -311,7 +320,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param shadowColor the text shadow color as color.
 	 */
-	public void setShadowColor(IsColor shadowColor) {
+	public final void setShadowColor(IsColor shadowColor) {
 		setShadowColor(shadowColor.toRGBA());
 	}
 
@@ -320,7 +329,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param shadowColor the text shadow color as string.
 	 */
-	public void setShadowColor(String shadowColor) {
+	public final void setShadowColor(String shadowColor) {
 		setValue(Property.shadowColor, shadowColor);
 	}
 
@@ -329,7 +338,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the text shadow color as string. Default is <code>rgba(0,0,0,0.3)</code>.
 	 */
-	public String getShadowColorAsString() {
+	public final String getShadowColorAsString() {
 		return getValue(Property.shadowColor, defaultsOptions.getShadowColorAsString());
 	}
 
@@ -338,7 +347,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the text shadow color as color.
 	 */
-	public IsColor getShadowColor() {
+	public final IsColor getShadowColor() {
 		return ColorBuilder.parse(getShadowColorAsString());
 	}
 
@@ -347,7 +356,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param arc if draws label in arc.
 	 */
-	public void setArc(boolean arc) {
+	public final void setArc(boolean arc) {
 		setValue(Property.arc, arc);
 	}
 
@@ -356,7 +365,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return <code>true</code> if draws label in arc. Default is <code>false</code>.
 	 */
-	public boolean isArc() {
+	public final boolean isArc() {
 		return getValue(Property.arc, defaultsOptions.isArc());
 	}
 
@@ -365,7 +374,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param position the position to draw label.
 	 */
-	public void setPosition(Position position) {
+	public final void setPosition(Position position) {
 		setValue(Property.position, position.getValue());
 	}
 
@@ -374,7 +383,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the position to draw label. Default is {@link Position#defaults}.
 	 */
-	public Position getPosition() {
+	public final Position getPosition() {
 		String value = getValue(Property.position, defaultsOptions.getPositionAsString());
 		return Position.getPositionByValue(value);
 	}
@@ -384,7 +393,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param overlap if draws label even it's overlap.
 	 */
-	public void setOverlap(boolean overlap) {
+	public final void setOverlap(boolean overlap) {
 		setValue(Property.overlap, overlap);
 	}
 
@@ -393,7 +402,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return <code>true</code>if draws label even it's overlap. Default is <code>true</code>.
 	 */
-	public boolean isOverlap() {
+	public final boolean isOverlap() {
 		return getValue(Property.overlap, defaultsOptions.isOverlap());
 	}
 
@@ -404,7 +413,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * @param showActualPercentages if shows the real calculated percentages from the values and don't apply the additional
 	 *            logic to fit the percentages to 100 in total.
 	 */
-	public void setShowActualPercentages(boolean showActualPercentages) {
+	public final void setShowActualPercentages(boolean showActualPercentages) {
 		setValue(Property.showActualPercentages, showActualPercentages);
 	}
 
@@ -415,7 +424,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * @return <code>true</code>if shows the real calculated percentages from the values and don't apply the additional logic to
 	 *         fit the percentages to 100 in total. Default is <code>false</code>.
 	 */
-	public boolean isShowActualPercentages() {
+	public final boolean isShowActualPercentages() {
 		return getValue(Property.showActualPercentages, defaultsOptions.isShowActualPercentages());
 	}
 
@@ -424,7 +433,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param outsidePadding the padding when position is {@link Position#outside}.
 	 */
-	public void setOutsidePadding(int outsidePadding) {
+	public final void setOutsidePadding(int outsidePadding) {
 		setValue(Property.outsidePadding, outsidePadding);
 	}
 
@@ -433,7 +442,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the padding when position is {@link Position#outside}. Default is 2.
 	 */
-	public int getOutsidePadding() {
+	public final int getOutsidePadding() {
 		return getValue(Property.outsidePadding, defaultsOptions.getOutsidePadding());
 	}
 
@@ -442,7 +451,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param textMargin the margin of text when position is {@link Position#outside} or {@link Position#border}.
 	 */
-	public void setTextMargin(int textMargin) {
+	public final void setTextMargin(int textMargin) {
 		setValue(Property.textMargin, textMargin);
 	}
 
@@ -451,7 +460,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the margin of text when position is {@link Position#outside} or {@link Position#border}. Default is 2.
 	 */
-	public int getTextMargin() {
+	public final int getTextMargin() {
 		return getValue(Property.textMargin, defaultsOptions.getTextMargin());
 	}
 
@@ -460,7 +469,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param images images when {@link Render} is {@link Render#image}.
 	 */
-	public void setImages(ImageResource... images) {
+	public final void setImages(ImageResource... images) {
 		// checks if argument is consistent
 		if (images != null) {
 			// creates a temporary array
@@ -487,7 +496,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param images images when {@link Render} is {@link Render#image}.
 	 */
-	public void setImages(ImageElement... images) {
+	public final void setImages(ImageElement... images) {
 		setArrayValue(Property.images, ArrayImage.of(images));
 	}
 
@@ -496,7 +505,7 @@ public final class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the images when {@link Render} is {@link Render#image} or an empty list.
 	 */
-	public List<ImageElement> getImages() {
+	public final List<ImageElement> getImages() {
 		// gets array
 		ArrayImage array = getArrayValue(Property.images);
 		return ArrayListHelper.list(array);

@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
- * Factory to get the options (form chart or from default global ones) related to pointer plugin.
+ * Factory to get the options (form chart or from default global ones) related to LABELS plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -32,8 +32,8 @@ public final class LabelsOptionsFactory implements NativeObjectContainerFactory<
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
-	 * .commons.NativeObject)
+	 * @see
+	 * org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
 	 */
 	@Override
 	public LabelsOptions create(NativeObject nativeObject) {
@@ -46,7 +46,7 @@ public final class LabelsOptionsFactory implements NativeObjectContainerFactory<
 		} else {
 			// if here, no default global option
 			// then the plugin will use the static defaults
-			defaultsOptions = new LabelsDefaultsOptions(null);
+			defaultsOptions = new LabelsDefaultsOptions();
 		}
 		// creates the options by the native object and the defaults
 		return new LabelsOptions(nativeObject, defaultsOptions);
@@ -62,8 +62,8 @@ public final class LabelsOptionsFactory implements NativeObjectContainerFactory<
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
-		 * .commons.NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
+		 * NativeObject)
 		 */
 		@Override
 		public LabelsDefaultsOptions create(NativeObject nativeObject) {

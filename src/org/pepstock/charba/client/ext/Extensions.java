@@ -30,12 +30,12 @@ public interface Extensions extends ClientBundle {
 	public static final Extensions INSTANCE = GWT.create(Extensions.class);
 
 	/**
-	 * Contains text representation of native chart <a href="https://github.com/emn178/chartjs-plugin-labels">labels plugin</a> code.
+	 * Contains text representation of native chart <a href="https://github.com/emn178/chartjs-plugin-labels">labels plugin</a>
+	 * code.
 	 * 
 	 * @return chart <a href="https://github.com/emn178/chartjs-plugin-labels">labels plugin</a> code
 	 */
 	@Source("js/chartjs-plugin-labels.min.js")
 	TextResource labelsPlugin();
-
 
 }

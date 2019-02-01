@@ -16,38 +16,68 @@
 package org.pepstock.charba.client.ext.labels;
 
 /**
- * FIXME
+ * Enumeration of available positions to use to configure LABELS plugin.
+ * 
  * @author Andrea "Stock" Stocchero
- * position to draw label, available value is 'default', 'border' and 'outside'
  */
 public enum Position
 {
-	defaults("default") ,
+	/**
+	 * In labels plugin is named 'default', inside the chart.
+	 */
+	defaults("default"),
+	/**
+	 * The labels are located on border.
+	 */
 	border("border"),
+	/**
+	 * The labels are located outisde of the chart.
+	 */
 	outside("outside");
-	
+
+	// value of enum
+	// this is the real value to set to configure
+	// correctly the LABELS plugin
 	private final String value;
 
+	/**
+	 * Creates the enumeration item by its value.
+	 * 
+	 * @param value this is the real value to set to configure LABELS plugin
+	 */
 	private Position(String value) {
 		this.value = value;
 	}
 
 	/**
-	 * @return the value
+	 * Rewturns the real value to set to configure LABELS plugin.
+	 * 
+	 * @return the value the real value to set to configure LABELS plugin
 	 */
 	String getValue() {
 		return value;
 	}
-	
+
+	/**
+	 * Returns the position enumeration item by its value.
+	 * 
+	 * @param value the real value to set to configure LABELS plugin
+	 * @return the position enumeration item or {@link Position#defaults} is the value is wrong.
+	 */
 	static final Position getPositionByValue(String value) {
+		// if the value is consistent
 		if (value != null) {
+			// scans all position
 			for (Position position : values()) {
+				// if the position matches with the value
 				if (position.getValue().equalsIgnoreCase(value)) {
+					// returns the position
 					return position;
 				}
 			}
 		}
+		// returns the default
 		return Position.defaults;
 	}
-	
+
 }

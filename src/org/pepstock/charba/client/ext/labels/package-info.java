@@ -14,7 +14,8 @@
     limitations under the License.
 */
 /**
- * FIXME
+ * Contains all classes to use LABELS plugin available for CHART.JS
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

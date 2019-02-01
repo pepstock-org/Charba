@@ -21,12 +21,12 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
- * FIXME
+ * It wraps default global options if there are and provides all default values for LABELS plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
 final class LabelsDefaultsOptions extends NativeObjectContainer {
-	//
+
 	private static final Render DEFAULT_RENDER = Render.value;
 
 	private static final int DEFAULT_PRECISION = 0;
@@ -56,8 +56,16 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	private static final int DEFAULT_TEXTMARGIN = 2;
 
 	/**
+	 * Creates an empty options without any default global options. it will use the constants as default of plugin properties.
+	 */
+	LabelsDefaultsOptions() {
+		super();
+	}
+
+	/**
+	 * Creates the object wrapping the default global options if there are.
 	 * 
-	 * @param nativeObject native object into options
+	 * @param nativeObject native object which maps default global options.
 	 */
 	LabelsDefaultsOptions(NativeObject nativeObject) {
 		super(nativeObject);
