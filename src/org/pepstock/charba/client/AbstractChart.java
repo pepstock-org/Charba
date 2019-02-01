@@ -469,7 +469,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 */
 	public final DatasetMetaItem getDatasetMeta(int index) {
 		// checks consistency of chart and datasets
-		if (chart != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size()) {
+		if (chart != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size() && index >= 0) {
 			// returns the array
 			return new DatasetMetaItem(chart.getDatasetMeta(index));
 		}
@@ -503,7 +503,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 */
 	public boolean isDatasetVisible(int index) {
 		// checks consistency of chart and datasets
-		if (chart != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size()) {
+		if (chart != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size() && index >= 0) {
 			// gets if dataset is visible or not
 			return chart.isDatasetVisible(index);
 		}

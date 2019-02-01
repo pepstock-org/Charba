@@ -13,19 +13,13 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.data;
+package org.pepstock.charba.client.colors;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartNode;
-import org.pepstock.charba.client.colors.Gradient;
-import org.pepstock.charba.client.colors.GradientColor;
-import org.pepstock.charba.client.colors.GradientOrientation;
-import org.pepstock.charba.client.colors.GradientScope;
-import org.pepstock.charba.client.colors.GradientType;
-import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
@@ -44,7 +38,7 @@ import com.google.gwt.canvas.dom.client.Context2d;
  * @see Gradient
  * @see com.google.gwt.canvas.dom.client.CanvasGradient
  */
-final class CanvasObjectFactory {
+public final class CanvasObjectFactory {
 
 	// cache for canvas gradients already created
 	// K = chart id, K = gradient id, V = canvas gradient
@@ -69,7 +63,7 @@ final class CanvasObjectFactory {
 	 * @param pattern pattern instance created at configuration level
 	 * @return a GWT canvas pattern
 	 */
-	static CanvasPattern createPattern(AbstractChart<?, ?> chart, Pattern pattern) {
+	public static CanvasPattern createPattern(AbstractChart<?, ?> chart, Pattern pattern) {
 		final Map<Integer, CanvasPattern> patternsMap;
 		// checks if the pattern is already created
 		if (PATTERNS.containsKey(chart.getId())) {
@@ -100,7 +94,7 @@ final class CanvasObjectFactory {
 	 * 
 	 * @param chart chart instance on which removes all loaded gradients
 	 */
-	static void resetGradients(AbstractChart<?, ?> chart) {
+	public static void resetGradients(AbstractChart<?, ?> chart) {
 		GRADIENTS.remove(chart.getId());
 	}
 
@@ -109,7 +103,7 @@ final class CanvasObjectFactory {
 	 * 
 	 * @param chart chart instance on which removes all loaded objects.
 	 */
-	static void clear(AbstractChart<?, ?> chart) {
+	public static void clear(AbstractChart<?, ?> chart) {
 		PATTERNS.remove(chart.getId());
 		GRADIENTS.remove(chart.getId());
 
@@ -125,7 +119,7 @@ final class CanvasObjectFactory {
 	 * @param index index of gradient related to index of dataset item of whole dataset
 	 * @return a GWT canvas gradient
 	 */
-	static CanvasGradient createGradient(AbstractChart<?, ?> chart, Gradient gradient, int datasetIndex, int index) {
+	public static CanvasGradient createGradient(AbstractChart<?, ?> chart, Gradient gradient, int datasetIndex, int index) {
 		// checks if the gradient is already created
 		final Map<Integer, CanvasGradient> gradientsMap;
 		// checks if the gradient is already created
@@ -327,13 +321,21 @@ final class CanvasObjectFactory {
 			if (!Double.isNaN(node.getInnerRadius()) && !Double.isNaN(node.getOuterRadius())) {
 				// gets meta data
 				DatasetMetaItem metaItem = chart.getDatasetMeta(datasetIndex);
-				DatasetItem item = metaItem.getDatasets().get(index);
-				// checks if chart is circular or not
-				if (!Double.isNaN(item.getView().getInnerRadius()) && !Double.isNaN(item.getView().getOuterRadius())) {
-					// uses the inner radius
-					radius0 = item.getView().getInnerRadius();
-					// uses the outer radius
-					radius1 = item.getView().getOuterRadius();
+				// checks if datasetIndex is consistent
+				if (metaItem != null && index < metaItem.getDatasets().size() && index >= 0) {
+					DatasetItem item = metaItem.getDatasets().get(index);
+					// checks if chart is circular or not
+					if (!Double.isNaN(item.getView().getInnerRadius()) && !Double.isNaN(item.getView().getOuterRadius())) {
+						// uses the inner radius
+						radius0 = item.getView().getInnerRadius();
+						// uses the outer radius
+						radius1 = item.getView().getOuterRadius();
+					} else {
+						// uses the inner radius
+						radius0 = node.getInnerRadius();
+						// uses the outer radius
+						radius1 = node.getOuterRadius();
+					}
 				} else {
 					// uses the inner radius
 					radius0 = node.getInnerRadius();
@@ -362,13 +364,21 @@ final class CanvasObjectFactory {
 			if (!Double.isNaN(node.getInnerRadius()) && !Double.isNaN(node.getOuterRadius())) {
 				// gets meta data
 				DatasetMetaItem metaItem = chart.getDatasetMeta(datasetIndex);
-				DatasetItem item = metaItem.getDatasets().get(index);
-				// checks if chart is circular or not
-				if (!Double.isNaN(item.getView().getInnerRadius()) && !Double.isNaN(item.getView().getOuterRadius())) {
-					// uses the inner radius
-					radius0 = item.getView().getInnerRadius();
-					// uses the outer radius
-					radius1 = item.getView().getOuterRadius();
+				// checks if datasetIndex is consistent
+				if (metaItem != null && index < metaItem.getDatasets().size() && index >= 0) {
+					DatasetItem item = metaItem.getDatasets().get(index);
+					// checks if chart is circular or not
+					if (!Double.isNaN(item.getView().getInnerRadius()) && !Double.isNaN(item.getView().getOuterRadius())) {
+						// uses the inner radius
+						radius0 = item.getView().getInnerRadius();
+						// uses the outer radius
+						radius1 = item.getView().getOuterRadius();
+					} else {
+						// uses the inner radius
+						radius0 = node.getInnerRadius();
+						// uses the outer radius
+						radius1 = node.getOuterRadius();
+					}
 				} else {
 					// uses the inner radius
 					radius0 = node.getInnerRadius();

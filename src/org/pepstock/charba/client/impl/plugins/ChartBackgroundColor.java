@@ -16,11 +16,16 @@
 package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.colors.CanvasObjectFactory;
 import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
+import com.google.gwt.canvas.dom.client.CanvasGradient;
+import com.google.gwt.canvas.dom.client.CanvasPattern;
 import com.google.gwt.canvas.dom.client.Context2d;
 
 /**
@@ -43,6 +48,10 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	private final ChartBackgroundColorOptionsFactory factory = new ChartBackgroundColorOptionsFactory();
 	// color instance
 	private final String color;
+	// gradient instance
+	private final Gradient gradient;
+	// pattern instance
+	private final Pattern pattern;
 
 	/**
 	 * Default constructor with WIHITE background color.
@@ -68,24 +77,80 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	public ChartBackgroundColor(String color) {
 		super();
 		this.color = (color != null) ? color : DEFAULT_BACKGROUND_COLOR;
+		this.pattern = null;
+		this.gradient = null;
 	}
 
 	/**
-	 * Returns the color as string.
+	 * Builds the object with the default gradient for all charts.
 	 * 
-	 * @return the color
+	 * @param gradient background default gradient for all charts.
+	 */
+	public ChartBackgroundColor(Gradient gradient) {
+		super();
+		if (gradient == null) {
+			throw new IllegalArgumentException("Gradient is null");
+		}
+		this.color = null;
+		this.pattern = null;
+		this.gradient = gradient;
+	}
+
+	/**
+	 * Builds the object with the default gradient for all charts.
+	 * 
+	 * @param pattern background default gradient for all charts.
+	 */
+	public ChartBackgroundColor(Pattern pattern) {
+		super();
+		if (pattern == null) {
+			throw new IllegalArgumentException("Pattern is null");
+		}
+		this.color = null;
+		this.pattern = pattern;
+		this.gradient = null;
+	}
+
+	/**
+	 * Returns the color as string if it has been set, otherwise <code>null</code>.
+	 * 
+	 * @return the color as string if it has been set, otherwise <code>null</code>.
 	 */
 	public String getColorAsString() {
 		return color;
 	}
 
 	/**
-	 * Returns the color.
+	 * Returns the color if it has been set, otherwise <code>null</code>.
 	 * 
-	 * @return the color
+	 * @return the color if it has been set, otherwise <code>null</code>
 	 */
 	public IsColor getColor() {
-		return ColorBuilder.parse(getColorAsString());
+		// checks if color has been set
+		if (getColorAsString() != null) {
+			// returns color
+			return ColorBuilder.parse(getColorAsString());
+		}
+		// otherwise null
+		return null;
+	}
+
+	/**
+	 * Returns the gradient if it has been set, otherwise <code>null</code>.
+	 * 
+	 * @return the gradient if it has been set, otherwise <code>null</code>
+	 */
+	public Gradient getGradient() {
+		return gradient;
+	}
+
+	/**
+	 * Returns the pattern if it has been set, otherwise <code>null</code>.
+	 * 
+	 * @return the pattern if it has been set, otherwise <code>null</code>
+	 */
+	public Pattern getPattern() {
+		return pattern;
 	}
 
 	/*
@@ -112,12 +177,30 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 			bgOptions = chart.getOptions().getPlugins().getOptions(ID, factory);
 		} else {
 			bgOptions = new ChartBackgroundColorOptions();
-			bgOptions.setBackgroundColor(color);
+			if (color != null) {
+				bgOptions.setBackgroundColor(color);
+			} else if (pattern != null) {
+				bgOptions.setBackgroundColor(pattern);
+			} else if (gradient != null) {
+				bgOptions.setBackgroundColor(gradient);
+			}
 		}
 		// gets the canvas
 		Context2d ctx = chart.getCanvas().getContext2d();
-		// set fill canvas color
-		ctx.setFillStyle(bgOptions.getBackgroundColorAsString());
+		if (ChartBackgroundColorOptions.ColorType.color.equals(bgOptions.getColorType())) {
+			// set fill canvas color
+			ctx.setFillStyle(bgOptions.getBackgroundColorAsString());
+		} else if (ChartBackgroundColorOptions.ColorType.pattern.equals(bgOptions.getColorType())){
+			// creates the pattern
+			CanvasPattern canvasPattern = CanvasObjectFactory.createPattern(chart, bgOptions.getBackgroundColorAsPattern());
+			// set fill canvas pattern
+			ctx.setFillStyle(canvasPattern);
+		} else if (ChartBackgroundColorOptions.ColorType.gradient.equals(bgOptions.getColorType())){
+			// creates the gradient
+			CanvasGradient canvasGradient = CanvasObjectFactory.createGradient(chart, bgOptions.getBackgroundColorAsGradient(), Integer.MIN_VALUE, Integer.MIN_VALUE);
+			// set fill canvas color
+			ctx.setFillStyle(canvasGradient);
+		}
 		// fills back ground
 		ctx.fillRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
 		// always TRUE
