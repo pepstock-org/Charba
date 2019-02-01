@@ -59,9 +59,8 @@ public final class Controllers {
 	 * @param controller controller instance
 	 * @return <code>true</code> if registered, otherwise <code>false</code> if the controller is already registered with the
 	 *         controller type of controller instance.
-	 * @throws InvalidControllerTypeException if the controller type is not correct.
 	 */
-	public boolean extend(Controller controller) throws InvalidControllerTypeException {
+	public boolean extend(Controller controller) {
 		// checks the consistency of controller
 		// and creates a java script object, wrapper of the controller
 		WrapperController wController = check(controller);
@@ -89,9 +88,8 @@ public final class Controllers {
 	 * 
 	 * @param controller controller implementation
 	 * @return the wrapper controller instance or <code>null</code> if there is any error.
-	 * @throws InvalidControllerTypeException if the controller type is not correct.
 	 */
-	private WrapperController check(Controller controller) throws InvalidControllerTypeException {
+	private WrapperController check(Controller controller) {
 		// checks the controller type
 		ControllerTypeChecker.check(controller.getType());
 		// checks if type is already registered

@@ -17,21 +17,28 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayImage;
+import org.pepstock.charba.client.commons.ArrayImageList;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.items.UndefinedValues;
 
+import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.resources.client.ImageResource;
@@ -46,9 +53,6 @@ import com.google.gwt.user.client.ui.Image;
  *
  */
 abstract class LiningDataset extends Dataset {
-
-	// default instance of image for point style
-	private final static ImageElement DEFAULT_IMAGE_POINT_STYLE = null;
 
 	/**
 	 * Name of properties of native object.
@@ -76,7 +80,24 @@ abstract class LiningDataset extends Dataset {
 		pointHoverRadius,
 		pointRotation,
 		// internal key to store if point style is an image or not
-		_charbaPointStyle
+		_charbaPointStyle,
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 */
+	LiningDataset() {
+		super();
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 */
+	LiningDataset(IsDefaultOptions defaultValues) {
+		super(defaultValues);
 	}
 
 	/**
@@ -95,6 +116,8 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setBackgroundColor(String backgroundColor) {
 		setValue(Property.backgroundColor, backgroundColor);
+		// removes the flag because default is string color
+		resetBeingColors(Property.backgroundColor);
 	}
 
 	/**
@@ -103,7 +126,22 @@ abstract class LiningDataset extends Dataset {
 	 * @param backgroundColor the fill pattern under the line.
 	 */
 	public void setBackgroundColor(Pattern backgroundColor) {
-		setValue(Property.backgroundColor, backgroundColor.getPattern());
+		// sets value to patterns
+		getPatternsContainer().setObjects(Property.backgroundColor, ArrayObject.of(backgroundColor));
+		// removes the property
+		resetBeingPatterns(Property.backgroundColor);
+	}
+
+	/**
+	 * Sets the fill gradient under the line.
+	 * 
+	 * @param backgroundColor the fill gradient under the line.
+	 */
+	public void setBackgroundColor(Gradient backgroundColor) {
+		// sets value to gradients
+		getGradientsContainer().setObjects(Property.backgroundColor, ArrayObject.of(backgroundColor));
+		// removes the property
+		resetBeingGradients(Property.backgroundColor);
 	}
 
 	/**
@@ -112,17 +150,15 @@ abstract class LiningDataset extends Dataset {
 	 * @return the fill color under the line. If property is missing or not a color, returns the default background color.
 	 */
 	public String getBackgroundColorAsString() {
-		// gets type of property
-		ObjectType type = type(Property.backgroundColor);
-		// checks if the property is a string (therefore a color)
-		if (ObjectType.String.equals(type)) {
+		// checks if the property is not a pattern or gradient (therefore a color)
+		if (hasColors(Property.backgroundColor)) {
 			// returns color as string
-			return getValue(Property.backgroundColor, Defaults.get().getGlobal().getElements().getLine().getBackgroundColorAsString());
+			return getValue(Property.backgroundColor, getDefaultValues().getElements().getLine().getBackgroundColorAsString());
 		} else {
 			// if here, the property is not a string
-			// therefore the property is missing or a pattern
+			// or the property is missing or a pattern
 			// returns default value
-			return Defaults.get().getGlobal().getElements().getLine().getBackgroundColorAsString();
+			return getDefaultValues().getElements().getLine().getBackgroundColorAsString();
 		}
 	}
 
@@ -136,25 +172,40 @@ abstract class LiningDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the fill pattern under the line. If property is missing or not a pattern, returns
-	 * {@link Pattern#DEFAULT_PATTERN}.
+	 * Returns the fill pattern under the line. If property is missing or not a pattern, returns <code>null</code>.
 	 * 
-	 * @return the fill pattern under the line. If property is missing or not a pattern, returns
-	 *         {@link Pattern#DEFAULT_PATTERN}.
+	 * @return the fill pattern under the line. If property is missing or not a pattern, returns <code>null</code>.
 	 */
 	public Pattern getBackgroundColorAsPattern() {
-		// gets type of property
-		ObjectType type = type(Property.backgroundColor);
-		// checks if the property is a object (therefore a pattern)
-		if (ObjectType.Object.equals(type)) {
-			// returns the pattern
-			CanvasPattern pattern = getValue(Property.backgroundColor, Pattern.DEFAULT_CANVAS_PATTERN);
-			return new Pattern(pattern);
+		// checks if the property is not a pattern (therefore a color or gradient)
+		if (hasPatterns(Property.backgroundColor)) {
+			List<Pattern> patterns = getPatternsContainer().getObjects(Property.backgroundColor);
+			// returns color as pattern
+			return patterns.get(0);
 		} else {
 			// if here, the property is not a object
-			// therefore the property is missing or a color
-			// returns a pattern without canvas pattern
-			return Pattern.DEFAULT_PATTERN;
+			// or the property is missing or a color
+			// returns null
+			return null;
+		}
+	}
+
+	/**
+	 * Returns the fill gradient under the line. If property is missing or not a gradient, returns <code>null</code>.
+	 * 
+	 * @return the fill gradient under the line. If property is missing or not a gradient, returns <code>null</code>.
+	 */
+	public Gradient getBackgroundColorAsGradient() {
+		// checks if the property is not a gradient (therefore a color or pattern)
+		if (hasGradients(Property.backgroundColor)) {
+			List<Gradient> gradients = getGradientsContainer().getObjects(Property.backgroundColor);
+			// returns color as gradient
+			return gradients.get(0);
+		} else {
+			// if here, the property is not a gradient
+			// or the property is missing
+			// returns null
+			return null;
 		}
 	}
 
@@ -174,24 +225,66 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setBorderColor(String borderColor) {
 		setValue(Property.borderColor, borderColor);
+		// removes the flag because default is string color
+		resetBeingColors(Property.borderColor);
 	}
 
 	/**
-	 * Returns the color of the line.
+	 * Sets the gradient of the line.
 	 * 
-	 * @return the color of the line.
+	 * @param borderColor the gradient of the line.
+	 */
+	public void setBorderColor(Gradient borderColor) {
+		// sets value to gradients
+		getGradientsContainer().setObjects(Property.borderColor, ArrayObject.of(borderColor));
+		// removes the property
+		resetBeingGradients(Property.borderColor);
+	}
+
+	/**
+	 * Returns the color of the line. If property is missing or not a color, returns the default border color.
+	 * 
+	 * @return the color of the line. If property is missing or not a color, returns the default border color.
 	 */
 	public String getBorderColorAsString() {
-		return getValue(Property.borderColor, Defaults.get().getGlobal().getElements().getLine().getBorderColorAsString());
+		// checks if the property is not a pattern or gradient (therefore a color)
+		if (hasColors(Property.borderColor)) {
+			// returns color as string
+			return getValue(Property.borderColor, getDefaultValues().getElements().getLine().getBorderColorAsString());
+		} else {
+			// if here, the property is not a string
+			// or the property is missing or a pattern
+			// returns default value
+			return getDefaultValues().getElements().getLine().getBorderColorAsString();
+		}
 	}
 
 	/**
-	 * Returns the color of the line.
+	 * Returns the color of the line. If property is missing or not a color, returns the default border color.
 	 * 
-	 * @return the color of the line.
+	 * @return the color of the line. If property is missing or not a color, returns the default border color.
 	 */
 	public IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
+	}
+
+	/**
+	 * Returns the gradient of the line. If property is missing or not a gradient, returns <code>null</code>.
+	 * 
+	 * @return the gradient of the line. If property is missing or not a gradient, returns <code>null</code>.
+	 */
+	public Gradient getBorderColorAsGradient() {
+		// checks if the property is not a gradient (therefore a color or pattern)
+		if (hasGradients(Property.borderColor)) {
+			List<Gradient> gradients = getGradientsContainer().getObjects(Property.borderColor);
+			// returns color as gradient
+			return gradients.get(0);
+		} else {
+			// if here, the property is not a gradient
+			// or the property is missing
+			// returns null
+			return null;
+		}
 	}
 
 	/**
@@ -209,7 +302,7 @@ abstract class LiningDataset extends Dataset {
 	 * @return the width of the line in pixels.
 	 */
 	public int getBorderWidth() {
-		return getValue(Property.borderWidth, Defaults.get().getGlobal().getElements().getLine().getBorderWidth());
+		return getValue(Property.borderWidth, getDefaultValues().getElements().getLine().getBorderWidth());
 	}
 
 	/**
@@ -250,7 +343,7 @@ abstract class LiningDataset extends Dataset {
 	 * @return the line dash pattern offset or "phase".
 	 */
 	public int getBorderDashOffset() {
-		return getValue(Property.borderDashOffset, Defaults.get().getGlobal().getElements().getLine().getBorderDashOffset());
+		return getValue(Property.borderDashOffset, getDefaultValues().getElements().getLine().getBorderDashOffset());
 	}
 
 	/**
@@ -270,7 +363,7 @@ abstract class LiningDataset extends Dataset {
 	 * @return how the end points of every line are drawn.
 	 */
 	public CapStyle getBorderCapStyle() {
-		return getValue(Property.borderCapStyle, CapStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderCapStyle());
+		return getValue(Property.borderCapStyle, CapStyle.class, getDefaultValues().getElements().getLine().getBorderCapStyle());
 	}
 
 	/**
@@ -294,7 +387,7 @@ abstract class LiningDataset extends Dataset {
 	 * @return There are three possible values for this property: round, bevel and miter.
 	 */
 	public JoinStyle getBorderJoinStyle() {
-		return getValue(Property.borderJoinStyle, JoinStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderJoinStyle());
+		return getValue(Property.borderJoinStyle, JoinStyle.class, getDefaultValues().getElements().getLine().getBorderJoinStyle());
 	}
 
 	/**
@@ -327,7 +420,7 @@ abstract class LiningDataset extends Dataset {
 			return getValue(Property.fill, false) ? Fill.origin : Fill.nofill;
 		}
 		// returns the fill object because was not stored as boolean
-		return getValue(Property.fill, Fill.class, Defaults.get().getGlobal().getElements().getLine().getFill());
+		return getValue(Property.fill, Fill.class, getDefaultValues().getElements().getLine().getFill());
 	}
 
 	/**
@@ -347,7 +440,7 @@ abstract class LiningDataset extends Dataset {
 	 * @return curve tension of the line.
 	 */
 	public double getLineTension() {
-		return getValue(Property.lineTension, Defaults.get().getGlobal().getElements().getLine().getTension());
+		return getValue(Property.lineTension, getDefaultValues().getElements().getLine().getTension());
 	}
 
 	/**
@@ -357,6 +450,8 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBackgroundColor(IsColor... pointBackgroundColor) {
 		setValueOrArray(Property.pointBackgroundColor, pointBackgroundColor);
+		// removes the flag because default is string color
+		resetBeingColors(Property.pointBackgroundColor);
 	}
 
 	/**
@@ -366,16 +461,41 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBackgroundColor(String... pointBackgroundColor) {
 		setValueOrArray(Property.pointBackgroundColor, pointBackgroundColor);
+		// removes the flag because default is string color
+		resetBeingColors(Property.pointBackgroundColor);
 	}
 
 	/**
-	 * Returns the fill color for points.
+	 * Sets the gradients for points.
 	 * 
-	 * @return list of the fill color for points.
+	 * @param pointBackgroundColor array of the gradients for points.
+	 */
+	public void setPointBackgroundColor(Gradient... pointBackgroundColor) {
+		// sets value to gradients
+		getGradientsContainer().setObjects(Property.pointBackgroundColor, ArrayObject.of(pointBackgroundColor));
+		// removes the property
+		resetBeingGradients(Property.pointBackgroundColor);
+	}
+
+	/**
+	 * Returns the fill color for points. If property is missing or not a color, returns the default point background color
+	 * color.
+	 * 
+	 * @return list of the fill color for points. If property is missing or not a color, returns the point background color
+	 *         color.
 	 */
 	public List<String> getPointBackgroundColorAsString() {
-		ArrayString array = getValueOrArray(Property.pointBackgroundColor, Defaults.get().getGlobal().getElements().getPoint().getBackgroundColorAsString());
-		return ArrayListHelper.list(array);
+		// checks if the property is not a pattern or gradient (therefore a color)
+		if (hasColors(Property.pointBackgroundColor)) {
+			// returns color as string
+			ArrayString array = getValueOrArray(Property.pointBackgroundColor, getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
+			return ArrayListHelper.list(array);
+		} else {
+			// if here, the property is not a string
+			// or the property is missing or a gradient
+			// returns default value
+			return ArrayListHelper.list(ArrayString.of(getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
+		}
 	}
 
 	/**
@@ -388,12 +508,31 @@ abstract class LiningDataset extends Dataset {
 	}
 
 	/**
+	 * Returns the fill color for points. If property is missing or not a gradient, returns an empty list.
+	 * 
+	 * @return list of the fill color for points. If property is missing or not a gradient, returns an empty list.
+	 */
+	public List<Gradient> getPointBackgroundColorAsGradient() {
+		// checks if the property is not a gradient (therefore a color or pattern)
+		if (hasGradients(Property.pointBackgroundColor)) {
+			return getGradientsContainer().getObjects(Property.pointBackgroundColor);
+		} else {
+			// if here, the property is not a gradient
+			// or the property is missing
+			// returns empty list
+			return new ArrayObjectContainerList<Gradient>();
+		}
+	}
+
+	/**
 	 * Sets the border color for points.
 	 * 
 	 * @param pointBorderColor array of the border color for points.
 	 */
 	public void setPointBorderColor(IsColor... pointBorderColor) {
 		setValueOrArray(Property.pointBorderColor, pointBorderColor);
+		// removes the flag because default is string color
+		resetBeingColors(Property.pointBorderColor);
 	}
 
 	/**
@@ -403,25 +542,67 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBorderColor(String... pointBorderColor) {
 		setValueOrArray(Property.pointBorderColor, pointBorderColor);
+		// removes the flag because default is string color
+		resetBeingColors(Property.pointBorderColor);
 	}
 
 	/**
-	 * Returns the border color for points.
+	 * Sets the border gradient for points.
 	 * 
-	 * @return list of the border color for points.
+	 * @param pointBorderColor array of the border gradient for points.
+	 */
+	public void setPointBorderColor(Gradient... pointBorderColor) {
+		// sets value to gradients
+		getGradientsContainer().setObjects(Property.pointBorderColor, ArrayObject.of(pointBorderColor));
+		// removes the property
+		resetBeingGradients(Property.pointBorderColor);
+	}
+
+	/**
+	 * Returns the border color for points. If property is missing or not a color, returns the default point border color.
+	 * 
+	 * @return list of the border color for points. If property is missing or not a color, returns the default point border
+	 *         color.
 	 */
 	public List<String> getPointBorderColorAsString() {
-		ArrayString array = getValueOrArray(Property.pointBorderColor, Defaults.get().getGlobal().getElements().getPoint().getBorderColorAsString());
-		return ArrayListHelper.list(array);
+		// checks if the property is not a pattern or gradient (therefore a color)
+		if (hasColors(Property.pointBorderColor)) {
+			// returns color as string
+			ArrayString array = getValueOrArray(Property.pointBorderColor, getDefaultValues().getElements().getPoint().getBorderColorAsString());
+			return ArrayListHelper.list(array);
+		} else {
+			// if here, the property is not a string
+			// or the property is missing or a pattern
+			// returns default value
+			return ArrayListHelper.list(ArrayString.of(getDefaultValues().getElements().getLine().getBorderColorAsString()));
+		}
 	}
 
 	/**
-	 * Returns the border color for points.
+	 * Returns the border color for points. If property is missing or not a color, returns the default point border color.
 	 * 
-	 * @return list of the border color for points.
+	 * @return list of the border color for points. If property is missing or not a color, returns the default point border
+	 *         color.
 	 */
 	public List<IsColor> getPointBorderColor() {
 		return ColorBuilder.parse(getPointBorderColorAsString());
+	}
+
+	/**
+	 * Returns the border gradient for points. If property is missing or not a gradient, returns an empty list.
+	 * 
+	 * @return list of the border gradient for points. If property is missing or not a gradient, returns an empty list.
+	 */
+	public List<Gradient> getPointBorderColorAsGradient() {
+		// checks if the property is not a gradient (therefore a color or pattern)
+		if (hasGradients(Property.pointBorderColor)) {
+			return getGradientsContainer().getObjects(Property.pointBorderColor);
+		} else {
+			// if here, the property is not a gradient
+			// or the property is missing
+			// returns empty list
+			return new ArrayObjectContainerList<Gradient>();
+		}
 	}
 
 	/**
@@ -439,7 +620,7 @@ abstract class LiningDataset extends Dataset {
 	 * @return list of the width of the point border in pixels.
 	 */
 	public List<Integer> getPointBorderWidth() {
-		ArrayInteger array = getValueOrArray(Property.pointBorderWidth, Defaults.get().getGlobal().getElements().getPoint().getBorderWidth());
+		ArrayInteger array = getValueOrArray(Property.pointBorderWidth, getDefaultValues().getElements().getPoint().getBorderWidth());
 		return ArrayListHelper.list(array);
 	}
 
@@ -458,7 +639,7 @@ abstract class LiningDataset extends Dataset {
 	 * @return list of the pixel size of the non-displayed point.
 	 */
 	public List<Double> getPointHitRadius() {
-		ArrayDouble array = getValueOrArray(Property.pointHitRadius, Defaults.get().getGlobal().getElements().getPoint().getHitRadius());
+		ArrayDouble array = getValueOrArray(Property.pointHitRadius, getDefaultValues().getElements().getPoint().getHitRadius());
 		return ArrayListHelper.list(array);
 	}
 
@@ -469,6 +650,8 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBackgroundColor(IsColor... pointHoverBackgroundColor) {
 		setValueOrArray(Property.pointHoverBackgroundColor, pointHoverBackgroundColor);
+		// removes the flag because default is string color
+		resetBeingColors(Property.pointHoverBackgroundColor);
 	}
 
 	/**
@@ -478,25 +661,69 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBackgroundColor(String... pointHoverBackgroundColor) {
 		setValueOrArray(Property.pointHoverBackgroundColor, pointHoverBackgroundColor);
+		// removes the flag because default is string color
+		resetBeingColors(Property.pointHoverBackgroundColor);
 	}
 
 	/**
-	 * Returns the point background color when hovered.
+	 * Sets the point background gradient when hovered.
 	 * 
-	 * @return list of the point background color when hovered.
+	 * @param pointHoverBackgroundColor array of the point background gradient when hovered.
+	 */
+	public void setPointHoverBackgroundColor(Gradient... pointHoverBackgroundColor) {
+		// sets value to gradients
+		getGradientsContainer().setObjects(Property.pointHoverBackgroundColor, ArrayObject.of(pointHoverBackgroundColor));
+		// removes the property
+		resetBeingGradients(Property.pointHoverBackgroundColor);
+	}
+
+	/**
+	 * Returns the point background color when hovered. If property is missing or not a color, returns the default point
+	 * background color.
+	 * 
+	 * @return list of the point background color when hovered. If property is missing or not a color, returns the default point
+	 *         background color.
 	 */
 	public List<String> getPointHoverBackgroundColorAsString() {
-		ArrayString array = getValueOrArray(Property.pointBackgroundColor, Defaults.get().getGlobal().getElements().getPoint().getBackgroundColorAsString());
-		return ArrayListHelper.list(array);
+		// checks if the property is not a pattern or gradient (therefore a color)
+		if (hasColors(Property.pointHoverBackgroundColor)) {
+			ArrayString array = getValueOrArray(Property.pointHoverBackgroundColor, getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
+			return ArrayListHelper.list(array);
+		} else {
+			// if here, the property is not a string
+			// or the property is missing or a pattern
+			// returns default value
+			return ArrayListHelper.list(ArrayString.of(getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
+		}
 	}
 
 	/**
-	 * Returns the point background color when hovered.
+	 * Returns the point background color when hovered. If property is missing or not a color, returns the default point
+	 * background color.
 	 * 
-	 * @return list of the point background color when hovered.
+	 * @return list of the point background color when hovered. If property is missing or not a color, returns the default point
+	 *         background color.
 	 */
 	public List<IsColor> getPointHoverBackgroundColor() {
 		return ColorBuilder.parse(getPointHoverBackgroundColorAsString());
+	}
+
+	/**
+	 * Returns the point background color when hovered. If property is missing or not a gradient, returns an empty list.
+	 * 
+	 * @return list of the point background color when hovered. If property is missing or not a gradient, returns
+	 *         an empty list.
+	 */
+	public List<Gradient> getPointHoverBackgroundColorAsGradient() {
+		// checks if the property is not a gradient (therefore a color or pattern)
+		if (hasGradients(Property.pointHoverBackgroundColor)) {
+			return getGradientsContainer().getObjects(Property.pointHoverBackgroundColor);
+		} else {
+			// if here, the property is not a gradient
+			// or the property is missing
+			// returns empty list
+			return new ArrayObjectContainerList<Gradient>();
+		}
 	}
 
 	/**
@@ -506,6 +733,8 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBorderColor(IsColor... pointHoverBorderColor) {
 		setValueOrArray(Property.pointHoverBorderColor, pointHoverBorderColor);
+		// removes the flag because default is string color
+		resetBeingColors(Property.pointHoverBorderColor);
 	}
 
 	/**
@@ -515,25 +744,67 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBorderColor(String... pointHoverBorderColor) {
 		setValueOrArray(Property.pointHoverBorderColor, pointHoverBorderColor);
+		// removes the flag because default is string color
+		resetBeingColors(Property.pointHoverBorderColor);
 	}
 
 	/**
-	 * Returns the point border color when hovered.
+	 * Sets the point border gradient when hovered.
 	 * 
-	 * @return list of the point border color when hovered.
+	 * @param pointHoverBorderColor array of the point border gradient when hovered.
+	 */
+	public void setPointHoverBorderColor(Gradient... pointHoverBorderColor) {
+		// sets value to gradients
+		getGradientsContainer().setObjects(Property.pointHoverBorderColor, ArrayObject.of(pointHoverBorderColor));
+		// removes the property
+		resetBeingGradients(Property.pointHoverBorderColor);
+	}
+
+	/**
+	 * Returns the point border color when hovered. If property is missing or not a color, returns the default border color.
+	 * 
+	 * @return list of the point border color when hovered. If property is missing or not a color, returns the default border
+	 *         color.
 	 */
 	public List<String> getPointHoverBorderColorAsString() {
-		ArrayString array = getValueOrArray(Property.pointHoverBorderColor, Defaults.get().getGlobal().getElements().getPoint().getBorderColorAsString());
-		return ArrayListHelper.list(array);
+		// checks if the property is not a pattern or gradient (therefore a color)
+		if (hasColors(Property.pointHoverBorderColor)) {
+			ArrayString array = getValueOrArray(Property.pointHoverBorderColor, getDefaultValues().getElements().getPoint().getBorderColorAsString());
+			return ArrayListHelper.list(array);
+		} else {
+			// if here, the property is not a string
+			// or the property is missing or a pattern
+			// returns default value
+			return ArrayListHelper.list(ArrayString.of(getDefaultValues().getElements().getPoint().getBorderColorAsString()));
+		}
 	}
 
 	/**
-	 * Returns the point border color when hovered.
+	 * Returns the point border color when hovered. If property is missing or not a color, returns the default border color.
 	 * 
-	 * @return list of the point border color when hovered.
+	 * @return list of the point border color when hovered. If property is missing or not a color, returns the default border
+	 *         color.
 	 */
 	public List<IsColor> getPointHoverBorderColor() {
 		return ColorBuilder.parse(getPointHoverBorderColorAsString());
+	}
+
+	/**
+	 * Returns the point border gradient when hovered. If property is missing or not a gradient, returns an empty list.
+	 * 
+	 * @return list of the point border gradient when hovered. If property is missing or not a gradient, returns
+	 *         an empty list.
+	 */
+	public List<Gradient> getPointHoverBorderColorAsGradient() {
+		// checks if the property is not a gradient (therefore a color or pattern)
+		if (hasGradients(Property.pointHoverBorderColor)) {
+			return getGradientsContainer().getObjects(Property.pointHoverBorderColor);
+		} else {
+			// if here, the property is not a gradient
+			// or the property is missing
+			// returns empty list
+			return new ArrayObjectContainerList<Gradient>();
+		}
 	}
 
 	/**
@@ -551,7 +822,7 @@ abstract class LiningDataset extends Dataset {
 	 * @return list of the border width of point when hovered.
 	 */
 	public List<Integer> getPointHoverBorderWidth() {
-		ArrayInteger array = getValueOrArray(Property.pointHoverBorderWidth, Defaults.get().getGlobal().getElements().getPoint().getHoverBorderWidth());
+		ArrayInteger array = getValueOrArray(Property.pointHoverBorderWidth, getDefaultValues().getElements().getPoint().getHoverBorderWidth());
 		return ArrayListHelper.list(array);
 	}
 
@@ -570,7 +841,7 @@ abstract class LiningDataset extends Dataset {
 	 * @return list of the radius of the point when hovered.
 	 */
 	public List<Double> getPointHoverRadius() {
-		ArrayDouble array = getValueOrArray(Property.pointHoverRadius, Defaults.get().getGlobal().getElements().getPoint().getHoverRadius());
+		ArrayDouble array = getValueOrArray(Property.pointHoverRadius, getDefaultValues().getElements().getPoint().getHoverRadius());
 		return ArrayListHelper.list(array);
 	}
 
@@ -589,7 +860,7 @@ abstract class LiningDataset extends Dataset {
 	 * @return list of the radius of the point shape.
 	 */
 	public List<Double> getPointRadius() {
-		ArrayDouble array = getValueOrArray(Property.pointRadius, Defaults.get().getGlobal().getElements().getPoint().getRadius());
+		ArrayDouble array = getValueOrArray(Property.pointRadius, getDefaultValues().getElements().getPoint().getRadius());
 		return ArrayListHelper.list(array);
 	}
 
@@ -605,19 +876,19 @@ abstract class LiningDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the style of the point. If property is missing or not a point style, returns <code>null</code>.
+	 * Returns the style of the point. If property is missing or not a point style, returns an empty list.
 	 * 
-	 * @return list of the style of the point. If property is missing or not a point style, returns <code>null</code>.
+	 * @return list of the style of the point. If property is missing or not a point style, returns an empty list.
 	 */
 	public List<PointStyle> getPointStyle() {
 		// checks if image as point style has been used
 		if (!getValue(Property._charbaPointStyle, false)) {
 			// if not, returns point styles
-			ArrayString array = getValueOrArray(Property.pointStyle, Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
+			ArrayString array = getValueOrArray(Property.pointStyle, getDefaultValues().getElements().getPoint().getPointStyle());
 			return ArrayListHelper.list(PointStyle.class, array);
 		} else {
 			// if here, means the point style as stored as images
-			return null;
+			return ArrayListHelper.list(PointStyle.class, new PointStyle[0]);
 		}
 	}
 
@@ -662,19 +933,19 @@ abstract class LiningDataset extends Dataset {
 	}
 
 	/**
-	 * Returns the style of the point as image. If property is missing or not an image, returns <code>null</code>.
+	 * Returns the style of the point as image. If property is missing or not an image, returns an empty list.
 	 * 
-	 * @return list of the style of the point as image. If property is missing or not a image, returns <code>null</code>.
+	 * @return list of the style of the point as image. If property is missing or not a image, returns an empty list.
 	 */
 	public List<ImageElement> getPointStyleAsImages() {
 		// checks if image as point style has been used
 		if (getValue(Property._charbaPointStyle, false)) {
 			// gets array
-			ArrayImage array = getValueOrArray(Property.pointStyle, DEFAULT_IMAGE_POINT_STYLE);
+			ArrayImage array = getValueOrArray(Property.pointStyle, UndefinedValues.IMAGE_ELEMENT);
 			return ArrayListHelper.list(array);
 		} else {
 			// if here, means the point style as stored as strings
-			return null;
+			return new ArrayImageList();
 		}
 	}
 
@@ -693,8 +964,42 @@ abstract class LiningDataset extends Dataset {
 	 * @return list of the rotation of the point in degrees.
 	 */
 	public List<Double> getPointRotation() {
-		ArrayDouble array = getValueOrArray(Property.pointRotation, Defaults.get().getGlobal().getElements().getPoint().getRotation());
+		ArrayDouble array = getValueOrArray(Property.pointRotation, getDefaultValues().getElements().getPoint().getRotation());
 		return ArrayListHelper.list(array);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#applyPattern(org.pepstock.charba.client.commons.Key, java.util.List)
+	 */
+	@Override
+	void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
+		// checks if background color (ONLY one which can be used with patterns)
+		if (Property.backgroundColor.name().equalsIgnoreCase(key.name())) {
+			// gets the first element
+			CanvasPattern pattern = canvasPatternsList.get(0);
+			// creates pattern and stores it
+			setValue(key, pattern);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#applyGradient(org.pepstock.charba.client.commons.Key, java.util.List)
+	 */
+	@Override
+	void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
+		// checks if background or border colors which must be set with single value
+		if (Property.backgroundColor.name().equalsIgnoreCase(key.name()) || Property.borderColor.name().equalsIgnoreCase(key.name())) {
+			// gets the first element
+			CanvasGradient gradient = canvasGradientsList.get(0);
+			// creates gradient and stores it
+			setValue(key, gradient);
+		} else {
+			// stores the array
+			setValueOrArray(key, canvasGradientsList.toArray(new CanvasGradient[0]));
+		}
+	}
 }

@@ -15,11 +15,16 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.List;
+
+import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.charba.client.plugins.InvalidPluginIdException;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.plugins.PluginIdChecker;
 
 /**
@@ -50,17 +55,9 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * 
 	 * @param pluginId plugin id.
 	 * @param enabled <code>false</code> disable a global plugin.
-	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public void setEnabled(String pluginId, boolean enabled) throws InvalidPluginIdException {
-		// if null, removes the configuration
-		if (enabled) {
-			// removes configuration if exists
-			remove(PluginIdChecker.key(pluginId));
-		} else {
-			// stores configuration
-			setValue(PluginIdChecker.key(pluginId), true);
-		}
+	public void setEnabled(String pluginId, boolean enabled) {
+		setValue(PluginIdChecker.key(pluginId), enabled);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -70,12 +67,33 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * 
 	 * @param pluginId plugin id.
 	 * @return <code>false</code> if a global plugin is not enabled otherwise <code>true</code>.
-	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public boolean isEnabled(String pluginId) throws InvalidPluginIdException {
-		return getValue(PluginIdChecker.key(pluginId), true);
+	public boolean isEnabled(String pluginId) {
+		// creates the key to avoid many calls to plugin checker
+		Key pluginIdKey = PluginIdChecker.key(pluginId);
+		// gets the type of property
+		ObjectType type = type(pluginIdKey);
+		// if boolean, checks if enable
+		if (ObjectType.Boolean.equals(type)) {
+			// if the property is not found, checks if the plugin was enable to all charts.
+			return getValue(pluginIdKey, Defaults.get().getPlugins().isEnabledAllCharts(pluginId));
+		}
+		// if here, the property can exist or not.
+		// if exist, means that the options have been added
+		// and then it enables the plugin
+		return has(pluginIdKey);
 	}
 
+	/**
+	 * Returns if a global plugin has been set or not.
+	 * 
+	 * @param pluginId plugin id.
+	 * @return <code>false</code> if a global plugin has not been set otherwise <code>true</code>.
+	 */
+	public boolean hasEnabled(String pluginId) {
+		return has(PluginIdChecker.key(pluginId));
+	}
+	
 	/**
 	 * Sets the plugin options. If passed options is null, the configuration of plugin will be removed.
 	 * 
@@ -83,9 +101,8 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * @param options java script object used to configure the plugin. Pass <code>null</code> to remove the configuration if
 	 *            exist.
 	 * @param <T> type of native object container to store
-	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public <T extends NativeObjectContainer> void setOptions(String pluginId, T options) throws InvalidPluginIdException {
+	public <T extends NativeObjectContainer> void setOptions(String pluginId, T options) {
 		// if null, removes the configuration
 		if (options == null) {
 			// removes configuration if exists
@@ -99,13 +116,33 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	}
 
 	/**
+	 * Sets the plugin options as array. If passed options is null, the configuration of plugin will be removed.
+	 * 
+	 * @param pluginId plugin id.
+	 * @param options list of native object container used to configure the plugin. Pass <code>null</code> to remove the configuration if
+	 *            exist.
+	 * @param <T> type of native object container to store
+	 */
+	public <T extends NativeObjectContainer> void setOptions(String pluginId, List<T> options) {
+		// if null, removes the configuration
+		if (options == null) {
+			// removes configuration if exists
+			remove(PluginIdChecker.key(pluginId));
+		} else {
+			// stores configuration
+			setArrayValue(PluginIdChecker.key(pluginId), ArrayObject.of(options));
+		}
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+	
+	/**
 	 * Checks if there is any options for a specific plugin, by its id.
 	 * 
 	 * @param pluginId plugin id.
 	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
-	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public boolean hasOptions(String pluginId) throws InvalidPluginIdException {
+	public boolean hasOptions(String pluginId) {
 		return has(PluginIdChecker.key(pluginId));
 	}
 
@@ -116,10 +153,22 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * @param factory factory instance to create a native object container.
 	 * @param <T> type of native object container to return
 	 * @return java script object used to configure the plugin or <code>null</code> if not exist.
-	 * @throws InvalidPluginIdException occurs if the plugin id is invalid.
 	 */
-	public <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) throws InvalidPluginIdException {
+	public <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) {
 		return factory.create(getValue(PluginIdChecker.key(pluginId)));
+	}
+	
+	/**
+	 * Returns the plugin options as list of object containers, if exist. It uses a factory instance to create a native object container.
+	 * 
+	 * @param pluginId plugin id.
+	 * @param factory factory instance to create a native object container.
+	 * @param <T> type of native object container to return
+	 * @return the plugin options as list of object containers or empty list if not exist.
+	 */
+	public <T extends NativeObjectContainer> List<T> getOptionsAsList(String pluginId, NativeObjectContainerFactory<T> factory) {
+		ArrayObject array = getArrayValue(PluginIdChecker.key(pluginId));
+		return ArrayListHelper.list(array, factory);
 	}
 
 }

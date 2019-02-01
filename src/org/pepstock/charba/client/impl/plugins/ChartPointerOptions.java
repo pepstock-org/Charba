@@ -20,7 +20,6 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.impl.plugins.ChartPointerOptionsFactory.ChartPointerDefaultsOptionsFactory;
-import org.pepstock.charba.client.plugins.InvalidPluginIdException;
 
 import com.google.gwt.dom.client.Style.Cursor;
 
@@ -52,20 +51,14 @@ public final class ChartPointerOptions extends NativeObjectContainer {
 	public ChartPointerOptions() {
 		// creates an empty object
 		super(null);
-		try {
-			// checks if the default global options has been added for the plugin
-			if (Defaults.get().getGlobal().getPlugins().hasOptions(ChartPointer.ID)) {
-				// reads the default default global options
-				defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(ChartPointer.ID, defaultsFactory);
-			} else {
-				// if here, no default global option
-				// then the plugin will use the static defaults
-				defaultsOptions = new ChartPointerDefaultsOptions(null);
-			}
-		} catch (InvalidPluginIdException e) {
-			// creates an empty default global option
+		// checks if the default global options has been added for the plugin
+		if (Defaults.get().getGlobal().getPlugins().hasOptions(ChartPointer.ID)) {
+			// reads the default default global options
+			defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(ChartPointer.ID, defaultsFactory);
+		} else {
+			// if here, no default global option
 			// then the plugin will use the static defaults
-			defaultsOptions = new ChartPointerDefaultsOptions(null);
+			defaultsOptions = new ChartPointerDefaultsOptions();
 		}
 	}
 
@@ -102,23 +95,23 @@ public final class ChartPointerOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Sets the cursor type when the cursor is out of the dataset item.
+	 * Sets the cursor type before changing it. Needed to set it back.
 	 * 
 	 * @param cursor cursor type
 	 * @see com.google.gwt.dom.client.Style.Cursor
 	 */
-	public void setCursorDefault(Cursor cursor) {
+	void setCurrentCursor(Cursor cursor) {
 		setValue(Property.cursorDefault, cursor.name());
 	}
 
 	/**
-	 * Returns the cursor type when the cursor is out of the dataset item.
+	 * Returns the cursor type before changing it. Needed to set it back.
 	 * 
 	 * @return cursor type
 	 * @see com.google.gwt.dom.client.Style.Cursor
 	 */
-	public Cursor getCursorDefault() {
-		String name = getValue(Property.cursorDefault, defaultsOptions.getCursorDefaultAsString());
+	Cursor getCurrentCursor() {
+		String name = getValue(Property.cursorDefault, Cursor.DEFAULT.name());
 		return Cursor.valueOf(name);
 	}
 

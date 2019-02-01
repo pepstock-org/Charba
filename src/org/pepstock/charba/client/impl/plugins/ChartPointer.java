@@ -22,7 +22,8 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
-import org.pepstock.charba.client.plugins.InvalidPluginIdException;
+
+import com.google.gwt.dom.client.Style.Cursor;
 
 /**
  * This plugin is changing the cursor when mouse over on dataset on canvas if a dataset selection handler has been.
@@ -33,11 +34,11 @@ import org.pepstock.charba.client.plugins.InvalidPluginIdException;
 public final class ChartPointer extends AbstractPlugin {
 	// factory to create options for plugin
 	private final ChartPointerOptionsFactory factory = new ChartPointerOptionsFactory();
-	// cache to store options in order do not lod every time the options
+	// cache to store options in order do not load every time the options
 	private static final Map<String, ChartPointerOptions> OPTIONS = new HashMap<>();
 
 	/**
-	 * Plugin ID
+	 * Plugin ID {@value ID}
 	 */
 	public static final String ID = "cursorpointer";
 
@@ -50,6 +51,42 @@ public final class ChartPointer extends AbstractPlugin {
 	public String getId() {
 		return ID;
 	}
+	
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client.AbstractChart)
+	 */
+	@Override
+	public void onAfterInit(AbstractChart<?, ?> chart) {
+		// checks if chart has got any dataset selection handler
+		if (chart.getOptions().hasDatasetSelectionHandlers()) {
+			// creates options instance
+			ChartPointerOptions pOptions = null;
+			// checks if is cached
+			if (!OPTIONS.containsKey(chart.getId())) {
+				// if not, loads and cache
+				// creates the plugin options using the java script object
+				// passing also the default color set at constructor.
+				if (chart.getOptions().getPlugins().hasOptions(ID)) {
+					pOptions = chart.getOptions().getPlugins().getOptions(ID, factory);
+				} else {
+					pOptions = new ChartPointerOptions();
+				}
+				OPTIONS.put(chart.getId(), pOptions);
+			} else {
+				// if here, options were already cached
+				pOptions = OPTIONS.get(chart.getId());
+			}
+			// scans all cursor to check if any cursor is already set
+			// needs to scan them because with valueOf there is an exception
+			// if the value does not match any element of enumeration
+			for (Cursor cursor : Cursor.values()) {
+				if (cursor.name().equalsIgnoreCase(chart.getElement().getStyle().getCursor())) {
+					// stores the current cursor
+					pOptions.setCurrentCursor(Cursor.valueOf(chart.getElement().getStyle().getCursor()));
+				}
+			}
+		}
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -61,36 +98,16 @@ public final class ChartPointer extends AbstractPlugin {
 	public void onAfterEvent(AbstractChart<?, ?> chart, ChartNativeEvent event) {
 		// checks if chart has got any dataset selection handler
 		if (chart.getOptions().hasDatasetSelectionHandlers()) {
-			// creates options instance
-			ChartPointerOptions pOptions = null;
-			// checks if is cached
-			if (!OPTIONS.containsKey(chart.getId())) {
-				// if not, loads and cache
-				try {
-					// creates the plugin options using the java script object
-					// passing also the default color set at constructor.
-					if (chart.getOptions().getPlugins().hasOptions(ID)) {
-						pOptions = chart.getOptions().getPlugins().getOptions(ID, factory);
-					} else {
-						pOptions = new ChartPointerOptions();
-					}
-				} catch (InvalidPluginIdException e) {
-					// ignore message
-					// and use the default
-					pOptions = new ChartPointerOptions();
-				}
-				OPTIONS.put(chart.getId(), pOptions);
-			} else {
-				// if here, options were already cached
-				pOptions = OPTIONS.get(chart.getId());
-			}
+			// gets options instance
+			ChartPointerOptions pOptions = OPTIONS.get(chart.getId());
 			// if yes, asks the dataset item by event
 			DatasetItem item = chart.getElementAtEvent(event);
 			// checks item
 			if (item == null) {
 				// if null, sets the default cursor
-				chart.getElement().getStyle().setCursor(pOptions.getCursorDefault());
+				chart.getElement().getStyle().setCursor(pOptions.getCurrentCursor());
 			} else {
+				
 				// otherwise sets the pointer
 				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
 			}

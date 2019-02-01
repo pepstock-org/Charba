@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.items;
 
+import com.google.gwt.dom.client.ImageElement;
+
 /**
  * Class with default values when the java script object returns an UNDEFINED value.
  * 
@@ -42,6 +44,11 @@ public final class UndefinedValues {
 	 * Default value for BOOLEAN instances
 	 */
 	public static final boolean BOOLEAN = Boolean.FALSE;
+
+	/**
+	 * Default value for ImageElement instances
+	 */
+	public static final ImageElement IMAGE_ELEMENT = null;
 
 	/**
 	 * To avoid any instantiation

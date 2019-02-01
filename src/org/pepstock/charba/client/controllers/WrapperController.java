@@ -43,7 +43,7 @@ final class WrapperController extends NativeObjectContainer {
 	/**
 	 * Java script FUNCTION callback called to catch the chart initialization.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyInitializeCallback {
@@ -60,7 +60,7 @@ final class WrapperController extends NativeObjectContainer {
 	/**
 	 * Java script FUNCTION callback called to catch the chart add elements.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyAddElementsCallback {
@@ -77,7 +77,7 @@ final class WrapperController extends NativeObjectContainer {
 	/**
 	 * Java script FUNCTION callback called to catch the chart add element and reset.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyAddElementAndResetCallback {
@@ -94,7 +94,7 @@ final class WrapperController extends NativeObjectContainer {
 	/**
 	 * Java script FUNCTION callback called to catch the chart drawing.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyDrawCallback {
@@ -111,7 +111,7 @@ final class WrapperController extends NativeObjectContainer {
 	/**
 	 * Java script FUNCTION callback called to catch the chart remove hover.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyRemoveHoverStyleCallback {
@@ -128,7 +128,7 @@ final class WrapperController extends NativeObjectContainer {
 	/**
 	 * Java script FUNCTION callback called to catch the chart set hover.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxySetHoverStyleCallback {
@@ -145,7 +145,7 @@ final class WrapperController extends NativeObjectContainer {
 	/**
 	 * Java script FUNCTION callback called to catch the chart updating.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyUpdateCallback {
@@ -214,7 +214,7 @@ final class WrapperController extends NativeObjectContainer {
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxyInitializeCallback#call(org.pepstock.
-			 * charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.Chart, int)
+			 * charba.client.controllers.Context, org.pepstock.charba.client.Chart, int)
 			 */
 			@Override
 			public void call(Context context, Chart chart, int datasetIndex) {
@@ -232,7 +232,7 @@ final class WrapperController extends NativeObjectContainer {
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxyAddElementsCallback#call(org.pepstock.
-			 * charba.client.jsinterop.controllers.Context)
+			 * charba.client.controllers.Context)
 			 */
 			@Override
 			public void call(Context context) {
@@ -247,7 +247,7 @@ final class WrapperController extends NativeObjectContainer {
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxyAddElementAndResetCallback#call(org.
-			 * pepstock.charba.client.jsinterop.controllers.Context, int)
+			 * pepstock.charba.client.controllers.Context, int)
 			 */
 			@Override
 			public void call(Context context, int index) {
@@ -262,7 +262,7 @@ final class WrapperController extends NativeObjectContainer {
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxyDrawCallback#call(org.pepstock.charba.
-			 * client.jsinterop.controllers.Context, double)
+			 * client.controllers.Context, double)
 			 */
 			@Override
 			public void call(Context context, double ease) {
@@ -277,7 +277,7 @@ final class WrapperController extends NativeObjectContainer {
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxyRemoveHoverStyleCallback#call(org.
-			 * pepstock.charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.commons.NativeObject)
+			 * pepstock.charba.client.controllers.Context, org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Context context, NativeObject element) {
@@ -292,7 +292,7 @@ final class WrapperController extends NativeObjectContainer {
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxySetHoverStyleCallback#call(org.pepstock.
-			 * charba.client.jsinterop.controllers.Context, org.pepstock.charba.client.commons.NativeObject)
+			 * charba.client.controllers.Context, org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Context context, NativeObject element) {
@@ -307,7 +307,7 @@ final class WrapperController extends NativeObjectContainer {
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxyUpdateCallback#call(org.pepstock.charba.
-			 * client.jsinterop.controllers.Context, boolean)
+			 * client.controllers.Context, boolean)
 			 */
 			@Override
 			public void call(Context context, boolean reset) {

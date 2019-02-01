@@ -34,17 +34,17 @@ import org.pepstock.charba.client.defaults.IsDefaultScales;
 public class Scales extends AbstractModel<Options, IsDefaultScales> implements IsDefaultScales {
 
 	/**
-	 * Default name of X axis
+	 * Default name of X axis is {@value DEFAULT_X_AXIS_ID}
 	 */
 	public static final String DEFAULT_X_AXIS_ID = "x-axis-0";
 
 	/**
-	 * Default name of Y axis
+	 * Default name of Y axis is {@value DEFAULT_Y_AXIS_ID}
 	 */
 	public static final String DEFAULT_Y_AXIS_ID = "y-axis-0";
 
 	/**
-	 * Default name of axis when the chart has got only 1 scale (polar, radar)
+	 * Default name of axis when the chart has got only 1 scale (polar, radar) is {@value DEFAULT_SINGLE_AXIS_ID}
 	 */
 	public static final String DEFAULT_SINGLE_AXIS_ID = "scale";
 	// factory to create X scale by native object
@@ -168,7 +168,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	/**
 	 * Inner class to create scale item by a native object.
 	 * 
-	 * @author Andrea "Stock" Stocchero @ *
+	 * @author Andrea "Stock" Stocchero *
 	 */
 	private final class ScaleListFactory implements NativeObjectContainerFactory<Scale> {
 
@@ -186,8 +186,8 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
-		 * .commons.NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
+		 * NativeObject)
 		 */
 		@Override
 		public Scale create(NativeObject nativeObject) {

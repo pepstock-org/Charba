@@ -64,7 +64,7 @@ public class LineChart extends AbstractChart<LineOptions, LineDataset> {
 	 */
 	@Override
 	public LineDataset newDataset() {
-		return new LineDataset();
+		return new LineDataset(getDefaultChartOptions());
 	}
 
 }

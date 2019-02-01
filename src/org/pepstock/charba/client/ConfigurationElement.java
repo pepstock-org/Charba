@@ -28,7 +28,8 @@ public interface ConfigurationElement {
 	/**
 	 * Called to enable to load into a configuration object the specific configuration item (by native object).
 	 * 
+	 * @param chart chart instance
 	 * @param configuration chart configuration instance
 	 */
-	void load(Configuration configuration);
+	void load(AbstractChart<?, ?> chart, Configuration configuration);
 }

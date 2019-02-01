@@ -39,6 +39,8 @@ public final class GlobalPlugins {
 	private final Map<String, GlobalPlugin> pluginIds = new HashMap<String, GlobalPlugin>();
 	// native object of plugins
 	private final NativePlugins plugins;
+	// set of embedded plugin ids to disable for charts
+	private final Set<String> pluginsToBeDisabled = new HashSet<>();
 
 	/**
 	 * Builds the object by the native object which maps <code>chart.plugins</code>
@@ -55,9 +57,8 @@ public final class GlobalPlugins {
 	 * @param plugin plugin instance
 	 * @return <code>true</code> if registered, otherwise <code>false</code> if the plugin is already registered with the plugin
 	 *         id of plugin instance.
-	 * @throws InvalidPluginIdException if the plugin id is not correct.
 	 */
-	public boolean register(Plugin plugin) throws InvalidPluginIdException {
+	public boolean register(Plugin plugin) {
 		// checks the plugin id
 		PluginIdChecker.check(plugin.getId());
 		// checks if ID is already registered
@@ -77,9 +78,8 @@ public final class GlobalPlugins {
 	 * 
 	 * @param pluginId plugin instance
 	 * @return <code>true</code> if unregistered, otherwise <code>false</code> if the plugin is not a custom one.
-	 * @throws InvalidPluginIdException if the plugin id is not correct.
 	 */
-	public boolean unregister(String pluginId) throws InvalidPluginIdException {
+	public boolean unregister(String pluginId) {
 		// checks the plugin id
 		PluginIdChecker.check(pluginId);
 		// checks if ID is already registered on custom one
@@ -127,22 +127,66 @@ public final class GlobalPlugins {
 	}
 
 	/**
+	 * Setting <code>false</code> for plugin id, the global plugin is disable to all charts and to activate the plugin on a
+	 * specific chart, is it enough to enable the plugin by options.
+	 * 
+	 * @param pluginId plug id to enable
+	 * @param enable <code>true</code> to enable to all charts, otherwise <code>false</code>.
+	 */
+	public void setEnabledAllCharts(String pluginId, boolean enable) {
+		// gets all global registered plugin
+		Set<String> currentIds = getIds();
+		// scans all
+		for (String id : currentIds) {
+			// if already registered plugin id is the
+			// same of the argument
+			if (id.equalsIgnoreCase(pluginId)) {
+				// if the argument is to enable
+				if (enable) {
+					// removes the plugin id to the cache to maintain
+					// plugin id to disable to the charts
+					pluginsToBeDisabled.remove(pluginId);
+				} else {
+					// adds to the set and it will disable to all charts
+					pluginsToBeDisabled.add(pluginId);
+				}
+				// finish!
+				return;
+			}
+		}
+	}
+
+	/**
+	 * Returns <code>true</code> if the plugin is enabled to all charts, otherwise <code>false</code>.
+	 * 
+	 * @param pluginId plug id to check
+	 * @return <code>true</code> if the plugin is enabled to all charts, otherwise <code>false</code>.
+	 */
+	public boolean isEnabledAllCharts(String pluginId) {
+		return !pluginsToBeDisabled.contains(pluginId);
+	}
+
+	/**
 	 * Invokes the on configuration method to inform the plugins that the chart is going to be initialized.
 	 * 
 	 * @param config configuration item. Added only to reduce visibility of public method.
 	 * @param chart instance of the chart
 	 */
 	public void onChartConfigure(Configuration config, AbstractChart<?, ?> chart) {
+		// sets into chart all global plugins to be disable
+		for (String id : pluginsToBeDisabled) {
+			// if the plugin does not have any options or is not disable by options
+			if (!chart.getOptions().getPlugins().hasEnabled(id)) {
+				// disables the plugin at chart level
+				chart.getOptions().getPlugins().setEnabled(id, false);
+			}
+		}
 		// scans all plugins
 		for (Entry<String, GlobalPlugin> entry : pluginIds.entrySet()) {
-			try {
-				// checks if plugin is enabled
-				if (chart.getOptions().getPlugins().isEnabled(entry.getKey())) {
-					// calls on configure method
-					entry.getValue().onConfigure(chart);
-				}
-			} catch (InvalidPluginIdException e) {
-				// do nothing
+			// checks if plugin is enabled
+			if (chart.getOptions().getPlugins().isEnabled(entry.getKey())) {
+				// calls on configure method
+				entry.getValue().onConfigure(chart);
 			}
 		}
 	}

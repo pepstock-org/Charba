@@ -13,31 +13,25 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.plugins;
+package org.pepstock.charba.client.ext.labels;
+
+import org.pepstock.charba.client.AbstractChart;
 
 /**
- * Exception created when the plugin ID is not valid.<br>
- * A plugin id <br>
- * <ul>
- * <li>can not start with a dot or an underscore
- * <li>can not contain any non-URL-safe characters
- * <li>cannot contain upper-case letters
- * <li>should be something short, but also reasonably descriptive
- * </ul>
+ * Callback interface of labels plugin to provide the item to be rendered as string at runtime, using the arguments.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public class InvalidPluginIdException extends Exception {
-
-	private static final long serialVersionUID = 1L;
+public interface RenderStringCallback {
 
 	/**
-	 * Builds the exception using the message explaining why the id is not valid.
+	 * Called to provide the item to be rendered as string at runtime, using the arguments.
 	 * 
-	 * @param message explanation why the id is not valid.
+	 * @param chart chart instance
+	 * @param item render item, passed by plugin
+	 * @return a string instance to show as label
 	 */
-	public InvalidPluginIdException(String message) {
-		super(message);
-	}
+	String render(AbstractChart<?, ?> chart, RenderItem item);
+
 }

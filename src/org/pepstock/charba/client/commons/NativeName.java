@@ -23,32 +23,32 @@ package org.pepstock.charba.client.commons;
 public final class NativeName {
 
 	/**
-	 * Constant to bind java script object as object
+	 * Constant to bind java script object as object with name {@value OBJECT}.
 	 */
 	public static final String OBJECT = "Object";
 
 	/**
-	 * Constant to bind java script array
+	 * Constant to bind java script array with name {@value ARRAY}.
 	 */
 	public static final String ARRAY = "Array";
 
 	/**
-	 * Constant to bind java script object as JsHelper (internal of Charba)
+	 * Constant to bind java script object as JsHelper with name {@value JSHELPER} (internal of Charba).
 	 */
 	public static final String JSHELPER = "JsHelper";
 
 	/**
-	 * Constant to bind java script object as JsControllerHelper (internal of Charba)
+	 * Constant to bind java script object as JsControllerHelper with name {@value JSCONTROLLERHELPER} (internal of Charba)
 	 */
 	public static final String JSCONTROLLERHELPER = "JsControllerHelper";
 
 	/**
-	 * Constant to bind java script object as Chart (internal of CHART.JS)
+	 * Constant to bind java script object as chart with name {@value CHART}  (internal of CHART.JS)
 	 */
 	public static final String CHART = "Chart";
 
 	/**
-	 * Constant to bind java script object as window
+	 * Constant to bind java script object as window with name {@value WINDOW} 
 	 */
 	public static final String WINDOW = "window";
 

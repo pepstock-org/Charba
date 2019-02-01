@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.data;
 
+import org.pepstock.charba.client.defaults.IsDefaultOptions;
+
 /**
  * The pie chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
  * specific dataset.
@@ -22,5 +24,22 @@ package org.pepstock.charba.client.data;
  * @author Andrea "Stock" Stocchero
  */
 public class PieDataset extends HovingDataset {
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 */
+	public PieDataset() {
+		super();
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 */
+	public PieDataset(IsDefaultOptions defaultValues) {
+		super(defaultValues);
+	}
 
 }

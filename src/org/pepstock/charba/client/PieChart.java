@@ -64,7 +64,7 @@ public class PieChart extends AbstractChart<PieOptions, PieDataset> {
 	 */
 	@Override
 	public PieDataset newDataset() {
-		return new PieDataset();
+		return new PieDataset(getDefaultChartOptions());
 	}
 
 }

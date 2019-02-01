@@ -18,7 +18,6 @@ package org.pepstock.charba.client.impl.plugins;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.charba.client.plugins.InvalidPluginIdException;
 
 /**
  * Factory to get the options (form chart or from default global ones) related to pointer plugin.
@@ -33,27 +32,21 @@ public final class ChartPointerOptionsFactory implements NativeObjectContainerFa
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
-	 * .commons.NativeObject)
+	 * @see
+	 * org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.NativeObject)
 	 */
 	@Override
 	public ChartPointerOptions create(NativeObject nativeObject) {
 		// defaults global options instance
 		ChartPointerDefaultsOptions defaultsOptions = null;
-		try {
-			// checks if the default global options has been added for the plugin
-			if (Defaults.get().getGlobal().getPlugins().hasOptions(ChartPointer.ID)) {
-				// reads the default default global options
-				defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(ChartPointer.ID, defaultsFactory);
-			} else {
-				// if here, no default global option
-				// then the plugin will use the static defaults
-				defaultsOptions = new ChartPointerDefaultsOptions(null);
-			}
-		} catch (InvalidPluginIdException e) {
-			// creates an empty default global option
+		// checks if the default global options has been added for the plugin
+		if (Defaults.get().getGlobal().getPlugins().hasOptions(ChartPointer.ID)) {
+			// reads the default default global options
+			defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(ChartPointer.ID, defaultsFactory);
+		} else {
+			// if here, no default global option
 			// then the plugin will use the static defaults
-			defaultsOptions = new ChartPointerDefaultsOptions(null);
+			defaultsOptions = new ChartPointerDefaultsOptions();
 		}
 		// creates the options by the native object and the defaults
 		return new ChartPointerOptions(nativeObject, defaultsOptions);
@@ -62,15 +55,15 @@ public final class ChartPointerOptionsFactory implements NativeObjectContainerFa
 	/**
 	 * Internal factory to create options from default global option for the plugin
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	static class ChartPointerDefaultsOptionsFactory implements NativeObjectContainerFactory<ChartPointerDefaultsOptions> {
 
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
-		 * .commons.NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
+		 * NativeObject)
 		 */
 		@Override
 		public ChartPointerDefaultsOptions create(NativeObject nativeObject) {

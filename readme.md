@@ -70,13 +70,14 @@ JsInterop is one of the core features of GWT 2.8.
 
 As the name suggests, JsInterop is a way of interoperating Java with JavaScript. It offers a better way of communication between the two using annotations instead of having to write java script in your classes (using JSNI).
 
-**Pay attention** that GWT compiler (you are using for your project) requires `-generateJsInteropExport` to be passed.
+**Pay attention** that GWT compiler (you are using for your project) requires `-generateJsInteropExports` to be passed.
 
 Documentation
 -------------
 
 All **Charba** documentation will be maintained into [GitHub wiki](https://github.com/pepstock-org/Charba/wiki) of **Charba** project.
- 
+
+API JavaDoc is published [here](http://www.pepstock.org/Charba/2.0/index.html). 
 
 Showcase
 --------

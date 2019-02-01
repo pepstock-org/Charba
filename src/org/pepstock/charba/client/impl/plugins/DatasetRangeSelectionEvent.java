@@ -28,7 +28,7 @@ import com.google.gwt.dom.client.NativeEvent;
 public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRangeSelectionEventHandler> {
 
 	/**
-	 * Value of FROM and TO when the event is representing a reset of selection
+	 * Value {@value RESET_SELECTION} of FROM and TO when the event is representing a reset of selection
 	 */
 	public static final int RESET_SELECTION = Integer.MIN_VALUE;
 

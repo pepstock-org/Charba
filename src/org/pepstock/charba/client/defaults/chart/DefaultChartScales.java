@@ -41,7 +41,7 @@ public final class DefaultChartScales implements IsDefaultScales {
 	public DefaultChartScales(Scales scales) {
 		this.scales = scales;
 		// checks if there is any x axes
-		if (scales.getXAxes() != null && !scales.getXAxes().isEmpty()) {
+		if (!scales.getXAxes().isEmpty()) {
 			// uses the first one as default
 			xAxis = scales.getXAxes().get(0);
 		} else {
@@ -49,7 +49,7 @@ public final class DefaultChartScales implements IsDefaultScales {
 			xAxis = DefaultsBuilder.get().getScaledOptions().getScale();
 		}
 		// checks if there is any y axes
-		if (scales.getYAxes() != null && !scales.getYAxes().isEmpty()) {
+		if (!scales.getYAxes().isEmpty()) {
 			// uses the first one as default
 			yAxis = scales.getYAxes().get(0);
 		} else {

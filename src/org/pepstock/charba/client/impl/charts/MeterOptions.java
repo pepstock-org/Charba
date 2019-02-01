@@ -39,12 +39,12 @@ public class MeterOptions extends AbstractPieOptions {
 	private static final String INVALID__CALL = "The invoked component is not available for Meter or Gauge charts.";
 
 	/**
-	 * Default format to apply displaying the value or percentage
+	 * Default format {@value DEFAULT_FORMAT} to apply displaying the value or percentage
 	 */
 	public static final String DEFAULT_FORMAT = "##0";
 
 	/**
-	 * Default color of display.
+	 * Default color of display
 	 */
 	public static final IsColor DEFAULT_DISPLAY_COLOR = new Color(128, 128, 128);
 

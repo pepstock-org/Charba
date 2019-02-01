@@ -49,7 +49,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	 * Java script FUNCTION callback called when a click event on the legend is raised.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyLegendClickCallback {
@@ -68,7 +68,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	 * Java script FUNCTION callback called when a hover event on the legend is raised.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyLegendHoverCallback {
@@ -125,7 +125,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.configuration.Legend.ProxyLegendClickCallback#call(org.pepstock.charba.
-			 * client.jsinterop.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
+			 * client.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
 			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
@@ -140,7 +140,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.configuration.Legend.ProxyLegendHoverCallback#call(org.pepstock.charba.
-			 * client.jsinterop.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
+			 * client.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
 			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override

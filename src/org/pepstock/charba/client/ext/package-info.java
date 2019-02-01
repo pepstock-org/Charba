@@ -13,29 +13,10 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.controllers;
-
 /**
- * Exception created when the controller type is not valid.<br>
- * A controller type <br>
- * <ul>
- * <li>can not start with a dot or an underscore
- * <li>can not contain any non-URL-safe characters
- * </ul>
+ * Main package with the implementation already exists plugins or other CHARTS.JS java script extensions.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class InvalidControllerTypeException extends Exception {
-
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Builds the exception using the message explaining why the type is not valid.
-	 * 
-	 * @param message explanation why the type is not valid.
-	 */
-	InvalidControllerTypeException(String message) {
-		super(message);
-	}
-}
+package org.pepstock.charba.client.ext;

@@ -29,9 +29,14 @@ import com.google.gwt.dom.client.Style.Cursor;
 final class ChartPointerDefaultsOptions extends NativeObjectContainer {
 	// default cursor type when the cursor is over the dataset item
 	static final Cursor DEFAULT_CURSOR_POINTER = Cursor.POINTER;
-	// default cursor type when the cursor is out of the dataset item
-	static final Cursor DEFAULT_CURSOR_DEFAULT = Cursor.DEFAULT;
 
+	/**
+	 * Builds the object with an empty java script object and uses the constants as default.
+	 */
+	ChartPointerDefaultsOptions() {
+		super();
+	}
+	
 	/**
 	 * Builds the object with a java script object stored into options.
 	 * 
@@ -48,15 +53,6 @@ final class ChartPointerDefaultsOptions extends NativeObjectContainer {
 	 */
 	String getCursorPointerAsString() {
 		return getValue(ChartPointerOptions.Property.cursorPointer, DEFAULT_CURSOR_POINTER.name());
-	}
-
-	/**
-	 * Returns the cursor type as string when the cursor is out of the dataset item.
-	 * 
-	 * @return cursor type as string
-	 */
-	String getCursorDefaultAsString() {
-		return getValue(ChartPointerOptions.Property.cursorDefault, DEFAULT_CURSOR_DEFAULT.name());
 	}
 
 }

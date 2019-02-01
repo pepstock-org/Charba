@@ -51,7 +51,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	 * your own custom way.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyCustomCallback {
@@ -70,7 +70,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	 * Java script FUNCTION callback called to filter tooltip items. Receives 1 parameter, a tooltip Item.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyFilterCallback {
@@ -89,7 +89,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	 * Java script FUNCTION callback called to allow sorting of tooltip items.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyItemSortCallback {

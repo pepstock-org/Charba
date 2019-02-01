@@ -17,10 +17,13 @@ package org.pepstock.charba.client.impl.charts;
 
 import java.util.List;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.Color;
+import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.data.DoughnutDataset;
-import org.pepstock.charba.client.data.Pattern;
+import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
  * The Meter chart allows a number of properties to be specified for each dataset. These are used to set display properties for
@@ -40,7 +43,7 @@ public class MeterDataset extends DoughnutDataset {
 	// exception string message for setting data
 	private static final String INVALID_SET_DATA_CALL = "setData method is not invokable by a Meter chart. Use setValue method.";
 	// exception string message for setting pattern
-	private static final String INVALID_PATTERN_CALL = "Pattern is not supported.";
+	private static final String INVALID_PATTERN_CALL = "Patterns and gradients are not supported.";
 
 	/**
 	 * Default value color
@@ -53,12 +56,12 @@ public class MeterDataset extends DoughnutDataset {
 	public static final IsColor DEFAULT_EMPTY_VALUE_COLOR = new Color(234, 234, 234);
 
 	/**
-	 * Default maximum value.
+	 * Default maximum value is {@value DEFAULT_MAXIMUM_VALUE}
 	 */
 	public static final double DEFAULT_MAXIMUM_VALUE = 100D;
 
 	/**
-	 * Minimum value.
+	 * Minimum value is {@value MINIMUM_VALUE}
 	 */
 	public static final double MINIMUM_VALUE = 0D;
 
@@ -67,12 +70,22 @@ public class MeterDataset extends DoughnutDataset {
 	private double value = MINIMUM_VALUE;
 
 	/**
-	 * Creates a dataset setting the maximum value of dataset.
+	 * Creates a dataset setting the maximum value of dataset. It uses the global options has default.
 	 * 
 	 * @param max maximum value of dataset.
 	 */
 	public MeterDataset(double max) {
-		super();
+		this(max, Defaults.get().getGlobal());
+	}
+
+	/**
+	 * Creates a dataset setting the maximum value of dataset and defaults value.
+	 * 
+	 * @param max maximum value of dataset.
+	 * @param defaultValues default options
+	 */
+	public MeterDataset(double max, IsDefaultOptions defaultValues) {
+		super(defaultValues);
 		// sets the max value between the max and minimum value
 		// max value must be higher than 0
 		this.max = Math.max(max, MINIMUM_VALUE);
@@ -84,7 +97,9 @@ public class MeterDataset extends DoughnutDataset {
 		super.setBackgroundColor(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.HovingDataset#setBackgroundColor(org.pepstock.charba.client.data.Pattern[])
 	 */
 	@Override
@@ -92,7 +107,49 @@ public class MeterDataset extends DoughnutDataset {
 		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HovingDataset#setBackgroundColor(org.pepstock.charba.client.colors.Gradient[])
+	 */
+	@Override
+	public void setBackgroundColor(Gradient... backgroundColor) {
+		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HovingDataset#setBorderColor(org.pepstock.charba.client.colors.Gradient[])
+	 */
+	@Override
+	public void setBorderColor(Gradient... borderColor) {
+		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBackgroundColor(org.pepstock.charba.client.colors.Gradient[])
+	 */
+	@Override
+	public void setHoverBackgroundColor(Gradient... colors) {
+		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBorderColor(org.pepstock.charba.client.colors.Gradient[])
+	 */
+	@Override
+	public void setHoverBorderColor(Gradient... colors) {
+		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBackgroundColor(org.pepstock.charba.client.data.Pattern[])
 	 */
 	@Override

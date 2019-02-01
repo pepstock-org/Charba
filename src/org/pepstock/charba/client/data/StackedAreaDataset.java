@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -33,6 +34,23 @@ public class StackedAreaDataset extends LineDataset {
 	private enum Property implements Key
 	{
 		stack
+	}
+
+	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.
+	 */
+	public StackedAreaDataset() {
+		super();
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 */
+	public StackedAreaDataset(IsDefaultOptions defaultValues) {
+		super(defaultValues);
 	}
 
 	/**

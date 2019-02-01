@@ -56,15 +56,15 @@ public final class LegendHitBoxItem extends SizeItem {
 	/**
 	 * Inner class to create legend hit box item by a native object.
 	 * 
-	 * @author Andrea "Stock" Stocchero @
+	 * @author Andrea "Stock" Stocchero
 	 */
 	static final class LegendHitBoxItemFactory implements NativeObjectContainerFactory<LegendHitBoxItem> {
 
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.jsinterop
-		 * .commons.NativeObject)
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
+		 * NativeObject)
 		 */
 		@Override
 		public LegendHitBoxItem create(NativeObject nativeObject) {

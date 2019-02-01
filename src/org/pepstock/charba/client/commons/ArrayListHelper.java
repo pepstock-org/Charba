@@ -45,7 +45,7 @@ public final class ArrayListHelper {
 	public static ArrayDoubleList list(ArrayDouble values) {
 		// checks if array is null
 		if (values == null) {
-			return null;
+			return new ArrayDoubleList();
 		}
 		// creates the list
 		return new ArrayDoubleList(values);
@@ -60,7 +60,7 @@ public final class ArrayListHelper {
 	public static ArrayIntegerList list(ArrayInteger values) {
 		// checks if array is null
 		if (values == null) {
-			return null;
+			return new ArrayIntegerList();
 		}
 		// creates the list
 		return new ArrayIntegerList(values);
@@ -75,7 +75,7 @@ public final class ArrayListHelper {
 	public static ArrayStringList list(ArrayString values) {
 		// checks if array is null
 		if (values == null) {
-			return null;
+			return new ArrayStringList();
 		}
 		// creates the list
 		return new ArrayStringList(values);
@@ -90,7 +90,7 @@ public final class ArrayListHelper {
 	public static ArrayImageList list(ArrayImage values) {
 		// checks if array is null
 		if (values == null) {
-			return null;
+			return new ArrayImageList();
 		}
 		// creates the list
 		return new ArrayImageList(values);
@@ -129,7 +129,7 @@ public final class ArrayListHelper {
 	public static <E extends Key> ArrayEnumList<E> list(Class<E> clazz, E[] values) {
 		// checks if array is null
 		if (values == null) {
-			return null;
+			return new ArrayEnumList<E>(clazz);
 		}
 		// creates the list
 		ArrayEnumList<E> result = new ArrayEnumList<E>(clazz);
@@ -150,7 +150,7 @@ public final class ArrayListHelper {
 	public static <E extends Key> ArrayEnumList<E> list(Class<E> clazz, ArrayString array) {
 		// checks if array is null
 		if (array == null) {
-			return null;
+			return new ArrayEnumList<E>(clazz);
 		}
 		// returns the list adding the string array list to initialize it
 		// PAY ATTENTION: no checks if the values of strings are
@@ -167,7 +167,7 @@ public final class ArrayListHelper {
 	public static ArrayObjectList list(ArrayObject values) {
 		// checks if array is null
 		if (values == null) {
-			return null;
+			return new ArrayObjectList();
 		}
 		// creates the list
 		return new ArrayObjectList(values);
@@ -184,7 +184,7 @@ public final class ArrayListHelper {
 	public static <E extends NativeObjectContainer> ArrayObjectContainerList<E> list(ArrayObject array, NativeObjectContainerFactory<E> factory) {
 		// checks if array is null
 		if (array == null) {
-			return null;
+			return new ArrayObjectContainerList<E>();
 		}
 		// creates the list
 		return new ArrayObjectContainerList<E>(array, factory);

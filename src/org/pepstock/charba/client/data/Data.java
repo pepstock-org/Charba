@@ -18,6 +18,7 @@ package org.pepstock.charba.client.data;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.commons.ArrayMixedObject;
@@ -185,7 +186,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * 
 	 * @return a list of string for each datasets, in JSON format
 	 */
-	public List<String> getDatasetsAsStrings() {
+	public List<String> getDatasetsAsString() {
 		// creates the result
 		List<String> result = new LinkedList<>();
 		// scans all datasets
@@ -199,11 +200,31 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.Configuration)
+	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.AbstractChart,
+	 * org.pepstock.charba.client.Configuration)
 	 */
 	@Override
-	public void load(Configuration configuration) {
+	public void load(AbstractChart<?, ?> chart, Configuration configuration) {
+		// loads data
 		ConfigurationLoader.loadData(configuration, this);
+		// checks if there is any pattern
+		// scans all datasets
+		for (Dataset ds : currentDatasets) {
+			// checks if dataset has got some patterns
+			if (!ds.getPatternsContainer().isEmpty() || !ds.getGradientsContainer().isEmpty()) {
+				// if here
+				// there are some patterns to load
+				// checks if the plugin to apply pattern is already loaded
+				if (!chart.getPlugins().has(CanvasObjectHandler.ID)) {
+					// adds plugin
+					chart.getPlugins().add(new CanvasObjectHandler());
+				}
+				// if here,
+				// plugin is already added to chart
+				// it shouldn't happen
+				return;
+			}
+		}
 	}
 
 }

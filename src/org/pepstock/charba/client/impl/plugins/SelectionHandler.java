@@ -464,7 +464,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// gets the chart area in json format
 		String chartAreaAsString = chart.getNode().getChartArea().toString();
 		// gets the list of datasets data as list of JSON string
-		List<String> datasetsAsString = chart.getData().getDatasetsAsStrings();
+		List<String> datasetsAsString = chart.getData().getDatasetsAsString();
 		// if the fields are null, this is the first call and draw of chart
 		// because chart is changed
 		if (previousDatasetsAsString == null && previousChartAreaAsString == null) {

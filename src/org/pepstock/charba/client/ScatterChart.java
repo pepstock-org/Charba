@@ -64,7 +64,7 @@ public class ScatterChart extends AbstractChart<ScatterOptions, ScatterDataset> 
 	 */
 	@Override
 	public ScatterDataset newDataset() {
-		return new ScatterDataset();
+		return new ScatterDataset(getDefaultChartOptions());
 	}
 
 }

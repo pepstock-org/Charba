@@ -17,6 +17,7 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.Fill;
 
 /**
@@ -32,9 +33,24 @@ public final class ScatterDataset extends LineDataset {
 	private static final String DATA_USAGE_MESSAGE = "Use datapoints instead of data for scatter chart";
 
 	/**
+	 * Creates a dataset.<br>
+	 * It uses the global options has default.<br>
 	 * Builds the object setting fixed properties
 	 */
 	public ScatterDataset() {
+		// scatter is always no fill
+		super.setFill(Fill.nofill);
+		// scatter has never show lines
+		super.setShowLines(false);
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 */
+	public ScatterDataset(IsDefaultOptions defaultValues) {
+		super(defaultValues);
 		// scatter is always no fill
 		super.setFill(Fill.nofill);
 		// scatter has never show lines

@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
@@ -63,18 +62,6 @@ abstract class ConfigurationContainer<T extends NativeObjectContainer> extends C
 	 */
 	protected final T getConfiguration() {
 		return configuration;
-	}
-
-	/**
-	 * Merge a native object into this one with a specific property name.<br>
-	 * This is used by plugins implementation (native java script ones) when they are not using the standard way to add plugin
-	 * configuration into options of chart. FIXME should be removed (see piecelabel import)
-	 * 
-	 * @param source native object container to add
-	 * @param property property name
-	 */
-	public final void merge(NativeObjectContainer source, String property) {
-		Merger.get().merge(getConfiguration(), source, property);
 	}
 
 	/**
