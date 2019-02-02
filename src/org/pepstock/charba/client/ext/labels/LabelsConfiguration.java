@@ -16,10 +16,10 @@
 package org.pepstock.charba.client.ext.labels;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
-import org.pepstock.charba.client.commons.NativeObject;
 
 import com.google.gwt.dom.client.ImageElement;
 
@@ -52,10 +52,10 @@ public final class LabelsConfiguration extends LabelsOptions {
 		 * Method of function to be called to render the chart returning the label to show.
 		 * 
 		 * @param context context Value of <code>this</code> to the execution context of function.
-		 * @param argument native object as render item.
+		 * @param item native object as render item.
 		 * @return string with rendering value.
 		 */
-		String call(Object context, NativeObject argument);
+		String call(Object context, RenderItem item);
 	}
 
 	/**
@@ -71,10 +71,10 @@ public final class LabelsConfiguration extends LabelsOptions {
 		 * Method of function to be called to to render the chart returning the image to show.
 		 * 
 		 * @param context context Value of <code>this</code> to the execution context of function.
-		 * @param argument native object as render item.
+		 * @param item native object as render item.
 		 * @return image for rendering.
 		 */
-		ImageElement call(Object context, NativeObject argument);
+		ImageElement call(Object context, RenderItem item);
 	}
 
 	/**
@@ -90,10 +90,10 @@ public final class LabelsConfiguration extends LabelsOptions {
 		 * Method of function to be called to color the font of render into chat.
 		 * 
 		 * @param context context Value of <code>this</code> to the execution context of function.
-		 * @param argument native object as render item.
+		 * @param item native object as render item.
 		 * @return string as color representation.
 		 */
-		String call(Object context, NativeObject argument);
+		String call(Object context, FontColorItem item);
 	}
 
 	// ---------------------------
@@ -131,16 +131,17 @@ public final class LabelsConfiguration extends LabelsOptions {
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.ext.labels.LabelsConfiguration.ProxyRenderStringCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
+			 * org.pepstock.charba.client.ext.labels.RenderItem)
 			 */
 			@Override
-			public String call(Object context, NativeObject argument) {
-				// reads item
-				RenderItem item = new RenderItem(argument);
+			public String call(Object context, RenderItem item) {
+				// gets chart instance
+				String id = item.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
 				// checks if the callback is set
-				if (renderStringCallback != null) {
+				if (chart != null && renderStringCallback != null) {
 					// calls callback
-					String value = renderStringCallback.render(getChart(), item);
+					String value = renderStringCallback.render(chart, item);
 					// checks result
 					if (value != null) {
 						return value;
@@ -156,14 +157,15 @@ public final class LabelsConfiguration extends LabelsOptions {
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.ext.labels.LabelsConfiguration.ProxyRenderImageCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
+			 * org.pepstock.charba.client.ext.labels.RenderItem)
 			 */
 			@Override
-			public ImageElement call(Object context, NativeObject argument) {
-				// reads item
-				RenderItem item = new RenderItem(argument);
+			public ImageElement call(Object context, RenderItem item) {
+				// gets chart instance
+				String id = item.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
 				// checks if the callback is set
-				if (renderImageCallback != null) {
+				if (chart != null && renderImageCallback != null) {
 					// calls callback and returns the result
 					return renderImageCallback.render(getChart(), item);
 				}
@@ -177,14 +179,15 @@ public final class LabelsConfiguration extends LabelsOptions {
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.ext.labels.LabelsConfiguration.ProxyFontColorCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
+			 * org.pepstock.charba.client.ext.labels.FontColorItem)
 			 */
 			@Override
-			public String call(Object context, NativeObject argument) {
-				// reads item
-				FontColorItem item = new FontColorItem(argument);
+			public String call(Object context, FontColorItem item) {
+				// gets chart instance
+				String id = item.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
 				// checks if the callback is set
-				if (fontColorCallback != null) {
+				if (chart != null && fontColorCallback != null) {
 					// calls callback
 					String value = fontColorCallback.color(getChart(), item);
 					// checks result

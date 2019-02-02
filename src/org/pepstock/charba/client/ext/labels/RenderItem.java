@@ -15,59 +15,78 @@
 */
 package org.pepstock.charba.client.ext.labels;
 
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.commons.StandardKey;
+import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.NativeName;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.items.UndefinedValues;
+
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * This object is wrapping the native java script object provided by labels plugin when the RENDER function is called.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class RenderItem extends NativeObjectContainer {
-
-	// standard key inside the _META object
-	private static final Key key = new StandardKey(String.valueOf(0));
+@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
+public class RenderItem {
 
 	/**
-	 * Name of properties of native object.
+	 * To avoid any instantiation
 	 */
-	private enum Property implements Key
-	{
-		label,
-		index,
-		percentage,
-		value,
-		dataset,
-		// used to get dataset index into internal structure
-		_meta,
-		controller
+	RenderItem() {
 	}
 
 	/**
-	 * Creates the item using a native java script object which contains all properties.
+	 * Returns the <code>chart</code> property by native object.
 	 * 
-	 * @param nativeObject native java script object which contains all properties.
+	 * @return the <code>chart</code> property by native object.
 	 */
-	RenderItem(NativeObject nativeObject) {
-		super(nativeObject);
-	}
+	@JsProperty(name = "chart")
+	native final Chart getNativeChart();
+	
+	/**
+	 * Returns the <code>datasetIndex</code> property by native object.
+	 * 
+	 * @return the <code>datasetIndex</code> property by native object.
+	 */
+	@JsProperty(name = "datasetIndex")
+	native final int getNativeDatasetIndex();
 
 	/**
-	 * Returns the dataset index of the data inside the dataset.
+	 * Returns the <code>index</code> property by native object.
 	 * 
-	 * @return the dataset index of the data inside the dataset. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the <code>index</code> property by native object.
 	 */
-	public final int getDatasetIndex() {
-		// to get the dataset index it has to go in deep
-		// in the object.
-		// the path is dataset -> _meta -> "0" -> controller -> index
-		DatasetItem item = new DatasetItem(getValue(Property.dataset));
-		return item.getIndex();
-	}
+	@JsProperty(name = "index")
+	native final int getNativeIndex();
+
+	/**
+	 * Returns the <code>label</code> property by native object.
+	 * 
+	 * @return the <code>label</code> property by native object.
+	 */
+	@JsProperty(name = "label")
+	native final String getNativeLabel();
+
+	/**
+	 * Returns the <code>value</code> property by native object.
+	 * 
+	 * @return the <code>value</code> property by native object.
+	 */
+	@JsProperty(name = "value")
+	native final double getNativeValue();
+
+	/**
+	 * Returns the <code>percentage</code> property by native object.
+	 * 
+	 * @return the <code>percentage</code> property by native object.
+	 */
+	@JsProperty(name = "percentage")
+	native final double getNativePercentage();
 
 	/**
 	 * Returns the index of the data inside the dataset.
@@ -75,8 +94,30 @@ public class RenderItem extends NativeObjectContainer {
 	 * @return the index of the data inside the dataset. Default is
 	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
+	@JsOverlay
 	public final int getIndex() {
-		return getValue(Property.index, UndefinedValues.INTEGER);
+		// checks if is defined
+		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "index"))) {
+			return UndefinedValues.INTEGER;
+		} 
+		// returns property value
+		return getNativeIndex();
+	}
+	
+	/**
+	 * Returns the dataset index of the data inside the dataset.
+	 * 
+	 * @return the dataset index of the data inside the dataset. Default is
+	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 */
+	@JsOverlay
+	public final int getDatasetIndex() {
+		// checks if is defined
+		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "datasetIndex"))) {
+			return UndefinedValues.INTEGER;
+		} 
+		// returns property value
+		return getNativeDatasetIndex();
 	}
 
 	/**
@@ -84,8 +125,14 @@ public class RenderItem extends NativeObjectContainer {
 	 * 
 	 * @return the label for the dataset. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
 	 */
+	@JsOverlay
 	public final String getLabel() {
-		return getValue(Property.label, UndefinedValues.STRING);
+		// checks if is defined
+		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "label"))) {
+			return UndefinedValues.STRING;
+		} 
+		// returns property value
+		return getNativeLabel();
 	}
 
 	/**
@@ -93,8 +140,14 @@ public class RenderItem extends NativeObjectContainer {
 	 * 
 	 * @return the percentage for the dataset. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
+	@JsOverlay
 	public final double getPercentage() {
-		return getValue(Property.percentage, UndefinedValues.DOUBLE);
+		// checks if is defined
+		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "percentage"))) {
+			return UndefinedValues.DOUBLE;
+		} 
+		// returns property value
+		return getNativePercentage();
 	}
 
 	/**
@@ -102,131 +155,13 @@ public class RenderItem extends NativeObjectContainer {
 	 * 
 	 * @return the value for the dataset. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
 	 */
+	@JsOverlay
 	public final double getValue() {
-		return getValue(Property.value, UndefinedValues.DOUBLE);
+		// checks if is defined
+		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "value"))) {
+			return UndefinedValues.DOUBLE;
+		} 
+		// returns property value
+		return getNativeValue();
 	}
-
-	/**
-	 * This object is wrapping the node DATASET.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	private static class DatasetItem extends NativeObjectContainer {
-
-		/**
-		 * Creates the item using a native java script object which contains all properties.
-		 * 
-		 * @param nativeObject native java script object which contains all properties.
-		 */
-		DatasetItem(NativeObject nativeObject) {
-			super(nativeObject);
-		}
-
-		/**
-		 * Returns the index of the data inside the dataset.
-		 * 
-		 * @return the index of the data inside the dataset. Default is
-		 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
-		 */
-		int getIndex() {
-			MetaItem meta = new MetaItem(getValue(Property._meta));
-			return meta.getIndex();
-		}
-	}
-
-	/**
-	 * This object is wrapping the node DATASET --> _META.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	private static class MetaItem extends NativeObjectContainer {
-
-		/**
-		 * Creates the item using a native java script object which contains all properties.
-		 * 
-		 * @param nativeObject native java script object which contains all properties.
-		 */
-		MetaItem(NativeObject nativeObject) {
-			super(nativeObject);
-		}
-
-		/**
-		 * Returns the index of the data inside the dataset.
-		 * 
-		 * @return the index of the data inside the dataset. Default is
-		 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
-		 */
-		int getIndex() {
-			// checks is key exists
-			if (has(key)) {
-				// creates meta 0 object by "0" proiperty
-				Meta0Item item = new Meta0Item(getValue(key));
-				// returns get index
-				return item.getIndex();
-			}
-			// if here, no object, returns default
-			return UndefinedValues.INTEGER;
-		}
-	}
-
-	/**
-	 * This object is wrapping the node DATASET --> _META --> "0".
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	private static class Meta0Item extends NativeObjectContainer {
-
-		/**
-		 * Creates the item using a native java script object which contains all properties.
-		 * 
-		 * @param nativeObject native java script object which contains all properties.
-		 */
-		Meta0Item(NativeObject nativeObject) {
-			super(nativeObject);
-		}
-
-		/**
-		 * Returns the index of the data inside the dataset.
-		 * 
-		 * @return the index of the data inside the dataset. Default is
-		 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
-		 */
-		int getIndex() {
-			// gets the controller object
-			ControllerItem item = new ControllerItem(getValue(Property.controller));
-			// returns index
-			return item.getIndex();
-		}
-
-	}
-
-	/**
-	 * This object is wrapping the node DATASET --> _META --> "0" --> CONTROLLER.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	private static class ControllerItem extends NativeObjectContainer {
-
-		/**
-		 * Creates the item using a native java script object which contains all properties.
-		 * 
-		 * @param nativeObject native java script object which contains all properties.
-		 */
-		ControllerItem(NativeObject nativeObject) {
-			super(nativeObject);
-		}
-
-		/**
-		 * Returns the index of the data inside the dataset.
-		 * 
-		 * @return the index of the data inside the dataset. Default is
-		 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
-		 */
-		int getIndex() {
-			// gets INDEX
-			return getValue(Property.index, UndefinedValues.INTEGER);
-		}
-
-	}
-
 }

@@ -18,8 +18,14 @@ package org.pepstock.charba.client.ext.labels;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.NativeName;
+import org.pepstock.charba.client.commons.ObjectType;
+
+import jsinterop.annotations.JsOverlay;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * This object is wrapping the native java script object provided by labels plugin when the FONTCOLOR function is called.
@@ -27,33 +33,36 @@ import org.pepstock.charba.client.commons.NativeObject;
  * @author Andrea "Stock" Stocchero
  *
  */
+@JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class FontColorItem extends RenderItem {
-
+	
 	/**
-	 * Name of properties of native object.
+	 * To avoid any instantiation
 	 */
-	private enum Property implements Key
-	{
-		backgroundColor
+	FontColorItem() {
 	}
 
 	/**
-	 * Creates the item using a native java script object which contains all properties.
+	 * Returns the <code>background</code> property by native object.
 	 * 
-	 * @param nativeObject native java script object which contains all properties.
+	 * @return the <code>label</code> property by native object.
 	 */
-	FontColorItem(NativeObject nativeObject) {
-		super(nativeObject);
-	}
+	@JsProperty(name = "backgroundColor")
+	native final String getNativeBackgroundColor();
 
 	/**
 	 * Returns the fill color
 	 * 
 	 * @return the fill color. Default is {@link HtmlColor#White}.
 	 */
+	@JsOverlay
 	public String getBackgroundColorAsString() {
-		// returns color as string
-		return getValue(Property.backgroundColor, HtmlColor.White.toRGBA());
+		// checks if is defined
+		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "backgroundColor"))) {
+			return HtmlColor.White.toRGBA();
+		} 
+		// returns property value
+		return getNativeBackgroundColor();
 	}
 
 	/**
@@ -61,6 +70,7 @@ public final class FontColorItem extends RenderItem {
 	 * 
 	 * @return the fill color under the line. Default is {@link HtmlColor#White}.
 	 */
+	@JsOverlay
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
