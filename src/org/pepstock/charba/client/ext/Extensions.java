@@ -35,7 +35,9 @@ public interface Extensions extends ClientBundle {
 	 * 
 	 * @return chart <a href="https://github.com/emn178/chartjs-plugin-labels">labels plugin</a> code
 	 */
-	@Source("js/chartjs-plugin-labels.min.js")
+	// FIXME wiat for approval of pull request to LABELS plugin
+//	@Source("js/chartjs-plugin-labels.min.js")
+	@Source("js/chartjs-plugin-labels.js")
 	TextResource labelsPlugin();
 
 	/**
