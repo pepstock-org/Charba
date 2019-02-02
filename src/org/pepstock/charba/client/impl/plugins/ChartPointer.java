@@ -51,8 +51,10 @@ public final class ChartPointer extends AbstractPlugin {
 	public String getId() {
 		return ID;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
@@ -107,7 +109,7 @@ public final class ChartPointer extends AbstractPlugin {
 				// if null, sets the default cursor
 				chart.getElement().getStyle().setCursor(pOptions.getCurrentCursor());
 			} else {
-				
+
 				// otherwise sets the pointer
 				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
 			}

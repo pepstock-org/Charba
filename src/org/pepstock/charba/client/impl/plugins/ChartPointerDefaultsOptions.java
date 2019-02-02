@@ -36,7 +36,7 @@ final class ChartPointerDefaultsOptions extends NativeObjectContainer {
 	ChartPointerDefaultsOptions() {
 		super();
 	}
-	
+
 	/**
 	 * Builds the object with a java script object stored into options.
 	 * 
