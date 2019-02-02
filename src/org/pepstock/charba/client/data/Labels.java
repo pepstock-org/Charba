@@ -29,7 +29,7 @@ import org.pepstock.charba.client.commons.ObjectType;
 public final class Labels {
 
 	private static final char SEPARATOR = '\n';
-	
+
 	private final ArrayMixedObject array;
 
 	/**
@@ -111,9 +111,10 @@ public final class Labels {
 			array.push(ArrayString.of(values));
 		}
 	}
-	
+
 	/**
-	 * Returns a label at a specific index. If at index there is multi-line label, returns labels with '\n' as separator. If the index is out of bounds, throws an exception.
+	 * Returns a label at a specific index. If at index there is multi-line label, returns labels with '\n' as separator. If the
+	 * index is out of bounds, throws an exception.
 	 * 
 	 * @param index index of label
 	 * @return a label at a specific index
@@ -135,14 +136,15 @@ public final class Labels {
 			}
 			// returns string
 			return result.toString();
-		} 
+		}
 		// returns string
 		// string can not be null, because checked during loading
-		return (String)array.get(index);
+		return (String) array.get(index);
 	}
 
 	/**
-	 * Returns a multi line label at a specific index. An array of strings is returned. If the index is out of bounds, throws an exception.
+	 * Returns a multi line label at a specific index. An array of strings is returned. If the index is out of bounds, throws an
+	 * exception.
 	 * 
 	 * @param index index of label
 	 * @return an array of strings
@@ -160,10 +162,10 @@ public final class Labels {
 			}
 			// returns array
 			return result;
-		} 
+		}
 		// returns the array with single item
 		// string can not be null, because checked during loading
-		return new String[] { (String)array.get(index) };
+		return new String[] { (String) array.get(index) };
 	}
 
 	/**
@@ -186,7 +188,7 @@ public final class Labels {
 	 */
 	private void checkRange(int index) {
 		if (index < 0 || index >= array.length()) {
-			throw new IndexOutOfBoundsException("Index "+index+" is out of bouds [0, "+array.length()+"]");
+			throw new IndexOutOfBoundsException("Index " + index + " is out of bouds [0, " + array.length() + "]");
 		}
 	}
 

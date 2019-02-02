@@ -711,8 +711,7 @@ abstract class LiningDataset extends Dataset {
 	/**
 	 * Returns the point background color when hovered. If property is missing or not a gradient, returns an empty list.
 	 * 
-	 * @return list of the point background color when hovered. If property is missing or not a gradient, returns
-	 *         an empty list.
+	 * @return list of the point background color when hovered. If property is missing or not a gradient, returns an empty list.
 	 */
 	public List<Gradient> getPointHoverBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
@@ -792,8 +791,7 @@ abstract class LiningDataset extends Dataset {
 	/**
 	 * Returns the point border gradient when hovered. If property is missing or not a gradient, returns an empty list.
 	 * 
-	 * @return list of the point border gradient when hovered. If property is missing or not a gradient, returns
-	 *         an empty list.
+	 * @return list of the point border gradient when hovered. If property is missing or not a gradient, returns an empty list.
 	 */
 	public List<Gradient> getPointHoverBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
