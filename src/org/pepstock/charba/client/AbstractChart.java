@@ -304,6 +304,8 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	protected void onDetach() {
 		// detaches the widget
 		super.onDetach();
+		// remove handler of mouse event handler
+		removeCanvasPreventDefault();
 		// if is not to be destroyed on detach, doesn't destroy
 		if (isDestroyOnDetach()) {
 			// then destroy
@@ -321,8 +323,6 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			// then destroy
 			chart.destroy();
 		}
-		// remove handler of mouse event handler
-		removeCanvasPreventDefault();
 		// removes chart instance from collection
 		Charts.remove(getId());
 	}
