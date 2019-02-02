@@ -18,7 +18,6 @@ package org.pepstock.charba.client.data;
 import java.util.List;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.colors.CanvasObjectFactory;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
@@ -132,7 +131,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 		// time is MANDATORY to update chart because CHART.JS
 		// must applied new patterns and gradients
 		if (updated) {
-			// resest flag
+			// reset flag
 			updated = false;
 			// updates the chart
 			chart.update();

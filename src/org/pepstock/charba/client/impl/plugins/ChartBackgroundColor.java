@@ -15,13 +15,16 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.colors.CanvasObjectFactory;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
@@ -29,7 +32,7 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
 import com.google.gwt.canvas.dom.client.Context2d;
 
 /**
- * Default plugin implementation to set the background color of chart.<br>
+ * Default plugin implementation to set the background color, gradient or pattern of chart.<br>
  * If added to defaults, without any configuration, the chart will have a WHITE background color.
  * 
  * @author Andrea "Stock" Stocchero
@@ -37,15 +40,17 @@ import com.google.gwt.canvas.dom.client.Context2d;
  */
 public final class ChartBackgroundColor extends AbstractPlugin {
 
-	// default background color
-	static final String DEFAULT_BACKGROUND_COLOR = HtmlColor.White.toRGBA();
-
 	/**
 	 * Plugin ID {@value ID}
 	 */
 	public static final String ID = "backgroundcolor";
+	// cache to store options in order do not load every time the options
+	private static final Map<String, ChartBackgroundColorOptions> OPTIONS = new HashMap<>();
 	// factory to create options (native object container)
-	private final ChartBackgroundColorOptionsFactory factory = new ChartBackgroundColorOptionsFactory();
+	private static final ChartBackgroundColorOptionsFactory FACTORY = new ChartBackgroundColorOptionsFactory();
+
+	// default background color
+	static final String DEFAULT_BACKGROUND_COLOR = HtmlColor.White.toRGBA();
 	// color instance
 	private final String color;
 	// gradient instance
@@ -75,8 +80,9 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 * @param color background default color for all charts.
 	 */
 	public ChartBackgroundColor(String color) {
-		super();
+		// sets default color if null
 		this.color = (color != null) ? color : DEFAULT_BACKGROUND_COLOR;
+		// sets null other kind of background
 		this.pattern = null;
 		this.gradient = null;
 	}
@@ -87,27 +93,33 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 * @param gradient background default gradient for all charts.
 	 */
 	public ChartBackgroundColor(Gradient gradient) {
-		super();
+		// checks if gradient is consistent
 		if (gradient == null) {
+			// if null, exception!
 			throw new IllegalArgumentException("Gradient is null");
 		}
+		// sets gradient
+		this.gradient = gradient;
+		// sets null other kind of background
 		this.color = null;
 		this.pattern = null;
-		this.gradient = gradient;
 	}
 
 	/**
-	 * Builds the object with the default gradient for all charts.
+	 * Builds the object with the default pattern for all charts.
 	 * 
-	 * @param pattern background default gradient for all charts.
+	 * @param pattern background default pattern for all charts.
 	 */
 	public ChartBackgroundColor(Pattern pattern) {
-		super();
+		// checks if pattern is consistent
 		if (pattern == null) {
+			// if null, exception!
 			throw new IllegalArgumentException("Pattern is null");
 		}
-		this.color = null;
+		// sets gradient
 		this.pattern = pattern;
+		// sets null other kind of background
+		this.color = null;
 		this.gradient = null;
 	}
 
@@ -170,34 +182,21 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 */
 	@Override
 	public boolean onBeforeDraw(AbstractChart<?, ?> chart, double easing) {
-		ChartBackgroundColorOptions bgOptions = null;
-		// creates the plugin options using the java script object
-		// passing also the default color set at constructor.
-		if (chart.getOptions().getPlugins().hasOptions(ID)) {
-			bgOptions = chart.getOptions().getPlugins().getOptions(ID, factory);
-		} else {
-			bgOptions = new ChartBackgroundColorOptions();
-			if (color != null) {
-				bgOptions.setBackgroundColor(color);
-			} else if (pattern != null) {
-				bgOptions.setBackgroundColor(pattern);
-			} else if (gradient != null) {
-				bgOptions.setBackgroundColor(gradient);
-			}
-		}
+		// gets options
+		ChartBackgroundColorOptions bgOptions = getOptions(chart);
 		// gets the canvas
 		Context2d ctx = chart.getCanvas().getContext2d();
 		if (ChartBackgroundColorOptions.ColorType.color.equals(bgOptions.getColorType())) {
 			// set fill canvas color
 			ctx.setFillStyle(bgOptions.getBackgroundColorAsString());
-		} else if (ChartBackgroundColorOptions.ColorType.pattern.equals(bgOptions.getColorType())){
+		} else if (ChartBackgroundColorOptions.ColorType.pattern.equals(bgOptions.getColorType())) {
 			// creates the pattern
-			CanvasPattern canvasPattern = CanvasObjectFactory.createPattern(chart, bgOptions.getBackgroundColorAsPattern());
+			CanvasPattern canvasPattern = ChartBackgroundCanvasObjectFactory.createPattern(chart, bgOptions.getBackgroundColorAsPattern());
 			// set fill canvas pattern
 			ctx.setFillStyle(canvasPattern);
-		} else if (ChartBackgroundColorOptions.ColorType.gradient.equals(bgOptions.getColorType())){
+		} else if (ChartBackgroundColorOptions.ColorType.gradient.equals(bgOptions.getColorType())) {
 			// creates the gradient
-			CanvasGradient canvasGradient = CanvasObjectFactory.createGradient(chart, bgOptions.getBackgroundColorAsGradient(), Integer.MIN_VALUE, Integer.MIN_VALUE);
+			CanvasGradient canvasGradient = ChartBackgroundCanvasObjectFactory.createGradient(chart, bgOptions.getBackgroundColorAsGradient());
 			// set fill canvas color
 			ctx.setFillStyle(canvasGradient);
 		}
@@ -206,4 +205,93 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		// always TRUE
 		return true;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterDraw(org.pepstock.charba.client.AbstractChart, double)
+	 */
+	@Override
+	public void onAfterDraw(AbstractChart<?, ?> chart, double easing) {
+		// when the draw is completed
+		// remove the options from cache in order to reload it
+		// when chart is re drawing for whatever reason.
+		// in this way if options are updating during chart's life cycle
+		// the updates can be applied.
+		if (easing == 1D) {
+			OPTIONS.remove(chart.getId());
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onResize(org.pepstock.charba.client.AbstractChart,
+	 * org.pepstock.charba.client.items.SizeItem)
+	 */
+	@Override
+	public void onResize(AbstractChart<?, ?> chart, SizeItem size) {
+		// gets options
+		ChartBackgroundColorOptions bgOptions = getOptions(chart);
+		// if gradient has been set
+		if (ChartBackgroundColorOptions.ColorType.gradient.equals(bgOptions.getColorType())) {
+			// Due to gradients are created based on dimension of
+			// canvas or chart area, every time a resize is occurring
+			// gradients must be recreated
+			// because gradients must be recreated
+			// the cache of gradients must be clear
+			ChartBackgroundCanvasObjectFactory.resetGradients(chart);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.AbstractChart)
+	 */
+	@Override
+	public void onDestroy(AbstractChart<?, ?> chart) {
+		// because chart is destroy
+		// clears the cache of patterns and gradients of the chart
+		ChartBackgroundCanvasObjectFactory.clear(chart);
+	}
+
+	/**
+	 * Reads the plugin options at chart level, if exists, puts in cache if needed and returns it.
+	 * 
+	 * @param chart chart instances where to extract options from.
+	 * @return the options of plugin
+	 */
+	private ChartBackgroundColorOptions getOptions(AbstractChart<?, ?> chart) {
+		// checks if options are in cache
+		if (OPTIONS.containsKey(chart.getId())) {
+			// returns from cache
+			return OPTIONS.get(chart.getId());
+		}
+		// options instance
+		ChartBackgroundColorOptions bgOptions = null;
+		// creates the plugin options using the java script object
+		// passing also the default color set at constructor.
+		if (chart.getOptions().getPlugins().hasOptions(ID)) {
+			bgOptions = chart.getOptions().getPlugins().getOptions(ID, FACTORY);
+		} else {
+			// no options, creates new one with global/defaults values
+			bgOptions = new ChartBackgroundColorOptions();
+			// if configured with a color
+			if (color != null) {
+				bgOptions.setBackgroundColor(color);
+			} else if (pattern != null) {
+				// if configured with a pattern
+				bgOptions.setBackgroundColor(pattern);
+			} else if (gradient != null) {
+				// if configured with a gradient
+				bgOptions.setBackgroundColor(gradient);
+			}
+		}
+		// stores into cache
+		OPTIONS.put(chart.getId(), bgOptions);
+		// returns it
+		return bgOptions;
+	}
+
 }
