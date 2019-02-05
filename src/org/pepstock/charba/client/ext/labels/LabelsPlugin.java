@@ -72,16 +72,13 @@ public final class LabelsPlugin {
 	 * 
 	 * @param labelsConfigurations the LABELS plugin options at chart level.
 	 */
-	public static void setOptions(LabelsConfiguration... labelsConfigurations) {
+	public static void setOptions(AbstractChart<?, ?> chart, LabelsConfiguration... labelsConfigurations) {
 		// checks if arguments are consistent
 		if (labelsConfigurations != null) {
-			// gets the first element to get chart
-			LabelsConfiguration config = labelsConfigurations[0];
-			AbstractChart<?, ?> chart = config.getChart();
 			// if the array has got only 1 element
 			if (labelsConfigurations.length == 1) {
 				// sets the option
-				chart.getOptions().getPlugins().setOptions(ID, config);
+				chart.getOptions().getPlugins().setOptions(ID, labelsConfigurations[0]);
 			} else {
 				// sets the options as list
 				chart.getOptions().getPlugins().setOptions(ID, Arrays.asList(labelsConfigurations));
