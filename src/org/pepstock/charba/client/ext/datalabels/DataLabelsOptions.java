@@ -121,7 +121,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @return the position of the label relative to the anchor point position and orientation.
 	 */
 	public final Align getAlign() {
-		return getValue(DataLabelsOptions.Property.align, Align.class, defaultsOptions.getAlign());
+		return getValue(Property.align, Align.class, defaultsOptions.getAlign());
 	}
 
 	/**
@@ -139,7 +139,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @return the anchor point, which is defined by an orientation vector and a position on the data element.
 	 */
 	public final Anchor getAnchor() {
-		return getValue(DataLabelsOptions.Property.anchor, Anchor.class, defaultsOptions.getAnchor());
+		return getValue(Property.anchor, Anchor.class, defaultsOptions.getAnchor());
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @return the background color as string.
 	 */
 	public final String getBackgroundColorAsString() {
-		return getValue(DataLabelsOptions.Property.backgroundColor, defaultsOptions.getBackgroundColorAsString());
+		return getValue(Property.backgroundColor, defaultsOptions.getBackgroundColorAsString());
 	}
 
 	/**
@@ -175,9 +175,10 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @return the background color.
 	 */
 	public final IsColor getBackgroundColor() {
-		return ColorBuilder.parse(getBackgroundColorAsString());
+		String color = getBackgroundColorAsString();
+		return color != null ? ColorBuilder.parse(color) : null;
 	}
-	
+
 	/**
 	 * Sets the border color.
 	 * 
@@ -195,43 +196,71 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	public final void setBorderColor(String color) {
 		setValue(Property.borderColor, color);
 	}
-	
+
 	/**
 	 * Returns the border color as string.
 	 * 
 	 * @return the border color as string.
 	 */
 	public final String getBorderColorAsString() {
-		return getValue(DataLabelsOptions.Property.borderColor, defaultsOptions.getBorderColorAsString());
+		return getValue(Property.borderColor, defaultsOptions.getBorderColorAsString());
 	}
-	
+
 	/**
 	 * Returns the border color.
 	 * 
 	 * @return the border color.
 	 */
 	public final IsColor getBorderColor() {
-		return ColorBuilder.parse(getBorderColorAsString());
+		String color = getBorderColorAsString();
+		return color != null ? ColorBuilder.parse(color) : null;
 	}
 
-	// QUI
-	
+	/**
+	 * Sets the border radius.
+	 * 
+	 * @param radius the border radius.
+	 */
+	public final void setBorderRadius(double radius) {
+		setValue(Property.borderRadius, radius);
+	}
+
 	/**
 	 * Returns the border radius.
 	 * 
-	 * @return the border width as string.
+	 * @return the border radius.
 	 */
 	public final double getBorderRadius() {
-		return getValue(DataLabelsOptions.Property.borderRadius, defaultsOptions.getBorderRadius());
+		return getValue(Property.borderRadius, defaultsOptions.getBorderRadius());
+	}
+
+	/**
+	 * Sets the border width.
+	 * 
+	 * @param width the border width.
+	 */
+	public final void setBorderWidth(int width) {
+		setValue(Property.borderWidth, width);
 	}
 
 	/**
 	 * Returns the border width.
 	 * 
-	 * @return the border width as string.
+	 * @return the border width.
 	 */
 	public final int getBorderWidth() {
-		return getValue(DataLabelsOptions.Property.borderWidth, defaultsOptions.getBorderWidth());
+		return getValue(Property.borderWidth, defaultsOptions.getBorderWidth());
+	}
+
+	/**
+	 * Sets <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated
+	 * element (i.e. part inside the chart area).
+	 * 
+	 * @param clamp <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the
+	 *            associated element (i.e. part inside the chart area).
+	 */
+	public final void setClamp(boolean clamp) {
+		setValue(Property.clamp, clamp);
 	}
 
 	/**
@@ -242,7 +271,17 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 *         element (i.e. part inside the chart area).
 	 */
 	public final boolean isClamp() {
-		return getValue(DataLabelsOptions.Property.clamp, defaultsOptions.isClamp());
+		return getValue(Property.clamp, defaultsOptions.isClamp());
+	}
+
+	/**
+	 * When the clip option is <code>true</code>, the part of the label which is outside the chart area will be masked.
+	 * 
+	 * @param clip when the clip option is <code>true</code>, the part of the label which is outside the chart area will be
+	 *            masked.
+	 */
+	public final void setClip(boolean clip) {
+		setValue(Property.clip, clip);
 	}
 
 	/**
@@ -251,7 +290,25 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @return when the clip option is <code>true</code>, the part of the label which is outside the chart area will be masked.
 	 */
 	public final boolean isClip() {
-		return getValue(DataLabelsOptions.Property.clip, defaultsOptions.isClip());
+		return getValue(Property.clip, defaultsOptions.isClip());
+	}
+
+	/**
+	 * Sets the color.
+	 * 
+	 * @param color the color
+	 */
+	public final void setColor(IsColor color) {
+		setColor(color.toRGBA());
+	}
+
+	/**
+	 * Sets the color.
+	 * 
+	 * @param color the color
+	 */
+	public final void setColor(String color) {
+		setValue(Property.color, color);
 	}
 
 	/**
@@ -260,7 +317,38 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @return the color as string.
 	 */
 	public final String getColorAsString() {
-		return getValue(DataLabelsOptions.Property.color, defaultsOptions.getColorAsString());
+		return getValue(Property.color, defaultsOptions.getColorAsString());
+	}
+
+	/**
+	 * Returns the color.
+	 * 
+	 * @return the color.
+	 */
+	public final IsColor getColor() {
+		return ColorBuilder.parse(getColorAsString());
+	}
+
+	/**
+	 * Sets the visibility of labels.
+	 * 
+	 * @param display the visibility of labels.
+	 */
+	public final void setDisplay(boolean display) {
+		setValue(Property.display, display);
+	}
+
+	/**
+	 * Sets the visibility of labels.
+	 * 
+	 * @param display the visibility of labels.
+	 */
+	public final void setDisplay(Display display) {
+		if (Display.auto.equals(display)) {
+			setValue(Property.display, display);
+		} else {
+			setValue(Property.display, Display.isTrue.equals(display) ? true : false);
+		}
 	}
 
 	/**
@@ -269,14 +357,25 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @return the visibility of labels.
 	 */
 	public final Display getDisplay() {
-		ObjectType type = type(DataLabelsOptions.Property.display);
+		ObjectType type = type(Property.display);
 		if (ObjectType.Boolean.equals(type)) {
-			boolean value = getValue(DataLabelsOptions.Property.display, true);
+			boolean value = getValue(Property.display, true);
 			return value ? Display.isTrue : Display.isFalse;
 		} else if (ObjectType.String.equals(type)) {
-			return getValue(DataLabelsOptions.Property.display, Display.class, defaultsOptions.getDisplay());
+			return getValue(Property.display, Display.class, defaultsOptions.getDisplay());
 		}
 		return defaultsOptions.getDisplay();
+	}
+
+	/**
+	 * Sets the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align is
+	 * 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
+	 * 
+	 * @param offset the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when
+	 *            align is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
+	 */
+	public final void setOffset(double offset) {
+		setValue(Property.offset, offset);
 	}
 
 	/**
@@ -287,7 +386,16 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 *         is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
 	 */
 	public final double getOffset() {
-		return getValue(DataLabelsOptions.Property.offset, defaultsOptions.getOffset());
+		return getValue(Property.offset, defaultsOptions.getOffset());
+	}
+
+	/**
+	 * Sets the opacity.
+	 * 
+	 * @param opacity the opacity.
+	 */
+	public final void setOpacity(double opacity) {
+		setValue(Property.opacity, opacity);
 	}
 
 	/**
@@ -296,7 +404,16 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @return the opacity.
 	 */
 	public final double getOpacity() {
-		return getValue(DataLabelsOptions.Property.opacity, defaultsOptions.getOpacity());
+		return getValue(Property.opacity, defaultsOptions.getOpacity());
+	}
+
+	/**
+	 * Sets the clockwise rotation angle (in degrees) of the label, the rotation center point being the label center.
+	 * 
+	 * @param rotation the clockwise rotation angle (in degrees) of the label, the rotation center point being the label center.
+	 */
+	public final void setRotation(double rotation) {
+		setValue(Property.rotation, rotation);
 	}
 
 	/**
@@ -305,7 +422,16 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @return the clockwise rotation angle (in degrees) of the label, the rotation center point being the label center.
 	 */
 	public final double getRotation() {
-		return getValue(DataLabelsOptions.Property.rotation, defaultsOptions.getRotation());
+		return getValue(Property.rotation, defaultsOptions.getRotation());
+	}
+
+	/**
+	 * Sets the text alignment being used when drawing the label text.
+	 * 
+	 * @param textAlign the text alignment being used when drawing the label text.
+	 */
+	public final void setTextAlign(TextAlign textAlign) {
+		setValue(Property.textAlign, textAlign);
 	}
 
 	/**
@@ -314,7 +440,25 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @return the text alignment being used when drawing the label text.
 	 */
 	public final TextAlign getTextAlign() {
-		return getValue(DataLabelsOptions.Property.textAlign, TextAlign.class, defaultsOptions.getTextAlign());
+		return getValue(Property.textAlign, TextAlign.class, defaultsOptions.getTextAlign());
+	}
+
+	/**
+	 * Sets the text stroke color.
+	 * 
+	 * @param color the text stroke color
+	 */
+	public final void setTextStrokeColor(IsColor color) {
+		setColor(color.toRGBA());
+	}
+
+	/**
+	 * Sets the text stroke color.
+	 * 
+	 * @param color the text stroke color.
+	 */
+	public final void setTextStrokeColor(String color) {
+		setValue(Property.textStrokeColor, color);
 	}
 
 	/**
@@ -323,7 +467,25 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @return the text stroke color as string.
 	 */
 	public final String getTextStrokeColorAsString() {
-		return getValue(DataLabelsOptions.Property.textStrokeColor, defaultsOptions.getTextStrokeColorAsString());
+		return getValue(Property.textStrokeColor, defaultsOptions.getTextStrokeColorAsString());
+	}
+
+	/**
+	 * Returns the text stroke color.
+	 * 
+	 * @return the text stroke color.
+	 */
+	public final IsColor getTextStrokeColor() {
+		return ColorBuilder.parse(getTextStrokeColorAsString());
+	}
+
+	/**
+	 * Sets the text stroke width.
+	 * 
+	 * @param textStrokeWidth the text stroke width.
+	 */
+	public final void setTextStrokeWidth(int textStrokeWidth) {
+		setValue(Property.textStrokeWidth, textStrokeWidth);
 	}
 
 	/**
@@ -332,7 +494,16 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @return the text stroke width.
 	 */
 	public final int getTextStrokeWidth() {
-		return getValue(DataLabelsOptions.Property.textStrokeWidth, defaultsOptions.getTextStrokeWidth());
+		return getValue(Property.textStrokeWidth, defaultsOptions.getTextStrokeWidth());
+	}
+
+	/**
+	 * Sets the text shadow blur.
+	 * 
+	 * @param textShadowBlur the text shadow blur.
+	 */
+	public final void setTextShadowBlur(double textShadowBlur) {
+		setValue(Property.textShadowBlur, textShadowBlur);
 	}
 
 	/**
@@ -341,7 +512,25 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @return the text shadow blur.
 	 */
 	public final double getTextShadowBlur() {
-		return getValue(DataLabelsOptions.Property.textShadowBlur, defaultsOptions.getTextShadowBlur());
+		return getValue(Property.textShadowBlur, defaultsOptions.getTextShadowBlur());
+	}
+
+	/**
+	 * Sets the text shadow color color.
+	 * 
+	 * @param color the text shadow color color
+	 */
+	public final void setTextShadowColor(IsColor color) {
+		setColor(color.toRGBA());
+	}
+
+	/**
+	 * Sets the text shadow color color.
+	 * 
+	 * @param color the text shadow color color.
+	 */
+	public final void setTextShadowColor(String color) {
+		setValue(Property.textShadowColor, color);
 	}
 
 	/**
@@ -350,7 +539,16 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @return the text shadow color as string.
 	 */
 	public final String getTextShadowColorAsString() {
-		return getValue(DataLabelsOptions.Property.textShadowColor, defaultsOptions.getTextShadowColorAsString());
+		return getValue(Property.textShadowColor, defaultsOptions.getTextShadowColorAsString());
+	}
+
+	/**
+	 * Returns the text shadow color.
+	 * 
+	 * @return the text shadow color.
+	 */
+	public final IsColor getTextShadowColor() {
+		return ColorBuilder.parse(getTextShadowColorAsString());
 	}
 
 }

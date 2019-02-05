@@ -26,7 +26,7 @@ import org.pepstock.charba.client.commons.ObjectType;
  * @author Andrea "Stock" Stocchero
  */
 final class DataLabelsDefaultsOptions extends NativeObjectContainer {
-	
+
 	private static final Align DEFAULT_ALIGN = Align.center;
 
 	private static final Anchor DEFAULT_ANCHOR = Anchor.center;
@@ -58,18 +58,9 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	private static final double DEFAULT_TEXTSHADOWBLUR = 0D;
 
 	private final DataLabelsDefaultsPadding padding;
-	
+
 	private final DataLabelsDefaultsFont font;
 
-
-	// | [`formatter`](formatting.md#data-transformation) | `function` \| `null` | - | - | -
-	// | [`listeners`](events.md) | `object` | - | - | `{}`
-
-	// | `padding` | `number` \| `object` | Yes | Yes | -
-	// | `padding.top` | `number` | - | - | `4`
-	// | `padding.right` | `number` | - | - | `4`
-	// | `padding.bottom` | `number` | - | - | `4`
-	// | `padding.left` | `number` | - | - | `4`
 	/**
 	 * Creates an empty options without any default global options. it will use the constants as default of plugin properties.
 	 */
@@ -128,7 +119,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the background color as string.
 	 * 
-	 * @return the background color as string. Default is FIXME {@link Anchor#center}.
+	 * @return the background color as string. Default is <code>null</code> and uses the background color of dataset.
 	 */
 	String getBackgroundColorAsString() {
 		return getValue(DataLabelsOptions.Property.backgroundColor, DEFAULT_BACKGROUNDCOLOR);
@@ -137,7 +128,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the border color as string.
 	 * 
-	 * @return the border color as string. Default is FIXME {@link Anchor#center}.
+	 * @return the border color as string. Default is <code>null</code> and uses the border color of dataset.
 	 */
 	String getBorderColorAsString() {
 		return getValue(DataLabelsOptions.Property.borderColor, DEFAULT_BORDERCOLOR);
@@ -146,7 +137,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the border radius.
 	 * 
-	 * @return the border width as string. Default is 0.
+	 * @return the border radius. Default is 0.
 	 */
 	double getBorderRadius() {
 		return getValue(DataLabelsOptions.Property.borderRadius, DEFAULT_BORDERRADIUS);
@@ -155,7 +146,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the border width.
 	 * 
-	 * @return the border width as string. Default is 0.
+	 * @return the border width. Default is 0.
 	 */
 	int getBorderWidth() {
 		return getValue(DataLabelsOptions.Property.borderWidth, DEFAULT_BORDERWIDTH);
@@ -245,7 +236,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	TextAlign getTextAlign() {
 		return getValue(DataLabelsOptions.Property.textAlign, TextAlign.class, DEFAULT_TEXTALIGN);
 	}
-	
+
 	/**
 	 * Returns the text stroke color as string.
 	 * 
@@ -272,7 +263,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	double getTextShadowBlur() {
 		return getValue(DataLabelsOptions.Property.textShadowBlur, DEFAULT_TEXTSHADOWBLUR);
 	}
-	
+
 	/**
 	 * Returns the text shadow color as string.
 	 * 
@@ -281,6 +272,5 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	String getTextShadowColorAsString() {
 		return getValue(DataLabelsOptions.Property.textShadowColor, getColorAsString());
 	}
-	
-	
+
 }

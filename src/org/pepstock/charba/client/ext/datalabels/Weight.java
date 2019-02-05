@@ -24,8 +24,8 @@ import org.pepstock.charba.client.commons.Key;
 public enum Weight implements Key
 {
 	normal,
-	bold, 	
-	bolder, 	
+	bold,
+	bolder,
 	lighter,
 	initial,
 	inherit

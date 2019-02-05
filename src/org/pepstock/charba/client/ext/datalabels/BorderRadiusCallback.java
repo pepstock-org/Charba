@@ -13,10 +13,22 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
+package org.pepstock.charba.client.ext.datalabels;
+
+import org.pepstock.charba.client.AbstractChart;
+
 /**
- * FIXME
+ * Callback interface of labels plugin to change font color at runtime, using the arguments.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-package org.pepstock.charba.client.ext.datalabels;
+public interface BorderRadiusCallback {
+
+	/**
+	 * FIXME
+	 * 
+	 */
+	double borderRadius(AbstractChart<?, ?> chart, Context context);
+
+}

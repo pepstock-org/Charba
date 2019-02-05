@@ -29,11 +29,11 @@ import org.pepstock.charba.client.enums.FontStyle;
  * @param <D> defaults provider class
  */
 final class DataLabelsDefaultsFont extends NativeObjectContainer {
-	
+
 	private static final Weight DEFAULT_WEIGHT = Weight.normal;
-	
+
 	private static final double DEFAULT_LINEHEIGHT = 1.2D;
-	
+
 	DataLabelsDefaultsFont() {
 		super();
 	}

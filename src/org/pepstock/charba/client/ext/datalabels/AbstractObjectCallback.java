@@ -13,10 +13,31 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
+package org.pepstock.charba.client.ext.datalabels;
+
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+
 /**
- * FIXME
- * 
  * @author Andrea "Stock" Stocchero
  *
  */
-package org.pepstock.charba.client.ext.datalabels;
+abstract class AbstractObjectCallback extends NativeObjectContainer {
+
+	AbstractObjectCallback() {
+	}
+
+	AbstractObjectCallback(NativeObject nativeObject) {
+		super(nativeObject);
+	}
+	
+	/**
+	 * Exposes the native object for callback.
+	 * 
+	 * @return the native object for callback.
+	 */
+	NativeObject getObject() {
+		return getNativeObject();
+	}
+
+}

@@ -17,7 +17,6 @@ package org.pepstock.charba.client.ext.labels;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Charts;
-import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 
@@ -27,8 +26,7 @@ import jsinterop.annotations.JsFunction;
 
 /**
  * This is the extension of LABELS plugin options. With this extension, you can set callbacks to manage rendering and font
- * colors at runtime.<br>
- * To activate the callbacks, the instance of chart is mandatory.
+ * colors at runtime.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -105,8 +103,6 @@ public final class LabelsConfiguration extends LabelsOptions {
 	private final CallbackProxy<ProxyRenderImageCallback> renderImageCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the font color function
 	private final CallbackProxy<ProxyFontColorCallback> fontColorCallbackProxy = JsHelper.get().newCallbackProxy();
-	// chart instance
-	private final AbstractChart<?, ?> chart;
 	// render (string) callback instance
 	private RenderStringCallback renderStringCallback = null;
 	// render (image) callback instance
@@ -115,13 +111,9 @@ public final class LabelsConfiguration extends LabelsOptions {
 	private FontColorCallback fontColorCallback = null;
 
 	/**
-	 * Creates the chart options with chart instance and sets all callbacks proxies.
-	 * 
-	 * @param chart chart instance
+	 * Creates the chart options and sets all callbacks proxies.
 	 */
-	public LabelsConfiguration(AbstractChart<?, ?> chart) {
-		// stores chart instance
-		this.chart = chart;
+	public LabelsConfiguration() {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -167,7 +159,7 @@ public final class LabelsConfiguration extends LabelsOptions {
 				// checks if the callback is set
 				if (chart != null && renderImageCallback != null) {
 					// calls callback and returns the result
-					return renderImageCallback.render(getChart(), item);
+					return renderImageCallback.render(chart, item);
 				}
 				// default value is null
 				return null;
@@ -189,27 +181,18 @@ public final class LabelsConfiguration extends LabelsOptions {
 				// checks if the callback is set
 				if (chart != null && fontColorCallback != null) {
 					// calls callback
-					String value = fontColorCallback.color(getChart(), item);
+					String value = fontColorCallback.color(chart, item);
 					// checks result
 					if (value != null) {
 						return value;
 					}
 				}
-				// defaults is WHITE
-				return HtmlColor.White.toRGBA();
+				// defaults returns font color
+				return getFontColorAsString();
 			}
 		});
 	}
-
-	/**
-	 * Returns the chart instance.
-	 * 
-	 * @return the chart instance
-	 */
-	public AbstractChart<?, ?> getChart() {
-		return chart;
-	}
-
+	
 	/**
 	 * Returns the render string callback, if set, otherwise <code>null</code>.
 	 * 

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.data;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartType;
@@ -45,6 +46,8 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  * @author Andrea "Stock" Stocchero
  */
 public abstract class Dataset extends NativeObjectContainer {
+	// internal count
+	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// default for hidden property
 	private static final boolean DEFAULT_HIDDEN = false;
 	// patterns container
@@ -63,6 +66,8 @@ public abstract class Dataset extends NativeObjectContainer {
 		data,
 		type,
 		hidden,
+		// internal key to store a unique id
+		_charbaId,
 		// internal key to store patterns and gradients
 		_charbaPatterns,
 		_charbaGradients
@@ -84,9 +89,20 @@ public abstract class Dataset extends NativeObjectContainer {
 	 */
 	Dataset(IsDefaultOptions defaultValues) {
 		this.defaultValues = defaultValues;
+		// stores the id based on a counter
+		setValue(Property._charbaId, COUNTER.getAndIncrement());
 		// sets the Charba containers into dataset java script configuration
 		setValue(Property._charbaPatterns, patternsContainer);
 		setValue(Property._charbaGradients, gradientsContainer);
+	}
+
+	/**
+	 * Returns the unique id of datasets.
+	 * 
+	 * @return the unique id of datasets
+	 */
+	public final int getId() {
+		return getValue(Property._charbaId, UndefinedValues.INTEGER);
 	}
 
 	/**

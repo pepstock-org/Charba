@@ -15,13 +15,18 @@
 */
 package org.pepstock.charba.client.ext.datalabels;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.ext.Extensions;
 
 /**
- * Entry point of <a href="FIXME">DATALABELS plugin</a> with some static utilities to
- * enable it and to get and set options.
+ * Entry point of <a href="FIXME">DATALABELS plugin</a> with some static utilities to enable it and to get and set options.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -32,8 +37,13 @@ public final class DataLabelsPlugin {
 	 * Plugin ID {@value ID}
 	 */
 	public static final String ID = "datalabels";
-//	// options factory
-//	private static final LabelsOptionsFactory FACTORY = new LabelsOptionsFactory();
+	// options factory
+	private static final DataLabelsOptionsFactory FACTORY = new DataLabelsOptionsFactory();
+	// cache of label options for configuration
+	// K = chart ID, V = label options
+	private static final Map<String, DataLabelsConfiguration> OPTIONS_CONFIGURATIONS = new HashMap<>();
+	// K = dataset ID, V = label options
+	private static final Map<Integer, DataLabelsConfiguration> DATASETS_CONFIGURATIONS = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation
@@ -63,82 +73,74 @@ public final class DataLabelsPlugin {
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
 	}
 
-//	/**
-//	 * Sets the LABELS plugin options at chart level.
-//	 * 
-//	 * @param labelsConfigurations the LABELS plugin options at chart level.
-//	 */
-//	public static void setOptions(LabelsConfiguration... labelsConfigurations) {
-//		// checks if arguments are consistent
-//		if (labelsConfigurations != null) {
-//			// gets the first element to get chart
-//			LabelsConfiguration config = labelsConfigurations[0];
-//			AbstractChart<?, ?> chart = config.getChart();
-//			// if the array has got only 1 element
-//			if (labelsConfigurations.length == 1) {
-//				// sets the option
-//				chart.getOptions().getPlugins().setOptions(ID, config);
-//			} else {
-//				// sets the options as list
-//				chart.getOptions().getPlugins().setOptions(ID, Arrays.asList(labelsConfigurations));
-//			}
-//		}
-//	}
-//
-//	/**
-//	 * Returns the LABELS plugin options set at chart level.
-//	 * 
-//	 * @param chart chart instance
-//	 * @return the LABELS plugin options
-//	 */
-//	public static LabelsOptions getOptions(AbstractChart<?, ?> chart) {
-//		return chart.getOptions().getPlugins().getOptions(ID, FACTORY);
-//	}
-//
-//	/**
-//	 * Returns the LABELS plugin options as list set at chart level.
-//	 * 
-//	 * @param chart chart instance
-//	 * @return the LABELS plugin options as list
-//	 */
-//	public static List<LabelsOptions> getOptionsAsList(AbstractChart<?, ?> chart) {
-//		return chart.getOptions().getPlugins().getOptionsAsList(ID, FACTORY);
-//	}
-//
-//	/**
-//	 * Sets the LABELS plugin options at global level.
-//	 * 
-//	 * @param labelsOptions the LABELS plugin options at global level
-//	 */
-//	public static void setGlobalOptions(LabelsOptions... labelsOptions) {
-//		// checks if arguments are consistent
-//		if (labelsOptions != null) {
-//			if (labelsOptions.length == 1) {
-//				// if the array has got only 1 element
-//				Defaults.get().getGlobal().getPlugins().setOptions(ID, labelsOptions[0]);
-//			} else {
-//				// sets the options as list
-//				Defaults.get().getGlobal().getPlugins().setOptions(ID, Arrays.asList(labelsOptions));
-//			}
-//		}
-//	}
-//
-//	/**
-//	 * Returns the LABELS plugin options at global level if defined only one.
-//	 * 
-//	 * @return the LABELS plugin options at global level.
-//	 */
-//	public static LabelsOptions getGlobalOptions() {
-//		return Defaults.get().getGlobal().getPlugins().getOptions(ID, FACTORY);
-//	}
-//
-//	/**
-//	 * Returns the LABELS plugin options at global level as list if defined more than one.
-//	 * 
-//	 * @return the LABELS plugin options at global level as list
-//	 */
-//	public static List<LabelsOptions> getGlobalOptionsAsList() {
-//		return Defaults.get().getGlobal().getPlugins().getOptionsAsList(ID, FACTORY);
-//	}
+	/**
+	 * Sets the LABELS plugin options at chart level.
+	 * 
+	 * @param labelsConfigurations the LABELS plugin options at chart level.
+	 */
+	public static void setOptions(AbstractChart<?, ?> chart, DataLabelsConfiguration labelsConfiguration) {
+		// sets the option
+		chart.getOptions().getPlugins().setOptions(ID, labelsConfiguration);
+		if (labelsConfiguration != null) {
+			OPTIONS_CONFIGURATIONS.put(chart.getId(), labelsConfiguration);
+		} else {
+			OPTIONS_CONFIGURATIONS.remove(chart.getId());
+		}
+	}
+
+	/**
+	 * Sets the LABELS plugin options at dataset level.
+	 * 
+	 * @param labelsConfigurations the LABELS plugin options at dataset level.
+	 */
+	public static void setOptions(Dataset dataset, DataLabelsConfiguration labelsConfiguration) {
+		// sets the option
+		dataset.setOptions(ID, labelsConfiguration);
+		if (labelsConfiguration != null) {
+			DATASETS_CONFIGURATIONS.put(dataset.getId(), labelsConfiguration);
+		} else {
+			DATASETS_CONFIGURATIONS.remove(dataset.getId());
+		}
+
+	}
+
+	/**
+	 * Returns the LABELS plugin options set at chart level.
+	 * 
+	 * @param chart chart instance
+	 * @return the LABELS plugin options
+	 */
+	public static DataLabelsOptions getOptions(AbstractChart<?, ?> chart) {
+		return chart.getOptions().getPlugins().getOptions(ID, FACTORY);
+	}
+
+	/**
+	 * Returns the LABELS plugin options set at dataset level.
+	 * 
+	 * @param chart chart instance
+	 * @return the LABELS plugin options
+	 */
+	public static DataLabelsOptions getOptions(Dataset dataset) {
+		return dataset.getOptions(ID, FACTORY);
+	}
+
+	/**
+	 * Sets the LABELS plugin options at global level.
+	 * 
+	 * @param labelsOptions the LABELS plugin options at global level
+	 */
+	public static void setGlobalOptions(DataLabelsOptions labelsOptions) {
+		// sets the options as list
+		Defaults.get().getGlobal().getPlugins().setOptions(ID, Arrays.asList(labelsOptions));
+	}
+
+	/**
+	 * Returns the LABELS plugin options at global level if defined only one.
+	 * 
+	 * @return the LABELS plugin options at global level.
+	 */
+	public static DataLabelsOptions getGlobalOptions() {
+		return Defaults.get().getGlobal().getPlugins().getOptions(ID, FACTORY);
+	}
 
 }

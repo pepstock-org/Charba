@@ -17,7 +17,6 @@ package org.pepstock.charba.client.ext.datalabels;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
@@ -28,8 +27,8 @@ import org.pepstock.charba.client.enums.FontStyle;
  * @param <P> parent node class
  * @param <D> defaults provider class
  */
-public final class Font extends NativeObjectContainer {
-	
+public final class Font extends AbstractObjectCallback {
+
 	// defaults global options instance
 	private DataLabelsDefaultsFont defaultsOptions;
 
@@ -44,10 +43,13 @@ public final class Font extends NativeObjectContainer {
 		weight,
 		lineHeight
 	}
+	
+	public Font() {
+		this(new DataLabelsDefaultsFont());
+	}
 
 	Font(DataLabelsDefaultsFont defaultsOptions) {
-		super();
-		this.defaultsOptions = defaultsOptions;
+		this(null, defaultsOptions);
 	}
 
 	Font(NativeObject nativeObject, DataLabelsDefaultsFont defaultsOptions) {
@@ -126,7 +128,7 @@ public final class Font extends NativeObjectContainer {
 	public Weight getWeight() {
 		return getValue(Property.weight, Weight.class, defaultsOptions.getWeight());
 	}
-	
+
 	/**
 	 * Sets the line height.
 	 * 

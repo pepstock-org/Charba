@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.ext.datalabels;
 
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -25,14 +24,17 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Padding extends NativeObjectContainer {
-	
+public final class Padding extends AbstractObjectCallback {
+
 	// defaults global options instance
 	private DataLabelsDefaultsPadding defaultsOptions;
 
+	public Padding() {
+		this(new DataLabelsDefaultsPadding());
+	}
+	
 	Padding(DataLabelsDefaultsPadding defaultsOptions) {
-		super();
-		this.defaultsOptions = defaultsOptions;
+		this(null, defaultsOptions);
 	}
 
 	Padding(NativeObject nativeObject, DataLabelsDefaultsPadding defaultsOptions) {

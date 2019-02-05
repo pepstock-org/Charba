@@ -26,7 +26,7 @@ import org.pepstock.charba.client.enums.Position;
  *
  */
 final class DataLabelsDefaultsPadding extends NativeObjectContainer {
-	
+
 	private static final int DEFAULT_PADDING = 4;
 
 	DataLabelsDefaultsPadding() {
