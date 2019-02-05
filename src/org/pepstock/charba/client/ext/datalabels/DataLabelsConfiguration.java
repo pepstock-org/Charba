@@ -1252,7 +1252,16 @@ public final class DataLabelsConfiguration extends DataLabelsOptions {
 	 * @param clampCallback the clampCallback to set
 	 */
 	public void setClampCallback(ClampCallback clampCallback) {
+		// sets the callback
 		this.clampCallback = clampCallback;
+		// checks if callback is consistent
+		if (clampCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.clamp, clampCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.clamp);
+		}
 	}
 
 	/**
@@ -1266,7 +1275,16 @@ public final class DataLabelsConfiguration extends DataLabelsOptions {
 	 * @param clipCallback the clipCallback to set
 	 */
 	public void setClipCallback(ClipCallback clipCallback) {
+		// sets the callback
 		this.clipCallback = clipCallback;
+		// checks if callback is consistent
+		if (clipCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.clip, clipCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.clip);
+		}
 	}
 
 	/**
@@ -1280,7 +1298,16 @@ public final class DataLabelsConfiguration extends DataLabelsOptions {
 	 * @param displayCallback the displayCallback to set
 	 */
 	public void setDisplayCallback(DisplayCallback displayCallback) {
+		// sets the callback
 		this.displayCallback = displayCallback;
+		// checks if callback is consistent
+		if (displayCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.display, displayCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.display);
+		}
 	}
 
 	/**
@@ -1294,7 +1321,16 @@ public final class DataLabelsConfiguration extends DataLabelsOptions {
 	 * @param offsetCallback the offsetCallback to set
 	 */
 	public void setOffsetCallback(OffsetCallback offsetCallback) {
+		// sets the callback
 		this.offsetCallback = offsetCallback;
+		// checks if callback is consistent
+		if (offsetCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.offset, offsetCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.offset);
+		}
 	}
 
 	/**
@@ -1308,7 +1344,16 @@ public final class DataLabelsConfiguration extends DataLabelsOptions {
 	 * @param opacityCallback the opacityCallback to set
 	 */
 	public void setOpacityCallback(OpacityCallback opacityCallback) {
+		// sets the callback
 		this.opacityCallback = opacityCallback;
+		// checks if callback is consistent
+		if (opacityCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.opacity, opacityCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.opacity);
+		}
 	}
 
 	/**
@@ -1322,7 +1367,16 @@ public final class DataLabelsConfiguration extends DataLabelsOptions {
 	 * @param rotationCallback the rotationCallback to set
 	 */
 	public void setRotationCallback(RotationCallback rotationCallback) {
+		// sets the callback
 		this.rotationCallback = rotationCallback;
+		// checks if callback is consistent
+		if (rotationCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.rotation, rotationCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.rotation);
+		}
 	}
 
 	/**
@@ -1336,7 +1390,16 @@ public final class DataLabelsConfiguration extends DataLabelsOptions {
 	 * @param textAlignCallback the textAlignCallback to set
 	 */
 	public void setTextAlignCallback(TextAlignCallback textAlignCallback) {
+		// sets the callback
 		this.textAlignCallback = textAlignCallback;
+		// checks if callback is consistent
+		if (textAlignCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.textAlign, textAlignCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.textAlign);
+		}
 	}
 
 	/**
@@ -1350,7 +1413,16 @@ public final class DataLabelsConfiguration extends DataLabelsOptions {
 	 * @param textStrokeColorCallback the textStrokeColorCallback to set
 	 */
 	public void setTextStrokeColorCallback(TextStrokeColorCallback textStrokeColorCallback) {
+		// sets the callback
 		this.textStrokeColorCallback = textStrokeColorCallback;
+		// checks if callback is consistent
+		if (textStrokeColorCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.textStrokeColor, textStrokeColorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.textStrokeColor);
+		}
 	}
 
 	/**
@@ -1364,7 +1436,16 @@ public final class DataLabelsConfiguration extends DataLabelsOptions {
 	 * @param textStrokeWidthCallback the textStrokeWidthCallback to set
 	 */
 	public void setTextStrokeWidthCallback(TextStrokeWidthCallback textStrokeWidthCallback) {
+		// sets the callback
 		this.textStrokeWidthCallback = textStrokeWidthCallback;
+		// checks if callback is consistent
+		if (textStrokeWidthCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.textStrokeWidth, textStrokeWidthCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.textStrokeWidth);
+		}
 	}
 
 	/**
@@ -1378,7 +1459,16 @@ public final class DataLabelsConfiguration extends DataLabelsOptions {
 	 * @param textShadowBlurCallback the textShadowBlurCallback to set
 	 */
 	public void setTextShadowBlurCallback(TextShadowBlurCallback textShadowBlurCallback) {
+		// sets the callback
 		this.textShadowBlurCallback = textShadowBlurCallback;
+		// checks if callback is consistent
+		if (textShadowBlurCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.textShadowBlur, textShadowBlurCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.textShadowBlur);
+		}
 	}
 
 	/**
@@ -1392,7 +1482,16 @@ public final class DataLabelsConfiguration extends DataLabelsOptions {
 	 * @param textShadowColorCallback the textShadowColorCallback to set
 	 */
 	public void setTextShadowColorCallback(TextShadowColorCallback textShadowColorCallback) {
+		// sets the callback
 		this.textShadowColorCallback = textShadowColorCallback;
+		// checks if callback is consistent
+		if (textShadowColorCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.textShadowColor, textShadowColorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.textShadowColor);
+		}
 	}
 
 	/**
@@ -1406,9 +1505,40 @@ public final class DataLabelsConfiguration extends DataLabelsOptions {
 	 * @param fontCallback the fontCallback to set
 	 */
 	public void setFontCallback(FontCallback fontCallback) {
+		// sets the callback
 		this.fontCallback = fontCallback;
+		// checks if callback is consistent
+		if (fontCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.font, fontCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.font);
+		}
 	}
-	
-	
+
+	/**
+	 * @return the paddingCallback
+	 */
+	public PaddingCallback getPaddingCallback() {
+		return paddingCallback;
+	}
+
+	/**
+	 * @param paddingCallback the paddingCallback to set
+	 */
+	public void setPaddingCallback(PaddingCallback paddingCallback) {
+		// sets the callback
+		this.paddingCallback = paddingCallback;
+		// checks if callback is consistent
+		if (paddingCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.padding, paddingCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.padding);
+		}
+
+	}
 
 }
