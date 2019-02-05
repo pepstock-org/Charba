@@ -25,7 +25,6 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.ext.labels.LabelsOptionsFactory.LabelsDefaultsOptionsFactory;
 
@@ -106,29 +105,16 @@ public class LabelsOptions extends NativeObjectContainer {
 	 * @param render what data must be showed.
 	 */
 	public final void setRender(Render render) {
-		// checks is trying to set as callback (not allowed)
-		if (!Render.callback.equals(render)) {
-			setValue(Property.render, render);
-		} else {
-			throw new IllegalArgumentException("Render " + Render.callback + " can not be used to set the render");
-		}
+		setValue(Property.render, render);
 	}
 
 	/**
 	 * Returns what data must be showed.
 	 * 
-	 * @return what data must be showed. Default is {@link Render#value}. If the render is defined by a callback, returns
-	 *         {@link Render#callback}.
+	 * @return what data must be showed. Default is {@link Render#value}.
 	 */
 	public final Render getRender() {
-		// gets the render type
-		ObjectType type = type(Property.render);
-		// checks if is not a function (no callback)
-		if (!ObjectType.Function.equals(type)) {
-			return getValue(Property.render, Render.class, Render.value);
-		}
-		// returns callback
-		return Render.callback;
+		return getValue(Property.render, Render.class, Render.value);
 	}
 
 	/**
@@ -210,14 +196,7 @@ public class LabelsOptions extends NativeObjectContainer {
 	 *         font color callback has been set.
 	 */
 	public final String getFontColorAsString() {
-		// gets the font color type
-		ObjectType type = type(Property.fontColor);
-		// checks if is not a function (no callback)
-		if (!ObjectType.Function.equals(type)) {
-			return getValue(Property.fontColor, defaultsOptions.getFontColorAsString());
-		}
-		// returns default
-		return defaultsOptions.getFontColorAsString();
+		return getValue(Property.fontColor, defaultsOptions.getFontColorAsString());
 	}
 
 	/**

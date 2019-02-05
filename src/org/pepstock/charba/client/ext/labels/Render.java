@@ -40,12 +40,5 @@ public enum Render implements Key
 	/**
 	 * The images will be rendered.
 	 */
-	image,
-	/**
-	 * The render is defined by callback. This can not be used to be set.
-	 * 
-	 * @see RenderStringCallback
-	 * @see RenderImageCallback
-	 */
-	callback
+	image;
 }

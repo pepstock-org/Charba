@@ -550,5 +550,5 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	public final IsColor getTextShadowColor() {
 		return ColorBuilder.parse(getTextShadowColorAsString());
 	}
-
+	
 }
