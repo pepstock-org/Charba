@@ -63,7 +63,7 @@ public final class Font extends AbstractObjectCallback {
 	 * @param fontSize the font size.
 	 */
 	public void setFontSize(int fontSize) {
-		setValue(Property.size, defaultsOptions.getFontSize());
+		setValue(Property.size, fontSize);
 	}
 
 	/**
