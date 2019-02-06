@@ -19,27 +19,55 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.Position;
 
 /**
- * It is applied to all sides of the chart (left, top, right, bottom).
+ * Base object to map font options for DATALABELS plugin configuration.<br>
+ * It is applied to all sides of the chart (left, top, right, bottom).<br>
+ * It can be used also into callback for font generation at runtime.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @see PaddingCallback
  */
 public final class Padding extends AbstractObjectCallback {
 
 	// defaults global options instance
 	private DataLabelsDefaultsPadding defaultsOptions;
 
+	/**
+	 * Creates new padding element.
+	 */
 	public Padding() {
 		this(new DataLabelsDefaultsPadding());
 	}
-	
+
+	/**
+	 * Creates new padding element, using the default values options.
+	 * 
+	 * @param defaultsOptions default PADDING options to returns the default when required.
+	 */
 	Padding(DataLabelsDefaultsPadding defaultsOptions) {
 		this(null, defaultsOptions);
 	}
 
+	/**
+	 * Creates new padding element, using stored native object instance and the default values options.
+	 * 
+	 * @param nativeObject stored padding values into native object to read.
+	 * @param defaultsOptions default PADDING options to returns the default when required.
+	 */
 	Padding(NativeObject nativeObject, DataLabelsDefaultsPadding defaultsOptions) {
 		super(nativeObject);
 		this.defaultsOptions = defaultsOptions;
+	}
+
+	/**
+	 * Sets the padding size to all dimensions.
+	 * 
+	 * @param padding padding size to apply to all dimensions.
+	 */
+	public void set(int padding) {
+		setTop(padding);
+		setBottom(padding);
+		setLeft(padding);
+		setRight(padding);
 	}
 
 	/**

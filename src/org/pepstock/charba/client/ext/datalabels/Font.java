@@ -20,12 +20,11 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
- * Base object to map font options for configuration.
+ * Base object to map font options for DATALABELS plugin configuration.<br>
+ * It can be used also into callback for font generation at runtime.
  * 
  * @author Andrea "Stock" Stocchero
- *
- * @param <P> parent node class
- * @param <D> defaults provider class
+ * @see FontCallback
  */
 public final class Font extends AbstractObjectCallback {
 
@@ -43,15 +42,30 @@ public final class Font extends AbstractObjectCallback {
 		weight,
 		lineHeight
 	}
-	
+
+	/**
+	 * Creates new font element.
+	 */
 	public Font() {
+		// uses the default values for font
 		this(new DataLabelsDefaultsFont());
 	}
 
+	/**
+	 * Creates new font element, using the default values options.
+	 * 
+	 * @param defaultsOptions default FONT options to returns the default when required.
+	 */
 	Font(DataLabelsDefaultsFont defaultsOptions) {
 		this(null, defaultsOptions);
 	}
 
+	/**
+	 * Creates new font element, using stored native object instance and the default values options.
+	 * 
+	 * @param nativeObject stored font values into native object to read.
+	 * @param defaultsOptions default FONT options to returns the default when required.
+	 */
 	Font(NativeObject nativeObject, DataLabelsDefaultsFont defaultsOptions) {
 		super(nativeObject);
 		this.defaultsOptions = defaultsOptions;

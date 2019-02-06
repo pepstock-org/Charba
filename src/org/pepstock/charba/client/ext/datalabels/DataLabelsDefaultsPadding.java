@@ -20,19 +20,29 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.enums.Position;
 
 /**
- * It is applied to all sides of the chart (left, top, right, bottom).
+ * DATALABELS plugin default options for PADDING element.<br>
+ * It contains all default values for PADDING.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 final class DataLabelsDefaultsPadding extends NativeObjectContainer {
 
+	// default padding
 	private static final int DEFAULT_PADDING = 4;
 
+	/**
+	 * Creates the object with an empty native object instance.
+	 */
 	DataLabelsDefaultsPadding() {
 		super();
 	}
 
+	/**
+	 * Creates the object with native object instance to be wrapped.
+	 * 
+	 * @param nativeObject native object instance to be wrapped.
+	 */
 	DataLabelsDefaultsPadding(NativeObject nativeObject) {
 		super(nativeObject);
 	}

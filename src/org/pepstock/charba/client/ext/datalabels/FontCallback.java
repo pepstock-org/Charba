@@ -18,7 +18,7 @@ package org.pepstock.charba.client.ext.datalabels;
 import org.pepstock.charba.client.AbstractChart;
 
 /**
- * Callback interface of labels plugin to change font color at runtime, using the arguments.
+ * Callback interface of DATALABELS plugin to set a font element at runtime, using the chart instance and the plugin context.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -26,8 +26,11 @@ import org.pepstock.charba.client.AbstractChart;
 public interface FontCallback {
 
 	/**
-	 * FIXME
+	 * Returns the font element at runtime, using the chart instance and the plugin context.
 	 * 
+	 * @param chart chart instance
+	 * @param context DATALABELS plugin context instance
+	 * @return the font element instance to be applied
 	 */
 	Font font(AbstractChart<?, ?> chart, Context context);
 

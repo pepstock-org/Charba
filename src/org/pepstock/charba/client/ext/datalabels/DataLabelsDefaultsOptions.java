@@ -21,11 +21,17 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 
 /**
- * It wraps default global options if there are and provides all default values for LABELS plugin.
+ * DATALABELS plugin default options.<br>
+ * It contains all default values.
  * 
  * @author Andrea "Stock" Stocchero
+ *
  */
 final class DataLabelsDefaultsOptions extends NativeObjectContainer {
+
+	// -------------------------------------------
+	// -- DEFAULTS VALUES of DATALABELS PLUGIN ---
+	// -------------------------------------------
 
 	private static final Align DEFAULT_ALIGN = Align.center;
 
@@ -57,41 +63,52 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 
 	private static final double DEFAULT_TEXTSHADOWBLUR = 0D;
 
+	// default padding options
 	private final DataLabelsDefaultsPadding padding;
-
+	// default font options
 	private final DataLabelsDefaultsFont font;
 
 	/**
-	 * Creates an empty options without any default global options. it will use the constants as default of plugin properties.
+	 * Creates an empty options without any default global options. It will use the constants as default of plugin properties.
 	 */
 	DataLabelsDefaultsOptions() {
 		super();
+		// creates default padding options
 		padding = new DataLabelsDefaultsPadding();
+		// creates default font options
 		font = new DataLabelsDefaultsFont();
+		// sets the native object inside this object
 		setValue(DataLabelsOptions.Property.padding, padding);
 		setValue(DataLabelsOptions.Property.font, font);
 	}
 
 	/**
-	 * Creates the object wrapping the default global options if there are.
+	 * Creates the object wrapping the default global options if there are. It will use the constants as default of plugin
+	 * properties.
 	 * 
 	 * @param nativeObject native object which maps default global options.
 	 */
 	DataLabelsDefaultsOptions(NativeObject nativeObject) {
 		super(nativeObject);
+		// reads default padding options from main object
 		padding = new DataLabelsDefaultsPadding(getValue(DataLabelsOptions.Property.padding));
+		// reads default font options from main object
 		font = new DataLabelsDefaultsFont(getValue(DataLabelsOptions.Property.font));
 	}
 
 	/**
-	 * @return the font
+	 * Returns the font element.
+	 * 
+	 * @return the font element.
 	 */
 	DataLabelsDefaultsFont getFont() {
 		return font;
 	}
 
 	/**
-	 * @return the padding
+	 * Returns the padding element.
+	 * 
+	 * @return the padding element.
 	 */
 	DataLabelsDefaultsPadding getPadding() {
 		return padding;

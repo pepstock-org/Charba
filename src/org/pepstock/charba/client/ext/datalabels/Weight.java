@@ -18,16 +18,35 @@ package org.pepstock.charba.client.ext.datalabels;
 import org.pepstock.charba.client.commons.Key;
 
 /**
+ * The weight sets how thick or thin characters in text should be displayed.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public enum Weight implements Key
 {
+	/**
+	 * Defines normal characters. This is default.
+	 */
 	normal,
+	/**
+	 * Defines thick characters.
+	 */
 	bold,
+	/**
+	 * Defines thicker characters.
+	 */
 	bolder,
+	/**
+	 * Defines lighter characters.
+	 */
 	lighter,
+	/**
+	 * Sets this property to its default value.
+	 */
 	initial,
+	/**
+	 * Inherits this property from its parent element.
+	 */
 	inherit
-
 }

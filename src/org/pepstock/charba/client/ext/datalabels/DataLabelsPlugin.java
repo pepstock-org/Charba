@@ -15,14 +15,8 @@
 */
 package org.pepstock.charba.client.ext.datalabels;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
-import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.ext.Extensions;
 
 /**
@@ -37,13 +31,10 @@ public final class DataLabelsPlugin {
 	 * Plugin ID {@value ID}
 	 */
 	public static final String ID = "datalabels";
-	// options factory
-	private static final DataLabelsOptionsFactory FACTORY = new DataLabelsOptionsFactory();
-	// cache of label options for configuration
-	// K = chart ID, V = label options
-	private static final Map<String, DataLabelsConfiguration> OPTIONS_CONFIGURATIONS = new HashMap<>();
-	// K = dataset ID, V = label options
-	private static final Map<Integer, DataLabelsConfiguration> DATASETS_CONFIGURATIONS = new HashMap<>();
+	/**
+	 * Data labels options factory
+	 */
+	public static final DataLabelsOptionsFactory FACTORY = new DataLabelsOptionsFactory();
 
 	/**
 	 * To avoid any instantiation
@@ -71,76 +62,6 @@ public final class DataLabelsPlugin {
 		Injector.ensureInjected(Extensions.INSTANCE.datalabelsPlugin());
 		// set the enabling to all charts at global level
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
-	}
-
-	/**
-	 * Sets the LABELS plugin options at chart level.
-	 * 
-	 * @param labelsConfigurations the LABELS plugin options at chart level.
-	 */
-	public static void setOptions(AbstractChart<?, ?> chart, DataLabelsConfiguration labelsConfiguration) {
-		// sets the option
-		chart.getOptions().getPlugins().setOptions(ID, labelsConfiguration);
-		if (labelsConfiguration != null) {
-			OPTIONS_CONFIGURATIONS.put(chart.getId(), labelsConfiguration);
-		} else {
-			OPTIONS_CONFIGURATIONS.remove(chart.getId());
-		}
-	}
-
-	/**
-	 * Sets the LABELS plugin options at dataset level.
-	 * 
-	 * @param labelsConfigurations the LABELS plugin options at dataset level.
-	 */
-	public static void setOptions(Dataset dataset, DataLabelsConfiguration labelsConfiguration) {
-		// sets the option
-		dataset.setOptions(ID, labelsConfiguration);
-		if (labelsConfiguration != null) {
-			DATASETS_CONFIGURATIONS.put(dataset.getId(), labelsConfiguration);
-		} else {
-			DATASETS_CONFIGURATIONS.remove(dataset.getId());
-		}
-
-	}
-
-	/**
-	 * Returns the LABELS plugin options set at chart level.
-	 * 
-	 * @param chart chart instance
-	 * @return the LABELS plugin options
-	 */
-	public static DataLabelsOptions getOptions(AbstractChart<?, ?> chart) {
-		return chart.getOptions().getPlugins().getOptions(ID, FACTORY);
-	}
-
-	/**
-	 * Returns the LABELS plugin options set at dataset level.
-	 * 
-	 * @param chart chart instance
-	 * @return the LABELS plugin options
-	 */
-	public static DataLabelsOptions getOptions(Dataset dataset) {
-		return dataset.getOptions(ID, FACTORY);
-	}
-
-	/**
-	 * Sets the LABELS plugin options at global level.
-	 * 
-	 * @param labelsOptions the LABELS plugin options at global level
-	 */
-	public static void setGlobalOptions(DataLabelsOptions labelsOptions) {
-		// sets the options as list
-		Defaults.get().getGlobal().getPlugins().setOptions(ID, Arrays.asList(labelsOptions));
-	}
-
-	/**
-	 * Returns the LABELS plugin options at global level if defined only one.
-	 * 
-	 * @return the LABELS plugin options at global level.
-	 */
-	public static DataLabelsOptions getGlobalOptions() {
-		return Defaults.get().getGlobal().getPlugins().getOptions(ID, FACTORY);
 	}
 
 }

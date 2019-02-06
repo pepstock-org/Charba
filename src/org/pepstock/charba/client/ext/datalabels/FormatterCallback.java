@@ -18,7 +18,10 @@ package org.pepstock.charba.client.ext.datalabels;
 import org.pepstock.charba.client.AbstractChart;
 
 /**
- * Callback interface of labels plugin to change font color at runtime, using the arguments.
+ * Callback interface of DATALABELS plugin to set <code>formatter</code> property at runtime, using the chart instance and the
+ * plugin context.<br>
+ * Labels can be displayed on multiple lines by using the newline character <code>\n</code> between each line or by providing an
+ * array of strings where each item represents a new line.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -26,8 +29,11 @@ import org.pepstock.charba.client.AbstractChart;
 public interface FormatterCallback {
 
 	/**
-	 * FIXME
+	 * Returns the <code>formatter</code> property at runtime, using the chart instance and the plugin context.
 	 * 
+	 * @param chart chart instance
+	 * @param context DATALABELS plugin context instance
+	 * @return the label value to be showed
 	 */
 	String format(AbstractChart<?, ?> chart, double value, Context context);
 

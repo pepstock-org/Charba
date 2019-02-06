@@ -18,7 +18,10 @@ package org.pepstock.charba.client.ext.datalabels;
 import org.pepstock.charba.client.AbstractChart;
 
 /**
- * Callback interface of labels plugin to change font color at runtime, using the arguments.
+ * Callback interface of DATALABELS plugin to manage LEAVE events on labels.<br>
+ * Charba events need to be enabled in order to get the associated label event working.<br>
+ * If the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart re-rendered.
+ * This allows to implement visual interactions with labels such as highlight, selection, etc.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -26,8 +29,12 @@ import org.pepstock.charba.client.AbstractChart;
 public interface LeaveEventHandler {
 
 	/**
-	 * FIXME
+	 * Invoked to manage LEAVE events on labels.
 	 * 
+	 * @param chart chart instance
+	 * @param context DATALABELS plugin context instance
+	 * @return If the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
+	 *         re-rendered.
 	 */
 	boolean onLeave(AbstractChart<?, ?> chart, Context context);
 

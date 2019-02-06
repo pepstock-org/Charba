@@ -24,6 +24,13 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import jsinterop.annotations.JsFunction;
 
 /**
+ * This is the LISTENER options of DATALABELS plugin allows to register callback(s) to be notified when an event is detected on
+ * a specific label. This option is an object where the property is the type of the event to listen and the value is a callback
+ * with a unique context argument.<br>
+ * Charba events need to be enabled in order to get the associated label event working.<br>
+ * If no listener is registered, incoming events are immediately ignored, preventing extra computation such as intersecting
+ * label bounding box. That means there should be no performance penalty for configurations that don't use events.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -35,6 +42,8 @@ public final class Listeners extends NativeObjectContainer {
 
 	/**
 	 * Java script FUNCTION callback called to manage the ENTER event of plugin.<br>
+	 * If the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
+	 * re-rendered.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -47,13 +56,16 @@ public final class Listeners extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return if the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
+		 *         re-rendered.
 		 */
 		boolean call(Object contextFunction, Context context);
 	}
 
 	/**
 	 * Java script FUNCTION callback called to manage the LEAVE event of plugin.<br>
+	 * If the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
+	 * re-rendered.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -66,13 +78,16 @@ public final class Listeners extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return if the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
+		 *         re-rendered.
 		 */
 		boolean call(Object contextFunction, Context context);
 	}
 
 	/**
 	 * Java script FUNCTION callback called to manage the CLICK event of plugin.<br>
+	 * If the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
+	 * re-rendered.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -85,7 +100,8 @@ public final class Listeners extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return if the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
+		 *         re-rendered.
 		 */
 		boolean call(Object contextFunction, Context context);
 	}
@@ -93,19 +109,22 @@ public final class Listeners extends NativeObjectContainer {
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
-	// callback proxy to invoke the formatter function
+	// callback proxy to invoke the ENTER event function
 	private final CallbackProxy<ProxyEnterEventCallback> enterEventCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the background color function
+	// callback proxy to invoke the LEAVE event function
 	private final CallbackProxy<ProxyLeaveEventCallback> leaveEventCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the border color function
+	// callback proxy to invoke the CLICK event function
 	private final CallbackProxy<ProxyClickEventCallback> clickEventCallbackProxy = JsHelper.get().newCallbackProxy();
-
+	// ENTER event handler instance
 	private EnterEventHandler enterEventHandler = null;
-
+	// LEAVE event handler instance
 	private LeaveEventHandler leaveEventHandler = null;
-
+	// CLICK event handler instance
 	private ClickEventHandler clickEventHandler = null;
 
+	/**
+	 * Creates the options element, adding all function to callbacks proxies.
+	 */
 	Listeners() {
 		super();
 		// -------------------------------
@@ -121,14 +140,15 @@ public final class Listeners extends NativeObjectContainer {
 			 */
 			@Override
 			public boolean call(Object contextFunction, Context context) {
-				// gets chart instance
+				// gets chart instance by id
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
+				// checks if the handler is set
 				if (chart != null && enterEventHandler != null) {
-					// calls callback
+					// calls handler
 					return enterEventHandler.onEnter(chart, context);
 				}
+				// defaults always true
 				return true;
 			}
 		});
@@ -145,11 +165,12 @@ public final class Listeners extends NativeObjectContainer {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
+				// checks if the handler is set
 				if (chart != null && leaveEventHandler != null) {
-					// calls callback
+					// calls handler
 					return leaveEventHandler.onLeave(chart, context);
 				}
+				// defaults always true
 				return true;
 			}
 		});
@@ -166,30 +187,35 @@ public final class Listeners extends NativeObjectContainer {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
+				// checks if the handler is set
 				if (chart != null && clickEventHandler != null) {
-					// calls callback
+					// calls handler
 					return clickEventHandler.onClick(chart, context);
 				}
+				// defaults always true
 				return true;
 			}
 		});
 	}
 
 	/**
-	 * @return the clickEventHandler
+	 * Returns the CLICK event (the mouse's primary button is pressed and released on a label) handler.
+	 * 
+	 * @return the click event handler instance or <code>null</code> if not set.
 	 */
 	public ClickEventHandler getClickEventHandler() {
 		return clickEventHandler;
 	}
 
 	/**
-	 * @param clickEventHandler the clickEventHandler to set
+	 * Sets the CLICK event (the mouse's primary button is pressed and released on a label) handler.
+	 * 
+	 * @param clickEventHandler the click event handler to set
 	 */
 	public void setClickEventHandler(ClickEventHandler clickEventHandler) {
-		// sets the callback
+		// sets the handler
 		this.clickEventHandler = clickEventHandler;
-		// checks if callback is consistent
+		// checks if handler is consistent
 		if (clickEventHandler != null) {
 			// adds the callback proxy function to java script object
 			setValue(Event.click, clickEventCallbackProxy.getProxy());
@@ -200,19 +226,23 @@ public final class Listeners extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the enterEventHandler
+	 * Returns the ENTER event (the mouse is moved over a label) handler.
+	 * 
+	 * @return the ENTER event handler instance or <code>null</code> if not set.
 	 */
 	public EnterEventHandler getEnterEventHandler() {
 		return enterEventHandler;
 	}
 
 	/**
-	 * @param enterEventHandler the enterEventHandler to set
+	 * Sets the ENTER event (the mouse is moved over a label) handler.
+	 * 
+	 * @param enterEventHandler the enter event handler to set
 	 */
 	public void setEnterEventHandler(EnterEventHandler enterEventHandler) {
-		// sets the callback
+		// sets the handler
 		this.enterEventHandler = enterEventHandler;
-		// checks if callback is consistent
+		// checks if handler is consistent
 		if (enterEventHandler != null) {
 			// adds the callback proxy function to java script object
 			setValue(Event.enter, enterEventCallbackProxy.getProxy());
@@ -223,19 +253,23 @@ public final class Listeners extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the leaveEventHandler
+	 * Returns the LEAVE event (the mouse is moved out of a label) handler.
+	 * 
+	 * @return the LEAVE event handler instance or <code>null</code> if not set.
 	 */
 	public LeaveEventHandler getLeaveEventHandler() {
 		return leaveEventHandler;
 	}
 
 	/**
-	 * @param leaveEventHandler the leaveEventHandler to set
+	 * Sets the LEAVE event (the mouse is moved out of a label) handler.
+	 * 
+	 * @param leaveEventHandler the leave event handler to set
 	 */
 	public void setLeaveEventHandler(LeaveEventHandler leaveEventHandler) {
-		// sets the callback
+		// sets the handler
 		this.leaveEventHandler = leaveEventHandler;
-		// checks if callback is consistent
+		// checks if handler is consistent
 		if (leaveEventHandler != null) {
 			// adds the callback proxy function to java script object
 			setValue(Event.leave, leaveEventCallbackProxy.getProxy());

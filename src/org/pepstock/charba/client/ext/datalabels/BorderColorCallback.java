@@ -18,7 +18,8 @@ package org.pepstock.charba.client.ext.datalabels;
 import org.pepstock.charba.client.AbstractChart;
 
 /**
- * Callback interface of labels plugin to change font color at runtime, using the arguments.
+ * Callback interface of DATALABELS plugin to set <code>borderColor</code> property at runtime, using the chart instance and the
+ * plugin context.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -26,8 +27,11 @@ import org.pepstock.charba.client.AbstractChart;
 public interface BorderColorCallback {
 
 	/**
-	 * FIXME
+	 * Returns the <code>borderColor</code> property at runtime, using the chart instance and the plugin context.
 	 * 
+	 * @param chart chart instance
+	 * @param context DATALABELS plugin context instance
+	 * @return the <code>borderColor</code> value to be applied
 	 */
 	String borderColor(AbstractChart<?, ?> chart, Context context);
 

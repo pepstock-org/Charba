@@ -15,14 +15,23 @@
 */
 package org.pepstock.charba.client.ext.datalabels;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
+import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.ext.datalabels.DataLabelsOptionsFactory.DataLabelsDefaultsOptionsFactory;
+import org.pepstock.charba.client.items.UndefinedValues;
+
+import jsinterop.annotations.JsFunction;
 
 /**
  * FIXME
@@ -30,12 +39,508 @@ import org.pepstock.charba.client.ext.datalabels.DataLabelsOptionsFactory.DataLa
  * @author Andrea "Stock" Stocchero
  *
  */
-public class DataLabelsOptions extends NativeObjectContainer {
+public final class DataLabelsOptions extends NativeObjectContainer {
 
+	// ---------------------------
+	// -- JAVASCRIPT FUNCTIONS ---
+	// ---------------------------
+
+	/**
+	 * Java script FUNCTION callback called to provide the value by custom formatter.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyFormatterCallback {
+
+		/**
+		 * Method of function to be called to provide the value by custom formatter.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function. FIXME manca argument
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		String call(Object contextFunction, double value, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the align property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyAlignCallback {
+
+		/**
+		 * Method of function to be called to provide the align property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		String call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the anchor property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyAnchorCallback {
+
+		/**
+		 * Method of function to be called to provide the anchor property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		String call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the background color.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyBackgroundColorCallback {
+
+		/**
+		 * Method of function to be called to provide the background color.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		String call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the border color.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyBorderColorCallback {
+
+		/**
+		 * Method of function to be called to provide the border color.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		String call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the border radius property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyBorderRadiusCallback {
+
+		/**
+		 * Method of function to be called to provide the border radius property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		double call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the border width property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyBorderWidthCallback {
+
+		/**
+		 * Method of function to be called to provide the border width property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		int call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the color of label.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyColorCallback {
+
+		/**
+		 * Method of function to be called to provide the color of label.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		String call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the clamp property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyClampCallback {
+
+		/**
+		 * Method of function to be called to provide the clamp property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		boolean call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the clip property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyClipCallback {
+
+		/**
+		 * Method of function to be called to provide the clip property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		boolean call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the display property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyDisplayCallback {
+
+		/**
+		 * Method of function to be called to provide the clip property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		Object call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the offset property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyOffsetCallback {
+
+		/**
+		 * Method of function to be called to provide the offset property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		double call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the opacity property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyOpacityCallback {
+
+		/**
+		 * Method of function to be called to provide the opacity property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		double call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the rotation property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyRotationCallback {
+
+		/**
+		 * Method of function to be called to provide the rotation property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		double call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the text align property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyTextAlignCallback {
+
+		/**
+		 * Method of function to be called to provide the text align property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		String call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the text stroke color property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyTextStrokeColorCallback {
+
+		/**
+		 * Method of function to be called to provide the text stroke color property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		String call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the text stroke width property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyTextStrokeWidthCallback {
+
+		/**
+		 * Method of function to be called to provide the text stroke width property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		int call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the text shadow blur property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyTextShadowBlurCallback {
+
+		/**
+		 * Method of function to be called to provide the text shadow blur property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		double call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the text shadow blur property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyTextShadowColorCallback {
+
+		/**
+		 * Method of function to be called to provide the text shadow color property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		String call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the font object.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyFontCallback {
+
+		/**
+		 * Method of function to be called to provide the font object.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		NativeObject call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the padding object.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyPaddingCallback {
+
+		/**
+		 * Method of function to be called to provide the padding object.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return string with rendering value.
+		 */
+		NativeObject call(Object contextFunction, Context context);
+	}
+
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the formatter function
+	private final CallbackProxy<ProxyFormatterCallback> formatterCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the background color function
+	private final CallbackProxy<ProxyBackgroundColorCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border color function
+	private final CallbackProxy<ProxyBorderColorCallback> borderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the color function
+	private final CallbackProxy<ProxyColorCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the align function
+	private final CallbackProxy<ProxyAlignCallback> alignCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the anchor function
+	private final CallbackProxy<ProxyAnchorCallback> anchorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border radius function
+	private final CallbackProxy<ProxyBorderRadiusCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border width function
+	private final CallbackProxy<ProxyBorderWidthCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the clamp function
+	private final CallbackProxy<ProxyClampCallback> clampCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the clip function
+	private final CallbackProxy<ProxyClipCallback> clipCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the display function
+	private final CallbackProxy<ProxyDisplayCallback> displayCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the offset function
+	private final CallbackProxy<ProxyOffsetCallback> offsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the opacity function
+	private final CallbackProxy<ProxyOpacityCallback> opacityCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the rotation function
+	private final CallbackProxy<ProxyRotationCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the text align function
+	private final CallbackProxy<ProxyTextAlignCallback> textAlignCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the text stroke color function
+	private final CallbackProxy<ProxyTextStrokeColorCallback> textStrokeColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the text stroke color function
+	private final CallbackProxy<ProxyTextStrokeWidthCallback> textStrokeWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the text shadow blur function
+	private final CallbackProxy<ProxyTextShadowBlurCallback> textShadowBlurCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the text shadow color function
+	private final CallbackProxy<ProxyTextShadowColorCallback> textShadowColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the font function
+	private final CallbackProxy<ProxyFontCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the padding function
+	private final CallbackProxy<ProxyPaddingCallback> paddingCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// color callback instance
+	private FormatterCallback formatterCallback = null;
+	// color callback instance
+	private BackgroundColorCallback backgroundColorCallback = null;
+	// color callback instance
+	private BorderColorCallback borderColorCallback = null;
+	// color callback instance
+	private ColorCallback colorCallback = null;
+	// align callback instance
+	private AlignCallback alignCallback = null;
+	// anchor callback instance
+	private AnchorCallback anchorCallback = null;
+	// borderRadius callback instance
+	private BorderRadiusCallback borderRadiusCallback = null;
+	// borderWidth callback instance
+	private BorderWidthCallback borderWidthCallback = null;
+	// clamp callback instance
+	private ClampCallback clampCallback = null;
+	// clip callback instance
+	private ClipCallback clipCallback = null;
+	// display callback instance
+	private DisplayCallback displayCallback = null;
+	// offset callback instance
+	private OffsetCallback offsetCallback = null;
+	// opacity callback instance
+	private OpacityCallback opacityCallback = null;
+	// rotation callback instance
+	private RotationCallback rotationCallback = null;
+	// text align callback instance
+	private TextAlignCallback textAlignCallback = null;
+	// text stroke color callback instance
+	private TextStrokeColorCallback textStrokeColorCallback = null;
+	// text stroke width callback instance
+	private TextStrokeWidthCallback textStrokeWidthCallback = null;
+	// text shadow blur callback instance
+	private TextShadowBlurCallback textShadowBlurCallback = null;
+	// text shadow color callback instance
+	private TextShadowColorCallback textShadowColorCallback = null;
+	// font callback instance
+	private FontCallback fontCallback = null;
+	// padding callback instance
+	private PaddingCallback paddingCallback = null;
+
+	// static counter. Starts from min value of integer
+	private static final AtomicInteger COUNTER = new AtomicInteger(Integer.MIN_VALUE);
 	// defaults global options instance
 	private DataLabelsDefaultsOptions defaultsOptions;
 	// defaults global options factory
 	private final DataLabelsDefaultsOptionsFactory defaultsFactory = new DataLabelsDefaultsOptionsFactory();
+
+	private final Listeners listeners;
 
 	private final Padding padding;
 
@@ -64,7 +569,9 @@ public class DataLabelsOptions extends NativeObjectContainer {
 		textStrokeColor,
 		textStrokeWidth,
 		textShadowBlur,
-		textShadowColor
+		textShadowColor,
+		// internal property to set unique id
+		_charbaOptionsId
 	}
 
 	public DataLabelsOptions() {
@@ -80,30 +587,552 @@ public class DataLabelsOptions extends NativeObjectContainer {
 		}
 		padding = new Padding(defaultsOptions.getPadding());
 		font = new Font(defaultsOptions.getFont());
+		listeners = new Listeners();
 		setValue(Property.padding, padding);
 		setValue(Property.font, font);
+		setValue(Property.listeners, listeners);
+		// sets unique id
+		setValue(Property._charbaOptionsId, COUNTER.incrementAndGet());
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		formatterCallbackProxy.setCallback(new ProxyFormatterCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyFormatterCallback#call(java.lang.Object,
+			 * double, org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public String call(Object contextFunction, double value, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && formatterCallback != null) {
+					// calls callback
+					String result = formatterCallback.format(chart, value, context);
+					// checks result
+					if (result != null) {
+						return result;
+					}
+				}
+				// default result
+				return String.valueOf(value);
+			}
+		});
+		backgroundColorCallbackProxy.setCallback(new ProxyBackgroundColorCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyColorCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public String call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && backgroundColorCallback != null) {
+					// calls callback
+					String result = backgroundColorCallback.backgroundColor(chart, context);
+					// checks result
+					if (result != null) {
+						return result;
+					}
+				}
+				// default result
+				return getBackgroundColorAsString();
+			}
+		});
+		borderColorCallbackProxy.setCallback(new ProxyBorderColorCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyBorderColorCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public String call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && borderColorCallback != null) {
+					// calls callback
+					String result = borderColorCallback.borderColor(chart, context);
+					// checks result
+					if (result != null) {
+						return result;
+					}
+				}
+				// default result
+				return getBorderColorAsString();
+			}
+		});
+		colorCallbackProxy.setCallback(new ProxyColorCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyColorCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public String call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && colorCallback != null) {
+					// calls callback
+					String result = colorCallback.color(chart, context);
+					// checks result
+					if (result != null) {
+						return result;
+					}
+				}
+				// default result
+				return getColorAsString();
+			}
+		});
+		alignCallbackProxy.setCallback(new ProxyAlignCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyAlignCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public String call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && alignCallback != null) {
+					// calls callback
+					Align result = alignCallback.align(chart, context);
+					// checks result
+					if (result != null) {
+						return result.name();
+					}
+				}
+				// default result
+				return getAlign().name();
+			}
+		});
+		anchorCallbackProxy.setCallback(new ProxyAnchorCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyAnchorCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public String call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && anchorCallback != null) {
+					// calls callback
+					Anchor result = anchorCallback.anchor(chart, context);
+					// checks result
+					if (result != null) {
+						return result.name();
+					}
+				}
+				// default result
+				return getAnchor().name();
+			}
+		});
+		borderRadiusCallbackProxy.setCallback(new ProxyBorderRadiusCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyBorderRadiusCallback#call(java.lang.
+			 * Object, org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public double call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && borderRadiusCallback != null) {
+					// calls callback
+					return borderRadiusCallback.borderRadius(chart, context);
+				}
+				// default result
+				return getBorderRadius();
+			}
+		});
+		borderWidthCallbackProxy.setCallback(new ProxyBorderWidthCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyBorderWidthCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public int call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && borderWidthCallback != null) {
+					// calls callback
+					return borderWidthCallback.borderWidth(chart, context);
+				}
+				// default result
+				return getBorderWidth();
+			}
+		});
+		clampCallbackProxy.setCallback(new ProxyClampCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyClampCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public boolean call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && clampCallback != null) {
+					// calls callback
+					return clampCallback.clamp(chart, context);
+				}
+				// default result
+				return isClamp();
+			}
+		});
+		clipCallbackProxy.setCallback(new ProxyClipCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyClipCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public boolean call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && clipCallback != null) {
+					// calls callback
+					return clipCallback.clip(chart, context);
+				}
+				// default result
+				return isClip();
+			}
+		});
+		displayCallbackProxy.setCallback(new ProxyDisplayCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyDisplayCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public Object call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				Display result = null;
+				// checks if the callback is set
+				if (chart != null && displayCallback != null) {
+					// calls callback
+					result = displayCallback.display(chart, context);
+				}
+				if (result == null) {
+					result = getDisplay();
+				}
+				if (Display.auto.equals(result)) {
+					return Display.auto.name();
+				} else {
+					return Display.isTrue.equals(result) ? true : false;
+				}
+			}
+		});
+		offsetCallbackProxy.setCallback(new ProxyOffsetCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyOffsetCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public double call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && offsetCallback != null) {
+					// calls callback
+					return offsetCallback.offset(chart, context);
+				}
+				return getOffset();
+			}
+		});
+		opacityCallbackProxy.setCallback(new ProxyOpacityCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyOpacityCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public double call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && opacityCallback != null) {
+					// calls callback
+					return opacityCallback.opacity(chart, context);
+				}
+				return getOpacity();
+			}
+		});
+		rotationCallbackProxy.setCallback(new ProxyRotationCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyRotationCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public double call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && rotationCallback != null) {
+					// calls callback
+					return rotationCallback.rotation(chart, context);
+				}
+				return getRotation();
+			}
+		});
+		textAlignCallbackProxy.setCallback(new ProxyTextAlignCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyTextAlignCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public String call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && textAlignCallback != null) {
+					// calls callback
+					TextAlign result = textAlignCallback.textAlign(chart, context);
+					if (result != null) {
+						return result.name();
+					}
+				}
+				return getTextAlign().name();
+			}
+		});
+		textStrokeColorCallbackProxy.setCallback(new ProxyTextStrokeColorCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyTextStrokeColorCallback#call(java.lang.
+			 * Object, org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public String call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && textStrokeColorCallback != null) {
+					// calls callback
+					String result = textStrokeColorCallback.textStrokeColor(chart, context);
+					if (result != null) {
+						return result;
+					}
+				}
+				return getTextStrokeColorAsString();
+			}
+		});
+		textStrokeWidthCallbackProxy.setCallback(new ProxyTextStrokeWidthCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyTextStrokeWidthCallback#call(java.lang.
+			 * Object, org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public int call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && textStrokeWidthCallback != null) {
+					// calls callback
+					return textStrokeWidthCallback.textStrokeWidth(chart, context);
+				}
+				return getTextStrokeWidth();
+			}
+		});
+		textShadowBlurCallbackProxy.setCallback(new ProxyTextShadowBlurCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyTextShadowBlurCallback#call(java.lang.
+			 * Object, org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public double call(Object contextFunction, Context context) {
+				// gets chart i nstance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && textShadowBlurCallback != null) {
+					// calls callback
+					return textShadowBlurCallback.textShadowBlur(chart, context);
+				}
+				return getTextShadowBlur();
+			}
+		});
+		textShadowColorCallbackProxy.setCallback(new ProxyTextShadowColorCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyTextShadowColorCallback#call(java.lang.
+			 * Object, org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public String call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && textShadowColorCallback != null) {
+					// calls callback
+					return textShadowColorCallback.textShadowColor(chart, context);
+				}
+				return getTextShadowColorAsString();
+			}
+		});
+		fontCallbackProxy.setCallback(new ProxyFontCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyFontCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public NativeObject call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && fontCallback != null) {
+					// calls callback
+					Font result = fontCallback.font(chart, context);
+					if (result != null) {
+						return result.getObject();
+					}
+				}
+				return getFont().getObject();
+			}
+		});
+		paddingCallbackProxy.setCallback(new ProxyPaddingCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyPaddingCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 */
+			@Override
+			public NativeObject call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && paddingCallback != null) {
+					// calls callback
+					Padding result = paddingCallback.padding(chart, context);
+					if (result != null) {
+						return result.getObject();
+					}
+				}
+				return getPadding().getObject();
+			}
+		});
+		// registers into cache
+		DataLabelsPlugin.FACTORY.registerOptions(this);
 	}
 
-	DataLabelsOptions(NativeObject nativeObject, DataLabelsDefaultsOptions defaultsOptions) {
-		super(nativeObject);
-		// stores default options
-		this.defaultsOptions = defaultsOptions;
-		padding = new Padding(getValue(Property.padding), defaultsOptions.getPadding());
-		font = new Font(getValue(Property.font), defaultsOptions.getFont());
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return getValue(Property._charbaOptionsId, UndefinedValues.INTEGER);
 	}
 
 	/**
 	 * @return the padding
 	 */
-	public final Padding getPadding() {
+	public Padding getPadding() {
 		return padding;
 	}
 
 	/**
 	 * @return the font
 	 */
-	public final Font getFont() {
+	public Font getFont() {
 		return font;
+	}
+
+	/**
+	 * @return the listeners
+	 */
+	public Listeners getListeners() {
+		return listeners;
 	}
 
 	/**
@@ -111,7 +1140,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param align the position of the label relative to the anchor point position and orientation.
 	 */
-	public final void setAlign(Align align) {
+	public void setAlign(Align align) {
 		setValue(Property.align, align);
 	}
 
@@ -120,7 +1149,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the position of the label relative to the anchor point position and orientation.
 	 */
-	public final Align getAlign() {
+	public Align getAlign() {
 		return getValue(Property.align, Align.class, defaultsOptions.getAlign());
 	}
 
@@ -129,7 +1158,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param anchor the anchor point, which is defined by an orientation vector and a position on the data element.
 	 */
-	public final void setAnchor(Anchor anchor) {
+	public void setAnchor(Anchor anchor) {
 		setValue(Property.anchor, anchor);
 	}
 
@@ -138,7 +1167,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the anchor point, which is defined by an orientation vector and a position on the data element.
 	 */
-	public final Anchor getAnchor() {
+	public Anchor getAnchor() {
 		return getValue(Property.anchor, Anchor.class, defaultsOptions.getAnchor());
 	}
 
@@ -147,7 +1176,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param color the background color
 	 */
-	public final void setBackgroundColor(IsColor color) {
+	public void setBackgroundColor(IsColor color) {
 		setBackgroundColor(color.toRGBA());
 	}
 
@@ -156,7 +1185,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param color the background color
 	 */
-	public final void setBackgroundColor(String color) {
+	public void setBackgroundColor(String color) {
 		setValue(Property.backgroundColor, color);
 	}
 
@@ -165,7 +1194,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the background color as string.
 	 */
-	public final String getBackgroundColorAsString() {
+	public String getBackgroundColorAsString() {
 		return getValue(Property.backgroundColor, defaultsOptions.getBackgroundColorAsString());
 	}
 
@@ -174,7 +1203,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the background color.
 	 */
-	public final IsColor getBackgroundColor() {
+	public IsColor getBackgroundColor() {
 		String color = getBackgroundColorAsString();
 		return color != null ? ColorBuilder.parse(color) : null;
 	}
@@ -184,7 +1213,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param color the border color
 	 */
-	public final void setBorderColor(IsColor color) {
+	public void setBorderColor(IsColor color) {
 		setBorderColor(color.toRGBA());
 	}
 
@@ -193,7 +1222,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param color the border color
 	 */
-	public final void setBorderColor(String color) {
+	public void setBorderColor(String color) {
 		setValue(Property.borderColor, color);
 	}
 
@@ -202,7 +1231,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the border color as string.
 	 */
-	public final String getBorderColorAsString() {
+	public String getBorderColorAsString() {
 		return getValue(Property.borderColor, defaultsOptions.getBorderColorAsString());
 	}
 
@@ -211,7 +1240,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the border color.
 	 */
-	public final IsColor getBorderColor() {
+	public IsColor getBorderColor() {
 		String color = getBorderColorAsString();
 		return color != null ? ColorBuilder.parse(color) : null;
 	}
@@ -221,7 +1250,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param radius the border radius.
 	 */
-	public final void setBorderRadius(double radius) {
+	public void setBorderRadius(double radius) {
 		setValue(Property.borderRadius, radius);
 	}
 
@@ -230,7 +1259,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the border radius.
 	 */
-	public final double getBorderRadius() {
+	public double getBorderRadius() {
 		return getValue(Property.borderRadius, defaultsOptions.getBorderRadius());
 	}
 
@@ -239,7 +1268,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param width the border width.
 	 */
-	public final void setBorderWidth(int width) {
+	public void setBorderWidth(int width) {
 		setValue(Property.borderWidth, width);
 	}
 
@@ -248,7 +1277,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the border width.
 	 */
-	public final int getBorderWidth() {
+	public int getBorderWidth() {
 		return getValue(Property.borderWidth, defaultsOptions.getBorderWidth());
 	}
 
@@ -259,7 +1288,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @param clamp <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the
 	 *            associated element (i.e. part inside the chart area).
 	 */
-	public final void setClamp(boolean clamp) {
+	public void setClamp(boolean clamp) {
 		setValue(Property.clamp, clamp);
 	}
 
@@ -270,7 +1299,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @return <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated
 	 *         element (i.e. part inside the chart area).
 	 */
-	public final boolean isClamp() {
+	public boolean isClamp() {
 		return getValue(Property.clamp, defaultsOptions.isClamp());
 	}
 
@@ -280,7 +1309,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @param clip when the clip option is <code>true</code>, the part of the label which is outside the chart area will be
 	 *            masked.
 	 */
-	public final void setClip(boolean clip) {
+	public void setClip(boolean clip) {
 		setValue(Property.clip, clip);
 	}
 
@@ -289,7 +1318,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return when the clip option is <code>true</code>, the part of the label which is outside the chart area will be masked.
 	 */
-	public final boolean isClip() {
+	public boolean isClip() {
 		return getValue(Property.clip, defaultsOptions.isClip());
 	}
 
@@ -298,7 +1327,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param color the color
 	 */
-	public final void setColor(IsColor color) {
+	public void setColor(IsColor color) {
 		setColor(color.toRGBA());
 	}
 
@@ -307,7 +1336,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param color the color
 	 */
-	public final void setColor(String color) {
+	public void setColor(String color) {
 		setValue(Property.color, color);
 	}
 
@@ -316,7 +1345,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the color as string.
 	 */
-	public final String getColorAsString() {
+	public String getColorAsString() {
 		return getValue(Property.color, defaultsOptions.getColorAsString());
 	}
 
@@ -325,7 +1354,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the color.
 	 */
-	public final IsColor getColor() {
+	public IsColor getColor() {
 		return ColorBuilder.parse(getColorAsString());
 	}
 
@@ -334,7 +1363,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param display the visibility of labels.
 	 */
-	public final void setDisplay(boolean display) {
+	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
 	}
 
@@ -343,7 +1372,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param display the visibility of labels.
 	 */
-	public final void setDisplay(Display display) {
+	public void setDisplay(Display display) {
 		if (Display.auto.equals(display)) {
 			setValue(Property.display, display);
 		} else {
@@ -356,7 +1385,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the visibility of labels.
 	 */
-	public final Display getDisplay() {
+	public Display getDisplay() {
 		ObjectType type = type(Property.display);
 		if (ObjectType.Boolean.equals(type)) {
 			boolean value = getValue(Property.display, true);
@@ -374,7 +1403,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @param offset the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when
 	 *            align is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
 	 */
-	public final void setOffset(double offset) {
+	public void setOffset(double offset) {
 		setValue(Property.offset, offset);
 	}
 
@@ -385,7 +1414,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * @return the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align
 	 *         is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
 	 */
-	public final double getOffset() {
+	public double getOffset() {
 		return getValue(Property.offset, defaultsOptions.getOffset());
 	}
 
@@ -394,7 +1423,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param opacity the opacity.
 	 */
-	public final void setOpacity(double opacity) {
+	public void setOpacity(double opacity) {
 		setValue(Property.opacity, opacity);
 	}
 
@@ -403,7 +1432,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the opacity.
 	 */
-	public final double getOpacity() {
+	public double getOpacity() {
 		return getValue(Property.opacity, defaultsOptions.getOpacity());
 	}
 
@@ -412,7 +1441,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param rotation the clockwise rotation angle (in degrees) of the label, the rotation center point being the label center.
 	 */
-	public final void setRotation(double rotation) {
+	public void setRotation(double rotation) {
 		setValue(Property.rotation, rotation);
 	}
 
@@ -421,7 +1450,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the clockwise rotation angle (in degrees) of the label, the rotation center point being the label center.
 	 */
-	public final double getRotation() {
+	public double getRotation() {
 		return getValue(Property.rotation, defaultsOptions.getRotation());
 	}
 
@@ -430,7 +1459,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param textAlign the text alignment being used when drawing the label text.
 	 */
-	public final void setTextAlign(TextAlign textAlign) {
+	public void setTextAlign(TextAlign textAlign) {
 		setValue(Property.textAlign, textAlign);
 	}
 
@@ -439,7 +1468,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the text alignment being used when drawing the label text.
 	 */
-	public final TextAlign getTextAlign() {
+	public TextAlign getTextAlign() {
 		return getValue(Property.textAlign, TextAlign.class, defaultsOptions.getTextAlign());
 	}
 
@@ -448,7 +1477,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param color the text stroke color
 	 */
-	public final void setTextStrokeColor(IsColor color) {
+	public void setTextStrokeColor(IsColor color) {
 		setColor(color.toRGBA());
 	}
 
@@ -457,7 +1486,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param color the text stroke color.
 	 */
-	public final void setTextStrokeColor(String color) {
+	public void setTextStrokeColor(String color) {
 		setValue(Property.textStrokeColor, color);
 	}
 
@@ -466,7 +1495,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the text stroke color as string.
 	 */
-	public final String getTextStrokeColorAsString() {
+	public String getTextStrokeColorAsString() {
 		return getValue(Property.textStrokeColor, defaultsOptions.getTextStrokeColorAsString());
 	}
 
@@ -475,7 +1504,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the text stroke color.
 	 */
-	public final IsColor getTextStrokeColor() {
+	public IsColor getTextStrokeColor() {
 		return ColorBuilder.parse(getTextStrokeColorAsString());
 	}
 
@@ -484,7 +1513,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param textStrokeWidth the text stroke width.
 	 */
-	public final void setTextStrokeWidth(int textStrokeWidth) {
+	public void setTextStrokeWidth(int textStrokeWidth) {
 		setValue(Property.textStrokeWidth, textStrokeWidth);
 	}
 
@@ -493,7 +1522,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the text stroke width.
 	 */
-	public final int getTextStrokeWidth() {
+	public int getTextStrokeWidth() {
 		return getValue(Property.textStrokeWidth, defaultsOptions.getTextStrokeWidth());
 	}
 
@@ -502,7 +1531,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param textShadowBlur the text shadow blur.
 	 */
-	public final void setTextShadowBlur(double textShadowBlur) {
+	public void setTextShadowBlur(double textShadowBlur) {
 		setValue(Property.textShadowBlur, textShadowBlur);
 	}
 
@@ -511,7 +1540,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the text shadow blur.
 	 */
-	public final double getTextShadowBlur() {
+	public double getTextShadowBlur() {
 		return getValue(Property.textShadowBlur, defaultsOptions.getTextShadowBlur());
 	}
 
@@ -520,7 +1549,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param color the text shadow color color
 	 */
-	public final void setTextShadowColor(IsColor color) {
+	public void setTextShadowColor(IsColor color) {
 		setColor(color.toRGBA());
 	}
 
@@ -529,7 +1558,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param color the text shadow color color.
 	 */
-	public final void setTextShadowColor(String color) {
+	public void setTextShadowColor(String color) {
 		setValue(Property.textShadowColor, color);
 	}
 
@@ -538,7 +1567,7 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the text shadow color as string.
 	 */
-	public final String getTextShadowColorAsString() {
+	public String getTextShadowColorAsString() {
 		return getValue(Property.textShadowColor, defaultsOptions.getTextShadowColorAsString());
 	}
 
@@ -547,8 +1576,504 @@ public class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the text shadow color.
 	 */
-	public final IsColor getTextShadowColor() {
+	public IsColor getTextShadowColor() {
 		return ColorBuilder.parse(getTextShadowColorAsString());
 	}
-	
+
+	/**
+	 * Returns the background color callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the background color callback, if set, otherwise <code>null</code>.
+	 */
+	public BackgroundColorCallback getBackgroundColorCallback() {
+		return backgroundColorCallback;
+	}
+
+	/**
+	 * Sets the background color callback.
+	 * 
+	 * @param backgroundColorCallback the background color callback.
+	 */
+	public void setBackgroundColorCallback(BackgroundColorCallback backgroundColorCallback) {
+		// sets the callback
+		this.backgroundColorCallback = backgroundColorCallback;
+		// checks if callback is consistent
+		if (backgroundColorCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.backgroundColor, backgroundColorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.backgroundColor);
+		}
+	}
+
+	/**
+	 * Returns the border color callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border color callback, if set, otherwise <code>null</code>.
+	 */
+	public BorderColorCallback getBorderColorCallback() {
+		return borderColorCallback;
+	}
+
+	/**
+	 * Sets the border color callback.
+	 * 
+	 * @param borderColorCallback the border color callback.
+	 */
+	public void setBorderColorCallback(BorderColorCallback borderColorCallback) {
+		// sets the callback
+		this.borderColorCallback = borderColorCallback;
+		// checks if callback is consistent
+		if (borderColorCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.borderColor, borderColorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.borderColor);
+		}
+	}
+
+	/**
+	 * Returns the color callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the color callback, if set, otherwise <code>null</code>.
+	 */
+	public ColorCallback getColorCallback() {
+		return colorCallback;
+	}
+
+	/**
+	 * Sets the color callback.
+	 * 
+	 * @param colorCallback the color callback.
+	 */
+	public void setColorCallback(ColorCallback colorCallback) {
+		// sets the callback
+		this.colorCallback = colorCallback;
+		// checks if callback is consistent
+		if (colorCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.color, colorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.color);
+		}
+	}
+
+	/**
+	 * @return the formatterCallback
+	 */
+	public FormatterCallback getFormatterCallback() {
+		return formatterCallback;
+	}
+
+	/**
+	 * @param formatterCallback the formatterCallback to set
+	 */
+	public void setFormatterCallback(FormatterCallback formatterCallback) {
+		// sets the callback
+		this.formatterCallback = formatterCallback;
+		// checks if callback is consistent
+		if (formatterCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.formatter, formatterCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.formatter);
+		}
+	}
+
+	/**
+	 * @return the alignCallback
+	 */
+	public AlignCallback getAlignCallback() {
+		return alignCallback;
+	}
+
+	/**
+	 * @param alignCallback the alignCallback to set
+	 */
+	public void setAlignCallback(AlignCallback alignCallback) {
+		// sets the callback
+		this.alignCallback = alignCallback;
+		// checks if callback is consistent
+		if (alignCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.align, alignCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.align);
+		}
+	}
+
+	/**
+	 * @return the anchorCallback
+	 */
+	public AnchorCallback getAnchorCallback() {
+		return anchorCallback;
+	}
+
+	/**
+	 * @param anchorCallback the anchorCallback to set
+	 */
+	public void setAnchorCallback(AnchorCallback anchorCallback) {
+		// sets the callback
+		this.anchorCallback = anchorCallback;
+		// checks if callback is consistent
+		if (anchorCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.anchor, anchorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.anchor);
+		}
+	}
+
+	/**
+	 * @return the borderRadiusCallback
+	 */
+	public BorderRadiusCallback getBorderRadiusCallback() {
+		return borderRadiusCallback;
+	}
+
+	/**
+	 * @param borderRadiusCallback the borderRadiusCallback to set
+	 */
+	public void setBorderRadiusCallback(BorderRadiusCallback borderRadiusCallback) {
+		// sets the callback
+		this.borderRadiusCallback = borderRadiusCallback;
+		// checks if callback is consistent
+		if (borderRadiusCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.borderRadius, borderRadiusCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.borderRadius);
+		}
+	}
+
+	/**
+	 * @return the borderWidthCallback
+	 */
+	public BorderWidthCallback getBorderWidthCallback() {
+		return borderWidthCallback;
+	}
+
+	/**
+	 * @param borderWidthCallback the borderWidthCallback to set
+	 */
+	public void setBorderWidthCallback(BorderWidthCallback borderWidthCallback) {
+		// sets the callback
+		this.borderWidthCallback = borderWidthCallback;
+		// checks if callback is consistent
+		if (borderWidthCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.borderWidth, borderWidthCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.borderWidth);
+		}
+	}
+
+	/**
+	 * @return the clampCallback
+	 */
+	public ClampCallback getClampCallback() {
+		return clampCallback;
+	}
+
+	/**
+	 * @param clampCallback the clampCallback to set
+	 */
+	public void setClampCallback(ClampCallback clampCallback) {
+		// sets the callback
+		this.clampCallback = clampCallback;
+		// checks if callback is consistent
+		if (clampCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.clamp, clampCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.clamp);
+		}
+	}
+
+	/**
+	 * @return the clipCallback
+	 */
+	public ClipCallback getClipCallback() {
+		return clipCallback;
+	}
+
+	/**
+	 * @param clipCallback the clipCallback to set
+	 */
+	public void setClipCallback(ClipCallback clipCallback) {
+		// sets the callback
+		this.clipCallback = clipCallback;
+		// checks if callback is consistent
+		if (clipCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.clip, clipCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.clip);
+		}
+	}
+
+	/**
+	 * @return the displayCallback
+	 */
+	public DisplayCallback getDisplayCallback() {
+		return displayCallback;
+	}
+
+	/**
+	 * @param displayCallback the displayCallback to set
+	 */
+	public void setDisplayCallback(DisplayCallback displayCallback) {
+		// sets the callback
+		this.displayCallback = displayCallback;
+		// checks if callback is consistent
+		if (displayCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.display, displayCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.display);
+		}
+	}
+
+	/**
+	 * @return the offsetCallback
+	 */
+	public OffsetCallback getOffsetCallback() {
+		return offsetCallback;
+	}
+
+	/**
+	 * @param offsetCallback the offsetCallback to set
+	 */
+	public void setOffsetCallback(OffsetCallback offsetCallback) {
+		// sets the callback
+		this.offsetCallback = offsetCallback;
+		// checks if callback is consistent
+		if (offsetCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.offset, offsetCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.offset);
+		}
+	}
+
+	/**
+	 * @return the opacityCallback
+	 */
+	public OpacityCallback getOpacityCallback() {
+		return opacityCallback;
+	}
+
+	/**
+	 * @param opacityCallback the opacityCallback to set
+	 */
+	public void setOpacityCallback(OpacityCallback opacityCallback) {
+		// sets the callback
+		this.opacityCallback = opacityCallback;
+		// checks if callback is consistent
+		if (opacityCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.opacity, opacityCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.opacity);
+		}
+	}
+
+	/**
+	 * @return the rotationCallback
+	 */
+	public RotationCallback getRotationCallback() {
+		return rotationCallback;
+	}
+
+	/**
+	 * @param rotationCallback the rotationCallback to set
+	 */
+	public void setRotationCallback(RotationCallback rotationCallback) {
+		// sets the callback
+		this.rotationCallback = rotationCallback;
+		// checks if callback is consistent
+		if (rotationCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.rotation, rotationCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.rotation);
+		}
+	}
+
+	/**
+	 * @return the textAlignCallback
+	 */
+	public TextAlignCallback getTextAlignCallback() {
+		return textAlignCallback;
+	}
+
+	/**
+	 * @param textAlignCallback the textAlignCallback to set
+	 */
+	public void setTextAlignCallback(TextAlignCallback textAlignCallback) {
+		// sets the callback
+		this.textAlignCallback = textAlignCallback;
+		// checks if callback is consistent
+		if (textAlignCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.textAlign, textAlignCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.textAlign);
+		}
+	}
+
+	/**
+	 * @return the textStrokeColorCallback
+	 */
+	public TextStrokeColorCallback getTextStrokeColorCallback() {
+		return textStrokeColorCallback;
+	}
+
+	/**
+	 * @param textStrokeColorCallback the textStrokeColorCallback to set
+	 */
+	public void setTextStrokeColorCallback(TextStrokeColorCallback textStrokeColorCallback) {
+		// sets the callback
+		this.textStrokeColorCallback = textStrokeColorCallback;
+		// checks if callback is consistent
+		if (textStrokeColorCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.textStrokeColor, textStrokeColorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.textStrokeColor);
+		}
+	}
+
+	/**
+	 * @return the textStrokeWidthCallback
+	 */
+	public TextStrokeWidthCallback getTextStrokeWidthCallback() {
+		return textStrokeWidthCallback;
+	}
+
+	/**
+	 * @param textStrokeWidthCallback the textStrokeWidthCallback to set
+	 */
+	public void setTextStrokeWidthCallback(TextStrokeWidthCallback textStrokeWidthCallback) {
+		// sets the callback
+		this.textStrokeWidthCallback = textStrokeWidthCallback;
+		// checks if callback is consistent
+		if (textStrokeWidthCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.textStrokeWidth, textStrokeWidthCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.textStrokeWidth);
+		}
+	}
+
+	/**
+	 * @return the textShadowBlurCallback
+	 */
+	public TextShadowBlurCallback getTextShadowBlurCallback() {
+		return textShadowBlurCallback;
+	}
+
+	/**
+	 * @param textShadowBlurCallback the textShadowBlurCallback to set
+	 */
+	public void setTextShadowBlurCallback(TextShadowBlurCallback textShadowBlurCallback) {
+		// sets the callback
+		this.textShadowBlurCallback = textShadowBlurCallback;
+		// checks if callback is consistent
+		if (textShadowBlurCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.textShadowBlur, textShadowBlurCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.textShadowBlur);
+		}
+	}
+
+	/**
+	 * @return the textShadowColorCallback
+	 */
+	public TextShadowColorCallback getTextShadowColorCallback() {
+		return textShadowColorCallback;
+	}
+
+	/**
+	 * @param textShadowColorCallback the textShadowColorCallback to set
+	 */
+	public void setTextShadowColorCallback(TextShadowColorCallback textShadowColorCallback) {
+		// sets the callback
+		this.textShadowColorCallback = textShadowColorCallback;
+		// checks if callback is consistent
+		if (textShadowColorCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.textShadowColor, textShadowColorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.textShadowColor);
+		}
+	}
+
+	/**
+	 * @return the fontCallback
+	 */
+	public FontCallback getFontCallback() {
+		return fontCallback;
+	}
+
+	/**
+	 * @param fontCallback the fontCallback to set
+	 */
+	public void setFontCallback(FontCallback fontCallback) {
+		// sets the callback
+		this.fontCallback = fontCallback;
+		// checks if callback is consistent
+		if (fontCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.font, fontCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.font);
+		}
+	}
+
+	/**
+	 * @return the paddingCallback
+	 */
+	public PaddingCallback getPaddingCallback() {
+		return paddingCallback;
+	}
+
+	/**
+	 * @param paddingCallback the paddingCallback to set
+	 */
+	public void setPaddingCallback(PaddingCallback paddingCallback) {
+		// sets the callback
+		this.paddingCallback = paddingCallback;
+		// checks if callback is consistent
+		if (paddingCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.padding, paddingCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.padding);
+		}
+
+	}
+
 }

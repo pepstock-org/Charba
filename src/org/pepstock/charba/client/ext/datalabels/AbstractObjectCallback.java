@@ -19,18 +19,34 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
+ * Abstract element used by padding and font object in order to enable to provide these object instances as result of a
+ * callback.<br>
+ * Exposes the native object to return to DATALABELS plugin.
+ * 
  * @author Andrea "Stock" Stocchero
+ * 
+ * @see FontCallback
+ * @see PaddingCallback
  *
  */
 abstract class AbstractObjectCallback extends NativeObjectContainer {
 
+	/**
+	 * Creates the object with an empty native object instance.
+	 */
 	AbstractObjectCallback() {
+		super();
 	}
 
+	/**
+	 * Creates the object with native object instance to be wrapped.
+	 * 
+	 * @param nativeObject native object instance to be wrapped.
+	 */
 	AbstractObjectCallback(NativeObject nativeObject) {
 		super(nativeObject);
 	}
-	
+
 	/**
 	 * Exposes the native object for callback.
 	 * 

@@ -15,19 +15,41 @@
 */
 package org.pepstock.charba.client.ext.datalabels;
 
-import org.pepstock.charba.client.Defaults;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
- * Factory to get the options (form chart or from default global ones) related to LABELS plugin.
+ * Factory to get the options (form chart, form dataset or from default global ones) related to DATALABELS plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class DataLabelsOptionsFactory implements NativeObjectContainerFactory<DataLabelsOptions> {
 
-	// factory instance to read the options from default global
-	private final DataLabelsDefaultsOptionsFactory defaultsFactory = new DataLabelsDefaultsOptionsFactory();
+	// cache of options in order to return the already existing options
+	// K = options id, V = plugin options
+	private static final Map<Integer, DataLabelsOptions> OPTIONS = new HashMap<>();
+
+	/**
+	 * To avoid any instantiation. Use the statis reference into {@link DataLabelsPlugin#FACTORY}.
+	 */
+	DataLabelsOptionsFactory() {
+		// do nothing
+	}
+
+	/**
+	 * Registers new DATALABELS plugin options into a map, in order to return a right object instance, mainly because the plugin
+	 * options can contain callbacks and references to be maintained.
+	 * 
+	 * @param options DATALABELS plugin options to be stored
+	 */
+	void registerOptions(DataLabelsOptions options) {
+		// adds to cache
+		OPTIONS.put(options.getId(), options);
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -37,19 +59,16 @@ public final class DataLabelsOptionsFactory implements NativeObjectContainerFact
 	 */
 	@Override
 	public DataLabelsOptions create(NativeObject nativeObject) {
-		// defaults global options instance
-		DataLabelsDefaultsOptions defaultsOptions = null;
-		// checks if the default global options has been added for the plugin
-		if (Defaults.get().getGlobal().getPlugins().hasOptions(DataLabelsPlugin.ID)) {
-			// reads the default default global options
-			defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(DataLabelsPlugin.ID, defaultsFactory);
-		} else {
-			// if here, no default global option
-			// then the plugin will use the static defaults
-			defaultsOptions = new DataLabelsDefaultsOptions();
+		// gets the option id
+		int optionsId = Id.get(DataLabelsOptions.Property._charbaOptionsId, nativeObject);
+		// if cached, MUST BE ALWAYS cached
+		if (OPTIONS.containsKey(optionsId)) {
+			// returns the instance
+			return OPTIONS.get(optionsId);
 		}
 		// creates the options by the native object and the defaults
-		return new DataLabelsOptions(nativeObject, defaultsOptions);
+		// and ignores the native object passed into method
+		return new DataLabelsOptions();
 	}
 
 	/**

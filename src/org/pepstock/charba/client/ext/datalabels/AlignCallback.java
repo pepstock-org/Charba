@@ -18,7 +18,8 @@ package org.pepstock.charba.client.ext.datalabels;
 import org.pepstock.charba.client.AbstractChart;
 
 /**
- * Callback interface of labels plugin to change font color at runtime, using the arguments.
+ * Callback interface of DATALABELS plugin to set <code>align</code> property at runtime, using the chart instance and the
+ * plugin context.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -26,8 +27,11 @@ import org.pepstock.charba.client.AbstractChart;
 public interface AlignCallback {
 
 	/**
-	 * FIXME
+	 * Returns the <code>align</code> property at runtime, using the chart instance and the plugin context.
 	 * 
+	 * @param chart chart instance
+	 * @param context DATALABELS plugin context instance
+	 * @return the <code>align</code> value to be applied
 	 */
 	Align align(AbstractChart<?, ?> chart, Context context);
 
