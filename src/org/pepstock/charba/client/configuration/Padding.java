@@ -35,6 +35,18 @@ public class Padding {
 	Padding(ExtendedOptions options) {
 		this.options = options;
 	}
+	
+	/**
+	 * Sets the padding size to all dimensions.
+	 * 
+	 * @param padding padding size to apply to all dimensions.
+	 */
+	public void set(int padding) {
+		setTop(padding);
+		setBottom(padding);
+		setLeft(padding);
+		setRight(padding);
+	}
 
 	/**
 	 * Sets the padding left in pixel.
