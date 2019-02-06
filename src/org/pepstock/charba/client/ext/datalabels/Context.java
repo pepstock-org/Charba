@@ -17,6 +17,7 @@ package org.pepstock.charba.client.ext.datalabels;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.NativeExtendedObject;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -33,15 +34,15 @@ import jsinterop.annotations.JsType;
  * <ul>
  * <li><b>active</b> (boolean): whether the associated element is hovered
  * <li><b>chart</b> (Chart): the associated chart
- * <li>dataIndex</b>(int): index of the associated data
- * <li>dataset</b>(object): the dataset at index datasetIndex
- * <li>datasetIndex</b>(int): index of the associated dataset
+ * <li><b>dataIndex</b>(int): index of the associated data
+ * <li><b>dataset</b>(object): the dataset at index datasetIndex
+ * <li><b>datasetIndex</b>(int): index of the associated dataset
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class Context {
+public final class Context extends NativeExtendedObject{
 
 	/**
 	 * To avoid any instantiation

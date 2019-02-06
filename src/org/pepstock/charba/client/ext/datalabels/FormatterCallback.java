@@ -32,6 +32,7 @@ public interface FormatterCallback {
 	 * Returns the <code>formatter</code> property at runtime, using the chart instance and the plugin context.
 	 * 
 	 * @param chart chart instance
+	 * @param value to be formatted
 	 * @param context DATALABELS plugin context instance
 	 * @return the label value to be showed
 	 */

@@ -35,7 +35,7 @@ public enum Display implements Key
 	isFalse,
 	/**
 	 * The label is hidden if it overlap with another label.<br>
-	 * The display {@value Display#auto} option can be used to prevent overlapping labels, based on the following rules when two
+	 * The display 'auto' option can be used to prevent overlapping labels, based on the following rules when two
 	 * labels overlap:<br>
 	 * <ul>
 	 * <li>if both labels are display: true, they will be drawn overlapping
