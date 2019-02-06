@@ -45,10 +45,12 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * Plugin ID {@value ID}
 	 */
 	public static final String ID = "datasetsitemsselector";
+	/**
+	 * The factory to read options for plugin
+	 */
+	public static final DatasetsItemsSelectorOptionsFactory FACTORY = new DatasetsItemsSelectorOptionsFactory();
 	// maps to maintain the selectors handler for every chart
 	private static final Map<String, SelectionHandler> HANDLERS = new HashMap<>();
-	// factory to read options
-	private final DatasetsItemsSelectorOptionsFactory factory = new DatasetsItemsSelectorOptionsFactory();
 
 	/**
 	 * Reset the selection on the chart. With this method, it don't fire any reset event.
@@ -148,7 +150,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			// creates the plugin options using the java script object
 			// passing also the default color set at constructor.
 			if (chart.getOptions().getPlugins().hasOptions(ID)) {
-				pOptions = chart.getOptions().getPlugins().getOptions(ID, factory);
+				pOptions = chart.getOptions().getPlugins().getOptions(ID, FACTORY);
 			} else {
 				pOptions = new DatasetsItemsSelectorOptions();
 			}

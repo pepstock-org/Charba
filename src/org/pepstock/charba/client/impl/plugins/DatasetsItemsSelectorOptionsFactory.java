@@ -29,6 +29,13 @@ public final class DatasetsItemsSelectorOptionsFactory implements NativeObjectCo
 	// factory instance to read the options from default global
 	private final DatasetsItemsSelectorDefaultsOptionsFactory defaultsFactory = new DatasetsItemsSelectorDefaultsOptionsFactory();
 
+	/**
+	 * To avoid any instantiation. Use the statis reference into {@link DatasetsItemsSelector#FACTORY}.
+	 */
+	DatasetsItemsSelectorOptionsFactory() {
+		// do nothing
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

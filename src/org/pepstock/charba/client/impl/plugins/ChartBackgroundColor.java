@@ -26,6 +26,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
+import org.pepstock.charba.client.utils.Window;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
@@ -44,10 +45,13 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 * Plugin ID {@value ID}
 	 */
 	public static final String ID = "backgroundcolor";
+	/**
+	 * The factory to create options
+	 */
+	public static final ChartBackgroundColorOptionsFactory FACTORY = new ChartBackgroundColorOptionsFactory();
+
 	// cache to store options in order do not load every time the options
 	private static final Map<String, ChartBackgroundColorOptions> OPTIONS = new HashMap<>();
-	// factory to create options (native object container)
-	private static final ChartBackgroundColorOptionsFactory FACTORY = new ChartBackgroundColorOptionsFactory();
 
 	// default background color
 	static final String DEFAULT_BACKGROUND_COLOR = HtmlColor.White.toRGBA();
@@ -182,6 +186,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 */
 	@Override
 	public boolean onBeforeDraw(AbstractChart<?, ?> chart, double easing) {
+		Window.getConsole().log("DRAW");
 		// gets options
 		ChartBackgroundColorOptions bgOptions = getOptions(chart);
 		// gets the canvas

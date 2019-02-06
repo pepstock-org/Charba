@@ -25,6 +25,13 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  */
 public final class ChartBackgroundColorOptionsFactory implements NativeObjectContainerFactory<ChartBackgroundColorOptions> {
 
+	/**
+	 * To avoid any instantiation. Use the statis reference into {@link ChartBackgroundColor#FACTORY}.
+	 */
+	ChartBackgroundColorOptionsFactory() {
+		// do nothing
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
