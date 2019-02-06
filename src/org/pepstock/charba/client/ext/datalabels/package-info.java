@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all classes to activate the <a href="https://github.com/chartjs/chartjs-plugin-datalabels">DATALABELS plugin</a ofr
+ * Contains all classes to activate the DATALABELS plugin (AKA <code>chartjs-plugin-datalabels.js</code> ) for
  * CHART.js.
  * 
  * @author Andrea "Stock" Stocchero
