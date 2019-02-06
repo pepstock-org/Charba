@@ -34,7 +34,9 @@ import org.pepstock.charba.client.items.UndefinedValues;
 import jsinterop.annotations.JsFunction;
 
 /**
- * FIXME
+ * This is the DATALABELS plugin options where to set all the configuration needed to the plugin.<br>
+ * The options could be set by simply the value or by setting a callback.<br>
+ * The DATALABELS plugin is highly customizable CHART.JS plugin that displays labels on data for any type of charts.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -57,9 +59,10 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		/**
 		 * Method of function to be called to provide the value by custom formatter.
 		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function. FIXME manca argument
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param value value to be formatter.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return string with formatted value.
 		 */
 		String call(Object contextFunction, double value, Context context);
 	}
@@ -78,7 +81,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return align property value.
 		 */
 		String call(Object contextFunction, Context context);
 	}
@@ -97,7 +100,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return anchor property value.
 		 */
 		String call(Object contextFunction, Context context);
 	}
@@ -116,7 +119,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return background color property value.
 		 */
 		String call(Object contextFunction, Context context);
 	}
@@ -135,7 +138,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return border color property value.
 		 */
 		String call(Object contextFunction, Context context);
 	}
@@ -154,7 +157,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return border radius property value.
 		 */
 		double call(Object contextFunction, Context context);
 	}
@@ -173,7 +176,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return border width property value.
 		 */
 		int call(Object contextFunction, Context context);
 	}
@@ -192,7 +195,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return color property value.
 		 */
 		String call(Object contextFunction, Context context);
 	}
@@ -211,7 +214,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return clamp property value.
 		 */
 		boolean call(Object contextFunction, Context context);
 	}
@@ -230,7 +233,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return clip property value.
 		 */
 		boolean call(Object contextFunction, Context context);
 	}
@@ -245,11 +248,11 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	interface ProxyDisplayCallback {
 
 		/**
-		 * Method of function to be called to provide the clip property.
+		 * Method of function to be called to provide the display property.
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return display property value, could be a boolean or a string.
 		 */
 		Object call(Object contextFunction, Context context);
 	}
@@ -268,7 +271,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return offset property value.
 		 */
 		double call(Object contextFunction, Context context);
 	}
@@ -287,7 +290,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return opacity property value.
 		 */
 		double call(Object contextFunction, Context context);
 	}
@@ -306,7 +309,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return rotation property value.
 		 */
 		double call(Object contextFunction, Context context);
 	}
@@ -325,7 +328,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return text align property value.
 		 */
 		String call(Object contextFunction, Context context);
 	}
@@ -344,7 +347,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return text stroke color property value.
 		 */
 		String call(Object contextFunction, Context context);
 	}
@@ -363,7 +366,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return text stroke width property value.
 		 */
 		int call(Object contextFunction, Context context);
 	}
@@ -382,7 +385,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return text shadow blur property value.
 		 */
 		double call(Object contextFunction, Context context);
 	}
@@ -401,7 +404,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return text shadow color value.
 		 */
 		String call(Object contextFunction, Context context);
 	}
@@ -420,7 +423,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return font object value.
 		 */
 		NativeObject call(Object contextFunction, Context context);
 	}
@@ -439,7 +442,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return string with rendering value.
+		 * @return padding object value.
 		 */
 		NativeObject call(Object contextFunction, Context context);
 	}
@@ -479,7 +482,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	private final CallbackProxy<ProxyTextAlignCallback> textAlignCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the text stroke color function
 	private final CallbackProxy<ProxyTextStrokeColorCallback> textStrokeColorCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the text stroke color function
+	// callback proxy to invoke the text stroke width function
 	private final CallbackProxy<ProxyTextStrokeWidthCallback> textStrokeWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the text shadow blur function
 	private final CallbackProxy<ProxyTextShadowBlurCallback> textShadowBlurCallbackProxy = JsHelper.get().newCallbackProxy();
@@ -490,11 +493,11 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	// callback proxy to invoke the padding function
 	private final CallbackProxy<ProxyPaddingCallback> paddingCallbackProxy = JsHelper.get().newCallbackProxy();
 
-	// color callback instance
+	// formatter callback instance
 	private FormatterCallback formatterCallback = null;
-	// color callback instance
+	// background color callback instance
 	private BackgroundColorCallback backgroundColorCallback = null;
-	// color callback instance
+	// border color callback instance
 	private BorderColorCallback borderColorCallback = null;
 	// color callback instance
 	private ColorCallback colorCallback = null;
@@ -539,13 +542,16 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	private DataLabelsDefaultsOptions defaultsOptions;
 	// defaults global options factory
 	private final DataLabelsDefaultsOptionsFactory defaultsFactory = new DataLabelsDefaultsOptionsFactory();
-
+	// listener inner element
 	private final Listeners listeners;
-
+	// padding inner element
 	private final Padding padding;
-
+	// font inner element
 	private final Font font;
 
+	/**
+	 * Name of properties of native object.
+	 */
 	enum Property implements Key
 	{
 		align,
@@ -574,7 +580,11 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		_charbaOptionsId
 	}
 
+	/**
+	 * Creates new DATALABELS plugin options
+	 */
 	public DataLabelsOptions() {
+		// creates an empty native object
 		super();
 		// checks if the default global options has been added for the plugin
 		if (Defaults.get().getGlobal().getPlugins().hasOptions(DataLabelsPlugin.ID)) {
@@ -585,13 +595,16 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 			// then the plugin will use the static defaults
 			defaultsOptions = new DataLabelsDefaultsOptions();
 		}
+		// sets inner elements
 		padding = new Padding(defaultsOptions.getPadding());
 		font = new Font(defaultsOptions.getFont());
 		listeners = new Listeners();
+		// stores inner elements
 		setValue(Property.padding, padding);
 		setValue(Property.font, font);
 		setValue(Property.listeners, listeners);
 		// sets unique id
+		// needed for caching the instances
 		setValue(Property._charbaOptionsId, COUNTER.incrementAndGet());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
@@ -857,18 +870,24 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
+				// creates the result instance
 				Display result = null;
 				// checks if the callback is set
 				if (chart != null && displayCallback != null) {
 					// calls callback
 					result = displayCallback.display(chart, context);
 				}
+				// checks if the result has been set
 				if (result == null) {
+					// if not, returns the defaults.
 					result = getDisplay();
 				}
+				// checks if it must return a boolean or string
 				if (Display.auto.equals(result)) {
+					// returns string
 					return Display.auto.name();
 				} else {
+					// returns boolean
 					return Display.isTrue.equals(result) ? true : false;
 				}
 			}
@@ -891,6 +910,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 					// calls callback
 					return offsetCallback.offset(chart, context);
 				}
+				// default result
 				return getOffset();
 			}
 		});
@@ -913,6 +933,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 					// calls callback
 					return opacityCallback.opacity(chart, context);
 				}
+				// default result
 				return getOpacity();
 			}
 		});
@@ -935,6 +956,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 					// calls callback
 					return rotationCallback.rotation(chart, context);
 				}
+				// default result
 				return getRotation();
 			}
 		});
@@ -956,10 +978,13 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 				if (chart != null && textAlignCallback != null) {
 					// calls callback
 					TextAlign result = textAlignCallback.textAlign(chart, context);
+					// checks if result is consistent
 					if (result != null) {
+						// returns result
 						return result.name();
 					}
 				}
+				// default result
 				return getTextAlign().name();
 			}
 		});
@@ -981,10 +1006,13 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 				if (chart != null && textStrokeColorCallback != null) {
 					// calls callback
 					String result = textStrokeColorCallback.textStrokeColor(chart, context);
+					// checks if result is consistent
 					if (result != null) {
+						// returns result
 						return result;
 					}
 				}
+				// default result
 				return getTextStrokeColorAsString();
 			}
 		});
@@ -1007,6 +1035,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 					// calls callback
 					return textStrokeWidthCallback.textStrokeWidth(chart, context);
 				}
+				// default result
 				return getTextStrokeWidth();
 			}
 		});
@@ -1029,6 +1058,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 					// calls callback
 					return textShadowBlurCallback.textShadowBlur(chart, context);
 				}
+				// default result
 				return getTextShadowBlur();
 			}
 		});
@@ -1051,6 +1081,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 					// calls callback
 					return textShadowColorCallback.textShadowColor(chart, context);
 				}
+				// default result
 				return getTextShadowColorAsString();
 			}
 		});
@@ -1071,10 +1102,13 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 				if (chart != null && fontCallback != null) {
 					// calls callback
 					Font result = fontCallback.font(chart, context);
+					// checks if result is consistent
 					if (result != null) {
+						// returns result
 						return result.getObject();
 					}
 				}
+				// default result
 				return getFont().getObject();
 			}
 		});
@@ -1096,10 +1130,13 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 				if (chart != null && paddingCallback != null) {
 					// calls callback
 					Padding result = paddingCallback.padding(chart, context);
+					// checks if result is consistent
 					if (result != null) {
+						// returns result
 						return result.getObject();
 					}
 				}
+				// default result
 				return getPadding().getObject();
 			}
 		});
@@ -1108,28 +1145,36 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the id
+	 * Returns the unique ID of the options.
+	 * 
+	 * @return the unique ID of the options.
 	 */
 	public int getId() {
 		return getValue(Property._charbaOptionsId, UndefinedValues.INTEGER);
 	}
 
 	/**
-	 * @return the padding
+	 * Returns the padding element.
+	 * 
+	 * @return the padding element.
 	 */
 	public Padding getPadding() {
 		return padding;
 	}
 
 	/**
-	 * @return the font
+	 * Returns the font element.
+	 * 
+	 * @return the font element.
 	 */
 	public Font getFont() {
 		return font;
 	}
 
 	/**
-	 * @return the listeners
+	 * Returns the listeners element.
+	 * 
+	 * @return the listeners element.
 	 */
 	public Listeners getListeners() {
 		return listeners;
@@ -1662,14 +1707,18 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the formatterCallback
+	 * Returns the formatter callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the formatter callback, if set, otherwise <code>null</code>.
 	 */
 	public FormatterCallback getFormatterCallback() {
 		return formatterCallback;
 	}
 
 	/**
-	 * @param formatterCallback the formatterCallback to set
+	 * Sets the formatter callback.
+	 * 
+	 * @param formatterCallback the formatter callback to set
 	 */
 	public void setFormatterCallback(FormatterCallback formatterCallback) {
 		// sets the callback
@@ -1685,14 +1734,18 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the alignCallback
+	 * Returns the align callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the align callback, if set, otherwise <code>null</code>.
 	 */
 	public AlignCallback getAlignCallback() {
 		return alignCallback;
 	}
 
 	/**
-	 * @param alignCallback the alignCallback to set
+	 * Sets the align callback.
+	 * 
+	 * @param alignCallback the align callback to set
 	 */
 	public void setAlignCallback(AlignCallback alignCallback) {
 		// sets the callback
@@ -1708,14 +1761,18 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the anchorCallback
+	 * Returns the anchor callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the anchor callback, if set, otherwise <code>null</code>.
 	 */
 	public AnchorCallback getAnchorCallback() {
 		return anchorCallback;
 	}
 
 	/**
-	 * @param anchorCallback the anchorCallback to set
+	 * Sets the anchor callback.
+	 * 
+	 * @param anchorCallback the anchor callback to set
 	 */
 	public void setAnchorCallback(AnchorCallback anchorCallback) {
 		// sets the callback
@@ -1731,14 +1788,18 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the borderRadiusCallback
+	 * Returns the border radius callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border radius callback, if set, otherwise <code>null</code>.
 	 */
 	public BorderRadiusCallback getBorderRadiusCallback() {
 		return borderRadiusCallback;
 	}
 
 	/**
-	 * @param borderRadiusCallback the borderRadiusCallback to set
+	 * Sets the border radius callback.
+	 * 
+	 * @param borderRadiusCallback the border radius callback to set
 	 */
 	public void setBorderRadiusCallback(BorderRadiusCallback borderRadiusCallback) {
 		// sets the callback
@@ -1754,14 +1815,18 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the borderWidthCallback
+	 * Returns the border width callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border width callback, if set, otherwise <code>null</code>.
 	 */
 	public BorderWidthCallback getBorderWidthCallback() {
 		return borderWidthCallback;
 	}
 
 	/**
-	 * @param borderWidthCallback the borderWidthCallback to set
+	 * Sets the border width callback.
+	 * 
+	 * @param borderWidthCallback the border width callback to set
 	 */
 	public void setBorderWidthCallback(BorderWidthCallback borderWidthCallback) {
 		// sets the callback
@@ -1777,14 +1842,18 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the clampCallback
+	 * Returns the clamp callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the clamp callback, if set, otherwise <code>null</code>.
 	 */
 	public ClampCallback getClampCallback() {
 		return clampCallback;
 	}
 
 	/**
-	 * @param clampCallback the clampCallback to set
+	 * Sets the clamp callback.
+	 * 
+	 * @param clampCallback the clamp callback to set
 	 */
 	public void setClampCallback(ClampCallback clampCallback) {
 		// sets the callback
@@ -1800,14 +1869,18 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the clipCallback
+	 * Returns the clip callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the clip callback, if set, otherwise <code>null</code>.
 	 */
 	public ClipCallback getClipCallback() {
 		return clipCallback;
 	}
 
 	/**
-	 * @param clipCallback the clipCallback to set
+	 * Sets the clip callback.
+	 * 
+	 * @param clipCallback the clip callback to set
 	 */
 	public void setClipCallback(ClipCallback clipCallback) {
 		// sets the callback
@@ -1823,14 +1896,18 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the displayCallback
+	 * Returns the display callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the display callback, if set, otherwise <code>null</code>.
 	 */
 	public DisplayCallback getDisplayCallback() {
 		return displayCallback;
 	}
 
 	/**
-	 * @param displayCallback the displayCallback to set
+	 * Sets the display callback.
+	 * 
+	 * @param displayCallback the display callback to set
 	 */
 	public void setDisplayCallback(DisplayCallback displayCallback) {
 		// sets the callback
@@ -1846,14 +1923,18 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the offsetCallback
+	 * Returns the offset callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the offset callback, if set, otherwise <code>null</code>.
 	 */
 	public OffsetCallback getOffsetCallback() {
 		return offsetCallback;
 	}
 
 	/**
-	 * @param offsetCallback the offsetCallback to set
+	 * Sets the offset callback.
+	 * 
+	 * @param offsetCallback the offset callback to set
 	 */
 	public void setOffsetCallback(OffsetCallback offsetCallback) {
 		// sets the callback
@@ -1869,14 +1950,18 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the opacityCallback
+	 * Returns the opacity callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the opacity callback, if set, otherwise <code>null</code>.
 	 */
 	public OpacityCallback getOpacityCallback() {
 		return opacityCallback;
 	}
 
 	/**
-	 * @param opacityCallback the opacityCallback to set
+	 * Sets the opacity callback.
+	 * 
+	 * @param opacityCallback the opacity callback to set
 	 */
 	public void setOpacityCallback(OpacityCallback opacityCallback) {
 		// sets the callback
@@ -1892,14 +1977,18 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the rotationCallback
+	 * Returns the rotation callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the rotation callback, if set, otherwise <code>null</code>.
 	 */
 	public RotationCallback getRotationCallback() {
 		return rotationCallback;
 	}
 
 	/**
-	 * @param rotationCallback the rotationCallback to set
+	 * Sets the rotation callback.
+	 * 
+	 * @param rotationCallback the rotation callback to set
 	 */
 	public void setRotationCallback(RotationCallback rotationCallback) {
 		// sets the callback
@@ -1915,14 +2004,18 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the textAlignCallback
+	 * Returns the text align callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the text align callback, if set, otherwise <code>null</code>.
 	 */
 	public TextAlignCallback getTextAlignCallback() {
 		return textAlignCallback;
 	}
 
 	/**
-	 * @param textAlignCallback the textAlignCallback to set
+	 * Sets the text align callback.
+	 * 
+	 * @param textAlignCallback the text align callback to set
 	 */
 	public void setTextAlignCallback(TextAlignCallback textAlignCallback) {
 		// sets the callback
@@ -1938,14 +2031,18 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the textStrokeColorCallback
+	 * Returns the text stroke color callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the text stroke color callback, if set, otherwise <code>null</code>.
 	 */
 	public TextStrokeColorCallback getTextStrokeColorCallback() {
 		return textStrokeColorCallback;
 	}
 
 	/**
-	 * @param textStrokeColorCallback the textStrokeColorCallback to set
+	 * Sets the text stroke color callback.
+	 * 
+	 * @param textStrokeColorCallback the text stroke color callback to set
 	 */
 	public void setTextStrokeColorCallback(TextStrokeColorCallback textStrokeColorCallback) {
 		// sets the callback
@@ -1961,14 +2058,18 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the textStrokeWidthCallback
+	 * Returns the text stroke width callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the text stroke width callback, if set, otherwise <code>null</code>.
 	 */
 	public TextStrokeWidthCallback getTextStrokeWidthCallback() {
 		return textStrokeWidthCallback;
 	}
 
 	/**
-	 * @param textStrokeWidthCallback the textStrokeWidthCallback to set
+	 * Sets the text stroke width callback.
+	 * 
+	 * @param textStrokeWidthCallback the text stroke width callback to set
 	 */
 	public void setTextStrokeWidthCallback(TextStrokeWidthCallback textStrokeWidthCallback) {
 		// sets the callback
@@ -1984,14 +2085,18 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the textShadowBlurCallback
+	 * Returns the text shadow blur callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the text shadow blur callback, if set, otherwise <code>null</code>.
 	 */
 	public TextShadowBlurCallback getTextShadowBlurCallback() {
 		return textShadowBlurCallback;
 	}
 
 	/**
-	 * @param textShadowBlurCallback the textShadowBlurCallback to set
+	 * Sets the text shadow blur callback.
+	 * 
+	 * @param textShadowBlurCallback the text shadow blur callback to set
 	 */
 	public void setTextShadowBlurCallback(TextShadowBlurCallback textShadowBlurCallback) {
 		// sets the callback
@@ -2007,14 +2112,18 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the textShadowColorCallback
+	 * Returns the text shadow color callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the text shadow color callback, if set, otherwise <code>null</code>.
 	 */
 	public TextShadowColorCallback getTextShadowColorCallback() {
 		return textShadowColorCallback;
 	}
 
 	/**
-	 * @param textShadowColorCallback the textShadowColorCallback to set
+	 * Sets the text shadow color callback.
+	 * 
+	 * @param textShadowColorCallback the text shadow color callback to set
 	 */
 	public void setTextShadowColorCallback(TextShadowColorCallback textShadowColorCallback) {
 		// sets the callback
@@ -2030,14 +2139,18 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the fontCallback
+	 * Returns the font callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the font callback, if set, otherwise <code>null</code>.
 	 */
 	public FontCallback getFontCallback() {
 		return fontCallback;
 	}
 
 	/**
-	 * @param fontCallback the fontCallback to set
+	 * Sets the the font callback.
+	 * 
+	 * @param fontCallback the font callback to set
 	 */
 	public void setFontCallback(FontCallback fontCallback) {
 		// sets the callback
@@ -2053,14 +2166,18 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * @return the paddingCallback
+	 * Returns the padding callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the padding callback, if set, otherwise <code>null</code>.
 	 */
 	public PaddingCallback getPaddingCallback() {
 		return paddingCallback;
 	}
 
 	/**
-	 * @param paddingCallback the paddingCallback to set
+	 * Sets the padding callback.
+	 * 
+	 * @param paddingCallback the padding callback to set
 	 */
 	public void setPaddingCallback(PaddingCallback paddingCallback) {
 		// sets the callback
@@ -2073,7 +2190,6 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.padding);
 		}
-
 	}
 
 }

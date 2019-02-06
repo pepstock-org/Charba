@@ -20,7 +20,8 @@ import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.ext.Extensions;
 
 /**
- * Entry point of <a href="FIXME">DATALABELS plugin</a> with some static utilities to enable it and to get and set options.
+ * Entry point of <a href="https://github.com/chartjs/chartjs-plugin-datalabels">DATALABELS plugin</a> to enable the plugin.<br>
+ * The DATALABELS plugin is highly customizable CHART.JS plugin that displays labels on data for any type of charts.
  * 
  * @author Andrea "Stock" Stocchero
  *
