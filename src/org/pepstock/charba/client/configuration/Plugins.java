@@ -112,7 +112,7 @@ public final class Plugins {
 	 * @param pluginId plugin id.
 	 * @param factory factory instance to create a native object container.
 	 * @param <T> type of native object container to return
-	 * @return java script object used to configure the plugin or <code>null</code> if not exist.
+	 * @return java script object used to configure the plugin or an empty object if not exist.
 	 */
 	public <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) {
 		// returns the configuration by plugin id.
