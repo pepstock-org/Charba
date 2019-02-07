@@ -35,7 +35,7 @@ public class Padding {
 	Padding(ExtendedOptions options) {
 		this.options = options;
 	}
-	
+
 	/**
 	 * Sets the padding size to all dimensions.
 	 * 

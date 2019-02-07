@@ -15,33 +15,127 @@
 */
 package org.pepstock.charba.client.enums;
 
-import org.pepstock.charba.client.commons.Key;
-
 /**
  * Both line and radar charts support a fill option on the dataset object which can be used to create area between two datasets
- * or a dataset and a boundary.
+ * or a dataset and a boundary.<br>
+ * These are the constants of predefined filling mode values.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum Fill implements Key
+public enum Fill implements IsFill
 {
-
 	/**
 	 * Fill the area from the bottom X axis
 	 */
-	start,
+	start(FillingMode.predefined),
 	/**
 	 * Fill the area from the top X axis
 	 */
-	end,
+	end(FillingMode.predefined),
 	/**
 	 * Fill the area from 0 axis to top or bottom, depending on value.<br>
 	 * Default.
 	 */
-	origin,
+	origin(FillingMode.predefined),
 	/**
 	 * Does not fill any area
 	 */
-	nofill;
+	nofill(FillingMode.predefined);
+
+	// filling mode, always predefined
+	private final FillingMode mode;
+
+	/**
+	 * Creates the predefined fillings by own mode, always {@link FillingMode#predefined}.
+	 * 
+	 * @param the predefined fillings by own mode, always {@link FillingMode#predefined}.
+	 */
+	private Fill(FillingMode mode) {
+		this.mode = mode;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.enums.IsFill#getMode()
+	 */
+	@Override
+	public FillingMode getMode() {
+		return mode;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.enums.IsFill#getValueAsInt()
+	 */
+	@Override
+	public int getValueAsInt() {
+		return Integer.MIN_VALUE;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.enums.IsFill#getValue()
+	 */
+	@Override
+	public String getValue() {
+		return name();
+	}
+
+	/**
+	 * Checks if the fill passed by argument is a predefined fill, the returns <code>true</code>.
+	 * 
+	 * @param fill fill instance
+	 * @return <code>true</code> if the fill passed by argument is a predefined fill otherwise <code>false</code>.
+	 */
+	public static boolean isPredefined(IsFill fill) {
+		// checks if passed argument is
+		// a predefined filling mode
+		if (fill instanceof Fill) {
+			// returns true
+			return true;
+		}
+		// returns false
+		return false;
+	}
+
+	/**
+	 * Returns a fill, based on absolute dataset index, using the passed index.
+	 * 
+	 * @param index absolute dataset index to use for filling
+	 * @return a fill object with tthe right configuration to set into chart
+	 */
+	public static IsFill getFill(int index) {
+		return new AbsoluteDatasetIndexFill(index);
+	}
+
+	/**
+	 * Returns a fill, based on relative dataset index, using the passed index.<br>
+	 * If the passed argument is not a relative dataset index, checks if is predefined fill.
+	 * 
+	 * @param index relative dataset index to use for filling
+	 * @return a fill object with the right configuration to set into chart.
+	 */
+	public static IsFill getFill(String index) {
+		// checks if argument is consistent
+		if (index != null) {
+			// scans all predefined fill values
+			for (Fill fill : values()) {
+				// checks if argument is predefined
+				if (fill.name().equalsIgnoreCase(index)) {
+					// returns it
+					return fill;
+				}
+			}
+			// if here is not a predefined
+			// then returns a relative dataset index fill
+			return new RelativeDatasetIndexFill(index);
+		}
+		// if here
+		// the argument is null
+		throw new IllegalArgumentException("Index argument is null");
+	}
 
 }

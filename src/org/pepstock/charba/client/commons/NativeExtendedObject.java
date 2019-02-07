@@ -75,7 +75,7 @@ public abstract class NativeExtendedObject {
 	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
 	 */
 	@JsOverlay
-	public final boolean hasOptions(String pluginId) {
+	public final boolean hasOptions() {
 		return getNativeOptions() != null;
 	}
 

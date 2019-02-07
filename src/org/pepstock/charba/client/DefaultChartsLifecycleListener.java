@@ -16,14 +16,14 @@
 package org.pepstock.charba.client;
 
 /**
- * Abstract implementation of charts life cycle listsner to help who wants to implement only some methods and not the complete
+ * Default implementation of charts life cycle listener to help who wants to implement only some methods and not the complete
  * interface.<br>
  * If the implementation doesn't override the methods, the method doesn't do anything.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class AbstractChartsLifecycleListener implements ChartsLifecycleListener {
+public abstract class DefaultChartsLifecycleListener implements ChartsLifecycleListener {
 
 	/*
 	 * (non-Javadoc)

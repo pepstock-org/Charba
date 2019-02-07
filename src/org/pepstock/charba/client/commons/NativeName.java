@@ -43,12 +43,12 @@ public final class NativeName {
 	public static final String JSCONTROLLERHELPER = "JsControllerHelper";
 
 	/**
-	 * Constant to bind java script object as chart with name {@value CHART}  (internal of CHART.JS)
+	 * Constant to bind java script object as chart with name {@value CHART} (internal of CHART.JS)
 	 */
 	public static final String CHART = "Chart";
 
 	/**
-	 * Constant to bind java script object as window with name {@value WINDOW} 
+	 * Constant to bind java script object as window with name {@value WINDOW}
 	 */
 	public static final String WINDOW = "window";
 

@@ -43,7 +43,7 @@ public class CartesianPadding extends AxisContainer {
 		setLeft(padding);
 		setRight(padding);
 	}
-	
+
 	/**
 	 * Sets the padding left in pixel.
 	 * 

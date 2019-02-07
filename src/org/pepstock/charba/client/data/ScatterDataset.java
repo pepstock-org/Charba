@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.Fill;
+import org.pepstock.charba.client.enums.IsFill;
 
 /**
  * The scatter chart allows a number of properties to be specified for each dataset. These are used to set display properties
@@ -74,7 +75,7 @@ public final class ScatterDataset extends LineDataset {
 	 * @see org.pepstock.charba.client.data.LiningDataset#setFill(org.pepstock.charba.client.enums.Fill)
 	 */
 	@Override
-	public void setFill(Fill fill) {
+	public void setFill(IsFill fill) {
 		// sets always to no fill
 		super.setFill(Fill.nofill);
 	}

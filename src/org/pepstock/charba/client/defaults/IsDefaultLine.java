@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.enums.CapStyle;
-import org.pepstock.charba.client.enums.Fill;
+import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 
 /**
@@ -70,7 +70,7 @@ public interface IsDefaultLine extends IsDefaultArc {
 	 * 
 	 * @return how to fill the area under the line.
 	 */
-	Fill getFill();
+	IsFill getFill();
 
 	/**
 	 * Returns <code>true</code> to show the line as a stepped line (tension will be ignored).

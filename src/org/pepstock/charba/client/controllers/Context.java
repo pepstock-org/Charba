@@ -88,7 +88,7 @@ public final class Context {
 		// checks if there is the property
 		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "index"))) {
 			return UndefinedValues.INTEGER;
-		} 
+		}
 		return getNativeIndex();
 	}
 
