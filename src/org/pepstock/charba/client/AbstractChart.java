@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -63,6 +64,10 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 
 	// canvas prevent default handler
 	private final HandlerRegistration preventDisplayHandler;
+	// list of all handle registration when
+	// an handler (for events) has been added to chart
+	// needed for clean up when chart will be destroy
+	private final List<HandlerRegistration> handlerRegistrations = new ArrayList<>();
 
 	// canvas where Chart.js draws the chart
 	private final Canvas canvas;
@@ -304,13 +309,21 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	protected void onDetach() {
 		// detaches the widget
 		super.onDetach();
-		// remove handler of mouse event handler
-		removeCanvasPreventDefault();
 		// if is not to be destroyed on detach, doesn't destroy
 		if (isDestroyOnDetach()) {
 			// then destroy
 			destroy();
 		}
+	}
+
+	/**
+	 * Called by handler manager to store every handler registration in order to remove them automatically when the chart will
+	 * be destroy.
+	 * 
+	 * @param registration new handler registration created
+	 */
+	void addHandlerRegistration(HandlerRegistration registration) {
+		handlerRegistrations.add(registration);
 	}
 
 	/**
@@ -323,6 +336,15 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			// then destroy
 			chart.destroy();
 		}
+		// remove handler of mouse event handler
+		removeCanvasPreventDefault();
+		// removes all handlers created to add
+		// events handler to chart
+		for (HandlerRegistration registration : handlerRegistrations) {
+			registration.removeHandler();
+		}
+		// clears the cache of handler registrations.
+		handlerRegistrations.clear();
 		// removes chart instance from collection
 		Charts.remove(getId());
 	}
