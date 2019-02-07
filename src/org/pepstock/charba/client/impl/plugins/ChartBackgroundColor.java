@@ -26,7 +26,6 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
-import org.pepstock.charba.client.utils.Window;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
@@ -186,7 +185,6 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 */
 	@Override
 	public boolean onBeforeDraw(AbstractChart<?, ?> chart, double easing) {
-		Window.getConsole().log("DRAW");
 		// gets options
 		ChartBackgroundColorOptions bgOptions = getOptions(chart);
 		// gets the canvas

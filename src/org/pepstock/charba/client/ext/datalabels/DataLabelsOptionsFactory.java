@@ -16,28 +16,39 @@
 package org.pepstock.charba.client.ext.datalabels;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.AbstractChartsLifecycleListener;
+import org.pepstock.charba.client.Charts;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.data.Dataset;
+
+import jsinterop.annotations.JsPackage;
 
 /**
  * Factory to get the options (form chart, form dataset or from default global ones) related to DATALABELS plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DataLabelsOptionsFactory implements NativeObjectContainerFactory<DataLabelsOptions> {
+public final class DataLabelsOptionsFactory extends AbstractChartsLifecycleListener implements NativeObjectContainerFactory<DataLabelsOptions> {
 
 	// cache of options in order to return the already existing options
 	// K = options id, V = plugin options
 	private static final Map<Integer, DataLabelsOptions> OPTIONS = new HashMap<>();
 
 	/**
-	 * To avoid any instantiation. Use the statis reference into {@link DataLabelsPlugin#FACTORY}.
+	 * To avoid any instantiation. Use the static reference into {@link DataLabelsPlugin#FACTORY}.<br>
+	 * Adds itself as charts life cycle listener to manage the cache of data labels options, in order to clean the instances
+	 * when the charts will be destroy.
 	 */
 	DataLabelsOptionsFactory() {
-		// do nothing
+		// adds itself as charts life cycle listener
+		Charts.addLifecycleListener(this);
 	}
 
 	/**
@@ -49,6 +60,94 @@ public final class DataLabelsOptionsFactory implements NativeObjectContainerFact
 	void registerOptions(DataLabelsOptions options) {
 		// adds to cache
 		OPTIONS.put(options.getId(), options);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChartsLifecycleListener#onAfterInit(org.pepstock.charba.client.AbstractChart)
+	 */
+	@Override
+	public void onAfterInit(AbstractChart<?, ?> chart) {
+		// checks if there is a data labels options as GLOBAL
+		if (Defaults.get().getGlobal().getPlugins().hasOptions(DataLabelsPlugin.ID)) {
+			DataLabelsOptions options = Defaults.get().getGlobal().getPlugins().getOptions(DataLabelsPlugin.ID, this);
+			// gets references
+			List<String> references = options.getReferences();
+			// checks if references has global
+			if (!references.contains(JsPackage.GLOBAL)) {
+				// otherwise adds it
+				references.add(JsPackage.GLOBAL);
+			}
+		}
+		// checks if there is a data labels options as CHART GLOBAL 
+		if (Defaults.get().getOptions(chart.getType()).getPlugins().hasOptions(DataLabelsPlugin.ID)) {
+			DataLabelsOptions options = Defaults.get().getOptions(chart.getType()).getPlugins().getOptions(DataLabelsPlugin.ID, this);
+			// gets references
+			List<String> references = options.getReferences();
+			// checks if references has global (used also for GLOBAL options for chart type)
+			if (!references.contains(JsPackage.GLOBAL)) {
+				// otherwise adds it
+				references.add(JsPackage.GLOBAL);
+			}
+		}
+		// gets the data labels options from chart options, if there
+		if (chart.getOptions().getPlugins().hasOptions(DataLabelsPlugin.ID)) {
+			DataLabelsOptions options = chart.getOptions().getPlugins().getOptions(DataLabelsPlugin.ID, this);
+			// gets references
+			List<String> references = options.getReferences();
+			// checks if has got the reference to the chart
+			if (!references.contains(chart.getId())) {
+				// adds it
+				references.add(chart.getId());
+			}
+		}
+		// gets the data labels options from chart datasets, if there
+		for (Dataset dataset : chart.getData().getDatasets()) {
+			if (dataset.hasOptions(DataLabelsPlugin.ID)) {
+				DataLabelsOptions options = dataset.getOptions(DataLabelsPlugin.ID, this);
+				// gets references
+				List<String> references = options.getReferences();
+				// checks if has got the reference to the chart
+				if (!references.contains(chart.getId())) {
+					// adds it
+					references.add(chart.getId());
+				}
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChartsLifecycleListener#onBeforeDestroy(org.pepstock.charba.client.AbstractChart)
+	 */
+	@Override
+	public void onBeforeDestroy(AbstractChart<?, ?> chart) {
+		// gets the data labels options from chart options, if there
+		if (chart.getOptions().getPlugins().hasOptions(DataLabelsPlugin.ID)) {
+			DataLabelsOptions options = chart.getOptions().getPlugins().getOptions(DataLabelsPlugin.ID, this);
+			// gets references
+			List<String> references = options.getReferences();
+			// removes the reference to chart and checks if empty
+			if (references.remove(chart.getId()) && references.isEmpty()) {
+				// removes from cache
+				OPTIONS.remove(options.getId());
+			}
+		}
+		// gets the data labels options from chart datasets, if there
+		for (Dataset dataset : chart.getData().getDatasets()) {
+			if (dataset.hasOptions(DataLabelsPlugin.ID)) {
+				DataLabelsOptions options = dataset.getOptions(DataLabelsPlugin.ID, this);
+				// gets references
+				List<String> references = options.getReferences();
+				// removes the reference to chart and checks if empty
+				if (references.remove(chart.getId()) && references.isEmpty()) {
+					// removes from cache
+					OPTIONS.remove(options.getId());
+				}
+			}
+		}
 	}
 
 	/*

@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.ext.datalabels;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.AbstractChart;
@@ -548,6 +550,10 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	private final Padding padding;
 	// font inner element
 	private final Font font;
+	// list of chart ids or global where this options has been set
+	// this is mandatory in order to clean up the cache of datalabels options
+	// when they are not longer needed
+	private final List<String> references = new ArrayList<>();
 
 	/**
 	 * Name of properties of native object.
@@ -2190,6 +2196,17 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.padding);
 		}
+	}
+
+	/**
+	 * Returns the list of references of this options.<br>
+	 * called by data labels factory in order to manage correctly the cache and removes this option when it doesn't have any
+	 * reference.
+	 * 
+	 * @return the list of references of this options
+	 */
+	List<String> getReferences() {
+		return references;
 	}
 
 }
