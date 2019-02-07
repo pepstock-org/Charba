@@ -47,7 +47,7 @@ public class RenderItem {
 	 */
 	@JsProperty(name = "chart")
 	native final Chart getNativeChart();
-	
+
 	/**
 	 * Returns the <code>datasetIndex</code> property by native object.
 	 * 
@@ -99,11 +99,11 @@ public class RenderItem {
 		// checks if is defined
 		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "index"))) {
 			return UndefinedValues.INTEGER;
-		} 
+		}
 		// returns property value
 		return getNativeIndex();
 	}
-	
+
 	/**
 	 * Returns the dataset index of the data inside the dataset.
 	 * 
@@ -115,7 +115,7 @@ public class RenderItem {
 		// checks if is defined
 		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "datasetIndex"))) {
 			return UndefinedValues.INTEGER;
-		} 
+		}
 		// returns property value
 		return getNativeDatasetIndex();
 	}
@@ -130,7 +130,7 @@ public class RenderItem {
 		// checks if is defined
 		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "label"))) {
 			return UndefinedValues.STRING;
-		} 
+		}
 		// returns property value
 		return getNativeLabel();
 	}
@@ -145,7 +145,7 @@ public class RenderItem {
 		// checks if is defined
 		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "percentage"))) {
 			return UndefinedValues.DOUBLE;
-		} 
+		}
 		// returns property value
 		return getNativePercentage();
 	}
@@ -160,7 +160,7 @@ public class RenderItem {
 		// checks if is defined
 		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "value"))) {
 			return UndefinedValues.DOUBLE;
-		} 
+		}
 		// returns property value
 		return getNativeValue();
 	}

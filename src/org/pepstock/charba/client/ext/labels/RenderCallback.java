@@ -18,20 +18,20 @@ package org.pepstock.charba.client.ext.labels;
 import org.pepstock.charba.client.AbstractChart;
 
 /**
- * Callback interface of labels plugin to provide the item to be rendered as string at runtime, using the arguments.
+ * Callback interface of labels plugin to provide the item to be rendered as string or as image at runtime, using the arguments.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface RenderStringCallback {
+public interface RenderCallback {
 
 	/**
-	 * Called to provide the item to be rendered as string at runtime, using the arguments.
+	 * Called to provide the item to be rendered as string or as image at runtime, using the arguments.
 	 * 
 	 * @param chart chart instance
 	 * @param item render item, passed by plugin
-	 * @return a string instance to show as label
+	 * @return a string or as image instance to show as label
 	 */
-	String render(AbstractChart<?, ?> chart, RenderItem item);
+	Object render(AbstractChart<?, ?> chart, RenderItem item);
 
 }

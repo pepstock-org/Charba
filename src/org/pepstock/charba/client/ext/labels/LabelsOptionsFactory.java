@@ -15,19 +15,140 @@
 */
 package org.pepstock.charba.client.ext.labels;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.Charts;
+import org.pepstock.charba.client.DefaultChartsLifecycleListener;
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.data.Dataset;
+
+import jsinterop.annotations.JsPackage;
 
 /**
  * Factory to get the options (form chart or from default global ones) related to LABELS plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LabelsOptionsFactory implements NativeObjectContainerFactory<LabelsOptions> {
+public final class LabelsOptionsFactory extends DefaultChartsLifecycleListener implements NativeObjectContainerFactory<LabelsOptions> {
 
-	// factory instance to read the options from default global
-	private final LabelsDefaultsOptionsFactory defaultsFactory = new LabelsDefaultsOptionsFactory();
+	// cache of options in order to return the already existing options
+	// K = options id, V = plugin options
+	private static final Map<Integer, LabelsOptions> OPTIONS = new HashMap<>();
+
+	/**
+	 * To avoid any instantiation. Use the static reference into {@link LabelsPlugin#FACTORY}.<br>
+	 * Adds itself as charts life cycle listener to manage the cache of labels options, in order to clean the instances when the
+	 * charts will be destroy.
+	 */
+	LabelsOptionsFactory() {
+		// adds itself as charts life cycle listener
+		Charts.addLifecycleListener(this);
+	}
+
+	/**
+	 * Registers new LABELS plugin options into a map, in order to return a right object instance, mainly because the plugin
+	 * options can contain callbacks and references to be maintained.
+	 * 
+	 * @param options LABELS plugin options to be stored
+	 */
+	void registerOptions(LabelsOptions options) {
+		// adds to cache
+		OPTIONS.put(options.getId(), options);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChartsLifecycleListener#onAfterInit(org.pepstock.charba.client.AbstractChart)
+	 */
+	@Override
+	public void onAfterInit(AbstractChart<?, ?> chart) {
+		// checks if there is a data labels options as GLOBAL
+		if (Defaults.get().getGlobal().getPlugins().hasOptions(LabelsPlugin.ID)) {
+			LabelsOptions options = Defaults.get().getGlobal().getPlugins().getOptions(LabelsPlugin.ID, this);
+			// gets references
+			List<String> references = options.getReferences();
+			// checks if references has global
+			if (!references.contains(JsPackage.GLOBAL)) {
+				// otherwise adds it
+				references.add(JsPackage.GLOBAL);
+			}
+		}
+		// checks if there is a data labels options as CHART GLOBAL
+		if (Defaults.get().getOptions(chart.getType()).getPlugins().hasOptions(LabelsPlugin.ID)) {
+			LabelsOptions options = Defaults.get().getOptions(chart.getType()).getPlugins().getOptions(LabelsPlugin.ID, this);
+			// gets references
+			List<String> references = options.getReferences();
+			// checks if references has global (used also for GLOBAL options for chart type)
+			if (!references.contains(JsPackage.GLOBAL)) {
+				// otherwise adds it
+				references.add(JsPackage.GLOBAL);
+			}
+		}
+		// gets the data labels options from chart options, if there
+		if (chart.getOptions().getPlugins().hasOptions(LabelsPlugin.ID)) {
+			LabelsOptions options = chart.getOptions().getPlugins().getOptions(LabelsPlugin.ID, this);
+			// gets references
+			List<String> references = options.getReferences();
+			// checks if has got the reference to the chart
+			if (!references.contains(chart.getId())) {
+				// adds it
+				references.add(chart.getId());
+			}
+		}
+		// gets the data labels options from chart datasets, if there
+		for (Dataset dataset : chart.getData().getDatasets()) {
+			if (dataset.hasOptions(LabelsPlugin.ID)) {
+				LabelsOptions options = dataset.getOptions(LabelsPlugin.ID, this);
+				// gets references
+				List<String> references = options.getReferences();
+				// checks if has got the reference to the chart
+				if (!references.contains(chart.getId())) {
+					// adds it
+					references.add(chart.getId());
+				}
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.AbstractChartsLifecycleListener#onBeforeDestroy(org.pepstock.charba.client.AbstractChart)
+	 */
+	@Override
+	public void onBeforeDestroy(AbstractChart<?, ?> chart) {
+		// gets the data labels options from chart options, if there
+		if (chart.getOptions().getPlugins().hasOptions(LabelsPlugin.ID)) {
+			LabelsOptions options = chart.getOptions().getPlugins().getOptions(LabelsPlugin.ID, this);
+			// gets references
+			List<String> references = options.getReferences();
+			// removes the reference to chart and checks if empty
+			if (references.remove(chart.getId()) && references.isEmpty()) {
+				// removes from cache
+				OPTIONS.remove(options.getId());
+			}
+		}
+		// gets the data labels options from chart datasets, if there
+		for (Dataset dataset : chart.getData().getDatasets()) {
+			if (dataset.hasOptions(LabelsPlugin.ID)) {
+				LabelsOptions options = dataset.getOptions(LabelsPlugin.ID, this);
+				// gets references
+				List<String> references = options.getReferences();
+				// removes the reference to chart and checks if empty
+				if (references.remove(chart.getId()) && references.isEmpty()) {
+					// removes from cache
+					OPTIONS.remove(options.getId());
+				}
+			}
+		}
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -37,19 +158,16 @@ public final class LabelsOptionsFactory implements NativeObjectContainerFactory<
 	 */
 	@Override
 	public LabelsOptions create(NativeObject nativeObject) {
-		// defaults global options instance
-		LabelsDefaultsOptions defaultsOptions = null;
-		// checks if the default global options has been added for the plugin
-		if (Defaults.get().getGlobal().getPlugins().hasOptions(LabelsPlugin.ID)) {
-			// reads the default default global options
-			defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(LabelsPlugin.ID, defaultsFactory);
-		} else {
-			// if here, no default global option
-			// then the plugin will use the static defaults
-			defaultsOptions = new LabelsDefaultsOptions();
+		// gets the option id
+		int optionsId = Id.get(LabelsOptions.Property._charbaOptionsId, nativeObject);
+		// if cached, MUST BE ALWAYS cached
+		if (OPTIONS.containsKey(optionsId)) {
+			// returns the instance
+			return OPTIONS.get(optionsId);
 		}
 		// creates the options by the native object and the defaults
-		return new LabelsOptions(nativeObject, defaultsOptions);
+		// and ignores the native object passed into method
+		return new LabelsOptions();
 	}
 
 	/**

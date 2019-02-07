@@ -15,22 +15,30 @@
 */
 package org.pepstock.charba.client.ext.labels;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
+import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayImage;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.ext.labels.LabelsOptionsFactory.LabelsDefaultsOptionsFactory;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Image;
+
+import jsinterop.annotations.JsFunction;
 
 /**
  * This is the object to map the LABELS plugin options, both at chart and global level.
@@ -39,10 +47,72 @@ import com.google.gwt.user.client.ui.Image;
  *
  */
 public class LabelsOptions extends NativeObjectContainer {
+
+	// ---------------------------
+	// -- JAVASCRIPT FUNCTIONS ---
+	// ---------------------------
+
+	/**
+	 * Java script FUNCTION callback called to render the chart returning the label(string) and the image to show.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyRenderCallback {
+
+		/**
+		 * Method of function to be called to to render the chart returning the label(string) and the image to show.
+		 * 
+		 * @param context context Value of <code>this</code> to the execution context of function.
+		 * @param item native object as render item.
+		 * @return image or string for rendering.
+		 */
+		Object call(Object context, RenderItem item);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to color the font of render into chat.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyFontColorCallback {
+
+		/**
+		 * Method of function to be called to color the font of render into chat.
+		 * 
+		 * @param context context Value of <code>this</code> to the execution context of function.
+		 * @param item native object as render item.
+		 * @return string as color representation.
+		 */
+		String call(Object context, FontColorItem item);
+	}
+
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the render function
+	private final CallbackProxy<ProxyRenderCallback> renderCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the font color function
+	private final CallbackProxy<ProxyFontColorCallback> fontColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// render (string) callback instance
+	private RenderCallback renderCallback = null;
+	// font color callback instance
+	private FontColorCallback fontColorCallback = null;
+
 	// defaults global options instance
 	private LabelsDefaultsOptions defaultsOptions;
 	// defaults global options factory
 	private final LabelsDefaultsOptionsFactory defaultsFactory = new LabelsDefaultsOptionsFactory();
+	// list of chart ids or global where this options has been set
+	// this is mandatory in order to clean up the cache of labels options
+	// when they are not longer needed
+	private final List<String> references = new ArrayList<>();
+
+	// static counter. Starts from min value of integer
+	private static final AtomicInteger COUNTER = new AtomicInteger(Integer.MIN_VALUE);
 
 	/**
 	 * Name of properties of native object.
@@ -67,7 +137,9 @@ public class LabelsOptions extends NativeObjectContainer {
 		showActualPercentages,
 		images,
 		outsidePadding,
-		textMargin
+		textMargin,
+		// internal property to set unique id
+		_charbaOptionsId
 	}
 
 	/**
@@ -85,18 +157,80 @@ public class LabelsOptions extends NativeObjectContainer {
 			// then the plugin will use the static defaults
 			defaultsOptions = new LabelsDefaultsOptions();
 		}
+		// sets unique id
+		// needed for caching the instances
+		setValue(Property._charbaOptionsId, COUNTER.incrementAndGet());
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		renderCallbackProxy.setCallback(new ProxyRenderCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.ext.labels.LabelsConfiguration.ProxyRenderStringCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.ext.labels.RenderItem)
+			 */
+			@Override
+			public Object call(Object context, RenderItem item) {
+				// gets chart instance
+				String id = item.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && renderCallback != null) {
+					// calls callback
+					Object value = renderCallback.render(chart, item);
+					// checks result
+					if (value != null) {
+						if (value instanceof ImageElement) {
+							ImageElement image = (ImageElement) value;
+							return image;
+						} else {
+							return value.toString();
+						}
+					}
+				}
+				// default value is percentage
+				return String.valueOf(item.getPercentage());
+			}
+		});
+		fontColorCallbackProxy.setCallback(new ProxyFontColorCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.ext.labels.LabelsConfiguration.ProxyFontColorCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.ext.labels.FontColorItem)
+			 */
+			@Override
+			public String call(Object context, FontColorItem item) {
+				// gets chart instance
+				String id = item.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && fontColorCallback != null) {
+					// calls callback
+					String value = fontColorCallback.color(chart, item);
+					// checks result
+					if (value != null) {
+						return value;
+					}
+				}
+				// defaults returns font color
+				return getFontColorAsString();
+			}
+		});
+		// registers into cache
+		LabelsPlugin.FACTORY.registerOptions(this);
 	}
 
 	/**
-	 * Creates the object using an existing options instance.<br>
-	 * This is used ONLY to read options instance into global or chart.
+	 * Returns the unique ID of the options.
 	 * 
-	 * @param nativeObject the object using an existing options instance
+	 * @return the unique ID of the options.
 	 */
-	LabelsOptions(NativeObject nativeObject, LabelsDefaultsOptions defaultsOptions) {
-		super(nativeObject);
-		// stores default options
-		this.defaultsOptions = defaultsOptions;
+	public int getId() {
+		return getValue(Property._charbaOptionsId, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -510,5 +644,70 @@ public class LabelsOptions extends NativeObjectContainer {
 		// gets array
 		ArrayImage array = getArrayValue(Property.images);
 		return ArrayListHelper.list(array);
+	}
+
+	/**
+	 * Returns the render callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the render callback, if set, otherwise <code>null</code>
+	 */
+	public RenderCallback getRenderCallback() {
+		return renderCallback;
+	}
+
+	/**
+	 * Sets the render callback.
+	 * 
+	 * @param renderCallback the render callback to set
+	 */
+	public void setRender(RenderCallback renderCallback) {
+		// sets the callback
+		this.renderCallback = renderCallback;
+		// checks if callback is consistent
+		if (renderCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(LabelsOptions.Property.render, renderCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(LabelsOptions.Property.render);
+		}
+	}
+	
+	/**
+	 * Returns the font color callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the font color callback, if set, otherwise <code>null</code>
+	 */
+	public FontColorCallback getFontColorCallback() {
+		return fontColorCallback;
+	}
+
+	/**
+	 * Sets the font color callback.
+	 * 
+	 * @param fontColorCallback the font color callback.
+	 */
+	public void setFontColor(FontColorCallback fontColorCallback) {
+		// sets the callback
+		this.fontColorCallback = fontColorCallback;
+		// checks if callback is consistent
+		if (fontColorCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(LabelsOptions.Property.fontColor, fontColorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(LabelsOptions.Property.fontColor);
+		}
+	}
+
+	/**
+	 * Returns the list of references of this options.<br>
+	 * Called by labels factory in order to manage correctly the cache and removes this option when it doesn't have any
+	 * reference.
+	 * 
+	 * @return the list of references of this options
+	 */
+	List<String> getReferences() {
+		return references;
 	}
 }

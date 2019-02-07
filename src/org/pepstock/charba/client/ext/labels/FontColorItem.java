@@ -35,7 +35,7 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
 public final class FontColorItem extends RenderItem {
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -60,7 +60,7 @@ public final class FontColorItem extends RenderItem {
 		// checks if is defined
 		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "backgroundColor"))) {
 			return HtmlColor.White.toRGBA();
-		} 
+		}
 		// returns property value
 		return getNativeBackgroundColor();
 	}

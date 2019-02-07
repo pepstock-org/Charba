@@ -15,10 +15,6 @@
 */
 package org.pepstock.charba.client.ext.labels;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.ext.Extensions;
@@ -36,8 +32,11 @@ public final class LabelsPlugin {
 	 * Plugin ID {@value ID}
 	 */
 	public static final String ID = "labels";
-	// options factory
-	private static final LabelsOptionsFactory FACTORY = new LabelsOptionsFactory();
+
+	/**
+	 * Data labels options factory
+	 */
+	public static final LabelsOptionsFactory FACTORY = new LabelsOptionsFactory();
 
 	/**
 	 * To avoid any instantiation
@@ -66,80 +65,4 @@ public final class LabelsPlugin {
 		// set the enabling to all charts at global level
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
 	}
-
-	/**
-	 * Sets the LABELS plugin options at chart level.
-	 * 
-	 * @param labelsConfigurations the LABELS plugin options at chart level.
-	 */
-	public static void setOptions(AbstractChart<?, ?> chart, LabelsConfiguration... labelsConfigurations) {
-		// checks if arguments are consistent
-		if (labelsConfigurations != null) {
-			// if the array has got only 1 element
-			if (labelsConfigurations.length == 1) {
-				// sets the option
-				chart.getOptions().getPlugins().setOptions(ID, labelsConfigurations[0]);
-			} else {
-				// sets the options as list
-				chart.getOptions().getPlugins().setOptions(ID, Arrays.asList(labelsConfigurations));
-			}
-		}
-	}
-
-	/**
-	 * Returns the LABELS plugin options set at chart level.
-	 * 
-	 * @param chart chart instance
-	 * @return the LABELS plugin options
-	 */
-	public static LabelsOptions getOptions(AbstractChart<?, ?> chart) {
-		return chart.getOptions().getPlugins().getOptions(ID, FACTORY);
-	}
-
-	/**
-	 * Returns the LABELS plugin options as list set at chart level.
-	 * 
-	 * @param chart chart instance
-	 * @return the LABELS plugin options as list
-	 */
-	public static List<LabelsOptions> getOptionsAsList(AbstractChart<?, ?> chart) {
-		return chart.getOptions().getPlugins().getOptionsAsList(ID, FACTORY);
-	}
-
-	/**
-	 * Sets the LABELS plugin options at global level.
-	 * 
-	 * @param labelsOptions the LABELS plugin options at global level
-	 */
-	public static void setGlobalOptions(LabelsOptions... labelsOptions) {
-		// checks if arguments are consistent
-		if (labelsOptions != null) {
-			if (labelsOptions.length == 1) {
-				// if the array has got only 1 element
-				Defaults.get().getGlobal().getPlugins().setOptions(ID, labelsOptions[0]);
-			} else {
-				// sets the options as list
-				Defaults.get().getGlobal().getPlugins().setOptions(ID, Arrays.asList(labelsOptions));
-			}
-		}
-	}
-
-	/**
-	 * Returns the LABELS plugin options at global level if defined only one.
-	 * 
-	 * @return the LABELS plugin options at global level.
-	 */
-	public static LabelsOptions getGlobalOptions() {
-		return Defaults.get().getGlobal().getPlugins().getOptions(ID, FACTORY);
-	}
-
-	/**
-	 * Returns the LABELS plugin options at global level as list if defined more than one.
-	 * 
-	 * @return the LABELS plugin options at global level as list
-	 */
-	public static List<LabelsOptions> getGlobalOptionsAsList() {
-		return Defaults.get().getGlobal().getPlugins().getOptionsAsList(ID, FACTORY);
-	}
-
 }
