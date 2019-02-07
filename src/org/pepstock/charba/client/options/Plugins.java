@@ -143,7 +143,14 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
 	 */
 	public boolean hasOptions(String pluginId) {
-		return has(PluginIdChecker.key(pluginId));
+		// creates the key to avoid many calls to plugin checker
+		Key pluginIdKey = PluginIdChecker.key(pluginId);
+		// gets the type of property
+		ObjectType type = type(pluginIdKey);
+		// if boolean, there is not any options, therefore false
+		// otherwise checks if there is the key. If there is and is NOT boolean
+		// means that an options has been added.
+		return ObjectType.Boolean.equals(type) ? false : has(pluginIdKey);
 	}
 
 	/**
