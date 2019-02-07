@@ -40,7 +40,7 @@ public final class Charts {
 	 */
 	private Charts() {
 	}
-	
+
 	/**
 	 * Adds new charts life cycle listener instance into collection.
 	 * 
@@ -76,7 +76,7 @@ public final class Charts {
 			}
 		}
 	}
-	
+
 	/**
 	 * Fires the notification to all listeners after chart init.
 	 * 

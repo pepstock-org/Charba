@@ -35,7 +35,7 @@ public final class DatasetsItemsSelectorOptionsFactory implements NativeObjectCo
 	DatasetsItemsSelectorOptionsFactory() {
 		// do nothing
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -35,7 +35,7 @@ public final class ChartPointerOptionsFactory implements NativeObjectContainerFa
 	ChartPointerOptionsFactory() {
 		// do nothing
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

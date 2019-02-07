@@ -31,7 +31,7 @@ public final class ChartBackgroundColorOptionsFactory implements NativeObjectCon
 	ChartBackgroundColorOptionsFactory() {
 		// do nothing
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

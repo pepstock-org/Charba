@@ -31,7 +31,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
  *
  */
 final class ChartHandlerManager extends HandlerManager {
-	
+
 	// chart instance, needed to add every new handler registration
 	private final AbstractChart<?, ?> chart;
 

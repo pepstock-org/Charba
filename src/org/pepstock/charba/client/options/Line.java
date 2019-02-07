@@ -199,7 +199,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	public boolean isCapBezierPoints() {
 		return getValue(Property.capBezierPoints, getDefaultValues().isCapBezierPoints());
 	}
-	
+
 	/**
 	 * Sets how to fill the area under the line.
 	 * 
@@ -221,7 +221,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	public void setFill(int index) {
 		setFill(Fill.getFill(index));
 	}
-	
+
 	/**
 	 * Sets how to fill the area under the line, by relative dataset index.
 	 * 
@@ -230,7 +230,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	public void setFill(String index) {
 		setFill(Fill.getFill(index));
 	}
-	
+
 	/**
 	 * Sets how to fill the area under the line.
 	 * 
@@ -243,17 +243,17 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 			setValue(Property.fill, false);
 			// stores the filling mode
 			setValue(Property._charbaFillingMode, FillingMode.predefinedBoolean);
-		} else if (Fill.isPredefined(fill)){
+		} else if (Fill.isPredefined(fill)) {
 			// sets value
 			setValue(Property.fill, fill);
 			// stores the filling mode
 			setValue(Property._charbaFillingMode, fill.getMode());
-		} else if (FillingMode.absoluteDatasetIndex.equals(fill.getMode())){
+		} else if (FillingMode.absoluteDatasetIndex.equals(fill.getMode())) {
 			// sets value
 			setValue(Property.fill, fill.getValueAsInt());
 			// stores the filling mode
 			setValue(Property._charbaFillingMode, FillingMode.absoluteDatasetIndex);
-		} else if (FillingMode.relativeDatasetIndex.equals(fill.getMode())){
+		} else if (FillingMode.relativeDatasetIndex.equals(fill.getMode())) {
 			// sets value
 			setValue(Property.fill, fill.getValue());
 			// stores the filling mode
@@ -272,10 +272,10 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	public IsFill getFill() {
 		// checks if there is the property
 		if (has(Property._charbaFillingMode)) {
-			// gets the filling mode 
+			// gets the filling mode
 			FillingMode mode = getValue(Property._charbaFillingMode, FillingMode.class, FillingMode.predefined);
 			// checks all possible types of filling mode
-			// to return the right value 
+			// to return the right value
 			if (FillingMode.predefinedBoolean.equals(mode)) {
 				// returns no fill
 				return getValue(Property.fill, false) ? Fill.origin : Fill.nofill;

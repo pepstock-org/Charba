@@ -93,7 +93,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	public boolean hasEnabled(String pluginId) {
 		return has(PluginIdChecker.key(pluginId));
 	}
-	
+
 	/**
 	 * Sets the plugin options. If passed options is null, the configuration of plugin will be removed.
 	 * 
@@ -119,8 +119,8 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * Sets the plugin options as array. If passed options is null, the configuration of plugin will be removed.
 	 * 
 	 * @param pluginId plugin id.
-	 * @param options list of native object container used to configure the plugin. Pass <code>null</code> to remove the configuration if
-	 *            exist.
+	 * @param options list of native object container used to configure the plugin. Pass <code>null</code> to remove the
+	 *            configuration if exist.
 	 * @param <T> type of native object container to store
 	 */
 	public <T extends NativeObjectContainer> void setOptions(String pluginId, List<T> options) {
@@ -135,7 +135,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Checks if there is any options for a specific plugin, by its id.
 	 * 
@@ -164,9 +164,10 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	public <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) {
 		return factory.create(getValue(PluginIdChecker.key(pluginId)));
 	}
-	
+
 	/**
-	 * Returns the plugin options as list of object containers, if exist. It uses a factory instance to create a native object container.
+	 * Returns the plugin options as list of object containers, if exist. It uses a factory instance to create a native object
+	 * container.
 	 * 
 	 * @param pluginId plugin id.
 	 * @param factory factory instance to create a native object container.

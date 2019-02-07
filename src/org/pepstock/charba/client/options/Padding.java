@@ -40,7 +40,7 @@ public final class Padding extends AbstractModel<Layout, IsDefaultPadding> imple
 	Padding(Layout layout, Key childKey, IsDefaultPadding defaultValues, NativeObject nativeObject) {
 		super(layout, childKey, defaultValues, nativeObject);
 	}
-	
+
 	/**
 	 * Sets the padding size to all dimensions.
 	 * 
