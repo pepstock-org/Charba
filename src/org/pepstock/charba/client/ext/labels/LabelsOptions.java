@@ -672,7 +672,7 @@ public class LabelsOptions extends NativeObjectContainer {
 			remove(LabelsOptions.Property.render);
 		}
 	}
-	
+
 	/**
 	 * Returns the font color callback, if set, otherwise <code>null</code>.
 	 * 
