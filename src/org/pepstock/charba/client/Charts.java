@@ -65,10 +65,39 @@ public final class Charts {
 	 * @param chart chart instance
 	 */
 	static void add(AbstractChart<?, ?> chart) {
-		CHARTS.put(chart.getId(), chart);
-		// scans all listener to send notification
+		// putting getting the chart
+		AbstractChart<?, ?> prevChart = CHARTS.put(chart.getId(), chart);
+		// if previous chart instance is not consistent
+		// means that chart is new and then...
+		if (prevChart == null) {
+			// ...scans all listener to send notification
+			for (ChartsLifecycleListener listener : LISTENERS) {
+				listener.onBeforeInit(chart);
+			}
+		}
+	}
+	
+	/**
+	 * Fires the notification to all listeners after chart init.
+	 * 
+	 * @param chart chart instance
+	 */
+	static void fireAfterInit(AbstractChart<?, ?> chart) {
+		// ...scans all listener to send notification
 		for (ChartsLifecycleListener listener : LISTENERS) {
-			listener.onInitialized(chart);
+			listener.onAfterInit(chart);
+		}
+	}
+
+	/**
+	 * Fires the notification to all listeners before chart destroy.
+	 * 
+	 * @param chart chart instance
+	 */
+	static void fireBeforeDestory(AbstractChart<?, ?> chart) {
+		// ...scans all listener to send notification
+		for (ChartsLifecycleListener listener : LISTENERS) {
+			listener.onBeforeDestroy(chart);
 		}
 	}
 
@@ -94,7 +123,7 @@ public final class Charts {
 		if (chart != null) {
 			// scans all listener to send notification
 			for (ChartsLifecycleListener listener : LISTENERS) {
-				listener.onDestroy(chart);
+				listener.onAfterDestroy(chart);
 			}
 		}
 	}

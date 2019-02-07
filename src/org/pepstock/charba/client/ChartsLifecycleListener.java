@@ -26,17 +26,31 @@ package org.pepstock.charba.client;
 public interface ChartsLifecycleListener {
 
 	/**
-	 * Called after initializing 'chart'.
+	 * Called before initializing 'chart'.
 	 * 
 	 * @param chart the chart instance.
 	 */
-	void onInitialized(AbstractChart<?, ?> chart);
+	void onBeforeInit(AbstractChart<?, ?> chart);
+
+	/**
+	 * Called after 'chart' has been initialized and before the first update.
+	 * 
+	 * @param chart the chart instance.
+	 */
+	void onAfterInit(AbstractChart<?, ?> chart);
+
+	/**
+	 * Called before the chart as been destroyed.
+	 * 
+	 * @param chart the chart instance.
+	 */
+	void onBeforeDestroy(AbstractChart<?, ?> chart);
 
 	/**
 	 * Called after the chart as been destroyed.
 	 * 
 	 * @param chart the chart instance.
 	 */
-	void onDestroy(AbstractChart<?, ?> chart);
+	void onAfterDestroy(AbstractChart<?, ?> chart);
 
 }

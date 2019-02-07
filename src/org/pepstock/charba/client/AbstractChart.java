@@ -331,6 +331,8 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * within Chart.js, along with any associated event listeners attached by Chart.js.
 	 */
 	public final void destroy() {
+		// notify before destroy
+		Charts.fireBeforeDestory(this);
 		// checks if chart is created
 		if (chart != null) {
 			// then destroy
@@ -608,11 +610,17 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			// sets plugins
 			configuration.setPlugins(this, plugins);
 			// destroy chart if chart is already instantiated
-			destroy();
+			// checks if chart is created
+			if (chart != null) {
+				// then destroy
+				chart.destroy();
+			}
 			// stores the chart instance into collection
 			Charts.add(this);
 			// draws chart with configuration
 			chart = new Chart(canvas.getContext2d(), configuration);
+			// notify after destroy
+			Charts.fireAfterInit(this);
 		}
 	}
 
