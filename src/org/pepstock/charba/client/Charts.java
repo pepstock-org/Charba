@@ -16,6 +16,8 @@
 package org.pepstock.charba.client;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,11 +32,31 @@ public final class Charts {
 	// K = CHART id (CHARBA ID)
 	// V = chart instance
 	private static final Map<String, AbstractChart<?, ?>> CHARTS = new HashMap<String, AbstractChart<?, ?>>();
+	// list with all charts life cycle listeners
+	private static final List<ChartsLifecycleListener> LISTENERS = new LinkedList<>();
 
 	/**
 	 * To avoid any instantiation
 	 */
 	private Charts() {
+	}
+	
+	/**
+	 * Adds new charts life cycle listener instance into collection.
+	 * 
+	 * @param listener chart life cycle listener instance
+	 */
+	public static void addLifecycleListener(ChartsLifecycleListener listener) {
+		LISTENERS.add(listener);
+	}
+
+	/**
+	 * Removes a charts life cycle listener instance from collection.
+	 * 
+	 * @param listener chart life cycle listener instance
+	 */
+	public static void removeLifecycleListener(ChartsLifecycleListener listener) {
+		LISTENERS.remove(listener);
 	}
 
 	/**
@@ -44,6 +66,10 @@ public final class Charts {
 	 */
 	static void add(AbstractChart<?, ?> chart) {
 		CHARTS.put(chart.getId(), chart);
+		// scans all listener to send notification
+		for (ChartsLifecycleListener listener : LISTENERS) {
+			listener.onInitialized(chart);
+		}
 	}
 
 	/**
@@ -62,7 +88,15 @@ public final class Charts {
 	 * @param chartId chart id
 	 */
 	static void remove(String chartId) {
-		CHARTS.remove(chartId);
+		// removes getting the chart
+		AbstractChart<?, ?> chart = CHARTS.remove(chartId);
+		// if chart instance is consistent
+		if (chart != null) {
+			// scans all listener to send notification
+			for (ChartsLifecycleListener listener : LISTENERS) {
+				listener.onDestroy(chart);
+			}
+		}
 	}
 
 }
