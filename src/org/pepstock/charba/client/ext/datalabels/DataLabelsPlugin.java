@@ -32,6 +32,7 @@ public final class DataLabelsPlugin {
 	 * Plugin ID {@value ID}
 	 */
 	public static final String ID = "datalabels";
+
 	/**
 	 * Data labels options factory
 	 */

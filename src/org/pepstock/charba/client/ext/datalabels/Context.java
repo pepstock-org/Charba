@@ -42,7 +42,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class Context extends NativeExtendedObject{
+public final class Context extends NativeExtendedObject {
 
 	/**
 	 * To avoid any instantiation

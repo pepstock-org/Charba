@@ -80,7 +80,7 @@ public final class DataLabelsOptionsFactory extends DefaultChartsLifecycleListen
 				references.add(JsPackage.GLOBAL);
 			}
 		}
-		// checks if there is a data labels options as CHART GLOBAL 
+		// checks if there is a data labels options as CHART GLOBAL
 		if (Defaults.get().getOptions(chart.getType()).getPlugins().hasOptions(DataLabelsPlugin.ID)) {
 			DataLabelsOptions options = Defaults.get().getOptions(chart.getType()).getPlugins().getOptions(DataLabelsPlugin.ID, this);
 			// gets references

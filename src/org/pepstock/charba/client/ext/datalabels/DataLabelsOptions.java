@@ -1645,7 +1645,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param backgroundColorCallback the background color callback.
 	 */
-	public void setBackgroundColorCallback(BackgroundColorCallback backgroundColorCallback) {
+	public void setBackgroundColor(BackgroundColorCallback backgroundColorCallback) {
 		// sets the callback
 		this.backgroundColorCallback = backgroundColorCallback;
 		// checks if callback is consistent
@@ -1672,7 +1672,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param borderColorCallback the border color callback.
 	 */
-	public void setBorderColorCallback(BorderColorCallback borderColorCallback) {
+	public void setBorderColor(BorderColorCallback borderColorCallback) {
 		// sets the callback
 		this.borderColorCallback = borderColorCallback;
 		// checks if callback is consistent
@@ -1699,7 +1699,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param colorCallback the color callback.
 	 */
-	public void setColorCallback(ColorCallback colorCallback) {
+	public void setColor(ColorCallback colorCallback) {
 		// sets the callback
 		this.colorCallback = colorCallback;
 		// checks if callback is consistent
@@ -1726,7 +1726,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param formatterCallback the formatter callback to set
 	 */
-	public void setFormatterCallback(FormatterCallback formatterCallback) {
+	public void setFormatter(FormatterCallback formatterCallback) {
 		// sets the callback
 		this.formatterCallback = formatterCallback;
 		// checks if callback is consistent
@@ -1753,7 +1753,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param alignCallback the align callback to set
 	 */
-	public void setAlignCallback(AlignCallback alignCallback) {
+	public void setAlign(AlignCallback alignCallback) {
 		// sets the callback
 		this.alignCallback = alignCallback;
 		// checks if callback is consistent
@@ -1780,7 +1780,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param anchorCallback the anchor callback to set
 	 */
-	public void setAnchorCallback(AnchorCallback anchorCallback) {
+	public void setAnchor(AnchorCallback anchorCallback) {
 		// sets the callback
 		this.anchorCallback = anchorCallback;
 		// checks if callback is consistent
@@ -1807,7 +1807,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param borderRadiusCallback the border radius callback to set
 	 */
-	public void setBorderRadiusCallback(BorderRadiusCallback borderRadiusCallback) {
+	public void setBorderRadius(BorderRadiusCallback borderRadiusCallback) {
 		// sets the callback
 		this.borderRadiusCallback = borderRadiusCallback;
 		// checks if callback is consistent
@@ -1834,7 +1834,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param borderWidthCallback the border width callback to set
 	 */
-	public void setBorderWidthCallback(BorderWidthCallback borderWidthCallback) {
+	public void setBorderWidth(BorderWidthCallback borderWidthCallback) {
 		// sets the callback
 		this.borderWidthCallback = borderWidthCallback;
 		// checks if callback is consistent
@@ -1861,7 +1861,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param clampCallback the clamp callback to set
 	 */
-	public void setClampCallback(ClampCallback clampCallback) {
+	public void setClamp(ClampCallback clampCallback) {
 		// sets the callback
 		this.clampCallback = clampCallback;
 		// checks if callback is consistent
@@ -1888,7 +1888,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param clipCallback the clip callback to set
 	 */
-	public void setClipCallback(ClipCallback clipCallback) {
+	public void setClip(ClipCallback clipCallback) {
 		// sets the callback
 		this.clipCallback = clipCallback;
 		// checks if callback is consistent
@@ -1915,7 +1915,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param displayCallback the display callback to set
 	 */
-	public void setDisplayCallback(DisplayCallback displayCallback) {
+	public void setDisplay(DisplayCallback displayCallback) {
 		// sets the callback
 		this.displayCallback = displayCallback;
 		// checks if callback is consistent
@@ -1942,7 +1942,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param offsetCallback the offset callback to set
 	 */
-	public void setOffsetCallback(OffsetCallback offsetCallback) {
+	public void setOffset(OffsetCallback offsetCallback) {
 		// sets the callback
 		this.offsetCallback = offsetCallback;
 		// checks if callback is consistent
@@ -1969,7 +1969,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param opacityCallback the opacity callback to set
 	 */
-	public void setOpacityCallback(OpacityCallback opacityCallback) {
+	public void setOpacity(OpacityCallback opacityCallback) {
 		// sets the callback
 		this.opacityCallback = opacityCallback;
 		// checks if callback is consistent
@@ -1996,7 +1996,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param rotationCallback the rotation callback to set
 	 */
-	public void setRotationCallback(RotationCallback rotationCallback) {
+	public void setRotation(RotationCallback rotationCallback) {
 		// sets the callback
 		this.rotationCallback = rotationCallback;
 		// checks if callback is consistent
@@ -2023,7 +2023,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param textAlignCallback the text align callback to set
 	 */
-	public void setTextAlignCallback(TextAlignCallback textAlignCallback) {
+	public void setTextAlign(TextAlignCallback textAlignCallback) {
 		// sets the callback
 		this.textAlignCallback = textAlignCallback;
 		// checks if callback is consistent
@@ -2050,7 +2050,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param textStrokeColorCallback the text stroke color callback to set
 	 */
-	public void setTextStrokeColorCallback(TextStrokeColorCallback textStrokeColorCallback) {
+	public void setTextStrokeColor(TextStrokeColorCallback textStrokeColorCallback) {
 		// sets the callback
 		this.textStrokeColorCallback = textStrokeColorCallback;
 		// checks if callback is consistent
@@ -2077,7 +2077,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param textStrokeWidthCallback the text stroke width callback to set
 	 */
-	public void setTextStrokeWidthCallback(TextStrokeWidthCallback textStrokeWidthCallback) {
+	public void setTextStrokeWidth(TextStrokeWidthCallback textStrokeWidthCallback) {
 		// sets the callback
 		this.textStrokeWidthCallback = textStrokeWidthCallback;
 		// checks if callback is consistent
@@ -2104,7 +2104,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param textShadowBlurCallback the text shadow blur callback to set
 	 */
-	public void setTextShadowBlurCallback(TextShadowBlurCallback textShadowBlurCallback) {
+	public void setTextShadowBlur(TextShadowBlurCallback textShadowBlurCallback) {
 		// sets the callback
 		this.textShadowBlurCallback = textShadowBlurCallback;
 		// checks if callback is consistent
@@ -2131,7 +2131,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param textShadowColorCallback the text shadow color callback to set
 	 */
-	public void setTextShadowColorCallback(TextShadowColorCallback textShadowColorCallback) {
+	public void setTextShadowColor(TextShadowColorCallback textShadowColorCallback) {
 		// sets the callback
 		this.textShadowColorCallback = textShadowColorCallback;
 		// checks if callback is consistent
@@ -2158,7 +2158,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param fontCallback the font callback to set
 	 */
-	public void setFontCallback(FontCallback fontCallback) {
+	public void setFont(FontCallback fontCallback) {
 		// sets the callback
 		this.fontCallback = fontCallback;
 		// checks if callback is consistent
@@ -2200,7 +2200,7 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 
 	/**
 	 * Returns the list of references of this options.<br>
-	 * called by data labels factory in order to manage correctly the cache and removes this option when it doesn't have any
+	 * Called by data labels factory in order to manage correctly the cache and removes this option when it doesn't have any
 	 * reference.
 	 * 
 	 * @return the list of references of this options
