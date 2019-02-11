@@ -210,10 +210,19 @@ public class LabelsOptions extends NativeObjectContainer {
 				// checks if the callback is set
 				if (chart != null && fontColorCallback != null) {
 					// calls callback
-					String value = fontColorCallback.color(chart, item);
+					Object value = fontColorCallback.color(chart, item);
 					// checks result
-					if (value != null) {
-						return value;
+					if (value instanceof IsColor) {
+						// is color instance
+						IsColor color = (IsColor)value;
+						return color.toRGBA();
+					} else if (value instanceof String) {
+						// is string instance
+						return (String)value;
+					} else if (value != null) {
+						// another instance not null
+						// returns to string
+						return value.toString();
 					}
 				}
 				// defaults returns font color

@@ -983,6 +983,33 @@ abstract class LiningDataset extends Dataset {
 			removeIfExists(Property._charbaPointStyle);
 		}
 	}
+	
+	/**
+	 * Sets the style of the point as image.
+	 * 
+	 * @param pointStyle array of the style of the point as image.
+	 */
+	public void setPointStyle(Image... pointStyle) {
+		// checks if argument is consistent
+		if (pointStyle != null) {
+			// creates a temporary array
+			ImageElement[] array = new ImageElement[pointStyle.length];
+			// scans passed array of images
+			for (int i = 0; i < pointStyle.length; i++) {
+				// transform a image resource into image element by image object
+				// stores into array changing in image element
+				array[i] = ImageElement.as(pointStyle[i].getElement());
+			}
+			// stores it
+			setPointStyle(array);
+		} else {
+			// if here, argument is null
+			// then removes property
+			remove(Property.pointStyle);
+			// remove flag
+			removeIfExists(Property._charbaPointStyle);
+		}
+	}
 
 	/**
 	 * Sets the style of the point as image.

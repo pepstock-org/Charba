@@ -30,8 +30,8 @@ public interface FontColorCallback {
 	 * 
 	 * @param chart chart instance
 	 * @param item font color item, passed by plugin
-	 * @return a string which represent a color. If returns <code>null</code>, it will use the default font color.
+	 * @return a string which represent a color or a color instace. If returns <code>null</code>, it will use the default font color.
 	 */
-	String color(AbstractChart<?, ?> chart, FontColorItem item);
+	Object color(AbstractChart<?, ?> chart, FontColorItem item);
 
 }

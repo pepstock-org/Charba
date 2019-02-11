@@ -129,6 +129,26 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 			removeIfExists(Property._charbaPointStyle);
 		}
 	}
+	
+	/**
+	 * Sets the style of the point as image.
+	 * 
+	 * @param pointStyle image resource of the style of the point as image.
+	 */
+	public void setPointStyle(Image pointStyle) {
+		// checks if argument is consistent
+		if (pointStyle != null) {
+			// transform a image resource into image element by image object
+			// stores it
+			setPointStyle(ImageElement.as(pointStyle.getElement()));
+		} else {
+			// if here, argument is null
+			// then removes property
+			remove(Property.pointStyle);
+			// remove flag
+			removeIfExists(Property._charbaPointStyle);
+		}
+	}
 
 	/**
 	 * Sets the style of the point as image.

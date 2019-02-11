@@ -16,6 +16,12 @@
 package org.pepstock.charba.client.ext.datalabels;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.colors.Pattern;
+
+import com.google.gwt.canvas.dom.client.CanvasGradient;
+import com.google.gwt.canvas.dom.client.CanvasPattern;
 
 /**
  * Callback interface of DATALABELS plugin to set <code>backgroundColor</code> property at runtime, using the chart instance and
@@ -31,8 +37,14 @@ public interface BackgroundColorCallback {
 	 * 
 	 * @param chart chart instance
 	 * @param context DATALABELS plugin context instance
-	 * @return the <code>backgroundColor</code> value to be applied
+	 * @return the <code>backgroundColor</code> value to be applied. Could be a string (as color), color, pattern or gradient
+	 *         instance
+	 * @see IsColor
+	 * @see Pattern
+	 * @see Gradient
+	 * @see CanvasPattern
+	 * @see CanvasGradient        
 	 */
-	String backgroundColor(AbstractChart<?, ?> chart, Context context);
+	Object backgroundColor(AbstractChart<?, ?> chart, Context context);
 
 }

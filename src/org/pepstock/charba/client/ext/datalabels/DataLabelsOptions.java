@@ -23,15 +23,21 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.data.CanvasObjectFactory;
 import org.pepstock.charba.client.ext.datalabels.DataLabelsOptionsFactory.DataLabelsDefaultsOptionsFactory;
 import org.pepstock.charba.client.items.UndefinedValues;
+
+import com.google.gwt.canvas.dom.client.CanvasGradient;
+import com.google.gwt.canvas.dom.client.CanvasPattern;
 
 import jsinterop.annotations.JsFunction;
 
@@ -121,9 +127,9 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return background color property value.
+		 * @return background color property value. Could be a string (as color), color, pattern or gradient instance
 		 */
-		String call(Object contextFunction, Context context);
+		Object call(Object contextFunction, Context context);
 	}
 
 	/**
@@ -140,9 +146,9 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return border color property value.
+		 * @return border color property value. Could be a string (as color), color, pattern or gradient instance
 		 */
-		String call(Object contextFunction, Context context);
+		Object call(Object contextFunction, Context context);
 	}
 
 	/**
@@ -197,9 +203,9 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return color property value.
+		 * @return color property value. Could be a string (as color), color, pattern or gradient instance
 		 */
-		String call(Object contextFunction, Context context);
+		Object call(Object contextFunction, Context context);
 	}
 
 	/**
@@ -349,9 +355,9 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return text stroke color property value.
+		 * @return text stroke color property value. Could be a string (as color), color, pattern or gradient instance
 		 */
-		String call(Object contextFunction, Context context);
+		Object call(Object contextFunction, Context context);
 	}
 
 	/**
@@ -406,9 +412,9 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return text shadow color value.
+		 * @return text shadow color value. Could be a string (as color), color, pattern or gradient instance
 		 */
-		String call(Object contextFunction, Context context);
+		Object call(Object contextFunction, Context context);
 	}
 
 	/**
@@ -651,17 +657,44 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public String call(Object contextFunction, Context context) {
+			public Object call(Object contextFunction, Context context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
 				// checks if the callback is set
 				if (chart != null && backgroundColorCallback != null) {
 					// calls callback
-					String result = backgroundColorCallback.backgroundColor(chart, context);
+					Object result = backgroundColorCallback.backgroundColor(chart, context);
 					// checks result
-					if (result != null) {
-						return result;
+					if (result instanceof IsColor) {
+						// is color instance
+						IsColor color = (IsColor) result;
+						return color.toRGBA();
+					} else if (result instanceof String) {
+						// is string instance
+						return (String) result;
+					} else if (result instanceof Pattern) {
+						// is pattern instance
+						Pattern pattern = (Pattern) result;
+						return CanvasObjectFactory.createPattern(chart, pattern);
+					} else if (result instanceof Gradient) {
+						// is gradient instance
+						// checks if chart is initialized
+						if (chart.isInitialized()) {
+							Gradient gradient = (Gradient) result;
+							return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
+						}
+						// otherwise returns default
+					} else if (result instanceof CanvasGradient) {
+						// is canvas gradient instance
+						return (CanvasGradient) result;
+					} else if (result instanceof CanvasPattern) {
+						// is canvas pattern instance
+						return (CanvasPattern) result;
+					} else if (result != null) {
+						// another instance not null
+						// returns to string
+						return result.toString();
 					}
 				}
 				// default result
@@ -678,17 +711,44 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public String call(Object contextFunction, Context context) {
+			public Object call(Object contextFunction, Context context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
 				// checks if the callback is set
 				if (chart != null && borderColorCallback != null) {
 					// calls callback
-					String result = borderColorCallback.borderColor(chart, context);
+					Object result = borderColorCallback.borderColor(chart, context);
 					// checks result
-					if (result != null) {
-						return result;
+					if (result instanceof IsColor) {
+						// is color instance
+						IsColor color = (IsColor) result;
+						return color.toRGBA();
+					} else if (result instanceof String) {
+						// is string instance
+						return (String) result;
+					} else if (result instanceof Pattern) {
+						// is pattern instance
+						Pattern pattern = (Pattern) result;
+						return CanvasObjectFactory.createPattern(chart, pattern);
+					} else if (result instanceof Gradient) {
+						// is gradient instance
+						// checks if chart is initialized
+						if (chart.isInitialized()) {
+							Gradient gradient = (Gradient) result;
+							return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
+						}
+						// otherwise returns default
+					} else if (result instanceof CanvasGradient) {
+						// is canvas gradient instance
+						return (CanvasGradient) result;
+					} else if (result instanceof CanvasPattern) {
+						// is canvas pattern instance
+						return (CanvasPattern) result;
+					} else if (result != null) {
+						// another instance not null
+						// returns to string
+						return result.toString();
 					}
 				}
 				// default result
@@ -704,17 +764,44 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public String call(Object contextFunction, Context context) {
+			public Object call(Object contextFunction, Context context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
 				// checks if the callback is set
 				if (chart != null && colorCallback != null) {
 					// calls callback
-					String result = colorCallback.color(chart, context);
+					Object result = colorCallback.color(chart, context);
 					// checks result
-					if (result != null) {
-						return result;
+					if (result instanceof IsColor) {
+						// is color instance
+						IsColor color = (IsColor) result;
+						return color.toRGBA();
+					} else if (result instanceof String) {
+						// is string instance
+						return (String) result;
+					} else if (result instanceof Pattern) {
+						// is pattern instance
+						Pattern pattern = (Pattern) result;
+						return CanvasObjectFactory.createPattern(chart, pattern);
+					} else if (result instanceof Gradient) {
+						// is gradient instance
+						// checks if chart is initialized
+						if (chart.isInitialized()) {
+							Gradient gradient = (Gradient) result;
+							return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
+						}
+						// otherwise returns default
+					} else if (result instanceof CanvasGradient) {
+						// is canvas gradient instance
+						return (CanvasGradient) result;
+					} else if (result instanceof CanvasPattern) {
+						// is canvas pattern instance
+						return (CanvasPattern) result;
+					} else if (result != null) {
+						// another instance not null
+						// returns to string
+						return result.toString();
 					}
 				}
 				// default result
@@ -1004,18 +1091,44 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 			 * Object, org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public String call(Object contextFunction, Context context) {
+			public Object call(Object contextFunction, Context context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
 				// checks if the callback is set
 				if (chart != null && textStrokeColorCallback != null) {
 					// calls callback
-					String result = textStrokeColorCallback.textStrokeColor(chart, context);
-					// checks if result is consistent
-					if (result != null) {
-						// returns result
-						return result;
+					Object result = textStrokeColorCallback.textStrokeColor(chart, context);
+					// checks result
+					if (result instanceof IsColor) {
+						// is color instance
+						IsColor color = (IsColor) result;
+						return color.toRGBA();
+					} else if (result instanceof String) {
+						// is string instance
+						return (String) result;
+					} else if (result instanceof Pattern) {
+						// is pattern instance
+						Pattern pattern = (Pattern) result;
+						return CanvasObjectFactory.createPattern(chart, pattern);
+					} else if (result instanceof Gradient) {
+						// is gradient instance
+						// checks if chart is initialized
+						if (chart.isInitialized()) {
+							Gradient gradient = (Gradient) result;
+							return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
+						}
+						// otherwise returns default
+					} else if (result instanceof CanvasGradient) {
+						// is canvas gradient instance
+						return (CanvasGradient) result;
+					} else if (result instanceof CanvasPattern) {
+						// is canvas pattern instance
+						return (CanvasPattern) result;
+					} else if (result != null) {
+						// another instance not null
+						// returns to string
+						return result.toString();
 					}
 				}
 				// default result
@@ -1078,14 +1191,45 @@ public final class DataLabelsOptions extends NativeObjectContainer {
 			 * Object, org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public String call(Object contextFunction, Context context) {
+			public Object call(Object contextFunction, Context context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
 				// checks if the callback is set
 				if (chart != null && textShadowColorCallback != null) {
 					// calls callback
-					return textShadowColorCallback.textShadowColor(chart, context);
+					Object result = textShadowColorCallback.textShadowColor(chart, context);
+					// checks result
+					if (result instanceof IsColor) {
+						// is color instance
+						IsColor color = (IsColor) result;
+						return color.toRGBA();
+					} else if (result instanceof String) {
+						// is string instance
+						return (String) result;
+					} else if (result instanceof Pattern) {
+						// is pattern instance
+						Pattern pattern = (Pattern) result;
+						return CanvasObjectFactory.createPattern(chart, pattern);
+					} else if (result instanceof Gradient) {
+						// is gradient instance
+						// checks if chart is initialized
+						if (chart.isInitialized()) {
+							Gradient gradient = (Gradient) result;
+							return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
+						}
+						// otherwise returns default
+					} else if (result instanceof CanvasGradient) {
+						// is canvas gradient instance
+						return (CanvasGradient) result;
+					} else if (result instanceof CanvasPattern) {
+						// is canvas pattern instance
+						return (CanvasPattern) result;
+					} else if (result != null) {
+						// another instance not null
+						// returns to string
+						return result.toString();
+					}
 				}
 				// default result
 				return getTextShadowColorAsString();
