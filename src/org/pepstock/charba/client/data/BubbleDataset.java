@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayDouble;
@@ -23,6 +24,7 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
@@ -44,7 +46,6 @@ public final class BubbleDataset extends HovingDataset {
 	 */
 	private enum Property implements Key
 	{
-		data,
 		hoverRadius,
 		hitRadius,
 		pointStyle,
@@ -170,7 +171,9 @@ public final class BubbleDataset extends HovingDataset {
 	 * @param datapoints an array of data points
 	 */
 	public void setDataPoints(DataPoint... datapoints) {
-		setArrayValue(Property.data, ArrayObject.of(datapoints));
+		setArrayValue(Dataset.Property.data, ArrayObject.of(datapoints));
+		// sets data type
+		setValue(Dataset.Property._charbaDataType, DataType.points);
 	}
 
 	/**
@@ -179,17 +182,26 @@ public final class BubbleDataset extends HovingDataset {
 	 * @param datapoints a list of data points
 	 */
 	public void setDataPoints(List<DataPoint> datapoints) {
-		setArrayValue(Property.data, ArrayObject.of(datapoints));
+		setArrayValue(Dataset.Property.data, ArrayObject.of(datapoints));
+		// sets data type
+		setValue(Dataset.Property._charbaDataType, DataType.points);
 	}
 
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
 	 * 
-	 * @return a list of data points
+	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#points}.
 	 */
 	public List<DataPoint> getDataPoints() {
-		ArrayObject array = getArrayValue(Property.data);
-		return ArrayListHelper.list(array, factory);
+		// checks if is a points data type
+		if (DataType.points.equals(getDataType())) {
+			// returns points
+			ArrayObject array = getArrayValue(Dataset.Property.data);
+			return ArrayListHelper.list(array, factory);
+		} else {
+			// otherwise an empty list
+			return new ArrayList<DataPoint>();
+		}
 	}
 
 	/*

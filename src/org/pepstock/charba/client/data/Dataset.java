@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -31,6 +32,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.PluginIdChecker;
 import org.pepstock.charba.client.utils.JSON;
@@ -60,7 +62,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	/**
 	 * Name of properties of native object.
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
 		label,
 		data,
@@ -70,7 +72,9 @@ public abstract class Dataset extends NativeObjectContainer {
 		_charbaId,
 		// internal key to store patterns and gradients
 		_charbaPatterns,
-		_charbaGradients
+		_charbaGradients,
+		// internal key to store data type
+		_charbaDataType
 	}
 
 	/**
@@ -94,6 +98,8 @@ public abstract class Dataset extends NativeObjectContainer {
 		// sets the Charba containers into dataset java script configuration
 		setValue(Property._charbaPatterns, patternsContainer);
 		setValue(Property._charbaGradients, gradientsContainer);
+		// sets default data type
+		setValue(Property._charbaDataType, DataType.unknown);
 	}
 
 	/**
@@ -105,6 +111,15 @@ public abstract class Dataset extends NativeObjectContainer {
 		return getValue(Property._charbaId, UndefinedValues.INTEGER);
 	}
 
+	/**
+	 * Returns the data type of datasets.
+	 * 
+	 * @return the data type of datasets
+	 */
+	public final DataType getDataType() {
+		return getValue(Property._charbaDataType, DataType.class, DataType.unknown);
+	}
+	
 	/**
 	 * Returns the patterns container element.
 	 * 
@@ -331,6 +346,8 @@ public abstract class Dataset extends NativeObjectContainer {
 	 */
 	public void setData(double... values) {
 		setArrayValue(Property.data, ArrayDouble.of(values));
+		// sets data type
+		setValue(Property._charbaDataType, DataType.numbers);
 	}
 
 	/**
@@ -341,17 +358,26 @@ public abstract class Dataset extends NativeObjectContainer {
 	 */
 	public void setData(List<Double> values) {
 		setArrayValue(Property.data, ArrayDouble.of(values));
+		// sets data type
+		setValue(Property._charbaDataType, DataType.numbers);
 	}
 
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array
 	 * corresponds to the label at the same index on the x axis.
 	 * 
-	 * @return list of numbers.
+	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#numbers}.
 	 */
 	public List<Double> getData() {
-		ArrayDouble array = getArrayValue(Property.data);
-		return ArrayListHelper.list(array);
+		// checks if is a numbers data type
+		if (DataType.numbers.equals(getDataType())) {
+			// returns numbers
+			ArrayDouble array = getArrayValue(Property.data);
+			return ArrayListHelper.list(array);
+		} else {
+			// otherwise an empty list
+			return new ArrayList<Double>();
+		}
 	}
 
 	/**
