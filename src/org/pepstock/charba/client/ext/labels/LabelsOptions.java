@@ -634,6 +634,31 @@ public class LabelsOptions extends NativeObjectContainer {
 			remove(Property.images);
 		}
 	}
+	
+	/**
+	 * Sets the images when {@link Render} is {@link Render#image}.
+	 * 
+	 * @param images images when {@link Render} is {@link Render#image}.
+	 */
+	public final void setImages(Image... images) {
+		// checks if argument is consistent
+		if (images != null) {
+			// creates a temporary array
+			ImageElement[] array = new ImageElement[images.length];
+			// scans passed array of images
+			for (int i = 0; i < images.length; i++) {
+				// transform a image resource into image element by image object
+				// stores into array changing in image element
+				array[i] = ImageElement.as(images[i].getElement());
+			}
+			// stores it
+			setImages(array);
+		} else {
+			// if here, argument is null
+			// then removes property
+			remove(Property.images);
+		}
+	}
 
 	/**
 	 * Sets the images when {@link Render} is {@link Render#image}.
