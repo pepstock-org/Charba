@@ -26,7 +26,7 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.commons.ObjectType;
 
 import jsinterop.annotations.JsPackage;
 
@@ -71,47 +71,61 @@ public final class LabelsOptionsFactory extends DefaultChartsLifecycleListener i
 	public void onAfterInit(AbstractChart<?, ?> chart) {
 		// checks if there is a data labels options as GLOBAL
 		if (Defaults.get().getGlobal().getPlugins().hasOptions(LabelsPlugin.ID)) {
-			LabelsOptions options = Defaults.get().getGlobal().getPlugins().getOptions(LabelsPlugin.ID, this);
-			// gets references
-			List<String> references = options.getReferences();
-			// checks if references has global
-			if (!references.contains(JsPackage.GLOBAL)) {
-				// otherwise adds it
-				references.add(JsPackage.GLOBAL);
+			// gets the object type of options to know if there is an array of options
+			ObjectType type = Defaults.get().getGlobal().getPlugins().getOptionsType(LabelsPlugin.ID);
+			// if is single object
+			if (ObjectType.Object.equals(type)) {
+				// gets object
+				LabelsOptions options = Defaults.get().getGlobal().getPlugins().getOptions(LabelsPlugin.ID, this);
+				// registers it to global
+				registerChart(options, JsPackage.GLOBAL);
+			} else if (ObjectType.Array.equals(type)) {
+				// if here the options are an array of objects
+				List<LabelsOptions> optionsList = Defaults.get().getGlobal().getPlugins().getOptionsAsList(LabelsPlugin.ID, this);
+				// scans the objects
+				for (LabelsOptions options : optionsList) {
+					// registers it to global
+					registerChart(options, JsPackage.GLOBAL);
+				}
 			}
 		}
 		// checks if there is a data labels options as CHART GLOBAL
 		if (Defaults.get().getOptions(chart.getType()).getPlugins().hasOptions(LabelsPlugin.ID)) {
-			LabelsOptions options = Defaults.get().getOptions(chart.getType()).getPlugins().getOptions(LabelsPlugin.ID, this);
-			// gets references
-			List<String> references = options.getReferences();
-			// checks if references has global (used also for GLOBAL options for chart type)
-			if (!references.contains(JsPackage.GLOBAL)) {
-				// otherwise adds it
-				references.add(JsPackage.GLOBAL);
+			// gets the object type of options to know if there is an array of options
+			ObjectType type = Defaults.get().getOptions(chart.getType()).getPlugins().getOptionsType(LabelsPlugin.ID);
+			// if is single object
+			if (ObjectType.Object.equals(type)) {
+				// gets object
+				LabelsOptions options = Defaults.get().getOptions(chart.getType()).getPlugins().getOptions(LabelsPlugin.ID, this);
+				// registers it to global
+				registerChart(options, JsPackage.GLOBAL);
+			} else if (ObjectType.Array.equals(type)) {
+				// if here the options are an array of objects
+				List<LabelsOptions> optionsList = Defaults.get().getOptions(chart.getType()).getPlugins().getOptionsAsList(LabelsPlugin.ID, this);
+				// scans the objects
+				for (LabelsOptions options : optionsList) {
+					// registers it to global
+					registerChart(options, JsPackage.GLOBAL);
+				}
 			}
 		}
 		// gets the data labels options from chart options, if there
 		if (chart.getOptions().getPlugins().hasOptions(LabelsPlugin.ID)) {
-			LabelsOptions options = chart.getOptions().getPlugins().getOptions(LabelsPlugin.ID, this);
-			// gets references
-			List<String> references = options.getReferences();
-			// checks if has got the reference to the chart
-			if (!references.contains(chart.getId())) {
-				// adds it
-				references.add(chart.getId());
-			}
-		}
-		// gets the data labels options from chart datasets, if there
-		for (Dataset dataset : chart.getData().getDatasets()) {
-			if (dataset.hasOptions(LabelsPlugin.ID)) {
-				LabelsOptions options = dataset.getOptions(LabelsPlugin.ID, this);
-				// gets references
-				List<String> references = options.getReferences();
-				// checks if has got the reference to the chart
-				if (!references.contains(chart.getId())) {
-					// adds it
-					references.add(chart.getId());
+			// gets the object type of options to know if there is an array of options
+			ObjectType type = chart.getOptions().getPlugins().getOptionsType(LabelsPlugin.ID);
+			// if is single object
+			if (ObjectType.Object.equals(type)) {
+				// gets object
+				LabelsOptions options = chart.getOptions().getPlugins().getOptions(LabelsPlugin.ID, this);
+				// registers it to the chart
+				registerChart(options, chart.getId());
+			} else if (ObjectType.Array.equals(type)) {
+				// if here the options are an array of objects
+				List<LabelsOptions> optionsList = chart.getOptions().getPlugins().getOptionsAsList(LabelsPlugin.ID, this);
+				// scans the objects
+				for (LabelsOptions options : optionsList) {
+					// registers it to the chart
+					registerChart(options, chart.getId());
 				}
 			}
 		}
@@ -126,27 +140,55 @@ public final class LabelsOptionsFactory extends DefaultChartsLifecycleListener i
 	public void onBeforeDestroy(AbstractChart<?, ?> chart) {
 		// gets the data labels options from chart options, if there
 		if (chart.getOptions().getPlugins().hasOptions(LabelsPlugin.ID)) {
-			LabelsOptions options = chart.getOptions().getPlugins().getOptions(LabelsPlugin.ID, this);
-			// gets references
-			List<String> references = options.getReferences();
-			// removes the reference to chart and checks if empty
-			if (references.remove(chart.getId()) && references.isEmpty()) {
-				// removes from cache
-				OPTIONS.remove(options.getId());
-			}
-		}
-		// gets the data labels options from chart datasets, if there
-		for (Dataset dataset : chart.getData().getDatasets()) {
-			if (dataset.hasOptions(LabelsPlugin.ID)) {
-				LabelsOptions options = dataset.getOptions(LabelsPlugin.ID, this);
-				// gets references
-				List<String> references = options.getReferences();
-				// removes the reference to chart and checks if empty
-				if (references.remove(chart.getId()) && references.isEmpty()) {
-					// removes from cache
-					OPTIONS.remove(options.getId());
+			// gets the object type of options to know if there is an array of options
+			ObjectType type = chart.getOptions().getPlugins().getOptionsType(LabelsPlugin.ID);
+			// if is single object
+			if (ObjectType.Object.equals(type)) {
+				// gets object
+				LabelsOptions options = chart.getOptions().getPlugins().getOptions(LabelsPlugin.ID, this);
+				// unregisters it from the chart
+				unregisterChart(options, chart.getId());
+			} else if (ObjectType.Array.equals(type)) {
+				// if here the options are an array of objects
+				List<LabelsOptions> optionsList = chart.getOptions().getPlugins().getOptionsAsList(LabelsPlugin.ID, this);
+				// scans the objects
+				for (LabelsOptions options : optionsList) {
+					// unregisters it from the chart
+					unregisterChart(options, chart.getId());
 				}
 			}
+		}
+	}
+
+	/**
+	 * Register the id (global or chart id) to the options.
+	 * 
+	 * @param options plugin options instance
+	 * @param tag tag to add to the options
+	 */
+	private void registerChart(LabelsOptions options, String tag) {
+		// gets references
+		List<String> references = options.getReferences();
+		// checks if has got the reference to the chart
+		if (!references.contains(tag)) {
+			// adds it
+			references.add(tag);
+		}
+	}
+
+	/**
+	 * Unregister the id (global or chart id) from the options.
+	 * 
+	 * @param options plugin options instance
+	 * @param tag tag to remove from the options
+	 */
+	private void unregisterChart(LabelsOptions options, String tag) {
+		// gets references
+		List<String> references = options.getReferences();
+		// removes the reference to chart and checks if empty
+		if (references.remove(tag) && references.isEmpty()) {
+			// removes from cache
+			OPTIONS.remove(options.getId());
 		}
 	}
 
