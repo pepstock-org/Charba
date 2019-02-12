@@ -129,7 +129,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 			removeIfExists(Property._charbaPointStyle);
 		}
 	}
-	
+
 	/**
 	 * Sets the style of the point as image.
 	 * 

@@ -47,5 +47,5 @@ public interface HasDataPoints {
 	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#points}.
 	 */
 	List<DataPoint> getDataPoints();
-	
+
 }

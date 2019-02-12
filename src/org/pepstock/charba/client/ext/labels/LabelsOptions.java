@@ -634,7 +634,7 @@ public class LabelsOptions extends NativeObjectContainer {
 			remove(Property.images);
 		}
 	}
-	
+
 	/**
 	 * Sets the images when {@link Render} is {@link Render#image}.
 	 * 

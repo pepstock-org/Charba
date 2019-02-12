@@ -36,7 +36,7 @@ import org.pepstock.charba.client.options.Scales;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class LineDataset extends LiningDataset implements HasDataPoints{
+public class LineDataset extends LiningDataset implements HasDataPoints {
 
 	// default value for cubic interpolation mode
 	private static final String DEFAULT_CUBIC_INTERPOLATION_MODE = "default";

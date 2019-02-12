@@ -119,7 +119,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	public final DataType getDataType() {
 		return getValue(Property._charbaDataType, DataType.class, DataType.unknown);
 	}
-	
+
 	/**
 	 * Returns the patterns container element.
 	 * 

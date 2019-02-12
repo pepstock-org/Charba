@@ -37,7 +37,7 @@ import org.pepstock.charba.client.plugins.PluginIdChecker;
  *
  */
 public final class Plugins extends AbstractModel<Options, Void> {
-	
+
 	/**
 	 * Creates the object with the parent, the key of this element and native object to map java script properties.<br>
 	 * No default values for this element.
@@ -50,7 +50,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 		// no default values for this element
 		super(options, childKey, null, nativeObject);
 	}
-	
+
 	/**
 	 * Sets if a global plugin must be enabled or not.
 	 * 
@@ -153,7 +153,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 		// means that an options has been added.
 		return ObjectType.Boolean.equals(type) ? false : has(pluginIdKey);
 	}
-	
+
 	/**
 	 * Returns the options type.
 	 * 

@@ -73,7 +73,7 @@ public class Point extends AbstractConfigurationElement {
 	public void setPointStyle(ImageResource pointStyle) {
 		getOptions().getElements().getPoint().setPointStyle(pointStyle);
 	}
-	
+
 	/**
 	 * Sets the style of the point as image .
 	 * 

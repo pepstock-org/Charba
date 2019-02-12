@@ -983,7 +983,7 @@ abstract class LiningDataset extends Dataset {
 			removeIfExists(Property._charbaPointStyle);
 		}
 	}
-	
+
 	/**
 	 * Sets the style of the point as image.
 	 * 

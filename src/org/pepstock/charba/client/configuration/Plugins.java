@@ -106,7 +106,7 @@ public final class Plugins {
 	public boolean hasOptions(String pluginId) {
 		return options.getPlugins().hasOptions(pluginId);
 	}
-	
+
 	/**
 	 * Returns the options type.
 	 * 

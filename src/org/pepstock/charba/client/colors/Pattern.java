@@ -66,7 +66,7 @@ public final class Pattern extends CanvasObject {
 	public Pattern(Image image) {
 		this(image, Context2d.Repetition.REPEAT);
 	}
-	
+
 	/**
 	 * Creates the object using an image to use in the pattern.<br>
 	 * The repetition used is repeat.
@@ -97,7 +97,7 @@ public final class Pattern extends CanvasObject {
 			throw new IllegalArgumentException(IMG_NULL_MESSAGE);
 		}
 	}
-	
+
 	/**
 	 * Creates the object using an image to use in the pattern and repetition to apply to pattern.
 	 * 
