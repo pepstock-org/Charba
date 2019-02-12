@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
@@ -36,7 +37,7 @@ import org.pepstock.charba.client.plugins.PluginIdChecker;
  *
  */
 public final class Plugins extends AbstractModel<Options, Void> {
-
+	
 	/**
 	 * Creates the object with the parent, the key of this element and native object to map java script properties.<br>
 	 * No default values for this element.
@@ -49,7 +50,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 		// no default values for this element
 		super(options, childKey, null, nativeObject);
 	}
-
+	
 	/**
 	 * Sets if a global plugin must be enabled or not.
 	 * 
@@ -152,6 +153,16 @@ public final class Plugins extends AbstractModel<Options, Void> {
 		// means that an options has been added.
 		return ObjectType.Boolean.equals(type) ? false : has(pluginIdKey);
 	}
+	
+	/**
+	 * Returns the options type.
+	 * 
+	 * @param pluginId plugin id.
+	 * @return the options type
+	 */
+	public ObjectType getOptionsType(String pluginId) {
+		return type(PluginIdChecker.key(pluginId));
+	}
 
 	/**
 	 * Returns the plugin options, if exist. It uses a factory instance to create a native object container.
@@ -162,7 +173,17 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * @return java script object used to configure the plugin or an empty object if not exist.
 	 */
 	public <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) {
-		return factory.create(getValue(PluginIdChecker.key(pluginId)));
+		// creates the key to avoid many calls to plugin checker
+		Key pluginIdKey = PluginIdChecker.key(pluginId);
+		// gets the type of property
+		ObjectType type = type(pluginIdKey);
+		// checks if object
+		if (ObjectType.Object.equals(type)) {
+			return factory.create(getValue(PluginIdChecker.key(pluginId)));
+		} else {
+			// if here returns an empty object
+			return factory.create(null);
+		}
 	}
 
 	/**
@@ -175,8 +196,18 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * @return the plugin options as list of object containers or empty list if not exist.
 	 */
 	public <T extends NativeObjectContainer> List<T> getOptionsAsList(String pluginId, NativeObjectContainerFactory<T> factory) {
-		ArrayObject array = getArrayValue(PluginIdChecker.key(pluginId));
-		return ArrayListHelper.list(array, factory);
+		// creates the key to avoid many calls to plugin checker
+		Key pluginIdKey = PluginIdChecker.key(pluginId);
+		// gets the type of property
+		ObjectType type = type(pluginIdKey);
+		// checks if array
+		if (ObjectType.Array.equals(type)) {
+			ArrayObject array = getArrayValue(PluginIdChecker.key(pluginId));
+			return ArrayListHelper.list(array, factory);
+		} else {
+			// if here returns an empty list
+			return new ArrayList<T>();
+		}
 	}
 
 }

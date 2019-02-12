@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
@@ -104,6 +105,16 @@ public final class Plugins {
 	 */
 	public boolean hasOptions(String pluginId) {
 		return options.getPlugins().hasOptions(pluginId);
+	}
+	
+	/**
+	 * Returns the options type.
+	 * 
+	 * @param pluginId plugin id.
+	 * @return the options type
+	 */
+	public ObjectType getOptionsType(String pluginId) {
+		return options.getPlugins().getOptionsType(pluginId);
 	}
 
 	/**
