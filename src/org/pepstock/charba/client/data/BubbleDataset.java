@@ -35,7 +35,7 @@ import org.pepstock.charba.client.enums.PointStyle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class BubbleDataset extends HovingDataset {
+public final class BubbleDataset extends HovingDataset implements HasDataPoints {
 	// exception message when it's not using data points
 	private static final String DATA_USAGE_MESSAGE = "Use datapoints instead of data for bubble chart";
 	// data point factory
@@ -170,6 +170,7 @@ public final class BubbleDataset extends HovingDataset {
 	 * 
 	 * @param datapoints an array of data points
 	 */
+	@Override
 	public void setDataPoints(DataPoint... datapoints) {
 		setArrayValue(Dataset.Property.data, ArrayObject.of(datapoints));
 		// sets data type
@@ -181,6 +182,7 @@ public final class BubbleDataset extends HovingDataset {
 	 * 
 	 * @param datapoints a list of data points
 	 */
+	@Override
 	public void setDataPoints(List<DataPoint> datapoints) {
 		setArrayValue(Dataset.Property.data, ArrayObject.of(datapoints));
 		// sets data type
@@ -192,6 +194,7 @@ public final class BubbleDataset extends HovingDataset {
 	 * 
 	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#points}.
 	 */
+	@Override
 	public List<DataPoint> getDataPoints() {
 		// checks if is a points data type
 		if (DataType.points.equals(getDataType())) {
