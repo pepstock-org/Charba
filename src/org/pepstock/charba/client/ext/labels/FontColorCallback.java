@@ -16,22 +16,26 @@
 package org.pepstock.charba.client.ext.labels;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.colors.IsColor;
 
 /**
  * Callback interface of labels plugin to change font color at runtime, using the arguments.
  * 
  * @author Andrea "Stock" Stocchero
  *
+ * @param <T> type of result of callback. Could a {@link String} or {@link IsColor}
+ * @see IsColor
  */
-public interface FontColorCallback {
+public interface FontColorCallback<T> {
 
 	/**
 	 * Called to change font color at runtime, using the arguments.
 	 * 
 	 * @param chart chart instance
 	 * @param item font color item, passed by plugin
-	 * @return a string which represent a color or a color instace. If returns <code>null</code>, it will use the default font color.
+	 * @return a string which represent a color or a color instace. If returns <code>null</code>, it will use the default font
+	 *         color.
 	 */
-	Object color(AbstractChart<?, ?> chart, FontColorItem item);
+	T color(AbstractChart<?, ?> chart, FontColorItem item);
 
 }

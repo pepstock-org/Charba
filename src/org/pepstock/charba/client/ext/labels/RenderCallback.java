@@ -17,13 +17,17 @@ package org.pepstock.charba.client.ext.labels;
 
 import org.pepstock.charba.client.AbstractChart;
 
+import com.google.gwt.dom.client.ImageElement;
+
 /**
  * Callback interface of labels plugin to provide the item to be rendered as string or as image at runtime, using the arguments.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * 
+ * @param <T> type of result of callback. Could a {@link String} or {@link ImageElement}
+ * @see ImageElement
  */
-public interface RenderCallback {
+public interface RenderCallback<T> {
 
 	/**
 	 * Called to provide the item to be rendered as string or as image at runtime, using the arguments.
@@ -32,6 +36,6 @@ public interface RenderCallback {
 	 * @param item render item, passed by plugin
 	 * @return a string or as image instance to show as label
 	 */
-	Object render(AbstractChart<?, ?> chart, RenderItem item);
+	T render(AbstractChart<?, ?> chart, RenderItem item);
 
 }

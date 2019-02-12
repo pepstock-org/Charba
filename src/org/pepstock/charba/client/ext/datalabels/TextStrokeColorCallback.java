@@ -29,8 +29,14 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  * 
  * @author Andrea "Stock" Stocchero
  *
+ * @param <T> type of result of callback. Could be a string (as color), color, pattern or gradient instance
+ * @see IsColor
+ * @see Pattern
+ * @see Gradient
+ * @see CanvasPattern
+ * @see CanvasGradient
  */
-public interface TextStrokeColorCallback {
+public interface TextStrokeColorCallback<T> {
 
 	/**
 	 * Returns the <code>textStrokeColor</code> property at runtime, using the chart instance and the plugin context.
@@ -45,6 +51,6 @@ public interface TextStrokeColorCallback {
 	 * @see CanvasPattern
 	 * @see CanvasGradient
 	 */
-	Object textStrokeColor(AbstractChart<?, ?> chart, Context context);
+	T textStrokeColor(AbstractChart<?, ?> chart, Context context);
 
 }

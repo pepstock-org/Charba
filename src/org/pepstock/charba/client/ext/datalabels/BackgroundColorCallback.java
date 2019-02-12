@@ -29,8 +29,14 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  * 
  * @author Andrea "Stock" Stocchero
  *
+ * @param <T> type of result of callback. Could be a string (as color), color, pattern or gradient instance
+ * @see IsColor
+ * @see Pattern
+ * @see Gradient
+ * @see CanvasPattern
+ * @see CanvasGradient
  */
-public interface BackgroundColorCallback {
+public interface BackgroundColorCallback<T> {
 
 	/**
 	 * Returns the <code>backgroundColor</code> property at runtime, using the chart instance and the plugin context.
@@ -43,8 +49,8 @@ public interface BackgroundColorCallback {
 	 * @see Pattern
 	 * @see Gradient
 	 * @see CanvasPattern
-	 * @see CanvasGradient        
+	 * @see CanvasGradient
 	 */
-	Object backgroundColor(AbstractChart<?, ?> chart, Context context);
+	T backgroundColor(AbstractChart<?, ?> chart, Context context);
 
 }

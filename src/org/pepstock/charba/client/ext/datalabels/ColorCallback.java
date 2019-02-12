@@ -29,22 +29,27 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  * 
  * @author Andrea "Stock" Stocchero
  *
+ * @param <T> type of result of callback. Could be a string (as color), color, pattern or gradient instance
+ * @see IsColor
+ * @see Pattern
+ * @see Gradient
+ * @see CanvasPattern
+ * @see CanvasGradient
  */
-public interface ColorCallback {
+public interface ColorCallback<T> {
 
 	/**
 	 * Returns the <code>color</code> property at runtime, using the chart instance and the plugin context.
 	 * 
 	 * @param chart chart instance
 	 * @param context DATALABELS plugin context instance
-	 * @return the <code>color</code> value to be applied. Could be a string (as color), color, pattern or gradient
-	 *         instance
+	 * @return the <code>color</code> value to be applied. Could be a string (as color), color, pattern or gradient instance
 	 * @see IsColor
 	 * @see Pattern
 	 * @see Gradient
 	 * @see CanvasPattern
-	 * @see CanvasGradient        
+	 * @see CanvasGradient
 	 */
-	Object color(AbstractChart<?, ?> chart, Context context);
+	T color(AbstractChart<?, ?> chart, Context context);
 
 }

@@ -98,9 +98,9 @@ public class LabelsOptions extends NativeObjectContainer {
 	// callback proxy to invoke the font color function
 	private final CallbackProxy<ProxyFontColorCallback> fontColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// render (string) callback instance
-	private RenderCallback renderCallback = null;
+	private RenderCallback<?> renderCallback = null;
 	// font color callback instance
-	private FontColorCallback fontColorCallback = null;
+	private FontColorCallback<?> fontColorCallback = null;
 
 	// defaults global options instance
 	private LabelsDefaultsOptions defaultsOptions;
@@ -214,11 +214,11 @@ public class LabelsOptions extends NativeObjectContainer {
 					// checks result
 					if (value instanceof IsColor) {
 						// is color instance
-						IsColor color = (IsColor)value;
+						IsColor color = (IsColor) value;
 						return color.toRGBA();
 					} else if (value instanceof String) {
 						// is string instance
-						return (String)value;
+						return (String) value;
 					} else if (value != null) {
 						// another instance not null
 						// returns to string
@@ -660,7 +660,7 @@ public class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the render callback, if set, otherwise <code>null</code>
 	 */
-	public RenderCallback getRenderCallback() {
+	public RenderCallback<?> getRenderCallback() {
 		return renderCallback;
 	}
 
@@ -669,7 +669,7 @@ public class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param renderCallback the render callback to set
 	 */
-	public void setRender(RenderCallback renderCallback) {
+	public void setRender(RenderCallback<?> renderCallback) {
 		// sets the callback
 		this.renderCallback = renderCallback;
 		// checks if callback is consistent
@@ -687,7 +687,7 @@ public class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @return the font color callback, if set, otherwise <code>null</code>
 	 */
-	public FontColorCallback getFontColorCallback() {
+	public FontColorCallback<?> getFontColorCallback() {
 		return fontColorCallback;
 	}
 
@@ -696,7 +696,7 @@ public class LabelsOptions extends NativeObjectContainer {
 	 * 
 	 * @param fontColorCallback the font color callback.
 	 */
-	public void setFontColor(FontColorCallback fontColorCallback) {
+	public void setFontColor(FontColorCallback<?> fontColorCallback) {
 		// sets the callback
 		this.fontColorCallback = fontColorCallback;
 		// checks if callback is consistent
