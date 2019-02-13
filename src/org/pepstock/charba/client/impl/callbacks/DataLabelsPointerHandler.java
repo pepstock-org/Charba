@@ -17,9 +17,7 @@ package org.pepstock.charba.client.impl.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.datalabels.Context;
-import org.pepstock.charba.client.datalabels.events.ClickEventHandler;
-import org.pepstock.charba.client.datalabels.events.EnterEventHandler;
-import org.pepstock.charba.client.datalabels.events.LeaveEventHandler;
+import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
 
 import com.google.gwt.dom.client.Style.Cursor;
 
@@ -29,7 +27,7 @@ import com.google.gwt.dom.client.Style.Cursor;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class DataLabelsPointer implements EnterEventHandler, LeaveEventHandler, ClickEventHandler {
+public class DataLabelsPointerHandler extends AbstractEventHandler {
 
 	// cursor type to be applied on enter
 	private final Cursor cursor;
@@ -37,7 +35,7 @@ public class DataLabelsPointer implements EnterEventHandler, LeaveEventHandler, 
 	/**
 	 * Creates a callback setting {@link com.google.gwt.dom.client.Style.Cursor#POINTER} as pointer.
 	 */
-	public DataLabelsPointer() {
+	public DataLabelsPointerHandler() {
 		this(Cursor.POINTER);
 	}
 
@@ -47,7 +45,7 @@ public class DataLabelsPointer implements EnterEventHandler, LeaveEventHandler, 
 	 * @param cursor the cursor type to use. If <code>null</code>, uses {@link com.google.gwt.dom.client.Style.Cursor#POINTER}
 	 *            as pointer
 	 */
-	public DataLabelsPointer(Cursor cursor) {
+	public DataLabelsPointerHandler(Cursor cursor) {
 		this.cursor = cursor != null ? cursor : Cursor.POINTER;
 	}
 
@@ -89,5 +87,5 @@ public class DataLabelsPointer implements EnterEventHandler, LeaveEventHandler, 
 		}
 		return true;
 	}
-
+	
 }
