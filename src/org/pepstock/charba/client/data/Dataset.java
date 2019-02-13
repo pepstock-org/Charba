@@ -345,9 +345,17 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @param values an array of numbers
 	 */
 	public void setData(double... values) {
-		setArrayValue(Property.data, ArrayDouble.of(values));
-		// sets data type
-		setValue(Property._charbaDataType, DataType.numbers);
+		// checks if consistent
+		if (values != null && values.length > 0) {
+			setArrayValue(Property.data, ArrayDouble.of(values));
+			// sets data type
+			setValue(Property._charbaDataType, DataType.numbers);
+		} else {
+			// removes data property
+			remove(Property.data);
+			// sets data type as unknown
+			setValue(Property._charbaDataType, DataType.unknown);
+		}
 	}
 
 	/**

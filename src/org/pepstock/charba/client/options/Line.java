@@ -117,7 +117,14 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 *            lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
-		setArrayValue(Property.borderDash, ArrayInteger.of(borderDash));
+		// checks if argument is consistent
+		if (borderDash != null && borderDash.length > 0) {
+			setArrayValue(Property.borderDash, ArrayInteger.of(borderDash));
+		} else {
+			// if here, argument is null
+			// then removes property
+			remove(Property.borderDash);
+		}
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}

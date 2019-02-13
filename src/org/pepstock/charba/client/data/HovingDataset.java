@@ -272,7 +272,14 @@ abstract class HovingDataset extends Dataset {
 	 * @param borderWidth the border width of the arcs in the dataset.
 	 */
 	public void setBorderWidth(int... borderWidth) {
-		setArrayValue(Property.borderWidth, ArrayInteger.of(borderWidth));
+		// checks if argument is consistent
+		if (borderWidth != null && borderWidth.length > 0) {
+			setArrayValue(Property.borderWidth, ArrayInteger.of(borderWidth));
+		} else {
+			// if here, argument is null
+			// then removes property
+			remove(Property.borderWidth);
+		}
 	}
 
 	/**
@@ -485,7 +492,14 @@ abstract class HovingDataset extends Dataset {
 	 * @param widths the stroke width of the arcs when hovered.
 	 */
 	public void setHoverBorderWidth(int... widths) {
-		setArrayValue(Property.hoverBorderWidth, ArrayInteger.of(widths));
+		// checks if argument is consistent
+		if (widths != null && widths.length > 0) {
+			setArrayValue(Property.hoverBorderWidth, ArrayInteger.of(widths));
+		} else {
+			// if here, argument is null
+			// then removes property
+			remove(Property.hoverBorderWidth);
+		}
 	}
 
 	/**

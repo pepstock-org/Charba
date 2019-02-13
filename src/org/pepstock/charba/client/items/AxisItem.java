@@ -223,7 +223,11 @@ public final class AxisItem extends ScaleItem {
 	 * @param ticksAsNumbers the array of ticks
 	 */
 	public void setTicksAsNumbers(double... ticksAsNumbers) {
-		setArrayValue(Property.ticksAsNumbers, ArrayDouble.of(ticksAsNumbers));
+		// checks if consistent
+		if (ticksAsNumbers != null) {
+			// sets value
+			setArrayValue(Property.ticksAsNumbers, ArrayDouble.of(ticksAsNumbers));
+		}
 	}
 
 	/**

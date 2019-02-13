@@ -212,17 +212,14 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param borderDash the line dash pattern used when stroking lines
 	 */
 	public void setBorderDash(int... borderDash) {
-		setBorderDash(ArrayInteger.of(borderDash));
-	}
-
-	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
-	 * and gaps which describe the pattern.
-	 * 
-	 * @param borderDash the line dash pattern used when stroking lines
-	 */
-	private void setBorderDash(ArrayInteger borderDash) {
-		setArrayValue(Property.borderDash, borderDash);
+		// checks if argument is consistent
+		if (borderDash != null && borderDash.length > 0) {
+			setArrayValue(Property.borderDash, ArrayInteger.of(borderDash));
+		} else {
+			// if here, argument is null
+			// then removes property
+			remove(Property.borderDash);
+		}
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -264,23 +261,21 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param lineWidth stroke widths of grid lines.
 	 */
 	public void setLineWidth(int... lineWidth) {
-		setLineWidth(ArrayInteger.of(lineWidth));
-	}
-
-	/**
-	 * Sets the stroke widths of grid lines.
-	 * 
-	 * @param lineWidth stroke widths of grid lines.
-	 */
-	private void setLineWidth(ArrayInteger lineWidth) {
-		// checks if there is only 1 element
-		if (lineWidth.length() == 1) {
-			// if 1 element, sets the value as string
-			// the same for all lines
-			setValue(Property.lineWidth, lineWidth.get(0));
+		// checks if argument is consistent
+		if (lineWidth != null && lineWidth.length > 0) {
+			// checks if there is only 1 element
+			if (lineWidth.length == 1) {
+				// if 1 element, sets the value as string
+				// the same for all lines
+				setValue(Property.lineWidth, lineWidth[0]);
+			} else {
+				// otherwise uses an array for all lines
+				setArrayValue(Property.lineWidth, ArrayInteger.of(lineWidth));
+			}
 		} else {
-			// otherwise uses an array for all lines
-			setArrayValue(Property.lineWidth, lineWidth);
+			// if here, argument is null
+			// then removes property
+			remove(Property.lineWidth);
 		}
 		// checks if all parents are attached
 		checkAndAddToParent();
@@ -472,16 +467,14 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param zeroLineBorderDash length and spacing of dashes of the grid line for the first index (index 0).
 	 */
 	public void setZeroLineBorderDash(int... zeroLineBorderDash) {
-		setZeroLineBorderDash(ArrayInteger.of(zeroLineBorderDash));
-	}
-
-	/**
-	 * Sets the length and spacing of dashes of the grid line for the first index (index 0).
-	 * 
-	 * @param zeroLineBorderDash length and spacing of dashes of the grid line for the first index (index 0).
-	 */
-	private void setZeroLineBorderDash(ArrayInteger zeroLineBorderDash) {
-		setArrayValue(Property.zeroLineBorderDash, zeroLineBorderDash);
+		// checks if argument is consistent
+		if (zeroLineBorderDash != null && zeroLineBorderDash.length > 0) {
+			setArrayValue(Property.zeroLineBorderDash, ArrayInteger.of(zeroLineBorderDash));
+		} else {
+			// if here, argument is null
+			// then removes property
+			remove(Property.zeroLineBorderDash);
+		}
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}

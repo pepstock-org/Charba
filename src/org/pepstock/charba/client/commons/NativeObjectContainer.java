@@ -822,7 +822,7 @@ public abstract class NativeObjectContainer {
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param defaultValue default value if the value was stored as single number value
-	 * @return value of the property (by array) or <code>null</code> if not exist
+	 * @return value of the property (by array)
 	 */
 	protected final ArrayInteger getValueOrArray(Key key, int defaultValue) {
 		// checks if property type
@@ -844,7 +844,7 @@ public abstract class NativeObjectContainer {
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param defaultValue default value if the value was stored as single number value
-	 * @return value of the property (by array) or <code>null</code> if not exist
+	 * @return value of the property (by array)
 	 */
 	protected final ArrayDouble getValueOrArray(Key key, double defaultValue) {
 		// checks if property type
@@ -866,7 +866,7 @@ public abstract class NativeObjectContainer {
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param defaultValue default value if the value was stored as single string value
-	 * @return value of the property (by array) or <code>null</code> if not exist
+	 * @return value of the property (by array)
 	 */
 	protected final ArrayString getValueOrArray(Key key, String defaultValue) {
 		// checks if property type
@@ -889,7 +889,7 @@ public abstract class NativeObjectContainer {
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param defaultValue default value if the value was stored as single image value
-	 * @return value of the property (by array) or <code>null</code> if not exist
+	 * @return value of the property (by array)
 	 */
 	protected final ArrayImage getValueOrArray(Key key, ImageElement defaultValue) {
 		// checks if property type
@@ -901,8 +901,14 @@ public abstract class NativeObjectContainer {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
 		}
-		// if here the property doesn't exist or has got a wrong type
-		return ArrayImage.of(defaultValue);
+		// checks if default is consistent
+		if (defaultValue != null) {
+			// if here the property doesn't exist or has got a wrong type
+			return ArrayImage.of(defaultValue);
+		} else {
+			// otherwise returns and empty array
+			return new ArrayImage();
+		}
 	}
 
 	/**
@@ -911,7 +917,7 @@ public abstract class NativeObjectContainer {
 	 * 
 	 * @param key key of the property of JavaScript object.
 	 * @param defaultValue default value if the value was stored as single pattern value
-	 * @return value of the property (by array) or <code>null</code> if not exist
+	 * @return value of the property (by array)
 	 */
 	protected final ArrayPattern getValueOrArray(Key key, CanvasPattern defaultValue) {
 		// checks if property type
@@ -923,8 +929,14 @@ public abstract class NativeObjectContainer {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
 		}
-		// if here the property doesn't exist or has got a wrong type
-		return ArrayPattern.of(defaultValue);
+		// checks if default is consistent
+		if (defaultValue != null) {
+			// if here the property doesn't exist or has got a wrong type
+			return ArrayPattern.of(defaultValue);
+		} else {
+			// otherwise returns and empty array
+			return new ArrayPattern();
+		}
 	}
 
 	/**
@@ -945,8 +957,14 @@ public abstract class NativeObjectContainer {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
 		}
-		// if here the property doesn't exist or has got a wrong type
-		return ArrayGradient.of(defaultValue);
+		// checks if default is consistent
+		if (defaultValue != null) {
+			// if here the property doesn't exist or has got a wrong type
+			return ArrayGradient.of(defaultValue);
+		} else {
+			// otherwise returns and empty array
+			return new ArrayGradient();
+		}
 	}
 
 	/**
