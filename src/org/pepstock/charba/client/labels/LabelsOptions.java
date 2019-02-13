@@ -47,7 +47,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LabelsOptions extends AbstractPluginOptions {
+public final class LabelsOptions extends AbstractPluginOptions {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -138,8 +138,18 @@ public class LabelsOptions extends AbstractPluginOptions {
 	 * Creates an empty object with plugin options.
 	 */
 	public LabelsOptions() {
+		// creates the object registering it
+		this(false);
+	}
+
+	/**
+	 * Creates an empty object with plugin options.
+	 * 
+	 * @param deferredRegistration if <code>true</code> the options is not registered
+	 */
+	LabelsOptions(boolean deferredRegistration) {
 		// creates an empty object
-		super(LabelsPlugin.FACTORY);
+		super(LabelsPlugin.ID, LabelsPlugin.FACTORY, deferredRegistration);
 		// checks if the default global options has been added for the plugin
 		if (Defaults.get().getGlobal().getPlugins().hasOptions(LabelsPlugin.ID)) {
 			// reads the default default global options
@@ -218,6 +228,16 @@ public class LabelsOptions extends AbstractPluginOptions {
 				return getFontColorAsString();
 			}
 		});
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#register()
+	 */
+	@Override
+	protected void register() {
+		super.register();
 	}
 
 	/**

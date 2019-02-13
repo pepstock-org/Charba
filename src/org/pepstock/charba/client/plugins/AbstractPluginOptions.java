@@ -37,6 +37,12 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	// this is mandatory in order to clean up the cache of plugin options
 	// when they are not longer needed
 	private final List<String> references = new ArrayList<>();
+	// options factory instance
+	private final AbstractPluginOptionsFactory<?> factory;
+	// flag to know if it must be registered
+	private boolean isRegistered = false;
+	// plugin id
+	private final String pluginId;
 
 	/**
 	 * Name of properties of native object.
@@ -48,18 +54,30 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates new plugin options with its factory.
+	 * Creates new plugin options with its factory, plugin ID and a flag to know if it must register the options to the cache or if it will be postponed.<br>
+	 * The deferred registration is needed to implement options builder in order do not register options not used.
 	 * 
+	 * @param pluginId plugin ID
 	 * @param factory plugin options factory
+	 * @param deferredRegistration if <code>true</code> the options is not registered
 	 */
-	protected AbstractPluginOptions(AbstractPluginOptionsFactory<?> factory) {
+	protected AbstractPluginOptions(String pluginId, AbstractPluginOptionsFactory<?> factory, boolean deferredRegistration) {
 		// creates an empty native object
 		super();
+		// stores factory and pluginId
+		this.factory = factory;
+		this.pluginId = pluginId;
 		// sets unique id
 		// needed for caching the instances
 		setValue(Property._charbaOptionsId, COUNTER.incrementAndGet());
-		// registers into cache
-		factory.registerOptions(this);
+		// checks if it must deferred the registration to
+		// the factory
+		if (!deferredRegistration) {
+			// registers into cache
+			factory.registerOptions(this);
+			// sets falg
+			isRegistered = true;
+		}
 	}
 
 	/**
@@ -72,6 +90,15 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	}
 
 	/**
+	 * Returns the plugin id related to this options.
+	 * 
+	 * @return the plugin id related to this options
+	 */
+	public final String getPluginId() {
+		return pluginId;
+	}
+
+	/**
 	 * Returns the list of references of this options.<br>
 	 * Called by factory in order to manage correctly the cache and removes this option when it doesn't have any reference.
 	 * 
@@ -79,6 +106,18 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	 */
 	protected List<String> getReferences() {
 		return references;
+	}
+
+	/**
+	 * Registers the options to the factory to manage the cache of options.
+	 */
+	protected void register() {
+		// checks if registered
+		// if yes, do nothing
+		if (!isRegistered) {
+			// registers into cache
+			factory.registerOptions(this);
+		}
 	}
 
 }

@@ -16,8 +16,10 @@
 package org.pepstock.charba.client.plugins;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Charts;
@@ -28,8 +30,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.data.Dataset;
-
-import jsinterop.annotations.JsPackage;
+import org.pepstock.charba.client.enums.PluginOptionsScope;
 
 /**
  * Factory to get the plugin options (form chart, from datasets or from default global ones) related to the plugin.
@@ -58,8 +59,8 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 	}
 
 	/**
-	 * Registers new plugin options into a map, in order to return a right object instance, mainly because the plugin
-	 * options can contain callbacks and references to be maintained.
+	 * Registers new plugin options into a map, in order to return a right object instance, mainly because the plugin options
+	 * can contain callbacks and references to be maintained.
 	 * 
 	 * @param options plugin options to be stored
 	 */
@@ -81,30 +82,21 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 			ObjectType type = Defaults.get().getGlobal().getPlugins().getOptionsType(pluginId);
 			// if is single object
 			if (ObjectType.Object.equals(type)) {
+				// unregister previous global options
+				unregisterGlobal(PluginOptionsScope.global);
 				// gets object
 				T options = Defaults.get().getGlobal().getPlugins().getOptions(pluginId, this);
 				// registers it to global
-				if (register(options, JsPackage.GLOBAL)) {
-					// overrides the current object
-					// if it has been added
-					Defaults.get().getGlobal().getPlugins().setOptions(pluginId, options);
-				}
+				register(options, PluginOptionsScope.global.name());
 			} else if (ObjectType.Array.equals(type)) {
+				// unregister previous global options
+				unregisterGlobal(PluginOptionsScope.global);
 				// if here the options are an array of objects
 				List<T> optionsList = Defaults.get().getGlobal().getPlugins().getOptionsAsList(pluginId, this);
-				// flag to know if it must be override
-				boolean mustBeOverrided = false;
 				// scans the objects
 				for (T options : optionsList) {
 					// registers it to global
-					// or if it must be override
-					mustBeOverrided = mustBeOverrided || register(options, JsPackage.GLOBAL);
-				}
-				// checks if the options must be override
-				if (mustBeOverrided) {
-					// overrides the current object
-					// if it has been added
-					Defaults.get().getGlobal().getPlugins().setOptions(pluginId, optionsList);
+					register(options, PluginOptionsScope.global.name());
 				}
 			}
 		}
@@ -114,17 +106,21 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 			ObjectType type = Defaults.get().getOptions(chart.getType()).getPlugins().getOptionsType(pluginId);
 			// if is single object
 			if (ObjectType.Object.equals(type)) {
+				// unregister previous options
+				unregisterGlobal(PluginOptionsScope.chartType);
 				// gets object
 				T options = Defaults.get().getOptions(chart.getType()).getPlugins().getOptions(pluginId, this);
 				// registers it to global
-				register(options, JsPackage.GLOBAL);
+				register(options, PluginOptionsScope.chartType.name());
 			} else if (ObjectType.Array.equals(type)) {
+				// unregister previous options
+				unregisterGlobal(PluginOptionsScope.chartType);
 				// if here the options are an array of objects
 				List<T> optionsList = Defaults.get().getOptions(chart.getType()).getPlugins().getOptionsAsList(pluginId, this);
 				// scans the objects
 				for (T options : optionsList) {
 					// registers it to global
-					register(options, JsPackage.GLOBAL);
+					register(options, PluginOptionsScope.chartType.name());
 				}
 			}
 		}
@@ -196,24 +192,19 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 	}
 
 	/**
-	 * Register the id (global or chart id) to the options and returns if the tag has been added.
+	 * Register the id (global or chart id) to the options.
 	 * 
 	 * @param options plugin options instance
 	 * @param tag tag to add to the options
-	 * @return <code>true</code> if the tag has been added to options otherwise <code>false</code>.
 	 */
-	private boolean register(T options, String tag) {
+	private void register(T options, String tag) {
 		// gets references
 		List<String> references = options.getReferences();
 		// checks if has got the reference to the chart
 		if (!references.contains(tag)) {
 			// adds it
 			references.add(tag);
-			// added
-			return true;
 		}
-		// not added
-		return false;
 	}
 
 	/**
@@ -229,6 +220,35 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 		if (references.remove(tag) && references.isEmpty()) {
 			// removes from cache
 			OPTIONS.remove(options.getId());
+		}
+	}
+
+	/**
+	 * Unregisters existing plugin options at global or chart type level to avoid to have in cache unused options, created only
+	 * reading the existing options.<br>
+	 * This is what happens with DATALABELS plugin which add ALWAYS a default options into global options.
+	 * 
+	 * @param scope scope of the options
+	 */
+	private void unregisterGlobal(PluginOptionsScope scope) {
+		// scans by iterator all entries of cache
+		// uses an iterator because if there is any reference, needs to remove the entry
+		// inside the scan
+		for (Iterator<Entry<Integer, AbstractPluginOptions>> iterator = OPTIONS.entrySet().iterator(); iterator.hasNext();) {
+			// gets NEXT
+			Entry<Integer, AbstractPluginOptions> entry = iterator.next();
+			// gets options
+			AbstractPluginOptions options = entry.getValue();
+			// checks if the options is related to the plugin of this factory
+			if (pluginId.equalsIgnoreCase(options.getPluginId())) {
+				// gets references
+				List<String> references = options.getReferences();
+				// removes the reference to chart and checks if empty
+				if (references.remove(scope.name()) && references.isEmpty()) {
+					// removes from cache
+					iterator.remove();
+				}
+			}
 		}
 	}
 

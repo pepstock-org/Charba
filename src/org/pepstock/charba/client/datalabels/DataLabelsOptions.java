@@ -54,6 +54,7 @@ import org.pepstock.charba.client.datalabels.enums.Align;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
 import org.pepstock.charba.client.datalabels.enums.Display;
 import org.pepstock.charba.client.datalabels.enums.TextAlign;
+import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
@@ -605,11 +606,21 @@ public final class DataLabelsOptions extends AbstractPluginOptions {
 	}
 
 	/**
-	 * Creates new DATALABELS plugin options
+	 * Creates new DATALABELS plugin options.
 	 */
 	public DataLabelsOptions() {
+		// creates the object registering it
+		this(false);
+	}
+
+	/**
+	 * Creates new DATALABELS plugin options.
+	 * 
+	 * @param deferredRegistration if <code>true</code> the options is not registered
+	 */
+	DataLabelsOptions(boolean deferredRegistration) {
 		// creates an empty native object
-		super(DataLabelsPlugin.FACTORY);
+		super(DataLabelsPlugin.ID, DataLabelsPlugin.FACTORY, deferredRegistration);
 		// checks if the default global options has been added for the plugin
 		if (Defaults.get().getGlobal().getPlugins().hasOptions(DataLabelsPlugin.ID)) {
 			// reads the default default global options
@@ -1302,6 +1313,16 @@ public final class DataLabelsOptions extends AbstractPluginOptions {
 		});
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#register()
+	 */
+	@Override
+	protected void register() {
+		super.register();
+	}
+
 	/**
 	 * Returns the padding element.
 	 * 
@@ -1327,6 +1348,20 @@ public final class DataLabelsOptions extends AbstractPluginOptions {
 	 */
 	public Listeners getListeners() {
 		return listeners;
+	}
+
+	/**
+	 * Adds a event handler instance as listener for all events.
+	 * 
+	 * @param handler event handler instance as listener for all events.
+	 */
+	public void setListenersHadler(AbstractEventHandler handler) {
+		// adds as click handler
+		getListeners().setClickEventHandler(handler);
+		// adds as enter handler
+		getListeners().setEnterEventHandler(handler);
+		// adds as leave handler
+		getListeners().setLeaveEventHandler(handler);
 	}
 
 	/**
