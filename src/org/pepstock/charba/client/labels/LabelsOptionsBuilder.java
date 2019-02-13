@@ -27,7 +27,7 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Image;
 
 /**
- * Comfortable object to create LABELS options by a builder.
+ * Comfortable object to create LABELS plugin options by a builder.
  * 
  * @author Andrea "Stock" Stocchero
  *
