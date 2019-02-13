@@ -27,7 +27,7 @@ import com.google.gwt.resources.client.TextResource;
 public interface Extensions extends ClientBundle {
 
 	/**
-	 * Static references to extensions java script source code
+	 * Static reference to extensions java script source code
 	 */
 	public static final Extensions INSTANCE = GWT.create(Extensions.class);
 
