@@ -16,10 +16,10 @@
 package org.pepstock.charba.client.impl.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.ext.datalabels.ClickEventHandler;
-import org.pepstock.charba.client.ext.datalabels.Context;
-import org.pepstock.charba.client.ext.datalabels.EnterEventHandler;
-import org.pepstock.charba.client.ext.datalabels.LeaveEventHandler;
+import org.pepstock.charba.client.datalabels.Context;
+import org.pepstock.charba.client.datalabels.events.ClickEventHandler;
+import org.pepstock.charba.client.datalabels.events.EnterEventHandler;
+import org.pepstock.charba.client.datalabels.events.LeaveEventHandler;
 
 import com.google.gwt.dom.client.Style.Cursor;
 
