@@ -1355,7 +1355,7 @@ public final class DataLabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @param handler event handler instance as listener for all events.
 	 */
-	public void setListenersHadler(AbstractEventHandler handler) {
+	public void setListenersHandler(AbstractEventHandler handler) {
 		// adds as click handler
 		getListeners().setClickEventHandler(handler);
 		// adds as enter handler
@@ -2363,7 +2363,7 @@ public final class DataLabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @param paddingCallback the padding callback to set
 	 */
-	public void setPaddingCallback(PaddingCallback paddingCallback) {
+	public void setPadding(PaddingCallback paddingCallback) {
 		// sets the callback
 		this.paddingCallback = paddingCallback;
 		// checks if callback is consistent

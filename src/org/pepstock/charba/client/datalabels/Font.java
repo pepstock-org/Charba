@@ -78,7 +78,7 @@ public final class Font extends AbstractElement {
 	 * 
 	 * @param fontSize the font size.
 	 */
-	public void setFontSize(int fontSize) {
+	public void setSize(int fontSize) {
 		setValue(Property.size, fontSize);
 	}
 
@@ -87,7 +87,7 @@ public final class Font extends AbstractElement {
 	 * 
 	 * @return the font size.
 	 */
-	public int getFontSize() {
+	public int getSize() {
 		return getValue(Property.size, defaultsOptions.getFontSize());
 	}
 
@@ -96,7 +96,7 @@ public final class Font extends AbstractElement {
 	 * 
 	 * @param fontStyle Font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
-	public void setFontStyle(FontStyle fontStyle) {
+	public void setStyle(FontStyle fontStyle) {
 		setValue(Property.style, fontStyle);
 	}
 
@@ -105,7 +105,7 @@ public final class Font extends AbstractElement {
 	 * 
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
-	public FontStyle getFontStyle() {
+	public FontStyle getStyle() {
 		return getValue(Property.style, FontStyle.class, defaultsOptions.getFontStyle());
 	}
 
@@ -114,7 +114,7 @@ public final class Font extends AbstractElement {
 	 * 
 	 * @param fontFamily Font family, follows CSS font-family options.
 	 */
-	public void setFontFamily(String fontFamily) {
+	public void setFamily(String fontFamily) {
 		setValue(Property.family, fontFamily);
 	}
 
@@ -123,7 +123,7 @@ public final class Font extends AbstractElement {
 	 * 
 	 * @return Font family, follows CSS font-family options.
 	 */
-	public String getFontFamily() {
+	public String getFamily() {
 		return getValue(Property.family, defaultsOptions.getFontFamily());
 	}
 
