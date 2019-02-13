@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.datalabels;
+package org.pepstock.charba.client.impl.callbacks;
 
 import java.util.List;
 
@@ -21,6 +21,7 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.data.DataPoint;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.data.HasDataPoints;
+import org.pepstock.charba.client.datalabels.Context;
 import org.pepstock.charba.client.enums.DataType;
 
 /**
