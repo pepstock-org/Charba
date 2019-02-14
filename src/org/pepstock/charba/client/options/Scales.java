@@ -109,7 +109,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	 * @param scales array of axes.
 	 */
 	public void setXAxes(Scale... scales) {
-		setArrayValue(Property.xAxes, ArrayObject.of(scales));
+		setArrayValue(Property.xAxes, ArrayObject.fromOrNull(scales));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -130,7 +130,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	 * @param scales array of axes.
 	 */
 	public void setYAxes(Scale... scales) {
-		setArrayValue(Property.yAxes, ArrayObject.of(scales));
+		setArrayValue(Property.yAxes, ArrayObject.fromOrNull(scales));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}

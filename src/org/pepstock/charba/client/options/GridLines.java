@@ -20,7 +20,6 @@ import java.util.List;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
-import org.pepstock.charba.client.commons.ArrayIntegerList;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.ArrayStringList;
@@ -120,7 +119,14 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 *            second to the second grid line and so on.
 	 */
 	public void setColor(IsColor... color) {
-		setColor(ArrayString.of(color));
+		// checks if argument is consistent
+		if (color != null && color.length > 0) {
+			setColor(ArrayString.of(color));
+		} else {
+			// if here, argument is null
+			// then removes property
+			remove(Property.color);
+		}
 	}
 
 	/**
@@ -131,7 +137,14 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 *            second to the second grid line and so on.
 	 */
 	public void setColor(String... color) {
-		setColor(ArrayString.of(color));
+		// checks if argument is consistent
+		if (color != null && color.length > 0) {
+			setColor(ArrayString.of(color));
+		} else {
+			// if here, argument is null
+			// then removes property
+			remove(Property.color);
+		}
 	}
 
 	/**
@@ -212,14 +225,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param borderDash the line dash pattern used when stroking lines
 	 */
 	public void setBorderDash(int... borderDash) {
-		// checks if argument is consistent
-		if (borderDash != null && borderDash.length > 0) {
-			setArrayValue(Property.borderDash, ArrayInteger.of(borderDash));
-		} else {
-			// if here, argument is null
-			// then removes property
-			remove(Property.borderDash);
-		}
+		setArrayValue(Property.borderDash, ArrayInteger.fromOrNull(borderDash));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -261,40 +267,19 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param lineWidth stroke widths of grid lines.
 	 */
 	public void setLineWidth(int... lineWidth) {
-		// checks if argument is consistent
-		if (lineWidth != null && lineWidth.length > 0) {
-			// checks if there is only 1 element
-			if (lineWidth.length == 1) {
-				// if 1 element, sets the value as string
-				// the same for all lines
-				setValue(Property.lineWidth, lineWidth[0]);
-			} else {
-				// otherwise uses an array for all lines
-				setArrayValue(Property.lineWidth, ArrayInteger.of(lineWidth));
-			}
-		} else {
-			// if here, argument is null
-			// then removes property
-			remove(Property.lineWidth);
-		}
+		setValueOrArray(Property.lineWidth, lineWidth);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
-	 * Returns the stroke widths of grid lines.
+	 * Returns the stroke width of grid lines. The first element if set as array.
 	 * 
-	 * @return lineWidth stroke widths of grid lines.
+	 * @return lineWidth stroke width of grid lines. The first element if set as array.
 	 */
 	public int getLineWidth() {
-		// checks if the stored value is a number
-		if (ObjectType.Number.equals(type(Property.lineWidth)) || !has(Property.lineWidth)) {
-			// returns a number
-			return getValue(Property.lineWidth, getDefaultValues().getLineWidth());
-		} else {
-			// returns the default
-			return getDefaultValues().getLineWidth();
-		}
+		ArrayInteger array = getValueOrArray(Property.lineWidth, getDefaultValues().getLineWidth());
+		return array.length() == 0 ? getDefaultValues().getLineWidth() : array.get(0);
 	}
 
 	/**
@@ -303,20 +288,8 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @return lineWidth stroke widths of grid lines.
 	 */
 	public List<Integer> getLinesWidth() {
-		ArrayIntegerList result = null;
-		// checks if the stored value is a number
-		if (ObjectType.Number.equals(type(Property.lineWidth)) || !has(Property.lineWidth)) {
-			// creates new list
-			result = new ArrayIntegerList();
-			// adds the number value
-			result.add(getValue(Property.lineWidth, getDefaultValues().getLineWidth()));
-		} else if (ObjectType.Array.equals(type(Property.lineWidth))) {
-			// if array
-			// loads the array
-			ArrayInteger array = getArrayValue(Property.lineWidth);
-			result = ArrayListHelper.list(array);
-		}
-		return result;
+		ArrayInteger array = getValueOrArray(Property.lineWidth, getDefaultValues().getLineWidth());
+		return ArrayListHelper.list(array);
 	}
 
 	/***
@@ -467,14 +440,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param zeroLineBorderDash length and spacing of dashes of the grid line for the first index (index 0).
 	 */
 	public void setZeroLineBorderDash(int... zeroLineBorderDash) {
-		// checks if argument is consistent
-		if (zeroLineBorderDash != null && zeroLineBorderDash.length > 0) {
-			setArrayValue(Property.zeroLineBorderDash, ArrayInteger.of(zeroLineBorderDash));
-		} else {
-			// if here, argument is null
-			// then removes property
-			remove(Property.zeroLineBorderDash);
-		}
+		setArrayValue(Property.zeroLineBorderDash, ArrayInteger.fromOrNull(zeroLineBorderDash));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}

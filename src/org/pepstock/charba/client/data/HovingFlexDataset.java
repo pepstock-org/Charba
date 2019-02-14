@@ -121,7 +121,7 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(Pattern... backgroundColor) {
 		// sets value to patterns
-		getPatternsContainer().setObjects(Property.backgroundColor, ArrayObject.of(backgroundColor));
+		getPatternsContainer().setObjects(Property.backgroundColor, ArrayObject.fromOrNull(backgroundColor));
 		// removes previous configuration to other containers
 		resetBeingPatterns(Property.backgroundColor);
 	}
@@ -133,7 +133,7 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(Gradient... backgroundColor) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.backgroundColor, ArrayObject.of(backgroundColor));
+		getGradientsContainer().setObjects(Property.backgroundColor, ArrayObject.fromOrNull(backgroundColor));
 		// removes previous configuration to other containers
 		resetBeingGradients(Property.backgroundColor);
 	}
@@ -229,7 +229,7 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBorderColor(Gradient... borderColor) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.borderColor, ArrayObject.of(borderColor));
+		getGradientsContainer().setObjects(Property.borderColor, ArrayObject.fromOrNull(borderColor));
 		// removes previous configuration to other containers
 		resetBeingGradients(Property.borderColor);
 	}
@@ -326,7 +326,7 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setHoverBackgroundColor(Pattern... colors) {
 		// sets value to patterns
-		getPatternsContainer().setObjects(Property.hoverBackgroundColor, ArrayObject.of(colors));
+		getPatternsContainer().setObjects(Property.hoverBackgroundColor, ArrayObject.fromOrNull(colors));
 		// removes the property
 		resetBeingPatterns(Property.hoverBackgroundColor);
 	}
@@ -338,7 +338,7 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setHoverBackgroundColor(Gradient... colors) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.hoverBackgroundColor, ArrayObject.of(colors));
+		getGradientsContainer().setObjects(Property.hoverBackgroundColor, ArrayObject.fromOrNull(colors));
 		// removes previous configuration to other containers
 		resetBeingGradients(Property.hoverBackgroundColor);
 	}
@@ -437,7 +437,7 @@ abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setHoverBorderColor(Gradient... colors) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.hoverBorderColor, ArrayObject.of(colors));
+		getGradientsContainer().setObjects(Property.hoverBorderColor, ArrayObject.fromOrNull(colors));
 		// removes previous configuration to other containers
 		resetBeingGradients(Property.hoverBorderColor);
 	}

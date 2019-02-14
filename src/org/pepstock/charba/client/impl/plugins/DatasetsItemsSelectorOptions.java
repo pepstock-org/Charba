@@ -153,14 +153,7 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	 * @param borderDash the line dash pattern used when stroking lines
 	 */
 	public void setBorderDash(int... borderDash) {
-		// checks if argument is consistent
-		if (borderDash != null && borderDash.length > 0) {
-			setArrayValue(Property.borderDash, ArrayInteger.of(borderDash));
-		} else {
-			// if here, argument is null
-			// then removes property
-			remove(Property.borderDash);
-		}
+		setArrayValue(Property.borderDash, ArrayInteger.fromOrNull(borderDash));
 	}
 
 	/**

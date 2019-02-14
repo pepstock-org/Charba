@@ -154,10 +154,10 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 					// calls callback
 					LegendLabelItem[] result = labelsCallback.generateLegendLabels(getChart());
 					// transforms into a native array
-					return ArrayObject.of(result);
+					return ArrayObject.from(result);
 				}
 				// empty array
-				return ArrayObject.of();
+				return new ArrayObject();
 			}
 
 		});

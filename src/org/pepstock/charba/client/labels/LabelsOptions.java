@@ -664,15 +664,8 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * @param images images when {@link Render} is {@link Render#image}.
 	 */
 	public final void setImages(ImageElement... images) {
-		// checks if argument is consistent
-		if (images != null && images.length > 0) {
-			// sets property
-			setArrayValue(Property.images, ArrayImage.of(images));
-		} else {
-			// if here, argument is null
-			// then removes property
-			remove(Property.images);
-		}
+		// sets property
+		setArrayValue(Property.images, ArrayImage.fromOrNull(images));
 	}
 
 	/**

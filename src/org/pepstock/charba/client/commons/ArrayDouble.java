@@ -36,20 +36,77 @@ public final class ArrayDouble extends Array {
 	 * @param items double items to create new array
 	 * @return new array instance of doubles.
 	 */
-	public static native ArrayDouble of(double... items);
+	private static native ArrayDouble of(double... items);
+
+	/**
+	 * This method creates new array instance with a variable number of <code>double</code> arguments.
+	 * 
+	 * @param items double items to create new array
+	 * @return new array instance of doubles or <code>null</code> if argument is <code>null</code> or length to 0.
+	 */
+	@JsOverlay
+	public static ArrayDouble fromOrNull(double... items) {
+		// checks if consistent
+		if (items == null || items.length == 0) {
+			// returns null
+			return null;
+		}
+		// returns array
+		return ArrayDouble.of(items);
+	}
+
+	/**
+	 * This method creates new array instance with a variable number of <code>double</code> arguments.
+	 * 
+	 * @param items double items to create new array
+	 * @return new array instance of doubles or an empty array if argument is <code>null</code>
+	 */
+	@JsOverlay
+	public static ArrayDouble from(double... items) {
+		// checks if consistent
+		if (items == null || items.length == 0) {
+			// returns an empty array
+			return new ArrayDouble();
+		}
+		// returns array
+		return ArrayDouble.of(items);
+	}
+	
+	/**
+	 * Creates a java script array of doubles starting from list of doubles.
+	 * 
+	 * @param items list of doubles to load into new java script array.
+	 * @return new array instance of doubles or <code>null</code> if argument is <code>null</code>
+	 */
+	@JsOverlay
+	public static ArrayDouble fromOrNull(List<Double> items) {
+		// checks if list is null
+		if (items == null || items.isEmpty()) {
+			return null;
+		}
+		// creates the list
+		ArrayDouble result = new ArrayDouble();
+		// scans all items of list
+		for (Double value : items) {
+			// adds element
+			result.push(value.doubleValue());
+		}
+		// returns the array
+		return result;
+	}
 
 	/**
 	 * Creates a java script array of doubles starting from list of doubles.
 	 * 
 	 * @param items list of doubles to load into new java script array.
-	 * @return new array instance of doubles.
+	 * @return new array instance of doubles or an empty array if argument is <code>null</code>
 	 */
 	@JsOverlay
-	public static ArrayDouble of(List<Double> items) {
+	public static ArrayDouble from(List<Double> items) {
 		// creates the list
 		ArrayDouble result = new ArrayDouble();
 		// checks if list is null
-		if (items == null) {
+		if (items == null || items.isEmpty()) {
 			return result;
 		}
 		// scans all items of list

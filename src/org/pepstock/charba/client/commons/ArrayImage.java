@@ -38,24 +38,81 @@ public final class ArrayImage extends Array {
 	 * @param items ImageElement items to create new array
 	 * @return new array instance of images.
 	 */
-	public static native ArrayImage of(ImageElement... items);
+	private static native ArrayImage of(ImageElement... items);
+
+	/**
+	 * This method creates new array instance with a variable number of <code>ImageElement</code> arguments.
+	 * 
+	 * @param items ImageElement items to create new array
+	 * @return new array instance of images.
+	 */
+	@JsOverlay
+	public static ArrayImage fromOrNull(ImageElement... items) {
+		// checks if consistent
+		if (items == null || items.length == 0) {
+			// returns an empty array
+			return null;
+		}
+		// returns array
+		return ArrayImage.of(items);
+	}
+
+	/**
+	 * This method creates new array instance with a variable number of <code>ImageElement</code> arguments.
+	 * 
+	 * @param items ImageElement items to create new array
+	 * @return new array instance of images.
+	 */
+	@JsOverlay
+	public static ArrayImage from(ImageElement... items) {
+		// checks if consistent
+		if (items == null || items.length == 0) {
+			// returns an empty array
+			return new ArrayImage();
+		}
+		// returns array
+		return ArrayImage.of(items);
+	}
+	
+	/**
+	 * Creates a java script array of images starting from list of images.
+	 * 
+	 * @param items list of images to load into new java script array.
+	 * @return new array instance of images or <code>null</code> if argument is <code>null</code>
+	 */
+	@JsOverlay
+	public static ArrayImage fromOrNull(List<ImageElement> items) {
+		// checks if list is null
+		if (items == null || items.isEmpty()) {
+			return null;
+		}
+		// creates the array
+		ArrayImage result = new ArrayImage();
+		// scans all items of list
+		for (ImageElement value : items) {
+			// adds elements
+			result.push(value);
+		}
+		// returns the array
+		return result;
+	}
 
 	/**
 	 * Creates a java script array of images starting from list of images.
 	 * 
-	 * @param values list of images to load into new java script array.
-	 * @return new array instance of images.
+	 * @param items list of images to load into new java script array.
+	 * @return new array instance of images or an empty array if argument is <code>null</code>
 	 */
 	@JsOverlay
-	public static ArrayImage of(List<ImageElement> values) {
+	public static ArrayImage from(List<ImageElement> items) {
 		// creates the array
 		ArrayImage result = new ArrayImage();
 		// checks if list is null
-		if (values == null) {
+		if (items == null || items.isEmpty()) {
 			return result;
 		}
 		// scans all items of list
-		for (ImageElement value : values) {
+		for (ImageElement value : items) {
 			// adds elements
 			result.push(value);
 		}

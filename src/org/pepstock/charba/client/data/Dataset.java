@@ -345,17 +345,10 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @param values an array of numbers
 	 */
 	public void setData(double... values) {
-		// checks if consistent
-		if (values != null && values.length > 0) {
-			setArrayValue(Property.data, ArrayDouble.of(values));
-			// sets data type
-			setValue(Property._charbaDataType, DataType.numbers);
-		} else {
-			// removes data property
-			remove(Property.data);
-			// sets data type as unknown
-			setValue(Property._charbaDataType, DataType.unknown);
-		}
+		// set value. If null, removes key and then..
+		setArrayValue(Property.data, ArrayDouble.fromOrNull(values));
+		// sets data type checking if the key exists
+		setValue(Property._charbaDataType, has(Property.data) ? DataType.numbers : DataType.unknown);
 	}
 
 	/**
@@ -365,9 +358,10 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @param values list of numbers.
 	 */
 	public void setData(List<Double> values) {
-		setArrayValue(Property.data, ArrayDouble.of(values));
-		// sets data type
-		setValue(Property._charbaDataType, DataType.numbers);
+		// set value. If null, removes key and then..
+		setArrayValue(Property.data, ArrayDouble.fromOrNull(values));
+		// sets data type checking if the key exists
+		setValue(Property._charbaDataType, has(Property.data) ? DataType.numbers : DataType.unknown);
 	}
 
 	/**

@@ -37,7 +37,28 @@ public final class ArrayObject extends Array {
 	 * @param items objects items to create new array
 	 * @return new array instance of objects.
 	 */
-	public static native ArrayObject of(NativeObject... items);
+	private static native ArrayObject of(NativeObject... items);
+	
+	/**
+	 * Creates a java script array of objects starting from a native object containers and the array will have ONE 1 element.
+	 * 
+	 * @param item list of objects to load into new java script array.
+	 * @param <E> type of native object containers
+	 * @return new array instance of ONE 1 element.
+	 */
+	@JsOverlay
+	public static <E extends NativeObjectContainer> ArrayObject fromOrNull(E item) {
+		// checks if array is null
+		if (item == null) {
+			return null;
+		}
+		// creates the array
+		ArrayObject result = new ArrayObject();
+		// adds element
+		result.push(item.getNativeObject());
+		// returns the array
+		return result;
+	}
 
 	/**
 	 * Creates a java script array of objects starting from a native object containers and the array will have ONE 1 element.
@@ -47,7 +68,7 @@ public final class ArrayObject extends Array {
 	 * @return new array instance of ONE 1 element.
 	 */
 	@JsOverlay
-	public static <E extends NativeObjectContainer> ArrayObject of(E item) {
+	public static <E extends NativeObjectContainer> ArrayObject from(E item) {
 		// creates the array
 		ArrayObject result = new ArrayObject();
 		// checks if array is null
@@ -56,6 +77,30 @@ public final class ArrayObject extends Array {
 		}
 		// adds element
 		result.push(item.getNativeObject());
+		// returns the array
+		return result;
+	}
+	
+	/**
+	 * Creates a java script array of objects starting from an array of native object containers.
+	 * 
+	 * @param items list of objects to load into new java script array.
+	 * @param <E> type of native object containers
+	 * @return new array instance of objects.
+	 */
+	@JsOverlay
+	public static <E extends NativeObjectContainer> ArrayObject fromOrNull(E[] items) {
+		// checks if array is null
+		if (items == null || items.length == 0) {
+			return null;
+		}
+		// creates the array
+		ArrayObject result = new ArrayObject();
+		// scans elements
+		for (E value : items) {
+			// adds element
+			result.push(value.getNativeObject());
+		}
 		// returns the array
 		return result;
 	}
@@ -68,13 +113,14 @@ public final class ArrayObject extends Array {
 	 * @return new array instance of objects.
 	 */
 	@JsOverlay
-	public static <E extends NativeObjectContainer> ArrayObject of(E[] items) {
+	public static <E extends NativeObjectContainer> ArrayObject from(E[] items) {
 		// creates the array
 		ArrayObject result = new ArrayObject();
 		// checks if array is null
-		if (items == null) {
+		if (items == null || items.length == 0) {
 			return result;
 		}
+		// scans elements
 		for (E value : items) {
 			// adds element
 			result.push(value.getNativeObject());
@@ -91,13 +137,38 @@ public final class ArrayObject extends Array {
 	 * @return new array instance of objects.
 	 */
 	@JsOverlay
-	public static <E extends NativeObjectContainer> ArrayObject of(List<E> items) {
+	public static <E extends NativeObjectContainer> ArrayObject fromOrNull(List<E> items) {
+		// checks if array is null
+		if (items == null || items.isEmpty()) {
+			return null;
+		}
+		// creates the array
+		ArrayObject result = new ArrayObject();
+		// scans elements
+		for (E value : items) {
+			// adds element
+			result.push(value.getNativeObject());
+		}
+		// returns the array
+		return result;
+	}
+	
+	/**
+	 * Creates a java script array of objects starting from a list of native object containers.
+	 * 
+	 * @param items list of objects to load into new java script array.
+	 * @param <E> type of native object containers
+	 * @return new array instance of objects.
+	 */
+	@JsOverlay
+	public static <E extends NativeObjectContainer> ArrayObject from(List<E> items) {
 		// creates the array
 		ArrayObject result = new ArrayObject();
 		// checks if array is null
-		if (items == null) {
+		if (items == null || items.isEmpty()) {
 			return result;
 		}
+		// scans elements
 		for (E value : items) {
 			// adds element
 			result.push(value.getNativeObject());

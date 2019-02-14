@@ -131,7 +131,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 			remove(PluginIdChecker.key(pluginId));
 		} else {
 			// stores configuration
-			setArrayValue(PluginIdChecker.key(pluginId), ArrayObject.of(options));
+			setArrayValue(PluginIdChecker.key(pluginId), ArrayObject.fromOrNull(options));
 		}
 		// checks if the node is already added to parent
 		checkAndAddToParent();

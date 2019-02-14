@@ -36,24 +36,81 @@ public final class ArrayInteger extends Array {
 	 * @param items integer items to create new array
 	 * @return new array instance of integers.
 	 */
-	public static native ArrayInteger of(int... items);
+	private static native ArrayInteger of(int... items);
+
+	/**
+	 * This method creates new array instance with a variable number of <code>int</code> arguments.
+	 * 
+	 * @param items integer items to create new array
+	 * @return new array instance of integers.
+	 */
+	@JsOverlay
+	public static ArrayInteger fromOrNull(int... items) {
+		// checks if consistent
+		if (items == null || items.length == 0) {
+			// returns null
+			return null;
+		}
+		// returns array
+		return ArrayInteger.of(items);
+	}
+
+	/**
+	 * This method creates new array instance with a variable number of <code>int</code> arguments.
+	 * 
+	 * @param items integer items to create new array
+	 * @return new array instance of integers.
+	 */
+	@JsOverlay
+	public static ArrayInteger from(int... items) {
+		// checks if consistent
+		if (items == null || items.length == 0) {
+			// returns null
+			return new ArrayInteger();
+		}
+		// returns array
+		return ArrayInteger.of(items);
+	}
 
 	/**
 	 * Creates a java script array of integers starting from list of integers.
 	 * 
-	 * @param values list of integers to load into new java script array.
+	 * @param items list of integers to load into new java script array.
 	 * @return new array instance of integers.
 	 */
 	@JsOverlay
-	public static ArrayInteger of(List<Integer> values) {
+	public static ArrayInteger fromOrNull(List<Integer> items) {
+		// checks if list is null
+		if (items == null || items.isEmpty()) {
+			return null;
+		}
+		// creates the array
+		ArrayInteger result = new ArrayInteger();
+		// scans all items of list
+		for (Integer value : items) {
+			// adds elements
+			result.push(value.intValue());
+		}
+		// returns the array
+		return result;
+	}
+
+	/**
+	 * Creates a java script array of integers starting from list of integers.
+	 * 
+	 * @param items list of integers to load into new java script array.
+	 * @return new array instance of integers.
+	 */
+	@JsOverlay
+	public static ArrayInteger from(List<Integer> items) {
 		// creates the array
 		ArrayInteger result = new ArrayInteger();
 		// checks if list is null
-		if (values == null) {
+		if (items == null || items.isEmpty()) {
 			return result;
 		}
 		// scans all items of list
-		for (Integer value : values) {
+		for (Integer value : items) {
 			// adds elements
 			result.push(value.intValue());
 		}

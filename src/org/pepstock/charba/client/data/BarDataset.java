@@ -133,9 +133,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 */
 	@Override
 	public void setDataPoints(DataPoint... datapoints) {
-		setArrayValue(Dataset.Property.data, ArrayObject.of(datapoints));
-		// sets data type
-		setValue(Dataset.Property._charbaDataType, DataType.points);
+		setArrayValue(Dataset.Property.data, ArrayObject.fromOrNull(datapoints));
+		// sets data type checking if the key exists
+		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.points : DataType.unknown);
 	}
 
 	/**
@@ -145,9 +145,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 */
 	@Override
 	public void setDataPoints(List<DataPoint> datapoints) {
-		setArrayValue(Dataset.Property.data, ArrayObject.of(datapoints));
-		// sets data type
-		setValue(Dataset.Property._charbaDataType, DataType.points);
+		setArrayValue(Dataset.Property.data, ArrayObject.fromOrNull(datapoints));
+		// sets data type checking if the key exists
+		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.points : DataType.unknown);
 	}
 
 	/**

@@ -29,14 +29,6 @@ import jsinterop.annotations.JsType;
 public final class ArrayMixedObject extends Array {
 
 	/**
-	 * This method creates new array instance with a variable number of <code>objects</code> arguments.
-	 * 
-	 * @param objects objects items to create new array
-	 * @return new array instance of objects.
-	 */
-	public static native ArrayMixedObject of(Object[] objects);
-
-	/**
 	 * Returns the index of the last occurrence of the specified element in this array, or -1 if this array does not contain the
 	 * element.
 	 * 

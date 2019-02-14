@@ -132,7 +132,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setBackgroundColor(Pattern backgroundColor) {
 		// sets value to patterns
-		getPatternsContainer().setObjects(Property.backgroundColor, ArrayObject.of(backgroundColor));
+		getPatternsContainer().setObjects(Property.backgroundColor, ArrayObject.fromOrNull(backgroundColor));
 		// removes the property
 		resetBeingPatterns(Property.backgroundColor);
 	}
@@ -144,7 +144,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setBackgroundColor(Gradient backgroundColor) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.backgroundColor, ArrayObject.of(backgroundColor));
+		getGradientsContainer().setObjects(Property.backgroundColor, ArrayObject.fromOrNull(backgroundColor));
 		// removes the property
 		resetBeingGradients(Property.backgroundColor);
 	}
@@ -241,7 +241,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setBorderColor(Gradient borderColor) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.borderColor, ArrayObject.of(borderColor));
+		getGradientsContainer().setObjects(Property.borderColor, ArrayObject.fromOrNull(borderColor));
 		// removes the property
 		resetBeingGradients(Property.borderColor);
 	}
@@ -318,14 +318,7 @@ abstract class LiningDataset extends Dataset {
 	 *            lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
-		// checks if argument is consistent
-		if (borderDash != null && borderDash.length > 0) {
-			setArrayValue(Property.borderDash, ArrayInteger.of(borderDash));
-		} else {
-			// if here, argument is null
-			// then removes property
-			remove(Property.borderDash);
-		}
+		setArrayValue(Property.borderDash, ArrayInteger.fromOrNull(borderDash));
 	}
 
 	/**
@@ -544,7 +537,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBackgroundColor(Gradient... pointBackgroundColor) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.pointBackgroundColor, ArrayObject.of(pointBackgroundColor));
+		getGradientsContainer().setObjects(Property.pointBackgroundColor, ArrayObject.fromOrNull(pointBackgroundColor));
 		// removes the property
 		resetBeingGradients(Property.pointBackgroundColor);
 	}
@@ -625,7 +618,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBorderColor(Gradient... pointBorderColor) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.pointBorderColor, ArrayObject.of(pointBorderColor));
+		getGradientsContainer().setObjects(Property.pointBorderColor, ArrayObject.fromOrNull(pointBorderColor));
 		// removes the property
 		resetBeingGradients(Property.pointBorderColor);
 	}
@@ -744,7 +737,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBackgroundColor(Gradient... pointHoverBackgroundColor) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.pointHoverBackgroundColor, ArrayObject.of(pointHoverBackgroundColor));
+		getGradientsContainer().setObjects(Property.pointHoverBackgroundColor, ArrayObject.fromOrNull(pointHoverBackgroundColor));
 		// removes the property
 		resetBeingGradients(Property.pointHoverBackgroundColor);
 	}
@@ -826,7 +819,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBorderColor(Gradient... pointHoverBorderColor) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.pointHoverBorderColor, ArrayObject.of(pointHoverBorderColor));
+		getGradientsContainer().setObjects(Property.pointHoverBorderColor, ArrayObject.fromOrNull(pointHoverBorderColor));
 		// removes the property
 		resetBeingGradients(Property.pointHoverBorderColor);
 	}
