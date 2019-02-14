@@ -108,7 +108,7 @@ public final class Labels {
 		// checks if is a valid array
 		if (values != null && values.length > 0) {
 			// creates new JS array
-			array.push(ArrayString.of(values));
+			array.push(ArrayString.from(values));
 		}
 	}
 

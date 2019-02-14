@@ -38,13 +38,19 @@ public final class ArrayObject extends Array {
 	 * @return new array instance of objects.
 	 */
 	private static native ArrayObject of(NativeObject... items);
+
+	/**
+	 * To avoid any instantiation
+	 */
+	ArrayObject() {
+	}
 	
 	/**
 	 * Creates a java script array of objects starting from a native object containers and the array will have ONE 1 element.
 	 * 
 	 * @param item list of objects to load into new java script array.
 	 * @param <E> type of native object containers
-	 * @return new array instance of ONE 1 element.
+	 * @return new array instance of ONE 1 element or <code>null</code> if argument is <code>null</code>
 	 */
 	@JsOverlay
 	public static <E extends NativeObjectContainer> ArrayObject fromOrNull(E item) {
@@ -65,7 +71,7 @@ public final class ArrayObject extends Array {
 	 * 
 	 * @param item list of objects to load into new java script array.
 	 * @param <E> type of native object containers
-	 * @return new array instance of ONE 1 element.
+	 * @return new array instance of ONE 1 element or an empty array if argument is <code>null</code>
 	 */
 	@JsOverlay
 	public static <E extends NativeObjectContainer> ArrayObject from(E item) {
@@ -86,7 +92,7 @@ public final class ArrayObject extends Array {
 	 * 
 	 * @param items list of objects to load into new java script array.
 	 * @param <E> type of native object containers
-	 * @return new array instance of objects.
+	 * @return new array instance of objects or <code>null</code> if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
 	public static <E extends NativeObjectContainer> ArrayObject fromOrNull(E[] items) {
@@ -110,7 +116,7 @@ public final class ArrayObject extends Array {
 	 * 
 	 * @param items list of objects to load into new java script array.
 	 * @param <E> type of native object containers
-	 * @return new array instance of objects.
+	 * @return new array instance of objects or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
 	public static <E extends NativeObjectContainer> ArrayObject from(E[] items) {
@@ -134,7 +140,7 @@ public final class ArrayObject extends Array {
 	 * 
 	 * @param items list of objects to load into new java script array.
 	 * @param <E> type of native object containers
-	 * @return new array instance of objects.
+	 * @return new array instance of objects or <code>null</code> if the argument is <code>null</code> or empty
 	 */
 	@JsOverlay
 	public static <E extends NativeObjectContainer> ArrayObject fromOrNull(List<E> items) {
@@ -158,7 +164,7 @@ public final class ArrayObject extends Array {
 	 * 
 	 * @param items list of objects to load into new java script array.
 	 * @param <E> type of native object containers
-	 * @return new array instance of objects.
+	 * @return new array instance of objects or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
 	public static <E extends NativeObjectContainer> ArrayObject from(List<E> items) {

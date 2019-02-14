@@ -55,8 +55,8 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 	 */
 	@Override
 	public boolean isEmpty() {
-		// checks if the size of JS array is ZERO
-		return size() == 0;
+		// returns if empty
+		return getArray().isEmpty();
 	}
 
 	/**

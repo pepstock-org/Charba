@@ -99,6 +99,8 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	private LegendFilterCallback filterCallback = null;
 	// user callbacks implementation for generating labels
 	private LegendLabelsCallback labelsCallback = null;
+	// empty result
+	private static final LegendLabelItem[] EMPTY_RESULT = new LegendLabelItem[0];
 
 	/**
 	 * Name of properties of native object.
@@ -157,7 +159,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 					return ArrayObject.from(result);
 				}
 				// empty array
-				return new ArrayObject();
+				return ArrayObject.from(EMPTY_RESULT);
 			}
 
 		});

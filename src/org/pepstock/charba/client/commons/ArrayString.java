@@ -18,7 +18,6 @@ package org.pepstock.charba.client.commons;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.Key;
 
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -39,22 +38,62 @@ public final class ArrayString extends Array {
 	 * @param items string items to create new array
 	 * @return new array instance of strings.
 	 */
-	public static native ArrayString of(String... items);
+	private static native ArrayString of(String... items);
+	
+	/**
+	 * To avoid any instantiation
+	 */
+	ArrayString() {
+	}
 
+	/**
+	 * This method creates new array instance with a variable number of <code>string</code> arguments.
+	 * 
+	 * @param items string items to create new array
+	 * @return new array instance of strings or <code>null</code> if argument is <code>null</code> or length to 0
+	 */
+	@JsOverlay
+	public static ArrayString fromOrNull(String... items) {
+		// checks if consistent
+		if (items == null || items.length == 0) {
+			// returns null
+			return null;
+		}
+		// returns array
+		return ArrayString.of(items);
+	}
+
+	/**
+	 * This method creates new array instance with a variable number of <code>string</code> arguments.
+	 * 
+	 * @param items string items to create new array
+	 * @return new array instance of strings or an empty array if argument is <code>null</code> or length to 0
+	 */
+	@JsOverlay
+	public static ArrayString from(String... items) {
+		// checks if consistent
+		if (items == null || items.length == 0) {
+			// returns null
+			return new ArrayString();
+		}
+		// returns array
+		return ArrayString.of(items);
+	}
+	
 	/**
 	 * Creates a java script array of strings starting from list of strings.
 	 * 
 	 * @param items list of strings to load into new java script array.
-	 * @return new array instance of strings.
+	 * @return new array instance of strings or <code>null</code> if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static ArrayString of(List<String> items) {
+	public static ArrayString fromOrNull(List<String> items) {
+		// checks if list is null
+		if (items == null || items.isEmpty()) {
+			return null;
+		}
 		// creates the array
 		ArrayString result = new ArrayString();
-		// checks if list is null
-		if (items == null) {
-			return result;
-		}
 		for (String value : items) {
 			// adds element
 			result.push(value);
@@ -64,20 +103,43 @@ public final class ArrayString extends Array {
 	}
 
 	/**
-	 * Creates a java script array of strings starting from array of colors.
+	 * Creates a java script array of strings starting from list of strings.
 	 * 
-	 * @param values array of colors to load into new java script array.
-	 * @return new array instance of strings.
+	 * @param items list of strings to load into new java script array.
+	 * @return new array instance of strings or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static ArrayString of(IsColor... values) {
+	public static ArrayString from(List<String> items) {
 		// creates the array
 		ArrayString result = new ArrayString();
-		// checks if array is null
-		if (values == null) {
+		// checks if list is null
+		if (items == null || items.isEmpty()) {
 			return result;
 		}
-		for (IsColor color : values) {
+		for (String value : items) {
+			// adds element
+			result.push(value);
+		}
+		// returns the array
+		return result;
+	}
+	
+	/**
+	 * Creates a java script array of strings starting from array of colors.
+	 * 
+	 * @param items array of colors to load into new java script array.
+	 * @return new array instance of strings or <code>null</code> if argument is <code>null</code> or length to 0
+	 */
+	@JsOverlay
+	public static ArrayString fromOrNull(IsColor... items) {
+		// checks if array is null
+		if (items == null || items.length == 0) {
+			return null;
+		}
+		// creates the array
+		ArrayString result = new ArrayString();
+		// scans items
+		for (IsColor color : items) {
 			// adds element
 			result.push(color.toRGBA());
 		}
@@ -86,20 +148,67 @@ public final class ArrayString extends Array {
 	}
 
 	/**
-	 * Creates a java script array of strings starting from array of keys.
+	 * Creates a java script array of strings starting from array of colors.
 	 * 
-	 * @param values array of keys to load into new java script array.
-	 * @return new array instance of strings.
+	 * @param items array of colors to load into new java script array.
+	 * @return new array instance of strings or an mepty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayString of(Key... values) {
+	public static ArrayString from(IsColor... items) {
 		// creates the array
 		ArrayString result = new ArrayString();
 		// checks if array is null
-		if (values == null) {
+		if (items == null || items.length == 0) {
 			return result;
 		}
-		for (Key key : values) {
+		// scans items
+		for (IsColor color : items) {
+			// adds element
+			result.push(color.toRGBA());
+		}
+		// returns the array
+		return result;
+	}
+	
+	/**
+	 * Creates a java script array of strings starting from array of keys.
+	 * 
+	 * @param items array of keys to load into new java script array.
+	 * @return new array instance of strings or <code>null</code> if argument is <code>null</code> or length to 0
+	 */
+	@JsOverlay
+	public static ArrayString fromOrNull(Key... items) {
+		// checks if array is null
+		if (items == null || items.length == 0) {
+			return null;
+		}
+		// creates the array
+		ArrayString result = new ArrayString();
+		// scans items
+		for (Key key : items) {
+			// adds element
+			result.push(key.name());
+		}
+		// returns the array
+		return result;
+	}
+
+	/**
+	 * Creates a java script array of strings starting from array of keys.
+	 * 
+	 * @param items array of keys to load into new java script array.
+	 * @return new array instance of strings or an empty array if argument is <code>null</code> or length to 0
+	 */
+	@JsOverlay
+	public static ArrayString from(Key... items) {
+		// creates the array
+		ArrayString result = new ArrayString();
+		// checks if array is null
+		if (items == null || items.length == 0) {
+			return result;
+		}
+		// scans items
+		for (Key key : items) {
 			// adds element
 			result.push(key.name());
 		}

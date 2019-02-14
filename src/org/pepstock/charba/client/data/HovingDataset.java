@@ -81,7 +81,7 @@ abstract class HovingDataset extends Dataset {
 	 * @param backgroundColor the fill color of the arcs in the dataset.
 	 */
 	public void setBackgroundColor(IsColor... backgroundColor) {
-		setArrayValue(Property.backgroundColor, ArrayString.of(backgroundColor));
+		setArrayValue(Property.backgroundColor, ArrayString.fromOrNull(backgroundColor));
 		// removes previous configuration to other containers
 		resetBeingColors(Property.backgroundColor);
 	}
@@ -92,7 +92,7 @@ abstract class HovingDataset extends Dataset {
 	 * @param backgroundColor the fill color of the arcs in the dataset.
 	 */
 	public void setBackgroundColor(String... backgroundColor) {
-		setArrayValue(Property.backgroundColor, ArrayString.of(backgroundColor));
+		setArrayValue(Property.backgroundColor, ArrayString.fromOrNull(backgroundColor));
 		// removes previous configuration to other containers
 		resetBeingColors(Property.backgroundColor);
 	}
@@ -192,7 +192,7 @@ abstract class HovingDataset extends Dataset {
 	 * @param borderColor the border color of the arcs in the dataset.
 	 */
 	public void setBorderColor(IsColor... borderColor) {
-		setArrayValue(Property.borderColor, ArrayString.of(borderColor));
+		setArrayValue(Property.borderColor, ArrayString.fromOrNull(borderColor));
 		// removes previous configuration to other containers
 		resetBeingColors(Property.borderColor);
 	}
@@ -203,7 +203,7 @@ abstract class HovingDataset extends Dataset {
 	 * @param borderColor the border color of the arcs in the dataset as string.
 	 */
 	public void setBorderColor(String... borderColor) {
-		setArrayValue(Property.borderColor, ArrayString.of(borderColor));
+		setArrayValue(Property.borderColor, ArrayString.fromOrNull(borderColor));
 		// removes previous configuration to other containers
 		resetBeingColors(Property.borderColor);
 	}
@@ -291,7 +291,7 @@ abstract class HovingDataset extends Dataset {
 	 * @param colors the fill color of the arcs when hovered
 	 */
 	public void setHoverBackgroundColor(IsColor... colors) {
-		setArrayValue(Property.hoverBackgroundColor, ArrayString.of(colors));
+		setArrayValue(Property.hoverBackgroundColor, ArrayString.fromOrNull(colors));
 		// removes previous configuration to other containers
 		resetBeingColors(Property.hoverBackgroundColor);
 	}
@@ -302,7 +302,7 @@ abstract class HovingDataset extends Dataset {
 	 * @param colors the fill color of the arcs when hovered as string
 	 */
 	public void setHoverBackgroundColor(String... colors) {
-		setArrayValue(Property.hoverBackgroundColor, ArrayString.of(colors));
+		setArrayValue(Property.hoverBackgroundColor, ArrayString.fromOrNull(colors));
 		// removes previous configuration to other containers
 		resetBeingColors(Property.hoverBackgroundColor);
 	}
@@ -404,7 +404,7 @@ abstract class HovingDataset extends Dataset {
 	 * @param colors the stroke color of the arcs when hovered as string.
 	 */
 	public void setHoverBorderColor(IsColor... colors) {
-		setArrayValue(Property.hoverBorderColor, ArrayString.of(colors));
+		setArrayValue(Property.hoverBorderColor, ArrayString.fromOrNull(colors));
 		// removes previous configuration to other containers
 		resetBeingColors(Property.hoverBorderColor);
 	}
@@ -415,7 +415,7 @@ abstract class HovingDataset extends Dataset {
 	 * @param colors the stroke color of the arcs when hovered as string.
 	 */
 	public void setHoverBorderColor(String... colors) {
-		setArrayValue(Property.hoverBorderColor, ArrayString.of(colors));
+		setArrayValue(Property.hoverBorderColor, ArrayString.fromOrNull(colors));
 		// removes previous configuration to other containers
 		resetBeingColors(Property.hoverBorderColor);
 	}
@@ -505,7 +505,7 @@ abstract class HovingDataset extends Dataset {
 	 */
 	@Override
 	void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
-		setArrayValue(key, ArrayPattern.of(canvasPatternsList));
+		setArrayValue(key, ArrayPattern.from(canvasPatternsList));
 	}
 
 	/*

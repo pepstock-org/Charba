@@ -34,12 +34,10 @@ import jsinterop.annotations.JsType;
 public final class ArrayPlugin extends Array {
 
 	/**
-	 * This method creates new array instance with a variable number of <code>plugin</code> arguments.
-	 * 
-	 * @param items plugin items to create new array
-	 * @return new array instance of plugins.
+	 * To avoid any instantiation
 	 */
-	static native ArrayPlugin of(NativePlugin... items);
+	ArrayPlugin() {
+	}
 
 	/**
 	 * Creates a java script array of plugins starting from list of plugins.
@@ -55,19 +53,13 @@ public final class ArrayPlugin extends Array {
 		if (items == null) {
 			return result;
 		}
+		// scans values
 		for (NativePlugin value : items) {
 			// adds element
 			result.push(value);
 		}
 		// returns the array
 		return result;
-	}
-
-	/**
-	 * To avoid any instantiation outside of this package.
-	 */
-	ArrayPlugin() {
-		// do nothing
 	}
 
 	/**

@@ -406,7 +406,7 @@ public abstract class NativeObjectContainer {
 				setValue(key, values[0]);
 			} else {
 				// if more than 1 element, sets the array
-				setArrayValue(key, ArrayString.of(values));
+				setArrayValue(key, ArrayString.from(values));
 			}
 		} else {
 			// if not consistent, remove the property
@@ -427,14 +427,14 @@ public abstract class NativeObjectContainer {
 		if (ObjectType.String.equals(type(key))) {
 			// if here, is a single value, therefore creates an array
 			// with only 1 element
-			return ArrayString.of(getValue(key, defaultValue));
+			return ArrayString.from(getValue(key, defaultValue));
 		} else if (ObjectType.Array.equals(type(key))) {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
 		}
 		// if here the property doesn't exist
 		// returns default
-		return ArrayString.of(defaultValue);
+		return ArrayString.from(defaultValue);
 	}
 
 	// ------------------------------------------
@@ -803,7 +803,7 @@ public abstract class NativeObjectContainer {
 				setValue(key, values[0]);
 			} else {
 				// if more than 1 element, sets the array
-				setArrayValue(key, ArrayPattern.of(values));
+				setArrayValue(key, ArrayPattern.from(values));
 			}
 		} else {
 			// if not consistent, remove the property
@@ -824,19 +824,13 @@ public abstract class NativeObjectContainer {
 		if (ObjectType.Object.equals(type(key))) {
 			// if here, is a single value, therefore creates an array
 			// with only 1 element
-			return ArrayPattern.of(getValue(key, defaultValue));
+			return ArrayPattern.from(getValue(key, defaultValue));
 		} else if (ObjectType.Array.equals(type(key))) {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
 		}
-		// checks if default is consistent
-		if (defaultValue != null) {
-			// if here the property doesn't exist or has got a wrong type
-			return ArrayPattern.of(defaultValue);
-		} else {
-			// otherwise returns and empty array
-			return new ArrayPattern();
-		}
+		// if here the property doesn't exist or has got a wrong type
+		return ArrayPattern.from(defaultValue);
 	}
 
 	// ------------------------------------------
@@ -907,7 +901,7 @@ public abstract class NativeObjectContainer {
 				setValue(key, values[0]);
 			} else {
 				// if more than 1 element, sets the array
-				setArrayValue(key, ArrayString.of(values));
+				setArrayValue(key, ArrayString.from(values));
 			}
 		} else {
 			// if not consistent, remove the property
@@ -988,7 +982,7 @@ public abstract class NativeObjectContainer {
 				setValue(key, values[0].toRGBA());
 			} else {
 				// if more than 1 element, sets the array
-				setArrayValue(key, ArrayString.of(values));
+				setArrayValue(key, ArrayString.from(values));
 			}
 		} else {
 			// if not consistent, remove the property

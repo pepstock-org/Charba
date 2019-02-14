@@ -563,10 +563,11 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		if (chart != null && event != null) {
 			// gets element
 			ArrayObject result = chart.getElementAtEvent(event);
-			if (result != null && result.length() > 0) {
+			if (result != null && !result.isEmpty()) {
 				return new DatasetItem(result.get(0));
 			}
 		}
+		// if here, inconsistent result
 		return null;
 	}
 

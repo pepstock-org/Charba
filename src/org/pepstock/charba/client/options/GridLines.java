@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -22,7 +24,6 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
-import org.pepstock.charba.client.commons.ArrayStringList;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -119,14 +120,9 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 *            second to the second grid line and so on.
 	 */
 	public void setColor(IsColor... color) {
-		// checks if argument is consistent
-		if (color != null && color.length > 0) {
-			setColor(ArrayString.of(color));
-		} else {
-			// if here, argument is null
-			// then removes property
-			remove(Property.color);
-		}
+		setValueOrArray(Property.color, color);
+		// checks if all parents are attached
+		checkAndAddToParent();
 	}
 
 	/**
@@ -137,33 +133,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 *            second to the second grid line and so on.
 	 */
 	public void setColor(String... color) {
-		// checks if argument is consistent
-		if (color != null && color.length > 0) {
-			setColor(ArrayString.of(color));
-		} else {
-			// if here, argument is null
-			// then removes property
-			remove(Property.color);
-		}
-	}
-
-	/**
-	 * The color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the
-	 * second grid line and so on.
-	 * 
-	 * @param color The color of the grid lines. If specified as an array, the first color applies to the first grid line, the
-	 *            second to the second grid line and so on.
-	 */
-	private void setColor(ArrayString color) {
-		// checks if there is only 1 element
-		if (color.length() == 1) {
-			// if 1 element, sets the value as string
-			// the same for all lines
-			setValue(Property.color, color.get(0));
-		} else {
-			// otherwise uses an array for all lines
-			setArrayValue(Property.color, color);
-		}
+		setValueOrArray(Property.color, color);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -192,20 +162,18 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @return the list of colors of the grid lines.
 	 */
 	public List<String> getColorsAsString() {
-		ArrayStringList result = null;
 		// checks if the stored value is a string
 		if (ObjectType.String.equals(type(Property.color)) || !has(Property.color)) {
-			// creates new list
-			result = new ArrayStringList();
 			// adds the string value
-			result.add(getValue(Property.color, getDefaultValues().getColorAsString()));
+			return Arrays.asList(getValue(Property.color, getDefaultValues().getColorAsString()));
 		} else if (ObjectType.Array.equals(type(Property.color))) {
 			// if array
 			// loads the array
 			ArrayString array = getArrayValue(Property.color);
-			result = ArrayListHelper.list(array);
+			return ArrayListHelper.list(array);
+		} else {
+			return new LinkedList<String>();
 		}
-		return result;
 	}
 
 	/**
@@ -279,7 +247,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 */
 	public int getLineWidth() {
 		ArrayInteger array = getValueOrArray(Property.lineWidth, getDefaultValues().getLineWidth());
-		return array.length() == 0 ? getDefaultValues().getLineWidth() : array.get(0);
+		return array.isEmpty() ? getDefaultValues().getLineWidth() : array.get(0);
 	}
 
 	/**

@@ -595,7 +595,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param labels An array of labels to display.
 	 */
 	public void setLabels(String... labels) {
-		setArrayValue(Property.labels, ArrayString.of(labels));
+		setArrayValue(Property.labels, ArrayString.fromOrNull(labels));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -606,7 +606,9 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param labels A list of labels to display.
 	 */
 	public void setLabels(List<String> labels) {
-		setLabels(labels.toArray(new String[0]));
+		setArrayValue(Property.labels, ArrayString.fromOrNull(labels));
+		// checks if all parents are attached
+		checkAndAddToParent();
 	}
 
 	/**

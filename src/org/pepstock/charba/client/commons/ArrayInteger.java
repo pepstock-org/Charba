@@ -37,12 +37,18 @@ public final class ArrayInteger extends Array {
 	 * @return new array instance of integers.
 	 */
 	private static native ArrayInteger of(int... items);
+	
+	/**
+	 * To avoid any instantiation
+	 */
+	ArrayInteger() {
+	}
 
 	/**
 	 * This method creates new array instance with a variable number of <code>int</code> arguments.
 	 * 
 	 * @param items integer items to create new array
-	 * @return new array instance of integers.
+	 * @return new array instance of integers or <code>null</code> if argument is <code>null</code> or length to 0.
 	 */
 	@JsOverlay
 	public static ArrayInteger fromOrNull(int... items) {
@@ -59,7 +65,7 @@ public final class ArrayInteger extends Array {
 	 * This method creates new array instance with a variable number of <code>int</code> arguments.
 	 * 
 	 * @param items integer items to create new array
-	 * @return new array instance of integers.
+	 * @return new array instance of integers or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
 	public static ArrayInteger from(int... items) {
@@ -76,7 +82,7 @@ public final class ArrayInteger extends Array {
 	 * Creates a java script array of integers starting from list of integers.
 	 * 
 	 * @param items list of integers to load into new java script array.
-	 * @return new array instance of integers.
+	 * @return new array instance of integers or <code>null</code> if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
 	public static ArrayInteger fromOrNull(List<Integer> items) {
@@ -99,7 +105,7 @@ public final class ArrayInteger extends Array {
 	 * Creates a java script array of integers starting from list of integers.
 	 * 
 	 * @param items list of integers to load into new java script array.
-	 * @return new array instance of integers.
+	 * @return new array instance of integers  or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
 	public static ArrayInteger from(List<Integer> items) {

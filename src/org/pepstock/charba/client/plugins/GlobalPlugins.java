@@ -114,7 +114,7 @@ public final class GlobalPlugins {
 		// creates a set of strings
 		final Set<String> pluginsIds = new HashSet<String>();
 		// checks the result from CHART.JS
-		if (existingPlugins != null && existingPlugins.length() > 0) {
+		if (existingPlugins != null && !existingPlugins.isEmpty()) {
 			// scans ids
 			for (int i = 0; i < existingPlugins.length(); i++) {
 				// creates the reference

@@ -41,10 +41,16 @@ public final class ArrayImage extends Array {
 	private static native ArrayImage of(ImageElement... items);
 
 	/**
+	 * To avoid any instantiation
+	 */
+	ArrayImage() {
+	}
+	
+	/**
 	 * This method creates new array instance with a variable number of <code>ImageElement</code> arguments.
 	 * 
 	 * @param items ImageElement items to create new array
-	 * @return new array instance of images.
+	 * @return new array instance of images or <code>null</code> if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
 	public static ArrayImage fromOrNull(ImageElement... items) {
@@ -61,7 +67,7 @@ public final class ArrayImage extends Array {
 	 * This method creates new array instance with a variable number of <code>ImageElement</code> arguments.
 	 * 
 	 * @param items ImageElement items to create new array
-	 * @return new array instance of images.
+	 * @return new array instance of images or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
 	public static ArrayImage from(ImageElement... items) {
@@ -78,7 +84,7 @@ public final class ArrayImage extends Array {
 	 * Creates a java script array of images starting from list of images.
 	 * 
 	 * @param items list of images to load into new java script array.
-	 * @return new array instance of images or <code>null</code> if argument is <code>null</code>
+	 * @return new array instance of images or <code>null</code> if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
 	public static ArrayImage fromOrNull(List<ImageElement> items) {
@@ -101,7 +107,7 @@ public final class ArrayImage extends Array {
 	 * Creates a java script array of images starting from list of images.
 	 * 
 	 * @param items list of images to load into new java script array.
-	 * @return new array instance of images or an empty array if argument is <code>null</code>
+	 * @return new array instance of images or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
 	public static ArrayImage from(List<ImageElement> items) {

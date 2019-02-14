@@ -38,24 +38,87 @@ public final class ArrayPattern extends Array {
 	 * @param items canvasPattern items to create new array
 	 * @return new array instance of images.
 	 */
-	public static native ArrayPattern of(CanvasPattern... items);
+	private static native ArrayPattern of(CanvasPattern... items);
+
+	/**
+	 * To avoid any instantiation
+	 */
+	ArrayPattern() {
+	}
+	
+	/**
+	 * This method creates new array instance with a variable number of <code>CanvasPattern</code> arguments.
+	 * 
+	 * @param items canvasPattern items to create new array
+	 * @return new array instance of images or <code>null</code> if argument is <code>null</code> or length to 0
+	 */
+	@JsOverlay
+	public static ArrayPattern fromOrNull(CanvasPattern... items) {
+		// checks if consistent
+		if (items == null || items.length == 0) {
+			// returns null
+			return null;
+		}
+		// returns array
+		return ArrayPattern.of(items);
+	}
+
+	/**
+	 * This method creates new array instance with a variable number of <code>CanvasPattern</code> arguments.
+	 * 
+	 * @param items canvasPattern items to create new array
+	 * @return new array instance of images or an empty array if argument is <code>null</code> or length to 0
+	 */
+	@JsOverlay
+	public static ArrayPattern from(CanvasPattern... items) {
+		// checks if consistent
+		if (items == null || items.length == 0) {
+			// returns null
+			return new ArrayPattern();
+		}
+		// returns array
+		return ArrayPattern.of(items);
+	}
 
 	/**
 	 * Creates a java script array of images starting from list of images.
 	 * 
-	 * @param values list of images to load into new java script array.
-	 * @return new array instance of images.
+	 * @param items list of images to load into new java script array.
+	 * @return new array instance of images or <code>null</code> if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static ArrayPattern of(List<CanvasPattern> values) {
+	public static ArrayPattern fromOrNull(List<CanvasPattern> items) {
+		// checks if list is null
+		if (items == null || items.isEmpty()) {
+			return null;
+		}
+		// creates the array
+		ArrayPattern result = new ArrayPattern();
+		// scans all items of list
+		for (CanvasPattern value : items) {
+			// adds elements
+			result.push(value);
+		}
+		// returns the array
+		return result;
+	}
+
+	/**
+	 * Creates a java script array of images starting from list of images.
+	 * 
+	 * @param items list of images to load into new java script array.
+	 * @return new array instance of images or an empty array if argument is <code>null</code> or empty
+	 */
+	@JsOverlay
+	public static ArrayPattern from(List<CanvasPattern> items) {
 		// creates the array
 		ArrayPattern result = new ArrayPattern();
 		// checks if list is null
-		if (values == null) {
+		if (items == null || items.isEmpty()) {
 			return result;
 		}
 		// scans all items of list
-		for (CanvasPattern value : values) {
+		for (CanvasPattern value : items) {
 			// adds elements
 			result.push(value);
 		}

@@ -559,7 +559,7 @@ abstract class LiningDataset extends Dataset {
 			// if here, the property is not a string
 			// or the property is missing or a gradient
 			// returns default value
-			return ArrayListHelper.list(ArrayString.of(getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
+			return ArrayListHelper.list(ArrayString.from(getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
 		}
 	}
 
@@ -639,7 +639,7 @@ abstract class LiningDataset extends Dataset {
 			// if here, the property is not a string
 			// or the property is missing or a pattern
 			// returns default value
-			return ArrayListHelper.list(ArrayString.of(getDefaultValues().getElements().getLine().getBorderColorAsString()));
+			return ArrayListHelper.list(ArrayString.from(getDefaultValues().getElements().getLine().getBorderColorAsString()));
 		}
 	}
 
@@ -758,7 +758,7 @@ abstract class LiningDataset extends Dataset {
 			// if here, the property is not a string
 			// or the property is missing or a pattern
 			// returns default value
-			return ArrayListHelper.list(ArrayString.of(getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
+			return ArrayListHelper.list(ArrayString.from(getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
 		}
 	}
 
@@ -839,7 +839,7 @@ abstract class LiningDataset extends Dataset {
 			// if here, the property is not a string
 			// or the property is missing or a pattern
 			// returns default value
-			return ArrayListHelper.list(ArrayString.of(getDefaultValues().getElements().getPoint().getBorderColorAsString()));
+			return ArrayListHelper.list(ArrayString.from(getDefaultValues().getElements().getPoint().getBorderColorAsString()));
 		}
 	}
 

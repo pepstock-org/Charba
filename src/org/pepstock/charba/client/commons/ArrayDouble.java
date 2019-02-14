@@ -39,6 +39,12 @@ public final class ArrayDouble extends Array {
 	private static native ArrayDouble of(double... items);
 
 	/**
+	 * To avoid any instantiation
+	 */
+	ArrayDouble() {
+	}
+
+	/**
 	 * This method creates new array instance with a variable number of <code>double</code> arguments.
 	 * 
 	 * @param items double items to create new array
@@ -59,7 +65,7 @@ public final class ArrayDouble extends Array {
 	 * This method creates new array instance with a variable number of <code>double</code> arguments.
 	 * 
 	 * @param items double items to create new array
-	 * @return new array instance of doubles or an empty array if argument is <code>null</code>
+	 * @return new array instance of doubles or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
 	public static ArrayDouble from(double... items) {
@@ -76,7 +82,7 @@ public final class ArrayDouble extends Array {
 	 * Creates a java script array of doubles starting from list of doubles.
 	 * 
 	 * @param items list of doubles to load into new java script array.
-	 * @return new array instance of doubles or <code>null</code> if argument is <code>null</code>
+	 * @return new array instance of doubles or <code>null</code> if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
 	public static ArrayDouble fromOrNull(List<Double> items) {
@@ -99,7 +105,7 @@ public final class ArrayDouble extends Array {
 	 * Creates a java script array of doubles starting from list of doubles.
 	 * 
 	 * @param items list of doubles to load into new java script array.
-	 * @return new array instance of doubles or an empty array if argument is <code>null</code>
+	 * @return new array instance of doubles or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
 	public static ArrayDouble from(List<Double> items) {

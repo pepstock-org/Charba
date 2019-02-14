@@ -41,10 +41,16 @@ public final class ArrayGradient extends Array {
 	private static native ArrayGradient of(CanvasGradient... items);
 	
 	/**
+	 * To avoid any instantiation
+	 */
+	ArrayGradient() {
+	}
+
+	/**
 	 * This method creates new array instance with a variable number of <code>CanvasGradient</code> arguments.
 	 * 
 	 * @param items canvasPattern items to create new array
-	 * @return new array instance of images or <code>null</code> if argument is <code>null</code>
+	 * @return new array instance of images or <code>null</code> if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
 	public static ArrayGradient fromOrNull(CanvasGradient... items) {
@@ -61,7 +67,7 @@ public final class ArrayGradient extends Array {
 	 * This method creates new array instance with a variable number of <code>CanvasGradient</code> arguments.
 	 * 
 	 * @param items canvasPattern items to create new array
-	 * @return new array instance of images or an empty array if argument is <code>null</code>
+	 * @return new array instance of images or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
 	public static ArrayGradient from(CanvasGradient... items) {
@@ -78,7 +84,7 @@ public final class ArrayGradient extends Array {
 	 * Creates a java script array of images starting from list of images.
 	 * 
 	 * @param items list of images to load into new java script array.
-	 * @return new array instance of images or <code>null</code> if argument is <code>null</code>
+	 * @return new array instance of images or <code>null</code> if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
 	public static ArrayGradient fromOrNull(List<CanvasGradient> items) {
@@ -101,7 +107,7 @@ public final class ArrayGradient extends Array {
 	 * Creates a java script array of images starting from list of images.
 	 * 
 	 * @param items list of images to load into new java script array.
-	 * @return new array instance of images or an empty array if argument is <code>null</code>
+	 * @return new array instance of images or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
 	public static ArrayGradient from(List<CanvasGradient> items) {

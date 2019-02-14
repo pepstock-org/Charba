@@ -221,9 +221,9 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @param data an array of strings
 	 */
 	public void setDataString(String... data) {
-		setArrayValue(Dataset.Property.data, ArrayString.of(data));
-		// sets data type
-		setValue(Dataset.Property._charbaDataType, DataType.strings);
+		setArrayValue(Dataset.Property.data, ArrayString.fromOrNull(data));
+		// sets data type checking if the key exists
+		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.strings : DataType.unknown);
 	}
 
 	/**
@@ -233,9 +233,9 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @param data a list of strings
 	 */
 	public void setDataString(List<String> data) {
-		setArrayValue(Dataset.Property.data, ArrayString.of(data));
-		// sets data type
-		setValue(Dataset.Property._charbaDataType, DataType.strings);
+		setArrayValue(Dataset.Property.data, ArrayString.fromOrNull(data));
+		// sets data type checking if the key exists
+		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.strings : DataType.unknown);
 	}
 
 	/**
