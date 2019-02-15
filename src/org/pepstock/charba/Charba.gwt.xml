@@ -3,7 +3,7 @@
         "http://gwtproject.org/doctype/2.7.0/gwt-module.dtd">
 <module>
 	<inherits name="com.google.gwt.user.User" />
-	
+	<inherits name="com.google.gwt.xml.XML" />
 	<!-- 
 	SOURCE PATH 
 	-->
