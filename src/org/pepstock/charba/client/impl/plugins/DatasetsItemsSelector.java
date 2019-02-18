@@ -40,7 +40,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Andrea "Stock" Stocchero
  */
 public final class DatasetsItemsSelector extends AbstractPlugin {
-
+	
 	/**
 	 * Plugin ID {@value ID}
 	 */
@@ -223,7 +223,6 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 						}
 					}
 				}
-
 				// checks if chart is changed
 				if (handler.isChartChanged()) {
 					// gets the image from canvas
@@ -234,6 +233,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 					img.setPixelSize(chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
 					// stores image
 					handler.setSnapshot(ImageElement.as(img.getElement()));
+					
 				}
 				// if the selections is already present
 				// it refreshes all the calculation of existing selection

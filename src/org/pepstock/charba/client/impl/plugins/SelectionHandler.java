@@ -126,7 +126,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 				return;
 			}
 			// updates the selection into canvas
-			updateSelection(event.getX());
+			updateSelection(event.getX(), false);
 		}
 	}
 
@@ -290,13 +290,17 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 * Can be invokes by mouse move or refresh of chart (like resizing).
 	 * 
 	 * @param x new X coordinate.
+	 * @param refresh if <code>true</code> the chart is refreshing therefore it doesn't clear the canvas
 	 */
-	void updateSelection(int x) {
+	void updateSelection(int x, boolean refresh) {
 		// the snapshot is the image of chart (without any selection).
 		// Every time the selection is updating, it removes the previous
 		// selection putting the original chart (image snapshot) and then
 		// draws new selection
 		if (snapshot != null) {
+			if (!refresh){
+				chart.getCanvas().getContext2d().clearRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
+			}
 			// draws a scaled image setting width and height
 			chart.getCanvas().getContext2d().drawImage(snapshot, 0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
 		}
@@ -437,7 +441,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			if (items.getEnd() == i) {
 				double middle = scaleTickX + scaleTickLength / 2;
 				// this is new end selection point
-				updateSelection((int) middle);
+				updateSelection((int) middle, true);
 			}
 			// increments the starting point of section
 			scaleTickX = scaleTickX + scaleTickLength;
