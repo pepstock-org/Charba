@@ -1,7 +1,7 @@
 Charba - GWT Charts library based on CHART.JS
 ===============================================
 
-Version 2.0
+Version 2.0 
 
 What's Charba
 --------
