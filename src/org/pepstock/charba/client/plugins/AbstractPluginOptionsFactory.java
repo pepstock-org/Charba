@@ -23,7 +23,7 @@ import java.util.Map.Entry;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Charts;
-import org.pepstock.charba.client.DefaultChartsLifecycleListener;
+import org.pepstock.charba.client.AbstractChartsLifecycleListener;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -37,7 +37,7 @@ import org.pepstock.charba.client.enums.PluginOptionsScope;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptions> extends DefaultChartsLifecycleListener implements NativeObjectContainerFactory<T> {
+public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptions> extends AbstractChartsLifecycleListener implements NativeObjectContainerFactory<T> {
 
 	// cache of options in order to return the already existing options
 	// K = options id, V = plugin options

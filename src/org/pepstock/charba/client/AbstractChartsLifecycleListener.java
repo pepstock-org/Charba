@@ -23,7 +23,7 @@ package org.pepstock.charba.client;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class DefaultChartsLifecycleListener implements ChartsLifecycleListener {
+public abstract class AbstractChartsLifecycleListener implements ChartsLifecycleListener {
 
 	/*
 	 * (non-Javadoc)
