@@ -44,7 +44,7 @@ public final class ArrayObject extends Array {
 	 */
 	ArrayObject() {
 	}
-	
+
 	/**
 	 * Creates a java script array of objects starting from a native object containers and the array will have ONE 1 element.
 	 * 
@@ -82,7 +82,7 @@ public final class ArrayObject extends Array {
 		// returns the array
 		return result;
 	}
-	
+
 	/**
 	 * Creates a java script array of objects starting from an array of native object containers.
 	 * 
@@ -154,7 +154,7 @@ public final class ArrayObject extends Array {
 		// returns the array
 		return result;
 	}
-	
+
 	/**
 	 * Creates a java script array of objects starting from a list of native object containers.
 	 * 

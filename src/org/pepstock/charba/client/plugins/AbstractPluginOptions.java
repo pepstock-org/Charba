@@ -54,7 +54,8 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates new plugin options with its factory, plugin ID and a flag to know if it must register the options to the cache or if it will be postponed.<br>
+	 * Creates new plugin options with its factory, plugin ID and a flag to know if it must register the options to the cache or
+	 * if it will be postponed.<br>
 	 * The deferred registration is needed to implement options builder in order do not register options not used.
 	 * 
 	 * @param pluginId plugin ID

@@ -39,12 +39,12 @@ public interface Extensions extends ClientBundle {
 	 */
 	// FIXME wiat for approval of pull request to LABELS plugin
 	@Source("js/chartjs-plugin-labels.min.js")
-//	@Source("js/chartjs-plugin-labels.js")
+	// @Source("js/chartjs-plugin-labels.js")
 	TextResource labelsPlugin();
 
 	/**
-	 * Contains text representation of native chart <a href="https://github.com/chartjs/chartjs-plugin-datalabelss">datalabels plugin</a>
-	 * code.
+	 * Contains text representation of native chart <a href="https://github.com/chartjs/chartjs-plugin-datalabelss">datalabels
+	 * plugin</a> code.
 	 * 
 	 * @return chart <a href="https://github.com/chartjs/chartjs-plugin-datalabelss">datalabels plugin</a> code
 	 */

@@ -47,7 +47,7 @@ public final class DataLabelsOptionsFactory extends AbstractPluginOptionsFactory
 		// checks if consistent and the right class
 		if (options instanceof DataLabelsOptions) {
 			// cast and returns it
-			return (DataLabelsOptions)options;
+			return (DataLabelsOptions) options;
 		}
 		// creates the options by the native object and the defaults
 		// and ignores the native object passed into method

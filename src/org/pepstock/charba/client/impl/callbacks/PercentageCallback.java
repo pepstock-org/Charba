@@ -122,7 +122,7 @@ public final class PercentageCallback implements FormatterCallback {
 		double percentage = Percentage.compute(chart, value, context, stacked);
 		// checks if consistent
 		if (Double.isNaN(percentage)) {
-			// if not, returns NaN as string 
+			// if not, returns NaN as string
 			return NAN_AS_STRING;
 		}
 		// applies the number format to the percentage

@@ -45,7 +45,7 @@ public final class ArrayImage extends Array {
 	 */
 	ArrayImage() {
 	}
-	
+
 	/**
 	 * This method creates new array instance with a variable number of <code>ImageElement</code> arguments.
 	 * 
@@ -79,7 +79,7 @@ public final class ArrayImage extends Array {
 		// returns array
 		return ArrayImage.of(items);
 	}
-	
+
 	/**
 	 * Creates a java script array of images starting from list of images.
 	 * 

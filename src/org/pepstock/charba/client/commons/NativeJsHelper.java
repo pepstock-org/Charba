@@ -36,7 +36,7 @@ final class NativeJsHelper {
 	NativeJsHelper() {
 		// do nothing
 	}
-	
+
 	/**
 	 * Returns the java script object type of object.
 	 * 

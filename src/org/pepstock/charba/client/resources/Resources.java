@@ -32,9 +32,8 @@ public interface Resources extends ClientBundle {
 	public static final Resources INSTANCE = GWT.create(Resources.class);
 
 	/**
-	 * Contains text representation of native chart.js code.
-	 * FIXME downloaded NOT ufficial version to solve the issue about POINTS and GRADIENTS color
-	 * FIXME https://www.chartjs.org/docs/latest/developers/
+	 * Contains text representation of native chart.js code. FIXME downloaded NOT ufficial version to solve the issue about
+	 * POINTS and GRADIENTS color FIXME https://www.chartjs.org/docs/latest/developers/
 	 * 
 	 * @return chart.js code
 	 */

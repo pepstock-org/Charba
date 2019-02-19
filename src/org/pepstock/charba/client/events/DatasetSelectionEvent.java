@@ -71,8 +71,10 @@ public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionE
 	public DatasetItem getItem() {
 		return item;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.events.AbstractEvent#getChart()
 	 */
 	@Override

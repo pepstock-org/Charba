@@ -34,7 +34,7 @@ import com.google.gwt.user.client.ui.Image;
  */
 public final class LabelsOptionsBuilder {
 	// creates the options with deferred registration
-	// because it will be register only when the build method 
+	// because it will be register only when the build method
 	// will be invoked
 	private final LabelsOptions options = new LabelsOptions(true);
 

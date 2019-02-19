@@ -39,7 +39,7 @@ public final class ArrayGradient extends Array {
 	 * @return new array instance of images.
 	 */
 	private static native ArrayGradient of(CanvasGradient... items);
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -102,7 +102,7 @@ public final class ArrayGradient extends Array {
 		// returns the array
 		return result;
 	}
-	
+
 	/**
 	 * Creates a java script array of images starting from list of images.
 	 * 

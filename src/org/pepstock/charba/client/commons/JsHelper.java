@@ -47,7 +47,7 @@ public final class JsHelper {
 	public static JsHelper get() {
 		return INSTANCE;
 	}
-	
+
 	/**
 	 * Returns the java script object type of object.
 	 * 

@@ -87,5 +87,5 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 		}
 		return true;
 	}
-	
+
 }

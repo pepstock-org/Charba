@@ -77,7 +77,7 @@ public final class ArrayDouble extends Array {
 		// returns array
 		return ArrayDouble.of(items);
 	}
-	
+
 	/**
 	 * Creates a java script array of doubles starting from list of doubles.
 	 * 

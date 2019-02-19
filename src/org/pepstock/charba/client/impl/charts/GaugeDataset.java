@@ -111,8 +111,6 @@ public final class GaugeDataset extends MeterDataset {
 		// checks colors to use for dataset
 		checkAndSetColor();
 	}
-	
-	
 
 	/**
 	 * Returns the current threshold.

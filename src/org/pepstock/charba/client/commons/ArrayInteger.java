@@ -37,7 +37,7 @@ public final class ArrayInteger extends Array {
 	 * @return new array instance of integers.
 	 */
 	private static native ArrayInteger of(int... items);
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -105,7 +105,7 @@ public final class ArrayInteger extends Array {
 	 * Creates a java script array of integers starting from list of integers.
 	 * 
 	 * @param items list of integers to load into new java script array.
-	 * @return new array instance of integers  or an empty array if argument is <code>null</code> or empty
+	 * @return new array instance of integers or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
 	public static ArrayInteger from(List<Integer> items) {

@@ -39,7 +39,7 @@ public final class ArrayString extends Array {
 	 * @return new array instance of strings.
 	 */
 	private static native ArrayString of(String... items);
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -79,7 +79,7 @@ public final class ArrayString extends Array {
 		// returns array
 		return ArrayString.of(items);
 	}
-	
+
 	/**
 	 * Creates a java script array of strings starting from list of strings.
 	 * 
@@ -123,7 +123,7 @@ public final class ArrayString extends Array {
 		// returns the array
 		return result;
 	}
-	
+
 	/**
 	 * Creates a java script array of strings starting from array of colors.
 	 * 
@@ -169,7 +169,7 @@ public final class ArrayString extends Array {
 		// returns the array
 		return result;
 	}
-	
+
 	/**
 	 * Creates a java script array of strings starting from array of keys.
 	 * 

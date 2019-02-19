@@ -28,10 +28,10 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL)
 public final class JSON {
-	
+
 	/**
-	 * A function that alters the behavior of the stringification process. If this
-	 * value is null or not provided, all properties of the object are included in the resulting JSON string.<br>
+	 * A function that alters the behavior of the stringification process. If this value is null or not provided, all properties
+	 * of the object are included in the resulting JSON string.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero

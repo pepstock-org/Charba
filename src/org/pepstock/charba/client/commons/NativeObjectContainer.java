@@ -73,7 +73,7 @@ public abstract class NativeObjectContainer {
 	public final String toJSON() {
 		return JSON.stringify(nativeObject, 3);
 	}
-	
+
 	/**
 	 * Returns true if the embedded JavaScript object contains an element at specific property.
 	 * 
@@ -162,7 +162,7 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		}
 	}
-	
+
 	// ------------------------------------------
 	// --- INTEGERS
 	// ------------------------------------------
@@ -194,7 +194,7 @@ public abstract class NativeObjectContainer {
 		// returns value
 		return descriptor == null ? defaultValue : descriptor.getValue();
 	}
-	
+
 	/**
 	 * Sets a value (Array or integer) into embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a integer.
@@ -218,7 +218,7 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		}
 	}
-	
+
 	/**
 	 * Returns a value (array) into embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a integer.
@@ -272,7 +272,7 @@ public abstract class NativeObjectContainer {
 		// returns value
 		return descriptor == null ? defaultValue : descriptor.getValue();
 	}
-	
+
 	/**
 	 * Sets a value (Array or double) into embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a double.
@@ -555,7 +555,7 @@ public abstract class NativeObjectContainer {
 			nativeObject.defineArrayProperty(key.name(), container.getArray());
 		}
 	}
-	
+
 	// ------------------------------------------
 	// --- CALLBACKS
 	// ------------------------------------------
@@ -576,7 +576,7 @@ public abstract class NativeObjectContainer {
 			nativeObject.defineCallbackProperty(key.name(), value);
 		}
 	}
-	
+
 	// ------------------------------------------
 	// --- IMAGES
 	// ------------------------------------------
@@ -640,7 +640,7 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		}
 	}
-	
+
 	/**
 	 * Returns a value (array) into embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a image.
@@ -702,7 +702,7 @@ public abstract class NativeObjectContainer {
 			nativeObject.defineGradientProperty(key.name(), value);
 		}
 	}
-	
+
 	/**
 	 * Sets a value (Array or gradient) into embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a gradient.
@@ -726,7 +726,7 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		}
 	}
-	
+
 	/**
 	 * Returns a value (array) into embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a gradient.
@@ -748,6 +748,7 @@ public abstract class NativeObjectContainer {
 		// returns default array
 		return ArrayGradient.from(defaultValue);
 	}
+
 	// ------------------------------------------
 	// --- PATTERNS
 	// ------------------------------------------
@@ -885,7 +886,7 @@ public abstract class NativeObjectContainer {
 			nativeObject.defineStringProperty(key.name(), value.name());
 		}
 	}
-	
+
 	/**
 	 * Sets a value (Array or string by keys) into embedded JavaScript object at specific property.<br>
 	 * This must be used when a java script property can contain an array or a string.

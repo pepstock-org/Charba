@@ -45,7 +45,7 @@ public final class ArrayPattern extends Array {
 	 */
 	ArrayPattern() {
 	}
-	
+
 	/**
 	 * This method creates new array instance with a variable number of <code>CanvasPattern</code> arguments.
 	 * 

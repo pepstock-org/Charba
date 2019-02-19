@@ -254,7 +254,7 @@ public final class ChartNode {
 	public int getOffsetY() {
 		return initialized ? check(chart.getOffsetY(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
 	}
-	
+
 	/**
 	 * Returns the string JSON representation of the object.
 	 * 
@@ -265,8 +265,10 @@ public final class ChartNode {
 		final Set<Object> objects = new HashSet<>();
 		// invokes JSON stringfy setting replacer to avoid cycle type error
 		return JSON.stringifyWithReplacer(chart, new Replacer() {
-			
-			/* (non-Javadoc)
+
+			/*
+			 * (non-Javadoc)
+			 * 
 			 * @see org.pepstock.charba.client.utils.JSON.Replacer#call(java.lang.String, java.lang.Object)
 			 */
 			@Override
@@ -281,7 +283,7 @@ public final class ChartNode {
 					}
 					// gets the type of object
 					ObjectType type = JsHelper.get().typeOf(value);
-					// if function 
+					// if function
 					if (ObjectType.Function.equals(type)) {
 						// returns the value of function
 						return value + "";
@@ -291,11 +293,11 @@ public final class ChartNode {
 						// checks if is an element
 						if (value instanceof Element) {
 							// casts to element
-							Element element = (Element)value;
+							Element element = (Element) value;
 							// checks if is an element node
 							if (element.getNodeType() == Node.ELEMENT_NODE) {
 								// returns html
-								return "<"+element.getNodeName().toLowerCase(Locale.getDefault())+">";
+								return "<" + element.getNodeName().toLowerCase(Locale.getDefault()) + ">";
 							}
 						}
 						// checks if the object has been already parsed

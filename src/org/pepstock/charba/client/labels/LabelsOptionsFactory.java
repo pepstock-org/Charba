@@ -49,7 +49,7 @@ public final class LabelsOptionsFactory extends AbstractPluginOptionsFactory<Lab
 		// checks if consistent and the right class
 		if (options instanceof LabelsOptions) {
 			// cast and returns it
-			return (LabelsOptions)options;
+			return (LabelsOptions) options;
 		}
 		// creates the options by the native object and the defaults
 		// and ignores the native object passed into method
