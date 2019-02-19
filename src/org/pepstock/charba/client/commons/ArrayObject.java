@@ -58,12 +58,8 @@ public final class ArrayObject extends Array {
 		if (item == null) {
 			return null;
 		}
-		// creates the array
-		ArrayObject result = new ArrayObject();
-		// adds element
-		result.push(item.getNativeObject());
 		// returns the array
-		return result;
+		return ArrayObject.of(item.getNativeObject());
 	}
 
 	/**

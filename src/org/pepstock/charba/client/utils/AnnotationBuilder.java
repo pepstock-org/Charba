@@ -157,7 +157,7 @@ public final class AnnotationBuilder {
 		// replaces the height into the template
 		result = result.replaceAll(HEIGHT_ARGUMENT_TOKEN, String.valueOf(height));
 		// creates the image with URL
-		Image image = new Image(validatedhtmlXmlContent);
+		Image image = new Image(result);
 		// transforms it into an element
 		ImageElement element = ImageElement.as(image.getElement());
 		// stores into cache
