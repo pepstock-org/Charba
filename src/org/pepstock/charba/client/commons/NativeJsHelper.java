@@ -36,6 +36,14 @@ final class NativeJsHelper {
 	NativeJsHelper() {
 		// do nothing
 	}
+	
+	/**
+	 * Returns the java script object type of object.
+	 * 
+	 * @param object the object to get type.
+	 * @return the object type
+	 */
+	static native String typeOf(Object object);
 
 	/**
 	 * Returns the java script object type of a property.

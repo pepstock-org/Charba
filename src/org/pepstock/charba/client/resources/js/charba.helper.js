@@ -20,6 +20,15 @@
 	*/
     function JsHelper() {};
     /*
+	 Returns the java script object type of the object.
+	  
+	 @param object the object to get type.
+	 @return the object type
+    */
+    JsHelper.typeOf = function(obj) {
+    	return typeof obj;
+    }
+   /*
 	 Removes a property from a java script object.
 	 
 	 @param object the object on which to remove the property.

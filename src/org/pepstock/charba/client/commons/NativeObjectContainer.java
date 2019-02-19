@@ -73,6 +73,7 @@ public abstract class NativeObjectContainer {
 	public final String toJSON() {
 		return JSON.stringify(nativeObject, 3);
 	}
+	
 	/**
 	 * Returns true if the embedded JavaScript object contains an element at specific property.
 	 * 

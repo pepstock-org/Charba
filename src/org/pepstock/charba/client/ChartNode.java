@@ -15,6 +15,10 @@
 */
 package org.pepstock.charba.client;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.LegendNode;
@@ -23,6 +27,10 @@ import org.pepstock.charba.client.items.ScalesNode;
 import org.pepstock.charba.client.items.TitleNode;
 import org.pepstock.charba.client.items.TooltipNode;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.utils.JSON;
+import org.pepstock.charba.client.utils.JSON.Replacer;
+
+import com.google.gwt.dom.client.Node;
 
 /**
  * This is a wrapper of CHART.JS CHART instance in order to provide all properties of chart java script instance, set at
@@ -31,6 +39,9 @@ import org.pepstock.charba.client.items.UndefinedValues;
  * @author Andrea "Stock" Stocchero
  */
 public final class ChartNode {
+
+	// used into JSON stringfy replacer when the object is already passed
+	private static final String CYCLE_PROPERTY_VALUE = "";
 
 	// all sub elements
 	private final Chart chart;
@@ -236,6 +247,42 @@ public final class ChartNode {
 	 */
 	public int getOffsetY() {
 		return initialized ? check(chart.getOffsetY(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
+	}
+	
+	/**
+	 * Returns the string JSON representation of the object.
+	 * 
+	 * @return the string JSON representation of the object.
+	 */
+	public final String toJSON() {
+		final Set<Object> objects = new HashSet<>();
+		return JSON.stringifyWithReplacer(chart, new Replacer() {
+			
+			@Override
+			public Object call(String key, Object value) {
+				if (key != null && key.trim().length() > 0) {
+					ObjectType type = JsHelper.get().typeOf(value);
+					if (ObjectType.Function.equals(type)) {
+						return value + "";
+					}
+					if (ObjectType.Object.equals(type)) {
+						if (value instanceof Node) {
+							Node node = (Node)value;
+							if (node.getNodeType() == Node.ELEMENT_NODE) {
+								return "<" + node.getNodeName().toLowerCase() +">";
+							}
+						}
+						if (objects.contains(value)) {
+							return CYCLE_PROPERTY_VALUE;
+						}
+						objects.add(value);
+					}
+				} else {
+					objects.add(value);
+				}
+				return value;
+			}
+		}, 3);
 	}
 
 	/**

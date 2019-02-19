@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.utils;
 
+import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -27,6 +28,26 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL)
 public final class JSON {
+
+	/**
+	 * A function that alters the behavior of the stringification process. If this
+	 * value is null or not provided, all properties of the object are included in the resulting JSON string.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	public interface Replacer {
+
+		/**
+		 * Method of function to alter the behavior of the stringification process.
+		 * 
+		 * @param key property key of object.
+		 * @param value object related to the key.
+		 * @return the value to show into string.
+		 */
+		Object call(String key, Object value);
+	}
 
 	/**
 	 * Converts a JavaScript object or value to a JSON string, optionally replacing values if a replacer function is specified
@@ -42,7 +63,7 @@ public final class JSON {
 	 *            greater, the value is just 10). Values less than 1 indicate that no space should be used.
 	 * @return A JSON string representing the given value.
 	 */
-	static native String stringify(Object obj, Object function, int spaces);
+	static native String stringify(Object obj, Replacer function, int spaces);
 
 	/**
 	 * Converts a JavaScript object or value to a JSON string. By default, the space value is set to -1 that no space should be
@@ -69,4 +90,17 @@ public final class JSON {
 		return stringify(obj, null, spaces);
 	}
 
+	/**
+	 * Converts a JavaScript object or value to a JSON string.
+	 * 
+	 * @param obj The value to convert to a JSON string.
+	 * @param replacer A function that alters the behavior of the stringification process.
+	 * @param spaces it indicates the number of space characters to use as white space; this number is capped at 10 (if it is
+	 *            greater, the value is just 10). Values less than 1 indicate that no space should be used.
+	 * @return A JSON string representing the given value.
+	 */
+	@JsOverlay
+	public static String stringifyWithReplacer(Object obj, Replacer replacer, int spaces) {
+		return stringify(obj, replacer, spaces);
+	}
 }

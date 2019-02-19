@@ -47,6 +47,17 @@ public final class JsHelper {
 	public static JsHelper get() {
 		return INSTANCE;
 	}
+	
+	/**
+	 * Returns the java script object type of object.
+	 * 
+	 * @param object the object to get type.
+	 * @return the object type
+	 */
+	public final ObjectType typeOf(Object object) {
+		// gets the object type by javascript type and checking if is an array
+		return ObjectType.getType(NativeJsHelper.typeOf(object), Array.isArray(object));
+	}
 
 	/**
 	 * Returns the java script object type of a property.
