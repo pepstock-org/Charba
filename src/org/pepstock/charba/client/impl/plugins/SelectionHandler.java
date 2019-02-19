@@ -298,7 +298,11 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// selection putting the original chart (image snapshot) and then
 		// draws new selection
 		if (snapshot != null) {
+			// checks if is doing a refresh
+			// in case of refresh, it doesn't clear the canvas
 			if (!refresh){
+				// clears the canvas because the chart could have a transparent background color therefore
+				// before to apply the image/snapshot, must clear the canvas (related to issue #26)
 				chart.getCanvas().getContext2d().clearRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
 			}
 			// draws a scaled image setting width and height
