@@ -31,6 +31,7 @@ import com.google.gwt.xml.client.XMLParser;
  * The HTML content MUST be XML well-formed, when passed as string.<br>
  * This is the SVG XML tree, used:<br>
  * <br>
+ * 
  * <pre>
  * &lt;svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}"&gt;
  *    &lt;foreignObject width="100%" height="100%"&gt;
@@ -45,20 +46,20 @@ import com.google.gwt.xml.client.XMLParser;
  *
  */
 public final class AnnotationBuilder {
-	
+
 	// cache of the image created
-	// K = svg string (with width and height), V = image element
+	// K = svg string argument (with width and height), V = image element
 	private static final Map<String, ImageElement> IMAGES = new HashMap<>();
 	// template of data image URL to create the image from HTML content
-	private static final String TEMPLATE_IMAGE_URL = "data:image/svg+xml;charset=utf-8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"{1}\" height=\"{2}\">"+ 
-			"<foreignObject width=\"100%\" height=\"100%\"><div xmlns=\"http://www.w3.org/1999/xhtml\">{0}</div></foreignObject></svg>";	
+	private static final String TEMPLATE_IMAGE_URL = "data:image/svg+xml;charset=utf-8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"{1}\" height=\"{2}\">"
+			+ "<foreignObject width=\"100%\" height=\"100%\"><div xmlns=\"http://www.w3.org/1999/xhtml\">{0}</div></foreignObject></svg>";
 	// token inside the template to use to replace the HTML XML content
 	private static final String CONTENT_ARGUMENT_TOKEN = "\\{0\\}";
 	// token inside the template to use to replace the width of resulted image
 	private static final String WIDTH_ARGUMENT_TOKEN = "\\{1\\}";
 	// token inside the template to use to replace the height of resulted image
 	private static final String HEIGHT_ARGUMENT_TOKEN = "\\{2\\}";
-	
+
 	/**
 	 * To avoid any instantiation
 	 */
@@ -67,7 +68,8 @@ public final class AnnotationBuilder {
 	}
 
 	/**
-	 * Creates an image to apply to canvas with the HTML content (passed as GWT element) and width and height of the resulted image.
+	 * Creates an image to apply to canvas with the HTML content (passed as GWT element) and width and height of the resulted
+	 * image.
 	 * 
 	 * @param htmlXmlContent GWT element which represents the XML content to show
 	 * @param width width of image to be created
@@ -79,31 +81,64 @@ public final class AnnotationBuilder {
 		// this element don't need for further computation
 		DivElement wrapper = Document.get().createDivElement();
 		// wraps the XML content
-     	wrapper.appendChild(htmlXmlContent);
-     	// builds the image and returns it
-		return buildWithValidatedContent(wrapper.getInnerHTML(), width, height);
+		wrapper.appendChild(htmlXmlContent);
+		// creates key
+		String key = getKey(wrapper.getInnerHTML(), width, height);
+		// the result is a key of images created
+		// if already built
+		if (IMAGES.containsKey(key)) {
+			// returns the existing one
+			return IMAGES.get(key);
+		}
+		// builds the image and returns it
+		return buildWithValidatedContent(key, wrapper.getInnerHTML(), width, height);
 	}
 
 	/**
-	 * Creates an image to apply to canvas with the HTML content (MUST BE XML well-formed) and width and height of the resulted image.
+	 * Creates an image to apply to canvas with the HTML content (MUST BE XML well-formed) and width and height of the resulted
+	 * image.
 	 * 
-	 * @param htmlXmlContent HTML content to apply on canvas, in XML well-formed
+	 * @param htmlXmlContent HTML content to apply on canvas, must be XML well-formed
 	 * @param width width of image to be created
 	 * @param height height of image to be created
 	 * @return an image to apply to canvas
 	 */
 	public static ImageElement build(String htmlXmlContent, double width, double height) {
+		// creates key
+		String key = getKey(htmlXmlContent, width, height);
+		// the result is a key of images created
+		// if already built
+		if (IMAGES.containsKey(key)) {
+			// returns the existing one
+			return IMAGES.get(key);
+		}
+		// if here, new annotation
+		// checks if valid using XML parser
 		try {
 			// parse the XML document checking if correct
 			XMLParser.parse(htmlXmlContent);
 			// returns it
-			return buildWithValidatedContent(htmlXmlContent, width, height);
+			return buildWithValidatedContent(key, htmlXmlContent, width, height);
 		} catch (Exception e) {
 			// the content is not XML well-formed
 			throw new IllegalArgumentException(e);
 		}
 	}
-	
+
+	/**
+	 * Creates a key to store the image in the cache. The key is created using teh html passed as argument, appending width and
+	 * height of image.
+	 * 
+	 * @param htmlXmlContent HTML content to apply on canvas
+	 * @param width width of image to be created
+	 * @param height height of image to be created
+	 * @return key to store the image as string
+	 */
+	private static String getKey(String htmlXmlContent, double width, double height) {
+		StringBuilder builder = new StringBuilder(htmlXmlContent);
+		return builder.append(width).append(height).toString();
+	}
+
 	/**
 	 * Creates the images to be returned, managing the cache of them.
 	 * 
@@ -112,7 +147,7 @@ public final class AnnotationBuilder {
 	 * @param height height of image to be created
 	 * @return an image to apply to canvas
 	 */
-	private static ImageElement buildWithValidatedContent(String validatedhtmlXmlContent, double width, double height) {
+	private static ImageElement buildWithValidatedContent(String key, String validatedhtmlXmlContent, double width, double height) {
 		// copies the template string
 		String result = TEMPLATE_IMAGE_URL;
 		// replaces the html content into the template
@@ -121,18 +156,12 @@ public final class AnnotationBuilder {
 		result = result.replaceAll(WIDTH_ARGUMENT_TOKEN, String.valueOf(width));
 		// replaces the height into the template
 		result = result.replaceAll(HEIGHT_ARGUMENT_TOKEN, String.valueOf(height));
-		// the result is a key of images created
-		// if already built
-		if (IMAGES.containsKey(validatedhtmlXmlContent)) {
-			// returns the existing one
-			return IMAGES.get(validatedhtmlXmlContent);
-		}
 		// creates the image with URL
 		Image image = new Image(validatedhtmlXmlContent);
 		// transforms it into an element
 		ImageElement element = ImageElement.as(image.getElement());
 		// stores into cache
-		IMAGES.put(validatedhtmlXmlContent, element);
+		IMAGES.put(key, element);
 		// returns it
 		return element;
 	}
