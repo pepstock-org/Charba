@@ -29,9 +29,27 @@ public interface Console {
 	/**
 	 * Outputs a message to the Web Console.
 	 *
-	 * @param objects A list of JavaScript objects to output. The string representations of each of these objects are appended
+	 * @param objects a list of JavaScript objects to output. The string representations of each of these objects are appended
 	 *            together in the order listed and output.
 	 */
 	void log(Object... objects);
 
+	/**
+	 * Displays an interactive list of the properties of the specified JavaScript object. The output is presented as a
+	 * hierarchical listing with disclosure triangles that let you see the contents of child objects. In other words, it is the
+	 * way to see all the properties of a specified JavaScript object in console by which the developer can easily get the
+	 * properties of the object.
+	 *
+	 * @param object a JavaScript object whose properties should be output.
+	 */
+	void dir(Object object);
+
+	/**
+	 * Displays an interactive tree of the descendant elements of the specified XML/HTML element. If it is not possible to
+	 * display as an element the JavaScript Object view is shown instead. The output is presented as a hierarchical listing of
+	 * expandable nodes that let you see the contents of child nodes.
+	 *
+	 * @param object a JavaScript object whose properties should be output.
+	 */
+	void dirxml(Object object);
 }
