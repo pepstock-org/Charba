@@ -15,6 +15,17 @@
 */
 package org.pepstock.charba.client.utils;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+
+import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.ObjectType;
+
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Node;
+
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
@@ -88,6 +99,98 @@ public final class JSON {
 	@JsOverlay
 	public static String stringify(Object obj, int spaces) {
 		return stringify(obj, null, spaces);
+	}
+
+	/**
+	 * Converts a JavaScript object or value to a JSON string.
+	 * 
+	 * @param obj The value to convert to a JSON string.
+	 * @param replacer A function that alters the behavior of the stringification process.
+	 * @param spaces it indicates the number of space characters to use as white space; this number is capped at 10 (if it is
+	 *            greater, the value is just 10). Values less than 1 indicate that no space should be used.
+	 * @return A JSON string representing the given value.
+	 */
+	@JsOverlay
+	public static String stringifyWithReplacer(Object obj) {
+		return stringifyWithReplacer(obj, -1);
+	}
+
+	/**
+	 * Converts a JavaScript object or value to a JSON string.
+	 * 
+	 * @param obj The value to convert to a JSON string.
+	 * @param replacer A function that alters the behavior of the stringification process.
+	 * @param spaces it indicates the number of space characters to use as white space; this number is capped at 10 (if it is
+	 *            greater, the value is just 10). Values less than 1 indicate that no space should be used.
+	 * @return A JSON string representing the given value.
+	 */
+	@JsOverlay
+	public static String stringifyWithReplacer(Object obj, int spaces) {
+		// creates a cached to checks if an object was already parsed
+		final Set<Object> objects = new HashSet<>();
+		// invokes JSON stringfy setting replacer to avoid cycle type error
+		return stringifyWithReplacer(obj, new Replacer() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.utils.JSON.Replacer#call(java.lang.String, java.lang.Object)
+			 */
+			@Override
+			public Object call(String key, Object value) {
+				// if key is null of empty
+				// means that is first object then skip
+				if (key != null && key.trim().length() > 0) {
+					// checks if hashcode
+					if (key.equalsIgnoreCase(JSONReplacerConstants.HASHCODE_PROPERTY_KEY)) {
+						// adds suffix
+						return JsHelper.get().undefined();
+					}
+					// gets the type of object
+					ObjectType type = JsHelper.get().typeOf(value);
+					// if function
+					if (ObjectType.Function.equals(type)) {
+						// returns the value of function
+						return value + "";
+					}
+					// if object
+					if (ObjectType.Object.equals(type)) {
+						// checks if is an element
+						if (value instanceof Element) {
+							// casts to element
+							Element element = (Element) value;
+							// checks if is an element node
+							if (element.getNodeType() == Node.ELEMENT_NODE) {
+								StringBuilder sb = new StringBuilder();
+								sb.append("<").append(element.getNodeName().toLowerCase(Locale.getDefault()));
+								List<String> attributes = JsHelper.get().elementAttributes(element);
+								if (!attributes.isEmpty()) {
+									for (String attribute : attributes) {
+										sb.append(" ").append(attribute);
+									}
+								}
+								// returns html
+								return sb.append(">").toString();
+							}
+						}
+						// checks if the object has been already parsed
+						if (objects.contains(value)) {
+							// sets the static vale
+							// to avoid cycle
+							return JSONReplacerConstants.CYCLE_PROPERTY_VALUE;
+						}
+						// adds object to cache
+						objects.add(value);
+					}
+				} else {
+					// here is the first object
+					// adds to set to further controls
+					objects.add(value);
+				}
+				// returns object
+				return value;
+			}
+		}, spaces);
 	}
 
 	/**

@@ -15,9 +15,12 @@
 */
 package org.pepstock.charba.client.commons;
 
+import java.util.List;
+
 import org.pepstock.charba.client.Injector;
 
 import com.google.gwt.canvas.dom.client.Context2d;
+import com.google.gwt.dom.client.Element;
 
 /**
  * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
@@ -46,6 +49,26 @@ public final class JsHelper {
 	 */
 	public static JsHelper get() {
 		return INSTANCE;
+	}
+
+	/**
+	 * Returns an undefined reference
+	 * 
+	 * @return undefined reference
+	 */
+	public final Object undefined() {
+		return NativeJsHelper.undefined();
+	}
+
+	/**
+	 * Returns a list of strings with element attributes.
+	 * 
+	 * @param element DOM element to scan
+	 * @return a list of strings with element attributes
+	 */
+	public final List<String> elementAttributes(Element element) {
+		ArrayString array = NativeJsHelper.elementAttributes(element);
+		return ArrayListHelper.unmodifiableList(array);
 	}
 
 	/**

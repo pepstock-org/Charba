@@ -71,7 +71,7 @@ public abstract class NativeObjectContainer {
 	 * @return the string JSON representation of the object.
 	 */
 	public final String toJSON() {
-		return JSON.stringify(nativeObject, 3);
+		return JSON.stringifyWithReplacer(nativeObject, 3);
 	}
 
 	/**

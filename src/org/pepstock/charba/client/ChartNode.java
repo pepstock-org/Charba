@@ -15,11 +15,6 @@
 */
 package org.pepstock.charba.client;
 
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
-
-import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.LegendNode;
@@ -29,10 +24,6 @@ import org.pepstock.charba.client.items.TitleNode;
 import org.pepstock.charba.client.items.TooltipNode;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.utils.JSON;
-import org.pepstock.charba.client.utils.JSON.Replacer;
-
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Node;
 
 /**
  * This is a wrapper of CHART.JS CHART instance in order to provide all properties of chart java script instance, set at
@@ -41,13 +32,6 @@ import com.google.gwt.dom.client.Node;
  * @author Andrea "Stock" Stocchero
  */
 public final class ChartNode {
-
-	// used into JSON stringfy replacer when the object is already passed
-	private static final String CYCLE_PROPERTY_VALUE = "";
-	// used into JSON stringfy replacer when the key of object is the hashcode
-	private static final String HASHCODE_PROPERTY_KEY = "$H";
-	// used into JSON stringfy replacer when the key of object is the hashcode
-	private static final String HASHCODE_SUFFIX_PROPERTY_VALUE = " (hashcode)";
 
 	// all sub elements
 	private final Chart chart;
@@ -261,63 +245,7 @@ public final class ChartNode {
 	 * @return the string JSON representation of the object.
 	 */
 	public final String toJSON() {
-		// creates a cached to checks if an object was already parsed
-		final Set<Object> objects = new HashSet<>();
-		// invokes JSON stringfy setting replacer to avoid cycle type error
-		return JSON.stringifyWithReplacer(chart, new Replacer() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.utils.JSON.Replacer#call(java.lang.String, java.lang.Object)
-			 */
-			@Override
-			public Object call(String key, Object value) {
-				// if key is null of empty
-				// means that is first object then skip
-				if (key != null && key.trim().length() > 0) {
-					// checks if hashcode
-					if (key.equalsIgnoreCase(HASHCODE_PROPERTY_KEY)) {
-						// adds suffix
-						return value + HASHCODE_SUFFIX_PROPERTY_VALUE;
-					}
-					// gets the type of object
-					ObjectType type = JsHelper.get().typeOf(value);
-					// if function
-					if (ObjectType.Function.equals(type)) {
-						// returns the value of function
-						return value + "";
-					}
-					// if object
-					if (ObjectType.Object.equals(type)) {
-						// checks if is an element
-						if (value instanceof Element) {
-							// casts to element
-							Element element = (Element) value;
-							// checks if is an element node
-							if (element.getNodeType() == Node.ELEMENT_NODE) {
-								// returns html
-								return "<" + element.getNodeName().toLowerCase(Locale.getDefault()) + ">";
-							}
-						}
-						// checks if the object has been already parsed
-						if (objects.contains(value)) {
-							// sets the static vale
-							// to avoid cycle
-							return CYCLE_PROPERTY_VALUE;
-						}
-						// adds object to cache
-						objects.add(value);
-					}
-				} else {
-					// here is the first object
-					// adds to set to further controls
-					objects.add(value);
-				}
-				// returns object
-				return value;
-			}
-		}, 3);
+		return JSON.stringifyWithReplacer(chart, 3);
 	}
 
 	/**

@@ -29,6 +29,13 @@
     	return typeof obj;
     }
    /*
+	 Returns an undefined.
+	 @return undefined
+    */
+    JsHelper.undefined = function(obj) {
+    	return undefined;
+    }
+   /*
 	 Removes a property from a java script object.
 	 
 	 @param object the object on which to remove the property.
@@ -87,6 +94,23 @@
     JsHelper.propertyAsInt = function(obj, key) {
     	return obj[key];
     }    
+   /*
+	 Returns an array of strings with element attributes.
+	  
+	 @param element DOM element to scan
+	 @return an array of strings with element attributes
+    */
+    JsHelper.elementAttributes = function(element) {
+    	var result = new Array();
+    	// First, let's verify that the paragraph has some attributes    
+     	if (element.hasAttributes()) {
+           var attrs = element.attributes;
+	       for(var i = 0; i < attrs.length; i++) {
+	          result[i] = attrs[i].name + "='" + attrs[i].value +"'";
+	       }
+	    }
+    	return result;
+    }  
     /*
 	 Sets the line dash pattern used when stroking lines. It uses an array of values that specify alternating lengths of lines
 	 and gaps which describe the pattern.

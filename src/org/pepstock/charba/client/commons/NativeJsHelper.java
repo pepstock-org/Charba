@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.commons;
 
 import com.google.gwt.canvas.dom.client.Context2d;
+import com.google.gwt.dom.client.Element;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -36,6 +37,13 @@ final class NativeJsHelper {
 	NativeJsHelper() {
 		// do nothing
 	}
+
+	/**
+	 * Returns an undefined reference
+	 * 
+	 * @return undefined reference
+	 */
+	static native Object undefined();
 
 	/**
 	 * Returns the java script object type of object.
@@ -114,5 +122,13 @@ final class NativeJsHelper {
 	 * @param object array of values that specify alternating lengths of lines and gaps which describe the pattern
 	 */
 	static native void setLineDash(Context2d context, ArrayInteger object);
+
+	/**
+	 * Returns an array of strings with element attributes.
+	 * 
+	 * @param element DOM element to scan
+	 * @return an array of strings with element attributes
+	 */
+	static native ArrayString elementAttributes(Element element);
 
 }
