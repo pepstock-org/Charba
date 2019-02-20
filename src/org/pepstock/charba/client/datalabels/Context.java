@@ -114,9 +114,9 @@ public final class Context extends NativeExtendedObject {
 	}
 
 	/**
-	 * Returns the dataset index of the data inside the dataset.
+	 * Returns whether the associated element is hovered.
 	 * 
-	 * @return the dataset index of the data inside the dataset. Default is true.
+	 * @return whether the associated element is hovered. Default is true.
 	 */
 	@JsOverlay
 	public boolean isActive() {
