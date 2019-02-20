@@ -30,12 +30,11 @@ import jsinterop.annotations.JsType;
 /**
  * The option context is used to give contextual information when resolving options. It mainly applies to scriptable options but
  * also to some function options such as formatter.<br>
+ * It can also be updated adding additional properties.<br>
  * The context object contains the following properties:<br>
  * <ul>
  * <li><b>active</b> (boolean): whether the associated element is hovered
- * <li><b>chart</b> (Chart): the associated chart
- * <li><b>dataIndex</b>(int): index of the associated data
- * <li><b>dataset</b>(object): the dataset at index datasetIndex
+ * <li><b>index</b>(int): index of the associated data
  * <li><b>datasetIndex</b>(int): index of the associated dataset
  * </ul>
  * 
