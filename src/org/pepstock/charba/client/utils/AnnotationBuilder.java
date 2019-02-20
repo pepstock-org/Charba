@@ -43,7 +43,6 @@ import com.google.gwt.xml.client.XMLParser;
  * &lt;/svg&gt;
  * </pre>
  * 
- * <br/>
  * Drawing the image on canvas, you could get the java script error <code>NS_ERROR_NOT_AVAILABLE</code> which means that if even
  * the content is well-formed, it contains some invalid characters, not allowed into xHTML.
  * 

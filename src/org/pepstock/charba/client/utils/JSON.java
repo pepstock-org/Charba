@@ -102,12 +102,10 @@ public final class JSON {
 	}
 
 	/**
-	 * Converts a JavaScript object or value to a JSON string.
+	 * Converts a JavaScript object or value to a JSON string, the space value is set to -1 that no space should be used and
+	 * uses a default replacer to avoid <code>TypeError: cyclic object value</code>.
 	 * 
 	 * @param obj The value to convert to a JSON string.
-	 * @param replacer A function that alters the behavior of the stringification process.
-	 * @param spaces it indicates the number of space characters to use as white space; this number is capped at 10 (if it is
-	 *            greater, the value is just 10). Values less than 1 indicate that no space should be used.
 	 * @return A JSON string representing the given value.
 	 */
 	@JsOverlay
@@ -116,10 +114,10 @@ public final class JSON {
 	}
 
 	/**
-	 * Converts a JavaScript object or value to a JSON string.
+	 * Converts a JavaScript object or value to a JSON string, using a default replacer to avoid
+	 * <code>TypeError: cyclic object value</code>.
 	 * 
 	 * @param obj The value to convert to a JSON string.
-	 * @param replacer A function that alters the behavior of the stringification process.
 	 * @param spaces it indicates the number of space characters to use as white space; this number is capped at 10 (if it is
 	 *            greater, the value is just 10). Values less than 1 indicate that no space should be used.
 	 * @return A JSON string representing the given value.
