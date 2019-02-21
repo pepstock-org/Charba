@@ -48,4 +48,12 @@ public interface HasDataPoints {
 	 */
 	List<DataPoint> getDataPoints();
 
+	/**
+	 * Returns the data property of a dataset for a chart is specified as an array of data points
+	 * 
+	 * @param binding if <code>true</code> binds the new array list into container
+	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#points}.
+	 */
+	List<DataPoint> getDataPoints(boolean binding);
+
 }

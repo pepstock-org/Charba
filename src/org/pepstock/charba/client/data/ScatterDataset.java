@@ -109,4 +109,15 @@ public final class ScatterDataset extends LineDataset {
 	public List<Double> getData() {
 		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getData(boolean)
+	 */
+	@Override
+	public List<Double> getData(boolean binding) {
+		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
+	}
+
 }

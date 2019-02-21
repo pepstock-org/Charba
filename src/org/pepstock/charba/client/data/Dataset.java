@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.data;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -27,7 +26,10 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.ArrayDouble;
+import org.pepstock.charba.client.commons.ArrayDoubleList;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
@@ -371,15 +373,65 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#numbers}.
 	 */
 	public List<Double> getData() {
+		return getData(false);
+	}
+
+	/**
+	 * Returns the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array
+	 * corresponds to the label at the same index on the x axis.
+	 * 
+	 * @param binding if <code>true</code> binds the new array list into container
+	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#numbers}.
+	 */
+	public List<Double> getData(boolean binding) {
 		// checks if is a numbers data type
-		if (DataType.numbers.equals(getDataType())) {
+		if (has(Property.data) && DataType.numbers.equals(getDataType())) {
 			// returns numbers
 			ArrayDouble array = getArrayValue(Property.data);
+			// returns array
 			return ArrayListHelper.list(array);
-		} else {
-			// otherwise an empty list
-			return new ArrayList<Double>();
 		}
+		// checks if wants to bind the array
+		if (binding) {
+			ArrayDoubleList result = new ArrayDoubleList();
+			// set value
+			setArrayValue(Property.data, ArrayDouble.from(result));
+			// sets data type
+			setValue(Property._charbaDataType, DataType.numbers);
+			// returns list
+			return result;
+		}
+		// returns an empty list
+		return new LinkedList<>();
+	}
+
+	/**
+	 * Returns the data property of a dataset for a chart is specified as an array of data points
+	 * 
+	 * @param factory datapoint object factory
+	 * @param binding if <code>true</code> binds the new array list into container
+	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#points}.
+	 */
+	final List<DataPoint> getDataPoints(DataPointListFactory factory, boolean binding) {
+		// checks if is a numbers data type
+		if (has(Dataset.Property.data) && DataType.points.equals(getDataType())) {
+			// gets array
+			ArrayObject array = getArrayValue(Dataset.Property.data);
+			// returns points
+			return ArrayListHelper.list(array, factory);
+		}
+		// checks if wants to bind the array
+		if (binding) {
+			ArrayObjectContainerList<DataPoint> result = new ArrayObjectContainerList<>();
+			// set value
+			setArrayValue(Dataset.Property.data, ArrayObject.from(result));
+			// sets data type
+			setValue(Dataset.Property._charbaDataType, DataType.points);
+			// returns list
+			return result;
+		}
+		// returns an empty list
+		return new LinkedList<>();
 	}
 
 	/**

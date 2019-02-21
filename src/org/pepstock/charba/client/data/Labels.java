@@ -28,7 +28,7 @@ import org.pepstock.charba.client.commons.ObjectType;
  */
 public final class Labels {
 
-	private static final char SEPARATOR = '\n';
+	private static final String SEPARATOR = "\n";
 
 	private final ArrayMixedObject array;
 
@@ -80,7 +80,7 @@ public final class Labels {
 				// checks is not null
 				if (value != null) {
 					// pushes to JS array
-					array.push(value);
+					add(value);
 				}
 			}
 		}
@@ -94,8 +94,15 @@ public final class Labels {
 	public void add(String value) {
 		// if consistent
 		if (value != null) {
-			// pushes to JS array
-			array.push(value);
+			// checks if contains separator
+			if (value.contains(SEPARATOR)) {
+				// splits the string by separator
+				// and adds to object as array
+				array.push(ArrayString.from(value.split(SEPARATOR)));
+			} else {
+				// pushes to JS array
+				array.push(value);
+			}
 		}
 	}
 
@@ -107,9 +114,21 @@ public final class Labels {
 	public void add(String... values) {
 		// checks if is a valid array
 		if (values != null && values.length > 0) {
-			// creates new JS array
+			// creates new JS array and push it
 			array.push(ArrayString.from(values));
 		}
+	}
+
+	/**
+	 * Removes an item of labels by index
+	 * 
+	 * @param index index of label
+	 */
+	public void remove(int index) {
+		// checks range
+		checkRange(index);
+		// creates new JS array
+		array.remove(index);
 	}
 
 	/**

@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayDouble;
@@ -196,15 +195,18 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 */
 	@Override
 	public List<DataPoint> getDataPoints() {
-		// checks if is a points data type
-		if (DataType.points.equals(getDataType())) {
-			// returns points
-			ArrayObject array = getArrayValue(Dataset.Property.data);
-			return ArrayListHelper.list(array, factory);
-		} else {
-			// otherwise an empty list
-			return new ArrayList<DataPoint>();
-		}
+		return getDataPoints(false);
+	}
+
+	/**
+	 * Returns the data property of a dataset for a chart is specified as an array of data points
+	 * 
+	 * @param binding if <code>true</code> binds the new array list into container
+	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#points}.
+	 */
+	@Override
+	public List<DataPoint> getDataPoints(boolean binding) {
+		return getDataPoints(factory, binding);
 	}
 
 	/*
@@ -236,4 +238,15 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	public List<Double> getData() {
 		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getData(boolean)
+	 */
+	@Override
+	public List<Double> getData(boolean binding) {
+		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
+	}
+
 }
