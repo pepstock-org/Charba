@@ -63,7 +63,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, Arr
 	 * 
 	 * @param clazz enumeration class with all values of an enumeration
 	 */
-	ArrayEnumList(Class<E> clazz) {
+	public ArrayEnumList(Class<E> clazz) {
 		this(clazz.getEnumConstants(), null);
 	}
 

@@ -90,10 +90,10 @@ public final class ArrayInteger extends Array {
 		if (items == null || items.isEmpty()) {
 			return null;
 		}
-		// checks if is already a list with array 
+		// checks if is already a list with array
 		if (items instanceof ArrayIntegerList) {
 			// casts to array list
-			ArrayIntegerList list = (ArrayIntegerList)items;
+			ArrayIntegerList list = (ArrayIntegerList) items;
 			// returns array
 			return list.getArray();
 		}
@@ -116,10 +116,10 @@ public final class ArrayInteger extends Array {
 	 */
 	@JsOverlay
 	public static ArrayInteger from(List<Integer> items) {
-		// checks if is already a list with array 
+		// checks if is already a list with array
 		if (items instanceof ArrayIntegerList) {
 			// casts to array list
-			ArrayIntegerList list = (ArrayIntegerList)items;
+			ArrayIntegerList list = (ArrayIntegerList) items;
 			// returns array
 			return list.getArray();
 		}

@@ -144,10 +144,10 @@ public final class ArrayObject extends Array {
 		if (items == null || items.isEmpty()) {
 			return null;
 		}
-		// checks if is already a list with array 
+		// checks if is already a list with array
 		if (items instanceof ArrayObjectContainerList<?>) {
 			// casts to array list
-			ArrayObjectContainerList<?> list = (ArrayObjectContainerList<?>)items;
+			ArrayObjectContainerList<?> list = (ArrayObjectContainerList<?>) items;
 			// returns array
 			return list.getArray();
 		}
@@ -171,10 +171,10 @@ public final class ArrayObject extends Array {
 	 */
 	@JsOverlay
 	public static <E extends NativeObjectContainer> ArrayObject from(List<E> items) {
-		// checks if is already a list with array 
+		// checks if is already a list with array
 		if (items instanceof ArrayObjectContainerList<?>) {
 			// casts to array list
-			ArrayObjectContainerList<?> list = (ArrayObjectContainerList<?>)items;
+			ArrayObjectContainerList<?> list = (ArrayObjectContainerList<?>) items;
 			// returns array
 			return list.getArray();
 		}

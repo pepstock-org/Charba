@@ -92,6 +92,13 @@ public final class ArrayImage extends Array {
 		if (items == null || items.isEmpty()) {
 			return null;
 		}
+		// checks if is already a list with array
+		if (items instanceof ArrayImageList) {
+			// casts to array list
+			ArrayImageList list = (ArrayImageList) items;
+			// returns array
+			return list.getArray();
+		}
 		// creates the array
 		ArrayImage result = new ArrayImage();
 		// scans all items of list
@@ -111,6 +118,13 @@ public final class ArrayImage extends Array {
 	 */
 	@JsOverlay
 	public static ArrayImage from(List<ImageElement> items) {
+		// checks if is already a list with array
+		if (items instanceof ArrayImageList) {
+			// casts to array list
+			ArrayImageList list = (ArrayImageList) items;
+			// returns array
+			return list.getArray();
+		}
 		// creates the array
 		ArrayImage result = new ArrayImage();
 		// checks if list is null
