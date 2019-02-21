@@ -36,6 +36,8 @@ public final class DataPoint extends NativeObjectContainer {
 	private static final double DEFAULT_Y = Double.NaN;
 	// default value for R
 	private static final double DEFAULT_R = Double.NaN;
+	// reference of date to improve performance
+	private Date time = null;
 
 	/**
 	 * Name of properties of native object.
@@ -126,6 +128,7 @@ public final class DataPoint extends NativeObjectContainer {
 	 */
 	public void setT(Date t) {
 		setValue(Property.t, t);
+		time = t;
 	}
 
 	/**
@@ -134,7 +137,7 @@ public final class DataPoint extends NativeObjectContainer {
 	 * @return T value. <code>null</code> is not set.
 	 */
 	public Date getT() {
-		return getValue(Property.t, (Date) null);
+		return time;
 	}
 
 	/**
