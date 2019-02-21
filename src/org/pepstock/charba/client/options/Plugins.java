@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
@@ -206,7 +206,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 			return ArrayListHelper.list(array, factory);
 		} else {
 			// if here returns an empty list
-			return new ArrayList<T>();
+			return new LinkedList<T>();
 		}
 	}
 
