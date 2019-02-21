@@ -92,6 +92,13 @@ public final class ArrayString extends Array {
 		if (items == null || items.isEmpty()) {
 			return null;
 		}
+		// checks if is already a list with array 
+		if (items instanceof ArrayStringList) {
+			// casts to array list
+			ArrayStringList list = (ArrayStringList)items;
+			// returns array
+			return list.getArray();
+		}
 		// creates the array
 		ArrayString result = new ArrayString();
 		for (String value : items) {
@@ -110,6 +117,13 @@ public final class ArrayString extends Array {
 	 */
 	@JsOverlay
 	public static ArrayString from(List<String> items) {
+		// checks if is already a list with array 
+		if (items instanceof ArrayStringList) {
+			// casts to array list
+			ArrayStringList list = (ArrayStringList)items;
+			// returns array
+			return list.getArray();
+		}
 		// creates the array
 		ArrayString result = new ArrayString();
 		// checks if list is null

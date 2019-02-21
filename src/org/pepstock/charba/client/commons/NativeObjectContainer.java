@@ -927,6 +927,7 @@ public abstract class NativeObjectContainer {
 	// ------------------------------------------
 	// --- ARRAYS
 	// ------------------------------------------
+	
 	/**
 	 * Returns a value (array) into embedded JavaScript object at specific property.
 	 * 

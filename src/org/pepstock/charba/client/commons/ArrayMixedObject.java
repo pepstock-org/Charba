@@ -132,7 +132,7 @@ public final class ArrayMixedObject extends Array {
 	 * @return the element previously at the specified position
 	 */
 	@JsOverlay
-	Object remove(int index) {
+	public Object remove(int index) {
 		return splice(index, 1).get(0);
 	}
 

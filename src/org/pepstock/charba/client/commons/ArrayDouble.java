@@ -90,6 +90,13 @@ public final class ArrayDouble extends Array {
 		if (items == null || items.isEmpty()) {
 			return null;
 		}
+		// checks if is already a list with array 
+		if (items instanceof ArrayDoubleList) {
+			// casts to array list
+			ArrayDoubleList list = (ArrayDoubleList)items;
+			// returns array
+			return list.getArray();
+		}
 		// creates the list
 		ArrayDouble result = new ArrayDouble();
 		// scans all items of list
@@ -109,6 +116,13 @@ public final class ArrayDouble extends Array {
 	 */
 	@JsOverlay
 	public static ArrayDouble from(List<Double> items) {
+		// checks if is already a list with array 
+		if (items instanceof ArrayDoubleList) {
+			// casts to array list
+			ArrayDoubleList list = (ArrayDoubleList)items;
+			// returns array
+			return list.getArray();
+		}
 		// creates the list
 		ArrayDouble result = new ArrayDouble();
 		// checks if list is null
