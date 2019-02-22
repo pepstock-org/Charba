@@ -110,6 +110,9 @@ public final class AnnotationBuilder {
 			}
 			// stores innerHTML
 			innerHtml = wrapper.getInnerHTML();
+			// removes all children to have a clean situation
+			// for the element passed as argument
+			wrapper.removeAllChildren();
 			// caches the elements and html
 			ELEMENTS.put(htmlXmlContent, innerHtml);
 		}
