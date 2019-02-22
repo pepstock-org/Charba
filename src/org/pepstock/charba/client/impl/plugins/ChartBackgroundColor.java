@@ -189,6 +189,8 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		ChartBackgroundColorOptions bgOptions = getOptions(chart);
 		// gets the canvas
 		Context2d ctx = chart.getCanvas().getContext2d();
+		// save context
+		ctx.save();
 		if (ChartBackgroundColorOptions.ColorType.color.equals(bgOptions.getColorType())) {
 			// set fill canvas color
 			ctx.setFillStyle(bgOptions.getBackgroundColorAsString());
@@ -205,6 +207,8 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		}
 		// fills back ground
 		ctx.fillRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
+		// restore context
+		ctx.restore();
 		// always TRUE
 		return true;
 	}

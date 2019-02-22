@@ -25,6 +25,7 @@ import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.ScaleItem;
 
+import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.NativeEvent;
@@ -293,6 +294,10 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 * @param refresh if <code>true</code> the chart is refreshing therefore it doesn't clear the canvas
 	 */
 	void updateSelection(int x, boolean refresh) {
+		// gets context
+		Context2d ctx = chart.getCanvas().getContext2d();
+		// save context
+		ctx.save();
 		// the snapshot is the image of chart (without any selection).
 		// Every time the selection is updating, it removes the previous
 		// selection putting the original chart (image snapshot) and then
@@ -303,10 +308,10 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			if (!refresh) {
 				// clears the canvas because the chart could have a transparent background color therefore
 				// before to apply the image/snapshot, must clear the canvas (related to issue #26)
-				chart.getCanvas().getContext2d().clearRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
+				ctx.clearRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
 			}
 			// draws a scaled image setting width and height
-			chart.getCanvas().getContext2d().drawImage(snapshot, 0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
+			ctx.drawImage(snapshot, 0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
 		}
 		// gets chart AREA
 		ChartNode node = chart.getNode();
@@ -360,20 +365,22 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			scaleTickX = scaleTickX + scaleTickLength;
 		}
 		// sets the selecting color into canvas
-		chart.getCanvas().getContext2d().setFillStyle(options.getColorAsString());
+		ctx.setFillStyle(options.getColorAsString());
 		// draws the rectangle of area selection
-		chart.getCanvas().getContext2d().fillRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
+		ctx.fillRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
 		// borders
 		if (options.getBorderWidth() > 0) {
-			chart.getCanvas().getContext2d().setLineWidth(options.getBorderWidth());
+			ctx.setLineWidth(options.getBorderWidth());
 			List<Integer> borderDash = options.getBorderDash();
 			// sets the selecting color into canvas
-			chart.getCanvas().getContext2d().setStrokeStyle(options.getBorderColorAsString());
+			ctx.setStrokeStyle(options.getBorderColorAsString());
 			if (!borderDash.isEmpty()) {
-				JsHelper.get().setLineDash(chart.getCanvas().getContext2d(), options.getBorderDashAsJavaScriptObject());
+				JsHelper.get().setLineDash(ctx, options.getBorderDashAsJavaScriptObject());
 			}
-			chart.getCanvas().getContext2d().strokeRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
+			ctx.strokeRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
 		}
+		// restore context
+		ctx.restore();
 	}
 
 	/**

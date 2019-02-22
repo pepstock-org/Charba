@@ -22,7 +22,7 @@ import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
 import com.google.gwt.dom.client.Style.Cursor;
 
 /**
- * DATA LABELS event callbacks to change the cursor type when the labels are clickable.
+ * DATA LABELS event callback to change the cursor type when the labels are clickable.
  * 
  * @author Andrea "Stock" Stocchero
  *
