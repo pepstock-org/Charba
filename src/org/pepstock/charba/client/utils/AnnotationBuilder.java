@@ -86,7 +86,7 @@ public final class AnnotationBuilder {
 	public static ImageElement build(Element htmlXmlContent, double width, double height) {
 		// inner html reference
 		final String innerHtml;
-		
+
 		// checks if cached
 		if (ELEMENTS.containsKey(htmlXmlContent)) {
 			// gets the key
@@ -99,7 +99,7 @@ public final class AnnotationBuilder {
 			// because adding to div element
 			// the element will loose the parent and removed from UI
 			if (htmlXmlContent.hasParentElement()) {
-				Element clonedElement = (Element)htmlXmlContent.cloneNode(true);
+				Element clonedElement = (Element) htmlXmlContent.cloneNode(true);
 				// wraps the XML content
 				// adding the element
 				wrapper.appendChild(clonedElement);
@@ -122,7 +122,7 @@ public final class AnnotationBuilder {
 			return IMAGES.get(key);
 		}
 		// builds the image and returns it
-		return buildWithValidatedContent(key,innerHtml, width, height);
+		return buildWithValidatedContent(key, innerHtml, width, height);
 	}
 
 	/**
