@@ -26,7 +26,9 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
 
 /**
  * Callback interface of DATALABELS plugin to set <code>backgroundColor</code> property at runtime, using the chart instance and
- * the plugin context.
+ * the plugin context.<br>
+ * <b>PAY ATTENTION</b> that with the current release of DATALABELS plugin, the GRADIENT coordinates are relative the the label
+ * coordinates (local), not relative to the canvas coordinates (global), therefore NOT USE GRADIENT Charba object, waiting for DATALABELS enhancement. 
  * 
  * @author Andrea "Stock" Stocchero
  *
