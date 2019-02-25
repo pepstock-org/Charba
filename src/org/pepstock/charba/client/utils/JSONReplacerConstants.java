@@ -27,7 +27,11 @@ final class JSONReplacerConstants {
 	static final String CYCLE_PROPERTY_VALUE = "";
 	// used into JSON stringfy replacer when the key of object is the hashcode
 	static final String HASHCODE_PROPERTY_KEY = "$H";
-
+	// used into JSON stringfy replacer when the key of object is CHART.JS internal
+	static final String INTERNAL_PROPERTY_KEY_PREFIX = "_";
+	// used into JSON stringfy replacer when the key of object is Chara internal
+	static final String CHARBA_PROPERTY_KEY_PREFIX = "_charba";
+	
 	/**
 	 * To avoid any instantiation.
 	 */

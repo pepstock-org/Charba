@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.data;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.AbstractChart;
@@ -277,20 +276,20 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	}
 
 	/**
-	 * Returns a list of string for each datasets, in JSON format.
+	 * Returns a string representation for all datasets, in JSON format.
 	 * 
-	 * @return a list of string for each datasets, in JSON format
+	 * @return a string representation for all datasets, in JSON format.
 	 */
-	public List<String> getDatasetsAsString() {
-		// creates the result
-		List<String> result = new LinkedList<>();
+	String getDatasetsAsString() {
+		// creates the builder
+		StringBuilder sb = new StringBuilder();
 		// scans all datasets
 		for (Dataset ds : currentDatasets) {
-			// adds to list the data in JSON string format
-			result.add(ds.getDataAsString());
+			// adds to builder the data in JSON string format
+			sb.append(ds.toFilteredJSON()).append("\n");
 		}
-		// returns list
-		return result;
+		// returns string of builder
+		return sb.toString();
 	}
 
 	/*

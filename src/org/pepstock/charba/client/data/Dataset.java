@@ -505,12 +505,12 @@ public abstract class Dataset extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the data property in JSON format.
+	 * Returns the JSON representation of dataset. This is used y canvas object handler to know if the dataset has been changed.
 	 * 
-	 * @return the data property in JSON format.
+	 * @return JSON representation of dataset
 	 */
-	final String getDataAsString() {
-		return JSON.stringify(getArrayValue(Property.data));
+	String toFilteredJSON() {
+		return JSON.stringifyNativeObject(getNativeObject(), -1);
 	}
 
 }

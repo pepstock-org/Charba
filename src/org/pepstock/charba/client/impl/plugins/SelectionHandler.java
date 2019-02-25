@@ -71,8 +71,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	private HandlerRegistration mouseMove = null;
 	// previous chart area
 	private String previousChartAreaAsString = null;
-	// previous datasets
-	private List<String> previousDatasetsAsString = null;
+	// previous data URL chart as png
+	private String previousDataURL = null;
 	// flag if do not send any event after refresh
 	private boolean skipNextFireEvent = false;
 
@@ -468,51 +468,35 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 * It checks:<br>
 	 * <ul>
 	 * <li>the dimension of chart
-	 * <li>the number of datasets
-	 * <li>the data of each dataset
+	 * <li>data image of chart
 	 * </ul>
 	 * 
-	 * @param chart chart instance
+	 * @param dataUrl data image for chart
 	 * @return <code>true</code> if chart is changed, otherwise <code>false</code>.
 	 */
-	boolean isChartChanged() {
+	boolean isChartChanged(String dataUrl) {
 		// gets the chart area in json format
 		String chartAreaAsString = chart.getNode().getChartArea().toString();
-		// gets the list of datasets data as list of JSON string
-		List<String> datasetsAsString = chart.getData().getDatasetsAsString();
-		// if the fields are null, this is the first call and draw of chart
-		// because chart is changed
-		if (previousDatasetsAsString == null && previousChartAreaAsString == null) {
-			// saves the current datasets and dimensions of chart
-			previousDatasetsAsString = datasetsAsString;
+		// checks if previous values are null (first round)
+		if (previousDataURL == null && previousChartAreaAsString == null) {
+			// saves the current data image and dimensions of chart
+			previousDataURL = dataUrl;
 			previousChartAreaAsString = chartAreaAsString;
 			return true;
 		}
 		// checks if dimension of chart is changed
 		if (!chartAreaAsString.equalsIgnoreCase(previousChartAreaAsString)) {
-			// saves the current datasets and dimensions of chart
-			previousDatasetsAsString = datasetsAsString;
+			// saves the current data image and dimensions of chart
+			previousDataURL = dataUrl;
 			previousChartAreaAsString = chartAreaAsString;
 			return true;
 		}
-		// checks if the amount of datasets remained the same
-		if (previousDatasetsAsString.size() != datasetsAsString.size()) {
-			// saves the current datasets and dimensions of chart
-			previousDatasetsAsString = datasetsAsString;
+		// checks if data image of chart is changed
+		if (!dataUrl.equalsIgnoreCase(previousDataURL)) {
+			// saves the current data image and dimensions of chart
+			previousDataURL = dataUrl;
 			previousChartAreaAsString = chartAreaAsString;
 			return true;
-		}
-		// checks if all data of all datasets remained the same
-		for (int i = 0; i < previousDatasetsAsString.size(); i++) {
-			// gets the datasets data as string
-			String datasetAsString = previousDatasetsAsString.get(i);
-			// checks if changed
-			if (!datasetAsString.equalsIgnoreCase(datasetsAsString.get(i))) {
-				// saves the current datasets and dimensions of chart
-				previousDatasetsAsString = datasetsAsString;
-				previousChartAreaAsString = chartAreaAsString;
-				return true;
-			}
 		}
 		// if here the chart is NOT changed
 		return false;

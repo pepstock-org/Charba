@@ -34,8 +34,8 @@ final class CanvasObjectHandler extends AbstractPlugin {
 
 	// plugin ID
 	static final String ID = "canvasobjecthandler";
-	// maintains the dataset count
-	private int datasetCount = Integer.MIN_VALUE;
+	// maintains the data object of chart status
+	private String dataToJson = null;
 
 	/**
 	 * To avoid any instantiation
@@ -62,10 +62,14 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	 */
 	@Override
 	public boolean onBeforeDatasetsDraw(AbstractChart<?, ?> chart, double easing) {
+		// gets data
+		Data data = chart.getData();
+		// gets data json
+		String currentDataToJson = data.getDatasetsAsString();
 		// gets list of datasets
-		List<Dataset> datasets = chart.getData().getDatasets();
+		List<Dataset> datasets = data.getDatasets();
 		// checks if the amount of datasets is changed
-		if (datasetCount != datasets.size()) {
+		if (dataToJson == null || !dataToJson.equalsIgnoreCase(currentDataToJson)) {
 			// flags to know if the gradients must be reset
 			boolean mustBeReset = false;
 			// scans datasets
@@ -88,8 +92,8 @@ final class CanvasObjectHandler extends AbstractPlugin {
 				CanvasObjectFactory.resetGradients(chart);
 			}
 		}
-		// stores the amount of datasets
-		datasetCount = datasets.size();
+		// stores the data chart JSON representation
+		dataToJson = currentDataToJson;
 		// flags to know if the chart must be updated because some patterns or
 		// gradients are recreated.
 		boolean updated = false;

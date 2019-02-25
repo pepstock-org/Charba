@@ -223,17 +223,17 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 						}
 					}
 				}
+				// gets the image from canvas
+				String dataUrl = chart.getCanvas().toDataUrl();
 				// checks if chart is changed
-				if (handler.isChartChanged()) {
-					// gets the image from canvas
+				if (handler.isChartChanged(dataUrl)) {
 					// this is necessary to apply every time the handler
 					// will draw directly into canvas
-					Image img = new Image(chart.getCanvas().toDataUrl());
+					Image img = new Image(dataUrl);
 					// fix dimension
 					img.setPixelSize(chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
 					// stores image
 					handler.setSnapshot(ImageElement.as(img.getElement()));
-
 				}
 				// if the selections is already present
 				// it refreshes all the calculation of existing selection

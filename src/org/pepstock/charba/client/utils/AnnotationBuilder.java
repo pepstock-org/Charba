@@ -86,7 +86,6 @@ public final class AnnotationBuilder {
 	public static ImageElement build(Element htmlXmlContent, double width, double height) {
 		// inner html reference
 		final String innerHtml;
-
 		// checks if cached
 		if (ELEMENTS.containsKey(htmlXmlContent)) {
 			// gets the key
