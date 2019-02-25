@@ -22,6 +22,7 @@ import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ImageElement;
+import com.google.gwt.dom.client.Node;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.xml.client.XMLParser;
 
@@ -98,10 +99,19 @@ public final class AnnotationBuilder {
 			// because adding to div element
 			// the element will loose the parent and removed from UI
 			if (htmlXmlContent.hasParentElement()) {
-				Element clonedElement = (Element) htmlXmlContent.cloneNode(true);
-				// wraps the XML content
-				// adding the element
-				wrapper.appendChild(clonedElement);
+				// clones node
+				Node clonedNode = htmlXmlContent.cloneNode(true);
+				// checks if is an element
+				if (clonedNode instanceof Element) {
+					// casts to element
+					Element clonedElement = (Element) clonedNode;
+					// wraps the XML content
+					// adding the element
+					wrapper.appendChild(clonedElement);
+				} else {
+					// if here, the clone node is not a element
+					throw new IllegalArgumentException("Element as argument is not cloneale. Class: " + clonedNode.getClass().getName());
+				}
 			} else {
 				// wraps the XML content
 				// adding the element
