@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.colors;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.GradientColor.GradientColorFactory;
@@ -42,6 +43,20 @@ public final class Gradient extends CanvasObject {
 	private final ArrayObjectContainerList<GradientColor> colors;
 	// factory to creates color by native object
 	private final GradientColorFactory factory = new GradientColorFactory();
+	// internal comparator to sort colors y own offset
+	private static final Comparator<GradientColor> COMPARATOR = new Comparator<GradientColor>() {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+		 */
+		@Override
+		public int compare(GradientColor o1, GradientColor o2) {
+			return Double.compare(o1.getOffset(), o2.getOffset());
+		}
+
+	};
 
 	/**
 	 * Name of properties of native object. ALL INTERNAL USE ONLY
@@ -125,51 +140,192 @@ public final class Gradient extends CanvasObject {
 	 * @param nativeObject native java script object wrapped by gradient.
 	 */
 	Gradient(NativeObject nativeObject) {
+		// creates the object with native one
 		super(nativeObject);
+		// gets array of color
 		ArrayObject array = getArrayValue(Property._charbaGradientColors);
+		// if null
 		if (array == null) {
+			// creates an empty list
 			colors = new ArrayObjectContainerList<GradientColor>();
 		} else {
+			// otherwise creates a list using the native object
 			colors = ArrayListHelper.list(array, factory);
 		}
 	}
 
+	/**
+	 * Returns the gradient type.
+	 * 
+	 * @return the gradient type
+	 */
 	public final GradientType getType() {
 		return getValue(Property._charbaGradientType, GradientType.class, GradientType.linear);
 	}
 
+	/**
+	 * Returns the gradient orientation.
+	 * 
+	 * @return the gradient orientation
+	 */
 	public final GradientOrientation getOrientation() {
 		return getValue(Property._charbaGradientOrientation, GradientOrientation.class, GradientOrientation.getDefaultByType(getType()));
 	}
 
+	/**
+	 * Returns the gradient scope.
+	 * 
+	 * @return the gradient scope
+	 */
 	public final GradientScope getScope() {
 		return getValue(Property._charbaGradientScope, GradientScope.class, GradientScope.chart);
 	}
 
+	/**
+	 * Sets the start and stop color of gradient, when the gradient will have only 2 colors.
+	 * 
+	 * @param start starting color, with offset 0
+	 * @param stop stopping color, with offset 1
+	 */
 	public void addColorsStartStop(IsColor start, IsColor stop) {
 		addColorsStartStop(start.toRGBA(), stop.toRGBA());
 	}
 
+	/**
+	 * Sets the start and stop color of gradient, when the gradient will have only 2 colors.
+	 * 
+	 * @param start starting color, with offset 0
+	 * @param stop stopping color, with offset 1
+	 */
 	public void addColorsStartStop(String start, String stop) {
 		colors.clear();
 		addColorStop(GradientColor.OFFSET_START, start);
 		addColorStop(GradientColor.OFFSET_STOP, stop);
 	}
 
+	/**
+	 * Adds a stopping color with its offset
+	 * 
+	 * @param offset offset of color
+	 * @param color color instance
+	 */
 	public void addColorStop(double offset, IsColor color) {
 		addColorStop(offset, color.toRGBA());
 	}
 
+	/**
+	 * Adds a stopping color with its offset
+	 * 
+	 * @param offset offset of color
+	 * @param color color instance
+	 */
 	public void addColorStop(double offset, String color) {
 		addColorStop(new GradientColor(offset, color));
 	}
 
+	/**
+	 * Adds a stopping color with its offset
+	 * 
+	 * @param color color instance
+	 */
 	public void addColorStop(GradientColor color) {
 		colors.add(color);
 	}
 
+	/**
+	 * Returns the unmodifiable list of stopping colors.
+	 * 
+	 * @return the unmodifiable list of stopping colors.
+	 */
 	public List<GradientColor> getColors() {
 		return Collections.unmodifiableList(colors);
+	}
+
+	/**
+	 * Returns a color using the gradient as source of colors.
+	 * 
+	 * @param offset offset to search into the gradient colors
+	 * @return a color based on offset.
+	 */
+	public IsColor getInterpolatedColorByOffset(double offset) {
+		// checks if offset is consistent
+		GradientColor.checkOffsetWithinBounds(offset);
+		// sorts the color in order to have the list from less to greater
+		Collections.sort(colors, COMPARATOR);
+		// instances of start and end colors
+		// which will contains the passed offset
+		IsColor startColor = null;
+		IsColor endColor = null;
+		// scans all gradient colors loaded
+		for (GradientColor color : colors) {
+			// if offset is the same of already set to a color
+			if (color.getOffset() == offset) {
+				// returns it
+				return color.getColor();
+			}
+			// checks if passed offset is less the passed offset
+			if (color.getOffset() < offset) {
+				// stores multiple time this value till
+				// the first color greater than passed offset
+				startColor = color.getColor();
+			} else if (color.getOffset() > offset && endColor == null) {
+				// gets the first color with offset greater than passed offset
+				endColor = color.getColor();
+			}
+		}
+		// checks starting colors are found otherwise exception
+		if (startColor == null) {
+			throw new IllegalArgumentException("Unable to get the start and stop color ased on passed offset " + offset);
+		} else if (endColor == null) {
+			// if end colors is not found, use the starting color
+			return startColor;
+		}
+		// gets the sRGB for starting color
+		long startLong = startColor.toRGBs();
+		// extract all RGB elements
+		// convert from sRGB to linear
+		double startA = ((startLong >> 24) & 0xff) / 255.0D;
+		double startR = fromRGBs(((startLong >> 16) & 0xff) / 255.0D);
+		double startG = fromRGBs(((startLong >> 8) & 0xff) / 255.0D);
+		double startB = fromRGBs((startLong & 0xff) / 255.0D);
+		// extract all RGB elements
+		// convert from sRGB to linear
+		long endLong = endColor.toRGBs();
+		double endA = ((endLong >> 24) & 0xff) / 255.0D;
+		double endR = fromRGBs(((endLong >> 16) & 0xff) / 255.0D);
+		double endG = fromRGBs(((endLong >> 8) & 0xff) / 255.0D);
+		double endB = fromRGBs((endLong & 0xff) / 255.0D);
+		// compute the interpolated color in linear space
+		// convert back to sRGB in the [0..255] range
+		// round them to int
+		double a = startA + offset * (endA - startA);
+		int r = (int)Math.round(toRGBs(startR + offset * (endR - startR)) * 255.0D);
+		int g = (int)Math.round(toRGBs(startG + offset * (endG - startG)) * 255.0D);
+		int b = (int)Math.round(toRGBs(startB + offset * (endB - startB)) * 255.0D);
+		// creates and return color
+		return new Color(r, g, b, a);
+	}
+
+	/**
+	 * Performs the conversion for the sRGB color space and converts it to a linear sRGB value.
+	 * 
+	 * @param linear optical electronic color value
+	 * @return linear sRGB value
+	 */
+	private double toRGBs(double linear) {
+		// IEC 61966-2-1:1999
+		return linear <= 0.0031308D ? linear * 12.92D : (double) ((Math.pow(linear, 1.0D / 2.4D) * 1.055D) - 0.055D);
+	}
+
+	/**
+	 * Performs the conversion for a linear sRGB value to a gamma-encoded sRGB value
+	 * 
+	 * @param srgb electronic optical color value
+	 * @return gamma-encoded sRGB value
+	 */
+	private double fromRGBs(double srgb) {
+		// IEC 61966-2-1:1999
+		return srgb <= 0.04045D ? srgb / 12.92D : (double) Math.pow((srgb + 0.055D) / 1.055D, 2.4D);
 	}
 
 	/**
