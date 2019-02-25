@@ -284,4 +284,18 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 		}
 		return -1;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.List#toArray()
+	 */
+	@Override
+	public Object[] toArray() {
+		Integer[] toArray = new Integer[array.length()];
+		for (int i = 0; i < array.length(); i++) {
+			toArray[i] = array.get(i);
+		}
+		return toArray;
+	}
 }

@@ -319,4 +319,18 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, Arr
 		return null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.List#toArray()
+	 */
+	@Override
+	public Object[] toArray() {
+		Object[] toArray = new Object[array.length()];
+		for (int i = 0; i < array.length(); i++) {
+			toArray[i] = getByName(array.get(i));
+		}
+		return toArray;
+	}
+
 }

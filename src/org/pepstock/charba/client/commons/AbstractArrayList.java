@@ -80,7 +80,7 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 	 * Not implemented
 	 */
 	@Override
-	public final Object[] toArray() {
+	public Object[] toArray() {
 		throw new UnsupportedOperationException(UNABLE_COPY_ARRAY_MESSAGE);
 	}
 
