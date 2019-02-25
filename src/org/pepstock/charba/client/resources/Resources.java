@@ -46,7 +46,7 @@ public interface Resources extends ClientBundle {
 	 * 
 	 * @return CHARBA java script code.
 	 */
-	@Source("js/charba.helper.js")
+	@Source("js/charba.helper.min.js")
 	TextResource charbaHelper();
 
 }
