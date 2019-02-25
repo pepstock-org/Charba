@@ -241,7 +241,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 					handler.refresh();
 				}
 				// if no dataset 
-				if (itemsCount == 0) {
+				if (itemsCount < handler.getMinimumDatasetsItemsCount(chart)) {
 					// reset selection
 					reset(chart);
 				}

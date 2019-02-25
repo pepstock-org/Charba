@@ -277,6 +277,24 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	void setMouseMove(HandlerRegistration mouseMove) {
 		this.mouseMove = mouseMove;
 	}
+	
+	/**
+	 * Returns the minimum amount of datasets, selectable based on chart type.
+	 *  
+	 * @param chart chart instance
+	 * @return the minimum amount of datasets
+	 */
+	int getMinimumDatasetsItemsCount(AbstractChart<?, ?> chart) {
+		// gets chart AREA
+		ChartNode node = chart.getNode();
+		// gets the scale element of chart
+		// using the X axis id of plugin options
+		ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID());
+		// if chart is line or axis time is equals to 2
+		// else if bar chart is equals to 1
+		return chart.getType().equals(ChartType.line) ? 2 : AxisType.time.equals(scaleItem.getType()) ? 2 : 1;
+	}
+
 
 	/**
 	 * Start selection on canvas by the starting X coordinate.<br>
