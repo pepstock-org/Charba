@@ -259,7 +259,7 @@ public final class Gradient extends CanvasObject {
 		// scans all gradient colors loaded
 		for (GradientColor color : colors) {
 			// if offset is the same of already set to a color
-			if (color.getOffset() == offset) {
+			if (Double.compare(color.getOffset(), offset) == 0) {
 				// returns it
 				return color.getColor();
 			}
@@ -299,9 +299,9 @@ public final class Gradient extends CanvasObject {
 		// convert back to sRGB in the [0..255] range
 		// round them to int
 		double a = startA + offset * (endA - startA);
-		int r = (int)Math.round(toRGBs(startR + offset * (endR - startR)) * 255.0D);
-		int g = (int)Math.round(toRGBs(startG + offset * (endG - startG)) * 255.0D);
-		int b = (int)Math.round(toRGBs(startB + offset * (endB - startB)) * 255.0D);
+		int r = (int) Math.round(toRGBs(startR + offset * (endR - startR)) * 255.0D);
+		int g = (int) Math.round(toRGBs(startG + offset * (endG - startG)) * 255.0D);
+		int b = (int) Math.round(toRGBs(startB + offset * (endB - startB)) * 255.0D);
 		// creates and return color
 		return new Color(r, g, b, a);
 	}
