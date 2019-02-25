@@ -97,9 +97,21 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// removes the default behavior of mouse down on canvas
 		// this removes the canvas selection
 		event.preventDefault();
+		// flag to know if there is at least a dataset visible
+		boolean areDatasetsVisible = false;
+		// checks how many dataset are visible
+		for (int i=0; i<chart.getData().getDatasets().size(); i++) {
+			// checks if dataset is visible
+			if (chart.isDatasetVisible(i)) {
+				// sets the flag
+				areDatasetsVisible = true;
+				// exits from for cycle
+				break;
+			}
+		}
 		// if the mouse down event points
 		// are in chart area and has got datasets items
-		if (datasetsItemsCount > 0 && isEventInChartArea(event)) {
+		if (datasetsItemsCount > 0 && areDatasetsVisible && isEventInChartArea(event)) {
 			chart.getCanvas().getElement().getStyle().setCursor(Cursor.CROSSHAIR);
 			// then start selection with X coordinate
 			startSelection(event.getX());

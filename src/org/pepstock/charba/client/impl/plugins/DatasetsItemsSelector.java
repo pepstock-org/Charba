@@ -240,6 +240,11 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 				if (handler.getStatus().equals(SelectionStatus.selected) && itemsCount > 0) {
 					handler.refresh();
 				}
+				// if no dataset 
+				if (itemsCount == 0) {
+					// reset selection
+					reset(chart);
+				}
 				// the drawing of chart is completed and set the default cursor
 				// removing the "wait" one.
 				chart.getCanvas().getElement().getStyle().setCursor(Cursor.DEFAULT);
