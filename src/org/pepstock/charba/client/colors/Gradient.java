@@ -281,23 +281,23 @@ public final class Gradient extends CanvasObject {
 			return startColor;
 		}
 		// gets the sRGB for starting color
-		long startLong = startColor.toRGBs();
+		int startRGBs = startColor.toRGBs();
 		// extract all RGB elements
 		// convert from sRGB to linear
-		double startA = ((startLong >> 24) & 0xff) / 255.0D;
-		double startR = fromRGBs(((startLong >> 16) & 0xff) / 255.0D);
-		double startG = fromRGBs(((startLong >> 8) & 0xff) / 255.0D);
-		double startB = fromRGBs((startLong & 0xff) / 255.0D);
+		double startA = ((startRGBs >> 24) & 0xff) / 255.0D;
+		double startR = fromRGBs(((startRGBs >> 16) & 0xff) / 255.0D);
+		double startG = fromRGBs(((startRGBs >> 8) & 0xff) / 255.0D);
+		double startB = fromRGBs((startRGBs & 0xff) / 255.0D);
 		// extract all RGB elements
 		// convert from sRGB to linear
-		long endLong = endColor.toRGBs();
-		double endA = ((endLong >> 24) & 0xff) / 255.0D;
-		double endR = fromRGBs(((endLong >> 16) & 0xff) / 255.0D);
-		double endG = fromRGBs(((endLong >> 8) & 0xff) / 255.0D);
-		double endB = fromRGBs((endLong & 0xff) / 255.0D);
+		int endRGBs = endColor.toRGBs();
+		double endA = ((endRGBs >> 24) & 0xff) / 255.0D;
+		double endR = fromRGBs(((endRGBs >> 16) & 0xff) / 255.0D);
+		double endG = fromRGBs(((endRGBs >> 8) & 0xff) / 255.0D);
+		double endB = fromRGBs((endRGBs & 0xff) / 255.0D);
 		// compute the interpolated color in linear space
 		// convert back to sRGB in the [0..255] range
-		// round them to int
+		// rounds them to int
 		double a = startA + offset * (endA - startA);
 		int r = (int) Math.round(toRGBs(startR + offset * (endR - startR)) * 255.0D);
 		int g = (int) Math.round(toRGBs(startG + offset * (endG - startG)) * 255.0D);

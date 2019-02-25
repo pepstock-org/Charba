@@ -83,12 +83,18 @@ public interface IsColor {
 	/**
 	 * As <a href="https://webstore.iec.ch/publication/6169">IEC 61966-2-1:1999</a>, applies to the encoding and communication
 	 * of RGB colors used in computer systems and similar applications, by defining encoding transformations for use in defined
-	 * reference conditions.
+	 * reference conditions.<br>
+	 * <br>
 	 * 
-	 * @return a long value which represents the RGB color
+	 * <pre>
+	 *    byte     byte     byte     byte
+	 * |        |        |        |        |
+	 * +--------+--------+--------+--------+
+	 *   alpha      red     green    blue
+	 * </pre>
+	 * 
+	 * @return a integer value which represents the RGB color
 	 */
-	default long toRGBs() {
-		return Math.round(getAlpha() * 255L) << 24 | getRed() << 16 | getGreen() << 8 | getBlue();
-	}
+	int toRGBs();
 
 }

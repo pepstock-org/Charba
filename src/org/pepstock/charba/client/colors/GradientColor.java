@@ -75,7 +75,7 @@ public final class GradientColor extends NativeObjectContainer {
 		super(nativeObject);
 	}
 
-	/** 
+	/**
 	 * Returns the defined offset for stopping gradient color.
 	 * 
 	 * @return the defined offset for stopping gradient color. Default is 0.

@@ -871,4 +871,15 @@ public enum HtmlColor implements IsColor
 	public String toHex() {
 		return hexValue;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#toRGBs()
+	 */
+	@Override
+	public int toRGBs() {
+		return color.toRGBs();
+	}
+
 }
