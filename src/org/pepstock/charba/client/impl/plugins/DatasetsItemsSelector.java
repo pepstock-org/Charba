@@ -93,8 +93,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * Clears the selection on the chart. With this method, it don't fire any clear event if not selected into plugin options.
 	 * 
 	 * @param chart chart instance to clear the selection
-	 * @see DatasetsItemsSelectorOptions#isFireEventOnReset()
-	 * @see DatasetsItemsSelectorOptions#setFireEventOnReset(boolean)
+	 * @see DatasetsItemsSelectorOptions#isFireEventOnClearSelection()
+	 * @see DatasetsItemsSelectorOptions#setFireEventOnClearSelection(boolean)
 	 */
 	public void clearSelection(AbstractChart<?, ?> chart) {
 		// flag with default to false

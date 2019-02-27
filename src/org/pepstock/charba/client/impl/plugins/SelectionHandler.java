@@ -659,7 +659,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		ClearSelection clearSelection = pOptions.getClearSelection();
 		// creates an instance to stores the height
 		// adding the border width top
-		double height = Math.min(pOptions.getBorderWidth(), 0);
+		// and adding 1 to border width
+		double height = clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
 		// adds padding top
 		height += clearSelection.getPadding();
 		// checking what must be rendered
@@ -688,7 +689,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// adds padding bottom
 		height += clearSelection.getPadding();
 		// adds border width bottom
-		height += Math.min(pOptions.getBorderWidth(), 0);
+		// and adding 1 to border width
+		height += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
 		// stores height
 		clearSelection.setHeight(height);
 	}
@@ -737,7 +739,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// clear selection element
 		// -----
 		// adds border width left
-		double width = Math.min(pOptions.getBorderWidth(), 0);
+		// and adding 1 to border width
+		double width = clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
 		// adds padding left
 		width += clearSelection.getPadding();
 		// checking what must be rendered
@@ -774,7 +777,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// adds padding right
 		width += clearSelection.getPadding();
 		// adds border width right
-		width += Math.min(pOptions.getBorderWidth(), 0);
+		// and adding 1 to border width
+		width += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
 		// stores width
 		clearSelection.setWidth(width);
 	}
@@ -797,15 +801,26 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			if (clearSelection.getPosition().equals(Position.top)) {
 				// for all elements the Y value is equals to margin
 				// set into configuration
-				clearSelection.setY(clearSelection.getMargin());
-				clearSelection.setImageY(clearSelection.getMargin());
-				clearSelection.setLabelY(clearSelection.getMargin());
+				double y = clearSelection.getMargin();
+				clearSelection.setY(y);
+				// and adding 1 to border width
+				y += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+
+				// y += clearSelection.isUseSelectionStyle() ? Math.max(pOptions.getBorderWidth(), 0) + 1 : 0;
+				// adds padding top
+				y += clearSelection.getPadding();
+				clearSelection.setImageY(y);
+				clearSelection.setLabelY(y);
 			} else {
 				// calculates the Y point from bottom, using the canvas dimension
 				// removing height of clear selection element and margin
 				double y = chart.getCanvas().getOffsetHeight() - clearSelection.getHeight() - clearSelection.getMargin();
 				// for all elements the Y value is equals
 				clearSelection.setY(y);
+				// and adding 1 to border width
+				y += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+				// adds padding top
+				y += clearSelection.getPadding();
 				clearSelection.setImageY(y);
 				clearSelection.setLabelY(y);
 			}
@@ -863,7 +878,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			}
 			// for all elements
 			// adds border width left
-			x += Math.min(pOptions.getBorderWidth(), 0);
+			// and adding 1 to border width
+			x += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
 			// adds padding left
 			// to have the X starting point
 			x += clearSelection.getPadding();
@@ -900,7 +916,6 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 				// stores 0 to label point X
 				clearSelection.setLabelX(ClearSelection.DEFAULT_VALUE);
 			}
-
 		}
 	}
 
@@ -935,6 +950,24 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		DatasetsItemsSelectorOptions pOptions = getOptions();
 		// gets clear selection element
 		ClearSelection clearSelection = pOptions.getClearSelection();
+		if (clearSelection.isUseSelectionStyle()) {
+			// sets the selecting color into canvas
+			ctx.setFillStyle(options.getColorAsString());
+			// draws the rectangle of area selection
+			ctx.fillRect(clearSelection.getX(), clearSelection.getY(), clearSelection.getWidth(), clearSelection.getHeight());
+			// borders
+			if (options.getBorderWidth() > 0) {
+				ctx.setLineWidth(ClearSelection.BORDER_WIDTH);
+				List<Integer> borderDash = options.getBorderDash();
+				// sets the selecting color into canvas
+				ctx.setStrokeStyle(options.getBorderColorAsString());
+				if (!borderDash.isEmpty()) {
+					JsHelper.get().setLineDash(ctx, options.getBorderDashAsJavaScriptObject());
+				}
+				double borderIncrement = ClearSelection.BORDER_WIDTH / 2D;
+				ctx.strokeRect(clearSelection.getX() + borderIncrement, clearSelection.getY() + borderIncrement, clearSelection.getWidth() - ClearSelection.BORDER_WIDTH, clearSelection.getHeight() - ClearSelection.BORDER_WIDTH);
+			}
+		}
 		// checks based on render type what must be draw
 		if (Render.label.equals(clearSelection.getRender())) {
 			// sets font

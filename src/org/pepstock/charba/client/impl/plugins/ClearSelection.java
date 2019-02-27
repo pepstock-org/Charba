@@ -37,6 +37,11 @@ public final class ClearSelection extends NativeObjectContainer {
 
 	// defaults values for dimensions and locations
 	static final double DEFAULT_VALUE = 0D;
+	/**
+	 * Default border width of clear selection element<br>
+	 * Used only when use selection style is set to <code>true</code>.
+	 */
+	static final int BORDER_WIDTH = 1;
 	// defaults global options instance
 	private DatasetsItemsSelectorDefaultsClearSelection defaultsOptions;
 
@@ -58,6 +63,7 @@ public final class ClearSelection extends NativeObjectContainer {
 		margin,
 		padding,
 		spacing,
+		useSelectionStyle,
 		// internal properties to store the points and dimensions info
 		_x,
 		_y,
@@ -344,6 +350,24 @@ public final class ClearSelection extends NativeObjectContainer {
 	 */
 	public int getSpacing() {
 		return getValue(Property.spacing, defaultsOptions.getSpacing());
+	}
+
+	/**
+	 * Sets <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>.
+	 * 
+	 * @param display <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>
+	 */
+	public void setUseSelectionStyle(boolean useSelectionStyle) {
+		setValue(Property.useSelectionStyle, useSelectionStyle);
+	}
+
+	/**
+	 * Returns <code>true</code> if clear selection element will apply style of selection area, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if clear selection element will apply style of selection area, otherwise <code>false</code>
+	 */
+	public boolean isUseSelectionStyle() {
+		return getValue(Property.useSelectionStyle, defaultsOptions.isUseSelectionStyle());
 	}
 
 	/**

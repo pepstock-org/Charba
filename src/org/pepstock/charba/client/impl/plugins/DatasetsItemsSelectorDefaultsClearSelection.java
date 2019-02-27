@@ -67,6 +67,11 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	private static final ImageElement DEFAULT_IMAGE = ImageElement.as(new Image(Resources.INSTANCE.clearSelection18()).getElement());
 
 	/**
+	 * Default flag if clear selection will use selection area style
+	 */
+	private static final boolean DEFAULT_USE_SELECTION_STYLE = false;
+
+	/**
 	 * Creates the object with an empty native object instance.
 	 */
 	DatasetsItemsSelectorDefaultsClearSelection() {
@@ -133,7 +138,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection label font color.
 	 */
 	String getFontColorAsString() {
-		return getValue(ClearSelection.Property.fontColor, Defaults.get().getGlobal().getDefaultFontColorAsString());
+		return getValue(ClearSelection.Property.fontColor, DatasetsItemsSelectorDefaultsOptions.DEFAULT_BORDER_COLOR.toRGBA());
 	}
 
 	/**
@@ -197,6 +202,15 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 */
 	int getSpacing() {
 		return getValue(ClearSelection.Property.spacing, DEFAULT_SPACING);
+	}
+
+	/**
+	 * Returns <code>true</code> if clear selection element will apply style of selection area, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if clear selection element will apply style of selection area, otherwise <code>false</code>
+	 */
+	boolean isUseSelectionStyle() {
+		return getValue(ClearSelection.Property.useSelectionStyle, DEFAULT_USE_SELECTION_STYLE);
 	}
 
 }
