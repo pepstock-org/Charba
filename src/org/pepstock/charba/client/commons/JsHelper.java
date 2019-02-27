@@ -18,6 +18,7 @@ package org.pepstock.charba.client.commons;
 import java.util.List;
 
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.events.ChartNativeEvent;
 
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.Element;
@@ -159,5 +160,19 @@ public final class JsHelper {
 		if (context != null && object != null) {
 			NativeJsHelper.setLineDash(context, object);
 		}
+	}
+	
+	/**
+	 * Returns a chart native event from CHART.JS event.
+	 * 
+	 * @param event CHART.JS event
+	 * @param key key of java script object
+	 * @return a chart native event
+	 */
+	public ChartNativeEvent nativeEvent(NativeObject event, String key) {
+		if (event != null && key != null) {
+			return NativeJsHelper.nativeEvent(event, key);
+		}
+		return null;
 	}
 }

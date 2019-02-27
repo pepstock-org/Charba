@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.commons;
 
+import org.pepstock.charba.client.events.ChartNativeEvent;
+
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.Element;
 
@@ -131,4 +133,12 @@ final class NativeJsHelper {
 	 */
 	static native ArrayString elementAttributes(Element element);
 
+	/**
+	 * Returns a chart native event from CHART.JS event.
+	 * 
+	 * @param event CHART.JS event
+	 * @param key key of java script object
+	 * @return a chart native event
+	 */
+	static native ChartNativeEvent nativeEvent(NativeObject event, String key);
 }

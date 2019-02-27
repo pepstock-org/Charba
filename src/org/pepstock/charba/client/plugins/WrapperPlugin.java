@@ -17,8 +17,8 @@ package org.pepstock.charba.client.plugins;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Plugin;
-import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.items.DatasetPluginItem;
+import org.pepstock.charba.client.items.EventPluginItem;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.TooltipPluginItem;
 
@@ -421,15 +421,15 @@ abstract class WrapperPlugin {
 	 * Called before processing the specified 'event'. If any plugin returns <code>false</code>, the event will be discarded.
 	 * 
 	 * @param chartId chart id.
-	 * @param event The event object.
+	 * @param event The event object wrapper.
 	 * @return <code>false</code> to discard the event.
 	 */
-	protected boolean onBeforeEvent(String chartId, ChartNativeEvent event) {
+	protected boolean onBeforeEvent(String chartId, EventPluginItem event) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
-		// if consistent, calls plugin
-		if (chart != null) {
-			return delegation.onBeforeEvent(chart, event);
+		// if consistent, both chart and event, calls plugin
+		if (chart != null && event.getEvent() != null) {
+			return delegation.onBeforeEvent(chart, event.getEvent());
 		}
 		return true;
 	}
@@ -439,14 +439,14 @@ abstract class WrapperPlugin {
 	 * discarded.
 	 * 
 	 * @param chartId chart id.
-	 * @param event The event object.
+	 * @param event The event object wrapper.
 	 */
-	protected void onAfterEvent(String chartId, ChartNativeEvent event) {
+	protected void onAfterEvent(String chartId, EventPluginItem event) {
 		// gets chart instance
 		AbstractChart<?, ?> chart = getChart(chartId);
-		// if consistent, calls plugin
-		if (chart != null) {
-			delegation.onAfterEvent(chart, event);
+		// if consistent, both chart and event, calls plugin
+		if (chart != null && event.getEvent() != null) {
+			delegation.onAfterEvent(chart, event.getEvent());
 		}
 	}
 

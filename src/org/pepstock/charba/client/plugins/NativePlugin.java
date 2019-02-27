@@ -17,8 +17,8 @@ package org.pepstock.charba.client.plugins;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.items.DatasetPluginItem;
+import org.pepstock.charba.client.items.EventPluginItem;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.TooltipPluginItem;
 
@@ -348,8 +348,8 @@ final class NativePlugin {
 	 * @return <code>false</code> to discard the event.
 	 */
 	@JsMethod
-	public boolean beforeEvent(Chart chart, ChartNativeEvent event, Object options) {
-		return wrapper.onBeforeEvent(chart.getCharbaId(), event);
+	public boolean beforeEvent(Chart chart, NativeObject item, Object options) {
+		return wrapper.onBeforeEvent(chart.getCharbaId(), new EventPluginItem(item));
 	}
 
 	/**
@@ -361,8 +361,8 @@ final class NativePlugin {
 	 * @param options plugin options set by user into chart options.
 	 */
 	@JsMethod
-	public void afterEvent(Chart chart, ChartNativeEvent event, Object options) {
-		wrapper.onAfterEvent(chart.getCharbaId(), event);
+	public void afterEvent(Chart chart, NativeObject item, Object options) {
+		wrapper.onAfterEvent(chart.getCharbaId(), new EventPluginItem(item));
 	}
 
 	/**
