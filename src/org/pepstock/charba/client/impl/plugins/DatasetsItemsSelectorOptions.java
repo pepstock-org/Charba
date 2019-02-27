@@ -257,7 +257,7 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	 * @param color the color.
 	 */
 	public void setBorderColor(IsColor color) {
-		setColor(color.toRGBA());
+		setBorderColor(color.toRGBA());
 	}
 
 	/**

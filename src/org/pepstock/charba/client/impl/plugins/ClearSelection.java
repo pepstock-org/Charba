@@ -26,6 +26,8 @@ import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
 
 import com.google.gwt.dom.client.ImageElement;
+import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.Image;
 
 /**
  * Datasets items selector plugin configuration element in order to have into the chart a clickable element to clear the
@@ -227,18 +229,18 @@ public final class ClearSelection extends NativeObjectContainer {
 	}
 
 	/**
-	 * Sets the clear selection label text align.
+	 * Sets the clear selection align.
 	 * 
-	 * @param align the clear selection label text align
+	 * @param align the clear selection align
 	 */
 	public void setAlign(Align align) {
 		setValue(Property.align, align);
 	}
 
 	/**
-	 * Returns the clear selection label text align.
+	 * Returns the clear selection align.
 	 * 
-	 * @return the clear selection label text align
+	 * @return the clear selection align
 	 */
 	public Align getAlign() {
 		return getValue(Property.align, Align.class, defaultsOptions.getAlign());
@@ -280,6 +282,36 @@ public final class ClearSelection extends NativeObjectContainer {
 		return getValue(Property.position, Position.class, defaultsOptions.getPosition());
 	}
 
+	/**
+	 * Sets the clear selection image.
+	 * 
+	 * @param image the clear selection image
+	 */
+	public void setImage(ImageResource image) {
+		// checks if consistent
+		if (image != null) {
+			// sets new image
+			setImage(new Image(image));
+		} else {
+			remove(Property.image);
+		}
+	}
+	
+	/**
+	 * Sets the clear selection image.
+	 * 
+	 * @param image the clear selection image
+	 */
+	public void setImage(Image image) {
+		// checks if consistent
+		if (image != null) {
+			// sets new image
+			setImage(ImageElement.as(image.getElement()));
+		} else {
+			remove(Property.image);
+		}
+	}
+	
 	/**
 	 * Sets the clear selection image.
 	 * 
@@ -355,7 +387,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	/**
 	 * Sets <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>.
 	 * 
-	 * @param display <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>
+	 * @param useSelectionStyle <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>
 	 */
 	public void setUseSelectionStyle(boolean useSelectionStyle) {
 		setValue(Property.useSelectionStyle, useSelectionStyle);
