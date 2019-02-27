@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
- * Factory to get the options (form chart or from default global ones) related to dataset selection plugin.
+ * Factory to get the options (form chart or from default global ones) related to datasets items selector plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -30,7 +30,7 @@ public final class DatasetsItemsSelectorOptionsFactory implements NativeObjectCo
 	private final DatasetsItemsSelectorDefaultsOptionsFactory defaultsFactory = new DatasetsItemsSelectorDefaultsOptionsFactory();
 
 	/**
-	 * To avoid any instantiation. Use the statis reference into {@link DatasetsItemsSelector#FACTORY}.
+	 * To avoid any instantiation. Use the static reference into {@link DatasetsItemsSelector#FACTORY}.
 	 */
 	DatasetsItemsSelectorOptionsFactory() {
 		// do nothing
@@ -60,7 +60,7 @@ public final class DatasetsItemsSelectorOptionsFactory implements NativeObjectCo
 	}
 
 	/**
-	 * Internal factory to create options from default global option for the plugin
+	 * Internal factory to create options from default global option for the plugin.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */

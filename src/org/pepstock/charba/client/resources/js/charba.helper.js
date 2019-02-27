@@ -93,7 +93,17 @@
     */
     JsHelper.propertyAsInt = function(obj, key) {
     	return obj[key];
-    }    
+    }  
+  /*
+	 Returns a chart native event from CHART.JS event.
+	  
+	 @param event CHART.JS event
+	 @param key key of java script object
+	 @return a chart native event
+    */
+    JsHelper.nativeEvent = function(obj, key) {
+    	return obj[key];
+    }      
    /*
 	 Returns an array of strings with element attributes.
 	  

@@ -32,6 +32,7 @@ import org.pepstock.charba.client.options.Scales;
  * <li>the border color
  * <li>the border width
  * <li>the border dash
+ * <li>if firing event on clear selection
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
@@ -62,10 +63,22 @@ final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
 	private static final IsColor DEFAULT_BORDER_COLOR = GwtMaterialColor.GREY_DARKEN_2;
 
 	/**
+	 * Default flag if fire event after clear selection
+	 */
+	private static final boolean DEFAULT_FIRE_EVENT_ON_CLEAR_SELECTION = false;
+
+	// default clear selection options
+	private final DatasetsItemsSelectorDefaultsClearSelection clearSelection;
+
+	/**
 	 * Builds the object using an empty java script object and uses the constants as defaults.
 	 */
 	DatasetsItemsSelectorDefaultsOptions() {
 		super();
+		// creates default clear selection options
+		clearSelection = new DatasetsItemsSelectorDefaultsClearSelection();
+		// sets the native object inside this object
+		setValue(DatasetsItemsSelectorOptions.Property.clearSelection, clearSelection);
 	}
 
 	/**
@@ -75,6 +88,17 @@ final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
 	 */
 	DatasetsItemsSelectorDefaultsOptions(NativeObject nativeObject) {
 		super(nativeObject);
+		// reads default clear selection options from main object
+		clearSelection = new DatasetsItemsSelectorDefaultsClearSelection(getValue(DatasetsItemsSelectorOptions.Property.clearSelection));
+	}
+
+	/**
+	 * Returns the clear selection item.
+	 * 
+	 * @return the clear selection item
+	 */
+	DatasetsItemsSelectorDefaultsClearSelection getClearSelection() {
+		return clearSelection;
 	}
 
 	/**
@@ -123,6 +147,15 @@ final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
 	 */
 	String getBorderColorAsString() {
 		return getValue(DatasetsItemsSelectorOptions.Property.borderColor, DEFAULT_BORDER_COLOR.toRGBA());
+	}
+
+	/**
+	 * Returns <code>true</code> if it will fire event after clear of selection, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if it will fire event after clear of selection, otherwise <code>false</code>
+	 */
+	boolean isFireEventOnClearSelection() {
+		return getValue(DatasetsItemsSelectorOptions.Property.fireEventOnClearSelection, DEFAULT_FIRE_EVENT_ON_CLEAR_SELECTION);
 	}
 
 }

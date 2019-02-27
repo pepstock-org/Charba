@@ -28,9 +28,9 @@ import com.google.gwt.dom.client.NativeEvent;
 public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRangeSelectionEventHandler> {
 
 	/**
-	 * Value {@value RESET_SELECTION} of FROM and TO when the event is representing a reset of selection
+	 * Value {@value CLEAR_SELECTION} of FROM and TO when the event is representing a clear of selection
 	 */
-	public static final int RESET_SELECTION = Integer.MIN_VALUE;
+	public static final int CLEAR_SELECTION = Integer.MIN_VALUE;
 
 	/**
 	 * Event type
@@ -42,12 +42,12 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRange
 	private final int to;
 
 	/**
-	 * Creates the event when the reset of current selection has been requested.
+	 * Creates the event when the clear of current selection has been requested.
 	 * 
 	 * @param nativeEvent native event of this custom event
 	 */
 	public DatasetRangeSelectionEvent(NativeEvent nativeEvent) {
-		this(nativeEvent, RESET_SELECTION, RESET_SELECTION);
+		this(nativeEvent, CLEAR_SELECTION, CLEAR_SELECTION);
 	}
 
 	/**
@@ -65,7 +65,7 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRange
 
 	/**
 	 * Returns the starting index of of selected datasets items.<br>
-	 * If equals to {@link RESET_SELECTION}, the event is related to a reset of selection area.
+	 * If equals to {@link CLEAR_SELECTION}, the event is related to a clear of selection area.
 	 * 
 	 * @return the starting index of of selected datasets items.
 	 */
@@ -75,7 +75,7 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRange
 
 	/**
 	 * Returns the ending index of of selected datasets items.<br>
-	 * If equals to {@link RESET_SELECTION}, the event is related to a reset of selection area.
+	 * If equals to {@link CLEAR_SELECTION}, the event is related to a clear of selection area.
 	 * 
 	 * @return the to the ending index of of selected datasets items.
 	 */

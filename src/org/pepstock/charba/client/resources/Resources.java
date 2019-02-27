@@ -17,10 +17,12 @@ package org.pepstock.charba.client.resources;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.TextResource;
 
 /**
- * Client bundle to reference CHART.JS and other java script codes, always needed to CHARBA.
+ * Client bundle to reference CHART.JS and other java script codes, always needed to CHARBA.<br>
+ * It also includes some image resources for datasets items selector plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -48,5 +50,29 @@ public interface Resources extends ClientBundle {
 	 */
 	@Source("js/charba.helper.min.js")
 	TextResource charbaHelper();
+
+	/**
+	 * Returns a image to use into datasets items selector plugin as clear icon.
+	 * 
+	 * @return a image to use into datasets items selector plugin as clear icon
+	 */
+	@Source("/images/clear_black_18dp.png")
+	ImageResource clearSelection18();
+
+	/**
+	 * Returns a image to use into datasets items selector plugin as clear icon.
+	 * 
+	 * @return a image to use into datasets items selector plugin as clear icon
+	 */
+	@Source("/images/clear_black_24dp.png")
+	ImageResource clearSelection24();
+
+	/**
+	 * Returns a image to use into datasets items selector plugin as clear icon.
+	 * 
+	 * @return a image to use into datasets items selector plugin as clear icon
+	 */
+	@Source("/images/clear_black_36dp.png")
+	ImageResource clearSelection36();
 
 }

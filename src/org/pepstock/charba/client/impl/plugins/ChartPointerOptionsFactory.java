@@ -30,7 +30,7 @@ public final class ChartPointerOptionsFactory implements NativeObjectContainerFa
 	private final ChartPointerDefaultsOptionsFactory defaultsFactory = new ChartPointerDefaultsOptionsFactory();
 
 	/**
-	 * To avoid any instantiation. Use the statis reference into {@link ChartPointer#FACTORY}.
+	 * To avoid any instantiation. Use the static reference into {@link ChartPointer#FACTORY}.
 	 */
 	ChartPointerOptionsFactory() {
 		// do nothing
