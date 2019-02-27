@@ -964,7 +964,9 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 				if (!borderDash.isEmpty()) {
 					JsHelper.get().setLineDash(ctx, options.getBorderDashAsJavaScriptObject());
 				}
+				// gets increment
 				double borderIncrement = ClearSelection.BORDER_WIDTH / 2D;
+				// draw border fixing the dimansions of rect
 				ctx.strokeRect(clearSelection.getX() + borderIncrement, clearSelection.getY() + borderIncrement, clearSelection.getWidth() - ClearSelection.BORDER_WIDTH, clearSelection.getHeight() - ClearSelection.BORDER_WIDTH);
 			}
 		}
