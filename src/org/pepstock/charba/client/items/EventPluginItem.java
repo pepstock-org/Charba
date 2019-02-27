@@ -28,7 +28,7 @@ import org.pepstock.charba.client.events.ChartNativeEvent;
  * @author Andrea "Stock" Stocchero
  */
 public final class EventPluginItem extends NativeObjectContainer {
-	
+
 	// "native" is a keyword of Java therefore
 	// it can not add the key into enum.
 	private static final String NATIVE_KEY = "native";

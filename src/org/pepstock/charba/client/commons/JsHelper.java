@@ -161,7 +161,7 @@ public final class JsHelper {
 			NativeJsHelper.setLineDash(context, object);
 		}
 	}
-	
+
 	/**
 	 * Returns a chart native event from CHART.JS event.
 	 * 

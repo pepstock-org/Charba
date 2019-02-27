@@ -31,7 +31,7 @@ final class JSONReplacerConstants {
 	static final String INTERNAL_PROPERTY_KEY_PREFIX = "_";
 	// used into JSON stringfy replacer when the key of object is Chara internal
 	static final String CHARBA_PROPERTY_KEY_PREFIX = "_charba";
-	
+
 	/**
 	 * To avoid any instantiation.
 	 */

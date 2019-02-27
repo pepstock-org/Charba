@@ -205,10 +205,10 @@ public final class JSON {
 	public static String stringifyWithReplacer(Object obj, Replacer replacer, int spaces) {
 		return stringify(obj, replacer, spaces);
 	}
-	
+
 	/**
-	 * Converts a JavaScript object or value to a JSON string, using a specific replacer to avoid
-	 * to print internal keys of CHART.js
+	 * Converts a JavaScript object or value to a JSON string, using a specific replacer to avoid to print internal keys of
+	 * CHART.js
 	 * 
 	 * @param obj The value to convert to a JSON string.
 	 * @param spaces it indicates the number of space characters to use as white space; this number is capped at 10 (if it is
@@ -228,7 +228,7 @@ public final class JSON {
 			@Override
 			public Object call(String key, Object value) {
 				// if key is null of empty
-				// means that is first object 
+				// means that is first object
 				if (key != null && key.trim().length() > 0) {
 					// checks is not a HCART.JS internal property
 					if (!key.startsWith(JSONReplacerConstants.INTERNAL_PROPERTY_KEY_PREFIX)) {
