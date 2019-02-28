@@ -8,7 +8,6 @@
 	<!-- 
 		CHARBA project configuration 
 	-->
-
 	<property name="charba.built.by" value="www.pepstock.org" />
 	<tstamp>
 		<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
@@ -76,6 +75,9 @@
 		</ivy:publish>
 	</target>
 
+	<!--
+        BUILD targets
+    -->
 	<target name="build-all" depends="build-bin, build-sources, build-javadoc" />
 
 	<target name="build-sources">
@@ -110,17 +112,25 @@
 		</jar>
 	</target>
 
+	<!--
+        JAVA compile
+    -->
 	<target name="compile" depends="clean, ivyRetrieve">
 		<mkdir dir="${classes.dir}"/>
 		<javac srcdir="${src.dir}" includes="**" encoding="utf-8" destdir="${classes.dir}" includeantruntime="${javac.includeantruntime}" source="${javac.source}" target="${javac.target}" nowarn="${javac.nowarn}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" createMissingPackageInfoClass="false">
 			<classpath refid="ivyPath"/>
 		</javac>
-		<!-- copy is necessary as GWT needs sources -->
+		<!-- copy is necessary as GWT needs sources: exclude charba.helper.js-->
 		<copy todir="${classes.dir}">
-			<fileset dir="${src.dir}"/>
+			<fileset dir="${src.dir}">
+			    <exclude name="**/charba.helper.js"/>
+			</fileset>
 		</copy>
 	</target>
 
+	<!--
+        JAVADOC creation
+    -->
 	<target name="javadoc" depends="ivyRetrieve">
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${javadoc.dir}" includes="**/*"/>
