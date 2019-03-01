@@ -18,8 +18,6 @@ package org.pepstock.charba.client;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.pepstock.charba.client.resources.Resources;
-
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ScriptElement;
 import com.google.gwt.resources.client.TextResource;
@@ -41,16 +39,6 @@ public final class Injector {
 	private static final Set<String> ELEMENTS_INJECTED = new HashSet<String>();
 
 	/**
-	 * Injects ChartJS and Charba utilities if not injected yet.
-	 */
-	public static void ensureInjected() {
-		// use default chart.js
-		ensureInjected(Resources.INSTANCE.chartJs());
-		// use CHARBA helper
-		ensureInjected(Resources.INSTANCE.charbaHelper());
-	}
-
-	/**
 	 * Injects a script resource if not injected yet.
 	 * 
 	 * @param resource script resource
@@ -62,7 +50,7 @@ public final class Injector {
 			ScriptElement scriptElement = Document.get().createScriptElement();
 			// sets ID
 			scriptElement.setId(CHARBA_PREFIX_SCRIPT_ELEMENT_ID + resource.getName());
-			// sets the script content with ChartJS source
+			// sets the script content source
 			scriptElement.setInnerText(resource.getText());
 			// appends to the body
 			Document.get().getBody().appendChild(scriptElement);

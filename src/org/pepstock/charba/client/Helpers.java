@@ -16,6 +16,7 @@
 package org.pepstock.charba.client;
 
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.resources.Resources;
 
 /**
  * Singleton object to use the helpers utility of CHART.JS.<br>
@@ -35,7 +36,7 @@ public final class Helpers {
 	 */
 	private Helpers() {
 		// to be sure that chart.js has been injected
-		Injector.ensureInjected();
+		Injector.ensureInjected(Resources.INSTANCE.chartJs());
 		// gets native object from CHART.JS
 		this.nativeObject = Chart.getHelpers();
 	}

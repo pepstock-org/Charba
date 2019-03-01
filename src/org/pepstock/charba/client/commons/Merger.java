@@ -23,6 +23,7 @@ import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.options.Scale;
+import org.pepstock.charba.client.resources.Resources;
 
 /**
  * Singleton utility to merge java script object into another one and provide the service to get the chart options with all
@@ -51,7 +52,7 @@ public final class Merger {
 	 */
 	private Merger() {
 		// Inject Chart.js if not already loaded
-		Injector.ensureInjected();
+		Injector.ensureInjected(Resources.INSTANCE.chartJs());
 	}
 
 	/**

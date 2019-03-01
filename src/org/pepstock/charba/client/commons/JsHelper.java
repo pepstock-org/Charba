@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.events.ChartNativeEvent;
+import org.pepstock.charba.client.resources.Resources;
 
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.Element;
@@ -40,7 +41,7 @@ public final class JsHelper {
 	 */
 	private JsHelper() {
 		// to be sure that CHARBA java script object is injected
-		Injector.ensureInjected();
+		Injector.ensureInjected(Resources.INSTANCE.charbaHelper());
 	}
 
 	/**

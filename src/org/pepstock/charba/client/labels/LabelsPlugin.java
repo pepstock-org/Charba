@@ -18,6 +18,7 @@ package org.pepstock.charba.client.labels;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.resources.Extensions;
+import org.pepstock.charba.client.resources.Resources;
 
 /**
  * Entry point of <a href="https://github.com/emn178/chartjs-plugin-labels">LABELS plugin</a> with some static utilities to
@@ -58,11 +59,12 @@ public final class LabelsPlugin {
 	 * @param enableToAllCharts by <code>true</code> the plugin will be enabled to all charts, otherwise <code>false</code>.
 	 */
 	public static void enable(boolean enableToAllCharts) {
-		// injects CHARBA is not already injected
-		Injector.ensureInjected();
+		// Inject Chart.js if not already loaded
+		Injector.ensureInjected(Resources.INSTANCE.chartJs());
 		// injects LABELS plugin
 		Injector.ensureInjected(Extensions.INSTANCE.labelsPlugin());
 		// set the enabling to all charts at global level
 		Defaults.get().getPlugins().setEnabledAllCharts(ID, enableToAllCharts);
+
 	}
 }

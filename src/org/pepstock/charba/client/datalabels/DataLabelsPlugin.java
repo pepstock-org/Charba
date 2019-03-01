@@ -18,6 +18,7 @@ package org.pepstock.charba.client.datalabels;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.resources.Extensions;
+import org.pepstock.charba.client.resources.Resources;
 
 /**
  * Entry point of <a href="https://github.com/chartjs/chartjs-plugin-datalabels">DATALABELS plugin</a> to enable the plugin.<br>
@@ -58,8 +59,8 @@ public final class DataLabelsPlugin {
 	 * @param enableToAllCharts by <code>true</code> the plugin will be enabled to all charts, otherwise <code>false</code>.
 	 */
 	public static void enable(boolean enableToAllCharts) {
-		// injects CHARBA is not already injected
-		Injector.ensureInjected();
+		// Inject Chart.js if not already loaded
+		Injector.ensureInjected(Resources.INSTANCE.chartJs());
 		// injects LABELS plugin
 		Injector.ensureInjected(Extensions.INSTANCE.datalabelsPlugin());
 		// set the enabling to all charts at global level
