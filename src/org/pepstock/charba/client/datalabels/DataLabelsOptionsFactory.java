@@ -17,21 +17,25 @@ package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.plugins.AbstractPluginCachedOptionsFactory;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
-import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
  * Factory to get the options (form chart, form dataset or from default global ones) related to DATALABELS plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DataLabelsOptionsFactory extends AbstractPluginOptionsFactory<DataLabelsOptions> {
+public final class DataLabelsOptionsFactory extends AbstractPluginCachedOptionsFactory<DataLabelsOptions> {
 
 	/**
-	 * To avoid any instantiation. Use the static reference into {@link DataLabelsPlugin#FACTORY}.
+	 * To avoid any instantiation. Use the static reference into {@link DataLabelsPlugin#FACTORY}.<br>
+	 * Adds itself as charts life cycle listener to manage the cache of data labels options, in order to clean the instances
+	 * when the charts will be destroy.
+	 * 
+	 * @param pluginId plugin ID
 	 */
-	DataLabelsOptionsFactory() {
-		super(DataLabelsPlugin.ID);
+	DataLabelsOptionsFactory(String pluginId) {
+		super(pluginId);
 	}
 
 	/*

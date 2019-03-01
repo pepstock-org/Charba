@@ -17,7 +17,6 @@ package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Charts;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
@@ -55,7 +54,7 @@ import org.pepstock.charba.client.datalabels.enums.Anchor;
 import org.pepstock.charba.client.datalabels.enums.Display;
 import org.pepstock.charba.client.datalabels.enums.TextAlign;
 import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
-import org.pepstock.charba.client.plugins.AbstractPluginOptions;
+import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
@@ -70,7 +69,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DataLabelsOptions extends AbstractPluginOptions {
+public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -610,6 +609,8 @@ public final class DataLabelsOptions extends AbstractPluginOptions {
 	 */
 	public DataLabelsOptions() {
 		// creates the object registering it
+		// this constructor is used by user to set options for plugin
+		// both default global or chart one.
 		this(false);
 	}
 
@@ -621,15 +622,8 @@ public final class DataLabelsOptions extends AbstractPluginOptions {
 	DataLabelsOptions(boolean deferredRegistration) {
 		// creates an empty native object
 		super(DataLabelsPlugin.ID, DataLabelsPlugin.FACTORY, deferredRegistration);
-		// checks if the default global options has been added for the plugin
-		if (Defaults.get().getGlobal().getPlugins().hasOptions(DataLabelsPlugin.ID)) {
-			// reads the default default global options
-			defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(DataLabelsPlugin.ID, defaultsFactory);
-		} else {
-			// if here, no default global option
-			// then the plugin will use the static defaults
-			defaultsOptions = new DataLabelsDefaultsOptions();
-		}
+		// reads the default default global options
+		defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
 		// sets inner elements
 		padding = new Padding(defaultsOptions.getPadding());
 		font = new Font(defaultsOptions.getFont());

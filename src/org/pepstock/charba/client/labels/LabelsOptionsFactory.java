@@ -17,23 +17,25 @@ package org.pepstock.charba.client.labels;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.plugins.AbstractPluginCachedOptionsFactory;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
-import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
  * Factory to get the options (form chart or from default global ones) related to LABELS plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class LabelsOptionsFactory extends AbstractPluginOptionsFactory<LabelsOptions> {
+public final class LabelsOptionsFactory extends AbstractPluginCachedOptionsFactory<LabelsOptions> {
 
 	/**
 	 * To avoid any instantiation. Use the static reference into {@link LabelsPlugin#FACTORY}.<br>
 	 * Adds itself as charts life cycle listener to manage the cache of labels options, in order to clean the instances when the
 	 * charts will be destroy.
+	 * 
+	 * @param pluginId plugin ID
 	 */
-	LabelsOptionsFactory() {
-		super(LabelsPlugin.ID);
+	LabelsOptionsFactory(String pluginId) {
+		super(pluginId);
 	}
 
 	/*

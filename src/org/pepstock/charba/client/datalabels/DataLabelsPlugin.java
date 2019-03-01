@@ -37,7 +37,7 @@ public final class DataLabelsPlugin {
 	/**
 	 * Data labels options factory
 	 */
-	public static final DataLabelsOptionsFactory FACTORY = new DataLabelsOptionsFactory();
+	public static final DataLabelsOptionsFactory FACTORY = new DataLabelsOptionsFactory(ID);
 
 	/**
 	 * To avoid any instantiation

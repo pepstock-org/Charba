@@ -40,7 +40,7 @@ public final class ChartPointer extends AbstractPlugin {
 	/**
 	 * The factory to create options for plugin.
 	 */
-	public static final ChartPointerOptionsFactory FACTORY = new ChartPointerOptionsFactory();
+	public static final ChartPointerOptionsFactory FACTORY = new ChartPointerOptionsFactory(ID);
 	// cache to store options in order do not load every time the options
 	private static final Map<String, ChartPointerOptions> OPTIONS = new HashMap<>();
 

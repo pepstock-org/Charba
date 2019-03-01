@@ -15,25 +15,27 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
  * Factory to get the options (form chart or from default global ones) related to datasets items selector plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DatasetsItemsSelectorOptionsFactory implements NativeObjectContainerFactory<DatasetsItemsSelectorOptions> {
+public final class DatasetsItemsSelectorOptionsFactory extends AbstractPluginOptionsFactory<DatasetsItemsSelectorOptions> {
 
 	// factory instance to read the options from default global
 	private final DatasetsItemsSelectorDefaultsOptionsFactory defaultsFactory = new DatasetsItemsSelectorDefaultsOptionsFactory();
 
 	/**
 	 * To avoid any instantiation. Use the static reference into {@link DatasetsItemsSelector#FACTORY}.
+	 * 
+	 * @param plugin id
 	 */
-	DatasetsItemsSelectorOptionsFactory() {
-		// do nothing
+	DatasetsItemsSelectorOptionsFactory(String pluginId) {
+		super(pluginId);
 	}
 
 	/*
@@ -45,16 +47,7 @@ public final class DatasetsItemsSelectorOptionsFactory implements NativeObjectCo
 	@Override
 	public DatasetsItemsSelectorOptions create(NativeObject nativeObject) {
 		// defaults global options instance
-		DatasetsItemsSelectorDefaultsOptions defaultsOptions = null;
-		// checks if the default global options has been added for the plugin
-		if (Defaults.get().getGlobal().getPlugins().hasOptions(DatasetsItemsSelector.ID)) {
-			// reads the default default global options
-			defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(DatasetsItemsSelector.ID, defaultsFactory);
-		} else {
-			// if here, no default global option
-			// then the plugin will use the static defaults
-			defaultsOptions = new DatasetsItemsSelectorDefaultsOptions();
-		}
+		DatasetsItemsSelectorDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
 		// creates the options by the native object and the defaults
 		return new DatasetsItemsSelectorOptions(nativeObject, defaultsOptions);
 	}

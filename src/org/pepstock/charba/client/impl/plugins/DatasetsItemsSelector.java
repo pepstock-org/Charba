@@ -27,12 +27,11 @@ import org.pepstock.charba.client.impl.callbacks.AtLeastOneDatasetHandler;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
+import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.Image;
 
 /**
  * Enables the datasets items selection directly into the canvas.<br>
@@ -54,7 +53,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/**
 	 * The factory to read options for plugin
 	 */
-	public static final DatasetsItemsSelectorOptionsFactory FACTORY = new DatasetsItemsSelectorOptionsFactory();
+	public static final DatasetsItemsSelectorOptionsFactory FACTORY = new DatasetsItemsSelectorOptionsFactory(ID);
 	// map to maintain the selectors handler for every chart
 	private static final Map<String, SelectionHandler> HANDLERS = new HashMap<>();
 	// set to maintain the status if legend click handler, if already added or not
@@ -281,11 +280,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 					if (handler.isChartChanged(dataUrl)) {
 						// this is necessary to apply every time the handler
 						// will draw directly into canvas
-						Image img = new Image(dataUrl);
-						// fix dimension
-						img.setPixelSize(chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
-						// stores image
-						handler.setSnapshot(ImageElement.as(img.getElement()));
+						// stores image setting size
+						handler.setSnapshot(Utilities.toImageElement(dataUrl, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight()));
 					}
 					// if the selections is already present
 					// it refreshes all the calculation of existing selection
