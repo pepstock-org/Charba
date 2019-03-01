@@ -18,6 +18,7 @@ package org.pepstock.charba.client.colors;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.ImageElement;
@@ -33,7 +34,7 @@ import com.google.gwt.user.client.ui.Image;
  */
 public final class Pattern extends CanvasObject {
 	// exception message
-	private static final String IMG_NULL_MESSAGE = "Image instance is null!";
+	private static final String IMG_NULL_MESSAGE = "Image instance is not consitent or null!";
 
 	// default instance of image. The image SHOULD NOT NEVER BE NULL!
 	private final static ImageElement DEFAULT_IMAGE = null;
@@ -84,18 +85,7 @@ public final class Pattern extends CanvasObject {
 	 * @param repetition repetition value to apply to pattern
 	 */
 	public Pattern(ImageResource image, Context2d.Repetition repetition) {
-		// checks if image is not consistent
-		if (image != null) {
-			// reads image
-			Image img = new Image(image);
-			// creates pattern
-			setValue(Property._charbaPatternImg, ImageElement.as(img.getElement()));
-			setValue(Property._charbaPatternRepetition, repetition == null ? Context2d.Repetition.REPEAT.name() : repetition.name());
-		} else {
-			// if here, image is null
-			// then exception
-			throw new IllegalArgumentException(IMG_NULL_MESSAGE);
-		}
+		this(Utilities.toImageElement(image), repetition);
 	}
 
 	/**
@@ -105,16 +95,7 @@ public final class Pattern extends CanvasObject {
 	 * @param repetition repetition value to apply to pattern
 	 */
 	public Pattern(Image image, Context2d.Repetition repetition) {
-		// checks if image is not consistent
-		if (image != null) {
-			// creates pattern
-			setValue(Property._charbaPatternImg, ImageElement.as(image.getElement()));
-			setValue(Property._charbaPatternRepetition, repetition == null ? Context2d.Repetition.REPEAT.name() : repetition.name());
-		} else {
-			// if here, image is null
-			// then exception
-			throw new IllegalArgumentException(IMG_NULL_MESSAGE);
-		}
+		this(Utilities.toImageElement(image), repetition);
 	}
 
 	/**

@@ -23,9 +23,9 @@ import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
 import org.pepstock.charba.client.resources.Resources;
+import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.user.client.ui.Image;
 
 /**
  * Datasets items selector plugin default options for CLEAR SELECTION element.<br>
@@ -64,7 +64,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	/**
 	 * Default image for clear selection element
 	 */
-	private static final ImageElement DEFAULT_IMAGE = ImageElement.as(new Image(Resources.INSTANCE.clearSelection18()).getElement());
+	private static final ImageElement DEFAULT_IMAGE = Utilities.toImageElement(Resources.INSTANCE.clearSelection18());
 
 	/**
 	 * Default flag if clear selection will use selection area style

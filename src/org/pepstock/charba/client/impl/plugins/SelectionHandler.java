@@ -22,12 +22,12 @@ import org.pepstock.charba.client.ChartNode;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.enums.AxisType;
-import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.ScaleItem;
+import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.canvas.dom.client.Context2d.TextBaseline;
@@ -53,8 +53,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
  */
 final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHandler {
 
-	// string format of font style
-	private static final String FONT_TEMPLATE = "{0} {1}px {2}";
 	// chart instance
 	private final AbstractChart<?, ?> chart;
 	// plugin options
@@ -728,7 +726,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// save context
 		ctx.save();
 		// sets font
-		ctx.setFont(getFont(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
+		ctx.setFont(Utilities.toFont(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
 		// gets metrics
 		TextMetrics metrics = ctx.measureText(clearSelection.getLabel());
 		// stores the label width
@@ -973,7 +971,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// checks based on render type what must be draw
 		if (Render.label.equals(clearSelection.getRender())) {
 			// sets font
-			ctx.setFont(getFont(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
+			ctx.setFont(Utilities.toFont(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
 			// sets color to canvas
 			ctx.setFillStyle(clearSelection.getFontColorAsString());
 			// sets alignment from center point
@@ -982,7 +980,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
 		} else if (Render.label_image.equals(clearSelection.getRender())) {
 			// sets font
-			ctx.setFont(getFont(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
+			ctx.setFont(Utilities.toFont(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
 			// sets color to canvas
 			ctx.setFillStyle(clearSelection.getFontColorAsString());
 			// sets alignment from center point
@@ -995,7 +993,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			// draws scaled image
 			ctx.drawImage(clearSelection.getImage(), clearSelection.getImageX(), clearSelection.getImageY(), clearSelection.getImageWidth(), clearSelection.getImageHeight());
 			// sets font
-			ctx.setFont(getFont(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
+			ctx.setFont(Utilities.toFont(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
 			// sets color to canvas
 			ctx.setFillStyle(clearSelection.getFontColorAsString());
 			// sets alignment from center point
@@ -1006,22 +1004,6 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			// draws scaled image
 			ctx.drawImage(clearSelection.getImage(), clearSelection.getImageX(), clearSelection.getImageY(), clearSelection.getImageWidth(), clearSelection.getImageHeight());
 		}
-	}
-
-	/**
-	 * Builds the font string to use in the canvas object.<br>
-	 * The format is [fontStyle] [fontSize] [fontFamily].
-	 * 
-	 * @param style font style to use
-	 * @param fontSize font size
-	 * @param fontFamily font family
-	 * @return the font string to use in the canvas object.
-	 */
-	private String getFont(FontStyle style, int fontSize, String fontFamily) {
-		// gets template
-		final String result = FONT_TEMPLATE;
-		// formats
-		return result.replaceAll("\\{0\\}", style.name()).replaceAll("\\{1\\}", String.valueOf(fontSize)).replaceAll("\\{2\\}", fontFamily);
 	}
 
 	/**

@@ -40,6 +40,7 @@ import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.enums.RelativeDatasetIndexFill;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
@@ -969,9 +970,8 @@ abstract class LiningDataset extends Dataset {
 			for (int i = 0; i < pointStyle.length; i++) {
 				// transform a image resource into image element by image object
 				// creates image object
-				Image img = new Image(pointStyle[i]);
 				// stores into array changing in image element
-				array[i] = ImageElement.as(img.getElement());
+				array[i] = Utilities.toImageElement(pointStyle[i]);
 			}
 			// stores it
 			setPointStyle(array);
@@ -998,7 +998,7 @@ abstract class LiningDataset extends Dataset {
 			for (int i = 0; i < pointStyle.length; i++) {
 				// transform a image resource into image element by image object
 				// stores into array changing in image element
-				array[i] = ImageElement.as(pointStyle[i].getElement());
+				array[i] = Utilities.toImageElement(pointStyle[i]);
 			}
 			// stores it
 			setPointStyle(array);

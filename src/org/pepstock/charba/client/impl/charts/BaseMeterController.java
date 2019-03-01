@@ -26,6 +26,7 @@ import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.items.ChartAreaNode;
+import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.canvas.dom.client.Context2d.TextAlign;
@@ -48,8 +49,6 @@ final class BaseMeterController extends AbstractController {
 	private static final int PADDING = 4;
 	// max percentage
 	private static final double MAX_PERCENTAGE = 100D;
-	// string format of font style
-	private static final String FONT_TEMPLATE = "{0} {1}px {2}";
 	// SQRT of 2 to calculate the sqare inside the doughnut
 	private static final double SQRT_2 = Math.sqrt(2);
 	// controller type
@@ -148,14 +147,14 @@ final class BaseMeterController extends AbstractController {
 		// checks if it must draw also the label
 		if ((MeterDisplay.valueAndLabel.equals(options.getDisplay()) || MeterDisplay.percentageAndLabel.equals(options.getDisplay())) && label != null) {
 			// sets font
-			ctx.setFont(getFont(style, fontSize, fontFamily));
+			ctx.setFont(Utilities.toFont(style, fontSize, fontFamily));
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.BOTTOM);
 			// draws text
 			ctx.fillText(valueToShow, centerX, centerY - PADDING);
 			// re-calculates the font size for label
 			fontSize = calculateFontSize(ctx, sideOfSquare, label, style, fontFamily);
-			ctx.setFont(getFont(style, fontSize, fontFamily));
+			ctx.setFont(Utilities.toFont(style, fontSize, fontFamily));
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.TOP);
 			// draws text
@@ -163,7 +162,7 @@ final class BaseMeterController extends AbstractController {
 		} else {
 			// if here it must draw ONLY the value
 			// sets font
-			ctx.setFont(getFont(style, fontSize, fontFamily));
+			ctx.setFont(Utilities.toFont(style, fontSize, fontFamily));
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.MIDDLE);
 			// draws text
@@ -190,7 +189,7 @@ final class BaseMeterController extends AbstractController {
 		// loop to calculate the size
 		while (check) {
 			// sets font
-			ctx.setFont(getFont(style, fontSize, fontFamily));
+			ctx.setFont(Utilities.toFont(style, fontSize, fontFamily));
 			// gets metrics
 			TextMetrics metrics = ctx.measureText(value);
 			// if the width is inside of side (and padding) or
@@ -217,22 +216,6 @@ final class BaseMeterController extends AbstractController {
 	private String getFormattedValue(double value, String format) {
 		// checks if format is set otherwise it uses the default
 		return format == null ? NumberFormat.getFormat(MeterOptions.DEFAULT_FORMAT).format(value) : NumberFormat.getFormat(format).format(value);
-	}
-
-	/**
-	 * Builds the font string to use in the canvas object.<br>
-	 * The format is [fontStyle] [fontSize] [fontFamily].
-	 * 
-	 * @param style font style to use
-	 * @param fontSize font size
-	 * @param fontFamily font family
-	 * @return the font string to use in the canvas object.
-	 */
-	private String getFont(FontStyle style, int fontSize, String fontFamily) {
-		// gets template
-		final String result = FONT_TEMPLATE;
-		// formats
-		return result.replaceAll("\\{0\\}", style.name()).replaceAll("\\{1\\}", String.valueOf(fontSize)).replaceAll("\\{2\\}", fontFamily);
 	}
 
 }
