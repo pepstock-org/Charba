@@ -22,7 +22,7 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
-import org.pepstock.charba.client.resources.Resources;
+import org.pepstock.charba.client.resources.DefaultsResources;
 import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.dom.client.ImageElement;
@@ -64,7 +64,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	/**
 	 * Default image for clear selection element
 	 */
-	private static final ImageElement DEFAULT_IMAGE = Utilities.toImageElement(Resources.INSTANCE.clearSelection18());
+	private static final ImageElement DEFAULT_IMAGE = Utilities.toImageElement(DefaultsResources.getResources().clearSelection18());
 
 	/**
 	 * Default flag if clear selection will use selection area style

@@ -21,7 +21,7 @@ import java.util.Set;
 
 import org.pepstock.charba.client.Controller;
 import org.pepstock.charba.client.Injector;
-import org.pepstock.charba.client.resources.Resources;
+import org.pepstock.charba.client.resources.DefaultsResources;
 
 /**
  * Global configuration to set controllers at global level.<br>
@@ -42,7 +42,8 @@ public final class Controllers {
 	 */
 	private Controllers() {
 		// to be sure that chart.js has been injected
-		Injector.ensureInjected(Resources.INSTANCE.chartJs());
+//		Injector.ensureInjected(Resources.INSTANCE.chartJs());
+		Injector.ensureInjected(DefaultsResources.getResources().chartJs());
 	}
 
 	/**

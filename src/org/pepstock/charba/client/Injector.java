@@ -20,6 +20,7 @@ import java.util.Set;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ScriptElement;
+import com.google.gwt.resources.client.ResourcePrototype;
 import com.google.gwt.resources.client.TextResource;
 
 /**
@@ -43,17 +44,20 @@ public final class Injector {
 	 * 
 	 * @param resource script resource
 	 */
-	public static void ensureInjected(TextResource resource) {
+	public static void ensureInjected(ResourcePrototype resource) {
 		// checks if already injected
 		if (!ELEMENTS_INJECTED.contains(resource.getName())) {
-			// creates a script element
-			ScriptElement scriptElement = Document.get().createScriptElement();
-			// sets ID
-			scriptElement.setId(CHARBA_PREFIX_SCRIPT_ELEMENT_ID + resource.getName());
-			// sets the script content source
-			scriptElement.setInnerText(resource.getText());
-			// appends to the body
-			Document.get().getBody().appendChild(scriptElement);
+			if (resource instanceof TextResource) {
+				TextResource textResource = (TextResource)resource;
+				// creates a script element
+				ScriptElement scriptElement = Document.get().createScriptElement();
+				// sets ID
+				scriptElement.setId(CHARBA_PREFIX_SCRIPT_ELEMENT_ID + resource.getName());
+				// sets the script content source
+				scriptElement.setInnerText(textResource.getText());
+				// appends to the body
+				Document.get().getBody().appendChild(scriptElement);
+			}
 			ELEMENTS_INJECTED.add(resource.getName());
 		}
 	}
