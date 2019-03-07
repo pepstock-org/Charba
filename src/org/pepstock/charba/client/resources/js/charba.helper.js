@@ -169,7 +169,7 @@
     	return obj;
     }
     /*
-		JSHelperController is an object with a set of static methods used as utility
+		JSControllerHelper is an object with a set of static methods used as utility
 		and needed to improve JSINTEROP adoption for CHARBA controllers implementation.   
 	*/
     function JsControllerHelper() {};
@@ -261,4 +261,22 @@
     */
     JsControllerHelper.update = function(controllerType, context, reset) {
     	Chart.controllers[controllerType].prototype.update.call(context, reset);
+    }
+    /*
+		JSWindowHelper is an object with a set of static methods used as utility
+		and needed to act on window java script object.   
+	*/
+    function JsWindowHelper() {};
+    /*
+     CSS media queries allow changing styles when printing a page. The CSS applied from these media queries may cause charts
+	 to need to resize. However, the resize won't happen automatically. To support resizing charts when printing, one needs to
+	 hook the "onbeforeprint" event and manually trigger resizing of each chart.
+    */
+    JsWindowHelper.enableResizeOnBeforePrint = function() {
+    	window.onbeforeprint = function (event) {
+ 			for (var id in Chart.instances) {
+    			Chart.instances[id].resize();
+    			console.log("Resize "+id);
+  			}
+		}
     }

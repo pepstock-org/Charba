@@ -26,8 +26,7 @@ import com.google.gwt.dom.client.Element;
 
 /**
  * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
- * utilities to act on java script objects.<br>
- * This wrapper is necessary to ensure that script is injected with CHART.JS.
+ * utilities to act on java script objects.
  * 
  * @author Andrea "Stock" Stocchero
  *
