@@ -22,26 +22,22 @@ import com.google.gwt.resources.client.TextResource;
 
 /**
  * Client bundle to reference CHART.JS and other java script codes, always needed to CHARBA.<br>
- * It also includes some image resources for datasets items selector plugin.
+ * CHART.JS text resource it's just defined because the mode how to inject depends on the implementation of this interface. It
+ * includes some image resources for datasets items selector plugin, the same for all implementation.
  * 
  * @author Andrea "Stock" Stocchero
+ * @see DeferredResources
+ * @see EmbeddedResources
+ * @param <T> resources prototype type of CHART.JS resource
  */
 public interface Resources<T extends ResourcePrototype> extends ClientBundle {
 
 	/**
-	 * Static reference to resources java script source code
+	 * Contains text representation of native chart.js code. FIXME downloaded NOT ufficial version to solve the issue about
+	 * POINTS and GRADIENTS color FIXME https://www.chartjs.org/docs/latest/developers/
+	 * 
+	 * @return chart.js code
 	 */
-//	public static final Resources INSTANCE = GWT.create(Resources.class);
-
-//	/**
-//	 * Contains text representation of native chart.js code. FIXME downloaded NOT ufficial version to solve the issue about
-//	 * POINTS and GRADIENTS color FIXME https://www.chartjs.org/docs/latest/developers/
-//	 * 
-//	 * @return chart.js code
-//	 */
-//	@Source("js/chart.bundle.min.js")
-//	TextResource chartJs();
-	
 	T chartJs();
 
 	/**

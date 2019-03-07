@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.controllers.Controllers;
 import org.pepstock.charba.client.plugins.GlobalPlugins;
-import org.pepstock.charba.client.resources.DefaultsResources;
+import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
  * This singleton is a wrapper to <code>defaults</code> object that CHART.JS (by CHART object) provides to get defaults values.
@@ -55,8 +55,7 @@ public final class Defaults {
 	 */
 	private Defaults() {
 		// to be sure that chart.js has been injected
-//		Injector.ensureInjected(Resources.INSTANCE.chartJs());
-		Injector.ensureInjected(DefaultsResources.getResources().chartJs());
+		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
 		// gets defaults from CHART.JS
 		wrapperDefaults = new WrapperDefaults(Chart.getDefaults());
 		// creates global options wrapping the global property of CHART

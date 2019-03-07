@@ -16,28 +16,29 @@
 package org.pepstock.charba.client.resources;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.TextResource;
+import com.google.gwt.resources.client.ExternalTextResource;
 
 /**
  * Client bundle to reference CHART.JS, always needed to CHARBA.<br>
- * This resources type will load the CHART.JS module in sync mode, as part of GWT module to be down loaded.
+ * This resources type will load the CHART.JS module in async mode in order to optimize the performance when GWT code splitting
+ * is implemented.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface EmbeddedResources extends Resources<TextResource> {
+public interface DeferredResources extends Resources<ExternalTextResource> {
 
 	/**
 	 * Static reference to resources java script source code
 	 */
-	public static final EmbeddedResources INSTANCE = GWT.create(EmbeddedResources.class);
+	public static final DeferredResources INSTANCE = GWT.create(DeferredResources.class);
 
 	/**
 	 * Contains text representation of native chart.js code. FIXME downloaded NOT ufficial version to solve the issue about
 	 * POINTS and GRADIENTS color FIXME https://www.chartjs.org/docs/latest/developers/
 	 * 
-	 * @return chart.js code in sync mode
+	 * @return chart.js code in async mode
 	 */
 	@Source("js/chart.bundle.min.js")
-	TextResource chartJs();
+	ExternalTextResource chartJs();
 
 }
