@@ -39,8 +39,6 @@ import org.pepstock.charba.client.options.Scales;
  */
 public class LineDataset extends LiningDataset implements HasDataPoints {
 
-	// default value for cubic interpolation mode
-	private static final String DEFAULT_CUBIC_INTERPOLATION_MODE = "default";
 	// factory to create data points
 	private final DataPointListFactory factory = new DataPointListFactory();
 
@@ -137,10 +135,10 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	/**
 	 * Returns algorithm used to interpolate a smooth curve from the discrete data points.
 	 * 
-	 * @return algorithm used to interpolate a smooth curve from the discrete data points. Default is <code>'default'</code>.
+	 * @return algorithm used to interpolate a smooth curve from the discrete data points.
 	 */
 	public String getCubicInterpolationMode() {
-		return getValue(Property.cubicInterpolationMode, DEFAULT_CUBIC_INTERPOLATION_MODE);
+		return getValue(Property.cubicInterpolationMode, getDefaultValues().getElements().getLine().getCubicInterpolationMode());
 	}
 
 	/**

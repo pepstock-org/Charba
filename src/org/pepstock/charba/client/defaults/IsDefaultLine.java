@@ -64,6 +64,13 @@ public interface IsDefaultLine extends IsDefaultArc {
 	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
 	 */
 	boolean isCapBezierPoints();
+	
+	/**
+	 * Returns algorithm used to interpolate a smooth curve from the discrete data points.
+	 * 
+	 * @return algorithm used to interpolate a smooth curve from the discrete data points. Default is <code>'default'</code>.
+	 */
+	String getCubicInterpolationMode();
 
 	/**
 	 * Returns how to fill the area under the line.

@@ -42,6 +42,8 @@ public final class DefaultLine extends DefaultArc implements IsDefaultLine {
 	private static final boolean DEFAULT_CAP_BEZIER_POINTS = true;
 
 	private static final boolean DEFAULT_STEPPED = false;
+	// default value for cubic interpolation mode
+	private static final String DEFAULT_CUBIC_INTERPOLATION_MODE = "";
 
 	/*
 	 * (non-Javadoc)
@@ -121,6 +123,16 @@ public final class DefaultLine extends DefaultArc implements IsDefaultLine {
 	@Override
 	public boolean isCapBezierPoints() {
 		return DEFAULT_CAP_BEZIER_POINTS;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#getCubicInterpolationMode()
+	 */
+	@Override
+	public String getCubicInterpolationMode() {
+		return DEFAULT_CUBIC_INTERPOLATION_MODE;
 	}
 
 	/*

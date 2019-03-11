@@ -122,6 +122,16 @@ public final class DefaultChartLine implements IsDefaultLine {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#getCubicInterpolationMode()
+	 */
+	@Override
+	public String getCubicInterpolationMode() {
+		return line.getCubicInterpolationMode();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#getFill()
 	 */
 	@Override

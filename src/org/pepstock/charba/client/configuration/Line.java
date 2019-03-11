@@ -159,6 +159,37 @@ public class Line extends AbstractConfigurationElement {
 	}
 
 	/**
+	 * Sets algorithm used to interpolate a smooth curve from the discrete data points.<br>
+	 * The following interpolation modes are supported:<br>
+	 * <br>
+	 * 
+	 * <pre>
+	 * 'default'
+	 * 'monotone'
+	 * </pre>
+	 * 
+	 * <br>
+	 * The 'default' algorithm uses a custom weighted cubic interpolation, which produces pleasant curves for all types of
+	 * datasets.<br>
+	 * The 'monotone' algorithm is more suited to y = f(x) datasets : it preserves monotonicity (or piecewise monotonicity) of
+	 * the dataset being interpolated, and ensures local extremums (if any) stay at input data points.
+	 * 
+	 * @param mode algorithm used to interpolate a smooth curve from the discrete data points
+	 */
+	public void setCubicInterpolationMode(String mode) {
+		getOptions().getElements().getLine().setCubicInterpolationMode(mode);
+	}
+
+	/**
+	 * Returns algorithm used to interpolate a smooth curve from the discrete data points.
+	 * 
+	 * @return algorithm used to interpolate a smooth curve from the discrete data points. Default is <code>'default'</code>.
+	 */
+	public String getCubicInterpolationMode() {
+		return getOptions().getElements().getLine().getCubicInterpolationMode();
+	}
+	
+	/**
 	 * Sets how to fill the area under the line.
 	 * 
 	 * @param fill <code>true</code> to fill, otherwise <code>false</code>.
