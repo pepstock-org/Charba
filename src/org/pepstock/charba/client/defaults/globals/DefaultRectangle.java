@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultRectangle;
-import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.enums.BorderSkipped;
 
 /**
  * CHART.JS default values for RECTANGLE element.
@@ -67,8 +67,8 @@ public final class DefaultRectangle extends DefaultArc implements IsDefaultRecta
 	 * @see org.pepstock.charba.client.options.elements.rectangle.IsDefaultRectangle#getBorderSkipped()
 	 */
 	@Override
-	public Position getBorderSkipped() {
-		return Position.bottom;
+	public BorderSkipped getBorderSkipped() {
+		return BorderSkipped.bottom;
 	}
 
 }

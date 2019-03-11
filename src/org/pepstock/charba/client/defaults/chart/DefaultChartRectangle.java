@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultRectangle;
-import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.options.Rectangle;
 
 /**
@@ -73,7 +73,7 @@ public final class DefaultChartRectangle implements IsDefaultRectangle {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultRectangle#getBorderSkipped()
 	 */
 	@Override
-	public Position getBorderSkipped() {
+	public BorderSkipped getBorderSkipped() {
 		return rectangle.getBorderSkipped();
 	}
 

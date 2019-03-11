@@ -18,11 +18,14 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Property to set the position's edge of an element to a unit above/below its normal position.
+ * Property to set the border position on chart datasets.<br>
+ * This setting is used to avoid drawing the bar stroke at the base of the fill. In general, this does not need to be changed
+ * except when creating chart types that derive from a bar chart.<br>
+ * For negative bars in vertical chart, top and bottom are flipped. Same goes for left and right in horizontal chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum Position implements Key
+public enum BorderSkipped implements Key
 {
 
 	/**
@@ -40,5 +43,9 @@ public enum Position implements Key
 	/**
 	 * the right property sets the right edge of an element to a unit to the left/right to its normal position.
 	 */
-	right;
+	right,
+	/**
+	 * the property sets <code>false</code> to avoid drawing the bar stroke at the base of the fill.
+	 */
+	isFalse;
 }

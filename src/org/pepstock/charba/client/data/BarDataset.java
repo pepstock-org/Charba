@@ -19,9 +19,10 @@ import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.enums.DataType;
-import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.options.Scales;
 
 /**
@@ -109,10 +110,31 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	/**
 	 * Sets the edge to skip drawing the border for.
 	 * 
+	 * @param borderskip to set <code>false</code> as border skipped. If set <code>true</code>, is ignored
+	 */
+	public void setBorderSkipped(boolean borderskip) {
+		// checks value for border skipped
+		// if not false, otherwise ignore it
+		if (!borderskip) {
+			// stores boolean value
+			setValue(Property.borderSkipped, BorderSkipped.isFalse);
+		}
+	}
+	
+	/**
+	 * Sets the edge to skip drawing the border for.
+	 * 
 	 * @param position the edge to skip drawing the border for.
 	 */
-	public void setBorderSkipped(Position position) {
-		setValue(Property.borderSkipped, position);
+	public void setBorderSkipped(BorderSkipped position) {
+		// checks if setting a false value
+		if (BorderSkipped.isFalse.equals(position)) {
+			// stores boolean value
+			setValue(Property.borderSkipped, false);
+		} else {
+			// otherwise stores the key value
+			setValue(Property.borderSkipped, position);
+		}
 	}
 
 	/**
@@ -120,10 +142,16 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 * 
 	 * @return the edge to skip drawing the border for.
 	 */
-	public Position getBorderSkipped() {
-		return getValue(Property.borderSkipped, Position.class, getDefaultValues().getElements().getRectangle().getBorderSkipped());
+	public BorderSkipped getBorderSkipped() {
+		// checks if 'false' has been set
+		if (ObjectType.Boolean.equals(type(Property.borderSkipped))) {
+			// returns is false
+			return BorderSkipped.isFalse;
+		}
+		// otherwise returns the enum value as string
+		return getValue(Property.borderSkipped, BorderSkipped.class, getDefaultValues().getElements().getRectangle().getBorderSkipped());
 	}
-
+	
 	/**
 	 * Sets the data property of a dataset for a chart is specified as an array of data points.
 	 * 
