@@ -52,7 +52,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 		xAxisID,
 		yAxisID,
 		cubicInterpolationMode,
-		showLines,
+		showLine,
 		spanGaps,
 		steppedLine
 	}
@@ -148,8 +148,8 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * 
 	 * @param showLine <code>false</code> if the line is not drawn for this dataset.
 	 */
-	public void setShowLines(boolean showLine) {
-		setValue(Property.showLines, showLine);
+	public void setShowLine(boolean showLine) {
+		setValue(Property.showLine, showLine);
 	}
 
 	/**
@@ -157,8 +157,8 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * 
 	 * @return <code>false</code> if the line is not drawn for this dataset.
 	 */
-	public boolean isShowLines() {
-		return getValue(Property.showLines, getDefaultValues().isShowLines());
+	public boolean isShowLine() {
+		return getValue(Property.showLine, getDefaultValues().isShowLines());
 	}
 
 	/**
