@@ -33,6 +33,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.chart.DefaultChartScale;
+import org.pepstock.charba.client.enums.AxisDisplay;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.items.AxisItem;
@@ -663,13 +664,27 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	}
 
 	/**
-	 * Returns if axis is hidden.
+	 * The display option controls the visibility of axis.<br>
+	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible
+	 * only if at least one associated dataset is visible.
 	 * 
-	 * @return <code>false</code> if axis is hidden, otherwise <code>true</code>.
+	 * @param display display option controls the visibility of axis
 	 */
-	public boolean isDisplay() {
-		return getScale().isDisplay();
+	public final void setDisplay(AxisDisplay display) {
+		getScale().setDisplay(display);
 	}
+
+	/**
+	 * The display option controls the visibility of axis.<br>
+	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible
+	 * only if at least one associated dataset is visible.
+	 * 
+	 * @return display option controls the visibility of axis
+	 */
+	public final AxisDisplay getDisplay() {
+		return getScale().getDisplay();
+	}
+
 
 	/**
 	 * The weight used to sort the axis. Higher weights are further away from the chart area.

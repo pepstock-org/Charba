@@ -17,7 +17,9 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
+import org.pepstock.charba.client.enums.AxisDisplay;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
@@ -272,12 +274,41 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	}
 
 	/**
-	 * If <code>true</code>, shows the axis.
+	 * The display option controls the visibility of axis.<br>
+	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible
+	 * only if at least one associated dataset is visible.
 	 * 
-	 * @return if <code>true</code>, shows the axis.
+	 * @param display display option controls the visibility of axis
 	 */
-	public final boolean isDisplay() {
-		return getValue(Property.display, getDefaultValues().isDisplay());
+	public final void setDisplay(AxisDisplay display) {
+		// checks if is setting auto
+		if (AxisDisplay.auto.equals(display)) {
+			setValue(Property.display, display);
+			// checks if all parents are attached
+			checkAndAddToParent();
+		} else {
+			// otherwise transforms into a boolean
+			setDisplay(AxisDisplay.True.equals(display) ? true : false);
+		}
+	}
+
+	/**
+	 * The display option controls the visibility of axis.<br>
+	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible
+	 * only if at least one associated dataset is visible.
+	 * 
+	 * @return display option controls the visibility of axis
+	 */
+	public final AxisDisplay getDisplay() {
+		// checks if is boolean
+		if (ObjectType.Boolean.equals(type(Property.display))) {
+			// gets value
+			boolean value = getValue(Property.display, true);
+			// returns value
+			return value ? AxisDisplay.True : AxisDisplay.False;
+		}
+		// returns value. Must be auto
+		return getValue(Property.display, AxisDisplay.class, getDefaultValues().getDisplay());
 	}
 
 	/**

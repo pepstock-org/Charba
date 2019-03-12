@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
+import org.pepstock.charba.client.enums.AxisDisplay;
 
 /**
  * CHART.JS default values for scale/axis element.
@@ -30,11 +31,11 @@ public final class DefaultScales implements IsDefaultScales {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#isDisplay()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getDisplay()
 	 */
 	@Override
-	public boolean isDisplay() {
-		return scale.isDisplay();
+	public AxisDisplay getDisplay() {
+		return scale.getDisplay();
 	}
 
 	/*

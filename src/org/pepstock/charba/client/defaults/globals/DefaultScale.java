@@ -22,6 +22,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.defaults.IsDefaultTime;
+import org.pepstock.charba.client.enums.AxisDisplay;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
@@ -33,8 +34,6 @@ import org.pepstock.charba.client.enums.ScaleDistribution;
  * @author Andrea "Stock" Stocchero
  */
 public final class DefaultScale implements IsDefaultScale {
-
-	private static final boolean DEFAULT_DISPLAY = true;
 
 	private static final boolean DEFAULT_OFFSET = false;
 
@@ -158,8 +157,8 @@ public final class DefaultScale implements IsDefaultScale {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#isDisplay()
 	 */
 	@Override
-	public boolean isDisplay() {
-		return DEFAULT_DISPLAY;
+	public AxisDisplay getDisplay() {
+		return AxisDisplay.True;
 	}
 
 	/*
