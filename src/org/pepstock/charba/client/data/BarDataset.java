@@ -53,7 +53,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 * It uses the global options has default.
 	 */
 	public BarDataset() {
-		super();
+		this(null);
 	}
 
 	/**

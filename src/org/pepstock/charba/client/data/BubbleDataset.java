@@ -57,7 +57,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 * It uses the global options has default.
 	 */
 	public BubbleDataset() {
-		super();
+		this(null);
 	}
 
 	/**

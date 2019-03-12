@@ -15,28 +15,31 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.enums.BorderAlign;
-
 /**
  * Interface to define arc object defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultArc extends IsDefaultOptionsElement {
+public interface IsDefaultOptionsElement {
 
 	/**
-	 * Returns the property to set the border alignment on chart datasets.
+	 * Returns the background color.
 	 * 
-	 * @return the property to set the border alignment on chart datasets.
+	 * @return the background color.
 	 */
-	BorderAlign getBorderAlign();
+	String getBackgroundColorAsString();
 
 	/**
-	 * Returns the relative thickness of the dataset.<br>
-	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of
-	 * all the dataset weight values.
+	 * Returns the border width.
 	 * 
-	 * @return the relative thickness of the dataset
+	 * @return the border width.
 	 */
-	double getWeight();
+	int getBorderWidth();
+
+	/**
+	 * Returns the border color.
+	 * 
+	 * @return the border color.
+	 */
+	String getBorderColorAsString();
 }

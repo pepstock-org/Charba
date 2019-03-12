@@ -151,7 +151,7 @@ public final class DefaultChartScale implements IsDefaultScale {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getWeight()
 	 */
 	@Override
-	public int getWeight() {
+	public double getWeight() {
 		return scale.getWeight();
 	}
 

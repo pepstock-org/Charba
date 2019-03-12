@@ -15,7 +15,9 @@
 */
 package org.pepstock.charba.client.data;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.enums.BorderAlign;
 
 /**
  * The polar area chart allows a number of properties to be specified for each dataset. These are used to set display properties
@@ -26,11 +28,18 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 public class PolarAreaDataset extends HovingDataset {
 
 	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		borderAlign
+	} 
+	/**
 	 * Creates a dataset.<br>
 	 * It uses the global options has default.
 	 */
 	public PolarAreaDataset() {
-		super();
+		this(null);
 	}
 
 	/**
@@ -41,5 +50,24 @@ public class PolarAreaDataset extends HovingDataset {
 	public PolarAreaDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
 	}
+	
+	/**
+	 * Sets the property to set the border alignment on chart datasets.
+	 * 
+	 * @param align the property to set the border alignment on chart datasets
+	 */
+	public void setBorderAlign(BorderAlign align) {
+		setValue(Property.borderAlign, align);
+	}
+	
+	/**
+	 * Returns the property to set the border alignment on chart datasets.
+	 * 
+	 * @return the property to set the border alignment on chart datasets.
+	 */
+	public BorderAlign getBorderAlign() {
+		return getValue(Property.borderAlign, BorderAlign.class, getDefaultValues().getElements().getArc().getBorderAlign());
+	}
+
 
 }

@@ -59,14 +59,6 @@ abstract class HovingDataset extends Dataset {
 	}
 
 	/**
-	 * Creates a dataset.<br>
-	 * It uses the global options has default.
-	 */
-	HovingDataset() {
-		super();
-	}
-
-	/**
 	 * Creates the dataset using a default.
 	 * 
 	 * @param defaultValues default options

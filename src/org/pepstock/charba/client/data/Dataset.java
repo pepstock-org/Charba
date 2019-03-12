@@ -80,21 +80,12 @@ public abstract class Dataset extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates a dataset.<br>
-	 * It uses the global options has default.
-	 */
-	Dataset() {
-		// creates object with global default
-		this(Defaults.get().getGlobal());
-	}
-
-	/**
 	 * Creates the dataset using a default, adding patterns and gradients element.
 	 * 
 	 * @param defaultValues default options
 	 */
 	Dataset(IsDefaultOptions defaultValues) {
-		this.defaultValues = defaultValues;
+		this.defaultValues = defaultValues == null ? Defaults.get().getGlobal() : defaultValues;
 		// stores the id based on a counter
 		setValue(Property._charbaId, COUNTER.getAndIncrement());
 		// sets the Charba containers into dataset java script configuration
@@ -328,6 +319,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @param label the label for the dataset which appears in the legend and tooltips.
 	 */
 	public void setLabel(String label) {
+		// FIXME
 		setValue(Property.label, label);
 	}
 

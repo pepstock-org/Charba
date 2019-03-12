@@ -24,8 +24,8 @@ import org.pepstock.charba.client.enums.JoinStyle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultLine extends IsDefaultArc {
-
+public interface IsDefaultLine extends IsDefaultOptionsElement {
+	
 	/**
 	 * Returns the Bezier curve tension (0 for no Bezier curves).
 	 * 

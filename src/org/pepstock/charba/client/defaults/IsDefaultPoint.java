@@ -22,7 +22,7 @@ import org.pepstock.charba.client.enums.PointStyle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultPoint extends IsDefaultArc {
+public interface IsDefaultPoint extends IsDefaultOptionsElement {
 
 	/**
 	 * Returns the radius of the point when hovered.

@@ -245,7 +245,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @param weight weight of axis
 	 */
-	public final void setWeight(int weight) {
+	public final void setWeight(double weight) {
 		setValue(Property.weight, weight);
 		// checks if all parents are attached
 		checkAndAddToParent();
@@ -256,7 +256,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return weight of axis.
 	 */
-	public final int getWeight() {
+	public final double getWeight() {
 		return getValue(Property.weight, getDefaultValues().getWeight());
 	}
 

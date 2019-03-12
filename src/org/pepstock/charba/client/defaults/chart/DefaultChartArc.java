@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultArc;
+import org.pepstock.charba.client.enums.BorderAlign;
 import org.pepstock.charba.client.options.Arc;
 
 /**
@@ -64,6 +65,26 @@ public final class DefaultChartArc implements IsDefaultArc {
 	@Override
 	public String getBorderColorAsString() {
 		return arc.getBorderColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getBorderAlign()
+	 */
+	@Override
+	public BorderAlign getBorderAlign() {
+		return arc.getBorderAlign();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getWeight()
+	 */
+	@Override
+	public double getWeight() {
+		return arc.getWeight();
 	}
 
 }

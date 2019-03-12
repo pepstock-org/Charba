@@ -19,7 +19,7 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.IsDefaultArc;
+import org.pepstock.charba.client.defaults.IsDefaultOptionsElement;
 
 /**
  * Options can be configured for four different types of elements: arc, lines, points, and rectangles.<br>
@@ -30,7 +30,7 @@ import org.pepstock.charba.client.defaults.IsDefaultArc;
  *
  * @param <D> defaults provider class
  */
-public abstract class AbstractElement<D extends IsDefaultArc> extends AbstractModel<Elements, D> {
+public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends AbstractModel<Elements, D> {
 
 	/**
 	 * Name of properties of native object.

@@ -15,7 +15,9 @@
 */
 package org.pepstock.charba.client.data;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.enums.BorderAlign;
 
 /**
  * The pie chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
@@ -26,11 +28,20 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 public class PieDataset extends HovingDataset {
 
 	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		borderAlign,
+		weight
+	}
+	
+	/**
 	 * Creates a dataset.<br>
 	 * It uses the global options has default.
 	 */
 	public PieDataset() {
-		super();
+		this(null);
 	}
 
 	/**
@@ -41,5 +52,44 @@ public class PieDataset extends HovingDataset {
 	public PieDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
 	}
+	
+	/**
+	 * Sets the property to set the border alignment on chart datasets.
+	 * 
+	 * @param align the property to set the border alignment on chart datasets
+	 */
+	public void setBorderAlign(BorderAlign align) {
+		setValue(Property.borderAlign, align);
+	}
+	
+	/**
+	 * Returns the property to set the border alignment on chart datasets.
+	 * 
+	 * @return the property to set the border alignment on chart datasets.
+	 */
+	public BorderAlign getBorderAlign() {
+		return getValue(Property.borderAlign, BorderAlign.class, getDefaultValues().getElements().getArc().getBorderAlign());
+	}
 
+	/**
+	 * Sets the relative thickness of the dataset.<br>
+	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of
+	 * all the dataset weight values.
+	 * 
+	 * @param weight the relative thickness of the dataset
+	 */
+	public void setWeight(double weight) {
+		setValue(Property.weight, weight);
+	}
+	
+	/**
+	 * Returns the relative thickness of the dataset.<br>
+	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of
+	 * all the dataset weight values.
+	 * 
+	 * @return the relative thickness of the dataset
+	 */
+	public double getWeight() {
+		return getValue(Property.weight, getDefaultValues().getElements().getArc().getWeight());
+	}
 }

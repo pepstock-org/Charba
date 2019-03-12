@@ -13,22 +13,24 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.defaults;
+package org.pepstock.charba.client.enums;
 
-import org.pepstock.charba.client.enums.BorderSkipped;
+import org.pepstock.charba.client.commons.Key;
 
 /**
- * Interface to define rectangle object defaults.
+ * Property to set the border alignment on chart datasets.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultRectangle extends IsDefaultOptionsElement {
+public enum BorderAlign implements Key
+{
 
 	/**
-	 * Returns the edge to skip drawing the border for.
-	 * 
-	 * @return the edge to skip drawing the border for.
+	 * When 'center' is set, the borders of arcs next to each other will overlap. This is the default.
 	 */
-	BorderSkipped getBorderSkipped();
-
+	center,
+	/**
+	 * When 'inner' is set, it is guaranteed that all the borders are not overlap.
+	 */
+	inner;
 }

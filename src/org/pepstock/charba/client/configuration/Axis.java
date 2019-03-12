@@ -676,7 +676,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * 
 	 * @param weight weight of axis
 	 */
-	public void setWeight(int weight) {
+	public void setWeight(double weight) {
 		getScale().setWeight(weight);
 	}
 
@@ -685,7 +685,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * 
 	 * @return weight of axis
 	 */
-	public int getWeight() {
+	public double getWeight() {
 		return getScale().getWeight();
 	}
 

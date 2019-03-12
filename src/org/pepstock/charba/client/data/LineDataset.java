@@ -60,7 +60,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * It uses the global options has default.
 	 */
 	public LineDataset() {
-		super();
+		this(null);
 	}
 
 	/**

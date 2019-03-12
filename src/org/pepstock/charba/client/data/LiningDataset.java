@@ -90,14 +90,6 @@ abstract class LiningDataset extends Dataset {
 	}
 
 	/**
-	 * Creates a dataset.<br>
-	 * It uses the global options has default.
-	 */
-	LiningDataset() {
-		super();
-	}
-
-	/**
 	 * Creates the dataset using a default.
 	 * 
 	 * @param defaultValues default options

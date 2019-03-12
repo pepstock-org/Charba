@@ -88,7 +88,7 @@ public interface IsDefaultScale {
 	 * 
 	 * @return weight of axis.
 	 */
-	int getWeight();
+	double getWeight();
 
 	/**
 	 * If true, shows the axis.
