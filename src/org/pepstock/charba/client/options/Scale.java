@@ -79,6 +79,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 		categoryPercentage,
 		barThickness,
 		maxBarThickness,
+		minBarLength,
 		stacked,
 		distribution,
 		bounds
@@ -438,6 +439,26 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 */
 	public final int getMaxBarThickness() {
 		return getValue(Property.maxBarThickness, getDefaultValues().getMaxBarThickness());
+	}
+
+	/**
+	 * Set this to ensure that bars have a minimum length in pixels.
+	 * 
+	 * @param minBarLength a minimum length in pixels.
+	 */
+	public final void setMinBarLength(int minBarLength) {
+		setValue(Property.minBarLength, minBarLength);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns a minimum length in pixels.
+	 * 
+	 * @return a minimum length in pixels.
+	 */
+	public final int getMinBarLength() {
+		return getValue(Property.minBarLength, getDefaultValues().getMinBarLength());
 	}
 
 	/**

@@ -219,6 +219,16 @@ public final class DefaultChartScale implements IsDefaultScale {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getMinBarLength()
+	 */
+	@Override
+	public int getMinBarLength() {
+		return scale.getMinBarLength();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getMaxBarThickness()
 	 */
 	@Override

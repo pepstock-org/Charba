@@ -47,6 +47,8 @@ public final class DefaultScale implements IsDefaultScale {
 
 	private static final int DEFAULT_MAX_BAR_THICKNESS = 0;
 
+	private static final int DEFAULT_MIN_BAR_LENGTH = 0;
+
 	private static final boolean DEFAULT_STACKED = false;
 
 	private final DefaultAngleLines angleLines = new DefaultAngleLines();
@@ -209,6 +211,16 @@ public final class DefaultScale implements IsDefaultScale {
 	@Override
 	public int getBarThickness() {
 		return DEFAULT_BAR_THICKNESS;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getMinBarLength()
+	 */
+	@Override
+	public int getMinBarLength() {
+		return DEFAULT_MIN_BAR_LENGTH;
 	}
 
 	/*
