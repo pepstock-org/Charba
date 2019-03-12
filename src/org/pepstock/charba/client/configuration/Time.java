@@ -182,7 +182,7 @@ public class Time extends AxisContainer {
 	 * 
 	 * @param stepSize The number of units between grid lines.
 	 */
-	public void setStepSize(int stepSize) {
+	public void setStepSize(double stepSize) {
 		getAxis().getScale().getTime().setStepSize(stepSize);
 	}
 
@@ -191,7 +191,7 @@ public class Time extends AxisContainer {
 	 * 
 	 * @return The number of units between grid lines.
 	 */
-	public int getStepSize() {
+	public double getStepSize() {
 		return getAxis().getScale().getTime().getStepSize();
 	}
 
