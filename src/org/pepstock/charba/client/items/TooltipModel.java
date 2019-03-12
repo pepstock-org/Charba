@@ -82,12 +82,16 @@ public final class TooltipModel extends NativeObjectContainer {
 		footerSpacing,
 		footerMarginTop,
 		caretSize,
+		caretPadding,
 		cornerRadius,
 		backgroundColor,
 		labelColors,
+		labelTextColors,
 		opacity,
 		legendColorBackground,
-		displayColors
+		displayColors,
+		borderColor,
+		borderWidth
 	}
 
 	// instance of tooltip items factory
@@ -485,6 +489,15 @@ public final class TooltipModel extends NativeObjectContainer {
 	}
 
 	/**
+	 * Returns the extra distance to move the end of the tooltip arrow away from the tooltip point.
+	 * 
+	 * @return the extra distance to move the end of the tooltip arrow away from the tooltip point
+	 */
+	public int getCaretPadding() {
+		return getValue(Property.caretPadding, Defaults.get().getGlobal().getTooltips().getCaretPadding());
+	}
+	
+	/**
 	 * Returns the radius of tooltip corner curves of footer section.
 	 * 
 	 * @return the radius of tooltip corner curves of footer section.
@@ -524,6 +537,18 @@ public final class TooltipModel extends NativeObjectContainer {
 	}
 
 	/**
+	 * Returns the list of labels text color of tooltip.
+	 * 
+	 * @return the list of labels text color of tooltip.
+	 */
+	public List<TooltipLabelColor> getTextLabelColors() {
+		// gets array from native object
+		ArrayObject array = getArrayValue(Property.labelTextColors);
+		// returns as list
+		return ArrayListHelper.unmodifiableList(array, tooltipLabelColorFactory);
+	}
+	
+	/**
 	 * Returns the opacity of tooltip.
 	 * 
 	 * @return the opacity of tooltip. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
@@ -550,6 +575,33 @@ public final class TooltipModel extends NativeObjectContainer {
 		return ColorBuilder.parse(getLegendColorBackgroundAsString());
 	}
 
+	/**
+	 * Returns the border color of tooltips.
+	 * 
+	 * @return the border color of tooltips.
+	 */
+	public String getBorderColorAsString() {
+		return getValue(Property.borderColor, Defaults.get().getGlobal().getTooltips().getBorderColorAsString());
+	}
+
+	/**
+	 * Returns the border color of tooltips.
+	 * 
+	 * @return the border color of tooltips.
+	 */
+	public IsColor getBorderColorBackground() {
+		return ColorBuilder.parse(getBorderColorAsString());
+	}
+
+	/**
+	 * Returns the size of border.
+	 * 
+	 * @return the size of border
+	 */
+	public int getBorderWidth() {
+		return getValue(Property.borderWidth, Defaults.get().getGlobal().getTooltips().getBorderWidth());
+	}
+	
 	/**
 	 * Returns the display of colors of tooltip.
 	 * 
