@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import java.util.List;
+
 import org.pepstock.charba.client.colors.IsColor;
 
 /**
@@ -107,4 +109,42 @@ public class RadialAngleLines extends AxisContainer {
 		return getAxis().getScale().getAngleLines().getLineWidth();
 	}
 
+	/**
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
+	 * and gaps which describe the pattern.
+	 * 
+	 * @param borderDash the line dash pattern used when stroking lines
+	 */
+	public void setBorderDash(int... borderDash) {
+		getAxis().getScale().getAngleLines().setBorderDash(borderDash);
+	}
+
+	/**
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
+	 * lines and gaps which describe the pattern.
+	 * 
+	 * @return the line dash pattern used when stroking lines
+	 */
+	public List<Integer> getBorderDash() {
+		return getAxis().getScale().getAngleLines().getBorderDash();
+	}
+
+	/**
+	 * Sets the line dash pattern offset or "phase".
+	 * 
+	 * @param borderDashOffset Offset for line dashes.
+	 */
+	public void setBorderDashOffset(int borderDashOffset) {
+		getAxis().getScale().getAngleLines().setBorderDashOffset(borderDashOffset);
+	}
+
+	/**
+	 * Returns the line dash pattern offset or "phase".
+	 * 
+	 * @return Offset for line dashes.
+	 */
+	public int getBorderDashOffset() {
+		return getAxis().getScale().getAngleLines().getBorderDashOffset();
+	}
+	
 }
