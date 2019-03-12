@@ -35,6 +35,8 @@ public final class TooltipItem extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
+		label,
+		value,
 		xLabel,
 		yLabel,
 		datasetIndex,
@@ -51,21 +53,41 @@ public final class TooltipItem extends NativeObjectContainer {
 	public TooltipItem(NativeObject nativeObject) {
 		super(nativeObject);
 	}
+	
+	/**
+	 * Returns the label for the tooltip.
+	 * 
+	 * @return the label for the tooltip. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 */
+	public String getLabel() {
+		return getValue(Property.label, UndefinedValues.STRING);
+	}
 
 	/**
-	 * Returns the X location of label.
+	 * Returns the value for the tooltip.
+	 * 
+	 * @return the value for the tooltip. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 */
+	public String getValue() {
+		return getValue(Property.value, UndefinedValues.STRING);
+	}
+	
+	/**
+	 * Returns the X location of label. Is {@link Deprecated}, use `value` or `label` instead
 	 * 
 	 * @return the X location of label. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
 	 */
+	@Deprecated
 	public String getXLabel() {
 		return getValue(Property.xLabel, UndefinedValues.STRING);
 	}
 
 	/**
-	 * Returns the Y location of label.
+	 * Returns the Y location of label. Is {@link Deprecated}, use `value` or `label` instead
 	 * 
 	 * @return the Y location of label. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
 	 */
+	@Deprecated
 	public String getYLabel() {
 		return getValue(Property.yLabel, UndefinedValues.STRING);
 	}
