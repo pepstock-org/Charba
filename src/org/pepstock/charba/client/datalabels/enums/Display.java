@@ -21,6 +21,7 @@ import org.pepstock.charba.client.commons.Key;
  * The display option controls the visibility of labels.
  * 
  * @author Andrea "Stock" Stocchero
+ * FIXME serve ancora???
  *
  */
 public enum Display implements Key
@@ -28,11 +29,11 @@ public enum Display implements Key
 	/**
 	 * This is default and the label is drawn.
 	 */
-	isTrue,
+	True,
 	/**
 	 * The label is hidden.
 	 */
-	isFalse,
+	False,
 	/**
 	 * The label is hidden if it overlap with another label.<br>
 	 * The display 'auto' option can be used to prevent overlapping labels, based on the following rules when two labels
