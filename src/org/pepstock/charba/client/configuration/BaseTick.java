@@ -215,7 +215,7 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	public String getFontFamily() {
 		return configuration.getFontFamily();
 	}
-
+	
 	/**
 	 * Returns the user callback instance.
 	 * 

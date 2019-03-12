@@ -68,6 +68,8 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 
 	private static final int DEFAULT_PRECISION = 0;
 
+	private static final double DEFAULT_LINE_HEIGHT = 1.2D;
+
 	private final DefaultTickItem minor = new DefaultTickItem();
 
 	private final DefaultTickItem major = new DefaultTickItem();
@@ -310,6 +312,16 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 	@Override
 	public int getPrecision() {
 		return DEFAULT_PRECISION;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getLineHeight()
+	 */
+	@Override
+	public double getLineHeight() {
+		return DEFAULT_LINE_HEIGHT;
 	}
 
 }

@@ -325,4 +325,15 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	public int getPrecision() {
 		return ticks.getPrecision();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getLineHeight()
+	 */
+	@Override
+	public double getLineHeight() {
+		return ticks.getLineHeight();
+	}
+
 }

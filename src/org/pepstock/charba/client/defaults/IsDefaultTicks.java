@@ -204,4 +204,11 @@ public interface IsDefaultTicks extends IsDefaultFontItem {
 	 * @return if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 */
 	int getPrecision();
+	
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text.
+	 */
+	double getLineHeight();
 }

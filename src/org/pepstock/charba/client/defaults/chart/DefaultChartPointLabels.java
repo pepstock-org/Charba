@@ -87,4 +87,14 @@ public final class DefaultChartPointLabels implements IsDefaultPointLabels {
 		return pointLabels.isDisplay();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#getLineHeight()
+	 */
+	@Override
+	public double getLineHeight() {
+		return pointLabels.getLineHeight();
+	}
+
 }

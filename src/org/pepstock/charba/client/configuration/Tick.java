@@ -96,5 +96,24 @@ abstract class Tick extends BaseTick<Ticks> {
 	public boolean isReverse() {
 		return getConfiguration().isReverse();
 	}
+	
+	/**
+	 * Sets the height of an individual line of text.
+	 * 
+	 * @param lineHeight height of an individual line of text.
+	 */
+	public void setLineHeight(double lineHeight) {
+		getConfiguration().setLineHeight(lineHeight);
+	}
 
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text.
+	 */
+	public double getLineHeight() {
+		return getConfiguration().getLineHeight();
+	}
+
+	
 }

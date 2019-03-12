@@ -33,7 +33,8 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 	 */
 	private enum Property implements Key
 	{
-		display
+		display,
+		lineHeight
 	}
 
 	/**
@@ -67,5 +68,25 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 	 */
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());
+	}
+	
+	/**
+	 * Sets the height of an individual line of text.
+	 * 
+	 * @param lineHeight height of an individual line of text.
+	 */
+	public void setLineHeight(double lineHeight) {
+		setValue(Property.lineHeight, lineHeight);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text.
+	 */
+	public double getLineHeight() {
+		return getValue(Property.lineHeight, getDefaultValues().getLineHeight());
 	}
 }
