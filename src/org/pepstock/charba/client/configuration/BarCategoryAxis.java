@@ -137,7 +137,7 @@ public class BarCategoryAxis extends CartesianCategoryAxis {
 	public final int getMinBarLength() {
 		return getScale().getMinBarLength();
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
