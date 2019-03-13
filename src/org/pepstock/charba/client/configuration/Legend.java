@@ -25,6 +25,7 @@ import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendHoverEvent;
+import org.pepstock.charba.client.events.LegendLeaveEvent;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
@@ -83,6 +84,24 @@ public class Legend extends EventProvider<ExtendedOptions> {
 		void call(Chart chart, ChartNativeEvent event, NativeObject item);
 	}
 
+	/**
+	 * Java script FUNCTION callback called when a leaving event on the legend is raised.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyLegendLeaveCallback {
+
+		/**
+		 * Method of function to be called when a leaving event on the legend is raised.
+		 * 
+		 * @param chart context Value of <code>this</code> to the execution context of function. It is the chart instance.
+		 * @param event native event
+		 * @param item legend item affected by event
+		 */
+		void call(Chart chart, ChartNativeEvent event, NativeObject item);
+	}
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -90,12 +109,16 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	private final CallbackProxy<ProxyLegendClickCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover function
 	private final CallbackProxy<ProxyLegendHoverCallback> hoverCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the leave function
+	private final CallbackProxy<ProxyLegendLeaveCallback> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
 	// sub element of legend
 	private final LegendLabels labels;
 	// amount of click handlers
 	private int onClickHandlers = 0;
 	// amount of hover handlers
 	private int onHoverHandlers = 0;
+	// amount of leave handlers
+	private int onLeaveHandlers = 0;
 
 	/**
 	 * Name of properties of native object.
@@ -103,7 +126,8 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	private enum Property implements Key
 	{
 		onClick,
-		onHover
+		onHover,
+		onLeave
 	}
 
 	/**
@@ -149,6 +173,17 @@ public class Legend extends EventProvider<ExtendedOptions> {
 				getChart().fireEvent(new LegendHoverEvent(event, new LegendItem(item)));
 			}
 		});
+		leaveCallbackProxy.setCallback(new ProxyLegendLeaveCallback() {
+
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.configuration.Legend.ProxyLegendLeaveCallback#call(org.pepstock.charba.client.Chart, org.pepstock.charba.client.events.ChartNativeEvent, org.pepstock.charba.client.commons.NativeObject)
+			 */
+			@Override
+			public void call(Chart chart, ChartNativeEvent event, NativeObject item) {
+				// fires the event
+				getChart().fireEvent(new LegendLeaveEvent(event, new LegendItem(item)));
+			}
+		});
 	}
 
 	/**
@@ -184,6 +219,14 @@ public class Legend extends EventProvider<ExtendedOptions> {
 			}
 			// increments amount of handlers
 			onHoverHandlers++;
+		} else if (type.equals(LegendLeaveEvent.TYPE)) {
+			// if java script property is missing
+			if (onLeaveHandlers == 0) {
+				// adds the java script function to catch the event
+				getConfiguration().setEvent(getConfiguration().getLegend(), Property.onLeave, leaveCallbackProxy.getProxy());
+			}
+			// increments amount of handlers
+			onLeaveHandlers++;
 		}
 	}
 
@@ -210,6 +253,14 @@ public class Legend extends EventProvider<ExtendedOptions> {
 			if (onHoverHandlers == 0) {
 				// removes the java script object
 				getConfiguration().setEvent(getConfiguration().getLegend(), Property.onHover, null);
+			}
+		} else if (type.equals(LegendLeaveEvent.TYPE)) {
+			// decrements the amount of handlers
+			onLeaveHandlers--;
+			// if there is not any handler
+			if (onLeaveHandlers == 0) {
+				// removes the java script object
+				getConfiguration().setEvent(getConfiguration().getLegend(), Property.onLeave, null);
 			}
 		}
 	}
