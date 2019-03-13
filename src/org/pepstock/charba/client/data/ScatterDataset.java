@@ -39,10 +39,7 @@ public final class ScatterDataset extends LineDataset {
 	 * Builds the object setting fixed properties
 	 */
 	public ScatterDataset() {
-		// scatter is always no fill
-		super.setFill(Fill.nofill);
-		// scatter has never show lines
-		super.setShowLine(false);
+		this(null);
 	}
 
 	/**

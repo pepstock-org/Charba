@@ -18,25 +18,37 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * The display option controls the visibility of axis.<br>
+ * The display option controls the visibility of axis and the display option controls the visibility of data labels plugin.<br>
  * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible only if
  * at least one associated dataset is visible.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum AxisDisplay implements Key
+public enum Display implements Key
 {
 	/**
-	 * This is default and the axis is drawn.
+	 * This is default and the axis is drawn.<br>
+	 * For plugin, this is default and the label is drawn.
 	 */
 	True,
 	/**
-	 * The axis is hidden.
+	 * The axis is hidden.<br>
+	 * For plugin, the label is hidden.
 	 */
 	False,
 	/**
-	 * The axis is visible only if at least one associated dataset is visible.
+	 * The axis is visible only if at least one associated dataset is visible.<br>
+	 * For plugin, the label is hidden if it overlap with another label.<br>
+	 * The display 'auto' option can be used to prevent overlapping labels, based on the following rules when two labels
+	 * overlap:<br>
+	 * <ul>
+	 * <li>if both labels are display: true, they will be drawn overlapping
+	 * <li>if both labels are display: 'auto', the one with the highest data index will be hidden. If labels are at the same
+	 * data index, the one with the lowest dataset index will be hidden.
+	 * <li>if one label is display: true and the other one is display: 'auto', the one with 'auto' will be hidden (whatever the
+	 * data/dataset indices).
+	 * </ul>
 	 */
 	auto
 }

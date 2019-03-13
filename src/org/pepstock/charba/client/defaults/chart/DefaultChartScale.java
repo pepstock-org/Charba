@@ -22,7 +22,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.defaults.IsDefaultTime;
-import org.pepstock.charba.client.enums.AxisDisplay;
+import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
@@ -162,7 +162,7 @@ public final class DefaultChartScale implements IsDefaultScale {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getDisplay()
 	 */
 	@Override
-	public AxisDisplay getDisplay() {
+	public Display getDisplay() {
 		return scale.getDisplay();
 	}
 

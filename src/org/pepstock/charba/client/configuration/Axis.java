@@ -33,7 +33,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.chart.DefaultChartScale;
-import org.pepstock.charba.client.enums.AxisDisplay;
+import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.items.AxisItem;
@@ -670,7 +670,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * 
 	 * @param display display option controls the visibility of axis
 	 */
-	public final void setDisplay(AxisDisplay display) {
+	public final void setDisplay(Display display) {
 		getScale().setDisplay(display);
 	}
 
@@ -681,7 +681,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * 
 	 * @return display option controls the visibility of axis
 	 */
-	public final AxisDisplay getDisplay() {
+	public final Display getDisplay() {
 		return getScale().getDisplay();
 	}
 

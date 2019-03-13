@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.enums.AxisDisplay;
+import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
@@ -96,7 +96,7 @@ public interface IsDefaultScale {
 	 * 
 	 * @return how showing the axis
 	 */
-	AxisDisplay getDisplay();
+	Display getDisplay();
 
 	/**
 	 * If true, extra space is added to the both edges and the axis is scaled to fit into the chart area.

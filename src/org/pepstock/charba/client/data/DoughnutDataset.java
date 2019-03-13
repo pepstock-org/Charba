@@ -31,7 +31,7 @@ public class DoughnutDataset extends PieDataset {
 	 * It uses the global options has default.
 	 */
 	public DoughnutDataset() {
-		super();
+		this(null);
 	}
 
 	/**

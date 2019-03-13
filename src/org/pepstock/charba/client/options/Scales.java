@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
-import org.pepstock.charba.client.enums.AxisDisplay;
+import org.pepstock.charba.client.enums.Display;
 
 /**
  * The configuration element which contains all axes definitions.
@@ -103,15 +103,15 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	 * 
 	 * @param display display option controls the visibility of axis
 	 */
-	public final void setDisplay(AxisDisplay display) {
+	public final void setDisplay(Display display) {
 		// checks if is setting auto
-		if (AxisDisplay.auto.equals(display)) {
+		if (Display.auto.equals(display)) {
 			setValue(Property.display, display);
 			// checks if all parents are attached
 			checkAndAddToParent();
 		} else {
 			// otherwise transforms into a boolean
-			setDisplay(AxisDisplay.True.equals(display) ? true : false);
+			setDisplay(Display.True.equals(display) ? true : false);
 		}
 	}
 
@@ -122,16 +122,16 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	 * 
 	 * @return display option controls the visibility of axis
 	 */
-	public final AxisDisplay getDisplay() {
+	public final Display getDisplay() {
 		// checks if is boolean
 		if (ObjectType.Boolean.equals(type(Property.display))) {
 			// gets value
 			boolean value = getValue(Property.display, true);
 			// returns value
-			return value ? AxisDisplay.True : AxisDisplay.False;
+			return value ? Display.True : Display.False;
 		}
 		// returns value. Must be auto
-		return getValue(Property.display, AxisDisplay.class, getDefaultValues().getDisplay());
+		return getValue(Property.display, Display.class, getDefaultValues().getDisplay());
 	}
 	
 	/**

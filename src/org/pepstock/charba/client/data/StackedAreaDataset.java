@@ -41,7 +41,7 @@ public class StackedAreaDataset extends LineDataset {
 	 * It uses the global options has default.
 	 */
 	public StackedAreaDataset() {
-		super();
+		this(null);
 	}
 
 	/**

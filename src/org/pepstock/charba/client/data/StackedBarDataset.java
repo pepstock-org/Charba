@@ -41,7 +41,7 @@ public class StackedBarDataset extends BarDataset {
 	 * It uses the global options has default.
 	 */
 	public StackedBarDataset() {
-		super();
+		this(null);
 	}
 
 	/**
