@@ -81,7 +81,7 @@ final class JsControllerHelper {
 	 * @param context context of controller
 	 * @param datasetIndex dataset index
 	 */
-	void initialize(ChartType chartType, Context context, int datasetIndex) {
+	void initialize(ChartType chartType, ControllerContext context, int datasetIndex) {
 		NativeJsControllerHelper.initialize(chartType.name(), context, datasetIndex);
 	}
 
@@ -91,7 +91,7 @@ final class JsControllerHelper {
 	 * @param chartType extended chart type
 	 * @param context context of controller
 	 */
-	void addElements(ChartType chartType, Context context) {
+	void addElements(ChartType chartType, ControllerContext context) {
 		NativeJsControllerHelper.addElements(chartType.name(), context);
 	}
 
@@ -102,7 +102,7 @@ final class JsControllerHelper {
 	 * @param context context of controller
 	 * @param index dataset index
 	 */
-	void addElementAndReset(ChartType chartType, Context context, int index) {
+	void addElementAndReset(ChartType chartType, ControllerContext context, int index) {
 		NativeJsControllerHelper.addElementAndReset(chartType.name(), context, index);
 	}
 
@@ -113,7 +113,7 @@ final class JsControllerHelper {
 	 * @param context context of controller
 	 * @param ease if specified, this number represents how far to transition elements.
 	 */
-	void draw(ChartType chartType, Context context, double ease) {
+	void draw(ChartType chartType, ControllerContext context, double ease) {
 		NativeJsControllerHelper.draw(chartType.name(), context, ease);
 	}
 
@@ -124,7 +124,7 @@ final class JsControllerHelper {
 	 * @param context context of controller
 	 * @param element element to be remove.
 	 */
-	void removeHoverStyle(ChartType chartType, Context context, NativeObject element) {
+	void removeHoverStyle(ChartType chartType, ControllerContext context, NativeObject element) {
 		NativeJsControllerHelper.removeHoverStyle(chartType.name(), context, element);
 	}
 
@@ -135,7 +135,7 @@ final class JsControllerHelper {
 	 * @param context context of controller
 	 * @param element element to be set.
 	 */
-	void setHoverStyle(ChartType chartType, Context context, NativeObject element) {
+	void setHoverStyle(ChartType chartType, ControllerContext context, NativeObject element) {
 		NativeJsControllerHelper.setHoverStyle(chartType.name(), context, element);
 	}
 
@@ -146,7 +146,7 @@ final class JsControllerHelper {
 	 * @param context context of controller
 	 * @param reset if true, put the elements into a reset state so they can animate to their final values
 	 */
-	void update(ChartType chartType, Context context, boolean reset) {
+	void update(ChartType chartType, ControllerContext context, boolean reset) {
 		NativeJsControllerHelper.update(chartType.name(), context, reset);
 	}
 

@@ -38,12 +38,12 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class Context {
+public final class ControllerContext {
 
 	/**
 	 * To avoid any instantiation
 	 */
-	Context() {
+	ControllerContext() {
 	}
 
 	/**

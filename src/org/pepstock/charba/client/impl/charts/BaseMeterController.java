@@ -21,7 +21,7 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartNode;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.controllers.AbstractController;
-import org.pepstock.charba.client.controllers.Context;
+import org.pepstock.charba.client.controllers.ControllerContext;
 import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.enums.FontStyle;
@@ -80,7 +80,7 @@ final class BaseMeterController extends AbstractController {
 	 * org.pepstock.charba.client.AbstractChart, double)
 	 */
 	@Override
-	public void draw(Context context, AbstractChart<?, ?> chart, double ease) {
+	public void draw(ControllerContext context, AbstractChart<?, ?> chart, double ease) {
 		// draw the doughnut chart
 		super.draw(context, chart, ease);
 		// gets the list of datasets
