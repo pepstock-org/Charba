@@ -507,8 +507,6 @@ abstract class HovingFlexDataset extends Dataset {
 	 * @param borderWidth the stroke width of the bar in pixels.
 	 */
 	public void setBorderWidth(int... borderWidth) {
-		// resets callback
-		setBorderWidth((BorderWidthCallback) null);
 		// stores value
 		setValueOrArray(Property.borderWidth, borderWidth);
 	}
@@ -524,7 +522,7 @@ abstract class HovingFlexDataset extends Dataset {
 			// returns the array
 			ArrayInteger array = getValueOrArray(Property.borderWidth, getDefaultBorderWidth());
 			return ArrayListHelper.list(array);
-		} 
+		}
 		// if here, is a callback
 		// then returns an empty list
 		return new ArrayIntegerList();
@@ -798,7 +796,7 @@ abstract class HovingFlexDataset extends Dataset {
 			remove(Property.borderColor);
 		}
 	}
-	
+
 	/**
 	 * Returns the border width callback, if set, otherwise <code>null</code>.
 	 * 

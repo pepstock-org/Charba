@@ -17,22 +17,23 @@ package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.data.Context;
+import org.pepstock.charba.client.enums.BorderAlign;
 
 /**
- * Callback interface to set <code>pointRotation</code> property at runtime, using the chart instance and the context.
+ * Callback interface to set <code>borderAlign</code> property at runtime, using the chart instance and the context.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface PointRotationCallback {
+public interface BorderAlignCallback {
 
 	/**
-	 * Returns the <code>pointRotation</code> property at runtime, using the chart instance and the context.
+	 * Returns the <code>borderAlign</code> property at runtime, using the chart instance and the context.
 	 * 
 	 * @param chart chart instance
 	 * @param context context instance
-	 * @return the <code>pointRotation</code> value to be applied
+	 * @return the <code>borderAlign</code> value to be applied.
 	 */
-	double rotation(AbstractChart<?, ?> chart, Context context);
+	BorderAlign align(AbstractChart<?, ?> chart, Context context);
 
 }

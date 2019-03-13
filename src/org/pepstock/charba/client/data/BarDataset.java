@@ -121,7 +121,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 				// checks if the callback is set
 				if (chart != null && borderSkippedCallback != null) {
 					// calls callback
-					BorderSkipped result = borderSkippedCallback.borderSkipped(chart, context);
+					BorderSkipped result = borderSkippedCallback.skipped(chart, context);
 					// checks result
 					if (result != null) {
 						// checks if is boolean
@@ -209,7 +209,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 */
 	public void setBorderSkipped(BorderSkipped position) {
 		// resets callbacks
-		setBorderSkipped((BorderSkippedCallback)null);
+		setBorderSkipped((BorderSkippedCallback) null);
 		// checks if setting a false value
 		if (BorderSkipped.noborderskipped.equals(position)) {
 			// stores boolean value
@@ -238,7 +238,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 		// otherwise returns the enum value as string
 		return getValue(Property.borderSkipped, BorderSkipped.class, getDefaultValues().getElements().getRectangle().getBorderSkipped());
 	}
-	
+
 	/**
 	 * Returns the border skipped callback, if set, otherwise <code>null</code>.
 	 * 

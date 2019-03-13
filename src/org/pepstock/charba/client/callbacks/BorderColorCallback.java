@@ -39,8 +39,7 @@ public interface BorderColorCallback<T> {
 	 * 
 	 * @param chart chart instance
 	 * @param context context instance
-	 * @return the <code>borderColor</code> value to be applied. Could be a string (as color), color or gradient
-	 *         instance
+	 * @return the <code>borderColor</code> value to be applied. Could be a string (as color), color or gradient instance
 	 * @see IsColor
 	 * @see Gradient
 	 * @see CanvasGradient

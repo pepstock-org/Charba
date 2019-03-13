@@ -17,23 +17,24 @@ package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.data.Context;
-import org.pepstock.charba.client.enums.BorderSkipped;
 
 /**
- * Callback interface to set <code>borderSkipped</code> property at runtime, using the chart instance and the context.
+ * Callback interface to set <code>rotation</code> or <code>pointRotation</code> property at runtime, using the chart instance
+ * and the context.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface BorderSkippedCallback {
+public interface RotationCallback {
 
 	/**
-	 * Returns the <code>borderSkipped</code> property at runtime, using the chart instance and the context.
+	 * Returns the <code>rotation</code> or <code>pointRotation</code> property at runtime, using the chart instance and the
+	 * context.
 	 * 
 	 * @param chart chart instance
 	 * @param context context instance
-	 * @return the <code>borderSkipped</code> value to be applied.
+	 * @return the <code>rotation</code> or <code>pointRotation</code> value to be applied
 	 */
-	BorderSkipped skipped(AbstractChart<?, ?> chart, Context context);
+	double rotation(AbstractChart<?, ?> chart, Context context);
 
 }

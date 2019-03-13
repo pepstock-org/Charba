@@ -180,7 +180,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	public boolean isSpanGaps() {
 		return getValue(Property.spanGaps, getDefaultValues().isSpanGaps());
 	}
-	
+
 	/**
 	 * Sets If the line is shown as a stepped line.<br>
 	 * If the steppedLine value is set to anything other than false, lineTension will be ignored.

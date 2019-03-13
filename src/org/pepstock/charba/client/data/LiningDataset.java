@@ -22,8 +22,8 @@ import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.callbacks.BorderWidthCallback;
-import org.pepstock.charba.client.callbacks.PointRadiusCallback;
-import org.pepstock.charba.client.callbacks.PointRotationCallback;
+import org.pepstock.charba.client.callbacks.RadiusCallback;
+import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
@@ -327,13 +327,13 @@ abstract class LiningDataset extends Dataset {
 	// point hover borderWidth callback instance
 	private BorderWidthCallback pointHoverBorderWidthCallback = null;
 	// point radius callback instance
-	private PointRadiusCallback pointRadiusCallback = null;
+	private RadiusCallback pointRadiusCallback = null;
 	// point hit radius callback instance
-	private PointRadiusCallback pointHitRadiusCallback = null;
+	private RadiusCallback pointHitRadiusCallback = null;
 	// point hover radius callback instance
-	private PointRadiusCallback pointHoverRadiusCallback = null;
+	private RadiusCallback pointHoverRadiusCallback = null;
 	// point rotation callback instance
-	private PointRotationCallback pointRotationCallback = null;
+	private RotationCallback pointRotationCallback = null;
 	// point style callback instance
 	private PointStyleCallback<?> pointStyleCallback = null;
 
@@ -1157,7 +1157,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBackgroundColor(IsColor... pointBackgroundColor) {
 		// reset callback
-		setPointBackgroundColor((BackgroundColorCallback<?>)null);
+		setPointBackgroundColor((BackgroundColorCallback<?>) null);
 		// stores value
 		setValueOrArray(Property.pointBackgroundColor, pointBackgroundColor);
 		// removes the flag because default is string color
@@ -1171,7 +1171,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBackgroundColor(String... pointBackgroundColor) {
 		// reset callback
-		setPointBackgroundColor((BackgroundColorCallback<?>)null);
+		setPointBackgroundColor((BackgroundColorCallback<?>) null);
 		// stores value
 		setValueOrArray(Property.pointBackgroundColor, pointBackgroundColor);
 		// removes the flag because default is string color
@@ -1185,7 +1185,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBackgroundColor(Gradient... pointBackgroundColor) {
 		// reset callback
-		setPointBackgroundColor((BackgroundColorCallback<?>)null);
+		setPointBackgroundColor((BackgroundColorCallback<?>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Property.pointBackgroundColor, ArrayObject.fromOrNull(pointBackgroundColor));
 		// removes the property
@@ -1246,7 +1246,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBorderColor(IsColor... pointBorderColor) {
 		// reset callback
-		setPointBorderColor((BorderColorCallback<?>)null);
+		setPointBorderColor((BorderColorCallback<?>) null);
 		// stores value
 		setValueOrArray(Property.pointBorderColor, pointBorderColor);
 		// removes the flag because default is string color
@@ -1260,7 +1260,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBorderColor(String... pointBorderColor) {
 		// reset callback
-		setPointBorderColor((BorderColorCallback<?>)null);
+		setPointBorderColor((BorderColorCallback<?>) null);
 		// stores value
 		setValueOrArray(Property.pointBorderColor, pointBorderColor);
 		// removes the flag because default is string color
@@ -1274,7 +1274,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBorderColor(Gradient... pointBorderColor) {
 		// reset callback
-		setPointBorderColor((BorderColorCallback<?>)null);
+		setPointBorderColor((BorderColorCallback<?>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Property.pointBorderColor, ArrayObject.fromOrNull(pointBorderColor));
 		// removes the property
@@ -1334,8 +1334,6 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointBorderWidth array of the width of the point border in pixels.
 	 */
 	public void setPointBorderWidth(int... pointBorderWidth) {
-		// reset callback
-		setPointBorderWidth((BorderWidthCallback)null);
 		// stores value
 		setValueOrArray(Property.pointBorderWidth, pointBorderWidth);
 	}
@@ -1351,7 +1349,7 @@ abstract class LiningDataset extends Dataset {
 			// returns the array
 			ArrayInteger array = getValueOrArray(Property.pointBorderWidth, getDefaultValues().getElements().getPoint().getBorderWidth());
 			return ArrayListHelper.list(array);
-		} 
+		}
 		// if here, is a callback
 		// then returns an empty list
 		return new ArrayIntegerList();
@@ -1363,8 +1361,6 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointHitRadius array of the pixel size of the non-displayed point.
 	 */
 	public void setPointHitRadius(double... pointHitRadius) {
-		// reset callback
-		setPointHitRadius((PointRadiusCallback)null);
 		// stores value
 		setValueOrArray(Property.pointHitRadius, pointHitRadius);
 	}
@@ -1380,7 +1376,7 @@ abstract class LiningDataset extends Dataset {
 			// returns the array
 			ArrayDouble array = getValueOrArray(Property.pointHitRadius, getDefaultValues().getElements().getPoint().getHitRadius());
 			return ArrayListHelper.list(array);
-		} 
+		}
 		// if here, is a callback
 		// then returns an empty list
 		return new ArrayDoubleList();
@@ -1393,7 +1389,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBackgroundColor(IsColor... pointHoverBackgroundColor) {
 		// resets callback
-		setPointHoverBackgroundColor((BackgroundColorCallback<?>)null);
+		setPointHoverBackgroundColor((BackgroundColorCallback<?>) null);
 		// stores value
 		setValueOrArray(Property.pointHoverBackgroundColor, pointHoverBackgroundColor);
 		// removes the flag because default is string color
@@ -1407,7 +1403,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBackgroundColor(String... pointHoverBackgroundColor) {
 		// resets callback
-		setPointHoverBackgroundColor((BackgroundColorCallback<?>)null);
+		setPointHoverBackgroundColor((BackgroundColorCallback<?>) null);
 		// stores value
 		setValueOrArray(Property.pointHoverBackgroundColor, pointHoverBackgroundColor);
 		// removes the flag because default is string color
@@ -1421,7 +1417,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBackgroundColor(Gradient... pointHoverBackgroundColor) {
 		// resets callback
-		setPointHoverBackgroundColor((BackgroundColorCallback<?>)null);
+		setPointHoverBackgroundColor((BackgroundColorCallback<?>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Property.pointHoverBackgroundColor, ArrayObject.fromOrNull(pointHoverBackgroundColor));
 		// removes the property
@@ -1483,7 +1479,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBorderColor(IsColor... pointHoverBorderColor) {
 		// resets callback
-		setPointHoverBorderColor((BorderColorCallback<?>)null);
+		setPointHoverBorderColor((BorderColorCallback<?>) null);
 		// sets value
 		setValueOrArray(Property.pointHoverBorderColor, pointHoverBorderColor);
 		// removes the flag because default is string color
@@ -1497,7 +1493,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBorderColor(String... pointHoverBorderColor) {
 		// resets callback
-		setPointHoverBorderColor((BorderColorCallback<?>)null);
+		setPointHoverBorderColor((BorderColorCallback<?>) null);
 		// stores value
 		setValueOrArray(Property.pointHoverBorderColor, pointHoverBorderColor);
 		// removes the flag because default is string color
@@ -1511,7 +1507,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBorderColor(Gradient... pointHoverBorderColor) {
 		// resets callback
-		setPointHoverBorderColor((BorderColorCallback<?>)null);
+		setPointHoverBorderColor((BorderColorCallback<?>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Property.pointHoverBorderColor, ArrayObject.fromOrNull(pointHoverBorderColor));
 		// removes the property
@@ -1570,8 +1566,6 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointHoverBorderWidth array of the border width of point when hovered.
 	 */
 	public void setPointHoverBorderWidth(int... pointHoverBorderWidth) {
-		// resets callback
-		setPointHoverBorderWidth((BorderWidthCallback)null);
 		// stores value
 		setValueOrArray(Property.pointHoverBorderWidth, pointHoverBorderWidth);
 	}
@@ -1587,7 +1581,7 @@ abstract class LiningDataset extends Dataset {
 			// returns the array
 			ArrayInteger array = getValueOrArray(Property.pointHoverBorderWidth, getDefaultValues().getElements().getPoint().getHoverBorderWidth());
 			return ArrayListHelper.list(array);
-		} 
+		}
 		// if here, is a callback
 		// then returns an empty list
 		return new ArrayIntegerList();
@@ -1599,8 +1593,6 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointHoverRadius array of the radius of the point when hovered.
 	 */
 	public void setPointHoverRadius(double... pointHoverRadius) {
-		// reset callback
-		setPointHoverRadius((PointRadiusCallback)null);
 		// stores values
 		setValueOrArray(Property.pointHoverRadius, pointHoverRadius);
 	}
@@ -1616,7 +1608,7 @@ abstract class LiningDataset extends Dataset {
 			// returns the array
 			ArrayDouble array = getValueOrArray(Property.pointHoverRadius, getDefaultValues().getElements().getPoint().getHoverRadius());
 			return ArrayListHelper.list(array);
-		} 
+		}
 		// if here, is a callback
 		// then returns an empty list
 		return new ArrayDoubleList();
@@ -1628,8 +1620,6 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointRadius array of the radius of the point shape.
 	 */
 	public void setPointRadius(double... pointRadius) {
-		// reset callback
-		setPointRadius((PointRadiusCallback)null);
 		// stores values
 		setValueOrArray(Property.pointRadius, pointRadius);
 	}
@@ -1645,7 +1635,7 @@ abstract class LiningDataset extends Dataset {
 			// returns the array
 			ArrayDouble array = getValueOrArray(Property.pointRadius, getDefaultValues().getElements().getPoint().getRadius());
 			return ArrayListHelper.list(array);
-		} 
+		}
 		// if here, is a callback
 		// then returns an empty list
 		return new ArrayDoubleList();
@@ -1769,8 +1759,6 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointRotation array of the rotation of the point in degrees.
 	 */
 	public void setPointRotation(double... pointRotation) {
-		// reset callback
-		setPointRotation((PointRotationCallback)null);
 		// sets value
 		setValueOrArray(Property.pointRotation, pointRotation);
 	}
@@ -1786,12 +1774,12 @@ abstract class LiningDataset extends Dataset {
 			// returns the array
 			ArrayDouble array = getValueOrArray(Property.pointRotation, getDefaultValues().getElements().getPoint().getRotation());
 			return ArrayListHelper.list(array);
-		} 
+		}
 		// if here, is a callback
 		// then returns an empty list
 		return new ArrayDoubleList();
 	}
-	
+
 	/**
 	 * Returns the point background color callback, if set, otherwise <code>null</code>.
 	 * 
@@ -1849,7 +1837,7 @@ abstract class LiningDataset extends Dataset {
 			remove(Property.pointBorderColor);
 		}
 	}
-	
+
 	/**
 	 * Returns the point border width callback, if set, otherwise <code>null</code>.
 	 * 
@@ -1876,7 +1864,7 @@ abstract class LiningDataset extends Dataset {
 			remove(Property.pointBorderWidth);
 		}
 	}
-	
+
 	/**
 	 * Returns the point hover background color callback, if set, otherwise <code>null</code>.
 	 * 
@@ -1934,7 +1922,7 @@ abstract class LiningDataset extends Dataset {
 			remove(Property.pointHoverBorderColor);
 		}
 	}
-	
+
 	/**
 	 * Returns the point hover border width callback, if set, otherwise <code>null</code>.
 	 * 
@@ -1967,7 +1955,7 @@ abstract class LiningDataset extends Dataset {
 	 * 
 	 * @return the point radius callback, if set, otherwise <code>null</code>.
 	 */
-	public PointRadiusCallback getPointRadiusCallback() {
+	public RadiusCallback getPointRadiusCallback() {
 		return pointRadiusCallback;
 	}
 
@@ -1976,7 +1964,7 @@ abstract class LiningDataset extends Dataset {
 	 * 
 	 * @param pointRadiusCallback the point radius callback to set
 	 */
-	public void setPointRadius(PointRadiusCallback pointRadiusCallback) {
+	public void setPointRadius(RadiusCallback pointRadiusCallback) {
 		// sets the callback
 		this.pointRadiusCallback = pointRadiusCallback;
 		// checks if callback is consistent
@@ -1988,13 +1976,13 @@ abstract class LiningDataset extends Dataset {
 			remove(Property.pointRadius);
 		}
 	}
-	
+
 	/**
 	 * Returns the point hit radius callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the point hit radius callback, if set, otherwise <code>null</code>.
 	 */
-	public PointRadiusCallback getPointHitRadiusCallback() {
+	public RadiusCallback getPointHitRadiusCallback() {
 		return pointRadiusCallback;
 	}
 
@@ -2003,7 +1991,7 @@ abstract class LiningDataset extends Dataset {
 	 * 
 	 * @param pointHitRadiusCallback the point hit radius callback to set
 	 */
-	public void setPointHitRadius(PointRadiusCallback pointHitRadiusCallback) {
+	public void setPointHitRadius(RadiusCallback pointHitRadiusCallback) {
 		// sets the callback
 		this.pointHitRadiusCallback = pointHitRadiusCallback;
 		// checks if callback is consistent
@@ -2015,13 +2003,13 @@ abstract class LiningDataset extends Dataset {
 			remove(Property.pointHitRadius);
 		}
 	}
-	
+
 	/**
 	 * Returns the point hover radius callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the point hover radius callback, if set, otherwise <code>null</code>.
 	 */
-	public PointRadiusCallback getPointHoverRadiusCallback() {
+	public RadiusCallback getPointHoverRadiusCallback() {
 		return pointHoverRadiusCallback;
 	}
 
@@ -2030,7 +2018,7 @@ abstract class LiningDataset extends Dataset {
 	 * 
 	 * @param pointHoverRadiusCallback the point hover radius callback to set
 	 */
-	public void setPointHoverRadius(PointRadiusCallback pointHoverRadiusCallback) {
+	public void setPointHoverRadius(RadiusCallback pointHoverRadiusCallback) {
 		// sets the callback
 		this.pointHoverRadiusCallback = pointHoverRadiusCallback;
 		// checks if callback is consistent
@@ -2042,13 +2030,13 @@ abstract class LiningDataset extends Dataset {
 			remove(Property.pointHoverRadius);
 		}
 	}
-	
+
 	/**
 	 * Returns the point rotation callback, if set, otherwise <code>null</code>.
 	 * 
 	 * @return the point rotation callback, if set, otherwise <code>null</code>.
 	 */
-	public PointRotationCallback getPointRotationCallback() {
+	public RotationCallback getPointRotationCallback() {
 		return pointRotationCallback;
 	}
 
@@ -2057,7 +2045,7 @@ abstract class LiningDataset extends Dataset {
 	 * 
 	 * @param pointRotationCallback the point rotation callback to set
 	 */
-	public void setPointRotation(PointRotationCallback pointRotationCallback) {
+	public void setPointRotation(RotationCallback pointRotationCallback) {
 		// sets the callback
 		this.pointRotationCallback = pointRotationCallback;
 		// checks if callback is consistent
@@ -2069,7 +2057,7 @@ abstract class LiningDataset extends Dataset {
 			remove(Property.pointRotation);
 		}
 	}
-	
+
 	/**
 	 * Returns the point style callback, if set, otherwise <code>null</code>.
 	 * 
@@ -2098,7 +2086,7 @@ abstract class LiningDataset extends Dataset {
 		// remove if exist flag
 		removeIfExists(Property._charbaPointStyle);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

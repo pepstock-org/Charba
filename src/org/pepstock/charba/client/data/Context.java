@@ -27,7 +27,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * The option context is used to give contextual information when resolving options.<br> 
+ * The option context is used to give contextual information when resolving options.<br>
  * The context object contains the following properties:<br>
  * <ul>
  * <li><b>index</b>(int): index of the associated data
