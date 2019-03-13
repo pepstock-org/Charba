@@ -41,13 +41,21 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class Context extends NativeExtendedObject {
+public final class DataLabelsContext extends NativeExtendedObject {
 
 	/**
 	 * To avoid any instantiation
 	 */
-	Context() {
+	DataLabelsContext() {
 	}
+
+	/**
+	 * Returns the <code>active</code> property by native object.
+	 * 
+	 * @return the <code>active</code> property by native object.
+	 */
+	@JsProperty(name = "active")
+	native boolean isNativeActive();
 
 	/**
 	 * Returns the <code>chart</code> property by native object.
@@ -72,14 +80,6 @@ public final class Context extends NativeExtendedObject {
 	 */
 	@JsProperty(name = "datasetIndex")
 	native int getNativeDatasetIndex();
-
-	/**
-	 * Returns the <code>active</code> property by native object.
-	 * 
-	 * @return the <code>active</code> property by native object.
-	 */
-	@JsProperty(name = "active")
-	native boolean isNativeActive();
 
 	/**
 	 * Returns the index of the data inside the dataset.
@@ -127,6 +127,7 @@ public final class Context extends NativeExtendedObject {
 		// returns property value
 		return isNativeActive();
 	}
+	
 
 	/**
 	 * Returns the CHARBA ID, set to the chart.
@@ -137,5 +138,7 @@ public final class Context extends NativeExtendedObject {
 	String getCharbaId() {
 		return getNativeChart().getCharbaId();
 	}
+
+
 
 }

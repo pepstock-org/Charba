@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.Context;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 
 /**
  * Callback interface of DATALABELS plugin to set <code>textShadowBlur</code> property at runtime, using the chart instance and
@@ -34,6 +34,6 @@ public interface TextShadowBlurCallback {
 	 * @param context DATALABELS plugin context instance
 	 * @return the <code>textShadowBlur</code> value to be applied
 	 */
-	double textShadowBlur(AbstractChart<?, ?> chart, Context context);
+	double textShadowBlur(AbstractChart<?, ?> chart, DataLabelsContext context);
 
 }

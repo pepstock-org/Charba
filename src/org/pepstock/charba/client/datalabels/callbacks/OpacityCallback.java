@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.Context;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 
 /**
  * Callback interface of DATALABELS plugin to set <code>opacity</code> property at runtime, using the chart instance and the
@@ -34,6 +34,6 @@ public interface OpacityCallback {
 	 * @param context DATALABELS plugin context instance
 	 * @return the <code>opacity</code> value to be applied
 	 */
-	double opacity(AbstractChart<?, ?> chart, Context context);
+	double opacity(AbstractChart<?, ?> chart, DataLabelsContext context);
 
 }

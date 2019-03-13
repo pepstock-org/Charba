@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.Context;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 import org.pepstock.charba.client.datalabels.enums.Align;
 
 /**
@@ -35,6 +35,6 @@ public interface AlignCallback {
 	 * @param context DATALABELS plugin context instance
 	 * @return the <code>align</code> value to be applied
 	 */
-	Align align(AbstractChart<?, ?> chart, Context context);
+	Align align(AbstractChart<?, ?> chart, DataLabelsContext context);
 
 }

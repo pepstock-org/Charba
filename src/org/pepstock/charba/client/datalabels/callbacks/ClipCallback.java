@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.Context;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 
 /**
  * Callback interface of DATALABELS plugin to set <code>clip</code> property at runtime, using the chart instance and the plugin
@@ -34,6 +34,6 @@ public interface ClipCallback {
 	 * @param context DATALABELS plugin context instance
 	 * @return the <code>clip</code> value to be applied
 	 */
-	boolean clip(AbstractChart<?, ?> chart, Context context);
+	boolean clip(AbstractChart<?, ?> chart, DataLabelsContext context);
 
 }

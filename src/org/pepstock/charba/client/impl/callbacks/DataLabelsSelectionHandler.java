@@ -19,7 +19,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.Context;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 import org.pepstock.charba.client.events.DatasetSelectionEvent;
 import org.pepstock.charba.client.events.DatasetSelectionEventHandler;
 import org.pepstock.charba.client.items.DatasetItem;
@@ -83,7 +83,7 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 	 * org.pepstock.charba.client.datalabels.Context)
 	 */
 	@Override
-	public boolean onClick(AbstractChart<?, ?> chart, Context context) {
+	public boolean onClick(AbstractChart<?, ?> chart, DataLabelsContext context) {
 		// checks if there is any selection handler and
 		// chart is initialized
 		if (!dataSelectionHandlers.isEmpty() && chart.isInitialized()) {

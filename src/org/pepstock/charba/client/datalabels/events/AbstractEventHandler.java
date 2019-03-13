@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.datalabels.events;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.Context;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 
 /**
  * Abstract event handler which implements all interfaces to listen DATA LABELS events.<br>
@@ -34,7 +34,7 @@ public abstract class AbstractEventHandler implements EnterEventHandler, LeaveEv
 	 * org.pepstock.charba.client.datalabels.Context)
 	 */
 	@Override
-	public boolean onClick(AbstractChart<?, ?> chart, Context context) {
+	public boolean onClick(AbstractChart<?, ?> chart, DataLabelsContext context) {
 		return true;
 	}
 
@@ -45,7 +45,7 @@ public abstract class AbstractEventHandler implements EnterEventHandler, LeaveEv
 	 * org.pepstock.charba.client.datalabels.Context)
 	 */
 	@Override
-	public boolean onLeave(AbstractChart<?, ?> chart, Context context) {
+	public boolean onLeave(AbstractChart<?, ?> chart, DataLabelsContext context) {
 		return true;
 	}
 
@@ -56,7 +56,7 @@ public abstract class AbstractEventHandler implements EnterEventHandler, LeaveEv
 	 * org.pepstock.charba.client.datalabels.Context)
 	 */
 	@Override
-	public boolean onEnter(AbstractChart<?, ?> chart, Context context) {
+	public boolean onEnter(AbstractChart<?, ?> chart, DataLabelsContext context) {
 		return true;
 	}
 

@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.Context;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 import org.pepstock.charba.client.datalabels.Font;
 
 /**
@@ -34,6 +34,6 @@ public interface FontCallback {
 	 * @param context DATALABELS plugin context instance
 	 * @return the font element instance to be applied
 	 */
-	Font font(AbstractChart<?, ?> chart, Context context);
+	Font font(AbstractChart<?, ?> chart, DataLabelsContext context);
 
 }

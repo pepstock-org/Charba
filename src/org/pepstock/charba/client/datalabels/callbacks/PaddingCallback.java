@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.Context;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 import org.pepstock.charba.client.datalabels.Padding;
 
 /**
@@ -34,6 +34,6 @@ public interface PaddingCallback {
 	 * @param context DATALABELS plugin context instance
 	 * @return the padding element instance to be applied
 	 */
-	Padding padding(AbstractChart<?, ?> chart, Context context);
+	Padding padding(AbstractChart<?, ?> chart, DataLabelsContext context);
 
 }

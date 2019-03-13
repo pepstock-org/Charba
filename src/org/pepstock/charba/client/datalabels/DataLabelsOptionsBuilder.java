@@ -39,13 +39,13 @@ import org.pepstock.charba.client.datalabels.callbacks.TextStrokeColorCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextStrokeWidthCallback;
 import org.pepstock.charba.client.datalabels.enums.Align;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
-import org.pepstock.charba.client.datalabels.enums.Display;
 import org.pepstock.charba.client.datalabels.enums.TextAlign;
 import org.pepstock.charba.client.datalabels.enums.Weight;
 import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
 import org.pepstock.charba.client.datalabels.events.ClickEventHandler;
 import org.pepstock.charba.client.datalabels.events.EnterEventHandler;
 import org.pepstock.charba.client.datalabels.events.LeaveEventHandler;
+import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**

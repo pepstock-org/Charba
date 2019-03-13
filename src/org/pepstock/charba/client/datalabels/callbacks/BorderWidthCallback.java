@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.Context;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 
 /**
  * Callback interface of DATALABELS plugin to set <code>borderWidth</code> property at runtime, using the chart instance and the
@@ -34,6 +34,6 @@ public interface BorderWidthCallback {
 	 * @param context DATALABELS plugin context instance
 	 * @return the <code>borderWidth</code> value to be applied
 	 */
-	int borderWidth(AbstractChart<?, ?> chart, Context context);
+	int borderWidth(AbstractChart<?, ?> chart, DataLabelsContext context);
 
 }

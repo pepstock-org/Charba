@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.Context;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
 
 /**
@@ -35,6 +35,6 @@ public interface AnchorCallback {
 	 * @param context DATALABELS plugin context instance
 	 * @return the <code>anchor</code> value to be applied
 	 */
-	Anchor anchor(AbstractChart<?, ?> chart, Context context);
+	Anchor anchor(AbstractChart<?, ?> chart, DataLabelsContext context);
 
 }

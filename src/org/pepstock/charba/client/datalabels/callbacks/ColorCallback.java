@@ -19,7 +19,7 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
-import org.pepstock.charba.client.datalabels.Context;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
@@ -54,6 +54,6 @@ public interface ColorCallback<T> {
 	 * @see CanvasPattern
 	 * @see CanvasGradient
 	 */
-	T color(AbstractChart<?, ?> chart, Context context);
+	T color(AbstractChart<?, ?> chart, DataLabelsContext context);
 
 }

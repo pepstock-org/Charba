@@ -19,7 +19,7 @@ import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
-import org.pepstock.charba.client.datalabels.Context;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
@@ -55,6 +55,6 @@ public interface TextShadowColorCallback<T> {
 	 * @see CanvasPattern
 	 * @see CanvasGradient
 	 */
-	T textShadowColor(AbstractChart<?, ?> chart, Context context);
+	T textShadowColor(AbstractChart<?, ?> chart, DataLabelsContext context);
 
 }

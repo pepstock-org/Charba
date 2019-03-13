@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.Context;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 
 /**
  * Callback interface of DATALABELS plugin to set <code>textStrokeWidth</code> property at runtime, using the chart instance and
@@ -34,6 +34,6 @@ public interface TextStrokeWidthCallback {
 	 * @param context DATALABELS plugin context instance
 	 * @return the <code>textStrokeWidth</code> value to be applied
 	 */
-	int textStrokeWidth(AbstractChart<?, ?> chart, Context context);
+	int textStrokeWidth(AbstractChart<?, ?> chart, DataLabelsContext context);
 
 }

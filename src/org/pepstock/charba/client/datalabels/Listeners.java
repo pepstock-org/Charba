@@ -63,7 +63,7 @@ public final class Listeners extends NativeObjectContainer {
 		 * @return if the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
 		 *         re-rendered.
 		 */
-		boolean call(Object contextFunction, Context context);
+		boolean call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -85,7 +85,7 @@ public final class Listeners extends NativeObjectContainer {
 		 * @return if the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
 		 *         re-rendered.
 		 */
-		boolean call(Object contextFunction, Context context);
+		boolean call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -107,7 +107,7 @@ public final class Listeners extends NativeObjectContainer {
 		 * @return if the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
 		 *         re-rendered.
 		 */
-		boolean call(Object contextFunction, Context context);
+		boolean call(Object contextFunction, DataLabelsContext context);
 	}
 
 	// ---------------------------
@@ -143,7 +143,7 @@ public final class Listeners extends NativeObjectContainer {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public boolean call(Object contextFunction, Context context) {
+			public boolean call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance by id
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -165,7 +165,7 @@ public final class Listeners extends NativeObjectContainer {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public boolean call(Object contextFunction, Context context) {
+			public boolean call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -187,7 +187,7 @@ public final class Listeners extends NativeObjectContainer {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public boolean call(Object contextFunction, Context context) {
+			public boolean call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);

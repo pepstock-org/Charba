@@ -51,9 +51,9 @@ import org.pepstock.charba.client.datalabels.callbacks.TextStrokeColorCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextStrokeWidthCallback;
 import org.pepstock.charba.client.datalabels.enums.Align;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
-import org.pepstock.charba.client.datalabels.enums.Display;
 import org.pepstock.charba.client.datalabels.enums.TextAlign;
 import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
+import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
@@ -92,7 +92,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return string with formatted value.
 		 */
-		String call(Object contextFunction, double value, Context context);
+		String call(Object contextFunction, double value, DataLabelsContext context);
 	}
 
 	/**
@@ -111,7 +111,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return align property value.
 		 */
-		String call(Object contextFunction, Context context);
+		String call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -130,7 +130,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return anchor property value.
 		 */
-		String call(Object contextFunction, Context context);
+		String call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -149,7 +149,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return background color property value. Could be a string (as color), color, pattern or gradient instance
 		 */
-		Object call(Object contextFunction, Context context);
+		Object call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -168,7 +168,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return border color property value. Could be a string (as color), color, pattern or gradient instance
 		 */
-		Object call(Object contextFunction, Context context);
+		Object call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -187,7 +187,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return border radius property value.
 		 */
-		double call(Object contextFunction, Context context);
+		double call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -206,7 +206,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return border width property value.
 		 */
-		int call(Object contextFunction, Context context);
+		int call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -225,7 +225,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return color property value. Could be a string (as color), color, pattern or gradient instance
 		 */
-		Object call(Object contextFunction, Context context);
+		Object call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -244,7 +244,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return clamp property value.
 		 */
-		boolean call(Object contextFunction, Context context);
+		boolean call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -263,7 +263,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return clip property value.
 		 */
-		boolean call(Object contextFunction, Context context);
+		boolean call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -282,7 +282,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return display property value, could be a boolean or a string.
 		 */
-		Object call(Object contextFunction, Context context);
+		Object call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -301,7 +301,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return offset property value.
 		 */
-		double call(Object contextFunction, Context context);
+		double call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -320,7 +320,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return opacity property value.
 		 */
-		double call(Object contextFunction, Context context);
+		double call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -339,7 +339,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return rotation property value.
 		 */
-		double call(Object contextFunction, Context context);
+		double call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -358,7 +358,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return text align property value.
 		 */
-		String call(Object contextFunction, Context context);
+		String call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -377,7 +377,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return text stroke color property value. Could be a string (as color), color, pattern or gradient instance
 		 */
-		Object call(Object contextFunction, Context context);
+		Object call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -396,7 +396,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return text stroke width property value.
 		 */
-		int call(Object contextFunction, Context context);
+		int call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -415,7 +415,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return text shadow blur property value.
 		 */
-		double call(Object contextFunction, Context context);
+		double call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -434,7 +434,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return text shadow color value. Could be a string (as color), color, pattern or gradient instance
 		 */
-		Object call(Object contextFunction, Context context);
+		Object call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -453,7 +453,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return font object value.
 		 */
-		NativeObject call(Object contextFunction, Context context);
+		NativeObject call(Object contextFunction, DataLabelsContext context);
 	}
 
 	/**
@@ -472,7 +472,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		 * @param context native object as context.
 		 * @return padding object value.
 		 */
-		NativeObject call(Object contextFunction, Context context);
+		NativeObject call(Object contextFunction, DataLabelsContext context);
 	}
 
 	// ---------------------------
@@ -646,7 +646,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * double, org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public String call(Object contextFunction, double value, Context context) {
+			public String call(Object contextFunction, double value, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -672,7 +672,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
+			public Object call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -726,7 +726,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
+			public Object call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -779,7 +779,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
+			public Object call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -832,7 +832,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public String call(Object contextFunction, Context context) {
+			public String call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -858,7 +858,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public String call(Object contextFunction, Context context) {
+			public String call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -884,7 +884,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * Object, org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public double call(Object contextFunction, Context context) {
+			public double call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -907,7 +907,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public int call(Object contextFunction, Context context) {
+			public int call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -929,7 +929,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public boolean call(Object contextFunction, Context context) {
+			public boolean call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -951,7 +951,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public boolean call(Object contextFunction, Context context) {
+			public boolean call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -974,7 +974,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
+			public Object call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -1009,7 +1009,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public double call(Object contextFunction, Context context) {
+			public double call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -1032,7 +1032,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public double call(Object contextFunction, Context context) {
+			public double call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -1055,7 +1055,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public double call(Object contextFunction, Context context) {
+			public double call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -1078,7 +1078,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public String call(Object contextFunction, Context context) {
+			public String call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -1106,7 +1106,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * Object, org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
+			public Object call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -1160,7 +1160,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * Object, org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public int call(Object contextFunction, Context context) {
+			public int call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -1183,7 +1183,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * Object, org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public double call(Object contextFunction, Context context) {
+			public double call(Object contextFunction, DataLabelsContext context) {
 				// gets chart i nstance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -1206,7 +1206,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * Object, org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
+			public Object call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -1259,7 +1259,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public NativeObject call(Object contextFunction, Context context) {
+			public NativeObject call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -1287,7 +1287,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			 * org.pepstock.charba.client.ext.datalabels.Context)
 			 */
 			@Override
-			public NativeObject call(Object contextFunction, Context context) {
+			public NativeObject call(Object contextFunction, DataLabelsContext context) {
 				// gets chart instance
 				String id = context.getNativeChart().getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);

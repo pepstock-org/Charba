@@ -16,8 +16,8 @@
 package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.Context;
-import org.pepstock.charba.client.datalabels.enums.Display;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
+import org.pepstock.charba.client.enums.Display;
 
 /**
  * Callback interface of DATALABELS plugin to set <code>display</code> property at runtime, using the chart instance and the
@@ -35,6 +35,6 @@ public interface DisplayCallback {
 	 * @param context DATALABELS plugin context instance
 	 * @return the <code>display</code> value to be applied
 	 */
-	Display display(AbstractChart<?, ?> chart, Context context);
+	Display display(AbstractChart<?, ?> chart, DataLabelsContext context);
 
 }

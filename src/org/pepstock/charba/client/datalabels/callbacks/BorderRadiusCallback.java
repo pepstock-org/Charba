@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.Context;
+import org.pepstock.charba.client.datalabels.DataLabelsContext;
 
 /**
  * Callback interface of DATALABELS plugin to set <code>borderRadius</code> property at runtime, using the chart instance and
@@ -34,6 +34,6 @@ public interface BorderRadiusCallback {
 	 * @param context DATALABELS plugin context instance
 	 * @return the <code>borderRadius</code> value to be applied
 	 */
-	double borderRadius(AbstractChart<?, ?> chart, Context context);
+	double borderRadius(AbstractChart<?, ?> chart, DataLabelsContext context);
 
 }
