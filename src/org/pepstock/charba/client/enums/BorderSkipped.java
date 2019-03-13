@@ -47,5 +47,5 @@ public enum BorderSkipped implements Key
 	/**
 	 * the property sets <code>false</code> to avoid drawing the bar stroke at the base of the fill.
 	 */
-	isFalse;
+	False;
 }

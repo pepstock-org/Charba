@@ -208,6 +208,20 @@ public abstract class Dataset extends NativeObjectContainer {
 	}
 
 	/**
+	 * Removes the property key related to the color from dataset object and pattern and gradient containers if callback is selected.
+	 * 
+	 * @param key key property name to remove.
+	 */
+	final void resetBeingCallback(Key key) {
+		// removes color key from dataset object
+		removeIfExists(key);
+		// remove from patterns
+		getPatternsContainer().removeObjects(key);
+		// remove from gradients
+		getGradientsContainer().removeObjects(key);
+	}
+	
+	/**
 	 * It applies all canvas patterns defined into dataset. The canvas pattern needs to be created a context 2d of canvas
 	 * therefore must be created by a chart.<br>
 	 * This is called by {@link CanvasObjectHandler}.

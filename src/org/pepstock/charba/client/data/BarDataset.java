@@ -17,13 +17,20 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.Charts;
+import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.options.Scales;
+
+import jsinterop.annotations.JsFunction;
 
 /**
  * The bar chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
@@ -34,6 +41,38 @@ import org.pepstock.charba.client.options.Scales;
  * @author Andrea "Stock" Stocchero
  */
 public class BarDataset extends HovingFlexDataset implements HasDataPoints {
+
+	// ---------------------------
+	// -- JAVASCRIPT FUNCTIONS ---
+	// ---------------------------
+
+	/**
+	 * Java script FUNCTION callback called to provide the border skipped.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyBorderSkippedCallback {
+
+		/**
+		 * Method of function to be called to provide the border skipped.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return border skipped property value. Could be a {@link BorderSkipped} or a {@link Boolean}
+		 */
+		Object call(Object contextFunction, Context context);
+	}
+
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the border skipped function
+	private final CallbackProxy<ProxyBorderSkippedCallback> borderSkippedCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// border skipped callback instance
+	private BorderSkippedCallback borderSkippedCallback = null;
 
 	// data point factory
 	private final DataPointListFactory factory = new DataPointListFactory();
@@ -63,6 +102,48 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 */
 	public BarDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		borderSkippedCallbackProxy.setCallback(new ProxyBorderSkippedCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.BarDataset.ProxyBorderSkippedCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.data.Context)
+			 */
+			@Override
+			public Object call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && borderSkippedCallback != null) {
+					// calls callback
+					BorderSkipped result = borderSkippedCallback.borderSkipped(chart, context);
+					// checks result
+					if (result != null) {
+						// checks if is boolean
+						if (BorderSkipped.False.equals(result)) {
+							return false;
+						} else {
+							// returns the string value
+							return result.name();
+						}
+					}
+				}
+				// default result
+				BorderSkipped defaults = getDefaultValues().getElements().getRectangle().getBorderSkipped();
+				// checks if is boolean
+				if (BorderSkipped.False.equals(defaults)) {
+					return false;
+				} else {
+					// returns the string value
+					return defaults.name();
+				}
+			}
+		});
 	}
 
 	/**
@@ -117,18 +198,20 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 		// if not false, otherwise ignore it
 		if (!borderskip) {
 			// stores boolean value
-			setValue(Property.borderSkipped, BorderSkipped.isFalse);
+			setValue(Property.borderSkipped, BorderSkipped.False);
 		}
 	}
-	
+
 	/**
 	 * Sets the edge to skip drawing the border for.
 	 * 
 	 * @param position the edge to skip drawing the border for.
 	 */
 	public void setBorderSkipped(BorderSkipped position) {
+		// resets callbacks
+		setBorderSkipped((BorderSkippedCallback)null);
 		// checks if setting a false value
-		if (BorderSkipped.isFalse.equals(position)) {
+		if (BorderSkipped.False.equals(position)) {
 			// stores boolean value
 			setValue(Property.borderSkipped, false);
 		} else {
@@ -146,12 +229,43 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 		// checks if 'false' has been set
 		if (ObjectType.Boolean.equals(type(Property.borderSkipped))) {
 			// returns is false
-			return BorderSkipped.isFalse;
+			return BorderSkipped.False;
+		} else if (ObjectType.Function.equals(type(Property.borderSkipped))) {
+			// checks if a callback has been set
+			// returns defaults
+			return getDefaultValues().getElements().getRectangle().getBorderSkipped();
 		}
 		// otherwise returns the enum value as string
 		return getValue(Property.borderSkipped, BorderSkipped.class, getDefaultValues().getElements().getRectangle().getBorderSkipped());
 	}
 	
+	/**
+	 * Returns the border skipped callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border skipped callback, if set, otherwise <code>null</code>.
+	 */
+	public BorderSkippedCallback getBorderSkippedCallback() {
+		return borderSkippedCallback;
+	}
+
+	/**
+	 * Sets the border skipped callback.
+	 * 
+	 * @param borderSkippedCallback the border skipped callback to set
+	 */
+	public void setBorderSkipped(BorderSkippedCallback borderSkippedCallback) {
+		// sets the callback
+		this.borderSkippedCallback = borderSkippedCallback;
+		// checks if callback is consistent
+		if (borderSkippedCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.borderSkipped, borderSkippedCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.borderSkipped);
+		}
+	}
+
 	/**
 	 * Sets the data property of a dataset for a chart is specified as an array of data points.
 	 * 
