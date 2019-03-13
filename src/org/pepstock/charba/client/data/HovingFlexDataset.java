@@ -89,7 +89,7 @@ abstract class HovingFlexDataset extends Dataset {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return border color property value. Could be a string (as color), color, pattern or gradient instance
+		 * @return border color property value. Could be a string (as color), color or gradient instance
 		 */
 		Object call(Object contextFunction, Context context);
 	}
@@ -231,10 +231,6 @@ abstract class HovingFlexDataset extends Dataset {
 					} else if (result instanceof String) {
 						// is string instance
 						return (String) result;
-					} else if (result instanceof Pattern) {
-						// is pattern instance
-						Pattern pattern = (Pattern) result;
-						return CanvasObjectFactory.createPattern(chart, pattern);
 					} else if (result instanceof Gradient) {
 						// is gradient instance
 						// checks if chart is initialized
@@ -246,9 +242,6 @@ abstract class HovingFlexDataset extends Dataset {
 					} else if (result instanceof CanvasGradient) {
 						// is canvas gradient instance
 						return (CanvasGradient) result;
-					} else if (result instanceof CanvasPattern) {
-						// is canvas pattern instance
-						return (CanvasPattern) result;
 					} else if (result != null) {
 						// another instance not null
 						// returns to string

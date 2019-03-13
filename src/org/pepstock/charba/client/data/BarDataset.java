@@ -125,7 +125,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 					// checks result
 					if (result != null) {
 						// checks if is boolean
-						if (BorderSkipped.False.equals(result)) {
+						if (BorderSkipped.noborderskipped.equals(result)) {
 							return false;
 						} else {
 							// returns the string value
@@ -136,7 +136,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 				// default result
 				BorderSkipped defaults = getDefaultValues().getElements().getRectangle().getBorderSkipped();
 				// checks if is boolean
-				if (BorderSkipped.False.equals(defaults)) {
+				if (BorderSkipped.noborderskipped.equals(defaults)) {
 					return false;
 				} else {
 					// returns the string value
@@ -198,7 +198,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 		// if not false, otherwise ignore it
 		if (!borderskip) {
 			// stores boolean value
-			setValue(Property.borderSkipped, BorderSkipped.False);
+			setValue(Property.borderSkipped, BorderSkipped.noborderskipped);
 		}
 	}
 
@@ -211,7 +211,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 		// resets callbacks
 		setBorderSkipped((BorderSkippedCallback)null);
 		// checks if setting a false value
-		if (BorderSkipped.False.equals(position)) {
+		if (BorderSkipped.noborderskipped.equals(position)) {
 			// stores boolean value
 			setValue(Property.borderSkipped, false);
 		} else {
@@ -229,7 +229,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 		// checks if 'false' has been set
 		if (ObjectType.Boolean.equals(type(Property.borderSkipped))) {
 			// returns is false
-			return BorderSkipped.False;
+			return BorderSkipped.noborderskipped;
 		} else if (ObjectType.Function.equals(type(Property.borderSkipped))) {
 			// checks if a callback has been set
 			// returns defaults

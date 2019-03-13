@@ -16,35 +16,23 @@
 package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.colors.Gradient;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.data.Context;
 
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-
 /**
- * Callback interface to set <code>borderColor</code> property at runtime, using the chart instance and the context.
+ * Callback interface to set <code>pointRotation</code> property at runtime, using the chart instance and the context.
  * 
  * @author Andrea "Stock" Stocchero
  *
- * @param <T> type of result of callback. Could be a string (as color), color or gradient instance
- * @see IsColor
- * @see Gradient
- * @see CanvasGradient
  */
-public interface BorderColorCallback<T> {
+public interface PointRotationCallback {
 
 	/**
-	 * Returns the <code>borderColor</code> property at runtime, using the chart instance and the context.
+	 * Returns the <code>pointRotation</code> property at runtime, using the chart instance and the context.
 	 * 
 	 * @param chart chart instance
 	 * @param context context instance
-	 * @return the <code>borderColor</code> value to be applied. Could be a string (as color), color or gradient
-	 *         instance
-	 * @see IsColor
-	 * @see Gradient
-	 * @see CanvasGradient
+	 * @return the <code>pointRotation</code> value to be applied
 	 */
-	T borderColor(AbstractChart<?, ?> chart, Context context);
+	double rotation(AbstractChart<?, ?> chart, Context context);
 
 }

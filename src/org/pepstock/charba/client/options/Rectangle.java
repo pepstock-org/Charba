@@ -59,7 +59,7 @@ public class Rectangle extends AbstractElement<IsDefaultRectangle> implements Is
 		// if not false, otherwise ignore it
 		if (!borderskip) {
 			// stores boolean value
-			setValue(Property.borderSkipped, BorderSkipped.False);
+			setValue(Property.borderSkipped, BorderSkipped.noborderskipped);
 		}
 	}
 	
@@ -70,7 +70,7 @@ public class Rectangle extends AbstractElement<IsDefaultRectangle> implements Is
 	 */
 	public void setBorderSkipped(BorderSkipped position) {
 		// checks if setting a false value
-		if (BorderSkipped.False.equals(position)) {
+		if (BorderSkipped.noborderskipped.equals(position)) {
 			// stores boolean value
 			setValue(Property.borderSkipped, false);
 		} else {
@@ -90,7 +90,7 @@ public class Rectangle extends AbstractElement<IsDefaultRectangle> implements Is
 		// checks if 'false' has been set
 		if (ObjectType.Boolean.equals(type(Property.borderSkipped))) {
 			// returns is false
-			return BorderSkipped.False;
+			return BorderSkipped.noborderskipped;
 		}
 		// otherwise returns the enum value as string
 		return getValue(Property.borderSkipped, BorderSkipped.class, getDefaultValues().getBorderSkipped());

@@ -105,16 +105,16 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	/**
 	 * Returns the edge to skip drawing the border for.
 	 * 
-	 * @return the edge to skip drawing the border for. Default is {@link org.pepstock.charba.client.enums.BorderSkipped#False}.
+	 * @return the edge to skip drawing the border for. Default is {@link org.pepstock.charba.client.enums.BorderSkipped#noborderskipped}.
 	 */
 	public BorderSkipped getBorderSkipped() {
 		// checks if 'false' has been set
 		if (ObjectType.Boolean.equals(type(Property.borderSkipped))) {
 			// returns is false
-			return BorderSkipped.False;
+			return BorderSkipped.noborderskipped;
 		}
 		// otherwise returns the enum value as string
-		return getValue(Property.borderSkipped, BorderSkipped.class, BorderSkipped.False);
+		return getValue(Property.borderSkipped, BorderSkipped.class, BorderSkipped.noborderskipped);
 	}
 	
 	/**
