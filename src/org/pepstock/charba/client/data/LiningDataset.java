@@ -17,14 +17,14 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.callbacks.BorderWidthCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
@@ -61,8 +61,6 @@ import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Image;
 
-import jsinterop.annotations.JsFunction;
-
 /**
  * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
  * specific dataset.<br>
@@ -74,245 +72,30 @@ import jsinterop.annotations.JsFunction;
 abstract class LiningDataset extends Dataset {
 
 	// ---------------------------
-	// -- JAVASCRIPT FUNCTIONS ---
-	// ---------------------------
-
-	/**
-	 * Java script FUNCTION callback called to provide the point background color.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyPointBackgroundColorCallback {
-
-		/**
-		 * Method of function to be called to provide the point background color.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return point background color property value. Could be a string (as color), color, pattern or gradient instance
-		 */
-		Object call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the point border color.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyPointBorderColorCallback {
-
-		/**
-		 * Method of function to be called to provide the point border color.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return point border color property value. Could be a string (as color), color or gradient instance
-		 */
-		Object call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the point border width property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyPointBorderWidthCallback {
-
-		/**
-		 * Method of function to be called to provide the point border width property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return point border width property value.
-		 */
-		int call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the point hover background color.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyPointHoverBackgroundColorCallback {
-
-		/**
-		 * Method of function to be called to provide the point hover background color.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return point hover background color property value. Could be a string (as color), color, pattern or gradient
-		 *         instance
-		 */
-		Object call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the point hover border color.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyPointHoverBorderColorCallback {
-
-		/**
-		 * Method of function to be called to provide the point hover border color.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return point hover border color property value. Could be a string (as color), color or gradient instance
-		 */
-		Object call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the point hover border width property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyPointHoverBorderWidthCallback {
-
-		/**
-		 * Method of function to be called to provide the point hover border width property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return point hover border width property value.
-		 */
-		int call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the point radius property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyPointRadiusCallback {
-
-		/**
-		 * Method of function to be called to provide the point radius property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return point radius property value.
-		 */
-		double call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the point hit radius property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyPointHitRadiusCallback {
-
-		/**
-		 * Method of function to be called to provide the point hit radius property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return point hit radius property value.
-		 */
-		double call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the point hover radius property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyPointHoverRadiusCallback {
-
-		/**
-		 * Method of function to be called to provide the point hover radius property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return point hover radius property value.
-		 */
-		double call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the point rotation property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyPointRotationCallback {
-
-		/**
-		 * Method of function to be called to provide the point rotation property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return point rotation property value.
-		 */
-		double call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the point style.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyPointStyleCallback {
-
-		/**
-		 * Method of function to be called to provide the point style.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return point style property value. Could be a {@link PointStyle}, {@link Image}, {@link ImageResource} or
-		 *         {@link ImageElement} instance
-		 */
-		Object call(Object contextFunction, Context context);
-	}
-
-	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the point background color function
-	private final CallbackProxy<ProxyPointBackgroundColorCallback> pointBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> pointBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point border color function
-	private final CallbackProxy<ProxyPointBorderColorCallback> pointBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> pointBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point border width function
-	private final CallbackProxy<ProxyPointBorderWidthCallback> pointBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<DatasetFunctions.ProxyIntegerCallback> pointBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point hover background color function
-	private final CallbackProxy<ProxyPointHoverBackgroundColorCallback> pointHoverBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> pointHoverBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point hover border color function
-	private final CallbackProxy<ProxyPointHoverBorderColorCallback> pointHoverBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> pointHoverBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point hover border width function
-	private final CallbackProxy<ProxyPointHoverBorderWidthCallback> pointHoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<DatasetFunctions.ProxyIntegerCallback> pointHoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point radius function
-	private final CallbackProxy<ProxyPointRadiusCallback> pointRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<DatasetFunctions.ProxyDoubleCallback> pointRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point hit radius function
-	private final CallbackProxy<ProxyPointHitRadiusCallback> pointHitRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<DatasetFunctions.ProxyDoubleCallback> pointHitRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point hover radius function
-	private final CallbackProxy<ProxyPointHoverRadiusCallback> pointHoverRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<DatasetFunctions.ProxyDoubleCallback> pointHoverRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point rotation function
-	private final CallbackProxy<ProxyPointRotationCallback> pointRotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<DatasetFunctions.ProxyDoubleCallback> pointRotationCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point style function
-	private final CallbackProxy<ProxyPointStyleCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// point background color callback instance
 	private BackgroundColorCallback<?> pointBackgroundColorCallback = null;
@@ -378,368 +161,173 @@ abstract class LiningDataset extends Dataset {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		pointBackgroundColorCallbackProxy.setCallback(new ProxyPointBackgroundColorCallback() {
+		pointBackgroundColorCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.data.LiningDataset.ProxyPointBackgroundColorCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && pointBackgroundColorCallback != null) {
-					// calls callback
-					Object result = pointBackgroundColorCallback.backgroundColor(chart, context);
-					// checks result
-					if (result instanceof IsColor) {
-						// is color instance
-						IsColor color = (IsColor) result;
-						return color.toRGBA();
-					} else if (result instanceof String) {
-						// is string instance
-						return (String) result;
-					} else if (result instanceof Pattern) {
-						// is pattern instance
-						Pattern pattern = (Pattern) result;
-						return CanvasObjectFactory.createPattern(chart, pattern);
-					} else if (result instanceof Gradient) {
-						// is gradient instance
-						// checks if chart is initialized
-						if (chart.isInitialized()) {
-							Gradient gradient = (Gradient) result;
-							return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
-						}
-						// otherwise returns default
-					} else if (result instanceof CanvasGradient) {
-						// is canvas gradient instance
-						return (CanvasGradient) result;
-					} else if (result instanceof CanvasPattern) {
-						// is canvas pattern instance
-						return (CanvasPattern) result;
-					} else if (result != null) {
-						// another instance not null
-						// returns to string
-						return result.toString();
-					}
-				}
-				// default result
-				return getDefaultValues().getElements().getPoint().getBackgroundColorAsString();
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsColor(context, pointBackgroundColorCallback, getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
 			}
 		});
-		pointBorderColorCallbackProxy.setCallback(new ProxyPointBorderColorCallback() {
+		pointBorderColorCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.data.LiningDataset.ProxyPointBorderColorCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && pointBorderColorCallback != null) {
-					// calls callback
-					Object result = pointBorderColorCallback.borderColor(chart, context);
-					// checks result
-					if (result instanceof IsColor) {
-						// is color instance
-						IsColor color = (IsColor) result;
-						return color.toRGBA();
-					} else if (result instanceof String) {
-						// is string instance
-						return (String) result;
-					} else if (result instanceof Gradient) {
-						// is gradient instance
-						// checks if chart is initialized
-						if (chart.isInitialized()) {
-							Gradient gradient = (Gradient) result;
-							return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
-						}
-						// otherwise returns default
-					} else if (result instanceof CanvasGradient) {
-						// is canvas gradient instance
-						return (CanvasGradient) result;
-					} else if (result != null) {
-						// another instance not null
-						// returns to string
-						return result.toString();
-					}
-				}
-				// default result
-				return getDefaultValues().getElements().getPoint().getBorderColorAsString();
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsColor(context, pointBorderColorCallback, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false);
 			}
 		});
-		pointBorderWidthCallbackProxy.setCallback(new ProxyPointBorderWidthCallback() {
+		pointBorderWidthCallbackProxy.setCallback(new DatasetFunctions.ProxyIntegerCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.data.LiningDataset.ProxyPointBorderWidthCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyIntegerCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public int call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && pointBorderWidthCallback != null) {
-					// calls callback
-					return pointBorderWidthCallback.borderWidth(chart, context);
-				}
-				// default result
-				return getDefaultValues().getElements().getPoint().getBorderWidth();
+			public int call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, pointBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue();
 			}
 		});
-		pointHoverBackgroundColorCallbackProxy.setCallback(new ProxyPointHoverBackgroundColorCallback() {
+		pointHoverBackgroundColorCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.data.LiningDataset.ProxyPointHoverBackgroundColorCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && pointHoverBackgroundColorCallback != null) {
-					// calls callback
-					Object result = pointHoverBackgroundColorCallback.backgroundColor(chart, context);
-					// checks result
-					if (result instanceof IsColor) {
-						// is color instance
-						IsColor color = (IsColor) result;
-						return color.toRGBA();
-					} else if (result instanceof String) {
-						// is string instance
-						return (String) result;
-					} else if (result instanceof Pattern) {
-						// is pattern instance
-						Pattern pattern = (Pattern) result;
-						return CanvasObjectFactory.createPattern(chart, pattern);
-					} else if (result instanceof Gradient) {
-						// is gradient instance
-						// checks if chart is initialized
-						if (chart.isInitialized()) {
-							Gradient gradient = (Gradient) result;
-							return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
-						}
-						// otherwise returns default
-					} else if (result instanceof CanvasGradient) {
-						// is canvas gradient instance
-						return (CanvasGradient) result;
-					} else if (result instanceof CanvasPattern) {
-						// is canvas pattern instance
-						return (CanvasPattern) result;
-					} else if (result != null) {
-						// another instance not null
-						// returns to string
-						return result.toString();
-					}
-				}
-				// default result
-				return getDefaultValues().getElements().getPoint().getBackgroundColorAsString();
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsColor(context, pointHoverBackgroundColorCallback, getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
 			}
 		});
-		pointHoverBorderColorCallbackProxy.setCallback(new ProxyPointHoverBorderColorCallback() {
+		pointHoverBorderColorCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.data.LiningDataset.ProxyPointHoverBorderColorCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && pointHoverBorderColorCallback != null) {
-					// calls callback
-					Object result = pointHoverBorderColorCallback.borderColor(chart, context);
-					// checks result
-					if (result instanceof IsColor) {
-						// is color instance
-						IsColor color = (IsColor) result;
-						return color.toRGBA();
-					} else if (result instanceof String) {
-						// is string instance
-						return (String) result;
-					} else if (result instanceof Gradient) {
-						// is gradient instance
-						// checks if chart is initialized
-						if (chart.isInitialized()) {
-							Gradient gradient = (Gradient) result;
-							return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
-						}
-						// otherwise returns default
-					} else if (result instanceof CanvasGradient) {
-						// is canvas gradient instance
-						return (CanvasGradient) result;
-					} else if (result != null) {
-						// another instance not null
-						// returns to string
-						return result.toString();
-					}
-				}
-				// default result
-				return getDefaultValues().getElements().getPoint().getBorderColorAsString();
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsColor(context, pointHoverBorderColorCallback, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false);
 			}
 		});
-		pointHoverBorderWidthCallbackProxy.setCallback(new ProxyPointHoverBorderWidthCallback() {
+		pointHoverBorderWidthCallbackProxy.setCallback(new DatasetFunctions.ProxyIntegerCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.data.LiningDataset.ProxyPointHoverBorderWidthCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyIntegerCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public int call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && pointHoverBorderWidthCallback != null) {
-					// calls callback
-					return pointHoverBorderWidthCallback.borderWidth(chart, context);
-				}
-				// default result
-				return getDefaultValues().getElements().getPoint().getBorderWidth();
+			public int call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, pointHoverBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue();
 			}
 		});
-		pointRadiusCallbackProxy.setCallback(new ProxyPointRadiusCallback() {
+		pointRadiusCallbackProxy.setCallback(new DatasetFunctions.ProxyDoubleCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.data.LiningDataset.ProxyPointRadiusCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyDoubleCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public double call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && pointRadiusCallback != null) {
-					// calls callback
-					return pointRadiusCallback.radius(chart, context);
-				}
-				// default result
-				return getDefaultValues().getElements().getPoint().getRadius();
+			public double call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, pointRadiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue();
+			}
+
+		});
+		pointHitRadiusCallbackProxy.setCallback(new DatasetFunctions.ProxyDoubleCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyDoubleCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
+			 */
+			@Override
+			public double call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, pointHitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue();
 			}
 		});
-		pointHitRadiusCallbackProxy.setCallback(new ProxyPointHitRadiusCallback() {
+		pointHoverRadiusCallbackProxy.setCallback(new DatasetFunctions.ProxyDoubleCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.data.LiningDataset.ProxyPointHitRadiusCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyDoubleCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public double call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && pointHitRadiusCallback != null) {
-					// calls callback
-					return pointHitRadiusCallback.radius(chart, context);
-				}
-				// default result
-				return getDefaultValues().getElements().getPoint().getHitRadius();
+			public double call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, pointHoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue();
 			}
 		});
-		pointHoverRadiusCallbackProxy.setCallback(new ProxyPointHoverRadiusCallback() {
+		pointRotationCallbackProxy.setCallback(new DatasetFunctions.ProxyDoubleCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.data.LiningDataset.ProxyPointHoverRadiusCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyDoubleCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public double call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && pointHoverRadiusCallback != null) {
-					// calls callback
-					return pointHoverRadiusCallback.radius(chart, context);
-				}
-				// default result
-				return getDefaultValues().getElements().getPoint().getHoverRadius();
+			public double call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, pointRotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue();
 			}
 		});
-		pointRotationCallbackProxy.setCallback(new ProxyPointRotationCallback() {
+		pointStyleCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.data.LiningDataset.ProxyPointRotationCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public double call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && pointRotationCallback != null) {
-					// calls callback
-					return pointRotationCallback.rotation(chart, context);
-				}
-				// default result
-				return getDefaultValues().getElements().getPoint().getRotation();
-			}
-		});
-		pointStyleCallbackProxy.setCallback(new ProxyPointStyleCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.LiningDataset.ProxyPointStyleCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
-			 */
-			@Override
-			public Object call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && pointStyleCallback != null) {
-					// calls callback
-					Object result = pointStyleCallback.style(chart, context);
-					// checks result
-					if (result instanceof PointStyle) {
-						// is point style instance
-						PointStyle style = (PointStyle) result;
-						return style.name();
-					} else if (result instanceof Image) {
-						// is image instance
-						return Utilities.toImageElement((Image) result);
-					} else if (result instanceof ImageResource) {
-						// is image resource instance
-						return Utilities.toImageElement((ImageResource) result);
-					} else if (result instanceof ImageElement) {
-						// is image element instance
-						return (ImageElement) result;
-					}
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				Object result = ScriptableUtils.getOptionValue(context, pointStyleCallback);
+				// checks result
+				if (result instanceof PointStyle) {
+					// is point style instance
+					PointStyle style = (PointStyle) result;
+					return style.name();
+				} else if (result instanceof Image) {
+					// is image instance
+					return Utilities.toImageElement((Image) result);
+				} else if (result instanceof ImageResource) {
+					// is image resource instance
+					return Utilities.toImageElement((ImageResource) result);
+				} else if (result instanceof ImageElement) {
+					// is image element instance
+					return (ImageElement) result;
 				}
 				// default result
 				return getDefaultValues().getElements().getPoint().getPointStyle().name();

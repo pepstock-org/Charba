@@ -15,10 +15,8 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.data.Context;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 
@@ -32,18 +30,6 @@ import com.google.gwt.canvas.dom.client.CanvasGradient;
  * @see Gradient
  * @see CanvasGradient
  */
-public interface BorderColorCallback<T> {
-
-	/**
-	 * Returns the <code>borderColor</code> property at runtime, using the chart instance and the context.
-	 * 
-	 * @param chart chart instance
-	 * @param context context instance
-	 * @return the <code>borderColor</code> value to be applied. Could be a string (as color), color or gradient instance
-	 * @see IsColor
-	 * @see Gradient
-	 * @see CanvasGradient
-	 */
-	T borderColor(AbstractChart<?, ?> chart, Context context);
+public interface BorderColorCallback<T> extends Scriptable<T>{
 
 }

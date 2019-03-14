@@ -15,12 +15,23 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import org.pepstock.charba.client.AbstractChart;
+
 /**
- * Callback interface to set <code>borderWidth</code> property at runtime, using the chart instance and the context.
+ * Interface to map all callback of scriptable options available for CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @param <T> type of result of invocation method.
  */
-public interface BorderWidthCallback extends Scriptable<Integer> {
+public interface Scriptable<T> {
+
+	/**
+	 * Returns the value of property at runtime, using the chart instance and the context.
+	 * 
+	 * @param chart chart instance
+	 * @param context context instance
+	 * @return value of property to be applied
+	 */
+	T invoke(AbstractChart<?, ?> chart, ScriptableContext context);
 
 }

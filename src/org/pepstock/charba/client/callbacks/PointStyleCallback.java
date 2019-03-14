@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.data.Context;
 import org.pepstock.charba.client.enums.PointStyle;
 
 import com.google.gwt.dom.client.ImageElement;
@@ -35,20 +33,6 @@ import com.google.gwt.user.client.ui.Image;
  * @see ImageResource
  * @see ImageElement
  */
-public interface PointStyleCallback<T> {
-
-	/**
-	 * Returns the <code>pointStyle</code> property at runtime, using the chart instance and the context.
-	 * 
-	 * @param chart chart instance
-	 * @param context context instance
-	 * @return the <code>pointStyle</code> value to be applied. Could be a {@link PointStyle}, {@link Image},
-	 *         {@link ImageResource} or {@link ImageElement} instance
-	 * @see PointStyle
-	 * @see Image
-	 * @see ImageResource
-	 * @see ImageElement
-	 */
-	T style(AbstractChart<?, ?> chart, Context context);
+public interface PointStyleCallback<T> extends Scriptable<T>{
 
 }

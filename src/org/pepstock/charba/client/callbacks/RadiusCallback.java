@@ -15,9 +15,6 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.data.Context;
-
 /**
  * Callback interface to set <code>radius</code> or <code>pointRadius</code> (hit and hover) property at runtime, using the
  * chart instance and the context.
@@ -25,16 +22,6 @@ import org.pepstock.charba.client.data.Context;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface RadiusCallback {
-
-	/**
-	 * Returns the <code>radius</code> or <code>pointRadius</code> (hit and hover) property at runtime, using the chart instance
-	 * and the context.
-	 * 
-	 * @param chart chart instance
-	 * @param context context instance
-	 * @return the <code>radius</code> or <code>pointRadius</code> (hit and hover) value to be applied
-	 */
-	double radius(AbstractChart<?, ?> chart, Context context);
+public interface RadiusCallback extends Scriptable<Double>{
 
 }

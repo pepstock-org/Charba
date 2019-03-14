@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.data.Context;
 import org.pepstock.charba.client.enums.BorderAlign;
 
 /**
@@ -25,15 +23,6 @@ import org.pepstock.charba.client.enums.BorderAlign;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface BorderAlignCallback {
-
-	/**
-	 * Returns the <code>borderAlign</code> property at runtime, using the chart instance and the context.
-	 * 
-	 * @param chart chart instance
-	 * @param context context instance
-	 * @return the <code>borderAlign</code> value to be applied.
-	 */
-	BorderAlign align(AbstractChart<?, ?> chart, Context context);
+public interface BorderAlignCallback extends Scriptable<BorderAlign>{
 
 }

@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.data;
+package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -32,17 +32,18 @@ import jsinterop.annotations.JsType;
  * <ul>
  * <li><b>index</b>(int): index of the associated data
  * <li><b>datasetIndex</b>(int): index of the associated dataset
+ * <li><b>Charba ID</b>(String): id (of Charba) assigned to chart
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public final class Context {
+public class ScriptableContext {
 
 	/**
 	 * To avoid any instantiation
 	 */
-	Context() {
+	protected ScriptableContext() {
 	}
 
 	/**
@@ -51,7 +52,7 @@ public final class Context {
 	 * @return the <code>chart</code> property by native object.
 	 */
 	@JsProperty(name = "chart")
-	native Chart getNativeChart();
+	protected native Chart getNativeChart();
 
 	/**
 	 * Returns the <code>dataIndex</code> property by native object.
@@ -59,7 +60,7 @@ public final class Context {
 	 * @return the <code>dataIndex</code> property by native object.
 	 */
 	@JsProperty(name = "dataIndex")
-	native int getNativeDataIndex();
+	protected native int getNativeDataIndex();
 
 	/**
 	 * Returns the <code>datasetIndex</code> property by native object.
@@ -67,7 +68,7 @@ public final class Context {
 	 * @return the <code>datasetIndex</code> property by native object.
 	 */
 	@JsProperty(name = "datasetIndex")
-	native int getNativeDatasetIndex();
+	protected native int getNativeDatasetIndex();
 
 	/**
 	 * Returns the index of the data inside the dataset.
@@ -76,7 +77,7 @@ public final class Context {
 	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	@JsOverlay
-	public int getIndex() {
+	public final int getIndex() {
 		// checks if is defined
 		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "dataIndex"))) {
 			return UndefinedValues.INTEGER;
@@ -92,7 +93,7 @@ public final class Context {
 	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	@JsOverlay
-	public int getDatasetIndex() {
+	public final int getDatasetIndex() {
 		// checks if is defined
 		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "datasetIndex"))) {
 			return UndefinedValues.INTEGER;
@@ -107,7 +108,7 @@ public final class Context {
 	 * @return the CHARBA ID
 	 */
 	@JsOverlay
-	public String getCharbaId() {
+	public final String getCharbaId() {
 		return getNativeChart().getCharbaId();
 	}
 

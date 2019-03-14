@@ -15,11 +15,9 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
-import org.pepstock.charba.client.data.Context;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
@@ -36,21 +34,6 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  * @see CanvasPattern
  * @see CanvasGradient
  */
-public interface BackgroundColorCallback<T> {
-
-	/**
-	 * Returns the <code>backgroundColor</code> property at runtime, using the chart instance and the context.
-	 * 
-	 * @param chart chart instance
-	 * @param context context instance
-	 * @return the <code>backgroundColor</code> value to be applied. Could be a string (as color), color, pattern or gradient
-	 *         instance
-	 * @see IsColor
-	 * @see Pattern
-	 * @see Gradient
-	 * @see CanvasPattern
-	 * @see CanvasGradient
-	 */
-	T backgroundColor(AbstractChart<?, ?> chart, Context context);
+public interface BackgroundColorCallback<T> extends Scriptable<T>{
 
 }

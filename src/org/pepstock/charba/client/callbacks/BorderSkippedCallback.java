@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.data.Context;
 import org.pepstock.charba.client.enums.BorderSkipped;
 
 /**
@@ -25,15 +23,6 @@ import org.pepstock.charba.client.enums.BorderSkipped;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface BorderSkippedCallback {
-
-	/**
-	 * Returns the <code>borderSkipped</code> property at runtime, using the chart instance and the context.
-	 * 
-	 * @param chart chart instance
-	 * @param context context instance
-	 * @return the <code>borderSkipped</code> value to be applied.
-	 */
-	BorderSkipped skipped(AbstractChart<?, ?> chart, Context context);
+public interface BorderSkippedCallback extends Scriptable<BorderSkipped>{
 
 }

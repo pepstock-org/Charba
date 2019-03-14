@@ -17,9 +17,9 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -29,8 +29,6 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.options.Scales;
-
-import jsinterop.annotations.JsFunction;
 
 /**
  * The bar chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
@@ -43,33 +41,10 @@ import jsinterop.annotations.JsFunction;
 public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 
 	// ---------------------------
-	// -- JAVASCRIPT FUNCTIONS ---
-	// ---------------------------
-
-	/**
-	 * Java script FUNCTION callback called to provide the border skipped.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBorderSkippedCallback {
-
-		/**
-		 * Method of function to be called to provide the border skipped.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return border skipped property value. Could be a {@link BorderSkipped} or a {@link Boolean}
-		 */
-		Object call(Object contextFunction, Context context);
-	}
-
-	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the border skipped function
-	private final CallbackProxy<ProxyBorderSkippedCallback> borderSkippedCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> borderSkippedCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border skipped callback instance
 	private BorderSkippedCallback borderSkippedCallback = null;
@@ -105,42 +80,22 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		borderSkippedCallbackProxy.setCallback(new ProxyBorderSkippedCallback() {
+		borderSkippedCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
 
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.BarDataset.ProxyBorderSkippedCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
+			/* (non-Javadoc)
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object, org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && borderSkippedCallback != null) {
-					// calls callback
-					BorderSkipped result = borderSkippedCallback.skipped(chart, context);
-					// checks result
-					if (result != null) {
-						// checks if is boolean
-						if (BorderSkipped.noborderskipped.equals(result)) {
-							return false;
-						} else {
-							// returns the string value
-							return result.name();
-						}
-					}
-				}
-				// default result
-				BorderSkipped defaults = getDefaultValues().getElements().getRectangle().getBorderSkipped();
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				BorderSkipped value = ScriptableUtils.getOptionValueAsString(context, borderSkippedCallback);
+				BorderSkipped result = value == null ? getDefaultValues().getElements().getRectangle().getBorderSkipped() : value;
 				// checks if is boolean
-				if (BorderSkipped.noborderskipped.equals(defaults)) {
+				if (BorderSkipped.noborderskipped.equals(result)) {
 					return false;
 				} else {
 					// returns the string value
-					return defaults.name();
+					return result.name();
 				}
 			}
 		});

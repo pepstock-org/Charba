@@ -17,11 +17,11 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.callbacks.BorderWidthCallback;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
@@ -44,8 +44,6 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
 
-import jsinterop.annotations.JsFunction;
-
 /**
  * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
  * specific dataset.<br>
@@ -57,138 +55,20 @@ import jsinterop.annotations.JsFunction;
 abstract class HovingDataset extends Dataset {
 
 	// ---------------------------
-	// -- JAVASCRIPT FUNCTIONS ---
-	// ---------------------------
-
-	/**
-	 * Java script FUNCTION callback called to provide the background color.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBackgroundColorCallback {
-
-		/**
-		 * Method of function to be called to provide the background color.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return background color property value. Could be a string (as color), color, pattern or gradient instance
-		 */
-		Object call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the border color.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBorderColorCallback {
-
-		/**
-		 * Method of function to be called to provide the border color.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return border color property value. Could be a string (as color), color or gradient instance
-		 */
-		Object call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the border width property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBorderWidthCallback {
-
-		/**
-		 * Method of function to be called to provide the border width property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return border width property value.
-		 */
-		int call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the hover background color.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyHoverBackgroundColorCallback {
-
-		/**
-		 * Method of function to be called to provide the hover background color.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return hover background color property value. Could be a string (as color), color, pattern or gradient instance
-		 */
-		Object call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the hover border color.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyHoverBorderColorCallback {
-
-		/**
-		 * Method of function to be called to provide the hover border color.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return hover border color property value. Could be a string (as color), color or gradient instance
-		 */
-		Object call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the hover border width property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyHoverBorderWidthCallback {
-
-		/**
-		 * Method of function to be called to provide the hover border width property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return hover border width property value.
-		 */
-		int call(Object contextFunction, Context context);
-	}
-
-	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the background color function
-	private final CallbackProxy<ProxyBackgroundColorCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border color function
-	private final CallbackProxy<ProxyBorderColorCallback> borderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> borderColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border width function
-	private final CallbackProxy<ProxyBorderWidthCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<DatasetFunctions.ProxyIntegerCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover background color function
-	private final CallbackProxy<ProxyHoverBackgroundColorCallback> hoverBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> hoverBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border color function
-	private final CallbackProxy<ProxyHoverBorderColorCallback> hoverBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> hoverBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover border width function
-	private final CallbackProxy<ProxyHoverBorderWidthCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<DatasetFunctions.ProxyIntegerCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// background color callback instance
 	private BackgroundColorCallback<?> backgroundColorCallback = null;
@@ -226,246 +106,88 @@ abstract class HovingDataset extends Dataset {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		backgroundColorCallbackProxy.setCallback(new ProxyBackgroundColorCallback() {
+		backgroundColorCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.data.HovingFlexDataset.ProxyBackgroundColorCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && backgroundColorCallback != null) {
-					// calls callback
-					Object result = backgroundColorCallback.backgroundColor(chart, context);
-					// checks result
-					if (result instanceof IsColor) {
-						// is color instance
-						IsColor color = (IsColor) result;
-						return color.toRGBA();
-					} else if (result instanceof String) {
-						// is string instance
-						return (String) result;
-					} else if (result instanceof Pattern) {
-						// is pattern instance
-						Pattern pattern = (Pattern) result;
-						return CanvasObjectFactory.createPattern(chart, pattern);
-					} else if (result instanceof Gradient) {
-						// is gradient instance
-						// checks if chart is initialized
-						if (chart.isInitialized()) {
-							Gradient gradient = (Gradient) result;
-							return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
-						}
-						// otherwise returns default
-					} else if (result instanceof CanvasGradient) {
-						// is canvas gradient instance
-						return (CanvasGradient) result;
-					} else if (result instanceof CanvasPattern) {
-						// is canvas pattern instance
-						return (CanvasPattern) result;
-					} else if (result != null) {
-						// another instance not null
-						// returns to string
-						return result.toString();
-					}
-				}
-				// default result
-				return getDefaultValues().getElements().getArc().getBackgroundColorAsString();
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsColor(context, backgroundColorCallback, getDefaultValues().getElements().getArc().getBackgroundColorAsString());
 			}
 		});
-		borderColorCallbackProxy.setCallback(new ProxyBorderColorCallback() {
+		borderColorCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.data.HovingFlexDataset.ProxyBorderColorCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && borderColorCallback != null) {
-					// calls callback
-					Object result = borderColorCallback.borderColor(chart, context);
-					// checks result
-					if (result instanceof IsColor) {
-						// is color instance
-						IsColor color = (IsColor) result;
-						return color.toRGBA();
-					} else if (result instanceof String) {
-						// is string instance
-						return (String) result;
-					} else if (result instanceof Gradient) {
-						// is gradient instance
-						// checks if chart is initialized
-						if (chart.isInitialized()) {
-							Gradient gradient = (Gradient) result;
-							return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
-						}
-						// otherwise returns default
-					} else if (result instanceof CanvasGradient) {
-						// is canvas gradient instance
-						return (CanvasGradient) result;
-					} else if (result != null) {
-						// another instance not null
-						// returns to string
-						return result.toString();
-					}
-				}
-				// default result
-				return getDefaultValues().getElements().getArc().getBorderColorAsString();
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsColor(context, borderColorCallback, getDefaultValues().getElements().getArc().getBorderColorAsString(), false);
 			}
 		});
-		borderWidthCallbackProxy.setCallback(new ProxyBorderWidthCallback() {
+		borderWidthCallbackProxy.setCallback(new DatasetFunctions.ProxyIntegerCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.data.HovingFlexDataset.ProxyBorderWidthCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyIntegerCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public int call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && borderWidthCallback != null) {
-					// calls callback
-					return borderWidthCallback.borderWidth(chart, context);
-				}
-				// default result
-				return getDefaultValues().getElements().getArc().getBorderWidth();
+			public int call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, borderWidthCallback, getDefaultValues().getElements().getArc().getBorderWidth()).intValue();
 			}
 		});
-		hoverBackgroundColorCallbackProxy.setCallback(new ProxyHoverBackgroundColorCallback() {
+		hoverBackgroundColorCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.data.HovingDataset.ProxyHoverBackgroundColorCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && hoverBackgroundColorCallback != null) {
-					// calls callback
-					Object result = hoverBackgroundColorCallback.backgroundColor(chart, context);
-					// checks result
-					if (result instanceof IsColor) {
-						// is color instance
-						IsColor color = (IsColor) result;
-						return color.toRGBA();
-					} else if (result instanceof String) {
-						// is string instance
-						return (String) result;
-					} else if (result instanceof Pattern) {
-						// is pattern instance
-						Pattern pattern = (Pattern) result;
-						return CanvasObjectFactory.createPattern(chart, pattern);
-					} else if (result instanceof Gradient) {
-						// is gradient instance
-						// checks if chart is initialized
-						if (chart.isInitialized()) {
-							Gradient gradient = (Gradient) result;
-							return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
-						}
-						// otherwise returns default
-					} else if (result instanceof CanvasGradient) {
-						// is canvas gradient instance
-						return (CanvasGradient) result;
-					} else if (result instanceof CanvasPattern) {
-						// is canvas pattern instance
-						return (CanvasPattern) result;
-					} else if (result != null) {
-						// another instance not null
-						// returns to string
-						return result.toString();
-					}
-				}
-				// default result
-				return getDefaultValues().getElements().getArc().getBackgroundColorAsString();
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsColor(context, hoverBackgroundColorCallback, getDefaultValues().getElements().getArc().getBackgroundColorAsString());
 			}
 		});
-		hoverBorderColorCallbackProxy.setCallback(new ProxyHoverBorderColorCallback() {
+		hoverBorderColorCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.data.HovingDataset.ProxyHoverBorderColorCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && hoverBorderColorCallback != null) {
-					// calls callback
-					Object result = hoverBorderColorCallback.borderColor(chart, context);
-					// checks result
-					if (result instanceof IsColor) {
-						// is color instance
-						IsColor color = (IsColor) result;
-						return color.toRGBA();
-					} else if (result instanceof String) {
-						// is string instance
-						return (String) result;
-					} else if (result instanceof Gradient) {
-						// is gradient instance
-						// checks if chart is initialized
-						if (chart.isInitialized()) {
-							Gradient gradient = (Gradient) result;
-							return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
-						}
-						// otherwise returns default
-					} else if (result instanceof CanvasGradient) {
-						// is canvas gradient instance
-						return (CanvasGradient) result;
-					} else if (result != null) {
-						// another instance not null
-						// returns to string
-						return result.toString();
-					}
-				}
-				// default result
-				return getDefaultValues().getElements().getArc().getBorderColorAsString();
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsColor(context, hoverBorderColorCallback, getDefaultValues().getElements().getArc().getBorderColorAsString(), false);
 			}
 		});
-		hoverBorderWidthCallbackProxy.setCallback(new ProxyHoverBorderWidthCallback() {
+		hoverBorderWidthCallbackProxy.setCallback(new DatasetFunctions.ProxyIntegerCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.data.HovingDataset.ProxyHoverBorderWidthCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyIntegerCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public int call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && hoverBorderWidthCallback != null) {
-					// calls callback
-					return hoverBorderWidthCallback.borderWidth(chart, context);
-				}
-				// default result
-				return getDefaultValues().getElements().getArc().getBorderWidth();
+			public int call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, hoverBorderWidthCallback, getDefaultValues().getElements().getArc().getBorderWidth()).intValue();
 			}
 		});
 	}

@@ -15,9 +15,6 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.data.Context;
-
 /**
  * Callback interface to set <code>rotation</code> or <code>pointRotation</code> property at runtime, using the chart instance
  * and the context.
@@ -25,16 +22,6 @@ import org.pepstock.charba.client.data.Context;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface RotationCallback {
-
-	/**
-	 * Returns the <code>rotation</code> or <code>pointRotation</code> property at runtime, using the chart instance and the
-	 * context.
-	 * 
-	 * @param chart chart instance
-	 * @param context context instance
-	 * @return the <code>rotation</code> or <code>pointRotation</code> value to be applied
-	 */
-	double rotation(AbstractChart<?, ?> chart, Context context);
+public interface RotationCallback extends Scriptable<Double>{
 
 }
