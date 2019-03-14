@@ -17,6 +17,7 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
@@ -50,15 +51,15 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the radius function
-	private final CallbackProxy<DatasetFunctions.ProxyDoubleCallback> radiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> radiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hit radius function
-	private final CallbackProxy<DatasetFunctions.ProxyDoubleCallback> hitRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> hitRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover radius function
-	private final CallbackProxy<DatasetFunctions.ProxyDoubleCallback> hoverRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> hoverRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the rotation function
-	private final CallbackProxy<DatasetFunctions.ProxyDoubleCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point style function
-	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// radius callback instance
 	private RadiusCallback radiusCallback = null;
@@ -106,7 +107,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		radiusCallbackProxy.setCallback(new DatasetFunctions.ProxyDoubleCallback() {
+		radiusCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
 
 			/*
 			 * (non-Javadoc)
@@ -120,7 +121,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 				return ScriptableUtils.getOptionValue(context, radiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue();
 			}
 		});
-		hitRadiusCallbackProxy.setCallback(new DatasetFunctions.ProxyDoubleCallback() {
+		hitRadiusCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
 
 			/*
 			 * (non-Javadoc)
@@ -134,7 +135,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 				return ScriptableUtils.getOptionValue(context, hitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue();
 			}
 		});
-		hoverRadiusCallbackProxy.setCallback(new DatasetFunctions.ProxyDoubleCallback() {
+		hoverRadiusCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
 
 			/*
 			 * (non-Javadoc)
@@ -148,7 +149,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 				return ScriptableUtils.getOptionValue(context, hoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue();
 			}
 		});
-		rotationCallbackProxy.setCallback(new DatasetFunctions.ProxyDoubleCallback() {
+		rotationCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
 
 			/*
 			 * (non-Javadoc)
@@ -162,7 +163,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 				return ScriptableUtils.getOptionValue(context, rotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue();
 			}
 		});
-		pointStyleCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
+		pointStyleCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)

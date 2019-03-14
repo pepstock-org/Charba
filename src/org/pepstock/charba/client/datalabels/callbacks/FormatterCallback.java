@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.datalabels.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.DataLabelsContext;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
 
 /**
  * Callback interface of DATALABELS plugin to set <code>formatter</code> property at runtime, using the chart instance and the
@@ -37,6 +37,6 @@ public interface FormatterCallback {
 	 * @param context DATALABELS plugin context instance
 	 * @return the label value to be showed
 	 */
-	String format(AbstractChart<?, ?> chart, double value, DataLabelsContext context);
+	String format(AbstractChart<?, ?> chart, double value, ScriptableContext context);
 
 }

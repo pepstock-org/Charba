@@ -15,8 +15,7 @@
 */
 package org.pepstock.charba.client.datalabels.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.DataLabelsContext;
+import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.enums.Display;
 
 /**
@@ -26,15 +25,6 @@ import org.pepstock.charba.client.enums.Display;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface DisplayCallback {
-
-	/**
-	 * Returns the <code>display</code> property at runtime, using the chart instance and the plugin context.
-	 * 
-	 * @param chart chart instance
-	 * @param context DATALABELS plugin context instance
-	 * @return the <code>display</code> value to be applied
-	 */
-	Display display(AbstractChart<?, ?> chart, DataLabelsContext context);
+public interface DisplayCallback extends Scriptable<Display> {
 
 }

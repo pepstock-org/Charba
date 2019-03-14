@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.callbacks.BorderAlignCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -36,7 +37,7 @@ abstract class ArcDataset extends HovingDataset {
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the border align function
-	private final CallbackProxy<DatasetFunctions.ProxyStringCallback> borderAlignCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> borderAlignCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border align callback instance
 	private BorderAlignCallback borderAlignCallback = null;
@@ -59,7 +60,7 @@ abstract class ArcDataset extends HovingDataset {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		borderAlignCallbackProxy.setCallback(new DatasetFunctions.ProxyStringCallback() {
+		borderAlignCallbackProxy.setCallback(new ScriptableFunctions.ProxyStringCallback() {
 
 			/* (non-Javadoc)
 			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object, org.pepstock.charba.client.callbacks.ScriptableContext)

@@ -15,11 +15,10 @@
 */
 package org.pepstock.charba.client.datalabels.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
-import org.pepstock.charba.client.datalabels.DataLabelsContext;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
@@ -40,20 +39,6 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  * @see CanvasPattern
  * @see CanvasGradient
  */
-public interface ColorCallback<T> {
-
-	/**
-	 * Returns the <code>color</code> property at runtime, using the chart instance and the plugin context.
-	 * 
-	 * @param chart chart instance
-	 * @param context DATALABELS plugin context instance
-	 * @return the <code>color</code> value to be applied. Could be a string (as color), color, pattern or gradient instance
-	 * @see IsColor
-	 * @see Pattern
-	 * @see Gradient
-	 * @see CanvasPattern
-	 * @see CanvasGradient
-	 */
-	T color(AbstractChart<?, ?> chart, DataLabelsContext context);
+public interface ColorCallback<T> extends Scriptable<T> {
 
 }

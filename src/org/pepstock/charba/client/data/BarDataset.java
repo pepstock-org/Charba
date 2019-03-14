@@ -18,6 +18,7 @@ package org.pepstock.charba.client.data;
 import java.util.List;
 
 import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayObject;
@@ -44,7 +45,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the border skipped function
-	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> borderSkippedCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> borderSkippedCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// border skipped callback instance
 	private BorderSkippedCallback borderSkippedCallback = null;
@@ -80,7 +81,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		borderSkippedCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
+		borderSkippedCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
 
 			/* (non-Javadoc)
 			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object, org.pepstock.charba.client.callbacks.ScriptableContext)

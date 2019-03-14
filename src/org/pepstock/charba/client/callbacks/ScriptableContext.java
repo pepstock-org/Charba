@@ -17,6 +17,7 @@ package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.NativeExtendedObject;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -38,7 +39,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.OBJECT, namespace = JsPackage.GLOBAL)
-public class ScriptableContext {
+public final class ScriptableContext extends NativeExtendedObject {
 
 	/**
 	 * To avoid any instantiation
@@ -52,7 +53,7 @@ public class ScriptableContext {
 	 * @return the <code>chart</code> property by native object.
 	 */
 	@JsProperty(name = "chart")
-	protected native Chart getNativeChart();
+	native Chart getNativeChart();
 
 	/**
 	 * Returns the <code>dataIndex</code> property by native object.
@@ -60,7 +61,7 @@ public class ScriptableContext {
 	 * @return the <code>dataIndex</code> property by native object.
 	 */
 	@JsProperty(name = "dataIndex")
-	protected native int getNativeDataIndex();
+	native int getNativeDataIndex();
 
 	/**
 	 * Returns the <code>datasetIndex</code> property by native object.
@@ -68,7 +69,15 @@ public class ScriptableContext {
 	 * @return the <code>datasetIndex</code> property by native object.
 	 */
 	@JsProperty(name = "datasetIndex")
-	protected native int getNativeDatasetIndex();
+	native int getNativeDatasetIndex();
+	
+	/**
+	 * Returns the <code>active</code> property by native object.
+	 * 
+	 * @return the <code>active</code> property by native object.
+	 */
+	@JsProperty(name = "active")
+	native boolean isNativeActive();
 
 	/**
 	 * Returns the index of the data inside the dataset.
@@ -77,7 +86,7 @@ public class ScriptableContext {
 	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	@JsOverlay
-	public final int getIndex() {
+	public int getIndex() {
 		// checks if is defined
 		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "dataIndex"))) {
 			return UndefinedValues.INTEGER;
@@ -93,7 +102,7 @@ public class ScriptableContext {
 	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
 	 */
 	@JsOverlay
-	public final int getDatasetIndex() {
+	public int getDatasetIndex() {
 		// checks if is defined
 		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "datasetIndex"))) {
 			return UndefinedValues.INTEGER;
@@ -108,8 +117,23 @@ public class ScriptableContext {
 	 * @return the CHARBA ID
 	 */
 	@JsOverlay
-	public final String getCharbaId() {
+	String getCharbaId() {
 		return getNativeChart().getCharbaId();
+	}
+	
+	/**
+	 * Returns whether the associated element is hovered.
+	 * 
+	 * @return whether the associated element is hovered. Default is false.
+	 */
+	@JsOverlay
+	public boolean isActive() {
+		// checks if is defined
+		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "active"))) {
+			return false;
+		}
+		// returns property value
+		return isNativeActive();
 	}
 
 }

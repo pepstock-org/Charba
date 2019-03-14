@@ -16,7 +16,9 @@
 package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Charts;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -24,8 +26,6 @@ import org.pepstock.charba.client.datalabels.enums.Event;
 import org.pepstock.charba.client.datalabels.events.ClickEventHandler;
 import org.pepstock.charba.client.datalabels.events.EnterEventHandler;
 import org.pepstock.charba.client.datalabels.events.LeaveEventHandler;
-
-import jsinterop.annotations.JsFunction;
 
 /**
  * This is the LISTENER options of DATALABELS plugin allows to register callback(s) to be notified when an event is detected on
@@ -41,84 +41,14 @@ import jsinterop.annotations.JsFunction;
 public final class Listeners extends NativeObjectContainer {
 
 	// ---------------------------
-	// -- JAVASCRIPT FUNCTIONS ---
-	// ---------------------------
-
-	/**
-	 * Java script FUNCTION callback called to manage the ENTER event of plugin.<br>
-	 * If the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
-	 * re-rendered.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyEnterEventCallback {
-
-		/**
-		 * Method of function to be called to manage the ENTER event of plugin.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return if the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
-		 *         re-rendered.
-		 */
-		boolean call(Object contextFunction, DataLabelsContext context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to manage the LEAVE event of plugin.<br>
-	 * If the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
-	 * re-rendered.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyLeaveEventCallback {
-
-		/**
-		 * Method of function to be called to manage the LEAVE event of plugin.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return if the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
-		 *         re-rendered.
-		 */
-		boolean call(Object contextFunction, DataLabelsContext context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to manage the CLICK event of plugin.<br>
-	 * If the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
-	 * re-rendered.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyClickEventCallback {
-
-		/**
-		 * Method of function to be called to manage the CLICK event of plugin.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return if the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
-		 *         re-rendered.
-		 */
-		boolean call(Object contextFunction, DataLabelsContext context);
-	}
-
-	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the ENTER event function
-	private final CallbackProxy<ProxyEnterEventCallback> enterEventCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyBooleanCallback> enterEventCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the LEAVE event function
-	private final CallbackProxy<ProxyLeaveEventCallback> leaveEventCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyBooleanCallback> leaveEventCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the CLICK event function
-	private final CallbackProxy<ProxyClickEventCallback> clickEventCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyBooleanCallback> clickEventCallbackProxy = JsHelper.get().newCallbackProxy();
 	// ENTER event handler instance
 	private EnterEventHandler enterEventHandler = null;
 	// LEAVE event handler instance
@@ -134,65 +64,64 @@ public final class Listeners extends NativeObjectContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		enterEventCallbackProxy.setCallback(new ProxyEnterEventCallback() {
+		enterEventCallbackProxy.setCallback(new ScriptableFunctions.ProxyBooleanCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.ext.datalabels.Listeners.ProxyEnterEventCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public boolean call(Object contextFunction, DataLabelsContext context) {
-				// gets chart instance by id
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
+			public boolean call(Object contextFunction, ScriptableContext context) {
+				// gets chart instance
+				AbstractChart<?, ?> chart = ScriptableUtils.retrieveChart(context, enterEventHandler);
 				// checks if the handler is set
-				if (chart != null && enterEventHandler != null) {
+				if (chart != null) {
 					// calls handler
 					return enterEventHandler.onEnter(chart, context);
 				}
 				// defaults always true
 				return true;
 			}
+
 		});
-		leaveEventCallbackProxy.setCallback(new ProxyLeaveEventCallback() {
+		leaveEventCallbackProxy.setCallback(new ScriptableFunctions.ProxyBooleanCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.ext.datalabels.Listeners.ProxyLeaveEventCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public boolean call(Object contextFunction, DataLabelsContext context) {
+			public boolean call(Object contextFunction, ScriptableContext context) {
 				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
+				AbstractChart<?, ?> chart = ScriptableUtils.retrieveChart(context, leaveEventHandler);
 				// checks if the handler is set
-				if (chart != null && leaveEventHandler != null) {
+				if (chart != null) {
 					// calls handler
 					return leaveEventHandler.onLeave(chart, context);
 				}
 				// defaults always true
 				return true;
 			}
+
 		});
-		clickEventCallbackProxy.setCallback(new ProxyClickEventCallback() {
+		clickEventCallbackProxy.setCallback(new ScriptableFunctions.ProxyBooleanCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.ext.datalabels.Listeners.ProxyClickEventCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public boolean call(Object contextFunction, DataLabelsContext context) {
+			public boolean call(Object contextFunction, ScriptableContext context) {
 				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
+				AbstractChart<?, ?> chart = ScriptableUtils.retrieveChart(context, clickEventHandler);
 				// checks if the handler is set
-				if (chart != null && clickEventHandler != null) {
+				if (chart != null) {
 					// calls handler
 					return clickEventHandler.onClick(chart, context);
 				}

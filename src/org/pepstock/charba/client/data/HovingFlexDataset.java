@@ -20,6 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.callbacks.BorderWidthCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -54,11 +55,11 @@ abstract class HovingFlexDataset extends Dataset {
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the background color function
-	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border color function
-	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> borderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> borderColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border width function
-	private final CallbackProxy<DatasetFunctions.ProxyIntegerCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// background color callback instance
 	private BackgroundColorCallback<?> backgroundColorCallback = null;
@@ -90,7 +91,7 @@ abstract class HovingFlexDataset extends Dataset {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		backgroundColorCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
+		backgroundColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
@@ -104,7 +105,7 @@ abstract class HovingFlexDataset extends Dataset {
 				return ScriptableUtils.getOptionValueAsColor(context, backgroundColorCallback, getDefaultBackgroundColorAsString());
 			}
 		});
-		borderColorCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
+		borderColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
@@ -118,7 +119,7 @@ abstract class HovingFlexDataset extends Dataset {
 				return ScriptableUtils.getOptionValueAsColor(context, borderColorCallback, getDefaultBorderColorAsString(), false);
 			}
 		});
-		borderWidthCallbackProxy.setCallback(new DatasetFunctions.ProxyIntegerCallback() {
+		borderWidthCallbackProxy.setCallback(new ScriptableFunctions.ProxyIntegerCallback() {
 
 			/*
 			 * (non-Javadoc)

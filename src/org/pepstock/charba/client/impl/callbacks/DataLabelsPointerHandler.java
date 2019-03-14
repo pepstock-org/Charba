@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.impl.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.DataLabelsContext;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
 
 import com.google.gwt.dom.client.Style.Cursor;
@@ -52,22 +52,11 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.ext.datalabels.ClickEventHandler#onClick(org.pepstock.charba.client.AbstractChart,
-	 * org.pepstock.charba.client.ext.datalabels.Context)
+	 * @see org.pepstock.charba.client.datalabels.events.LeaveEventHandler#onLeave(org.pepstock.charba.client.AbstractChart,
+	 * org.pepstock.charba.client.callbacks.ScriptableContext)
 	 */
 	@Override
-	public boolean onClick(AbstractChart<?, ?> chart, DataLabelsContext context) {
-		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.ext.datalabels.LeaveEventHandler#onLeave(org.pepstock.charba.client.AbstractChart,
-	 * org.pepstock.charba.client.ext.datalabels.Context)
-	 */
-	@Override
-	public boolean onLeave(AbstractChart<?, ?> chart, DataLabelsContext context) {
+	public boolean onLeave(AbstractChart<?, ?> chart, ScriptableContext context) {
 		if (chart.isInitialized()) {
 			chart.getCanvas().getElement().getStyle().setCursor(Cursor.DEFAULT);
 		}
@@ -77,11 +66,11 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.ext.datalabels.EnterEventHandler#onEnter(org.pepstock.charba.client.AbstractChart,
-	 * org.pepstock.charba.client.ext.datalabels.Context)
+	 * @see org.pepstock.charba.client.datalabels.events.EnterEventHandler#onEnter(org.pepstock.charba.client.AbstractChart,
+	 * org.pepstock.charba.client.callbacks.ScriptableContext)
 	 */
 	@Override
-	public boolean onEnter(AbstractChart<?, ?> chart, DataLabelsContext context) {
+	public boolean onEnter(AbstractChart<?, ?> chart, ScriptableContext context) {
 		if (chart.isInitialized()) {
 			chart.getCanvas().getElement().getStyle().setCursor(cursor);
 		}

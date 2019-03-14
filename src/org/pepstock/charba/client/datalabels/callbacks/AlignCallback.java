@@ -15,8 +15,7 @@
 */
 package org.pepstock.charba.client.datalabels.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.DataLabelsContext;
+import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.datalabels.enums.Align;
 
 /**
@@ -26,15 +25,6 @@ import org.pepstock.charba.client.datalabels.enums.Align;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface AlignCallback {
-
-	/**
-	 * Returns the <code>align</code> property at runtime, using the chart instance and the plugin context.
-	 * 
-	 * @param chart chart instance
-	 * @param context DATALABELS plugin context instance
-	 * @return the <code>align</code> value to be applied
-	 */
-	Align align(AbstractChart<?, ?> chart, DataLabelsContext context);
+public interface AlignCallback extends Scriptable<Align> {
 
 }

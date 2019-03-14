@@ -20,6 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.callbacks.BorderWidthCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
@@ -75,27 +76,27 @@ abstract class LiningDataset extends Dataset {
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the point background color function
-	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> pointBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point border color function
-	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> pointBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point border width function
-	private final CallbackProxy<DatasetFunctions.ProxyIntegerCallback> pointBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> pointBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point hover background color function
-	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> pointHoverBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointHoverBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point hover border color function
-	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> pointHoverBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointHoverBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point hover border width function
-	private final CallbackProxy<DatasetFunctions.ProxyIntegerCallback> pointHoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> pointHoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point radius function
-	private final CallbackProxy<DatasetFunctions.ProxyDoubleCallback> pointRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> pointRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point hit radius function
-	private final CallbackProxy<DatasetFunctions.ProxyDoubleCallback> pointHitRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> pointHitRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point hover radius function
-	private final CallbackProxy<DatasetFunctions.ProxyDoubleCallback> pointHoverRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> pointHoverRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point rotation function
-	private final CallbackProxy<DatasetFunctions.ProxyDoubleCallback> pointRotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> pointRotationCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point style function
-	private final CallbackProxy<DatasetFunctions.ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// point background color callback instance
 	private BackgroundColorCallback<?> pointBackgroundColorCallback = null;
@@ -161,7 +162,7 @@ abstract class LiningDataset extends Dataset {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		pointBackgroundColorCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
+		pointBackgroundColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
@@ -175,7 +176,7 @@ abstract class LiningDataset extends Dataset {
 				return ScriptableUtils.getOptionValueAsColor(context, pointBackgroundColorCallback, getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
 			}
 		});
-		pointBorderColorCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
+		pointBorderColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
@@ -189,7 +190,7 @@ abstract class LiningDataset extends Dataset {
 				return ScriptableUtils.getOptionValueAsColor(context, pointBorderColorCallback, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false);
 			}
 		});
-		pointBorderWidthCallbackProxy.setCallback(new DatasetFunctions.ProxyIntegerCallback() {
+		pointBorderWidthCallbackProxy.setCallback(new ScriptableFunctions.ProxyIntegerCallback() {
 
 			/*
 			 * (non-Javadoc)
@@ -203,7 +204,7 @@ abstract class LiningDataset extends Dataset {
 				return ScriptableUtils.getOptionValue(context, pointBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue();
 			}
 		});
-		pointHoverBackgroundColorCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
+		pointHoverBackgroundColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
@@ -217,7 +218,7 @@ abstract class LiningDataset extends Dataset {
 				return ScriptableUtils.getOptionValueAsColor(context, pointHoverBackgroundColorCallback, getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
 			}
 		});
-		pointHoverBorderColorCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
+		pointHoverBorderColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
@@ -231,7 +232,7 @@ abstract class LiningDataset extends Dataset {
 				return ScriptableUtils.getOptionValueAsColor(context, pointHoverBorderColorCallback, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false);
 			}
 		});
-		pointHoverBorderWidthCallbackProxy.setCallback(new DatasetFunctions.ProxyIntegerCallback() {
+		pointHoverBorderWidthCallbackProxy.setCallback(new ScriptableFunctions.ProxyIntegerCallback() {
 
 			/*
 			 * (non-Javadoc)
@@ -245,7 +246,7 @@ abstract class LiningDataset extends Dataset {
 				return ScriptableUtils.getOptionValue(context, pointHoverBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue();
 			}
 		});
-		pointRadiusCallbackProxy.setCallback(new DatasetFunctions.ProxyDoubleCallback() {
+		pointRadiusCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
 
 			/*
 			 * (non-Javadoc)
@@ -260,7 +261,7 @@ abstract class LiningDataset extends Dataset {
 			}
 
 		});
-		pointHitRadiusCallbackProxy.setCallback(new DatasetFunctions.ProxyDoubleCallback() {
+		pointHitRadiusCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
 
 			/*
 			 * (non-Javadoc)
@@ -274,7 +275,7 @@ abstract class LiningDataset extends Dataset {
 				return ScriptableUtils.getOptionValue(context, pointHitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue();
 			}
 		});
-		pointHoverRadiusCallbackProxy.setCallback(new DatasetFunctions.ProxyDoubleCallback() {
+		pointHoverRadiusCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
 
 			/*
 			 * (non-Javadoc)
@@ -288,7 +289,7 @@ abstract class LiningDataset extends Dataset {
 				return ScriptableUtils.getOptionValue(context, pointHoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue();
 			}
 		});
-		pointRotationCallbackProxy.setCallback(new DatasetFunctions.ProxyDoubleCallback() {
+		pointRotationCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
 
 			/*
 			 * (non-Javadoc)
@@ -302,7 +303,7 @@ abstract class LiningDataset extends Dataset {
 				return ScriptableUtils.getOptionValue(context, pointRotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue();
 			}
 		});
-		pointStyleCallbackProxy.setCallback(new DatasetFunctions.ProxyObjectCallback() {
+		pointStyleCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)

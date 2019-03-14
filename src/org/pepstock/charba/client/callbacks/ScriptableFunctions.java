@@ -13,31 +13,32 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.data;
+package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.commons.NativeObject;
 
 import jsinterop.annotations.JsFunction;
 
 /**
- * FIXME
+ * Set of common JSINTEROP functions (mapped as interfaces) to be able to implement scriptable options of CHART.JS. Must be a
+ * public interface with only 1 method.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DatasetFunctions {
-	
+public final class ScriptableFunctions {
+
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
-	
+
 	/**
-	 * Java script FUNCTION callback called to provide a double property.<br>
-	 * Must be an interface with only 1 method.
+	 * Java script FUNCTION callback called to provide a double property.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	interface ProxyDoubleCallback {
+	public interface ProxyDoubleCallback {
 
 		/**
 		 * Method of function to be called to provide a double property.
@@ -50,13 +51,30 @@ final class DatasetFunctions {
 	}
 
 	/**
-	 * Java script FUNCTION callback called to provide a integer property.<br>
-	 * Must be an interface with only 1 method.
+	 * Java script FUNCTION callback called to provide a boolean property.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	interface ProxyIntegerCallback {
+	public interface ProxyBooleanCallback {
+
+		/**
+		 * Method of function to be called to provide a boolean property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return a boolean property value.
+		 */
+		boolean call(Object contextFunction, ScriptableContext context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide a integer property.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	public interface ProxyIntegerCallback {
 
 		/**
 		 * Method of function to be called to provide a integer property.
@@ -69,13 +87,12 @@ final class DatasetFunctions {
 	}
 
 	/**
-	 * Java script FUNCTION callback called to provide a string property.<br>
-	 * Must be an interface with only 1 method.
+	 * Java script FUNCTION callback called to provide a string property.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	interface ProxyStringCallback {
+	public interface ProxyStringCallback {
 
 		/**
 		 * Method of function to be called to provide a string property.
@@ -88,13 +105,12 @@ final class DatasetFunctions {
 	}
 
 	/**
-	 * Java script FUNCTION callback called to provide a object property.<br>
-	 * Must be an interface with only 1 method.
+	 * Java script FUNCTION callback called to provide a object property.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	interface ProxyObjectCallback {
+	public interface ProxyObjectCallback {
 
 		/**
 		 * Method of function to be called to provide a object property.
@@ -107,9 +123,27 @@ final class DatasetFunctions {
 	}
 
 	/**
+	 * Java script FUNCTION callback called to provide a native object property.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	public interface ProxyNativeObjectCallback {
+
+		/**
+		 * Method of function to be called to provide a native object property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return a object proeprty value.
+		 */
+		NativeObject call(Object contextFunction, ScriptableContext context);
+	}
+
+	/**
 	 * To avoid any instantiation
 	 */
-	private DatasetFunctions() {
+	private ScriptableFunctions() {
 		// do nothing
 	}
 

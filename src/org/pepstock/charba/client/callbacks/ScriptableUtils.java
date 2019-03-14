@@ -40,6 +40,25 @@ public final class ScriptableUtils {
 	private ScriptableUtils() {
 		// do nothing
 	}
+	
+	/**
+	 * Returns the chart instance if callback and chart itself are consistent.
+	 * 
+	 * @param context scriptable context
+	 * @param callback callback to check if consistent
+	 * @return a char instance if callback and chart itself are consistent
+	 */
+	public static AbstractChart<?, ?> retrieveChart(ScriptableContext context, Object callback) {
+		// checks if callback is consistent
+		if (callback != null) {
+			// gets chart ID
+			String id = context.getCharbaId();
+			// gets chart instance
+			return Charts.get(id);
+		}
+		// if here, chart or callback are not consistent
+		return null;
+	}
 
 	/**
 	 * Returns the enumeration value as value of the property by invoking a callback which is typed to a key.
@@ -65,21 +84,16 @@ public final class ScriptableUtils {
 	 * @return a value of property related to the enumeration value
 	 */
 	public static <T extends Key> T getOptionValueAsString(ScriptableContext context, Scriptable<T> callback, T defaultValue) {
-		// checks if callback is consistent
-		if (callback != null) {
-			// gets chart ID
-			String id = context.getCharbaId();
-			// gets chart instance
-			AbstractChart<?, ?> chart = Charts.get(id);
-			// checks if the chart is correct
-			if (chart != null) {
-				// calls callback
-				T result = callback.invoke(chart, context);
-				// checks result
-				if (result != null) {
-					// returns the string value
-					return result;
-				}
+		// gets chart instance
+		AbstractChart<?, ?> chart = retrieveChart(context, callback);
+		// checks if the chart is correct
+		if (chart != null) {
+			// calls callback
+			T result = callback.invoke(chart, context);
+			// checks result
+			if (result != null) {
+				// returns the string value
+				return result;
 			}
 		}
 		// if here, chart, callback or result of callback are not consistent
@@ -108,20 +122,15 @@ public final class ScriptableUtils {
 	 * @return a value of property as result of callback invocation
 	 */
 	public static <T> T getOptionValue(ScriptableContext context, Scriptable<T> callback, T defaultValue) {
-		// checks if callback is consistent
-		if (callback != null) {
-			// gets chart ID
-			String id = context.getCharbaId();
-			// gets chart instance
-			AbstractChart<?, ?> chart = Charts.get(id);
-			// checks if the chart is correct
-			if (chart != null) {
-				// calls callback
-				T result = callback.invoke(chart, context);
-				// checks if consistent
-				if (result != null) {
-					return result;
-				}
+		// gets chart instance
+		AbstractChart<?, ?> chart = retrieveChart(context, callback);
+		// checks if the chart is correct
+		if (chart != null) {
+			// calls callback
+			T result = callback.invoke(chart, context);
+			// checks if consistent
+			if (result != null) {
+				return result;
 			}
 		}
 		// if here, chart, callback or result of callback are not consistent
@@ -154,47 +163,42 @@ public final class ScriptableUtils {
 	 * @return a value of property as color
 	 */
 	public static Object getOptionValueAsColor(ScriptableContext context, Scriptable<?> callback, String defaultValue, boolean hasPattern) {
-		// checks if callback is consistent
-		if (callback != null) {
-			// gets chart ID
-			String id = context.getCharbaId();
-			// gets chart instance
-			AbstractChart<?, ?> chart = Charts.get(id);
-			// checks if the chart is correct
-			if (chart != null) {
-				// calls callback
-				Object result = callback.invoke(chart, context);
-				// checks result
-				if (result instanceof IsColor) {
-					// is color instance
-					IsColor color = (IsColor) result;
-					return color.toRGBA();
-				} else if (result instanceof String) {
-					// is string instance
-					return (String) result;
-				} else if (result instanceof Pattern && hasPattern) {
-					// is pattern instance
-					Pattern pattern = (Pattern) result;
-					return CanvasObjectFactory.createPattern(chart, pattern);
-				} else if (result instanceof Gradient) {
-					// is gradient instance
-					// checks if chart is initialized
-					if (chart.isInitialized()) {
-						Gradient gradient = (Gradient) result;
-						return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
-					}
-					// otherwise returns default
-				} else if (result instanceof CanvasGradient) {
-					// is canvas gradient instance
-					return (CanvasGradient) result;
-				} else if (result instanceof CanvasPattern && hasPattern) {
-					// is canvas pattern instance
-					return (CanvasPattern) result;
-				} else if (result != null && hasPattern) {
-					// another instance not null
-					// returns to string
-					return result.toString();
+		// gets chart instance
+		AbstractChart<?, ?> chart = retrieveChart(context, callback);
+		// checks if the chart is correct
+		if (chart != null) {
+			// calls callback
+			Object result = callback.invoke(chart, context);
+			// checks result
+			if (result instanceof IsColor) {
+				// is color instance
+				IsColor color = (IsColor) result;
+				return color.toRGBA();
+			} else if (result instanceof String) {
+				// is string instance
+				return (String) result;
+			} else if (result instanceof Pattern && hasPattern) {
+				// is pattern instance
+				Pattern pattern = (Pattern) result;
+				return CanvasObjectFactory.createPattern(chart, pattern);
+			} else if (result instanceof Gradient) {
+				// is gradient instance
+				// checks if chart is initialized
+				if (chart.isInitialized()) {
+					Gradient gradient = (Gradient) result;
+					return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
 				}
+				// otherwise returns default
+			} else if (result instanceof CanvasGradient) {
+				// is canvas gradient instance
+				return (CanvasGradient) result;
+			} else if (result instanceof CanvasPattern && hasPattern) {
+				// is canvas pattern instance
+				return (CanvasPattern) result;
+			} else if (result != null && hasPattern) {
+				// another instance not null
+				// returns to string
+				return result.toString();
 			}
 		}
 		// if here, chart, callback or result of callback are not consistent
