@@ -68,8 +68,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 		showLabelBackdrop,
 		labels,
 		source,
-		precision,
-		lineHeight
+		precision
 	}
 
 	/**
@@ -662,23 +661,4 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 		return getValue(Property.precision, getDefaultValues().getPrecision());
 	}
 	
-	/**
-	 * Sets the height of an individual line of text.
-	 * 
-	 * @param lineHeight height of an individual line of text.
-	 */
-	public void setLineHeight(double lineHeight) {
-		setValue(Property.lineHeight, lineHeight);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the height of an individual line of text.
-	 * 
-	 * @return the height of an individual line of text.
-	 */
-	public double getLineHeight() {
-		return getValue(Property.lineHeight, getDefaultValues().getLineHeight());
-	}
 }

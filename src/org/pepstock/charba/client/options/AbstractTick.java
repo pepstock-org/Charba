@@ -17,7 +17,7 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.IsDefaultFontItem;
+import org.pepstock.charba.client.defaults.IsDefaultBaseTick;
 
 /**
  * Configures the ticks of an axis.<br>
@@ -28,8 +28,16 @@ import org.pepstock.charba.client.defaults.IsDefaultFontItem;
  * @param <P> parent node class
  * @param <D> defaults provider class
  */
-public abstract class AbstractTick<P extends AbstractModel<?, ?>, D extends IsDefaultFontItem> extends FontItem<P, D> {
+public abstract class AbstractTick<P extends AbstractModel<?, ?>, D extends IsDefaultBaseTick> extends FontItem<P, D> {
 
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		lineHeight
+	}
+	
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script
 	 * properties.
@@ -43,4 +51,23 @@ public abstract class AbstractTick<P extends AbstractModel<?, ?>, D extends IsDe
 		super(ticks, childKey, defaultValues, nativeObject);
 	}
 
+	/**
+	 * Sets the height of an individual line of text.
+	 * 
+	 * @param lineHeight height of an individual line of text.
+	 */
+	public void setLineHeight(double lineHeight) {
+		setValue(Property.lineHeight, lineHeight);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text.
+	 */
+	public double getLineHeight() {
+		return getValue(Property.lineHeight, getDefaultValues().getLineHeight());
+	}
 }

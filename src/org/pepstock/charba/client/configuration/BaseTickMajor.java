@@ -33,5 +33,23 @@ public class BaseTickMajor extends BaseTick<TickMajor> {
 	BaseTickMajor(Axis axis, TickMajor configuration) {
 		super(axis, configuration);
 	}
+	
+	/**
+	 * If <code>true</code>, major tick options are used to show major ticks.
+	 * 
+	 * @param enabled if <code>true</code>, major tick options are used to show major ticks
+	 */
+	public void setEnabled(boolean enabled) {
+		getConfiguration().setEnabled(enabled);
+	}
+
+	/**
+	 * If <code>true</code>, major tick options are used to show major ticks.
+	 * 
+	 * @return if <code>true</code>, major tick options are used to show major ticks
+	 */
+	public boolean isEnabled() {
+		return getConfiguration().isEnabled();
+	}
 
 }

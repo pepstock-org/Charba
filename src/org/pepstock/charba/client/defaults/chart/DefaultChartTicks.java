@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import org.pepstock.charba.client.defaults.IsDefaultFontItem;
+import org.pepstock.charba.client.defaults.IsDefaultMajorTick;
+import org.pepstock.charba.client.defaults.IsDefaultMinorTick;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.TickSource;
@@ -30,10 +31,6 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 
 	private final Ticks ticks;
 
-	private final DefaultChartFontItem minor;
-
-	private final DefaultChartFontItem major;
-
 	/**
 	 * Creates the object by ticks option element instance.
 	 * 
@@ -41,9 +38,6 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 	 */
 	DefaultChartTicks(Ticks ticks) {
 		this.ticks = ticks;
-		// creates sub elements
-		this.minor = new DefaultChartFontItem(ticks.getMinor());
-		this.major = new DefaultChartFontItem(ticks.getMajor());
 	}
 
 	/*
@@ -86,24 +80,20 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 		return ticks.getFontFamily();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMinor()
 	 */
 	@Override
-	public IsDefaultFontItem getMinor() {
-		return minor;
+	public IsDefaultMinorTick getMinor() {
+		return ticks.getMinor();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMajor()
 	 */
 	@Override
-	public IsDefaultFontItem getMajor() {
-		return major;
+	public IsDefaultMajorTick getMajor() {
+		return ticks.getMajor();
 	}
 
 	/*
