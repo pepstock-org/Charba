@@ -15,26 +15,25 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.defaults.IsDefaultRectangle;
-import org.pepstock.charba.client.enums.BorderSkipped;
+import org.pepstock.charba.client.defaults.IsDefaultOptionsElement;
 
 /**
- * CHART.JS default values for RECTANGLE element.
+ * CHART.JS default values for ARC element.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultRectangle extends AbstractDefaultOptionsElement implements IsDefaultRectangle {
+abstract class AbstractDefaultOptionsElement implements IsDefaultOptionsElement {
 
 	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
 
-	private static final int DEFAULT_BORDER_WIDTH = 0;
+	private static final int DEFAULT_BORDER_WIDTH = 2;
 
-	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0.1)";
+	private static final String DEFAULT_BORDER_COLOR = "#fff";
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.DefaultArc#getBackgroundColorAsString()
+	 * @see org.pepstock.charba.client.options.elements.arc.IsReadableArc#getBackgroundColorAsString()
 	 */
 	@Override
 	public String getBackgroundColorAsString() {
@@ -44,7 +43,7 @@ public final class DefaultRectangle extends AbstractDefaultOptionsElement implem
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.DefaultArc#getBorderWidth()
+	 * @see org.pepstock.charba.client.options.elements.arc.IsReadableArc#getBorderWidth()
 	 */
 	@Override
 	public int getBorderWidth() {
@@ -54,21 +53,11 @@ public final class DefaultRectangle extends AbstractDefaultOptionsElement implem
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.DefaultArc#getBorderColorAsString()
+	 * @see org.pepstock.charba.client.options.elements.arc.IsReadableArc#getBorderColorAsString()
 	 */
 	@Override
 	public String getBorderColorAsString() {
 		return DEFAULT_BORDER_COLOR;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.elements.rectangle.IsDefaultRectangle#getBorderSkipped()
-	 */
-	@Override
-	public BorderSkipped getBorderSkipped() {
-		return BorderSkipped.bottom;
 	}
 
 }

@@ -26,7 +26,7 @@ import org.pepstock.charba.client.enums.JoinStyle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultLine extends DefaultArc implements IsDefaultLine {
+public final class DefaultLine extends AbstractDefaultOptionsElement implements IsDefaultLine {
 
 	// default line tension
 	private static final float DEFAULT_TENSION = 0.4F;

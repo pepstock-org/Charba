@@ -23,7 +23,7 @@ import org.pepstock.charba.client.enums.PointStyle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultPoint extends DefaultArc implements IsDefaultPoint {
+public final class DefaultPoint extends AbstractDefaultOptionsElement implements IsDefaultPoint {
 
 	private static final double DEFAULT_RADIUS = 3D;
 

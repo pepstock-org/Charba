@@ -23,45 +23,9 @@ import org.pepstock.charba.client.enums.BorderAlign;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DefaultArc implements IsDefaultArc {
-
-	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
-
-	private static final int DEFAULT_BORDER_WIDTH = 2;
+public final class DefaultArc extends AbstractDefaultOptionsElement implements IsDefaultArc {
 
 	private static final double DEFAULT_WEIGHT = 1D;
-
-	private static final String DEFAULT_BORDER_COLOR = "#fff";
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.elements.arc.IsReadableArc#getBackgroundColorAsString()
-	 */
-	@Override
-	public String getBackgroundColorAsString() {
-		return DEFAULT_BACKGROUND_COLOR;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.elements.arc.IsReadableArc#getBorderWidth()
-	 */
-	@Override
-	public int getBorderWidth() {
-		return DEFAULT_BORDER_WIDTH;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.elements.arc.IsReadableArc#getBorderColorAsString()
-	 */
-	@Override
-	public String getBorderColorAsString() {
-		return DEFAULT_BORDER_COLOR;
-	}
 
 	/*
 	 * (non-Javadoc)
