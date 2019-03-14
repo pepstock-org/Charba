@@ -53,7 +53,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 
 	private static final boolean DEFAULT_CLIP = false;
 
-	private static final Display DEFAULT_DISPLAY = Display.True;
+	private static final Display DEFAULT_DISPLAY = Display.yes;
 
 	private static final double DEFAULT_OFFSET = 4D;
 
@@ -206,13 +206,13 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the visibility of labels.
 	 * 
-	 * @return the visibility of labels. Default is {@link Display#True}.
+	 * @return the visibility of labels. Default is {@link Display#yes}.
 	 */
 	Display getDisplay() {
 		ObjectType type = type(DataLabelsOptions.Property.display);
 		if (ObjectType.Boolean.equals(type)) {
 			boolean value = getValue(DataLabelsOptions.Property.display, true);
-			return value ? Display.True : Display.False;
+			return value ? Display.yes : Display.no;
 		} else if (ObjectType.String.equals(type)) {
 			return getValue(DataLabelsOptions.Property.display, Display.class, DEFAULT_DISPLAY);
 		}

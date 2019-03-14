@@ -31,12 +31,12 @@ public enum Display implements Key
 	 * This is default and the axis is drawn.<br>
 	 * For plugin, this is default and the label is drawn.
 	 */
-	True,
+	yes,
 	/**
 	 * The axis is hidden.<br>
 	 * For plugin, the label is hidden.
 	 */
-	False,
+	no,
 	/**
 	 * The axis is visible only if at least one associated dataset is visible.<br>
 	 * For plugin, the label is hidden if it overlap with another label.<br>

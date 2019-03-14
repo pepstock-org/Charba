@@ -160,7 +160,7 @@ public final class DefaultScale implements IsDefaultScale {
 	 */
 	@Override
 	public Display getDisplay() {
-		return Display.True;
+		return Display.yes;
 	}
 
 	/*

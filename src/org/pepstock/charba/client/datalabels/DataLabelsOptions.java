@@ -421,7 +421,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 					return Display.auto.name();
 				} else {
 					// returns boolean
-					return Display.True.equals(result) ? true : false;
+					return Display.yes.equals(result) ? true : false;
 				}
 			}
 		});
@@ -873,7 +873,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		if (Display.auto.equals(display)) {
 			setValue(Property.display, display);
 		} else {
-			setValue(Property.display, Display.True.equals(display) ? true : false);
+			setValue(Property.display, Display.yes.equals(display) ? true : false);
 		}
 	}
 
@@ -886,7 +886,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		ObjectType type = type(Property.display);
 		if (ObjectType.Boolean.equals(type)) {
 			boolean value = getValue(Property.display, true);
-			return value ? Display.True : Display.False;
+			return value ? Display.yes : Display.no;
 		} else if (ObjectType.String.equals(type)) {
 			return getValue(Property.display, Display.class, defaultsOptions.getDisplay());
 		}

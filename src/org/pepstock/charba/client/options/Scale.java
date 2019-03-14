@@ -299,7 +299,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 			checkAndAddToParent();
 		} else {
 			// otherwise transforms into a boolean
-			setDisplay(Display.True.equals(display) ? true : false);
+			setDisplay(Display.yes.equals(display) ? true : false);
 		}
 	}
 
@@ -316,7 +316,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 			// gets value
 			boolean value = getValue(Property.display, true);
 			// returns value
-			return value ? Display.True : Display.False;
+			return value ? Display.yes : Display.no;
 		}
 		// returns value. Must be auto
 		return getValue(Property.display, Display.class, getDefaultValues().getDisplay());

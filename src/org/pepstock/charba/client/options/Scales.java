@@ -111,7 +111,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 			checkAndAddToParent();
 		} else {
 			// otherwise transforms into a boolean
-			setDisplay(Display.True.equals(display) ? true : false);
+			setDisplay(Display.yes.equals(display) ? true : false);
 		}
 	}
 
@@ -128,7 +128,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 			// gets value
 			boolean value = getValue(Property.display, true);
 			// returns value
-			return value ? Display.True : Display.False;
+			return value ? Display.yes : Display.no;
 		}
 		// returns value. Must be auto
 		return getValue(Property.display, Display.class, getDefaultValues().getDisplay());
