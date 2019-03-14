@@ -22,9 +22,9 @@ import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.callbacks.BorderWidthCallback;
+import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
-import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
@@ -1983,7 +1983,7 @@ abstract class LiningDataset extends Dataset {
 	 * @return the point hit radius callback, if set, otherwise <code>null</code>.
 	 */
 	public RadiusCallback getPointHitRadiusCallback() {
-		return pointRadiusCallback;
+		return pointHitRadiusCallback;
 	}
 
 	/**
