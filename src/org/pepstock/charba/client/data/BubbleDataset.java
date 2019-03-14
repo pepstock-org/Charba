@@ -17,14 +17,26 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.Charts;
+import org.pepstock.charba.client.callbacks.PointStyleCallback;
+import org.pepstock.charba.client.callbacks.RadiusCallback;
+import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.commons.ArrayDouble;
+import org.pepstock.charba.client.commons.ArrayDoubleList;
+import org.pepstock.charba.client.commons.ArrayEnumList;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.PointStyle;
+
+import jsinterop.annotations.JsFunction;
 
 /**
  * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
@@ -35,6 +47,131 @@ import org.pepstock.charba.client.enums.PointStyle;
  * @author Andrea "Stock" Stocchero
  */
 public final class BubbleDataset extends HovingDataset implements HasDataPoints {
+
+	// ---------------------------
+	// -- JAVASCRIPT FUNCTIONS ---
+	// ---------------------------
+
+	/**
+	 * Java script FUNCTION callback called to provide the radius property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyRadiusCallback {
+
+		/**
+		 * Method of function to be called to provide the radius property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return radius property value.
+		 */
+		double call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the hit radius property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyHitRadiusCallback {
+
+		/**
+		 * Method of function to be called to provide the hit radius property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return hit radius property value.
+		 */
+		double call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the hover radius property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyHoverRadiusCallback {
+
+		/**
+		 * Method of function to be called to provide the hover radius property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return hover radius property value.
+		 */
+		double call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the rotation property.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyRotationCallback {
+
+		/**
+		 * Method of function to be called to provide the rotation property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return rotation property value.
+		 */
+		double call(Object contextFunction, Context context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide the point style.<br>
+	 * Must be an interface with only 1 method.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	interface ProxyPointStyleCallback {
+
+		/**
+		 * Method of function to be called to provide the point style.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return point style property value.
+		 */
+		Object call(Object contextFunction, Context context);
+	}
+
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the radius function
+	private final CallbackProxy<ProxyRadiusCallback> radiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the hit radius function
+	private final CallbackProxy<ProxyHitRadiusCallback> hitRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the hover radius function
+	private final CallbackProxy<ProxyHoverRadiusCallback> hoverRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the rotation function
+	private final CallbackProxy<ProxyRotationCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point style function
+	private final CallbackProxy<ProxyPointStyleCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// radius callback instance
+	private RadiusCallback radiusCallback = null;
+	// hit radius callback instance
+	private RadiusCallback hitRadiusCallback = null;
+	// hover radius callback instance
+	private RadiusCallback hoverRadiusCallback = null;
+	// rotation callback instance
+	private RotationCallback rotationCallback = null;
+	// point style callback instance
+	private PointStyleCallback<PointStyle> pointStyleCallback = null;
+
 	// exception message when it's not using data points
 	private static final String DATA_USAGE_MESSAGE = "Use datapoints instead of data for bubble chart";
 	// data point factory
@@ -67,6 +204,123 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 */
 	public BubbleDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		radiusCallbackProxy.setCallback(new ProxyRadiusCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.BubbleDataset.ProxyRadiusCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.data.Context)
+			 */
+			@Override
+			public double call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && radiusCallback != null) {
+					// calls callback
+					return radiusCallback.radius(chart, context);
+				}
+				// default result
+				return getDefaultValues().getElements().getPoint().getRadius();
+			}
+		});
+		hitRadiusCallbackProxy.setCallback(new ProxyHitRadiusCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.BubbleDataset.ProxyHitRadiusCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.data.Context)
+			 */
+			@Override
+			public double call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && hitRadiusCallback != null) {
+					// calls callback
+					return hitRadiusCallback.radius(chart, context);
+				}
+				// default result
+				return getDefaultValues().getElements().getPoint().getHitRadius();
+			}
+		});
+		hoverRadiusCallbackProxy.setCallback(new ProxyHoverRadiusCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.BubbleDataset.ProxyHoverRadiusCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.data.Context)
+			 */
+			@Override
+			public double call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && hoverRadiusCallback != null) {
+					// calls callback
+					return hoverRadiusCallback.radius(chart, context);
+				}
+				// default result
+				return getDefaultValues().getElements().getPoint().getHoverRadius();
+			}
+		});
+		rotationCallbackProxy.setCallback(new ProxyRotationCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.BubbleDataset.ProxyRotationCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.data.Context)
+			 */
+			@Override
+			public double call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && rotationCallback != null) {
+					// calls callback
+					return rotationCallback.rotation(chart, context);
+				}
+				// default result
+				return getDefaultValues().getElements().getPoint().getRotation();
+			}
+		});
+		pointStyleCallbackProxy.setCallback(new ProxyPointStyleCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.BubbleDataset.ProxyPointStyleCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.data.Context)
+			 */
+			@Override
+			public Object call(Object contextFunction, Context context) {
+				// gets chart instance
+				String id = context.getNativeChart().getCharbaId();
+				AbstractChart<?, ?> chart = Charts.get(id);
+				// checks if the callback is set
+				if (chart != null && pointStyleCallback != null) {
+					// calls callback
+					PointStyle result = pointStyleCallback.style(chart, context);
+					// checks result
+					if (result != null) {
+						return result.name();
+					}
+				}
+				// default result
+				return getDefaultValues().getElements().getPoint().getPointStyle().name();
+			}
+		});
 	}
 
 	/**
@@ -84,8 +338,15 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 * @return list of the style of the point.
 	 */
 	public List<PointStyle> getPointStyle() {
-		ArrayString array = getValueOrArray(Property.pointStyle, getDefaultValues().getElements().getPoint().getPointStyle());
-		return ArrayListHelper.list(PointStyle.class, array);
+		// checks if the callback has not been set
+		if (!ObjectType.Function.equals(type(Property.pointStyle))) {
+			// returns the array
+			ArrayString array = getValueOrArray(Property.pointStyle, getDefaultValues().getElements().getPoint().getPointStyle());
+			return ArrayListHelper.list(PointStyle.class, array);
+		} 
+		// if here, is a callback
+		// then returns an empty list
+		return new ArrayEnumList<PointStyle>(PointStyle.class);
 	}
 
 	/**
@@ -103,8 +364,15 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 * @return list of the pixel size of the non-displayed point.
 	 */
 	public List<Double> getHitRadius() {
-		ArrayDouble array = getValueOrArray(Property.hitRadius, getDefaultValues().getElements().getPoint().getHitRadius());
-		return ArrayListHelper.list(array);
+		// checks if the callback has not been set
+		if (!ObjectType.Function.equals(type(Property.hitRadius))) {
+			// returns the array
+			ArrayDouble array = getValueOrArray(Property.hitRadius, getDefaultValues().getElements().getPoint().getHitRadius());
+			return ArrayListHelper.list(array);
+		} 
+		// if here, is a callback
+		// then returns an empty list
+		return new ArrayDoubleList();
 	}
 
 	/**
@@ -122,8 +390,15 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 * @return list of the radius of the point when hovered.
 	 */
 	public List<Double> getHoverRadius() {
-		ArrayDouble array = getValueOrArray(Property.hoverRadius, getDefaultValues().getElements().getPoint().getHoverRadius());
-		return ArrayListHelper.list(array);
+		// checks if the callback has not been set
+		if (!ObjectType.Function.equals(type(Property.hoverRadius))) {
+			// returns the array
+			ArrayDouble array = getValueOrArray(Property.hoverRadius, getDefaultValues().getElements().getPoint().getHoverRadius());
+			return ArrayListHelper.list(array);
+		} 
+		// if here, is a callback
+		// then returns an empty list
+		return new ArrayDoubleList();
 	}
 
 	/**
@@ -141,8 +416,15 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 * @return list of the radius of the point shape.
 	 */
 	public List<Double> getRadius() {
-		ArrayDouble array = getValueOrArray(Property.radius, getDefaultValues().getElements().getPoint().getRadius());
-		return ArrayListHelper.list(array);
+		// checks if the callback has not been set
+		if (!ObjectType.Function.equals(type(Property.radius))) {
+			// returns the array
+			ArrayDouble array = getValueOrArray(Property.radius, getDefaultValues().getElements().getPoint().getRadius());
+			return ArrayListHelper.list(array);
+		} 
+		// if here, is a callback
+		// then returns an empty list
+		return new ArrayDoubleList();
 	}
 
 	/**
@@ -160,8 +442,15 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 * @return list of the rotation of the point in degrees.
 	 */
 	public List<Double> getRotation() {
-		ArrayDouble array = getValueOrArray(Property.rotation, getDefaultValues().getElements().getPoint().getRotation());
-		return ArrayListHelper.list(array);
+		// checks if the callback has not been set
+		if (!ObjectType.Function.equals(type(Property.rotation))) {
+			// returns the array
+			ArrayDouble array = getValueOrArray(Property.rotation, getDefaultValues().getElements().getPoint().getRotation());
+			return ArrayListHelper.list(array);
+		} 
+		// if here, is a callback
+		// then returns an empty list
+		return new ArrayDoubleList();
 	}
 
 	/**
@@ -247,6 +536,141 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	@Override
 	public List<Double> getData(boolean binding) {
 		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
+	}
+	
+	/**
+	 * Returns the radius callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the radius callback, if set, otherwise <code>null</code>.
+	 */
+	public RadiusCallback getRadiusCallback() {
+		return radiusCallback;
+	}
+
+	/**
+	 * Sets the radius callback.
+	 * 
+	 * @param radiusCallback the radius callback to set
+	 */
+	public void setRadius(RadiusCallback radiusCallback) {
+		// sets the callback
+		this.radiusCallback = radiusCallback;
+		// checks if callback is consistent
+		if (radiusCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.radius, radiusCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.radius);
+		}
+	}
+
+	/**
+	 * Returns the hit radius callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the hit radius callback, if set, otherwise <code>null</code>.
+	 */
+	public RadiusCallback getHitRadiusCallback() {
+		return hitRadiusCallback;
+	}
+
+	/**
+	 * Sets the hit radius callback.
+	 * 
+	 * @param hitRadiusCallback the hit radius callback to set
+	 */
+	public void setHitRadius(RadiusCallback hitRadiusCallback) {
+		// sets the callback
+		this.hitRadiusCallback = hitRadiusCallback;
+		// checks if callback is consistent
+		if (hitRadiusCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.hitRadius, hitRadiusCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.hitRadius);
+		}
+	}
+
+	/**
+	 * Returns the hover radius callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the hover radius callback, if set, otherwise <code>null</code>.
+	 */
+	public RadiusCallback getHoverRadiusCallback() {
+		return hoverRadiusCallback;
+	}
+
+	/**
+	 * Sets the hover radius callback.
+	 * 
+	 * @param hoverRadiusCallback the hover radius callback to set
+	 */
+	public void setHoverRadius(RadiusCallback hoverRadiusCallback) {
+		// sets the callback
+		this.hoverRadiusCallback = hoverRadiusCallback;
+		// checks if callback is consistent
+		if (hoverRadiusCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.hoverRadius, hoverRadiusCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.hoverRadius);
+		}
+	}
+
+	/**
+	 * Returns the rotation callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the rotation callback, if set, otherwise <code>null</code>.
+	 */
+	public RotationCallback getRotationCallback() {
+		return rotationCallback;
+	}
+
+	/**
+	 * Sets the rotation callback.
+	 * 
+	 * @param rotationCallback the rotation callback to set
+	 */
+	public void setRotation(RotationCallback rotationCallback) {
+		// sets the callback
+		this.rotationCallback = rotationCallback;
+		// checks if callback is consistent
+		if (rotationCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.rotation, rotationCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.rotation);
+		}
+	}
+
+	/**
+	 * Returns the point style callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the point style callback, if set, otherwise <code>null</code>.
+	 */
+	public PointStyleCallback<?> getPointStyleCallback() {
+		return pointStyleCallback;
+	}
+
+	/**
+	 * Sets the point style callback.
+	 * 
+	 * @param pointStyleCallback the point style callback.
+	 */
+	public void setPointStyle(PointStyleCallback<PointStyle> pointStyleCallback) {
+		// sets the callback
+		this.pointStyleCallback = pointStyleCallback;
+		// checks if callback is consistent
+		if (pointStyleCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.pointStyle, pointStyleCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.pointStyle);
+		}
 	}
 
 }
