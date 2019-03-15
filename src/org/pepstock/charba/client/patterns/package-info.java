@@ -14,9 +14,9 @@
     limitations under the License.
 */
 /**
- * All callbacks interfaces to be implemented, also to use the scriptable options of CHART.JS.
+ * Contains all classes to use the PATTERNOMALY library.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-package org.pepstock.charba.client.callbacks;
+package org.pepstock.charba.client.patterns;

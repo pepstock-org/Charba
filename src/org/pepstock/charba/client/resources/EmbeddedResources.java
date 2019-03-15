@@ -32,8 +32,7 @@ public interface EmbeddedResources extends Resources<TextResource> {
 	public static final EmbeddedResources INSTANCE = GWT.create(EmbeddedResources.class);
 
 	/**
-	 * Contains text representation of native chart.js code. FIXME downloaded NOT ufficial version to solve the issue about
-	 * POINTS and GRADIENTS color FIXME https://www.chartjs.org/docs/latest/developers/
+	 * Contains text representation of native chart.js code.
 	 * 
 	 * @return chart.js code in sync mode
 	 */

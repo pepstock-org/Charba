@@ -48,6 +48,7 @@
 
 	<property name="javascript.chartjs.minify.file" value="chart.bundle.min.js" />
 	<property name="javascript.datalabels.minify.file" value="chartjs-plugin-datalabels.min.js" />
+	<property name="javascript.patternomaly.minify.file" value="patternomaly.min.js" />
 
 	<property name="dist.dir" value="dist" />
 	<property name="bin.archive.file" value="${dist.dir}/charba-${ivy.pubrevision}.jar" />
@@ -241,7 +242,7 @@
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${retrieve.dir}" includes="${javascript.chartjs.minify.file}" />
 		</delete>
-		<get src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/${depver.chartjs}/Chart.bundle.min.js" dest="${retrieve.dir}/${javascript.chartjs.minify.file}" />
+		<get src="https://cdn.jsdelivr.net/npm/chart.js@${depver.chartjs}/dist/Chart.bundle.min.js" dest="${retrieve.dir}/${javascript.chartjs.minify.file}" />
 	</target>
 
 	<target name="retrieveLatestChartJS">
@@ -270,7 +271,16 @@
 		</delete>
 		<get src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels" dest="${retrieve.dir}/${javascript.datalabels.minify.file}" />
 	</target>
-	
+
+	<target name="retrieveOfficialPatternomaly">
+		<echo>Retrieve Patternomaly library minify javascript resource - version ${depver.patternomaly}</echo>
+		<mkdir dir="${retrieve.dir}" />
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${retrieve.dir}" includes="${javascript.datalabels.minify.file}" />
+		</delete>
+		<get src="https://cdn.jsdelivr.net/npm/patternomaly@${depver.patternomaly}/dist/patternomaly.min.js" dest="${retrieve.dir}/${javascript.patternomaly.minify.file}" />
+	</target>
+
 	<!--
 		IVY targets for Travis CI
 	-->

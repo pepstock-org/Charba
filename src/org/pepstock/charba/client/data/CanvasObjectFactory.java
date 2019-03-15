@@ -86,6 +86,10 @@ public final class CanvasObjectFactory {
 			patternsMap = new HashMap<>();
 			PATTERNS.put(chart.getId(), patternsMap);
 		}
+		// checks if canvas pattern already loaded
+		if (pattern.getCanvasPattern() != null) {
+			return pattern.getCanvasPattern();
+		}
 		// gets canvas and context 2d
 		Canvas canvas = chart.getCanvas();
 		Context2d context = canvas.getContext2d();

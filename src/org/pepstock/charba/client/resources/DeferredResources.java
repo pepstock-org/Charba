@@ -33,8 +33,7 @@ public interface DeferredResources extends Resources<ExternalTextResource> {
 	public static final DeferredResources INSTANCE = GWT.create(DeferredResources.class);
 
 	/**
-	 * Contains text representation of native chart.js code. FIXME downloaded NOT ufficial version to solve the issue about
-	 * POINTS and GRADIENTS color FIXME https://www.chartjs.org/docs/latest/developers/
+	 * Contains text representation of native chart.js code. 
 	 * 
 	 * @return chart.js code in async mode
 	 */
