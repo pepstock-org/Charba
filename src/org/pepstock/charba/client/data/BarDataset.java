@@ -18,8 +18,8 @@ package org.pepstock.charba.client.data;
 import java.util.List;
 
 import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -40,6 +40,8 @@ import org.pepstock.charba.client.options.Scales;
  * @author Andrea "Stock" Stocchero
  */
 public class BarDataset extends HovingFlexDataset implements HasDataPoints {
+	// default label
+	private static final String DEFAULT_LABEL = "";
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -102,6 +104,16 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 		});
 	}
 
+	/**
+	 * Returns the label for the dataset which appears in the legend and tooltips.
+	 * 
+	 * @return the label for the dataset which appears in the legend and tooltips.
+	 */
+	@Override
+	public String getLabel() {
+		return getValue(Dataset.Property.label, DEFAULT_LABEL);
+	}
+	
 	/**
 	 * Sets the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * 

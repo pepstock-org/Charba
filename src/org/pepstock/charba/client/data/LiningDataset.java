@@ -20,11 +20,11 @@ import java.util.List;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.callbacks.BorderWidthCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
@@ -71,6 +71,8 @@ import com.google.gwt.user.client.ui.Image;
  *
  */
 abstract class LiningDataset extends Dataset {
+	// default label
+	private static final String DEFAULT_LABEL = "";
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -335,6 +337,17 @@ abstract class LiningDataset extends Dataset {
 			}
 		});
 	}
+	
+	/**
+	 * Returns the label for the dataset which appears in the legend and tooltips.
+	 * 
+	 * @return the label for the dataset which appears in the legend and tooltips.
+	 */
+	@Override
+	public String getLabel() {
+		return getValue(Dataset.Property.label, DEFAULT_LABEL);
+	}
+
 
 	/**
 	 * Sets the fill color under the line.

@@ -327,14 +327,13 @@ public abstract class Dataset extends NativeObjectContainer {
 	public boolean isHidden() {
 		return getValue(Property.hidden, DEFAULT_HIDDEN);
 	}
-
+	
 	/**
 	 * Sets the label for the dataset which appears in the legend and tooltips.
 	 * 
 	 * @param label the label for the dataset which appears in the legend and tooltips.
 	 */
 	public void setLabel(String label) {
-		// FIXME
 		setValue(Property.label, label);
 	}
 
