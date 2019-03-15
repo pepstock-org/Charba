@@ -27,7 +27,7 @@ import org.pepstock.charba.client.resources.Extensions;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
 
 /**
- * Patternomaly java script library implementation.<br>
+ * Patternomaly java script library implementation that can easily generate patterns for use in data graphics.<br>
  * This injects the Patternomaly java script, invokes it and uses a cache to improve the performance and do not create a pattern
  * every time if already created.<br>
  * Rather than relying solely on color to display information patterns provide a better way for viewers to differentiate
