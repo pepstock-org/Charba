@@ -20,8 +20,8 @@ import java.util.List;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.callbacks.BorderWidthCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
@@ -376,8 +376,11 @@ abstract class HovingFlexDataset extends Dataset {
 	 * @return list of the stroke width of the bar in pixels. If a callback has been set, returns an empty list.
 	 */
 	public List<Integer> getBorderWidth() {
-		// checks if the callback has not been set
-		if (!ObjectType.Function.equals(type(Property.borderWidth))) {
+		// gets object type 
+		ObjectType type = type(Property.borderWidth); 
+		// checks if the callback has not been set and is not an object (border width object
+		// set by bar dataset)
+		if (!ObjectType.Function.equals(type) && !ObjectType.Object.equals(type)) {
 			// returns the array
 			ArrayInteger array = getValueOrArray(Property.borderWidth, getDefaultBorderWidth());
 			return ArrayListHelper.list(array);

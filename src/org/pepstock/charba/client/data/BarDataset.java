@@ -62,7 +62,8 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	{
 		xAxisID,
 		yAxisID,
-		borderSkipped
+		borderSkipped,
+		borderWidth
 	}
 
 	/**
@@ -154,6 +155,34 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 */
 	public String getYAxisID() {
 		return getValue(Property.yAxisID, Scales.DEFAULT_Y_AXIS_ID);
+	}
+	
+	/**
+	 * Sets the stroke width of the bar in pixels.
+	 * 
+	 * @param borderWidth the stroke width of the bar in pixels.
+	 */
+	public void setBorderWidth(BarBorderWidth borderWidth) {
+		// stores value
+		setValue(Property.borderWidth, borderWidth);
+	}
+
+	/**
+	 * Returns the stroke width of the bar in pixels. If a callback or an array or number have been set, returns an empty object.
+	 * 
+	 * @return list of the stroke width of the bar in pixels. If a callback or an array or number have been set, returns an empty object
+	 */
+	public BarBorderWidth getBorderWidthAsItem() {
+		// gets object type 
+		ObjectType type = type(Property.borderWidth); 
+		// checks if borer width has been set by an object
+		if (ObjectType.Object.equals(type)) {
+			// returns the array
+			return new BarBorderWidth(getValue(Property.borderWidth));
+		}
+		// if here, is not a bar border width object
+		// then returns null
+		return new BarBorderWidth();
 	}
 
 	/**
