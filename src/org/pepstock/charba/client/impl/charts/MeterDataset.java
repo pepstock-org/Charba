@@ -18,6 +18,8 @@ package org.pepstock.charba.client.impl.charts;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
+import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
@@ -120,6 +122,50 @@ public class MeterDataset extends DoughnutDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.data.HovingDataset#setBackgroundColor(org.pepstock.charba.client.callbacks.
+	 * BackgroundColorCallback)
+	 */
+	@Override
+	public void setBackgroundColor(BackgroundColorCallback<?> backgroundColorCallback) {
+		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.pepstock.charba.client.data.HovingDataset#setBorderColor(org.pepstock.charba.client.callbacks.BorderColorCallback)
+	 */
+	@Override
+	public void setBorderColor(BorderColorCallback<?> borderColorCallback) {
+		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBackgroundColor(org.pepstock.charba.client.callbacks.
+	 * BackgroundColorCallback)
+	 */
+	@Override
+	public void setHoverBackgroundColor(BackgroundColorCallback<?> hoverBackgroundColorCallback) {
+		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBorderColor(org.pepstock.charba.client.callbacks.
+	 * BorderColorCallback)
+	 */
+	@Override
+	public void setHoverBorderColor(BorderColorCallback<?> hoverBorderColorCallback) {
+		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.HovingDataset#setBorderColor(org.pepstock.charba.client.colors.Gradient[])
 	 */
 	@Override
@@ -155,28 +201,6 @@ public class MeterDataset extends DoughnutDataset {
 	@Override
 	public void setHoverBackgroundColor(Pattern... colors) {
 		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.HovingDataset#setBorderWidth(int[])
-	 */
-	@Override
-	public final void setBorderWidth(int... borderWidth) {
-		// ignore passed value
-		super.setBorderWidth(0, 0);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBorderWidth(int[])
-	 */
-	@Override
-	public final void setHoverBorderWidth(int... widths) {
-		// ignore passed value
-		super.setHoverBorderWidth(0, 0);
 	}
 
 	/**
