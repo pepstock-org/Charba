@@ -21,6 +21,7 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -153,12 +154,50 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	}
 
 	/**
+	 * Sets the height of an individual line of text.
+	 * 
+	 * @param lineHeight height of an individual line of text.
+	 */
+	public void setLineHeight(String lineHeight) {
+		setValue(Property.lineHeight, lineHeight);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
 	 * Returns the height of an individual line of text.
 	 * 
 	 * @return the height of an individual line of text.
 	 */
 	public double getLineHeight() {
-		return getValue(Property.lineHeight, getDefaultValues().getLineHeight());
+		// creates default
+		double defaultValue = getDefaultValues().getLineHeight();
+		// checks type if number
+		if (ObjectType.Number.equals(type(Property.lineHeight))) {
+			// reads and returns as double
+			return getValue(Property.lineHeight, defaultValue);
+		}
+		// if here, is not a number
+		// then returns the default
+		return defaultValue;
+	}
+
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text.
+	 */
+	public String getLineHeightAsString() {
+		// creates default
+		String defaultValue = String.valueOf(getDefaultValues().getLineHeight());
+		// checks type if string
+		if (ObjectType.String.equals(type(Property.lineHeight))) {
+			// reads and returns as string
+			return getValue(Property.lineHeight, defaultValue);
+		}
+		// if here, is not a number
+		// then returns the default
+		return defaultValue;
 	}
 
 	/**

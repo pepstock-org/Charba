@@ -655,6 +655,17 @@ public final class DataLabelsOptionsBuilder {
 		options.getFont().setLineHeight(lineHeight);
 		return this;
 	}
+	
+	/**
+	 * Sets the line height.
+	 * 
+	 * @param lineHeight the line height.
+	 * @return builder instance
+	 */
+	public DataLabelsOptionsBuilder setFontLineHeight(String lineHeight) {
+		options.getFont().setLineHeight(lineHeight);
+		return this;
+	}
 
 	/**
 	 * Sets the padding size to all dimensions.

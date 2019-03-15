@@ -95,12 +95,30 @@ public class CartesianScaleLabel extends AxisContainer {
 	}
 
 	/**
+	 * Sets the height of an individual line of text.
+	 * 
+	 * @param lineHeight Height of an individual line of text.
+	 */
+	public void setLineHeight(String lineHeight) {
+		getAxis().getScale().getScaleLabel().setLineHeight(lineHeight);
+	}
+
+	/**
 	 * Returns the height of an individual line of text.
 	 * 
 	 * @return the height of an individual line of text.
 	 */
 	public double getLineHeight() {
 		return getAxis().getScale().getScaleLabel().getLineHeight();
+	}
+
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text.
+	 */
+	public String getLineHeightAsString() {
+		return getAxis().getScale().getScaleLabel().getLineHeightAsString();
 	}
 
 	/**

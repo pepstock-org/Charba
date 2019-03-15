@@ -231,6 +231,15 @@ public class Title {
 	}
 
 	/**
+	 * Sets the height of an individual line of text.
+	 * 
+	 * @param lineHeight height of an individual line of text.
+	 */
+	public void setLineHeight(String lineHeight) {
+		options.getTitle().setLineHeight(lineHeight);
+	}
+
+	/**
 	 * Returns the height of an individual line of text.
 	 * 
 	 * @return height of an individual line of text.
@@ -238,4 +247,14 @@ public class Title {
 	public double getLineHeight() {
 		return options.getTitle().getLineHeight();
 	}
+	
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return height of an individual line of text.
+	 */
+	public String getLineHeightAsString() {
+		return options.getTitle().getLineHeightAsString();
+	}
+
 }
