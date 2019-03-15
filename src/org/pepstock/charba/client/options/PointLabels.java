@@ -15,6 +15,12 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.List;
+
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -70,7 +76,7 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());
 	}
-	
+
 	/**
 	 * Sets the height of an individual line of text.
 	 * 
@@ -127,6 +133,73 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 		// if here, is not a number
 		// then returns the default
 		return defaultValue;
+	}
+
+	/**
+	 * Sets an array of font colors.
+	 * 
+	 * @param fontColors an array of font colors
+	 */
+	public void setFontColor(IsColor... fontColors) {
+		// stores value
+		setValueOrArray(FontItem.Property.fontColor, fontColors);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Sets an array of font colors.
+	 * 
+	 * @param fontColors an array of font colors
+	 */
+	public void setFontColor(String... fontColors) {
+		// stores value
+		setValueOrArray(FontItem.Property.fontColor, fontColors);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.FontItem#getFontColorAsString()
+	 */
+	@Override
+	public String getFontColorAsString() {
+		// gets list of colors
+		List<String> colors = getFontColorsAsString();
+		// if list is empty, retruns default otherwise the first color
+		return colors.isEmpty() ? getDefaultValues().getFontColorAsString() : colors.get(0);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.FontItem#getFontColor()
+	 */
+	@Override
+	public IsColor getFontColor() {
+		return ColorBuilder.parse(getFontColorAsString());
+	}
+
+	/**
+	 * Returns the font colors as list.
+	 * 
+	 * @return Font color as list
+	 */
+	public List<String> getFontColorsAsString() {
+		// returns list of colors
+		ArrayString array = getValueOrArray(FontItem.Property.fontColor, getDefaultValues().getFontColorAsString());
+		return ArrayListHelper.list(array);
+	}
+
+	/**
+	 * Returns the font colors as list.
+	 * 
+	 * @return Font color as list
+	 */
+	public List<IsColor> getFontColors() {
+		return ColorBuilder.parse(getFontColorsAsString());
 	}
 
 }
