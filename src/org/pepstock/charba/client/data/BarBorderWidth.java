@@ -47,7 +47,7 @@ public final class BarBorderWidth extends NativeObjectContainer {
 	/**
 	 * Sets the border width size to all dimensions.
 	 * 
-	 * @param border width border width size to apply to all dimensions.
+	 * @param borderWidth border width size to apply to all dimensions.
 	 */
 	public void set(int borderWidth) {
 		setTop(borderWidth);
