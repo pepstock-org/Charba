@@ -56,252 +56,17 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
-	// FIXME
 	/**
-	 * Java script FUNCTION callback called before the update process starts.<br>
+	 * Java script FUNCTION callback called to invoke a custom callback for axis.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	interface ProxyBeforeUpdateCallback {
+	interface ProxyAxisCallback {
 
 		/**
-		 * Method of function to be called before the update process starts.
-		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
-		 * @param item native object of axis
-		 */
-		void call(Object context, NativeObject item);
-	}
-
-	/**
-	 * Java script FUNCTION callback that runs before dimensions are set.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBeforeSetDimensionsCallback {
-
-		/**
-		 * Method of function to be called that runs before dimensions are set.
-		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
-		 * @param item native object of axis
-		 */
-		void call(Object context, NativeObject item);
-	}
-
-	/**
-	 * Java script FUNCTION callback that runs after dimensions are set.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterSetDimensionsCallback {
-
-		/**
-		 * Method of function to be called that runs after dimensions are set.
-		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
-		 * @param item native object of axis
-		 */
-		void call(Object context, NativeObject item);
-	}
-
-	/**
-	 * Java script FUNCTION callback that runs before data limits are determined.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBeforeDataLimitsCallback {
-
-		/**
-		 * Method of function to be called that runs before data limits are determined.
-		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
-		 * @param item native object of axis
-		 */
-		void call(Object context, NativeObject item);
-	}
-
-	/**
-	 * Java script FUNCTION callback that runs after data limits are determined.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterDataLimitsCallback {
-
-		/**
-		 * Method of function to be called that runs after data limits are determined.
-		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
-		 * @param item native object of axis
-		 */
-		void call(Object context, NativeObject item);
-	}
-
-	/**
-	 * Java script FUNCTION callback that runs before ticks are created.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBeforeBuildTicksCallback {
-
-		/**
-		 * Method of function to be called that runs before ticks are created.
-		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
-		 * @param item native object of axis
-		 */
-		void call(Object context, NativeObject item);
-	}
-
-	/**
-	 * Java script FUNCTION callback that runs after ticks are created. Useful for filtering ticks.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterBuildTicksCallback {
-
-		/**
-		 * Method of function to be called that runs after ticks are created. Useful for filtering ticks.
-		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
-		 * @param item native object of axis
-		 */
-		void call(Object context, NativeObject item);
-	}
-
-	/**
-	 * Java script FUNCTION callback that runs before ticks are converted into strings.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBeforeTickToLabelConversionCallback {
-
-		/**
-		 * Method of function to be called that runs before ticks are converted into strings.
-		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
-		 * @param item native object of axis
-		 */
-		void call(Object context, NativeObject item);
-	}
-
-	/**
-	 * Java script FUNCTION callback that runs after ticks are converted into strings.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterTickToLabelConversionCallback {
-
-		/**
-		 * Method of function to be called that runs after ticks are converted into strings.
-		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
-		 * @param item native object of axis
-		 */
-		void call(Object context, NativeObject item);
-	}
-
-	/**
-	 * Java script FUNCTION callback that runs before tick rotation is determined.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBeforeCalculateTickRotationCallback {
-
-		/**
-		 * Method of function to be called that runs before tick rotation is determined.
-		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
-		 * @param item native object of axis
-		 */
-		void call(Object context, NativeObject item);
-	}
-
-	/**
-	 * Java script FUNCTION callback that runs after tick rotation is determined.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterCalculateTickRotationCallback {
-
-		/**
-		 * Method of function to be called that runs before tick rotation is determined.
-		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
-		 * @param item native object of axis
-		 */
-		void call(Object context, NativeObject item);
-	}
-
-	/**
-	 * Java script FUNCTION callback that runs before the scale fits to the canvas.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBeforeFitCallback {
-
-		/**
-		 * Method of function to be called that runs before the scale fits to the canvas.
-		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
-		 * @param item native object of axis
-		 */
-		void call(Object context, NativeObject item);
-	}
-
-	/**
-	 * Java script FUNCTION callback that runs after the scale fits to the canvas.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterFitCallback {
-
-		/**
-		 * Method of function to be called that runs after the scale fits to the canvas.
-		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
-		 * @param item native object of axis
-		 */
-		void call(Object context, NativeObject item);
-	}
-
-	/**
-	 * Java script FUNCTION callback that runs at the end of the update process.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterUpdateCallback {
-
-		/**
-		 * Method of function to be called that runs at the end of the update process.
+		 * Method of function to be called to invoke a custom callback for axis.
 		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param item native object of axis
@@ -314,33 +79,33 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	// ---------------------------
 
 	// callback proxy to invoke the before update function
-	private final CallbackProxy<ProxyBeforeUpdateCallback> beforeUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyAxisCallback> beforeUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before set dimension function
-	private final CallbackProxy<ProxyBeforeSetDimensionsCallback> beforeSetDimensionsCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyAxisCallback> beforeSetDimensionsCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after set dimension function
-	private final CallbackProxy<ProxyAfterSetDimensionsCallback> afterSetDimensionsCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyAxisCallback> afterSetDimensionsCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before data limit function
-	private final CallbackProxy<ProxyBeforeDataLimitsCallback> beforeDataLimitsCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyAxisCallback> beforeDataLimitsCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after data limit function
-	private final CallbackProxy<ProxyAfterDataLimitsCallback> afterDataLimitsCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyAxisCallback> afterDataLimitsCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before build tricks function
-	private final CallbackProxy<ProxyBeforeBuildTicksCallback> beforeBuildTicksCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyAxisCallback> beforeBuildTicksCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after build tricks function
-	private final CallbackProxy<ProxyAfterBuildTicksCallback> afterBuildTicksCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyAxisCallback> afterBuildTicksCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before tick label conversion function
-	private final CallbackProxy<ProxyBeforeTickToLabelConversionCallback> beforeTickToLabelConversionCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyAxisCallback> beforeTickToLabelConversionCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after tick label conversion function
-	private final CallbackProxy<ProxyAfterTickToLabelConversionCallback> afterTickToLabelConversionCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyAxisCallback> afterTickToLabelConversionCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before calculate tick rotation function
-	private final CallbackProxy<ProxyBeforeCalculateTickRotationCallback> beforeCalculateTickRotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyAxisCallback> beforeCalculateTickRotationCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after calculate tick rotation function
-	private final CallbackProxy<ProxyAfterCalculateTickRotationCallback> afterCalculateTickRotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyAxisCallback> afterCalculateTickRotationCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before fit function
-	private final CallbackProxy<ProxyBeforeFitCallback> beforeFitCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyAxisCallback> beforeFitCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after fit function
-	private final CallbackProxy<ProxyAfterFitCallback> afterFitCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyAxisCallback> afterFitCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after update function
-	private final CallbackProxy<ProxyAfterUpdateCallback> afterUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyAxisCallback> afterUpdateCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// ---------------------------
 	// -- USERS CALLBACKS ---
@@ -395,12 +160,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		beforeUpdateCallbackProxy.setCallback(new ProxyBeforeUpdateCallback() {
+		beforeUpdateCallbackProxy.setCallback(new ProxyAxisCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyBeforeUpdateCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
 			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
@@ -412,12 +177,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 				}
 			}
 		});
-		beforeSetDimensionsCallbackProxy.setCallback(new ProxyBeforeSetDimensionsCallback() {
+		beforeSetDimensionsCallbackProxy.setCallback(new ProxyAxisCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyBeforeSetDimensionsCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
 			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
@@ -429,12 +194,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 				}
 			}
 		});
-		afterSetDimensionsCallbackProxy.setCallback(new ProxyAfterSetDimensionsCallback() {
+		afterSetDimensionsCallbackProxy.setCallback(new ProxyAxisCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAfterSetDimensionsCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
 			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
@@ -446,12 +211,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 				}
 			}
 		});
-		beforeDataLimitsCallbackProxy.setCallback(new ProxyBeforeDataLimitsCallback() {
+		beforeDataLimitsCallbackProxy.setCallback(new ProxyAxisCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyBeforeDataLimitsCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
 			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
@@ -463,12 +228,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 				}
 			}
 		});
-		afterDataLimitsCallbackProxy.setCallback(new ProxyAfterDataLimitsCallback() {
+		afterDataLimitsCallbackProxy.setCallback(new ProxyAxisCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAfterDataLimitsCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
 			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
@@ -480,12 +245,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 				}
 			}
 		});
-		beforeBuildTicksCallbackProxy.setCallback(new ProxyBeforeBuildTicksCallback() {
+		beforeBuildTicksCallbackProxy.setCallback(new ProxyAxisCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyBeforeBuildTicksCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
 			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
@@ -497,12 +262,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 				}
 			}
 		});
-		afterBuildTicksCallbackProxy.setCallback(new ProxyAfterBuildTicksCallback() {
+		afterBuildTicksCallbackProxy.setCallback(new ProxyAxisCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAfterBuildTicksCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
 			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
@@ -514,13 +279,13 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 				}
 			}
 		});
-		beforeTickToLabelConversionCallbackProxy.setCallback(new ProxyBeforeTickToLabelConversionCallback() {
+		beforeTickToLabelConversionCallbackProxy.setCallback(new ProxyAxisCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyBeforeTickToLabelConversionCallback#call(java.lang.
-			 * Object, org.pepstock.charba.client.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -531,13 +296,13 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 				}
 			}
 		});
-		afterTickToLabelConversionCallbackProxy.setCallback(new ProxyAfterTickToLabelConversionCallback() {
+		afterTickToLabelConversionCallbackProxy.setCallback(new ProxyAxisCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAfterTickToLabelConversionCallback#call(java.lang.
-			 * Object, org.pepstock.charba.client.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -548,13 +313,13 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 				}
 			}
 		});
-		beforeCalculateTickRotationCallbackProxy.setCallback(new ProxyBeforeCalculateTickRotationCallback() {
+		beforeCalculateTickRotationCallbackProxy.setCallback(new ProxyAxisCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyBeforeCalculateTickRotationCallback#call(java.lang.
-			 * Object, org.pepstock.charba.client.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -565,13 +330,13 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 				}
 			}
 		});
-		afterCalculateTickRotationCallbackProxy.setCallback(new ProxyAfterCalculateTickRotationCallback() {
+		afterCalculateTickRotationCallbackProxy.setCallback(new ProxyAxisCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAfterCalculateTickRotationCallback#call(java.lang.
-			 * Object, org.pepstock.charba.client.commons.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Object context, NativeObject item) {
@@ -582,12 +347,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 				}
 			}
 		});
-		beforeFitCallbackProxy.setCallback(new ProxyBeforeFitCallback() {
+		beforeFitCallbackProxy.setCallback(new ProxyAxisCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyBeforeFitCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
 			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
@@ -599,12 +364,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 				}
 			}
 		});
-		afterFitCallbackProxy.setCallback(new ProxyAfterFitCallback() {
+		afterFitCallbackProxy.setCallback(new ProxyAxisCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAfterFitCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
 			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
@@ -616,12 +381,12 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 				}
 			}
 		});
-		afterUpdateCallbackProxy.setCallback(new ProxyAfterUpdateCallback() {
+		afterUpdateCallbackProxy.setCallback(new ProxyAxisCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAfterUpdateCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
 			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
@@ -684,7 +449,6 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	public final Display getDisplay() {
 		return getScale().getDisplay();
 	}
-
 
 	/**
 	 * The weight used to sort the axis. Higher weights are further away from the chart area.

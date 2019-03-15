@@ -47,16 +47,16 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	// ---------------------------
 
 	/**
-	 * Java script FUNCTION callback called when a click event on the legend is raised.<br>
+	 * Java script FUNCTION callback called when a event on the legend is raised.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	interface ProxyLegendClickCallback {
+	interface ProxyLegendEventCallback {
 
 		/**
-		 * Method of function to be called when a click event on the legend is raised.
+		 * Method of function to be called when a event on the legend is raised.
 		 * 
 		 * @param chart context Value of <code>this</code> to the execution context of function. It is the chart instance.
 		 * @param event native event
@@ -65,52 +65,15 @@ public class Legend extends EventProvider<ExtendedOptions> {
 		void call(Chart chart, ChartNativeEvent event, NativeObject item);
 	}
 
-	/**
-	 * Java script FUNCTION callback called when a hover event on the legend is raised.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyLegendHoverCallback {
-
-		/**
-		 * Method of function to be called when a hover event on the legend is raised.
-		 * 
-		 * @param chart context Value of <code>this</code> to the execution context of function. It is the chart instance.
-		 * @param event native event
-		 * @param item legend item affected by event
-		 */
-		void call(Chart chart, ChartNativeEvent event, NativeObject item);
-	}
-
-	/**
-	 * Java script FUNCTION callback called when a leaving event on the legend is raised.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyLegendLeaveCallback {
-
-		/**
-		 * Method of function to be called when a leaving event on the legend is raised.
-		 * 
-		 * @param chart context Value of <code>this</code> to the execution context of function. It is the chart instance.
-		 * @param event native event
-		 * @param item legend item affected by event
-		 */
-		void call(Chart chart, ChartNativeEvent event, NativeObject item);
-	}
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the click function
-	private final CallbackProxy<ProxyLegendClickCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyLegendEventCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover function
-	private final CallbackProxy<ProxyLegendHoverCallback> hoverCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyLegendEventCallback> hoverCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the leave function
-	private final CallbackProxy<ProxyLegendLeaveCallback> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyLegendEventCallback> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
 	// sub element of legend
 	private final LegendLabels labels;
 	// amount of click handlers
@@ -143,14 +106,14 @@ public class Legend extends EventProvider<ExtendedOptions> {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		clickCallbackProxy.setCallback(new ProxyLegendClickCallback() {
+		clickCallbackProxy.setCallback(new ProxyLegendEventCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Legend.ProxyLegendClickCallback#call(org.pepstock.charba.
-			 * client.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
-			 * org.pepstock.charba.client.commons.NativeObject)
+			 * @see
+			 * org.pepstock.charba.client.configuration.Legend.ProxyLegendEventCallback#call(org.pepstock.charba.client.Chart,
+			 * org.pepstock.charba.client.events.ChartNativeEvent, org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Chart chart, ChartNativeEvent event, NativeObject item) {
@@ -158,14 +121,14 @@ public class Legend extends EventProvider<ExtendedOptions> {
 				getChart().fireEvent(new LegendClickEvent(event, new LegendItem(item)));
 			}
 		});
-		hoverCallbackProxy.setCallback(new ProxyLegendHoverCallback() {
+		hoverCallbackProxy.setCallback(new ProxyLegendEventCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Legend.ProxyLegendHoverCallback#call(org.pepstock.charba.
-			 * client.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
-			 * org.pepstock.charba.client.commons.NativeObject)
+			 * @see
+			 * org.pepstock.charba.client.configuration.Legend.ProxyLegendEventCallback#call(org.pepstock.charba.client.Chart,
+			 * org.pepstock.charba.client.events.ChartNativeEvent, org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Chart chart, ChartNativeEvent event, NativeObject item) {
@@ -173,10 +136,14 @@ public class Legend extends EventProvider<ExtendedOptions> {
 				getChart().fireEvent(new LegendHoverEvent(event, new LegendItem(item)));
 			}
 		});
-		leaveCallbackProxy.setCallback(new ProxyLegendLeaveCallback() {
+		leaveCallbackProxy.setCallback(new ProxyLegendEventCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.configuration.Legend.ProxyLegendLeaveCallback#call(org.pepstock.charba.client.Chart, org.pepstock.charba.client.events.ChartNativeEvent, org.pepstock.charba.client.commons.NativeObject)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.configuration.Legend.ProxyLegendEventCallback#call(org.pepstock.charba.client.Chart,
+			 * org.pepstock.charba.client.events.ChartNativeEvent, org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Chart chart, ChartNativeEvent event, NativeObject item) {
