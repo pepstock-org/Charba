@@ -358,4 +358,14 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 		throw new UnsupportedOperationException(UNABLE_COPY_ARRAY_MESSAGE);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.List#toArray()
+	 */
+	@Override
+	public Object[] toArray() {
+		return delegate.toArray();
+	}
+
 }

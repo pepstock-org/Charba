@@ -63,7 +63,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, Arr
 	 * 
 	 * @param clazz enumeration class with all values of an enumeration
 	 */
-	ArrayEnumList(Class<E> clazz) {
+	public ArrayEnumList(Class<E> clazz) {
 		this(clazz.getEnumConstants(), null);
 	}
 
@@ -317,6 +317,20 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, Arr
 			}
 		}
 		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.List#toArray()
+	 */
+	@Override
+	public Object[] toArray() {
+		Object[] toArray = new Object[array.length()];
+		for (int i = 0; i < array.length(); i++) {
+			toArray[i] = getByName(array.get(i));
+		}
+		return toArray;
 	}
 
 }

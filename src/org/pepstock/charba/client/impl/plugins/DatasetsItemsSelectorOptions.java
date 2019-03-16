@@ -36,6 +36,7 @@ import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelectorOptionsFacto
  * <li>the border color
  * <li>the border width
  * <li>the border dash
+ * <li>if firing event on clear selection
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
@@ -46,6 +47,8 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	private DatasetsItemsSelectorDefaultsOptions defaultsOptions;
 	// defaults global options factory
 	private final DatasetsItemsSelectorDefaultsOptionsFactory defaultsFactory = new DatasetsItemsSelectorDefaultsOptionsFactory();
+	// clear selection item
+	private final ClearSelection clearSelection;
 
 	/**
 	 * Name of properties of native object.
@@ -56,7 +59,9 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 		xAxisID,
 		borderColor,
 		borderDash,
-		borderWidth
+		borderWidth,
+		fireEventOnClearSelection,
+		clearSelection
 	}
 
 	/**
@@ -75,6 +80,10 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 			// then the plugin will use the static defaults
 			defaultsOptions = new DatasetsItemsSelectorDefaultsOptions();
 		}
+		// sets inner elements
+		clearSelection = new ClearSelection(defaultsOptions.getClearSelection());
+		// stores inner elements
+		setValue(Property.clearSelection, clearSelection);
 	}
 
 	/**
@@ -87,6 +96,17 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	DatasetsItemsSelectorOptions(NativeObject nativeObject, DatasetsItemsSelectorDefaultsOptions defaultsOptions) {
 		super(nativeObject);
 		this.defaultsOptions = defaultsOptions;
+		// sets inner elements
+		clearSelection = new ClearSelection(getValue(Property.clearSelection), defaultsOptions.getClearSelection());
+	}
+
+	/**
+	 * Returns the clear selection element.
+	 * 
+	 * @return the clear selection element
+	 */
+	public ClearSelection getClearSelection() {
+		return clearSelection;
 	}
 
 	/**
@@ -153,7 +173,7 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	 * @param borderDash the line dash pattern used when stroking lines
 	 */
 	public void setBorderDash(int... borderDash) {
-		setArrayValue(Property.borderDash, ArrayInteger.of(borderDash));
+		setArrayValue(Property.borderDash, ArrayInteger.fromOrNull(borderDash));
 	}
 
 	/**
@@ -173,10 +193,14 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	 * @return the line dash pattern used when stroking lines.
 	 */
 	ArrayInteger getBorderDashAsJavaScriptObject() {
+		// creates array instance
 		ArrayInteger array = null;
+		// checks if there is the property set
 		if (has(Property.borderDash)) {
+			// returns array
 			array = getArrayValue(Property.borderDash);
 		} else {
+			// returns default
 			array = defaultsOptions.getBorderDash();
 		}
 		return array;
@@ -233,7 +257,25 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	 * @param color the color.
 	 */
 	public void setBorderColor(IsColor color) {
-		setColor(color.toRGBA());
+		setBorderColor(color.toRGBA());
+	}
+
+	/**
+	 * Sets <code>true</code> if it will fire event after clear of selection, otherwise <code>false</code>.
+	 * 
+	 * @param fireEvent <code>true</code> if it will fire event after clear of selection, otherwise <code>false</code>
+	 */
+	public void setFireEventOnClearSelection(boolean fireEvent) {
+		setValue(Property.fireEventOnClearSelection, fireEvent);
+	}
+
+	/**
+	 * Returns <code>true</code> if it will fire event after clear of selection, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if it will fire event after clear of selection, otherwise <code>false</code>
+	 */
+	public boolean isFireEventOnClearSelection() {
+		return getValue(Property.fireEventOnClearSelection, defaultsOptions.isFireEventOnClearSelection());
 	}
 
 	/**

@@ -137,6 +137,8 @@ final class BaseMeterController extends AbstractController {
 		final String fontColor = options.getDisplayFontColor() == null ? MeterOptions.DEFAULT_DISPLAY_COLOR.toRGBA() : options.getDisplayFontColor().toRGBA();
 		// gets the label
 		final String label = dataset.getLabel();
+		// saves context
+		ctx.save();
 		// calculates the font size
 		int fontSize = calculateFontSize(ctx, sideOfSquare, maxValueToShow, style, fontFamily);
 		// sets color to canvas
@@ -167,6 +169,8 @@ final class BaseMeterController extends AbstractController {
 			// draws text
 			ctx.fillText(valueToShow, centerX, centerY);
 		}
+		// restores context
+		ctx.restore();
 	}
 
 	/**

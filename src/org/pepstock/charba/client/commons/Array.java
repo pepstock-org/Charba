@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.commons;
 
+import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -25,7 +26,7 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, name = NativeName.ARRAY, namespace = JsPackage.GLOBAL)
-public class Array {
+public abstract class Array {
 
 	/**
 	 * This method determines whether the passed value is an Array.
@@ -42,5 +43,16 @@ public class Array {
 	 */
 	@JsProperty(name = "length")
 	public final native int length();
+
+	/**
+	 * Returns <code>true</code> if this array contains no elements.
+	 * 
+	 * @return <code>true</code> if this array contains no elements
+	 */
+	@JsOverlay
+	public final boolean isEmpty() {
+		// checks the length
+		return length() == 0;
+	}
 
 }

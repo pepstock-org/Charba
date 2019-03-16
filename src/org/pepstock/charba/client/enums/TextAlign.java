@@ -25,15 +25,15 @@ import org.pepstock.charba.client.commons.Key;
 public enum TextAlign implements Key
 {
 	/**
-	 * the left property sets the left text alignment.
+	 * the property sets the left text alignment.
 	 */
 	left,
 	/**
-	 * the bottom property sets the left text alignment.
+	 * the property sets the center text alignment.
 	 */
 	center,
 	/**
-	 * the right property sets the left text alignment.
+	 * the property sets the right text alignment.
 	 */
 	right;
 }

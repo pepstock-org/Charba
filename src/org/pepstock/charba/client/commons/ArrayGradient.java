@@ -38,24 +38,87 @@ public final class ArrayGradient extends Array {
 	 * @param items canvasPattern items to create new array
 	 * @return new array instance of images.
 	 */
-	public static native ArrayGradient of(CanvasGradient... items);
+	private static native ArrayGradient of(CanvasGradient... items);
+
+	/**
+	 * To avoid any instantiation
+	 */
+	ArrayGradient() {
+	}
+
+	/**
+	 * This method creates new array instance with a variable number of <code>CanvasGradient</code> arguments.
+	 * 
+	 * @param items canvasPattern items to create new array
+	 * @return new array instance of images or <code>null</code> if argument is <code>null</code> or length to 0
+	 */
+	@JsOverlay
+	public static ArrayGradient fromOrNull(CanvasGradient... items) {
+		// checks if consistent
+		if (items == null || items.length == 0) {
+			// returns an empty array
+			return null;
+		}
+		// returns array
+		return ArrayGradient.of(items);
+	}
+
+	/**
+	 * This method creates new array instance with a variable number of <code>CanvasGradient</code> arguments.
+	 * 
+	 * @param items canvasPattern items to create new array
+	 * @return new array instance of images or an empty array if argument is <code>null</code> or length to 0
+	 */
+	@JsOverlay
+	public static ArrayGradient from(CanvasGradient... items) {
+		// checks if consistent
+		if (items == null || items.length == 0) {
+			// returns an empty array
+			return new ArrayGradient();
+		}
+		// returns array
+		return ArrayGradient.of(items);
+	}
 
 	/**
 	 * Creates a java script array of images starting from list of images.
 	 * 
-	 * @param values list of images to load into new java script array.
-	 * @return new array instance of images.
+	 * @param items list of images to load into new java script array.
+	 * @return new array instance of images or <code>null</code> if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static ArrayGradient of(List<CanvasGradient> values) {
+	public static ArrayGradient fromOrNull(List<CanvasGradient> items) {
+		// checks if list is null
+		if (items == null || items.isEmpty()) {
+			return null;
+		}
+		// creates the array
+		ArrayGradient result = new ArrayGradient();
+		// scans all items of list
+		for (CanvasGradient value : items) {
+			// adds elements
+			result.push(value);
+		}
+		// returns the array
+		return result;
+	}
+
+	/**
+	 * Creates a java script array of images starting from list of images.
+	 * 
+	 * @param items list of images to load into new java script array.
+	 * @return new array instance of images or an empty array if argument is <code>null</code> or empty
+	 */
+	@JsOverlay
+	public static ArrayGradient from(List<CanvasGradient> items) {
 		// creates the array
 		ArrayGradient result = new ArrayGradient();
 		// checks if list is null
-		if (values == null) {
+		if (items == null || items.isEmpty()) {
 			return result;
 		}
 		// scans all items of list
-		for (CanvasGradient value : values) {
+		for (CanvasGradient value : items) {
 			// adds elements
 			result.push(value);
 		}

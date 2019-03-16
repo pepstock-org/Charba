@@ -17,10 +17,10 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
-import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.options.Scales;
 
@@ -32,7 +32,7 @@ import org.pepstock.charba.client.options.Scales;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class BarDataset extends HovingFlexDataset {
+public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 
 	// data point factory
 	private final DataPointListFactory factory = new DataPointListFactory();
@@ -44,8 +44,7 @@ public class BarDataset extends HovingFlexDataset {
 	{
 		xAxisID,
 		yAxisID,
-		borderSkipped,
-		data
+		borderSkipped
 	}
 
 	/**
@@ -130,8 +129,11 @@ public class BarDataset extends HovingFlexDataset {
 	 * 
 	 * @param datapoints an array of data points
 	 */
+	@Override
 	public void setDataPoints(DataPoint... datapoints) {
-		setArrayValue(Property.data, ArrayObject.of(datapoints));
+		setArrayValue(Dataset.Property.data, ArrayObject.fromOrNull(datapoints));
+		// sets data type checking if the key exists
+		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.points : DataType.unknown);
 	}
 
 	/**
@@ -139,18 +141,32 @@ public class BarDataset extends HovingFlexDataset {
 	 * 
 	 * @param datapoints a list of data points
 	 */
+	@Override
 	public void setDataPoints(List<DataPoint> datapoints) {
-		setArrayValue(Property.data, ArrayObject.of(datapoints));
+		setArrayValue(Dataset.Property.data, ArrayObject.fromOrNull(datapoints));
+		// sets data type checking if the key exists
+		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.points : DataType.unknown);
 	}
 
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
 	 * 
-	 * @return a list of data points
+	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#points}.
 	 */
+	@Override
 	public List<DataPoint> getDataPoints() {
-		ArrayObject array = getArrayValue(Property.data);
-		return ArrayListHelper.list(array, factory);
+		return getDataPoints(false);
+	}
+
+	/**
+	 * Returns the data property of a dataset for a chart is specified as an array of data points
+	 * 
+	 * @param binding if <code>true</code> binds the new array list into container
+	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#points}.
+	 */
+	@Override
+	public List<DataPoint> getDataPoints(boolean binding) {
+		return getDataPoints(factory, binding);
 	}
 
 	/*

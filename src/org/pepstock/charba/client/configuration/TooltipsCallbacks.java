@@ -30,8 +30,8 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.TooltipItem;
-import org.pepstock.charba.client.items.TooltipLabelColor;
 import org.pepstock.charba.client.items.TooltipItem.TooltipItemFactory;
+import org.pepstock.charba.client.items.TooltipLabelColor;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 import jsinterop.annotations.JsFunction;
@@ -47,7 +47,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	// empty string
 	private static final String EMPTY = "";
 	// empty array string
-	private static final ArrayString EMPTY_ARRAY = new ArrayString();
+	private static final String[] EMPTY_ARRAY = new String[0];
 	// default label color
 	private static final TooltipLabelColor DEFAULT_LABEL_COLOR = new TooltipLabelColor();
 	// factory to create tooltip items
@@ -396,11 +396,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 					String[] result = titleCallback.onBeforeTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 					// checks if result is consistent
 					if (result != null && result.length > 0) {
-						return ArrayString.of(result);
+						return ArrayString.from(result);
 					}
 				}
 				// default result
-				return EMPTY_ARRAY;
+				return ArrayString.from(EMPTY_ARRAY);
 			}
 		});
 		titleCallbackProxy.setCallback(new ProxyTitleCallback() {
@@ -419,11 +419,12 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 					String[] result = titleCallback.onTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 					// checks if result is consistent
 					if (result != null && result.length > 0) {
-						return ArrayString.of(result);
+						return ArrayString.from(result);
 					}
 				}
 				// default result
-				return EMPTY_ARRAY;
+				// default result
+				return ArrayString.from(EMPTY_ARRAY);
 			}
 		});
 		afterTitleCallbackProxy.setCallback(new ProxyAfterTitleCallback() {
@@ -442,11 +443,12 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 					String[] result = titleCallback.onAfterTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 					// checks if result is consistent
 					if (result != null && result.length > 0) {
-						return ArrayString.of(result);
+						return ArrayString.from(result);
 					}
 				}
 				// default result
-				return EMPTY_ARRAY;
+				// default result
+				return ArrayString.from(EMPTY_ARRAY);
 			}
 		});
 		beforeBodyCallbackProxy.setCallback(new ProxyBeforeBodyCallback() {
@@ -465,11 +467,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 					String[] result = bodyCallback.onBeforeBody(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 					// checks if result is consistent
 					if (result != null && result.length > 0) {
-						return ArrayString.of(result);
+						return ArrayString.from(result);
 					}
 				}
 				// default result
-				return EMPTY_ARRAY;
+				return ArrayString.from(EMPTY_ARRAY);
 			}
 		});
 		afterBodyCallbackProxy.setCallback(new ProxyAfterBodyCallback() {
@@ -488,11 +490,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 					String[] result = bodyCallback.onAfterBody(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 					// checks if result is consistent
 					if (result != null && result.length > 0) {
-						return ArrayString.of(result);
+						return ArrayString.from(result);
 					}
 				}
 				// default result
-				return EMPTY_ARRAY;
+				return ArrayString.from(EMPTY_ARRAY);
 			}
 		});
 		beforeLabelCallbackProxy.setCallback(new ProxyBeforeLabelCallback() {
@@ -616,11 +618,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 					String[] result = footerCallback.onBeforeFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 					// checks if result is consistent
 					if (result != null && result.length > 0) {
-						return ArrayString.of(result);
+						return ArrayString.from(result);
 					}
 				}
 				// default result
-				return EMPTY_ARRAY;
+				return ArrayString.from(EMPTY_ARRAY);
 			}
 		});
 		footerCallbackProxy.setCallback(new ProxyFooterCallback() {
@@ -639,11 +641,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 					String[] result = footerCallback.onFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 					// checks if result is consistent
 					if (result != null && result.length > 0) {
-						return ArrayString.of(result);
+						return ArrayString.from(result);
 					}
 				}
 				// default result
-				return EMPTY_ARRAY;
+				return ArrayString.from(EMPTY_ARRAY);
 			}
 		});
 		afterFooterCallbackProxy.setCallback(new ProxyAfterFooterCallback() {
@@ -662,11 +664,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 					String[] result = footerCallback.onAfterFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 					// checks if result is consistent
 					if (result != null && result.length > 0) {
-						return ArrayString.of(result);
+						return ArrayString.from(result);
 					}
 				}
 				// default result
-				return EMPTY_ARRAY;
+				return ArrayString.from(EMPTY_ARRAY);
 			}
 		});
 	}

@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all events generated to interact with chart instance.
+ * Contains all events to interact with chart instance.
  * 
  * @author Andrea "Stock" Stocchero
  *

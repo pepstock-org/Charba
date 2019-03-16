@@ -23,6 +23,7 @@ import org.pepstock.charba.client.items.ScalesNode;
 import org.pepstock.charba.client.items.TitleNode;
 import org.pepstock.charba.client.items.TooltipNode;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.utils.JSON;
 
 /**
  * This is a wrapper of CHART.JS CHART instance in order to provide all properties of chart java script instance, set at
@@ -236,6 +237,15 @@ public final class ChartNode {
 	 */
 	public int getOffsetY() {
 		return initialized ? check(chart.getOffsetY(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
+	}
+
+	/**
+	 * Returns the string JSON representation of the object.
+	 * 
+	 * @return the string JSON representation of the object.
+	 */
+	public final String toJSON() {
+		return JSON.stringifyWithReplacer(chart, 3);
 	}
 
 	/**

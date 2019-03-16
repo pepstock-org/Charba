@@ -21,6 +21,9 @@ import java.util.Map;
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.events.ChartNativeEvent;
+import org.pepstock.charba.client.events.LegendClickEvent;
+import org.pepstock.charba.client.impl.callbacks.AtLeastOneDatasetHandler;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
@@ -28,6 +31,7 @@ import org.pepstock.charba.client.plugins.AbstractPlugin;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.Style.Cursor;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Image;
 
 /**
@@ -35,9 +39,11 @@ import com.google.gwt.user.client.ui.Image;
  * It works only for line and bar chart instances.<br>
  * It will add mouser listeners to canvas.<br>
  * Tooltips will be disable to avoid events conflicts.<br>
- * Overrides also the events which can be caught (only click and touchstart).
+ * Overrides also the events which can be caught (only click and touchstart).<br>
+ * It activates also the legend click handler to avoid that all datasets will be hidden.
  * 
  * @author Andrea "Stock" Stocchero
+ * @see AtLeastOneDatasetHandler
  */
 public final class DatasetsItemsSelector extends AbstractPlugin {
 
@@ -45,47 +51,94 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * Plugin ID {@value ID}
 	 */
 	public static final String ID = "datasetsitemsselector";
-	// maps to maintain the selectors handler for every chart
+	/**
+	 * The factory to read options for plugin
+	 */
+	public static final DatasetsItemsSelectorOptionsFactory FACTORY = new DatasetsItemsSelectorOptionsFactory();
+	// map to maintain the selectors handler for every chart
 	private static final Map<String, SelectionHandler> HANDLERS = new HashMap<>();
-	// factory to read options
-	private final DatasetsItemsSelectorOptionsFactory factory = new DatasetsItemsSelectorOptionsFactory();
+	// set to maintain the status if legend click handler, if already added or not
+	private static final Map<String, HandlerRegistration> LEGEND_HANDLERS_STATUS = new HashMap<>();
+	// click lgend handler to avoid to remove all datasets
+	private final AtLeastOneDatasetHandler legendClickHandler = new AtLeastOneDatasetHandler();
 
 	/**
-	 * Reset the selection on the chart. With this method, it don't fire any reset event.
+	 * Returns the padding height used by clear selection element if enabled.<br>
+	 * This is very helpful when you have added padding for your purposes and you need to know the amount of space that the
+	 * element allocated.
 	 * 
-	 * @param chart chart instance to reset the selection
+	 * @param chart chart instance
+	 * @return the padding height used by clear selection element or <code>0</code> if disabled
 	 */
-	public void reset(AbstractChart<?, ?> chart) {
-		reset(chart, false);
+	public double getPadding(AbstractChart<?, ?> chart) {
+		// checks if there is a handler
+		if (HANDLERS.containsKey(chart.getId())) {
+			// gets selection handler
+			SelectionHandler handler = HANDLERS.get(chart.getId());
+			// option instance
+			DatasetsItemsSelectorOptions pOptions = handler.getOptions();
+			// gets clear selection configuration
+			ClearSelection clearSelection = pOptions.getClearSelection();
+			// checks if is enabled
+			if (clearSelection.isDisplay()) {
+				// returns the used padding
+				return clearSelection.getLayoutPadding();
+			}
+		}
+		// by defaults, returns 0
+		return ClearSelection.DEFAULT_VALUE;
 	}
 
 	/**
-	 * Reset the selection on the chart and set if an event should fire on reset action.
+	 * Clears the selection on the chart. With this method, it don't fire any clear event if not selected into plugin options.
 	 * 
-	 * @param chart chart instance to reset the selection
+	 * @param chart chart instance to clear the selection
+	 * @see DatasetsItemsSelectorOptions#isFireEventOnClearSelection()
+	 * @see DatasetsItemsSelectorOptions#setFireEventOnClearSelection(boolean)
+	 */
+	public void clearSelection(AbstractChart<?, ?> chart) {
+		// flag with default to false
+		boolean fireEvent = false;
+		// checks for handler
+		if (HANDLERS.containsKey(chart.getId())) {
+			// gets selection handler
+			SelectionHandler handler = HANDLERS.get(chart.getId());
+			// checks into options if fire event has been set
+			fireEvent = handler.getOptions().isFireEventOnClearSelection();
+		}
+		// invoke reset using fire event of options or false by default
+		clearSelection(chart, fireEvent);
+	}
+
+	/**
+	 * Clears the selection on the chart and set if an event should fire on clear action.
+	 * 
+	 * @param chart chart instance to clear the selection
 	 * @param fireEvent if <code>true</code> an event is fired otherwise not.
 	 */
-	public void reset(AbstractChart<?, ?> chart, boolean fireEvent) {
+	public void clearSelection(AbstractChart<?, ?> chart, boolean fireEvent) {
 		// flag to know if the chart must be updated
-		boolean mustBeUpodated = false;
+		boolean mustBeUpdated = false;
 		// checks if we have already an handler
 		if (HANDLERS.containsKey(chart.getId())) {
 			// gets selection handler
 			SelectionHandler handler = HANDLERS.get(chart.getId());
+			// clear the selection
+			handler.removeClearSelection();
 			// checks if the selection was done
-			mustBeUpodated = !SelectionStatus.ready.equals(handler.getStatus());
+			mustBeUpdated = !SelectionStatus.ready.equals(handler.getStatus());
 		}
 		// destroy the current configuration
 		onDestroy(chart);
 		// recreates the selections handler
-		onAfterInit(chart);
+		onConfigure(chart);
 		// checks if it must fire the event
 		if (fireEvent) {
 			// fires the reset event
 			chart.fireEvent(new DatasetRangeSelectionEvent(Document.get().createChangeEvent()));
 		}
 		// updates the chart only if the selection was done
-		if (mustBeUpodated) {
+		if (mustBeUpdated) {
 			// refresh the chart
 			chart.update();
 		}
@@ -132,23 +185,20 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			chart.getOptions().getTooltips().setEnabled(false);
 			// overrides the events configuration setting only the following
 			chart.getOptions().setEvents(Event.click, Event.touchstart);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client. AbstractChart)
-	 */
-	@Override
-	public void onAfterInit(AbstractChart<?, ?> chart) {
-		// checks if the plugin has been invoked for LINE or BAR charts
-		if (chart.getType().equals(ChartType.line) || chart.getType().equals(ChartType.bar)) {
+			// checks if handler on legend to avoid to remove all datasets has been already added
+			// and if legend is display
+			if (!LEGEND_HANDLERS_STATUS.containsKey(chart.getId()) && chart.getOptions().getLegend().isDisplay()) {
+				// if not, adds handler
+				HandlerRegistration registratrion = chart.addHandler(legendClickHandler, LegendClickEvent.TYPE);
+				// stores flag into map
+				LEGEND_HANDLERS_STATUS.put(chart.getId(), registratrion);
+			}
+			// option instance
 			DatasetsItemsSelectorOptions pOptions = null;
 			// creates the plugin options using the java script object
 			// passing also the default color set at constructor.
 			if (chart.getOptions().getPlugins().hasOptions(ID)) {
-				pOptions = chart.getOptions().getPlugins().getOptions(ID, factory);
+				pOptions = chart.getOptions().getPlugins().getOptions(ID, FACTORY);
 			} else {
 				pOptions = new DatasetsItemsSelectorOptions();
 			}
@@ -184,6 +234,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			chart.getCanvas().getElement().getStyle().setCursor(Cursor.WAIT);
 			// gets selection handler
 			SelectionHandler handler = HANDLERS.get(chart.getId());
+			// calculates the coordinates of clear selection element
+			handler.calculateClearSelectionPositions();
 			// checks if the draw if at the end of animation
 			// and if the selection is not already started
 			if (easing == 1D) {
@@ -216,27 +268,33 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 									itemsCount++;
 								}
 							}
-							// stores the amount of items
-							handler.setDatasetsItemsCount(itemsCount);
 						}
 					}
 				}
-
-				// checks if chart is changed
-				if (handler.isChartChanged()) {
+				// stores the amount of items
+				handler.setDatasetsItemsCount(itemsCount);
+				// checks if there is the amount of datasets for selection
+				if (handler.hasMinimumDatasetsItems()) {
 					// gets the image from canvas
-					// this is necessary to apply every time the handler
-					// will draw directly into canvas
-					Image img = new Image(chart.getCanvas().toDataUrl());
-					// fix dimension
-					img.setPixelSize(chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
-					// stores image
-					handler.setSnapshot(ImageElement.as(img.getElement()));
-				}
-				// if the selections is already present
-				// it refreshes all the calculation of existing selection
-				if (handler.getStatus().equals(SelectionStatus.selected) && itemsCount > 0) {
-					handler.refresh();
+					String dataUrl = chart.getCanvas().toDataUrl();
+					// checks if chart is changed
+					if (handler.isChartChanged(dataUrl)) {
+						// this is necessary to apply every time the handler
+						// will draw directly into canvas
+						Image img = new Image(dataUrl);
+						// fix dimension
+						img.setPixelSize(chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
+						// stores image
+						handler.setSnapshot(ImageElement.as(img.getElement()));
+					}
+					// if the selections is already present
+					// it refreshes all the calculation of existing selection
+					if (handler.getStatus().equals(SelectionStatus.selected)) {
+						handler.refresh();
+					}
+				} else {
+					// clears selection
+					clearSelection(chart);
 				}
 				// the drawing of chart is completed and set the default cursor
 				// removing the "wait" one.
@@ -271,8 +329,62 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 				if (handler.getMouseMove() != null) {
 					handler.getMouseMove().removeHandler();
 				}
+				// removes handler from map
 				HANDLERS.remove(chart.getId());
+			}
+			// checks if we have already an legend handler
+			if (LEGEND_HANDLERS_STATUS.containsKey(chart.getId())) {
+				// cleans the legend click handler status
+				HandlerRegistration registration = LEGEND_HANDLERS_STATUS.remove(chart.getId());
+				// removes registration
+				registration.removeHandler();
 			}
 		}
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeEvent(org.pepstock.charba.client.AbstractChart,
+	 * org.pepstock.charba.client.events.ChartNativeEvent)
+	 */
+	@Override
+	public boolean onBeforeEvent(AbstractChart<?, ?> chart, ChartNativeEvent event) {
+		// gets selection handler
+		SelectionHandler handler = HANDLERS.get(chart.getId());
+		// checks if it is a click event
+		// ONLY click are caught
+		if (Event.click.name().equalsIgnoreCase(event.getType())) {
+			// option instance
+			DatasetsItemsSelectorOptions pOptions = handler.getOptions();
+			// get clear selection element
+			ClearSelection clearSelection = pOptions.getClearSelection();
+			// checks if is enabled
+			if (clearSelection.isDisplay()) {
+				// calculates if the events cooradintes are hover of clear selection element
+				boolean isX = event.getLayerX() >= clearSelection.getX() && event.getLayerX() <= (clearSelection.getX() + clearSelection.getWidth());
+				boolean isY = event.getLayerY() >= clearSelection.getY() && event.getLayerY() <= (clearSelection.getY() + clearSelection.getHeight());
+				// checks if hover
+				if (isX && isY) {
+					// invokes the clear selection
+					clearSelection(chart);
+					// and forces the event will be discarded.
+					return false;
+				}
+			}
+		}
+		// This control has been added because a click event is always fired
+		// by canvas when mouse up (of selection handler) is perfromed
+		// but to avoid to refresh the chart every time
+		// selection handler sets a flag to check this condition
+		if (handler.isPreventClickEvent()) {
+			// resets flag
+			handler.resetPreventClickEvent();
+			// and forces the event will be discarded.
+			return false;
+		}
+		// if here, propagates the event to other listeners
+		return true;
+	}
+
 }

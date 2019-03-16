@@ -284,4 +284,18 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 		}
 		return -1;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.List#toArray()
+	 */
+	@Override
+	public Object[] toArray() {
+		Double[] toArray = new Double[array.length()];
+		for (int i = 0; i < array.length(); i++) {
+			toArray[i] = array.get(i);
+		}
+		return toArray;
+	}
 }

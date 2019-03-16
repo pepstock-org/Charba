@@ -30,12 +30,15 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.enums.AbsoluteDatasetIndexFill;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Fill;
+import org.pepstock.charba.client.enums.FillingMode;
+import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.enums.RelativeDatasetIndexFill;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
@@ -81,6 +84,8 @@ abstract class LiningDataset extends Dataset {
 		pointRotation,
 		// internal key to store if point style is an image or not
 		_charbaPointStyle,
+		// internal property key to map the type of FILL property
+		_charbaFillingMode
 	}
 
 	/**
@@ -127,7 +132,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setBackgroundColor(Pattern backgroundColor) {
 		// sets value to patterns
-		getPatternsContainer().setObjects(Property.backgroundColor, ArrayObject.of(backgroundColor));
+		getPatternsContainer().setObjects(Property.backgroundColor, ArrayObject.fromOrNull(backgroundColor));
 		// removes the property
 		resetBeingPatterns(Property.backgroundColor);
 	}
@@ -139,7 +144,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setBackgroundColor(Gradient backgroundColor) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.backgroundColor, ArrayObject.of(backgroundColor));
+		getGradientsContainer().setObjects(Property.backgroundColor, ArrayObject.fromOrNull(backgroundColor));
 		// removes the property
 		resetBeingGradients(Property.backgroundColor);
 	}
@@ -236,7 +241,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setBorderColor(Gradient borderColor) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.borderColor, ArrayObject.of(borderColor));
+		getGradientsContainer().setObjects(Property.borderColor, ArrayObject.fromOrNull(borderColor));
 		// removes the property
 		resetBeingGradients(Property.borderColor);
 	}
@@ -313,7 +318,7 @@ abstract class LiningDataset extends Dataset {
 	 *            lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
-		setArrayValue(Property.borderDash, ArrayInteger.of(borderDash));
+		setArrayValue(Property.borderDash, ArrayInteger.fromOrNull(borderDash));
 	}
 
 	/**
@@ -393,16 +398,59 @@ abstract class LiningDataset extends Dataset {
 	/**
 	 * Sets how to fill the area under the line.
 	 * 
+	 * @param fill <code>true</code> to fill, otherwise <code>false</code>.
+	 */
+	public void setFill(boolean fill) {
+		setValue(Property.fill, fill);
+		// stores the filling mode
+		setValue(Property._charbaFillingMode, FillingMode.predefinedBoolean);
+	}
+
+	/**
+	 * Sets how to fill the area under the line, by absolute dataset index.
+	 * 
+	 * @param index absolute dataset index of the chart.
+	 */
+	public void setFill(int index) {
+		setFill(Fill.getFill(index));
+	}
+
+	/**
+	 * Sets how to fill the area under the line, by relative dataset index.
+	 * 
+	 * @param index relative dataset index of the chart.
+	 */
+	public void setFill(String index) {
+		setFill(Fill.getFill(index));
+	}
+
+	/**
+	 * Sets how to fill the area under the line.
+	 * 
 	 * @param fill how to fill the area under the line.
 	 */
-	public void setFill(Fill fill) {
+	public void setFill(IsFill fill) {
 		// checks if is no fill
 		if (Fill.nofill.equals(fill)) {
 			// sets the boolean value instead of string one
 			setValue(Property.fill, false);
-		} else {
+			// stores the filling mode
+			setValue(Property._charbaFillingMode, FillingMode.predefinedBoolean);
+		} else if (Fill.isPredefined(fill)) {
 			// sets value
 			setValue(Property.fill, fill);
+			// stores the filling mode
+			setValue(Property._charbaFillingMode, fill.getMode());
+		} else if (FillingMode.absoluteDatasetIndex.equals(fill.getMode())) {
+			// sets value
+			setValue(Property.fill, fill.getValueAsInt());
+			// stores the filling mode
+			setValue(Property._charbaFillingMode, FillingMode.absoluteDatasetIndex);
+		} else if (FillingMode.relativeDatasetIndex.equals(fill.getMode())) {
+			// sets value
+			setValue(Property.fill, fill.getValue());
+			// stores the filling mode
+			setValue(Property._charbaFillingMode, FillingMode.relativeDatasetIndex);
 		}
 	}
 
@@ -411,16 +459,33 @@ abstract class LiningDataset extends Dataset {
 	 * 
 	 * @return how to fill the area under the line.
 	 */
-	public Fill getFill() {
-		// gets value type
-		ObjectType type = type(Property.fill);
-		// if is a boolean FALSE value
-		if (ObjectType.Boolean.equals(type)) {
-			// returns no fill
-			return getValue(Property.fill, false) ? Fill.origin : Fill.nofill;
+	public IsFill getFill() {
+		// checks if there is the property
+		if (has(Property._charbaFillingMode)) {
+			// gets the filling mode
+			FillingMode mode = getValue(Property._charbaFillingMode, FillingMode.class, FillingMode.predefined);
+			// checks all possible types of filling mode
+			// to return the right value
+			if (FillingMode.predefinedBoolean.equals(mode)) {
+				// returns no fill
+				return getValue(Property.fill, false) ? Fill.origin : Fill.nofill;
+			} else if (FillingMode.predefined.equals(mode)) {
+				// gets the fill value, using null as default
+				IsFill fill = getValue(Property.fill, Fill.class, null);
+				// if null, returns the default one
+				return fill == null ? getDefaultValues().getElements().getLine().getFill() : fill;
+			} else if (FillingMode.absoluteDatasetIndex.equals(mode)) {
+				// the default here is 0 because the property must be set
+				// setting 0, an exception will be thrown
+				return Fill.getFill(getValue(Property.fill, AbsoluteDatasetIndexFill.DEFAULT_VALUE_AS_INT));
+			} else if (FillingMode.relativeDatasetIndex.equals(mode)) {
+				// the default here is 0 because the property must be set
+				// setting 0, an exception will be thrown
+				return Fill.getFill(getValue(Property.fill, RelativeDatasetIndexFill.DEFAULT_VALUE));
+			}
 		}
-		// returns the fill object because was not stored as boolean
-		return getValue(Property.fill, Fill.class, getDefaultValues().getElements().getLine().getFill());
+		// returns the default
+		return getDefaultValues().getElements().getLine().getFill();
 	}
 
 	/**
@@ -472,7 +537,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBackgroundColor(Gradient... pointBackgroundColor) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.pointBackgroundColor, ArrayObject.of(pointBackgroundColor));
+		getGradientsContainer().setObjects(Property.pointBackgroundColor, ArrayObject.fromOrNull(pointBackgroundColor));
 		// removes the property
 		resetBeingGradients(Property.pointBackgroundColor);
 	}
@@ -494,7 +559,7 @@ abstract class LiningDataset extends Dataset {
 			// if here, the property is not a string
 			// or the property is missing or a gradient
 			// returns default value
-			return ArrayListHelper.list(ArrayString.of(getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
+			return ArrayListHelper.list(ArrayString.from(getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
 		}
 	}
 
@@ -553,7 +618,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBorderColor(Gradient... pointBorderColor) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.pointBorderColor, ArrayObject.of(pointBorderColor));
+		getGradientsContainer().setObjects(Property.pointBorderColor, ArrayObject.fromOrNull(pointBorderColor));
 		// removes the property
 		resetBeingGradients(Property.pointBorderColor);
 	}
@@ -574,7 +639,7 @@ abstract class LiningDataset extends Dataset {
 			// if here, the property is not a string
 			// or the property is missing or a pattern
 			// returns default value
-			return ArrayListHelper.list(ArrayString.of(getDefaultValues().getElements().getLine().getBorderColorAsString()));
+			return ArrayListHelper.list(ArrayString.from(getDefaultValues().getElements().getLine().getBorderColorAsString()));
 		}
 	}
 
@@ -672,7 +737,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBackgroundColor(Gradient... pointHoverBackgroundColor) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.pointHoverBackgroundColor, ArrayObject.of(pointHoverBackgroundColor));
+		getGradientsContainer().setObjects(Property.pointHoverBackgroundColor, ArrayObject.fromOrNull(pointHoverBackgroundColor));
 		// removes the property
 		resetBeingGradients(Property.pointHoverBackgroundColor);
 	}
@@ -693,7 +758,7 @@ abstract class LiningDataset extends Dataset {
 			// if here, the property is not a string
 			// or the property is missing or a pattern
 			// returns default value
-			return ArrayListHelper.list(ArrayString.of(getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
+			return ArrayListHelper.list(ArrayString.from(getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
 		}
 	}
 
@@ -711,8 +776,7 @@ abstract class LiningDataset extends Dataset {
 	/**
 	 * Returns the point background color when hovered. If property is missing or not a gradient, returns an empty list.
 	 * 
-	 * @return list of the point background color when hovered. If property is missing or not a gradient, returns
-	 *         an empty list.
+	 * @return list of the point background color when hovered. If property is missing or not a gradient, returns an empty list.
 	 */
 	public List<Gradient> getPointHoverBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
@@ -755,7 +819,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBorderColor(Gradient... pointHoverBorderColor) {
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.pointHoverBorderColor, ArrayObject.of(pointHoverBorderColor));
+		getGradientsContainer().setObjects(Property.pointHoverBorderColor, ArrayObject.fromOrNull(pointHoverBorderColor));
 		// removes the property
 		resetBeingGradients(Property.pointHoverBorderColor);
 	}
@@ -775,7 +839,7 @@ abstract class LiningDataset extends Dataset {
 			// if here, the property is not a string
 			// or the property is missing or a pattern
 			// returns default value
-			return ArrayListHelper.list(ArrayString.of(getDefaultValues().getElements().getPoint().getBorderColorAsString()));
+			return ArrayListHelper.list(ArrayString.from(getDefaultValues().getElements().getPoint().getBorderColorAsString()));
 		}
 	}
 
@@ -792,8 +856,7 @@ abstract class LiningDataset extends Dataset {
 	/**
 	 * Returns the point border gradient when hovered. If property is missing or not a gradient, returns an empty list.
 	 * 
-	 * @return list of the point border gradient when hovered. If property is missing or not a gradient, returns
-	 *         an empty list.
+	 * @return list of the point border gradient when hovered. If property is missing or not a gradient, returns an empty list.
 	 */
 	public List<Gradient> getPointHoverBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
@@ -909,6 +972,33 @@ abstract class LiningDataset extends Dataset {
 				Image img = new Image(pointStyle[i]);
 				// stores into array changing in image element
 				array[i] = ImageElement.as(img.getElement());
+			}
+			// stores it
+			setPointStyle(array);
+		} else {
+			// if here, argument is null
+			// then removes property
+			remove(Property.pointStyle);
+			// remove flag
+			removeIfExists(Property._charbaPointStyle);
+		}
+	}
+
+	/**
+	 * Sets the style of the point as image.
+	 * 
+	 * @param pointStyle array of the style of the point as image.
+	 */
+	public void setPointStyle(Image... pointStyle) {
+		// checks if argument is consistent
+		if (pointStyle != null) {
+			// creates a temporary array
+			ImageElement[] array = new ImageElement[pointStyle.length];
+			// scans passed array of images
+			for (int i = 0; i < pointStyle.length; i++) {
+				// transform a image resource into image element by image object
+				// stores into array changing in image element
+				array[i] = ImageElement.as(pointStyle[i].getElement());
 			}
 			// stores it
 			setPointStyle(array);

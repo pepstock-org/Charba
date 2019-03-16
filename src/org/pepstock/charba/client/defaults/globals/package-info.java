@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains the default values of chart options for all chart types and used in the global options.
+ * Contains the default values of chart options for all chart types (CHART.JS options defaults).
  * 
  * @author Andrea "Stock" Stocchero
  *

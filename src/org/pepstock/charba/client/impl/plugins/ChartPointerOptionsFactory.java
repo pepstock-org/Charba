@@ -29,6 +29,13 @@ public final class ChartPointerOptionsFactory implements NativeObjectContainerFa
 	// factory instance to read the options from default global
 	private final ChartPointerDefaultsOptionsFactory defaultsFactory = new ChartPointerDefaultsOptionsFactory();
 
+	/**
+	 * To avoid any instantiation. Use the static reference into {@link ChartPointer#FACTORY}.
+	 */
+	ChartPointerOptionsFactory() {
+		// do nothing
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

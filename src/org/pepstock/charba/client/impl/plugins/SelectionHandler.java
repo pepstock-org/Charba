@@ -22,9 +22,16 @@ import org.pepstock.charba.client.ChartNode;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.FontStyle;
+import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.impl.plugins.enums.Align;
+import org.pepstock.charba.client.impl.plugins.enums.Render;
 import org.pepstock.charba.client.items.ChartAreaNode;
 import org.pepstock.charba.client.items.ScaleItem;
 
+import com.google.gwt.canvas.dom.client.Context2d;
+import com.google.gwt.canvas.dom.client.Context2d.TextBaseline;
+import com.google.gwt.canvas.dom.client.TextMetrics;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.NativeEvent;
@@ -42,10 +49,12 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * Manages the selection on canvas, drawing selection area and implementing mouse listeners for canvas.
  * 
  * @author Andrea "Stock" Stocchero
- * @since 1.8
+ * 
  */
 final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHandler {
 
+	// string format of font style
+	private static final String FONT_TEMPLATE = "{0} {1}px {2}";
 	// chart instance
 	private final AbstractChart<?, ?> chart;
 	// plugin options
@@ -70,10 +79,15 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	private HandlerRegistration mouseMove = null;
 	// previous chart area
 	private String previousChartAreaAsString = null;
-	// previous datasets
-	private List<String> previousDatasetsAsString = null;
+	// previous data URL chart as png
+	private String previousDataURL = null;
 	// flag if do not send any event after refresh
 	private boolean skipNextFireEvent = false;
+	// cursor before hover the clear selection
+	private Cursor cursorOverClearSelection = null;
+	// this is a flag to prevent click event after drawing
+	// of selection area
+	private boolean preventClickEvent = false;
 
 	/**
 	 * Creates the selection handler with chart instance and the options (if exist) into chart options.
@@ -82,8 +96,52 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 * @param options plugin options
 	 */
 	SelectionHandler(AbstractChart<?, ?> chart, DatasetsItemsSelectorOptions options) {
+		// stores items
 		this.chart = chart;
 		this.options = options;
+		// gets selection item
+		ClearSelection clearSelection = options.getClearSelection();
+		// checks if display is required
+		if (clearSelection.isDisplay()) {
+			// calculates the height of element
+			calculateClearSelectionHeight();
+			// calculates the width of element
+			calculateClearSelectionWidth();
+			int additionalPadding = clearSelection.getMargin();
+			additionalPadding += clearSelection.getHeight();
+			additionalPadding += clearSelection.getMargin();
+			clearSelection.setLayoutPadding(additionalPadding);
+			// based on the position, it must define space to show the label
+			// to clear the selection, leveraging on padding of chart layout
+			if (clearSelection.getPosition().equals(Position.top)) {
+				// if the clear selection must be set on TOP
+				// gets the padding set by chart configuration
+				int padding = chart.getOptions().getLayout().getPadding().getTop();
+				// adds on required padding, the space needed to show the clear selection
+				// based on FONT SIZE, plus margins from border
+				padding = padding + additionalPadding;
+				// sets new padding top
+				chart.getOptions().getLayout().getPadding().setTop(padding);
+			} else {
+				// if the clear selection must be set on BOTTOM (other values of position are ignored)
+				// gets the padding set by chart configuration
+				int padding = chart.getOptions().getLayout().getPadding().getBottom();
+				// adds on required padding, the space needed to show the clear selection
+				// based on FONT SIZE, plus margins from border
+				padding = padding + additionalPadding;
+				// sets new padding bottom
+				chart.getOptions().getLayout().getPadding().setBottom(padding);
+			}
+		}
+	}
+
+	/**
+	 * Returns the options of datasets items selector plugin.
+	 * 
+	 * @return the options the options of datasets items selector plugin
+	 */
+	DatasetsItemsSelectorOptions getOptions() {
+		return options;
 	}
 
 	/*
@@ -98,7 +156,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		event.preventDefault();
 		// if the mouse down event points
 		// are in chart area and has got datasets items
-		if (datasetsItemsCount > 0 && isEventInChartArea(event)) {
+		if (hasMinimumDatasetsItems() && isEventInChartArea(event)) {
+			// sets cursor
 			chart.getCanvas().getElement().getStyle().setCursor(Cursor.CROSSHAIR);
 			// then start selection with X coordinate
 			startSelection(event.getX());
@@ -126,7 +185,35 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 				return;
 			}
 			// updates the selection into canvas
-			updateSelection(event.getX());
+			updateSelection(event.getX(), false);
+		} else if (isEventInClearSelection(event) && getStatus().equals(SelectionStatus.selected)) {
+			// if here
+			// the mouse is hovering the clear selection
+			// checks if was already hover
+			// using the cursor previously saved
+			if (cursorOverClearSelection == null) {
+				// scans all cursor to check if any cursor is already set
+				// needs to scan them because with valueOf there is an exception
+				// if the value does not match any element of enumeration
+				for (Cursor cursor : Cursor.values()) {
+					if (cursor.name().equalsIgnoreCase(chart.getElement().getStyle().getCursor())) {
+						// stores the current cursor
+						cursorOverClearSelection = Cursor.valueOf(chart.getElement().getStyle().getCursor());
+					}
+				}
+				// if here, no cursor was set
+				// then uses the default
+				if (cursorOverClearSelection == null) {
+					cursorOverClearSelection = Cursor.DEFAULT;
+				}
+			}
+			// sets cursor pointer because hover the clear selection
+			chart.getCanvas().getElement().getStyle().setCursor(Cursor.POINTER);
+		} else if (cursorOverClearSelection != null) {
+			// if here, the mouse is not selecting and not hover the clear selection
+			// but before it was on clear selection therefore reset the cursor and the instance
+			chart.getCanvas().getElement().getStyle().setCursor(cursorOverClearSelection);
+			cursorOverClearSelection = null;
 		}
 	}
 
@@ -144,10 +231,31 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// therefore will apply the logic of end selection
 		// only if current status is selecting and selected
 		if (getStatus().equals(SelectionStatus.selecting)) {
+			// sets this flag to prevent to propagate a click event
+			// that canvas is generating after mouse up
+			preventClickEvent = true;
 			// sets the cursor
 			chart.getCanvas().getElement().getStyle().setCursor(Cursor.DEFAULT);
 			endSelection(event.getNativeEvent());
 		}
+	}
+
+	/**
+	 * Returns a flag to prevent click event after drawing of selection area.
+	 * 
+	 * @return <code>true</code> if click event must be ignored
+	 */
+	boolean isPreventClickEvent() {
+		return preventClickEvent;
+	}
+
+	/**
+	 * Reset a flag to prevent click event after drawing of selection area.
+	 * 
+	 * @param preventClickEvent the preventClickEvent to set
+	 */
+	void resetPreventClickEvent() {
+		preventClickEvent = false;
 	}
 
 	/**
@@ -266,6 +374,25 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	}
 
 	/**
+	 * Returns the minimum amount of datasets, selectable based on chart type.
+	 * 
+	 * @param chart chart instance
+	 * @return the minimum amount of datasets
+	 */
+	boolean hasMinimumDatasetsItems() {
+		// gets chart AREA
+		ChartNode node = chart.getNode();
+		// gets the scale element of chart
+		// using the X axis id of plugin options
+		ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID());
+		// if chart is line or axis time is equals to 2
+		// else if bar chart is equals to 1
+		int minimDatasetsItemsCount = chart.getType().equals(ChartType.line) ? 2 : AxisType.time.equals(scaleItem.getType()) ? 2 : 1;
+		// returns checking the value with amount of datasets items
+		return getDatasetsItemsCount() >= minimDatasetsItemsCount;
+	}
+
+	/**
 	 * Start selection on canvas by the starting X coordinate.<br>
 	 * Can be invokes by mouse down or refresh of chart (like resizing).
 	 * 
@@ -290,15 +417,27 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 * Can be invokes by mouse move or refresh of chart (like resizing).
 	 * 
 	 * @param x new X coordinate.
+	 * @param refresh if <code>true</code> the chart is refreshing therefore it doesn't clear the canvas
 	 */
-	void updateSelection(int x) {
+	void updateSelection(int x, boolean refresh) {
+		// gets context
+		Context2d ctx = chart.getCanvas().getContext2d();
+		// save context
+		ctx.save();
 		// the snapshot is the image of chart (without any selection).
 		// Every time the selection is updating, it removes the previous
 		// selection putting the original chart (image snapshot) and then
 		// draws new selection
 		if (snapshot != null) {
+			// checks if is doing a refresh
+			// in case of refresh, it doesn't clear the canvas
+			if (!refresh) {
+				// clears the canvas because the chart could have a transparent background color therefore
+				// before to apply the image/snapshot, must clear the canvas (related to issue #26)
+				ctx.clearRect(0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
+			}
 			// draws a scaled image setting width and height
-			chart.getCanvas().getContext2d().drawImage(snapshot, 0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
+			ctx.drawImage(snapshot, 0, 0, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight());
 		}
 		// gets chart AREA
 		ChartNode node = chart.getNode();
@@ -352,20 +491,31 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			scaleTickX = scaleTickX + scaleTickLength;
 		}
 		// sets the selecting color into canvas
-		chart.getCanvas().getContext2d().setFillStyle(options.getColorAsString());
+		ctx.setFillStyle(options.getColorAsString());
 		// draws the rectangle of area selection
-		chart.getCanvas().getContext2d().fillRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
+		ctx.fillRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
 		// borders
 		if (options.getBorderWidth() > 0) {
-			chart.getCanvas().getContext2d().setLineWidth(options.getBorderWidth());
+			ctx.setLineWidth(options.getBorderWidth());
 			List<Integer> borderDash = options.getBorderDash();
 			// sets the selecting color into canvas
-			chart.getCanvas().getContext2d().setStrokeStyle(options.getBorderColorAsString());
+			ctx.setStrokeStyle(options.getBorderColorAsString());
 			if (!borderDash.isEmpty()) {
-				JsHelper.get().setLineDash(chart.getCanvas().getContext2d(), options.getBorderDashAsJavaScriptObject());
+				JsHelper.get().setLineDash(ctx, options.getBorderDashAsJavaScriptObject());
 			}
-			chart.getCanvas().getContext2d().strokeRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
+			ctx.strokeRect(area.getLeft(), area.getTop(), area.getRight() - area.getLeft(), area.getBottom() - area.getTop());
 		}
+		// option instance
+		DatasetsItemsSelectorOptions pOptions = getOptions();
+		// gets clear selection configuration
+		ClearSelection clearSelection = pOptions.getClearSelection();
+		// checks if clear selection must be draw
+		if (clearSelection.isDisplay()) {
+			// draws clear selection
+			drawClearSelection();
+		}
+		// restore context
+		ctx.restore();
 	}
 
 	/**
@@ -437,7 +587,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			if (items.getEnd() == i) {
 				double middle = scaleTickX + scaleTickLength / 2;
 				// this is new end selection point
-				updateSelection((int) middle);
+				updateSelection((int) middle, true);
 			}
 			// increments the starting point of section
 			scaleTickX = scaleTickX + scaleTickLength;
@@ -453,54 +603,442 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 * It checks:<br>
 	 * <ul>
 	 * <li>the dimension of chart
-	 * <li>the number of datasets
-	 * <li>the data of each dataset
+	 * <li>data image of chart
 	 * </ul>
 	 * 
-	 * @param chart chart instance
+	 * @param dataUrl data image for chart
 	 * @return <code>true</code> if chart is changed, otherwise <code>false</code>.
 	 */
-	boolean isChartChanged() {
+	boolean isChartChanged(String dataUrl) {
 		// gets the chart area in json format
 		String chartAreaAsString = chart.getNode().getChartArea().toString();
-		// gets the list of datasets data as list of JSON string
-		List<String> datasetsAsString = chart.getData().getDatasetsAsString();
-		// if the fields are null, this is the first call and draw of chart
-		// because chart is changed
-		if (previousDatasetsAsString == null && previousChartAreaAsString == null) {
-			// saves the current datasets and dimensions of chart
-			previousDatasetsAsString = datasetsAsString;
+		// checks if previous values are null (first round)
+		if (previousDataURL == null && previousChartAreaAsString == null) {
+			// saves the current data image and dimensions of chart
+			previousDataURL = dataUrl;
 			previousChartAreaAsString = chartAreaAsString;
 			return true;
 		}
 		// checks if dimension of chart is changed
 		if (!chartAreaAsString.equalsIgnoreCase(previousChartAreaAsString)) {
-			// saves the current datasets and dimensions of chart
-			previousDatasetsAsString = datasetsAsString;
+			// saves the current data image and dimensions of chart
+			previousDataURL = dataUrl;
 			previousChartAreaAsString = chartAreaAsString;
 			return true;
 		}
-		// checks if the amount of datasets remained the same
-		if (previousDatasetsAsString.size() != datasetsAsString.size()) {
-			// saves the current datasets and dimensions of chart
-			previousDatasetsAsString = datasetsAsString;
+		// checks if data image of chart is changed
+		if (!dataUrl.equalsIgnoreCase(previousDataURL)) {
+			// saves the current data image and dimensions of chart
+			previousDataURL = dataUrl;
 			previousChartAreaAsString = chartAreaAsString;
 			return true;
-		}
-		// checks if all data of all datasets remained the same
-		for (int i = 0; i < previousDatasetsAsString.size(); i++) {
-			// gets the datasets data as string
-			String datasetAsString = previousDatasetsAsString.get(i);
-			// checks if changed
-			if (!datasetAsString.equalsIgnoreCase(datasetsAsString.get(i))) {
-				// saves the current datasets and dimensions of chart
-				previousDatasetsAsString = datasetsAsString;
-				previousChartAreaAsString = chartAreaAsString;
-				return true;
-			}
 		}
 		// if here the chart is NOT changed
 		return false;
+	}
+
+	// -----------------------------------------
+	// CLEAR SELECTION methods
+	// -----------------------------------------
+
+	/**
+	 * Calculates the height of clear selection element and sets all values for label and image as well.<br>
+	 * Height is composed by:<br>
+	 * <ul>
+	 * <li>border width
+	 * <li>padding
+	 * <li>image height or font size
+	 * <li>padding
+	 * <li>border width
+	 * </ul>
+	 */
+	private void calculateClearSelectionHeight() {
+		// option instance
+		DatasetsItemsSelectorOptions pOptions = getOptions();
+		// gets clear selection configuration
+		ClearSelection clearSelection = pOptions.getClearSelection();
+		// creates an instance to stores the height
+		// adding the border width top
+		// and adding 1 to border width
+		double height = clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+		// adds padding top
+		height += clearSelection.getPadding();
+		// checking what must be rendered
+		if (Render.image.equals(clearSelection.getRender())) {
+			// if here is ONLY image
+			// gets image height
+			double imgHeight = clearSelection.getImage().getHeight();
+			// adds to total height
+			height += imgHeight;
+			// stores image height
+			clearSelection.setImageHeight(imgHeight);
+			// stores 0 for label height
+			clearSelection.setLabelHeight(ClearSelection.DEFAULT_VALUE);
+		} else {
+			// if here there is a label
+			// therefore the height is based on font size
+			double fontSize = clearSelection.getFontSize();
+			// adds font size to height
+			height += fontSize;
+			// sets the height to image or
+			// 0 if there is ONLY a label to show
+			clearSelection.setImageHeight(Render.label.equals(clearSelection.getRender()) ? ClearSelection.DEFAULT_VALUE : fontSize);
+			// stores label height
+			clearSelection.setLabelHeight(fontSize);
+		}
+		// adds padding bottom
+		height += clearSelection.getPadding();
+		// adds border width bottom
+		// and adding 1 to border width
+		height += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+		// stores height
+		clearSelection.setHeight(height);
+	}
+
+	/**
+	 * Calculates the width of clear selection element and sets all values for label and image as well.<br>
+	 * Width is composed by:<br>
+	 * <ul>
+	 * <li>border width
+	 * <li>padding
+	 * <li>image width or label width or image width plus label width with spacing
+	 * <li>padding
+	 * <li>border width
+	 * </ul>
+	 */
+	private void calculateClearSelectionWidth() {
+		// option instance
+		DatasetsItemsSelectorOptions pOptions = getOptions();
+		// gets clear selection configuration
+		ClearSelection clearSelection = pOptions.getClearSelection();
+		// -----
+		// calculate IMAGE
+		// -----
+		double imgWidth = clearSelection.getImage().getWidth();
+		// maintains the image aspect ratio
+		double aspectRatio = clearSelection.getImage().getHeight() / (double) imgWidth;
+		// calculates image width
+		imgWidth = imgWidth * aspectRatio;
+		// -----
+		// calculate LABEL
+		// -----
+		// uses context of canvas and text metrics to calculate
+		// the label width
+		Context2d ctx = chart.getCanvas().getContext2d();
+		// save context
+		ctx.save();
+		// sets font
+		ctx.setFont(getFont(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
+		// gets metrics
+		TextMetrics metrics = ctx.measureText(clearSelection.getLabel());
+		// stores the label width
+		double labelWidth = metrics.getWidth();
+		ctx.restore();
+		// -----
+		// calculate width
+		// clear selection element
+		// -----
+		// adds border width left
+		// and adding 1 to border width
+		double width = clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+		// adds padding left
+		width += clearSelection.getPadding();
+		// checking what must be rendered
+		if (Render.image.equals(clearSelection.getRender())) {
+			// if here is rendering only image
+			// adds image width
+			width += imgWidth;
+			// stores image width
+			clearSelection.setImageWidth(imgWidth);
+			// stores 0 for label width
+			clearSelection.setLabelWidth(ClearSelection.DEFAULT_VALUE);
+		} else if (Render.label.equals(clearSelection.getRender())) {
+			// if here is rendering only label
+			// adds label width
+			width += labelWidth;
+			// stores 0 for image width
+			clearSelection.setImageWidth(ClearSelection.DEFAULT_VALUE);
+			// stores label width
+			clearSelection.setLabelWidth(labelWidth);
+		} else {
+			// if here, it draws both image and label
+			// it does not matter the sequence to calculate the width
+			// adds label width
+			width += labelWidth;
+			// adds spacing
+			width += clearSelection.getSpacing();
+			// adds image width
+			width += imgWidth;
+			// stores image width
+			clearSelection.setImageWidth(imgWidth);
+			// stores label width
+			clearSelection.setLabelWidth(labelWidth);
+		}
+		// adds padding right
+		width += clearSelection.getPadding();
+		// adds border width right
+		// and adding 1 to border width
+		width += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+		// stores width
+		clearSelection.setWidth(width);
+	}
+
+	/**
+	 * Calculates X and Y coordinates for clear selection element and for image and label
+	 */
+	void calculateClearSelectionPositions() {
+		// option instance
+		DatasetsItemsSelectorOptions pOptions = getOptions();
+		// gets clear selection element
+		ClearSelection clearSelection = pOptions.getClearSelection();
+		// checks if is enabled
+		if (clearSelection.isDisplay()) {
+			// checks position of clear selection
+			// ---------------------------------
+			// calculate Y points
+			// ---------------------------------
+			// if the position is top
+			if (clearSelection.getPosition().equals(Position.top)) {
+				// for all elements the Y value is equals to margin
+				// set into configuration
+				double y = clearSelection.getMargin();
+				clearSelection.setY(y);
+				// and adding 1 to border width
+				y += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+
+				// y += clearSelection.isUseSelectionStyle() ? Math.max(pOptions.getBorderWidth(), 0) + 1 : 0;
+				// adds padding top
+				y += clearSelection.getPadding();
+				clearSelection.setImageY(y);
+				clearSelection.setLabelY(y);
+			} else {
+				// calculates the Y point from bottom, using the canvas dimension
+				// removing height of clear selection element and margin
+				double y = chart.getCanvas().getOffsetHeight() - clearSelection.getHeight() - clearSelection.getMargin();
+				// for all elements the Y value is equals
+				clearSelection.setY(y);
+				// and adding 1 to border width
+				y += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+				// adds padding top
+				y += clearSelection.getPadding();
+				clearSelection.setImageY(y);
+				clearSelection.setLabelY(y);
+			}
+			// ---------------------------------
+			// calculate X points
+			// ---------------------------------
+			// the X point depends on alignment required by configuration
+			double x = 0;
+			// checks all alignment types
+			if (Align.left.equals(clearSelection.getAlign())) {
+				// if left
+				// X is equals to margin
+				clearSelection.setX(clearSelection.getMargin());
+				// stores the x of clear selection element
+				x = clearSelection.getMargin();
+			} else if (Align.left_chartArea.equals(clearSelection.getAlign())) {
+				// gets chart AREA
+				ChartNode node = chart.getNode();
+				ChartAreaNode area = node.getChartArea();
+				// stores the x of clear selection element
+				// setting the left value of chart area
+				clearSelection.setX(area.getLeft());
+				// sets to left for further calculations
+				x = area.getLeft();
+			} else if (Align.center.equals(clearSelection.getAlign())) {
+				// calculates the center of width
+				// by canvas width and clear selection element width
+				x = (chart.getCanvas().getOffsetWidth() - clearSelection.getWidth()) / 2;
+				// stores the x of clear selection element
+				clearSelection.setX(x);
+			} else if (Align.center_chartArea.equals(clearSelection.getAlign())) {
+				// gets chart AREA
+				ChartNode node = chart.getNode();
+				ChartAreaNode area = node.getChartArea();
+				// calculates the center of width
+				// by chart area width and clear selection element width
+				x = (area.getRight() - area.getLeft() - clearSelection.getWidth()) / 2;
+				// stores the x of clear selection element
+				clearSelection.setX(x);
+			} else if (Align.right_chartArea.equals(clearSelection.getAlign())) {
+				// gets chart AREA
+				ChartNode node = chart.getNode();
+				ChartAreaNode area = node.getChartArea();
+				// the x value is the right point of chart area minus
+				// width of clear selection element
+				x = area.getRight() - clearSelection.getWidth();
+				// stores the x of clear selection element
+				clearSelection.setX(x);
+			} else if (Align.right.equals(clearSelection.getAlign())) {
+				// the x value is the width of canvas minus
+				// width of clear selection element and margin
+				x = chart.getCanvas().getOffsetWidth() - clearSelection.getWidth() - clearSelection.getMargin();
+				// stores the x of clear selection element
+				clearSelection.setX(x);
+			}
+			// for all elements
+			// adds border width left
+			// and adding 1 to border width
+			x += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+			// adds padding left
+			// to have the X starting point
+			x += clearSelection.getPadding();
+			// calculates point X based on render type
+			if (Render.label.equals(clearSelection.getRender())) {
+				// if here ONLY label
+				// stores to 0 the image
+				clearSelection.setImageX(ClearSelection.DEFAULT_VALUE);
+				// stores X point for label
+				clearSelection.setLabelX(x);
+			} else if (Render.label_image.equals(clearSelection.getRender())) {
+				// if here, before label and then image
+				// stores X point for label
+				clearSelection.setLabelX(x);
+				// adds label width
+				x += clearSelection.getLabelWidth();
+				// adds spacing
+				x += clearSelection.getSpacing();
+				// stores X point for image
+				clearSelection.setImageX(x);
+			} else if (Render.image_label.equals(clearSelection.getRender())) {
+				// stores X point for image
+				clearSelection.setImageX(x);
+				// adds image width
+				x += clearSelection.getImageWidth();
+				// adds spacing
+				x += clearSelection.getSpacing();
+				// stores X point for label
+				clearSelection.setLabelX(x);
+			} else if (Render.image.equals(clearSelection.getRender())) {
+				// if here ONLY image
+				// stores X point for image
+				clearSelection.setImageX(x);
+				// stores 0 to label point X
+				clearSelection.setLabelX(ClearSelection.DEFAULT_VALUE);
+			}
+		}
+	}
+
+	/**
+	 * Called when the selection is clearing
+	 */
+	void removeClearSelection() {
+		// option instance
+		DatasetsItemsSelectorOptions pOptions = getOptions();
+		// gets clear selection element
+		ClearSelection clearSelection = pOptions.getClearSelection();
+		// if clear selection element is enabled
+		if (clearSelection.isDisplay()) {
+			// gets context from canvas
+			Context2d ctx = chart.getCanvas().getContext2d();
+			// saves context
+			ctx.save();
+			// clear area from canvas of clear selection element
+			ctx.clearRect(clearSelection.getX(), clearSelection.getY(), clearSelection.getWidth(), clearSelection.getHeight());
+			// restores context
+			ctx.restore();
+		}
+	}
+
+	/**
+	 * Draws the clear selection element into canvas of chart
+	 */
+	private void drawClearSelection() {
+		// gets context from canvas
+		Context2d ctx = chart.getCanvas().getContext2d();
+		// option instance
+		DatasetsItemsSelectorOptions pOptions = getOptions();
+		// gets clear selection element
+		ClearSelection clearSelection = pOptions.getClearSelection();
+		if (clearSelection.isUseSelectionStyle()) {
+			// sets the selecting color into canvas
+			ctx.setFillStyle(options.getColorAsString());
+			// draws the rectangle of area selection
+			ctx.fillRect(clearSelection.getX(), clearSelection.getY(), clearSelection.getWidth(), clearSelection.getHeight());
+			// borders
+			if (options.getBorderWidth() > 0) {
+				ctx.setLineWidth(ClearSelection.BORDER_WIDTH);
+				List<Integer> borderDash = options.getBorderDash();
+				// sets the selecting color into canvas
+				ctx.setStrokeStyle(options.getBorderColorAsString());
+				if (!borderDash.isEmpty()) {
+					JsHelper.get().setLineDash(ctx, options.getBorderDashAsJavaScriptObject());
+				}
+				// gets increment
+				double borderIncrement = ClearSelection.BORDER_WIDTH / 2D;
+				// draw border fixing the dimansions of rect
+				ctx.strokeRect(clearSelection.getX() + borderIncrement, clearSelection.getY() + borderIncrement, clearSelection.getWidth() - ClearSelection.BORDER_WIDTH, clearSelection.getHeight() - ClearSelection.BORDER_WIDTH);
+			}
+		}
+		// checks based on render type what must be draw
+		if (Render.label.equals(clearSelection.getRender())) {
+			// sets font
+			ctx.setFont(getFont(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
+			// sets color to canvas
+			ctx.setFillStyle(clearSelection.getFontColorAsString());
+			// sets alignment from center point
+			ctx.setTextBaseline(TextBaseline.TOP);
+			// draws text
+			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
+		} else if (Render.label_image.equals(clearSelection.getRender())) {
+			// sets font
+			ctx.setFont(getFont(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
+			// sets color to canvas
+			ctx.setFillStyle(clearSelection.getFontColorAsString());
+			// sets alignment from center point
+			ctx.setTextBaseline(TextBaseline.TOP);
+			// draws text
+			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
+			// draws scaled image
+			ctx.drawImage(clearSelection.getImage(), clearSelection.getImageX(), clearSelection.getImageY(), clearSelection.getImageWidth(), clearSelection.getImageHeight());
+		} else if (Render.image_label.equals(clearSelection.getRender())) {
+			// draws scaled image
+			ctx.drawImage(clearSelection.getImage(), clearSelection.getImageX(), clearSelection.getImageY(), clearSelection.getImageWidth(), clearSelection.getImageHeight());
+			// sets font
+			ctx.setFont(getFont(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
+			// sets color to canvas
+			ctx.setFillStyle(clearSelection.getFontColorAsString());
+			// sets alignment from center point
+			ctx.setTextBaseline(TextBaseline.TOP);
+			// draws text
+			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
+		} else if (Render.image.equals(clearSelection.getRender())) {
+			// draws scaled image
+			ctx.drawImage(clearSelection.getImage(), clearSelection.getImageX(), clearSelection.getImageY(), clearSelection.getImageWidth(), clearSelection.getImageHeight());
+		}
+	}
+
+	/**
+	 * Builds the font string to use in the canvas object.<br>
+	 * The format is [fontStyle] [fontSize] [fontFamily].
+	 * 
+	 * @param style font style to use
+	 * @param fontSize font size
+	 * @param fontFamily font family
+	 * @return the font string to use in the canvas object.
+	 */
+	private String getFont(FontStyle style, int fontSize, String fontFamily) {
+		// gets template
+		final String result = FONT_TEMPLATE;
+		// formats
+		return result.replaceAll("\\{0\\}", style.name()).replaceAll("\\{1\\}", String.valueOf(fontSize)).replaceAll("\\{2\\}", fontFamily);
+	}
+
+	/**
+	 * Checks if the coordinate of event is inside the clear selection element.
+	 * 
+	 * @param event event to be checked.
+	 * @return <code>true</code> if inside the element, otherwise <code>false</code>.
+	 */
+	private boolean isEventInClearSelection(MouseEvent<?> event) {
+		// option instance
+		DatasetsItemsSelectorOptions pOptions = getOptions();
+		// gets clear selection element
+		ClearSelection clearSelection = pOptions.getClearSelection();
+		// checks if inside
+		boolean isX = event.getX() >= clearSelection.getX() && event.getX() <= (clearSelection.getX() + clearSelection.getWidth());
+		boolean isY = event.getY() >= clearSelection.getY() && event.getY() <= (clearSelection.getY() + clearSelection.getHeight());
+		return isX && isY;
 	}
 
 	/**

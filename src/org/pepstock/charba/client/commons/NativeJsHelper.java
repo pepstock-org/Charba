@@ -15,7 +15,10 @@
 */
 package org.pepstock.charba.client.commons;
 
+import org.pepstock.charba.client.events.ChartNativeEvent;
+
 import com.google.gwt.canvas.dom.client.Context2d;
+import com.google.gwt.dom.client.Element;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -36,6 +39,21 @@ final class NativeJsHelper {
 	NativeJsHelper() {
 		// do nothing
 	}
+
+	/**
+	 * Returns an undefined reference
+	 * 
+	 * @return undefined reference
+	 */
+	static native Object undefined();
+
+	/**
+	 * Returns the java script object type of object.
+	 * 
+	 * @param object the object to get type.
+	 * @return the object type
+	 */
+	static native String typeOf(Object object);
 
 	/**
 	 * Returns the java script object type of a property.
@@ -107,4 +125,20 @@ final class NativeJsHelper {
 	 */
 	static native void setLineDash(Context2d context, ArrayInteger object);
 
+	/**
+	 * Returns an array of strings with element attributes.
+	 * 
+	 * @param element DOM element to scan
+	 * @return an array of strings with element attributes
+	 */
+	static native ArrayString elementAttributes(Element element);
+
+	/**
+	 * Returns a chart native event from CHART.JS event.
+	 * 
+	 * @param event CHART.JS event
+	 * @param key key of java script object
+	 * @return a chart native event
+	 */
+	static native ChartNativeEvent nativeEvent(NativeObject event, String key);
 }

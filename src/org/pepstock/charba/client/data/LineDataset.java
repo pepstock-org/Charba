@@ -15,14 +15,17 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.ArrayStringList;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.SteppedLine;
 import org.pepstock.charba.client.options.Scales;
 
@@ -34,7 +37,7 @@ import org.pepstock.charba.client.options.Scales;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class LineDataset extends LiningDataset {
+public class LineDataset extends LiningDataset implements HasDataPoints {
 
 	// default value for cubic interpolation mode
 	private static final String DEFAULT_CUBIC_INTERPOLATION_MODE = "default";
@@ -51,8 +54,7 @@ public class LineDataset extends LiningDataset {
 		cubicInterpolationMode,
 		showLines,
 		spanGaps,
-		steppedLine,
-		data
+		steppedLine
 	}
 
 	/**
@@ -220,7 +222,9 @@ public class LineDataset extends LiningDataset {
 	 * @param data an array of strings
 	 */
 	public void setDataString(String... data) {
-		setArrayValue(Property.data, ArrayString.of(data));
+		setArrayValue(Dataset.Property.data, ArrayString.fromOrNull(data));
+		// sets data type checking if the key exists
+		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.strings : DataType.unknown);
 	}
 
 	/**
@@ -230,18 +234,47 @@ public class LineDataset extends LiningDataset {
 	 * @param data a list of strings
 	 */
 	public void setDataString(List<String> data) {
-		setArrayValue(Property.data, ArrayString.of(data));
+		setArrayValue(Dataset.Property.data, ArrayString.fromOrNull(data));
+		// sets data type checking if the key exists
+		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.strings : DataType.unknown);
 	}
 
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of strings. Each point in the data array
 	 * corresponds to the label at the same index on the x axis.
 	 * 
-	 * @return a list of strings
+	 * @return a list of strings or an empty list of strings if the data type is not {@link DataType#strings}.
 	 */
 	public List<String> getDataString() {
-		ArrayString array = getArrayValue(Property.data);
-		return ArrayListHelper.list(array);
+		return getDataString(false);
+	}
+
+	/**
+	 * Returns the data property of a dataset for a chart is specified as an array of strings. Each point in the data array
+	 * corresponds to the label at the same index on the x axis.
+	 * 
+	 * @param binding if <code>true</code> binds the new array list into container
+	 * @return a list of strings or an empty list of strings if the data type is not {@link DataType#strings}.
+	 */
+	public List<String> getDataString(boolean binding) {
+		// checks if is a string data type
+		if (has(Dataset.Property.data) && DataType.strings.equals(getDataType())) {
+			/// returns strings
+			ArrayString array = getArrayValue(Dataset.Property.data);
+			return ArrayListHelper.list(array);
+		}
+		// checks if wants to bind the array
+		if (binding) {
+			ArrayStringList result = new ArrayStringList();
+			// set value
+			setArrayValue(Dataset.Property.data, ArrayString.from(result));
+			// sets data type
+			setValue(Dataset.Property._charbaDataType, DataType.strings);
+			// returns list
+			return result;
+		}
+		// returns an empty list
+		return new LinkedList<>();
 	}
 
 	/**
@@ -249,8 +282,11 @@ public class LineDataset extends LiningDataset {
 	 * 
 	 * @param datapoints an array of data points
 	 */
+	@Override
 	public void setDataPoints(DataPoint... datapoints) {
-		setArrayValue(Property.data, ArrayObject.of(datapoints));
+		setArrayValue(Dataset.Property.data, ArrayObject.fromOrNull(datapoints));
+		// sets data type checking if the key exists
+		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.points : DataType.unknown);
 	}
 
 	/**
@@ -258,18 +294,32 @@ public class LineDataset extends LiningDataset {
 	 * 
 	 * @param datapoints a list of data points
 	 */
+	@Override
 	public void setDataPoints(List<DataPoint> datapoints) {
-		setArrayValue(Property.data, ArrayObject.of(datapoints));
+		setArrayValue(Dataset.Property.data, ArrayObject.fromOrNull(datapoints));
+		// sets data type checking if the key exists
+		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.points : DataType.unknown);
 	}
 
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
 	 * 
-	 * @return a list of data points
+	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#points}.
 	 */
+	@Override
 	public List<DataPoint> getDataPoints() {
-		ArrayObject array = getArrayValue(Property.data);
-		return ArrayListHelper.list(array, factory);
+		return getDataPoints(false);
+	}
+
+	/**
+	 * Returns the data property of a dataset for a chart is specified as an array of data points
+	 * 
+	 * @param binding if <code>true</code> binds the new array list into container
+	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#points}.
+	 */
+	@Override
+	public List<DataPoint> getDataPoints(boolean binding) {
+		return getDataPoints(factory, binding);
 	}
 
 }

@@ -79,4 +79,22 @@ public interface IsColor {
 	 * @return HEX string value which represents the color.
 	 */
 	String toHex();
+
+	/**
+	 * As <a href="https://webstore.iec.ch/publication/6169">IEC 61966-2-1:1999</a>, applies to the encoding and communication
+	 * of RGB colors used in computer systems and similar applications, by defining encoding transformations for use in defined
+	 * reference conditions.<br>
+	 * <br>
+	 * 
+	 * <pre>
+	 *    byte     byte     byte     byte
+	 * |        |        |        |        |
+	 * +--------+--------+--------+--------+
+	 *   alpha      red     green    blue
+	 * </pre>
+	 * 
+	 * @return a integer value which represents the RGB color
+	 */
+	int toRGBs();
+
 }

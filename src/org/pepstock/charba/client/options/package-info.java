@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all elements to use to configure charts at global level (know as chart global options).
+ * Contains all elements to configure charts at global level (know as chart global options).
  * 
  * @author Andrea "Stock" Stocchero
  *

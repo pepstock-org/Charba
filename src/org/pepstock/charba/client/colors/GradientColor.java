@@ -22,15 +22,17 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
+ * Contains the color and its offset to set a gradient.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class GradientColor extends NativeObjectContainer {
-
+	// offset 0 defined as default start
 	static final double OFFSET_START = 0D;
-
+	// offset 1 defined as default stop
 	static final double OFFSET_STOP = 1D;
-
+	// default offset is the start one
 	private static final double DEFAULT_OFFSET = OFFSET_START;
 
 	/**
@@ -42,20 +44,42 @@ public final class GradientColor extends NativeObjectContainer {
 		_charbaGradientColor
 	}
 
+	/**
+	 * Creates a stopping gradient with its offset.
+	 * 
+	 * @param offset offset of color
+	 * @param color color instance
+	 */
 	public GradientColor(double offset, IsColor color) {
 		this(offset, color.toRGBA());
 	}
 
+	/**
+	 * Creates a stopping gradient with its offset.
+	 * 
+	 * @param offset offset of color
+	 * @param color color instance
+	 */
 	public GradientColor(double offset, String color) {
 		checkOffsetWithinBounds(offset);
 		setValue(Property._charbaGradientColorOffset, offset);
 		setValue(Property._charbaGradientColor, color);
 	}
 
+	/**
+	 * Creates a stopping gradient starting from existing native object.
+	 * 
+	 * @param nativeObject native object instance with all field to define a stopping gradient color.
+	 */
 	GradientColor(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
+	/**
+	 * Returns the defined offset for stopping gradient color.
+	 * 
+	 * @return the defined offset for stopping gradient color. Default is 0.
+	 */
 	public double getOffset() {
 		return getValue(Property._charbaGradientColorOffset, DEFAULT_OFFSET);
 	}
@@ -84,7 +108,7 @@ public final class GradientColor extends NativeObjectContainer {
 	 * @param offset value between 0 and 1 for where the color stop is located.
 	 * @exception if the channel is nor within bounds
 	 */
-	private static void checkOffsetWithinBounds(double offset) {
+	static void checkOffsetWithinBounds(double offset) {
 		if (offset < OFFSET_START || offset > OFFSET_STOP) {
 			throw new IllegalArgumentException("Offset argument is not within bounds (0D-1D)");
 		}

@@ -15,9 +15,13 @@
 */
 package org.pepstock.charba.client.commons;
 
+import java.util.List;
+
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.events.ChartNativeEvent;
 
 import com.google.gwt.canvas.dom.client.Context2d;
+import com.google.gwt.dom.client.Element;
 
 /**
  * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
@@ -46,6 +50,37 @@ public final class JsHelper {
 	 */
 	public static JsHelper get() {
 		return INSTANCE;
+	}
+
+	/**
+	 * Returns an undefined reference
+	 * 
+	 * @return undefined reference
+	 */
+	public final Object undefined() {
+		return NativeJsHelper.undefined();
+	}
+
+	/**
+	 * Returns a list of strings with element attributes.
+	 * 
+	 * @param element DOM element to scan
+	 * @return a list of strings with element attributes
+	 */
+	public final List<String> elementAttributes(Element element) {
+		ArrayString array = NativeJsHelper.elementAttributes(element);
+		return ArrayListHelper.unmodifiableList(array);
+	}
+
+	/**
+	 * Returns the java script object type of object.
+	 * 
+	 * @param object the object to get type.
+	 * @return the object type
+	 */
+	public final ObjectType typeOf(Object object) {
+		// gets the object type by javascript type and checking if is an array
+		return ObjectType.getType(NativeJsHelper.typeOf(object), Array.isArray(object));
 	}
 
 	/**
@@ -125,5 +160,19 @@ public final class JsHelper {
 		if (context != null && object != null) {
 			NativeJsHelper.setLineDash(context, object);
 		}
+	}
+
+	/**
+	 * Returns a chart native event from CHART.JS event.
+	 * 
+	 * @param event CHART.JS event
+	 * @param key key of java script object
+	 * @return a chart native event
+	 */
+	public ChartNativeEvent nativeEvent(NativeObject event, String key) {
+		if (event != null && key != null) {
+			return NativeJsHelper.nativeEvent(event, key);
+		}
+		return null;
 	}
 }

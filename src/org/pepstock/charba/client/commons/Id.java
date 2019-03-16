@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.commons;
 
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -59,4 +58,22 @@ public enum Id implements Key
 		return UndefinedValues.STRING;
 	}
 
+	/**
+	 * Returns the property value from java script object, when the ID is stored as integer
+	 * 
+	 * @param key the key to search inside the object
+	 * @param nativeObject java script object
+	 * @return the property value or {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER} if not exist
+	 */
+	public static int get(Key key, NativeObject nativeObject) {
+		// checks if property exists
+		if (nativeObject.hasProperty(key.name())) {
+			// gets descriptor
+			NativeIntegerDescriptor descriptor = nativeObject.getIntProperty(key.name());
+			// if descriptor is consistent, return value
+			return descriptor != null ? descriptor.getValue() : UndefinedValues.INTEGER;
+		}
+		// property doesn't exist
+		return UndefinedValues.INTEGER;
+	}
 }

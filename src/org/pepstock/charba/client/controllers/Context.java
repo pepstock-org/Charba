@@ -85,11 +85,11 @@ public final class Context {
 	 */
 	@JsOverlay
 	public final int getIndex() {
+		// checks if there is the property
 		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "index"))) {
 			return UndefinedValues.INTEGER;
-		} else {
-			return getNativeIndex();
 		}
+		return getNativeIndex();
 	}
 
 	/**

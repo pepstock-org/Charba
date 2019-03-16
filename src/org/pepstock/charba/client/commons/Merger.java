@@ -98,8 +98,7 @@ public final class Merger {
 		}
 		// merges chart options (maybe already updated by scales)
 		// and the global ones
-		merge(chartOptions, globalOptions);
-		return chartOptions;
+		return mergeNativeObjects(chartOptions, globalOptions);
 	}
 
 	/**
@@ -122,7 +121,7 @@ public final class Merger {
 				ArrayObject xScales = xScalesDescriptor.getValue();
 				// scans all x axes applying the default scale
 				for (int i = 0; i < xScales.length(); i++) {
-					merge(xScales.get(i), scaleOptions);
+					xScales.set(i, mergeNativeObjects(xScales.get(i), scaleOptions));
 				}
 			}
 			// checks if there is y axes
@@ -132,7 +131,7 @@ public final class Merger {
 				ArrayObject yScales = yScalesDescriptor.getValue();
 				// scans all x axes applying the default scale
 				for (int i = 0; i < yScales.length(); i++) {
-					merge(yScales.get(i), scaleOptions);
+					yScales.set(i, mergeNativeObjects(yScales.get(i), scaleOptions));
 				}
 			}
 		}
@@ -150,53 +149,8 @@ public final class Merger {
 			// if has got scale
 			// apply the default scale to single scale of chart options
 			NativeObjectDescriptor descriptor = chartOptions.getObjectProperty(Property.scale.name());
-			merge(descriptor.getValue(), scaleOptions);
+			chartOptions.defineObjectProperty(Property.scale.name(), mergeNativeObjects(descriptor.getValue(), scaleOptions));
 		}
-	}
-
-	/**
-	 * Copies <code>source</code> properties into <code>target</code> only if not defined in target.<br>
-	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.
-	 * 
-	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source Object to merge into <code>target</code>.
-	 */
-	public void merge(NativeObjectContainer target, NativeObjectContainer source) {
-		merge(target.getNativeObject(), source.getNativeObject());
-	}
-
-	/**
-	 * Copies <code>source</code> properties into <code>target</code> only if not defined in target.<br>
-	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.
-	 * 
-	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source Object to merge into <code>target</code>.
-	 */
-	public void merge(NativeObject target, NativeObjectContainer source) {
-		merge(target, source.getNativeObject());
-	}
-
-	/**
-	 * Copies <code>source</code> properties into <code>target</code> only if not defined in target.<br>
-	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.
-	 * 
-	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source Object to merge into <code>target</code>.
-	 */
-	public void merge(NativeObjectContainer target, NativeObject source) {
-		merge(target.getNativeObject(), source);
-	}
-
-	/**
-	 * Copies <code>source</code> properties into <code>target</code> only if not defined in target.<br>
-	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.
-	 * 
-	 * @param target The target object in which <code>source</code> is merged into.
-	 * @param source Object to merge into <code>target</code>.
-	 */
-	public void merge(NativeObject target, NativeObject source) {
-		// FIXME why doen't it return the value?
-		mergeNativeObjects(target, source);
 	}
 
 	/**

@@ -101,7 +101,7 @@ public final class LegendLabelItem extends LegendItem {
 	 *            lengths of lines and gaps which describe the pattern.
 	 */
 	public void setLineDash(List<Integer> lineDash) {
-		setArrayValue(LegendItem.Property.lineDash, ArrayInteger.of(lineDash));
+		setArrayValue(LegendItem.Property.lineDash, ArrayInteger.fromOrNull(lineDash));
 	}
 
 	/**

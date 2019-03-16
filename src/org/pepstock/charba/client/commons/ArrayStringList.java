@@ -273,4 +273,18 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	public int lastIndexOf(Object o) {
 		return array.lastIndexOf(o.toString());
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.List#toArray()
+	 */
+	@Override
+	public Object[] toArray() {
+		String[] toArray = new String[array.length()];
+		for (int i = 0; i < array.length(); i++) {
+			toArray[i] = array.get(i);
+		}
+		return toArray;
+	}
 }

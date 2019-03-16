@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains some java script utilities useful for debugging.
+ * Contains some utilities to use in Charba, like HTML annotation builder, and other java script utilities useful for debugging.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -32,15 +32,17 @@ import com.google.gwt.dom.client.Style.Cursor;
  *
  */
 public final class ChartPointer extends AbstractPlugin {
-	// factory to create options for plugin
-	private final ChartPointerOptionsFactory factory = new ChartPointerOptionsFactory();
-	// cache to store options in order do not load every time the options
-	private static final Map<String, ChartPointerOptions> OPTIONS = new HashMap<>();
 
 	/**
 	 * Plugin ID {@value ID}
 	 */
 	public static final String ID = "cursorpointer";
+	/**
+	 * The factory to create options for plugin.
+	 */
+	public static final ChartPointerOptionsFactory FACTORY = new ChartPointerOptionsFactory();
+	// cache to store options in order do not load every time the options
+	private static final Map<String, ChartPointerOptions> OPTIONS = new HashMap<>();
 
 	/*
 	 * (non-Javadoc)
@@ -51,8 +53,10 @@ public final class ChartPointer extends AbstractPlugin {
 	public String getId() {
 		return ID;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
@@ -67,7 +71,7 @@ public final class ChartPointer extends AbstractPlugin {
 				// creates the plugin options using the java script object
 				// passing also the default color set at constructor.
 				if (chart.getOptions().getPlugins().hasOptions(ID)) {
-					pOptions = chart.getOptions().getPlugins().getOptions(ID, factory);
+					pOptions = chart.getOptions().getPlugins().getOptions(ID, FACTORY);
 				} else {
 					pOptions = new ChartPointerOptions();
 				}
@@ -107,7 +111,7 @@ public final class ChartPointer extends AbstractPlugin {
 				// if null, sets the default cursor
 				chart.getElement().getStyle().setCursor(pOptions.getCurrentCursor());
 			} else {
-				
+
 				// otherwise sets the pointer
 				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
 			}

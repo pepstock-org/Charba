@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains METER and GAUGE chart implementations (based on controllers), available out-of-the box.
+ * Contains METER and GAUGE charts implementations (based on controllers), available out-of-the box.
  * 
  * @author Andrea "Stock" Stocchero
  *

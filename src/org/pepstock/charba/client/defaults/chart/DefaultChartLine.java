@@ -17,7 +17,7 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultLine;
 import org.pepstock.charba.client.enums.CapStyle;
-import org.pepstock.charba.client.enums.Fill;
+import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.options.Line;
 
@@ -125,7 +125,7 @@ public final class DefaultChartLine implements IsDefaultLine {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#getFill()
 	 */
 	@Override
-	public Fill getFill() {
+	public IsFill getFill() {
 		return line.getFill();
 	}
 

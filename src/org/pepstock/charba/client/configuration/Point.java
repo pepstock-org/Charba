@@ -20,6 +20,7 @@ import org.pepstock.charba.client.options.ExtendedOptions;
 
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.Image;
 
 /**
  * Point elements are used to represent the points in a line chart or a bubble chart.
@@ -70,6 +71,15 @@ public class Point extends AbstractConfigurationElement {
 	 * @param pointStyle array of the style of the point.
 	 */
 	public void setPointStyle(ImageResource pointStyle) {
+		getOptions().getElements().getPoint().setPointStyle(pointStyle);
+	}
+
+	/**
+	 * Sets the style of the point as image .
+	 * 
+	 * @param pointStyle array of the style of the point.
+	 */
+	public void setPointStyle(Image pointStyle) {
 		getOptions().getElements().getPoint().setPointStyle(pointStyle);
 	}
 

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
@@ -93,7 +94,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	public boolean hasEnabled(String pluginId) {
 		return has(PluginIdChecker.key(pluginId));
 	}
-	
+
 	/**
 	 * Sets the plugin options. If passed options is null, the configuration of plugin will be removed.
 	 * 
@@ -119,8 +120,8 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * Sets the plugin options as array. If passed options is null, the configuration of plugin will be removed.
 	 * 
 	 * @param pluginId plugin id.
-	 * @param options list of native object container used to configure the plugin. Pass <code>null</code> to remove the configuration if
-	 *            exist.
+	 * @param options list of native object container used to configure the plugin. Pass <code>null</code> to remove the
+	 *            configuration if exist.
 	 * @param <T> type of native object container to store
 	 */
 	public <T extends NativeObjectContainer> void setOptions(String pluginId, List<T> options) {
@@ -130,12 +131,12 @@ public final class Plugins extends AbstractModel<Options, Void> {
 			remove(PluginIdChecker.key(pluginId));
 		} else {
 			// stores configuration
-			setArrayValue(PluginIdChecker.key(pluginId), ArrayObject.of(options));
+			setArrayValue(PluginIdChecker.key(pluginId), ArrayObject.fromOrNull(options));
 		}
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Checks if there is any options for a specific plugin, by its id.
 	 * 
@@ -143,7 +144,24 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * @return <code>true</code> if there is an options, otherwise <code>false</code>.
 	 */
 	public boolean hasOptions(String pluginId) {
-		return has(PluginIdChecker.key(pluginId));
+		// creates the key to avoid many calls to plugin checker
+		Key pluginIdKey = PluginIdChecker.key(pluginId);
+		// gets the type of property
+		ObjectType type = type(pluginIdKey);
+		// if boolean, there is not any options, therefore false
+		// otherwise checks if there is the key. If there is and is NOT boolean
+		// means that an options has been added.
+		return ObjectType.Boolean.equals(type) ? false : has(pluginIdKey);
+	}
+
+	/**
+	 * Returns the options type.
+	 * 
+	 * @param pluginId plugin id.
+	 * @return the options type
+	 */
+	public ObjectType getOptionsType(String pluginId) {
+		return type(PluginIdChecker.key(pluginId));
 	}
 
 	/**
@@ -152,14 +170,25 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * @param pluginId plugin id.
 	 * @param factory factory instance to create a native object container.
 	 * @param <T> type of native object container to return
-	 * @return java script object used to configure the plugin or <code>null</code> if not exist.
+	 * @return java script object used to configure the plugin or an empty object if not exist.
 	 */
 	public <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) {
-		return factory.create(getValue(PluginIdChecker.key(pluginId)));
+		// creates the key to avoid many calls to plugin checker
+		Key pluginIdKey = PluginIdChecker.key(pluginId);
+		// gets the type of property
+		ObjectType type = type(pluginIdKey);
+		// checks if object
+		if (ObjectType.Object.equals(type)) {
+			return factory.create(getValue(PluginIdChecker.key(pluginId)));
+		} else {
+			// if here returns an empty object
+			return factory.create(null);
+		}
 	}
-	
+
 	/**
-	 * Returns the plugin options as list of object containers, if exist. It uses a factory instance to create a native object container.
+	 * Returns the plugin options as list of object containers, if exist. It uses a factory instance to create a native object
+	 * container.
 	 * 
 	 * @param pluginId plugin id.
 	 * @param factory factory instance to create a native object container.
@@ -167,8 +196,18 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * @return the plugin options as list of object containers or empty list if not exist.
 	 */
 	public <T extends NativeObjectContainer> List<T> getOptionsAsList(String pluginId, NativeObjectContainerFactory<T> factory) {
-		ArrayObject array = getArrayValue(PluginIdChecker.key(pluginId));
-		return ArrayListHelper.list(array, factory);
+		// creates the key to avoid many calls to plugin checker
+		Key pluginIdKey = PluginIdChecker.key(pluginId);
+		// gets the type of property
+		ObjectType type = type(pluginIdKey);
+		// checks if array
+		if (ObjectType.Array.equals(type)) {
+			ArrayObject array = getArrayValue(PluginIdChecker.key(pluginId));
+			return ArrayListHelper.list(array, factory);
+		} else {
+			// if here returns an empty list
+			return new LinkedList<T>();
+		}
 	}
 
 }

@@ -1,0 +1,65 @@
+/**
+    Copyright 2017 Andrea "Stock" Stocchero
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+	    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
+package org.pepstock.charba.client.enums;
+
+import org.pepstock.charba.client.items.UndefinedValues;
+
+/**
+ * Fill object to configure chart to use an absolute dataset index.<br>
+ * Absolute dataset index, as integer, is composed by integer value which must be greater than 0.<br>
+ * Here are same examples: (1,2,3,...).
+ * 
+ * @author Andrea "Stock" Stocchero
+ *
+ */
+public final class AbsoluteDatasetIndexFill extends AbstractDatasetIndexFill {
+
+	/**
+	 * Default value for absolute dataset index
+	 */
+	public static final int DEFAULT_VALUE_AS_INT = 0;
+	// the name of fill
+	private final String name;
+
+	/**
+	 * Creates a absolute dataset index fill using the absolute position.
+	 * 
+	 * @param index dataset index set by the absolute position.
+	 */
+	AbsoluteDatasetIndexFill(int index) {
+		// creates the abstract object passing the filling mode (always absolute filling mode
+		// and undefined string for index as string (absolute ONLY integer)
+		super(FillingMode.absoluteDatasetIndex, index, UndefinedValues.STRING);
+		// checks if the index is greater than 0
+		if (index <= 0) {
+			// if not, exception
+			throw new IllegalArgumentException("Value must represent a integer greater than 0");
+		}
+		// creates the name to return
+		this.name = FillingMode.absoluteDatasetIndex.name() + ":" + index;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#name()
+	 */
+	@Override
+	public String name() {
+		return name;
+	}
+
+}

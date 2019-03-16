@@ -1,7 +1,7 @@
-Charba - GWT wrapper for CHART.JS
+Charba - GWT Charts library based on CHART.JS
 ===============================================
 
-Version 2.0
+Version 2.1 
 
 What's Charba
 --------
@@ -36,20 +36,20 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>2.0</version>
+    <version>2.1</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="2.0"/>
+<dependency org="org.pepstock" name="charba" rev="2.1"/>
 ```
 
 If you are using [Gradle](https://gradle.org/):
 
 ```json
-compile group: 'org.pepstock', name: 'charba', version: '2.0'
+compile group: 'org.pepstock', name: 'charba', version: '2.1'
 ```
 
 To install in your GWT project, you must the following configuration into your GWT project module configuration:
@@ -77,7 +77,7 @@ Documentation
 
 All **Charba** documentation will be maintained into [GitHub wiki](https://github.com/pepstock-org/Charba/wiki) of **Charba** project.
 
-API JavaDoc is published [here](http://www.pepstock.org/Charba/2.0/index.html). 
+API JavaDoc is published [here](http://www.pepstock.org/Charba/2.1/index.html). 
 
 Showcase
 --------

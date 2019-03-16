@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -28,6 +29,7 @@ import org.pepstock.charba.client.items.DatasetItem.DatasetItemFactory;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.Plugins;
+import org.pepstock.charba.client.utils.JSON;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.dom.client.Document;
@@ -63,6 +65,10 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 
 	// canvas prevent default handler
 	private final HandlerRegistration preventDisplayHandler;
+	// list of all handle registration when
+	// an handler (for events) has been added to chart
+	// needed for clean up when chart will be destroy
+	private final List<HandlerRegistration> handlerRegistrations = new ArrayList<>();
 
 	// canvas where Chart.js draws the chart
 	private final Canvas canvas;
@@ -312,10 +318,22 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	}
 
 	/**
+	 * Called by handler manager to store every handler registration in order to remove them automatically when the chart will
+	 * be destroy.
+	 * 
+	 * @param registration new handler registration created
+	 */
+	void addHandlerRegistration(HandlerRegistration registration) {
+		handlerRegistrations.add(registration);
+	}
+
+	/**
 	 * Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object
 	 * within Chart.js, along with any associated event listeners attached by Chart.js.
 	 */
 	public final void destroy() {
+		// notify before destroy
+		Charts.fireBeforeDestory(this);
 		// checks if chart is created
 		if (chart != null) {
 			// then destroy
@@ -323,6 +341,13 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		}
 		// remove handler of mouse event handler
 		removeCanvasPreventDefault();
+		// removes all handlers created to add
+		// events handler to chart
+		for (HandlerRegistration registration : handlerRegistrations) {
+			registration.removeHandler();
+		}
+		// clears the cache of handler registrations.
+		handlerRegistrations.clear();
 		// removes chart instance from collection
 		Charts.remove(getId());
 	}
@@ -469,7 +494,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 */
 	public final DatasetMetaItem getDatasetMeta(int index) {
 		// checks consistency of chart and datasets
-		if (chart != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size()) {
+		if (chart != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size() && index >= 0) {
 			// returns the array
 			return new DatasetMetaItem(chart.getDatasetMeta(index));
 		}
@@ -503,7 +528,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 */
 	public boolean isDatasetVisible(int index) {
 		// checks consistency of chart and datasets
-		if (chart != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size()) {
+		if (chart != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size() && index >= 0) {
 			// gets if dataset is visible or not
 			return chart.isDatasetVisible(index);
 		}
@@ -539,10 +564,11 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		if (chart != null && event != null) {
 			// gets element
 			ArrayObject result = chart.getElementAtEvent(event);
-			if (result != null && result.length() > 0) {
+			if (result != null && !result.isEmpty()) {
 				return new DatasetItem(result.get(0));
 			}
 		}
+		// if here, inconsistent result
 		return null;
 	}
 
@@ -586,12 +612,27 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			// sets plugins
 			configuration.setPlugins(this, plugins);
 			// destroy chart if chart is already instantiated
-			destroy();
+			// checks if chart is created
+			if (chart != null) {
+				// then destroy
+				chart.destroy();
+			}
 			// stores the chart instance into collection
 			Charts.add(this);
 			// draws chart with configuration
 			chart = new Chart(canvas.getContext2d(), configuration);
+			// notify after destroy
+			Charts.fireAfterInit(this);
 		}
+	}
+
+	/**
+	 * Returns the string JSON representation of the object.
+	 * 
+	 * @return the string JSON representation of the object.
+	 */
+	public final String toJSON() {
+		return JSON.stringifyWithReplacer(configuration, 3);
 	}
 
 }

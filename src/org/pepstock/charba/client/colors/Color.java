@@ -33,9 +33,10 @@ public final class Color implements IsColor {
 	private final int red;
 	private final int green;
 	private final int blue;
-
 	// alpha
 	private double alpha = DEFAULT_ALPHA;
+	// srgb
+	private final int srgb;
 
 	/**
 	 * Creates the color with RGB values.
@@ -67,6 +68,7 @@ public final class Color implements IsColor {
 		this.green = g;
 		this.blue = b;
 		this.alpha = a;
+		this.srgb = (int) Math.round(alpha * 255D) << 24 | red << 16 | green << 8 | blue;
 	}
 
 	/*
@@ -149,6 +151,16 @@ public final class Color implements IsColor {
 	@Override
 	public String toHex() {
 		return ColorBuilder.HEX_STARTING_CHAR + pad(Integer.toHexString(red)) + pad(Integer.toHexString(green)) + pad(Integer.toHexString(blue));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#toRGBs()
+	 */
+	@Override
+	public int toRGBs() {
+		return srgb;
 	}
 
 	/**

@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all elements to use to configure the datasets of a chart instance (know as chart data at instance level).
+ * Contains all elements to configure the datasets of a chart instance (know as chart data at instance level).
  * 
  * @author Andrea "Stock" Stocchero
  *

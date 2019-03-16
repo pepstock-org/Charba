@@ -61,7 +61,7 @@ public abstract class AbstractEvent<H extends EventHandler> extends GwtEvent<H> 
 	 * 
 	 * @return the chart instance
 	 */
-	public final AbstractChart<?, ?> getChart() {
+	public AbstractChart<?, ?> getChart() {
 		return (AbstractChart<?, ?>) getSource();
 	}
 

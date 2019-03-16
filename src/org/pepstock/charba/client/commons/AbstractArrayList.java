@@ -55,8 +55,8 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 	 */
 	@Override
 	public boolean isEmpty() {
-		// checks if the size of JS array is ZERO
-		return size() == 0;
+		// returns if empty
+		return getArray().isEmpty();
 	}
 
 	/**
@@ -80,7 +80,7 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 	 * Not implemented
 	 */
 	@Override
-	public final Object[] toArray() {
+	public Object[] toArray() {
 		throw new UnsupportedOperationException(UNABLE_COPY_ARRAY_MESSAGE);
 	}
 

@@ -1,6 +1,7 @@
 <Project projectName="Charba">
-  <Jar>.\classes</Jar>
-  <AuxClasspathEntry>.\lib-ivy\gwt-dev-2.8.2.jar</AuxClasspathEntry>
-  <AuxClasspathEntry>.\lib-ivy\gwt-user-2.8.2.jar</AuxClasspathEntry>
-  <SrcDir>.\.\src</SrcDir>
+  <Jar>.\.\classes</Jar>
+  <AuxClasspathEntry>.\.\lib-ivy\gwt-dev-2.8.2.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\.\lib-ivy\gwt-user-2.8.2.jar</AuxClasspathEntry>
+  <AuxClasspathEntry>.\lib-ivy\jsinterop-annotations-1.0.2.jar</AuxClasspathEntry>
+  <SrcDir>.\.\.\src</SrcDir>
 </Project>

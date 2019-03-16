@@ -23,6 +23,7 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
@@ -33,7 +34,7 @@ import org.pepstock.charba.client.enums.PointStyle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class BubbleDataset extends HovingDataset {
+public final class BubbleDataset extends HovingDataset implements HasDataPoints {
 	// exception message when it's not using data points
 	private static final String DATA_USAGE_MESSAGE = "Use datapoints instead of data for bubble chart";
 	// data point factory
@@ -44,7 +45,6 @@ public final class BubbleDataset extends HovingDataset {
 	 */
 	private enum Property implements Key
 	{
-		data,
 		hoverRadius,
 		hitRadius,
 		pointStyle,
@@ -169,8 +169,11 @@ public final class BubbleDataset extends HovingDataset {
 	 * 
 	 * @param datapoints an array of data points
 	 */
+	@Override
 	public void setDataPoints(DataPoint... datapoints) {
-		setArrayValue(Property.data, ArrayObject.of(datapoints));
+		setArrayValue(Dataset.Property.data, ArrayObject.fromOrNull(datapoints));
+		// sets data type checking if the key exists
+		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.points : DataType.unknown);
 	}
 
 	/**
@@ -178,18 +181,32 @@ public final class BubbleDataset extends HovingDataset {
 	 * 
 	 * @param datapoints a list of data points
 	 */
+	@Override
 	public void setDataPoints(List<DataPoint> datapoints) {
-		setArrayValue(Property.data, ArrayObject.of(datapoints));
+		setArrayValue(Dataset.Property.data, ArrayObject.fromOrNull(datapoints));
+		// sets data type checking if the key exists
+		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.points : DataType.unknown);
 	}
 
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
 	 * 
-	 * @return a list of data points
+	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#points}.
 	 */
+	@Override
 	public List<DataPoint> getDataPoints() {
-		ArrayObject array = getArrayValue(Property.data);
-		return ArrayListHelper.list(array, factory);
+		return getDataPoints(false);
+	}
+
+	/**
+	 * Returns the data property of a dataset for a chart is specified as an array of data points
+	 * 
+	 * @param binding if <code>true</code> binds the new array list into container
+	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#points}.
+	 */
+	@Override
+	public List<DataPoint> getDataPoints(boolean binding) {
+		return getDataPoints(factory, binding);
 	}
 
 	/*
@@ -221,4 +238,15 @@ public final class BubbleDataset extends HovingDataset {
 	public List<Double> getData() {
 		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getData(boolean)
+	 */
+	@Override
+	public List<Double> getData(boolean binding) {
+		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
+	}
+
 }

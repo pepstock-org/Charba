@@ -63,6 +63,16 @@ public final class Pattern extends CanvasObject {
 	 * 
 	 * @param image image to use as pattern
 	 */
+	public Pattern(Image image) {
+		this(image, Context2d.Repetition.REPEAT);
+	}
+
+	/**
+	 * Creates the object using an image to use in the pattern.<br>
+	 * The repetition used is repeat.
+	 * 
+	 * @param image image to use as pattern
+	 */
 	public Pattern(ImageElement image) {
 		this(image, Context2d.Repetition.REPEAT);
 	}
@@ -80,6 +90,25 @@ public final class Pattern extends CanvasObject {
 			Image img = new Image(image);
 			// creates pattern
 			setValue(Property._charbaPatternImg, ImageElement.as(img.getElement()));
+			setValue(Property._charbaPatternRepetition, repetition == null ? Context2d.Repetition.REPEAT.name() : repetition.name());
+		} else {
+			// if here, image is null
+			// then exception
+			throw new IllegalArgumentException(IMG_NULL_MESSAGE);
+		}
+	}
+
+	/**
+	 * Creates the object using an image to use in the pattern and repetition to apply to pattern.
+	 * 
+	 * @param image image to use as pattern
+	 * @param repetition repetition value to apply to pattern
+	 */
+	public Pattern(Image image, Context2d.Repetition repetition) {
+		// checks if image is not consistent
+		if (image != null) {
+			// creates pattern
+			setValue(Property._charbaPatternImg, ImageElement.as(image.getElement()));
 			setValue(Property._charbaPatternRepetition, repetition == null ? Context2d.Repetition.REPEAT.name() : repetition.name());
 		} else {
 			// if here, image is null

@@ -21,7 +21,6 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultTitle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -168,46 +167,21 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	 * @param text the title text to display. If specified as an array, text is rendered on multiple lines.
 	 */
 	public void setText(String... text) {
-		// check if text is consistent
-		if (text != null) {
-			// checks if there is more than 1 element
-			if (text.length > 1) {
-				// stores the array
-				setArrayValue(Property.text, ArrayString.of(text));
-			} else {
-				// in this case there is only 1 element and then
-				// stores as string
-				setValue(Property.text, text[0]);
-			}
-			// checks if the node is already added to parent
-			checkAndAddToParent();
-		} else {
-			// being null
-			// remove the key if exists
-			removeIfExists(Property.text);
-		}
+		// stores the array
+		setValueOrArray(Property.text, text);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns the title text to display, as a list of strings.
 	 * 
-	 * @return a list of strings or <code>null</code> if not exist
+	 * @return a list of strings or an empty list if not exist
 	 */
 	public List<String> getText() {
-		// gets the type of the property
-		ObjectType type = type(Property.text);
-		// if it's an array
-		if (ObjectType.Array.equals(type)) {
-			// reads as array
-			// and returns it
-			ArrayString array = getArrayValue(Property.text);
-			return ArrayListHelper.list(array);
-		} else if (has(Property.text)) {
-			// if there is the property
-			// and we are here, loads it as string
-			return ArrayListHelper.list(ArrayString.of(getValue(Property.text, UndefinedValues.STRING)));
-		}
-		// if not exists, null.
-		return null;
+		// reads as array
+		// and returns it
+		ArrayString array = getValueOrArray(Property.text, UndefinedValues.STRING);
+		return ArrayListHelper.list(array);
 	}
 }

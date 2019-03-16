@@ -201,15 +201,8 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param events the browser events that the chart should listen to for tooltips and hovering.
 	 */
 	public void setEvents(Event... events) {
-		// checks the events passed
-		// if empty
-		if (events == null || events.length == 0) {
-			// remove java script property
-			remove(Property.events);
-		} else {
-			// sets the array of events
-			setArrayValue(Property.events, ArrayString.of(events));
-		}
+		// sets the array of events
+		setArrayValue(Property.events, ArrayString.fromOrNull(events));
 	}
 
 	/**

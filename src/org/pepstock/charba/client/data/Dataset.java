@@ -17,6 +17,7 @@ package org.pepstock.charba.client.data;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartType;
@@ -25,11 +26,15 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.ArrayDouble;
+import org.pepstock.charba.client.commons.ArrayDoubleList;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.PluginIdChecker;
 import org.pepstock.charba.client.utils.JSON;
@@ -45,6 +50,8 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  * @author Andrea "Stock" Stocchero
  */
 public abstract class Dataset extends NativeObjectContainer {
+	// internal count
+	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// default for hidden property
 	private static final boolean DEFAULT_HIDDEN = false;
 	// patterns container
@@ -57,15 +64,19 @@ public abstract class Dataset extends NativeObjectContainer {
 	/**
 	 * Name of properties of native object.
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
 		label,
 		data,
 		type,
 		hidden,
+		// internal key to store a unique id
+		_charbaId,
 		// internal key to store patterns and gradients
 		_charbaPatterns,
-		_charbaGradients
+		_charbaGradients,
+		// internal key to store data type
+		_charbaDataType
 	}
 
 	/**
@@ -84,11 +95,33 @@ public abstract class Dataset extends NativeObjectContainer {
 	 */
 	Dataset(IsDefaultOptions defaultValues) {
 		this.defaultValues = defaultValues;
+		// stores the id based on a counter
+		setValue(Property._charbaId, COUNTER.getAndIncrement());
 		// sets the Charba containers into dataset java script configuration
 		setValue(Property._charbaPatterns, patternsContainer);
 		setValue(Property._charbaGradients, gradientsContainer);
+		// sets default data type
+		setValue(Property._charbaDataType, DataType.unknown);
 	}
-	
+
+	/**
+	 * Returns the unique id of datasets.
+	 * 
+	 * @return the unique id of datasets
+	 */
+	public final int getId() {
+		return getValue(Property._charbaId, UndefinedValues.INTEGER);
+	}
+
+	/**
+	 * Returns the data type of datasets.
+	 * 
+	 * @return the data type of datasets
+	 */
+	public final DataType getDataType() {
+		return getValue(Property._charbaDataType, DataType.class, DataType.unknown);
+	}
+
 	/**
 	 * Returns the patterns container element.
 	 * 
@@ -314,7 +347,10 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @param values an array of numbers
 	 */
 	public void setData(double... values) {
-		setArrayValue(Property.data, ArrayDouble.of(values));
+		// set value. If null, removes key and then..
+		setArrayValue(Property.data, ArrayDouble.fromOrNull(values));
+		// sets data type checking if the key exists
+		setValue(Property._charbaDataType, has(Property.data) ? DataType.numbers : DataType.unknown);
 	}
 
 	/**
@@ -324,18 +360,78 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @param values list of numbers.
 	 */
 	public void setData(List<Double> values) {
-		setArrayValue(Property.data, ArrayDouble.of(values));
+		// set value. If null, removes key and then..
+		setArrayValue(Property.data, ArrayDouble.fromOrNull(values));
+		// sets data type checking if the key exists
+		setValue(Property._charbaDataType, has(Property.data) ? DataType.numbers : DataType.unknown);
 	}
 
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array
 	 * corresponds to the label at the same index on the x axis.
 	 * 
-	 * @return list of numbers.
+	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#numbers}.
 	 */
 	public List<Double> getData() {
-		ArrayDouble array = getArrayValue(Property.data);
-		return ArrayListHelper.list(array);
+		return getData(false);
+	}
+
+	/**
+	 * Returns the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array
+	 * corresponds to the label at the same index on the x axis.
+	 * 
+	 * @param binding if <code>true</code> binds the new array list into container
+	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#numbers}.
+	 */
+	public List<Double> getData(boolean binding) {
+		// checks if is a numbers data type
+		if (has(Property.data) && DataType.numbers.equals(getDataType())) {
+			// returns numbers
+			ArrayDouble array = getArrayValue(Property.data);
+			// returns array
+			return ArrayListHelper.list(array);
+		}
+		// checks if wants to bind the array
+		if (binding) {
+			ArrayDoubleList result = new ArrayDoubleList();
+			// set value
+			setArrayValue(Property.data, ArrayDouble.from(result));
+			// sets data type
+			setValue(Property._charbaDataType, DataType.numbers);
+			// returns list
+			return result;
+		}
+		// returns an empty list
+		return new LinkedList<>();
+	}
+
+	/**
+	 * Returns the data property of a dataset for a chart is specified as an array of data points
+	 * 
+	 * @param factory datapoint object factory
+	 * @param binding if <code>true</code> binds the new array list into container
+	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#points}.
+	 */
+	final List<DataPoint> getDataPoints(DataPointListFactory factory, boolean binding) {
+		// checks if is a numbers data type
+		if (has(Dataset.Property.data) && DataType.points.equals(getDataType())) {
+			// gets array
+			ArrayObject array = getArrayValue(Dataset.Property.data);
+			// returns points
+			return ArrayListHelper.list(array, factory);
+		}
+		// checks if wants to bind the array
+		if (binding) {
+			ArrayObjectContainerList<DataPoint> result = new ArrayObjectContainerList<>();
+			// set value
+			setArrayValue(Dataset.Property.data, ArrayObject.from(result));
+			// sets data type
+			setValue(Dataset.Property._charbaDataType, DataType.points);
+			// returns list
+			return result;
+		}
+		// returns an empty list
+		return new LinkedList<>();
 	}
 
 	/**
@@ -409,12 +505,12 @@ public abstract class Dataset extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the data property in JSON format.
+	 * Returns the JSON representation of dataset. This is used y canvas object handler to know if the dataset has been changed.
 	 * 
-	 * @return the data property in JSON format.
+	 * @return JSON representation of dataset
 	 */
-	final String getDataAsString() {
-		return JSON.stringify(getArrayValue(Property.data));
+	String toFilteredJSON() {
+		return JSON.stringifyNativeObject(getNativeObject(), -1);
 	}
 
 }

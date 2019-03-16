@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.data;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.AbstractChart;
@@ -35,7 +34,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  */
 public final class Data extends NativeObjectContainer implements ConfigurationElement {
 
-	// maintains the list of datasets
+	// maintains the list of datasets because needs to preserve the dataset type
 	private final ArrayObjectContainerList<Dataset> currentDatasets = new ArrayObjectContainerList<Dataset>();
 
 	/**
@@ -50,14 +49,14 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	}
 
 	/**
-	 * Creates the object with an empty native object
+	 * Creates the object with an empty native object.
 	 */
 	public Data() {
 		// nothing
 	}
 
 	/**
-	 * Sets the labels of the data
+	 * Sets the labels of the data.
 	 * 
 	 * @param labels array of labels
 	 */
@@ -71,26 +70,51 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	}
 
 	/**
-	 * Sets the labels of the data
+	 * Sets the labels of the data.
 	 * 
-	 * @param labels labels object to manage also multi-line labels.
+	 * @param labels labels object to manage also multi-line labels
 	 */
 	public void setLabels(Labels labels) {
 		setArrayValue(Property.labels, labels.getArray());
 	}
 
 	/**
-	 * Returns the labels
+	 * Returns the labels.
 	 * 
 	 * @return the labels
 	 */
 	public Labels getLabels() {
-		ArrayMixedObject array = getArrayValue(Property.labels);
-		return Labels.load(array);
+		return getLabels(false);
 	}
 
 	/**
-	 * Sets the labels for X axes of the data
+	 * Returns the labels for axes.
+	 * 
+	 * @param binding if <code>true</code> binds the new labels into container
+	 * @return the labels for axes
+	 */
+	public Labels getLabels(boolean binding) {
+		// checks if there is the property
+		if (has(Property.labels)) {
+			// gets array
+			ArrayMixedObject array = getArrayValue(Property.labels);
+			// returns labels
+			return Labels.load(array);
+		}
+		// if here, no array stored
+		// object to return
+		Labels result = Labels.build();
+		// checks if binding new array
+		if (binding) {
+			// stores array
+			setLabels(result);
+		}
+		// returns labels
+		return result;
+	}
+
+	/**
+	 * Sets the labels for X axes of the data.
 	 * 
 	 * @param labels array of labels
 	 */
@@ -104,26 +128,51 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	}
 
 	/**
-	 * Sets the labels for X axes of the data
+	 * Sets the labels for X axes of the data.
 	 * 
-	 * @param labels labels object to manage also multi-line labels.
+	 * @param labels labels object to manage also multi-line labels
 	 */
 	public void setXLabels(Labels labels) {
 		setArrayValue(Property.xLabels, labels.getArray());
 	}
 
 	/**
-	 * Returns the labels for X axes
+	 * Returns the labels for X axes.
 	 * 
 	 * @return the labels for X axes
 	 */
 	public Labels getXLabels() {
-		ArrayMixedObject array = getArrayValue(Property.xLabels);
-		return Labels.load(array);
+		return getXLabels(false);
 	}
 
 	/**
-	 * Sets the labels for Y axes of the data
+	 * Returns the labels for X axes.
+	 * 
+	 * @param binding if <code>true</code> binds the new labels into container
+	 * @return the labels for X axes
+	 */
+	public Labels getXLabels(boolean binding) {
+		// checks if there is the property
+		if (has(Property.xLabels)) {
+			// gets array
+			ArrayMixedObject array = getArrayValue(Property.xLabels);
+			// returns labels
+			return Labels.load(array);
+		}
+		// if here, no array stored
+		// object to return
+		Labels result = Labels.build();
+		// checks if binding new array
+		if (binding) {
+			// stores array
+			setXLabels(result);
+		}
+		// returns labels
+		return result;
+	}
+
+	/**
+	 * Sets the labels for Y axes of the data.
 	 * 
 	 * @param labels array of labels
 	 */
@@ -137,64 +186,110 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	}
 
 	/**
-	 * Sets the labels for Y axes of the data
+	 * Sets the labels for Y axes of the data.
 	 * 
-	 * @param labels labels object to manage also multi-line labels.
+	 * @param labels labels object to manage also multi-line labels
 	 */
 	public void setYLabels(Labels labels) {
 		setArrayValue(Property.yLabels, labels.getArray());
 	}
 
 	/**
-	 * Returns the labels for Y axes
+	 * Returns the labels for Y axes.
 	 * 
 	 * @return the labels for Y axes
 	 */
 	public Labels getYLabels() {
-		ArrayMixedObject array = getArrayValue(Property.yLabels);
-		return Labels.load(array);
+		return getYLabels(false);
 	}
 
 	/**
-	 * Sets a set of datasets for chart
+	 * Returns the labels for Y axes.
 	 * 
-	 * @param datasets set of dataset
+	 * @param binding if <code>true</code> binds the new labels into container
+	 * @return the labels for Y axes
+	 */
+	public Labels getYLabels(boolean binding) {
+		// checks if there is the property
+		if (has(Property.yLabels)) {
+			// gets array
+			ArrayMixedObject array = getArrayValue(Property.yLabels);
+			// returns labels
+			return Labels.load(array);
+		}
+		// if here, no array stored
+		// object to return
+		Labels result = Labels.build();
+		// checks if binding new array
+		if (binding) {
+			// stores array
+			setYLabels(result);
+		}
+		// returns labels
+		return result;
+	}
+
+	/**
+	 * Sets a set of datasets for chart. If argument is <code>null</code>, removes all datasets.
+	 * 
+	 * @param datasets set of dataset. If <code>null</code>, removes all datasets
 	 */
 	public void setDatasets(Dataset... datasets) {
+		// clear buffer
+		this.currentDatasets.clear();
 		// checks if arguments is consistent
 		if (datasets != null) {
-			// clear buffer
-			this.currentDatasets.clear();
 			// adds all datasets
 			this.currentDatasets.addAll(datasets);
 			// sets datasets to native object
 			setArrayValue(Property.datasets, this.currentDatasets);
+		} else {
+			// removes the existing property
+			removeIfExists(Property.datasets);
 		}
 	}
 
 	/**
-	 * Returns the list of datasets
+	 * Returns the list of datasets.
 	 * 
 	 * @return the list of datasets
 	 */
 	public List<Dataset> getDatasets() {
+		return getDatasets(false);
+	}
+
+	/**
+	 * Returns the list of datasets.
+	 * 
+	 * @param binding if <code>true</code> binds the new array list into container
+	 * @return the list of datasets
+	 */
+	public List<Dataset> getDatasets(boolean binding) {
+		// there is not the property and the binding is requested
+		// then adds array to container
+		if (!has(Property.datasets) && binding) {
+			// sets datasets to native object
+			setArrayValue(Property.datasets, this.currentDatasets);
+		}
+		// returns datasets
 		return this.currentDatasets;
 	}
 
 	/**
-	 * Returns a list of string for each datasets, in JSON format.
+	 * Returns a string representation for all datasets, in JSON format.
 	 * 
-	 * @return a list of string for each datasets, in JSON format
+	 * @return a string representation for all datasets, in JSON format.
 	 */
-	public List<String> getDatasetsAsString() {
-		// creates the result
-		List<String> result = new LinkedList<>();
+	String getDatasetsAsString() {
+		// creates the builder
+		StringBuilder sb = new StringBuilder();
 		// scans all datasets
 		for (Dataset ds : currentDatasets) {
-			// adds to list the data in JSON string format
-			result.add(ds.getDataAsString());
+			// adds to builder the data in JSON string format
+			sb.append(ds.toFilteredJSON()).append("\n");
 		}
-		return result;
+		// returns string of builder
+		return sb.toString();
 	}
 
 	/*

@@ -19,11 +19,18 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 
 /**
- * Factory to get the options (ONLY form chart) related to background color plugin.
+ * Factory to get the options (ONLY for chart and not global options) related to background plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class ChartBackgroundColorOptionsFactory implements NativeObjectContainerFactory<ChartBackgroundColorOptions> {
+
+	/**
+	 * To avoid any instantiation. Use the static reference into {@link ChartBackgroundColor#FACTORY}.
+	 */
+	ChartBackgroundColorOptionsFactory() {
+		// do nothing
+	}
 
 	/*
 	 * (non-Javadoc)

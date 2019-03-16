@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all interfaces need to provide defaults value of the chart options.
+ * Contains all interfaces need to provide defaults values of the chart options.
  * 
  * @author Andrea "Stock" Stocchero
  *

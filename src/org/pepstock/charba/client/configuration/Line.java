@@ -18,7 +18,7 @@ package org.pepstock.charba.client.configuration;
 import java.util.List;
 
 import org.pepstock.charba.client.enums.CapStyle;
-import org.pepstock.charba.client.enums.Fill;
+import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
@@ -161,10 +161,28 @@ public class Line extends AbstractConfigurationElement {
 	/**
 	 * Sets how to fill the area under the line.
 	 * 
-	 * @param fill how to fill the area under the line.
+	 * @param fill <code>true</code> to fill, otherwise <code>false</code>.
 	 */
 	public void setFill(boolean fill) {
 		getOptions().getElements().getLine().setFill(fill);
+	}
+
+	/**
+	 * Sets how to fill the area under the line, by absolute dataset index.
+	 * 
+	 * @param index absolute dataset index of the chart.
+	 */
+	public void setFill(int index) {
+		getOptions().getElements().getLine().setFill(index);
+	}
+
+	/**
+	 * Sets how to fill the area under the line, by relative dataset index.
+	 * 
+	 * @param index relative dataset index of the chart.
+	 */
+	public void setFill(String index) {
+		getOptions().getElements().getLine().setFill(index);
 	}
 
 	/**
@@ -172,7 +190,7 @@ public class Line extends AbstractConfigurationElement {
 	 * 
 	 * @param fill how to fill the area under the line.
 	 */
-	public void setFill(Fill fill) {
+	public void setFill(IsFill fill) {
 		getOptions().getElements().getLine().setFill(fill);
 	}
 
@@ -181,7 +199,7 @@ public class Line extends AbstractConfigurationElement {
 	 * 
 	 * @return how to fill the area under the line.
 	 */
-	public Fill getFill() {
+	public IsFill getFill() {
 		return getOptions().getElements().getLine().getFill();
 	}
 

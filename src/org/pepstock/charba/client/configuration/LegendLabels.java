@@ -49,7 +49,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	 * returns the text + styling for the color box.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero 
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyGenerateLabelsCallback {
@@ -69,7 +69,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	 * Java script FUNCTION callback called to filter legend items out of the legend. Receives 1 parameter, a Legend Item.<br>
 	 * Must be an interface with only 1 method.
 	 * 
-	 * @author Andrea "Stock" Stocchero 
+	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
 	interface ProxyFilterCallback {
@@ -99,6 +99,8 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	private LegendFilterCallback filterCallback = null;
 	// user callbacks implementation for generating labels
 	private LegendLabelsCallback labelsCallback = null;
+	// empty result
+	private static final LegendLabelItem[] EMPTY_RESULT = new LegendLabelItem[0];
 
 	/**
 	 * Name of properties of native object.
@@ -154,10 +156,10 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 					// calls callback
 					LegendLabelItem[] result = labelsCallback.generateLegendLabels(getChart());
 					// transforms into a native array
-					return ArrayObject.of(result);
+					return ArrayObject.from(result);
 				}
 				// empty array
-				return ArrayObject.of();
+				return ArrayObject.from(EMPTY_RESULT);
 			}
 
 		});
