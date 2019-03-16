@@ -20,7 +20,7 @@ jdk:
 # specify the brances to build from
 branches:
    only:
-     - cuc
+     - master
 #
 # BUILD phase
 #
@@ -29,7 +29,7 @@ before_install: ant ivyInit
 # list the content of Ivy cache dir BEFORE 
 before_script: sh ./scripts/before_script.sh
 # run the ant main target
-script: ant -v build-bin
+script: ant build-bin
 # list the content of Ivy cache dir AFTER
 after_script: ls -R ~/.ant 
 #
