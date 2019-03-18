@@ -168,9 +168,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	}
 
 	/**
-	 * Returns the stroke width of the bar in pixels. If a callback or an array or number have been set, returns an empty object.
+	 * Returns the stroke width of the bar in pixels. If a callback or an array have been set, returns an empty object.
 	 * 
-	 * @return list of the stroke width of the bar in pixels. If a callback or an array or number have been set, returns an empty object
+	 * @return list of the stroke width of the bar in pixels. If a callback or an array have been set, returns an empty object
 	 */
 	public BarBorderWidth getBorderWidthAsItem() {
 		// gets object type 
@@ -181,8 +181,15 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 			return new BarBorderWidth(getValue(Property.borderWidth));
 		}
 		// if here, is not a bar border width object
-		// then returns null
-		return new BarBorderWidth();
+		// then creates new border width
+		BarBorderWidth borderWidth = new BarBorderWidth();
+		// checks if borer width has been set by an object
+		if (ObjectType.Number.equals(type)) {
+			// reads number and set to object
+			borderWidth.set(getValue(Property.borderWidth, getDefaultBorderWidth()));
+		}
+		// returns the border width object
+		return borderWidth;
 	}
 
 	/**
