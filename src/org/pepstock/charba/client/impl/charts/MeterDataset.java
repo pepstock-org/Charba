@@ -127,7 +127,14 @@ public class MeterDataset extends DoughnutDataset {
 	 */
 	@Override
 	public void setBackgroundColor(BackgroundColorCallback<?> backgroundColorCallback) {
-		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+		// checks if null
+		if (backgroundColorCallback != null) {
+			// if not, exception
+			throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+		} else {
+			// otherwise clean up 
+			super.setBackgroundColor(backgroundColorCallback);
+		}
 	}
 
 	/*
@@ -138,7 +145,14 @@ public class MeterDataset extends DoughnutDataset {
 	 */
 	@Override
 	public void setBorderColor(BorderColorCallback<?> borderColorCallback) {
-		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+		// checks if null
+		if (borderColorCallback != null) {
+			// if not, exception
+			throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+		} else {
+			// otherwise clean up 
+			super.setBorderColor(borderColorCallback);
+		}
 	}
 
 	/*
@@ -149,7 +163,14 @@ public class MeterDataset extends DoughnutDataset {
 	 */
 	@Override
 	public void setHoverBackgroundColor(BackgroundColorCallback<?> hoverBackgroundColorCallback) {
-		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+		// checks if null
+		if (hoverBackgroundColorCallback != null) {
+			// if not, exception
+			throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+		} else {
+			// otherwise clean up 
+			super.setHoverBackgroundColor(hoverBackgroundColorCallback);
+		}
 	}
 
 	/*
@@ -160,7 +181,14 @@ public class MeterDataset extends DoughnutDataset {
 	 */
 	@Override
 	public void setHoverBorderColor(BorderColorCallback<?> hoverBorderColorCallback) {
-		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+		// checks if null
+		if (hoverBorderColorCallback != null) {
+			// if not, exception
+			throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+		} else {
+			// otherwise clean up 
+			super.setHoverBorderColor(hoverBorderColorCallback);
+		}
 	}
 
 	/*
