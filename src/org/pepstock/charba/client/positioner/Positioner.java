@@ -16,15 +16,18 @@
 package org.pepstock.charba.client.positioner;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Charts;
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
-import org.pepstock.charba.client.utils.Window;
+import org.pepstock.charba.client.items.DatasetItem;
 
 import jsinterop.annotations.JsFunction;
 
@@ -57,11 +60,11 @@ public final class Positioner {
 		 * Method of function to be called to invoke a custom positioner for tooltips.
 		 * 
 		 * @param context context Value of <code>this</code> to the execution context of function.
-		 * @param elements elements of tooltips.
+		 * @param datasetItems dataset elements of tooltips.
 		 * @param eventPosition point on the canvas where the event occurred.
 		 * @return point to show the tooltip
 		 */
-		Point call(PositionerContext context, Object elements, Point eventPoint);
+		Point call(PositionerContext context, ArrayObject datasetItems, Point eventPoint);
 	}
 
 	// ---------------------------
@@ -72,6 +75,8 @@ public final class Positioner {
 
 	// all custom positioners
 	private final Map<String, TooltipPositioner> positioners = new HashMap<>();
+	// dataset items factory
+	private final DatasetItem.DatasetItemFactory factory = new DatasetItem.DatasetItemFactory();
 
 	/**
 	 * To avoid any instantiation
@@ -86,12 +91,11 @@ public final class Positioner {
 			 * (non-Javadoc)
 			 * 
 			 * @see org.pepstock.charba.client.positioner.Positioner.ProxyPositionerCallback#call(org.pepstock.charba.client.
-			 * positioner.PositionerContext, java.lang.Object, org.pepstock.charba.client.positioner.Point)
+			 * positioner.PositionerContext, org.pepstock.charba.client.commons.ArrayObject,
+			 * org.pepstock.charba.client.positioner.Point)
 			 */
 			@Override
-			public Point call(PositionerContext context, Object elements, Point eventPoint) {
-				Window.getConsole().log(context);
-				Window.getConsole().log(elements);
+			public Point call(PositionerContext context, ArrayObject datasetItems, Point eventPoint) {
 				// gets chart instance
 				String id = context.getCharbaId();
 				AbstractChart<?, ?> chart = Charts.get(id);
@@ -104,8 +108,10 @@ public final class Positioner {
 					if (positioners.containsKey(position.name())) {
 						// gets the custom implementation
 						TooltipPositioner positioner = positioners.get(position.name());
+						// list of dataset items
+						List<DatasetItem> items = ArrayListHelper.unmodifiableList(datasetItems, factory);
 						// and invokes it
-						Point result = positioner.computePosition(chart, eventPoint);
+						Point result = positioner.computePosition(chart, items, eventPoint);
 						// checks if the result is consistent
 						if (result != null) {
 							return result;
@@ -117,7 +123,7 @@ public final class Positioner {
 				// then gets the default tooltip position
 				IsTooltipPosition defaultValue = DefaultsBuilder.get().getOptions().getTooltips().getPosition();
 				// invokes the positioner of the default one getting the point
-				Point defaultPoint = JsPositionerHelper.get().invoke(defaultValue, context, elements, eventPoint);
+				Point defaultPoint = JsPositionerHelper.get().invoke(defaultValue, context, datasetItems, eventPoint);
 				// if the result is ok, return it otherwise returns the point of event
 				return defaultPoint != null ? defaultPoint : eventPoint;
 			}

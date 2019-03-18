@@ -15,7 +15,10 @@
 */
 package org.pepstock.charba.client.positioner;
 
+import java.util.List;
+
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.options.Tooltips;
 
 /**
@@ -39,10 +42,11 @@ public interface TooltipPositioner {
 	 * Applies own logic to returns the point where the tooltip must be showed.
 	 * 
 	 * @param chart chart instance
+	 * @param items list of dataset items
 	 * @param eventPoint the point of event when the method has been invoked
 	 * @return the point where the tooltip must be showed. If <code>null</code>, the default tooltip positioner will be used to
 	 *         provide a consistent point where tooltip will be showed
 	 */
-	Point computePosition(AbstractChart<?, ?> chart, final Point eventPoint);
+	Point computePosition(AbstractChart<?, ?> chart, List<DatasetItem> items, Point eventPoint);
 
 }

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.positioner;
 
 import org.pepstock.charba.client.Injector;
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.resources.ResourcesType;
@@ -76,11 +77,11 @@ final class JsPositionerHelper {
 	 * 
 	 * @param position position of tooltips to be invoked
 	 * @param context context Value of <code>this</code> to the execution context of function.
-	 * @param elements elements of tooltips.
+	 * @param datasetItems list of dataset items
 	 * @param eventPosition point on the canvas where the event occurred.
 	 * @return the point calculated by positioner or <code>null</code> if positioner does not exist
 	 */
-	Point invoke(IsTooltipPosition position, PositionerContext context, Object elements, Point eventPoint) {
-		return NativeJsPositionerHelper.invoke(position.name(), context, elements, eventPoint);
+	Point invoke(IsTooltipPosition position, PositionerContext context, ArrayObject datasetItems, Point eventPoint) {
+		return NativeJsPositionerHelper.invoke(position.name(), context, datasetItems, eventPoint);
 	}
 }
