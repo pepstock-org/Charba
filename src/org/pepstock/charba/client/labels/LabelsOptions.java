@@ -63,7 +63,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	interface ProxyRenderCallback {
 
 		/**
-		 * Method of function to be called to to render the chart returning the label(string) and the image to show.
+		 * Method of function to be called to render the chart returning the label(string) and the image to show.
 		 * 
 		 * @param context context Value of <code>this</code> to the execution context of function.
 		 * @param item native object as render item.

@@ -26,8 +26,8 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
-import org.pepstock.charba.client.enums.TooltipPosition;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipModel;
 import org.pepstock.charba.client.options.ExtendedOptions;
@@ -279,7 +279,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	 * 
 	 * @param position the mode for positioning the tooltip.
 	 */
-	public void setPosition(TooltipPosition position) {
+	public void setPosition(IsTooltipPosition position) {
 		getConfiguration().getTooltips().setPosition(position);
 	}
 
@@ -288,7 +288,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	 * 
 	 * @return mode for positioning the tooltip.
 	 */
-	public TooltipPosition getPosition() {
+	public IsTooltipPosition getPosition() {
 		return getConfiguration().getTooltips().getPosition();
 	}
 

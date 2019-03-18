@@ -13,38 +13,10 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.commons;
-
 /**
- * This is a standard implementation of a key of property inside a Java script object.<br>
- * The standard is the key name is a String.
+ * Contains all classes to implement a custom tooltip positioner for CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class StandardKey implements Key {
-
-	private final String id;
-
-	/**
-	 * Builds the object with the key id as string
-	 * 
-	 * @param id id of key as String
-	 */
-	public StandardKey(String id) {
-		if (id == null) {
-			throw new IllegalArgumentException("Key is null");
-		}
-		this.id = id;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.commons.Key#name()
-	 */
-	@Override
-	public String name() {
-		return id;
-	}
-}
+package org.pepstock.charba.client.positioner;

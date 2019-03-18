@@ -276,7 +276,44 @@
     	window.onbeforeprint = function (event) {
  			for (var id in Chart.instances) {
     			Chart.instances[id].resize();
-    			console.log("Resize "+id);
   			}
 		}
     }
+    /*
+		JSPositionerHelper is an object with a set of static methods used as utility
+		and needed to add custom positioner on tooltips.   
+	*/
+    function JsPositionerHelper() {};
+    /*
+     Registers a custom postioner for tooltips into CHART.JS.
+
+	 @param name name of new position to set into tooltip config
+	 @param module function to invoke to get control
+    */
+    JsPositionerHelper.register = function(name, module) {
+    	if (module != null && typeof module === 'function'){
+	    	Chart.Tooltip.positioners[name] = module;
+    	}
+    }
+    /*
+     Unregisters a custom postioner for tooltips from CHART.JS.
+
+	 @param name name of new position to set into tooltip config
+    */
+    JsPositionerHelper.unregister = function(name) {
+    	if (Chart.Tooltip.positioners[name] != 'undefined'){
+ 		    delete Chart.Tooltip.positioners[name];
+    	}
+    }
+     /*
+	 Invokes an existing positioner to get the point.
+	  
+	 @param name name of position to be invoked
+	 @return the point calculated by positioner or <code>null</code> if positioner does not exist
+    */
+    JsPositionerHelper.invoke = function(name, context, elements, eventPoint) {
+    	if (Chart.Tooltip.positioners[name] != 'undefined'){
+    		return Chart.Tooltip.positioners[name].apply(context, Array.of(elements, eventPoint));
+    	}
+    	return null;
+    }   
