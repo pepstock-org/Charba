@@ -15,14 +15,12 @@
 */
 package org.pepstock.charba.client.patterns;
 
-import org.pepstock.charba.client.commons.Key;
-
 /**
  * Enumerates all available pattern types (called shapes) in PATTERNOMALY java script library.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum Shape implements Key
+public enum Shape
 {
 	plus("plus"),
 	cross("cross"),
