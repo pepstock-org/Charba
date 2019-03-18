@@ -21,7 +21,8 @@ import org.pepstock.charba.client.colors.IsColor;
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 
 /**
- * Callback interface to set <code>borderColor</code> property at runtime, using the chart instance and the context.
+ * Callback interface to set <code>borderColor</code>, <code>hoverBorderColor</code>, <code>pointBorderColor</code>or
+ * <code>pointHoverBorderColor</code> property at runtime, using the chart instance and the context.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -30,6 +31,6 @@ import com.google.gwt.canvas.dom.client.CanvasGradient;
  * @see Gradient
  * @see CanvasGradient
  */
-public interface BorderColorCallback<T> extends Scriptable<T>{
+public interface BorderColorCallback<T> extends Scriptable<T> {
 
 }

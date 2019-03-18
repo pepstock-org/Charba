@@ -165,7 +165,6 @@ public final class Positioner {
 	/**
 	 * Register the tooltips positioner to CHART.JS.
 	 * 
-	 * @param position custom tooltip position to use into tooltip
 	 * @param positioner tooltip positioner instance to invoke
 	 */
 	public void register(TooltipPositioner positioner) {

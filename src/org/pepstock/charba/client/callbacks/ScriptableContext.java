@@ -34,7 +34,7 @@ import jsinterop.annotations.JsType;
  * <ul>
  * <li><b>index</b>(int): index of the associated data
  * <li><b>datasetIndex</b>(int): index of the associated dataset
- * <li><b>Charba ID</b>(String): id (of Charba) assigned to chart
+ * <li><b>active</b>(boolean): if the data and dataset item is hovered (only for datalabels plugin)
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
@@ -71,7 +71,7 @@ public final class ScriptableContext extends NativeExtendedObject {
 	 */
 	@JsProperty(name = "datasetIndex")
 	native int getNativeDatasetIndex();
-	
+
 	/**
 	 * Returns the <code>active</code> property by native object.
 	 * 
@@ -118,10 +118,10 @@ public final class ScriptableContext extends NativeExtendedObject {
 	 * @return the CHARBA chart instance
 	 */
 	@JsOverlay
-	AbstractChart<?, ?>getChart() {
+	AbstractChart<?, ?> getChart() {
 		return getNativeChart().getChart();
 	}
-	
+
 	/**
 	 * Returns whether the associated element is hovered.
 	 * 

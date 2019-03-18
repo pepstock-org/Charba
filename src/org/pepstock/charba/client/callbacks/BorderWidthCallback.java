@@ -16,7 +16,8 @@
 package org.pepstock.charba.client.callbacks;
 
 /**
- * Callback interface to set <code>borderWidth</code> property at runtime, using the chart instance and the context.
+ * Callback interface to set <code>borderWidth</code>, <code>hoverBorderWidth</code>, <code>pointBorderWidth</code> or
+ * <code>pointHoverBorderWidth</code> property at runtime, using the chart instance and the context.
  * 
  * @author Andrea "Stock" Stocchero
  *

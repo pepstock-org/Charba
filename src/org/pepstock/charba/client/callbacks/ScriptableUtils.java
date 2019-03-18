@@ -39,7 +39,7 @@ public final class ScriptableUtils {
 	private ScriptableUtils() {
 		// do nothing
 	}
-	
+
 	/**
 	 * Returns the chart instance if callback and chart itself are consistent.
 	 * 

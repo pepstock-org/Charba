@@ -23,7 +23,8 @@ import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
 
 /**
- * Callback interface to set <code>backgroundColor</code> property at runtime, using the chart instance and the context.
+ * Callback interface to set <code>backgroundColor</code>, <code>hoverBackgroundColor</code>, <code>pointBackgroundColor</code>
+ * or <code>pointHoverBackgroundColor</code> property at runtime, using the chart instance and the context.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -34,6 +35,6 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  * @see CanvasPattern
  * @see CanvasGradient
  */
-public interface BackgroundColorCallback<T> extends Scriptable<T>{
+public interface BackgroundColorCallback<T> extends Scriptable<T> {
 
 }

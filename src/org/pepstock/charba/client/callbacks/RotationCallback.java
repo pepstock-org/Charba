@@ -22,6 +22,6 @@ package org.pepstock.charba.client.callbacks;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface RotationCallback extends Scriptable<Double>{
+public interface RotationCallback extends Scriptable<Double> {
 
 }
