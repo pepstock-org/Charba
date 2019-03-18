@@ -37,7 +37,7 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  *
  */
 public final class Patternomaly {
-	
+
 	// static instance for singleton
 	private static final Patternomaly INSTANCE = new Patternomaly();
 
@@ -53,7 +53,7 @@ public final class Patternomaly {
 	 * Default pattern size, 20
 	 */
 	public static final int DEFAULT_SIZE = 20;
-	
+
 	// minimum size that can be requested
 	private static final int MINIMUM_SIZE = 10;
 	// cache of canvas pattern to avoid to create the same pattern if already used
@@ -77,9 +77,7 @@ public final class Patternomaly {
 	}
 
 	/**
-	 * Returns a canvas pattern, using default values.<br>
-	 * Share is <code>square</code>, background color {@value DEFAULT_BACKGROUND_COLOR}, pattern color
-	 * {@value DEFAULT_PATTERN_COLOR} and size 20.
+	 * Returns a canvas pattern, using default values, shape is <code>square</code>, background color, pattern color and size.
 	 * 
 	 * @return a canvas pattern
 	 */
@@ -88,9 +86,8 @@ public final class Patternomaly {
 	}
 
 	/**
-	 * Returns a canvas pattern, using the shape as argument and the other default values.<br>
-	 * Background color {@value DEFAULT_BACKGROUND_COLOR}, pattern color
-	 * {@value DEFAULT_PATTERN_COLOR} and size 20.
+	 * Returns a canvas pattern, using the shape as argument and the other default values, background color, pattern color and
+	 * size.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @return a canvas pattern
@@ -100,8 +97,8 @@ public final class Patternomaly {
 	}
 
 	/**
-	 * Returns a canvas pattern, using the shape and back ground color as arguments and the other default values.<br>
-	 * Pattern color {@value DEFAULT_PATTERN_COLOR} and size 20.
+	 * Returns a canvas pattern, using the shape and back ground color as arguments and the other default values, pattern color
+	 * and size.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
@@ -112,8 +109,8 @@ public final class Patternomaly {
 	}
 
 	/**
-	 * Returns a canvas pattern, using the shape and back ground color as arguments and the other default values.<br>
-	 * Pattern color {@value DEFAULT_PATTERN_COLOR} and size 20.
+	 * Returns a canvas pattern, using the shape and back ground color as arguments and the other default values, pattern color
+	 * and size.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
@@ -124,13 +121,12 @@ public final class Patternomaly {
 	}
 
 	/**
-	 * Returns a canvas pattern, using the shape, back ground color and pattern color as arguments and the other default
-	 * values.<br>
-	 * Size 20.
+	 * Returns a canvas pattern, using the shape, back ground color and pattern color as arguments and the size as default
+	 * value.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
-	 * @param patternColor pattern color 
+	 * @param patternColor pattern color
 	 * @return a canvas pattern
 	 */
 	public CanvasPattern draw(Shape shape, String backgroundColor, String patternColor) {
@@ -138,13 +134,12 @@ public final class Patternomaly {
 	}
 
 	/**
-	 * Returns a canvas pattern, using the shape, back ground color and pattern color as arguments and the other default
-	 * values.<br>
-	 * Size 20.
+	 * Returns a canvas pattern, using the shape, back ground color and pattern color as arguments and the size as default
+	 * value.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
-	 * @param patternColor pattern color 
+	 * @param patternColor pattern color
 	 * @return a canvas pattern
 	 */
 	public CanvasPattern draw(Shape shape, IsColor backgroundColor, IsColor patternColor) {
@@ -156,7 +151,7 @@ public final class Patternomaly {
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
-	 * @param patternColor pattern color 
+	 * @param patternColor pattern color
 	 * @param size size of canvas pattern
 	 * @return a canvas pattern
 	 */
@@ -169,7 +164,7 @@ public final class Patternomaly {
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
-	 * @param patternColor pattern color 
+	 * @param patternColor pattern color
 	 * @param size size of canvas pattern
 	 * @return a canvas pattern
 	 */
@@ -182,7 +177,7 @@ public final class Patternomaly {
 		// checks the minimum size of canvas pattern
 		int sizeParam = Math.max(size, MINIMUM_SIZE);
 		// creates a unique key based on arguments
-		// in order to store the canvas pattern when created and 
+		// in order to store the canvas pattern when created and
 		// if all further requests for the same canvas pattern, returns the cached one
 		StringBuilder keyBuilder = new StringBuilder(shapeParam);
 		keyBuilder.append(backgroundColorParam).append(patternColorParam).append(sizeParam);
@@ -200,9 +195,7 @@ public final class Patternomaly {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using default values.<br>
-	 * Share is <code>square</code>, background color {@value DEFAULT_BACKGROUND_COLOR}, pattern color
-	 * {@value DEFAULT_PATTERN_COLOR} and size 20.
+	 * Returns a CHARBA pattern, using default values, shape is <code>square</code>, background color, pattern color and size.
 	 * 
 	 * @return a CHARBA pattern
 	 */
@@ -211,9 +204,8 @@ public final class Patternomaly {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the shape as argument and the other default values.<br>
-	 * Background color {@value DEFAULT_BACKGROUND_COLOR}, pattern color
-	 * {@value DEFAULT_PATTERN_COLOR} and size 20.
+	 * Returns a CHARBA pattern, using the shape as argument and the other default values, background color, pattern color and
+	 * size.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @return a CHARBA pattern
@@ -223,8 +215,8 @@ public final class Patternomaly {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the shape and back ground color as arguments and the other default values.<br>
-	 * Pattern color {@value DEFAULT_PATTERN_COLOR} and size 20.
+	 * Returns a CHARBA pattern, using the shape and back ground color as arguments and the other default values, pattern color
+	 * and size.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
@@ -235,8 +227,8 @@ public final class Patternomaly {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the shape and back ground color as arguments and the other default values.<br>
-	 * Pattern color {@value DEFAULT_PATTERN_COLOR} and size 20.
+	 * Returns a CHARBA pattern, using the shape and back ground color as arguments and the other default values, pattern color
+	 * and size.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
@@ -247,13 +239,12 @@ public final class Patternomaly {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the shape, back ground color and pattern color as arguments and the other default
-	 * values.<br>
-	 * Size 20.
+	 * Returns a CHARBA pattern, using the shape, back ground color and pattern color as arguments and the size as default
+	 * value.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
-	 * @param patternColor pattern color 
+	 * @param patternColor pattern color
 	 * @return a CHARBA pattern
 	 */
 	public Pattern createPattern(Shape shape, String backgroundColor, String patternColor) {
@@ -261,13 +252,12 @@ public final class Patternomaly {
 	}
 
 	/**
-	 * Returns a CHARBA pattern, using the shape, back ground color and pattern color as arguments and the other default
-	 * values.<br>
-	 * Size 20.
+	 * Returns a CHARBA pattern, using the shape, back ground color and pattern color as arguments and the size as default
+	 * value.
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
-	 * @param patternColor pattern color 
+	 * @param patternColor pattern color
 	 * @return a CHARBA pattern
 	 */
 	public Pattern createPattern(Shape shape, IsColor backgroundColor, IsColor patternColor) {
@@ -279,7 +269,7 @@ public final class Patternomaly {
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
-	 * @param patternColor pattern color 
+	 * @param patternColor pattern color
 	 * @param size size of canvas pattern
 	 * @return a CHARBA pattern
 	 */
@@ -292,7 +282,7 @@ public final class Patternomaly {
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
-	 * @param patternColor pattern color 
+	 * @param patternColor pattern color
 	 * @param size size of canvas pattern
 	 * @return a CHARBA pattern
 	 */

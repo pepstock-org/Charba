@@ -24,7 +24,7 @@ import jsinterop.annotations.JsType;
 
 /**
  * Native object which import the PATTERNOMALY java script library.<br>
- * The <code>pattern</code> the entry point of PATTERNOMALY.
+ * The <code>pattern</code> object name is the entry point of PATTERNOMALY.
  * 
  * @author Andrea "Stock" Stocchero
  */
