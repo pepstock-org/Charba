@@ -29,7 +29,7 @@ public abstract class AbstractTooltipPositioner implements TooltipPositioner {
 	private final CustomTooltipPosition name;
 
 	/**
-	 * Creates the positioner passing the name of tooltipo position as argument.<br>
+	 * Creates the positioner passing the name of tooltip position as argument.<br>
 	 * If the name is one of out of the box ones, see {@link TooltipPosition}, an exception is launched.
 	 * 
 	 * @param name of tooltip position.
@@ -44,7 +44,7 @@ public abstract class AbstractTooltipPositioner implements TooltipPositioner {
 	 * @see org.pepstock.charba.client.positioner.TooltipPositioner#getName()
 	 */
 	@Override
-	public CustomTooltipPosition getName() {
+	public final CustomTooltipPosition getName() {
 		return name;
 	}
 
