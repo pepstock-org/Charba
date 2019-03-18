@@ -24,6 +24,7 @@ import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.data.CanvasObjectFactory;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
@@ -196,12 +197,12 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 			ctx.setFillStyle(bgOptions.getBackgroundColorAsString());
 		} else if (ChartBackgroundColorOptions.ColorType.pattern.equals(bgOptions.getColorType())) {
 			// creates the pattern
-			CanvasPattern canvasPattern = ChartBackgroundCanvasObjectFactory.createPattern(chart, bgOptions.getBackgroundColorAsPattern());
+			CanvasPattern canvasPattern = CanvasObjectFactory.createPattern(chart, bgOptions.getBackgroundColorAsPattern());
 			// set fill canvas pattern
 			ctx.setFillStyle(canvasPattern);
 		} else if (ChartBackgroundColorOptions.ColorType.gradient.equals(bgOptions.getColorType())) {
 			// creates the gradient
-			CanvasGradient canvasGradient = ChartBackgroundCanvasObjectFactory.createGradient(chart, bgOptions.getBackgroundColorAsGradient());
+			CanvasGradient canvasGradient = ChartBackgroundGradientFactory.createGradient(chart, bgOptions.getBackgroundColorAsGradient());
 			// set fill canvas color
 			ctx.setFillStyle(canvasGradient);
 		}
@@ -247,7 +248,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 			// gradients must be recreated
 			// because gradients must be recreated
 			// the cache of gradients must be clear
-			ChartBackgroundCanvasObjectFactory.resetGradients(chart);
+			ChartBackgroundGradientFactory.resetGradients(chart);
 		}
 	}
 
@@ -260,7 +261,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	public void onDestroy(AbstractChart<?, ?> chart) {
 		// because chart is destroy
 		// clears the cache of patterns and gradients of the chart
-		ChartBackgroundCanvasObjectFactory.clear(chart);
+		ChartBackgroundGradientFactory.clear(chart);
 	}
 
 	/**
