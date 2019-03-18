@@ -25,11 +25,7 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * The positioner context is used to give contextual information to the tooltip positioner function.<br>
- * The context object contains the following properties:<br>
- * <ul>
- * <li><b>Charba ID</b>(String): id (of Charba) assigned to chart
- * </ul>
+ * The positioner context is used to give contextual information to the tooltip positioner function.
  * 
  * @author Andrea "Stock" Stocchero
  */

@@ -25,7 +25,7 @@ import org.pepstock.charba.client.enums.TooltipPosition;
  * @author Andrea "Stock" Stocchero
  * @see TooltipPosition
  */
-public class CustomTooltipPosition implements IsTooltipPosition {
+public final class CustomTooltipPosition implements IsTooltipPosition {
 	// name of tooltip position
 	private final String name;
 
