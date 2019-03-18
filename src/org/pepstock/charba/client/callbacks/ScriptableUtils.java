@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
@@ -51,10 +50,8 @@ public final class ScriptableUtils {
 	public static AbstractChart<?, ?> retrieveChart(ScriptableContext context, Object callback) {
 		// checks if callback is consistent
 		if (callback != null) {
-			// gets chart ID
-			String id = context.getCharbaId();
 			// gets chart instance
-			return Charts.get(id);
+			return context.getChart();
 		}
 		// if here, chart or callback are not consistent
 		return null;

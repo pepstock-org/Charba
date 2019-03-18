@@ -222,7 +222,7 @@ final class WrapperController extends NativeObjectContainer {
 				// PAY ATTENTION: this is mandatory
 				context.setNativeChart(chart);
 				// invoke user method implementation
-				onInitialize(context, chart.getCharbaId(), datasetIndex);
+				onInitialize(context, chart.getChart(), datasetIndex);
 			}
 
 		});
@@ -237,7 +237,7 @@ final class WrapperController extends NativeObjectContainer {
 			@Override
 			public void call(ControllerContext context) {
 				// invoke user method implementation
-				onAddElements(context, context.getCharbaId());
+				onAddElements(context, context.getChart());
 			}
 
 		});
@@ -252,7 +252,7 @@ final class WrapperController extends NativeObjectContainer {
 			@Override
 			public void call(ControllerContext context, int index) {
 				// invoke user method implementation
-				onAddElementAndReset(context, context.getCharbaId(), index);
+				onAddElementAndReset(context, context.getChart(), index);
 			}
 
 		});
@@ -267,7 +267,7 @@ final class WrapperController extends NativeObjectContainer {
 			@Override
 			public void call(ControllerContext context, double ease) {
 				// invoke user method implementation
-				onDraw(context, context.getCharbaId(), ease);
+				onDraw(context, context.getChart(), ease);
 			}
 
 		});
@@ -282,7 +282,7 @@ final class WrapperController extends NativeObjectContainer {
 			@Override
 			public void call(ControllerContext context, NativeObject element) {
 				// invoke user method implementation
-				onRemoveHoverStyle(context, context.getCharbaId(), element);
+				onRemoveHoverStyle(context, context.getChart(), element);
 			}
 
 		});
@@ -297,7 +297,7 @@ final class WrapperController extends NativeObjectContainer {
 			@Override
 			public void call(ControllerContext context, NativeObject element) {
 				// invoke user method implementation
-				onSetHoverStyle(context, context.getCharbaId(), element);
+				onSetHoverStyle(context, context.getChart(), element);
 			}
 
 		});
@@ -312,7 +312,7 @@ final class WrapperController extends NativeObjectContainer {
 			@Override
 			public void call(ControllerContext context, boolean reset) {
 				// invoke user method implementation
-				onUpdate(context, context.getCharbaId(), reset);
+				onUpdate(context, context.getChart(), reset);
 			}
 
 		});
@@ -352,9 +352,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chartId chartId chart id.
 	 * @param datasetIndex dataset index
 	 */
-	protected void onInitialize(ControllerContext context, String chartId, int datasetIndex) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onInitialize(ControllerContext context, AbstractChart<?, ?> chart, int datasetIndex) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.initialize(context, chart, datasetIndex);
@@ -367,9 +365,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param context context of controller
 	 * @param chartId chartId chart id.
 	 */
-	protected void onAddElements(ControllerContext context, String chartId) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onAddElements(ControllerContext context, AbstractChart<?, ?> chart) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.addElements(context, chart);
@@ -383,9 +379,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chartId chartId chart id.
 	 * @param index dataset index
 	 */
-	protected void onAddElementAndReset(ControllerContext context, String chartId, int index) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onAddElementAndReset(ControllerContext context, AbstractChart<?, ?> chart, int index) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.addElementAndReset(context, chart, index);
@@ -399,9 +393,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chartId chartId chart id.
 	 * @param ease if specified, this number represents how far to transition elements.
 	 */
-	protected void onDraw(ControllerContext context, String chartId, double ease) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onDraw(ControllerContext context, AbstractChart<?, ?> chart, double ease) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.draw(context, chart, ease);
@@ -415,9 +407,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chartId chartId chart id.
 	 * @param object element to be removed.
 	 */
-	protected void onRemoveHoverStyle(ControllerContext context, String chartId, NativeObject object) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onRemoveHoverStyle(ControllerContext context, AbstractChart<?, ?> chart, NativeObject object) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.removeHoverStyle(context, chart, new StyleElement(object));
@@ -431,9 +421,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chartId chartId chart id.
 	 * @param object element to be set.
 	 */
-	protected void onSetHoverStyle(ControllerContext context, String chartId, NativeObject object) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onSetHoverStyle(ControllerContext context, AbstractChart<?, ?> chart, NativeObject object) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.setHoverStyle(context, chart, new StyleElement(object));
@@ -447,9 +435,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chartId chartId chart id.
 	 * @param reset if true, put the elements into a reset state so they can animate to their final values
 	 */
-	protected void onUpdate(ControllerContext context, String chartId, boolean reset) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onUpdate(ControllerContext context, AbstractChart<?, ?> chart, boolean reset) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.update(context, chart, reset);

@@ -36,7 +36,7 @@ public final class GlobalPlugins {
 
 	// list of global plugins set by user (not OOTB)
 	// K = plugin id, V = plugin instance
-	private final Map<String, GlobalPlugin> pluginIds = new HashMap<String, GlobalPlugin>();
+	private final Map<String, WrapperPlugin> pluginIds = new HashMap<String, WrapperPlugin>();
 	// native object of plugins
 	private final NativePlugins plugins;
 	// set of embedded plugin ids to disable for charts
@@ -66,7 +66,7 @@ public final class GlobalPlugins {
 			return false;
 		}
 		// creates a java script object, wrapper of the plugin
-		GlobalPlugin wPlugin = new GlobalPlugin(plugin);
+		WrapperPlugin wPlugin = new WrapperPlugin(plugin);
 		plugins.register(wPlugin.getNativeObject());
 		// stores the id and object into a map
 		pluginIds.put(plugin.getId(), wPlugin);
@@ -182,7 +182,7 @@ public final class GlobalPlugins {
 			}
 		}
 		// scans all plugins
-		for (Entry<String, GlobalPlugin> entry : pluginIds.entrySet()) {
+		for (Entry<String, WrapperPlugin> entry : pluginIds.entrySet()) {
 			// checks if plugin is enabled
 			if (chart.getOptions().getPlugins().isEnabled(entry.getKey())) {
 				// calls on configure method

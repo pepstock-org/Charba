@@ -29,7 +29,7 @@ import org.pepstock.charba.client.items.TooltipPluginItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class WrapperPlugin {
+final class WrapperPlugin {
 	// user plugin implementation
 	private final Plugin delegation;
 	// native object which will be added to chart.js
@@ -48,13 +48,13 @@ abstract class WrapperPlugin {
 		nativeObject.setId(delegation.getId());
 	}
 
-	/**
-	 * Returns the chart instances which must be consumed by plugin.
-	 * 
-	 * @param chartId chart id.
-	 * @return the chart instance or <code>null</code> if not found.
-	 */
-	abstract AbstractChart<?, ?> getChart(String chartId);
+//	/**
+//	 * Returns the chart instances which must be consumed by plugin.
+//	 * 
+//	 * @param chartId chart id.
+//	 * @return the chart instance or <code>null</code> if not found.
+//	 */
+//	abstract AbstractChart<?, ?> getChart(String chartId);
 
 	/**
 	 * Returns the plugin id.
@@ -91,9 +91,7 @@ abstract class WrapperPlugin {
 	 * 
 	 * @param chartId chart id.
 	 */
-	protected void onBeforeInit(String chartId) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onBeforeInit(AbstractChart<?, ?> chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onBeforeInit(chart);
@@ -105,9 +103,7 @@ abstract class WrapperPlugin {
 	 * 
 	 * @param chartId chart id.
 	 */
-	protected void onAfterInit(String chartId) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onAfterInit(AbstractChart<?, ?> chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterInit(chart);
@@ -121,9 +117,7 @@ abstract class WrapperPlugin {
 	 * @param chartId chart id.
 	 * @return <code>false</code> to cancel the chart update.
 	 */
-	protected boolean onBeforeUpdate(String chartId) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected boolean onBeforeUpdate(AbstractChart<?, ?> chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			return delegation.onBeforeUpdate(chart);
@@ -137,9 +131,7 @@ abstract class WrapperPlugin {
 	 * 
 	 * @param chartId chart id.
 	 */
-	protected void onAfterUpdate(String chartId) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onAfterUpdate(AbstractChart<?, ?> chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterUpdate(chart);
@@ -153,9 +145,7 @@ abstract class WrapperPlugin {
 	 * @param chartId chart id.
 	 * @return <code>false</code> to cancel the chart layout.
 	 */
-	protected boolean onBeforeLayout(String chartId) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected boolean onBeforeLayout(AbstractChart<?, ?> chart) {
 		// if consistent
 		if (chart != null) {
 			// calls plugin
@@ -170,9 +160,7 @@ abstract class WrapperPlugin {
 	 * 
 	 * @param chartId chart id.
 	 */
-	protected void onAfterLayout(String chartId) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onAfterLayout(AbstractChart<?, ?> chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterLayout(chart);
@@ -186,9 +174,7 @@ abstract class WrapperPlugin {
 	 * @param chartId chart id.
 	 * @return <code>false</code> to cancel the datasets update.
 	 */
-	protected boolean onBeforeDatasetsUpdate(String chartId) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected boolean onBeforeDatasetsUpdate(AbstractChart<?, ?> chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			return delegation.onBeforeDatasetsUpdate(chart);
@@ -202,9 +188,7 @@ abstract class WrapperPlugin {
 	 * 
 	 * @param chartId chart id.
 	 */
-	protected void onAfterDatasetsUpdate(String chartId) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onAfterDatasetsUpdate(AbstractChart<?, ?> chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterDatasetsUpdate(chart);
@@ -219,9 +203,7 @@ abstract class WrapperPlugin {
 	 * @param datasetIndex The dataset index.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	protected boolean onBeforeDatasetUpdate(String chartId, DatasetPluginItem item) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected boolean onBeforeDatasetUpdate(AbstractChart<?, ?> chart, DatasetPluginItem item) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			return delegation.onBeforeDatasetUpdate(chart, item);
@@ -236,9 +218,7 @@ abstract class WrapperPlugin {
 	 * @param chartId chart id.
 	 * @param datasetIndex The dataset index.
 	 */
-	protected void onAfterDatasetUpdate(String chartId, DatasetPluginItem item) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onAfterDatasetUpdate(AbstractChart<?, ?> chart, DatasetPluginItem item) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterDatasetUpdate(chart, item);
@@ -252,9 +232,7 @@ abstract class WrapperPlugin {
 	 * @param chartId chart id.
 	 * @return <code>false</code> to cancel the chart rendering.
 	 */
-	protected boolean onBeforeRender(String chartId) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected boolean onBeforeRender(AbstractChart<?, ?> chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			return delegation.onBeforeRender(chart);
@@ -268,9 +246,7 @@ abstract class WrapperPlugin {
 	 * 
 	 * @param chartId chart id.
 	 */
-	protected void onAfterRender(String chartId) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onAfterRender(AbstractChart<?, ?> chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterRender(chart);
@@ -285,9 +261,7 @@ abstract class WrapperPlugin {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart drawing.
 	 */
-	protected boolean onBeforeDraw(String chartId, double easing) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected boolean onBeforeDraw(AbstractChart<?, ?> chart, double easing) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			return delegation.onBeforeDraw(chart, easing);
@@ -302,9 +276,7 @@ abstract class WrapperPlugin {
 	 * @param chartId chart id.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	protected void onAfterDraw(String chartId, double easing) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onAfterDraw(AbstractChart<?, ?> chart, double easing) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterDraw(chart, easing);
@@ -319,9 +291,7 @@ abstract class WrapperPlugin {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	protected boolean onBeforeDatasetsDraw(String chartId, double easing) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected boolean onBeforeDatasetsDraw(AbstractChart<?, ?> chart, double easing) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			return delegation.onBeforeDatasetsDraw(chart, easing);
@@ -336,9 +306,7 @@ abstract class WrapperPlugin {
 	 * @param chartId chart id.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	protected void onAfterDatasetsDraw(String chartId, double easing) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onAfterDatasetsDraw(AbstractChart<?, ?> chart, double easing) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterDatasetsDraw(chart, easing);
@@ -354,9 +322,7 @@ abstract class WrapperPlugin {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	protected boolean onBeforeDatasetDraw(String chartId, DatasetPluginItem item) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected boolean onBeforeDatasetDraw(AbstractChart<?, ?> chart, DatasetPluginItem item) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			return delegation.onBeforeDatasetDraw(chart, item);
@@ -372,9 +338,7 @@ abstract class WrapperPlugin {
 	 * @param datasetIndex The dataset index.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	protected void onAfterDatasetDraw(String chartId, DatasetPluginItem item) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onAfterDatasetDraw(AbstractChart<?, ?> chart, DatasetPluginItem item) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterDatasetDraw(chart, item);
@@ -390,9 +354,7 @@ abstract class WrapperPlugin {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart tooltip drawing.
 	 */
-	protected boolean onBeforeTooltipDraw(String chartId, TooltipPluginItem item) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected boolean onBeforeTooltipDraw(AbstractChart<?, ?> chart, TooltipPluginItem item) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			return delegation.onBeforeTooltipDraw(chart, item);
@@ -408,9 +370,7 @@ abstract class WrapperPlugin {
 	 * @param object The tooltip model instance as java script object.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	protected void onAfterTooltipDraw(String chartId, TooltipPluginItem item) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onAfterTooltipDraw(AbstractChart<?, ?> chart, TooltipPluginItem item) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterTooltipDraw(chart, item);
@@ -424,9 +384,7 @@ abstract class WrapperPlugin {
 	 * @param event The event object wrapper.
 	 * @return <code>false</code> to discard the event.
 	 */
-	protected boolean onBeforeEvent(String chartId, EventPluginItem event) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected boolean onBeforeEvent(AbstractChart<?, ?> chart, EventPluginItem event) {
 		// if consistent, both chart and event, calls plugin
 		if (chart != null && event.getEvent() != null) {
 			return delegation.onBeforeEvent(chart, event.getEvent());
@@ -441,9 +399,7 @@ abstract class WrapperPlugin {
 	 * @param chartId chart id.
 	 * @param event The event object wrapper.
 	 */
-	protected void onAfterEvent(String chartId, EventPluginItem event) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onAfterEvent(AbstractChart<?, ?> chart, EventPluginItem event) {
 		// if consistent, both chart and event, calls plugin
 		if (chart != null && event.getEvent() != null) {
 			delegation.onAfterEvent(chart, event.getEvent());
@@ -456,9 +412,7 @@ abstract class WrapperPlugin {
 	 * @param chartId chart id.
 	 * @param item The new canvas display size (eq. canvas.style width & height).
 	 */
-	protected void onResize(String chartId, SizeItem item) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onResize(AbstractChart<?, ?> chart, SizeItem item) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onResize(chart, item);
@@ -470,9 +424,7 @@ abstract class WrapperPlugin {
 	 * 
 	 * @param chartId chart id.
 	 */
-	protected void onDestroy(String chartId) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onDestroy(AbstractChart<?, ?> chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onDestroy(chart);

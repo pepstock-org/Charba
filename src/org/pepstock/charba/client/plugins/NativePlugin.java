@@ -86,7 +86,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public void beforeInit(Chart chart, Object options) {
-		wrapper.onBeforeInit(chart.getCharbaId());
+		wrapper.onBeforeInit(chart.getChart());
 	}
 
 	/**
@@ -97,7 +97,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public void afterInit(Chart chart, Object options) {
-		wrapper.onAfterInit(chart.getCharbaId());
+		wrapper.onAfterInit(chart.getChart());
 	}
 
 	/**
@@ -110,7 +110,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public boolean beforeUpdate(Chart chart, Object options) {
-		return wrapper.onBeforeUpdate(chart.getCharbaId());
+		return wrapper.onBeforeUpdate(chart.getChart());
 	}
 
 	/**
@@ -122,7 +122,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public void afterUpdate(Chart chart, Object options) {
-		wrapper.onAfterUpdate(chart.getCharbaId());
+		wrapper.onAfterUpdate(chart.getChart());
 	}
 
 	/**
@@ -135,7 +135,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public boolean beforeLayout(Chart chart, Object options) {
-		return wrapper.onBeforeLayout(chart.getCharbaId());
+		return wrapper.onBeforeLayout(chart.getChart());
 	}
 
 	/**
@@ -147,7 +147,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public void afterLayout(Chart chart, Object options) {
-		wrapper.onAfterLayout(chart.getCharbaId());
+		wrapper.onAfterLayout(chart.getChart());
 	}
 
 	/**
@@ -160,7 +160,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public boolean beforeDatasetsUpdate(Chart chart, Object options) {
-		return wrapper.onBeforeDatasetsUpdate(chart.getCharbaId());
+		return wrapper.onBeforeDatasetsUpdate(chart.getChart());
 	}
 
 	/**
@@ -172,7 +172,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public void afterDatasetsUpdate(Chart chart, Object options) {
-		wrapper.onAfterDatasetsUpdate(chart.getCharbaId());
+		wrapper.onAfterDatasetsUpdate(chart.getChart());
 	}
 
 	/**
@@ -186,7 +186,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public boolean beforeDatasetUpdate(Chart chart, NativeObject item, Object options) {
-		return wrapper.onBeforeDatasetUpdate(chart.getCharbaId(), new DatasetPluginItem(item));
+		return wrapper.onBeforeDatasetUpdate(chart.getChart(), new DatasetPluginItem(item));
 	}
 
 	/**
@@ -199,7 +199,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public void afterDatasetUpdate(Chart chart, NativeObject item, Object options) {
-		wrapper.onAfterDatasetUpdate(chart.getCharbaId(), new DatasetPluginItem(item));
+		wrapper.onAfterDatasetUpdate(chart.getChart(), new DatasetPluginItem(item));
 	}
 
 	/**
@@ -212,7 +212,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public boolean beforeRender(Chart chart, Object options) {
-		return wrapper.onBeforeRender(chart.getCharbaId());
+		return wrapper.onBeforeRender(chart.getChart());
 	}
 
 	/**
@@ -224,7 +224,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public void afterRender(Chart chart, Object options) {
-		wrapper.onAfterRender(chart.getCharbaId());
+		wrapper.onAfterRender(chart.getChart());
 	}
 
 	/**
@@ -238,7 +238,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public boolean beforeDraw(Chart chart, double easing, Object options) {
-		return wrapper.onBeforeDraw(chart.getCharbaId(), easing);
+		return wrapper.onBeforeDraw(chart.getChart(), easing);
 	}
 
 	/**
@@ -251,7 +251,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public void afterDraw(Chart chart, double easing, Object options) {
-		wrapper.onAfterDraw(chart.getCharbaId(), easing);
+		wrapper.onAfterDraw(chart.getChart(), easing);
 	}
 
 	/**
@@ -265,7 +265,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public boolean beforeDatasetsDraw(Chart chart, double easing, Object options) {
-		return wrapper.onBeforeDatasetsDraw(chart.getCharbaId(), easing);
+		return wrapper.onBeforeDatasetsDraw(chart.getChart(), easing);
 	}
 
 	/**
@@ -278,7 +278,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public void afterDatasetsDraw(Chart chart, double easing, Object options) {
-		wrapper.onAfterDatasetsDraw(chart.getCharbaId(), easing);
+		wrapper.onAfterDatasetsDraw(chart.getChart(), easing);
 	}
 
 	/**
@@ -293,7 +293,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public boolean beforeDatasetDraw(Chart chart, NativeObject item, Object options) {
-		return wrapper.onBeforeDatasetDraw(chart.getCharbaId(), new DatasetPluginItem(item));
+		return wrapper.onBeforeDatasetDraw(chart.getChart(), new DatasetPluginItem(item));
 	}
 
 	/**
@@ -307,7 +307,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public void afterDatasetDraw(Chart chart, NativeObject item, Object options) {
-		wrapper.onAfterDatasetDraw(chart.getCharbaId(), new DatasetPluginItem(item));
+		wrapper.onAfterDatasetDraw(chart.getChart(), new DatasetPluginItem(item));
 	}
 
 	/**
@@ -322,7 +322,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public boolean beforeTooltipDraw(Chart chart, NativeObject item, Object options) {
-		return wrapper.onBeforeTooltipDraw(chart.getCharbaId(), new TooltipPluginItem(item));
+		return wrapper.onBeforeTooltipDraw(chart.getChart(), new TooltipPluginItem(item));
 	}
 
 	/**
@@ -336,7 +336,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public void afterTooltipDraw(Chart chart, NativeObject item, Object options) {
-		wrapper.onAfterTooltipDraw(chart.getCharbaId(), new TooltipPluginItem(item));
+		wrapper.onAfterTooltipDraw(chart.getChart(), new TooltipPluginItem(item));
 	}
 
 	/**
@@ -349,7 +349,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public boolean beforeEvent(Chart chart, NativeObject item, Object options) {
-		return wrapper.onBeforeEvent(chart.getCharbaId(), new EventPluginItem(item));
+		return wrapper.onBeforeEvent(chart.getChart(), new EventPluginItem(item));
 	}
 
 	/**
@@ -362,7 +362,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public void afterEvent(Chart chart, NativeObject item, Object options) {
-		wrapper.onAfterEvent(chart.getCharbaId(), new EventPluginItem(item));
+		wrapper.onAfterEvent(chart.getChart(), new EventPluginItem(item));
 	}
 
 	/**
@@ -374,7 +374,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public void resize(Chart chart, NativeObject size, Object options) {
-		wrapper.onResize(chart.getCharbaId(), new SizeItem(size));
+		wrapper.onResize(chart.getChart(), new SizeItem(size));
 	}
 
 	/**
@@ -385,7 +385,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public void destroy(Chart chart, Object options) {
-		wrapper.onDestroy(chart.getCharbaId());
+		wrapper.onDestroy(chart.getChart());
 	}
 
 }

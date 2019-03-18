@@ -138,7 +138,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		// Inject Chart.js if not already loaded
 		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
 		// creates plugins container
-		plugins = new Plugins(this);
+		plugins = new Plugins();
 		// creates defaults options for this chart type
 		options = createChartOptions();
 	}
