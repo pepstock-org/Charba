@@ -305,7 +305,7 @@
  		    delete Chart.Tooltip.positioners[name];
     	}
     }
-     /*
+    /*
 	 Invokes an existing positioner to get the point.
 	  
 	 @param name name of position to be invoked
@@ -316,4 +316,4 @@
     		return Chart.Tooltip.positioners[name].apply(context, Array.of(elements, eventPoint));
     	}
     	return null;
-    }   
+    }
