@@ -59,9 +59,10 @@ public enum Shape
 
 	/**
 	 * Returns value to pass to PATTERNOMALY when a pattern must be created.
+	 * 
 	 * @return the value
 	 */
-	public final String getValue() {
+	final String getValue() {
 		return value;
 	}
 }
