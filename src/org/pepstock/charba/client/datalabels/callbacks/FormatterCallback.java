@@ -37,6 +37,6 @@ public interface FormatterCallback {
 	 * @param context DATALABELS plugin context instance
 	 * @return the label value to be showed
 	 */
-	String format(AbstractChart<?, ?> chart, double value, ScriptableContext context);
+	String invoke(AbstractChart<?, ?> chart, double value, ScriptableContext context);
 
 }

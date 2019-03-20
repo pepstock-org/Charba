@@ -37,6 +37,6 @@ public interface FontColorCallback<T> {
 	 * @return a string which represent a color or a color instace. If returns <code>null</code>, it will use the default font
 	 *         color.
 	 */
-	T color(AbstractChart<?, ?> chart, FontColorItem item);
+	T invoke(AbstractChart<?, ?> chart, FontColorItem item);
 
 }

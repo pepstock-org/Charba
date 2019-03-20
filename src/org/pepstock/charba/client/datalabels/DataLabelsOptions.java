@@ -267,7 +267,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 				// checks if the handler is set
 				if (chart != null) {
 					// calls callback
-					String result = formatterCallback.format(chart, value, context);
+					String result = formatterCallback.invoke(chart, value, context);
 					// checks result
 					if (result != null) {
 						return result;

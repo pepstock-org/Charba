@@ -37,6 +37,6 @@ public interface RenderCallback<T> {
 	 * @param item render item, passed by plugin
 	 * @return a string or as image instance to show as label
 	 */
-	T render(AbstractChart<?, ?> chart, RenderItem item);
+	T invoke(AbstractChart<?, ?> chart, RenderItem item);
 
 }

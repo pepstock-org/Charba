@@ -117,7 +117,7 @@ public final class PercentageCallback implements FormatterCallback {
 	 * double, org.pepstock.charba.client.callbacks.ScriptableContext)
 	 */
 	@Override
-	public String format(AbstractChart<?, ?> chart, double value, ScriptableContext context) {
+	public String invoke(AbstractChart<?, ?> chart, double value, ScriptableContext context) {
 		// computes the percentage
 		double percentage = Percentage.compute(chart, value, context, stacked);
 		// checks if consistent

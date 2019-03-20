@@ -171,7 +171,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 				// checks if the callback is set
 				if (chart != null && renderCallback != null) {
 					// calls callback
-					Object value = renderCallback.render(chart, item);
+					Object value = renderCallback.invoke(chart, item);
 					// checks result
 					if (value != null) {
 						if (value instanceof ImageElement) {
@@ -201,7 +201,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 				// checks if the callback is set
 				if (chart != null && fontColorCallback != null) {
 					// calls callback
-					Object value = fontColorCallback.color(chart, item);
+					Object value = fontColorCallback.invoke(chart, item);
 					// checks result
 					if (value instanceof IsColor) {
 						// is color instance
