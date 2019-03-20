@@ -143,6 +143,7 @@ public final class Pattern extends CanvasObject {
 			throw new IllegalArgumentException(IMG_OR_CANVAS_PATTERN_NULL_MESSAGE);
 		}
 	}
+
 	/**
 	 * Creates the object using a native object where pattern info are stored.
 	 * 
@@ -170,7 +171,7 @@ public final class Pattern extends CanvasObject {
 		String value = getValue(Property._charbaPatternRepetition, Context2d.Repetition.REPEAT.name());
 		return Context2d.Repetition.valueOf(value);
 	}
-	
+
 	/**
 	 * Returns the canvas pattern if exists.
 	 * 

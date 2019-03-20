@@ -43,7 +43,7 @@ final class NativePatternomaly {
 	 * 
 	 * @param shape shape to apply to canvas pattern
 	 * @param backgroundColor background color of canvas pattern
-	 * @param patternColor pattern color 
+	 * @param patternColor pattern color
 	 * @param size size of canvas pattern
 	 * @return a canvas pattern
 	 */
