@@ -81,6 +81,20 @@ public interface IsColor {
 	String toHex();
 
 	/**
+	 * Returns HSLA string value which represents the color.
+	 * 
+	 * @return HSLA string value which represents the color
+	 */
+	String toHSLA();
+
+	/**
+	 * Returns HSL string value which represents the color.
+	 * 
+	 * @return HSL string value which represents the color
+	 */
+	String toHSL();
+
+	/**
 	 * As <a href="https://webstore.iec.ch/publication/6169">IEC 61966-2-1:1999</a>, applies to the encoding and communication
 	 * of RGB colors used in computer systems and similar applications, by defining encoding transformations for use in defined
 	 * reference conditions.<br>

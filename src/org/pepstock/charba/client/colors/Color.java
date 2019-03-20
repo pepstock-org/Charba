@@ -156,6 +156,26 @@ public final class Color implements IsColor {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#toHSLA()
+	 */
+	@Override
+	public String toHSLA() {
+		return ColorBuilder.HSLA_STARTING_CHARS + "(" + createHSLAsString(red, green, blue) + "," + alpha + ")";
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#toHSL()
+	 */
+	@Override
+	public String toHSL() {
+		return ColorBuilder.HSL_STARTING_CHARS + "(" + createHSLAsString(red, green, blue) + ")";
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.colors.IsColor#toRGBs()
 	 */
 	@Override
@@ -180,6 +200,58 @@ public final class Color implements IsColor {
 		}
 		// returns
 		return in;
+	}
+
+	/**
+	 * Convert a RGB Color to it corresponding HSL values.
+	 *
+	 * @return a string representation of HSL color, only <code>h,s%,l% </code>
+	 */
+	private static String createHSLAsString(int red, int green, int blue) {
+		// creates string builr
+		StringBuilder sb = new StringBuilder();
+		// transforms RGB values, normalizing them
+		// in a value between 0 abd 1
+		double r = red / 255D;
+		double g = green / 255D;
+		double b = blue / 255D;
+		// sets minimum and maximum RGB values are used in the HSL calculations
+		double min = Math.min(r, Math.min(g, b));
+		double max = Math.max(r, Math.max(g, b));
+		// ------------------
+		// HUE calculation
+		// ------------------
+		double hue = 0;
+		if (Double.compare(max, min) == 0) {
+			hue = 0;
+		} else if (Double.compare(max, r) == 0) {
+			hue = ((60 * (g - b) / (max - min)) + 360) % 360;
+		} else if (Double.compare(max, g) == 0) {
+			hue = (60 * (b - r) / (max - min)) + 120;
+		} else if (Double.compare(max, b) == 0) {
+			hue = (60 * (r - g) / (max - min)) + 240;
+		}
+		int hueInt = (int) Math.round(hue);
+		sb.append(hueInt).append(",");
+		// ------------------
+		// LIGHTNESS calculation
+		// ------------------
+		double lightness = (max + min) / 2;
+		int lightnessInt = (int) Math.round(lightness * 100);
+		// ------------------
+		// SATURATION calculation
+		// ------------------
+		double saturation = 0;
+		if (max == min) {
+			saturation = 0;
+		} else if (lightness <= 0.5D) {
+			saturation = (max - min) / (max + min);
+		} else {
+			saturation = (max - min) / (2 - max - min);
+		}
+		int saturationInt = (int) Math.round(saturation * 100);
+		// returns the string HSL
+		return sb.append(saturationInt).append("%,").append(lightnessInt).append("%").toString();
 	}
 
 	/**
