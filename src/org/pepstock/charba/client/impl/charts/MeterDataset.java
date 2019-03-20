@@ -24,6 +24,7 @@ import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.data.DoughnutDataset;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
@@ -70,6 +71,17 @@ public class MeterDataset extends DoughnutDataset {
 	private final double max;
 
 	private double value = MINIMUM_VALUE;
+	
+	/**
+	 * Name of properties of native object. Overrides {@link DoughnutDataset}
+	 */
+	private enum Property implements Key
+	{
+		backgroundColor,
+		borderColor,
+		hoverBackgroundColor,
+		hoverBorderColor,
+	}
 
 	/**
 	 * Creates a dataset setting the maximum value of dataset. It uses the global options has default.
@@ -132,8 +144,8 @@ public class MeterDataset extends DoughnutDataset {
 			// if not, exception
 			throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
 		} else {
-			// otherwise clean up 
-			super.setBackgroundColor(backgroundColorCallback);
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.backgroundColor);
 		}
 	}
 
@@ -150,8 +162,8 @@ public class MeterDataset extends DoughnutDataset {
 			// if not, exception
 			throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
 		} else {
-			// otherwise clean up 
-			super.setBorderColor(borderColorCallback);
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.borderColor);
 		}
 	}
 
@@ -168,8 +180,8 @@ public class MeterDataset extends DoughnutDataset {
 			// if not, exception
 			throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
 		} else {
-			// otherwise clean up 
-			super.setHoverBackgroundColor(hoverBackgroundColorCallback);
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.hoverBackgroundColor);
 		}
 	}
 
@@ -186,8 +198,8 @@ public class MeterDataset extends DoughnutDataset {
 			// if not, exception
 			throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
 		} else {
-			// otherwise clean up 
-			super.setHoverBorderColor(hoverBorderColorCallback);
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.hoverBorderColor);
 		}
 	}
 

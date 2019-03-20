@@ -135,7 +135,7 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	public int getLineWidth() {
 		return getValue(Property.lineWidth, getDefaultValues().getLineWidth());
 	}
-	
+
 	/**
 	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
 	 * and gaps which describe the pattern.

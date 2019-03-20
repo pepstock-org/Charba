@@ -327,7 +327,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	public boolean isHidden() {
 		return getValue(Property.hidden, DEFAULT_HIDDEN);
 	}
-	
+
 	/**
 	 * Sets the label for the dataset which appears in the legend and tooltips.
 	 * 

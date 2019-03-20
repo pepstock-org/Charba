@@ -124,7 +124,7 @@ public final class Utilities {
 		if (image != null) {
 			// checks if size is consistent
 			if (width > 0 && height > 0) {
-				// forses size to image
+				// forces size to image
 				image.setPixelSize(width, height);
 			}
 			// transform into image element

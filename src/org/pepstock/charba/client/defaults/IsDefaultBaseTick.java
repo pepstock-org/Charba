@@ -28,5 +28,5 @@ public interface IsDefaultBaseTick extends IsDefaultFontItem {
 	 * @return the height of an individual line of text.
 	 */
 	double getLineHeight();
-	
+
 }

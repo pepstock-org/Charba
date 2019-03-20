@@ -96,5 +96,5 @@ abstract class Tick extends BaseTick<Ticks> {
 	public boolean isReverse() {
 		return getConfiguration().isReverse();
 	}
-	
+
 }

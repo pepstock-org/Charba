@@ -254,8 +254,11 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// -------------------------------
 		formatterCallbackProxy.setCallback(new ProxyFormatterCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.datalabels.DataLabelsOptions.ProxyFormatterCallback#call(java.lang.Object, double, org.pepstock.charba.client.callbacks.ScriptableContext)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.datalabels.DataLabelsOptions.ProxyFormatterCallback#call(java.lang.Object,
+			 * double, org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
 			public String call(Object contextFunction, double value, ScriptableContext context) {

@@ -143,7 +143,7 @@ public interface IsDefaultScale {
 	 * @return the maximum bar thickness.
 	 */
 	int getMaxBarThickness();
-	
+
 	/**
 	 * Returns a minimum length in pixels.
 	 * 

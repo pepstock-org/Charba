@@ -215,7 +215,7 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	public String getFontFamily() {
 		return configuration.getFontFamily();
 	}
-	
+
 	/**
 	 * Sets the height of an individual line of text.
 	 * 
@@ -233,7 +233,7 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	public void setLineHeight(String lineHeight) {
 		getConfiguration().setLineHeight(lineHeight);
 	}
-	
+
 	/**
 	 * Returns the height of an individual line of text.
 	 * 
@@ -242,7 +242,7 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	public double getLineHeight() {
 		return getConfiguration().getLineHeight();
 	}
-	
+
 	/**
 	 * Returns the height of an individual line of text.
 	 * 
@@ -251,7 +251,7 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	public String getLineHeightAsString() {
 		return getConfiguration().getLineHeightAsString();
 	}
-	
+
 	/**
 	 * Returns the user callback instance.
 	 * 

@@ -496,7 +496,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	public int getCaretPadding() {
 		return getValue(Property.caretPadding, Defaults.get().getGlobal().getTooltips().getCaretPadding());
 	}
-	
+
 	/**
 	 * Returns the radius of tooltip corner curves of footer section.
 	 * 
@@ -547,7 +547,7 @@ public final class TooltipModel extends NativeObjectContainer {
 		// returns as list
 		return ArrayListHelper.unmodifiableList(array, tooltipLabelColorFactory);
 	}
-	
+
 	/**
 	 * Returns the opacity of tooltip.
 	 * 
@@ -601,7 +601,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	public int getBorderWidth() {
 		return getValue(Property.borderWidth, Defaults.get().getGlobal().getTooltips().getBorderWidth());
 	}
-	
+
 	/**
 	 * Returns the display of colors of tooltip.
 	 * 

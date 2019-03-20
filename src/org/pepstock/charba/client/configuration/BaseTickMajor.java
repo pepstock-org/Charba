@@ -33,7 +33,7 @@ public class BaseTickMajor extends BaseTick<TickMajor> {
 	BaseTickMajor(Axis axis, TickMajor configuration) {
 		super(axis, configuration);
 	}
-	
+
 	/**
 	 * If <code>true</code>, major tick options are used to show major ticks.
 	 * 

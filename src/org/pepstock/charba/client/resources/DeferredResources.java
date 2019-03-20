@@ -33,7 +33,7 @@ public interface DeferredResources extends Resources<ExternalTextResource> {
 	public static final DeferredResources INSTANCE = GWT.create(DeferredResources.class);
 
 	/**
-	 * Contains text representation of native chart.js code. 
+	 * Contains text representation of native chart.js code.
 	 * 
 	 * @return chart.js code in async mode
 	 */

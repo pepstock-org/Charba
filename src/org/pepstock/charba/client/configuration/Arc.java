@@ -33,7 +33,7 @@ public class Arc extends AbstractConfigurationElement {
 	Arc(ExtendedOptions options) {
 		super(options, options.getElements().getArc());
 	}
-	
+
 	/**
 	 * Sets the property to set the border alignment on chart datasets.
 	 * 
@@ -42,7 +42,7 @@ public class Arc extends AbstractConfigurationElement {
 	public void setBorderAlign(BorderAlign align) {
 		getOptions().getElements().getArc().setBorderAlign(align);
 	}
-	
+
 	/**
 	 * Returns the property to set the border alignment on chart datasets.
 	 * 
@@ -62,7 +62,7 @@ public class Arc extends AbstractConfigurationElement {
 	public void setWeight(double weight) {
 		getOptions().getElements().getArc().setWeight(weight);
 	}
-	
+
 	/**
 	 * Returns the relative thickness of the dataset.<br>
 	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of

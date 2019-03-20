@@ -28,7 +28,7 @@ public interface IsDefaultPointLabels extends IsDefaultFontItem {
 	 * @return if the title is shown.
 	 */
 	boolean isDisplay();
-	
+
 	/**
 	 * Returns the height of an individual line of text.
 	 * 

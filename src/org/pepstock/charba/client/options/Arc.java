@@ -27,7 +27,7 @@ import org.pepstock.charba.client.enums.BorderAlign;
  *
  */
 public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -49,7 +49,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	Arc(Elements elements, Key childKey, IsDefaultArc defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
 	}
-	
+
 	/**
 	 * Sets the property to set the border alignment on chart datasets.
 	 * 
@@ -60,7 +60,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Returns the property to set the border alignment on chart datasets.
 	 * 
@@ -69,7 +69,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	public BorderAlign getBorderAlign() {
 		return getValue(Property.borderAlign, BorderAlign.class, getDefaultValues().getBorderAlign());
 	}
-	
+
 	/**
 	 * Sets the relative thickness of the dataset.<br>
 	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of
@@ -82,7 +82,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Returns the relative thickness of the dataset.<br>
 	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of

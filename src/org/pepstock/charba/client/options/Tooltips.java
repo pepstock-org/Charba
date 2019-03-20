@@ -175,7 +175,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 */
 	public void setPosition(IsTooltipPosition position) {
 		// checks if the tooltip position is consistent
-		//& that means that is defined both otu of the box or custom one by positioner
+		// & that means that is defined both otu of the box or custom one by positioner
 		if (position != null && !TooltipPosition.hasTooltipPosition(position.name()) && !Positioner.get().hasTooltipPosition(position.name())) {
 			throw new IllegalArgumentException("Name of tooltip position is not consistent not defined: " + position);
 		}
@@ -199,7 +199,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 			return TooltipPosition.getTooltipPosition(value);
 		}
 		// if here, it could be a custom tooltip position
-		// checks if is  a custom tooltip position
+		// checks if is a custom tooltip position
 		if (Positioner.get().hasTooltipPosition(value)) {
 			// returns the pout of the box
 			return Positioner.get().getTooltipPosition(value);

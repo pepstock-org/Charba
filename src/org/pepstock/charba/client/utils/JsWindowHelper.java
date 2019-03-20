@@ -28,7 +28,7 @@ import org.pepstock.charba.client.resources.ResourcesType;
 public final class JsWindowHelper {
 	// static instance for singleton
 	private static final JsWindowHelper INSTANCE = new JsWindowHelper();
-	
+
 	private boolean enableResizeOnBeforePrint = false;
 
 	/**

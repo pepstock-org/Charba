@@ -163,7 +163,7 @@ public final class Font extends AbstractElement {
 	public void setLineHeight(String lineHeight) {
 		setValue(Property.lineHeight, lineHeight);
 	}
-	
+
 	/**
 	 * Returns the height of an individual line of text.
 	 * 

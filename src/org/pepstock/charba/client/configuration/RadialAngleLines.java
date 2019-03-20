@@ -146,5 +146,5 @@ public class RadialAngleLines extends AxisContainer {
 	public int getBorderDashOffset() {
 		return getAxis().getScale().getAngleLines().getBorderDashOffset();
 	}
-	
+
 }

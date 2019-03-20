@@ -247,7 +247,7 @@ public class Title {
 	public double getLineHeight() {
 		return options.getTitle().getLineHeight();
 	}
-	
+
 	/**
 	 * Returns the height of an individual line of text.
 	 * 

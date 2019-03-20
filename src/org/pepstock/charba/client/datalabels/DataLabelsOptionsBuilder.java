@@ -655,7 +655,7 @@ public final class DataLabelsOptionsBuilder {
 		options.getFont().setLineHeight(lineHeight);
 		return this;
 	}
-	
+
 	/**
 	 * Sets the line height.
 	 * 

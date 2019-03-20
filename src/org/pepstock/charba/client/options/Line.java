@@ -200,7 +200,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	public boolean isCapBezierPoints() {
 		return getValue(Property.capBezierPoints, getDefaultValues().isCapBezierPoints());
 	}
-	
+
 	/**
 	 * Sets algorithm used to interpolate a smooth curve from the discrete data points.<br>
 	 * The following interpolation modes are supported:<br>
@@ -231,7 +231,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @return algorithm used to interpolate a smooth curve from the discrete data points. Default is <code>'default'</code>.
 	 */
 	public String getCubicInterpolationMode() {
-		return getValue(Property.cubicInterpolationMode,  getDefaultValues().getCubicInterpolationMode());
+		return getValue(Property.cubicInterpolationMode, getDefaultValues().getCubicInterpolationMode());
 	}
 
 	/**

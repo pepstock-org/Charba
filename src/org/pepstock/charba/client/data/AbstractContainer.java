@@ -97,13 +97,13 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 			setArrayValue(key, objects);
 			// increments the counter
 			count++;
+			// changes the flag
+			changed = true;
 		} else {
 			// if null, remove the key and its value
 			// if exists
 			removeObjects(key);
 		}
-		// changes the flag
-		changed = true;
 	}
 
 	/**

@@ -25,7 +25,7 @@ import org.pepstock.charba.client.defaults.IsDefaultMajorTick;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TickMajor extends AbstractTick<Ticks, IsDefaultMajorTick>  implements IsDefaultMajorTick{
+public final class TickMajor extends AbstractTick<Ticks, IsDefaultMajorTick> implements IsDefaultMajorTick {
 
 	/**
 	 * Name of properties of native object.
@@ -34,7 +34,7 @@ public final class TickMajor extends AbstractTick<Ticks, IsDefaultMajorTick>  im
 	{
 		enabled
 	}
-	
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script
 	 * properties.
@@ -47,7 +47,7 @@ public final class TickMajor extends AbstractTick<Ticks, IsDefaultMajorTick>  im
 	TickMajor(Ticks ticks, Key childKey, IsDefaultMajorTick defaultValues, NativeObject nativeObject) {
 		super(ticks, childKey, defaultValues, nativeObject);
 	}
-	
+
 	/**
 	 * If <code>true</code>, major tick options are used to show major ticks.
 	 * 

@@ -53,7 +53,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	public TooltipItem(NativeObject nativeObject) {
 		super(nativeObject);
 	}
-	
+
 	/**
 	 * Returns the label for the tooltip.
 	 * 
@@ -71,7 +71,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	public String getValue() {
 		return getValue(Property.value, UndefinedValues.STRING);
 	}
-	
+
 	/**
 	 * Returns the X location of label. Is {@link Deprecated}, use `value` or `label` instead
 	 * 

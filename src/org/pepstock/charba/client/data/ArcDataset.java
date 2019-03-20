@@ -62,8 +62,11 @@ abstract class ArcDataset extends HovingDataset {
 		// -------------------------------
 		borderAlignCallbackProxy.setCallback(new ScriptableFunctions.ProxyStringCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object, org.pepstock.charba.client.callbacks.ScriptableContext)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
 			public String call(Object contextFunction, ScriptableContext context) {

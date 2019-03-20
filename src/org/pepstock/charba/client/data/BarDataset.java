@@ -86,8 +86,11 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 		// -------------------------------
 		borderSkippedCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
 
-			/* (non-Javadoc)
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object, org.pepstock.charba.client.callbacks.ScriptableContext)
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
 			public Object call(Object contextFunction, ScriptableContext context) {
@@ -114,7 +117,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	public String getLabel() {
 		return getValue(Dataset.Property.label, DEFAULT_LABEL);
 	}
-	
+
 	/**
 	 * Sets the ID of the x axis to plot this dataset on. If not specified, this defaults to the ID of the first found x axis.
 	 * 
@@ -156,7 +159,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	public String getYAxisID() {
 		return getValue(Property.yAxisID, Scales.DEFAULT_Y_AXIS_ID);
 	}
-	
+
 	/**
 	 * Sets the stroke width of the bar in pixels.
 	 * 
@@ -173,8 +176,8 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 * @return list of the stroke width of the bar in pixels. If a callback or an array have been set, returns an empty object
 	 */
 	public BarBorderWidth getBorderWidthAsItem() {
-		// gets object type 
-		ObjectType type = type(Property.borderWidth); 
+		// gets object type
+		ObjectType type = type(Property.borderWidth);
 		// checks if borer width has been set by an object
 		if (ObjectType.Object.equals(type)) {
 			// returns the array

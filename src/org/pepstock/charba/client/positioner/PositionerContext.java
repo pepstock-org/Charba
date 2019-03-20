@@ -46,7 +46,6 @@ public final class PositionerContext {
 	@JsProperty(name = "_chart")
 	native Chart getNativeChart();
 
-
 	/**
 	 * Returns the CHARBA chart instance.
 	 * 

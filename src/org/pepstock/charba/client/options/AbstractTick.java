@@ -38,7 +38,7 @@ public abstract class AbstractTick<P extends AbstractModel<?, ?>, D extends IsDe
 	{
 		lineHeight
 	}
-	
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script
 	 * properties.

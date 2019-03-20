@@ -188,7 +188,7 @@ public class Line extends AbstractConfigurationElement {
 	public String getCubicInterpolationMode() {
 		return getOptions().getElements().getLine().getCubicInterpolationMode();
 	}
-	
+
 	/**
 	 * Sets how to fill the area under the line.
 	 * 

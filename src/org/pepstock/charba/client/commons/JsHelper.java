@@ -115,7 +115,7 @@ public final class JsHelper {
 	void remove(NativeObject object, String key) {
 		NativeJsHelper.remove(object, key);
 	}
-	
+
 	/**
 	 * Returns a property of java script object as integer.
 	 * 

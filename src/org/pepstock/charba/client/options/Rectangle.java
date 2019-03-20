@@ -62,7 +62,7 @@ public class Rectangle extends AbstractElement<IsDefaultRectangle> implements Is
 			setValue(Property.borderSkipped, BorderSkipped.noborderskipped);
 		}
 	}
-	
+
 	/**
 	 * Sets the edge to skip drawing the border for.
 	 * 
@@ -80,7 +80,7 @@ public class Rectangle extends AbstractElement<IsDefaultRectangle> implements Is
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Returns the edge to skip drawing the border for.
 	 * 

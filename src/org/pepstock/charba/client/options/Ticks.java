@@ -660,5 +660,5 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	public int getPrecision() {
 		return getValue(Property.precision, getDefaultValues().getPrecision());
 	}
-	
+
 }

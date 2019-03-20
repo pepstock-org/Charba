@@ -42,7 +42,7 @@ public interface IsDefaultAngleLines {
 	 * @return width of angled lines.
 	 */
 	int getLineWidth();
-	
+
 	/**
 	 * Returns the line dash pattern offset or "phase".
 	 * 

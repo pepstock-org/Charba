@@ -28,7 +28,7 @@ import org.pepstock.charba.client.resources.ResourcesType;
  *
  */
 final class JsPositionerHelper {
-	
+
 	// static instance for singleton
 	private static final JsPositionerHelper INSTANCE = new JsPositionerHelper();
 

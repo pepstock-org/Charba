@@ -32,7 +32,7 @@ import org.pepstock.charba.client.Plugin;
  *
  */
 public final class Plugins implements ConfigurationElement {
-	
+
 	// list of added plugins
 	private final List<WrapperPlugin> plugins = new LinkedList<WrapperPlugin>();
 

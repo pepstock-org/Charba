@@ -221,7 +221,7 @@ public class RadialPointLabels extends AxisContainer {
 	public String getFontFamily() {
 		return getAxis().getScale().getPointLabels().getFontFamily();
 	}
-	
+
 	/**
 	 * Sets the height of an individual line of text.
 	 * 

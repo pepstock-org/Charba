@@ -48,7 +48,7 @@ public final class Injector {
 		// checks if already injected
 		if (!ELEMENTS_INJECTED.contains(resource.getName())) {
 			if (resource instanceof TextResource) {
-				TextResource textResource = (TextResource)resource;
+				TextResource textResource = (TextResource) resource;
 				// creates a script element
 				ScriptElement scriptElement = Document.get().createScriptElement();
 				// sets ID

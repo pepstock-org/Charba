@@ -376,8 +376,8 @@ abstract class HovingFlexDataset extends Dataset {
 	 * @return list of the stroke width of the bar in pixels. If a callback has been set, returns an empty list.
 	 */
 	public List<Integer> getBorderWidth() {
-		// gets object type 
-		ObjectType type = type(Property.borderWidth); 
+		// gets object type
+		ObjectType type = type(Property.borderWidth);
 		// checks if the callback has not been set and is not an object (border width object
 		// set by bar dataset)
 		if (!ObjectType.Function.equals(type) && !ObjectType.Object.equals(type)) {

@@ -133,7 +133,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 		// returns value. Must be auto
 		return getValue(Property.display, Display.class, getDefaultValues().getDisplay());
 	}
-	
+
 	/**
 	 * Sets all X axes of chart.
 	 * 

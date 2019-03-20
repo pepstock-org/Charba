@@ -116,7 +116,7 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
-	
+
 	/**
 	 * Sets the height of an individual line of text.
 	 * 

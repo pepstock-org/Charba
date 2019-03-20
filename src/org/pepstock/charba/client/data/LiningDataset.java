@@ -337,7 +337,7 @@ abstract class LiningDataset extends Dataset {
 			}
 		});
 	}
-	
+
 	/**
 	 * Returns the label for the dataset which appears in the legend and tooltips.
 	 * 
@@ -347,7 +347,6 @@ abstract class LiningDataset extends Dataset {
 	public String getLabel() {
 		return getValue(Dataset.Property.label, DEFAULT_LABEL);
 	}
-
 
 	/**
 	 * Sets the fill color under the line.

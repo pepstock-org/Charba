@@ -47,14 +47,14 @@ final class NativeJsPositionerHelper {
 	 * @param object callback to invoke the tolltip positioner
 	 */
 	static native void register(String name, Proxy object);
-	
+
 	/**
 	 * Unregister the tooltips positioner from CHART.JS.
 	 * 
 	 * @param name name of position to be removed
 	 */
 	static native void unregister(String name);
-	
+
 	/**
 	 * Invokes an existing positioner to get the point.
 	 * 

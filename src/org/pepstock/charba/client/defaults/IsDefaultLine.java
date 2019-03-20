@@ -25,7 +25,7 @@ import org.pepstock.charba.client.enums.JoinStyle;
  * @author Andrea "Stock" Stocchero
  */
 public interface IsDefaultLine extends IsDefaultOptionsElement {
-	
+
 	/**
 	 * Returns the Bezier curve tension (0 for no Bezier curves).
 	 * 
@@ -64,7 +64,7 @@ public interface IsDefaultLine extends IsDefaultOptionsElement {
 	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
 	 */
 	boolean isCapBezierPoints();
-	
+
 	/**
 	 * Returns algorithm used to interpolate a smooth curve from the discrete data points.
 	 * 
