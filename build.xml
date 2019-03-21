@@ -8,18 +8,6 @@
 	<loadproperties srcfile="ivymoduleconfiguration.properties" />
 
 	<!-- 
-	    Google Closure task definition
-	 -->
-	<taskdef name="closure-compiler" classname="com.google.javascript.jscomp.ant.CompileTask">
-		<classpath>
-			<fileset dir="lib-ivy">
-				<include name="**/*.jar" />
-			</fileset>
-			<pathelement path="${java.class.path}" />
-		</classpath>
-	</taskdef>
-
-	<!-- 
 		CHARBA configuration 
 	-->
 	<property name="charba.built.by" value="www.pepstock.org" />
@@ -29,6 +17,7 @@
 
 	<property name="src.dir" value="src" />
 	<property name="classes.dir" value="classes" />
+	<property name="lib.dir" value="lib-ivy" />
 	<property name="javadoc.dir" value="javadoc" />
 	<property name="resources.dir" value="resources" />
 	<property name="retrieve.dir" value="retrieve" />
@@ -83,8 +72,14 @@
 	<!--
         IVY - Retrieves by IVY the needed jar 
     -->
-	<target name="ivyRetrieve">
-		<ivy:retrieve sync="true" pattern="lib-ivy/[artifact]-[revision](-[classifier]).[ext]" pathid="ivyPath" />
+	<target name="ivyRetrieve" depends="ivyRetrieve-compile, ivyRetrieve-runtime" />
+	
+	<target name="ivyRetrieve-runtime">
+		<ivy:retrieve sync="true" pattern="${lib.dir}/[artifact]-[revision](-[classifier]).[ext]" pathid="ivyPath-runtime" conf="runtime" />
+	</target>
+
+	<target name="ivyRetrieve-compile">
+		<ivy:retrieve sync="true" pattern="${ant.jar.dir}/[artifact]-[revision](-[classifier]).[ext]" pathid="ivyPath-compile" conf="compile"/>
 	</target>
 
 	<!--
@@ -177,10 +172,13 @@
 	<!--
         CHARBA - JAVA compile, MINIFY CHARBA javascript helper, COPY resources into classes folder
     -->
-	<target name="compile" depends="clean, ivyRetrieve">
+	<target name="compile" depends="clean, buildInit, ivyRetrieve-runtime">
 		<mkdir dir="${classes.dir}"/>
 		<javac srcdir="${src.dir}" includes="**" encoding="utf-8" destdir="${classes.dir}" includeantruntime="${javac.includeantruntime}" source="${javac.source}" target="${javac.target}" nowarn="${javac.nowarn}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" createMissingPackageInfoClass="false">
-			<classpath refid="ivyPath"/>
+			<classpath>
+				<path refid="ivyPath-runtime" />
+				<path refid="ivyPath-compile"/>
+			</classpath>
 		</javac>
 		<!-- minify -->
 		<echo>Minify CHARBA helper from file "${javascript.charba.file}" to "${javascript.charba.minify.file}" </echo>
@@ -220,7 +218,7 @@
 		<javadoc destdir="${javadoc.dir}" useexternalfile="yes" author="true" version="true" use="true" 
 			windowtitle="Charba, GWT wrapper for CHART.JS">
 			<classpath>
-				<path refid="ivyPath" />
+				<path refid="ivyPath-runtime" />
 				<fileset dir="${classes.dir}" />
 				<pathelement path="${java.class.path}" />
 			</classpath>
@@ -282,31 +280,21 @@
 	</target>
 
 	<!--
-		IVY targets for Travis CI
+		IVY targets for getting build dependencies and Travis CI needed libraries
 	-->
-	<property name="ivy.install.version" value="2.4.0" />
-	<condition property="ivy.home" value="${env.IVY_HOME}">
-		<isset property="env.IVY_HOME" />
-	</condition>
-	<property name="ivy.home" value="${user.home}/.ant" />
-	<property name="ivy.jar.dir" value="${ivy.home}/lib" />
-	<property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
-
-	<target name="ivyDownload" unless="offline">
-		<mkdir dir="${ivy.jar.dir}"/>
-		<!-- download Ivy from web site so that it can be used even without any special installation -->
-		<get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${ivy.install.version}.jar"
-	             dest="${ivy.jar.file}" usetimestamp="true"/>
+	<property name="ant.user.home" value="${user.home}/.ant" />
+	<property name="ant.jar.dir" value="${ant.user.home}/lib" />
+	
+	<target name="buildInit" depends="retrieveBuildLibs, ivyRetrieve-compile">
+		<!-- Define the Ivy and Google Closure tasks -->
+    	<taskdef name="closure-compiler" classname="com.google.javascript.jscomp.ant.CompileTask" classpathref="ivyPath-compile" />
 	</target>
 
-	<target name="ivyInit" depends="ivyDownload">
-		<!-- try to load Ivy here from Ivy home, in case the user has not already dropped
-	         it into Ant's lib dir (note that the latter copy will always take precedence).
-	         We will not fail as long as local lib dir exists (it may be empty) and
-	         Ivy is in at least one of Ant's lib dir or the local lib dir. -->
-		<path id="ivy.lib.path">
-			<fileset dir="${ivy.jar.dir}" includes="*.jar"/>
-		</path>
+	<target name="retrieveBuildLibs">
+		<!-- Download the Ivy jar and then invoke it to download the others task libs -->
+		<mkdir dir="${ant.jar.dir}"/>
+		<get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${depver.ivy}/ivy-${depver.ivy}.jar"
+	        dest="${ant.jar.dir}" usetimestamp="true"/>
 	</target>
-
+	
 </project>
