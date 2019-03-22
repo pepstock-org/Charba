@@ -205,22 +205,30 @@ public final class Color implements IsColor {
 	/**
 	 * Convert a RGB Color to it corresponding HSL values.
 	 *
-	 * @return a string representation of HSL color, only <code>h,s%,l% </code>
+	 * @return a string representation of HSL color, only <code>h,s%,l%</code>
+	 * @see See explanation <a href="http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/">Math behind
+	 *      colorspace conversions, RGB-HSL</a>
 	 */
 	private static String createHSLAsString(int red, int green, int blue) {
-		// creates string builr
+		// creates string builder
 		StringBuilder sb = new StringBuilder();
-		// transforms RGB values, normalizing them
-		// in a value between 0 abd 1
+		// converts the RGB values to the range 0-1, this can be done by dividing the value by 255 for 8-bit
+		// color depth
 		double r = red / 255D;
 		double g = green / 255D;
 		double b = blue / 255D;
-		// sets minimum and maximum RGB values are used in the HSL calculations
+		// finds the minimum and maximum values of R, G and B
 		double min = Math.min(r, Math.min(g, b));
 		double max = Math.max(r, Math.max(g, b));
 		// ------------------
 		// HUE calculation
 		// ------------------
+		// the Hue formula is depending on what RGB color channel is the max value. The three different formulas are:
+		// if Red is max, then Hue = (G-B)/(max-min)
+		// if Green is max, then Hue = 2.0 + (B-R)/(max-min)
+		// if Blue is max, then Hue = 4.0 + (R-G)/(max-min)
+		// the Hue value you get needs to be multiplied by 60 to convert it to degrees on the color circle
+		// if Hue becomes negative you need to add 360 to, because a circle has 360 degrees.
 		double hue = 0;
 		if (Double.compare(max, min) == 0) {
 			hue = 0;
@@ -236,19 +244,28 @@ public final class Color implements IsColor {
 		// ------------------
 		// LIGHTNESS calculation
 		// ------------------
+		// now calculate the lightness value by adding the max and min values and
+		// divide by 2.
 		double lightness = (max + min) / 2;
-		int lightnessInt = (int) Math.round(lightness * 100);
+		// stores as integer
+		int lightnessInt = (int) Math.round(lightness * 100D);
 		// ------------------
 		// SATURATION calculation
 		// ------------------
 		double saturation = 0;
-		if (max == min) {
+		// if the min and max value are the same, it means that there is no saturation.
+		// but in our case min and max are not equal which means there is saturation.
+		// if there is saturation we need to do check the level of the lightness in order to select the correct formula.
+		// if lightness is smaller then 0.5, then saturation = (max-min)/(max+min)
+		// if lightness is bigger then 0.5. then saturation = (max-min)/(2.0-max-min)
+		if (Double.compare(max, min) == 0) {
 			saturation = 0;
 		} else if (lightness <= 0.5D) {
 			saturation = (max - min) / (max + min);
 		} else {
 			saturation = (max - min) / (2 - max - min);
 		}
+		// stores as integer
 		int saturationInt = (int) Math.round(saturation * 100);
 		// returns the string HSL
 		return sb.append(saturationInt).append("%,").append(lightnessInt).append("%").toString();

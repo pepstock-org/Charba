@@ -50,12 +50,4 @@ public interface Extensions extends ClientBundle {
 	@Source("js/chartjs-plugin-datalabels.min.js")
 	TextResource datalabelsPlugin();
 
-	/**
-	 * Contains text representation of native library <a href="https://github.com/ashiguruma/patternomaly">Patternomaly</a>
-	 * code.
-	 * 
-	 * @return library <a href="https://github.com/ashiguruma/patternomaly">Patternomaly</a> code
-	 */
-	@Source("js/patternomaly.min.js")
-	TextResource patternomaly();
 }

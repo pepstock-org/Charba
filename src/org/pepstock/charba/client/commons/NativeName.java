@@ -63,11 +63,6 @@ public final class NativeName {
 	public static final String WINDOW = "window";
 
 	/**
-	 * Constant to bind java script object as Patternomaly with name {@value PATTERNOMALY} (internal of CHART.JS)
-	 */
-	public static final String PATTERNOMALY = "pattern";
-
-	/**
 	 * To avoid any instantiation
 	 */
 	private NativeName() {

@@ -14,9 +14,9 @@
     limitations under the License.
 */
 /**
- * Contains all classes to use the PATTERNOMALY library.
+ * Contains all classes to build tiles to use into patterns as images
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-package org.pepstock.charba.client.patterns;
+package org.pepstock.charba.client.colors.tiles;

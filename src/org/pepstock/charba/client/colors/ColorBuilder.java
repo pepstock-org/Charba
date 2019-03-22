@@ -395,6 +395,7 @@ public final class ColorBuilder {
 	 * @param alpha the alpha
 	 *
 	 * @returns the RGB/RGBA Color object
+	 * @see See explanation <a href="http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/">Math behind colorspace conversions, RGB-HSL</a>
 	 */
 	private static IsColor convertHSL2RGB(int hue, int saturation, int lightness, double alpha) {
 		// checks if hue is in range
@@ -415,24 +416,28 @@ public final class ColorBuilder {
 		transientHue /= 360D;
 		double transientSaturation = saturation / 100D;
 		double transientLightness = lightness / 100D;
-		// transient value to calculate lightness
-		double q = 0D;
-		// checks value of lightness
+		// we need to create some temporary variables 
+		// the variables are used to store temporary values which makes the formulas easier to read
+		double temporary1 = 0D;
+		// There are two formulas to choose from in the first step.
+		// if Lightness is smaller then 0.5 (50%) then temporary1 = Lightness x (1.0 + Saturation)
+		// If Lightness is equal or larger then 0.5 (50%) then temporary1 = Lightness + Saturation - Lightness x Saturation
 		if (transientLightness < 0.5D) {
-			q = transientLightness * (1 + transientSaturation);
+			temporary1 = transientLightness * (1 + transientSaturation);
 		} else {
-			q = (transientLightness + transientSaturation) - (transientSaturation * transientLightness);
+			temporary1 = (transientLightness + transientSaturation) - (transientSaturation * transientLightness);
 		}
-		// transient value of factor
-		double p = 2 * transientLightness - q;
+		// we need one more temporary variable, temporary2
+		double temporary2 = 2 * transientLightness - temporary1;
+		// // And now we need another temporary variable for each color channel, temporary_R, temporary_G and temporary_B.
 		// calculate RED, GREEN and BLUE as Double
-		double redDbl = Math.max(0, hueToRGB(p, q, transientHue + (1D / 3D)));
-		double greenDbl = Math.max(0, hueToRGB(p, q, transientHue));
-		double blueDbl = Math.max(0, hueToRGB(p, q, transientHue - (1D / 3D)));
-		// transforms RED, GREEN and BLUE into Integer
-		int red = (int) Math.round(Math.min(redDbl, 1) * 255F);
-		int green = (int) Math.round(Math.min(greenDbl, 1) * 255);
-		int blue = (int) Math.round(Math.min(blueDbl, 1) * 255);
+		double temporary_R = Math.max(0, hueToRGB(temporary2, temporary1, transientHue + (1D / 3D)));
+		double temporary_G = Math.max(0, hueToRGB(temporary2, temporary1, transientHue));
+		double temporary_B = Math.max(0, hueToRGB(temporary2, temporary1, transientHue - (1D / 3D)));
+		// calculate RED, GREEN and BLUE as Integer
+		int red = (int) Math.round(Math.min(temporary_R, 1) * 255F);
+		int green = (int) Math.round(Math.min(temporary_G, 1) * 255);
+		int blue = (int) Math.round(Math.min(temporary_B, 1) * 255);
 		// checks if alpha is NaN
 		// builds the RGB color without alpha
 		// otherwise with alpha
@@ -442,32 +447,34 @@ public final class ColorBuilder {
 	/**
 	 * Transforms Hue value into a color value for RGB
 	 * 
-	 * @param p lightness and saturation value
-	 * @param q lightness and saturation value
-	 * @param h hue value
-	 * @return a color value for RGB
+	 * @param temporary2 lightness and saturation temporary variable
+	 * @param temporary1 lightness and saturation temporary variable
+	 * @param temporaryChannelValue temporary channel value
+	 * @return the channel color value to use for RGB color
 	 */
-	private static double hueToRGB(double p, double q, double h) {
-		// checks and fix hue
-		if (h < 0) {
-			h += 1;
+	private static double hueToRGB(double temporary2, double temporary1, double temporaryChannelValue) {
+		// all values need to be between 0 and 1. 
+		// if you get a negative value you need to add 1 to it.
+		// if you get a value above 1 you need to subtract 1 from it.
+		if (temporaryChannelValue < 0) {
+			temporaryChannelValue += 1;
 		}
-		// checks and fix hue
-		if (h > 1) {
-			h -= 1;
+		if (temporaryChannelValue > 1) {
+			temporaryChannelValue -= 1;
 		}
-		// calculate the hue factor
-		if (6 * h < 1) {
-			return p + ((q - p) * 6 * h);
+		// now we need to do up to 3 tests to select the correct formula for each color channel.
+		// test 1 - If 6 x CHANNEL temporary color is smaller then 1, CHANNEL temporary color = temporary_2 + (temporary_1 - temporary_2) x 6 x CHANNEL temporary color
+		if (6 * temporaryChannelValue < 1) {
+			return temporary2 + ((temporary1 - temporary2) * 6 * temporaryChannelValue);
 		}
-		// calculate the hue factor
-		if (2 * h < 1) {
-			return q;
+		// test 2 - If 2 x CHANNEL temporary color is smaller then 1, CHANNEL temporary color = temporary_1
+		if (2 * temporaryChannelValue < 1) {
+			return temporary1;
 		}
-		// calculate the hue factor
-		if (3 * h < 2) {
-			return p + ((q - p) * 6 * ((2.0D / 3.0D) - h));
+		// test 3 - If 3 x CHANNEL temporary color is smaller then 2, CHANNEL temporary color = temporary_2 + (temporary_1 - temporary_2) x (0.666 - CHANNEL temporary color) x 6
+		if (3 * temporaryChannelValue < 2) {
+			return temporary2 + ((temporary1 - temporary2) * 6 * ((2.0D / 3.0D) - temporaryChannelValue));
 		}
-		return p;
+		return temporary2;
 	}
 }
