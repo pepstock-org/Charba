@@ -22,26 +22,93 @@ package org.pepstock.charba.client.colors.tiles;
  */
 public enum Shape
 {
+	/**
+	 * Draws a box on the tile.
+	 */
 	box(new Box()),
+	/**
+	 * Draws a cross on the tile.
+	 */
 	cross(new Cross()),
+	/**
+	 * Draws a cross and a dash on the tile.
+	 */
 	crossDash(new CrossDash()),
+	/**
+	 * Draws a dash on the tile.
+	 */
 	dash(new Dash()),
+	/**
+	 * Draws a diagonal (from left to right) on the tile.
+	 */
 	diagonal(new Diagonal()),
+	/**
+	 * Draws a diagonal (from right to left) on the tile.
+	 */
 	diagonalRightLeft(new DiagonalRightLeft()),
+	/**
+	 * Draws a diamond on the tile.
+	 */
 	diamond(new Diamond()),
+	/**
+	 * Draws a diamond and a box on the tile.
+	 */
 	diamondBox(new DiamondBox()),
+	/**
+	 * Draws a disc on the tile.
+	 */
 	disc(new Disc()),
+	/**
+	 * Draws a dot on the tile.
+	 */
 	dot(new Dot()),
+	/**
+	 * Draws a dot and a dash on the tile.
+	 */
 	dotDash(new DotDash()),
+	/**
+	 * Draws a line on the tile.
+	 */
 	line(new Line()),
+	/**
+	 * Draws a plus on the tile.
+	 */
 	plus(new Plus()),
+	/**
+	 * Draws a ring on the tile.
+	 */
 	ring(new Ring()),
+	/**
+	 * Draws an empty tile.
+	 */
+	solid(new Solid()),
+	/**
+	 * Draws a square on the tile.
+	 */
 	square(new Square()),
+	/**
+	 * Draws a triangle on the tile.
+	 */
 	triangle(new Triangle()),
+	/**
+	 * Draws a weave on the tile.
+	 */
 	weave(new Weave()),
+	/**
+	 * Draws a zig zag line on the tile.
+	 */
 	zigzag(new ZigZag()),
+	/**
+	 * Draws a line vertically on the tile.
+	 */
 	verticalLine(new VerticalLine()),
+	/**
+	 * Draws a triangle vertically on the tile.
+	 */
 	verticalTriangle(new VerticalTriangle()),
+	/**
+	 * Draws a zig zag vertically on the tile.
+	 */
 	verticalZigzag(new VerticalZigZag());
 
 	// instance of shape drawer
