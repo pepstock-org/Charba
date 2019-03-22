@@ -15,15 +15,14 @@
 */
 package org.pepstock.charba.client.colors.tiles;
 
-import org.pepstock.charba.client.utils.Utilities;
-
+import com.google.gwt.canvas.dom.client.CanvasPattern;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.CanvasElement;
-import com.google.gwt.dom.client.ImageElement;
+import com.google.gwt.dom.client.Document;
 
 /**
  * Base class for all shape drawer, classes which must designer on canvas the shape.<br>
- * A tile is always a square and for some shapes is divided in 4 parts and not all patrs are designed.<br>
+ * A tile is always a square and for some shapes is divided in 4 sections and not all sections are designed.<br>
  * A tile is designed as following:<br>
  * 
  * <pre>
@@ -49,6 +48,8 @@ abstract class ShapeDrawer {
 	static final double ROTATION_90_DEGREES = 90 * Math.PI / 180;
 	// rotation of 180 degrees to apply on rotation
 	static final double ROTATION_180_DEGREES = 180 * Math.PI / 180;
+	// canvas element to draw
+	private final CanvasElement canvas = Document.get().createCanvasElement();
 
 	/**
 	 * Creates a tile based on arguments passed. This is the entry point of every drawer.
@@ -57,9 +58,12 @@ abstract class ShapeDrawer {
 	 * @param backgroundColor background of tile
 	 * @param shapeColor color of shape
 	 * @param size the size of tile, which is a square
-	 * @return an image which represents a tile.
+	 * @return a canvas pattern which represents a tile.
 	 */
-	final ImageElement createTile(CanvasElement canvas, String backgroundColor, String shapeColor, int size) {
+	final CanvasPattern createTile(CanvasElement outerCanvas, String backgroundColor, String shapeColor, int size) {
+		// changes dimensions of outer canvas
+		outerCanvas.setWidth(size);
+		outerCanvas.setHeight(size);
 		// sets dimensions of canvas, always a square
 		canvas.setWidth(size);
 		canvas.setHeight(size);
@@ -76,9 +80,8 @@ abstract class ShapeDrawer {
 		drawTile(canvas.getContext2d(), backgroundColor, shapeColor, size);
 		// closes the path
 		context.closePath();
-		// transforms the canvas into a image
-		// getting the data URL for the current content of the canvas element
-		return Utilities.toImageElement(canvas.toDataUrl());
+		// transforms the canvas into a pattern
+		return outerCanvas.getContext2d().createPattern(canvas, Context2d.Repetition.REPEAT);
 	}
 
 	/**

@@ -40,7 +40,7 @@ public final class TilesBuilderDefaults {
 	public static final String DEFAULT_SHAPE_COLOR = "rgba(255, 255, 255, 0.8)";
 
 	/**
-	 * Default image size, 20
+	 * Default tile size, 20
 	 */
 	public static final int DEFAULT_SIZE = 20;
 

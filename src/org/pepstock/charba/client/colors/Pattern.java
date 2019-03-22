@@ -20,6 +20,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.utils.Utilities;
 
+import com.google.gwt.canvas.dom.client.CanvasPattern;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.resources.client.ImageResource;
@@ -34,10 +35,12 @@ import com.google.gwt.user.client.ui.Image;
  */
 public final class Pattern extends CanvasObject {
 	// exception message
-	private static final String IMG_NULL_MESSAGE = "Image instance is not consitent or null!";
+	private static final String IMG_OR_CANVAS_PATTERN_NULL_MESSAGE = "Image or canvas pattern instance is not consitent or null!";
 
 	// default instance of image.
 	private final static ImageElement DEFAULT_IMAGE = null;
+	// default instance of canvas pattern.
+	private final static CanvasPattern DEFAULT_CANVAS_PATTERN = null;
 
 	/**
 	 * Name of properties of native object. ALL INTERNAL USE ONLY
@@ -45,7 +48,8 @@ public final class Pattern extends CanvasObject {
 	private enum Property implements Key
 	{
 		_charbaPatternImg,
-		_charbaPatternRepetition
+		_charbaPatternRepetition,
+		_charbaPatternCanvas,
 	}
 
 	/**
@@ -113,7 +117,28 @@ public final class Pattern extends CanvasObject {
 		} else {
 			// if here, image is null
 			// then exception
-			throw new IllegalArgumentException(IMG_NULL_MESSAGE);
+			throw new IllegalArgumentException(IMG_OR_CANVAS_PATTERN_NULL_MESSAGE);
+		}
+	}
+
+	/**
+	 * Creates the object using an already created canvas pattern.<br>
+	 * This is mainly used by tiles.
+	 * 
+	 * @param canvasPattern canvas pattern instance
+	 */
+	public Pattern(CanvasPattern canvasPattern) {
+		// checks if canvas pattern is not consistent
+		if (canvasPattern != null) {
+			// creates pattern
+			setValue(Property._charbaPatternCanvas, canvasPattern);
+			// sets repetition even is not used
+			// to normalizes the properties
+			setValue(Property._charbaPatternRepetition, Context2d.Repetition.REPEAT.name());
+		} else {
+			// if here, image is null
+			// then exception
+			throw new IllegalArgumentException(IMG_OR_CANVAS_PATTERN_NULL_MESSAGE);
 		}
 	}
 
@@ -143,6 +168,15 @@ public final class Pattern extends CanvasObject {
 	public Context2d.Repetition getRepetition() {
 		String value = getValue(Property._charbaPatternRepetition, Context2d.Repetition.REPEAT.name());
 		return Context2d.Repetition.valueOf(value);
+	}
+
+	/**
+	 * Returns the canvas pattern if exists.
+	 * 
+	 * @return the canvas pattern if exists, otherwise <code>null</code>.
+	 */
+	public CanvasPattern getCanvasPattern() {
+		return getValue(Property._charbaPatternCanvas, DEFAULT_CANVAS_PATTERN);
 	}
 
 	/**

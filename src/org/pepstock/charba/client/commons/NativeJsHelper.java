@@ -140,4 +140,5 @@ final class NativeJsHelper {
 	 * @return a chart native event
 	 */
 	static native ChartNativeEvent nativeEvent(NativeObject event, String key);
+	
 }
