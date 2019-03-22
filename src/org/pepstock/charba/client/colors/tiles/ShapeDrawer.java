@@ -105,7 +105,7 @@ abstract class ShapeDrawer {
 		// applies the stroke color
 		context.setStrokeStyle(shapeColor);
 		// line width is by default tenth size
-		context.setLineWidth(size / 10);
+		context.setLineWidth(size / 10D);
 		// sets line cap and join
 		context.setLineJoin(TilesBuilder.get().getDefaults().getLineJoin());
 		context.setLineCap(TilesBuilder.get().getDefaults().getLineCap());
