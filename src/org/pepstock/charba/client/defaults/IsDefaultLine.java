@@ -69,7 +69,7 @@ public interface IsDefaultLine extends IsDefaultOptionsElement {
 	/**
 	 * Returns algorithm used to interpolate a smooth curve from the discrete data points.
 	 * 
-	 * @return algorithm used to interpolate a smooth curve from the discrete data points.</code>.
+	 * @return algorithm used to interpolate a smooth curve from the discrete data points.
 	 */
 	CubicInterpolationMode getCubicInterpolationMode();
 
