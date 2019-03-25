@@ -20,7 +20,7 @@ jdk:
 # specify the brances to build from
 branches:
    only:
-     - cuc
+     - stock
 #
 # BUILD phase
 #
