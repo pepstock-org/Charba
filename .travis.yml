@@ -18,10 +18,13 @@ cache:
 # specify the JDKs 
 jdk:
    - oraclejdk8
+   - openjdk8
 # specify the brances to build from
 branches:
    only:
+     - master 
      - stock
+     - cuc
 #
 # BUILD phase
 #
