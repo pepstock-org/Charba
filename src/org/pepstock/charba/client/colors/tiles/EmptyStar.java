@@ -18,7 +18,7 @@ package org.pepstock.charba.client.colors.tiles;
 import com.google.gwt.canvas.dom.client.Context2d;
 
 /**
- * STAR drawer to design a star into tile.<br>
+ * STAR drawer to design a star (empty) into tile.<br>
  * It designs a star into the following tile sections (only A):<br>
  * <br>
  * 
@@ -37,11 +37,8 @@ import com.google.gwt.canvas.dom.client.Context2d;
  * @author Andrea "Stock" Stocchero
  *
  */
-class Star extends ShapeDrawer {
+final class EmptyStar extends Star {
 	
-	//number of spikes of star
-	static final int SPIKES = 5;
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -62,47 +59,6 @@ class Star extends ShapeDrawer {
 		drawStar(context, size, halfSize, halfSize, SPIKES, halfSize - 2, quarterSize - 1);
 		// strokes the current path
 		context.stroke();
-		// apply the fill properties
-		applyFillProperties(context, shapeColor);
-		// fills the current path
-		context.fill();
 	}
 
-	/**
-	 * Designs a star into a tile section.
-	 * 
-	 * @param context context of canvas to design the shape
-	 * @param size the size of tile, which is a square
-	 * @param offsetX offset X where starts drawing
-	 * @param offsetY offset Y where starts drawing
-	 * @param spikes number of spikes of star
-	 * @param innerRadius inner radius of star
-	 * @param outerRadius outer radius of star
-	 */
-	final void drawStar(Context2d context, int size, double offsetX, double offsetY, int spikes, double innerRadius, double outerRadius) {
-		// calculates quarter dimension
-		double rot = Math.PI / 2 * 3;
-		// calculates the center X of arc
-		double x = offsetX;
-		// calculates the center Y of arc
-		double y = offsetY;
-		// calculates of step
-		final double step = Math.PI / spikes;
-		// draws shape
-		// scans spikes
-		for (int i = 0; i < spikes; i++) {
-			// draws spike first line
-			x = offsetX + Math.cos(rot) * outerRadius;
-			y = offsetY + Math.sin(rot) * outerRadius;
-			context.lineTo(x, y);
-			rot += step;
-			// draws spike second line
-			x = offsetX + Math.cos(rot) * innerRadius;
-			y = offsetY + Math.sin(rot) * innerRadius;
-			context.lineTo(x, y);
-			rot += step;
-		}
-		// last line of last spkie
-		context.lineTo(offsetX, offsetY - outerRadius);
-	}
 }

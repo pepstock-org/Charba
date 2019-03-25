@@ -63,6 +63,10 @@ public enum Shape implements IsShape
 	 */
 	dotDash(new DotDash()),
 	/**
+	 * Draws a start (no filled) on the tile.
+	 */
+	emptyStar(new EmptyStar()),
+	/**
 	 * Draws a diagonal (from right to left) on the tile.
 	 */
 	invertedDiagonal(new InvertedDiagonal()),
