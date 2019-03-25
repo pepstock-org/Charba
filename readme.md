@@ -21,6 +21,8 @@ Building
 
 To build **Charba**, you can check out the project and to run [Ant build.xml](https://github.com/pepstock-org/Charba/blob/master/build.xml).
 
+To build the project, execute `build-bin` target.
+
 It creates a `charba-[version.release].jar` file into `dist` folder, ready to be included into your project.
 
 Installation

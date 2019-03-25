@@ -23,8 +23,6 @@ jdk:
 branches:
    only:
      - master 
-     - stock
-     - cuc
 #
 # BUILD phase
 #
