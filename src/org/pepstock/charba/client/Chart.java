@@ -364,8 +364,24 @@ public final class Chart {
 	 * @see org.pepstock.charba.client.commons.Id
 	 */
 	@JsOverlay
-	public String getCharbaId() {
+	private String getCharbaId() {
 		return Id.get(getOptions());
 	}
 
+	/**
+	 * Returns the CHARBA chart.
+	 * 
+	 * @return the CHARBA chart
+	 */
+	@JsOverlay
+	public AbstractChart<?, ?> getChart() {
+		// gets charba id
+		String charbaId = getCharbaId();
+		// checks if not null
+		if (charbaId != null) {
+			return Charts.get(Id.get(getOptions()));
+		}
+		// if here, charba id is null
+		return null;
+	}
 }

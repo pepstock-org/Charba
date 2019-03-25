@@ -42,11 +42,12 @@ public interface Extensions extends ClientBundle {
 	TextResource labelsPlugin();
 
 	/**
-	 * Contains text representation of native chart <a href="https://github.com/chartjs/chartjs-plugin-datalabelss">datalabels
+	 * Contains text representation of native chart<a href="https://github.com/chartjs/chartjs-plugin-datalabelss">datalabels
 	 * plugin</a> code.
 	 * 
 	 * @return chart <a href="https://github.com/chartjs/chartjs-plugin-datalabelss">datalabels plugin</a> code
 	 */
 	@Source("js/chartjs-plugin-datalabels.min.js")
 	TextResource datalabelsPlugin();
+
 }

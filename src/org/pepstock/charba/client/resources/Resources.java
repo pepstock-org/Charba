@@ -15,32 +15,29 @@
 */
 package org.pepstock.charba.client.resources;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.resources.client.ResourcePrototype;
 import com.google.gwt.resources.client.TextResource;
 
 /**
  * Client bundle to reference CHART.JS and other java script codes, always needed to CHARBA.<br>
- * It also includes some image resources for datasets items selector plugin.
+ * CHART.JS text resource it's just defined because the mode how to inject depends on the implementation of this interface. It
+ * includes some image resources for datasets items selector plugin, the same for all implementation.
  * 
  * @author Andrea "Stock" Stocchero
+ * @see DeferredResources
+ * @see EmbeddedResources
+ * @param <T> resources prototype type of CHART.JS resource
  */
-public interface Resources extends ClientBundle {
+public interface Resources<T extends ResourcePrototype> extends ClientBundle {
 
 	/**
-	 * Static reference to resources java script source code
-	 */
-	public static final Resources INSTANCE = GWT.create(Resources.class);
-
-	/**
-	 * Contains text representation of native chart.js code. FIXME downloaded NOT ufficial version to solve the issue about
-	 * POINTS and GRADIENTS color FIXME https://www.chartjs.org/docs/latest/developers/
+	 * Contains text representation of native chart.js code.
 	 * 
 	 * @return chart.js code
 	 */
-	@Source("js/chart.bundle.min.js")
-	TextResource chartJs();
+	T chartJs();
 
 	/**
 	 * This java script with a set of static methods used as utility and needed to improve JSINTEROP adoption for CHARBA,

@@ -34,6 +34,10 @@ public enum SteppedLine implements Key
 	 */
 	after,
 	/**
+	 * Step-middle Interpolation
+	 */
+	middle,
+	/**
 	 * No Step Interpolation (default)
 	 */
 	nosteppedline;

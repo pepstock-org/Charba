@@ -23,7 +23,6 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.Node;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.xml.client.XMLParser;
 
 /**
@@ -200,10 +199,8 @@ public final class AnnotationBuilder {
 		result = result.replaceAll(WIDTH_ARGUMENT_TOKEN, String.valueOf(width));
 		// replaces the height into the template
 		result = result.replaceAll(HEIGHT_ARGUMENT_TOKEN, String.valueOf(height));
-		// creates the image with URL
-		Image image = new Image(result);
 		// transforms it into an element
-		ImageElement element = ImageElement.as(image.getElement());
+		ImageElement element = Utilities.toImageElement(result);
 		// stores into cache
 		IMAGES.put(key, element);
 		// returns it

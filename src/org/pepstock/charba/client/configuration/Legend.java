@@ -25,6 +25,7 @@ import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendHoverEvent;
+import org.pepstock.charba.client.events.LegendLeaveEvent;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
@@ -46,35 +47,16 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	// ---------------------------
 
 	/**
-	 * Java script FUNCTION callback called when a click event on the legend is raised.<br>
+	 * Java script FUNCTION callback called when a event on the legend is raised.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	interface ProxyLegendClickCallback {
+	interface ProxyLegendEventCallback {
 
 		/**
-		 * Method of function to be called when a click event on the legend is raised.
-		 * 
-		 * @param chart context Value of <code>this</code> to the execution context of function. It is the chart instance.
-		 * @param event native event
-		 * @param item legend item affected by event
-		 */
-		void call(Chart chart, ChartNativeEvent event, NativeObject item);
-	}
-
-	/**
-	 * Java script FUNCTION callback called when a hover event on the legend is raised.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyLegendHoverCallback {
-
-		/**
-		 * Method of function to be called when a hover event on the legend is raised.
+		 * Method of function to be called when a event on the legend is raised.
 		 * 
 		 * @param chart context Value of <code>this</code> to the execution context of function. It is the chart instance.
 		 * @param event native event
@@ -87,15 +69,19 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the click function
-	private final CallbackProxy<ProxyLegendClickCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyLegendEventCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover function
-	private final CallbackProxy<ProxyLegendHoverCallback> hoverCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyLegendEventCallback> hoverCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the leave function
+	private final CallbackProxy<ProxyLegendEventCallback> leaveCallbackProxy = JsHelper.get().newCallbackProxy();
 	// sub element of legend
 	private final LegendLabels labels;
 	// amount of click handlers
 	private int onClickHandlers = 0;
 	// amount of hover handlers
 	private int onHoverHandlers = 0;
+	// amount of leave handlers
+	private int onLeaveHandlers = 0;
 
 	/**
 	 * Name of properties of native object.
@@ -103,7 +89,8 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	private enum Property implements Key
 	{
 		onClick,
-		onHover
+		onHover,
+		onLeave
 	}
 
 	/**
@@ -119,14 +106,14 @@ public class Legend extends EventProvider<ExtendedOptions> {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		clickCallbackProxy.setCallback(new ProxyLegendClickCallback() {
+		clickCallbackProxy.setCallback(new ProxyLegendEventCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Legend.ProxyLegendClickCallback#call(org.pepstock.charba.
-			 * client.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
-			 * org.pepstock.charba.client.commons.NativeObject)
+			 * @see
+			 * org.pepstock.charba.client.configuration.Legend.ProxyLegendEventCallback#call(org.pepstock.charba.client.Chart,
+			 * org.pepstock.charba.client.events.ChartNativeEvent, org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Chart chart, ChartNativeEvent event, NativeObject item) {
@@ -134,19 +121,34 @@ public class Legend extends EventProvider<ExtendedOptions> {
 				getChart().fireEvent(new LegendClickEvent(event, new LegendItem(item)));
 			}
 		});
-		hoverCallbackProxy.setCallback(new ProxyLegendHoverCallback() {
+		hoverCallbackProxy.setCallback(new ProxyLegendEventCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Legend.ProxyLegendHoverCallback#call(org.pepstock.charba.
-			 * client.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
-			 * org.pepstock.charba.client.commons.NativeObject)
+			 * @see
+			 * org.pepstock.charba.client.configuration.Legend.ProxyLegendEventCallback#call(org.pepstock.charba.client.Chart,
+			 * org.pepstock.charba.client.events.ChartNativeEvent, org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public void call(Chart chart, ChartNativeEvent event, NativeObject item) {
 				// fires the event
 				getChart().fireEvent(new LegendHoverEvent(event, new LegendItem(item)));
+			}
+		});
+		leaveCallbackProxy.setCallback(new ProxyLegendEventCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see
+			 * org.pepstock.charba.client.configuration.Legend.ProxyLegendEventCallback#call(org.pepstock.charba.client.Chart,
+			 * org.pepstock.charba.client.events.ChartNativeEvent, org.pepstock.charba.client.commons.NativeObject)
+			 */
+			@Override
+			public void call(Chart chart, ChartNativeEvent event, NativeObject item) {
+				// fires the event
+				getChart().fireEvent(new LegendLeaveEvent(event, new LegendItem(item)));
 			}
 		});
 	}
@@ -184,6 +186,14 @@ public class Legend extends EventProvider<ExtendedOptions> {
 			}
 			// increments amount of handlers
 			onHoverHandlers++;
+		} else if (type.equals(LegendLeaveEvent.TYPE)) {
+			// if java script property is missing
+			if (onLeaveHandlers == 0) {
+				// adds the java script function to catch the event
+				getConfiguration().setEvent(getConfiguration().getLegend(), Property.onLeave, leaveCallbackProxy.getProxy());
+			}
+			// increments amount of handlers
+			onLeaveHandlers++;
 		}
 	}
 
@@ -210,6 +220,14 @@ public class Legend extends EventProvider<ExtendedOptions> {
 			if (onHoverHandlers == 0) {
 				// removes the java script object
 				getConfiguration().setEvent(getConfiguration().getLegend(), Property.onHover, null);
+			}
+		} else if (type.equals(LegendLeaveEvent.TYPE)) {
+			// decrements the amount of handlers
+			onLeaveHandlers--;
+			// if there is not any handler
+			if (onLeaveHandlers == 0) {
+				// removes the java script object
+				getConfiguration().setEvent(getConfiguration().getLegend(), Property.onLeave, null);
 			}
 		}
 	}

@@ -36,6 +36,10 @@ public final class ColorBuilder {
 	private static final String RGB_PATTERN = "rgb\\(\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})\\s*\\)";
 	// REGX for RGBA
 	private static final String RGBA_PATTERN = "rgba\\(\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})\\s*,\\s*(\\d*\\.?\\d*)\\s*\\)";
+	// REGX for HSL
+	private static final String HSL_PATTERN = "hsl\\(\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})%\\s*,\\s*(\\d{1,3})%\\s*\\)";
+	// REGX for HSLA
+	private static final String HSLA_PATTERN = "hsla\\(\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})%\\s*,\\s*(\\d{1,3})%\\s*,\\s*(\\d*\\.?\\d*)\\s*\\)";
 
 	// char to identify if is a HEX color
 	static final String HEX_STARTING_CHAR = "#";
@@ -43,6 +47,10 @@ public final class ColorBuilder {
 	static final String RGB_STARTING_CHARS = "rgb";
 	// char to identify if is a RGBA color
 	static final String RGBA_STARTING_CHARS = "rgba";
+	// chars to identify if is a HSL color
+	static final String HSL_STARTING_CHARS = "hsl";
+	// chars to identify if is a HSLA color
+	static final String HSLA_STARTING_CHARS = "hsla";
 
 	/**
 	 * To avoid any instantiation
@@ -119,6 +127,12 @@ public final class ColorBuilder {
 			} else if (value.startsWith(RGB_STARTING_CHARS)) {
 				// is a RGB
 				return buildByRGBValue(newValue);
+			} else if (value.startsWith(HSLA_STARTING_CHARS)) {
+				// is a HSLA. It must be checked before HSL
+				return buildByHSLAValue(newValue);
+			} else if (value.startsWith(HSL_STARTING_CHARS)) {
+				// is a HSL
+				return buildByHSLValue(newValue);
 			} else {
 				// search by color name
 				for (HtmlColor color : HtmlColor.values()) {
@@ -282,5 +296,185 @@ public final class ColorBuilder {
 			// if here the rgba value is not valid
 			throw new IllegalArgumentException("RGBA value is invalid");
 		}
+	}
+
+	/**
+	 * Parses HSL value translating into a color. HSL format: <code>hsl(h, s, l)</code>
+	 * 
+	 * @param hslvalue hsl value
+	 * @return color instance
+	 */
+	private static IsColor buildByHSLValue(String hslvalue) {
+		// creates regular expression
+		RegExp regExp = RegExp.compile(HSL_PATTERN);
+		MatchResult matcher = regExp.exec(hslvalue);
+		boolean matchFound = matcher != null;
+		// checks if matches
+		if (matchFound && matcher.getGroupCount() == 4) {
+			// init int values
+			int hue = 0;
+			int saturation = 0;
+			int lightness = 0;
+			// scans all token. Starts by 1
+			for (int i = 1; i < matcher.getGroupCount(); i++) {
+				String groupStr = matcher.getGroup(i);
+				switch (i) {
+				case 1:
+					hue = Integer.parseInt(groupStr);
+					break;
+				case 2:
+					saturation = Integer.parseInt(groupStr);
+					break;
+				case 3:
+					lightness = Integer.parseInt(groupStr);
+					break;
+				default:
+					break;
+				}
+			}
+			// builds color
+			return convertHSL2RGB(hue, saturation, lightness, Double.NaN);
+		} else {
+			// if here the rgb value is not valid
+			throw new IllegalArgumentException("HSL value is invalid");
+		}
+	}
+
+	/**
+	 * Parses HSL value translating into a color. HSL format: <code>hsla(h, s, l, a)</code>
+	 * 
+	 * @param hslavalue hsla value
+	 * @return color instance
+	 */
+	private static IsColor buildByHSLAValue(String hslavalue) {
+		// creates regular expression
+		RegExp regExp = RegExp.compile(HSLA_PATTERN);
+		MatchResult matcher = regExp.exec(hslavalue);
+		boolean matchFound = matcher != null;
+		// checks if matches
+		if (matchFound && matcher.getGroupCount() == 5) {
+			// init int values
+			int hue = 0;
+			int saturation = 0;
+			int lightness = 0;
+			double alpha = Color.DEFAULT_ALPHA;
+			// scans all token. Starts by 1
+			for (int i = 1; i < matcher.getGroupCount(); i++) {
+				String groupStr = matcher.getGroup(i);
+				switch (i) {
+				case 1:
+					hue = Integer.parseInt(groupStr);
+					break;
+				case 2:
+					saturation = Integer.parseInt(groupStr);
+					break;
+				case 3:
+					lightness = Integer.parseInt(groupStr);
+					break;
+				case 4:
+					alpha = Double.parseDouble(groupStr);
+					break;
+				default:
+					break;
+				}
+			}
+			// builds color
+			return convertHSL2RGB(hue, saturation, lightness, alpha);
+		} else {
+			// if here the rgb value is not valid
+			throw new IllegalArgumentException("HSL value is invalid");
+		}
+	}
+
+	/**
+	 * Convert HSL(A) values to a RGB(A) Color.
+	 *
+	 * @param hue hue is a degree on the color wheel from 0 to 360. 0 is red, 120 is green, 240 is blue.
+	 * @param saturation saturation is a percentage value; 0% means a shade of gray and 100% is the full color.
+	 * @param lightness lightness is a percentage; 0% is black, 100% is white.
+	 * @param alpha the alpha
+	 *
+	 * @returns the RGB/RGBA Color object
+	 * @see See explanation <a href="http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/">Math behind colorspace conversions, RGB-HSL</a>
+	 */
+	private static IsColor convertHSL2RGB(int hue, int saturation, int lightness, double alpha) {
+		// checks if hue is in range
+		if (hue < 0 || saturation > 360) {
+			throw new IllegalArgumentException("Hue argument is not within bounds (0-360)");
+		}
+		// saturation if saturation is in range
+		if (saturation < 0 || saturation > 100) {
+			throw new IllegalArgumentException("Saturation argument is not within bounds (0-100)");
+		}
+		// lightness if saturation is in range
+		if (lightness < 0 || lightness > 100) {
+			throw new IllegalArgumentException("Lightness argument is not within bounds (0-100)");
+		}
+		// transforms all values into values between 0 and 1
+		// with maximum value of range
+		double transientHue = hue % 360D;
+		transientHue /= 360D;
+		double transientSaturation = saturation / 100D;
+		double transientLightness = lightness / 100D;
+		// we need to create some temporary variables 
+		// the variables are used to store temporary values which makes the formulas easier to read
+		double temporary1 = 0D;
+		// There are two formulas to choose from in the first step.
+		// if Lightness is smaller then 0.5 (50%) then temporary1 = Lightness x (1.0 + Saturation)
+		// If Lightness is equal or larger then 0.5 (50%) then temporary1 = Lightness + Saturation - Lightness x Saturation
+		if (transientLightness < 0.5D) {
+			temporary1 = transientLightness * (1 + transientSaturation);
+		} else {
+			temporary1 = (transientLightness + transientSaturation) - (transientSaturation * transientLightness);
+		}
+		// we need one more temporary variable, temporary2
+		double temporary2 = 2 * transientLightness - temporary1;
+		// // And now we need another temporary variable for each color channel, temporary_R, temporary_G and temporary_B.
+		// calculate RED, GREEN and BLUE as Double
+		double temporary_R = Math.max(0, hueToRGB(temporary2, temporary1, transientHue + (1D / 3D)));
+		double temporary_G = Math.max(0, hueToRGB(temporary2, temporary1, transientHue));
+		double temporary_B = Math.max(0, hueToRGB(temporary2, temporary1, transientHue - (1D / 3D)));
+		// calculate RED, GREEN and BLUE as Integer
+		int red = (int) Math.round(Math.min(temporary_R, 1) * 255F);
+		int green = (int) Math.round(Math.min(temporary_G, 1) * 255);
+		int blue = (int) Math.round(Math.min(temporary_B, 1) * 255);
+		// checks if alpha is NaN
+		// builds the RGB color without alpha
+		// otherwise with alpha
+		return Double.isNaN(alpha) ? build(red, green, blue) : build(red, green, blue, alpha);
+	}
+
+	/**
+	 * Transforms Hue value into a color value for RGB
+	 * 
+	 * @param temporary2 lightness and saturation temporary variable
+	 * @param temporary1 lightness and saturation temporary variable
+	 * @param temporaryChannelValue temporary channel value
+	 * @return the channel color value to use for RGB color
+	 */
+	private static double hueToRGB(double temporary2, double temporary1, double temporaryChannelValue) {
+		// all values need to be between 0 and 1. 
+		// if you get a negative value you need to add 1 to it.
+		// if you get a value above 1 you need to subtract 1 from it.
+		if (temporaryChannelValue < 0) {
+			temporaryChannelValue += 1;
+		}
+		if (temporaryChannelValue > 1) {
+			temporaryChannelValue -= 1;
+		}
+		// now we need to do up to 3 tests to select the correct formula for each color channel.
+		// test 1 - If 6 x CHANNEL temporary color is smaller then 1, CHANNEL temporary color = temporary_2 + (temporary_1 - temporary_2) x 6 x CHANNEL temporary color
+		if (6 * temporaryChannelValue < 1) {
+			return temporary2 + ((temporary1 - temporary2) * 6 * temporaryChannelValue);
+		}
+		// test 2 - If 2 x CHANNEL temporary color is smaller then 1, CHANNEL temporary color = temporary_1
+		if (2 * temporaryChannelValue < 1) {
+			return temporary1;
+		}
+		// test 3 - If 3 x CHANNEL temporary color is smaller then 2, CHANNEL temporary color = temporary_2 + (temporary_1 - temporary_2) x (0.666 - CHANNEL temporary color) x 6
+		if (3 * temporaryChannelValue < 2) {
+			return temporary2 + ((temporary1 - temporary2) * 6 * ((2.0D / 3.0D) - temporaryChannelValue));
+		}
+		return temporary2;
 	}
 }

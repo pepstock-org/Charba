@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultLine;
 import org.pepstock.charba.client.enums.CapStyle;
+import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
@@ -26,7 +27,7 @@ import org.pepstock.charba.client.enums.JoinStyle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultLine extends DefaultArc implements IsDefaultLine {
+public final class DefaultLine extends AbstractDefaultOptionsElement implements IsDefaultLine {
 
 	// default line tension
 	private static final float DEFAULT_TENSION = 0.4F;
@@ -121,6 +122,16 @@ public final class DefaultLine extends DefaultArc implements IsDefaultLine {
 	@Override
 	public boolean isCapBezierPoints() {
 		return DEFAULT_CAP_BEZIER_POINTS;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#getCubicInterpolationMode()
+	 */
+	@Override
+	public CubicInterpolationMode getCubicInterpolationMode() {
+		return CubicInterpolationMode.defaults;
 	}
 
 	/*

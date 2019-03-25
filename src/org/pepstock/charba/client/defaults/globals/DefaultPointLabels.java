@@ -26,6 +26,8 @@ public final class DefaultPointLabels extends AbstractDefaultFontItem implements
 
 	private static final boolean DEFAULT_DISPLAY = true;
 
+	private static final double DEFAULT_LINE_HEIGHT = 1.2D;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -35,4 +37,15 @@ public final class DefaultPointLabels extends AbstractDefaultFontItem implements
 	public boolean isDisplay() {
 		return DEFAULT_DISPLAY;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultPointLabels#getLineHeight()
+	 */
+	@Override
+	public double getLineHeight() {
+		return DEFAULT_LINE_HEIGHT;
+	}
+
 }

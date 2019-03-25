@@ -32,6 +32,9 @@ public final class StandardKey implements Key {
 	 * @param id id of key as String
 	 */
 	public StandardKey(String id) {
+		if (id == null) {
+			throw new IllegalArgumentException("Key is null");
+		}
 		this.id = id;
 	}
 

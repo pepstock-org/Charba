@@ -66,4 +66,14 @@ public final class DefaultChartAngleLines implements IsDefaultAngleLines {
 		return angleLines.getLineWidth();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAngleLines#getBorderDashOffset()
+	 */
+	@Override
+	public int getBorderDashOffset() {
+		return angleLines.getBorderDashOffset();
+	}
+
 }

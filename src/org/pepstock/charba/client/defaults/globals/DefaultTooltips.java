@@ -18,6 +18,7 @@ package org.pepstock.charba.client.defaults.globals;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TooltipPosition;
 
@@ -104,7 +105,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 * @see org.pepstock.charba.client.options.tooltips.IsDefaultTooltips#getPosition()
 	 */
 	@Override
-	public TooltipPosition getPosition() {
+	public IsTooltipPosition getPosition() {
 		return TooltipPosition.average;
 	}
 

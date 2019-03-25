@@ -22,6 +22,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.defaults.IsDefaultTime;
+import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
@@ -34,19 +35,19 @@ import org.pepstock.charba.client.enums.ScaleDistribution;
  */
 public final class DefaultScale implements IsDefaultScale {
 
-	private static final boolean DEFAULT_DISPLAY = true;
-
 	private static final boolean DEFAULT_OFFSET = false;
 
-	private static final int DEFAULT_WEIGHT = 0;
+	private static final double DEFAULT_WEIGHT = 0D;
 
-	private static final double DEFAULT_BAR_PERCENTAGE = 0.9F;
+	private static final double DEFAULT_BAR_PERCENTAGE = 0.9D;
 
-	private static final double DEFAULT_CATEGORY_PERCENTAGE = 0.8F;
+	private static final double DEFAULT_CATEGORY_PERCENTAGE = 0.8D;
 
 	private static final int DEFAULT_BAR_THICKNESS = 0;
 
 	private static final int DEFAULT_MAX_BAR_THICKNESS = 0;
+
+	private static final int DEFAULT_MIN_BAR_LENGTH = 0;
 
 	private static final boolean DEFAULT_STACKED = false;
 
@@ -148,7 +149,7 @@ public final class DefaultScale implements IsDefaultScale {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getWeight()
 	 */
 	@Override
-	public int getWeight() {
+	public double getWeight() {
 		return DEFAULT_WEIGHT;
 	}
 
@@ -158,8 +159,8 @@ public final class DefaultScale implements IsDefaultScale {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#isDisplay()
 	 */
 	@Override
-	public boolean isDisplay() {
-		return DEFAULT_DISPLAY;
+	public Display getDisplay() {
+		return Display.yes;
 	}
 
 	/*
@@ -210,6 +211,16 @@ public final class DefaultScale implements IsDefaultScale {
 	@Override
 	public int getBarThickness() {
 		return DEFAULT_BAR_THICKNESS;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getMinBarLength()
+	 */
+	@Override
+	public int getMinBarLength() {
+		return DEFAULT_MIN_BAR_LENGTH;
 	}
 
 	/*

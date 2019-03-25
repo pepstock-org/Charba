@@ -29,4 +29,11 @@ public interface IsDefaultPointLabels extends IsDefaultFontItem {
 	 */
 	boolean isDisplay();
 
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text.
+	 */
+	double getLineHeight();
+
 }

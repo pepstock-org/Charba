@@ -18,7 +18,7 @@ package org.pepstock.charba.client.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Property to set the postion's edge of an element to a unit above/below its normal position.
+ * Property to set the position's edge of an element to a unit above/below its normal position.
  * 
  * @author Andrea "Stock" Stocchero
  */

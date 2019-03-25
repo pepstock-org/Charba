@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.enums.CapStyle;
+import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 
@@ -24,7 +25,7 @@ import org.pepstock.charba.client.enums.JoinStyle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultLine extends IsDefaultArc {
+public interface IsDefaultLine extends IsDefaultOptionsElement {
 
 	/**
 	 * Returns the Bezier curve tension (0 for no Bezier curves).
@@ -64,6 +65,13 @@ public interface IsDefaultLine extends IsDefaultArc {
 	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
 	 */
 	boolean isCapBezierPoints();
+
+	/**
+	 * Returns algorithm used to interpolate a smooth curve from the discrete data points.
+	 * 
+	 * @return algorithm used to interpolate a smooth curve from the discrete data points.
+	 */
+	CubicInterpolationMode getCubicInterpolationMode();
 
 	/**
 	 * Returns how to fill the area under the line.

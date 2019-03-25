@@ -25,8 +25,7 @@ import jsinterop.annotations.JsType;
 
 /**
  * Java native object which is wrapping a CHARBA java script object implementation with some utilities to act on java script
- * objects.<br>
- * This script will be injected with CHART.JS.
+ * objects.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -141,4 +140,5 @@ final class NativeJsHelper {
 	 * @return a chart native event
 	 */
 	static native ChartNativeEvent nativeEvent(NativeObject event, String key);
+	
 }

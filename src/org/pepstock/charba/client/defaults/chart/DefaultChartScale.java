@@ -22,6 +22,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.defaults.IsDefaultTime;
+import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
@@ -151,18 +152,18 @@ public final class DefaultChartScale implements IsDefaultScale {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getWeight()
 	 */
 	@Override
-	public int getWeight() {
+	public double getWeight() {
 		return scale.getWeight();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#isDisplay()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getDisplay()
 	 */
 	@Override
-	public boolean isDisplay() {
-		return scale.isDisplay();
+	public Display getDisplay() {
+		return scale.getDisplay();
 	}
 
 	/*
@@ -213,6 +214,16 @@ public final class DefaultChartScale implements IsDefaultScale {
 	@Override
 	public int getBarThickness() {
 		return scale.getBarThickness();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getMinBarLength()
+	 */
+	@Override
+	public int getMinBarLength() {
+		return scale.getMinBarLength();
 	}
 
 	/*

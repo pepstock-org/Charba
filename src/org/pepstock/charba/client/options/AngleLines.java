@@ -15,8 +15,12 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.List;
+
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.ArrayInteger;
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultAngleLines;
@@ -36,7 +40,9 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	{
 		display,
 		color,
-		lineWidth
+		lineWidth,
+		borderDash,
+		borderDashOffset
 	}
 
 	/**
@@ -128,5 +134,48 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	 */
 	public int getLineWidth() {
 		return getValue(Property.lineWidth, getDefaultValues().getLineWidth());
+	}
+
+	/**
+	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
+	 * and gaps which describe the pattern.
+	 * 
+	 * @param borderDash the line dash pattern used when stroking lines
+	 */
+	public void setBorderDash(int... borderDash) {
+		setArrayValue(Property.borderDash, ArrayInteger.fromOrNull(borderDash));
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
+	 * lines and gaps which describe the pattern.
+	 * 
+	 * @return the line dash pattern used when stroking lines
+	 */
+	public List<Integer> getBorderDash() {
+		ArrayInteger array = getArrayValue(Property.borderDash);
+		return ArrayListHelper.list(array);
+	}
+
+	/**
+	 * Sets the line dash pattern offset or "phase".
+	 * 
+	 * @param borderDashOffset Offset for line dashes.
+	 */
+	public void setBorderDashOffset(int borderDashOffset) {
+		setValue(Property.borderDashOffset, borderDashOffset);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the line dash pattern offset or "phase".
+	 * 
+	 * @return Offset for line dashes.
+	 */
+	public int getBorderDashOffset() {
+		return getValue(Property.borderDashOffset, getDefaultValues().getBorderDashOffset());
 	}
 }

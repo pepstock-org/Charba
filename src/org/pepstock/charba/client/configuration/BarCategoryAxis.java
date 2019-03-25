@@ -120,6 +120,24 @@ public class BarCategoryAxis extends CartesianCategoryAxis {
 		return getScale().getMaxBarThickness();
 	}
 
+	/**
+	 * Set this to ensure that bars have a minimum length in pixels.
+	 * 
+	 * @param minBarLength a minimum length in pixels.
+	 */
+	public final void setMinBarLength(int minBarLength) {
+		getScale().setMinBarLength(minBarLength);
+	}
+
+	/**
+	 * Returns a minimum length in pixels.
+	 * 
+	 * @return a minimum length in pixels.
+	 */
+	public final int getMinBarLength() {
+		return getScale().getMinBarLength();
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

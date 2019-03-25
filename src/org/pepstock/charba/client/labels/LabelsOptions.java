@@ -18,8 +18,6 @@ package org.pepstock.charba.client.labels;
 import java.util.List;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Charts;
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayImage;
@@ -33,7 +31,8 @@ import org.pepstock.charba.client.labels.callbacks.FontColorCallback;
 import org.pepstock.charba.client.labels.callbacks.RenderCallback;
 import org.pepstock.charba.client.labels.enums.Position;
 import org.pepstock.charba.client.labels.enums.Render;
-import org.pepstock.charba.client.plugins.AbstractPluginOptions;
+import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
+import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.resources.client.ImageResource;
@@ -47,7 +46,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class LabelsOptions extends AbstractPluginOptions {
+public final class LabelsOptions extends AbstractPluginCachedOptions {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -63,7 +62,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	interface ProxyRenderCallback {
 
 		/**
-		 * Method of function to be called to to render the chart returning the label(string) and the image to show.
+		 * Method of function to be called to render the chart returning the label(string) and the image to show.
 		 * 
 		 * @param context context Value of <code>this</code> to the execution context of function.
 		 * @param item native object as render item.
@@ -150,15 +149,10 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	LabelsOptions(boolean deferredRegistration) {
 		// creates an empty object
 		super(LabelsPlugin.ID, LabelsPlugin.FACTORY, deferredRegistration);
-		// checks if the default global options has been added for the plugin
-		if (Defaults.get().getGlobal().getPlugins().hasOptions(LabelsPlugin.ID)) {
-			// reads the default default global options
-			defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(LabelsPlugin.ID, defaultsFactory);
-		} else {
-			// if here, no default global option
-			// then the plugin will use the static defaults
-			defaultsOptions = new LabelsDefaultsOptions();
-		}
+		// this constructor is used by user to set options for plugin
+		// both default global or chart one.
+		// reads the default default global options
+		defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -173,12 +167,11 @@ public final class LabelsOptions extends AbstractPluginOptions {
 			@Override
 			public Object call(Object context, RenderItem item) {
 				// gets chart instance
-				String id = item.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
+				AbstractChart<?, ?> chart = item.getNativeChart().getChart();
 				// checks if the callback is set
 				if (chart != null && renderCallback != null) {
 					// calls callback
-					Object value = renderCallback.render(chart, item);
+					Object value = renderCallback.invoke(chart, item);
 					// checks result
 					if (value != null) {
 						if (value instanceof ImageElement) {
@@ -204,12 +197,11 @@ public final class LabelsOptions extends AbstractPluginOptions {
 			@Override
 			public String call(Object context, FontColorItem item) {
 				// gets chart instance
-				String id = item.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
+				AbstractChart<?, ?> chart = item.getNativeChart().getChart();
 				// checks if the callback is set
 				if (chart != null && fontColorCallback != null) {
 					// calls callback
-					Object value = fontColorCallback.color(chart, item);
+					Object value = fontColorCallback.invoke(chart, item);
 					// checks result
 					if (value instanceof IsColor) {
 						// is color instance
@@ -526,8 +518,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 	 * @return the position to draw label. Default is {@link Position#defaults}.
 	 */
 	public final Position getPosition() {
-		String value = getValue(Property.position, defaultsOptions.getPositionAsString());
-		return Position.getPositionByValue(value);
+		return Position.getPositionByValue(getValue(Property.position, defaultsOptions.getPositionAsString()));
 	}
 
 	/**
@@ -620,9 +611,8 @@ public final class LabelsOptions extends AbstractPluginOptions {
 			for (int i = 0; i < images.length; i++) {
 				// transform a image resource into image element by image object
 				// creates image object
-				Image img = new Image(images[i]);
 				// stores into array changing in image element
-				array[i] = ImageElement.as(img.getElement());
+				array[i] = Utilities.toImageElement(images[i]);
 			}
 			// stores it
 			setImages(array);
@@ -647,7 +637,7 @@ public final class LabelsOptions extends AbstractPluginOptions {
 			for (int i = 0; i < images.length; i++) {
 				// transform a image resource into image element by image object
 				// stores into array changing in image element
-				array[i] = ImageElement.as(images[i].getElement());
+				array[i] = Utilities.toImageElement(images[i]);
 			}
 			// stores it
 			setImages(array);

@@ -32,19 +32,9 @@ import org.pepstock.charba.client.Plugin;
  *
  */
 public final class Plugins implements ConfigurationElement {
-	// chart instance
-	private final AbstractChart<?, ?> chart;
-	// list of added plugins
-	private final List<InlinePlugin> plugins = new LinkedList<InlinePlugin>();
 
-	/**
-	 * Builds the object storing the chart instance.
-	 * 
-	 * @param chart chart instance
-	 */
-	public Plugins(AbstractChart<?, ?> chart) {
-		this.chart = chart;
-	}
+	// list of added plugins
+	private final List<WrapperPlugin> plugins = new LinkedList<WrapperPlugin>();
 
 	/**
 	 * Adds a new plugin to the chart.<br>
@@ -56,7 +46,7 @@ public final class Plugins implements ConfigurationElement {
 		// checks the plugin id
 		PluginIdChecker.check(plugin.getId());
 		// creates a java script object, wrapper of the plugin
-		InlinePlugin wPlugin = new InlinePlugin(chart, plugin);
+		WrapperPlugin wPlugin = new WrapperPlugin(plugin);
 		// stores the wrapper into a list
 		plugins.add(wPlugin);
 	}
@@ -69,10 +59,10 @@ public final class Plugins implements ConfigurationElement {
 	 */
 	public boolean has(String id) {
 		// scans all plugins
-		Iterator<InlinePlugin> iter = plugins.iterator();
+		Iterator<WrapperPlugin> iter = plugins.iterator();
 		while (iter.hasNext()) {
 			// gets wrapper
-			InlinePlugin plugin = iter.next();
+			WrapperPlugin plugin = iter.next();
 			// if has got the same id
 			if (plugin.getId().equals(id)) {
 				// removes it
@@ -90,10 +80,10 @@ public final class Plugins implements ConfigurationElement {
 	 */
 	public void remove(String id) {
 		// scans all plugins
-		Iterator<InlinePlugin> iter = plugins.iterator();
+		Iterator<WrapperPlugin> iter = plugins.iterator();
 		while (iter.hasNext()) {
 			// gets wrapper
-			InlinePlugin plugin = iter.next();
+			WrapperPlugin plugin = iter.next();
 			// if has got the same id
 			if (plugin.getId().equals(id)) {
 				// removes it
@@ -110,7 +100,7 @@ public final class Plugins implements ConfigurationElement {
 	 */
 	public void onChartConfigure(Configuration config, AbstractChart<?, ?> chart) {
 		// scans all plugins
-		for (InlinePlugin entry : plugins) {
+		for (WrapperPlugin entry : plugins) {
 			// calls on configure method
 			entry.onConfigure(chart);
 		}
@@ -129,7 +119,7 @@ public final class Plugins implements ConfigurationElement {
 			// new array
 			ArrayPlugin array = new ArrayPlugin();
 			// adds all java script object of the plugin wrapper
-			for (InlinePlugin plugin : plugins) {
+			for (WrapperPlugin plugin : plugins) {
 				array.push(plugin.getNativeObject());
 			}
 			// sets it to configuration object

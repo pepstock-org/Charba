@@ -18,6 +18,7 @@ package org.pepstock.charba.client.datalabels;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.resources.Extensions;
+import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
  * Entry point of <a href="https://github.com/chartjs/chartjs-plugin-datalabels">DATALABELS plugin</a> to enable the plugin.<br>
@@ -36,7 +37,7 @@ public final class DataLabelsPlugin {
 	/**
 	 * Data labels options factory
 	 */
-	public static final DataLabelsOptionsFactory FACTORY = new DataLabelsOptionsFactory();
+	public static final DataLabelsOptionsFactory FACTORY = new DataLabelsOptionsFactory(ID);
 
 	/**
 	 * To avoid any instantiation
@@ -58,8 +59,8 @@ public final class DataLabelsPlugin {
 	 * @param enableToAllCharts by <code>true</code> the plugin will be enabled to all charts, otherwise <code>false</code>.
 	 */
 	public static void enable(boolean enableToAllCharts) {
-		// injects CHARBA is not already injected
-		Injector.ensureInjected();
+		// Inject Chart.js if not already loaded
+		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
 		// injects LABELS plugin
 		Injector.ensureInjected(Extensions.INSTANCE.datalabelsPlugin());
 		// set the enabling to all charts at global level

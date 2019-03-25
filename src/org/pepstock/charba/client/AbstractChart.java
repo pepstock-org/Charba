@@ -29,6 +29,7 @@ import org.pepstock.charba.client.items.DatasetItem.DatasetItemFactory;
 import org.pepstock.charba.client.items.DatasetMetaItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.Plugins;
+import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.utils.JSON;
 
 import com.google.gwt.canvas.client.Canvas;
@@ -134,10 +135,10 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			canvas = null;
 			preventDisplayHandler = null;
 		}
-		// injects Chart.js java script source
-		Injector.ensureInjected();
+		// Inject Chart.js if not already loaded
+		Injector.ensureInjected(ResourcesType.getClientBundle().chartJs());
 		// creates plugins container
-		plugins = new Plugins(this);
+		plugins = new Plugins();
 		// creates defaults options for this chart type
 		options = createChartOptions();
 	}

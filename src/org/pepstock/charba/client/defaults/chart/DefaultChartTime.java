@@ -105,7 +105,7 @@ public final class DefaultChartTime implements IsDefaultTime {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getStepSize()
 	 */
 	@Override
-	public int getStepSize() {
+	public double getStepSize() {
 		return time.getStepSize();
 	}
 

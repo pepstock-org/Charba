@@ -17,11 +17,18 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayObject;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.enums.DataType;
-import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.options.Scales;
 
 /**
@@ -33,6 +40,17 @@ import org.pepstock.charba.client.options.Scales;
  * @author Andrea "Stock" Stocchero
  */
 public class BarDataset extends HovingFlexDataset implements HasDataPoints {
+	// default label
+	private static final String DEFAULT_LABEL = "";
+
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the border skipped function
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> borderSkippedCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// border skipped callback instance
+	private BorderSkippedCallback borderSkippedCallback = null;
 
 	// data point factory
 	private final DataPointListFactory factory = new DataPointListFactory();
@@ -44,7 +62,8 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	{
 		xAxisID,
 		yAxisID,
-		borderSkipped
+		borderSkipped,
+		borderWidth
 	}
 
 	/**
@@ -52,7 +71,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 * It uses the global options has default.
 	 */
 	public BarDataset() {
-		super();
+		this(null);
 	}
 
 	/**
@@ -62,6 +81,41 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 */
 	public BarDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		borderSkippedCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
+			 */
+			@Override
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				BorderSkipped value = ScriptableUtils.getOptionValueAsString(context, borderSkippedCallback);
+				BorderSkipped result = value == null ? getDefaultValues().getElements().getRectangle().getBorderSkipped() : value;
+				// checks if is boolean
+				if (BorderSkipped.noborderskipped.equals(result)) {
+					return false;
+				} else {
+					// returns the string value
+					return result.name();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Returns the label for the dataset which appears in the legend and tooltips.
+	 * 
+	 * @return the label for the dataset which appears in the legend and tooltips.
+	 */
+	@Override
+	public String getLabel() {
+		return getValue(Dataset.Property.label, DEFAULT_LABEL);
 	}
 
 	/**
@@ -107,12 +161,70 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	}
 
 	/**
+	 * Sets the stroke width of the bar in pixels.
+	 * 
+	 * @param borderWidth the stroke width of the bar in pixels.
+	 */
+	public void setBorderWidth(BarBorderWidth borderWidth) {
+		// stores value
+		setValue(Property.borderWidth, borderWidth);
+	}
+
+	/**
+	 * Returns the stroke width of the bar in pixels. If a callback or an array have been set, returns an empty object.
+	 * 
+	 * @return list of the stroke width of the bar in pixels. If a callback or an array have been set, returns an empty object
+	 */
+	public BarBorderWidth getBorderWidthAsItem() {
+		// gets object type
+		ObjectType type = type(Property.borderWidth);
+		// checks if borer width has been set by an object
+		if (ObjectType.Object.equals(type)) {
+			// returns the array
+			return new BarBorderWidth(getValue(Property.borderWidth));
+		}
+		// if here, is not a bar border width object
+		// then creates new border width
+		BarBorderWidth borderWidth = new BarBorderWidth();
+		// checks if borer width has been set by an object
+		if (ObjectType.Number.equals(type)) {
+			// reads number and set to object
+			borderWidth.set(getValue(Property.borderWidth, getDefaultBorderWidth()));
+		}
+		// returns the border width object
+		return borderWidth;
+	}
+
+	/**
+	 * Sets the edge to skip drawing the border for.
+	 * 
+	 * @param borderskip to set <code>false</code> as border skipped. If set <code>true</code>, is ignored
+	 */
+	public void setBorderSkipped(boolean borderskip) {
+		// checks value for border skipped
+		// if not false, otherwise ignore it
+		if (!borderskip) {
+			// stores boolean value
+			setValue(Property.borderSkipped, BorderSkipped.noborderskipped);
+		}
+	}
+
+	/**
 	 * Sets the edge to skip drawing the border for.
 	 * 
 	 * @param position the edge to skip drawing the border for.
 	 */
-	public void setBorderSkipped(Position position) {
-		setValue(Property.borderSkipped, position);
+	public void setBorderSkipped(BorderSkipped position) {
+		// resets callbacks
+		setBorderSkipped((BorderSkippedCallback) null);
+		// checks if setting a false value
+		if (BorderSkipped.noborderskipped.equals(position)) {
+			// stores boolean value
+			setValue(Property.borderSkipped, false);
+		} else {
+			// otherwise stores the key value
+			setValue(Property.borderSkipped, position);
+		}
 	}
 
 	/**
@@ -120,8 +232,45 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 * 
 	 * @return the edge to skip drawing the border for.
 	 */
-	public Position getBorderSkipped() {
-		return getValue(Property.borderSkipped, Position.class, getDefaultValues().getElements().getRectangle().getBorderSkipped());
+	public BorderSkipped getBorderSkipped() {
+		// checks if 'false' has been set
+		if (ObjectType.Boolean.equals(type(Property.borderSkipped))) {
+			// returns is false
+			return BorderSkipped.noborderskipped;
+		} else if (ObjectType.Function.equals(type(Property.borderSkipped))) {
+			// checks if a callback has been set
+			// returns defaults
+			return getDefaultValues().getElements().getRectangle().getBorderSkipped();
+		}
+		// otherwise returns the enum value as string
+		return getValue(Property.borderSkipped, BorderSkipped.class, getDefaultValues().getElements().getRectangle().getBorderSkipped());
+	}
+
+	/**
+	 * Returns the border skipped callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border skipped callback, if set, otherwise <code>null</code>.
+	 */
+	public BorderSkippedCallback getBorderSkippedCallback() {
+		return borderSkippedCallback;
+	}
+
+	/**
+	 * Sets the border skipped callback.
+	 * 
+	 * @param borderSkippedCallback the border skipped callback to set
+	 */
+	public void setBorderSkipped(BorderSkippedCallback borderSkippedCallback) {
+		// sets the callback
+		this.borderSkippedCallback = borderSkippedCallback;
+		// checks if callback is consistent
+		if (borderSkippedCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.borderSkipped, borderSkippedCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.borderSkipped);
+		}
 	}
 
 	/**

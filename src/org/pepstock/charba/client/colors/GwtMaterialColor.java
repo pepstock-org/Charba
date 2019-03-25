@@ -1447,6 +1447,26 @@ public enum GwtMaterialColor implements IsColor
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#toHSLA()
+	 */
+	@Override
+	public String toHSLA() {
+		return color.toHSLA();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.IsColor#toHSL()
+	 */
+	@Override
+	public String toHSL() {
+		return color.toHSL();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.utils.IsColor#toHex()
 	 */
 	@Override

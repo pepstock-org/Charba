@@ -18,6 +18,7 @@ package org.pepstock.charba.client.configuration;
 import java.util.List;
 
 import org.pepstock.charba.client.enums.CapStyle;
+import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.options.ExtendedOptions;
@@ -156,6 +157,37 @@ public class Line extends AbstractConfigurationElement {
 	 */
 	public boolean isCapBezierPoints() {
 		return getOptions().getElements().getLine().isCapBezierPoints();
+	}
+
+	/**
+	 * Sets algorithm used to interpolate a smooth curve from the discrete data points.<br>
+	 * The following interpolation modes are supported:<br>
+	 * <br>
+	 * 
+	 * <pre>
+	 * 'default'
+	 * 'monotone'
+	 * </pre>
+	 * 
+	 * <br>
+	 * The 'default' algorithm uses a custom weighted cubic interpolation, which produces pleasant curves for all types of
+	 * datasets.<br>
+	 * The 'monotone' algorithm is more suited to y = f(x) datasets : it preserves monotonicity (or piecewise monotonicity) of
+	 * the dataset being interpolated, and ensures local extremums (if any) stay at input data points.
+	 * 
+	 * @param mode algorithm used to interpolate a smooth curve from the discrete data points
+	 */
+	public void setCubicInterpolationMode(CubicInterpolationMode mode) {
+		getOptions().getElements().getLine().setCubicInterpolationMode(mode);
+	}
+
+	/**
+	 * Returns algorithm used to interpolate a smooth curve from the discrete data points.
+	 * 
+	 * @return algorithm used to interpolate a smooth curve from the discrete data points. Default is <code>'default'</code>.
+	 */
+	public CubicInterpolationMode getCubicInterpolationMode() {
+		return getOptions().getElements().getLine().getCubicInterpolationMode();
 	}
 
 	/**

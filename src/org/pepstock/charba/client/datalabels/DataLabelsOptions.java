@@ -16,25 +16,24 @@
 package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.Charts;
-import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
+import org.pepstock.charba.client.callbacks.BorderColorCallback;
+import org.pepstock.charba.client.callbacks.BorderWidthCallback;
+import org.pepstock.charba.client.callbacks.RadiusCallback;
+import org.pepstock.charba.client.callbacks.RotationCallback;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
-import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
-import org.pepstock.charba.client.data.CanvasObjectFactory;
 import org.pepstock.charba.client.datalabels.DataLabelsOptionsFactory.DataLabelsDefaultsOptionsFactory;
 import org.pepstock.charba.client.datalabels.callbacks.AlignCallback;
 import org.pepstock.charba.client.datalabels.callbacks.AnchorCallback;
-import org.pepstock.charba.client.datalabels.callbacks.BackgroundColorCallback;
-import org.pepstock.charba.client.datalabels.callbacks.BorderColorCallback;
-import org.pepstock.charba.client.datalabels.callbacks.BorderRadiusCallback;
-import org.pepstock.charba.client.datalabels.callbacks.BorderWidthCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ClampCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ClipCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ColorCallback;
@@ -44,7 +43,6 @@ import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
 import org.pepstock.charba.client.datalabels.callbacks.OffsetCallback;
 import org.pepstock.charba.client.datalabels.callbacks.OpacityCallback;
 import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
-import org.pepstock.charba.client.datalabels.callbacks.RotationCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextShadowBlurCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextShadowColorCallback;
@@ -52,13 +50,10 @@ import org.pepstock.charba.client.datalabels.callbacks.TextStrokeColorCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextStrokeWidthCallback;
 import org.pepstock.charba.client.datalabels.enums.Align;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
-import org.pepstock.charba.client.datalabels.enums.Display;
 import org.pepstock.charba.client.datalabels.enums.TextAlign;
 import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
-import org.pepstock.charba.client.plugins.AbstractPluginOptions;
-
-import com.google.gwt.canvas.dom.client.CanvasGradient;
-import com.google.gwt.canvas.dom.client.CanvasPattern;
+import org.pepstock.charba.client.enums.Display;
+import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
 
 import jsinterop.annotations.JsFunction;
 
@@ -70,7 +65,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class DataLabelsOptions extends AbstractPluginOptions {
+public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -93,387 +88,7 @@ public final class DataLabelsOptions extends AbstractPluginOptions {
 		 * @param context native object as context.
 		 * @return string with formatted value.
 		 */
-		String call(Object contextFunction, double value, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the align property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAlignCallback {
-
-		/**
-		 * Method of function to be called to provide the align property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return align property value.
-		 */
-		String call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the anchor property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAnchorCallback {
-
-		/**
-		 * Method of function to be called to provide the anchor property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return anchor property value.
-		 */
-		String call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the background color.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBackgroundColorCallback {
-
-		/**
-		 * Method of function to be called to provide the background color.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return background color property value. Could be a string (as color), color, pattern or gradient instance
-		 */
-		Object call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the border color.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBorderColorCallback {
-
-		/**
-		 * Method of function to be called to provide the border color.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return border color property value. Could be a string (as color), color, pattern or gradient instance
-		 */
-		Object call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the border radius property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBorderRadiusCallback {
-
-		/**
-		 * Method of function to be called to provide the border radius property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return border radius property value.
-		 */
-		double call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the border width property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBorderWidthCallback {
-
-		/**
-		 * Method of function to be called to provide the border width property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return border width property value.
-		 */
-		int call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the color of label.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyColorCallback {
-
-		/**
-		 * Method of function to be called to provide the color of label.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return color property value. Could be a string (as color), color, pattern or gradient instance
-		 */
-		Object call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the clamp property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyClampCallback {
-
-		/**
-		 * Method of function to be called to provide the clamp property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return clamp property value.
-		 */
-		boolean call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the clip property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyClipCallback {
-
-		/**
-		 * Method of function to be called to provide the clip property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return clip property value.
-		 */
-		boolean call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the display property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyDisplayCallback {
-
-		/**
-		 * Method of function to be called to provide the display property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return display property value, could be a boolean or a string.
-		 */
-		Object call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the offset property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyOffsetCallback {
-
-		/**
-		 * Method of function to be called to provide the offset property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return offset property value.
-		 */
-		double call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the opacity property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyOpacityCallback {
-
-		/**
-		 * Method of function to be called to provide the opacity property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return opacity property value.
-		 */
-		double call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the rotation property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyRotationCallback {
-
-		/**
-		 * Method of function to be called to provide the rotation property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return rotation property value.
-		 */
-		double call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the text align property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyTextAlignCallback {
-
-		/**
-		 * Method of function to be called to provide the text align property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return text align property value.
-		 */
-		String call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the text stroke color property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyTextStrokeColorCallback {
-
-		/**
-		 * Method of function to be called to provide the text stroke color property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return text stroke color property value. Could be a string (as color), color, pattern or gradient instance
-		 */
-		Object call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the text stroke width property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyTextStrokeWidthCallback {
-
-		/**
-		 * Method of function to be called to provide the text stroke width property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return text stroke width property value.
-		 */
-		int call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the text shadow blur property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyTextShadowBlurCallback {
-
-		/**
-		 * Method of function to be called to provide the text shadow blur property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return text shadow blur property value.
-		 */
-		double call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the text shadow blur property.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyTextShadowColorCallback {
-
-		/**
-		 * Method of function to be called to provide the text shadow color property.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return text shadow color value. Could be a string (as color), color, pattern or gradient instance
-		 */
-		Object call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the font object.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyFontCallback {
-
-		/**
-		 * Method of function to be called to provide the font object.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return font object value.
-		 */
-		NativeObject call(Object contextFunction, Context context);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to provide the padding object.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyPaddingCallback {
-
-		/**
-		 * Method of function to be called to provide the padding object.
-		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
-		 * @param context native object as context.
-		 * @return padding object value.
-		 */
-		NativeObject call(Object contextFunction, Context context);
+		String call(Object contextFunction, double value, ScriptableContext context);
 	}
 
 	// ---------------------------
@@ -482,45 +97,45 @@ public final class DataLabelsOptions extends AbstractPluginOptions {
 	// callback proxy to invoke the formatter function
 	private final CallbackProxy<ProxyFormatterCallback> formatterCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the background color function
-	private final CallbackProxy<ProxyBackgroundColorCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border color function
-	private final CallbackProxy<ProxyBorderColorCallback> borderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> borderColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the color function
-	private final CallbackProxy<ProxyColorCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> colorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the align function
-	private final CallbackProxy<ProxyAlignCallback> alignCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> alignCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the anchor function
-	private final CallbackProxy<ProxyAnchorCallback> anchorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> anchorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border radius function
-	private final CallbackProxy<ProxyBorderRadiusCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> borderRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the border width function
-	private final CallbackProxy<ProxyBorderWidthCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the clamp function
-	private final CallbackProxy<ProxyClampCallback> clampCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyBooleanCallback> clampCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the clip function
-	private final CallbackProxy<ProxyClipCallback> clipCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyBooleanCallback> clipCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the display function
-	private final CallbackProxy<ProxyDisplayCallback> displayCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> displayCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the offset function
-	private final CallbackProxy<ProxyOffsetCallback> offsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> offsetCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the opacity function
-	private final CallbackProxy<ProxyOpacityCallback> opacityCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> opacityCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the rotation function
-	private final CallbackProxy<ProxyRotationCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> rotationCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the text align function
-	private final CallbackProxy<ProxyTextAlignCallback> textAlignCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> textAlignCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the text stroke color function
-	private final CallbackProxy<ProxyTextStrokeColorCallback> textStrokeColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> textStrokeColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the text stroke width function
-	private final CallbackProxy<ProxyTextStrokeWidthCallback> textStrokeWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> textStrokeWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the text shadow blur function
-	private final CallbackProxy<ProxyTextShadowBlurCallback> textShadowBlurCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> textShadowBlurCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the text shadow color function
-	private final CallbackProxy<ProxyTextShadowColorCallback> textShadowColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> textShadowColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the font function
-	private final CallbackProxy<ProxyFontCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> fontCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the padding function
-	private final CallbackProxy<ProxyPaddingCallback> paddingCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ScriptableFunctions.ProxyNativeObjectCallback> paddingCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// formatter callback instance
 	private FormatterCallback formatterCallback = null;
@@ -535,7 +150,7 @@ public final class DataLabelsOptions extends AbstractPluginOptions {
 	// anchor callback instance
 	private AnchorCallback anchorCallback = null;
 	// borderRadius callback instance
-	private BorderRadiusCallback borderRadiusCallback = null;
+	private RadiusCallback borderRadiusCallback = null;
 	// borderWidth callback instance
 	private BorderWidthCallback borderWidthCallback = null;
 	// clamp callback instance
@@ -610,6 +225,8 @@ public final class DataLabelsOptions extends AbstractPluginOptions {
 	 */
 	public DataLabelsOptions() {
 		// creates the object registering it
+		// this constructor is used by user to set options for plugin
+		// both default global or chart one.
 		this(false);
 	}
 
@@ -621,15 +238,8 @@ public final class DataLabelsOptions extends AbstractPluginOptions {
 	DataLabelsOptions(boolean deferredRegistration) {
 		// creates an empty native object
 		super(DataLabelsPlugin.ID, DataLabelsPlugin.FACTORY, deferredRegistration);
-		// checks if the default global options has been added for the plugin
-		if (Defaults.get().getGlobal().getPlugins().hasOptions(DataLabelsPlugin.ID)) {
-			// reads the default default global options
-			defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(DataLabelsPlugin.ID, defaultsFactory);
-		} else {
-			// if here, no default global option
-			// then the plugin will use the static defaults
-			defaultsOptions = new DataLabelsDefaultsOptions();
-		}
+		// reads the default default global options
+		defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
 		// sets inner elements
 		padding = new Padding(defaultsOptions.getPadding());
 		font = new Font(defaultsOptions.getFont());
@@ -647,19 +257,17 @@ public final class DataLabelsOptions extends AbstractPluginOptions {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyFormatterCallback#call(java.lang.Object,
-			 * double, org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.datalabels.DataLabelsOptions.ProxyFormatterCallback#call(java.lang.Object,
+			 * double, org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public String call(Object contextFunction, double value, Context context) {
+			public String call(Object contextFunction, double value, ScriptableContext context) {
 				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && formatterCallback != null) {
+				AbstractChart<?, ?> chart = ScriptableUtils.retrieveChart(context, formatterCallback);
+				// checks if the handler is set
+				if (chart != null) {
 					// calls callback
-					String result = formatterCallback.format(chart, value, context);
+					String result = formatterCallback.invoke(chart, value, context);
 					// checks result
 					if (result != null) {
 						return result;
@@ -669,643 +277,306 @@ public final class DataLabelsOptions extends AbstractPluginOptions {
 				return String.valueOf(value);
 			}
 		});
-		backgroundColorCallbackProxy.setCallback(new ProxyBackgroundColorCallback() {
+		backgroundColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyColorCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && backgroundColorCallback != null) {
-					// calls callback
-					Object result = backgroundColorCallback.backgroundColor(chart, context);
-					// checks result
-					if (result instanceof IsColor) {
-						// is color instance
-						IsColor color = (IsColor) result;
-						return color.toRGBA();
-					} else if (result instanceof String) {
-						// is string instance
-						return (String) result;
-					} else if (result instanceof Pattern) {
-						// is pattern instance
-						Pattern pattern = (Pattern) result;
-						return CanvasObjectFactory.createPattern(chart, pattern);
-					} else if (result instanceof Gradient) {
-						// is gradient instance
-						// checks if chart is initialized
-						if (chart.isInitialized()) {
-							Gradient gradient = (Gradient) result;
-							return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
-						}
-						// otherwise returns default
-					} else if (result instanceof CanvasGradient) {
-						// is canvas gradient instance
-						return (CanvasGradient) result;
-					} else if (result instanceof CanvasPattern) {
-						// is canvas pattern instance
-						return (CanvasPattern) result;
-					} else if (result != null) {
-						// another instance not null
-						// returns to string
-						return result.toString();
-					}
-				}
-				// default result
-				return getBackgroundColorAsString();
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsColor(context, backgroundColorCallback, getBackgroundColorAsString());
 			}
 		});
-		borderColorCallbackProxy.setCallback(new ProxyBorderColorCallback() {
+		borderColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyBorderColorCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && borderColorCallback != null) {
-					// calls callback
-					Object result = borderColorCallback.borderColor(chart, context);
-					// checks result
-					if (result instanceof IsColor) {
-						// is color instance
-						IsColor color = (IsColor) result;
-						return color.toRGBA();
-					} else if (result instanceof String) {
-						// is string instance
-						return (String) result;
-					} else if (result instanceof Pattern) {
-						// is pattern instance
-						Pattern pattern = (Pattern) result;
-						return CanvasObjectFactory.createPattern(chart, pattern);
-					} else if (result instanceof Gradient) {
-						// is gradient instance
-						// checks if chart is initialized
-						if (chart.isInitialized()) {
-							Gradient gradient = (Gradient) result;
-							return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
-						}
-						// otherwise returns default
-					} else if (result instanceof CanvasGradient) {
-						// is canvas gradient instance
-						return (CanvasGradient) result;
-					} else if (result instanceof CanvasPattern) {
-						// is canvas pattern instance
-						return (CanvasPattern) result;
-					} else if (result != null) {
-						// another instance not null
-						// returns to string
-						return result.toString();
-					}
-				}
-				// default result
-				return getBorderColorAsString();
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsColor(context, borderColorCallback, getBorderColorAsString());
 			}
 		});
-		colorCallbackProxy.setCallback(new ProxyColorCallback() {
+		colorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyColorCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && colorCallback != null) {
-					// calls callback
-					Object result = colorCallback.color(chart, context);
-					// checks result
-					if (result instanceof IsColor) {
-						// is color instance
-						IsColor color = (IsColor) result;
-						return color.toRGBA();
-					} else if (result instanceof String) {
-						// is string instance
-						return (String) result;
-					} else if (result instanceof Pattern) {
-						// is pattern instance
-						Pattern pattern = (Pattern) result;
-						return CanvasObjectFactory.createPattern(chart, pattern);
-					} else if (result instanceof Gradient) {
-						// is gradient instance
-						// checks if chart is initialized
-						if (chart.isInitialized()) {
-							Gradient gradient = (Gradient) result;
-							return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
-						}
-						// otherwise returns default
-					} else if (result instanceof CanvasGradient) {
-						// is canvas gradient instance
-						return (CanvasGradient) result;
-					} else if (result instanceof CanvasPattern) {
-						// is canvas pattern instance
-						return (CanvasPattern) result;
-					} else if (result != null) {
-						// another instance not null
-						// returns to string
-						return result.toString();
-					}
-				}
-				// default result
-				return getColorAsString();
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsColor(context, colorCallback, getColorAsString());
 			}
 		});
-		alignCallbackProxy.setCallback(new ProxyAlignCallback() {
+		alignCallbackProxy.setCallback(new ScriptableFunctions.ProxyStringCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyAlignCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public String call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && alignCallback != null) {
-					// calls callback
-					Align result = alignCallback.align(chart, context);
-					// checks result
-					if (result != null) {
-						return result.name();
-					}
-				}
-				// default result
-				return getAlign().name();
+			public String call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsString(context, alignCallback, getAlign()).name();
 			}
 		});
-		anchorCallbackProxy.setCallback(new ProxyAnchorCallback() {
+		anchorCallbackProxy.setCallback(new ScriptableFunctions.ProxyStringCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyAnchorCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public String call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && anchorCallback != null) {
-					// calls callback
-					Anchor result = anchorCallback.anchor(chart, context);
-					// checks result
-					if (result != null) {
-						return result.name();
-					}
-				}
-				// default result
-				return getAnchor().name();
+			public String call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsString(context, anchorCallback, getAnchor()).name();
 			}
 		});
-		borderRadiusCallbackProxy.setCallback(new ProxyBorderRadiusCallback() {
+		borderRadiusCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyBorderRadiusCallback#call(java.lang.
-			 * Object, org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public double call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && borderRadiusCallback != null) {
-					// calls callback
-					return borderRadiusCallback.borderRadius(chart, context);
-				}
-				// default result
-				return getBorderRadius();
+			public double call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, borderRadiusCallback, getBorderRadius()).doubleValue();
 			}
 		});
-		borderWidthCallbackProxy.setCallback(new ProxyBorderWidthCallback() {
+		borderWidthCallbackProxy.setCallback(new ScriptableFunctions.ProxyIntegerCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyBorderWidthCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public int call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && borderWidthCallback != null) {
-					// calls callback
-					return borderWidthCallback.borderWidth(chart, context);
-				}
-				// default result
-				return getBorderWidth();
+			public int call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, borderWidthCallback, getBorderWidth()).intValue();
 			}
 		});
-		clampCallbackProxy.setCallback(new ProxyClampCallback() {
+		clampCallbackProxy.setCallback(new ScriptableFunctions.ProxyBooleanCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyClampCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public boolean call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && clampCallback != null) {
-					// calls callback
-					return clampCallback.clamp(chart, context);
-				}
-				// default result
-				return isClamp();
+			public boolean call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, clampCallback, isClamp()).booleanValue();
 			}
 		});
-		clipCallbackProxy.setCallback(new ProxyClipCallback() {
+		clipCallbackProxy.setCallback(new ScriptableFunctions.ProxyBooleanCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyClipCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public boolean call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && clipCallback != null) {
-					// calls callback
-					return clipCallback.clip(chart, context);
-				}
-				// default result
-				return isClip();
+			public boolean call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, clipCallback, isClip()).booleanValue();
 			}
+
 		});
-		displayCallbackProxy.setCallback(new ProxyDisplayCallback() {
+		displayCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyDisplayCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// creates the result instance
-				Display result = null;
-				// checks if the callback is set
-				if (chart != null && displayCallback != null) {
-					// calls callback
-					result = displayCallback.display(chart, context);
-				}
-				// checks if the result has been set
-				if (result == null) {
-					// if not, returns the defaults.
-					result = getDisplay();
-				}
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				Display value = ScriptableUtils.getOptionValueAsString(context, displayCallback);
+				Display result = value == null ? getDisplay() : value;
+				// checks if is boolean
 				// checks if it must return a boolean or string
 				if (Display.auto.equals(result)) {
 					// returns string
 					return Display.auto.name();
 				} else {
 					// returns boolean
-					return Display.isTrue.equals(result) ? true : false;
+					return Display.yes.equals(result) ? true : false;
 				}
 			}
 		});
-		offsetCallbackProxy.setCallback(new ProxyOffsetCallback() {
+		offsetCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyOffsetCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public double call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && offsetCallback != null) {
-					// calls callback
-					return offsetCallback.offset(chart, context);
-				}
-				// default result
-				return getOffset();
+			public double call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, offsetCallback, getOffset()).doubleValue();
 			}
 		});
-		opacityCallbackProxy.setCallback(new ProxyOpacityCallback() {
+		opacityCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyOpacityCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public double call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && opacityCallback != null) {
-					// calls callback
-					return opacityCallback.opacity(chart, context);
-				}
-				// default result
-				return getOpacity();
+			public double call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, opacityCallback, getOpacity()).doubleValue();
 			}
 		});
-		rotationCallbackProxy.setCallback(new ProxyRotationCallback() {
+		rotationCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyRotationCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public double call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && rotationCallback != null) {
-					// calls callback
-					return rotationCallback.rotation(chart, context);
-				}
-				// default result
-				return getRotation();
+			public double call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, rotationCallback, getRotation()).doubleValue();
 			}
 		});
-		textAlignCallbackProxy.setCallback(new ProxyTextAlignCallback() {
+		textAlignCallbackProxy.setCallback(new ScriptableFunctions.ProxyStringCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyTextAlignCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public String call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && textAlignCallback != null) {
-					// calls callback
-					TextAlign result = textAlignCallback.textAlign(chart, context);
-					// checks if result is consistent
-					if (result != null) {
-						// returns result
-						return result.name();
-					}
-				}
-				// default result
-				return getTextAlign().name();
+			public String call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsString(context, textAlignCallback, getTextAlign()).name();
 			}
 		});
-		textStrokeColorCallbackProxy.setCallback(new ProxyTextStrokeColorCallback() {
+		textStrokeColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyTextStrokeColorCallback#call(java.lang.
-			 * Object, org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && textStrokeColorCallback != null) {
-					// calls callback
-					Object result = textStrokeColorCallback.textStrokeColor(chart, context);
-					// checks result
-					if (result instanceof IsColor) {
-						// is color instance
-						IsColor color = (IsColor) result;
-						return color.toRGBA();
-					} else if (result instanceof String) {
-						// is string instance
-						return (String) result;
-					} else if (result instanceof Pattern) {
-						// is pattern instance
-						Pattern pattern = (Pattern) result;
-						return CanvasObjectFactory.createPattern(chart, pattern);
-					} else if (result instanceof Gradient) {
-						// is gradient instance
-						// checks if chart is initialized
-						if (chart.isInitialized()) {
-							Gradient gradient = (Gradient) result;
-							return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
-						}
-						// otherwise returns default
-					} else if (result instanceof CanvasGradient) {
-						// is canvas gradient instance
-						return (CanvasGradient) result;
-					} else if (result instanceof CanvasPattern) {
-						// is canvas pattern instance
-						return (CanvasPattern) result;
-					} else if (result != null) {
-						// another instance not null
-						// returns to string
-						return result.toString();
-					}
-				}
-				// default result
-				return getTextStrokeColorAsString();
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsColor(context, textStrokeColorCallback, getTextStrokeColorAsString());
 			}
 		});
-		textStrokeWidthCallbackProxy.setCallback(new ProxyTextStrokeWidthCallback() {
+		textStrokeWidthCallbackProxy.setCallback(new ScriptableFunctions.ProxyIntegerCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyTextStrokeWidthCallback#call(java.lang.
-			 * Object, org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public int call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && textStrokeWidthCallback != null) {
-					// calls callback
-					return textStrokeWidthCallback.textStrokeWidth(chart, context);
-				}
-				// default result
-				return getTextStrokeWidth();
+			public int call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, textStrokeWidthCallback, getTextStrokeWidth()).intValue();
 			}
 		});
-		textShadowBlurCallbackProxy.setCallback(new ProxyTextShadowBlurCallback() {
+		textShadowBlurCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyTextShadowBlurCallback#call(java.lang.
-			 * Object, org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public double call(Object contextFunction, Context context) {
-				// gets chart i nstance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && textShadowBlurCallback != null) {
-					// calls callback
-					return textShadowBlurCallback.textShadowBlur(chart, context);
-				}
-				// default result
-				return getTextShadowBlur();
+			public double call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, textShadowBlurCallback, getTextShadowBlur()).doubleValue();
 			}
 		});
-		textShadowColorCallbackProxy.setCallback(new ProxyTextShadowColorCallback() {
+		textShadowColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyTextShadowColorCallback#call(java.lang.
-			 * Object, org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public Object call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && textShadowColorCallback != null) {
-					// calls callback
-					Object result = textShadowColorCallback.textShadowColor(chart, context);
-					// checks result
-					if (result instanceof IsColor) {
-						// is color instance
-						IsColor color = (IsColor) result;
-						return color.toRGBA();
-					} else if (result instanceof String) {
-						// is string instance
-						return (String) result;
-					} else if (result instanceof Pattern) {
-						// is pattern instance
-						Pattern pattern = (Pattern) result;
-						return CanvasObjectFactory.createPattern(chart, pattern);
-					} else if (result instanceof Gradient) {
-						// is gradient instance
-						// checks if chart is initialized
-						if (chart.isInitialized()) {
-							Gradient gradient = (Gradient) result;
-							return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
-						}
-						// otherwise returns default
-					} else if (result instanceof CanvasGradient) {
-						// is canvas gradient instance
-						return (CanvasGradient) result;
-					} else if (result instanceof CanvasPattern) {
-						// is canvas pattern instance
-						return (CanvasPattern) result;
-					} else if (result != null) {
-						// another instance not null
-						// returns to string
-						return result.toString();
-					}
-				}
-				// default result
-				return getTextShadowColorAsString();
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsColor(context, textShadowColorCallback, getTextShadowColorAsString());
 			}
 		});
-		fontCallbackProxy.setCallback(new ProxyFontCallback() {
+		fontCallbackProxy.setCallback(new ScriptableFunctions.ProxyNativeObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyFontCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public NativeObject call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && fontCallback != null) {
-					// calls callback
-					Font result = fontCallback.font(chart, context);
-					// checks if result is consistent
-					if (result != null) {
-						// returns result
-						return result.getObject();
-					}
+			public NativeObject call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				Font result = ScriptableUtils.getOptionValue(context, fontCallback);
+				// checks if result is consistent
+				if (result != null) {
+					// returns result
+					return result.getObject();
 				}
 				// default result
 				return getFont().getObject();
 			}
 		});
-		paddingCallbackProxy.setCallback(new ProxyPaddingCallback() {
+		paddingCallbackProxy.setCallback(new ScriptableFunctions.ProxyNativeObjectCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see
-			 * org.pepstock.charba.client.ext.datalabels.DataLabelsConfiguration.ProxyPaddingCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.datalabels.Context)
+			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
 			 */
 			@Override
-			public NativeObject call(Object contextFunction, Context context) {
-				// gets chart instance
-				String id = context.getNativeChart().getCharbaId();
-				AbstractChart<?, ?> chart = Charts.get(id);
-				// checks if the callback is set
-				if (chart != null && paddingCallback != null) {
-					// calls callback
-					Padding result = paddingCallback.padding(chart, context);
-					// checks if result is consistent
-					if (result != null) {
-						// returns result
-						return result.getObject();
-					}
+			public NativeObject call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				Padding result = ScriptableUtils.getOptionValue(context, paddingCallback);
+				// checks if result is consistent
+				if (result != null) {
+					// returns result
+					return result.getObject();
 				}
 				// default result
 				return getPadding().getObject();
@@ -1605,7 +876,7 @@ public final class DataLabelsOptions extends AbstractPluginOptions {
 		if (Display.auto.equals(display)) {
 			setValue(Property.display, display);
 		} else {
-			setValue(Property.display, Display.isTrue.equals(display) ? true : false);
+			setValue(Property.display, Display.yes.equals(display) ? true : false);
 		}
 	}
 
@@ -1618,7 +889,7 @@ public final class DataLabelsOptions extends AbstractPluginOptions {
 		ObjectType type = type(Property.display);
 		if (ObjectType.Boolean.equals(type)) {
 			boolean value = getValue(Property.display, true);
-			return value ? Display.isTrue : Display.isFalse;
+			return value ? Display.yes : Display.no;
 		} else if (ObjectType.String.equals(type)) {
 			return getValue(Property.display, Display.class, defaultsOptions.getDisplay());
 		}
@@ -1976,7 +1247,7 @@ public final class DataLabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @return the border radius callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderRadiusCallback getBorderRadiusCallback() {
+	public RadiusCallback getBorderRadiusCallback() {
 		return borderRadiusCallback;
 	}
 
@@ -1985,7 +1256,7 @@ public final class DataLabelsOptions extends AbstractPluginOptions {
 	 * 
 	 * @param borderRadiusCallback the border radius callback to set
 	 */
-	public void setBorderRadius(BorderRadiusCallback borderRadiusCallback) {
+	public void setBorderRadius(RadiusCallback borderRadiusCallback) {
 		// sets the callback
 		this.borderRadiusCallback = borderRadiusCallback;
 		// checks if callback is consistent

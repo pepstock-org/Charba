@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
@@ -37,9 +37,18 @@ public class Rectangle extends AbstractConfigurationElement {
 	/**
 	 * Sets the edge to skip drawing the border for.
 	 * 
+	 * @param borderSkipped to set <code>false</code> as border skipped. If set <code>true</code>, is ignored
+	 */
+	public void setBorderSkipped(boolean borderSkipped) {
+		getOptions().getElements().getRectangle().setBorderSkipped(borderSkipped);
+	}
+
+	/**
+	 * Sets the edge to skip drawing the border for.
+	 * 
 	 * @param borderSkipped the edge to skip drawing the border for.
 	 */
-	public void setBorderSkipped(Position borderSkipped) {
+	public void setBorderSkipped(BorderSkipped borderSkipped) {
 		getOptions().getElements().getRectangle().setBorderSkipped(borderSkipped);
 	}
 
@@ -48,7 +57,7 @@ public class Rectangle extends AbstractConfigurationElement {
 	 * 
 	 * @return the edge to skip drawing the border for.
 	 */
-	public Position getBorderSkipped() {
+	public BorderSkipped getBorderSkipped() {
 		return getOptions().getElements().getRectangle().getBorderSkipped();
 	}
 

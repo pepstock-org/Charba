@@ -22,12 +22,14 @@
     optional     contains all optional dependencies
     -->
     
-    <configurations defaultconf="default" 
-    	defaultconfmapping="default->default; sources->sources; javadoc->javadoc; optional->optional">
+    <configurations defaultconf="runtime" 
+    	defaultconfmapping="runtime->master; sources->sources; javadoc->javadoc; optional->optional; compile->compile">
         <conf name="default" />
         <conf name="sources" />
         <conf name="javadoc" />
         <conf name="optional" />
+        <conf name="compile" />
+        <conf name="runtime" />
     </configurations>
 
 	<publications>
@@ -42,11 +44,20 @@
 		<artifact type="pom.asc" ext="pom.asc" conf="optional" />
 	</publications>
     
-    <dependencies defaultconf="*->master">
+    <dependencies>
+    	<!--
+    		RUNTIME
+    	-->
         <!-- GWT SDK -->
         <dependency org="com.google.gwt" name="gwt-user" rev="${depver.gwt}" />
         <dependency org="com.google.gwt" name="gwt-dev" rev="${depver.gwt}" />
         <dependency org="com.google.jsinterop" name="jsinterop-annotations" rev="${depver.jsinterop-annotations}"/>
+    	<!--
+    		BUILD
+    	-->
+        <!-- Google closure compiler to minify javascript -->
+		<dependency org="com.google.javascript" name="closure-compiler" rev="${depver.closure-compiler}" conf="compile->master" />
+        <dependency org="org.apache.ivy" name="ivy" rev="${depver.ivy}" conf="compile->master"/>
     </dependencies>
     
 </ivy-module>

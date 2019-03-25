@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.datalabels.events;
 
 import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.Context;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
 
 /**
  * Callback interface of DATALABELS plugin to manage CLICK events on labels.<br>
@@ -37,6 +37,6 @@ public interface ClickEventHandler {
 	 * @return If the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
 	 *         re-rendered.
 	 */
-	boolean onClick(AbstractChart<?, ?> chart, Context context);
+	boolean onClick(AbstractChart<?, ?> chart, ScriptableContext context);
 
 }

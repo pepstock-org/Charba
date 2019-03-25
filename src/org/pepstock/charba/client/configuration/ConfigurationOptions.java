@@ -76,37 +76,18 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	// ---------------------------
 
 	/**
-	 * Java script FUNCTION callback when a click event on chart is triggered.<br>
+	 * Java script FUNCTION callback when a event on chart is triggered.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	interface ProxyChartClickCallback {
+	interface ProxyChartEventCallback {
 
 		/**
-		 * Method of function to be called when a click event on chart is triggered.
+		 * Method of function to be called when a event on chart is triggered.
 		 * 
 		 * @param chart Value of <code>this</code> to the execution context of function. It's the java script chart.
-		 * @param event native event
-		 * @param items array of chart elements affected by the event
-		 */
-		void call(Chart chart, ChartNativeEvent event, ArrayObject items);
-	}
-
-	/**
-	 * Java script FUNCTION callback when a hover event on chart is triggered.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyChartHoverCallback {
-
-		/**
-		 * Method of function to be called when a hover event on chart is triggered.
-		 * 
-		 * @param chart value of <code>this</code> to the execution context of function. It's the java script chart.
 		 * @param event native event
 		 * @param items array of chart elements affected by the event
 		 */
@@ -157,9 +138,9 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	// callback proxy to invoke the resize function
 	private final CallbackProxy<ProxyChartResizeCallback> resizeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the click function
-	private final CallbackProxy<ProxyChartClickCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyChartEventCallback> clickCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the hover function
-	private final CallbackProxy<ProxyChartHoverCallback> hoverCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyChartEventCallback> hoverCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the generate legend function
 	private final CallbackProxy<ProxyGenerateLegendCallback> legendCallbackProxy = JsHelper.get().newCallbackProxy();
 
@@ -228,14 +209,14 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		clickCallbackProxy.setCallback(new ProxyChartClickCallback() {
+		clickCallbackProxy.setCallback(new ProxyChartEventCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.ConfigurationOptions.ProxyChartClickCallback#call(org.pepstock
-			 * .charba.client.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
-			 * org.pepstock.charba.client.commons.ArrayObject)
+			 * @see
+			 * org.pepstock.charba.client.configuration.ConfigurationOptions.ProxyChartEventCallback#call(org.pepstock.charba.
+			 * client.Chart, org.pepstock.charba.client.events.ChartNativeEvent, org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
 			public void call(Chart chart, ChartNativeEvent event, ArrayObject items) {
@@ -250,14 +231,14 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 				getChart().fireEvent(new ChartClickEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
 			}
 		});
-		hoverCallbackProxy.setCallback(new ProxyChartHoverCallback() {
+		hoverCallbackProxy.setCallback(new ProxyChartEventCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.ConfigurationOptions.ProxyChartHoverCallback#call(org.pepstock
-			 * .charba.client.Chart, org.pepstock.charba.client.events.ChartNativeEvent,
-			 * org.pepstock.charba.client.commons.ArrayObject)
+			 * @see
+			 * org.pepstock.charba.client.configuration.ConfigurationOptions.ProxyChartEventCallback#call(org.pepstock.charba.
+			 * client.Chart, org.pepstock.charba.client.events.ChartNativeEvent, org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
 			public void call(Chart chart, ChartNativeEvent event, ArrayObject items) {

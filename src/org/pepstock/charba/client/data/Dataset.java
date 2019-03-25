@@ -80,21 +80,12 @@ public abstract class Dataset extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates a dataset.<br>
-	 * It uses the global options has default.
-	 */
-	Dataset() {
-		// creates object with global default
-		this(Defaults.get().getGlobal());
-	}
-
-	/**
 	 * Creates the dataset using a default, adding patterns and gradients element.
 	 * 
 	 * @param defaultValues default options
 	 */
 	Dataset(IsDefaultOptions defaultValues) {
-		this.defaultValues = defaultValues;
+		this.defaultValues = defaultValues == null ? Defaults.get().getGlobal() : defaultValues;
 		// stores the id based on a counter
 		setValue(Property._charbaId, COUNTER.getAndIncrement());
 		// sets the Charba containers into dataset java script configuration
@@ -214,6 +205,21 @@ public abstract class Dataset extends NativeObjectContainer {
 		removeIfExists(key);
 		// remove from patterns
 		getPatternsContainer().removeObjects(key);
+	}
+
+	/**
+	 * Removes the property key related to the color from dataset object and pattern and gradient containers if callback is
+	 * selected.
+	 * 
+	 * @param key key property name to remove.
+	 */
+	final void resetBeingCallback(Key key) {
+		// removes color key from dataset object
+		removeIfExists(key);
+		// remove from patterns
+		getPatternsContainer().removeObjects(key);
+		// remove from gradients
+		getGradientsContainer().removeObjects(key);
 	}
 
 	/**

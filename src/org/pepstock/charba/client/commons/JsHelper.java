@@ -19,14 +19,14 @@ import java.util.List;
 
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.events.ChartNativeEvent;
+import org.pepstock.charba.client.resources.ResourcesType;
 
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.Element;
 
 /**
  * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
- * utilities to act on java script objects.<br>
- * This wrapper is necessary to ensure that script is injected with CHART.JS.
+ * utilities to act on java script objects.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -40,7 +40,7 @@ public final class JsHelper {
 	 */
 	private JsHelper() {
 		// to be sure that CHARBA java script object is injected
-		Injector.ensureInjected();
+		Injector.ensureInjected(ResourcesType.getClientBundle().charbaHelper());
 	}
 
 	/**
@@ -175,4 +175,5 @@ public final class JsHelper {
 		}
 		return null;
 	}
+
 }

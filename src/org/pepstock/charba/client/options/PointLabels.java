@@ -15,8 +15,15 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.List;
+
+import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.IsColor;
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultPointLabels;
 
 /**
@@ -33,7 +40,8 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 	 */
 	private enum Property implements Key
 	{
-		display
+		display,
+		lineHeight
 	}
 
 	/**
@@ -68,4 +76,130 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 	public boolean isDisplay() {
 		return getValue(Property.display, getDefaultValues().isDisplay());
 	}
+
+	/**
+	 * Sets the height of an individual line of text.
+	 * 
+	 * @param lineHeight height of an individual line of text.
+	 */
+	public void setLineHeight(double lineHeight) {
+		setValue(Property.lineHeight, lineHeight);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Sets the height of an individual line of text.
+	 * 
+	 * @param lineHeight height of an individual line of text.
+	 */
+	public void setLineHeight(String lineHeight) {
+		setValue(Property.lineHeight, lineHeight);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text.
+	 */
+	public double getLineHeight() {
+		// creates default
+		double defaultValue = getDefaultValues().getLineHeight();
+		// checks type if number
+		if (ObjectType.Number.equals(type(Property.lineHeight))) {
+			// reads and returns as double
+			return getValue(Property.lineHeight, defaultValue);
+		}
+		// if here, is not a number
+		// then returns the default
+		return defaultValue;
+	}
+
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text.
+	 */
+	public String getLineHeightAsString() {
+		// creates default
+		String defaultValue = String.valueOf(getDefaultValues().getLineHeight());
+		// checks type if string
+		if (ObjectType.String.equals(type(Property.lineHeight))) {
+			// reads and returns as string
+			return getValue(Property.lineHeight, defaultValue);
+		}
+		// if here, is not a number
+		// then returns the default
+		return defaultValue;
+	}
+
+	/**
+	 * Sets an array of font colors.
+	 * 
+	 * @param fontColors an array of font colors
+	 */
+	public void setFontColor(IsColor... fontColors) {
+		// stores value
+		setValueOrArray(FontItem.Property.fontColor, fontColors);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Sets an array of font colors.
+	 * 
+	 * @param fontColors an array of font colors
+	 */
+	public void setFontColor(String... fontColors) {
+		// stores value
+		setValueOrArray(FontItem.Property.fontColor, fontColors);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.FontItem#getFontColorAsString()
+	 */
+	@Override
+	public String getFontColorAsString() {
+		// gets list of colors
+		List<String> colors = getFontColorsAsString();
+		// if list is empty, retruns default otherwise the first color
+		return colors.isEmpty() ? getDefaultValues().getFontColorAsString() : colors.get(0);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.FontItem#getFontColor()
+	 */
+	@Override
+	public IsColor getFontColor() {
+		return ColorBuilder.parse(getFontColorAsString());
+	}
+
+	/**
+	 * Returns the font colors as list.
+	 * 
+	 * @return Font color as list
+	 */
+	public List<String> getFontColorsAsString() {
+		// returns list of colors
+		ArrayString array = getValueOrArray(FontItem.Property.fontColor, getDefaultValues().getFontColorAsString());
+		return ArrayListHelper.list(array);
+	}
+
+	/**
+	 * Returns the font colors as list.
+	 * 
+	 * @return Font color as list
+	 */
+	public List<IsColor> getFontColors() {
+		return ColorBuilder.parse(getFontColorsAsString());
+	}
+
 }

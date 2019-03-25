@@ -23,14 +23,14 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class PolarAreaDataset extends HovingDataset {
+public class PolarAreaDataset extends ArcDataset {
 
 	/**
 	 * Creates a dataset.<br>
 	 * It uses the global options has default.
 	 */
 	public PolarAreaDataset() {
-		super();
+		this(null);
 	}
 
 	/**
@@ -41,5 +41,4 @@ public class PolarAreaDataset extends HovingDataset {
 	public PolarAreaDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
 	}
-
 }

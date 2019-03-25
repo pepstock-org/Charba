@@ -15,10 +15,25 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
+import org.pepstock.charba.client.defaults.IsDefaultBaseTick;
+
 /**
- * CHART.JS default values for tick element, for MAJOR and MINOR of ticks.
+ * CHART.JS default values for base tick element.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultTickItem extends AbstractDefaultFontItem {
+public class DefaultTickItem extends AbstractDefaultFontItem implements IsDefaultBaseTick {
+
+	private static final double DEFAULT_LINE_HEIGHT = 1.2D;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultBaseTick#getLineHeight()
+	 */
+	@Override
+	public double getLineHeight() {
+		return DEFAULT_LINE_HEIGHT;
+	}
+
 }

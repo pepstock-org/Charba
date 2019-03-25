@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.data;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
@@ -23,14 +24,22 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class PieDataset extends HovingDataset {
+public class PieDataset extends ArcDataset {
+
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		weight
+	}
 
 	/**
 	 * Creates a dataset.<br>
 	 * It uses the global options has default.
 	 */
 	public PieDataset() {
-		super();
+		this(null);
 	}
 
 	/**
@@ -42,4 +51,25 @@ public class PieDataset extends HovingDataset {
 		super(defaultValues);
 	}
 
+	/**
+	 * Sets the relative thickness of the dataset.<br>
+	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of
+	 * all the dataset weight values.
+	 * 
+	 * @param weight the relative thickness of the dataset
+	 */
+	public void setWeight(double weight) {
+		setValue(Property.weight, weight);
+	}
+
+	/**
+	 * Returns the relative thickness of the dataset.<br>
+	 * Providing a value for weight will cause the pie or doughnut dataset to be drawn with a thickness relative to the sum of
+	 * all the dataset weight values.
+	 * 
+	 * @return the relative thickness of the dataset
+	 */
+	public double getWeight() {
+		return getValue(Property.weight, getDefaultValues().getElements().getArc().getWeight());
+	}
 }

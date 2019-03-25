@@ -15,8 +15,7 @@
 */
 package org.pepstock.charba.client.datalabels.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
-import org.pepstock.charba.client.datalabels.Context;
+import org.pepstock.charba.client.callbacks.Scriptable;
 
 /**
  * Callback interface of DATALABELS plugin to set <code>clamp</code> property at runtime, using the chart instance and the
@@ -25,15 +24,6 @@ import org.pepstock.charba.client.datalabels.Context;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface ClampCallback {
-
-	/**
-	 * Returns the <code>clamp</code> property at runtime, using the chart instance and the plugin context.
-	 * 
-	 * @param chart chart instance
-	 * @param context DATALABELS plugin context instance
-	 * @return the <code>clamp</code> value to be applied
-	 */
-	boolean clamp(AbstractChart<?, ?> chart, Context context);
+public interface ClampCallback extends Scriptable<Boolean> {
 
 }

@@ -23,6 +23,15 @@ package org.pepstock.charba.client.commons;
 public interface NativeObjectContainerFactory<T extends NativeObjectContainer> {
 
 	/**
+	 * Creates a native object container instance by an empty native object
+	 * 
+	 * @return native object container element instance
+	 */
+	default T create() {
+		return create(null);
+	}
+
+	/**
 	 * Creates a native object container instance by a native object
 	 * 
 	 * @param nativeObject native object

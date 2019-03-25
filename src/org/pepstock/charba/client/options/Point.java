@@ -20,6 +20,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPoint;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.resources.client.ImageResource;
@@ -114,20 +115,9 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @param pointStyle image resource of the style of the point as image.
 	 */
 	public void setPointStyle(ImageResource pointStyle) {
-		// checks if argument is consistent
-		if (pointStyle != null) {
-			// transform a image resource into image element by image object
-			// creates image object
-			Image img = new Image(pointStyle);
-			// stores it
-			setPointStyle(ImageElement.as(img.getElement()));
-		} else {
-			// if here, argument is null
-			// then removes property
-			remove(Property.pointStyle);
-			// remove flag
-			removeIfExists(Property._charbaPointStyle);
-		}
+		// transform a image resource into image element by image object
+		// creates image object
+		setPointStyle(Utilities.toImageElement(pointStyle));
 	}
 
 	/**
@@ -136,18 +126,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @param pointStyle image resource of the style of the point as image.
 	 */
 	public void setPointStyle(Image pointStyle) {
-		// checks if argument is consistent
-		if (pointStyle != null) {
-			// transform a image resource into image element by image object
-			// stores it
-			setPointStyle(ImageElement.as(pointStyle.getElement()));
-		} else {
-			// if here, argument is null
-			// then removes property
-			remove(Property.pointStyle);
-			// remove flag
-			removeIfExists(Property._charbaPointStyle);
-		}
+		setPointStyle(Utilities.toImageElement(pointStyle));
 	}
 
 	/**
@@ -159,8 +138,15 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 		setValue(Property.pointStyle, pointStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
-		// sets flag
-		setValue(Property._charbaPointStyle, true);
+		// checks if there is the property
+		if (has(Property.pointStyle)) {
+			// sets flags
+			setValue(Property._charbaPointStyle, true);
+		} else {
+			// image not set
+			// remove point style
+			removeIfExists(Property._charbaPointStyle);
+		}
 	}
 
 	/**

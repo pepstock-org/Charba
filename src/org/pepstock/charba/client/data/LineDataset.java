@@ -25,8 +25,10 @@ import org.pepstock.charba.client.commons.ArrayStringList;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.SteppedLine;
+import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.Scales;
 
 /**
@@ -39,8 +41,6 @@ import org.pepstock.charba.client.options.Scales;
  */
 public class LineDataset extends LiningDataset implements HasDataPoints {
 
-	// default value for cubic interpolation mode
-	private static final String DEFAULT_CUBIC_INTERPOLATION_MODE = "default";
 	// factory to create data points
 	private final DataPointListFactory factory = new DataPointListFactory();
 
@@ -52,7 +52,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 		xAxisID,
 		yAxisID,
 		cubicInterpolationMode,
-		showLines,
+		showLine,
 		spanGaps,
 		steppedLine
 	}
@@ -62,7 +62,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * It uses the global options has default.
 	 */
 	public LineDataset() {
-		super();
+		this(null);
 	}
 
 	/**
@@ -130,17 +130,18 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * 
 	 * @param mode algorithm used to interpolate a smooth curve from the discrete data points
 	 */
-	public void setCubicInterpolationMode(String mode) {
-		setValue(Property.cubicInterpolationMode, mode);
+	public void setCubicInterpolationMode(CubicInterpolationMode mode) {
+		setValue(Property.cubicInterpolationMode, mode != null ? mode.getValue() : UndefinedValues.STRING);
 	}
 
 	/**
 	 * Returns algorithm used to interpolate a smooth curve from the discrete data points.
 	 * 
-	 * @return algorithm used to interpolate a smooth curve from the discrete data points. Default is <code>'default'</code>.
+	 * @return algorithm used to interpolate a smooth curve from the discrete data points.
 	 */
-	public String getCubicInterpolationMode() {
-		return getValue(Property.cubicInterpolationMode, DEFAULT_CUBIC_INTERPOLATION_MODE);
+	public CubicInterpolationMode getCubicInterpolationMode() {
+		String value = getValue(Property.cubicInterpolationMode, UndefinedValues.STRING);
+		return CubicInterpolationMode.getModeByValue(value, getDefaultValues().getElements().getLine().getCubicInterpolationMode());
 	}
 
 	/**
@@ -148,8 +149,8 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * 
 	 * @param showLine <code>false</code> if the line is not drawn for this dataset.
 	 */
-	public void setShowLines(boolean showLine) {
-		setValue(Property.showLines, showLine);
+	public void setShowLine(boolean showLine) {
+		setValue(Property.showLine, showLine);
 	}
 
 	/**
@@ -157,8 +158,8 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * 
 	 * @return <code>false</code> if the line is not drawn for this dataset.
 	 */
-	public boolean isShowLines() {
-		return getValue(Property.showLines, getDefaultValues().isShowLines());
+	public boolean isShowLine() {
+		return getValue(Property.showLine, getDefaultValues().isShowLines());
 	}
 
 	/**
@@ -181,6 +182,23 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 */
 	public boolean isSpanGaps() {
 		return getValue(Property.spanGaps, getDefaultValues().isSpanGaps());
+	}
+
+	/**
+	 * Sets If the line is shown as a stepped line.<br>
+	 * If the steppedLine value is set to anything other than false, lineTension will be ignored.
+	 * 
+	 * @param line If the line is shown as a stepped line. <code>false</code> is no step interpolation
+	 */
+	public void setSteppedLine(boolean line) {
+		// checks if no stepped line
+		if (!line) {
+			// sets boolean value instead of string one
+			setValue(Property.steppedLine, false);
+		} else {
+			// sets value before, equals to true
+			setValue(Property.steppedLine, SteppedLine.before);
+		}
 	}
 
 	/**

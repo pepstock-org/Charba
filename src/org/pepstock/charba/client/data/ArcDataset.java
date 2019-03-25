@@ -1,0 +1,129 @@
+/**
+    Copyright 2017 Andrea "Stock" Stocchero
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+	    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
+package org.pepstock.charba.client.data;
+
+import org.pepstock.charba.client.callbacks.BorderAlignCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.enums.BorderAlign;
+
+/**
+ * Specific dataset which contains properties for charts without or with 1 axes.
+ * 
+ * @author Andrea "Stock" Stocchero
+ */
+abstract class ArcDataset extends HovingDataset {
+
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the border align function
+	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> borderAlignCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// border align callback instance
+	private BorderAlignCallback borderAlignCallback = null;
+
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		borderAlign
+	}
+
+	/**
+	 * Creates the dataset using a default.
+	 * 
+	 * @param defaultValues default options
+	 */
+	ArcDataset(IsDefaultOptions defaultValues) {
+		super(defaultValues);
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		borderAlignCallbackProxy.setCallback(new ScriptableFunctions.ProxyStringCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
+			 */
+			@Override
+			public String call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsString(context, borderAlignCallback, getDefaultValues().getElements().getArc().getBorderAlign()).name();
+			}
+		});
+	}
+
+	/**
+	 * Sets the property to set the border alignment on chart datasets.
+	 * 
+	 * @param align the property to set the border alignment on chart datasets
+	 */
+	public void setBorderAlign(BorderAlign align) {
+		setValue(Property.borderAlign, align);
+	}
+
+	/**
+	 * Returns the property to set the border alignment on chart datasets.
+	 * 
+	 * @return the property to set the border alignment on chart datasets.
+	 */
+	public BorderAlign getBorderAlign() {
+		if (ObjectType.Function.equals(type(Property.borderAlign))) {
+			// checks if a callback has been set
+			// returns defaults
+			return getDefaultValues().getElements().getArc().getBorderAlign();
+		}
+		// otherwise returns the enum value as string
+		return getValue(Property.borderAlign, BorderAlign.class, getDefaultValues().getElements().getArc().getBorderAlign());
+	}
+
+	/**
+	 * Returns the border align callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border align callback, if set, otherwise <code>null</code>.
+	 */
+	public BorderAlignCallback getBorderAlignCallback() {
+		return borderAlignCallback;
+	}
+
+	/**
+	 * Sets the border align callback.
+	 * 
+	 * @param borderAlignCallback the border align callback to set
+	 */
+	public void setBorderAlign(BorderAlignCallback borderAlignCallback) {
+		// sets the callback
+		this.borderAlignCallback = borderAlignCallback;
+		// checks if callback is consistent
+		if (borderAlignCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.borderAlign, borderAlignCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.borderAlign);
+		}
+	}
+}

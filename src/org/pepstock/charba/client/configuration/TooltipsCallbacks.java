@@ -58,16 +58,16 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	// ---------------------------
 
 	/**
-	 * Java script FUNCTION callback called to have text before title.<br>
+	 * Java script FUNCTION callback called to invoke a tooltip callback on elements.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	interface ProxyBeforeTitleCallback {
+	interface ProxyTooltipsCallback {
 
 		/**
-		 * Method of function to be called to have text before title.
+		 * Method of function to be called to invoke a tooltip callback on elements.
 		 * 
 		 * @param context context Value of <code>this</code> to the execution context of function.
 		 * @param items tooltip items
@@ -77,178 +77,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	}
 
 	/**
-	 * Java script FUNCTION callback called to have text on title.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyTitleCallback {
-
-		/**
-		 * Method of function to be called to have text on title.
-		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
-		 * @param items tooltip items
-		 * @return array of strings
-		 */
-		ArrayString call(Object context, ArrayObject items);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to have text after title.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterTitleCallback {
-
-		/**
-		 * Method of function to be called to have text after title.
-		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
-		 * @param items tooltip items
-		 * @return array of strings
-		 */
-		ArrayString call(Object context, ArrayObject items);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to have text before footer.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBeforeFooterCallback {
-
-		/**
-		 * Method of function to be called to have text before footer.
-		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
-		 * @param items tooltip items
-		 * @return array of strings
-		 */
-		ArrayString call(Object context, ArrayObject items);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to have text on footer.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyFooterCallback {
-
-		/**
-		 * Method of function to be called to have text on footer.
-		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
-		 * @param items tooltip items
-		 * @return array of strings
-		 */
-		ArrayString call(Object context, ArrayObject items);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to have text after footer.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterFooterCallback {
-
-		/**
-		 * Method of function to be called to have text after footer.
-		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
-		 * @param items tooltip items
-		 * @return array of strings
-		 */
-		ArrayString call(Object context, ArrayObject items);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to have text before body.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBeforeBodyCallback {
-
-		/**
-		 * Method of function to be called to have text before body.
-		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
-		 * @param items tooltip items
-		 * @return array of strings
-		 */
-		ArrayString call(Object context, ArrayObject items);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to have text after body.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterBodyCallback {
-
-		/**
-		 * Method of function to be called to have text after body.
-		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
-		 * @param items tooltip items
-		 * @return array of strings
-		 */
-		ArrayString call(Object context, ArrayObject items);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to have text before label.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyBeforeLabelCallback {
-
-		/**
-		 * Method of function to be called to have text before label.
-		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
-		 * @param item tooltip item
-		 * @return string before item
-		 */
-		String call(Object context, NativeObject item);
-	}
-
-	/**
-	 * Java script FUNCTION callback called to have text after label.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAfterLabelCallback {
-
-		/**
-		 * Method of function to be called to have text after label.
-		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
-		 * @param item tooltip item
-		 * @return string before item
-		 */
-		String call(Object context, NativeObject item);
-	}
-
-	/**
-	 * Java script FUNCTION callback called creating label.<br>
+	 * Java script FUNCTION callback called to manage the label.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -257,7 +86,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	interface ProxyLabelCallback {
 
 		/**
-		 * Method of function to be called to have text creating label.
+		 * Method of function to be called to manage the label.
 		 * 
 		 * @param context context Value of <code>this</code> to the execution context of function.
 		 * @param item tooltip item
@@ -285,54 +114,35 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		NativeObject call(Object context, NativeObject item);
 	}
 
-	/**
-	 * Java script FUNCTION callback called after creating text label color.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyLabelTextColorCallback {
-
-		/**
-		 * Method of function to be called to have text for text label color.
-		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
-		 * @param item tooltip item
-		 * @return string text label color
-		 */
-		String call(Object context, NativeObject item);
-	}
-
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
 	// callback proxy to invoke the before title function
-	private final CallbackProxy<ProxyBeforeTitleCallback> beforeTitleCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyTooltipsCallback> beforeTitleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the title function
-	private final CallbackProxy<ProxyTitleCallback> titleCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyTooltipsCallback> titleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after title function
-	private final CallbackProxy<ProxyAfterTitleCallback> afterTitleCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyTooltipsCallback> afterTitleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before body function
-	private final CallbackProxy<ProxyBeforeBodyCallback> beforeBodyCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyTooltipsCallback> beforeBodyCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after body function
-	private final CallbackProxy<ProxyAfterBodyCallback> afterBodyCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyTooltipsCallback> afterBodyCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before label function
-	private final CallbackProxy<ProxyBeforeLabelCallback> beforeLabelCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyLabelCallback> beforeLabelCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the label function
 	private final CallbackProxy<ProxyLabelCallback> labelCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the label color function
 	private final CallbackProxy<ProxyLabelColorCallback> labelColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the text label color function
-	private final CallbackProxy<ProxyLabelTextColorCallback> labelTextColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyLabelCallback> labelTextColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after label function
-	private final CallbackProxy<ProxyAfterLabelCallback> afterLabelCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyLabelCallback> afterLabelCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before footer function
-	private final CallbackProxy<ProxyBeforeFooterCallback> beforeFooterCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyTooltipsCallback> beforeFooterCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the footer function
-	private final CallbackProxy<ProxyFooterCallback> footerCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyTooltipsCallback> footerCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after footer function
-	private final CallbackProxy<ProxyAfterFooterCallback> afterFooterCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyTooltipsCallback> afterFooterCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// ---------------------------
 	// -- USERS CALLBACKS ---
@@ -380,12 +190,12 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		beforeTitleCallbackProxy.setCallback(new ProxyBeforeTitleCallback() {
+		beforeTitleCallbackProxy.setCallback(new ProxyTooltipsCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyBeforeTitleCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyTooltipsCallback#call(java.lang.Object,
 			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
@@ -403,12 +213,12 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 				return ArrayString.from(EMPTY_ARRAY);
 			}
 		});
-		titleCallbackProxy.setCallback(new ProxyTitleCallback() {
+		titleCallbackProxy.setCallback(new ProxyTooltipsCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyTitleCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyTooltipsCallback#call(java.lang.Object,
 			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
@@ -427,12 +237,12 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 				return ArrayString.from(EMPTY_ARRAY);
 			}
 		});
-		afterTitleCallbackProxy.setCallback(new ProxyAfterTitleCallback() {
+		afterTitleCallbackProxy.setCallback(new ProxyTooltipsCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyAfterTitleCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyTooltipsCallback#call(java.lang.Object,
 			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
@@ -451,12 +261,12 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 				return ArrayString.from(EMPTY_ARRAY);
 			}
 		});
-		beforeBodyCallbackProxy.setCallback(new ProxyBeforeBodyCallback() {
+		beforeBodyCallbackProxy.setCallback(new ProxyTooltipsCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyBeforeBodyCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyTooltipsCallback#call(java.lang.Object,
 			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
@@ -474,12 +284,12 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 				return ArrayString.from(EMPTY_ARRAY);
 			}
 		});
-		afterBodyCallbackProxy.setCallback(new ProxyAfterBodyCallback() {
+		afterBodyCallbackProxy.setCallback(new ProxyTooltipsCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyAfterBodyCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyTooltipsCallback#call(java.lang.Object,
 			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
@@ -497,13 +307,13 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 				return ArrayString.from(EMPTY_ARRAY);
 			}
 		});
-		beforeLabelCallbackProxy.setCallback(new ProxyBeforeLabelCallback() {
+		beforeLabelCallbackProxy.setCallback(new ProxyLabelCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyBeforeLabelCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.items.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyLabelCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public String call(Object context, NativeObject item) {
@@ -523,8 +333,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyLabelCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.items.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyLabelCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public String call(Object context, NativeObject item) {
@@ -560,13 +370,13 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 				return DEFAULT_LABEL_COLOR.getObject();
 			}
 		});
-		labelTextColorCallbackProxy.setCallback(new ProxyLabelTextColorCallback() {
+		labelTextColorCallbackProxy.setCallback(new ProxyLabelCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyLabelTextColorCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.items.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyLabelCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public String call(Object context, NativeObject item) {
@@ -581,13 +391,13 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 				return Defaults.get().getGlobal().getTooltips().getBodyFontColor().toRGBA();
 			}
 		});
-		afterLabelCallbackProxy.setCallback(new ProxyAfterLabelCallback() {
+		afterLabelCallbackProxy.setCallback(new ProxyLabelCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyAfterLabelCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.items.NativeObject)
+			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyLabelCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
 			public String call(Object context, NativeObject item) {
@@ -602,12 +412,12 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 				return EMPTY;
 			}
 		});
-		beforeFooterCallbackProxy.setCallback(new ProxyBeforeFooterCallback() {
+		beforeFooterCallbackProxy.setCallback(new ProxyTooltipsCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyBeforeFooterCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyTooltipsCallback#call(java.lang.Object,
 			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
@@ -625,12 +435,12 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 				return ArrayString.from(EMPTY_ARRAY);
 			}
 		});
-		footerCallbackProxy.setCallback(new ProxyFooterCallback() {
+		footerCallbackProxy.setCallback(new ProxyTooltipsCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyFooterCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyTooltipsCallback#call(java.lang.Object,
 			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override
@@ -648,12 +458,12 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 				return ArrayString.from(EMPTY_ARRAY);
 			}
 		});
-		afterFooterCallbackProxy.setCallback(new ProxyAfterFooterCallback() {
+		afterFooterCallbackProxy.setCallback(new ProxyTooltipsCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyAfterFooterCallback#call(java.lang.Object,
+			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyTooltipsCallback#call(java.lang.Object,
 			 * org.pepstock.charba.client.commons.ArrayObject)
 			 */
 			@Override

@@ -22,8 +22,10 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
 import org.pepstock.charba.client.enums.TooltipPosition;
+import org.pepstock.charba.client.positioner.Positioner;
 
 /**
  * Configuration element to set all attributes and features of the default tooltip.
@@ -171,7 +173,13 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * 
 	 * @param position the mode for positioning the tooltip.
 	 */
-	public void setPosition(TooltipPosition position) {
+	public void setPosition(IsTooltipPosition position) {
+		// checks if the tooltip position is consistent
+		// & that means that is defined both otu of the box or custom one by positioner
+		if (position != null && !TooltipPosition.hasTooltipPosition(position.name()) && !Positioner.get().hasTooltipPosition(position.name())) {
+			throw new IllegalArgumentException("Name of tooltip position is not consistent not defined: " + position);
+		}
+		// stores values
 		setValue(Property.position, position);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -182,8 +190,22 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * 
 	 * @return mode for positioning the tooltip.
 	 */
-	public TooltipPosition getPosition() {
-		return getValue(Property.position, TooltipPosition.class, getDefaultValues().getPosition());
+	public IsTooltipPosition getPosition() {
+		// gets string value
+		String value = getValue(Property.position, getDefaultValues().getPosition().name());
+		// checks if is the out of the box one
+		if (TooltipPosition.hasTooltipPosition(value)) {
+			// returns the pout of the box
+			return TooltipPosition.getTooltipPosition(value);
+		}
+		// if here, it could be a custom tooltip position
+		// checks if is a custom tooltip position
+		if (Positioner.get().hasTooltipPosition(value)) {
+			// returns the pout of the box
+			return Positioner.get().getTooltipPosition(value);
+		}
+		// if here, it's wrong but returns the default ones
+		return getDefaultValues().getPosition();
 	}
 
 	/**

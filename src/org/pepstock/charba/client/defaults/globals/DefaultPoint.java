@@ -23,9 +23,9 @@ import org.pepstock.charba.client.enums.PointStyle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultPoint extends DefaultArc implements IsDefaultPoint {
+public final class DefaultPoint extends AbstractDefaultOptionsElement implements IsDefaultPoint {
 
-	private static final double DEFAULT_RADIUS = 3;
+	private static final double DEFAULT_RADIUS = 3D;
 
 	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
 
@@ -33,9 +33,9 @@ public final class DefaultPoint extends DefaultArc implements IsDefaultPoint {
 
 	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0.1)";
 
-	private static final double DEFAULT_HIT_RADIUS = 1;
+	private static final double DEFAULT_HIT_RADIUS = 1D;
 
-	private static final double DEFAULT_HOVER_RADIUS = 4;
+	private static final double DEFAULT_HOVER_RADIUS = 4D;
 
 	private static final int DEFAULT_HOVER_BORDER_WIDTH = 1;
 

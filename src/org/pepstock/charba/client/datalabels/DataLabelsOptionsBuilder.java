@@ -15,13 +15,14 @@
 * @return builder instance */
 package org.pepstock.charba.client.datalabels;
 
+import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
+import org.pepstock.charba.client.callbacks.BorderColorCallback;
+import org.pepstock.charba.client.callbacks.BorderWidthCallback;
+import org.pepstock.charba.client.callbacks.RadiusCallback;
+import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.datalabels.callbacks.AlignCallback;
 import org.pepstock.charba.client.datalabels.callbacks.AnchorCallback;
-import org.pepstock.charba.client.datalabels.callbacks.BackgroundColorCallback;
-import org.pepstock.charba.client.datalabels.callbacks.BorderColorCallback;
-import org.pepstock.charba.client.datalabels.callbacks.BorderRadiusCallback;
-import org.pepstock.charba.client.datalabels.callbacks.BorderWidthCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ClampCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ClipCallback;
 import org.pepstock.charba.client.datalabels.callbacks.ColorCallback;
@@ -31,7 +32,6 @@ import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
 import org.pepstock.charba.client.datalabels.callbacks.OffsetCallback;
 import org.pepstock.charba.client.datalabels.callbacks.OpacityCallback;
 import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
-import org.pepstock.charba.client.datalabels.callbacks.RotationCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextAlignCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextShadowBlurCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextShadowColorCallback;
@@ -39,13 +39,13 @@ import org.pepstock.charba.client.datalabels.callbacks.TextStrokeColorCallback;
 import org.pepstock.charba.client.datalabels.callbacks.TextStrokeWidthCallback;
 import org.pepstock.charba.client.datalabels.enums.Align;
 import org.pepstock.charba.client.datalabels.enums.Anchor;
-import org.pepstock.charba.client.datalabels.enums.Display;
 import org.pepstock.charba.client.datalabels.enums.TextAlign;
 import org.pepstock.charba.client.datalabels.enums.Weight;
 import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
 import org.pepstock.charba.client.datalabels.events.ClickEventHandler;
 import org.pepstock.charba.client.datalabels.events.EnterEventHandler;
 import org.pepstock.charba.client.datalabels.events.LeaveEventHandler;
+import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
@@ -442,7 +442,7 @@ public final class DataLabelsOptionsBuilder {
 	 * @param borderRadiusCallback the border radius callback to set
 	 * @return builder instance
 	 */
-	public DataLabelsOptionsBuilder setBorderRadius(BorderRadiusCallback borderRadiusCallback) {
+	public DataLabelsOptionsBuilder setBorderRadius(RadiusCallback borderRadiusCallback) {
 		options.setBorderRadius(borderRadiusCallback);
 		return this;
 	}
@@ -652,6 +652,17 @@ public final class DataLabelsOptionsBuilder {
 	 * @return builder instance
 	 */
 	public DataLabelsOptionsBuilder setFontLineHeight(double lineHeight) {
+		options.getFont().setLineHeight(lineHeight);
+		return this;
+	}
+
+	/**
+	 * Sets the line height.
+	 * 
+	 * @param lineHeight the line height.
+	 * @return builder instance
+	 */
+	public DataLabelsOptionsBuilder setFontLineHeight(String lineHeight) {
 		options.getFont().setLineHeight(lineHeight);
 		return this;
 	}

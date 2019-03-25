@@ -30,7 +30,7 @@ public class RadarDataset extends LiningDataset {
 	 * It uses the global options has default.
 	 */
 	public RadarDataset() {
-		super();
+		this(null);
 	}
 
 	/**

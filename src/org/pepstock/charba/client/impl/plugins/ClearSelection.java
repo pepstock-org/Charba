@@ -24,6 +24,7 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
+import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.resources.client.ImageResource;
@@ -288,13 +289,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param image the clear selection image
 	 */
 	public void setImage(ImageResource image) {
-		// checks if consistent
-		if (image != null) {
-			// sets new image
-			setImage(new Image(image));
-		} else {
-			remove(Property.image);
-		}
+		setImage(Utilities.toImageElement(image));
 	}
 	
 	/**
@@ -303,13 +298,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param image the clear selection image
 	 */
 	public void setImage(Image image) {
-		// checks if consistent
-		if (image != null) {
-			// sets new image
-			setImage(ImageElement.as(image.getElement()));
-		} else {
-			remove(Property.image);
-		}
+		setImage(Utilities.toImageElement(image));
 	}
 	
 	/**

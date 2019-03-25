@@ -18,10 +18,13 @@ package org.pepstock.charba.client.impl.charts;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
+import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.data.DoughnutDataset;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
@@ -68,6 +71,17 @@ public class MeterDataset extends DoughnutDataset {
 	private final double max;
 
 	private double value = MINIMUM_VALUE;
+	
+	/**
+	 * Name of properties of native object. Overrides {@link DoughnutDataset}
+	 */
+	private enum Property implements Key
+	{
+		backgroundColor,
+		borderColor,
+		hoverBackgroundColor,
+		hoverBorderColor,
+	}
 
 	/**
 	 * Creates a dataset setting the maximum value of dataset. It uses the global options has default.
@@ -120,6 +134,78 @@ public class MeterDataset extends DoughnutDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.data.HovingDataset#setBackgroundColor(org.pepstock.charba.client.callbacks.
+	 * BackgroundColorCallback)
+	 */
+	@Override
+	public void setBackgroundColor(BackgroundColorCallback<?> backgroundColorCallback) {
+		// checks if null
+		if (backgroundColorCallback != null) {
+			// if not, exception
+			throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.backgroundColor);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.pepstock.charba.client.data.HovingDataset#setBorderColor(org.pepstock.charba.client.callbacks.BorderColorCallback)
+	 */
+	@Override
+	public void setBorderColor(BorderColorCallback<?> borderColorCallback) {
+		// checks if null
+		if (borderColorCallback != null) {
+			// if not, exception
+			throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.borderColor);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBackgroundColor(org.pepstock.charba.client.callbacks.
+	 * BackgroundColorCallback)
+	 */
+	@Override
+	public void setHoverBackgroundColor(BackgroundColorCallback<?> hoverBackgroundColorCallback) {
+		// checks if null
+		if (hoverBackgroundColorCallback != null) {
+			// if not, exception
+			throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.hoverBackgroundColor);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBorderColor(org.pepstock.charba.client.callbacks.
+	 * BorderColorCallback)
+	 */
+	@Override
+	public void setHoverBorderColor(BorderColorCallback<?> hoverBorderColorCallback) {
+		// checks if null
+		if (hoverBorderColorCallback != null) {
+			// if not, exception
+			throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.hoverBorderColor);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.HovingDataset#setBorderColor(org.pepstock.charba.client.colors.Gradient[])
 	 */
 	@Override
@@ -155,28 +241,6 @@ public class MeterDataset extends DoughnutDataset {
 	@Override
 	public void setHoverBackgroundColor(Pattern... colors) {
 		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.HovingDataset#setBorderWidth(int[])
-	 */
-	@Override
-	public final void setBorderWidth(int... borderWidth) {
-		// ignore passed value
-		super.setBorderWidth(0, 0);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBorderWidth(int[])
-	 */
-	@Override
-	public final void setHoverBorderWidth(int... widths) {
-		// ignore passed value
-		super.setHoverBorderWidth(0, 0);
 	}
 
 	/**

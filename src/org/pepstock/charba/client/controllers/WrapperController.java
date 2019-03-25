@@ -54,7 +54,7 @@ final class WrapperController extends NativeObjectContainer {
 		 * @param chart CHART.JS chart instance
 		 * @param datasetIndex dataset index
 		 */
-		void call(Context context, Chart chart, int datasetIndex);
+		void call(ControllerContext context, Chart chart, int datasetIndex);
 	}
 
 	/**
@@ -71,7 +71,7 @@ final class WrapperController extends NativeObjectContainer {
 		 * 
 		 * @param context java script <code>this</code> function context.
 		 */
-		void call(Context context);
+		void call(ControllerContext context);
 	}
 
 	/**
@@ -88,7 +88,7 @@ final class WrapperController extends NativeObjectContainer {
 		 * @param context java script <code>this</code> function context.
 		 * @param index dataset index
 		 */
-		void call(Context context, int index);
+		void call(ControllerContext context, int index);
 	}
 
 	/**
@@ -105,7 +105,7 @@ final class WrapperController extends NativeObjectContainer {
 		 * @param context java script <code>this</code> function context.
 		 * @param ease if specified, this number represents how far to transition elements.
 		 */
-		void call(Context context, double ease);
+		void call(ControllerContext context, double ease);
 	}
 
 	/**
@@ -122,7 +122,7 @@ final class WrapperController extends NativeObjectContainer {
 		 * @param context java script <code>this</code> function context.
 		 * @param element element to be removed.
 		 */
-		void call(Context context, NativeObject element);
+		void call(ControllerContext context, NativeObject element);
 	}
 
 	/**
@@ -139,7 +139,7 @@ final class WrapperController extends NativeObjectContainer {
 		 * @param context java script <code>this</code> function context.
 		 * @param element element to be set.
 		 */
-		void call(Context context, NativeObject element);
+		void call(ControllerContext context, NativeObject element);
 	}
 
 	/**
@@ -156,7 +156,7 @@ final class WrapperController extends NativeObjectContainer {
 		 * @param context java script <code>this</code> function context.
 		 * @param reset if true, put the elements into a reset state so they can animate to their final values
 		 */
-		void call(Context context, boolean reset);
+		void call(ControllerContext context, boolean reset);
 	}
 
 	// ---------------------------
@@ -217,12 +217,12 @@ final class WrapperController extends NativeObjectContainer {
 			 * charba.client.controllers.Context, org.pepstock.charba.client.Chart, int)
 			 */
 			@Override
-			public void call(Context context, Chart chart, int datasetIndex) {
+			public void call(ControllerContext context, Chart chart, int datasetIndex) {
 				// adds the chart instance to the context
 				// PAY ATTENTION: this is mandatory
 				context.setNativeChart(chart);
 				// invoke user method implementation
-				onInitialize(context, chart.getCharbaId(), datasetIndex);
+				onInitialize(context, chart.getChart(), datasetIndex);
 			}
 
 		});
@@ -235,9 +235,9 @@ final class WrapperController extends NativeObjectContainer {
 			 * charba.client.controllers.Context)
 			 */
 			@Override
-			public void call(Context context) {
+			public void call(ControllerContext context) {
 				// invoke user method implementation
-				onAddElements(context, context.getCharbaId());
+				onAddElements(context, context.getChart());
 			}
 
 		});
@@ -250,9 +250,9 @@ final class WrapperController extends NativeObjectContainer {
 			 * pepstock.charba.client.controllers.Context, int)
 			 */
 			@Override
-			public void call(Context context, int index) {
+			public void call(ControllerContext context, int index) {
 				// invoke user method implementation
-				onAddElementAndReset(context, context.getCharbaId(), index);
+				onAddElementAndReset(context, context.getChart(), index);
 			}
 
 		});
@@ -265,9 +265,9 @@ final class WrapperController extends NativeObjectContainer {
 			 * client.controllers.Context, double)
 			 */
 			@Override
-			public void call(Context context, double ease) {
+			public void call(ControllerContext context, double ease) {
 				// invoke user method implementation
-				onDraw(context, context.getCharbaId(), ease);
+				onDraw(context, context.getChart(), ease);
 			}
 
 		});
@@ -280,9 +280,9 @@ final class WrapperController extends NativeObjectContainer {
 			 * pepstock.charba.client.controllers.Context, org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
-			public void call(Context context, NativeObject element) {
+			public void call(ControllerContext context, NativeObject element) {
 				// invoke user method implementation
-				onRemoveHoverStyle(context, context.getCharbaId(), element);
+				onRemoveHoverStyle(context, context.getChart(), element);
 			}
 
 		});
@@ -295,9 +295,9 @@ final class WrapperController extends NativeObjectContainer {
 			 * charba.client.controllers.Context, org.pepstock.charba.client.commons.NativeObject)
 			 */
 			@Override
-			public void call(Context context, NativeObject element) {
+			public void call(ControllerContext context, NativeObject element) {
 				// invoke user method implementation
-				onSetHoverStyle(context, context.getCharbaId(), element);
+				onSetHoverStyle(context, context.getChart(), element);
 			}
 
 		});
@@ -310,9 +310,9 @@ final class WrapperController extends NativeObjectContainer {
 			 * client.controllers.Context, boolean)
 			 */
 			@Override
-			public void call(Context context, boolean reset) {
+			public void call(ControllerContext context, boolean reset) {
 				// invoke user method implementation
-				onUpdate(context, context.getCharbaId(), reset);
+				onUpdate(context, context.getChart(), reset);
 			}
 
 		});
@@ -352,9 +352,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chartId chartId chart id.
 	 * @param datasetIndex dataset index
 	 */
-	protected void onInitialize(Context context, String chartId, int datasetIndex) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onInitialize(ControllerContext context, AbstractChart<?, ?> chart, int datasetIndex) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.initialize(context, chart, datasetIndex);
@@ -367,9 +365,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param context context of controller
 	 * @param chartId chartId chart id.
 	 */
-	protected void onAddElements(Context context, String chartId) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onAddElements(ControllerContext context, AbstractChart<?, ?> chart) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.addElements(context, chart);
@@ -383,9 +379,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chartId chartId chart id.
 	 * @param index dataset index
 	 */
-	protected void onAddElementAndReset(Context context, String chartId, int index) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onAddElementAndReset(ControllerContext context, AbstractChart<?, ?> chart, int index) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.addElementAndReset(context, chart, index);
@@ -399,9 +393,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chartId chartId chart id.
 	 * @param ease if specified, this number represents how far to transition elements.
 	 */
-	protected void onDraw(Context context, String chartId, double ease) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onDraw(ControllerContext context, AbstractChart<?, ?> chart, double ease) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.draw(context, chart, ease);
@@ -415,9 +407,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chartId chartId chart id.
 	 * @param object element to be removed.
 	 */
-	protected void onRemoveHoverStyle(Context context, String chartId, NativeObject object) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onRemoveHoverStyle(ControllerContext context, AbstractChart<?, ?> chart, NativeObject object) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.removeHoverStyle(context, chart, new StyleElement(object));
@@ -431,9 +421,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chartId chartId chart id.
 	 * @param object element to be set.
 	 */
-	protected void onSetHoverStyle(Context context, String chartId, NativeObject object) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onSetHoverStyle(ControllerContext context, AbstractChart<?, ?> chart, NativeObject object) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.setHoverStyle(context, chart, new StyleElement(object));
@@ -447,9 +435,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chartId chartId chart id.
 	 * @param reset if true, put the elements into a reset state so they can animate to their final values
 	 */
-	protected void onUpdate(Context context, String chartId, boolean reset) {
-		// gets chart instance
-		AbstractChart<?, ?> chart = getChart(chartId);
+	protected void onUpdate(ControllerContext context, AbstractChart<?, ?> chart, boolean reset) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.update(context, chart, reset);

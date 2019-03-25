@@ -47,34 +47,16 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	// ---------------------------
 
 	/**
-	 * Java script FUNCTION callback when animation is completed.<br>
+	 * Java script FUNCTION callback when animation is changing.<br>
 	 * Must be an interface with only 1 method.
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
 	@JsFunction
-	interface ProxyAnimationCompleteCallback {
+	interface ProxyAnimationCallback {
 
 		/**
-		 * Method of function to be called when animation is completed.
-		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
-		 * @param animationObject java script object which contains animation object
-		 */
-		void call(Chart context, AnimationObject animationObject);
-	}
-
-	/**
-	 * Java script FUNCTION callback when animation is in progress.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyAnimationProgressCallback {
-
-		/**
-		 * Method of function to be called when animation is completed.
+		 * Method of function to be called when animation is changing.
 		 * 
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @param animationObject java script object which contains animation object
@@ -87,9 +69,9 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	// ---------------------------
 
 	// callback proxy to invoke the animation complete function
-	private final CallbackProxy<ProxyAnimationCompleteCallback> completeCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyAnimationCallback> completeCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the animation in progress function
-	private final CallbackProxy<ProxyAnimationProgressCallback> progressCallbackProxy = JsHelper.get().newCallbackProxy();
+	private final CallbackProxy<ProxyAnimationCallback> progressCallbackProxy = JsHelper.get().newCallbackProxy();
 	// amount of handlers
 	private int onCompleteHandlers = 0;
 	// amount of handlers
@@ -116,13 +98,14 @@ public class Animation extends EventProvider<ExtendedOptions> {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		completeCallbackProxy.setCallback(new ProxyAnimationCompleteCallback() {
+		completeCallbackProxy.setCallback(new ProxyAnimationCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Animation.ProxyAnimationCompleteCallback#call(org.pepstock.
-			 * charba.client.Chart, org.pepstock.charba.client.items.AnimationObject)
+			 * @see
+			 * org.pepstock.charba.client.configuration.Animation.ProxyAnimationCallback#call(org.pepstock.charba.client.Chart,
+			 * org.pepstock.charba.client.items.AnimationObject)
 			 */
 			@Override
 			public void call(Chart context, AnimationObject animationObject) {
@@ -133,13 +116,14 @@ public class Animation extends EventProvider<ExtendedOptions> {
 				}
 			}
 		});
-		progressCallbackProxy.setCallback(new ProxyAnimationProgressCallback() {
+		progressCallbackProxy.setCallback(new ProxyAnimationCallback() {
 
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see org.pepstock.charba.client.configuration.Animation.ProxyAnimationProgressCallback#call(org.pepstock.
-			 * charba.client.Chart, org.pepstock.charba.client.items.AnimationObject)
+			 * @see
+			 * org.pepstock.charba.client.configuration.Animation.ProxyAnimationCallback#call(org.pepstock.charba.client.Chart,
+			 * org.pepstock.charba.client.items.AnimationObject)
 			 */
 			@Override
 			public void call(Chart context, AnimationObject animationObject) {

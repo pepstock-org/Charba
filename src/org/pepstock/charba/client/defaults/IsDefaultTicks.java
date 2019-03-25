@@ -22,21 +22,21 @@ import org.pepstock.charba.client.enums.TickSource;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultTicks extends IsDefaultFontItem {
+public interface IsDefaultTicks extends IsDefaultBaseTick {
 
 	/**
 	 * Returns the minor tick defaults.
 	 * 
 	 * @return the minor tick defaults.
 	 */
-	IsDefaultFontItem getMinor();
+	IsDefaultMinorTick getMinor();
 
 	/**
 	 * Returns the major tick defaults.
 	 * 
 	 * @return the major tick defaults.
 	 */
-	IsDefaultFontItem getMajor();
+	IsDefaultMajorTick getMajor();
 
 	/**
 	 * If true, scale will include 0 if it is not already included.
@@ -204,4 +204,5 @@ public interface IsDefaultTicks extends IsDefaultFontItem {
 	 * @return if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 */
 	int getPrecision();
+
 }

@@ -24,11 +24,13 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultLine;
 import org.pepstock.charba.client.enums.AbsoluteDatasetIndexFill;
 import org.pepstock.charba.client.enums.CapStyle;
+import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.FillingMode;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.RelativeDatasetIndexFill;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Line elements are used to represent the line in a line chart.
@@ -47,6 +49,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 		borderDash,
 		borderDashOffset,
 		borderJoinStyle,
+		cubicInterpolationMode,
 		capBezierPoints,
 		fill,
 		stepped,
@@ -198,6 +201,40 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 */
 	public boolean isCapBezierPoints() {
 		return getValue(Property.capBezierPoints, getDefaultValues().isCapBezierPoints());
+	}
+
+	/**
+	 * Sets algorithm used to interpolate a smooth curve from the discrete data points.<br>
+	 * The following interpolation modes are supported:<br>
+	 * <br>
+	 * 
+	 * <pre>
+	 * 'default'
+	 * 'monotone'
+	 * </pre>
+	 * 
+	 * <br>
+	 * The 'default' algorithm uses a custom weighted cubic interpolation, which produces pleasant curves for all types of
+	 * datasets.<br>
+	 * The 'monotone' algorithm is more suited to y = f(x) datasets : it preserves monotonicity (or piecewise monotonicity) of
+	 * the dataset being interpolated, and ensures local extremums (if any) stay at input data points.
+	 * 
+	 * @param mode algorithm used to interpolate a smooth curve from the discrete data points
+	 */
+	public void setCubicInterpolationMode(CubicInterpolationMode mode) {
+		setValue(Property.cubicInterpolationMode, mode != null ? mode.getValue() : UndefinedValues.STRING);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns algorithm used to interpolate a smooth curve from the discrete data points.
+	 * 
+	 * @return algorithm used to interpolate a smooth curve from the discrete data points. Default is <code>'default'</code>.
+	 */
+	public CubicInterpolationMode getCubicInterpolationMode() {
+		String value = getValue(Property.cubicInterpolationMode, UndefinedValues.STRING);
+		return CubicInterpolationMode.getModeByValue(value, getDefaultValues().getCubicInterpolationMode());
 	}
 
 	/**

@@ -15,7 +15,8 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.defaults.IsDefaultFontItem;
+import org.pepstock.charba.client.defaults.IsDefaultMajorTick;
+import org.pepstock.charba.client.defaults.IsDefaultMinorTick;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.enums.TickSource;
 
@@ -24,7 +25,7 @@ import org.pepstock.charba.client.enums.TickSource;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTicks {
+public class DefaultTicks extends DefaultTickItem implements IsDefaultTicks {
 
 	private static final boolean DEFAULT_DISPLAY = true;
 
@@ -68,9 +69,9 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 
 	private static final int DEFAULT_PRECISION = 0;
 
-	private final DefaultTickItem minor = new DefaultTickItem();
+	private final DefaultMinorTickItem minor = new DefaultMinorTickItem();
 
-	private final DefaultTickItem major = new DefaultTickItem();
+	private final DefaultMajorTickItem major = new DefaultMajorTickItem();
 
 	/*
 	 * (non-Javadoc)
@@ -78,7 +79,7 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMinor()
 	 */
 	@Override
-	public IsDefaultFontItem getMinor() {
+	public IsDefaultMinorTick getMinor() {
 		return minor;
 	}
 
@@ -88,7 +89,7 @@ public class DefaultTicks extends AbstractDefaultFontItem implements IsDefaultTi
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMajor()
 	 */
 	@Override
-	public IsDefaultFontItem getMajor() {
+	public IsDefaultMajorTick getMajor() {
 		return major;
 	}
 

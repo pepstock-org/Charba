@@ -18,6 +18,7 @@ package org.pepstock.charba.client.defaults.chart;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
+import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.options.Scales;
 
 /**
@@ -61,11 +62,11 @@ public final class DefaultChartScales implements IsDefaultScales {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#isDisplay()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultScales#getDisplay()
 	 */
 	@Override
-	public boolean isDisplay() {
-		return scales.isDisplay();
+	public Display getDisplay() {
+		return scales.getDisplay();
 	}
 
 	/*

@@ -15,25 +15,27 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
  * Factory to get the options (form chart or from default global ones) related to pointer plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ChartPointerOptionsFactory implements NativeObjectContainerFactory<ChartPointerOptions> {
+public final class ChartPointerOptionsFactory extends AbstractPluginOptionsFactory<ChartPointerOptions> {
 
 	// factory instance to read the options from default global
 	private final ChartPointerDefaultsOptionsFactory defaultsFactory = new ChartPointerDefaultsOptionsFactory();
 
 	/**
 	 * To avoid any instantiation. Use the static reference into {@link ChartPointer#FACTORY}.
+	 * 
+	 * @param plugin id
 	 */
-	ChartPointerOptionsFactory() {
-		// do nothing
+	ChartPointerOptionsFactory(String pluginId) {
+		super(pluginId);
 	}
 
 	/*
@@ -45,16 +47,7 @@ public final class ChartPointerOptionsFactory implements NativeObjectContainerFa
 	@Override
 	public ChartPointerOptions create(NativeObject nativeObject) {
 		// defaults global options instance
-		ChartPointerDefaultsOptions defaultsOptions = null;
-		// checks if the default global options has been added for the plugin
-		if (Defaults.get().getGlobal().getPlugins().hasOptions(ChartPointer.ID)) {
-			// reads the default default global options
-			defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(ChartPointer.ID, defaultsFactory);
-		} else {
-			// if here, no default global option
-			// then the plugin will use the static defaults
-			defaultsOptions = new ChartPointerDefaultsOptions();
-		}
+		ChartPointerDefaultsOptions defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
 		// creates the options by the native object and the defaults
 		return new ChartPointerOptions(nativeObject, defaultsOptions);
 	}

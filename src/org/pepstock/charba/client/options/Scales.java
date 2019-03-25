@@ -22,8 +22,10 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
+import org.pepstock.charba.client.enums.Display;
 
 /**
  * The configuration element which contains all axes definitions.
@@ -84,23 +86,52 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	}
 
 	/**
-	 * Sets if the scales are shown.
+	 * If <code>true</code>, shows the axis.
 	 * 
-	 * @param display <code>true</code> if the scales are shown.
+	 * @param display if <code>true</code>, shows the axes.
 	 */
-	public void setDisplay(boolean display) {
+	public final void setDisplay(boolean display) {
 		setValue(Property.display, display);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
-	 * Returns if the scales are shown.
+	 * The display option controls the visibility of axis.<br>
+	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible
+	 * only if at least one associated dataset is visible.
 	 * 
-	 * @return <code>true</code> if the scales are shown.
+	 * @param display display option controls the visibility of axis
 	 */
-	public boolean isDisplay() {
-		return getValue(Property.display, getDefaultValues().isDisplay());
+	public final void setDisplay(Display display) {
+		// checks if is setting auto
+		if (Display.auto.equals(display)) {
+			setValue(Property.display, display);
+			// checks if all parents are attached
+			checkAndAddToParent();
+		} else {
+			// otherwise transforms into a boolean
+			setDisplay(Display.yes.equals(display) ? true : false);
+		}
+	}
+
+	/**
+	 * The display option controls the visibility of axis.<br>
+	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible
+	 * only if at least one associated dataset is visible.
+	 * 
+	 * @return display option controls the visibility of axis
+	 */
+	public final Display getDisplay() {
+		// checks if is boolean
+		if (ObjectType.Boolean.equals(type(Property.display))) {
+			// gets value
+			boolean value = getValue(Property.display, true);
+			// returns value
+			return value ? Display.yes : Display.no;
+		}
+		// returns value. Must be auto
+		return getValue(Property.display, Display.class, getDefaultValues().getDisplay());
 	}
 
 	/**

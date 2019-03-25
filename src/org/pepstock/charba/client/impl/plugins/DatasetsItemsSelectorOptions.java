@@ -17,15 +17,14 @@ package org.pepstock.charba.client.impl.plugins;
 
 import java.util.List;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelectorOptionsFactory.DatasetsItemsSelectorDefaultsOptionsFactory;
+import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
  * Configuration options of selection plugin.<br>
@@ -41,7 +40,7 @@ import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelectorOptionsFacto
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
+public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 
 	// defaults global options instance
 	private DatasetsItemsSelectorDefaultsOptions defaultsOptions;
@@ -68,18 +67,11 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	 * Builds the object with a new java script object setting the default value of plugin.
 	 */
 	public DatasetsItemsSelectorOptions() {
-		super(null);
+		super(DatasetsItemsSelector.ID);
 		// this constructor is used by user to set options for plugin
 		// both default global or chart one.
-		// checks if the default global options has been added for the plugin
-		if (Defaults.get().getGlobal().getPlugins().hasOptions(DatasetsItemsSelector.ID)) {
-			// reads the default default global options
-			defaultsOptions = Defaults.get().getGlobal().getPlugins().getOptions(DatasetsItemsSelector.ID, defaultsFactory);
-		} else {
-			// if here, no default global option
-			// then the plugin will use the static defaults
-			defaultsOptions = new DatasetsItemsSelectorDefaultsOptions();
-		}
+		// reads the default default global options
+		defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
 		// sets inner elements
 		clearSelection = new ClearSelection(defaultsOptions.getClearSelection());
 		// stores inner elements
@@ -94,7 +86,7 @@ public final class DatasetsItemsSelectorOptions extends NativeObjectContainer {
 	 * @param defaultsOptions default options, which must be stored into default global.
 	 */
 	DatasetsItemsSelectorOptions(NativeObject nativeObject, DatasetsItemsSelectorDefaultsOptions defaultsOptions) {
-		super(nativeObject);
+		super(DatasetsItemsSelector.ID, nativeObject);
 		this.defaultsOptions = defaultsOptions;
 		// sets inner elements
 		clearSelection = new ClearSelection(getValue(Property.clearSelection), defaultsOptions.getClearSelection());

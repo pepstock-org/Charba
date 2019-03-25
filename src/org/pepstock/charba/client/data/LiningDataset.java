@@ -17,19 +17,33 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
+import org.pepstock.charba.client.callbacks.BorderColorCallback;
+import org.pepstock.charba.client.callbacks.BorderWidthCallback;
+import org.pepstock.charba.client.callbacks.PointStyleCallback;
+import org.pepstock.charba.client.callbacks.RadiusCallback;
+import org.pepstock.charba.client.callbacks.RotationCallback;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.ArrayDouble;
+import org.pepstock.charba.client.commons.ArrayDoubleList;
 import org.pepstock.charba.client.commons.ArrayImage;
 import org.pepstock.charba.client.commons.ArrayImageList;
 import org.pepstock.charba.client.commons.ArrayInteger;
+import org.pepstock.charba.client.commons.ArrayIntegerList;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.AbsoluteDatasetIndexFill;
 import org.pepstock.charba.client.enums.CapStyle;
@@ -40,6 +54,7 @@ import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.enums.RelativeDatasetIndexFill;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
@@ -56,6 +71,57 @@ import com.google.gwt.user.client.ui.Image;
  *
  */
 abstract class LiningDataset extends Dataset {
+	// default label
+	private static final String DEFAULT_LABEL = "";
+
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the point background color function
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point border color function
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point border width function
+	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> pointBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point hover background color function
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointHoverBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point hover border color function
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointHoverBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point hover border width function
+	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> pointHoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point radius function
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> pointRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point hit radius function
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> pointHitRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point hover radius function
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> pointHoverRadiusCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point rotation function
+	private final CallbackProxy<ScriptableFunctions.ProxyDoubleCallback> pointRotationCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the point style function
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// point background color callback instance
+	private BackgroundColorCallback<?> pointBackgroundColorCallback = null;
+	// point border color callback instance
+	private BorderColorCallback<?> pointBorderColorCallback = null;
+	// point borderWidth callback instance
+	private BorderWidthCallback pointBorderWidthCallback = null;
+	// point hover background color callback instance
+	private BackgroundColorCallback<?> pointHoverBackgroundColorCallback = null;
+	// point hover border color callback instance
+	private BorderColorCallback<?> pointHoverBorderColorCallback = null;
+	// point hover borderWidth callback instance
+	private BorderWidthCallback pointHoverBorderWidthCallback = null;
+	// point radius callback instance
+	private RadiusCallback pointRadiusCallback = null;
+	// point hit radius callback instance
+	private RadiusCallback pointHitRadiusCallback = null;
+	// point hover radius callback instance
+	private RadiusCallback pointHoverRadiusCallback = null;
+	// point rotation callback instance
+	private RotationCallback pointRotationCallback = null;
+	// point style callback instance
+	private PointStyleCallback<?> pointStyleCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -89,20 +155,197 @@ abstract class LiningDataset extends Dataset {
 	}
 
 	/**
-	 * Creates a dataset.<br>
-	 * It uses the global options has default.
-	 */
-	LiningDataset() {
-		super();
-	}
-
-	/**
 	 * Creates the dataset using a default.
 	 * 
 	 * @param defaultValues default options
 	 */
 	LiningDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		pointBackgroundColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
+			 */
+			@Override
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsColor(context, pointBackgroundColorCallback, getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
+			}
+		});
+		pointBorderColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
+			 */
+			@Override
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsColor(context, pointBorderColorCallback, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false);
+			}
+		});
+		pointBorderWidthCallbackProxy.setCallback(new ScriptableFunctions.ProxyIntegerCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyIntegerCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
+			 */
+			@Override
+			public int call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, pointBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue();
+			}
+		});
+		pointHoverBackgroundColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
+			 */
+			@Override
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsColor(context, pointHoverBackgroundColorCallback, getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
+			}
+		});
+		pointHoverBorderColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
+			 */
+			@Override
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValueAsColor(context, pointHoverBorderColorCallback, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false);
+			}
+		});
+		pointHoverBorderWidthCallbackProxy.setCallback(new ScriptableFunctions.ProxyIntegerCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyIntegerCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
+			 */
+			@Override
+			public int call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, pointHoverBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue();
+			}
+		});
+		pointRadiusCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyDoubleCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
+			 */
+			@Override
+			public double call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, pointRadiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue();
+			}
+
+		});
+		pointHitRadiusCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyDoubleCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
+			 */
+			@Override
+			public double call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, pointHitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue();
+			}
+		});
+		pointHoverRadiusCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyDoubleCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
+			 */
+			@Override
+			public double call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, pointHoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue();
+			}
+		});
+		pointRotationCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyDoubleCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
+			 */
+			@Override
+			public double call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				return ScriptableUtils.getOptionValue(context, pointRotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue();
+			}
+		});
+		pointStyleCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
+			 * org.pepstock.charba.client.callbacks.ScriptableContext)
+			 */
+			@Override
+			public Object call(Object contextFunction, ScriptableContext context) {
+				// gets value
+				Object result = ScriptableUtils.getOptionValue(context, pointStyleCallback);
+				// checks result
+				if (result instanceof PointStyle) {
+					// is point style instance
+					PointStyle style = (PointStyle) result;
+					return style.name();
+				} else if (result instanceof Image) {
+					// is image instance
+					return Utilities.toImageElement((Image) result);
+				} else if (result instanceof ImageResource) {
+					// is image resource instance
+					return Utilities.toImageElement((ImageResource) result);
+				} else if (result instanceof ImageElement) {
+					// is image element instance
+					return (ImageElement) result;
+				}
+				// default result
+				return getDefaultValues().getElements().getPoint().getPointStyle().name();
+			}
+		});
+	}
+
+	/**
+	 * Returns the label for the dataset which appears in the legend and tooltips.
+	 * 
+	 * @return the label for the dataset which appears in the legend and tooltips.
+	 */
+	@Override
+	public String getLabel() {
+		return getValue(Dataset.Property.label, DEFAULT_LABEL);
 	}
 
 	/**
@@ -514,6 +757,9 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointBackgroundColor array of the fill color for points.
 	 */
 	public void setPointBackgroundColor(IsColor... pointBackgroundColor) {
+		// reset callback
+		setPointBackgroundColor((BackgroundColorCallback<?>) null);
+		// stores value
 		setValueOrArray(Property.pointBackgroundColor, pointBackgroundColor);
 		// removes the flag because default is string color
 		resetBeingColors(Property.pointBackgroundColor);
@@ -525,6 +771,9 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointBackgroundColor array of the fill color for points.
 	 */
 	public void setPointBackgroundColor(String... pointBackgroundColor) {
+		// reset callback
+		setPointBackgroundColor((BackgroundColorCallback<?>) null);
+		// stores value
 		setValueOrArray(Property.pointBackgroundColor, pointBackgroundColor);
 		// removes the flag because default is string color
 		resetBeingColors(Property.pointBackgroundColor);
@@ -536,6 +785,8 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointBackgroundColor array of the gradients for points.
 	 */
 	public void setPointBackgroundColor(Gradient... pointBackgroundColor) {
+		// reset callback
+		setPointBackgroundColor((BackgroundColorCallback<?>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Property.pointBackgroundColor, ArrayObject.fromOrNull(pointBackgroundColor));
 		// removes the property
@@ -551,7 +802,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public List<String> getPointBackgroundColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
-		if (hasColors(Property.pointBackgroundColor)) {
+		if (hasColors(Property.pointBackgroundColor) && pointBackgroundColorCallback == null) {
 			// returns color as string
 			ArrayString array = getValueOrArray(Property.pointBackgroundColor, getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
 			return ArrayListHelper.list(array);
@@ -579,7 +830,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public List<Gradient> getPointBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
-		if (hasGradients(Property.pointBackgroundColor)) {
+		if (hasGradients(Property.pointBackgroundColor) && pointBackgroundColorCallback == null) {
 			return getGradientsContainer().getObjects(Property.pointBackgroundColor);
 		} else {
 			// if here, the property is not a gradient
@@ -595,6 +846,9 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointBorderColor array of the border color for points.
 	 */
 	public void setPointBorderColor(IsColor... pointBorderColor) {
+		// reset callback
+		setPointBorderColor((BorderColorCallback<?>) null);
+		// stores value
 		setValueOrArray(Property.pointBorderColor, pointBorderColor);
 		// removes the flag because default is string color
 		resetBeingColors(Property.pointBorderColor);
@@ -606,6 +860,9 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointBorderColor array of the border color for points.
 	 */
 	public void setPointBorderColor(String... pointBorderColor) {
+		// reset callback
+		setPointBorderColor((BorderColorCallback<?>) null);
+		// stores value
 		setValueOrArray(Property.pointBorderColor, pointBorderColor);
 		// removes the flag because default is string color
 		resetBeingColors(Property.pointBorderColor);
@@ -617,6 +874,8 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointBorderColor array of the border gradient for points.
 	 */
 	public void setPointBorderColor(Gradient... pointBorderColor) {
+		// reset callback
+		setPointBorderColor((BorderColorCallback<?>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Property.pointBorderColor, ArrayObject.fromOrNull(pointBorderColor));
 		// removes the property
@@ -631,7 +890,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public List<String> getPointBorderColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
-		if (hasColors(Property.pointBorderColor)) {
+		if (hasColors(Property.pointBorderColor) && pointBorderColorCallback == null) {
 			// returns color as string
 			ArrayString array = getValueOrArray(Property.pointBorderColor, getDefaultValues().getElements().getPoint().getBorderColorAsString());
 			return ArrayListHelper.list(array);
@@ -660,7 +919,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public List<Gradient> getPointBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
-		if (hasGradients(Property.pointBorderColor)) {
+		if (hasGradients(Property.pointBorderColor) && pointBorderColorCallback == null) {
 			return getGradientsContainer().getObjects(Property.pointBorderColor);
 		} else {
 			// if here, the property is not a gradient
@@ -676,6 +935,7 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointBorderWidth array of the width of the point border in pixels.
 	 */
 	public void setPointBorderWidth(int... pointBorderWidth) {
+		// stores value
 		setValueOrArray(Property.pointBorderWidth, pointBorderWidth);
 	}
 
@@ -685,8 +945,15 @@ abstract class LiningDataset extends Dataset {
 	 * @return list of the width of the point border in pixels.
 	 */
 	public List<Integer> getPointBorderWidth() {
-		ArrayInteger array = getValueOrArray(Property.pointBorderWidth, getDefaultValues().getElements().getPoint().getBorderWidth());
-		return ArrayListHelper.list(array);
+		// checks if the callback has not been set
+		if (!ObjectType.Function.equals(type(Property.pointBorderWidth))) {
+			// returns the array
+			ArrayInteger array = getValueOrArray(Property.pointBorderWidth, getDefaultValues().getElements().getPoint().getBorderWidth());
+			return ArrayListHelper.list(array);
+		}
+		// if here, is a callback
+		// then returns an empty list
+		return new ArrayIntegerList();
 	}
 
 	/**
@@ -695,6 +962,7 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointHitRadius array of the pixel size of the non-displayed point.
 	 */
 	public void setPointHitRadius(double... pointHitRadius) {
+		// stores value
 		setValueOrArray(Property.pointHitRadius, pointHitRadius);
 	}
 
@@ -704,8 +972,15 @@ abstract class LiningDataset extends Dataset {
 	 * @return list of the pixel size of the non-displayed point.
 	 */
 	public List<Double> getPointHitRadius() {
-		ArrayDouble array = getValueOrArray(Property.pointHitRadius, getDefaultValues().getElements().getPoint().getHitRadius());
-		return ArrayListHelper.list(array);
+		// checks if the callback has not been set
+		if (!ObjectType.Function.equals(type(Property.pointHitRadius))) {
+			// returns the array
+			ArrayDouble array = getValueOrArray(Property.pointHitRadius, getDefaultValues().getElements().getPoint().getHitRadius());
+			return ArrayListHelper.list(array);
+		}
+		// if here, is a callback
+		// then returns an empty list
+		return new ArrayDoubleList();
 	}
 
 	/**
@@ -714,17 +989,23 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointHoverBackgroundColor array of the point background color when hovered.
 	 */
 	public void setPointHoverBackgroundColor(IsColor... pointHoverBackgroundColor) {
+		// resets callback
+		setPointHoverBackgroundColor((BackgroundColorCallback<?>) null);
+		// stores value
 		setValueOrArray(Property.pointHoverBackgroundColor, pointHoverBackgroundColor);
 		// removes the flag because default is string color
 		resetBeingColors(Property.pointHoverBackgroundColor);
 	}
 
 	/**
-	 * Sets the point background color when hovered.
+	 * Sets the point hover background color when hovered.
 	 * 
 	 * @param pointHoverBackgroundColor array of the point background color when hovered.
 	 */
 	public void setPointHoverBackgroundColor(String... pointHoverBackgroundColor) {
+		// resets callback
+		setPointHoverBackgroundColor((BackgroundColorCallback<?>) null);
+		// stores value
 		setValueOrArray(Property.pointHoverBackgroundColor, pointHoverBackgroundColor);
 		// removes the flag because default is string color
 		resetBeingColors(Property.pointHoverBackgroundColor);
@@ -736,6 +1017,8 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointHoverBackgroundColor array of the point background gradient when hovered.
 	 */
 	public void setPointHoverBackgroundColor(Gradient... pointHoverBackgroundColor) {
+		// resets callback
+		setPointHoverBackgroundColor((BackgroundColorCallback<?>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Property.pointHoverBackgroundColor, ArrayObject.fromOrNull(pointHoverBackgroundColor));
 		// removes the property
@@ -751,7 +1034,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public List<String> getPointHoverBackgroundColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
-		if (hasColors(Property.pointHoverBackgroundColor)) {
+		if (hasColors(Property.pointHoverBackgroundColor) && pointHoverBackgroundColorCallback == null) {
 			ArrayString array = getValueOrArray(Property.pointHoverBackgroundColor, getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
 			return ArrayListHelper.list(array);
 		} else {
@@ -780,7 +1063,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public List<Gradient> getPointHoverBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
-		if (hasGradients(Property.pointHoverBackgroundColor)) {
+		if (hasGradients(Property.pointHoverBackgroundColor) && pointHoverBackgroundColorCallback == null) {
 			return getGradientsContainer().getObjects(Property.pointHoverBackgroundColor);
 		} else {
 			// if here, the property is not a gradient
@@ -796,6 +1079,9 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointHoverBorderColor array of the point border color when hovered.
 	 */
 	public void setPointHoverBorderColor(IsColor... pointHoverBorderColor) {
+		// resets callback
+		setPointHoverBorderColor((BorderColorCallback<?>) null);
+		// sets value
 		setValueOrArray(Property.pointHoverBorderColor, pointHoverBorderColor);
 		// removes the flag because default is string color
 		resetBeingColors(Property.pointHoverBorderColor);
@@ -807,6 +1093,9 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointHoverBorderColor array of the point border color when hovered.
 	 */
 	public void setPointHoverBorderColor(String... pointHoverBorderColor) {
+		// resets callback
+		setPointHoverBorderColor((BorderColorCallback<?>) null);
+		// stores value
 		setValueOrArray(Property.pointHoverBorderColor, pointHoverBorderColor);
 		// removes the flag because default is string color
 		resetBeingColors(Property.pointHoverBorderColor);
@@ -818,6 +1107,8 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointHoverBorderColor array of the point border gradient when hovered.
 	 */
 	public void setPointHoverBorderColor(Gradient... pointHoverBorderColor) {
+		// resets callback
+		setPointHoverBorderColor((BorderColorCallback<?>) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Property.pointHoverBorderColor, ArrayObject.fromOrNull(pointHoverBorderColor));
 		// removes the property
@@ -832,7 +1123,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public List<String> getPointHoverBorderColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
-		if (hasColors(Property.pointHoverBorderColor)) {
+		if (hasColors(Property.pointHoverBorderColor) && pointHoverBorderColorCallback == null) {
 			ArrayString array = getValueOrArray(Property.pointHoverBorderColor, getDefaultValues().getElements().getPoint().getBorderColorAsString());
 			return ArrayListHelper.list(array);
 		} else {
@@ -860,7 +1151,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public List<Gradient> getPointHoverBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
-		if (hasGradients(Property.pointHoverBorderColor)) {
+		if (hasGradients(Property.pointHoverBorderColor) && pointHoverBorderColorCallback == null) {
 			return getGradientsContainer().getObjects(Property.pointHoverBorderColor);
 		} else {
 			// if here, the property is not a gradient
@@ -876,6 +1167,7 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointHoverBorderWidth array of the border width of point when hovered.
 	 */
 	public void setPointHoverBorderWidth(int... pointHoverBorderWidth) {
+		// stores value
 		setValueOrArray(Property.pointHoverBorderWidth, pointHoverBorderWidth);
 	}
 
@@ -885,8 +1177,15 @@ abstract class LiningDataset extends Dataset {
 	 * @return list of the border width of point when hovered.
 	 */
 	public List<Integer> getPointHoverBorderWidth() {
-		ArrayInteger array = getValueOrArray(Property.pointHoverBorderWidth, getDefaultValues().getElements().getPoint().getHoverBorderWidth());
-		return ArrayListHelper.list(array);
+		// checks if the callback has not been set
+		if (!ObjectType.Function.equals(type(Property.pointHoverBorderWidth))) {
+			// returns the array
+			ArrayInteger array = getValueOrArray(Property.pointHoverBorderWidth, getDefaultValues().getElements().getPoint().getHoverBorderWidth());
+			return ArrayListHelper.list(array);
+		}
+		// if here, is a callback
+		// then returns an empty list
+		return new ArrayIntegerList();
 	}
 
 	/**
@@ -895,6 +1194,7 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointHoverRadius array of the radius of the point when hovered.
 	 */
 	public void setPointHoverRadius(double... pointHoverRadius) {
+		// stores values
 		setValueOrArray(Property.pointHoverRadius, pointHoverRadius);
 	}
 
@@ -904,8 +1204,15 @@ abstract class LiningDataset extends Dataset {
 	 * @return list of the radius of the point when hovered.
 	 */
 	public List<Double> getPointHoverRadius() {
-		ArrayDouble array = getValueOrArray(Property.pointHoverRadius, getDefaultValues().getElements().getPoint().getHoverRadius());
-		return ArrayListHelper.list(array);
+		// checks if the callback has not been set
+		if (!ObjectType.Function.equals(type(Property.pointHoverRadius))) {
+			// returns the array
+			ArrayDouble array = getValueOrArray(Property.pointHoverRadius, getDefaultValues().getElements().getPoint().getHoverRadius());
+			return ArrayListHelper.list(array);
+		}
+		// if here, is a callback
+		// then returns an empty list
+		return new ArrayDoubleList();
 	}
 
 	/**
@@ -914,6 +1221,7 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointRadius array of the radius of the point shape.
 	 */
 	public void setPointRadius(double... pointRadius) {
+		// stores values
 		setValueOrArray(Property.pointRadius, pointRadius);
 	}
 
@@ -923,8 +1231,15 @@ abstract class LiningDataset extends Dataset {
 	 * @return list of the radius of the point shape.
 	 */
 	public List<Double> getPointRadius() {
-		ArrayDouble array = getValueOrArray(Property.pointRadius, getDefaultValues().getElements().getPoint().getRadius());
-		return ArrayListHelper.list(array);
+		// checks if the callback has not been set
+		if (!ObjectType.Function.equals(type(Property.pointRadius))) {
+			// returns the array
+			ArrayDouble array = getValueOrArray(Property.pointRadius, getDefaultValues().getElements().getPoint().getRadius());
+			return ArrayListHelper.list(array);
+		}
+		// if here, is a callback
+		// then returns an empty list
+		return new ArrayDoubleList();
 	}
 
 	/**
@@ -933,9 +1248,10 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointStyle array of the style of the point.
 	 */
 	public void setPointStyle(PointStyle... pointStyle) {
+		// resets callback and flags
+		setPointStyle((PointStyleCallback<?>) null);
+		// stores value
 		setValueOrArray(Property.pointStyle, pointStyle);
-		// remove if exist flag
-		removeIfExists(Property._charbaPointStyle);
 	}
 
 	/**
@@ -945,12 +1261,12 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public List<PointStyle> getPointStyle() {
 		// checks if image as point style has been used
-		if (!getValue(Property._charbaPointStyle, false)) {
+		if (!getValue(Property._charbaPointStyle, false) && pointStyleCallback == null) {
 			// if not, returns point styles
 			ArrayString array = getValueOrArray(Property.pointStyle, getDefaultValues().getElements().getPoint().getPointStyle());
 			return ArrayListHelper.list(PointStyle.class, array);
 		} else {
-			// if here, means the point style as stored as images
+			// if here, means the point style as stored as images or callback
 			return ArrayListHelper.list(PointStyle.class, new PointStyle[0]);
 		}
 	}
@@ -969,18 +1285,15 @@ abstract class LiningDataset extends Dataset {
 			for (int i = 0; i < pointStyle.length; i++) {
 				// transform a image resource into image element by image object
 				// creates image object
-				Image img = new Image(pointStyle[i]);
 				// stores into array changing in image element
-				array[i] = ImageElement.as(img.getElement());
+				array[i] = Utilities.toImageElement(pointStyle[i]);
 			}
 			// stores it
 			setPointStyle(array);
 		} else {
-			// if here, argument is null
-			// then removes property
-			remove(Property.pointStyle);
-			// remove flag
-			removeIfExists(Property._charbaPointStyle);
+			// resets callback and
+			// also flags
+			setPointStyle((PointStyleCallback<?>) null);
 		}
 	}
 
@@ -998,16 +1311,14 @@ abstract class LiningDataset extends Dataset {
 			for (int i = 0; i < pointStyle.length; i++) {
 				// transform a image resource into image element by image object
 				// stores into array changing in image element
-				array[i] = ImageElement.as(pointStyle[i].getElement());
+				array[i] = Utilities.toImageElement(pointStyle[i]);
 			}
 			// stores it
 			setPointStyle(array);
 		} else {
-			// if here, argument is null
-			// then removes property
-			remove(Property.pointStyle);
-			// remove flag
-			removeIfExists(Property._charbaPointStyle);
+			// resets callback and
+			// also flags
+			setPointStyle((PointStyleCallback<?>) null);
 		}
 	}
 
@@ -1017,6 +1328,10 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointStyle array of the style of the point as image.
 	 */
 	public void setPointStyle(ImageElement... pointStyle) {
+		// resets callback and
+		// also flags
+		setPointStyle((PointStyleCallback<?>) null);
+		// stores values
 		setValueOrArray(Property.pointStyle, pointStyle);
 		// sets flag
 		setValue(Property._charbaPointStyle, true);
@@ -1029,7 +1344,7 @@ abstract class LiningDataset extends Dataset {
 	 */
 	public List<ImageElement> getPointStyleAsImages() {
 		// checks if image as point style has been used
-		if (getValue(Property._charbaPointStyle, false)) {
+		if (getValue(Property._charbaPointStyle, false) && pointStyleCallback == null) {
 			// gets array
 			ArrayImage array = getValueOrArray(Property.pointStyle, UndefinedValues.IMAGE_ELEMENT);
 			return ArrayListHelper.list(array);
@@ -1045,6 +1360,7 @@ abstract class LiningDataset extends Dataset {
 	 * @param pointRotation array of the rotation of the point in degrees.
 	 */
 	public void setPointRotation(double... pointRotation) {
+		// sets value
 		setValueOrArray(Property.pointRotation, pointRotation);
 	}
 
@@ -1054,8 +1370,322 @@ abstract class LiningDataset extends Dataset {
 	 * @return list of the rotation of the point in degrees.
 	 */
 	public List<Double> getPointRotation() {
-		ArrayDouble array = getValueOrArray(Property.pointRotation, getDefaultValues().getElements().getPoint().getRotation());
-		return ArrayListHelper.list(array);
+		// checks if the callback has not been set
+		if (!ObjectType.Function.equals(type(Property.pointRotation))) {
+			// returns the array
+			ArrayDouble array = getValueOrArray(Property.pointRotation, getDefaultValues().getElements().getPoint().getRotation());
+			return ArrayListHelper.list(array);
+		}
+		// if here, is a callback
+		// then returns an empty list
+		return new ArrayDoubleList();
+	}
+
+	/**
+	 * Returns the point background color callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the point background color callback, if set, otherwise <code>null</code>.
+	 */
+	public BackgroundColorCallback<?> getPointBackgroundColorCallback() {
+		return pointBackgroundColorCallback;
+	}
+
+	/**
+	 * Sets the point background color callback.
+	 * 
+	 * @param pointBackgroundColorCallback the point background color callback.
+	 */
+	public void setPointBackgroundColor(BackgroundColorCallback<?> pointBackgroundColorCallback) {
+		// sets the callback
+		this.pointBackgroundColorCallback = pointBackgroundColorCallback;
+		// checks if callback is consistent
+		if (pointBackgroundColorCallback != null) {
+			// resets previous setting
+			resetBeingCallback(Property.pointBackgroundColor);
+			// adds the callback proxy function to java script object
+			setValue(Property.pointBackgroundColor, pointBackgroundColorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.pointBackgroundColor);
+		}
+	}
+
+	/**
+	 * Returns the point border color callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the point border color callback, if set, otherwise <code>null</code>.
+	 */
+	public BorderColorCallback<?> getPointBorderColorCallback() {
+		return pointBorderColorCallback;
+	}
+
+	/**
+	 * Sets the point border color callback.
+	 * 
+	 * @param pointBorderColorCallback the point border color callback.
+	 */
+	public void setPointBorderColor(BorderColorCallback<?> pointBorderColorCallback) {
+		// sets the callback
+		this.pointBorderColorCallback = pointBorderColorCallback;
+		// checks if callback is consistent
+		if (pointBorderColorCallback != null) {
+			// resets previous setting
+			resetBeingCallback(Property.pointBorderColor);
+			// adds the callback proxy function to java script object
+			setValue(Property.pointBorderColor, pointBorderColorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.pointBorderColor);
+		}
+	}
+
+	/**
+	 * Returns the point border width callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the point border width callback, if set, otherwise <code>null</code>.
+	 */
+	public BorderWidthCallback getPointBorderWidthCallback() {
+		return pointBorderWidthCallback;
+	}
+
+	/**
+	 * Sets the point border width callback.
+	 * 
+	 * @param pointBorderWidthCallback the point border width callback to set
+	 */
+	public void setPointBorderWidth(BorderWidthCallback pointBorderWidthCallback) {
+		// sets the callback
+		this.pointBorderWidthCallback = pointBorderWidthCallback;
+		// checks if callback is consistent
+		if (pointBorderWidthCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.pointBorderWidth, pointBorderWidthCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.pointBorderWidth);
+		}
+	}
+
+	/**
+	 * Returns the point hover background color callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the point hover background color callback, if set, otherwise <code>null</code>.
+	 */
+	public BackgroundColorCallback<?> getPointHoverBackgroundColorCallback() {
+		return pointHoverBackgroundColorCallback;
+	}
+
+	/**
+	 * Sets the point hover background color callback.
+	 * 
+	 * @param pointHoverBackgroundColorCallback the point hover background color callback.
+	 */
+	public void setPointHoverBackgroundColor(BackgroundColorCallback<?> pointHoverBackgroundColorCallback) {
+		// sets the callback
+		this.pointHoverBackgroundColorCallback = pointHoverBackgroundColorCallback;
+		// checks if callback is consistent
+		if (pointHoverBackgroundColorCallback != null) {
+			// resets previous setting
+			resetBeingCallback(Property.pointHoverBackgroundColor);
+			// adds the callback proxy function to java script object
+			setValue(Property.pointHoverBackgroundColor, pointHoverBackgroundColorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.pointHoverBackgroundColor);
+		}
+	}
+
+	/**
+	 * Returns the point hover border color callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the point hover border color callback, if set, otherwise <code>null</code>.
+	 */
+	public BorderColorCallback<?> getPointHoverBorderColorCallback() {
+		return pointHoverBorderColorCallback;
+	}
+
+	/**
+	 * Sets the point hover border color callback.
+	 * 
+	 * @param pointHoverBorderColorCallback the point hover border color callback.
+	 */
+	public void setPointHoverBorderColor(BorderColorCallback<?> pointHoverBorderColorCallback) {
+		// sets the callback
+		this.pointHoverBorderColorCallback = pointHoverBorderColorCallback;
+		// checks if callback is consistent
+		if (pointHoverBorderColorCallback != null) {
+			// resets previous setting
+			resetBeingCallback(Property.pointHoverBorderColor);
+			// adds the callback proxy function to java script object
+			setValue(Property.pointHoverBorderColor, pointHoverBorderColorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.pointHoverBorderColor);
+		}
+	}
+
+	/**
+	 * Returns the point hover border width callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the point hover border width callback, if set, otherwise <code>null</code>.
+	 */
+	public BorderWidthCallback getPointHoverBorderWidthCallback() {
+		return pointHoverBorderWidthCallback;
+	}
+
+	/**
+	 * Sets the point hover border width callback.
+	 * 
+	 * @param pointHoverBorderWidthCallback the point hover border width callback to set
+	 */
+	public void setPointHoverBorderWidth(BorderWidthCallback pointHoverBorderWidthCallback) {
+		// sets the callback
+		this.pointHoverBorderWidthCallback = pointHoverBorderWidthCallback;
+		// checks if callback is consistent
+		if (pointHoverBorderWidthCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.pointHoverBorderWidth, pointHoverBorderWidthCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.pointHoverBorderWidth);
+		}
+	}
+
+	/**
+	 * Returns the point radius callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the point radius callback, if set, otherwise <code>null</code>.
+	 */
+	public RadiusCallback getPointRadiusCallback() {
+		return pointRadiusCallback;
+	}
+
+	/**
+	 * Sets the point radius callback.
+	 * 
+	 * @param pointRadiusCallback the point radius callback to set
+	 */
+	public void setPointRadius(RadiusCallback pointRadiusCallback) {
+		// sets the callback
+		this.pointRadiusCallback = pointRadiusCallback;
+		// checks if callback is consistent
+		if (pointRadiusCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.pointRadius, pointRadiusCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.pointRadius);
+		}
+	}
+
+	/**
+	 * Returns the point hit radius callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the point hit radius callback, if set, otherwise <code>null</code>.
+	 */
+	public RadiusCallback getPointHitRadiusCallback() {
+		return pointHitRadiusCallback;
+	}
+
+	/**
+	 * Sets the point hit radius callback.
+	 * 
+	 * @param pointHitRadiusCallback the point hit radius callback to set
+	 */
+	public void setPointHitRadius(RadiusCallback pointHitRadiusCallback) {
+		// sets the callback
+		this.pointHitRadiusCallback = pointHitRadiusCallback;
+		// checks if callback is consistent
+		if (pointHitRadiusCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.pointHitRadius, pointHitRadiusCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.pointHitRadius);
+		}
+	}
+
+	/**
+	 * Returns the point hover radius callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the point hover radius callback, if set, otherwise <code>null</code>.
+	 */
+	public RadiusCallback getPointHoverRadiusCallback() {
+		return pointHoverRadiusCallback;
+	}
+
+	/**
+	 * Sets the point hover radius callback.
+	 * 
+	 * @param pointHoverRadiusCallback the point hover radius callback to set
+	 */
+	public void setPointHoverRadius(RadiusCallback pointHoverRadiusCallback) {
+		// sets the callback
+		this.pointHoverRadiusCallback = pointHoverRadiusCallback;
+		// checks if callback is consistent
+		if (pointHoverRadiusCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.pointHoverRadius, pointHoverRadiusCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.pointHoverRadius);
+		}
+	}
+
+	/**
+	 * Returns the point rotation callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the point rotation callback, if set, otherwise <code>null</code>.
+	 */
+	public RotationCallback getPointRotationCallback() {
+		return pointRotationCallback;
+	}
+
+	/**
+	 * Sets the point rotation callback.
+	 * 
+	 * @param pointRotationCallback the point rotation callback to set
+	 */
+	public void setPointRotation(RotationCallback pointRotationCallback) {
+		// sets the callback
+		this.pointRotationCallback = pointRotationCallback;
+		// checks if callback is consistent
+		if (pointRotationCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.pointRotation, pointRotationCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.pointRotation);
+		}
+	}
+
+	/**
+	 * Returns the point style callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the point style callback, if set, otherwise <code>null</code>.
+	 */
+	public PointStyleCallback<?> getPointStyleCallback() {
+		return pointStyleCallback;
+	}
+
+	/**
+	 * Sets the point style callback.
+	 * 
+	 * @param pointStyleCallback the point style callback.
+	 */
+	public void setPointStyle(PointStyleCallback<?> pointStyleCallback) {
+		// sets the callback
+		this.pointStyleCallback = pointStyleCallback;
+		// checks if callback is consistent
+		if (pointStyleCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.pointStyle, pointStyleCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.pointStyle);
+		}
+		// remove if exist flag
+		removeIfExists(Property._charbaPointStyle);
 	}
 
 	/*

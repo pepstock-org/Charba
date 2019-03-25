@@ -17,8 +17,8 @@ package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
+import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
-import org.pepstock.charba.client.enums.TooltipPosition;
 
 /**
  * Interface to define tooltips object defaults.
@@ -55,7 +55,7 @@ public interface IsDefaultTooltips {
 	 * 
 	 * @return mode for positioning the tooltip.
 	 */
-	TooltipPosition getPosition();
+	IsTooltipPosition getPosition();
 
 	/**
 	 * Returns the background color of the tooltip.

@@ -28,8 +28,8 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.enums.Position;
 
 /**
  * This item provides all information about the view where a dataset has been displayed.<br>
@@ -105,10 +105,17 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	/**
 	 * Returns the edge to skip drawing the border for.
 	 * 
-	 * @return the edge to skip drawing the border for. Default is {@link org.pepstock.charba.client.enums.Position#top}.
+	 * @return the edge to skip drawing the border for. Default is
+	 *         {@link org.pepstock.charba.client.enums.BorderSkipped#noborderskipped}.
 	 */
-	public Position getBorderSkipped() {
-		return getValue(Property.borderSkipped, Position.class, Position.top);
+	public BorderSkipped getBorderSkipped() {
+		// checks if 'false' has been set
+		if (ObjectType.Boolean.equals(type(Property.borderSkipped))) {
+			// returns is false
+			return BorderSkipped.noborderskipped;
+		}
+		// otherwise returns the enum value as string
+		return getValue(Property.borderSkipped, BorderSkipped.class, BorderSkipped.noborderskipped);
 	}
 
 	/**

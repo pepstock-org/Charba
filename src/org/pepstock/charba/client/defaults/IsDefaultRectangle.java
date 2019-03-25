@@ -15,20 +15,20 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.enums.BorderSkipped;
 
 /**
  * Interface to define rectangle object defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultRectangle extends IsDefaultArc {
+public interface IsDefaultRectangle extends IsDefaultOptionsElement {
 
 	/**
 	 * Returns the edge to skip drawing the border for.
 	 * 
 	 * @return the edge to skip drawing the border for.
 	 */
-	Position getBorderSkipped();
+	BorderSkipped getBorderSkipped();
 
 }

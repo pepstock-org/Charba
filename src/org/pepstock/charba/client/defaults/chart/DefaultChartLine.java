@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.defaults.IsDefaultLine;
 import org.pepstock.charba.client.enums.CapStyle;
+import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.options.Line;
@@ -117,6 +118,16 @@ public final class DefaultChartLine implements IsDefaultLine {
 	@Override
 	public boolean isCapBezierPoints() {
 		return line.isCapBezierPoints();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#getCubicInterpolationMode()
+	 */
+	@Override
+	public CubicInterpolationMode getCubicInterpolationMode() {
+		return line.getCubicInterpolationMode();
 	}
 
 	/*

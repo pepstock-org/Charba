@@ -13,21 +13,21 @@ sudo: false
 # cache the Ivy cache directory to avoid download dependencies on each build
 cache:
    directories:
-   - ~/.ant
+   - $HOME/.ivy2
+   - $HOME/.ant
 # specify the JDKs 
 jdk:
    - oraclejdk8
+   - openjdk8
 # specify the brances to build from
 branches:
    only:
-     - master
+     - master 
 #
 # BUILD phase
 #
 # download Ivy, if needed
-before_install: ant ivyInit
-# list the content of Ivy cache dir BEFORE 
-before_script: sh ./scripts/before_script.sh
+before_install: ant buildInit
 # run the ant main target
 script: ant build-bin
 # list the content of Ivy cache dir AFTER

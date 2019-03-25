@@ -15,12 +15,14 @@
 */
 package org.pepstock.charba.client.plugins;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
@@ -33,14 +35,6 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 
 	// static counter. Starts from min value of integer
 	private static final AtomicInteger COUNTER = new AtomicInteger(Integer.MIN_VALUE);
-	// list of chart ids or global where this options has been set
-	// this is mandatory in order to clean up the cache of plugin options
-	// when they are not longer needed
-	private final List<String> references = new ArrayList<>();
-	// options factory instance
-	private final AbstractPluginOptionsFactory<?> factory;
-	// flag to know if it must be registered
-	private boolean isRegistered = false;
 	// plugin id
 	private final String pluginId;
 
@@ -54,31 +48,21 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates new plugin options with its factory, plugin ID and a flag to know if it must register the options to the cache or
-	 * if it will be postponed.<br>
-	 * The deferred registration is needed to implement options builder in order do not register options not used.
+	 * Creates new plugin options with plugin ID.<br>
 	 * 
 	 * @param pluginId plugin ID
-	 * @param factory plugin options factory
-	 * @param deferredRegistration if <code>true</code> the options is not registered
 	 */
-	protected AbstractPluginOptions(String pluginId, AbstractPluginOptionsFactory<?> factory, boolean deferredRegistration) {
+	protected AbstractPluginOptions(String pluginId) {
 		// creates an empty native object
-		super();
-		// stores factory and pluginId
-		this.factory = factory;
-		this.pluginId = pluginId;
+		this(pluginId, null);
 		// sets unique id
 		// needed for caching the instances
 		setValue(Property._charbaOptionsId, COUNTER.incrementAndGet());
-		// checks if it must deferred the registration to
-		// the factory
-		if (!deferredRegistration) {
-			// registers into cache
-			factory.registerOptions(this);
-			// sets falg
-			isRegistered = true;
-		}
+	}
+
+	protected AbstractPluginOptions(String pluginId, NativeObject nativeObject) {
+		super(nativeObject);
+		this.pluginId = pluginId;
 	}
 
 	/**
@@ -100,25 +84,40 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the list of references of this options.<br>
-	 * Called by factory in order to manage correctly the cache and removes this option when it doesn't have any reference.
+	 * Loads the default plugin options from defaults.
 	 * 
-	 * @return the list of references of this options
+	 * @param factory factory to load options
+	 * @return the defaults plugin options or new options instance if not exist
+	 * @param <T> type of native object container
 	 */
-	protected List<String> getReferences() {
-		return references;
+	protected final <T extends NativeObjectContainer> T loadGlobalsPluginOptions(NativeObjectContainerFactory<T> factory) {
+		// checks if the default global options has been added for the plugin
+		if (Defaults.get().getGlobal().getPlugins().hasOptions(pluginId)) {
+			// reads the default default global options
+			return Defaults.get().getGlobal().getPlugins().getOptions(pluginId, factory);
+		} else {
+			// if here, no default global option
+			// then the plugin will use the static defaults
+			return factory.create();
+		}
 	}
 
 	/**
-	 * Registers the options to the factory to manage the cache of options.
+	 * Stores this options into default global plugins options.
 	 */
-	protected void register() {
-		// checks if registered
-		// if yes, do nothing
-		if (!isRegistered) {
-			// registers into cache
-			factory.registerOptions(this);
-		}
+	public void store() {
+		// stores itself into defaults
+		Defaults.get().getGlobal().getPlugins().setOptions(pluginId, this);
+	}
+
+	/**
+	 * Stores this options into chart plugins options.
+	 * 
+	 * @param chart chart instance
+	 */
+	public final void store(AbstractChart<?, ?> chart) {
+		// stores itself into defaults
+		chart.getOptions().getPlugins().setOptions(pluginId, this);
 	}
 
 }

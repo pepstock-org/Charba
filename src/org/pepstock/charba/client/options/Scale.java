@@ -17,7 +17,9 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
+import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
@@ -42,6 +44,16 @@ import org.pepstock.charba.client.items.UndefinedValues;
  *
  */
 public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsDefaultScale {
+
+	/**
+	 * If set to 'flex', the base sample widths are calculated automatically based on the previous and following samples so that
+	 * they take the full available widths without overlap. Then, bars are sized using barPercentage and categoryPercentage.
+	 * There is no gap when the percentage options are 1. This mode generates bars with different widths when data are not
+	 * evenly spaced.
+	 */
+	public static final int FLEX_BAR_THICKNESS = Integer.MIN_VALUE;
+	// this is the value which must be stored in JS object when flex bar thickness is set
+	private static final String FLEX_BAR_THICKNESS_VALUE = "flex";
 
 	// adds sub elements
 	private final GridLines gridLines;
@@ -77,6 +89,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 		categoryPercentage,
 		barThickness,
 		maxBarThickness,
+		minBarLength,
 		stacked,
 		distribution,
 		bounds
@@ -245,7 +258,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @param weight weight of axis
 	 */
-	public final void setWeight(int weight) {
+	public final void setWeight(double weight) {
 		setValue(Property.weight, weight);
 		// checks if all parents are attached
 		checkAndAddToParent();
@@ -256,7 +269,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * 
 	 * @return weight of axis.
 	 */
-	public final int getWeight() {
+	public final double getWeight() {
 		return getValue(Property.weight, getDefaultValues().getWeight());
 	}
 
@@ -272,12 +285,41 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	}
 
 	/**
-	 * If <code>true</code>, shows the axis.
+	 * The display option controls the visibility of axis.<br>
+	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible
+	 * only if at least one associated dataset is visible.
 	 * 
-	 * @return if <code>true</code>, shows the axis.
+	 * @param display display option controls the visibility of axis
 	 */
-	public final boolean isDisplay() {
-		return getValue(Property.display, getDefaultValues().isDisplay());
+	public final void setDisplay(Display display) {
+		// checks if is setting auto
+		if (Display.auto.equals(display)) {
+			setValue(Property.display, display);
+			// checks if all parents are attached
+			checkAndAddToParent();
+		} else {
+			// otherwise transforms into a boolean
+			setDisplay(Display.yes.equals(display) ? true : false);
+		}
+	}
+
+	/**
+	 * The display option controls the visibility of axis.<br>
+	 * Controls the axis global visibility (visible when true, hidden when false). When display: 'auto', the axis is visible
+	 * only if at least one associated dataset is visible.
+	 * 
+	 * @return display option controls the visibility of axis
+	 */
+	public final Display getDisplay() {
+		// checks if is boolean
+		if (ObjectType.Boolean.equals(type(Property.display))) {
+			// gets value
+			boolean value = getValue(Property.display, true);
+			// returns value
+			return value ? Display.yes : Display.no;
+		}
+		// returns value. Must be auto
+		return getValue(Property.display, Display.class, getDefaultValues().getDisplay());
 	}
 
 	/**
@@ -365,27 +407,40 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	}
 
 	/**
-	 * Sets the width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take
-	 * the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
+	 * Sets the width of each bar in pixels. If set to 'flex', it computes "optimal" sample widths that globally arrange bars
+	 * side by side. If not set, the base sample widths are calculated automatically so that they take the full available widths
+	 * without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
 	 * 
 	 * @param barThickness width of each bar in pixels. If not set, the base sample widths are calculated automatically so that
 	 *            they take the full available widths without overlap. Then, the bars are sized using barPercentage and
 	 *            categoryPercentage.
 	 */
 	public final void setBarThickness(int barThickness) {
-		setValue(Property.barThickness, barThickness);
+		// checks if FLEX value has been set
+		if (FLEX_BAR_THICKNESS == barThickness) {
+			// flex must be set
+			setValue(Property.barThickness, FLEX_BAR_THICKNESS_VALUE);
+		} else {
+			setValue(Property.barThickness, barThickness);
+		}
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
 
 	/**
-	 * Returns the width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they
-	 * take the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
+	 * Returns the width of each bar in pixels. If set to 'flex', it computes "optimal" sample widths that globally arrange bars
+	 * side by side. If not set, the base sample widths are calculated automatically so that they take the full available widths
+	 * without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
 	 * 
 	 * @return width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take
 	 *         the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
 	 */
 	public final int getBarThickness() {
+		// checks if flex has been set
+		if (ObjectType.String.equals(type(Property.barThickness))) {
+			return FLEX_BAR_THICKNESS;
+		}
+		// if here, is not flex
 		return getValue(Property.barThickness, getDefaultValues().getBarThickness());
 	}
 
@@ -407,6 +462,26 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 */
 	public final int getMaxBarThickness() {
 		return getValue(Property.maxBarThickness, getDefaultValues().getMaxBarThickness());
+	}
+
+	/**
+	 * Set this to ensure that bars have a minimum length in pixels.
+	 * 
+	 * @param minBarLength a minimum length in pixels.
+	 */
+	public final void setMinBarLength(int minBarLength) {
+		setValue(Property.minBarLength, minBarLength);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns a minimum length in pixels.
+	 * 
+	 * @return a minimum length in pixels.
+	 */
+	public final int getMinBarLength() {
+		return getValue(Property.minBarLength, getDefaultValues().getMinBarLength());
 	}
 
 	/**

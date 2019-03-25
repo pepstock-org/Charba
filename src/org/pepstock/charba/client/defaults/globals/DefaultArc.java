@@ -16,48 +16,35 @@
 package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultArc;
+import org.pepstock.charba.client.enums.BorderAlign;
 
 /**
  * CHART.JS default values for ARC element.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DefaultArc implements IsDefaultArc {
+public final class DefaultArc extends AbstractDefaultOptionsElement implements IsDefaultArc {
 
-	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
-
-	private static final int DEFAULT_BORDER_WIDTH = 2;
-
-	private static final String DEFAULT_BORDER_COLOR = "#fff";
+	private static final double DEFAULT_WEIGHT = 1D;
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.elements.arc.IsReadableArc#getBackgroundColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getBorderAlign()
 	 */
 	@Override
-	public String getBackgroundColorAsString() {
-		return DEFAULT_BACKGROUND_COLOR;
+	public BorderAlign getBorderAlign() {
+		return BorderAlign.center;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.elements.arc.IsReadableArc#getBorderWidth()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getWeight()
 	 */
 	@Override
-	public int getBorderWidth() {
-		return DEFAULT_BORDER_WIDTH;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.elements.arc.IsReadableArc#getBorderColorAsString()
-	 */
-	@Override
-	public String getBorderColorAsString() {
-		return DEFAULT_BORDER_COLOR;
+	public double getWeight() {
+		return DEFAULT_WEIGHT;
 	}
 
 }

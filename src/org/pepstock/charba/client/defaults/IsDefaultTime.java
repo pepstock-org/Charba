@@ -74,7 +74,7 @@ public interface IsDefaultTime {
 	 * 
 	 * @return The number of units between grid lines.
 	 */
-	int getStepSize();
+	double getStepSize();
 
 	/**
 	 * The minimum display format to be used for a time unit.

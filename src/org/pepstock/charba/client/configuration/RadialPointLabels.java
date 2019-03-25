@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import java.util.List;
+
 import org.pepstock.charba.client.callbacks.RadialPointLabelCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -171,7 +173,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @param fontColor font color for tick labels.
 	 */
-	public void setFontColor(IsColor fontColor) {
+	public void setFontColor(IsColor... fontColor) {
 		getAxis().getScale().getPointLabels().setFontColor(fontColor);
 	}
 
@@ -180,7 +182,7 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @param fontColor font color for tick labels.
 	 */
-	public void setFontColor(String fontColor) {
+	public void setFontColor(String... fontColor) {
 		getAxis().getScale().getPointLabels().setFontColor(fontColor);
 	}
 
@@ -189,8 +191,8 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @return font color for tick labels.
 	 */
-	public String getFontColorAsString() {
-		return getAxis().getScale().getPointLabels().getFontColorAsString();
+	public List<String> getFontColorAsString() {
+		return getAxis().getScale().getPointLabels().getFontColorsAsString();
 	}
 
 	/**
@@ -198,8 +200,8 @@ public class RadialPointLabels extends AxisContainer {
 	 * 
 	 * @return font color for tick labels.
 	 */
-	public IsColor getFontColor() {
-		return getAxis().getScale().getPointLabels().getFontColor();
+	public List<IsColor> getFontColor() {
+		return getAxis().getScale().getPointLabels().getFontColors();
 	}
 
 	/**
@@ -218,6 +220,42 @@ public class RadialPointLabels extends AxisContainer {
 	 */
 	public String getFontFamily() {
 		return getAxis().getScale().getPointLabels().getFontFamily();
+	}
+
+	/**
+	 * Sets the height of an individual line of text.
+	 * 
+	 * @param lineHeight height of an individual line of text.
+	 */
+	public void setLineHeight(double lineHeight) {
+		getAxis().getScale().getPointLabels().setLineHeight(lineHeight);
+	}
+
+	/**
+	 * Sets the height of an individual line of text.
+	 * 
+	 * @param lineHeight height of an individual line of text.
+	 */
+	public void setLineHeight(String lineHeight) {
+		getAxis().getScale().getPointLabels().setLineHeight(lineHeight);
+	}
+
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text.
+	 */
+	public double getLineHeight() {
+		return getAxis().getScale().getPointLabels().getLineHeight();
+	}
+
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text.
+	 */
+	public String getLineHeightAsString() {
+		return getAxis().getScale().getPointLabels().getLineHeightAsString();
 	}
 
 	/**

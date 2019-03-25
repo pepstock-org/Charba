@@ -29,7 +29,7 @@ public class DefaultTime implements IsDefaultTime {
 
 	private static final boolean DEFAULT_ISO_WEEKDAY = true;
 
-	private static final int DEFAULT_STEP_SIZE = 1;
+	private static final double DEFAULT_STEP_SIZE = 1D;
 
 	/*
 	 * (non-Javadoc)
@@ -97,7 +97,7 @@ public class DefaultTime implements IsDefaultTime {
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getStepSize()
 	 */
 	@Override
-	public int getStepSize() {
+	public double getStepSize() {
 		return DEFAULT_STEP_SIZE;
 	}
 

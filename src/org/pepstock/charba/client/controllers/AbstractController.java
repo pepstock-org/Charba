@@ -34,7 +34,7 @@ public abstract class AbstractController implements Controller {
 	 * org.pepstock.charba.client.AbstractChart, int)
 	 */
 	@Override
-	public void initialize(Context context, AbstractChart<?, ?> chart, int datasetIndex) {
+	public void initialize(ControllerContext context, AbstractChart<?, ?> chart, int datasetIndex) {
 		// if chart type is consistent
 		if (getType().isExtended()) {
 			// invokes default
@@ -49,7 +49,7 @@ public abstract class AbstractController implements Controller {
 	 * org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
-	public void addElements(Context context, AbstractChart<?, ?> chart) {
+	public void addElements(ControllerContext context, AbstractChart<?, ?> chart) {
 		// if chart type is consistent
 		if (getType().isExtended()) {
 			// invokes default
@@ -64,7 +64,7 @@ public abstract class AbstractController implements Controller {
 	 * org.pepstock.charba.client.AbstractChart, int)
 	 */
 	@Override
-	public void addElementAndReset(Context context, AbstractChart<?, ?> chart, int index) {
+	public void addElementAndReset(ControllerContext context, AbstractChart<?, ?> chart, int index) {
 		// if chart type is consistent
 		if (getType().isExtended()) {
 			// invokes default
@@ -79,7 +79,7 @@ public abstract class AbstractController implements Controller {
 	 * org.pepstock.charba.client.AbstractChart, double)
 	 */
 	@Override
-	public void draw(Context context, AbstractChart<?, ?> chart, double ease) {
+	public void draw(ControllerContext context, AbstractChart<?, ?> chart, double ease) {
 		// if chart type is consistent
 		if (getType().isExtended()) {
 			// invokes default
@@ -94,7 +94,7 @@ public abstract class AbstractController implements Controller {
 	 * org.pepstock.charba.client.AbstractChart, org.pepstock.charba.client.controllers.StyleElement)
 	 */
 	@Override
-	public void removeHoverStyle(Context context, AbstractChart<?, ?> chart, StyleElement element) {
+	public void removeHoverStyle(ControllerContext context, AbstractChart<?, ?> chart, StyleElement element) {
 		// if chart type is consistent
 		if (getType().isExtended()) {
 			// invokes default
@@ -109,7 +109,7 @@ public abstract class AbstractController implements Controller {
 	 * org.pepstock.charba.client.AbstractChart, org.pepstock.charba.client.controllers.StyleElement)
 	 */
 	@Override
-	public void setHoverStyle(Context context, AbstractChart<?, ?> chart, StyleElement element) {
+	public void setHoverStyle(ControllerContext context, AbstractChart<?, ?> chart, StyleElement element) {
 		// if chart type is consistent
 		if (getType().isExtended()) {
 			// invokes default
@@ -124,7 +124,7 @@ public abstract class AbstractController implements Controller {
 	 * org.pepstock.charba.client.AbstractChart, boolean)
 	 */
 	@Override
-	public void update(Context context, AbstractChart<?, ?> chart, boolean reset) {
+	public void update(ControllerContext context, AbstractChart<?, ?> chart, boolean reset) {
 		// if chart type is consistent
 		if (getType().isExtended()) {
 			// invokes default

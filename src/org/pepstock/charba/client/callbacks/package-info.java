@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * All callbacks interfaces to be implemented.
+ * All callbacks interfaces to be implemented, also to use the scriptable options of CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  *

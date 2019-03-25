@@ -17,6 +17,7 @@ package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.datalabels.callbacks.FontCallback;
 import org.pepstock.charba.client.datalabels.enums.Weight;
 import org.pepstock.charba.client.enums.FontStyle;
@@ -155,12 +156,48 @@ public final class Font extends AbstractElement {
 	}
 
 	/**
-	 * Returns the line height.
+	 * Sets the line height.
 	 * 
-	 * @return the line height.
+	 * @param lineHeight the line height.
+	 */
+	public void setLineHeight(String lineHeight) {
+		setValue(Property.lineHeight, lineHeight);
+	}
+
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text.
 	 */
 	public double getLineHeight() {
-		return getValue(Property.lineHeight, defaultsOptions.getLineHeight());
+		// creates default
+		double defaultValue = defaultsOptions.getLineHeight();
+		// checks type if number
+		if (ObjectType.Number.equals(type(Property.lineHeight))) {
+			// reads and returns as double
+			return getValue(Property.lineHeight, defaultValue);
+		}
+		// if here, is not a number
+		// then returns the default
+		return defaultValue;
+	}
+
+	/**
+	 * Returns the height of an individual line of text.
+	 * 
+	 * @return the height of an individual line of text.
+	 */
+	public String getLineHeightAsString() {
+		// creates default
+		String defaultValue = String.valueOf(defaultsOptions.getLineHeight());
+		// checks type if string
+		if (ObjectType.String.equals(type(Property.lineHeight))) {
+			// reads and returns as string
+			return getValue(Property.lineHeight, defaultValue);
+		}
+		// if here, is not a number
+		// then returns the default
+		return defaultValue;
 	}
 
 }

@@ -12,4 +12,10 @@
 	<include url="${ivy.default.settings.dir}/ivysettings-default-chain.xml"/>
 	<include file="ivysettings-publish.xml"/>
 	
+	<!-- Use both Ivy and Ant caches -->
+	<caches>
+		<cache basedir="${user.home}/.ivy2" />
+		<cache basedir="${user.home}/.ant" />
+	</caches>
+	
 </ivysettings>

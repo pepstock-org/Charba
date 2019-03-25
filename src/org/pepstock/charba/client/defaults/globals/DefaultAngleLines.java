@@ -28,6 +28,8 @@ public final class DefaultAngleLines implements IsDefaultAngleLines {
 
 	private static final int DEFAULT_LINE_WIDTH = 1;
 
+	private static final int DEFAULT_BORDER_DASH_OFFSET = 0;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -56,6 +58,16 @@ public final class DefaultAngleLines implements IsDefaultAngleLines {
 	@Override
 	public int getLineWidth() {
 		return DEFAULT_LINE_WIDTH;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultAngleLines#getBorderDashOffset()
+	 */
+	@Override
+	public int getBorderDashOffset() {
+		return DEFAULT_BORDER_DASH_OFFSET;
 	}
 
 }
