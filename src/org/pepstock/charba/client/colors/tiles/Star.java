@@ -83,9 +83,9 @@ class Star extends ShapeDrawer {
 		// calculates quarter dimension
 		double rot = Math.PI / 2 * 3;
 		// calculates the center X of arc
-		double x = offsetX;
+		double x = 0D;
 		// calculates the center Y of arc
-		double y = offsetY;
+		double y = 0D;
 		// calculates of step
 		final double step = Math.PI / spikes;
 		// draws shape
