@@ -14,18 +14,19 @@ sudo: false
 cache:
    directories:
    - $HOME/.ivy2
+   - $HOME/.ant
 # specify the JDKs 
 jdk:
    - oraclejdk8
 # specify the brances to build from
 branches:
    only:
-     - stock
+     - build
 #
 # BUILD phase
 #
 # download Ivy, if needed
-before_install: ant ivyInit
+before_install: ant buildInit
 # run the ant main target
 script: ant build-bin
 #
