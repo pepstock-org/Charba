@@ -72,18 +72,18 @@
     -->
 	<target name="ivyRetrieve" depends="ivyRetrieve-compile, ivyRetrieve-runtime" />
 	
-	<target name="ivyRetrieve-runtime">
+	<target name="ivyRetrieve-runtime" depends="taskdefIvy">
 		<ivy:retrieve sync="true" pattern="${lib.dir}/[artifact]-[revision](-[classifier]).[ext]" pathid="ivyPath-runtime" conf="runtime" />
 	</target>
 
-	<target name="ivyRetrieve-compile">
+	<target name="ivyRetrieve-compile" depends="taskdefIvy">
 		<ivy:retrieve sync="true" pattern="${ant.jar.dir}/[artifact]-[revision](-[classifier]).[ext]" pathid="ivyPath-compile" conf="compile"/>
 	</target>
 
 	<!--
         IVY - Makes POM file 
     -->
-	<target name="makePom">
+	<target name="makePom" depends="taskdefIvy">
 		<property name="ivy.pom.name" value="Charba"/>
 		<property name="ivy.pom.description" value="Charba, GWT Chart library based on CHART.JS"/>
 		<property name="ivy.pom.url" value="www.pepstock.org"/>
@@ -97,7 +97,7 @@
 	<!--
         IVY - Publishes snapshots into MVN 
     -->
-	<target name="ivyPublish-snapshot">
+	<target name="ivyPublish-snapshot" depends="taskdefIvy">
 		<ivy:resolve />
 		<ivy:publish resolver="nexus-snapshots" pubrevision="${ivy.pubrevision}-SNAPSHOT" forcedeliver="true" overwrite="true" publishivy="false">
 			<artifacts pattern="${artifact.pattern}" />
@@ -107,7 +107,7 @@
 	<!--
         IVY - Publishes official release into MVN 
     -->
-	<target name="ivyPublish-release">
+	<target name="ivyPublish-release" depends="taskdefIvy">
 		<ivy:resolve />
 		<ivy:publish resolver="nexus-releases" pubrevision="${ivy.pubrevision}" forcedeliver="true" overwrite="true" publishivy="false">
 			<artifacts pattern="${artifact.pattern}" />
@@ -282,11 +282,24 @@
     	<taskdef name="closure-compiler" classname="com.google.javascript.jscomp.ant.CompileTask" classpathref="ivyPath-compile" />
 	</target>
 
-	<target name="setupIvy">
+	<target name="setupIvy" depends="downloadIvy, taskdefIvy" />
+	
+	<target name="downloadIvy">
 		<!-- Download the Ivy jar and then invoke it to download the others task libs -->
 		<mkdir dir="${ant.jar.dir}"/>
 		<get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${depver.ivy}/ivy-${depver.ivy}.jar"
 	        dest="${ant.jar.dir}" usetimestamp="true"/>
+		<!-- Define the ivyPath with all jars located in ${ant.jar.dir} --> 
+		<path id="ivyPath">
+			<fileset dir="${ant.jar.dir}">
+				<include name="**/ivy-*.jar"/>
+			</fileset>
+		</path>
+		<!-- Define the Ivy tasks -->
+		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivyPath" />
+	</target>
+	
+	<target name="taskdefIvy">
 		<!-- Define the ivyPath with all jars located in ${ant.jar.dir} --> 
 		<path id="ivyPath">
 			<fileset dir="${ant.jar.dir}">
