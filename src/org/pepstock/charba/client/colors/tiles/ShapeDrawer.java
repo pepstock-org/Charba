@@ -17,6 +17,8 @@ package org.pepstock.charba.client.colors.tiles;
 
 import com.google.gwt.canvas.dom.client.CanvasPattern;
 import com.google.gwt.canvas.dom.client.Context2d;
+import com.google.gwt.canvas.dom.client.Context2d.LineCap;
+import com.google.gwt.canvas.dom.client.Context2d.LineJoin;
 import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.Document;
 
@@ -49,7 +51,7 @@ abstract class ShapeDrawer {
 	// rotation of 180 degrees to apply on rotation
 	static final double ROTATION_180_DEGREES = 180 * Math.PI / 180;
 	// canvas element to draw
-	private final CanvasElement canvas = Document.get().createCanvasElement();
+	private CanvasElement canvas = null;
 
 	/**
 	 * Creates a tile based on arguments passed. This is the entry point of every drawer.
@@ -64,6 +66,12 @@ abstract class ShapeDrawer {
 		// changes dimensions of outer canvas
 		outerCanvas.setWidth(size);
 		outerCanvas.setHeight(size);
+		// checks if canvas already created
+		// this is to avoid to create canvas objects is not required
+		if (canvas == null) {
+			// creates the canvas
+			canvas = Document.get().createCanvasElement();
+		}
 		// sets dimensions of canvas, always a square
 		canvas.setWidth(size);
 		canvas.setHeight(size);
@@ -102,15 +110,27 @@ abstract class ShapeDrawer {
 	 * @param size the size of tile, which is a square
 	 */
 	protected final void applyStrokeProperties(Context2d context, String shapeColor, int size) {
+		applyStrokeProperties(context, shapeColor, size, TilesBuilder.get().getDefaults().getLineCap(), TilesBuilder.get().getDefaults().getLineJoin());
+	}
+
+	/**
+	 * Applies the common configuration to context for stroke designing.
+	 * 
+	 * @param context context of canvas to design the shape
+	 * @param shapeColor color of shape
+	 * @param size the size of tile, which is a square
+	 * @param lineCap determines the shape used to draw the end points of lines
+	 * @param lineJoin determines the shape used to join two line segments where they meet
+	 */
+	protected final void applyStrokeProperties(Context2d context, String shapeColor, int size, LineCap lineCap, LineJoin lineJoin) {
 		// applies the stroke color
 		context.setStrokeStyle(shapeColor);
 		// line width is by default tenth size
 		context.setLineWidth(size / 10D);
 		// sets line cap and join
-		context.setLineJoin(TilesBuilder.get().getDefaults().getLineJoin());
-		context.setLineCap(TilesBuilder.get().getDefaults().getLineCap());
+		context.setLineJoin(lineJoin);
+		context.setLineCap(lineCap);
 	}
-
 	/**
 	 * Applies the common configuration to context for fill designing.
 	 * 

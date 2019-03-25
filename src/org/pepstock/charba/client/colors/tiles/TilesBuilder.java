@@ -98,7 +98,7 @@ public final class TilesBuilder {
 	 * @param shape shape to apply to canvas pattern
 	 * @return a tile as canvas pattern
 	 */
-	public CanvasPattern createTile(Shape shape) {
+	public CanvasPattern createTile(IsShape shape) {
 		return createTile(shape, defaults.getBackgroundColorAsString());
 	}
 
@@ -109,7 +109,7 @@ public final class TilesBuilder {
 	 * @param backgroundColor background color of canvas pattern
 	 * @return a tile as canvas pattern
 	 */
-	public CanvasPattern createTile(Shape shape, IsColor backgroundColor) {
+	public CanvasPattern createTile(IsShape shape, IsColor backgroundColor) {
 		return createTile(shape, backgroundColor, defaults.getShapeColor());
 	}
 
@@ -120,7 +120,7 @@ public final class TilesBuilder {
 	 * @param backgroundColor background color of canvas pattern
 	 * @return a tile as canvas pattern
 	 */
-	public CanvasPattern createTile(Shape shape, String backgroundColor) {
+	public CanvasPattern createTile(IsShape shape, String backgroundColor) {
 		return createTile(shape, backgroundColor, defaults.getShapeColorAsString());
 	}
 
@@ -132,7 +132,7 @@ public final class TilesBuilder {
 	 * @param shapeColor shape color
 	 * @return a tile as canvas pattern
 	 */
-	public CanvasPattern createTile(Shape shape, String backgroundColor, String shapeColor) {
+	public CanvasPattern createTile(IsShape shape, String backgroundColor, String shapeColor) {
 		return createTile(shape, backgroundColor, shapeColor, defaults.getSize());
 	}
 
@@ -144,7 +144,7 @@ public final class TilesBuilder {
 	 * @param shapeColor shape color
 	 * @return a tile as canvas pattern
 	 */
-	public CanvasPattern createTile(Shape shape, IsColor backgroundColor, IsColor shapeColor) {
+	public CanvasPattern createTile(IsShape shape, IsColor backgroundColor, IsColor shapeColor) {
 		return createTile(shape, backgroundColor, shapeColor, defaults.getSize());
 	}
 
@@ -157,7 +157,7 @@ public final class TilesBuilder {
 	 * @param size size of canvas pattern
 	 * @return a tile as canvas pattern
 	 */
-	public CanvasPattern createTile(Shape shape, IsColor backgroundColor, IsColor shapeColor, int size) {
+	public CanvasPattern createTile(IsShape shape, IsColor backgroundColor, IsColor shapeColor, int size) {
 		return createTile(shape, backgroundColor != null ? backgroundColor.toRGBA() : defaults.getBackgroundColorAsString(), shapeColor != null ? shapeColor.toRGBA() : defaults.getShapeColorAsString(), size);
 	}
 
@@ -170,12 +170,12 @@ public final class TilesBuilder {
 	 * @param size size of canvas pattern
 	 * @return a tile as canvas pattern
 	 */
-	public CanvasPattern createTile(Shape shape, String backgroundColor, String shapeColor, int size) {
+	public CanvasPattern createTile(IsShape shape, String backgroundColor, String shapeColor, int size) {
 		// checks consistency of all parameters
 		// if not consistent, it applies the default value
-		Shape shapeParam = shape != null ? shape : defaults.getShape();
-		String backgroundColorParam = backgroundColor != null ? backgroundColor : TilesBuilderDefaults.DEFAULT_BACKGROUND_COLOR;
-		String shapeColorParam = shapeColor != null ? shapeColor : TilesBuilderDefaults.DEFAULT_SHAPE_COLOR;
+		IsShape shapeParam = shape != null ? shape : defaults.getShape();
+		String backgroundColorParam = backgroundColor != null ? backgroundColor : TilesBuilderDefaults.DEFAULT_BACKGROUND_COLOR_AS_STRING;
+		String shapeColorParam = shapeColor != null ? shapeColor : TilesBuilderDefaults.DEFAULT_SHAPE_COLOR_AS_STRING;
 		// checks the minimum size of canvas pattern
 		int sizeParam = Math.max(size, TilesBuilderDefaults.DEFAULT_SIZE);
 		// creates a unique key based on arguments
@@ -212,7 +212,7 @@ public final class TilesBuilder {
 	 * @param shape shape to apply to canvas pattern
 	 * @return a CHARBA pattern
 	 */
-	public Pattern createPattern(Shape shape) {
+	public Pattern createPattern(IsShape shape) {
 		return new Pattern(createTile(shape));
 	}
 
@@ -224,7 +224,7 @@ public final class TilesBuilder {
 	 * @param backgroundColor background color of canvas pattern
 	 * @return a CHARBA pattern
 	 */
-	public Pattern createPattern(Shape shape, IsColor backgroundColor) {
+	public Pattern createPattern(IsShape shape, IsColor backgroundColor) {
 		return new Pattern(createTile(shape, backgroundColor));
 	}
 
@@ -236,7 +236,7 @@ public final class TilesBuilder {
 	 * @param backgroundColor background color of canvas pattern
 	 * @return a CHARBA pattern
 	 */
-	public Pattern createPattern(Shape shape, String backgroundColor) {
+	public Pattern createPattern(IsShape shape, String backgroundColor) {
 		return new Pattern(createTile(shape, backgroundColor));
 	}
 
@@ -248,7 +248,7 @@ public final class TilesBuilder {
 	 * @param shapeColor shape color
 	 * @return a CHARBA pattern
 	 */
-	public Pattern createPattern(Shape shape, String backgroundColor, String shapeColor) {
+	public Pattern createPattern(IsShape shape, String backgroundColor, String shapeColor) {
 		return new Pattern(createTile(shape, backgroundColor, shapeColor));
 	}
 
@@ -260,7 +260,7 @@ public final class TilesBuilder {
 	 * @param shapeColor shape color
 	 * @return a CHARBA pattern
 	 */
-	public Pattern createPattern(Shape shape, IsColor backgroundColor, IsColor shapeColor) {
+	public Pattern createPattern(IsShape shape, IsColor backgroundColor, IsColor shapeColor) {
 		return new Pattern(createTile(shape, backgroundColor, shapeColor));
 	}
 
@@ -273,7 +273,7 @@ public final class TilesBuilder {
 	 * @param size size of canvas pattern
 	 * @return a CHARBA pattern
 	 */
-	public Pattern createPattern(Shape shape, String backgroundColor, String shapeColor, int size) {
+	public Pattern createPattern(IsShape shape, String backgroundColor, String shapeColor, int size) {
 		return new Pattern(createTile(shape, backgroundColor, shapeColor, size));
 	}
 
@@ -286,7 +286,7 @@ public final class TilesBuilder {
 	 * @param size size of canvas pattern
 	 * @return a CHARBA pattern
 	 */
-	public Pattern createPattern(Shape shape, IsColor backgroundColor, IsColor shapeColor, int size) {
+	public Pattern createPattern(IsShape shape, IsColor backgroundColor, IsColor shapeColor, int size) {
 		return new Pattern(createTile(shape, backgroundColor, shapeColor, size));
 	}
 

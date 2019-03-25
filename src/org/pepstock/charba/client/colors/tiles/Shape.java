@@ -20,7 +20,7 @@ package org.pepstock.charba.client.colors.tiles;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum Shape
+public enum Shape implements IsShape
 {
 	/**
 	 * Draws a box on the tile.
@@ -43,10 +43,6 @@ public enum Shape
 	 */
 	diagonal(new Diagonal()),
 	/**
-	 * Draws a diagonal (from right to left) on the tile.
-	 */
-	diagonalRightLeft(new DiagonalRightLeft()),
-	/**
 	 * Draws a diamond on the tile.
 	 */
 	diamond(new Diamond()),
@@ -67,6 +63,14 @@ public enum Shape
 	 */
 	dotDash(new DotDash()),
 	/**
+	 * Draws a diagonal (from right to left) on the tile.
+	 */
+	invertedDiagonal(new InvertedDiagonal()),
+	/**
+	 * Draws a triangle (with spike down) on the tile.
+	 */
+	invertedTriangle(new InvertedTriangle()),
+	/**
 	 * Draws a line on the tile.
 	 */
 	line(new Line()),
@@ -82,6 +86,10 @@ public enum Shape
 	 * Draws an empty tile.
 	 */
 	solid(new Solid()),
+	/**
+	 * Draws a star.
+	 */
+	star(new Star()),
 	/**
 	 * Draws a square on the tile.
 	 */
@@ -102,10 +110,6 @@ public enum Shape
 	 * Draws a line vertically on the tile.
 	 */
 	verticalLine(new VerticalLine()),
-	/**
-	 * Draws a triangle vertically on the tile.
-	 */
-	verticalTriangle(new VerticalTriangle()),
 	/**
 	 * Draws a zig zag vertically on the tile.
 	 */
@@ -128,7 +132,7 @@ public enum Shape
 	 * 
 	 * @return the instance of shape drawer.
 	 */
-	final ShapeDrawer getDrawer() {
+	public final ShapeDrawer getDrawer() {
 		return drawer;
 	}
 }

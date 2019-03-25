@@ -18,8 +18,8 @@ package org.pepstock.charba.client.colors.tiles;
 import com.google.gwt.canvas.dom.client.Context2d;
 
 /**
- * DIAGONAL drawer to design a diagonal into tile, from right to left.<br>
- * It designs a diagonal into the following tile sections (A and B):<br>
+ * TRAINGLE (vertically) drawer to design a triangle (vertically) into tile.<br>
+ * It designs a triangle (vertically) into the following tile sections (A and B):<br>
  * <br>
  * 
  * <pre>
@@ -37,22 +37,22 @@ import com.google.gwt.canvas.dom.client.Context2d;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class DiagonalRightLeft extends Diagonal {
+final class InvertedTriangle extends Triangle {
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.Diagonal#drawTile(com.google.gwt.canvas.dom.client.Context2d,
+	 * @see org.pepstock.charba.client.colors.tiles.Triangle#drawTile(com.google.gwt.canvas.dom.client.Context2d,
 	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override
 	void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
 		// applies a translation to the current transform
-		context.translate(size, 0);
-		// applies rotation (90 degrees) to the current transform
-		context.rotate(ROTATION_90_DEGREES);
-		// invoke the diagonal shape drawer
-		// which will design the diagonal from right to left
+		context.translate(size, size);
+		// applies rotation (180 degrees) to the current transform
+		context.rotate(ROTATION_180_DEGREES);
+		// invoke the triangle shape drawer
+		// which will design the triangle vertically
 		super.drawTile(context, backgroundColor, shapeColor, size);
 	}
 

@@ -30,15 +30,25 @@ import com.google.gwt.canvas.dom.client.Context2d.LineJoin;
 public final class TilesBuilderDefaults {
 
 	/**
-	 * Default background color, {@value DEFAULT_BACKGROUND_COLOR}
+	 * Default background color as string, {@value DEFAULT_BACKGROUND_COLOR_AS_STRING}
 	 */
-	public static final String DEFAULT_BACKGROUND_COLOR = "rgba(100, 100, 100, 0.7)";
+	public static final String DEFAULT_BACKGROUND_COLOR_AS_STRING = "rgba(100, 100, 100, 0.7)";
 
 	/**
-	 * Default shape color, {@value DEFAULT_SHAPE_COLOR}
+	 * Default shape color as string, {@value DEFAULT_SHAPE_COLOR_AS_STRING}
 	 */
-	public static final String DEFAULT_SHAPE_COLOR = "rgba(255, 255, 255, 0.8)";
+	public static final String DEFAULT_SHAPE_COLOR_AS_STRING = "rgba(255, 255, 255, 0.8)";
 
+	/**
+	 * Default background color, {@value DEFAULT_BACKGROUND_COLOR_AS_STRING}
+	 */
+	public static final IsColor DEFAULT_BACKGROUND_COLOR = ColorBuilder.parse(DEFAULT_BACKGROUND_COLOR_AS_STRING);
+
+	/**
+	 * Default shape color, {@value DEFAULT_SHAPE_COLOR_AS_STRING}
+	 */
+	public static final IsColor DEFAULT_SHAPE_COLOR = ColorBuilder.parse(DEFAULT_SHAPE_COLOR_AS_STRING);
+	
 	/**
 	 * Default tile size, 20
 	 */
@@ -63,9 +73,9 @@ public final class TilesBuilderDefaults {
 
 	private int size = DEFAULT_SIZE;
 
-	private String backgroundColor = DEFAULT_BACKGROUND_COLOR;
+	private String backgroundColor = DEFAULT_BACKGROUND_COLOR_AS_STRING;
 
-	private String shapeColor = DEFAULT_SHAPE_COLOR;
+	private String shapeColor = DEFAULT_SHAPE_COLOR_AS_STRING;
 
 	private LineCap lineCap = DEFAULT_LINE_CAP;
 
@@ -138,7 +148,7 @@ public final class TilesBuilderDefaults {
 	 * @param backgroundColor the background color of tile as string
 	 */
 	public final void setBackgroundColor(String backgroundColor) {
-		this.backgroundColor = backgroundColor == null ? DEFAULT_BACKGROUND_COLOR : backgroundColor;
+		this.backgroundColor = backgroundColor == null ? DEFAULT_BACKGROUND_COLOR_AS_STRING : backgroundColor;
 	}
 
 	/**
@@ -147,7 +157,7 @@ public final class TilesBuilderDefaults {
 	 * @param backgroundColor the background color of tile
 	 */
 	public final void setBackgroundColor(IsColor backgroundColor) {
-		this.backgroundColor = backgroundColor == null ? DEFAULT_BACKGROUND_COLOR : backgroundColor.toRGBA();
+		this.backgroundColor = backgroundColor == null ? DEFAULT_BACKGROUND_COLOR_AS_STRING : backgroundColor.toRGBA();
 	}
 
 	/**
@@ -174,7 +184,7 @@ public final class TilesBuilderDefaults {
 	 * @param shapeColor the shape color of tile
 	 */
 	public final void setShapeColor(String shapeColor) {
-		this.shapeColor = shapeColor == null ? DEFAULT_SHAPE_COLOR : shapeColor;
+		this.shapeColor = shapeColor == null ? DEFAULT_SHAPE_COLOR_AS_STRING : shapeColor;
 	}
 
 	/**
@@ -183,7 +193,7 @@ public final class TilesBuilderDefaults {
 	 * @param shapeColor the shape color of tile
 	 */
 	public final void setShapeColor(IsColor shapeColor) {
-		this.shapeColor = shapeColor == null ? DEFAULT_SHAPE_COLOR : shapeColor.toRGBA();
+		this.shapeColor = shapeColor == null ? DEFAULT_SHAPE_COLOR_AS_STRING : shapeColor.toRGBA();
 	}
 
 	/**
