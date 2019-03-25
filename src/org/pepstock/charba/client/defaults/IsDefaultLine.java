@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.enums.CapStyle;
+import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 
@@ -68,9 +69,9 @@ public interface IsDefaultLine extends IsDefaultOptionsElement {
 	/**
 	 * Returns algorithm used to interpolate a smooth curve from the discrete data points.
 	 * 
-	 * @return algorithm used to interpolate a smooth curve from the discrete data points. Default is <code>'default'</code>.
+	 * @return algorithm used to interpolate a smooth curve from the discrete data points.</code>.
 	 */
-	String getCubicInterpolationMode();
+	CubicInterpolationMode getCubicInterpolationMode();
 
 	/**
 	 * Returns how to fill the area under the line.

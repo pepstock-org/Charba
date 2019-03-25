@@ -25,8 +25,10 @@ import org.pepstock.charba.client.commons.ArrayStringList;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.SteppedLine;
+import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.Scales;
 
 /**
@@ -128,8 +130,8 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * 
 	 * @param mode algorithm used to interpolate a smooth curve from the discrete data points
 	 */
-	public void setCubicInterpolationMode(String mode) {
-		setValue(Property.cubicInterpolationMode, mode);
+	public void setCubicInterpolationMode(CubicInterpolationMode mode) {
+		setValue(Property.cubicInterpolationMode, mode != null ? mode.getValue() : UndefinedValues.STRING);
 	}
 
 	/**
@@ -137,8 +139,9 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * 
 	 * @return algorithm used to interpolate a smooth curve from the discrete data points.
 	 */
-	public String getCubicInterpolationMode() {
-		return getValue(Property.cubicInterpolationMode, getDefaultValues().getElements().getLine().getCubicInterpolationMode());
+	public CubicInterpolationMode getCubicInterpolationMode() {
+		String value = getValue(Property.cubicInterpolationMode, UndefinedValues.STRING);
+		return CubicInterpolationMode.getModeByValue(value, getDefaultValues().getElements().getLine().getCubicInterpolationMode());
 	}
 
 	/**
