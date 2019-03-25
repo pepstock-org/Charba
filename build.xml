@@ -4,7 +4,6 @@
 	<!-- 
 	    Apache Ivy task definition and load properties
 	 -->
-	<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" />
 	<loadproperties srcfile="ivymoduleconfiguration.properties" />
 
 	<!-- 
@@ -276,7 +275,9 @@
 	<property name="ant.jar.dir" value="${ant.user.home}/lib" />
 	
 	<target name="buildInit" depends="retrieveBuildLibs, ivyRetrieve-compile">
-		<!-- Define the Ivy and Google Closure tasks -->
+		<!-- Define Ivy tasks -->
+		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" />
+		<!-- Define Google Closure tasks -->
     	<taskdef name="closure-compiler" classname="com.google.javascript.jscomp.ant.CompileTask" classpathref="ivyPath-compile" />
 	</target>
 
