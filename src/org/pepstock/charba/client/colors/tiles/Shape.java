@@ -23,6 +23,10 @@ package org.pepstock.charba.client.colors.tiles;
 public enum Shape implements IsShape
 {
 	/**
+	 * Draws a back slashed line.
+	 */
+	backSlashedLine(new BackSlashedLine()),
+	/**
 	 * Draws a box on the tile.
 	 */
 	box(new Box()),
@@ -63,6 +67,10 @@ public enum Shape implements IsShape
 	 */
 	dotDash(new DotDash()),
 	/**
+	 * Draws a double diagonals on the tile.
+	 */
+	doubleDiagonal(new DoubleDiagonal()),
+	/**
 	 * Draws a start (no filled) on the tile.
 	 */
 	emptyStar(new EmptyStar()),
@@ -70,6 +78,10 @@ public enum Shape implements IsShape
 	 * Draws a diagonal (from right to left) on the tile.
 	 */
 	invertedDiagonal(new InvertedDiagonal()),
+	/**
+	 * Draws a double diagonals (from right to left) on the tile.
+	 */
+	invertedDoubleDiagonal(new InvertedDoubleDiagonal()),
 	/**
 	 * Draws a triangle (with spike down) on the tile.
 	 */
@@ -86,6 +98,10 @@ public enum Shape implements IsShape
 	 * Draws a ring on the tile.
 	 */
 	ring(new Ring()),
+	/**
+	 * Draws a slashed line.
+	 */
+	slashedLine(new SlashedLine()),
 	/**
 	 * Draws an empty tile.
 	 */

@@ -18,18 +18,18 @@ package org.pepstock.charba.client.colors.tiles;
 import com.google.gwt.canvas.dom.client.Context2d;
 
 /**
- * DIAGONAL drawer to design a diagonal into tile.<br>
- * It designs a diagonal into the following tile sections (A and B):<br>
+ * Double DIAGONAL drawer to design a set of diagonals into tile.<br>
+ * It designs a set of diagonals into the following tile sections (B, C and A-D):<br>
  * <br>
  * 
  * <pre>
  * +---------+---------+
  * |         |         |
- * |         |    A    |
+ * |    A    |    B    |
  * |         |         |
  * +---------+---------+
  * |         |         |
- * |    B    |         |
+ * |    C    |    D    |
  * |         |         |
  * +---------+---------+
  * </pre>
@@ -37,7 +37,7 @@ import com.google.gwt.canvas.dom.client.Context2d;
  * @author Andrea "Stock" Stocchero
  *
  */
-class Diagonal extends ShapeDrawer {
+class DoubleDiagonal extends Diagonal{
 
 	/*
 	 * (non-Javadoc)
@@ -51,10 +51,12 @@ class Diagonal extends ShapeDrawer {
 		final double halfSize = size / 2D;
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
-		// designs the shape into A section
-		drawDiagonal(context, size, 0, 0);
 		// designs the shape into B section
+		drawDiagonal(context, size, 0, 0);
+		// designs the shape into C section
 		drawDiagonal(context, size, halfSize, halfSize);
+		// designs the shape into A-D section
+		drawWholeDiagonal(context, size, 0, 0);
 		// draws the current path with the current stroke style
 		context.stroke();
 	}
@@ -67,15 +69,20 @@ class Diagonal extends ShapeDrawer {
 	 * @param offsetX offset X where starts drawing
 	 * @param offsetY offset Y where starts drawing
 	 */
-	final void drawDiagonal(Context2d context, int size, double offsetX, double offsetY) {
-		// calculates half dimension
-		final double halfSize = size / 2D;
-		// calculates margin from boundary of tile
-		final double margin = 1D;
+	final void drawWholeDiagonal(Context2d context, int size, double offsetX, double offsetY) {
 		// draws shape
 		// to point for drawing line
-		context.moveTo((halfSize - margin) - offsetX, (margin * -1) + offsetY);
-		context.lineTo((size + 1) - offsetX, (halfSize + 1) + offsetY);
+		context.moveTo(0, 0);
+		context.lineTo(size, size);
+		// draws shape
+		// to point for drawing line
+		context.moveTo(size-1, -1);
+		context.lineTo(size+1, 1);
+		// draws shape
+		// to point for drawing line
+		context.moveTo(-1, size-1);
+		context.lineTo(1, size+1);
+		
 	}
 
 }

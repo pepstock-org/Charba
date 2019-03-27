@@ -177,7 +177,7 @@ public final class TilesBuilder {
 		String backgroundColorParam = backgroundColor != null ? backgroundColor : TilesBuilderDefaults.DEFAULT_BACKGROUND_COLOR_AS_STRING;
 		String shapeColorParam = shapeColor != null ? shapeColor : TilesBuilderDefaults.DEFAULT_SHAPE_COLOR_AS_STRING;
 		// checks the minimum size of canvas pattern
-		int sizeParam = Math.max(size, TilesBuilderDefaults.DEFAULT_SIZE);
+		int sizeParam = Math.max(size, TilesBuilderDefaults.MINIMUM_SIZE);
 		// creates a unique key based on arguments
 		// in order to store the canvas pattern when created and
 		// if all further requests for the same canvas pattern, returns the cached one

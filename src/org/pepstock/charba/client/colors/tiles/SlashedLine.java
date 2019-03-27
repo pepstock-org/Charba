@@ -18,26 +18,26 @@ package org.pepstock.charba.client.colors.tiles;
 import com.google.gwt.canvas.dom.client.Context2d;
 
 /**
- * DIAGONAL drawer to design a diagonal into tile.<br>
- * It designs a diagonal into the following tile sections (A and B):<br>
+ * SLASH drawer to design a slash into tile.<br>
+ * It designs a slash into the following tile sections (A, B and C):<br>
  * <br>
  * 
  * <pre>
- * +---------+---------+
- * |         |         |
- * |         |    A    |
- * |         |         |
- * +---------+---------+
- * |         |         |
- * |    B    |         |
- * |         |         |
- * +---------+---------+
+ * +-----+-------+-----+
+ * |     |       |     |
+ * |     |       |  B  |
+ * |     |       |     |
+ * +-----|   A   |-----+
+ * |     |       |     |
+ * |  C  |       |     |
+ * |     |       |     |
+ * +-----+-------+-----+
  * </pre>
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-class Diagonal extends ShapeDrawer {
+final class SlashedLine extends ShapeDrawer {
 
 	/*
 	 * (non-Javadoc)
@@ -47,35 +47,33 @@ class Diagonal extends ShapeDrawer {
 	 */
 	@Override
 	void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
-		// calculates half dimension
-		final double halfSize = size / 2D;
+		// calculates fifth dimension
+		final double quarterSize = size / 4D;
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
 		// designs the shape into A section
-		drawDiagonal(context, size, 0, 0);
+		drawDiagonal(context, size, quarterSize * -2, 0, quarterSize * 6);
+		// designs the shape into C section
+		drawDiagonal(context, quarterSize * 3, quarterSize * -4, quarterSize * -1, size);
 		// designs the shape into B section
-		drawDiagonal(context, size, halfSize, halfSize);
+		drawDiagonal(context, size + quarterSize, 0,  quarterSize, size * 2);
 		// draws the current path with the current stroke style
 		context.stroke();
 	}
 
 	/**
-	 * Designs a diagonal into a tile section.
+	 * Designs a slash into a tile section.
 	 * 
 	 * @param context context of canvas to design the shape
-	 * @param size the size of tile, which is a square
-	 * @param offsetX offset X where starts drawing
-	 * @param offsetY offset Y where starts drawing
+	 * @param startX offset X where starts drawing
+	 * @param startY offset Y where starts drawing
+	 * @param endX offset X where ends drawing
+	 * @param endY offset Y where ends drawing
 	 */
-	final void drawDiagonal(Context2d context, int size, double offsetX, double offsetY) {
-		// calculates half dimension
-		final double halfSize = size / 2D;
-		// calculates margin from boundary of tile
-		final double margin = 1D;
+	final void drawDiagonal(Context2d context, double startX, double startY, double endX, double endY) {
 		// draws shape
 		// to point for drawing line
-		context.moveTo((halfSize - margin) - offsetX, (margin * -1) + offsetY);
-		context.lineTo((size + 1) - offsetX, (halfSize + 1) + offsetY);
+		context.moveTo(startX, startY);
+		context.lineTo(endX, endY);
 	}
-
 }

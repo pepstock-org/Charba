@@ -54,6 +54,9 @@ public final class TilesBuilderDefaults {
 	 */
 	public static final int DEFAULT_SIZE = 20;
 
+	// minimum size
+	static final int MINIMUM_SIZE = 10;
+
 	/**
 	 * Default to determine the shape used to draw the end points of lines, {@link LineCap#ROUND}.
 	 */
@@ -121,7 +124,7 @@ public final class TilesBuilderDefaults {
 	 * @param size the size to set
 	 */
 	public final void setSize(int size) {
-		this.size = Math.max(size, DEFAULT_SIZE);
+		this.size = Math.max(size, MINIMUM_SIZE);
 	}
 
 	/**
