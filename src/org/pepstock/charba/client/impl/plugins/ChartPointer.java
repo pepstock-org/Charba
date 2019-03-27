@@ -86,7 +86,7 @@ public final class ChartPointer extends AbstractPlugin {
 			for (Cursor cursor : Cursor.values()) {
 				if (cursor.name().equalsIgnoreCase(chart.getElement().getStyle().getCursor())) {
 					// stores the current cursor
-					pOptions.setCurrentCursor(Cursor.valueOf(chart.getElement().getStyle().getCursor()));
+					pOptions.setCurrentCursor(cursor);
 				}
 			}
 		}
