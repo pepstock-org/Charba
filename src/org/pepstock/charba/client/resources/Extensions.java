@@ -50,4 +50,10 @@ public interface Extensions extends ClientBundle {
 	@Source("js/chartjs-plugin-datalabels.min.js")
 	TextResource datalabelsPlugin();
 
+	/**
+	 * FIXME
+	 * @return
+	 */
+	@Source("js/chartjs-plugin-colorschemes.min.js")
+	TextResource colorschemesPlugin();
 }
