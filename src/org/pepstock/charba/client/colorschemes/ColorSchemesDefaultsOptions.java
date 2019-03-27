@@ -26,7 +26,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 final class ColorSchemesDefaultsOptions extends NativeObjectContainer {
 
 	static final Scheme DEFAULT_SCHEME = Brewer.Paired12;
-	
+
 	private static final String DEFAULT_SCHEME_AS_STRING = DEFAULT_SCHEME.getValue();
 
 	private static final double DEFAULT_FILL_ALPHA = 0.5D;

@@ -16,6 +16,15 @@
 package org.pepstock.charba.client.colorschemes;
 
 /**
+ * Contains all labels to use Microsoft Office color scheme.<br>
+ * To configure COLORSCHEMES plugin, the label is composed by:<br>
+ * <br>
+ * <pre>
+ * [category].[name]
+ * </pre>
+ * where category is <b>"office"</b>.<br>
+ * See <a href="https://nagix.github.io/chartjs-plugin-colorschemes/colorchart.html">here</a> the list of color by scheme.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -153,20 +162,33 @@ public enum Office implements Scheme
 	WoodType6,
 	Yellow6,
 	YellowOrange6;
-	
+
+	/**
+	 * Category name used to build the label to configure plugin.
+	 */
 	static final String CATEGORY = "office";
-	
+	// the value to configure the plugin
 	private final String value;
 
+	/**
+	 * Builds a scheme using its enum name as value of label.
+	 */
 	private Office() {
 		this(null);
-	} 
-
-	private Office(String subSchemeName) {
-		value = createValue(CATEGORY, subSchemeName == null ? name() : subSchemeName);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Builds a scheme using argument as value of label.
+	 * 
+	 * @param schemeName name of scheme
+	 */
+	private Office(String schemeName) {
+		value = createValue(CATEGORY, schemeName == null ? name() : schemeName);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.colorschemes.Scheme#getValue()
 	 */
 	@Override

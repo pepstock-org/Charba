@@ -395,7 +395,8 @@ public final class ColorBuilder {
 	 * @param alpha the alpha
 	 *
 	 * @returns the RGB/RGBA Color object
-	 * @see See explanation <a href="http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/">Math behind colorspace conversions, RGB-HSL</a>
+	 * @see See explanation <a href="http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/">Math behind
+	 *      colorspace conversions, RGB-HSL</a>
 	 */
 	private static IsColor convertHSL2RGB(int hue, int saturation, int lightness, double alpha) {
 		// checks if hue is in range
@@ -416,7 +417,7 @@ public final class ColorBuilder {
 		transientHue /= 360D;
 		double transientSaturation = saturation / 100D;
 		double transientLightness = lightness / 100D;
-		// we need to create some temporary variables 
+		// we need to create some temporary variables
 		// the variables are used to store temporary values which makes the formulas easier to read
 		double temporary1 = 0D;
 		// There are two formulas to choose from in the first step.
@@ -453,7 +454,7 @@ public final class ColorBuilder {
 	 * @return the channel color value to use for RGB color
 	 */
 	private static double hueToRGB(double temporary2, double temporary1, double temporaryChannelValue) {
-		// all values need to be between 0 and 1. 
+		// all values need to be between 0 and 1.
 		// if you get a negative value you need to add 1 to it.
 		// if you get a value above 1 you need to subtract 1 from it.
 		if (temporaryChannelValue < 0) {
@@ -463,7 +464,8 @@ public final class ColorBuilder {
 			temporaryChannelValue -= 1;
 		}
 		// now we need to do up to 3 tests to select the correct formula for each color channel.
-		// test 1 - If 6 x CHANNEL temporary color is smaller then 1, CHANNEL temporary color = temporary_2 + (temporary_1 - temporary_2) x 6 x CHANNEL temporary color
+		// test 1 - If 6 x CHANNEL temporary color is smaller then 1, CHANNEL temporary color = temporary_2 + (temporary_1 -
+		// temporary_2) x 6 x CHANNEL temporary color
 		if (6 * temporaryChannelValue < 1) {
 			return temporary2 + ((temporary1 - temporary2) * 6 * temporaryChannelValue);
 		}
@@ -471,7 +473,8 @@ public final class ColorBuilder {
 		if (2 * temporaryChannelValue < 1) {
 			return temporary1;
 		}
-		// test 3 - If 3 x CHANNEL temporary color is smaller then 2, CHANNEL temporary color = temporary_2 + (temporary_1 - temporary_2) x (0.666 - CHANNEL temporary color) x 6
+		// test 3 - If 3 x CHANNEL temporary color is smaller then 2, CHANNEL temporary color = temporary_2 + (temporary_1 -
+		// temporary_2) x (0.666 - CHANNEL temporary color) x 6
 		if (3 * temporaryChannelValue < 2) {
 			return temporary2 + ((temporary1 - temporary2) * 6 * ((2.0D / 3.0D) - temporaryChannelValue));
 		}

@@ -85,7 +85,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	public final boolean isReverse() {
 		return getValue(Property.reverse, defaultsOptions.isReverse());
 	}
-	
+
 	private Scheme getSchemeByValue(String value) {
 		if (value.startsWith(Brewer.CATEGORY)) {
 			return getSchemeByCategory(Brewer.class, value);

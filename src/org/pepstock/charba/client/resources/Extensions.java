@@ -51,8 +51,10 @@ public interface Extensions extends ClientBundle {
 	TextResource datalabelsPlugin();
 
 	/**
-	 * FIXME
-	 * @return
+	 * Contains text representation of native chart<a href="https://github.com/nagix/chartjs-plugin-colorschemes">colorschemes
+	 * plugin</a> code.
+	 * 
+	 * @return chart <a href="https://github.com/nagix/chartjs-plugin-colorschemes">colorschemes plugin</a> code
 	 */
 	@Source("js/chartjs-plugin-colorschemes.min.js")
 	TextResource colorschemesPlugin();

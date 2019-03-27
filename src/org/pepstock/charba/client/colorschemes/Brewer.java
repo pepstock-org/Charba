@@ -16,6 +16,15 @@
 package org.pepstock.charba.client.colorschemes;
 
 /**
+ * Contains all labels to use <a href="http://colorbrewer2.org/">Color Brewer</a> scheme.<br>
+ * To configure COLORSCHEMES plugin, the label is composed by:<br>
+ * <br>
+ * <pre>
+ * [category].[name]
+ * </pre>
+ * where category is <b>"brewer"</b>.<br>
+ * See <a href="https://nagix.github.io/chartjs-plugin-colorschemes/colorchart.html">here</a> the list of color by scheme.
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -286,20 +295,35 @@ public enum Brewer implements Scheme
 	Set3_10("Set3-10"),
 	Set3_11("Set3-11"),
 	Set3_12("Set3-12");
-	
+
+	/**
+	 * Category name used to build the label to configure plugin.
+	 */
 	static final String CATEGORY = "brewer";
-	
+	// the value to configure the plugin
 	private final String value;
 
+	/**
+	 * Builds a scheme using its enum name as value of label.
+	 */
 	private Brewer() {
 		this(null);
-	} 
-
-	private Brewer(String subSchemeName) {
-		value = createValue(CATEGORY, subSchemeName == null ? name() : subSchemeName);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Builds a scheme using argument as value of label.
+	 * 
+	 * @param schemeName name of scheme
+	 */
+	private Brewer(String schemeName) {
+		// uses a default method of interface to build teh value 
+		// to use into plugin configuration
+		value = createValue(CATEGORY, schemeName == null ? name() : schemeName);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.colorschemes.Scheme#getValue()
 	 */
 	@Override

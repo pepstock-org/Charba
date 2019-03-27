@@ -22,13 +22,13 @@ import org.pepstock.charba.client.commons.Key;
  *
  */
 public interface Scheme extends Key {
-	
+
 	String getValue();
-	
+
 	default String createValue(String category, String value) {
 		StringBuilder sb = new StringBuilder(category);
 		sb.append(".").append(value);
 		return sb.toString();
 	}
-	
+
 }

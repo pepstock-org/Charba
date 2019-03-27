@@ -21,8 +21,8 @@ import org.pepstock.charba.client.resources.Extensions;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 /**
- * Entry point of <a href="https://github.com/nagix/chartjs-plugin-colorschemes">COLORSCHEMES plugin</a> with some static utilities to
- * enable it and to get and set options.
+ * Entry point of <a href="https://github.com/nagix/chartjs-plugin-colorschemes">COLORSCHEMES plugin</a> with some static
+ * utilities to enable it and to get and set options.
  * 
  * @author Andrea "Stock" Stocchero
  *
