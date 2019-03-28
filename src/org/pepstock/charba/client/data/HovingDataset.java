@@ -53,7 +53,7 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class HovingDataset extends Dataset {
+public abstract class HovingDataset extends Dataset {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---

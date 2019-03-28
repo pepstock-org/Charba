@@ -13,23 +13,21 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-package org.pepstock.charba.client.colorschemes;
+package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
- * Factory to get the options (form chart or from default global ones) related to LABELS plugin.
+ * Factory to get the options (form chart or from default global ones) related to "{@value ColorSchemes#ID}" plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class ColorSchemesOptionsFactory extends AbstractPluginOptionsFactory<ColorSchemesOptions> {
 
 	/**
-	 * To avoid any instantiation. Use the static reference into {@link ColorSchemesPlugin#FACTORY}.<br>
-	 * Adds itself as charts life cycle listener to manage the cache of labels options, in order to clean the instances when the
-	 * charts will be destroy.
+	 * To avoid any instantiation. Use the static reference into {@link ColorSchemes#FACTORY}.
 	 * 
 	 * @param pluginId plugin ID
 	 */
@@ -45,8 +43,7 @@ public final class ColorSchemesOptionsFactory extends AbstractPluginOptionsFacto
 	 */
 	@Override
 	public ColorSchemesOptions create(NativeObject nativeObject) {
-		// creates the options by the native object and the defaults
-		// and ignores the native object passed into method
+		// creates the options by the native object
 		return new ColorSchemesOptions(nativeObject);
 	}
 

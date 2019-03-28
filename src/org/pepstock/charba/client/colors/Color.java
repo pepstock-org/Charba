@@ -27,7 +27,7 @@ public final class Color implements IsColor {
 	/**
 	 * Default transparency is {@value DEFAULT_ALPHA} (no transparency).
 	 */
-	public static final double DEFAULT_ALPHA = 1F;
+	public static final double DEFAULT_ALPHA = 1D;
 
 	// colors
 	private final int red;
@@ -289,7 +289,7 @@ public final class Color implements IsColor {
 	 * @param alpha alpha value
 	 * @exception if the channel is nor within bounds
 	 */
-	private static void checkAlphaWithinBounds(double alpha) {
+	public static void checkAlphaWithinBounds(double alpha) {
 		if (alpha < 0D || alpha > 1D) {
 			throw new IllegalArgumentException("Alpha argument is not within bounds (0D-1D)");
 		}

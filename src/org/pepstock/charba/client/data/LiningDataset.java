@@ -70,7 +70,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class LiningDataset extends Dataset {
+public abstract class LiningDataset extends Dataset {
 	// default label
 	private static final String DEFAULT_LABEL = "";
 

@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains the enumeration items to configure datasets items selector plugin.
+ * Contains the enumeration items to configure out of the box CHARBA plugins.
  * 
  * @author Andrea "Stock" Stocchero
  *
