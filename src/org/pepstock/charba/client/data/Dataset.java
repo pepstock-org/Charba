@@ -456,6 +456,10 @@ public abstract class Dataset extends NativeObjectContainer {
 	 *         {@link org.pepstock.charba.client.ChartType#bar}.
 	 */
 	public final Type getType() {
+		// checks if the type has been set
+		if (!has(Property.type)) {
+			return null;
+		}
 		// gets string value from java script object
 		String value = getValue(Property.type, ChartType.bar.name());
 		// checks if consistent with out of the box chart types
