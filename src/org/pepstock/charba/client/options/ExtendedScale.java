@@ -15,9 +15,12 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Scale options used internally inside the chart configuration.<br>
@@ -28,6 +31,18 @@ import org.pepstock.charba.client.defaults.IsDefaultScale;
  */
 public final class ExtendedScale extends Scale {
 
+	// internal count
+	private static final AtomicInteger COUNTER = new AtomicInteger(0);
+
+	/**
+	 * Name of properties of native object.
+	 */
+	private enum Property implements Key
+	{
+		// internal key to store a unique id
+		_charbaId,
+	}
+
 	/**
 	 * Creates a scale with default provider. The native object is created empty.
 	 * 
@@ -35,6 +50,17 @@ public final class ExtendedScale extends Scale {
 	 */
 	public ExtendedScale(IsDefaultScale defaultValues) {
 		super(defaultValues);
+		// stores the id based on a counter
+		setValue(Property._charbaId, COUNTER.getAndIncrement());
+	}
+
+	/**
+	 * Returns the unique id of scale.
+	 * 
+	 * @return the unique id of scale
+	 */
+	public int getCharbaId() {
+		return getValue(Property._charbaId, UndefinedValues.INTEGER);
 	}
 
 	/**

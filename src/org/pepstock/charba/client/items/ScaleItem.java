@@ -20,8 +20,10 @@ import java.util.List;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.AxisType;
 
 /**
@@ -57,7 +59,10 @@ public class ScaleItem extends BaseBoxNodeItem {
 		yCenter,
 		drawingArea,
 		pointLabels,
-		type
+		type,
+		options,
+		// internal key to store a unique id
+		_charbaId
 	}
 
 	/**
@@ -87,6 +92,28 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 */
 	public final String getId() {
 		return getValue(Property.id, UndefinedValues.STRING);
+	}
+
+	/**
+	 * Returns the unique id of scale.
+	 * 
+	 * @return the unique id of scale. Default or if does not exist is Default is
+	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 */
+	public final int getCharbaId() {
+		// the unique id is under options object of scale item
+		// checks if there is
+		if (has(Property.options)) {
+			// gets the options object
+			NativeObject object = getValue(Property.options);
+			// checks if the charba id exists and is a number
+			if (ObjectType.Number.equals(JsHelper.get().typeOf(object, Property._charbaId.name()))) {
+				// returns the number
+				return JsHelper.get().propertyAsInt(object, Property._charbaId.name());
+			}
+		}
+		// otherwise if here is undefined
+		return UndefinedValues.INTEGER;
 	}
 
 	/**

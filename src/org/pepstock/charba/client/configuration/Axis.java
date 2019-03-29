@@ -401,6 +401,15 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	}
 
 	/**
+	 * Returns the unique id of axis.
+	 * 
+	 * @return the unique id of axis
+	 */
+	public final int getCharbaId() {
+		return getConfiguration().getCharbaId();
+	}
+
+	/**
 	 * Type of scale being employed.
 	 * 
 	 * @param type type of axis

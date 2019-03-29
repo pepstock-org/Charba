@@ -25,6 +25,8 @@ import org.pepstock.charba.client.ChartOptions;
  *
  */
 public abstract class SingleScaleOptions extends ConfigurationOptions {
+	// axis instance
+	private Axis axis = null;
 
 	/**
 	 * Builds the object storing the chart instance and default values.
@@ -42,7 +44,20 @@ public abstract class SingleScaleOptions extends ConfigurationOptions {
 	 * @param axis the axis.
 	 */
 	public void setAxis(Axis axis) {
+		// stores locally the axis
+		this.axis = axis;
+		// stores into configuration
 		getConfiguration().setScale(axis.getConfiguration());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getAxisById(int)
+	 */
+	@Override
+	Axis getAxisById(int id) {
+		return (axis != null && axis.getCharbaId() == id) ? axis : null;
 	}
 
 }

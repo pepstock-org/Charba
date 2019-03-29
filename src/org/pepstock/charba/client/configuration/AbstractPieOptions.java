@@ -89,4 +89,14 @@ public abstract class AbstractPieOptions extends ConfigurationOptions {
 		return getConfiguration().getCircumference();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getAxisById(int)
+	 */
+	@Override
+	Axis getAxisById(int id) {
+		// no axis
+		return null;
+	}
 }
