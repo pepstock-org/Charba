@@ -37,6 +37,7 @@ import org.pepstock.charba.client.events.ChartHoverEvent;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.events.ChartResizeEvent;
 import org.pepstock.charba.client.events.DatasetSelectionEvent;
+import org.pepstock.charba.client.events.TitleClickEvent;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetItem.DatasetItemFactory;
 import org.pepstock.charba.client.items.SizeItem;
@@ -170,6 +171,8 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	private int onHoverHandlers = 0;
 	// amount of resize event handlers
 	private int onResizeHandlers = 0;
+	// amount of resize event handlers
+	private int onTitleClickHandlers = 0;
 
 	/**
 	 * Name of properties of native object.
@@ -226,6 +229,10 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 				if (item != null) {
 					// fires the event for dataset selection
 					getChart().fireEvent(new DatasetSelectionEvent(event, item));
+				} else if (getChart().getNode().getTitle().isInside(event)) {
+					// checks if title has been selected
+					// fires the click event on the chart
+					getChart().fireEvent(new TitleClickEvent(event, getChart().getNode().getOptions().getTitle()));
 				}
 				// fires the click event on the chart
 				getChart().fireEvent(new ChartClickEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
@@ -481,6 +488,15 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 		return onDatasetSelectionHandlers > 0;
 	}
 
+	/**
+	 * Returns <code>true</code> if there is any title click handler, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if there is any title click handler, otherwise <code>false</code>.
+	 */
+	public final boolean hasTitleClickHandlers() {
+		return onTitleClickHandlers > 0;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -489,7 +505,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	@Override
 	protected final <H extends EventHandler> void addHandler(Type<H> type) {
 		// checks if type of added event handler is dataset selection or click
-		if (type.equals(DatasetSelectionEvent.TYPE) || type.equals(ChartClickEvent.TYPE)) {
+		if (type.equals(DatasetSelectionEvent.TYPE) || type.equals(ChartClickEvent.TYPE) || type.equals(TitleClickEvent.TYPE)) {
 			// if there is not any click event handler
 			if (onClickHandlers == 0) {
 				// sets the callback proxy in order to call the user event interface
@@ -501,6 +517,11 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			if (type.equals(DatasetSelectionEvent.TYPE)) {
 				// increments handlers of dataset selection
 				onDatasetSelectionHandlers++;
+			}
+			// check if a title click handler has been added
+			if (type.equals(TitleClickEvent.TYPE)) {
+				// increments handlers of title click
+				onTitleClickHandlers++;
 			}
 		} else if (type.equals(ChartHoverEvent.TYPE)) {
 			// if there is not any hover event handler
@@ -529,7 +550,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	@Override
 	protected final <H extends EventHandler> void removeHandler(Type<H> type) {
 		// checks if type of removed event handler is dataset selection or click
-		if (type.equals(DatasetSelectionEvent.TYPE) || type.equals(ChartClickEvent.TYPE)) {
+		if (type.equals(DatasetSelectionEvent.TYPE) || type.equals(ChartClickEvent.TYPE) || type.equals(TitleClickEvent.TYPE)) {
 			// decrements the amount of handlers
 			onClickHandlers--;
 			// if there is not any handler
@@ -541,6 +562,11 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			if (type.equals(DatasetSelectionEvent.TYPE)) {
 				// decrements handlers of dataset selection
 				onDatasetSelectionHandlers--;
+			}
+			// check if a title click handler has been removed
+			if (type.equals(TitleClickEvent.TYPE)) {
+				// decrements handlers of title click
+				onTitleClickHandlers--;
 			}
 		} else if (type.equals(ChartHoverEvent.TYPE)) {
 			// decrements the amount of handlers

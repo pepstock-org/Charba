@@ -18,6 +18,7 @@ package org.pepstock.charba.client.items;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.events.ChartNativeEvent;
 
 /**
  * Base object which maps the CHART.JS chart items which represents a box.<br>
@@ -82,5 +83,19 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 */
 	public final int getLeft() {
 		return getValue(Property.left, UndefinedValues.INTEGER);
+	}
+
+	/**
+	 * Returns <code>true</code> if the chart event is inside of this box, otherwise <code>false</code>.
+	 * 
+	 * @param event event to check if inside the box
+	 * @return <code>true</code> if the chart event is inside of this box, otherwise <code>false</code>
+	 */
+	public final boolean isInside(ChartNativeEvent event) {
+		// checks X
+		boolean isX = event.getLayerX() >= getLeft() && event.getLayerX() <= getRight();
+		// checks Y
+		boolean isY = event.getLayerY() >= getTop() && event.getLayerY() <= getBottom();
+		return isX && isY;
 	}
 }
