@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.configuration;
 
 import java.util.List;
-import java.util.Map;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Chart;
@@ -245,27 +244,22 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 					// checks if there is any handler and the chart has got scales
 					// gets the scales
 					ScalesNode scales = getChart().getNode().getScales();
-					// gets map
-					Map<String, ScaleItem> scalesMap = scales.getItems();
-					// scans all scales to check if event is inside one of them
-					for (ScaleItem scaleItem : scalesMap.values()) {
-						// checks if event is inside
-						if (scaleItem.isInside(event)) {
-							// creates axis reference
-							Axis axis = null;
-							// gets charba id of scale
-							final int charbaIdOfScale = scaleItem.getCharbaId();
-							// checks if undefined
-							// means no axis configured into chart
-							if (charbaIdOfScale != UndefinedValues.INTEGER) {
-								// gets the axis by charba id
-								axis = getAxisById(charbaIdOfScale);
-							}
-							// fires the click event on the chart scale
-							getChart().fireEvent(new AxisClickEvent(event, scaleItem, axis));
-							// skips rest of for
-							break;
+					// checks if event is inside a scale box 
+					if (scales.isInside(event)) {
+						// gets scale item
+						ScaleItem scaleItem = scales.getScaleIsInside(event);
+						// creates axis reference
+						Axis axis = null;
+						// gets charba id of scale
+						final int charbaIdOfScale = scaleItem.getCharbaId();
+						// checks if undefined
+						// means no axis configured into chart
+						if (charbaIdOfScale != UndefinedValues.INTEGER) {
+							// gets the axis by charba id
+							axis = getAxisById(charbaIdOfScale);
 						}
+						// fires the click event on the chart scale
+						getChart().fireEvent(new AxisClickEvent(event, scaleItem, axis));
 					}
 				}
 				// fires the click event on the chart

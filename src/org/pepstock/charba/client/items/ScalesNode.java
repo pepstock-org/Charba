@@ -23,6 +23,7 @@ import java.util.Map;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.events.ChartNativeEvent;
 
 /**
  * Wrapper of scales node of CHART.JS.<br>
@@ -63,4 +64,40 @@ public final class ScalesNode extends NativeObjectContainer {
 		return Collections.unmodifiableMap(result);
 	}
 
+	/**
+	 * Returns the scale item if the chart event is inside of one of scales, otherwise <code>null</code>.
+	 * 
+	 * @param event event to check if inside of one of scales.
+	 * @return the scale item if the chart event is inside of one of scales, otherwise <code>null</code>
+	 */
+	public final ScaleItem getScaleIsInside(ChartNativeEvent event) {
+		// gets all keys
+		List<Key> keys = keys();
+		// if keys are consistent
+		if (!keys.isEmpty()) {
+			// scans all keys
+			for (Key key : keys) {
+				// loads scale item
+				ScaleItem scaleItem = new ScaleItem(getValue(key));
+				// checks if event is inside
+				if (scaleItem.isInside(event)) {
+					// returns scale item
+					return scaleItem;
+				}
+
+			}
+		}
+		// if here not scales or event not inside of scale box
+		return null;
+	}
+
+	/**
+	 * Returns <code>true</code> if the chart event is inside of one of scales, otherwise <code>false</code>.
+	 * 
+	 * @param event event to check if inside of one of scales.
+	 * @return <code>true</code> if the chart event is inside of one of scales, otherwise <code>false</code>
+	 */
+	public final boolean isInside(ChartNativeEvent event) {
+		return getScaleIsInside(event) != null;
+	}
 }

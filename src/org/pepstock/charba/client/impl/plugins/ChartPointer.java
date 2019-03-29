@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
@@ -26,7 +27,8 @@ import org.pepstock.charba.client.plugins.AbstractPlugin;
 import com.google.gwt.dom.client.Style.Cursor;
 
 /**
- * This plugin is changing the cursor when mouse over on dataset, title on canvas if a dataset selection, title handler have been defined.
+ * This plugin is changing the cursor when mouse over on dataset, title on canvas if a dataset selection, title handler have
+ * been defined.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -62,7 +64,7 @@ public final class ChartPointer extends AbstractPlugin {
 	@Override
 	public void onAfterInit(AbstractChart<?, ?> chart) {
 		// checks if chart has got any dataset selection and title click handler
-		if (chart.getOptions().hasDatasetSelectionHandlers() || chart.getOptions().hasTitleClickHandlers()) {
+		if (chart.getOptions().hasDatasetSelectionHandlers() || chart.getOptions().hasTitleClickHandlers() || chart.getOptions().hasAxisClickHandlers()) {
 			// creates options instance
 			ChartPointerOptions pOptions = null;
 			// checks if is cached
@@ -101,23 +103,29 @@ public final class ChartPointer extends AbstractPlugin {
 	@Override
 	public void onAfterEvent(AbstractChart<?, ?> chart, ChartNativeEvent event) {
 		// checks if chart has got any dataset selection handler
-		if (chart.getOptions().hasDatasetSelectionHandlers() || chart.getOptions().hasTitleClickHandlers()) {
+		if (chart.getOptions().hasDatasetSelectionHandlers() || chart.getOptions().hasTitleClickHandlers() || chart.getOptions().hasAxisClickHandlers()) {
 			// gets options instance
 			ChartPointerOptions pOptions = OPTIONS.get(chart.getId());
 			// if yes, asks the dataset item by event
 			DatasetItem item = chart.getElementAtEvent(event);
 			// checks item
 			if (item != null) {
+				// DATASET SELECTION
 				// otherwise sets the pointer
 				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
 			} else if (chart.getNode().getTitle().isInside(event)) {
+				// TITLE SELECTION
+				// otherwise sets the pointer
+				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
+			} else if (!ScaleType.none.equals(chart.getType().scaleType()) && chart.getNode().getScales().isInside(event)) {
+				// AXIS SELECTION
 				// otherwise sets the pointer
 				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
 			} else {
 				// if null, sets the default cursor
 				chart.getElement().getStyle().setCursor(pOptions.getCurrentCursor());
 			}
-		} 
+		}
 	}
 
 }
