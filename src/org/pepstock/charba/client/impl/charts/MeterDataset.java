@@ -71,7 +71,7 @@ public class MeterDataset extends DoughnutDataset {
 	private final double max;
 
 	private double value = MINIMUM_VALUE;
-	
+
 	/**
 	 * Name of properties of native object. Overrides {@link DoughnutDataset}
 	 */

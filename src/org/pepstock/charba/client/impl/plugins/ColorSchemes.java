@@ -94,7 +94,7 @@ public final class ColorSchemes extends AbstractPlugin {
 							// casts the dataset
 							HovingDataset hovingDataset = (HovingDataset) dataset;
 							// sets background colors, applying the transparency
-							hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, colors, options.isReverse(), options.getFillAlpha()));
+							hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, colors, options.isReverse(), options.getBackgroundColorAlpha()));
 							// checks if border has been requested
 							if (!hovingDataset.getBorderWidth().isEmpty()) {
 								// if yes, apply the colors to borders properties
@@ -107,7 +107,7 @@ public final class ColorSchemes extends AbstractPlugin {
 							if (SchemeScope.data.equals(options.getSchemeScope())) {
 								// if here is at data level
 								// every data has got own color
-								hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, colors, options.isReverse(), options.getFillAlpha()));
+								hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, colors, options.isReverse(), options.getBackgroundColorAlpha()));
 								// checks if border has been requested
 								if (getMaxBorderWidth(hovingDataset) > 0) {
 									// if yes, apply the colors to borders properties
@@ -117,7 +117,7 @@ public final class ColorSchemes extends AbstractPlugin {
 								// if here is at dataset level
 								// every dataset has got own color
 								// sets background colors, applying the transparency
-								hovingDataset.setBackgroundColor(color.alpha(options.getFillAlpha()));
+								hovingDataset.setBackgroundColor(color.alpha(options.getBackgroundColorAlpha()));
 								// checks if border has been requested
 								if (getMaxBorderWidth(hovingDataset) > 0) {
 									// if yes, apply the colors to borders properties
@@ -125,12 +125,18 @@ public final class ColorSchemes extends AbstractPlugin {
 								}
 							}
 						} else if (dataset instanceof LiningDataset) {
+							// background color with transparency
+							IsColor backgroundColor = color.alpha(options.getBackgroundColorAlpha());
 							// if lining dataset, like LINE, RADAR, SCATTER
 							LiningDataset liningDataset = (LiningDataset) dataset;
 							// sets border color
 							liningDataset.setBorderColor(color);
 							// sets background colors, applying the transparency
-							liningDataset.setBackgroundColor(color.alpha(options.getFillAlpha()));
+							liningDataset.setBackgroundColor(backgroundColor);
+							// sets point hover border color
+							liningDataset.setPointHoverBorderColor(color);
+							// sets point hover background colors, applying the transparency
+							liningDataset.setPointHoverBackgroundColor(backgroundColor);
 						}
 						// increments dataset index
 						datasetIndex++;

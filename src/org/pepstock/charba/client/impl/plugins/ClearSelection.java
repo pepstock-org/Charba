@@ -291,7 +291,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	public void setImage(ImageResource image) {
 		setImage(Utilities.toImageElement(image));
 	}
-	
+
 	/**
 	 * Sets the clear selection image.
 	 * 
@@ -300,7 +300,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	public void setImage(Image image) {
 		setImage(Utilities.toImageElement(image));
 	}
-	
+
 	/**
 	 * Sets the clear selection image.
 	 * 
@@ -376,7 +376,8 @@ public final class ClearSelection extends NativeObjectContainer {
 	/**
 	 * Sets <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>.
 	 * 
-	 * @param useSelectionStyle <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>
+	 * @param useSelectionStyle <code>true</code> if clear of selection label will e applied into chart, otherwise
+	 *            <code>false</code>
 	 */
 	public void setUseSelectionStyle(boolean useSelectionStyle) {
 		setValue(Property.useSelectionStyle, useSelectionStyle);

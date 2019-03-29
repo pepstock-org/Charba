@@ -17,22 +17,23 @@ package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.data.HovingFlexDataset;
 import org.pepstock.charba.client.impl.plugins.enums.Brewer;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 
 /**
- * It wraps default global options if there are and provides all default values for COLORSCHEMES plugin.
+ * It wraps default global options if there are and provides all default values for "{@value ColorSchemes#ID}" plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
 final class ColorSchemesDefaultsOptions extends NativeObjectContainer {
 
+	// this the default category when new color scheme
+	// has been created on top of the available schemes.
 	static final String DEFAULT_SCHEME_CATEGORY = "custom";
-	
-	// this is not private because it used as default scheme to return
-	// without searching into enumeration classes
+
 	private static final ColorScheme DEFAULT_SCHEME = Brewer.Paired12;
-	
+
 	private static final SchemeScope DEFAULT_SCHEME_SCOPE = SchemeScope.dataset;
 
 	private static final double DEFAULT_FILL_ALPHA = 0.5D;
@@ -73,24 +74,25 @@ final class ColorSchemesDefaultsOptions extends NativeObjectContainer {
 	String getSchemeName() {
 		return getValue(ColorSchemesOptions.Property.schemeName, DEFAULT_SCHEME.name());
 	}
-	
+
 	/**
-	 * FIXME
+	 * Returns the color scheme scope when the scheme is applied to hoving flex datasets, like bars charts.
 	 * 
-	 * @return the color scheme name
+	 * @return the color scheme cope when the scheme is applied to hoving flex datasets, like bars charts
+	 * @see HovingFlexDataset
 	 */
 	SchemeScope getSchemeScope() {
 		return getValue(ColorSchemesOptions.Property.schemeScope, SchemeScope.class, DEFAULT_SCHEME_SCOPE);
 	}
-	
+
 	/**
-	 * The transparency value for the line fill color. Must be a number between 0.0 (fully transparent) and 1.0 (no
+	 * The transparency value for the background color. Must be a number between 0.0 (fully transparent) and 1.0 (no
 	 * transparency).
 	 * 
-	 * @return the transparency value for the line fill color
+	 * @return the transparency value for the background color
 	 */
-	double getFillAlpha() {
-		return getValue(ColorSchemesOptions.Property.fillAlpha, DEFAULT_FILL_ALPHA);
+	double getBackgroundColorAlpha() {
+		return getValue(ColorSchemesOptions.Property.backgroundColorAlpha, DEFAULT_FILL_ALPHA);
 	}
 
 	/**

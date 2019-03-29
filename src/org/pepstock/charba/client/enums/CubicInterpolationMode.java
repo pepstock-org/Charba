@@ -36,7 +36,7 @@ public enum CubicInterpolationMode implements Key
 	 * being interpolated, and ensures local extremums (if any) stay at input data points.
 	 */
 	monotone("monotone");
-	
+
 	// value to assign into configuration
 	private final String value;
 
@@ -57,12 +57,12 @@ public enum CubicInterpolationMode implements Key
 	public final String getValue() {
 		return value;
 	}
-	
+
 	/**
 	 * Returns the interpolation mode by the string value.
 	 * 
 	 * @param value value of interpolation mode
-	 * @param defaultValue default interpolation mode 
+	 * @param defaultValue default interpolation mode
 	 * @return if value is <code>null</code>, returns the default value
 	 */
 	public static CubicInterpolationMode getModeByValue(String value, CubicInterpolationMode defaultValue) {

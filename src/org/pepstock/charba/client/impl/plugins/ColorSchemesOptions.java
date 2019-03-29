@@ -18,12 +18,13 @@ package org.pepstock.charba.client.impl.plugins;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.data.HovingFlexDataset;
 import org.pepstock.charba.client.impl.plugins.ColorSchemesOptionsFactory.ColorSchemesDefaultsOptionsFactory;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
- * This is the object to map the COLORSCHEMES plugin options, both at chart and global level.
+ * This is the object to map the "{@value ColorSchemes#ID}" plugin options, both at chart and global level.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -43,7 +44,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 		schemeScope,
 		schemeCategory,
 		schemeName,
-		fillAlpha,
+		backgroundColorAlpha,
 		reverse
 	}
 
@@ -66,23 +67,39 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 		defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
 	}
 
+	/**
+	 * Sets the color scheme scope when the scheme is applied to hoving flex datasets, like bars charts.
+	 * 
+	 * @param schemeScope the color scheme scope when the scheme is applied to hoving flex datasets, like bars charts.
+	 * @see HovingFlexDataset
+	 */
 	public void setSchemeScope(SchemeScope schemeScope) {
 		setValue(Property.schemeScope, schemeScope);
 	}
 
 	/**
-	 * FIXME
+	 * Returns the color scheme scope when the scheme is applied to hoving flex datasets, like bars charts.
 	 * 
-	 * @return the color scheme name
+	 * @return the color scheme scope when the scheme is applied to hoving flex datasets, like bars charts
+	 * @see HovingFlexDataset
 	 */
 	public SchemeScope getSchemeScope() {
 		return getValue(ColorSchemesOptions.Property.schemeScope, SchemeScope.class, defaultsOptions.getSchemeScope());
 	}
 
+	/**
+	 * Sets the color scheme.
+	 * 
+	 * @param scheme the color scheme.
+	 */
 	public void setScheme(ColorScheme scheme) {
+		// checks if the scheme is already cached (used)
+		// checks also if scheme is consistent
 		if (!ColorSchemesUtil.hasColorScheme(scheme.category(), scheme.name())) {
+			// puts the scheme
 			ColorSchemesUtil.putColorScheme(scheme);
 		}
+		// stores the values of scheme
 		setValue(Property.schemeName, scheme);
 		setValue(Property.schemeCategory, scheme.category());
 	}
@@ -93,26 +110,41 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * @return the color scheme
 	 */
 	public ColorScheme getScheme() {
+		// gets the category and name from object
 		String category = getValue(Property.schemeCategory, defaultsOptions.getSchemeCategory());
 		String name = getValue(Property.schemeName, defaultsOptions.getSchemeName());
+		// all color scheme are stored into cache when the "set" is called
+		// therefore here the scheme MUST be in cache
 		return ColorSchemesUtil.getColorScheme(category, name);
 	}
 
-	public void setFillAlpha(double fillAlpha) {
-		Color.checkAlphaWithinBounds(fillAlpha);
-		setValue(Property.fillAlpha, fillAlpha);
+	/**
+	 * The transparency value for the background color. Must be a number between 0.0 (fully transparent) and 1.0 (no
+	 * transparency).
+	 * 
+	 * @param backgroundColorAlpha the transparency value for the background color
+	 */
+	public void setBackgroundColorAlpha(double backgroundColorAlpha) {
+		// checks if consistent value between 0 and 1
+		Color.checkAlphaWithinBounds(backgroundColorAlpha);
+		setValue(Property.backgroundColorAlpha, backgroundColorAlpha);
 	}
 
 	/**
-	 * The transparency value for the line fill color. Must be a number between 0.0 (fully transparent) and 1.0 (no
+	 * The transparency value for the background color. Must be a number between 0.0 (fully transparent) and 1.0 (no
 	 * transparency).
 	 * 
-	 * @return the transparency value for the line fill color
+	 * @return the transparency value for the background color
 	 */
-	public double getFillAlpha() {
-		return getValue(Property.fillAlpha, defaultsOptions.getFillAlpha());
+	public double getBackgroundColorAlpha() {
+		return getValue(Property.backgroundColorAlpha, defaultsOptions.getBackgroundColorAlpha());
 	}
 
+	/**
+	 * If set to <code>true</code>, the order of the colors in the selected scheme is reversed.
+	 * 
+	 * @param reverse if set to <code>true</code>, the order of the colors in the selected scheme is reversed
+	 */
 	public void setReverse(boolean reverse) {
 		setValue(Property.reverse, reverse);
 	}
