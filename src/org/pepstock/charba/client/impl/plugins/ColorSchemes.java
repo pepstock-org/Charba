@@ -15,17 +15,21 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.data.BarBorderWidth;
 import org.pepstock.charba.client.data.BarDataset;
 import org.pepstock.charba.client.data.Dataset;
+import org.pepstock.charba.client.data.HasDataPoints;
 import org.pepstock.charba.client.data.HovingDataset;
 import org.pepstock.charba.client.data.HovingFlexDataset;
 import org.pepstock.charba.client.data.LiningDataset;
+import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
@@ -93,12 +97,25 @@ public final class ColorSchemes extends AbstractPlugin {
 						if (dataset instanceof HovingDataset) {
 							// casts the dataset
 							HovingDataset hovingDataset = (HovingDataset) dataset;
-							// sets background colors, applying the transparency
-							hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, colors, options.isReverse(), options.getBackgroundColorAlpha()));
-							// checks if border has been requested
-							if (!hovingDataset.getBorderWidth().isEmpty()) {
-								// if yes, apply the colors to borders properties
-								hovingDataset.setBorderColor(getColorsFromData(hovingDataset, colors, options.isReverse(), Color.DEFAULT_ALPHA));
+							// checks if bubble chart because the color will be selected by scheme, as for bar charts
+							if (ChartType.bubble.equals(chart.getType()) && SchemeScope.dataset.equals(options.getSchemeScope())){
+								// if here is at dataset level
+								// every dataset has got own color
+								// sets background color (passed as list but it's only 1), applying the transparency
+								hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, Arrays.asList(color), options.isReverse(), options.getBackgroundColorAlpha()));
+								// checks if border has been requested
+								if (!hovingDataset.getBorderWidth().isEmpty()) {
+									// if yes, apply the color (passed as list but it's only 1) to borders properties
+									hovingDataset.setBorderColor(getColorsFromData(hovingDataset, Arrays.asList(color), options.isReverse(), Color.DEFAULT_ALPHA));
+								}
+							} else {
+								// sets background colors, applying the transparency
+								hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, colors, options.isReverse(), options.getBackgroundColorAlpha()));
+								// checks if border has been requested
+								if (!hovingDataset.getBorderWidth().isEmpty()) {
+									// if yes, apply the colors to borders properties
+									hovingDataset.setBorderColor(getColorsFromData(hovingDataset, colors, options.isReverse(), Color.DEFAULT_ALPHA));
+								}
 							}
 						} else if (dataset instanceof HovingFlexDataset) {
 							// if hoving FLEX dataset, like BAR
@@ -160,10 +177,18 @@ public final class ColorSchemes extends AbstractPlugin {
 	private IsColor[] getColorsFromData(Dataset dataset, List<IsColor> colors, boolean isReverse, double alpha) {
 		// gets the amount of colors
 		int amountOfColors = colors.size();
-		// gets the data
-		List<Double> datas = dataset.getData();
 		// gets the amount of data
-		int amountOfData = datas.size();
+		int amountOfData = 0;
+		// gets data checking type
+		DataType type = dataset.getDataType();
+		// depending on data type, gets the amount of data
+		if (DataType.numbers.equals(type)) {
+			amountOfData = dataset.getData().size();
+		} else if (DataType.points.equals(type) && dataset instanceof HasDataPoints) {
+			// ONLY datasets which implements the interface have got the data POINTS 
+			HasDataPoints dataPointsDataset = (HasDataPoints)dataset;
+			amountOfData = dataPointsDataset.getDataPoints().size();
+		}
 		// creates an array with the data dimension
 		IsColor[] colorsToSet = new IsColor[amountOfData];
 		// scans all data

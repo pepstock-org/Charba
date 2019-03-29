@@ -274,8 +274,7 @@ public final class Color implements IsColor {
 	/**
 	 * Any integer between 0 and 255 (inclusive) is valid.
 	 * 
-	 * @param channel channel to check
-	 * @exception if the channel is nor within bounds
+	 * @param channel channel to check, exception if the channel is nor within bounds
 	 */
 	private static void checkChannelWithinBounds(int channel) {
 		if (channel < 0 || channel > 255) {
@@ -286,8 +285,7 @@ public final class Color implements IsColor {
 	/**
 	 * Any double between 0.0d and 1.0d (inclusive) is valid.
 	 * 
-	 * @param alpha alpha value
-	 * @exception if the channel is nor within bounds
+	 * @param alpha alpha value, exception if the channel is nor within bounds
 	 */
 	public static void checkAlphaWithinBounds(double alpha) {
 		if (alpha < 0D || alpha > 1D) {
