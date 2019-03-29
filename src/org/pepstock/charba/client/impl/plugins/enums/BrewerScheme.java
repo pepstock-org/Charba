@@ -33,7 +33,7 @@ import org.pepstock.charba.client.impl.plugins.ColorSchemes;
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum Brewer implements ColorScheme
+public enum BrewerScheme implements ColorScheme
 {
 	/**
 	 * Color scheme name "YlGn3" - <span style="background-color:#f7fcb9; border-style: solid; border-width:
@@ -2979,7 +2979,7 @@ public enum Brewer implements ColorScheme
 	 * 
 	 * @param hexColors list of colors in HEX format
 	 */
-	private Brewer(String... hexColors) {
+	private BrewerScheme(String... hexColors) {
 		// scans all hex colors and creates ISCOLOR
 		for (String color : hexColors) {
 			// and adds them into the list

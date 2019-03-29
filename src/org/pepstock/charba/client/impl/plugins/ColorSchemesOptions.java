@@ -18,7 +18,6 @@ package org.pepstock.charba.client.impl.plugins;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.data.HovingFlexDataset;
 import org.pepstock.charba.client.impl.plugins.ColorSchemesOptionsFactory.ColorSchemesDefaultsOptionsFactory;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
@@ -71,7 +70,6 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * Sets the color scheme scope when the scheme is applied to hoving flex datasets, like bars charts.
 	 * 
 	 * @param schemeScope the color scheme scope when the scheme is applied to hoving flex datasets, like bars charts.
-	 * @see HovingFlexDataset
 	 */
 	public void setSchemeScope(SchemeScope schemeScope) {
 		setValue(Property.schemeScope, schemeScope);
@@ -81,7 +79,6 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * Returns the color scheme scope when the scheme is applied to hoving flex datasets, like bars charts.
 	 * 
 	 * @return the color scheme scope when the scheme is applied to hoving flex datasets, like bars charts
-	 * @see HovingFlexDataset
 	 */
 	public SchemeScope getSchemeScope() {
 		return getValue(ColorSchemesOptions.Property.schemeScope, SchemeScope.class, defaultsOptions.getSchemeScope());

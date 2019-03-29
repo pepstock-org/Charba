@@ -17,8 +17,7 @@ package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.data.HovingFlexDataset;
-import org.pepstock.charba.client.impl.plugins.enums.Brewer;
+import org.pepstock.charba.client.impl.plugins.enums.BrewerScheme;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 
 /**
@@ -32,7 +31,7 @@ final class ColorSchemesDefaultsOptions extends NativeObjectContainer {
 	// has been created on top of the available schemes.
 	static final String DEFAULT_SCHEME_CATEGORY = "custom";
 
-	private static final ColorScheme DEFAULT_SCHEME = Brewer.Paired12;
+	private static final ColorScheme DEFAULT_SCHEME = BrewerScheme.Paired12;
 
 	private static final SchemeScope DEFAULT_SCHEME_SCOPE = SchemeScope.dataset;
 
@@ -79,7 +78,6 @@ final class ColorSchemesDefaultsOptions extends NativeObjectContainer {
 	 * Returns the color scheme scope when the scheme is applied to hoving flex datasets, like bars charts.
 	 * 
 	 * @return the color scheme cope when the scheme is applied to hoving flex datasets, like bars charts
-	 * @see HovingFlexDataset
 	 */
 	SchemeScope getSchemeScope() {
 		return getValue(ColorSchemesOptions.Property.schemeScope, SchemeScope.class, DEFAULT_SCHEME_SCOPE);

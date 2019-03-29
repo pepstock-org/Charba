@@ -33,7 +33,7 @@ import org.pepstock.charba.client.impl.plugins.ColorSchemes;
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum Office implements ColorScheme
+public enum OfficeScheme implements ColorScheme
 {
 	/**
 	 * Color scheme name "Adjacency6" - <span style="background-color:#a9a57c; border-style: solid; border-width:
@@ -1510,7 +1510,7 @@ public enum Office implements ColorScheme
 	 * 
 	 * @param hexColors list of colors in HEX format
 	 */
-	private Office(String... hexColors) {
+	private OfficeScheme(String... hexColors) {
 		// scans all hex colors and creates ISCOLOR
 		for (String color : hexColors) {
 			// and adds them into the list

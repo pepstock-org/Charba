@@ -33,7 +33,7 @@ import org.pepstock.charba.client.impl.plugins.ColorSchemes;
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum Tableau implements ColorScheme
+public enum TableauScheme implements ColorScheme
 {
 	/**
 	 * Color scheme name "Tableau10" - <span style="background-color:#4e79a7; border-style: solid; border-width:
@@ -1432,7 +1432,7 @@ public enum Tableau implements ColorScheme
 	 * 
 	 * @param hexColors list of colors in HEX format
 	 */
-	private Tableau(String... hexColors) {
+	private TableauScheme(String... hexColors) {
 		// scans all hex colors and creates ISCOLOR
 		for (String color : hexColors) {
 			// and adds them into the list
