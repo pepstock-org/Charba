@@ -58,7 +58,7 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 	@Override
 	public boolean onLeave(AbstractChart<?, ?> chart, ScriptableContext context) {
 		if (chart.isInitialized()) {
-			chart.getCanvas().getElement().getStyle().setCursor(Cursor.DEFAULT);
+			chart.getCanvas().getElement().getStyle().setCursor(chart.getInitialCursor());
 		}
 		return true;
 	}

@@ -18,6 +18,7 @@ package org.pepstock.charba.client.items;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.events.ChartNativeEvent;
 
 /**
  * This is a wrapper of the CHART.JS item which contains the legends hit box.
@@ -53,6 +54,25 @@ public final class LegendHitBoxItem extends SizeItem {
 		return getValue(Position.top, UndefinedValues.INTEGER);
 	}
 
+	/**
+	 * Returns <code>true</code> if the chart event is inside of this box, otherwise <code>false</code>.
+	 * 
+	 * @param event event to check if inside the box
+	 * @return <code>true</code> if the chart event is inside of this box, otherwise <code>false</code>
+	 */
+	public boolean isInside(ChartNativeEvent event) {
+		// checks is properties are consistent
+		if (has(Position.left) && has(Position.top)) {
+			// checks X
+			boolean isX = event.getLayerX() >= getLeft() && event.getLayerX() <= (getLeft() + getWidth());
+			// checks Y
+			boolean isY = event.getLayerY() >= getTop() && event.getLayerY() <= (getTop() + getHeight());;
+			return isX && isY;
+		}
+		// if here, no properties, then false
+		return false;
+	}
+	
 	/**
 	 * Inner class to create legend hit box item by a native object.
 	 * 

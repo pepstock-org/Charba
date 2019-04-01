@@ -35,8 +35,10 @@ public final class PercentageCallback implements FormatterCallback {
 	 * Constant of NaN as string
 	 */
 	public static final String NAN_AS_STRING = "NaN";
-	// default format
-	private static final String DEFAULT_FORMAT = "##0.##%";
+	/**
+	 * Constant number format
+	 */
+	public static final String DEFAULT_FORMAT = "##0.##%";
 	// default stacked flag
 	private static final boolean DEFAULT_STACKED = false;
 	// number format

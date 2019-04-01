@@ -31,10 +31,12 @@ import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.Plugins;
 import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.utils.JSON;
+import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.HeadingElement;
+import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.MouseDownEvent;
@@ -89,7 +91,9 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	private final ChartOptions options;
 	// instance of dataset items factory.
 	private final DatasetItemFactory datasetItemFactory = new DatasetItemFactory();
-
+	// cursor  defined when chart is created
+	private final Cursor initialCursor; 
+	
 	/**
 	 * Initializes simple panel and canvas which are used by CHART.JS.<br>
 	 * It sets also some default behaviors (width in percentage) for resizing
@@ -141,6 +145,8 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 		plugins = new Plugins();
 		// creates defaults options for this chart type
 		options = createChartOptions();
+		// stores initial cursor
+		initialCursor = Utilities.getCursorOfChart(this);
 	}
 
 	/*
@@ -189,6 +195,15 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			// cleans up the handler for mouse listener
 			preventDisplayHandler.removeHandler();
 		}
+	}
+
+	/**
+	 * Returns the initial cursor of the chart.
+	 * 
+	 * @return the initial cursor of the chart.
+	 */
+	public final Cursor getInitialCursor() {
+		return initialCursor;
 	}
 
 	/**
@@ -327,7 +342,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	void addHandlerRegistration(HandlerRegistration registration) {
 		handlerRegistrations.add(registration);
 	}
-
+	
 	/**
 	 * Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object
 	 * within Chart.js, along with any associated event listeners attached by Chart.js.

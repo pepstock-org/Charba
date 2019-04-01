@@ -15,9 +15,11 @@
 */
 package org.pepstock.charba.client.utils;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.enums.FontStyle;
 
 import com.google.gwt.dom.client.ImageElement;
+import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Image;
 
@@ -132,5 +134,28 @@ public final class Utilities {
 		}
 		// returns null
 		return null;
+	}
+	
+	/**
+	 * Returns the cursor currently set into chart.
+	 * 
+	 * @param chart chart instance
+	 * @return the cursor currently set into chart. Default is {@link Cursor#DEFAULT}.
+	 */
+	public static Cursor getCursorOfChart(AbstractChart<?,?> chart) {
+		// checks if argument is consistent
+		if (chart != null) {
+			// scans all cursors to check if any cursor is already set
+			// needs to scan them because with valueOf there is an exception
+			// if the value does not match any element of enumeration
+			for (Cursor cursor : Cursor.values()) {
+				if (cursor.name().equalsIgnoreCase(chart.getElement().getStyle().getCursor())) {
+					// stores the current cursor
+					return cursor;
+				}
+			}
+		}
+		//if here, not found
+		return Cursor.DEFAULT;
 	}
 }

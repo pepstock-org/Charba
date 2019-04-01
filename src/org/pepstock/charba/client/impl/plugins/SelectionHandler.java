@@ -190,20 +190,8 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			// checks if was already hover
 			// using the cursor previously saved
 			if (cursorOverClearSelection == null) {
-				// scans all cursor to check if any cursor is already set
-				// needs to scan them because with valueOf there is an exception
-				// if the value does not match any element of enumeration
-				for (Cursor cursor : Cursor.values()) {
-					if (cursor.name().equalsIgnoreCase(chart.getElement().getStyle().getCursor())) {
-						// stores the current cursor
-						cursorOverClearSelection = Cursor.valueOf(chart.getElement().getStyle().getCursor());
-					}
-				}
-				// if here, no cursor was set
-				// then uses the default
-				if (cursorOverClearSelection == null) {
-					cursorOverClearSelection = Cursor.DEFAULT;
-				}
+				// gets cursor
+				cursorOverClearSelection = Utilities.getCursorOfChart(chart);
 			}
 			// sets cursor pointer because hover the clear selection
 			chart.getCanvas().getElement().getStyle().setCursor(Cursor.POINTER);

@@ -23,7 +23,7 @@ import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
- * This is the object to map the "{@value ColorSchemes#ID}" plugin options, both at chart and global level.
+ * This is the object to map the "charbacolorschemes" plugin options, both at chart and global level.
  * 
  * @author Andrea "Stock" Stocchero
  *

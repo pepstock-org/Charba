@@ -15,9 +15,14 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
+import java.util.List;
+
+import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.impl.plugins.ChartPointerOptionsFactory.ChartPointerDefaultsOptionsFactory;
+import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 import com.google.gwt.dom.client.Style.Cursor;
@@ -40,6 +45,7 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 	 */
 	enum Property implements Key
 	{
+		elements,
 		cursorPointer,
 		cursorDefault
 	}
@@ -52,6 +58,8 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 		super(ChartPointer.ID);
 		// reads the default default global options
 		defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
+		// sets all elements as defaults
+		setElements(PointerElement.values());
 	}
 
 	/**
@@ -63,6 +71,26 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 	ChartPointerOptions(NativeObject nativeObject, ChartPointerDefaultsOptions defaultsOptions) {
 		super(ChartPointer.ID, nativeObject);
 		this.defaultsOptions = defaultsOptions;
+	}
+	
+	/**
+	 * Sets the chart elements in scope to "cursorpointer" plugin.
+	 * 
+	 * @param elements the chart elements in scope to "cursorpointer" plugin
+	 */
+	public void setElements(PointerElement... elements) {
+		// sets the array of events
+		setArrayValue(Property.elements, ArrayString.fromOrNull(elements));
+	}
+
+	/**
+	 * Returns the chart elements in scope to "cursorpointer" plugin.
+	 * 
+	 * @return the chart elements in scope to "cursorpointer" plugin
+	 */
+	public List<PointerElement> getElements() {
+		ArrayString array = getArrayValue(Property.elements);
+		return ArrayListHelper.list(PointerElement.class, array);
 	}
 
 	/**

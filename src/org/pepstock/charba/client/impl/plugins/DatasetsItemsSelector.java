@@ -220,6 +220,23 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.AbstractChart)
+	 */
+	@Override
+	public boolean onBeforeUpdate(AbstractChart<?, ?> chart) {
+		// checks if the plugin has been invoked for LINE or BAR charts
+		if (chart.getType().equals(ChartType.line) || chart.getType().equals(ChartType.bar)) {
+			// add checks if there is any dataset selection handler into option
+			// if yes exception
+			if (chart.getOptions().hasDatasetSelectionHandlers()) {
+				// throw exception
+				throw new IllegalArgumentException("Unable to activate plugin because a dataset selection handler has been defined.");
+			}
+		}
+		return true;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -16,15 +16,16 @@
 package org.pepstock.charba.client.impl.plugins;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.events.ChartNativeEvent;
+import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 import org.pepstock.charba.client.items.DatasetItem;
+import org.pepstock.charba.client.items.LegendHitBoxItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
-
-import com.google.gwt.dom.client.Style.Cursor;
 
 /**
  * This plugin is changing the cursor when mouse over on dataset, title on canvas if a dataset selection, title handler have
@@ -59,39 +60,26 @@ public final class ChartPointer extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client.AbstractChart)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.AbstractChart)
 	 */
 	@Override
-	public void onAfterInit(AbstractChart<?, ?> chart) {
+	public boolean onBeforeUpdate(AbstractChart<?, ?> chart) {
 		// checks if chart has got any dataset selection and title click handler
 		if (chart.getOptions().hasDatasetSelectionHandlers() || chart.getOptions().hasTitleClickHandlers() || chart.getOptions().hasAxisClickHandlers()) {
 			// creates options instance
 			ChartPointerOptions pOptions = null;
-			// checks if is cached
-			if (!OPTIONS.containsKey(chart.getId())) {
-				// if not, loads and cache
-				// creates the plugin options using the java script object
-				// passing also the default color set at constructor.
-				if (chart.getOptions().getPlugins().hasOptions(ID)) {
-					pOptions = chart.getOptions().getPlugins().getOptions(ID, FACTORY);
-				} else {
-					pOptions = new ChartPointerOptions();
-				}
-				OPTIONS.put(chart.getId(), pOptions);
+			// if not, loads and cache
+			// creates the plugin options using the java script object
+			// passing also the default color set at constructor.
+			if (chart.getOptions().getPlugins().hasOptions(ID)) {
+				pOptions = chart.getOptions().getPlugins().getOptions(ID, FACTORY);
 			} else {
-				// if here, options were already cached
-				pOptions = OPTIONS.get(chart.getId());
+				pOptions = new ChartPointerOptions();
 			}
-			// scans all cursor to check if any cursor is already set
-			// needs to scan them because with valueOf there is an exception
-			// if the value does not match any element of enumeration
-			for (Cursor cursor : Cursor.values()) {
-				if (cursor.name().equalsIgnoreCase(chart.getElement().getStyle().getCursor())) {
-					// stores the current cursor
-					pOptions.setCurrentCursor(cursor);
-				}
-			}
+			OPTIONS.put(chart.getId(), pOptions);
+			pOptions.setCurrentCursor(chart.getInitialCursor());
 		}
+		return true;
 	}
 
 	/*
@@ -106,26 +94,68 @@ public final class ChartPointer extends AbstractPlugin {
 		if (chart.getOptions().hasDatasetSelectionHandlers() || chart.getOptions().hasTitleClickHandlers() || chart.getOptions().hasAxisClickHandlers()) {
 			// gets options instance
 			ChartPointerOptions pOptions = OPTIONS.get(chart.getId());
-			// if yes, asks the dataset item by event
-			DatasetItem item = chart.getElementAtEvent(event);
+			// gets the scope
+			List<PointerElement> scope = pOptions.getElements();
+			// creates the item reference
+			DatasetItem item = null;
+			// checks if the datasets is in scope
+			if (chart.getOptions().hasDatasetSelectionHandlers() && isElementInScope(scope, PointerElement.dataset)) {
+				// if yes, asks the dataset item by event
+				item = chart.getElementAtEvent(event);
+			}
 			// checks item
 			if (item != null) {
 				// DATASET SELECTION
 				// otherwise sets the pointer
 				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
-			} else if (chart.getNode().getTitle().isInside(event)) {
+			} else if (chart.getOptions().hasTitleClickHandlers() && isElementInScope(scope, PointerElement.title) && chart.getNode().getTitle().isInside(event)) {
 				// TITLE SELECTION
 				// otherwise sets the pointer
 				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
-			} else if (!ScaleType.none.equals(chart.getType().scaleType()) && chart.getNode().getScales().isInside(event)) {
+			} else if (chart.getOptions().hasAxisClickHandlers() && isElementInScope(scope, PointerElement.axes) && !ScaleType.none.equals(chart.getType().scaleType()) && chart.getNode().getScales().isInside(event)) {
 				// AXIS SELECTION
 				// otherwise sets the pointer
 				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
+			} else if (isElementInScope(scope, PointerElement.legend) && chart.getNode().getLegend().isInside(event)) {
+				// LEGEND SELECTION
+				// checks if cursor is over the hit box
+				List<LegendHitBoxItem> legendItems = chart.getNode().getLegend().getHitBoxes();
+				// scnas all legend item box
+				for (LegendHitBoxItem legendItem : legendItems) {
+					// if cursor inside the legend item
+					if (legendItem.isInside(event)) {
+						// sets the pointer
+						chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
+						// and close
+						return;
+					}
+				}
+				// if null, sets the default cursor
+				chart.getElement().getStyle().setCursor(chart.getInitialCursor());
 			} else {
 				// if null, sets the default cursor
-				chart.getElement().getStyle().setCursor(pOptions.getCurrentCursor());
+				chart.getElement().getStyle().setCursor(chart.getInitialCursor());
 			}
 		}
+	}
+
+	/**
+	 * Returns <code>true</code> if the element is configured in order to apply cursor when mouse is over.
+	 * 
+	 * @param scope  list of pointer elements configured as in scope
+	 * @param element the element to be checked
+	 * @return  <code>true</code> if the element is configured in order to apply cursor when mouse is over
+	 */
+	private boolean isElementInScope(List<PointerElement> scope, PointerElement element) {
+		// scans all elements in scope
+		for (PointerElement scopeElement : scope) {
+			// if equals, return true
+			if (element.equals(scopeElement)) {
+				return true;
+			}
+		}
+		// if here, the elemtn is not in scope
+		return false;
 	}
 
 }

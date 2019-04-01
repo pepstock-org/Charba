@@ -18,7 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 
 /**
- * Comfortable object to create "{@value ColorSchemes#ID}" plugin options by a builder.
+ * Comfortable object to create "charbacolorschemes" plugin options by a builder.
  * 
  * @author Andrea "Stock" Stocchero
  *

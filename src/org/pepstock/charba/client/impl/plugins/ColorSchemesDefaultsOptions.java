@@ -21,7 +21,7 @@ import org.pepstock.charba.client.impl.plugins.enums.BrewerScheme;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 
 /**
- * It wraps default global options if there are and provides all default values for "{@value ColorSchemes#ID}" plugin.
+ * It wraps default global options if there are and provides all default values for "charbacolorschemes" plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
