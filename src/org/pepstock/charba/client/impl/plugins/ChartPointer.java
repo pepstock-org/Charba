@@ -120,7 +120,7 @@ public final class ChartPointer extends AbstractPlugin {
 				// LEGEND SELECTION
 				// checks if cursor is over the hit box
 				List<LegendHitBoxItem> legendItems = chart.getNode().getLegend().getHitBoxes();
-				// scnas all legend item box
+				// scans all legend item box
 				for (LegendHitBoxItem legendItem : legendItems) {
 					// if cursor inside the legend item
 					if (legendItem.isInside(event)) {
