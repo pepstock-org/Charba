@@ -79,7 +79,7 @@ public class LegendItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset index of the chart
 	 * 
-	 * @return the dataset index of the chart. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the dataset index of the chart. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getDatasetIndex() {
 		return getValue(Property.datasetIndex, UndefinedValues.INTEGER);
@@ -89,7 +89,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * Returns the dataset index of the chart (for POLAR and PIE charts)
 	 * 
 	 * @return the dataset index of the chart (for POLAR and PIE charts). Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 *         {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getIndex() {
 		return getValue(Property.index, UndefinedValues.INTEGER);
@@ -98,7 +98,7 @@ public class LegendItem extends NativeObjectContainer {
 	/**
 	 * Returns the label that will be displayed
 	 * 
-	 * @return the label that will be displayed. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return the label that will be displayed. Default is {@link UndefinedValues#STRING}.
 	 */
 	public final String getText() {
 		return getValue(Property.text, UndefinedValues.STRING);
@@ -118,7 +118,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return <code>true</code> if this item represents a hidden dataset. Label will be rendered with a strike-through
 	 *         effect.<br>
-	 *         Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 *         Default is {@link UndefinedValues#BOOLEAN}.
 	 */
 	public final boolean isHidden() {
 		return getValue(Property.hidden, UndefinedValues.BOOLEAN);

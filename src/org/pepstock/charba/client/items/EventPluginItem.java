@@ -64,7 +64,7 @@ public final class EventPluginItem extends NativeObjectContainer {
 	/**
 	 * Returns X value of event.
 	 * 
-	 * @return X value of event. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return X value of event. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getX() {
 		return getValue(Property.x, UndefinedValues.INTEGER);
@@ -73,7 +73,7 @@ public final class EventPluginItem extends NativeObjectContainer {
 	/**
 	 * Returns Y value of event.
 	 * 
-	 * @return Y value of event. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return Y value of event. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getY() {
 		return getValue(Property.y, UndefinedValues.INTEGER);
@@ -82,7 +82,7 @@ public final class EventPluginItem extends NativeObjectContainer {
 	/**
 	 * Returns the event type a string.
 	 * 
-	 * @return the event type a string. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return the event type a string. Default is {@link UndefinedValues#STRING}.
 	 */
 	public String getType() {
 		return getValue(Property.type, UndefinedValues.STRING);

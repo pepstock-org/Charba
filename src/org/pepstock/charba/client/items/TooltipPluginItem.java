@@ -53,7 +53,7 @@ public final class TooltipPluginItem extends NativeObjectContainer {
 	/**
 	 * Returns the total number of animation frames.
 	 * 
-	 * @return the total number of animation frames. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the total number of animation frames. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getEasing() {
 		return getValue(Property.easing, UndefinedValues.DOUBLE);

@@ -58,7 +58,7 @@ public class DatasetItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset index of the chart
 	 * 
-	 * @return the dataset index of the chart. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the dataset index of the chart. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getDatasetIndex() {
 		return getValue(Property._datasetIndex, UndefinedValues.INTEGER);
@@ -68,7 +68,7 @@ public class DatasetItem extends NativeObjectContainer {
 	 * Returns the index of the data inside the dataset.
 	 * 
 	 * @return the index of the data inside the dataset. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 *         {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getIndex() {
 		return getValue(Property._index, UndefinedValues.INTEGER);
@@ -78,7 +78,7 @@ public class DatasetItem extends NativeObjectContainer {
 	 * Returns if the dataset is hidden.
 	 * 
 	 * @return <code>true</code> if the dataset is hidden, otherwise <code>false</code>. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 *         {@link UndefinedValues#BOOLEAN}.
 	 */
 	public final boolean isHidden() {
 		return getValue(Property.hidden, UndefinedValues.BOOLEAN);

@@ -34,7 +34,7 @@ public enum Id implements Key
 	 * Returns the property value from java script object.
 	 * 
 	 * @param nativeObjectContainer java script object container
-	 * @return the property value or {@link org.pepstock.charba.client.items.UndefinedValues#STRING} if not exist
+	 * @return the property value or {@link UndefinedValues#STRING} if not exist
 	 */
 	public static String get(NativeObjectContainer nativeObjectContainer) {
 		return get(nativeObjectContainer.getNativeObject());
@@ -44,7 +44,7 @@ public enum Id implements Key
 	 * Returns the property value from java script object.
 	 * 
 	 * @param nativeObject java script object
-	 * @return the property value or {@link org.pepstock.charba.client.items.UndefinedValues#STRING} if not exist
+	 * @return the property value or {@link UndefinedValues#STRING} if not exist
 	 */
 	public static String get(NativeObject nativeObject) {
 		// checks if property exists
@@ -63,7 +63,7 @@ public enum Id implements Key
 	 * 
 	 * @param key the key to search inside the object
 	 * @param nativeObject java script object
-	 * @return the property value or {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER} if not exist
+	 * @return the property value or {@link UndefinedValues#INTEGER} if not exist
 	 */
 	public static int get(Key key, NativeObject nativeObject) {
 		// checks if property exists

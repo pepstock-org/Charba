@@ -63,7 +63,7 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * Returns if it is in doughnut mode.
 	 * 
 	 * @return <code>true</code> it is in doughnut mode. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 *         {@link UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isDoughnutMode() {
 		return getValue(Property.doughnutMode, UndefinedValues.BOOLEAN);

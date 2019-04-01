@@ -85,7 +85,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the full width in pixel.
 	 * 
-	 * @return the full width in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 * @return the full width in pixel. Default is {@link UndefinedValues#BOOLEAN}.
 	 */
 	public final boolean isFullWidth() {
 		return getValue(Property.fullWidth, UndefinedValues.BOOLEAN);
@@ -103,7 +103,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the weight.
 	 * 
-	 * @return the weight. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the weight. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public final double getWeight() {
 		return getValue(Property.weight, UndefinedValues.DOUBLE);
@@ -112,7 +112,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the width in pixel.
 	 * 
-	 * @return the width in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the width in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getWidth() {
 		return getValue(Property.width, UndefinedValues.INTEGER);
@@ -121,7 +121,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the height in pixel.
 	 * 
-	 * @return the height in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the height in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getHeight() {
 		return getValue(Property.height, UndefinedValues.INTEGER);
@@ -130,7 +130,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the max width in pixel.
 	 * 
-	 * @return the max width in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the max width in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public final double getMaxWidth() {
 		return getValue(Property.maxWidth, UndefinedValues.DOUBLE);
@@ -139,7 +139,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the max height in pixel.
 	 * 
-	 * @return the max height in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the max height in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public final double getMaxHeight() {
 		return getValue(Property.maxHeight, UndefinedValues.DOUBLE);
@@ -148,7 +148,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the padding top in pixel.
 	 * 
-	 * @return the padding top in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the padding top in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getPaddingTop() {
 		return getValue(Property.paddingTop, UndefinedValues.INTEGER);
@@ -157,7 +157,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the padding right in pixel.
 	 * 
-	 * @return the padding right in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the padding right in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getPaddingRight() {
 		return getValue(Property.paddingRight, UndefinedValues.INTEGER);
@@ -166,7 +166,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the padding bottom in pixel.
 	 * 
-	 * @return the padding bottom in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the padding bottom in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getPaddingBottom() {
 		return getValue(Property.paddingBottom, UndefinedValues.INTEGER);
@@ -175,7 +175,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	/**
 	 * Returns the padding left in pixel.
 	 * 
-	 * @return the padding left in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the padding left in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getPaddingLeft() {
 		return getValue(Property.paddingLeft, UndefinedValues.INTEGER);

@@ -52,7 +52,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	/**
 	 * Returns the top of chart area.
 	 * 
-	 * @return the top of chart area. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the top of chart area. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getTop() {
 		return getValue(Property.top, UndefinedValues.INTEGER);
@@ -61,7 +61,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	/**
 	 * Returns the right of chart area.
 	 * 
-	 * @return the right of chart area. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the right of chart area. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getRight() {
 		return getValue(Property.right, UndefinedValues.INTEGER);
@@ -70,7 +70,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	/**
 	 * Returns the bottom of chart area.
 	 * 
-	 * @return the bottom of chart area. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the bottom of chart area. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getBottom() {
 		return getValue(Property.bottom, UndefinedValues.INTEGER);
@@ -79,7 +79,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	/**
 	 * Returns the left of chart area.
 	 * 
-	 * @return the left of chart area. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the left of chart area. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getLeft() {
 		return getValue(Property.left, UndefinedValues.INTEGER);

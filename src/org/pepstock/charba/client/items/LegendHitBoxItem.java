@@ -39,7 +39,7 @@ public final class LegendHitBoxItem extends SizeItem {
 	/**
 	 * Returns the padding left in pixel.
 	 * 
-	 * @return the padding left in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the padding left in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getLeft() {
 		return getValue(Position.left, UndefinedValues.INTEGER);
@@ -48,7 +48,7 @@ public final class LegendHitBoxItem extends SizeItem {
 	/**
 	 * Returns the padding top in pixel.
 	 * 
-	 * @return the padding top in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the padding top in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getTop() {
 		return getValue(Position.top, UndefinedValues.INTEGER);

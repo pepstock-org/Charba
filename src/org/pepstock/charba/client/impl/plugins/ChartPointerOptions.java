@@ -58,8 +58,6 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 		super(ChartPointer.ID);
 		// reads the default default global options
 		defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
-		// sets all elements as defaults
-		setElements(PointerElement.values());
 	}
 
 	/**
@@ -89,8 +87,16 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 	 * @return the chart elements in scope to "cursorpointer" plugin
 	 */
 	public List<PointerElement> getElements() {
-		ArrayString array = getArrayValue(Property.elements);
-		return ArrayListHelper.list(PointerElement.class, array);
+		// checks if there is the property
+		if (has(Property.elements)) {
+			// reads the property
+			ArrayString array = getArrayValue(ChartPointerOptions.Property.elements);
+			return ArrayListHelper.list(PointerElement.class, array);
+		} else {
+			// if here, no property
+			// then it uses the default ones
+			return defaultsOptions.getElements();
+		}
 	}
 
 	/**

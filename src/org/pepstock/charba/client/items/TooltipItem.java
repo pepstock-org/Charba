@@ -57,7 +57,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	/**
 	 * Returns the label for the tooltip.
 	 * 
-	 * @return the label for the tooltip. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return the label for the tooltip. Default is {@link UndefinedValues#STRING}.
 	 */
 	public String getLabel() {
 		return getValue(Property.label, UndefinedValues.STRING);
@@ -66,7 +66,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	/**
 	 * Returns the value for the tooltip.
 	 * 
-	 * @return the value for the tooltip. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return the value for the tooltip. Default is {@link UndefinedValues#STRING}.
 	 */
 	public String getValue() {
 		return getValue(Property.value, UndefinedValues.STRING);
@@ -75,7 +75,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	/**
 	 * Returns the X location of label. Is {@link Deprecated}, use `value` or `label` instead
 	 * 
-	 * @return the X location of label. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return the X location of label. Default is {@link UndefinedValues#STRING}.
 	 */
 	@Deprecated
 	public String getXLabel() {
@@ -85,7 +85,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	/**
 	 * Returns the Y location of label. Is {@link Deprecated}, use `value` or `label` instead
 	 * 
-	 * @return the Y location of label. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return the Y location of label. Default is {@link UndefinedValues#STRING}.
 	 */
 	@Deprecated
 	public String getYLabel() {
@@ -95,7 +95,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset index of the chart
 	 * 
-	 * @return the dataset index of the chart. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the dataset index of the chart. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getDatasetIndex() {
 		return getValue(Property.datasetIndex, UndefinedValues.INTEGER);
@@ -105,7 +105,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	 * Returns the index of the data inside the dataset.
 	 * 
 	 * @return the index of the data inside the dataset. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 *         {@link UndefinedValues#INTEGER}.
 	 */
 	public int getIndex() {
 		return getValue(Property.index, UndefinedValues.INTEGER);
@@ -114,7 +114,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	/**
 	 * Returns the X location of tooltip item.
 	 * 
-	 * @return the X location of tooltip item. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the X location of tooltip item. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getX() {
 		return getValue(Property.x, UndefinedValues.INTEGER);
@@ -123,7 +123,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	/**
 	 * Returns the Y location of tooltip item.
 	 * 
-	 * @return the Y location of tooltip item. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the Y location of tooltip item. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getY() {
 		return getValue(Property.y, UndefinedValues.INTEGER);

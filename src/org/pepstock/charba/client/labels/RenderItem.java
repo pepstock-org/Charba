@@ -92,7 +92,7 @@ public class RenderItem {
 	 * Returns the index of the data inside the dataset.
 	 * 
 	 * @return the index of the data inside the dataset. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 *         {@link UndefinedValues#INTEGER}.
 	 */
 	@JsOverlay
 	public final int getIndex() {
@@ -108,7 +108,7 @@ public class RenderItem {
 	 * Returns the dataset index of the data inside the dataset.
 	 * 
 	 * @return the dataset index of the data inside the dataset. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 *         {@link UndefinedValues#INTEGER}.
 	 */
 	@JsOverlay
 	public final int getDatasetIndex() {
@@ -123,7 +123,7 @@ public class RenderItem {
 	/**
 	 * Returns the label for the dataset.
 	 * 
-	 * @return the label for the dataset. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return the label for the dataset. Default is {@link UndefinedValues#STRING}.
 	 */
 	@JsOverlay
 	public final String getLabel() {
@@ -138,7 +138,7 @@ public class RenderItem {
 	/**
 	 * Returns the percentage for the dataset.
 	 * 
-	 * @return the percentage for the dataset. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the percentage for the dataset. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	@JsOverlay
 	public final double getPercentage() {
@@ -153,7 +153,7 @@ public class RenderItem {
 	/**
 	 * Returns the value for the dataset.
 	 * 
-	 * @return the value for the dataset. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the value for the dataset. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	@JsOverlay
 	public final double getValue() {

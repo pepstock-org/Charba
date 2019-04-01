@@ -143,7 +143,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the X align location.
 	 * 
-	 * @return the X align location. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return the X align location. Default is {@link UndefinedValues#STRING}.
 	 */
 	public String getXAlign() {
 		return getValue(Property.xAlign, UndefinedValues.STRING);
@@ -152,7 +152,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the Y align location.
 	 * 
-	 * @return the Y align location. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return the Y align location. Default is {@link UndefinedValues#STRING}.
 	 */
 	public String getYAlign() {
 		return getValue(Property.yAlign, UndefinedValues.STRING);
@@ -161,7 +161,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the X location of tooltip.
 	 * 
-	 * @return the X location of tooltip. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the X location of tooltip. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getX() {
 		return getValue(Property.x, UndefinedValues.INTEGER);
@@ -170,7 +170,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the Y location of tooltip.
 	 * 
-	 * @return the Y location of tooltip. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the Y location of tooltip. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getY() {
 		return getValue(Property.y, UndefinedValues.INTEGER);
@@ -179,7 +179,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the width of tooltip.
 	 * 
-	 * @return the width of tooltip. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the width of tooltip. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getWidth() {
 		return getValue(Property.width, UndefinedValues.INTEGER);
@@ -188,7 +188,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the height of tooltip.
 	 * 
-	 * @return the height of tooltip. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the height of tooltip. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getHeight() {
 		return getValue(Property.height, UndefinedValues.INTEGER);
@@ -197,7 +197,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the X location of the tooltip arrow.
 	 * 
-	 * @return the X location of the tooltip arrow. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the X location of the tooltip arrow. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getCaretX() {
 		return getValue(Property.caretX, UndefinedValues.INTEGER);
@@ -206,7 +206,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the Y location of the tooltip arrow.
 	 * 
-	 * @return the Y location of the tooltip arrow. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the Y location of the tooltip arrow. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getCaretY() {
 		return getValue(Property.caretY, UndefinedValues.INTEGER);
@@ -551,7 +551,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	/**
 	 * Returns the opacity of tooltip.
 	 * 
-	 * @return the opacity of tooltip. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the opacity of tooltip. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getOpacity() {
 		return getValue(Property.opacity, UndefinedValues.DOUBLE);

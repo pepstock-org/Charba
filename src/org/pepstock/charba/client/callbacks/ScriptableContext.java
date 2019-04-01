@@ -83,8 +83,7 @@ public final class ScriptableContext extends NativeExtendedObject {
 	/**
 	 * Returns the index of the data inside the dataset.
 	 * 
-	 * @return the index of the data inside the dataset. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	@JsOverlay
 	public int getIndex() {
@@ -99,8 +98,7 @@ public final class ScriptableContext extends NativeExtendedObject {
 	/**
 	 * Returns the dataset index of the data inside the dataset.
 	 * 
-	 * @return the dataset index of the data inside the dataset. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the dataset index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	@JsOverlay
 	public int getDatasetIndex() {

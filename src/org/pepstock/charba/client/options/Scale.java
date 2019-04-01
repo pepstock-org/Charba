@@ -207,7 +207,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * This is especially needed if multi-axes charts are used.
 	 * 
 	 * @return The ID is used to link datasets and scale axes together or
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#STRING} if not set
+	 *         {@link UndefinedValues#STRING} if not set
 	 */
 	public final String getId() {
 		return getValue(Property.id, UndefinedValues.STRING);

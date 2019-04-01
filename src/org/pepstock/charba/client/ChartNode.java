@@ -134,7 +134,7 @@ public final class ChartNode {
 	/**
 	 * Returns the CHART JS chart ID.
 	 * 
-	 * @return the CHART JS chart ID. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the CHART JS chart ID. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getId() {
 		return initialized ? check(chart.getId(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
@@ -143,7 +143,7 @@ public final class ChartNode {
 	/**
 	 * Returns the width in pixel.
 	 * 
-	 * @return the width in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the width in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getWidth() {
 		return initialized ? check(chart.getWidth(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
@@ -152,7 +152,7 @@ public final class ChartNode {
 	/**
 	 * Returns the height in pixel.
 	 * 
-	 * @return the height in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the height in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getHeight() {
 		return initialized ? check(chart.getHeight(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
@@ -161,7 +161,7 @@ public final class ChartNode {
 	/**
 	 * Returns the aspect ratio.
 	 * 
-	 * @return the aspect ratio. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the aspect ratio. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getAspectRatio() {
 		return initialized ? check(chart.getAspectRatio(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
@@ -170,7 +170,7 @@ public final class ChartNode {
 	/**
 	 * Returns the current device pixel ratio.
 	 * 
-	 * @return the current device pixel ratio. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the current device pixel ratio. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getCurrentDevicePixelRatio() {
 		return initialized ? check(chart.getCurrentDevicePixelRatio(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
@@ -179,7 +179,7 @@ public final class ChartNode {
 	/**
 	 * Returns if the chart is animating or not.
 	 * 
-	 * @return if the chart is animating or not. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 * @return if the chart is animating or not. Default is {@link UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isAnimating() {
 		return initialized ? check(chart.isAnimating(), UndefinedValues.BOOLEAN) : UndefinedValues.BOOLEAN;
@@ -188,7 +188,7 @@ public final class ChartNode {
 	/**
 	 * Returns the border width value.
 	 * 
-	 * @return the border width value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the border width value. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getBorderWidth() {
 		return initialized ? check(chart.getBorderWidth(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
@@ -197,7 +197,7 @@ public final class ChartNode {
 	/**
 	 * Returns the outer radius value.
 	 * 
-	 * @return the outer radius value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the outer radius value. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getOuterRadius() {
 		return initialized ? check(chart.getOuterRadius(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
@@ -206,7 +206,7 @@ public final class ChartNode {
 	/**
 	 * Returns the inner radius value.
 	 * 
-	 * @return the inner radius value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the inner radius value. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getInnerRadius() {
 		return initialized ? check(chart.getInnerRadius(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
@@ -215,7 +215,7 @@ public final class ChartNode {
 	/**
 	 * Returns the radius length value.
 	 * 
-	 * @return the radius length value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the radius length value. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getRadiusLength() {
 		return initialized ? check(chart.getRadiusLength(), UndefinedValues.DOUBLE) : UndefinedValues.DOUBLE;
@@ -224,7 +224,7 @@ public final class ChartNode {
 	/**
 	 * Returns the offset X value.
 	 * 
-	 * @return the offset X value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the offset X value. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getOffsetX() {
 		return initialized ? check(chart.getOffsetX(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;
@@ -233,7 +233,7 @@ public final class ChartNode {
 	/**
 	 * Returns the offset Y value.
 	 * 
-	 * @return the offset Y value. Default is {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 * @return the offset Y value. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getOffsetY() {
 		return initialized ? check(chart.getOffsetY(), UndefinedValues.INTEGER) : UndefinedValues.INTEGER;

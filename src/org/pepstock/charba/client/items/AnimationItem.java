@@ -50,7 +50,7 @@ public final class AnimationItem extends NativeObjectContainer {
 	/**
 	 * Returns the current animation frame number.
 	 * 
-	 * @return the current animation frame number. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the current animation frame number. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getCurrentStep() {
 		return getValue(Property.currentStep, UndefinedValues.DOUBLE);
@@ -59,7 +59,7 @@ public final class AnimationItem extends NativeObjectContainer {
 	/**
 	 * Returns the total number of animation frames.
 	 * 
-	 * @return the total number of animation frames. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the total number of animation frames. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getNumSteps() {
 		return getValue(Property.numSteps, UndefinedValues.DOUBLE);

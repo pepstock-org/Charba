@@ -48,7 +48,7 @@ final class PluginReference extends NativeObjectContainer {
 	/**
 	 * Returns the plugin id.
 	 * 
-	 * @return the plugin id if exists or an {@link org.pepstock.charba.client.items.UndefinedValues#STRING} if missing.
+	 * @return the plugin id if exists or an {@link UndefinedValues#STRING} if missing.
 	 */
 	String getId() {
 		return getValue(Property.id, UndefinedValues.STRING);

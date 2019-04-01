@@ -91,7 +91,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	 * Returns if the dataset is hidden.
 	 * 
 	 * @return <code>true</code> if the dataset is hidden, otherwise is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 *         {@link UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isHidden() {
 		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
@@ -101,7 +101,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	 * Sets if the dataset must be hidden.
 	 * 
 	 * @param hidden <code>true</code> if the dataset must be hidden, otherwise is
-	 *            {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 *            {@link UndefinedValues#BOOLEAN}.
 	 */
 	public void setHidden(boolean hidden) {
 		setValue(Property.hidden, hidden);

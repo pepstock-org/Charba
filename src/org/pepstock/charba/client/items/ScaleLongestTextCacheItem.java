@@ -56,7 +56,7 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the font of scale.
 	 * 
-	 * @return the font of scale. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}
+	 * @return the font of scale. Default is {@link UndefinedValues#STRING}
 	 */
 	public String getFont() {
 		return getValue(Property.font, UndefinedValues.STRING);

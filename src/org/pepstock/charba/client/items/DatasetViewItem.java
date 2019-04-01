@@ -87,7 +87,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset label.
 	 * 
-	 * @return the dataset label. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return the dataset label. Default is {@link UndefinedValues#STRING}.
 	 */
 	public String getDatasetLabel() {
 		return getValue(Property.datasetLabel, UndefinedValues.STRING);
@@ -96,7 +96,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	/**
 	 * Returns the label.
 	 * 
-	 * @return the label. Default is {@link org.pepstock.charba.client.items.UndefinedValues#STRING}.
+	 * @return the label. Default is {@link UndefinedValues#STRING}.
 	 */
 	public String getLabel() {
 		return getValue(Property.label, UndefinedValues.STRING);
@@ -158,7 +158,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * Returns the stroke width of the dataset item in pixels.
 	 * 
 	 * @return list of the stroke width of the dataset item in pixels. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#INTEGER}.
+	 *         {@link UndefinedValues#INTEGER}.
 	 */
 	public int getBorderWidth() {
 		return getValue(Property.borderWidth, UndefinedValues.INTEGER);
@@ -168,7 +168,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * Returns if is an horizontal view.
 	 * 
 	 * @return <code>true</code> if is an horizontal view. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 *         {@link UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isHorizontal() {
 		return getValue(Property.horizontal, UndefinedValues.BOOLEAN);
@@ -177,7 +177,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	/**
 	 * Returns the base value of dataset.
 	 * 
-	 * @return the base value of dataset. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the base value of dataset. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getBase() {
 		return getValue(Property.base, UndefinedValues.DOUBLE);
@@ -187,7 +187,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * Returns the X location of dataset item in pixel.
 	 * 
 	 * @return the X location of dataset item in pixel. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 *         {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getX() {
 		return getValue(Property.x, UndefinedValues.DOUBLE);
@@ -197,7 +197,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * Returns the Y location of dataset item in pixel.
 	 * 
 	 * @return the Y location of dataset item in pixel. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 *         {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getY() {
 		return getValue(Property.y, UndefinedValues.DOUBLE);
@@ -206,7 +206,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	/**
 	 * Returns the width of dataset item in pixel.
 	 * 
-	 * @return the width of dataset item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the width of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getWidth() {
 		return getValue(Property.width, UndefinedValues.DOUBLE);
@@ -215,7 +215,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	/**
 	 * Returns the height of dataset item in pixel.
 	 * 
-	 * @return the height of dataset item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the height of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getHeight() {
 		return getValue(Property.height, UndefinedValues.DOUBLE);
@@ -224,7 +224,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	/**
 	 * Returns <code>true</code> if skipped.
 	 * 
-	 * @return <code>true</code> if skipped. Default is {@link org.pepstock.charba.client.items.UndefinedValues#BOOLEAN}.
+	 * @return <code>true</code> if skipped. Default is {@link UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isSkipped() {
 		return getValue(Property.skip, UndefinedValues.BOOLEAN);
@@ -233,7 +233,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	/**
 	 * Returns the radius of dataset item in pixel.
 	 * 
-	 * @return the radius of dataset item in pixel. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the radius of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getRadius() {
 		return getValue(Property.radius, Defaults.get().getGlobal().getElements().getPoint().getRadius());
@@ -279,7 +279,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * Returns the previous X control point of dataset item in pixel.
 	 * 
 	 * @return the previous X control point of dataset item in pixel. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 *         {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getControlPointPreviousX() {
 		return getValue(Property.controlPointPreviousX, UndefinedValues.DOUBLE);
@@ -289,7 +289,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * Returns the previous Y control point of dataset item in pixel.
 	 * 
 	 * @return the previous Y control point of dataset item in pixel. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 *         {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getControlPointPreviousY() {
 		return getValue(Property.controlPointPreviousY, UndefinedValues.DOUBLE);
@@ -299,7 +299,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * Returns the next X control point of dataset item in pixel.
 	 * 
 	 * @return the next X control point of dataset item in pixel. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 *         {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getControlPointNextX() {
 		return getValue(Property.controlPointNextX, UndefinedValues.DOUBLE);
@@ -309,7 +309,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * Returns the next Y control point of dataset item in pixel.
 	 * 
 	 * @return the next Y control point of dataset item in pixel. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 *         {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getControlPointNextY() {
 		return getValue(Property.controlPointNextY, UndefinedValues.DOUBLE);
@@ -327,7 +327,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	/**
 	 * Returns the start angle of dataset item.
 	 * 
-	 * @return the start angle of dataset item. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the start angle of dataset item. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getStartAngle() {
 		return getValue(Property.startAngle, UndefinedValues.DOUBLE);
@@ -336,7 +336,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	/**
 	 * Returns the end angle of dataset item.
 	 * 
-	 * @return the end angle of dataset item. Default is {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 * @return the end angle of dataset item. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getEndAngle() {
 		return getValue(Property.endAngle, UndefinedValues.DOUBLE);
@@ -355,7 +355,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * Returns the outer radius of dataset item in pixel.
 	 * 
 	 * @return the outer radius of dataset item in pixel. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 *         {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getOuterRadius() {
 		return getValue(Property.outerRadius, UndefinedValues.DOUBLE);
@@ -365,7 +365,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * Returns the inner radius of dataset item in pixel.
 	 * 
 	 * @return the inner radius of dataset item in pixel. Default is
-	 *         {@link org.pepstock.charba.client.items.UndefinedValues#DOUBLE}.
+	 *         {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getInnerRadius() {
 		return getValue(Property.innerRadius, UndefinedValues.DOUBLE);
