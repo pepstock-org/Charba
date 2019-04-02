@@ -19,7 +19,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Color scheme utility to cache the usage of color schemes in order to avoid to search them when requested.
+ * Color scheme utility to cache the usage of color schemes in order to avoid to search them when requested.<br>
+ * Used by {@link ColorSchemes#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  *

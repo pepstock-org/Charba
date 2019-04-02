@@ -17,13 +17,14 @@ package org.pepstock.charba.client.impl.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
 
 import com.google.gwt.i18n.client.NumberFormat;
 
 /**
- * Formatter implementation for DATALABELS plugin in order to provide the percentage of the value.<br>
- * Setting this object to formatter callback of DATALABELS options, it will return the percentage for each data index per
+ * Formatter implementation for {@link DataLabelsPlugin#ID} plugin in order to provide the percentage of the value.<br>
+ * Setting this object to formatter callback of {@link DataLabelsPlugin#ID} options, it will return the percentage for each data index per
  * dataset.
  * 
  * @author Andrea "Stock" Stocchero

@@ -16,9 +16,10 @@
 package org.pepstock.charba.client.impl.plugins.enums;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.impl.plugins.ChartPointer;
 
 /**
- * The elements of the chart in scope of "cursorpointer" plugin.
+ * The elements of the chart in scope of {@link ChartPointer#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */

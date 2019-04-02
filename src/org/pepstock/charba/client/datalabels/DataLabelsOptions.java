@@ -58,9 +58,10 @@ import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
 import jsinterop.annotations.JsFunction;
 
 /**
- * This is the DATALABELS plugin options where to set all the configuration needed to the plugin.<br>
+ * This is the {@link DataLabelsPlugin#ID} plugin options where to set all the configuration needed to the plugin.<br>
  * The options could be set by simply the value or by setting a callback.<br>
- * The DATALABELS plugin is highly customizable CHART.JS plugin that displays labels on data for any type of charts.<br>
+ * The {@link DataLabelsPlugin#ID} plugin is highly customizable CHART.JS plugin that displays labels on data for any type of
+ * charts.<br>
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -134,7 +135,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	public static final double DEFAULT_ROTATION = 0D;
 
 	/**
-	 * Default text alignment being used when drawing the label text, {@link TextAlign#start}. 
+	 * Default text alignment being used when drawing the label text, {@link TextAlign#start}.
 	 */
 	public static final TextAlign DEFAULT_TEXTALIGN = TextAlign.start;
 
@@ -302,7 +303,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	}
 
 	/**
-	 * Creates new DATALABELS plugin options.
+	 * Creates new {@link DataLabelsPlugin#ID} plugin options.
 	 */
 	public DataLabelsOptions() {
 		// creates the object registering it
@@ -312,7 +313,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	}
 
 	/**
-	 * Creates new DATALABELS plugin options.
+	 * Creates new {@link DataLabelsPlugin#ID} plugin options.
 	 * 
 	 * @param deferredRegistration if <code>true</code> the options is not registered
 	 */

@@ -23,7 +23,7 @@ import org.pepstock.charba.client.labels.enums.Position;
 import org.pepstock.charba.client.labels.enums.Render;
 
 /**
- * It wraps default global options if there are and provides all default values for LABELS plugin.
+ * It wraps default global options if there are and provides all default values for {@link LabelsPlugin#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -147,7 +147,7 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the text shadow color as string.
 	 * 
-	 * @return the text shadow color as string. 
+	 * @return the text shadow color as string.
 	 */
 	String getShadowColorAsString() {
 		return getValue(LabelsOptions.Property.shadowColor, LabelsOptions.DEFAULT_SHADOWCOLOR);
@@ -156,7 +156,7 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns if draws label in arc.
 	 * 
-	 * @return <code>true</code> if draws label in arc. 
+	 * @return <code>true</code> if draws label in arc.
 	 */
 	boolean isArc() {
 		return getValue(LabelsOptions.Property.arc, LabelsOptions.DEFAULT_ARC);
@@ -203,7 +203,7 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the margin of text when position is {@link Position#outside} or {@link Position#border}.
 	 * 
-	 * @return the margin of text when position is {@link Position#outside} or {@link Position#border}. 
+	 * @return the margin of text when position is {@link Position#outside} or {@link Position#border}.
 	 */
 	int getTextMargin() {
 		return getValue(LabelsOptions.Property.textMargin, LabelsOptions.DEFAULT_TEXTMARGIN);

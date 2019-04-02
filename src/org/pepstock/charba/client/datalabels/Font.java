@@ -23,7 +23,7 @@ import org.pepstock.charba.client.datalabels.enums.Weight;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
- * Base object to map font options for DATALABELS plugin configuration.<br>
+ * Base object to map font options for {@link DataLabelsPlugin#ID} plugin configuration.<br>
  * It can be used also into callback for font generation at runtime.
  * 
  * @author Andrea "Stock" Stocchero
@@ -35,7 +35,7 @@ public final class Font extends AbstractElement {
 	 * Default font weight, {@link Weight#normal}.
 	 */
 	public static final Weight DEFAULT_WEIGHT = Weight.normal;
-	
+
 	/**
 	 * Default line height, <b>{@value DEFAULT_LINEHEIGHT}</b>.
 	 */

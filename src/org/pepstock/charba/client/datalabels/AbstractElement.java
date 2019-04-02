@@ -23,7 +23,7 @@ import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
 /**
  * Abstract element used by padding and font object in order to enable to provide these object instances as result of a
  * callback.<br>
- * Exposes the native object to return to DATALABELS plugin.
+ * Exposes the native object to return to {@link DataLabelsPlugin#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  * 

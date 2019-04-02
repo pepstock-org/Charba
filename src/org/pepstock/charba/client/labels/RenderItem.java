@@ -27,7 +27,8 @@ import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * This object is wrapping the native java script object provided by labels plugin when the RENDER function is called.
+ * This object is wrapping the native java script object provided by {@link LabelsPlugin#ID} plugin when the RENDER function is
+ * called.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -91,8 +92,7 @@ public class RenderItem {
 	/**
 	 * Returns the index of the data inside the dataset.
 	 * 
-	 * @return the index of the data inside the dataset. Default is
-	 *         {@link UndefinedValues#INTEGER}.
+	 * @return the index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	@JsOverlay
 	public final int getIndex() {
@@ -107,8 +107,7 @@ public class RenderItem {
 	/**
 	 * Returns the dataset index of the data inside the dataset.
 	 * 
-	 * @return the dataset index of the data inside the dataset. Default is
-	 *         {@link UndefinedValues#INTEGER}.
+	 * @return the dataset index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	@JsOverlay
 	public final int getDatasetIndex() {

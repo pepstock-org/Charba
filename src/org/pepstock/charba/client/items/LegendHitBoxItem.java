@@ -66,13 +66,14 @@ public final class LegendHitBoxItem extends SizeItem {
 			// checks X
 			boolean isX = event.getLayerX() >= getLeft() && event.getLayerX() <= (getLeft() + getWidth());
 			// checks Y
-			boolean isY = event.getLayerY() >= getTop() && event.getLayerY() <= (getTop() + getHeight());;
+			boolean isY = event.getLayerY() >= getTop() && event.getLayerY() <= (getTop() + getHeight());
+			;
 			return isX && isY;
 		}
 		// if here, no properties, then false
 		return false;
 	}
-	
+
 	/**
 	 * Inner class to create legend hit box item by a native object.
 	 * 

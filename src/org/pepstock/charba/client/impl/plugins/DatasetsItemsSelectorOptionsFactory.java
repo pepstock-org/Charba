@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.plugins.AbstractPluginOptionsFactory;
 
 /**
- * Factory to get the options (form chart or from default global ones) related to datasets items selector plugin.
+ * Factory to get the options (form chart or from default global ones) related to {@link DatasetsItemsSelector#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */

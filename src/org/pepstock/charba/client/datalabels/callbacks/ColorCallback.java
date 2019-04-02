@@ -19,16 +19,17 @@ import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
 
 /**
- * Callback interface of DATALABELS plugin to set <code>color</code> property at runtime, using the chart instance and the
+ * Callback interface of {@link DataLabelsPlugin#ID} plugin to set <code>color</code> property at runtime, using the chart instance and the
  * plugin context.<br>
- * <b>PAY ATTENTION</b> that with the current release of DATALABELS plugin, the GRADIENT coordinates are relative the the label
+ * <b>PAY ATTENTION</b> that with the current release of {@link DataLabelsPlugin#ID} plugin, the GRADIENT coordinates are relative the the label
  * coordinates (local), not relative to the canvas coordinates (global), therefore NOT USE GRADIENT Charba object, waiting for
- * DATALABELS enhancement.
+ * {@link DataLabelsPlugin#ID} enhancement.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -29,7 +29,7 @@ import org.pepstock.charba.client.options.Scales;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
- * Configuration options of selection plugin.<br>
+ * Configuration options of {@link DatasetsItemsSelector#ID} plugin.<br>
  * It is managing:<br>
  * <ul>
  * <li>the X axis ID

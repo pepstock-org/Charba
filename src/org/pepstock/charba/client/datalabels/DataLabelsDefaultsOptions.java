@@ -25,7 +25,7 @@ import org.pepstock.charba.client.datalabels.enums.TextAlign;
 import org.pepstock.charba.client.enums.Display;
 
 /**
- * DATALABELS plugin default options.<br>
+ * {@link DataLabelsPlugin#ID} plugin default options.<br>
  * It contains all default values.
  * 
  * @author Andrea "Stock" Stocchero
@@ -96,7 +96,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the anchor point, which is defined by an orientation vector and a position on the data element
 	 * 
-	 * @return the anchor point, which is defined by an orientation vector and a position on the data element. 
+	 * @return the anchor point, which is defined by an orientation vector and a position on the data element.
 	 */
 	Anchor getAnchor() {
 		return getValue(DataLabelsOptions.Property.anchor, Anchor.class, DataLabelsOptions.DEFAULT_ANCHOR);
@@ -123,7 +123,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the border radius.
 	 * 
-	 * @return the border radius. 
+	 * @return the border radius.
 	 */
 	double getBorderRadius() {
 		return getValue(DataLabelsOptions.Property.borderRadius, DataLabelsOptions.DEFAULT_BORDERRADIUS);
@@ -143,7 +143,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * element (i.e. part inside the chart area).
 	 * 
 	 * @return <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated
-	 *         element (i.e. part inside the chart area). 
+	 *         element (i.e. part inside the chart area).
 	 */
 	boolean isClamp() {
 		return getValue(DataLabelsOptions.Property.clamp, DataLabelsOptions.DEFAULT_CLAMP);
@@ -170,7 +170,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the visibility of labels.
 	 * 
-	 * @return the visibility of labels. 
+	 * @return the visibility of labels.
 	 */
 	Display getDisplay() {
 		// gets object type
@@ -192,7 +192,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
 	 * 
 	 * @return the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align
-	 *         is 'center'. Also note that if align is 'start', the label is moved in the opposite direction. 
+	 *         is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
 	 */
 	double getOffset() {
 		return getValue(DataLabelsOptions.Property.offset, DataLabelsOptions.DEFAULT_OFFSET);
@@ -210,7 +210,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the clockwise rotation angle (in degrees) of the label, the rotation center point being the label center.
 	 * 
-	 * @return the clockwise rotation angle (in degrees) of the label, the rotation center point being the label center. 
+	 * @return the clockwise rotation angle (in degrees) of the label, the rotation center point being the label center.
 	 */
 	double getRotation() {
 		return getValue(DataLabelsOptions.Property.rotation, DataLabelsOptions.DEFAULT_ROTATION);
@@ -219,7 +219,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the text alignment being used when drawing the label text.
 	 * 
-	 * @return the text alignment being used when drawing the label text. 
+	 * @return the text alignment being used when drawing the label text.
 	 */
 	TextAlign getTextAlign() {
 		return getValue(DataLabelsOptions.Property.textAlign, TextAlign.class, DataLabelsOptions.DEFAULT_TEXTALIGN);
@@ -255,7 +255,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the text shadow color as string.
 	 * 
-	 * @return the text shadow color as string. 
+	 * @return the text shadow color as string.
 	 */
 	String getTextShadowColorAsString() {
 		return getValue(DataLabelsOptions.Property.textShadowColor, getColorAsString());

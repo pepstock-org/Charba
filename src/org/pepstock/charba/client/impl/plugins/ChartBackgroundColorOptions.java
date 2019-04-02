@@ -24,7 +24,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * Configuration options of background color plugin.
+ * Configuration options of {@link ChartBackgroundColor#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */

@@ -189,8 +189,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	/**
 	 * Returns the CHARBA id when the options are related to a chart instance.
 	 * 
-	 * @return the CHARBA id when the options are related to a chart instance otherwise
-	 *         {@link UndefinedValues#STRING}.
+	 * @return the CHARBA id when the options are related to a chart instance otherwise {@link UndefinedValues#STRING}.
 	 */
 	public String getCharbaId() {
 		return Id.get(this);

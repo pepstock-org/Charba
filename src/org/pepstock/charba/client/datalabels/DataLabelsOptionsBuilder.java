@@ -49,7 +49,7 @@ import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
- * Comfortable object to create DATALABELS plugin options by a builder.
+ * Comfortable object to create {@link DataLabelsPlugin#ID} plugin options by a builder.
  * 
  * @author Andrea "Stock" Stocchero
  *

@@ -36,7 +36,7 @@ public final class UndefinedValues {
 	public static final double DOUBLE = Double.NaN;
 
 	/**
-	 * Default value for STRING instances, <b>{@value STRING}</b>.
+	 * Default value for STRING instances, <b>null</b>.
 	 */
 	public static final String STRING = null;
 

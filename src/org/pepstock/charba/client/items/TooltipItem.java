@@ -104,8 +104,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	/**
 	 * Returns the index of the data inside the dataset.
 	 * 
-	 * @return the index of the data inside the dataset. Default is
-	 *         {@link UndefinedValues#INTEGER}.
+	 * @return the index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getIndex() {
 		return getValue(Property.index, UndefinedValues.INTEGER);

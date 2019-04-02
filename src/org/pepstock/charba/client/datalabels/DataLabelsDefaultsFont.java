@@ -22,14 +22,13 @@ import org.pepstock.charba.client.datalabels.enums.Weight;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
- * DATALABELS plugin default options for FONT element.<br>
+ * {@link DataLabelsPlugin#ID} plugin default options for FONT element.<br>
  * It contains all default values for FONT.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 final class DataLabelsDefaultsFont extends NativeObjectContainer {
-
 
 	/**
 	 * Creates the object with an empty native object instance.

@@ -20,7 +20,7 @@ import org.pepstock.charba.client.events.AbstractEvent;
 import com.google.gwt.dom.client.NativeEvent;
 
 /**
- * Event which is fired when the user selects an area on the chart.
+ * Event which is fired when the user selects an area on the chart, by {@link DatasetsItemsSelector#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  *

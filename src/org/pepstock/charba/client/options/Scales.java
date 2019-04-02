@@ -36,7 +36,7 @@ import org.pepstock.charba.client.enums.Display;
 public class Scales extends AbstractModel<Options, IsDefaultScales> implements IsDefaultScales {
 
 	/**
-	 * Default name of X axis is <b<{@value DEFAULT_X_AXIS_ID}</b>.
+	 * Default name of X axis is <b>{@value DEFAULT_X_AXIS_ID}</b>.
 	 */
 	public static final String DEFAULT_X_AXIS_ID = "x-axis-0";
 

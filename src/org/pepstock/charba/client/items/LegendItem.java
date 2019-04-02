@@ -88,8 +88,7 @@ public class LegendItem extends NativeObjectContainer {
 	/**
 	 * Returns the dataset index of the chart (for POLAR and PIE charts)
 	 * 
-	 * @return the dataset index of the chart (for POLAR and PIE charts). Default is
-	 *         {@link UndefinedValues#INTEGER}.
+	 * @return the dataset index of the chart (for POLAR and PIE charts). Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getIndex() {
 		return getValue(Property.index, UndefinedValues.INTEGER);

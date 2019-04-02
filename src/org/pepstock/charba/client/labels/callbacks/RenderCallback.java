@@ -16,12 +16,13 @@
 package org.pepstock.charba.client.labels.callbacks;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.labels.LabelsPlugin;
 import org.pepstock.charba.client.labels.RenderItem;
 
 import com.google.gwt.dom.client.ImageElement;
 
 /**
- * Callback interface of labels plugin to provide the item to be rendered as string or as image at runtime, using the arguments.
+ * Callback interface of {@link LabelsPlugin#ID} plugin to provide the item to be rendered as string or as image at runtime, using the arguments.
  * 
  * @author Andrea "Stock" Stocchero
  * 

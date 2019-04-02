@@ -18,7 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import org.pepstock.charba.client.events.ChartEventHandler;
 
 /**
- * Event handler for chart area selecting.
+ * Event handler for chart area selecting, by {@link DatasetsItemsSelector#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */

@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.enums.Position;
 
 /**
- * DATALABELS plugin default options for PADDING element.<br>
+ * {@link DataLabelsPlugin#ID} plugin default options for PADDING element.<br>
  * It contains all default values for PADDING.
  * 
  * @author Andrea "Stock" Stocchero

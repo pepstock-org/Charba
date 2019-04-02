@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains the DATALABELS plugin event handlers interfaces to configure the plugin itself.
+ * Contains the {@link org.pepstock.charba.client.datalabels.DataLabelsPlugin#ID} plugin event handlers interfaces to configure the plugin itself.
  * 
  * @author Andrea "Stock" Stocchero
  *

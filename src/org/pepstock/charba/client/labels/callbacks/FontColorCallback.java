@@ -18,9 +18,10 @@ package org.pepstock.charba.client.labels.callbacks;
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.labels.FontColorItem;
+import org.pepstock.charba.client.labels.LabelsPlugin;
 
 /**
- * Callback interface of labels plugin to change font color at runtime, using the arguments.
+ * Callback interface of {@link LabelsPlugin#ID} plugin to change font color at runtime, using the arguments.
  * 
  * @author Andrea "Stock" Stocchero
  *

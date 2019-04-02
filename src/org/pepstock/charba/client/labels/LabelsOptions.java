@@ -41,7 +41,7 @@ import com.google.gwt.user.client.ui.Image;
 import jsinterop.annotations.JsFunction;
 
 /**
- * This is the object to map the LABELS plugin options, both at chart and global level.
+ * This is the object to map the {@link LabelsPlugin#ID} plugin options, both at chart and global level.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -69,7 +69,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	public static final boolean DEFAULT_TEXTSHADOW = false;
 
 	/**
-	 * Default text shadow intensity, <b>{@value DEFAULT_SHADOWBLUR}</b>. 
+	 * Default text shadow intensity, <b>{@value DEFAULT_SHADOWBLUR}</b>.
 	 */
 	public static final int DEFAULT_SHADOWBLUR = 6;
 
@@ -84,7 +84,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	public static final int DEFAULT_SHADOWOFFSETY = 3;
 
 	/**
-	 * Default text shadow color, <b>{@value DEFAULT_SHADOWCOLOR}</b>. 
+	 * Default text shadow color, <b>{@value DEFAULT_SHADOWCOLOR}</b>.
 	 */
 	public static final String DEFAULT_SHADOWCOLOR = "rgba(0,0,0,0.3)";
 
@@ -114,7 +114,8 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	public static final int DEFAULT_OUTSIDEPADDING = 2;
 
 	/**
-	 * Default the margin of text when position is {@link Position#outside} or {@link Position#border}, <b>{@value DEFAULT_TEXTMARGIN}</b>.
+	 * Default the margin of text when position is {@link Position#outside} or {@link Position#border},
+	 * <b>{@value DEFAULT_TEXTMARGIN}</b>.
 	 */
 	public static final int DEFAULT_TEXTMARGIN = 2;
 

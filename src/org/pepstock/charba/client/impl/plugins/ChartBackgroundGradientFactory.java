@@ -29,7 +29,7 @@ import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.Context2d;
 
 /**
- * Utility used by CHART background color PLUGIN.<br>
+ * Utility used by CHART {@link ChartBackgroundColor#ID} PLUGIN.<br>
  * Utility class which creates a canvas gradient java script object using a Charba gradient.<br>
  * A Charba gradient describes how a GWT canvas gradient must be created.
  * 

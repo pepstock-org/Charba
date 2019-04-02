@@ -26,7 +26,7 @@ import org.pepstock.charba.client.impl.plugins.enums.Render;
 import com.google.gwt.dom.client.ImageElement;
 
 /**
- * Datasets items selector plugin default options for CLEAR SELECTION element.<br>
+ * {@link DatasetsItemsSelector#ID} plugin default options for CLEAR SELECTION element.<br>
  * It contains all default values for CLEAR Selection.
  * 
  * @author Andrea "Stock" Stocchero

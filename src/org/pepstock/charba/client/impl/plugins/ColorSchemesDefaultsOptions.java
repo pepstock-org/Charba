@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 
 /**
- * It wraps default global options if there are and provides all default values for "charbacolorschemes" plugin.
+ * It wraps default global options if there are and provides all default values for {@link ColorSchemes#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */

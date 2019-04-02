@@ -21,10 +21,11 @@ import java.util.List;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.impl.plugins.ColorScheme;
+import org.pepstock.charba.client.impl.plugins.ColorSchemes;
 
 /**
  * Contains all scheme definitions to map the <a href="http://colorbrewer2.org/">Color Brewer</a> schemes.<br>
- * To configure "charbacolorschemes" plugin, where category is <b>"brewer"</b>.<br>
+ * To configure {@link ColorSchemes#ID} plugin, where category is <b>"brewer"</b>.<br>
  * Every color scheme has a number at the end of its name, which indicates the number of that colors included in the scheme. If
  * the number of the datasets is larger than it, the same colors will appear repeatedly. A color is not modified if it is
  * specified by dataset options.

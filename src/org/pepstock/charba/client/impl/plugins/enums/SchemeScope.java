@@ -18,7 +18,7 @@ package org.pepstock.charba.client.impl.plugins.enums;
 import org.pepstock.charba.client.commons.Key;
 
 /**
- * Enumerates the possible values to address coloring of BAR datasets by a color scheme.
+ * Enumerates the possible values to address coloring of BAR or BUBBLE datasets by a color scheme.
  * 
  * @author Andrea "Stock" Stocchero
  *

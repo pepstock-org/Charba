@@ -17,9 +17,10 @@ package org.pepstock.charba.client.datalabels.events;
 
 import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 
 /**
- * Callback interface of DATALABELS plugin to manage LEAVE events on labels.<br>
+ * Callback interface of {@link DataLabelsPlugin#ID} plugin to manage LEAVE events on labels.<br>
  * Charba events need to be enabled in order to get the associated label event working.<br>
  * If the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart re-rendered.
  * This allows to implement visual interactions with labels such as highlight, selection, etc.
@@ -33,7 +34,7 @@ public interface LeaveEventHandler {
 	 * Invoked to manage LEAVE events on labels.
 	 * 
 	 * @param chart chart instance
-	 * @param context DATALABELS plugin context instance
+	 * @param context {@link DataLabelsPlugin#ID} plugin context instance
 	 * @return If the callback explicitly returns <code>true</code>, the label is updated with the new context and the chart
 	 *         re-rendered.
 	 */

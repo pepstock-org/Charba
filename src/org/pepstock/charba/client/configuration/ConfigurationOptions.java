@@ -244,7 +244,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 					// checks if there is any handler and the chart has got scales
 					// gets the scales
 					ScalesNode scales = getChart().getNode().getScales();
-					// checks if event is inside a scale box 
+					// checks if event is inside a scale box
 					if (scales.isInside(event)) {
 						// gets scale item
 						ScaleItem scaleItem = scales.getScaleIsInside(event);

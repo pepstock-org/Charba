@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all enumerations to configure the DATALABELS plugin.
+ * Contains all enumerations to configure the {@link org.pepstock.charba.client.datalabels.DataLabelsPlugin#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  *

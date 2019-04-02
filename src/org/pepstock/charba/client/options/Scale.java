@@ -206,8 +206,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * The ID is used to link datasets and scale axes together.<br>
 	 * This is especially needed if multi-axes charts are used.
 	 * 
-	 * @return The ID is used to link datasets and scale axes together or
-	 *         {@link UndefinedValues#STRING} if not set
+	 * @return The ID is used to link datasets and scale axes together or {@link UndefinedValues#STRING} if not set
 	 */
 	public final String getId() {
 		return getValue(Property.id, UndefinedValues.STRING);

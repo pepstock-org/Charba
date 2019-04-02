@@ -20,7 +20,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * Configuration options of DEFAULT GLOBAL options of selection plugin.<br>
+ * Configuration options of DEFAULT GLOBAL options of {@link DatasetsItemsSelector#ID} plugin.<br>
  * This is used to set the defaults to chart options for the plugin.<br>
  * It is managing:<br>
  * <ul>

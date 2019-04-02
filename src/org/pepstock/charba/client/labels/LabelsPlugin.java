@@ -30,7 +30,7 @@ import org.pepstock.charba.client.resources.ResourcesType;
 public final class LabelsPlugin {
 
 	/**
-	 * Plugin ID </b>{@value ID}</b>.
+	 * Plugin ID <b>{@value ID}</b>.
 	 */
 	public static final String ID = "labels";
 

@@ -14,7 +14,7 @@
     limitations under the License.
 */
 /**
- * Contains all enumerations to configure the LABELS plugin.
+ * Contains all enumerations to configure the {@link org.pepstock.charba.client.labels.LabelsPlugin#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  *

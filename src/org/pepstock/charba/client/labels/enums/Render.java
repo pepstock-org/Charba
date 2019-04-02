@@ -16,9 +16,10 @@
 package org.pepstock.charba.client.labels.enums;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.labels.LabelsPlugin;
 
 /**
- * Enumeration of available render to use to configure LABELS plugin.
+ * Enumeration of available render to use to configure {@link LabelsPlugin#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  *

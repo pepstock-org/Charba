@@ -91,9 +91,9 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	private final ChartOptions options;
 	// instance of dataset items factory.
 	private final DatasetItemFactory datasetItemFactory = new DatasetItemFactory();
-	// cursor  defined when chart is created
-	private final Cursor initialCursor; 
-	
+	// cursor defined when chart is created
+	private final Cursor initialCursor;
+
 	/**
 	 * Initializes simple panel and canvas which are used by CHART.JS.<br>
 	 * It sets also some default behaviors (width in percentage) for resizing
@@ -342,7 +342,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	void addHandlerRegistration(HandlerRegistration registration) {
 		handlerRegistrations.add(registration);
 	}
-	
+
 	/**
 	 * Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object
 	 * within Chart.js, along with any associated event listeners attached by Chart.js.
@@ -555,8 +555,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	/**
 	 * Returns the amount of datasets which are visible
 	 * 
-	 * @return the amount of datasets which are visible. If chart is not initialized, return
-	 *         {@link UndefinedValues#INTEGER}.
+	 * @return the amount of datasets which are visible. If chart is not initialized, return {@link UndefinedValues#INTEGER}.
 	 */
 	public int getVisibleDatasetCount() {
 		// checks consistency of chart and datasets

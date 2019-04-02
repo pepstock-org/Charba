@@ -20,7 +20,7 @@ import org.pepstock.charba.client.datalabels.callbacks.PaddingCallback;
 import org.pepstock.charba.client.enums.Position;
 
 /**
- * Base object to map font options for DATALABELS plugin configuration.<br>
+ * Base object to map font options for {@link DataLabelsPlugin#ID} plugin configuration.<br>
  * It is applied to all sides of the chart (left, top, right, bottom).<br>
  * It can be used also into callback for font generation at runtime.
  * 
@@ -28,7 +28,7 @@ import org.pepstock.charba.client.enums.Position;
  * @see PaddingCallback
  */
 public final class Padding extends AbstractElement {
-	
+
 	/**
 	 * Default padding, <b>{@value DEFAULT_PADDING}</b>.
 	 */

@@ -97,8 +97,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the unique id of scale.
 	 * 
-	 * @return the unique id of scale. Default or if does not exist is Default is
-	 *         {@link UndefinedValues#INTEGER}.
+	 * @return the unique id of scale. Default or if does not exist is Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getCharbaId() {
 		// the unique id is under options object of scale item
@@ -128,8 +127,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns true if this item represents a hidden scale.
 	 * 
-	 * @return <code>true</code> if this item represents a hidden scale. Default is
-	 *         {@link UndefinedValues#BOOLEAN}.
+	 * @return <code>true</code> if this item represents a hidden scale. Default is {@link UndefinedValues#BOOLEAN}.
 	 */
 	public final boolean isHidden() {
 		return getValue(Property.hidden, UndefinedValues.BOOLEAN);

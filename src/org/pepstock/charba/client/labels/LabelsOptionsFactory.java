@@ -21,7 +21,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginCachedOptionsFactory;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
- * Factory to get the options (form chart or from default global ones) related to LABELS plugin.
+ * Factory to get the options (form chart or from default global ones) related to {@link LabelsPlugin#ID} plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */

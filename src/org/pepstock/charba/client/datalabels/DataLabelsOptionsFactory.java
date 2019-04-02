@@ -21,7 +21,8 @@ import org.pepstock.charba.client.plugins.AbstractPluginCachedOptionsFactory;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
- * Factory to get the options (form chart, form dataset or from default global ones) related to DATALABELS plugin.
+ * Factory to get the options (form chart, form dataset or from default global ones) related to {@link DataLabelsPlugin#ID}
+ * plugin.
  * 
  * @author Andrea "Stock" Stocchero
  */

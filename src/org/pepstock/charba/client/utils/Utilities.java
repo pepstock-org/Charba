@@ -135,14 +135,14 @@ public final class Utilities {
 		// returns null
 		return null;
 	}
-	
+
 	/**
 	 * Returns the cursor currently set into chart.
 	 * 
 	 * @param chart chart instance
 	 * @return the cursor currently set into chart. Default is {@link Cursor#DEFAULT}.
 	 */
-	public static Cursor getCursorOfChart(AbstractChart<?,?> chart) {
+	public static Cursor getCursorOfChart(AbstractChart<?, ?> chart) {
 		// checks if argument is consistent
 		if (chart != null) {
 			// scans all cursors to check if any cursor is already set
@@ -155,7 +155,7 @@ public final class Utilities {
 				}
 			}
 		}
-		//if here, not found
+		// if here, not found
 		return Cursor.DEFAULT;
 	}
 }

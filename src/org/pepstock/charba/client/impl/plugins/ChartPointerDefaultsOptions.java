@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 
 /**
- * Configuration options of pointer plugin. This is mapping the configuration set into default global, used as default of the
+ * Configuration options of {@link ChartPointer#ID} plugin. This is mapping the configuration set into default global, used as default of the
  * chart one, if exist.
  * 
  * @author Andrea "Stock" Stocchero
