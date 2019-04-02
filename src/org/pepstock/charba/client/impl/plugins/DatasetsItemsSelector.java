@@ -47,7 +47,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 public final class DatasetsItemsSelector extends AbstractPlugin {
 
 	/**
-	 * Plugin ID {@value ID}
+	 * Plugin ID <b>{@value ID}</b>.
 	 */
 	public static final String ID = "datasetsitemsselector";
 	/**
@@ -67,7 +67,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * element allocated.
 	 * 
 	 * @param chart chart instance
-	 * @return the padding height used by clear selection element or <code>0</code> if disabled
+	 * @return the padding height used by clear selection element or <b>{@link ClearSelection#DEFAULT_VALUE}</b> if disabled
 	 */
 	public double getPadding(AbstractChart<?, ?> chart) {
 		// checks if there is a handler
@@ -374,7 +374,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			ClearSelection clearSelection = pOptions.getClearSelection();
 			// checks if is enabled
 			if (clearSelection.isDisplay()) {
-				// calculates if the events cooradintes are hover of clear selection element
+				// calculates if the events coordinates are hover of clear selection element
 				boolean isX = event.getLayerX() >= clearSelection.getX() && event.getLayerX() <= (clearSelection.getX() + clearSelection.getWidth());
 				boolean isY = event.getLayerY() >= clearSelection.getY() && event.getLayerY() <= (clearSelection.getY() + clearSelection.getHeight());
 				// checks if hover
@@ -387,7 +387,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			}
 		}
 		// This control has been added because a click event is always fired
-		// by canvas when mouse up (of selection handler) is perfromed
+		// by canvas when mouse up (of selection handler) is performed
 		// but to avoid to refresh the chart every time
 		// selection handler sets a flag to check this condition
 		if (handler.isPreventClickEvent()) {

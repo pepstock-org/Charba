@@ -17,7 +17,6 @@ package org.pepstock.charba.client.impl.plugins;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.impl.plugins.enums.BrewerScheme;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 
 /**
@@ -30,14 +29,6 @@ final class ColorSchemesDefaultsOptions extends NativeObjectContainer {
 	// this the default category when new color scheme
 	// has been created on top of the available schemes.
 	static final String DEFAULT_SCHEME_CATEGORY = "custom";
-
-	private static final ColorScheme DEFAULT_SCHEME = BrewerScheme.Paired12;
-
-	private static final SchemeScope DEFAULT_SCHEME_SCOPE = SchemeScope.dataset;
-
-	private static final double DEFAULT_FILL_ALPHA = 0.5D;
-
-	private static final boolean DEFAULT_REVERSE = false;
 
 	/**
 	 * Creates an empty options without any default global options. it will use the constants as default of plugin properties.
@@ -53,7 +44,7 @@ final class ColorSchemesDefaultsOptions extends NativeObjectContainer {
 	 */
 	ColorSchemesDefaultsOptions(NativeObject nativeObject) {
 		super(nativeObject);
-		ColorSchemesUtil.putColorScheme(DEFAULT_SCHEME);
+		ColorSchemesUtil.putColorScheme(ColorSchemesOptions.DEFAULT_SCHEME);
 	}
 
 	/**
@@ -62,7 +53,7 @@ final class ColorSchemesDefaultsOptions extends NativeObjectContainer {
 	 * @return the color scheme category
 	 */
 	String getSchemeCategory() {
-		return getValue(ColorSchemesOptions.Property.schemeCategory, DEFAULT_SCHEME.category());
+		return getValue(ColorSchemesOptions.Property.schemeCategory, ColorSchemesOptions.DEFAULT_SCHEME.category());
 	}
 
 	/**
@@ -71,7 +62,7 @@ final class ColorSchemesDefaultsOptions extends NativeObjectContainer {
 	 * @return the color scheme name
 	 */
 	String getSchemeName() {
-		return getValue(ColorSchemesOptions.Property.schemeName, DEFAULT_SCHEME.name());
+		return getValue(ColorSchemesOptions.Property.schemeName, ColorSchemesOptions.DEFAULT_SCHEME.name());
 	}
 
 	/**
@@ -80,7 +71,7 @@ final class ColorSchemesDefaultsOptions extends NativeObjectContainer {
 	 * @return the color scheme cope when the scheme is applied to hoving flex datasets, like bars charts
 	 */
 	SchemeScope getSchemeScope() {
-		return getValue(ColorSchemesOptions.Property.schemeScope, SchemeScope.class, DEFAULT_SCHEME_SCOPE);
+		return getValue(ColorSchemesOptions.Property.schemeScope, SchemeScope.class, ColorSchemesOptions.DEFAULT_SCHEME_SCOPE);
 	}
 
 	/**
@@ -90,7 +81,7 @@ final class ColorSchemesDefaultsOptions extends NativeObjectContainer {
 	 * @return the transparency value for the background color
 	 */
 	double getBackgroundColorAlpha() {
-		return getValue(ColorSchemesOptions.Property.backgroundColorAlpha, DEFAULT_FILL_ALPHA);
+		return getValue(ColorSchemesOptions.Property.backgroundColorAlpha, ColorSchemesOptions.DEFAULT_BACKGROUND_ALPHA);
 	}
 
 	/**
@@ -99,7 +90,7 @@ final class ColorSchemesDefaultsOptions extends NativeObjectContainer {
 	 * @return if set to <code>true</code>, the order of the colors in the selected scheme is reversed
 	 */
 	boolean isReverse() {
-		return getValue(ColorSchemesOptions.Property.reverse, DEFAULT_REVERSE);
+		return getValue(ColorSchemesOptions.Property.reverse, ColorSchemesOptions.DEFAULT_REVERSE);
 	}
 
 }

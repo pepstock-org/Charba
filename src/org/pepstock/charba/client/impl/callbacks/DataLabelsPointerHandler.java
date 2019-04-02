@@ -28,25 +28,39 @@ import com.google.gwt.dom.client.Style.Cursor;
  *
  */
 public class DataLabelsPointerHandler extends AbstractEventHandler {
+	
+	/**
+	 * Default pointer cursor to use if omitted, {@link com.google.gwt.dom.client.Style.Cursor#POINTER}.
+	 */
+	public static final Cursor DEFAULT_CURSOR = Cursor.POINTER;
 
 	// cursor type to be applied on enter
 	private final Cursor cursor;
 
 	/**
-	 * Creates a callback setting {@link com.google.gwt.dom.client.Style.Cursor#POINTER} as pointer.
+	 * Creates a callback setting the {@link DataLabelsPointerHandler#DEFAULT_CURSOR} as pointer.
 	 */
 	public DataLabelsPointerHandler() {
-		this(Cursor.POINTER);
+		this(DEFAULT_CURSOR);
 	}
 
 	/**
 	 * Creates a callback setting the pointer cursor what is passed as argument.
 	 * 
-	 * @param cursor the cursor type to use. If <code>null</code>, uses {@link com.google.gwt.dom.client.Style.Cursor#POINTER}
+	 * @param cursor the cursor type to use. If <code>null</code>, uses {@link DataLabelsPointerHandler#DEFAULT_CURSOR}
 	 *            as pointer
 	 */
 	public DataLabelsPointerHandler(Cursor cursor) {
-		this.cursor = cursor != null ? cursor : Cursor.POINTER;
+		this.cursor = cursor != null ? cursor : DEFAULT_CURSOR;
+	}
+
+	/**
+	 * Returns the pointer cursor to use.
+	 * 
+	 * @return the pointer cursor to use
+	 */
+	public final Cursor getCursor() {
+		return cursor;
 	}
 
 	/*

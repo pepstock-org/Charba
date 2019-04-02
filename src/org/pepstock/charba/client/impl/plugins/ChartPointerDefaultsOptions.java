@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -24,8 +24,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 
-import com.google.gwt.dom.client.Style.Cursor;
-
 /**
  * Configuration options of pointer plugin. This is mapping the configuration set into default global, used as default of the
  * chart one, if exist.
@@ -33,10 +31,6 @@ import com.google.gwt.dom.client.Style.Cursor;
  * @author Andrea "Stock" Stocchero
  */
 final class ChartPointerDefaultsOptions extends NativeObjectContainer {
-	// default cursor type when the cursor is over the dataset item
-	private static final Cursor DEFAULT_CURSOR_POINTER = Cursor.POINTER;
-	// default list of elements in scope
-	private static final List<PointerElement> DEFAULT_ELEMENTS = Arrays.asList(PointerElement.values());
 
 	/**
 	 * Builds the object with an empty java script object and uses the constants as default.
@@ -60,7 +54,7 @@ final class ChartPointerDefaultsOptions extends NativeObjectContainer {
 	 * @return cursor type as string
 	 */
 	String getCursorPointerAsString() {
-		return getValue(ChartPointerOptions.Property.cursorPointer, DEFAULT_CURSOR_POINTER.name());
+		return getValue(ChartPointerOptions.Property.cursorPointer, ChartPointerOptions.DEFAULT_CURSOR_POINTER.name());
 	}
 
 	/**
@@ -77,7 +71,11 @@ final class ChartPointerDefaultsOptions extends NativeObjectContainer {
 		} else {
 			// if here, no property
 			// then it uses the default static ones
-			return DEFAULT_ELEMENTS;
+			// clones them into another list in order to be able to 
+			// change them
+			List<PointerElement> elements = new LinkedList<>();
+			elements.addAll(ChartPointerOptions.DEFAULT_ELEMENTS);
+			return elements;
 		}
 	}
 }

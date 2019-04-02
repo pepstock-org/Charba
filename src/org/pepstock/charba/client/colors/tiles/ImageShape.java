@@ -45,8 +45,10 @@ import com.google.gwt.user.client.ui.Image;
  */
 public class ImageShape extends ShapeDrawer implements IsShape {
 
-	// name of shape
-	private static final String NAME = "image";
+	/**
+	 * Name of shape to draw an image, <b>{@value NAME}</b>.
+	 */
+	public static final String NAME = "image";
 	// image to draw on the tile
 	private final ImageElement imageElement;
 

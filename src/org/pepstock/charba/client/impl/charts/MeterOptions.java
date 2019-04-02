@@ -35,18 +35,19 @@ import org.pepstock.charba.client.enums.FontStyle;
  *
  */
 public class MeterOptions extends AbstractPieOptions {
-	// exception message
-	private static final String INVALID__CALL = "The invoked component is not available for Meter or Gauge charts.";
 
 	/**
-	 * Default format {@value DEFAULT_FORMAT} to apply displaying the value or percentage
+	 * Default number format <b>{@value DEFAULT_FORMAT}</b> to apply displaying the value or percentage.
 	 */
 	public static final String DEFAULT_FORMAT = "##0";
 
 	/**
-	 * Default color of display
+	 * Default color of display, <b>rgb(128, 128, 128)</b>
 	 */
 	public static final IsColor DEFAULT_DISPLAY_COLOR = new Color(128, 128, 128);
+
+	// exception message
+	private static final String INVALID__CALL = "The invoked component is not available for Meter or Gauge charts.";
 
 	private static final double DEFAULT_CUTOUT_PERCENTAGE = 90D;
 

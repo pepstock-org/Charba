@@ -15,12 +15,9 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import org.pepstock.charba.client.colors.GwtMaterialColor;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.options.Scales;
 
 /**
  * Configuration options of DEFAULT GLOBAL options of selection plugin.<br>
@@ -38,34 +35,6 @@ import org.pepstock.charba.client.options.Scales;
  * @author Andrea "Stock" Stocchero
  */
 final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
-
-	// default alpha of selecting/selection colors
-	private static final double DEFAULT_ALPHA = 0.3D;
-
-	/**
-	 * Default color for area
-	 */
-	private static final IsColor DEFAULT_COLOR = GwtMaterialColor.ORANGE_LIGHTEN_3.alpha(DEFAULT_ALPHA);
-
-	/**
-	 * Default X axis id
-	 */
-	private static final String DEFAULT_AXIS_ID = Scales.DEFAULT_X_AXIS_ID;
-
-	/**
-	 * Default border width of selection area
-	 */
-	private static final int DEFAULT_BORDER_WIDTH = 0;
-
-	/**
-	 * Default border color for area
-	 */
-	static final IsColor DEFAULT_BORDER_COLOR = GwtMaterialColor.GREY_DARKEN_2;
-
-	/**
-	 * Default flag if fire event after clear selection
-	 */
-	private static final boolean DEFAULT_FIRE_EVENT_ON_CLEAR_SELECTION = false;
 
 	// default clear selection options
 	private final DatasetsItemsSelectorDefaultsClearSelection clearSelection;
@@ -109,7 +78,7 @@ final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
 	 *         axis.
 	 */
 	String getXAxisID() {
-		return getValue(DatasetsItemsSelectorOptions.Property.xAxisID, DEFAULT_AXIS_ID);
+		return getValue(DatasetsItemsSelectorOptions.Property.xAxisID, DatasetsItemsSelectorOptions.DEFAULT_AXIS_ID);
 	}
 
 	/**
@@ -118,7 +87,7 @@ final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
 	 * @return the color.
 	 */
 	String getColorAsString() {
-		return getValue(DatasetsItemsSelectorOptions.Property.color, DEFAULT_COLOR.toRGBA());
+		return getValue(DatasetsItemsSelectorOptions.Property.color, DatasetsItemsSelectorOptions.DEFAULT_COLOR.toRGBA());
 	}
 
 	/**
@@ -137,7 +106,7 @@ final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
 	 * @return list of the border width of the selection.
 	 */
 	int getBorderWidth() {
-		return getValue(DatasetsItemsSelectorOptions.Property.borderWidth, DEFAULT_BORDER_WIDTH);
+		return getValue(DatasetsItemsSelectorOptions.Property.borderWidth, DatasetsItemsSelectorOptions.DEFAULT_BORDER_WIDTH);
 	}
 
 	/**
@@ -146,7 +115,7 @@ final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
 	 * @return the color.
 	 */
 	String getBorderColorAsString() {
-		return getValue(DatasetsItemsSelectorOptions.Property.borderColor, DEFAULT_BORDER_COLOR.toRGBA());
+		return getValue(DatasetsItemsSelectorOptions.Property.borderColor, DatasetsItemsSelectorOptions.DEFAULT_BORDER_COLOR.toRGBA());
 	}
 
 	/**
@@ -155,7 +124,7 @@ final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
 	 * @return <code>true</code> if it will fire event after clear of selection, otherwise <code>false</code>
 	 */
 	boolean isFireEventOnClearSelection() {
-		return getValue(DatasetsItemsSelectorOptions.Property.fireEventOnClearSelection, DEFAULT_FIRE_EVENT_ON_CLEAR_SELECTION);
+		return getValue(DatasetsItemsSelectorOptions.Property.fireEventOnClearSelection, DatasetsItemsSelectorOptions.DEFAULT_FIRE_EVENT_ON_CLEAR_SELECTION);
 	}
 
 }

@@ -32,11 +32,11 @@ import com.google.gwt.i18n.client.NumberFormat;
 public final class PercentageCallback implements FormatterCallback {
 
 	/**
-	 * Constant of NaN as string
+	 * Default value of NaN as string, <b>{@value NAN_AS_STRING}</b>.
 	 */
 	public static final String NAN_AS_STRING = "NaN";
 	/**
-	 * Constant number format
+	 * Default number format, <b>{@value DEFAULT_FORMAT}</b>.
 	 */
 	public static final String DEFAULT_FORMAT = "##0.##%";
 	// default stacked flag

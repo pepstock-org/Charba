@@ -28,7 +28,7 @@ import com.google.gwt.dom.client.NativeEvent;
 public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRangeSelectionEventHandler> {
 
 	/**
-	 * Value {@value CLEAR_SELECTION} of FROM and TO when the event is representing a clear of selection
+	 * Value <b>{@value CLEAR_SELECTION}</b> of FROM and TO when the event is representing a clear of selection
 	 */
 	public static final int CLEAR_SELECTION = Integer.MIN_VALUE;
 

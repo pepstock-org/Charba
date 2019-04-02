@@ -48,6 +48,76 @@ import jsinterop.annotations.JsFunction;
  */
 public final class LabelsOptions extends AbstractPluginCachedOptions {
 
+	/**
+	 * Default rendering (what data must be showed), {@link Render#value}.
+	 */
+	public static final Render DEFAULT_RENDER = Render.value;
+
+	/**
+	 * Default the precision for percentage, <b>{@value DEFAULT_PRECISION}</b>.
+	 */
+	public static final int DEFAULT_PRECISION = 0;
+
+	/**
+	 * Default to enable whether or not labels of value 0 are displayed, <b>{@value DEFAULT_SHOWZERO}</b>.
+	 */
+	public static final boolean DEFAULT_SHOWZERO = false;
+
+	/**
+	 * Default to enable if draws text shadows under labels, <b>{@value DEFAULT_TEXTSHADOW}</b>.
+	 */
+	public static final boolean DEFAULT_TEXTSHADOW = false;
+
+	/**
+	 * Default text shadow intensity, <b>{@value DEFAULT_SHADOWBLUR}</b>. 
+	 */
+	public static final int DEFAULT_SHADOWBLUR = 6;
+
+	/**
+	 * Default text shadow X offset, <b>{@value DEFAULT_SHADOWOFFSETX}</b>.
+	 */
+	public static final int DEFAULT_SHADOWOFFSETX = 3;
+
+	/**
+	 * Default text shadow Y offset, <b>{@value DEFAULT_SHADOWOFFSETY}</b>.
+	 */
+	public static final int DEFAULT_SHADOWOFFSETY = 3;
+
+	/**
+	 * Default text shadow color, <b>{@value DEFAULT_SHADOWCOLOR}</b>. 
+	 */
+	public static final String DEFAULT_SHADOWCOLOR = "rgba(0,0,0,0.3)";
+
+	/**
+	 * Default to enable drawing label in arc, <b>{@value DEFAULT_ARC}</b>.
+	 */
+	public static final boolean DEFAULT_ARC = false;
+
+	/**
+	 * Default position to draw label, {@link Position#defaults}.
+	 */
+	public static final Position DEFAULT_POSITION = Position.defaults;
+
+	/**
+	 * Default to enable drawing label even it's overlap, <b>{@value DEFAULT_OVERLAP}</b>.
+	 */
+	public static final boolean DEFAULT_OVERLAP = true;
+
+	/**
+	 * Default to enable showing the real calculated percentages from the values, <b>{@value DEFAULT_SHOWACTUALPERCENTAGES}</b>.
+	 */
+	public static final boolean DEFAULT_SHOWACTUALPERCENTAGES = false;
+
+	/**
+	 * Default padding when position is {@link Position#outside}, <b>{@value DEFAULT_OUTSIDEPADDING}</b>.
+	 */
+	public static final int DEFAULT_OUTSIDEPADDING = 2;
+
+	/**
+	 * Default the margin of text when position is {@link Position#outside} or {@link Position#border}, <b>{@value DEFAULT_TEXTMARGIN}</b>.
+	 */
+	public static final int DEFAULT_TEXTMARGIN = 2;
+
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------

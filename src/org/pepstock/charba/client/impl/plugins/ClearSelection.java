@@ -24,6 +24,8 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.impl.plugins.enums.Align;
 import org.pepstock.charba.client.impl.plugins.enums.Render;
+import org.pepstock.charba.client.resources.Resources;
+import org.pepstock.charba.client.resources.ResourcesType;
 import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.dom.client.ImageElement;
@@ -31,12 +33,62 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Image;
 
 /**
- * Datasets items selector plugin configuration element in order to have into the chart a clickable element to clear the
+ * {@link DatasetsItemsSelector#ID} plugin configuration element in order to have into the chart a clickable element to clear the
  * selection.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class ClearSelection extends NativeObjectContainer {
+	
+	/**
+	 * Default flag if clear selection must be showed into chart, value is <b>{@value DEFAULT_DISPLAY}</b>.
+	 */
+	public static final boolean DEFAULT_DISPLAY = false;
+
+	/**
+	 * Default label for clear selection element, value is <b>{@value DEFAULT_LABEL}</b>.
+	 */
+	public static final String DEFAULT_LABEL = "Clear selection";
+
+	/**
+	 * Default margin from canvas for clear selection element, value is <b>{@value DEFAULT_MARGIN}</b>.
+	 */
+	public static final int DEFAULT_MARGIN = 2;
+
+	/**
+	 * Default padding for clear selection element, value is <b>{@value DEFAULT_PADDING}</b>.
+	 */
+	public static final int DEFAULT_PADDING = 4;
+
+	/**
+	 * Default spacing between label and image for clear selection element, value is <b>{@value DEFAULT_SPACING}</b>.
+	 */
+	public static final int DEFAULT_SPACING = 3;
+
+	/**
+	 * Default image for clear selection element, , value is {@link Resources#clearSelection18()}}.
+	 */
+	public static final ImageElement DEFAULT_IMAGE = Utilities.toImageElement(ResourcesType.getClientBundle().clearSelection18());
+
+	/**
+	 * Default flag if clear selection will use selection area style, value is <b>{@value DEFAULT_USE_SELECTION_STYLE}</b>.
+	 */
+	public static final boolean DEFAULT_USE_SELECTION_STYLE = false;
+	
+	/**
+	 * Default clear selection box alignment, {@link Align#right}.
+	 */
+	public static final Align DEFAULT_ALIGN = Align.right;
+	
+	/**
+	 * Default clear selection rendering, {@link Render#image_label}.
+	 */
+	public static final Render DEFAULT_RENDER = Render.image_label;
+	
+	/**
+	 * Default clear selection box position, {@link Position#bottom}.
+	 */
+	public static final Position DEFAULT_POSITION = Position.bottom;
 
 	// defaults values for dimensions and locations
 	static final double DEFAULT_VALUE = 0D;

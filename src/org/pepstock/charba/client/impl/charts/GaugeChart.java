@@ -27,7 +27,7 @@ import org.pepstock.charba.client.controllers.ControllerType;
 public final class GaugeChart extends BaseMeterChart<GaugeOptions, GaugeDataset> {
 
 	/**
-	 * Name of chart type {@value TYPE} for gauge
+	 * Name of chart type <b>{@value TYPE}</b> for gauge
 	 */
 	public static final String TYPE = "gauge";
 	// static reference to controller type

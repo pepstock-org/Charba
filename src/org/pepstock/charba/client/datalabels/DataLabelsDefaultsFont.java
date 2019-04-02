@@ -30,10 +30,6 @@ import org.pepstock.charba.client.enums.FontStyle;
  */
 final class DataLabelsDefaultsFont extends NativeObjectContainer {
 
-	// default weight
-	private static final Weight DEFAULT_WEIGHT = Weight.normal;
-	// default line height
-	private static final double DEFAULT_LINEHEIGHT = 1.2D;
 
 	/**
 	 * Creates the object with an empty native object instance.
@@ -81,19 +77,19 @@ final class DataLabelsDefaultsFont extends NativeObjectContainer {
 	/**
 	 * Returns the font weight, follows CSS font-style-weight options.
 	 * 
-	 * @return the font weight, follows CSS font-style-weight options. Default is {@link Weight#normal}.
+	 * @return the font weight, follows CSS font-style-weight options.
 	 */
 	Weight getWeight() {
-		return getValue(Font.Property.weight, Weight.class, DEFAULT_WEIGHT);
+		return getValue(Font.Property.weight, Weight.class, Font.DEFAULT_WEIGHT);
 	}
 
 	/**
 	 * Returns the line height.
 	 * 
-	 * @return the line height. Default is 1.2.
+	 * @return the line height.
 	 */
 	double getLineHeight() {
-		return getValue(Font.Property.lineHeight, DEFAULT_LINEHEIGHT);
+		return getValue(Font.Property.lineHeight, Font.DEFAULT_LINEHEIGHT);
 	}
 
 }

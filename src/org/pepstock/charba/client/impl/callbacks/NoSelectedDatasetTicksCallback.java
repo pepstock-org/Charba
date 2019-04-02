@@ -31,10 +31,45 @@ import com.google.gwt.i18n.client.NumberFormat;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class NoSelectedDatasetTicksCallback implements TickCallback {
+public final class NoSelectedDatasetTicksCallback implements TickCallback {
+	
+	/**
+	 * Default number format to apply to ticks, <b>{@value DEFAULT_FORMAT}</b>.
+	 */
+	public static final String DEFAULT_FORMAT = "0.0";
 
-	// it formats the ticks with 1 digits of precision
-	private final static NumberFormat FORMAT = NumberFormat.getFormat("0.0");
+	// it formats the number of ticks 
+	private final NumberFormat numberFormat;
+	// instance of format as string
+	private final String format;
+	
+	/**
+	 * Creates the callback using the {@link NoSelectedDatasetTicksCallback#DEFAULT_FORMAT}. 
+	 */
+	public NoSelectedDatasetTicksCallback() {
+		this(DEFAULT_FORMAT);
+	}
+
+	/**
+	 * Creates the callback using the argument as number format to apply to ticks.
+	 * 
+	 * @param stringFormat number format to apply, if <code>null</code> it uses {@link NoSelectedDatasetTicksCallback#DEFAULT_FORMAT}
+	 */
+	public NoSelectedDatasetTicksCallback(String stringFormat) {
+		// stores the format as string
+		this.format = stringFormat != null ? stringFormat : DEFAULT_FORMAT;
+		// creates the number fomramt
+		this.numberFormat = NumberFormat.getFormat(format);
+	}
+
+	/**
+	 * Returns the number format applied to ticks.
+	 * 
+	 * @return the number format applied to ticks.
+	 */
+	public String getFormat() {
+		return format;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -67,7 +102,7 @@ public class NoSelectedDatasetTicksCallback implements TickCallback {
 		if (allHidden) {
 			// uses the tick value (double) provided by CHART.js
 			// applying the number format
-			return FORMAT.format(value);
+			return numberFormat.format(value);
 		}
 		// otherwise will return the tick value as string
 		return String.valueOf(value);

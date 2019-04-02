@@ -30,27 +30,27 @@ import com.google.gwt.canvas.dom.client.Context2d.LineJoin;
 public final class TilesBuilderDefaults {
 
 	/**
-	 * Default background color as string, {@value DEFAULT_BACKGROUND_COLOR_AS_STRING}
+	 * Default background color as string, <b>{@value DEFAULT_BACKGROUND_COLOR_AS_STRING}</b>.
 	 */
 	public static final String DEFAULT_BACKGROUND_COLOR_AS_STRING = "rgba(100, 100, 100, 0.7)";
 
 	/**
-	 * Default shape color as string, {@value DEFAULT_SHAPE_COLOR_AS_STRING}
+	 * Default shape color as string, <b>{@value DEFAULT_SHAPE_COLOR_AS_STRING}</b>.
 	 */
 	public static final String DEFAULT_SHAPE_COLOR_AS_STRING = "rgba(255, 255, 255, 0.8)";
 
 	/**
-	 * Default background color, {@value DEFAULT_BACKGROUND_COLOR_AS_STRING}
+	 * Default background color, <b>{@value DEFAULT_BACKGROUND_COLOR_AS_STRING}</b>.
 	 */
 	public static final IsColor DEFAULT_BACKGROUND_COLOR = ColorBuilder.parse(DEFAULT_BACKGROUND_COLOR_AS_STRING);
 
 	/**
-	 * Default shape color, {@value DEFAULT_SHAPE_COLOR_AS_STRING}
+	 * Default shape color, <b>{@value DEFAULT_SHAPE_COLOR_AS_STRING}</b>.
 	 */
 	public static final IsColor DEFAULT_SHAPE_COLOR = ColorBuilder.parse(DEFAULT_SHAPE_COLOR_AS_STRING);
 	
 	/**
-	 * Default tile size, 20
+	 * Default tile size, <b>{@value DEFAULT_SIZE}</b>.
 	 */
 	public static final int DEFAULT_SIZE = 20;
 

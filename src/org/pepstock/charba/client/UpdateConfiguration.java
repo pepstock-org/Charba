@@ -28,7 +28,10 @@ import org.pepstock.charba.client.enums.Easing;
  */
 public final class UpdateConfiguration extends NativeObjectContainer {
 
-	private static final boolean DEFAULT_LAZY = false;
+	/**
+	 * Default to enable the animation can be interrupted by other animations, <b>{@value DEFAULT_LAZY}</b>.
+	 */
+	public static final boolean DEFAULT_LAZY = false;
 
 	/**
 	 * Name of properties of native object.
@@ -86,9 +89,9 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	}
 
 	/**
-	 * If true, the animation can be interrupted by other animations
+	 * If true, the animation can be interrupted by other animations.
 	 * 
-	 * @return if true, the animation can be interrupted by other animations. Default is false.
+	 * @return if true, the animation can be interrupted by other animations.
 	 */
 	public boolean isLazy() {
 		return getValue(Property.lazy, DEFAULT_LAZY);

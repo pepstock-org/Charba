@@ -34,7 +34,7 @@ import com.google.gwt.canvas.dom.client.Context2d;
 
 /**
  * Default plugin implementation to set the background color, gradient or pattern of chart.<br>
- * If added to defaults, without any configuration, the chart will have a WHITE background color.
+ * If added to defaults, without any configuration, the chart will have a {@link DEFAULT_BACKGROUND_COLOR} background color.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -42,7 +42,7 @@ import com.google.gwt.canvas.dom.client.Context2d;
 public final class ChartBackgroundColor extends AbstractPlugin {
 
 	/**
-	 * Plugin ID {@value ID}
+	 * Plugin ID <b>{@value ID}</b>.
 	 */
 	public static final String ID = "backgroundcolor";
 	/**
@@ -53,8 +53,10 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	// cache to store options in order do not load every time the options
 	private static final Map<String, ChartBackgroundColorOptions> OPTIONS = new HashMap<>();
 
-	// default background color
-	static final String DEFAULT_BACKGROUND_COLOR = HtmlColor.White.toRGBA();
+	/**
+	 * Default background color, {@link HtmlColor#White}.
+	 */
+	public static final String DEFAULT_BACKGROUND_COLOR = HtmlColor.White.toRGBA();
 	// color instance
 	private final String color;
 	// gradient instance
@@ -63,7 +65,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	private final Pattern pattern;
 
 	/**
-	 * Default constructor with WIHITE background color.
+	 * Default constructor with {@link DEFAULT_BACKGROUND_COLOR} background color.
 	 */
 	public ChartBackgroundColor() {
 		this(DEFAULT_BACKGROUND_COLOR);

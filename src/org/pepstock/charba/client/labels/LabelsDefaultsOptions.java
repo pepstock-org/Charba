@@ -29,34 +29,6 @@ import org.pepstock.charba.client.labels.enums.Render;
  */
 final class LabelsDefaultsOptions extends NativeObjectContainer {
 
-	private static final Render DEFAULT_RENDER = Render.value;
-
-	private static final int DEFAULT_PRECISION = 0;
-
-	private static final boolean DEFAULT_SHOWZERO = false;
-
-	private static final boolean DEFAULT_TEXTSHADOW = false;
-
-	private static final int DEFAULT_SHADOWBLUR = 6;
-
-	private static final int DEFAULT_SHADOWOFFSETX = 3;
-
-	private static final int DEFAULT_SHADOWOFFSETY = 3;
-
-	private static final String DEFAULT_SHADOWCOLOR = "rgba(0,0,0,0.3)";
-
-	private static final boolean DEFAULT_ARC = false;
-
-	private static final String DEFAULT_POSITION = Position.defaults.getValue();
-
-	private static final boolean DEFAULT_OVERLAP = true;
-
-	private static final boolean DEFAULT_SHOWACTUALPERCENTAGES = false;
-
-	private static final int DEFAULT_OUTSIDEPADDING = 2;
-
-	private static final int DEFAULT_TEXTMARGIN = 2;
-
 	/**
 	 * Creates an empty options without any default global options. it will use the constants as default of plugin properties.
 	 */
@@ -76,34 +48,34 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns what data must be showed.
 	 * 
-	 * @return what data must be showed. Default is {@link Render#value}.
+	 * @return what data must be showed.
 	 */
 	Render getRender() {
-		return getValue(LabelsOptions.Property.render, Render.class, DEFAULT_RENDER);
+		return getValue(LabelsOptions.Property.render, Render.class, LabelsOptions.DEFAULT_RENDER);
 	}
 
 	/**
 	 * Returns the precision for percentage.
 	 * 
-	 * @return the precision for percentage. Default is 0.
+	 * @return the precision for percentage.
 	 */
 	int getPrecision() {
-		return getValue(LabelsOptions.Property.precision, DEFAULT_PRECISION);
+		return getValue(LabelsOptions.Property.precision, LabelsOptions.DEFAULT_PRECISION);
 	}
 
 	/**
 	 * Returns whether or not labels of value 0 are displayed.
 	 * 
-	 * @return whether or not labels of value 0 are displayed. Default is false.
+	 * @return whether or not labels of value 0 are displayed.
 	 */
 	boolean isShowZero() {
-		return getValue(LabelsOptions.Property.showZero, DEFAULT_SHOWZERO);
+		return getValue(LabelsOptions.Property.showZero, LabelsOptions.DEFAULT_SHOWZERO);
 	}
 
 	/**
 	 * Returns the the font size.
 	 * 
-	 * @return the font size. Default is <code>Defaults.get().getGlobal().getDefaultFontSize()</code>.
+	 * @return the font size..
 	 */
 	int getFontSize() {
 		return getValue(LabelsOptions.Property.fontSize, Defaults.get().getGlobal().getDefaultFontSize());
@@ -112,7 +84,7 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the the font color as string.
 	 * 
-	 * @return the font color. Default is <code>Defaults.get().getGlobal().getDefaultFontColorAsString()</code>.
+	 * @return the font color.
 	 */
 	String getFontColorAsString() {
 		return getValue(LabelsOptions.Property.fontColor, Defaults.get().getGlobal().getDefaultFontColorAsString());
@@ -121,7 +93,7 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the font style.
 	 * 
-	 * @return the font style. Default is <code>Defaults.get().getGlobal().getDefaultFontStyle()</code>.
+	 * @return the font style.
 	 */
 	FontStyle getFontStyle() {
 		return getValue(LabelsOptions.Property.fontStyle, FontStyle.class, Defaults.get().getGlobal().getDefaultFontStyle());
@@ -130,7 +102,7 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the font family.
 	 * 
-	 * @return the font family. Default is <code>Defaults.get().getGlobal().getDefaultFontFamily()</code>.
+	 * @return the font family.
 	 */
 	String getFontFamily() {
 		return getValue(LabelsOptions.Property.fontFamily, Defaults.get().getGlobal().getDefaultFontFamily());
@@ -139,73 +111,73 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns if draws text shadows under labels.
 	 * 
-	 * @return <code>true</code> if draws text shadows under labels. Default is <code>false</code>.
+	 * @return <code>true</code> if draws text shadows under labels.
 	 */
 	boolean isTextShadow() {
-		return getValue(LabelsOptions.Property.textShadow, DEFAULT_TEXTSHADOW);
+		return getValue(LabelsOptions.Property.textShadow, LabelsOptions.DEFAULT_TEXTSHADOW);
 	}
 
 	/**
 	 * Returns the text shadow intensity.
 	 * 
-	 * @return the text shadow intensity. Default is 6.
+	 * @return the text shadow intensity.
 	 */
 	int getShadowBlur() {
-		return getValue(LabelsOptions.Property.shadowBlur, DEFAULT_SHADOWBLUR);
+		return getValue(LabelsOptions.Property.shadowBlur, LabelsOptions.DEFAULT_SHADOWBLUR);
 	}
 
 	/**
 	 * Returns the text shadow X offset.
 	 * 
-	 * @return the text shadow X offset. Default is 3.
+	 * @return the text shadow X offset.
 	 */
 	int getShadowOffsetX() {
-		return getValue(LabelsOptions.Property.shadowOffsetX, DEFAULT_SHADOWOFFSETX);
+		return getValue(LabelsOptions.Property.shadowOffsetX, LabelsOptions.DEFAULT_SHADOWOFFSETX);
 	}
 
 	/**
 	 * Returns the text shadow Y offset.
 	 * 
-	 * @return the text shadow Y offset. Default is 3.
+	 * @return the text shadow Y offset.
 	 */
 	int getShadowOffsetY() {
-		return getValue(LabelsOptions.Property.shadowOffsetY, DEFAULT_SHADOWOFFSETY);
+		return getValue(LabelsOptions.Property.shadowOffsetY, LabelsOptions.DEFAULT_SHADOWOFFSETY);
 	}
 
 	/**
 	 * Returns the text shadow color as string.
 	 * 
-	 * @return the text shadow color as string. Default is <code>rgba(0,0,0,0.3)</code>.
+	 * @return the text shadow color as string. 
 	 */
 	String getShadowColorAsString() {
-		return getValue(LabelsOptions.Property.shadowColor, DEFAULT_SHADOWCOLOR);
+		return getValue(LabelsOptions.Property.shadowColor, LabelsOptions.DEFAULT_SHADOWCOLOR);
 	}
 
 	/**
 	 * Returns if draws label in arc.
 	 * 
-	 * @return <code>true</code> if draws label in arc. Default is <code>false</code>.
+	 * @return <code>true</code> if draws label in arc. 
 	 */
 	boolean isArc() {
-		return getValue(LabelsOptions.Property.arc, DEFAULT_ARC);
+		return getValue(LabelsOptions.Property.arc, LabelsOptions.DEFAULT_ARC);
 	}
 
 	/**
 	 * Returns the position to draw label.
 	 * 
-	 * @return the position to draw label. Default is {@link Position#defaults}.
+	 * @return the position to draw label.
 	 */
 	String getPositionAsString() {
-		return getValue(LabelsOptions.Property.position, DEFAULT_POSITION);
+		return getValue(LabelsOptions.Property.position, LabelsOptions.DEFAULT_POSITION.getValue());
 	}
 
 	/**
 	 * Returns if draws label even it's overlap.
 	 * 
-	 * @return <code>true</code>if draws label even it's overlap. Default is <code>true</code>.
+	 * @return <code>true</code>if draws label even it's overlap.
 	 */
 	boolean isOverlap() {
-		return getValue(LabelsOptions.Property.overlap, DEFAULT_OVERLAP);
+		return getValue(LabelsOptions.Property.overlap, LabelsOptions.DEFAULT_OVERLAP);
 	}
 
 	/**
@@ -213,27 +185,27 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	 * percentages to 100 in total.
 	 * 
 	 * @return <code>true</code>if shows the real calculated percentages from the values and don't apply the additional logic to
-	 *         fit the percentages to 100 in total. Default is <code>false</code>.
+	 *         fit the percentages to 100 in total.
 	 */
 	boolean isShowActualPercentages() {
-		return getValue(LabelsOptions.Property.showActualPercentages, DEFAULT_SHOWACTUALPERCENTAGES);
+		return getValue(LabelsOptions.Property.showActualPercentages, LabelsOptions.DEFAULT_SHOWACTUALPERCENTAGES);
 	}
 
 	/**
 	 * Returns the padding when position is {@link Position#outside}.
 	 * 
-	 * @return the padding when position is {@link Position#outside}. Default is 2.
+	 * @return the padding when position is {@link Position#outside}.
 	 */
 	int getOutsidePadding() {
-		return getValue(LabelsOptions.Property.outsidePadding, DEFAULT_OUTSIDEPADDING);
+		return getValue(LabelsOptions.Property.outsidePadding, LabelsOptions.DEFAULT_OUTSIDEPADDING);
 	}
 
 	/**
 	 * Returns the margin of text when position is {@link Position#outside} or {@link Position#border}.
 	 * 
-	 * @return the margin of text when position is {@link Position#outside} or {@link Position#border}. Default is 2.
+	 * @return the margin of text when position is {@link Position#outside} or {@link Position#border}. 
 	 */
 	int getTextMargin() {
-		return getValue(LabelsOptions.Property.textMargin, DEFAULT_TEXTMARGIN);
+		return getValue(LabelsOptions.Property.textMargin, LabelsOptions.DEFAULT_TEXTMARGIN);
 	}
 }

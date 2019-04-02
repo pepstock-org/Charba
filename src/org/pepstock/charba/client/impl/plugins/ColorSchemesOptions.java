@@ -19,16 +19,37 @@ import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.impl.plugins.ColorSchemesOptionsFactory.ColorSchemesDefaultsOptionsFactory;
+import org.pepstock.charba.client.impl.plugins.enums.BrewerScheme;
 import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
- * This is the object to map the "charbacolorschemes" plugin options, both at chart and global level.
+ * This is the object to map the {@link ColorSchemes#ID} plugin options, both at chart and global level.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class ColorSchemesOptions extends AbstractPluginOptions {
+	
+	/**
+	 * Default color scheme, {@link BrewerScheme#Paired12}.
+	 */
+	public static final ColorScheme DEFAULT_SCHEME = BrewerScheme.Paired12;
+
+	/**
+	 * Default color scheme scope (for bar and bubble charts), {@link SchemeScope#dataset}.
+	 */
+	public static final SchemeScope DEFAULT_SCHEME_SCOPE = SchemeScope.dataset;
+
+	/**
+	 * Default transparency value for the background color, <b>{@value DEFAULT_BACKGROUND_ALPHA}</b>.
+	 */
+	public static final double DEFAULT_BACKGROUND_ALPHA = 0.5D;
+
+	/**
+	 * Default the order of the colors in the selected scheme is reversed, <b>{@value DEFAULT_REVERSE}</b>.
+	 */
+	public static final boolean DEFAULT_REVERSE = false;
 
 	// defaults global options instance
 	private ColorSchemesDefaultsOptions defaultsOptions;

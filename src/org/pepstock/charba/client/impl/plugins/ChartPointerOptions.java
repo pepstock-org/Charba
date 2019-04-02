@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -28,12 +30,21 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 import com.google.gwt.dom.client.Style.Cursor;
 
 /**
- * Configuration options of pointer plugin.<br>
+ * Configuration options of {@link ChartPointer#ID} plugin.<br>
  * It manages the cursor to adopt when the cursor is over the dataset item and when not.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class ChartPointerOptions extends AbstractPluginOptions {
+	
+	/**
+	 * Default cursor type when the cursor is over the dataset item, {@link Cursor#POINTER}.
+	 */
+	public static final Cursor DEFAULT_CURSOR_POINTER = Cursor.POINTER;
+	/**
+	 * Default list of elements in scope.
+	 */
+	public static final List<PointerElement> DEFAULT_ELEMENTS = Collections.unmodifiableList(Arrays.asList(PointerElement.values()));
 
 	// defaults global options instance
 	private ChartPointerDefaultsOptions defaultsOptions;

@@ -19,8 +19,8 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
-import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
 import org.pepstock.charba.client.enums.ScaleDistribution;
@@ -49,7 +49,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * If set to 'flex', the base sample widths are calculated automatically based on the previous and following samples so that
 	 * they take the full available widths without overlap. Then, bars are sized using barPercentage and categoryPercentage.
 	 * There is no gap when the percentage options are 1. This mode generates bars with different widths when data are not
-	 * evenly spaced.
+	 * evenly spaced, {@link Integer#MIN_VALUE}.
 	 */
 	public static final int FLEX_BAR_THICKNESS = Integer.MIN_VALUE;
 	// this is the value which must be stored in JS object when flex bar thickness is set

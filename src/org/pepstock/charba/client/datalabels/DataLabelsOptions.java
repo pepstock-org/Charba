@@ -67,6 +67,87 @@ import jsinterop.annotations.JsFunction;
  */
 public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 
+	// -------------------------------------------
+	// -- DEFAULTS VALUES of DATALABELS PLUGIN ---
+	// -------------------------------------------
+
+	/**
+	 * Default position of the label relative to the anchor point position and orientation, {@link Align#center}.
+	 */
+	public static final Align DEFAULT_ALIGN = Align.center;
+
+	/**
+	 * Default anchor point, which is defined by an orientation vector and a position on the data element,
+	 * {@link Anchor#center}.
+	 */
+	public static final Anchor DEFAULT_ANCHOR = Anchor.center;
+
+	/**
+	 * Default background color, <code>null</code>, and uses the background color of dataset.
+	 */
+	public static final String DEFAULT_BACKGROUNDCOLOR = null;
+
+	/**
+	 * Default border color, <code>null</code>, and uses the border color of dataset.
+	 */
+	public static final String DEFAULT_BORDERCOLOR = null;
+
+	/**
+	 * Default border radius of labels, <b>{@value DEFAULT_BORDERRADIUS}</b>.
+	 */
+	public static final double DEFAULT_BORDERRADIUS = 0D;
+
+	/**
+	 * Default border width of labels, <b>{@value DEFAULT_BORDERWIDTH}</b>.
+	 */
+	public static final int DEFAULT_BORDERWIDTH = 0;
+
+	/**
+	 * Default to enforce the anchor position to be calculated based on the visible geometry of the associated element,
+	 * <b>{@value DEFAULT_CLAMP}</b>.
+	 */
+	public static final boolean DEFAULT_CLAMP = false;
+
+	/**
+	 * Default to enforce the part of the label which is outside the chart area will be masked, <b>{@value DEFAULT_CLIP}</b>.
+	 */
+	public static final boolean DEFAULT_CLIP = false;
+
+	/**
+	 * Default visibility of labels, {@link Display#yes}.
+	 */
+	public static final Display DEFAULT_DISPLAY = Display.yes;
+
+	/**
+	 * Default distance (in pixels) to pull the label away from the anchor point, <b>{@value DEFAULT_OFFSET}</b>.
+	 */
+	public static final double DEFAULT_OFFSET = 4D;
+
+	/**
+	 * Default opacity, <b>{@value DEFAULT_OPACITY}</b>.
+	 */
+	public static final double DEFAULT_OPACITY = 1D;
+
+	/**
+	 * Default clockwise rotation angle (in degrees) of the label, <b>{@value DEFAULT_ROTATION}</b>.
+	 */
+	public static final double DEFAULT_ROTATION = 0D;
+
+	/**
+	 * Default text alignment being used when drawing the label text, {@link TextAlign#start}. 
+	 */
+	public static final TextAlign DEFAULT_TEXTALIGN = TextAlign.start;
+
+	/**
+	 * Default text stroke width, <b>{@value DEFAULT_TEXTSTROKEWIDTH}</b>.
+	 */
+	public static final int DEFAULT_TEXTSTROKEWIDTH = 0;
+
+	/**
+	 * Default text shadow blur, <b>{@value DEFAULT_TEXTSHADOWBLUR}</b>.
+	 */
+	public static final double DEFAULT_TEXTSHADOWBLUR = 0D;
+
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------

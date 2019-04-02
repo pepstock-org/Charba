@@ -31,6 +31,16 @@ import org.pepstock.charba.client.enums.FontStyle;
  */
 public final class Font extends AbstractElement {
 
+	/**
+	 * Default font weight, {@link Weight#normal}.
+	 */
+	public static final Weight DEFAULT_WEIGHT = Weight.normal;
+	
+	/**
+	 * Default line height, <b>{@value DEFAULT_LINEHEIGHT}</b>.
+	 */
+	public static final double DEFAULT_LINEHEIGHT = 1.2D;
+
 	// defaults global options instance
 	private DataLabelsDefaultsFont defaultsOptions;
 

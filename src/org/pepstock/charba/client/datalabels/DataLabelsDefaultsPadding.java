@@ -28,9 +28,6 @@ import org.pepstock.charba.client.enums.Position;
  */
 final class DataLabelsDefaultsPadding extends NativeObjectContainer {
 
-	// default padding
-	private static final int DEFAULT_PADDING = 4;
-
 	/**
 	 * Creates the object with an empty native object instance.
 	 */
@@ -50,36 +47,36 @@ final class DataLabelsDefaultsPadding extends NativeObjectContainer {
 	/**
 	 * Returns the padding left in pixel.
 	 * 
-	 * @return the padding left in pixel. Default is 4.
+	 * @return the padding left in pixel.
 	 */
 	int getLeft() {
-		return getValue(Position.left, DEFAULT_PADDING);
+		return getValue(Position.left, Padding.DEFAULT_PADDING);
 	}
 
 	/**
 	 * Returns the padding right in pixel.
 	 * 
-	 * @return the padding right in pixel. Default is 4.
+	 * @return the padding right in pixel.
 	 */
 	int getRight() {
-		return getValue(Position.right, DEFAULT_PADDING);
+		return getValue(Position.right, Padding.DEFAULT_PADDING);
 	}
 
 	/**
 	 * Returns the padding top in pixel.
 	 * 
-	 * @return the padding top in pixel. Default is 4.
+	 * @return the padding top in pixel.
 	 */
 	int getTop() {
-		return getValue(Position.top, DEFAULT_PADDING);
+		return getValue(Position.top, Padding.DEFAULT_PADDING);
 	}
 
 	/**
 	 * Returns the padding bottom in pixel.
 	 * 
-	 * @return the padding bottom in pixel. Default is 4.
+	 * @return the padding bottom in pixel.
 	 */
 	int getBottom() {
-		return getValue(Position.bottom, DEFAULT_PADDING);
+		return getValue(Position.bottom, Padding.DEFAULT_PADDING);
 	}
 }

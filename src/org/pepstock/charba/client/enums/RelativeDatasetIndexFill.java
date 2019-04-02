@@ -31,7 +31,7 @@ import com.google.gwt.regexp.shared.RegExp;
 public final class RelativeDatasetIndexFill extends AbstractDatasetIndexFill {
 
 	/**
-	 * Default value for relative dataset index
+	 * Default value for relative dataset index, {@link AbsoluteDatasetIndexFill#DEFAULT_VALUE_AS_INT} as string.
 	 */
 	public static final String DEFAULT_VALUE = String.valueOf(AbsoluteDatasetIndexFill.DEFAULT_VALUE_AS_INT);
 	// regex string to check the string format, which must be sign and number (both mandatory)

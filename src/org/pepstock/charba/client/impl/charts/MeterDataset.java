@@ -49,22 +49,22 @@ public class MeterDataset extends DoughnutDataset {
 	private static final String INVALID_PATTERN_CALL = "Patterns and gradients are not supported.";
 
 	/**
-	 * Default value color
+	 * Default value color, <b>rgb(140, 214, 16)</b>.
 	 */
 	public static final IsColor DEFAULT_VALUE_COLOR = new Color(140, 214, 16);
 
 	/**
-	 * Default empty color
+	 * Default empty color, <b>rgb(234, 234, 234)</b>.
 	 */
 	public static final IsColor DEFAULT_EMPTY_VALUE_COLOR = new Color(234, 234, 234);
 
 	/**
-	 * Default maximum value is {@value DEFAULT_MAXIMUM_VALUE}
+	 * Default maximum value is <b>{@value DEFAULT_MAXIMUM_VALUE}</b>.
 	 */
 	public static final double DEFAULT_MAXIMUM_VALUE = 100D;
 
 	/**
-	 * Minimum value is {@value MINIMUM_VALUE}
+	 * Minimum value is <b>{@value MINIMUM_VALUE}</b>.
 	 */
 	public static final double MINIMUM_VALUE = 0D;
 

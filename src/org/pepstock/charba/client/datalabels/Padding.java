@@ -28,6 +28,11 @@ import org.pepstock.charba.client.enums.Position;
  * @see PaddingCallback
  */
 public final class Padding extends AbstractElement {
+	
+	/**
+	 * Default padding, <b>{@value DEFAULT_PADDING}</b>.
+	 */
+	public static final int DEFAULT_PADDING = 4;
 
 	// defaults global options instance
 	private DataLabelsDefaultsPadding defaultsOptions;

@@ -18,12 +18,14 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
+import org.pepstock.charba.client.colors.GwtMaterialColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.impl.plugins.DatasetsItemsSelectorOptionsFactory.DatasetsItemsSelectorDefaultsOptionsFactory;
+import org.pepstock.charba.client.options.Scales;
 import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 
 /**
@@ -41,6 +43,36 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * @author Andrea "Stock" Stocchero
  */
 public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
+	
+	/**
+	 * Default alpha of selecting/selection colors, <b>{@value DEFAULT_ALPHA}</b>.
+	 */
+	public static final double DEFAULT_ALPHA = 0.3D;
+
+	/**
+	 * Default color for area, {@link GwtMaterialColor#ORANGE_LIGHTEN_3}, alpha <b>{@value DEFAULT_ALPHA}</b>.
+	 */
+	public static final IsColor DEFAULT_COLOR = GwtMaterialColor.ORANGE_LIGHTEN_3.alpha(DEFAULT_ALPHA);
+
+	/**
+	 * Default X axis id, {@link Scales#DEFAULT_X_AXIS_ID}.
+	 */
+	public static final String DEFAULT_AXIS_ID = Scales.DEFAULT_X_AXIS_ID;
+
+	/**
+	 * Default border width of selection area, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
+	 */
+	public static final int DEFAULT_BORDER_WIDTH = 0;
+
+	/**
+	 * Default border color for area, {@link GwtMaterialColor#GREY_DARKEN_2}.
+	 */
+	public static final IsColor DEFAULT_BORDER_COLOR = GwtMaterialColor.GREY_DARKEN_2;
+
+	/**
+	 * Default flag if fire event after clear selection, <b>{@value DEFAULT_FIRE_EVENT_ON_CLEAR_SELECTION}</b>.
+	 */
+	public static final boolean DEFAULT_FIRE_EVENT_ON_CLEAR_SELECTION = false;
 
 	// defaults global options instance
 	private DatasetsItemsSelectorDefaultsOptions defaultsOptions;

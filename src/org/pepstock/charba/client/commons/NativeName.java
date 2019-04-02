@@ -23,42 +23,42 @@ package org.pepstock.charba.client.commons;
 public final class NativeName {
 
 	/**
-	 * Constant to bind java script object as object with name {@value OBJECT}.
+	 * Constant to bind java script object as object with name <b>{@value OBJECT}</b>.
 	 */
 	public static final String OBJECT = "Object";
 
 	/**
-	 * Constant to bind java script array with name {@value ARRAY}.
+	 * Constant to bind java script array with name <b>{@value ARRAY}</b>.
 	 */
 	public static final String ARRAY = "Array";
 
 	/**
-	 * Constant to bind java script object as JsHelper with name {@value JSHELPER} (internal of Charba).
+	 * Constant to bind java script object as JsHelper with name <b>{@value JSHELPER}</b>, (internal of Charba).
 	 */
 	public static final String JSHELPER = "JsHelper";
 
 	/**
-	 * Constant to bind java script object as JsControllerHelper with name {@value JSCONTROLLERHELPER} (internal of Charba)
+	 * Constant to bind java script object as JsControllerHelper with name <b>{@value JSCONTROLLERHELPER}</b>, (internal of Charba).
 	 */
 	public static final String JSCONTROLLERHELPER = "JsControllerHelper";
 
 	/**
-	 * Constant to bind java script object as JsWindowHelper with name {@value JSWINDOWHELPER} (internal of Charba)
+	 * Constant to bind java script object as JsWindowHelper with name <b>{@value JSWINDOWHELPER}</b>, (internal of Charba).
 	 */
 	public static final String JSWINDOWHELPER = "JsWindowHelper";
 
 	/**
-	 * Constant to bind java script object as JsPositionerHelper with name {@value JSPOSITIONERHELPER} (internal of Charba)
+	 * Constant to bind java script object as JsPositionerHelper with name <b>{@value JSPOSITIONERHELPER}</b>, (internal of Charba).
 	 */
 	public static final String JSPOSITIONERHELPER = "JsPositionerHelper";
 
 	/**
-	 * Constant to bind java script object as chart with name {@value CHART} (internal of CHART.JS)
+	 * Constant to bind java script object as chart with name <b>{@value CHART}</b>, (internal of CHART.JS).
 	 */
 	public static final String CHART = "Chart";
 
 	/**
-	 * Constant to bind java script object as window with name {@value WINDOW}
+	 * Constant to bind java script object as window with name <b>{@value WINDOW}</b>.
 	 */
 	public static final String WINDOW = "window";
 

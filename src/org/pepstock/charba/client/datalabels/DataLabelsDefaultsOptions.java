@@ -33,40 +33,6 @@ import org.pepstock.charba.client.enums.Display;
  */
 final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 
-	// -------------------------------------------
-	// -- DEFAULTS VALUES of DATALABELS PLUGIN ---
-	// -------------------------------------------
-
-	private static final Align DEFAULT_ALIGN = Align.center;
-
-	private static final Anchor DEFAULT_ANCHOR = Anchor.center;
-
-	private static final String DEFAULT_BACKGROUNDCOLOR = null;
-
-	private static final String DEFAULT_BORDERCOLOR = null;
-
-	private static final double DEFAULT_BORDERRADIUS = 0D;
-
-	private static final int DEFAULT_BORDERWIDTH = 0;
-
-	private static final boolean DEFAULT_CLAMP = false;
-
-	private static final boolean DEFAULT_CLIP = false;
-
-	private static final Display DEFAULT_DISPLAY = Display.yes;
-
-	private static final double DEFAULT_OFFSET = 4D;
-
-	private static final double DEFAULT_OPACITY = 1D;
-
-	private static final double DEFAULT_ROTATION = 0D;
-
-	private static final TextAlign DEFAULT_TEXTALIGN = TextAlign.start;
-
-	private static final int DEFAULT_TEXTSTROKEWIDTH = 0;
-
-	private static final double DEFAULT_TEXTSHADOWBLUR = 0D;
-
 	// default padding options
 	private final DataLabelsDefaultsPadding padding;
 	// default font options
@@ -121,56 +87,55 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the position of the label relative to the anchor point position and orientation.
 	 * 
-	 * @return the position of the label relative to the anchor point position and orientation. Default is {@link Align#center}.
+	 * @return the position of the label relative to the anchor point position and orientation.
 	 */
 	Align getAlign() {
-		return getValue(DataLabelsOptions.Property.align, Align.class, DEFAULT_ALIGN);
+		return getValue(DataLabelsOptions.Property.align, Align.class, DataLabelsOptions.DEFAULT_ALIGN);
 	}
 
 	/**
 	 * Returns the anchor point, which is defined by an orientation vector and a position on the data element
 	 * 
-	 * @return the anchor point, which is defined by an orientation vector and a position on the data element. Default is
-	 *         {@link Anchor#center}.
+	 * @return the anchor point, which is defined by an orientation vector and a position on the data element. 
 	 */
 	Anchor getAnchor() {
-		return getValue(DataLabelsOptions.Property.anchor, Anchor.class, DEFAULT_ANCHOR);
+		return getValue(DataLabelsOptions.Property.anchor, Anchor.class, DataLabelsOptions.DEFAULT_ANCHOR);
 	}
 
 	/**
 	 * Returns the background color as string.
 	 * 
-	 * @return the background color as string. Default is <code>null</code> and uses the background color of dataset.
+	 * @return the background color as string. If <code>null</code>, it uses the background color of dataset.
 	 */
 	String getBackgroundColorAsString() {
-		return getValue(DataLabelsOptions.Property.backgroundColor, DEFAULT_BACKGROUNDCOLOR);
+		return getValue(DataLabelsOptions.Property.backgroundColor, DataLabelsOptions.DEFAULT_BACKGROUNDCOLOR);
 	}
 
 	/**
 	 * Returns the border color as string.
 	 * 
-	 * @return the border color as string. Default is <code>null</code> and uses the border color of dataset.
+	 * @return the border color as string. If <code>null</code>, it uses the border color of dataset.
 	 */
 	String getBorderColorAsString() {
-		return getValue(DataLabelsOptions.Property.borderColor, DEFAULT_BORDERCOLOR);
+		return getValue(DataLabelsOptions.Property.borderColor, DataLabelsOptions.DEFAULT_BORDERCOLOR);
 	}
 
 	/**
 	 * Returns the border radius.
 	 * 
-	 * @return the border radius. Default is 0.
+	 * @return the border radius. 
 	 */
 	double getBorderRadius() {
-		return getValue(DataLabelsOptions.Property.borderRadius, DEFAULT_BORDERRADIUS);
+		return getValue(DataLabelsOptions.Property.borderRadius, DataLabelsOptions.DEFAULT_BORDERRADIUS);
 	}
 
 	/**
 	 * Returns the border width.
 	 * 
-	 * @return the border width. Default is 0.
+	 * @return the border width.
 	 */
 	int getBorderWidth() {
-		return getValue(DataLabelsOptions.Property.borderWidth, DEFAULT_BORDERWIDTH);
+		return getValue(DataLabelsOptions.Property.borderWidth, DataLabelsOptions.DEFAULT_BORDERWIDTH);
 	}
 
 	/**
@@ -178,20 +143,19 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * element (i.e. part inside the chart area).
 	 * 
 	 * @return <code>true</code> to enforce the anchor position to be calculated based on the visible geometry of the associated
-	 *         element (i.e. part inside the chart area). Default is <code>false</code>.
+	 *         element (i.e. part inside the chart area). 
 	 */
 	boolean isClamp() {
-		return getValue(DataLabelsOptions.Property.clamp, DEFAULT_CLAMP);
+		return getValue(DataLabelsOptions.Property.clamp, DataLabelsOptions.DEFAULT_CLAMP);
 	}
 
 	/**
 	 * When the clip option is <code>true</code>, the part of the label which is outside the chart area will be masked.
 	 * 
 	 * @return when the clip option is <code>true</code>, the part of the label which is outside the chart area will be masked.
-	 *         Default is <code>false</code>.
 	 */
 	boolean isClip() {
-		return getValue(DataLabelsOptions.Property.clip, DEFAULT_CLIP);
+		return getValue(DataLabelsOptions.Property.clip, DataLabelsOptions.DEFAULT_CLIP);
 	}
 
 	/**
@@ -206,17 +170,21 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the visibility of labels.
 	 * 
-	 * @return the visibility of labels. Default is {@link Display#yes}.
+	 * @return the visibility of labels. 
 	 */
 	Display getDisplay() {
+		// gets object type
 		ObjectType type = type(DataLabelsOptions.Property.display);
+		// if boolean
 		if (ObjectType.Boolean.equals(type)) {
+			// gets value and compare with enum value
 			boolean value = getValue(DataLabelsOptions.Property.display, true);
 			return value ? Display.yes : Display.no;
 		} else if (ObjectType.String.equals(type)) {
-			return getValue(DataLabelsOptions.Property.display, Display.class, DEFAULT_DISPLAY);
+			// if string
+			return getValue(DataLabelsOptions.Property.display, Display.class, DataLabelsOptions.DEFAULT_DISPLAY);
 		}
-		return DEFAULT_DISPLAY;
+		return DataLabelsOptions.DEFAULT_DISPLAY;
 	}
 
 	/**
@@ -224,44 +192,43 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
 	 * 
 	 * @return the distance (in pixels) to pull the label away from the anchor point. This option is not applicable when align
-	 *         is 'center'. Also note that if align is 'start', the label is moved in the opposite direction. Default is 4.
+	 *         is 'center'. Also note that if align is 'start', the label is moved in the opposite direction. 
 	 */
 	double getOffset() {
-		return getValue(DataLabelsOptions.Property.offset, DEFAULT_OFFSET);
+		return getValue(DataLabelsOptions.Property.offset, DataLabelsOptions.DEFAULT_OFFSET);
 	}
 
 	/**
 	 * Returns the opacity.
 	 * 
-	 * @return the opacity. Default is 1.
+	 * @return the opacity.
 	 */
 	double getOpacity() {
-		return getValue(DataLabelsOptions.Property.opacity, DEFAULT_OPACITY);
+		return getValue(DataLabelsOptions.Property.opacity, DataLabelsOptions.DEFAULT_OPACITY);
 	}
 
 	/**
 	 * Returns the clockwise rotation angle (in degrees) of the label, the rotation center point being the label center.
 	 * 
-	 * @return the clockwise rotation angle (in degrees) of the label, the rotation center point being the label center. Default
-	 *         is 0.
+	 * @return the clockwise rotation angle (in degrees) of the label, the rotation center point being the label center. 
 	 */
 	double getRotation() {
-		return getValue(DataLabelsOptions.Property.rotation, DEFAULT_ROTATION);
+		return getValue(DataLabelsOptions.Property.rotation, DataLabelsOptions.DEFAULT_ROTATION);
 	}
 
 	/**
 	 * Returns the text alignment being used when drawing the label text.
 	 * 
-	 * @return the text alignment being used when drawing the label text. Default is {@link TextAlign#start}.
+	 * @return the text alignment being used when drawing the label text. 
 	 */
 	TextAlign getTextAlign() {
-		return getValue(DataLabelsOptions.Property.textAlign, TextAlign.class, DEFAULT_TEXTALIGN);
+		return getValue(DataLabelsOptions.Property.textAlign, TextAlign.class, DataLabelsOptions.DEFAULT_TEXTALIGN);
 	}
 
 	/**
 	 * Returns the text stroke color as string.
 	 * 
-	 * @return the text stroke color as string. Default is {@link DataLabelsDefaultsOptions#getColorAsString()}.
+	 * @return the text stroke color as string.
 	 */
 	String getTextStrokeColorAsString() {
 		return getValue(DataLabelsOptions.Property.textStrokeColor, getColorAsString());
@@ -270,25 +237,25 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	/**
 	 * Returns the text stroke width.
 	 * 
-	 * @return the text stroke width. Default is 0.
+	 * @return the text stroke width.
 	 */
 	int getTextStrokeWidth() {
-		return getValue(DataLabelsOptions.Property.textStrokeWidth, DEFAULT_TEXTSTROKEWIDTH);
+		return getValue(DataLabelsOptions.Property.textStrokeWidth, DataLabelsOptions.DEFAULT_TEXTSTROKEWIDTH);
 	}
 
 	/**
 	 * Returns the text shadow blur.
 	 * 
-	 * @return the text shadow blur. Default is 0.
+	 * @return the text shadow blur.
 	 */
 	double getTextShadowBlur() {
-		return getValue(DataLabelsOptions.Property.textShadowBlur, DEFAULT_TEXTSHADOWBLUR);
+		return getValue(DataLabelsOptions.Property.textShadowBlur, DataLabelsOptions.DEFAULT_TEXTSHADOWBLUR);
 	}
 
 	/**
 	 * Returns the text shadow color as string.
 	 * 
-	 * @return the text shadow color as string. Default is {@link DataLabelsDefaultsOptions#getColorAsString()}.
+	 * @return the text shadow color as string. 
 	 */
 	String getTextShadowColorAsString() {
 		return getValue(DataLabelsOptions.Property.textShadowColor, getColorAsString());

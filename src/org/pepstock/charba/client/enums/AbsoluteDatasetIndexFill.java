@@ -28,7 +28,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
 public final class AbsoluteDatasetIndexFill extends AbstractDatasetIndexFill {
 
 	/**
-	 * Default value for absolute dataset index
+	 * Default value for absolute dataset index, <b>{@value DEFAULT_VALUE_AS_INT}</b>.
 	 */
 	public static final int DEFAULT_VALUE_AS_INT = 0;
 	// the name of fill

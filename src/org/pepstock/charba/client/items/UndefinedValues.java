@@ -26,27 +26,27 @@ import com.google.gwt.dom.client.ImageElement;
 public final class UndefinedValues {
 
 	/**
-	 * Default value for INTEGER instances
+	 * Default value for INTEGER instances, {@link Integer#MIN_VALUE}.
 	 */
 	public static final int INTEGER = Integer.MIN_VALUE;
 
 	/**
-	 * Default value for DOUBLE instances
+	 * Default value for DOUBLE instances, {@link Double#NaN}.
 	 */
 	public static final double DOUBLE = Double.NaN;
 
 	/**
-	 * Default value for STRING instances.
+	 * Default value for STRING instances, <b>{@value STRING}</b>.
 	 */
 	public static final String STRING = null;
 
 	/**
-	 * Default value for BOOLEAN instances
+	 * Default value for BOOLEAN instances, {@link Boolean#FALSE}.
 	 */
 	public static final boolean BOOLEAN = Boolean.FALSE;
 
 	/**
-	 * Default value for ImageElement instances
+	 * Default value for ImageElement instances, <b>null</b>.
 	 */
 	public static final ImageElement IMAGE_ELEMENT = null;
 

@@ -43,7 +43,7 @@ import org.pepstock.charba.client.plugins.AbstractPlugin;
 public final class ColorSchemes extends AbstractPlugin {
 
 	/**
-	 * Plugin ID {@value ID}
+	 * Plugin ID <b>{@value ID}</b>.
 	 */
 	public static final String ID = "charbacolorschemes";
 

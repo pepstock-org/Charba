@@ -31,9 +31,9 @@ import org.pepstock.charba.client.controllers.ControllerType;
 abstract class BaseMeterChart<O extends MeterOptions, D extends MeterDataset> extends AbstractChart<O, D> {
 
 	/**
-	 * Default of maximum of dataset
+	 * Default of maximum value of data into a dataset (percentage based), <b>{@value DEFAULT_MAX}</b>.
 	 */
-	protected static final double DEFAULT_MAX = 100D;
+	public static final double DEFAULT_MAX = 100D;
 
 	/**
 	 * Returns a dataset with a maximum value.
