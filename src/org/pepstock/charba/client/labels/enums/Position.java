@@ -66,7 +66,7 @@ public enum Position
 	 * @param value the real value to set to configure LABELS plugin
 	 * @return the position enumeration item or {@link Position#defaults} is the value is wrong.
 	 */
-	public static final Position getPositionByValue(String value) {
+	public static Position getPositionByValue(String value) {
 		// if the value is consistent
 		if (value != null) {
 			// scans all position

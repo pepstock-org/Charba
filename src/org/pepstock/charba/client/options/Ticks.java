@@ -92,7 +92,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * 
 	 * @return the minor
 	 */
-	public final TickMinor getMinor() {
+	public TickMinor getMinor() {
 		return minor;
 	}
 
@@ -101,7 +101,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * 
 	 * @return the major
 	 */
-	public final TickMajor getMajor() {
+	public TickMajor getMajor() {
 		return major;
 	}
 

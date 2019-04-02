@@ -30,7 +30,7 @@ import org.pepstock.charba.client.options.ExtendedOptions;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Plugins {
+public class Plugins {
 
 	private final ExtendedOptions options;
 

@@ -33,7 +33,7 @@ import org.pepstock.charba.client.enums.Display;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Scales extends AbstractModel<Options, IsDefaultScales> implements IsDefaultScales {
+public final class Scales extends AbstractModel<Options, IsDefaultScales> implements IsDefaultScales {
 
 	/**
 	 * Default name of X axis is <b>{@value DEFAULT_X_AXIS_ID}</b>.
@@ -90,7 +90,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	 * 
 	 * @param display if <code>true</code>, shows the axes.
 	 */
-	public final void setDisplay(boolean display) {
+	public void setDisplay(boolean display) {
 		setValue(Property.display, display);
 		// checks if all parents are attached
 		checkAndAddToParent();
@@ -103,7 +103,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	 * 
 	 * @param display display option controls the visibility of axis
 	 */
-	public final void setDisplay(Display display) {
+	public void setDisplay(Display display) {
 		// checks if is setting auto
 		if (Display.auto.equals(display)) {
 			setValue(Property.display, display);
@@ -122,7 +122,7 @@ public class Scales extends AbstractModel<Options, IsDefaultScales> implements I
 	 * 
 	 * @return display option controls the visibility of axis
 	 */
-	public final Display getDisplay() {
+	public Display getDisplay() {
 		// checks if is boolean
 		if (ObjectType.Boolean.equals(type(Property.display))) {
 			// gets value

@@ -53,7 +53,7 @@ final class WrapperPlugin {
 	 * 
 	 * @return the plugin id.
 	 */
-	final String getId() {
+	String getId() {
 		return delegation.getId();
 	}
 

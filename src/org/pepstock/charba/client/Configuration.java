@@ -93,7 +93,7 @@ public final class Configuration {
 	 * @param options the options of the chart.
 	 */
 	@JsOverlay
-	final <T extends ConfigurationOptions> void setOptions(AbstractChart<?, ?> chart, T options) {
+	<T extends ConfigurationOptions> void setOptions(AbstractChart<?, ?> chart, T options) {
 		options.load(chart, this);
 	}
 

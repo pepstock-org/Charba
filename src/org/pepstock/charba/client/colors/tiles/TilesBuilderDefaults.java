@@ -96,7 +96,7 @@ public final class TilesBuilderDefaults {
 	 * 
 	 * @return the shape of tile. If <code>null</code>, returns the default one
 	 */
-	public final Shape getShape() {
+	public Shape getShape() {
 		return shape;
 	}
 
@@ -105,7 +105,7 @@ public final class TilesBuilderDefaults {
 	 * 
 	 * @param shape the shape of tile
 	 */
-	public final void setShape(Shape shape) {
+	public void setShape(Shape shape) {
 		this.shape = shape == null ? DEFAULT_SHAPE : shape;
 	}
 
@@ -123,7 +123,7 @@ public final class TilesBuilderDefaults {
 	 * 
 	 * @param size the size to set
 	 */
-	public final void setSize(int size) {
+	public void setSize(int size) {
 		this.size = Math.max(size, MINIMUM_SIZE);
 	}
 
@@ -132,7 +132,7 @@ public final class TilesBuilderDefaults {
 	 * 
 	 * @return the background color of tile. If <code>null</code>, returns the default one
 	 */
-	public final String getBackgroundColorAsString() {
+	public String getBackgroundColorAsString() {
 		return backgroundColor;
 	}
 
@@ -141,7 +141,7 @@ public final class TilesBuilderDefaults {
 	 * 
 	 * @return the background color of tile. If <code>null</code>, returns the default one
 	 */
-	public final IsColor getBackgroundColor() {
+	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
@@ -150,7 +150,7 @@ public final class TilesBuilderDefaults {
 	 * 
 	 * @param backgroundColor the background color of tile as string
 	 */
-	public final void setBackgroundColor(String backgroundColor) {
+	public void setBackgroundColor(String backgroundColor) {
 		this.backgroundColor = backgroundColor == null ? DEFAULT_BACKGROUND_COLOR_AS_STRING : backgroundColor;
 	}
 
@@ -159,7 +159,7 @@ public final class TilesBuilderDefaults {
 	 * 
 	 * @param backgroundColor the background color of tile
 	 */
-	public final void setBackgroundColor(IsColor backgroundColor) {
+	public void setBackgroundColor(IsColor backgroundColor) {
 		this.backgroundColor = backgroundColor == null ? DEFAULT_BACKGROUND_COLOR_AS_STRING : backgroundColor.toRGBA();
 	}
 
@@ -168,7 +168,7 @@ public final class TilesBuilderDefaults {
 	 * 
 	 * @return the shape color of tile. If <code>null</code>, returns the default one
 	 */
-	public final String getShapeColorAsString() {
+	public String getShapeColorAsString() {
 		return shapeColor;
 	}
 
@@ -177,7 +177,7 @@ public final class TilesBuilderDefaults {
 	 * 
 	 * @return the shape color of tile. If <code>null</code>, returns the default one
 	 */
-	public final IsColor getShapeColor() {
+	public IsColor getShapeColor() {
 		return ColorBuilder.parse(getShapeColorAsString());
 	}
 
@@ -186,7 +186,7 @@ public final class TilesBuilderDefaults {
 	 * 
 	 * @param shapeColor the shape color of tile
 	 */
-	public final void setShapeColor(String shapeColor) {
+	public void setShapeColor(String shapeColor) {
 		this.shapeColor = shapeColor == null ? DEFAULT_SHAPE_COLOR_AS_STRING : shapeColor;
 	}
 
@@ -195,7 +195,7 @@ public final class TilesBuilderDefaults {
 	 * 
 	 * @param shapeColor the shape color of tile
 	 */
-	public final void setShapeColor(IsColor shapeColor) {
+	public void setShapeColor(IsColor shapeColor) {
 		this.shapeColor = shapeColor == null ? DEFAULT_SHAPE_COLOR_AS_STRING : shapeColor.toRGBA();
 	}
 
@@ -206,7 +206,7 @@ public final class TilesBuilderDefaults {
 	 * @return lineCap the lineCap to determine the shape used to draw the end points of lines. If <code>null</code>, returns
 	 *         the default one
 	 */
-	public final LineCap getLineCap() {
+	public LineCap getLineCap() {
 		return lineCap;
 	}
 
@@ -215,7 +215,7 @@ public final class TilesBuilderDefaults {
 	 * 
 	 * @param lineCap the lineCap to determine the shape used to draw the end points of lines
 	 */
-	public final void setLineCap(LineCap lineCap) {
+	public void setLineCap(LineCap lineCap) {
 		this.lineCap = lineCap == null ? DEFAULT_LINE_CAP : lineCap;
 	}
 
@@ -226,7 +226,7 @@ public final class TilesBuilderDefaults {
 	 * @return lineJoin the lineJoin to determine the shape used to join two line segments where they meet. If
 	 *         <code>null</code>, returns the default one
 	 */
-	public final LineJoin getLineJoin() {
+	public LineJoin getLineJoin() {
 		return lineJoin;
 	}
 
@@ -235,7 +235,7 @@ public final class TilesBuilderDefaults {
 	 * 
 	 * @param lineJoin the lineJoin, to determine the shape used to join two line segments where they meet.
 	 */
-	public final void setLineJoin(LineJoin lineJoin) {
+	public void setLineJoin(LineJoin lineJoin) {
 		this.lineJoin = lineJoin;
 	}
 

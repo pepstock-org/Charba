@@ -240,7 +240,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * 
 	 * @return the style of the dataset item.
 	 */
-	public final List<PointStyle> getPointStyle() {
+	public List<PointStyle> getPointStyle() {
 		// checks if the property is an array
 		if (ObjectType.Array.equals(type(Property.pointStyle))) {
 			// if array, maps into array

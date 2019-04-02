@@ -244,7 +244,7 @@ public final class ChartNode {
 	 * 
 	 * @return the string JSON representation of the object.
 	 */
-	public final String toJSON() {
+	public String toJSON() {
 		return JSON.stringifyWithReplacer(chart, 3);
 	}
 

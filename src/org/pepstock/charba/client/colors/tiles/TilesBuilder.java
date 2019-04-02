@@ -79,7 +79,7 @@ public final class TilesBuilder {
 	 * 
 	 * @return the default values of tiles configuration
 	 */
-	public final TilesBuilderDefaults getDefaults() {
+	public TilesBuilderDefaults getDefaults() {
 		return defaults;
 	}
 

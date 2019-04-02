@@ -341,7 +341,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * 
 	 * @return the controller type.
 	 */
-	final Type getType() {
+	Type getType() {
 		return delegation.getType();
 	}
 
@@ -352,7 +352,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chartId chartId chart id.
 	 * @param datasetIndex dataset index
 	 */
-	protected void onInitialize(ControllerContext context, AbstractChart<?, ?> chart, int datasetIndex) {
+	void onInitialize(ControllerContext context, AbstractChart<?, ?> chart, int datasetIndex) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.initialize(context, chart, datasetIndex);
@@ -365,7 +365,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param context context of controller
 	 * @param chartId chartId chart id.
 	 */
-	protected void onAddElements(ControllerContext context, AbstractChart<?, ?> chart) {
+	void onAddElements(ControllerContext context, AbstractChart<?, ?> chart) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.addElements(context, chart);
@@ -379,7 +379,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chartId chartId chart id.
 	 * @param index dataset index
 	 */
-	protected void onAddElementAndReset(ControllerContext context, AbstractChart<?, ?> chart, int index) {
+	void onAddElementAndReset(ControllerContext context, AbstractChart<?, ?> chart, int index) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.addElementAndReset(context, chart, index);
@@ -393,7 +393,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chartId chartId chart id.
 	 * @param ease if specified, this number represents how far to transition elements.
 	 */
-	protected void onDraw(ControllerContext context, AbstractChart<?, ?> chart, double ease) {
+	void onDraw(ControllerContext context, AbstractChart<?, ?> chart, double ease) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.draw(context, chart, ease);
@@ -407,7 +407,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chartId chartId chart id.
 	 * @param object element to be removed.
 	 */
-	protected void onRemoveHoverStyle(ControllerContext context, AbstractChart<?, ?> chart, NativeObject object) {
+	void onRemoveHoverStyle(ControllerContext context, AbstractChart<?, ?> chart, NativeObject object) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.removeHoverStyle(context, chart, new StyleElement(object));
@@ -421,7 +421,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chartId chartId chart id.
 	 * @param object element to be set.
 	 */
-	protected void onSetHoverStyle(ControllerContext context, AbstractChart<?, ?> chart, NativeObject object) {
+	void onSetHoverStyle(ControllerContext context, AbstractChart<?, ?> chart, NativeObject object) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.setHoverStyle(context, chart, new StyleElement(object));
@@ -435,7 +435,7 @@ final class WrapperController extends NativeObjectContainer {
 	 * @param chartId chartId chart id.
 	 * @param reset if true, put the elements into a reset state so they can animate to their final values
 	 */
-	protected void onUpdate(ControllerContext context, AbstractChart<?, ?> chart, boolean reset) {
+	void onUpdate(ControllerContext context, AbstractChart<?, ?> chart, boolean reset) {
 		// if consistent, calls controller
 		if (chart != null) {
 			delegation.update(context, chart, reset);

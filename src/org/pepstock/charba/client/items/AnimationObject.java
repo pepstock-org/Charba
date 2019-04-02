@@ -52,7 +52,7 @@ public final class AnimationObject {
 	 * @return the animation item, by the native java script object.
 	 */
 	@JsOverlay
-	public final AnimationItem getAnimationItem() {
+	public AnimationItem getAnimationItem() {
 		return new AnimationItem(getAnimationObject());
 	}
 

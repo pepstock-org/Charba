@@ -57,7 +57,7 @@ public final class JsHelper {
 	 * 
 	 * @return undefined reference
 	 */
-	public final Object undefined() {
+	public Object undefined() {
 		return NativeJsHelper.undefined();
 	}
 
@@ -67,7 +67,7 @@ public final class JsHelper {
 	 * @param element DOM element to scan
 	 * @return a list of strings with element attributes
 	 */
-	public final List<String> elementAttributes(Element element) {
+	public List<String> elementAttributes(Element element) {
 		ArrayString array = NativeJsHelper.elementAttributes(element);
 		return ArrayListHelper.unmodifiableList(array);
 	}
@@ -78,7 +78,7 @@ public final class JsHelper {
 	 * @param object the object to get type.
 	 * @return the object type
 	 */
-	public final ObjectType typeOf(Object object) {
+	public ObjectType typeOf(Object object) {
 		// gets the object type by javascript type and checking if is an array
 		return ObjectType.getType(NativeJsHelper.typeOf(object), Array.isArray(object));
 	}
@@ -90,7 +90,7 @@ public final class JsHelper {
 	 * @param key the string name of the property to test.
 	 * @return the object type
 	 */
-	public final ObjectType typeOf(Object object, String key) {
+	public ObjectType typeOf(Object object, String key) {
 		// gets the object type by javascript type and checking if is an array
 		return ObjectType.getType(NativeJsHelper.type(object, key), NativeJsHelper.isArray(object, key));
 	}

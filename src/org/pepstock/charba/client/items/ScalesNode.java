@@ -70,7 +70,7 @@ public final class ScalesNode extends NativeObjectContainer {
 	 * @param event event to check if inside of one of scales.
 	 * @return the scale item if the chart event is inside of one of scales, otherwise <code>null</code>
 	 */
-	public final ScaleItem getScaleIsInside(ChartNativeEvent event) {
+	public ScaleItem getScaleIsInside(ChartNativeEvent event) {
 		// gets all keys
 		List<Key> keys = keys();
 		// if keys are consistent
@@ -97,7 +97,7 @@ public final class ScalesNode extends NativeObjectContainer {
 	 * @param event event to check if inside of one of scales.
 	 * @return <code>true</code> if the chart event is inside of one of scales, otherwise <code>false</code>
 	 */
-	public final boolean isInside(ChartNativeEvent event) {
+	public boolean isInside(ChartNativeEvent event) {
 		return getScaleIsInside(event) != null;
 	}
 }

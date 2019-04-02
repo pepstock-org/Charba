@@ -70,7 +70,7 @@ final class SlashedLine extends ShapeDrawer {
 	 * @param endX offset X where ends drawing
 	 * @param endY offset Y where ends drawing
 	 */
-	final void drawDiagonal(Context2d context, double startX, double startY, double endX, double endY) {
+	void drawDiagonal(Context2d context, double startX, double startY, double endX, double endY) {
 		// draws shape
 		// to point for drawing line
 		context.moveTo(startX, startY);
