@@ -3,7 +3,7 @@ Charba - GWT Charts library based on CHART.JS
 
 Version 2.3
 
-[![Build Status](https://travis-ci.com/pepstock-org/Charba.svg?branch=master)](https://travis-ci.com/pepstock-org/Charba)
+[![Build Status](https://travis-ci.com/pepstock-org/Charba.svg?branch=master)](https://travis-ci.com/pepstock-org/Charba) [![Awesome](https://awesome.re/badge-flat2.svg)](https://github.com/chartjs/awesome)
 
 What's Charba
 --------
