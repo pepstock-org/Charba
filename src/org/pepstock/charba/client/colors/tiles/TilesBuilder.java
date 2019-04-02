@@ -15,279 +15,130 @@
 */
 package org.pepstock.charba.client.colors.tiles;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 
-import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
-import com.google.gwt.dom.client.CanvasElement;
-import com.google.gwt.dom.client.Document;
 
 /**
- * Builds tiles to use inside the pattern, as canvas pattern.
+ * Comfortable object to create tiles (as CHARBA pattern or canvas pattern) by a builder.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 public final class TilesBuilder {
 
-	// static instance for singleton
-	private static final TilesBuilder INSTANCE = new TilesBuilder();
-	// cache of canvas patterns to avoid to create the same canvas pattern if already used
-	private static final Map<String, CanvasPattern> CANVAS_PATTERNS = new HashMap<>();
-	// message to show when the browser can't support canvas
-	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
-	// gets if Canvas is supported
-	private final boolean isCanvasSupported = Canvas.isSupported();
-	// canvas where draws the pattern
-	private final CanvasElement canvas;
-	// default configuration
-	private final TilesBuilderDefaults defaults;
+	// fields used to create a tile
+	private IsShape shape = null;
+
+	private String backgroundColor = null;
+
+	String shapeColor = null;
+
+	int size = Integer.MIN_VALUE;
 
 	/**
 	 * To avoid any instantiation
 	 */
 	private TilesBuilder() {
-		// checks if canvas is supported
-		if (isCanvasSupported) {
-			// creates a canvas
-			canvas = Document.get().createCanvasElement();
-			// defaults configuration
-			defaults = new TilesBuilderDefaults();
-		} else {
-			// canvas not supported
-			// throws exception
-			throw new IllegalArgumentException(CANVAS_NOT_SUPPORTED_MESSAGE);
-		}
+		// sets to all filed the defaults
+		// as starting value
+		shape = TilesFactory.getDefaults().getShape();
+		backgroundColor = TilesFactory.getDefaults().getBackgroundColorAsString();
+		shapeColor = TilesFactory.getDefaults().getShapeColorAsString();
+		size = TilesFactory.getDefaults().getSize();
 	}
 
 	/**
-	 * Singleton method to get static instance.
+	 * Returns new tiles builder instance.
 	 * 
 	 * @return tiles builder instance
 	 */
-	public static TilesBuilder get() {
-		return INSTANCE;
+	public static TilesBuilder create() {
+		return new TilesBuilder();
 	}
 
 	/**
-	 * Returns the default values of tiles configuration.
+	 * Sets the shape of the tile.
 	 * 
-	 * @return the default values of tiles configuration
+	 * @param shape the shape of tile
+	 * @return tiles builder instance
 	 */
-	public TilesBuilderDefaults getDefaults() {
-		return defaults;
+	public TilesBuilder setShape(IsShape shape) {
+		this.shape = shape == null ? TilesFactory.getDefaults().getShape() : shape;
+		return this;
 	}
 
 	/**
-	 * Returns a canvas pattern, using default values, shape is <code>square</code>, background color, shape color and size.
+	 * Sets the size of the tile, minimum size is the default size.
+	 * 
+	 * @param size the size to set
+	 * @return tiles builder instance
+	 */
+	public TilesBuilder setSize(int size) {
+		this.size = Math.max(size, TilesFactory.getDefaults().getSize());
+		return this;
+	}
+
+	/**
+	 * Sets the background color of tile as string.
+	 * 
+	 * @param backgroundColor the background color of tile as string
+	 * @return tiles builder instance
+	 */
+	public TilesBuilder setBackgroundColor(String backgroundColor) {
+		this.backgroundColor = backgroundColor == null ? TilesFactory.getDefaults().getBackgroundColorAsString() : backgroundColor;
+		return this;
+	}
+
+	/**
+	 * Sets the background color of tile.
+	 * 
+	 * @param backgroundColor the background color of tile
+	 * @return tiles builder instance
+	 */
+	public TilesBuilder setBackgroundColor(IsColor backgroundColor) {
+		this.backgroundColor = backgroundColor == null ? TilesFactory.getDefaults().getBackgroundColorAsString() : backgroundColor.toRGBA();
+		return this;
+	}
+
+	/**
+	 * Sets the shape color of tile.
+	 * 
+	 * @param shapeColor the shape color of tile
+	 * @return tiles builder instance
+	 */
+	public TilesBuilder setShapeColor(String shapeColor) {
+		this.shapeColor = shapeColor == null ? TilesFactory.getDefaults().getShapeColorAsString() : shapeColor;
+		return this;
+	}
+
+	/**
+	 * Sets the shape color of tile.
+	 * 
+	 * @param shapeColor the shape color of tile
+	 * @return tiles builder instance
+	 */
+	public TilesBuilder setShapeColor(IsColor shapeColor) {
+		this.shapeColor = shapeColor == null ? TilesFactory.getDefaults().getShapeColorAsString() : shapeColor.toRGBA();
+		return this;
+	}
+
+	/**
+	 * Returns a canvas pattern, using the shape, background color, shape color and size.
 	 * 
 	 * @return a tile as canvas pattern
 	 */
-	public CanvasPattern createTile() {
-		return createTile(defaults.getShape());
+	public CanvasPattern asTile() {
+		return TilesFactory.createTile(shape, backgroundColor, shapeColor, size);
 	}
 
 	/**
-	 * Returns a canvas pattern, using the shape as argument and the other default values, background color, shape color and size.
+	 * Returns a CHARBA pattern, using the shape, background color, shape color and size.
 	 * 
-	 * @param shape shape to apply to canvas pattern
-	 * @return a tile as canvas pattern
+	 * @return a tile as CHARBA pattern
 	 */
-	public CanvasPattern createTile(IsShape shape) {
-		return createTile(shape, defaults.getBackgroundColorAsString());
+	public Pattern asPattern() {
+		return TilesFactory.createPattern(shape, backgroundColor, shapeColor, size);
 	}
-
-	/**
-	 * Returns a canvas pattern, using the shape and back ground color as arguments and the other default values, shape color and size.
-	 * 
-	 * @param shape shape to apply to canvas pattern
-	 * @param backgroundColor background color of canvas pattern
-	 * @return a tile as canvas pattern
-	 */
-	public CanvasPattern createTile(IsShape shape, IsColor backgroundColor) {
-		return createTile(shape, backgroundColor, defaults.getShapeColor());
-	}
-
-	/**
-	 * Returns a canvas pattern, using the shape and back ground color as arguments and the other default values, shape color and size.
-	 * 
-	 * @param shape shape to apply to canvas pattern
-	 * @param backgroundColor background color of canvas pattern
-	 * @return a tile as canvas pattern
-	 */
-	public CanvasPattern createTile(IsShape shape, String backgroundColor) {
-		return createTile(shape, backgroundColor, defaults.getShapeColorAsString());
-	}
-
-	/**
-	 * Returns a canvas pattern, using the shape, back ground color and shape color as arguments and the size as default value.
-	 * 
-	 * @param shape shape to apply to canvas pattern
-	 * @param backgroundColor background color of canvas pattern
-	 * @param shapeColor shape color
-	 * @return a tile as canvas pattern
-	 */
-	public CanvasPattern createTile(IsShape shape, String backgroundColor, String shapeColor) {
-		return createTile(shape, backgroundColor, shapeColor, defaults.getSize());
-	}
-
-	/**
-	 * Returns a canvas pattern, using the shape, back ground color and shape color as arguments and the size as default value.
-	 * 
-	 * @param shape shape to apply to canvas pattern
-	 * @param backgroundColor background color of canvas pattern
-	 * @param shapeColor shape color
-	 * @return a tile as canvas pattern
-	 */
-	public CanvasPattern createTile(IsShape shape, IsColor backgroundColor, IsColor shapeColor) {
-		return createTile(shape, backgroundColor, shapeColor, defaults.getSize());
-	}
-
-	/**
-	 * Returns a canvas pattern, using the shape, back ground color, shape color and size as arguments.
-	 * 
-	 * @param shape shape to apply to canvas pattern
-	 * @param backgroundColor background color of canvas pattern
-	 * @param shapeColor shape color
-	 * @param size size of canvas pattern
-	 * @return a tile as canvas pattern
-	 */
-	public CanvasPattern createTile(IsShape shape, IsColor backgroundColor, IsColor shapeColor, int size) {
-		return createTile(shape, backgroundColor != null ? backgroundColor.toRGBA() : defaults.getBackgroundColorAsString(), shapeColor != null ? shapeColor.toRGBA() : defaults.getShapeColorAsString(), size);
-	}
-
-	/**
-	 * Returns a canvas pattern, using the shape, back ground color, shape color and size as arguments.
-	 * 
-	 * @param shape shape to apply to canvas pattern
-	 * @param backgroundColor background color of canvas pattern
-	 * @param shapeColor shape color
-	 * @param size size of canvas pattern
-	 * @return a tile as canvas pattern
-	 */
-	public CanvasPattern createTile(IsShape shape, String backgroundColor, String shapeColor, int size) {
-		// checks consistency of all parameters
-		// if not consistent, it applies the default value
-		IsShape shapeParam = shape != null ? shape : defaults.getShape();
-		String backgroundColorParam = backgroundColor != null ? backgroundColor : TilesBuilderDefaults.DEFAULT_BACKGROUND_COLOR_AS_STRING;
-		String shapeColorParam = shapeColor != null ? shapeColor : TilesBuilderDefaults.DEFAULT_SHAPE_COLOR_AS_STRING;
-		// checks the minimum size of canvas pattern
-		int sizeParam = Math.max(size, TilesBuilderDefaults.MINIMUM_SIZE);
-		// creates a unique key based on arguments
-		// in order to store the canvas pattern when created and
-		// if all further requests for the same canvas pattern, returns the cached one
-		StringBuilder keyBuilder = new StringBuilder(shapeParam.name());
-		keyBuilder.append(backgroundColorParam).append(shapeColorParam).append(sizeParam);
-		String key = keyBuilder.toString().replaceAll("\\s+", "").toLowerCase(Locale.getDefault());
-		// checks if the canvas pattern is already created with those parameters
-		if (CANVAS_PATTERNS.containsKey(key)) {
-			// if yes returns the cached one
-			return CANVAS_PATTERNS.get(key);
-		}
-		// creates a canvas
-		CanvasPattern pattern = shapeParam.getDrawer().createTile(canvas, backgroundColorParam, shapeColorParam, sizeParam);
-		// stores it into cache
-		CANVAS_PATTERNS.put(key, pattern);
-		return pattern;
-	}
-
-	/**
-	 * Returns a CHARBA pattern, using default values, shape is <code>square</code>, background color, shape color and size.
-	 * 
-	 * @return a CHARBA pattern
-	 */
-	public Pattern createPattern() {
-		return new Pattern(createTile());
-	}
-
-	/**
-	 * Returns a CHARBA pattern, using the shape as argument and the other default values, background color, shape color and
-	 * size.
-	 * 
-	 * @param shape shape to apply to canvas pattern
-	 * @return a CHARBA pattern
-	 */
-	public Pattern createPattern(IsShape shape) {
-		return new Pattern(createTile(shape));
-	}
-
-	/**
-	 * Returns a CHARBA pattern, using the shape and back ground color as arguments and the other default values, shape color
-	 * and size.
-	 * 
-	 * @param shape shape to apply to canvas pattern
-	 * @param backgroundColor background color of canvas pattern
-	 * @return a CHARBA pattern
-	 */
-	public Pattern createPattern(IsShape shape, IsColor backgroundColor) {
-		return new Pattern(createTile(shape, backgroundColor));
-	}
-
-	/**
-	 * Returns a CHARBA pattern, using the shape and back ground color as arguments and the other default values, shape color
-	 * and size.
-	 * 
-	 * @param shape shape to apply to canvas pattern
-	 * @param backgroundColor background color of canvas pattern
-	 * @return a CHARBA pattern
-	 */
-	public Pattern createPattern(IsShape shape, String backgroundColor) {
-		return new Pattern(createTile(shape, backgroundColor));
-	}
-
-	/**
-	 * Returns a CHARBA pattern, using the shape, back ground color and shape color as arguments and the size as default value.
-	 * 
-	 * @param shape shape to apply to canvas pattern
-	 * @param backgroundColor background color of canvas pattern
-	 * @param shapeColor shape color
-	 * @return a CHARBA pattern
-	 */
-	public Pattern createPattern(IsShape shape, String backgroundColor, String shapeColor) {
-		return new Pattern(createTile(shape, backgroundColor, shapeColor));
-	}
-
-	/**
-	 * Returns a CHARBA pattern, using the shape, back ground color and shape color as arguments and the size as default value.
-	 * 
-	 * @param shape shape to apply to canvas pattern
-	 * @param backgroundColor background color of canvas pattern
-	 * @param shapeColor shape color
-	 * @return a CHARBA pattern
-	 */
-	public Pattern createPattern(IsShape shape, IsColor backgroundColor, IsColor shapeColor) {
-		return new Pattern(createTile(shape, backgroundColor, shapeColor));
-	}
-
-	/**
-	 * Returns a CHARBA pattern, using the shape, back ground color, shape color and size as arguments.
-	 * 
-	 * @param shape shape to apply to canvas pattern
-	 * @param backgroundColor background color of canvas pattern
-	 * @param shapeColor shape color
-	 * @param size size of canvas pattern
-	 * @return a CHARBA pattern
-	 */
-	public Pattern createPattern(IsShape shape, String backgroundColor, String shapeColor, int size) {
-		return new Pattern(createTile(shape, backgroundColor, shapeColor, size));
-	}
-
-	/**
-	 * Returns a CHARBA pattern, using the shape, back ground color, shape color and size as arguments.
-	 * 
-	 * @param shape shape to apply to canvas pattern
-	 * @param backgroundColor background color of canvas pattern
-	 * @param shapeColor shape color
-	 * @param size size of canvas pattern
-	 * @return a CHARBA pattern
-	 */
-	public Pattern createPattern(IsShape shape, IsColor backgroundColor, IsColor shapeColor, int size) {
-		return new Pattern(createTile(shape, backgroundColor, shapeColor, size));
-	}
-
 }

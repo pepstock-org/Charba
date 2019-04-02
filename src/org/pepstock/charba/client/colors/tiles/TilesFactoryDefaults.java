@@ -27,7 +27,7 @@ import com.google.gwt.canvas.dom.client.Context2d.LineJoin;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class TilesBuilderDefaults {
+public final class TilesFactoryDefaults {
 
 	/**
 	 * Default background color as string, <b>{@value DEFAULT_BACKGROUND_COLOR_AS_STRING}</b>.
@@ -65,14 +65,14 @@ public final class TilesBuilderDefaults {
 	/**
 	 * Default the shape, {@link Shape#square}.
 	 */
-	public static final Shape DEFAULT_SHAPE = Shape.square;
+	public static final IsShape DEFAULT_SHAPE = Shape.square;
 
 	/**
 	 * Default to determine the shape used to join two line segments where they meet, {@link LineJoin#ROUND}.
 	 */
 	public static final LineJoin DEFAULT_LINE_JOIN = LineJoin.ROUND;
 
-	private Shape shape = DEFAULT_SHAPE;
+	private IsShape shape = DEFAULT_SHAPE;
 
 	private int size = DEFAULT_SIZE;
 
@@ -87,7 +87,7 @@ public final class TilesBuilderDefaults {
 	/**
 	 * To avoid any external implementation
 	 */
-	TilesBuilderDefaults() {
+	TilesFactoryDefaults() {
 		// do nothing
 	}
 
@@ -96,7 +96,7 @@ public final class TilesBuilderDefaults {
 	 * 
 	 * @return the shape of tile. If <code>null</code>, returns the default one
 	 */
-	public Shape getShape() {
+	public IsShape getShape() {
 		return shape;
 	}
 
@@ -105,7 +105,7 @@ public final class TilesBuilderDefaults {
 	 * 
 	 * @param shape the shape of tile
 	 */
-	public void setShape(Shape shape) {
+	public void setShape(IsShape shape) {
 		this.shape = shape == null ? DEFAULT_SHAPE : shape;
 	}
 

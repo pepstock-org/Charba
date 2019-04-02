@@ -110,7 +110,7 @@ abstract class ShapeDrawer {
 	 * @param size the size of tile, which is a square
 	 */
 	protected final void applyStrokeProperties(Context2d context, String shapeColor, int size) {
-		applyStrokeProperties(context, shapeColor, size, TilesBuilder.get().getDefaults().getLineCap(), TilesBuilder.get().getDefaults().getLineJoin());
+		applyStrokeProperties(context, shapeColor, size, TilesFactory.getDefaults().getLineCap(), TilesFactory.getDefaults().getLineJoin());
 	}
 
 	/**
