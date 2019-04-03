@@ -14,7 +14,7 @@ sudo: false
 #
 addons:
   sonarcloud:
-    organization: "pepstock-org_Charba"
+    organization: "pepstock-org"
     token:
       secure: ${SONAR_TOKEN}
 #
@@ -28,7 +28,7 @@ cache:
 # specify the JDKs 
 jdk:
    - oraclejdk8
-   - openjdk8
+#  - openjdk8
 # specify the brances to build from
 branches:
    only:
