@@ -10,7 +10,7 @@ language: java
 # enable container-based build (faster), instead of vm build
 sudo: false
 #
-# SONARCLOUD
+# SONARCLOUD 
 #
 addons:
   sonarcloud:
