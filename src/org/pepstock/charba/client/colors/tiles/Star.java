@@ -37,11 +37,8 @@ import com.google.gwt.canvas.dom.client.Context2d;
  * @author Andrea "Stock" Stocchero
  *
  */
-class Star extends ShapeDrawer {
+class Star extends EmptyStar {
 	
-	//number of spikes of star
-	static final int SPIKES = 5;
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -50,63 +47,11 @@ class Star extends ShapeDrawer {
 	 */
 	@Override
 	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
-		// calculates half dimension
-		final double halfSize = size / 2D;
-		// calculates quarter dimension
-		final double quarterSize = size / 4D;
-		// apply the stroke properties
-		applyStrokeProperties(context, shapeColor, size);
-		// override line width to 1
-		context.setLineWidth(1D);
-		// applies a translation to the current transform
-		context.translate(size, size);
-		// applies rotation (90 degrees) to the current transform
-		context.rotate(ROTATION_180_DEGREES);
-		// designs the shape into A section
-		drawStar(context, size, halfSize, halfSize, SPIKES, halfSize - 2D, quarterSize - 1D);
-		// strokes the current path
-		context.stroke();
+		super.drawTile(context, backgroundColor, shapeColor, size);
 		// apply the fill properties
 		applyFillProperties(context, shapeColor);
 		// fills the current path
 		context.fill();
 	}
 
-	/**
-	 * Designs a star into a tile section.
-	 * 
-	 * @param context context of canvas to design the shape
-	 * @param size the size of tile, which is a square
-	 * @param offsetX offset X where starts drawing
-	 * @param offsetY offset Y where starts drawing
-	 * @param spikes number of spikes of star
-	 * @param innerRadius inner radius of star
-	 * @param outerRadius outer radius of star
-	 */
-	final void drawStar(Context2d context, int size, double offsetX, double offsetY, int spikes, double innerRadius, double outerRadius) {
-		// calculates quarter dimension
-		double rot = Math.PI / 2D * 3D;
-		// calculates the center X of arc
-		double x = 0D;
-		// calculates the center Y of arc
-		double y = 0D;
-		// calculates of step
-		final double step = Math.PI / spikes;
-		// draws shape
-		// scans spikes
-		for (int i = 0; i < spikes; i++) {
-			// draws spike first line
-			x = offsetX + Math.cos(rot) * outerRadius;
-			y = offsetY + Math.sin(rot) * outerRadius;
-			context.lineTo(x, y);
-			rot += step;
-			// draws spike second line
-			x = offsetX + Math.cos(rot) * innerRadius;
-			y = offsetY + Math.sin(rot) * innerRadius;
-			context.lineTo(x, y);
-			rot += step;
-		}
-		// last line of last spkie
-		context.lineTo(offsetX, offsetY - outerRadius);
-	}
 }

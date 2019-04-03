@@ -47,9 +47,9 @@ import com.google.gwt.canvas.dom.client.TextMetrics;
 public final class CharacterShape extends ShapeDrawer implements IsShape {
 
 	/**
-	 * Name of shape to draw a character, <b>{@value SHAPE_NAME}</b>.
+	 * Name of shape to draw a character, <b>{@value CHARACTER_SHAPE_NAME}</b>.
 	 */
-	public static final String SHAPE_NAME = "char";
+	public static final String CHARACTER_SHAPE_NAME = "char";
 	// default font decrement
 	private static final int FONT_SIZE_DECREMENT = 2;
 	// string (char) to draw on the tile
@@ -57,7 +57,7 @@ public final class CharacterShape extends ShapeDrawer implements IsShape {
 	// font family to apply on tile
 	private final String fontFamily;
 	// key prefix for caching
-	private final String keyPrefix;
+	private final String charKeyPrefix;
 
 	/**
 	 * Creates a shape with a character as shape, using the default font family
@@ -89,7 +89,7 @@ public final class CharacterShape extends ShapeDrawer implements IsShape {
 		this.character = character;
 		this.fontFamily = fontFamily != null ? fontFamily : Defaults.get().getGlobal().getDefaultFontFamily();
 		// creates the prefix key for caching
-		this.keyPrefix = SHAPE_NAME + character + fontFamily;
+		this.charKeyPrefix = CHARACTER_SHAPE_NAME + character + fontFamily;
 	}
 
 	/*
@@ -99,7 +99,7 @@ public final class CharacterShape extends ShapeDrawer implements IsShape {
 	 */
 	@Override
 	public String name() {
-		return SHAPE_NAME;
+		return CHARACTER_SHAPE_NAME;
 	}
 
 	/*
@@ -119,7 +119,7 @@ public final class CharacterShape extends ShapeDrawer implements IsShape {
 	 */
 	@Override
 	public String getKeyPrefix() {
-		return keyPrefix;
+		return charKeyPrefix;
 	}
 
 	/*
@@ -151,11 +151,6 @@ public final class CharacterShape extends ShapeDrawer implements IsShape {
 	}
 
 	/**
-	 *
-	 * 
-	 * 
-	 */
-	/**
 	 * Designs a char into a tile section.
 	 *  
 	 * @param context context of canvas to design the shape
@@ -174,12 +169,11 @@ public final class CharacterShape extends ShapeDrawer implements IsShape {
 		// calculates y point (centering the char)
 		final double y = (halfSize - fontSize) / 2D + offsetY;
 		// draws text
-		// context.strokeText(character, x, y);
 		context.fillText(character, x, y);
 	}
 
 	/**
-	 * Calculates the font size based on available space into square into doughnut inner radius. FIXME
+	 * Calculates the font size based on available space into square into doughnut inner radius.
 	 * 
 	 * @param context canvas context
 	 * @param sideOfSquare side of square

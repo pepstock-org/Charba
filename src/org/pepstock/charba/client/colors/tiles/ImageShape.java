@@ -46,13 +46,13 @@ import com.google.gwt.user.client.ui.Image;
 public final class ImageShape extends ShapeDrawer implements IsShape {
 
 	/**
-	 * Name of shape to draw an image, <b>{@value SHAPE_NAME}</b>.
+	 * Name of shape to draw an image, <b>{@value IMAGE_SHAPE_NAME}</b>.
 	 */
-	public static final String SHAPE_NAME = "image";
+	public static final String IMAGE_SHAPE_NAME = "image";
 	// image to draw on the tile
 	private final ImageElement imageElement;
 	// key prefix
-	private final String keyPrefix;
+	private final String imageKeyPrefix;
 
 	/**
 	 * Creates a shape with an image.
@@ -83,7 +83,7 @@ public final class ImageShape extends ShapeDrawer implements IsShape {
 			// stores the image
 			this.imageElement = image;
 			// key prefix for caching is NAME plus source of image
-			this.keyPrefix = SHAPE_NAME+imageElement.getSrc();
+			this.imageKeyPrefix = IMAGE_SHAPE_NAME+imageElement.getSrc();
 		} else {
 			// if here, image is null
 			// then exception
@@ -98,7 +98,7 @@ public final class ImageShape extends ShapeDrawer implements IsShape {
 	 */
 	@Override
 	public String name() {
-		return SHAPE_NAME;
+		return IMAGE_SHAPE_NAME;
 	}
 
 	/*
@@ -116,7 +116,7 @@ public final class ImageShape extends ShapeDrawer implements IsShape {
 	 */
 	@Override
 	public String getKeyPrefix() {
-		return keyPrefix;
+		return imageKeyPrefix;
 	}
 
 	/*

@@ -37,8 +37,11 @@ import com.google.gwt.canvas.dom.client.Context2d;
  * @author Andrea "Stock" Stocchero
  *
  */
-final class EmptyStar extends Star {
+class EmptyStar extends ShapeDrawer {
 	
+	//number of spikes of star
+	static final int SPIKES = 5;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -63,6 +66,44 @@ final class EmptyStar extends Star {
 		drawStar(context, size, halfSize, halfSize, SPIKES, halfSize - 2D, quarterSize - 1D);
 		// strokes the current path
 		context.stroke();
+	}
+
+	/**
+	 * Designs a star into a tile section.
+	 * 
+	 * @param context context of canvas to design the shape
+	 * @param size the size of tile, which is a square
+	 * @param offsetX offset X where starts drawing
+	 * @param offsetY offset Y where starts drawing
+	 * @param spikes number of spikes of star
+	 * @param innerRadius inner radius of star
+	 * @param outerRadius outer radius of star
+	 */
+	final void drawStar(Context2d context, int size, double offsetX, double offsetY, int spikes, double innerRadius, double outerRadius) {
+		// calculates quarter dimension
+		double rot = Math.PI / 2D * 3D;
+		// calculates the center X of arc
+		double x = 0D;
+		// calculates the center Y of arc
+		double y = 0D;
+		// calculates of step
+		final double step = Math.PI / spikes;
+		// draws shape
+		// scans spikes
+		for (int i = 0; i < spikes; i++) {
+			// draws spike first line
+			x = offsetX + Math.cos(rot) * outerRadius;
+			y = offsetY + Math.sin(rot) * outerRadius;
+			context.lineTo(x, y);
+			rot += step;
+			// draws spike second line
+			x = offsetX + Math.cos(rot) * innerRadius;
+			y = offsetY + Math.sin(rot) * innerRadius;
+			context.lineTo(x, y);
+			rot += step;
+		}
+		// last line of last spkie
+		context.lineTo(offsetX, offsetY - outerRadius);
 	}
 
 }
