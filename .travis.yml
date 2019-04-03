@@ -40,7 +40,9 @@ branches:
 # download Ivy, if needed
 before_install: ant buildInit
 # run the ant main target
-script: ant build-bin
+script: 
+   - ant build-bin
+   - sonar-scanner
 # list the content of Ivy cache dir AFTER
 after_script: ls -R ~/.ant 
 #
