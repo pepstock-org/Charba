@@ -30,7 +30,6 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  * a specific dataset.<br>
  * Is equals of Meter dataset.<br>
  * The minimum value of data is 0 (see {@link MeterDataset#MINIMUM_VALUE}).<br>
- * The dataset will have always 2 data and setting the color of data (set by thresholds), only the first is the empty value.<br>
  * To set the data, is mandatory to use {@link MeterDataset#setValue(double)}) method instead of
  * {@link org.pepstock.charba.client.data.Dataset#setData(double...)}) one.
  * 
@@ -84,32 +83,28 @@ public final class GaugeDataset extends MeterDataset {
 		for (GaugeThreshold t : GaugeThreshold.values()) {
 			thresholds.add(t.getThreshold());
 		}
+		// sets current color 
+		super.setColor(current.getColor());
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.HovingDataset#setBackgroundColor(java.lang.String[])
+	
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.impl.charts.MeterDataset#setValueColor(org.pepstock.charba.client.colors.IsColor)
 	 */
 	@Override
-	public void setBackgroundColor(IsColor... backgroundColor) {
-		// sets color for empty value
-		super.setBackgroundColor(backgroundColor);
-		// checks colors to use for dataset
-		checkAndSetColor();
+	public void setColor(IsColor valueColor) {
+		// value color must be override because
+		// depends on threshold
+		super.setColor(current.getColor().toRGBA());
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.HovingDataset#setBackgroundColor(java.lang.String[])
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.impl.charts.MeterDataset#setValueColor(java.lang.String)
 	 */
 	@Override
-	public void setBackgroundColor(String... backgroundColor) {
-		// sets color for empty value
-		super.setBackgroundColor(backgroundColor);
-		// checks colors to use for dataset
-		checkAndSetColor();
+	public void setColor(String valueColor) {
+		// value color must be override because
+		// depends on threshold
+		super.setColor(current.getColor().toRGBA());
 	}
 
 	/**
@@ -140,8 +135,8 @@ public final class GaugeDataset extends MeterDataset {
 		this.percentageThreshold = percentageThreshold;
 		// checks the threshold
 		current = checkLevel();
-		// checks and sets color
-		checkAndSetColor();
+		// sets color
+		setColor(current.getColor());
 	}
 
 	/**
@@ -156,8 +151,8 @@ public final class GaugeDataset extends MeterDataset {
 		thresholds.addAll(Arrays.asList(thres));
 		// checks the threshold
 		current = checkLevel();
-		// checks and sets color
-		checkAndSetColor();
+		// sets color
+		setColor(current.getColor());
 	}
 
 	/**
@@ -180,25 +175,8 @@ public final class GaugeDataset extends MeterDataset {
 		super.setValue(value);
 		// checks the threshold
 		current = checkLevel();
-		// checks and sets color
-		checkAndSetColor();
-	}
-
-	/**
-	 * Checks which color should used based on the current threshold
-	 */
-	private void checkAndSetColor() {
-		// gets all colors
-		// to get the color for empty value
-		List<IsColor> colors = getBackgroundColor();
-		// if empty
-		if (colors.isEmpty()) {
-			// it sets the threshold color for value and the default value for empty one
-			super.setBackgroundColor(getCurrent().getColor(), DEFAULT_EMPTY_VALUE_COLOR);
-		} else {
-			// it sets the threshold color for value and the first color sets previously for empty one
-			super.setBackgroundColor(getCurrent().getColor(), colors.get(1));
-		}
+		// sets color
+		setColor(current.getColor());
 	}
 
 	/**

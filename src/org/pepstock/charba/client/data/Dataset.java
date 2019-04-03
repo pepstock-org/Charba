@@ -84,7 +84,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * 
 	 * @param defaultValues default options
 	 */
-	Dataset(IsDefaultOptions defaultValues) {
+	protected Dataset(IsDefaultOptions defaultValues) {
 		this.defaultValues = defaultValues == null ? Defaults.get().getGlobal() : defaultValues;
 		// stores the id based on a counter
 		setValue(Property._charbaId, COUNTER.getAndIncrement());
@@ -258,7 +258,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @param key key property name to use to store canvas patterns into dataset object.
 	 * @param canvasPatternsList list of canvas patterns
 	 */
-	abstract void applyPattern(Key key, List<CanvasPattern> canvasPatternsList);
+	protected abstract void applyPattern(Key key, List<CanvasPattern> canvasPatternsList);
 
 	/**
 	 * It applies all canvas gradients defined into dataset. The canvas gradients needs to be created a context 2d of canvas
@@ -300,7 +300,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @param key key property name to use to store canvas gradients into dataset object.
 	 * @param canvasGradientsList list of canvas gradients
 	 */
-	abstract void applyGradient(Key key, List<CanvasGradient> canvasGradientsList);
+	protected abstract void applyGradient(Key key, List<CanvasGradient> canvasGradientsList);
 
 	/**
 	 * Sets if the dataset will appear or not.
@@ -445,7 +445,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * 
 	 * @param type type of dataset.
 	 */
-	public final void setType(Type type) {
+	public void setType(Type type) {
 		setValue(Property.type, type);
 	}
 

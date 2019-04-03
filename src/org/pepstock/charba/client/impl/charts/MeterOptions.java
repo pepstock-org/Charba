@@ -51,6 +51,10 @@ public class MeterOptions extends AbstractPieOptions {
 
 	private static final double DEFAULT_CUTOUT_PERCENTAGE = 90D;
 
+	private static final double DEFAULT_CIRCUMFERENCE = 2 * Math.PI;
+
+	private static final double DEFAULT_ROTATION = -0.5 * Math.PI;
+
 	private static final boolean DEFAULT_ANIMATED_DISPLAY = false;
 
 	private MeterDisplay display = MeterDisplay.value;
@@ -80,6 +84,8 @@ public class MeterOptions extends AbstractPieOptions {
 		super.getHover().setAnimationDuration(0);
 		// sets the 90% of cutout
 		super.setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
+		super.setCircumference(DEFAULT_CIRCUMFERENCE);
+		super.setRotation(DEFAULT_ROTATION);
 	}
 
 	/*
@@ -91,6 +97,28 @@ public class MeterOptions extends AbstractPieOptions {
 	public void setCutoutPercentage(double cutoutPercentage) {
 		// ignore the passed value. is ALWAYS 90
 		super.setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AbstractPieOptions#setRotation(double)
+	 */
+	@Override
+	public void setRotation(double rotation) {
+		// ignore the passed value.
+		super.setRotation(DEFAULT_ROTATION);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.AbstractPieOptions#setCircumference(double)
+	 */
+	@Override
+	public void setCircumference(double circumference) {
+		// ignore the passed value.
+		super.setCircumference(DEFAULT_CIRCUMFERENCE);
 	}
 
 	/*

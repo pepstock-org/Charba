@@ -76,6 +76,36 @@ final class BaseMeterController extends AbstractController {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.controllers.AbstractController#initialize(org.pepstock.charba.client.controllers.
+	 * ControllerContext, org.pepstock.charba.client.AbstractChart, int)
+	 */
+	@Override
+	public void initialize(ControllerContext context, AbstractChart<?, ?> chart, int datasetIndex) {
+		// gets the dataset at index
+		Dataset dataset = chart.getData().getDatasets().get(datasetIndex);
+		// checks if is a meter dataset (or gauge)
+		if (dataset instanceof MeterDataset) {
+			// casts to meter dataset
+			MeterDataset meterDataset = (MeterDataset) dataset;
+			// meter or gauge charts must have only 1 dataset
+			// checks if there is more than 1
+			if (datasetIndex > 0) {
+				// if more than 1
+				// forces hidden dataset
+				meterDataset.hide();
+			}
+			// invokes the initialization
+			super.initialize(context, chart, datasetIndex);
+		} else {
+			// if not meter dataset
+			// exception
+			throw new IllegalArgumentException("Dataset at index " + datasetIndex + " is not a MeterDataset");
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.controllers.AbstractController#draw(org.pepstock.charba.client.controllers .Context,
 	 * org.pepstock.charba.client.AbstractChart, double)
 	 */

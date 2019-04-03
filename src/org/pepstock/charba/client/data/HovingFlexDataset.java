@@ -692,7 +692,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * @see org.pepstock.charba.client.data.Dataset#applyPattern(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
-	void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
+	protected final void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
 		setValueOrArray(key, canvasPatternsList.toArray(new CanvasPattern[0]));
 	}
 
@@ -702,7 +702,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * @see org.pepstock.charba.client.data.Dataset#applyGradient(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
-	void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
+	protected final void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
 		setValueOrArray(key, canvasGradientsList.toArray(new CanvasGradient[0]));
 	}
 

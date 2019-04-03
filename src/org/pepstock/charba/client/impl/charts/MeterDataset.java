@@ -17,36 +17,36 @@ package org.pepstock.charba.client.impl.charts;
 
 import java.util.List;
 
+import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
-import org.pepstock.charba.client.callbacks.BorderColorCallback;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.colors.Color;
-import org.pepstock.charba.client.colors.Gradient;
+import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.commons.ArrayInteger;
+import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.data.DoughnutDataset;
+import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
+
+import com.google.gwt.canvas.dom.client.CanvasGradient;
+import com.google.gwt.canvas.dom.client.CanvasPattern;
 
 /**
  * The Meter chart allows a number of properties to be specified for each dataset. These are used to set display properties for
  * a specific dataset.<br>
- * Is equals of Doughnut dataset.<br>
  * The minimum value of data is 0 (see {@link MeterDataset#MINIMUM_VALUE}).<br>
  * The dataset will have always 2 data and setting the color of data, the first is the value color and the second is the empty
  * one.<br>
- * To set the data, is mandatory to use {@link MeterDataset#setValue(double)}) method instead of
- * {@link org.pepstock.charba.client.data.Dataset#setData(double...)}) one.
+ * To set the data, is mandatory to use {@link MeterDataset#setValue(double)}) method.
  * 
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class MeterDataset extends DoughnutDataset {
+public class MeterDataset extends Dataset {
 
 	// exception string message for setting data
 	private static final String INVALID_SET_DATA_CALL = "setData method is not invokable by a Meter chart. Use setValue method.";
-	// exception string message for setting pattern
-	private static final String INVALID_PATTERN_CALL = "Patterns and gradients are not supported.";
 
 	/**
 	 * Default value color, <b>rgb(140, 214, 16)</b>.
@@ -54,9 +54,19 @@ public class MeterDataset extends DoughnutDataset {
 	public static final IsColor DEFAULT_VALUE_COLOR = new Color(140, 214, 16);
 
 	/**
+	 * Default value color as string, <b>rgb(140, 214, 16)</b>.
+	 */
+	static final String DEFAULT_VALUE_COLOR_AS_STRING = DEFAULT_VALUE_COLOR.toRGBA();
+
+	/**
 	 * Default empty color, <b>rgb(234, 234, 234)</b>.
 	 */
 	public static final IsColor DEFAULT_EMPTY_VALUE_COLOR = new Color(234, 234, 234);
+
+	/**
+	 * Default empty color as string, <b>rgb(234, 234, 234)</b>.
+	 */
+	static final String DEFAULT_EMPTY_VALUE_COLOR_AS_STRING = DEFAULT_EMPTY_VALUE_COLOR.toRGBA();
 
 	/**
 	 * Default maximum value is <b>{@value DEFAULT_MAXIMUM_VALUE}</b>.
@@ -73,14 +83,14 @@ public class MeterDataset extends DoughnutDataset {
 	private double value = MINIMUM_VALUE;
 
 	/**
-	 * Name of properties of native object. Overrides {@link DoughnutDataset}
+	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
 		backgroundColor,
-		borderColor,
+		borderWidth,
 		hoverBackgroundColor,
-		hoverBorderColor,
+		hoverBorderWidth
 	}
 
 	/**
@@ -105,142 +115,99 @@ public class MeterDataset extends DoughnutDataset {
 		this.max = Math.max(max, MINIMUM_VALUE);
 		// sets default dataset values
 		// removing borders
-		super.setBorderWidth(0, 0);
-		super.setHoverBorderWidth(0, 0);
+		setArrayValue(Property.borderWidth, ArrayInteger.fromOrNull(0, 0));
+		setArrayValue(Property.hoverBorderWidth, ArrayInteger.fromOrNull(0, 0));
 		// sets the color of datasets.
-		super.setBackgroundColor(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR);
+		setArrayValue(Property.backgroundColor, ArrayString.fromOrNull(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR));
+		// disable hover back ground color
+		setArrayValue(Property.hoverBackgroundColor, ArrayString.fromOrNull(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR));
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Sets the fill color for value.
 	 * 
-	 * @see org.pepstock.charba.client.data.HovingDataset#setBackgroundColor(org.pepstock.charba.client.data.Pattern[])
+	 * @param valueColor the fill color for value.
 	 */
-	@Override
-	public void setBackgroundColor(Pattern... backgroundColor) {
-		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+	public void setColor(IsColor valueColor) {
+		setColor(valueColor != null ? valueColor.toRGBA() : DEFAULT_VALUE_COLOR_AS_STRING);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Sets the fill color for value.
 	 * 
-	 * @see org.pepstock.charba.client.data.HovingDataset#setBackgroundColor(org.pepstock.charba.client.colors.Gradient[])
+	 * @param valueColor the fill color for value.
 	 */
-	@Override
-	public void setBackgroundColor(Gradient... backgroundColor) {
-		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+	public void setColor(String valueColor) {
+		String valueToSet = valueColor != null ? valueColor : DEFAULT_VALUE_COLOR_AS_STRING;
+		// creates array reference
+		ArrayString array = ArrayString.from(valueToSet, getEmptyColorAsString());
+		// stores value
+		setArrayValue(Property.backgroundColor, array);
+		setArrayValue(Property.hoverBackgroundColor, array);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns the fill color for value.
 	 * 
-	 * @see org.pepstock.charba.client.data.HovingDataset#setBackgroundColor(org.pepstock.charba.client.callbacks.
-	 * BackgroundColorCallback)
+	 * @return the fill color for value.
 	 */
-	@Override
-	public void setBackgroundColor(BackgroundColorCallback<?> backgroundColorCallback) {
-		// checks if null
-		if (backgroundColorCallback != null) {
-			// if not, exception
-			throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.backgroundColor);
-		}
+	public String getColorAsString() {
+		// returns list of colors
+		ArrayString array = getArrayValue(Property.backgroundColor);
+		// returns color as string
+		return array.get(0);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns the fill color for value.
 	 * 
-	 * @see
-	 * org.pepstock.charba.client.data.HovingDataset#setBorderColor(org.pepstock.charba.client.callbacks.BorderColorCallback)
+	 * @return the fill color for value.
 	 */
-	@Override
-	public void setBorderColor(BorderColorCallback<?> borderColorCallback) {
-		// checks if null
-		if (borderColorCallback != null) {
-			// if not, exception
-			throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.borderColor);
-		}
+	public IsColor getColor() {
+		return ColorBuilder.parse(getColorAsString());
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Sets the fill color for empty sector.
 	 * 
-	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBackgroundColor(org.pepstock.charba.client.callbacks.
-	 * BackgroundColorCallback)
+	 * @param valueColor the fill color for empty sector.
 	 */
-	@Override
-	public void setHoverBackgroundColor(BackgroundColorCallback<?> hoverBackgroundColorCallback) {
-		// checks if null
-		if (hoverBackgroundColorCallback != null) {
-			// if not, exception
-			throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.hoverBackgroundColor);
-		}
+	public void setEmptyColor(IsColor emptyValueColor) {
+		setColor(emptyValueColor != null ? emptyValueColor.toRGBA() : DEFAULT_EMPTY_VALUE_COLOR_AS_STRING);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Sets the fill color for empty sector.
 	 * 
-	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBorderColor(org.pepstock.charba.client.callbacks.
-	 * BorderColorCallback)
+	 * @param emptyValueColor the fill color for empty sector.
 	 */
-	@Override
-	public void setHoverBorderColor(BorderColorCallback<?> hoverBorderColorCallback) {
-		// checks if null
-		if (hoverBorderColorCallback != null) {
-			// if not, exception
-			throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.hoverBorderColor);
-		}
+	public void setEmptyColor(String emptyValueColor) {
+		String valueToSet = emptyValueColor != null ? emptyValueColor : DEFAULT_EMPTY_VALUE_COLOR_AS_STRING;
+		ArrayString array = ArrayString.from(getColorAsString(), valueToSet);
+		// stores value
+		setArrayValue(Property.backgroundColor, array);
+		setArrayValue(Property.hoverBackgroundColor, array);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns the fill color for empty sector.
 	 * 
-	 * @see org.pepstock.charba.client.data.HovingDataset#setBorderColor(org.pepstock.charba.client.colors.Gradient[])
+	 * @return the fill color for empty sector.
 	 */
-	@Override
-	public void setBorderColor(Gradient... borderColor) {
-		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+	public String getEmptyColorAsString() {
+		// returns list of colors
+		ArrayString array = getArrayValue(Property.backgroundColor);
+		// returns color as string
+		return array.get(1);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns the fill color for empty sector.
 	 * 
-	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBackgroundColor(org.pepstock.charba.client.colors.Gradient[])
+	 * @return the fill color for empty sector.
 	 */
-	@Override
-	public void setHoverBackgroundColor(Gradient... colors) {
-		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBorderColor(org.pepstock.charba.client.colors.Gradient[])
-	 */
-	@Override
-	public void setHoverBorderColor(Gradient... colors) {
-		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.HovingDataset#setHoverBackgroundColor(org.pepstock.charba.client.data.Pattern[])
-	 */
-	@Override
-	public void setHoverBackgroundColor(Pattern... colors) {
-		throw new UnsupportedOperationException(INVALID_PATTERN_CALL);
+	public IsColor getEmptyColor() {
+		return ColorBuilder.parse(getColorAsString());
 	}
 
 	/**
@@ -270,6 +237,37 @@ public class MeterDataset extends DoughnutDataset {
 		// sets the data
 		super.setData(this.value, Math.max(MINIMUM_VALUE, max - value));
 	}
+	
+	/**
+	 * Forces hiding the dataset because tehre are more than 1 datasets
+	 * into chart
+	 */
+	void hide() {
+		// the dataset is hidden
+		super.setHidden(true);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#setType(org.pepstock.charba.client.Type)
+	 */
+	@Override
+	public void setType(Type type) {
+		// overrides always with doughnut
+		super.setType(ChartType.doughnut);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#setHidden(boolean)
+	 */
+	@Override
+	public final void setHidden(boolean hidden) {
+		// the dataset can not be hidden
+		super.setHidden(false);
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -291,4 +289,23 @@ public class MeterDataset extends DoughnutDataset {
 		throw new UnsupportedOperationException(INVALID_SET_DATA_CALL);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#applyPattern(org.pepstock.charba.client.commons.Key, java.util.List)
+	 */
+	@Override
+	protected final void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
+		// do nothing
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#applyGradient(org.pepstock.charba.client.commons.Key, java.util.List)
+	 */
+	@Override
+	protected final void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
+		// do nothing
+	}
 }

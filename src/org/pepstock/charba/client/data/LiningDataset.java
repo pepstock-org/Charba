@@ -1694,7 +1694,7 @@ public abstract class LiningDataset extends Dataset {
 	 * @see org.pepstock.charba.client.data.Dataset#applyPattern(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
-	void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
+	protected final void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
 		// checks if background color (ONLY one which can be used with patterns)
 		if (Property.backgroundColor.name().equalsIgnoreCase(key.name())) {
 			// gets the first element
@@ -1710,7 +1710,7 @@ public abstract class LiningDataset extends Dataset {
 	 * @see org.pepstock.charba.client.data.Dataset#applyGradient(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
-	void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
+	protected final void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
 		// checks if background or border colors which must be set with single value
 		if (Property.backgroundColor.name().equalsIgnoreCase(key.name()) || Property.borderColor.name().equalsIgnoreCase(key.name())) {
 			// gets the first element
