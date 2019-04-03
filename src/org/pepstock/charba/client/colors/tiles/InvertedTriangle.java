@@ -46,7 +46,7 @@ final class InvertedTriangle extends Triangle {
 	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
 		// applies a translation to the current transform
 		context.translate(size, size);
 		// applies rotation (180 degrees) to the current transform

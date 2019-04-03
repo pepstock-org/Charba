@@ -26,10 +26,6 @@ import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
  */
 final class ColorSchemesDefaultsOptions extends NativeObjectContainer {
 
-	// this the default category when new color scheme
-	// has been created on top of the available schemes.
-	static final String DEFAULT_SCHEME_CATEGORY = "custom";
-
 	/**
 	 * Creates an empty options without any default global options. it will use the constants as default of plugin properties.
 	 */

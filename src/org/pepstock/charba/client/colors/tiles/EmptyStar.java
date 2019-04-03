@@ -46,7 +46,7 @@ final class EmptyStar extends Star {
 	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
 		// calculates half dimension
 		final double halfSize = size / 2D;
 		// calculates quarter dimension
@@ -55,6 +55,10 @@ final class EmptyStar extends Star {
 		applyStrokeProperties(context, shapeColor, size);
 		// override line width to 1
 		context.setLineWidth(1D);
+		// applies a translation to the current transform
+		context.translate(size, size);
+		// applies rotation (90 degrees) to the current transform
+		context.rotate(ROTATION_180_DEGREES);
 		// designs the shape into A section
 		drawStar(context, size, halfSize, halfSize, SPIKES, halfSize - 2, quarterSize - 1);
 		// strokes the current path

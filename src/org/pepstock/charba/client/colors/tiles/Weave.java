@@ -46,7 +46,7 @@ final class Weave extends ShapeDrawer {
 	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
 		// designs the shape into A and B section

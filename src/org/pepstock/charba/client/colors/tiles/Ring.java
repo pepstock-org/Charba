@@ -46,7 +46,7 @@ final class Ring extends Dot {
 	 * java.lang.String, int)
 	 */
 	@Override
-	void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
 		// calculates half dimension
 		final double halfSize = size / 2D;
 		// calculates diameter of dot

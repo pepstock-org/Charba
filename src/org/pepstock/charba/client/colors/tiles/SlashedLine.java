@@ -46,7 +46,7 @@ final class SlashedLine extends ShapeDrawer {
 	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
 		// calculates fifth dimension
 		final double quarterSize = size / 4D;
 		// apply the stroke properties

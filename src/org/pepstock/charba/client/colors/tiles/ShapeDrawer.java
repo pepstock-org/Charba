@@ -44,7 +44,7 @@ import com.google.gwt.dom.client.Document;
  * @author Andrea "Stock" Stocchero
  *
  */
-abstract class ShapeDrawer {
+public abstract class ShapeDrawer {
 
 	// rotation of 90 degrees to apply on rotation
 	static final double ROTATION_90_DEGREES = 90 * Math.PI / 180;
@@ -100,7 +100,7 @@ abstract class ShapeDrawer {
 	 * @param shapeColor color of shape
 	 * @param size the size of tile, which is a square
 	 */
-	abstract void drawTile(Context2d context, String backgroundColor, String shapeColor, int size);
+	protected abstract void drawTile(Context2d context, String backgroundColor, String shapeColor, int size);
 
 	/**
 	 * Applies the common configuration to context for stroke designing.

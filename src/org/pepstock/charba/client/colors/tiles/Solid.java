@@ -32,7 +32,7 @@ final class Solid extends ShapeDrawer {
 	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
 		// do nothing 
 	}
 }

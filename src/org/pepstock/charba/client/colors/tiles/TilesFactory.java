@@ -175,7 +175,7 @@ public final class TilesFactory {
 		// creates a unique key based on arguments
 		// in order to store the canvas pattern when created and
 		// if all further requests for the same canvas pattern, returns the cached one
-		StringBuilder keyBuilder = new StringBuilder(shapeParam.name());
+		StringBuilder keyBuilder = new StringBuilder(shapeParam.getKeyPrefix());
 		keyBuilder.append(backgroundColorParam).append(shapeColorParam).append(sizeParam);
 		String key = keyBuilder.toString().replaceAll("\\s+", "").toLowerCase(Locale.getDefault());
 		// checks if the canvas pattern is already created with those parameters

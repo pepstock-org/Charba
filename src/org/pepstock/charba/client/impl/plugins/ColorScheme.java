@@ -37,12 +37,12 @@ import org.pepstock.charba.client.commons.Key;
 public interface ColorScheme extends Key {
 
 	/**
-	 * Returns the color scheme category. If not implemented, the default is "custom".
+	 * Returns the color scheme category. If not implemented, the default is {@link ColorSchemesOptions#DEFAULT_SCHEME_CATEGORY}.
 	 * 
-	 * @return the color scheme category. If not implemented, the default is "custom"
+	 * @return the color scheme category. If not implemented, the default is {@link ColorSchemesOptions#DEFAULT_SCHEME_CATEGORY}
 	 */
 	default String category() {
-		return ColorSchemesDefaultsOptions.DEFAULT_SCHEME_CATEGORY;
+		return ColorSchemesOptions.DEFAULT_SCHEME_CATEGORY;
 	}
 
 	/**

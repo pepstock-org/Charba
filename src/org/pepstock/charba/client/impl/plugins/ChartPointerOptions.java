@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -41,10 +39,6 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 	 * Default cursor type when the cursor is over the dataset item, {@link Cursor#POINTER}.
 	 */
 	public static final Cursor DEFAULT_CURSOR_POINTER = Cursor.POINTER;
-	/**
-	 * Default list of elements in scope.
-	 */
-	public static final List<PointerElement> DEFAULT_ELEMENTS = Collections.unmodifiableList(Arrays.asList(PointerElement.values()));
 
 	// defaults global options instance
 	private ChartPointerDefaultsOptions defaultsOptions;
@@ -69,6 +63,8 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 		super(ChartPointer.ID);
 		// reads the default default global options
 		defaultsOptions = loadGlobalsPluginOptions(defaultsFactory);
+		// sets all pointer elements as default
+		setElements(PointerElement.values());
 	}
 
 	/**
@@ -80,6 +76,11 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 	ChartPointerOptions(NativeObject nativeObject, ChartPointerDefaultsOptions defaultsOptions) {
 		super(ChartPointer.ID, nativeObject);
 		this.defaultsOptions = defaultsOptions;
+		// checks if there is the property
+		if (!has(Property.elements)) {
+			// sets all pointer elements as default
+			setElements(PointerElement.values());
+		}
 	}
 	
 	/**
@@ -98,16 +99,9 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 	 * @return the chart elements in scope to "cursorpointer" plugin
 	 */
 	public List<PointerElement> getElements() {
-		// checks if there is the property
-		if (has(Property.elements)) {
-			// reads the property
-			ArrayString array = getArrayValue(ChartPointerOptions.Property.elements);
-			return ArrayListHelper.list(PointerElement.class, array);
-		} else {
-			// if here, no property
-			// then it uses the default ones
-			return defaultsOptions.getElements();
-		}
+		// reads the property
+		ArrayString array = getArrayValue(ChartPointerOptions.Property.elements);
+		return ArrayListHelper.list(PointerElement.class, array);
 	}
 
 	/**

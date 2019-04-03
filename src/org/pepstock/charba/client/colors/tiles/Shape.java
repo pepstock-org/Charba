@@ -147,12 +147,24 @@ public enum Shape implements IsShape
 		this.drawer = drawer;
 	}
 
-	/**
-	 * Returns the instance of shape drawer.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the instance of shape drawer.
+	 * @see org.pepstock.charba.client.colors.tiles.IsShape#getKeyPrefix()
 	 */
-	public final ShapeDrawer getDrawer() {
+	@Override
+	public String getKeyPrefix() {
+		return name();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.colors.tiles.IsShape#getDrawer()
+	 */
+	@Override
+	public ShapeDrawer getDrawer() {
 		return drawer;
 	}
+
 }

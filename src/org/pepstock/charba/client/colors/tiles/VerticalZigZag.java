@@ -46,7 +46,7 @@ final class VerticalZigZag extends ZigZag {
 	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
 		// applies a translation to the current transform
 		context.translate(size, 0);
 		// applies rotation (90 degrees) to the current transform

@@ -23,7 +23,7 @@ import org.pepstock.charba.client.commons.Key;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsShape extends Key {
+public interface IsShape extends Key {
 	
 	/**
 	 * Returns the instance of shape drawer.
@@ -31,5 +31,12 @@ interface IsShape extends Key {
 	 * @return the instance of shape drawer.
 	 */
 	ShapeDrawer getDrawer();
+	
+	/**
+	 * Returns a unique key prefix for shape to use into cache.
+	 * 
+	 * @return a unique key prefix for shape to use into cache
+	 */
+	String getKeyPrefix();
 
 }

@@ -15,14 +15,8 @@
 */
 package org.pepstock.charba.client.impl.plugins;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
 
 /**
  * Configuration options of {@link ChartPointer#ID} plugin. This is mapping the configuration set into default global, used as default of the
@@ -55,27 +49,5 @@ final class ChartPointerDefaultsOptions extends NativeObjectContainer {
 	 */
 	String getCursorPointerAsString() {
 		return getValue(ChartPointerOptions.Property.cursorPointer, ChartPointerOptions.DEFAULT_CURSOR_POINTER.name());
-	}
-
-	/**
-	 * Returns the chart elements in scope to "cursorpointer" plugin.
-	 * 
-	 * @return the chart elements in scope to "cursorpointer" plugin
-	 */
-	List<PointerElement> getElements() {
-		// checks if there is the property
-		if (has(ChartPointerOptions.Property.elements)) {
-			// reads the property
-			ArrayString array = getArrayValue(ChartPointerOptions.Property.elements);
-			return ArrayListHelper.list(PointerElement.class, array);
-		} else {
-			// if here, no property
-			// then it uses the default static ones
-			// clones them into another list in order to be able to 
-			// change them
-			List<PointerElement> elements = new LinkedList<>();
-			elements.addAll(ChartPointerOptions.DEFAULT_ELEMENTS);
-			return elements;
-		}
 	}
 }

@@ -50,6 +50,11 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * Default the order of the colors in the selected scheme is reversed, <b>{@value DEFAULT_REVERSE}</b>.
 	 */
 	public static final boolean DEFAULT_REVERSE = false;
+	
+	/**
+	 * Default category when new color scheme has been created on top of the available schemes, <b>{@value DEFAULT_SCHEME_CATEGORY}</b>.
+	 */
+	public static final String DEFAULT_SCHEME_CATEGORY = "custom";
 
 	// defaults global options instance
 	private ColorSchemesDefaultsOptions defaultsOptions;

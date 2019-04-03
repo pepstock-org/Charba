@@ -43,7 +43,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class ImageShape extends ShapeDrawer implements IsShape {
+public final class ImageShape extends ShapeDrawer implements IsShape {
 
 	/**
 	 * Name of shape to draw an image, <b>{@value NAME}</b>.
@@ -51,6 +51,8 @@ public class ImageShape extends ShapeDrawer implements IsShape {
 	public static final String NAME = "image";
 	// image to draw on the tile
 	private final ImageElement imageElement;
+	// key prefix
+	private final String keyPrefix;
 
 	/**
 	 * Creates a shape with an image.
@@ -80,6 +82,8 @@ public class ImageShape extends ShapeDrawer implements IsShape {
 		if (image != null) {
 			// stores the image
 			this.imageElement = image;
+			// key prefix for caching is NAME plus source of image
+			this.keyPrefix = NAME+imageElement.getSrc();
 		} else {
 			// if here, image is null
 			// then exception
@@ -107,6 +111,14 @@ public class ImageShape extends ShapeDrawer implements IsShape {
 		return this;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.colors.tiles.IsShape#getKeyPrefix()
+	 */
+	@Override
+	public String getKeyPrefix() {
+		return keyPrefix;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -114,7 +126,7 @@ public class ImageShape extends ShapeDrawer implements IsShape {
 	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
+	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
 		// 1 pox of margin for all dimensions
 		final double realSize = size - 2;
 		// draws a scaled image
