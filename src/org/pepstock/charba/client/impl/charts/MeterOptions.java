@@ -126,6 +126,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * 
 	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getHover()
 	 */
+	@Deprecated
 	@Override
 	public final Hover getHover() {
 		throw new UnsupportedOperationException(INVALID__CALL);
@@ -136,6 +137,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * 
 	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getLayout()
 	 */
+	@Deprecated
 	@Override
 	public final Layout getLayout() {
 		throw new UnsupportedOperationException(INVALID__CALL);
@@ -146,6 +148,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * 
 	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getLegend()
 	 */
+	@Deprecated
 	@Override
 	public final Legend getLegend() {
 		throw new UnsupportedOperationException(INVALID__CALL);
@@ -156,6 +159,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * 
 	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getTooltips()
 	 */
+	@Deprecated
 	@Override
 	public final Tooltips getTooltips() {
 		throw new UnsupportedOperationException(INVALID__CALL);
@@ -167,6 +171,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#setLegendCallback(org.pepstock.charba.client.
 	 * jsinterop.callbacks.LegendCallback)
 	 */
+	@Deprecated
 	@Override
 	public final void setLegendCallback(LegendCallback legendCallback) {
 		throw new UnsupportedOperationException(INVALID__CALL);

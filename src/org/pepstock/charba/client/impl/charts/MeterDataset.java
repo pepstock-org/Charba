@@ -170,10 +170,10 @@ public class MeterDataset extends Dataset {
 	/**
 	 * Sets the fill color for empty sector.
 	 * 
-	 * @param valueColor the fill color for empty sector.
+	 * @param emptyValueColor the fill color for empty sector.
 	 */
 	public void setEmptyColor(IsColor emptyValueColor) {
-		setColor(emptyValueColor != null ? emptyValueColor.toRGBA() : DEFAULT_EMPTY_VALUE_COLOR_AS_STRING);
+		setEmptyColor(emptyValueColor != null ? emptyValueColor.toRGBA() : DEFAULT_EMPTY_VALUE_COLOR_AS_STRING);
 	}
 
 	/**
@@ -274,6 +274,7 @@ public class MeterDataset extends Dataset {
 	 * 
 	 * @see org.pepstock.charba.client.data.Dataset#setData(double[])
 	 */
+	@Deprecated
 	@Override
 	public final void setData(double... values) {
 		throw new UnsupportedOperationException(INVALID_SET_DATA_CALL);
@@ -284,6 +285,7 @@ public class MeterDataset extends Dataset {
 	 * 
 	 * @see org.pepstock.charba.client.data.Dataset#setData(java.util.List)
 	 */
+	@Deprecated
 	@Override
 	public final void setData(List<Double> values) {
 		throw new UnsupportedOperationException(INVALID_SET_DATA_CALL);
