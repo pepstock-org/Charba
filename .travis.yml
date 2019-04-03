@@ -2,14 +2,24 @@
 # * Charba Travis-CI build script *
 # * Copyright © 2019 pepstock.org *
 # *********************************
-
 #
 # CONFIGURATION
 #
 # define the language
 language: java
-# enable container-based build (faster), insted of vm build
+# enable container-based build (faster), instead of vm build
 sudo: false
+#
+# SONARCLOUD
+#
+addons:
+  sonarcloud:
+    organization: "pepstock-org_Charba"
+    token:
+      secure: ${SONAR_TOKEN}
+#
+# CACHE
+#
 # cache the Ivy cache directory to avoid download dependencies on each build
 cache:
    directories:
@@ -22,7 +32,8 @@ jdk:
 # specify the brances to build from
 branches:
    only:
-     - master 
+#    - master
+     - stock
 #
 # BUILD phase
 #
