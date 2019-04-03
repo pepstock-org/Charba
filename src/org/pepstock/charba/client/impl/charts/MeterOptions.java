@@ -94,7 +94,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * @see org.pepstock.charba.client.configuration.AbstractPieOptions#setCutoutPercentage(double)
 	 */
 	@Override
-	public void setCutoutPercentage(double cutoutPercentage) {
+	public final void setCutoutPercentage(double cutoutPercentage) {
 		// ignore the passed value. is ALWAYS 90
 		super.setCutoutPercentage(DEFAULT_CUTOUT_PERCENTAGE);
 	}
@@ -105,7 +105,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * @see org.pepstock.charba.client.configuration.AbstractPieOptions#setRotation(double)
 	 */
 	@Override
-	public void setRotation(double rotation) {
+	public final void setRotation(double rotation) {
 		// ignore the passed value.
 		super.setRotation(DEFAULT_ROTATION);
 	}
@@ -116,7 +116,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * @see org.pepstock.charba.client.configuration.AbstractPieOptions#setCircumference(double)
 	 */
 	@Override
-	public void setCircumference(double circumference) {
+	public final void setCircumference(double circumference) {
 		// ignore the passed value.
 		super.setCircumference(DEFAULT_CIRCUMFERENCE);
 	}
@@ -127,7 +127,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getHover()
 	 */
 	@Override
-	public Hover getHover() {
+	public final Hover getHover() {
 		throw new UnsupportedOperationException(INVALID__CALL);
 	}
 
