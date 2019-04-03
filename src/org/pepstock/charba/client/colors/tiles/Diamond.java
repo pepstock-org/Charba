@@ -52,7 +52,7 @@ final class Diamond extends ShapeDrawer {
 		// apply the fill properties
 		applyFillProperties(context, shapeColor);
 		// designs the shape into A section
-		drawDiamond(context, size, 0, 0);
+		drawDiamond(context, size, 0D, 0D);
 		// designs the shape into B section
 		drawDiamond(context, size, halfSize, halfSize);
 		// fills the current path

@@ -54,7 +54,7 @@ final class Disc extends Dot {
 		// apply the fill properties
 		applyFillProperties(context, shapeColor);
 		// designs the shape into A section
-		drawDot(context, size, 0, 0, diameter);
+		drawDot(context, size, 0D, 0D, diameter);
 		// designs the shape into B section
 		drawDot(context, size, halfSize, halfSize, diameter);
 		// fills the current path

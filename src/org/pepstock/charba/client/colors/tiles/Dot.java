@@ -54,7 +54,7 @@ class Dot extends ShapeDrawer {
 		// apply the fill properties
 		applyFillProperties(context, shapeColor);
 		// designs the shape into A section
-		drawDot(context, size, 0, 0, diameter);
+		drawDot(context, size, 0D, 0D, diameter);
 		// designs the shape into B section
 		drawDot(context, size, halfSize, halfSize, diameter);
 		// fills the current path
@@ -79,6 +79,6 @@ class Dot extends ShapeDrawer {
 		final double y = quarterSize + offsetY;
 		// draws shape
 		context.moveTo(x + quarterSize, y);
-		context.arc(x, y, diameter, 0, 2 * Math.PI);
+		context.arc(x, y, diameter, 0D, 2D * Math.PI);
 	}
 }

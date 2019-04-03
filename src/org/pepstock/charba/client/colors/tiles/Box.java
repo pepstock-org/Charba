@@ -52,7 +52,7 @@ final class Box extends ShapeDrawer {
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
 		// designs the shape into A section
-		drawBox(context, size, 0, 0);
+		drawBox(context, size, 0D, 0D);
 		// designs the shape into B section
 		drawBox(context, size, halfSize, halfSize);
 		// draws the current path with the current stroke style

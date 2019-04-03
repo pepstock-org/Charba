@@ -63,7 +63,7 @@ class Star extends ShapeDrawer {
 		// applies rotation (90 degrees) to the current transform
 		context.rotate(ROTATION_180_DEGREES);
 		// designs the shape into A section
-		drawStar(context, size, halfSize, halfSize, SPIKES, halfSize - 2, quarterSize - 1);
+		drawStar(context, size, halfSize, halfSize, SPIKES, halfSize - 2D, quarterSize - 1D);
 		// strokes the current path
 		context.stroke();
 		// apply the fill properties
@@ -85,7 +85,7 @@ class Star extends ShapeDrawer {
 	 */
 	final void drawStar(Context2d context, int size, double offsetX, double offsetY, int spikes, double innerRadius, double outerRadius) {
 		// calculates quarter dimension
-		double rot = Math.PI / 2 * 3;
+		double rot = Math.PI / 2D * 3D;
 		// calculates the center X of arc
 		double x = 0D;
 		// calculates the center Y of arc

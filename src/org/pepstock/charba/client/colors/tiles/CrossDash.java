@@ -56,7 +56,7 @@ final class CrossDash extends ShapeDrawer {
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
 		// designs the shape (CROSS) into A section
-		cross.drawCross(context, size, 0, 0);
+		cross.drawCross(context, size, 0D, 0D);
 		// designs the shape (DASH) into B section
 		dash.drawDash(context, size, halfSize, halfSize);
 		// draws the current path with the current stroke style

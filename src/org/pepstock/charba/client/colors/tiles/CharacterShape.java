@@ -47,9 +47,9 @@ import com.google.gwt.canvas.dom.client.TextMetrics;
 public final class CharacterShape extends ShapeDrawer implements IsShape {
 
 	/**
-	 * Name of shape to draw a character, <b>{@value NAME}</b>.
+	 * Name of shape to draw a character, <b>{@value SHAPE_NAME}</b>.
 	 */
-	public static final String NAME = "char";
+	public static final String SHAPE_NAME = "char";
 	// default font decrement
 	private static final int FONT_SIZE_DECREMENT = 2;
 	// string (char) to draw on the tile
@@ -89,7 +89,7 @@ public final class CharacterShape extends ShapeDrawer implements IsShape {
 		this.character = character;
 		this.fontFamily = fontFamily != null ? fontFamily : Defaults.get().getGlobal().getDefaultFontFamily();
 		// creates the prefix key for caching
-		this.keyPrefix = NAME + character + fontFamily;
+		this.keyPrefix = SHAPE_NAME + character + fontFamily;
 	}
 
 	/*
@@ -99,7 +99,7 @@ public final class CharacterShape extends ShapeDrawer implements IsShape {
 	 */
 	@Override
 	public String name() {
-		return NAME;
+		return SHAPE_NAME;
 	}
 
 	/*

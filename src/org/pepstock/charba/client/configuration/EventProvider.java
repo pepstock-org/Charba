@@ -55,7 +55,7 @@ public abstract class EventProvider<T extends NativeObjectContainer> extends Con
 	 */
 	@Override
 	public void onRemove(RemoveHandlerEvent event) {
-		removeHandler(event.getType());
+		removeHandler(event.getHandlerType());
 	}
 
 	/*
@@ -65,7 +65,7 @@ public abstract class EventProvider<T extends NativeObjectContainer> extends Con
 	 */
 	@Override
 	public final void onAdd(AddHandlerEvent event) {
-		addHandler(event.getType());
+		addHandler(event.getHandlerType());
 	}
 
 	/**

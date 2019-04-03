@@ -32,15 +32,15 @@ public final class AddHandlerEvent extends GwtEvent<AddHandlerEventHandler> {
 	public static final Type<AddHandlerEventHandler> TYPE = new Type<AddHandlerEventHandler>();
 
 	// type of new handler added to the chart
-	private final Type<? extends EventHandler> type;
+	private final Type<? extends EventHandler> handlerType;
 
 	/**
 	 * Creates the event with the type of new handler.
 	 * 
-	 * @param type the type of new handler.
+	 * @param handlerType the type of new handler.
 	 */
-	public AddHandlerEvent(Type<? extends EventHandler> type) {
-		this.type = type;
+	public AddHandlerEvent(Type<? extends EventHandler> handlerType) {
+		this.handlerType = handlerType;
 	}
 
 	/**
@@ -48,8 +48,8 @@ public final class AddHandlerEvent extends GwtEvent<AddHandlerEventHandler> {
 	 * 
 	 * @return the type of new handler.
 	 */
-	public Type<? extends EventHandler> getType() {
-		return type;
+	public Type<? extends EventHandler> getHandlerType() {
+		return handlerType;
 	}
 
 	/*

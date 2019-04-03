@@ -52,7 +52,7 @@ class Line extends ShapeDrawer {
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
 		// designs the shape into A section
-		drawLine(context, size, 0, 0);
+		drawLine(context, size, 0D, 0D);
 		// designs the shape into B section
 		drawLine(context, size, halfSize, halfSize);
 		// draws the current path with the current stroke style
@@ -72,7 +72,7 @@ class Line extends ShapeDrawer {
 		final double quarterSize = size / 4D;
 		// draws shape
 		// to point for drawing line
-		context.moveTo(0, quarterSize + offsetY);
+		context.moveTo(0D, quarterSize + offsetY);
 		context.lineTo(size, quarterSize + offsetY);
 	}
 }

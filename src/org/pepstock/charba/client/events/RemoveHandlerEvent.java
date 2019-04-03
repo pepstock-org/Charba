@@ -31,15 +31,15 @@ public final class RemoveHandlerEvent extends GwtEvent<RemoveHandlerEventHandler
 	 */
 	public static final Type<RemoveHandlerEventHandler> TYPE = new Type<RemoveHandlerEventHandler>();
 	// type of the handler removed from the chart
-	private final Type<? extends EventHandler> type;
+	private final Type<? extends EventHandler> handlerType;
 
 	/**
 	 * Creates the event with the type of removed handler.
 	 * 
-	 * @param type the type of removed handler.
+	 * @param handlerType the type of removed handler.
 	 */
-	public RemoveHandlerEvent(Type<? extends EventHandler> type) {
-		this.type = type;
+	public RemoveHandlerEvent(Type<? extends EventHandler> handlerType) {
+		this.handlerType = handlerType;
 	}
 
 	/**
@@ -47,8 +47,8 @@ public final class RemoveHandlerEvent extends GwtEvent<RemoveHandlerEventHandler
 	 * 
 	 * @return the type of removed handler.
 	 */
-	public Type<? extends EventHandler> getType() {
-		return type;
+	public Type<? extends EventHandler> getHandlerType() {
+		return handlerType;
 	}
 
 	/*

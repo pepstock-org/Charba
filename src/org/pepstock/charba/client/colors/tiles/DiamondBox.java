@@ -52,7 +52,7 @@ final class DiamondBox extends ShapeDrawer {
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
 		// designs the shape into A section
-		drawDiamond(context, size, 0, 0);
+		drawDiamond(context, size, 0D, 0D);
 		// designs the shape into B section
 		drawDiamond(context, size, halfSize, halfSize);
 		// draws the current path with the current stroke style
@@ -69,15 +69,15 @@ final class DiamondBox extends ShapeDrawer {
 	 */
 	void drawDiamond(Context2d context, int size, double offsetX, double offsetY) {
 		// calculates half dimension
-		final double halfSize = (size / 2D) - 1;
+		final double halfSize = (size / 2D) - 1D;
 		// calculates quarter dimension
 		final double quarterSize = size / 4D;
 		// draws shape
 		// to point for drawing line
-		context.moveTo(quarterSize + offsetX, offsetY + 1);
+		context.moveTo(quarterSize + offsetX, offsetY + 1D);
 		context.lineTo(halfSize + offsetX, quarterSize + offsetY);
 		context.lineTo(quarterSize + offsetX, halfSize + offsetY);
-		context.lineTo(offsetX + 1, quarterSize + offsetY);
-		context.lineTo(quarterSize + offsetX, offsetY + 1);
+		context.lineTo(offsetX + 1D, quarterSize + offsetY);
+		context.lineTo(quarterSize + offsetX, offsetY + 1D);
 	}
 }

@@ -47,9 +47,9 @@ import com.google.gwt.dom.client.Document;
 public abstract class ShapeDrawer {
 
 	// rotation of 90 degrees to apply on rotation
-	static final double ROTATION_90_DEGREES = 90 * Math.PI / 180;
+	static final double ROTATION_90_DEGREES = 90D * Math.PI / 180D;
 	// rotation of 180 degrees to apply on rotation
-	static final double ROTATION_180_DEGREES = 180 * Math.PI / 180;
+	static final double ROTATION_180_DEGREES = 180D * Math.PI / 180D;
 	// canvas element to draw
 	private CanvasElement canvas = null;
 
@@ -78,10 +78,10 @@ public abstract class ShapeDrawer {
 		// gets the context
 		Context2d context = canvas.getContext2d();
 		// clears the canvas for new design
-		context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		context.clearRect(0D, 0D, canvas.getWidth(), canvas.getHeight());
 		// sets the background color
 		context.setFillStyle(backgroundColor);
-		context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		context.fillRect(0D, 0D, canvas.getWidth(), canvas.getHeight());
 		// begins a new path.
 		context.beginPath();
 		// invoke the drawer to design the shape

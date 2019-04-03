@@ -52,7 +52,7 @@ class Diagonal extends ShapeDrawer {
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
 		// designs the shape into A section
-		drawDiagonal(context, size, 0, 0);
+		drawDiagonal(context, size, 0D, 0D);
 		// designs the shape into B section
 		drawDiagonal(context, size, halfSize, halfSize);
 		// draws the current path with the current stroke style
@@ -74,8 +74,8 @@ class Diagonal extends ShapeDrawer {
 		final double margin = 1D;
 		// draws shape
 		// to point for drawing line
-		context.moveTo((halfSize - margin) - offsetX, (margin * -1) + offsetY);
-		context.lineTo((size + 1) - offsetX, (halfSize + 1) + offsetY);
+		context.moveTo((halfSize - margin) - offsetX, (margin * -1D) + offsetY);
+		context.lineTo((size + 1D) - offsetX, (halfSize + 1D) + offsetY);
 	}
 
 }

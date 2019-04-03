@@ -133,14 +133,9 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 		Iterator<? extends NativeObject> e = c.iterator();
 		// scans all elements
 		while (e.hasNext()) {
-			// if adds
-			if (add(e.next())) {
-				// sets modified
-				modified &= true;
-			} else {
-				// sets false!
-				modified = false;
-			}
+			add(e.next());
+			// sets modified
+			modified &= true;
 		}
 		return modified;
 	}

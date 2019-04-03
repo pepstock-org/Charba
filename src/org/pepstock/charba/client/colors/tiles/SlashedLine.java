@@ -52,11 +52,11 @@ final class SlashedLine extends ShapeDrawer {
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
 		// designs the shape into A section
-		drawDiagonal(context, size, quarterSize * -2, 0, quarterSize * 6);
+		drawDiagonal(context, size, quarterSize * -2D, 0D, quarterSize * 6D);
 		// designs the shape into C section
-		drawDiagonal(context, quarterSize * 3, quarterSize * -4, quarterSize * -1, size);
+		drawDiagonal(context, quarterSize * 3D, quarterSize * -4D, quarterSize * -1D, size);
 		// designs the shape into B section
-		drawDiagonal(context, size + quarterSize, 0,  quarterSize, size * 2);
+		drawDiagonal(context, size + quarterSize, 0D,  quarterSize, size * 2D);
 		// draws the current path with the current stroke style
 		context.stroke();
 	}

@@ -52,7 +52,7 @@ final class Cross extends ShapeDrawer {
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
 		// designs the shape into A section
-		drawCross(context, size, 0, 0);
+		drawCross(context, size, 0D, 0D);
 		// designs the shape into B section
 		drawCross(context, size, halfSize, halfSize);
 		// draws the current path with the current stroke style

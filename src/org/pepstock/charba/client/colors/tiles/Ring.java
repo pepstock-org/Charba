@@ -54,7 +54,7 @@ final class Ring extends Dot {
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
 		// designs the shape into A section
-		drawDot(context, size, 0, 0, diameter);
+		drawDot(context, size, 0D, 0D, diameter);
 		// designs the shape into B section
 		drawDot(context, size, halfSize, halfSize, diameter);
 		// draws the current path with the current stroke style

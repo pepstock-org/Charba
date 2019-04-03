@@ -52,7 +52,7 @@ class Triangle extends ShapeDrawer {
 		// apply the fill properties
 		applyFillProperties(context, shapeColor);
 		// designs the shape into A section
-		drawTriangle(context, size, 0, 0);
+		drawTriangle(context, size, 0D, 0D);
 		// designs the shape into B section
 		drawTriangle(context, size, halfSize, halfSize);
 		// fills the current path

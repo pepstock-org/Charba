@@ -46,9 +46,9 @@ import com.google.gwt.user.client.ui.Image;
 public final class ImageShape extends ShapeDrawer implements IsShape {
 
 	/**
-	 * Name of shape to draw an image, <b>{@value NAME}</b>.
+	 * Name of shape to draw an image, <b>{@value SHAPE_NAME}</b>.
 	 */
-	public static final String NAME = "image";
+	public static final String SHAPE_NAME = "image";
 	// image to draw on the tile
 	private final ImageElement imageElement;
 	// key prefix
@@ -83,7 +83,7 @@ public final class ImageShape extends ShapeDrawer implements IsShape {
 			// stores the image
 			this.imageElement = image;
 			// key prefix for caching is NAME plus source of image
-			this.keyPrefix = NAME+imageElement.getSrc();
+			this.keyPrefix = SHAPE_NAME+imageElement.getSrc();
 		} else {
 			// if here, image is null
 			// then exception
@@ -98,7 +98,7 @@ public final class ImageShape extends ShapeDrawer implements IsShape {
 	 */
 	@Override
 	public String name() {
-		return NAME;
+		return SHAPE_NAME;
 	}
 
 	/*
@@ -128,9 +128,9 @@ public final class ImageShape extends ShapeDrawer implements IsShape {
 	@Override
 	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
 		// 1 pox of margin for all dimensions
-		final double realSize = size - 2;
+		final double realSize = size - 2D;
 		// draws a scaled image
-		context.drawImage(imageElement, 1, 1, realSize, realSize);
+		context.drawImage(imageElement, 1D, 1D, realSize, realSize);
 	}
 
 }

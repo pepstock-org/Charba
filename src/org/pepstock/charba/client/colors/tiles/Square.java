@@ -52,7 +52,7 @@ final class Square extends ShapeDrawer {
 		// apply the fill properties
 		applyFillProperties(context, shapeColor);
 		// designs the shape into A section
-		drawSquare(context, size, 0, 0);
+		drawSquare(context, size, 0D, 0D);
 		// designs the shape into B section
 		drawSquare(context, size, halfSize, halfSize);
 		// fills the current path

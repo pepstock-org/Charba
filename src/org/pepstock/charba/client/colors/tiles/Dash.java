@@ -52,7 +52,7 @@ final class Dash extends ShapeDrawer {
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
 		// designs the shape into A section
-		drawDash(context, size, 0, 0);
+		drawDash(context, size, 0D, 0D);
 		// designs the shape into B section
 		drawDash(context, size, halfSize, halfSize);
 		// draws the current path with the current stroke style

@@ -64,7 +64,7 @@ final class DotDash extends ShapeDrawer {
 		// apply the fill properties
 		applyFillProperties(context, shapeColor);
 		// designs the shape into A section
-		dot.drawDot(context, size, 0, 0, diameter);
+		dot.drawDot(context, size, 0D, 0D, diameter);
 		// fills the current path
 		context.fill();
 	}

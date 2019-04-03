@@ -60,7 +60,7 @@ final class EmptyStar extends Star {
 		// applies rotation (90 degrees) to the current transform
 		context.rotate(ROTATION_180_DEGREES);
 		// designs the shape into A section
-		drawStar(context, size, halfSize, halfSize, SPIKES, halfSize - 2, quarterSize - 1);
+		drawStar(context, size, halfSize, halfSize, SPIKES, halfSize - 2D, quarterSize - 1D);
 		// strokes the current path
 		context.stroke();
 	}

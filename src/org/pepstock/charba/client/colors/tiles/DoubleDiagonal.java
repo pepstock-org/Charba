@@ -37,7 +37,7 @@ import com.google.gwt.canvas.dom.client.Context2d;
  * @author Andrea "Stock" Stocchero
  *
  */
-class DoubleDiagonal extends Diagonal{
+class DoubleDiagonal extends Diagonal {
 
 	/*
 	 * (non-Javadoc)
@@ -52,11 +52,11 @@ class DoubleDiagonal extends Diagonal{
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
 		// designs the shape into B section
-		drawDiagonal(context, size, 0, 0);
+		drawDiagonal(context, size, 0D, 0D);
 		// designs the shape into C section
 		drawDiagonal(context, size, halfSize, halfSize);
 		// designs the shape into A-D section
-		drawWholeDiagonal(context, size, 0, 0);
+		drawWholeDiagonal(context, size, 0D, 0D);
 		// draws the current path with the current stroke style
 		context.stroke();
 	}
@@ -72,17 +72,17 @@ class DoubleDiagonal extends Diagonal{
 	final void drawWholeDiagonal(Context2d context, int size, double offsetX, double offsetY) {
 		// draws shape
 		// to point for drawing line
-		context.moveTo(0, 0);
+		context.moveTo(0D, 0D);
 		context.lineTo(size, size);
 		// draws shape
 		// to point for drawing line
-		context.moveTo(size-1, -1);
-		context.lineTo(size+1, 1);
+		context.moveTo(size - 1D, -1D);
+		context.lineTo(size + 1D, 1D);
 		// draws shape
 		// to point for drawing line
-		context.moveTo(-1, size-1);
-		context.lineTo(1, size+1);
-		
+		context.moveTo(-1D, size - 1D);
+		context.lineTo(1D, size + 1D);
+
 	}
 
 }

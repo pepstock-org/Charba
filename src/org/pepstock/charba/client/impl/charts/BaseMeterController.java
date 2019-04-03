@@ -46,7 +46,7 @@ final class BaseMeterController extends AbstractController {
 	// minimum font size
 	private static final int MINIMUM_FONT_SIZE = 12;
 	// default padding
-	private static final int PADDING = 4;
+	private static final double PADDING = 4D;
 	// max percentage
 	private static final double MAX_PERCENTAGE = 100D;
 	// SQRT of 2 to calculate the sqare inside the doughnut
@@ -225,7 +225,7 @@ final class BaseMeterController extends AbstractController {
 			// if the width is inside of side (and padding) or
 			// is the minimum size of font
 			// exit
-			if ((metrics.getWidth() + PADDING * 2) < sideOfSquare || fontSize <= MINIMUM_FONT_SIZE) {
+			if ((metrics.getWidth() + PADDING * 2D) < sideOfSquare || fontSize <= MINIMUM_FONT_SIZE) {
 				check = false;
 			} else {
 				// decrements the font size

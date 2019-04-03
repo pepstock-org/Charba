@@ -52,11 +52,11 @@ class BackSlashedLine extends ShapeDrawer {
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
 		// designs the shape into A line section
-		drawDiagonal(context, 0, quarterSize * -2, size, quarterSize * 6);
+		drawDiagonal(context, 0D, quarterSize * -2D, size, quarterSize * 6D);
 		// designs the shape into C line section
-		drawDiagonal(context, quarterSize, quarterSize * -4, size + quarterSize, size);
+		drawDiagonal(context, quarterSize, quarterSize * -4D, size + quarterSize, size);
 		// designs the shape into B line section
-		drawDiagonal(context, quarterSize * -1, 0,  quarterSize * 3, size * 2);
+		drawDiagonal(context, quarterSize * -1D, 0D,  quarterSize * 3D, size * 2D);
 		// draws the current path with the current stroke style
 		context.stroke();
 	}

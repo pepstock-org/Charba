@@ -50,7 +50,7 @@ final class Weave extends ShapeDrawer {
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
 		// designs the shape into A and B section
-		drawWeave(context, size, 0, 0);
+		drawWeave(context, size, 0D, 0D);
 		context.stroke();
 	}
 
@@ -66,10 +66,10 @@ final class Weave extends ShapeDrawer {
 		// calculates half dimension
 		final double halfSize = size / 2D;
 		// designs the shape into A section
-		context.moveTo(offsetX + 1, offsetY + 1);
-		context.lineTo(halfSize - 1, halfSize - 1);
+		context.moveTo(offsetX + 1D, offsetY + 1D);
+		context.lineTo(halfSize - 1D, halfSize - 1D);
 		// designs the shape into B section
-		context.moveTo(halfSize + 1, size - 1);
-		context.lineTo(size - 1, halfSize + 1);
+		context.moveTo(halfSize + 1D, size - 1D);
+		context.lineTo(size - 1D, halfSize + 1D);
 	}
 }

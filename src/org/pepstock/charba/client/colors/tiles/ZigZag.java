@@ -52,7 +52,7 @@ class ZigZag extends ShapeDrawer {
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
 		// designs the shape into A section
-		drawZigZag(context, size, 0);
+		drawZigZag(context, size, 0D);
 		// designs the shape into B section
 		drawZigZag(context, size, halfSize);
 		// draws the current path with the current stroke style
