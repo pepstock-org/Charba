@@ -151,10 +151,10 @@ public final class Listeners extends NativeObjectContainer {
 		// checks if handler is consistent
 		if (clickEventHandler != null) {
 			// adds the callback proxy function to java script object
-			setValue(Event.click, clickEventCallbackProxy.getProxy());
+			setValue(Event.CLICK, clickEventCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Event.click);
+			remove(Event.CLICK);
 		}
 	}
 
@@ -178,10 +178,10 @@ public final class Listeners extends NativeObjectContainer {
 		// checks if handler is consistent
 		if (enterEventHandler != null) {
 			// adds the callback proxy function to java script object
-			setValue(Event.enter, enterEventCallbackProxy.getProxy());
+			setValue(Event.ENTER, enterEventCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Event.enter);
+			remove(Event.ENTER);
 		}
 	}
 
@@ -205,10 +205,10 @@ public final class Listeners extends NativeObjectContainer {
 		// checks if handler is consistent
 		if (leaveEventHandler != null) {
 			// adds the callback proxy function to java script object
-			setValue(Event.leave, leaveEventCallbackProxy.getProxy());
+			setValue(Event.LEAVE, leaveEventCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Event.leave);
+			remove(Event.LEAVE);
 		}
 	}
 

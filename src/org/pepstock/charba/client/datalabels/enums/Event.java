@@ -31,14 +31,37 @@ public enum Event implements Key
 	/**
 	 * The mouse is moved over a label. Charba {@link org.pepstock.charba.client.enums.Event#mousemove} must be enabled.
 	 */
-	enter,
+	ENTER("enter"),
 	/**
 	 * The mouse is moved out of a label. Charba {@link org.pepstock.charba.client.enums.Event#mousemove} must be enabled.
 	 */
-	leave,
+	LEAVE("leave"),
 	/**
 	 * The mouse's primary button is pressed and released on a label. Charba
 	 * {@link org.pepstock.charba.client.enums.Event#click} must be enabled.
 	 */
-	click;
+	CLICK("click");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private Event(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

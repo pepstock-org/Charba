@@ -52,7 +52,7 @@ final class DataLabelsDefaultsFont extends NativeObjectContainer {
 	 * @return the font size.
 	 */
 	int getFontSize() {
-		return getValue(Font.Property.size, Defaults.get().getGlobal().getDefaultFontSize());
+		return getValue(Font.Property.SIZE, Defaults.get().getGlobal().getDefaultFontSize());
 	}
 
 	/**
@@ -61,7 +61,7 @@ final class DataLabelsDefaultsFont extends NativeObjectContainer {
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	FontStyle getFontStyle() {
-		return getValue(Font.Property.style, FontStyle.class, Defaults.get().getGlobal().getDefaultFontStyle());
+		return getValue(Font.Property.STYLE, FontStyle.class, Defaults.get().getGlobal().getDefaultFontStyle());
 	}
 
 	/**
@@ -70,7 +70,7 @@ final class DataLabelsDefaultsFont extends NativeObjectContainer {
 	 * @return Font family, follows CSS font-family options.
 	 */
 	String getFontFamily() {
-		return getValue(Font.Property.family, Defaults.get().getGlobal().getDefaultFontFamily());
+		return getValue(Font.Property.FAMILY, Defaults.get().getGlobal().getDefaultFontFamily());
 	}
 
 	/**
@@ -79,7 +79,7 @@ final class DataLabelsDefaultsFont extends NativeObjectContainer {
 	 * @return the font weight, follows CSS font-style-weight options.
 	 */
 	Weight getWeight() {
-		return getValue(Font.Property.weight, Weight.class, Font.DEFAULT_WEIGHT);
+		return getValue(Font.Property.WEIGHT, Weight.class, Font.DEFAULT_WEIGHT);
 	}
 
 	/**
@@ -88,7 +88,7 @@ final class DataLabelsDefaultsFont extends NativeObjectContainer {
 	 * @return the line height.
 	 */
 	double getLineHeight() {
-		return getValue(Font.Property.lineHeight, Font.DEFAULT_LINEHEIGHT);
+		return getValue(Font.Property.LINE_HEIGHT, Font.DEFAULT_LINEHEIGHT);
 	}
 
 }

@@ -28,25 +28,48 @@ public enum Weight implements Key
 	/**
 	 * Defines normal characters. This is default.
 	 */
-	normal,
+	NORMAL("normal"),
 	/**
 	 * Defines thick characters.
 	 */
-	bold,
+	BOLD("bold"),
 	/**
 	 * Defines thicker characters.
 	 */
-	bolder,
+	BOLDER("bolder"),
 	/**
 	 * Defines lighter characters.
 	 */
-	lighter,
+	LIGHTER("lighter"),
 	/**
 	 * Sets this property to its default value.
 	 */
-	initial,
+	INITIAL("initial"),
 	/**
 	 * Inherits this property from its parent element.
 	 */
-	inherit
+	INHERIT("inherit");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private Weight(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

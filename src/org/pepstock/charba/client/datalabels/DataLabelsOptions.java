@@ -75,13 +75,13 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	/**
 	 * Default position of the label relative to the anchor point position and orientation, {@link Align#center}.
 	 */
-	public static final Align DEFAULT_ALIGN = Align.center;
+	public static final Align DEFAULT_ALIGN = Align.CENTER;
 
 	/**
 	 * Default anchor point, which is defined by an orientation vector and a position on the data element,
 	 * {@link Anchor#center}.
 	 */
-	public static final Anchor DEFAULT_ANCHOR = Anchor.center;
+	public static final Anchor DEFAULT_ANCHOR = Anchor.CENTER;
 
 	/**
 	 * Default background color, <code>null</code>, and uses the background color of dataset.
@@ -137,7 +137,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	/**
 	 * Default text alignment being used when drawing the label text, {@link TextAlign#start}.
 	 */
-	public static final TextAlign DEFAULT_TEXTALIGN = TextAlign.start;
+	public static final TextAlign DEFAULT_TEXTALIGN = TextAlign.START;
 
 	/**
 	 * Default text stroke width, <b>{@value DEFAULT_TEXTSTROKEWIDTH}</b>.
@@ -278,28 +278,51 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 */
 	enum Property implements Key
 	{
-		align,
-		anchor,
-		backgroundColor,
-		borderColor,
-		borderRadius,
-		borderWidth,
-		clamp,
-		clip,
-		color,
-		display,
-		font,
-		formatter,
-		listeners,
-		offset,
-		opacity,
-		padding,
-		rotation,
-		textAlign,
-		textStrokeColor,
-		textStrokeWidth,
-		textShadowBlur,
-		textShadowColor
+		ALIGN("align"),
+		ANCHOR("anchor"),
+		BACKGROUND_COLOR("backgroundColor"),
+		BORDER_COLOR("borderColor"),
+		BORDER_RADIUS("borderRadius"),
+		BORDER_WIDTH("borderWidth"),
+		CLAMP("clamp"),
+		CLIP("clip"),
+		COLOR("color"),
+		DISPLAY("display"),
+		FONT("font"),
+		FORMATTER("formatter"),
+		LISTENERS("listeners"),
+		OFFSET("offset"),
+		OPACITY("opacity"),
+		PADDING("padding"),
+		ROTATION("rotation"),
+		TEXT_ALIGN("textAlign"),
+		TEXT_STROKE_COLOR("textStrokeColor"),
+		TEXT_STROKE_WIDTH("textStrokeWidth"),
+		TEXT_SHADOW_BLUR("textShadowBlur"),
+		TEXT_SHADOW_COLOR("textShadowColor");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -327,9 +350,9 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		font = new Font(defaultsOptions.getFont());
 		listeners = new Listeners();
 		// stores inner elements
-		setValue(Property.padding, padding);
-		setValue(Property.font, font);
-		setValue(Property.listeners, listeners);
+		setValue(Property.PADDING, padding);
+		setValue(Property.FONT, font);
+		setValue(Property.LISTENERS, listeners);
 		// sets unique id
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
@@ -723,7 +746,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param align the position of the label relative to the anchor point position and orientation.
 	 */
 	public void setAlign(Align align) {
-		setValue(Property.align, align);
+		setValue(Property.ALIGN, align);
 	}
 
 	/**
@@ -732,7 +755,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the position of the label relative to the anchor point position and orientation.
 	 */
 	public Align getAlign() {
-		return getValue(Property.align, Align.class, defaultsOptions.getAlign());
+		return getValue(Property.ALIGN, Align.class, defaultsOptions.getAlign());
 	}
 
 	/**
@@ -741,7 +764,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param anchor the anchor point, which is defined by an orientation vector and a position on the data element.
 	 */
 	public void setAnchor(Anchor anchor) {
-		setValue(Property.anchor, anchor);
+		setValue(Property.ANCHOR, anchor);
 	}
 
 	/**
@@ -750,7 +773,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the anchor point, which is defined by an orientation vector and a position on the data element.
 	 */
 	public Anchor getAnchor() {
-		return getValue(Property.anchor, Anchor.class, defaultsOptions.getAnchor());
+		return getValue(Property.ANCHOR, Anchor.class, defaultsOptions.getAnchor());
 	}
 
 	/**
@@ -768,7 +791,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param color the background color
 	 */
 	public void setBackgroundColor(String color) {
-		setValue(Property.backgroundColor, color);
+		setValue(Property.BACKGROUND_COLOR, color);
 	}
 
 	/**
@@ -777,7 +800,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the background color as string.
 	 */
 	public String getBackgroundColorAsString() {
-		return getValue(Property.backgroundColor, defaultsOptions.getBackgroundColorAsString());
+		return getValue(Property.BACKGROUND_COLOR, defaultsOptions.getBackgroundColorAsString());
 	}
 
 	/**
@@ -805,7 +828,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param color the border color
 	 */
 	public void setBorderColor(String color) {
-		setValue(Property.borderColor, color);
+		setValue(Property.BORDER_COLOR, color);
 	}
 
 	/**
@@ -814,7 +837,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the border color as string.
 	 */
 	public String getBorderColorAsString() {
-		return getValue(Property.borderColor, defaultsOptions.getBorderColorAsString());
+		return getValue(Property.BORDER_COLOR, defaultsOptions.getBorderColorAsString());
 	}
 
 	/**
@@ -833,7 +856,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param radius the border radius.
 	 */
 	public void setBorderRadius(double radius) {
-		setValue(Property.borderRadius, radius);
+		setValue(Property.BORDER_RADIUS, radius);
 	}
 
 	/**
@@ -842,7 +865,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the border radius.
 	 */
 	public double getBorderRadius() {
-		return getValue(Property.borderRadius, defaultsOptions.getBorderRadius());
+		return getValue(Property.BORDER_RADIUS, defaultsOptions.getBorderRadius());
 	}
 
 	/**
@@ -851,7 +874,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param width the border width.
 	 */
 	public void setBorderWidth(int width) {
-		setValue(Property.borderWidth, width);
+		setValue(Property.BORDER_WIDTH, width);
 	}
 
 	/**
@@ -860,7 +883,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the border width.
 	 */
 	public int getBorderWidth() {
-		return getValue(Property.borderWidth, defaultsOptions.getBorderWidth());
+		return getValue(Property.BORDER_WIDTH, defaultsOptions.getBorderWidth());
 	}
 
 	/**
@@ -871,7 +894,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 *            associated element (i.e. part inside the chart area).
 	 */
 	public void setClamp(boolean clamp) {
-		setValue(Property.clamp, clamp);
+		setValue(Property.CLAMP, clamp);
 	}
 
 	/**
@@ -882,7 +905,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 *         element (i.e. part inside the chart area).
 	 */
 	public boolean isClamp() {
-		return getValue(Property.clamp, defaultsOptions.isClamp());
+		return getValue(Property.CLAMP, defaultsOptions.isClamp());
 	}
 
 	/**
@@ -892,7 +915,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 *            masked.
 	 */
 	public void setClip(boolean clip) {
-		setValue(Property.clip, clip);
+		setValue(Property.CLIP, clip);
 	}
 
 	/**
@@ -901,7 +924,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return when the clip option is <code>true</code>, the part of the label which is outside the chart area will be masked.
 	 */
 	public boolean isClip() {
-		return getValue(Property.clip, defaultsOptions.isClip());
+		return getValue(Property.CLIP, defaultsOptions.isClip());
 	}
 
 	/**
@@ -919,7 +942,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param color the color
 	 */
 	public void setColor(String color) {
-		setValue(Property.color, color);
+		setValue(Property.COLOR, color);
 	}
 
 	/**
@@ -928,7 +951,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the color as string.
 	 */
 	public String getColorAsString() {
-		return getValue(Property.color, defaultsOptions.getColorAsString());
+		return getValue(Property.COLOR, defaultsOptions.getColorAsString());
 	}
 
 	/**
@@ -946,7 +969,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param display the visibility of labels.
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.display, display);
+		setValue(Property.DISPLAY, display);
 	}
 
 	/**
@@ -956,9 +979,9 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 */
 	public void setDisplay(Display display) {
 		if (Display.auto.equals(display)) {
-			setValue(Property.display, display);
+			setValue(Property.DISPLAY, display);
 		} else {
-			setValue(Property.display, Display.yes.equals(display) ? true : false);
+			setValue(Property.DISPLAY, Display.yes.equals(display) ? true : false);
 		}
 	}
 
@@ -968,12 +991,12 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the visibility of labels.
 	 */
 	public Display getDisplay() {
-		ObjectType type = type(Property.display);
+		ObjectType type = type(Property.DISPLAY);
 		if (ObjectType.Boolean.equals(type)) {
-			boolean value = getValue(Property.display, true);
+			boolean value = getValue(Property.DISPLAY, true);
 			return value ? Display.yes : Display.no;
 		} else if (ObjectType.String.equals(type)) {
-			return getValue(Property.display, Display.class, defaultsOptions.getDisplay());
+			return getValue(Property.DISPLAY, Display.class, defaultsOptions.getDisplay());
 		}
 		return defaultsOptions.getDisplay();
 	}
@@ -986,7 +1009,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 *            align is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
 	 */
 	public void setOffset(double offset) {
-		setValue(Property.offset, offset);
+		setValue(Property.OFFSET, offset);
 	}
 
 	/**
@@ -997,7 +1020,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 *         is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
 	 */
 	public double getOffset() {
-		return getValue(Property.offset, defaultsOptions.getOffset());
+		return getValue(Property.OFFSET, defaultsOptions.getOffset());
 	}
 
 	/**
@@ -1006,7 +1029,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param opacity the opacity.
 	 */
 	public void setOpacity(double opacity) {
-		setValue(Property.opacity, opacity);
+		setValue(Property.OPACITY, opacity);
 	}
 
 	/**
@@ -1015,7 +1038,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the opacity.
 	 */
 	public double getOpacity() {
-		return getValue(Property.opacity, defaultsOptions.getOpacity());
+		return getValue(Property.OPACITY, defaultsOptions.getOpacity());
 	}
 
 	/**
@@ -1024,7 +1047,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param rotation the clockwise rotation angle (in degrees) of the label, the rotation center point being the label center.
 	 */
 	public void setRotation(double rotation) {
-		setValue(Property.rotation, rotation);
+		setValue(Property.ROTATION, rotation);
 	}
 
 	/**
@@ -1033,7 +1056,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the clockwise rotation angle (in degrees) of the label, the rotation center point being the label center.
 	 */
 	public double getRotation() {
-		return getValue(Property.rotation, defaultsOptions.getRotation());
+		return getValue(Property.ROTATION, defaultsOptions.getRotation());
 	}
 
 	/**
@@ -1042,7 +1065,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param textAlign the text alignment being used when drawing the label text.
 	 */
 	public void setTextAlign(TextAlign textAlign) {
-		setValue(Property.textAlign, textAlign);
+		setValue(Property.TEXT_ALIGN, textAlign);
 	}
 
 	/**
@@ -1051,7 +1074,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the text alignment being used when drawing the label text.
 	 */
 	public TextAlign getTextAlign() {
-		return getValue(Property.textAlign, TextAlign.class, defaultsOptions.getTextAlign());
+		return getValue(Property.TEXT_ALIGN, TextAlign.class, defaultsOptions.getTextAlign());
 	}
 
 	/**
@@ -1069,7 +1092,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param color the text stroke color.
 	 */
 	public void setTextStrokeColor(String color) {
-		setValue(Property.textStrokeColor, color);
+		setValue(Property.TEXT_STROKE_COLOR, color);
 	}
 
 	/**
@@ -1078,7 +1101,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the text stroke color as string.
 	 */
 	public String getTextStrokeColorAsString() {
-		return getValue(Property.textStrokeColor, defaultsOptions.getTextStrokeColorAsString());
+		return getValue(Property.TEXT_STROKE_COLOR, defaultsOptions.getTextStrokeColorAsString());
 	}
 
 	/**
@@ -1096,7 +1119,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param textStrokeWidth the text stroke width.
 	 */
 	public void setTextStrokeWidth(int textStrokeWidth) {
-		setValue(Property.textStrokeWidth, textStrokeWidth);
+		setValue(Property.TEXT_STROKE_WIDTH, textStrokeWidth);
 	}
 
 	/**
@@ -1105,7 +1128,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the text stroke width.
 	 */
 	public int getTextStrokeWidth() {
-		return getValue(Property.textStrokeWidth, defaultsOptions.getTextStrokeWidth());
+		return getValue(Property.TEXT_STROKE_WIDTH, defaultsOptions.getTextStrokeWidth());
 	}
 
 	/**
@@ -1114,7 +1137,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param textShadowBlur the text shadow blur.
 	 */
 	public void setTextShadowBlur(double textShadowBlur) {
-		setValue(Property.textShadowBlur, textShadowBlur);
+		setValue(Property.TEXT_SHADOW_BLUR, textShadowBlur);
 	}
 
 	/**
@@ -1123,7 +1146,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the text shadow blur.
 	 */
 	public double getTextShadowBlur() {
-		return getValue(Property.textShadowBlur, defaultsOptions.getTextShadowBlur());
+		return getValue(Property.TEXT_SHADOW_BLUR, defaultsOptions.getTextShadowBlur());
 	}
 
 	/**
@@ -1141,7 +1164,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param color the text shadow color color.
 	 */
 	public void setTextShadowColor(String color) {
-		setValue(Property.textShadowColor, color);
+		setValue(Property.TEXT_SHADOW_COLOR, color);
 	}
 
 	/**
@@ -1150,7 +1173,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the text shadow color as string.
 	 */
 	public String getTextShadowColorAsString() {
-		return getValue(Property.textShadowColor, defaultsOptions.getTextShadowColorAsString());
+		return getValue(Property.TEXT_SHADOW_COLOR, defaultsOptions.getTextShadowColorAsString());
 	}
 
 	/**
@@ -1182,10 +1205,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (backgroundColorCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.backgroundColor, backgroundColorCallbackProxy.getProxy());
+			setValue(Property.BACKGROUND_COLOR, backgroundColorCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.backgroundColor);
+			remove(Property.BACKGROUND_COLOR);
 		}
 	}
 
@@ -1209,10 +1232,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (borderColorCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.borderColor, borderColorCallbackProxy.getProxy());
+			setValue(Property.BORDER_COLOR, borderColorCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.borderColor);
+			remove(Property.BORDER_COLOR);
 		}
 	}
 
@@ -1236,10 +1259,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (colorCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.color, colorCallbackProxy.getProxy());
+			setValue(Property.COLOR, colorCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.color);
+			remove(Property.COLOR);
 		}
 	}
 
@@ -1263,10 +1286,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (formatterCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.formatter, formatterCallbackProxy.getProxy());
+			setValue(Property.FORMATTER, formatterCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.formatter);
+			remove(Property.FORMATTER);
 		}
 	}
 
@@ -1290,10 +1313,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (alignCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.align, alignCallbackProxy.getProxy());
+			setValue(Property.ALIGN, alignCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.align);
+			remove(Property.ALIGN);
 		}
 	}
 
@@ -1317,10 +1340,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (anchorCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.anchor, anchorCallbackProxy.getProxy());
+			setValue(Property.ANCHOR, anchorCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.anchor);
+			remove(Property.ANCHOR);
 		}
 	}
 
@@ -1344,10 +1367,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (borderRadiusCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.borderRadius, borderRadiusCallbackProxy.getProxy());
+			setValue(Property.BORDER_RADIUS, borderRadiusCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.borderRadius);
+			remove(Property.BORDER_RADIUS);
 		}
 	}
 
@@ -1371,10 +1394,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (borderWidthCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.borderWidth, borderWidthCallbackProxy.getProxy());
+			setValue(Property.BORDER_WIDTH, borderWidthCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.borderWidth);
+			remove(Property.BORDER_WIDTH);
 		}
 	}
 
@@ -1398,10 +1421,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (clampCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.clamp, clampCallbackProxy.getProxy());
+			setValue(Property.CLAMP, clampCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.clamp);
+			remove(Property.CLAMP);
 		}
 	}
 
@@ -1425,10 +1448,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (clipCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.clip, clipCallbackProxy.getProxy());
+			setValue(Property.CLIP, clipCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.clip);
+			remove(Property.CLIP);
 		}
 	}
 
@@ -1452,10 +1475,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (displayCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.display, displayCallbackProxy.getProxy());
+			setValue(Property.DISPLAY, displayCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.display);
+			remove(Property.DISPLAY);
 		}
 	}
 
@@ -1479,10 +1502,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (offsetCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.offset, offsetCallbackProxy.getProxy());
+			setValue(Property.OFFSET, offsetCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.offset);
+			remove(Property.OFFSET);
 		}
 	}
 
@@ -1506,10 +1529,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (opacityCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.opacity, opacityCallbackProxy.getProxy());
+			setValue(Property.OPACITY, opacityCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.opacity);
+			remove(Property.OPACITY);
 		}
 	}
 
@@ -1533,10 +1556,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (rotationCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.rotation, rotationCallbackProxy.getProxy());
+			setValue(Property.ROTATION, rotationCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.rotation);
+			remove(Property.ROTATION);
 		}
 	}
 
@@ -1560,10 +1583,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (textAlignCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.textAlign, textAlignCallbackProxy.getProxy());
+			setValue(Property.TEXT_ALIGN, textAlignCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.textAlign);
+			remove(Property.TEXT_ALIGN);
 		}
 	}
 
@@ -1587,10 +1610,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (textStrokeColorCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.textStrokeColor, textStrokeColorCallbackProxy.getProxy());
+			setValue(Property.TEXT_STROKE_COLOR, textStrokeColorCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.textStrokeColor);
+			remove(Property.TEXT_STROKE_COLOR);
 		}
 	}
 
@@ -1614,10 +1637,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (textStrokeWidthCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.textStrokeWidth, textStrokeWidthCallbackProxy.getProxy());
+			setValue(Property.TEXT_STROKE_WIDTH, textStrokeWidthCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.textStrokeWidth);
+			remove(Property.TEXT_STROKE_WIDTH);
 		}
 	}
 
@@ -1641,10 +1664,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (textShadowBlurCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.textShadowBlur, textShadowBlurCallbackProxy.getProxy());
+			setValue(Property.TEXT_SHADOW_BLUR, textShadowBlurCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.textShadowBlur);
+			remove(Property.TEXT_SHADOW_BLUR);
 		}
 	}
 
@@ -1668,10 +1691,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (textShadowColorCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.textShadowColor, textShadowColorCallbackProxy.getProxy());
+			setValue(Property.TEXT_SHADOW_COLOR, textShadowColorCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.textShadowColor);
+			remove(Property.TEXT_SHADOW_COLOR);
 		}
 	}
 
@@ -1695,10 +1718,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (fontCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.font, fontCallbackProxy.getProxy());
+			setValue(Property.FONT, fontCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.font);
+			remove(Property.FONT);
 		}
 	}
 
@@ -1722,10 +1745,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (paddingCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.padding, paddingCallbackProxy.getProxy());
+			setValue(Property.PADDING, paddingCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.padding);
+			remove(Property.PADDING);
 		}
 	}
 

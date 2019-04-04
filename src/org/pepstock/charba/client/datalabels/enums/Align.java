@@ -25,34 +25,55 @@ import org.pepstock.charba.client.commons.Key;
  */
 public enum Align implements Key
 {
-
 	/**
 	 * is the default: the label is centered on the anchor point.
 	 */
-	center,
+	CENTER("center"),
 	/**
 	 * The label is positioned before the anchor point, following the same direction
 	 */
-	start,
+	START("start"),
 	/**
 	 * The label is positioned after the anchor point, following the same direction
 	 */
-	end,
+	END("end"),
 	/**
 	 * The label is positioned to the right of the anchor point (0 degrees)
 	 */
-	right,
+	RIGHT("right"),
 	/**
 	 * The label is positioned to the bottom of the anchor point (90 degrees)
 	 */
-	bottom,
+	BOTTOM("bottom"),
 	/**
 	 * The label is positioned to the left of the anchor point (180 degrees)
 	 */
-	left,
+	LEFT("left"),
 	/**
 	 * The label is positioned to the top of the anchor point (270 degrees)
 	 */
-	top;
+	TOP("top");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private Align(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
 
 }

@@ -48,8 +48,8 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 		// creates default font options
 		font = new DataLabelsDefaultsFont();
 		// sets the native object inside this object
-		setValue(DataLabelsOptions.Property.padding, padding);
-		setValue(DataLabelsOptions.Property.font, font);
+		setValue(DataLabelsOptions.Property.PADDING, padding);
+		setValue(DataLabelsOptions.Property.FONT, font);
 	}
 
 	/**
@@ -61,9 +61,9 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	DataLabelsDefaultsOptions(NativeObject nativeObject) {
 		super(nativeObject);
 		// reads default padding options from main object
-		padding = new DataLabelsDefaultsPadding(getValue(DataLabelsOptions.Property.padding));
+		padding = new DataLabelsDefaultsPadding(getValue(DataLabelsOptions.Property.PADDING));
 		// reads default font options from main object
-		font = new DataLabelsDefaultsFont(getValue(DataLabelsOptions.Property.font));
+		font = new DataLabelsDefaultsFont(getValue(DataLabelsOptions.Property.FONT));
 	}
 
 	/**
@@ -90,7 +90,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the position of the label relative to the anchor point position and orientation.
 	 */
 	Align getAlign() {
-		return getValue(DataLabelsOptions.Property.align, Align.class, DataLabelsOptions.DEFAULT_ALIGN);
+		return getValue(DataLabelsOptions.Property.ALIGN, Align.class, DataLabelsOptions.DEFAULT_ALIGN);
 	}
 
 	/**
@@ -99,7 +99,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the anchor point, which is defined by an orientation vector and a position on the data element.
 	 */
 	Anchor getAnchor() {
-		return getValue(DataLabelsOptions.Property.anchor, Anchor.class, DataLabelsOptions.DEFAULT_ANCHOR);
+		return getValue(DataLabelsOptions.Property.ANCHOR, Anchor.class, DataLabelsOptions.DEFAULT_ANCHOR);
 	}
 
 	/**
@@ -108,7 +108,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the background color as string. If <code>null</code>, it uses the background color of dataset.
 	 */
 	String getBackgroundColorAsString() {
-		return getValue(DataLabelsOptions.Property.backgroundColor, DataLabelsOptions.DEFAULT_BACKGROUNDCOLOR);
+		return getValue(DataLabelsOptions.Property.BACKGROUND_COLOR, DataLabelsOptions.DEFAULT_BACKGROUNDCOLOR);
 	}
 
 	/**
@@ -117,7 +117,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the border color as string. If <code>null</code>, it uses the border color of dataset.
 	 */
 	String getBorderColorAsString() {
-		return getValue(DataLabelsOptions.Property.borderColor, DataLabelsOptions.DEFAULT_BORDERCOLOR);
+		return getValue(DataLabelsOptions.Property.BORDER_COLOR, DataLabelsOptions.DEFAULT_BORDERCOLOR);
 	}
 
 	/**
@@ -126,7 +126,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the border radius.
 	 */
 	double getBorderRadius() {
-		return getValue(DataLabelsOptions.Property.borderRadius, DataLabelsOptions.DEFAULT_BORDERRADIUS);
+		return getValue(DataLabelsOptions.Property.BORDER_RADIUS, DataLabelsOptions.DEFAULT_BORDERRADIUS);
 	}
 
 	/**
@@ -135,7 +135,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the border width.
 	 */
 	int getBorderWidth() {
-		return getValue(DataLabelsOptions.Property.borderWidth, DataLabelsOptions.DEFAULT_BORDERWIDTH);
+		return getValue(DataLabelsOptions.Property.BORDER_WIDTH, DataLabelsOptions.DEFAULT_BORDERWIDTH);
 	}
 
 	/**
@@ -146,7 +146,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 *         element (i.e. part inside the chart area).
 	 */
 	boolean isClamp() {
-		return getValue(DataLabelsOptions.Property.clamp, DataLabelsOptions.DEFAULT_CLAMP);
+		return getValue(DataLabelsOptions.Property.CLAMP, DataLabelsOptions.DEFAULT_CLAMP);
 	}
 
 	/**
@@ -155,7 +155,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return when the clip option is <code>true</code>, the part of the label which is outside the chart area will be masked.
 	 */
 	boolean isClip() {
-		return getValue(DataLabelsOptions.Property.clip, DataLabelsOptions.DEFAULT_CLIP);
+		return getValue(DataLabelsOptions.Property.CLIP, DataLabelsOptions.DEFAULT_CLIP);
 	}
 
 	/**
@@ -164,7 +164,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the color as string.
 	 */
 	String getColorAsString() {
-		return getValue(DataLabelsOptions.Property.color, Defaults.get().getGlobal().getDefaultFontColorAsString());
+		return getValue(DataLabelsOptions.Property.COLOR, Defaults.get().getGlobal().getDefaultFontColorAsString());
 	}
 
 	/**
@@ -174,15 +174,15 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 */
 	Display getDisplay() {
 		// gets object type
-		ObjectType type = type(DataLabelsOptions.Property.display);
+		ObjectType type = type(DataLabelsOptions.Property.DISPLAY);
 		// if boolean
 		if (ObjectType.Boolean.equals(type)) {
 			// gets value and compare with enum value
-			boolean value = getValue(DataLabelsOptions.Property.display, true);
+			boolean value = getValue(DataLabelsOptions.Property.DISPLAY, true);
 			return value ? Display.yes : Display.no;
 		} else if (ObjectType.String.equals(type)) {
 			// if string
-			return getValue(DataLabelsOptions.Property.display, Display.class, DataLabelsOptions.DEFAULT_DISPLAY);
+			return getValue(DataLabelsOptions.Property.DISPLAY, Display.class, DataLabelsOptions.DEFAULT_DISPLAY);
 		}
 		return DataLabelsOptions.DEFAULT_DISPLAY;
 	}
@@ -195,7 +195,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 *         is 'center'. Also note that if align is 'start', the label is moved in the opposite direction.
 	 */
 	double getOffset() {
-		return getValue(DataLabelsOptions.Property.offset, DataLabelsOptions.DEFAULT_OFFSET);
+		return getValue(DataLabelsOptions.Property.OFFSET, DataLabelsOptions.DEFAULT_OFFSET);
 	}
 
 	/**
@@ -204,7 +204,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the opacity.
 	 */
 	double getOpacity() {
-		return getValue(DataLabelsOptions.Property.opacity, DataLabelsOptions.DEFAULT_OPACITY);
+		return getValue(DataLabelsOptions.Property.OPACITY, DataLabelsOptions.DEFAULT_OPACITY);
 	}
 
 	/**
@@ -213,7 +213,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the clockwise rotation angle (in degrees) of the label, the rotation center point being the label center.
 	 */
 	double getRotation() {
-		return getValue(DataLabelsOptions.Property.rotation, DataLabelsOptions.DEFAULT_ROTATION);
+		return getValue(DataLabelsOptions.Property.ROTATION, DataLabelsOptions.DEFAULT_ROTATION);
 	}
 
 	/**
@@ -222,7 +222,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the text alignment being used when drawing the label text.
 	 */
 	TextAlign getTextAlign() {
-		return getValue(DataLabelsOptions.Property.textAlign, TextAlign.class, DataLabelsOptions.DEFAULT_TEXTALIGN);
+		return getValue(DataLabelsOptions.Property.TEXT_ALIGN, TextAlign.class, DataLabelsOptions.DEFAULT_TEXTALIGN);
 	}
 
 	/**
@@ -231,7 +231,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the text stroke color as string.
 	 */
 	String getTextStrokeColorAsString() {
-		return getValue(DataLabelsOptions.Property.textStrokeColor, getColorAsString());
+		return getValue(DataLabelsOptions.Property.TEXT_STROKE_COLOR, getColorAsString());
 	}
 
 	/**
@@ -240,7 +240,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the text stroke width.
 	 */
 	int getTextStrokeWidth() {
-		return getValue(DataLabelsOptions.Property.textStrokeWidth, DataLabelsOptions.DEFAULT_TEXTSTROKEWIDTH);
+		return getValue(DataLabelsOptions.Property.TEXT_STROKE_WIDTH, DataLabelsOptions.DEFAULT_TEXTSTROKEWIDTH);
 	}
 
 	/**
@@ -249,7 +249,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the text shadow blur.
 	 */
 	double getTextShadowBlur() {
-		return getValue(DataLabelsOptions.Property.textShadowBlur, DataLabelsOptions.DEFAULT_TEXTSHADOWBLUR);
+		return getValue(DataLabelsOptions.Property.TEXT_SHADOW_BLUR, DataLabelsOptions.DEFAULT_TEXTSHADOWBLUR);
 	}
 
 	/**
@@ -258,7 +258,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the text shadow color as string.
 	 */
 	String getTextShadowColorAsString() {
-		return getValue(DataLabelsOptions.Property.textShadowColor, getColorAsString());
+		return getValue(DataLabelsOptions.Property.TEXT_SHADOW_COLOR, getColorAsString());
 	}
 
 }

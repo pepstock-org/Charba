@@ -34,7 +34,7 @@ public final class Font extends AbstractElement {
 	/**
 	 * Default font weight, {@link Weight#normal}.
 	 */
-	public static final Weight DEFAULT_WEIGHT = Weight.normal;
+	public static final Weight DEFAULT_WEIGHT = Weight.NORMAL;
 
 	/**
 	 * Default line height, <b>{@value DEFAULT_LINEHEIGHT}</b>.
@@ -49,11 +49,34 @@ public final class Font extends AbstractElement {
 	 */
 	enum Property implements Key
 	{
-		size,
-		style,
-		family,
-		weight,
-		lineHeight
+		SIZE("size"),
+		STYLE("style"),
+		FAMILY("family"),
+		WEIGHT("weight"),
+		LINE_HEIGHT("lineHeight");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -90,7 +113,7 @@ public final class Font extends AbstractElement {
 	 * @param fontSize the font size.
 	 */
 	public void setSize(int fontSize) {
-		setValue(Property.size, fontSize);
+		setValue(Property.SIZE, fontSize);
 	}
 
 	/**
@@ -99,7 +122,7 @@ public final class Font extends AbstractElement {
 	 * @return the font size.
 	 */
 	public int getSize() {
-		return getValue(Property.size, defaultsOptions.getFontSize());
+		return getValue(Property.SIZE, defaultsOptions.getFontSize());
 	}
 
 	/**
@@ -108,7 +131,7 @@ public final class Font extends AbstractElement {
 	 * @param fontStyle Font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public void setStyle(FontStyle fontStyle) {
-		setValue(Property.style, fontStyle);
+		setValue(Property.STYLE, fontStyle);
 	}
 
 	/**
@@ -117,7 +140,7 @@ public final class Font extends AbstractElement {
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getStyle() {
-		return getValue(Property.style, FontStyle.class, defaultsOptions.getFontStyle());
+		return getValue(Property.STYLE, FontStyle.class, defaultsOptions.getFontStyle());
 	}
 
 	/**
@@ -126,7 +149,7 @@ public final class Font extends AbstractElement {
 	 * @param fontFamily Font family, follows CSS font-family options.
 	 */
 	public void setFamily(String fontFamily) {
-		setValue(Property.family, fontFamily);
+		setValue(Property.FAMILY, fontFamily);
 	}
 
 	/**
@@ -135,7 +158,7 @@ public final class Font extends AbstractElement {
 	 * @return Font family, follows CSS font-family options.
 	 */
 	public String getFamily() {
-		return getValue(Property.family, defaultsOptions.getFontFamily());
+		return getValue(Property.FAMILY, defaultsOptions.getFontFamily());
 	}
 
 	/**
@@ -144,7 +167,7 @@ public final class Font extends AbstractElement {
 	 * @param weight font weight, follows CSS font-style-weight options.
 	 */
 	public void setWeight(Weight weight) {
-		setValue(Property.weight, weight);
+		setValue(Property.WEIGHT, weight);
 	}
 
 	/**
@@ -153,7 +176,7 @@ public final class Font extends AbstractElement {
 	 * @return the font weight, follows CSS font-style-weight options.
 	 */
 	public Weight getWeight() {
-		return getValue(Property.weight, Weight.class, defaultsOptions.getWeight());
+		return getValue(Property.WEIGHT, Weight.class, defaultsOptions.getWeight());
 	}
 
 	/**
@@ -162,7 +185,7 @@ public final class Font extends AbstractElement {
 	 * @param lineHeight the line height.
 	 */
 	public void setLineHeight(double lineHeight) {
-		setValue(Property.lineHeight, lineHeight);
+		setValue(Property.LINE_HEIGHT, lineHeight);
 	}
 
 	/**
@@ -171,7 +194,7 @@ public final class Font extends AbstractElement {
 	 * @param lineHeight the line height.
 	 */
 	public void setLineHeight(String lineHeight) {
-		setValue(Property.lineHeight, lineHeight);
+		setValue(Property.LINE_HEIGHT, lineHeight);
 	}
 
 	/**
@@ -183,9 +206,9 @@ public final class Font extends AbstractElement {
 		// creates default
 		double defaultValue = defaultsOptions.getLineHeight();
 		// checks type if number
-		if (ObjectType.Number.equals(type(Property.lineHeight))) {
+		if (ObjectType.Number.equals(type(Property.LINE_HEIGHT))) {
 			// reads and returns as double
-			return getValue(Property.lineHeight, defaultValue);
+			return getValue(Property.LINE_HEIGHT, defaultValue);
 		}
 		// if here, is not a number
 		// then returns the default
@@ -201,9 +224,9 @@ public final class Font extends AbstractElement {
 		// creates default
 		String defaultValue = String.valueOf(defaultsOptions.getLineHeight());
 		// checks type if string
-		if (ObjectType.String.equals(type(Property.lineHeight))) {
+		if (ObjectType.String.equals(type(Property.LINE_HEIGHT))) {
 			// reads and returns as string
-			return getValue(Property.lineHeight, defaultValue);
+			return getValue(Property.LINE_HEIGHT, defaultValue);
 		}
 		// if here, is not a number
 		// then returns the default

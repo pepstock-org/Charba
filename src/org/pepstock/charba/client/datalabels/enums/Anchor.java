@@ -29,14 +29,36 @@ public enum Anchor implements Key
 	/**
 	 * This is the default. Element center
 	 */
-	center,
+	CENTER("center"),
 	/**
 	 * Lowest element boundary
 	 */
-	start,
+	START("start"),
 	/**
 	 * Highest element boundary
 	 */
-	end;
+	END("end");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private Anchor(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
 
 }

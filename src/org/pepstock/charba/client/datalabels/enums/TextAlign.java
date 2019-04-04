@@ -32,22 +32,44 @@ public enum TextAlign implements Key
 	/**
 	 * This is the default and the text is left-aligned.
 	 */
-	start,
+	START("start"),
 	/**
 	 * The text is centered.
 	 */
-	center,
+	CENTER("center"),
 	/**
 	 * The text is right-aligned.
 	 */
-	end,
+	END("end"),
 	/**
 	 * Alias of 'start'
 	 */
-	left,
+	LEFT("left"),
 	/**
 	 * alias of 'end'
 	 */
-	right;
+	RIGHT("right");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private TextAlign(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
 
 }
