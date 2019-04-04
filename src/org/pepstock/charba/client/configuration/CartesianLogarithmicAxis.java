@@ -35,7 +35,7 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	 * @param chart chart instance
 	 */
 	public CartesianLogarithmicAxis(AbstractChart<?, ?> chart) {
-		this(chart, CartesianAxisType.y);
+		this(chart, CartesianAxisType.Y);
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	public CartesianLogarithmicAxis(AbstractChart<?, ?> chart, CartesianAxisType cartesianType) {
 		super(chart, cartesianType);
 		// sets axis type
-		super.setType(AxisType.logarithmic);
+		super.setType(AxisType.LOGARITHMIC);
 		// creates the ticks instance
 		this.ticks = new CartesianLogarithmicTick(this);
 	}

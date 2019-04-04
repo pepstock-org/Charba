@@ -26,17 +26,17 @@ public enum ChartType implements Type
 	 * A line chart is a way of plotting data points on a line. Often, it is used to show trend data, or the comparison of two
 	 * data sets.
 	 */
-	LINE("line", ScaleType.multi),
+	LINE("line", ScaleType.MULTI),
 	/**
 	 * A bar chart provides a way of showing data values represented as vertical bars. It is sometimes used to show trend data,
 	 * and the comparison of multiple data sets side by side.
 	 */
-	BAR("bar", ScaleType.multi),
+	BAR("bar", ScaleType.MULTI),
 	/**
 	 * A horizontal bar chart is a variation on a vertical bar chart. It is sometimes used to show trend data, and the
 	 * comparison of multiple data sets side by side.
 	 */
-	HORIZONTAL_BAR("horizontalBar", ScaleType.multi),
+	HORIZONTAL_BAR("horizontalBar", ScaleType.MULTI),
 	/**
 	 * Pie chart is probably the most commonly used chart. It is divided into segments, the arc of each segment shows the
 	 * proportional value of each piece of data. It is excellent at showing the relational proportions between data. Pie and
@@ -44,7 +44,7 @@ public enum ChartType implements Type
 	 * cutoutPercentage. This equates what percentage of the inner should be cut out. This defaults to 0 for pie charts, and 50
 	 * for doughnuts.
 	 */
-	PIE("pie", ScaleType.none),
+	PIE("pie", ScaleType.NONE),
 	/**
 	 * Doughnut chart is probably the most commonly used chart. It is divided into segments, the arc of each segment shows the
 	 * proportional value of each piece of data. It is excellent at showing the relational proportions between data. Pie and
@@ -52,29 +52,29 @@ public enum ChartType implements Type
 	 * cutoutPercentage. This equates what percentage of the inner should be cut out. This defaults to 0 for pie charts, and 50
 	 * for doughnuts.
 	 */
-	DOUGHNUT("doughnut", ScaleType.none),
+	DOUGHNUT("doughnut", ScaleType.NONE),
 	/**
 	 * A radar chart is a way of showing multiple data points and the variation between them. They are often useful for
 	 * comparing the points of two or more different data sets.
 	 */
-	RADAR("radar", ScaleType.single),
+	RADAR("radar", ScaleType.SINGLE),
 	/**
 	 * Polar area charts are similar to pie charts, but each segment has the same angle - the radius of the segment differs
 	 * depending on the value. This type of chart is often useful when we want to show a comparison data similar to a pie chart,
 	 * but also show a scale of values for context.
 	 */
-	POLAR_AREA("polarArea", ScaleType.single),
+	POLAR_AREA("polarArea", ScaleType.SINGLE),
 	/**
 	 * Scatter charts are based on basic line charts with the x axis changed to a linear axis. To use a scatter chart, data must
 	 * be passed as objects containing X and Y properties.
 	 */
-	SCATTER("scatter", ScaleType.multi),
+	SCATTER("scatter", ScaleType.MULTI),
 	/**
 	 * A bubble chart is used to display three dimensions of data at the same time. The location of the bubble is determined by
 	 * the first two dimensions and the corresponding horizontal and vertical axes. The third dimension is represented by the
 	 * size of the individual bubbles.
 	 */
-	BUBBLE("bubble", ScaleType.multi);
+	BUBBLE("bubble", ScaleType.MULTI);
 
 	// name value of property
 	private final String value;

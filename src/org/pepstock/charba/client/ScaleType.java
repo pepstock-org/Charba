@@ -26,14 +26,14 @@ public enum ScaleType
 	/**
 	 * Multiple scales are defined for the chart, based on its type.
 	 */
-	multi,
+	MULTI,
 	/**
 	 * A single scale is defined for the chart, based on its type.
 	 */
-	single,
+	SINGLE,
 	/**
 	 * No scale is defined for the chart, based on its type.
 	 */
-	none
+	NONE
 
 }

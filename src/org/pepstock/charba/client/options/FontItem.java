@@ -37,10 +37,33 @@ public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaul
 	 */
 	enum Property implements Key
 	{
-		fontSize,
-		fontStyle,
-		fontColor,
-		fontFamily,
+		FONT_SIZE("fontSize"),
+		FONT_STYLE("fontStyle"),
+		FONT_COLOR("fontColor"),
+		FONT_FAMILY("fontFamily");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -62,7 +85,7 @@ public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaul
 	 * @param fontSize the font size.
 	 */
 	public void setFontSize(int fontSize) {
-		setValue(Property.fontSize, fontSize);
+		setValue(Property.FONT_SIZE, fontSize);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -73,7 +96,7 @@ public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaul
 	 * @return the font size.
 	 */
 	public int getFontSize() {
-		return getValue(Property.fontSize, getDefaultValues().getFontSize());
+		return getValue(Property.FONT_SIZE, getDefaultValues().getFontSize());
 	}
 
 	/**
@@ -82,7 +105,7 @@ public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaul
 	 * @param fontStyle Font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
-		setValue(Property.fontStyle, fontStyle);
+		setValue(Property.FONT_STYLE, fontStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -93,7 +116,7 @@ public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaul
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.fontStyle, FontStyle.class, getDefaultValues().getFontStyle());
+		return getValue(Property.FONT_STYLE, FontStyle.class, getDefaultValues().getFontStyle());
 	}
 
 	/**
@@ -111,7 +134,7 @@ public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaul
 	 * @param fontColor Font color
 	 */
 	public void setFontColor(String fontColor) {
-		setValue(Property.fontColor, fontColor);
+		setValue(Property.FONT_COLOR, fontColor);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -122,7 +145,7 @@ public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaul
 	 * @return Font color.
 	 */
 	public String getFontColorAsString() {
-		return getValue(Property.fontColor, getDefaultValues().getFontColorAsString());
+		return getValue(Property.FONT_COLOR, getDefaultValues().getFontColorAsString());
 	}
 
 	/**
@@ -140,7 +163,7 @@ public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaul
 	 * @param fontFamily Font family, follows CSS font-family options.
 	 */
 	public void setFontFamily(String fontFamily) {
-		setValue(Property.fontFamily, fontFamily);
+		setValue(Property.FONT_FAMILY, fontFamily);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -151,7 +174,7 @@ public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaul
 	 * @return Font family, follows CSS font-family options.
 	 */
 	public String getFontFamily() {
-		return getValue(Property.fontFamily, getDefaultValues().getFontFamily());
+		return getValue(Property.FONT_FAMILY, getDefaultValues().getFontFamily());
 	}
 
 }

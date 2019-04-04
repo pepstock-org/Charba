@@ -34,7 +34,7 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 * @param chart chart instance
 	 */
 	public CartesianCategoryAxis(AbstractChart<?, ?> chart) {
-		this(chart, CartesianAxisType.x);
+		this(chart, CartesianAxisType.X);
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	public CartesianCategoryAxis(AbstractChart<?, ?> chart, CartesianAxisType cartesianType) {
 		super(chart, cartesianType);
 		// sets axis type
-		super.setType(AxisType.category);
+		super.setType(AxisType.CATEGORY);
 		// creates the ticks instance
 		this.ticks = new CartesianCategoryTick(this);
 	}

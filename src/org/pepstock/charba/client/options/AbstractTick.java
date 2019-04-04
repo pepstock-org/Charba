@@ -36,7 +36,30 @@ public abstract class AbstractTick<P extends AbstractModel<?, ?>, D extends IsDe
 	 */
 	private enum Property implements Key
 	{
-		lineHeight
+		LINE_HEIGHT("lineHeight");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -58,7 +81,7 @@ public abstract class AbstractTick<P extends AbstractModel<?, ?>, D extends IsDe
 	 * @param lineHeight height of an individual line of text.
 	 */
 	public void setLineHeight(double lineHeight) {
-		setValue(Property.lineHeight, lineHeight);
+		setValue(Property.LINE_HEIGHT, lineHeight);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -69,7 +92,7 @@ public abstract class AbstractTick<P extends AbstractModel<?, ?>, D extends IsDe
 	 * @param lineHeight height of an individual line of text.
 	 */
 	public void setLineHeight(String lineHeight) {
-		setValue(Property.lineHeight, lineHeight);
+		setValue(Property.LINE_HEIGHT, lineHeight);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -83,9 +106,9 @@ public abstract class AbstractTick<P extends AbstractModel<?, ?>, D extends IsDe
 		// creates default
 		double defaultValue = getDefaultValues().getLineHeight();
 		// checks type if number
-		if (ObjectType.NUMBER.equals(type(Property.lineHeight))) {
+		if (ObjectType.NUMBER.equals(type(Property.LINE_HEIGHT))) {
 			// reads and returns as double
-			return getValue(Property.lineHeight, defaultValue);
+			return getValue(Property.LINE_HEIGHT, defaultValue);
 		}
 		// if here, is not a number
 		// then returns the default
@@ -101,9 +124,9 @@ public abstract class AbstractTick<P extends AbstractModel<?, ?>, D extends IsDe
 		// creates default
 		String defaultValue = String.valueOf(getDefaultValues().getLineHeight());
 		// checks type if string
-		if (ObjectType.STRING.equals(type(Property.lineHeight))) {
+		if (ObjectType.STRING.equals(type(Property.LINE_HEIGHT))) {
 			// reads and returns as string
-			return getValue(Property.lineHeight, defaultValue);
+			return getValue(Property.LINE_HEIGHT, defaultValue);
 		}
 		// if here, is not a number
 		// then returns the default

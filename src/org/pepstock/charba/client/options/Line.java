@@ -30,7 +30,6 @@ import org.pepstock.charba.client.enums.FillingMode;
 import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.RelativeDatasetIndexFill;
-import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Line elements are used to represent the line in a line chart.
@@ -44,17 +43,40 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 */
 	private enum Property implements Key
 	{
-		tension,
-		borderCapStyle,
-		borderDash,
-		borderDashOffset,
-		borderJoinStyle,
-		cubicInterpolationMode,
-		capBezierPoints,
-		fill,
-		stepped,
+		TENSION("tension"),
+		BORDER_CAP_STYLE("borderCapStyle"),
+		BORDER_DASH("borderDash"),
+		BORDER_DASH_OFFSET("borderDashOffset"),
+		BORDER_JOIN_STYLE("borderJoinStyle"),
+		CUBIC_INTERPOLATION_MODE("cubicInterpolationMode"),
+		CAP_BEZIER_POINTS("capBezierPoints"),
+		FILL("fill"),
+		STEPPED("stepped"),
 		// internal property key to map the type of FILL property
-		_charbaFillingMode
+		CHARBA_FILLING_MODE("_charbaFillingMode");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -76,7 +98,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @param tension the Bezier curve tension (0 for no Bezier curves).
 	 */
 	public void setTension(double tension) {
-		setValue(Property.tension, tension);
+		setValue(Property.TENSION, tension);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -87,7 +109,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @return the Bezier curve tension (0 for no Bezier curves).
 	 */
 	public double getTension() {
-		return getValue(Property.tension, getDefaultValues().getTension());
+		return getValue(Property.TENSION, getDefaultValues().getTension());
 	}
 
 	/**
@@ -97,7 +119,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @param borderCapStyle how the end points of every line are drawn.
 	 */
 	public void setBorderCapStyle(CapStyle borderCapStyle) {
-		setValue(Property.borderCapStyle, borderCapStyle);
+		setValue(Property.BORDER_CAP_STYLE, borderCapStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -109,7 +131,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @return how the end points of every line are drawn.
 	 */
 	public CapStyle getBorderCapStyle() {
-		return getValue(Property.borderCapStyle, CapStyle.class, getDefaultValues().getBorderCapStyle());
+		return getValue(Property.BORDER_CAP_STYLE, CapStyle.class, getDefaultValues().getBorderCapStyle());
 	}
 
 	/**
@@ -120,7 +142,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 *            lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
-		setArrayValue(Property.borderDash, ArrayInteger.fromOrNull(borderDash));
+		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -133,7 +155,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 *         lines and gaps which describe the pattern.
 	 */
 	public List<Integer> getBorderDash() {
-		ArrayInteger array = getArrayValue(Property.borderDash);
+		ArrayInteger array = getArrayValue(Property.BORDER_DASH);
 		return ArrayListHelper.list(array);
 	}
 
@@ -143,7 +165,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @param borderDashOffset the line dash pattern offset or "phase".
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
-		setValue(Property.borderDashOffset, borderDashOffset);
+		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -154,7 +176,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @return the line dash pattern offset or "phase".
 	 */
 	public int getBorderDashOffset() {
-		return getValue(Property.borderDashOffset, getDefaultValues().getBorderDashOffset());
+		return getValue(Property.BORDER_DASH_OFFSET, getDefaultValues().getBorderDashOffset());
 	}
 
 	/**
@@ -166,7 +188,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @param borderJoinStyle there are three possible values for this property: round, bevel and miter.
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
-		setValue(Property.borderJoinStyle, borderJoinStyle);
+		setValue(Property.BORDER_JOIN_STYLE, borderJoinStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -180,7 +202,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @return there are three possible values for this property: round, bevel and miter.
 	 */
 	public JoinStyle getBorderJoinStyle() {
-		return getValue(Property.borderJoinStyle, JoinStyle.class, getDefaultValues().getBorderJoinStyle());
+		return getValue(Property.BORDER_JOIN_STYLE, JoinStyle.class, getDefaultValues().getBorderJoinStyle());
 	}
 
 	/**
@@ -189,7 +211,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @param capBezierPoints <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
 	 */
 	public void setCapBezierPoints(boolean capBezierPoints) {
-		setValue(Property.capBezierPoints, capBezierPoints);
+		setValue(Property.CAP_BEZIER_POINTS, capBezierPoints);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -200,7 +222,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @return <code>true</code> to keep Bezier control inside the chart, <code>false</code> for no restriction.
 	 */
 	public boolean isCapBezierPoints() {
-		return getValue(Property.capBezierPoints, getDefaultValues().isCapBezierPoints());
+		return getValue(Property.CAP_BEZIER_POINTS, getDefaultValues().isCapBezierPoints());
 	}
 
 	/**
@@ -222,7 +244,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @param mode algorithm used to interpolate a smooth curve from the discrete data points
 	 */
 	public void setCubicInterpolationMode(CubicInterpolationMode mode) {
-		setValue(Property.cubicInterpolationMode, mode != null ? mode.getValue() : UndefinedValues.STRING);
+		setValue(Property.CUBIC_INTERPOLATION_MODE, mode);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -233,8 +255,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @return algorithm used to interpolate a smooth curve from the discrete data points. Default is <code>'default'</code>.
 	 */
 	public CubicInterpolationMode getCubicInterpolationMode() {
-		String value = getValue(Property.cubicInterpolationMode, UndefinedValues.STRING);
-		return CubicInterpolationMode.getModeByValue(value, getDefaultValues().getCubicInterpolationMode());
+		return getValue(Property.CUBIC_INTERPOLATION_MODE, CubicInterpolationMode.class, getDefaultValues().getCubicInterpolationMode());
 	}
 
 	/**
@@ -243,9 +264,9 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @param fill <code>true</code> to fill, otherwise <code>false</code>.
 	 */
 	public void setFill(boolean fill) {
-		setValue(Property.fill, fill);
+		setValue(Property.FILL, fill);
 		// stores the filling mode
-		setValue(Property._charbaFillingMode, FillingMode.predefinedBoolean);
+		setValue(Property.CHARBA_FILLING_MODE, FillingMode.PREDEFINED_BOOLEAN);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -275,26 +296,26 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 */
 	public void setFill(IsFill fill) {
 		// checks if is no fill
-		if (Fill.nofill.equals(fill)) {
+		if (Fill.FALSE.equals(fill)) {
 			// sets the boolean value instead of string one
-			setValue(Property.fill, false);
+			setValue(Property.FILL, false);
 			// stores the filling mode
-			setValue(Property._charbaFillingMode, FillingMode.predefinedBoolean);
+			setValue(Property.CHARBA_FILLING_MODE, FillingMode.PREDEFINED_BOOLEAN);
 		} else if (Fill.isPredefined(fill)) {
 			// sets value
-			setValue(Property.fill, fill);
+			setValue(Property.FILL, fill);
 			// stores the filling mode
-			setValue(Property._charbaFillingMode, fill.getMode());
-		} else if (FillingMode.absoluteDatasetIndex.equals(fill.getMode())) {
+			setValue(Property.CHARBA_FILLING_MODE, fill.getMode());
+		} else if (FillingMode.ABSOLUTE_DATASET_INDEX.equals(fill.getMode())) {
 			// sets value
-			setValue(Property.fill, fill.getValueAsInt());
+			setValue(Property.FILL, fill.getValueAsInt());
 			// stores the filling mode
-			setValue(Property._charbaFillingMode, FillingMode.absoluteDatasetIndex);
-		} else if (FillingMode.relativeDatasetIndex.equals(fill.getMode())) {
+			setValue(Property.CHARBA_FILLING_MODE, FillingMode.ABSOLUTE_DATASET_INDEX);
+		} else if (FillingMode.RELATIVE_DATASET_INDEX.equals(fill.getMode())) {
 			// sets value
-			setValue(Property.fill, fill.getValue());
+			setValue(Property.FILL, fill.getValue());
 			// stores the filling mode
-			setValue(Property._charbaFillingMode, FillingMode.relativeDatasetIndex);
+			setValue(Property.CHARBA_FILLING_MODE, FillingMode.RELATIVE_DATASET_INDEX);
 		}
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -308,27 +329,27 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 */
 	public IsFill getFill() {
 		// checks if there is the property
-		if (has(Property._charbaFillingMode)) {
+		if (has(Property.CHARBA_FILLING_MODE)) {
 			// gets the filling mode
-			FillingMode mode = getValue(Property._charbaFillingMode, FillingMode.class, FillingMode.predefined);
+			FillingMode mode = getValue(Property.CHARBA_FILLING_MODE, FillingMode.class, FillingMode.PREDEFINED);
 			// checks all possible types of filling mode
 			// to return the right value
-			if (FillingMode.predefinedBoolean.equals(mode)) {
+			if (FillingMode.PREDEFINED_BOOLEAN.equals(mode)) {
 				// returns no fill
-				return getValue(Property.fill, false) ? Fill.origin : Fill.nofill;
-			} else if (FillingMode.predefined.equals(mode)) {
+				return getValue(Property.FILL, false) ? Fill.ORIGIN : Fill.FALSE;
+			} else if (FillingMode.PREDEFINED.equals(mode)) {
 				// gets the fill value, using null as default
-				IsFill fill = getValue(Property.fill, Fill.class, null);
+				IsFill fill = getValue(Property.FILL, Fill.class, null);
 				// if null, returns the default one
 				return fill == null ? getDefaultValues().getFill() : fill;
-			} else if (FillingMode.absoluteDatasetIndex.equals(mode)) {
+			} else if (FillingMode.ABSOLUTE_DATASET_INDEX.equals(mode)) {
 				// the default here is 0 because the property must be set
 				// setting 0, an exception will be thrown
-				return Fill.getFill(getValue(Property.fill, AbsoluteDatasetIndexFill.DEFAULT_VALUE_AS_INT));
-			} else if (FillingMode.relativeDatasetIndex.equals(mode)) {
+				return Fill.getFill(getValue(Property.FILL, AbsoluteDatasetIndexFill.DEFAULT_VALUE_AS_INT));
+			} else if (FillingMode.RELATIVE_DATASET_INDEX.equals(mode)) {
 				// the default here is 0 because the property must be set
 				// setting 0, an exception will be thrown
-				return Fill.getFill(getValue(Property.fill, RelativeDatasetIndexFill.DEFAULT_VALUE));
+				return Fill.getFill(getValue(Property.FILL, RelativeDatasetIndexFill.DEFAULT_VALUE));
 			}
 		}
 		// returns the default
@@ -341,7 +362,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @param stepped <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 */
 	public void setStepped(boolean stepped) {
-		setValue(Property.stepped, stepped);
+		setValue(Property.STEPPED, stepped);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -352,6 +373,6 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 * @return <code>true</code> to show the line as a stepped line (tension will be ignored).
 	 */
 	public boolean isStepped() {
-		return getValue(Property.stepped, getDefaultValues().isStepped());
+		return getValue(Property.STEPPED, getDefaultValues().isStepped());
 	}
 }

@@ -35,11 +35,34 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 */
 	private enum Property implements Key
 	{
-		labels,
-		display,
-		position,
-		fullWidth,
-		reverse
+		LABELS("labels"),
+		DISPLAY("display"),
+		POSITION("position"),
+		FULL_WIDTH("fullWidth"),
+		REVERSE("reverse");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -54,7 +77,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	Legend(Options options, Key childKey, IsDefaultLegend defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 		// gets sub element
-		labels = new LegendLabels(this, Property.labels, getDefaultValues().getLabels(), getValue(Property.labels));
+		labels = new LegendLabels(this, Property.LABELS, getDefaultValues().getLabels(), getValue(Property.LABELS));
 	}
 
 	/**
@@ -72,7 +95,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 * @param display if the legend is shown.
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.display, display);
+		setValue(Property.DISPLAY, display);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -83,7 +106,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 * @return <code>true</code> if the legend is shown.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, getDefaultValues().isDisplay());
+		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -92,7 +115,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 * @param fullWidth Marks that this box should take the full width of the canvas (pushing down other boxes)
 	 */
 	public void setFullWidth(boolean fullWidth) {
-		setValue(Property.fullWidth, fullWidth);
+		setValue(Property.FULL_WIDTH, fullWidth);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -103,7 +126,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 * @return <code>true</code> if marks that this box should take the full width of the canvas (pushing down other boxes).
 	 */
 	public boolean isFullWidth() {
-		return getValue(Property.fullWidth, getDefaultValues().isFullWidth());
+		return getValue(Property.FULL_WIDTH, getDefaultValues().isFullWidth());
 	}
 
 	/**
@@ -112,7 +135,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 * @param reverse legend will show datasets in reverse order.
 	 */
 	public void setReverse(boolean reverse) {
-		setValue(Property.reverse, reverse);
+		setValue(Property.REVERSE, reverse);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -123,7 +146,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 * @return <code>true</code> if legend will show datasets in reverse order.
 	 */
 	public boolean isReverse() {
-		return getValue(Property.reverse, getDefaultValues().isReverse());
+		return getValue(Property.REVERSE, getDefaultValues().isReverse());
 	}
 
 	/**
@@ -132,7 +155,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 * @param position Position of the legend.
 	 */
 	public void setPosition(Position position) {
-		setValue(Property.position, position);
+		setValue(Property.POSITION, position);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -143,6 +166,6 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 * @return position of the legend.
 	 */
 	public Position getPosition() {
-		return getValue(Property.position, Position.class, getDefaultValues().getPosition());
+		return getValue(Property.POSITION, Position.class, getDefaultValues().getPosition());
 	}
 }

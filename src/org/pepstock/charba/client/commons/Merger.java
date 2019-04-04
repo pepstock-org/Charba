@@ -113,10 +113,10 @@ public final class Merger {
 		NativeObject globalOptions = Helpers.get().clone(global.getNativeObject());
 		// checks if the chart options has got scale (only 1)
 		// chart without scales don't do anything
-		if (ScaleType.single.equals(type.scaleType())) {
+		if (ScaleType.SINGLE.equals(type.scaleType())) {
 			// manages single scale chart type
 			handleSingleScalesType(chartOptions, scaleOptions);
-		} else if (ScaleType.multi.equals(type.scaleType())) {
+		} else if (ScaleType.MULTI.equals(type.scaleType())) {
 			// manages multi scale chart type
 			handleMultiScalesType(chartOptions, scaleOptions);
 		}

@@ -33,7 +33,30 @@ public class Rectangle extends AbstractElement<IsDefaultRectangle> implements Is
 	 */
 	private enum Property implements Key
 	{
-		borderSkipped
+		BORDER_SKIPPED("borderSkipped");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -59,7 +82,7 @@ public class Rectangle extends AbstractElement<IsDefaultRectangle> implements Is
 		// if not false, otherwise ignore it
 		if (!borderskip) {
 			// stores boolean value
-			setValue(Property.borderSkipped, BorderSkipped.noborderskipped);
+			setValue(Property.BORDER_SKIPPED, BorderSkipped.FALSE);
 		}
 	}
 
@@ -70,12 +93,12 @@ public class Rectangle extends AbstractElement<IsDefaultRectangle> implements Is
 	 */
 	public void setBorderSkipped(BorderSkipped position) {
 		// checks if setting a false value
-		if (BorderSkipped.noborderskipped.equals(position)) {
+		if (BorderSkipped.FALSE.equals(position)) {
 			// stores boolean value
-			setValue(Property.borderSkipped, false);
+			setValue(Property.BORDER_SKIPPED, false);
 		} else {
 			// otherwise stores the key value
-			setValue(Property.borderSkipped, position);
+			setValue(Property.BORDER_SKIPPED, position);
 		}
 		// checks if the node is already added to parent
 		checkAndAddToParent();
@@ -88,12 +111,12 @@ public class Rectangle extends AbstractElement<IsDefaultRectangle> implements Is
 	 */
 	public BorderSkipped getBorderSkipped() {
 		// checks if 'false' has been set
-		if (ObjectType.BOOLEAN.equals(type(Property.borderSkipped))) {
+		if (ObjectType.BOOLEAN.equals(type(Property.BORDER_SKIPPED))) {
 			// returns is false
-			return BorderSkipped.noborderskipped;
+			return BorderSkipped.FALSE;
 		}
 		// otherwise returns the enum value as string
-		return getValue(Property.borderSkipped, BorderSkipped.class, getDefaultValues().getBorderSkipped());
+		return getValue(Property.BORDER_SKIPPED, BorderSkipped.class, getDefaultValues().getBorderSkipped());
 	}
 
 }

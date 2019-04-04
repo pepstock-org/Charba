@@ -31,9 +31,32 @@ public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> 
 	 */
 	private enum Property implements Key
 	{
-		boxWidth,
-		padding,
-		usePointStyle
+		BOX_WIDTH("boxWidth"),
+		PADDING("padding"),
+		USE_POINT_STYLE("usePointStyle");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -56,7 +79,7 @@ public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> 
 	 *            in this case).
 	 */
 	public void setUsePointStyle(boolean usePointStyle) {
-		setValue(Property.usePointStyle, usePointStyle);
+		setValue(Property.USE_POINT_STYLE, usePointStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -69,7 +92,7 @@ public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> 
 	 *         used in this case).
 	 */
 	public boolean isUsePointStyle() {
-		return getValue(Property.usePointStyle, getDefaultValues().isUsePointStyle());
+		return getValue(Property.USE_POINT_STYLE, getDefaultValues().isUsePointStyle());
 	}
 
 	/**
@@ -78,7 +101,7 @@ public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> 
 	 * @param boxWidth width of colored box.
 	 */
 	public void setBoxWidth(int boxWidth) {
-		setValue(Property.boxWidth, boxWidth);
+		setValue(Property.BOX_WIDTH, boxWidth);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -89,7 +112,7 @@ public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> 
 	 * @return width of colored box.
 	 */
 	public int getBoxWidth() {
-		return getValue(Property.boxWidth, getDefaultValues().getBoxWidth());
+		return getValue(Property.BOX_WIDTH, getDefaultValues().getBoxWidth());
 	}
 
 	/**
@@ -98,7 +121,7 @@ public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> 
 	 * @param padding padding to apply around labels. Only top and bottom are implemented.
 	 */
 	public void setPadding(int padding) {
-		setValue(Property.padding, padding);
+		setValue(Property.PADDING, padding);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -109,7 +132,7 @@ public final class LegendLabels extends FontItem<Legend, IsDefaultLegendLabels> 
 	 * @return padding to apply around labels. Only top and bottom are implemented.
 	 */
 	public int getPadding() {
-		return getValue(Property.padding, getDefaultValues().getPadding());
+		return getValue(Property.PADDING, getDefaultValues().getPadding());
 	}
 
 }

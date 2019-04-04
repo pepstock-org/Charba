@@ -38,14 +38,37 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 */
 	private enum Property implements Key
 	{
-		radius,
-		pointStyle,
-		hitRadius,
-		hoverRadius,
-		hoverBorderWidth,
-		rotation,
+		RADIUS("radius"),
+		POINT_STYLE("pointStyle"),
+		HIT_RADIUS("hitRadius"),
+		HOVER_RADIUS("hoverRadius"),
+		HOVER_BORDER_WIDTH("hoverBorderWidth"),
+		ROTATION("rotation"),
 		// internal key to store if point style is an image or not
-		_charbaPointStyle
+		CHARBA_POINT_STYLE("_charbaPointStyle");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -67,7 +90,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @param radius array of the radius of the point shape.
 	 */
 	public void setRadius(double radius) {
-		setValue(Property.radius, radius);
+		setValue(Property.RADIUS, radius);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -78,7 +101,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @return list of the radius of the point when hovered.
 	 */
 	public double getRadius() {
-		return getValue(Property.radius, getDefaultValues().getRadius());
+		return getValue(Property.RADIUS, getDefaultValues().getRadius());
 	}
 
 	/**
@@ -87,11 +110,11 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @param pointStyle array of the style of the point.
 	 */
 	public void setPointStyle(PointStyle pointStyle) {
-		setValue(Property.pointStyle, pointStyle);
+		setValue(Property.POINT_STYLE, pointStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 		// remove if exist flag
-		removeIfExists(Property._charbaPointStyle);
+		removeIfExists(Property.CHARBA_POINT_STYLE);
 	}
 
 	/**
@@ -101,8 +124,8 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 */
 	public PointStyle getPointStyle() {
 		// checks if image as point style has been used
-		if (!getValue(Property._charbaPointStyle, false)) {
-			return getValue(Property.pointStyle, PointStyle.class, getDefaultValues().getPointStyle());
+		if (!getValue(Property.CHARBA_POINT_STYLE, false)) {
+			return getValue(Property.POINT_STYLE, PointStyle.class, getDefaultValues().getPointStyle());
 		} else {
 			// if here, means the point style as stored as images
 			return null;
@@ -135,17 +158,17 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @param pointStyle image element of the style of the point as image.
 	 */
 	public void setPointStyle(ImageElement pointStyle) {
-		setValue(Property.pointStyle, pointStyle);
+		setValue(Property.POINT_STYLE, pointStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 		// checks if there is the property
-		if (has(Property.pointStyle)) {
+		if (has(Property.POINT_STYLE)) {
 			// sets flags
-			setValue(Property._charbaPointStyle, true);
+			setValue(Property.CHARBA_POINT_STYLE, true);
 		} else {
 			// image not set
 			// remove point style
-			removeIfExists(Property._charbaPointStyle);
+			removeIfExists(Property.CHARBA_POINT_STYLE);
 		}
 	}
 
@@ -156,9 +179,9 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 */
 	public ImageElement getPointStyleAsImages() {
 		// checks if image as point style has been used
-		if (getValue(Property._charbaPointStyle, false)) {
+		if (getValue(Property.CHARBA_POINT_STYLE, false)) {
 			// gets value
-			return getValue(Property.pointStyle, UndefinedValues.IMAGE_ELEMENT);
+			return getValue(Property.POINT_STYLE, UndefinedValues.IMAGE_ELEMENT);
 		} else {
 			// if here, means the point style as stored as strings
 			return null;
@@ -171,7 +194,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @param hitRadius the pixel size of the non-displayed point.
 	 */
 	public void setHitRadius(double hitRadius) {
-		setValue(Property.hitRadius, hitRadius);
+		setValue(Property.HIT_RADIUS, hitRadius);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -182,7 +205,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @return the pixel size of the non-displayed point.
 	 */
 	public double getHitRadius() {
-		return getValue(Property.hitRadius, getDefaultValues().getHitRadius());
+		return getValue(Property.HIT_RADIUS, getDefaultValues().getHitRadius());
 	}
 
 	/**
@@ -191,7 +214,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @param hoverRadius the radius of the point when hovered.
 	 */
 	public void setHoverRadius(double hoverRadius) {
-		setValue(Property.hoverRadius, hoverRadius);
+		setValue(Property.HOVER_RADIUS, hoverRadius);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -202,7 +225,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @return the radius of the point when hovered.
 	 */
 	public double getHoverRadius() {
-		return getValue(Property.hoverRadius, getDefaultValues().getHoverRadius());
+		return getValue(Property.HOVER_RADIUS, getDefaultValues().getHoverRadius());
 	}
 
 	/**
@@ -211,7 +234,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @param hoverBorderWidth the border width of point when hovered.
 	 */
 	public void setHoverBorderWidth(int hoverBorderWidth) {
-		setValue(Property.hoverBorderWidth, hoverBorderWidth);
+		setValue(Property.HOVER_BORDER_WIDTH, hoverBorderWidth);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -222,7 +245,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @return the border width of point when hovered.
 	 */
 	public int getHoverBorderWidth() {
-		return getValue(Property.hoverBorderWidth, getDefaultValues().getHoverBorderWidth());
+		return getValue(Property.HOVER_BORDER_WIDTH, getDefaultValues().getHoverBorderWidth());
 	}
 
 	/**
@@ -231,7 +254,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @param rotation the point rotation (in degrees).
 	 */
 	public void setRotation(double rotation) {
-		setValue(Property.rotation, rotation);
+		setValue(Property.ROTATION, rotation);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -242,7 +265,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	 * @return the point rotation (in degrees).
 	 */
 	public double getRotation() {
-		return getValue(Property.rotation, getDefaultValues().getRotation());
+		return getValue(Property.ROTATION, getDefaultValues().getRotation());
 	}
 
 }

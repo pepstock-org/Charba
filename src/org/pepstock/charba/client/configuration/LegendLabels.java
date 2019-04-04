@@ -107,8 +107,31 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	 */
 	private enum Property implements Key
 	{
-		generateLabels,
-		filter
+		GENERATE_LABELS("generateLabels"),
+		FILTER("filter");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -333,10 +356,10 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (filterCallback != null) {
 			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.filter, filterCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.FILTER, filterCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.filter, null);
+			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.FILTER, null);
 		}
 	}
 
@@ -360,10 +383,10 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 		// checks if callback is consistent
 		if (labelsCallback != null) {
 			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.generateLabels, labelsCallbackProxy.getProxy());
+			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.GENERATE_LABELS, labelsCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.generateLabels, null);
+			getConfiguration().setCallback(getConfiguration().getLegend().getLabels(), Property.GENERATE_LABELS, null);
 		}
 	}
 }

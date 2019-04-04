@@ -38,11 +38,34 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	 */
 	private enum Property implements Key
 	{
-		display,
-		color,
-		lineWidth,
-		borderDash,
-		borderDashOffset
+		DISPLAY("display"),
+		COLOR("color"),
+		LINE_WIDTH("lineWidth"),
+		BORDER_DASH("borderDash"),
+		BORDER_DASH_OFFSET("borderDashOffset");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -64,7 +87,7 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	 * @param display if <code>true</code>, angle lines are shown
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.display, display);
+		setValue(Property.DISPLAY, display);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -75,7 +98,7 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	 * @return if <code>true</code>, angle lines are shown.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, getDefaultValues().isDisplay());
+		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -93,7 +116,7 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	 * @param color color of angled lines.
 	 */
 	public void setColor(String color) {
-		setValue(Property.color, color);
+		setValue(Property.COLOR, color);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -104,7 +127,7 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	 * @return color of angled lines.
 	 */
 	public String getColorAsString() {
-		return getValue(Property.color, getDefaultValues().getColorAsString());
+		return getValue(Property.COLOR, getDefaultValues().getColorAsString());
 	}
 
 	/**
@@ -122,7 +145,7 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	 * @param lineWidth width of angled lines.
 	 */
 	public void setLineWidth(int lineWidth) {
-		setValue(Property.lineWidth, lineWidth);
+		setValue(Property.LINE_WIDTH, lineWidth);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -133,7 +156,7 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	 * @return width of angled lines.
 	 */
 	public int getLineWidth() {
-		return getValue(Property.lineWidth, getDefaultValues().getLineWidth());
+		return getValue(Property.LINE_WIDTH, getDefaultValues().getLineWidth());
 	}
 
 	/**
@@ -143,7 +166,7 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	 * @param borderDash the line dash pattern used when stroking lines
 	 */
 	public void setBorderDash(int... borderDash) {
-		setArrayValue(Property.borderDash, ArrayInteger.fromOrNull(borderDash));
+		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -155,7 +178,7 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	 * @return the line dash pattern used when stroking lines
 	 */
 	public List<Integer> getBorderDash() {
-		ArrayInteger array = getArrayValue(Property.borderDash);
+		ArrayInteger array = getArrayValue(Property.BORDER_DASH);
 		return ArrayListHelper.list(array);
 	}
 
@@ -165,7 +188,7 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	 * @param borderDashOffset Offset for line dashes.
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
-		setValue(Property.borderDashOffset, borderDashOffset);
+		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -176,6 +199,6 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	 * @return Offset for line dashes.
 	 */
 	public int getBorderDashOffset() {
-		return getValue(Property.borderDashOffset, getDefaultValues().getBorderDashOffset());
+		return getValue(Property.BORDER_DASH_OFFSET, getDefaultValues().getBorderDashOffset());
 	}
 }

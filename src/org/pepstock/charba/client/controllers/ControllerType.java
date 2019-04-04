@@ -34,12 +34,12 @@ public final class ControllerType implements Type {
 	private final ChartType chartType;
 
 	/**
-	 * Creates new chart type with scale type {@link ScaleType#multi} as default.
+	 * Creates new chart type with scale type {@link ScaleType#MULTI} as default.
 	 * 
 	 * @param type new chart type as string.
 	 */
 	public ControllerType(String type) {
-		this(type, ScaleType.multi);
+		this(type, ScaleType.MULTI);
 	}
 
 	/**

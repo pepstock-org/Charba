@@ -37,9 +37,32 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	 */
 	private enum Property implements Key
 	{
-		backgroundColor,
-		borderWidth,
-		borderColor
+		BACKGROUND_COLOR("backgroundColor"),
+		BORDER_WIDTH("borderWidth"),
+		BORDER_COLOR("borderColor");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -70,7 +93,7 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	 * @param backgroundColor the background color.
 	 */
 	public final void setBackgroundColor(String backgroundColor) {
-		setValue(Property.backgroundColor, backgroundColor);
+		setValue(Property.BACKGROUND_COLOR, backgroundColor);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -81,7 +104,7 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	 * @return the background color.
 	 */
 	public final String getBackgroundColorAsString() {
-		return getValue(Property.backgroundColor, getDefaultValues().getBackgroundColorAsString());
+		return getValue(Property.BACKGROUND_COLOR, getDefaultValues().getBackgroundColorAsString());
 	}
 
 	/**
@@ -99,7 +122,7 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	 * @param borderWidth the border width.
 	 */
 	public final void setBorderWidth(int borderWidth) {
-		setValue(Property.borderWidth, borderWidth);
+		setValue(Property.BORDER_WIDTH, borderWidth);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -110,7 +133,7 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	 * @return the border width.
 	 */
 	public final int getBorderWidth() {
-		return getValue(Property.borderWidth, getDefaultValues().getBorderWidth());
+		return getValue(Property.BORDER_WIDTH, getDefaultValues().getBorderWidth());
 	}
 
 	/**
@@ -128,7 +151,7 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	 * @param borderColor the border color.
 	 */
 	public final void setBorderColor(String borderColor) {
-		setValue(Property.borderColor, borderColor);
+		setValue(Property.BORDER_COLOR, borderColor);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -139,7 +162,7 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	 * @return the border color.
 	 */
 	public final String getBorderColorAsString() {
-		return getValue(Property.borderColor, getDefaultValues().getBorderColorAsString());
+		return getValue(Property.BORDER_COLOR, getDefaultValues().getBorderColorAsString());
 	}
 
 	/**

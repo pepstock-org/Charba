@@ -58,31 +58,54 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	private enum Property implements Key
 	{
-		hover,
-		elements,
-		layout,
-		animation,
-		tooltips,
-		legend,
-		title,
-		plugins,
-		responsive,
-		responsiveAnimationDuration,
-		maintainAspectRatio,
-		aspectRatio,
-		events,
-		defaultColor,
-		defaultFontColor,
-		defaultFontFamily,
-		defaultFontSize,
-		defaultFontStyle,
-		devicePixelRatio,
-		showLines,
-		spanGaps,
-		cutoutPercentage,
-		rotation,
-		circumference,
-		startAngle;
+		HOVER("hover"),
+		ELEMENTS("elements"),
+		LAYOUT("layout"),
+		ANIMATION("animation"),
+		TOOLTIPS("tooltips"),
+		LEGEND("legend"),
+		TITLE("title"),
+		PLUGINS("plugins"),
+		RESPONSIVE("responsive"),
+		RESPONSIVE_ANIMATION_DURATION("responsiveAnimationDuration"),
+		MAINTAIN_ASPECT_RATIO("maintainAspectRatio"),
+		ASPECT_RATIO("aspectRatio"),
+		EVENTS("events"),
+		DEFAULT_COLOR("defaultColor"),
+		DEFAULT_FONT_COLOR("defaultFontColor"),
+		DEFAULT_FONT_FAMILY("defaultFontFamily"),
+		DEFAULT_FONT_SIZE("defaultFontSize"),
+		DEFAULT_FONT_STYLE("defaultFontStyle"),
+		DEVICE_PIXEL_RATIO("devicePixelRatio"),
+		SHOW_LINES("showLines"),
+		SPAN_GAPS("spanGaps"),
+		CUTOUT_PERCENTAGE("cutoutPercentage"),
+		ROTATION("rotation"),
+		CIRCUMFERENCE("circumference"),
+		START_ANGLE("startAngle");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -104,14 +127,14 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	protected Options(IsDefaultOptions defaultValues, NativeObject nativeObject) {
 		super(defaultValues, nativeObject);
 		// gets all sub elements
-		animation = new Animation(this, Property.animation, getDefaultValues().getAnimation(), getValue(Property.animation));
-		legend = new Legend(this, Property.legend, getDefaultValues().getLegend(), getValue(Property.legend));
-		elements = new Elements(this, Property.elements, defaultValues.getElements(), getValue(Property.elements));
-		hover = new Hover(this, Property.hover, getDefaultValues().getHover(), getValue(Property.hover));
-		layout = new Layout(this, Property.layout, defaultValues.getLayout(), getValue(Property.layout));
-		title = new Title(this, Property.title, getDefaultValues().getTitle(), getValue(Property.title));
-		tooltips = new Tooltips(this, Property.tooltips, getDefaultValues().getTooltips(), getValue(Property.tooltips));
-		plugins = new Plugins(this, Property.plugins, getValue(Property.plugins));
+		animation = new Animation(this, Property.ANIMATION, getDefaultValues().getAnimation(), getValue(Property.ANIMATION));
+		legend = new Legend(this, Property.LEGEND, getDefaultValues().getLegend(), getValue(Property.LEGEND));
+		elements = new Elements(this, Property.ELEMENTS, defaultValues.getElements(), getValue(Property.ELEMENTS));
+		hover = new Hover(this, Property.HOVER, getDefaultValues().getHover(), getValue(Property.HOVER));
+		layout = new Layout(this, Property.LAYOUT, defaultValues.getLayout(), getValue(Property.LAYOUT));
+		title = new Title(this, Property.TITLE, getDefaultValues().getTitle(), getValue(Property.TITLE));
+		tooltips = new Tooltips(this, Property.TOOLTIPS, getDefaultValues().getTooltips(), getValue(Property.TOOLTIPS));
+		plugins = new Plugins(this, Property.PLUGINS, getValue(Property.PLUGINS));
 	}
 
 	/**
@@ -202,7 +225,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 */
 	public void setEvents(Event... events) {
 		// sets the array of events
-		setArrayValue(Property.events, ArrayString.fromOrNull(events));
+		setArrayValue(Property.EVENTS, ArrayString.fromOrNull(events));
 	}
 
 	/**
@@ -211,7 +234,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return the browser events that the chart should listen to for tooltips and hovering.
 	 */
 	public List<Event> getEvents() {
-		ArrayString array = getArrayValue(Property.events);
+		ArrayString array = getArrayValue(Property.EVENTS);
 		return ArrayListHelper.list(Event.class, array);
 	}
 
@@ -221,7 +244,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param responsive the resizing of the chart canvas when its container does.
 	 */
 	public void setResponsive(boolean responsive) {
-		setValue(Property.responsive, responsive);
+		setValue(Property.RESPONSIVE, responsive);
 	}
 
 	/**
@@ -230,7 +253,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return the resizing of the chart canvas when its container does.
 	 */
 	public boolean isResponsive() {
-		return getValue(Property.responsive, getDefaultValues().isResponsive());
+		return getValue(Property.RESPONSIVE, getDefaultValues().isResponsive());
 	}
 
 	/**
@@ -239,7 +262,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param milliseconds the duration in milliseconds it takes to animate to new size after a resize event.
 	 */
 	public void setResponsiveAnimationDuration(int milliseconds) {
-		setValue(Property.responsiveAnimationDuration, milliseconds);
+		setValue(Property.RESPONSIVE_ANIMATION_DURATION, milliseconds);
 	}
 
 	/**
@@ -248,7 +271,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return the duration in milliseconds it takes to animate to new size after a resize event.
 	 */
 	public int getResponsiveAnimationDuration() {
-		return getValue(Property.responsiveAnimationDuration, getDefaultValues().getResponsiveAnimationDuration());
+		return getValue(Property.RESPONSIVE_ANIMATION_DURATION, getDefaultValues().getResponsiveAnimationDuration());
 	}
 
 	/**
@@ -257,7 +280,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param maintainAspectRatio the maintaining of the original canvas aspect ratio (width / height) when resizing.
 	 */
 	public void setMaintainAspectRatio(boolean maintainAspectRatio) {
-		setValue(Property.maintainAspectRatio, maintainAspectRatio);
+		setValue(Property.MAINTAIN_ASPECT_RATIO, maintainAspectRatio);
 	}
 
 	/**
@@ -266,7 +289,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return the maintaining of the original canvas aspect ratio (width / height) when resizing.
 	 */
 	public boolean isMaintainAspectRatio() {
-		return getValue(Property.maintainAspectRatio, getDefaultValues().isMaintainAspectRatio());
+		return getValue(Property.MAINTAIN_ASPECT_RATIO, getDefaultValues().isMaintainAspectRatio());
 	}
 
 	/**
@@ -276,7 +299,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param ratio the aspect ratio.
 	 */
 	public void setAspectRatio(double ratio) {
-		setValue(Property.aspectRatio, ratio);
+		setValue(Property.ASPECT_RATIO, ratio);
 	}
 
 	/**
@@ -286,7 +309,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return the aspect ratio.
 	 */
 	public double getAspectRatio() {
-		return getValue(Property.aspectRatio, getDefaultValues().getAspectRatio());
+		return getValue(Property.ASPECT_RATIO, getDefaultValues().getAspectRatio());
 	}
 
 	/**
@@ -296,7 +319,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param ratio the pixel ratio.
 	 */
 	public void setDevicePixelRatio(double ratio) {
-		setValue(Property.devicePixelRatio, ratio);
+		setValue(Property.DEVICE_PIXEL_RATIO, ratio);
 	}
 
 	/**
@@ -307,7 +330,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return the pixel ratio.
 	 */
 	public double getDevicePixelRatio() {
-		return getValue(Property.devicePixelRatio, getDefaultValues().getDevicePixelRatio());
+		return getValue(Property.DEVICE_PIXEL_RATIO, getDefaultValues().getDevicePixelRatio());
 	}
 
 	/**
@@ -325,7 +348,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param defaultColor color to use into chart.
 	 */
 	public void setDefaultColor(String defaultColor) {
-		setValue(Property.defaultColor, defaultColor);
+		setValue(Property.DEFAULT_COLOR, defaultColor);
 	}
 
 	/**
@@ -334,7 +357,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return color to use into chart.
 	 */
 	public String getDefaultColorAsString() {
-		return getValue(Property.defaultColor, getDefaultValues().getDefaultColorAsString());
+		return getValue(Property.DEFAULT_COLOR, getDefaultValues().getDefaultColorAsString());
 	}
 
 	/**
@@ -361,7 +384,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param defaultFontColor font color to use into chart.
 	 */
 	public void setDefaultFontColor(String defaultFontColor) {
-		setValue(Property.defaultFontColor, defaultFontColor);
+		setValue(Property.DEFAULT_FONT_COLOR, defaultFontColor);
 	}
 
 	/**
@@ -370,7 +393,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return font color to use into chart.
 	 */
 	public String getDefaultFontColorAsString() {
-		return getValue(Property.defaultFontColor, getDefaultValues().getDefaultFontColorAsString());
+		return getValue(Property.DEFAULT_FONT_COLOR, getDefaultValues().getDefaultFontColorAsString());
 	}
 
 	/**
@@ -388,7 +411,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param fontSize Font size into chart.
 	 */
 	public void setDefaultFontSize(int fontSize) {
-		setValue(Property.defaultFontSize, fontSize);
+		setValue(Property.DEFAULT_FONT_SIZE, fontSize);
 	}
 
 	/**
@@ -397,7 +420,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return font size into chart.
 	 */
 	public int getDefaultFontSize() {
-		return getValue(Property.defaultFontSize, getDefaultValues().getDefaultFontSize());
+		return getValue(Property.DEFAULT_FONT_SIZE, getDefaultValues().getDefaultFontSize());
 	}
 
 	/**
@@ -408,7 +431,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 *            CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public void setDefaultFontStyle(FontStyle fontStyle) {
-		setValue(Property.defaultFontStyle, fontStyle.name());
+		setValue(Property.DEFAULT_FONT_STYLE, fontStyle.name());
 	}
 
 	/**
@@ -419,7 +442,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 *         font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getDefaultFontStyle() {
-		return getValue(Property.defaultFontStyle, FontStyle.class, getDefaultValues().getDefaultFontStyle());
+		return getValue(Property.DEFAULT_FONT_STYLE, FontStyle.class, getDefaultValues().getDefaultFontStyle());
 	}
 
 	/**
@@ -430,7 +453,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 *            CSS font-family options.
 	 */
 	public void setDefaultFontFamily(String fontFamily) {
-		setValue(Property.defaultFontFamily, fontFamily);
+		setValue(Property.DEFAULT_FONT_FAMILY, fontFamily);
 	}
 
 	/**
@@ -441,7 +464,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 *         font-family options.
 	 */
 	public String getDefaultFontFamily() {
-		return getValue(Property.defaultFontFamily, getDefaultValues().getDefaultFontFamily());
+		return getValue(Property.DEFAULT_FONT_FAMILY, getDefaultValues().getDefaultFontFamily());
 	}
 
 	/**
@@ -450,7 +473,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param showLine if <code>false</code>, the lines between points are not drawn.
 	 */
 	public void setShowLines(boolean showLine) {
-		setValue(Property.showLines, showLine);
+		setValue(Property.SHOW_LINES, showLine);
 	}
 
 	/**
@@ -459,7 +482,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return if <code>false</code>, the lines between points are not drawn..
 	 */
 	public boolean isShowLines() {
-		return getValue(Property.showLines, getDefaultValues().isShowLines());
+		return getValue(Property.SHOW_LINES, getDefaultValues().isShowLines());
 	}
 
 	/**
@@ -468,7 +491,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param spanGaps if <code>false</code>, <code>NaN</code> data causes a break in the line.
 	 */
 	public void setSpanGaps(boolean spanGaps) {
-		setValue(Property.spanGaps, spanGaps);
+		setValue(Property.SPAN_GAPS, spanGaps);
 	}
 
 	/**
@@ -477,7 +500,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return if <code>false</code>, <code>NaN</code> data causes a break in the line.
 	 */
 	public boolean isSpanGaps() {
-		return getValue(Property.spanGaps, getDefaultValues().isSpanGaps());
+		return getValue(Property.SPAN_GAPS, getDefaultValues().isSpanGaps());
 	}
 
 	/**
@@ -486,7 +509,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param cutoutPercentage the percentage of the chart that is cut out of the middle.
 	 */
 	public void setCutoutPercentage(double cutoutPercentage) {
-		setValue(Property.cutoutPercentage, cutoutPercentage);
+		setValue(Property.CUTOUT_PERCENTAGE, cutoutPercentage);
 	}
 
 	/**
@@ -495,7 +518,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return the percentage of the chart that is cut out of the middle.
 	 */
 	public double getCutoutPercentage() {
-		return getValue(Property.cutoutPercentage, getDefaultValues().getCutoutPercentage());
+		return getValue(Property.CUTOUT_PERCENTAGE, getDefaultValues().getCutoutPercentage());
 	}
 
 	/**
@@ -504,7 +527,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param rotation starting angle to draw arcs from.
 	 */
 	public void setRotation(double rotation) {
-		setValue(Property.rotation, rotation);
+		setValue(Property.ROTATION, rotation);
 	}
 
 	/**
@@ -513,7 +536,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return starting angle to draw arcs from.
 	 */
 	public double getRotation() {
-		return getValue(Property.rotation, getDefaultValues().getRotation());
+		return getValue(Property.ROTATION, getDefaultValues().getRotation());
 	}
 
 	/**
@@ -522,7 +545,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param circumference the sweep to allow arcs to cover.
 	 */
 	public void setCircumference(double circumference) {
-		setValue(Property.circumference, circumference);
+		setValue(Property.CIRCUMFERENCE, circumference);
 	}
 
 	/**
@@ -531,7 +554,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return the sweep to allow arcs to cover.
 	 */
 	public double getCircumference() {
-		return getValue(Property.circumference, getDefaultValues().getCircumference());
+		return getValue(Property.CIRCUMFERENCE, getDefaultValues().getCircumference());
 	}
 
 	/**
@@ -540,7 +563,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param startAngle starting angle to draw arcs for the first item in a dataset.
 	 */
 	public void setStartAngle(double startAngle) {
-		setValue(Property.startAngle, startAngle);
+		setValue(Property.START_ANGLE, startAngle);
 	}
 
 	/**
@@ -549,6 +572,6 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @return starting angle to draw arcs for the first item in a dataset.
 	 */
 	public double getStartAngle() {
-		return getValue(Property.startAngle, getDefaultValues().getStartAngle());
+		return getValue(Property.START_ANGLE, getDefaultValues().getStartAngle());
 	}
 }

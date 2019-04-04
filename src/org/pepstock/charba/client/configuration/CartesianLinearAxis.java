@@ -34,7 +34,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> {
 	 * @param chart chart instance
 	 */
 	public CartesianLinearAxis(AbstractChart<?, ?> chart) {
-		this(chart, CartesianAxisType.y);
+		this(chart, CartesianAxisType.Y);
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> {
 	public CartesianLinearAxis(AbstractChart<?, ?> chart, CartesianAxisType cartesianType) {
 		super(chart, cartesianType);
 		// sets axis type
-		super.setType(AxisType.linear);
+		super.setType(AxisType.LINEAR);
 		// creates the ticks instance
 		this.ticks = new CartesianLinearTick(this);
 	}

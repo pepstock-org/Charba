@@ -40,8 +40,31 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 	 */
 	private enum Property implements Key
 	{
-		display,
-		lineHeight
+		DISPLAY("display"),
+		LINE_HEIGHT("lineHeight");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -63,7 +86,7 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 	 * @param display if <code>true</code>, labels are shown.
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.display, display);
+		setValue(Property.DISPLAY, display);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -74,7 +97,7 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 	 * @return if <code>true</code>, labels are shown.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, getDefaultValues().isDisplay());
+		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -83,7 +106,7 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 	 * @param lineHeight height of an individual line of text.
 	 */
 	public void setLineHeight(double lineHeight) {
-		setValue(Property.lineHeight, lineHeight);
+		setValue(Property.LINE_HEIGHT, lineHeight);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -94,7 +117,7 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 	 * @param lineHeight height of an individual line of text.
 	 */
 	public void setLineHeight(String lineHeight) {
-		setValue(Property.lineHeight, lineHeight);
+		setValue(Property.LINE_HEIGHT, lineHeight);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -108,9 +131,9 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 		// creates default
 		double defaultValue = getDefaultValues().getLineHeight();
 		// checks type if number
-		if (ObjectType.NUMBER.equals(type(Property.lineHeight))) {
+		if (ObjectType.NUMBER.equals(type(Property.LINE_HEIGHT))) {
 			// reads and returns as double
-			return getValue(Property.lineHeight, defaultValue);
+			return getValue(Property.LINE_HEIGHT, defaultValue);
 		}
 		// if here, is not a number
 		// then returns the default
@@ -126,9 +149,9 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 		// creates default
 		String defaultValue = String.valueOf(getDefaultValues().getLineHeight());
 		// checks type if string
-		if (ObjectType.STRING.equals(type(Property.lineHeight))) {
+		if (ObjectType.STRING.equals(type(Property.LINE_HEIGHT))) {
 			// reads and returns as string
-			return getValue(Property.lineHeight, defaultValue);
+			return getValue(Property.LINE_HEIGHT, defaultValue);
 		}
 		// if here, is not a number
 		// then returns the default
@@ -142,7 +165,7 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 	 */
 	public void setFontColor(IsColor... fontColors) {
 		// stores value
-		setValueOrArray(FontItem.Property.fontColor, fontColors);
+		setValueOrArray(FontItem.Property.FONT_COLOR, fontColors);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -154,7 +177,7 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 	 */
 	public void setFontColor(String... fontColors) {
 		// stores value
-		setValueOrArray(FontItem.Property.fontColor, fontColors);
+		setValueOrArray(FontItem.Property.FONT_COLOR, fontColors);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -189,7 +212,7 @@ public final class PointLabels extends FontItem<Scale, IsDefaultPointLabels> imp
 	 */
 	public List<String> getFontColorsAsString() {
 		// returns list of colors
-		ArrayString array = getValueOrArray(FontItem.Property.fontColor, getDefaultValues().getFontColorAsString());
+		ArrayString array = getValueOrArray(FontItem.Property.FONT_COLOR, getDefaultValues().getFontColorAsString());
 		return ArrayListHelper.list(array);
 	}
 

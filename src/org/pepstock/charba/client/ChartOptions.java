@@ -67,7 +67,7 @@ public final class ChartOptions extends ScaledOptions {
 	 */
 	public Scales getScales() {
 		// checks if the chart is multi-scales
-		if (ScaleType.multi.equals(type.scaleType())) {
+		if (ScaleType.MULTI.equals(type.scaleType())) {
 			// returns the scales
 			return super.getScales();
 		}
@@ -82,7 +82,7 @@ public final class ChartOptions extends ScaledOptions {
 	 */
 	public Scale getScale() {
 		// checks if the chart is single-scales
-		if (ScaleType.single.equals(type.scaleType())) {
+		if (ScaleType.SINGLE.equals(type.scaleType())) {
 			// returns the scale
 			return super.getScale();
 		}

@@ -33,8 +33,31 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	 */
 	private enum Property implements Key
 	{
-		borderAlign,
-		weight
+		BORDER_ALIGN("borderAlign"),
+		WEIGHT("weight");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -56,7 +79,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	 * @param align the property to set the border alignment on chart datasets
 	 */
 	public void setBorderAlign(BorderAlign align) {
-		setValue(Property.borderAlign, align);
+		setValue(Property.BORDER_ALIGN, align);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -67,7 +90,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	 * @return the property to set the border alignment on chart datasets.
 	 */
 	public BorderAlign getBorderAlign() {
-		return getValue(Property.borderAlign, BorderAlign.class, getDefaultValues().getBorderAlign());
+		return getValue(Property.BORDER_ALIGN, BorderAlign.class, getDefaultValues().getBorderAlign());
 	}
 
 	/**
@@ -78,7 +101,7 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	 * @param weight the relative thickness of the dataset
 	 */
 	public void setWeight(double weight) {
-		setValue(Property.weight, weight);
+		setValue(Property.WEIGHT, weight);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -91,6 +114,6 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	 * @return the relative thickness of the dataset
 	 */
 	public double getWeight() {
-		return getValue(Property.weight, getDefaultValues().getWeight());
+		return getValue(Property.WEIGHT, getDefaultValues().getWeight());
 	}
 }

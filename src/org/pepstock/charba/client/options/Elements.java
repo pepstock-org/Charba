@@ -41,10 +41,33 @@ public final class Elements extends AbstractModel<Options, IsDefaultElements> im
 	 */
 	private enum Property implements Key
 	{
-		point,
-		line,
-		rectangle,
-		arc
+		POINT("point"),
+		LINE("line"),
+		RECTANGLE("rectangle"),
+		ARC("arc");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -59,10 +82,10 @@ public final class Elements extends AbstractModel<Options, IsDefaultElements> im
 	Elements(Options options, Key childKey, IsDefaultElements defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 		// gets all sub elements
-		arc = new Arc(this, Property.arc, defaultValues.getArc(), getValue(Property.arc));
-		line = new Line(this, Property.line, defaultValues.getLine(), getValue(Property.line));
-		point = new Point(this, Property.point, defaultValues.getPoint(), getValue(Property.point));
-		rectangle = new Rectangle(this, Property.rectangle, defaultValues.getRectangle(), getValue(Property.rectangle));
+		arc = new Arc(this, Property.ARC, defaultValues.getArc(), getValue(Property.ARC));
+		line = new Line(this, Property.LINE, defaultValues.getLine(), getValue(Property.LINE));
+		point = new Point(this, Property.POINT, defaultValues.getPoint(), getValue(Property.POINT));
+		rectangle = new Rectangle(this, Property.RECTANGLE, defaultValues.getRectangle(), getValue(Property.RECTANGLE));
 	}
 
 	/**

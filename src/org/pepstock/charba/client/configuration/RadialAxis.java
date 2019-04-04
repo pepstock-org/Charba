@@ -46,7 +46,7 @@ public class RadialAxis extends Axis {
 	public RadialAxis(AbstractChart<?, ?> chart) {
 		super(chart);
 		// sets type
-		setType(AxisType.radialLinear);
+		setType(AxisType.RADIAL_LINEAR);
 		// initialize sub elements
 		pointLabels = new RadialPointLabels(this);
 		grideLines = new GridLines(this);

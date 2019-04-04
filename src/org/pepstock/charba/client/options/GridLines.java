@@ -42,21 +42,44 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 */
 	private enum Property implements Key
 	{
-		display,
-		circular,
-		color,
-		borderDash,
-		borderDashOffset,
-		lineWidth,
-		drawBorder,
-		drawOnChartArea,
-		drawTicks,
-		tickMarkLength,
-		zeroLineWidth,
-		zeroLineColor,
-		zeroLineBorderDash,
-		zeroLineBorderDashOffset,
-		offsetGridLines
+		DISPLAY("display"),
+		CIRCULAR("circular"),
+		COLOR("color"),
+		BORDER_DASH("borderDash"),
+		BORDER_DASH_OFFSET("borderDashOffset"),
+		LINE_WIDTH("lineWidth"),
+		DRAW_BORDER("drawBorder"),
+		DRAW_ON_CHART_AREA("drawOnChartArea"),
+		DRAW_TICKS("drawTicks"),
+		TICK_MARK_LENGTH("tickMarkLength"),
+		ZERO_LINE_WIDTH("zeroLineWidth"),
+		ZERO_LINE_COLOR("zeroLineColor"),
+		ZERO_LINE_BORDER_DASH("zeroLineBorderDash"),
+		ZERO_LINE_BORDER_DASH_OFFSET("zeroLineBorderDashOffset"),
+		OFFSET_GRID_LINES("offsetGridLines");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -78,7 +101,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param display If <code>false</code>, do not display grid lines for this axis.
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.display, display);
+		setValue(Property.DISPLAY, display);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -89,7 +112,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @return If <code>false</code>, do not display grid lines for this axis.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, getDefaultValues().isDisplay());
+		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -98,7 +121,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param circular If <code>true</code>, gridlines are circular (on radar chart only).
 	 */
 	public void setCircular(boolean circular) {
-		setValue(Property.circular, circular);
+		setValue(Property.CIRCULAR, circular);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -109,7 +132,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @return If <code>true</code>, gridlines are circular (on radar chart only).
 	 */
 	public boolean isCircular() {
-		return getValue(Property.circular, getDefaultValues().isCircular());
+		return getValue(Property.CIRCULAR, getDefaultValues().isCircular());
 	}
 
 	/**
@@ -120,7 +143,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 *            second to the second grid line and so on.
 	 */
 	public void setColor(IsColor... color) {
-		setValueOrArray(Property.color, color);
+		setValueOrArray(Property.COLOR, color);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -133,7 +156,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 *            second to the second grid line and so on.
 	 */
 	public void setColor(String... color) {
-		setValueOrArray(Property.color, color);
+		setValueOrArray(Property.COLOR, color);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -146,9 +169,9 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 */
 	public String getColorAsString() {
 		// checks if the stored value is a string
-		if (ObjectType.STRING.equals(type(Property.color)) || !has(Property.color)) {
+		if (ObjectType.STRING.equals(type(Property.COLOR)) || !has(Property.COLOR)) {
 			// returns a string
-			return getValue(Property.color, getDefaultValues().getColorAsString());
+			return getValue(Property.COLOR, getDefaultValues().getColorAsString());
 		} else {
 			// returns the default
 			return getDefaultValues().getColorAsString();
@@ -163,13 +186,13 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 */
 	public List<String> getColorsAsString() {
 		// checks if the stored value is a string
-		if (ObjectType.STRING.equals(type(Property.color)) || !has(Property.color)) {
+		if (ObjectType.STRING.equals(type(Property.COLOR)) || !has(Property.COLOR)) {
 			// adds the string value
-			return Arrays.asList(getValue(Property.color, getDefaultValues().getColorAsString()));
-		} else if (ObjectType.ARRAY.equals(type(Property.color))) {
+			return Arrays.asList(getValue(Property.COLOR, getDefaultValues().getColorAsString()));
+		} else if (ObjectType.ARRAY.equals(type(Property.COLOR))) {
 			// if array
 			// loads the array
-			ArrayString array = getArrayValue(Property.color);
+			ArrayString array = getArrayValue(Property.COLOR);
 			return ArrayListHelper.list(array);
 		} else {
 			return new LinkedList<String>();
@@ -193,7 +216,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param borderDash the line dash pattern used when stroking lines
 	 */
 	public void setBorderDash(int... borderDash) {
-		setArrayValue(Property.borderDash, ArrayInteger.fromOrNull(borderDash));
+		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -205,7 +228,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @return the line dash pattern used when stroking lines
 	 */
 	public List<Integer> getBorderDash() {
-		ArrayInteger array = getArrayValue(Property.borderDash);
+		ArrayInteger array = getArrayValue(Property.BORDER_DASH);
 		return ArrayListHelper.list(array);
 	}
 
@@ -215,7 +238,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param borderDashOffset Offset for line dashes.
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
-		setValue(Property.borderDashOffset, borderDashOffset);
+		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -226,7 +249,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @return Offset for line dashes.
 	 */
 	public int getBorderDashOffset() {
-		return getValue(Property.borderDashOffset, getDefaultValues().getBorderDashOffset());
+		return getValue(Property.BORDER_DASH_OFFSET, getDefaultValues().getBorderDashOffset());
 	}
 
 	/**
@@ -235,7 +258,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param lineWidth stroke widths of grid lines.
 	 */
 	public void setLineWidth(int... lineWidth) {
-		setValueOrArray(Property.lineWidth, lineWidth);
+		setValueOrArray(Property.LINE_WIDTH, lineWidth);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -246,7 +269,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @return lineWidth stroke width of grid lines. The first element if set as array.
 	 */
 	public int getLineWidth() {
-		ArrayInteger array = getValueOrArray(Property.lineWidth, getDefaultValues().getLineWidth());
+		ArrayInteger array = getValueOrArray(Property.LINE_WIDTH, getDefaultValues().getLineWidth());
 		return array.isEmpty() ? getDefaultValues().getLineWidth() : array.get(0);
 	}
 
@@ -256,7 +279,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @return lineWidth stroke widths of grid lines.
 	 */
 	public List<Integer> getLinesWidth() {
-		ArrayInteger array = getValueOrArray(Property.lineWidth, getDefaultValues().getLineWidth());
+		ArrayInteger array = getValueOrArray(Property.LINE_WIDTH, getDefaultValues().getLineWidth());
 		return ArrayListHelper.list(array);
 	}
 
@@ -266,7 +289,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param drawBorder If <code>true</code>, draw border at the edge between the axis and the chart area.
 	 */
 	public void setDrawBorder(boolean drawBorder) {
-		setValue(Property.drawBorder, drawBorder);
+		setValue(Property.DRAW_BORDER, drawBorder);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -277,7 +300,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @return If <code>true</code>, draw border at the edge between the axis and the chart area.
 	 */
 	public boolean isDrawBorder() {
-		return getValue(Property.drawBorder, getDefaultValues().isDrawBorder());
+		return getValue(Property.DRAW_BORDER, getDefaultValues().isDrawBorder());
 	}
 
 	/**
@@ -288,7 +311,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 *            there are multiple axes and you need to control which grid lines are drawn.
 	 */
 	public void setDrawOnChartArea(boolean drawOnChartArea) {
-		setValue(Property.drawOnChartArea, drawOnChartArea);
+		setValue(Property.DRAW_ON_CHART_AREA, drawOnChartArea);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -301,7 +324,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 *         axes and you need to control which grid lines are drawn.
 	 */
 	public boolean isDrawOnChartArea() {
-		return getValue(Property.drawOnChartArea, getDefaultValues().isDrawOnChartArea());
+		return getValue(Property.DRAW_ON_CHART_AREA, getDefaultValues().isDrawOnChartArea());
 	}
 
 	/**
@@ -310,7 +333,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param drawTicks If <code>true</code>, draw lines beside the ticks in the axis area beside the chart.
 	 */
 	public void setDrawTicks(boolean drawTicks) {
-		setValue(Property.drawTicks, drawTicks);
+		setValue(Property.DRAW_TICKS, drawTicks);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -321,7 +344,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @return If <code>true</code>, draw lines beside the ticks in the axis area beside the chart.
 	 */
 	public boolean isDrawTicks() {
-		return getValue(Property.drawTicks, getDefaultValues().isDrawTicks());
+		return getValue(Property.DRAW_TICKS, getDefaultValues().isDrawTicks());
 	}
 
 	/**
@@ -330,7 +353,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param tickMarkLength Length in pixels that the grid lines will draw into the axis area.
 	 */
 	public void setTickMarkLength(int tickMarkLength) {
-		setValue(Property.tickMarkLength, tickMarkLength);
+		setValue(Property.TICK_MARK_LENGTH, tickMarkLength);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -341,7 +364,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @return Length in pixels that the grid lines will draw into the axis area.
 	 */
 	public int getTickMarkLength() {
-		return getValue(Property.tickMarkLength, getDefaultValues().getTickMarkLength());
+		return getValue(Property.TICK_MARK_LENGTH, getDefaultValues().getTickMarkLength());
 	}
 
 	/**
@@ -350,7 +373,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param zeroLineWidth Stroke width of the grid line for the first index (index 0).
 	 */
 	public void setZeroLineWidth(int zeroLineWidth) {
-		setValue(Property.zeroLineWidth, zeroLineWidth);
+		setValue(Property.ZERO_LINE_WIDTH, zeroLineWidth);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -361,7 +384,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @return Stroke width of the grid line for the first index (index 0).
 	 */
 	public int getZeroLineWidth() {
-		return getValue(Property.zeroLineWidth, getDefaultValues().getZeroLineWidth());
+		return getValue(Property.ZERO_LINE_WIDTH, getDefaultValues().getZeroLineWidth());
 	}
 
 	/**
@@ -379,7 +402,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param zeroLineColor Stroke color of the grid line for the first index (index 0).
 	 */
 	public void setZeroLineColor(String zeroLineColor) {
-		setValue(Property.zeroLineColor, zeroLineColor);
+		setValue(Property.ZERO_LINE_COLOR, zeroLineColor);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -390,7 +413,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @return Stroke color of the grid line for the first index (index 0).
 	 */
 	public String getZeroLineColorAsString() {
-		return getValue(Property.zeroLineColor, getDefaultValues().getZeroLineColorAsString());
+		return getValue(Property.ZERO_LINE_COLOR, getDefaultValues().getZeroLineColorAsString());
 	}
 
 	/**
@@ -408,7 +431,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param zeroLineBorderDash length and spacing of dashes of the grid line for the first index (index 0).
 	 */
 	public void setZeroLineBorderDash(int... zeroLineBorderDash) {
-		setArrayValue(Property.zeroLineBorderDash, ArrayInteger.fromOrNull(zeroLineBorderDash));
+		setArrayValue(Property.ZERO_LINE_BORDER_DASH, ArrayInteger.fromOrNull(zeroLineBorderDash));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -419,7 +442,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @return the length and spacing of dashes of the grid line for the first index (index 0).
 	 */
 	public List<Integer> getZeroLineBorderDash() {
-		ArrayInteger array = getArrayValue(Property.zeroLineBorderDash);
+		ArrayInteger array = getArrayValue(Property.ZERO_LINE_BORDER_DASH);
 		return ArrayListHelper.list(array);
 	}
 
@@ -429,7 +452,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param zeroLineBorderDashOffset the offset for line dashes of the grid line for the first index (index 0).
 	 */
 	public void setZeroLineBorderDashOffset(int zeroLineBorderDashOffset) {
-		setValue(Property.zeroLineBorderDashOffset, zeroLineBorderDashOffset);
+		setValue(Property.ZERO_LINE_BORDER_DASH_OFFSET, zeroLineBorderDashOffset);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -440,7 +463,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @return the offset for line dashes of the grid line for the first index (index 0).
 	 */
 	public int getZeroLineBorderDashOffset() {
-		return getValue(Property.zeroLineBorderDashOffset, getDefaultValues().getZeroLineBorderDashOffset());
+		return getValue(Property.ZERO_LINE_BORDER_DASH_OFFSET, getDefaultValues().getZeroLineBorderDashOffset());
 	}
 
 	/**
@@ -450,7 +473,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @param offsetGridLines if <code>true</code>, grid lines will be shifted to be between labels.
 	 */
 	public void setOffsetGridLines(boolean offsetGridLines) {
-		setValue(Property.offsetGridLines, offsetGridLines);
+		setValue(Property.OFFSET_GRID_LINES, offsetGridLines);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -462,7 +485,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 * @return if <code>true</code>, grid lines will be shifted to be between labels.
 	 */
 	public boolean isOffsetGridLines() {
-		return getValue(Property.offsetGridLines, getDefaultValues().isOffsetGridLines());
+		return getValue(Property.OFFSET_GRID_LINES, getDefaultValues().isOffsetGridLines());
 	}
 
 }

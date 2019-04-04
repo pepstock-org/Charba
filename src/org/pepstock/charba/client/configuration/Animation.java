@@ -82,8 +82,31 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	 */
 	private enum Property implements Key
 	{
-		onProgress,
-		onComplete
+		ON_PROGRESS("onProgress"),
+		ON_COMPLETE("onComplete");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -220,7 +243,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 			// checks if property exist
 			if (onCompleteHandlers == 0) {
 				// sets the java script code to get the event
-				getConfiguration().setEvent(getConfiguration().getAnimation(), Property.onComplete, completeCallbackProxy.getProxy());
+				getConfiguration().setEvent(getConfiguration().getAnimation(), Property.ON_COMPLETE, completeCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onCompleteHandlers++;
@@ -228,7 +251,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 			// checks if property exist
 			if (onProgressHandlers == 0) {
 				// sets the java script code to get the event
-				getConfiguration().setEvent(getConfiguration().getAnimation(), Property.onProgress, progressCallbackProxy.getProxy());
+				getConfiguration().setEvent(getConfiguration().getAnimation(), Property.ON_PROGRESS, progressCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onProgressHandlers++;
@@ -249,7 +272,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 			// if zero, no handler
 			if (onCompleteHandlers == 0) {
 				// therefore remove property
-				getConfiguration().setEvent(getConfiguration().getAnimation(), Property.onComplete, null);
+				getConfiguration().setEvent(getConfiguration().getAnimation(), Property.ON_COMPLETE, null);
 
 			}
 		} else if (type.equals(AnimationProgressEvent.TYPE)) {
@@ -258,7 +281,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 			// if zero, no handler
 			if (onProgressHandlers == 0) {
 				// therefore remove property
-				getConfiguration().setEvent(getConfiguration().getAnimation(), Property.onProgress, null);
+				getConfiguration().setEvent(getConfiguration().getAnimation(), Property.ON_PROGRESS, null);
 			}
 		}
 	}

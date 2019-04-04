@@ -40,7 +40,30 @@ public final class ExtendedScale extends Scale {
 	private enum Property implements Key
 	{
 		// internal key to store a unique id
-		_charbaId,
+		CHARBA_ID("_charbaId");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -51,7 +74,7 @@ public final class ExtendedScale extends Scale {
 	public ExtendedScale(IsDefaultScale defaultValues) {
 		super(defaultValues);
 		// stores the id based on a counter
-		setValue(Property._charbaId, COUNTER.getAndIncrement());
+		setValue(Property.CHARBA_ID, COUNTER.getAndIncrement());
 	}
 
 	/**
@@ -60,7 +83,7 @@ public final class ExtendedScale extends Scale {
 	 * @return the unique id of scale
 	 */
 	public int getCharbaId() {
-		return getValue(Property._charbaId, UndefinedValues.INTEGER);
+		return getValue(Property.CHARBA_ID, UndefinedValues.INTEGER);
 	}
 
 	/**

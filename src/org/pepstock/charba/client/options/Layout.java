@@ -34,7 +34,30 @@ public final class Layout extends AbstractModel<Options, IsDefaultLayout> implem
 	 */
 	private enum Property implements Key
 	{
-		padding
+		PADDING("padding");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -49,7 +72,7 @@ public final class Layout extends AbstractModel<Options, IsDefaultLayout> implem
 	Layout(Options options, Key childKey, IsDefaultLayout defaultvalues, NativeObject nativeObject) {
 		super(options, childKey, defaultvalues, nativeObject);
 		// gets sub element
-		padding = new Padding(this, Property.padding, defaultvalues.getPadding(), getValue(Property.padding));
+		padding = new Padding(this, Property.PADDING, defaultvalues.getPadding(), getValue(Property.PADDING));
 	}
 
 	/**

@@ -88,9 +88,32 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	 */
 	private enum Property implements Key
 	{
-		onClick,
-		onHover,
-		onLeave
+		ON_CLICK("onClick"),
+		ON_HOVER("onHover"),
+		ON_LEAVE("onLeave");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -174,7 +197,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 			// if java script property is missing
 			if (onClickHandlers == 0) {
 				// adds the java script function to catch the event
-				getConfiguration().setEvent(getConfiguration().getLegend(), Property.onClick, clickCallbackProxy.getProxy());
+				getConfiguration().setEvent(getConfiguration().getLegend(), Property.ON_CLICK, clickCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onClickHandlers++;
@@ -182,7 +205,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 			// if java script property is missing
 			if (onHoverHandlers == 0) {
 				// adds the java script function to catch the event
-				getConfiguration().setEvent(getConfiguration().getLegend(), Property.onHover, hoverCallbackProxy.getProxy());
+				getConfiguration().setEvent(getConfiguration().getLegend(), Property.ON_HOVER, hoverCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onHoverHandlers++;
@@ -190,7 +213,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 			// if java script property is missing
 			if (onLeaveHandlers == 0) {
 				// adds the java script function to catch the event
-				getConfiguration().setEvent(getConfiguration().getLegend(), Property.onLeave, leaveCallbackProxy.getProxy());
+				getConfiguration().setEvent(getConfiguration().getLegend(), Property.ON_LEAVE, leaveCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onLeaveHandlers++;
@@ -211,7 +234,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 			// if there is not any handler
 			if (onClickHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(getConfiguration().getLegend(), Property.onClick, null);
+				getConfiguration().setEvent(getConfiguration().getLegend(), Property.ON_CLICK, null);
 			}
 		} else if (type.equals(LegendHoverEvent.TYPE)) {
 			// decrements the amount of handlers
@@ -219,7 +242,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 			// if there is not any handler
 			if (onHoverHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(getConfiguration().getLegend(), Property.onHover, null);
+				getConfiguration().setEvent(getConfiguration().getLegend(), Property.ON_HOVER, null);
 			}
 		} else if (type.equals(LegendLeaveEvent.TYPE)) {
 			// decrements the amount of handlers
@@ -227,7 +250,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 			// if there is not any handler
 			if (onLeaveHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(getConfiguration().getLegend(), Property.onLeave, null);
+				getConfiguration().setEvent(getConfiguration().getLegend(), Property.ON_LEAVE, null);
 			}
 		}
 	}

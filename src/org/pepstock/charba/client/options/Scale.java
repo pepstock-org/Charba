@@ -73,26 +73,49 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 */
 	private enum Property implements Key
 	{
-		gridLines,
-		scaleLabel,
-		ticks,
-		angleLines,
-		pointLabels,
-		time,
-		id,
-		type,
-		display,
-		weight,
-		position,
-		offset,
-		barPercentage,
-		categoryPercentage,
-		barThickness,
-		maxBarThickness,
-		minBarLength,
-		stacked,
-		distribution,
-		bounds
+		GRID_LINES("gridLines"),
+		SCALE_LABEL("scaleLabel"),
+		TICKS("ticks"),
+		ANGLE_LINES("angleLines"),
+		POINT_LABELS("pointLabels"),
+		TIME("time"),
+		ID("id"),
+		TYPE("type"),
+		DISPLAY("display"),
+		WEIGHT("weight"),
+		POSITION("position"),
+		OFFSET("offset"),
+		BAR_PERCENTAGE("barPercentage"),
+		CATEGORY_PERCENTAGE("categoryPercentage"),
+		BAR_THICKNESS("barThickness"),
+		MAX_BAR_THICKNESS("maxBarThickness"),
+		MIN_BAR_LENGTH("minBarLength"),
+		STACKED("stacked"),
+		DISTRIBUTION("distribution"),
+		BOUNDS("bounds");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -128,12 +151,12 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	Scale(Options options, Key childKey, IsDefaultScale defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 		// gets all sub elements
-		angleLines = new AngleLines(this, Property.angleLines, getDefaultValues().getAngleLines(), getValue(Property.angleLines));
-		gridLines = new GridLines(this, Property.gridLines, getDefaultValues().getGrideLines(), getValue(Property.gridLines));
-		pointLabels = new PointLabels(this, Property.pointLabels, getDefaultValues().getPointLabels(), getValue(Property.pointLabels));
-		scaleLabel = new ScaleLabel(this, Property.scaleLabel, getDefaultValues().getScaleLabel(), getValue(Property.scaleLabel));
-		ticks = new Ticks(this, Property.ticks, getDefaultValues().getTicks(), getValue(Property.ticks));
-		time = new Time(this, Property.time, getDefaultValues().getTime(), getValue(Property.time));
+		angleLines = new AngleLines(this, Property.ANGLE_LINES, getDefaultValues().getAngleLines(), getValue(Property.ANGLE_LINES));
+		gridLines = new GridLines(this, Property.GRID_LINES, getDefaultValues().getGrideLines(), getValue(Property.GRID_LINES));
+		pointLabels = new PointLabels(this, Property.POINT_LABELS, getDefaultValues().getPointLabels(), getValue(Property.POINT_LABELS));
+		scaleLabel = new ScaleLabel(this, Property.SCALE_LABEL, getDefaultValues().getScaleLabel(), getValue(Property.SCALE_LABEL));
+		ticks = new Ticks(this, Property.TICKS, getDefaultValues().getTicks(), getValue(Property.TICKS));
+		time = new Time(this, Property.TIME, getDefaultValues().getTime(), getValue(Property.TIME));
 	}
 
 	/**
@@ -197,7 +220,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @param id The ID is used to link datasets and scale axes together
 	 */
 	public final void setId(String id) {
-		setValue(Property.id, id);
+		setValue(Property.ID, id);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -209,7 +232,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @return The ID is used to link datasets and scale axes together or {@link UndefinedValues#STRING} if not set
 	 */
 	public final String getId() {
-		return getValue(Property.id, UndefinedValues.STRING);
+		return getValue(Property.ID, UndefinedValues.STRING);
 	}
 
 	/**
@@ -218,7 +241,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @param stacked if the axis are stacked or not.
 	 */
 	public final void setStacked(boolean stacked) {
-		setValue(Property.stacked, stacked);
+		setValue(Property.STACKED, stacked);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -229,7 +252,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @return if the axis are stacked or not.
 	 */
 	public final boolean isStacked() {
-		return getValue(Property.stacked, getDefaultValues().isStacked());
+		return getValue(Property.STACKED, getDefaultValues().isStacked());
 	}
 
 	/**
@@ -238,7 +261,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @param type type of axis
 	 */
 	public final void setType(AxisType type) {
-		setValue(Property.type, type);
+		setValue(Property.TYPE, type);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -249,7 +272,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @return the type of axis.
 	 */
 	public final AxisType getType() {
-		return getValue(Property.type, AxisType.class, getDefaultValues().getType());
+		return getValue(Property.TYPE, AxisType.class, getDefaultValues().getType());
 	}
 
 	/**
@@ -258,7 +281,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @param weight weight of axis
 	 */
 	public final void setWeight(double weight) {
-		setValue(Property.weight, weight);
+		setValue(Property.WEIGHT, weight);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -269,7 +292,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @return weight of axis.
 	 */
 	public final double getWeight() {
-		return getValue(Property.weight, getDefaultValues().getWeight());
+		return getValue(Property.WEIGHT, getDefaultValues().getWeight());
 	}
 
 	/**
@@ -278,7 +301,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @param display if <code>true</code>, shows the axes.
 	 */
 	public final void setDisplay(boolean display) {
-		setValue(Property.display, display);
+		setValue(Property.DISPLAY, display);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -292,13 +315,13 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 */
 	public final void setDisplay(Display display) {
 		// checks if is setting auto
-		if (Display.auto.equals(display)) {
-			setValue(Property.display, display);
+		if (Display.AUTO.equals(display)) {
+			setValue(Property.DISPLAY, display);
 			// checks if all parents are attached
 			checkAndAddToParent();
 		} else {
 			// otherwise transforms into a boolean
-			setDisplay(Display.yes.equals(display) ? true : false);
+			setDisplay(Display.TRUE.equals(display) ? true : false);
 		}
 	}
 
@@ -311,14 +334,14 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 */
 	public final Display getDisplay() {
 		// checks if is boolean
-		if (ObjectType.BOOLEAN.equals(type(Property.display))) {
+		if (ObjectType.BOOLEAN.equals(type(Property.DISPLAY))) {
 			// gets value
-			boolean value = getValue(Property.display, true);
+			boolean value = getValue(Property.DISPLAY, true);
 			// returns value
-			return value ? Display.yes : Display.no;
+			return value ? Display.TRUE : Display.FALSE;
 		}
 		// returns value. Must be auto
-		return getValue(Property.display, Display.class, getDefaultValues().getDisplay());
+		return getValue(Property.DISPLAY, Display.class, getDefaultValues().getDisplay());
 	}
 
 	/**
@@ -327,7 +350,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @param offset extra space of axis
 	 */
 	public final void setOffset(boolean offset) {
-		setValue(Property.offset, offset);
+		setValue(Property.OFFSET, offset);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -338,7 +361,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @return extra space of axis.
 	 */
 	public final boolean isOffset() {
-		return getValue(Property.offset, getDefaultValues().isOffset());
+		return getValue(Property.OFFSET, getDefaultValues().isOffset());
 	}
 
 	/**
@@ -347,7 +370,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @param position position of axis
 	 */
 	public final void setPosition(Position position) {
-		setValue(Property.position, position);
+		setValue(Property.POSITION, position);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -358,7 +381,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @return position of axis.
 	 */
 	public final Position getPosition() {
-		return getValue(Property.position, Position.class, getDefaultValues().getPosition());
+		return getValue(Property.POSITION, Position.class, getDefaultValues().getPosition());
 	}
 
 	/**
@@ -369,7 +392,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 *            whole category width and put the bars right next to each other.
 	 */
 	public final void setBarPercentage(double barPercentage) {
-		setValue(Property.barPercentage, barPercentage);
+		setValue(Property.BAR_PERCENTAGE, barPercentage);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -382,7 +405,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 *         category width and put the bars right next to each other.
 	 */
 	public final double getBarPercentage() {
-		return getValue(Property.barPercentage, getDefaultValues().getBarPercentage());
+		return getValue(Property.BAR_PERCENTAGE, getDefaultValues().getBarPercentage());
 	}
 
 	/**
@@ -391,7 +414,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @param categoryPercentage percent (0-1) of the available width each category should be within the sample width.
 	 */
 	public final void setCategoryPercentage(double categoryPercentage) {
-		setValue(Property.categoryPercentage, categoryPercentage);
+		setValue(Property.CATEGORY_PERCENTAGE, categoryPercentage);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -402,7 +425,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @return the percent (0-1) of the available width each category should be within the sample width.
 	 */
 	public final double getCategoryPercentage() {
-		return getValue(Property.categoryPercentage, getDefaultValues().getCategoryPercentage());
+		return getValue(Property.CATEGORY_PERCENTAGE, getDefaultValues().getCategoryPercentage());
 	}
 
 	/**
@@ -418,9 +441,9 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 		// checks if FLEX value has been set
 		if (FLEX_BAR_THICKNESS == barThickness) {
 			// flex must be set
-			setValue(Property.barThickness, FLEX_BAR_THICKNESS_VALUE);
+			setValue(Property.BAR_THICKNESS, FLEX_BAR_THICKNESS_VALUE);
 		} else {
-			setValue(Property.barThickness, barThickness);
+			setValue(Property.BAR_THICKNESS, barThickness);
 		}
 		// checks if all parents are attached
 		checkAndAddToParent();
@@ -436,11 +459,11 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 */
 	public final int getBarThickness() {
 		// checks if flex has been set
-		if (ObjectType.STRING.equals(type(Property.barThickness))) {
+		if (ObjectType.STRING.equals(type(Property.BAR_THICKNESS))) {
 			return FLEX_BAR_THICKNESS;
 		}
 		// if here, is not flex
-		return getValue(Property.barThickness, getDefaultValues().getBarThickness());
+		return getValue(Property.BAR_THICKNESS, getDefaultValues().getBarThickness());
 	}
 
 	/**
@@ -449,7 +472,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @param maxBarThickness the maximum bar thickness.
 	 */
 	public final void setMaxBarThickness(int maxBarThickness) {
-		setValue(Property.maxBarThickness, maxBarThickness);
+		setValue(Property.MAX_BAR_THICKNESS, maxBarThickness);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -460,7 +483,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @return the maximum bar thickness.
 	 */
 	public final int getMaxBarThickness() {
-		return getValue(Property.maxBarThickness, getDefaultValues().getMaxBarThickness());
+		return getValue(Property.MAX_BAR_THICKNESS, getDefaultValues().getMaxBarThickness());
 	}
 
 	/**
@@ -469,7 +492,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @param minBarLength a minimum length in pixels.
 	 */
 	public final void setMinBarLength(int minBarLength) {
-		setValue(Property.minBarLength, minBarLength);
+		setValue(Property.MIN_BAR_LENGTH, minBarLength);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -480,7 +503,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @return a minimum length in pixels.
 	 */
 	public final int getMinBarLength() {
-		return getValue(Property.minBarLength, getDefaultValues().getMinBarLength());
+		return getValue(Property.MIN_BAR_LENGTH, getDefaultValues().getMinBarLength());
 	}
 
 	/**
@@ -489,7 +512,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @param distribution property controls the data distribution along the scale.
 	 */
 	public final void setDistribution(ScaleDistribution distribution) {
-		setValue(Property.distribution, distribution);
+		setValue(Property.DISTRIBUTION, distribution);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -500,7 +523,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @return property controls the data distribution along the scale.
 	 */
 	public final ScaleDistribution getDistribution() {
-		return getValue(Property.distribution, ScaleDistribution.class, getDefaultValues().getDistribution());
+		return getValue(Property.DISTRIBUTION, ScaleDistribution.class, getDefaultValues().getDistribution());
 	}
 
 	/**
@@ -509,7 +532,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @param bounds property controls the scale boundary strategy (bypassed by min/max time options).
 	 */
 	public final void setBounds(ScaleBounds bounds) {
-		setValue(Property.bounds, bounds);
+		setValue(Property.BOUNDS, bounds);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -520,7 +543,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 * @return property controls the scale boundary strategy (bypassed by min/max time options).
 	 */
 	public final ScaleBounds getBounds() {
-		return getValue(Property.bounds, ScaleBounds.class, getDefaultValues().getBounds());
+		return getValue(Property.BOUNDS, ScaleBounds.class, getDefaultValues().getBounds());
 	}
 
 }

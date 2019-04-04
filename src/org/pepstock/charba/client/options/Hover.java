@@ -34,10 +34,33 @@ public final class Hover extends AbstractModel<Options, IsDefaultHover> implemen
 	 */
 	private enum Property implements Key
 	{
-		mode,
-		axis,
-		intersect,
-		animationDuration
+		MODE("mode"),
+		AXIS("axis"),
+		INTERSECT("intersect"),
+		ANIMATION_DURATION("animationDuration");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -59,7 +82,7 @@ public final class Hover extends AbstractModel<Options, IsDefaultHover> implemen
 	 * @param mode which elements appear in the tooltip.
 	 */
 	public void setMode(InteractionMode mode) {
-		setValue(Property.mode, mode);
+		setValue(Property.MODE, mode);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -70,7 +93,7 @@ public final class Hover extends AbstractModel<Options, IsDefaultHover> implemen
 	 * @return which elements appear in the tooltip.
 	 */
 	public InteractionMode getMode() {
-		return getValue(Property.mode, InteractionMode.class, getDefaultValues().getMode());
+		return getValue(Property.MODE, InteractionMode.class, getDefaultValues().getMode());
 	}
 
 	/**
@@ -80,7 +103,7 @@ public final class Hover extends AbstractModel<Options, IsDefaultHover> implemen
 	 *            chart.
 	 */
 	public void setIntersect(boolean intersect) {
-		setValue(Property.intersect, intersect);
+		setValue(Property.INTERSECT, intersect);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -91,7 +114,7 @@ public final class Hover extends AbstractModel<Options, IsDefaultHover> implemen
 	 * @return if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
 	 */
 	public boolean isIntersect() {
-		return getValue(Property.intersect, getDefaultValues().isIntersect());
+		return getValue(Property.INTERSECT, getDefaultValues().isIntersect());
 	}
 
 	/**
@@ -100,7 +123,7 @@ public final class Hover extends AbstractModel<Options, IsDefaultHover> implemen
 	 * @param milliseconds duration in milliseconds it takes to animate hover style changes.
 	 */
 	public void setAnimationDuration(int milliseconds) {
-		setValue(Property.animationDuration, milliseconds);
+		setValue(Property.ANIMATION_DURATION, milliseconds);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -111,7 +134,7 @@ public final class Hover extends AbstractModel<Options, IsDefaultHover> implemen
 	 * @return duration in milliseconds it takes to animate hover style changes.
 	 */
 	public int getAnimationDuration() {
-		return getValue(Property.animationDuration, getDefaultValues().getAnimationDuration());
+		return getValue(Property.ANIMATION_DURATION, getDefaultValues().getAnimationDuration());
 	}
 
 	/**
@@ -121,7 +144,7 @@ public final class Hover extends AbstractModel<Options, IsDefaultHover> implemen
 	 * @param axis define which directions are used in calculating distances.
 	 */
 	public void setAxis(InteractionAxis axis) {
-		setValue(Property.axis, axis);
+		setValue(Property.AXIS, axis);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -132,7 +155,7 @@ public final class Hover extends AbstractModel<Options, IsDefaultHover> implemen
 	 * @return define which directions are used in calculating distances.
 	 */
 	public InteractionAxis getAxis() {
-		return getValue(Property.axis, InteractionAxis.class, getDefaultValues().getAxis());
+		return getValue(Property.AXIS, InteractionAxis.class, getDefaultValues().getAxis());
 	}
 
 }

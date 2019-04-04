@@ -112,7 +112,7 @@ public final class ChartPointer extends AbstractPlugin {
 				// TITLE SELECTION
 				// otherwise sets the pointer
 				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
-			} else if (chart.getOptions().hasAxisClickHandlers() && isElementInScope(scope, PointerElement.AXES) && !ScaleType.none.equals(chart.getType().scaleType()) && chart.getNode().getScales().isInside(event)) {
+			} else if (chart.getOptions().hasAxisClickHandlers() && isElementInScope(scope, PointerElement.AXES) && !ScaleType.NONE.equals(chart.getType().scaleType()) && chart.getNode().getScales().isInside(event)) {
 				// AXIS SELECTION
 				// otherwise sets the pointer
 				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());

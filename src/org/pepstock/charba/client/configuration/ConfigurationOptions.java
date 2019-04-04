@@ -186,10 +186,33 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 */
 	private enum Property implements Key
 	{
-		legendCallback,
-		onResize,
-		onClick,
-		onHover
+		LEGEND_CALLBACK("legendCallback"),
+		ON_RESIZE("onResize"),
+		ON_CLICK("onClick"),
+		ON_HOVER("onHover");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	// factory to transform a native object into a dataset item
@@ -240,7 +263,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 					// checks if title has been selected and there is any handler
 					// fires the click event on the chart title
 					getChart().fireEvent(new TitleClickEvent(event, getChart().getNode().getOptions().getTitle()));
-				} else if (hasAxisClickHandlers() && !ScaleType.none.equals(getChart().getType().scaleType())) {
+				} else if (hasAxisClickHandlers() && !ScaleType.NONE.equals(getChart().getType().scaleType())) {
 					// checks if there is any handler and the chart has got scales
 					// gets the scales
 					ScalesNode scales = getChart().getNode().getScales();
@@ -554,7 +577,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			// if there is not any click event handler
 			if (onClickHandlers == 0) {
 				// sets the callback proxy in order to call the user event interface
-				getConfiguration().setEvent(Property.onClick, clickCallbackProxy.getProxy());
+				getConfiguration().setEvent(Property.ON_CLICK, clickCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onClickHandlers++;
@@ -577,7 +600,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			// if there is not any hover event handler
 			if (onHoverHandlers == 0) {
 				// sets the callback proxy in order to call the user event interface
-				getConfiguration().setEvent(Property.onHover, hoverCallbackProxy.getProxy());
+				getConfiguration().setEvent(Property.ON_HOVER, hoverCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onHoverHandlers++;
@@ -585,7 +608,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			// if there is not any resize event handler
 			if (onResizeHandlers == 0) {
 				// sets the callback proxy in order to call the user event interface
-				getConfiguration().setEvent(Property.onResize, resizeCallbackProxy.getProxy());
+				getConfiguration().setEvent(Property.ON_RESIZE, resizeCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onResizeHandlers++;
@@ -606,7 +629,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			// if there is not any handler
 			if (onClickHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(Property.onClick, null);
+				getConfiguration().setEvent(Property.ON_CLICK, null);
 			}
 			// check if a dataset selection handler has been removed
 			if (type.equals(DatasetSelectionEvent.TYPE)) {
@@ -629,7 +652,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			// if there is not any handler
 			if (onHoverHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(Property.onHover, null);
+				getConfiguration().setEvent(Property.ON_HOVER, null);
 			}
 		} else if (type.equals(ChartResizeEvent.TYPE)) {
 			// decrements the amount of handlers
@@ -637,7 +660,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			// if there is not any handler
 			if (onResizeHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(Property.onResize, null);
+				getConfiguration().setEvent(Property.ON_RESIZE, null);
 			}
 		}
 	}
@@ -662,10 +685,10 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 		// checks if callback is consistent
 		if (legendCallback != null) {
 			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(Property.legendCallback, legendCallbackProxy.getProxy());
+			getConfiguration().setCallback(Property.LEGEND_CALLBACK, legendCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(Property.legendCallback, null);
+			getConfiguration().setCallback(Property.LEGEND_CALLBACK, null);
 		}
 	}
 

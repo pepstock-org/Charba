@@ -74,7 +74,7 @@ public final class DefaultChartOptions implements IsDefaultScaledOptions {
 		elements = new DefaultChartElements(chartOptions.getElements());
 		// checks if the chart options is related to axes
 		// checks if single scale
-		if (ScaleType.single.equals(chartOptions.getType().scaleType())) {
+		if (ScaleType.SINGLE.equals(chartOptions.getType().scaleType())) {
 			// gets scale
 			scale = new DefaultChartScale(chartOptions.getScale());
 		} else {
@@ -82,7 +82,7 @@ public final class DefaultChartOptions implements IsDefaultScaledOptions {
 			scale = DefaultsBuilder.get().getScaledOptions().getScale();
 		}
 		// checks if multi scale
-		if (ScaleType.multi.equals(chartOptions.getType().scaleType())) {
+		if (ScaleType.MULTI.equals(chartOptions.getType().scaleType())) {
 			// gets scale
 			scales = new DefaultChartScales(chartOptions.getScales());
 		} else {

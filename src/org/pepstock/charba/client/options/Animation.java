@@ -34,10 +34,33 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 */
 	private enum Property implements Key
 	{
-		animateRotate,
-		animateScale,
-		duration,
-		easing
+		ANIMATE_ROTATE("animateRotate"),
+		ANIMATE_SCALE("animateScale"),
+		DURATION("duration"),
+		EASING("easing");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -59,7 +82,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * @param easing animation easing.
 	 */
 	public void setEasing(Easing easing) {
-		setValue(Property.easing, easing);
+		setValue(Property.EASING, easing);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -70,7 +93,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * @return animation easing.
 	 */
 	public Easing getEasing() {
-		return getValue(Property.easing, Easing.class, getDefaultValues().getEasing());
+		return getValue(Property.EASING, Easing.class, getDefaultValues().getEasing());
 	}
 
 	/**
@@ -79,7 +102,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * @param milliseconds the number of milliseconds an animation takes.
 	 */
 	public void setDuration(int milliseconds) {
-		setValue(Property.duration, milliseconds);
+		setValue(Property.DURATION, milliseconds);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -90,7 +113,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * @return the number of milliseconds an animation takes.
 	 */
 	public int getDuration() {
-		return getValue(Property.duration, getDefaultValues().getDuration());
+		return getValue(Property.DURATION, getDefaultValues().getDuration());
 	}
 
 	/**
@@ -99,7 +122,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * @param animateRotate If <code>true</code>, the chart will animate in with a rotation animation.
 	 */
 	public void setAnimateRotate(boolean animateRotate) {
-		setValue(Property.animateRotate, animateRotate);
+		setValue(Property.ANIMATE_ROTATE, animateRotate);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -110,7 +133,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * @return If <code>true</code>, the chart will animate in with a rotation animation.
 	 */
 	public boolean isAnimateRotate() {
-		return getValue(Property.animateRotate, getDefaultValues().isAnimateRotate());
+		return getValue(Property.ANIMATE_ROTATE, getDefaultValues().isAnimateRotate());
 	}
 
 	/**
@@ -119,7 +142,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * @param animateScale If <code>true</code>, will animate scaling the chart from the center outwards.
 	 */
 	public void setAnimateScale(boolean animateScale) {
-		setValue(Property.animateScale, animateScale);
+		setValue(Property.ANIMATE_SCALE, animateScale);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -130,7 +153,7 @@ public class Animation extends AbstractModel<Options, IsDefaultAnimation> implem
 	 * @return If <code>true</code>, will animate scaling the chart from the center outwards.
 	 */
 	public boolean isAnimateScale() {
-		return getValue(Property.animateScale, getDefaultValues().isAnimateScale());
+		return getValue(Property.ANIMATE_SCALE, getDefaultValues().isAnimateScale());
 	}
 
 }

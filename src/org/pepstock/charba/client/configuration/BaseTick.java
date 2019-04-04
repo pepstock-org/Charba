@@ -78,7 +78,30 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 	 */
 	private enum Property implements Key
 	{
-		callback
+		CALLBACK("callback");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -272,10 +295,10 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 		// checks if callback is consistent
 		if (callback != null) {
 			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(configuration, Property.callback, tickCallbackProxy.getProxy());
+			getAxis().getConfiguration().setCallback(configuration, Property.CALLBACK, tickCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(configuration, Property.callback, null);
+			getAxis().getConfiguration().setCallback(configuration, Property.CALLBACK, null);
 		}
 	}
 }
