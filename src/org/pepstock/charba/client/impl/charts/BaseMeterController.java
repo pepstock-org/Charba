@@ -148,9 +148,9 @@ final class BaseMeterController extends AbstractController {
 		final int centerX = (area.getRight() - area.getLeft()) / 2 + area.getLeft();
 		final int centerY = (area.getBottom() - area.getTop()) / 2 + area.getTop();
 		// gets max value
-		final double maxValue = MeterDisplay.percentage.equals(options.getDisplay()) || MeterDisplay.percentageAndLabel.equals(options.getDisplay()) ? MAX_PERCENTAGE : dataset.getMax();
+		final double maxValue = MeterDisplay.PERCENTAGE.equals(options.getDisplay()) || MeterDisplay.PERCENTAGE_AND_LABEL.equals(options.getDisplay()) ? MAX_PERCENTAGE : dataset.getMax();
 		// gets value
-		final double valueToCalculate = MeterDisplay.percentage.equals(options.getDisplay()) || MeterDisplay.percentageAndLabel.equals(options.getDisplay()) ? dataset.getValue() / dataset.getMax() : dataset.getValue();
+		final double valueToCalculate = MeterDisplay.PERCENTAGE.equals(options.getDisplay()) || MeterDisplay.PERCENTAGE_AND_LABEL.equals(options.getDisplay()) ? dataset.getValue() / dataset.getMax() : dataset.getValue();
 		// here is calculating the value to showed
 		// based on easing of drawing
 		final double value = options.isAnimatedDisplay() ? valueToCalculate * ease : valueToCalculate;
@@ -175,7 +175,7 @@ final class BaseMeterController extends AbstractController {
 		// sets alignment
 		ctx.setTextAlign(TextAlign.CENTER);
 		// checks if it must draw also the label
-		if ((MeterDisplay.valueAndLabel.equals(options.getDisplay()) || MeterDisplay.percentageAndLabel.equals(options.getDisplay())) && label != null) {
+		if ((MeterDisplay.VALUE_AND_LABEL.equals(options.getDisplay()) || MeterDisplay.PERCENTAGE_AND_LABEL.equals(options.getDisplay())) && label != null) {
 			// sets font
 			ctx.setFont(Utilities.toFont(style, fontSize, fontFamily));
 			// sets alignment from center point

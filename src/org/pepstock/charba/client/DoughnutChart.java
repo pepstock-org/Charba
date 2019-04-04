@@ -42,7 +42,7 @@ public class DoughnutChart extends AbstractChart<DoughnutOptions, DoughnutDatase
 	 */
 	@Override
 	public Type getType() {
-		return ChartType.doughnut;
+		return ChartType.DOUGHNUT;
 	}
 
 	/*

@@ -56,7 +56,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return <code>true</code> if clear of selection label will be applied into chart, otherwise <code>false</code>
 	 */
 	boolean isDisplay() {
-		return getValue(ClearSelection.Property.display, ClearSelection.DEFAULT_DISPLAY);
+		return getValue(ClearSelection.Property.DISPLAY, ClearSelection.DEFAULT_DISPLAY);
 	}
 
 	/**
@@ -65,7 +65,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection label
 	 */
 	String getLabel() {
-		return getValue(ClearSelection.Property.label, ClearSelection.DEFAULT_LABEL);
+		return getValue(ClearSelection.Property.LABEL, ClearSelection.DEFAULT_LABEL);
 	}
 
 	/**
@@ -74,7 +74,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection label font size
 	 */
 	int getFontSize() {
-		return getValue(ClearSelection.Property.fontSize, Defaults.get().getGlobal().getDefaultFontSize());
+		return getValue(ClearSelection.Property.FONT_SIZE, Defaults.get().getGlobal().getDefaultFontSize());
 	}
 
 	/**
@@ -83,7 +83,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection label font family
 	 */
 	String getFontFamily() {
-		return getValue(ClearSelection.Property.fontFamily, Defaults.get().getGlobal().getDefaultFontFamily());
+		return getValue(ClearSelection.Property.FONT_FAMILY, Defaults.get().getGlobal().getDefaultFontFamily());
 	}
 
 	/**
@@ -92,7 +92,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection label font style
 	 */
 	FontStyle getFontStyle() {
-		return getValue(ClearSelection.Property.fontStyle, FontStyle.class, Defaults.get().getGlobal().getDefaultFontStyle());
+		return getValue(ClearSelection.Property.FONT_STYLE, FontStyle.class, Defaults.get().getGlobal().getDefaultFontStyle());
 	}
 
 	/**
@@ -101,7 +101,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection label font color.
 	 */
 	String getFontColorAsString() {
-		return getValue(ClearSelection.Property.fontColor, DatasetsItemsSelectorOptions.DEFAULT_BORDER_COLOR.toRGBA());
+		return getValue(ClearSelection.Property.FONT_COLOR, DatasetsItemsSelectorOptions.DEFAULT_BORDER_COLOR.toRGBA());
 	}
 
 	/**
@@ -110,7 +110,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection align
 	 */
 	Align getAlign() {
-		return getValue(ClearSelection.Property.align, Align.class, ClearSelection.DEFAULT_ALIGN);
+		return getValue(ClearSelection.Property.ALIGN, Align.class, ClearSelection.DEFAULT_ALIGN);
 	}
 
 	/**
@@ -119,7 +119,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection render.
 	 */
 	Render getRender() {
-		return getValue(ClearSelection.Property.render, Render.class, ClearSelection.DEFAULT_RENDER);
+		return getValue(ClearSelection.Property.RENDER, Render.class, ClearSelection.DEFAULT_RENDER);
 	}
 
 	/**
@@ -128,7 +128,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection position
 	 */
 	Position getPosition() {
-		return getValue(ClearSelection.Property.position, Position.class, ClearSelection.DEFAULT_POSITION);
+		return getValue(ClearSelection.Property.POSITION, Position.class, ClearSelection.DEFAULT_POSITION);
 	}
 
 	/**
@@ -137,7 +137,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection image
 	 */
 	ImageElement getImage() {
-		return getValue(ClearSelection.Property.image, ClearSelection.DEFAULT_IMAGE);
+		return getValue(ClearSelection.Property.IMAGE, ClearSelection.DEFAULT_IMAGE);
 	}
 
 	/**
@@ -146,7 +146,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection margin from canvas border
 	 */
 	int getMargin() {
-		return getValue(ClearSelection.Property.margin, ClearSelection.DEFAULT_MARGIN);
+		return getValue(ClearSelection.Property.MARGIN, ClearSelection.DEFAULT_MARGIN);
 	}
 
 	/**
@@ -155,7 +155,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the clear selection padding
 	 */
 	int getPadding() {
-		return getValue(ClearSelection.Property.padding, ClearSelection.DEFAULT_PADDING);
+		return getValue(ClearSelection.Property.PADDING, ClearSelection.DEFAULT_PADDING);
 	}
 
 	/**
@@ -164,7 +164,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return the spacing between label and image for clear selection element
 	 */
 	int getSpacing() {
-		return getValue(ClearSelection.Property.spacing, ClearSelection.DEFAULT_SPACING);
+		return getValue(ClearSelection.Property.SPACING, ClearSelection.DEFAULT_SPACING);
 	}
 
 	/**
@@ -173,7 +173,7 @@ final class DatasetsItemsSelectorDefaultsClearSelection extends NativeObjectCont
 	 * @return <code>true</code> if clear selection element will apply style of selection area, otherwise <code>false</code>
 	 */
 	boolean isUseSelectionStyle() {
-		return getValue(ClearSelection.Property.useSelectionStyle, ClearSelection.DEFAULT_USE_SELECTION_STYLE);
+		return getValue(ClearSelection.Property.USE_SELECTION_STYLE, ClearSelection.DEFAULT_USE_SELECTION_STYLE);
 	}
 
 }

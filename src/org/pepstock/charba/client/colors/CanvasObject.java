@@ -37,7 +37,30 @@ public abstract class CanvasObject extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		_charbaObjectID
+		CHARBA_OBJECT_ID("_charbaObjectID");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -48,7 +71,7 @@ public abstract class CanvasObject extends NativeObjectContainer {
 		// increments the id
 		// unique for every canvas object
 		// stores the ID
-		setValue(Property._charbaObjectID, counter.getAndIncrement());
+		setValue(Property.CHARBA_OBJECT_ID, counter.getAndIncrement());
 	}
 
 	/**
@@ -66,7 +89,7 @@ public abstract class CanvasObject extends NativeObjectContainer {
 	 * @return the unique canvas id.
 	 */
 	public final int getId() {
-		return getValue(Property._charbaObjectID, UndefinedValues.INTEGER);
+		return getValue(Property.CHARBA_OBJECT_ID, UndefinedValues.INTEGER);
 	}
 
 }

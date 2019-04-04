@@ -43,7 +43,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ImageShape extends ShapeDrawer implements IsShape {
+public final class ImageShape extends AbstractShape {
 
 	/**
 	 * Name of shape to draw an image, <b>{@value IMAGE_SHAPE_NAME}</b>.
@@ -51,8 +51,6 @@ public final class ImageShape extends ShapeDrawer implements IsShape {
 	public static final String IMAGE_SHAPE_NAME = "image";
 	// image to draw on the tile
 	private final ImageElement imageElement;
-	// key prefix
-	private final String imageKeyPrefix;
 
 	/**
 	 * Creates a shape with an image.
@@ -78,45 +76,18 @@ public final class ImageShape extends ShapeDrawer implements IsShape {
 	 * @param image image to draw on tile
 	 */
 	public ImageShape(ImageElement image) {
+		super(IMAGE_SHAPE_NAME);
 		// checks if image is not consistent
 		if (image != null) {
 			// stores the image
 			this.imageElement = image;
 			// key prefix for caching is NAME plus source of image
-			this.imageKeyPrefix = IMAGE_SHAPE_NAME+imageElement.getSrc();
+			super.setKeyPrefix(IMAGE_SHAPE_NAME + imageElement.getSrc());
 		} else {
 			// if here, image is null
 			// then exception
 			throw new IllegalArgumentException("Image instance is not consitent or null!");
 		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.commons.Key#name()
-	 */
-	@Override
-	public String name() {
-		return IMAGE_SHAPE_NAME;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.IsShape#getDrawer()
-	 */
-	@Override
-	public ShapeDrawer getDrawer() {
-		return this;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.colors.tiles.IsShape#getKeyPrefix()
-	 */
-	@Override
-	public String getKeyPrefix() {
-		return imageKeyPrefix;
 	}
 
 	/*

@@ -40,8 +40,30 @@ public final class GradientColor extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		_charbaGradientColorOffset,
-		_charbaGradientColor
+		CHARBA_GRADIENT_COLOR_OFFSET("_charbaGradientColorOffset"),
+		CHARBA_GRADIENT_COLOR("_charbaGradientColor");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
 	}
 
 	/**
@@ -62,8 +84,8 @@ public final class GradientColor extends NativeObjectContainer {
 	 */
 	public GradientColor(double offset, String color) {
 		checkOffsetWithinBounds(offset);
-		setValue(Property._charbaGradientColorOffset, offset);
-		setValue(Property._charbaGradientColor, color);
+		setValue(Property.CHARBA_GRADIENT_COLOR_OFFSET, offset);
+		setValue(Property.CHARBA_GRADIENT_COLOR, color);
 	}
 
 	/**
@@ -81,7 +103,7 @@ public final class GradientColor extends NativeObjectContainer {
 	 * @return the defined offset for stopping gradient color. Default is 0.
 	 */
 	public double getOffset() {
-		return getValue(Property._charbaGradientColorOffset, DEFAULT_OFFSET);
+		return getValue(Property.CHARBA_GRADIENT_COLOR_OFFSET, DEFAULT_OFFSET);
 	}
 
 	/**
@@ -90,7 +112,7 @@ public final class GradientColor extends NativeObjectContainer {
 	 * @return the color of the gradient.
 	 */
 	public String getColorAsString() {
-		return getValue(Property._charbaGradientColor, Defaults.get().getGlobal().getElements().getLine().getBackgroundColorAsString());
+		return getValue(Property.CHARBA_GRADIENT_COLOR, Defaults.get().getGlobal().getElements().getLine().getBackgroundColorAsString());
 	}
 
 	/**

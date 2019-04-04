@@ -44,7 +44,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param datasetIndex the dataset index of the chart
 	 */
 	public void setDatasetIndex(int datasetIndex) {
-		setValue(LegendItem.Property.datasetIndex, datasetIndex);
+		setValue(LegendItem.Property.DATASET_INDEX, datasetIndex);
 	}
 
 	/**
@@ -53,7 +53,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param index the dataset index of the chart (for POLAR and PIE charts)
 	 */
 	public void setIndex(int index) {
-		setValue(LegendItem.Property.index, index);
+		setValue(LegendItem.Property.INDEX, index);
 	}
 
 	/**
@@ -62,7 +62,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param text the label that will be displayed
 	 */
 	public void setText(String text) {
-		setValue(LegendItem.Property.text, text);
+		setValue(LegendItem.Property.TEXT, text);
 	}
 
 	/**
@@ -71,7 +71,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param color the fill style of the legend box
 	 */
 	public void setFillStyle(IsColor color) {
-		setValue(LegendItem.Property.fillStyle, color.toRGBA());
+		setValue(LegendItem.Property.FILL_STYLE, color.toRGBA());
 	}
 
 	/**
@@ -80,7 +80,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param hidden true if this item represents a hidden dataset. Label will be rendered with a strike-through effect
 	 */
 	public void setHidden(boolean hidden) {
-		setValue(LegendItem.Property.hidden, hidden);
+		setValue(LegendItem.Property.HIDDEN, hidden);
 	}
 
 	/**
@@ -90,7 +90,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param style how the end points of every box border are drawn.
 	 */
 	public void setLineCap(CapStyle style) {
-		setValue(LegendItem.Property.lineCap, style);
+		setValue(LegendItem.Property.LINE_CAP, style);
 	}
 
 	/**
@@ -101,7 +101,7 @@ public final class LegendLabelItem extends LegendItem {
 	 *            lengths of lines and gaps which describe the pattern.
 	 */
 	public void setLineDash(List<Integer> lineDash) {
-		setArrayValue(LegendItem.Property.lineDash, ArrayInteger.fromOrNull(lineDash));
+		setArrayValue(LegendItem.Property.LINE_DASH, ArrayInteger.fromOrNull(lineDash));
 	}
 
 	/**
@@ -110,7 +110,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param lineDashOffset the box border dash pattern offset or "phase".
 	 */
 	public void setLineDashOffset(int lineDashOffset) {
-		setValue(LegendItem.Property.lineDashOffset, lineDashOffset);
+		setValue(LegendItem.Property.LINE_DASH_OFFSET, lineDashOffset);
 	}
 
 	/**
@@ -122,7 +122,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param style There are three possible values for this property: round, bevel and miter.
 	 */
 	public void setLineJoin(JoinStyle style) {
-		setValue(LegendItem.Property.lineJoin, style);
+		setValue(LegendItem.Property.LINE_JOIN, style);
 	}
 
 	/**
@@ -131,7 +131,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param lineWidths the width of box border in pixels.
 	 */
 	public void setLineWidth(int lineWidths) {
-		setValue(LegendItem.Property.lineWidth, lineWidths);
+		setValue(LegendItem.Property.LINE_WIDTH, lineWidths);
 	}
 
 	/**
@@ -140,7 +140,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param color the stroke style of the legend box
 	 */
 	public void setStrokeStyle(IsColor color) {
-		setValue(LegendItem.Property.strokeStyle, color.toRGBA());
+		setValue(LegendItem.Property.STROKE_STYLE, color.toRGBA());
 	}
 
 	/**
@@ -149,6 +149,6 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param style the style of the legend box
 	 */
 	public void setPointStyle(PointStyle style) {
-		setValue(LegendItem.Property.pointStyle, style);
+		setValue(LegendItem.Property.POINT_STYLE, style);
 	}
 }

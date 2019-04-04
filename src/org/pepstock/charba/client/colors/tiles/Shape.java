@@ -25,115 +25,115 @@ public enum Shape implements IsShape
 	/**
 	 * Draws a back slashed line.
 	 */
-	backSlashedLine(new BackSlashedLine()),
+	BACK_SLASHED_LINE(new BackSlashedLine()),
 	/**
 	 * Draws a box on the tile.
 	 */
-	box(new Box()),
+	BOX(new Box()),
 	/**
 	 * Draws a cross on the tile.
 	 */
-	cross(new Cross()),
+	CROSS(new Cross()),
 	/**
 	 * Draws a cross and a dash on the tile.
 	 */
-	crossDash(new CrossDash()),
+	CROSS_DASH(new CrossDash()),
 	/**
 	 * Draws a dash on the tile.
 	 */
-	dash(new Dash()),
+	DASH(new Dash()),
 	/**
 	 * Draws a diagonal (from left to right) on the tile.
 	 */
-	diagonal(new Diagonal()),
+	DIAGONAL(new Diagonal()),
 	/**
 	 * Draws a diamond on the tile.
 	 */
-	diamond(new Diamond()),
+	DIAMOND(new Diamond()),
 	/**
 	 * Draws a diamond and a box on the tile.
 	 */
-	diamondBox(new DiamondBox()),
+	DIAMOND_BOX(new DiamondBox()),
 	/**
 	 * Draws a disc on the tile.
 	 */
-	disc(new Disc()),
+	DISC(new Disc()),
 	/**
 	 * Draws a dot on the tile.
 	 */
-	dot(new Dot()),
+	DOT(new Dot()),
 	/**
 	 * Draws a dot and a dash on the tile.
 	 */
-	dotDash(new DotDash()),
+	DOT_DASH(new DotDash()),
 	/**
 	 * Draws a double diagonals on the tile.
 	 */
-	doubleDiagonal(new DoubleDiagonal()),
+	DOUBLE_DIAGONAL(new DoubleDiagonal()),
 	/**
 	 * Draws a start (no filled) on the tile.
 	 */
-	emptyStar(new EmptyStar()),
+	EMPTY_STAR(new EmptyStar()),
 	/**
 	 * Draws a diagonal (from right to left) on the tile.
 	 */
-	invertedDiagonal(new InvertedDiagonal()),
+	INVERTED_DIAGONAL(new InvertedDiagonal()),
 	/**
 	 * Draws a double diagonals (from right to left) on the tile.
 	 */
-	invertedDoubleDiagonal(new InvertedDoubleDiagonal()),
+	INVERTED_DOUBLE_DIAGONAL(new InvertedDoubleDiagonal()),
 	/**
 	 * Draws a triangle (with spike down) on the tile.
 	 */
-	invertedTriangle(new InvertedTriangle()),
+	INVERTED_TRIANGLE(new InvertedTriangle()),
 	/**
 	 * Draws a line on the tile.
 	 */
-	line(new Line()),
+	LINE(new Line()),
 	/**
 	 * Draws a plus on the tile.
 	 */
-	plus(new Plus()),
+	PLUS(new Plus()),
 	/**
 	 * Draws a ring on the tile.
 	 */
-	ring(new Ring()),
+	RING(new Ring()),
 	/**
 	 * Draws a slashed line.
 	 */
-	slashedLine(new SlashedLine()),
+	SLASHED_LINE(new SlashedLine()),
 	/**
 	 * Draws an empty tile.
 	 */
-	solid(new Solid()),
+	SOLID(new Solid()),
 	/**
 	 * Draws a star.
 	 */
-	star(new Star()),
+	STAR(new Star()),
 	/**
 	 * Draws a square on the tile.
 	 */
-	square(new Square()),
+	SQUARE(new Square()),
 	/**
 	 * Draws a triangle on the tile.
 	 */
-	triangle(new Triangle()),
+	TRIANGLE(new Triangle()),
 	/**
 	 * Draws a weave on the tile.
 	 */
-	weave(new Weave()),
+	WEAVE(new Weave()),
 	/**
 	 * Draws a zig zag line on the tile.
 	 */
-	zigzag(new ZigZag()),
+	ZIGZAG(new ZigZag()),
 	/**
 	 * Draws a line vertically on the tile.
 	 */
-	verticalLine(new VerticalLine()),
+	VERTICAL_LINE(new VerticalLine()),
 	/**
 	 * Draws a zig zag vertically on the tile.
 	 */
-	verticalZigzag(new VerticalZigZag());
+	VERTICAL_ZIGZAG(new VerticalZigZag());
 
 	// instance of shape drawer
 	private final ShapeDrawer drawer;
@@ -145,6 +145,16 @@ public enum Shape implements IsShape
 	 */
 	private Shape(ShapeDrawer drawer) {
 		this.drawer = drawer;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return name();
 	}
 
 	/*

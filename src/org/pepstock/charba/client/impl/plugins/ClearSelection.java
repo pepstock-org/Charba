@@ -33,13 +33,13 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Image;
 
 /**
- * {@link DatasetsItemsSelector#ID} plugin configuration element in order to have into the chart a clickable element to clear the
- * selection.
+ * {@link DatasetsItemsSelector#ID} plugin configuration element in order to have into the chart a clickable element to clear
+ * the selection.
  * 
  * @author Andrea "Stock" Stocchero
  */
 public final class ClearSelection extends NativeObjectContainer {
-	
+
 	/**
 	 * Default flag if clear selection must be showed into chart, value is <b>{@value DEFAULT_DISPLAY}</b>.
 	 */
@@ -74,17 +74,17 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * Default flag if clear selection will use selection area style, value is <b>{@value DEFAULT_USE_SELECTION_STYLE}</b>.
 	 */
 	public static final boolean DEFAULT_USE_SELECTION_STYLE = false;
-	
+
 	/**
-	 * Default clear selection box alignment, {@link Align#right}.
+	 * Default clear selection box alignment, {@link Align#RIGHT}.
 	 */
-	public static final Align DEFAULT_ALIGN = Align.right;
-	
+	public static final Align DEFAULT_ALIGN = Align.RIGHT;
+
 	/**
-	 * Default clear selection rendering, {@link Render#image_label}.
+	 * Default clear selection rendering, {@link Render#IMAGE_LABEL}.
 	 */
-	public static final Render DEFAULT_RENDER = Render.image_label;
-	
+	public static final Render DEFAULT_RENDER = Render.IMAGE_LABEL;
+
 	/**
 	 * Default clear selection box position, {@link Position#bottom}.
 	 */
@@ -105,34 +105,57 @@ public final class ClearSelection extends NativeObjectContainer {
 	 */
 	enum Property implements Key
 	{
-		display,
-		label,
-		fontSize,
-		fontFamily,
-		fontColor,
-		fontStyle,
-		align,
-		position,
-		image,
-		render,
-		margin,
-		padding,
-		spacing,
-		useSelectionStyle,
+		DISPLAY("display"),
+		LABEL("label"),
+		FONT_SIZE("fontSize"),
+		FONT_FAMILY("fontFamily"),
+		FONT_COLOR("fontColor"),
+		FONT_STYLE("fontStyle"),
+		ALIGN("align"),
+		POSITION("position"),
+		IMAGE("image"),
+		RENDER("render"),
+		MARGIN("margin"),
+		PADDING("padding"),
+		SPACING("spacing"),
+		USE_SELECTION_STYLE("useSelectionStyle"),
 		// internal properties to store the points and dimensions info
-		_x,
-		_y,
-		_width,
-		_height,
-		_imageX,
-		_imageY,
-		_imageWidth,
-		_imageHeight,
-		_labelX,
-		_labelY,
-		_labelWidth,
-		_labelHeight,
-		_layoutPadding
+		X("_x"),
+		Y("_y"),
+		WIDTH("_width"),
+		HEIGHT("_height"),
+		IMAGE_X("_imageX"),
+		IMAGE_Y("_imageY"),
+		IMAGE_WIDTH("_imageWidth"),
+		IMAGE_HEIGHT("_imageHeight"),
+		LABEL_X("_labelX"),
+		LABEL_Y("_labelY"),
+		LABEL_WIDTH("_labelWidth"),
+		LABEL_HEIGHT("_labelHeight"),
+		LAYOUT_PADDING("_layoutPadding");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -161,7 +184,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param display <code>true</code> if clear of selection label will e applied into chart, otherwise <code>false</code>
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.display, display);
+		setValue(Property.DISPLAY, display);
 	}
 
 	/**
@@ -170,7 +193,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return <code>true</code> if clear of selection label will be applied into chart, otherwise <code>false</code>
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, defaultsOptions.isDisplay());
+		return getValue(Property.DISPLAY, defaultsOptions.isDisplay());
 	}
 
 	/**
@@ -179,7 +202,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param label the clear selection label
 	 */
 	public void setLabel(String label) {
-		setValue(Property.label, label);
+		setValue(Property.LABEL, label);
 	}
 
 	/**
@@ -188,7 +211,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the clear selection label
 	 */
 	public String getLabel() {
-		return getValue(Property.label, defaultsOptions.getLabel());
+		return getValue(Property.LABEL, defaultsOptions.getLabel());
 	}
 
 	/**
@@ -197,7 +220,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param fontSize the font size.
 	 */
 	public void setFontSize(int fontSize) {
-		setValue(Property.fontSize, fontSize);
+		setValue(Property.FONT_SIZE, fontSize);
 	}
 
 	/**
@@ -206,7 +229,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the font size.
 	 */
 	public int getFontSize() {
-		return getValue(Property.fontSize, defaultsOptions.getFontSize());
+		return getValue(Property.FONT_SIZE, defaultsOptions.getFontSize());
 	}
 
 	/**
@@ -215,7 +238,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param fontStyle Font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
-		setValue(Property.fontStyle, fontStyle);
+		setValue(Property.FONT_STYLE, fontStyle);
 	}
 
 	/**
@@ -224,7 +247,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.fontStyle, FontStyle.class, defaultsOptions.getFontStyle());
+		return getValue(Property.FONT_STYLE, FontStyle.class, defaultsOptions.getFontStyle());
 	}
 
 	/**
@@ -233,7 +256,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param fontFamily Font family, follows CSS font-family options.
 	 */
 	public void setFontFamily(String fontFamily) {
-		setValue(Property.fontFamily, fontFamily);
+		setValue(Property.FONT_FAMILY, fontFamily);
 	}
 
 	/**
@@ -242,7 +265,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return Font family, follows CSS font-family options.
 	 */
 	public String getFontFamily() {
-		return getValue(Property.fontFamily, defaultsOptions.getFontFamily());
+		return getValue(Property.FONT_FAMILY, defaultsOptions.getFontFamily());
 	}
 
 	/**
@@ -251,7 +274,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the the clear selection label font color.
 	 */
 	public String getFontColorAsString() {
-		return getValue(Property.fontColor, defaultsOptions.getFontColorAsString());
+		return getValue(Property.FONT_COLOR, defaultsOptions.getFontColorAsString());
 	}
 
 	/**
@@ -269,7 +292,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param color the clear selection label font color.
 	 */
 	public void setFontColor(String color) {
-		setValue(Property.fontColor, color);
+		setValue(Property.FONT_COLOR, color);
 	}
 
 	/**
@@ -287,7 +310,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param align the clear selection align
 	 */
 	public void setAlign(Align align) {
-		setValue(Property.align, align);
+		setValue(Property.ALIGN, align);
 	}
 
 	/**
@@ -296,7 +319,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the clear selection align
 	 */
 	public Align getAlign() {
-		return getValue(Property.align, Align.class, defaultsOptions.getAlign());
+		return getValue(Property.ALIGN, Align.class, defaultsOptions.getAlign());
 	}
 
 	/**
@@ -305,7 +328,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param render the clear selection render
 	 */
 	public void setRender(Render render) {
-		setValue(Property.render, render);
+		setValue(Property.RENDER, render);
 	}
 
 	/**
@@ -314,7 +337,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the clear selection render
 	 */
 	public Render getRender() {
-		return getValue(Property.render, Render.class, defaultsOptions.getRender());
+		return getValue(Property.RENDER, Render.class, defaultsOptions.getRender());
 	}
 
 	/**
@@ -323,7 +346,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param position the clear selection label position
 	 */
 	public void setPosition(Position position) {
-		setValue(Property.position, position);
+		setValue(Property.POSITION, position);
 	}
 
 	/**
@@ -332,7 +355,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the clear selection label position
 	 */
 	public Position getPosition() {
-		return getValue(Property.position, Position.class, defaultsOptions.getPosition());
+		return getValue(Property.POSITION, Position.class, defaultsOptions.getPosition());
 	}
 
 	/**
@@ -359,7 +382,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param image the clear selection image
 	 */
 	public void setImage(ImageElement image) {
-		setValue(Property.image, image);
+		setValue(Property.IMAGE, image);
 	}
 
 	/**
@@ -368,7 +391,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the clear selection image or <code>null</code> if not set
 	 */
 	public ImageElement getImage() {
-		return getValue(Property.image, defaultsOptions.getImage());
+		return getValue(Property.IMAGE, defaultsOptions.getImage());
 	}
 
 	/**
@@ -377,7 +400,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param margin margin from canvas border
 	 */
 	public void setMargin(int margin) {
-		setValue(Property.margin, margin);
+		setValue(Property.MARGIN, margin);
 	}
 
 	/**
@@ -386,7 +409,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the margin from canvas border
 	 */
 	public int getMargin() {
-		return getValue(Property.margin, defaultsOptions.getMargin());
+		return getValue(Property.MARGIN, defaultsOptions.getMargin());
 	}
 
 	/**
@@ -395,7 +418,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param padding padding of clear selection element
 	 */
 	public void setPadding(int padding) {
-		setValue(Property.padding, padding);
+		setValue(Property.PADDING, padding);
 	}
 
 	/**
@@ -404,7 +427,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the padding of clear selection element
 	 */
 	public int getPadding() {
-		return getValue(Property.padding, defaultsOptions.getPadding());
+		return getValue(Property.PADDING, defaultsOptions.getPadding());
 	}
 
 	/**
@@ -413,7 +436,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param spacing spacing between label and image for clear selection element
 	 */
 	public void setSpacing(int spacing) {
-		setValue(Property.spacing, spacing);
+		setValue(Property.SPACING, spacing);
 	}
 
 	/**
@@ -422,7 +445,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the spacing between label and image for clear selection element
 	 */
 	public int getSpacing() {
-		return getValue(Property.spacing, defaultsOptions.getSpacing());
+		return getValue(Property.SPACING, defaultsOptions.getSpacing());
 	}
 
 	/**
@@ -432,7 +455,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 *            <code>false</code>
 	 */
 	public void setUseSelectionStyle(boolean useSelectionStyle) {
-		setValue(Property.useSelectionStyle, useSelectionStyle);
+		setValue(Property.USE_SELECTION_STYLE, useSelectionStyle);
 	}
 
 	/**
@@ -441,7 +464,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return <code>true</code> if clear selection element will apply style of selection area, otherwise <code>false</code>
 	 */
 	public boolean isUseSelectionStyle() {
-		return getValue(Property.useSelectionStyle, defaultsOptions.isUseSelectionStyle());
+		return getValue(Property.USE_SELECTION_STYLE, defaultsOptions.isUseSelectionStyle());
 	}
 
 	/**
@@ -450,7 +473,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param x X point of clear selection element
 	 */
 	void setX(double x) {
-		setValue(Property._x, x);
+		setValue(Property.X, x);
 	}
 
 	/**
@@ -459,7 +482,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the X point of clear selection element or <code>0</code> if not set
 	 */
 	double getX() {
-		return getValue(Property._x, DEFAULT_VALUE);
+		return getValue(Property.X, DEFAULT_VALUE);
 	}
 
 	/**
@@ -468,7 +491,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param y Y point of clear selection element
 	 */
 	void setY(double y) {
-		setValue(Property._y, y);
+		setValue(Property.Y, y);
 	}
 
 	/**
@@ -477,7 +500,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the Y point of clear selection element or <code>0</code> if not set
 	 */
 	double getY() {
-		return getValue(Property._y, DEFAULT_VALUE);
+		return getValue(Property.Y, DEFAULT_VALUE);
 	}
 
 	/**
@@ -486,7 +509,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param width width of clear selection element
 	 */
 	void setWidth(double width) {
-		setValue(Property._width, width);
+		setValue(Property.WIDTH, width);
 	}
 
 	/**
@@ -495,7 +518,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the width of clear selection element or <code>0</code> if not set
 	 */
 	double getWidth() {
-		return getValue(Property._width, DEFAULT_VALUE);
+		return getValue(Property.WIDTH, DEFAULT_VALUE);
 	}
 
 	/**
@@ -504,7 +527,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param height height of clear selection element
 	 */
 	void setHeight(double height) {
-		setValue(Property._height, height);
+		setValue(Property.HEIGHT, height);
 	}
 
 	/**
@@ -513,7 +536,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the height of clear selection element or <code>0</code> if not set
 	 */
 	double getHeight() {
-		return getValue(Property._height, DEFAULT_VALUE);
+		return getValue(Property.HEIGHT, DEFAULT_VALUE);
 	}
 
 	/**
@@ -522,7 +545,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param x X point of image for clear selection element
 	 */
 	void setImageX(double x) {
-		setValue(Property._imageX, x);
+		setValue(Property.IMAGE_X, x);
 	}
 
 	/**
@@ -531,7 +554,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the X point of image for clear selection element or <code>0</code> if not set
 	 */
 	double getImageX() {
-		return getValue(Property._imageX, DEFAULT_VALUE);
+		return getValue(Property.IMAGE_X, DEFAULT_VALUE);
 	}
 
 	/**
@@ -540,7 +563,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param y Y point of image for clear selection element
 	 */
 	void setImageY(double y) {
-		setValue(Property._imageY, y);
+		setValue(Property.IMAGE_Y, y);
 	}
 
 	/**
@@ -549,7 +572,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the Y point of image for clear selection element or <code>0</code> if not set
 	 */
 	double getImageY() {
-		return getValue(Property._imageY, DEFAULT_VALUE);
+		return getValue(Property.IMAGE_Y, DEFAULT_VALUE);
 	}
 
 	/**
@@ -558,7 +581,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param width width of image for clear selection element
 	 */
 	void setImageWidth(double width) {
-		setValue(Property._imageWidth, width);
+		setValue(Property.IMAGE_WIDTH, width);
 	}
 
 	/**
@@ -567,7 +590,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the width of image for clear selection element or <code>0</code> if not set
 	 */
 	double getImageWidth() {
-		return getValue(Property._imageWidth, DEFAULT_VALUE);
+		return getValue(Property.IMAGE_WIDTH, DEFAULT_VALUE);
 	}
 
 	/**
@@ -576,7 +599,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param height height of image for clear selection element
 	 */
 	void setImageHeight(double height) {
-		setValue(Property._imageHeight, height);
+		setValue(Property.IMAGE_HEIGHT, height);
 	}
 
 	/**
@@ -585,7 +608,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the height of image for clear selection element or <code>0</code> if not set
 	 */
 	double getImageHeight() {
-		return getValue(Property._imageHeight, DEFAULT_VALUE);
+		return getValue(Property.IMAGE_HEIGHT, DEFAULT_VALUE);
 	}
 
 	/**
@@ -594,7 +617,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param x X point of label for clear selection element
 	 */
 	void setLabelX(double x) {
-		setValue(Property._labelX, x);
+		setValue(Property.LABEL_X, x);
 	}
 
 	/**
@@ -603,7 +626,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the X point of label for clear selection element or <code>0</code> if not set
 	 */
 	double getLabelX() {
-		return getValue(Property._labelX, DEFAULT_VALUE);
+		return getValue(Property.LABEL_X, DEFAULT_VALUE);
 	}
 
 	/**
@@ -612,7 +635,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param y Y point of label for clear selection element
 	 */
 	void setLabelY(double y) {
-		setValue(Property._labelY, y);
+		setValue(Property.LABEL_Y, y);
 	}
 
 	/**
@@ -622,7 +645,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 */
 
 	double getLabelY() {
-		return getValue(Property._labelY, DEFAULT_VALUE);
+		return getValue(Property.LABEL_Y, DEFAULT_VALUE);
 	}
 
 	/**
@@ -632,7 +655,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 */
 
 	void setLabelWidth(double width) {
-		setValue(Property._labelWidth, width);
+		setValue(Property.LABEL_WIDTH, width);
 	}
 
 	/**
@@ -641,7 +664,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the width of label for clear selection element or <code>0</code> if not set
 	 */
 	double getLabelWidth() {
-		return getValue(Property._labelWidth, DEFAULT_VALUE);
+		return getValue(Property.LABEL_WIDTH, DEFAULT_VALUE);
 	}
 
 	/**
@@ -650,7 +673,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param height height of label for clear selection element
 	 */
 	void setLabelHeight(double height) {
-		setValue(Property._labelHeight, height);
+		setValue(Property.LABEL_HEIGHT, height);
 	}
 
 	/**
@@ -659,7 +682,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the height of label for clear selection element or <code>0</code> if not set
 	 */
 	double getLabelHeight() {
-		return getValue(Property._labelHeight, DEFAULT_VALUE);
+		return getValue(Property.LABEL_HEIGHT, DEFAULT_VALUE);
 	}
 
 	/**
@@ -668,7 +691,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @param layoutPadding the chart layout padding reserve for clear selection element
 	 */
 	void setLayoutPadding(double layoutPadding) {
-		setValue(Property._layoutPadding, layoutPadding);
+		setValue(Property.LAYOUT_PADDING, layoutPadding);
 	}
 
 	/**
@@ -677,6 +700,6 @@ public final class ClearSelection extends NativeObjectContainer {
 	 * @return the chart layout padding reserve for clear selection element or <code>0</code> if not set
 	 */
 	double getLayoutPadding() {
-		return getValue(Property._layoutPadding, DEFAULT_VALUE);
+		return getValue(Property.LAYOUT_PADDING, DEFAULT_VALUE);
 	}
 }

@@ -64,7 +64,7 @@ abstract class BaseMeterChart<O extends MeterOptions, D extends MeterDataset> ex
 		// could be gauge or meter
 		ControllerType type = getControllerType();
 		// checks if already registered
-		if (!Defaults.get().getControllers().isRegistered(type.name())) {
+		if (!Defaults.get().getControllers().isRegistered(type.value())) {
 			// if not, adds a controller
 			Defaults.get().getControllers().extend(new BaseMeterController(type));
 		}

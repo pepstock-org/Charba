@@ -34,10 +34,32 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 */
 	enum Property implements Key
 	{
-		top,
-		right,
-		bottom,
-		left
+		TOP("top"),
+		RIGHT("right"),
+		BOTTOM("bottom"),
+		LEFT("left");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
 	}
 
 	/**
@@ -55,7 +77,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 * @return the top of chart area. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getTop() {
-		return getValue(Property.top, UndefinedValues.INTEGER);
+		return getValue(Property.TOP, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -64,7 +86,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 * @return the right of chart area. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getRight() {
-		return getValue(Property.right, UndefinedValues.INTEGER);
+		return getValue(Property.RIGHT, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -73,7 +95,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 * @return the bottom of chart area. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getBottom() {
-		return getValue(Property.bottom, UndefinedValues.INTEGER);
+		return getValue(Property.BOTTOM, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -82,7 +104,7 @@ public abstract class BaseBoxItem extends NativeObjectContainer {
 	 * @return the left of chart area. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getLeft() {
-		return getValue(Property.left, UndefinedValues.INTEGER);
+		return getValue(Property.LEFT, UndefinedValues.INTEGER);
 	}
 
 	/**

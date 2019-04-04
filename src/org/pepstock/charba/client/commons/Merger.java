@@ -41,10 +41,33 @@ public final class Merger {
 	 */
 	private enum Property implements Key
 	{
-		scale,
-		scales,
-		xAxes,
-		yAxes
+		SCALE("scale"),
+		SCALES("scales"),
+		X_AXES("xAxes"),
+		Y_AXES("yAxes");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates a property with the value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -110,15 +133,15 @@ public final class Merger {
 	 */
 	private void handleMultiScalesType(NativeObject chartOptions, NativeObject scaleOptions) {
 		// checks if scales object is present
-		if (chartOptions.hasProperty(Property.scales.name())) {
+		if (chartOptions.hasProperty(Property.SCALES.value())) {
 			// if here, the chart has got 2 or more scales
 			// gets the native object for scales
-			NativeObjectDescriptor descriptor = chartOptions.getObjectProperty(Property.scales.name());
+			NativeObjectDescriptor descriptor = chartOptions.getObjectProperty(Property.SCALES.name());
 			NativeObject scales = descriptor.getValue();
 			// checks if there is x axes
-			if (scales.hasProperty(Property.xAxes.name())) {
+			if (scales.hasProperty(Property.X_AXES.value())) {
 				// gets the array about x axes
-				NativeArrayDescriptor<ArrayObject> xScalesDescriptor = scales.getArrayProperty(Property.xAxes.name());
+				NativeArrayDescriptor<ArrayObject> xScalesDescriptor = scales.getArrayProperty(Property.X_AXES.value());
 				ArrayObject xScales = xScalesDescriptor.getValue();
 				// scans all x axes applying the default scale
 				for (int i = 0; i < xScales.length(); i++) {
@@ -126,9 +149,9 @@ public final class Merger {
 				}
 			}
 			// checks if there is y axes
-			if (scales.hasProperty(Property.yAxes.name())) {
+			if (scales.hasProperty(Property.Y_AXES.value())) {
 				// gets the array about y axes
-				NativeArrayDescriptor<ArrayObject> yScalesDescriptor = scales.getArrayProperty(Property.yAxes.name());
+				NativeArrayDescriptor<ArrayObject> yScalesDescriptor = scales.getArrayProperty(Property.Y_AXES.value());
 				ArrayObject yScales = yScalesDescriptor.getValue();
 				// scans all x axes applying the default scale
 				for (int i = 0; i < yScales.length(); i++) {
@@ -146,11 +169,11 @@ public final class Merger {
 	 */
 	private void handleSingleScalesType(NativeObject chartOptions, NativeObject scaleOptions) {
 		// checks if scale object is present
-		if (chartOptions.hasProperty(Property.scale.name())) {
+		if (chartOptions.hasProperty(Property.SCALE.value())) {
 			// if has got scale
 			// apply the default scale to single scale of chart options
-			NativeObjectDescriptor descriptor = chartOptions.getObjectProperty(Property.scale.name());
-			chartOptions.defineObjectProperty(Property.scale.name(), mergeNativeObjects(descriptor.getValue(), scaleOptions));
+			NativeObjectDescriptor descriptor = chartOptions.getObjectProperty(Property.SCALE.value());
+			chartOptions.defineObjectProperty(Property.SCALE.value(), mergeNativeObjects(descriptor.getValue(), scaleOptions));
 		}
 	}
 

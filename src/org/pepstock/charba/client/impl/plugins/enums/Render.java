@@ -28,18 +28,40 @@ public enum Render implements Key
 	/**
 	 * The label will be rendered.
 	 */
-	label,
+	LABEL("label"),
 	/**
 	 * The label and image will be rendered.
 	 */
-	label_image,
+	LABEL_IMAGE("label_image"),
 	/**
 	 * The images will be rendered.
 	 */
-	image,
+	IMAGE("image"),
 	/**
 	 * The images and label will be rendered.
 	 */
-	image_label;
+	IMAGE_LABEL("image_label");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private Render(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
 
 }

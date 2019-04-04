@@ -45,7 +45,7 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * @param id CHARBA id.
 	 */
 	public void setCharbaId(String id) {
-		setValue(Id.charbaId, id);
+		setValue(Id.CHARBA_ID, id);
 	}
 
 	/**

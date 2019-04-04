@@ -95,7 +95,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, Arr
 	 */
 	@Override
 	public boolean add(E e) {
-		array.push(e.name());
+		array.push(e.value());
 		return true;
 	}
 
@@ -140,18 +140,14 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, Arr
 	@Override
 	public boolean addAll(Collection<? extends E> c) {
 		// set modified checking if collection is empty
-		boolean modified = !c.isEmpty();
+		boolean modified = false;
 		Iterator<? extends E> e = c.iterator();
 		// scans all elements
 		while (e.hasNext()) {
-			// if adds
-			if (add(e.next())) {
-				// sets modified
-				modified &= true;
-			} else {
-				// sets false!
-				modified = false;
-			}
+			// adds
+			add(e.next());
+			// sets modified
+			modified = true;
 		}
 		return modified;
 	}
@@ -238,7 +234,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, Arr
 			String old = array.get(index);
 			E oldValue = getByName(old);
 			// replaces with new element
-			array.set(index, element.name());
+			array.set(index, element.value());
 			// returns old
 			return oldValue;
 		}
@@ -252,7 +248,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, Arr
 	 */
 	@Override
 	public void add(int index, E element) {
-		array.insertAt(index, element.name());
+		array.insertAt(index, element.value());
 	}
 
 	/**
@@ -281,7 +277,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, Arr
 			// cast
 			Key val = (Key) o;
 			// search
-			return array.indexOf(val.name());
+			return array.indexOf(val.value());
 		}
 		return -1;
 	}
@@ -297,7 +293,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, Arr
 			// cast
 			Key val = (Key) o;
 			// search
-			return array.lastIndexOf(val.name());
+			return array.lastIndexOf(val.value());
 		}
 		return -1;
 	}
@@ -312,7 +308,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, Arr
 		// scans all EnumValues
 		for (E value : definedValues) {
 			// if equals returns it
-			if (value.name().equalsIgnoreCase(name)) {
+			if (value.value().equalsIgnoreCase(name)) {
 				return value;
 			}
 		}

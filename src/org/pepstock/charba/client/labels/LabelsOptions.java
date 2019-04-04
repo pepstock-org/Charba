@@ -49,9 +49,9 @@ import jsinterop.annotations.JsFunction;
 public final class LabelsOptions extends AbstractPluginCachedOptions {
 
 	/**
-	 * Default rendering (what data must be showed), {@link Render#value}.
+	 * Default rendering (what data must be showed), {@link Render#VALUE}.
 	 */
-	public static final Render DEFAULT_RENDER = Render.value;
+	public static final Render DEFAULT_RENDER = Render.VALUE;
 
 	/**
 	 * Default the precision for percentage, <b>{@value DEFAULT_PRECISION}</b>.
@@ -94,9 +94,9 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	public static final boolean DEFAULT_ARC = false;
 
 	/**
-	 * Default position to draw label, {@link Position#defaults}.
+	 * Default position to draw label, {@link Position#DEFAULT}.
 	 */
-	public static final Position DEFAULT_POSITION = Position.defaults;
+	public static final Position DEFAULT_POSITION = Position.DEFAULT;
 
 	/**
 	 * Default to enable drawing label even it's overlap, <b>{@value DEFAULT_OVERLAP}</b>.
@@ -183,25 +183,47 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 */
 	enum Property implements Key
 	{
-		render,
-		precision,
-		showZero,
-		fontSize,
-		fontColor,
-		fontStyle,
-		fontFamily,
-		textShadow,
-		shadowBlur,
-		shadowOffsetX,
-		shadowOffsetY,
-		shadowColor,
-		arc,
-		position,
-		overlap,
-		showActualPercentages,
-		images,
-		outsidePadding,
-		textMargin
+		RENDER("render"),
+		PRECISION("precision"),
+		SHOW_ZERO("showZero"),
+		FONT_SIZE("fontSize"),
+		FONT_COLOR("fontColor"),
+		FONT_STYLE("fontStyle"),
+		FONT_FAMILY("fontFamily"),
+		TEXT_SHADOW("textShadow"),
+		SHADOW_BLUR("shadowBlur"),
+		SHADOW_OFFSET_X("shadowOffsetX"),
+		SHADOW_OFFSET_Y("shadowOffsetY"),
+		SHADOW_COLOR("shadowColor"),
+		ARC("arc"),
+		POSITION("position"),
+		OVERLAP("overlap"),
+		SHOW_ACTUAL_PERCENTAGES("showActualPercentages"),
+		IMAGES("images"),
+		OUTSIDE_PADDING("outsidePadding"),
+		TEXT_MARGIN("textMargin");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
 	}
 
 	/**
@@ -309,16 +331,16 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param render what data must be showed.
 	 */
 	public void setRender(Render render) {
-		setValue(Property.render, render);
+		setValue(Property.RENDER, render);
 	}
 
 	/**
 	 * Returns what data must be showed.
 	 * 
-	 * @return what data must be showed. Default is {@link Render#value}.
+	 * @return what data must be showed.
 	 */
 	public Render getRender() {
-		return getValue(Property.render, Render.class, Render.value);
+		return getValue(Property.RENDER, Render.class, defaultsOptions.getRender());
 	}
 
 	/**
@@ -327,16 +349,16 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param precision the precision for percentage
 	 */
 	public void setPrecision(int precision) {
-		setValue(Property.precision, precision);
+		setValue(Property.PRECISION, precision);
 	}
 
 	/**
 	 * Returns the precision for percentage.
 	 * 
-	 * @return the precision for percentage. Default is 0.
+	 * @return the precision for percentage.
 	 */
 	public int getPrecision() {
-		return getValue(Property.precision, defaultsOptions.getPrecision());
+		return getValue(Property.PRECISION, defaultsOptions.getPrecision());
 	}
 
 	/**
@@ -345,16 +367,16 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param showZero whether or not labels of value 0 are displayed.
 	 */
 	public void setShowZero(boolean showZero) {
-		setValue(Property.showZero, showZero);
+		setValue(Property.SHOW_ZERO, showZero);
 	}
 
 	/**
 	 * Returns whether or not labels of value 0 are displayed.
 	 * 
-	 * @return whether or not labels of value 0 are displayed. Default is false.
+	 * @return whether or not labels of value 0 are displayed.
 	 */
 	public boolean isShowZero() {
-		return getValue(Property.showZero, defaultsOptions.isShowZero());
+		return getValue(Property.SHOW_ZERO, defaultsOptions.isShowZero());
 	}
 
 	/**
@@ -363,16 +385,16 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param size the font size.
 	 */
 	public void setFontSize(int size) {
-		setValue(Property.fontSize, size);
+		setValue(Property.FONT_SIZE, size);
 	}
 
 	/**
 	 * Returns the the font size.
 	 * 
-	 * @return the font size. Default is <code>Defaults.get().getGlobal().getDefaultFontSize()</code>.
+	 * @return the font size.
 	 */
 	public int getFontSize() {
-		return getValue(Property.fontSize, defaultsOptions.getFontSize());
+		return getValue(Property.FONT_SIZE, defaultsOptions.getFontSize());
 	}
 
 	/**
@@ -390,17 +412,16 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param color the font color as string.
 	 */
 	public void setFontColor(String color) {
-		setValue(Property.fontColor, color);
+		setValue(Property.FONT_COLOR, color);
 	}
 
 	/**
 	 * Returns the the font color as string.
 	 * 
-	 * @return the font color. Default is <code>Defaults.get().getGlobal().getDefaultFontColorAsString()</code>, even if the
-	 *         font color callback has been set.
+	 * @return the font color.
 	 */
 	public String getFontColorAsString() {
-		return getValue(Property.fontColor, defaultsOptions.getFontColorAsString());
+		return getValue(Property.FONT_COLOR, defaultsOptions.getFontColorAsString());
 	}
 
 	/**
@@ -418,16 +439,16 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param fontStyle the font style.
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
-		setValue(Property.fontStyle, fontStyle);
+		setValue(Property.FONT_STYLE, fontStyle);
 	}
 
 	/**
 	 * Returns the font style.
 	 * 
-	 * @return the font style. Default is <code>Defaults.get().getGlobal().getDefaultFontStyle()</code>.
+	 * @return the font style.
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.fontStyle, FontStyle.class, defaultsOptions.getFontStyle());
+		return getValue(Property.FONT_STYLE, FontStyle.class, defaultsOptions.getFontStyle());
 	}
 
 	/**
@@ -436,16 +457,16 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param fontFamily the font family
 	 */
 	public void setFontFamily(String fontFamily) {
-		setValue(Property.fontFamily, fontFamily);
+		setValue(Property.FONT_FAMILY, fontFamily);
 	}
 
 	/**
 	 * Returns the font family.
 	 * 
-	 * @return the font family. Default is <code>Defaults.get().getGlobal().getDefaultFontFamily()</code>.
+	 * @return the font family.
 	 */
 	public String getFontFamily() {
-		return getValue(Property.fontFamily, defaultsOptions.getFontFamily());
+		return getValue(Property.FONT_FAMILY, defaultsOptions.getFontFamily());
 	}
 
 	/**
@@ -454,16 +475,16 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param textShadow <code>true</code> if draws text shadows under labels.
 	 */
 	public void setTextShadow(boolean textShadow) {
-		setValue(Property.textShadow, textShadow);
+		setValue(Property.TEXT_SHADOW, textShadow);
 	}
 
 	/**
 	 * Returns if draws text shadows under labels.
 	 * 
-	 * @return <code>true</code> if draws text shadows under labels. Default is <code>false</code>.
+	 * @return <code>true</code> if draws text shadows under labels.
 	 */
 	public boolean isTextShadow() {
-		return getValue(Property.textShadow, defaultsOptions.isTextShadow());
+		return getValue(Property.TEXT_SHADOW, defaultsOptions.isTextShadow());
 	}
 
 	/**
@@ -472,16 +493,16 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param shadowBlur the text shadow intensity.
 	 */
 	public void setShadowBlur(int shadowBlur) {
-		setValue(Property.shadowBlur, shadowBlur);
+		setValue(Property.SHADOW_BLUR, shadowBlur);
 	}
 
 	/**
 	 * Returns the text shadow intensity.
 	 * 
-	 * @return the text shadow intensity. Default is 6.
+	 * @return the text shadow intensity.
 	 */
 	public int getShadowBlur() {
-		return getValue(Property.shadowBlur, defaultsOptions.getShadowBlur());
+		return getValue(Property.SHADOW_BLUR, defaultsOptions.getShadowBlur());
 	}
 
 	/**
@@ -490,16 +511,16 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param shadowOffsetX the text shadow X offset.
 	 */
 	public void setShadowOffsetX(int shadowOffsetX) {
-		setValue(Property.shadowOffsetX, shadowOffsetX);
+		setValue(Property.SHADOW_OFFSET_X, shadowOffsetX);
 	}
 
 	/**
 	 * Returns the text shadow X offset.
 	 * 
-	 * @return the text shadow X offset. Default is 3.
+	 * @return the text shadow X offset.
 	 */
 	public int getShadowOffsetX() {
-		return getValue(Property.shadowOffsetX, defaultsOptions.getShadowOffsetX());
+		return getValue(Property.SHADOW_OFFSET_X, defaultsOptions.getShadowOffsetX());
 	}
 
 	/**
@@ -508,16 +529,16 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param shadowOffsetY the text shadow Y offset.
 	 */
 	public void setShadowOffsetY(int shadowOffsetY) {
-		setValue(Property.shadowOffsetY, shadowOffsetY);
+		setValue(Property.SHADOW_OFFSET_Y, shadowOffsetY);
 	}
 
 	/**
 	 * Returns the text shadow Y offset.
 	 * 
-	 * @return the text shadow Y offset. Default is 3.
+	 * @return the text shadow Y offset.
 	 */
 	public int getShadowOffsetY() {
-		return getValue(Property.shadowOffsetY, defaultsOptions.getShadowOffsetY());
+		return getValue(Property.SHADOW_OFFSET_Y, defaultsOptions.getShadowOffsetY());
 	}
 
 	/**
@@ -535,16 +556,16 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param shadowColor the text shadow color as string.
 	 */
 	public void setShadowColor(String shadowColor) {
-		setValue(Property.shadowColor, shadowColor);
+		setValue(Property.SHADOW_COLOR, shadowColor);
 	}
 
 	/**
 	 * Returns the text shadow color as string.
 	 * 
-	 * @return the text shadow color as string. Default is <code>rgba(0,0,0,0.3)</code>.
+	 * @return the text shadow color as string.
 	 */
 	public String getShadowColorAsString() {
-		return getValue(Property.shadowColor, defaultsOptions.getShadowColorAsString());
+		return getValue(Property.SHADOW_COLOR, defaultsOptions.getShadowColorAsString());
 	}
 
 	/**
@@ -562,16 +583,16 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param arc if draws label in arc.
 	 */
 	public void setArc(boolean arc) {
-		setValue(Property.arc, arc);
+		setValue(Property.ARC, arc);
 	}
 
 	/**
 	 * Returns if draws label in arc.
 	 * 
-	 * @return <code>true</code> if draws label in arc. Default is <code>false</code>.
+	 * @return <code>true</code> if draws label in arc.
 	 */
 	public boolean isArc() {
-		return getValue(Property.arc, defaultsOptions.isArc());
+		return getValue(Property.ARC, defaultsOptions.isArc());
 	}
 
 	/**
@@ -580,16 +601,16 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param position the position to draw label.
 	 */
 	public void setPosition(Position position) {
-		setValue(Property.position, position.getValue());
+		setValue(Property.POSITION, position);
 	}
 
 	/**
 	 * Returns the position to draw label.
 	 * 
-	 * @return the position to draw label. Default is {@link Position#defaults}.
+	 * @return the position to draw label.
 	 */
 	public Position getPosition() {
-		return Position.getPositionByValue(getValue(Property.position, defaultsOptions.getPositionAsString()));
+		return getValue(Property.POSITION, Position.class, defaultsOptions.getPosition());
 	}
 
 	/**
@@ -598,16 +619,16 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param overlap if draws label even it's overlap.
 	 */
 	public void setOverlap(boolean overlap) {
-		setValue(Property.overlap, overlap);
+		setValue(Property.OVERLAP, overlap);
 	}
 
 	/**
 	 * Returns if draws label even it's overlap.
 	 * 
-	 * @return <code>true</code>if draws label even it's overlap. Default is <code>true</code>.
+	 * @return <code>true</code>if draws label even it's overlap.
 	 */
 	public boolean isOverlap() {
-		return getValue(Property.overlap, defaultsOptions.isOverlap());
+		return getValue(Property.OVERLAP, defaultsOptions.isOverlap());
 	}
 
 	/**
@@ -618,7 +639,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 *            logic to fit the percentages to 100 in total.
 	 */
 	public void setShowActualPercentages(boolean showActualPercentages) {
-		setValue(Property.showActualPercentages, showActualPercentages);
+		setValue(Property.SHOW_ACTUAL_PERCENTAGES, showActualPercentages);
 	}
 
 	/**
@@ -626,10 +647,10 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * percentages to 100 in total.
 	 * 
 	 * @return <code>true</code>if shows the real calculated percentages from the values and don't apply the additional logic to
-	 *         fit the percentages to 100 in total. Default is <code>false</code>.
+	 *         fit the percentages to 100 in total.
 	 */
 	public boolean isShowActualPercentages() {
-		return getValue(Property.showActualPercentages, defaultsOptions.isShowActualPercentages());
+		return getValue(Property.SHOW_ACTUAL_PERCENTAGES, defaultsOptions.isShowActualPercentages());
 	}
 
 	/**
@@ -638,16 +659,16 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param outsidePadding the padding when position is {@link Position#outside}.
 	 */
 	public void setOutsidePadding(int outsidePadding) {
-		setValue(Property.outsidePadding, outsidePadding);
+		setValue(Property.OUTSIDE_PADDING, outsidePadding);
 	}
 
 	/**
 	 * Returns the padding when position is {@link Position#outside}.
 	 * 
-	 * @return the padding when position is {@link Position#outside}. Default is 2.
+	 * @return the padding when position is {@link Position#outside}.
 	 */
 	public int getOutsidePadding() {
-		return getValue(Property.outsidePadding, defaultsOptions.getOutsidePadding());
+		return getValue(Property.OUTSIDE_PADDING, defaultsOptions.getOutsidePadding());
 	}
 
 	/**
@@ -656,16 +677,16 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * @param textMargin the margin of text when position is {@link Position#outside} or {@link Position#border}.
 	 */
 	public void setTextMargin(int textMargin) {
-		setValue(Property.textMargin, textMargin);
+		setValue(Property.TEXT_MARGIN, textMargin);
 	}
 
 	/**
 	 * Returns the margin of text when position is {@link Position#outside} or {@link Position#border}.
 	 * 
-	 * @return the margin of text when position is {@link Position#outside} or {@link Position#border}. Default is 2.
+	 * @return the margin of text when position is {@link Position#outside} or {@link Position#border}.
 	 */
 	public int getTextMargin() {
-		return getValue(Property.textMargin, defaultsOptions.getTextMargin());
+		return getValue(Property.TEXT_MARGIN, defaultsOptions.getTextMargin());
 	}
 
 	/**
@@ -690,7 +711,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		} else {
 			// if here, argument is null
 			// then removes property
-			remove(Property.images);
+			remove(Property.IMAGES);
 		}
 	}
 
@@ -715,7 +736,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		} else {
 			// if here, argument is null
 			// then removes property
-			remove(Property.images);
+			remove(Property.IMAGES);
 		}
 	}
 
@@ -726,7 +747,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 */
 	public void setImages(ImageElement... images) {
 		// sets property
-		setArrayValue(Property.images, ArrayImage.fromOrNull(images));
+		setArrayValue(Property.IMAGES, ArrayImage.fromOrNull(images));
 	}
 
 	/**
@@ -736,7 +757,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 */
 	public List<ImageElement> getImages() {
 		// gets array
-		ArrayImage array = getArrayValue(Property.images);
+		ArrayImage array = getArrayValue(Property.IMAGES);
 		return ArrayListHelper.list(array);
 	}
 
@@ -760,10 +781,10 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (renderCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(LabelsOptions.Property.render, renderCallbackProxy.getProxy());
+			setValue(LabelsOptions.Property.RENDER, renderCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(LabelsOptions.Property.render);
+			remove(LabelsOptions.Property.RENDER);
 		}
 	}
 
@@ -787,10 +808,10 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		// checks if callback is consistent
 		if (fontColorCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(LabelsOptions.Property.fontColor, fontColorCallbackProxy.getProxy());
+			setValue(LabelsOptions.Property.FONT_COLOR, fontColorCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(LabelsOptions.Property.fontColor);
+			remove(LabelsOptions.Property.FONT_COLOR);
 		}
 	}
 }

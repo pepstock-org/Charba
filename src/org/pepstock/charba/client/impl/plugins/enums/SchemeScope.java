@@ -28,9 +28,32 @@ public enum SchemeScope implements Key
 	/**
 	 * Apply the scheme colors at dataset level (1 color for 1 dataset).
 	 */
-	dataset,
+	DATASET("dataset"),
 	/**
 	 * Apply the scheme colors at data lavel (1 color for each data inside a dataset dataset).
 	 */
-	data
+	DATA("data");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private SchemeScope(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

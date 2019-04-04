@@ -33,9 +33,32 @@ public final class AnimationItem extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		currentStep,
-		numSteps,
-		easing
+		CURRENT_STEP("currentStep"),
+		NUM_STEPS("numSteps"),
+		EASING("easing");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -53,7 +76,7 @@ public final class AnimationItem extends NativeObjectContainer {
 	 * @return the current animation frame number. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getCurrentStep() {
-		return getValue(Property.currentStep, UndefinedValues.DOUBLE);
+		return getValue(Property.CURRENT_STEP, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -62,7 +85,7 @@ public final class AnimationItem extends NativeObjectContainer {
 	 * @return the total number of animation frames. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getNumSteps() {
-		return getValue(Property.numSteps, UndefinedValues.DOUBLE);
+		return getValue(Property.NUM_STEPS, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -71,6 +94,6 @@ public final class AnimationItem extends NativeObjectContainer {
 	 * @return the animation easing to use. Default is {@link org.pepstock.charba.client.enums.Easing#easeInOutQuart}
 	 */
 	public Easing getEasing() {
-		return getValue(Property.easing, Easing.class, Easing.easeOutQuart);
+		return getValue(Property.EASING, Easing.class, Easing.easeOutQuart);
 	}
 }

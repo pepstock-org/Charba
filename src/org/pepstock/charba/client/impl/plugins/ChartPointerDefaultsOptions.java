@@ -19,8 +19,8 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
 /**
- * Configuration options of {@link ChartPointer#ID} plugin. This is mapping the configuration set into default global, used as default of the
- * chart one, if exist.
+ * Configuration options of {@link ChartPointer#ID} plugin. This is mapping the configuration set into default global, used as
+ * default of the chart one, if exist.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -48,6 +48,6 @@ final class ChartPointerDefaultsOptions extends NativeObjectContainer {
 	 * @return cursor type as string
 	 */
 	String getCursorPointerAsString() {
-		return getValue(ChartPointerOptions.Property.cursorPointer, ChartPointerOptions.DEFAULT_CURSOR_POINTER.name());
+		return getValue(ChartPointerOptions.Property.CURSOR_POINTER, ChartPointerOptions.DEFAULT_CURSOR_POINTER.name());
 	}
 }

@@ -103,9 +103,9 @@ public final class Positioner {
 					// because this callback will be set for all custom positioners
 					IsTooltipPosition position = chart.getOptions().getTooltips().getPosition();
 					// checks if the custom positioner has been registered
-					if (positioners.containsKey(position.name())) {
+					if (positioners.containsKey(position.value())) {
 						// gets the custom implementation
-						TooltipPositioner positioner = positioners.get(position.name());
+						TooltipPositioner positioner = positioners.get(position.value());
 						// list of dataset items
 						List<DatasetItem> items = ArrayListHelper.unmodifiableList(datasetItems, factory);
 						// and invokes it
@@ -174,13 +174,13 @@ public final class Positioner {
 			if (position != null) {
 				// if consistent
 				// checks if is already defined
-				if (!positioners.containsKey(position.name())) {
+				if (!positioners.containsKey(position.value())) {
 					// if not
 					// adds the function to invoke the custom positioner
 					JsPositionerHelper.get().register(position, positionerCallbackProxy.getProxy());
 				}
 				// stores into positioners map
-				positioners.put(position.name(), positioner);
+				positioners.put(position.value(), positioner);
 			} else {
 				throw new IllegalArgumentException("Custom tooltip position name is null");
 			}
@@ -200,7 +200,7 @@ public final class Positioner {
 			// removes the custom positioner from chart.js
 			JsPositionerHelper.get().unregister(position);
 			// removes the entry from maps
-			positioners.remove(position.name());
+			positioners.remove(position.value());
 		}
 	}
 }

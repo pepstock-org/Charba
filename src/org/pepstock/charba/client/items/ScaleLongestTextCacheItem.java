@@ -39,9 +39,32 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	 */
 	private enum Property implements Key
 	{
-		data,
-		garbageCollect,
-		font
+		DATA("data"), // FIXME
+		GARBAGE_COLLECT("garbageCollect"),
+		FONT("font");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -59,7 +82,7 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	 * @return the font of scale. Default is {@link UndefinedValues#STRING}
 	 */
 	public String getFont() {
-		return getValue(Property.font, UndefinedValues.STRING);
+		return getValue(Property.FONT, UndefinedValues.STRING);
 	}
 
 	/**
@@ -69,7 +92,7 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	 */
 	public List<String> getGarbageCollect() {
 		// gets array from native object
-		ArrayString array = getArrayValue(Property.garbageCollect);
+		ArrayString array = getArrayValue(Property.GARBAGE_COLLECT);
 		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}
@@ -90,7 +113,7 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 			// scans all keys
 			for (Key key : keys) {
 				// loads data item
-				result.put(key.name(), getValue(key, UndefinedValues.INTEGER));
+				result.put(key.value(), getValue(key, UndefinedValues.INTEGER));
 			}
 		}
 		// returns a unmodifiable map

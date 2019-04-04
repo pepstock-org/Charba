@@ -75,7 +75,7 @@ final class ColorSchemesUtil {
 	 * @return a key as string
 	 */
 	static String createKey(ColorScheme scheme) {
-		return createKey(scheme.category(), scheme.name());
+		return createKey(scheme.category(), scheme.value());
 	}
 
 	/**

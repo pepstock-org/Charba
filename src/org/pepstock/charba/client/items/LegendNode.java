@@ -38,11 +38,34 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 */
 	private enum Property implements Key
 	{
-		doughnutMode,
-		legendItems,
-		legendHitBoxes,
-		lineWidths,
-		columnWidths
+		DOUGHNUT_MODE("doughnutMode"),
+		LEGEND_ITEMS("legendItems"),
+		LEGEND_HIT_BOXES("legendHitBoxes"),
+		LINE_WIDTHS("lineWidths"),
+		COLUMN_WIDTHS("columnWidths");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	// factory to create legend items for array container list
@@ -65,7 +88,7 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 * @return <code>true</code> it is in doughnut mode. Default is {@link UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isDoughnutMode() {
-		return getValue(Property.doughnutMode, UndefinedValues.BOOLEAN);
+		return getValue(Property.DOUGHNUT_MODE, UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -75,7 +98,7 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 */
 	public List<Integer> getLineWidths() {
 		// gets array from native object
-		ArrayInteger array = getArrayValue(Property.lineWidths);
+		ArrayInteger array = getArrayValue(Property.LINE_WIDTHS);
 		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}
@@ -87,7 +110,7 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 */
 	public List<Integer> getColumnWidths() {
 		// gets array from native object
-		ArrayInteger array = getArrayValue(Property.columnWidths);
+		ArrayInteger array = getArrayValue(Property.COLUMN_WIDTHS);
 		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}
@@ -99,7 +122,7 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 */
 	public List<LegendHitBoxItem> getHitBoxes() {
 		// gets array from native object
-		ArrayObject array = getArrayValue(Property.legendHitBoxes);
+		ArrayObject array = getArrayValue(Property.LEGEND_HIT_BOXES);
 		// returns list
 		return ArrayListHelper.unmodifiableList(array, legendHitBoxItemFactory);
 	}
@@ -111,7 +134,7 @@ public final class LegendNode extends BaseBoxNodeItem {
 	 */
 	public List<LegendItem> getItems() {
 		// gets array from native object
-		ArrayObject array = getArrayValue(Property.legendItems);
+		ArrayObject array = getArrayValue(Property.LEGEND_ITEMS);
 		// returns list
 		return ArrayListHelper.unmodifiableList(array, legendItemFactory);
 	}

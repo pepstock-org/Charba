@@ -42,7 +42,7 @@ public final class AxisMarginsItem extends MarginsItem {
 	 * @param top the top margin in pixel
 	 */
 	public void setTop(int top) {
-		setValue(Property.top, top);
+		setValue(BaseBoxItem.Property.TOP, top);
 	}
 
 	/**
@@ -51,7 +51,7 @@ public final class AxisMarginsItem extends MarginsItem {
 	 * @param bottom the bottom margin in pixel
 	 */
 	public void setBottom(int bottom) {
-		setValue(Property.bottom, bottom);
+		setValue(BaseBoxItem.Property.BOTTOM, bottom);
 	}
 
 	/**
@@ -60,7 +60,7 @@ public final class AxisMarginsItem extends MarginsItem {
 	 * @param left the left margin in pixel
 	 */
 	public void setLeft(int left) {
-		setValue(Property.left, left);
+		setValue(BaseBoxItem.Property.LEFT, left);
 	}
 
 	/**
@@ -69,7 +69,7 @@ public final class AxisMarginsItem extends MarginsItem {
 	 * @param right the right margin in pixel
 	 */
 	public void setRight(int right) {
-		setValue(Property.right, right);
+		setValue(BaseBoxItem.Property.RIGHT, right);
 	}
 
 }

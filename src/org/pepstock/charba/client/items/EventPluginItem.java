@@ -38,9 +38,32 @@ public final class EventPluginItem extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		type,
-		x,
-		y
+		TYPE("type"),
+		X("x"),
+		Y("y");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -67,7 +90,7 @@ public final class EventPluginItem extends NativeObjectContainer {
 	 * @return X value of event. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getX() {
-		return getValue(Property.x, UndefinedValues.INTEGER);
+		return getValue(Property.X, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -76,7 +99,7 @@ public final class EventPluginItem extends NativeObjectContainer {
 	 * @return Y value of event. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getY() {
-		return getValue(Property.y, UndefinedValues.INTEGER);
+		return getValue(Property.Y, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -85,6 +108,6 @@ public final class EventPluginItem extends NativeObjectContainer {
 	 * @return the event type a string. Default is {@link UndefinedValues#STRING}.
 	 */
 	public String getType() {
-		return getValue(Property.type, UndefinedValues.STRING);
+		return getValue(Property.TYPE, UndefinedValues.STRING);
 	}
 }

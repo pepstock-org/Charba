@@ -49,10 +49,10 @@ public final class CustomTooltipPosition implements IsTooltipPosition {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.Key#name()
+	 * @see org.pepstock.charba.client.commons.Key#value()
 	 */
 	@Override
-	public String name() {
+	public String value() {
 		return name;
 	}
 

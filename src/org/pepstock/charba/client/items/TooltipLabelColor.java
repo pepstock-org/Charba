@@ -36,8 +36,31 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		backgroundColor,
-		borderColor
+		BACKGROUND_COLOR("backgroundColor"),
+		BORDER_COLOR("borderColor");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -62,7 +85,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * @param backgroundColor background color
 	 */
 	public void setBackgroundColor(String backgroundColor) {
-		setValue(Property.backgroundColor, backgroundColor);
+		setValue(Property.BACKGROUND_COLOR, backgroundColor);
 	}
 
 	/**
@@ -71,7 +94,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * @param backgroundColor background color
 	 */
 	public void setBackgroundColor(IsColor backgroundColor) {
-		setValue(Property.backgroundColor, backgroundColor.toRGBA());
+		setValue(Property.BACKGROUND_COLOR, backgroundColor.toRGBA());
 	}
 
 	/**
@@ -80,7 +103,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * @return the background color of the label.
 	 */
 	public String getBackgroundColorAsString() {
-		return getValue(Property.backgroundColor, Defaults.get().getGlobal().getTooltips().getBackgroundColorAsString());
+		return getValue(Property.BACKGROUND_COLOR, Defaults.get().getGlobal().getTooltips().getBackgroundColorAsString());
 	}
 
 	/**
@@ -98,7 +121,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * @param borderColor border color
 	 */
 	public void setBorderColor(String borderColor) {
-		setValue(Property.borderColor, borderColor);
+		setValue(Property.BORDER_COLOR, borderColor);
 	}
 
 	/**
@@ -107,7 +130,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * @param borderColor border color
 	 */
 	public void setBorderColor(IsColor borderColor) {
-		setValue(Property.borderColor, borderColor.toRGBA());
+		setValue(Property.BORDER_COLOR, borderColor.toRGBA());
 	}
 
 	/**
@@ -116,7 +139,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * @return the border color of the label.
 	 */
 	public String getBorderColorAsString() {
-		return getValue(Property.borderColor, Defaults.get().getGlobal().getTooltips().getBorderColorAsString());
+		return getValue(Property.BORDER_COLOR, Defaults.get().getGlobal().getTooltips().getBorderColorAsString());
 	}
 
 	/**

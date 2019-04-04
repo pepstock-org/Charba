@@ -277,6 +277,8 @@ public enum GwtMaterialScheme implements ColorScheme
 
 	// Category name used to build the label to configure plugin.
 	private static final String CATEGORY = "gwtmaterial";
+	// name value of property
+	private final String value;
 	// list of colors for each scheme
 	private final List<IsColor> colors = new LinkedList<>();
 
@@ -286,8 +288,19 @@ public enum GwtMaterialScheme implements ColorScheme
 	 * @param hexColors list of colors in HEX format
 	 */
 	private GwtMaterialScheme(IsColor... gwtColors) {
+		this.value = name();
 		// adds them into the list
 		colors.addAll(Arrays.asList(gwtColors));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
 	}
 
 	/*

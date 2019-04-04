@@ -43,11 +43,34 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		hidden,
-		type,
-		data,
-		yAxisID,
-		xAxisID
+		HIDDEN("hidden"),
+		TYPE("type"),
+		DATA("data"),
+		Y_AXIS_ID("yAxisID"),
+		X_AXIS_ID("xAxisID");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	// instance of dataset items factory.
@@ -72,11 +95,11 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	/**
 	 * Returns the type of dataset.
 	 * 
-	 * @return the type of dataset. If not set or invalid, the default is {@link org.pepstock.charba.client.ChartType#bar}.
+	 * @return the type of dataset. If not set or invalid, the default is {@link ChartType#BAR}.
 	 */
 	public Type getType() {
 		// gets string value from java script object
-		String value = getValue(Property.type, ChartType.bar.name());
+		String value = getValue(Property.TYPE, ChartType.BAR.value());
 		// checks if consistent with out of the box chart types
 		Type type = ChartType.get(value);
 		// if not, creates new type being a controller.
@@ -84,7 +107,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 			// gets type from controllers
 			type = Defaults.get().getControllers().getTypeByString(value);
 		}
-		return type == null ? ChartType.bar : type;
+		return type == null ? ChartType.BAR : type;
 	}
 
 	/**
@@ -93,7 +116,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	 * @return <code>true</code> if the dataset is hidden, otherwise is {@link UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isHidden() {
-		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
+		return getValue(Property.HIDDEN, UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -102,7 +125,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	 * @param hidden <code>true</code> if the dataset must be hidden, otherwise is {@link UndefinedValues#BOOLEAN}.
 	 */
 	public void setHidden(boolean hidden) {
-		setValue(Property.hidden, hidden);
+		setValue(Property.HIDDEN, hidden);
 	}
 
 	/**
@@ -111,7 +134,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	 * @return the Y axis ID. Default is {@link org.pepstock.charba.client.options.Scales#DEFAULT_Y_AXIS_ID}.
 	 */
 	public String getYAxisID() {
-		return getValue(Property.yAxisID, Scales.DEFAULT_Y_AXIS_ID);
+		return getValue(Property.Y_AXIS_ID, Scales.DEFAULT_Y_AXIS_ID);
 	}
 
 	/**
@@ -120,7 +143,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	 * @return the X axis ID. Default is {@link org.pepstock.charba.client.options.Scales#DEFAULT_X_AXIS_ID}.
 	 */
 	public String getXAxisID() {
-		return getValue(Property.xAxisID, Scales.DEFAULT_X_AXIS_ID);
+		return getValue(Property.X_AXIS_ID, Scales.DEFAULT_X_AXIS_ID);
 	}
 
 	/**
@@ -129,7 +152,7 @@ public final class DatasetMetaItem extends NativeObjectContainer {
 	 * @return a list of dataset metadata items.
 	 */
 	public List<DatasetItem> getDatasets() {
-		ArrayObject array = getArrayValue(Property.data);
+		ArrayObject array = getArrayValue(Property.DATA);
 		return ArrayListHelper.unmodifiableList(array, datasetItemFactory);
 	}
 

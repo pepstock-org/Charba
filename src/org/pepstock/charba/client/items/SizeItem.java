@@ -32,8 +32,31 @@ public class SizeItem extends NativeObjectContainer {
 	 */
 	enum Property implements Key
 	{
-		width,
-		height
+		WIDTH("width"),
+		HEIGHT("height");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -51,7 +74,7 @@ public class SizeItem extends NativeObjectContainer {
 	 * @return the width of the chart item in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getWidth() {
-		return getValue(Property.width, UndefinedValues.INTEGER);
+		return getValue(Property.WIDTH, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -60,7 +83,7 @@ public class SizeItem extends NativeObjectContainer {
 	 * @return the height of the chart item in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getHeight() {
-		return getValue(Property.height, UndefinedValues.INTEGER);
+		return getValue(Property.HEIGHT, UndefinedValues.INTEGER);
 	}
 
 }

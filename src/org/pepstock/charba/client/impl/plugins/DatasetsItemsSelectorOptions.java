@@ -43,7 +43,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  * @author Andrea "Stock" Stocchero
  */
 public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
-	
+
 	/**
 	 * Default alpha of selecting/selection colors, <b>{@value DEFAULT_ALPHA}</b>.
 	 */
@@ -86,13 +86,36 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 */
 	enum Property implements Key
 	{
-		color,
-		xAxisID,
-		borderColor,
-		borderDash,
-		borderWidth,
-		fireEventOnClearSelection,
-		clearSelection
+		COLOR("color"),
+		X_AXIS_ID("xAxisID"),
+		BORDER_COLOR("borderColor"),
+		BORDER_DASH("borderDash"),
+		BORDER_WIDTH("borderWidth"),
+		FIRE_EVENT_ON_CLEAR_SELECTION("fireEventOnClearSelection"),
+		CLEAR_SELECTION("clearSelection");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -107,7 +130,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 		// sets inner elements
 		clearSelection = new ClearSelection(defaultsOptions.getClearSelection());
 		// stores inner elements
-		setValue(Property.clearSelection, clearSelection);
+		setValue(Property.CLEAR_SELECTION, clearSelection);
 	}
 
 	/**
@@ -121,7 +144,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 		super(DatasetsItemsSelector.ID, nativeObject);
 		this.defaultsOptions = defaultsOptions;
 		// sets inner elements
-		clearSelection = new ClearSelection(getValue(Property.clearSelection), defaultsOptions.getClearSelection());
+		clearSelection = new ClearSelection(getValue(Property.CLEAR_SELECTION), defaultsOptions.getClearSelection());
 	}
 
 	/**
@@ -140,7 +163,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 *            x axis.
 	 */
 	public void setXAxisID(String xAxisID) {
-		setValue(Property.xAxisID, xAxisID);
+		setValue(Property.X_AXIS_ID, xAxisID);
 	}
 
 	/**
@@ -151,7 +174,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 *         axis.
 	 */
 	public String getXAxisID() {
-		return getValue(Property.xAxisID, defaultsOptions.getXAxisID());
+		return getValue(Property.X_AXIS_ID, defaultsOptions.getXAxisID());
 	}
 
 	/**
@@ -160,7 +183,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @return the color.
 	 */
 	public String getColorAsString() {
-		return getValue(Property.color, defaultsOptions.getColorAsString());
+		return getValue(Property.COLOR, defaultsOptions.getColorAsString());
 	}
 
 	/**
@@ -178,7 +201,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @param color the color.
 	 */
 	public void setColor(String color) {
-		setValue(Property.color, color);
+		setValue(Property.COLOR, color);
 	}
 
 	/**
@@ -197,7 +220,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @param borderDash the line dash pattern used when stroking lines
 	 */
 	public void setBorderDash(int... borderDash) {
-		setArrayValue(Property.borderDash, ArrayInteger.fromOrNull(borderDash));
+		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
 	}
 
 	/**
@@ -220,9 +243,9 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 		// creates array instance
 		ArrayInteger array = null;
 		// checks if there is the property set
-		if (has(Property.borderDash)) {
+		if (has(Property.BORDER_DASH)) {
 			// returns array
-			array = getArrayValue(Property.borderDash);
+			array = getArrayValue(Property.BORDER_DASH);
 		} else {
 			// returns default
 			array = defaultsOptions.getBorderDash();
@@ -236,7 +259,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @param borderWidth the border width of the selection.
 	 */
 	public void setBorderWidth(int borderWidth) {
-		setValue(Property.borderWidth, borderWidth);
+		setValue(Property.BORDER_WIDTH, borderWidth);
 	}
 
 	/**
@@ -245,7 +268,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @return list of the border width of the selection.
 	 */
 	public int getBorderWidth() {
-		return getValue(Property.borderWidth, defaultsOptions.getBorderWidth());
+		return getValue(Property.BORDER_WIDTH, defaultsOptions.getBorderWidth());
 	}
 
 	/**
@@ -254,7 +277,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @return the color.
 	 */
 	public String getBorderColorAsString() {
-		return getValue(Property.borderColor, defaultsOptions.getBorderColorAsString());
+		return getValue(Property.BORDER_COLOR, defaultsOptions.getBorderColorAsString());
 	}
 
 	/**
@@ -272,7 +295,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @param color the color.
 	 */
 	public void setBorderColor(String color) {
-		setValue(Property.borderColor, color);
+		setValue(Property.BORDER_COLOR, color);
 	}
 
 	/**
@@ -290,7 +313,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @param fireEvent <code>true</code> if it will fire event after clear of selection, otherwise <code>false</code>
 	 */
 	public void setFireEventOnClearSelection(boolean fireEvent) {
-		setValue(Property.fireEventOnClearSelection, fireEvent);
+		setValue(Property.FIRE_EVENT_ON_CLEAR_SELECTION, fireEvent);
 	}
 
 	/**
@@ -299,7 +322,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @return <code>true</code> if it will fire event after clear of selection, otherwise <code>false</code>
 	 */
 	public boolean isFireEventOnClearSelection() {
-		return getValue(Property.fireEventOnClearSelection, defaultsOptions.isFireEventOnClearSelection());
+		return getValue(Property.FIRE_EVENT_ON_CLEAR_SELECTION, defaultsOptions.isFireEventOnClearSelection());
 	}
 
 	/**

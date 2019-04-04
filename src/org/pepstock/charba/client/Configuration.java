@@ -83,7 +83,7 @@ public final class Configuration {
 	 */
 	@JsOverlay
 	void setType(Type type) {
-		setNativeType(type.name());
+		setNativeType(type.value());
 	}
 
 	/**

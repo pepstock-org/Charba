@@ -47,7 +47,7 @@ final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
 		// creates default clear selection options
 		clearSelection = new DatasetsItemsSelectorDefaultsClearSelection();
 		// sets the native object inside this object
-		setValue(DatasetsItemsSelectorOptions.Property.clearSelection, clearSelection);
+		setValue(DatasetsItemsSelectorOptions.Property.CLEAR_SELECTION, clearSelection);
 	}
 
 	/**
@@ -58,7 +58,7 @@ final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
 	DatasetsItemsSelectorDefaultsOptions(NativeObject nativeObject) {
 		super(nativeObject);
 		// reads default clear selection options from main object
-		clearSelection = new DatasetsItemsSelectorDefaultsClearSelection(getValue(DatasetsItemsSelectorOptions.Property.clearSelection));
+		clearSelection = new DatasetsItemsSelectorDefaultsClearSelection(getValue(DatasetsItemsSelectorOptions.Property.CLEAR_SELECTION));
 	}
 
 	/**
@@ -78,7 +78,7 @@ final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
 	 *         axis.
 	 */
 	String getXAxisID() {
-		return getValue(DatasetsItemsSelectorOptions.Property.xAxisID, DatasetsItemsSelectorOptions.DEFAULT_AXIS_ID);
+		return getValue(DatasetsItemsSelectorOptions.Property.X_AXIS_ID, DatasetsItemsSelectorOptions.DEFAULT_AXIS_ID);
 	}
 
 	/**
@@ -87,7 +87,7 @@ final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
 	 * @return the color.
 	 */
 	String getColorAsString() {
-		return getValue(DatasetsItemsSelectorOptions.Property.color, DatasetsItemsSelectorOptions.DEFAULT_COLOR.toRGBA());
+		return getValue(DatasetsItemsSelectorOptions.Property.COLOR, DatasetsItemsSelectorOptions.DEFAULT_COLOR.toRGBA());
 	}
 
 	/**
@@ -97,7 +97,7 @@ final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
 	 * @return the line dash pattern used when stroking lines.
 	 */
 	ArrayInteger getBorderDash() {
-		return getArrayValue(DatasetsItemsSelectorOptions.Property.borderDash);
+		return getArrayValue(DatasetsItemsSelectorOptions.Property.BORDER_DASH);
 	}
 
 	/**
@@ -106,7 +106,7 @@ final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
 	 * @return list of the border width of the selection.
 	 */
 	int getBorderWidth() {
-		return getValue(DatasetsItemsSelectorOptions.Property.borderWidth, DatasetsItemsSelectorOptions.DEFAULT_BORDER_WIDTH);
+		return getValue(DatasetsItemsSelectorOptions.Property.BORDER_WIDTH, DatasetsItemsSelectorOptions.DEFAULT_BORDER_WIDTH);
 	}
 
 	/**
@@ -115,7 +115,7 @@ final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
 	 * @return the color.
 	 */
 	String getBorderColorAsString() {
-		return getValue(DatasetsItemsSelectorOptions.Property.borderColor, DatasetsItemsSelectorOptions.DEFAULT_BORDER_COLOR.toRGBA());
+		return getValue(DatasetsItemsSelectorOptions.Property.BORDER_COLOR, DatasetsItemsSelectorOptions.DEFAULT_BORDER_COLOR.toRGBA());
 	}
 
 	/**
@@ -124,7 +124,7 @@ final class DatasetsItemsSelectorDefaultsOptions extends NativeObjectContainer {
 	 * @return <code>true</code> if it will fire event after clear of selection, otherwise <code>false</code>
 	 */
 	boolean isFireEventOnClearSelection() {
-		return getValue(DatasetsItemsSelectorOptions.Property.fireEventOnClearSelection, DatasetsItemsSelectorOptions.DEFAULT_FIRE_EVENT_ON_CLEAR_SELECTION);
+		return getValue(DatasetsItemsSelectorOptions.Property.FIRE_EVENT_ON_CLEAR_SELECTION, DatasetsItemsSelectorOptions.DEFAULT_FIRE_EVENT_ON_CLEAR_SELECTION);
 	}
 
 }

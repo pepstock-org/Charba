@@ -44,7 +44,29 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	enum Property implements Key
 	{
 		// internal property to set unique id
-		_charbaOptionsId
+		CHARBA_OPTIONS_ID("_charbaOptionsId");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
 	}
 
 	/**
@@ -57,7 +79,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 		this(pluginId, null);
 		// sets unique id
 		// needed for caching the instances
-		setValue(Property._charbaOptionsId, COUNTER.incrementAndGet());
+		setValue(Property.CHARBA_OPTIONS_ID, COUNTER.incrementAndGet());
 	}
 
 	protected AbstractPluginOptions(String pluginId, NativeObject nativeObject) {
@@ -71,7 +93,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	 * @return the unique ID of the options.
 	 */
 	public final int getId() {
-		return getValue(Property._charbaOptionsId, UndefinedValues.INTEGER);
+		return getValue(Property.CHARBA_OPTIONS_ID, UndefinedValues.INTEGER);
 	}
 
 	/**

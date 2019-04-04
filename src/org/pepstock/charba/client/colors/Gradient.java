@@ -63,17 +63,39 @@ public final class Gradient extends CanvasObject {
 	 */
 	private enum Property implements Key
 	{
-		_charbaGradientColors,
-		_charbaGradientType,
-		_charbaGradientOrientation,
-		_charbaGradientScope
+		CHARBA_GRADIENT_COLORS("_charbaGradientColors"),
+		CHARBA_GRADIENT_TYPE("_charbaGradientType"),
+		CHARBA_GRADIENT_ORIENTATION("_charbaGradientOrientation"),
+		CHARBA_GRADIENT_SCOPE("_charbaGradientScope");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
 	}
 
 	/**
 	 * Creates a LINEAR gradient, with <code>topDown</code> orientation and <code>chart</code> scope.
 	 */
 	public Gradient() {
-		this(GradientType.linear);
+		this(GradientType.LINEAR);
 	}
 
 	/**
@@ -92,7 +114,7 @@ public final class Gradient extends CanvasObject {
 	 * @param orientation orientation of gradient
 	 */
 	public Gradient(GradientType type, GradientOrientation orientation) {
-		this(type, orientation, GradientScope.chart);
+		this(type, orientation, GradientScope.CHART);
 	}
 
 	/**
@@ -116,22 +138,22 @@ public final class Gradient extends CanvasObject {
 		// creates color list
 		colors = new ArrayObjectContainerList<>();
 		// stores gradient type
-		setValue(Property._charbaGradientType, type);
+		setValue(Property.CHARBA_GRADIENT_TYPE, type);
 		// checks if orientation is aligned with type
 		if (type.equals(orientation.getType())) {
 			// stores the passed orientation
-			setValue(Property._charbaGradientOrientation, orientation);
+			setValue(Property.CHARBA_GRADIENT_ORIENTATION, orientation);
 		} else {
 			// if here, the type is not aligned with orientation
 			// type wins on orientation
 			// and then ignore orientation and stores
 			// default orientation for that gradient
-			setValue(Property._charbaGradientOrientation, GradientOrientation.getDefaultByType(type));
+			setValue(Property.CHARBA_GRADIENT_ORIENTATION, GradientOrientation.getDefaultByType(type));
 		}
 		// stores scope
-		setValue(Property._charbaGradientScope, scope);
+		setValue(Property.CHARBA_GRADIENT_SCOPE, scope);
 		// stores the color list
-		setArrayValue(Property._charbaGradientColors, colors);
+		setArrayValue(Property.CHARBA_GRADIENT_COLORS, colors);
 	}
 
 	/**
@@ -143,7 +165,7 @@ public final class Gradient extends CanvasObject {
 		// creates the object with native one
 		super(nativeObject);
 		// gets array of color
-		ArrayObject array = getArrayValue(Property._charbaGradientColors);
+		ArrayObject array = getArrayValue(Property.CHARBA_GRADIENT_COLORS);
 		// if null
 		if (array == null) {
 			// creates an empty list
@@ -160,7 +182,7 @@ public final class Gradient extends CanvasObject {
 	 * @return the gradient type
 	 */
 	public GradientType getType() {
-		return getValue(Property._charbaGradientType, GradientType.class, GradientType.linear);
+		return getValue(Property.CHARBA_GRADIENT_TYPE, GradientType.class, GradientType.LINEAR);
 	}
 
 	/**
@@ -169,7 +191,7 @@ public final class Gradient extends CanvasObject {
 	 * @return the gradient orientation
 	 */
 	public GradientOrientation getOrientation() {
-		return getValue(Property._charbaGradientOrientation, GradientOrientation.class, GradientOrientation.getDefaultByType(getType()));
+		return getValue(Property.CHARBA_GRADIENT_ORIENTATION, GradientOrientation.class, GradientOrientation.getDefaultByType(getType()));
 	}
 
 	/**
@@ -178,7 +200,7 @@ public final class Gradient extends CanvasObject {
 	 * @return the gradient scope
 	 */
 	public GradientScope getScope() {
-		return getValue(Property._charbaGradientScope, GradientScope.class, GradientScope.chart);
+		return getValue(Property.CHARBA_GRADIENT_SCOPE, GradientScope.class, GradientScope.CHART);
 	}
 
 	/**

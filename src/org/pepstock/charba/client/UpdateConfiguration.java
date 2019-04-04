@@ -38,9 +38,31 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		duration,
-		lazy,
-		easing
+		DURATION("duration"),
+		LAZY("lazy"),
+		EASING("easing");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
 	}
 
 	/**
@@ -49,7 +71,7 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * @param easing animation easing function.
 	 */
 	public void setEasing(Easing easing) {
-		setValue(Property.easing, easing);
+		setValue(Property.EASING, easing);
 	}
 
 	/**
@@ -58,7 +80,7 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * @return the animation easing function.
 	 */
 	public Easing getEasing() {
-		return getValue(Property.easing, Easing.class, Defaults.get().getGlobal().getAnimation().getEasing());
+		return getValue(Property.EASING, Easing.class, Defaults.get().getGlobal().getAnimation().getEasing());
 	}
 
 	/**
@@ -67,7 +89,7 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * @param milliseconds time for the animation of the redraw in milliseconds.
 	 */
 	public void setDuration(int milliseconds) {
-		setValue(Property.duration, milliseconds);
+		setValue(Property.DURATION, milliseconds);
 	}
 
 	/**
@@ -76,7 +98,7 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * @return time for the animation of the redraw in milliseconds.
 	 */
 	public int getDuration() {
-		return getValue(Property.duration, Defaults.get().getGlobal().getAnimation().getDuration());
+		return getValue(Property.DURATION, Defaults.get().getGlobal().getAnimation().getDuration());
 	}
 
 	/**
@@ -85,7 +107,7 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * @param intersect if true, the animation can be interrupted by other animations.
 	 */
 	public void setLazy(boolean intersect) {
-		setValue(Property.lazy, intersect);
+		setValue(Property.LAZY, intersect);
 	}
 
 	/**
@@ -94,7 +116,7 @@ public final class UpdateConfiguration extends NativeObjectContainer {
 	 * @return if true, the animation can be interrupted by other animations.
 	 */
 	public boolean isLazy() {
-		return getValue(Property.lazy, DEFAULT_LAZY);
+		return getValue(Property.LAZY, DEFAULT_LAZY);
 	}
 
 	/**

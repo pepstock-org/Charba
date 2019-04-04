@@ -201,7 +201,7 @@ public final class ArrayString extends Array {
 		// scans items
 		for (Key key : items) {
 			// adds element
-			result.push(key.name());
+			result.push(key.value());
 		}
 		// returns the array
 		return result;
@@ -224,7 +224,7 @@ public final class ArrayString extends Array {
 		// scans items
 		for (Key key : items) {
 			// adds element
-			result.push(key.name());
+			result.push(key.value());
 		}
 		// returns the array
 		return result;

@@ -79,10 +79,10 @@ public final class ControllerType implements Type {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.Key#name()
+	 * @see org.pepstock.charba.client.commons.Key#value()
 	 */
 	@Override
-	public String name() {
+	public String value() {
 		return type;
 	}
 
@@ -136,8 +136,8 @@ public final class ControllerType implements Type {
 	public boolean equals(Object obj) {
 		if (obj instanceof Type) {
 			Type objType = (Type) obj;
-			if (objType.name() != null && type != null) {
-				return type.equals(objType.name());
+			if (objType.value() != null && type != null) {
+				return type.equals(objType.value());
 			}
 		}
 		return false;

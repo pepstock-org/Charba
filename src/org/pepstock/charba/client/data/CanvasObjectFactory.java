@@ -154,7 +154,7 @@ public final class CanvasObjectFactory {
 			// creates the result instance
 			CanvasGradient result = null;
 			// checks if the gradient must be linear oe radial
-			if (GradientType.linear.equals(gradient.getType())) {
+			if (GradientType.LINEAR.equals(gradient.getType())) {
 				// creates a linear
 				result = createLinearGradient(chart, gradient);
 			} else {
@@ -212,7 +212,7 @@ public final class CanvasObjectFactory {
 		final double left;
 		final double right;
 		// depending of scope (canvas or chart area)
-		if (GradientScope.canvas.equals(gradient.getScope())) {
+		if (GradientScope.CANVAS.equals(gradient.getScope())) {
 			// sets the coordinates of scope
 			// CANVAS
 			top = 0;
@@ -230,49 +230,49 @@ public final class CanvasObjectFactory {
 		}
 		// checks the orientation requires by gradient
 		// and then calculates the coordinates instances of gradient
-		if (GradientOrientation.topDown.equals(gradient.getOrientation())) {
+		if (GradientOrientation.TOP_DOWN.equals(gradient.getOrientation())) {
 			// TOP-DOWN: top --> bottom
 			x0 = left;
 			y0 = top;
 			x1 = left;
 			y1 = bottom;
-		} else if (GradientOrientation.bottomUp.equals(gradient.getOrientation())) {
+		} else if (GradientOrientation.BOTTOM_UP.equals(gradient.getOrientation())) {
 			// BOTTOM-UP: bottom --> up
 			x0 = left;
 			y0 = bottom;
 			x1 = left;
 			y1 = top;
-		} else if (GradientOrientation.leftRight.equals(gradient.getOrientation())) {
+		} else if (GradientOrientation.LEFT_RIGHT.equals(gradient.getOrientation())) {
 			// LEFT-RIGHT: left --> right
 			x0 = left;
 			y0 = top;
 			x1 = right;
 			y1 = top;
-		} else if (GradientOrientation.rightLeft.equals(gradient.getOrientation())) {
+		} else if (GradientOrientation.RIGHT_LEFT.equals(gradient.getOrientation())) {
 			// RIGHT-LEFT: right --> left
 			x0 = right;
 			y0 = top;
 			x1 = left;
 			y1 = top;
-		} else if (GradientOrientation.topRight.equals(gradient.getOrientation())) {
+		} else if (GradientOrientation.TOP_RIGHT.equals(gradient.getOrientation())) {
 			// DIAGONAL TOP-RIGHT: top(left) --> bottom(right)
 			x0 = left;
 			y0 = top;
 			x1 = right;
 			y1 = bottom;
-		} else if (GradientOrientation.bottomLeft.equals(gradient.getOrientation())) {
+		} else if (GradientOrientation.BOTTOM_LEFT.equals(gradient.getOrientation())) {
 			// DIAGONAL BOTTOM-LEFT: bottom(right) --> top(left)
 			x0 = right;
 			y0 = bottom;
 			x1 = left;
 			y1 = top;
-		} else if (GradientOrientation.topLeft.equals(gradient.getOrientation())) {
+		} else if (GradientOrientation.TOP_LEFT.equals(gradient.getOrientation())) {
 			// DIAGONAL TOP-LEFT: top(right) --> bottom(left)
 			x0 = right;
 			y0 = top;
 			x1 = left;
 			y1 = bottom;
-		} else if (GradientOrientation.bottomRight.equals(gradient.getOrientation())) {
+		} else if (GradientOrientation.BOTTOM_RIGHT.equals(gradient.getOrientation())) {
 			// DIAGONAL BOTTOM-RIGHT: bottom(left) --> top(right)
 			x0 = left;
 			y0 = bottom;
@@ -321,7 +321,7 @@ public final class CanvasObjectFactory {
 		final double radius0;
 		final double radius1;
 		// depending of scope (canvas or chart area)
-		if (GradientScope.canvas.equals(gradient.getScope())) {
+		if (GradientScope.CANVAS.equals(gradient.getScope())) {
 			// gets chart node
 			ChartNode node = chart.getNode();
 			// CANVAS
@@ -410,7 +410,7 @@ public final class CanvasObjectFactory {
 		}
 		// checks the orientation requires by gradient
 		// and then calculates the coordinates instances of gradient
-		if (GradientOrientation.inOut.equals(gradient.getOrientation())) {
+		if (GradientOrientation.IN_OUT.equals(gradient.getOrientation())) {
 			// from center to border of scope (canvas or chart area) O-->
 			x0 = centerX;
 			y0 = centerY;
@@ -418,7 +418,7 @@ public final class CanvasObjectFactory {
 			x1 = centerX;
 			y1 = centerY;
 			r1 = radius1;
-		} else if (GradientOrientation.outIn.equals(gradient.getOrientation())) {
+		} else if (GradientOrientation.OUT_IN.equals(gradient.getOrientation())) {
 			// from border of scope to center (canvas or chart area) -->O
 			x0 = centerX;
 			y0 = centerY;

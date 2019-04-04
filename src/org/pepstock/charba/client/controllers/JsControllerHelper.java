@@ -60,7 +60,7 @@ final class JsControllerHelper {
 	 * @param instance controller java script instance
 	 */
 	void register(ControllerType controllerType, NativeObject instance) {
-		NativeJsControllerHelper.register(controllerType.name(), instance);
+		NativeJsControllerHelper.register(controllerType.value(), instance);
 	}
 
 	/**
@@ -71,7 +71,7 @@ final class JsControllerHelper {
 	 * @param instance controller java script instance
 	 */
 	void extend(ControllerType controllerType, ChartType chartType, NativeObject instance) {
-		NativeJsControllerHelper.extend(controllerType.name(), chartType.name(), instance);
+		NativeJsControllerHelper.extend(controllerType.value(), chartType.value(), instance);
 	}
 
 	/**
@@ -82,7 +82,7 @@ final class JsControllerHelper {
 	 * @param datasetIndex dataset index
 	 */
 	void initialize(ChartType chartType, ControllerContext context, int datasetIndex) {
-		NativeJsControllerHelper.initialize(chartType.name(), context, datasetIndex);
+		NativeJsControllerHelper.initialize(chartType.value(), context, datasetIndex);
 	}
 
 	/**
@@ -92,7 +92,7 @@ final class JsControllerHelper {
 	 * @param context context of controller
 	 */
 	void addElements(ChartType chartType, ControllerContext context) {
-		NativeJsControllerHelper.addElements(chartType.name(), context);
+		NativeJsControllerHelper.addElements(chartType.value(), context);
 	}
 
 	/**
@@ -103,7 +103,7 @@ final class JsControllerHelper {
 	 * @param index dataset index
 	 */
 	void addElementAndReset(ChartType chartType, ControllerContext context, int index) {
-		NativeJsControllerHelper.addElementAndReset(chartType.name(), context, index);
+		NativeJsControllerHelper.addElementAndReset(chartType.value(), context, index);
 	}
 
 	/**
@@ -114,7 +114,7 @@ final class JsControllerHelper {
 	 * @param ease if specified, this number represents how far to transition elements.
 	 */
 	void draw(ChartType chartType, ControllerContext context, double ease) {
-		NativeJsControllerHelper.draw(chartType.name(), context, ease);
+		NativeJsControllerHelper.draw(chartType.value(), context, ease);
 	}
 
 	/**
@@ -125,7 +125,7 @@ final class JsControllerHelper {
 	 * @param element element to be remove.
 	 */
 	void removeHoverStyle(ChartType chartType, ControllerContext context, NativeObject element) {
-		NativeJsControllerHelper.removeHoverStyle(chartType.name(), context, element);
+		NativeJsControllerHelper.removeHoverStyle(chartType.value(), context, element);
 	}
 
 	/**
@@ -136,7 +136,7 @@ final class JsControllerHelper {
 	 * @param element element to be set.
 	 */
 	void setHoverStyle(ChartType chartType, ControllerContext context, NativeObject element) {
-		NativeJsControllerHelper.setHoverStyle(chartType.name(), context, element);
+		NativeJsControllerHelper.setHoverStyle(chartType.value(), context, element);
 	}
 
 	/**
@@ -147,7 +147,7 @@ final class JsControllerHelper {
 	 * @param reset if true, put the elements into a reset state so they can animate to their final values
 	 */
 	void update(ChartType chartType, ControllerContext context, boolean reset) {
-		NativeJsControllerHelper.update(chartType.name(), context, reset);
+		NativeJsControllerHelper.update(chartType.value(), context, reset);
 	}
 
 }

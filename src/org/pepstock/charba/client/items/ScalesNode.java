@@ -57,7 +57,7 @@ public final class ScalesNode extends NativeObjectContainer {
 			// scans all keys
 			for (Key key : keys) {
 				// loads scale item
-				result.put(key.name(), new ScaleItem(getValue(key)));
+				result.put(key.value(), new ScaleItem(getValue(key)));
 			}
 		}
 		// returns a unmodifiable map

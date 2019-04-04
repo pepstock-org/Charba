@@ -24,10 +24,10 @@ package org.pepstock.charba.client.commons;
 public interface Key {
 
 	/**
-	 * Returns the name of property
+	 * Returns the name value of property
 	 * 
-	 * @return the name of property
+	 * @return the name value of property
 	 */
-	String name();
+	String value();
 
 }

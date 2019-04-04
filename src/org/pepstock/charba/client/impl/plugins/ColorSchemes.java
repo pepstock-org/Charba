@@ -98,7 +98,7 @@ public final class ColorSchemes extends AbstractPlugin {
 							// casts the dataset
 							HovingDataset hovingDataset = (HovingDataset) dataset;
 							// checks if bubble chart because the color will be selected by scheme, as for bar charts
-							if (ChartType.bubble.equals(chart.getType()) && SchemeScope.dataset.equals(options.getSchemeScope())){
+							if (ChartType.BUBBLE.equals(chart.getType()) && SchemeScope.DATASET.equals(options.getSchemeScope())) {
 								// if here is at dataset level
 								// every dataset has got own color
 								// sets background color (passed as list but it's only 1), applying the transparency
@@ -121,7 +121,7 @@ public final class ColorSchemes extends AbstractPlugin {
 							// if hoving FLEX dataset, like BAR
 							HovingFlexDataset hovingDataset = (HovingFlexDataset) dataset;
 							// checks if the scope to apply the colors is at data or dataset level
-							if (SchemeScope.data.equals(options.getSchemeScope())) {
+							if (SchemeScope.DATA.equals(options.getSchemeScope())) {
 								// if here is at data level
 								// every data has got own color
 								hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, colors, options.isReverse(), options.getBackgroundColorAlpha()));
@@ -185,8 +185,8 @@ public final class ColorSchemes extends AbstractPlugin {
 		if (DataType.numbers.equals(type)) {
 			amountOfData = dataset.getData().size();
 		} else if (DataType.points.equals(type) && dataset instanceof HasDataPoints) {
-			// ONLY datasets which implements the interface have got the data POINTS 
-			HasDataPoints dataPointsDataset = (HasDataPoints)dataset;
+			// ONLY datasets which implements the interface have got the data POINTS
+			HasDataPoints dataPointsDataset = (HasDataPoints) dataset;
 			amountOfData = dataPointsDataset.getDataPoints().size();
 		}
 		// creates an array with the data dimension

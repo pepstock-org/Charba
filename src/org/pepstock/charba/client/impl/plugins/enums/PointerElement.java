@@ -25,21 +25,43 @@ import org.pepstock.charba.client.impl.plugins.ChartPointer;
  */
 public enum PointerElement implements Key
 {
-
 	/**
 	 * Changes the cursor when over to a dataset.
 	 */
-	dataset,
+	DATASET("dataset"),
 	/**
 	 * Changes the cursor when over to the title.
 	 */
-	title,
+	TITLE("title"),
 	/**
 	 * Changes the cursor when over to an axes.
 	 */
-	axes,
+	AXES("axes"),
 	/**
 	 * Changes the cursor when over to the legend.
 	 */
-	legend;
+	LEGEND("legend");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private PointerElement(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

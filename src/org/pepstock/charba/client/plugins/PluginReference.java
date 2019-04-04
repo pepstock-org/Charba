@@ -33,7 +33,30 @@ final class PluginReference extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		id
+		ID("id");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -51,7 +74,7 @@ final class PluginReference extends NativeObjectContainer {
 	 * @return the plugin id if exists or an {@link UndefinedValues#STRING} if missing.
 	 */
 	String getId() {
-		return getValue(Property.id, UndefinedValues.STRING);
+		return getValue(Property.ID, UndefinedValues.STRING);
 	}
 
 	/**

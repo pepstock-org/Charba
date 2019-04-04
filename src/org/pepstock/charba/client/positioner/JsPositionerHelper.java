@@ -60,7 +60,7 @@ final class JsPositionerHelper {
 	 * @param object callback to invoke the tolltip positioner
 	 */
 	void register(IsTooltipPosition position, Proxy object) {
-		NativeJsPositionerHelper.register(position.name(), object);
+		NativeJsPositionerHelper.register(position.value(), object);
 	}
 
 	/**
@@ -69,7 +69,7 @@ final class JsPositionerHelper {
 	 * @param position position of tooltips to be removed
 	 */
 	void unregister(IsTooltipPosition position) {
-		NativeJsPositionerHelper.unregister(position.name());
+		NativeJsPositionerHelper.unregister(position.value());
 	}
 
 	/**
@@ -82,6 +82,6 @@ final class JsPositionerHelper {
 	 * @return the point calculated by positioner or <code>null</code> if positioner does not exist
 	 */
 	Point invoke(IsTooltipPosition position, PositionerContext context, ArrayObject datasetItems, Point eventPoint) {
-		return NativeJsPositionerHelper.invoke(position.name(), context, datasetItems, eventPoint);
+		return NativeJsPositionerHelper.invoke(position.value(), context, datasetItems, eventPoint);
 	}
 }

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.labels.enums;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.labels.LabelsPlugin;
 
 /**
@@ -22,20 +23,20 @@ import org.pepstock.charba.client.labels.LabelsPlugin;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public enum Position
+public enum Position implements Key
 {
 	/**
 	 * In labels plugin is named 'default', inside the chart.
 	 */
-	defaults("default"),
+	DEFAULT("default"),
 	/**
 	 * The labels are located on border.
 	 */
-	border("border"),
+	BORDER("border"),
 	/**
 	 * The labels are located outisde of the chart.
 	 */
-	outside("outside");
+	OUTSIDE("outside");
 
 	// value of enum
 	// this is the real value to set to configure
@@ -51,35 +52,14 @@ public enum Position
 		this.value = value;
 	}
 
-	/**
-	 * Returns the real value to set to configure LABELS plugin.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the value the real value to set to configure LABELS plugin
+	 * @see org.pepstock.charba.client.commons.Key#value()
 	 */
-	public String getValue() {
+	@Override
+	public String value() {
 		return value;
-	}
-
-	/**
-	 * Returns the position enumeration item by its value.
-	 * 
-	 * @param value the real value to set to configure LABELS plugin
-	 * @return the position enumeration item or {@link Position#defaults} is the value is wrong.
-	 */
-	public static Position getPositionByValue(String value) {
-		// if the value is consistent
-		if (value != null) {
-			// scans all position
-			for (Position position : values()) {
-				// if the position matches with the value
-				if (position.getValue().equalsIgnoreCase(value)) {
-					// returns the position
-					return position;
-				}
-			}
-		}
-		// returns the default
-		return Position.defaults;
 	}
 
 }

@@ -29,9 +29,32 @@ public enum GradientScope implements Key
 	/**
 	 * The dimension to create a gradient is the chart area.
 	 */
-	chart,
+	CHART("chart"),
 	/**
 	 * The dimension to create a gradient is the canvas.
 	 */
-	canvas
+	CANVAS("canvas");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private GradientScope(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

@@ -33,8 +33,30 @@ public class ChartNativeEvent extends NativeEvent {
 	 */
 	private enum Property implements Key
 	{
-		layerX,
-		layerY
+		LAYER_X("layerX"),
+		LAYER_Y("layerY");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
 	}
 
 	/**
@@ -50,7 +72,7 @@ public class ChartNativeEvent extends NativeEvent {
 	 * @return the layer X property
 	 */
 	public final int getLayerX() {
-		return JsHelper.get().propertyAsInt(this, Property.layerX.name());
+		return JsHelper.get().propertyAsInt(this, Property.LAYER_X.value());
 	}
 
 	/**
@@ -59,7 +81,7 @@ public class ChartNativeEvent extends NativeEvent {
 	 * @return the layer Y property
 	 */
 	public final int getLayerY() {
-		return JsHelper.get().propertyAsInt(this, Property.layerY.name());
+		return JsHelper.get().propertyAsInt(this, Property.LAYER_Y.value());
 	}
 
 }

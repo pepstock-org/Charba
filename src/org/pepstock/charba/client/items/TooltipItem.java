@@ -35,14 +35,37 @@ public final class TooltipItem extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		label,
-		value,
-		xLabel,
-		yLabel,
-		datasetIndex,
-		index,
-		x,
-		y
+		LABEL("label"),
+		VALUE("value"),
+		X_LABEL("xLabel"),
+		Y_LABEL("yLabel"),
+		DATASET_INDEX("datasetIndex"),
+		INDEX("index"),
+		X("x"),
+		Y("y");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -60,7 +83,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	 * @return the label for the tooltip. Default is {@link UndefinedValues#STRING}.
 	 */
 	public String getLabel() {
-		return getValue(Property.label, UndefinedValues.STRING);
+		return getValue(Property.LABEL, UndefinedValues.STRING);
 	}
 
 	/**
@@ -69,7 +92,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	 * @return the value for the tooltip. Default is {@link UndefinedValues#STRING}.
 	 */
 	public String getValue() {
-		return getValue(Property.value, UndefinedValues.STRING);
+		return getValue(Property.VALUE, UndefinedValues.STRING);
 	}
 
 	/**
@@ -79,7 +102,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	 */
 	@Deprecated
 	public String getXLabel() {
-		return getValue(Property.xLabel, UndefinedValues.STRING);
+		return getValue(Property.X_LABEL, UndefinedValues.STRING);
 	}
 
 	/**
@@ -89,7 +112,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	 */
 	@Deprecated
 	public String getYLabel() {
-		return getValue(Property.yLabel, UndefinedValues.STRING);
+		return getValue(Property.Y_LABEL, UndefinedValues.STRING);
 	}
 
 	/**
@@ -98,7 +121,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	 * @return the dataset index of the chart. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getDatasetIndex() {
-		return getValue(Property.datasetIndex, UndefinedValues.INTEGER);
+		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -107,7 +130,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	 * @return the index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getIndex() {
-		return getValue(Property.index, UndefinedValues.INTEGER);
+		return getValue(Property.INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -116,7 +139,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	 * @return the X location of tooltip item. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getX() {
-		return getValue(Property.x, UndefinedValues.INTEGER);
+		return getValue(Property.X, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -125,7 +148,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	 * @return the Y location of tooltip item. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getY() {
-		return getValue(Property.y, UndefinedValues.INTEGER);
+		return getValue(Property.Y, UndefinedValues.INTEGER);
 	}
 
 	/**

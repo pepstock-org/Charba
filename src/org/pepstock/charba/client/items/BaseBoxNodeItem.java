@@ -37,19 +37,42 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 */
 	enum Property implements Key
 	{
-		fullWidth,
-		position,
-		weight,
-		width,
-		height,
-		maxWidth,
-		maxHeight,
-		margins,
-		paddingTop,
-		paddingRight,
-		paddingLeft,
-		paddingBottom,
-		minSize
+		FULL_WIDTH("fullWidth"),
+		POSITION("position"),
+		WEIGHT("weight"),
+		WIDTH("width"),
+		HEIGHT("height"),
+		MAX_WIDTH("maxWidth"),
+		MAX_HEIGHT("maxHeight"),
+		MARGINS("margins"),
+		PADDING_TOP("paddingTop"),
+		PADDING_RIGHT("paddingRight"),
+		PADDING_LEFT("paddingLeft"),
+		PADDING_BOTTOM("paddingBottom"),
+		MIN_SIZE("minSize");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -60,8 +83,8 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	BaseBoxNodeItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// initializes the sub objects
-		margins = new MarginsItem(getValue(Property.margins));
-		minSize = new SizeItem(getValue(Property.minSize));
+		margins = new MarginsItem(getValue(Property.MARGINS));
+		minSize = new SizeItem(getValue(Property.MIN_SIZE));
 	}
 
 	/**
@@ -88,7 +111,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the full width in pixel. Default is {@link UndefinedValues#BOOLEAN}.
 	 */
 	public final boolean isFullWidth() {
-		return getValue(Property.fullWidth, UndefinedValues.BOOLEAN);
+		return getValue(Property.FULL_WIDTH, UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -97,7 +120,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the position of node. Default is {@link org.pepstock.charba.client.enums.Position#top}.
 	 */
 	public final Position getPosition() {
-		return getValue(Property.position, Position.class, Position.top);
+		return getValue(Property.POSITION, Position.class, Position.top);
 	}
 
 	/**
@@ -106,7 +129,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the weight. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public final double getWeight() {
-		return getValue(Property.weight, UndefinedValues.DOUBLE);
+		return getValue(Property.WEIGHT, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -115,7 +138,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the width in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getWidth() {
-		return getValue(Property.width, UndefinedValues.INTEGER);
+		return getValue(Property.WIDTH, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -124,7 +147,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the height in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getHeight() {
-		return getValue(Property.height, UndefinedValues.INTEGER);
+		return getValue(Property.HEIGHT, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -133,7 +156,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the max width in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public final double getMaxWidth() {
-		return getValue(Property.maxWidth, UndefinedValues.DOUBLE);
+		return getValue(Property.MAX_WIDTH, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -142,7 +165,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the max height in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public final double getMaxHeight() {
-		return getValue(Property.maxHeight, UndefinedValues.DOUBLE);
+		return getValue(Property.MAX_HEIGHT, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -151,7 +174,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the padding top in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getPaddingTop() {
-		return getValue(Property.paddingTop, UndefinedValues.INTEGER);
+		return getValue(Property.PADDING_TOP, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -160,7 +183,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the padding right in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getPaddingRight() {
-		return getValue(Property.paddingRight, UndefinedValues.INTEGER);
+		return getValue(Property.PADDING_RIGHT, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -169,7 +192,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the padding bottom in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getPaddingBottom() {
-		return getValue(Property.paddingBottom, UndefinedValues.INTEGER);
+		return getValue(Property.PADDING_BOTTOM, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -178,7 +201,7 @@ public abstract class BaseBoxNodeItem extends BaseBoxItem {
 	 * @return the padding left in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getPaddingLeft() {
-		return getValue(Property.paddingLeft, UndefinedValues.INTEGER);
+		return getValue(Property.PADDING_LEFT, UndefinedValues.INTEGER);
 	}
 
 }

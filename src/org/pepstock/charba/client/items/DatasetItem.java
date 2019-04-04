@@ -38,10 +38,33 @@ public class DatasetItem extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		_datasetIndex,
-		_index,
-		_view,
-		hidden
+		DATASET_INDEX("_datasetIndex"),
+		INDEX("_index"),
+		VIEW("_view"),
+		HIDDEN("hidden");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -52,7 +75,7 @@ public class DatasetItem extends NativeObjectContainer {
 	public DatasetItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// initializes the sub objects
-		view = new DatasetViewItem(getValue(Property._view));
+		view = new DatasetViewItem(getValue(Property.VIEW));
 	}
 
 	/**
@@ -61,7 +84,7 @@ public class DatasetItem extends NativeObjectContainer {
 	 * @return the dataset index of the chart. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getDatasetIndex() {
-		return getValue(Property._datasetIndex, UndefinedValues.INTEGER);
+		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -70,7 +93,7 @@ public class DatasetItem extends NativeObjectContainer {
 	 * @return the index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getIndex() {
-		return getValue(Property._index, UndefinedValues.INTEGER);
+		return getValue(Property.INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -80,7 +103,7 @@ public class DatasetItem extends NativeObjectContainer {
 	 *         {@link UndefinedValues#BOOLEAN}.
 	 */
 	public final boolean isHidden() {
-		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
+		return getValue(Property.HIDDEN, UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -89,7 +112,7 @@ public class DatasetItem extends NativeObjectContainer {
 	 * @param hidden <code>true</code> if the dataset must be hidden, otherwise <code>false</code>.
 	 */
 	public final void setHidden(boolean hidden) {
-		setValue(Property.hidden, hidden);
+		setValue(Property.HIDDEN, hidden);
 	}
 
 	/**

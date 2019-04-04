@@ -30,15 +30,39 @@ import org.pepstock.charba.client.commons.Key;
  */
 public enum GradientType implements Key
 {
+
 	/**
 	 * Creates an image consisting of a progressive transition between two or more colors along a straight line.<br>
 	 * Here is the<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient"> definition</a>.
 	 */
-	linear,
+	LINEAR("linear"),
 	/**
 	 * Creates an image consisting of a progressive transition between two or more colors that radiate from an origin. Its shape
 	 * may be a circle or an ellipse.<br>
 	 * Here is the<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient"> definition</a>.
 	 */
-	radial
+	RADIAL("radial");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private GradientType(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

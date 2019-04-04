@@ -29,17 +29,40 @@ public enum Render implements Key
 	/**
 	 * The label will be rendered.
 	 */
-	label,
+	LABEL("label"),
 	/**
 	 * The value will be rendered.
 	 */
-	value,
+	VALUE("value"),
 	/**
 	 * The percentage will be rendered. Is the default.
 	 */
-	percentage,
+	PERCENTAGE("percentage"),
 	/**
 	 * The images will be rendered.
 	 */
-	image;
+	IMAGE("image");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private Render(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

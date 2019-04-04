@@ -28,7 +28,29 @@ public enum Id implements Key
 	/**
 	 * Name of java script property
 	 */
-	charbaId;
+	CHARBA_ID("charbaId");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates a property with the value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private Id(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
 
 	/**
 	 * Returns the property value from java script object.
@@ -48,9 +70,9 @@ public enum Id implements Key
 	 */
 	public static String get(NativeObject nativeObject) {
 		// checks if property exists
-		if (nativeObject.hasProperty(charbaId.name())) {
+		if (nativeObject.hasProperty(CHARBA_ID.value())) {
 			// gets descriptor
-			NativeStringDescriptor descriptor = nativeObject.getStringProperty(charbaId.name());
+			NativeStringDescriptor descriptor = nativeObject.getStringProperty(CHARBA_ID.value());
 			// if descriptor is consistent, return value
 			return descriptor != null ? descriptor.getValue() : UndefinedValues.STRING;
 		}
@@ -67,9 +89,9 @@ public enum Id implements Key
 	 */
 	public static int get(Key key, NativeObject nativeObject) {
 		// checks if property exists
-		if (nativeObject.hasProperty(key.name())) {
+		if (nativeObject.hasProperty(key.value())) {
 			// gets descriptor
-			NativeIntegerDescriptor descriptor = nativeObject.getIntProperty(key.name());
+			NativeIntegerDescriptor descriptor = nativeObject.getIntProperty(key.value());
 			// if descriptor is consistent, return value
 			return descriptor != null ? descriptor.getValue() : UndefinedValues.INTEGER;
 		}

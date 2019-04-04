@@ -452,8 +452,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	/**
 	 * Returns the type of dataset, based on type of chart.
 	 * 
-	 * @return type of dataset or null if not set. If not set or invalid, the default is
-	 *         {@link org.pepstock.charba.client.ChartType#bar}.
+	 * @return type of dataset or null if not set. If not set or invalid, the default is {@link ChartType#BAR}.
 	 */
 	public final Type getType() {
 		// checks if the type has been set
@@ -461,7 +460,7 @@ public abstract class Dataset extends NativeObjectContainer {
 			return null;
 		}
 		// gets string value from java script object
-		String value = getValue(Property.type, ChartType.bar.name());
+		String value = getValue(Property.type, ChartType.BAR.value());
 		// checks if consistent with out of the box chart types
 		Type type = ChartType.get(value);
 		// if not, creates new type being a controller.
@@ -469,7 +468,7 @@ public abstract class Dataset extends NativeObjectContainer {
 			// gets type from controllers
 			type = Defaults.get().getControllers().getTypeByString(value);
 		}
-		return type == null ? ChartType.bar : type;
+		return type == null ? ChartType.BAR : type;
 	}
 
 	/**

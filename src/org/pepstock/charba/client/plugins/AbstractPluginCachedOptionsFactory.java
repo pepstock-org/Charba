@@ -260,7 +260,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	 */
 	protected final AbstractPluginCachedOptions getOptions(NativeObject nativeObject) {
 		// gets the option id
-		int optionsId = Id.get(AbstractPluginOptions.Property._charbaOptionsId, nativeObject);
+		int optionsId = Id.get(AbstractPluginOptions.Property.CHARBA_OPTIONS_ID, nativeObject);
 		// if cached, MUST BE ALWAYS cached
 		if (OPTIONS.containsKey(optionsId)) {
 			// returns the instance

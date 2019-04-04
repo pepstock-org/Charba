@@ -194,15 +194,15 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		Context2d ctx = chart.getCanvas().getContext2d();
 		// save context
 		ctx.save();
-		if (ChartBackgroundColorOptions.ColorType.color.equals(bgOptions.getColorType())) {
+		if (ChartBackgroundColorOptions.ColorType.COLOR.equals(bgOptions.getColorType())) {
 			// set fill canvas color
 			ctx.setFillStyle(bgOptions.getBackgroundColorAsString());
-		} else if (ChartBackgroundColorOptions.ColorType.pattern.equals(bgOptions.getColorType())) {
+		} else if (ChartBackgroundColorOptions.ColorType.PATTERN.equals(bgOptions.getColorType())) {
 			// creates the pattern
 			CanvasPattern canvasPattern = CanvasObjectFactory.createPattern(chart, bgOptions.getBackgroundColorAsPattern());
 			// set fill canvas pattern
 			ctx.setFillStyle(canvasPattern);
-		} else if (ChartBackgroundColorOptions.ColorType.gradient.equals(bgOptions.getColorType())) {
+		} else if (ChartBackgroundColorOptions.ColorType.GRADIENT.equals(bgOptions.getColorType())) {
 			// creates the gradient
 			CanvasGradient canvasGradient = ChartBackgroundGradientFactory.createGradient(chart, bgOptions.getBackgroundColorAsGradient());
 			// set fill canvas color
@@ -244,7 +244,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		// gets options
 		ChartBackgroundColorOptions bgOptions = getOptions(chart);
 		// if gradient has been set
-		if (ChartBackgroundColorOptions.ColorType.gradient.equals(bgOptions.getColorType())) {
+		if (ChartBackgroundColorOptions.ColorType.GRADIENT.equals(bgOptions.getColorType())) {
 			// Due to gradients are created based on dimension of
 			// canvas or chart area, every time a resize is occurring
 			// gradients must be recreated

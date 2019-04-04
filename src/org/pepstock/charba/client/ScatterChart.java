@@ -44,7 +44,7 @@ public class ScatterChart extends AbstractChart<ScatterOptions, ScatterDataset> 
 	 */
 	@Override
 	public Type getType() {
-		return ChartType.scatter;
+		return ChartType.SCATTER;
 	}
 
 	/*

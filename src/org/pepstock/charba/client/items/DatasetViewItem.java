@@ -46,33 +46,56 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		datasetLabel,
-		label,
-		borderSkipped,
-		backgroundColor,
-		borderColor,
-		borderWidth,
-		horizontal,
-		base,
-		x,
-		y,
-		width,
-		height,
-		skip,
-		radius,
-		pointStyle,
-		tension,
-		hitRadius,
-		controlPointPreviousX,
-		controlPointPreviousY,
-		controlPointNextX,
-		controlPointNextY,
-		steppedLine,
-		startAngle,
-		endAngle,
-		circumference,
-		outerRadius,
-		innerRadius
+		DATASET_LABEL("datasetLabel"),
+		LABEL("label"),
+		BORDER_SKIPPED("borderSkipped"),
+		BACKGROUND_COLOR("backgroundColor"),
+		BORDER_COLOR("borderColor"),
+		BORDER_WIDTH("borderWidth"),
+		HORIZONTAL("horizontal"),
+		BASE("base"),
+		X("x"),
+		Y("y"),
+		WIDTH("width"),
+		HEIGHT("height"),
+		SKIP("skip"),
+		RADIUS("radius"),
+		POINT_STYLE("pointStyle"),
+		TENSION("tension"),
+		HIT_RADIUS("hitRadius"),
+		CONTROL_POINT_PREVIOUS_X("controlPointPreviousX"),
+		CONTROL_POINT_PREVIOUS_Y("controlPointPreviousY"),
+		CONTROL_POINT_NEXT_X("controlPointNextX"),
+		CONTROL_POINT_NEXT_Y("controlPointNextY"),
+		STEPPED_LINE("steppedLine"),
+		START_ANGLE("startAngle"),
+		END_ANGLE("endAngle"),
+		CIRCUMFERENCE("circumference"),
+		OUTER_RADIUS("outerRadius"),
+		INNER_RADIUS("innerRadius");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -90,7 +113,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the dataset label. Default is {@link UndefinedValues#STRING}.
 	 */
 	public String getDatasetLabel() {
-		return getValue(Property.datasetLabel, UndefinedValues.STRING);
+		return getValue(Property.DATASET_LABEL, UndefinedValues.STRING);
 	}
 
 	/**
@@ -99,7 +122,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the label. Default is {@link UndefinedValues#STRING}.
 	 */
 	public String getLabel() {
-		return getValue(Property.label, UndefinedValues.STRING);
+		return getValue(Property.LABEL, UndefinedValues.STRING);
 	}
 
 	/**
@@ -110,12 +133,12 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 */
 	public BorderSkipped getBorderSkipped() {
 		// checks if 'false' has been set
-		if (ObjectType.Boolean.equals(type(Property.borderSkipped))) {
+		if (ObjectType.Boolean.equals(type(Property.BORDER_SKIPPED))) {
 			// returns is false
 			return BorderSkipped.noborderskipped;
 		}
 		// otherwise returns the enum value as string
-		return getValue(Property.borderSkipped, BorderSkipped.class, BorderSkipped.noborderskipped);
+		return getValue(Property.BORDER_SKIPPED, BorderSkipped.class, BorderSkipped.noborderskipped);
 	}
 
 	/**
@@ -124,7 +147,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return list of the fill color of the dataset item.
 	 */
 	public String getBackgroundColorAsString() {
-		return getValue(Property.backgroundColor, Defaults.get().getGlobal().getDefaultColorAsString());
+		return getValue(Property.BACKGROUND_COLOR, Defaults.get().getGlobal().getDefaultColorAsString());
 	}
 
 	/**
@@ -142,7 +165,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return list of the color of the dataset item border.
 	 */
 	public String getBorderColorAsString() {
-		return getValue(Property.borderColor, Defaults.get().getGlobal().getDefaultColorAsString());
+		return getValue(Property.BORDER_COLOR, Defaults.get().getGlobal().getDefaultColorAsString());
 	}
 
 	/**
@@ -160,7 +183,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return list of the stroke width of the dataset item in pixels. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getBorderWidth() {
-		return getValue(Property.borderWidth, UndefinedValues.INTEGER);
+		return getValue(Property.BORDER_WIDTH, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -169,7 +192,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return <code>true</code> if is an horizontal view. Default is {@link UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isHorizontal() {
-		return getValue(Property.horizontal, UndefinedValues.BOOLEAN);
+		return getValue(Property.HORIZONTAL, UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -178,7 +201,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the base value of dataset. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getBase() {
-		return getValue(Property.base, UndefinedValues.DOUBLE);
+		return getValue(Property.BASE, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -187,7 +210,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the X location of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getX() {
-		return getValue(Property.x, UndefinedValues.DOUBLE);
+		return getValue(Property.X, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -196,7 +219,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the Y location of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getY() {
-		return getValue(Property.y, UndefinedValues.DOUBLE);
+		return getValue(Property.Y, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -205,7 +228,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the width of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getWidth() {
-		return getValue(Property.width, UndefinedValues.DOUBLE);
+		return getValue(Property.WIDTH, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -214,7 +237,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the height of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getHeight() {
-		return getValue(Property.height, UndefinedValues.DOUBLE);
+		return getValue(Property.HEIGHT, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -223,7 +246,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return <code>true</code> if skipped. Default is {@link UndefinedValues#BOOLEAN}.
 	 */
 	public boolean isSkipped() {
-		return getValue(Property.skip, UndefinedValues.BOOLEAN);
+		return getValue(Property.SKIP, UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -232,7 +255,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the radius of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getRadius() {
-		return getValue(Property.radius, Defaults.get().getGlobal().getElements().getPoint().getRadius());
+		return getValue(Property.RADIUS, Defaults.get().getGlobal().getElements().getPoint().getRadius());
 	}
 
 	/**
@@ -242,14 +265,14 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 */
 	public List<PointStyle> getPointStyle() {
 		// checks if the property is an array
-		if (ObjectType.Array.equals(type(Property.pointStyle))) {
+		if (ObjectType.Array.equals(type(Property.POINT_STYLE))) {
 			// if array, maps into array
-			ArrayString array = getArrayValue(Property.pointStyle);
+			ArrayString array = getArrayValue(Property.POINT_STYLE);
 			// returns list
 			return ArrayListHelper.unmodifiableList(PointStyle.class, array);
 		} else {
 			// the property is a string or missing
-			return Collections.unmodifiableList(Arrays.asList(getValue(Property.pointStyle, PointStyle.class, Defaults.get().getGlobal().getElements().getPoint().getPointStyle())));
+			return Collections.unmodifiableList(Arrays.asList(getValue(Property.POINT_STYLE, PointStyle.class, Defaults.get().getGlobal().getElements().getPoint().getPointStyle())));
 		}
 	}
 
@@ -259,7 +282,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the Bezier curve tension (0 for no Bezier curves).
 	 */
 	public double getTension() {
-		return getValue(Property.tension, Defaults.get().getGlobal().getElements().getLine().getTension());
+		return getValue(Property.TENSION, Defaults.get().getGlobal().getElements().getLine().getTension());
 	}
 
 	/**
@@ -268,7 +291,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the hit radius.
 	 */
 	public double getHitRadius() {
-		return getValue(Property.hitRadius, Defaults.get().getGlobal().getElements().getPoint().getHitRadius());
+		return getValue(Property.HIT_RADIUS, Defaults.get().getGlobal().getElements().getPoint().getHitRadius());
 	}
 
 	/**
@@ -277,7 +300,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the previous X control point of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getControlPointPreviousX() {
-		return getValue(Property.controlPointPreviousX, UndefinedValues.DOUBLE);
+		return getValue(Property.CONTROL_POINT_PREVIOUS_X, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -286,7 +309,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the previous Y control point of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getControlPointPreviousY() {
-		return getValue(Property.controlPointPreviousY, UndefinedValues.DOUBLE);
+		return getValue(Property.CONTROL_POINT_PREVIOUS_Y, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -295,7 +318,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the next X control point of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getControlPointNextX() {
-		return getValue(Property.controlPointNextX, UndefinedValues.DOUBLE);
+		return getValue(Property.CONTROL_POINT_NEXT_X, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -304,7 +327,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the next Y control point of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getControlPointNextY() {
-		return getValue(Property.controlPointNextY, UndefinedValues.DOUBLE);
+		return getValue(Property.CONTROL_POINT_NEXT_Y, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -313,7 +336,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return <code>true</code> if stepped line has been selected.
 	 */
 	public boolean isSteppedLine() {
-		return getValue(Property.steppedLine, Defaults.get().getGlobal().getElements().getLine().isStepped());
+		return getValue(Property.STEPPED_LINE, Defaults.get().getGlobal().getElements().getLine().isStepped());
 	}
 
 	/**
@@ -322,7 +345,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the start angle of dataset item. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getStartAngle() {
-		return getValue(Property.startAngle, UndefinedValues.DOUBLE);
+		return getValue(Property.START_ANGLE, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -331,7 +354,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the end angle of dataset item. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getEndAngle() {
-		return getValue(Property.endAngle, UndefinedValues.DOUBLE);
+		return getValue(Property.END_ANGLE, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -340,7 +363,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the circumference of dataset item.
 	 */
 	public double getCircumference() {
-		return getValue(Property.circumference, Defaults.get().getGlobal().getCircumference());
+		return getValue(Property.CIRCUMFERENCE, Defaults.get().getGlobal().getCircumference());
 	}
 
 	/**
@@ -349,7 +372,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the outer radius of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getOuterRadius() {
-		return getValue(Property.outerRadius, UndefinedValues.DOUBLE);
+		return getValue(Property.OUTER_RADIUS, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -358,6 +381,6 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 * @return the inner radius of dataset item in pixel. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getInnerRadius() {
-		return getValue(Property.innerRadius, UndefinedValues.DOUBLE);
+		return getValue(Property.INNER_RADIUS, UndefinedValues.DOUBLE);
 	}
 }

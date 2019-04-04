@@ -30,16 +30,16 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
  *
  */
 public final class ColorSchemesOptions extends AbstractPluginOptions {
-	
+
 	/**
 	 * Default color scheme, {@link BrewerScheme#Paired12}.
 	 */
-	public static final ColorScheme DEFAULT_SCHEME = BrewerScheme.Paired12;
+	public static final ColorScheme DEFAULT_SCHEME = BrewerScheme.PAIRED12;
 
 	/**
-	 * Default color scheme scope (for bar and bubble charts), {@link SchemeScope#dataset}.
+	 * Default color scheme scope (for bar and bubble charts), {@link SchemeScope#DATASET}.
 	 */
-	public static final SchemeScope DEFAULT_SCHEME_SCOPE = SchemeScope.dataset;
+	public static final SchemeScope DEFAULT_SCHEME_SCOPE = SchemeScope.DATASET;
 
 	/**
 	 * Default transparency value for the background color, <b>{@value DEFAULT_BACKGROUND_ALPHA}</b>.
@@ -50,9 +50,10 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * Default the order of the colors in the selected scheme is reversed, <b>{@value DEFAULT_REVERSE}</b>.
 	 */
 	public static final boolean DEFAULT_REVERSE = false;
-	
+
 	/**
-	 * Default category when new color scheme has been created on top of the available schemes, <b>{@value DEFAULT_SCHEME_CATEGORY}</b>.
+	 * Default category when new color scheme has been created on top of the available schemes,
+	 * <b>{@value DEFAULT_SCHEME_CATEGORY}</b>.
 	 */
 	public static final String DEFAULT_SCHEME_CATEGORY = "custom";
 
@@ -66,11 +67,33 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 */
 	enum Property implements Key
 	{
-		schemeScope,
-		schemeCategory,
-		schemeName,
-		backgroundColorAlpha,
-		reverse
+		SCHEME_SCOPE("schemeScope"),
+		SCHEME_CATEGORY("schemeCategory"),
+		SCHEME_NAME("schemeName"),
+		BACKGROUND_COLOR_ALPHA("backgroundColorAlpha"),
+		REVERSE("reverse");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
 	}
 
 	/**
@@ -98,7 +121,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * @param schemeScope the color scheme scope when the scheme is applied to hoving flex datasets, like bars charts.
 	 */
 	public void setSchemeScope(SchemeScope schemeScope) {
-		setValue(Property.schemeScope, schemeScope);
+		setValue(Property.SCHEME_SCOPE, schemeScope);
 	}
 
 	/**
@@ -107,7 +130,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * @return the color scheme scope when the scheme is applied to hoving flex datasets, like bars charts
 	 */
 	public SchemeScope getSchemeScope() {
-		return getValue(ColorSchemesOptions.Property.schemeScope, SchemeScope.class, defaultsOptions.getSchemeScope());
+		return getValue(ColorSchemesOptions.Property.SCHEME_SCOPE, SchemeScope.class, defaultsOptions.getSchemeScope());
 	}
 
 	/**
@@ -118,13 +141,13 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	public void setScheme(ColorScheme scheme) {
 		// checks if the scheme is already cached (used)
 		// checks also if scheme is consistent
-		if (!ColorSchemesUtil.hasColorScheme(scheme.category(), scheme.name())) {
+		if (!ColorSchemesUtil.hasColorScheme(scheme.category(), scheme.value())) {
 			// puts the scheme
 			ColorSchemesUtil.putColorScheme(scheme);
 		}
 		// stores the values of scheme
-		setValue(Property.schemeName, scheme);
-		setValue(Property.schemeCategory, scheme.category());
+		setValue(Property.SCHEME_NAME, scheme);
+		setValue(Property.SCHEME_CATEGORY, scheme.category());
 	}
 
 	/**
@@ -134,8 +157,8 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 */
 	public ColorScheme getScheme() {
 		// gets the category and name from object
-		String category = getValue(Property.schemeCategory, defaultsOptions.getSchemeCategory());
-		String name = getValue(Property.schemeName, defaultsOptions.getSchemeName());
+		String category = getValue(Property.SCHEME_CATEGORY, defaultsOptions.getSchemeCategory());
+		String name = getValue(Property.SCHEME_NAME, defaultsOptions.getSchemeName());
 		// all color scheme are stored into cache when the "set" is called
 		// therefore here the scheme MUST be in cache
 		return ColorSchemesUtil.getColorScheme(category, name);
@@ -150,7 +173,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	public void setBackgroundColorAlpha(double backgroundColorAlpha) {
 		// checks if consistent value between 0 and 1
 		Color.checkAlphaWithinBounds(backgroundColorAlpha);
-		setValue(Property.backgroundColorAlpha, backgroundColorAlpha);
+		setValue(Property.BACKGROUND_COLOR_ALPHA, backgroundColorAlpha);
 	}
 
 	/**
@@ -160,7 +183,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * @return the transparency value for the background color
 	 */
 	public double getBackgroundColorAlpha() {
-		return getValue(Property.backgroundColorAlpha, defaultsOptions.getBackgroundColorAlpha());
+		return getValue(Property.BACKGROUND_COLOR_ALPHA, defaultsOptions.getBackgroundColorAlpha());
 	}
 
 	/**
@@ -169,7 +192,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * @param reverse if set to <code>true</code>, the order of the colors in the selected scheme is reversed
 	 */
 	public void setReverse(boolean reverse) {
-		setValue(Property.reverse, reverse);
+		setValue(Property.REVERSE, reverse);
 	}
 
 	/**
@@ -178,7 +201,7 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * @return if set to <code>true</code>, the order of the colors in the selected scheme is reversed
 	 */
 	public boolean isReverse() {
-		return getValue(Property.reverse, defaultsOptions.isReverse());
+		return getValue(Property.REVERSE, defaultsOptions.isReverse());
 	}
 
 }

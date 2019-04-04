@@ -34,7 +34,7 @@ import com.google.gwt.dom.client.Style.Cursor;
  * @author Andrea "Stock" Stocchero
  */
 public final class ChartPointerOptions extends AbstractPluginOptions {
-	
+
 	/**
 	 * Default cursor type when the cursor is over the dataset item, {@link Cursor#POINTER}.
 	 */
@@ -50,9 +50,32 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 	 */
 	enum Property implements Key
 	{
-		elements,
-		cursorPointer,
-		cursorDefault
+		ELEMENTS("elements"),
+		CURSOR_POINTER("cursorPointer"),
+		CURSOR_DEFAULT("cursorDefault");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -77,12 +100,12 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 		super(ChartPointer.ID, nativeObject);
 		this.defaultsOptions = defaultsOptions;
 		// checks if there is the property
-		if (!has(Property.elements)) {
+		if (!has(Property.ELEMENTS)) {
 			// sets all pointer elements as default
 			setElements(PointerElement.values());
 		}
 	}
-	
+
 	/**
 	 * Sets the chart elements in scope to "cursorpointer" plugin.
 	 * 
@@ -90,7 +113,7 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 	 */
 	public void setElements(PointerElement... elements) {
 		// sets the array of events
-		setArrayValue(Property.elements, ArrayString.fromOrNull(elements));
+		setArrayValue(Property.ELEMENTS, ArrayString.fromOrNull(elements));
 	}
 
 	/**
@@ -100,7 +123,7 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 	 */
 	public List<PointerElement> getElements() {
 		// reads the property
-		ArrayString array = getArrayValue(ChartPointerOptions.Property.elements);
+		ArrayString array = getArrayValue(ChartPointerOptions.Property.ELEMENTS);
 		return ArrayListHelper.list(PointerElement.class, array);
 	}
 
@@ -111,7 +134,7 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 	 * @see com.google.gwt.dom.client.Style.Cursor
 	 */
 	public void setCursorPointer(Cursor cursor) {
-		setValue(Property.cursorPointer, cursor.name());
+		setValue(Property.CURSOR_POINTER, cursor.name());
 	}
 
 	/**
@@ -121,7 +144,7 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 	 * @see com.google.gwt.dom.client.Style.Cursor
 	 */
 	public Cursor getCursorPointer() {
-		String name = getValue(Property.cursorPointer, defaultsOptions.getCursorPointerAsString());
+		String name = getValue(Property.CURSOR_POINTER, defaultsOptions.getCursorPointerAsString());
 		return Cursor.valueOf(name);
 	}
 
@@ -132,7 +155,7 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 	 * @see com.google.gwt.dom.client.Style.Cursor
 	 */
 	void setCurrentCursor(Cursor cursor) {
-		setValue(Property.cursorDefault, cursor.name());
+		setValue(Property.CURSOR_DEFAULT, cursor.name());
 	}
 
 	/**
@@ -142,7 +165,7 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 	 * @see com.google.gwt.dom.client.Style.Cursor
 	 */
 	Cursor getCurrentCursor() {
-		String name = getValue(Property.cursorDefault, Cursor.DEFAULT.name());
+		String name = getValue(Property.CURSOR_DEFAULT, Cursor.DEFAULT.name());
 		return Cursor.valueOf(name);
 	}
 

@@ -33,8 +33,31 @@ public final class TooltipPluginItem extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		easing,
-		tooltip
+		EASING("easing"),
+		TOOLTIP("tooltip");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	private final TooltipNode node;
@@ -47,7 +70,7 @@ public final class TooltipPluginItem extends NativeObjectContainer {
 	public TooltipPluginItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// creates sub element
-		node = new TooltipNode(getValue(Property.tooltip));
+		node = new TooltipNode(getValue(Property.TOOLTIP));
 	}
 
 	/**
@@ -56,7 +79,7 @@ public final class TooltipPluginItem extends NativeObjectContainer {
 	 * @return the total number of animation frames. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getEasing() {
-		return getValue(Property.easing, UndefinedValues.DOUBLE);
+		return getValue(Property.EASING, UndefinedValues.DOUBLE);
 	}
 
 	/**

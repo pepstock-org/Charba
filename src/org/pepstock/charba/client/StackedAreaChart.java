@@ -43,7 +43,7 @@ public class StackedAreaChart extends AbstractChart<StackedOptions, StackedAreaD
 	 */
 	@Override
 	public Type getType() {
-		return ChartType.line;
+		return ChartType.LINE;
 	}
 
 	/*

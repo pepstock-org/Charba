@@ -28,43 +28,46 @@ public enum GradientOrientation implements Key
 	/**
 	 * From top to bottom (vertical)
 	 */
-	topDown(GradientType.linear),
+	TOP_DOWN("topDown", GradientType.LINEAR),
 	/**
 	 * From bottom to to (vertical)
 	 */
-	bottomUp(GradientType.linear),
+	BOTTOM_UP("bottomUp", GradientType.LINEAR),
 	/**
 	 * From left to right (horizontal)
 	 */
-	leftRight(GradientType.linear),
+	LEFT_RIGHT("leftRight", GradientType.LINEAR),
 	/**
 	 * From right to left (horizontal)
 	 */
-	rightLeft(GradientType.linear),
+	RIGHT_LEFT("rightLeft", GradientType.LINEAR),
 	/**
 	 * From top(left) to right(bottom) (diagonal)
 	 */
-	topRight(GradientType.linear),
+	TOP_RIGHT("topRight", GradientType.LINEAR),
 	/**
 	 * From bottom(right) to left(top) (diagonal)
 	 */
-	bottomLeft(GradientType.linear),
+	BOTTOM_LEFT("bottomLeft", GradientType.LINEAR),
 	/**
 	 * From top(right) to left(bottom) (diagonal)
 	 */
-	topLeft(GradientType.linear),
+	TOP_LEFT("topLeft", GradientType.LINEAR),
 	/**
 	 * From bottom(left) to right(top) (diagonal)
 	 */
-	bottomRight(GradientType.linear),
+	BOTTOM_RIGHT("bottomRight", GradientType.LINEAR),
 	/**
 	 * From center to the borders (ONLY radial)
 	 */
-	inOut(GradientType.radial),
+	IN_OUT("inOut", GradientType.RADIAL),
 	/**
 	 * From borders to the center (ONLY radial)
 	 */
-	outIn(GradientType.radial);
+	OUT_IN("outIn", GradientType.RADIAL);
+
+	// name value of property
+	private final String value;
 
 	// supported gradient type
 	private GradientType type;
@@ -72,9 +75,11 @@ public enum GradientOrientation implements Key
 	/**
 	 * Creates the orientation with supported gradient type
 	 * 
+	 * @param value value of property name
 	 * @param type supported gradient type
 	 */
-	private GradientOrientation(GradientType type) {
+	private GradientOrientation(String value, GradientType type) {
+		this.value = value;
 		this.type = type;
 	}
 
@@ -87,6 +92,16 @@ public enum GradientOrientation implements Key
 		return type;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 	/**
 	 * Returns the default orientation based on gradient type.
 	 * 
@@ -95,11 +110,11 @@ public enum GradientOrientation implements Key
 	 */
 	public static final GradientOrientation getDefaultByType(GradientType type) {
 		// checks if is linear
-		if (type.equals(GradientType.linear)) {
-			return topDown;
+		if (type.equals(GradientType.LINEAR)) {
+			return TOP_DOWN;
 		} else {
 			// if here, is radial
-			return inOut;
+			return IN_OUT;
 		}
 	}
 

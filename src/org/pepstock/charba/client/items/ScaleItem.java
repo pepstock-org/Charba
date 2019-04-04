@@ -41,28 +41,51 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 */
 	enum Property implements Key
 	{
-		id,
-		hidden,
-		longestTextCache,
-		minIndex,
-		maxIndex,
-		min,
-		max,
-		ticks,
-		labelRotation,
-		longestLabelWidth,
-		start,
-		end,
-		ticksAsNumbers,
-		zeroLineIndex,
-		xCenter,
-		yCenter,
-		drawingArea,
-		pointLabels,
-		type,
-		options,
+		ID("id"),
+		HIDDEN("hidden"),
+		LONGEST_TEXT_CACHE("longestTextCache"),
+		MIN_INDEX("minIndex"),
+		MAX_INDEX("maxIndex"),
+		MIN("min"),
+		MAX("max"),
+		TICKS("ticks"),
+		LABEL_ROTATION("labelRotation"),
+		LONGEST_LABEL_WIDTH("longestLabelWidth"),
+		START("start"),
+		END("end"),
+		TICKS_AS_NUMBERS("ticksAsNumbers"),
+		ZERO_LINE_INDEX("zeroLineIndex"),
+		X_CENTER("xCenter"),
+		Y_CENTER("yCenter"),
+		DRAWING_AREA("drawingArea"),
+		POINT_LABELS("pointLabels"),
+		TYPE("type"),
+		OPTIONS("options"),
 		// internal key to store a unique id
-		_charbaId
+		CHARBA_ID("_charbaId");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -73,7 +96,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	public ScaleItem(NativeObject nativeObject) {
 		super(nativeObject);
 		// initializes sub objects
-		longestTextCache = new ScaleLongestTextCacheItem(getValue(Property.longestTextCache));
+		longestTextCache = new ScaleLongestTextCacheItem(getValue(Property.LONGEST_TEXT_CACHE));
 	}
 
 	/**
@@ -91,7 +114,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the id of scale. Default is {@link UndefinedValues#STRING}.
 	 */
 	public final String getId() {
-		return getValue(Property.id, UndefinedValues.STRING);
+		return getValue(Property.ID, UndefinedValues.STRING);
 	}
 
 	/**
@@ -102,13 +125,13 @@ public class ScaleItem extends BaseBoxNodeItem {
 	public final int getCharbaId() {
 		// the unique id is under options object of scale item
 		// checks if there is
-		if (has(Property.options)) {
+		if (has(Property.OPTIONS)) {
 			// gets the options object
-			NativeObject object = getValue(Property.options);
+			NativeObject object = getValue(Property.OPTIONS);
 			// checks if the charba id exists and is a number
-			if (ObjectType.Number.equals(JsHelper.get().typeOf(object, Property._charbaId.name()))) {
+			if (ObjectType.Number.equals(JsHelper.get().typeOf(object, Property.CHARBA_ID.value()))) {
 				// returns the number
-				return JsHelper.get().propertyAsInt(object, Property._charbaId.name());
+				return JsHelper.get().propertyAsInt(object, Property.CHARBA_ID.value());
 			}
 		}
 		// otherwise if here is undefined
@@ -121,7 +144,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the type of scale. Default is {@link org.pepstock.charba.client.enums.AxisType#category}.
 	 */
 	public final AxisType getType() {
-		return getValue(Property.type, AxisType.class, AxisType.category);
+		return getValue(Property.TYPE, AxisType.class, AxisType.category);
 	}
 
 	/**
@@ -130,7 +153,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return <code>true</code> if this item represents a hidden scale. Default is {@link UndefinedValues#BOOLEAN}.
 	 */
 	public final boolean isHidden() {
-		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
+		return getValue(Property.HIDDEN, UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -139,7 +162,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the max index of scale. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getMaxIndex() {
-		return getValue(Property.maxIndex, UndefinedValues.INTEGER);
+		return getValue(Property.MAX_INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -148,7 +171,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the minimum index of scale. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getMinIndex() {
-		return getValue(Property.minIndex, UndefinedValues.INTEGER);
+		return getValue(Property.MIN_INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -157,7 +180,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the max value of scale. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getMax() {
-		return getValue(Property.max, UndefinedValues.INTEGER);
+		return getValue(Property.MAX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -166,7 +189,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the minimum value of scale. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getMin() {
-		return getValue(Property.min, UndefinedValues.INTEGER);
+		return getValue(Property.MIN, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -175,7 +198,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the max value of scale. Default is {@link UndefinedValues#STRING}.
 	 */
 	public final String getMaxAsString() {
-		return getValue(Property.max, UndefinedValues.STRING);
+		return getValue(Property.MAX, UndefinedValues.STRING);
 	}
 
 	/**
@@ -184,7 +207,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the minimum value of scale. Default is {@link UndefinedValues#STRING}.
 	 */
 	public final String getMinAsString() {
-		return getValue(Property.min, UndefinedValues.STRING);
+		return getValue(Property.MIN, UndefinedValues.STRING);
 	}
 
 	/**
@@ -194,7 +217,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 */
 	public final List<String> getTicks() {
 		// gets array from native object
-		ArrayString array = getArrayValue(Property.ticks);
+		ArrayString array = getArrayValue(Property.TICKS);
 		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}
@@ -205,7 +228,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the label rotation ratio. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public final double getLabelRotation() {
-		return getValue(Property.labelRotation, UndefinedValues.DOUBLE);
+		return getValue(Property.LABEL_ROTATION, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -214,7 +237,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the longest width of label of ticks.Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getLongestLabelWidth() {
-		return getValue(Property.longestLabelWidth, UndefinedValues.INTEGER);
+		return getValue(Property.LONGEST_LABEL_WIDTH, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -223,7 +246,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the start value of scale. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public final double getStart() {
-		return getValue(Property.start, UndefinedValues.DOUBLE);
+		return getValue(Property.START, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -232,7 +255,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the end value of scale. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public final double getEnd() {
-		return getValue(Property.end, UndefinedValues.DOUBLE);
+		return getValue(Property.END, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -241,7 +264,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the list of ticks as number.
 	 */
 	public final List<Double> getTicksAsNumber() {
-		ArrayDouble array = getArrayValue(Property.ticksAsNumbers);
+		ArrayDouble array = getArrayValue(Property.TICKS_AS_NUMBERS);
 		return ArrayListHelper.unmodifiableList(array);
 	}
 
@@ -251,7 +274,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the zero line index of scale. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getZeroLineIndex() {
-		return getValue(Property.zeroLineIndex, UndefinedValues.INTEGER);
+		return getValue(Property.ZERO_LINE_INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -260,7 +283,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the X center of scale. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getXCenter() {
-		return getValue(Property.xCenter, UndefinedValues.INTEGER);
+		return getValue(Property.X_CENTER, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -269,7 +292,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the Y center of scale. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getYCenter() {
-		return getValue(Property.yCenter, UndefinedValues.INTEGER);
+		return getValue(Property.Y_CENTER, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -278,7 +301,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the drawing area dimension of scale. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getDrawingArea() {
-		return getValue(Property.drawingArea, UndefinedValues.INTEGER);
+		return getValue(Property.DRAWING_AREA, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -288,7 +311,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 */
 	public final List<String> getPointLabels() {
 		// gets array from native object
-		ArrayString array = getArrayValue(Property.pointLabels);
+		ArrayString array = getArrayValue(Property.POINT_LABELS);
 		// returns the list
 		return ArrayListHelper.unmodifiableList(array);
 	}

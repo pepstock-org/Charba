@@ -45,53 +45,76 @@ public final class TooltipModel extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		dataPoints,
-		xPadding,
-		yPadding,
-		xAlign,
-		yAlign,
-		x,
-		y,
-		width,
-		height,
-		caretX,
-		caretY,
-		body,
-		beforeBody,
-		afterBody,
-		bodyFontColor,
-		_bodyFontFamily,
-		_bodyFontStyle,
-		_bodyAlign,
-		bodyFontSize,
-		bodySpacing,
-		title,
-		titleFontColor,
-		_titleFontFamily,
-		_titleFontStyle,
-		titleFontSize,
-		_titleAlign,
-		titleSpacing,
-		titleMarginBottom,
-		footer,
-		footerFontColor,
-		_footerFontFamily,
-		_footerFontStyle,
-		footerFontSize,
-		_footerAlign,
-		footerSpacing,
-		footerMarginTop,
-		caretSize,
-		caretPadding,
-		cornerRadius,
-		backgroundColor,
-		labelColors,
-		labelTextColors,
-		opacity,
-		legendColorBackground,
-		displayColors,
-		borderColor,
-		borderWidth
+		DATA_POINTS("dataPoints"),
+		X_PADDING("xPadding"),
+		Y_PADDING("yPadding"),
+		X_ALIGN("xAlign"),
+		Y_ALIGN("yAlign"),
+		X("x"),
+		Y("y"),
+		WIDTH("width"),
+		HEIGHT("height"),
+		CARET_X("caretX"),
+		CARET_Y("caretY"),
+		BODY("body"),
+		BEFORE_BODY("beforeBody"),
+		AFTER_BODY("afterBody"),
+		BODY_FONT_COLOR("bodyFontColor"),
+		BODY_FONT_FAMILY("_bodyFontFamily"),
+		BODY_FONT_STYLE("_bodyFontStyle"),
+		BODY_ALIGN("_bodyAlign"),
+		BODY_FONT_SIZE("bodyFontSize"),
+		BODY_SPACING("bodySpacing"),
+		TITLE("title"),
+		TITLE_FONT_COLOR("titleFontColor"),
+		TITLE_FONT_FAMILY("_titleFontFamily"),
+		TITLE_FONT_STYLE("_titleFontStyle"),
+		TITLE_FONT_SIZE("titleFontSize"),
+		TITLE_ALIGN("_titleAlign"),
+		TITLE_SPACING("titleSpacing"),
+		TITLE_MARGIN_BOTTOM("titleMarginBottom"),
+		FOOTER("footer"),
+		FOOTER_FONT_COLOR("footerFontColor"),
+		FOOTER_FONT_FAMILY("_footerFontFamily"),
+		FOOTER_FONT_STYLE("_footerFontStyle"),
+		FOOTER_FONT_SIZE("footerFontSize"),
+		FOOTER_ALIGN("_footerAlign"),
+		FOOTER_SPACING("footerSpacing"),
+		FOOTER_MARGIN_TOP("footerMarginTop"),
+		CARET_SIZE("caretSize"),
+		CARET_PADDING("caretPadding"),
+		CORNER_RADIUS("cornerRadius"),
+		BACKGROUND_COLOR("backgroundColor"),
+		LABEL_COLORS("labelColors"),
+		LABEL_TEXT_COLORS("labelTextColors"),
+		OPACITY("opacity"),
+		LEGEND_COLOR_BACKGROUND("legendColorBackground"),
+		DISPLAY_COLORS("displayColors"),
+		BORDER_COLOR("borderColor"),
+		BORDER_WIDTH("borderWidth");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	// instance of tooltip items factory
@@ -117,7 +140,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 */
 	public List<TooltipItem> getDataPoints() {
 		// gets array from native object
-		ArrayObject array = getArrayValue(Property.dataPoints);
+		ArrayObject array = getArrayValue(Property.DATA_POINTS);
 		// returns as list
 		return ArrayListHelper.unmodifiableList(array, tooltipItemFactory);
 	}
@@ -128,7 +151,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the X padding location.
 	 */
 	public int getXPadding() {
-		return getValue(Property.xPadding, Defaults.get().getGlobal().getTooltips().getXPadding());
+		return getValue(Property.X_PADDING, Defaults.get().getGlobal().getTooltips().getXPadding());
 	}
 
 	/**
@@ -137,7 +160,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the Y padding location.
 	 */
 	public int getYPadding() {
-		return getValue(Property.yPadding, Defaults.get().getGlobal().getTooltips().getYPadding());
+		return getValue(Property.Y_PADDING, Defaults.get().getGlobal().getTooltips().getYPadding());
 	}
 
 	/**
@@ -146,7 +169,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the X align location. Default is {@link UndefinedValues#STRING}.
 	 */
 	public String getXAlign() {
-		return getValue(Property.xAlign, UndefinedValues.STRING);
+		return getValue(Property.X_ALIGN, UndefinedValues.STRING);
 	}
 
 	/**
@@ -155,7 +178,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the Y align location. Default is {@link UndefinedValues#STRING}.
 	 */
 	public String getYAlign() {
-		return getValue(Property.yAlign, UndefinedValues.STRING);
+		return getValue(Property.Y_ALIGN, UndefinedValues.STRING);
 	}
 
 	/**
@@ -164,7 +187,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the X location of tooltip. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getX() {
-		return getValue(Property.x, UndefinedValues.INTEGER);
+		return getValue(Property.X, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -173,7 +196,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the Y location of tooltip. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getY() {
-		return getValue(Property.y, UndefinedValues.INTEGER);
+		return getValue(Property.Y, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -182,7 +205,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the width of tooltip. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getWidth() {
-		return getValue(Property.width, UndefinedValues.INTEGER);
+		return getValue(Property.WIDTH, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -191,7 +214,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the height of tooltip. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getHeight() {
-		return getValue(Property.height, UndefinedValues.INTEGER);
+		return getValue(Property.HEIGHT, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -200,7 +223,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the X location of the tooltip arrow. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getCaretX() {
-		return getValue(Property.caretX, UndefinedValues.INTEGER);
+		return getValue(Property.CARET_X, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -209,7 +232,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the Y location of the tooltip arrow. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getCaretY() {
-		return getValue(Property.caretY, UndefinedValues.INTEGER);
+		return getValue(Property.CARET_Y, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -219,7 +242,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 */
 	public List<TooltipBodyItem> getBody() {
 		// gets array from native object
-		ArrayObject array = getArrayValue(Property.body);
+		ArrayObject array = getArrayValue(Property.BODY);
 		// returns as list
 		return ArrayListHelper.unmodifiableList(array, tooltipBodyItemFactory);
 	}
@@ -231,7 +254,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 */
 	public List<String> getBeforeBody() {
 		// gets array from native object
-		ArrayString array = getArrayValue(Property.beforeBody);
+		ArrayString array = getArrayValue(Property.BEFORE_BODY);
 		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}
@@ -243,7 +266,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 */
 	public List<String> getAfterBody() {
 		// gets array from native object
-		ArrayString array = getArrayValue(Property.afterBody);
+		ArrayString array = getArrayValue(Property.AFTER_BODY);
 		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}
@@ -254,7 +277,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the color of the tooltip body section.
 	 */
 	public String getBodyFontColorAsString() {
-		return getValue(Property.bodyFontColor, Defaults.get().getGlobal().getTooltips().getBodyFontColorAsString());
+		return getValue(Property.BODY_FONT_COLOR, Defaults.get().getGlobal().getTooltips().getBodyFontColorAsString());
 	}
 
 	/**
@@ -272,7 +295,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font family of the tooltip body section.
 	 */
 	public String getBodyFontFamily() {
-		return getValue(Property._bodyFontFamily, Defaults.get().getGlobal().getTooltips().getBodyFontFamily());
+		return getValue(Property.BODY_FONT_FAMILY, Defaults.get().getGlobal().getTooltips().getBodyFontFamily());
 	}
 
 	/**
@@ -281,7 +304,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font style of the tooltip body section.
 	 */
 	public FontStyle getBodyFontStyle() {
-		return getValue(Property._bodyFontStyle, FontStyle.class, Defaults.get().getGlobal().getTooltips().getBodyFontStyle());
+		return getValue(Property.BODY_FONT_STYLE, FontStyle.class, Defaults.get().getGlobal().getTooltips().getBodyFontStyle());
 	}
 
 	/**
@@ -290,7 +313,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the alignment of the tooltip body section.
 	 */
 	public TextAlign getBodyAlign() {
-		return getValue(Property._bodyAlign, TextAlign.class, Defaults.get().getGlobal().getTooltips().getBodyAlign());
+		return getValue(Property.BODY_ALIGN, TextAlign.class, Defaults.get().getGlobal().getTooltips().getBodyAlign());
 	}
 
 	/**
@@ -299,7 +322,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font size of the tooltip body section.
 	 */
 	public int getBodyFontSize() {
-		return getValue(Property.bodyFontSize, Defaults.get().getGlobal().getTooltips().getBodyFontSize());
+		return getValue(Property.BODY_FONT_SIZE, Defaults.get().getGlobal().getTooltips().getBodyFontSize());
 	}
 
 	/**
@@ -308,7 +331,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the spacing of the tooltip body section.
 	 */
 	public int getBodySpacing() {
-		return getValue(Property.bodySpacing, Defaults.get().getGlobal().getTooltips().getBodySpacing());
+		return getValue(Property.BODY_SPACING, Defaults.get().getGlobal().getTooltips().getBodySpacing());
 	}
 
 	/**
@@ -318,7 +341,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 */
 	public List<String> getTitle() {
 		// gets array from native object
-		ArrayString array = getArrayValue(Property.title);
+		ArrayString array = getArrayValue(Property.TITLE);
 		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}
@@ -329,7 +352,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the color of the tooltip title section.
 	 */
 	public String getTitleFontColorAsString() {
-		return getValue(Property.titleFontColor, Defaults.get().getGlobal().getTooltips().getTitleFontColorAsString());
+		return getValue(Property.TITLE_FONT_COLOR, Defaults.get().getGlobal().getTooltips().getTitleFontColorAsString());
 	}
 
 	/**
@@ -347,7 +370,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font family of the tooltip title section.
 	 */
 	public String getTitleFontFamily() {
-		return getValue(Property._titleFontFamily, Defaults.get().getGlobal().getTooltips().getTitleFontFamily());
+		return getValue(Property.TITLE_FONT_FAMILY, Defaults.get().getGlobal().getTooltips().getTitleFontFamily());
 	}
 
 	/**
@@ -356,7 +379,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font style of the tooltip title section.
 	 */
 	public FontStyle getTitleFontStyle() {
-		return getValue(Property._titleFontStyle, FontStyle.class, Defaults.get().getGlobal().getTooltips().getTitleFontStyle());
+		return getValue(Property.TITLE_FONT_STYLE, FontStyle.class, Defaults.get().getGlobal().getTooltips().getTitleFontStyle());
 	}
 
 	/**
@@ -365,7 +388,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font size of the tooltip title section.
 	 */
 	public int getTitleFontSize() {
-		return getValue(Property.titleFontSize, Defaults.get().getGlobal().getTooltips().getTitleFontSize());
+		return getValue(Property.TITLE_FONT_SIZE, Defaults.get().getGlobal().getTooltips().getTitleFontSize());
 	}
 
 	/**
@@ -374,7 +397,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the alignment of the tooltip title section.
 	 */
 	public TextAlign getTitleAlign() {
-		return getValue(Property._titleAlign, TextAlign.class, Defaults.get().getGlobal().getTooltips().getTitleAlign());
+		return getValue(Property.TITLE_ALIGN, TextAlign.class, Defaults.get().getGlobal().getTooltips().getTitleAlign());
 	}
 
 	/**
@@ -383,7 +406,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the spacing of the tooltip title section.
 	 */
 	public int getTitleSpacing() {
-		return getValue(Property.titleSpacing, Defaults.get().getGlobal().getTooltips().getTitleSpacing());
+		return getValue(Property.TITLE_SPACING, Defaults.get().getGlobal().getTooltips().getTitleSpacing());
 	}
 
 	/**
@@ -392,7 +415,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the bottom margin of the tooltip title section.
 	 */
 	public int getTitleMarginBottom() {
-		return getValue(Property.titleMarginBottom, Defaults.get().getGlobal().getTooltips().getTitleMarginBottom());
+		return getValue(Property.TITLE_MARGIN_BOTTOM, Defaults.get().getGlobal().getTooltips().getTitleMarginBottom());
 	}
 
 	/**
@@ -402,7 +425,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 */
 	public List<String> getFooter() {
 		// gets array from native object
-		ArrayString array = getArrayValue(Property.footer);
+		ArrayString array = getArrayValue(Property.FOOTER);
 		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}
@@ -413,7 +436,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the color of the tooltip footer section.
 	 */
 	public String getFooterFontColorAsString() {
-		return getValue(Property.footerFontColor, Defaults.get().getGlobal().getTooltips().getFooterFontColorAsString());
+		return getValue(Property.FOOTER_FONT_COLOR, Defaults.get().getGlobal().getTooltips().getFooterFontColorAsString());
 	}
 
 	/**
@@ -431,7 +454,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font family of the tooltip footer section.
 	 */
 	public String getFooterFontFamily() {
-		return getValue(Property._footerFontFamily, Defaults.get().getGlobal().getTooltips().getFooterFontFamily());
+		return getValue(Property.FOOTER_FONT_FAMILY, Defaults.get().getGlobal().getTooltips().getFooterFontFamily());
 	}
 
 	/**
@@ -440,7 +463,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font style of the tooltip footer section.
 	 */
 	public FontStyle getFooterFontStyle() {
-		return getValue(Property._footerFontStyle, FontStyle.class, Defaults.get().getGlobal().getTooltips().getFooterFontStyle());
+		return getValue(Property.FOOTER_FONT_STYLE, FontStyle.class, Defaults.get().getGlobal().getTooltips().getFooterFontStyle());
 	}
 
 	/**
@@ -449,7 +472,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the font size of the tooltip footer section.
 	 */
 	public int getFooterFontSize() {
-		return getValue(Property.footerFontSize, Defaults.get().getGlobal().getTooltips().getFooterFontSize());
+		return getValue(Property.FOOTER_FONT_SIZE, Defaults.get().getGlobal().getTooltips().getFooterFontSize());
 	}
 
 	/**
@@ -458,7 +481,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the alignment of the tooltip footer section.
 	 */
 	public TextAlign getFooterAlign() {
-		return getValue(Property._footerAlign, TextAlign.class, Defaults.get().getGlobal().getTooltips().getFooterAlign());
+		return getValue(Property.FOOTER_ALIGN, TextAlign.class, Defaults.get().getGlobal().getTooltips().getFooterAlign());
 	}
 
 	/**
@@ -467,7 +490,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the spacing of the tooltip footer section.
 	 */
 	public int getFooterSpacing() {
-		return getValue(Property.footerSpacing, Defaults.get().getGlobal().getTooltips().getFooterSpacing());
+		return getValue(Property.FOOTER_SPACING, Defaults.get().getGlobal().getTooltips().getFooterSpacing());
 	}
 
 	/**
@@ -476,7 +499,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the margin top of the tooltip footer section.
 	 */
 	public int getFooterMarginTop() {
-		return getValue(Property.footerMarginTop, Defaults.get().getGlobal().getTooltips().getFooterMarginTop());
+		return getValue(Property.FOOTER_MARGIN_TOP, Defaults.get().getGlobal().getTooltips().getFooterMarginTop());
 	}
 
 	/**
@@ -485,7 +508,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the size, in px, of the tooltip arrow of footer section.
 	 */
 	public int getCaretSize() {
-		return getValue(Property.caretSize, Defaults.get().getGlobal().getTooltips().getCaretSize());
+		return getValue(Property.CARET_SIZE, Defaults.get().getGlobal().getTooltips().getCaretSize());
 	}
 
 	/**
@@ -494,7 +517,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the extra distance to move the end of the tooltip arrow away from the tooltip point
 	 */
 	public int getCaretPadding() {
-		return getValue(Property.caretPadding, Defaults.get().getGlobal().getTooltips().getCaretPadding());
+		return getValue(Property.CARET_PADDING, Defaults.get().getGlobal().getTooltips().getCaretPadding());
 	}
 
 	/**
@@ -503,7 +526,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the radius of tooltip corner curves of footer section.
 	 */
 	public double getCornerRadius() {
-		return getValue(Property.cornerRadius, Defaults.get().getGlobal().getTooltips().getCornerRadius());
+		return getValue(Property.CORNER_RADIUS, Defaults.get().getGlobal().getTooltips().getCornerRadius());
 	}
 
 	/**
@@ -512,7 +535,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the background color of tooltip.
 	 */
 	public String getBackgroundColorAsString() {
-		return getValue(Property.backgroundColor, Defaults.get().getGlobal().getTooltips().getBackgroundColorAsString());
+		return getValue(Property.BACKGROUND_COLOR, Defaults.get().getGlobal().getTooltips().getBackgroundColorAsString());
 	}
 
 	/**
@@ -531,7 +554,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 */
 	public List<TooltipLabelColor> getLabelColors() {
 		// gets array from native object
-		ArrayObject array = getArrayValue(Property.labelColors);
+		ArrayObject array = getArrayValue(Property.LABEL_COLORS);
 		// returns as list
 		return ArrayListHelper.unmodifiableList(array, tooltipLabelColorFactory);
 	}
@@ -543,7 +566,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 */
 	public List<TooltipLabelColor> getTextLabelColors() {
 		// gets array from native object
-		ArrayObject array = getArrayValue(Property.labelTextColors);
+		ArrayObject array = getArrayValue(Property.LABEL_TEXT_COLORS);
 		// returns as list
 		return ArrayListHelper.unmodifiableList(array, tooltipLabelColorFactory);
 	}
@@ -554,7 +577,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the opacity of tooltip. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getOpacity() {
-		return getValue(Property.opacity, UndefinedValues.DOUBLE);
+		return getValue(Property.OPACITY, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -563,7 +586,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the legend color of tooltips.
 	 */
 	public String getLegendColorBackgroundAsString() {
-		return getValue(Property.legendColorBackground, Defaults.get().getGlobal().getDefaultColorAsString());
+		return getValue(Property.LEGEND_COLOR_BACKGROUND, Defaults.get().getGlobal().getDefaultColorAsString());
 	}
 
 	/**
@@ -581,7 +604,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the border color of tooltips.
 	 */
 	public String getBorderColorAsString() {
-		return getValue(Property.borderColor, Defaults.get().getGlobal().getTooltips().getBorderColorAsString());
+		return getValue(Property.BORDER_COLOR, Defaults.get().getGlobal().getTooltips().getBorderColorAsString());
 	}
 
 	/**
@@ -599,7 +622,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the size of border
 	 */
 	public int getBorderWidth() {
-		return getValue(Property.borderWidth, Defaults.get().getGlobal().getTooltips().getBorderWidth());
+		return getValue(Property.BORDER_WIDTH, Defaults.get().getGlobal().getTooltips().getBorderWidth());
 	}
 
 	/**
@@ -608,7 +631,7 @@ public final class TooltipModel extends NativeObjectContainer {
 	 * @return the display of colors of tooltip.
 	 */
 	public boolean isDisplayColors() {
-		return getValue(Property.displayColors, Defaults.get().getGlobal().getTooltips().isDisplayColors());
+		return getValue(Property.DISPLAY_COLORS, Defaults.get().getGlobal().getTooltips().isDisplayColors());
 	}
 
 }

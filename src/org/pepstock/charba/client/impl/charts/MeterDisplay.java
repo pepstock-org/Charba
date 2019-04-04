@@ -27,18 +27,39 @@ public enum MeterDisplay implements Key
 	/**
 	 * Shows only the value
 	 */
-	value,
+	VALUE("value"),
 	/**
 	 * Shows the percentage
 	 */
-	percentage,
+	PERCENTAGE("percentage"),
 	/**
 	 * Shows value and label
 	 */
-	valueAndLabel,
+	VALUE_AND_LABEL("valueAndLabel"),
 	/**
 	 * Shows percentage and label
 	 */
-	percentageAndLabel
+	PERCENTAGE_AND_LABEL("percentageAndLabel");
 
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private MeterDisplay(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
 }

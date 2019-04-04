@@ -44,7 +44,7 @@ public class StackedBarChart extends AbstractChart<StackedOptions, StackedBarDat
 	 */
 	@Override
 	public Type getType() {
-		return ChartType.bar;
+		return ChartType.BAR;
 	}
 
 	/*

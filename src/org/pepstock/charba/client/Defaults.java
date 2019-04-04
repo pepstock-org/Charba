@@ -131,12 +131,12 @@ public final class Defaults {
 	 */
 	public ChartOptions getOptions(Type type) {
 		// checks if the options have already stored
-		if (!chartOptions.containsKey(type.name())) {
+		if (!chartOptions.containsKey(type.value())) {
 			// if not, creates and stores new options by chart type
-			chartOptions.put(type.name(), wrapperDefaults.chart(type));
+			chartOptions.put(type.value(), wrapperDefaults.chart(type));
 		}
 		// returns the existing options
-		return chartOptions.get(type.name());
+		return chartOptions.get(type.value());
 	}
 
 	/**
@@ -153,8 +153,30 @@ public final class Defaults {
 		 */
 		private enum Property implements Key
 		{
-			global,
-			scale
+			GLOBAL("global"),
+			SCALE("scale");
+
+			// name value of property
+			private final String value;
+
+			/**
+			 * Creates with the property value to use into native object.
+			 * 
+			 * @param value value of property name
+			 */
+			private Property(String value) {
+				this.value = value;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see org.pepstock.charba.client.commons.Key#value()
+			 */
+			@Override
+			public String value() {
+				return value;
+			}
 		}
 
 		/**
@@ -172,7 +194,7 @@ public final class Defaults {
 		 * @return the GLOBAL options
 		 */
 		NativeObject getGlobal() {
-			return getValue(Property.global);
+			return getValue(Property.GLOBAL);
 		}
 
 		/**
@@ -181,7 +203,7 @@ public final class Defaults {
 		 * @return the SCALE global options
 		 */
 		NativeObject getScale() {
-			return getValue(Property.scale);
+			return getValue(Property.SCALE);
 
 		}
 

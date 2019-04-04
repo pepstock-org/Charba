@@ -32,9 +32,32 @@ public final class DatasetPluginItem extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		easing,
-		index,
-		meta
+		EASING("easing"),
+		INDEX("index"),
+		META("meta");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	// meta data reference
@@ -49,7 +72,7 @@ public final class DatasetPluginItem extends NativeObjectContainer {
 		super(nativeObject);
 		// checks if meta data are present
 		// creating it or setting an empty object
-		meta = has(Property.meta) ? new DatasetMetaItem(getValue(Property.meta)) : new DatasetMetaItem();
+		meta = has(Property.META) ? new DatasetMetaItem(getValue(Property.META)) : new DatasetMetaItem();
 	}
 
 	/**
@@ -58,7 +81,7 @@ public final class DatasetPluginItem extends NativeObjectContainer {
 	 * @return the current animation frame number. Default is {@link UndefinedValues#DOUBLE}.
 	 */
 	public double getEasing() {
-		return getValue(Property.easing, UndefinedValues.DOUBLE);
+		return getValue(Property.EASING, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -67,7 +90,7 @@ public final class DatasetPluginItem extends NativeObjectContainer {
 	 * @return the index of the data inside the dataset. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getIndex() {
-		return getValue(Property.index, UndefinedValues.INTEGER);
+		return getValue(Property.INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**

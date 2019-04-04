@@ -373,7 +373,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID());
 		// if chart is line or axis time is equals to 2
 		// else if bar chart is equals to 1
-		int minimDatasetsItemsCount = chart.getType().equals(ChartType.line) ? 2 : AxisType.time.equals(scaleItem.getType()) ? 2 : 1;
+		int minimDatasetsItemsCount = chart.getType().equals(ChartType.LINE) ? 2 : AxisType.time.equals(scaleItem.getType()) ? 2 : 1;
 		// returns checking the value with amount of datasets items
 		return getDatasetsItemsCount() >= minimDatasetsItemsCount;
 	}
@@ -447,7 +447,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// amount of dataset items
 		// in case of time axis, it must be reduce by1 because the dataset items
 		// are always located in line with tick
-		int areaCount = chart.getType().equals(ChartType.line) ? getDatasetsItemsCount() - 1 : AxisType.time.equals(scaleItem.getType()) ? getDatasetsItemsCount() - 1 : getDatasetsItemsCount();
+		int areaCount = chart.getType().equals(ChartType.LINE) ? getDatasetsItemsCount() - 1 : AxisType.time.equals(scaleItem.getType()) ? getDatasetsItemsCount() - 1 : getDatasetsItemsCount();
 		// gets the left of chart area as starting point
 		double scaleTickX = chartArea.getLeft();
 		// calculates the section size for every dataset item
@@ -533,10 +533,10 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID());
 			// checks the type of chart and scale
 			// LINE and axis TIME must be added by 1 end of datasets
-			if (chart.getType().equals(ChartType.line) || AxisType.time.equals(scaleItem.getType())) {
+			if (chart.getType().equals(ChartType.LINE) || AxisType.time.equals(scaleItem.getType())) {
 				// fires the event that dataset items selection
 				chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd() + 1));
-			} else if (chart.getType().equals(ChartType.bar)) {
+			} else if (chart.getType().equals(ChartType.BAR)) {
 				// fires the event that dataset items selection
 				chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd()));
 			}
@@ -555,7 +555,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID());
 		// calculates the amount of sections into chart based on
 		// amount of dataset items
-		int areaCount = chart.getType().equals(ChartType.line) ? getDatasetsItemsCount() - 1 : AxisType.time.equals(scaleItem.getType()) ? getDatasetsItemsCount() - 1 : getDatasetsItemsCount();
+		int areaCount = chart.getType().equals(ChartType.LINE) ? getDatasetsItemsCount() - 1 : AxisType.time.equals(scaleItem.getType()) ? getDatasetsItemsCount() - 1 : getDatasetsItemsCount();
 		// gets the left of chart area as starting point
 		double scaleTickX = chartArea.getLeft();
 		// calculates the section size for every dataset item
@@ -650,7 +650,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// adds padding top
 		height += clearSelection.getPadding();
 		// checking what must be rendered
-		if (Render.image.equals(clearSelection.getRender())) {
+		if (Render.IMAGE.equals(clearSelection.getRender())) {
 			// if here is ONLY image
 			// gets image height
 			double imgHeight = clearSelection.getImage().getHeight();
@@ -668,7 +668,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			height += fontSize;
 			// sets the height to image or
 			// 0 if there is ONLY a label to show
-			clearSelection.setImageHeight(Render.label.equals(clearSelection.getRender()) ? ClearSelection.DEFAULT_VALUE : fontSize);
+			clearSelection.setImageHeight(Render.LABEL.equals(clearSelection.getRender()) ? ClearSelection.DEFAULT_VALUE : fontSize);
 			// stores label height
 			clearSelection.setLabelHeight(fontSize);
 		}
@@ -730,7 +730,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// adds padding left
 		width += clearSelection.getPadding();
 		// checking what must be rendered
-		if (Render.image.equals(clearSelection.getRender())) {
+		if (Render.IMAGE.equals(clearSelection.getRender())) {
 			// if here is rendering only image
 			// adds image width
 			width += imgWidth;
@@ -738,7 +738,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			clearSelection.setImageWidth(imgWidth);
 			// stores 0 for label width
 			clearSelection.setLabelWidth(ClearSelection.DEFAULT_VALUE);
-		} else if (Render.label.equals(clearSelection.getRender())) {
+		} else if (Render.LABEL.equals(clearSelection.getRender())) {
 			// if here is rendering only label
 			// adds label width
 			width += labelWidth;
@@ -816,13 +816,13 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			// the X point depends on alignment required by configuration
 			double x = 0;
 			// checks all alignment types
-			if (Align.left.equals(clearSelection.getAlign())) {
+			if (Align.LEFT.equals(clearSelection.getAlign())) {
 				// if left
 				// X is equals to margin
 				clearSelection.setX(clearSelection.getMargin());
 				// stores the x of clear selection element
 				x = clearSelection.getMargin();
-			} else if (Align.left_chartArea.equals(clearSelection.getAlign())) {
+			} else if (Align.LEFT_CHART_AREA.equals(clearSelection.getAlign())) {
 				// gets chart AREA
 				ChartNode node = chart.getNode();
 				ChartAreaNode area = node.getChartArea();
@@ -831,13 +831,13 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 				clearSelection.setX(area.getLeft());
 				// sets to left for further calculations
 				x = area.getLeft();
-			} else if (Align.center.equals(clearSelection.getAlign())) {
+			} else if (Align.CENTER.equals(clearSelection.getAlign())) {
 				// calculates the center of width
 				// by canvas width and clear selection element width
 				x = (chart.getCanvas().getOffsetWidth() - clearSelection.getWidth()) / 2;
 				// stores the x of clear selection element
 				clearSelection.setX(x);
-			} else if (Align.center_chartArea.equals(clearSelection.getAlign())) {
+			} else if (Align.CENTER_CHART_AREA.equals(clearSelection.getAlign())) {
 				// gets chart AREA
 				ChartNode node = chart.getNode();
 				ChartAreaNode area = node.getChartArea();
@@ -846,7 +846,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 				x = (area.getRight() - area.getLeft() - clearSelection.getWidth()) / 2;
 				// stores the x of clear selection element
 				clearSelection.setX(x);
-			} else if (Align.right_chartArea.equals(clearSelection.getAlign())) {
+			} else if (Align.RIGHT_CHART_AREA.equals(clearSelection.getAlign())) {
 				// gets chart AREA
 				ChartNode node = chart.getNode();
 				ChartAreaNode area = node.getChartArea();
@@ -855,7 +855,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 				x = area.getRight() - clearSelection.getWidth();
 				// stores the x of clear selection element
 				clearSelection.setX(x);
-			} else if (Align.right.equals(clearSelection.getAlign())) {
+			} else if (Align.RIGHT.equals(clearSelection.getAlign())) {
 				// the x value is the width of canvas minus
 				// width of clear selection element and margin
 				x = chart.getCanvas().getOffsetWidth() - clearSelection.getWidth() - clearSelection.getMargin();
@@ -870,13 +870,13 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			// to have the X starting point
 			x += clearSelection.getPadding();
 			// calculates point X based on render type
-			if (Render.label.equals(clearSelection.getRender())) {
+			if (Render.LABEL.equals(clearSelection.getRender())) {
 				// if here ONLY label
 				// stores to 0 the image
 				clearSelection.setImageX(ClearSelection.DEFAULT_VALUE);
 				// stores X point for label
 				clearSelection.setLabelX(x);
-			} else if (Render.label_image.equals(clearSelection.getRender())) {
+			} else if (Render.LABEL_IMAGE.equals(clearSelection.getRender())) {
 				// if here, before label and then image
 				// stores X point for label
 				clearSelection.setLabelX(x);
@@ -886,7 +886,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 				x += clearSelection.getSpacing();
 				// stores X point for image
 				clearSelection.setImageX(x);
-			} else if (Render.image_label.equals(clearSelection.getRender())) {
+			} else if (Render.IMAGE_LABEL.equals(clearSelection.getRender())) {
 				// stores X point for image
 				clearSelection.setImageX(x);
 				// adds image width
@@ -895,7 +895,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 				x += clearSelection.getSpacing();
 				// stores X point for label
 				clearSelection.setLabelX(x);
-			} else if (Render.image.equals(clearSelection.getRender())) {
+			} else if (Render.IMAGE.equals(clearSelection.getRender())) {
 				// if here ONLY image
 				// stores X point for image
 				clearSelection.setImageX(x);
@@ -957,7 +957,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			}
 		}
 		// checks based on render type what must be draw
-		if (Render.label.equals(clearSelection.getRender())) {
+		if (Render.LABEL.equals(clearSelection.getRender())) {
 			// sets font
 			ctx.setFont(Utilities.toFont(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
 			// sets color to canvas
@@ -966,7 +966,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			ctx.setTextBaseline(TextBaseline.TOP);
 			// draws text
 			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
-		} else if (Render.label_image.equals(clearSelection.getRender())) {
+		} else if (Render.LABEL_IMAGE.equals(clearSelection.getRender())) {
 			// sets font
 			ctx.setFont(Utilities.toFont(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
 			// sets color to canvas
@@ -977,7 +977,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
 			// draws scaled image
 			ctx.drawImage(clearSelection.getImage(), clearSelection.getImageX(), clearSelection.getImageY(), clearSelection.getImageWidth(), clearSelection.getImageHeight());
-		} else if (Render.image_label.equals(clearSelection.getRender())) {
+		} else if (Render.IMAGE_LABEL.equals(clearSelection.getRender())) {
 			// draws scaled image
 			ctx.drawImage(clearSelection.getImage(), clearSelection.getImageX(), clearSelection.getImageY(), clearSelection.getImageWidth(), clearSelection.getImageHeight());
 			// sets font
@@ -988,7 +988,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			ctx.setTextBaseline(TextBaseline.TOP);
 			// draws text
 			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
-		} else if (Render.image.equals(clearSelection.getRender())) {
+		} else if (Render.IMAGE.equals(clearSelection.getRender())) {
 			// draws scaled image
 			ctx.drawImage(clearSelection.getImage(), clearSelection.getImageX(), clearSelection.getImageY(), clearSelection.getImageWidth(), clearSelection.getImageHeight());
 		}

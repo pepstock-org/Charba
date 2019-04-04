@@ -99,7 +99,7 @@ public final class ChartPointer extends AbstractPlugin {
 			// creates the item reference
 			DatasetItem item = null;
 			// checks if the datasets is in scope
-			if (chart.getOptions().hasDatasetSelectionHandlers() && isElementInScope(scope, PointerElement.dataset)) {
+			if (chart.getOptions().hasDatasetSelectionHandlers() && isElementInScope(scope, PointerElement.DATASET)) {
 				// if yes, asks the dataset item by event
 				item = chart.getElementAtEvent(event);
 			}
@@ -108,15 +108,15 @@ public final class ChartPointer extends AbstractPlugin {
 				// DATASET SELECTION
 				// otherwise sets the pointer
 				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
-			} else if (chart.getOptions().hasTitleClickHandlers() && isElementInScope(scope, PointerElement.title) && chart.getNode().getTitle().isInside(event)) {
+			} else if (chart.getOptions().hasTitleClickHandlers() && isElementInScope(scope, PointerElement.TITLE) && chart.getNode().getTitle().isInside(event)) {
 				// TITLE SELECTION
 				// otherwise sets the pointer
 				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
-			} else if (chart.getOptions().hasAxisClickHandlers() && isElementInScope(scope, PointerElement.axes) && !ScaleType.none.equals(chart.getType().scaleType()) && chart.getNode().getScales().isInside(event)) {
+			} else if (chart.getOptions().hasAxisClickHandlers() && isElementInScope(scope, PointerElement.AXES) && !ScaleType.none.equals(chart.getType().scaleType()) && chart.getNode().getScales().isInside(event)) {
 				// AXIS SELECTION
 				// otherwise sets the pointer
 				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
-			} else if (isElementInScope(scope, PointerElement.legend) && chart.getNode().getLegend().isInside(event)) {
+			} else if (isElementInScope(scope, PointerElement.LEGEND) && chart.getNode().getLegend().isInside(event)) {
 				// LEGEND SELECTION
 				// checks if cursor is over the hit box
 				List<LegendHitBoxItem> legendItems = chart.getNode().getLegend().getHitBoxes();
@@ -142,9 +142,9 @@ public final class ChartPointer extends AbstractPlugin {
 	/**
 	 * Returns <code>true</code> if the element is configured in order to apply cursor when mouse is over.
 	 * 
-	 * @param scope  list of pointer elements configured as in scope
+	 * @param scope list of pointer elements configured as in scope
 	 * @param element the element to be checked
-	 * @return  <code>true</code> if the element is configured in order to apply cursor when mouse is over
+	 * @return <code>true</code> if the element is configured in order to apply cursor when mouse is over
 	 */
 	private boolean isElementInScope(List<PointerElement> scope, PointerElement element) {
 		// scans all elements in scope

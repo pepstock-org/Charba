@@ -57,7 +57,7 @@ public class MeterOptions extends AbstractPieOptions {
 
 	private static final boolean DEFAULT_ANIMATED_DISPLAY = false;
 
-	private MeterDisplay display = MeterDisplay.value;
+	private MeterDisplay display = MeterDisplay.VALUE;
 
 	private String format = DEFAULT_FORMAT;
 

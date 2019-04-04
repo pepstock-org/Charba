@@ -36,13 +36,35 @@ public final class ChartBackgroundColorOptions extends NativeObjectContainer {
 	private final Gradient.GradientFactory gradientFactory = new Gradient.GradientFactory();
 
 	/**
-	 * Name of properties of native object.
+	 * Value of the stored color type into native object.
 	 */
 	enum ColorType implements Key
 	{
-		color,
-		pattern,
-		gradient
+		COLOR("color"),
+		PATTERN("pattern"),
+		GRADIENT("gradient");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private ColorType(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
 	}
 
 	/**
@@ -50,8 +72,30 @@ public final class ChartBackgroundColorOptions extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		backgroundColor,
-		colorType
+		BACKGROUND_COLOR("backgroundColor"),
+		COLOR_TYPE("colorType");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
 	}
 
 	/**
@@ -71,7 +115,7 @@ public final class ChartBackgroundColorOptions extends NativeObjectContainer {
 		// checks if background color exists
 		// it could happens only when the object has been created
 		// by a native object
-		if (!has(Property.backgroundColor)) {
+		if (!has(Property.BACKGROUND_COLOR)) {
 			setBackgroundColor(ChartBackgroundColor.DEFAULT_BACKGROUND_COLOR);
 		}
 	}
@@ -79,10 +123,10 @@ public final class ChartBackgroundColorOptions extends NativeObjectContainer {
 	/**
 	 * Returns the type of background color has been set.
 	 * 
-	 * @return the type of background color has been set. Default is {@link ColorType#color}.
+	 * @return the type of background color has been set. Default is {@link ColorType#COLOR}.
 	 */
 	ColorType getColorType() {
-		return getValue(Property.colorType, ColorType.class, ColorType.color);
+		return getValue(Property.COLOR_TYPE, ColorType.class, ColorType.COLOR);
 	}
 
 	/**
@@ -94,8 +138,8 @@ public final class ChartBackgroundColorOptions extends NativeObjectContainer {
 	 */
 	public String getBackgroundColorAsString() {
 		// checks if color has been set
-		if (ColorType.color.equals(getColorType())) {
-			return getValue(Property.backgroundColor, ChartBackgroundColor.DEFAULT_BACKGROUND_COLOR);
+		if (ColorType.COLOR.equals(getColorType())) {
+			return getValue(Property.BACKGROUND_COLOR, ChartBackgroundColor.DEFAULT_BACKGROUND_COLOR);
 		}
 		// otherwise returns null
 		return null;
@@ -110,7 +154,7 @@ public final class ChartBackgroundColorOptions extends NativeObjectContainer {
 	 */
 	public IsColor getBackgroundColor() {
 		// checks if color has been set
-		if (ColorType.color.equals(getColorType())) {
+		if (ColorType.COLOR.equals(getColorType())) {
 			return ColorBuilder.parse(getBackgroundColorAsString());
 		}
 		// otherwise returns null
@@ -124,8 +168,8 @@ public final class ChartBackgroundColorOptions extends NativeObjectContainer {
 	 */
 	public Gradient getBackgroundColorAsGradient() {
 		// checks if gradient has been set
-		if (ColorType.gradient.equals(getColorType())) {
-			return gradientFactory.create(getValue(Property.backgroundColor));
+		if (ColorType.GRADIENT.equals(getColorType())) {
+			return gradientFactory.create(getValue(Property.BACKGROUND_COLOR));
 		}
 		// otherwise returns null
 		return null;
@@ -138,8 +182,8 @@ public final class ChartBackgroundColorOptions extends NativeObjectContainer {
 	 */
 	public Pattern getBackgroundColorAsPattern() {
 		// checks if pattern has been set
-		if (ColorType.pattern.equals(getColorType())) {
-			return patternFactory.create(getValue(Property.backgroundColor));
+		if (ColorType.PATTERN.equals(getColorType())) {
+			return patternFactory.create(getValue(Property.BACKGROUND_COLOR));
 		}
 		// otherwise returns null
 		return null;
@@ -151,9 +195,9 @@ public final class ChartBackgroundColorOptions extends NativeObjectContainer {
 	 * @param color the background color.
 	 */
 	public void setBackgroundColor(String color) {
-		setValue(Property.backgroundColor, color);
+		setValue(Property.BACKGROUND_COLOR, color);
 		// sets the color type
-		setValue(Property.colorType, ColorType.color);
+		setValue(Property.COLOR_TYPE, ColorType.COLOR);
 	}
 
 	/**
@@ -171,9 +215,9 @@ public final class ChartBackgroundColorOptions extends NativeObjectContainer {
 	 * @param gradient the background gradient.
 	 */
 	public void setBackgroundColor(Gradient gradient) {
-		setValue(Property.backgroundColor, gradient);
+		setValue(Property.BACKGROUND_COLOR, gradient);
 		// sets the color type
-		setValue(Property.colorType, ColorType.gradient);
+		setValue(Property.COLOR_TYPE, ColorType.GRADIENT);
 	}
 
 	/**
@@ -182,8 +226,8 @@ public final class ChartBackgroundColorOptions extends NativeObjectContainer {
 	 * @param pattern the background pattern.
 	 */
 	public void setBackgroundColor(Pattern pattern) {
-		setValue(Property.backgroundColor, pattern);
+		setValue(Property.BACKGROUND_COLOR, pattern);
 		// sets the color type
-		setValue(Property.colorType, ColorType.pattern);
+		setValue(Property.COLOR_TYPE, ColorType.PATTERN);
 	}
 }

@@ -81,7 +81,7 @@ public abstract class NativeObjectContainer {
 	 * @return <code>true</code> if the embedded JavaScript object contains an element at specific property
 	 */
 	protected final boolean has(Key key) {
-		return nativeObject.hasProperty(key.name());
+		return nativeObject.hasProperty(key.value());
 	}
 
 	/**
@@ -125,7 +125,7 @@ public abstract class NativeObjectContainer {
 	 * @return the java script type of the property.
 	 */
 	protected final ObjectType type(Key key) {
-		return JsHelper.get().typeOf(nativeObject, key.name());
+		return JsHelper.get().typeOf(nativeObject, key.value());
 	}
 
 	/**
@@ -147,7 +147,7 @@ public abstract class NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 */
 	protected final void remove(Key key) {
-		nativeObject.removeProperty(key.name());
+		nativeObject.removeProperty(key.value());
 	}
 
 	/**
@@ -173,7 +173,7 @@ public abstract class NativeObjectContainer {
 	 * @param value value to be set
 	 */
 	protected final void setValue(Key key, int value) {
-		nativeObject.defineIntProperty(key.name(), value);
+		nativeObject.defineIntProperty(key.value(), value);
 	}
 
 	/**
@@ -190,7 +190,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// gets descriptor
-		NativeIntegerDescriptor descriptor = nativeObject.getIntProperty(key.name());
+		NativeIntegerDescriptor descriptor = nativeObject.getIntProperty(key.value());
 		// returns value
 		return descriptor == null ? defaultValue : descriptor.getValue();
 	}
@@ -251,7 +251,7 @@ public abstract class NativeObjectContainer {
 	 * @param value value to be set
 	 */
 	protected final void setValue(Key key, double value) {
-		nativeObject.defineDoubleProperty(key.name(), value);
+		nativeObject.defineDoubleProperty(key.value(), value);
 	}
 
 	/**
@@ -268,7 +268,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// gets descriptor
-		NativeDoubleDescriptor descriptor = nativeObject.getDoubleProperty(key.name());
+		NativeDoubleDescriptor descriptor = nativeObject.getDoubleProperty(key.value());
 		// returns value
 		return descriptor == null ? defaultValue : descriptor.getValue();
 	}
@@ -329,7 +329,7 @@ public abstract class NativeObjectContainer {
 	 * @param value value to be set
 	 */
 	protected final void setValue(Key key, boolean value) {
-		nativeObject.defineBooleanProperty(key.name(), value);
+		nativeObject.defineBooleanProperty(key.value(), value);
 	}
 
 	/**
@@ -346,7 +346,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// gets descriptor
-		NativeBooleanDescriptor descriptor = nativeObject.getBooleanProperty(key.name());
+		NativeBooleanDescriptor descriptor = nativeObject.getBooleanProperty(key.value());
 		// returns value
 		return descriptor == null ? defaultValue : descriptor.getValue();
 	}
@@ -368,7 +368,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// gets descriptor
-		NativeStringDescriptor descriptor = nativeObject.getStringProperty(key.name());
+		NativeStringDescriptor descriptor = nativeObject.getStringProperty(key.value());
 		// returns value
 		return descriptor == null ? defaultValue : descriptor.getValue();
 	}
@@ -387,7 +387,7 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		} else {
 			// sets value
-			nativeObject.defineStringProperty(key.name(), value);
+			nativeObject.defineStringProperty(key.value(), value);
 		}
 	}
 
@@ -455,7 +455,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// gets descriptor
-		NativeDateDescriptor descriptor = nativeObject.getDateProperty(key.name());
+		NativeDateDescriptor descriptor = nativeObject.getDateProperty(key.value());
 		// returns value
 		return descriptor == null ? defaultValue : new Date((long) descriptor.getValue().getTime());
 	}
@@ -474,7 +474,7 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		} else {
 			// sets value
-			nativeObject.defineDateProperty(key.name(), JsDate.create((double) value.getTime()));
+			nativeObject.defineDateProperty(key.value(), JsDate.create((double) value.getTime()));
 		}
 	}
 
@@ -494,7 +494,7 @@ public abstract class NativeObjectContainer {
 			return null;
 		}
 		// gets descriptor
-		NativeObjectDescriptor descriptor = nativeObject.getObjectProperty(key.name());
+		NativeObjectDescriptor descriptor = nativeObject.getObjectProperty(key.value());
 		// returns value
 		return descriptor == null ? null : descriptor.getValue();
 	}
@@ -513,7 +513,7 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		} else {
 			// sets value
-			nativeObject.defineObjectProperty(key.name(), value);
+			nativeObject.defineObjectProperty(key.value(), value);
 		}
 	}
 
@@ -534,7 +534,7 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		} else {
 			// sets value
-			nativeObject.defineObjectProperty(key.name(), value.getNativeObject());
+			nativeObject.defineObjectProperty(key.value(), value.getNativeObject());
 		}
 	}
 
@@ -552,7 +552,7 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		} else {
 			// sets value
-			nativeObject.defineArrayProperty(key.name(), container.getArray());
+			nativeObject.defineArrayProperty(key.value(), container.getArray());
 		}
 	}
 
@@ -573,7 +573,7 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		} else {
 			// sets value
-			nativeObject.defineCallbackProperty(key.name(), value);
+			nativeObject.defineCallbackProperty(key.value(), value);
 		}
 	}
 
@@ -594,7 +594,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// gets descriptor
-		NativeImageDescriptor descriptor = nativeObject.getImageProperty(key.name());
+		NativeImageDescriptor descriptor = nativeObject.getImageProperty(key.value());
 		// returns value
 		return descriptor == null ? defaultValue : descriptor.getValue();
 	}
@@ -613,7 +613,7 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		} else {
 			// sets value
-			nativeObject.defineImageProperty(key.name(), value);
+			nativeObject.defineImageProperty(key.value(), value);
 		}
 	}
 
@@ -680,7 +680,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// gets descriptor
-		NativeGradientDescriptor descriptor = nativeObject.getGradientProperty(key.name());
+		NativeGradientDescriptor descriptor = nativeObject.getGradientProperty(key.value());
 		// returns value
 		return descriptor == null ? defaultValue : descriptor.getValue();
 	}
@@ -699,7 +699,7 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		} else {
 			// sets value
-			nativeObject.defineGradientProperty(key.name(), value);
+			nativeObject.defineGradientProperty(key.value(), value);
 		}
 	}
 
@@ -766,7 +766,7 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// gets descriptor
-		NativePatternDescriptor descriptor = nativeObject.getPatternProperty(key.name());
+		NativePatternDescriptor descriptor = nativeObject.getPatternProperty(key.value());
 		// returns value
 		return descriptor == null ? defaultValue : descriptor.getValue();
 	}
@@ -785,7 +785,7 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		} else {
 			// sets value
-			nativeObject.definePatternProperty(key.name(), value);
+			nativeObject.definePatternProperty(key.value(), value);
 		}
 	}
 
@@ -854,11 +854,11 @@ public abstract class NativeObjectContainer {
 			return defaultValue;
 		}
 		// gets the string value
-		String value = getValue(key, defaultValue.name());
+		String value = getValue(key, defaultValue.value());
 		// scans all EnumValue array
 		for (T enumValue : clazz.getEnumConstants()) {
 			// checks if Enum value name is equals to value
-			if (enumValue.name().equalsIgnoreCase(value)) {
+			if (enumValue.value().equalsIgnoreCase(value)) {
 				// returns EnumValue
 				return enumValue;
 			}
@@ -883,7 +883,7 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		} else {
 			// sets value
-			nativeObject.defineStringProperty(key.name(), value.name());
+			nativeObject.defineStringProperty(key.value(), value.value());
 		}
 	}
 
@@ -921,7 +921,7 @@ public abstract class NativeObjectContainer {
 	 */
 	protected final ArrayString getValueOrArray(Key key, Key defaultValue) {
 		// the same logic as a string
-		return getValueOrArray(key, defaultValue.name());
+		return getValueOrArray(key, defaultValue.value());
 	}
 
 	// ------------------------------------------
@@ -942,7 +942,7 @@ public abstract class NativeObjectContainer {
 			return null;
 		}
 		// gets descriptor
-		NativeArrayDescriptor<T> descriptor = nativeObject.getArrayProperty(key.name());
+		NativeArrayDescriptor<T> descriptor = nativeObject.getArrayProperty(key.value());
 		// returns value
 		return descriptor == null ? null : descriptor.getValue();
 	}
@@ -962,7 +962,7 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		} else {
 			// sets value
-			nativeObject.defineArrayProperty(key.name(), value);
+			nativeObject.defineArrayProperty(key.value(), value);
 		}
 	}
 

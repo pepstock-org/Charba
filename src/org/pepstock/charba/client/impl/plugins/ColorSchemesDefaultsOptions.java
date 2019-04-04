@@ -49,7 +49,7 @@ final class ColorSchemesDefaultsOptions extends NativeObjectContainer {
 	 * @return the color scheme category
 	 */
 	String getSchemeCategory() {
-		return getValue(ColorSchemesOptions.Property.schemeCategory, ColorSchemesOptions.DEFAULT_SCHEME.category());
+		return getValue(ColorSchemesOptions.Property.SCHEME_CATEGORY, ColorSchemesOptions.DEFAULT_SCHEME.category());
 	}
 
 	/**
@@ -58,7 +58,7 @@ final class ColorSchemesDefaultsOptions extends NativeObjectContainer {
 	 * @return the color scheme name
 	 */
 	String getSchemeName() {
-		return getValue(ColorSchemesOptions.Property.schemeName, ColorSchemesOptions.DEFAULT_SCHEME.name());
+		return getValue(ColorSchemesOptions.Property.SCHEME_NAME, ColorSchemesOptions.DEFAULT_SCHEME.value());
 	}
 
 	/**
@@ -67,7 +67,7 @@ final class ColorSchemesDefaultsOptions extends NativeObjectContainer {
 	 * @return the color scheme cope when the scheme is applied to hoving flex datasets, like bars charts
 	 */
 	SchemeScope getSchemeScope() {
-		return getValue(ColorSchemesOptions.Property.schemeScope, SchemeScope.class, ColorSchemesOptions.DEFAULT_SCHEME_SCOPE);
+		return getValue(ColorSchemesOptions.Property.SCHEME_SCOPE, SchemeScope.class, ColorSchemesOptions.DEFAULT_SCHEME_SCOPE);
 	}
 
 	/**
@@ -77,7 +77,7 @@ final class ColorSchemesDefaultsOptions extends NativeObjectContainer {
 	 * @return the transparency value for the background color
 	 */
 	double getBackgroundColorAlpha() {
-		return getValue(ColorSchemesOptions.Property.backgroundColorAlpha, ColorSchemesOptions.DEFAULT_BACKGROUND_ALPHA);
+		return getValue(ColorSchemesOptions.Property.BACKGROUND_COLOR_ALPHA, ColorSchemesOptions.DEFAULT_BACKGROUND_ALPHA);
 	}
 
 	/**
@@ -86,7 +86,7 @@ final class ColorSchemesDefaultsOptions extends NativeObjectContainer {
 	 * @return if set to <code>true</code>, the order of the colors in the selected scheme is reversed
 	 */
 	boolean isReverse() {
-		return getValue(ColorSchemesOptions.Property.reverse, ColorSchemesOptions.DEFAULT_REVERSE);
+		return getValue(ColorSchemesOptions.Property.REVERSE, ColorSchemesOptions.DEFAULT_REVERSE);
 	}
 
 }

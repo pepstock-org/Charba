@@ -27,25 +27,48 @@ public enum Align implements Key
 	/**
 	 * the property sets the left alignment.
 	 */
-	left,
+	LEFT("left"),
 	/**
 	 * the property sets the left chart area alignment.
 	 */
-	left_chartArea,
+	LEFT_CHART_AREA("left_chartArea"),
 	/**
 	 * the property sets the center alignment.
 	 */
-	center,
+	CENTER("center"),
 	/**
 	 * the property sets the center of chart area alignment.
 	 */
-	center_chartArea,
+	CENTER_CHART_AREA("center_chartArea"),
 	/**
 	 * the property sets the right chart area alignment.
 	 */
-	right_chartArea,
+	RIGHT_CHART_AREA("right_chartArea"),
 	/**
 	 * the property sets the right text alignment.
 	 */
-	right;
+	RIGHT("right");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private Align(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

@@ -45,7 +45,7 @@ public class BubbleChart extends AbstractChart<BubbleOptions, BubbleDataset> {
 	 */
 	@Override
 	public Type getType() {
-		return ChartType.bubble;
+		return ChartType.BUBBLE;
 	}
 
 	/*

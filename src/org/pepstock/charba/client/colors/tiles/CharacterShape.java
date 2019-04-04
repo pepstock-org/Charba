@@ -44,7 +44,7 @@ import com.google.gwt.canvas.dom.client.TextMetrics;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class CharacterShape extends ShapeDrawer implements IsShape {
+public final class CharacterShape extends AbstractShape {
 
 	/**
 	 * Name of shape to draw a character, <b>{@value CHARACTER_SHAPE_NAME}</b>.
@@ -56,8 +56,6 @@ public final class CharacterShape extends ShapeDrawer implements IsShape {
 	private final String character;
 	// font family to apply on tile
 	private final String fontFamily;
-	// key prefix for caching
-	private final String charKeyPrefix;
 
 	/**
 	 * Creates a shape with a character as shape, using the default font family
@@ -75,6 +73,7 @@ public final class CharacterShape extends ShapeDrawer implements IsShape {
 	 * @param fontFamily font family to apply on tile
 	 */
 	public CharacterShape(String character, String fontFamily) {
+		super(CHARACTER_SHAPE_NAME);
 		// checks the character is consistent
 		if (character == null) {
 			// if not, exception
@@ -89,37 +88,7 @@ public final class CharacterShape extends ShapeDrawer implements IsShape {
 		this.character = character;
 		this.fontFamily = fontFamily != null ? fontFamily : Defaults.get().getGlobal().getDefaultFontFamily();
 		// creates the prefix key for caching
-		this.charKeyPrefix = CHARACTER_SHAPE_NAME + character + fontFamily;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.commons.Key#name()
-	 */
-	@Override
-	public String name() {
-		return CHARACTER_SHAPE_NAME;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.IsShape#getDrawer()
-	 */
-	@Override
-	public ShapeDrawer getDrawer() {
-		return this;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.tiles.IsShape#getKeyPrefix()
-	 */
-	@Override
-	public String getKeyPrefix() {
-		return charKeyPrefix;
+		super.setKeyPrefix(CHARACTER_SHAPE_NAME + character + fontFamily);
 	}
 
 	/*
@@ -152,7 +121,7 @@ public final class CharacterShape extends ShapeDrawer implements IsShape {
 
 	/**
 	 * Designs a char into a tile section.
-	 *  
+	 * 
 	 * @param context context of canvas to design the shape
 	 * @param size the size of tile, which is a square
 	 * @param offsetX offset X where starts drawing
@@ -188,7 +157,7 @@ public final class CharacterShape extends ShapeDrawer implements IsShape {
 	 * @param context context of canvas to design the shape
 	 * @param value character to draw
 	 * @param size size of tile
-	 * @param style font style to use to apply the char on tile 
+	 * @param style font style to use to apply the char on tile
 	 * @param fontFamily font family to use to apply the char on tile
 	 * @return the font size to use
 	 */

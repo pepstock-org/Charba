@@ -36,9 +36,32 @@ public final class TooltipBodyItem extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		before,
-		lines,
-		after
+		BEFORE("before"),
+		LINES("lines"),
+		AFTER("after");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -57,7 +80,7 @@ public final class TooltipBodyItem extends NativeObjectContainer {
 	 */
 	public List<String> getBefore() {
 		// gets array from native object
-		ArrayString array = getArrayValue(Property.before);
+		ArrayString array = getArrayValue(Property.BEFORE);
 		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}
@@ -69,7 +92,7 @@ public final class TooltipBodyItem extends NativeObjectContainer {
 	 */
 	public List<String> getLines() {
 		// gets array from native object
-		ArrayString array = getArrayValue(Property.lines);
+		ArrayString array = getArrayValue(Property.LINES);
 		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}
@@ -81,7 +104,7 @@ public final class TooltipBodyItem extends NativeObjectContainer {
 	 */
 	public List<String> getAfter() {
 		// gets array from native object
-		ArrayString array = getArrayValue(Property.after);
+		ArrayString array = getArrayValue(Property.AFTER);
 		// returns list
 		return ArrayListHelper.unmodifiableList(array);
 	}

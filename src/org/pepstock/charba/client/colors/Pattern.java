@@ -47,9 +47,31 @@ public final class Pattern extends CanvasObject {
 	 */
 	private enum Property implements Key
 	{
-		_charbaPatternImg,
-		_charbaPatternRepetition,
-		_charbaPatternCanvas,
+		CHARBA_PATTERN_IMG("_charbaPatternImg"),
+		CHARBA_PATTERN_REPETITION("_charbaPatternRepetition"),
+		CHARBA_PATTERN_CANVAS("_charbaPatternCanvas");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates a property with the value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
 	}
 
 	/**
@@ -112,8 +134,8 @@ public final class Pattern extends CanvasObject {
 		// checks if image is not consistent
 		if (image != null) {
 			// creates pattern
-			setValue(Property._charbaPatternImg, image);
-			setValue(Property._charbaPatternRepetition, repetition == null ? Context2d.Repetition.REPEAT.name() : repetition.name());
+			setValue(Property.CHARBA_PATTERN_IMG, image);
+			setValue(Property.CHARBA_PATTERN_REPETITION, repetition == null ? Context2d.Repetition.REPEAT.name() : repetition.name());
 		} else {
 			// if here, image is null
 			// then exception
@@ -131,10 +153,10 @@ public final class Pattern extends CanvasObject {
 		// checks if canvas pattern is not consistent
 		if (canvasPattern != null) {
 			// creates pattern
-			setValue(Property._charbaPatternCanvas, canvasPattern);
+			setValue(Property.CHARBA_PATTERN_CANVAS, canvasPattern);
 			// sets repetition even is not used
 			// to normalizes the properties
-			setValue(Property._charbaPatternRepetition, Context2d.Repetition.REPEAT.name());
+			setValue(Property.CHARBA_PATTERN_REPETITION, Context2d.Repetition.REPEAT.name());
 		} else {
 			// if here, image is null
 			// then exception
@@ -157,7 +179,7 @@ public final class Pattern extends CanvasObject {
 	 * @return the image to use into pattern if exists, otherwise <code>null</code>.
 	 */
 	public ImageElement getImage() {
-		return getValue(Property._charbaPatternImg, DEFAULT_IMAGE);
+		return getValue(Property.CHARBA_PATTERN_IMG, DEFAULT_IMAGE);
 	}
 
 	/**
@@ -166,7 +188,7 @@ public final class Pattern extends CanvasObject {
 	 * @return the repetition to use into pattern
 	 */
 	public Context2d.Repetition getRepetition() {
-		String value = getValue(Property._charbaPatternRepetition, Context2d.Repetition.REPEAT.name());
+		String value = getValue(Property.CHARBA_PATTERN_REPETITION, Context2d.Repetition.REPEAT.name());
 		return Context2d.Repetition.valueOf(value);
 	}
 
@@ -176,7 +198,7 @@ public final class Pattern extends CanvasObject {
 	 * @return the canvas pattern if exists, otherwise <code>null</code>.
 	 */
 	public CanvasPattern getCanvasPattern() {
-		return getValue(Property._charbaPatternCanvas, DEFAULT_CANVAS_PATTERN);
+		return getValue(Property.CHARBA_PATTERN_CANVAS, DEFAULT_CANVAS_PATTERN);
 	}
 
 	/**

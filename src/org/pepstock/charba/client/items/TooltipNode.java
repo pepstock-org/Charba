@@ -35,7 +35,30 @@ public final class TooltipNode extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		_model
+		MODEL("_model");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -46,7 +69,7 @@ public final class TooltipNode extends NativeObjectContainer {
 	public TooltipNode(NativeObject nativeObject) {
 		super(nativeObject);
 		// creates sub element
-		model = new TooltipModel(getValue(Property._model));
+		model = new TooltipModel(getValue(Property.MODEL));
 	}
 
 	/**

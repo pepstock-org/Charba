@@ -41,7 +41,7 @@ public final class AxisMinSizeItem extends SizeItem {
 	 * @param width the minimum width of axis in pixel.
 	 */
 	public void setWidth(int width) {
-		setValue(Property.width, width);
+		setValue(SizeItem.Property.WIDTH, width);
 	}
 
 	/**
@@ -50,6 +50,6 @@ public final class AxisMinSizeItem extends SizeItem {
 	 * @param height the minimum height of axis in pixel.
 	 */
 	public void setHeight(int height) {
-		setValue(Property.height, height);
+		setValue(SizeItem.Property.HEIGHT, height);
 	}
 }

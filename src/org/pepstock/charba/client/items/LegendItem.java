@@ -46,18 +46,41 @@ public class LegendItem extends NativeObjectContainer {
 	 */
 	enum Property implements Key
 	{
-		datasetIndex,
-		index,
-		text,
-		fillStyle,
-		hidden,
-		lineCap,
-		lineDash,
-		lineDashOffset,
-		lineJoin,
-		lineWidth,
-		strokeStyle,
-		pointStyle
+		DATASET_INDEX("datasetIndex"),
+		INDEX("index"),
+		TEXT("text"),
+		FILL_STYLE("fillStyle"),
+		HIDDEN("hidden"),
+		LINE_CAP("lineCap"),
+		LINE_DASH("lineDash"),
+		LINE_DASH_OFFSET("lineDashOffset"),
+		LINE_JOIN("lineJoin"),
+		LINE_WIDTH("lineWidth"),
+		STROKE_STYLE("strokeStyle"),
+		POINT_STYLE("pointStyle");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -82,7 +105,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return the dataset index of the chart. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getDatasetIndex() {
-		return getValue(Property.datasetIndex, UndefinedValues.INTEGER);
+		return getValue(Property.DATASET_INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -91,7 +114,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return the dataset index of the chart (for POLAR and PIE charts). Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public final int getIndex() {
-		return getValue(Property.index, UndefinedValues.INTEGER);
+		return getValue(Property.INDEX, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -100,7 +123,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return the label that will be displayed. Default is {@link UndefinedValues#STRING}.
 	 */
 	public final String getText() {
-		return getValue(Property.text, UndefinedValues.STRING);
+		return getValue(Property.TEXT, UndefinedValues.STRING);
 	}
 
 	/**
@@ -109,7 +132,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return the fill style of the legend box
 	 */
 	public final IsColor getFillStyle() {
-		return ColorBuilder.parse(getValue(Property.fillStyle, Defaults.get().getGlobal().getDefaultColorAsString()));
+		return ColorBuilder.parse(getValue(Property.FILL_STYLE, Defaults.get().getGlobal().getDefaultColorAsString()));
 	}
 
 	/**
@@ -120,7 +143,7 @@ public class LegendItem extends NativeObjectContainer {
 	 *         Default is {@link UndefinedValues#BOOLEAN}.
 	 */
 	public final boolean isHidden() {
-		return getValue(Property.hidden, UndefinedValues.BOOLEAN);
+		return getValue(Property.HIDDEN, UndefinedValues.BOOLEAN);
 	}
 
 	/**
@@ -130,7 +153,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return how the end points of every box border are drawn.
 	 */
 	public final CapStyle getLineCap() {
-		return getValue(Property.lineCap, CapStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderCapStyle());
+		return getValue(Property.LINE_CAP, CapStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderCapStyle());
 	}
 
 	/**
@@ -142,7 +165,7 @@ public class LegendItem extends NativeObjectContainer {
 	 */
 	public final List<Integer> getLineDash() {
 		// gets the array from native object
-		ArrayInteger array = getArrayValue(Property.lineDash);
+		ArrayInteger array = getArrayValue(Property.LINE_DASH);
 		// returns the list
 		return ArrayListHelper.unmodifiableList(array);
 	}
@@ -153,7 +176,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return the box border dash pattern offset or "phase".
 	 */
 	public final int getLineDashOffset() {
-		return getValue(Property.lineDashOffset, Defaults.get().getGlobal().getElements().getLine().getBorderDashOffset());
+		return getValue(Property.LINE_DASH_OFFSET, Defaults.get().getGlobal().getElements().getLine().getBorderDashOffset());
 	}
 
 	/**
@@ -165,7 +188,7 @@ public class LegendItem extends NativeObjectContainer {
 	 * @return There are three possible values for this property: round, bevel and miter.
 	 */
 	public final JoinStyle getLineJoin() {
-		return getValue(Property.lineJoin, JoinStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderJoinStyle());
+		return getValue(Property.LINE_JOIN, JoinStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderJoinStyle());
 	}
 
 	/**
@@ -175,14 +198,14 @@ public class LegendItem extends NativeObjectContainer {
 	 */
 	public final List<Integer> getLineWidth() {
 		// checks if the value into object is an array
-		if (ObjectType.Array.equals(type(Property.lineWidth))) {
+		if (ObjectType.Array.equals(type(Property.LINE_WIDTH))) {
 			// gets the array from native object
-			ArrayInteger array = getArrayValue(Property.lineWidth);
+			ArrayInteger array = getArrayValue(Property.LINE_WIDTH);
 			// returns list
 			return ArrayListHelper.unmodifiableList(array);
 		} else {
 			// returns an array with 1 element
-			return Collections.unmodifiableList(Arrays.asList(getValue(Property.lineWidth, Defaults.get().getGlobal().getElements().getLine().getBorderWidth())));
+			return Collections.unmodifiableList(Arrays.asList(getValue(Property.LINE_WIDTH, Defaults.get().getGlobal().getElements().getLine().getBorderWidth())));
 		}
 	}
 
@@ -193,14 +216,14 @@ public class LegendItem extends NativeObjectContainer {
 	 */
 	public final List<IsColor> getStrokeStyle() {
 		// checks if is an array
-		if (ObjectType.Array.equals(type(Property.strokeStyle))) {
+		if (ObjectType.Array.equals(type(Property.STROKE_STYLE))) {
 			// gets the array from native object
-			ArrayString array = getArrayValue(Property.strokeStyle);
+			ArrayString array = getArrayValue(Property.STROKE_STYLE);
 			// returns list
 			return Collections.unmodifiableList(ColorBuilder.parse(ArrayListHelper.list(array)));
 		} else {
 			// returns an array with 1 element
-			return Collections.unmodifiableList(ColorBuilder.parse(Arrays.asList(getValue(Property.strokeStyle, Defaults.get().getGlobal().getDefaultColorAsString()))));
+			return Collections.unmodifiableList(ColorBuilder.parse(Arrays.asList(getValue(Property.STROKE_STYLE, Defaults.get().getGlobal().getDefaultColorAsString()))));
 		}
 	}
 
@@ -211,14 +234,14 @@ public class LegendItem extends NativeObjectContainer {
 	 */
 	public final List<PointStyle> getPointStyle() {
 		// checks if is an array
-		if (ObjectType.Array.equals(type(Property.pointStyle))) {
+		if (ObjectType.Array.equals(type(Property.POINT_STYLE))) {
 			// gets the array from native object
-			ArrayString array = getArrayValue(Property.pointStyle);
+			ArrayString array = getArrayValue(Property.POINT_STYLE);
 			// returns list
 			return ArrayListHelper.unmodifiableList(PointStyle.class, array);
 		} else {
 			// returns an array with 1 element
-			return Collections.unmodifiableList(Arrays.asList(getValue(Property.pointStyle, PointStyle.class, Defaults.get().getGlobal().getElements().getPoint().getPointStyle())));
+			return Collections.unmodifiableList(Arrays.asList(getValue(Property.POINT_STYLE, PointStyle.class, Defaults.get().getGlobal().getElements().getPoint().getPointStyle())));
 		}
 	}
 

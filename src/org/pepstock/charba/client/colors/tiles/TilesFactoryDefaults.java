@@ -48,7 +48,7 @@ public final class TilesFactoryDefaults {
 	 * Default shape color, <b>{@value DEFAULT_SHAPE_COLOR_AS_STRING}</b>.
 	 */
 	public static final IsColor DEFAULT_SHAPE_COLOR = ColorBuilder.parse(DEFAULT_SHAPE_COLOR_AS_STRING);
-	
+
 	/**
 	 * Default tile size, <b>{@value DEFAULT_SIZE}</b>.
 	 */
@@ -65,7 +65,7 @@ public final class TilesFactoryDefaults {
 	/**
 	 * Default the shape, {@link Shape#square}.
 	 */
-	public static final IsShape DEFAULT_SHAPE = Shape.square;
+	public static final IsShape DEFAULT_SHAPE = Shape.SQUARE;
 
 	/**
 	 * Default to determine the shape used to join two line segments where they meet, {@link LineJoin#ROUND}.

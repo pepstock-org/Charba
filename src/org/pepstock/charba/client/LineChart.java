@@ -44,7 +44,7 @@ public class LineChart extends AbstractChart<LineOptions, LineDataset> {
 	 */
 	@Override
 	public Type getType() {
-		return ChartType.line;
+		return ChartType.LINE;
 	}
 
 	/*
