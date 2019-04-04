@@ -39,13 +39,36 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	 */
 	private enum Property implements Key
 	{
-		display,
-		fontStyle,
-		position,
-		padding,
-		fullWidth,
-		lineHeight,
-		text
+		DISPLAY("display"),
+		FONT_STYLE("fontStyle"),
+		POSITION("position"),
+		PADDING("padding"),
+		FULL_WIDTH("fullWidth"),
+		LINE_HEIGHT("lineHeight"),
+		TEXT("text");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -67,7 +90,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	 * @param display if <code>true</code> the title is shown.
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.display, display);
+		setValue(Property.DISPLAY, display);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -78,7 +101,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	 * @return if <code>true</code> the title is shown.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, getDefaultValues().isDisplay());
+		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -87,7 +110,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	 * @param position the position of title.
 	 */
 	public void setPosition(Position position) {
-		setValue(Property.position, position);
+		setValue(Property.POSITION, position);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -98,7 +121,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	 * @return the position of title.
 	 */
 	public Position getPosition() {
-		return getValue(Property.position, Position.class, getDefaultValues().getPosition());
+		return getValue(Property.POSITION, Position.class, getDefaultValues().getPosition());
 	}
 
 	/**
@@ -107,7 +130,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	 * @param padding padding to apply around labels. Only top and bottom are implemented.
 	 */
 	public void setPadding(int padding) {
-		setValue(Property.padding, padding);
+		setValue(Property.PADDING, padding);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -118,7 +141,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	 * @return padding to apply around labels. Only top and bottom are implemented.
 	 */
 	public int getPadding() {
-		return getValue(Property.padding, getDefaultValues().getPadding());
+		return getValue(Property.PADDING, getDefaultValues().getPadding());
 	}
 
 	/**
@@ -128,7 +151,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	 *            boxes)
 	 */
 	public void setFullWidth(boolean fullWidth) {
-		setValue(Property.fullWidth, fullWidth);
+		setValue(Property.FULL_WIDTH, fullWidth);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -139,7 +162,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	 * @return <code>true</code> if marks that this box should take the full width of the canvas (pushing down other boxes).
 	 */
 	public boolean isFullWidth() {
-		return getValue(Property.fullWidth, getDefaultValues().isFullWidth());
+		return getValue(Property.FULL_WIDTH, getDefaultValues().isFullWidth());
 	}
 
 	/**
@@ -148,7 +171,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	 * @param lineHeight height of an individual line of text.
 	 */
 	public void setLineHeight(double lineHeight) {
-		setValue(Property.lineHeight, lineHeight);
+		setValue(Property.LINE_HEIGHT, lineHeight);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -159,7 +182,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	 * @param lineHeight height of an individual line of text.
 	 */
 	public void setLineHeight(String lineHeight) {
-		setValue(Property.lineHeight, lineHeight);
+		setValue(Property.LINE_HEIGHT, lineHeight);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -173,9 +196,9 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 		// creates default
 		double defaultValue = getDefaultValues().getLineHeight();
 		// checks type if number
-		if (ObjectType.NUMBER.equals(type(Property.lineHeight))) {
+		if (ObjectType.NUMBER.equals(type(Property.LINE_HEIGHT))) {
 			// reads and returns as double
-			return getValue(Property.lineHeight, defaultValue);
+			return getValue(Property.LINE_HEIGHT, defaultValue);
 		}
 		// if here, is not a number
 		// then returns the default
@@ -191,9 +214,9 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 		// creates default
 		String defaultValue = String.valueOf(getDefaultValues().getLineHeight());
 		// checks type if string
-		if (ObjectType.STRING.equals(type(Property.lineHeight))) {
+		if (ObjectType.STRING.equals(type(Property.LINE_HEIGHT))) {
 			// reads and returns as string
-			return getValue(Property.lineHeight, defaultValue);
+			return getValue(Property.LINE_HEIGHT, defaultValue);
 		}
 		// if here, is not a number
 		// then returns the default
@@ -207,7 +230,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	 */
 	public void setText(String... text) {
 		// stores the array
-		setValueOrArray(Property.text, text);
+		setValueOrArray(Property.TEXT, text);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -220,7 +243,7 @@ public final class Title extends FontItem<Options, IsDefaultTitle> implements Is
 	public List<String> getText() {
 		// reads as array
 		// and returns it
-		ArrayString array = getValueOrArray(Property.text, UndefinedValues.STRING);
+		ArrayString array = getValueOrArray(Property.TEXT, UndefinedValues.STRING);
 		return ArrayListHelper.list(array);
 	}
 }

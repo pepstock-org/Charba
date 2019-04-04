@@ -44,31 +44,54 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 */
 	private enum Property implements Key
 	{
-		minor,
-		major,
-		display,
-		reverse,
-		autoSkip,
-		autoSkipPadding,
-		labelOffset,
-		maxRotation,
-		minRotation,
-		mirror,
-		padding,
-		beginAtZero,
-		min,
-		max,
-		maxTicksLimit,
-		stepSize,
-		suggestedMax,
-		suggestedMin,
-		backdropColor,
-		backdropPaddingX,
-		backdropPaddingY,
-		showLabelBackdrop,
-		labels,
-		source,
-		precision
+		MINOR("minor"),
+		MAJOR("major"),
+		DISPLAY("display"),
+		REVERSE("reverse"),
+		AUTO_SKIP("autoSkip"),
+		AUTO_SKIP_PADDING("autoSkipPadding"),
+		LABEL_OFFSET("labelOffset"),
+		MAX_ROTATION("maxRotation"),
+		MIN_ROTATION("minRotation"),
+		MIRROR("mirror"),
+		PADDING("padding"),
+		BEGIN_AT_ZERO("beginAtZero"),
+		MIN("min"),
+		MAX("max"),
+		MAX_TICKS_LIMIT("maxTicksLimit"),
+		STEP_SIZE("stepSize"),
+		SUGGESTED_MAX("suggestedMax"),
+		SUGGESTED_MIN("suggestedMin"),
+		BACKDROP_COLOR("backdropColor"),
+		BACKDROP_PADDING_X("backdropPaddingX"),
+		BACKDROP_PADDING_Y("backdropPaddingY"),
+		SHOW_LABEL_BACKDROP("showLabelBackdrop"),
+		LABELS("labels"),
+		SOURCE("source"),
+		PRECISION("precision");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -83,8 +106,8 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	Ticks(Scale scale, Key childKey, IsDefaultTicks defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 		// gets sub elements
-		minor = new TickMinor(this, Property.minor, getDefaultValues().getMinor(), getValue(Property.minor));
-		major = new TickMajor(this, Property.major, getDefaultValues().getMajor(), getValue(Property.major));
+		minor = new TickMinor(this, Property.MINOR, getDefaultValues().getMinor(), getValue(Property.MINOR));
+		major = new TickMajor(this, Property.MAJOR, getDefaultValues().getMajor(), getValue(Property.MAJOR));
 	}
 
 	/**
@@ -111,7 +134,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param beginAtZero if <code>true</code>, scale will include 0 if it is not already included.
 	 */
 	public void setBeginAtZero(boolean beginAtZero) {
-		setValue(Property.beginAtZero, beginAtZero);
+		setValue(Property.BEGIN_AT_ZERO, beginAtZero);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -122,7 +145,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return if <code>true</code>, scale will include 0 if it is not already included.
 	 */
 	public boolean isBeginAtZero() {
-		return getValue(Property.beginAtZero, getDefaultValues().isBeginAtZero());
+		return getValue(Property.BEGIN_AT_ZERO, getDefaultValues().isBeginAtZero());
 	}
 
 	/**
@@ -131,7 +154,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param display if <code>true</code>, show tick marks.
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.display, display);
+		setValue(Property.DISPLAY, display);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -142,7 +165,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return if <code>true</code>, show tick marks.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, getDefaultValues().isDisplay());
+		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -151,7 +174,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param reverse reverses order of tick labels.
 	 */
 	public void setReverse(boolean reverse) {
-		setValue(Property.reverse, reverse);
+		setValue(Property.REVERSE, reverse);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -162,7 +185,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return if <code>true</code> reverses order of tick labels.
 	 */
 	public boolean isReverse() {
-		return getValue(Property.reverse, getDefaultValues().isReverse());
+		return getValue(Property.REVERSE, getDefaultValues().isReverse());
 	}
 
 	/**
@@ -173,7 +196,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 *            accordingly. Turn it off to show all labels no matter what
 	 */
 	public void setAutoSkip(boolean autoSkip) {
-		setValue(Property.autoSkip, autoSkip);
+		setValue(Property.AUTO_SKIP, autoSkip);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -186,7 +209,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 *         Turn it off to show all labels no matter what.
 	 */
 	public boolean isAutoSkip() {
-		return getValue(Property.autoSkip, getDefaultValues().isAutoSkip());
+		return getValue(Property.AUTO_SKIP, getDefaultValues().isAutoSkip());
 	}
 
 	/**
@@ -197,7 +220,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 *            to horizontal scales.
 	 */
 	public void setAutoSkipPadding(int autoSkipPadding) {
-		setValue(Property.autoSkipPadding, autoSkipPadding);
+		setValue(Property.AUTO_SKIP_PADDING, autoSkipPadding);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -210,7 +233,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 *         scales.
 	 */
 	public int getAutoSkipPadding() {
-		return getValue(Property.autoSkipPadding, getDefaultValues().getAutoSkipPadding());
+		return getValue(Property.AUTO_SKIP_PADDING, getDefaultValues().getAutoSkipPadding());
 	}
 
 	/**
@@ -222,7 +245,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 *            the x axis, and the x direction for the y axis)
 	 */
 	public void setLabelOffset(int labelOffset) {
-		setValue(Property.labelOffset, labelOffset);
+		setValue(Property.LABEL_OFFSET, labelOffset);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -236,7 +259,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 *         and the x direction for the y axis).
 	 */
 	public int getLabelOffset() {
-		return getValue(Property.labelOffset, getDefaultValues().getLabelOffset());
+		return getValue(Property.LABEL_OFFSET, getDefaultValues().getLabelOffset());
 	}
 
 	/**
@@ -247,7 +270,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 *            necessary. Note: Only applicable to horizontal scales.
 	 */
 	public void setMaxRotation(int maxRotation) {
-		setValue(Property.maxRotation, maxRotation);
+		setValue(Property.MAX_ROTATION, maxRotation);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -260,7 +283,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 *         Note: Only applicable to horizontal scales.
 	 */
 	public int getMaxRotation() {
-		return getValue(Property.maxRotation, getDefaultValues().getMaxRotation());
+		return getValue(Property.MAX_ROTATION, getDefaultValues().getMaxRotation());
 	}
 
 	/**
@@ -269,7 +292,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param minRotation minimum rotation for tick labels. Note: Only applicable to horizontal scales.
 	 */
 	public void setMinRotation(int minRotation) {
-		setValue(Property.minRotation, minRotation);
+		setValue(Property.MIN_ROTATION, minRotation);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -280,7 +303,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return minimum rotation for tick labels. Note: Only applicable to horizontal scales.
 	 */
 	public int getMinRotation() {
-		return getValue(Property.minRotation, getDefaultValues().getMinRotation());
+		return getValue(Property.MIN_ROTATION, getDefaultValues().getMinRotation());
 	}
 
 	/**
@@ -291,7 +314,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 *            applicable to vertical scales.
 	 */
 	public void setMirror(boolean mirror) {
-		setValue(Property.mirror, mirror);
+		setValue(Property.MIRROR, mirror);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -304,7 +327,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 *         to vertical scales.
 	 */
 	public boolean isMirror() {
-		return getValue(Property.mirror, getDefaultValues().isMirror());
+		return getValue(Property.MIRROR, getDefaultValues().isMirror());
 	}
 
 	/**
@@ -315,7 +338,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 *            (X) direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
 	 */
 	public void setPadding(int padding) {
-		setValue(Property.padding, padding);
+		setValue(Property.PADDING, padding);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -328,7 +351,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 *         direction. When set on a horizontal axis, this applies in the vertical (Y) direction.
 	 */
 	public int getPadding() {
-		return getValue(Property.padding, getDefaultValues().getPadding());
+		return getValue(Property.PADDING, getDefaultValues().getPadding());
 	}
 
 	/**
@@ -337,7 +360,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	public void setMin(double min) {
-		setValue(Property.min, min);
+		setValue(Property.MIN, min);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -348,7 +371,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	public double getMin() {
-		return getValue(Property.min, getDefaultValues().getMin());
+		return getValue(Property.MIN, getDefaultValues().getMin());
 	}
 
 	/**
@@ -357,7 +380,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param max user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	public void setMax(double max) {
-		setValue(Property.max, max);
+		setValue(Property.MAX, max);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -368,7 +391,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	public double getMax() {
-		return getValue(Property.max, getDefaultValues().getMax());
+		return getValue(Property.MAX, getDefaultValues().getMax());
 	}
 
 	/**
@@ -377,7 +400,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	public void setMin(String min) {
-		setValue(Property.min, min);
+		setValue(Property.MIN, min);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -388,7 +411,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	public String getMinAsString() {
-		return getValue(Property.min, String.valueOf(getDefaultValues().getMin()));
+		return getValue(Property.MIN, String.valueOf(getDefaultValues().getMin()));
 	}
 
 	/**
@@ -397,7 +420,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param max user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	public void setMax(String max) {
-		setValue(Property.max, max);
+		setValue(Property.MAX, max);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -408,7 +431,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	public String getMaxAsString() {
-		return getValue(Property.max, String.valueOf(getDefaultValues().getMax()));
+		return getValue(Property.MAX, String.valueOf(getDefaultValues().getMax()));
 	}
 
 	/**
@@ -417,7 +440,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param maxTicksLimit maximum number of ticks and gridlines to show.
 	 */
 	public void setMaxTicksLimit(int maxTicksLimit) {
-		setValue(Property.maxTicksLimit, maxTicksLimit);
+		setValue(Property.MAX_TICKS_LIMIT, maxTicksLimit);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -428,7 +451,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return maximum number of ticks and gridlines to show.
 	 */
 	public int getMaxTicksLimit() {
-		return getValue(Property.maxTicksLimit, getDefaultValues().getMaxTicksLimit());
+		return getValue(Property.MAX_TICKS_LIMIT, getDefaultValues().getMaxTicksLimit());
 	}
 
 	/**
@@ -437,7 +460,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param stepSize user defined fixed step size for the scale.
 	 */
 	public void setStepSize(double stepSize) {
-		setValue(Property.stepSize, stepSize);
+		setValue(Property.STEP_SIZE, stepSize);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -448,7 +471,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return user defined fixed step size for the scale.
 	 */
 	public double getStepSize() {
-		return getValue(Property.stepSize, getDefaultValues().getStepSize());
+		return getValue(Property.STEP_SIZE, getDefaultValues().getStepSize());
 	}
 
 	/**
@@ -457,7 +480,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param suggestedMax adjustment used when calculating the maximum data value.
 	 */
 	public void setSuggestedMax(double suggestedMax) {
-		setValue(Property.suggestedMax, suggestedMax);
+		setValue(Property.SUGGESTED_MAX, suggestedMax);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -468,7 +491,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return adjustment used when calculating the maximum data value.
 	 */
 	public double getSuggestedMax() {
-		return getValue(Property.suggestedMax, getDefaultValues().getSuggestedMax());
+		return getValue(Property.SUGGESTED_MAX, getDefaultValues().getSuggestedMax());
 	}
 
 	/**
@@ -477,7 +500,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param suggestedMin adjustment used when calculating the minimum data value.
 	 */
 	public void setSuggestedMin(double suggestedMin) {
-		setValue(Property.suggestedMin, suggestedMin);
+		setValue(Property.SUGGESTED_MIN, suggestedMin);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -488,7 +511,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return adjustment used when calculating the minimum data value.
 	 */
 	public double getSuggestedMin() {
-		return getValue(Property.suggestedMin, getDefaultValues().getSuggestedMin());
+		return getValue(Property.SUGGESTED_MIN, getDefaultValues().getSuggestedMin());
 	}
 
 	/**
@@ -506,7 +529,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param backdropColor color of label backdrops.
 	 */
 	public void setBackdropColor(String backdropColor) {
-		setValue(Property.backdropColor, backdropColor);
+		setValue(Property.BACKDROP_COLOR, backdropColor);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -517,7 +540,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return color of label backdrops.
 	 */
 	public String getBackdropColorAsString() {
-		return getValue(Property.backdropColor, getDefaultValues().getBackdropColorAsString());
+		return getValue(Property.BACKDROP_COLOR, getDefaultValues().getBackdropColorAsString());
 	}
 
 	/**
@@ -535,7 +558,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param backdropPaddingX horizontal padding of label backdrop.
 	 */
 	public void setBackdropPaddingX(int backdropPaddingX) {
-		setValue(Property.backdropPaddingX, backdropPaddingX);
+		setValue(Property.BACKDROP_PADDING_X, backdropPaddingX);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -546,7 +569,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return horizontal padding of label backdrop.
 	 */
 	public int getBackdropPaddingX() {
-		return getValue(Property.backdropPaddingX, getDefaultValues().getBackdropPaddingX());
+		return getValue(Property.BACKDROP_PADDING_X, getDefaultValues().getBackdropPaddingX());
 	}
 
 	/**
@@ -555,7 +578,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param backdropPaddingY vertical padding of label backdrop.
 	 */
 	public void setBackdropPaddingY(int backdropPaddingY) {
-		setValue(Property.backdropPaddingY, backdropPaddingY);
+		setValue(Property.BACKDROP_PADDING_Y, backdropPaddingY);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -566,7 +589,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return vertical padding of label backdrop.
 	 */
 	public int getBackdropPaddingY() {
-		return getValue(Property.backdropPaddingY, getDefaultValues().getBackdropPaddingY());
+		return getValue(Property.BACKDROP_PADDING_Y, getDefaultValues().getBackdropPaddingY());
 	}
 
 	/**
@@ -575,7 +598,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param showLabelBackdrop if <code>true</code>, draw a background behind the tick labels.
 	 */
 	public void setShowLabelBackdrop(boolean showLabelBackdrop) {
-		setValue(Property.showLabelBackdrop, showLabelBackdrop);
+		setValue(Property.SHOW_LABEL_BACKDROP, showLabelBackdrop);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -586,7 +609,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return if <code>true</code>, draw a background behind the tick labels.
 	 */
 	public boolean isShowLabelBackdrop() {
-		return getValue(Property.showLabelBackdrop, getDefaultValues().isShowLabelBackdrop());
+		return getValue(Property.SHOW_LABEL_BACKDROP, getDefaultValues().isShowLabelBackdrop());
 	}
 
 	/**
@@ -595,7 +618,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param labels An array of labels to display.
 	 */
 	public void setLabels(String... labels) {
-		setArrayValue(Property.labels, ArrayString.fromOrNull(labels));
+		setArrayValue(Property.LABELS, ArrayString.fromOrNull(labels));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -606,7 +629,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param labels A list of labels to display.
 	 */
 	public void setLabels(List<String> labels) {
-		setArrayValue(Property.labels, ArrayString.fromOrNull(labels));
+		setArrayValue(Property.LABELS, ArrayString.fromOrNull(labels));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -617,7 +640,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return the array of labels to display.
 	 */
 	public List<String> getLabels() {
-		ArrayString array = getArrayValue(Property.labels);
+		ArrayString array = getArrayValue(Property.LABELS);
 		return ArrayListHelper.list(array);
 	}
 
@@ -627,7 +650,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param source property controls the ticks generation.
 	 */
 	public void setSource(TickSource source) {
-		setValue(Property.source, source);
+		setValue(Property.SOURCE, source);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -638,7 +661,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return property controls the ticks generation.
 	 */
 	public TickSource getSource() {
-		return getValue(Property.source, TickSource.class, getDefaultValues().getSource());
+		return getValue(Property.SOURCE, TickSource.class, getDefaultValues().getSource());
 	}
 
 	/**
@@ -647,7 +670,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param precision if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 */
 	public void setPrecision(int precision) {
-		setValue(Property.precision, precision);
+		setValue(Property.PRECISION, precision);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -658,7 +681,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return if defined and stepSize is not specified, the step size will be rounded to this many decimal places.
 	 */
 	public int getPrecision() {
-		return getValue(Property.precision, getDefaultValues().getPrecision());
+		return getValue(Property.PRECISION, getDefaultValues().getPrecision());
 	}
 
 }

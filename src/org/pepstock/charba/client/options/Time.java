@@ -38,16 +38,39 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 */
 	private enum Property implements Key
 	{
-		displayFormats,
-		isoWeekday,
-		max,
-		min,
-		parser,
-		round,
-		tooltipFormat,
-		unit,
-		stepSize,
-		minUnit
+		DISPLAY_FORMATS("displayFormats"),
+		ISO_WEEKDAY("isoWeekday"),
+		MAX("max"),
+		MIN("min"),
+		PARSER("parser"),
+		ROUND("round"),
+		TOOLTIP_FORMAT("tooltipFormat"),
+		UNIT("unit"),
+		STEP_SIZE("stepSize"),
+		MIN_UNIT("minUnit");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -62,7 +85,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	Time(Scale scale, Key childKey, IsDefaultTime defaultValues, NativeObject nativeObject) {
 		super(scale, childKey, defaultValues, nativeObject);
 		// gets sub elements
-		displayFormats = new DisplayFormats(this, Property.displayFormats, getValue(Property.displayFormats));
+		displayFormats = new DisplayFormats(this, Property.DISPLAY_FORMATS, getValue(Property.DISPLAY_FORMATS));
 	}
 
 	/**
@@ -82,7 +105,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 *            Otherwise, it will be Sunday.
 	 */
 	public void setIsoWeekday(boolean isoWeekday) {
-		setValue(Property.isoWeekday, isoWeekday);
+		setValue(Property.ISO_WEEKDAY, isoWeekday);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -95,7 +118,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 *         will be Sunday.
 	 */
 	public boolean isIsoWeekday() {
-		return getValue(Property.isoWeekday, getDefaultValues().isIsoWeekday());
+		return getValue(Property.ISO_WEEKDAY, getDefaultValues().isIsoWeekday());
 	}
 
 	/**
@@ -104,7 +127,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * @param max if defined, this will override the data maximum.
 	 */
 	public void setMax(Date max) {
-		setValue(Property.max, max);
+		setValue(Property.MAX, max);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -115,7 +138,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * @return if defined, this will override the data maximum.
 	 */
 	public Date getMax() {
-		return getValue(Property.max, getDefaultValues().getMax());
+		return getValue(Property.MAX, getDefaultValues().getMax());
 	}
 
 	/**
@@ -124,7 +147,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * @param min if defined, this will override the data minimum.
 	 */
 	public void setMin(Date min) {
-		setValue(Property.min, min);
+		setValue(Property.MIN, min);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -135,7 +158,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * @return if defined, this will override the data minimum.
 	 */
 	public Date getMin() {
-		return getValue(Property.min, getDefaultValues().getMin());
+		return getValue(Property.MIN, getDefaultValues().getMin());
 	}
 
 	/**
@@ -147,7 +170,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 		// if is setting false
 		if (!round) {
 			// removes property, using default
-			remove(Property.round);
+			remove(Property.ROUND);
 		}
 	}
 
@@ -157,7 +180,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * @param round if defined, this will override the data minimum.
 	 */
 	public void setRound(TimeUnit round) {
-		setValue(Property.round, round);
+		setValue(Property.ROUND, round);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -169,13 +192,13 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 */
 	public TimeUnit getRound() {
 		// checks if value is a boolean
-		if (ObjectType.BOOLEAN.equals(type(Property.round))) {
+		if (ObjectType.BOOLEAN.equals(type(Property.ROUND))) {
 			// if is a boolean FALSE value
 			// returns no unit
 			return getDefaultValues().getRound();
 		}
 		// gets the value
-		return getValue(Property.round, TimeUnit.class, getDefaultValues().getRound());
+		return getValue(Property.ROUND, TimeUnit.class, getDefaultValues().getRound());
 	}
 
 	/**
@@ -184,7 +207,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * @param tooltipFormat format string to use for the tooltip.
 	 */
 	public void setTooltipFormat(String tooltipFormat) {
-		setValue(Property.tooltipFormat, tooltipFormat);
+		setValue(Property.TOOLTIP_FORMAT, tooltipFormat);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -195,7 +218,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * @return the format string to use for the tooltip.
 	 */
 	public String getTooltipFormat() {
-		return getValue(Property.tooltipFormat, getDefaultValues().getTooltipFormat());
+		return getValue(Property.TOOLTIP_FORMAT, getDefaultValues().getTooltipFormat());
 	}
 
 	/**
@@ -207,7 +230,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 		// if is setting false
 		if (!unit) {
 			// removes property, using default
-			remove(Property.unit);
+			remove(Property.UNIT);
 		}
 	}
 
@@ -217,7 +240,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * @param unit if defined, will force the unit to be a certain type.
 	 */
 	public void setUnit(TimeUnit unit) {
-		setValue(Property.unit, unit);
+		setValue(Property.UNIT, unit);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -229,13 +252,13 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 */
 	public TimeUnit getUnit() {
 		// checks if value is a boolean
-		if (ObjectType.BOOLEAN.equals(type(Property.unit))) {
+		if (ObjectType.BOOLEAN.equals(type(Property.UNIT))) {
 			// if is a boolean FALSE value
 			// returns no unit
 			return getDefaultValues().getUnit();
 		}
 		// returns the value
-		return getValue(Property.unit, TimeUnit.class, getDefaultValues().getUnit());
+		return getValue(Property.UNIT, TimeUnit.class, getDefaultValues().getUnit());
 	}
 
 	/**
@@ -244,7 +267,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * @param stepSize number of units between grid lines.
 	 */
 	public void setStepSize(double stepSize) {
-		setValue(Property.stepSize, stepSize);
+		setValue(Property.STEP_SIZE, stepSize);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -255,7 +278,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * @return number of units between grid lines.
 	 */
 	public double getStepSize() {
-		return getValue(Property.stepSize, getDefaultValues().getStepSize());
+		return getValue(Property.STEP_SIZE, getDefaultValues().getStepSize());
 	}
 
 	/**
@@ -264,7 +287,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * @param unit minimum display format to be used for a time unit.
 	 */
 	public void setMinUnit(TimeUnit unit) {
-		setValue(Property.minUnit, unit);
+		setValue(Property.MIN_UNIT, unit);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -275,7 +298,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * @return minimum display format to be used for a time unit.
 	 */
 	public TimeUnit getMinUnit() {
-		return getValue(Property.minUnit, TimeUnit.class, getDefaultValues().getMinUnit());
+		return getValue(Property.MIN_UNIT, TimeUnit.class, getDefaultValues().getMinUnit());
 	}
 
 	/**
@@ -284,7 +307,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * @param parser defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
 	 */
 	public void setParser(String parser) {
-		setValue(Property.parser, parser);
+		setValue(Property.PARSER, parser);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -295,7 +318,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 * @return defined as a string, it is interpreted as a custom format to be used by moment to parse the date.
 	 */
 	public String getParser() {
-		return getValue(Property.parser, getDefaultValues().getParser());
+		return getValue(Property.PARSER, getDefaultValues().getParser());
 	}
 
 }

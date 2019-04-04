@@ -42,41 +42,64 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 */
 	private enum Property implements Key
 	{
-		callbacks,
-		enabled,
-		mode,
-		intersect,
-		position,
-		backgroundColor,
-		titleFontFamily,
-		titleFontSize,
-		titleFontStyle,
-		titleFontColor,
-		titleSpacing,
-		titleMarginBottom,
-		titleAlign,
-		bodyFontFamily,
-		bodyFontSize,
-		bodyFontStyle,
-		bodyFontColor,
-		bodySpacing,
-		bodyAlign,
-		footerFontFamily,
-		footerFontSize,
-		footerFontStyle,
-		footerFontColor,
-		footerSpacing,
-		footerMarginTop,
-		footerAlign,
-		xPadding,
-		yPadding,
-		caretPadding,
-		caretSize,
-		cornerRadius,
-		multiKeyBackground,
-		displayColors,
-		borderColor,
-		borderWidth;
+		CALLBACKS("callbacks"),
+		ENABLED("enabled"),
+		MODE("mode"),
+		INTERSECT("intersect"),
+		POSITION("position"),
+		BACKGROUND_COLOR("backgroundColor"),
+		TITLE_FONT_FAMILY("titleFontFamily"),
+		TITLE_FONT_SIZE("titleFontSize"),
+		TITLE_FONT_STYLE("titleFontStyle"),
+		TITLE_FONT_COLOR("titleFontColor"),
+		TITLE_SPACING("titleSpacing"),
+		TITLE_MARGIN_BOTTOM("titleMarginBottom"),
+		TITLE_ALIGN("titleAlign"),
+		BODY_FONT_FAMILY("bodyFontFamily"),
+		BODY_FONT_SIZE("bodyFontSize"),
+		BODY_FONT_STYLE("bodyFontStyle"),
+		BODY_FONT_COLOR("bodyFontColor"),
+		BODY_SPACING("bodySpacing"),
+		BODY_ALIGN("bodyAlign"),
+		FOOTER_FONT_FAMILY("footerFontFamily"),
+		FOOTER_FONT_SIZE("footerFontSize"),
+		FOOTER_FONT_STYLE("footerFontStyle"),
+		FOOTER_FONT_COLOR("footerFontColor"),
+		FOOTER_SPACING("footerSpacing"),
+		FOOTER_MARGIN_TOP("footerMarginTop"),
+		FOOTER_ALIGN("footerAlign"),
+		X_PADDING("xPadding"),
+		Y_PADDING("yPadding"),
+		CARET_PADDING("caretPadding"),
+		CARET_SIZE("caretSize"),
+		CORNER_RADIUS("cornerRadius"),
+		MULTI_KEY_BACKGROUND("multiKeyBackground"),
+		DISPLAY_COLORS("displayColors"),
+		BORDER_COLOR("borderColor"),
+		BORDER_WIDTH("borderWidth");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -91,7 +114,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	Tooltips(Options options, Key childKey, IsDefaultTooltips defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 		// gets sub element
-		this.callbacks = new TooltipsCallbacks(this, Property.callbacks, defaultValues, getValue(Property.callbacks));
+		this.callbacks = new TooltipsCallbacks(this, Property.CALLBACKS, defaultValues, getValue(Property.CALLBACKS));
 	}
 
 	/**
@@ -109,7 +132,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param enabled <code>true</code> if tooltips are enabled.
 	 */
 	public void setEnabled(boolean enabled) {
-		setValue(Property.enabled, enabled);
+		setValue(Property.ENABLED, enabled);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -120,7 +143,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return <code>true</code> if tooltips are enabled.
 	 */
 	public boolean isEnabled() {
-		return getValue(Property.enabled, getDefaultValues().isEnabled());
+		return getValue(Property.ENABLED, getDefaultValues().isEnabled());
 	}
 
 	/**
@@ -129,7 +152,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param mode which elements appear in the tooltip.
 	 */
 	public void setMode(InteractionMode mode) {
-		setValue(Property.mode, mode);
+		setValue(Property.MODE, mode);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -140,7 +163,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return which elements appear in the tooltip.
 	 */
 	public InteractionMode getMode() {
-		return getValue(Property.mode, InteractionMode.class, getDefaultValues().getMode());
+		return getValue(Property.MODE, InteractionMode.class, getDefaultValues().getMode());
 	}
 
 	/**
@@ -151,8 +174,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 *            If <code>false</code>, the mode will be applied at all times.
 	 */
 	public void setIntersect(boolean intersect) {
-		setValue(Property.intersect, intersect);
-		;
+		setValue(Property.INTERSECT, intersect);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -165,7 +187,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 *         <code>false</code>, the mode will be applied at all times.
 	 */
 	public boolean isIntersect() {
-		return getValue(Property.intersect, getDefaultValues().isIntersect());
+		return getValue(Property.INTERSECT, getDefaultValues().isIntersect());
 	}
 
 	/**
@@ -176,11 +198,11 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	public void setPosition(IsTooltipPosition position) {
 		// checks if the tooltip position is consistent
 		// & that means that is defined both otu of the box or custom one by positioner
-		if (position != null && !TooltipPosition.hasTooltipPosition(position.name()) && !Positioner.get().hasTooltipPosition(position.name())) {
+		if (position != null && !TooltipPosition.hasTooltipPosition(position.value()) && !Positioner.get().hasTooltipPosition(position.value())) {
 			throw new IllegalArgumentException("Name of tooltip position is not consistent not defined: " + position);
 		}
 		// stores values
-		setValue(Property.position, position);
+		setValue(Property.POSITION, position);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -192,7 +214,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 */
 	public IsTooltipPosition getPosition() {
 		// gets string value
-		String value = getValue(Property.position, getDefaultValues().getPosition().name());
+		String value = getValue(Property.POSITION, getDefaultValues().getPosition().value());
 		// checks if is the out of the box one
 		if (TooltipPosition.hasTooltipPosition(value)) {
 			// returns the pout of the box
@@ -223,7 +245,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param backgroundColor background color of the tooltip.
 	 */
 	public void setBackgroundColor(String backgroundColor) {
-		setValue(Property.backgroundColor, backgroundColor);
+		setValue(Property.BACKGROUND_COLOR, backgroundColor);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -234,7 +256,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return background color of the tooltip.
 	 */
 	public String getBackgroundColorAsString() {
-		return getValue(Property.backgroundColor, getDefaultValues().getBackgroundColorAsString());
+		return getValue(Property.BACKGROUND_COLOR, getDefaultValues().getBackgroundColorAsString());
 	}
 
 	/**
@@ -252,7 +274,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param titleFontFamily title font.
 	 */
 	public void setTitleFontFamily(String titleFontFamily) {
-		setValue(Property.titleFontFamily, titleFontFamily);
+		setValue(Property.TITLE_FONT_FAMILY, titleFontFamily);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -263,7 +285,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return the title font.
 	 */
 	public String getTitleFontFamily() {
-		return getValue(Property.titleFontFamily, getDefaultValues().getTitleFontFamily());
+		return getValue(Property.TITLE_FONT_FAMILY, getDefaultValues().getTitleFontFamily());
 	}
 
 	/**
@@ -272,7 +294,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param titleFontSize title font size.
 	 */
 	public void setTitleFontSize(int titleFontSize) {
-		setValue(Property.titleFontSize, titleFontSize);
+		setValue(Property.TITLE_FONT_SIZE, titleFontSize);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -283,7 +305,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return title font size.
 	 */
 	public int getTitleFontSize() {
-		return getValue(Property.titleFontSize, getDefaultValues().getTitleFontSize());
+		return getValue(Property.TITLE_FONT_SIZE, getDefaultValues().getTitleFontSize());
 	}
 
 	/**
@@ -292,7 +314,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param titleFontStyle title font style.
 	 */
 	public void setTitleFontStyle(FontStyle titleFontStyle) {
-		setValue(Property.titleFontStyle, titleFontStyle);
+		setValue(Property.TITLE_FONT_STYLE, titleFontStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -303,7 +325,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return title font style.
 	 */
 	public FontStyle getTitleFontStyle() {
-		return getValue(Property.titleFontStyle, FontStyle.class, getDefaultValues().getTitleFontStyle());
+		return getValue(Property.TITLE_FONT_STYLE, FontStyle.class, getDefaultValues().getTitleFontStyle());
 	}
 
 	/**
@@ -312,7 +334,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param align title alignment.
 	 */
 	public void setTitleAlign(TextAlign align) {
-		setValue(Property.titleAlign, align);
+		setValue(Property.TITLE_ALIGN, align);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -323,7 +345,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return title alignment.
 	 */
 	public TextAlign getTitleAlign() {
-		return getValue(Property.titleAlign, TextAlign.class, getDefaultValues().getTitleAlign());
+		return getValue(Property.TITLE_ALIGN, TextAlign.class, getDefaultValues().getTitleAlign());
 	}
 
 	/**
@@ -341,7 +363,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param titleFontColor title font color.
 	 */
 	public void setTitleFontColor(String titleFontColor) {
-		setValue(Property.titleFontColor, titleFontColor);
+		setValue(Property.TITLE_FONT_COLOR, titleFontColor);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -352,7 +374,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return title font color.
 	 */
 	public String getTitleFontColorAsString() {
-		return getValue(Property.titleFontColor, getDefaultValues().getTitleFontColorAsString());
+		return getValue(Property.TITLE_FONT_COLOR, getDefaultValues().getTitleFontColorAsString());
 	}
 
 	/**
@@ -370,7 +392,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param titleSpacing spacing to add to top and bottom of each title line.
 	 */
 	public void setTitleSpacing(int titleSpacing) {
-		setValue(Property.titleSpacing, titleSpacing);
+		setValue(Property.TITLE_SPACING, titleSpacing);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -381,7 +403,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return spacing to add to top and bottom of each title line.
 	 */
 	public int getTitleSpacing() {
-		return getValue(Property.titleSpacing, getDefaultValues().getTitleSpacing());
+		return getValue(Property.TITLE_SPACING, getDefaultValues().getTitleSpacing());
 	}
 
 	/**
@@ -390,7 +412,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param titleMarginBottom margin to add on bottom of title section.
 	 */
 	public void setTitleMarginBottom(int titleMarginBottom) {
-		setValue(Property.titleMarginBottom, titleMarginBottom);
+		setValue(Property.TITLE_MARGIN_BOTTOM, titleMarginBottom);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -401,7 +423,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return margin to add on bottom of title section.
 	 */
 	public int getTitleMarginBottom() {
-		return getValue(Property.titleMarginBottom, getDefaultValues().getTitleMarginBottom());
+		return getValue(Property.TITLE_MARGIN_BOTTOM, getDefaultValues().getTitleMarginBottom());
 	}
 
 	/**
@@ -410,7 +432,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param bodyFontFamily body line font.
 	 */
 	public void setBodyFontFamily(String bodyFontFamily) {
-		setValue(Property.bodyFontFamily, bodyFontFamily);
+		setValue(Property.BODY_FONT_FAMILY, bodyFontFamily);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -421,7 +443,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return body line font.
 	 */
 	public String getBodyFontFamily() {
-		return getValue(Property.bodyFontFamily, getDefaultValues().getBodyFontFamily());
+		return getValue(Property.BODY_FONT_FAMILY, getDefaultValues().getBodyFontFamily());
 	}
 
 	/**
@@ -430,7 +452,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param bodyFontSize body font size.
 	 */
 	public void setBodyFontSize(int bodyFontSize) {
-		setValue(Property.bodyFontSize, bodyFontSize);
+		setValue(Property.BODY_FONT_SIZE, bodyFontSize);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -441,7 +463,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return body font size.
 	 */
 	public int getBodyFontSize() {
-		return getValue(Property.bodyFontSize, getDefaultValues().getBodyFontSize());
+		return getValue(Property.BODY_FONT_SIZE, getDefaultValues().getBodyFontSize());
 	}
 
 	/**
@@ -450,7 +472,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param bodyFontStyle body font style.
 	 */
 	public void setBodyFontStyle(FontStyle bodyFontStyle) {
-		setValue(Property.bodyFontStyle, bodyFontStyle);
+		setValue(Property.BODY_FONT_STYLE, bodyFontStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -461,7 +483,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return body font style.
 	 */
 	public FontStyle getBodyFontStyle() {
-		return getValue(Property.bodyFontStyle, FontStyle.class, getDefaultValues().getBodyFontStyle());
+		return getValue(Property.BODY_FONT_STYLE, FontStyle.class, getDefaultValues().getBodyFontStyle());
 	}
 
 	/**
@@ -470,7 +492,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param align body alignment.
 	 */
 	public void setBodyAlign(TextAlign align) {
-		setValue(Property.bodyAlign, align);
+		setValue(Property.BODY_ALIGN, align);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -481,7 +503,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return body alignment.
 	 */
 	public TextAlign getBodyAlign() {
-		return getValue(Property.bodyAlign, TextAlign.class, getDefaultValues().getBodyAlign());
+		return getValue(Property.BODY_ALIGN, TextAlign.class, getDefaultValues().getBodyAlign());
 	}
 
 	/**
@@ -499,7 +521,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param bodyFontColor body font color.
 	 */
 	public void setBodyFontColor(String bodyFontColor) {
-		setValue(Property.bodyFontColor, bodyFontColor);
+		setValue(Property.BODY_FONT_COLOR, bodyFontColor);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -510,7 +532,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return body font color.
 	 */
 	public String getBodyFontColorAsString() {
-		return getValue(Property.bodyFontColor, getDefaultValues().getBodyFontColorAsString());
+		return getValue(Property.BODY_FONT_COLOR, getDefaultValues().getBodyFontColorAsString());
 	}
 
 	/**
@@ -528,7 +550,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param bodySpacing spacing to add to top and bottom of each tooltip item.
 	 */
 	public void setBodySpacing(int bodySpacing) {
-		setValue(Property.bodySpacing, bodySpacing);
+		setValue(Property.BODY_SPACING, bodySpacing);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -539,7 +561,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return spacing to add to top and bottom of each tooltip item.
 	 */
 	public int getBodySpacing() {
-		return getValue(Property.bodySpacing, getDefaultValues().getBodySpacing());
+		return getValue(Property.BODY_SPACING, getDefaultValues().getBodySpacing());
 	}
 
 	/**
@@ -548,7 +570,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param footerFontFamily footer font.
 	 */
 	public void setFooterFontFamily(String footerFontFamily) {
-		setValue(Property.footerFontFamily, footerFontFamily);
+		setValue(Property.FOOTER_FONT_FAMILY, footerFontFamily);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -559,7 +581,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return footer font.
 	 */
 	public String getFooterFontFamily() {
-		return getValue(Property.footerFontFamily, getDefaultValues().getFooterFontFamily());
+		return getValue(Property.FOOTER_FONT_FAMILY, getDefaultValues().getFooterFontFamily());
 	}
 
 	/**
@@ -568,7 +590,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param footerFontSize footer font size.
 	 */
 	public void setFooterFontSize(int footerFontSize) {
-		setValue(Property.footerFontSize, footerFontSize);
+		setValue(Property.FOOTER_FONT_SIZE, footerFontSize);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -579,7 +601,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return footer font size.
 	 */
 	public int getFooterFontSize() {
-		return getValue(Property.footerFontSize, getDefaultValues().getFooterFontSize());
+		return getValue(Property.FOOTER_FONT_SIZE, getDefaultValues().getFooterFontSize());
 	}
 
 	/**
@@ -588,7 +610,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param footerFontStyle the footer font style.
 	 */
 	public void setFooterFontStyle(FontStyle footerFontStyle) {
-		setValue(Property.footerFontStyle, footerFontStyle);
+		setValue(Property.FOOTER_FONT_STYLE, footerFontStyle);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -599,7 +621,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return footer font style.
 	 */
 	public FontStyle getFooterFontStyle() {
-		return getValue(Property.footerFontStyle, FontStyle.class, getDefaultValues().getFooterFontStyle());
+		return getValue(Property.FOOTER_FONT_STYLE, FontStyle.class, getDefaultValues().getFooterFontStyle());
 	}
 
 	/**
@@ -608,7 +630,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param align footer alignment.
 	 */
 	public void setFooterAlign(TextAlign align) {
-		setValue(Property.footerAlign, align);
+		setValue(Property.FOOTER_ALIGN, align);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -619,7 +641,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return footer alignment.
 	 */
 	public TextAlign getFooterAlign() {
-		return getValue(Property.footerAlign, TextAlign.class, getDefaultValues().getFooterAlign());
+		return getValue(Property.FOOTER_ALIGN, TextAlign.class, getDefaultValues().getFooterAlign());
 	}
 
 	/**
@@ -637,7 +659,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param footerFontColor footer font color.
 	 */
 	public void setFooterFontColor(String footerFontColor) {
-		setValue(Property.footerFontColor, footerFontColor);
+		setValue(Property.FOOTER_FONT_COLOR, footerFontColor);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -648,7 +670,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return footer font color.
 	 */
 	public String getFooterFontColorAsString() {
-		return getValue(Property.footerFontColor, getDefaultValues().getFooterFontColorAsString());
+		return getValue(Property.FOOTER_FONT_COLOR, getDefaultValues().getFooterFontColorAsString());
 	}
 
 	/**
@@ -666,7 +688,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param footerSpacing spacing to add to top and bottom of each footer line.
 	 */
 	public void setFooterSpacing(int footerSpacing) {
-		setValue(Property.footerSpacing, footerSpacing);
+		setValue(Property.FOOTER_SPACING, footerSpacing);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -677,7 +699,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return spacing to add to top and bottom of each footer line.
 	 */
 	public int getFooterSpacing() {
-		return getValue(Property.footerSpacing, getDefaultValues().getFooterSpacing());
+		return getValue(Property.FOOTER_SPACING, getDefaultValues().getFooterSpacing());
 	}
 
 	/**
@@ -686,7 +708,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param footerMarginTop margin to add before drawing the footer.
 	 */
 	public void setFooterMarginTop(int footerMarginTop) {
-		setValue(Property.footerMarginTop, footerMarginTop);
+		setValue(Property.FOOTER_MARGIN_TOP, footerMarginTop);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -697,7 +719,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return margin to add before drawing the footer.
 	 */
 	public int getFooterMarginTop() {
-		return getValue(Property.footerMarginTop, getDefaultValues().getFooterMarginTop());
+		return getValue(Property.FOOTER_MARGIN_TOP, getDefaultValues().getFooterMarginTop());
 	}
 
 	/**
@@ -706,7 +728,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param xPadding padding to add on left and right of tooltip.
 	 */
 	public void setXPadding(int xPadding) {
-		setValue(Property.xPadding, xPadding);
+		setValue(Property.X_PADDING, xPadding);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -717,7 +739,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return padding to add on left and right of tooltip.
 	 */
 	public int getXPadding() {
-		return getValue(Property.xPadding, getDefaultValues().getXPadding());
+		return getValue(Property.X_PADDING, getDefaultValues().getXPadding());
 	}
 
 	/**
@@ -726,7 +748,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param yPadding padding to add on top and bottom of tooltip.
 	 */
 	public void setYPadding(int yPadding) {
-		setValue(Property.yPadding, yPadding);
+		setValue(Property.Y_PADDING, yPadding);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -737,7 +759,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return padding to add on top and bottom of tooltip.
 	 */
 	public int getYPadding() {
-		return getValue(Property.yPadding, getDefaultValues().getYPadding());
+		return getValue(Property.Y_PADDING, getDefaultValues().getYPadding());
 	}
 
 	/**
@@ -746,7 +768,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param caretPadding extra distance to move the end of the tooltip arrow away from the tooltip point.
 	 */
 	public void setCaretPadding(int caretPadding) {
-		setValue(Property.caretPadding, caretPadding);
+		setValue(Property.CARET_PADDING, caretPadding);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -757,7 +779,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return extra distance to move the end of the tooltip arrow away from the tooltip point.
 	 */
 	public int getCaretPadding() {
-		return getValue(Property.caretPadding, getDefaultValues().getCaretPadding());
+		return getValue(Property.CARET_PADDING, getDefaultValues().getCaretPadding());
 	}
 
 	/**
@@ -766,7 +788,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param caretSize size, in pixels, of the tooltip arrow.
 	 */
 	public void setCaretSize(int caretSize) {
-		setValue(Property.caretSize, caretSize);
+		setValue(Property.CARET_SIZE, caretSize);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -777,7 +799,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return size, in pixels, of the tooltip arrow.
 	 */
 	public int getCaretSize() {
-		return getValue(Property.caretSize, getDefaultValues().getCaretSize());
+		return getValue(Property.CARET_SIZE, getDefaultValues().getCaretSize());
 	}
 
 	/**
@@ -786,7 +808,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param cornerRadius radius of tooltip corner curves.
 	 */
 	public void setCornerRadius(int cornerRadius) {
-		setValue(Property.cornerRadius, cornerRadius);
+		setValue(Property.CORNER_RADIUS, cornerRadius);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -797,7 +819,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return radius of tooltip corner curves.
 	 */
 	public int getCornerRadius() {
-		return getValue(Property.cornerRadius, getDefaultValues().getCornerRadius());
+		return getValue(Property.CORNER_RADIUS, getDefaultValues().getCornerRadius());
 	}
 
 	/**
@@ -815,7 +837,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param multiKeyBackground color to draw behind the colored boxes when multiple items are in the tooltip.
 	 */
 	public void setMultiKeyBackground(String multiKeyBackground) {
-		setValue(Property.multiKeyBackground, multiKeyBackground);
+		setValue(Property.MULTI_KEY_BACKGROUND, multiKeyBackground);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -826,7 +848,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return color to draw behind the colored boxes when multiple items are in the tooltip.
 	 */
 	public String getMultiKeyBackgroundAsString() {
-		return getValue(Property.multiKeyBackground, getDefaultValues().getMultiKeyBackgroundAsString());
+		return getValue(Property.MULTI_KEY_BACKGROUND, getDefaultValues().getMultiKeyBackgroundAsString());
 	}
 
 	/**
@@ -844,7 +866,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param displayColors if <code>true</code>, color boxes are shown in the tooltip.
 	 */
 	public void setDisplayColors(boolean displayColors) {
-		setValue(Property.displayColors, displayColors);
+		setValue(Property.DISPLAY_COLORS, displayColors);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -855,7 +877,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return if <code>true</code>, color boxes are shown in the tooltip.
 	 */
 	public boolean isDisplayColors() {
-		return getValue(Property.displayColors, getDefaultValues().isDisplayColors());
+		return getValue(Property.DISPLAY_COLORS, getDefaultValues().isDisplayColors());
 	}
 
 	/**
@@ -873,7 +895,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param borderColor color of the border.
 	 */
 	public void setBorderColor(String borderColor) {
-		setValue(Property.borderColor, borderColor);
+		setValue(Property.BORDER_COLOR, borderColor);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -884,7 +906,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return color of the border.
 	 */
 	public String getBorderColorAsString() {
-		return getValue(Property.borderColor, getDefaultValues().getBorderColorAsString());
+		return getValue(Property.BORDER_COLOR, getDefaultValues().getBorderColorAsString());
 	}
 
 	/**
@@ -902,7 +924,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @param borderWidth size of the border.
 	 */
 	public void setBorderWidth(int borderWidth) {
-		setValue(Property.borderWidth, borderWidth);
+		setValue(Property.BORDER_WIDTH, borderWidth);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -913,6 +935,6 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 * @return size of the border.
 	 */
 	public int getBorderWidth() {
-		return getValue(Property.borderWidth, getDefaultValues().getBorderWidth());
+		return getValue(Property.BORDER_WIDTH, getDefaultValues().getBorderWidth());
 	}
 }

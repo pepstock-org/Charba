@@ -35,8 +35,31 @@ public class ScaledOptions extends Options implements IsDefaultScaledOptions {
 	 */
 	private enum Property implements Key
 	{
-		scales,
-		scale
+		SCALES("scales"),
+		SCALE("scale");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -58,8 +81,8 @@ public class ScaledOptions extends Options implements IsDefaultScaledOptions {
 	protected ScaledOptions(IsDefaultScaledOptions defaultValues, NativeObject nativeObject) {
 		super(defaultValues, nativeObject);
 		// gets scales sub elements
-		scale = new Scale(this, Property.scale, defaultValues.getScale(), getValue(Property.scale));
-		scales = new Scales(this, Property.scales, defaultValues.getScales(), getValue(Property.scales));
+		scale = new Scale(this, Property.SCALE, defaultValues.getScale(), getValue(Property.SCALE));
+		scales = new Scales(this, Property.SCALES, defaultValues.getScales(), getValue(Property.SCALES));
 	}
 
 	/**

@@ -36,10 +36,33 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 	 */
 	private enum Property implements Key
 	{
-		padding,
-		display,
-		labelString,
-		lineHeight
+		PADDING("padding"),
+		DISPLAY("display"),
+		LABEL_STRING("labelString"),
+		LINE_HEIGHT("lineHeight");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -54,7 +77,7 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 	ScaleLabel(Scale scale, Key childKey, IsDefaultScaleLabel defaultValues, NativeObject delegated) {
 		super(scale, childKey, defaultValues, delegated);
 		// gets sub element
-		padding = new ScaleLabelPadding(this, Property.padding, getDefaultValues().getPadding(), getValue(Property.padding));
+		padding = new ScaleLabelPadding(this, Property.PADDING, getDefaultValues().getPadding(), getValue(Property.PADDING));
 	}
 
 	/**
@@ -72,7 +95,7 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 	 * @param display if <code>true</code>, display the axis title.
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.display, display);
+		setValue(Property.DISPLAY, display);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -83,7 +106,7 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 	 * @return if <code>true</code>, display the axis title.
 	 */
 	public boolean isDisplay() {
-		return getValue(Property.display, getDefaultValues().isDisplay());
+		return getValue(Property.DISPLAY, getDefaultValues().isDisplay());
 	}
 
 	/**
@@ -92,7 +115,7 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 	 * @param labelString the text for the scale string.
 	 */
 	public void setLabelString(String labelString) {
-		setValue(Property.labelString, labelString);
+		setValue(Property.LABEL_STRING, labelString);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -103,7 +126,7 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 	 * @return the text for the scale string.
 	 */
 	public String getLabelString() {
-		return getValue(Property.labelString, getDefaultValues().getLabelString());
+		return getValue(Property.LABEL_STRING, getDefaultValues().getLabelString());
 	}
 
 	/**
@@ -112,7 +135,7 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 	 * @param lineHeight height of an individual line of text.
 	 */
 	public void setLineHeight(double lineHeight) {
-		setValue(Property.lineHeight, lineHeight);
+		setValue(Property.LINE_HEIGHT, lineHeight);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -123,7 +146,7 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 	 * @param lineHeight height of an individual line of text.
 	 */
 	public void setLineHeight(String lineHeight) {
-		setValue(Property.lineHeight, lineHeight);
+		setValue(Property.LINE_HEIGHT, lineHeight);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -137,9 +160,9 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 		// creates default
 		double defaultValue = getDefaultValues().getLineHeight();
 		// checks type if number
-		if (ObjectType.NUMBER.equals(type(Property.lineHeight))) {
+		if (ObjectType.NUMBER.equals(type(Property.LINE_HEIGHT))) {
 			// reads and returns as double
-			return getValue(Property.lineHeight, defaultValue);
+			return getValue(Property.LINE_HEIGHT, defaultValue);
 		}
 		// if here, is not a number
 		// then returns the default
@@ -155,9 +178,9 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 		// creates default
 		String defaultValue = String.valueOf(getDefaultValues().getLineHeight());
 		// checks type if string
-		if (ObjectType.STRING.equals(type(Property.lineHeight))) {
+		if (ObjectType.STRING.equals(type(Property.LINE_HEIGHT))) {
 			// reads and returns as string
-			return getValue(Property.lineHeight, defaultValue);
+			return getValue(Property.LINE_HEIGHT, defaultValue);
 		}
 		// if here, is not a number
 		// then returns the default

@@ -32,7 +32,30 @@ public final class TickMajor extends AbstractTick<Ticks, IsDefaultMajorTick> imp
 	 */
 	private enum Property implements Key
 	{
-		enabled
+		ENABLED("enabled");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -54,7 +77,7 @@ public final class TickMajor extends AbstractTick<Ticks, IsDefaultMajorTick> imp
 	 * @param enabled if <code>true</code>, major tick options are used to show major ticks
 	 */
 	public void setEnabled(boolean enabled) {
-		setValue(Property.enabled, enabled);
+		setValue(Property.ENABLED, enabled);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -65,7 +88,7 @@ public final class TickMajor extends AbstractTick<Ticks, IsDefaultMajorTick> imp
 	 * @return if <code>true</code>, major tick options are used to show major ticks
 	 */
 	public boolean isEnabled() {
-		return getValue(Property.enabled, getDefaultValues().isEnabled());
+		return getValue(Property.ENABLED, getDefaultValues().isEnabled());
 	}
 
 }

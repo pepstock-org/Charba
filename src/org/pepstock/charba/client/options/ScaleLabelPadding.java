@@ -59,7 +59,7 @@ public final class ScaleLabelPadding extends AbstractModel<ScaleLabel, IsDefault
 	 * @param padding the padding left in pixel.
 	 */
 	public void setLeft(int padding) {
-		setValue(Position.left, padding);
+		setValue(Position.LEFT, padding);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -70,7 +70,7 @@ public final class ScaleLabelPadding extends AbstractModel<ScaleLabel, IsDefault
 	 * @return the padding left in pixel.
 	 */
 	public int getLeft() {
-		return getValue(Position.left, getDefaultValues().getLeft());
+		return getValue(Position.LEFT, getDefaultValues().getLeft());
 	}
 
 	/**
@@ -79,7 +79,7 @@ public final class ScaleLabelPadding extends AbstractModel<ScaleLabel, IsDefault
 	 * @param padding the padding right in pixel.
 	 */
 	public void setRight(int padding) {
-		setValue(Position.right, padding);
+		setValue(Position.RIGHT, padding);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -90,7 +90,7 @@ public final class ScaleLabelPadding extends AbstractModel<ScaleLabel, IsDefault
 	 * @return the padding right in pixel.
 	 */
 	public int getRight() {
-		return getValue(Position.right, getDefaultValues().getRight());
+		return getValue(Position.RIGHT, getDefaultValues().getRight());
 	}
 
 	/**
@@ -99,7 +99,7 @@ public final class ScaleLabelPadding extends AbstractModel<ScaleLabel, IsDefault
 	 * @param padding the padding top in pixel.
 	 */
 	public void setTop(int padding) {
-		setValue(Position.top, padding);
+		setValue(Position.TOP, padding);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -110,7 +110,7 @@ public final class ScaleLabelPadding extends AbstractModel<ScaleLabel, IsDefault
 	 * @return the padding top in pixel.
 	 */
 	public int getTop() {
-		return getValue(Position.top, getDefaultValues().getTop());
+		return getValue(Position.TOP, getDefaultValues().getTop());
 	}
 
 	/**
@@ -119,7 +119,7 @@ public final class ScaleLabelPadding extends AbstractModel<ScaleLabel, IsDefault
 	 * @param padding the padding bottom in pixel.
 	 */
 	public void setBottom(int padding) {
-		setValue(Position.bottom, padding);
+		setValue(Position.BOTTOM, padding);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -130,6 +130,6 @@ public final class ScaleLabelPadding extends AbstractModel<ScaleLabel, IsDefault
 	 * @return the padding bottom in pixel.
 	 */
 	public int getBottom() {
-		return getValue(Position.bottom, getDefaultValues().getBottom());
+		return getValue(Position.BOTTOM, getDefaultValues().getBottom());
 	}
 }

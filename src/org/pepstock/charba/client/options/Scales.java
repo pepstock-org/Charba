@@ -50,18 +50,41 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	 */
 	public static final String DEFAULT_SINGLE_AXIS_ID = "scale";
 	// factory to create X scale by native object
-	private final ScaleListFactory xAxisFactory = new ScaleListFactory(Property.xAxes);
+	private final ScaleListFactory xAxisFactory = new ScaleListFactory(Property.X_AXES);
 	// factory to create Y scale by native object
-	private final ScaleListFactory yAxisfactory = new ScaleListFactory(Property.yAxes);
+	private final ScaleListFactory yAxisfactory = new ScaleListFactory(Property.Y_AXES);
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		display,
-		xAxes,
-		yAxes
+		DISPLAY("display"),
+		X_AXES("xAxes"),
+		Y_AXES("yAxes");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -91,7 +114,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	 * @param display if <code>true</code>, shows the axes.
 	 */
 	public void setDisplay(boolean display) {
-		setValue(Property.display, display);
+		setValue(Property.DISPLAY, display);
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -105,13 +128,13 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	 */
 	public void setDisplay(Display display) {
 		// checks if is setting auto
-		if (Display.auto.equals(display)) {
-			setValue(Property.display, display);
+		if (Display.AUTO.equals(display)) {
+			setValue(Property.DISPLAY, display);
 			// checks if all parents are attached
 			checkAndAddToParent();
 		} else {
 			// otherwise transforms into a boolean
-			setDisplay(Display.yes.equals(display) ? true : false);
+			setDisplay(Display.TRUE.equals(display) ? true : false);
 		}
 	}
 
@@ -124,14 +147,14 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	 */
 	public Display getDisplay() {
 		// checks if is boolean
-		if (ObjectType.BOOLEAN.equals(type(Property.display))) {
+		if (ObjectType.BOOLEAN.equals(type(Property.DISPLAY))) {
 			// gets value
-			boolean value = getValue(Property.display, true);
+			boolean value = getValue(Property.DISPLAY, true);
 			// returns value
-			return value ? Display.yes : Display.no;
+			return value ? Display.TRUE : Display.FALSE;
 		}
 		// returns value. Must be auto
-		return getValue(Property.display, Display.class, getDefaultValues().getDisplay());
+		return getValue(Property.DISPLAY, Display.class, getDefaultValues().getDisplay());
 	}
 
 	/**
@@ -140,7 +163,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	 * @param scales array of axes.
 	 */
 	public void setXAxes(Scale... scales) {
-		setArrayValue(Property.xAxes, ArrayObject.fromOrNull(scales));
+		setArrayValue(Property.X_AXES, ArrayObject.fromOrNull(scales));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -151,7 +174,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	 * @return a list of X axes.
 	 */
 	public List<Scale> getXAxes() {
-		ArrayObject array = getArrayValue(Property.xAxes);
+		ArrayObject array = getArrayValue(Property.X_AXES);
 		return ArrayListHelper.list(array, xAxisFactory);
 	}
 
@@ -161,7 +184,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	 * @param scales array of axes.
 	 */
 	public void setYAxes(Scale... scales) {
-		setArrayValue(Property.yAxes, ArrayObject.fromOrNull(scales));
+		setArrayValue(Property.Y_AXES, ArrayObject.fromOrNull(scales));
 		// checks if all parents are attached
 		checkAndAddToParent();
 	}
@@ -172,7 +195,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	 * @return a list of Y axes.
 	 */
 	public List<Scale> getYAxes() {
-		ArrayObject array = getArrayValue(Property.yAxes);
+		ArrayObject array = getArrayValue(Property.Y_AXES);
 		return ArrayListHelper.list(array, yAxisfactory);
 	}
 
@@ -223,7 +246,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 		@Override
 		public Scale create(NativeObject nativeObject) {
 			// gets default value based on key of the object
-			IsDefaultScale defaultValue = Property.xAxes.equals(property) ? getXAxis() : getYAxis();
+			IsDefaultScale defaultValue = Property.X_AXES.equals(property) ? getXAxis() : getYAxis();
 			// creates the scale
 			return new Scale(defaultValue, nativeObject);
 		}
