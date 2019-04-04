@@ -259,7 +259,7 @@ public final class ChartNode {
 		// transforms the value into string because a boolean can not be null
 		String stringValue = String.valueOf(value);
 		// by java script, if value is null, to string you have "undefined"
-		return ObjectType.Undefined.name().equalsIgnoreCase(stringValue) ? defaultValue : value;
+		return ObjectType.UNDEFINED.name().equalsIgnoreCase(stringValue) ? defaultValue : value;
 	}
 
 	/**

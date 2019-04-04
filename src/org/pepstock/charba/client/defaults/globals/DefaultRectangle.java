@@ -68,7 +68,7 @@ public final class DefaultRectangle extends AbstractDefaultOptionsElement implem
 	 */
 	@Override
 	public BorderSkipped getBorderSkipped() {
-		return BorderSkipped.bottom;
+		return BorderSkipped.BOTTOM;
 	}
 
 }

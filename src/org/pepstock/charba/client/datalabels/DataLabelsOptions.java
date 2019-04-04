@@ -117,7 +117,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	/**
 	 * Default visibility of labels, {@link Display#yes}.
 	 */
-	public static final Display DEFAULT_DISPLAY = Display.yes;
+	public static final Display DEFAULT_DISPLAY = Display.TRUE;
 
 	/**
 	 * Default distance (in pixels) to pull the label away from the anchor point, <b>{@value DEFAULT_OFFSET}</b>.
@@ -524,12 +524,12 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 				Display result = value == null ? getDisplay() : value;
 				// checks if is boolean
 				// checks if it must return a boolean or string
-				if (Display.auto.equals(result)) {
+				if (Display.AUTO.equals(result)) {
 					// returns string
-					return Display.auto.name();
+					return Display.AUTO.value();
 				} else {
 					// returns boolean
-					return Display.yes.equals(result) ? true : false;
+					return Display.TRUE.equals(result) ? true : false;
 				}
 			}
 		});
@@ -978,10 +978,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param display the visibility of labels.
 	 */
 	public void setDisplay(Display display) {
-		if (Display.auto.equals(display)) {
+		if (Display.AUTO.equals(display)) {
 			setValue(Property.DISPLAY, display);
 		} else {
-			setValue(Property.DISPLAY, Display.yes.equals(display) ? true : false);
+			setValue(Property.DISPLAY, Display.TRUE.equals(display) ? true : false);
 		}
 	}
 
@@ -992,10 +992,10 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 */
 	public Display getDisplay() {
 		ObjectType type = type(Property.DISPLAY);
-		if (ObjectType.Boolean.equals(type)) {
+		if (ObjectType.BOOLEAN.equals(type)) {
 			boolean value = getValue(Property.DISPLAY, true);
-			return value ? Display.yes : Display.no;
-		} else if (ObjectType.String.equals(type)) {
+			return value ? Display.TRUE : Display.FALSE;
+		} else if (ObjectType.STRING.equals(type)) {
 			return getValue(Property.DISPLAY, Display.class, defaultsOptions.getDisplay());
 		}
 		return defaultsOptions.getDisplay();

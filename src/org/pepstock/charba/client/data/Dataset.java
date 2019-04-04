@@ -66,17 +66,40 @@ public abstract class Dataset extends NativeObjectContainer {
 	 */
 	enum Property implements Key
 	{
-		label,
-		data,
-		type,
-		hidden,
+		LABEL("label"),
+		DATA("data"),
+		TYPE("type"),
+		HIDDEN("hidden"),
 		// internal key to store a unique id
-		_charbaId,
+		CHARBA_ID("_charbaId"),
 		// internal key to store patterns and gradients
-		_charbaPatterns,
-		_charbaGradients,
+		CHARBA_PATTERNS("_charbaPatterns"),
+		CHARBA_GRADIENTS("_charbaGradients"),
 		// internal key to store data type
-		_charbaDataType
+		CHARBA_DATA_TYPE("_charbaDataType");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -87,12 +110,12 @@ public abstract class Dataset extends NativeObjectContainer {
 	protected Dataset(IsDefaultOptions defaultValues) {
 		this.defaultValues = defaultValues == null ? Defaults.get().getGlobal() : defaultValues;
 		// stores the id based on a counter
-		setValue(Property._charbaId, COUNTER.getAndIncrement());
+		setValue(Property.CHARBA_ID, COUNTER.getAndIncrement());
 		// sets the Charba containers into dataset java script configuration
-		setValue(Property._charbaPatterns, patternsContainer);
-		setValue(Property._charbaGradients, gradientsContainer);
+		setValue(Property.CHARBA_PATTERNS, patternsContainer);
+		setValue(Property.CHARBA_GRADIENTS, gradientsContainer);
 		// sets default data type
-		setValue(Property._charbaDataType, DataType.unknown);
+		setValue(Property.CHARBA_DATA_TYPE, DataType.UNKNOWN);
 	}
 
 	/**
@@ -101,7 +124,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @return the unique id of datasets
 	 */
 	public final int getId() {
-		return getValue(Property._charbaId, UndefinedValues.INTEGER);
+		return getValue(Property.CHARBA_ID, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -110,7 +133,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @return the data type of datasets
 	 */
 	public final DataType getDataType() {
-		return getValue(Property._charbaDataType, DataType.class, DataType.unknown);
+		return getValue(Property.CHARBA_DATA_TYPE, DataType.class, DataType.UNKNOWN);
 	}
 
 	/**
@@ -311,11 +334,11 @@ public abstract class Dataset extends NativeObjectContainer {
 		// checks if is hidden
 		if (hidden) {
 			// then sets it
-			setValue(Property.hidden, hidden);
+			setValue(Property.HIDDEN, hidden);
 		} else {
 			// if is not hidden
 			// remove the property
-			remove(Property.hidden);
+			remove(Property.HIDDEN);
 		}
 	}
 
@@ -325,7 +348,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @return if the dataset will appear or not. Default is <code>false</code>
 	 */
 	public boolean isHidden() {
-		return getValue(Property.hidden, DEFAULT_HIDDEN);
+		return getValue(Property.HIDDEN, DEFAULT_HIDDEN);
 	}
 
 	/**
@@ -334,7 +357,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @param label the label for the dataset which appears in the legend and tooltips.
 	 */
 	public void setLabel(String label) {
-		setValue(Property.label, label);
+		setValue(Property.LABEL, label);
 	}
 
 	/**
@@ -343,7 +366,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @return the label for the dataset which appears in the legend and tooltips.
 	 */
 	public String getLabel() {
-		return getValue(Property.label, UndefinedValues.STRING);
+		return getValue(Property.LABEL, UndefinedValues.STRING);
 	}
 
 	/**
@@ -354,9 +377,9 @@ public abstract class Dataset extends NativeObjectContainer {
 	 */
 	public void setData(double... values) {
 		// set value. If null, removes key and then..
-		setArrayValue(Property.data, ArrayDouble.fromOrNull(values));
+		setArrayValue(Property.DATA, ArrayDouble.fromOrNull(values));
 		// sets data type checking if the key exists
-		setValue(Property._charbaDataType, has(Property.data) ? DataType.numbers : DataType.unknown);
+		setValue(Property.CHARBA_DATA_TYPE, has(Property.DATA) ? DataType.NUMBERS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -367,9 +390,9 @@ public abstract class Dataset extends NativeObjectContainer {
 	 */
 	public void setData(List<Double> values) {
 		// set value. If null, removes key and then..
-		setArrayValue(Property.data, ArrayDouble.fromOrNull(values));
+		setArrayValue(Property.DATA, ArrayDouble.fromOrNull(values));
 		// sets data type checking if the key exists
-		setValue(Property._charbaDataType, has(Property.data) ? DataType.numbers : DataType.unknown);
+		setValue(Property.CHARBA_DATA_TYPE, has(Property.DATA) ? DataType.NUMBERS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -391,9 +414,9 @@ public abstract class Dataset extends NativeObjectContainer {
 	 */
 	public List<Double> getData(boolean binding) {
 		// checks if is a numbers data type
-		if (has(Property.data) && DataType.numbers.equals(getDataType())) {
+		if (has(Property.DATA) && DataType.NUMBERS.equals(getDataType())) {
 			// returns numbers
-			ArrayDouble array = getArrayValue(Property.data);
+			ArrayDouble array = getArrayValue(Property.DATA);
 			// returns array
 			return ArrayListHelper.list(array);
 		}
@@ -401,9 +424,9 @@ public abstract class Dataset extends NativeObjectContainer {
 		if (binding) {
 			ArrayDoubleList result = new ArrayDoubleList();
 			// set value
-			setArrayValue(Property.data, ArrayDouble.from(result));
+			setArrayValue(Property.DATA, ArrayDouble.from(result));
 			// sets data type
-			setValue(Property._charbaDataType, DataType.numbers);
+			setValue(Property.CHARBA_DATA_TYPE, DataType.NUMBERS);
 			// returns list
 			return result;
 		}
@@ -420,9 +443,9 @@ public abstract class Dataset extends NativeObjectContainer {
 	 */
 	final List<DataPoint> getDataPoints(DataPointListFactory factory, boolean binding) {
 		// checks if is a numbers data type
-		if (has(Dataset.Property.data) && DataType.points.equals(getDataType())) {
+		if (has(Dataset.Property.DATA) && DataType.POINTS.equals(getDataType())) {
 			// gets array
-			ArrayObject array = getArrayValue(Dataset.Property.data);
+			ArrayObject array = getArrayValue(Dataset.Property.DATA);
 			// returns points
 			return ArrayListHelper.list(array, factory);
 		}
@@ -430,9 +453,9 @@ public abstract class Dataset extends NativeObjectContainer {
 		if (binding) {
 			ArrayObjectContainerList<DataPoint> result = new ArrayObjectContainerList<>();
 			// set value
-			setArrayValue(Dataset.Property.data, ArrayObject.from(result));
+			setArrayValue(Dataset.Property.DATA, ArrayObject.from(result));
 			// sets data type
-			setValue(Dataset.Property._charbaDataType, DataType.points);
+			setValue(Dataset.Property.CHARBA_DATA_TYPE, DataType.POINTS);
 			// returns list
 			return result;
 		}
@@ -446,7 +469,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @param type type of dataset.
 	 */
 	public void setType(Type type) {
-		setValue(Property.type, type);
+		setValue(Property.TYPE, type);
 	}
 
 	/**
@@ -456,11 +479,11 @@ public abstract class Dataset extends NativeObjectContainer {
 	 */
 	public final Type getType() {
 		// checks if the type has been set
-		if (!has(Property.type)) {
+		if (!has(Property.TYPE)) {
 			return null;
 		}
 		// gets string value from java script object
-		String value = getValue(Property.type, ChartType.BAR.value());
+		String value = getValue(Property.TYPE, ChartType.BAR.value());
 		// checks if consistent with out of the box chart types
 		Type type = ChartType.get(value);
 		// if not, creates new type being a controller.

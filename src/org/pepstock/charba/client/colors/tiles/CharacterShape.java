@@ -102,11 +102,11 @@ public final class CharacterShape extends AbstractShape {
 		// calculates half dimension
 		final double halfSize = size / 2D;
 		// sets real font size
-		final int realFontSize = calculateFontSize(context, character, halfSize, FontStyle.normal, fontFamily);
+		final int realFontSize = calculateFontSize(context, character, halfSize, FontStyle.NORMAL, fontFamily);
 		// apply the stroke properties
 		applyFillProperties(context, shapeColor);
 		// sets font as string
-		context.setFont(Utilities.toFont(FontStyle.normal, realFontSize, fontFamily));
+		context.setFont(Utilities.toFont(FontStyle.NORMAL, realFontSize, fontFamily));
 		// sets alignment from center point
 		context.setTextBaseline(TextBaseline.TOP);
 		// gets metrics

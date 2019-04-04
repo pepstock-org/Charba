@@ -88,7 +88,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	/**
 	 * Default clear selection box position, {@link Position#bottom}.
 	 */
-	public static final Position DEFAULT_POSITION = Position.bottom;
+	public static final Position DEFAULT_POSITION = Position.BOTTOM;
 
 	// defaults values for dimensions and locations
 	static final double DEFAULT_VALUE = 0D;

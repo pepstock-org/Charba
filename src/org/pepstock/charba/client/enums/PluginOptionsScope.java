@@ -30,9 +30,32 @@ public enum PluginOptionsScope implements Key
 	/**
 	 * Represents a plugin options set globally.
 	 */
-	global,
+	GLOBAL("global"),
 	/**
 	 * Represents a plugin options set to all charts of the same type.
 	 */
-	chartType
+	CHART_TYPE("chartType");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private PluginOptionsScope(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

@@ -27,9 +27,32 @@ public enum ScaleBounds implements Key
 	/**
 	 * Make sure data are fully visible, labels outside are removed.
 	 */
-	data,
+	DATA("data"),
 	/**
 	 * Make sure ticks are fully visible, data outside are truncated.
 	 */
-	ticks
+	TICKS("ticks");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private ScaleBounds(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

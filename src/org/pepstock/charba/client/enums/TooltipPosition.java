@@ -26,11 +26,33 @@ public enum TooltipPosition implements IsTooltipPosition
 	/**
 	 * Will place the tooltip at the average position of the items displayed in the tooltip.
 	 */
-	average,
+	AVERAGE("average"),
 	/**
 	 * Will place the tooltip at the position of the element closest to the event position.
 	 */
-	nearest;
+	NEAREST("nearest");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private TooltipPosition(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
 
 	/**
 	 * Returns <code>true</code> if the name passed as argument is out of the box position, otherwise <code>false</code>.
@@ -55,7 +77,7 @@ public enum TooltipPosition implements IsTooltipPosition
 			// scans all tooltip positions
 			for (TooltipPosition position : values()) {
 				// if has got the same name
-				if (position.name().equalsIgnoreCase(name)) {
+				if (position.value().equalsIgnoreCase(name)) {
 					return position;
 				}
 			}

@@ -94,11 +94,11 @@ public final class Controllers {
 		// checks the controller type
 		ControllerTypeChecker.check(controller.getType());
 		// checks if type is already registered
-		if (controllers.containsKey(controller.getType().name())) {
+		if (controllers.containsKey(controller.getType().value())) {
 			return null;
 		}
 		// stores the type into a set
-		controllers.put(controller.getType().name(), controller);
+		controllers.put(controller.getType().value(), controller);
 		// creates a java script object, wrapper of the controller
 		return new WrapperController(controller);
 	}

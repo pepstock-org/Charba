@@ -75,7 +75,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 		// gets the type of property
 		ObjectType type = type(pluginIdKey);
 		// if boolean, checks if enable
-		if (ObjectType.Boolean.equals(type)) {
+		if (ObjectType.BOOLEAN.equals(type)) {
 			// if the property is not found, checks if the plugin was enable to all charts.
 			return getValue(pluginIdKey, Defaults.get().getPlugins().isEnabledAllCharts(pluginId));
 		}
@@ -151,7 +151,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 		// if boolean, there is not any options, therefore false
 		// otherwise checks if there is the key. If there is and is NOT boolean
 		// means that an options has been added.
-		return ObjectType.Boolean.equals(type) ? false : has(pluginIdKey);
+		return ObjectType.BOOLEAN.equals(type) ? false : has(pluginIdKey);
 	}
 
 	/**
@@ -178,7 +178,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 		// gets the type of property
 		ObjectType type = type(pluginIdKey);
 		// checks if object
-		if (ObjectType.Object.equals(type)) {
+		if (ObjectType.OBJECT.equals(type)) {
 			return factory.create(getValue(PluginIdChecker.key(pluginId)));
 		} else {
 			// if here returns an empty object
@@ -201,7 +201,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 		// gets the type of property
 		ObjectType type = type(pluginIdKey);
 		// checks if array
-		if (ObjectType.Array.equals(type)) {
+		if (ObjectType.ARRAY.equals(type)) {
 			ArrayObject array = getArrayValue(PluginIdChecker.key(pluginId));
 			return ArrayListHelper.list(array, factory);
 		} else {

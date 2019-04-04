@@ -24,13 +24,35 @@ import org.pepstock.charba.client.commons.Key;
  */
 public enum CartesianAxisType implements Key
 {
-
 	/**
 	 * X directions are used in calculating axis.
 	 */
-	x,
+	X("x"),
 	/**
 	 * Y directions are used in calculating axis.
 	 */
-	y
+	Y("y");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private CartesianAxisType(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

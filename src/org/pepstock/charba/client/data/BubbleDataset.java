@@ -82,11 +82,34 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 */
 	private enum Property implements Key
 	{
-		hoverRadius,
-		hitRadius,
-		pointStyle,
-		radius,
-		rotation
+		HOVER_RADIUS("hoverRadius"),
+		HIT_RADIUS("hitRadius"),
+		POINT_STYLE("pointStyle"),
+		RADIUS("radius"),
+		ROTATION("rotation");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -185,7 +208,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 * @param pointStyle array of the style of the point.
 	 */
 	public void setPointStyle(PointStyle... pointStyle) {
-		setValueOrArray(Property.pointStyle, pointStyle);
+		setValueOrArray(Property.POINT_STYLE, pointStyle);
 	}
 
 	/**
@@ -195,9 +218,9 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 */
 	public List<PointStyle> getPointStyle() {
 		// checks if the callback has not been set
-		if (!ObjectType.Function.equals(type(Property.pointStyle))) {
+		if (!ObjectType.FUNCTION.equals(type(Property.POINT_STYLE))) {
 			// returns the array
-			ArrayString array = getValueOrArray(Property.pointStyle, getDefaultValues().getElements().getPoint().getPointStyle());
+			ArrayString array = getValueOrArray(Property.POINT_STYLE, getDefaultValues().getElements().getPoint().getPointStyle());
 			return ArrayListHelper.list(PointStyle.class, array);
 		}
 		// if here, is a callback
@@ -211,7 +234,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 * @param hitRadius array of the pixel size of the non-displayed point.
 	 */
 	public void setHitRadius(double... hitRadius) {
-		setValueOrArray(Property.hitRadius, hitRadius);
+		setValueOrArray(Property.HIT_RADIUS, hitRadius);
 	}
 
 	/**
@@ -221,9 +244,9 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 */
 	public List<Double> getHitRadius() {
 		// checks if the callback has not been set
-		if (!ObjectType.Function.equals(type(Property.hitRadius))) {
+		if (!ObjectType.FUNCTION.equals(type(Property.HIT_RADIUS))) {
 			// returns the array
-			ArrayDouble array = getValueOrArray(Property.hitRadius, getDefaultValues().getElements().getPoint().getHitRadius());
+			ArrayDouble array = getValueOrArray(Property.HIT_RADIUS, getDefaultValues().getElements().getPoint().getHitRadius());
 			return ArrayListHelper.list(array);
 		}
 		// if here, is a callback
@@ -237,7 +260,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 * @param hoverRadius array of the radius of the point when hovered.
 	 */
 	public void setHoverRadius(double... hoverRadius) {
-		setValueOrArray(Property.hoverRadius, hoverRadius);
+		setValueOrArray(Property.HOVER_RADIUS, hoverRadius);
 	}
 
 	/**
@@ -247,9 +270,9 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 */
 	public List<Double> getHoverRadius() {
 		// checks if the callback has not been set
-		if (!ObjectType.Function.equals(type(Property.hoverRadius))) {
+		if (!ObjectType.FUNCTION.equals(type(Property.HOVER_RADIUS))) {
 			// returns the array
-			ArrayDouble array = getValueOrArray(Property.hoverRadius, getDefaultValues().getElements().getPoint().getHoverRadius());
+			ArrayDouble array = getValueOrArray(Property.HOVER_RADIUS, getDefaultValues().getElements().getPoint().getHoverRadius());
 			return ArrayListHelper.list(array);
 		}
 		// if here, is a callback
@@ -263,7 +286,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 * @param radius array of the radius of the point shape.
 	 */
 	public void setRadius(double... radius) {
-		setValueOrArray(Property.radius, radius);
+		setValueOrArray(Property.RADIUS, radius);
 	}
 
 	/**
@@ -273,9 +296,9 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 */
 	public List<Double> getRadius() {
 		// checks if the callback has not been set
-		if (!ObjectType.Function.equals(type(Property.radius))) {
+		if (!ObjectType.FUNCTION.equals(type(Property.RADIUS))) {
 			// returns the array
-			ArrayDouble array = getValueOrArray(Property.radius, getDefaultValues().getElements().getPoint().getRadius());
+			ArrayDouble array = getValueOrArray(Property.RADIUS, getDefaultValues().getElements().getPoint().getRadius());
 			return ArrayListHelper.list(array);
 		}
 		// if here, is a callback
@@ -289,7 +312,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 * @param rotation array of the rotation of the point in degrees.
 	 */
 	public void setRotation(double... rotation) {
-		setValueOrArray(Property.rotation, rotation);
+		setValueOrArray(Property.ROTATION, rotation);
 	}
 
 	/**
@@ -299,9 +322,9 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 */
 	public List<Double> getRotation() {
 		// checks if the callback has not been set
-		if (!ObjectType.Function.equals(type(Property.rotation))) {
+		if (!ObjectType.FUNCTION.equals(type(Property.ROTATION))) {
 			// returns the array
-			ArrayDouble array = getValueOrArray(Property.rotation, getDefaultValues().getElements().getPoint().getRotation());
+			ArrayDouble array = getValueOrArray(Property.ROTATION, getDefaultValues().getElements().getPoint().getRotation());
 			return ArrayListHelper.list(array);
 		}
 		// if here, is a callback
@@ -316,9 +339,9 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 */
 	@Override
 	public void setDataPoints(DataPoint... datapoints) {
-		setArrayValue(Dataset.Property.data, ArrayObject.fromOrNull(datapoints));
+		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(datapoints));
 		// sets data type checking if the key exists
-		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.points : DataType.unknown);
+		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -328,9 +351,9 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 */
 	@Override
 	public void setDataPoints(List<DataPoint> datapoints) {
-		setArrayValue(Dataset.Property.data, ArrayObject.fromOrNull(datapoints));
+		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(datapoints));
 		// sets data type checking if the key exists
-		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.points : DataType.unknown);
+		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -414,10 +437,10 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 		// checks if callback is consistent
 		if (radiusCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.radius, radiusCallbackProxy.getProxy());
+			setValue(Property.RADIUS, radiusCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.radius);
+			remove(Property.RADIUS);
 		}
 	}
 
@@ -441,10 +464,10 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 		// checks if callback is consistent
 		if (hitRadiusCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.hitRadius, hitRadiusCallbackProxy.getProxy());
+			setValue(Property.HIT_RADIUS, hitRadiusCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.hitRadius);
+			remove(Property.HIT_RADIUS);
 		}
 	}
 
@@ -468,10 +491,10 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 		// checks if callback is consistent
 		if (hoverRadiusCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.hoverRadius, hoverRadiusCallbackProxy.getProxy());
+			setValue(Property.HOVER_RADIUS, hoverRadiusCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.hoverRadius);
+			remove(Property.HOVER_RADIUS);
 		}
 	}
 
@@ -495,10 +518,10 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 		// checks if callback is consistent
 		if (rotationCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.rotation, rotationCallbackProxy.getProxy());
+			setValue(Property.ROTATION, rotationCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.rotation);
+			remove(Property.ROTATION);
 		}
 	}
 
@@ -522,10 +545,10 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 		// checks if callback is consistent
 		if (pointStyleCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.pointStyle, pointStyleCallbackProxy.getProxy());
+			setValue(Property.POINT_STYLE, pointStyleCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.pointStyle);
+			remove(Property.POINT_STYLE);
 		}
 	}
 

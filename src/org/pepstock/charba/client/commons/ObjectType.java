@@ -43,39 +43,39 @@ public enum ObjectType
 	/**
 	 * A variable that has not been assigned a value
 	 */
-	Undefined,
+	UNDEFINED,
 	/**
 	 * Boolean represents a logical entity and can have two values: true, and false.
 	 */
-	Boolean,
+	BOOLEAN,
 	/**
 	 * According to the ECMAScript standard, there is only one number type: the double-precision 64-bit binary format IEEE 754
 	 * value (numbers between -(2^53 -1) and 2^53 -1). There is no specific type for integers. In addition to being able to
 	 * represent floating-point numbers, the number type has three symbolic values: +Infinity, -Infinity, and NaN
 	 * (not-a-number).
 	 */
-	Number,
+	NUMBER,
 	/**
 	 * Is used to represent textual data
 	 */
-	String,
+	STRING,
 	/**
 	 * Symbols are new to JavaScript in ECMAScript 2015. A Symbol is a unique and immutable primitive value.
 	 */
-	Symbol,
+	SYMBOL,
 	/**
 	 * Functions are regular objects with the additional capability of being callable.
 	 */
-	Function,
+	FUNCTION,
 	/**
 	 * Objects can be seen as a collection of properties.
 	 */
-	Object,
+	OBJECT,
 	/**
 	 * Arrays are regular objects for which there is a particular relationship between integer-key-ed properties and the
 	 * 'length' property.
 	 */
-	Array;
+	ARRAY;
 
 	/**
 	 * Returns the java script property type.
@@ -87,7 +87,7 @@ public enum ObjectType
 	static final ObjectType getType(String value, boolean isArray) {
 		// if is array, returns array
 		if (isArray) {
-			return Array;
+			return ARRAY;
 		}
 		// if value is not null
 		if (value != null) {
@@ -100,6 +100,6 @@ public enum ObjectType
 			}
 		}
 		// if here the default is object
-		return Object;
+		return OBJECT;
 	}
 }

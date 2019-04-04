@@ -229,11 +229,11 @@ public abstract class NativeObjectContainer {
 	 */
 	protected final ArrayInteger getValueOrArray(Key key, int defaultValue) {
 		// checks if property type
-		if (ObjectType.Number.equals(type(key))) {
+		if (ObjectType.NUMBER.equals(type(key))) {
 			// if here, is a single value, therefore creates an array
 			// with only 1 element
 			return ArrayInteger.from(getValue(key, defaultValue));
-		} else if (ObjectType.Array.equals(type(key))) {
+		} else if (ObjectType.ARRAY.equals(type(key))) {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
 		}
@@ -307,11 +307,11 @@ public abstract class NativeObjectContainer {
 	 */
 	protected final ArrayDouble getValueOrArray(Key key, double defaultValue) {
 		// checks if property type
-		if (ObjectType.Number.equals(type(key))) {
+		if (ObjectType.NUMBER.equals(type(key))) {
 			// if here, is a single value, therefore creates an array
 			// with only 1 element
 			return ArrayDouble.from(getValue(key, defaultValue));
-		} else if (ObjectType.Array.equals(type(key))) {
+		} else if (ObjectType.ARRAY.equals(type(key))) {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
 		}
@@ -425,11 +425,11 @@ public abstract class NativeObjectContainer {
 	 */
 	protected final ArrayString getValueOrArray(Key key, String defaultValue) {
 		// checks if property type
-		if (ObjectType.String.equals(type(key))) {
+		if (ObjectType.STRING.equals(type(key))) {
 			// if here, is a single value, therefore creates an array
 			// with only 1 element
 			return ArrayString.from(getValue(key, defaultValue));
-		} else if (ObjectType.Array.equals(type(key))) {
+		} else if (ObjectType.ARRAY.equals(type(key))) {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
 		}
@@ -651,11 +651,11 @@ public abstract class NativeObjectContainer {
 	 */
 	protected final ArrayImage getValueOrArray(Key key, ImageElement defaultValue) {
 		// checks if property type
-		if (ObjectType.Object.equals(type(key))) {
+		if (ObjectType.OBJECT.equals(type(key))) {
 			// if here, is a single value, therefore creates an array
 			// with only 1 element
 			return ArrayImage.from(getValue(key, defaultValue));
-		} else if (ObjectType.Array.equals(type(key))) {
+		} else if (ObjectType.ARRAY.equals(type(key))) {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
 		}
@@ -737,11 +737,11 @@ public abstract class NativeObjectContainer {
 	 */
 	protected final ArrayGradient getValueOrArray(Key key, CanvasGradient defaultValue) {
 		// checks if property type
-		if (ObjectType.Object.equals(type(key))) {
+		if (ObjectType.OBJECT.equals(type(key))) {
 			// if here, is a single value, therefore creates an array
 			// with only 1 element
 			return ArrayGradient.from(getValue(key, defaultValue));
-		} else if (ObjectType.Array.equals(type(key))) {
+		} else if (ObjectType.ARRAY.equals(type(key))) {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
 		}
@@ -823,11 +823,11 @@ public abstract class NativeObjectContainer {
 	 */
 	protected final ArrayPattern getValueOrArray(Key key, CanvasPattern defaultValue) {
 		// checks if property type
-		if (ObjectType.Object.equals(type(key))) {
+		if (ObjectType.OBJECT.equals(type(key))) {
 			// if here, is a single value, therefore creates an array
 			// with only 1 element
 			return ArrayPattern.from(getValue(key, defaultValue));
-		} else if (ObjectType.Array.equals(type(key))) {
+		} else if (ObjectType.ARRAY.equals(type(key))) {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
 		}

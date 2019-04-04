@@ -34,7 +34,7 @@ public final class DefaultArc extends AbstractDefaultOptionsElement implements I
 	 */
 	@Override
 	public BorderAlign getBorderAlign() {
-		return BorderAlign.center;
+		return BorderAlign.CENTER;
 	}
 
 	/*

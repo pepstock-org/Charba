@@ -148,12 +148,12 @@ public final class JSON {
 					// gets the type of object
 					ObjectType type = JsHelper.get().typeOf(value);
 					// if function
-					if (ObjectType.Function.equals(type)) {
+					if (ObjectType.FUNCTION.equals(type)) {
 						// returns the value of function
 						return value + "";
 					}
 					// if object
-					if (ObjectType.Object.equals(type)) {
+					if (ObjectType.OBJECT.equals(type)) {
 						// checks if is an element
 						if (value instanceof Element) {
 							// casts to element
@@ -235,12 +235,12 @@ public final class JSON {
 						// gets the type of object
 						ObjectType type = JsHelper.get().typeOf(value);
 						// if function
-						if (ObjectType.Function.equals(type)) {
+						if (ObjectType.FUNCTION.equals(type)) {
 							// returns the value of function
 							return value + "";
 						}
 						// if object
-						if (ObjectType.Object.equals(type)) {
+						if (ObjectType.OBJECT.equals(type)) {
 							// checks if is an element
 							if (value instanceof Element) {
 								// casts to element

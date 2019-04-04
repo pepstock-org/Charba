@@ -58,15 +58,15 @@ final class ControllerTypeChecker {
 		// checks if is null
 		if (type == null) {
 			throw new IllegalArgumentException(INVALID_CONTROLLER_TYPE_NULL);
-		} else if (type.name() == null) {
+		} else if (type.value() == null) {
 			// checks if value is null
 			throw new IllegalArgumentException(INVALID_CONTROLLER_TYPE_NULL);
-		} else if (type.name().charAt(0) == DOT || type.name().charAt(0) == UNDERSCORE) {
+		} else if (type.value().charAt(0) == DOT || type.value().charAt(0) == UNDERSCORE) {
 			// checks if is starting with DOT or underscore
-			throw new IllegalArgumentException(buildMessage(type.name(), INVALID_CONTROLLER_TYPE_INVALID_FIRST_CHAR));
-		} else if (!UriUtils.isSafeUri(type.name())) {
+			throw new IllegalArgumentException(buildMessage(type.value(), INVALID_CONTROLLER_TYPE_INVALID_FIRST_CHAR));
+		} else if (!UriUtils.isSafeUri(type.value())) {
 			// checks if is not safe URL
-			throw new IllegalArgumentException(buildMessage(type.name(), INVALID_CONTROLLER_TYPE_NOT_URL_SAFE));
+			throw new IllegalArgumentException(buildMessage(type.value(), INVALID_CONTROLLER_TYPE_NOT_URL_SAFE));
 		}
 	}
 

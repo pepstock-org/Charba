@@ -42,23 +42,23 @@ public final class AbsoluteDatasetIndexFill extends AbstractDatasetIndexFill {
 	AbsoluteDatasetIndexFill(int index) {
 		// creates the abstract object passing the filling mode (always absolute filling mode
 		// and undefined string for index as string (absolute ONLY integer)
-		super(FillingMode.absoluteDatasetIndex, index, UndefinedValues.STRING);
+		super(FillingMode.ABSOLUTE_DATASET_INDEX, index, UndefinedValues.STRING);
 		// checks if the index is greater than 0
 		if (index <= 0) {
 			// if not, exception
 			throw new IllegalArgumentException("Value must represent a integer greater than 0");
 		}
 		// creates the name to return
-		this.name = FillingMode.absoluteDatasetIndex.name() + ":" + index;
+		this.name = FillingMode.ABSOLUTE_DATASET_INDEX.value() + ":" + index;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.Key#name()
+	 * @see org.pepstock.charba.client.commons.Key#value()
 	 */
 	@Override
-	public String name() {
+	public String value() {
 		return name;
 	}
 

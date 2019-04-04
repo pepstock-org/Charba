@@ -22,8 +22,8 @@ import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.defaults.IsDefaultTime;
-import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
 import org.pepstock.charba.client.enums.ScaleDistribution;
@@ -140,7 +140,7 @@ public final class DefaultScale implements IsDefaultScale {
 	 */
 	@Override
 	public AxisType getType() {
-		return AxisType.linear;
+		return AxisType.LINEAR;
 	}
 
 	/*
@@ -160,7 +160,7 @@ public final class DefaultScale implements IsDefaultScale {
 	 */
 	@Override
 	public Display getDisplay() {
-		return Display.yes;
+		return Display.TRUE;
 	}
 
 	/*
@@ -180,7 +180,7 @@ public final class DefaultScale implements IsDefaultScale {
 	 */
 	@Override
 	public Position getPosition() {
-		return Position.top;
+		return Position.TOP;
 	}
 
 	/*
@@ -240,7 +240,7 @@ public final class DefaultScale implements IsDefaultScale {
 	 */
 	@Override
 	public ScaleDistribution getDistribution() {
-		return ScaleDistribution.linear;
+		return ScaleDistribution.LINEAR;
 	}
 
 	/*
@@ -250,7 +250,7 @@ public final class DefaultScale implements IsDefaultScale {
 	 */
 	@Override
 	public ScaleBounds getBounds() {
-		return ScaleBounds.data;
+		return ScaleBounds.DATA;
 	}
 
 }

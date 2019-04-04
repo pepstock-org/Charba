@@ -88,7 +88,7 @@ public final class DefaultPoint extends AbstractDefaultOptionsElement implements
 	 */
 	@Override
 	public PointStyle getPointStyle() {
-		return PointStyle.circle;
+		return PointStyle.CIRCLE;
 	}
 
 	/*

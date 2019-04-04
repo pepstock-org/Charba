@@ -31,7 +31,30 @@ public class PieDataset extends ArcDataset {
 	 */
 	private enum Property implements Key
 	{
-		weight
+		WEIGHT("weight");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -59,7 +82,7 @@ public class PieDataset extends ArcDataset {
 	 * @param weight the relative thickness of the dataset
 	 */
 	public void setWeight(double weight) {
-		setValue(Property.weight, weight);
+		setValue(Property.WEIGHT, weight);
 	}
 
 	/**
@@ -70,6 +93,6 @@ public class PieDataset extends ArcDataset {
 	 * @return the relative thickness of the dataset
 	 */
 	public double getWeight() {
-		return getValue(Property.weight, getDefaultValues().getElements().getArc().getWeight());
+		return getValue(Property.WEIGHT, getDefaultValues().getElements().getArc().getWeight());
 	}
 }

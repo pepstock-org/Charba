@@ -311,7 +311,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 */
 	public final Display getDisplay() {
 		// checks if is boolean
-		if (ObjectType.Boolean.equals(type(Property.display))) {
+		if (ObjectType.BOOLEAN.equals(type(Property.display))) {
 			// gets value
 			boolean value = getValue(Property.display, true);
 			// returns value
@@ -436,7 +436,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 */
 	public final int getBarThickness() {
 		// checks if flex has been set
-		if (ObjectType.String.equals(type(Property.barThickness))) {
+		if (ObjectType.STRING.equals(type(Property.barThickness))) {
 			return FLEX_BAR_THICKNESS;
 		}
 		// if here, is not flex

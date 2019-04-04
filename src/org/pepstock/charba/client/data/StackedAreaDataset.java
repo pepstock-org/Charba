@@ -33,7 +33,30 @@ public class StackedAreaDataset extends LineDataset {
 	 */
 	private enum Property implements Key
 	{
-		stack
+		STACK("stack");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -59,7 +82,7 @@ public class StackedAreaDataset extends LineDataset {
 	 * @param stackGroup name of stack group.
 	 */
 	public void setStackGroup(String stackGroup) {
-		setValue(Property.stack, stackGroup);
+		setValue(Property.STACK, stackGroup);
 	}
 
 	/**
@@ -68,7 +91,7 @@ public class StackedAreaDataset extends LineDataset {
 	 * @return the name of stack group.
 	 */
 	public String getStackGroup() {
-		return getValue(Property.stack, UndefinedValues.STRING);
+		return getValue(Property.STACK, UndefinedValues.STRING);
 	}
 
 }

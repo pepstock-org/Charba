@@ -25,47 +25,50 @@ import org.pepstock.charba.client.commons.Key;
  */
 public enum TimeUnit implements Key
 {
+
 	/**
 	 * Millisecond time unit
 	 */
-	millisecond("h:mm:ss.SSS a"),
+	MILLISECOND("millisecond", "h:mm:ss.SSS a"),
 	/**
 	 * Second time unit
 	 */
-	second("h:mm:ss a"),
+	SECOND("second", "h:mm:ss a"),
 	/**
 	 * Minute time unit
 	 */
-	minute("h:mm a"),
+	MINUTE("minute", "h:mm a"),
 	/**
 	 * Hour time unit
 	 */
-	hour("hA"),
+	HOUR("hour", "hA"),
 	/**
 	 * Day time unit
 	 */
-	day("MMM D"),
+	DAY("day", "MMM D"),
 	/**
 	 * Week time unit
 	 */
-	week("ll"),
+	WEEK("week", "ll"),
 	/**
 	 * Month time unit
 	 */
-	month("MMM YYYY"),
+	MONTH("month", "MMM YYYY"),
 	/**
 	 * Quarter time unit
 	 */
-	quarter("[Q]Q - YYYY"),
+	QUARTER("quarter", "[Q]Q - YYYY"),
 	/**
 	 * Year time unit
 	 */
-	year("YYYY"),
+	YEAR("year", "YYYY"),
 	/**
 	 * Unknown
 	 */
-	unknown("");
+	UNKNOWN("unknown", "");
 
+	// name value of property
+	private final String value;
 	// default format based on time unit
 	private final String defaultFormat;
 
@@ -74,8 +77,19 @@ public enum TimeUnit implements Key
 	 * 
 	 * @param format default format based on time unit
 	 */
-	private TimeUnit(String format) {
+	private TimeUnit(String value, String format) {
+		this.value = value;
 		this.defaultFormat = format;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
 	}
 
 	/**

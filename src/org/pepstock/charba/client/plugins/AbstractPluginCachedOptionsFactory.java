@@ -81,22 +81,22 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 			// gets the object type of options to know if there is an array of options
 			ObjectType type = Defaults.get().getGlobal().getPlugins().getOptionsType(pluginId);
 			// if is single object
-			if (ObjectType.Object.equals(type)) {
+			if (ObjectType.OBJECT.equals(type)) {
 				// unregister previous global options
-				unregisterGlobal(PluginOptionsScope.global);
+				unregisterGlobal(PluginOptionsScope.GLOBAL);
 				// gets object
 				T options = Defaults.get().getGlobal().getPlugins().getOptions(pluginId, this);
 				// registers it to global
-				register(options, PluginOptionsScope.global.name());
-			} else if (ObjectType.Array.equals(type)) {
+				register(options, PluginOptionsScope.GLOBAL.value());
+			} else if (ObjectType.ARRAY.equals(type)) {
 				// unregister previous global options
-				unregisterGlobal(PluginOptionsScope.global);
+				unregisterGlobal(PluginOptionsScope.GLOBAL);
 				// if here the options are an array of objects
 				List<T> optionsList = Defaults.get().getGlobal().getPlugins().getOptionsAsList(pluginId, this);
 				// scans the objects
 				for (T options : optionsList) {
 					// registers it to global
-					register(options, PluginOptionsScope.global.name());
+					register(options, PluginOptionsScope.GLOBAL.value());
 				}
 			}
 		}
@@ -105,22 +105,22 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 			// gets the object type of options to know if there is an array of options
 			ObjectType type = Defaults.get().getOptions(chart.getType()).getPlugins().getOptionsType(pluginId);
 			// if is single object
-			if (ObjectType.Object.equals(type)) {
+			if (ObjectType.OBJECT.equals(type)) {
 				// unregister previous options
-				unregisterGlobal(PluginOptionsScope.chartType);
+				unregisterGlobal(PluginOptionsScope.CHART_TYPE);
 				// gets object
 				T options = Defaults.get().getOptions(chart.getType()).getPlugins().getOptions(pluginId, this);
 				// registers it to global
-				register(options, PluginOptionsScope.chartType.name());
-			} else if (ObjectType.Array.equals(type)) {
+				register(options, PluginOptionsScope.CHART_TYPE.name());
+			} else if (ObjectType.ARRAY.equals(type)) {
 				// unregister previous options
-				unregisterGlobal(PluginOptionsScope.chartType);
+				unregisterGlobal(PluginOptionsScope.CHART_TYPE);
 				// if here the options are an array of objects
 				List<T> optionsList = Defaults.get().getOptions(chart.getType()).getPlugins().getOptionsAsList(pluginId, this);
 				// scans the objects
 				for (T options : optionsList) {
 					// registers it to global
-					register(options, PluginOptionsScope.chartType.name());
+					register(options, PluginOptionsScope.CHART_TYPE.name());
 				}
 			}
 		}
@@ -129,12 +129,12 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 			// gets the object type of options to know if there is an array of options
 			ObjectType type = chart.getOptions().getPlugins().getOptionsType(pluginId);
 			// if is single object
-			if (ObjectType.Object.equals(type)) {
+			if (ObjectType.OBJECT.equals(type)) {
 				// gets object
 				T options = chart.getOptions().getPlugins().getOptions(pluginId, this);
 				// registers it to the chart
 				register(options, chart.getId());
-			} else if (ObjectType.Array.equals(type)) {
+			} else if (ObjectType.ARRAY.equals(type)) {
 				// if here the options are an array of objects
 				List<T> optionsList = chart.getOptions().getPlugins().getOptionsAsList(pluginId, this);
 				// scans the objects
@@ -166,12 +166,12 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 			// gets the object type of options to know if there is an array of options
 			ObjectType type = chart.getOptions().getPlugins().getOptionsType(pluginId);
 			// if is single object
-			if (ObjectType.Object.equals(type)) {
+			if (ObjectType.OBJECT.equals(type)) {
 				// gets object
 				T options = chart.getOptions().getPlugins().getOptions(pluginId, this);
 				// unregisters it from the chart
 				unregister(options, chart.getId());
-			} else if (ObjectType.Array.equals(type)) {
+			} else if (ObjectType.ARRAY.equals(type)) {
 				// if here the options are an array of objects
 				List<T> optionsList = chart.getOptions().getPlugins().getOptionsAsList(pluginId, this);
 				// scans the objects

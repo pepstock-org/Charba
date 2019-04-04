@@ -206,7 +206,7 @@ public final class Font extends AbstractElement {
 		// creates default
 		double defaultValue = defaultsOptions.getLineHeight();
 		// checks type if number
-		if (ObjectType.Number.equals(type(Property.LINE_HEIGHT))) {
+		if (ObjectType.NUMBER.equals(type(Property.LINE_HEIGHT))) {
 			// reads and returns as double
 			return getValue(Property.LINE_HEIGHT, defaultValue);
 		}
@@ -224,7 +224,7 @@ public final class Font extends AbstractElement {
 		// creates default
 		String defaultValue = String.valueOf(defaultsOptions.getLineHeight());
 		// checks type if string
-		if (ObjectType.String.equals(type(Property.LINE_HEIGHT))) {
+		if (ObjectType.STRING.equals(type(Property.LINE_HEIGHT))) {
 			// reads and returns as string
 			return getValue(Property.LINE_HEIGHT, defaultValue);
 		}

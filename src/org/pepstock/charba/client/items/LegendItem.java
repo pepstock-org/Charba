@@ -198,7 +198,7 @@ public class LegendItem extends NativeObjectContainer {
 	 */
 	public final List<Integer> getLineWidth() {
 		// checks if the value into object is an array
-		if (ObjectType.Array.equals(type(Property.LINE_WIDTH))) {
+		if (ObjectType.ARRAY.equals(type(Property.LINE_WIDTH))) {
 			// gets the array from native object
 			ArrayInteger array = getArrayValue(Property.LINE_WIDTH);
 			// returns list
@@ -216,7 +216,7 @@ public class LegendItem extends NativeObjectContainer {
 	 */
 	public final List<IsColor> getStrokeStyle() {
 		// checks if is an array
-		if (ObjectType.Array.equals(type(Property.STROKE_STYLE))) {
+		if (ObjectType.ARRAY.equals(type(Property.STROKE_STYLE))) {
 			// gets the array from native object
 			ArrayString array = getArrayValue(Property.STROKE_STYLE);
 			// returns list
@@ -234,7 +234,7 @@ public class LegendItem extends NativeObjectContainer {
 	 */
 	public final List<PointStyle> getPointStyle() {
 		// checks if is an array
-		if (ObjectType.Array.equals(type(Property.POINT_STYLE))) {
+		if (ObjectType.ARRAY.equals(type(Property.POINT_STYLE))) {
 			// gets the array from native object
 			ArrayString array = getArrayValue(Property.POINT_STYLE);
 			// returns list

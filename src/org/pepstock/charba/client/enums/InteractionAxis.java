@@ -29,13 +29,36 @@ public enum InteractionAxis implements Key
 	/**
 	 * X directions are used in calculating distances.
 	 */
-	x,
+	X("x"),
 	/**
 	 * Y directions are used in calculating distances.
 	 */
-	y,
+	Y("y"),
 	/**
 	 * XY directions are used in calculating distances.
 	 */
-	xy
+	XY("xy");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private InteractionAxis(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

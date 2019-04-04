@@ -50,7 +50,7 @@ public final class ScatterDataset extends LineDataset {
 	public ScatterDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
 		// scatter is always no fill
-		super.setFill(Fill.nofill);
+		super.setFill(Fill.FALSE);
 		// scatter has never show lines
 		super.setShowLine(false);
 	}
@@ -74,7 +74,7 @@ public final class ScatterDataset extends LineDataset {
 	@Override
 	public void setFill(IsFill fill) {
 		// sets always to no fill
-		super.setFill(Fill.nofill);
+		super.setFill(Fill.FALSE);
 	}
 
 	/*

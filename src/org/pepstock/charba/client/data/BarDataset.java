@@ -60,10 +60,33 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 */
 	private enum Property implements Key
 	{
-		xAxisID,
-		yAxisID,
-		borderSkipped,
-		borderWidth
+		X_AXIS_ID("xAxisID"),
+		Y_AXIS_ID("yAxisID"),
+		BORDER_SKIPPED("borderSkipped"),
+		BORDER_WIDTH("borderWidth");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -98,11 +121,11 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 				BorderSkipped value = ScriptableUtils.getOptionValueAsString(context, borderSkippedCallback);
 				BorderSkipped result = value == null ? getDefaultValues().getElements().getRectangle().getBorderSkipped() : value;
 				// checks if is boolean
-				if (BorderSkipped.noborderskipped.equals(result)) {
+				if (BorderSkipped.FALSE.equals(result)) {
 					return false;
 				} else {
 					// returns the string value
-					return result.name();
+					return result.value();
 				}
 			}
 		});
@@ -115,7 +138,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 */
 	@Override
 	public String getLabel() {
-		return getValue(Dataset.Property.label, DEFAULT_LABEL);
+		return getValue(Dataset.Property.LABEL, DEFAULT_LABEL);
 	}
 
 	/**
@@ -125,7 +148,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 *            x axis.
 	 */
 	public void setXAxisID(String xAxisID) {
-		setValue(Property.xAxisID, xAxisID);
+		setValue(Property.X_AXIS_ID, xAxisID);
 	}
 
 	/**
@@ -136,7 +159,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 *         axis.
 	 */
 	public String getXAxisID() {
-		return getValue(Property.xAxisID, Scales.DEFAULT_X_AXIS_ID);
+		return getValue(Property.X_AXIS_ID, Scales.DEFAULT_X_AXIS_ID);
 	}
 
 	/**
@@ -146,7 +169,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 *            y axis.
 	 */
 	public void setYAxisID(String yAxisID) {
-		setValue(Property.yAxisID, yAxisID);
+		setValue(Property.Y_AXIS_ID, yAxisID);
 	}
 
 	/**
@@ -157,7 +180,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 *         axis.
 	 */
 	public String getYAxisID() {
-		return getValue(Property.yAxisID, Scales.DEFAULT_Y_AXIS_ID);
+		return getValue(Property.Y_AXIS_ID, Scales.DEFAULT_Y_AXIS_ID);
 	}
 
 	/**
@@ -167,7 +190,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 */
 	public void setBorderWidth(BarBorderWidth borderWidth) {
 		// stores value
-		setValue(Property.borderWidth, borderWidth);
+		setValue(Property.BORDER_WIDTH, borderWidth);
 	}
 
 	/**
@@ -177,19 +200,19 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 */
 	public BarBorderWidth getBorderWidthAsItem() {
 		// gets object type
-		ObjectType type = type(Property.borderWidth);
+		ObjectType type = type(Property.BORDER_WIDTH);
 		// checks if borer width has been set by an object
-		if (ObjectType.Object.equals(type)) {
+		if (ObjectType.OBJECT.equals(type)) {
 			// returns the array
-			return new BarBorderWidth(getValue(Property.borderWidth));
+			return new BarBorderWidth(getValue(Property.BORDER_WIDTH));
 		}
 		// if here, is not a bar border width object
 		// then creates new border width
 		BarBorderWidth borderWidth = new BarBorderWidth();
 		// checks if borer width has been set by an object
-		if (ObjectType.Number.equals(type)) {
+		if (ObjectType.NUMBER.equals(type)) {
 			// reads number and set to object
-			borderWidth.set(getValue(Property.borderWidth, getDefaultBorderWidth()));
+			borderWidth.set(getValue(Property.BORDER_WIDTH, getDefaultBorderWidth()));
 		}
 		// returns the border width object
 		return borderWidth;
@@ -205,25 +228,25 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 		// if not false, otherwise ignore it
 		if (!borderskip) {
 			// stores boolean value
-			setValue(Property.borderSkipped, BorderSkipped.noborderskipped);
+			setValue(Property.BORDER_SKIPPED, BorderSkipped.FALSE);
 		}
 	}
 
 	/**
 	 * Sets the edge to skip drawing the border for.
 	 * 
-	 * @param position the edge to skip drawing the border for.
+	 * @param borderskip the edge to skip drawing the border for.
 	 */
-	public void setBorderSkipped(BorderSkipped position) {
+	public void setBorderSkipped(BorderSkipped borderskip) {
 		// resets callbacks
 		setBorderSkipped((BorderSkippedCallback) null);
 		// checks if setting a false value
-		if (BorderSkipped.noborderskipped.equals(position)) {
+		if (BorderSkipped.FALSE.equals(borderskip)) {
 			// stores boolean value
-			setValue(Property.borderSkipped, false);
+			setValue(Property.BORDER_SKIPPED, false);
 		} else {
 			// otherwise stores the key value
-			setValue(Property.borderSkipped, position);
+			setValue(Property.BORDER_SKIPPED, borderskip);
 		}
 	}
 
@@ -234,16 +257,16 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 */
 	public BorderSkipped getBorderSkipped() {
 		// checks if 'false' has been set
-		if (ObjectType.Boolean.equals(type(Property.borderSkipped))) {
+		if (ObjectType.BOOLEAN.equals(type(Property.BORDER_SKIPPED))) {
 			// returns is false
-			return BorderSkipped.noborderskipped;
-		} else if (ObjectType.Function.equals(type(Property.borderSkipped))) {
+			return BorderSkipped.FALSE;
+		} else if (ObjectType.FUNCTION.equals(type(Property.BORDER_SKIPPED))) {
 			// checks if a callback has been set
 			// returns defaults
 			return getDefaultValues().getElements().getRectangle().getBorderSkipped();
 		}
 		// otherwise returns the enum value as string
-		return getValue(Property.borderSkipped, BorderSkipped.class, getDefaultValues().getElements().getRectangle().getBorderSkipped());
+		return getValue(Property.BORDER_SKIPPED, BorderSkipped.class, getDefaultValues().getElements().getRectangle().getBorderSkipped());
 	}
 
 	/**
@@ -266,10 +289,10 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 		// checks if callback is consistent
 		if (borderSkippedCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.borderSkipped, borderSkippedCallbackProxy.getProxy());
+			setValue(Property.BORDER_SKIPPED, borderSkippedCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.borderSkipped);
+			remove(Property.BORDER_SKIPPED);
 		}
 	}
 
@@ -280,9 +303,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 */
 	@Override
 	public void setDataPoints(DataPoint... datapoints) {
-		setArrayValue(Dataset.Property.data, ArrayObject.fromOrNull(datapoints));
+		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(datapoints));
 		// sets data type checking if the key exists
-		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.points : DataType.unknown);
+		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -292,9 +315,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 */
 	@Override
 	public void setDataPoints(List<DataPoint> datapoints) {
-		setArrayValue(Dataset.Property.data, ArrayObject.fromOrNull(datapoints));
+		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(datapoints));
 		// sets data type checking if the key exists
-		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.points : DataType.unknown);
+		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
 
 	/**

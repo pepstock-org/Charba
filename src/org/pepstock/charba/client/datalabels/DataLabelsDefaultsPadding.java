@@ -50,7 +50,7 @@ final class DataLabelsDefaultsPadding extends NativeObjectContainer {
 	 * @return the padding left in pixel.
 	 */
 	int getLeft() {
-		return getValue(Position.left, Padding.DEFAULT_PADDING);
+		return getValue(Position.LEFT, Padding.DEFAULT_PADDING);
 	}
 
 	/**
@@ -59,7 +59,7 @@ final class DataLabelsDefaultsPadding extends NativeObjectContainer {
 	 * @return the padding right in pixel.
 	 */
 	int getRight() {
-		return getValue(Position.right, Padding.DEFAULT_PADDING);
+		return getValue(Position.RIGHT, Padding.DEFAULT_PADDING);
 	}
 
 	/**
@@ -68,7 +68,7 @@ final class DataLabelsDefaultsPadding extends NativeObjectContainer {
 	 * @return the padding top in pixel.
 	 */
 	int getTop() {
-		return getValue(Position.top, Padding.DEFAULT_PADDING);
+		return getValue(Position.TOP, Padding.DEFAULT_PADDING);
 	}
 
 	/**
@@ -77,6 +77,6 @@ final class DataLabelsDefaultsPadding extends NativeObjectContainer {
 	 * @return the padding bottom in pixel.
 	 */
 	int getBottom() {
-		return getValue(Position.bottom, Padding.DEFAULT_PADDING);
+		return getValue(Position.BOTTOM, Padding.DEFAULT_PADDING);
 	}
 }

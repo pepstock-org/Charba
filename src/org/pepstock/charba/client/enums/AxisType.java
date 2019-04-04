@@ -25,34 +25,55 @@ import org.pepstock.charba.client.commons.Key;
  */
 public enum AxisType implements Key
 {
-
 	/**
 	 * The linear scale is use to chart numerical data. It can be placed on either the x or y axis.<br>
 	 * The linear interpolation is used to determine where a value lies on the axis.
 	 */
-	linear,
+	LINEAR("linear"),
 	/**
 	 * The logarithmic scale is use to chart numerical data. It can be placed on either the x or y axis. <br>
 	 * The logarithmic interpolation is used to determine where a value lies on the axis.
 	 */
-	logarithmic,
+	LOGARITHMIC("logarithmic"),
 	/**
 	 * The labels are drawn from one of the label arrays included in the chart data.<br>
 	 * Where not specified, this is the default.
 	 */
-	category,
+	CATEGORY("category"),
 	/**
 	 * The time scale is used to display times and dates. When building its ticks, it will automatically calculate the most
 	 * comfortable unit base on the size of the scale.<br>
 	 * Not implemented
 	 */
-	time,
+	TIME("time"),
 	/**
 	 * Radial axes are used specifically for the radar and polar area chart types.<br>
 	 * These axes overlay the chart area, rather than being positioned on one of the edges.<br>
 	 * The linear scale is use to chart numerical data.<br>
 	 * The linear interpolation is used to determine where a value lies in relation the center of the axis.
 	 */
-	radialLinear
+	RADIAL_LINEAR("radialLinear");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private AxisType(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
 
 }

@@ -185,14 +185,37 @@ final class WrapperController extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		type,
-		initialize,
-		addElements,
-		addElementAndReset,
-		draw,
-		removeHoverStyle,
-		setHoverStyle,
-		update
+		TYPE("type"),
+		INITIALIZE("initialize"),
+		ADD_ELEMENTS("addElements"),
+		ADD_ELEMENT_AND_RESET("addElementAndReset"),
+		DRAW("draw"),
+		REMOVE_HOVER_STYLE("removeHoverStyle"),
+		SET_HOVER_STYLE("setHoverStyle"),
+		UPDATE("update");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -204,7 +227,7 @@ final class WrapperController extends NativeObjectContainer {
 		// stores the controller
 		this.delegation = delegation;
 		// sets the controller type
-		setValue(Property.type, delegation.getType());
+		setValue(Property.TYPE, delegation.getType());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -317,13 +340,13 @@ final class WrapperController extends NativeObjectContainer {
 
 		});
 		// adds all proxy functions to call the functions to the native object
-		setValue(Property.initialize, initializeCallbackProxy.getProxy());
-		setValue(Property.addElements, addElementsCallbackProxy.getProxy());
-		setValue(Property.addElementAndReset, addElementAndResetCallbackProxy.getProxy());
-		setValue(Property.draw, drawCallbackProxy.getProxy());
-		setValue(Property.removeHoverStyle, removeHoverStyleCallbackProxy.getProxy());
-		setValue(Property.setHoverStyle, setHoverStyleCallbackProxy.getProxy());
-		setValue(Property.update, updateCallbackProxy.getProxy());
+		setValue(Property.INITIALIZE, initializeCallbackProxy.getProxy());
+		setValue(Property.ADD_ELEMENTS, addElementsCallbackProxy.getProxy());
+		setValue(Property.ADD_ELEMENT_AND_RESET, addElementAndResetCallbackProxy.getProxy());
+		setValue(Property.DRAW, drawCallbackProxy.getProxy());
+		setValue(Property.REMOVE_HOVER_STYLE, removeHoverStyleCallbackProxy.getProxy());
+		setValue(Property.SET_HOVER_STYLE, setHoverStyleCallbackProxy.getProxy());
+		setValue(Property.UPDATE, updateCallbackProxy.getProxy());
 	}
 
 	/**

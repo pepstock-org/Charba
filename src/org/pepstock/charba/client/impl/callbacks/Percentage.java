@@ -73,7 +73,7 @@ public final class Percentage {
 			// scans all datasets
 			for (Dataset ds : chart.getData().getDatasets()) {
 				// if dataset contains data points
-				if (DataType.points.equals(ds.getDataType())) {
+				if (DataType.POINTS.equals(ds.getDataType())) {
 					// then dataset is data point container
 					// and then cast it
 					HasDataPoints hasDataPoints = (HasDataPoints) ds;
@@ -81,7 +81,7 @@ public final class Percentage {
 					DataPoint point = hasDataPoints.getDataPoints().get(context.getIndex());
 					// adds the Y value to the total
 					total = total + point.getY();
-				} else if (DataType.numbers.equals(ds.getDataType())) {
+				} else if (DataType.NUMBERS.equals(ds.getDataType())) {
 					// if here, the dataset has got data as doubles
 					// then it get the double at data index
 					double data = ds.getData().get(context.getIndex());
@@ -94,7 +94,7 @@ public final class Percentage {
 			// then it calculates the values inside the dataset
 			Dataset ds = chart.getData().getDatasets().get(context.getDatasetIndex());
 			// if dataset contains data points
-			if (DataType.points.equals(ds.getDataType())) {
+			if (DataType.POINTS.equals(ds.getDataType())) {
 				// then dataset is data points container
 				// and then cast it
 				HasDataPoints hasDataPoints = (HasDataPoints) ds;
@@ -105,7 +105,7 @@ public final class Percentage {
 					// adds the Y value to the total
 					total = total + dataPoint.getY();
 				}
-			} else if (DataType.numbers.equals(ds.getDataType())) {
+			} else if (DataType.NUMBERS.equals(ds.getDataType())) {
 				// if here, the dataset has got data as doubles
 				// then it get the doubles
 				List<Double> data = ds.getData();

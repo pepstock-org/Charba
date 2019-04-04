@@ -176,11 +176,11 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 		// gets object type
 		ObjectType type = type(DataLabelsOptions.Property.DISPLAY);
 		// if boolean
-		if (ObjectType.Boolean.equals(type)) {
+		if (ObjectType.BOOLEAN.equals(type)) {
 			// gets value and compare with enum value
 			boolean value = getValue(DataLabelsOptions.Property.DISPLAY, true);
-			return value ? Display.yes : Display.no;
-		} else if (ObjectType.String.equals(type)) {
+			return value ? Display.TRUE : Display.FALSE;
+		} else if (ObjectType.STRING.equals(type)) {
 			// if string
 			return getValue(DataLabelsOptions.Property.DISPLAY, Display.class, DataLabelsOptions.DEFAULT_DISPLAY);
 		}

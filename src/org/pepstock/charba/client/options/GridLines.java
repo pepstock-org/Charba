@@ -146,7 +146,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 */
 	public String getColorAsString() {
 		// checks if the stored value is a string
-		if (ObjectType.String.equals(type(Property.color)) || !has(Property.color)) {
+		if (ObjectType.STRING.equals(type(Property.color)) || !has(Property.color)) {
 			// returns a string
 			return getValue(Property.color, getDefaultValues().getColorAsString());
 		} else {
@@ -163,10 +163,10 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 */
 	public List<String> getColorsAsString() {
 		// checks if the stored value is a string
-		if (ObjectType.String.equals(type(Property.color)) || !has(Property.color)) {
+		if (ObjectType.STRING.equals(type(Property.color)) || !has(Property.color)) {
 			// adds the string value
 			return Arrays.asList(getValue(Property.color, getDefaultValues().getColorAsString()));
-		} else if (ObjectType.Array.equals(type(Property.color))) {
+		} else if (ObjectType.ARRAY.equals(type(Property.color))) {
 			// if array
 			// loads the array
 			ArrayString array = getArrayValue(Property.color);

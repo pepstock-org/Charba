@@ -27,13 +27,36 @@ public enum TickSource implements Key
 	/**
 	 * Generates "optimal" ticks based on scale size and time options.
 	 */
-	auto,
+	AUTO("auto"),
 	/**
 	 * Generates ticks from data (including labels from data <code>{t|x|y}</code> objects).
 	 */
-	data,
+	DATA("data"),
 	/**
 	 * Generates ticks from user given <code>data.labels</code> values ONLY.
 	 */
-	labels
+	LABELS("labels");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private TickSource(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

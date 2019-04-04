@@ -140,7 +140,7 @@ public final class Labels {
 	 */
 	public String getString(int index) {
 		ObjectType type = getType(index);
-		if (ObjectType.Array.equals(type)) {
+		if (ObjectType.ARRAY.equals(type)) {
 			ArrayString internalArray = (ArrayString) array.get(index);
 			// creates an string builder
 			StringBuilder result = new StringBuilder();
@@ -170,7 +170,7 @@ public final class Labels {
 	 */
 	public String[] getStrings(int index) {
 		ObjectType type = getType(index);
-		if (ObjectType.Array.equals(type)) {
+		if (ObjectType.ARRAY.equals(type)) {
 			ArrayString internalArray = (ArrayString) array.get(index);
 			// creates an string array
 			String[] result = new String[internalArray.length()];
@@ -197,7 +197,7 @@ public final class Labels {
 		// checks range
 		checkRange(index);
 		// gets type of label
-		return Array.isArray(array.get(index)) ? ObjectType.Array : ObjectType.String;
+		return Array.isArray(array.get(index)) ? ObjectType.ARRAY : ObjectType.STRING;
 	}
 
 	/**

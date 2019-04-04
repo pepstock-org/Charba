@@ -97,7 +97,7 @@ public class RenderItem {
 	@JsOverlay
 	public final int getIndex() {
 		// checks if is defined
-		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "index"))) {
+		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "index"))) {
 			return UndefinedValues.INTEGER;
 		}
 		// returns property value
@@ -112,7 +112,7 @@ public class RenderItem {
 	@JsOverlay
 	public final int getDatasetIndex() {
 		// checks if is defined
-		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "datasetIndex"))) {
+		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "datasetIndex"))) {
 			return UndefinedValues.INTEGER;
 		}
 		// returns property value
@@ -127,7 +127,7 @@ public class RenderItem {
 	@JsOverlay
 	public final String getLabel() {
 		// checks if is defined
-		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "label"))) {
+		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "label"))) {
 			return UndefinedValues.STRING;
 		}
 		// returns property value
@@ -142,7 +142,7 @@ public class RenderItem {
 	@JsOverlay
 	public final double getPercentage() {
 		// checks if is defined
-		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "percentage"))) {
+		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "percentage"))) {
 			return UndefinedValues.DOUBLE;
 		}
 		// returns property value
@@ -157,7 +157,7 @@ public class RenderItem {
 	@JsOverlay
 	public final double getValue() {
 		// checks if is defined
-		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "value"))) {
+		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "value"))) {
 			return UndefinedValues.DOUBLE;
 		}
 		// returns property value

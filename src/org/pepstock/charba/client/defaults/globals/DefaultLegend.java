@@ -81,7 +81,7 @@ public final class DefaultLegend implements IsDefaultLegend {
 	 */
 	@Override
 	public Position getPosition() {
-		return Position.top;
+		return Position.TOP;
 	}
 
 }

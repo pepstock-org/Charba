@@ -42,10 +42,33 @@ public final class DataPoint extends NativeObjectContainer {
 	 */
 	private enum Property implements Key
 	{
-		x,
-		y,
-		r,
-		t
+		X("x"),
+		Y("y"),
+		R("r"),
+		T("t");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -70,7 +93,7 @@ public final class DataPoint extends NativeObjectContainer {
 	 * @param x X value.
 	 */
 	public void setX(double x) {
-		setValue(Property.x, x);
+		setValue(Property.X, x);
 	}
 
 	/**
@@ -79,7 +102,7 @@ public final class DataPoint extends NativeObjectContainer {
 	 * @return X value.
 	 */
 	public double getX() {
-		return getValue(Property.x, DEFAULT_X);
+		return getValue(Property.X, DEFAULT_X);
 	}
 
 	/**
@@ -88,7 +111,7 @@ public final class DataPoint extends NativeObjectContainer {
 	 * @param y Y value.
 	 */
 	public void setY(double y) {
-		setValue(Property.y, y);
+		setValue(Property.Y, y);
 	}
 
 	/**
@@ -97,7 +120,7 @@ public final class DataPoint extends NativeObjectContainer {
 	 * @return Y value.
 	 */
 	public double getY() {
-		return getValue(Property.y, DEFAULT_Y);
+		return getValue(Property.Y, DEFAULT_Y);
 	}
 
 	/**
@@ -107,7 +130,7 @@ public final class DataPoint extends NativeObjectContainer {
 	 * @param r the bubble radius in pixels (not scaled).
 	 */
 	public void setR(double r) {
-		setValue(Property.r, r);
+		setValue(Property.R, r);
 	}
 
 	/**
@@ -116,7 +139,7 @@ public final class DataPoint extends NativeObjectContainer {
 	 * @return the bubble radius in pixels (not scaled).
 	 */
 	public double getR() {
-		return getValue(Property.r, DEFAULT_R);
+		return getValue(Property.R, DEFAULT_R);
 	}
 
 	/**
@@ -125,7 +148,7 @@ public final class DataPoint extends NativeObjectContainer {
 	 * @param t T value.
 	 */
 	public void setT(Date t) {
-		setValue(Property.t, t);
+		setValue(Property.T, t);
 	}
 
 	/**
@@ -134,7 +157,7 @@ public final class DataPoint extends NativeObjectContainer {
 	 * @return T value. <code>null</code> is not set.
 	 */
 	public Date getT() {
-		return getValue(Property.t, (Date) null);
+		return getValue(Property.T, (Date) null);
 	}
 
 	/**

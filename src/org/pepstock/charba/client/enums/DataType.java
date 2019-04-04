@@ -29,18 +29,40 @@ public enum DataType implements Key
 	/**
 	 * The data property is not set yet.
 	 */
-	unknown,
+	UNKNOWN("unknown"),
 	/**
 	 * The data property is set as array of doubles.
 	 */
-	numbers,
+	NUMBERS("numbers"),
 	/**
 	 * The data property is set as array of data points.
 	 */
-	points,
+	POINTS("points"),
 	/**
 	 * The data property is set as array of strings.
 	 */
-	strings
+	STRINGS("strings");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private DataType(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
 
 }

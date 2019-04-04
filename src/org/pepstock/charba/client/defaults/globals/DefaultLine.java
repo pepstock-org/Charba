@@ -91,7 +91,7 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 	 */
 	@Override
 	public CapStyle getBorderCapStyle() {
-		return CapStyle.butt;
+		return CapStyle.BUTT;
 	}
 
 	/*
@@ -111,7 +111,7 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 	 */
 	@Override
 	public JoinStyle getBorderJoinStyle() {
-		return JoinStyle.miter;
+		return JoinStyle.MITER;
 	}
 
 	/*
@@ -131,7 +131,7 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 	 */
 	@Override
 	public CubicInterpolationMode getCubicInterpolationMode() {
-		return CubicInterpolationMode.defaults;
+		return CubicInterpolationMode.DEFAULT;
 	}
 
 	/*
@@ -141,7 +141,7 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 	 */
 	@Override
 	public IsFill getFill() {
-		return Fill.origin;
+		return Fill.ORIGIN;
 	}
 
 	/*

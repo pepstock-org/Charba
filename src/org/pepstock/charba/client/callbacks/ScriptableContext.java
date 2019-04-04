@@ -88,7 +88,7 @@ public final class ScriptableContext extends NativeExtendedObject {
 	@JsOverlay
 	public int getIndex() {
 		// checks if is defined
-		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "dataIndex"))) {
+		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "dataIndex"))) {
 			return UndefinedValues.INTEGER;
 		}
 		// returns property value
@@ -103,7 +103,7 @@ public final class ScriptableContext extends NativeExtendedObject {
 	@JsOverlay
 	public int getDatasetIndex() {
 		// checks if is defined
-		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "datasetIndex"))) {
+		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "datasetIndex"))) {
 			return UndefinedValues.INTEGER;
 		}
 		// returns property value
@@ -128,7 +128,7 @@ public final class ScriptableContext extends NativeExtendedObject {
 	@JsOverlay
 	public boolean isActive() {
 		// checks if is defined
-		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "active"))) {
+		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "active"))) {
 			return false;
 		}
 		// returns property value

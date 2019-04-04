@@ -26,19 +26,40 @@ import org.pepstock.charba.client.commons.Key;
  */
 public enum CapStyle implements Key
 {
-
 	/**
 	 * The ends of lines are squared off at the end points.<br>
 	 * Default.
 	 */
-	butt,
+	BUTT("butt"),
 	/**
 	 * The ends of lines are rounded.
 	 */
-	round,
+	ROUND("round"),
 	/**
 	 * The ends of lines are squared off by adding a box with an equal width and half the height of the line's thickness.
 	 */
-	square;
+	SQUARE("square");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private CapStyle(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
 
 }

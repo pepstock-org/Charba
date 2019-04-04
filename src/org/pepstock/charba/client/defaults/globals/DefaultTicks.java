@@ -300,7 +300,7 @@ public class DefaultTicks extends DefaultTickItem implements IsDefaultTicks {
 	 */
 	@Override
 	public TickSource getSource() {
-		return TickSource.auto;
+		return TickSource.AUTO;
 	}
 
 	/*

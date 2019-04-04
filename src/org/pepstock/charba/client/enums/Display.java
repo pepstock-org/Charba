@@ -31,12 +31,12 @@ public enum Display implements Key
 	 * This is default and the axis is drawn.<br>
 	 * For plugin, this is default and the label is drawn.
 	 */
-	yes,
+	TRUE("true"),
 	/**
 	 * The axis is hidden.<br>
 	 * For plugin, the label is hidden.
 	 */
-	no,
+	FALSE("false"),
 	/**
 	 * The axis is visible only if at least one associated dataset is visible.<br>
 	 * For plugin, the label is hidden if it overlap with another label.<br>
@@ -50,5 +50,28 @@ public enum Display implements Key
 	 * data/dataset indices).
 	 * </ul>
 	 */
-	auto
+	AUTO("auto");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private Display(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

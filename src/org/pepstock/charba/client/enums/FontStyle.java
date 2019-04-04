@@ -24,22 +24,43 @@ import org.pepstock.charba.client.commons.Key;
  */
 public enum FontStyle implements Key
 {
-
 	/**
 	 * The browser displays a normal font style. This is default
 	 */
-	normal,
+	NORMAL("normal"),
 	/**
 	 * The browser displays thick characters.
 	 */
-	bold,
+	BOLD("bold"),
 	/**
 	 * The browser displays an oblique font style
 	 */
-	oblique,
+	OBLIQUE("oblique"),
 	/**
 	 * The browser displays an italic font style
 	 */
-	italic;
+	ITALIC("italic");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private FontStyle(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
 
 }

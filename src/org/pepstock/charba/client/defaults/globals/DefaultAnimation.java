@@ -38,7 +38,7 @@ public final class DefaultAnimation implements IsDefaultAnimation {
 	 */
 	@Override
 	public Easing getEasing() {
-		return Easing.easeOutQuart;
+		return Easing.EASE_OUT_QUART;
 	}
 
 	/*

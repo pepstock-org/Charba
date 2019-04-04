@@ -38,8 +38,31 @@ public final class StyleElement extends DatasetItem {
 	 */
 	private enum Property implements Key
 	{
-		_xScale,
-		_yScale
+		X_SCALE("_xScale"),
+		Y_SCALE("_yScale");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -50,14 +73,14 @@ public final class StyleElement extends DatasetItem {
 	StyleElement(NativeObject nativeObject) {
 		super(nativeObject);
 		// checks and set the X scale if exists
-		if (has(Property._xScale)) {
-			xScale = new InternalScaleItem(getValue(Property._xScale));
+		if (has(Property.X_SCALE)) {
+			xScale = new InternalScaleItem(getValue(Property.X_SCALE));
 		} else {
 			xScale = null;
 		}
 		// checks and set the Y scale if exists
-		if (has(Property._yScale)) {
-			yScale = new InternalScaleItem(getValue(Property._yScale));
+		if (has(Property.Y_SCALE)) {
+			yScale = new InternalScaleItem(getValue(Property.Y_SCALE));
 		} else {
 			yScale = null;
 		}

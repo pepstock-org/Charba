@@ -28,7 +28,6 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.SteppedLine;
-import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.Scales;
 
 /**
@@ -49,12 +48,35 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 */
 	private enum Property implements Key
 	{
-		xAxisID,
-		yAxisID,
-		cubicInterpolationMode,
-		showLine,
-		spanGaps,
-		steppedLine
+		X_AXIS_ID("xAxisID"),
+		Y_AXIS_ID("yAxisID"),
+		CUBIC_INTERPOLATION_MODE("cubicInterpolationMode"),
+		SHOW_LINE("showLine"),
+		SPAN_GAPS("spanGaps"),
+		STEPPED_LINE("steppedLine");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -80,7 +102,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @param xAxisID the ID of the x axis to plot this dataset on.
 	 */
 	public void setXAxisID(String xAxisID) {
-		setValue(Property.xAxisID, xAxisID);
+		setValue(Property.X_AXIS_ID, xAxisID);
 	}
 
 	/**
@@ -90,7 +112,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 *         {@link org.pepstock.charba.client.options.Scales#DEFAULT_X_AXIS_ID}
 	 */
 	public String getXAxisID() {
-		return getValue(Property.xAxisID, Scales.DEFAULT_X_AXIS_ID);
+		return getValue(Property.X_AXIS_ID, Scales.DEFAULT_X_AXIS_ID);
 	}
 
 	/**
@@ -99,7 +121,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @param yAxisID the ID of the y axis to plot this dataset on.
 	 */
 	public void setYAxisID(String yAxisID) {
-		setValue(Property.yAxisID, yAxisID);
+		setValue(Property.Y_AXIS_ID, yAxisID);
 	}
 
 	/**
@@ -109,7 +131,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 *         {@link org.pepstock.charba.client.options.Scales#DEFAULT_Y_AXIS_ID}
 	 */
 	public String getYAxisID() {
-		return getValue(Property.yAxisID, Scales.DEFAULT_Y_AXIS_ID);
+		return getValue(Property.Y_AXIS_ID, Scales.DEFAULT_Y_AXIS_ID);
 	}
 
 	/**
@@ -131,7 +153,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @param mode algorithm used to interpolate a smooth curve from the discrete data points
 	 */
 	public void setCubicInterpolationMode(CubicInterpolationMode mode) {
-		setValue(Property.cubicInterpolationMode, mode != null ? mode.getValue() : UndefinedValues.STRING);
+		setValue(Property.CUBIC_INTERPOLATION_MODE, mode);
 	}
 
 	/**
@@ -140,8 +162,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @return algorithm used to interpolate a smooth curve from the discrete data points.
 	 */
 	public CubicInterpolationMode getCubicInterpolationMode() {
-		String value = getValue(Property.cubicInterpolationMode, UndefinedValues.STRING);
-		return CubicInterpolationMode.getModeByValue(value, getDefaultValues().getElements().getLine().getCubicInterpolationMode());
+		return getValue(Property.CUBIC_INTERPOLATION_MODE, CubicInterpolationMode.class, CubicInterpolationMode.DEFAULT);
 	}
 
 	/**
@@ -150,7 +171,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @param showLine <code>false</code> if the line is not drawn for this dataset.
 	 */
 	public void setShowLine(boolean showLine) {
-		setValue(Property.showLine, showLine);
+		setValue(Property.SHOW_LINE, showLine);
 	}
 
 	/**
@@ -159,7 +180,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @return <code>false</code> if the line is not drawn for this dataset.
 	 */
 	public boolean isShowLine() {
-		return getValue(Property.showLine, getDefaultValues().isShowLines());
+		return getValue(Property.SHOW_LINE, getDefaultValues().isShowLines());
 	}
 
 	/**
@@ -170,7 +191,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 *            data will create a break in the line
 	 */
 	public void setSpanGaps(boolean spanGaps) {
-		setValue(Property.spanGaps, spanGaps);
+		setValue(Property.SPAN_GAPS, spanGaps);
 	}
 
 	/**
@@ -181,7 +202,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 *         create a break in the line.
 	 */
 	public boolean isSpanGaps() {
-		return getValue(Property.spanGaps, getDefaultValues().isSpanGaps());
+		return getValue(Property.SPAN_GAPS, getDefaultValues().isSpanGaps());
 	}
 
 	/**
@@ -194,10 +215,10 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 		// checks if no stepped line
 		if (!line) {
 			// sets boolean value instead of string one
-			setValue(Property.steppedLine, false);
+			setValue(Property.STEPPED_LINE, false);
 		} else {
 			// sets value before, equals to true
-			setValue(Property.steppedLine, SteppedLine.before);
+			setValue(Property.STEPPED_LINE, SteppedLine.BEFORE);
 		}
 	}
 
@@ -209,12 +230,12 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 */
 	public void setSteppedLine(SteppedLine line) {
 		// checks if no stepped line
-		if (SteppedLine.nosteppedline.equals(line)) {
+		if (SteppedLine.FALSE.equals(line)) {
 			// sets boolean value instead of string one
-			setValue(Property.steppedLine, false);
+			setValue(Property.STEPPED_LINE, false);
 		} else {
 			// sets value
-			setValue(Property.steppedLine, line);
+			setValue(Property.STEPPED_LINE, line);
 		}
 	}
 
@@ -225,11 +246,11 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 */
 	public SteppedLine getSteppedLine() {
 		// checks if value of stepped line is a boolean
-		if (ObjectType.Boolean.equals(type(Property.steppedLine))) {
-			return SteppedLine.nosteppedline;
+		if (ObjectType.BOOLEAN.equals(type(Property.STEPPED_LINE))) {
+			return SteppedLine.FALSE;
 		} else {
 			// otherwise returns the steppedline
-			return getValue(Property.steppedLine, SteppedLine.class, SteppedLine.nosteppedline);
+			return getValue(Property.STEPPED_LINE, SteppedLine.class, SteppedLine.FALSE);
 		}
 	}
 
@@ -240,9 +261,9 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @param data an array of strings
 	 */
 	public void setDataString(String... data) {
-		setArrayValue(Dataset.Property.data, ArrayString.fromOrNull(data));
+		setArrayValue(Dataset.Property.DATA, ArrayString.fromOrNull(data));
 		// sets data type checking if the key exists
-		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.strings : DataType.unknown);
+		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.STRINGS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -252,9 +273,9 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @param data a list of strings
 	 */
 	public void setDataString(List<String> data) {
-		setArrayValue(Dataset.Property.data, ArrayString.fromOrNull(data));
+		setArrayValue(Dataset.Property.DATA, ArrayString.fromOrNull(data));
 		// sets data type checking if the key exists
-		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.strings : DataType.unknown);
+		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.STRINGS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -276,18 +297,18 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 */
 	public List<String> getDataString(boolean binding) {
 		// checks if is a string data type
-		if (has(Dataset.Property.data) && DataType.strings.equals(getDataType())) {
+		if (has(Dataset.Property.DATA) && DataType.STRINGS.equals(getDataType())) {
 			/// returns strings
-			ArrayString array = getArrayValue(Dataset.Property.data);
+			ArrayString array = getArrayValue(Dataset.Property.DATA);
 			return ArrayListHelper.list(array);
 		}
 		// checks if wants to bind the array
 		if (binding) {
 			ArrayStringList result = new ArrayStringList();
 			// set value
-			setArrayValue(Dataset.Property.data, ArrayString.from(result));
+			setArrayValue(Dataset.Property.DATA, ArrayString.from(result));
 			// sets data type
-			setValue(Dataset.Property._charbaDataType, DataType.strings);
+			setValue(Dataset.Property.CHARBA_DATA_TYPE, DataType.STRINGS);
 			// returns list
 			return result;
 		}
@@ -302,9 +323,9 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 */
 	@Override
 	public void setDataPoints(DataPoint... datapoints) {
-		setArrayValue(Dataset.Property.data, ArrayObject.fromOrNull(datapoints));
+		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(datapoints));
 		// sets data type checking if the key exists
-		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.points : DataType.unknown);
+		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
 
 	/**
@@ -314,9 +335,9 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 */
 	@Override
 	public void setDataPoints(List<DataPoint> datapoints) {
-		setArrayValue(Dataset.Property.data, ArrayObject.fromOrNull(datapoints));
+		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(datapoints));
 		// sets data type checking if the key exists
-		setValue(Dataset.Property._charbaDataType, has(Dataset.Property.data) ? DataType.points : DataType.unknown);
+		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
 
 	/**

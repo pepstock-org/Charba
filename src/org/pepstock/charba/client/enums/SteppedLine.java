@@ -24,22 +24,43 @@ import org.pepstock.charba.client.commons.Key;
  */
 public enum SteppedLine implements Key
 {
-
 	/**
 	 * Step-before Interpolation
 	 */
-	before,
+	BEFORE("before"),
 	/**
 	 * Step-after Interpolation
 	 */
-	after,
+	AFTER("after"),
 	/**
 	 * Step-middle Interpolation
 	 */
-	middle,
+	MIDDLE("middle"),
 	/**
 	 * No Step Interpolation (default)
 	 */
-	nosteppedline;
+	FALSE("false");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private SteppedLine(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
 
 }

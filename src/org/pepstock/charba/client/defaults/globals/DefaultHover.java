@@ -37,7 +37,7 @@ public final class DefaultHover implements IsDefaultHover {
 	 */
 	@Override
 	public InteractionMode getMode() {
-		return InteractionMode.nearest;
+		return InteractionMode.NEAREST;
 	}
 
 	/*
@@ -67,7 +67,7 @@ public final class DefaultHover implements IsDefaultHover {
 	 */
 	@Override
 	public InteractionAxis getAxis() {
-		return InteractionAxis.x;
+		return InteractionAxis.X;
 	}
 
 }

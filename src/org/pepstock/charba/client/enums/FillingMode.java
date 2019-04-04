@@ -38,17 +38,40 @@ public enum FillingMode implements Key
 	/**
 	 * Links datasets by absolute dataset index, as integer (1,2,3,...)
 	 */
-	absoluteDatasetIndex,
+	ABSOLUTE_DATASET_INDEX("absoluteDatasetIndex"),
 	/**
 	 * Links datastes by relative dataset index, as string ("-1", "-2", "+1", "+2",...)
 	 */
-	relativeDatasetIndex,
+	RELATIVE_DATASET_INDEX("relativeDatasetIndex"),
 	/**
 	 * Predefined values by {@link Fill}.
 	 */
-	predefined,
+	PREDEFINED("predefined"),
 	/**
 	 * It is never really used, because the value is boolean.
 	 */
-	predefinedBoolean
+	PREDEFINED_BOOLEAN("predefinedBoolean");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private FillingMode(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

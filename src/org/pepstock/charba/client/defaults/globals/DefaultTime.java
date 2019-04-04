@@ -108,7 +108,7 @@ public class DefaultTime implements IsDefaultTime {
 	 */
 	@Override
 	public TimeUnit getMinUnit() {
-		return TimeUnit.millisecond;
+		return TimeUnit.MILLISECOND;
 	}
 
 	/*

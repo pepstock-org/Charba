@@ -24,13 +24,35 @@ import org.pepstock.charba.client.commons.Key;
  */
 public enum BorderAlign implements Key
 {
-
 	/**
 	 * When 'center' is set, the borders of arcs next to each other will overlap. This is the default.
 	 */
-	center,
+	CENTER("center"),
 	/**
 	 * When 'inner' is set, it is guaranteed that all the borders are not overlap.
 	 */
-	inner;
+	INNER("inner");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private BorderAlign(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

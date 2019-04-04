@@ -86,7 +86,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public InteractionMode getMode() {
-		return InteractionMode.nearest;
+		return InteractionMode.NEAREST;
 	}
 
 	/*
@@ -106,7 +106,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public IsTooltipPosition getPosition() {
-		return TooltipPosition.average;
+		return TooltipPosition.AVERAGE;
 	}
 
 	/*
@@ -146,7 +146,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public FontStyle getTitleFontStyle() {
-		return FontStyle.bold;
+		return FontStyle.BOLD;
 	}
 
 	/*
@@ -156,7 +156,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public TextAlign getTitleAlign() {
-		return TextAlign.left;
+		return TextAlign.LEFT;
 	}
 
 	/*
@@ -216,7 +216,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public FontStyle getBodyFontStyle() {
-		return FontStyle.normal;
+		return FontStyle.NORMAL;
 	}
 
 	/*
@@ -226,7 +226,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public TextAlign getBodyAlign() {
-		return TextAlign.left;
+		return TextAlign.LEFT;
 	}
 
 	/*
@@ -276,7 +276,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public FontStyle getFooterFontStyle() {
-		return FontStyle.bold;
+		return FontStyle.BOLD;
 	}
 
 	/*
@@ -286,7 +286,7 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	 */
 	@Override
 	public TextAlign getFooterAlign() {
-		return TextAlign.left;
+		return TextAlign.LEFT;
 	}
 
 	/*

@@ -28,17 +28,40 @@ public enum Position implements Key
 	/**
 	 * The top property sets the top edge of an element to a unit above/below its normal position.
 	 */
-	top,
+	TOP("top"),
 	/**
 	 * the left property sets the left edge of an element to a unit to the left/right to its normal position.
 	 */
-	left,
+	LEFT("left"),
 	/**
 	 * the bottom property sets the bottom edge of an element to a unit above/below its normal position.
 	 */
-	bottom,
+	BOTTOM("bottom"),
 	/**
 	 * the right property sets the right edge of an element to a unit to the left/right to its normal position.
 	 */
-	right;
+	RIGHT("right");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private Position(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

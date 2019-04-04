@@ -129,7 +129,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 			// gets the options object
 			NativeObject object = getValue(Property.OPTIONS);
 			// checks if the charba id exists and is a number
-			if (ObjectType.Number.equals(JsHelper.get().typeOf(object, Property.CHARBA_ID.value()))) {
+			if (ObjectType.NUMBER.equals(JsHelper.get().typeOf(object, Property.CHARBA_ID.value()))) {
 				// returns the number
 				return JsHelper.get().propertyAsInt(object, Property.CHARBA_ID.value());
 			}
@@ -144,7 +144,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the type of scale. Default is {@link org.pepstock.charba.client.enums.AxisType#category}.
 	 */
 	public final AxisType getType() {
-		return getValue(Property.TYPE, AxisType.class, AxisType.category);
+		return getValue(Property.TYPE, AxisType.class, AxisType.CATEGORY);
 	}
 
 	/**

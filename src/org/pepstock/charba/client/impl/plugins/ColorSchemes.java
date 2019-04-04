@@ -182,9 +182,9 @@ public final class ColorSchemes extends AbstractPlugin {
 		// gets data checking type
 		DataType type = dataset.getDataType();
 		// depending on data type, gets the amount of data
-		if (DataType.numbers.equals(type)) {
+		if (DataType.NUMBERS.equals(type)) {
 			amountOfData = dataset.getData().size();
-		} else if (DataType.points.equals(type) && dataset instanceof HasDataPoints) {
+		} else if (DataType.POINTS.equals(type) && dataset instanceof HasDataPoints) {
 			// ONLY datasets which implements the interface have got the data POINTS
 			HasDataPoints dataPointsDataset = (HasDataPoints) dataset;
 			amountOfData = dataPointsDataset.getDataPoints().size();

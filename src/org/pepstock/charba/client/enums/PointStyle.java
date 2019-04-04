@@ -24,14 +24,37 @@ import org.pepstock.charba.client.commons.Key;
  */
 public enum PointStyle implements Key
 {
-	circle,
-	cross,
-	crossRot,
-	dash,
-	line,
-	rect,
-	rectRounded,
-	rectRot,
-	star,
-	triangle;
+	CIRCLE("circle"),
+	CROSS("cross"),
+	CROSS_ROT("crossRot"),
+	DASH("dash"),
+	LINE("line"),
+	RECT("rect"),
+	RECT_ROUNDED("rectRounded"),
+	RECT_ROT("rectRot"),
+	STAR("star"),
+	TRIANGLE("triangle");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private PointStyle(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

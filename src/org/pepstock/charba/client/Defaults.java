@@ -215,7 +215,7 @@ public final class Defaults {
 		 */
 		ChartOptions chart(Type type) {
 			// checks if the property is present
-			if (ObjectType.Object.equals(type(type))) {
+			if (ObjectType.OBJECT.equals(type(type))) {
 				return new ChartOptions(type, getValue(type));
 			} else {
 				// if here, the chart type is not defined (could be a controller)

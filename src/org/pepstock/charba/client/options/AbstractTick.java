@@ -83,7 +83,7 @@ public abstract class AbstractTick<P extends AbstractModel<?, ?>, D extends IsDe
 		// creates default
 		double defaultValue = getDefaultValues().getLineHeight();
 		// checks type if number
-		if (ObjectType.Number.equals(type(Property.lineHeight))) {
+		if (ObjectType.NUMBER.equals(type(Property.lineHeight))) {
 			// reads and returns as double
 			return getValue(Property.lineHeight, defaultValue);
 		}
@@ -101,7 +101,7 @@ public abstract class AbstractTick<P extends AbstractModel<?, ?>, D extends IsDe
 		// creates default
 		String defaultValue = String.valueOf(getDefaultValues().getLineHeight());
 		// checks type if string
-		if (ObjectType.String.equals(type(Property.lineHeight))) {
+		if (ObjectType.STRING.equals(type(Property.lineHeight))) {
 			// reads and returns as string
 			return getValue(Property.lineHeight, defaultValue);
 		}

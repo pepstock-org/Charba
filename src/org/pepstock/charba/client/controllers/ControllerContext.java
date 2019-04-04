@@ -87,7 +87,7 @@ public final class ControllerContext {
 	@JsOverlay
 	public final int getIndex() {
 		// checks if there is the property
-		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "index"))) {
+		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "index"))) {
 			return UndefinedValues.INTEGER;
 		}
 		return getNativeIndex();

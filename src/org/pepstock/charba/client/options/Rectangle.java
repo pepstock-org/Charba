@@ -88,7 +88,7 @@ public class Rectangle extends AbstractElement<IsDefaultRectangle> implements Is
 	 */
 	public BorderSkipped getBorderSkipped() {
 		// checks if 'false' has been set
-		if (ObjectType.Boolean.equals(type(Property.borderSkipped))) {
+		if (ObjectType.BOOLEAN.equals(type(Property.borderSkipped))) {
 			// returns is false
 			return BorderSkipped.noborderskipped;
 		}

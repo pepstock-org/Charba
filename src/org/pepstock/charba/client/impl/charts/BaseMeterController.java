@@ -159,7 +159,7 @@ final class BaseMeterController extends AbstractController {
 		// value to show with format required
 		final String valueToShow = getFormattedValue(value, options.getFormat());
 		// gets font style
-		final FontStyle style = options.getFontStyle() == null ? FontStyle.normal : options.getFontStyle();
+		final FontStyle style = options.getFontStyle() == null ? FontStyle.NORMAL : options.getFontStyle();
 		// gets font family
 		final String fontFamily = options.getFontFamily() == null ? Defaults.get().getGlobal().getDefaultFontFamily() : options.getFontFamily();
 		// gets font color

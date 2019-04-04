@@ -47,7 +47,7 @@ public final class RelativeDatasetIndexFill extends AbstractDatasetIndexFill {
 	RelativeDatasetIndexFill(String index) {
 		// creates the abstract object passing the filling mode (always relative filling mode
 		// and undefined integer for index as integer (relative ONLY string)
-		super(FillingMode.relativeDatasetIndex, UndefinedValues.INTEGER, index);
+		super(FillingMode.RELATIVE_DATASET_INDEX, UndefinedValues.INTEGER, index);
 		// creates regular expression to check th argument
 		RegExp regExp = RegExp.compile(RELATIVE_INDEX_PATTERN);
 		// applies the regex
@@ -58,16 +58,16 @@ public final class RelativeDatasetIndexFill extends AbstractDatasetIndexFill {
 			throw new IllegalArgumentException("Value is not a valid relative index");
 		}
 		// creates the name to return
-		this.name = FillingMode.relativeDatasetIndex.name() + ":" + getValue();
+		this.name = FillingMode.RELATIVE_DATASET_INDEX.value() + ":" + getValue();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.commons.Key#name()
+	 * @see org.pepstock.charba.client.commons.Key#value()
 	 */
 	@Override
-	public String name() {
+	public String value() {
 		return name;
 	}
 

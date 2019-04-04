@@ -28,26 +28,48 @@ public enum Event implements Key
 	/**
 	 * The user moves the mouse over an element
 	 */
-	mousemove,
+	MOUSEMOVE("mousemove"),
 	/**
 	 * The user moves the mouse away from an element
 	 */
-	mouseout,
+	MOUSEOUT("mouseout"),
 	/**
 	 * The user clicks an element
 	 */
-	click,
+	CLICK("click"),
 	/**
 	 * The user touches a point is placed on the touch surface.
 	 */
-	touchstart,
+	TOUCHSTART("touchstart"),
 	/**
 	 * The user touches a point is moved along the touch surface.
 	 */
-	touchmove,
+	TOUCHMOVE("touchmove"),
 	/**
 	 * The user touches a point is removed from the touch surface.
 	 */
-	touchend;
+	TOUCHEND("touchend");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private Event(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
 
 }

@@ -133,12 +133,12 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 */
 	public BorderSkipped getBorderSkipped() {
 		// checks if 'false' has been set
-		if (ObjectType.Boolean.equals(type(Property.BORDER_SKIPPED))) {
+		if (ObjectType.BOOLEAN.equals(type(Property.BORDER_SKIPPED))) {
 			// returns is false
-			return BorderSkipped.noborderskipped;
+			return BorderSkipped.FALSE;
 		}
 		// otherwise returns the enum value as string
-		return getValue(Property.BORDER_SKIPPED, BorderSkipped.class, BorderSkipped.noborderskipped);
+		return getValue(Property.BORDER_SKIPPED, BorderSkipped.class, BorderSkipped.FALSE);
 	}
 
 	/**
@@ -265,7 +265,7 @@ public final class DatasetViewItem extends NativeObjectContainer {
 	 */
 	public List<PointStyle> getPointStyle() {
 		// checks if the property is an array
-		if (ObjectType.Array.equals(type(Property.POINT_STYLE))) {
+		if (ObjectType.ARRAY.equals(type(Property.POINT_STYLE))) {
 			// if array, maps into array
 			ArrayString array = getArrayValue(Property.POINT_STYLE);
 			// returns list

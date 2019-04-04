@@ -30,56 +30,33 @@ public enum CubicInterpolationMode implements Key
 	 * datasets.<br>
 	 * Default.
 	 */
-	defaults("default"),
+	DEFAULT("default"),
 	/**
 	 * The 'monotone' algorithm is more suited to datasets: it preserves monotonicity (or piecewise monotonicity) of the dataset
 	 * being interpolated, and ensures local extremums (if any) stay at input data points.
 	 */
-	monotone("monotone");
+	MONOTONE("monotone");
 
-	// value to assign into configuration
+	// name value of property
 	private final String value;
 
 	/**
-	 * Creates the object with the value to assign into configuration.
+	 * Creates with the property value to use into native object.
 	 * 
-	 * @param value value to assign into configuration
+	 * @param value value of property name
 	 */
 	private CubicInterpolationMode(String value) {
 		this.value = value;
 	}
 
-	/**
-	 * Returns the value to assign into configuration.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the value to assign into configuration
+	 * @see org.pepstock.charba.client.commons.Key#value()
 	 */
-	public final String getValue() {
+	@Override
+	public String value() {
 		return value;
-	}
-
-	/**
-	 * Returns the interpolation mode by the string value.
-	 * 
-	 * @param value value of interpolation mode
-	 * @param defaultValue default interpolation mode
-	 * @return if value is <code>null</code>, returns the default value
-	 */
-	public static CubicInterpolationMode getModeByValue(String value, CubicInterpolationMode defaultValue) {
-		// checks if value is consistent
-		if (value != null) {
-			// scans all modes to search the one which has got that value
-			for (CubicInterpolationMode mode : values()) {
-				// the value is equals to the argument
-				if (mode.getValue().equalsIgnoreCase(value)) {
-					// returns the interpolation mode
-					return mode;
-				}
-			}
-		}
-		// if here, not found
-		// then returns the defaults
-		return defaultValue != null ? defaultValue : defaults;
 	}
 
 }

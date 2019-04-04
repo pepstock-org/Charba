@@ -51,7 +51,7 @@ public final class DefaultTitle extends AbstractDefaultFontItem implements IsDef
 	 */
 	@Override
 	public Position getPosition() {
-		return Position.top;
+		return Position.TOP;
 	}
 
 	/*
@@ -91,7 +91,7 @@ public final class DefaultTitle extends AbstractDefaultFontItem implements IsDef
 	 */
 	@Override
 	public FontStyle getFontStyle() {
-		return FontStyle.bold;
+		return FontStyle.BOLD;
 	}
 
 }

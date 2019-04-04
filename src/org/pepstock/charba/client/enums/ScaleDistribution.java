@@ -27,9 +27,32 @@ public enum ScaleDistribution implements Key
 	/**
 	 * Data are spread according to their time (distances can vary).
 	 */
-	linear,
+	LINEAR("linear"),
 	/**
 	 * Data are spread at the same distance from each other.
 	 */
-	series
+	SERIES("series");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private ScaleDistribution(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
+
 }

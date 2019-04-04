@@ -183,7 +183,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			// overrides the tooltip configuration disabling it
 			chart.getOptions().getTooltips().setEnabled(false);
 			// overrides the events configuration setting only the following
-			chart.getOptions().setEvents(Event.click, Event.touchstart);
+			chart.getOptions().setEvents(Event.CLICK, Event.TOUCHSTART);
 			// checks if handler on legend to avoid to remove all datasets has been already added
 			// and if legend is display
 			if (!LEGEND_HANDLERS_STATUS.containsKey(chart.getId()) && chart.getOptions().getLegend().isDisplay()) {
@@ -369,7 +369,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		SelectionHandler handler = HANDLERS.get(chart.getId());
 		// checks if it is a click event
 		// ONLY click are caught
-		if (Event.click.name().equalsIgnoreCase(event.getType())) {
+		if (Event.CLICK.value().equalsIgnoreCase(event.getType())) {
 			// option instance
 			DatasetsItemsSelectorOptions pOptions = handler.getOptions();
 			// get clear selection element

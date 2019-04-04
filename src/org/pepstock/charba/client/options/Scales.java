@@ -124,7 +124,7 @@ public final class Scales extends AbstractModel<Options, IsDefaultScales> implem
 	 */
 	public Display getDisplay() {
 		// checks if is boolean
-		if (ObjectType.Boolean.equals(type(Property.display))) {
+		if (ObjectType.BOOLEAN.equals(type(Property.display))) {
 			// gets value
 			boolean value = getValue(Property.display, true);
 			// returns value

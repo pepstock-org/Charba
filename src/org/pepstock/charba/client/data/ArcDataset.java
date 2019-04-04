@@ -16,8 +16,8 @@
 package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.callbacks.BorderAlignCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -47,7 +47,30 @@ abstract class ArcDataset extends HovingDataset {
 	 */
 	private enum Property implements Key
 	{
-		borderAlign
+		BORDER_ALIGN("borderAlign");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -82,7 +105,7 @@ abstract class ArcDataset extends HovingDataset {
 	 * @param align the property to set the border alignment on chart datasets
 	 */
 	public void setBorderAlign(BorderAlign align) {
-		setValue(Property.borderAlign, align);
+		setValue(Property.BORDER_ALIGN, align);
 	}
 
 	/**
@@ -91,13 +114,13 @@ abstract class ArcDataset extends HovingDataset {
 	 * @return the property to set the border alignment on chart datasets.
 	 */
 	public BorderAlign getBorderAlign() {
-		if (ObjectType.Function.equals(type(Property.borderAlign))) {
+		if (ObjectType.FUNCTION.equals(type(Property.BORDER_ALIGN))) {
 			// checks if a callback has been set
 			// returns defaults
 			return getDefaultValues().getElements().getArc().getBorderAlign();
 		}
 		// otherwise returns the enum value as string
-		return getValue(Property.borderAlign, BorderAlign.class, getDefaultValues().getElements().getArc().getBorderAlign());
+		return getValue(Property.BORDER_ALIGN, BorderAlign.class, getDefaultValues().getElements().getArc().getBorderAlign());
 	}
 
 	/**
@@ -120,10 +143,10 @@ abstract class ArcDataset extends HovingDataset {
 		// checks if callback is consistent
 		if (borderAlignCallback != null) {
 			// adds the callback proxy function to java script object
-			setValue(Property.borderAlign, borderAlignCallbackProxy.getProxy());
+			setValue(Property.BORDER_ALIGN, borderAlignCallbackProxy.getProxy());
 		} else {
 			// otherwise sets null which removes the properties from java script object
-			remove(Property.borderAlign);
+			remove(Property.BORDER_ALIGN);
 		}
 	}
 }

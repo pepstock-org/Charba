@@ -82,7 +82,7 @@ public final class Padding extends AbstractElement {
 	 * @param padding the padding left in pixel.
 	 */
 	public void setLeft(int padding) {
-		setValue(Position.left, padding);
+		setValue(Position.LEFT, padding);
 	}
 
 	/**
@@ -91,7 +91,7 @@ public final class Padding extends AbstractElement {
 	 * @return the padding left in pixel.
 	 */
 	public int getLeft() {
-		return getValue(Position.left, defaultsOptions.getLeft());
+		return getValue(Position.LEFT, defaultsOptions.getLeft());
 	}
 
 	/**
@@ -100,7 +100,7 @@ public final class Padding extends AbstractElement {
 	 * @param padding the padding right in pixel.
 	 */
 	public void setRight(int padding) {
-		setValue(Position.right, padding);
+		setValue(Position.RIGHT, padding);
 	}
 
 	/**
@@ -109,7 +109,7 @@ public final class Padding extends AbstractElement {
 	 * @return the padding right in pixel.
 	 */
 	public int getRight() {
-		return getValue(Position.right, defaultsOptions.getRight());
+		return getValue(Position.RIGHT, defaultsOptions.getRight());
 	}
 
 	/**
@@ -118,7 +118,7 @@ public final class Padding extends AbstractElement {
 	 * @param padding the padding top in pixel.
 	 */
 	public void setTop(int padding) {
-		setValue(Position.top, padding);
+		setValue(Position.TOP, padding);
 	}
 
 	/**
@@ -127,7 +127,7 @@ public final class Padding extends AbstractElement {
 	 * @return the padding top in pixel.
 	 */
 	public int getTop() {
-		return getValue(Position.top, defaultsOptions.getTop());
+		return getValue(Position.TOP, defaultsOptions.getTop());
 	}
 
 	/**
@@ -136,7 +136,7 @@ public final class Padding extends AbstractElement {
 	 * @param padding the padding bottom in pixel.
 	 */
 	public void setBottom(int padding) {
-		setValue(Position.bottom, padding);
+		setValue(Position.BOTTOM, padding);
 	}
 
 	/**
@@ -145,6 +145,6 @@ public final class Padding extends AbstractElement {
 	 * @return the padding bottom in pixel.
 	 */
 	public int getBottom() {
-		return getValue(Position.bottom, defaultsOptions.getBottom());
+		return getValue(Position.BOTTOM, defaultsOptions.getBottom());
 	}
 }

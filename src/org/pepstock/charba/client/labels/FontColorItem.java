@@ -59,7 +59,7 @@ public final class FontColorItem extends RenderItem {
 	@JsOverlay
 	public String getBackgroundColorAsString() {
 		// checks if is defined
-		if (ObjectType.Undefined.equals(JsHelper.get().typeOf(this, "backgroundColor"))) {
+		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "backgroundColor"))) {
 			return HtmlColor.White.toRGBA();
 		}
 		// returns property value

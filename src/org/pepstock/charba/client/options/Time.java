@@ -169,7 +169,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 */
 	public TimeUnit getRound() {
 		// checks if value is a boolean
-		if (ObjectType.Boolean.equals(type(Property.round))) {
+		if (ObjectType.BOOLEAN.equals(type(Property.round))) {
 			// if is a boolean FALSE value
 			// returns no unit
 			return getDefaultValues().getRound();
@@ -229,7 +229,7 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 */
 	public TimeUnit getUnit() {
 		// checks if value is a boolean
-		if (ObjectType.Boolean.equals(type(Property.unit))) {
+		if (ObjectType.BOOLEAN.equals(type(Property.unit))) {
 			// if is a boolean FALSE value
 			// returns no unit
 			return getDefaultValues().getUnit();

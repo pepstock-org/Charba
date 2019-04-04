@@ -42,7 +42,7 @@ public final class LegendHitBoxItem extends SizeItem {
 	 * @return the padding left in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getLeft() {
-		return getValue(Position.left, UndefinedValues.INTEGER);
+		return getValue(Position.LEFT, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -51,7 +51,7 @@ public final class LegendHitBoxItem extends SizeItem {
 	 * @return the padding top in pixel. Default is {@link UndefinedValues#INTEGER}.
 	 */
 	public int getTop() {
-		return getValue(Position.top, UndefinedValues.INTEGER);
+		return getValue(Position.TOP, UndefinedValues.INTEGER);
 	}
 
 	/**
@@ -62,7 +62,7 @@ public final class LegendHitBoxItem extends SizeItem {
 	 */
 	public boolean isInside(ChartNativeEvent event) {
 		// checks is properties are consistent
-		if (has(Position.left) && has(Position.top)) {
+		if (has(Position.LEFT) && has(Position.TOP)) {
 			// checks X
 			boolean isX = event.getLayerX() >= getLeft() && event.getLayerX() <= (getLeft() + getWidth());
 			// checks Y

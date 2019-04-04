@@ -507,7 +507,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			// if type is consistent
 			if (type != null) {
 				// returns the option for x or y scale.
-				return getCartesianScale(CartesianAxisType.x.equals(type) ? options.getScales().getXAxes() : options.getScales().getYAxes());
+				return getCartesianScale(CartesianAxisType.X.equals(type) ? options.getScales().getXAxes() : options.getScales().getYAxes());
 			}
 		} else if (ScaleType.single.equals(getChart().getType().scaleType())) {
 			// being a single scale

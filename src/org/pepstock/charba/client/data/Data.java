@@ -42,10 +42,33 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 */
 	private enum Property implements Key
 	{
-		labels,
-		datasets,
-		xLabels,
-		yLabels
+		LABELS("labels"),
+		DATASETS("datasets"),
+		X_LABELS("xLabels"),
+		Y_LABELS("yLabels");
+
+		// name value of property
+		private final String value;
+
+		/**
+		 * Creates with the property value to use into native object.
+		 * 
+		 * @param value value of property name
+		 */
+		private Property(String value) {
+			this.value = value;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.Key#value()
+		 */
+		@Override
+		public String value() {
+			return value;
+		}
+
 	}
 
 	/**
@@ -75,7 +98,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * @param labels labels object to manage also multi-line labels
 	 */
 	public void setLabels(Labels labels) {
-		setArrayValue(Property.labels, labels.getArray());
+		setArrayValue(Property.LABELS, labels.getArray());
 	}
 
 	/**
@@ -95,9 +118,9 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 */
 	public Labels getLabels(boolean binding) {
 		// checks if there is the property
-		if (has(Property.labels)) {
+		if (has(Property.LABELS)) {
 			// gets array
-			ArrayMixedObject array = getArrayValue(Property.labels);
+			ArrayMixedObject array = getArrayValue(Property.LABELS);
 			// returns labels
 			return Labels.load(array);
 		}
@@ -133,7 +156,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * @param labels labels object to manage also multi-line labels
 	 */
 	public void setXLabels(Labels labels) {
-		setArrayValue(Property.xLabels, labels.getArray());
+		setArrayValue(Property.X_LABELS, labels.getArray());
 	}
 
 	/**
@@ -153,9 +176,9 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 */
 	public Labels getXLabels(boolean binding) {
 		// checks if there is the property
-		if (has(Property.xLabels)) {
+		if (has(Property.X_LABELS)) {
 			// gets array
-			ArrayMixedObject array = getArrayValue(Property.xLabels);
+			ArrayMixedObject array = getArrayValue(Property.X_LABELS);
 			// returns labels
 			return Labels.load(array);
 		}
@@ -191,7 +214,7 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * @param labels labels object to manage also multi-line labels
 	 */
 	public void setYLabels(Labels labels) {
-		setArrayValue(Property.yLabels, labels.getArray());
+		setArrayValue(Property.Y_LABELS, labels.getArray());
 	}
 
 	/**
@@ -211,9 +234,9 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 */
 	public Labels getYLabels(boolean binding) {
 		// checks if there is the property
-		if (has(Property.yLabels)) {
+		if (has(Property.Y_LABELS)) {
 			// gets array
-			ArrayMixedObject array = getArrayValue(Property.yLabels);
+			ArrayMixedObject array = getArrayValue(Property.Y_LABELS);
 			// returns labels
 			return Labels.load(array);
 		}
@@ -242,10 +265,10 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 			// adds all datasets
 			this.currentDatasets.addAll(datasets);
 			// sets datasets to native object
-			setArrayValue(Property.datasets, this.currentDatasets);
+			setArrayValue(Property.DATASETS, this.currentDatasets);
 		} else {
 			// removes the existing property
-			removeIfExists(Property.datasets);
+			removeIfExists(Property.DATASETS);
 		}
 	}
 
@@ -267,9 +290,9 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	public List<Dataset> getDatasets(boolean binding) {
 		// there is not the property and the binding is requested
 		// then adds array to container
-		if (!has(Property.datasets) && binding) {
+		if (!has(Property.DATASETS) && binding) {
 			// sets datasets to native object
-			setArrayValue(Property.datasets, this.currentDatasets);
+			setArrayValue(Property.DATASETS, this.currentDatasets);
 		}
 		// returns datasets
 		return this.currentDatasets;

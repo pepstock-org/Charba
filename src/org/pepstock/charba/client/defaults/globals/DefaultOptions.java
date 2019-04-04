@@ -239,7 +239,7 @@ public class DefaultOptions implements IsDefaultOptions {
 	 */
 	@Override
 	public FontStyle getDefaultFontStyle() {
-		return FontStyle.normal;
+		return FontStyle.NORMAL;
 	}
 
 	/*

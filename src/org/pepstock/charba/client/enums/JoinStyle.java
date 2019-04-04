@@ -31,18 +31,40 @@ public enum JoinStyle implements Key
 	 * Fills an additional triangular area between the common end point of connected segments, and the separate outside
 	 * rectangular corners of each segment.
 	 */
-	bevel,
+	BEVEL("bevel"),
 	/**
 	 * Rounds off the corners of a shape by filling an additional sector of disc centered at the common end point of connected
 	 * segments.<br>
 	 * The radius for these rounded corners is equal to the line width.
 	 */
-	round,
+	ROUND("round"),
 	/**
 	 * Connected segments are joined by extending their outside edges to connect at a single point, with the effect of filling
 	 * an additional shaped area.<br>
 	 * This is the default.
 	 */
-	miter;
+	MITER("miter");
+
+	// name value of property
+	private final String value;
+
+	/**
+	 * Creates with the property value to use into native object.
+	 * 
+	 * @param value value of property name
+	 */
+	private JoinStyle(String value) {
+		this.value = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
+	}
 
 }

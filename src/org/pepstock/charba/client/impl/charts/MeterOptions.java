@@ -63,7 +63,7 @@ public class MeterOptions extends AbstractPieOptions {
 
 	private String fontFamily = Defaults.get().getGlobal().getDefaultFontFamily();
 
-	private FontStyle fontStyle = FontStyle.normal;
+	private FontStyle fontStyle = FontStyle.NORMAL;
 
 	private IsColor displayFontColor = DEFAULT_DISPLAY_COLOR;
 

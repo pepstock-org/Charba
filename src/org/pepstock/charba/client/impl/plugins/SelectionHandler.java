@@ -111,7 +111,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			clearSelection.setLayoutPadding(additionalPadding);
 			// based on the position, it must define space to show the label
 			// to clear the selection, leveraging on padding of chart layout
-			if (clearSelection.getPosition().equals(Position.top)) {
+			if (clearSelection.getPosition().equals(Position.TOP)) {
 				// if the clear selection must be set on TOP
 				// gets the padding set by chart configuration
 				int padding = chart.getOptions().getLayout().getPadding().getTop();
@@ -373,7 +373,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID());
 		// if chart is line or axis time is equals to 2
 		// else if bar chart is equals to 1
-		int minimDatasetsItemsCount = chart.getType().equals(ChartType.LINE) ? 2 : AxisType.time.equals(scaleItem.getType()) ? 2 : 1;
+		int minimDatasetsItemsCount = chart.getType().equals(ChartType.LINE) ? 2 : AxisType.TIME.equals(scaleItem.getType()) ? 2 : 1;
 		// returns checking the value with amount of datasets items
 		return getDatasetsItemsCount() >= minimDatasetsItemsCount;
 	}
@@ -447,7 +447,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// amount of dataset items
 		// in case of time axis, it must be reduce by1 because the dataset items
 		// are always located in line with tick
-		int areaCount = chart.getType().equals(ChartType.LINE) ? getDatasetsItemsCount() - 1 : AxisType.time.equals(scaleItem.getType()) ? getDatasetsItemsCount() - 1 : getDatasetsItemsCount();
+		int areaCount = chart.getType().equals(ChartType.LINE) ? getDatasetsItemsCount() - 1 : AxisType.TIME.equals(scaleItem.getType()) ? getDatasetsItemsCount() - 1 : getDatasetsItemsCount();
 		// gets the left of chart area as starting point
 		double scaleTickX = chartArea.getLeft();
 		// calculates the section size for every dataset item
@@ -533,7 +533,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID());
 			// checks the type of chart and scale
 			// LINE and axis TIME must be added by 1 end of datasets
-			if (chart.getType().equals(ChartType.LINE) || AxisType.time.equals(scaleItem.getType())) {
+			if (chart.getType().equals(ChartType.LINE) || AxisType.TIME.equals(scaleItem.getType())) {
 				// fires the event that dataset items selection
 				chart.fireEvent(new DatasetRangeSelectionEvent(event, items.getStart(), items.getEnd() + 1));
 			} else if (chart.getType().equals(ChartType.BAR)) {
@@ -555,7 +555,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		ScaleItem scaleItem = node.getScales().getItems().get(options.getXAxisID());
 		// calculates the amount of sections into chart based on
 		// amount of dataset items
-		int areaCount = chart.getType().equals(ChartType.LINE) ? getDatasetsItemsCount() - 1 : AxisType.time.equals(scaleItem.getType()) ? getDatasetsItemsCount() - 1 : getDatasetsItemsCount();
+		int areaCount = chart.getType().equals(ChartType.LINE) ? getDatasetsItemsCount() - 1 : AxisType.TIME.equals(scaleItem.getType()) ? getDatasetsItemsCount() - 1 : getDatasetsItemsCount();
 		// gets the left of chart area as starting point
 		double scaleTickX = chartArea.getLeft();
 		// calculates the section size for every dataset item
@@ -784,7 +784,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			// calculate Y points
 			// ---------------------------------
 			// if the position is top
-			if (clearSelection.getPosition().equals(Position.top)) {
+			if (clearSelection.getPosition().equals(Position.TOP)) {
 				// for all elements the Y value is equals to margin
 				// set into configuration
 				double y = clearSelection.getMargin();

@@ -27,31 +27,44 @@ public enum Fill implements IsFill
 	/**
 	 * Fill the area from the bottom X axis
 	 */
-	start(FillingMode.predefined),
+	START("start", FillingMode.PREDEFINED),
 	/**
 	 * Fill the area from the top X axis
 	 */
-	end(FillingMode.predefined),
+	END("end", FillingMode.PREDEFINED),
 	/**
 	 * Fill the area from 0 axis to top or bottom, depending on value.<br>
 	 * Default.
 	 */
-	origin(FillingMode.predefined),
+	ORIGIN("origin", FillingMode.PREDEFINED),
 	/**
 	 * Does not fill any area
 	 */
-	nofill(FillingMode.predefined);
+	FALSE("false", FillingMode.PREDEFINED);
 
 	// filling mode, always predefined
 	private final FillingMode mode;
+	// name value of property
+	private final String value;
 
 	/**
 	 * Creates the predefined fillings by own mode, always {@link FillingMode#predefined}.
 	 * 
 	 * @param the predefined fillings by own mode, always {@link FillingMode#predefined}.
 	 */
-	private Fill(FillingMode mode) {
+	private Fill(String value, FillingMode mode) {
+		this.value = value;
 		this.mode = mode;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.commons.Key#value()
+	 */
+	@Override
+	public String value() {
+		return value;
 	}
 
 	/*
@@ -124,7 +137,7 @@ public enum Fill implements IsFill
 			// scans all predefined fill values
 			for (Fill fill : values()) {
 				// checks if argument is predefined
-				if (fill.name().equalsIgnoreCase(index)) {
+				if (fill.value().equalsIgnoreCase(index)) {
 					// returns it
 					return fill;
 				}
