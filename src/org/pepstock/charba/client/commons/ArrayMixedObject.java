@@ -122,7 +122,7 @@ public final class ArrayMixedObject extends Array {
 	@JsOverlay
 	void clear() {
 		splice(0, length());
-	};
+	}
 
 	/**
 	 * Removes the element at the specified position in this array. Shifts any subsequent elements to the left (subtracts one
@@ -146,7 +146,7 @@ public final class ArrayMixedObject extends Array {
 	@JsOverlay
 	void insertAt(int index, Object item) {
 		splice(index, 0, item);
-	};
+	}
 
 	/**
 	 * Gets the value at a given index.
