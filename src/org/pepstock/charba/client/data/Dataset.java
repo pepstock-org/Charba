@@ -399,7 +399,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * Returns the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array
 	 * corresponds to the label at the same index on the x axis.
 	 * 
-	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#numbers}.
+	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#NUMBERS}.
 	 */
 	public List<Double> getData() {
 		return getData(false);
@@ -410,7 +410,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * corresponds to the label at the same index on the x axis.
 	 * 
 	 * @param binding if <code>true</code> binds the new array list into container
-	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#numbers}.
+	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#NUMBERS}.
 	 */
 	public List<Double> getData(boolean binding) {
 		// checks if is a numbers data type
@@ -439,7 +439,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * 
 	 * @param factory datapoint object factory
 	 * @param binding if <code>true</code> binds the new array list into container
-	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#points}.
+	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
 	 */
 	final List<DataPoint> getDataPoints(DataPointListFactory factory, boolean binding) {
 		// checks if is a numbers data type

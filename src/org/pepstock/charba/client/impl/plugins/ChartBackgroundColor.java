@@ -54,7 +54,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	private static final Map<String, ChartBackgroundColorOptions> OPTIONS = new HashMap<>();
 
 	/**
-	 * Default background color, {@link HtmlColor#White}.
+	 * Default background color, {@link HtmlColor#WHITE}.
 	 */
 	public static final String DEFAULT_BACKGROUND_COLOR = HtmlColor.WHITE.toRGBA();
 	// color instance

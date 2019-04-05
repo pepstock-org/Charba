@@ -32,7 +32,7 @@ import org.pepstock.charba.client.plugins.AbstractPluginOptions;
 public final class ColorSchemesOptions extends AbstractPluginOptions {
 
 	/**
-	 * Default color scheme, {@link BrewerScheme#Paired12}.
+	 * Default color scheme, {@link BrewerScheme#PAIRED12}.
 	 */
 	public static final ColorScheme DEFAULT_SCHEME = BrewerScheme.PAIRED12;
 

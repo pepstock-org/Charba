@@ -359,7 +359,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
 	 * 
-	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#points}.
+	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
 	 */
 	@Override
 	public List<DataPoint> getDataPoints() {
@@ -370,7 +370,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
 	 * 
 	 * @param binding if <code>true</code> binds the new array list into container
-	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#points}.
+	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
 	 */
 	@Override
 	public List<DataPoint> getDataPoints(boolean binding) {

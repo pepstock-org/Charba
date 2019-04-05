@@ -73,13 +73,13 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	// -------------------------------------------
 
 	/**
-	 * Default position of the label relative to the anchor point position and orientation, {@link Align#center}.
+	 * Default position of the label relative to the anchor point position and orientation, {@link Align#CENTER}.
 	 */
 	public static final Align DEFAULT_ALIGN = Align.CENTER;
 
 	/**
 	 * Default anchor point, which is defined by an orientation vector and a position on the data element,
-	 * {@link Anchor#center}.
+	 * {@link Anchor#CENTER}.
 	 */
 	public static final Anchor DEFAULT_ANCHOR = Anchor.CENTER;
 
@@ -115,7 +115,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	public static final boolean DEFAULT_CLIP = false;
 
 	/**
-	 * Default visibility of labels, {@link Display#yes}.
+	 * Default visibility of labels, {@link Display#TRUE}.
 	 */
 	public static final Display DEFAULT_DISPLAY = Display.TRUE;
 
@@ -135,7 +135,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	public static final double DEFAULT_ROTATION = 0D;
 
 	/**
-	 * Default text alignment being used when drawing the label text, {@link TextAlign#start}.
+	 * Default text alignment being used when drawing the label text, {@link TextAlign#START}.
 	 */
 	public static final TextAlign DEFAULT_TEXTALIGN = TextAlign.START;
 

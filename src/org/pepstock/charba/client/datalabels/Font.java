@@ -32,7 +32,7 @@ import org.pepstock.charba.client.enums.FontStyle;
 public final class Font extends AbstractElement {
 
 	/**
-	 * Default font weight, {@link Weight#normal}.
+	 * Default font weight, {@link Weight#NORMAL}.
 	 */
 	public static final Weight DEFAULT_WEIGHT = Weight.NORMAL;
 

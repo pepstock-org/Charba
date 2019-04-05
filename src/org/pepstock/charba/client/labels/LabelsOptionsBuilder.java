@@ -270,9 +270,9 @@ public final class LabelsOptionsBuilder {
 	}
 
 	/**
-	 * Sets the padding when position is {@link Position#outside}.
+	 * Sets the padding when position is {@link Position#OUTSIDE}.
 	 * 
-	 * @param outsidePadding the padding when position is {@link Position#outside}.
+	 * @param outsidePadding the padding when position is {@link Position#OUTSIDE}.
 	 * @return builder instance
 	 */
 	public LabelsOptionsBuilder setOutsidePadding(int outsidePadding) {
@@ -281,9 +281,9 @@ public final class LabelsOptionsBuilder {
 	}
 
 	/**
-	 * Sets the margin of text when position is {@link Position#outside} or {@link Position#border}.
+	 * Sets the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER}.
 	 * 
-	 * @param textMargin the margin of text when position is {@link Position#outside} or {@link Position#border}.
+	 * @param textMargin the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER}.
 	 * @return builder instance
 	 */
 	public LabelsOptionsBuilder setTextMargin(int textMargin) {
@@ -292,9 +292,9 @@ public final class LabelsOptionsBuilder {
 	}
 
 	/**
-	 * Sets the images when {@link Render} is {@link Render#image}.
+	 * Sets the images when {@link Render} is {@link Render#IMAGE}.
 	 * 
-	 * @param images images when {@link Render} is {@link Render#image}.
+	 * @param images images when {@link Render} is {@link Render#IMAGE}.
 	 * @return builder instance
 	 */
 	public LabelsOptionsBuilder setImages(ImageResource... images) {
@@ -303,9 +303,9 @@ public final class LabelsOptionsBuilder {
 	}
 
 	/**
-	 * Sets the images when {@link Render} is {@link Render#image}.
+	 * Sets the images when {@link Render} is {@link Render#IMAGE}.
 	 * 
-	 * @param images images when {@link Render} is {@link Render#image}.
+	 * @param images images when {@link Render} is {@link Render#IMAGE}.
 	 * @return builder instance
 	 */
 	public LabelsOptionsBuilder setImages(Image... images) {
@@ -314,9 +314,9 @@ public final class LabelsOptionsBuilder {
 	}
 
 	/**
-	 * Sets the images when {@link Render} is {@link Render#image}.
+	 * Sets the images when {@link Render} is {@link Render#IMAGE}.
 	 * 
-	 * @param images images when {@link Render} is {@link Render#image}.
+	 * @param images images when {@link Render} is {@link Render#IMAGE}.
 	 * @return builder instance
 	 */
 	public LabelsOptionsBuilder setImages(ImageElement... images) {

@@ -86,7 +86,7 @@ public final class ClearSelection extends NativeObjectContainer {
 	public static final Render DEFAULT_RENDER = Render.IMAGE_LABEL;
 
 	/**
-	 * Default clear selection box position, {@link Position#bottom}.
+	 * Default clear selection box position, {@link Position#BOTTOM}.
 	 */
 	public static final Position DEFAULT_POSITION = Position.BOTTOM;
 

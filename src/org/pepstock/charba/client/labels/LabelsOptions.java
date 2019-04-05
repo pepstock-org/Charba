@@ -109,12 +109,12 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	public static final boolean DEFAULT_SHOWACTUALPERCENTAGES = false;
 
 	/**
-	 * Default padding when position is {@link Position#outside}, <b>{@value DEFAULT_OUTSIDEPADDING}</b>.
+	 * Default padding when position is {@link Position#OUTSIDE}, <b>{@value DEFAULT_OUTSIDEPADDING}</b>.
 	 */
 	public static final int DEFAULT_OUTSIDEPADDING = 2;
 
 	/**
-	 * Default the margin of text when position is {@link Position#outside} or {@link Position#border},
+	 * Default the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER},
 	 * <b>{@value DEFAULT_TEXTMARGIN}</b>.
 	 */
 	public static final int DEFAULT_TEXTMARGIN = 2;
@@ -654,45 +654,45 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	}
 
 	/**
-	 * Sets the padding when position is {@link Position#outside}.
+	 * Sets the padding when position is {@link Position#OUTSIDE}.
 	 * 
-	 * @param outsidePadding the padding when position is {@link Position#outside}.
+	 * @param outsidePadding the padding when position is {@link Position#OUTSIDE}.
 	 */
 	public void setOutsidePadding(int outsidePadding) {
 		setValue(Property.OUTSIDE_PADDING, outsidePadding);
 	}
 
 	/**
-	 * Returns the padding when position is {@link Position#outside}.
+	 * Returns the padding when position is {@link Position#OUTSIDE}.
 	 * 
-	 * @return the padding when position is {@link Position#outside}.
+	 * @return the padding when position is {@link Position#OUTSIDE}.
 	 */
 	public int getOutsidePadding() {
 		return getValue(Property.OUTSIDE_PADDING, defaultsOptions.getOutsidePadding());
 	}
 
 	/**
-	 * Sets the margin of text when position is {@link Position#outside} or {@link Position#border}.
+	 * Sets the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER}.
 	 * 
-	 * @param textMargin the margin of text when position is {@link Position#outside} or {@link Position#border}.
+	 * @param textMargin the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER}.
 	 */
 	public void setTextMargin(int textMargin) {
 		setValue(Property.TEXT_MARGIN, textMargin);
 	}
 
 	/**
-	 * Returns the margin of text when position is {@link Position#outside} or {@link Position#border}.
+	 * Returns the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER}.
 	 * 
-	 * @return the margin of text when position is {@link Position#outside} or {@link Position#border}.
+	 * @return the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER}.
 	 */
 	public int getTextMargin() {
 		return getValue(Property.TEXT_MARGIN, defaultsOptions.getTextMargin());
 	}
 
 	/**
-	 * Sets the images when {@link Render} is {@link Render#image}.
+	 * Sets the images when {@link Render} is {@link Render#IMAGE}.
 	 * 
-	 * @param images images when {@link Render} is {@link Render#image}.
+	 * @param images images when {@link Render} is {@link Render#IMAGE}.
 	 */
 	public void setImages(ImageResource... images) {
 		// checks if argument is consistent
@@ -716,9 +716,9 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	}
 
 	/**
-	 * Sets the images when {@link Render} is {@link Render#image}.
+	 * Sets the images when {@link Render} is {@link Render#IMAGE}.
 	 * 
-	 * @param images images when {@link Render} is {@link Render#image}.
+	 * @param images images when {@link Render} is {@link Render#IMAGE}.
 	 */
 	public void setImages(Image... images) {
 		// checks if argument is consistent
@@ -741,9 +741,9 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	}
 
 	/**
-	 * Sets the images when {@link Render} is {@link Render#image}.
+	 * Sets the images when {@link Render} is {@link Render#IMAGE}.
 	 * 
-	 * @param images images when {@link Render} is {@link Render#image}.
+	 * @param images images when {@link Render} is {@link Render#IMAGE}.
 	 */
 	public void setImages(ImageElement... images) {
 		// sets property
@@ -751,9 +751,9 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	}
 
 	/**
-	 * Returns the images when {@link Render} is {@link Render#image}.
+	 * Returns the images when {@link Render} is {@link Render#IMAGE}.
 	 * 
-	 * @return the images when {@link Render} is {@link Render#image} or an empty list.
+	 * @return the images when {@link Render} is {@link Render#IMAGE} or an empty list.
 	 */
 	public List<ImageElement> getImages() {
 		// gets array

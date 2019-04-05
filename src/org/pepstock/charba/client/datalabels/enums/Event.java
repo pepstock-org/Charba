@@ -29,16 +29,16 @@ import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 public enum Event implements Key
 {
 	/**
-	 * The mouse is moved over a label. Charba {@link org.pepstock.charba.client.enums.Event#mousemove} must be enabled.
+	 * The mouse is moved over a label. Charba {@link org.pepstock.charba.client.enums.Event#MOUSEMOVE} must be enabled.
 	 */
 	ENTER("enter"),
 	/**
-	 * The mouse is moved out of a label. Charba {@link org.pepstock.charba.client.enums.Event#mousemove} must be enabled.
+	 * The mouse is moved out of a label. Charba {@link org.pepstock.charba.client.enums.Event#MOUSEMOVE} must be enabled.
 	 */
 	LEAVE("leave"),
 	/**
 	 * The mouse's primary button is pressed and released on a label. Charba
-	 * {@link org.pepstock.charba.client.enums.Event#click} must be enabled.
+	 * {@link org.pepstock.charba.client.enums.Event#CLICK} must be enabled.
 	 */
 	CLICK("click");
 

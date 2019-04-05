@@ -141,7 +141,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the type of scale
 	 * 
-	 * @return the type of scale. Default is {@link org.pepstock.charba.client.enums.AxisType#category}.
+	 * @return the type of scale. Default is {@link org.pepstock.charba.client.enums.AxisType#CATEGORY}.
 	 */
 	public final AxisType getType() {
 		return getValue(Property.TYPE, AxisType.class, AxisType.CATEGORY);

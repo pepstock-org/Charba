@@ -35,6 +35,7 @@ public interface Key {
 	 * 
 	 * @param clazz enumeration of keys
 	 * @param value value to search into key
+	 * @param <T> type of key
 	 * @return <code>true</code> if a key into an enumeration is related to the value, otherwise <code>false</code>
 	 */
 	public static <T extends Key> boolean hasKeyByValue(Class<T> clazz, String value) {
@@ -46,6 +47,7 @@ public interface Key {
 	 * 
 	 * @param clazz enumeration of keys
 	 * @param value value to search into key
+	 * @param <T> type of key
 	 * @return the found key by value or <code>null</code>
 	 */
 	public static <T extends Key> T getKeyByValue(Class<T> clazz, String value) {
@@ -58,6 +60,7 @@ public interface Key {
 	 * @param clazz enumeration of keys
 	 * @param value value to search into key
 	 * @param defaultKey default key instance if the value is not found
+	 * @param <T> type of key
 	 * @return the found key by value or the default one
 	 */
 	public static <T extends Key> T getKeyByValue(Class<T> clazz, String value, T defaultKey) {

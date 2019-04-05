@@ -282,7 +282,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * Returns the data property of a dataset for a chart is specified as an array of strings. Each point in the data array
 	 * corresponds to the label at the same index on the x axis.
 	 * 
-	 * @return a list of strings or an empty list of strings if the data type is not {@link DataType#strings}.
+	 * @return a list of strings or an empty list of strings if the data type is not {@link DataType#STRINGS}.
 	 */
 	public List<String> getDataString() {
 		return getDataString(false);
@@ -293,7 +293,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * corresponds to the label at the same index on the x axis.
 	 * 
 	 * @param binding if <code>true</code> binds the new array list into container
-	 * @return a list of strings or an empty list of strings if the data type is not {@link DataType#strings}.
+	 * @return a list of strings or an empty list of strings if the data type is not {@link DataType#STRINGS}.
 	 */
 	public List<String> getDataString(boolean binding) {
 		// checks if is a string data type
@@ -343,7 +343,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
 	 * 
-	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#points}.
+	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
 	 */
 	@Override
 	public List<DataPoint> getDataPoints() {
@@ -354,7 +354,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
 	 * 
 	 * @param binding if <code>true</code> binds the new array list into container
-	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#points}.
+	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
 	 */
 	@Override
 	public List<DataPoint> getDataPoints(boolean binding) {

@@ -192,18 +192,18 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the padding when position is {@link Position#outside}.
+	 * Returns the padding when position is {@link Position#OUTSIDE}.
 	 * 
-	 * @return the padding when position is {@link Position#outside}.
+	 * @return the padding when position is {@link Position#OUTSIDE}.
 	 */
 	int getOutsidePadding() {
 		return getValue(LabelsOptions.Property.OUTSIDE_PADDING, LabelsOptions.DEFAULT_OUTSIDEPADDING);
 	}
 
 	/**
-	 * Returns the margin of text when position is {@link Position#outside} or {@link Position#border}.
+	 * Returns the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER}.
 	 * 
-	 * @return the margin of text when position is {@link Position#outside} or {@link Position#border}.
+	 * @return the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER}.
 	 */
 	int getTextMargin() {
 		return getValue(LabelsOptions.Property.TEXT_MARGIN, LabelsOptions.DEFAULT_TEXTMARGIN);

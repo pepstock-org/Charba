@@ -63,7 +63,7 @@ public final class TilesFactoryDefaults {
 	public static final LineCap DEFAULT_LINE_CAP = LineCap.ROUND;
 
 	/**
-	 * Default the shape, {@link Shape#square}.
+	 * Default the shape, {@link Shape#SQUARE}.
 	 */
 	public static final IsShape DEFAULT_SHAPE = Shape.SQUARE;
 

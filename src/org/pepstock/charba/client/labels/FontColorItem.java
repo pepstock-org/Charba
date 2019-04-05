@@ -54,7 +54,7 @@ public final class FontColorItem extends RenderItem {
 	/**
 	 * Returns the fill color
 	 * 
-	 * @return the fill color. Default is {@link HtmlColor#White}.
+	 * @return the fill color. Default is {@link HtmlColor#WHITE}.
 	 */
 	@JsOverlay
 	public String getBackgroundColorAsString() {
@@ -69,7 +69,7 @@ public final class FontColorItem extends RenderItem {
 	/**
 	 * Returns the fill color under the line.
 	 * 
-	 * @return the fill color under the line. Default is {@link HtmlColor#White}.
+	 * @return the fill color under the line. Default is {@link HtmlColor#WHITE}.
 	 */
 	@JsOverlay
 	public IsColor getBackgroundColor() {
