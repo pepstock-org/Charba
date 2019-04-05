@@ -36,7 +36,7 @@ public final class GlobalPlugins {
 
 	// list of global plugins set by user (not OOTB)
 	// K = plugin id, V = plugin instance
-	private final Map<String, WrapperPlugin> pluginIds = new HashMap<String, WrapperPlugin>();
+	private final Map<String, WrapperPlugin> pluginIds = new HashMap<>();
 	// native object of plugins
 	private final NativePlugins plugins;
 	// set of embedded plugin ids to disable for charts
@@ -112,7 +112,7 @@ public final class GlobalPlugins {
 		// gets plugins ids requesting to CHART.JS.
 		ArrayObject existingPlugins = plugins.getAll();
 		// creates a set of strings
-		final Set<String> pluginsIds = new HashSet<String>();
+		final Set<String> pluginsIds = new HashSet<>();
 		// checks the result from CHART.JS
 		if (existingPlugins != null && !existingPlugins.isEmpty()) {
 			// scans ids

@@ -29,7 +29,7 @@ public final class AddHandlerEvent extends GwtEvent<AddHandlerEventHandler> {
 	/**
 	 * Event type
 	 */
-	public static final Type<AddHandlerEventHandler> TYPE = new Type<AddHandlerEventHandler>();
+	public static final Type<AddHandlerEventHandler> TYPE = new Type<>();
 
 	// type of new handler added to the chart
 	private final Type<? extends EventHandler> handlerType;

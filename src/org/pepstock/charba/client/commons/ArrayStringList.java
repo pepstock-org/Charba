@@ -167,7 +167,7 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 		boolean modified = !c.isEmpty();
 		if (modified) {
 			// creates a copy of elements
-			List<String> contained = new ArrayList<String>();
+			List<String> contained = new ArrayList<>();
 			// scans all current elements
 			for (int i = 0; i < size(); i++) {
 				String value = get(i);

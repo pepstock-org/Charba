@@ -29,7 +29,7 @@ public final class LegendLeaveEvent extends AbstractEvent<LegendLeaveEventHandle
 	/**
 	 * Event type
 	 */
-	public static final Type<LegendLeaveEventHandler> TYPE = new Type<LegendLeaveEventHandler>();
+	public static final Type<LegendLeaveEventHandler> TYPE = new Type<>();
 	// legend item selected by hovering
 	private final LegendItem item;
 

@@ -225,7 +225,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 		}
 		// if here, is a callback
 		// then returns an empty list
-		return new ArrayEnumList<PointStyle>(PointStyle.class);
+		return new ArrayEnumList<>(PointStyle.class);
 	}
 
 	/**

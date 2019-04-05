@@ -39,7 +39,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	private final ArrayObject array;
 
 	// delegated linked list to store Java objects
-	private final List<E> delegate = new LinkedList<E>();
+	private final List<E> delegate = new LinkedList<>();
 
 	/**
 	 * Internal constructor used to set an array instance as back-end of the list.
@@ -125,7 +125,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	 */
 	@Override
 	public Iterator<E> iterator() {
-		return new IteratorImpl<E>(this);
+		return new IteratorImpl<>(this);
 	}
 
 	/**
@@ -332,7 +332,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	 */
 	@Override
 	public ListIterator<E> listIterator() {
-		return new ListIteratorImpl<E>(0, this);
+		return new ListIteratorImpl<>(0, this);
 	}
 
 	/**
@@ -347,7 +347,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 		if (!checkRange(index)) {
 			throw new IndexOutOfBoundsException("Index: " + index);
 		}
-		return new ListIteratorImpl<E>(index, this);
+		return new ListIteratorImpl<>(index, this);
 	}
 
 	/**

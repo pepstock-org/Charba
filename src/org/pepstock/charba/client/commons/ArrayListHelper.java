@@ -129,10 +129,10 @@ public final class ArrayListHelper {
 	public static <E extends Key> ArrayEnumList<E> list(Class<E> clazz, E[] values) {
 		// checks if array is null
 		if (values == null) {
-			return new ArrayEnumList<E>(clazz);
+			return new ArrayEnumList<>(clazz);
 		}
 		// creates the list
-		ArrayEnumList<E> result = new ArrayEnumList<E>(clazz);
+		ArrayEnumList<E> result = new ArrayEnumList<>(clazz);
 		// adds all elements
 		result.addAll(values);
 		// returns the list
@@ -150,12 +150,12 @@ public final class ArrayListHelper {
 	public static <E extends Key> ArrayEnumList<E> list(Class<E> clazz, ArrayString array) {
 		// checks if array is null
 		if (array == null) {
-			return new ArrayEnumList<E>(clazz);
+			return new ArrayEnumList<>(clazz);
 		}
 		// returns the list adding the string array list to initialize it
 		// PAY ATTENTION: no checks if the values of strings are
 		// consistent with the enumeration values
-		return new ArrayEnumList<E>(clazz.getEnumConstants(), array);
+		return new ArrayEnumList<>(clazz.getEnumConstants(), array);
 	}
 
 	/**

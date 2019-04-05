@@ -297,7 +297,7 @@ public final class NativeObject {
 	@JsOverlay
 	<T extends Array> void defineArrayProperty(String key, T value) {
 		// creates a descriptor
-		NativeArrayDescriptor<T> descriptor = new NativeArrayDescriptor<T>();
+		NativeArrayDescriptor<T> descriptor = new NativeArrayDescriptor<>();
 		// sets value
 		descriptor.setValue(value);
 		// sets attributes of descriptor to true

@@ -29,7 +29,7 @@ public final class AnimationCompleteEvent extends AbstractEvent<AnimationComplet
 	/**
 	 * Event type
 	 */
-	public static final Type<AnimationCompleteEventHandler> TYPE = new Type<AnimationCompleteEventHandler>();
+	public static final Type<AnimationCompleteEventHandler> TYPE = new Type<>();
 
 	// animation item with animation info from chart
 	private final AnimationItem item;

@@ -276,7 +276,7 @@ public abstract class HovingFlexDataset extends Dataset {
 			// if here, the property is not a object
 			// or the property is missing or not a pattern
 			// returns empty list
-			return new ArrayObjectContainerList<Pattern>();
+			return new ArrayObjectContainerList<>();
 		}
 	}
 
@@ -293,7 +293,7 @@ public abstract class HovingFlexDataset extends Dataset {
 			// if here, the property is not a gradient
 			// or the property is missing
 			// returns empty list
-			return new ArrayObjectContainerList<Gradient>();
+			return new ArrayObjectContainerList<>();
 		}
 	}
 
@@ -379,7 +379,7 @@ public abstract class HovingFlexDataset extends Dataset {
 			// if here, the property is not a gradient
 			// or the property is missing
 			// returns empty list
-			return new ArrayObjectContainerList<Gradient>();
+			return new ArrayObjectContainerList<>();
 		}
 	}
 
@@ -502,7 +502,7 @@ public abstract class HovingFlexDataset extends Dataset {
 			// if here, the property is not a color
 			// or the property is missing
 			// returns empty list
-			return new ArrayObjectContainerList<Pattern>();
+			return new ArrayObjectContainerList<>();
 		}
 	}
 
@@ -520,7 +520,7 @@ public abstract class HovingFlexDataset extends Dataset {
 			// if here, the property is not a object
 			// or the property is missing or not a gradient
 			// returns empty list
-			return new ArrayObjectContainerList<Gradient>();
+			return new ArrayObjectContainerList<>();
 		}
 	}
 
@@ -601,7 +601,7 @@ public abstract class HovingFlexDataset extends Dataset {
 			// if here, the property is not a object
 			// or the property is missing or not a gradient
 			// returns empty list
-			return new ArrayObjectContainerList<Gradient>();
+			return new ArrayObjectContainerList<>();
 		}
 	}
 

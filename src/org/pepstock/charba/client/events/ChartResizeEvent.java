@@ -29,7 +29,7 @@ public final class ChartResizeEvent extends AbstractEvent<ChartResizeEventHandle
 	/**
 	 * Event type
 	 */
-	public static final Type<ChartResizeEventHandler> TYPE = new Type<ChartResizeEventHandler>();
+	public static final Type<ChartResizeEventHandler> TYPE = new Type<>();
 	// item which contains the new size of the chart
 	private final SizeItem size;
 

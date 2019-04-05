@@ -262,7 +262,7 @@ public abstract class Dataset extends NativeObjectContainer {
 				// gets list of all patterns
 				List<Pattern> patterns = getPatternsContainer().getObjects(key);
 				// creates the list of canvas pattern
-				final List<CanvasPattern> canvasPatternsList = new LinkedList<CanvasPattern>();
+				final List<CanvasPattern> canvasPatternsList = new LinkedList<>();
 				// scans the patterns
 				for (Pattern pattern : patterns) {
 					// creates the canvas pattern and adds into list
@@ -300,7 +300,7 @@ public abstract class Dataset extends NativeObjectContainer {
 				// gets all gradients for the key
 				List<Gradient> gradients = getGradientsContainer().getObjects(key);
 				// creates a temporary list of gradients
-				List<CanvasGradient> canvasGradientsList = new LinkedList<CanvasGradient>();
+				List<CanvasGradient> canvasGradientsList = new LinkedList<>();
 				// sets internal dataset index
 				int index = 0;
 				// scans all gradients

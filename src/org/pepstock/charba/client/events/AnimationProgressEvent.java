@@ -29,7 +29,7 @@ public final class AnimationProgressEvent extends AbstractEvent<AnimationProgres
 	/**
 	 * Event type
 	 */
-	public static final Type<AnimationProgressEventHandler> TYPE = new Type<AnimationProgressEventHandler>();
+	public static final Type<AnimationProgressEventHandler> TYPE = new Type<>();
 
 	// animation item with animation info from chart
 	private final AnimationItem item;

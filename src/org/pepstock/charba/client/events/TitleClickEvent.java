@@ -29,7 +29,7 @@ public final class TitleClickEvent extends AbstractEvent<TitleClickEventHandler>
 	/**
 	 * Event type
 	 */
-	public static final Type<TitleClickEventHandler> TYPE = new Type<TitleClickEventHandler>();
+	public static final Type<TitleClickEventHandler> TYPE = new Type<>();
 	// title item selected by clicking
 	private final Title item;
 

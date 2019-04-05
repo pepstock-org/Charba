@@ -30,7 +30,7 @@ public final class AxisClickEvent extends AbstractEvent<AxisClickEventHandler> {
 	/**
 	 * Event type
 	 */
-	public static final Type<AxisClickEventHandler> TYPE = new Type<AxisClickEventHandler>();
+	public static final Type<AxisClickEventHandler> TYPE = new Type<>();
 	// scale item selected by clicking
 	private final ScaleItem item;
 	// axis selected by clicking

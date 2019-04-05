@@ -31,7 +31,7 @@ public final class ChartClickEvent extends AbstractEvent<ChartClickEventHandler>
 	/**
 	 * Event type
 	 */
-	public static final Type<ChartClickEventHandler> TYPE = new Type<ChartClickEventHandler>();
+	public static final Type<ChartClickEventHandler> TYPE = new Type<>();
 
 	// a list of items with dataset metadata related to the click
 	private final List<DatasetItem> items;

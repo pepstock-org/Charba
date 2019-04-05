@@ -31,7 +31,7 @@ public final class ChartHoverEvent extends AbstractEvent<ChartHoverEventHandler>
 	/**
 	 * Event type
 	 */
-	public static final Type<ChartHoverEventHandler> TYPE = new Type<ChartHoverEventHandler>();
+	public static final Type<ChartHoverEventHandler> TYPE = new Type<>();
 
 	// a list of items with dataset metadata related to the hover
 	private final List<DatasetItem> items;

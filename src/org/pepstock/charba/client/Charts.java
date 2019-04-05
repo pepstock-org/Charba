@@ -31,7 +31,7 @@ public final class Charts {
 	// buffer with all charts instances
 	// K = CHART id (CHARBA ID)
 	// V = chart instance
-	private static final Map<String, AbstractChart<?, ?>> CHARTS = new HashMap<String, AbstractChart<?, ?>>();
+	private static final Map<String, AbstractChart<?, ?>> CHARTS = new HashMap<>();
 	// list with all charts life cycle listeners
 	private static final List<ChartsLifecycleListener> LISTENERS = new LinkedList<>();
 

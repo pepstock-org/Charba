@@ -166,7 +166,7 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 		boolean modified = !c.isEmpty();
 		if (modified) {
 			// creates a copy of elements
-			List<Double> contained = new ArrayList<Double>();
+			List<Double> contained = new ArrayList<>();
 			// scans all current elements
 			for (int i = 0; i < size(); i++) {
 				Double value = get(i);

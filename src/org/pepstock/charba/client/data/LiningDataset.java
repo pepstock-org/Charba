@@ -859,7 +859,7 @@ public abstract class LiningDataset extends Dataset {
 			// if here, the property is not a gradient
 			// or the property is missing
 			// returns empty list
-			return new ArrayObjectContainerList<Gradient>();
+			return new ArrayObjectContainerList<>();
 		}
 	}
 
@@ -948,7 +948,7 @@ public abstract class LiningDataset extends Dataset {
 			// if here, the property is not a gradient
 			// or the property is missing
 			// returns empty list
-			return new ArrayObjectContainerList<Gradient>();
+			return new ArrayObjectContainerList<>();
 		}
 	}
 
@@ -1092,7 +1092,7 @@ public abstract class LiningDataset extends Dataset {
 			// if here, the property is not a gradient
 			// or the property is missing
 			// returns empty list
-			return new ArrayObjectContainerList<Gradient>();
+			return new ArrayObjectContainerList<>();
 		}
 	}
 
@@ -1180,7 +1180,7 @@ public abstract class LiningDataset extends Dataset {
 			// if here, the property is not a gradient
 			// or the property is missing
 			// returns empty list
-			return new ArrayObjectContainerList<Gradient>();
+			return new ArrayObjectContainerList<>();
 		}
 	}
 

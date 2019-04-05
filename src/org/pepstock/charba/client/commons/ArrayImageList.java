@@ -169,7 +169,7 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 		boolean modified = !c.isEmpty();
 		if (modified) {
 			// creates a copy of elements
-			List<ImageElement> contained = new ArrayList<ImageElement>();
+			List<ImageElement> contained = new ArrayList<>();
 			// scans all current elements
 			for (int i = 0; i < size(); i++) {
 				ImageElement value = get(i);

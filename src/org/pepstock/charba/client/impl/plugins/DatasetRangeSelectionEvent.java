@@ -35,7 +35,7 @@ public final class DatasetRangeSelectionEvent extends AbstractEvent<DatasetRange
 	/**
 	 * Event type
 	 */
-	public static final Type<DatasetRangeSelectionEventHandler> TYPE = new Type<DatasetRangeSelectionEventHandler>();
+	public static final Type<DatasetRangeSelectionEventHandler> TYPE = new Type<>();
 	// starting index of selected dataset
 	private final int from;
 	// ending index of selected dataset

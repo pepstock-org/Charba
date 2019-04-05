@@ -73,7 +73,7 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 	 */
 	@Override
 	public Iterator<E> iterator() {
-		return new IteratorImpl<E>(this);
+		return new IteratorImpl<>(this);
 	}
 
 	/**
@@ -97,7 +97,7 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 	 */
 	@Override
 	public ListIterator<E> listIterator() {
-		return new ListIteratorImpl<E>(0, this);
+		return new ListIteratorImpl<>(0, this);
 	}
 
 	/*
@@ -126,7 +126,7 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 		if (!checkRange(index)) {
 			throw new IndexOutOfBoundsException("Index: " + index);
 		}
-		return new ListIteratorImpl<E>(index, this);
+		return new ListIteratorImpl<>(index, this);
 	}
 
 	/**

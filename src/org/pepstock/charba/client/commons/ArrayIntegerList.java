@@ -166,7 +166,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 		boolean modified = !c.isEmpty();
 		if (modified) {
 			// creates a copy of elements
-			List<Integer> contained = new ArrayList<Integer>();
+			List<Integer> contained = new ArrayList<>();
 			// scans all current elements
 			for (int i = 0; i < size(); i++) {
 				Integer value = get(i);

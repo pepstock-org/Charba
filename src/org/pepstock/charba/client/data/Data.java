@@ -35,7 +35,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 public final class Data extends NativeObjectContainer implements ConfigurationElement {
 
 	// maintains the list of datasets because needs to preserve the dataset type
-	private final ArrayObjectContainerList<Dataset> currentDatasets = new ArrayObjectContainerList<Dataset>();
+	private final ArrayObjectContainerList<Dataset> currentDatasets = new ArrayObjectContainerList<>();
 
 	/**
 	 * Name of properties of native object.

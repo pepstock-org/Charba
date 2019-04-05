@@ -31,7 +31,7 @@ public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionE
 	/**
 	 * Event type
 	 */
-	public static final Type<DatasetSelectionEventHandler> TYPE = new Type<DatasetSelectionEventHandler>();
+	public static final Type<DatasetSelectionEventHandler> TYPE = new Type<>();
 	// item with dataset metadata related to the click
 	private final DatasetItem item;
 	// item with dataset metadata related to the click

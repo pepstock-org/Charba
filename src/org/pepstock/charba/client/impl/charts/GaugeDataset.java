@@ -38,7 +38,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 public final class GaugeDataset extends MeterDataset {
 
 	// list if thresholds
-	private final List<Threshold> thresholds = new LinkedList<Threshold>();
+	private final List<Threshold> thresholds = new LinkedList<>();
 	// current status related to threshold
 	private IsThreshold current = GaugeThreshold.normal.getThreshold();
 	// flag to understand if the absolute or percentage value must be used

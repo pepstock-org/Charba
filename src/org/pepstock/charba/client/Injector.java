@@ -37,7 +37,7 @@ public final class Injector {
 	// Prefix ID of script element with CHART JS
 	private static final String CHARBA_PREFIX_SCRIPT_ELEMENT_ID = "_charba_";
 	// contains all script object injected
-	private static final Set<String> ELEMENTS_INJECTED = new HashSet<String>();
+	private static final Set<String> ELEMENTS_INJECTED = new HashSet<>();
 
 	/**
 	 * Injects a script resource if not injected yet.

@@ -169,7 +169,7 @@ public final class Gradient extends CanvasObject {
 		// if null
 		if (array == null) {
 			// creates an empty list
-			colors = new ArrayObjectContainerList<GradientColor>();
+			colors = new ArrayObjectContainerList<>();
 		} else {
 			// otherwise creates a list using the native object
 			colors = ArrayListHelper.list(array, factory);

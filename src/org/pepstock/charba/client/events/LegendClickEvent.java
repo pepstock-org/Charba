@@ -29,7 +29,7 @@ public final class LegendClickEvent extends AbstractEvent<LegendClickEventHandle
 	/**
 	 * Event type
 	 */
-	public static final Type<LegendClickEventHandler> TYPE = new Type<LegendClickEventHandler>();
+	public static final Type<LegendClickEventHandler> TYPE = new Type<>();
 	// legend item selected by clicking
 	private final LegendItem item;
 

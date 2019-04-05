@@ -167,7 +167,7 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 		boolean modified = !c.isEmpty();
 		if (modified) {
 			// creates a copy of elements
-			List<NativeObject> contained = new ArrayList<NativeObject>();
+			List<NativeObject> contained = new ArrayList<>();
 			// scans all current elements
 			for (int i = 0; i < size(); i++) {
 				NativeObject value = get(i);

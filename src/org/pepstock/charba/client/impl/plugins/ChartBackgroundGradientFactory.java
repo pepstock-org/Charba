@@ -42,7 +42,7 @@ final class ChartBackgroundGradientFactory {
 
 	// cache for canvas gradients already created
 	// K = chart id, K = gradient id, V = canvas gradient
-	private static final Map<String, Map<Integer, CanvasGradient>> GRADIENTS = new HashMap<String, Map<Integer, CanvasGradient>>();
+	private static final Map<String, Map<Integer, CanvasGradient>> GRADIENTS = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation

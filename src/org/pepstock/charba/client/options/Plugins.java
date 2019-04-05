@@ -206,7 +206,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 			return ArrayListHelper.list(array, factory);
 		} else {
 			// if here returns an empty list
-			return new LinkedList<T>();
+			return new LinkedList<>();
 		}
 	}
 
