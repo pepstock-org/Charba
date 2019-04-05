@@ -431,7 +431,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 *            CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public void setDefaultFontStyle(FontStyle fontStyle) {
-		setValue(Property.DEFAULT_FONT_STYLE, fontStyle.name());
+		setValue(Property.DEFAULT_FONT_STYLE, fontStyle.value());
 	}
 
 	/**

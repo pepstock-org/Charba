@@ -111,7 +111,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 				// gets object
 				T options = Defaults.get().getOptions(chart.getType()).getPlugins().getOptions(pluginId, this);
 				// registers it to global
-				register(options, PluginOptionsScope.CHART_TYPE.name());
+				register(options, PluginOptionsScope.CHART_TYPE.value());
 			} else if (ObjectType.ARRAY.equals(type)) {
 				// unregister previous options
 				unregisterGlobal(PluginOptionsScope.CHART_TYPE);
@@ -120,7 +120,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 				// scans the objects
 				for (T options : optionsList) {
 					// registers it to global
-					register(options, PluginOptionsScope.CHART_TYPE.name());
+					register(options, PluginOptionsScope.CHART_TYPE.value());
 				}
 			}
 		}
@@ -244,7 +244,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 				// gets references
 				List<String> references = options.getReferences();
 				// removes the reference to chart and checks if empty
-				if (references.remove(scope.name()) && references.isEmpty()) {
+				if (references.remove(scope.value()) && references.isEmpty()) {
 					// removes from cache
 					iterator.remove();
 				}

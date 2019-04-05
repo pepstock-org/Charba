@@ -94,7 +94,7 @@ abstract class ArcDataset extends HovingDataset {
 			@Override
 			public String call(Object contextFunction, ScriptableContext context) {
 				// gets value
-				return ScriptableUtils.getOptionValueAsString(context, borderAlignCallback, getDefaultValues().getElements().getArc().getBorderAlign()).name();
+				return ScriptableUtils.getOptionValueAsString(context, borderAlignCallback, getDefaultValues().getElements().getArc().getBorderAlign()).value();
 			}
 		});
 	}

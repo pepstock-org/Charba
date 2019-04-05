@@ -855,17 +855,8 @@ public abstract class NativeObjectContainer {
 		}
 		// gets the string value
 		String value = getValue(key, defaultValue.value());
-		// scans all EnumValue array
-		for (T enumValue : clazz.getEnumConstants()) {
-			// checks if Enum value name is equals to value
-			if (enumValue.value().equalsIgnoreCase(value)) {
-				// returns EnumValue
-				return enumValue;
-			}
-		}
-		// if here, means the value is wrong into java script object
-		// returns the default value
-		return defaultValue;
+		// gets the key by value
+		return Key.getKeyByValue(clazz, value, defaultValue);
 	}
 
 	/**

@@ -435,7 +435,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			@Override
 			public String call(Object contextFunction, ScriptableContext context) {
 				// gets value
-				return ScriptableUtils.getOptionValueAsString(context, alignCallback, getAlign()).name();
+				return ScriptableUtils.getOptionValueAsString(context, alignCallback, getAlign()).value();
 			}
 		});
 		anchorCallbackProxy.setCallback(new ScriptableFunctions.ProxyStringCallback() {
@@ -449,7 +449,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			@Override
 			public String call(Object contextFunction, ScriptableContext context) {
 				// gets value
-				return ScriptableUtils.getOptionValueAsString(context, anchorCallback, getAnchor()).name();
+				return ScriptableUtils.getOptionValueAsString(context, anchorCallback, getAnchor()).value();
 			}
 		});
 		borderRadiusCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
@@ -586,7 +586,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			@Override
 			public String call(Object contextFunction, ScriptableContext context) {
 				// gets value
-				return ScriptableUtils.getOptionValueAsString(context, textAlignCallback, getTextAlign()).name();
+				return ScriptableUtils.getOptionValueAsString(context, textAlignCallback, getTextAlign()).value();
 			}
 		});
 		textStrokeColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {

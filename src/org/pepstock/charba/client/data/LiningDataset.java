@@ -344,7 +344,7 @@ public abstract class LiningDataset extends Dataset {
 				if (result instanceof PointStyle) {
 					// is point style instance
 					PointStyle style = (PointStyle) result;
-					return style.name();
+					return style.value();
 				} else if (result instanceof Image) {
 					// is image instance
 					return Utilities.toImageElement((Image) result);
@@ -356,7 +356,7 @@ public abstract class LiningDataset extends Dataset {
 					return (ImageElement) result;
 				}
 				// default result
-				return getDefaultValues().getElements().getPoint().getPointStyle().name();
+				return getDefaultValues().getElements().getPoint().getPointStyle().value();
 			}
 		});
 	}
@@ -1719,7 +1719,7 @@ public abstract class LiningDataset extends Dataset {
 	@Override
 	protected final void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
 		// checks if background color (ONLY one which can be used with patterns)
-		if (Property.BACKGROUND_COLOR.name().equalsIgnoreCase(key.value())) {
+		if (Property.BACKGROUND_COLOR.value().equalsIgnoreCase(key.value())) {
 			// gets the first element
 			CanvasPattern pattern = canvasPatternsList.get(0);
 			// creates pattern and stores it
@@ -1735,7 +1735,7 @@ public abstract class LiningDataset extends Dataset {
 	@Override
 	protected final void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
 		// checks if background or border colors which must be set with single value
-		if (Property.BACKGROUND_COLOR.name().equalsIgnoreCase(key.value()) || Property.BORDER_COLOR.name().equalsIgnoreCase(key.value())) {
+		if (Property.BACKGROUND_COLOR.value().equalsIgnoreCase(key.value()) || Property.BORDER_COLOR.value().equalsIgnoreCase(key.value())) {
 			// gets the first element
 			CanvasGradient gradient = canvasGradientsList.get(0);
 			// creates gradient and stores it

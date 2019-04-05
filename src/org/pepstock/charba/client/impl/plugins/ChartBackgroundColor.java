@@ -56,7 +56,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/**
 	 * Default background color, {@link HtmlColor#White}.
 	 */
-	public static final String DEFAULT_BACKGROUND_COLOR = HtmlColor.White.toRGBA();
+	public static final String DEFAULT_BACKGROUND_COLOR = HtmlColor.WHITE.toRGBA();
 	// color instance
 	private final String color;
 	// gradient instance

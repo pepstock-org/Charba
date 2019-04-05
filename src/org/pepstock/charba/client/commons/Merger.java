@@ -136,7 +136,7 @@ public final class Merger {
 		if (chartOptions.hasProperty(Property.SCALES.value())) {
 			// if here, the chart has got 2 or more scales
 			// gets the native object for scales
-			NativeObjectDescriptor descriptor = chartOptions.getObjectProperty(Property.SCALES.name());
+			NativeObjectDescriptor descriptor = chartOptions.getObjectProperty(Property.SCALES.value());
 			NativeObject scales = descriptor.getValue();
 			// checks if there is x axes
 			if (scales.hasProperty(Property.X_AXES.value())) {

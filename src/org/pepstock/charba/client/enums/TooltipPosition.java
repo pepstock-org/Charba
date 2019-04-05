@@ -54,35 +54,4 @@ public enum TooltipPosition implements IsTooltipPosition
 		return value;
 	}
 
-	/**
-	 * Returns <code>true</code> if the name passed as argument is out of the box position, otherwise <code>false</code>.
-	 * 
-	 * @param name the name of tooltip position
-	 * @return <code>true</code> if the name passed as argument is out of the box position, otherwise <code>false</code>
-	 */
-	public static boolean hasTooltipPosition(String name) {
-		// checks the exist
-		return getTooltipPosition(name) != null;
-	}
-
-	/**
-	 * Returns the tooltip position by its name passed as argument. If not exists, returns <code>null</code>.
-	 * 
-	 * @param name the name of tooltip position
-	 * @return the tooltip position. If not exists, returns <code>null</code>.
-	 */
-	public static TooltipPosition getTooltipPosition(String name) {
-		// checks if name is consistent
-		if (name != null) {
-			// scans all tooltip positions
-			for (TooltipPosition position : values()) {
-				// if has got the same name
-				if (position.value().equalsIgnoreCase(name)) {
-					return position;
-				}
-			}
-		}
-		// if here, the name has not been found
-		return null;
-	}
 }

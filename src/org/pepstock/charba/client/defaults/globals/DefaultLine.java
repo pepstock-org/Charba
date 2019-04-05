@@ -141,7 +141,7 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 	 */
 	@Override
 	public IsFill getFill() {
-		return Fill.ORIGIN;
+		return Fill.FALSE;
 	}
 
 	/*

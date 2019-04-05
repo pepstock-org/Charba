@@ -60,7 +60,7 @@ public final class FontColorItem extends RenderItem {
 	public String getBackgroundColorAsString() {
 		// checks if is defined
 		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "backgroundColor"))) {
-			return HtmlColor.White.toRGBA();
+			return HtmlColor.WHITE.toRGBA();
 		}
 		// returns property value
 		return getNativeBackgroundColor();

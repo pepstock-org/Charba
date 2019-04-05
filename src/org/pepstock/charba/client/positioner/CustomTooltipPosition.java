@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.positioner;
 
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TooltipPosition;
 
@@ -40,7 +41,7 @@ public final class CustomTooltipPosition implements IsTooltipPosition {
 			throw new IllegalArgumentException("Name of tooltip position is null");
 		}
 		// check is the name is the same of already out of the box ones
-		if (TooltipPosition.hasTooltipPosition(name)) {
+		if (Key.hasKeyByValue(TooltipPosition.class, name)) {
 			throw new IllegalArgumentException("Name of tooltip position is not consistent and already defined: " + name);
 		}
 		this.name = name;

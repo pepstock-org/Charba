@@ -198,7 +198,7 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	public void setPosition(IsTooltipPosition position) {
 		// checks if the tooltip position is consistent
 		// & that means that is defined both otu of the box or custom one by positioner
-		if (position != null && !TooltipPosition.hasTooltipPosition(position.value()) && !Positioner.get().hasTooltipPosition(position.value())) {
+		if (position != null && !Key.hasKeyByValue(TooltipPosition.class, position.value()) && !Positioner.get().hasTooltipPosition(position.value())) {
 			throw new IllegalArgumentException("Name of tooltip position is not consistent not defined: " + position);
 		}
 		// stores values
@@ -216,9 +216,9 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 		// gets string value
 		String value = getValue(Property.POSITION, getDefaultValues().getPosition().value());
 		// checks if is the out of the box one
-		if (TooltipPosition.hasTooltipPosition(value)) {
+		if (Key.hasKeyByValue(TooltipPosition.class, value)) {
 			// returns the pout of the box
-			return TooltipPosition.getTooltipPosition(value);
+			return Key.getKeyByValue(TooltipPosition.class, value);
 		}
 		// if here, it could be a custom tooltip position
 		// checks if is a custom tooltip position

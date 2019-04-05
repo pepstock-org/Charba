@@ -27,745 +27,745 @@ public enum HtmlColor implements IsColor
 {
 
 	/**
-	 * HTML color name "AliceBlue" - <span style="background-color:#F0F8FF; border-style: solid; border-width:
+	 * HTML color name "ALICE_BLUE" - <span style="background-color:#F0F8FF; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	AliceBlue("#F0F8FF"),
+	ALICE_BLUE("#F0F8FF"),
 	/**
-	 * HTML color name "AntiqueWhite" - <span style="background-color:#FAEBD7; border-style: solid; border-width:
+	 * HTML color name "ANTIQUE_WHITE" - <span style="background-color:#FAEBD7; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	AntiqueWhite("#FAEBD7"),
+	ANTIQUE_WHITE("#FAEBD7"),
 	/**
-	 * HTML color name "Aqua" - <span style="background-color:#00FFFF; border-style: solid; border-width:
+	 * HTML color name "AQUA" - <span style="background-color:#00FFFF; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Aqua("#00FFFF"),
+	AQUA("#00FFFF"),
 	/**
-	 * HTML color name "Aquamarine" - <span style="background-color:#7FFFD4; border-style: solid; border-width:
+	 * HTML color name "AQUAMARINE" - <span style="background-color:#7FFFD4; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Aquamarine("#7FFFD4"),
+	AQUAMARINE("#7FFFD4"),
 	/**
-	 * HTML color name "Azure" - <span style="background-color:#F0FFFF; border-style: solid; border-width:
+	 * HTML color name "AZURE" - <span style="background-color:#F0FFFF; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Azure("#F0FFFF"),
+	AZURE("#F0FFFF"),
 	/**
-	 * HTML color name "Beige" - <span style="background-color:#F5F5DC; border-style: solid; border-width:
+	 * HTML color name "BEIGE" - <span style="background-color:#F5F5DC; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Beige("#F5F5DC"),
+	BEIGE("#F5F5DC"),
 	/**
-	 * HTML color name "Bisque" - <span style="background-color:#FFE4C4; border-style: solid; border-width:
+	 * HTML color name "BISQUE" - <span style="background-color:#FFE4C4; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Bisque("#FFE4C4"),
+	BISQUE("#FFE4C4"),
 	/**
-	 * HTML color name "Black" - <span style="background-color:#000000; border-style: solid; border-width:
+	 * HTML color name "BLACK" - <span style="background-color:#000000; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Black("#000000"),
+	BLACK("#000000"),
 	/**
-	 * HTML color name "BlanchedAlmond" - <span style="background-color:#FFEBCD; border-style: solid; border-width:
+	 * HTML color name "BLANCHED_ALMOND" - <span style="background-color:#FFEBCD; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	BlanchedAlmond("#FFEBCD"),
+	BLANCHED_ALMOND("#FFEBCD"),
 	/**
-	 * HTML color name "Blue" - <span style="background-color:#0000FF; border-style: solid; border-width:
+	 * HTML color name "BLUE" - <span style="background-color:#0000FF; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Blue("#0000FF"),
+	BLUE("#0000FF"),
 	/**
-	 * HTML color name "BlueViolet" - <span style="background-color:#8A2BE2; border-style: solid; border-width:
+	 * HTML color name "BLUE_VIOLET" - <span style="background-color:#8A2BE2; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	BlueViolet("#8A2BE2"),
+	BLUE_VIOLET("#8A2BE2"),
 	/**
-	 * HTML color name "Brown" - <span style="background-color:#A52A2A; border-style: solid; border-width:
+	 * HTML color name "BROWN" - <span style="background-color:#A52A2A; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Brown("#A52A2A"),
+	BROWN("#A52A2A"),
 	/**
-	 * HTML color name "BurlyWood" - <span style="background-color:#DEB887; border-style: solid; border-width:
+	 * HTML color name "BURLY_WOOD" - <span style="background-color:#DEB887; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	BurlyWood("#DEB887"),
+	BURLY_WOOD("#DEB887"),
 	/**
-	 * HTML color name "CadetBlue" - <span style="background-color:#5F9EA0; border-style: solid; border-width:
+	 * HTML color name "CADET_BLUE" - <span style="background-color:#5F9EA0; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	CadetBlue("#5F9EA0"),
+	CADET_BLUE("#5F9EA0"),
 	/**
-	 * HTML color name "Chartreuse" - <span style="background-color:#7FFF00; border-style: solid; border-width:
+	 * HTML color name "CHARTREUSE" - <span style="background-color:#7FFF00; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Chartreuse("#7FFF00"),
+	CHARTREUSE("#7FFF00"),
 	/**
-	 * HTML color name "Chocolate" - <span style="background-color:#D2691E; border-style: solid; border-width:
+	 * HTML color name "CHOCOLATE" - <span style="background-color:#D2691E; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Chocolate("#D2691E"),
+	CHOCOLATE("#D2691E"),
 	/**
-	 * HTML color name "Coral" - <span style="background-color:#FF7F50; border-style: solid; border-width:
+	 * HTML color name "CORAL" - <span style="background-color:#FF7F50; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Coral("#FF7F50"),
+	CORAL("#FF7F50"),
 	/**
-	 * HTML color name "CornflowerBlue" - <span style="background-color:#6495ED; border-style: solid; border-width:
+	 * HTML color name "CORNFLOWER_BLUE" - <span style="background-color:#6495ED; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	CornflowerBlue("#6495ED"),
+	CORNFLOWER_BLUE("#6495ED"),
 	/**
-	 * HTML color name "Cornsilk" - <span style="background-color:#FFF8DC; border-style: solid; border-width:
+	 * HTML color name "CORNSILK" - <span style="background-color:#FFF8DC; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Cornsilk("#FFF8DC"),
+	CORNSILK("#FFF8DC"),
 	/**
-	 * HTML color name "Crimson" - <span style="background-color:#DC143C; border-style: solid; border-width:
+	 * HTML color name "CRIMSON" - <span style="background-color:#DC143C; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Crimson("#DC143C"),
+	CRIMSON("#DC143C"),
 	/**
-	 * HTML color name "Cyan" - <span style="background-color:#00FFFF; border-style: solid; border-width:
+	 * HTML color name "CYAN" - <span style="background-color:#00FFFF; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Cyan("#00FFFF"),
+	CYAN("#00FFFF"),
 	/**
-	 * HTML color name "DarkBlue" - <span style="background-color:#00008B; border-style: solid; border-width:
+	 * HTML color name "DARK_BLUE" - <span style="background-color:#00008B; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkBlue("#00008B"),
+	DARK_BLUE("#00008B"),
 	/**
-	 * HTML color name "DarkCyan" - <span style="background-color:#008B8B; border-style: solid; border-width:
+	 * HTML color name "DARK_CYAN" - <span style="background-color:#008B8B; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkCyan("#008B8B"),
+	DARK_CYAN("#008B8B"),
 	/**
-	 * HTML color name "DarkGoldenRod" - <span style="background-color:#B8860B; border-style: solid; border-width:
+	 * HTML color name "DARK_GOLDEN_ROD" - <span style="background-color:#B8860B; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkGoldenRod("#B8860B"),
+	DARK_GOLDEN_ROD("#B8860B"),
 	/**
-	 * HTML color name "DarkGray" - <span style="background-color:#A9A9A9; border-style: solid; border-width:
+	 * HTML color name "DARK_GRAY" - <span style="background-color:#A9A9A9; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkGray("#A9A9A9"),
+	DARK_GRAY("#A9A9A9"),
 	/**
-	 * HTML color name "DarkGrey" - <span style="background-color:#A9A9A9; border-style: solid; border-width:
+	 * HTML color name "DARK_GREY" - <span style="background-color:#A9A9A9; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkGrey("#A9A9A9"),
+	DARK_GREY("#A9A9A9"),
 	/**
-	 * HTML color name "DarkGreen" - <span style="background-color:#006400; border-style: solid; border-width:
+	 * HTML color name "DARK_GREEN" - <span style="background-color:#006400; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkGreen("#006400"),
+	DARK_GREEN("#006400"),
 	/**
-	 * HTML color name "DarkKhaki" - <span style="background-color:#BDB76B; border-style: solid; border-width:
+	 * HTML color name "DARK_KHAKI" - <span style="background-color:#BDB76B; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkKhaki("#BDB76B"),
+	DARK_KHAKI("#BDB76B"),
 	/**
-	 * HTML color name "DarkMagenta" - <span style="background-color:#8B008B; border-style: solid; border-width:
+	 * HTML color name "DARK_MAGENTA" - <span style="background-color:#8B008B; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkMagenta("#8B008B"),
+	DARK_MAGENTA("#8B008B"),
 	/**
-	 * HTML color name "DarkOliveGreen" - <span style="background-color:#556B2F; border-style: solid; border-width:
+	 * HTML color name "DARK_OLIVE_GREEN" - <span style="background-color:#556B2F; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkOliveGreen("#556B2F"),
+	DARK_OLIVE_GREEN("#556B2F"),
 	/**
-	 * HTML color name "DarkOrange" - <span style="background-color:#FF8C00; border-style: solid; border-width:
+	 * HTML color name "DARK_ORANGE" - <span style="background-color:#FF8C00; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkOrange("#FF8C00"),
+	DARK_ORANGE("#FF8C00"),
 	/**
-	 * HTML color name "DarkOrchid" - <span style="background-color:#9932CC; border-style: solid; border-width:
+	 * HTML color name "DARK_ORCHID" - <span style="background-color:#9932CC; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkOrchid("#9932CC"),
+	DARK_ORCHID("#9932CC"),
 	/**
-	 * HTML color name "DarkRed" - <span style="background-color:#8B0000; border-style: solid; border-width:
+	 * HTML color name "DARK_RED" - <span style="background-color:#8B0000; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkRed("#8B0000"),
+	DARK_RED("#8B0000"),
 	/**
-	 * HTML color name "DarkSalmon" - <span style="background-color:#E9967A; border-style: solid; border-width:
+	 * HTML color name "DARK_SALMON" - <span style="background-color:#E9967A; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkSalmon("#E9967A"),
+	DARK_SALMON("#E9967A"),
 	/**
-	 * HTML color name "DarkSeaGreen" - <span style="background-color:#8FBC8F; border-style: solid; border-width:
+	 * HTML color name "DARK_SEA_GREEN" - <span style="background-color:#8FBC8F; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkSeaGreen("#8FBC8F"),
+	DARK_SEA_GREEN("#8FBC8F"),
 	/**
-	 * HTML color name "DarkSlateBlue" - <span style="background-color:#483D8B; border-style: solid; border-width:
+	 * HTML color name "DARK_SLATE_BLUE" - <span style="background-color:#483D8B; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkSlateBlue("#483D8B"),
+	DARK_SLATE_BLUE("#483D8B"),
 	/**
-	 * HTML color name "DarkSlateGray" - <span style="background-color:#2F4F4F; border-style: solid; border-width:
+	 * HTML color name "DARK_SLATE_GRAY" - <span style="background-color:#2F4F4F; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkSlateGray("#2F4F4F"),
+	DARK_SLATE_GRAY("#2F4F4F"),
 	/**
-	 * HTML color name "DarkSlateGrey" - <span style="background-color:#2F4F4F; border-style: solid; border-width:
+	 * HTML color name "DARK_SLATE_GREY" - <span style="background-color:#2F4F4F; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkSlateGrey("#2F4F4F"),
+	DARK_SLATE_GREY("#2F4F4F"),
 	/**
-	 * HTML color name "DarkTurquoise" - <span style="background-color:#00CED1; border-style: solid; border-width:
+	 * HTML color name "DARK_TURQUOISE" - <span style="background-color:#00CED1; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkTurquoise("#00CED1"),
+	DARK_TURQUOISE("#00CED1"),
 	/**
-	 * HTML color name "DarkViolet" - <span style="background-color:#9400D3; border-style: solid; border-width:
+	 * HTML color name "DARK_VIOLET" - <span style="background-color:#9400D3; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DarkViolet("#9400D3"),
+	DARK_VIOLET("#9400D3"),
 	/**
-	 * HTML color name "DeepPink" - <span style="background-color:#FF1493; border-style: solid; border-width:
+	 * HTML color name "DEEP_PINK" - <span style="background-color:#FF1493; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DeepPink("#FF1493"),
+	DEEP_PINK("#FF1493"),
 	/**
-	 * HTML color name "DeepSkyBlue" - <span style="background-color:#00BFFF; border-style: solid; border-width:
+	 * HTML color name "DEEP_SKY_BLUE" - <span style="background-color:#00BFFF; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DeepSkyBlue("#00BFFF"),
+	DEEP_SKY_BLUE("#00BFFF"),
 	/**
-	 * HTML color name "DimGray" - <span style="background-color:#696969; border-style: solid; border-width:
+	 * HTML color name "DIM_GRAY" - <span style="background-color:#696969; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DimGray("#696969"),
+	DIM_GRAY("#696969"),
 	/**
-	 * HTML color name "DimGrey" - <span style="background-color:#696969; border-style: solid; border-width:
+	 * HTML color name "DIM_GREY" - <span style="background-color:#696969; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DimGrey("#696969"),
+	DIM_GREY("#696969"),
 	/**
-	 * HTML color name "DodgerBlue" - <span style="background-color:#1E90FF; border-style: solid; border-width:
+	 * HTML color name "DODGER_BLUE" - <span style="background-color:#1E90FF; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	DodgerBlue("#1E90FF"),
+	DODGER_BLUE("#1E90FF"),
 	/**
-	 * HTML color name "FireBrick" - <span style="background-color:#B22222; border-style: solid; border-width:
+	 * HTML color name "FIRE_BRICK" - <span style="background-color:#B22222; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	FireBrick("#B22222"),
+	FIRE_BRICK("#B22222"),
 	/**
-	 * HTML color name "FloralWhite" - <span style="background-color:#FFFAF0; border-style: solid; border-width:
+	 * HTML color name "FLORAL_WHITE" - <span style="background-color:#FFFAF0; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	FloralWhite("#FFFAF0"),
+	FLORAL_WHITE("#FFFAF0"),
 	/**
-	 * HTML color name "ForestGreen" - <span style="background-color:#228B22; border-style: solid; border-width:
+	 * HTML color name "FOREST_GREEN" - <span style="background-color:#228B22; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	ForestGreen("#228B22"),
+	FOREST_GREEN("#228B22"),
 	/**
-	 * HTML color name "Fuchsia" - <span style="background-color:#FF00FF; border-style: solid; border-width:
+	 * HTML color name "FUCHSIA" - <span style="background-color:#FF00FF; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Fuchsia("#FF00FF"),
+	FUCHSIA("#FF00FF"),
 	/**
-	 * HTML color name "Gainsboro" - <span style="background-color:#DCDCDC; border-style: solid; border-width:
+	 * HTML color name "GAINSBORO" - <span style="background-color:#DCDCDC; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Gainsboro("#DCDCDC"),
+	GAINSBORO("#DCDCDC"),
 	/**
-	 * HTML color name "GhostWhite" - <span style="background-color:#F8F8FF; border-style: solid; border-width:
+	 * HTML color name "GHOST_WHITE" - <span style="background-color:#F8F8FF; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	GhostWhite("#F8F8FF"),
+	GHOST_WHITE("#F8F8FF"),
 	/**
-	 * HTML color name "Gold" - <span style="background-color:#FFD700; border-style: solid; border-width:
+	 * HTML color name "GOLD" - <span style="background-color:#FFD700; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Gold("#FFD700"),
+	GOLD("#FFD700"),
 	/**
-	 * HTML color name "GoldenRod" - <span style="background-color:#DAA520; border-style: solid; border-width:
+	 * HTML color name "GOLDEN_ROD" - <span style="background-color:#DAA520; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	GoldenRod("#DAA520"),
+	GOLDEN_ROD("#DAA520"),
 	/**
-	 * HTML color name "Gray" - <span style="background-color:#808080; border-style: solid; border-width:
+	 * HTML color name "GRAY" - <span style="background-color:#808080; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Gray("#808080"),
+	GRAY("#808080"),
 	/**
-	 * HTML color name "Grey" - <span style="background-color:#808080; border-style: solid; border-width:
+	 * HTML color name "GREY" - <span style="background-color:#808080; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Grey("#808080"),
+	GREY("#808080"),
 	/**
-	 * HTML color name "Green" - <span style="background-color:#008000; border-style: solid; border-width:
+	 * HTML color name "GREEN" - <span style="background-color:#008000; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Green("#008000"),
+	GREEN("#008000"),
 	/**
-	 * HTML color name "GreenYellow" - <span style="background-color:#ADFF2F; border-style: solid; border-width:
+	 * HTML color name "GREEN_YELLOW" - <span style="background-color:#ADFF2F; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	GreenYellow("#ADFF2F"),
+	GREEN_YELLOW("#ADFF2F"),
 	/**
-	 * HTML color name "HoneyDew" - <span style="background-color:#F0FFF0; border-style: solid; border-width:
+	 * HTML color name "HONEY_DEW" - <span style="background-color:#F0FFF0; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	HoneyDew("#F0FFF0"),
+	HONEY_DEW("#F0FFF0"),
 	/**
-	 * HTML color name "HotPink" - <span style="background-color:#FF69B4; border-style: solid; border-width:
+	 * HTML color name "HOT_PINK" - <span style="background-color:#FF69B4; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	HotPink("#FF69B4"),
+	HOT_PINK("#FF69B4"),
 	/**
-	 * HTML color name "IndianRed" - <span style="background-color:#CD5C5C; border-style: solid; border-width:
+	 * HTML color name "INDIAN_RED" - <span style="background-color:#CD5C5C; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	IndianRed("#CD5C5C"),
+	INDIAN_RED("#CD5C5C"),
 	/**
-	 * HTML color name "Indigo" - <span style="background-color:#4B0082; border-style: solid; border-width:
+	 * HTML color name "INDIGO" - <span style="background-color:#4B0082; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Indigo("#4B0082"),
+	INDIGO("#4B0082"),
 	/**
-	 * HTML color name "Ivory" - <span style="background-color:#FFFFF0; border-style: solid; border-width:
+	 * HTML color name "IVORY" - <span style="background-color:#FFFFF0; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Ivory("#FFFFF0"),
+	IVORY("#FFFFF0"),
 	/**
-	 * HTML color name "Khaki" - <span style="background-color:#F0E68C; border-style: solid; border-width:
+	 * HTML color name "KHAKI" - <span style="background-color:#F0E68C; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Khaki("#F0E68C"),
+	KHAKI("#F0E68C"),
 	/**
-	 * HTML color name "Lavender" - <span style="background-color:#E6E6FA; border-style: solid; border-width:
+	 * HTML color name "LAVENDER" - <span style="background-color:#E6E6FA; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Lavender("#E6E6FA"),
+	LAVENDER("#E6E6FA"),
 	/**
-	 * HTML color name "LavenderBlush" - <span style="background-color:#FFF0F5; border-style: solid; border-width:
+	 * HTML color name "LAVENDER_BLUSH" - <span style="background-color:#FFF0F5; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LavenderBlush("#FFF0F5"),
+	LAVENDER_BLUSH("#FFF0F5"),
 	/**
-	 * HTML color name "LawnGreen" - <span style="background-color:#7CFC00; border-style: solid; border-width:
+	 * HTML color name "LAWN_GREEN" - <span style="background-color:#7CFC00; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LawnGreen("#7CFC00"),
+	LAWN_GREEN("#7CFC00"),
 	/**
-	 * HTML color name "LemonChiffon" - <span style="background-color:#FFFACD; border-style: solid; border-width:
+	 * HTML color name "LEMON_CHIFFON" - <span style="background-color:#FFFACD; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LemonChiffon("#FFFACD"),
+	LEMON_CHIFFON("#FFFACD"),
 	/**
-	 * HTML color name "LightBlue" - <span style="background-color:#ADD8E6; border-style: solid; border-width:
+	 * HTML color name "LIGHT_BLUE" - <span style="background-color:#ADD8E6; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LightBlue("#ADD8E6"),
+	LIGHT_BLUE("#ADD8E6"),
 	/**
-	 * HTML color name "LightCoral" - <span style="background-color:#F08080; border-style: solid; border-width:
+	 * HTML color name "LIGHT_CORAL" - <span style="background-color:#F08080; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LightCoral("#F08080"),
+	LIGHT_CORAL("#F08080"),
 	/**
-	 * HTML color name "LightCyan" - <span style="background-color:#E0FFFF; border-style: solid; border-width:
+	 * HTML color name "LIGHT_CYAN" - <span style="background-color:#E0FFFF; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LightCyan("#E0FFFF"),
+	LIGHT_CYAN("#E0FFFF"),
 	/**
-	 * HTML color name "LightGoldenRodYellow" - <span style="background-color:#FAFAD2; border-style: solid; border-width:
+	 * HTML color name "LIGHT_GOLDEN_ROD_YELLOW" - <span style="background-color:#FAFAD2; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LightGoldenRodYellow("#FAFAD2"),
+	LIGHT_GOLDEN_ROD_YELLOW("#FAFAD2"),
 	/**
-	 * HTML color name "LightGray" - <span style="background-color:#D3D3D3; border-style: solid; border-width:
+	 * HTML color name "LIGHT_GRAY" - <span style="background-color:#D3D3D3; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LightGray("#D3D3D3"),
+	LIGHT_GRAY("#D3D3D3"),
 	/**
-	 * HTML color name "LightGrey" - <span style="background-color:#D3D3D3; border-style: solid; border-width:
+	 * HTML color name "LIGHT_GREY" - <span style="background-color:#D3D3D3; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LightGrey("#D3D3D3"),
+	LIGHT_GREY("#D3D3D3"),
 	/**
-	 * HTML color name "LightGreen" - <span style="background-color:#90EE90; border-style: solid; border-width:
+	 * HTML color name "LIGHT_GREEN" - <span style="background-color:#90EE90; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LightGreen("#90EE90"),
+	LIGHT_GREEN("#90EE90"),
 	/**
-	 * HTML color name "LightPink" - <span style="background-color:#FFB6C1; border-style: solid; border-width:
+	 * HTML color name "LIGHT_PINK" - <span style="background-color:#FFB6C1; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LightPink("#FFB6C1"),
+	LIGHT_PINK("#FFB6C1"),
 	/**
-	 * HTML color name "LightSalmon" - <span style="background-color:#FFA07A; border-style: solid; border-width:
+	 * HTML color name "LIGHT_SALMON" - <span style="background-color:#FFA07A; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LightSalmon("#FFA07A"),
+	LIGHT_SALMON("#FFA07A"),
 	/**
-	 * HTML color name "LightSeaGreen" - <span style="background-color:#20B2AA; border-style: solid; border-width:
+	 * HTML color name "LIGHT_SEA_GREEN" - <span style="background-color:#20B2AA; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LightSeaGreen("#20B2AA"),
+	LIGHT_SEA_GREEN("#20B2AA"),
 	/**
-	 * HTML color name "LightSkyBlue" - <span style="background-color:#87CEFA; border-style: solid; border-width:
+	 * HTML color name "LIGHT_SKY_BLUE" - <span style="background-color:#87CEFA; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LightSkyBlue("#87CEFA"),
+	LIGHT_SKY_BLUE("#87CEFA"),
 	/**
-	 * HTML color name "LightSlateGray" - <span style="background-color:#778899; border-style: solid; border-width:
+	 * HTML color name "LIGHT_SLATE_GRAY" - <span style="background-color:#778899; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LightSlateGray("#778899"),
+	LIGHT_SLATE_GRAY("#778899"),
 	/**
-	 * HTML color name "LightSlateGrey" - <span style="background-color:#778899; border-style: solid; border-width:
+	 * HTML color name "LIGHT_SLATE_GREY" - <span style="background-color:#778899; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LightSlateGrey("#778899"),
+	LIGHT_SLATE_GREY("#778899"),
 	/**
-	 * HTML color name "LightSteelBlue" - <span style="background-color:#B0C4DE; border-style: solid; border-width:
+	 * HTML color name "LIGHT_STEEL_BLUE" - <span style="background-color:#B0C4DE; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LightSteelBlue("#B0C4DE"),
+	LIGHT_STEEL_BLUE("#B0C4DE"),
 	/**
-	 * HTML color name "LightYellow" - <span style="background-color:#FFFFE0; border-style: solid; border-width:
+	 * HTML color name "LIGHT_YELLOW" - <span style="background-color:#FFFFE0; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LightYellow("#FFFFE0"),
+	LIGHT_YELLOW("#FFFFE0"),
 	/**
-	 * HTML color name "Lime" - <span style="background-color:#00FF00; border-style: solid; border-width:
+	 * HTML color name "LIME" - <span style="background-color:#00FF00; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Lime("#00FF00"),
+	LIME("#00FF00"),
 	/**
-	 * HTML color name "LimeGreen" - <span style="background-color:#32CD32; border-style: solid; border-width:
+	 * HTML color name "LIME_GREEN" - <span style="background-color:#32CD32; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	LimeGreen("#32CD32"),
+	LIME_GREEN("#32CD32"),
 	/**
-	 * HTML color name "Linen" - <span style="background-color:#FAF0E6; border-style: solid; border-width:
+	 * HTML color name "LINEN" - <span style="background-color:#FAF0E6; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Linen("#FAF0E6"),
+	LINEN("#FAF0E6"),
 	/**
-	 * HTML color name "Magenta" - <span style="background-color:#FF00FF; border-style: solid; border-width:
+	 * HTML color name "MAGENTA" - <span style="background-color:#FF00FF; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Magenta("#FF00FF"),
+	MAGENTA("#FF00FF"),
 	/**
-	 * HTML color name "Maroon" - <span style="background-color:#800000; border-style: solid; border-width:
+	 * HTML color name "MAROON" - <span style="background-color:#800000; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Maroon("#800000"),
+	MAROON("#800000"),
 	/**
-	 * HTML color name "MediumAquaMarine" - <span style="background-color:#66CDAA; border-style: solid; border-width:
+	 * HTML color name "MEDIUM_AQUA_MARINE" - <span style="background-color:#66CDAA; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	MediumAquaMarine("#66CDAA"),
+	MEDIUM_AQUA_MARINE("#66CDAA"),
 	/**
-	 * HTML color name "MediumBlue" - <span style="background-color:#0000CD; border-style: solid; border-width:
+	 * HTML color name "MEDIUM_BLUE" - <span style="background-color:#0000CD; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	MediumBlue("#0000CD"),
+	MEDIUM_BLUE("#0000CD"),
 	/**
-	 * HTML color name "MediumOrchid" - <span style="background-color:#BA55D3; border-style: solid; border-width:
+	 * HTML color name "MEDIUM_ORCHID" - <span style="background-color:#BA55D3; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	MediumOrchid("#BA55D3"),
+	MEDIUM_ORCHID("#BA55D3"),
 	/**
-	 * HTML color name "MediumPurple" - <span style="background-color:#9370DB; border-style: solid; border-width:
+	 * HTML color name "MEDIUM_PURPLE" - <span style="background-color:#9370DB; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	MediumPurple("#9370DB"),
+	MEDIUM_PURPLE("#9370DB"),
 	/**
-	 * HTML color name "MediumSeaGreen" - <span style="background-color:#3CB371; border-style: solid; border-width:
+	 * HTML color name "MEDIUM_SEA_GREEN" - <span style="background-color:#3CB371; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	MediumSeaGreen("#3CB371"),
+	MEDIUM_SEA_GREEN("#3CB371"),
 	/**
-	 * HTML color name "MediumSlateBlue" - <span style="background-color:#7B68EE; border-style: solid; border-width:
+	 * HTML color name "MEDIUM_SLATE_BLUE" - <span style="background-color:#7B68EE; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	MediumSlateBlue("#7B68EE"),
+	MEDIUM_SLATE_BLUE("#7B68EE"),
 	/**
-	 * HTML color name "MediumSpringGreen" - <span style="background-color:#00FA9A; border-style: solid; border-width:
+	 * HTML color name "MEDIUM_SPRING_GREEN" - <span style="background-color:#00FA9A; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	MediumSpringGreen("#00FA9A"),
+	MEDIUM_SPRING_GREEN("#00FA9A"),
 	/**
-	 * HTML color name "MediumTurquoise" - <span style="background-color:#48D1CC; border-style: solid; border-width:
+	 * HTML color name "MEDIUM_TURQUOISE" - <span style="background-color:#48D1CC; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	MediumTurquoise("#48D1CC"),
+	MEDIUM_TURQUOISE("#48D1CC"),
 	/**
-	 * HTML color name "MediumVioletRed" - <span style="background-color:#C71585; border-style: solid; border-width:
+	 * HTML color name "MEDIUM_VIOLET_RED" - <span style="background-color:#C71585; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	MediumVioletRed("#C71585"),
+	MEDIUM_VIOLET_RED("#C71585"),
 	/**
-	 * HTML color name "MidnightBlue" - <span style="background-color:#191970; border-style: solid; border-width:
+	 * HTML color name "MIDNIGHT_BLUE" - <span style="background-color:#191970; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	MidnightBlue("#191970"),
+	MIDNIGHT_BLUE("#191970"),
 	/**
-	 * HTML color name "MintCream" - <span style="background-color:#F5FFFA; border-style: solid; border-width:
+	 * HTML color name "MINT_CREAM" - <span style="background-color:#F5FFFA; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	MintCream("#F5FFFA"),
+	MINT_CREAM("#F5FFFA"),
 	/**
-	 * HTML color name "MistyRose" - <span style="background-color:#FFE4E1; border-style: solid; border-width:
+	 * HTML color name "MISTY_ROSE" - <span style="background-color:#FFE4E1; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	MistyRose("#FFE4E1"),
+	MISTY_ROSE("#FFE4E1"),
 	/**
-	 * HTML color name "Moccasin" - <span style="background-color:#FFE4B5; border-style: solid; border-width:
+	 * HTML color name "MOCCASIN" - <span style="background-color:#FFE4B5; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Moccasin("#FFE4B5"),
+	MOCCASIN("#FFE4B5"),
 	/**
-	 * HTML color name "NavajoWhite" - <span style="background-color:#FFDEAD; border-style: solid; border-width:
+	 * HTML color name "NAVAJO_WHITE" - <span style="background-color:#FFDEAD; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	NavajoWhite("#FFDEAD"),
+	NAVAJO_WHITE("#FFDEAD"),
 	/**
-	 * HTML color name "Navy" - <span style="background-color:#000080; border-style: solid; border-width:
+	 * HTML color name "NAVY" - <span style="background-color:#000080; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Navy("#000080"),
+	NAVY("#000080"),
 	/**
-	 * HTML color name "OldLace" - <span style="background-color:#FDF5E6; border-style: solid; border-width:
+	 * HTML color name "OLD_LACE" - <span style="background-color:#FDF5E6; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	OldLace("#FDF5E6"),
+	OLD_LACE("#FDF5E6"),
 	/**
-	 * HTML color name "Olive" - <span style="background-color:#808000; border-style: solid; border-width:
+	 * HTML color name "OLIVE" - <span style="background-color:#808000; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Olive("#808000"),
+	OLIVE("#808000"),
 	/**
-	 * HTML color name "OliveDrab" - <span style="background-color:#6B8E23; border-style: solid; border-width:
+	 * HTML color name "OLIVE_DRAB" - <span style="background-color:#6B8E23; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	OliveDrab("#6B8E23"),
+	OLIVE_DRAB("#6B8E23"),
 	/**
-	 * HTML color name "Orange" - <span style="background-color:#FFA500; border-style: solid; border-width:
+	 * HTML color name "ORANGE" - <span style="background-color:#FFA500; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Orange("#FFA500"),
+	ORANGE("#FFA500"),
 	/**
-	 * HTML color name "OrangeRed" - <span style="background-color:#FF4500; border-style: solid; border-width:
+	 * HTML color name "ORANGE_RED" - <span style="background-color:#FF4500; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	OrangeRed("#FF4500"),
+	ORANGE_RED("#FF4500"),
 	/**
-	 * HTML color name "Orchid" - <span style="background-color:#DA70D6; border-style: solid; border-width:
+	 * HTML color name "ORCHID" - <span style="background-color:#DA70D6; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Orchid("#DA70D6"),
+	ORCHID("#DA70D6"),
 	/**
-	 * HTML color name "PaleGoldenRod" - <span style="background-color:#EEE8AA; border-style: solid; border-width:
+	 * HTML color name "PALE_GOLDEN_ROD" - <span style="background-color:#EEE8AA; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	PaleGoldenRod("#EEE8AA"),
+	PALE_GOLDEN_ROD("#EEE8AA"),
 	/**
-	 * HTML color name "PaleGreen" - <span style="background-color:#98FB98; border-style: solid; border-width:
+	 * HTML color name "PALE_GREEN" - <span style="background-color:#98FB98; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	PaleGreen("#98FB98"),
+	PALE_GREEN("#98FB98"),
 	/**
-	 * HTML color name "PaleTurquoise" - <span style="background-color:#AFEEEE; border-style: solid; border-width:
+	 * HTML color name "PALE_TURQUOISE" - <span style="background-color:#AFEEEE; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	PaleTurquoise("#AFEEEE"),
+	PALE_TURQUOISE("#AFEEEE"),
 	/**
-	 * HTML color name "PaleVioletRed" - <span style="background-color:#DB7093; border-style: solid; border-width:
+	 * HTML color name "PALE_VIOLET_RED" - <span style="background-color:#DB7093; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	PaleVioletRed("#DB7093"),
+	PALE_VIOLET_RED("#DB7093"),
 	/**
-	 * HTML color name "PapayaWhip" - <span style="background-color:#FFEFD5; border-style: solid; border-width:
+	 * HTML color name "PAPAYA_WHIP" - <span style="background-color:#FFEFD5; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	PapayaWhip("#FFEFD5"),
+	PAPAYA_WHIP("#FFEFD5"),
 	/**
-	 * HTML color name "PeachPuff" - <span style="background-color:#FFDAB9; border-style: solid; border-width:
+	 * HTML color name "PEACH_PUFF" - <span style="background-color:#FFDAB9; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	PeachPuff("#FFDAB9"),
+	PEACH_PUFF("#FFDAB9"),
 	/**
-	 * HTML color name "Peru" - <span style="background-color:#CD853F; border-style: solid; border-width:
+	 * HTML color name "PERU" - <span style="background-color:#CD853F; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Peru("#CD853F"),
+	PERU("#CD853F"),
 	/**
-	 * HTML color name "Pink" - <span style="background-color:#FFC0CB; border-style: solid; border-width:
+	 * HTML color name "PINK" - <span style="background-color:#FFC0CB; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Pink("#FFC0CB"),
+	PINK("#FFC0CB"),
 	/**
-	 * HTML color name "Plum" - <span style="background-color:#DDA0DD; border-style: solid; border-width:
+	 * HTML color name "PLUM" - <span style="background-color:#DDA0DD; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Plum("#DDA0DD"),
+	PLUM("#DDA0DD"),
 	/**
-	 * HTML color name "PowderBlue" - <span style="background-color:#B0E0E6; border-style: solid; border-width:
+	 * HTML color name "POWDER_BLUE" - <span style="background-color:#B0E0E6; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	PowderBlue("#B0E0E6"),
+	POWDER_BLUE("#B0E0E6"),
 	/**
-	 * HTML color name "Purple" - <span style="background-color:#800080; border-style: solid; border-width:
+	 * HTML color name "PURPLE" - <span style="background-color:#800080; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Purple("#800080"),
+	PURPLE("#800080"),
 	/**
-	 * HTML color name "RebeccaPurple" - <span style="background-color:#663399; border-style: solid; border-width:
+	 * HTML color name "REBECCA_PURPLE" - <span style="background-color:#663399; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	RebeccaPurple("#663399"),
+	REBECCA_PURPLE("#663399"),
 	/**
-	 * HTML color name "Red" - <span style="background-color:#FF0000; border-style: solid; border-width:
+	 * HTML color name "RED" - <span style="background-color:#FF0000; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Red("#FF0000"),
+	RED("#FF0000"),
 	/**
-	 * HTML color name "RosyBrown" - <span style="background-color:#BC8F8F; border-style: solid; border-width:
+	 * HTML color name "ROSY_BROWN" - <span style="background-color:#BC8F8F; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	RosyBrown("#BC8F8F"),
+	ROSY_BROWN("#BC8F8F"),
 	/**
-	 * HTML color name "RoyalBlue" - <span style="background-color:#4169E1; border-style: solid; border-width:
+	 * HTML color name "ROYAL_BLUE" - <span style="background-color:#4169E1; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	RoyalBlue("#4169E1"),
+	ROYAL_BLUE("#4169E1"),
 	/**
-	 * HTML color name "SaddleBrown" - <span style="background-color:#8B4513; border-style: solid; border-width:
+	 * HTML color name "SADDLE_BROWN" - <span style="background-color:#8B4513; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	SaddleBrown("#8B4513"),
+	SADDLE_BROWN("#8B4513"),
 	/**
-	 * HTML color name "Salmon" - <span style="background-color:#FA8072; border-style: solid; border-width:
+	 * HTML color name "SALMON" - <span style="background-color:#FA8072; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Salmon("#FA8072"),
+	SALMON("#FA8072"),
 	/**
-	 * HTML color name "SandyBrown" - <span style="background-color:#F4A460; border-style: solid; border-width:
+	 * HTML color name "SANDY_BROWN" - <span style="background-color:#F4A460; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	SandyBrown("#F4A460"),
+	SANDY_BROWN("#F4A460"),
 	/**
-	 * HTML color name "SeaGreen" - <span style="background-color:#2E8B57; border-style: solid; border-width:
+	 * HTML color name "SEA_GREEN" - <span style="background-color:#2E8B57; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	SeaGreen("#2E8B57"),
+	SEA_GREEN("#2E8B57"),
 	/**
-	 * HTML color name "SeaShell" - <span style="background-color:#FFF5EE; border-style: solid; border-width:
+	 * HTML color name "SEA_SHELL" - <span style="background-color:#FFF5EE; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	SeaShell("#FFF5EE"),
+	SEA_SHELL("#FFF5EE"),
 	/**
-	 * HTML color name "Sienna" - <span style="background-color:#A0522D; border-style: solid; border-width:
+	 * HTML color name "SIENNA" - <span style="background-color:#A0522D; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Sienna("#A0522D"),
+	SIENNA("#A0522D"),
 	/**
-	 * HTML color name "Silver" - <span style="background-color:#C0C0C0; border-style: solid; border-width:
+	 * HTML color name "SILVER" - <span style="background-color:#C0C0C0; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Silver("#C0C0C0"),
+	SILVER("#C0C0C0"),
 	/**
-	 * HTML color name "SkyBlue" - <span style="background-color:#87CEEB; border-style: solid; border-width:
+	 * HTML color name "SKY_BLUE" - <span style="background-color:#87CEEB; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	SkyBlue("#87CEEB"),
+	SKY_BLUE("#87CEEB"),
 	/**
-	 * HTML color name "SlateBlue" - <span style="background-color:#6A5ACD; border-style: solid; border-width:
+	 * HTML color name "SLATE_BLUE" - <span style="background-color:#6A5ACD; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	SlateBlue("#6A5ACD"),
+	SLATE_BLUE("#6A5ACD"),
 	/**
-	 * HTML color name "SlateGray" - <span style="background-color:#708090; border-style: solid; border-width:
+	 * HTML color name "SLATE_GRAY" - <span style="background-color:#708090; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	SlateGray("#708090"),
+	SLATE_GRAY("#708090"),
 	/**
-	 * HTML color name "SlateGrey" - <span style="background-color:#708090; border-style: solid; border-width:
+	 * HTML color name "SLATE_GREY" - <span style="background-color:#708090; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	SlateGrey("#708090"),
+	SLATE_GREY("#708090"),
 	/**
-	 * HTML color name "Snow" - <span style="background-color:#FFFAFA; border-style: solid; border-width:
+	 * HTML color name "SNOW" - <span style="background-color:#FFFAFA; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Snow("#FFFAFA"),
+	SNOW("#FFFAFA"),
 	/**
-	 * HTML color name "SpringGreen" - <span style="background-color:#00FF7F; border-style: solid; border-width:
+	 * HTML color name "SPRING_GREEN" - <span style="background-color:#00FF7F; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	SpringGreen("#00FF7F"),
+	SPRING_GREEN("#00FF7F"),
 	/**
-	 * HTML color name "SteelBlue" - <span style="background-color:#4682B4; border-style: solid; border-width:
+	 * HTML color name "STEEL_BLUE" - <span style="background-color:#4682B4; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	SteelBlue("#4682B4"),
+	STEEL_BLUE("#4682B4"),
 	/**
-	 * HTML color name "Tan" - <span style="background-color:#D2B48C; border-style: solid; border-width:
+	 * HTML color name "TAN" - <span style="background-color:#D2B48C; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Tan("#D2B48C"),
+	TAN("#D2B48C"),
 	/**
-	 * HTML color name "Teal" - <span style="background-color:#008080; border-style: solid; border-width:
+	 * HTML color name "TEAL" - <span style="background-color:#008080; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Teal("#008080"),
+	TEAL("#008080"),
 	/**
-	 * HTML color name "Thistle" - <span style="background-color:#D8BFD8; border-style: solid; border-width:
+	 * HTML color name "THISTLE" - <span style="background-color:#D8BFD8; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Thistle("#D8BFD8"),
+	THISTLE("#D8BFD8"),
 	/**
-	 * HTML color name "Tomato" - <span style="background-color:#FF6347; border-style: solid; border-width:
+	 * HTML color name "TOMATO" - <span style="background-color:#FF6347; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Tomato("#FF6347"),
+	TOMATO("#FF6347"),
 	/**
-	 * HTML color name "Turquoise" - <span style="background-color:#40E0D0; border-style: solid; border-width:
+	 * HTML color name "TURQUOISE" - <span style="background-color:#40E0D0; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Turquoise("#40E0D0"),
+	TURQUOISE("#40E0D0"),
 	/**
-	 * HTML color name "Violet" - <span style="background-color:#EE82EE; border-style: solid; border-width:
+	 * HTML color name "VIOLET" - <span style="background-color:#EE82EE; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Violet("#EE82EE"),
+	VIOLET("#EE82EE"),
 	/**
-	 * HTML color name "Wheat" - <span style="background-color:#F5DEB3; border-style: solid; border-width:
+	 * HTML color name "WHEAT" - <span style="background-color:#F5DEB3; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Wheat("#F5DEB3"),
+	WHEAT("#F5DEB3"),
 	/**
-	 * HTML color name "White" - <span style="background-color:#FFFFFF; border-style: solid; border-width:
+	 * HTML color name "WHITE" - <span style="background-color:#FFFFFF; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	White("#FFFFFF"),
+	WHITE("#FFFFFF"),
 	/**
-	 * HTML color name "WhiteSmoke" - <span style="background-color:#F5F5F5; border-style: solid; border-width:
+	 * HTML color name "WHITE_SMOKE" - <span style="background-color:#F5F5F5; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	WhiteSmoke("#F5F5F5"),
+	WHITE_SMOKE("#F5F5F5"),
 	/**
-	 * HTML color name "Yellow" - <span style="background-color:#FFFF00; border-style: solid; border-width:
+	 * HTML color name "YELLOW" - <span style="background-color:#FFFF00; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	Yellow("#FFFF00"),
+	YELLOW("#FFFF00"),
 	/**
-	 * HTML color name "YellowGreen" - <span style="background-color:#9ACD32; border-style: solid; border-width:
+	 * HTML color name "YELLOW_GREEN" - <span style="background-color:#9ACD32; border-style: solid; border-width:
 	 * 1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
-	YellowGreen("#9ACD32");
+	YELLOW_GREEN("#9ACD32");
 
 	// color string representation in hex mode
 	private final String hexValue;

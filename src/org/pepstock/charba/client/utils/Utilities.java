@@ -54,7 +54,7 @@ public final class Utilities {
 		// gets template
 		final String result = FONT_TEMPLATE;
 		// formats
-		return result.replaceAll("\\{0\\}", style.name()).replaceAll("\\{1\\}", String.valueOf(fontSize)).replaceAll("\\{2\\}", fontFamily);
+		return result.replaceAll("\\{0\\}", style.value()).replaceAll("\\{1\\}", String.valueOf(fontSize)).replaceAll("\\{2\\}", fontFamily);
 	}
 
 	/**
@@ -158,4 +158,5 @@ public final class Utilities {
 		// if here, not found
 		return Cursor.DEFAULT;
 	}
+
 }
