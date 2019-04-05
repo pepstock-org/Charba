@@ -128,19 +128,15 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	 */
 	@Override
 	public boolean addAll(Collection<? extends String> c) {
-		// set modified checking if collection is empty
-		boolean modified = !c.isEmpty();
+		// set modified
+		boolean modified = false;
 		Iterator<? extends String> e = c.iterator();
 		// scans all elements
 		while (e.hasNext()) {
-			// if adds
-			if (add(e.next())) {
-				// sets modified
-				modified &= true;
-			} else {
-				// sets false!
-				modified = false;
-			}
+			// adds
+			add(e.next());
+			// sets modified
+			modified = true;
 		}
 		return modified;
 	}

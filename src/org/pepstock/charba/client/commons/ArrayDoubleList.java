@@ -127,19 +127,15 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 	 */
 	@Override
 	public boolean addAll(Collection<? extends Double> c) {
-		// set modified checking if collection is empty
-		boolean modified = !c.isEmpty();
+		// set modified 
+		boolean modified = false;
 		Iterator<? extends Double> e = c.iterator();
 		// scans all elements
 		while (e.hasNext()) {
-			// if adds
-			if (add(e.next())) {
-				// sets modified
-				modified &= true;
-			} else {
-				// sets false!
-				modified = false;
-			}
+			// adds
+			add(e.next());
+			// sets modified
+			modified = true;
 		}
 		return modified;
 	}

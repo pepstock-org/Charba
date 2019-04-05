@@ -139,7 +139,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, Arr
 	 */
 	@Override
 	public boolean addAll(Collection<? extends E> c) {
-		// set modified checking if collection is empty
+		// set modified
 		boolean modified = false;
 		Iterator<? extends E> e = c.iterator();
 		// scans all elements

@@ -128,14 +128,15 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 	 */
 	@Override
 	public boolean addAll(Collection<? extends NativeObject> c) {
-		// set modified checking if collection is empty
-		boolean modified = !c.isEmpty();
+		// set modified 
+		boolean modified = false;
 		Iterator<? extends NativeObject> e = c.iterator();
 		// scans all elements
 		while (e.hasNext()) {
+			// adds
 			add(e.next());
 			// sets modified
-			modified &= true;
+			modified = true;
 		}
 		return modified;
 	}
