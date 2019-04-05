@@ -29,7 +29,7 @@ public interface Key {
 	 * @return the name value of property
 	 */
 	String value();
-	
+
 	/**
 	 * Returns <code>true</code> if a key into an enumeration is related to the value, otherwise <code>false</code>.
 	 * 

@@ -132,7 +132,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 		Iterator<? extends Integer> e = c.iterator();
 		// scans all elements
 		while (e.hasNext()) {
-			//  adds
+			// adds
 			add(e.next());
 			// sets modified
 			modified = true;

@@ -128,7 +128,7 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 	 */
 	@Override
 	public boolean addAll(Collection<? extends NativeObject> c) {
-		// set modified 
+		// set modified
 		boolean modified = false;
 		Iterator<? extends NativeObject> e = c.iterator();
 		// scans all elements
