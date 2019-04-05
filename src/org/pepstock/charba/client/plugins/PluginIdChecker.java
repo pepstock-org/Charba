@@ -30,13 +30,13 @@ import com.google.gwt.safehtml.shared.UriUtils;
 public final class PluginIdChecker {
 
 	// exception text when plugin id is null
-	private static final String INVALID_PLUGIN__ID_NULL = "Plugin id can not be null ";
+	private static final String INVALID_PLUGIN_ID_NULL = "Plugin id can not be null ";
 	// exception text when plugin starts with dot or underscore
-	private static final String INVALID_PLUGIN__ID_INVALID_FIRST_CHAR = "Plugin id can not start with a dot or an underscore ";
+	private static final String INVALID_PLUGIN_ID_INVALID_FIRST_CHAR = "Plugin id can not start with a dot or an underscore ";
 	// exception text when plugin id is not URL safe
-	private static final String INVALID_PLUGIN__ID_NOT_URL_SAFE = "Plugin id can not contain any non-URL-safe characters ";
+	private static final String INVALID_PLUGIN_ID_NOT_URL_SAFE = "Plugin id can not contain any non-URL-safe characters ";
 	// exception text when plugin id is not lower case
-	private static final String INVALID_PLUGIN__ID_NOT_LOWERCASE_UPPERCASE = "Plugin id can not contain uppercase letters ";
+	private static final String INVALID_PLUGIN_ID_NOT_LOWERCASE_UPPERCASE = "Plugin id can not contain uppercase letters ";
 	// DOT constant
 	private static final char DOT = '.';
 	// underscore constant
@@ -64,16 +64,16 @@ public final class PluginIdChecker {
 	public static void check(String id) {
 		// checks if is null
 		if (id == null) {
-			throw new IllegalArgumentException(INVALID_PLUGIN__ID_NULL);
+			throw new IllegalArgumentException(INVALID_PLUGIN_ID_NULL);
 		} else if (id.charAt(0) == DOT || id.charAt(0) == UNDERSCORE) {
 			// checks if is starting with DOT or underscore
-			throw new IllegalArgumentException(buildMessage(id, INVALID_PLUGIN__ID_INVALID_FIRST_CHAR));
+			throw new IllegalArgumentException(buildMessage(id, INVALID_PLUGIN_ID_INVALID_FIRST_CHAR));
 		} else if (!UriUtils.isSafeUri(id)) {
 			// checks if is not safe URL
-			throw new IllegalArgumentException(buildMessage(id, INVALID_PLUGIN__ID_NOT_URL_SAFE));
+			throw new IllegalArgumentException(buildMessage(id, INVALID_PLUGIN_ID_NOT_URL_SAFE));
 		} else if (!id.toLowerCase(Locale.getDefault()).equals(id)) {
 			// checks if contains uppercase letters
-			throw new IllegalArgumentException(buildMessage(id, INVALID_PLUGIN__ID_NOT_LOWERCASE_UPPERCASE));
+			throw new IllegalArgumentException(buildMessage(id, INVALID_PLUGIN_ID_NOT_LOWERCASE_UPPERCASE));
 		}
 	}
 

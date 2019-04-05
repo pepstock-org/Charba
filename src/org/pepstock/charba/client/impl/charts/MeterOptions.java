@@ -47,7 +47,7 @@ public class MeterOptions extends AbstractPieOptions {
 	public static final IsColor DEFAULT_DISPLAY_COLOR = new Color(128, 128, 128);
 
 	// exception message
-	private static final String INVALID__CALL = "The invoked component is not available for Meter or Gauge charts.";
+	private static final String INVALID_CALL = "The invoked component is not available for Meter or Gauge charts.";
 
 	private static final double DEFAULT_CUTOUT_PERCENTAGE = 90D;
 
@@ -129,7 +129,7 @@ public class MeterOptions extends AbstractPieOptions {
 	@Deprecated
 	@Override
 	public final Hover getHover() {
-		throw new UnsupportedOperationException(INVALID__CALL);
+		throw new UnsupportedOperationException(INVALID_CALL);
 	}
 
 	/*
@@ -140,7 +140,7 @@ public class MeterOptions extends AbstractPieOptions {
 	@Deprecated
 	@Override
 	public final Layout getLayout() {
-		throw new UnsupportedOperationException(INVALID__CALL);
+		throw new UnsupportedOperationException(INVALID_CALL);
 	}
 
 	/*
@@ -151,7 +151,7 @@ public class MeterOptions extends AbstractPieOptions {
 	@Deprecated
 	@Override
 	public final Legend getLegend() {
-		throw new UnsupportedOperationException(INVALID__CALL);
+		throw new UnsupportedOperationException(INVALID_CALL);
 	}
 
 	/*
@@ -162,7 +162,7 @@ public class MeterOptions extends AbstractPieOptions {
 	@Deprecated
 	@Override
 	public final Tooltips getTooltips() {
-		throw new UnsupportedOperationException(INVALID__CALL);
+		throw new UnsupportedOperationException(INVALID_CALL);
 	}
 
 	/*
@@ -174,7 +174,7 @@ public class MeterOptions extends AbstractPieOptions {
 	@Deprecated
 	@Override
 	public final void setLegendCallback(LegendCallback legendCallback) {
-		throw new UnsupportedOperationException(INVALID__CALL);
+		throw new UnsupportedOperationException(INVALID_CALL);
 	}
 
 	/**

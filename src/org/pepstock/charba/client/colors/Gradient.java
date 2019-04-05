@@ -43,20 +43,8 @@ public final class Gradient extends CanvasObject {
 	private final ArrayObjectContainerList<GradientColor> colors;
 	// factory to creates color by native object
 	private final GradientColorFactory factory = new GradientColorFactory();
-	// internal comparator to sort colors y own offset
-	private static final Comparator<GradientColor> COMPARATOR = new Comparator<GradientColor>() {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
-		 */
-		@Override
-		public int compare(GradientColor o1, GradientColor o2) {
-			return Double.compare(o1.getOffset(), o2.getOffset());
-		}
-
-	};
+	// internal comparator to sort colors by own offset
+	private static final Comparator<GradientColor> COMPARATOR = (GradientColor o1, GradientColor o2) -> Double.compare(o1.getOffset(), o2.getOffset());
 
 	/**
 	 * Name of properties of native object. ALL INTERNAL USE ONLY

@@ -173,7 +173,7 @@ public final class ScriptableUtils {
 				return color.toRGBA();
 			} else if (result instanceof String) {
 				// is string instance
-				return (String) result;
+				return result;
 			} else if (result instanceof Pattern && hasPattern) {
 				// is pattern instance
 				Pattern pattern = (Pattern) result;
@@ -188,10 +188,10 @@ public final class ScriptableUtils {
 				// otherwise returns default
 			} else if (result instanceof CanvasGradient) {
 				// is canvas gradient instance
-				return (CanvasGradient) result;
+				return result;
 			} else if (result instanceof CanvasPattern && hasPattern) {
 				// is canvas pattern instance
-				return (CanvasPattern) result;
+				return result;
 			} else if (result != null && hasPattern) {
 				// another instance not null
 				// returns to string

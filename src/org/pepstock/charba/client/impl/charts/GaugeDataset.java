@@ -40,7 +40,7 @@ public final class GaugeDataset extends MeterDataset {
 	// list if thresholds
 	private final List<Threshold> thresholds = new LinkedList<>();
 	// current status related to threshold
-	private IsThreshold current = GaugeThreshold.normal.getThreshold();
+	private IsThreshold current = GaugeThreshold.NORMAL.getThreshold();
 	// flag to understand if the absolute or percentage value must be used
 	// to compare thresholds
 	private boolean percentageThreshold = true;
@@ -208,7 +208,7 @@ public final class GaugeDataset extends MeterDataset {
 			return ((LinkedList<Threshold>) thresholds).getLast();
 		}
 		// default threshold is returned
-		return GaugeThreshold.normal.getThreshold();
+		return GaugeThreshold.NORMAL.getThreshold();
 	}
 
 }

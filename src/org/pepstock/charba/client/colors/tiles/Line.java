@@ -52,9 +52,9 @@ class Line extends ShapeDrawer {
 		// apply the stroke properties
 		applyStrokeProperties(context, shapeColor, size);
 		// designs the shape into A section
-		drawLine(context, size, 0D, 0D);
+		drawLine(context, size, 0D);
 		// designs the shape into B section
-		drawLine(context, size, halfSize, halfSize);
+		drawLine(context, size, halfSize);
 		// draws the current path with the current stroke style
 		context.stroke();
 	}
@@ -64,10 +64,9 @@ class Line extends ShapeDrawer {
 	 * 
 	 * @param context context of canvas to design the shape
 	 * @param size the size of tile, which is a square
-	 * @param offsetX offset X where starts drawing
 	 * @param offsetY offset Y where starts drawing
 	 */
-	final void drawLine(Context2d context, int size, double offsetX, double offsetY) {
+	final void drawLine(Context2d context, int size, double offsetY) {
 		// calculates quarter dimension
 		final double quarterSize = size / 4D;
 		// draws shape

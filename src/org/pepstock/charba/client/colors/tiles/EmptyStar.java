@@ -63,7 +63,7 @@ class EmptyStar extends ShapeDrawer {
 		// applies rotation (90 degrees) to the current transform
 		context.rotate(ROTATION_180_DEGREES);
 		// designs the shape into A section
-		drawStar(context, size, halfSize, halfSize, SPIKES, halfSize - 2D, quarterSize - 1D);
+		drawStar(context, halfSize, halfSize, SPIKES, halfSize - 2D, quarterSize - 1D);
 		// strokes the current path
 		context.stroke();
 	}
@@ -72,20 +72,19 @@ class EmptyStar extends ShapeDrawer {
 	 * Designs a star into a tile section.
 	 * 
 	 * @param context context of canvas to design the shape
-	 * @param size the size of tile, which is a square
 	 * @param offsetX offset X where starts drawing
 	 * @param offsetY offset Y where starts drawing
 	 * @param spikes number of spikes of star
 	 * @param innerRadius inner radius of star
 	 * @param outerRadius outer radius of star
 	 */
-	final void drawStar(Context2d context, int size, double offsetX, double offsetY, int spikes, double innerRadius, double outerRadius) {
+	final void drawStar(Context2d context, double offsetX, double offsetY, int spikes, double innerRadius, double outerRadius) {
 		// calculates quarter dimension
 		double rot = Math.PI / 2D * 3D;
 		// calculates the center X of arc
-		double x = 0D;
+		double x;
 		// calculates the center Y of arc
-		double y = 0D;
+		double y;
 		// calculates of step
 		final double step = Math.PI / spikes;
 		// draws shape

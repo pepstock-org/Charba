@@ -125,7 +125,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			// clear the selection
 			handler.removeClearSelection();
 			// checks if the selection was done
-			mustBeUpdated = !SelectionStatus.ready.equals(handler.getStatus());
+			mustBeUpdated = !SelectionStatus.READY.equals(handler.getStatus());
 		}
 		// destroy the current configuration
 		onDestroy(chart);
@@ -304,7 +304,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 					}
 					// if the selections is already present
 					// it refreshes all the calculation of existing selection
-					if (handler.getStatus().equals(SelectionStatus.selected)) {
+					if (handler.getStatus().equals(SelectionStatus.SELECTED)) {
 						handler.refresh();
 					}
 				} else {

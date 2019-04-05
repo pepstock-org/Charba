@@ -58,7 +58,7 @@ public final class ColorBuilder {
 	private ColorBuilder() {
 		// nothing
 	}
-
+	
 	/**
 	 * Builds a list of colors starting from a list of strings which represent colors.
 	 * 
@@ -179,7 +179,17 @@ public final class ColorBuilder {
 	 * @param hexvalue hex color.
 	 * @return color instance
 	 */
-	private static IsColor buildByHexValue(String hexvalue) {
+	static IsColor buildByHexValue(String hexvalue) {
+		return buildByHexValue(hexvalue, true);
+	}
+	/**
+	 * Parses HEX value translating into a color. HEX format: <code>#rrggbb</code>.
+	 * 
+	 * @param hexvalue hex color.
+	 * @param searchOnEnum if <code>true</code> scans the html and GWT material color 
+	 * @return color instance
+	 */
+	static IsColor buildByHexValue(String hexvalue, boolean searchOnEnum) {
 		// removes the pound
 		String newHexvalue = hexvalue.substring(1);
 		// checks if the HEX value is the short one
@@ -203,7 +213,7 @@ public final class ColorBuilder {
 			String blueValue = newHexvalue.substring(4);
 			int blue = Integer.parseInt(blueValue, 16);
 			// builds color
-			return build(red, green, blue);
+			return searchOnEnum ? build(red, green, blue) : new Color(red, green, blue, Color.DEFAULT_ALPHA);
 		} else {
 			// if here the hex value is not valid
 			throw new IllegalArgumentException("Hex value is invalid. Must be length 3 or 6");
@@ -419,7 +429,7 @@ public final class ColorBuilder {
 		double transientLightness = lightness / 100D;
 		// we need to create some temporary variables
 		// the variables are used to store temporary values which makes the formulas easier to read
-		double temporary1 = 0D;
+		double temporary1;
 		// There are two formulas to choose from in the first step.
 		// if Lightness is smaller then 0.5 (50%) then temporary1 = Lightness x (1.0 + Saturation)
 		// If Lightness is equal or larger then 0.5 (50%) then temporary1 = Lightness + Saturation - Lightness x Saturation
@@ -432,13 +442,13 @@ public final class ColorBuilder {
 		double temporary2 = 2 * transientLightness - temporary1;
 		// // And now we need another temporary variable for each color channel, temporary_R, temporary_G and temporary_B.
 		// calculate RED, GREEN and BLUE as Double
-		double temporary_R = Math.max(0, hueToRGB(temporary2, temporary1, transientHue + (1D / 3D)));
-		double temporary_G = Math.max(0, hueToRGB(temporary2, temporary1, transientHue));
-		double temporary_B = Math.max(0, hueToRGB(temporary2, temporary1, transientHue - (1D / 3D)));
+		double temporaryRed = Math.max(0, hueToRGB(temporary2, temporary1, transientHue + (1D / 3D)));
+		double temporaryGreen = Math.max(0, hueToRGB(temporary2, temporary1, transientHue));
+		double temporaryBlue = Math.max(0, hueToRGB(temporary2, temporary1, transientHue - (1D / 3D)));
 		// calculate RED, GREEN and BLUE as Integer
-		int red = (int) Math.round(Math.min(temporary_R, 1) * 255F);
-		int green = (int) Math.round(Math.min(temporary_G, 1) * 255);
-		int blue = (int) Math.round(Math.min(temporary_B, 1) * 255);
+		int red = (int) Math.round(Math.min(temporaryRed, 1) * 255F);
+		int green = (int) Math.round(Math.min(temporaryGreen, 1) * 255);
+		int blue = (int) Math.round(Math.min(temporaryBlue, 1) * 255);
 		// checks if alpha is NaN
 		// builds the RGB color without alpha
 		// otherwise with alpha

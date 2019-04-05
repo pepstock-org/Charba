@@ -56,7 +56,7 @@ class DoubleDiagonal extends Diagonal {
 		// designs the shape into C section
 		drawDiagonal(context, size, halfSize, halfSize);
 		// designs the shape into A-D section
-		drawWholeDiagonal(context, size, 0D, 0D);
+		drawWholeDiagonal(context, size);
 		// draws the current path with the current stroke style
 		context.stroke();
 	}
@@ -66,10 +66,8 @@ class DoubleDiagonal extends Diagonal {
 	 * 
 	 * @param context context of canvas to design the shape
 	 * @param size the size of tile, which is a square
-	 * @param offsetX offset X where starts drawing
-	 * @param offsetY offset Y where starts drawing
 	 */
-	final void drawWholeDiagonal(Context2d context, int size, double offsetX, double offsetY) {
+	final void drawWholeDiagonal(Context2d context, int size) {
 		// draws shape
 		// to point for drawing line
 		context.moveTo(0D, 0D);

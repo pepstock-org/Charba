@@ -30,15 +30,15 @@ public enum GaugeThreshold implements IsThreshold
 	/**
 	 * the normal threshold
 	 */
-	normal(75D, new Color(140, 214, 16)),
+	NORMAL(75D, new Color(140, 214, 16)),
 	/**
 	 * the warning threshold.
 	 */
-	warning(90D, new Color(239, 198, 0)),
+	WARNING(90D, new Color(239, 198, 0)),
 	/**
 	 * the critical threshold.
 	 */
-	critical(Double.MAX_VALUE, new Color(231, 24, 49));
+	CRITICAL(Double.MAX_VALUE, new Color(231, 24, 49));
 
 	// value
 	private final double value;

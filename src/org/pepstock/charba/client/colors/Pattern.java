@@ -38,9 +38,9 @@ public final class Pattern extends CanvasObject {
 	private static final String IMG_OR_CANVAS_PATTERN_NULL_MESSAGE = "Image or canvas pattern instance is not consitent or null!";
 
 	// default instance of image.
-	private final static ImageElement DEFAULT_IMAGE = null;
+	private static final ImageElement DEFAULT_IMAGE = null;
 	// default instance of canvas pattern.
-	private final static CanvasPattern DEFAULT_CANVAS_PATTERN = null;
+	private static final CanvasPattern DEFAULT_CANVAS_PATTERN = null;
 
 	/**
 	 * Name of properties of native object. ALL INTERNAL USE ONLY

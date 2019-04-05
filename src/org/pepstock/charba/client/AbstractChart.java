@@ -16,6 +16,7 @@
 package org.pepstock.charba.client;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -603,8 +604,8 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			// returns the array
 			return ArrayListHelper.unmodifiableList(array, datasetItemFactory);
 		}
-		// returns null;
-		return null;
+		// returns empty list;
+		return Collections.emptyList();
 	}
 
 	/**

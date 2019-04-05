@@ -64,7 +64,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	// current mouse track of selection
 	private SelectionTrack track = null;
 	// status if selected
-	private SelectionStatus status = SelectionStatus.ready;
+	private SelectionStatus status = SelectionStatus.READY;
 	// copy of chart canvas as image to apply when is drwaing into canvas
 	private ImageElement snapshot = null;
 	// amount of datasets items
@@ -174,7 +174,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		event.preventDefault();
 		// if the status of is in selecting
 		// means that mouse down is already done
-		if (getStatus().equals(SelectionStatus.selecting)) {
+		if (getStatus().equals(SelectionStatus.SELECTING)) {
 			// if the mouse move event points
 			// are out of chart area
 			if (!isEventInChartArea(event)) {
@@ -184,7 +184,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			}
 			// updates the selection into canvas
 			updateSelection(event.getX(), false);
-		} else if (isEventInClearSelection(event) && getStatus().equals(SelectionStatus.selected)) {
+		} else if (isEventInClearSelection(event) && getStatus().equals(SelectionStatus.SELECTED)) {
 			// if here
 			// the mouse is hovering the clear selection
 			// checks if was already hover
@@ -216,7 +216,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// this could be the end of selection
 		// therefore will apply the logic of end selection
 		// only if current status is selecting and selected
-		if (getStatus().equals(SelectionStatus.selecting)) {
+		if (getStatus().equals(SelectionStatus.SELECTING)) {
 			// sets this flag to prevent to propagate a click event
 			// that canvas is generating after mouse up
 			preventClickEvent = true;
@@ -386,7 +386,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 */
 	void startSelection(int x) {
 		// sets status
-		setStatus(SelectionStatus.selecting);
+		setStatus(SelectionStatus.SELECTING);
 		// gets chart AREA
 		ChartNode node = chart.getNode();
 		ChartAreaNode chartArea = node.getChartArea();
@@ -523,7 +523,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 */
 	void endSelection(NativeEvent event, boolean skipNextFireEvent) {
 		// sets status
-		setStatus(SelectionStatus.selected);
+		setStatus(SelectionStatus.SELECTED);
 		// checks if it must send event
 		if (!skipNextFireEvent) {
 			// gets chart node

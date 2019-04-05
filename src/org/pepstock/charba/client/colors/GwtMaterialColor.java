@@ -23,7 +23,7 @@ package org.pepstock.charba.client.colors;
  * @see <a href="http://gwtmaterialdesign.github.io/gwt-material-demo/#colors">GWT material colors</a>
  *
  */
-public enum GwtMaterialColor implements IsColor
+public enum GwtMaterialColor implements IsEnumeratedColor
 {
 	/**
 	 * GWT material color name "RED_LIGHTEN_5" - <span style="background-color:#ffebee; border-style: solid; border-width:
@@ -1350,8 +1350,6 @@ public enum GwtMaterialColor implements IsColor
 	 */
 	WHITE("#ffffff");
 
-	// color string representation in HEX
-	private final String hexValue;
 	// color instance
 	private final IsColor color;
 
@@ -1361,127 +1359,16 @@ public enum GwtMaterialColor implements IsColor
 	 * @param hexValue color string representation in HEX
 	 */
 	private GwtMaterialColor(String hexValue) {
-		this.hexValue = hexValue;
-		// checks if the HEX value
-		String newHexvalue = hexValue.substring(1);
-		// reads colors
-		String redValue = newHexvalue.substring(0, 2);
-		int red = Integer.parseInt(redValue, 16);
-		String greenValue = newHexvalue.substring(2, 4);
-		int green = Integer.parseInt(greenValue, 16);
-		String blueValue = newHexvalue.substring(4);
-		int blue = Integer.parseInt(blueValue, 16);
-		color = new Color(red, green, blue, Color.DEFAULT_ALPHA);
+		color = ColorBuilder.buildByHexValue(hexValue, false);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.utils.IsColor#getRed()
+	 * @see org.pepstock.charba.client.colors.IsEnumeratedColor#getColor()
 	 */
 	@Override
-	public int getRed() {
-		return color.getRed();
+	public IsColor getColor() {
+		return color;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.utils.IsColor#getGreen()
-	 */
-	@Override
-	public int getGreen() {
-		return color.getGreen();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.utils.IsColor#getBlue()
-	 */
-	@Override
-	public int getBlue() {
-		return color.getBlue();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.utils.IsColor#getAlpha()
-	 */
-	@Override
-	public double getAlpha() {
-		return color.getAlpha();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.utils.IsColor#alpha(double)
-	 */
-	@Override
-	public IsColor alpha(double alpha) {
-		return color.alpha(alpha);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.utils.IsColor#toRGBA()
-	 */
-	@Override
-	public String toRGBA() {
-		return color.toRGBA();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.utils.IsColor#toRGB()
-	 */
-	@Override
-	public String toRGB() {
-		return color.toRGB();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.IsColor#toHSLA()
-	 */
-	@Override
-	public String toHSLA() {
-		return color.toHSLA();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.IsColor#toHSL()
-	 */
-	@Override
-	public String toHSL() {
-		return color.toHSL();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.utils.IsColor#toHex()
-	 */
-	@Override
-	public String toHex() {
-		return hexValue;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.colors.IsColor#toRGBs()
-	 */
-	@Override
-	public int toRGBs() {
-		return color.toRGBs();
-	}
-
 }

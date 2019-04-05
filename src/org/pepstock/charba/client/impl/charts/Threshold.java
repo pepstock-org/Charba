@@ -25,9 +25,9 @@ import org.pepstock.charba.client.colors.IsColor;
 public final class Threshold implements IsThreshold {
 
 	/**
-	 * Default color value, {@link GaugeThreshold#normal}.
+	 * Default color value, {@link GaugeThreshold#NORMAL}.
 	 */
-	public static final IsColor DEFAULT_VALUE_COLOR = GaugeThreshold.normal.getColor();
+	public static final IsColor DEFAULT_VALUE_COLOR = GaugeThreshold.NORMAL.getColor();
 
 	/**
 	 * Default value, {@link java.lang.Double#MAX_VALUE}.

@@ -25,14 +25,14 @@ enum SelectionStatus
 	/**
 	 * Ready for selection
 	 */
-	ready,
+	READY,
 	/**
 	 * The selection is running but not completed
 	 */
-	selecting,
+	SELECTING,
 	/**
 	 * The selection has been completed
 	 */
-	selected,
+	SELECTED,
 
 }
