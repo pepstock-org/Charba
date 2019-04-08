@@ -248,38 +248,8 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		clickCallbackProxy.setCallback((nativeChart, event, items) -> {
-			// gets the dataset items by event
-			DatasetItem item = getChart().getElementAtEvent(event);
-			// if the item is consistent
-			if (item != null && hasDatasetSelectionHandlers()) {
-				// fires the event for dataset selection
-				getChart().fireEvent(new DatasetSelectionEvent(event, item));
-			} else if (hasTitleClickHandlers() && getChart().getNode().getTitle().isInside(event)) {
-				// checks if title has been selected and there is any handler
-				// fires the click event on the chart title
-				getChart().fireEvent(new TitleClickEvent(event, getChart().getNode().getOptions().getTitle()));
-			} else if (hasAxisClickHandlers() && !ScaleType.NONE.equals(getChart().getType().scaleType())) {
-				// checks if there is any handler and the chart has got scales
-				// gets the scales
-				ScalesNode scales = getChart().getNode().getScales();
-				// checks if event is inside a scale box
-				if (scales.isInside(event)) {
-					// gets scale item
-					ScaleItem scaleItem = scales.getScaleIsInside(event);
-					// creates axis reference
-					Axis axis = null;
-					// gets charba id of scale
-					final int charbaIdOfScale = scaleItem.getCharbaId();
-					// checks if undefined
-					// means no axis configured into chart
-					if (charbaIdOfScale != UndefinedValues.INTEGER) {
-						// gets the axis by charba id
-						axis = getAxisById(charbaIdOfScale);
-					}
-					// fires the click event on the chart scale
-					getChart().fireEvent(new AxisClickEvent(event, scaleItem, axis));
-				}
-			}
+			// handle click event
+			handleClickEvent(nativeChart, event, items);
 			// fires the click event on the chart
 			getChart().fireEvent(new ChartClickEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
 		});
@@ -658,6 +628,65 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	public void load(IsChart chart, Configuration configuration) {
 		// loads the native object into configuration to pass to chart
 		ConfigurationLoader.loadOptions(configuration, getConfiguration());
+	}
+	
+	private void handleClickEvent(Chart chart, ChartNativeEvent event, ArrayObject items) {
+		boolean executionChain = handleDatasetSelection(chart, event, items);
+		// if the item is consistent
+		if (!executionChain) {
+			executionChain = handleTitleSelection(chart, event, items);
+		}
+		// if the item is consistent
+		if (!executionChain) {
+			handleScaleSelection(chart, event, items);
+		}
+	}
+	
+	private boolean handleDatasetSelection(Chart chart, ChartNativeEvent event, ArrayObject items) {
+		// gets the dataset items by event
+		DatasetItem item = getChart().getElementAtEvent(event);
+		// if the item is consistent
+		if (item != null && hasDatasetSelectionHandlers()) {
+			// fires the event for dataset selection
+			getChart().fireEvent(new DatasetSelectionEvent(event, item));
+			return true;
+		}
+		return false;
+	}
+
+	private boolean handleTitleSelection(Chart chart, ChartNativeEvent event, ArrayObject items) {
+		if (hasTitleClickHandlers() && getChart().getNode().getTitle().isInside(event)) {
+			// checks if title has been selected and there is any handler
+			// fires the click event on the chart title
+			getChart().fireEvent(new TitleClickEvent(event, getChart().getNode().getOptions().getTitle()));
+			return true;
+		}
+		return false;
+	}
+	
+	private void handleScaleSelection(Chart chart, ChartNativeEvent event, ArrayObject items) {
+		if (hasAxisClickHandlers() && !ScaleType.NONE.equals(getChart().getType().scaleType())) {
+			// checks if there is any handler and the chart has got scales
+			// gets the scales
+			ScalesNode scales = getChart().getNode().getScales();
+			// checks if event is inside a scale box
+			if (scales.isInside(event)) {
+				// gets scale item
+				ScaleItem scaleItem = scales.getScaleIsInside(event);
+				// creates axis reference
+				Axis axis = null;
+				// gets charba id of scale
+				final int charbaIdOfScale = scaleItem.getCharbaId();
+				// checks if undefined
+				// means no axis configured into chart
+				if (charbaIdOfScale != UndefinedValues.INTEGER) {
+					// gets the axis by charba id
+					axis = getAxisById(charbaIdOfScale);
+				}
+				// fires the click event on the chart scale
+				getChart().fireEvent(new AxisClickEvent(event, scaleItem, axis));
+			}
+		}
 	}
 
 }
