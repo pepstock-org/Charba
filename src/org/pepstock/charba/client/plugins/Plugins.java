@@ -34,7 +34,7 @@ import org.pepstock.charba.client.Plugin;
 public final class Plugins implements ConfigurationElement {
 
 	// list of added plugins
-	private final List<WrapperPlugin> plugins = new LinkedList<>();
+	private final List<WrapperPlugin> pluginsInstances = new LinkedList<>();
 
 	/**
 	 * Adds a new plugin to the chart.<br>
@@ -48,7 +48,7 @@ public final class Plugins implements ConfigurationElement {
 		// creates a java script object, wrapper of the plugin
 		WrapperPlugin wPlugin = new WrapperPlugin(plugin);
 		// stores the wrapper into a list
-		plugins.add(wPlugin);
+		pluginsInstances.add(wPlugin);
 	}
 
 	/**
@@ -59,7 +59,7 @@ public final class Plugins implements ConfigurationElement {
 	 */
 	public boolean has(String id) {
 		// scans all plugins
-		Iterator<WrapperPlugin> iter = plugins.iterator();
+		Iterator<WrapperPlugin> iter = pluginsInstances.iterator();
 		while (iter.hasNext()) {
 			// gets wrapper
 			WrapperPlugin plugin = iter.next();
@@ -80,7 +80,7 @@ public final class Plugins implements ConfigurationElement {
 	 */
 	public void remove(String id) {
 		// scans all plugins
-		Iterator<WrapperPlugin> iter = plugins.iterator();
+		Iterator<WrapperPlugin> iter = pluginsInstances.iterator();
 		while (iter.hasNext()) {
 			// gets wrapper
 			WrapperPlugin plugin = iter.next();
@@ -100,7 +100,7 @@ public final class Plugins implements ConfigurationElement {
 	 */
 	public void onChartConfigure(Configuration config, IsChart chart) {
 		// scans all plugins
-		for (WrapperPlugin entry : plugins) {
+		for (WrapperPlugin entry : pluginsInstances) {
 			// calls on configure method
 			entry.onConfigure(chart);
 		}
@@ -115,11 +115,11 @@ public final class Plugins implements ConfigurationElement {
 	@Override
 	public void load(IsChart chart, Configuration configuration) {
 		// checks if there is any plugin to configured to chart.js
-		if (!plugins.isEmpty()) {
+		if (!pluginsInstances.isEmpty()) {
 			// new array
 			ArrayPlugin array = new ArrayPlugin();
 			// adds all java script object of the plugin wrapper
-			for (WrapperPlugin plugin : plugins) {
+			for (WrapperPlugin plugin : pluginsInstances) {
 				array.push(plugin.getNativeObject());
 			}
 			// sets it to configuration object
