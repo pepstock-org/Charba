@@ -122,9 +122,7 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Na
 	 * @param proxy the function proxy instance to add
 	 */
 	protected final void setEventToModel(AbstractModel<?, ?> model, Key key, CallbackProxy.Proxy proxy) {
-		model.setValue(key, proxy);
-		// checks if the node is already added to parent
-		model.checkAndAddToParent();
+		setInternalCallbackToModel(model, key, proxy);
 	}
 
 	/**
@@ -135,6 +133,17 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Na
 	 * @param proxy the function proxy instance to add
 	 */
 	protected final void setCallbackToModel(AbstractModel<?, ?> model, Key key, CallbackProxy.Proxy proxy) {
+		setInternalCallbackToModel(model, key, proxy);
+	}
+
+	/**
+	 * Adds a proxy function  to a model at the specific key.
+	 * 
+	 * @param model element where adding the function proxy
+	 * @param key property name to use to add the function proxy
+	 * @param proxy the function proxy instance to add
+	 */
+	private void setInternalCallbackToModel(AbstractModel<?, ?> model, Key key, CallbackProxy.Proxy proxy) {
 		model.setValue(key, proxy);
 		// checks if the node is already added to parent
 		model.checkAndAddToParent();
