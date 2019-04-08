@@ -157,11 +157,11 @@
         }
         widths.push(mertrics.width);
       }
-      for (var j = 0; j < lines.length; ++j) {
-        var line = lines[j];
-        var y = (lines.length - 1 - j) * -this.options.fontSize + offset;
+      for (var k = 0; k < lines.length; ++k) {
+        var line = lines[k];
+        var y = (lines.length - 1 - k) * -this.options.fontSize + offset;
         ctx.save();
-        var padding = (max - widths[j]) / 2;
+        var padding = (max - widths[k]) / 2;
         ctx.rotate(padding / radius);
         for (var i = 0; i < line.length; i++) {
           var char = line.charAt(i);
@@ -261,8 +261,8 @@
     } else if (this.chart.config.type === 'bar') {
       if (this.barTotal[index] === undefined) {
         this.barTotal[index] = 0;
-        for (var i = 0;i < this.chart.data.datasets.length; ++i) {
-          this.barTotal[index] += this.chart.data.datasets[i].data[index];
+        for (var k = 0;k < this.chart.data.datasets.length; ++k) {
+          this.barTotal[index] += this.chart.data.datasets[k].data[index];
         }
       }
       percentage = dataset.data[index] / this.barTotal[index] * 100;
@@ -393,10 +393,10 @@
         [bound.right, bound.top],
         [bound.right, bound.bottom]
       ];
-      for (var j = 0;j < potins.length;++j) {
-        var x = potins[j][0];
-        var y = potins[j][1];
-        if (x >= left && x <= right && y >= top && y <= bottom) {
+      for (var k = 0;k < potins.length;++k) {
+        var x1 = potins[k][0];
+        var y1 = potins[k][1];
+        if (x1 >= left && x1 <= right && y1 >= top && y1 <= bottom) {
           return false;
         }
       }
