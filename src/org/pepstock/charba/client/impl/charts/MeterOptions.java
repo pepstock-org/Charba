@@ -121,10 +121,10 @@ public class MeterOptions extends AbstractPieOptions {
 		super.setCircumference(DEFAULT_CIRCUMFERENCE);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns nothing but throws an exception because not available.
 	 * 
-	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getHover()
+	 * @return nothing because will throw an exception
 	 * @deprecated component is not available for Meter or Gauge charts.
 	 */
 	@Deprecated
@@ -133,10 +133,10 @@ public class MeterOptions extends AbstractPieOptions {
 		throw new UnsupportedOperationException(INVALID_CALL);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns nothing but throws an exception because not available.
 	 * 
-	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getLayout()
+	 * @return nothing because will throw an exception
 	 * @deprecated component is not available for Meter or Gauge charts.
 	 */
 	@Deprecated
@@ -145,10 +145,10 @@ public class MeterOptions extends AbstractPieOptions {
 		throw new UnsupportedOperationException(INVALID_CALL);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns nothing but throws an exception because not available.
 	 * 
-	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getLegend()
+	 * @return nothing because will throw an exception
 	 * @deprecated component is not available for Meter or Gauge charts.
 	 */
 	@Deprecated
@@ -157,10 +157,10 @@ public class MeterOptions extends AbstractPieOptions {
 		throw new UnsupportedOperationException(INVALID_CALL);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns nothing but throws an exception because not available.
 	 * 
-	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getTooltips()
+	 * @return nothing because will throw an exception
 	 * @deprecated component is not available for Meter or Gauge charts.
 	 */
 	@Deprecated
@@ -169,11 +169,10 @@ public class MeterOptions extends AbstractPieOptions {
 		throw new UnsupportedOperationException(INVALID_CALL);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Throws an exception because not available.
 	 * 
-	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#setLegendCallback(org.pepstock.charba.client.
-	 * jsinterop.callbacks.LegendCallback)
+	 * @param legendCallback ignored because will throw an exception
 	 * @deprecated component is not available for Meter or Gauge charts.
 	 */
 	@Deprecated
