@@ -220,7 +220,7 @@
     }
     if (typeof label === 'object') {
       label = this.loadImage(label);
-    } else if (label != null && label != undefined) {
+    } else if (label) {
       label = label.toString();
     }
     return label;
