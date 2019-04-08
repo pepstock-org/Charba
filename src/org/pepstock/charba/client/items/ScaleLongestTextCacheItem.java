@@ -133,7 +133,7 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private class Data extends NativeObjectContainer{
+	private static class Data extends NativeObjectContainer{
 
 		/**
 		 * Creates the object for data.
