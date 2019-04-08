@@ -99,6 +99,11 @@ public final class Plugins implements ConfigurationElement {
 	 * @param chart instance of the chart
 	 */
 	public void onChartConfigure(Configuration config, IsChart chart) {
+		// checks if config is consistent
+		if (config == null) {
+			// otherwise do nothing
+			return;
+		}
 		// scans all plugins
 		for (WrapperPlugin entry : pluginsInstances) {
 			// calls on configure method

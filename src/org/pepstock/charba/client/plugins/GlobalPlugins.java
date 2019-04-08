@@ -173,6 +173,11 @@ public final class GlobalPlugins {
 	 * @param chart instance of the chart
 	 */
 	public void onChartConfigure(Configuration config, IsChart chart) {
+		// checks if config is consistent
+		if (config == null) {
+			// otherwise do nothing
+			return;
+		}
 		// sets into chart all global plugins to be disable
 		for (String id : pluginsToBeDisabled) {
 			// if the plugin does not have any options or is not disable by options
