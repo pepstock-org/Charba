@@ -21,6 +21,7 @@ import org.pepstock.charba.client.enums.FontStyle;
 
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.Style.Cursor;
+import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Image;
 
@@ -40,6 +41,12 @@ public final class Utilities {
 	private static final String REGEX_FORMAT_FONT_SIZE = "\\{1\\}";
 	// string format of font family
 	private static final String REGEX_FORMAT_FONT_FAMILY = "\\{2\\}";
+	// regex instance for font style
+	private static final RegExp REGEX_FONT_STYLE = RegExp.compile(REGEX_FORMAT_FONT_STYLE);
+	// regex instance for font style
+	private static final RegExp REGEX_FONT_SIZE = RegExp.compile(REGEX_FORMAT_FONT_SIZE);
+	// regex instance for font style
+	private static final RegExp REGEX_FONT_FAMILY = RegExp.compile(REGEX_FORMAT_FONT_FAMILY);
 
 	/**
 	 * To avoid any instantiation
@@ -60,8 +67,8 @@ public final class Utilities {
 	public static String toFont(FontStyle style, int fontSize, String fontFamily) {
 		// gets template
 		final String result = FONT_TEMPLATE;
-		// formats
-		return result.replaceAll(REGEX_FORMAT_FONT_STYLE, style.value()).replaceAll(REGEX_FORMAT_FONT_SIZE, String.valueOf(fontSize)).replaceAll(REGEX_FORMAT_FONT_FAMILY, fontFamily);
+		// by regex changes the value of format
+		return REGEX_FONT_FAMILY.replace(REGEX_FONT_SIZE.replace(REGEX_FONT_STYLE.replace(result, style.value()), String.valueOf(fontSize)), fontFamily);
 	}
 
 	/**
