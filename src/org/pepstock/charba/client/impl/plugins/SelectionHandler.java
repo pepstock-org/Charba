@@ -825,12 +825,12 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			} else if (Align.LEFT_CHART_AREA.equals(clearSelection.getAlign())) {
 				// gets chart AREA
 				ChartNode node = chart.getNode();
-				ChartAreaNode area = node.getChartArea();
+				ChartAreaNode areaInstance = node.getChartArea();
 				// stores the x of clear selection element
 				// setting the left value of chart area
-				clearSelection.setX(area.getLeft());
+				clearSelection.setX(areaInstance.getLeft());
 				// sets to left for further calculations
-				x = area.getLeft();
+				x = areaInstance.getLeft();
 			} else if (Align.CENTER.equals(clearSelection.getAlign())) {
 				// calculates the center of width
 				// by canvas width and clear selection element width
@@ -840,19 +840,19 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			} else if (Align.CENTER_CHART_AREA.equals(clearSelection.getAlign())) {
 				// gets chart AREA
 				ChartNode node = chart.getNode();
-				ChartAreaNode area = node.getChartArea();
+				ChartAreaNode areaInstance = node.getChartArea();
 				// calculates the center of width
 				// by chart area width and clear selection element width
-				x = (area.getRight() - area.getLeft() - clearSelection.getWidth()) / 2;
+				x = (areaInstance.getRight() - areaInstance.getLeft() - clearSelection.getWidth()) / 2;
 				// stores the x of clear selection element
 				clearSelection.setX(x);
 			} else if (Align.RIGHT_CHART_AREA.equals(clearSelection.getAlign())) {
 				// gets chart AREA
 				ChartNode node = chart.getNode();
-				ChartAreaNode area = node.getChartArea();
+				ChartAreaNode areaInstance = node.getChartArea();
 				// the x value is the right point of chart area minus
 				// width of clear selection element
-				x = area.getRight() - clearSelection.getWidth();
+				x = areaInstance.getRight() - clearSelection.getWidth();
 				// stores the x of clear selection element
 				clearSelection.setX(x);
 			} else if (Align.RIGHT.equals(clearSelection.getAlign())) {
@@ -1020,10 +1020,10 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	private boolean isEventInChartArea(MouseEvent<?> event) {
 		// gets chart AREA
 		ChartNode node = chart.getNode();
-		ChartAreaNode area = node.getChartArea();
+		ChartAreaNode areaInstance = node.getChartArea();
 		// checks if inside
-		boolean isX = event.getX() >= area.getLeft() && event.getX() <= area.getRight();
-		boolean isY = event.getY() >= area.getTop() && event.getY() <= area.getBottom();
+		boolean isX = event.getX() >= areaInstance.getLeft() && event.getX() <= areaInstance.getRight();
+		boolean isY = event.getY() >= areaInstance.getTop() && event.getY() <= areaInstance.getBottom();
 		return isX && isY;
 	}
 
