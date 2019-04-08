@@ -41,7 +41,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 
 	// cache of options in order to return the already existing options
 	// K = options id, V = plugin options
-	private final static Map<Integer, AbstractPluginCachedOptions> OPTIONS = new HashMap<>();
+	private static final Map<Integer, AbstractPluginCachedOptions> OPTIONS = new HashMap<>();
 	// plugin id
 	private final String pluginId;
 

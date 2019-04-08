@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.callbacks.BorderAlignCallback;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -83,19 +82,9 @@ abstract class ArcDataset extends HovingDataset {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		borderAlignCallbackProxy.setCallback(new ScriptableFunctions.ProxyStringCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public String call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValueAsString(context, borderAlignCallback, getDefaultValues().getElements().getArc().getBorderAlign()).value();
-			}
+		borderAlignCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValueAsString(context, borderAlignCallback, getDefaultValues().getElements().getArc().getBorderAlign()).value();
 		});
 	}
 

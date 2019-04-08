@@ -29,7 +29,6 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.datalabels.DataLabelsOptionsFactory.DataLabelsDefaultsOptionsFactory;
 import org.pepstock.charba.client.datalabels.callbacks.AlignCallback;
@@ -357,335 +356,124 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		formatterCallbackProxy.setCallback(new ProxyFormatterCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.datalabels.DataLabelsOptions.ProxyFormatterCallback#call(java.lang.Object,
-			 * double, org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public String call(Object contextFunction, double value, ScriptableContext context) {
-				// gets chart instance
-				IsChart chart = ScriptableUtils.retrieveChart(context, formatterCallback);
-				// checks if the handler is set
-				if (chart != null) {
-					// calls callback
-					String result = formatterCallback.invoke(chart, value, context);
-					// checks result
-					if (result != null) {
-						return result;
-					}
-				}
-				// default result
-				return String.valueOf(value);
-			}
-		});
-		backgroundColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public Object call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValueAsColor(context, backgroundColorCallback, getBackgroundColorAsString());
-			}
-		});
-		borderColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public Object call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValueAsColor(context, borderColorCallback, getBorderColorAsString());
-			}
-		});
-		colorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public Object call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValueAsColor(context, colorCallback, getColorAsString());
-			}
-		});
-		alignCallbackProxy.setCallback(new ScriptableFunctions.ProxyStringCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public String call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValueAsString(context, alignCallback, getAlign()).value();
-			}
-		});
-		anchorCallbackProxy.setCallback(new ScriptableFunctions.ProxyStringCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public String call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValueAsString(context, anchorCallback, getAnchor()).value();
-			}
-		});
-		borderRadiusCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public double call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, borderRadiusCallback, getBorderRadius()).doubleValue();
-			}
-		});
-		borderWidthCallbackProxy.setCallback(new ScriptableFunctions.ProxyIntegerCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public int call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, borderWidthCallback, getBorderWidth()).intValue();
-			}
-		});
-		clampCallbackProxy.setCallback(new ScriptableFunctions.ProxyBooleanCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public boolean call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, clampCallback, isClamp()).booleanValue();
-			}
-		});
-		clipCallbackProxy.setCallback(new ScriptableFunctions.ProxyBooleanCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public boolean call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, clipCallback, isClip()).booleanValue();
-			}
-
-		});
-		displayCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public Object call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				Display value = ScriptableUtils.getOptionValueAsString(context, displayCallback);
-				Display result = value == null ? getDisplay() : value;
-				// checks if is boolean
-				// checks if it must return a boolean or string
-				if (Display.AUTO.equals(result)) {
-					// returns string
-					return Display.AUTO.value();
-				} else {
-					// returns boolean
-					return Display.TRUE.equals(result) ? true : false;
-				}
-			}
-		});
-		offsetCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public double call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, offsetCallback, getOffset()).doubleValue();
-			}
-		});
-		opacityCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public double call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, opacityCallback, getOpacity()).doubleValue();
-			}
-		});
-		rotationCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public double call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, rotationCallback, getRotation()).doubleValue();
-			}
-		});
-		textAlignCallbackProxy.setCallback(new ScriptableFunctions.ProxyStringCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyStringCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public String call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValueAsString(context, textAlignCallback, getTextAlign()).value();
-			}
-		});
-		textStrokeColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public Object call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValueAsColor(context, textStrokeColorCallback, getTextStrokeColorAsString());
-			}
-		});
-		textStrokeWidthCallbackProxy.setCallback(new ScriptableFunctions.ProxyIntegerCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyIntegerCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public int call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, textStrokeWidthCallback, getTextStrokeWidth()).intValue();
-			}
-		});
-		textShadowBlurCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyDoubleCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public double call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, textShadowBlurCallback, getTextShadowBlur()).doubleValue();
-			}
-		});
-		textShadowColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public Object call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValueAsColor(context, textShadowColorCallback, getTextShadowColorAsString());
-			}
-		});
-		fontCallbackProxy.setCallback(new ScriptableFunctions.ProxyNativeObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public NativeObject call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				Font result = ScriptableUtils.getOptionValue(context, fontCallback);
-				// checks if result is consistent
+		formatterCallbackProxy.setCallback((contextFunction, value, context) -> {
+			// gets chart instance
+			IsChart chart = ScriptableUtils.retrieveChart(context, formatterCallback);
+			// checks if the handler is set
+			if (chart != null) {
+				// calls callback
+				String result = formatterCallback.invoke(chart, value, context);
+				// checks result
 				if (result != null) {
-					// returns result
-					return result.getObject();
+					return result;
 				}
-				// default result
-				return getFont().getObject();
+			}
+			// default result
+			return String.valueOf(value);
+		});
+		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValueAsColor(context, backgroundColorCallback, getBackgroundColorAsString());
+		});
+		borderColorCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValueAsColor(context, borderColorCallback, getBorderColorAsString());
+		});
+		colorCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValueAsColor(context, colorCallback, getColorAsString());
+		});
+		alignCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValueAsString(context, alignCallback, getAlign()).value();
+		});
+		anchorCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValueAsString(context, anchorCallback, getAnchor()).value();
+		});
+		borderRadiusCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, borderRadiusCallback, getBorderRadius()).doubleValue();
+		});
+		borderWidthCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, borderWidthCallback, getBorderWidth()).intValue();
+		});
+		clampCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, clampCallback, isClamp()).booleanValue();
+		});
+		clipCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, clipCallback, isClip()).booleanValue();
+		});
+		displayCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			Display value = ScriptableUtils.getOptionValueAsString(context, displayCallback);
+			Display result = value == null ? getDisplay() : value;
+			// checks if is boolean
+			// checks if it must return a boolean or string
+			if (Display.AUTO.equals(result)) {
+				// returns string
+				return Display.AUTO.value();
+			} else {
+				// returns boolean
+				return Display.TRUE.equals(result) ? true : false;
 			}
 		});
-		paddingCallbackProxy.setCallback(new ScriptableFunctions.ProxyNativeObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyNativeObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public NativeObject call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				Padding result = ScriptableUtils.getOptionValue(context, paddingCallback);
-				// checks if result is consistent
-				if (result != null) {
-					// returns result
-					return result.getObject();
-				}
-				// default result
-				return getPadding().getObject();
+		offsetCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, offsetCallback, getOffset()).doubleValue();
+		});
+		opacityCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, opacityCallback, getOpacity()).doubleValue();
+		});
+		rotationCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, rotationCallback, getRotation()).doubleValue();
+		});
+		textAlignCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValueAsString(context, textAlignCallback, getTextAlign()).value();
+		});
+		textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValueAsColor(context, textStrokeColorCallback, getTextStrokeColorAsString());
+		});
+		textStrokeWidthCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, textStrokeWidthCallback, getTextStrokeWidth()).intValue();
+		});
+		textShadowBlurCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, textShadowBlurCallback, getTextShadowBlur()).doubleValue();
+		});
+		textShadowColorCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValueAsColor(context, textShadowColorCallback, getTextShadowColorAsString());
+		});
+		fontCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			Font result = ScriptableUtils.getOptionValue(context, fontCallback);
+			// checks if result is consistent
+			if (result != null) {
+				// returns result
+				return result.getObject();
 			}
+			// default result
+			return getFont().getObject();
+		});
+		paddingCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			Padding result = ScriptableUtils.getOptionValue(context, paddingCallback);
+			// checks if result is consistent
+			if (result != null) {
+				// returns result
+				return result.getObject();
+			}
+			// default result
+			return getPadding().getObject();
 		});
 	}
 

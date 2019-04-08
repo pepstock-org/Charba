@@ -231,113 +231,36 @@ final class WrapperController extends NativeObjectContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		initializeCallbackProxy.setCallback(new ProxyInitializeCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxyInitializeCallback#call(org.pepstock.
-			 * charba.client.controllers.Context, org.pepstock.charba.client.Chart, int)
-			 */
-			@Override
-			public void call(ControllerContext context, Chart chart, int datasetIndex) {
-				// adds the chart instance to the context
-				// PAY ATTENTION: this is mandatory
-				context.setNativeChart(chart);
-				// invoke user method implementation
-				onInitialize(context, chart.getChart(), datasetIndex);
-			}
-
+		initializeCallbackProxy.setCallback((context, chart, datasetIndex) -> {
+			// adds the chart instance to the context
+			// PAY ATTENTION: this is mandatory
+			context.setNativeChart(chart);
+			// invoke user method implementation
+			onInitialize(context, chart.getChart(), datasetIndex);
 		});
-		addElementsCallbackProxy.setCallback(new ProxyAddElementsCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxyAddElementsCallback#call(org.pepstock.
-			 * charba.client.controllers.Context)
-			 */
-			@Override
-			public void call(ControllerContext context) {
-				// invoke user method implementation
-				onAddElements(context, context.getChart());
-			}
-
+		addElementsCallbackProxy.setCallback(context -> {
+			// invoke user method implementation
+			onAddElements(context, context.getChart());
 		});
-		addElementAndResetCallbackProxy.setCallback(new ProxyAddElementAndResetCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxyAddElementAndResetCallback#call(org.
-			 * pepstock.charba.client.controllers.Context, int)
-			 */
-			@Override
-			public void call(ControllerContext context, int index) {
-				// invoke user method implementation
-				onAddElementAndReset(context, context.getChart(), index);
-			}
-
+		addElementAndResetCallbackProxy.setCallback((context, index) -> {
+			// invoke user method implementation
+			onAddElementAndReset(context, context.getChart(), index);
 		});
-		drawCallbackProxy.setCallback(new ProxyDrawCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxyDrawCallback#call(org.pepstock.charba.
-			 * client.controllers.Context, double)
-			 */
-			@Override
-			public void call(ControllerContext context, double ease) {
-				// invoke user method implementation
-				onDraw(context, context.getChart(), ease);
-			}
-
+		drawCallbackProxy.setCallback((context, ease) -> {
+			// invoke user method implementation
+			onDraw(context, context.getChart(), ease);
 		});
-		removeHoverStyleCallbackProxy.setCallback(new ProxyRemoveHoverStyleCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxyRemoveHoverStyleCallback#call(org.
-			 * pepstock.charba.client.controllers.Context, org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(ControllerContext context, NativeObject element) {
-				// invoke user method implementation
-				onRemoveHoverStyle(context, context.getChart(), element);
-			}
-
+		removeHoverStyleCallbackProxy.setCallback((context, element) -> {
+			// invoke user method implementation
+			onRemoveHoverStyle(context, context.getChart(), element);
 		});
-		setHoverStyleCallbackProxy.setCallback(new ProxySetHoverStyleCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxySetHoverStyleCallback#call(org.pepstock.
-			 * charba.client.controllers.Context, org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(ControllerContext context, NativeObject element) {
-				// invoke user method implementation
-				onSetHoverStyle(context, context.getChart(), element);
-			}
-
+		setHoverStyleCallbackProxy.setCallback((context, element) -> {
+			// invoke user method implementation
+			onSetHoverStyle(context, context.getChart(), element);
 		});
-		updateCallbackProxy.setCallback(new ProxyUpdateCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.controllers.WrapperController.ProxyUpdateCallback#call(org.pepstock.charba.
-			 * client.controllers.Context, boolean)
-			 */
-			@Override
-			public void call(ControllerContext context, boolean reset) {
-				// invoke user method implementation
-				onUpdate(context, context.getChart(), reset);
-			}
-
+		updateCallbackProxy.setCallback((context, reset) -> {
+			// invoke user method implementation
+			onUpdate(context, context.getChart(), reset);
 		});
 		// adds all proxy functions to call the functions to the native object
 		setValue(Property.INITIALIZE, initializeCallbackProxy.getProxy());

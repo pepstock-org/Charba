@@ -63,7 +63,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 		 * @param context context Value of <code>this</code> to the execution context of function.
 		 * @param model all info about tooltip to create own HTML tooltip.
 		 */
-		void call(Object context, NativeObject model);
+		void call(NativeObject context, NativeObject model);
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 		 * @param item tooltip item to check.
 		 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
 		 */
-		boolean call(Object context, NativeObject item);
+		boolean call(NativeObject context, NativeObject item);
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 		 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than
 		 *         the second.
 		 */
-		int call(Object context, NativeObject item1, NativeObject item2);
+		int call(NativeObject context, NativeObject item1, NativeObject item2);
 	}
 
 	// ---------------------------
@@ -175,60 +175,30 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		customCallbackProxy.setCallback(new ProxyCustomCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.Tooltips.ProxyCustomCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(Object context, NativeObject model) {
-				// checks if callback is consistent
-				if (customCallback != null) {
-					// calls callback
-					customCallback.onCustom(getChart(), new TooltipModel(model));
-				}
+		customCallbackProxy.setCallback((context, model) -> {
+			// checks if callback is consistent
+			if (customCallback != null) {
+				// calls callback
+				customCallback.onCustom(getChart(), new TooltipModel(model));
 			}
 		});
-		itemSortCallbackProxy.setCallback(new ProxyItemSortCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.Tooltips.ProxyItemSortCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject, org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public int call(Object context, NativeObject item1, NativeObject item2) {
-				// checks if callback is consistent
-				if (itemSortCallback != null) {
-					// calls callback
-					return itemSortCallback.onItemSort(getChart(), new TooltipItem(item1), new TooltipItem(item2));
-				}
-				// default is 0 - equals
-				return 0;
+		itemSortCallbackProxy.setCallback((context, item1, item2) -> {
+			// checks if callback is consistent
+			if (itemSortCallback != null) {
+				// calls callback
+				return itemSortCallback.onItemSort(getChart(), new TooltipItem(item1), new TooltipItem(item2));
 			}
+			// default is 0 - equals
+			return 0;
 		});
-		filterCallbackProxy.setCallback(new ProxyFilterCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.Tooltips.ProxyFilterCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public boolean call(Object context, NativeObject item) {
-				// checks if callback is consistent
-				if (filterCallback != null) {
-					// calls callback
-					return filterCallback.onFilter(getChart(), new TooltipItem(item));
-				}
-				// default is true
-				return true;
+		filterCallbackProxy.setCallback((context, item) -> {
+			// checks if callback is consistent
+			if (filterCallback != null) {
+				// calls callback
+				return filterCallback.onFilter(getChart(), new TooltipItem(item));
 			}
+			// default is true
+			return true;
 		});
 	}
 

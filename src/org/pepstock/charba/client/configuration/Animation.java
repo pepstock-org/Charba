@@ -121,40 +121,18 @@ public class Animation extends EventProvider<ExtendedOptions> {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		completeCallbackProxy.setCallback(new ProxyAnimationCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see
-			 * org.pepstock.charba.client.configuration.Animation.ProxyAnimationCallback#call(org.pepstock.charba.client.Chart,
-			 * org.pepstock.charba.client.items.AnimationObject)
-			 */
-			@Override
-			public void call(Chart context, AnimationObject animationObject) {
-				// checks consistency of argument
-				if (animationObject != null) {
-					// invokes the custom callback
-					onComplete(animationObject.getAnimationItem());
-				}
+		completeCallbackProxy.setCallback((context, animationObject) -> {
+			// checks consistency of argument
+			if (animationObject != null) {
+				// invokes the custom callback
+				onComplete(animationObject.getAnimationItem());
 			}
-		});
-		progressCallbackProxy.setCallback(new ProxyAnimationCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see
-			 * org.pepstock.charba.client.configuration.Animation.ProxyAnimationCallback#call(org.pepstock.charba.client.Chart,
-			 * org.pepstock.charba.client.items.AnimationObject)
-			 */
-			@Override
-			public void call(Chart context, AnimationObject animationObject) {
-				// checks consistency of argument
-				if (animationObject != null) {
-					// invokes the custom callback
-					onProgress(animationObject.getAnimationItem());
-				}
+		});		
+		progressCallbackProxy.setCallback((context, animationObject) -> {
+			// checks consistency of argument
+			if (animationObject != null) {
+				// invokes the custom callback
+				onProgress(animationObject.getAnimationItem());
 			}
 		});
 	}

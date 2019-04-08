@@ -118,24 +118,14 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		tickCallbackProxy.setCallback(new ProxyTickCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.options.BaseTick.ProxyTickCallback#call(java.lang.Object, double, int,
-			 * org.pepstock.charba.client.commons.ArrayDouble)
-			 */
-			@Override
-			public String call(Object context, double value, int index, ArrayDouble values) {
-				// checks if user callback is consistent
-				if (callback != null) {
-					// then calls user callback
-					return callback.onCallback(getAxis(), value, index, ArrayListHelper.unmodifiableList(values));
-				}
-				// default tick is the string representation of the tick value
-				return String.valueOf(value);
+		tickCallbackProxy.setCallback((context, value, index, values) -> {
+			// checks if user callback is consistent
+			if (callback != null) {
+				// then calls user callback
+				return callback.onCallback(getAxis(), value, index, ArrayListHelper.unmodifiableList(values));
 			}
+			// default tick is the string representation of the tick value
+			return String.valueOf(value);
 		});
 	}
 

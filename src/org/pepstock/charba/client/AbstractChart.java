@@ -40,8 +40,6 @@ import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.MouseDownEvent;
-import com.google.gwt.event.dom.client.MouseDownHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -114,21 +112,8 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			// adds to panel
 			add(canvas);
 			// adds the listener to disable canvas selection
-			preventDisplayHandler = canvas.addMouseDownHandler(new MouseDownHandler() {
-
-				/*
-				 * (non-Javadoc)
-				 * 
-				 * @see
-				 * com.google.gwt.event.dom.client.MouseDownHandler#onMouseDown(com.google.gwt.event.dom.client.MouseDownEvent)
-				 */
-				@Override
-				public void onMouseDown(MouseDownEvent event) {
-					// removes the default behavior
-					event.preventDefault();
-				}
-
-			});
+			// removes the default behavior
+			preventDisplayHandler = canvas.addMouseDownHandler(event -> event.preventDefault());
 		} else {
 			// creates a header element
 			HeadingElement h = Document.get().createHElement(3);

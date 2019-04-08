@@ -22,6 +22,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.FontStyle;
 
 import jsinterop.annotations.JsFunction;
@@ -57,7 +58,7 @@ public class RadialPointLabels extends AxisContainer {
 		 * @param item label of the point
 		 * @return new label to show.
 		 */
-		String call(Object context, String item);
+		String call(NativeObject context, String item);
 	}
 
 	// ---------------------------
@@ -114,24 +115,14 @@ public class RadialPointLabels extends AxisContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		pointLabelCallbackProxy.setCallback(new ProxyPointLabelCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.options.PointLabels.ProxyPointLabelCallback#call(java.lang.Object,
-			 * java.lang.String)
-			 */
-			@Override
-			public String call(Object context, String item) {
-				// checks if callback is consistent
-				if (callback != null) {
-					// invokes callback
-					return callback.onCallback(getAxis(), item);
-				}
-				// returns passed item
-				return item;
+		pointLabelCallbackProxy.setCallback((context, item) ->{
+			// checks if callback is consistent
+			if (callback != null) {
+				// invokes callback
+				return callback.onCallback(getAxis(), item);
 			}
+			// returns passed item
+			return item;
 		});
 	}
 

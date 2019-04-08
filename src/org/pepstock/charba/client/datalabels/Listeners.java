@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -64,70 +63,38 @@ public final class Listeners extends NativeObjectContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		enterEventCallbackProxy.setCallback(new ScriptableFunctions.ProxyBooleanCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public boolean call(Object contextFunction, ScriptableContext context) {
-				// gets chart instance
-				IsChart chart = ScriptableUtils.retrieveChart(context, enterEventHandler);
-				// checks if the handler is set
-				if (chart != null) {
-					// calls handler
-					return enterEventHandler.onEnter(chart, context);
-				}
-				// defaults always true
-				return true;
+		enterEventCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets chart instance
+			IsChart chart = ScriptableUtils.retrieveChart(context, enterEventHandler);
+			// checks if the handler is set
+			if (chart != null) {
+				// calls handler
+				return enterEventHandler.onEnter(chart, context);
 			}
-
+			// defaults always true
+			return true;
 		});
-		leaveEventCallbackProxy.setCallback(new ScriptableFunctions.ProxyBooleanCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public boolean call(Object contextFunction, ScriptableContext context) {
-				// gets chart instance
-				IsChart chart = ScriptableUtils.retrieveChart(context, leaveEventHandler);
-				// checks if the handler is set
-				if (chart != null) {
-					// calls handler
-					return leaveEventHandler.onLeave(chart, context);
-				}
-				// defaults always true
-				return true;
+		leaveEventCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets chart instance
+			IsChart chart = ScriptableUtils.retrieveChart(context, leaveEventHandler);
+			// checks if the handler is set
+			if (chart != null) {
+				// calls handler
+				return leaveEventHandler.onLeave(chart, context);
 			}
-
+			// defaults always true
+			return true;
 		});
-		clickEventCallbackProxy.setCallback(new ScriptableFunctions.ProxyBooleanCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.callbacks.ScriptableFunctions.ProxyBooleanCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public boolean call(Object contextFunction, ScriptableContext context) {
-				// gets chart instance
-				IsChart chart = ScriptableUtils.retrieveChart(context, clickEventHandler);
-				// checks if the handler is set
-				if (chart != null) {
-					// calls handler
-					return clickEventHandler.onClick(chart, context);
-				}
-				// defaults always true
-				return true;
+		clickEventCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets chart instance
+			IsChart chart = ScriptableUtils.retrieveChart(context, clickEventHandler);
+			// checks if the handler is set
+			if (chart != null) {
+				// calls handler
+				return clickEventHandler.onClick(chart, context);
 			}
+			// defaults always true
+			return true;
 		});
 	}
 

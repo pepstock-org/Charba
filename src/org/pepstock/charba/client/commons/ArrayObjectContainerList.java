@@ -217,7 +217,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 		boolean modified = !c.isEmpty();
 		if (modified) {
 			// creates a copy of elements
-			List<E> contained = new ArrayList<E>();
+			List<E> contained = new ArrayList<>();
 			// scans all current elements
 			for (int i = 0; i < size(); i++) {
 				E value = get(i);

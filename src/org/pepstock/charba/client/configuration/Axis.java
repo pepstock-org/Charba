@@ -183,242 +183,102 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		beforeUpdateCallbackProxy.setCallback(new ProxyAxisCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(Object context, NativeObject item) {
-				// if user callback is consistent
-				if (axisUpdateCallback != null) {
-					// then it is called
-					axisUpdateCallback.onBeforeUpdate(Axis.this, new AxisItem(item));
-				}
+		beforeUpdateCallbackProxy.setCallback((context, item) -> {
+			// if user callback is consistent
+			if (axisUpdateCallback != null) {
+				// then it is called
+				axisUpdateCallback.onBeforeUpdate(Axis.this, new AxisItem(item));
 			}
 		});
-		beforeSetDimensionsCallbackProxy.setCallback(new ProxyAxisCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(Object context, NativeObject item) {
-				// if user callback is consistent
-				if (axisDimensionsCallback != null) {
-					// then it is called
-					axisDimensionsCallback.onBeforeSetDimensions(Axis.this, new AxisItem(item));
-				}
+		beforeSetDimensionsCallbackProxy.setCallback((context, item) -> {
+			// if user callback is consistent
+			if (axisDimensionsCallback != null) {
+				// then it is called
+				axisDimensionsCallback.onBeforeSetDimensions(Axis.this, new AxisItem(item));
 			}
 		});
-		afterSetDimensionsCallbackProxy.setCallback(new ProxyAxisCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(Object context, NativeObject item) {
-				// if user callback is consistent
-				if (axisDimensionsCallback != null) {
-					// then it is called
-					axisDimensionsCallback.onAfterSetDimensions(Axis.this, new AxisItem(item));
-				}
+		afterSetDimensionsCallbackProxy.setCallback((context, item) -> {
+			// if user callback is consistent
+			if (axisDimensionsCallback != null) {
+				// then it is called
+				axisDimensionsCallback.onAfterSetDimensions(Axis.this, new AxisItem(item));
 			}
 		});
-		beforeDataLimitsCallbackProxy.setCallback(new ProxyAxisCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(Object context, NativeObject item) {
-				// if user callback is consistent
-				if (axisDataLimitsCallback != null) {
-					// then it is called
-					axisDataLimitsCallback.onBeforeDataLimits(Axis.this, new AxisItem(item));
-				}
+		beforeDataLimitsCallbackProxy.setCallback((context, item) -> {
+			// if user callback is consistent
+			if (axisDataLimitsCallback != null) {
+				// then it is called
+				axisDataLimitsCallback.onBeforeDataLimits(Axis.this, new AxisItem(item));
 			}
 		});
-		afterDataLimitsCallbackProxy.setCallback(new ProxyAxisCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(Object context, NativeObject item) {
-				// if user callback is consistent
-				if (axisDataLimitsCallback != null) {
-					// then it is called
-					axisDataLimitsCallback.onAfterDataLimits(Axis.this, new AxisItem(item));
-				}
+		afterDataLimitsCallbackProxy.setCallback((context, item) -> {
+			// if user callback is consistent
+			if (axisDataLimitsCallback != null) {
+				// then it is called
+				axisDataLimitsCallback.onAfterDataLimits(Axis.this, new AxisItem(item));
 			}
 		});
-		beforeBuildTicksCallbackProxy.setCallback(new ProxyAxisCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(Object context, NativeObject item) {
-				// if user callback is consistent
-				if (axisBuildTicksCallback != null) {
-					// then it is called
-					axisBuildTicksCallback.onBeforeBuildTicks(Axis.this, new AxisItem(item));
-				}
+		beforeBuildTicksCallbackProxy.setCallback((context, item) -> {
+			// if user callback is consistent
+			if (axisBuildTicksCallback != null) {
+				// then it is called
+				axisBuildTicksCallback.onBeforeBuildTicks(Axis.this, new AxisItem(item));
 			}
 		});
-		afterBuildTicksCallbackProxy.setCallback(new ProxyAxisCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(Object context, NativeObject item) {
-				// if user callback is consistent
-				if (axisBuildTicksCallback != null) {
-					// then it is called
-					axisBuildTicksCallback.onAfterBuildTicks(Axis.this, new AxisItem(item));
-				}
+		afterBuildTicksCallbackProxy.setCallback((context, item) -> {
+			// if user callback is consistent
+			if (axisBuildTicksCallback != null) {
+				// then it is called
+				axisBuildTicksCallback.onAfterBuildTicks(Axis.this, new AxisItem(item));
 			}
 		});
-		beforeTickToLabelConversionCallbackProxy.setCallback(new ProxyAxisCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(Object context, NativeObject item) {
-				// if user callback is consistent
-				if (axisTickToLabelConversionCallback != null) {
-					// then it is called
-					axisTickToLabelConversionCallback.onBeforeTickToLabelConversion(Axis.this, new AxisItem(item));
-				}
+		beforeTickToLabelConversionCallbackProxy.setCallback((context, item) -> {
+			// if user callback is consistent
+			if (axisTickToLabelConversionCallback != null) {
+				// then it is called
+				axisTickToLabelConversionCallback.onBeforeTickToLabelConversion(Axis.this, new AxisItem(item));
 			}
 		});
-		afterTickToLabelConversionCallbackProxy.setCallback(new ProxyAxisCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(Object context, NativeObject item) {
-				// if user callback is consistent
-				if (axisTickToLabelConversionCallback != null) {
-					// then it is called
-					axisTickToLabelConversionCallback.onAfterTickToLabelConversion(Axis.this, new AxisItem(item));
-				}
+		afterTickToLabelConversionCallbackProxy.setCallback((context, item) -> {
+			// if user callback is consistent
+			if (axisTickToLabelConversionCallback != null) {
+				// then it is called
+				axisTickToLabelConversionCallback.onAfterTickToLabelConversion(Axis.this, new AxisItem(item));
 			}
 		});
-		beforeCalculateTickRotationCallbackProxy.setCallback(new ProxyAxisCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(Object context, NativeObject item) {
-				// if user callback is consistent
-				if (axisCalculateTickRotationCallback != null) {
-					// then it is called
-					axisCalculateTickRotationCallback.onBeforeCalculateTickRotation(Axis.this, new AxisItem(item));
-				}
+		beforeCalculateTickRotationCallbackProxy.setCallback((context, item) -> {
+			// if user callback is consistent
+			if (axisCalculateTickRotationCallback != null) {
+				// then it is called
+				axisCalculateTickRotationCallback.onBeforeCalculateTickRotation(Axis.this, new AxisItem(item));
 			}
 		});
-		afterCalculateTickRotationCallbackProxy.setCallback(new ProxyAxisCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(Object context, NativeObject item) {
-				// if user callback is consistent
-				if (axisCalculateTickRotationCallback != null) {
-					// then it is called
-					axisCalculateTickRotationCallback.onAfterCalculateTickRotation(Axis.this, new AxisItem(item));
-				}
+		afterCalculateTickRotationCallbackProxy.setCallback((context, item) -> {
+			// if user callback is consistent
+			if (axisCalculateTickRotationCallback != null) {
+				// then it is called
+				axisCalculateTickRotationCallback.onAfterCalculateTickRotation(Axis.this, new AxisItem(item));
 			}
 		});
-		beforeFitCallbackProxy.setCallback(new ProxyAxisCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(Object context, NativeObject item) {
-				// if user callback is consistent
-				if (axisFitCallback != null) {
-					// then it is called
-					axisFitCallback.onBeforeFit(Axis.this, new AxisItem(item));
-				}
+		beforeFitCallbackProxy.setCallback((context, item) -> {
+			// if user callback is consistent
+			if (axisFitCallback != null) {
+				// then it is called
+				axisFitCallback.onBeforeFit(Axis.this, new AxisItem(item));
 			}
 		});
-		afterFitCallbackProxy.setCallback(new ProxyAxisCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(Object context, NativeObject item) {
-				// if user callback is consistent
-				if (axisFitCallback != null) {
-					// then it is called
-					axisFitCallback.onAfterFit(Axis.this, new AxisItem(item));
-				}
+		afterFitCallbackProxy.setCallback((context, item) -> {
+			// if user callback is consistent
+			if (axisFitCallback != null) {
+				// then it is called
+				axisFitCallback.onAfterFit(Axis.this, new AxisItem(item));
 			}
 		});
-		afterUpdateCallbackProxy.setCallback(new ProxyAxisCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.Axis.ProxyAxisCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(Object context, NativeObject item) {
-				// if user callback is consistent
-				if (axisUpdateCallback != null) {
-					// then it is called
-					axisUpdateCallback.onAfterUpdate(Axis.this, new AxisItem(item));
-				}
+		afterUpdateCallbackProxy.setCallback((context, item) -> {
+			// if user callback is consistent
+			if (axisUpdateCallback != null) {
+				// then it is called
+				axisUpdateCallback.onAfterUpdate(Axis.this, new AxisItem(item));
 			}
 		});
 	}

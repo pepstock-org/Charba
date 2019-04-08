@@ -20,7 +20,6 @@ import java.util.List;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.callbacks.BorderWidthCallback;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -130,89 +129,29 @@ public abstract class HovingDataset extends Dataset {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		backgroundColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public Object call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValueAsColor(context, backgroundColorCallback, getDefaultValues().getElements().getArc().getBackgroundColorAsString());
-			}
+		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValueAsColor(context, backgroundColorCallback, getDefaultValues().getElements().getArc().getBackgroundColorAsString());
 		});
-		borderColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public Object call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValueAsColor(context, borderColorCallback, getDefaultValues().getElements().getArc().getBorderColorAsString(), false);
-			}
+		borderColorCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValueAsColor(context, borderColorCallback, getDefaultValues().getElements().getArc().getBorderColorAsString(), false);
 		});
-		borderWidthCallbackProxy.setCallback(new ScriptableFunctions.ProxyIntegerCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyIntegerCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public int call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, borderWidthCallback, getDefaultValues().getElements().getArc().getBorderWidth()).intValue();
-			}
+		borderWidthCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, borderWidthCallback, getDefaultValues().getElements().getArc().getBorderWidth()).intValue();
 		});
-		hoverBackgroundColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public Object call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValueAsColor(context, hoverBackgroundColorCallback, getDefaultValues().getElements().getArc().getBackgroundColorAsString());
-			}
+		hoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValueAsColor(context, hoverBackgroundColorCallback, getDefaultValues().getElements().getArc().getBackgroundColorAsString());
 		});
-		hoverBorderColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public Object call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValueAsColor(context, hoverBorderColorCallback, getDefaultValues().getElements().getArc().getBorderColorAsString(), false);
-			}
+		hoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValueAsColor(context, hoverBorderColorCallback, getDefaultValues().getElements().getArc().getBorderColorAsString(), false);
 		});
-		hoverBorderWidthCallbackProxy.setCallback(new ScriptableFunctions.ProxyIntegerCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyIntegerCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public int call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, hoverBorderWidthCallback, getDefaultValues().getElements().getArc().getBorderWidth()).intValue();
-			}
+		hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, hoverBorderWidthCallback, getDefaultValues().getElements().getArc().getBorderWidth()).intValue();
 		});
 	}
 

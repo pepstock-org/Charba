@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.resources;
 
+import com.google.gwt.resources.client.ResourcePrototype;
+
 /**
  * Utility to set which kind of resources type must be use to load text resources.<br>
  * This utility MUST be called as first statement before using Charba.
@@ -24,7 +26,7 @@ package org.pepstock.charba.client.resources;
  */
 public final class ResourcesType {
 	// static instance of resources to be loaded
-	private static Resources<?> resources = null;
+	private static Resources<ResourcePrototype> resources = null;
 
 	/**
 	 * To avoid any instantiation
@@ -32,14 +34,15 @@ public final class ResourcesType {
 	private ResourcesType() {
 		// do nothing
 	}
-
+	
 	/**
 	 * Sets the resources type to use to inject java script code.<br>
 	 * If the resources type was already set or if is <code>null</code> an exception will be throw.
 	 * 
 	 * @param resources the resources type to use to inject java script code
 	 */
-	public static void setClientBundle(Resources<?> resources) {
+	@SuppressWarnings("unchecked")
+	public static <T extends ResourcePrototype> void setClientBundle(Resources<T> resources) {
 		// checks if argument is null
 		if (resources == null) {
 			// exception
@@ -51,7 +54,7 @@ public final class ResourcesType {
 			throw new IllegalArgumentException("Resources type is already set and you can not change it");
 		}
 		// stores the instance
-		ResourcesType.resources = resources;
+		ResourcesType.resources = (Resources<ResourcePrototype>) resources;
 	}
 
 	/**
@@ -60,7 +63,7 @@ public final class ResourcesType {
 	 * 
 	 * @return the resources type to use to inject java script code
 	 */
-	public static Resources<?> getClientBundle() {
+	public static Resources<ResourcePrototype> getClientBundle() {
 		// checks if a type was already stored
 		if (ResourcesType.resources == null) {
 			// if not, exception

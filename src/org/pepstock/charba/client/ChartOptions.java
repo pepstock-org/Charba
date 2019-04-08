@@ -65,6 +65,7 @@ public final class ChartOptions extends ScaledOptions {
 	 * 
 	 * @see org.pepstock.charba.client.options.ScaledOptions#getScales()
 	 */
+	@Override
 	public Scales getScales() {
 		// checks if the chart is multi-scales
 		if (ScaleType.MULTI.equals(type.scaleType())) {
@@ -80,6 +81,7 @@ public final class ChartOptions extends ScaledOptions {
 	 * 
 	 * @see org.pepstock.charba.client.options.ScaledOptions#getScale()
 	 */
+	@Override
 	public Scale getScale() {
 		// checks if the chart is single-scales
 		if (ScaleType.SINGLE.equals(type.scaleType())) {

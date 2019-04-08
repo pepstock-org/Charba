@@ -23,7 +23,6 @@ import org.pepstock.charba.client.callbacks.BorderWidthCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -187,177 +186,66 @@ public abstract class LiningDataset extends Dataset {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		pointBackgroundColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public Object call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValueAsColor(context, pointBackgroundColorCallback, getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
-			}
+		pointBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValueAsColor(context, pointBackgroundColorCallback, getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
 		});
-		pointBorderColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public Object call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValueAsColor(context, pointBorderColorCallback, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false);
-			}
+		pointBorderColorCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValueAsColor(context, pointBorderColorCallback, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false);
 		});
-		pointBorderWidthCallbackProxy.setCallback(new ScriptableFunctions.ProxyIntegerCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyIntegerCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public int call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, pointBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue();
-			}
+		pointBorderWidthCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, pointBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue();
 		});
-		pointHoverBackgroundColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public Object call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValueAsColor(context, pointHoverBackgroundColorCallback, getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
-			}
+		pointHoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValueAsColor(context, pointHoverBackgroundColorCallback, getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
 		});
-		pointHoverBorderColorCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public Object call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValueAsColor(context, pointHoverBorderColorCallback, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false);
-			}
+		pointHoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValueAsColor(context, pointHoverBorderColorCallback, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false);
 		});
-		pointHoverBorderWidthCallbackProxy.setCallback(new ScriptableFunctions.ProxyIntegerCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyIntegerCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public int call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, pointHoverBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue();
-			}
+		pointHoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, pointHoverBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue();
 		});
-		pointRadiusCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyDoubleCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public double call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, pointRadiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue();
-			}
-
+		pointRadiusCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, pointRadiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue();
 		});
-		pointHitRadiusCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyDoubleCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public double call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, pointHitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue();
-			}
+		pointHitRadiusCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, pointHitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue();
 		});
-		pointHoverRadiusCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyDoubleCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public double call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, pointHoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue();
-			}
+		pointHoverRadiusCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, pointHoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue();
 		});
-		pointRotationCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyDoubleCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public double call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, pointRotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue();
-			}
+		pointRotationCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, pointRotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue();
 		});
-		pointStyleCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public Object call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				Object result = ScriptableUtils.getOptionValue(context, pointStyleCallback);
-				// checks result
-				if (result instanceof PointStyle) {
-					// is point style instance
-					PointStyle style = (PointStyle) result;
-					return style.value();
-				} else if (result instanceof Image) {
-					// is image instance
-					return Utilities.toImageElement((Image) result);
-				} else if (result instanceof ImageResource) {
-					// is image resource instance
-					return Utilities.toImageElement((ImageResource) result);
-				} else if (result instanceof ImageElement) {
-					// is image element instance
-					return (ImageElement) result;
-				}
-				// default result
-				return getDefaultValues().getElements().getPoint().getPointStyle().value();
+		pointStyleCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			Object result = ScriptableUtils.getOptionValue(context, pointStyleCallback);
+			// checks result
+			if (result instanceof PointStyle) {
+				// is point style instance
+				PointStyle style = (PointStyle) result;
+				return style.value();
+			} else if (result instanceof Image) {
+				// is image instance
+				return Utilities.toImageElement((Image) result);
+			} else if (result instanceof ImageResource) {
+				// is image resource instance
+				return Utilities.toImageElement((ImageResource) result);
+			} else if (result instanceof ImageElement) {
+				// is image element instance
+				return (ImageElement) result;
 			}
+			// default result
+			return getDefaultValues().getElements().getPoint().getPointStyle().value();
 		});
 	}
 

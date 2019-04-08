@@ -141,6 +141,10 @@ Here you can find the list of enhancement and updates available on `master` bran
  * squid:S1452 - Generic wildcard types should not be used in return parameters
    * change callbacks, events, plugins and controller to use new interface `IsChart` instead of `AbstractChart<?,?>`
    * remove type on colors and point style callbacks
+ * squid:ModifiersOrderCheck - Reorder the modifiers to comply with the Java Language Specification
+ * squid:S1161 - "@Override" should be used on overriding and implementing methods
+ * squid:S1604 - Anonymous inner classes containing only one method should become lambdas
+ * squid:CommentedOutCodeLine - Sections of code should not be commented out
  
 License
 -------

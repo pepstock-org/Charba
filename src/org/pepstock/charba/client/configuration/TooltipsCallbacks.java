@@ -73,7 +73,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		 * @param items tooltip items
 		 * @return array of strings
 		 */
-		ArrayString call(Object context, ArrayObject items);
+		ArrayString call(NativeObject context, ArrayObject items);
 	}
 
 	/**
@@ -92,7 +92,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		 * @param item tooltip item
 		 * @return string before item
 		 */
-		String call(Object context, NativeObject item);
+		String call(NativeObject context, NativeObject item);
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		 * @param item tooltip item
 		 * @return label color item
 		 */
-		NativeObject call(Object context, NativeObject item);
+		NativeObject call(NativeObject context, NativeObject item);
 	}
 
 	// ---------------------------
@@ -213,296 +213,166 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		beforeTitleCallbackProxy.setCallback(new ProxyTooltipsCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyTooltipsCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.ArrayObject)
-			 */
-			@Override
-			public ArrayString call(Object context, ArrayObject items) {
-				// checks if callback is consistent
-				if (titleCallback != null) {
-					// invokes callback
-					String[] result = titleCallback.onBeforeTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
-					// checks if result is consistent
-					if (result != null && result.length > 0) {
-						return ArrayString.from(result);
-					}
+		beforeTitleCallbackProxy.setCallback((context, items) -> {
+			// checks if callback is consistent
+			if (titleCallback != null) {
+				// invokes callback
+				String[] result = titleCallback.onBeforeTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
+				// checks if result is consistent
+				if (result != null && result.length > 0) {
+					return ArrayString.from(result);
 				}
-				// default result
-				return ArrayString.from(EMPTY_ARRAY);
 			}
+			// default result
+			return ArrayString.from(EMPTY_ARRAY);
 		});
-		titleCallbackProxy.setCallback(new ProxyTooltipsCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyTooltipsCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.ArrayObject)
-			 */
-			@Override
-			public ArrayString call(Object context, ArrayObject items) {
-				// checks if callback is consistent
-				if (titleCallback != null) {
-					// invokes callback
-					String[] result = titleCallback.onTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
-					// checks if result is consistent
-					if (result != null && result.length > 0) {
-						return ArrayString.from(result);
-					}
+		titleCallbackProxy.setCallback((context, items) -> {
+			// checks if callback is consistent
+			if (titleCallback != null) {
+				// invokes callback
+				String[] result = titleCallback.onTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
+				// checks if result is consistent
+				if (result != null && result.length > 0) {
+					return ArrayString.from(result);
 				}
-				// default result
-				// default result
-				return ArrayString.from(EMPTY_ARRAY);
 			}
+			// default result
+			// default result
+			return ArrayString.from(EMPTY_ARRAY);
 		});
-		afterTitleCallbackProxy.setCallback(new ProxyTooltipsCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyTooltipsCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.ArrayObject)
-			 */
-			@Override
-			public ArrayString call(Object context, ArrayObject items) {
-				// checks if callback is consistent
-				if (titleCallback != null) {
-					// invokes callback
-					String[] result = titleCallback.onAfterTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
-					// checks if result is consistent
-					if (result != null && result.length > 0) {
-						return ArrayString.from(result);
-					}
+		afterTitleCallbackProxy.setCallback((context, items) -> {
+			// checks if callback is consistent
+			if (titleCallback != null) {
+				// invokes callback
+				String[] result = titleCallback.onAfterTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
+				// checks if result is consistent
+				if (result != null && result.length > 0) {
+					return ArrayString.from(result);
 				}
-				// default result
-				// default result
-				return ArrayString.from(EMPTY_ARRAY);
 			}
+			// default result
+			// default result
+			return ArrayString.from(EMPTY_ARRAY);
 		});
-		beforeBodyCallbackProxy.setCallback(new ProxyTooltipsCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyTooltipsCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.ArrayObject)
-			 */
-			@Override
-			public ArrayString call(Object context, ArrayObject items) {
-				// checks if callback is consistent
-				if (bodyCallback != null) {
-					// invokes callback
-					String[] result = bodyCallback.onBeforeBody(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
-					// checks if result is consistent
-					if (result != null && result.length > 0) {
-						return ArrayString.from(result);
-					}
+		beforeBodyCallbackProxy.setCallback((context, items) -> {
+			// checks if callback is consistent
+			if (bodyCallback != null) {
+				// invokes callback
+				String[] result = bodyCallback.onBeforeBody(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
+				// checks if result is consistent
+				if (result != null && result.length > 0) {
+					return ArrayString.from(result);
 				}
-				// default result
-				return ArrayString.from(EMPTY_ARRAY);
 			}
+			// default result
+			return ArrayString.from(EMPTY_ARRAY);
 		});
-		afterBodyCallbackProxy.setCallback(new ProxyTooltipsCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyTooltipsCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.ArrayObject)
-			 */
-			@Override
-			public ArrayString call(Object context, ArrayObject items) {
-				// checks if callback is consistent
-				if (bodyCallback != null) {
-					// invokes callback
-					String[] result = bodyCallback.onAfterBody(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
-					// checks if result is consistent
-					if (result != null && result.length > 0) {
-						return ArrayString.from(result);
-					}
+		afterBodyCallbackProxy.setCallback((context, items) -> {
+			// checks if callback is consistent
+			if (bodyCallback != null) {
+				// invokes callback
+				String[] result = bodyCallback.onAfterBody(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
+				// checks if result is consistent
+				if (result != null && result.length > 0) {
+					return ArrayString.from(result);
 				}
-				// default result
-				return ArrayString.from(EMPTY_ARRAY);
 			}
+			// default result
+			return ArrayString.from(EMPTY_ARRAY);
 		});
-		beforeLabelCallbackProxy.setCallback(new ProxyLabelCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyLabelCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public String call(Object context, NativeObject item) {
-				// checks if callback is consistent
-				if (labelCallback != null) {
-					// invokes callback
-					String result = labelCallback.onBeforeLabel(getChart(), new TooltipItem(item));
-					// checks if result is consistent
-					return result != null ? result : EMPTY;
-				}
-				// default result
-				return EMPTY;
+		beforeLabelCallbackProxy.setCallback((context, item) -> {
+			// checks if callback is consistent
+			if (labelCallback != null) {
+				// invokes callback
+				String result = labelCallback.onBeforeLabel(getChart(), new TooltipItem(item));
+				// checks if result is consistent
+				return result != null ? result : EMPTY;
 			}
+			// default result
+			return EMPTY;
 		});
-		labelCallbackProxy.setCallback(new ProxyLabelCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyLabelCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public String call(Object context, NativeObject item) {
-				// checks if callback is consistent
-				if (labelCallback != null) {
-					// invokes callback
-					String result = labelCallback.onLabel(getChart(), new TooltipItem(item));
-					// checks if result is consistent
-					return result != null ? result : EMPTY;
-				}
-				// default result
-				return EMPTY;
+		labelCallbackProxy.setCallback((context, item) -> {
+			// checks if callback is consistent
+			if (labelCallback != null) {
+				// invokes callback
+				String result = labelCallback.onLabel(getChart(), new TooltipItem(item));
+				// checks if result is consistent
+				return result != null ? result : EMPTY;
 			}
+			// default result
+			return EMPTY;
 		});
-		labelColorCallbackProxy.setCallback(new ProxyLabelColorCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.options.TooltipsCallbacks.ProxyLabelColorCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.items.NativeObject)
-			 */
-			@Override
-			public NativeObject call(Object context, NativeObject item) {
-				// checks if callback is consistent
-				if (labelCallback != null) {
-					// invokes callback
-					TooltipLabelColor result = labelCallback.onLabelColor(getChart(), new TooltipItem(item));
-					// checks if result is consistent
-					return result != null ? result.getObject() : DEFAULT_LABEL_COLOR.getObject();
-				}
-				// default result
-				return DEFAULT_LABEL_COLOR.getObject();
+		labelColorCallbackProxy.setCallback((context, item) -> {
+			// checks if callback is consistent
+			if (labelCallback != null) {
+				// invokes callback
+				TooltipLabelColor result = labelCallback.onLabelColor(getChart(), new TooltipItem(item));
+				// checks if result is consistent
+				return result != null ? result.getObject() : DEFAULT_LABEL_COLOR.getObject();
 			}
+			// default result
+			return DEFAULT_LABEL_COLOR.getObject();
 		});
-		labelTextColorCallbackProxy.setCallback(new ProxyLabelCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyLabelCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public String call(Object context, NativeObject item) {
-				// checks if callback is consistent
-				if (labelCallback != null) {
-					// invokes callback
-					IsColor result = labelCallback.onLabelTextColor(getChart(), new TooltipItem(item));
-					// checks if result is consistent
-					return result != null ? result.toRGBA() : Defaults.get().getGlobal().getTooltips().getBodyFontColor().toRGBA();
-				}
-				// default result
-				return Defaults.get().getGlobal().getTooltips().getBodyFontColor().toRGBA();
+		labelTextColorCallbackProxy.setCallback((context, item) -> {
+			// checks if callback is consistent
+			if (labelCallback != null) {
+				// invokes callback
+				IsColor result = labelCallback.onLabelTextColor(getChart(), new TooltipItem(item));
+				// checks if result is consistent
+				return result != null ? result.toRGBA() : Defaults.get().getGlobal().getTooltips().getBodyFontColor().toRGBA();
 			}
+			// default result
+			return Defaults.get().getGlobal().getTooltips().getBodyFontColor().toRGBA();
 		});
-		afterLabelCallbackProxy.setCallback(new ProxyLabelCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyLabelCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public String call(Object context, NativeObject item) {
-				// checks if callback is consistent
-				if (labelCallback != null) {
-					// invokes callback
-					String result = labelCallback.onAfterLabel(getChart(), new TooltipItem(item));
-					// checks if result is consistent
-					return result != null ? result : EMPTY;
-				}
-				// default result
-				return EMPTY;
+		afterLabelCallbackProxy.setCallback((context, item) -> {
+			// checks if callback is consistent
+			if (labelCallback != null) {
+				// invokes callback
+				String result = labelCallback.onAfterLabel(getChart(), new TooltipItem(item));
+				// checks if result is consistent
+				return result != null ? result : EMPTY;
 			}
+			// default result
+			return EMPTY;
 		});
-		beforeFooterCallbackProxy.setCallback(new ProxyTooltipsCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyTooltipsCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.ArrayObject)
-			 */
-			@Override
-			public ArrayString call(Object context, ArrayObject items) {
-				// checks if callback is consistent
-				if (footerCallback != null) {
-					// invokes callback
-					String[] result = footerCallback.onBeforeFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
-					// checks if result is consistent
-					if (result != null && result.length > 0) {
-						return ArrayString.from(result);
-					}
+		beforeFooterCallbackProxy.setCallback((context, items) -> {
+			// checks if callback is consistent
+			if (footerCallback != null) {
+				// invokes callback
+				String[] result = footerCallback.onBeforeFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
+				// checks if result is consistent
+				if (result != null && result.length > 0) {
+					return ArrayString.from(result);
 				}
-				// default result
-				return ArrayString.from(EMPTY_ARRAY);
 			}
+			// default result
+			return ArrayString.from(EMPTY_ARRAY);
 		});
-		footerCallbackProxy.setCallback(new ProxyTooltipsCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyTooltipsCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.ArrayObject)
-			 */
-			@Override
-			public ArrayString call(Object context, ArrayObject items) {
-				// checks if callback is consistent
-				if (footerCallback != null) {
-					// invokes callback
-					String[] result = footerCallback.onFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
-					// checks if result is consistent
-					if (result != null && result.length > 0) {
-						return ArrayString.from(result);
-					}
+		footerCallbackProxy.setCallback((context, items) -> {
+			// checks if callback is consistent
+			if (footerCallback != null) {
+				// invokes callback
+				String[] result = footerCallback.onFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
+				// checks if result is consistent
+				if (result != null && result.length > 0) {
+					return ArrayString.from(result);
 				}
-				// default result
-				return ArrayString.from(EMPTY_ARRAY);
 			}
+			// default result
+			return ArrayString.from(EMPTY_ARRAY);
 		});
-		afterFooterCallbackProxy.setCallback(new ProxyTooltipsCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.TooltipsCallbacks.ProxyTooltipsCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.commons.ArrayObject)
-			 */
-			@Override
-			public ArrayString call(Object context, ArrayObject items) {
-				// checks if callback is consistent
-				if (footerCallback != null) {
-					// invokes callback
-					String[] result = footerCallback.onAfterFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
-					// checks if result is consistent
-					if (result != null && result.length > 0) {
-						return ArrayString.from(result);
-					}
+		afterFooterCallbackProxy.setCallback((context, items) -> {
+			// checks if callback is consistent
+			if (footerCallback != null) {
+				// invokes callback
+				String[] result = footerCallback.onAfterFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
+				// checks if result is consistent
+				if (result != null && result.length > 0) {
+					return ArrayString.from(result);
 				}
-				// default result
-				return ArrayString.from(EMPTY_ARRAY);
 			}
+			// default result
+			return ArrayString.from(EMPTY_ARRAY);
 		});
 	}
 

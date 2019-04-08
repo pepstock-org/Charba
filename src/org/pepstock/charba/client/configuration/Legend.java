@@ -129,50 +129,17 @@ public class Legend extends EventProvider<ExtendedOptions> {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		clickCallbackProxy.setCallback(new ProxyLegendEventCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see
-			 * org.pepstock.charba.client.configuration.Legend.ProxyLegendEventCallback#call(org.pepstock.charba.client.Chart,
-			 * org.pepstock.charba.client.events.ChartNativeEvent, org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(Chart chart, ChartNativeEvent event, NativeObject item) {
-				// fires the event
-				getChart().fireEvent(new LegendClickEvent(event, new LegendItem(item)));
-			}
+		clickCallbackProxy.setCallback((nativeChart, event, item) -> {
+			// fires the event
+			getChart().fireEvent(new LegendClickEvent(event, new LegendItem(item)));
 		});
-		hoverCallbackProxy.setCallback(new ProxyLegendEventCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see
-			 * org.pepstock.charba.client.configuration.Legend.ProxyLegendEventCallback#call(org.pepstock.charba.client.Chart,
-			 * org.pepstock.charba.client.events.ChartNativeEvent, org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(Chart chart, ChartNativeEvent event, NativeObject item) {
-				// fires the event
-				getChart().fireEvent(new LegendHoverEvent(event, new LegendItem(item)));
-			}
+		hoverCallbackProxy.setCallback((nativeChart, event, item) -> {
+			// fires the event
+			getChart().fireEvent(new LegendHoverEvent(event, new LegendItem(item)));
 		});
-		leaveCallbackProxy.setCallback(new ProxyLegendEventCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see
-			 * org.pepstock.charba.client.configuration.Legend.ProxyLegendEventCallback#call(org.pepstock.charba.client.Chart,
-			 * org.pepstock.charba.client.events.ChartNativeEvent, org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(Chart chart, ChartNativeEvent event, NativeObject item) {
-				// fires the event
-				getChart().fireEvent(new LegendLeaveEvent(event, new LegendItem(item)));
-			}
+		leaveCallbackProxy.setCallback((nativeChart, event, item) -> {
+			// fires the event
+			getChart().fireEvent(new LegendLeaveEvent(event, new LegendItem(item)));
 		});
 	}
 

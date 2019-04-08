@@ -20,7 +20,6 @@ import java.util.List;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayDouble;
@@ -130,82 +129,33 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		radiusCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyDoubleCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public double call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, radiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue();
-			}
+		radiusCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, radiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue();
 		});
-		hitRadiusCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyDoubleCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public double call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, hitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue();
-			}
+		hitRadiusCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, hitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue();
 		});
-		hoverRadiusCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyDoubleCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public double call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, hoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue();
-			}
+		hoverRadiusCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, hoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue();
 		});
-		rotationCallbackProxy.setCallback(new ScriptableFunctions.ProxyDoubleCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyDoubleCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public double call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				return ScriptableUtils.getOptionValue(context, rotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue();
-			}
+		rotationCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			return ScriptableUtils.getOptionValue(context, rotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue();
 		});
-		pointStyleCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.BubbleDataset.ProxyPointStyleCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.data.Context)
-			 */
-			@Override
-			public Object call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				Object result = ScriptableUtils.getOptionValue(context, pointStyleCallback);
-				// checks result
-				if (result instanceof PointStyle) {
-					// is point style instance
-					PointStyle style = (PointStyle) result;
-					return style.value();
-				}
-				// default result
-				return getDefaultValues().getElements().getPoint().getPointStyle().value();			}
+		pointStyleCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			Object result = ScriptableUtils.getOptionValue(context, pointStyleCallback);
+			// checks result
+			if (result instanceof PointStyle) {
+				// is point style instance
+				PointStyle style = (PointStyle) result;
+				return style.value();
+			}
+			// default result
+			return getDefaultValues().getElements().getPoint().getPointStyle().value();
 		});
 	}
 

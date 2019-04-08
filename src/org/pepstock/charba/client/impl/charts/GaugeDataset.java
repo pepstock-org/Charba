@@ -48,7 +48,7 @@ public final class GaugeDataset extends MeterDataset {
 	/**
 	 * Comparator to sort the thresholds using the thresholds value, always ASCENDING
 	 */
-	private final static Comparator<Threshold> COMPARATOR = new Comparator<Threshold>() {
+	private static final Comparator<Threshold> COMPARATOR = new Comparator<Threshold>() {
 
 		/*
 		 * (non-Javadoc)

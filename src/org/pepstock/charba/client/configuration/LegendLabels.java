@@ -62,7 +62,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 		 * @param chart chart instance.
 		 * @return array of legend items.
 		 */
-		ArrayObject call(Object context, Chart chart);
+		ArrayObject call(NativeObject context, Chart chart);
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 		 * @param item legend item to check.
 		 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
 		 */
-		boolean call(Object context, NativeObject item);
+		boolean call(NativeObject context, NativeObject item);
 	}
 
 	// ---------------------------
@@ -145,46 +145,25 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		filterCallbackProxy.setCallback(new ProxyFilterCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.options.LegendLabels.ProxyFilterCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.items.LegendItem)
-			 */
-			@Override
-			public boolean call(Object context, NativeObject item) {
-				// checks if callback is consistent
-				if (filterCallback != null) {
-					// calls callback
-					return filterCallback.onFilter(getChart(), new LegendItem(item));
-				}
-				return true;
+		filterCallbackProxy.setCallback((context, item) -> {
+			// checks if callback is consistent
+			if (filterCallback != null) {
+				// calls callback
+				return filterCallback.onFilter(getChart(), new LegendItem(item));
 			}
+			return true;
 		});
 
-		labelsCallbackProxy.setCallback(new ProxyGenerateLabelsCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.options.LegendLabels.ProxyGenerateLabelsCallback#call(java.lang.Object,
-			 * java.lang.Object)
-			 */
-			@Override
-			public ArrayObject call(Object context, Chart chart) {
-				// checks if callback is consistent
-				if (labelsCallback != null) {
-					// calls callback
-					LegendLabelItem[] result = labelsCallback.generateLegendLabels(getChart());
-					// transforms into a native array
-					return ArrayObject.from(result);
-				}
-				// empty array
-				return ArrayObject.from(EMPTY_RESULT);
+		labelsCallbackProxy.setCallback((context, nativeChart) -> {
+			// checks if callback is consistent
+			if (labelsCallback != null) {
+				// calls callback
+				LegendLabelItem[] result = labelsCallback.generateLegendLabels(getChart());
+				// transforms into a native array
+				return ArrayObject.from(result);
 			}
-
+			// empty array
+			return ArrayObject.from(EMPTY_RESULT);
 		});
 	}
 

@@ -18,7 +18,6 @@ package org.pepstock.charba.client.data;
 import java.util.List;
 
 import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
-import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayObject;
@@ -107,26 +106,16 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		borderSkippedCallbackProxy.setCallback(new ScriptableFunctions.ProxyObjectCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.data.DatasetFunctions.ProxyObjectCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.callbacks.ScriptableContext)
-			 */
-			@Override
-			public Object call(Object contextFunction, ScriptableContext context) {
-				// gets value
-				BorderSkipped value = ScriptableUtils.getOptionValueAsString(context, borderSkippedCallback);
-				BorderSkipped result = value == null ? getDefaultValues().getElements().getRectangle().getBorderSkipped() : value;
-				// checks if is boolean
-				if (BorderSkipped.FALSE.equals(result)) {
-					return false;
-				} else {
-					// returns the string value
-					return result.value();
-				}
+		borderSkippedCallbackProxy.setCallback((contextFunction, context) -> {
+			// gets value
+			BorderSkipped value = ScriptableUtils.getOptionValueAsString(context, borderSkippedCallback);
+			BorderSkipped result = value == null ? getDefaultValues().getElements().getRectangle().getBorderSkipped() : value;
+			// checks if is boolean
+			if (BorderSkipped.FALSE.equals(result)) {
+				return false;
+			} else {
+				// returns the string value
+				return result.value();
 			}
 		});
 	}

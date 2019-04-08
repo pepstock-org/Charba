@@ -134,7 +134,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 		 * @param context Value of <code>this</code> to the execution context of function.
 		 * @return an HTML string which represents the legend.
 		 */
-		String call(Object context);
+		String call(NativeObject context);
 	}
 
 	// ---------------------------
@@ -242,106 +242,61 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		clickCallbackProxy.setCallback(new ProxyChartEventCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see
-			 * org.pepstock.charba.client.configuration.ConfigurationOptions.ProxyChartEventCallback#call(org.pepstock.charba.
-			 * client.Chart, org.pepstock.charba.client.events.ChartNativeEvent, org.pepstock.charba.client.commons.ArrayObject)
-			 */
-			@Override
-			public void call(Chart chart, ChartNativeEvent event, ArrayObject items) {
-				// gets the dataset items by event
-				DatasetItem item = getChart().getElementAtEvent(event);
-				// if the item is consistent
-				if (item != null && hasDatasetSelectionHandlers()) {
-					// fires the event for dataset selection
-					getChart().fireEvent(new DatasetSelectionEvent(event, item));
-				} else if (hasTitleClickHandlers() && getChart().getNode().getTitle().isInside(event)) {
-					// checks if title has been selected and there is any handler
-					// fires the click event on the chart title
-					getChart().fireEvent(new TitleClickEvent(event, getChart().getNode().getOptions().getTitle()));
-				} else if (hasAxisClickHandlers() && !ScaleType.NONE.equals(getChart().getType().scaleType())) {
-					// checks if there is any handler and the chart has got scales
-					// gets the scales
-					ScalesNode scales = getChart().getNode().getScales();
-					// checks if event is inside a scale box
-					if (scales.isInside(event)) {
-						// gets scale item
-						ScaleItem scaleItem = scales.getScaleIsInside(event);
-						// creates axis reference
-						Axis axis = null;
-						// gets charba id of scale
-						final int charbaIdOfScale = scaleItem.getCharbaId();
-						// checks if undefined
-						// means no axis configured into chart
-						if (charbaIdOfScale != UndefinedValues.INTEGER) {
-							// gets the axis by charba id
-							axis = getAxisById(charbaIdOfScale);
-						}
-						// fires the click event on the chart scale
-						getChart().fireEvent(new AxisClickEvent(event, scaleItem, axis));
+		clickCallbackProxy.setCallback((nativeChart, event, items) -> {
+			// gets the dataset items by event
+			DatasetItem item = getChart().getElementAtEvent(event);
+			// if the item is consistent
+			if (item != null && hasDatasetSelectionHandlers()) {
+				// fires the event for dataset selection
+				getChart().fireEvent(new DatasetSelectionEvent(event, item));
+			} else if (hasTitleClickHandlers() && getChart().getNode().getTitle().isInside(event)) {
+				// checks if title has been selected and there is any handler
+				// fires the click event on the chart title
+				getChart().fireEvent(new TitleClickEvent(event, getChart().getNode().getOptions().getTitle()));
+			} else if (hasAxisClickHandlers() && !ScaleType.NONE.equals(getChart().getType().scaleType())) {
+				// checks if there is any handler and the chart has got scales
+				// gets the scales
+				ScalesNode scales = getChart().getNode().getScales();
+				// checks if event is inside a scale box
+				if (scales.isInside(event)) {
+					// gets scale item
+					ScaleItem scaleItem = scales.getScaleIsInside(event);
+					// creates axis reference
+					Axis axis = null;
+					// gets charba id of scale
+					final int charbaIdOfScale = scaleItem.getCharbaId();
+					// checks if undefined
+					// means no axis configured into chart
+					if (charbaIdOfScale != UndefinedValues.INTEGER) {
+						// gets the axis by charba id
+						axis = getAxisById(charbaIdOfScale);
 					}
+					// fires the click event on the chart scale
+					getChart().fireEvent(new AxisClickEvent(event, scaleItem, axis));
 				}
-				// fires the click event on the chart
-				getChart().fireEvent(new ChartClickEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
 			}
+			// fires the click event on the chart
+			getChart().fireEvent(new ChartClickEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
 		});
-		hoverCallbackProxy.setCallback(new ProxyChartEventCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see
-			 * org.pepstock.charba.client.configuration.ConfigurationOptions.ProxyChartEventCallback#call(org.pepstock.charba.
-			 * client.Chart, org.pepstock.charba.client.events.ChartNativeEvent, org.pepstock.charba.client.commons.ArrayObject)
-			 */
-			@Override
-			public void call(Chart chart, ChartNativeEvent event, ArrayObject items) {
-				// fires the hover hover on the chart
-				getChart().fireEvent(new ChartHoverEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
-			}
-
+		hoverCallbackProxy.setCallback((nativeChart, event, items) -> {
+			// fires the hover hover on the chart
+			getChart().fireEvent(new ChartHoverEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
 		});
-		resizeCallbackProxy.setCallback(new ProxyChartResizeCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.ConfigurationOptions.ProxyChartResizeCallback#call(org.
-			 * pepstock.charba.client.commons.NativeObject, org.pepstock.charba.client.Chart,
-			 * org.pepstock.charba.client.commons.NativeObject)
-			 */
-			@Override
-			public void call(NativeObject context, Chart chart, NativeObject size) {
-				// creates new native vent
-				NativeEvent event = Document.get().createChangeEvent();
-				// fires the resize event on chart
-				getChart().fireEvent(new ChartResizeEvent(event, new SizeItem(size)));
-			}
-
+		resizeCallbackProxy.setCallback((context, nativeChart, size) -> {
+			// creates new native vent
+			NativeEvent event = Document.get().createChangeEvent();
+			// fires the resize event on chart
+			getChart().fireEvent(new ChartResizeEvent(event, new SizeItem(size)));
 		});
-		legendCallbackProxy.setCallback(new ProxyGenerateLegendCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.configuration.ConfigurationOptions.ProxyGenerateLegendCallback#call(java.
-			 * lang.Object)
-			 */
-			@Override
-			public String call(Object context) {
-				// creates the safe html to be sure about the right HTML to send back
-				SafeHtmlBuilder builder = new SafeHtmlBuilder();
-				// checks if callback is consistent
-				if (legendCallback != null) {
-					// calls callback
-					legendCallback.generateLegend(getChart(), builder);
-				}
-				return builder.toSafeHtml().asString();
+		legendCallbackProxy.setCallback(context -> {
+			// creates the safe html to be sure about the right HTML to send back
+			SafeHtmlBuilder builder = new SafeHtmlBuilder();
+			// checks if callback is consistent
+			if (legendCallback != null) {
+				// calls callback
+				legendCallback.generateLegend(getChart(), builder);
 			}
+			return builder.toSafeHtml().asString();
 		});
 	}
 

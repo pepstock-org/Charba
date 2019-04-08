@@ -184,10 +184,10 @@ public final class ArrayListHelper {
 	public static <E extends NativeObjectContainer> ArrayObjectContainerList<E> list(ArrayObject array, NativeObjectContainerFactory<E> factory) {
 		// checks if array is null
 		if (array == null) {
-			return new ArrayObjectContainerList<E>();
+			return new ArrayObjectContainerList<>();
 		}
 		// creates the list
-		return new ArrayObjectContainerList<E>(array, factory);
+		return new ArrayObjectContainerList<>(array, factory);
 	}
 
 	/**

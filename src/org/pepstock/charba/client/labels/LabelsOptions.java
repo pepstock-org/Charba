@@ -249,69 +249,49 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		renderCallbackProxy.setCallback(new ProxyRenderCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.ext.labels.LabelsConfiguration.ProxyRenderStringCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.labels.RenderItem)
-			 */
-			@Override
-			public Object call(Object context, RenderItem item) {
-				// gets chart instance
-				IsChart chart = item.getNativeChart().getChart();
-				// checks if the callback is set
-				if (chart != null && renderCallback != null) {
-					// calls callback
-					Object value = renderCallback.invoke(chart, item);
-					// checks result
-					if (value != null) {
-						if (value instanceof ImageElement) {
-							ImageElement image = (ImageElement) value;
-							return image;
-						} else {
-							return value.toString();
-						}
-					}
-				}
-				// default value is percentage
-				return String.valueOf(item.getPercentage());
-			}
-		});
-		fontColorCallbackProxy.setCallback(new ProxyFontColorCallback() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.ext.labels.LabelsConfiguration.ProxyFontColorCallback#call(java.lang.Object,
-			 * org.pepstock.charba.client.ext.labels.FontColorItem)
-			 */
-			@Override
-			public String call(Object context, FontColorItem item) {
-				// gets chart instance
-				IsChart chart = item.getNativeChart().getChart();
-				// checks if the callback is set
-				if (chart != null && fontColorCallback != null) {
-					// calls callback
-					Object value = fontColorCallback.invoke(chart, item);
-					// checks result
-					if (value instanceof IsColor) {
-						// is color instance
-						IsColor color = (IsColor) value;
-						return color.toRGBA();
-					} else if (value instanceof String) {
-						// is string instance
-						return (String) value;
-					} else if (value != null) {
-						// another instance not null
-						// returns to string
+		renderCallbackProxy.setCallback((context, item) -> {
+			// gets chart instance
+			IsChart chart = item.getNativeChart().getChart();
+			// checks if the callback is set
+			if (chart != null && renderCallback != null) {
+				// calls callback
+				Object value = renderCallback.invoke(chart, item);
+				// checks result
+				if (value != null) {
+					if (value instanceof ImageElement) {
+						ImageElement image = (ImageElement) value;
+						return image;
+					} else {
 						return value.toString();
 					}
 				}
-				// defaults returns font color
-				return getFontColorAsString();
 			}
+			// default value is percentage
+			return String.valueOf(item.getPercentage());
+		});
+		fontColorCallbackProxy.setCallback((context, item) -> {
+			// gets chart instance
+			IsChart chart = item.getNativeChart().getChart();
+			// checks if the callback is set
+			if (chart != null && fontColorCallback != null) {
+				// calls callback
+				Object value = fontColorCallback.invoke(chart, item);
+				// checks result
+				if (value instanceof IsColor) {
+					// is color instance
+					IsColor color = (IsColor) value;
+					return color.toRGBA();
+				} else if (value instanceof String) {
+					// is string instance
+					return (String) value;
+				} else if (value != null) {
+					// another instance not null
+					// returns to string
+					return value.toString();
+				}
+			}
+			// defaults returns font color
+			return getFontColorAsString();
 		});
 	}
 
