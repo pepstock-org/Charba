@@ -371,42 +371,25 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			// default result
 			return String.valueOf(value);
 		});
-		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValueAsColor(context, backgroundColorCallback, getBackgroundColorAsString());
-		});
-		borderColorCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValueAsColor(context, borderColorCallback, getBorderColorAsString());
-		});
-		colorCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValueAsColor(context, colorCallback, getColorAsString());
-		});
-		alignCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValueAsString(context, alignCallback, getAlign()).value();
-		});
-		anchorCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValueAsString(context, anchorCallback, getAnchor()).value();
-		});
-		borderRadiusCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, borderRadiusCallback, getBorderRadius()).doubleValue();
-		});
-		borderWidthCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, borderWidthCallback, getBorderWidth()).intValue();
-		});
-		clampCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, clampCallback, isClamp()).booleanValue();
-		});
-		clipCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, clipCallback, isClip()).booleanValue();
-		});
+		// gets value calling callback
+		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, backgroundColorCallback, getBackgroundColorAsString()));
+		// gets value calling callback
+		borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, borderColorCallback, getBorderColorAsString()));
+		// gets value calling callback
+		colorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, colorCallback, getColorAsString()));
+		// gets value calling callback
+		alignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(context, alignCallback, getAlign()).value());
+		// gets value calling callback
+		anchorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(context, anchorCallback, getAnchor()).value());
+		// gets value calling callback
+		borderRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, borderRadiusCallback, getBorderRadius()).doubleValue());
+		// gets value calling callback
+		borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, borderWidthCallback, getBorderWidth()).intValue());
+		// gets value calling callback
+		clampCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, clampCallback, isClamp()).booleanValue());
+		// gets value calling callback
+		clipCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, clipCallback, isClip()).booleanValue());
+		// gets value calling callback
 		displayCallbackProxy.setCallback((contextFunction, context) -> {
 			// gets value
 			Display value = ScriptableUtils.getOptionValueAsString(context, displayCallback);
@@ -421,38 +404,23 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 				return Display.TRUE.equals(result);
 			}
 		});
-		offsetCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, offsetCallback, getOffset()).doubleValue();
-		});
-		opacityCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, opacityCallback, getOpacity()).doubleValue();
-		});
-		rotationCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, rotationCallback, getRotation()).doubleValue();
-		});
-		textAlignCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValueAsString(context, textAlignCallback, getTextAlign()).value();
-		});
-		textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValueAsColor(context, textStrokeColorCallback, getTextStrokeColorAsString());
-		});
-		textStrokeWidthCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, textStrokeWidthCallback, getTextStrokeWidth()).intValue();
-		});
-		textShadowBlurCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, textShadowBlurCallback, getTextShadowBlur()).doubleValue();
-		});
-		textShadowColorCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValueAsColor(context, textShadowColorCallback, getTextShadowColorAsString());
-		});
+		// gets value calling callback
+		offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, offsetCallback, getOffset()).doubleValue());
+		// gets value calling callback
+		opacityCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, opacityCallback, getOpacity()).doubleValue());
+		// gets value calling callback
+		rotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, rotationCallback, getRotation()).doubleValue());
+		// gets value calling callback
+		textAlignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(context, textAlignCallback, getTextAlign()).value());
+		// gets value calling callback
+		textStrokeColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, textStrokeColorCallback, getTextStrokeColorAsString()));
+		// gets value calling callback
+		textStrokeWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, textStrokeWidthCallback, getTextStrokeWidth()).intValue());
+		// gets value calling callback
+		textShadowBlurCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, textShadowBlurCallback, getTextShadowBlur()).doubleValue());
+		// gets value calling callback
+		textShadowColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, textShadowColorCallback, getTextShadowColorAsString()));
+		// gets value calling callback
 		fontCallbackProxy.setCallback((contextFunction, context) -> {
 			// gets value
 			Font result = ScriptableUtils.getOptionValue(context, fontCallback);
@@ -464,6 +432,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			// default result
 			return getFont().getObject();
 		});
+		// gets value calling callback
 		paddingCallbackProxy.setCallback((contextFunction, context) -> {
 			// gets value
 			Padding result = ScriptableUtils.getOptionValue(context, paddingCallback);

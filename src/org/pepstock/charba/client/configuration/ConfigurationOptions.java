@@ -49,7 +49,6 @@ import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
@@ -278,16 +277,11 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			// fires the click event on the chart
 			getChart().fireEvent(new ChartClickEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
 		});
-		hoverCallbackProxy.setCallback((nativeChart, event, items) -> {
-			// fires the hover hover on the chart
-			getChart().fireEvent(new ChartHoverEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
-		});
-		resizeCallbackProxy.setCallback((context, nativeChart, size) -> {
-			// creates new native vent
-			NativeEvent event = Document.get().createChangeEvent();
-			// fires the resize event on chart
-			getChart().fireEvent(new ChartResizeEvent(event, new SizeItem(size)));
-		});
+		// fires the hover hover on the chart
+		hoverCallbackProxy.setCallback((nativeChart, event, items) -> getChart().fireEvent(new ChartHoverEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory))));
+		// creates new native vent
+		// fires the resize event on chart
+		resizeCallbackProxy.setCallback((context, nativeChart, size) -> getChart().fireEvent(new ChartResizeEvent(Document.get().createChangeEvent(), new SizeItem(size))));
 		legendCallbackProxy.setCallback(context -> {
 			// creates the safe html to be sure about the right HTML to send back
 			SafeHtmlBuilder builder = new SafeHtmlBuilder();

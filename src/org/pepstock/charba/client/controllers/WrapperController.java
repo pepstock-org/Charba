@@ -238,30 +238,18 @@ final class WrapperController extends NativeObjectContainer {
 			// invoke user method implementation
 			onInitialize(context, chart.getChart(), datasetIndex);
 		});
-		addElementsCallbackProxy.setCallback(context -> {
-			// invoke user method implementation
-			onAddElements(context, context.getChart());
-		});
-		addElementAndResetCallbackProxy.setCallback((context, index) -> {
-			// invoke user method implementation
-			onAddElementAndReset(context, context.getChart(), index);
-		});
-		drawCallbackProxy.setCallback((context, ease) -> {
-			// invoke user method implementation
-			onDraw(context, context.getChart(), ease);
-		});
-		removeHoverStyleCallbackProxy.setCallback((context, element) -> {
-			// invoke user method implementation
-			onRemoveHoverStyle(context, context.getChart(), element);
-		});
-		setHoverStyleCallbackProxy.setCallback((context, element) -> {
-			// invoke user method implementation
-			onSetHoverStyle(context, context.getChart(), element);
-		});
-		updateCallbackProxy.setCallback((context, reset) -> {
-			// invoke user method implementation
-			onUpdate(context, context.getChart(), reset);
-		});
+		// invoke user method implementation
+		addElementsCallbackProxy.setCallback(context -> onAddElements(context, context.getChart()));
+		// invoke user method implementation
+		addElementAndResetCallbackProxy.setCallback((context, index) -> onAddElementAndReset(context, context.getChart(), index));
+		// invoke user method implementation
+		drawCallbackProxy.setCallback((context, ease) -> onDraw(context, context.getChart(), ease));
+		// invoke user method implementation
+		removeHoverStyleCallbackProxy.setCallback((context, element) -> onRemoveHoverStyle(context, context.getChart(), element));
+		// invoke user method implementation
+		setHoverStyleCallbackProxy.setCallback((context, element) -> onSetHoverStyle(context, context.getChart(), element));
+		// invoke user method implementation
+		updateCallbackProxy.setCallback((context, reset) -> onUpdate(context, context.getChart(), reset));
 		// adds all proxy functions to call the functions to the native object
 		setValue(Property.INITIALIZE, initializeCallbackProxy.getProxy());
 		setValue(Property.ADD_ELEMENTS, addElementsCallbackProxy.getProxy());

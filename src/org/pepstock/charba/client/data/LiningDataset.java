@@ -186,46 +186,27 @@ public abstract class LiningDataset extends Dataset {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		pointBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValueAsColor(context, pointBackgroundColorCallback, getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
-		});
-		pointBorderColorCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValueAsColor(context, pointBorderColorCallback, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false);
-		});
-		pointBorderWidthCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, pointBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue();
-		});
-		pointHoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValueAsColor(context, pointHoverBackgroundColorCallback, getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
-		});
-		pointHoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValueAsColor(context, pointHoverBorderColorCallback, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false);
-		});
-		pointHoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, pointHoverBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue();
-		});
-		pointRadiusCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, pointRadiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue();
-		});
-		pointHitRadiusCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, pointHitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue();
-		});
-		pointHoverRadiusCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, pointHoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue();
-		});
-		pointRotationCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, pointRotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue();
-		});
+		// gets value calling callback
+		pointBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, pointBackgroundColorCallback, getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
+		// gets value calling callback
+		pointBorderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, pointBorderColorCallback, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false));
+		// gets value calling callback
+		pointBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
+		// gets value calling callback
+		pointHoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, pointHoverBackgroundColorCallback, getDefaultValues().getElements().getPoint().getBackgroundColorAsString()));
+		// gets value calling callback
+		pointHoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, pointHoverBorderColorCallback, getDefaultValues().getElements().getPoint().getBorderColorAsString(), false));
+		// gets value calling callback
+		pointHoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointHoverBorderWidthCallback, getDefaultValues().getElements().getPoint().getBorderWidth()).intValue());
+		// gets value calling callback
+		pointRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointRadiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue());
+		// gets value calling callback
+		pointHitRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointHitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue());
+		// gets value calling callback
+		pointHoverRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointHoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
+		// gets value calling callback
+		pointRotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointRotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
+		// gets value calling callback
 		pointStyleCallbackProxy.setCallback((contextFunction, context) -> {
 			// gets value
 			Object result = ScriptableUtils.getOptionValue(context, pointStyleCallback);

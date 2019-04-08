@@ -129,22 +129,15 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		radiusCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, radiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue();
-		});
-		hitRadiusCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, hitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue();
-		});
-		hoverRadiusCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, hoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue();
-		});
-		rotationCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValue(context, rotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue();
-		});
+		// gets value calling callback
+		radiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, radiusCallback, getDefaultValues().getElements().getPoint().getRadius()).doubleValue());
+		// gets value calling callback
+		hitRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, hitRadiusCallback, getDefaultValues().getElements().getPoint().getHitRadius()).doubleValue());
+		// gets value calling callback
+		hoverRadiusCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, hoverRadiusCallback, getDefaultValues().getElements().getPoint().getHoverRadius()).doubleValue());
+		// gets value calling callback
+		rotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, rotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
+		// gets value calling callback
 		pointStyleCallbackProxy.setCallback((contextFunction, context) -> {
 			// gets value
 			Object result = ScriptableUtils.getOptionValue(context, pointStyleCallback);

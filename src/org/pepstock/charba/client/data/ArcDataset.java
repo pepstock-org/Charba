@@ -82,10 +82,8 @@ abstract class ArcDataset extends HovingDataset {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		borderAlignCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			return ScriptableUtils.getOptionValueAsString(context, borderAlignCallback, getDefaultValues().getElements().getArc().getBorderAlign()).value();
-		});
+		// gets value and calls the callback
+		borderAlignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(context, borderAlignCallback, getDefaultValues().getElements().getArc().getBorderAlign()).value());
 	}
 
 	/**

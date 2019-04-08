@@ -129,18 +129,12 @@ public class Legend extends EventProvider<ExtendedOptions> {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		clickCallbackProxy.setCallback((nativeChart, event, item) -> {
-			// fires the event
-			getChart().fireEvent(new LegendClickEvent(event, new LegendItem(item)));
-		});
-		hoverCallbackProxy.setCallback((nativeChart, event, item) -> {
-			// fires the event
-			getChart().fireEvent(new LegendHoverEvent(event, new LegendItem(item)));
-		});
-		leaveCallbackProxy.setCallback((nativeChart, event, item) -> {
-			// fires the event
-			getChart().fireEvent(new LegendLeaveEvent(event, new LegendItem(item)));
-		});
+		// fires the event
+		clickCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendClickEvent(event, new LegendItem(item))));
+		// fires the event
+		hoverCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendHoverEvent(event, new LegendItem(item))));
+		// fires the event
+		leaveCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendLeaveEvent(event, new LegendItem(item))));
 	}
 
 	/**
