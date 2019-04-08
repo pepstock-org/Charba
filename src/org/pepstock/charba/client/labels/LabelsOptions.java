@@ -259,8 +259,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 				// checks result
 				if (value != null) {
 					if (value instanceof ImageElement) {
-						ImageElement image = (ImageElement) value;
-						return image;
+						return (ImageElement) value;
 					} else {
 						return value.toString();
 					}
