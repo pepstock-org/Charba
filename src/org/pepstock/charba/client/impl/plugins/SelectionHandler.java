@@ -717,7 +717,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// -----
 		double imgWidth = clearSelection.getImage().getWidth();
 		// maintains the image aspect ratio
-		double aspectRatio = clearSelection.getImage().getHeight() / (double) imgWidth;
+		double aspectRatio = clearSelection.getImage().getHeight() / imgWidth;
 		// calculates image width
 		imgWidth = imgWidth * aspectRatio;
 		// -----
