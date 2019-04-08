@@ -151,7 +151,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 		// if boolean, there is not any options, therefore false
 		// otherwise checks if there is the key. If there is and is NOT boolean
 		// means that an options has been added.
-		return ObjectType.BOOLEAN.equals(type) ? false : has(pluginIdKey);
+		return !ObjectType.BOOLEAN.equals(type) && has(pluginIdKey);
 	}
 
 	/**

@@ -321,7 +321,7 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 			checkAndAddToParent();
 		} else {
 			// otherwise transforms into a boolean
-			setDisplay(Display.TRUE.equals(display) ? true : false);
+			setDisplay(Display.TRUE.equals(display));
 		}
 	}
 

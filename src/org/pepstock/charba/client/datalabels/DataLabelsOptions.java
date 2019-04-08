@@ -418,7 +418,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 				return Display.AUTO.value();
 			} else {
 				// returns boolean
-				return Display.TRUE.equals(result) ? true : false;
+				return Display.TRUE.equals(result);
 			}
 		});
 		offsetCallbackProxy.setCallback((contextFunction, context) -> {
@@ -769,7 +769,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		if (Display.AUTO.equals(display)) {
 			setValue(Property.DISPLAY, display);
 		} else {
-			setValue(Property.DISPLAY, Display.TRUE.equals(display) ? true : false);
+			setValue(Property.DISPLAY, Display.TRUE.equals(display));
 		}
 	}
 

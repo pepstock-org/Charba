@@ -49,7 +49,7 @@ public final class FontColorItem extends RenderItem {
 	 * @return the <code>label</code> property by native object.
 	 */
 	@JsProperty(name = "backgroundColor")
-	native final String getNativeBackgroundColor();
+	final native String getNativeBackgroundColor();
 
 	/**
 	 * Returns the fill color

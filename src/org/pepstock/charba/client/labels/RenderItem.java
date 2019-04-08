@@ -47,7 +47,7 @@ public class RenderItem {
 	 * @return the <code>chart</code> property by native object.
 	 */
 	@JsProperty(name = "chart")
-	native final Chart getNativeChart();
+	final native Chart getNativeChart();
 
 	/**
 	 * Returns the <code>datasetIndex</code> property by native object.
@@ -55,7 +55,7 @@ public class RenderItem {
 	 * @return the <code>datasetIndex</code> property by native object.
 	 */
 	@JsProperty(name = "datasetIndex")
-	native final int getNativeDatasetIndex();
+	final native int getNativeDatasetIndex();
 
 	/**
 	 * Returns the <code>index</code> property by native object.
@@ -63,7 +63,7 @@ public class RenderItem {
 	 * @return the <code>index</code> property by native object.
 	 */
 	@JsProperty(name = "index")
-	native final int getNativeIndex();
+	final native int getNativeIndex();
 
 	/**
 	 * Returns the <code>label</code> property by native object.
@@ -71,7 +71,7 @@ public class RenderItem {
 	 * @return the <code>label</code> property by native object.
 	 */
 	@JsProperty(name = "label")
-	native final String getNativeLabel();
+	final native String getNativeLabel();
 
 	/**
 	 * Returns the <code>value</code> property by native object.
@@ -79,7 +79,7 @@ public class RenderItem {
 	 * @return the <code>value</code> property by native object.
 	 */
 	@JsProperty(name = "value")
-	native final double getNativeValue();
+	final native double getNativeValue();
 
 	/**
 	 * Returns the <code>percentage</code> property by native object.
@@ -87,7 +87,7 @@ public class RenderItem {
 	 * @return the <code>percentage</code> property by native object.
 	 */
 	@JsProperty(name = "percentage")
-	native final double getNativePercentage();
+	final native double getNativePercentage();
 
 	/**
 	 * Returns the index of the data inside the dataset.
