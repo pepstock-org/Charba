@@ -22,9 +22,6 @@ import org.pepstock.charba.client.events.AddHandlerEventHandler;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.events.RemoveHandlerEventHandler;
 
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
-
 /**
  * Is a JavaScript object container, which contains the chart instance and options element to store chart configuration, which
  * will manage chart events to events handlers.
@@ -54,8 +51,8 @@ public abstract class EventProvider<T extends NativeObjectContainer> extends Con
 	 * RemoveHandlerEvent)
 	 */
 	@Override
-	public void onRemove(RemoveHandlerEvent event) {
-		removeHandler(event.getHandlerType());
+	public final void onRemove(RemoveHandlerEvent event) {
+		removeHandler(event);
 	}
 
 	/*
@@ -65,22 +62,22 @@ public abstract class EventProvider<T extends NativeObjectContainer> extends Con
 	 */
 	@Override
 	public final void onAdd(AddHandlerEvent event) {
-		addHandler(event.getHandlerType());
+		addHandler(event);
 	}
 
 	/**
 	 * Notifies the event provider when a new handler has been added.
 	 * 
-	 * @param type type of event
-	 * @param <H> type of event handler
+	 * @param event event to be forwarded
 	 */
-	protected abstract <H extends EventHandler> void addHandler(Type<H> type);
+	protected abstract void addHandler(AddHandlerEvent event);
+	
 
 	/**
 	 * Notifies the event provider when a new handler has been unregistered
 	 * 
-	 * @param type type of event handler
-	 * @param <H> type of event handler
+	 * @param event event to be forwarded
 	 */
-	protected abstract <H extends EventHandler> void removeHandler(Type<H> type);
+	protected abstract void removeHandler(RemoveHandlerEvent event);
+
 }

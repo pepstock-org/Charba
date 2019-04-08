@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.events;
 
 import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent;
 
 /**
  * Event which is fired when new event handler has been removed to the chart.<br>
@@ -24,14 +23,12 @@ import com.google.gwt.event.shared.GwtEvent;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class RemoveHandlerEvent extends GwtEvent<RemoveHandlerEventHandler> {
+public final class RemoveHandlerEvent extends AbstractHandlerEvent<RemoveHandlerEventHandler> {
 
 	/**
 	 * Event type
 	 */
 	public static final Type<RemoveHandlerEventHandler> TYPE = new Type<>();
-	// type of the handler removed from the chart
-	private final Type<? extends EventHandler> handlerType;
 
 	/**
 	 * Creates the event with the type of removed handler.
@@ -39,16 +36,7 @@ public final class RemoveHandlerEvent extends GwtEvent<RemoveHandlerEventHandler
 	 * @param handlerType the type of removed handler.
 	 */
 	public RemoveHandlerEvent(Type<? extends EventHandler> handlerType) {
-		this.handlerType = handlerType;
-	}
-
-	/**
-	 * Returns the type of removed handler.
-	 * 
-	 * @return the type of removed handler.
-	 */
-	public Type<? extends EventHandler> getHandlerType() {
-		return handlerType;
+		super(handlerType);
 	}
 
 	/*

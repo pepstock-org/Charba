@@ -126,6 +126,7 @@ Here you can find the list of enhancement and updates available on `master` bran
  * change key for tile caching to enable also for image and character shape drawers
  * transform and rotate of 180 degrees `Star` and `EmptyStar` shapes
  * `deprecated` some methods of Meter and Gauge datasets and options
+ * change internal add and remove handler management
 
 ### Fixed Sonar Issue
  * squid:S00115 - Constant names should comply with a naming convention

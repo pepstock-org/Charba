@@ -21,16 +21,16 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.Easing;
+import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.AnimationCompleteEvent;
 import org.pepstock.charba.client.events.AnimationProgressEvent;
+import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.items.AnimationItem;
 import org.pepstock.charba.client.items.AnimationObject;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
 
 import jsinterop.annotations.JsFunction;
 
@@ -127,7 +127,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 				// invokes the custom callback
 				onComplete(animationObject.getAnimationItem());
 			}
-		});		
+		});
 		progressCallbackProxy.setCallback((context, animationObject) -> {
 			// checks consistency of argument
 			if (animationObject != null) {
@@ -212,12 +212,12 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.EventProvider#addHandler(com.google.gwt.event.shared.GwtEvent.Type)
+	 * @see org.pepstock.charba.client.configuration.EventProvider#addHandler(org.pepstock.charba.client.events.AddHandlerEvent)
 	 */
 	@Override
-	protected final <H extends EventHandler> void addHandler(Type<H> type) {
+	protected final void addHandler(AddHandlerEvent event) {
 		// checks which kind of handler has been added
-		if (type.equals(AnimationCompleteEvent.TYPE)) {
+		if (event.isRecognize(AnimationCompleteEvent.TYPE)) {
 			// checks if property exist
 			if (onCompleteHandlers == 0) {
 				// sets the java script code to get the event
@@ -225,7 +225,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 			}
 			// increments amount of handlers
 			onCompleteHandlers++;
-		} else if (type.equals(AnimationProgressEvent.TYPE)) {
+		} else if (event.isRecognize(AnimationProgressEvent.TYPE)) {
 			// checks if property exist
 			if (onProgressHandlers == 0) {
 				// sets the java script code to get the event
@@ -239,12 +239,13 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.EventProvider#removeHandler(com.google.gwt.event.shared.GwtEvent.Type)
+	 * @see org.pepstock.charba.client.configuration.EventProvider#removeHandler(org.pepstock.charba.client.events.
+	 * RemoveHandlerEvent)
 	 */
 	@Override
-	protected final <H extends EventHandler> void removeHandler(Type<H> type) {
+	protected final void removeHandler(RemoveHandlerEvent event) {
 		// checks which kind of handler has been removed
-		if (type.equals(AnimationCompleteEvent.TYPE)) {
+		if (event.isRecognize(AnimationCompleteEvent.TYPE)) {
 			// decrements amount of handlers
 			onCompleteHandlers--;
 			// if zero, no handler
@@ -253,7 +254,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 				getConfiguration().setEvent(getConfiguration().getAnimation(), Property.ON_COMPLETE, null);
 
 			}
-		} else if (type.equals(AnimationProgressEvent.TYPE)) {
+		} else if (event.isRecognize(AnimationProgressEvent.TYPE)) {
 			// decrements amount of handlers
 			onProgressHandlers--;
 			// if zero, no handler

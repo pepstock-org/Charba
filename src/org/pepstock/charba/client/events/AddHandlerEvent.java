@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.events;
 
 import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent;
 
 /**
  * Event which is fired when new event handler has been added to the chart.<br>
@@ -24,15 +23,12 @@ import com.google.gwt.event.shared.GwtEvent;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class AddHandlerEvent extends GwtEvent<AddHandlerEventHandler> {
+public final class AddHandlerEvent extends AbstractHandlerEvent<AddHandlerEventHandler> {
 
 	/**
 	 * Event type
 	 */
 	public static final Type<AddHandlerEventHandler> TYPE = new Type<>();
-
-	// type of new handler added to the chart
-	private final Type<? extends EventHandler> handlerType;
 
 	/**
 	 * Creates the event with the type of new handler.
@@ -40,16 +36,7 @@ public final class AddHandlerEvent extends GwtEvent<AddHandlerEventHandler> {
 	 * @param handlerType the type of new handler.
 	 */
 	public AddHandlerEvent(Type<? extends EventHandler> handlerType) {
-		this.handlerType = handlerType;
-	}
-
-	/**
-	 * Returns the type of new handler.
-	 * 
-	 * @return the type of new handler.
-	 */
-	public Type<? extends EventHandler> getHandlerType() {
-		return handlerType;
+		super(handlerType);
 	}
 
 	/*

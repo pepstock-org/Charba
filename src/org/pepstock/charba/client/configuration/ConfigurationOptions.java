@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Chart;
@@ -33,12 +35,14 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.chart.DefaultChartOptions;
 import org.pepstock.charba.client.enums.Event;
+import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.AxisClickEvent;
 import org.pepstock.charba.client.events.ChartClickEvent;
 import org.pepstock.charba.client.events.ChartHoverEvent;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.events.ChartResizeEvent;
 import org.pepstock.charba.client.events.DatasetSelectionEvent;
+import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.events.TitleClickEvent;
 import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.DatasetItem.DatasetItemFactory;
@@ -49,7 +53,6 @@ import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 
@@ -75,6 +78,9 @@ import jsinterop.annotations.JsFunction;
  *
  */
 public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions> implements ConfigurationElement {
+
+	// list of click event handler types
+	private static final List<Type<?>> CHART_CLICK_TYPES = Collections.unmodifiableList(Arrays.asList(DatasetSelectionEvent.TYPE, ChartClickEvent.TYPE, TitleClickEvent.TYPE, AxisClickEvent.TYPE));
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -517,12 +523,12 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.EventProvider#addHandler(com.google.gwt.event.shared.GwtEvent.Type)
+	 * @see org.pepstock.charba.client.configuration.EventProvider#addHandler(org.pepstock.charba.client.events.AddHandlerEvent)
 	 */
 	@Override
-	protected final <H extends EventHandler> void addHandler(Type<H> type) {
+	protected final void addHandler(AddHandlerEvent event) {
 		// checks if type of added event handler is dataset selection or click
-		if (type.equals(DatasetSelectionEvent.TYPE) || type.equals(ChartClickEvent.TYPE) || type.equals(TitleClickEvent.TYPE) || type.equals(AxisClickEvent.TYPE)) {
+		if (event.isRecognize(CHART_CLICK_TYPES)) {
 			// if there is not any click event handler
 			if (onClickHandlers == 0) {
 				// sets the callback proxy in order to call the user event interface
@@ -531,21 +537,21 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			// increments amount of handlers
 			onClickHandlers++;
 			// check if a dataset selection handler has been added
-			if (type.equals(DatasetSelectionEvent.TYPE)) {
+			if (event.isRecognize(DatasetSelectionEvent.TYPE)) {
 				// increments handlers of dataset selection
 				onDatasetSelectionHandlers++;
 			}
 			// check if a title click handler has been added
-			if (type.equals(TitleClickEvent.TYPE)) {
+			if (event.isRecognize(TitleClickEvent.TYPE)) {
 				// increments handlers of title click
 				onTitleClickHandlers++;
 			}
 			// check if a axis click handler has been added
-			if (type.equals(AxisClickEvent.TYPE)) {
+			if (event.isRecognize(AxisClickEvent.TYPE)) {
 				// increments handlers of axis click
 				onAxisClickHandlers++;
 			}
-		} else if (type.equals(ChartHoverEvent.TYPE)) {
+		} else if (event.isRecognize(ChartHoverEvent.TYPE)) {
 			// if there is not any hover event handler
 			if (onHoverHandlers == 0) {
 				// sets the callback proxy in order to call the user event interface
@@ -553,7 +559,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 			}
 			// increments amount of handlers
 			onHoverHandlers++;
-		} else if (type.equals(ChartResizeEvent.TYPE)) {
+		} else if (event.isRecognize(ChartResizeEvent.TYPE)) {
 			// if there is not any resize event handler
 			if (onResizeHandlers == 0) {
 				// sets the callback proxy in order to call the user event interface
@@ -567,12 +573,13 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.EventProvider#removeHandler(com.google.gwt.event.shared.GwtEvent.Type)
+	 * @see org.pepstock.charba.client.configuration.EventProvider#removeHandler(org.pepstock.charba.client.events.
+	 * RemoveHandlerEvent)
 	 */
 	@Override
-	protected final <H extends EventHandler> void removeHandler(Type<H> type) {
+	protected final void removeHandler(RemoveHandlerEvent event) {
 		// checks if type of removed event handler is dataset selection or click
-		if (type.equals(DatasetSelectionEvent.TYPE) || type.equals(ChartClickEvent.TYPE) || type.equals(TitleClickEvent.TYPE) || type.equals(AxisClickEvent.TYPE)) {
+		if (event.isRecognize(CHART_CLICK_TYPES)) {
 			// decrements the amount of handlers
 			onClickHandlers--;
 			// if there is not any handler
@@ -581,21 +588,21 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 				getConfiguration().setEvent(Property.ON_CLICK, null);
 			}
 			// check if a dataset selection handler has been removed
-			if (type.equals(DatasetSelectionEvent.TYPE)) {
+			if (event.isRecognize(DatasetSelectionEvent.TYPE)) {
 				// decrements handlers of dataset selection
 				onDatasetSelectionHandlers--;
 			}
 			// check if a title click handler has been removed
-			if (type.equals(TitleClickEvent.TYPE)) {
+			if (event.isRecognize(TitleClickEvent.TYPE)) {
 				// decrements handlers of title click
 				onTitleClickHandlers--;
 			}
 			// check if a axis click handler has been removed
-			if (type.equals(AxisClickEvent.TYPE)) {
+			if (event.isRecognize(AxisClickEvent.TYPE)) {
 				// decrements handlers of axis click
 				onAxisClickHandlers--;
 			}
-		} else if (type.equals(ChartHoverEvent.TYPE)) {
+		} else if (event.isRecognize(ChartHoverEvent.TYPE)) {
 			// decrements the amount of handlers
 			onHoverHandlers--;
 			// if there is not any handler
@@ -603,7 +610,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 				// removes the java script object
 				getConfiguration().setEvent(Property.ON_HOVER, null);
 			}
-		} else if (type.equals(ChartResizeEvent.TYPE)) {
+		} else if (event.isRecognize(ChartResizeEvent.TYPE)) {
 			// decrements the amount of handlers
 			onResizeHandlers--;
 			// if there is not any handler

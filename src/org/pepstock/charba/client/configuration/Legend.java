@@ -22,15 +22,14 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendHoverEvent;
 import org.pepstock.charba.client.events.LegendLeaveEvent;
+import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.options.ExtendedOptions;
-
-import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent.Type;
 
 import jsinterop.annotations.JsFunction;
 
@@ -149,12 +148,12 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.EventProvider#addHandler(com.google.gwt.event.shared.GwtEvent.Type)
+	 * @see org.pepstock.charba.client.configuration.EventProvider#addHandler(org.pepstock.charba.client.events.AddHandlerEvent)
 	 */
 	@Override
-	protected final <H extends EventHandler> void addHandler(Type<H> type) {
+	protected final void addHandler(AddHandlerEvent event) {
 		// checks if type of added event handler is dataset selection or click
-		if (type.equals(LegendClickEvent.TYPE)) {
+		if (event.isRecognize(LegendClickEvent.TYPE)) {
 			// if java script property is missing
 			if (onClickHandlers == 0) {
 				// adds the java script function to catch the event
@@ -162,7 +161,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 			}
 			// increments amount of handlers
 			onClickHandlers++;
-		} else if (type.equals(LegendHoverEvent.TYPE)) {
+		} else if (event.isRecognize(LegendHoverEvent.TYPE)) {
 			// if java script property is missing
 			if (onHoverHandlers == 0) {
 				// adds the java script function to catch the event
@@ -170,7 +169,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 			}
 			// increments amount of handlers
 			onHoverHandlers++;
-		} else if (type.equals(LegendLeaveEvent.TYPE)) {
+		} else if (event.isRecognize(LegendLeaveEvent.TYPE)) {
 			// if java script property is missing
 			if (onLeaveHandlers == 0) {
 				// adds the java script function to catch the event
@@ -184,12 +183,13 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.EventProvider#removeHandler(com.google.gwt.event.shared.GwtEvent.Type)
+	 * @see org.pepstock.charba.client.configuration.EventProvider#removeHandler(org.pepstock.charba.client.events.
+	 * RemoveHandlerEvent)
 	 */
 	@Override
-	protected final <H extends EventHandler> void removeHandler(Type<H> type) {
+	protected final void removeHandler(RemoveHandlerEvent event) {
 		// checks if type of removed event handler is dataset selection or click
-		if (type.equals(LegendClickEvent.TYPE)) {
+		if (event.isRecognize(LegendClickEvent.TYPE)) {
 			// decrements the amount of handlers
 			onClickHandlers--;
 			// if there is not any handler
@@ -197,7 +197,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 				// removes the java script object
 				getConfiguration().setEvent(getConfiguration().getLegend(), Property.ON_CLICK, null);
 			}
-		} else if (type.equals(LegendHoverEvent.TYPE)) {
+		} else if (event.isRecognize(LegendHoverEvent.TYPE)) {
 			// decrements the amount of handlers
 			onHoverHandlers--;
 			// if there is not any handler
@@ -205,7 +205,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 				// removes the java script object
 				getConfiguration().setEvent(getConfiguration().getLegend(), Property.ON_HOVER, null);
 			}
-		} else if (type.equals(LegendLeaveEvent.TYPE)) {
+		} else if (event.isRecognize(LegendLeaveEvent.TYPE)) {
 			// decrements the amount of handlers
 			onLeaveHandlers--;
 			// if there is not any handler
