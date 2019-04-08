@@ -62,8 +62,6 @@ public final class DataLabelsOptionsBuilder {
 
 	/**
 	 * To avoid any instantiation
-	 * 
-	 * @return builder instance
 	 */
 	private DataLabelsOptionsBuilder() {
 		// do nothing

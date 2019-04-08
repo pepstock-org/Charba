@@ -791,8 +791,6 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 				clearSelection.setY(y);
 				// and adding 1 to border width
 				y += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
-
-				// y += clearSelection.isUseSelectionStyle() ? Math.max(pOptions.getBorderWidth(), 0) + 1 : 0;
 				// adds padding top
 				y += clearSelection.getPadding();
 				clearSelection.setImageY(y);

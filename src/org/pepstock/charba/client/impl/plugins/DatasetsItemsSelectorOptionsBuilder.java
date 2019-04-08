@@ -37,11 +37,9 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 
 	/**
 	 * To avoid any instantiation
-	 * 
-	 * @return builder instance
 	 */
 	private DatasetsItemsSelectorOptionsBuilder() {
-		// do nothing;
+		// do nothing
 	}
 
 	/**

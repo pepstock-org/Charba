@@ -40,11 +40,9 @@ public final class LabelsOptionsBuilder {
 
 	/**
 	 * To avoid any instantiation
-	 * 
-	 * @return builder instance
 	 */
 	private LabelsOptionsBuilder() {
-		// do nothing;
+		// do nothing
 	}
 
 	/**
