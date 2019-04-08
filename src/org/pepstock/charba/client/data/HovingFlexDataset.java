@@ -62,9 +62,9 @@ public abstract class HovingFlexDataset extends Dataset {
 	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// background color callback instance
-	private BackgroundColorCallback<?> backgroundColorCallback = null;
+	private BackgroundColorCallback backgroundColorCallback = null;
 	// border color callback instance
-	private BorderColorCallback<?> borderColorCallback = null;
+	private BorderColorCallback borderColorCallback = null;
 	// borderWidth callback instance
 	private BorderWidthCallback borderWidthCallback = null;
 
@@ -186,7 +186,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(IsColor... backgroundColor) {
 		// resets callback
-		setBackgroundColor((BackgroundColorCallback<?>) null);
+		setBackgroundColor((BackgroundColorCallback) null);
 		// stores value
 		setValueOrArray(Property.BACKGROUND_COLOR, backgroundColor);
 		// removes previous configuration to other containers
@@ -200,7 +200,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(String... backgroundColor) {
 		// resets callback
-		setBackgroundColor((BackgroundColorCallback<?>) null);
+		setBackgroundColor((BackgroundColorCallback) null);
 		// stores value
 		setValueOrArray(Property.BACKGROUND_COLOR, backgroundColor);
 		// removes previous configuration to other containers
@@ -214,7 +214,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(Pattern... backgroundColor) {
 		// resets callback
-		setBackgroundColor((BackgroundColorCallback<?>) null);
+		setBackgroundColor((BackgroundColorCallback) null);
 		// sets value to patterns
 		getPatternsContainer().setObjects(Property.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor));
 		// removes previous configuration to other containers
@@ -228,7 +228,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBackgroundColor(Gradient... backgroundColor) {
 		// resets callback
-		setBackgroundColor((BackgroundColorCallback<?>) null);
+		setBackgroundColor((BackgroundColorCallback) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Property.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor));
 		// removes previous configuration to other containers
@@ -304,7 +304,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBorderColor(IsColor... borderColor) {
 		// resets callback
-		setBorderColor((BorderColorCallback<?>) null);
+		setBorderColor((BorderColorCallback) null);
 		// stores value
 		setValueOrArray(Property.BORDER_COLOR, borderColor);
 		// removes previous configuration to other containers
@@ -318,7 +318,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBorderColor(String... borderColor) {
 		// resets callback
-		setBorderColor((BorderColorCallback<?>) null);
+		setBorderColor((BorderColorCallback) null);
 		// stores value
 		setValueOrArray(Property.BORDER_COLOR, borderColor);
 		// removes previous configuration to other containers
@@ -332,7 +332,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBorderColor(Gradient... borderColor) {
 		// resets callback
-		setBorderColor((BorderColorCallback<?>) null);
+		setBorderColor((BorderColorCallback) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Property.BORDER_COLOR, ArrayObject.fromOrNull(borderColor));
 		// removes previous configuration to other containers
@@ -629,7 +629,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * 
 	 * @return the background color callback, if set, otherwise <code>null</code>.
 	 */
-	public BackgroundColorCallback<?> getBackgroundColorCallback() {
+	public BackgroundColorCallback getBackgroundColorCallback() {
 		return backgroundColorCallback;
 	}
 
@@ -638,7 +638,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * 
 	 * @param backgroundColorCallback the background color callback.
 	 */
-	public void setBackgroundColor(BackgroundColorCallback<?> backgroundColorCallback) {
+	public void setBackgroundColor(BackgroundColorCallback backgroundColorCallback) {
 		// sets the callback
 		this.backgroundColorCallback = backgroundColorCallback;
 		// checks if callback is consistent
@@ -658,7 +658,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * 
 	 * @return the border color callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderColorCallback<?> getBorderColorCallback() {
+	public BorderColorCallback getBorderColorCallback() {
 		return borderColorCallback;
 	}
 
@@ -667,7 +667,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * 
 	 * @param borderColorCallback the border color callback.
 	 */
-	public void setBorderColor(BorderColorCallback<?> borderColorCallback) {
+	public void setBorderColor(BorderColorCallback borderColorCallback) {
 		// sets the callback
 		this.borderColorCallback = borderColorCallback;
 		// checks if callback is consistent

@@ -35,6 +35,6 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  * @see CanvasPattern
  * @see CanvasGradient
  */
-public interface BackgroundColorCallback<T> extends Scriptable<T> {
+public interface BackgroundColorCallback extends Scriptable<Object> {
 
 }

@@ -40,6 +40,6 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  * @see CanvasPattern
  * @see CanvasGradient
  */
-public interface TextShadowColorCallback<T> extends Scriptable<T> {
+public interface TextShadowColorCallback extends Scriptable<Object> {
 
 }

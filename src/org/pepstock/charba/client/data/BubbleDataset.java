@@ -70,7 +70,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	// rotation callback instance
 	private RotationCallback rotationCallback = null;
 	// point style callback instance
-	private PointStyleCallback<PointStyle> pointStyleCallback = null;
+	private PointStyleCallback pointStyleCallback = null;
 
 	// exception message when it's not using data points
 	private static final String DATA_USAGE_MESSAGE = "Use datapoints instead of data for bubble chart";
@@ -197,8 +197,15 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 			@Override
 			public Object call(Object contextFunction, ScriptableContext context) {
 				// gets value
-				return ScriptableUtils.getOptionValueAsString(context, pointStyleCallback, getDefaultValues().getElements().getPoint().getPointStyle());
-			}
+				Object result = ScriptableUtils.getOptionValue(context, pointStyleCallback);
+				// checks result
+				if (result instanceof PointStyle) {
+					// is point style instance
+					PointStyle style = (PointStyle) result;
+					return style.value();
+				}
+				// default result
+				return getDefaultValues().getElements().getPoint().getPointStyle().value();			}
 		});
 	}
 
@@ -530,7 +537,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 * 
 	 * @return the point style callback, if set, otherwise <code>null</code>.
 	 */
-	public PointStyleCallback<?> getPointStyleCallback() {
+	public PointStyleCallback getPointStyleCallback() {
 		return pointStyleCallback;
 	}
 
@@ -539,7 +546,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 * 
 	 * @param pointStyleCallback the point style callback.
 	 */
-	public void setPointStyle(PointStyleCallback<PointStyle> pointStyleCallback) {
+	public void setPointStyle(PointStyleCallback pointStyleCallback) {
 		// sets the callback
 		this.pointStyleCallback = pointStyleCallback;
 		// checks if callback is consistent

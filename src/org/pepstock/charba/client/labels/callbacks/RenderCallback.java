@@ -29,7 +29,7 @@ import com.google.gwt.dom.client.ImageElement;
  * @param <T> type of result of callback. Could a {@link String} or {@link ImageElement}
  * @see ImageElement
  */
-public interface RenderCallback<T> {
+public interface RenderCallback {
 
 	/**
 	 * Called to provide the item to be rendered as string or as image at runtime, using the arguments.
@@ -38,6 +38,6 @@ public interface RenderCallback<T> {
 	 * @param item render item, passed by plugin
 	 * @return a string or as image instance to show as label
 	 */
-	T invoke(IsChart chart, RenderItem item);
+	Object invoke(IsChart chart, RenderItem item);
 
 }

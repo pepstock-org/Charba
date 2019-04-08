@@ -101,15 +101,15 @@ public abstract class LiningDataset extends Dataset {
 	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// point background color callback instance
-	private BackgroundColorCallback<?> pointBackgroundColorCallback = null;
+	private BackgroundColorCallback pointBackgroundColorCallback = null;
 	// point border color callback instance
-	private BorderColorCallback<?> pointBorderColorCallback = null;
+	private BorderColorCallback pointBorderColorCallback = null;
 	// point borderWidth callback instance
 	private BorderWidthCallback pointBorderWidthCallback = null;
 	// point hover background color callback instance
-	private BackgroundColorCallback<?> pointHoverBackgroundColorCallback = null;
+	private BackgroundColorCallback pointHoverBackgroundColorCallback = null;
 	// point hover border color callback instance
-	private BorderColorCallback<?> pointHoverBorderColorCallback = null;
+	private BorderColorCallback pointHoverBorderColorCallback = null;
 	// point hover borderWidth callback instance
 	private BorderWidthCallback pointHoverBorderWidthCallback = null;
 	// point radius callback instance
@@ -121,7 +121,7 @@ public abstract class LiningDataset extends Dataset {
 	// point rotation callback instance
 	private RotationCallback pointRotationCallback = null;
 	// point style callback instance
-	private PointStyleCallback<?> pointStyleCallback = null;
+	private PointStyleCallback pointStyleCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -781,7 +781,7 @@ public abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBackgroundColor(IsColor... pointBackgroundColor) {
 		// reset callback
-		setPointBackgroundColor((BackgroundColorCallback<?>) null);
+		setPointBackgroundColor((BackgroundColorCallback) null);
 		// stores value
 		setValueOrArray(Property.POINT_BACKGROUND_COLOR, pointBackgroundColor);
 		// removes the flag because default is string color
@@ -795,7 +795,7 @@ public abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBackgroundColor(String... pointBackgroundColor) {
 		// reset callback
-		setPointBackgroundColor((BackgroundColorCallback<?>) null);
+		setPointBackgroundColor((BackgroundColorCallback) null);
 		// stores value
 		setValueOrArray(Property.POINT_BACKGROUND_COLOR, pointBackgroundColor);
 		// removes the flag because default is string color
@@ -809,7 +809,7 @@ public abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBackgroundColor(Gradient... pointBackgroundColor) {
 		// reset callback
-		setPointBackgroundColor((BackgroundColorCallback<?>) null);
+		setPointBackgroundColor((BackgroundColorCallback) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Property.POINT_BACKGROUND_COLOR, ArrayObject.fromOrNull(pointBackgroundColor));
 		// removes the property
@@ -870,7 +870,7 @@ public abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBorderColor(IsColor... pointBorderColor) {
 		// reset callback
-		setPointBorderColor((BorderColorCallback<?>) null);
+		setPointBorderColor((BorderColorCallback) null);
 		// stores value
 		setValueOrArray(Property.POINT_BORDER_COLOR, pointBorderColor);
 		// removes the flag because default is string color
@@ -884,7 +884,7 @@ public abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBorderColor(String... pointBorderColor) {
 		// reset callback
-		setPointBorderColor((BorderColorCallback<?>) null);
+		setPointBorderColor((BorderColorCallback) null);
 		// stores value
 		setValueOrArray(Property.POINT_BORDER_COLOR, pointBorderColor);
 		// removes the flag because default is string color
@@ -898,7 +898,7 @@ public abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointBorderColor(Gradient... pointBorderColor) {
 		// reset callback
-		setPointBorderColor((BorderColorCallback<?>) null);
+		setPointBorderColor((BorderColorCallback) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Property.POINT_BORDER_COLOR, ArrayObject.fromOrNull(pointBorderColor));
 		// removes the property
@@ -1013,7 +1013,7 @@ public abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBackgroundColor(IsColor... pointHoverBackgroundColor) {
 		// resets callback
-		setPointHoverBackgroundColor((BackgroundColorCallback<?>) null);
+		setPointHoverBackgroundColor((BackgroundColorCallback) null);
 		// stores value
 		setValueOrArray(Property.POINT_HOVER_BACKGROUND_COLOR, pointHoverBackgroundColor);
 		// removes the flag because default is string color
@@ -1027,7 +1027,7 @@ public abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBackgroundColor(String... pointHoverBackgroundColor) {
 		// resets callback
-		setPointHoverBackgroundColor((BackgroundColorCallback<?>) null);
+		setPointHoverBackgroundColor((BackgroundColorCallback) null);
 		// stores value
 		setValueOrArray(Property.POINT_HOVER_BACKGROUND_COLOR, pointHoverBackgroundColor);
 		// removes the flag because default is string color
@@ -1041,7 +1041,7 @@ public abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBackgroundColor(Gradient... pointHoverBackgroundColor) {
 		// resets callback
-		setPointHoverBackgroundColor((BackgroundColorCallback<?>) null);
+		setPointHoverBackgroundColor((BackgroundColorCallback) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Property.POINT_HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(pointHoverBackgroundColor));
 		// removes the property
@@ -1103,7 +1103,7 @@ public abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBorderColor(IsColor... pointHoverBorderColor) {
 		// resets callback
-		setPointHoverBorderColor((BorderColorCallback<?>) null);
+		setPointHoverBorderColor((BorderColorCallback) null);
 		// sets value
 		setValueOrArray(Property.POINT_HOVER_BORDER_COLOR, pointHoverBorderColor);
 		// removes the flag because default is string color
@@ -1117,7 +1117,7 @@ public abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBorderColor(String... pointHoverBorderColor) {
 		// resets callback
-		setPointHoverBorderColor((BorderColorCallback<?>) null);
+		setPointHoverBorderColor((BorderColorCallback) null);
 		// stores value
 		setValueOrArray(Property.POINT_HOVER_BORDER_COLOR, pointHoverBorderColor);
 		// removes the flag because default is string color
@@ -1131,7 +1131,7 @@ public abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointHoverBorderColor(Gradient... pointHoverBorderColor) {
 		// resets callback
-		setPointHoverBorderColor((BorderColorCallback<?>) null);
+		setPointHoverBorderColor((BorderColorCallback) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Property.POINT_HOVER_BORDER_COLOR, ArrayObject.fromOrNull(pointHoverBorderColor));
 		// removes the property
@@ -1272,7 +1272,7 @@ public abstract class LiningDataset extends Dataset {
 	 */
 	public void setPointStyle(PointStyle... pointStyle) {
 		// resets callback and flags
-		setPointStyle((PointStyleCallback<?>) null);
+		setPointStyle((PointStyleCallback) null);
 		// stores value
 		setValueOrArray(Property.POINT_STYLE, pointStyle);
 	}
@@ -1316,7 +1316,7 @@ public abstract class LiningDataset extends Dataset {
 		} else {
 			// resets callback and
 			// also flags
-			setPointStyle((PointStyleCallback<?>) null);
+			setPointStyle((PointStyleCallback) null);
 		}
 	}
 
@@ -1341,7 +1341,7 @@ public abstract class LiningDataset extends Dataset {
 		} else {
 			// resets callback and
 			// also flags
-			setPointStyle((PointStyleCallback<?>) null);
+			setPointStyle((PointStyleCallback) null);
 		}
 	}
 
@@ -1353,7 +1353,7 @@ public abstract class LiningDataset extends Dataset {
 	public void setPointStyle(ImageElement... pointStyle) {
 		// resets callback and
 		// also flags
-		setPointStyle((PointStyleCallback<?>) null);
+		setPointStyle((PointStyleCallback) null);
 		// stores values
 		setValueOrArray(Property.POINT_STYLE, pointStyle);
 		// sets flag
@@ -1409,7 +1409,7 @@ public abstract class LiningDataset extends Dataset {
 	 * 
 	 * @return the point background color callback, if set, otherwise <code>null</code>.
 	 */
-	public BackgroundColorCallback<?> getPointBackgroundColorCallback() {
+	public BackgroundColorCallback getPointBackgroundColorCallback() {
 		return pointBackgroundColorCallback;
 	}
 
@@ -1418,7 +1418,7 @@ public abstract class LiningDataset extends Dataset {
 	 * 
 	 * @param pointBackgroundColorCallback the point background color callback.
 	 */
-	public void setPointBackgroundColor(BackgroundColorCallback<?> pointBackgroundColorCallback) {
+	public void setPointBackgroundColor(BackgroundColorCallback pointBackgroundColorCallback) {
 		// sets the callback
 		this.pointBackgroundColorCallback = pointBackgroundColorCallback;
 		// checks if callback is consistent
@@ -1438,7 +1438,7 @@ public abstract class LiningDataset extends Dataset {
 	 * 
 	 * @return the point border color callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderColorCallback<?> getPointBorderColorCallback() {
+	public BorderColorCallback getPointBorderColorCallback() {
 		return pointBorderColorCallback;
 	}
 
@@ -1447,7 +1447,7 @@ public abstract class LiningDataset extends Dataset {
 	 * 
 	 * @param pointBorderColorCallback the point border color callback.
 	 */
-	public void setPointBorderColor(BorderColorCallback<?> pointBorderColorCallback) {
+	public void setPointBorderColor(BorderColorCallback pointBorderColorCallback) {
 		// sets the callback
 		this.pointBorderColorCallback = pointBorderColorCallback;
 		// checks if callback is consistent
@@ -1494,7 +1494,7 @@ public abstract class LiningDataset extends Dataset {
 	 * 
 	 * @return the point hover background color callback, if set, otherwise <code>null</code>.
 	 */
-	public BackgroundColorCallback<?> getPointHoverBackgroundColorCallback() {
+	public BackgroundColorCallback getPointHoverBackgroundColorCallback() {
 		return pointHoverBackgroundColorCallback;
 	}
 
@@ -1503,7 +1503,7 @@ public abstract class LiningDataset extends Dataset {
 	 * 
 	 * @param pointHoverBackgroundColorCallback the point hover background color callback.
 	 */
-	public void setPointHoverBackgroundColor(BackgroundColorCallback<?> pointHoverBackgroundColorCallback) {
+	public void setPointHoverBackgroundColor(BackgroundColorCallback pointHoverBackgroundColorCallback) {
 		// sets the callback
 		this.pointHoverBackgroundColorCallback = pointHoverBackgroundColorCallback;
 		// checks if callback is consistent
@@ -1523,7 +1523,7 @@ public abstract class LiningDataset extends Dataset {
 	 * 
 	 * @return the point hover border color callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderColorCallback<?> getPointHoverBorderColorCallback() {
+	public BorderColorCallback getPointHoverBorderColorCallback() {
 		return pointHoverBorderColorCallback;
 	}
 
@@ -1532,7 +1532,7 @@ public abstract class LiningDataset extends Dataset {
 	 * 
 	 * @param pointHoverBorderColorCallback the point hover border color callback.
 	 */
-	public void setPointHoverBorderColor(BorderColorCallback<?> pointHoverBorderColorCallback) {
+	public void setPointHoverBorderColor(BorderColorCallback pointHoverBorderColorCallback) {
 		// sets the callback
 		this.pointHoverBorderColorCallback = pointHoverBorderColorCallback;
 		// checks if callback is consistent
@@ -1687,7 +1687,7 @@ public abstract class LiningDataset extends Dataset {
 	 * 
 	 * @return the point style callback, if set, otherwise <code>null</code>.
 	 */
-	public PointStyleCallback<?> getPointStyleCallback() {
+	public PointStyleCallback getPointStyleCallback() {
 		return pointStyleCallback;
 	}
 
@@ -1696,7 +1696,7 @@ public abstract class LiningDataset extends Dataset {
 	 * 
 	 * @param pointStyleCallback the point style callback.
 	 */
-	public void setPointStyle(PointStyleCallback<?> pointStyleCallback) {
+	public void setPointStyle(PointStyleCallback pointStyleCallback) {
 		// sets the callback
 		this.pointStyleCallback = pointStyleCallback;
 		// checks if callback is consistent

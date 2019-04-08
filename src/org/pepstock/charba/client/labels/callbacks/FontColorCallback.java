@@ -28,7 +28,7 @@ import org.pepstock.charba.client.labels.LabelsPlugin;
  * @param <T> type of result of callback. Could a {@link String} or {@link IsColor}
  * @see IsColor
  */
-public interface FontColorCallback<T> {
+public interface FontColorCallback {
 
 	/**
 	 * Called to change font color at runtime, using the arguments.
@@ -38,6 +38,6 @@ public interface FontColorCallback<T> {
 	 * @return a string which represent a color or a color instace. If returns <code>null</code>, it will use the default font
 	 *         color.
 	 */
-	T invoke(IsChart chart, FontColorItem item);
+	Object invoke(IsChart chart, FontColorItem item);
 
 }

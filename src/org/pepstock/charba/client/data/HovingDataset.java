@@ -72,15 +72,15 @@ public abstract class HovingDataset extends Dataset {
 	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
 
 	// background color callback instance
-	private BackgroundColorCallback<?> backgroundColorCallback = null;
+	private BackgroundColorCallback backgroundColorCallback = null;
 	// border color callback instance
-	private BorderColorCallback<?> borderColorCallback = null;
+	private BorderColorCallback borderColorCallback = null;
 	// borderWidth callback instance
 	private BorderWidthCallback borderWidthCallback = null;
 	// background color callback instance
-	private BackgroundColorCallback<?> hoverBackgroundColorCallback = null;
+	private BackgroundColorCallback hoverBackgroundColorCallback = null;
 	// border color callback instance
-	private BorderColorCallback<?> hoverBorderColorCallback = null;
+	private BorderColorCallback hoverBorderColorCallback = null;
 	// borderWidth callback instance
 	private BorderWidthCallback hoverBorderWidthCallback = null;
 
@@ -223,7 +223,7 @@ public abstract class HovingDataset extends Dataset {
 	 */
 	public void setBackgroundColor(IsColor... backgroundColor) {
 		// resets callback
-		setBackgroundColor((BackgroundColorCallback<?>) null);
+		setBackgroundColor((BackgroundColorCallback) null);
 		// stores value
 		setArrayValue(Property.BACKGROUND_COLOR, ArrayString.fromOrNull(backgroundColor));
 		// removes previous configuration to other containers
@@ -237,7 +237,7 @@ public abstract class HovingDataset extends Dataset {
 	 */
 	public void setBackgroundColor(String... backgroundColor) {
 		// resets callback
-		setBackgroundColor((BackgroundColorCallback<?>) null);
+		setBackgroundColor((BackgroundColorCallback) null);
 		// stores value
 		setArrayValue(Property.BACKGROUND_COLOR, ArrayString.fromOrNull(backgroundColor));
 		// removes previous configuration to other containers
@@ -251,7 +251,7 @@ public abstract class HovingDataset extends Dataset {
 	 */
 	public void setBackgroundColor(Pattern... backgroundColor) {
 		// resets callback
-		setBackgroundColor((BackgroundColorCallback<?>) null);
+		setBackgroundColor((BackgroundColorCallback) null);
 		// sets value to patterns
 		getPatternsContainer().setObjects(Property.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor));
 		// removes previous configuration to other containers
@@ -265,7 +265,7 @@ public abstract class HovingDataset extends Dataset {
 	 */
 	public void setBackgroundColor(Gradient... backgroundColor) {
 		// resets callback
-		setBackgroundColor((BackgroundColorCallback<?>) null);
+		setBackgroundColor((BackgroundColorCallback) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Property.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor));
 		// removes previous configuration to other containers
@@ -344,7 +344,7 @@ public abstract class HovingDataset extends Dataset {
 	 */
 	public void setBorderColor(IsColor... borderColor) {
 		// resets callback
-		setBorderColor((BorderColorCallback<?>) null);
+		setBorderColor((BorderColorCallback) null);
 		// stores value
 		setArrayValue(Property.BORDER_COLOR, ArrayString.fromOrNull(borderColor));
 		// removes previous configuration to other containers
@@ -358,7 +358,7 @@ public abstract class HovingDataset extends Dataset {
 	 */
 	public void setBorderColor(String... borderColor) {
 		// resets callback
-		setBorderColor((BorderColorCallback<?>) null);
+		setBorderColor((BorderColorCallback) null);
 		// stores value
 		setArrayValue(Property.BORDER_COLOR, ArrayString.fromOrNull(borderColor));
 		// removes previous configuration to other containers
@@ -372,7 +372,7 @@ public abstract class HovingDataset extends Dataset {
 	 */
 	public void setBorderColor(Gradient... borderColor) {
 		// resets callback
-		setBorderColor((BorderColorCallback<?>) null);
+		setBorderColor((BorderColorCallback) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Property.BORDER_COLOR, ArrayObject.fromOrNull(borderColor));
 		// removes previous configuration to other containers
@@ -459,7 +459,7 @@ public abstract class HovingDataset extends Dataset {
 	 */
 	public void setHoverBackgroundColor(IsColor... colors) {
 		// resets callback
-		setHoverBackgroundColor((BackgroundColorCallback<?>) null);
+		setHoverBackgroundColor((BackgroundColorCallback) null);
 		// stores value
 		setArrayValue(Property.HOVER_BACKGROUND_COLOR, ArrayString.fromOrNull(colors));
 		// removes previous configuration to other containers
@@ -473,7 +473,7 @@ public abstract class HovingDataset extends Dataset {
 	 */
 	public void setHoverBackgroundColor(String... colors) {
 		// resets callback
-		setHoverBackgroundColor((BackgroundColorCallback<?>) null);
+		setHoverBackgroundColor((BackgroundColorCallback) null);
 		// stores value
 		setArrayValue(Property.HOVER_BACKGROUND_COLOR, ArrayString.fromOrNull(colors));
 		// removes previous configuration to other containers
@@ -487,7 +487,7 @@ public abstract class HovingDataset extends Dataset {
 	 */
 	public void setHoverBackgroundColor(Pattern... colors) {
 		// resets callback
-		setHoverBackgroundColor((BackgroundColorCallback<?>) null);
+		setHoverBackgroundColor((BackgroundColorCallback) null);
 		// sets value to patterns
 		getPatternsContainer().setObjects(Property.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(colors));
 		// removes previous configuration to other containers
@@ -501,7 +501,7 @@ public abstract class HovingDataset extends Dataset {
 	 */
 	public void setHoverBackgroundColor(Gradient... colors) {
 		// resets callback
-		setHoverBackgroundColor((BackgroundColorCallback<?>) null);
+		setHoverBackgroundColor((BackgroundColorCallback) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Property.HOVER_BACKGROUND_COLOR, ArrayObject.fromOrNull(colors));
 		// removes previous configuration to other containers
@@ -582,7 +582,7 @@ public abstract class HovingDataset extends Dataset {
 	 */
 	public void setHoverBorderColor(IsColor... colors) {
 		// resets callback
-		setHoverBorderColor((BorderColorCallback<?>) null);
+		setHoverBorderColor((BorderColorCallback) null);
 		// stores value
 		setArrayValue(Property.HOVER_BORDER_COLOR, ArrayString.fromOrNull(colors));
 		// removes previous configuration to other containers
@@ -596,7 +596,7 @@ public abstract class HovingDataset extends Dataset {
 	 */
 	public void setHoverBorderColor(String... colors) {
 		// resets callback
-		setHoverBorderColor((BorderColorCallback<?>) null);
+		setHoverBorderColor((BorderColorCallback) null);
 		// stores value
 		setArrayValue(Property.HOVER_BORDER_COLOR, ArrayString.fromOrNull(colors));
 		// removes previous configuration to other containers
@@ -610,7 +610,7 @@ public abstract class HovingDataset extends Dataset {
 	 */
 	public void setHoverBorderColor(Gradient... colors) {
 		// resets callback
-		setHoverBorderColor((BorderColorCallback<?>) null);
+		setHoverBorderColor((BorderColorCallback) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Property.HOVER_BORDER_COLOR, ArrayObject.fromOrNull(colors));
 		// removes previous configuration to other containers
@@ -696,7 +696,7 @@ public abstract class HovingDataset extends Dataset {
 	 * 
 	 * @return the background color callback, if set, otherwise <code>null</code>.
 	 */
-	public BackgroundColorCallback<?> getBackgroundColorCallback() {
+	public BackgroundColorCallback getBackgroundColorCallback() {
 		return backgroundColorCallback;
 	}
 
@@ -705,7 +705,7 @@ public abstract class HovingDataset extends Dataset {
 	 * 
 	 * @param backgroundColorCallback the background color callback.
 	 */
-	public void setBackgroundColor(BackgroundColorCallback<?> backgroundColorCallback) {
+	public void setBackgroundColor(BackgroundColorCallback backgroundColorCallback) {
 		// sets the callback
 		this.backgroundColorCallback = backgroundColorCallback;
 		// checks if callback is consistent
@@ -725,7 +725,7 @@ public abstract class HovingDataset extends Dataset {
 	 * 
 	 * @return the border color callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderColorCallback<?> getBorderColorCallback() {
+	public BorderColorCallback getBorderColorCallback() {
 		return borderColorCallback;
 	}
 
@@ -734,7 +734,7 @@ public abstract class HovingDataset extends Dataset {
 	 * 
 	 * @param borderColorCallback the border color callback.
 	 */
-	public void setBorderColor(BorderColorCallback<?> borderColorCallback) {
+	public void setBorderColor(BorderColorCallback borderColorCallback) {
 		// sets the callback
 		this.borderColorCallback = borderColorCallback;
 		// checks if callback is consistent
@@ -781,7 +781,7 @@ public abstract class HovingDataset extends Dataset {
 	 * 
 	 * @return the hover background color callback, if set, otherwise <code>null</code>.
 	 */
-	public BackgroundColorCallback<?> getHoverBackgroundColorCallback() {
+	public BackgroundColorCallback getHoverBackgroundColorCallback() {
 		return hoverBackgroundColorCallback;
 	}
 
@@ -790,7 +790,7 @@ public abstract class HovingDataset extends Dataset {
 	 * 
 	 * @param hoverBackgroundColorCallback the hover background color callback.
 	 */
-	public void setHoverBackgroundColor(BackgroundColorCallback<?> hoverBackgroundColorCallback) {
+	public void setHoverBackgroundColor(BackgroundColorCallback hoverBackgroundColorCallback) {
 		// sets the callback
 		this.hoverBackgroundColorCallback = hoverBackgroundColorCallback;
 		// checks if callback is consistent
@@ -810,7 +810,7 @@ public abstract class HovingDataset extends Dataset {
 	 * 
 	 * @return the hover border color callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderColorCallback<?> getHoverBorderColorCallback() {
+	public BorderColorCallback getHoverBorderColorCallback() {
 		return hoverBorderColorCallback;
 	}
 
@@ -819,7 +819,7 @@ public abstract class HovingDataset extends Dataset {
 	 * 
 	 * @param hoverBorderColorCallback the hover border color callback.
 	 */
-	public void setHoverBorderColor(BorderColorCallback<?> hoverBorderColorCallback) {
+	public void setHoverBorderColor(BorderColorCallback hoverBorderColorCallback) {
 		// sets the callback
 		this.hoverBorderColorCallback = hoverBorderColorCallback;
 		// checks if callback is consistent

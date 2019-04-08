@@ -33,6 +33,6 @@ import com.google.gwt.user.client.ui.Image;
  * @see ImageResource
  * @see ImageElement
  */
-public interface PointStyleCallback<T> extends Scriptable<T> {
+public interface PointStyleCallback extends Scriptable<Object> {
 
 }

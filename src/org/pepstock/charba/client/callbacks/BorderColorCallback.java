@@ -31,6 +31,6 @@ import com.google.gwt.canvas.dom.client.CanvasGradient;
  * @see Gradient
  * @see CanvasGradient
  */
-public interface BorderColorCallback<T> extends Scriptable<T> {
+public interface BorderColorCallback extends Scriptable<Object> {
 
 }

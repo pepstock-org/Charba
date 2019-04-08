@@ -222,11 +222,11 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	// formatter callback instance
 	private FormatterCallback formatterCallback = null;
 	// background color callback instance
-	private BackgroundColorCallback<?> backgroundColorCallback = null;
+	private BackgroundColorCallback backgroundColorCallback = null;
 	// border color callback instance
-	private BorderColorCallback<?> borderColorCallback = null;
+	private BorderColorCallback borderColorCallback = null;
 	// color callback instance
-	private ColorCallback<?> colorCallback = null;
+	private ColorCallback colorCallback = null;
 	// align callback instance
 	private AlignCallback alignCallback = null;
 	// anchor callback instance
@@ -250,13 +250,13 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	// text align callback instance
 	private TextAlignCallback textAlignCallback = null;
 	// text stroke color callback instance
-	private TextStrokeColorCallback<?> textStrokeColorCallback = null;
+	private TextStrokeColorCallback textStrokeColorCallback = null;
 	// text stroke width callback instance
 	private TextStrokeWidthCallback textStrokeWidthCallback = null;
 	// text shadow blur callback instance
 	private TextShadowBlurCallback textShadowBlurCallback = null;
 	// text shadow color callback instance
-	private TextShadowColorCallback<?> textShadowColorCallback = null;
+	private TextShadowColorCallback textShadowColorCallback = null;
 	// font callback instance
 	private FontCallback fontCallback = null;
 	// padding callback instance
@@ -1190,7 +1190,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @return the background color callback, if set, otherwise <code>null</code>.
 	 */
-	public BackgroundColorCallback<?> getBackgroundColorCallback() {
+	public BackgroundColorCallback getBackgroundColorCallback() {
 		return backgroundColorCallback;
 	}
 
@@ -1199,7 +1199,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @param backgroundColorCallback the background color callback.
 	 */
-	public void setBackgroundColor(BackgroundColorCallback<?> backgroundColorCallback) {
+	public void setBackgroundColor(BackgroundColorCallback backgroundColorCallback) {
 		// sets the callback
 		this.backgroundColorCallback = backgroundColorCallback;
 		// checks if callback is consistent
@@ -1217,7 +1217,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @return the border color callback, if set, otherwise <code>null</code>.
 	 */
-	public BorderColorCallback<?> getBorderColorCallback() {
+	public BorderColorCallback getBorderColorCallback() {
 		return borderColorCallback;
 	}
 
@@ -1226,7 +1226,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @param borderColorCallback the border color callback.
 	 */
-	public void setBorderColor(BorderColorCallback<?> borderColorCallback) {
+	public void setBorderColor(BorderColorCallback borderColorCallback) {
 		// sets the callback
 		this.borderColorCallback = borderColorCallback;
 		// checks if callback is consistent
@@ -1244,7 +1244,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @return the color callback, if set, otherwise <code>null</code>.
 	 */
-	public ColorCallback<?> getColorCallback() {
+	public ColorCallback getColorCallback() {
 		return colorCallback;
 	}
 
@@ -1253,7 +1253,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @param colorCallback the color callback.
 	 */
-	public void setColor(ColorCallback<?> colorCallback) {
+	public void setColor(ColorCallback colorCallback) {
 		// sets the callback
 		this.colorCallback = colorCallback;
 		// checks if callback is consistent
@@ -1595,7 +1595,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @return the text stroke color callback, if set, otherwise <code>null</code>.
 	 */
-	public TextStrokeColorCallback<?> getTextStrokeColorCallback() {
+	public TextStrokeColorCallback getTextStrokeColorCallback() {
 		return textStrokeColorCallback;
 	}
 
@@ -1604,7 +1604,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @param textStrokeColorCallback the text stroke color callback to set
 	 */
-	public void setTextStrokeColor(TextStrokeColorCallback<?> textStrokeColorCallback) {
+	public void setTextStrokeColor(TextStrokeColorCallback textStrokeColorCallback) {
 		// sets the callback
 		this.textStrokeColorCallback = textStrokeColorCallback;
 		// checks if callback is consistent
@@ -1676,7 +1676,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @return the text shadow color callback, if set, otherwise <code>null</code>.
 	 */
-	public TextShadowColorCallback<?> getTextShadowColorCallback() {
+	public TextShadowColorCallback getTextShadowColorCallback() {
 		return textShadowColorCallback;
 	}
 
@@ -1685,7 +1685,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @param textShadowColorCallback the text shadow color callback to set
 	 */
-	public void setTextShadowColor(TextShadowColorCallback<?> textShadowColorCallback) {
+	public void setTextShadowColor(TextShadowColorCallback textShadowColorCallback) {
 		// sets the callback
 		this.textShadowColorCallback = textShadowColorCallback;
 		// checks if callback is consistent

@@ -376,7 +376,7 @@ public final class DataLabelsOptionsBuilder {
 	 * @param backgroundColorCallback the background color callback.
 	 * @return builder instance
 	 */
-	public DataLabelsOptionsBuilder setBackgroundColor(BackgroundColorCallback<?> backgroundColorCallback) {
+	public DataLabelsOptionsBuilder setBackgroundColor(BackgroundColorCallback backgroundColorCallback) {
 		options.setBackgroundColor(backgroundColorCallback);
 		return this;
 	}
@@ -387,7 +387,7 @@ public final class DataLabelsOptionsBuilder {
 	 * @param borderColorCallback the border color callback.
 	 * @return builder instance
 	 */
-	public DataLabelsOptionsBuilder setBorderColor(BorderColorCallback<?> borderColorCallback) {
+	public DataLabelsOptionsBuilder setBorderColor(BorderColorCallback borderColorCallback) {
 		options.setBorderColor(borderColorCallback);
 		return this;
 	}
@@ -398,7 +398,7 @@ public final class DataLabelsOptionsBuilder {
 	 * @param colorCallback the color callback.
 	 * @return builder instance
 	 */
-	public DataLabelsOptionsBuilder setColor(ColorCallback<?> colorCallback) {
+	public DataLabelsOptionsBuilder setColor(ColorCallback colorCallback) {
 		options.setColor(colorCallback);
 		return this;
 	}
@@ -541,7 +541,7 @@ public final class DataLabelsOptionsBuilder {
 	 * @param textStrokeColorCallback the text stroke color callback to set
 	 * @return builder instance
 	 */
-	public DataLabelsOptionsBuilder setTextStrokeColor(TextStrokeColorCallback<?> textStrokeColorCallback) {
+	public DataLabelsOptionsBuilder setTextStrokeColor(TextStrokeColorCallback textStrokeColorCallback) {
 		options.setTextStrokeColor(textStrokeColorCallback);
 		return this;
 	}
@@ -574,7 +574,7 @@ public final class DataLabelsOptionsBuilder {
 	 * @param textShadowColorCallback the text shadow color callback to set
 	 * @return builder instance
 	 */
-	public DataLabelsOptionsBuilder setTextShadowColor(TextShadowColorCallback<?> textShadowColorCallback) {
+	public DataLabelsOptionsBuilder setTextShadowColor(TextShadowColorCallback textShadowColorCallback) {
 		options.setTextShadowColor(textShadowColorCallback);
 		return this;
 	}

@@ -125,6 +125,7 @@ Here you can find the list of enhancement and updates available on `master` bran
  * change visibility of `IsShape` and `ShapeDrawer` classes
  * change key for tile caching to enable also for image and character shape drawers
  * transform and rotate of 180 degrees `Star` and `EmptyStar` shapes
+ * `deprecated` some methods of Meter and Gauge datasets and options
 
 ### Fixed Sonar Issue
  * squid:S00115 - Constant names should comply with a naming convention
@@ -138,9 +139,9 @@ Here you can find the list of enhancement and updates available on `master` bran
  * squid:S2293 - The diamond operator ("<>") should be used
  * squid:EmptyStatementUsageCheck - Empty statements should be removed
  * squid:S1452 - Generic wildcard types should not be used in return parameters
-   * change clabbacks, event, plugin and controller to use new interface `IsChart` instead of `AbstractChart<?,?>`
+   * change callbacks, events, plugins and controller to use new interface `IsChart` instead of `AbstractChart<?,?>`
+   * remove type on colors and point style callbacks
  
-
 License
 -------
 

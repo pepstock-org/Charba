@@ -330,7 +330,7 @@ public final class LabelsOptionsBuilder {
 	 * @param renderCallback the render callback to set
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setRender(RenderCallback<?> renderCallback) {
+	public LabelsOptionsBuilder setRender(RenderCallback renderCallback) {
 		options.setRender(renderCallback);
 		return this;
 	}
@@ -341,7 +341,7 @@ public final class LabelsOptionsBuilder {
 	 * @param fontColorCallback the font color callback.
 	 * @return builder instance
 	 */
-	public LabelsOptionsBuilder setFontColor(FontColorCallback<?> fontColorCallback) {
+	public LabelsOptionsBuilder setFontColor(FontColorCallback fontColorCallback) {
 		options.setFontColor(fontColorCallback);
 		return this;
 	}

@@ -40,6 +40,6 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  * @see CanvasPattern
  * @see CanvasGradient
  */
-public interface TextStrokeColorCallback<T> extends Scriptable<T> {
+public interface TextStrokeColorCallback extends Scriptable<Object> {
 
 }

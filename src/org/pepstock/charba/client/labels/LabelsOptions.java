@@ -169,9 +169,9 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	// callback proxy to invoke the font color function
 	private final CallbackProxy<ProxyFontColorCallback> fontColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// render (string) callback instance
-	private RenderCallback<?> renderCallback = null;
+	private RenderCallback renderCallback = null;
 	// font color callback instance
-	private FontColorCallback<?> fontColorCallback = null;
+	private FontColorCallback fontColorCallback = null;
 
 	// defaults global options instance
 	private LabelsDefaultsOptions defaultsOptions;
@@ -766,7 +766,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @return the render callback, if set, otherwise <code>null</code>
 	 */
-	public RenderCallback<?> getRenderCallback() {
+	public RenderCallback getRenderCallback() {
 		return renderCallback;
 	}
 
@@ -775,7 +775,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @param renderCallback the render callback to set
 	 */
-	public void setRender(RenderCallback<?> renderCallback) {
+	public void setRender(RenderCallback renderCallback) {
 		// sets the callback
 		this.renderCallback = renderCallback;
 		// checks if callback is consistent
@@ -793,7 +793,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @return the font color callback, if set, otherwise <code>null</code>
 	 */
-	public FontColorCallback<?> getFontColorCallback() {
+	public FontColorCallback getFontColorCallback() {
 		return fontColorCallback;
 	}
 
@@ -802,7 +802,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	 * 
 	 * @param fontColorCallback the font color callback.
 	 */
-	public void setFontColor(FontColorCallback<?> fontColorCallback) {
+	public void setFontColor(FontColorCallback fontColorCallback) {
 		// sets the callback
 		this.fontColorCallback = fontColorCallback;
 		// checks if callback is consistent
