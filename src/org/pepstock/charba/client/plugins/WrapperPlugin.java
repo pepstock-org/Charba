@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.plugins;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.items.DatasetPluginItem;
 import org.pepstock.charba.client.items.EventPluginItem;
@@ -71,7 +71,7 @@ final class WrapperPlugin {
 	 * 
 	 * @param chart chart instance.
 	 */
-	void onConfigure(AbstractChart<?, ?> chart) {
+	void onConfigure(IsChart chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onConfigure(chart);
@@ -83,7 +83,7 @@ final class WrapperPlugin {
 	 * 
 	 * @param chartId chart id.
 	 */
-	void onBeforeInit(AbstractChart<?, ?> chart) {
+	void onBeforeInit(IsChart chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onBeforeInit(chart);
@@ -95,7 +95,7 @@ final class WrapperPlugin {
 	 * 
 	 * @param chartId chart id.
 	 */
-	void onAfterInit(AbstractChart<?, ?> chart) {
+	void onAfterInit(IsChart chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterInit(chart);
@@ -109,7 +109,7 @@ final class WrapperPlugin {
 	 * @param chartId chart id.
 	 * @return <code>false</code> to cancel the chart update.
 	 */
-	boolean onBeforeUpdate(AbstractChart<?, ?> chart) {
+	boolean onBeforeUpdate(IsChart chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			return delegation.onBeforeUpdate(chart);
@@ -123,7 +123,7 @@ final class WrapperPlugin {
 	 * 
 	 * @param chartId chart id.
 	 */
-	void onAfterUpdate(AbstractChart<?, ?> chart) {
+	void onAfterUpdate(IsChart chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterUpdate(chart);
@@ -137,7 +137,7 @@ final class WrapperPlugin {
 	 * @param chartId chart id.
 	 * @return <code>false</code> to cancel the chart layout.
 	 */
-	boolean onBeforeLayout(AbstractChart<?, ?> chart) {
+	boolean onBeforeLayout(IsChart chart) {
 		// if consistent
 		if (chart != null) {
 			// calls plugin
@@ -152,7 +152,7 @@ final class WrapperPlugin {
 	 * 
 	 * @param chartId chart id.
 	 */
-	void onAfterLayout(AbstractChart<?, ?> chart) {
+	void onAfterLayout(IsChart chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterLayout(chart);
@@ -166,7 +166,7 @@ final class WrapperPlugin {
 	 * @param chartId chart id.
 	 * @return <code>false</code> to cancel the datasets update.
 	 */
-	boolean onBeforeDatasetsUpdate(AbstractChart<?, ?> chart) {
+	boolean onBeforeDatasetsUpdate(IsChart chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			return delegation.onBeforeDatasetsUpdate(chart);
@@ -180,7 +180,7 @@ final class WrapperPlugin {
 	 * 
 	 * @param chartId chart id.
 	 */
-	void onAfterDatasetsUpdate(AbstractChart<?, ?> chart) {
+	void onAfterDatasetsUpdate(IsChart chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterDatasetsUpdate(chart);
@@ -195,7 +195,7 @@ final class WrapperPlugin {
 	 * @param datasetIndex The dataset index.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	boolean onBeforeDatasetUpdate(AbstractChart<?, ?> chart, DatasetPluginItem item) {
+	boolean onBeforeDatasetUpdate(IsChart chart, DatasetPluginItem item) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			return delegation.onBeforeDatasetUpdate(chart, item);
@@ -210,7 +210,7 @@ final class WrapperPlugin {
 	 * @param chartId chart id.
 	 * @param datasetIndex The dataset index.
 	 */
-	void onAfterDatasetUpdate(AbstractChart<?, ?> chart, DatasetPluginItem item) {
+	void onAfterDatasetUpdate(IsChart chart, DatasetPluginItem item) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterDatasetUpdate(chart, item);
@@ -224,7 +224,7 @@ final class WrapperPlugin {
 	 * @param chartId chart id.
 	 * @return <code>false</code> to cancel the chart rendering.
 	 */
-	boolean onBeforeRender(AbstractChart<?, ?> chart) {
+	boolean onBeforeRender(IsChart chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			return delegation.onBeforeRender(chart);
@@ -238,7 +238,7 @@ final class WrapperPlugin {
 	 * 
 	 * @param chartId chart id.
 	 */
-	void onAfterRender(AbstractChart<?, ?> chart) {
+	void onAfterRender(IsChart chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterRender(chart);
@@ -253,7 +253,7 @@ final class WrapperPlugin {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart drawing.
 	 */
-	boolean onBeforeDraw(AbstractChart<?, ?> chart, double easing) {
+	boolean onBeforeDraw(IsChart chart, double easing) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			return delegation.onBeforeDraw(chart, easing);
@@ -268,7 +268,7 @@ final class WrapperPlugin {
 	 * @param chartId chart id.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	void onAfterDraw(AbstractChart<?, ?> chart, double easing) {
+	void onAfterDraw(IsChart chart, double easing) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterDraw(chart, easing);
@@ -283,7 +283,7 @@ final class WrapperPlugin {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	boolean onBeforeDatasetsDraw(AbstractChart<?, ?> chart, double easing) {
+	boolean onBeforeDatasetsDraw(IsChart chart, double easing) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			return delegation.onBeforeDatasetsDraw(chart, easing);
@@ -298,7 +298,7 @@ final class WrapperPlugin {
 	 * @param chartId chart id.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	void onAfterDatasetsDraw(AbstractChart<?, ?> chart, double easing) {
+	void onAfterDatasetsDraw(IsChart chart, double easing) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterDatasetsDraw(chart, easing);
@@ -314,7 +314,7 @@ final class WrapperPlugin {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart datasets drawing.
 	 */
-	boolean onBeforeDatasetDraw(AbstractChart<?, ?> chart, DatasetPluginItem item) {
+	boolean onBeforeDatasetDraw(IsChart chart, DatasetPluginItem item) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			return delegation.onBeforeDatasetDraw(chart, item);
@@ -330,7 +330,7 @@ final class WrapperPlugin {
 	 * @param datasetIndex The dataset index.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	void onAfterDatasetDraw(AbstractChart<?, ?> chart, DatasetPluginItem item) {
+	void onAfterDatasetDraw(IsChart chart, DatasetPluginItem item) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterDatasetDraw(chart, item);
@@ -346,7 +346,7 @@ final class WrapperPlugin {
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 * @return <code>false</code> to cancel the chart tooltip drawing.
 	 */
-	boolean onBeforeTooltipDraw(AbstractChart<?, ?> chart, TooltipPluginItem item) {
+	boolean onBeforeTooltipDraw(IsChart chart, TooltipPluginItem item) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			return delegation.onBeforeTooltipDraw(chart, item);
@@ -362,7 +362,7 @@ final class WrapperPlugin {
 	 * @param object The tooltip model instance as java script object.
 	 * @param easing The current animation value, between 0.0 and 1.0.
 	 */
-	void onAfterTooltipDraw(AbstractChart<?, ?> chart, TooltipPluginItem item) {
+	void onAfterTooltipDraw(IsChart chart, TooltipPluginItem item) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onAfterTooltipDraw(chart, item);
@@ -376,7 +376,7 @@ final class WrapperPlugin {
 	 * @param event The event object wrapper.
 	 * @return <code>false</code> to discard the event.
 	 */
-	boolean onBeforeEvent(AbstractChart<?, ?> chart, EventPluginItem event) {
+	boolean onBeforeEvent(IsChart chart, EventPluginItem event) {
 		// if consistent, both chart and event, calls plugin
 		if (chart != null && event.getEvent() != null) {
 			return delegation.onBeforeEvent(chart, event.getEvent());
@@ -391,7 +391,7 @@ final class WrapperPlugin {
 	 * @param chartId chart id.
 	 * @param event The event object wrapper.
 	 */
-	void onAfterEvent(AbstractChart<?, ?> chart, EventPluginItem event) {
+	void onAfterEvent(IsChart chart, EventPluginItem event) {
 		// if consistent, both chart and event, calls plugin
 		if (chart != null && event.getEvent() != null) {
 			delegation.onAfterEvent(chart, event.getEvent());
@@ -404,7 +404,7 @@ final class WrapperPlugin {
 	 * @param chartId chart id.
 	 * @param item The new canvas display size (eq. canvas.style width & height).
 	 */
-	void onResize(AbstractChart<?, ?> chart, SizeItem item) {
+	void onResize(IsChart chart, SizeItem item) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onResize(chart, item);
@@ -416,7 +416,7 @@ final class WrapperPlugin {
 	 * 
 	 * @param chartId chart id.
 	 */
-	void onDestroy(AbstractChart<?, ?> chart) {
+	void onDestroy(IsChart chart) {
 		// if consistent, calls plugin
 		if (chart != null) {
 			delegation.onDestroy(chart);

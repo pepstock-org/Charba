@@ -17,8 +17,8 @@ package org.pepstock.charba.client.plugins;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -137,7 +137,7 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	 * 
 	 * @param chart chart instance
 	 */
-	public final void store(AbstractChart<?, ?> chart) {
+	public final void store(IsChart chart) {
 		// stores itself into defaults
 		chart.getOptions().getPlugins().setOptions(pluginId, this);
 	}

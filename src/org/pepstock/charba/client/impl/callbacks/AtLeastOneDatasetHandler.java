@@ -17,7 +17,7 @@ package org.pepstock.charba.client.impl.callbacks;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendClickEventHandler;
@@ -40,7 +40,7 @@ public class AtLeastOneDatasetHandler implements LegendClickEventHandler {
 	@Override
 	public void onClick(LegendClickEvent event) {
 		// get the chart instance form event
-		AbstractChart<?, ?> chart = event.getChart();
+		IsChart chart = event.getChart();
 		// gets the dataset by the legend item and its relation with dataset
 		DatasetMetaItem metadata = chart.getDatasetMeta(event.getItem().getDatasetIndex());
 		// if the dataset is already hidden

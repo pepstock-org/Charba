@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 
 /**
  * Container of a chart instance. Must be extended for all other entities which will trigger events or callbacks to pass the
@@ -26,14 +26,14 @@ import org.pepstock.charba.client.AbstractChart;
 abstract class ChartContainer {
 
 	// chart instance
-	private final AbstractChart<?, ?> chart;
+	private final IsChart chart;
 
 	/**
 	 * Creates the chart configuration object with the chart instance
 	 * 
 	 * @param chart chart instance
 	 */
-	ChartContainer(AbstractChart<?, ?> chart) {
+	ChartContainer(IsChart chart) {
 		this.chart = chart;
 	}
 
@@ -42,7 +42,7 @@ abstract class ChartContainer {
 	 * 
 	 * @return the chart
 	 */
-	public final AbstractChart<?, ?> getChart() {
+	public final IsChart getChart() {
 		return chart;
 	}
 }

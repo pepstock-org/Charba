@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartOptions;
+import org.pepstock.charba.client.IsChart;
 
 /**
  * Specific options for BUBBLE chart. It contains all properties for this kind of chart.
@@ -31,7 +31,7 @@ public class BubbleOptions extends AbstractLineOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults options of bubble chart
 	 */
-	public BubbleOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
+	public BubbleOptions(IsChart chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
 	}
 

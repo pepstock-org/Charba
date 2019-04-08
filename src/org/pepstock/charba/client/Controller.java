@@ -42,7 +42,7 @@ public interface Controller {
 	 * @param chart chart instance
 	 * @param datasetIndex dataset index
 	 */
-	void initialize(ControllerContext context, AbstractChart<?, ?> chart, int datasetIndex);
+	void initialize(ControllerContext context, IsChart chart, int datasetIndex);
 
 	/**
 	 * Create elements for each piece of data in the dataset. Store elements in an array on the dataset.
@@ -50,7 +50,7 @@ public interface Controller {
 	 * @param context context of controller
 	 * @param chart chart instance
 	 */
-	void addElements(ControllerContext context, AbstractChart<?, ?> chart);
+	void addElements(ControllerContext context, IsChart chart);
 
 	/**
 	 * Create a single element for the data at the given index and reset its state.
@@ -59,7 +59,7 @@ public interface Controller {
 	 * @param chart chart instance
 	 * @param index dataset index
 	 */
-	void addElementAndReset(ControllerContext context, AbstractChart<?, ?> chart, int index);
+	void addElementAndReset(ControllerContext context, IsChart chart, int index);
 
 	/**
 	 * Draw the representation of the dataset.
@@ -68,7 +68,7 @@ public interface Controller {
 	 * @param chart chart instance
 	 * @param ease if specified, this number represents how far to transition elements.
 	 */
-	void draw(ControllerContext context, AbstractChart<?, ?> chart, double ease);
+	void draw(ControllerContext context, IsChart chart, double ease);
 
 	/**
 	 * Remove hover styling from the given element.
@@ -77,7 +77,7 @@ public interface Controller {
 	 * @param chart chart instance
 	 * @param element element to be removed.
 	 */
-	void removeHoverStyle(ControllerContext context, AbstractChart<?, ?> chart, StyleElement element);
+	void removeHoverStyle(ControllerContext context, IsChart chart, StyleElement element);
 
 	/**
 	 * Add hover styling to the given element.
@@ -86,7 +86,7 @@ public interface Controller {
 	 * @param chart chart instance
 	 * @param element element to be set.
 	 */
-	void setHoverStyle(ControllerContext context, AbstractChart<?, ?> chart, StyleElement element);
+	void setHoverStyle(ControllerContext context, IsChart chart, StyleElement element);
 
 	/**
 	 * Update the elements in response to new data.
@@ -95,6 +95,6 @@ public interface Controller {
 	 * @param chart chart instance
 	 * @param reset if true, put the elements into a reset state so they can animate to their final values
 	 */
-	void update(ControllerContext context, AbstractChart<?, ?> chart, boolean reset);
+	void update(ControllerContext context, IsChart chart, boolean reset);
 
 }

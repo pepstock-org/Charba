@@ -17,9 +17,9 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.ArrayMixedObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ConfigurationLoader;
@@ -318,11 +318,11 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.AbstractChart,
+	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.IsChart,
 	 * org.pepstock.charba.client.Configuration)
 	 */
 	@Override
-	public void load(AbstractChart<?, ?> chart, Configuration configuration) {
+	public void load(IsChart chart, Configuration configuration) {
 		// loads data
 		ConfigurationLoader.loadData(configuration, this);
 		// checks if there is any pattern

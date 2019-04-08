@@ -21,8 +21,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Configuration;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.commons.ArrayObject;
 
@@ -172,7 +172,7 @@ public final class GlobalPlugins {
 	 * @param config configuration item. Added only to reduce visibility of public method.
 	 * @param chart instance of the chart
 	 */
-	public void onChartConfigure(Configuration config, AbstractChart<?, ?> chart) {
+	public void onChartConfigure(Configuration config, IsChart chart) {
 		// sets into chart all global plugins to be disable
 		for (String id : pluginsToBeDisabled) {
 			// if the plugin does not have any options or is not disable by options

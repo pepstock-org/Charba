@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.impl.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.datalabels.callbacks.FormatterCallback;
@@ -116,11 +116,11 @@ public final class PercentageCallback implements FormatterCallback {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.callbacks.FormatterCallback#format(org.pepstock.charba.client.AbstractChart,
+	 * @see org.pepstock.charba.client.datalabels.callbacks.FormatterCallback#format(org.pepstock.charba.client.IsChart,
 	 * double, org.pepstock.charba.client.callbacks.ScriptableContext)
 	 */
 	@Override
-	public String invoke(AbstractChart<?, ?> chart, double value, ScriptableContext context) {
+	public String invoke(IsChart chart, double value, ScriptableContext context) {
 		// computes the percentage
 		double percentage = Percentage.compute(chart, value, context, stacked);
 		// checks if consistent

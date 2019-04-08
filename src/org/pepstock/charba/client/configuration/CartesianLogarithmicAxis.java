@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
 
@@ -34,7 +34,7 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	 * 
 	 * @param chart chart instance
 	 */
-	public CartesianLogarithmicAxis(AbstractChart<?, ?> chart) {
+	public CartesianLogarithmicAxis(IsChart chart) {
 		this(chart, CartesianAxisType.Y);
 	}
 
@@ -44,7 +44,7 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	 * @param chart chart instance
 	 * @param cartesianType cartesian axis type.
 	 */
-	public CartesianLogarithmicAxis(AbstractChart<?, ?> chart, CartesianAxisType cartesianType) {
+	public CartesianLogarithmicAxis(IsChart chart, CartesianAxisType cartesianType) {
 		super(chart, cartesianType);
 		// sets axis type
 		super.setType(AxisType.LOGARITHMIC);

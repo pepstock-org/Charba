@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.datalabels;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -75,7 +75,7 @@ public final class Listeners extends NativeObjectContainer {
 			@Override
 			public boolean call(Object contextFunction, ScriptableContext context) {
 				// gets chart instance
-				AbstractChart<?, ?> chart = ScriptableUtils.retrieveChart(context, enterEventHandler);
+				IsChart chart = ScriptableUtils.retrieveChart(context, enterEventHandler);
 				// checks if the handler is set
 				if (chart != null) {
 					// calls handler
@@ -97,7 +97,7 @@ public final class Listeners extends NativeObjectContainer {
 			@Override
 			public boolean call(Object contextFunction, ScriptableContext context) {
 				// gets chart instance
-				AbstractChart<?, ?> chart = ScriptableUtils.retrieveChart(context, leaveEventHandler);
+				IsChart chart = ScriptableUtils.retrieveChart(context, leaveEventHandler);
 				// checks if the handler is set
 				if (chart != null) {
 					// calls handler
@@ -119,7 +119,7 @@ public final class Listeners extends NativeObjectContainer {
 			@Override
 			public boolean call(Object contextFunction, ScriptableContext context) {
 				// gets chart instance
-				AbstractChart<?, ?> chart = ScriptableUtils.retrieveChart(context, clickEventHandler);
+				IsChart chart = ScriptableUtils.retrieveChart(context, clickEventHandler);
 				// checks if the handler is set
 				if (chart != null) {
 					// calls handler

@@ -17,7 +17,7 @@ package org.pepstock.charba.client.impl.callbacks;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.TickCallback;
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.data.Dataset;
@@ -80,7 +80,7 @@ public final class NoSelectedDatasetTicksCallback implements TickCallback {
 	@Override
 	public String onCallback(Axis axis, double value, int index, List<Double> values) {
 		// gets chart instance
-		AbstractChart<?, ?> chart = axis.getChart();
+		IsChart chart = axis.getChart();
 		// flags to know if all datasets are hidden
 		boolean allHidden = false;
 		// gets datasets

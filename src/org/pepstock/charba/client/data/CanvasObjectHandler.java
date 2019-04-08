@@ -17,7 +17,7 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
@@ -57,11 +57,11 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDatasetsDraw(org.pepstock.charba.client.AbstractChart,
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDatasetsDraw(org.pepstock.charba.client.IsChart,
 	 * double)
 	 */
 	@Override
-	public boolean onBeforeDatasetsDraw(AbstractChart<?, ?> chart, double easing) {
+	public boolean onBeforeDatasetsDraw(IsChart chart, double easing) {
 		// gets data
 		Data data = chart.getData();
 		// gets data json
@@ -150,11 +150,11 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onResize(org.pepstock.charba.client.AbstractChart,
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onResize(org.pepstock.charba.client.IsChart,
 	 * org.pepstock.charba.client.items.SizeItem)
 	 */
 	@Override
-	public void onResize(AbstractChart<?, ?> chart, SizeItem size) {
+	public void onResize(IsChart chart, SizeItem size) {
 		// Due to gradients are created based on dimension of
 		// canvas or chart area, every time a resize is occurring
 		// gradients must be recreated
@@ -172,10 +172,10 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.AbstractChart)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void onDestroy(AbstractChart<?, ?> chart) {
+	public void onDestroy(IsChart chart) {
 		// because chart is destroy
 		// clears the cache of patterns and gradients of the chart
 		CanvasObjectFactory.clear(chart);

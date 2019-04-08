@@ -19,9 +19,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Plugin;
 
 /**
@@ -98,7 +98,7 @@ public final class Plugins implements ConfigurationElement {
 	 * @param config configuration item. Added only to reduce visibility of public method.
 	 * @param chart instance of the chart
 	 */
-	public void onChartConfigure(Configuration config, AbstractChart<?, ?> chart) {
+	public void onChartConfigure(Configuration config, IsChart chart) {
 		// scans all plugins
 		for (WrapperPlugin entry : plugins) {
 			// calls on configure method
@@ -109,11 +109,11 @@ public final class Plugins implements ConfigurationElement {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.AbstractChart,
+	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.IsChart,
 	 * org.pepstock.charba.client.Configuration)
 	 */
 	@Override
-	public void load(AbstractChart<?, ?> chart, Configuration configuration) {
+	public void load(IsChart chart, Configuration configuration) {
 		// checks if there is any plugin to configured to chart.js
 		if (!plugins.isEmpty()) {
 			// new array

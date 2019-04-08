@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.options.ExtendedOptions;
 
 /**
@@ -34,7 +34,7 @@ public class StackedScales extends Scales {
 	 * @param chart chart instance
 	 * @param options root options
 	 */
-	StackedScales(AbstractChart<?, ?> chart, ExtendedOptions options) {
+	StackedScales(IsChart chart, ExtendedOptions options) {
 		super(chart, options);
 	}
 

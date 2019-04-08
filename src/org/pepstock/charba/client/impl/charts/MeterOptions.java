@@ -15,9 +15,9 @@
 */
 package org.pepstock.charba.client.impl.charts;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.LegendCallback;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
@@ -75,7 +75,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults of chart
 	 */
-	public MeterOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
+	public MeterOptions(IsChart chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
 		// disables legend, title and tooltips.
 		super.getLegend().setDisplay(false);

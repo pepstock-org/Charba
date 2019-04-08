@@ -31,7 +31,7 @@ public final class Charts {
 	// buffer with all charts instances
 	// K = CHART id (CHARBA ID)
 	// V = chart instance
-	private static final Map<String, AbstractChart<?, ?>> CHARTS = new HashMap<>();
+	private static final Map<String, IsChart> CHARTS = new HashMap<>();
 	// list with all charts life cycle listeners
 	private static final List<ChartsLifecycleListener> LISTENERS = new LinkedList<>();
 
@@ -64,9 +64,9 @@ public final class Charts {
 	 * 
 	 * @param chart chart instance
 	 */
-	static void add(AbstractChart<?, ?> chart) {
+	static void add(IsChart chart) {
 		// putting getting the chart
-		AbstractChart<?, ?> prevChart = CHARTS.put(chart.getId(), chart);
+		IsChart prevChart = CHARTS.put(chart.getId(), chart);
 		// if previous chart instance is not consistent
 		// means that chart is new and then...
 		if (prevChart == null) {
@@ -82,7 +82,7 @@ public final class Charts {
 	 * 
 	 * @param chart chart instance
 	 */
-	static void fireAfterInit(AbstractChart<?, ?> chart) {
+	static void fireAfterInit(IsChart chart) {
 		// ...scans all listener to send notification
 		for (ChartsLifecycleListener listener : LISTENERS) {
 			listener.onAfterInit(chart);
@@ -94,7 +94,7 @@ public final class Charts {
 	 * 
 	 * @param chart chart instance
 	 */
-	static void fireBeforeDestory(AbstractChart<?, ?> chart) {
+	static void fireBeforeDestory(IsChart chart) {
 		// ...scans all listener to send notification
 		for (ChartsLifecycleListener listener : LISTENERS) {
 			listener.onBeforeDestroy(chart);
@@ -107,7 +107,7 @@ public final class Charts {
 	 * @param chartId chart id
 	 * @return chart instance or <code>null</code> if not exist.
 	 */
-	public static AbstractChart<?, ?> get(String chartId) {
+	public static IsChart get(String chartId) {
 		return CHARTS.get(chartId);
 	}
 
@@ -118,7 +118,7 @@ public final class Charts {
 	 */
 	static void remove(String chartId) {
 		// removes getting the chart
-		AbstractChart<?, ?> chart = CHARTS.remove(chartId);
+		IsChart chart = CHARTS.remove(chartId);
 		// if chart instance is consistent
 		if (chart != null) {
 			// scans all listener to send notification

@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
 
@@ -33,7 +33,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> {
 	 * 
 	 * @param chart chart instance
 	 */
-	public CartesianLinearAxis(AbstractChart<?, ?> chart) {
+	public CartesianLinearAxis(IsChart chart) {
 		this(chart, CartesianAxisType.Y);
 	}
 
@@ -43,7 +43,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> {
 	 * @param chart chart instance
 	 * @param cartesianType cartesian axis type.
 	 */
-	public CartesianLinearAxis(AbstractChart<?, ?> chart, CartesianAxisType cartesianType) {
+	public CartesianLinearAxis(IsChart chart, CartesianAxisType cartesianType) {
 		super(chart, cartesianType);
 		// sets axis type
 		super.setType(AxisType.LINEAR);

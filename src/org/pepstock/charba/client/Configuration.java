@@ -93,7 +93,7 @@ public final class Configuration {
 	 * @param options the options of the chart.
 	 */
 	@JsOverlay
-	<T extends ConfigurationOptions> void setOptions(AbstractChart<?, ?> chart, T options) {
+	<T extends ConfigurationOptions> void setOptions(IsChart chart, T options) {
 		options.load(chart, this);
 	}
 
@@ -104,7 +104,7 @@ public final class Configuration {
 	 * @param data the data of chart.
 	 */
 	@JsOverlay
-	void setData(AbstractChart<?, ?> chart, Data data) {
+	void setData(IsChart chart, Data data) {
 		data.load(chart, this);
 	}
 
@@ -115,7 +115,7 @@ public final class Configuration {
 	 * @param plugins the plugins of chart.
 	 */
 	@JsOverlay
-	void setPlugins(AbstractChart<?, ?> chart, Plugins plugins) {
+	void setPlugins(IsChart chart, Plugins plugins) {
 		plugins.load(chart, this);
 	}
 

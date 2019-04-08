@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -96,7 +96,7 @@ public final class Positioner {
 			@Override
 			public Point call(PositionerContext context, ArrayObject datasetItems, Point eventPoint) {
 				// gets chart instance
-				AbstractChart<?, ?> chart = context.getChart();
+				IsChart chart = context.getChart();
 				// checks if the chart is consistent
 				if (chart != null) {
 					// gets the tooltip position requested

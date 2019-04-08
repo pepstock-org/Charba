@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartOptions;
+import org.pepstock.charba.client.IsChart;
 
 /**
  * Abstract options for LINE chart. It contains all properties for this kind of chart.
@@ -30,7 +30,7 @@ abstract class AbstractLineOptions extends MultiScalesOptions {
 	 * 
 	 * @param chart chart instance
 	 */
-	protected AbstractLineOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
+	protected AbstractLineOptions(IsChart chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
 	}
 

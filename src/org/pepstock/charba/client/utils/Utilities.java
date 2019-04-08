@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.utils;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.enums.FontStyle;
 
 import com.google.gwt.dom.client.ImageElement;
@@ -139,12 +140,14 @@ public final class Utilities {
 	/**
 	 * Returns the cursor currently set into chart.
 	 * 
-	 * @param chart chart instance
+	 * @param isChart chart instance
 	 * @return the cursor currently set into chart. Default is {@link Cursor#DEFAULT}.
 	 */
-	public static Cursor getCursorOfChart(AbstractChart<?, ?> chart) {
+	public static Cursor getCursorOfChart(IsChart isChart) {
 		// checks if argument is consistent
-		if (chart != null) {
+		if (isChart != null && isChart instanceof AbstractChart<?, ?>) {
+			// cast to abstract chart to get element of GWT object
+			AbstractChart<?, ?> chart = (AbstractChart<?, ?>) isChart;
 			// scans all cursors to check if any cursor is already set
 			// needs to scan them because with valueOf there is an exception
 			// if the value does not match any element of enumeration

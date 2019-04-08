@@ -17,8 +17,8 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartOptions;
+import org.pepstock.charba.client.IsChart;
 
 /**
  * Configuration of chart with multiple scales.
@@ -36,7 +36,7 @@ abstract class MultiScalesOptions extends ConfigurationOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults options
 	 */
-	protected MultiScalesOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
+	protected MultiScalesOptions(IsChart chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
 		// new scales creation
 		scales = new Scales(chart, getConfiguration());

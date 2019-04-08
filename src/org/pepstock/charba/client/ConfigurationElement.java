@@ -31,5 +31,5 @@ public interface ConfigurationElement {
 	 * @param chart chart instance
 	 * @param configuration chart configuration instance
 	 */
-	void load(AbstractChart<?, ?> chart, Configuration configuration);
+	void load(IsChart chart, Configuration configuration);
 }

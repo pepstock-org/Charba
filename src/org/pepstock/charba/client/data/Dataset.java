@@ -19,9 +19,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
@@ -253,7 +253,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @param chart chart instance
 	 * @see CanvasObjectHandler
 	 */
-	final void applyPatterns(AbstractChart<?, ?> chart) {
+	final void applyPatterns(IsChart chart) {
 		// checks if there is any pattern
 		if (!getPatternsContainer().isEmpty()) {
 			// gets all keys of pattern containers.
@@ -292,7 +292,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @param datasetIndex dataset index related to dataset to be checked
 	 * @see CanvasObjectHandler
 	 */
-	final void applyGradients(AbstractChart<?, ?> chart, int datasetIndex) {
+	final void applyGradients(IsChart chart, int datasetIndex) {
 		// checks if there is any gradient to be created
 		if (!getGradientsContainer().isEmpty()) {
 			// scans all key of all created gradients

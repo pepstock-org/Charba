@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -115,7 +115,7 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	 * @param chart chart instance.
 	 * @param options root options of chart.
 	 */
-	Animation(AbstractChart<?, ?> chart, ExtendedOptions options) {
+	Animation(IsChart chart, ExtendedOptions options) {
 		super(chart, options);
 
 		// -------------------------------

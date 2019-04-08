@@ -55,7 +55,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
  * @param <O> Options type for the specific chart
  * @param <D> Dataset type for the specific chart
  */
-public abstract class AbstractChart<O extends ConfigurationOptions, D extends Dataset> extends SimplePanel implements IsChart<O, D> {
+public abstract class AbstractChart<O extends ConfigurationOptions, D extends Dataset> extends SimplePanel implements IsChart {
 
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
@@ -161,11 +161,27 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	}
 
 	/**
+	 * Returns the options of chart.
+	 * 
+	 * @return the options of chart.
+	 */
+	@Override
+	public abstract O getOptions();
+
+	/**
+	 * Creates a new dataset related to chart type.
+	 * 
+	 * @return a new dataset related to chart type.
+	 */
+	public abstract D newDataset();
+
+	/**
 	 * Returns the ID of chart.<br>
 	 * It could be considered as chart unique ID.
 	 * 
 	 * @return the ID of chart
 	 */
+	@Override
 	public final String getId() {
 		return id;
 	}
@@ -175,6 +191,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @return the canvas
 	 */
+	@Override
 	public final Canvas getCanvas() {
 		// checks if canvas is initialized
 		if (isCanvasSupported) {
@@ -190,6 +207,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * Remove the registration of prevent default mouse listener from canvas.<br>
 	 * This is necessary when you will add your mouse down listener.
 	 */
+	@Override
 	public final void removeCanvasPreventDefault() {
 		// checks if consistent
 		if (preventDisplayHandler != null) {
@@ -203,6 +221,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @return the initial cursor of the chart.
 	 */
+	@Override
 	public final Cursor getInitialCursor() {
 		return initialCursor;
 	}
@@ -212,6 +231,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @return <code>true</code> if CHART.JS chart has been initialized, otherwise <code>false</code>.
 	 */
+	@Override
 	public boolean isInitialized() {
 		return chart != null;
 	}
@@ -221,6 +241,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @return the chart node.
 	 */
+	@Override
 	public final ChartNode getNode() {
 		return new ChartNode(chart);
 	}
@@ -230,6 +251,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @return the data configuration object
 	 */
+	@Override
 	public final Data getData() {
 		return data;
 	}
@@ -239,6 +261,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @return the plugins configuration object
 	 */
+	@Override
 	public final Plugins getPlugins() {
 		return plugins;
 	}
@@ -258,6 +281,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @return the default options of the chart
 	 */
+	@Override
 	public final ChartOptions getDefaultChartOptions() {
 		return options;
 	}
@@ -269,6 +293,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * @return the drawOnAttach <code>true</code> if the chart is configured to be drawn on the attach of DIV element, otherwise
 	 *         <code>false</code>. Default is <code>true</code>.
 	 */
+	@Override
 	public final boolean isDrawOnAttach() {
 		return drawOnAttach;
 	}
@@ -278,6 +303,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @param drawOnAttach the drawOnAttach to set
 	 */
+	@Override
 	public final void setDrawOnAttach(boolean drawOnAttach) {
 		this.drawOnAttach = drawOnAttach;
 	}
@@ -289,6 +315,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * @return the destroyOnDetach <code>true</code> if the chart is configured to be destroyed on the attach of DIV element,
 	 *         otherwise <code>false</code>. Default is <code>true</code>.
 	 */
+	@Override
 	public final boolean isDestroyOnDetach() {
 		return destroyOnDetach;
 	}
@@ -299,6 +326,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @param destroyOnDetach the destroyOnDetach to set
 	 */
+	@Override
 	public final void setDestroyOnDetach(boolean destroyOnDetach) {
 		this.destroyOnDetach = destroyOnDetach;
 	}
@@ -348,6 +376,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object
 	 * within Chart.js, along with any associated event listeners attached by Chart.js.
 	 */
+	@Override
 	public final void destroy() {
 		// notify before destroy
 		Charts.fireBeforeDestory(this);
@@ -373,6 +402,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * Use this to stop any current animation loop. This will pause the chart during any current animation frame. Call
 	 * <code>.render()</code> to re-animate.
 	 */
+	@Override
 	public final void stop() {
 		// checks if chart is created
 		if (chart != null) {
@@ -384,6 +414,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	/**
 	 * Will clear the chart canvas. Used extensively internally between animation frames.
 	 */
+	@Override
 	public final void clear() {
 		// checks if chart is created
 		if (chart != null) {
@@ -395,6 +426,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	/**
 	 * Reset the chart to it's state before the initial animation. A new animation can then be triggered using update.
 	 */
+	@Override
 	public final void reset() {
 		// checks if chart is created
 		if (chart != null) {
@@ -408,6 +440,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @return base 64 image or {@link UndefinedValues#STRING} if chart is not initialized.
 	 */
+	@Override
 	public final String toBase64Image() {
 		// checks if chart is created
 		if (chart != null) {
@@ -423,6 +456,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @return the HTML legend or {@link UndefinedValues#STRING} if chart is not initialized.
 	 */
+	@Override
 	public final String generateLegend() {
 		// checks if chart is created
 		if (chart != null) {
@@ -437,6 +471,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called
 	 * this method manually if you change the size of the canvas nodes container element.
 	 */
+	@Override
 	public final void resize() {
 		// checks if chart is created
 		if (chart != null) {
@@ -449,6 +484,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales,
 	 * legends, and then re-render the chart.
 	 */
+	@Override
 	public final void update() {
 		update(null);
 	}
@@ -460,6 +496,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @param config a config object can be provided with additional configuration for the update process
 	 */
+	@Override
 	public final void update(UpdateConfiguration config) {
 		// checks if chart is created
 		if (chart != null) {
@@ -478,6 +515,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in
 	 * that case.
 	 */
+	@Override
 	public final void render() {
 		render(null);
 	}
@@ -489,6 +527,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @param config a config object can be provided with additional configuration for the render process
 	 */
+	@Override
 	public final void render(UpdateConfiguration config) {
 		// checks if chart is created
 		if (chart != null) {
@@ -509,6 +548,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * @param index dataset index
 	 * @return dataset meta data item.
 	 */
+	@Override
 	public final DatasetMetaItem getDatasetMeta(int index) {
 		// checks consistency of chart and datasets
 		if (chart != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size() && index >= 0) {
@@ -525,6 +565,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * @param event event of chart.
 	 * @return dataset meta data item.
 	 */
+	@Override
 	public DatasetMetaItem getDatasetAtEvent(ChartNativeEvent event) {
 		// checks consistency of chart and event
 		if (chart != null && event != null) {
@@ -543,6 +584,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * @param index dataset index
 	 * @return <code>true</code> if dataset is visible otherwise <code>false</code>.
 	 */
+	@Override
 	public boolean isDatasetVisible(int index) {
 		// checks consistency of chart and datasets
 		if (chart != null && data.getDatasets() != null && !data.getDatasets().isEmpty() && index < data.getDatasets().size() && index >= 0) {
@@ -558,6 +600,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @return the amount of datasets which are visible. If chart is not initialized, return {@link UndefinedValues#INTEGER}.
 	 */
+	@Override
 	public int getVisibleDatasetCount() {
 		// checks consistency of chart and datasets
 		if (chart != null) {
@@ -575,6 +618,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * @param event event of chart.
 	 * @return single element at the event position or null.
 	 */
+	@Override
 	public final DatasetItem getElementAtEvent(ChartNativeEvent event) {
 		// checks consistency of chart and event
 		if (chart != null && event != null) {
@@ -596,6 +640,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * @param event event of chart.
 	 * @return all elements at the same data index or an empty list.
 	 */
+	@Override
 	public final List<DatasetItem> getElementsAtEvent(ChartNativeEvent event) {
 		// checks consistency of chart and event
 		if (chart != null && event != null) {
@@ -611,6 +656,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	/**
 	 * Draws the chart
 	 */
+	@Override
 	public final void draw() {
 		// checks if canvas is supported
 		if (isCanvasSupported) {
@@ -647,6 +693,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	 * 
 	 * @return the string JSON representation of the object.
 	 */
+	@Override
 	public final String toJSON() {
 		return JSON.stringifyWithReplacer(configuration, 3);
 	}

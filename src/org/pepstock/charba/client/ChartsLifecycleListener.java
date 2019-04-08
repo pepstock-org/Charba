@@ -30,27 +30,27 @@ public interface ChartsLifecycleListener {
 	 * 
 	 * @param chart the chart instance.
 	 */
-	void onBeforeInit(AbstractChart<?, ?> chart);
+	void onBeforeInit(IsChart chart);
 
 	/**
 	 * Called after 'chart' has been initialized and before the first update.
 	 * 
 	 * @param chart the chart instance.
 	 */
-	void onAfterInit(AbstractChart<?, ?> chart);
+	void onAfterInit(IsChart chart);
 
 	/**
 	 * Called before the chart as been destroyed.
 	 * 
 	 * @param chart the chart instance.
 	 */
-	void onBeforeDestroy(AbstractChart<?, ?> chart);
+	void onBeforeDestroy(IsChart chart);
 
 	/**
 	 * Called after the chart as been destroyed.
 	 * 
 	 * @param chart the chart instance.
 	 */
-	void onAfterDestroy(AbstractChart<?, ?> chart);
+	void onAfterDestroy(IsChart chart);
 
 }

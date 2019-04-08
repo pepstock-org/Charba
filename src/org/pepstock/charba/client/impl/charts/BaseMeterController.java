@@ -17,9 +17,9 @@ package org.pepstock.charba.client.impl.charts;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartNode;
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.controllers.AbstractController;
 import org.pepstock.charba.client.controllers.ControllerContext;
 import org.pepstock.charba.client.controllers.ControllerType;
@@ -77,10 +77,10 @@ final class BaseMeterController extends AbstractController {
 	 * (non-Javadoc)
 	 * 
 	 * @see org.pepstock.charba.client.controllers.AbstractController#initialize(org.pepstock.charba.client.controllers.
-	 * ControllerContext, org.pepstock.charba.client.AbstractChart, int)
+	 * ControllerContext, org.pepstock.charba.client.IsChart, int)
 	 */
 	@Override
-	public void initialize(ControllerContext context, AbstractChart<?, ?> chart, int datasetIndex) {
+	public void initialize(ControllerContext context, IsChart chart, int datasetIndex) {
 		// gets the dataset at index
 		Dataset dataset = chart.getData().getDatasets().get(datasetIndex);
 		// checks if is a meter dataset (or gauge)
@@ -107,10 +107,10 @@ final class BaseMeterController extends AbstractController {
 	 * (non-Javadoc)
 	 * 
 	 * @see org.pepstock.charba.client.controllers.AbstractController#draw(org.pepstock.charba.client.controllers .Context,
-	 * org.pepstock.charba.client.AbstractChart, double)
+	 * org.pepstock.charba.client.IsChart, double)
 	 */
 	@Override
-	public void draw(ControllerContext context, AbstractChart<?, ?> chart, double ease) {
+	public void draw(ControllerContext context, IsChart chart, double ease) {
 		// draw the doughnut chart
 		super.draw(context, chart, ease);
 		// gets the list of datasets
@@ -119,15 +119,24 @@ final class BaseMeterController extends AbstractController {
 		if (!datasets.isEmpty()) {
 			// gets chart item
 			ChartNode item = chart.getNode();
+			// gets dataset index 0
 			MeterDataset dataset = (MeterDataset) datasets.get(0);
-			MeterOptions options = (MeterOptions) chart.getOptions();
-			// let's draw the value inside the doughnut
-			execute(chart, item, dataset, options, ease);
+			// checks if meter chart
+			if (chart instanceof MeterChart) {
+				MeterChart meterChart = (MeterChart)chart;
+				MeterOptions options = meterChart.getOptions();
+				// let's draw the value inside the doughnut
+				execute(chart, item, dataset, options, ease);
+			} else if (chart instanceof GaugeChart) {
+				// checks if meter chart
+				GaugeChart gaugeChart = (GaugeChart)chart;
+				GaugeOptions options = gaugeChart.getOptions();
+				// let's draw the value inside the doughnut
+				execute(chart, item, dataset, options, ease);
+			}
 		}
 	}
 
-	/**
-	 */
 	/**
 	 * Draws the value inside the inner radius of doughnut.
 	 * 
@@ -137,7 +146,7 @@ final class BaseMeterController extends AbstractController {
 	 * @param options the chart options
 	 * @param ease easing of drawing (between 0 and 1) for animation
 	 */
-	private void execute(AbstractChart<?, ?> chart, ChartNode item, MeterDataset dataset, MeterOptions options, double ease) {
+	private void execute(IsChart chart, ChartNode item, MeterDataset dataset, MeterOptions options, double ease) {
 		// calculate the side of the square where to draw the value
 		final int sideOfSquare = (int) ((item.getInnerRadius() * 2) / SQRT_2);
 		// gets canvas context 2d

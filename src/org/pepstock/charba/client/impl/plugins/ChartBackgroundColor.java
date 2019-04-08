@@ -18,7 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.HtmlColor;
@@ -184,10 +184,10 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDraw(org.pepstock.charba.client.AbstractChart, double)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeDraw(org.pepstock.charba.client.IsChart, double)
 	 */
 	@Override
-	public boolean onBeforeDraw(AbstractChart<?, ?> chart, double easing) {
+	public boolean onBeforeDraw(IsChart chart, double easing) {
 		// gets options
 		ChartBackgroundColorOptions bgOptions = getOptions(chart);
 		// gets the canvas
@@ -219,10 +219,10 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterDraw(org.pepstock.charba.client.AbstractChart, double)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterDraw(org.pepstock.charba.client.IsChart, double)
 	 */
 	@Override
-	public void onAfterDraw(AbstractChart<?, ?> chart, double easing) {
+	public void onAfterDraw(IsChart chart, double easing) {
 		// when the draw is completed
 		// remove the options from cache in order to reload it
 		// when chart is re drawing for whatever reason.
@@ -236,11 +236,11 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onResize(org.pepstock.charba.client.AbstractChart,
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onResize(org.pepstock.charba.client.IsChart,
 	 * org.pepstock.charba.client.items.SizeItem)
 	 */
 	@Override
-	public void onResize(AbstractChart<?, ?> chart, SizeItem size) {
+	public void onResize(IsChart chart, SizeItem size) {
 		// gets options
 		ChartBackgroundColorOptions bgOptions = getOptions(chart);
 		// if gradient has been set
@@ -257,10 +257,10 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.AbstractChart)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void onDestroy(AbstractChart<?, ?> chart) {
+	public void onDestroy(IsChart chart) {
 		// because chart is destroy
 		// clears the cache of patterns and gradients of the chart
 		ChartBackgroundGradientFactory.clear(chart);
@@ -272,7 +272,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	 * @param chart chart instances where to extract options from.
 	 * @return the options of plugin
 	 */
-	private ChartBackgroundColorOptions getOptions(AbstractChart<?, ?> chart) {
+	private ChartBackgroundColorOptions getOptions(IsChart chart) {
 		// checks if options are in cache
 		if (OPTIONS.containsKey(chart.getId())) {
 			// returns from cache

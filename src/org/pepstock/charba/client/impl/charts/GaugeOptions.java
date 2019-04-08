@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.impl.charts;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartOptions;
+import org.pepstock.charba.client.IsChart;
 
 /**
  * Specific options for GAUGE chart. This chart doesn't allow any legend, hover, layout and tooltips components.
@@ -32,7 +32,7 @@ public final class GaugeOptions extends MeterOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults of chart
 	 */
-	public GaugeOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
+	public GaugeOptions(IsChart chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
 	}
 

@@ -17,7 +17,7 @@ package org.pepstock.charba.client.impl.callbacks;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.data.DataPoint;
 import org.pepstock.charba.client.data.Dataset;
@@ -49,7 +49,7 @@ public final class Percentage {
 	 * @return the percentage value, a double between 0 and 1. If the datasets does not contains any data, it will return
 	 *         {@link Double#NaN}.
 	 */
-	public static double compute(AbstractChart<?, ?> chart, double value, ScriptableContext context) {
+	public static double compute(IsChart chart, double value, ScriptableContext context) {
 		return compute(chart, value, context, false);
 	}
 
@@ -65,7 +65,7 @@ public final class Percentage {
 	 * @return the percentage value, a double between 0 and 1. If the datasets does not contains any data, it will return
 	 *         {@link Double#NaN}.
 	 */
-	public static double compute(AbstractChart<?, ?> chart, double value, ScriptableContext context, boolean stacked) {
+	public static double compute(IsChart chart, double value, ScriptableContext context, boolean stacked) {
 		// creates the total reference
 		double total = 0D;
 		// checks if stacked

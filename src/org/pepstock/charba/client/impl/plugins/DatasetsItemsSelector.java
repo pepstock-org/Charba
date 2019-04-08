@@ -18,8 +18,8 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartType;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.events.LegendClickEvent;
@@ -69,7 +69,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * @param chart chart instance
 	 * @return the padding height used by clear selection element or <b>{@link ClearSelection#DEFAULT_VALUE}</b> if disabled
 	 */
-	public double getPadding(AbstractChart<?, ?> chart) {
+	public double getPadding(IsChart chart) {
 		// checks if there is a handler
 		if (HANDLERS.containsKey(chart.getId())) {
 			// gets selection handler
@@ -95,7 +95,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * @see DatasetsItemsSelectorOptions#isFireEventOnClearSelection()
 	 * @see DatasetsItemsSelectorOptions#setFireEventOnClearSelection(boolean)
 	 */
-	public void clearSelection(AbstractChart<?, ?> chart) {
+	public void clearSelection(IsChart chart) {
 		// flag with default to false
 		boolean fireEvent = false;
 		// checks for handler
@@ -115,7 +115,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * @param chart chart instance to clear the selection
 	 * @param fireEvent if <code>true</code> an event is fired otherwise not.
 	 */
-	public void clearSelection(AbstractChart<?, ?> chart, boolean fireEvent) {
+	public void clearSelection(IsChart chart, boolean fireEvent) {
 		// flag to know if the chart must be updated
 		boolean mustBeUpdated = false;
 		// checks if we have already an handler
@@ -148,7 +148,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * 
 	 * @param chart chart instance to apply the fire events skipping.
 	 */
-	public void skipNextRefreshFireEvent(AbstractChart<?, ?> chart) {
+	public void skipNextRefreshFireEvent(IsChart chart) {
 		// checks if the plugin has been invoked for LINE or BAR charts
 		if (chart.getType().equals(ChartType.LINE) || chart.getType().equals(ChartType.BAR)) {
 			// checks if we have already an handler
@@ -177,7 +177,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onConfigure(org.pepstock.charba.client. AbstractChart)
 	 */
 	@Override
-	public void onConfigure(AbstractChart<?, ?> chart) {
+	public void onConfigure(IsChart chart) {
 		// checks if the plugin has been invoked for LINE or BAR charts
 		if (chart.getType().equals(ChartType.LINE) || chart.getType().equals(ChartType.BAR)) {
 			// overrides the tooltip configuration disabling it
@@ -186,6 +186,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			chart.getOptions().setEvents(Event.CLICK, Event.TOUCHSTART);
 			// checks if handler on legend to avoid to remove all datasets has been already added
 			// and if legend is display
+			// checks if is chart is a abstract chart instance
 			if (!LEGEND_HANDLERS_STATUS.containsKey(chart.getId()) && chart.getOptions().getLegend().isDisplay()) {
 				// if not, adds handler
 				HandlerRegistration registratrion = chart.addHandler(legendClickHandler, LegendClickEvent.TYPE);
@@ -223,10 +224,10 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.AbstractChart)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public boolean onBeforeUpdate(AbstractChart<?, ?> chart) {
+	public boolean onBeforeUpdate(IsChart chart) {
 		// checks if the plugin has been invoked for LINE or BAR charts
 		if (chart.getType().equals(ChartType.LINE) || chart.getType().equals(ChartType.BAR)) {
 			// add checks if there is any dataset selection handler into option
@@ -245,7 +246,7 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterDraw(org.pepstock.charba.client. AbstractChart, double)
 	 */
 	@Override
-	public void onAfterDraw(AbstractChart<?, ?> chart, double easing) {
+	public void onAfterDraw(IsChart chart, double easing) {
 		// checks if the plugin has been invoked for LINE or BAR charts
 		if (chart.getType().equals(ChartType.LINE) || chart.getType().equals(ChartType.BAR)) {
 			// sets cursor wait because the chart is drawing and not selectable
@@ -321,10 +322,10 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.AbstractChart)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onDestroy(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void onDestroy(AbstractChart<?, ?> chart) {
+	public void onDestroy(IsChart chart) {
 		// checks if the plugin has been invoked for LINE or BAR charts
 		if (chart.getType().equals(ChartType.LINE) || chart.getType().equals(ChartType.BAR)) {
 			// checks if we have already an handler
@@ -360,11 +361,11 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeEvent(org.pepstock.charba.client.AbstractChart,
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeEvent(org.pepstock.charba.client.IsChart,
 	 * org.pepstock.charba.client.events.ChartNativeEvent)
 	 */
 	@Override
-	public boolean onBeforeEvent(AbstractChart<?, ?> chart, ChartNativeEvent event) {
+	public boolean onBeforeEvent(IsChart chart, ChartNativeEvent event) {
 		// gets selection handler
 		SelectionHandler handler = HANDLERS.get(chart.getId());
 		// checks if it is a click event

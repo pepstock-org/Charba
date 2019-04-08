@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 
 /**
  * This a cartesian axis for BAR chart.
@@ -33,9 +33,9 @@ public class BarCategoryAxis extends CartesianCategoryAxis {
 	 * 
 	 * @param chart chart instance
 	 */
-	public BarCategoryAxis(AbstractChart<?, ?> chart) {
+	public BarCategoryAxis(IsChart chart) {
 		super(chart);
-		// creates girlines
+		// creates grid lines
 		barGridLines = new BarGridLines(this);
 	}
 

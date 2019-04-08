@@ -18,8 +18,8 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.Arrays;
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartType;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.data.BarBorderWidth;
@@ -65,10 +65,10 @@ public final class ColorSchemes extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.AbstractChart)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public boolean onBeforeUpdate(AbstractChart<?, ?> chart) {
+	public boolean onBeforeUpdate(IsChart chart) {
 		// gets options from chart options
 		ColorSchemesOptions options = getOptions(chart);
 		// gets scheme
@@ -242,7 +242,7 @@ public final class ColorSchemes extends AbstractPlugin {
 	 * @param chart chart instances where to extract options from.
 	 * @return the options of plugin
 	 */
-	private ColorSchemesOptions getOptions(AbstractChart<?, ?> chart) {
+	private ColorSchemesOptions getOptions(IsChart chart) {
 		// options instance
 		ColorSchemesOptions options = null;
 		// creates the plugin options using the java script object

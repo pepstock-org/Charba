@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.AddHandlerEventHandler;
@@ -41,7 +41,7 @@ public abstract class EventProvider<T extends NativeObjectContainer> extends Con
 	 * @param chart chart instance
 	 * @param configuration options element.
 	 */
-	EventProvider(AbstractChart<?, ?> chart, T configuration) {
+	EventProvider(IsChart chart, T configuration) {
 		super(chart, configuration);
 		chart.addHandler(this, AddHandlerEvent.TYPE);
 		chart.addHandler(this, RemoveHandlerEvent.TYPE);

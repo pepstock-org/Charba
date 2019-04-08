@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.enums.AxisType;
 
 /**
@@ -43,7 +43,7 @@ public class RadialAxis extends Axis {
 	 * 
 	 * @param chart chart instance
 	 */
-	public RadialAxis(AbstractChart<?, ?> chart) {
+	public RadialAxis(IsChart chart) {
 		super(chart);
 		// sets type
 		setType(AxisType.RADIAL_LINEAR);

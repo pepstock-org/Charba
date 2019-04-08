@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.enums.ScaleBounds;
@@ -38,7 +38,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * 
 	 * @param chart chart instance
 	 */
-	public CartesianTimeAxis(AbstractChart<?, ?> chart) {
+	public CartesianTimeAxis(IsChart chart) {
 		this(chart, CartesianAxisType.X);
 	}
 
@@ -48,7 +48,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @param chart chart instance
 	 * @param cartesianType cartesian axis type.
 	 */
-	public CartesianTimeAxis(AbstractChart<?, ?> chart, CartesianAxisType cartesianType) {
+	public CartesianTimeAxis(IsChart chart, CartesianAxisType cartesianType) {
 		super(chart, cartesianType);
 		// sets axis type
 		super.setType(AxisType.TIME);

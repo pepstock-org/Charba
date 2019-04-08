@@ -17,11 +17,11 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.LegendCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -224,7 +224,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	 * @param chart chart instance
 	 * @param defaultValues defaults options
 	 */
-	ConfigurationOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
+	ConfigurationOptions(IsChart chart, ChartOptions defaultValues) {
 		// uses the extended option internally (no override)
 		super(chart, new ExtendedOptions(new DefaultChartOptions(defaultValues)));
 		// creates all sub elements
@@ -695,11 +695,11 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.AbstractChart,
+	 * @see org.pepstock.charba.client.ConfigurationElement#load(org.pepstock.charba.client.IsChart,
 	 * org.pepstock.charba.client.Configuration)
 	 */
 	@Override
-	public void load(AbstractChart<?, ?> chart, Configuration configuration) {
+	public void load(IsChart chart, Configuration configuration) {
 		// loads the native object into configuration to pass to chart
 		ConfigurationLoader.loadOptions(configuration, getConfiguration());
 	}

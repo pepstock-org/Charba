@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.TooltipBodyCallback;
 import org.pepstock.charba.client.callbacks.TooltipFooterCallback;
 import org.pepstock.charba.client.callbacks.TooltipLabelCallback;
@@ -205,7 +205,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	 * @param chart chart instance
 	 * @param options root options element.
 	 */
-	TooltipsCallbacks(AbstractChart<?, ?> chart, ExtendedOptions configuration) {
+	TooltipsCallbacks(IsChart chart, ExtendedOptions configuration) {
 		super(chart, configuration);
 		// sets the colors getting from tooltip
 		DEFAULT_LABEL_COLOR.setBackgroundColor(configuration.getTooltips().getBackgroundColor());

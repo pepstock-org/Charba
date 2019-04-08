@@ -21,10 +21,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.AbstractChartsLifecycleListener;
 import org.pepstock.charba.client.Charts;
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Id;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
@@ -72,10 +72,10 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.AbstractChartsLifecycleListener#onAfterInit(org.pepstock.charba.client.AbstractChart)
+	 * @see org.pepstock.charba.client.IsChartsLifecycleListener#onAfterInit(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public final void onAfterInit(AbstractChart<?, ?> chart) {
+	public final void onAfterInit(IsChart chart) {
 		// checks if there is a plugin options as GLOBAL
 		if (Defaults.get().getGlobal().getPlugins().hasOptions(pluginId)) {
 			// gets the object type of options to know if there is an array of options
@@ -157,10 +157,10 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.AbstractChartsLifecycleListener#onBeforeDestroy(org.pepstock.charba.client.AbstractChart)
+	 * @see org.pepstock.charba.client.IsChartsLifecycleListener#onBeforeDestroy(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public final void onBeforeDestroy(AbstractChart<?, ?> chart) {
+	public final void onBeforeDestroy(IsChart chart) {
 		// gets the plugin options from chart options, if there
 		if (chart.getOptions().getPlugins().hasOptions(pluginId)) {
 			// gets the object type of options to know if there is an array of options

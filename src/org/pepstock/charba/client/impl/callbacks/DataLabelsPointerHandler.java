@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.impl.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.datalabels.events.AbstractEventHandler;
@@ -67,11 +67,11 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.events.LeaveEventHandler#onLeave(org.pepstock.charba.client.AbstractChart,
+	 * @see org.pepstock.charba.client.datalabels.events.LeaveEventHandler#onLeave(org.pepstock.charba.client.IsChart,
 	 * org.pepstock.charba.client.callbacks.ScriptableContext)
 	 */
 	@Override
-	public boolean onLeave(AbstractChart<?, ?> chart, ScriptableContext context) {
+	public boolean onLeave(IsChart chart, ScriptableContext context) {
 		if (chart.isInitialized()) {
 			chart.getCanvas().getElement().getStyle().setCursor(chart.getInitialCursor());
 		}
@@ -81,11 +81,11 @@ public class DataLabelsPointerHandler extends AbstractEventHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.events.EnterEventHandler#onEnter(org.pepstock.charba.client.AbstractChart,
+	 * @see org.pepstock.charba.client.datalabels.events.EnterEventHandler#onEnter(org.pepstock.charba.client.IsChart,
 	 * org.pepstock.charba.client.callbacks.ScriptableContext)
 	 */
 	@Override
-	public boolean onEnter(AbstractChart<?, ?> chart, ScriptableContext context) {
+	public boolean onEnter(IsChart chart, ScriptableContext context) {
 		if (chart.isInitialized()) {
 			chart.getCanvas().getElement().getStyle().setCursor(cursor);
 		}

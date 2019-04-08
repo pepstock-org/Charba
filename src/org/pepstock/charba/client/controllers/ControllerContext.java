@@ -17,9 +17,9 @@ package org.pepstock.charba.client.controllers;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.ChartNode;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.JsHelper;
@@ -99,7 +99,7 @@ public final class ControllerContext {
 	 * @return the CHARBA chart instance
 	 */
 	@JsOverlay
-	public final AbstractChart<?, ?> getChart() {
+	public final IsChart getChart() {
 		return getNativeChart().getChart();
 	}
 

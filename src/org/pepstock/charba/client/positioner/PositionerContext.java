@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.positioner;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.NativeName;
 
 import jsinterop.annotations.JsOverlay;
@@ -52,7 +52,7 @@ public final class PositionerContext {
 	 * @return the CHARBA chart instance
 	 */
 	@JsOverlay
-	AbstractChart<?, ?> getChart() {
+	IsChart getChart() {
 		return getNativeChart().getChart();
 	}
 

@@ -291,10 +291,13 @@ public class MeterDataset extends Dataset {
 		super.setHidden(false);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Sets the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array
+	 * corresponds to the label at the same index on the x axis.
 	 * 
+	 * @param values an array of numbers
 	 * @see org.pepstock.charba.client.data.Dataset#setData(double[])
+	 * @deprecated setData is not allowed. Use setValue.
 	 */
 	@Deprecated
 	@Override
@@ -302,10 +305,13 @@ public class MeterDataset extends Dataset {
 		throw new UnsupportedOperationException(INVALID_SET_DATA_CALL);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Sets the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array
+	 * corresponds to the label at the same index on the x axis.
 	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setData(java.util.List)
+	 * @param values an array of numbers
+	 * @see org.pepstock.charba.client.data.Dataset#setData(double[])
+	 * @deprecated setData is not allowed. Use setValue.
 	 */
 	@Deprecated
 	@Override

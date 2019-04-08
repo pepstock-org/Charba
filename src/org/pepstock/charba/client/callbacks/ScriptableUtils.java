@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
@@ -47,7 +47,7 @@ public final class ScriptableUtils {
 	 * @param callback callback to check if consistent
 	 * @return a char instance if callback and chart itself are consistent
 	 */
-	public static AbstractChart<?, ?> retrieveChart(ScriptableContext context, Object callback) {
+	public static IsChart retrieveChart(ScriptableContext context, Object callback) {
 		// checks if callback is consistent
 		if (callback != null) {
 			// gets chart instance
@@ -82,7 +82,7 @@ public final class ScriptableUtils {
 	 */
 	public static <T extends Key> T getOptionValueAsString(ScriptableContext context, Scriptable<T> callback, T defaultValue) {
 		// gets chart instance
-		AbstractChart<?, ?> chart = retrieveChart(context, callback);
+		IsChart chart = retrieveChart(context, callback);
 		// checks if the chart is correct
 		if (chart != null) {
 			// calls callback
@@ -120,7 +120,7 @@ public final class ScriptableUtils {
 	 */
 	public static <T> T getOptionValue(ScriptableContext context, Scriptable<T> callback, T defaultValue) {
 		// gets chart instance
-		AbstractChart<?, ?> chart = retrieveChart(context, callback);
+		IsChart chart = retrieveChart(context, callback);
 		// checks if the chart is correct
 		if (chart != null) {
 			// calls callback
@@ -161,7 +161,7 @@ public final class ScriptableUtils {
 	 */
 	public static Object getOptionValueAsColor(ScriptableContext context, Scriptable<?> callback, String defaultValue, boolean hasPattern) {
 		// gets chart instance
-		AbstractChart<?, ?> chart = retrieveChart(context, callback);
+		IsChart chart = retrieveChart(context, callback);
 		// checks if the chart is correct
 		if (chart != null) {
 			// calls callback

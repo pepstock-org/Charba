@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 
@@ -34,7 +34,7 @@ abstract class ConfigurationContainer<T extends NativeObjectContainer> extends C
 	 * 
 	 * @param chart chart instance
 	 */
-	protected ConfigurationContainer(AbstractChart<?, ?> chart) {
+	protected ConfigurationContainer(IsChart chart) {
 		super(chart);
 	}
 
@@ -44,7 +44,7 @@ abstract class ConfigurationContainer<T extends NativeObjectContainer> extends C
 	 * @param chart chart instance
 	 * @param configuration options instance to store the configuration of chart.
 	 */
-	public ConfigurationContainer(AbstractChart<?, ?> chart, T configuration) {
+	public ConfigurationContainer(IsChart chart, T configuration) {
 		super(chart);
 		this.configuration = configuration;
 	}

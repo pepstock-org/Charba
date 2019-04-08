@@ -38,11 +38,13 @@ public enum InteractionMode implements Key
 	NEAREST("nearest"),
 	/**
 	 * See 'index' mode.
+	 * @deprecated use 'index' instead of this
 	 */
 	@Deprecated
 	LABEL("label"),
 	/**
 	 * Finds the first item that intersects the point and returns it.
+	 * @deprecated CHART.JS does not use it anymore but it still there
 	 */
 	@Deprecated
 	SINGLE("single"),

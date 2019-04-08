@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.items.TooltipModel;
 
 /**
@@ -34,6 +34,6 @@ public interface TooltipCustomCallback {
 	 * @param chart chart instance
 	 * @param model all info about tooltip to create own HTML tooltip.
 	 */
-	void onCustom(AbstractChart<?, ?> chart, TooltipModel model);
+	void onCustom(IsChart chart, TooltipModel model);
 
 }

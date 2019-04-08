@@ -17,9 +17,9 @@ package org.pepstock.charba.client.impl.plugins;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartNode;
 import org.pepstock.charba.client.ChartType;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
@@ -54,7 +54,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseMoveHandler {
 
 	// chart instance
-	private final AbstractChart<?, ?> chart;
+	private final IsChart chart;
 	// plugin options
 	private final DatasetsItemsSelectorOptions options;
 	// current selection area
@@ -93,7 +93,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 	 * @param chart chart instance
 	 * @param options plugin options
 	 */
-	SelectionHandler(AbstractChart<?, ?> chart, DatasetsItemsSelectorOptions options) {
+	SelectionHandler(IsChart chart, DatasetsItemsSelectorOptions options) {
 		// stores items
 		this.chart = chart;
 		this.options = options;

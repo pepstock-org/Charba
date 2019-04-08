@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
@@ -60,10 +61,10 @@ public final class ChartPointer extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.AbstractChart)
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onBeforeUpdate(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public boolean onBeforeUpdate(AbstractChart<?, ?> chart) {
+	public boolean onBeforeUpdate(IsChart chart) {
 		// checks if chart has got any dataset selection and title click handler
 		if (chart.getOptions().hasDatasetSelectionHandlers() || chart.getOptions().hasTitleClickHandlers() || chart.getOptions().hasAxisClickHandlers()) {
 			// creates options instance
@@ -85,56 +86,61 @@ public final class ChartPointer extends AbstractPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterEvent(org.pepstock.charba.client. AbstractChart,
+	 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterEvent(org.pepstock.charba.client.IsChart,
 	 * org.pepstock.charba.client.events.ChartNativeEvent)
 	 */
 	@Override
-	public void onAfterEvent(AbstractChart<?, ?> chart, ChartNativeEvent event) {
-		// checks if chart has got any dataset selection handler
-		if (chart.getOptions().hasDatasetSelectionHandlers() || chart.getOptions().hasTitleClickHandlers() || chart.getOptions().hasAxisClickHandlers()) {
-			// gets options instance
-			ChartPointerOptions pOptions = OPTIONS.get(chart.getId());
-			// gets the scope
-			List<PointerElement> scope = pOptions.getElements();
-			// creates the item reference
-			DatasetItem item = null;
-			// checks if the datasets is in scope
-			if (chart.getOptions().hasDatasetSelectionHandlers() && isElementInScope(scope, PointerElement.DATASET)) {
-				// if yes, asks the dataset item by event
-				item = chart.getElementAtEvent(event);
-			}
-			// checks item
-			if (item != null) {
-				// DATASET SELECTION
-				// otherwise sets the pointer
-				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
-			} else if (chart.getOptions().hasTitleClickHandlers() && isElementInScope(scope, PointerElement.TITLE) && chart.getNode().getTitle().isInside(event)) {
-				// TITLE SELECTION
-				// otherwise sets the pointer
-				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
-			} else if (chart.getOptions().hasAxisClickHandlers() && isElementInScope(scope, PointerElement.AXES) && !ScaleType.NONE.equals(chart.getType().scaleType()) && chart.getNode().getScales().isInside(event)) {
-				// AXIS SELECTION
-				// otherwise sets the pointer
-				chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
-			} else if (isElementInScope(scope, PointerElement.LEGEND) && chart.getNode().getLegend().isInside(event)) {
-				// LEGEND SELECTION
-				// checks if cursor is over the hit box
-				List<LegendHitBoxItem> legendItems = chart.getNode().getLegend().getHitBoxes();
-				// scans all legend item box
-				for (LegendHitBoxItem legendItem : legendItems) {
-					// if cursor inside the legend item
-					if (legendItem.isInside(event)) {
-						// sets the pointer
-						chart.getElement().getStyle().setCursor(pOptions.getCursorPointer());
-						// and close
-						return;
-					}
+	public void onAfterEvent(IsChart chart, ChartNativeEvent event) {
+		// checks if is chart is a abstract chart instance
+		if (chart instanceof AbstractChart<?, ?>) {
+			// cast to abstract chart to get element of GWT object
+			AbstractChart<?, ?> chartInstance = (AbstractChart<?, ?>) chart;
+			// checks if chart has got any dataset selection handler
+			if (chartInstance.getOptions().hasDatasetSelectionHandlers() || chartInstance.getOptions().hasTitleClickHandlers() || chartInstance.getOptions().hasAxisClickHandlers()) {
+				// gets options instance
+				ChartPointerOptions pOptions = OPTIONS.get(chartInstance.getId());
+				// gets the scope
+				List<PointerElement> scope = pOptions.getElements();
+				// creates the item reference
+				DatasetItem item = null;
+				// checks if the datasets is in scope
+				if (chartInstance.getOptions().hasDatasetSelectionHandlers() && isElementInScope(scope, PointerElement.DATASET)) {
+					// if yes, asks the dataset item by event
+					item = chartInstance.getElementAtEvent(event);
 				}
-				// if null, sets the default cursor
-				chart.getElement().getStyle().setCursor(chart.getInitialCursor());
-			} else {
-				// if null, sets the default cursor
-				chart.getElement().getStyle().setCursor(chart.getInitialCursor());
+				// checks item
+				if (item != null) {
+					// DATASET SELECTION
+					// otherwise sets the pointer
+					chartInstance.getElement().getStyle().setCursor(pOptions.getCursorPointer());
+				} else if (chartInstance.getOptions().hasTitleClickHandlers() && isElementInScope(scope, PointerElement.TITLE) && chartInstance.getNode().getTitle().isInside(event)) {
+					// TITLE SELECTION
+					// otherwise sets the pointer
+					chartInstance.getElement().getStyle().setCursor(pOptions.getCursorPointer());
+				} else if (chartInstance.getOptions().hasAxisClickHandlers() && isElementInScope(scope, PointerElement.AXES) && !ScaleType.NONE.equals(chartInstance.getType().scaleType()) && chartInstance.getNode().getScales().isInside(event)) {
+					// AXIS SELECTION
+					// otherwise sets the pointer
+					chartInstance.getElement().getStyle().setCursor(pOptions.getCursorPointer());
+				} else if (isElementInScope(scope, PointerElement.LEGEND) && chartInstance.getNode().getLegend().isInside(event)) {
+					// LEGEND SELECTION
+					// checks if cursor is over the hit box
+					List<LegendHitBoxItem> legendItems = chartInstance.getNode().getLegend().getHitBoxes();
+					// scans all legend item box
+					for (LegendHitBoxItem legendItem : legendItems) {
+						// if cursor inside the legend item
+						if (legendItem.isInside(event)) {
+							// sets the pointer
+							chartInstance.getElement().getStyle().setCursor(pOptions.getCursorPointer());
+							// and close
+							return;
+						}
+					}
+					// if null, sets the default cursor
+					chartInstance.getElement().getStyle().setCursor(chartInstance.getInitialCursor());
+				} else {
+					// if null, sets the default cursor
+					chartInstance.getElement().getStyle().setCursor(chartInstance.getInitialCursor());
+				}
 			}
 		}
 	}
@@ -154,7 +160,7 @@ public final class ChartPointer extends AbstractPlugin {
 				return true;
 			}
 		}
-		// if here, the elemtn is not in scope
+		// if here, the element is not in scope
 		return false;
 	}
 

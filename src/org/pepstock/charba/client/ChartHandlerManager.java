@@ -33,14 +33,14 @@ import com.google.gwt.event.shared.HandlerRegistration;
 final class ChartHandlerManager extends HandlerManager {
 
 	// chart instance, needed to add every new handler registration
-	private final AbstractChart<?, ?> chart;
+	private final IsChart chart;
 
 	/**
 	 * Creates a handler manager with the given chart as source, specifying to maintain the order in which handlers are fired.
 	 * 
 	 * @param chart chart instance
 	 */
-	ChartHandlerManager(AbstractChart<?, ?> chart) {
+	ChartHandlerManager(IsChart chart) {
 		super(chart, false);
 		// stores the chart instance
 		this.chart = chart;
@@ -61,9 +61,14 @@ final class ChartHandlerManager extends HandlerManager {
 			// sends the event
 			fireEvent(new AddHandlerEvent(type));
 		}
-		// stores the registration into chart
-		// for cleaning up when chart will be destroy
-		chart.addHandlerRegistration(registration);
+		// checks if is chart is a abstract chart instance
+		if (chart instanceof AbstractChart<?, ?>) {
+			// cast to abstract chart to get the method
+			AbstractChart<?, ?> chartInstance = (AbstractChart<?, ?>) chart;
+			// stores the registration into chart
+			// for cleaning up when chart will be destroy
+			chartInstance.addHandlerRegistration(registration);
+		}
 		// retuns registration
 		return registration;
 	}

@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.datalabels;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.callbacks.BorderWidthCallback;
@@ -368,7 +368,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			@Override
 			public String call(Object contextFunction, double value, ScriptableContext context) {
 				// gets chart instance
-				AbstractChart<?, ?> chart = ScriptableUtils.retrieveChart(context, formatterCallback);
+				IsChart chart = ScriptableUtils.retrieveChart(context, formatterCallback);
 				// checks if the handler is set
 				if (chart != null) {
 					// calls callback

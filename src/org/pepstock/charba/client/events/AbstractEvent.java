@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.events;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.shared.EventHandler;
@@ -61,8 +61,8 @@ public abstract class AbstractEvent<H extends EventHandler> extends GwtEvent<H> 
 	 * 
 	 * @return the chart instance
 	 */
-	public AbstractChart<?, ?> getChart() {
-		return (AbstractChart<?, ?>) getSource();
+	public IsChart getChart() {
+		return (IsChart) getSource();
 	}
 
 }

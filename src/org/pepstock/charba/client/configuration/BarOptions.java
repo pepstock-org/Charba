@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartOptions;
+import org.pepstock.charba.client.IsChart;
 
 /**
  * Specific options for BAR chart. It contains all properties for this kind of chart.
@@ -31,7 +31,7 @@ public class BarOptions extends MultiScalesOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults options of bar chart
 	 */
-	public BarOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
+	public BarOptions(IsChart chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
 	}
 

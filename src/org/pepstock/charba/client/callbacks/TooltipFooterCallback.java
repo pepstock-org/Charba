@@ -17,7 +17,7 @@ package org.pepstock.charba.client.callbacks;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.items.TooltipItem;
 
 /**
@@ -38,7 +38,7 @@ public interface TooltipFooterCallback {
 	 * @param items list of all tooltip items
 	 * @return an array of labels to apply to the footer. If returns <code>null</code>, it will be ignored.
 	 */
-	String[] onBeforeFooter(AbstractChart<?, ?> chart, List<TooltipItem> items);
+	String[] onBeforeFooter(IsChart chart, List<TooltipItem> items);
 
 	/**
 	 * Returns text to render as the footer of the tooltip.
@@ -47,7 +47,7 @@ public interface TooltipFooterCallback {
 	 * @param items list of all tooltip items
 	 * @return an array of labels to apply to the footer. If returns <code>null</code>, it will be ignored.
 	 */
-	String[] onFooter(AbstractChart<?, ?> chart, List<TooltipItem> items);
+	String[] onFooter(IsChart chart, List<TooltipItem> items);
 
 	/**
 	 * Text to render after the footer section.
@@ -56,6 +56,6 @@ public interface TooltipFooterCallback {
 	 * @param items list of all tooltip items
 	 * @return an array of labels to apply to the footer. If returns <code>null</code>, it will be ignored.
 	 */
-	String[] onAfterFooter(AbstractChart<?, ?> chart, List<TooltipItem> items);
+	String[] onAfterFooter(IsChart chart, List<TooltipItem> items);
 
 }

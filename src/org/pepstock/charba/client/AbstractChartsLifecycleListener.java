@@ -28,40 +28,40 @@ public abstract class AbstractChartsLifecycleListener implements ChartsLifecycle
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.ChartsLifecycleListener#onBeforeInit(org.pepstock.charba.client.AbstractChart)
+	 * @see org.pepstock.charba.client.ChartsLifecycleListener#onBeforeInit(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void onBeforeInit(AbstractChart<?, ?> chart) {
+	public void onBeforeInit(IsChart chart) {
 		// do nothing
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.ChartsLifecycleListener#onAfterInit(org.pepstock.charba.client.AbstractChart)
+	 * @see org.pepstock.charba.client.ChartsLifecycleListener#onAfterInit(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void onAfterInit(AbstractChart<?, ?> chart) {
+	public void onAfterInit(IsChart chart) {
 		// do nothing
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.ChartsLifecycleListener#onBeforeDestroy(org.pepstock.charba.client.AbstractChart)
+	 * @see org.pepstock.charba.client.ChartsLifecycleListener#onBeforeDestroy(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void onBeforeDestroy(AbstractChart<?, ?> chart) {
+	public void onBeforeDestroy(IsChart chart) {
 		// do nothing
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.ChartsLifecycleListener#onAfterDestroy(org.pepstock.charba.client.AbstractChart)
+	 * @see org.pepstock.charba.client.ChartsLifecycleListener#onAfterDestroy(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void onAfterDestroy(AbstractChart<?, ?> chart) {
+	public void onAfterDestroy(IsChart chart) {
 		// do nothing
 	}
 

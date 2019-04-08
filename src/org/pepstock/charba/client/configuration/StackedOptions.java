@@ -17,8 +17,8 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartOptions;
+import org.pepstock.charba.client.IsChart;
 
 /**
  * Configuration of chart which could be stacked.<br>
@@ -38,7 +38,7 @@ public class StackedOptions extends ConfigurationOptions {
 	 * @param defaultValues defaults options of stacked chart
 	 * @param onlyYScaled <code>true</code> if only Y axis is scaled.
 	 */
-	public StackedOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues, boolean onlyYScaled) {
+	public StackedOptions(IsChart chart, ChartOptions defaultValues, boolean onlyYScaled) {
 		super(chart, defaultValues);
 		// creates scales for stacked chart
 		scales = new StackedScales(chart, getConfiguration());
@@ -57,7 +57,7 @@ public class StackedOptions extends ConfigurationOptions {
 	 * @param chart chart instance
 	 * @param defaultValues defaults options of bar chart
 	 */
-	public StackedOptions(AbstractChart<?, ?> chart, ChartOptions defaultValues) {
+	public StackedOptions(IsChart chart, ChartOptions defaultValues) {
 		this(chart, defaultValues, false);
 	}
 

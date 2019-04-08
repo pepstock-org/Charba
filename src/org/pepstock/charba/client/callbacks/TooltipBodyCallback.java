@@ -17,7 +17,7 @@ package org.pepstock.charba.client.callbacks;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.items.TooltipItem;
 
 /**
@@ -38,7 +38,7 @@ public interface TooltipBodyCallback {
 	 * @param items list of all tooltip items
 	 * @return an array of labels to apply to the body. If returns <code>null</code>, it will be ignored.
 	 */
-	String[] onBeforeBody(AbstractChart<?, ?> chart, List<TooltipItem> items);
+	String[] onBeforeBody(IsChart chart, List<TooltipItem> items);
 
 	/**
 	 * Returns text to render after the body section.
@@ -47,6 +47,6 @@ public interface TooltipBodyCallback {
 	 * @param items list of all tooltips items
 	 * @return an array of labels to apply to the body. If returns <code>null</code>, it will be ignored.
 	 */
-	String[] onAfterBody(AbstractChart<?, ?> chart, List<TooltipItem> items);
+	String[] onAfterBody(IsChart chart, List<TooltipItem> items);
 
 }

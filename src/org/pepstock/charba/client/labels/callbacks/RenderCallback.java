@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.labels.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.labels.LabelsPlugin;
 import org.pepstock.charba.client.labels.RenderItem;
 
@@ -38,6 +38,6 @@ public interface RenderCallback<T> {
 	 * @param item render item, passed by plugin
 	 * @return a string or as image instance to show as label
 	 */
-	T invoke(AbstractChart<?, ?> chart, RenderItem item);
+	T invoke(IsChart chart, RenderItem item);
 
 }

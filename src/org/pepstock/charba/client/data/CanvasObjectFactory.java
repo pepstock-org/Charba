@@ -18,8 +18,8 @@ package org.pepstock.charba.client.data;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartNode;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.GradientColor;
 import org.pepstock.charba.client.colors.GradientOrientation;
@@ -71,7 +71,7 @@ public final class CanvasObjectFactory {
 	 * @param pattern pattern instance created at configuration level
 	 * @return a GWT canvas pattern
 	 */
-	public static CanvasPattern createPattern(AbstractChart<?, ?> chart, Pattern pattern) {
+	public static CanvasPattern createPattern(IsChart chart, Pattern pattern) {
 		final Map<Integer, CanvasPattern> patternsMap;
 		// checks if the pattern is already created
 		if (PATTERNS.containsKey(chart.getId())) {
@@ -109,7 +109,7 @@ public final class CanvasObjectFactory {
 	 * 
 	 * @param chart chart instance on which removes all loaded gradients
 	 */
-	static void resetGradients(AbstractChart<?, ?> chart) {
+	static void resetGradients(IsChart chart) {
 		GRADIENTS.remove(chart.getId());
 	}
 
@@ -118,7 +118,7 @@ public final class CanvasObjectFactory {
 	 * 
 	 * @param chart chart instance on which removes all loaded objects.
 	 */
-	static void clear(AbstractChart<?, ?> chart) {
+	static void clear(IsChart chart) {
 		PATTERNS.remove(chart.getId());
 		GRADIENTS.remove(chart.getId());
 	}
@@ -133,7 +133,7 @@ public final class CanvasObjectFactory {
 	 * @param index index of gradient related to index of dataset item of whole dataset
 	 * @return a GWT canvas gradient
 	 */
-	public static CanvasGradient createGradient(AbstractChart<?, ?> chart, Gradient gradient, int datasetIndex, int index) {
+	public static CanvasGradient createGradient(IsChart chart, Gradient gradient, int datasetIndex, int index) {
 		// checks if the gradient is already created
 		final Map<Integer, CanvasGradient> gradientsMap;
 		// checks if the gradient is already created
@@ -189,7 +189,7 @@ public final class CanvasObjectFactory {
 	 * @param gradient gradient instance created at configuration level
 	 * @return a GWT linear canvas gradient
 	 */
-	private static CanvasGradient createLinearGradient(AbstractChart<?, ?> chart, Gradient gradient) {
+	private static CanvasGradient createLinearGradient(IsChart chart, Gradient gradient) {
 		// gets canvas and context 2d
 		Canvas canvas = chart.getCanvas();
 		Context2d context = canvas.getContext2d();
@@ -298,7 +298,7 @@ public final class CanvasObjectFactory {
 	 * @param index index of gradient related to index of dataset item of whole dataset
 	 * @return a GWT radial canvas gradient
 	 */
-	private static CanvasGradient createRadialGradient(AbstractChart<?, ?> chart, Gradient gradient, int datasetIndex, int index) {
+	private static CanvasGradient createRadialGradient(IsChart chart, Gradient gradient, int datasetIndex, int index) {
 		// gets canvas and context 2d
 		Canvas canvas = chart.getCanvas();
 		Context2d context = canvas.getContext2d();

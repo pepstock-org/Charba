@@ -18,7 +18,7 @@ package org.pepstock.charba.client.impl.callbacks;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.datalabels.DataLabelsPlugin;
 import org.pepstock.charba.client.events.DatasetSelectionEvent;
@@ -80,11 +80,11 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.events.ClickEventHandler#onClick(org.pepstock.charba.client.AbstractChart,
+	 * @see org.pepstock.charba.client.datalabels.events.ClickEventHandler#onClick(org.pepstock.charba.client.IsChart,
 	 * org.pepstock.charba.client.callbacks.ScriptableContext)
 	 */
 	@Override
-	public boolean onClick(AbstractChart<?, ?> chart, ScriptableContext context) {
+	public boolean onClick(IsChart chart, ScriptableContext context) {
 		// checks if there is any selection handler and
 		// chart is initialized
 		if (!dataSelectionHandlers.isEmpty() && chart.isInitialized()) {

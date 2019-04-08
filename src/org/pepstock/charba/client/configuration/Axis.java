@@ -17,9 +17,9 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.Defaults;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.callbacks.AxisBuildTicksCallback;
 import org.pepstock.charba.client.callbacks.AxisCalculateTickRotationCallback;
@@ -175,7 +175,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * 
 	 * @param chart chart instance
 	 */
-	Axis(AbstractChart<?, ?> chart) {
+	Axis(IsChart chart) {
 		super(chart);
 		// sets the options (scale) to map attributes
 		// getting the defaults values for scales

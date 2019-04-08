@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.events;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.items.DatasetItem;
 
 import com.google.gwt.dom.client.NativeEvent;
@@ -35,7 +35,7 @@ public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionE
 	// item with dataset metadata related to the click
 	private final DatasetItem item;
 	// item with dataset metadata related to the click
-	private final AbstractChart<?, ?> chart;
+	private final IsChart chart;
 
 	/**
 	 * Creates the event with dataset metadata item related to the click
@@ -57,7 +57,7 @@ public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionE
 	 * @param chart chart instance
 	 * @param item dataset metadata item related to the click
 	 */
-	public DatasetSelectionEvent(NativeEvent nativeEvent, AbstractChart<?, ?> chart, DatasetItem item) {
+	public DatasetSelectionEvent(NativeEvent nativeEvent, IsChart chart, DatasetItem item) {
 		super(nativeEvent);
 		this.item = item;
 		this.chart = chart;
@@ -78,7 +78,7 @@ public final class DatasetSelectionEvent extends AbstractEvent<DatasetSelectionE
 	 * @see org.pepstock.charba.client.events.AbstractEvent#getChart()
 	 */
 	@Override
-	public AbstractChart<?, ?> getChart() {
+	public IsChart getChart() {
 		// override the method
 		// if chart has passed as argument of constructor
 		if (chart != null) {

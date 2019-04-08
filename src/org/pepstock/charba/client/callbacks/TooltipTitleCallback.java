@@ -17,7 +17,7 @@ package org.pepstock.charba.client.callbacks;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.items.TooltipItem;
 
 /**
@@ -38,7 +38,7 @@ public interface TooltipTitleCallback {
 	 * @param items list of all tooltip items
 	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored.
 	 */
-	String[] onBeforeTitle(AbstractChart<?, ?> chart, List<TooltipItem> items);
+	String[] onBeforeTitle(IsChart chart, List<TooltipItem> items);
 
 	/**
 	 * Returns text to render as the title of the tooltip.
@@ -47,7 +47,7 @@ public interface TooltipTitleCallback {
 	 * @param items list of all tooltip items
 	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored.
 	 */
-	String[] onTitle(AbstractChart<?, ?> chart, List<TooltipItem> items);
+	String[] onTitle(IsChart chart, List<TooltipItem> items);
 
 	/**
 	 * Returns text to render after the title.
@@ -56,6 +56,6 @@ public interface TooltipTitleCallback {
 	 * @param items list of all tooltip items
 	 * @return an array of labels to apply to the title. If returns <code>null</code>, it will be ignored.
 	 */
-	String[] onAfterTitle(AbstractChart<?, ?> chart, List<TooltipItem> items);
+	String[] onAfterTitle(IsChart chart, List<TooltipItem> items);
 
 }

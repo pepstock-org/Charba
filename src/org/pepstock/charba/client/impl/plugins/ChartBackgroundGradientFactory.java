@@ -18,7 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.GradientColor;
 import org.pepstock.charba.client.colors.GradientOrientation;
@@ -56,7 +56,7 @@ final class ChartBackgroundGradientFactory {
 	 * 
 	 * @param chart chart instance on which removes all loaded gradients
 	 */
-	static void resetGradients(AbstractChart<?, ?> chart) {
+	static void resetGradients(IsChart chart) {
 		GRADIENTS.remove(chart.getId());
 	}
 
@@ -65,7 +65,7 @@ final class ChartBackgroundGradientFactory {
 	 * 
 	 * @param chart chart instance on which removes all loaded objects.
 	 */
-	static void clear(AbstractChart<?, ?> chart) {
+	static void clear(IsChart chart) {
 		GRADIENTS.remove(chart.getId());
 	}
 
@@ -77,7 +77,7 @@ final class ChartBackgroundGradientFactory {
 	 * @param gradient gradient instance created at configuration level
 	 * @return a GWT canvas gradient
 	 */
-	static CanvasGradient createGradient(AbstractChart<?, ?> chart, Gradient gradient) {
+	static CanvasGradient createGradient(IsChart chart, Gradient gradient) {
 		// checks if the gradient is already created
 		final Map<Integer, CanvasGradient> gradientsMap;
 		// checks if the gradient is already created
@@ -133,7 +133,7 @@ final class ChartBackgroundGradientFactory {
 	 * @param gradient gradient instance created at configuration level
 	 * @return a GWT linear canvas gradient
 	 */
-	private static CanvasGradient createLinearGradient(AbstractChart<?, ?> chart, Gradient gradient) {
+	private static CanvasGradient createLinearGradient(IsChart chart, Gradient gradient) {
 		// gets canvas and context 2d
 		Canvas canvas = chart.getCanvas();
 		Context2d context = canvas.getContext2d();
@@ -225,7 +225,7 @@ final class ChartBackgroundGradientFactory {
 	 * @param gradient gradient instance created at configuration level
 	 * @return a GWT radial canvas gradient
 	 */
-	private static CanvasGradient createRadialGradient(AbstractChart<?, ?> chart, Gradient gradient) {
+	private static CanvasGradient createRadialGradient(IsChart chart, Gradient gradient) {
 		// gets canvas and context 2d
 		Canvas canvas = chart.getCanvas();
 		Context2d context = canvas.getContext2d();

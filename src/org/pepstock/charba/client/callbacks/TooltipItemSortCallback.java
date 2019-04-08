@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.items.TooltipItem;
 
 /**
@@ -34,6 +34,6 @@ public interface TooltipItemSortCallback {
 	 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the
 	 *         second.
 	 */
-	int onItemSort(AbstractChart<?, ?> chart, TooltipItem item1, TooltipItem item2);
+	int onItemSort(IsChart chart, TooltipItem item1, TooltipItem item2);
 
 }

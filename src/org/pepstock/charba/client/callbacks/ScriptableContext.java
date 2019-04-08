@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.NativeExtendedObject;
 import org.pepstock.charba.client.commons.NativeName;
@@ -116,7 +116,7 @@ public final class ScriptableContext extends NativeExtendedObject {
 	 * @return the CHARBA chart instance
 	 */
 	@JsOverlay
-	AbstractChart<?, ?> getChart() {
+	IsChart getChart() {
 		return getNativeChart().getChart();
 	}
 

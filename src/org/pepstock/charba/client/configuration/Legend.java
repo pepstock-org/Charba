@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -122,7 +122,7 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	 * @param chart chart instance
 	 * @param options root options element.
 	 */
-	Legend(AbstractChart<?, ?> chart, ExtendedOptions options) {
+	Legend(IsChart chart, ExtendedOptions options) {
 		super(chart, options);
 		// creates sub element
 		labels = new LegendLabels(chart, options);

@@ -17,7 +17,7 @@ package org.pepstock.charba.client.labels;
 
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayImage;
@@ -260,7 +260,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 			@Override
 			public Object call(Object context, RenderItem item) {
 				// gets chart instance
-				AbstractChart<?, ?> chart = item.getNativeChart().getChart();
+				IsChart chart = item.getNativeChart().getChart();
 				// checks if the callback is set
 				if (chart != null && renderCallback != null) {
 					// calls callback
@@ -290,7 +290,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 			@Override
 			public String call(Object context, FontColorItem item) {
 				// gets chart instance
-				AbstractChart<?, ?> chart = item.getNativeChart().getChart();
+				IsChart chart = item.getNativeChart().getChart();
 				// checks if the callback is set
 				if (chart != null && fontColorCallback != null) {
 					// calls callback

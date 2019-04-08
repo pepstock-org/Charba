@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.TooltipCustomCallback;
 import org.pepstock.charba.client.callbacks.TooltipFilterCallback;
 import org.pepstock.charba.client.callbacks.TooltipItemSortCallback;
@@ -168,7 +168,7 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	 * @param chart chart instance
 	 * @param options root options element.
 	 */
-	Tooltips(AbstractChart<?, ?> chart, ExtendedOptions options) {
+	Tooltips(IsChart chart, ExtendedOptions options) {
 		super(chart, options);
 		// sets callbacks sub element
 		callbacks = new TooltipsCallbacks(chart, options);

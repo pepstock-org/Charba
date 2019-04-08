@@ -15,8 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.LegendFilterCallback;
 import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
 import org.pepstock.charba.client.colors.IsColor;
@@ -140,7 +140,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 	 * @param chart chart instance
 	 * @param options root options element.
 	 */
-	LegendLabels(AbstractChart<?, ?> chart, ExtendedOptions options) {
+	LegendLabels(IsChart chart, ExtendedOptions options) {
 		super(chart, options);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---

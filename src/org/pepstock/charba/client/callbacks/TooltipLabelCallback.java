@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipLabelColor;
@@ -37,7 +37,7 @@ public interface TooltipLabelCallback {
 	 * @param item tooltip item
 	 * @return label to be applied. If returns <code>null</code>, it will be ignored.
 	 */
-	String onBeforeLabel(AbstractChart<?, ?> chart, TooltipItem item);
+	String onBeforeLabel(IsChart chart, TooltipItem item);
 
 	/**
 	 * Returns text to render for an individual item in the tooltip.
@@ -46,7 +46,7 @@ public interface TooltipLabelCallback {
 	 * @param item tooltip item
 	 * @return label to be applied. If returns <code>null</code>, it will be ignored.
 	 */
-	String onLabel(AbstractChart<?, ?> chart, TooltipItem item);
+	String onLabel(IsChart chart, TooltipItem item);
 
 	/**
 	 * Returns the colors to render for the tooltip item.
@@ -55,7 +55,7 @@ public interface TooltipLabelCallback {
 	 * @param item tooltip item
 	 * @return label color to be applied. If returns <code>null</code>, it will be ignored.
 	 */
-	TooltipLabelColor onLabelColor(AbstractChart<?, ?> chart, TooltipItem item);
+	TooltipLabelColor onLabelColor(IsChart chart, TooltipItem item);
 
 	/**
 	 * Returns the colors for the text of the label for the tooltip item.
@@ -64,7 +64,7 @@ public interface TooltipLabelCallback {
 	 * @param item tooltip item
 	 * @return label text color to be applied. If returns <code>null</code>, it will be ignored.
 	 */
-	IsColor onLabelTextColor(AbstractChart<?, ?> chart, TooltipItem item);
+	IsColor onLabelTextColor(IsChart chart, TooltipItem item);
 
 	/**
 	 * Returns text to render after an individual label.
@@ -73,6 +73,6 @@ public interface TooltipLabelCallback {
 	 * @param item tooltip item
 	 * @return label to be applied. If returns <code>null</code>, it will be ignored.
 	 */
-	String onAfterLabel(AbstractChart<?, ?> chart, TooltipItem item);
+	String onAfterLabel(IsChart chart, TooltipItem item);
 
 }

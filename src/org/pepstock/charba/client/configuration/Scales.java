@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.options.ExtendedOptions;
 import org.pepstock.charba.client.options.Scale;
 
@@ -41,7 +41,7 @@ public class Scales extends ConfigurationContainer<ExtendedOptions> {
 	 * @param chart chart instance
 	 * @param options root options element.
 	 */
-	Scales(AbstractChart<?, ?> chart, ExtendedOptions options) {
+	Scales(IsChart chart, ExtendedOptions options) {
 		super(chart, options);
 	}
 

@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 
 /**
  * Filters items out of the item container. Receives 2 parameters, an item and the chart.
@@ -32,6 +32,6 @@ interface FilterCallback<T> {
 	 * @param item item to be filtered
 	 * @return <code>false</code> to remove the item from the container, otherwise <code>true</code>.
 	 */
-	boolean onFilter(AbstractChart<?, ?> chart, T item);
+	boolean onFilter(IsChart chart, T item);
 
 }

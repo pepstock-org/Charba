@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.labels.callbacks;
 
-import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.labels.FontColorItem;
 import org.pepstock.charba.client.labels.LabelsPlugin;
@@ -38,6 +38,6 @@ public interface FontColorCallback<T> {
 	 * @return a string which represent a color or a color instace. If returns <code>null</code>, it will use the default font
 	 *         color.
 	 */
-	T invoke(AbstractChart<?, ?> chart, FontColorItem item);
+	T invoke(IsChart chart, FontColorItem item);
 
 }

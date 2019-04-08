@@ -374,7 +374,7 @@ public final class Chart {
 	 * @return the CHARBA chart
 	 */
 	@JsOverlay
-	public AbstractChart<?, ?> getChart() {
+	public IsChart getChart() {
 		// gets charba id
 		String charbaId = getCharbaId();
 		// checks if not null
