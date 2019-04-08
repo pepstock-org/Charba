@@ -27,7 +27,14 @@ import jsinterop.annotations.JsType;
  * @author Andrea "Stock" Stocchero
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.WINDOW)
-public class Window {
+public final class Window {
+	
+	/**
+	 * To avoid any instantiation
+	 */
+	private Window() {
+		// do nothing
+	}
 
 	/**
 	 * Returns the Console object
