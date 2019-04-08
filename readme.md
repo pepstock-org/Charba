@@ -97,7 +97,7 @@ Going to new version
 
 Here you can find the list of enhancement and updates available on `master` branch before which will be part of new official release:
 
-## Features
+### Features
 
  * implement new `Colorschemes` out-of-the-box plugin to enable to pick the color combination for charts from the predefined or custom color schemes.
  * implement `TitleClickHandler` to catch click events on title of charts
@@ -110,7 +110,7 @@ Here you can find the list of enhancement and updates available on `master` bran
  * add `CharacterShape` for tiles in order to draw a char into a tile, as pattern 
  * integration with [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) 
   
-## Development
+### Development
 
  * fix issue about `ChartPointer` setting cursor
  * getType of dataset returns `null` is not set
@@ -126,7 +126,7 @@ Here you can find the list of enhancement and updates available on `master` bran
  * change key for tile caching to enable also for image and character shape drawers
  * transform and rotate of 180 degrees `Star` and `EmptyStar` shapes
 
-## Fixed Sonar Issue
+### Fixed Sonar Issue
  * squid:S00115 - Constant names should comply with a naming convention
    * change all enumeration name to uppercase
  * javascript:S3403 - Strict equality operators should not be used with dissimilar types
