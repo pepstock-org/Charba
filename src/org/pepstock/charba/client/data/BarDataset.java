@@ -29,6 +29,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.BorderSkipped;
 import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.options.Scales;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * The bar chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
@@ -40,7 +41,7 @@ import org.pepstock.charba.client.options.Scales;
  */
 public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	// default label
-	private static final String DEFAULT_LABEL = "";
+	private static final String DEFAULT_LABEL = Utilities.EMPTY_STRING;
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---

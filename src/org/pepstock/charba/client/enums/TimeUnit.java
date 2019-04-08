@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.enums;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * Controls the data distribution along the scale.<br>
@@ -65,7 +66,7 @@ public enum TimeUnit implements Key
 	/**
 	 * Unknown
 	 */
-	UNKNOWN("unknown", "");
+	UNKNOWN("unknown", Utilities.EMPTY_STRING);
 
 	// name value of property
 	private final String value;

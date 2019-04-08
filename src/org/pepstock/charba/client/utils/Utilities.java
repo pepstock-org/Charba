@@ -32,7 +32,11 @@ import com.google.gwt.user.client.ui.Image;
  *
  */
 public final class Utilities {
-
+	
+	/**
+	 * Constant for EMPTY string
+	 */
+	public static final String EMPTY_STRING = "";
 	// string format of font CSS style
 	private static final String FONT_TEMPLATE = "{0} {1}px {2}";
 	// string format of font style

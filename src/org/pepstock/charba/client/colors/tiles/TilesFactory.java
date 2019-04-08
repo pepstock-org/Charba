@@ -21,11 +21,13 @@ import java.util.Map;
 
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
 import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.regexp.shared.RegExp;
 
 /**
  * Builds tiles creating a CHARBA pattern or canvas pattern passing all needed arguments and leveraging on tiles factory defaults.
@@ -41,6 +43,11 @@ public final class TilesFactory {
 	private static final Map<String, CanvasPattern> CANVAS_PATTERNS = new HashMap<>();
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
+	// string format to trim blanks
+	private static final String REGEX_FORMAT_TRIM_SPACES = "\\s+";
+	// regex instance to trim blanks
+	private static final RegExp REGEX_TRIM_SPACES = RegExp.compile(REGEX_FORMAT_TRIM_SPACES);
+
 	// gets if Canvas is supported
 	private final boolean isCanvasSupported = Canvas.isSupported();
 	// canvas where draws the pattern
@@ -177,7 +184,7 @@ public final class TilesFactory {
 		// if all further requests for the same canvas pattern, returns the cached one
 		StringBuilder keyBuilder = new StringBuilder(shapeParam.getKeyPrefix());
 		keyBuilder.append(backgroundColorParam).append(shapeColorParam).append(sizeParam);
-		String key = keyBuilder.toString().replaceAll("\\s+", "").toLowerCase(Locale.getDefault());
+		String key = REGEX_TRIM_SPACES.replace(keyBuilder.toString(), Utilities.EMPTY_STRING).toLowerCase(Locale.getDefault());
 		// checks if the canvas pattern is already created with those parameters
 		if (CANVAS_PATTERNS.containsKey(key)) {
 			// if yes returns the cached one

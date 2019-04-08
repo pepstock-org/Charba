@@ -71,7 +71,7 @@ import com.google.gwt.user.client.ui.Image;
  */
 public abstract class LiningDataset extends Dataset {
 	// default label
-	private static final String DEFAULT_LABEL = "";
+	private static final String DEFAULT_LABEL = Utilities.EMPTY_STRING;
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---

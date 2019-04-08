@@ -33,6 +33,7 @@ import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipItem.TooltipItemFactory;
 import org.pepstock.charba.client.items.TooltipLabelColor;
 import org.pepstock.charba.client.options.ExtendedOptions;
+import org.pepstock.charba.client.utils.Utilities;
 
 import jsinterop.annotations.JsFunction;
 
@@ -44,8 +45,6 @@ import jsinterop.annotations.JsFunction;
  */
 public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 
-	// empty string
-	private static final String EMPTY = "";
 	// empty array string
 	private static final String[] EMPTY_ARRAY = new String[0];
 	// default label color
@@ -286,10 +285,10 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 				// invokes callback
 				String result = labelCallback.onBeforeLabel(getChart(), new TooltipItem(item));
 				// checks if result is consistent
-				return result != null ? result : EMPTY;
+				return result != null ? result : Utilities.EMPTY_STRING;
 			}
 			// default result
-			return EMPTY;
+			return Utilities.EMPTY_STRING;
 		});
 		labelCallbackProxy.setCallback((context, item) -> {
 			// checks if callback is consistent
@@ -297,10 +296,10 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 				// invokes callback
 				String result = labelCallback.onLabel(getChart(), new TooltipItem(item));
 				// checks if result is consistent
-				return result != null ? result : EMPTY;
+				return result != null ? result : Utilities.EMPTY_STRING;
 			}
 			// default result
-			return EMPTY;
+			return Utilities.EMPTY_STRING;
 		});
 		labelColorCallbackProxy.setCallback((context, item) -> {
 			// checks if callback is consistent
@@ -330,10 +329,10 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 				// invokes callback
 				String result = labelCallback.onAfterLabel(getChart(), new TooltipItem(item));
 				// checks if result is consistent
-				return result != null ? result : EMPTY;
+				return result != null ? result : Utilities.EMPTY_STRING;
 			}
 			// default result
-			return EMPTY;
+			return Utilities.EMPTY_STRING;
 		});
 		beforeFooterCallbackProxy.setCallback((context, items) -> {
 			// checks if callback is consistent

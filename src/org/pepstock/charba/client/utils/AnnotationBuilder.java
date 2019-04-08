@@ -23,6 +23,7 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.dom.client.Node;
+import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.xml.client.XMLParser;
 
 /**
@@ -65,6 +66,13 @@ public final class AnnotationBuilder {
 	private static final String WIDTH_ARGUMENT_TOKEN = "\\{1\\}";
 	// token inside the template to use to replace the height of resulted image
 	private static final String HEIGHT_ARGUMENT_TOKEN = "\\{2\\}";
+	// regex instance for content
+	private static final RegExp REGEX_CONTENT = RegExp.compile(CONTENT_ARGUMENT_TOKEN);
+	// regex instance for width
+	private static final RegExp REGEX_WIDTH = RegExp.compile(WIDTH_ARGUMENT_TOKEN);
+	// regex instance for height
+	private static final RegExp REGEX_HEIGHT = RegExp.compile(HEIGHT_ARGUMENT_TOKEN);
+
 
 	/**
 	 * To avoid any instantiation
@@ -194,11 +202,11 @@ public final class AnnotationBuilder {
 		// copies the template string
 		String result = TEMPLATE_IMAGE_URL;
 		// replaces the html content into the template
-		result = result.replaceAll(CONTENT_ARGUMENT_TOKEN, validatedhtmlXmlContent);
+		result = REGEX_CONTENT.replace(result, validatedhtmlXmlContent);
 		// replaces the width into the template
-		result = result.replaceAll(WIDTH_ARGUMENT_TOKEN, String.valueOf(width));
+		result = REGEX_WIDTH.replace(result, String.valueOf(width));
 		// replaces the height into the template
-		result = result.replaceAll(HEIGHT_ARGUMENT_TOKEN, String.valueOf(height));
+		result = REGEX_HEIGHT.replace(result, String.valueOf(height));
 		// transforms it into an element
 		ImageElement element = Utilities.toImageElement(result);
 		// stores into cache

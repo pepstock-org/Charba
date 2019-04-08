@@ -24,7 +24,7 @@ package org.pepstock.charba.client.utils;
 final class JSONReplacerConstants {
 
 	// used into JSON stringfy replacer when the object is already passed
-	static final String CYCLE_PROPERTY_VALUE = "";
+	static final String CYCLE_PROPERTY_VALUE = Utilities.EMPTY_STRING;
 	// used into JSON stringfy replacer when the key of object is the hashcode
 	static final String HASHCODE_PROPERTY_KEY = "$H";
 	// used into JSON stringfy replacer when the key of object is CHART.JS internal

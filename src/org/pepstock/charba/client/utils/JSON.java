@@ -150,7 +150,7 @@ public final class JSON {
 					// if function
 					if (ObjectType.FUNCTION.equals(type)) {
 						// returns the value of function
-						return value + "";
+						return value + Utilities.EMPTY_STRING;
 					}
 					// if object
 					if (ObjectType.OBJECT.equals(type)) {
@@ -237,7 +237,7 @@ public final class JSON {
 						// if function
 						if (ObjectType.FUNCTION.equals(type)) {
 							// returns the value of function
-							return value + "";
+							return value + Utilities.EMPTY_STRING;
 						}
 						// if object
 						if (ObjectType.OBJECT.equals(type)) {

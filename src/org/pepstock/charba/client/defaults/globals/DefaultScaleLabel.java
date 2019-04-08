@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
+import org.pepstock.charba.client.utils.Utilities;
 
 /**
  * CHART.JS default values for SCALELABEL element.
@@ -27,7 +28,7 @@ public final class DefaultScaleLabel extends AbstractDefaultFontItem implements 
 
 	private static final boolean DEFAULT_DISPLAY = false;
 
-	private static final String DEFAULT_LABEL_STRING = "";
+	private static final String DEFAULT_LABEL_STRING = Utilities.EMPTY_STRING;
 
 	private static final double DEFAULT_LINE_HEIGHT = 1.2D;
 
