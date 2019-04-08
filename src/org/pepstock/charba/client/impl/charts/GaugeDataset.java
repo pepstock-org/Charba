@@ -48,19 +48,7 @@ public final class GaugeDataset extends MeterDataset {
 	/**
 	 * Comparator to sort the thresholds using the thresholds value, always ASCENDING
 	 */
-	private static final Comparator<Threshold> COMPARATOR = new Comparator<Threshold>() {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
-		 */
-		@Override
-		public int compare(Threshold o1, Threshold o2) {
-			// ascending order
-			return (int) (o1.getValue() - o2.getValue());
-		}
-	};
+	private static final Comparator<Threshold> COMPARATOR = (Threshold o1, Threshold o2) -> (int) (o1.getValue() - o2.getValue());
 
 	/**
 	 * Creates a dataset for gauge with maximum value of data. It uses the global options has default.

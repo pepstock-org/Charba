@@ -128,67 +128,58 @@ public final class JSON {
 		// creates a cached to checks if an object was already parsed
 		final Set<Object> objects = new HashSet<>();
 		// invokes JSON stringfy setting replacer to avoid cycle type error
-		return stringifyWithReplacer(obj, new Replacer() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.utils.JSON.Replacer#call(java.lang.String, java.lang.Object)
-			 */
-			@Override
-			public Object call(String key, Object value) {
-				// if key is null of empty
-				// means that is first object then skip
-				if (key != null && key.trim().length() > 0) {
-					// checks if hashcode
-					if (key.equalsIgnoreCase(JSONReplacerConstants.HASHCODE_PROPERTY_KEY)) {
-						// skips it
-						return JsHelper.get().undefined();
-					}
-					// gets the type of object
-					ObjectType type = JsHelper.get().typeOf(value);
-					// if function
-					if (ObjectType.FUNCTION.equals(type)) {
-						// returns the value of function
-						return value + Utilities.EMPTY_STRING;
-					}
-					// if object
-					if (ObjectType.OBJECT.equals(type)) {
-						// checks if is an element
-						if (value instanceof Element) {
-							// casts to element
-							Element element = (Element) value;
-							// checks if is an element node
-							if (element.getNodeType() == Node.ELEMENT_NODE) {
-								StringBuilder sb = new StringBuilder();
-								sb.append("<").append(element.getNodeName().toLowerCase(Locale.getDefault()));
-								List<String> attributes = JsHelper.get().elementAttributes(element);
-								if (!attributes.isEmpty()) {
-									for (String attribute : attributes) {
-										sb.append(" ").append(attribute);
-									}
+		return stringifyWithReplacer(obj, (key, value) -> {
+			// if key is null of empty
+			// means that is first object then skip
+			if (key != null && key.trim().length() > 0) {
+				// checks if hashcode
+				if (key.equalsIgnoreCase(JSONReplacerConstants.HASHCODE_PROPERTY_KEY)) {
+					// skips it
+					return JsHelper.get().undefined();
+				}
+				// gets the type of object
+				ObjectType type = JsHelper.get().typeOf(value);
+				// if function
+				if (ObjectType.FUNCTION.equals(type)) {
+					// returns the value of function
+					return value + Utilities.EMPTY_STRING;
+				}
+				// if object
+				if (ObjectType.OBJECT.equals(type)) {
+					// checks if is an element
+					if (value instanceof Element) {
+						// casts to element
+						Element element = (Element) value;
+						// checks if is an element node
+						if (element.getNodeType() == Node.ELEMENT_NODE) {
+							StringBuilder sb = new StringBuilder();
+							sb.append("<").append(element.getNodeName().toLowerCase(Locale.getDefault()));
+							List<String> attributes = JsHelper.get().elementAttributes(element);
+							if (!attributes.isEmpty()) {
+								for (String attribute : attributes) {
+									sb.append(" ").append(attribute);
 								}
-								// returns html
-								return sb.append(">").toString();
 							}
+							// returns html
+							return sb.append(">").toString();
 						}
-						// checks if the object has been already parsed
-						if (objects.contains(value)) {
-							// sets the static vale
-							// to avoid cycle
-							return JSONReplacerConstants.CYCLE_PROPERTY_VALUE;
-						}
-						// adds object to cache
-						objects.add(value);
 					}
-				} else {
-					// here is the first object
-					// adds to set to further controls
+					// checks if the object has been already parsed
+					if (objects.contains(value)) {
+						// sets the static vale
+						// to avoid cycle
+						return JSONReplacerConstants.CYCLE_PROPERTY_VALUE;
+					}
+					// adds object to cache
 					objects.add(value);
 				}
-				// returns object
-				return value;
+			} else {
+				// here is the first object
+				// adds to set to further controls
+				objects.add(value);
 			}
+			// returns object
+			return value;
 		}, spaces);
 	}
 
@@ -218,63 +209,54 @@ public final class JSON {
 	@JsOverlay
 	public static String stringifyNativeObject(NativeObject obj, int spaces) {
 		// invokes JSON stringfy setting replacer to get only keys passed
-		return stringifyWithReplacer(obj, new Replacer() {
-
-			/*
-			 * (non-Javadoc)
-			 * 
-			 * @see org.pepstock.charba.client.utils.JSON.Replacer#call(java.lang.String, java.lang.Object)
-			 */
-			@Override
-			public Object call(String key, Object value) {
-				// if key is null of empty
-				// means that is first object
-				if (key != null && key.trim().length() > 0) {
-					// checks is not a HCART.JS internal property
-					if (!key.startsWith(JSONReplacerConstants.INTERNAL_PROPERTY_KEY_PREFIX)) {
-						// gets the type of object
-						ObjectType type = JsHelper.get().typeOf(value);
-						// if function
-						if (ObjectType.FUNCTION.equals(type)) {
-							// returns the value of function
-							return value + Utilities.EMPTY_STRING;
-						}
-						// if object
-						if (ObjectType.OBJECT.equals(type)) {
-							// checks if is an element
-							if (value instanceof Element) {
-								// casts to element
-								Element element = (Element) value;
-								// checks if is an element node
-								if (element.getNodeType() == Node.ELEMENT_NODE) {
-									StringBuilder sb = new StringBuilder();
-									sb.append("<").append(element.getNodeName().toLowerCase(Locale.getDefault()));
-									List<String> attributes = JsHelper.get().elementAttributes(element);
-									if (!attributes.isEmpty()) {
-										for (String attribute : attributes) {
-											sb.append(" ").append(attribute);
-										}
+		return stringifyWithReplacer(obj, (key, value) -> {
+			// if key is null of empty
+			// means that is first object
+			if (key != null && key.trim().length() > 0) {
+				// checks is not a HCART.JS internal property
+				if (!key.startsWith(JSONReplacerConstants.INTERNAL_PROPERTY_KEY_PREFIX)) {
+					// gets the type of object
+					ObjectType type = JsHelper.get().typeOf(value);
+					// if function
+					if (ObjectType.FUNCTION.equals(type)) {
+						// returns the value of function
+						return value + Utilities.EMPTY_STRING;
+					}
+					// if object
+					if (ObjectType.OBJECT.equals(type)) {
+						// checks if is an element
+						if (value instanceof Element) {
+							// casts to element
+							Element element = (Element) value;
+							// checks if is an element node
+							if (element.getNodeType() == Node.ELEMENT_NODE) {
+								StringBuilder sb = new StringBuilder();
+								sb.append("<").append(element.getNodeName().toLowerCase(Locale.getDefault()));
+								List<String> attributes = JsHelper.get().elementAttributes(element);
+								if (!attributes.isEmpty()) {
+									for (String attribute : attributes) {
+										sb.append(" ").append(attribute);
 									}
-									// returns html
-									return sb.append(">").toString();
 								}
+								// returns html
+								return sb.append(">").toString();
 							}
 						}
-						// returns value
-						return value;
 					}
-					// checks if is a Charba property
-					if (key.startsWith(JSONReplacerConstants.CHARBA_PROPERTY_KEY_PREFIX)) {
-						// returns value
-						return value;
-					} else {
-						// skip it
-						return JsHelper.get().undefined();
-					}
+					// returns value
+					return value;
 				}
-				// returns object
-				return value;
+				// checks if is a Charba property
+				if (key.startsWith(JSONReplacerConstants.CHARBA_PROPERTY_KEY_PREFIX)) {
+					// returns value
+					return value;
+				} else {
+					// skip it
+					return JsHelper.get().undefined();
+				}
 			}
+			// returns object
+			return value;
 		}, spaces);
 	}
 
