@@ -146,14 +146,6 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	}
 
 	/**
-	 * Returns the options of chart.
-	 * 
-	 * @return the options of chart.
-	 */
-	@Override
-	public abstract O getOptions();
-
-	/**
 	 * Creates a new dataset related to chart type.
 	 * 
 	 * @return a new dataset related to chart type.
@@ -554,12 +546,11 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 	public DatasetMetaItem getDatasetAtEvent(ChartNativeEvent event) {
 		// checks consistency of chart and event
 		if (chart != null && event != null) {
-			// gets dataset
-			DatasetMetaItem array = new DatasetMetaItem(chart.getDatasetAtEvent(event));
+			// gets dataset and
 			// returns the array
-			return array;
+			return new DatasetMetaItem(chart.getDatasetAtEvent(event));
 		}
-		// returns null;
+		// if here, chart or event not valid than returns null
 		return null;
 	}
 
@@ -634,7 +625,7 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			// returns the array
 			return ArrayListHelper.unmodifiableList(array, datasetItemFactory);
 		}
-		// returns empty list;
+		// if here, chart and event npot consistent then returns an empty list
 		return Collections.emptyList();
 	}
 
@@ -649,13 +640,13 @@ public abstract class AbstractChart<O extends ConfigurationOptions, D extends Da
 			Defaults.get().getPlugins().onChartConfigure(configuration, this);
 			plugins.onChartConfigure(configuration, this);
 			// gets options
-			ConfigurationOptions options = getOptions();
+			ConfigurationOptions internalOptions = getOptions();
 			// gets data
-			Data data = getData();
+			Data internalData = getData();
 			// sets all items to configuration item
 			configuration.setType(getType());
-			configuration.setOptions(this, options);
-			configuration.setData(this, data);
+			configuration.setOptions(this, internalOptions);
+			configuration.setData(this, internalData);
 			// sets plugins
 			configuration.setPlugins(this, plugins);
 			// destroy chart if chart is already instantiated

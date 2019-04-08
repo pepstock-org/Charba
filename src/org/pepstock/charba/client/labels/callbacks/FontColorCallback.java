@@ -25,7 +25,6 @@ import org.pepstock.charba.client.labels.LabelsPlugin;
  * 
  * @author Andrea "Stock" Stocchero
  *
- * @param <T> type of result of callback. Could a {@link String} or {@link IsColor}
  * @see IsColor
  */
 public interface FontColorCallback {

@@ -32,8 +32,14 @@ import com.google.gwt.user.client.ui.Image;
  */
 public final class Utilities {
 
-	// string format of font style
+	// string format of font CSS style
 	private static final String FONT_TEMPLATE = "{0} {1}px {2}";
+	// string format of font style
+	private static final String REGEX_FORMAT_FONT_STYLE = "\\{0\\}";
+	// string format of font size
+	private static final String REGEX_FORMAT_FONT_SIZE = "\\{1\\}";
+	// string format of font family
+	private static final String REGEX_FORMAT_FONT_FAMILY = "\\{2\\}";
 
 	/**
 	 * To avoid any instantiation
@@ -55,7 +61,7 @@ public final class Utilities {
 		// gets template
 		final String result = FONT_TEMPLATE;
 		// formats
-		return result.replaceAll("\\{0\\}", style.value()).replaceAll("\\{1\\}", String.valueOf(fontSize)).replaceAll("\\{2\\}", fontFamily);
+		return result.replaceAll(REGEX_FORMAT_FONT_STYLE, style.value()).replaceAll(REGEX_FORMAT_FONT_SIZE, String.valueOf(fontSize)).replaceAll(REGEX_FORMAT_FONT_FAMILY, fontFamily);
 	}
 
 	/**

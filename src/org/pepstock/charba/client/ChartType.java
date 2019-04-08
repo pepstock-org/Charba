@@ -112,24 +112,4 @@ public enum ChartType implements Type
 		return value;
 	}
 
-	// /**
-	// * Gets the chart type by a string.
-	// *
-	// * @param value string value to search
-	// * @return the chart type instance which matches with the string otherwise <code>null</code>.
-	// */
-	// public static Type get(String value) {
-	// // checks if the value is consistent
-	// if (value != null) {
-	// // scans all chart types
-	// for (Type type : values()) {
-	// // checks the name of chart type
-	// if (type.value().equals(value)) {
-	// return type;
-	// }
-	// }
-	// }
-	// // is null if not found
-	// return null;
-	// }
 }

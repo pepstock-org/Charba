@@ -15,54 +15,20 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.defaults.IsDefaultPadding;
-
 /**
  * CHART.JS default values for PADDING element for scale.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultScaleLabelPadding implements IsDefaultPadding {
+public final class DefaultScaleLabelPadding extends AbstractDefaultPadding {
 
 	private static final int DEFAULT_PADDING = 4;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.layout.padding.IsDefaultPadding#getLeft()
+	/**
+	 * Creates a default PADDING element for scale.
 	 */
-	@Override
-	public int getLeft() {
-		return DEFAULT_PADDING;
+	public DefaultScaleLabelPadding() {
+		super(DEFAULT_PADDING);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.layout.padding.IsDefaultPadding#getRight()
-	 */
-	@Override
-	public int getRight() {
-		return DEFAULT_PADDING;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.layout.padding.IsDefaultPadding#getTop()
-	 */
-	@Override
-	public int getTop() {
-		return DEFAULT_PADDING;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.layout.padding.IsDefaultPadding#getBottom()
-	 */
-	@Override
-	public int getBottom() {
-		return DEFAULT_PADDING;
-	}
 }

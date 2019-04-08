@@ -26,8 +26,6 @@ import com.google.gwt.user.client.ui.Image;
  * 
  * @author Andrea "Stock" Stocchero
  *
- * @param <T> type of result of callback. Could be a {@link PointStyle}, {@link Image}, {@link ImageResource} or
- *            {@link ImageElement}
  * @see PointStyle
  * @see Image
  * @see ImageResource

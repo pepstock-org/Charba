@@ -26,7 +26,6 @@ import com.google.gwt.dom.client.ImageElement;
  * 
  * @author Andrea "Stock" Stocchero
  * 
- * @param <T> type of result of callback. Could a {@link String} or {@link ImageElement}
  * @see ImageElement
  */
 public interface RenderCallback {

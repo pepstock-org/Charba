@@ -31,7 +31,7 @@ public final class Charts {
 	// buffer with all charts instances
 	// K = CHART id (CHARBA ID)
 	// V = chart instance
-	private static final Map<String, IsChart> CHARTS = new HashMap<>();
+	private static final Map<String, IsChart> CHARTS_INSTANCES = new HashMap<>();
 	// list with all charts life cycle listeners
 	private static final List<ChartsLifecycleListener> LISTENERS = new LinkedList<>();
 
@@ -66,7 +66,7 @@ public final class Charts {
 	 */
 	static void add(IsChart chart) {
 		// putting getting the chart
-		IsChart prevChart = CHARTS.put(chart.getId(), chart);
+		IsChart prevChart = CHARTS_INSTANCES.put(chart.getId(), chart);
 		// if previous chart instance is not consistent
 		// means that chart is new and then...
 		if (prevChart == null) {
@@ -108,7 +108,7 @@ public final class Charts {
 	 * @return chart instance or <code>null</code> if not exist.
 	 */
 	public static IsChart get(String chartId) {
-		return CHARTS.get(chartId);
+		return CHARTS_INSTANCES.get(chartId);
 	}
 
 	/**
@@ -118,7 +118,7 @@ public final class Charts {
 	 */
 	static void remove(String chartId) {
 		// removes getting the chart
-		IsChart chart = CHARTS.remove(chartId);
+		IsChart chart = CHARTS_INSTANCES.remove(chartId);
 		// if chart instance is consistent
 		if (chart != null) {
 			// scans all listener to send notification

@@ -125,6 +125,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * (non-Javadoc)
 	 * 
 	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getHover()
+	 * @deprecated component is not available for Meter or Gauge charts.
 	 */
 	@Deprecated
 	@Override
@@ -136,6 +137,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * (non-Javadoc)
 	 * 
 	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getLayout()
+	 * @deprecated component is not available for Meter or Gauge charts.
 	 */
 	@Deprecated
 	@Override
@@ -147,6 +149,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * (non-Javadoc)
 	 * 
 	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getLegend()
+	 * @deprecated component is not available for Meter or Gauge charts.
 	 */
 	@Deprecated
 	@Override
@@ -158,6 +161,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * (non-Javadoc)
 	 * 
 	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getTooltips()
+	 * @deprecated component is not available for Meter or Gauge charts.
 	 */
 	@Deprecated
 	@Override
@@ -170,6 +174,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * 
 	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#setLegendCallback(org.pepstock.charba.client.
 	 * jsinterop.callbacks.LegendCallback)
+	 * @deprecated component is not available for Meter or Gauge charts.
 	 */
 	@Deprecated
 	@Override

@@ -135,8 +135,6 @@ final class CanvasObjectHandler extends AbstractPlugin {
 		// time is MANDATORY to update chart because CHART.JS
 		// must applied new patterns and gradients
 		if (updated) {
-			// reset flag
-			updated = false;
 			// updates the chart
 			chart.update();
 			// informs CHART.JS to stop the current drawing

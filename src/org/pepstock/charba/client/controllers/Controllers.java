@@ -35,7 +35,7 @@ public final class Controllers {
 	private static final Controllers INSTANCE = new Controllers();
 	// list of global controllers set by user (not OOTB)
 	// K = controller type name as string, V = controller instance
-	private final Map<String, Controller> controllers = new HashMap<>();
+	private final Map<String, Controller> controllersInstances = new HashMap<>();
 
 	/**
 	 * To avoid any instantiation
@@ -94,11 +94,11 @@ public final class Controllers {
 		// checks the controller type
 		ControllerTypeChecker.check(controller.getType());
 		// checks if type is already registered
-		if (controllers.containsKey(controller.getType().value())) {
+		if (controllersInstances.containsKey(controller.getType().value())) {
 			return null;
 		}
 		// stores the type into a set
-		controllers.put(controller.getType().value(), controller);
+		controllersInstances.put(controller.getType().value(), controller);
 		// creates a java script object, wrapper of the controller
 		return new WrapperController(controller);
 	}
@@ -110,7 +110,7 @@ public final class Controllers {
 	 * @return <code>true</code> if registered, otherwise <code>false</code>.
 	 */
 	public boolean isRegistered(String type) {
-		return controllers.containsKey(type);
+		return controllersInstances.containsKey(type);
 	}
 
 	/**
@@ -119,7 +119,7 @@ public final class Controllers {
 	 * @return all global registered controllers types.
 	 */
 	public Set<String> getTypeNames() {
-		return controllers.keySet();
+		return controllersInstances.keySet();
 	}
 
 	/**
@@ -130,9 +130,9 @@ public final class Controllers {
 	 */
 	public ControllerType getTypeByString(String type) {
 		// checks in the map of controller
-		if (controllers.containsKey(type)) {
+		if (controllersInstances.containsKey(type)) {
 			// gets controller
-			Controller controller = controllers.get(type);
+			Controller controller = controllersInstances.get(type);
 			// returns controller type
 			return controller.getType();
 		}

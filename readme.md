@@ -145,6 +145,7 @@ Here you can find the list of enhancement and updates available on `master` bran
  * squid:S1161 - "@Override" should be used on overriding and implementing methods
  * squid:S1604 - Anonymous inner classes containing only one method should become lambdas
  * squid:CommentedOutCodeLine - Sections of code should not be commented out
+ * squid:S4784 - Using regular expressions is security-sensitive
  
 License
 -------

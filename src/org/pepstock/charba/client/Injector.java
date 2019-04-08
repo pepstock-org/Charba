@@ -40,6 +40,13 @@ public final class Injector {
 	private static final Set<String> ELEMENTS_INJECTED = new HashSet<>();
 
 	/**
+	 * To avoid any instantiation
+	 */
+	private Injector() {
+		// do nothing
+	}
+
+	/**
 	 * Injects a script resource if not injected yet.
 	 * 
 	 * @param resource script resource

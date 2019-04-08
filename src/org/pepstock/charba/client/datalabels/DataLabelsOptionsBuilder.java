@@ -66,7 +66,7 @@ public final class DataLabelsOptionsBuilder {
 	 * @return builder instance
 	 */
 	private DataLabelsOptionsBuilder() {
-		// do nothing;
+		// do nothing
 	}
 
 	/**

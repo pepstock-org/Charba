@@ -40,6 +40,7 @@ public final class ResourcesType {
 	 * If the resources type was already set or if is <code>null</code> an exception will be throw.
 	 * 
 	 * @param resources the resources type to use to inject java script code
+	 * @param <T> type of resources to be loaded. 
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends ResourcePrototype> void setClientBundle(Resources<T> resources) {

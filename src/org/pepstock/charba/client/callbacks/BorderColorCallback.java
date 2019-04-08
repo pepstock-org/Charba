@@ -26,7 +26,6 @@ import com.google.gwt.canvas.dom.client.CanvasGradient;
  * 
  * @author Andrea "Stock" Stocchero
  *
- * @param <T> type of result of callback. Could be a string (as color), color or gradient instance
  * @see IsColor
  * @see Gradient
  * @see CanvasGradient

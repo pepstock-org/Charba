@@ -333,13 +333,7 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	NativeIntegerDescriptor getIntProperty(String key) {
-		// checks if the property is present
-		if (ObjectType.NUMBER.equals(JsHelper.get().typeOf(this, key))) {
-			// returns the descriptor
-			return getOwnPropertyDescriptor(this, key);
-		}
-		// if here, property does not exist
-		return null;
+		return getInternalNumberProperty(key);
 	}
 
 	/**
@@ -351,6 +345,18 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	NativeDoubleDescriptor getDoubleProperty(String key) {
+		return getInternalNumberProperty(key);
+	}
+	
+	/**
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
+	 * prototype chain) of a given object.
+	 * 
+	 * @param key the name of the property to test.
+	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
+	 */
+	@JsOverlay
+	private <T extends NativeAbstractDescriptor> T getInternalNumberProperty(String key) {
 		// checks if the property is present
 		if (ObjectType.NUMBER.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor
@@ -387,13 +393,7 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	NativeDateDescriptor getDateProperty(String key) {
-		// checks if the property is present
-		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(this, key))) {
-			// returns the descriptor
-			return getOwnPropertyDescriptor(this, key);
-		}
-		// if here, property does not exist
-		return null;
+		return getInternalObjectProperty(key);
 	}
 
 	/**
@@ -405,13 +405,7 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	NativeImageDescriptor getImageProperty(String key) {
-		// checks if the property is present
-		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(this, key))) {
-			// returns the descriptor
-			return getOwnPropertyDescriptor(this, key);
-		}
-		// if here, property does not exist
-		return null;
+		return getInternalObjectProperty(key);
 	}
 
 	/**
@@ -423,13 +417,7 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	NativePatternDescriptor getPatternProperty(String key) {
-		// checks if the property is present
-		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(this, key))) {
-			// returns the descriptor
-			return getOwnPropertyDescriptor(this, key);
-		}
-		// if here, property does not exist
-		return null;
+		return getInternalObjectProperty(key);
 	}
 
 	/**
@@ -441,13 +429,7 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	NativeGradientDescriptor getGradientProperty(String key) {
-		// checks if the property is present
-		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(this, key))) {
-			// returns the descriptor
-			return getOwnPropertyDescriptor(this, key);
-		}
-		// if here, property does not exist
-		return null;
+		return getInternalObjectProperty(key);
 	}
 
 	/**
@@ -459,6 +441,18 @@ public final class NativeObject {
 	 */
 	@JsOverlay
 	NativeObjectDescriptor getObjectProperty(String key) {
+		return getInternalObjectProperty(key);
+	}
+
+	/**
+	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
+	 * prototype chain) of a given object.
+	 * 
+	 * @param key the name of the property to test.
+	 * @return property descriptor of the given property if it exists on the object, <code>null</code> otherwise.
+	 */
+	@JsOverlay
+	private <T extends NativeAbstractDescriptor> T getInternalObjectProperty(String key) {
 		// checks if the property is present
 		if (ObjectType.OBJECT.equals(JsHelper.get().typeOf(this, key))) {
 			// returns the descriptor

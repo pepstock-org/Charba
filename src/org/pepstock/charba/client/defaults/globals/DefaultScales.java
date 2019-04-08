@@ -45,7 +45,7 @@ public final class DefaultScales implements IsDefaultScales {
 	 */
 	@Override
 	public IsDefaultScale getXAxis() {
-		return scale;
+		return getDefaultScale();
 	}
 
 	/*
@@ -55,6 +55,15 @@ public final class DefaultScales implements IsDefaultScales {
 	 */
 	@Override
 	public IsDefaultScale getYAxis() {
+		return getDefaultScale();
+	}
+
+	/**
+	 * Returns the default scale to other methods.
+	 * 
+	 * @return the default scale to other methods
+	 */
+	private DefaultScale getDefaultScale() {
 		return scale;
 	}
 

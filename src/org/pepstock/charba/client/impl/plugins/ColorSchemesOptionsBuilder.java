@@ -29,11 +29,9 @@ public final class ColorSchemesOptionsBuilder {
 
 	/**
 	 * To avoid any instantiation
-	 * 
-	 * @return builder instance
 	 */
 	private ColorSchemesOptionsBuilder() {
-		// do nothing;
+		// do nothing
 	}
 
 	/**

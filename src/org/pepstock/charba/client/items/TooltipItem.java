@@ -99,6 +99,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	 * Returns the X location of label. Is {@link Deprecated}, use `value` or `label` instead
 	 * 
 	 * @return the X location of label. Default is {@link UndefinedValues#STRING}.
+	 * @deprecated use `value` or `label` instead
 	 */
 	@Deprecated
 	public String getXLabel() {
@@ -109,6 +110,7 @@ public final class TooltipItem extends NativeObjectContainer {
 	 * Returns the Y location of label. Is {@link Deprecated}, use `value` or `label` instead
 	 * 
 	 * @return the Y location of label. Default is {@link UndefinedValues#STRING}.
+	 * @deprecated use `value` or `label` instead
 	 */
 	@Deprecated
 	public String getYLabel() {
