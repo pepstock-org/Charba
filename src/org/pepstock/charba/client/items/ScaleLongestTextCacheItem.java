@@ -24,6 +24,8 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.commons.ObjectType;
 
 /**
  * Legend internal object to get data about ticks and their length in pixels.<br>
@@ -106,17 +108,60 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	public Map<String, Integer> getData() {
 		// creates result
 		Map<String, Integer> result = new HashMap<>();
-		// gets all keys
-		List<Key> keys = keys();
-		// if keys are consistent
-		if (!keys.isEmpty()) {
-			// scans all keys
-			for (Key key : keys) {
-				// loads data item
-				result.put(key.value(), getValue(key, UndefinedValues.INTEGER));
+		// checks if data object exists
+		if (ObjectType.OBJECT.equals(type(Property.DATA))) {
+			// creates data
+			Data data = new Data(getValue(Property.DATA));
+			// gets all keys
+			List<Key> keys = data.dataKeys();
+			// if keys are consistent
+			if (!keys.isEmpty()) {
+				// scans all keys
+				for (Key key : keys) {
+					// loads data item
+					result.put(key.value(), data.dataValue(key));
+				}
 			}
 		}
 		// returns a unmodifiable map
 		return Collections.unmodifiableMap(result);
+	}
+	
+	/**
+	 * Class which maps the DATA value
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private class Data extends NativeObjectContainer{
+
+		/**
+		 * Creates the object for data.
+		 * 
+		 * @param native object which must be mapped
+		 */
+		Data(NativeObject nativeObject) {
+			super(nativeObject);
+		}
+		
+		/**
+		 * Returns the list of properties names of the object.
+		 * 
+		 * @return the list of properties names of the object.
+		 */
+		List<Key> dataKeys(){
+			return keys();
+		}
+		
+		/**
+		 * Returns a value (int) into embedded JavaScript object at specific property.
+		 * 
+		 * @param key key of the property of JavaScript object.
+		 * @return value of the property
+		 */
+		int dataValue(Key key) {
+			return getValue(key, UndefinedValues.INTEGER);
+		}
+		
 	}
 }
