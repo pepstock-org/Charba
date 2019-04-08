@@ -41,7 +41,7 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 	 */
 	private enum Property implements Key
 	{
-		DATA("data"), // FIXME
+		DATA("data"),
 		GARBAGE_COLLECT("garbageCollect"),
 		FONT("font");
 
