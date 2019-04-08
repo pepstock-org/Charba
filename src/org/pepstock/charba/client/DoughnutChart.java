@@ -24,7 +24,7 @@ import org.pepstock.charba.client.data.DoughnutDataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DoughnutChart extends AbstractChart<DoughnutOptions, DoughnutDataset> {
+public class DoughnutChart extends AbstractChart<DoughnutDataset> {
 
 	private final DoughnutOptions options;
 

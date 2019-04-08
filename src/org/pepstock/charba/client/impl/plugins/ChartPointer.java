@@ -92,9 +92,9 @@ public final class ChartPointer extends AbstractPlugin {
 	@Override
 	public void onAfterEvent(IsChart chart, ChartNativeEvent event) {
 		// checks if is chart is a abstract chart instance
-		if (chart instanceof AbstractChart<?, ?>) {
+		if (chart instanceof AbstractChart<?>) {
 			// cast to abstract chart to get element of GWT object
-			AbstractChart<?, ?> chartInstance = (AbstractChart<?, ?>) chart;
+			AbstractChart<?> chartInstance = (AbstractChart<?>) chart;
 			// checks if chart has got any dataset selection handler
 			if (chartInstance.getOptions().hasDatasetSelectionHandlers() || chartInstance.getOptions().hasTitleClickHandlers() || chartInstance.getOptions().hasAxisClickHandlers()) {
 				// gets options instance

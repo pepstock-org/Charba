@@ -26,7 +26,7 @@ import org.pepstock.charba.client.data.ScatterDataset;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class ScatterChart extends AbstractChart<ScatterOptions, ScatterDataset> {
+public class ScatterChart extends AbstractChart<ScatterDataset> {
 
 	private final ScatterOptions options;
 

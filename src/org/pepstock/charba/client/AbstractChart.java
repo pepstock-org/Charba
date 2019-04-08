@@ -50,10 +50,9 @@ import com.google.gwt.user.client.ui.SimplePanel;
  * 
  * @author Andrea "Stock" Stocchero
  *
- * @param <O> Options type for the specific chart
  * @param <D> Dataset type for the specific chart
  */
-public abstract class AbstractChart<O extends ConfigurationOptions, D extends Dataset> extends SimplePanel implements IsChart {
+public abstract class AbstractChart<D extends Dataset> extends SimplePanel implements IsChart {
 
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";

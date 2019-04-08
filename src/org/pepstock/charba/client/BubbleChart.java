@@ -26,7 +26,7 @@ import org.pepstock.charba.client.data.BubbleDataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class BubbleChart extends AbstractChart<BubbleOptions, BubbleDataset> {
+public class BubbleChart extends AbstractChart<BubbleDataset> {
 
 	private final BubbleOptions options;
 

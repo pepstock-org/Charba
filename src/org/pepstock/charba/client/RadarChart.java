@@ -25,7 +25,7 @@ import org.pepstock.charba.client.data.RadarDataset;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class RadarChart extends AbstractChart<RadarOptions, RadarDataset> {
+public class RadarChart extends AbstractChart<RadarDataset> {
 
 	private final RadarOptions options;
 

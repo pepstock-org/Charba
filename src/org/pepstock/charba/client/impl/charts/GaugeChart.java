@@ -24,7 +24,7 @@ import org.pepstock.charba.client.controllers.ControllerType;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class GaugeChart extends BaseMeterChart<GaugeOptions, GaugeDataset> {
+public final class GaugeChart extends BaseMeterChart<GaugeDataset> {
 
 	/**
 	 * Name of chart type <b>{@value TYPE}</b> for gauge
@@ -47,7 +47,7 @@ public final class GaugeChart extends BaseMeterChart<GaugeOptions, GaugeDataset>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getType()
+	 * @see org.pepstock.charba.client.IsChart#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -57,7 +57,7 @@ public final class GaugeChart extends BaseMeterChart<GaugeOptions, GaugeDataset>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#getOptions()
+	 * @see org.pepstock.charba.client.IsChart#getOptions()
 	 */
 	@Override
 	public GaugeOptions getOptions() {
@@ -67,7 +67,7 @@ public final class GaugeChart extends BaseMeterChart<GaugeOptions, GaugeDataset>
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.Chart#newDataset()
+	 * @see org.pepstock.charba.client.AbstractChart#newDataset()
 	 */
 	@Override
 	public GaugeDataset newDataset() {

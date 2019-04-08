@@ -26,7 +26,7 @@ import org.pepstock.charba.client.data.LineDataset;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class LineChart extends AbstractChart<LineOptions, LineDataset> {
+public class LineChart extends AbstractChart<LineDataset> {
 
 	private final LineOptions options;
 

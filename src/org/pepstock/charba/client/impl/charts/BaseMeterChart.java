@@ -25,10 +25,9 @@ import org.pepstock.charba.client.controllers.ControllerType;
  * 
  * @author Andrea "Stock" Stocchero
  *
- * @param <O> Options type for the specific chart, extends MeterOptions
  * @param <D> Dataset type for the specific chart, extends MeterDataset
  */
-abstract class BaseMeterChart<O extends MeterOptions, D extends MeterDataset> extends AbstractChart<O, D> {
+abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart<D> {
 
 	/**
 	 * Default of maximum value of data into a dataset (percentage based), <b>{@value DEFAULT_MAX}</b>.
