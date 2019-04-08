@@ -150,14 +150,12 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 */
 	public void skipNextRefreshFireEvent(IsChart chart) {
 		// checks if the plugin has been invoked for LINE or BAR charts
-		if (chart.getType().equals(ChartType.LINE) || chart.getType().equals(ChartType.BAR)) {
-			// checks if we have already an handler
-			if (HANDLERS.containsKey(chart.getId())) {
-				// gets selection handler
-				SelectionHandler handler = HANDLERS.get(chart.getId());
-				// sets the flag to skip next event after refresh
-				handler.setSkipNextFireEvent(true);
-			}
+		// checks if we have already an handler
+		if ((chart.getType().equals(ChartType.LINE) || chart.getType().equals(ChartType.BAR)) && HANDLERS.containsKey(chart.getId())) {
+			// gets selection handler
+			SelectionHandler handler = HANDLERS.get(chart.getId());
+			// sets the flag to skip next event after refresh
+			handler.setSkipNextFireEvent(true);
 		}
 	}
 
@@ -229,13 +227,11 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	@Override
 	public boolean onBeforeUpdate(IsChart chart) {
 		// checks if the plugin has been invoked for LINE or BAR charts
-		if (chart.getType().equals(ChartType.LINE) || chart.getType().equals(ChartType.BAR)) {
-			// add checks if there is any dataset selection handler into option
-			// if yes exception
-			if (chart.getOptions().hasDatasetSelectionHandlers()) {
-				// throw exception
-				throw new IllegalArgumentException("Unable to activate plugin because a dataset selection handler has been defined.");
-			}
+		// add checks if there is any dataset selection handler into option
+		// if yes exception
+		if ((chart.getType().equals(ChartType.LINE) || chart.getType().equals(ChartType.BAR)) && chart.getOptions().hasDatasetSelectionHandlers()) {
+			// throw exception
+			throw new IllegalArgumentException("Unable to activate plugin because a dataset selection handler has been defined.");
 		}
 		return true;
 	}

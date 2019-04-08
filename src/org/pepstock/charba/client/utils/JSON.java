@@ -223,24 +223,22 @@ public final class JSON {
 						return value + Utilities.EMPTY_STRING;
 					}
 					// if object
-					if (ObjectType.OBJECT.equals(type)) {
-						// checks if is an element
-						if (value instanceof Element) {
-							// casts to element
-							Element element = (Element) value;
-							// checks if is an element node
-							if (element.getNodeType() == Node.ELEMENT_NODE) {
-								StringBuilder sb = new StringBuilder();
-								sb.append("<").append(element.getNodeName().toLowerCase(Locale.getDefault()));
-								List<String> attributes = JsHelper.get().elementAttributes(element);
-								if (!attributes.isEmpty()) {
-									for (String attribute : attributes) {
-										sb.append(" ").append(attribute);
-									}
+					// checks if is an element
+					if (ObjectType.OBJECT.equals(type) && value instanceof Element) {
+						// casts to element
+						Element element = (Element) value;
+						// checks if is an element node
+						if (element.getNodeType() == Node.ELEMENT_NODE) {
+							StringBuilder sb = new StringBuilder();
+							sb.append("<").append(element.getNodeName().toLowerCase(Locale.getDefault()));
+							List<String> attributes = JsHelper.get().elementAttributes(element);
+							if (!attributes.isEmpty()) {
+								for (String attribute : attributes) {
+									sb.append(" ").append(attribute);
 								}
-								// returns html
-								return sb.append(">").toString();
 							}
+							// returns html
+							return sb.append(">").toString();
 						}
 					}
 					// returns value
