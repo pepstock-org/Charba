@@ -83,7 +83,7 @@ public final class DataLabelsOptionsBuilder {
 	 */
 	public DataLabelsOptions build() {
 		// registers the options to the factory
-		options.register();
+		options.registerOptions();
 		// returns options
 		return options;
 	}

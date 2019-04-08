@@ -61,7 +61,7 @@ public final class LabelsOptionsBuilder {
 	 */
 	public LabelsOptions build() {
 		// registers the options to the factory
-		options.register();
+		options.registerOptions();
 		// returns options
 		return options;
 	}

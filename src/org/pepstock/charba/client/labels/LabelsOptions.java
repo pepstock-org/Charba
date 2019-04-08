@@ -295,13 +295,10 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		});
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.plugins.AbstractPluginOptions#register()
+	/**
+	 * Registers the options to the factory to manage the cache of options.
 	 */
-	@Override
-	protected void register() {
+	void registerOptions() {
 		super.register();
 	}
 
