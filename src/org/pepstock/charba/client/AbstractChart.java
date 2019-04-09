@@ -40,6 +40,7 @@ import com.google.gwt.dom.client.HeadingElement;
 import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.MouseDownEvent;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -112,7 +113,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 			add(canvas);
 			// adds the listener to disable canvas selection
 			// removes the default behavior
-			preventDisplayHandler = canvas.addMouseDownHandler(event -> event.preventDefault());
+			preventDisplayHandler = canvas.addMouseDownHandler(MouseDownEvent::preventDefault);
 		} else {
 			// creates a header element
 			HeadingElement h = Document.get().createHElement(3);
