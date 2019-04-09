@@ -69,71 +69,17 @@ final class CanvasObjectHandler extends AbstractPlugin {
 		List<Dataset> datasets = data.getDatasets();
 		// checks if the amount of datasets is changed
 		if (dataToJson == null || !dataToJson.equalsIgnoreCase(currentDataToJson)) {
-			// flags to know if the gradients must be reset
-			boolean mustBeReset = false;
-			// scans datasets
-			for (Dataset dataset : datasets) {
-				// if there is at least 1 gradient
-				if (!dataset.getGradientsContainer().isEmpty()) {
-					// forces the flag to be changed
-					// because adding a dataset
-					// the RADIAL gradient could change
-					dataset.getGradientsContainer().setChanged(true);
-					// set the flag to reset
-					mustBeReset = true;
-				}
-			}
-			// checks if gradients must be reset
-			if (mustBeReset) {
-				// because amount of datasets is changed
-				// the cache of gradients must be clear
-				// and gradients recalculated
-				CanvasObjectFactory.resetGradients(chart);
-			}
+			// data have been changed
+			dataChanged(chart, datasets);
 		}
 		// stores the data chart JSON representation
 		dataToJson = currentDataToJson;
-		// flags to know if the chart must be updated because some patterns or
-		// gradients are recreated.
-		boolean updated = false;
-		// dataset index
-		int datasetIndex = 0;
-		// scans all datasets
-		for (Dataset dataset : datasets) {
-			// checks if the dataset is visible
-			if (chart.isDatasetVisible(datasetIndex)) {
-				// checks if the patterns container has been changed
-				// if true, means that new patterns are set or old patterns
-				// are removed
-				if (dataset.getPatternsContainer().isChanged()) {
-					// asks to dataset to creates patterns
-					dataset.applyPatterns(chart);
-					// reset the changed status of pattern container
-					dataset.getPatternsContainer().setChanged(false);
-					// sets the flag to update chart
-					updated = true;
-				}
-				// checks if the gradients container has been changed
-				// if true, means that new gradients are set or old gradients
-				// are removed
-				if (dataset.getGradientsContainer().isChanged()) {
-					// asks to dataset to creates gradients
-					dataset.applyGradients(chart, datasetIndex);
-					// reset the changed status of gradients container
-					dataset.getGradientsContainer().setChanged(false);
-					// sets the flag to update chart
-					updated = true;
-				}
-			}
-			// increments of index
-			datasetIndex++;
-		}
 		// checks if chart must be updated
 		// when you creates new patterns or gradient and
 		// set them to dataset configuration in this point of
 		// time is MANDATORY to update chart because CHART.JS
 		// must applied new patterns and gradients
-		if (updated) {
+		if (arePatternOrGradientsChanged(chart, datasets)) {
 			// updates the chart
 			chart.update();
 			// informs CHART.JS to stop the current drawing
@@ -176,6 +122,113 @@ final class CanvasObjectHandler extends AbstractPlugin {
 		// because chart is destroy
 		// clears the cache of patterns and gradients of the chart
 		CanvasObjectFactory.clear(chart);
+	}
+
+	/**
+	 * The data of chart has been changed therefore checks if the gradients container must be reset.
+	 * 
+	 * @param chart chart instance
+	 * @param datasets list of datasets of chart
+	 */
+	private void dataChanged(IsChart chart, List<Dataset> datasets) {
+		// flags to know if the gradients must be reset
+		boolean mustBeReset = false;
+		// scans datasets
+		for (Dataset dataset : datasets) {
+			// if there is at least 1 gradient
+			if (!dataset.getGradientsContainer().isEmpty()) {
+				// forces the flag to be changed
+				// because adding a dataset
+				// the RADIAL gradient could change
+				dataset.getGradientsContainer().setChanged(true);
+				// set the flag to reset
+				mustBeReset = true;
+			}
+		}
+		// checks if gradients must be reset
+		if (mustBeReset) {
+			// because amount of datasets is changed
+			// the cache of gradients must be clear
+			// and gradients recalculated
+			CanvasObjectFactory.resetGradients(chart);
+		}
+	}
+
+	/**
+	 * Returns <code>true</code> if gradients or patterns has been created or changed, otherwise <code>false</code>.
+	 * 
+	 * @param chart chart instance
+	 * @param datasets list of datasets of chart
+	 * @return <code>true</code> if gradients or patterns has been created or changed, otherwise <code>false</code>
+	 */
+	private boolean arePatternOrGradientsChanged(IsChart chart, List<Dataset> datasets) {
+		// flags to know if the chart must be updated because some patterns or
+		// gradients are recreated.
+		boolean updated = false;
+		// dataset index
+		int datasetIndex = 0;
+		// scans all datasets
+		for (Dataset dataset : datasets) {
+			// checks if the dataset is visible
+			if (chart.isDatasetVisible(datasetIndex)) {
+				// checks if the patterns container has been changed
+				// if true, means that new patterns are set or old patterns
+				// are removed
+				updated = updated || checkPatterns(chart, dataset);
+				// checks if the gradients container has been changed
+				// if true, means that new gradients are set or old gradients
+				// are removed
+				updated = updated || checkGradients(chart, dataset, datasetIndex);
+			}
+			// increments of index
+			datasetIndex++;
+		}
+		return updated;
+	}
+	
+	/**
+	 * Returns <code>true</code> if patterns has been created or changed, otherwise <code>false</code>.
+	 * 
+	 * @param chart chart instance
+	 * @param dataset dataset instance
+	 * @return <code>true</code> if patterns has been created or changed, otherwise <code>false</code>
+	 */
+	private boolean checkPatterns(IsChart chart, Dataset dataset) {
+		// checks if the patterns container has been changed
+		// if true, means that new patterns are set or old patterns
+		// are removed
+		if (dataset.getPatternsContainer().isChanged()) {
+			// asks to dataset to creates patterns
+			dataset.applyPatterns(chart);
+			// reset the changed status of pattern container
+			dataset.getPatternsContainer().setChanged(false);
+			// sets the flag to update chart
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Returns <code>true</code> if gradients has been created or changed, otherwise <code>false</code>.
+	 * 
+	 * @param chart chart instance
+	 * @param dataset dataset instance
+	 * @param datasetIndex dataset index
+	 * @return <code>true</code> if gradients has been created or changed, otherwise <code>false</code>
+	 */
+	private boolean checkGradients(IsChart chart, Dataset dataset, int datasetIndex) {
+		// checks if the gradients container has been changed
+		// if true, means that new gradients are set or old gradients
+		// are removed
+		if (dataset.getGradientsContainer().isChanged()) {
+			// asks to dataset to creates gradients
+			dataset.applyGradients(chart, datasetIndex);
+			// reset the changed status of gradients container
+			dataset.getGradientsContainer().setChanged(false);
+			// sets the flag to update chart
+			return true;
+		}
+		return false;
 	}
 
 }
