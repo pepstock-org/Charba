@@ -265,17 +265,30 @@ public final class JSON {
 					return result != null ? result : value;
 				}
 				// checks if is a Charba property
-				if (key.startsWith(JSONReplacerConstants.CHARBA_PROPERTY_KEY_PREFIX)) {
-					// returns value
-					return value;
-				} else {
-					// skip it
-					return JsHelper.get().undefined();
-				}
+				return ignoreCharbaInstances(key, value);
 			}
 			// returns object
 			return value;
 		}, spaces);
+	}
+
+	/**
+	 * Ignores all keys created by CHARBA into replace function.
+	 * 
+	 * @param key property key of object.
+	 * @param value object related to the key.
+	 * @return the value to show into string.
+	 */
+	@JsOverlay
+	private static Object ignoreCharbaInstances(String key, Object value) {
+		// checks if is a Charba property
+		if (key.startsWith(JSONReplacerConstants.CHARBA_PROPERTY_KEY_PREFIX)) {
+			// returns value
+			return value;
+		} else {
+			// skip it
+			return JsHelper.get().undefined();
+		}
 	}
 
 }
