@@ -118,11 +118,11 @@ public final class ColorSchemes extends AbstractPlugin {
 					// if hoving FLEX dataset, like BAR
 					HovingFlexDataset hovingDataset = (HovingFlexDataset) dataset;
 					// manages hoving flex dataset
-					manageHovingFlexDataset(chart, options, hovingDataset, color, colors);
+					manageHovingFlexDataset(options, hovingDataset, color, colors);
 				} else if (dataset instanceof LiningDataset) {
 					// if lining dataset, like LINE, RADAR, SCATTER
 					LiningDataset liningDataset = (LiningDataset) dataset;
-					manageLiningDataset(chart, options, liningDataset, color);
+					manageLiningDataset(options, liningDataset, color);
 				}
 				// increments dataset index
 				datasetIndex++;
@@ -165,13 +165,12 @@ public final class ColorSchemes extends AbstractPlugin {
 	/**
 	 * Manages the colors for HOVING FLEX datasets.
 	 * 
-	 * @param chart chart instance
 	 * @param options color scheme plugin options
 	 * @param hovingDataset hoving flex dataset instance
 	 * @param color color selected by dataset position
 	 * @param colors list of colors of scheme
 	 */
-	private void manageHovingFlexDataset(IsChart chart, ColorSchemesOptions options, HovingFlexDataset hovingDataset, IsColor color, List<IsColor> colors) {
+	private void manageHovingFlexDataset(ColorSchemesOptions options, HovingFlexDataset hovingDataset, IsColor color, List<IsColor> colors) {
 		// checks if the scope to apply the colors is at data or dataset level
 		if (SchemeScope.DATA.equals(options.getSchemeScope())) {
 			// if here is at data level
@@ -198,12 +197,11 @@ public final class ColorSchemes extends AbstractPlugin {
 	/**
 	 * Manages the colors for LINING datasets.
 	 * 
-	 * @param chart chart instance
 	 * @param options color scheme plugin options
 	 * @param liningDataset lining dataset instance
 	 * @param color color selected by dataset position
 	 */
-	private void manageLiningDataset(IsChart chart, ColorSchemesOptions options, LiningDataset liningDataset, IsColor color) {
+	private void manageLiningDataset(ColorSchemesOptions options, LiningDataset liningDataset, IsColor color) {
 		// background color with transparency
 		IsColor backgroundColor = color.alpha(options.getBackgroundColorAlpha());
 		// sets border color
