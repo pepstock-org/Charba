@@ -40,17 +40,17 @@ public final class Utilities {
 	// string format of font CSS style
 	private static final String FONT_TEMPLATE = "{0} {1}px {2}";
 	// string format of font style
-	private static final String REGEX_FORMAT_FONT_STYLE = "\\{0\\}";
+	private static final String REGEXP_FONT_STYLE_PATTERN = "\\{0\\}";
 	// string format of font size
-	private static final String REGEX_FORMAT_FONT_SIZE = "\\{1\\}";
+	private static final String REGEXP_FONT_SIZE_PATTERN = "\\{1\\}";
 	// string format of font family
-	private static final String REGEX_FORMAT_FONT_FAMILY = "\\{2\\}";
+	private static final String REGEXP_FONT_FAMILY_PATTERN = "\\{2\\}";
 	// regex instance for font style
-	private static final RegExp REGEX_FONT_STYLE = RegExp.compile(REGEX_FORMAT_FONT_STYLE);
+	private static final RegExp REGEXP_FONT_STYLE = RegExp.compile(REGEXP_FONT_STYLE_PATTERN);
 	// regex instance for font style
-	private static final RegExp REGEX_FONT_SIZE = RegExp.compile(REGEX_FORMAT_FONT_SIZE);
+	private static final RegExp REGEXP_FONT_SIZE = RegExp.compile(REGEXP_FONT_SIZE_PATTERN);
 	// regex instance for font style
-	private static final RegExp REGEX_FONT_FAMILY = RegExp.compile(REGEX_FORMAT_FONT_FAMILY);
+	private static final RegExp REGEXP_FONT_FAMILY = RegExp.compile(REGEXP_FONT_FAMILY_PATTERN);
 
 	/**
 	 * To avoid any instantiation
@@ -72,7 +72,7 @@ public final class Utilities {
 		// gets template
 		final String result = FONT_TEMPLATE;
 		// by regex changes the value of format
-		return REGEX_FONT_FAMILY.replace(REGEX_FONT_SIZE.replace(REGEX_FONT_STYLE.replace(result, style.value()), String.valueOf(fontSize)), fontFamily);
+		return REGEXP_FONT_FAMILY.replace(REGEXP_FONT_SIZE.replace(REGEXP_FONT_STYLE.replace(result, style.value()), String.valueOf(fontSize)), fontFamily);
 	}
 
 	/**

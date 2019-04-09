@@ -32,15 +32,23 @@ import com.google.gwt.regexp.shared.RegExp;
  */
 public final class ColorBuilder {
 
-	// REGX for RGB
-	private static final String RGB_PATTERN = "rgb\\(\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})\\s*\\)";
-	// REGX for RGBA
-	private static final String RGBA_PATTERN = "rgba\\(\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})\\s*,\\s*(\\d*\\.?\\d*)\\s*\\)";
-	// REGX for HSL
-	private static final String HSL_PATTERN = "hsl\\(\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})%\\s*,\\s*(\\d{1,3})%\\s*\\)";
-	// REGX for HSLA
-	private static final String HSLA_PATTERN = "hsla\\(\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})%\\s*,\\s*(\\d{1,3})%\\s*,\\s*(\\d*\\.?\\d*)\\s*\\)";
-
+	// REGEXP pattern for RGB
+	private static final String REGEXP_RGB_PATTERN = "rgb\\(\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})\\s*\\)";
+	// REGEXP pattern for RGBA
+	private static final String REGEXP_RGBA_PATTERN = "rgba\\(\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})\\s*,\\s*(\\d*\\.?\\d*)\\s*\\)";
+	// REGEXP pattern for HSL
+	private static final String REGEXP_HSL_PATTERN = "hsl\\(\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})%\\s*,\\s*(\\d{1,3})%\\s*\\)";
+	// REGEXP pattern for HSLA
+	private static final String REGEXP_HSLA_PATTERN = "hsla\\(\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})%\\s*,\\s*(\\d{1,3})%\\s*,\\s*(\\d*\\.?\\d*)\\s*\\)";
+	// REGEXP for RGB
+	private static final RegExp REGEXP_RGB = RegExp.compile(REGEXP_RGB_PATTERN);
+	// REGEXP for RGBA
+	private static final RegExp REGEXP_RGBA = RegExp.compile(REGEXP_RGBA_PATTERN);
+	// REGEXP for HSL
+	private static final RegExp REGEXP_HSL = RegExp.compile(REGEXP_HSL_PATTERN);
+	// REGEXP for HSLA
+	private static final RegExp REGEXP_HSLA = RegExp.compile(REGEXP_HSLA_PATTERN);
+	
 	// char to identify if is a HEX color
 	static final String HEX_STARTING_CHAR = "#";
 	// chars to identify if is a RGB color
@@ -228,9 +236,8 @@ public final class ColorBuilder {
 	 * @return color instance
 	 */
 	private static IsColor buildByRGBValue(String rgbvalue) {
-		// creates regular expression
-		RegExp regExp = RegExp.compile(RGB_PATTERN);
-		MatchResult matcher = regExp.exec(rgbvalue);
+		// executes regular expression
+		MatchResult matcher = REGEXP_RGB.exec(rgbvalue);
 		boolean matchFound = matcher != null;
 		// checks if matches
 		if (matchFound && matcher.getGroupCount() == 4) {
@@ -270,9 +277,8 @@ public final class ColorBuilder {
 	 * @return color instance
 	 */
 	private static IsColor buildByRGBAValue(String rgbavalue) {
-		// creates regular expression
-		RegExp regExp = RegExp.compile(RGBA_PATTERN);
-		MatchResult matcher = regExp.exec(rgbavalue);
+		// executes regular expression
+		MatchResult matcher = REGEXP_RGBA.exec(rgbavalue);
 		boolean matchFound = matcher != null;
 		// checks if matches
 		if (matchFound && matcher.getGroupCount() == 5) {
@@ -316,9 +322,8 @@ public final class ColorBuilder {
 	 * @return color instance
 	 */
 	private static IsColor buildByHSLValue(String hslvalue) {
-		// creates regular expression
-		RegExp regExp = RegExp.compile(HSL_PATTERN);
-		MatchResult matcher = regExp.exec(hslvalue);
+		// executes regular expression
+		MatchResult matcher = REGEXP_HSL.exec(hslvalue);
 		boolean matchFound = matcher != null;
 		// checks if matches
 		if (matchFound && matcher.getGroupCount() == 4) {
@@ -358,9 +363,8 @@ public final class ColorBuilder {
 	 * @return color instance
 	 */
 	private static IsColor buildByHSLAValue(String hslavalue) {
-		// creates regular expression
-		RegExp regExp = RegExp.compile(HSLA_PATTERN);
-		MatchResult matcher = regExp.exec(hslavalue);
+		// executes regular expression
+		MatchResult matcher = REGEXP_HSLA.exec(hslavalue);
 		boolean matchFound = matcher != null;
 		// checks if matches
 		if (matchFound && matcher.getGroupCount() == 5) {

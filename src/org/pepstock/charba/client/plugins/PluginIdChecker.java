@@ -15,11 +15,10 @@
 */
 package org.pepstock.charba.client.plugins;
 
-import java.util.Locale;
-
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.StandardKey;
 
+import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.safehtml.shared.UriUtils;
 
 /**
@@ -41,6 +40,10 @@ public final class PluginIdChecker {
 	private static final char DOT = '.';
 	// underscore constant
 	private static final char UNDERSCORE = '_';
+	// regexp to check if there is an uppercase
+	private static final String REGEXP_HAS_UPPERCASE_PATTERN = "^.*[A-Z].*";
+	// regex instance for font style
+	private static final RegExp REGEXP_HAS_UPPERCASE = RegExp.compile(REGEXP_HAS_UPPERCASE_PATTERN);
 
 	/**
 	 * To avoid any instantiation
@@ -71,7 +74,7 @@ public final class PluginIdChecker {
 		} else if (!UriUtils.isSafeUri(id)) {
 			// checks if is not safe URL
 			throw new IllegalArgumentException(buildMessage(id, INVALID_PLUGIN_ID_NOT_URL_SAFE));
-		} else if (!id.equals(id.toLowerCase(Locale.getDefault()))) {
+		} else if (REGEXP_HAS_UPPERCASE.exec(id) != null) {
 			// checks if contains uppercase letters
 			throw new IllegalArgumentException(buildMessage(id, INVALID_PLUGIN_ID_NOT_LOWERCASE_UPPERCASE));
 		}

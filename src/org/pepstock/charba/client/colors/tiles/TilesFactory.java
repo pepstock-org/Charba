@@ -44,9 +44,9 @@ public final class TilesFactory {
 	// message to show when the browser can't support canvas
 	private static final String CANVAS_NOT_SUPPORTED_MESSAGE = "Ops... Canvas element is not supported...";
 	// string format to trim blanks
-	private static final String REGEX_FORMAT_TRIM_SPACES = "\\s+";
-	// regex instance to trim blanks
-	private static final RegExp REGEX_TRIM_SPACES = RegExp.compile(REGEX_FORMAT_TRIM_SPACES);
+	private static final String REGEXP_TRIM_SPACES_PATTERN = "\\s+";
+	// regexp instance to trim blanks
+	private static final RegExp REGEXP_TRIM_SPACES = RegExp.compile(REGEXP_TRIM_SPACES_PATTERN);
 
 	// gets if Canvas is supported
 	private final boolean isCanvasSupported = Canvas.isSupported();
@@ -184,7 +184,7 @@ public final class TilesFactory {
 		// if all further requests for the same canvas pattern, returns the cached one
 		StringBuilder keyBuilder = new StringBuilder(shapeParam.getKeyPrefix());
 		keyBuilder.append(backgroundColorParam).append(shapeColorParam).append(sizeParam);
-		String key = REGEX_TRIM_SPACES.replace(keyBuilder.toString(), Utilities.EMPTY_STRING).toLowerCase(Locale.getDefault());
+		String key = REGEXP_TRIM_SPACES.replace(keyBuilder.toString(), Utilities.EMPTY_STRING).toLowerCase(Locale.getDefault());
 		// checks if the canvas pattern is already created with those parameters
 		if (CANVAS_PATTERNS.containsKey(key)) {
 			// if yes returns the cached one
