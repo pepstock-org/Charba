@@ -71,7 +71,7 @@ public final class PluginIdChecker {
 		} else if (!UriUtils.isSafeUri(id)) {
 			// checks if is not safe URL
 			throw new IllegalArgumentException(buildMessage(id, INVALID_PLUGIN_ID_NOT_URL_SAFE));
-		} else if (!id.toLowerCase(Locale.getDefault()).equals(id)) {
+		} else if (!id.equals(id.toLowerCase(Locale.getDefault()))) {
 			// checks if contains uppercase letters
 			throw new IllegalArgumentException(buildMessage(id, INVALID_PLUGIN_ID_NOT_LOWERCASE_UPPERCASE));
 		}
