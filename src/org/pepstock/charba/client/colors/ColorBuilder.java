@@ -58,7 +58,7 @@ public final class ColorBuilder {
 	private ColorBuilder() {
 		// nothing
 	}
-	
+
 	/**
 	 * Builds a list of colors starting from a list of strings which represent colors.
 	 * 
@@ -182,11 +182,12 @@ public final class ColorBuilder {
 	static IsColor buildByHexValue(String hexvalue) {
 		return buildByHexValue(hexvalue, true);
 	}
+
 	/**
 	 * Parses HEX value translating into a color. HEX format: <code>#rrggbb</code>.
 	 * 
 	 * @param hexvalue hex color.
-	 * @param searchOnEnum if <code>true</code> scans the html and GWT material color 
+	 * @param searchOnEnum if <code>true</code> scans the html and GWT material color
 	 * @return color instance
 	 */
 	static IsColor buildByHexValue(String hexvalue, boolean searchOnEnum) {

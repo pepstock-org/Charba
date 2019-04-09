@@ -71,7 +71,6 @@ public abstract class EventProvider<T extends NativeObjectContainer> extends Con
 	 * @param event event to be forwarded
 	 */
 	protected abstract void addHandler(AddHandlerEvent event);
-	
 
 	/**
 	 * Notifies the event provider when a new handler has been unregistered

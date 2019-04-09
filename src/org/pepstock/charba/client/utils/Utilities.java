@@ -32,7 +32,7 @@ import com.google.gwt.user.client.ui.Image;
  *
  */
 public final class Utilities {
-	
+
 	/**
 	 * Constant for EMPTY string
 	 */

@@ -35,8 +35,8 @@ public interface Extensions extends ClientBundle {
 	 * Contains text representation of native chart <a href="https://github.com/emn178/chartjs-plugin-labels">labels plugin</a>
 	 * code.
 	 * 
-	 * @return chart <a href="https://github.com/emn178/chartjs-plugin-labels">labels plugin</a> code. <b>PAY ATTENTION</b> wait for approval of
-	 *         pull request to LABELS plugin
+	 * @return chart <a href="https://github.com/emn178/chartjs-plugin-labels">labels plugin</a> code. <b>PAY ATTENTION</b> wait
+	 *         for approval of pull request to LABELS plugin
 	 */
 	@Source("js/chartjs-plugin-labels.min.js")
 	TextResource labelsPlugin();

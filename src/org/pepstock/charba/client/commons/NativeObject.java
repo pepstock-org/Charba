@@ -347,7 +347,7 @@ public final class NativeObject {
 	NativeDoubleDescriptor getDoubleProperty(String key) {
 		return getInternalNumberProperty(key);
 	}
-	
+
 	/**
 	 * Returns a property descriptor for an own property (that is, one directly present on an object and not in the object's
 	 * prototype chain) of a given object.

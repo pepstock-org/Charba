@@ -126,14 +126,14 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 		// returns a unmodifiable map
 		return Collections.unmodifiableMap(result);
 	}
-	
+
 	/**
 	 * Class which maps the DATA value
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 *
 	 */
-	private static class Data extends NativeObjectContainer{
+	private static class Data extends NativeObjectContainer {
 
 		/**
 		 * Creates the object for data.
@@ -143,16 +143,16 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 		Data(NativeObject nativeObject) {
 			super(nativeObject);
 		}
-		
+
 		/**
 		 * Returns the list of properties names of the object.
 		 * 
 		 * @return the list of properties names of the object.
 		 */
-		List<Key> dataKeys(){
+		List<Key> dataKeys() {
 			return keys();
 		}
-		
+
 		/**
 		 * Returns a value (int) into embedded JavaScript object at specific property.
 		 * 
@@ -162,6 +162,6 @@ public final class ScaleLongestTextCacheItem extends BaseBoxNodeItem {
 		int dataValue(Key key) {
 			return getValue(key, UndefinedValues.INTEGER);
 		}
-		
+
 	}
 }

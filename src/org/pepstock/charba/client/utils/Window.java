@@ -28,7 +28,7 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = NativeName.WINDOW)
 public final class Window {
-	
+
 	/**
 	 * To avoid any instantiation
 	 */

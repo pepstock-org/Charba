@@ -137,7 +137,7 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Na
 	}
 
 	/**
-	 * Adds a proxy function  to a model at the specific key.
+	 * Adds a proxy function to a model at the specific key.
 	 * 
 	 * @param model element where adding the function proxy
 	 * @param key property name to use to add the function proxy

@@ -73,7 +73,6 @@ public final class AnnotationBuilder {
 	// regex instance for height
 	private static final RegExp REGEX_HEIGHT = RegExp.compile(HEIGHT_ARGUMENT_TOKEN);
 
-
 	/**
 	 * To avoid any instantiation
 	 */

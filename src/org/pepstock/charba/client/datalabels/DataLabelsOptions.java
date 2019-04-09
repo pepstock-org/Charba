@@ -445,14 +445,14 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			return getPadding().getObject();
 		});
 	}
-	
+
 	/**
 	 * Registers the options to the factory to manage the cache of options.
 	 */
 	void registerOptions() {
 		super.register();
 	}
-	
+
 	/**
 	 * Returns the padding element.
 	 * 

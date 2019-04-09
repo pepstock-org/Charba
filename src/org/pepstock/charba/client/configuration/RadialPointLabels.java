@@ -115,7 +115,7 @@ public class RadialPointLabels extends AxisContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		pointLabelCallbackProxy.setCallback((context, item) ->{
+		pointLabelCallbackProxy.setCallback((context, item) -> {
 			// checks if callback is consistent
 			if (callback != null) {
 				// invokes callback
