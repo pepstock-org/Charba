@@ -917,6 +917,39 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			}
 		}
 	}
+	
+	//FIXME
+	private void calculateYPoints(ClearSelection clearSelection) {
+		// checks position of clear selection
+		// ---------------------------------
+		// calculate Y points
+		// ---------------------------------
+		// if the position is top
+		if (clearSelection.getPosition().equals(Position.TOP)) {
+			// for all elements the Y value is equals to margin
+			// set into configuration
+			double y = clearSelection.getMargin();
+			clearSelection.setY(y);
+			// and adding 1 to border width
+			y += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+			// adds padding top
+			y += clearSelection.getPadding();
+			clearSelection.setImageY(y);
+			clearSelection.setLabelY(y);
+		} else {
+			// calculates the Y point from bottom, using the canvas dimension
+			// removing height of clear selection element and margin
+			double y = chart.getCanvas().getOffsetHeight() - clearSelection.getHeight() - clearSelection.getMargin();
+			// for all elements the Y value is equals
+			clearSelection.setY(y);
+			// and adding 1 to border width
+			y += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+			// adds padding top
+			y += clearSelection.getPadding();
+			clearSelection.setImageY(y);
+			clearSelection.setLabelY(y);
+		}
+	}
 
 	/**
 	 * Called when the selection is clearing
