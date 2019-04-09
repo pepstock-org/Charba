@@ -67,54 +67,14 @@ public final class Percentage {
 	 */
 	public static double compute(IsChart chart, double value, ScriptableContext context, boolean stacked) {
 		// creates the total reference
-		double total = 0D;
+		double total;
 		// checks if stacked
 		if (stacked) {
-			// scans all datasets
-			for (Dataset ds : chart.getData().getDatasets()) {
-				// if dataset contains data points
-				if (DataType.POINTS.equals(ds.getDataType())) {
-					// then dataset is data point container
-					// and then cast it
-					HasDataPoints hasDataPoints = (HasDataPoints) ds;
-					// gets the data points at data index
-					DataPoint point = hasDataPoints.getDataPoints().get(context.getIndex());
-					// adds the Y value to the total
-					total = total + point.getY();
-				} else if (DataType.NUMBERS.equals(ds.getDataType())) {
-					// if here, the dataset has got data as doubles
-					// then it get the double at data index
-					double data = ds.getData().get(context.getIndex());
-					// adds it to total
-					total = total + data;
-				}
-			}
+			// get the total for stacked datasets
+			total = getTotalForStacked(chart, context);
 		} else {
-			// if here, the argument of stack is false
-			// then it calculates the values inside the dataset
-			Dataset ds = chart.getData().getDatasets().get(context.getDatasetIndex());
-			// if dataset contains data points
-			if (DataType.POINTS.equals(ds.getDataType())) {
-				// then dataset is data points container
-				// and then cast it
-				HasDataPoints hasDataPoints = (HasDataPoints) ds;
-				// gets the data points
-				List<DataPoint> points = hasDataPoints.getDataPoints();
-				// scans data points
-				for (DataPoint dataPoint : points) {
-					// adds the Y value to the total
-					total = total + dataPoint.getY();
-				}
-			} else if (DataType.NUMBERS.equals(ds.getDataType())) {
-				// if here, the dataset has got data as doubles
-				// then it get the doubles
-				List<Double> data = ds.getData();
-				// scans doubles
-				for (Double dataValue : data) {
-					// adds it to total
-					total = total + dataValue;
-				}
-			}
+			// get the total for no stacked datasets
+			total = getTotal(chart, context);
 		}
 		// if total is zero
 		// means that no datasets are available data
@@ -126,4 +86,73 @@ public final class Percentage {
 		return value / total;
 	}
 
+	/**
+	 * Calculates the total for data values for stacked dataset.
+	 * 
+	 * @param chart chart instance
+	 * @param context data labels plugin context
+	 * @return the total for data values for stacked dataset.
+	 */
+	private static double getTotalForStacked(IsChart chart, ScriptableContext context) {
+		// creates the total reference
+		double total = 0D;
+		// scans all datasets
+		for (Dataset ds : chart.getData().getDatasets()) {
+			// if dataset contains data points
+			if (DataType.POINTS.equals(ds.getDataType())) {
+				// then dataset is data point container
+				// and then cast it
+				HasDataPoints hasDataPoints = (HasDataPoints) ds;
+				// gets the data points at data index
+				DataPoint point = hasDataPoints.getDataPoints().get(context.getIndex());
+				// adds the Y value to the total
+				total = total + point.getY();
+			} else if (DataType.NUMBERS.equals(ds.getDataType())) {
+				// if here, the dataset has got data as doubles
+				// then it get the double at data index
+				double data = ds.getData().get(context.getIndex());
+				// adds it to total
+				total = total + data;
+			}
+		}
+		return total;
+	}
+
+	/**
+	 * Calculates the total for data values for NO stacked dataset.
+	 * 
+	 * @param chart chart instance
+	 * @param context data labels plugin context
+	 * @return the total for data values for NO stacked dataset.
+	 */
+	private static double getTotal(IsChart chart, ScriptableContext context) {
+		// creates the total reference
+		double total = 0D;
+		// if here, the argument of stack is false
+		// then it calculates the values inside the dataset
+		Dataset ds = chart.getData().getDatasets().get(context.getDatasetIndex());
+		// if dataset contains data points
+		if (DataType.POINTS.equals(ds.getDataType())) {
+			// then dataset is data points container
+			// and then cast it
+			HasDataPoints hasDataPoints = (HasDataPoints) ds;
+			// gets the data points
+			List<DataPoint> points = hasDataPoints.getDataPoints();
+			// scans data points
+			for (DataPoint dataPoint : points) {
+				// adds the Y value to the total
+				total = total + dataPoint.getY();
+			}
+		} else if (DataType.NUMBERS.equals(ds.getDataType())) {
+			// if here, the dataset has got data as doubles
+			// then it get the doubles
+			List<Double> data = ds.getData();
+			// scans doubles
+			for (Double dataValue : data) {
+				// adds it to total
+				total = total + dataValue;
+			}
+		}
+		return total;
+	}
 }
