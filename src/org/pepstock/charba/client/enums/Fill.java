@@ -106,12 +106,7 @@ public enum Fill implements IsFill
 	public static boolean isPredefined(IsFill fill) {
 		// checks if passed argument is
 		// a predefined filling mode
-		if (fill instanceof Fill) {
-			// returns true
-			return true;
-		}
-		// returns false
-		return false;
+		return fill instanceof Fill;
 	}
 
 	/**
