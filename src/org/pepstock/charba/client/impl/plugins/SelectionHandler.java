@@ -377,7 +377,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		if (chart.getType().equals(ChartType.LINE)) {
 			minimDatasetsItemsCount = 2;
 		} else {
-			minimDatasetsItemsCount =  AxisType.TIME.equals(scaleItem.getType()) ? 2 : 1;
+			minimDatasetsItemsCount = AxisType.TIME.equals(scaleItem.getType()) ? 2 : 1;
 		}
 		// returns checking the value with amount of datasets items
 		return getDatasetsItemsCount() >= minimDatasetsItemsCount;
@@ -798,128 +798,131 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			// ---------------------------------
 			// calculate Y points
 			// ---------------------------------
-			// if the position is top
-			if (clearSelection.getPosition().equals(Position.TOP)) {
-				// for all elements the Y value is equals to margin
-				// set into configuration
-				double y = clearSelection.getMargin();
-				clearSelection.setY(y);
-				// and adding 1 to border width
-				y += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
-				// adds padding top
-				y += clearSelection.getPadding();
-				clearSelection.setImageY(y);
-				clearSelection.setLabelY(y);
-			} else {
-				// calculates the Y point from bottom, using the canvas dimension
-				// removing height of clear selection element and margin
-				double y = chart.getCanvas().getOffsetHeight() - clearSelection.getHeight() - clearSelection.getMargin();
-				// for all elements the Y value is equals
-				clearSelection.setY(y);
-				// and adding 1 to border width
-				y += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
-				// adds padding top
-				y += clearSelection.getPadding();
-				clearSelection.setImageY(y);
-				clearSelection.setLabelY(y);
-			}
+			calculatePointsY(clearSelection);
 			// ---------------------------------
 			// calculate X points
 			// ---------------------------------
-			// the X point depends on alignment required by configuration
-			double x = 0;
-			// checks all alignment types
-			if (Align.LEFT.equals(clearSelection.getAlign())) {
-				// if left
-				// X is equals to margin
-				clearSelection.setX(clearSelection.getMargin());
-				// stores the x of clear selection element
-				x = clearSelection.getMargin();
-			} else if (Align.LEFT_CHART_AREA.equals(clearSelection.getAlign())) {
-				// gets chart AREA
-				ChartNode node = chart.getNode();
-				ChartAreaNode areaInstance = node.getChartArea();
-				// stores the x of clear selection element
-				// setting the left value of chart area
-				clearSelection.setX(areaInstance.getLeft());
-				// sets to left for further calculations
-				x = areaInstance.getLeft();
-			} else if (Align.CENTER.equals(clearSelection.getAlign())) {
-				// calculates the center of width
-				// by canvas width and clear selection element width
-				x = (chart.getCanvas().getOffsetWidth() - clearSelection.getWidth()) / 2;
-				// stores the x of clear selection element
-				clearSelection.setX(x);
-			} else if (Align.CENTER_CHART_AREA.equals(clearSelection.getAlign())) {
-				// gets chart AREA
-				ChartNode node = chart.getNode();
-				ChartAreaNode areaInstance = node.getChartArea();
-				// calculates the center of width
-				// by chart area width and clear selection element width
-				x = (areaInstance.getRight() - areaInstance.getLeft() - clearSelection.getWidth()) / 2;
-				// stores the x of clear selection element
-				clearSelection.setX(x);
-			} else if (Align.RIGHT_CHART_AREA.equals(clearSelection.getAlign())) {
-				// gets chart AREA
-				ChartNode node = chart.getNode();
-				ChartAreaNode areaInstance = node.getChartArea();
-				// the x value is the right point of chart area minus
-				// width of clear selection element
-				x = areaInstance.getRight() - clearSelection.getWidth();
-				// stores the x of clear selection element
-				clearSelection.setX(x);
-			} else if (Align.RIGHT.equals(clearSelection.getAlign())) {
-				// the x value is the width of canvas minus
-				// width of clear selection element and margin
-				x = chart.getCanvas().getOffsetWidth() - clearSelection.getWidth() - clearSelection.getMargin();
-				// stores the x of clear selection element
-				clearSelection.setX(x);
-			}
-			// for all elements
-			// adds border width left
-			// and adding 1 to border width
-			x += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
-			// adds padding left
-			// to have the X starting point
-			x += clearSelection.getPadding();
-			// calculates point X based on render type
-			if (Render.LABEL.equals(clearSelection.getRender())) {
-				// if here ONLY label
-				// stores to 0 the image
-				clearSelection.setImageX(ClearSelection.DEFAULT_VALUE);
-				// stores X point for label
-				clearSelection.setLabelX(x);
-			} else if (Render.LABEL_IMAGE.equals(clearSelection.getRender())) {
-				// if here, before label and then image
-				// stores X point for label
-				clearSelection.setLabelX(x);
-				// adds label width
-				x += clearSelection.getLabelWidth();
-				// adds spacing
-				x += clearSelection.getSpacing();
-				// stores X point for image
-				clearSelection.setImageX(x);
-			} else if (Render.IMAGE_LABEL.equals(clearSelection.getRender())) {
-				// stores X point for image
-				clearSelection.setImageX(x);
-				// adds image width
-				x += clearSelection.getImageWidth();
-				// adds spacing
-				x += clearSelection.getSpacing();
-				// stores X point for label
-				clearSelection.setLabelX(x);
-			} else if (Render.IMAGE.equals(clearSelection.getRender())) {
-				// if here ONLY image
-				// stores X point for image
-				clearSelection.setImageX(x);
-				// stores 0 to label point X
-				clearSelection.setLabelX(ClearSelection.DEFAULT_VALUE);
-			}
+			calculatePointsX(clearSelection);
 		}
 	}
-	
-	//FIXME
-	private void calculateYPoints(ClearSelection clearSelection) {
+
+	/**
+	 * Calculates X coordinates and items for clear selection element by alignment and rendering
+	 * 
+	 * @param clearSelection clear selection instance
+	 */
+	private void calculatePointsX(ClearSelection clearSelection) {
+		// ---------------------------------
+		// calculate X points
+		// ---------------------------------
+		// the X point depends on alignment required by configuration
+		double x = 0;
+		// checks all alignment types
+		if (Align.LEFT.equals(clearSelection.getAlign())) {
+			// if left
+			// X is equals to margin
+			clearSelection.setX(clearSelection.getMargin());
+			// stores the x of clear selection element
+			x = clearSelection.getMargin();
+		} else if (Align.LEFT_CHART_AREA.equals(clearSelection.getAlign())) {
+			// gets chart AREA
+			ChartNode node = chart.getNode();
+			ChartAreaNode areaInstance = node.getChartArea();
+			// stores the x of clear selection element
+			// setting the left value of chart area
+			clearSelection.setX(areaInstance.getLeft());
+			// sets to left for further calculations
+			x = areaInstance.getLeft();
+		} else if (Align.CENTER.equals(clearSelection.getAlign())) {
+			// calculates the center of width
+			// by canvas width and clear selection element width
+			x = (chart.getCanvas().getOffsetWidth() - clearSelection.getWidth()) / 2;
+			// stores the x of clear selection element
+			clearSelection.setX(x);
+		} else if (Align.CENTER_CHART_AREA.equals(clearSelection.getAlign())) {
+			// gets chart AREA
+			ChartNode node = chart.getNode();
+			ChartAreaNode areaInstance = node.getChartArea();
+			// calculates the center of width
+			// by chart area width and clear selection element width
+			x = (areaInstance.getRight() - areaInstance.getLeft() - clearSelection.getWidth()) / 2;
+			// stores the x of clear selection element
+			clearSelection.setX(x);
+		} else if (Align.RIGHT_CHART_AREA.equals(clearSelection.getAlign())) {
+			// gets chart AREA
+			ChartNode node = chart.getNode();
+			ChartAreaNode areaInstance = node.getChartArea();
+			// the x value is the right point of chart area minus
+			// width of clear selection element
+			x = areaInstance.getRight() - clearSelection.getWidth();
+			// stores the x of clear selection element
+			clearSelection.setX(x);
+		} else if (Align.RIGHT.equals(clearSelection.getAlign())) {
+			// the x value is the width of canvas minus
+			// width of clear selection element and margin
+			x = chart.getCanvas().getOffsetWidth() - clearSelection.getWidth() - clearSelection.getMargin();
+			// stores the x of clear selection element
+			clearSelection.setX(x);
+		}
+		// for all elements
+		// adds border width left
+		// and adding 1 to border width
+		x += clearSelection.isUseSelectionStyle() ? ClearSelection.BORDER_WIDTH + 1 : 0;
+		// adds padding left
+		// to have the X starting point
+		x += clearSelection.getPadding();
+		// calculates X by rendering
+		adjustPointsXByRender(clearSelection, x);
+	}
+
+	/**
+	 * Adjusts X coordinates and items for clear selection element by rendering, using x value calculated previously.
+	 * 
+	 * @param clearSelection clear selection instance
+	 * @param x value calculated applying the alignment
+	 */
+	private void adjustPointsXByRender(ClearSelection clearSelection, double x) {
+		// calculates point X based on render type
+		if (Render.LABEL.equals(clearSelection.getRender())) {
+			// if here ONLY label
+			// stores to 0 the image
+			clearSelection.setImageX(ClearSelection.DEFAULT_VALUE);
+			// stores X point for label
+			clearSelection.setLabelX(x);
+		} else if (Render.LABEL_IMAGE.equals(clearSelection.getRender())) {
+			// if here, before label and then image
+			// stores X point for label
+			clearSelection.setLabelX(x);
+			// adds label width
+			x += clearSelection.getLabelWidth();
+			// adds spacing
+			x += clearSelection.getSpacing();
+			// stores X point for image
+			clearSelection.setImageX(x);
+		} else if (Render.IMAGE_LABEL.equals(clearSelection.getRender())) {
+			// stores X point for image
+			clearSelection.setImageX(x);
+			// adds image width
+			x += clearSelection.getImageWidth();
+			// adds spacing
+			x += clearSelection.getSpacing();
+			// stores X point for label
+			clearSelection.setLabelX(x);
+		} else if (Render.IMAGE.equals(clearSelection.getRender())) {
+			// if here ONLY image
+			// stores X point for image
+			clearSelection.setImageX(x);
+			// stores 0 to label point X
+			clearSelection.setLabelX(ClearSelection.DEFAULT_VALUE);
+		}
+	}
+
+	/**
+	 * Calculates Y coordinates and items for clear selection element by position.
+	 * 
+	 * @param clearSelection clear selection instance
+	 */
+	private void calculatePointsY(ClearSelection clearSelection) {
 		// checks position of clear selection
 		// ---------------------------------
 		// calculate Y points

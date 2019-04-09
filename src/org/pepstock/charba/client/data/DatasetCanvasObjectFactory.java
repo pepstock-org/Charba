@@ -66,14 +66,14 @@ public final class DatasetCanvasObjectFactory extends CanvasObjectFactory {
 	 * (non-Javadoc)
 	 * 
 	 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getArea(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.colors.GradientScope)
+	 * org.pepstock.charba.client.colors.Gradient)
 	 */
 	@Override
-	protected Area getArea(IsChart chart, GradientScope scope) {
+	protected Area getArea(IsChart chart, Gradient gradient) {
 		// creates instance to return
 		final Area area = new Area();
 		// depending of scope (canvas or chart area)
-		if (GradientScope.CANVAS.equals(scope)) {
+		if (GradientScope.CANVAS.equals(gradient.getScope())) {
 			// gets canvas
 			Canvas canvas = chart.getCanvas();
 			// sets the coordinates of scope

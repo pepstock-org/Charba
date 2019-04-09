@@ -20,7 +20,6 @@ import org.pepstock.charba.client.colors.Area;
 import org.pepstock.charba.client.colors.CanvasObjectFactory;
 import org.pepstock.charba.client.colors.Center;
 import org.pepstock.charba.client.colors.Gradient;
-import org.pepstock.charba.client.colors.GradientScope;
 import org.pepstock.charba.client.colors.Radius;
 
 import com.google.gwt.canvas.client.Canvas;
@@ -59,10 +58,10 @@ final class ChartBackgroundGradientFactory extends CanvasObjectFactory {
 	 * (non-Javadoc)
 	 * 
 	 * @see org.pepstock.charba.client.colors.CanvasObjectFactory#getArea(org.pepstock.charba.client.IsChart,
-	 * org.pepstock.charba.client.colors.GradientScope)
+	 * org.pepstock.charba.client.colors.Gradient)
 	 */
 	@Override
-	protected final Area getArea(IsChart chart, GradientScope scope) {
+	protected Area getArea(IsChart chart, Gradient gradient) {
 		// gets canvas
 		Canvas canvas = chart.getCanvas();
 		// IGNORE THE SCOPE of gradient
@@ -87,7 +86,7 @@ final class ChartBackgroundGradientFactory extends CanvasObjectFactory {
 	 * org.pepstock.charba.client.colors.Gradient, int, int)
 	 */
 	@Override
-	protected final Center getCenter(IsChart chart, Gradient gradient, int datasetIndex, int index) {
+	protected Center getCenter(IsChart chart, Gradient gradient, int datasetIndex, int index) {
 		// gets canvas
 		Canvas canvas = chart.getCanvas();
 		// IGNORE THE SCOPE of gradient
@@ -109,7 +108,7 @@ final class ChartBackgroundGradientFactory extends CanvasObjectFactory {
 	 * org.pepstock.charba.client.colors.Gradient, int, int)
 	 */
 	@Override
-	protected final Radius getRadius(IsChart chart, Gradient gradient, int datasetIndex, int index) {
+	protected Radius getRadius(IsChart chart, Gradient gradient, int datasetIndex, int index) {
 		// gets canvas
 		Canvas canvas = chart.getCanvas();
 		// by default is the center of chart area

@@ -198,7 +198,7 @@ public abstract class CanvasObjectFactory {
 		// top - the y coordinate of the starting point of the scope
 		// right - the x coordinate of the ending point of the scope
 		// bottom - the y coordinate of the ending point of the scope
-		final Area area = getArea(chart, gradient.getScope());
+		final Area area = getArea(chart, gradient);
 		final double top = area.getTop();
 		final double bottom = area.getBottom();
 		final double left = area.getLeft();
@@ -325,10 +325,35 @@ public abstract class CanvasObjectFactory {
 		return context.createRadialGradient(x0, y0, r0, x1, y1, r1);
 	}
 
-	protected abstract Area getArea(IsChart chart, GradientScope scope);
+	/**
+	 * Returns an area object used to define the area of LINEAR gradient.
+	 * 
+	 * @param chart chart instance
+	 * @param gradient gradient instance
+	 * @return an area object used to define the area of LINEAR gradient
+	 */
+	protected abstract Area getArea(IsChart chart, Gradient gradient);
 
+	/**
+	 * Returns the coordinates of a center of arc for RADIAL gradient.
+	 * 
+	 * @param chart chart instance
+	 * @param gradient gradient instance
+	 * @param datasetIndex dataset index
+	 * @param index data index
+	 * @return the coordinates of a center of arc
+	 */
 	protected abstract Center getCenter(IsChart chart, Gradient gradient, int datasetIndex, int index);
 
+	/**
+	 * Returns the inner and outer radius of arc for RADIAL gradient.
+	 * 
+	 * @param chart chart instance
+	 * @param gradient gradient instance
+	 * @param datasetIndex dataset index
+	 * @param index data index
+	 * @return the inner and outer radius of arc
+	 */
 	protected abstract Radius getRadius(IsChart chart, Gradient gradient, int datasetIndex, int index);
 
 }
