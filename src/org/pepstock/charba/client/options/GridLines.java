@@ -195,7 +195,7 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 			ArrayString array = getArrayValue(Property.COLOR);
 			return ArrayListHelper.list(array);
 		} else {
-			return new LinkedList<String>();
+			return new LinkedList<>();
 		}
 	}
 
