@@ -249,7 +249,7 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 		// -------------------------------
 		clickCallbackProxy.setCallback((nativeChart, event, items) -> {
 			// handle click event
-			handleClickEvent(nativeChart, event, items);
+			handleClickEvent(event);
 			// fires the click event on the chart
 			getChart().fireEvent(new ChartClickEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
 		});
@@ -629,44 +629,75 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 		// loads the native object into configuration to pass to chart
 		ConfigurationLoader.loadOptions(configuration, getConfiguration());
 	}
-	
-	private void handleClickEvent(Chart chart, ChartNativeEvent event, ArrayObject items) {
-		boolean executionChain = handleDatasetSelection(chart, event, items);
-		// if the item is consistent
-		if (!executionChain) {
-			executionChain = handleTitleSelection(chart, event, items);
+
+	/**
+	 * Manage click event on chart.
+	 * 
+	 * @param event event generated on chart
+	 */
+	private void handleClickEvent(ChartNativeEvent event) {
+		// try to manage click of dataset
+		if (handleDatasetSelection(event)) {
+			// if done, returns to caller
+			return;
 		}
-		// if the item is consistent
-		if (!executionChain) {
-			handleScaleSelection(chart, event, items);
+		// if here, dataset is not manage
+		// try to manage click on title
+		if (handleTitleSelection(event)) {
+			// if done, returns to caller
+			return;
 		}
+		// if here, dataset and title are not manage
+		// try to manage click on axis
+		handleScaleSelection(event);
 	}
-	
-	private boolean handleDatasetSelection(Chart chart, ChartNativeEvent event, ArrayObject items) {
+
+	/**
+	 * Check if the click event on chart and manage it fire a CHARBA dataset selection event.
+	 * 
+	 * @param event event generated on chart
+	 * @return <code>true</code> if the event on chart has been managed as dataset selection, otherwise <code>false</code>.
+	 */
+	private boolean handleDatasetSelection(ChartNativeEvent event) {
 		// gets the dataset items by event
 		DatasetItem item = getChart().getElementAtEvent(event);
-		// if the item is consistent
+		// if the item is consistent and there is any handler
 		if (item != null && hasDatasetSelectionHandlers()) {
 			// fires the event for dataset selection
 			getChart().fireEvent(new DatasetSelectionEvent(event, item));
+			// return that the event has been fired
 			return true;
 		}
+		// if here, the event is not managed yet
 		return false;
 	}
 
-	private boolean handleTitleSelection(Chart chart, ChartNativeEvent event, ArrayObject items) {
+	/**
+	 * Check if the click event on chart and manage it fire a CHARBA title selection event.
+	 * 
+	 * @param event event generated on chart
+	 * @return <code>true</code> if the event on chart has been managed as title selection, otherwise <code>false</code>.
+	 */
+	private boolean handleTitleSelection(ChartNativeEvent event) {
+		// checks if title has been selected and there is any handler
 		if (hasTitleClickHandlers() && getChart().getNode().getTitle().isInside(event)) {
-			// checks if title has been selected and there is any handler
 			// fires the click event on the chart title
 			getChart().fireEvent(new TitleClickEvent(event, getChart().getNode().getOptions().getTitle()));
+			// return that the event has been fired
 			return true;
 		}
+		// if here, the event is not managed yet
 		return false;
 	}
-	
-	private void handleScaleSelection(Chart chart, ChartNativeEvent event, ArrayObject items) {
+
+	/**
+	 * Check if the click event on chart and manage it fire a CHARBA scale selection event.
+	 * 
+	 * @param event event generated on chart
+	 */
+	private void handleScaleSelection(ChartNativeEvent event) {
+		// checks if there is any handler and the chart has got scales
 		if (hasAxisClickHandlers() && !ScaleType.NONE.equals(getChart().getType().scaleType())) {
-			// checks if there is any handler and the chart has got scales
 			// gets the scales
 			ScalesNode scales = getChart().getNode().getScales();
 			// checks if event is inside a scale box
