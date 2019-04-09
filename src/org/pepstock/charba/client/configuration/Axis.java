@@ -183,104 +183,20 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		beforeUpdateCallbackProxy.setCallback((context, item) -> {
-			// if user callback is consistent
-			if (axisUpdateCallback != null) {
-				// then it is called
-				axisUpdateCallback.onBeforeUpdate(Axis.this, new AxisItem(item));
-			}
-		});
-		beforeSetDimensionsCallbackProxy.setCallback((context, item) -> {
-			// if user callback is consistent
-			if (axisDimensionsCallback != null) {
-				// then it is called
-				axisDimensionsCallback.onBeforeSetDimensions(Axis.this, new AxisItem(item));
-			}
-		});
-		afterSetDimensionsCallbackProxy.setCallback((context, item) -> {
-			// if user callback is consistent
-			if (axisDimensionsCallback != null) {
-				// then it is called
-				axisDimensionsCallback.onAfterSetDimensions(Axis.this, new AxisItem(item));
-			}
-		});
-		beforeDataLimitsCallbackProxy.setCallback((context, item) -> {
-			// if user callback is consistent
-			if (axisDataLimitsCallback != null) {
-				// then it is called
-				axisDataLimitsCallback.onBeforeDataLimits(Axis.this, new AxisItem(item));
-			}
-		});
-		afterDataLimitsCallbackProxy.setCallback((context, item) -> {
-			// if user callback is consistent
-			if (axisDataLimitsCallback != null) {
-				// then it is called
-				axisDataLimitsCallback.onAfterDataLimits(Axis.this, new AxisItem(item));
-			}
-		});
-		beforeBuildTicksCallbackProxy.setCallback((context, item) -> {
-			// if user callback is consistent
-			if (axisBuildTicksCallback != null) {
-				// then it is called
-				axisBuildTicksCallback.onBeforeBuildTicks(Axis.this, new AxisItem(item));
-			}
-		});
-		afterBuildTicksCallbackProxy.setCallback((context, item) -> {
-			// if user callback is consistent
-			if (axisBuildTicksCallback != null) {
-				// then it is called
-				axisBuildTicksCallback.onAfterBuildTicks(Axis.this, new AxisItem(item));
-			}
-		});
-		beforeTickToLabelConversionCallbackProxy.setCallback((context, item) -> {
-			// if user callback is consistent
-			if (axisTickToLabelConversionCallback != null) {
-				// then it is called
-				axisTickToLabelConversionCallback.onBeforeTickToLabelConversion(Axis.this, new AxisItem(item));
-			}
-		});
-		afterTickToLabelConversionCallbackProxy.setCallback((context, item) -> {
-			// if user callback is consistent
-			if (axisTickToLabelConversionCallback != null) {
-				// then it is called
-				axisTickToLabelConversionCallback.onAfterTickToLabelConversion(Axis.this, new AxisItem(item));
-			}
-		});
-		beforeCalculateTickRotationCallbackProxy.setCallback((context, item) -> {
-			// if user callback is consistent
-			if (axisCalculateTickRotationCallback != null) {
-				// then it is called
-				axisCalculateTickRotationCallback.onBeforeCalculateTickRotation(Axis.this, new AxisItem(item));
-			}
-		});
-		afterCalculateTickRotationCallbackProxy.setCallback((context, item) -> {
-			// if user callback is consistent
-			if (axisCalculateTickRotationCallback != null) {
-				// then it is called
-				axisCalculateTickRotationCallback.onAfterCalculateTickRotation(Axis.this, new AxisItem(item));
-			}
-		});
-		beforeFitCallbackProxy.setCallback((context, item) -> {
-			// if user callback is consistent
-			if (axisFitCallback != null) {
-				// then it is called
-				axisFitCallback.onBeforeFit(Axis.this, new AxisItem(item));
-			}
-		});
-		afterFitCallbackProxy.setCallback((context, item) -> {
-			// if user callback is consistent
-			if (axisFitCallback != null) {
-				// then it is called
-				axisFitCallback.onAfterFit(Axis.this, new AxisItem(item));
-			}
-		});
-		afterUpdateCallbackProxy.setCallback((context, item) -> {
-			// if user callback is consistent
-			if (axisUpdateCallback != null) {
-				// then it is called
-				axisUpdateCallback.onAfterUpdate(Axis.this, new AxisItem(item));
-			}
-		});
+		beforeUpdateCallbackProxy.setCallback((context, item) -> onBeforeUpdateCallback(item));
+		beforeSetDimensionsCallbackProxy.setCallback((context, item) -> onBeforeSetDimensionsCallback(item));
+		afterSetDimensionsCallbackProxy.setCallback((context, item) -> onAfterSetDimensionsCallback(item));
+		beforeDataLimitsCallbackProxy.setCallback((context, item) -> onBeforeDataLimitsCallback(item));
+		afterDataLimitsCallbackProxy.setCallback((context, item) -> onAfterDataLimitsCallback(item));
+		beforeBuildTicksCallbackProxy.setCallback((context, item) -> onBeforeBuildTicksCallback(item));
+		afterBuildTicksCallbackProxy.setCallback((context, item) -> onAfterBuildTicksCallback(item));
+		beforeTickToLabelConversionCallbackProxy.setCallback((context, item) -> onBeforeTickToLabelConversionCallback(item));
+		afterTickToLabelConversionCallbackProxy.setCallback((context, item) -> onAfterTickToLabelConversionCallback(item));
+		beforeCalculateTickRotationCallbackProxy.setCallback((context, item) -> onBeforeCalculateTickRotationCallback(item));
+		afterCalculateTickRotationCallbackProxy.setCallback((context, item) -> onAfterCalculateTickRotationCallback(item));
+		beforeFitCallbackProxy.setCallback((context, item) -> onBeforeFitCallback(item));
+		afterFitCallbackProxy.setCallback((context, item) -> onAfterFitCallback(item));
+		afterUpdateCallbackProxy.setCallback((context, item) -> onAfterUpdateCallback(item));
 	}
 
 	/**
@@ -620,6 +536,188 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			// otherwise sets null which removes the properties from java script object
 			getConfiguration().setCallback(Property.BEFORE_UPDATE, null);
 			getConfiguration().setCallback(Property.AFTER_UPDATE, null);
+		}
+	}
+
+	/**
+	 * Invokes UPDATE axis callback.
+	 * 
+	 * @param item axis item instance
+	 */
+	private void onBeforeUpdateCallback(NativeObject item) {
+		// if user callback is consistent
+		if (axisUpdateCallback != null) {
+			// then it is called
+			axisUpdateCallback.onBeforeUpdate(this, new AxisItem(item));
+		}
+	}
+
+	/**
+	 * Invokes SET DIMENSION axis callback.
+	 * 
+	 * @param item axis item instance
+	 */
+	private void onBeforeSetDimensionsCallback(NativeObject item) {
+		// if user callback is consistent
+		if (axisDimensionsCallback != null) {
+			// then it is called
+			axisDimensionsCallback.onBeforeSetDimensions(this, new AxisItem(item));
+		}
+	}
+
+	/**
+	 * Invokes SET DIMENSION axis callback.
+	 * 
+	 * @param item axis item instance
+	 */
+	private void onAfterSetDimensionsCallback(NativeObject item) {
+		// if user callback is consistent
+		if (axisDimensionsCallback != null) {
+			// then it is called
+			axisDimensionsCallback.onAfterSetDimensions(this, new AxisItem(item));
+		}
+	}
+
+	/**
+	 * Invokes DATA LIMITS axis callback.
+	 * 
+	 * @param item axis item instance
+	 */
+	private void onBeforeDataLimitsCallback(NativeObject item) {
+		// if user callback is consistent
+		if (axisDataLimitsCallback != null) {
+			// then it is called
+			axisDataLimitsCallback.onBeforeDataLimits(this, new AxisItem(item));
+		}
+	}
+
+	/**
+	 * Invokes DATA LIMITS axis callback.
+	 * 
+	 * @param item axis item instance
+	 */
+	private void onAfterDataLimitsCallback(NativeObject item) {
+		// if user callback is consistent
+		if (axisDataLimitsCallback != null) {
+			// then it is called
+			axisDataLimitsCallback.onAfterDataLimits(this, new AxisItem(item));
+		}
+	}
+
+	/**
+	 * Invokes BUILD TICKS axis callback.
+	 * 
+	 * @param item axis item instance
+	 */
+	private void onBeforeBuildTicksCallback(NativeObject item) {
+		// if user callback is consistent
+		if (axisBuildTicksCallback != null) {
+			// then it is called
+			axisBuildTicksCallback.onBeforeBuildTicks(this, new AxisItem(item));
+		}
+	}
+
+	/**
+	 * Invokes BUILD TICKS axis callback.
+	 * 
+	 * @param item axis item instance
+	 */
+	private void onAfterBuildTicksCallback(NativeObject item) {
+		// if user callback is consistent
+		if (axisBuildTicksCallback != null) {
+			// then it is called
+			axisBuildTicksCallback.onAfterBuildTicks(this, new AxisItem(item));
+		}
+	}
+
+	/**
+	 * Invokes TICK TO LABEL conversion axis callback.
+	 * 
+	 * @param item axis item instance
+	 */
+	private void onBeforeTickToLabelConversionCallback(NativeObject item) {
+		// if user callback is consistent
+		if (axisTickToLabelConversionCallback != null) {
+			// then it is called
+			axisTickToLabelConversionCallback.onBeforeTickToLabelConversion(this, new AxisItem(item));
+		}
+	}
+
+	/**
+	 * Invokes TICK TO LABEL conversion axis callback.
+	 * 
+	 * @param item axis item instance
+	 */
+	private void onAfterTickToLabelConversionCallback(NativeObject item) {
+		// if user callback is consistent
+		if (axisTickToLabelConversionCallback != null) {
+			// then it is called
+			axisTickToLabelConversionCallback.onAfterTickToLabelConversion(this, new AxisItem(item));
+		}
+	}
+
+	/**
+	 * Invokes CALCULATE TICK rotation conversion axis callback.
+	 * 
+	 * @param item axis item instance
+	 */
+	private void onBeforeCalculateTickRotationCallback(NativeObject item) {
+		// if user callback is consistent
+		if (axisCalculateTickRotationCallback != null) {
+			// then it is called
+			axisCalculateTickRotationCallback.onBeforeCalculateTickRotation(this, new AxisItem(item));
+		}
+	}
+
+	/**
+	 * Invokes CALCULATE TICK rotation conversion axis callback.
+	 * 
+	 * @param item axis item instance
+	 */
+	private void onAfterCalculateTickRotationCallback(NativeObject item) {
+		// if user callback is consistent
+		if (axisCalculateTickRotationCallback != null) {
+			// then it is called
+			axisCalculateTickRotationCallback.onAfterCalculateTickRotation(this, new AxisItem(item));
+		}
+	}
+
+	/**
+	 * Invokes FIT conversion axis callback.
+	 * 
+	 * @param item axis item instance
+	 */
+	private void onBeforeFitCallback(NativeObject item) {
+		// if user callback is consistent
+		if (axisFitCallback != null) {
+			// then it is called
+			axisFitCallback.onBeforeFit(this, new AxisItem(item));
+		}
+	}
+
+	/**
+	 * Invokes FIT conversion axis callback.
+	 * 
+	 * @param item axis item instance
+	 */
+	private void onAfterFitCallback(NativeObject item) {
+		// if user callback is consistent
+		if (axisFitCallback != null) {
+			// then it is called
+			axisFitCallback.onAfterFit(this, new AxisItem(item));
+		}
+	}
+
+	/**
+	 * Invokes UPDATE conversion axis callback.
+	 * 
+	 * @param item axis item instance
+	 */
+	private void onAfterUpdateCallback(NativeObject item) {
+		// if user callback is consistent
+		if (axisUpdateCallback != null) {
+			// then it is called
+			axisUpdateCallback.onAfterUpdate(this, new AxisItem(item));
 		}
 	}
 
