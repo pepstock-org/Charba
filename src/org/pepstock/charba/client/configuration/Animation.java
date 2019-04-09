@@ -212,10 +212,10 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.EventProvider#addHandler(org.pepstock.charba.client.events.AddHandlerEvent)
+	 * @see org.pepstock.charba.client.events.AddHandlerEventHandler#onAdd(org.pepstock.charba.client.events.AddHandlerEvent)
 	 */
 	@Override
-	protected final void addHandler(AddHandlerEvent event) {
+	public void onAdd(AddHandlerEvent event) {
 		// checks which kind of handler has been added
 		if (event.isRecognize(AnimationCompleteEvent.TYPE)) {
 			// checks if property exist
@@ -239,11 +239,11 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.EventProvider#removeHandler(org.pepstock.charba.client.events.
+	 * @see org.pepstock.charba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.charba.client.events.
 	 * RemoveHandlerEvent)
 	 */
 	@Override
-	protected final void removeHandler(RemoveHandlerEvent event) {
+	public void onRemove(RemoveHandlerEvent event) {
 		// checks which kind of handler has been removed
 		if (event.isRecognize(AnimationCompleteEvent.TYPE)) {
 			// decrements amount of handlers

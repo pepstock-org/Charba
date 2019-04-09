@@ -44,39 +44,4 @@ public abstract class EventProvider<T extends NativeObjectContainer> extends Con
 		chart.addHandler(this, RemoveHandlerEvent.TYPE);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.charba.client.events.
-	 * RemoveHandlerEvent)
-	 */
-	@Override
-	public final void onRemove(RemoveHandlerEvent event) {
-		removeHandler(event);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.events.AddHandlerEventHandler#onAdd(org.pepstock.charba.client.events. AddHandlerEvent)
-	 */
-	@Override
-	public final void onAdd(AddHandlerEvent event) {
-		addHandler(event);
-	}
-
-	/**
-	 * Notifies the event provider when a new handler has been added.
-	 * 
-	 * @param event event to be forwarded
-	 */
-	protected abstract void addHandler(AddHandlerEvent event);
-
-	/**
-	 * Notifies the event provider when a new handler has been unregistered
-	 * 
-	 * @param event event to be forwarded
-	 */
-	protected abstract void removeHandler(RemoveHandlerEvent event);
-
 }

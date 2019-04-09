@@ -493,10 +493,10 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.EventProvider#addHandler(org.pepstock.charba.client.events.AddHandlerEvent)
+	 * @see org.pepstock.charba.client.events.AddHandlerEventHandler#onAdd(org.pepstock.charba.client.events.AddHandlerEvent)
 	 */
 	@Override
-	protected final void addHandler(AddHandlerEvent event) {
+	public void onAdd(AddHandlerEvent event) {
 		// checks if type of added event handler is dataset selection or click
 		if (event.isRecognize(CHART_CLICK_TYPES)) {
 			// if there is not any click event handler
@@ -543,11 +543,11 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.configuration.EventProvider#removeHandler(org.pepstock.charba.client.events.
+	 * @see org.pepstock.charba.client.events.RemoveHandlerEventHandler#onRemove(org.pepstock.charba.client.events.
 	 * RemoveHandlerEvent)
 	 */
 	@Override
-	protected final void removeHandler(RemoveHandlerEvent event) {
+	public void onRemove(RemoveHandlerEvent event) {
 		// checks if type of removed event handler is dataset selection or click
 		if (event.isRecognize(CHART_CLICK_TYPES)) {
 			// decrements the amount of handlers
