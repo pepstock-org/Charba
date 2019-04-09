@@ -170,22 +170,11 @@ public final class JSON {
 		// if object
 		if (ObjectType.OBJECT.equals(type)) {
 			// checks if is an element
-			if (value instanceof Element) {
-				// casts to element
-				Element element = (Element) value;
-				// checks if is an element node
-				if (element.getNodeType() == Node.ELEMENT_NODE) {
-					StringBuilder sb = new StringBuilder();
-					sb.append("<").append(element.getNodeName().toLowerCase(Locale.getDefault()));
-					List<String> attributes = JsHelper.get().elementAttributes(element);
-					if (!attributes.isEmpty()) {
-						for (String attribute : attributes) {
-							sb.append(" ").append(attribute);
-						}
-					}
-					// returns html
-					return sb.append(">").toString();
-				}
+			String result = manageElement(value);
+			// if not null, is an element
+			// then returns the result
+			if (result != null) {
+				return result;
 			}
 			// checks if the object has been already parsed
 			if (objects.contains(value)) {
@@ -195,6 +184,35 @@ public final class JSON {
 			}
 			// adds object to cache
 			objects.add(value);
+		}
+		return null;
+	}
+	
+	/**
+	 * Manages the object of the replace function checking if is a DOM element and then returning the DOM string.
+	 * 
+	 * @param value object passed by replace function.
+	 * @return a DOM element as string.
+	 */
+	@JsOverlay
+	private static String manageElement(Object value) {
+		// checks if is an element
+		if (value instanceof Element) {
+			// casts to element
+			Element element = (Element) value;
+			// checks if is an element node
+			if (element.getNodeType() == Node.ELEMENT_NODE) {
+				StringBuilder sb = new StringBuilder();
+				sb.append("<").append(element.getNodeName().toLowerCase(Locale.getDefault()));
+				List<String> attributes = JsHelper.get().elementAttributes(element);
+				if (!attributes.isEmpty()) {
+					for (String attribute : attributes) {
+						sb.append(" ").append(attribute);
+					}
+				}
+				// returns html
+				return sb.append(">").toString();
+			}
 		}
 		return null;
 	}
@@ -240,25 +258,11 @@ public final class JSON {
 					}
 					// if object
 					// checks if is an element
-					if (ObjectType.OBJECT.equals(type) && value instanceof Element) {
-						// casts to element
-						Element element = (Element) value;
-						// checks if is an element node
-						if (element.getNodeType() == Node.ELEMENT_NODE) {
-							StringBuilder sb = new StringBuilder();
-							sb.append("<").append(element.getNodeName().toLowerCase(Locale.getDefault()));
-							List<String> attributes = JsHelper.get().elementAttributes(element);
-							if (!attributes.isEmpty()) {
-								for (String attribute : attributes) {
-									sb.append(" ").append(attribute);
-								}
-							}
-							// returns html
-							return sb.append(">").toString();
-						}
-					}
-					// returns value
-					return value;
+					// checks if is an element
+					String result = manageElement(value);
+					// if not null, is an element
+					// then returns the result
+					return result != null ? result : value;
 				}
 				// checks if is a Charba property
 				if (key.startsWith(JSONReplacerConstants.CHARBA_PROPERTY_KEY_PREFIX)) {
