@@ -24,7 +24,6 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.impl.plugins.enums.PointerElement;
-import org.pepstock.charba.client.items.DatasetItem;
 import org.pepstock.charba.client.items.LegendHitBoxItem;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
@@ -101,48 +100,97 @@ public final class ChartPointer extends AbstractPlugin {
 				ChartPointerOptions pOptions = OPTIONS.get(chartInstance.getId());
 				// gets the scope
 				List<PointerElement> scope = pOptions.getElements();
-				// creates the item reference
-				DatasetItem item = null;
-				// checks if the datasets is in scope
-				if (chartInstance.getOptions().hasDatasetSelectionHandlers() && isElementInScope(scope, PointerElement.DATASET)) {
-					// if yes, asks the dataset item by event
-					item = chartInstance.getElementAtEvent(event);
-				}
-				// checks item
-				if (item != null) {
-					// DATASET SELECTION
-					// otherwise sets the pointer
+				// DATASET SELECTION
+				if (hasDatasetSelection(chartInstance, event, scope)) {
 					chartInstance.getElement().getStyle().setCursor(pOptions.getCursorPointer());
-				} else if (chartInstance.getOptions().hasTitleClickHandlers() && isElementInScope(scope, PointerElement.TITLE) && chartInstance.getNode().getTitle().isInside(event)) {
+				} else if (hasTitleSelection(chartInstance, event, scope)) {
 					// TITLE SELECTION
-					// otherwise sets the pointer
 					chartInstance.getElement().getStyle().setCursor(pOptions.getCursorPointer());
-				} else if (chartInstance.getOptions().hasAxisClickHandlers() && isElementInScope(scope, PointerElement.AXES) && !ScaleType.NONE.equals(chartInstance.getType().scaleType()) && chartInstance.getNode().getScales().isInside(event)) {
+				} else if (hasScaleSelection(chartInstance, event, scope)) {
 					// AXIS SELECTION
-					// otherwise sets the pointer
 					chartInstance.getElement().getStyle().setCursor(pOptions.getCursorPointer());
-				} else if (isElementInScope(scope, PointerElement.LEGEND) && chartInstance.getNode().getLegend().isInside(event)) {
+				} else if (hasLegendSelection(chartInstance, event, scope)) {
 					// LEGEND SELECTION
-					// checks if cursor is over the hit box
-					List<LegendHitBoxItem> legendItems = chartInstance.getNode().getLegend().getHitBoxes();
-					// scans all legend item box
-					for (LegendHitBoxItem legendItem : legendItems) {
-						// if cursor inside the legend item
-						if (legendItem.isInside(event)) {
-							// sets the pointer
-							chartInstance.getElement().getStyle().setCursor(pOptions.getCursorPointer());
-							// and close
-							return;
-						}
-					}
-					// if null, sets the default cursor
-					chartInstance.getElement().getStyle().setCursor(chartInstance.getInitialCursor());
+					chartInstance.getElement().getStyle().setCursor(pOptions.getCursorPointer());
 				} else {
 					// if null, sets the default cursor
 					chartInstance.getElement().getStyle().setCursor(chartInstance.getInitialCursor());
 				}
 			}
 		}
+	}
+
+	/**
+	 * Returns <code>true</code> if the cursor is over to a dataset, otherwise <code>false</code>.
+	 * 
+	 * @param chart chart instance
+	 * @param event event form CHART.js
+	 * @param scope the scope with all activated scope of the plugin
+	 * @return <code>true</code> if the cursor is over to a dataset, otherwise <code>false</code>
+	 */
+	private boolean hasDatasetSelection(AbstractChart<?> chart, ChartNativeEvent event, List<PointerElement> scope) {
+		// checks if the datasets is in scope
+		if (chart.getOptions().hasDatasetSelectionHandlers() && isElementInScope(scope, PointerElement.DATASET)) {
+			// if yes, asks the dataset item by event
+			// if consistent, is over a dataset
+			return chart.getElementAtEvent(event) != null;
+		}
+		return false;
+	}
+
+	/**
+	 * Returns <code>true</code> if the cursor is over to the title, otherwise <code>false</code>.
+	 * 
+	 * @param chart chart instance
+	 * @param event event form CHART.js
+	 * @param scope the scope with all activated scope of the plugin
+	 * @return <code>true</code> if the cursor is over to the title, otherwise <code>false</code>
+	 */
+	private boolean hasTitleSelection(AbstractChart<?> chart, ChartNativeEvent event, List<PointerElement> scope) {
+		// checks if there is any title click handler and title is in scope
+		// and the cursor is over the title element
+		return chart.getOptions().hasTitleClickHandlers() && isElementInScope(scope, PointerElement.TITLE) && chart.getNode().getTitle().isInside(event);
+	}
+
+	/**
+	 * Returns <code>true</code> if the cursor is over to a scale, otherwise <code>false</code>.
+	 * 
+	 * @param chart chart instance
+	 * @param event event form CHART.js
+	 * @param scope the scope with all activated scope of the plugin
+	 * @return <code>true</code> if the cursor is over to a scale, otherwise <code>false</code>
+	 */
+	private boolean hasScaleSelection(AbstractChart<?> chart, ChartNativeEvent event, List<PointerElement> scope) {
+		// checks if there is any axis click handler and axis is in scope
+		// and the cursor is over the axis element
+		return chart.getOptions().hasAxisClickHandlers() && isElementInScope(scope, PointerElement.AXES) && !ScaleType.NONE.equals(chart.getType().scaleType()) && chart.getNode().getScales().isInside(event);
+	}
+
+	/**
+	 * Returns <code>true</code> if the cursor is over to the legend, otherwise <code>false</code>.
+	 * 
+	 * @param chart chart instance
+	 * @param event event form CHART.js
+	 * @param scope the scope with all activated scope of the plugin
+	 * @return <code>true</code> if the cursor is over to the legend, otherwise <code>false</code>
+	 */
+	private boolean hasLegendSelection(AbstractChart<?> chart, ChartNativeEvent event, List<PointerElement> scope) {
+		// checks if legend is in scope
+		// and the cursor is over the title element
+		if (isElementInScope(scope, PointerElement.LEGEND) && chart.getNode().getLegend().isInside(event)) {
+			// LEGEND SELECTION
+			// checks if cursor is over the hit box
+			List<LegendHitBoxItem> legendItems = chart.getNode().getLegend().getHitBoxes();
+			// scans all legend item box
+			for (LegendHitBoxItem legendItem : legendItems) {
+				// if cursor inside the legend item
+				if (legendItem.isInside(event)) {
+					// confirms is on legend
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	/**

@@ -155,7 +155,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		 * Method of function to be called to color the font of render into chat.
 		 * 
 		 * @param context context Value of <code>this</code> to the execution context of function.
-		 * @param item native object as render item.
+		 * @param item native object as font color item.
 		 * @return string as color representation.
 		 */
 		String call(Object context, FontColorItem item);
@@ -249,49 +249,8 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		renderCallbackProxy.setCallback((context, item) -> {
-			// gets chart instance
-			IsChart chart = item.getNativeChart().getChart();
-			// checks if the callback is set
-			if (chart != null && renderCallback != null) {
-				// calls callback
-				Object value = renderCallback.invoke(chart, item);
-				// checks result
-				if (value != null) {
-					if (value instanceof ImageElement) {
-						return (ImageElement) value;
-					} else {
-						return value.toString();
-					}
-				}
-			}
-			// default value is percentage
-			return String.valueOf(item.getPercentage());
-		});
-		fontColorCallbackProxy.setCallback((context, item) -> {
-			// gets chart instance
-			IsChart chart = item.getNativeChart().getChart();
-			// checks if the callback is set
-			if (chart != null && fontColorCallback != null) {
-				// calls callback
-				Object value = fontColorCallback.invoke(chart, item);
-				// checks result
-				if (value instanceof IsColor) {
-					// is color instance
-					IsColor color = (IsColor) value;
-					return color.toRGBA();
-				} else if (value instanceof String) {
-					// is string instance
-					return (String) value;
-				} else if (value != null) {
-					// another instance not null
-					// returns to string
-					return value.toString();
-				}
-			}
-			// defaults returns font color
-			return getFontColorAsString();
-		});
+		renderCallbackProxy.setCallback((context, item) -> onRenderCallback(item));
+		fontColorCallbackProxy.setCallback((context, item) -> onFontColorCallback(item));
 	}
 
 	/**
@@ -790,4 +749,62 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 			remove(LabelsOptions.Property.FONT_COLOR);
 		}
 	}
+
+	/**
+	 * Invokes the RENDER callback.
+	 * 
+	 * @param item native object as render item.
+	 * @return image or string for rendering.
+	 */
+	private Object onRenderCallback(RenderItem item) {
+		// gets chart instance
+		IsChart chart = item.getNativeChart().getChart();
+		// checks if the callback is set
+		if (chart != null && renderCallback != null) {
+			// calls callback
+			Object value = renderCallback.invoke(chart, item);
+			// checks result
+			if (value != null) {
+				if (value instanceof ImageElement) {
+					return (ImageElement) value;
+				} else {
+					return value.toString();
+				}
+			}
+		}
+		// default value is percentage
+		return String.valueOf(item.getPercentage());
+	}
+	
+	/**
+	 * Invokes the FONTCOLOR callback.
+	 * 
+	 * @param item native object as font color item.
+	 * @return string as color representation.
+	 */
+	private String onFontColorCallback(FontColorItem item) {
+		// gets chart instance
+		IsChart chart = item.getNativeChart().getChart();
+		// checks if the callback is set
+		if (chart != null && fontColorCallback != null) {
+			// calls callback
+			Object value = fontColorCallback.invoke(chart, item);
+			// checks result
+			if (value instanceof IsColor) {
+				// is color instance
+				IsColor color = (IsColor) value;
+				return color.toRGBA();
+			} else if (value instanceof String) {
+				// is string instance
+				return (String) value;
+			} else if (value != null) {
+				// another instance not null
+				// returns to string
+				return value.toString();
+			}
+		}
+		// defaults returns font color
+		return getFontColorAsString();
+	}
+
 }

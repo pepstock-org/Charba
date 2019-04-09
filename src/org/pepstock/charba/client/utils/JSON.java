@@ -137,42 +137,10 @@ public final class JSON {
 					// skips it
 					return JsHelper.get().undefined();
 				}
-				// gets the type of object
-				ObjectType type = JsHelper.get().typeOf(value);
-				// if function
-				if (ObjectType.FUNCTION.equals(type)) {
-					// returns the value of function
-					return value + Utilities.EMPTY_STRING;
-				}
-				// if object
-				if (ObjectType.OBJECT.equals(type)) {
-					// checks if is an element
-					if (value instanceof Element) {
-						// casts to element
-						Element element = (Element) value;
-						// checks if is an element node
-						if (element.getNodeType() == Node.ELEMENT_NODE) {
-							StringBuilder sb = new StringBuilder();
-							sb.append("<").append(element.getNodeName().toLowerCase(Locale.getDefault()));
-							List<String> attributes = JsHelper.get().elementAttributes(element);
-							if (!attributes.isEmpty()) {
-								for (String attribute : attributes) {
-									sb.append(" ").append(attribute);
-								}
-							}
-							// returns html
-							return sb.append(">").toString();
-						}
-					}
-					// checks if the object has been already parsed
-					if (objects.contains(value)) {
-						// sets the static vale
-						// to avoid cycle
-						return JSONReplacerConstants.CYCLE_PROPERTY_VALUE;
-					}
-					// adds object to cache
-					objects.add(value);
-				}
+				// gets the object 
+				Object result = manageObject(objects, value);
+				// if result is not consistent, returns the value
+				return result != null ? result : value;
 			} else {
 				// here is the first object
 				// adds to set to further controls
@@ -181,6 +149,54 @@ public final class JSON {
 			// returns object
 			return value;
 		}, spaces);
+	}
+	
+	/**
+	 * Manages the object of the replace function.
+	 * 
+	 * @param objects set of objects already managed.
+	 * @param value object passed by replace function.
+	 * @return the value to return to replace function or <code>null</code> if must continue
+	 */
+	@JsOverlay
+	private static String manageObject(Set<Object> objects, Object value) {
+		// gets the type of object
+		ObjectType type = JsHelper.get().typeOf(value);
+		// if function
+		if (ObjectType.FUNCTION.equals(type)) {
+			// returns the value of function
+			return value + Utilities.EMPTY_STRING;
+		}
+		// if object
+		if (ObjectType.OBJECT.equals(type)) {
+			// checks if is an element
+			if (value instanceof Element) {
+				// casts to element
+				Element element = (Element) value;
+				// checks if is an element node
+				if (element.getNodeType() == Node.ELEMENT_NODE) {
+					StringBuilder sb = new StringBuilder();
+					sb.append("<").append(element.getNodeName().toLowerCase(Locale.getDefault()));
+					List<String> attributes = JsHelper.get().elementAttributes(element);
+					if (!attributes.isEmpty()) {
+						for (String attribute : attributes) {
+							sb.append(" ").append(attribute);
+						}
+					}
+					// returns html
+					return sb.append(">").toString();
+				}
+			}
+			// checks if the object has been already parsed
+			if (objects.contains(value)) {
+				// sets the static vale
+				// to avoid cycle
+				return JSONReplacerConstants.CYCLE_PROPERTY_VALUE;
+			}
+			// adds object to cache
+			objects.add(value);
+		}
+		return null;
 	}
 
 	/**

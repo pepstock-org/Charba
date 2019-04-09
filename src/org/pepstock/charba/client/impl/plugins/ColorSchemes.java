@@ -79,90 +79,142 @@ public final class ColorSchemes extends AbstractPlugin {
 			List<IsColor> colors = scheme.getColors();
 			// checks if the list colors is consistent, if not skips the logic
 			if (colors != null && !colors.isEmpty()) {
-				// gets the amount of colors
-				int amountOfColors = colors.size();
-				// gets the list of datasets of chart
-				List<Dataset> datasets = chart.getData().getDatasets();
-				// if dataset list is empty, skips the logic
-				if (!datasets.isEmpty()) {
-					// initial dataset index
-					int datasetIndex = 0;
-					// scans all datasets
-					for (Dataset dataset : datasets) {
-						// get the module for color index
-						int colorIndex = datasetIndex % amountOfColors;
-						// checks if reverse is requested to get the color
-						IsColor color = colors.get(options.isReverse() ? amountOfColors - colorIndex - 1 : colorIndex);
-						// if hoving dataset, like PIE, POLAR, DOIUGHNUT
-						if (dataset instanceof HovingDataset) {
-							// casts the dataset
-							HovingDataset hovingDataset = (HovingDataset) dataset;
-							// checks if bubble chart because the color will be selected by scheme, as for bar charts
-							if (ChartType.BUBBLE.equals(chart.getType()) && SchemeScope.DATASET.equals(options.getSchemeScope())) {
-								// if here is at dataset level
-								// every dataset has got own color
-								// sets background color (passed as list but it's only 1), applying the transparency
-								hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, Arrays.asList(color), options.isReverse(), options.getBackgroundColorAlpha()));
-								// checks if border has been requested
-								if (!hovingDataset.getBorderWidth().isEmpty()) {
-									// if yes, apply the color (passed as list but it's only 1) to borders properties
-									hovingDataset.setBorderColor(getColorsFromData(hovingDataset, Arrays.asList(color), options.isReverse(), Color.DEFAULT_ALPHA));
-								}
-							} else {
-								// sets background colors, applying the transparency
-								hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, colors, options.isReverse(), options.getBackgroundColorAlpha()));
-								// checks if border has been requested
-								if (!hovingDataset.getBorderWidth().isEmpty()) {
-									// if yes, apply the colors to borders properties
-									hovingDataset.setBorderColor(getColorsFromData(hovingDataset, colors, options.isReverse(), Color.DEFAULT_ALPHA));
-								}
-							}
-						} else if (dataset instanceof HovingFlexDataset) {
-							// if hoving FLEX dataset, like BAR
-							HovingFlexDataset hovingDataset = (HovingFlexDataset) dataset;
-							// checks if the scope to apply the colors is at data or dataset level
-							if (SchemeScope.DATA.equals(options.getSchemeScope())) {
-								// if here is at data level
-								// every data has got own color
-								hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, colors, options.isReverse(), options.getBackgroundColorAlpha()));
-								// checks if border has been requested
-								if (getMaxBorderWidth(hovingDataset) > 0) {
-									// if yes, apply the colors to borders properties
-									hovingDataset.setBorderColor(getColorsFromData(hovingDataset, colors, options.isReverse(), Color.DEFAULT_ALPHA));
-								}
-							} else {
-								// if here is at dataset level
-								// every dataset has got own color
-								// sets background colors, applying the transparency
-								hovingDataset.setBackgroundColor(color.alpha(options.getBackgroundColorAlpha()));
-								// checks if border has been requested
-								if (getMaxBorderWidth(hovingDataset) > 0) {
-									// if yes, apply the colors to borders properties
-									hovingDataset.setBorderColor(color);
-								}
-							}
-						} else if (dataset instanceof LiningDataset) {
-							// background color with transparency
-							IsColor backgroundColor = color.alpha(options.getBackgroundColorAlpha());
-							// if lining dataset, like LINE, RADAR, SCATTER
-							LiningDataset liningDataset = (LiningDataset) dataset;
-							// sets border color
-							liningDataset.setBorderColor(color);
-							// sets background colors, applying the transparency
-							liningDataset.setBackgroundColor(backgroundColor);
-							// sets point hover border color
-							liningDataset.setPointHoverBorderColor(color);
-							// sets point hover background colors, applying the transparency
-							liningDataset.setPointHoverBackgroundColor(backgroundColor);
-						}
-						// increments dataset index
-						datasetIndex++;
-					}
-				}
+				scanDatasets(chart, options, colors);
 			}
 		}
 		// always true
 		return true;
+	}
+
+	/**
+	 * Scans all datasets of chart to apply the colors by selected scheme.
+	 * 
+	 * @param chart chart instance
+	 * @param options color scheme plugin options
+	 * @param colors list of colors of scheme
+	 */
+	private void scanDatasets(IsChart chart, ColorSchemesOptions options, List<IsColor> colors) {
+		// gets the amount of colors
+		int amountOfColors = colors.size();
+		// gets the list of datasets of chart
+		List<Dataset> datasets = chart.getData().getDatasets();
+		// if dataset list is empty, skips the logic
+		if (!datasets.isEmpty()) {
+			// initial dataset index
+			int datasetIndex = 0;
+			// scans all datasets
+			for (Dataset dataset : datasets) {
+				// get the module for color index
+				int colorIndex = datasetIndex % amountOfColors;
+				// checks if reverse is requested to get the color
+				IsColor color = colors.get(options.isReverse() ? amountOfColors - colorIndex - 1 : colorIndex);
+				// if hoving dataset, like PIE, POLAR, DOIUGHNUT
+				if (dataset instanceof HovingDataset) {
+					// casts the dataset
+					HovingDataset hovingDataset = (HovingDataset) dataset;
+					// manages hoving dataset
+					manageHovingDataset(chart, options, hovingDataset, color, colors);
+				} else if (dataset instanceof HovingFlexDataset) {
+					// if hoving FLEX dataset, like BAR
+					HovingFlexDataset hovingDataset = (HovingFlexDataset) dataset;
+					// manages hoving flex dataset
+					manageHovingFlexDataset(chart, options, hovingDataset, color, colors);
+				} else if (dataset instanceof LiningDataset) {
+					// if lining dataset, like LINE, RADAR, SCATTER
+					LiningDataset liningDataset = (LiningDataset) dataset;
+					manageLiningDataset(chart, options, liningDataset, color);
+				}
+				// increments dataset index
+				datasetIndex++;
+			}
+		}
+	}
+
+	/**
+	 * Manages the colors for HOVING datasets.
+	 * 
+	 * @param chart chart instance
+	 * @param options color scheme plugin options
+	 * @param hovingDataset hoving dataset instance
+	 * @param color color selected by dataset position
+	 * @param colors list of colors of scheme
+	 */
+	private void manageHovingDataset(IsChart chart, ColorSchemesOptions options, HovingDataset hovingDataset, IsColor color, List<IsColor> colors) {
+		// checks if bubble chart because the color will be selected by scheme, as for bar charts
+		if (ChartType.BUBBLE.equals(chart.getType()) && SchemeScope.DATASET.equals(options.getSchemeScope())) {
+			// if here is at dataset level
+			// every dataset has got own color
+			// sets background color (passed as list but it's only 1), applying the transparency
+			hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, Arrays.asList(color), options.isReverse(), options.getBackgroundColorAlpha()));
+			// checks if border has been requested
+			if (!hovingDataset.getBorderWidth().isEmpty()) {
+				// if yes, apply the color (passed as list but it's only 1) to borders properties
+				hovingDataset.setBorderColor(getColorsFromData(hovingDataset, Arrays.asList(color), options.isReverse(), Color.DEFAULT_ALPHA));
+			}
+		} else {
+			// sets background colors, applying the transparency
+			hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, colors, options.isReverse(), options.getBackgroundColorAlpha()));
+			// checks if border has been requested
+			if (!hovingDataset.getBorderWidth().isEmpty()) {
+				// if yes, apply the colors to borders properties
+				hovingDataset.setBorderColor(getColorsFromData(hovingDataset, colors, options.isReverse(), Color.DEFAULT_ALPHA));
+			}
+		}
+	}
+
+	/**
+	 * Manages the colors for HOVING FLEX datasets.
+	 * 
+	 * @param chart chart instance
+	 * @param options color scheme plugin options
+	 * @param hovingDataset hoving flex dataset instance
+	 * @param color color selected by dataset position
+	 * @param colors list of colors of scheme
+	 */
+	private void manageHovingFlexDataset(IsChart chart, ColorSchemesOptions options, HovingFlexDataset hovingDataset, IsColor color, List<IsColor> colors) {
+		// checks if the scope to apply the colors is at data or dataset level
+		if (SchemeScope.DATA.equals(options.getSchemeScope())) {
+			// if here is at data level
+			// every data has got own color
+			hovingDataset.setBackgroundColor(getColorsFromData(hovingDataset, colors, options.isReverse(), options.getBackgroundColorAlpha()));
+			// checks if border has been requested
+			if (getMaxBorderWidth(hovingDataset) > 0) {
+				// if yes, apply the colors to borders properties
+				hovingDataset.setBorderColor(getColorsFromData(hovingDataset, colors, options.isReverse(), Color.DEFAULT_ALPHA));
+			}
+		} else {
+			// if here is at dataset level
+			// every dataset has got own color
+			// sets background colors, applying the transparency
+			hovingDataset.setBackgroundColor(color.alpha(options.getBackgroundColorAlpha()));
+			// checks if border has been requested
+			if (getMaxBorderWidth(hovingDataset) > 0) {
+				// if yes, apply the colors to borders properties
+				hovingDataset.setBorderColor(color);
+			}
+		}
+	}
+
+	/**
+	 * Manages the colors for LINING datasets.
+	 * 
+	 * @param chart chart instance
+	 * @param options color scheme plugin options
+	 * @param liningDataset lining dataset instance
+	 * @param color color selected by dataset position
+	 */
+	private void manageLiningDataset(IsChart chart, ColorSchemesOptions options, LiningDataset liningDataset, IsColor color) {
+		// background color with transparency
+		IsColor backgroundColor = color.alpha(options.getBackgroundColorAlpha());
+		// sets border color
+		liningDataset.setBorderColor(color);
+		// sets background colors, applying the transparency
+		liningDataset.setBackgroundColor(backgroundColor);
+		// sets point hover border color
+		liningDataset.setPointHoverBorderColor(color);
+		// sets point hover background colors, applying the transparency
+		liningDataset.setPointHoverBackgroundColor(backgroundColor);
+
 	}
 
 	/**

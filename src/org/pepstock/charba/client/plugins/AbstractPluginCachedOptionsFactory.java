@@ -77,81 +77,13 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	@Override
 	public final void onAfterInit(IsChart chart) {
 		// checks if there is a plugin options as GLOBAL
-		if (Defaults.get().getGlobal().getPlugins().hasOptions(pluginId)) {
-			// gets the object type of options to know if there is an array of options
-			ObjectType type = Defaults.get().getGlobal().getPlugins().getOptionsType(pluginId);
-			// if is single object
-			if (ObjectType.OBJECT.equals(type)) {
-				// unregister previous global options
-				unregisterGlobal(PluginOptionsScope.GLOBAL);
-				// gets object
-				T options = Defaults.get().getGlobal().getPlugins().getOptions(pluginId, this);
-				// registers it to global
-				register(options, PluginOptionsScope.GLOBAL.value());
-			} else if (ObjectType.ARRAY.equals(type)) {
-				// unregister previous global options
-				unregisterGlobal(PluginOptionsScope.GLOBAL);
-				// if here the options are an array of objects
-				List<T> optionsList = Defaults.get().getGlobal().getPlugins().getOptionsAsList(pluginId, this);
-				// scans the objects
-				for (T options : optionsList) {
-					// registers it to global
-					register(options, PluginOptionsScope.GLOBAL.value());
-				}
-			}
-		}
+		manageGlobalOptions();
 		// checks if there is a plugin options as CHART GLOBAL
-		if (Defaults.get().getOptions(chart.getType()).getPlugins().hasOptions(pluginId)) {
-			// gets the object type of options to know if there is an array of options
-			ObjectType type = Defaults.get().getOptions(chart.getType()).getPlugins().getOptionsType(pluginId);
-			// if is single object
-			if (ObjectType.OBJECT.equals(type)) {
-				// unregister previous options
-				unregisterGlobal(PluginOptionsScope.CHART_TYPE);
-				// gets object
-				T options = Defaults.get().getOptions(chart.getType()).getPlugins().getOptions(pluginId, this);
-				// registers it to global
-				register(options, PluginOptionsScope.CHART_TYPE.value());
-			} else if (ObjectType.ARRAY.equals(type)) {
-				// unregister previous options
-				unregisterGlobal(PluginOptionsScope.CHART_TYPE);
-				// if here the options are an array of objects
-				List<T> optionsList = Defaults.get().getOptions(chart.getType()).getPlugins().getOptionsAsList(pluginId, this);
-				// scans the objects
-				for (T options : optionsList) {
-					// registers it to global
-					register(options, PluginOptionsScope.CHART_TYPE.value());
-				}
-			}
-		}
+		manageGlobalChartOptions(chart);
 		// gets the plugin options from chart options, if there
-		if (chart.getOptions().getPlugins().hasOptions(pluginId)) {
-			// gets the object type of options to know if there is an array of options
-			ObjectType type = chart.getOptions().getPlugins().getOptionsType(pluginId);
-			// if is single object
-			if (ObjectType.OBJECT.equals(type)) {
-				// gets object
-				T options = chart.getOptions().getPlugins().getOptions(pluginId, this);
-				// registers it to the chart
-				register(options, chart.getId());
-			} else if (ObjectType.ARRAY.equals(type)) {
-				// if here the options are an array of objects
-				List<T> optionsList = chart.getOptions().getPlugins().getOptionsAsList(pluginId, this);
-				// scans the objects
-				for (T options : optionsList) {
-					// registers it to the chart
-					register(options, chart.getId());
-				}
-			}
-		}
+		manageChartOptions(chart);
 		// gets the plugin options from chart datasets, if there
-		for (Dataset dataset : chart.getData().getDatasets()) {
-			if (dataset.hasOptions(pluginId)) {
-				T options = dataset.getOptions(pluginId, this);
-				// registers it to the chart
-				register(options, chart.getId());
-			}
-		}
+		manageDatasetsOptions(chart);
 	}
 
 	/*
@@ -269,4 +201,111 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 		// returns null because
 		return null;
 	}
+	
+	/**
+	 * Registers the plugin options from GLOBAL options
+	 */
+	private void manageGlobalOptions() {
+		// checks if there is a plugin options as GLOBAL
+		if (Defaults.get().getGlobal().getPlugins().hasOptions(pluginId)) {
+			// gets the object type of options to know if there is an array of options
+			ObjectType type = Defaults.get().getGlobal().getPlugins().getOptionsType(pluginId);
+			// if is single object
+			if (ObjectType.OBJECT.equals(type)) {
+				// unregister previous global options
+				unregisterGlobal(PluginOptionsScope.GLOBAL);
+				// gets object
+				T options = Defaults.get().getGlobal().getPlugins().getOptions(pluginId, this);
+				// registers it to global
+				register(options, PluginOptionsScope.GLOBAL.value());
+			} else if (ObjectType.ARRAY.equals(type)) {
+				// unregister previous global options
+				unregisterGlobal(PluginOptionsScope.GLOBAL);
+				// if here the options are an array of objects
+				List<T> optionsList = Defaults.get().getGlobal().getPlugins().getOptionsAsList(pluginId, this);
+				// scans the objects
+				for (T options : optionsList) {
+					// registers it to global
+					register(options, PluginOptionsScope.GLOBAL.value());
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Registers the plugin options defined into CHART GLOBAl options.
+	 * 
+	 * @param chart chart instance
+	 */
+	private void manageGlobalChartOptions(IsChart chart) {
+		// checks if there is a plugin options as CHART GLOBAL
+		if (Defaults.get().getOptions(chart.getType()).getPlugins().hasOptions(pluginId)) {
+			// gets the object type of options to know if there is an array of options
+			ObjectType type = Defaults.get().getOptions(chart.getType()).getPlugins().getOptionsType(pluginId);
+			// if is single object
+			if (ObjectType.OBJECT.equals(type)) {
+				// unregister previous options
+				unregisterGlobal(PluginOptionsScope.CHART_TYPE);
+				// gets object
+				T options = Defaults.get().getOptions(chart.getType()).getPlugins().getOptions(pluginId, this);
+				// registers it to global
+				register(options, PluginOptionsScope.CHART_TYPE.value());
+			} else if (ObjectType.ARRAY.equals(type)) {
+				// unregister previous options
+				unregisterGlobal(PluginOptionsScope.CHART_TYPE);
+				// if here the options are an array of objects
+				List<T> optionsList = Defaults.get().getOptions(chart.getType()).getPlugins().getOptionsAsList(pluginId, this);
+				// scans the objects
+				for (T options : optionsList) {
+					// registers it to global
+					register(options, PluginOptionsScope.CHART_TYPE.value());
+				}
+			}
+		}		
+	}
+	
+	/**
+	 * Registers the plugin options defined into CHART options.
+	 * 
+	 * @param chart chart instance
+	 */
+	private void manageChartOptions(IsChart chart) {
+		// gets the plugin options from chart options, if there
+		if (chart.getOptions().getPlugins().hasOptions(pluginId)) {
+			// gets the object type of options to know if there is an array of options
+			ObjectType type = chart.getOptions().getPlugins().getOptionsType(pluginId);
+			// if is single object
+			if (ObjectType.OBJECT.equals(type)) {
+				// gets object
+				T options = chart.getOptions().getPlugins().getOptions(pluginId, this);
+				// registers it to the chart
+				register(options, chart.getId());
+			} else if (ObjectType.ARRAY.equals(type)) {
+				// if here the options are an array of objects
+				List<T> optionsList = chart.getOptions().getPlugins().getOptionsAsList(pluginId, this);
+				// scans the objects
+				for (T options : optionsList) {
+					// registers it to the chart
+					register(options, chart.getId());
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Registers the plugin options defined into DATASET options.
+	 * 
+	 * @param chart chart instance
+	 */
+	private void manageDatasetsOptions(IsChart chart) {
+		// gets the plugin options from chart datasets, if there
+		for (Dataset dataset : chart.getData().getDatasets()) {
+			if (dataset.hasOptions(pluginId)) {
+				T options = dataset.getOptions(pluginId, this);
+				// registers it to the chart
+				register(options, chart.getId());
+			}
+		}
+	}
+
 }
