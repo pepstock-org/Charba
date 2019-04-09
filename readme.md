@@ -128,7 +128,7 @@ Here you can find the list of enhancement and updates available on `master` bran
  * `deprecated` some methods of Meter and Gauge datasets and options
  * change internal add and remove handler management
  * improve Pattern and Gradient creation engine
- * rename `from` methods into Array classes into `fromOrEmpy` to avoid any conflict with native `Array.from` javascript implementation
+ * rename `from` methods into Array classes into `fromOrEmpty` to avoid any conflict with native `Array.from` javascript implementation
  * fix `ScaleLongestTextCacheItem` because didn't manage `data` property properly 
 
 ### Fixed Sonar Issue
