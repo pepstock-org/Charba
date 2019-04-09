@@ -254,63 +254,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 			// checks if the draw if at the end of animation
 			// and if the selection is not already started
 			if (easing == 1D) {
-				// gets the width of canvas
-				// here is already attached to the parent
-				int limitRight = chart.getCanvas().getOffsetWidth();
-				// datasets items count
-				int itemsCount = 0;
-				// gets the amount of datasets
-				int datasetsCount = chart.getData().getDatasets().size();
-				// scans all datasets
-				for (int i = 0; i < datasetsCount; i++) {
-					// checks if dataset is visible and
-					// it didn't start count the dataset items (first cycle)
-					if (chart.isDatasetVisible(i) && itemsCount == 0) {
-						// gets dataset meta data
-						DatasetMetaItem items = chart.getDatasetMeta(i);
-						if (chart.getType().equals(items.getType())) {
-							// scans all datasets items
-							for (DatasetItem item : items.getDatasets()) {
-								// if the chart is line
-								// and X coordinate is less the width of canvas (item is inside of canvas)
-								if (chart.getType().equals(ChartType.LINE) && item.getView().getX() <= limitRight) {
-									itemsCount++;
-								}
-								// if the chart is line
-								// and X coordinate is less the width of canvas
-								// and the width of bar is less of width of canvas (item is inside of canvas)
-								if (chart.getType().equals(ChartType.BAR) && (item.getView().getX() <= limitRight || (item.getView().getX() + item.getView().getWidth()) <= limitRight)) {
-									itemsCount++;
-								}
-							}
-						}
-					}
-				}
-				// stores the amount of items
-				handler.setDatasetsItemsCount(itemsCount);
-				// checks if there is the amount of datasets for selection
-				if (handler.hasMinimumDatasetsItems()) {
-					// gets the image from canvas
-					String dataUrl = chart.getCanvas().toDataUrl();
-					// checks if chart is changed
-					if (handler.isChartChanged(dataUrl)) {
-						// this is necessary to apply every time the handler
-						// will draw directly into canvas
-						// stores image setting size
-						handler.setSnapshot(Utilities.toImageElement(dataUrl, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight()));
-					}
-					// if the selections is already present
-					// it refreshes all the calculation of existing selection
-					if (handler.getStatus().equals(SelectionStatus.SELECTED)) {
-						handler.refresh();
-					}
-				} else {
-					// clears selection
-					clearSelection(chart);
-				}
-				// the drawing of chart is completed and set the default cursor
-				// removing the "wait" one.
-				chart.getCanvas().getElement().getStyle().setCursor(Cursor.DEFAULT);
+				// the selection is managed
+				manageSelection(chart, handler);
 			}
 		}
 	}
@@ -397,6 +342,102 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 		}
 		// if here, propagates the event to other listeners
 		return true;
+	}
+
+	/**
+	 * Invoked when the chart is already drawn nad takes care about the selection logic.
+	 * 
+	 * @param chart chart instance
+	 * @param handler selection handler instance
+	 */
+	private void manageSelection(IsChart chart, SelectionHandler handler) {
+		// datasets items count
+		int itemsCount = getItemsCount(chart);
+		// stores the amount of items
+		handler.setDatasetsItemsCount(itemsCount);
+		// checks if there is the amount of datasets for selection
+		if (handler.hasMinimumDatasetsItems()) {
+			// gets the image from canvas
+			String dataUrl = chart.getCanvas().toDataUrl();
+			// checks if chart is changed
+			if (handler.isChartChanged(dataUrl)) {
+				// this is necessary to apply every time the handler
+				// will draw directly into canvas
+				// stores image setting size
+				handler.setSnapshot(Utilities.toImageElement(dataUrl, chart.getCanvas().getOffsetWidth(), chart.getCanvas().getOffsetHeight()));
+			}
+			// if the selections is already present
+			// it refreshes all the calculation of existing selection
+			if (handler.getStatus().equals(SelectionStatus.SELECTED)) {
+				handler.refresh();
+			}
+		} else {
+			// clears selection
+			clearSelection(chart);
+		}
+		// the drawing of chart is completed and set the default cursor
+		// removing the "wait" one.
+		chart.getCanvas().getElement().getStyle().setCursor(Cursor.DEFAULT);
+	}
+
+	/**
+	 * Calculates the dataset items of chart in order to calculate correctly the selection area.
+	 * 
+	 * @param chart chart instance
+	 * @return the amount of visible dataset items or <code>0</code> if datasets are not visible.
+	 */
+	private int getItemsCount(IsChart chart) {
+		// gets the width of canvas
+		// here is already attached to the parent
+		int limitRight = chart.getCanvas().getOffsetWidth();
+		// gets the amount of datasets
+		int datasetsCount = chart.getData().getDatasets().size();
+		// datasets items count
+		int itemsCount = 0;
+		// scans all datasets
+		for (int i = 0; i < datasetsCount; i++) {
+			// checks if dataset is visible and
+			// it didn't start count the dataset items (first cycle)
+			if (chart.isDatasetVisible(i) && itemsCount == 0) {
+				// checks and gets items count for the dataset index
+				itemsCount = checkAndGetItemsCountByDatasetMetaItem(chart, i, limitRight);
+			}
+		}
+		// returns items count
+		return itemsCount;
+	}
+
+	/**
+	 * Calculates the items count checking the dataset item meta data.
+	 * 
+	 * @param chart chart instance
+	 * @param datasetIndex dataset index of dataset to be checked
+	 * @param limitRight the width of canvas
+	 * @return the amount of visible dataset items
+	 */
+	private int checkAndGetItemsCountByDatasetMetaItem(IsChart chart, int datasetIndex, int limitRight) {
+		// datasets items count
+		int itemsCount = 0;
+		// gets dataset meta data
+		DatasetMetaItem items = chart.getDatasetMeta(datasetIndex);
+		if (chart.getType().equals(items.getType())) {
+			// scans all datasets items
+			for (DatasetItem item : items.getDatasets()) {
+				// if the chart is line
+				// and X coordinate is less the width of canvas (item is inside of canvas)
+				if (chart.getType().equals(ChartType.LINE) && item.getView().getX() <= limitRight) {
+					itemsCount++;
+				}
+				// if the chart is line
+				// and X coordinate is less the width of canvas
+				// and the width of bar is less of width of canvas (item is inside of canvas)
+				if (chart.getType().equals(ChartType.BAR) && (item.getView().getX() <= limitRight || (item.getView().getX() + item.getView().getWidth()) <= limitRight)) {
+					itemsCount++;
+				}
+			}
+		}
+		// returns items count
+		return itemsCount;
 	}
 
 }
