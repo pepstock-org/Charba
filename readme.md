@@ -148,6 +148,7 @@ Here you can find the list of enhancement and updates available on `master` bran
  * squid:CommentedOutCodeLine - Sections of code should not be commented out
  * squid:S4784 - Using regular expressions is security-sensitive
  * squid:MissingDeprecatedCheck - Deprecated elements should have both the annotation and the Javadoc tag
+ * squid:S3776 - Cognitive Complexity of methods should not be too high
  
 License
 -------
