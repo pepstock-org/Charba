@@ -163,7 +163,7 @@ public class MeterDataset extends Dataset {
 	public void setColor(String valueColor) {
 		String valueToSet = valueColor != null ? valueColor : DEFAULT_VALUE_COLOR_AS_STRING;
 		// creates array reference
-		ArrayString array = ArrayString.from(valueToSet, getEmptyColorAsString());
+		ArrayString array = ArrayString.fromOrEmpty(valueToSet, getEmptyColorAsString());
 		// stores value
 		setArrayValue(Property.BACKGROUND_COLOR, array);
 		setArrayValue(Property.HOVER_BACKGROUND_COLOR, array);
@@ -206,7 +206,7 @@ public class MeterDataset extends Dataset {
 	 */
 	public void setEmptyColor(String emptyValueColor) {
 		String valueToSet = emptyValueColor != null ? emptyValueColor : DEFAULT_EMPTY_VALUE_COLOR_AS_STRING;
-		ArrayString array = ArrayString.from(getColorAsString(), valueToSet);
+		ArrayString array = ArrayString.fromOrEmpty(getColorAsString(), valueToSet);
 		// stores value
 		setArrayValue(Property.BACKGROUND_COLOR, array);
 		setArrayValue(Property.HOVER_BACKGROUND_COLOR, array);

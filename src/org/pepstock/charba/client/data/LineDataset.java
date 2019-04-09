@@ -306,7 +306,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 		if (binding) {
 			ArrayStringList result = new ArrayStringList();
 			// set value
-			setArrayValue(Dataset.Property.DATA, ArrayString.from(result));
+			setArrayValue(Dataset.Property.DATA, ArrayString.fromOrEmpty(result));
 			// sets data type
 			setValue(Dataset.Property.CHARBA_DATA_TYPE, DataType.STRINGS);
 			// returns list

@@ -795,7 +795,7 @@ public abstract class HovingDataset extends Dataset {
 	 */
 	@Override
 	protected final void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
-		setArrayValue(key, ArrayPattern.from(canvasPatternsList));
+		setArrayValue(key, ArrayPattern.fromOrEmpty(canvasPatternsList));
 	}
 
 	/*
@@ -805,6 +805,6 @@ public abstract class HovingDataset extends Dataset {
 	 */
 	@Override
 	protected final void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
-		setArrayValue(key, ArrayGradient.from(canvasGradientsList));
+		setArrayValue(key, ArrayGradient.fromOrEmpty(canvasGradientsList));
 	}
 }

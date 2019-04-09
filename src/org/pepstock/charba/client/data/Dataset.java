@@ -424,7 +424,7 @@ public abstract class Dataset extends NativeObjectContainer {
 		if (binding) {
 			ArrayDoubleList result = new ArrayDoubleList();
 			// set value
-			setArrayValue(Property.DATA, ArrayDouble.from(result));
+			setArrayValue(Property.DATA, ArrayDouble.fromOrEmpty(result));
 			// sets data type
 			setValue(Property.CHARBA_DATA_TYPE, DataType.NUMBERS);
 			// returns list
@@ -453,7 +453,7 @@ public abstract class Dataset extends NativeObjectContainer {
 		if (binding) {
 			ArrayObjectContainerList<DataPoint> result = new ArrayObjectContainerList<>();
 			// set value
-			setArrayValue(Dataset.Property.DATA, ArrayObject.from(result));
+			setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrEmpty(result));
 			// sets data type
 			setValue(Dataset.Property.CHARBA_DATA_TYPE, DataType.POINTS);
 			// returns list

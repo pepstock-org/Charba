@@ -366,11 +366,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			String[] result = titleCallback.onBeforeTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 			// checks if result is consistent
 			if (result != null && result.length > 0) {
-				return ArrayString.from(result);
+				return ArrayString.fromOrEmpty(result);
 			}
 		}
 		// default result
-		return ArrayString.from(EMPTY_ARRAY);
+		return ArrayString.fromOrEmpty(EMPTY_ARRAY);
 	}
 
 	/**
@@ -386,12 +386,12 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			String[] result = titleCallback.onTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 			// checks if result is consistent
 			if (result != null && result.length > 0) {
-				return ArrayString.from(result);
+				return ArrayString.fromOrEmpty(result);
 			}
 		}
 		// default result
 		// default result
-		return ArrayString.from(EMPTY_ARRAY);
+		return ArrayString.fromOrEmpty(EMPTY_ARRAY);
 	}
 
 	/**
@@ -407,12 +407,12 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			String[] result = titleCallback.onAfterTitle(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 			// checks if result is consistent
 			if (result != null && result.length > 0) {
-				return ArrayString.from(result);
+				return ArrayString.fromOrEmpty(result);
 			}
 		}
 		// default result
 		// default result
-		return ArrayString.from(EMPTY_ARRAY);
+		return ArrayString.fromOrEmpty(EMPTY_ARRAY);
 	}
 
 	/**
@@ -428,11 +428,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			String[] result = bodyCallback.onBeforeBody(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 			// checks if result is consistent
 			if (result != null && result.length > 0) {
-				return ArrayString.from(result);
+				return ArrayString.fromOrEmpty(result);
 			}
 		}
 		// default result
-		return ArrayString.from(EMPTY_ARRAY);
+		return ArrayString.fromOrEmpty(EMPTY_ARRAY);
 	}
 
 	/**
@@ -448,11 +448,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			String[] result = bodyCallback.onAfterBody(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 			// checks if result is consistent
 			if (result != null && result.length > 0) {
-				return ArrayString.from(result);
+				return ArrayString.fromOrEmpty(result);
 			}
 		}
 		// default result
-		return ArrayString.from(EMPTY_ARRAY);
+		return ArrayString.fromOrEmpty(EMPTY_ARRAY);
 	}
 
 	/**
@@ -558,11 +558,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			String[] result = footerCallback.onBeforeFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 			// checks if result is consistent
 			if (result != null && result.length > 0) {
-				return ArrayString.from(result);
+				return ArrayString.fromOrEmpty(result);
 			}
 		}
 		// default result
-		return ArrayString.from(EMPTY_ARRAY);
+		return ArrayString.fromOrEmpty(EMPTY_ARRAY);
 	}
 
 	/**
@@ -578,11 +578,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			String[] result = footerCallback.onFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 			// checks if result is consistent
 			if (result != null && result.length > 0) {
-				return ArrayString.from(result);
+				return ArrayString.fromOrEmpty(result);
 			}
 		}
 		// default result
-		return ArrayString.from(EMPTY_ARRAY);
+		return ArrayString.fromOrEmpty(EMPTY_ARRAY);
 	}
 
 	/**
@@ -598,10 +598,10 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			String[] result = footerCallback.onAfterFooter(getChart(), ArrayListHelper.unmodifiableList(items, tooltipItemFactory));
 			// checks if result is consistent
 			if (result != null && result.length > 0) {
-				return ArrayString.from(result);
+				return ArrayString.fromOrEmpty(result);
 			}
 		}
 		// default result
-		return ArrayString.from(EMPTY_ARRAY);
+		return ArrayString.fromOrEmpty(EMPTY_ARRAY);
 	}
 }

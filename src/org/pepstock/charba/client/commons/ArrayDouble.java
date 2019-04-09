@@ -68,7 +68,7 @@ public final class ArrayDouble extends Array {
 	 * @return new array instance of doubles or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayDouble from(double... items) {
+	public static ArrayDouble fromOrEmpty(double... items) {
 		// checks if consistent
 		if (items == null || items.length == 0) {
 			// returns an empty array
@@ -115,7 +115,7 @@ public final class ArrayDouble extends Array {
 	 * @return new array instance of doubles or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static ArrayDouble from(List<Double> items) {
+	public static ArrayDouble fromOrEmpty(List<Double> items) {
 		// checks if is already a list with array
 		if (items instanceof ArrayDoubleList) {
 			// casts to array list

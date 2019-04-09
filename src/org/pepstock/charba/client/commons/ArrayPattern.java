@@ -70,7 +70,7 @@ public final class ArrayPattern extends Array {
 	 * @return new array instance of images or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayPattern from(CanvasPattern... items) {
+	public static ArrayPattern fromOrEmpty(CanvasPattern... items) {
 		// checks if consistent
 		if (items == null || items.length == 0) {
 			// returns null
@@ -110,7 +110,7 @@ public final class ArrayPattern extends Array {
 	 * @return new array instance of images or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static ArrayPattern from(List<CanvasPattern> items) {
+	public static ArrayPattern fromOrEmpty(List<CanvasPattern> items) {
 		// creates the array
 		ArrayPattern result = new ArrayPattern();
 		// checks if list is null

@@ -70,7 +70,7 @@ public final class ArrayString extends Array {
 	 * @return new array instance of strings or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayString from(String... items) {
+	public static ArrayString fromOrEmpty(String... items) {
 		// checks if consistent
 		if (items == null || items.length == 0) {
 			// returns null
@@ -116,7 +116,7 @@ public final class ArrayString extends Array {
 	 * @return new array instance of strings or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static ArrayString from(List<String> items) {
+	public static ArrayString fromOrEmpty(List<String> items) {
 		// checks if is already a list with array
 		if (items instanceof ArrayStringList) {
 			// casts to array list
@@ -168,7 +168,7 @@ public final class ArrayString extends Array {
 	 * @return new array instance of strings or an mepty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayString from(IsColor... items) {
+	public static ArrayString fromOrEmpty(IsColor... items) {
 		// creates the array
 		ArrayString result = new ArrayString();
 		// checks if array is null
@@ -214,7 +214,7 @@ public final class ArrayString extends Array {
 	 * @return new array instance of strings or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayString from(Key... items) {
+	public static ArrayString fromOrEmpty(Key... items) {
 		// creates the array
 		ArrayString result = new ArrayString();
 		// checks if array is null

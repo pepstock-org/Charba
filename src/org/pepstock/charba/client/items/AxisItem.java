@@ -196,7 +196,7 @@ public final class AxisItem extends ScaleItem {
 	 * @param ticks the array of ticks
 	 */
 	public void setTicks(String... ticks) {
-		setArrayValue(ScaleItem.Property.TICKS, ArrayString.from(ticks));
+		setArrayValue(ScaleItem.Property.TICKS, ArrayString.fromOrEmpty(ticks));
 	}
 
 	/**
@@ -224,7 +224,7 @@ public final class AxisItem extends ScaleItem {
 	 */
 	public void setTicksAsNumbers(double... ticksAsNumbers) {
 		// sets value
-		setArrayValue(ScaleItem.Property.TICKS_AS_NUMBERS, ArrayDouble.from(ticksAsNumbers));
+		setArrayValue(ScaleItem.Property.TICKS_AS_NUMBERS, ArrayDouble.fromOrEmpty(ticksAsNumbers));
 	}
 
 	/**

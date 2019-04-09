@@ -68,7 +68,7 @@ public final class ArrayInteger extends Array {
 	 * @return new array instance of integers or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayInteger from(int... items) {
+	public static ArrayInteger fromOrEmpty(int... items) {
 		// checks if consistent
 		if (items == null || items.length == 0) {
 			// returns null
@@ -115,7 +115,7 @@ public final class ArrayInteger extends Array {
 	 * @return new array instance of integers or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static ArrayInteger from(List<Integer> items) {
+	public static ArrayInteger fromOrEmpty(List<Integer> items) {
 		// checks if is already a list with array
 		if (items instanceof ArrayIntegerList) {
 			// casts to array list

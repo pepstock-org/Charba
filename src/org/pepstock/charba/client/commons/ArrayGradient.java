@@ -70,7 +70,7 @@ public final class ArrayGradient extends Array {
 	 * @return new array instance of images or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayGradient from(CanvasGradient... items) {
+	public static ArrayGradient fromOrEmpty(CanvasGradient... items) {
 		// checks if consistent
 		if (items == null || items.length == 0) {
 			// returns an empty array
@@ -110,7 +110,7 @@ public final class ArrayGradient extends Array {
 	 * @return new array instance of images or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static ArrayGradient from(List<CanvasGradient> items) {
+	public static ArrayGradient fromOrEmpty(List<CanvasGradient> items) {
 		// creates the array
 		ArrayGradient result = new ArrayGradient();
 		// checks if list is null

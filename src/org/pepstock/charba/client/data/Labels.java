@@ -98,7 +98,7 @@ public final class Labels {
 			if (value.contains(SEPARATOR)) {
 				// splits the string by separator
 				// and adds to object as array
-				array.push(ArrayString.from(value.split(SEPARATOR)));
+				array.push(ArrayString.fromOrEmpty(value.split(SEPARATOR)));
 			} else {
 				// pushes to JS array
 				array.push(value);
@@ -115,7 +115,7 @@ public final class Labels {
 		// checks if is a valid array
 		if (values != null && values.length > 0) {
 			// creates new JS array and push it
-			array.push(ArrayString.from(values));
+			array.push(ArrayString.fromOrEmpty(values));
 		}
 	}
 

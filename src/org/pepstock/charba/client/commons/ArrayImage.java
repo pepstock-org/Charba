@@ -70,7 +70,7 @@ public final class ArrayImage extends Array {
 	 * @return new array instance of images or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static ArrayImage from(ImageElement... items) {
+	public static ArrayImage fromOrEmpty(ImageElement... items) {
 		// checks if consistent
 		if (items == null || items.length == 0) {
 			// returns an empty array
@@ -117,7 +117,7 @@ public final class ArrayImage extends Array {
 	 * @return new array instance of images or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static ArrayImage from(List<ImageElement> items) {
+	public static ArrayImage fromOrEmpty(List<ImageElement> items) {
 		// checks if is already a list with array
 		if (items instanceof ArrayImageList) {
 			// casts to array list

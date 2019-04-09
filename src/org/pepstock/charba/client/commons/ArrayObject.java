@@ -70,7 +70,7 @@ public final class ArrayObject extends Array {
 	 * @return new array instance of ONE 1 element or an empty array if argument is <code>null</code>
 	 */
 	@JsOverlay
-	public static <E extends NativeObjectContainer> ArrayObject from(E item) {
+	public static <E extends NativeObjectContainer> ArrayObject fromOrEmpty(E item) {
 		// creates the array
 		ArrayObject result = new ArrayObject();
 		// checks if array is null
@@ -115,7 +115,7 @@ public final class ArrayObject extends Array {
 	 * @return new array instance of objects or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
-	public static <E extends NativeObjectContainer> ArrayObject from(E[] items) {
+	public static <E extends NativeObjectContainer> ArrayObject fromOrEmpty(E[] items) {
 		// creates the array
 		ArrayObject result = new ArrayObject();
 		// checks if array is null
@@ -170,7 +170,7 @@ public final class ArrayObject extends Array {
 	 * @return new array instance of objects or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
-	public static <E extends NativeObjectContainer> ArrayObject from(List<E> items) {
+	public static <E extends NativeObjectContainer> ArrayObject fromOrEmpty(List<E> items) {
 		// checks if is already a list with array
 		if (items instanceof ArrayObjectContainerList<?>) {
 			// casts to array list
