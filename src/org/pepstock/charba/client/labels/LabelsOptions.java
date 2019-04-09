@@ -775,7 +775,7 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		// default value is percentage
 		return String.valueOf(item.getPercentage());
 	}
-	
+
 	/**
 	 * Invokes the FONTCOLOR callback.
 	 * 

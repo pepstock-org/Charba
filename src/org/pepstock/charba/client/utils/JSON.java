@@ -137,7 +137,7 @@ public final class JSON {
 					// skips it
 					return JsHelper.get().undefined();
 				}
-				// gets the object 
+				// gets the object
 				Object result = manageObject(objects, value);
 				// if result is not consistent, returns the value
 				return result != null ? result : value;
@@ -150,7 +150,7 @@ public final class JSON {
 			return value;
 		}, spaces);
 	}
-	
+
 	/**
 	 * Manages the object of the replace function.
 	 * 
@@ -187,7 +187,7 @@ public final class JSON {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Manages the object of the replace function checking if is a DOM element and then returning the DOM string.
 	 * 

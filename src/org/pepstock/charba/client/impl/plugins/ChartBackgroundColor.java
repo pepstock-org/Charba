@@ -24,8 +24,8 @@ import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.HtmlColor;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
-import org.pepstock.charba.client.data.CanvasObjectFactory;
 import org.pepstock.charba.client.items.SizeItem;
+import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
@@ -199,12 +199,12 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 			ctx.setFillStyle(bgOptions.getBackgroundColorAsString());
 		} else if (ChartBackgroundColorOptions.ColorType.PATTERN.equals(bgOptions.getColorType())) {
 			// creates the pattern
-			CanvasPattern canvasPattern = CanvasObjectFactory.createPattern(chart, bgOptions.getBackgroundColorAsPattern());
+			CanvasPattern canvasPattern = ChartBackgroundGradientFactory.get().createPattern(chart, bgOptions.getBackgroundColorAsPattern());
 			// set fill canvas pattern
 			ctx.setFillStyle(canvasPattern);
 		} else if (ChartBackgroundColorOptions.ColorType.GRADIENT.equals(bgOptions.getColorType())) {
 			// creates the gradient
-			CanvasGradient canvasGradient = ChartBackgroundGradientFactory.createGradient(chart, bgOptions.getBackgroundColorAsGradient());
+			CanvasGradient canvasGradient = ChartBackgroundGradientFactory.get().createGradient(chart, bgOptions.getBackgroundColorAsGradient(), UndefinedValues.INTEGER, UndefinedValues.INTEGER);
 			// set fill canvas color
 			ctx.setFillStyle(canvasGradient);
 		}
@@ -250,7 +250,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 			// gradients must be recreated
 			// because gradients must be recreated
 			// the cache of gradients must be clear
-			ChartBackgroundGradientFactory.resetGradients(chart);
+			ChartBackgroundGradientFactory.get().resetGradients(chart);
 		}
 	}
 
@@ -263,7 +263,7 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 	public void onDestroy(IsChart chart) {
 		// because chart is destroy
 		// clears the cache of patterns and gradients of the chart
-		ChartBackgroundGradientFactory.clear(chart);
+		ChartBackgroundGradientFactory.get().clear(chart);
 	}
 
 	/**

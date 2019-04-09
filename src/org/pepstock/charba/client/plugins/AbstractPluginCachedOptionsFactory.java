@@ -201,7 +201,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 		// returns null because
 		return null;
 	}
-	
+
 	/**
 	 * Registers the plugin options from GLOBAL options
 	 */
@@ -231,7 +231,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 			}
 		}
 	}
-	
+
 	/**
 	 * Registers the plugin options defined into CHART GLOBAl options.
 	 * 
@@ -261,9 +261,9 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 					register(options, PluginOptionsScope.CHART_TYPE.value());
 				}
 			}
-		}		
+		}
 	}
-	
+
 	/**
 	 * Registers the plugin options defined into CHART options.
 	 * 
@@ -291,7 +291,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 			}
 		}
 	}
-	
+
 	/**
 	 * Registers the plugin options defined into DATASET options.
 	 * 

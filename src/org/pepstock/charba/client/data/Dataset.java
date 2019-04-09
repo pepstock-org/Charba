@@ -266,7 +266,7 @@ public abstract class Dataset extends NativeObjectContainer {
 				// scans the patterns
 				for (Pattern pattern : patterns) {
 					// creates the canvas pattern and adds into list
-					canvasPatternsList.add(CanvasObjectFactory.createPattern(chart, pattern));
+					canvasPatternsList.add(DatasetCanvasObjectFactory.get().createPattern(chart, pattern));
 				}
 				// asks to dataset implementation to set the property
 				// applying the logic it wants
@@ -306,7 +306,7 @@ public abstract class Dataset extends NativeObjectContainer {
 				// scans all gradients
 				for (Gradient gradient : gradients) {
 					// creates gradient and adds to the temporary list
-					canvasGradientsList.add(CanvasObjectFactory.createGradient(chart, gradient, datasetIndex, index));
+					canvasGradientsList.add(DatasetCanvasObjectFactory.get().createGradient(chart, gradient, datasetIndex, index));
 					// increments the index
 					index++;
 				}

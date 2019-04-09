@@ -109,7 +109,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 		}
 		// because gradients must be recreated
 		// the cache of gradients must be clear
-		CanvasObjectFactory.resetGradients(chart);
+		DatasetCanvasObjectFactory.get().resetGradients(chart);
 	}
 
 	/*
@@ -121,7 +121,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 	public void onDestroy(IsChart chart) {
 		// because chart is destroy
 		// clears the cache of patterns and gradients of the chart
-		CanvasObjectFactory.clear(chart);
+		DatasetCanvasObjectFactory.get().clear(chart);
 	}
 
 	/**
@@ -150,7 +150,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 			// because amount of datasets is changed
 			// the cache of gradients must be clear
 			// and gradients recalculated
-			CanvasObjectFactory.resetGradients(chart);
+			DatasetCanvasObjectFactory.get().resetGradients(chart);
 		}
 	}
 
@@ -185,7 +185,7 @@ final class CanvasObjectHandler extends AbstractPlugin {
 		}
 		return updated;
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if patterns has been created or changed, otherwise <code>false</code>.
 	 * 

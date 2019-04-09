@@ -20,7 +20,7 @@ import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.data.CanvasObjectFactory;
+import org.pepstock.charba.client.data.DatasetCanvasObjectFactory;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
@@ -177,13 +177,13 @@ public final class ScriptableUtils {
 			} else if (result instanceof Pattern && hasPattern) {
 				// is pattern instance
 				Pattern pattern = (Pattern) result;
-				return CanvasObjectFactory.createPattern(chart, pattern);
+				return DatasetCanvasObjectFactory.get().createPattern(chart, pattern);
 			} else if (result instanceof Gradient) {
 				// is gradient instance
 				// checks if chart is initialized
 				if (chart.isInitialized()) {
 					Gradient gradient = (Gradient) result;
-					return CanvasObjectFactory.createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
+					return DatasetCanvasObjectFactory.get().createGradient(chart, gradient, context.getDatasetIndex(), context.getIndex());
 				}
 				// otherwise returns default
 			} else if (result instanceof CanvasGradient) {
