@@ -162,7 +162,7 @@ public final class Utilities {
 	 */
 	public static Cursor getCursorOfChart(IsChart isChart) {
 		// checks if argument is consistent
-		if (isChart != null && isChart instanceof AbstractChart<?>) {
+		if (isChart instanceof AbstractChart<?>) {
 			// cast to abstract chart to get element of GWT object
 			AbstractChart<?> chart = (AbstractChart<?>) isChart;
 			// scans all cursors to check if any cursor is already set
