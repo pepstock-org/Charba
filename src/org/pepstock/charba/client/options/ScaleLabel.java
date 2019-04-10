@@ -17,7 +17,6 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
 
 /**
@@ -27,7 +26,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> implements IsDefaultScaleLabel {
+public final class ScaleLabel extends AbstractLabel<Scale, IsDefaultScaleLabel> implements IsDefaultScaleLabel {
 
 	private final ScaleLabelPadding padding;
 
@@ -38,8 +37,7 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 	{
 		PADDING("padding"),
 		DISPLAY("display"),
-		LABEL_STRING("labelString"),
-		LINE_HEIGHT("lineHeight");
+		LABEL_STRING("labelString");
 
 		// name value of property
 		private final String value;
@@ -128,63 +126,13 @@ public final class ScaleLabel extends FontItem<Scale, IsDefaultScaleLabel> imple
 	public String getLabelString() {
 		return getValue(Property.LABEL_STRING, getDefaultValues().getLabelString());
 	}
-
-	/**
-	 * Sets the height of an individual line of text.
-	 * 
-	 * @param lineHeight height of an individual line of text.
+	
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.options.AbstractLabel#getDefaultLineHeight()
 	 */
-	public void setLineHeight(double lineHeight) {
-		setValue(Property.LINE_HEIGHT, lineHeight);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Sets the height of an individual line of text.
-	 * 
-	 * @param lineHeight height of an individual line of text.
-	 */
-	public void setLineHeight(String lineHeight) {
-		setValue(Property.LINE_HEIGHT, lineHeight);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the height of an individual line of text.
-	 * 
-	 * @return the height of an individual line of text.
-	 */
-	public double getLineHeight() {
-		// creates default
-		double defaultValue = getDefaultValues().getLineHeight();
-		// checks type if number
-		if (ObjectType.NUMBER.equals(type(Property.LINE_HEIGHT))) {
-			// reads and returns as double
-			return getValue(Property.LINE_HEIGHT, defaultValue);
-		}
-		// if here, is not a number
-		// then returns the default
-		return defaultValue;
-	}
-
-	/**
-	 * Returns the height of an individual line of text.
-	 * 
-	 * @return the height of an individual line of text.
-	 */
-	public String getLineHeightAsString() {
-		// creates default
-		String defaultValue = String.valueOf(getDefaultValues().getLineHeight());
-		// checks type if string
-		if (ObjectType.STRING.equals(type(Property.LINE_HEIGHT))) {
-			// reads and returns as string
-			return getValue(Property.LINE_HEIGHT, defaultValue);
-		}
-		// if here, is not a number
-		// then returns the default
-		return defaultValue;
+	@Override
+	double getDefaultLineHeight() {
+		return getDefaultValues().getLineHeight();
 	}
 
 }
