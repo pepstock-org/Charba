@@ -86,7 +86,7 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Na
 		this.parent = parent;
 		this.defaultValues = defaultValues;
 	}
-	
+
 	/**
 	 * Returns the property name to use to add this element to its parent.
 	 * 

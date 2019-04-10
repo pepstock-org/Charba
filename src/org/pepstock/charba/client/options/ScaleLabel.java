@@ -126,8 +126,10 @@ public final class ScaleLabel extends AbstractLabel<Scale, IsDefaultScaleLabel> 
 	public String getLabelString() {
 		return getValue(Property.LABEL_STRING, getDefaultValues().getLabelString());
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.AbstractLabel#getDefaultLineHeight()
 	 */
 	@Override

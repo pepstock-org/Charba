@@ -25,7 +25,7 @@ import org.pepstock.charba.client.defaults.IsDefaultPadding;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Padding extends AbstractPadding<Layout>{
+public final class Padding extends AbstractPadding<Layout> {
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script

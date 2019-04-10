@@ -73,7 +73,7 @@ abstract class AbstractLabel<P extends AbstractModel<?, ?>, D extends IsDefaultF
 	AbstractLabel(P ticks, Key childKey, D defaultValues, NativeObject nativeObject) {
 		super(ticks, childKey, defaultValues, nativeObject);
 	}
-	
+
 	/**
 	 * Returns the default line height for the labelled element.
 	 * 

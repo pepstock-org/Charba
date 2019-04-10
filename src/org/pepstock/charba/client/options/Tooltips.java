@@ -33,7 +33,7 @@ import org.pepstock.charba.client.positioner.Positioner;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> implements IsDefaultTooltips {
+public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements IsDefaultTooltips {
 
 	private final TooltipsCallbacks callbacks;
 
@@ -44,8 +44,6 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	{
 		CALLBACKS("callbacks"),
 		ENABLED("enabled"),
-		MODE("mode"),
-		INTERSECT("intersect"),
 		POSITION("position"),
 		BACKGROUND_COLOR("backgroundColor"),
 		TITLE_FONT_FAMILY("titleFontFamily"),
@@ -126,6 +124,26 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 		return callbacks;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.AbstractHover#getDefaultMode()
+	 */
+	@Override
+	InteractionMode getDefaultMode() {
+		return getDefaultValues().getMode();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.AbstractHover#isDefaultIntersect()
+	 */
+	@Override
+	boolean isDefaultIntersect() {
+		return getDefaultValues().isIntersect();
+	}
+
 	/**
 	 * Sets <code>true</code> if tooltips are enabled.
 	 * 
@@ -144,50 +162,6 @@ public final class Tooltips extends AbstractModel<Options, IsDefaultTooltips> im
 	 */
 	public boolean isEnabled() {
 		return getValue(Property.ENABLED, getDefaultValues().isEnabled());
-	}
-
-	/**
-	 * Sets which elements appear in the tooltip.
-	 * 
-	 * @param mode which elements appear in the tooltip.
-	 */
-	public void setMode(InteractionMode mode) {
-		setValue(Property.MODE, mode);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns which elements appear in the tooltip.
-	 * 
-	 * @return which elements appear in the tooltip.
-	 */
-	public InteractionMode getMode() {
-		return getValue(Property.MODE, InteractionMode.class, getDefaultValues().getMode());
-	}
-
-	/**
-	 * If <code>true</code>, the tooltip mode applies only when the mouse position intersects with an element. If
-	 * <code>false</code>, the mode will be applied at all times.
-	 * 
-	 * @param intersect if <code>true</code>, the tooltip mode applies only when the mouse position intersects with an element.
-	 *            If <code>false</code>, the mode will be applied at all times.
-	 */
-	public void setIntersect(boolean intersect) {
-		setValue(Property.INTERSECT, intersect);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * If <code>true</code>, the tooltip mode applies only when the mouse position intersects with an element. If
-	 * <code>false</code>, the mode will be applied at all times.
-	 * 
-	 * @return if <code>true</code>, the tooltip mode applies only when the mouse position intersects with an element. If
-	 *         <code>false</code>, the mode will be applied at all times.
-	 */
-	public boolean isIntersect() {
-		return getValue(Property.INTERSECT, getDefaultValues().isIntersect());
 	}
 
 	/**

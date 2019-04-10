@@ -17,25 +17,23 @@ package org.pepstock.charba.client.options;
 
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.defaults.IsDefaultHover;
-import org.pepstock.charba.client.enums.InteractionAxis;
 import org.pepstock.charba.client.enums.InteractionMode;
 
 /**
- * Definitions about how elements appear in the tooltip, hovering the chart.
+ * Definitions about how elements appear, hovering the chart.
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @param <D> defaults provider class
  */
-public final class Hover extends AbstractHover<IsDefaultHover> implements IsDefaultHover {
+abstract class AbstractHover<D> extends AbstractModel<Options, D> {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		AXIS("axis"),
-		ANIMATION_DURATION("animationDuration");
+		MODE("mode"),
+		INTERSECT("intersect");
 
 		// name value of property
 		private final String value;
@@ -70,69 +68,63 @@ public final class Hover extends AbstractHover<IsDefaultHover> implements IsDefa
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	Hover(Options options, Key childKey, IsDefaultHover defaultValues, NativeObject nativeObject) {
+	AbstractHover(Options options, Key childKey, D defaultValues, NativeObject nativeObject) {
 		super(options, childKey, defaultValues, nativeObject);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns which elements appear in the tooltip.
 	 * 
-	 * @see org.pepstock.charba.client.options.AbstractHover#getDefaultMode()
+	 * @return which elements appear in the tooltip.
 	 */
-	@Override
-	InteractionMode getDefaultMode() {
-		return getDefaultValues().getMode();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.AbstractHover#isDefaultIntersect()
-	 */
-	@Override
-	boolean isDefaultIntersect() {
-		return getDefaultValues().isIntersect();
-	}
+	abstract InteractionMode getDefaultMode();
 
 	/**
-	 * Sets the duration in milliseconds it takes to animate hover style changes.
+	 * if true, the hover mode only applies when the mouse position intersects an item on the chart.
 	 * 
-	 * @param milliseconds duration in milliseconds it takes to animate hover style changes.
+	 * @return if true, the hover mode only applies when the mouse position intersects an item on the chart.
 	 */
-	public void setAnimationDuration(int milliseconds) {
-		setValue(Property.ANIMATION_DURATION, milliseconds);
+	abstract boolean isDefaultIntersect();
+
+	/**
+	 * Sets which elements appear in the tooltip.
+	 * 
+	 * @param mode which elements appear in the tooltip.
+	 */
+	public final void setMode(InteractionMode mode) {
+		setValue(Property.MODE, mode);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
 
 	/**
-	 * Returns the duration in milliseconds it takes to animate hover style changes.
+	 * Returns which elements appear in the tooltip.
 	 * 
-	 * @return duration in milliseconds it takes to animate hover style changes.
+	 * @return which elements appear in the tooltip.
 	 */
-	public int getAnimationDuration() {
-		return getValue(Property.ANIMATION_DURATION, getDefaultValues().getAnimationDuration());
+	public final InteractionMode getMode() {
+		return getValue(Property.MODE, InteractionMode.class, getDefaultMode());
 	}
 
 	/**
-	 * Sets to 'x', 'y', or 'xy' to define which directions are used in calculating distances.<br>
-	 * Defaults to 'x' for index mode and 'xy' in dataset and nearest modes.
+	 * if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
 	 * 
-	 * @param axis define which directions are used in calculating distances.
+	 * @param intersect if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the
+	 *            chart.
 	 */
-	public void setAxis(InteractionAxis axis) {
-		setValue(Property.AXIS, axis);
+	public final void setIntersect(boolean intersect) {
+		setValue(Property.INTERSECT, intersect);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
 
 	/**
-	 * Returns to 'x', 'y', or 'xy' to define which directions are used in calculating distances.
+	 * if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
 	 * 
-	 * @return define which directions are used in calculating distances.
+	 * @return if <code>true</code>, the hover mode only applies when the mouse position intersects an item on the chart.
 	 */
-	public InteractionAxis getAxis() {
-		return getValue(Property.AXIS, InteractionAxis.class, getDefaultValues().getAxis());
+	public final boolean isIntersect() {
+		return getValue(Property.INTERSECT, isDefaultIntersect());
 	}
 
 }
