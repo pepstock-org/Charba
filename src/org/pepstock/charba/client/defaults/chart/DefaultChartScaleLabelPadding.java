@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import org.pepstock.charba.client.defaults.IsDefaultPadding;
 import org.pepstock.charba.client.options.ScaleLabelPadding;
 
 /**
@@ -23,9 +22,7 @@ import org.pepstock.charba.client.options.ScaleLabelPadding;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultChartScaleLabelPadding implements IsDefaultPadding {
-
-	private final ScaleLabelPadding padding;
+public final class DefaultChartScaleLabelPadding extends AbstractDefaultChartPadding {
 
 	/**
 	 * Creates the object by scale label padding option element instance.
@@ -33,47 +30,7 @@ public final class DefaultChartScaleLabelPadding implements IsDefaultPadding {
 	 * @param padding scale label padding option element instance.
 	 */
 	DefaultChartScaleLabelPadding(ScaleLabelPadding padding) {
-		this.padding = padding;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPadding#getLeft()
-	 */
-	@Override
-	public int getLeft() {
-		return padding.getLeft();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPadding#getRight()
-	 */
-	@Override
-	public int getRight() {
-		return padding.getRight();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPadding#getTop()
-	 */
-	@Override
-	public int getTop() {
-		return padding.getTop();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultPadding#getBottom()
-	 */
-	@Override
-	public int getBottom() {
-		return padding.getBottom();
+		super(padding);
 	}
 
 }

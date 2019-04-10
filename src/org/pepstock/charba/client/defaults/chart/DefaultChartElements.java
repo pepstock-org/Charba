@@ -15,11 +15,7 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import org.pepstock.charba.client.defaults.IsDefaultArc;
-import org.pepstock.charba.client.defaults.IsDefaultElements;
-import org.pepstock.charba.client.defaults.IsDefaultLine;
-import org.pepstock.charba.client.defaults.IsDefaultPoint;
-import org.pepstock.charba.client.defaults.IsDefaultRectangle;
+import org.pepstock.charba.client.defaults.globals.DefaultElements;
 import org.pepstock.charba.client.options.Elements;
 
 /**
@@ -27,15 +23,7 @@ import org.pepstock.charba.client.options.Elements;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultChartElements implements IsDefaultElements {
-
-	private final DefaultChartArc arc;
-
-	private final DefaultChartLine line;
-
-	private final DefaultChartPoint point;
-
-	private final DefaultChartRectangle rectangle;
+public final class DefaultChartElements extends DefaultElements {
 
 	/**
 	 * Creates the object by elements option element instance.
@@ -43,50 +31,7 @@ public final class DefaultChartElements implements IsDefaultElements {
 	 * @param elements elements option element instance.
 	 */
 	DefaultChartElements(Elements elements) {
-		arc = new DefaultChartArc(elements.getArc());
-		line = new DefaultChartLine(elements.getLine());
-		point = new DefaultChartPoint(elements.getPoint());
-		rectangle = new DefaultChartRectangle(elements.getRectangle());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultElements#getArc()
-	 */
-	@Override
-	public IsDefaultArc getArc() {
-		return arc;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultElements#getLine()
-	 */
-	@Override
-	public IsDefaultLine getLine() {
-		return line;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultElements#getPoint()
-	 */
-	@Override
-	public IsDefaultPoint getPoint() {
-		return point;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultElements#getRectangle()
-	 */
-	@Override
-	public IsDefaultRectangle getRectangle() {
-		return rectangle;
+		super(new DefaultChartArc(elements.getArc()), new DefaultChartLine(elements.getLine()), new DefaultChartPoint(elements.getPoint()), new DefaultChartRectangle(elements.getRectangle()));
 	}
 
 }

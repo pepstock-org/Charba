@@ -24,11 +24,24 @@ import org.pepstock.charba.client.defaults.IsDefaultOptionsElement;
  */
 abstract class AbstractDefaultOptionsElement implements IsDefaultOptionsElement {
 
-	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
+	private final String backgroundColor;
 
-	private static final int DEFAULT_BORDER_WIDTH = 2;
+	private final String borderColor;
 
-	private static final String DEFAULT_BORDER_COLOR = "#fff";
+	private final int borderWidth;
+	
+	/**
+	 * Creates the object using the values passed as arguments.
+	 * 
+	 * @param backgroundColor background color of element
+	 * @param borderColor border color of element
+	 * @param borderWidth vorder width of element
+	 */
+	AbstractDefaultOptionsElement(String backgroundColor, String borderColor, int borderWidth) {
+		this.backgroundColor = backgroundColor;
+		this.borderColor = borderColor;
+		this.borderWidth = borderWidth;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -36,8 +49,8 @@ abstract class AbstractDefaultOptionsElement implements IsDefaultOptionsElement 
 	 * @see org.pepstock.charba.client.options.elements.arc.IsReadableArc#getBackgroundColorAsString()
 	 */
 	@Override
-	public String getBackgroundColorAsString() {
-		return DEFAULT_BACKGROUND_COLOR;
+	public final String getBackgroundColorAsString() {
+		return backgroundColor;
 	}
 
 	/*
@@ -46,8 +59,8 @@ abstract class AbstractDefaultOptionsElement implements IsDefaultOptionsElement 
 	 * @see org.pepstock.charba.client.options.elements.arc.IsReadableArc#getBorderWidth()
 	 */
 	@Override
-	public int getBorderWidth() {
-		return DEFAULT_BORDER_WIDTH;
+	public final int getBorderWidth() {
+		return borderWidth;
 	}
 
 	/*
@@ -56,8 +69,8 @@ abstract class AbstractDefaultOptionsElement implements IsDefaultOptionsElement 
 	 * @see org.pepstock.charba.client.options.elements.arc.IsReadableArc#getBorderColorAsString()
 	 */
 	@Override
-	public String getBorderColorAsString() {
-		return DEFAULT_BORDER_COLOR;
+	public final String getBorderColorAsString() {
+		return borderColor;
 	}
 
 }

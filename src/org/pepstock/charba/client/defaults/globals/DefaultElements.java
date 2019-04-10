@@ -26,15 +26,38 @@ import org.pepstock.charba.client.defaults.IsDefaultRectangle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultElements implements IsDefaultElements {
+public class DefaultElements implements IsDefaultElements {
 
-	private final DefaultArc arc = new DefaultArc();
+	private final IsDefaultArc arc;
 
-	private final DefaultLine line = new DefaultLine();
+	private final IsDefaultLine line;
 
-	private final DefaultPoint point = new DefaultPoint();
+	private final IsDefaultPoint point;
 
-	private final DefaultRectangle rectangle = new DefaultRectangle();
+	private final IsDefaultRectangle rectangle;
+	
+	/**
+	 * Creates the object using inner default elements. 
+	 */
+	public DefaultElements() {
+		this(new DefaultArc(), new DefaultLine(), new DefaultPoint(), new DefaultRectangle());
+	}
+
+	/**
+	 * Creates the object using the inner elements are arguments.
+	 * 
+	 * @param arc arc element instance
+	 * @param line line element instance
+	 * @param point point element instance
+	 * @param rectangle rectangle element instance
+	 */
+	public DefaultElements(IsDefaultArc arc, IsDefaultLine line, IsDefaultPoint point, IsDefaultRectangle rectangle) {
+		super();
+		this.arc = arc;
+		this.line = line;
+		this.point = point;
+		this.rectangle = rectangle;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -42,7 +65,7 @@ public final class DefaultElements implements IsDefaultElements {
 	 * @see org.pepstock.charba.client.options.IsDefaultOptions#getArc()
 	 */
 	@Override
-	public IsDefaultArc getArc() {
+	public final IsDefaultArc getArc() {
 		return arc;
 	}
 
@@ -52,7 +75,7 @@ public final class DefaultElements implements IsDefaultElements {
 	 * @see org.pepstock.charba.client.options.IsDefaultOptions#getLine()
 	 */
 	@Override
-	public IsDefaultLine getLine() {
+	public final IsDefaultLine getLine() {
 		return line;
 	}
 
@@ -62,7 +85,7 @@ public final class DefaultElements implements IsDefaultElements {
 	 * @see org.pepstock.charba.client.options.IsDefaultOptions#getPoint()
 	 */
 	@Override
-	public IsDefaultPoint getPoint() {
+	public final IsDefaultPoint getPoint() {
 		return point;
 	}
 
@@ -72,7 +95,7 @@ public final class DefaultElements implements IsDefaultElements {
 	 * @see org.pepstock.charba.client.options.IsDefaultOptions#getRectangle()
 	 */
 	@Override
-	public IsDefaultRectangle getRectangle() {
+	public final IsDefaultRectangle getRectangle() {
 		return rectangle;
 	}
 

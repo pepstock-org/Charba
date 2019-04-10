@@ -44,34 +44,11 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 
 	private static final boolean DEFAULT_STEPPED = false;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.DefaultArc#getBackgroundColorAsString()
+	/**
+	 * Creates a defualt arc
 	 */
-	@Override
-	public String getBackgroundColorAsString() {
-		return DEFAULT_BACKGROUND_COLOR;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.DefaultArc#getBorderWidth()
-	 */
-	@Override
-	public int getBorderWidth() {
-		return DEFAULT_BORDER_WIDTH;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.DefaultArc#getBorderColorAsString()
-	 */
-	@Override
-	public String getBorderColorAsString() {
-		return DEFAULT_BORDER_COLOR;
+	public DefaultLine() {
+		super(DEFAULT_BACKGROUND_COLOR, DEFAULT_BORDER_COLOR, DEFAULT_BORDER_WIDTH);
 	}
 
 	/*
