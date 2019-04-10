@@ -115,6 +115,56 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 	}
 
 	/**
+	 * Removes the first occurrence of the specified element from this list, if it is present. If this list does not contain the
+	 * element, it is unchanged.
+	 */
+	@Override
+	public final boolean remove(Object o) {
+		// gets index of object
+		int index = indexOf(o);
+		// if is in the right range
+		if (checkRange(index)) {
+			// removes by index
+			remove(index);
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Returns true if this list contains all of the elements of the specified collection.
+	 */
+	@Override
+	public boolean containsAll(Collection<?> c) {
+		Iterator<?> e = c.iterator();
+		// scans all elements
+		while (e.hasNext()) {
+			// if does not contain return false
+			if (!contains(e.next())) {
+				return false;
+			}
+		}
+		// if here, all elements are in the list
+		return true;
+	}
+
+	/**
+	 * Removes from this list all of its elements that are contained in the specified collection.
+	 */
+	@Override
+	public final boolean removeAll(Collection<?> c) {
+		// set modified checking if collection is empty
+		boolean modified = !c.isEmpty();
+		Iterator<?> e = c.iterator();
+		// scans all elements
+		while (e.hasNext()) {
+			// removes and checks if modified
+			modified = modified && remove(e.next());
+		}
+		return modified;
+	}
+
+	/**
 	 * Returns a list iterator over the elements in this list (in proper sequence), starting at the specified position in the
 	 * list.<br>
 	 * The specified index indicates the first element that would be returned by an initial call to next.<br>

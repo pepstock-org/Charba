@@ -144,23 +144,6 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	}
 
 	/**
-	 * Removes the first occurrence of the specified element from this list, if it is present. If this list does not contain the
-	 * element, it is unchanged.
-	 */
-	@Override
-	public boolean remove(Object o) {
-		// gets index of object
-		int index = indexOf(o);
-		// if is in the right range
-		if (checkRange(index)) {
-			// removes by index
-			remove(index);
-			return true;
-		}
-		return false;
-	}
-
-	/**
 	 * Returns true if this list contains all of the elements of the specified collection.
 	 */
 	@Override
@@ -187,22 +170,6 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 				// sets false!
 				modified = false;
 			}
-		}
-		return modified;
-	}
-
-	/**
-	 * Removes from this list all of its elements that are contained in the specified collection.
-	 */
-	@Override
-	public boolean removeAll(Collection<?> c) {
-		// set modified checking if collection is empty
-		boolean modified = !c.isEmpty();
-		Iterator<?> e = c.iterator();
-		// scans all elements
-		while (e.hasNext()) {
-			// removes and checks if modified
-			modified = modified && remove(e.next());
 		}
 		return modified;
 	}
