@@ -15,10 +15,8 @@
 */
 package org.pepstock.charba.client.commons;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * The user of this interface has precise control over where in the list each element is inserted. <br>
@@ -28,7 +26,7 @@ import java.util.List;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, ArrayString> {
+public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerList<E, ArrayString> {
 
 	// delegated array to store objects
 	private final ArrayString array;
@@ -114,39 +112,6 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayList<E, Arr
 			add(e.next());
 			// sets modified
 			modified = true;
-		}
-		return modified;
-	}
-
-	/**
-	 * Retains only the elements in this list that are contained in the specified collection.<br>
-	 * In other words, removes from this list all of its elements that are not contained in the specified collection.
-	 */
-	@Override
-	public boolean retainAll(Collection<?> c) {
-		// set modified checking if collection is empty
-		boolean modified = !c.isEmpty();
-		if (modified) {
-			// creates a copy of elements
-			List<E> contained = new ArrayList<>();
-			// scans all current elements
-			for (int i = 0; i < size(); i++) {
-				E value = get(i);
-				// checks if not present into
-				// passed collection
-				if (!c.contains(get(i))) {
-					// adds to temporary list
-					contained.add(value);
-				}
-			}
-			// if temporary list is not empty
-			if (!contained.isEmpty()) {
-				// scans all elements
-				for (E toRemove : contained) {
-					// removes and checks if modified
-					modified = modified && remove(toRemove);
-				}
-			}
 		}
 		return modified;
 	}

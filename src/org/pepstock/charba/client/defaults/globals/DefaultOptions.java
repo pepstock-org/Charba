@@ -15,14 +15,6 @@
 */
 package org.pepstock.charba.client.defaults.globals;
 
-import org.pepstock.charba.client.defaults.IsDefaultAnimation;
-import org.pepstock.charba.client.defaults.IsDefaultElements;
-import org.pepstock.charba.client.defaults.IsDefaultHover;
-import org.pepstock.charba.client.defaults.IsDefaultLayout;
-import org.pepstock.charba.client.defaults.IsDefaultLegend;
-import org.pepstock.charba.client.defaults.IsDefaultOptions;
-import org.pepstock.charba.client.defaults.IsDefaultTitle;
-import org.pepstock.charba.client.defaults.IsDefaultTooltips;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.utils.Window;
 
@@ -31,7 +23,7 @@ import org.pepstock.charba.client.utils.Window;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class DefaultOptions implements IsDefaultOptions {
+public class DefaultOptions extends AbstractDefaultOptions {
 
 	private static final boolean DEFAULT_RESPONSIVE = true;
 
@@ -61,95 +53,11 @@ public class DefaultOptions implements IsDefaultOptions {
 
 	private static final double DEFAULT_START_ANGLE = -0.5 * Math.PI;
 
-	private final DefaultAnimation animation = new DefaultAnimation();
-
-	private final DefaultHover hover = new DefaultHover();
-
-	private final DefaultElements elements = new DefaultElements();
-
-	private final DefaultLayout layout = new DefaultLayout();
-
-	private final DefaultTitle title = new DefaultTitle();
-
-	private final DefaultLegend legend = new DefaultLegend();
-
-	private final DefaultTooltips tooltips = new DefaultTooltips();
-
 	/**
 	 * Creates the object. Protected to avoid any instantiation
 	 */
 	protected DefaultOptions() {
-		// do nothing
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.IsDefaultOptions#getAnimation()
-	 */
-	@Override
-	public IsDefaultAnimation getAnimation() {
-		return animation;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getLayout()
-	 */
-	@Override
-	public IsDefaultLayout getLayout() {
-		return layout;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getElements()
-	 */
-	@Override
-	public IsDefaultElements getElements() {
-		return elements;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.IsDefaultOptions#getHover()
-	 */
-	@Override
-	public IsDefaultHover getHover() {
-		return hover;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.IsDefaultOptions#getTitle()
-	 */
-	@Override
-	public IsDefaultTitle getTitle() {
-		return title;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.IsDefaultOptions#getLegend()
-	 */
-	@Override
-	public IsDefaultLegend getLegend() {
-		return legend;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.IsDefaultOptions#getTooltips()
-	 */
-	@Override
-	public IsDefaultTooltips getTooltips() {
-		return tooltips;
+		super();
 	}
 
 	/*

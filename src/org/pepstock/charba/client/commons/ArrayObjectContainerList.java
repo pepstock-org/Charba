@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.commons;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -33,7 +32,7 @@ import java.util.ListIterator;
  * @param <E> extension of {@link org.pepstock.charba.client.commons.NativeObjectContainer}
  * 
  */
-public final class ArrayObjectContainerList<E extends NativeObjectContainer> extends AbstractArrayList<E, ArrayObject> {
+public final class ArrayObjectContainerList<E extends NativeObjectContainer> extends AbstractArrayContainerList<E, ArrayObject> {
 
 	// delegated array to store objects
 	private final ArrayObject array;
@@ -169,39 +168,6 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 			} else {
 				// sets false!
 				modified = false;
-			}
-		}
-		return modified;
-	}
-
-	/**
-	 * Retains only the elements in this list that are contained in the specified collection.<br>
-	 * In other words, removes from this list all of its elements that are not contained in the specified collection.
-	 */
-	@Override
-	public boolean retainAll(Collection<?> c) {
-		// set modified checking if collection is empty
-		boolean modified = !c.isEmpty();
-		if (modified) {
-			// creates a copy of elements
-			List<E> contained = new ArrayList<>();
-			// scans all current elements
-			for (int i = 0; i < size(); i++) {
-				E value = get(i);
-				// checks if not present into
-				// passed collection
-				if (!c.contains(get(i))) {
-					// adds to temporary list
-					contained.add(value);
-				}
-			}
-			// if temporary list is not empty
-			if (!contained.isEmpty()) {
-				// scans all elements
-				for (E toRemove : contained) {
-					// removes and checks if modified
-					modified = modified && remove(toRemove);
-				}
 			}
 		}
 		return modified;

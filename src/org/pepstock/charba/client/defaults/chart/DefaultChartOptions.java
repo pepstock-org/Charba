@@ -17,16 +17,10 @@ package org.pepstock.charba.client.defaults.chart;
 
 import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.ScaleType;
-import org.pepstock.charba.client.defaults.IsDefaultAnimation;
-import org.pepstock.charba.client.defaults.IsDefaultElements;
-import org.pepstock.charba.client.defaults.IsDefaultHover;
-import org.pepstock.charba.client.defaults.IsDefaultLayout;
-import org.pepstock.charba.client.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
 import org.pepstock.charba.client.defaults.IsDefaultScales;
-import org.pepstock.charba.client.defaults.IsDefaultTitle;
-import org.pepstock.charba.client.defaults.IsDefaultTooltips;
+import org.pepstock.charba.client.defaults.globals.AbstractDefaultOptions;
 import org.pepstock.charba.client.defaults.globals.DefaultsBuilder;
 import org.pepstock.charba.client.enums.FontStyle;
 
@@ -35,27 +29,13 @@ import org.pepstock.charba.client.enums.FontStyle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class DefaultChartOptions implements IsDefaultScaledOptions {
+public final class DefaultChartOptions extends AbstractDefaultOptions implements IsDefaultScaledOptions {
 
 	private final ChartOptions chartOptions;
-
-	private final IsDefaultAnimation animation;
 
 	private final IsDefaultScale scale;
 
 	private final IsDefaultScales scales;
-
-	private final IsDefaultHover hover;
-
-	private final IsDefaultTitle title;
-
-	private final IsDefaultLegend legend;
-
-	private final IsDefaultTooltips tooltips;
-
-	private final IsDefaultLayout layout;
-
-	private final IsDefaultElements elements;
 
 	/**
 	 * Creates the object by options element instance.
@@ -63,15 +43,14 @@ public final class DefaultChartOptions implements IsDefaultScaledOptions {
 	 * @param chartOptions chart options instance.
 	 */
 	public DefaultChartOptions(ChartOptions chartOptions) {
+		super(new DefaultChartAnimation(chartOptions.getAnimation()),
+				new DefaultChartHover(chartOptions.getHover()),
+				new DefaultChartElements(chartOptions.getElements()),
+				new DefaultChartLayout(chartOptions.getLayout()),
+				new DefaultChartTitle(chartOptions.getTitle()),
+				new DefaultChartLegend(chartOptions.getLegend()),
+				new DefaultChartTooltips(chartOptions.getTooltips()));
 		this.chartOptions = chartOptions;
-		// creates sub elements
-		animation = new DefaultChartAnimation(chartOptions.getAnimation());
-		hover = new DefaultChartHover(chartOptions.getHover());
-		title = new DefaultChartTitle(chartOptions.getTitle());
-		legend = new DefaultChartLegend(chartOptions.getLegend());
-		tooltips = new DefaultChartTooltips(chartOptions.getTooltips());
-		layout = new DefaultChartLayout(chartOptions.getLayout());
-		elements = new DefaultChartElements(chartOptions.getElements());
 		// checks if the chart options is related to axes
 		// checks if single scale
 		if (ScaleType.SINGLE.equals(chartOptions.getType().scaleType())) {
@@ -94,26 +73,6 @@ public final class DefaultChartOptions implements IsDefaultScaledOptions {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getLayout()
-	 */
-	@Override
-	public IsDefaultLayout getLayout() {
-		return layout;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getElements()
-	 */
-	@Override
-	public IsDefaultElements getElements() {
-		return elements;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getScale()
 	 */
 	@Override
@@ -129,56 +88,6 @@ public final class DefaultChartOptions implements IsDefaultScaledOptions {
 	@Override
 	public IsDefaultScales getScales() {
 		return scales;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getAnimation()
-	 */
-	@Override
-	public IsDefaultAnimation getAnimation() {
-		return animation;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getHover()
-	 */
-	@Override
-	public IsDefaultHover getHover() {
-		return hover;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getTitle()
-	 */
-	@Override
-	public IsDefaultTitle getTitle() {
-		return title;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getLegend()
-	 */
-	@Override
-	public IsDefaultLegend getLegend() {
-		return legend;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultOptions#getTooltips()
-	 */
-	@Override
-	public IsDefaultTooltips getTooltips() {
-		return tooltips;
 	}
 
 	/*
