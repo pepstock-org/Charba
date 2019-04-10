@@ -69,7 +69,7 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return whether or not labels of value 0 are displayed.
 	 */
 	boolean isShowZero() {
-		return getValue(LabelsOptions.Property.SHOW_ZERO, LabelsOptions.DEFAULT_SHOWZERO);
+		return getValue(LabelsOptions.Property.SHOW_ZERO, LabelsOptions.DEFAULT_SHOW_ZERO);
 	}
 
 	/**
@@ -114,7 +114,7 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return <code>true</code> if draws text shadows under labels.
 	 */
 	boolean isTextShadow() {
-		return getValue(LabelsOptions.Property.TEXT_SHADOW, LabelsOptions.DEFAULT_TEXTSHADOW);
+		return getValue(LabelsOptions.Property.TEXT_SHADOW, LabelsOptions.DEFAULT_TEXT_SHADOW);
 	}
 
 	/**
@@ -123,7 +123,7 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the text shadow intensity.
 	 */
 	int getShadowBlur() {
-		return getValue(LabelsOptions.Property.SHADOW_BLUR, LabelsOptions.DEFAULT_SHADOWBLUR);
+		return getValue(LabelsOptions.Property.SHADOW_BLUR, LabelsOptions.DEFAULT_SHADOW_BLUR);
 	}
 
 	/**
@@ -132,7 +132,7 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the text shadow X offset.
 	 */
 	int getShadowOffsetX() {
-		return getValue(LabelsOptions.Property.SHADOW_OFFSET_X, LabelsOptions.DEFAULT_SHADOWOFFSETX);
+		return getValue(LabelsOptions.Property.SHADOW_OFFSET_X, LabelsOptions.DEFAULT_SHADOW_OFFSET_X);
 	}
 
 	/**
@@ -141,7 +141,7 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the text shadow Y offset.
 	 */
 	int getShadowOffsetY() {
-		return getValue(LabelsOptions.Property.SHADOW_OFFSET_Y, LabelsOptions.DEFAULT_SHADOWOFFSETY);
+		return getValue(LabelsOptions.Property.SHADOW_OFFSET_Y, LabelsOptions.DEFAULT_SHADOW_OFFSET_Y);
 	}
 
 	/**
@@ -150,7 +150,7 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the text shadow color as string.
 	 */
 	String getShadowColorAsString() {
-		return getValue(LabelsOptions.Property.SHADOW_COLOR, LabelsOptions.DEFAULT_SHADOWCOLOR);
+		return getValue(LabelsOptions.Property.SHADOW_COLOR, LabelsOptions.DEFAULT_SHADOW_COLOR);
 	}
 
 	/**
@@ -188,7 +188,7 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	 *         fit the percentages to 100 in total.
 	 */
 	boolean isShowActualPercentages() {
-		return getValue(LabelsOptions.Property.SHOW_ACTUAL_PERCENTAGES, LabelsOptions.DEFAULT_SHOWACTUALPERCENTAGES);
+		return getValue(LabelsOptions.Property.SHOW_ACTUAL_PERCENTAGES, LabelsOptions.DEFAULT_SHOW_ACTUAL_PERCENTAGES);
 	}
 
 	/**
@@ -197,7 +197,7 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the padding when position is {@link Position#OUTSIDE}.
 	 */
 	int getOutsidePadding() {
-		return getValue(LabelsOptions.Property.OUTSIDE_PADDING, LabelsOptions.DEFAULT_OUTSIDEPADDING);
+		return getValue(LabelsOptions.Property.OUTSIDE_PADDING, LabelsOptions.DEFAULT_OUTSIDE_PADDING);
 	}
 
 	/**
@@ -206,6 +206,6 @@ final class LabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER}.
 	 */
 	int getTextMargin() {
-		return getValue(LabelsOptions.Property.TEXT_MARGIN, LabelsOptions.DEFAULT_TEXTMARGIN);
+		return getValue(LabelsOptions.Property.TEXT_MARGIN, LabelsOptions.DEFAULT_TEXT_MARGIN);
 	}
 }

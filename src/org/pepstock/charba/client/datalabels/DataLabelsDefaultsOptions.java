@@ -108,7 +108,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the background color as string. If <code>null</code>, it uses the background color of dataset.
 	 */
 	String getBackgroundColorAsString() {
-		return getValue(DataLabelsOptions.Property.BACKGROUND_COLOR, DataLabelsOptions.DEFAULT_BACKGROUNDCOLOR);
+		return getValue(DataLabelsOptions.Property.BACKGROUND_COLOR, DataLabelsOptions.DEFAULT_BACKGROUND_COLOR);
 	}
 
 	/**
@@ -117,7 +117,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the border color as string. If <code>null</code>, it uses the border color of dataset.
 	 */
 	String getBorderColorAsString() {
-		return getValue(DataLabelsOptions.Property.BORDER_COLOR, DataLabelsOptions.DEFAULT_BORDERCOLOR);
+		return getValue(DataLabelsOptions.Property.BORDER_COLOR, DataLabelsOptions.DEFAULT_BORDER_COLOR);
 	}
 
 	/**
@@ -126,7 +126,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the border radius.
 	 */
 	double getBorderRadius() {
-		return getValue(DataLabelsOptions.Property.BORDER_RADIUS, DataLabelsOptions.DEFAULT_BORDERRADIUS);
+		return getValue(DataLabelsOptions.Property.BORDER_RADIUS, DataLabelsOptions.DEFAULT_BORDER_RADIUS);
 	}
 
 	/**
@@ -135,7 +135,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the border width.
 	 */
 	int getBorderWidth() {
-		return getValue(DataLabelsOptions.Property.BORDER_WIDTH, DataLabelsOptions.DEFAULT_BORDERWIDTH);
+		return getValue(DataLabelsOptions.Property.BORDER_WIDTH, DataLabelsOptions.DEFAULT_BORDER_WIDTH);
 	}
 
 	/**
@@ -222,7 +222,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the text alignment being used when drawing the label text.
 	 */
 	TextAlign getTextAlign() {
-		return getValue(DataLabelsOptions.Property.TEXT_ALIGN, TextAlign.class, DataLabelsOptions.DEFAULT_TEXTALIGN);
+		return getValue(DataLabelsOptions.Property.TEXT_ALIGN, TextAlign.class, DataLabelsOptions.DEFAULT_TEXT_ALIGN);
 	}
 
 	/**
@@ -240,7 +240,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the text stroke width.
 	 */
 	int getTextStrokeWidth() {
-		return getValue(DataLabelsOptions.Property.TEXT_STROKE_WIDTH, DataLabelsOptions.DEFAULT_TEXTSTROKEWIDTH);
+		return getValue(DataLabelsOptions.Property.TEXT_STROKE_WIDTH, DataLabelsOptions.DEFAULT_TEXT_STROKE_WIDTH);
 	}
 
 	/**
@@ -249,7 +249,7 @@ final class DataLabelsDefaultsOptions extends NativeObjectContainer {
 	 * @return the text shadow blur.
 	 */
 	double getTextShadowBlur() {
-		return getValue(DataLabelsOptions.Property.TEXT_SHADOW_BLUR, DataLabelsOptions.DEFAULT_TEXTSHADOWBLUR);
+		return getValue(DataLabelsOptions.Property.TEXT_SHADOW_BLUR, DataLabelsOptions.DEFAULT_TEXT_SHADOW_BLUR);
 	}
 
 	/**

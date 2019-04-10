@@ -85,22 +85,22 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	/**
 	 * Default background color, <code>null</code>, and uses the background color of dataset.
 	 */
-	public static final String DEFAULT_BACKGROUNDCOLOR = null;
+	public static final String DEFAULT_BACKGROUND_COLOR = null;
 
 	/**
 	 * Default border color, <code>null</code>, and uses the border color of dataset.
 	 */
-	public static final String DEFAULT_BORDERCOLOR = null;
+	public static final String DEFAULT_BORDER_COLOR = null;
 
 	/**
-	 * Default border radius of labels, <b>{@value DEFAULT_BORDERRADIUS}</b>.
+	 * Default border radius of labels, <b>{@value DEFAULT_BORDER_RADIUS}</b>.
 	 */
-	public static final double DEFAULT_BORDERRADIUS = 0D;
+	public static final double DEFAULT_BORDER_RADIUS = 0D;
 
 	/**
-	 * Default border width of labels, <b>{@value DEFAULT_BORDERWIDTH}</b>.
+	 * Default border width of labels, <b>{@value DEFAULT_BORDER_WIDTH}</b>.
 	 */
-	public static final int DEFAULT_BORDERWIDTH = 0;
+	public static final int DEFAULT_BORDER_WIDTH = 0;
 
 	/**
 	 * Default to enforce the anchor position to be calculated based on the visible geometry of the associated element,
@@ -136,17 +136,17 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	/**
 	 * Default text alignment being used when drawing the label text, {@link TextAlign#START}.
 	 */
-	public static final TextAlign DEFAULT_TEXTALIGN = TextAlign.START;
+	public static final TextAlign DEFAULT_TEXT_ALIGN = TextAlign.START;
 
 	/**
-	 * Default text stroke width, <b>{@value DEFAULT_TEXTSTROKEWIDTH}</b>.
+	 * Default text stroke width, <b>{@value DEFAULT_TEXT_STROKE_WIDTH}</b>.
 	 */
-	public static final int DEFAULT_TEXTSTROKEWIDTH = 0;
+	public static final int DEFAULT_TEXT_STROKE_WIDTH = 0;
 
 	/**
-	 * Default text shadow blur, <b>{@value DEFAULT_TEXTSHADOWBLUR}</b>.
+	 * Default text shadow blur, <b>{@value DEFAULT_TEXT_SHADOW_BLUR}</b>.
 	 */
-	public static final double DEFAULT_TEXTSHADOWBLUR = 0D;
+	public static final double DEFAULT_TEXT_SHADOW_BLUR = 0D;
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---

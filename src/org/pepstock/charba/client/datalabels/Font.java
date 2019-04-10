@@ -37,9 +37,9 @@ public final class Font extends AbstractElement {
 	public static final Weight DEFAULT_WEIGHT = Weight.NORMAL;
 
 	/**
-	 * Default line height, <b>{@value DEFAULT_LINEHEIGHT}</b>.
+	 * Default line height, <b>{@value DEFAULT_LINE_HEIGHT}</b>.
 	 */
-	public static final double DEFAULT_LINEHEIGHT = 1.2D;
+	public static final double DEFAULT_LINE_HEIGHT = 1.2D;
 
 	// defaults global options instance
 	private DataLabelsDefaultsFont defaultsOptions;

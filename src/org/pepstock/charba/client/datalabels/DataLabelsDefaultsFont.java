@@ -88,7 +88,7 @@ final class DataLabelsDefaultsFont extends NativeObjectContainer {
 	 * @return the line height.
 	 */
 	double getLineHeight() {
-		return getValue(Font.Property.LINE_HEIGHT, Font.DEFAULT_LINEHEIGHT);
+		return getValue(Font.Property.LINE_HEIGHT, Font.DEFAULT_LINE_HEIGHT);
 	}
 
 }

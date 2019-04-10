@@ -59,34 +59,34 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	public static final int DEFAULT_PRECISION = 0;
 
 	/**
-	 * Default to enable whether or not labels of value 0 are displayed, <b>{@value DEFAULT_SHOWZERO}</b>.
+	 * Default to enable whether or not labels of value 0 are displayed, <b>{@value DEFAULT_SHOW_ZERO}</b>.
 	 */
-	public static final boolean DEFAULT_SHOWZERO = false;
+	public static final boolean DEFAULT_SHOW_ZERO = false;
 
 	/**
-	 * Default to enable if draws text shadows under labels, <b>{@value DEFAULT_TEXTSHADOW}</b>.
+	 * Default to enable if draws text shadows under labels, <b>{@value DEFAULT_TEXT_SHADOW}</b>.
 	 */
-	public static final boolean DEFAULT_TEXTSHADOW = false;
+	public static final boolean DEFAULT_TEXT_SHADOW = false;
 
 	/**
-	 * Default text shadow intensity, <b>{@value DEFAULT_SHADOWBLUR}</b>.
+	 * Default text shadow intensity, <b>{@value DEFAULT_SHADOW_BLUR}</b>.
 	 */
-	public static final int DEFAULT_SHADOWBLUR = 6;
+	public static final int DEFAULT_SHADOW_BLUR = 6;
 
 	/**
-	 * Default text shadow X offset, <b>{@value DEFAULT_SHADOWOFFSETX}</b>.
+	 * Default text shadow X offset, <b>{@value DEFAULT_SHADOW_OFFSET_X}</b>.
 	 */
-	public static final int DEFAULT_SHADOWOFFSETX = 3;
+	public static final int DEFAULT_SHADOW_OFFSET_X = 3;
 
 	/**
-	 * Default text shadow Y offset, <b>{@value DEFAULT_SHADOWOFFSETY}</b>.
+	 * Default text shadow Y offset, <b>{@value DEFAULT_SHADOW_OFFSET_Y}</b>.
 	 */
-	public static final int DEFAULT_SHADOWOFFSETY = 3;
+	public static final int DEFAULT_SHADOW_OFFSET_Y = 3;
 
 	/**
-	 * Default text shadow color, <b>{@value DEFAULT_SHADOWCOLOR}</b>.
+	 * Default text shadow color, <b>{@value DEFAULT_SHADOW_COLOR}</b>.
 	 */
-	public static final String DEFAULT_SHADOWCOLOR = "rgba(0,0,0,0.3)";
+	public static final String DEFAULT_SHADOW_COLOR = "rgba(0,0,0,0.3)";
 
 	/**
 	 * Default to enable drawing label in arc, <b>{@value DEFAULT_ARC}</b>.
@@ -104,20 +104,20 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	public static final boolean DEFAULT_OVERLAP = true;
 
 	/**
-	 * Default to enable showing the real calculated percentages from the values, <b>{@value DEFAULT_SHOWACTUALPERCENTAGES}</b>.
+	 * Default to enable showing the real calculated percentages from the values, <b>{@value DEFAULT_SHOW_ACTUAL_PERCENTAGES}</b>.
 	 */
-	public static final boolean DEFAULT_SHOWACTUALPERCENTAGES = false;
+	public static final boolean DEFAULT_SHOW_ACTUAL_PERCENTAGES = false;
 
 	/**
-	 * Default padding when position is {@link Position#OUTSIDE}, <b>{@value DEFAULT_OUTSIDEPADDING}</b>.
+	 * Default padding when position is {@link Position#OUTSIDE}, <b>{@value DEFAULT_OUTSIDE_PADDING}</b>.
 	 */
-	public static final int DEFAULT_OUTSIDEPADDING = 2;
+	public static final int DEFAULT_OUTSIDE_PADDING = 2;
 
 	/**
 	 * Default the margin of text when position is {@link Position#OUTSIDE} or {@link Position#BORDER},
-	 * <b>{@value DEFAULT_TEXTMARGIN}</b>.
+	 * <b>{@value DEFAULT_TEXT_MARGIN}</b>.
 	 */
-	public static final int DEFAULT_TEXTMARGIN = 2;
+	public static final int DEFAULT_TEXT_MARGIN = 2;
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
