@@ -104,7 +104,8 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 	public static final boolean DEFAULT_OVERLAP = true;
 
 	/**
-	 * Default to enable showing the real calculated percentages from the values, <b>{@value DEFAULT_SHOW_ACTUAL_PERCENTAGES}</b>.
+	 * Default to enable showing the real calculated percentages from the values,
+	 * <b>{@value DEFAULT_SHOW_ACTUAL_PERCENTAGES}</b>.
 	 */
 	public static final boolean DEFAULT_SHOW_ACTUAL_PERCENTAGES = false;
 

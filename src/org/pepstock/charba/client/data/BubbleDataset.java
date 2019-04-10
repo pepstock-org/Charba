@@ -69,9 +69,6 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	// point style callback instance
 	private PointStyleCallback pointStyleCallback = null;
 
-	// exception message when it's not using data points
-	private static final String DATA_USAGE_MESSAGE = "Use datapoints instead of data for bubble chart";
-
 	/**
 	 * Name of properties of native object.
 	 */
@@ -146,6 +143,16 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 			// default result
 			return getDefaultValues().getElements().getPoint().getPointStyle().value();
 		});
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#mustUseDataPoints()
+	 */
+	@Override
+	final boolean mustUseDataPoints() {
+		return true;
 	}
 
 	/**
@@ -276,46 +283,6 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 		// if here, is a callback
 		// then returns an empty list
 		return new ArrayDoubleList();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setData(double[])
-	 */
-	@Override
-	public void setData(double... values) {
-		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setData(java.util.List)
-	 */
-	@Override
-	public void setData(List<Double> values) {
-		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#getData()
-	 */
-	@Override
-	public List<Double> getData() {
-		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#getData(boolean)
-	 */
-	@Override
-	public List<Double> getData(boolean binding) {
-		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
 	}
 
 	/**

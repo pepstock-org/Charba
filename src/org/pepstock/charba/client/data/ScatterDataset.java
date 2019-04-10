@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.data;
 
-import java.util.List;
-
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.Fill;
 import org.pepstock.charba.client.enums.IsFill;
@@ -30,8 +28,6 @@ import org.pepstock.charba.client.enums.IsFill;
  * @author Andrea "Stock" Stocchero
  */
 public final class ScatterDataset extends LineDataset {
-	// exception message when it's not using data points
-	private static final String DATA_USAGE_MESSAGE = "Use datapoints instead of data for scatter chart";
 
 	/**
 	 * Creates a dataset.<br>
@@ -58,6 +54,16 @@ public final class ScatterDataset extends LineDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#mustUseDataPoints()
+	 */
+	@Override
+	final boolean mustUseDataPoints() {
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.data.LineDataset#setShowLine(boolean)
 	 */
 	@Override
@@ -75,46 +81,6 @@ public final class ScatterDataset extends LineDataset {
 	public void setFill(IsFill fill) {
 		// sets always to no fill
 		super.setFill(Fill.FALSE);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setData(double[])
-	 */
-	@Override
-	public void setData(double... values) {
-		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setData(java.util.List)
-	 */
-	@Override
-	public void setData(List<Double> values) {
-		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#getData()
-	 */
-	@Override
-	public List<Double> getData() {
-		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#getData(boolean)
-	 */
-	@Override
-	public List<Double> getData(boolean binding) {
-		throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
 	}
 
 }

@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import java.util.List;
-
 import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.IsChart;
 
@@ -27,7 +25,7 @@ import org.pepstock.charba.client.IsChart;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class StackedOptions extends ConfigurationOptions {
+public class StackedOptions extends MultiScalesOptions {
 
 	private final StackedScales scales;
 
@@ -39,7 +37,8 @@ public class StackedOptions extends ConfigurationOptions {
 	 * @param onlyYScaled <code>true</code> if only Y axis is scaled.
 	 */
 	public StackedOptions(IsChart chart, ChartOptions defaultValues, boolean onlyYScaled) {
-		super(chart, defaultValues);
+		// asks to do not create a scale
+		super(chart, defaultValues, false);
 		// creates scales for stacked chart
 		scales = new StackedScales(chart, getConfiguration());
 		// sets if only Y scaled
@@ -61,49 +60,14 @@ public class StackedOptions extends ConfigurationOptions {
 		this(chart, defaultValues, false);
 	}
 
-	/**
-	 * Returns the scales element.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return the scales
+	 * @see org.pepstock.charba.client.configuration.MultiScalesOptions#getScales()
 	 */
+	@Override
 	public Scales getScales() {
 		return scales;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.configuration.ConfigurationOptions#getAxisById(int)
-	 */
-	@Override
-	Axis getAxisById(int id) {
-		// gets all X axes
-		List<Axis> xAxes = scales.getXAxes();
-		// checks if consistent
-		if (xAxes != null && !xAxes.isEmpty()) {
-			// scans all axes
-			for (Axis axis : xAxes) {
-				// checks if charba ID is the same of argument
-				if (axis.getCharbaId() == id) {
-					// axis found! returns it
-					return axis;
-				}
-			}
-		}
-		// gets all Y axes
-		List<Axis> yAxes = scales.getYAxes();
-		// checks if consistent
-		if (yAxes != null && !yAxes.isEmpty()) {
-			// scans all axes
-			for (Axis axis : yAxes) {
-				// checks if charba ID is the same of argument
-				if (axis.getCharbaId() == id) {
-					// axis found! returns it
-					return axis;
-				}
-			}
-		}
-		// if here, no axis found
-		return null;
-	}
 }

@@ -56,6 +56,8 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	private static final boolean DEFAULT_HIDDEN = false;
 	// factory to create data points
 	static final DataPointFactory DATAPOINTS_FACTORY = new DataPointFactory();
+	// exception message when it's not using data points
+	static final String DATA_USAGE_MESSAGE = "Use datapoints instead of data for this chart";
 	// patterns container
 	private final PatternsContainer patternsContainer = new PatternsContainer();
 	// gradients container
@@ -372,12 +374,27 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
+	 * Returns <code>true</code> if dataset must use only data points otherwise <code>false</code>.<br>
+	 * The dataset which can set this capabilities, must override this method.
+	 * 
+	 * @return <code>true</code> if dataset must use only data points otherwise <code>false</code>
+	 */
+	boolean mustUseDataPoints() {
+		return false;
+	}
+
+	/**
 	 * Sets the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array
 	 * corresponds to the label at the same index on the x axis.
 	 * 
 	 * @param values an array of numbers
 	 */
 	public void setData(double... values) {
+		// checks if it can use data as double
+		if (mustUseDataPoints()) {
+			// if not, exception
+			throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
+		}
 		// set value. If null, removes key and then..
 		setArrayValue(Property.DATA, ArrayDouble.fromOrNull(values));
 		// sets data type checking if the key exists
@@ -391,6 +408,11 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @param values list of numbers.
 	 */
 	public void setData(List<Double> values) {
+		// checks if it can use data as double
+		if (mustUseDataPoints()) {
+			// if not, exception
+			throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
+		}
 		// set value. If null, removes key and then..
 		setArrayValue(Property.DATA, ArrayDouble.fromOrNull(values));
 		// sets data type checking if the key exists
@@ -415,6 +437,11 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @return list of numbers or an empty list of numbers if the data type is not {@link DataType#NUMBERS}.
 	 */
 	public List<Double> getData(boolean binding) {
+		// checks if it can use data as double
+		if (mustUseDataPoints()) {
+			// if not, exception
+			throw new UnsupportedOperationException(DATA_USAGE_MESSAGE);
+		}
 		// checks if is a numbers data type
 		if (has(Property.DATA) && DataType.NUMBERS.equals(getDataType())) {
 			// returns numbers

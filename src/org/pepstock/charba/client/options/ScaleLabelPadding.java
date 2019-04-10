@@ -18,7 +18,6 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultPadding;
-import org.pepstock.charba.client.enums.Position;
 
 /**
  * It is applied to all sides of the scale label object of axes (left, top, right, bottom).
@@ -26,7 +25,7 @@ import org.pepstock.charba.client.enums.Position;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class ScaleLabelPadding extends AbstractModel<ScaleLabel, IsDefaultPadding> implements IsDefaultPadding {
+public final class ScaleLabelPadding extends AbstractPadding<ScaleLabel> {
 
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script
@@ -41,95 +40,4 @@ public final class ScaleLabelPadding extends AbstractModel<ScaleLabel, IsDefault
 		super(scaleLabel, childKey, defaultValues, delegated);
 	}
 
-	/**
-	 * Sets the padding size to all dimensions.
-	 * 
-	 * @param padding padding size to apply to all dimensions.
-	 */
-	public void set(int padding) {
-		setTop(padding);
-		setBottom(padding);
-		setLeft(padding);
-		setRight(padding);
-	}
-
-	/**
-	 * Sets the padding left in pixel.
-	 * 
-	 * @param padding the padding left in pixel.
-	 */
-	public void setLeft(int padding) {
-		setValue(Position.LEFT, padding);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the padding left in pixel.
-	 * 
-	 * @return the padding left in pixel.
-	 */
-	public int getLeft() {
-		return getValue(Position.LEFT, getDefaultValues().getLeft());
-	}
-
-	/**
-	 * Sets the padding right in pixel.
-	 * 
-	 * @param padding the padding right in pixel.
-	 */
-	public void setRight(int padding) {
-		setValue(Position.RIGHT, padding);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the padding right in pixel.
-	 * 
-	 * @return the padding right in pixel.
-	 */
-	public int getRight() {
-		return getValue(Position.RIGHT, getDefaultValues().getRight());
-	}
-
-	/**
-	 * Sets the padding top in pixel.
-	 * 
-	 * @param padding the padding top in pixel.
-	 */
-	public void setTop(int padding) {
-		setValue(Position.TOP, padding);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the padding top in pixel.
-	 * 
-	 * @return the padding top in pixel.
-	 */
-	public int getTop() {
-		return getValue(Position.TOP, getDefaultValues().getTop());
-	}
-
-	/**
-	 * Sets the padding bottom in pixel.
-	 * 
-	 * @param padding the padding bottom in pixel.
-	 */
-	public void setBottom(int padding) {
-		setValue(Position.BOTTOM, padding);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the padding bottom in pixel.
-	 * 
-	 * @return the padding bottom in pixel.
-	 */
-	public int getBottom() {
-		return getValue(Position.BOTTOM, getDefaultValues().getBottom());
-	}
 }

@@ -27,8 +27,9 @@ import org.pepstock.charba.client.IsChart;
  *
  */
 abstract class MultiScalesOptions extends ConfigurationOptions {
-
-	private final Scales scales;
+	// not final in order it can be set from
+	// options which inherits this class
+	private Scales scales = null;
 
 	/**
 	 * Builds the object storing the chart instance and default values.
@@ -37,9 +38,24 @@ abstract class MultiScalesOptions extends ConfigurationOptions {
 	 * @param defaultValues defaults options
 	 */
 	protected MultiScalesOptions(IsChart chart, ChartOptions defaultValues) {
+		this(chart, defaultValues, true);
+	}
+
+	/**
+	 * Builds the object storing the chart instance and default values and creating a scale options if requested.
+	 * 
+	 * @param chart chart instance
+	 * @param defaultValues defaults options
+	 * @param createScale if <code>true</code> creates a scale object reading the configuration otherwise it leaves the scale
+	 *            instance to <code>null</code> to allow to be set later.
+	 */
+	protected MultiScalesOptions(IsChart chart, ChartOptions defaultValues, boolean createScale) {
 		super(chart, defaultValues);
-		// new scales creation
-		scales = new Scales(chart, getConfiguration());
+		// checks if a scale must be created
+		if (createScale) {
+			// new scales creation
+			scales = new Scales(chart, getConfiguration());
+		}
 	}
 
 	/**
