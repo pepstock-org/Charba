@@ -15,11 +15,7 @@ limitations under the License.
 */
 package org.pepstock.charba.client.impl.plugins.enums;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.pepstock.charba.client.colors.ColorBuilder;
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.impl.plugins.ColorScheme;
 import org.pepstock.charba.client.impl.plugins.ColorSchemes;
 
@@ -33,7 +29,7 @@ import org.pepstock.charba.client.impl.plugins.ColorSchemes;
  * @author Andrea "Stock" Stocchero
  *
  */
-public enum TableauScheme implements ColorScheme
+public enum TableauScheme implements IsEnumeratedScheme
 {
 	/**
 	 * Color scheme name "Tableau10" - <span style="background-color:#4e79a7; border-style: solid; border-width:
@@ -1492,11 +1488,9 @@ public enum TableauScheme implements ColorScheme
 
 	// Category name used to build the label to configure plugin.
 	private static final String CATEGORY = "tableau";
-	// name value of property
-	private final String value;
-	// list of colors for each scheme
-	private final List<IsColor> colors = new LinkedList<>();
-
+	// enumerated scheme instance
+	private final EnumeratedScheme scheme;
+	
 	/**
 	 * Builds a scheme using argument as list of colors in HEX format.
 	 *
@@ -1504,42 +1498,21 @@ public enum TableauScheme implements ColorScheme
 	 * @param hexColors list of colors in HEX format
 	 */
 	private TableauScheme(String value, String... hexColors) {
-		this.value = value;
+		scheme = new EnumeratedScheme(CATEGORY, value);
 		// scans all hex colors and creates ISCOLOR
 		for (String color : hexColors) {
 			// and adds them into the list
-			colors.add(ColorBuilder.parse(color));
+			scheme.getColors().add(ColorBuilder.parse(color));
 		}
 	}
 
 	/*
 	 * (non-Javadoc)
-	 *
-	 * @see org.pepstock.charba.client.commons.Key#value()
+	 * 
+	 * @see org.pepstock.charba.client.impl.plugins.enums.IsEnumeratedScheme#getScheme()
 	 */
 	@Override
-	public String value() {
-		return value;
+	public ColorScheme getScheme() {
+		return scheme;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see org.pepstock.charba.client.impl.plugins.Scheme#category()
-	 */
-	@Override
-	public String category() {
-		return CATEGORY;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see org.pepstock.charba.client.impl.plugins.Scheme#getColors()
-	 */
-	@Override
-	public List<IsColor> getColors() {
-		return colors;
-	}
-
 }

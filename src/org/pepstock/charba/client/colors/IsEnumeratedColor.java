@@ -23,6 +23,11 @@ package org.pepstock.charba.client.colors;
  */
 interface IsEnumeratedColor extends IsColor {
 
+	/**
+	 * Returns the color instance.
+	 * 
+	 * @return the color instance
+	 */
 	IsColor getColor();
 
 	/*
