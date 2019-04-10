@@ -48,7 +48,7 @@ public final class ColorBuilder {
 	private static final RegExp REGEXP_HSL = RegExp.compile(REGEXP_HSL_PATTERN);
 	// REGEXP for HSLA
 	private static final RegExp REGEXP_HSLA = RegExp.compile(REGEXP_HSLA_PATTERN);
-	
+
 	// char to identify if is a HEX color
 	static final String HEX_STARTING_CHAR = "#";
 	// chars to identify if is a RGB color
