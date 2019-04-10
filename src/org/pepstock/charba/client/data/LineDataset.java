@@ -19,7 +19,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.ArrayStringList;
 import org.pepstock.charba.client.commons.Key;
@@ -39,9 +38,6 @@ import org.pepstock.charba.client.options.Scales;
  * @author Andrea "Stock" Stocchero
  */
 public class LineDataset extends LiningDataset implements HasDataPoints {
-
-	// factory to create data points
-	private final DataPointListFactory factory = new DataPointListFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -314,51 +310,6 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 		}
 		// returns an empty list
 		return new LinkedList<>();
-	}
-
-	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of data points.
-	 * 
-	 * @param datapoints an array of data points
-	 */
-	@Override
-	public void setDataPoints(DataPoint... datapoints) {
-		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(datapoints));
-		// sets data type checking if the key exists
-		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
-	}
-
-	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of data points.
-	 * 
-	 * @param datapoints a list of data points
-	 */
-	@Override
-	public void setDataPoints(List<DataPoint> datapoints) {
-		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(datapoints));
-		// sets data type checking if the key exists
-		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
-	}
-
-	/**
-	 * Returns the data property of a dataset for a chart is specified as an array of data points
-	 * 
-	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
-	 */
-	@Override
-	public List<DataPoint> getDataPoints() {
-		return getDataPoints(false);
-	}
-
-	/**
-	 * Returns the data property of a dataset for a chart is specified as an array of data points
-	 * 
-	 * @param binding if <code>true</code> binds the new array list into container
-	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
-	 */
-	@Override
-	public List<DataPoint> getDataPoints(boolean binding) {
-		return getDataPoints(factory, binding);
 	}
 
 }

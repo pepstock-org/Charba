@@ -39,7 +39,7 @@ abstract class AxisContainer {
 	 * 
 	 * @return the axis
 	 */
-	final Axis getAxis() {
+	public final Axis getAxis() {
 		return axis;
 	}
 

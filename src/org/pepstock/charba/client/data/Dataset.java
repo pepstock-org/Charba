@@ -49,11 +49,13 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public abstract class Dataset extends NativeObjectContainer {
+public abstract class Dataset extends NativeObjectContainer implements HasDataset {
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// default for hidden property
 	private static final boolean DEFAULT_HIDDEN = false;
+	// factory to create data points
+	static final DataPointFactory DATAPOINTS_FACTORY = new DataPointFactory();
 	// patterns container
 	private final PatternsContainer patternsContainer = new PatternsContainer();
 	// gradients container
@@ -441,7 +443,7 @@ public abstract class Dataset extends NativeObjectContainer {
 	 * @param binding if <code>true</code> binds the new array list into container
 	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
 	 */
-	final List<DataPoint> getDataPoints(DataPointListFactory factory, boolean binding) {
+	final List<DataPoint> getDataPoints(DataPointFactory factory, boolean binding) {
 		// checks if is a numbers data type
 		if (has(Dataset.Property.DATA) && DataType.POINTS.equals(getDataType())) {
 			// gets array
@@ -461,6 +463,38 @@ public abstract class Dataset extends NativeObjectContainer {
 		}
 		// returns an empty list
 		return new LinkedList<>();
+	}
+
+	/**
+	 * Sets the data property of a dataset for a chart is specified as an array of data points.
+	 * 
+	 * @param datapoints an array of data points
+	 */
+	final void setInternalDataPoints(DataPoint... datapoints) {
+		setArrayValue(Property.DATA, ArrayObject.fromOrNull(datapoints));
+		// sets data type checking if the key exists
+		setValue(Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
+	}
+
+	/**
+	 * Sets the data property of a dataset for a chart is specified as an array of data points.
+	 * 
+	 * @param datapoints a list of data points
+	 */
+	final void setInternalDataPoints(List<DataPoint> datapoints) {
+		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(datapoints));
+		// sets data type checking if the key exists
+		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HasDataset#getDataset()
+	 */
+	@Override
+	public Dataset getDataset() {
+		return this;
 	}
 
 	/**

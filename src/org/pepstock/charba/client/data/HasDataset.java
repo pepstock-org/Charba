@@ -15,25 +15,18 @@
 */
 package org.pepstock.charba.client.data;
 
-import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-
 /**
- * Factory to create a data point from a native object, used for array container lists.
+ * Interface to get a dataset instance.
  * 
  * @author Andrea "Stock" Stocchero
+ *
  */
-final class DataPointListFactory implements NativeObjectContainerFactory<DataPoint> {
+public interface HasDataset {
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Gets the dataset instance.
 	 * 
-	 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.
-	 * commons.NativeObject)
+	 * @return the dataset instance
 	 */
-	@Override
-	public DataPoint create(NativeObject nativeObject) {
-		return new DataPoint(nativeObject);
-	}
-
+	Dataset getDataset();
 }

@@ -15,19 +15,15 @@
 */
 package org.pepstock.charba.client.data;
 
-import java.util.List;
-
 import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
-import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.BorderSkipped;
-import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.options.Scales;
 import org.pepstock.charba.client.utils.Utilities;
 
@@ -51,9 +47,6 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 
 	// border skipped callback instance
 	private BorderSkippedCallback borderSkippedCallback = null;
-
-	// data point factory
-	private final DataPointListFactory factory = new DataPointListFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -284,51 +277,6 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.BORDER_SKIPPED);
 		}
-	}
-
-	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of data points.
-	 * 
-	 * @param datapoints an array of data points
-	 */
-	@Override
-	public void setDataPoints(DataPoint... datapoints) {
-		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(datapoints));
-		// sets data type checking if the key exists
-		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
-	}
-
-	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of data points.
-	 * 
-	 * @param datapoints a list of data points
-	 */
-	@Override
-	public void setDataPoints(List<DataPoint> datapoints) {
-		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(datapoints));
-		// sets data type checking if the key exists
-		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
-	}
-
-	/**
-	 * Returns the data property of a dataset for a chart is specified as an array of data points
-	 * 
-	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
-	 */
-	@Override
-	public List<DataPoint> getDataPoints() {
-		return getDataPoints(false);
-	}
-
-	/**
-	 * Returns the data property of a dataset for a chart is specified as an array of data points
-	 * 
-	 * @param binding if <code>true</code> binds the new array list into container
-	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
-	 */
-	@Override
-	public List<DataPoint> getDataPoints(boolean binding) {
-		return getDataPoints(factory, binding);
 	}
 
 	/*

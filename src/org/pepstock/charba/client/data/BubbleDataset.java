@@ -26,14 +26,12 @@ import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayDoubleList;
 import org.pepstock.charba.client.commons.ArrayEnumList;
 import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
-import org.pepstock.charba.client.enums.DataType;
 import org.pepstock.charba.client.enums.PointStyle;
 
 /**
@@ -73,8 +71,6 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 
 	// exception message when it's not using data points
 	private static final String DATA_USAGE_MESSAGE = "Use datapoints instead of data for bubble chart";
-	// data point factory
-	private final DataPointListFactory factory = new DataPointListFactory();
 
 	/**
 	 * Name of properties of native object.
@@ -280,51 +276,6 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 		// if here, is a callback
 		// then returns an empty list
 		return new ArrayDoubleList();
-	}
-
-	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of data points.
-	 * 
-	 * @param datapoints an array of data points
-	 */
-	@Override
-	public void setDataPoints(DataPoint... datapoints) {
-		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(datapoints));
-		// sets data type checking if the key exists
-		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
-	}
-
-	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of data points.
-	 * 
-	 * @param datapoints a list of data points
-	 */
-	@Override
-	public void setDataPoints(List<DataPoint> datapoints) {
-		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(datapoints));
-		// sets data type checking if the key exists
-		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
-	}
-
-	/**
-	 * Returns the data property of a dataset for a chart is specified as an array of data points
-	 * 
-	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
-	 */
-	@Override
-	public List<DataPoint> getDataPoints() {
-		return getDataPoints(false);
-	}
-
-	/**
-	 * Returns the data property of a dataset for a chart is specified as an array of data points
-	 * 
-	 * @param binding if <code>true</code> binds the new array list into container
-	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
-	 */
-	@Override
-	public List<DataPoint> getDataPoints(boolean binding) {
-		return getDataPoints(factory, binding);
 	}
 
 	/*

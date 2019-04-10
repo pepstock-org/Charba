@@ -25,28 +25,34 @@ import org.pepstock.charba.client.enums.DataType;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface HasDataPoints {
+public interface HasDataPoints extends HasDataset {
 
 	/**
 	 * Sets the data property of a dataset for a chart is specified as an array of data points.
 	 * 
 	 * @param datapoints an array of data points
 	 */
-	void setDataPoints(DataPoint... datapoints);
+	default void setDataPoints(DataPoint... datapoints) {
+		getDataset().setInternalDataPoints(datapoints);
+	}
 
 	/**
 	 * Sets the data property of a dataset for a chart is specified as an array of data points.
 	 * 
 	 * @param datapoints a list of data points
 	 */
-	void setDataPoints(List<DataPoint> datapoints);
+	default void setDataPoints(List<DataPoint> datapoints) {
+		getDataset().setInternalDataPoints(datapoints);
+	}
 
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
 	 * 
 	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
 	 */
-	List<DataPoint> getDataPoints();
+	default List<DataPoint> getDataPoints() {
+		return getDataPoints(false);
+	}
 
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
@@ -54,6 +60,8 @@ public interface HasDataPoints {
 	 * @param binding if <code>true</code> binds the new array list into container
 	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
 	 */
-	List<DataPoint> getDataPoints(boolean binding);
+	default List<DataPoint> getDataPoints(boolean binding) {
+		return getDataset().getDataPoints(Dataset.DATAPOINTS_FACTORY, binding);
+	}
 
 }

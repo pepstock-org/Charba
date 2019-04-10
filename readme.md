@@ -152,6 +152,7 @@ Here you can find the list of enhancement and updates available on `master` bran
  * squid:S4784 - Using regular expressions is security-sensitive
  * squid:MissingDeprecatedCheck - Deprecated elements should have both the annotation and the Javadoc tag
  * squid:S3776 - Cognitive Complexity of methods should not be too high
+ * common-java:DuplicatedBlocks - Source files should not have any duplicated blocks
  
 License
 -------

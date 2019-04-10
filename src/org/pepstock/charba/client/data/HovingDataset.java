@@ -152,7 +152,7 @@ public abstract class HovingDataset extends Dataset {
 		// resets callback
 		setBackgroundColor((BackgroundColorCallback) null);
 		// stores value
-		setArrayValue(Property.BACKGROUND_COLOR, ArrayString.fromOrNull(backgroundColor));
+		setArrayValue(Property.BACKGROUND_COLOR, ArrayString.fromOrEmpty(backgroundColor));
 		// removes previous configuration to other containers
 		resetBeingColors(Property.BACKGROUND_COLOR);
 	}
@@ -166,7 +166,7 @@ public abstract class HovingDataset extends Dataset {
 		// resets callback
 		setBackgroundColor((BackgroundColorCallback) null);
 		// stores value
-		setArrayValue(Property.BACKGROUND_COLOR, ArrayString.fromOrNull(backgroundColor));
+		setArrayValue(Property.BACKGROUND_COLOR, ArrayString.fromOrEmpty(backgroundColor));
 		// removes previous configuration to other containers
 		resetBeingColors(Property.BACKGROUND_COLOR);
 	}
@@ -273,7 +273,7 @@ public abstract class HovingDataset extends Dataset {
 		// resets callback
 		setBorderColor((BorderColorCallback) null);
 		// stores value
-		setArrayValue(Property.BORDER_COLOR, ArrayString.fromOrNull(borderColor));
+		setArrayValue(Property.BORDER_COLOR, ArrayString.fromOrEmpty(borderColor));
 		// removes previous configuration to other containers
 		resetBeingColors(Property.BORDER_COLOR);
 	}
@@ -287,7 +287,7 @@ public abstract class HovingDataset extends Dataset {
 		// resets callback
 		setBorderColor((BorderColorCallback) null);
 		// stores value
-		setArrayValue(Property.BORDER_COLOR, ArrayString.fromOrNull(borderColor));
+		setArrayValue(Property.BORDER_COLOR, ArrayString.fromOrEmpty(borderColor));
 		// removes previous configuration to other containers
 		resetBeingColors(Property.BORDER_COLOR);
 	}
@@ -359,7 +359,7 @@ public abstract class HovingDataset extends Dataset {
 	 */
 	public void setBorderWidth(int... borderWidth) {
 		// stores value
-		setArrayValue(Property.BORDER_WIDTH, ArrayInteger.fromOrNull(borderWidth));
+		setArrayValue(Property.BORDER_WIDTH, ArrayInteger.fromOrEmpty(borderWidth));
 	}
 
 	/**
@@ -388,7 +388,7 @@ public abstract class HovingDataset extends Dataset {
 		// resets callback
 		setHoverBackgroundColor((BackgroundColorCallback) null);
 		// stores value
-		setArrayValue(Property.HOVER_BACKGROUND_COLOR, ArrayString.fromOrNull(colors));
+		setArrayValue(Property.HOVER_BACKGROUND_COLOR, ArrayString.fromOrEmpty(colors));
 		// removes previous configuration to other containers
 		resetBeingColors(Property.HOVER_BACKGROUND_COLOR);
 	}
@@ -402,7 +402,7 @@ public abstract class HovingDataset extends Dataset {
 		// resets callback
 		setHoverBackgroundColor((BackgroundColorCallback) null);
 		// stores value
-		setArrayValue(Property.HOVER_BACKGROUND_COLOR, ArrayString.fromOrNull(colors));
+		setArrayValue(Property.HOVER_BACKGROUND_COLOR, ArrayString.fromOrEmpty(colors));
 		// removes previous configuration to other containers
 		resetBeingColors(Property.HOVER_BACKGROUND_COLOR);
 	}
@@ -511,7 +511,7 @@ public abstract class HovingDataset extends Dataset {
 		// resets callback
 		setHoverBorderColor((BorderColorCallback) null);
 		// stores value
-		setArrayValue(Property.HOVER_BORDER_COLOR, ArrayString.fromOrNull(colors));
+		setArrayValue(Property.HOVER_BORDER_COLOR, ArrayString.fromOrEmpty(colors));
 		// removes previous configuration to other containers
 		resetBeingColors(Property.HOVER_BORDER_COLOR);
 	}
@@ -525,7 +525,7 @@ public abstract class HovingDataset extends Dataset {
 		// resets callback
 		setHoverBorderColor((BorderColorCallback) null);
 		// stores value
-		setArrayValue(Property.HOVER_BORDER_COLOR, ArrayString.fromOrNull(colors));
+		setArrayValue(Property.HOVER_BORDER_COLOR, ArrayString.fromOrEmpty(colors));
 		// removes previous configuration to other containers
 		resetBeingColors(Property.HOVER_BORDER_COLOR);
 	}
@@ -598,7 +598,7 @@ public abstract class HovingDataset extends Dataset {
 	 */
 	public void setHoverBorderWidth(int... widths) {
 		// stores value
-		setArrayValue(Property.HOVER_BORDER_WIDTH, ArrayInteger.fromOrNull(widths));
+		setArrayValue(Property.HOVER_BORDER_WIDTH, ArrayInteger.fromOrEmpty(widths));
 	}
 
 	/**

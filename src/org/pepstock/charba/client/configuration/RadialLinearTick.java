@@ -23,7 +23,7 @@ import org.pepstock.charba.client.colors.IsColor;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class RadialLinearTick extends Tick {
+public class RadialLinearTick extends Tick implements IsLinearTick {
 
 	/**
 	 * Builds the object storing the axis which this tick belongs to.
@@ -32,132 +32,6 @@ public class RadialLinearTick extends Tick {
 	 */
 	RadialLinearTick(Axis axis) {
 		super(axis);
-	}
-
-	/**
-	 * If true, scale will include 0 if it is not already included.
-	 * 
-	 * @param beginAtZero if true, scale will include 0 if it is not already included.
-	 */
-	public void setBeginAtZero(boolean beginAtZero) {
-		getConfiguration().setBeginAtZero(beginAtZero);
-	}
-
-	/**
-	 * If true, scale will include 0 if it is not already included.
-	 * 
-	 * @return if true, scale will include 0 if it is not already included.
-	 */
-	public boolean isBeginAtZero() {
-		return getConfiguration().isBeginAtZero();
-	}
-
-	/**
-	 * Sets the user defined minimum number for the scale, overrides minimum value from data.
-	 * 
-	 * @param min user defined minimum number for the scale, overrides minimum value from data.
-	 */
-	public void setMin(double min) {
-		getConfiguration().setMin(min);
-	}
-
-	/**
-	 * Returns the user defined minimum number for the scale, overrides minimum value from data.
-	 * 
-	 * @return user defined minimum number for the scale, overrides minimum value from data.
-	 */
-	public double getMin() {
-		return getConfiguration().getMin();
-	}
-
-	/**
-	 * Sets the user defined maximum number for the scale, overrides maximum value from data.
-	 * 
-	 * @param max user defined maximum number for the scale, overrides maximum value from data.
-	 */
-	public void setMax(double max) {
-		getConfiguration().setMax(max);
-	}
-
-	/**
-	 * Returns the user defined maximum number for the scale, overrides maximum value from data.
-	 * 
-	 * @return user defined maximum number for the scale, overrides maximum value from data.
-	 */
-	public double getMax() {
-		return getConfiguration().getMax();
-	}
-
-	/**
-	 * Sets the maximum number of ticks and gridlines to show.
-	 * 
-	 * @param maxTicksLimit maximum number of ticks and gridlines to show.
-	 */
-	public void setMaxTicksLimit(int maxTicksLimit) {
-		getConfiguration().setMaxTicksLimit(maxTicksLimit);
-	}
-
-	/**
-	 * Returns the maximum number of ticks and gridlines to show.
-	 * 
-	 * @return maximum number of ticks and gridlines to show.
-	 */
-	public int getMaxTicksLimit() {
-		return getConfiguration().getMaxTicksLimit();
-	}
-
-	/**
-	 * Sets the user defined fixed step size for the scale.
-	 * 
-	 * @param stepSize user defined fixed step size for the scale.
-	 */
-	public void setStepSize(double stepSize) {
-		getConfiguration().setStepSize(stepSize);
-	}
-
-	/**
-	 * Returns the user defined fixed step size for the scale.
-	 * 
-	 * @return user defined fixed step size for the scale.
-	 */
-	public double getStepSize() {
-		return getConfiguration().getStepSize();
-	}
-
-	/**
-	 * Sets the adjustment used when calculating the maximum data value.
-	 * 
-	 * @param suggestedMax adjustment used when calculating the maximum data value.
-	 */
-	public void setSuggestedMax(double suggestedMax) {
-		getConfiguration().setSuggestedMax(suggestedMax);
-	}
-
-	/**
-	 * Returns the adjustment used when calculating the maximum data value.
-	 * 
-	 * @return adjustment used when calculating the maximum data value.
-	 */
-	public double getSuggestedMax() {
-		return getConfiguration().getSuggestedMax();
-	}
-
-	/**
-	 * Sets the adjustment used when calculating the minimum data value.
-	 * 
-	 * @param suggestedMin adjustment used when calculating the minimum data value.
-	 */
-	public void setSuggestedMin(double suggestedMin) {
-		getConfiguration().setSuggestedMin(suggestedMin);
-	}
-
-	/**
-	 * Returns the adjustment used when calculating the minimum data value.
-	 * 
-	 * @return adjustment used when calculating the minimum data value.
-	 */
-	public double getSuggestedMin() {
-		return getConfiguration().getSuggestedMin();
 	}
 
 	/**
