@@ -199,6 +199,12 @@ public abstract class CanvasObjectFactory {
 		// right - the x coordinate of the ending point of the scope
 		// bottom - the y coordinate of the ending point of the scope
 		final Area area = getArea(chart, gradient);
+		// checks if area is consistent
+		if (area == null) {
+			// if here, the area is invalid
+			// then exception
+			throw new IllegalArgumentException("Area for linear gradient is null!");
+		}
 		final double top = area.getTop();
 		final double bottom = area.getBottom();
 		final double left = area.getLeft();
@@ -292,9 +298,21 @@ public abstract class CanvasObjectFactory {
 		double r1 = 0;
 		// these are the coordinates of center and radius of scope
 		final Center center = getCenter(chart, gradient, datasetIndex, index);
+		// checks if center is consistent
+		if (center == null) {
+			// if here, the center is invalid
+			// then exception
+			throw new IllegalArgumentException("Center for radial gradient is null!");
+		}
 		final double centerX = center.getX();
 		final double centerY = center.getY();
 		final Radius radius = getRadius(chart, gradient, datasetIndex, index);
+		// checks if radius is consistent
+		if (radius == null) {
+			// if here, the radius is invalid
+			// then exception
+			throw new IllegalArgumentException("Radius for radial gradient is null!");
+		}
 		final double radius0 = radius.getInner();
 		final double radius1 = radius.getOuter();
 		// checks the orientation requires by gradient
