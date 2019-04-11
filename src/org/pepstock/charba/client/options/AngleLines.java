@@ -15,12 +15,8 @@
 */
 package org.pepstock.charba.client.options;
 
-import java.util.List;
-
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.ArrayInteger;
-import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultAngleLines;
@@ -31,7 +27,7 @@ import org.pepstock.charba.client.defaults.IsDefaultAngleLines;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> implements IsDefaultAngleLines {
+public final class AngleLines extends AbstractScaleLine<IsDefaultAngleLines> implements IsDefaultAngleLines {
 
 	/**
 	 * Name of properties of native object.
@@ -40,9 +36,7 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 	{
 		DISPLAY("display"),
 		COLOR("color"),
-		LINE_WIDTH("lineWidth"),
-		BORDER_DASH("borderDash"),
-		BORDER_DASH_OFFSET("borderDashOffset");
+		LINE_WIDTH("lineWidth");
 
 		// name value of property
 		private final String value;
@@ -159,46 +153,13 @@ public final class AngleLines extends AbstractModel<Scale, IsDefaultAngleLines> 
 		return getValue(Property.LINE_WIDTH, getDefaultValues().getLineWidth());
 	}
 
-	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
-	 * and gaps which describe the pattern.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param borderDash the line dash pattern used when stroking lines
+	 * @see org.pepstock.charba.client.options.AbstractScaleLine#getDefaultBorderDashOffset()
 	 */
-	public void setBorderDash(int... borderDash) {
-		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
-	 * 
-	 * @return the line dash pattern used when stroking lines
-	 */
-	public List<Integer> getBorderDash() {
-		ArrayInteger array = getArrayValue(Property.BORDER_DASH);
-		return ArrayListHelper.list(array);
-	}
-
-	/**
-	 * Sets the line dash pattern offset or "phase".
-	 * 
-	 * @param borderDashOffset Offset for line dashes.
-	 */
-	public void setBorderDashOffset(int borderDashOffset) {
-		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the line dash pattern offset or "phase".
-	 * 
-	 * @return Offset for line dashes.
-	 */
-	public int getBorderDashOffset() {
-		return getValue(Property.BORDER_DASH_OFFSET, getDefaultValues().getBorderDashOffset());
+	@Override
+	int getDefaultBorderDashOffset() {
+		return getDefaultValues().getBorderDashOffset();
 	}
 }

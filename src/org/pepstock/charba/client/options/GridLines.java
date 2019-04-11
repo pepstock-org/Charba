@@ -35,7 +35,7 @@ import org.pepstock.charba.client.defaults.IsDefaultGridLines;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> implements IsDefaultGridLines {
+public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> implements IsDefaultGridLines {
 
 	/**
 	 * Name of properties of native object.
@@ -45,8 +45,6 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 		DISPLAY("display"),
 		CIRCULAR("circular"),
 		COLOR("color"),
-		BORDER_DASH("borderDash"),
-		BORDER_DASH_OFFSET("borderDashOffset"),
 		LINE_WIDTH("lineWidth"),
 		DRAW_BORDER("drawBorder"),
 		DRAW_ON_CHART_AREA("drawOnChartArea"),
@@ -207,49 +205,6 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 	 */
 	public List<IsColor> getColor() {
 		return ColorBuilder.parse(getColorsAsString());
-	}
-
-	/**
-	 * Sets the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of lines
-	 * and gaps which describe the pattern.
-	 * 
-	 * @param borderDash the line dash pattern used when stroking lines
-	 */
-	public void setBorderDash(int... borderDash) {
-		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the line dash pattern used when stroking lines, using an array of values which specify alternating lengths of
-	 * lines and gaps which describe the pattern.
-	 * 
-	 * @return the line dash pattern used when stroking lines
-	 */
-	public List<Integer> getBorderDash() {
-		ArrayInteger array = getArrayValue(Property.BORDER_DASH);
-		return ArrayListHelper.list(array);
-	}
-
-	/**
-	 * Sets the line dash pattern offset or "phase".
-	 * 
-	 * @param borderDashOffset Offset for line dashes.
-	 */
-	public void setBorderDashOffset(int borderDashOffset) {
-		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the line dash pattern offset or "phase".
-	 * 
-	 * @return Offset for line dashes.
-	 */
-	public int getBorderDashOffset() {
-		return getValue(Property.BORDER_DASH_OFFSET, getDefaultValues().getBorderDashOffset());
 	}
 
 	/**
@@ -488,4 +443,12 @@ public final class GridLines extends AbstractModel<Scale, IsDefaultGridLines> im
 		return getValue(Property.OFFSET_GRID_LINES, getDefaultValues().isOffsetGridLines());
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.options.AbstractScaleLine#getDefaultBorderDashOffset()
+	 */
+	@Override
+	int getDefaultBorderDashOffset() {
+		return getDefaultValues().getBorderDashOffset();
+	}
+	
 }
