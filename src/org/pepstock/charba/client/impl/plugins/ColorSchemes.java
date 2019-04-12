@@ -34,7 +34,7 @@ import org.pepstock.charba.client.impl.plugins.enums.SchemeScope;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
 
 /**
- * Default plugin implementation to us color schemes instead the single colors for border and background colors of chart.<br>
+ * Default plugin implementation to use color schemes instead the single colors for border and background colors of chart.<br>
  * It enables to pick the color combination for charts from the predefined or custom color schemes.
  * 
  * @author Andrea "Stock" Stocchero

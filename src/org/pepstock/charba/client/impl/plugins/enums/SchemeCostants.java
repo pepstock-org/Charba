@@ -11056,7 +11056,7 @@ final class SchemeCostants {
 	 * border-width:1px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 	 */
 	static final String COLOR_AD4433 = "#ad4433";
-	
+
 	/**
 	 * To avoid any instantiation
 	 */

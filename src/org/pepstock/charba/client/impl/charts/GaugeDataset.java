@@ -71,11 +71,13 @@ public final class GaugeDataset extends MeterDataset {
 		for (GaugeThreshold t : GaugeThreshold.values()) {
 			thresholds.add(t.getThreshold());
 		}
-		// sets current color 
+		// sets current color
 		super.setColor(current.getColor());
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.impl.charts.MeterDataset#setValueColor(org.pepstock.charba.client.colors.IsColor)
 	 */
 	@Override
@@ -85,7 +87,9 @@ public final class GaugeDataset extends MeterDataset {
 		super.setColor(current.getColor().toRGBA());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.impl.charts.MeterDataset#setValueColor(java.lang.String)
 	 */
 	@Override

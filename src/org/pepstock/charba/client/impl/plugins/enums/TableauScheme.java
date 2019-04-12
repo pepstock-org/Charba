@@ -1490,7 +1490,7 @@ public enum TableauScheme implements IsEnumeratedScheme
 	private static final String CATEGORY = "tableau";
 	// enumerated scheme instance
 	private final EnumeratedScheme scheme;
-	
+
 	/**
 	 * Builds a scheme using argument as list of colors in HEX format.
 	 *

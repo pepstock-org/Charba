@@ -24,8 +24,8 @@ import com.google.gwt.i18n.client.NumberFormat;
 
 /**
  * Formatter implementation for {@link DataLabelsPlugin#ID} plugin in order to provide the percentage of the value.<br>
- * Setting this object to formatter callback of {@link DataLabelsPlugin#ID} options, it will return the percentage for each data index per
- * dataset.
+ * Setting this object to formatter callback of {@link DataLabelsPlugin#ID} options, it will return the percentage for each data
+ * index per dataset.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -116,8 +116,8 @@ public final class PercentageCallback implements FormatterCallback {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.datalabels.callbacks.FormatterCallback#format(org.pepstock.charba.client.IsChart,
-	 * double, org.pepstock.charba.client.callbacks.ScriptableContext)
+	 * @see org.pepstock.charba.client.datalabels.callbacks.FormatterCallback#format(org.pepstock.charba.client.IsChart, double,
+	 * org.pepstock.charba.client.callbacks.ScriptableContext)
 	 */
 	@Override
 	public String invoke(IsChart chart, double value, ScriptableContext context) {

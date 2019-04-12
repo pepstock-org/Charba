@@ -123,13 +123,13 @@ final class BaseMeterController extends AbstractController {
 			MeterDataset dataset = (MeterDataset) datasets.get(0);
 			// checks if meter chart
 			if (chart instanceof MeterChart) {
-				MeterChart meterChart = (MeterChart)chart;
+				MeterChart meterChart = (MeterChart) chart;
 				MeterOptions options = meterChart.getOptions();
 				// let's draw the value inside the doughnut
 				execute(chart, item, dataset, options, ease);
 			} else if (chart instanceof GaugeChart) {
 				// checks if meter chart
-				GaugeChart gaugeChart = (GaugeChart)chart;
+				GaugeChart gaugeChart = (GaugeChart) chart;
 				GaugeOptions options = gaugeChart.getOptions();
 				// let's draw the value inside the doughnut
 				execute(chart, item, dataset, options, ease);

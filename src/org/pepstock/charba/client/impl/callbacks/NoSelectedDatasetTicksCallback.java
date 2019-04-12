@@ -32,19 +32,19 @@ import com.google.gwt.i18n.client.NumberFormat;
  * @author Andrea "Stock" Stocchero
  */
 public final class NoSelectedDatasetTicksCallback implements TickCallback {
-	
+
 	/**
 	 * Default number format to apply to ticks, <b>{@value DEFAULT_FORMAT}</b>.
 	 */
 	public static final String DEFAULT_FORMAT = "0.0";
 
-	// it formats the number of ticks 
+	// it formats the number of ticks
 	private final NumberFormat numberFormat;
 	// instance of format as string
 	private final String format;
-	
+
 	/**
-	 * Creates the callback using the {@link NoSelectedDatasetTicksCallback#DEFAULT_FORMAT}. 
+	 * Creates the callback using the {@link NoSelectedDatasetTicksCallback#DEFAULT_FORMAT}.
 	 */
 	public NoSelectedDatasetTicksCallback() {
 		this(DEFAULT_FORMAT);
@@ -53,7 +53,8 @@ public final class NoSelectedDatasetTicksCallback implements TickCallback {
 	/**
 	 * Creates the callback using the argument as number format to apply to ticks.
 	 * 
-	 * @param stringFormat number format to apply, if <code>null</code> it uses {@link NoSelectedDatasetTicksCallback#DEFAULT_FORMAT}
+	 * @param stringFormat number format to apply, if <code>null</code> it uses
+	 *            {@link NoSelectedDatasetTicksCallback#DEFAULT_FORMAT}
 	 */
 	public NoSelectedDatasetTicksCallback(String stringFormat) {
 		// stores the format as string
