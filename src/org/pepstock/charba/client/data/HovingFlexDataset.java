@@ -43,8 +43,8 @@ import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
 
 /**
- * This dataset is managing some common properties of Bar and Bubble datasets where every property can be set as a single value
- * or an array.
+ * This dataset is managing some common properties related to background and border colors where every property can be set as a
+ * single value or an array.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -70,7 +70,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	/**
 	 * Name of properties of native object.
 	 */
-	private enum Property implements Key
+	protected enum Property implements Key
 	{
 		BACKGROUND_COLOR("backgroundColor"),
 		BORDER_COLOR("borderColor"),
@@ -143,6 +143,61 @@ public abstract class HovingFlexDataset extends Dataset {
 	abstract int getDefaultBorderWidth();
 
 	/**
+	 * Sets a color property into dataset, setting a single value or an array.
+	 * 
+	 * @param key property key
+	 * @param colors colors value to be set
+	 */
+	void setColors(Key key, String... colors) {
+		// stores value
+		setValueOrArray(key, colors);
+	}
+
+	/**
+	 * Sets a color property into dataset, setting a single value or an array.
+	 * 
+	 * @param key property key
+	 * @param colors colors value to be set
+	 */
+	void setColors(Key key, IsColor... colors) {
+		// stores value
+		setValueOrArray(key, colors);
+	}
+
+	/**
+	 * Returns an array of colors as string.
+	 * 
+	 * @param key property key
+	 * @param defaultvalue default value if key does not exist
+	 * @return an array of colors
+	 */
+	ArrayString getColors(Key key, String defaultvalue) {
+		return getValueOrArray(key, defaultvalue);
+	}
+
+	/**
+	 * Sets a width property into dataset, setting a single value or an array.
+	 * 
+	 * @param key property key
+	 * @param widths widths value to be set
+	 */
+	void setWidths(Key key, int... widths) {
+		// stores value
+		setValueOrArray(key, widths);
+	}
+
+	/**
+	 * Returns an array of widths as integer
+	 * 
+	 * @param key property key
+	 * @param defaultvalue default value if key does not exist
+	 * @return an array of widths
+	 */
+	ArrayInteger getWidths(Key key, int defaultvalue) {
+		return getValueOrArray(key, defaultvalue);
+	}
+
+	/**
 	 * Sets the fill colors of the elements.
 	 * 
 	 * @param backgroundColor the fill colors of the elements.
@@ -151,7 +206,7 @@ public abstract class HovingFlexDataset extends Dataset {
 		// resets callback
 		setBackgroundColor((BackgroundColorCallback) null);
 		// stores value
-		setValueOrArray(Property.BACKGROUND_COLOR, backgroundColor);
+		setColors(Property.BACKGROUND_COLOR, backgroundColor);
 		// removes previous configuration to other containers
 		resetBeingColors(Property.BACKGROUND_COLOR);
 	}
@@ -165,7 +220,7 @@ public abstract class HovingFlexDataset extends Dataset {
 		// resets callback
 		setBackgroundColor((BackgroundColorCallback) null);
 		// stores value
-		setValueOrArray(Property.BACKGROUND_COLOR, backgroundColor);
+		setColors(Property.BACKGROUND_COLOR, backgroundColor);
 		// removes previous configuration to other containers
 		resetBeingColors(Property.BACKGROUND_COLOR);
 	}
@@ -207,7 +262,7 @@ public abstract class HovingFlexDataset extends Dataset {
 		// checks if the property is not a color (therefore a pattern or gradient) and no callback
 		if (hasColors(Property.BACKGROUND_COLOR) && backgroundColorCallback == null) {
 			// returns list of colors
-			ArrayString array = getValueOrArray(Property.BACKGROUND_COLOR, getDefaultBackgroundColorAsString());
+			ArrayString array = getColors(Property.BACKGROUND_COLOR, getDefaultBackgroundColorAsString());
 			return ArrayListHelper.list(array);
 		} else {
 			// if here, the property is not a object
@@ -269,7 +324,7 @@ public abstract class HovingFlexDataset extends Dataset {
 		// resets callback
 		setBorderColor((BorderColorCallback) null);
 		// stores value
-		setValueOrArray(Property.BORDER_COLOR, borderColor);
+		setColors(Property.BORDER_COLOR, borderColor);
 		// removes previous configuration to other containers
 		resetBeingColors(Property.BORDER_COLOR);
 	}
@@ -283,7 +338,7 @@ public abstract class HovingFlexDataset extends Dataset {
 		// resets callback
 		setBorderColor((BorderColorCallback) null);
 		// stores value
-		setValueOrArray(Property.BORDER_COLOR, borderColor);
+		setColors(Property.BORDER_COLOR, borderColor);
 		// removes previous configuration to other containers
 		resetBeingColors(Property.BORDER_COLOR);
 	}
@@ -310,7 +365,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	public List<String> getBorderColorAsString() {
 		// checks if the property is not a color (therefore a gradient)
 		if (hasColors(Property.BORDER_COLOR) && borderColorCallback == null) {
-			ArrayString array = getValueOrArray(Property.BORDER_COLOR, getDefaultBorderColorAsString());
+			ArrayString array = getColors(Property.BORDER_COLOR, getDefaultBorderColorAsString());
 			return ArrayListHelper.list(array);
 		} else {
 			// if here, the property is not a string
@@ -353,7 +408,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBorderWidth(int... borderWidth) {
 		// stores value
-		setValueOrArray(Property.BORDER_WIDTH, borderWidth);
+		setWidths(Property.BORDER_WIDTH, borderWidth);
 	}
 
 	/**
@@ -368,7 +423,7 @@ public abstract class HovingFlexDataset extends Dataset {
 		// set by bar dataset)
 		if (!ObjectType.FUNCTION.equals(type) && !ObjectType.OBJECT.equals(type)) {
 			// returns the array
-			ArrayInteger array = getValueOrArray(Property.BORDER_WIDTH, getDefaultBorderWidth());
+			ArrayInteger array = getWidths(Property.BORDER_WIDTH, getDefaultBorderWidth());
 			return ArrayListHelper.list(array);
 		}
 		// if here, is a callback
@@ -382,7 +437,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * @param colors the fill color of the elements when hovered
 	 */
 	public void setHoverBackgroundColor(IsColor... colors) {
-		setValueOrArray(Property.HOVER_BACKGROUND_COLOR, colors);
+		setColors(Property.HOVER_BACKGROUND_COLOR, colors);
 		// removes the flag because default is string color
 		resetBeingColors(Property.HOVER_BACKGROUND_COLOR);
 	}
@@ -393,7 +448,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * @param colors the fill color of the elements when hovered
 	 */
 	public void setHoverBackgroundColor(String... colors) {
-		setValueOrArray(Property.HOVER_BACKGROUND_COLOR, colors);
+		setColors(Property.HOVER_BACKGROUND_COLOR, colors);
 		// removes the flag because default is string color
 		resetBeingColors(Property.HOVER_BACKGROUND_COLOR);
 	}
@@ -432,7 +487,7 @@ public abstract class HovingFlexDataset extends Dataset {
 		// checks if the property is not a color (therefore a pattern or gradient)
 		if (hasColors(Property.HOVER_BACKGROUND_COLOR)) {
 			// returns list of colors
-			ArrayString array = getValueOrArray(Property.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString());
+			ArrayString array = getColors(Property.HOVER_BACKGROUND_COLOR, getDefaultBackgroundColorAsString());
 			return ArrayListHelper.list(array);
 		} else {
 			// if here, the property is not a color
@@ -493,7 +548,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * @param colors the stroke color of the elements when hovered
 	 */
 	public void setHoverBorderColor(IsColor... colors) {
-		setValueOrArray(Property.HOVER_BORDER_COLOR, colors);
+		setColors(Property.HOVER_BORDER_COLOR, colors);
 		// removes previous configuration to other containers
 		resetBeingColors(Property.HOVER_BORDER_COLOR);
 	}
@@ -504,7 +559,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * @param colors the stroke color of the elements when hovered
 	 */
 	public void setHoverBorderColor(String... colors) {
-		setValueOrArray(Property.HOVER_BORDER_COLOR, colors);
+		setColors(Property.HOVER_BORDER_COLOR, colors);
 		// removes previous configuration to other containers
 		resetBeingColors(Property.HOVER_BORDER_COLOR);
 	}
@@ -530,7 +585,7 @@ public abstract class HovingFlexDataset extends Dataset {
 		// checks if the property is not a color (therefore a gradient)
 		if (hasColors(Property.HOVER_BORDER_COLOR)) {
 			// returns list of colors
-			ArrayString array = getValueOrArray(Property.HOVER_BORDER_COLOR, getDefaultBorderColorAsString());
+			ArrayString array = getColors(Property.HOVER_BORDER_COLOR, getDefaultBorderColorAsString());
 			return ArrayListHelper.list(array);
 		} else {
 			// if here, the property is not a object
@@ -574,7 +629,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * @param widths the stroke width of the elements when hovered.
 	 */
 	public void setHoverBorderWidth(int... widths) {
-		setValueOrArray(Property.HOVER_BORDER_WIDTH, widths);
+		setWidths(Property.HOVER_BORDER_WIDTH, widths);
 	}
 
 	/**
@@ -583,7 +638,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * @return list of the stroke width of the elements when hovered.
 	 */
 	public List<Integer> getHoverBorderWidth() {
-		ArrayInteger array = getValueOrArray(Property.HOVER_BORDER_WIDTH, getDefaultBorderWidth());
+		ArrayInteger array = getWidths(Property.HOVER_BORDER_WIDTH, getDefaultBorderWidth());
 		return ArrayListHelper.list(array);
 	}
 
@@ -678,7 +733,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * @see org.pepstock.charba.client.data.Dataset#applyPattern(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
-	protected final void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
+	protected void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
 		setValueOrArray(key, canvasPatternsList.toArray(new CanvasPattern[0]));
 	}
 
@@ -688,7 +743,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 * @see org.pepstock.charba.client.data.Dataset#applyGradient(org.pepstock.charba.client.commons.Key, java.util.List)
 	 */
 	@Override
-	protected final void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
+	protected void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
 		setValueOrArray(key, canvasGradientsList.toArray(new CanvasGradient[0]));
 	}
 
