@@ -37,6 +37,10 @@ public final class Utilities {
 	 * Constant for EMPTY string
 	 */
 	public static final String EMPTY_STRING = "";
+	/**
+	 * Constant for EMPTY ARRAY string.
+	 */
+	public static final String[] EMPTY_ARRAY_STRING = new String[0];
 	// string format of font CSS style
 	private static final String FONT_TEMPLATE = "{0} {1}px {2}";
 	// string format of font style

@@ -15,7 +15,6 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.TooltipBodyCallback;
 import org.pepstock.charba.client.callbacks.TooltipFooterCallback;
@@ -45,10 +44,8 @@ import jsinterop.annotations.JsFunction;
  */
 public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 
-	// empty array string
-	private static final String[] EMPTY_ARRAY = new String[0];
 	// default label color
-	private static final TooltipLabelColor DEFAULT_LABEL_COLOR = new TooltipLabelColor();
+	public final TooltipLabelColor defaultLabelColor = new TooltipLabelColor();
 	// factory to create tooltip items
 	private final TooltipItemFactory tooltipItemFactory = new TooltipItemFactory();
 
@@ -207,8 +204,8 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 	TooltipsCallbacks(IsChart chart, ExtendedOptions configuration) {
 		super(chart, configuration);
 		// sets the colors getting from tooltip
-		DEFAULT_LABEL_COLOR.setBackgroundColor(configuration.getTooltips().getBackgroundColor());
-		DEFAULT_LABEL_COLOR.setBorderColor(configuration.getTooltips().getBorderColor());
+		defaultLabelColor.setBackgroundColor(configuration.getTooltips().getBackgroundColor());
+		defaultLabelColor.setBorderColor(configuration.getTooltips().getBorderColor());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -370,7 +367,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			}
 		}
 		// default result
-		return ArrayString.fromOrEmpty(EMPTY_ARRAY);
+		return ArrayString.fromOrEmpty(Utilities.EMPTY_ARRAY_STRING);
 	}
 
 	/**
@@ -391,7 +388,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		}
 		// default result
 		// default result
-		return ArrayString.fromOrEmpty(EMPTY_ARRAY);
+		return ArrayString.fromOrEmpty(Utilities.EMPTY_ARRAY_STRING);
 	}
 
 	/**
@@ -412,7 +409,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		}
 		// default result
 		// default result
-		return ArrayString.fromOrEmpty(EMPTY_ARRAY);
+		return ArrayString.fromOrEmpty(Utilities.EMPTY_ARRAY_STRING);
 	}
 
 	/**
@@ -432,7 +429,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			}
 		}
 		// default result
-		return ArrayString.fromOrEmpty(EMPTY_ARRAY);
+		return ArrayString.fromOrEmpty(Utilities.EMPTY_ARRAY_STRING);
 	}
 
 	/**
@@ -452,7 +449,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			}
 		}
 		// default result
-		return ArrayString.fromOrEmpty(EMPTY_ARRAY);
+		return ArrayString.fromOrEmpty(Utilities.EMPTY_ARRAY_STRING);
 	}
 
 	/**
@@ -503,10 +500,10 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			// invokes callback
 			TooltipLabelColor result = labelCallback.onLabelColor(getChart(), new TooltipItem(item));
 			// checks if result is consistent
-			return result != null ? result.getObject() : DEFAULT_LABEL_COLOR.getObject();
+			return result != null ? result.getObject() : defaultLabelColor.getObject();
 		}
 		// default result
-		return DEFAULT_LABEL_COLOR.getObject();
+		return defaultLabelColor.getObject();
 	}
 
 	/**
@@ -521,10 +518,10 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			// invokes callback
 			IsColor result = labelCallback.onLabelTextColor(getChart(), new TooltipItem(item));
 			// checks if result is consistent
-			return result != null ? result.toRGBA() : Defaults.get().getGlobal().getTooltips().getBodyFontColor().toRGBA();
+			return result != null ? result.toRGBA() : getConfiguration().getTooltips().getBodyFontColorAsString();
 		}
 		// default result
-		return Defaults.get().getGlobal().getTooltips().getBodyFontColor().toRGBA();
+		return getConfiguration().getTooltips().getBodyFontColorAsString();
 	}
 
 	/**
@@ -562,7 +559,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			}
 		}
 		// default result
-		return ArrayString.fromOrEmpty(EMPTY_ARRAY);
+		return ArrayString.fromOrEmpty(Utilities.EMPTY_ARRAY_STRING);
 	}
 
 	/**
@@ -582,7 +579,7 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			}
 		}
 		// default result
-		return ArrayString.fromOrEmpty(EMPTY_ARRAY);
+		return ArrayString.fromOrEmpty(Utilities.EMPTY_ARRAY_STRING);
 	}
 
 	/**
@@ -602,6 +599,6 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 			}
 		}
 		// default result
-		return ArrayString.fromOrEmpty(EMPTY_ARRAY);
+		return ArrayString.fromOrEmpty(Utilities.EMPTY_ARRAY_STRING);
 	}
 }

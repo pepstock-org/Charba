@@ -319,7 +319,6 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 		}
 		// checks if the node is already added to parent
 		checkAndAddToParent();
-
 	}
 
 	/**

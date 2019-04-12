@@ -108,7 +108,8 @@ Here you can find the list of enhancement and updates available on `master` bran
  * change `TilesBuilder` into a `TilesFactory` (no singleton)
  * implement `TilesBuilder` as sequence of set methods to create a pattern or canvas pattern
  * add `CharacterShape` for tiles in order to draw a char into a tile, as pattern 
- * integration with [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) 
+ * integration with [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba)
+ * implement abstract class for tooltips title, body, label and footer callbacks
   
 ### Development
 
