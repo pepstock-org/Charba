@@ -443,12 +443,14 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 		return getValue(Property.OFFSET_GRID_LINES, getDefaultValues().isOffsetGridLines());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.options.AbstractScaleLine#getDefaultBorderDashOffset()
 	 */
 	@Override
 	int getDefaultBorderDashOffset() {
 		return getDefaultValues().getBorderDashOffset();
 	}
-	
+
 }

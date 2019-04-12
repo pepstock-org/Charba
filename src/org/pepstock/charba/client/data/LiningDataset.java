@@ -44,14 +44,12 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
-import org.pepstock.charba.client.enums.AbsoluteDatasetIndexFill;
 import org.pepstock.charba.client.enums.CapStyle;
-import org.pepstock.charba.client.enums.Fill;
-import org.pepstock.charba.client.enums.FillingMode;
+import org.pepstock.charba.client.enums.Filler;
 import org.pepstock.charba.client.enums.IsFill;
+import org.pepstock.charba.client.enums.IsFillable;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
-import org.pepstock.charba.client.enums.RelativeDatasetIndexFill;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.utils.Utilities;
 
@@ -69,7 +67,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class LiningDataset extends Dataset {
+public abstract class LiningDataset extends Dataset implements IsFillable {
 	// default label
 	private static final String DEFAULT_LABEL = Utilities.EMPTY_STRING;
 
@@ -134,7 +132,6 @@ public abstract class LiningDataset extends Dataset {
 		BORDER_CAP_STYLE("borderCapStyle"),
 		BORDER_JOIN_STYLE("borderJoinStyle"),
 		BORDER_WIDTH("borderWidth"),
-		FILL("fill"),
 		LINE_TENSION("lineTension"),
 		POINT_BACKGROUND_COLOR("pointBackgroundColor"),
 		POINT_BORDER_COLOR("pointBorderColor"),
@@ -148,9 +145,7 @@ public abstract class LiningDataset extends Dataset {
 		POINT_HOVER_RADIUS("pointHoverRadius"),
 		POINT_ROTATION("pointRotation"),
 		// internal key to store if point style is an image or not
-		CHARBA_POINT_STYLE("_charbaPointStyle"),
-		// internal property key to map the type of FILL property
-		CHARBA_FILLING_MODE("_charbaFillingMode");
+		CHARBA_POINT_STYLE("_charbaPointStyle");
 
 		// name value of property
 		private final String value;
@@ -176,6 +171,9 @@ public abstract class LiningDataset extends Dataset {
 
 	}
 
+	// instance of filler
+	private final Filler filler;
+
 	/**
 	 * Creates the dataset using a default.
 	 * 
@@ -183,6 +181,7 @@ public abstract class LiningDataset extends Dataset {
 	 */
 	LiningDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
+		filler = new Filler(getNativeObject(), getDefaultValues().getElements().getLine().getFill());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -228,6 +227,16 @@ public abstract class LiningDataset extends Dataset {
 			// default result
 			return getDefaultValues().getElements().getPoint().getPointStyle().value();
 		});
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.enums.IsFillable#getFiller()
+	 */
+	@Override
+	public final Filler getFiller() {
+		return filler;
 	}
 
 	/**
@@ -531,94 +540,11 @@ public abstract class LiningDataset extends Dataset {
 	}
 
 	/**
-	 * Sets how to fill the area under the line.
-	 * 
-	 * @param fill <code>true</code> to fill, otherwise <code>false</code>.
-	 */
-	public void setFill(boolean fill) {
-		setValue(Property.FILL, fill);
-		// stores the filling mode
-		setValue(Property.CHARBA_FILLING_MODE, FillingMode.PREDEFINED_BOOLEAN);
-	}
-
-	/**
-	 * Sets how to fill the area under the line, by absolute dataset index.
-	 * 
-	 * @param index absolute dataset index of the chart.
-	 */
-	public void setFill(int index) {
-		setFill(Fill.getFill(index));
-	}
-
-	/**
-	 * Sets how to fill the area under the line, by relative dataset index.
-	 * 
-	 * @param index relative dataset index of the chart.
-	 */
-	public void setFill(String index) {
-		setFill(Fill.getFill(index));
-	}
-
-	/**
-	 * Sets how to fill the area under the line.
-	 * 
-	 * @param fill how to fill the area under the line.
-	 */
-	public void setFill(IsFill fill) {
-		// checks if is no fill
-		if (Fill.FALSE.equals(fill)) {
-			// sets the boolean value instead of string one
-			setValue(Property.FILL, false);
-			// stores the filling mode
-			setValue(Property.CHARBA_FILLING_MODE, FillingMode.PREDEFINED_BOOLEAN);
-		} else if (Fill.isPredefined(fill)) {
-			// sets value
-			setValue(Property.FILL, fill);
-			// stores the filling mode
-			setValue(Property.CHARBA_FILLING_MODE, fill.getMode());
-		} else if (FillingMode.ABSOLUTE_DATASET_INDEX.equals(fill.getMode())) {
-			// sets value
-			setValue(Property.FILL, fill.getValueAsInt());
-			// stores the filling mode
-			setValue(Property.CHARBA_FILLING_MODE, FillingMode.ABSOLUTE_DATASET_INDEX);
-		} else if (FillingMode.RELATIVE_DATASET_INDEX.equals(fill.getMode())) {
-			// sets value
-			setValue(Property.FILL, fill.getValue());
-			// stores the filling mode
-			setValue(Property.CHARBA_FILLING_MODE, FillingMode.RELATIVE_DATASET_INDEX);
-		}
-	}
-
-	/**
 	 * Returns how to fill the area under the line.
 	 * 
 	 * @return how to fill the area under the line.
 	 */
 	public IsFill getFill() {
-		// checks if there is the property
-		if (has(Property.CHARBA_FILLING_MODE)) {
-			// gets the filling mode
-			FillingMode mode = getValue(Property.CHARBA_FILLING_MODE, FillingMode.class, FillingMode.PREDEFINED);
-			// checks all possible types of filling mode
-			// to return the right value
-			if (FillingMode.PREDEFINED_BOOLEAN.equals(mode)) {
-				// returns no fill
-				return getValue(Property.FILL, false) ? Fill.ORIGIN : Fill.FALSE;
-			} else if (FillingMode.PREDEFINED.equals(mode)) {
-				// gets the fill value, using null as default
-				IsFill fill = getValue(Property.FILL, Fill.class, null);
-				// if null, returns the default one
-				return fill == null ? getDefaultValues().getElements().getLine().getFill() : fill;
-			} else if (FillingMode.ABSOLUTE_DATASET_INDEX.equals(mode)) {
-				// the default here is 0 because the property must be set
-				// setting 0, an exception will be thrown
-				return Fill.getFill(getValue(Property.FILL, AbsoluteDatasetIndexFill.DEFAULT_VALUE_AS_INT));
-			} else if (FillingMode.RELATIVE_DATASET_INDEX.equals(mode)) {
-				// the default here is 0 because the property must be set
-				// setting 0, an exception will be thrown
-				return Fill.getFill(getValue(Property.FILL, RelativeDatasetIndexFill.DEFAULT_VALUE));
-			}
-		}
 		// returns the default
 		return getDefaultValues().getElements().getLine().getFill();
 	}

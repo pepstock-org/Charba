@@ -389,7 +389,9 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	}
 
 	/**
-	 * Will clear the chart canvas. Used extensively internally between animation frames.
+	 * Will clear the chart canvas. Used extensively internally between animation frames.<br>
+	 * Overrides the <code>clear</code> method of GWT <code>Panel</code>, changing completely the behavior of GWT
+	 * <code>Panel</code> one.
 	 */
 	@Override
 	public final void clear() {

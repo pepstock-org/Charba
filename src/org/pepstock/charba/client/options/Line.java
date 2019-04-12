@@ -22,21 +22,19 @@ import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultLine;
-import org.pepstock.charba.client.enums.AbsoluteDatasetIndexFill;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.CubicInterpolationMode;
-import org.pepstock.charba.client.enums.Fill;
-import org.pepstock.charba.client.enums.FillingMode;
+import org.pepstock.charba.client.enums.Filler;
 import org.pepstock.charba.client.enums.IsFill;
+import org.pepstock.charba.client.enums.IsFillable;
 import org.pepstock.charba.client.enums.JoinStyle;
-import org.pepstock.charba.client.enums.RelativeDatasetIndexFill;
 
 /**
  * Line elements are used to represent the line in a line chart.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Line extends AbstractElement<IsDefaultLine> implements IsDefaultLine {
+public final class Line extends AbstractElement<IsDefaultLine> implements IsDefaultLine, IsFillable {
 
 	/**
 	 * Name of properties of native object.
@@ -50,10 +48,10 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 		BORDER_JOIN_STYLE("borderJoinStyle"),
 		CUBIC_INTERPOLATION_MODE("cubicInterpolationMode"),
 		CAP_BEZIER_POINTS("capBezierPoints"),
-		FILL("fill"),
-		STEPPED("stepped"),
+		// FILL("fill"),
+		STEPPED("stepped");
 		// internal property key to map the type of FILL property
-		CHARBA_FILLING_MODE("_charbaFillingMode");
+		// CHARBA_FILLING_MODE("_charbaFillingMode");
 
 		// name value of property
 		private final String value;
@@ -79,6 +77,9 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 
 	}
 
+	// instance of filler
+	private final Filler filler;
+
 	/**
 	 * Creates the object with the parent, the key of this element, default values and native object to map java script
 	 * properties.
@@ -90,6 +91,18 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	 */
 	Line(Elements elements, Key childKey, IsDefaultLine defaultValues, NativeObject nativeObject) {
 		super(elements, childKey, defaultValues, nativeObject);
+		// creates filler instance
+		filler = new Filler(getNativeObject(), getDefaultValues().getFill());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.enums.IsFillable#getFiller()
+	 */
+	@Override
+	public Filler getFiller() {
+		return filler;
 	}
 
 	/**
@@ -260,99 +273,39 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 
 	/**
 	 * Sets how to fill the area under the line.
-	 * 
+	 *
 	 * @param fill <code>true</code> to fill, otherwise <code>false</code>.
 	 */
+	@Override
 	public void setFill(boolean fill) {
-		setValue(Property.FILL, fill);
-		// stores the filling mode
-		setValue(Property.CHARBA_FILLING_MODE, FillingMode.PREDEFINED_BOOLEAN);
+		// calls the default method into interface
+		IsFillable.super.setFill(fill);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
 
 	/**
-	 * Sets how to fill the area under the line, by absolute dataset index.
-	 * 
-	 * @param index absolute dataset index of the chart.
-	 */
-	public void setFill(int index) {
-		setFill(Fill.getFill(index));
-	}
-
-	/**
-	 * Sets how to fill the area under the line, by relative dataset index.
-	 * 
-	 * @param index relative dataset index of the chart.
-	 */
-	public void setFill(String index) {
-		setFill(Fill.getFill(index));
-	}
-
-	/**
 	 * Sets how to fill the area under the line.
-	 * 
+	 *
 	 * @param fill how to fill the area under the line.
 	 */
+	@Override
 	public void setFill(IsFill fill) {
-		// checks if is no fill
-		if (Fill.FALSE.equals(fill)) {
-			// sets the boolean value instead of string one
-			setValue(Property.FILL, false);
-			// stores the filling mode
-			setValue(Property.CHARBA_FILLING_MODE, FillingMode.PREDEFINED_BOOLEAN);
-		} else if (Fill.isPredefined(fill)) {
-			// sets value
-			setValue(Property.FILL, fill);
-			// stores the filling mode
-			setValue(Property.CHARBA_FILLING_MODE, fill.getMode());
-		} else if (FillingMode.ABSOLUTE_DATASET_INDEX.equals(fill.getMode())) {
-			// sets value
-			setValue(Property.FILL, fill.getValueAsInt());
-			// stores the filling mode
-			setValue(Property.CHARBA_FILLING_MODE, FillingMode.ABSOLUTE_DATASET_INDEX);
-		} else if (FillingMode.RELATIVE_DATASET_INDEX.equals(fill.getMode())) {
-			// sets value
-			setValue(Property.FILL, fill.getValue());
-			// stores the filling mode
-			setValue(Property.CHARBA_FILLING_MODE, FillingMode.RELATIVE_DATASET_INDEX);
-		}
+		// calls the default method into interface
+		IsFillable.super.setFill(fill);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
 
 	/**
 	 * Returns how to fill the area under the line.
-	 * 
+	 *
 	 * @return how to fill the area under the line.
 	 */
+	@Override
 	public IsFill getFill() {
-		// checks if there is the property
-		if (has(Property.CHARBA_FILLING_MODE)) {
-			// gets the filling mode
-			FillingMode mode = getValue(Property.CHARBA_FILLING_MODE, FillingMode.class, FillingMode.PREDEFINED);
-			// checks all possible types of filling mode
-			// to return the right value
-			if (FillingMode.PREDEFINED_BOOLEAN.equals(mode)) {
-				// returns no fill
-				return getValue(Property.FILL, false) ? Fill.ORIGIN : Fill.FALSE;
-			} else if (FillingMode.PREDEFINED.equals(mode)) {
-				// gets the fill value, using null as default
-				IsFill fill = getValue(Property.FILL, Fill.class, null);
-				// if null, returns the default one
-				return fill == null ? getDefaultValues().getFill() : fill;
-			} else if (FillingMode.ABSOLUTE_DATASET_INDEX.equals(mode)) {
-				// the default here is 0 because the property must be set
-				// setting 0, an exception will be thrown
-				return Fill.getFill(getValue(Property.FILL, AbsoluteDatasetIndexFill.DEFAULT_VALUE_AS_INT));
-			} else if (FillingMode.RELATIVE_DATASET_INDEX.equals(mode)) {
-				// the default here is 0 because the property must be set
-				// setting 0, an exception will be thrown
-				return Fill.getFill(getValue(Property.FILL, RelativeDatasetIndexFill.DEFAULT_VALUE));
-			}
-		}
-		// returns the default
-		return getDefaultValues().getFill();
+		// calls the default method into interface
+		return IsFillable.super.getFill();
 	}
 
 	/**
