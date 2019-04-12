@@ -81,7 +81,7 @@ Documentation
 
 All **Charba** documentation will be maintained into [GitHub wiki](https://github.com/pepstock-org/Charba/wiki) of **Charba** project.
 
-API JavaDoc is published [here](http://www.pepstock.org/Charba/2.3/index.html). 
+API JavaDoc is published [here](http://www.pepstock.org/Charba/2.3/index.html).
 
 Showcase
 --------
@@ -91,6 +91,15 @@ See [Charba showcase](http://www.pepstock.org/Charba-Showcase/Charba_Showcase.ht
 See also [Charba showcase source code](https://github.com/pepstock-org/Charba-Showcase) on GitHub as starting point.
 
 The samples are going to reflect what CHART.JS samples are showing [here](http://www.chartjs.org/samples/latest/).
+
+Continuous integration and quality gate
+---------------------------------------
+
+**Charba** is continuously built at every commit and merge into `master` by [Travis](https://travis-ci.com/pepstock-org/Charba).
+
+At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of the quality.
+
+In the project, it's also provided the [FindBugs](https://github.com/pepstock-org/Charba/blob/master/charba.fbp) project to be tested offline.
 
 Going to new version
 -------
