@@ -33,6 +33,8 @@ public final class Fonter extends NativeObjectContainer {
 	
 	// default font values
 	private final IsDefaultFontItem defaultValue;
+	// model which contains the fonter
+	private final AbstractModel<?,?> model;
 
 	/**
 	 * Name of properties of native object.
@@ -73,10 +75,12 @@ public final class Fonter extends NativeObjectContainer {
 	 * property does not exist.
 	 * 
 	 * @param nativeObject native object where FONTs properties must be managed
+	 * @param model model which contains the fonter.
 	 * @param defaultValue default value of FONTs to use when the properties do not exist
 	 */
-	public Fonter(NativeObject nativeObject, IsDefaultFontItem defaultValue) {
+	public Fonter(NativeObject nativeObject, AbstractModel<?,?> model, IsDefaultFontItem defaultValue) {
 		super(nativeObject);
+		this.model = model;
 		this.defaultValue = defaultValue;
 	}
 
@@ -87,6 +91,8 @@ public final class Fonter extends NativeObjectContainer {
 	 */
 	public void setFontSize(int fontSize) {
 		setValue(Property.FONT_SIZE, fontSize);
+		// checks if all parents are attached
+		model.checkAndAddToParent();
 	}
 
 	/**
@@ -105,6 +111,8 @@ public final class Fonter extends NativeObjectContainer {
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
 		setValue(Property.FONT_STYLE, fontStyle);
+		// checks if all parents are attached
+		model.checkAndAddToParent();
 	}
 
 	/**
@@ -132,6 +140,8 @@ public final class Fonter extends NativeObjectContainer {
 	 */
 	public void setFontColor(String fontColor) {
 		setValue(Property.FONT_COLOR, fontColor);
+		// checks if all parents are attached
+		model.checkAndAddToParent();
 	}
 
 	/**
@@ -159,6 +169,8 @@ public final class Fonter extends NativeObjectContainer {
 	 */
 	public void setFontFamily(String fontFamily) {
 		setValue(Property.FONT_FAMILY, fontFamily);
+		// checks if all parents are attached
+		model.checkAndAddToParent();
 	}
 
 	/**

@@ -15,12 +15,10 @@
 */
 package org.pepstock.charba.client.options;
 
-import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultFontItem;
-import org.pepstock.charba.client.enums.FontStyle;
 
 /**
  * Abstract object for element which are using line height on their label(s).
@@ -77,7 +75,7 @@ abstract class AbstractLabel<P extends AbstractModel<?, ?>, D extends IsDefaultF
 	 */
 	AbstractLabel(P ticks, Key childKey, D defaultValues, NativeObject nativeObject) {
 		super(ticks, childKey, defaultValues, nativeObject);
-		this.fonter = new Fonter(getNativeObject(), getDefaultValues());
+		this.fonter = new Fonter(getNativeObject(), this, getDefaultValues());
 	}
 
 	/*
@@ -88,66 +86,6 @@ abstract class AbstractLabel<P extends AbstractModel<?, ?>, D extends IsDefaultF
 	@Override
 	public final Fonter getFonter() {
 		return fonter;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.HasFont#setFontSize(int)
-	 */
-	@Override
-	public void setFontSize(int fontSize) {
-		HasFont.super.setFontSize(fontSize);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.HasFont#setFontStyle(org.pepstock.charba.client.enums.FontStyle)
-	 */
-	@Override
-	public void setFontStyle(FontStyle fontStyle) {
-		HasFont.super.setFontStyle(fontStyle);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.HasFont#setFontColor(org.pepstock.charba.client.colors.IsColor)
-	 */
-	@Override
-	public void setFontColor(IsColor fontColor) {
-		HasFont.super.setFontColor(fontColor);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.HasFont#setFontColor(java.lang.String)
-	 */
-	@Override
-	public void setFontColor(String fontColor) {
-		HasFont.super.setFontColor(fontColor);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.options.HasFont#setFontFamily(java.lang.String)
-	 */
-	@Override
-	public void setFontFamily(String fontFamily) {
-		HasFont.super.setFontFamily(fontFamily);
-		// checks if all parents are attached
-		checkAndAddToParent();
 	}
 
 	/**
