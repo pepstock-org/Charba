@@ -15,32 +15,27 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.ChartOptions;
-import org.pepstock.charba.client.IsChart;
-
 /**
- * Abstract options for LINE chart. It contains all properties for this kind of chart.
+ * Implements options for chart with lines to be showed and with span gaps.
  *
  * @author Andrea "Stock" Stocchero
  */
-abstract class AbstractLineOptions extends MultiScalesOptions {
+interface HasLineOptions {
 
 	/**
-	 * Builds the object storing the chart instance.
+	 * Returns a multi scale options which will implements show lines and span gaps.
 	 * 
-	 * @param chart chart instance
+	 * @return a multi scale options instance
 	 */
-	protected AbstractLineOptions(IsChart chart, ChartOptions defaultValues) {
-		super(chart, defaultValues);
-	}
+	MultiScalesOptions getOptions();
 
 	/**
 	 * If false, the lines between points are not drawn.
 	 * 
 	 * @param showLine If false, the lines between points are not drawn.
 	 */
-	public void setShowLines(boolean showLine) {
-		getConfiguration().setShowLines(showLine);
+	default void setShowLines(boolean showLine) {
+		getOptions().getConfiguration().setShowLines(showLine);
 	}
 
 	/**
@@ -48,8 +43,8 @@ abstract class AbstractLineOptions extends MultiScalesOptions {
 	 * 
 	 * @return If false, the lines between points are not drawn.
 	 */
-	public boolean isShowLines() {
-		return getConfiguration().isShowLines();
+	default boolean isShowLines() {
+		return getOptions().getConfiguration().isShowLines();
 	}
 
 	/**
@@ -57,8 +52,8 @@ abstract class AbstractLineOptions extends MultiScalesOptions {
 	 * 
 	 * @param spanGaps If false, NaN data causes a break in the line.
 	 */
-	public void setSpanGaps(boolean spanGaps) {
-		getConfiguration().setSpanGaps(spanGaps);
+	default void setSpanGaps(boolean spanGaps) {
+		getOptions().getConfiguration().setSpanGaps(spanGaps);
 	}
 
 	/**
@@ -66,8 +61,8 @@ abstract class AbstractLineOptions extends MultiScalesOptions {
 	 * 
 	 * @return If false, NaN data causes a break in the line.
 	 */
-	public boolean isSpanGaps() {
-		return getConfiguration().isSpanGaps();
+	default boolean isSpanGaps() {
+		return getOptions().getConfiguration().isSpanGaps();
 	}
 
 }

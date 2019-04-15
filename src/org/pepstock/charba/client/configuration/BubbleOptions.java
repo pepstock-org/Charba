@@ -23,7 +23,7 @@ import org.pepstock.charba.client.IsChart;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class BubbleOptions extends AbstractLineOptions {
+public class BubbleOptions extends MultiScalesOptions implements HasLineOptions {
 
 	/**
 	 * Builds the object storing the chart instance.
@@ -33,6 +33,16 @@ public class BubbleOptions extends AbstractLineOptions {
 	 */
 	public BubbleOptions(IsChart chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.configuration.HasLineOptions#getOptions()
+	 */
+	@Override
+	public MultiScalesOptions getOptions() {
+		return this;
 	}
 
 }

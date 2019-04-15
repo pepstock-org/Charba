@@ -23,7 +23,7 @@ import org.pepstock.charba.client.IsChart;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class ScatterOptions extends AbstractLineOptions {
+public class ScatterOptions extends MultiScalesOptions implements HasLineOptions {
 
 	/**
 	 * Builds the object storing the chart instance and default values.
@@ -33,6 +33,14 @@ public class ScatterOptions extends AbstractLineOptions {
 	 */
 	public ScatterOptions(IsChart chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.configuration.HasLineOptions#getOptions()
+	 */
+	@Override
+	public MultiScalesOptions getOptions() {
+		return this;
 	}
 
 }
