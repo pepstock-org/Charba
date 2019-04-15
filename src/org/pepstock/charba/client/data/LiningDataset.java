@@ -47,7 +47,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Filler;
 import org.pepstock.charba.client.enums.IsFill;
-import org.pepstock.charba.client.enums.IsFillable;
+import org.pepstock.charba.client.enums.HasFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -67,7 +67,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class LiningDataset extends Dataset implements IsFillable {
+public abstract class LiningDataset extends Dataset implements HasFill {
 	// default label
 	private static final String DEFAULT_LABEL = Utilities.EMPTY_STRING;
 

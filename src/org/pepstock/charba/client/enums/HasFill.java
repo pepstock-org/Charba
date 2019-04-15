@@ -22,7 +22,7 @@ package org.pepstock.charba.client.enums;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsFillable {
+public interface HasFill {
 
 	/**
 	 * Returns a filler instance to use into default methods of this interface.

@@ -26,7 +26,7 @@ import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.CubicInterpolationMode;
 import org.pepstock.charba.client.enums.Filler;
 import org.pepstock.charba.client.enums.IsFill;
-import org.pepstock.charba.client.enums.IsFillable;
+import org.pepstock.charba.client.enums.HasFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 
 /**
@@ -34,7 +34,7 @@ import org.pepstock.charba.client.enums.JoinStyle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class Line extends AbstractElement<IsDefaultLine> implements IsDefaultLine, IsFillable {
+public final class Line extends AbstractElement<IsDefaultLine> implements IsDefaultLine, HasFill {
 
 	/**
 	 * Name of properties of native object.
@@ -276,7 +276,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	@Override
 	public void setFill(boolean fill) {
 		// calls the default method into interface
-		IsFillable.super.setFill(fill);
+		HasFill.super.setFill(fill);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -289,7 +289,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	@Override
 	public void setFill(IsFill fill) {
 		// calls the default method into interface
-		IsFillable.super.setFill(fill);
+		HasFill.super.setFill(fill);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -302,7 +302,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	@Override
 	public IsFill getFill() {
 		// calls the default method into interface
-		return IsFillable.super.getFill();
+		return HasFill.super.getFill();
 	}
 
 	/**
