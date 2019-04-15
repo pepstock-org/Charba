@@ -42,15 +42,19 @@ public final class Utilities {
 	 */
 	public static final String[] EMPTY_ARRAY_STRING = new String[0];
 	// string format of font CSS style
-	private static final String FONT_TEMPLATE = "{0} {1}px {2}";
+	private static final String FONT_TEMPLATE = "{0} normal {1} {2}px {3}";
 	// string format of font style
 	private static final String REGEXP_FONT_STYLE_PATTERN = "\\{0\\}";
 	// string format of font size
-	private static final String REGEXP_FONT_SIZE_PATTERN = "\\{1\\}";
+	private static final String REGEXP_FONT_WEIGHT_PATTERN = "\\{1\\}";
+	// string format of font size
+	private static final String REGEXP_FONT_SIZE_PATTERN = "\\{2\\}";
 	// string format of font family
-	private static final String REGEXP_FONT_FAMILY_PATTERN = "\\{2\\}";
+	private static final String REGEXP_FONT_FAMILY_PATTERN = "\\{3\\}";
 	// regex instance for font style
 	private static final RegExp REGEXP_FONT_STYLE = RegExp.compile(REGEXP_FONT_STYLE_PATTERN);
+	// regex instance for font style
+	private static final RegExp REGEXP_FONT_WEIGHT = RegExp.compile(REGEXP_FONT_WEIGHT_PATTERN);
 	// regex instance for font style
 	private static final RegExp REGEXP_FONT_SIZE = RegExp.compile(REGEXP_FONT_SIZE_PATTERN);
 	// regex instance for font style
@@ -65,7 +69,8 @@ public final class Utilities {
 
 	/**
 	 * Builds the font string (shorthand property of CSS font) to use in the canvas object.<br>
-	 * The format is [fontStyle] [fontSize] [fontFamily].
+	 * The format is [font-style] [font-variant] [font-weight] [font-size] [font-family].<br>
+	 * See <a href="https://www.w3schools.com/tags/canvas_font.asp">here</a> CSS specification.
 	 * 
 	 * @param style font style to use
 	 * @param fontSize font size
@@ -75,8 +80,12 @@ public final class Utilities {
 	public static String toFont(FontStyle style, int fontSize, String fontFamily) {
 		// gets template
 		final String result = FONT_TEMPLATE;
+		// checks font style. If bold is always NORMAl
+		final FontStyle fontStyle = FontStyle.BOLD.equals(style) ? FontStyle.NORMAL : style;
+		// checks font weight. If not bold is always NORMAl
+		final FontStyle fontWeight = FontStyle.BOLD.equals(style) ? FontStyle.BOLD : FontStyle.NORMAL;
 		// by regex changes the value of format
-		return REGEXP_FONT_FAMILY.replace(REGEXP_FONT_SIZE.replace(REGEXP_FONT_STYLE.replace(result, style.value()), String.valueOf(fontSize)), fontFamily);
+		return REGEXP_FONT_FAMILY.replace(REGEXP_FONT_SIZE.replace(REGEXP_FONT_WEIGHT.replace(REGEXP_FONT_STYLE.replace(result, fontStyle.value()), fontWeight.value()), String.valueOf(fontSize)), fontFamily);
 	}
 
 	/**
