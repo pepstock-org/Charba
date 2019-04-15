@@ -24,7 +24,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class PieDataset extends ArcDataset {
+public class PieDataset extends HovingDataset implements HasBorderAlign {
 
 	/**
 	 * Name of properties of native object.
@@ -57,6 +57,9 @@ public class PieDataset extends ArcDataset {
 
 	}
 
+	// instance of border aligner
+	private final BorderAligner borderAligner;
+
 	/**
 	 * Creates a dataset.<br>
 	 * It uses the global options has default.
@@ -72,6 +75,18 @@ public class PieDataset extends ArcDataset {
 	 */
 	public PieDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
+		// creates border aligner instance
+		this.borderAligner = new BorderAligner(getNativeObject(), getDefaultValues());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HasBorderAlign#getBorderAligner()
+	 */
+	@Override
+	public final BorderAligner getBorderAligner() {
+		return borderAligner;
 	}
 
 	/**

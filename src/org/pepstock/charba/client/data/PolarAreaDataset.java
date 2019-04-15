@@ -23,8 +23,11 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class PolarAreaDataset extends ArcDataset {
+public class PolarAreaDataset extends HovingDataset implements HasBorderAlign {
 
+	// instance of border aligner
+	private final BorderAligner borderAligner;
+	
 	/**
 	 * Creates a dataset.<br>
 	 * It uses the global options has default.
@@ -40,5 +43,17 @@ public class PolarAreaDataset extends ArcDataset {
 	 */
 	public PolarAreaDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
+		// creates border aligner instance
+		this.borderAligner = new BorderAligner(getNativeObject(), getDefaultValues());
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HasBorderAlign#getBorderAligner()
+	 */
+	@Override
+	public final BorderAligner getBorderAligner() {
+		return borderAligner;
 	}
 }

@@ -21,6 +21,8 @@ import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.BorderAlign;
@@ -30,7 +32,7 @@ import org.pepstock.charba.client.enums.BorderAlign;
  * 
  * @author Andrea "Stock" Stocchero
  */
-abstract class ArcDataset extends HovingDataset {
+public final class BorderAligner extends NativeObjectContainer {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -40,6 +42,8 @@ abstract class ArcDataset extends HovingDataset {
 
 	// border align callback instance
 	private BorderAlignCallback borderAlignCallback = null;
+	// default values
+	private final IsDefaultOptions defaultValues;
 
 	/**
 	 * Name of properties of native object.
@@ -77,13 +81,14 @@ abstract class ArcDataset extends HovingDataset {
 	 * 
 	 * @param defaultValues default options
 	 */
-	ArcDataset(IsDefaultOptions defaultValues) {
-		super(defaultValues);
+	BorderAligner(NativeObject nativeObject, IsDefaultOptions defaultValues) {
+		super(nativeObject);
+		this.defaultValues = defaultValues;
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// gets value and calls the callback
-		borderAlignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(context, borderAlignCallback, getDefaultValues().getElements().getArc().getBorderAlign()).value());
+		borderAlignCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsString(context, borderAlignCallback, defaultValues.getElements().getArc().getBorderAlign()).value());
 	}
 
 	/**
@@ -104,10 +109,10 @@ abstract class ArcDataset extends HovingDataset {
 		if (ObjectType.FUNCTION.equals(type(Property.BORDER_ALIGN))) {
 			// checks if a callback has been set
 			// returns defaults
-			return getDefaultValues().getElements().getArc().getBorderAlign();
+			return defaultValues.getElements().getArc().getBorderAlign();
 		}
 		// otherwise returns the enum value as string
-		return getValue(Property.BORDER_ALIGN, BorderAlign.class, getDefaultValues().getElements().getArc().getBorderAlign());
+		return getValue(Property.BORDER_ALIGN, BorderAlign.class, defaultValues.getElements().getArc().getBorderAlign());
 	}
 
 	/**
