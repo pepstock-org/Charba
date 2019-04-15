@@ -19,6 +19,7 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.defaults.IsDefaultFontItem;
 import org.pepstock.charba.client.enums.FontStyle;
 
@@ -27,10 +28,11 @@ import org.pepstock.charba.client.enums.FontStyle;
  * 
  * @author Andrea "Stock" Stocchero
  *
- * @param <P> parent node class
- * @param <D> defaults provider class
  */
-public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaultFontItem> extends AbstractModel<P, D> implements IsDefaultFontItem {
+public final class Fonter extends NativeObjectContainer {
+	
+	// default font values
+	private final IsDefaultFontItem defaultValue;
 
 	/**
 	 * Name of properties of native object.
@@ -67,16 +69,15 @@ public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaul
 	}
 
 	/**
-	 * Creates the object with the parent, the key of this element, default values and native object to map java script
-	 * properties.
+	 * Creates a fonter with the native object where FONTs properties must be managed and the default value to use when the
+	 * property does not exist.
 	 * 
-	 * @param parent parent node to use to add this element where changed
-	 * @param childKey the property name of this element to use to add it to the parent.
-	 * @param defaultValues default provider
-	 * @param nativeObject native object to map java script properties
+	 * @param nativeObject native object where FONTs properties must be managed
+	 * @param defaultValue default value of FONTs to use when the properties do not exist
 	 */
-	FontItem(P parent, Key childKey, D defaultValues, NativeObject nativeObject) {
-		super(parent, childKey, defaultValues, nativeObject);
+	public Fonter(NativeObject nativeObject, IsDefaultFontItem defaultValue) {
+		super(nativeObject);
+		this.defaultValue = defaultValue;
 	}
 
 	/**
@@ -86,8 +87,6 @@ public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaul
 	 */
 	public void setFontSize(int fontSize) {
 		setValue(Property.FONT_SIZE, fontSize);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
 	}
 
 	/**
@@ -96,7 +95,7 @@ public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaul
 	 * @return the font size.
 	 */
 	public int getFontSize() {
-		return getValue(Property.FONT_SIZE, getDefaultValues().getFontSize());
+		return getValue(Property.FONT_SIZE, defaultValue.getFontSize());
 	}
 
 	/**
@@ -106,8 +105,6 @@ public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaul
 	 */
 	public void setFontStyle(FontStyle fontStyle) {
 		setValue(Property.FONT_STYLE, fontStyle);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
 	}
 
 	/**
@@ -116,7 +113,7 @@ public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaul
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.FONT_STYLE, FontStyle.class, getDefaultValues().getFontStyle());
+		return getValue(Property.FONT_STYLE, FontStyle.class, defaultValue.getFontStyle());
 	}
 
 	/**
@@ -135,8 +132,6 @@ public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaul
 	 */
 	public void setFontColor(String fontColor) {
 		setValue(Property.FONT_COLOR, fontColor);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
 	}
 
 	/**
@@ -145,7 +140,7 @@ public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaul
 	 * @return Font color.
 	 */
 	public String getFontColorAsString() {
-		return getValue(Property.FONT_COLOR, getDefaultValues().getFontColorAsString());
+		return getValue(Property.FONT_COLOR, defaultValue.getFontColorAsString());
 	}
 
 	/**
@@ -164,8 +159,6 @@ public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaul
 	 */
 	public void setFontFamily(String fontFamily) {
 		setValue(Property.FONT_FAMILY, fontFamily);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
 	}
 
 	/**
@@ -174,7 +167,7 @@ public abstract class FontItem<P extends AbstractModel<?, ?>, D extends IsDefaul
 	 * @return Font family, follows CSS font-family options.
 	 */
 	public String getFontFamily() {
-		return getValue(Property.FONT_FAMILY, getDefaultValues().getFontFamily());
+		return getValue(Property.FONT_FAMILY, defaultValue.getFontFamily());
 	}
 
 }

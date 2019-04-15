@@ -115,7 +115,7 @@ public final class PointLabels extends AbstractLabel<Scale, IsDefaultPointLabels
 	 */
 	public void setFontColor(IsColor... fontColors) {
 		// stores value
-		setValueOrArray(FontItem.Property.FONT_COLOR, fontColors);
+		setValueOrArray(Fonter.Property.FONT_COLOR, fontColors);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -127,7 +127,7 @@ public final class PointLabels extends AbstractLabel<Scale, IsDefaultPointLabels
 	 */
 	public void setFontColor(String... fontColors) {
 		// stores value
-		setValueOrArray(FontItem.Property.FONT_COLOR, fontColors);
+		setValueOrArray(Fonter.Property.FONT_COLOR, fontColors);
 		// checks if the node is already added to parent
 		checkAndAddToParent();
 	}
@@ -135,7 +135,7 @@ public final class PointLabels extends AbstractLabel<Scale, IsDefaultPointLabels
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.FontItem#getFontColorAsString()
+	 * @see org.pepstock.charba.client.defaults.IsDefaultFontItem#getFontColorAsString()
 	 */
 	@Override
 	public String getFontColorAsString() {
@@ -148,7 +148,7 @@ public final class PointLabels extends AbstractLabel<Scale, IsDefaultPointLabels
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.options.FontItem#getFontColor()
+	 * @see org.pepstock.charba.client.options.HasFont#getFontColor()
 	 */
 	@Override
 	public IsColor getFontColor() {
@@ -162,7 +162,7 @@ public final class PointLabels extends AbstractLabel<Scale, IsDefaultPointLabels
 	 */
 	public List<String> getFontColorsAsString() {
 		// returns list of colors
-		ArrayString array = getValueOrArray(FontItem.Property.FONT_COLOR, getDefaultValues().getFontColorAsString());
+		ArrayString array = getValueOrArray(Fonter.Property.FONT_COLOR, getDefaultValues().getFontColorAsString());
 		return ArrayListHelper.list(array);
 	}
 
