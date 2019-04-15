@@ -21,12 +21,10 @@ import org.pepstock.charba.client.defaults.IsDefaultFontItem;
 import org.pepstock.charba.client.enums.FontStyle;
 
 /**
- * Base object to map font options for configuration.
+ * Interface to map font options.
  * 
  * @author Andrea "Stock" Stocchero
  *
- * @param <P> parent node class
- * @param <D> defaults provider class
  */
 public interface HasFont extends IsDefaultFontItem {
 
