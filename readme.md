@@ -1,7 +1,7 @@
 Charba - GWT Charts library based on CHART.JS
 ===============================================
 
-Version 2.3
+Version 2.4
 
 [![Build Status](https://travis-ci.com/pepstock-org/Charba.svg?branch=master)](https://travis-ci.com/pepstock-org/Charba) [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=pepstock-org_Charba&metric=alert_status)](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) [![Awesome](https://awesome.re/badge-flat2.svg)](https://github.com/chartjs/awesome)  
 
@@ -40,20 +40,20 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>2.3</version>
+    <version>2.4</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="2.3"/>
+<dependency org="org.pepstock" name="charba" rev="2.4"/>
 ```
 
 If you are using [Gradle](https://gradle.org/):
 
 ```json
-compile group: 'org.pepstock', name: 'charba', version: '2.3'
+compile group: 'org.pepstock', name: 'charba', version: '2.4'
 ```
 
 To install in your GWT project, you must the following configuration into your GWT project module configuration:
@@ -81,7 +81,7 @@ Documentation
 
 All **Charba** documentation will be maintained into [GitHub wiki](https://github.com/pepstock-org/Charba/wiki) of **Charba** project.
 
-API JavaDoc is published [here](http://www.pepstock.org/Charba/2.3/index.html).
+API JavaDoc is published [here](http://www.pepstock.org/Charba/2.4/index.html).
 
 Showcase
 --------
@@ -97,75 +97,11 @@ Continuous integration and quality gate
 
 **Charba** is continuously built at every commit and merge into `master` by [Travis](https://travis-ci.com/pepstock-org/Charba).
 
-At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of the quality.
+At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
-In the project, it's also provided the [FindBugs](https://github.com/pepstock-org/Charba/blob/master/charba.fbp) project to be tested offline.
-
-Going to new version
--------
-
-Here you can find the list of enhancement and updates available on `master` branch before which will be part of new official release:
-
-### Features
-
- * implement new `Colorschemes` out-of-the-box plugin to enable to pick the color combination for charts from the predefined or custom color schemes.
- * implement `TitleClickHandler` to catch click events on title of charts
- * implement `AxisClickHandler` to catch click events on axes of charts
- * update ChartPointer to change cursor on title, axes or legend when the handlers are added
- * create GWT material scheme
- * enable custom number format to `NoSelectedDatasetTicksCallback` 
- * change `TilesBuilder` into a `TilesFactory` (no singleton)
- * implement `TilesBuilder` as sequence of set methods to create a pattern or canvas pattern
- * add `CharacterShape` for tiles in order to draw a char into a tile, as pattern 
- * integration with [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba)
- * implement abstract class for tooltips title, body, label and footer callbacks
-  
-### Development
-
- * fix issue about `ChartPointer` setting cursor
- * getType of dataset returns `null` is not set
- * change visibility of `HovingDataset`, `HovingFlexDataset` and `LiningDataset`
- * change visibility of Color to checkAlphaWithinBounds method
- * fix type value of default alpha (from 1F to 1D)
- * `DatasetsItems selector` plugin is not compatible with `Dataset selection` handler
- * move reading of option of `ChartPointer` into `beforeUpdate` method of plugin
- * expose constants of callbacks
- * remove final modifier to methods where class already final
- * changed visibility of some methods, from protected to package
- * change visibility of `IsShape` and `ShapeDrawer` classes
- * change key for tile caching to enable also for image and character shape drawers
- * transform and rotate of 180 degrees `Star` and `EmptyStar` shapes
- * `deprecated` some methods of Meter and Gauge datasets and options
- * change internal add and remove handler management
- * improve Pattern and Gradient creation engine
- * rename `from` methods into Array classes into `fromOrEmpty` to avoid any conflict with native `Array.from` javascript implementation
- * fix `ScaleLongestTextCacheItem` because didn't manage `data` property properly
- * fix CSS font string creation
-
-### Fixed Sonar Issue
- * squid:S00115 - Constant names should comply with a naming convention
-   * change all enumeration name to uppercase
- * javascript:S3403 - Strict equality operators should not be used with dissimilar types
-   * change compare into label plugin
- * squid:S2583 - Conditionally executed blocks should be reachable
-   * fix addCollection method removing check if new item is added
- * squid:S1192 - String literals should not be duplicated
-   * change string into color schemes as constants
- * squid:S2293 - The diamond operator ("<>") should be used
- * squid:EmptyStatementUsageCheck - Empty statements should be removed
- * squid:S1452 - Generic wildcard types should not be used in return parameters
-   * change callbacks, events, plugins and controller to use new interface `IsChart` instead of `AbstractChart<?,?>`
-   * remove type on colors and point style callbacks
- * squid:ModifiersOrderCheck - Reorder the modifiers to comply with the Java Language Specification
- * squid:S1161 - "@Override" should be used on overriding and implementing methods
- * squid:S1604 - Anonymous inner classes containing only one method should become lambdas
- * squid:CommentedOutCodeLine - Sections of code should not be commented out
- * squid:S4784 - Using regular expressions is security-sensitive
- * squid:MissingDeprecatedCheck - Deprecated elements should have both the annotation and the Javadoc tag
- * squid:S3776 - Cognitive Complexity of methods should not be too high
- * common-java:DuplicatedBlocks - Source files should not have any duplicated blocks
+In the project, it's also provided the [FindBugs](https://github.com/pepstock-org/Charba/blob/2.4/charba.fbp) project to looking offline for bugs.
  
 License
 -------
 
-Charba is available under the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0).
+ **Charba** is available under the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0).
