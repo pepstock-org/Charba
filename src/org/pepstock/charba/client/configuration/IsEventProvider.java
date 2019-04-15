@@ -16,32 +16,28 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.AddHandlerEventHandler;
 import org.pepstock.charba.client.events.RemoveHandlerEvent;
 import org.pepstock.charba.client.events.RemoveHandlerEventHandler;
 
 /**
- * Is a JavaScript object container, which contains the chart instance and options element to store chart configuration, which
- * will manage chart events to events handlers.
+ * Interface to be bale to catch and manage chart events to events handlers.
  * 
  * @author Andrea "Stock" Stocchero
  *
- * @param <T> options element to store chart configuration
  */
-public abstract class EventProvider<T extends NativeObjectContainer> extends ConfigurationContainer<T> implements AddHandlerEventHandler, RemoveHandlerEventHandler {
+interface IsEventProvider extends  AddHandlerEventHandler, RemoveHandlerEventHandler {
 
 	/**
-	 * Creates the chart configuration object with the chart instance and options element to store chart configuration.
+	 * Adds the event provider implementation as handlers of chart.
 	 * 
 	 * @param chart chart instance
-	 * @param configuration options element.
+	 * @param provider event provider implmentation
 	 */
-	EventProvider(IsChart chart, T configuration) {
-		super(chart, configuration);
-		chart.addHandler(this, AddHandlerEvent.TYPE);
-		chart.addHandler(this, RemoveHandlerEvent.TYPE);
+	static void register(IsChart chart, IsEventProvider provider) {
+		chart.addHandler(provider, AddHandlerEvent.TYPE);
+		chart.addHandler(provider, RemoveHandlerEvent.TYPE);
 	}
 
 }

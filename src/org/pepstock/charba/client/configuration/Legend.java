@@ -39,7 +39,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class Legend extends EventProvider<ExtendedOptions> {
+public class Legend extends ConfigurationContainer<ExtendedOptions> implements IsEventProvider {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -123,6 +123,8 @@ public class Legend extends EventProvider<ExtendedOptions> {
 	 */
 	Legend(IsChart chart, ExtendedOptions options) {
 		super(chart, options);
+		// registers as event handler
+		IsEventProvider.register(chart, this);
 		// creates sub element
 		labels = new LegendLabels(chart, options);
 		// -------------------------------

@@ -40,7 +40,7 @@ import jsinterop.annotations.JsFunction;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class Animation extends EventProvider<ExtendedOptions> {
+public class Animation extends ConfigurationContainer<ExtendedOptions> implements IsEventProvider {
 
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
@@ -117,7 +117,8 @@ public class Animation extends EventProvider<ExtendedOptions> {
 	 */
 	Animation(IsChart chart, ExtendedOptions options) {
 		super(chart, options);
-
+		// registers as event handler
+		IsEventProvider.register(chart, this);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------

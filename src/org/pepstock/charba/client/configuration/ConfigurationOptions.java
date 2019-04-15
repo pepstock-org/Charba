@@ -77,7 +77,7 @@ import jsinterop.annotations.JsFunction;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions> implements ConfigurationElement {
+public abstract class ConfigurationOptions extends ConfigurationContainer<ExtendedOptions> implements ConfigurationElement, IsEventProvider {
 
 	// list of click event handler types
 	private static final List<Type<?>> CHART_CLICK_TYPES = Collections.unmodifiableList(Arrays.asList(DatasetSelectionEvent.TYPE, ChartClickEvent.TYPE, TitleClickEvent.TYPE, AxisClickEvent.TYPE));
@@ -232,6 +232,8 @@ public abstract class ConfigurationOptions extends EventProvider<ExtendedOptions
 	ConfigurationOptions(IsChart chart, ChartOptions defaultValues) {
 		// uses the extended option internally (no override)
 		super(chart, new ExtendedOptions(new DefaultChartOptions(defaultValues)));
+		// registers as event handler
+		IsEventProvider.register(chart, this);
 		// creates all sub elements
 		animation = new Animation(chart, getConfiguration());
 		elements = new Elements(getConfiguration());
