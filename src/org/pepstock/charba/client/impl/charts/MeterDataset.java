@@ -292,28 +292,20 @@ public class MeterDataset extends Dataset {
 	}
 
 	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array
-	 * corresponds to the label at the same index on the x axis.
+	 * Throws an exception because not available.
 	 * 
-	 * @param values an array of numbers
-	 * @see org.pepstock.charba.client.data.Dataset#setData(double[])
-	 * @deprecated setData is not allowed. Use setValue.
+	 * @param values ignored because will throw an exception
 	 */
-	@Deprecated
 	@Override
 	public final void setData(double... values) {
 		throw new UnsupportedOperationException(INVALID_SET_DATA_CALL);
 	}
 
 	/**
-	 * Sets the data property of a dataset for a chart is specified as an array of numbers. Each point in the data array
-	 * corresponds to the label at the same index on the x axis.
+	 * Throws an exception because not available.
 	 * 
-	 * @param values an array of numbers
-	 * @see org.pepstock.charba.client.data.Dataset#setData(double[])
-	 * @deprecated setData is not allowed. Use setValue.
+	 * @param values ignored because will throw an exception
 	 */
-	@Deprecated
 	@Override
 	public final void setData(List<Double> values) {
 		throw new UnsupportedOperationException(INVALID_SET_DATA_CALL);

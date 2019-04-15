@@ -48,10 +48,7 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 		BORDER_JOIN_STYLE("borderJoinStyle"),
 		CUBIC_INTERPOLATION_MODE("cubicInterpolationMode"),
 		CAP_BEZIER_POINTS("capBezierPoints"),
-		// FILL("fill"),
 		STEPPED("stepped");
-		// internal property key to map the type of FILL property
-		// CHARBA_FILLING_MODE("_charbaFillingMode");
 
 		// name value of property
 		private final String value;

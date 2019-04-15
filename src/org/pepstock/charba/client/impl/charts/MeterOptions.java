@@ -125,9 +125,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * Returns nothing but throws an exception because not available.
 	 * 
 	 * @return nothing because will throw an exception
-	 * @deprecated component is not available for Meter or Gauge charts.
 	 */
-	@Deprecated
 	@Override
 	public final Hover getHover() {
 		throw new UnsupportedOperationException(INVALID_CALL);
@@ -137,9 +135,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * Returns nothing but throws an exception because not available.
 	 * 
 	 * @return nothing because will throw an exception
-	 * @deprecated component is not available for Meter or Gauge charts.
 	 */
-	@Deprecated
 	@Override
 	public final Layout getLayout() {
 		throw new UnsupportedOperationException(INVALID_CALL);
@@ -149,9 +145,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * Returns nothing but throws an exception because not available.
 	 * 
 	 * @return nothing because will throw an exception
-	 * @deprecated component is not available for Meter or Gauge charts.
 	 */
-	@Deprecated
 	@Override
 	public final Legend getLegend() {
 		throw new UnsupportedOperationException(INVALID_CALL);
@@ -161,9 +155,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * Returns nothing but throws an exception because not available.
 	 * 
 	 * @return nothing because will throw an exception
-	 * @deprecated component is not available for Meter or Gauge charts.
 	 */
-	@Deprecated
 	@Override
 	public final Tooltips getTooltips() {
 		throw new UnsupportedOperationException(INVALID_CALL);
@@ -173,9 +165,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * Throws an exception because not available.
 	 * 
 	 * @param legendCallback ignored because will throw an exception
-	 * @deprecated component is not available for Meter or Gauge charts.
 	 */
-	@Deprecated
 	@Override
 	public final void setLegendCallback(LegendCallback legendCallback) {
 		throw new UnsupportedOperationException(INVALID_CALL);

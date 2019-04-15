@@ -544,6 +544,7 @@ public abstract class LiningDataset extends Dataset implements IsFillable {
 	 * 
 	 * @return how to fill the area under the line.
 	 */
+	@Override
 	public IsFill getFill() {
 		// returns the default
 		return getDefaultValues().getElements().getLine().getFill();
