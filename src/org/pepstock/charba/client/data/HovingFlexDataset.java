@@ -70,7 +70,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	/**
 	 * Name of properties of native object.
 	 */
-	protected enum Property implements Key
+	enum Property implements Key
 	{
 		BACKGROUND_COLOR("backgroundColor"),
 		BORDER_COLOR("borderColor"),
