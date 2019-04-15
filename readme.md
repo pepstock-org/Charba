@@ -139,7 +139,8 @@ Here you can find the list of enhancement and updates available on `master` bran
  * change internal add and remove handler management
  * improve Pattern and Gradient creation engine
  * rename `from` methods into Array classes into `fromOrEmpty` to avoid any conflict with native `Array.from` javascript implementation
- * fix `ScaleLongestTextCacheItem` because didn't manage `data` property properly 
+ * fix `ScaleLongestTextCacheItem` because didn't manage `data` property properly
+ * fix CSS font string creation
 
 ### Fixed Sonar Issue
  * squid:S00115 - Constant names should comply with a naming convention
