@@ -48,8 +48,8 @@ public final class ScriptableUtils {
 	 * @return a char instance if callback and chart itself are consistent
 	 */
 	public static IsChart retrieveChart(ScriptableContext context, Object callback) {
-		// checks if callback is consistent
-		if (callback != null) {
+		// checks if arguments are consistent
+		if (callback != null && context != null) {
 			// gets chart instance
 			return context.getChart();
 		}

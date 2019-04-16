@@ -123,6 +123,21 @@ public final class Gradient extends CanvasObject {
 	 * @param scope scope of gradient
 	 */
 	public Gradient(GradientType type, GradientOrientation orientation, GradientScope scope) {
+		// checks if type is consistent
+		if (type == null) {
+			// then throws an exception
+			throw new IllegalArgumentException("Type is null");
+		}
+		// checks if orientation is consistent
+		if (orientation == null) {
+			// then throws an exception
+			throw new IllegalArgumentException("Orientation is null");
+		}
+		// checks if scope is consistent
+		if (scope == null) {
+			// then throws an exception
+			throw new IllegalArgumentException("Scope is null");
+		}
 		// creates color list
 		colors = new ArrayObjectContainerList<>();
 		// stores gradient type
@@ -239,7 +254,11 @@ public final class Gradient extends CanvasObject {
 	 * @param color color instance
 	 */
 	public void addColorStop(GradientColor color) {
-		colors.add(color);
+		// checks if argument is consistent
+		if (color != null) {
+			// if consistent, adds color
+			colors.add(color);
+		}
 	}
 
 	/**

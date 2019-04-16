@@ -37,7 +37,7 @@ abstract class AbstractDatasetIndexFill implements IsFill {
 	 * 
 	 * @param mode filling mode. Only absolute or relative dataset index
 	 * @param index dataset index as integer (only absolute dataset index)
-	 * @param indexAsString dataset index as string (only realtive dataset index)
+	 * @param indexAsString dataset index as string (only relative dataset index)
 	 */
 	AbstractDatasetIndexFill(FillingMode mode, int index, String indexAsString) {
 		this.mode = mode;

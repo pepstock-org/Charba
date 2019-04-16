@@ -63,6 +63,21 @@ public abstract class CanvasObjectFactory {
 	 * @return a GWT canvas pattern
 	 */
 	public final CanvasPattern createPattern(IsChart chart, Pattern pattern) {
+		// checks if chart is consistent
+		if (chart == null) {
+			// if here,
+			// chart is null
+			// then throws an exception
+			throw new IllegalArgumentException("Chart is null");
+		}
+		// checks if pattern is consistent
+		if (pattern == null) {
+			// if here,
+			// pattern is null
+			// then throws an exception
+			throw new IllegalArgumentException("Pattern is null");
+		}
+		// map instance
 		final Map<Integer, CanvasPattern> patternsMap;
 		// checks if the pattern is already created
 		if (PATTERNS.containsKey(chart.getId())) {
@@ -101,7 +116,10 @@ public abstract class CanvasObjectFactory {
 	 * @param chart chart instance on which removes all loaded gradients
 	 */
 	public final void resetGradients(IsChart chart) {
-		GRADIENTS.remove(chart.getId());
+		// checks if chart is consistent
+		if (chart != null) {
+			GRADIENTS.remove(chart.getId());
+		}
 	}
 
 	/**
@@ -110,8 +128,11 @@ public abstract class CanvasObjectFactory {
 	 * @param chart chart instance on which removes all loaded objects.
 	 */
 	public final void clear(IsChart chart) {
-		PATTERNS.remove(chart.getId());
-		GRADIENTS.remove(chart.getId());
+		// checks if chart is consistent
+		if (chart != null) {
+			PATTERNS.remove(chart.getId());
+			GRADIENTS.remove(chart.getId());
+		}
 	}
 
 	/**
@@ -125,6 +146,20 @@ public abstract class CanvasObjectFactory {
 	 * @return a GWT canvas gradient
 	 */
 	public final CanvasGradient createGradient(IsChart chart, Gradient gradient, int datasetIndex, int index) {
+		// checks if chart is consistent
+		if (chart == null) {
+			// if here,
+			// chart is null
+			// then throws an exception
+			throw new IllegalArgumentException("Chart is null");
+		}
+		// checks if gradient is consistent
+		if (gradient == null) {
+			// if here,
+			// gradient is null
+			// then throws an exception
+			throw new IllegalArgumentException("Gradient is null");
+		}
 		// checks if the gradient is already created
 		final Map<Integer, CanvasGradient> gradientsMap;
 		// checks if the gradient is already created

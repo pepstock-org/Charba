@@ -76,10 +76,13 @@ public final class ColorBuilder {
 	public static List<IsColor> parse(List<String> colorsAsString) {
 		// creates result
 		final List<IsColor> colors = new LinkedList<>();
-		// scans all colors as strings
-		for (String colorAsString : colorsAsString) {
-			// parses and add colors
-			colors.add(parse(colorAsString));
+		// checks if argument is consistent
+		if (colorsAsString != null) {
+			// scans all colors as strings
+			for (String colorAsString : colorsAsString) {
+				// parses and add colors
+				colors.add(parse(colorAsString));
+			}
 		}
 		return colors;
 	}

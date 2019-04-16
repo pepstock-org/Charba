@@ -79,8 +79,13 @@ public final class JsHelper {
 	 * @return the object type
 	 */
 	public ObjectType typeOf(Object object) {
-		// gets the object type by javascript type and checking if is an array
-		return ObjectType.getType(NativeJsHelper.typeOf(object), Array.isArray(object));
+		// checks consistency of arguments
+		if (object != null) {
+			// gets the object type by javascript type and checking if is an array
+			return ObjectType.getType(NativeJsHelper.typeOf(object), Array.isArray(object));
+		}
+		// if here the arguments are not consistent
+		return ObjectType.UNDEFINED;
 	}
 
 	/**
@@ -91,8 +96,13 @@ public final class JsHelper {
 	 * @return the object type
 	 */
 	public ObjectType typeOf(Object object, String key) {
-		// gets the object type by javascript type and checking if is an array
-		return ObjectType.getType(NativeJsHelper.type(object, key), NativeJsHelper.isArray(object, key));
+		// checks consistency of arguments
+		if (object != null && key != null) {
+			// gets the object type by javascript type and checking if is an array
+			return ObjectType.getType(NativeJsHelper.type(object, key), NativeJsHelper.isArray(object, key));
+		}
+		// if here the arguments are not consistent
+		return ObjectType.UNDEFINED;
 	}
 
 	/**
