@@ -84,7 +84,7 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	 * @param backgroundColor the background color.
 	 */
 	public final void setBackgroundColor(IsColor backgroundColor) {
-		setBackgroundColor(backgroundColor.toRGBA());
+		setBackgroundColor(checkValue(backgroundColor));
 	}
 
 	/**
@@ -142,7 +142,7 @@ public abstract class AbstractElement<D extends IsDefaultOptionsElement> extends
 	 * @param borderColor the border color.
 	 */
 	public final void setBorderColor(IsColor borderColor) {
-		setBorderColor(borderColor.toRGBA());
+		setBorderColor(checkValue(borderColor));
 	}
 
 	/**

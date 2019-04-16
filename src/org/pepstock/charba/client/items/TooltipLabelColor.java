@@ -94,7 +94,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * @param backgroundColor background color
 	 */
 	public void setBackgroundColor(IsColor backgroundColor) {
-		setValue(Property.BACKGROUND_COLOR, backgroundColor.toRGBA());
+		setBackgroundColor(checkValue(backgroundColor));
 	}
 
 	/**
@@ -130,7 +130,7 @@ public final class TooltipLabelColor extends NativeObjectContainer {
 	 * @param borderColor border color
 	 */
 	public void setBorderColor(IsColor borderColor) {
-		setValue(Property.BORDER_COLOR, borderColor.toRGBA());
+		setBorderColor(checkValue(borderColor));
 	}
 
 	/**

@@ -77,7 +77,7 @@ public interface HasFont extends IsDefaultFontItem {
 	 * @param fontColor font color
 	 */
 	default void setFontColor(IsColor fontColor) {
-		setFontColor(fontColor.toRGBA());
+		getFonter().setFontColor(fontColor);
 	}
 
 	/**

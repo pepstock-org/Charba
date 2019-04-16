@@ -46,8 +46,8 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Filler;
-import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.HasFill;
+import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -255,7 +255,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param backgroundColor the fill color under the line.
 	 */
 	public void setBackgroundColor(IsColor backgroundColor) {
-		setBackgroundColor(backgroundColor.toRGBA());
+		setBackgroundColor(checkValue(backgroundColor));
 	}
 
 	/**
@@ -364,7 +364,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param borderColor the color of the line.
 	 */
 	public void setBorderColor(IsColor borderColor) {
-		setBorderColor(borderColor.toRGBA());
+		setBorderColor(checkValue(borderColor));
 	}
 
 	/**

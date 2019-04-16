@@ -520,7 +520,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @param backdropColor color of label backdrops.
 	 */
 	public void setBackdropColor(IsColor backdropColor) {
-		setBackdropColor(backdropColor.toRGBA());
+		setBackdropColor(checkValue(backdropColor));
 	}
 
 	/**

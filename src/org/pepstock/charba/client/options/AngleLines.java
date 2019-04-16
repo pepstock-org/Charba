@@ -101,7 +101,7 @@ public final class AngleLines extends AbstractScaleLine<IsDefaultAngleLines> imp
 	 * @param color color of angled lines.
 	 */
 	public void setColor(IsColor color) {
-		setColor(color.toRGBA());
+		setColor(checkValue(color));
 	}
 
 	/**

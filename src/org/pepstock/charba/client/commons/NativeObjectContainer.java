@@ -983,4 +983,16 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		}
 	}
+	
+	/**
+	 * Checks a color value if consistent, returning the RGBA representation, otherwise <code>null</code>.
+	 * 
+	 * @param value value to be set
+	 * @return the string RGBA color representation or <code>null</code> if color is null
+	 */
+	protected final String checkValue(IsColor value) {
+		// check value is null
+		// and sets value accordingly
+		return value != null ? value.toRGBA() : null;
+	}
 }

@@ -130,7 +130,7 @@ public final class Fonter extends NativeObjectContainer {
 	 * @param fontColor Font color
 	 */
 	public void setFontColor(IsColor fontColor) {
-		setFontColor(fontColor.toRGBA());
+		setFontColor(checkValue(fontColor));
 	}
 
 	/**

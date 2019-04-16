@@ -71,7 +71,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param color the fill style of the legend box
 	 */
 	public void setFillStyle(IsColor color) {
-		setValue(LegendItem.Property.FILL_STYLE, color.toRGBA());
+		setValue(LegendItem.Property.FILL_STYLE, checkValue(color));
 	}
 
 	/**
@@ -140,7 +140,7 @@ public final class LegendLabelItem extends LegendItem {
 	 * @param color the stroke style of the legend box
 	 */
 	public void setStrokeStyle(IsColor color) {
-		setValue(LegendItem.Property.STROKE_STYLE, color.toRGBA());
+		setValue(LegendItem.Property.STROKE_STYLE, checkValue(color));
 	}
 
 	/**

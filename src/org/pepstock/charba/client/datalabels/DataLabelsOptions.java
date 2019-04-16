@@ -536,7 +536,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param color the background color
 	 */
 	public void setBackgroundColor(IsColor color) {
-		setBackgroundColor(color.toRGBA());
+		setBackgroundColor(checkValue(color));
 	}
 
 	/**
@@ -573,7 +573,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param color the border color
 	 */
 	public void setBorderColor(IsColor color) {
-		setBorderColor(color.toRGBA());
+		setBorderColor(checkValue(color));
 	}
 
 	/**
@@ -687,7 +687,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param color the color
 	 */
 	public void setColor(IsColor color) {
-		setColor(color.toRGBA());
+		setColor(checkValue(color));
 	}
 
 	/**
@@ -837,7 +837,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param color the text stroke color
 	 */
 	public void setTextStrokeColor(IsColor color) {
-		setColor(color.toRGBA());
+		setTextStrokeColor(checkValue(color));
 	}
 
 	/**
@@ -909,7 +909,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param color the text shadow color color
 	 */
 	public void setTextShadowColor(IsColor color) {
-		setColor(color.toRGBA());
+		setTextShadowColor(checkValue(color));
 	}
 
 	/**

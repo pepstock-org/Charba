@@ -73,7 +73,7 @@ public final class GradientColor extends NativeObjectContainer {
 	 * @param color color instance
 	 */
 	public GradientColor(double offset, IsColor color) {
-		this(offset, color.toRGBA());
+		this(offset, color != null ? color.toRGBA() : null);
 	}
 
 	/**
@@ -85,7 +85,9 @@ public final class GradientColor extends NativeObjectContainer {
 	public GradientColor(double offset, String color) {
 		checkOffsetWithinBounds(offset);
 		setValue(Property.CHARBA_GRADIENT_COLOR_OFFSET, offset);
-		setValue(Property.CHARBA_GRADIENT_COLOR, color);
+		// checks if color is consistent
+		// using default if not
+		setValue(Property.CHARBA_GRADIENT_COLOR, color == null ? Defaults.get().getGlobal().getElements().getLine().getBackgroundColorAsString() : color);
 	}
 
 	/**

@@ -210,7 +210,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @param color the color.
 	 */
 	public void setColor(IsColor color) {
-		setColor(color.toRGBA());
+		setColor(checkValue(color));
 	}
 
 	/**
@@ -304,7 +304,7 @@ public final class DatasetsItemsSelectorOptions extends AbstractPluginOptions {
 	 * @param color the color.
 	 */
 	public void setBorderColor(IsColor color) {
-		setBorderColor(color.toRGBA());
+		setBorderColor(checkValue(color));
 	}
 
 	/**

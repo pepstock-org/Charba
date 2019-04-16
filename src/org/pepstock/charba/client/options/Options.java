@@ -339,7 +339,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param defaultColor color to use into chart.
 	 */
 	public void setDefaultColor(IsColor defaultColor) {
-		setDefaultColor(defaultColor.toRGBA());
+		setDefaultColor(checkValue(defaultColor));
 	}
 
 	/**
@@ -375,7 +375,7 @@ public class Options extends AbstractModel<Options, IsDefaultOptions> implements
 	 * @param defaultFontColor font color to use into chart.
 	 */
 	public void setDefaultFontColor(IsColor defaultFontColor) {
-		setDefaultFontColor(defaultFontColor.toRGBA());
+		setDefaultFontColor(checkValue(defaultFontColor));
 	}
 
 	/**

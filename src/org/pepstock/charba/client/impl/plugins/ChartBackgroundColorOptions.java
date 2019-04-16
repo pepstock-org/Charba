@@ -206,7 +206,7 @@ public final class ChartBackgroundColorOptions extends NativeObjectContainer {
 	 * @param color the background color.
 	 */
 	public void setBackgroundColor(IsColor color) {
-		setBackgroundColor(color.toRGBA());
+		setBackgroundColor(checkValue(color));
 	}
 
 	/**

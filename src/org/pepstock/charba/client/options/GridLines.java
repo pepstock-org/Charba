@@ -348,7 +348,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 * @param zeroLineColor Stroke color of the grid line for the first index (index 0).
 	 */
 	public void setZeroLineColor(IsColor zeroLineColor) {
-		setZeroLineColor(zeroLineColor.toRGBA());
+		setZeroLineColor(checkValue(zeroLineColor));
 	}
 
 	/**

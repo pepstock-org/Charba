@@ -210,7 +210,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param backgroundColor background color of the tooltip.
 	 */
 	public void setBackgroundColor(IsColor backgroundColor) {
-		setBackgroundColor(backgroundColor.toRGBA());
+		setBackgroundColor(checkValue(backgroundColor));
 	}
 
 	/**
@@ -328,7 +328,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param titleFontColor title font color.
 	 */
 	public void setTitleFontColor(IsColor titleFontColor) {
-		setTitleFontColor(titleFontColor.toRGBA());
+		setTitleFontColor(checkValue(titleFontColor));
 	}
 
 	/**
@@ -486,7 +486,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param bodyFontColor body font color.
 	 */
 	public void setBodyFontColor(IsColor bodyFontColor) {
-		setBodyFontColor(bodyFontColor.toRGBA());
+		setBodyFontColor(checkValue(bodyFontColor));
 	}
 
 	/**
@@ -624,7 +624,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param footerFontColor footer font color.
 	 */
 	public void setFooterFontColor(IsColor footerFontColor) {
-		setFooterFontColor(footerFontColor.toRGBA());
+		setFooterFontColor(checkValue(footerFontColor));
 	}
 
 	/**
@@ -802,7 +802,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param multiKeyBackground color to draw behind the colored boxes when multiple items are in the tooltip.
 	 */
 	public void setMultiKeyBackground(IsColor multiKeyBackground) {
-		setMultiKeyBackground(multiKeyBackground.toRGBA());
+		setMultiKeyBackground(checkValue(multiKeyBackground));
 	}
 
 	/**
@@ -860,7 +860,7 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 * @param borderColor color of the border.
 	 */
 	public void setBorderColor(IsColor borderColor) {
-		setBorderColor(borderColor.toRGBA());
+		setBorderColor(checkValue(borderColor));
 	}
 
 	/**
