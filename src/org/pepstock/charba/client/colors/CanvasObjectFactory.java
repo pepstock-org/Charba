@@ -63,20 +63,8 @@ public abstract class CanvasObjectFactory {
 	 * @return a GWT canvas pattern
 	 */
 	public final CanvasPattern createPattern(IsChart chart, Pattern pattern) {
-		// checks if chart is consistent
-		if (chart == null) {
-			// if here,
-			// chart is null
-			// then throws an exception
-			throw new IllegalArgumentException("Chart is null");
-		}
-		// checks if pattern is consistent
-		if (pattern == null) {
-			// if here,
-			// pattern is null
-			// then throws an exception
-			throw new IllegalArgumentException("Pattern is null");
-		}
+		// checks if arguments are consistent
+		checkArgumentsConsistency(chart, pattern);
 		// map instance
 		final Map<Integer, CanvasPattern> patternsMap;
 		// checks if the pattern is already created
@@ -146,20 +134,8 @@ public abstract class CanvasObjectFactory {
 	 * @return a GWT canvas gradient
 	 */
 	public final CanvasGradient createGradient(IsChart chart, Gradient gradient, int datasetIndex, int index) {
-		// checks if chart is consistent
-		if (chart == null) {
-			// if here,
-			// chart is null
-			// then throws an exception
-			throw new IllegalArgumentException("Chart is null");
-		}
-		// checks if gradient is consistent
-		if (gradient == null) {
-			// if here,
-			// gradient is null
-			// then throws an exception
-			throw new IllegalArgumentException("Gradient is null");
-		}
+		// checks if arguments are consistent
+		checkArgumentsConsistency(chart, gradient);
 		// checks if the gradient is already created
 		final Map<Integer, CanvasGradient> gradientsMap;
 		// checks if the gradient is already created
@@ -376,6 +352,29 @@ public abstract class CanvasObjectFactory {
 		// returns GWT canvas gradient
 		// by GWT context 2d method
 		return context.createRadialGradient(x0, y0, r0, x1, y1, r1);
+	}
+	
+	/**
+	 * Checks consistency of arguments if not <code>null</code>. If not consistent, throws an {@link IllegalArgumentException}.
+	 * 
+	 * @param chart chart instance
+	 * @param canvasObject cnavas object (patter or gradient) instance
+	 */
+	private void checkArgumentsConsistency(IsChart chart, Object canvasObject) {
+		// checks if chart is consistent
+		if (chart == null) {
+			// if here,
+			// chart is null
+			// then throws an exception
+			throw new IllegalArgumentException("Chart is null");
+		}
+		// checks if canvas object is consistent
+		if (canvasObject == null) {
+			// if here,
+			// canvas oObject is null
+			// then throws an exception
+			throw new IllegalArgumentException("CanvasObject is null");
+		}
 	}
 
 	/**
