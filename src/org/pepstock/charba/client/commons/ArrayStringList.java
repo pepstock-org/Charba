@@ -228,7 +228,7 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 			return array.indexOf(object.toString());
 		}
 		// if here, argument not consistent
-		return -1;
+		return AbstractArrayList.NOT_FOUND;
 	}
 
 	/**
@@ -242,7 +242,7 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 			return array.lastIndexOf(object.toString());
 		}
 		// if here, argument not consistent
-		return -1;
+		return AbstractArrayList.NOT_FOUND;
 	}
 
 	/*

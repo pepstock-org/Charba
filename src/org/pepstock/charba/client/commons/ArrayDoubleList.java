@@ -229,7 +229,7 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 			// check index of
 			return array.indexOf(doubleInstance.doubleValue());
 		}
-		return -1;
+		return AbstractArrayList.NOT_FOUND;
 	}
 
 	/**
@@ -244,7 +244,7 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 			// check last index of
 			return array.lastIndexOf(doubleInstance.doubleValue());
 		}
-		return -1;
+		return AbstractArrayList.NOT_FOUND;
 	}
 
 	/*

@@ -230,7 +230,7 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 			return array.indexOf(value);
 		}
 		// if here, element is not consistent
-		return -1;
+		return AbstractArrayList.NOT_FOUND;
 	}
 
 	/**
@@ -246,6 +246,6 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 			return array.lastIndexOf(value);
 		}
 		// if here, element is not consistent
-		return -1;
+		return AbstractArrayList.NOT_FOUND;
 	}
 }

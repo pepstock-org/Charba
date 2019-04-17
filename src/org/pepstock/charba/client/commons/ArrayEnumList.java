@@ -188,7 +188,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 				return array.indexOf(value.value());
 			}
 		}
-		return -1;
+		return AbstractArrayList.NOT_FOUND;
 	}
 
 	/**
@@ -207,7 +207,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 				return array.lastIndexOf(value.value());
 			}
 		}
-		return -1;
+		return AbstractArrayList.NOT_FOUND;
 	}
 
 	/**

@@ -229,7 +229,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 			// check index of
 			return array.indexOf(value.intValue());
 		}
-		return -1;
+		return AbstractArrayList.NOT_FOUND;
 	}
 
 	/**
@@ -244,7 +244,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 			// check last index of
 			return array.lastIndexOf(value.intValue());
 		}
-		return -1;
+		return AbstractArrayList.NOT_FOUND;
 	}
 
 	/*

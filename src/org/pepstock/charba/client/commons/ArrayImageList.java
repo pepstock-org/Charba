@@ -234,7 +234,7 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 			// check index of
 			return array.indexOf(value);
 		}
-		return -1;
+		return AbstractArrayList.NOT_FOUND;
 	}
 
 	/**
@@ -249,6 +249,6 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 			// check last index of
 			return array.lastIndexOf(value);
 		}
-		return -1;
+		return AbstractArrayList.NOT_FOUND;
 	}
 }

@@ -248,7 +248,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 			return delegate.indexOf(object);
 		}
 		// if here, element is not consistent
-		return -1;
+		return AbstractArrayList.NOT_FOUND;
 	}
 
 	/**
@@ -262,7 +262,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 			return delegate.lastIndexOf(object);
 		}
 		// if here, element is not consistent
-		return -1;
+		return AbstractArrayList.NOT_FOUND;
 	}
 
 	/**
