@@ -81,7 +81,9 @@ public abstract class NativeObjectContainer {
 	 * @return <code>true</code> if the embedded JavaScript object contains an element at specific property
 	 */
 	protected final boolean has(Key key) {
-		return nativeObject.hasProperty(key.value());
+		// checks arguments if consistent
+		// if not consistent, returns not found
+		return Key.isValid(key) ? nativeObject.hasProperty(key.value()) : false;
 	}
 
 	/**
@@ -91,15 +93,20 @@ public abstract class NativeObjectContainer {
 	 * @return <code>true</code> if the embedded JavaScript object contains an element at all properties.
 	 */
 	protected final boolean has(Key... keys) {
-		// scans keys
-		for (Key key : keys) {
-			// if one is not present
-			// returns false
-			if (!has(key)) {
-				return false;
+		// checks arguments if consistent
+		if (keys != null && keys.length > 0) {
+			// scans keys
+			for (Key key : keys) {
+				// if one is not present
+				// returns false
+				if (!has(key)) {
+					return false;
+				}
 			}
+			return true;
 		}
-		return true;
+		// if here, argument is not consistent
+		return false;
 	}
 
 	/**
@@ -125,7 +132,9 @@ public abstract class NativeObjectContainer {
 	 * @return the java script type of the property.
 	 */
 	protected final ObjectType type(Key key) {
-		return JsHelper.get().typeOf(nativeObject, key.value());
+		// checks arguments if consistent
+		// if not consistent, returns undefined
+		return Key.isValid(key) ? JsHelper.get().typeOf(nativeObject, key.value()) : ObjectType.UNDEFINED;
 	}
 
 	/**
@@ -147,7 +156,11 @@ public abstract class NativeObjectContainer {
 	 * @param key key of the property of JavaScript object.
 	 */
 	protected final void remove(Key key) {
-		nativeObject.removeProperty(key.value());
+		// checks arguments if consistent
+		// if not consistent, do nothing
+		if (Key.isValid(key)) {
+			nativeObject.removeProperty(key.value());
+		}
 	}
 
 	/**
@@ -156,10 +169,13 @@ public abstract class NativeObjectContainer {
 	 * @param keys set of keys of the properties of JavaScript object.
 	 */
 	protected final void remove(Key... keys) {
-		// scans all keys
-		for (Key key : keys) {
-			// removes if exists
-			removeIfExists(key);
+		// checks arguments if consistent
+		if (keys != null && keys.length > 0) {
+			// scans all keys
+			for (Key key : keys) {
+				// removes if exists
+				removeIfExists(key);
+			}
 		}
 	}
 
@@ -173,6 +189,10 @@ public abstract class NativeObjectContainer {
 	 * @param value value to be set
 	 */
 	protected final void setValue(Key key, int value) {
+		// checks if the key is consistent
+		// if not, exception
+		Key.checkIfValid(key);
+		// if here, key is consistent
 		nativeObject.defineIntProperty(key.value(), value);
 	}
 
@@ -228,12 +248,14 @@ public abstract class NativeObjectContainer {
 	 * @return value of the property (by array)
 	 */
 	protected final ArrayInteger getValueOrArray(Key key, int defaultValue) {
+		// gets object type of key
+		ObjectType type = type(key);
 		// checks if property type
-		if (ObjectType.NUMBER.equals(type(key))) {
+		if (ObjectType.NUMBER.equals(type)) {
 			// if here, is a single value, therefore creates an array
 			// with only 1 element
 			return ArrayInteger.fromOrEmpty(getValue(key, defaultValue));
-		} else if (ObjectType.ARRAY.equals(type(key))) {
+		} else if (ObjectType.ARRAY.equals(type)) {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
 		}
@@ -251,6 +273,10 @@ public abstract class NativeObjectContainer {
 	 * @param value value to be set
 	 */
 	protected final void setValue(Key key, double value) {
+		// checks if the key is consistent
+		// if not, exception
+		Key.checkIfValid(key);
+		// if here, key is consistent
 		nativeObject.defineDoubleProperty(key.value(), value);
 	}
 
@@ -306,12 +332,14 @@ public abstract class NativeObjectContainer {
 	 * @return value of the property (by array)
 	 */
 	protected final ArrayDouble getValueOrArray(Key key, double defaultValue) {
+		// gets object type of key
+		ObjectType type = type(key);
 		// checks if property type
-		if (ObjectType.NUMBER.equals(type(key))) {
+		if (ObjectType.NUMBER.equals(type)) {
 			// if here, is a single value, therefore creates an array
 			// with only 1 element
 			return ArrayDouble.fromOrEmpty(getValue(key, defaultValue));
-		} else if (ObjectType.ARRAY.equals(type(key))) {
+		} else if (ObjectType.ARRAY.equals(type)) {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
 		}
@@ -329,6 +357,10 @@ public abstract class NativeObjectContainer {
 	 * @param value value to be set
 	 */
 	protected final void setValue(Key key, boolean value) {
+		// checks if the key is consistent
+		// if not, exception
+		Key.checkIfValid(key);
+		// if here, key is consistent
 		nativeObject.defineBooleanProperty(key.value(), value);
 	}
 
@@ -386,6 +418,10 @@ public abstract class NativeObjectContainer {
 			// removes property if the property exists
 			removeIfExists(key);
 		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
 			// sets value
 			nativeObject.defineStringProperty(key.value(), value);
 		}
@@ -424,12 +460,14 @@ public abstract class NativeObjectContainer {
 	 * @return value of the property (by array)
 	 */
 	protected final ArrayString getValueOrArray(Key key, String defaultValue) {
+		// gets object type of key
+		ObjectType type = type(key);
 		// checks if property type
-		if (ObjectType.STRING.equals(type(key))) {
+		if (ObjectType.STRING.equals(type)) {
 			// if here, is a single value, therefore creates an array
 			// with only 1 element
 			return ArrayString.fromOrEmpty(getValue(key, defaultValue));
-		} else if (ObjectType.ARRAY.equals(type(key))) {
+		} else if (ObjectType.ARRAY.equals(type)) {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
 		}
@@ -473,6 +511,10 @@ public abstract class NativeObjectContainer {
 			// removes property if the property exists
 			removeIfExists(key);
 		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
 			// sets value
 			nativeObject.defineDateProperty(key.value(), JsDate.create((double) value.getTime()));
 		}
@@ -512,6 +554,10 @@ public abstract class NativeObjectContainer {
 			// removes property if the property exists
 			removeIfExists(key);
 		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
 			// sets value
 			nativeObject.defineObjectProperty(key.value(), value);
 		}
@@ -533,6 +579,10 @@ public abstract class NativeObjectContainer {
 			// removes property if the property exists
 			removeIfExists(key);
 		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
 			// sets value
 			nativeObject.defineObjectProperty(key.value(), value.getNativeObject());
 		}
@@ -551,6 +601,10 @@ public abstract class NativeObjectContainer {
 			// removes property if the property exists
 			removeIfExists(key);
 		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
 			// sets value
 			nativeObject.defineArrayProperty(key.value(), container.getArray());
 		}
@@ -572,6 +626,10 @@ public abstract class NativeObjectContainer {
 			// removes property if the property exists
 			removeIfExists(key);
 		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
 			// sets value
 			nativeObject.defineCallbackProperty(key.value(), value);
 		}
@@ -612,6 +670,10 @@ public abstract class NativeObjectContainer {
 			// removes property if the property exists
 			removeIfExists(key);
 		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
 			// sets value
 			nativeObject.defineImageProperty(key.value(), value);
 		}
@@ -650,12 +712,14 @@ public abstract class NativeObjectContainer {
 	 * @return value of the property (by array)
 	 */
 	protected final ArrayImage getValueOrArray(Key key, ImageElement defaultValue) {
+		// gets object type of key
+		ObjectType type = type(key);
 		// checks if property type
-		if (ObjectType.OBJECT.equals(type(key))) {
+		if (ObjectType.OBJECT.equals(type)) {
 			// if here, is a single value, therefore creates an array
 			// with only 1 element
 			return ArrayImage.fromOrEmpty(getValue(key, defaultValue));
-		} else if (ObjectType.ARRAY.equals(type(key))) {
+		} else if (ObjectType.ARRAY.equals(type)) {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
 		}
@@ -698,6 +762,10 @@ public abstract class NativeObjectContainer {
 			// removes property if the property exists
 			removeIfExists(key);
 		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
 			// sets value
 			nativeObject.defineGradientProperty(key.value(), value);
 		}
@@ -736,12 +804,14 @@ public abstract class NativeObjectContainer {
 	 * @return value of the property (by array) or an empty array if not exist
 	 */
 	protected final ArrayGradient getValueOrArray(Key key, CanvasGradient defaultValue) {
+		// gets object type of key
+		ObjectType type = type(key);
 		// checks if property type
-		if (ObjectType.OBJECT.equals(type(key))) {
+		if (ObjectType.OBJECT.equals(type)) {
 			// if here, is a single value, therefore creates an array
 			// with only 1 element
 			return ArrayGradient.fromOrEmpty(getValue(key, defaultValue));
-		} else if (ObjectType.ARRAY.equals(type(key))) {
+		} else if (ObjectType.ARRAY.equals(type)) {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
 		}
@@ -784,6 +854,10 @@ public abstract class NativeObjectContainer {
 			// removes property if the property exists
 			removeIfExists(key);
 		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
 			// sets value
 			nativeObject.definePatternProperty(key.value(), value);
 		}
@@ -822,12 +896,14 @@ public abstract class NativeObjectContainer {
 	 * @return value of the property (by array)
 	 */
 	protected final ArrayPattern getValueOrArray(Key key, CanvasPattern defaultValue) {
+		// gets object type of key
+		ObjectType type = type(key);
 		// checks if property type
-		if (ObjectType.OBJECT.equals(type(key))) {
+		if (ObjectType.OBJECT.equals(type)) {
 			// if here, is a single value, therefore creates an array
 			// with only 1 element
 			return ArrayPattern.fromOrEmpty(getValue(key, defaultValue));
-		} else if (ObjectType.ARRAY.equals(type(key))) {
+		} else if (ObjectType.ARRAY.equals(type)) {
 			// if here, is an array, therefore return it
 			return getArrayValue(key);
 		}
@@ -873,6 +949,10 @@ public abstract class NativeObjectContainer {
 			// removes property if the property exists
 			removeIfExists(key);
 		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
 			// sets value
 			nativeObject.defineStringProperty(key.value(), value.value());
 		}
@@ -912,7 +992,8 @@ public abstract class NativeObjectContainer {
 	 */
 	protected final ArrayString getValueOrArray(Key key, Key defaultValue) {
 		// the same logic as a string
-		return getValueOrArray(key, defaultValue.value());
+		// checks if default value is consistent
+		return getValueOrArray(key, Key.isValid(defaultValue) ? defaultValue.value() : null);
 	}
 
 	// ------------------------------------------
@@ -952,6 +1033,10 @@ public abstract class NativeObjectContainer {
 			// removes property if the property exists
 			removeIfExists(key);
 		} else {
+			// checks if the key is consistent
+			// if not, exception
+			Key.checkIfValid(key);
+			// if here, key is consistent
 			// sets value
 			nativeObject.defineArrayProperty(key.value(), value);
 		}

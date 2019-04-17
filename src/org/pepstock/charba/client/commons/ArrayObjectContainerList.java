@@ -53,7 +53,7 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 		} else if (factory == null) {
 			// factory is not consistent and array is consistent EXCEPTION
 			// factory is mandatory to initialize the list creating the elements from native object
-			throw new UnsupportedOperationException("Unable to create NativeObjectContainer without a factory");
+			throw new IllegalArgumentException("Unable to create NativeObjectContainer without a factory which is null");
 		} else {
 			// uses an existing array
 			this.array = array;
@@ -88,10 +88,13 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	 * @param values an array of elements to be loaded
 	 */
 	public void addAll(E[] values) {
-		// scans all elements
-		for (E val : values) {
-			// adds
-			add(val);
+		// checks if arguments are consistent
+		if (values != null && values.length > 0) {
+			// scans all elements
+			for (E val : values) {
+				// adds
+				add(val);
+			}
 		}
 	}
 
@@ -115,8 +118,8 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	 * Returns true if this list contains the specified element.
 	 */
 	@Override
-	public boolean contains(Object o) {
-		return delegate.contains(o);
+	public boolean contains(Object object) {
+		return delegate.contains(object);
 	}
 
 	/**
@@ -131,23 +134,30 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	 * Appends the specified element to the end of this list
 	 */
 	@Override
-	public boolean add(E e) {
-		// adds to linked list
-		boolean added = delegate.add(e);
-		// if added
-		if (added) {
-			// adds to JS array
-			array.push(e.getNativeObject());
+	public boolean add(E element) {
+		// checks if element is consistent
+		if (element != null) {
+			// adds to linked list
+			boolean added = delegate.add(element);
+			// if added
+			if (added) {
+				// adds to JS array
+				array.push(element.getNativeObject());
+			}
+			return added;
 		}
-		return added;
+		// if here, element is not consistent
+		// and not added
+		return false;
 	}
 
 	/**
 	 * Returns true if this list contains all of the elements of the specified collection.
 	 */
 	@Override
-	public boolean containsAll(Collection<?> c) {
-		return delegate.containsAll(c);
+	public boolean containsAll(Collection<?> collection) {
+		// checks if argument is consistent
+		return collection != null ? delegate.containsAll(collection) : false;
 	}
 
 	/**
@@ -155,19 +165,17 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	 * the specified collection's iterator
 	 */
 	@Override
-	public boolean addAll(Collection<? extends E> c) {
+	public boolean addAll(Collection<? extends E> collection) {
 		// set modified checking if collection is empty
-		boolean modified = !c.isEmpty();
-		Iterator<? extends E> e = c.iterator();
-		// scans all elements
-		while (e.hasNext()) {
-			// if adds
-			if (add(e.next())) {
+		boolean modified = collection != null && !collection.isEmpty();
+		// checks if argument is consistent
+		if (modified) {
+			Iterator<? extends E> iter = collection.iterator();
+			// scans all elements
+			while (iter.hasNext()) {
+				// adds and
 				// sets modified
-				modified &= true;
-			} else {
-				// sets false!
-				modified = false;
+				modified = modified && add(iter.next());
 			}
 		}
 		return modified;
@@ -200,8 +208,8 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	 */
 	@Override
 	public E set(int index, E element) {
-		// checks range
-		if (checkRange(index)) {
+		// checks element is consistent and in range
+		if (element != null && checkRange(index)) {
 			// sets to linked list
 			E old = delegate.set(index, element);
 			// sets on JS array
@@ -219,8 +227,12 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	 */
 	@Override
 	public void add(int index, E element) {
-		delegate.add(index, element);
-		array.insertAt(index, element.getNativeObject());
+		// checks if element is consistent
+		if (element != null) {
+			// adds element
+			delegate.add(index, element);
+			array.insertAt(index, element.getNativeObject());
+		}
 	}
 
 	/**
@@ -233,11 +245,11 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 		// checks range
 		if (checkRange(index)) {
 			// removes from LinkedList
-			E elem = delegate.remove(index);
+			E old = delegate.remove(index);
 			// removes from JS array
 			array.remove(index);
 			// returns old value
-			return elem;
+			return old;
 		}
 		return null;
 	}
@@ -247,8 +259,13 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	 * element.
 	 */
 	@Override
-	public int indexOf(Object o) {
-		return delegate.indexOf(o);
+	public int indexOf(Object object) {
+		// checks if argument is consistent
+		if (object != null) {
+			return delegate.indexOf(object);
+		}
+		// if here, element is not consistent
+		return -1;
 	}
 
 	/**
@@ -256,8 +273,13 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	 * element.
 	 */
 	@Override
-	public int lastIndexOf(Object o) {
-		return delegate.lastIndexOf(o);
+	public int lastIndexOf(Object object) {
+		// checks if argument is consistent
+		if (object != null) {
+			return delegate.lastIndexOf(object);
+		}
+		// if here, element is not consistent
+		return -1;
 	}
 
 	/**

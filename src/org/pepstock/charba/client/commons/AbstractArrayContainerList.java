@@ -32,9 +32,9 @@ abstract class AbstractArrayContainerList<E, A extends Array> extends AbstractAr
 	 * In other words, removes from this list all of its elements that are not contained in the specified collection.
 	 */
 	@Override
-	public final boolean retainAll(Collection<?> c) {
+	public final boolean retainAll(Collection<?> collection) {
 		// set modified checking if collection is empty
-		boolean modified = !c.isEmpty();
+		boolean modified = (collection != null) && !collection.isEmpty();
 		if (modified) {
 			// creates a copy of elements
 			List<E> contained = new ArrayList<>();
@@ -43,7 +43,7 @@ abstract class AbstractArrayContainerList<E, A extends Array> extends AbstractAr
 				E value = get(i);
 				// checks if not present into
 				// passed collection
-				if (!c.contains(get(i))) {
+				if (!collection.contains(value)) {
 					// adds to temporary list
 					contained.add(value);
 				}

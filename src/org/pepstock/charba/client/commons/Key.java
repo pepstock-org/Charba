@@ -29,6 +29,31 @@ public interface Key {
 	 * @return the name value of property
 	 */
 	String value();
+	
+	/**
+	 * Returns <code>true</code> if key passed as argument is not <code>null</code> and its value is not <code>null</code>
+	 * as well.
+	 * 
+	 * @param key key to be checked
+	 * @return <code>true</code> if key passed as argument is not <code>null</code> and its value is not <code>null</code>
+	 *         as well.
+	 */
+	public static boolean isValid(Key key) {
+		return key != null && key.value() != null;
+	}
+	
+	/**
+	 * Checks if key passed as argument is not <code>null</code> and its value is not <code>null</code>
+	 * as well. If not, throw a {@link IllegalArgumentException}.
+	 * 
+	 * @param key key to be checked
+	 */
+	public static void checkIfValid(Key key) {
+		if (!isValid(key)) {
+			throw new IllegalArgumentException("Key implementation instance is null");
+		}
+	}
+
 
 	/**
 	 * Returns <code>true</code> if a key into an enumeration is related to the value, otherwise <code>false</code>.

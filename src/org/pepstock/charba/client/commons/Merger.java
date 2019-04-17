@@ -189,6 +189,8 @@ public final class Merger {
 	 * @return the added java script object
 	 */
 	public NativeObject merge(NativeObjectContainer target, NativeObjectContainer source, String property) {
+		// checks if arguments are consistent
+		checkArgumentsConsistency(target, source, property);
 		return merge(target.getNativeObject(), source.getNativeObject(), property);
 	}
 
@@ -204,6 +206,8 @@ public final class Merger {
 	 * @return the added java script object
 	 */
 	public NativeObject merge(NativeObject target, NativeObjectContainer source, String property) {
+		// checks if arguments are consistent
+		checkArgumentsConsistency(target, source, property);
 		return merge(target, source.getNativeObject(), property);
 	}
 
@@ -219,6 +223,8 @@ public final class Merger {
 	 * @return the added java script object
 	 */
 	public NativeObject merge(NativeObjectContainer target, NativeObject source, String property) {
+		// checks if arguments are consistent
+		checkArgumentsConsistency(target, source, property);
 		return merge(target.getNativeObject(), source, property);
 	}
 
@@ -234,6 +240,23 @@ public final class Merger {
 	 * @return the added java script object
 	 */
 	public NativeObject merge(NativeObject target, NativeObject source, String property) {
+		// checks if arguments are consistent
+		checkArgumentsConsistency(target, source, property);
+		return internalMerge(target, source, property);
+	}
+
+	/**
+	 * Copies <code>source</code> properties (creating a new java script object and setting the <code>source</code> one with the
+	 * property argument) into <code>target</code> only if not defined in target.<br>
+	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.<br>
+	 * The property is
+	 * 
+	 * @param target The target object in which <code>source</code> is merged into.
+	 * @param source Object to merge into <code>target</code>.
+	 * @param property property of root java script object to add
+	 * @return the added java script object
+	 */
+	private NativeObject internalMerge(NativeObject target, NativeObject source, String property) {
 		// creates new root object
 		NativeObject newObject = new NativeObject();
 		// stores configuration
@@ -241,7 +264,6 @@ public final class Merger {
 		// invokes CHART.JS to merge
 		return mergeNativeObjects(target, newObject);
 	}
-
 	/**
 	 * Copies <code>source</code> properties into <code>target</code> only if not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.
@@ -254,4 +276,17 @@ public final class Merger {
 		return newObject == null ? new NativeObject() : newObject;
 	}
 
+	/**
+	 * Checks if arguments are not <code>null</code> or not consistent. If not consistent, throws an {@link IllegalArgumentException}.
+	 *  
+	 * @param target The target object in which <code>source</code> is merged into.
+	 * @param source Object to merge into <code>target</code>.
+	 * @param property property of root java script object to add
+	 */
+	private void checkArgumentsConsistency(Object target, Object source, String property) {
+		// checks if arguments are not consistent
+		if (target == null || source == null || property == null || property.trim().length() == 0) {
+			throw new IllegalArgumentException("Argurments of merge are null or not consistent");
+		}
+	}
 }

@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.events.ChartNativeEvent;
+import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.resources.ResourcesType;
 
 import com.google.gwt.canvas.dom.client.Context2d;
@@ -68,7 +69,9 @@ public final class JsHelper {
 	 * @return a list of strings with element attributes
 	 */
 	public List<String> elementAttributes(Element element) {
-		ArrayString array = NativeJsHelper.elementAttributes(element);
+		// checks if arguments is consistent
+		// if not, uses a null element for array string
+		ArrayString array = element != null ? NativeJsHelper.elementAttributes(element) : null;
 		return ArrayListHelper.unmodifiableList(array);
 	}
 
@@ -131,10 +134,15 @@ public final class JsHelper {
 	 * 
 	 * @param object the object on which to define the property.
 	 * @param key the string name of the property to be defined or modified..
-	 * @return integer value
+	 * @return integer value or {@link UndefinedValues#INTEGER} if arguments are not consistent
 	 */
 	public int propertyAsInt(Object object, String key) {
-		return NativeJsHelper.propertyAsInt(object, key);
+		// checks consistency of arguments
+		if (object != null && key != null) {
+			return NativeJsHelper.propertyAsInt(object, key);
+		}
+		// if here, arguments not consistent
+		return UndefinedValues.INTEGER;
 	}
 
 	/**
@@ -142,10 +150,15 @@ public final class JsHelper {
 	 * 
 	 * @param object the object on which to define the property.
 	 * @param key the string name of the property to be defined or modified..
-	 * @return double value
+	 * @return double value or {@link UndefinedValues#DOUBLE} if arguments are not consistent
 	 */
 	public double propertyAsDouble(Object object, String key) {
-		return NativeJsHelper.propertyAsDouble(object, key);
+		// checks consistency of arguments
+		if (object != null && key != null) {
+			return NativeJsHelper.propertyAsDouble(object, key);
+		}
+		// if here, arguments not consistent
+		return UndefinedValues.DOUBLE;
 	}
 
 	/**
@@ -153,10 +166,15 @@ public final class JsHelper {
 	 * 
 	 * @param object the object on which to define the property.
 	 * @param key the string name of the property to be defined or modified..
-	 * @return string value
+	 * @return string value or {@link UndefinedValues#STRING} if arguments are not consistent
 	 */
 	public String propertyAsString(Object object, String key) {
-		return NativeJsHelper.propertyAsString(object, key);
+		// checks consistency of arguments
+		if (object != null && key != null) {
+			return NativeJsHelper.propertyAsString(object, key);
+		}
+		// if here, arguments not consistent
+		return UndefinedValues.STRING;
 	}
 
 	/**
@@ -167,6 +185,7 @@ public final class JsHelper {
 	 * @param object array of values that specify alternating lengths of lines and gaps which describe the pattern
 	 */
 	public void setLineDash(Context2d context, ArrayInteger object) {
+		// checks consistency of arguments
 		if (context != null && object != null) {
 			NativeJsHelper.setLineDash(context, object);
 		}
@@ -180,9 +199,11 @@ public final class JsHelper {
 	 * @return a chart native event
 	 */
 	public ChartNativeEvent nativeEvent(NativeObject event, String key) {
+		// checks consistency of arguments
 		if (event != null && key != null) {
 			return NativeJsHelper.nativeEvent(event, key);
 		}
+		// if here, arguments not consistent
 		return null;
 	}
 

@@ -26,7 +26,7 @@ import java.util.NoSuchElementException;
  * @author Andrea "Stock" Stocchero
  * @param <E> type of list
  */
-public class ListIteratorImpl<E> extends IteratorImpl<E> implements ListIterator<E> {
+public final class ListIteratorImpl<E> extends IteratorImpl<E> implements ListIterator<E> {
 
 	/**
 	 * Creates an iterator of a list

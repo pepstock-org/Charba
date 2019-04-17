@@ -72,10 +72,13 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 	 * @param values an array of elements to be loaded
 	 */
 	public void addAll(NativeObject... values) {
-		// scans all elements
-		for (NativeObject val : values) {
-			// adds
-			add(val);
+		// checks if arguments are consistent
+		if (values != null && values.length > 0) {
+			// scans all elements
+			for (NativeObject val : values) {
+				// adds
+				add(val);
+			}
 		}
 	}
 
@@ -83,9 +86,16 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 	 * Appends the specified element to the end of this list
 	 */
 	@Override
-	public boolean add(NativeObject e) {
-		array.push(e);
-		return true;
+	public boolean add(NativeObject element) {
+		// checks if element is consistent
+		if (element != null) {
+			// adds to JS array
+			array.push(element);
+			return true;
+		}
+		// if here, element is not consistent
+		// and not added
+		return false;
 	}
 
 	/**
@@ -93,10 +103,10 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 	 * the specified collection's iterator
 	 */
 	@Override
-	public boolean addAll(Collection<? extends NativeObject> c) {
+	public boolean addAll(Collection<? extends NativeObject> collection) {
 		// set modified
 		boolean modified = false;
-		Iterator<? extends NativeObject> e = c.iterator();
+		Iterator<? extends NativeObject> e = collection.iterator();
 		// scans all elements
 		while (e.hasNext()) {
 			// adds
@@ -112,9 +122,10 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 	 * In other words, removes from this list all of its elements that are not contained in the specified collection.
 	 */
 	@Override
-	public boolean retainAll(Collection<?> c) {
+	public boolean retainAll(Collection<?> collection) {
 		// set modified checking if collection is empty
-		boolean modified = !c.isEmpty();
+		boolean modified = collection != null && !collection.isEmpty();
+		// checks if argument is consistent
 		if (modified) {
 			// creates a copy of elements
 			List<NativeObject> contained = new ArrayList<>();
@@ -123,7 +134,7 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 				NativeObject value = get(i);
 				// checks if not present into
 				// passed collection
-				if (!c.contains(get(i))) {
+				if (!collection.contains(value)) {
 					// adds to temporary list
 					contained.add(value);
 				}
@@ -166,8 +177,8 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 	 */
 	@Override
 	public NativeObject set(int index, NativeObject element) {
-		// checks range
-		if (checkRange(index)) {
+		// checks element is consistent and in range
+		if (element != null && checkRange(index)) {
 			// gets current element at that index
 			NativeObject old = array.get(index);
 			// replaces with new element
@@ -185,7 +196,11 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 	 */
 	@Override
 	public void add(int index, NativeObject element) {
-		array.insertAt(index, element);
+		// checks if element is consistent
+		if (element != null) {
+			// adds element
+			array.insertAt(index, element);
+		}
 	}
 
 	/**
@@ -207,8 +222,13 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 	 * element.
 	 */
 	@Override
-	public int indexOf(Object o) {
-		return array.indexOf(o);
+	public int indexOf(Object object) {
+		// checks if argument is consistent
+		if (object != null) {
+			return array.indexOf(object);
+		}
+		// if here, element is not consistent
+		return -1;
 	}
 
 	/**
@@ -216,7 +236,12 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 	 * element.
 	 */
 	@Override
-	public int lastIndexOf(Object o) {
-		return array.lastIndexOf(o);
+	public int lastIndexOf(Object object) {
+		// checks if argument is consistent
+		if (object != null) {
+			return array.lastIndexOf(object);
+		}
+		// if here, element is not consistent
+		return -1;
 	}
 }

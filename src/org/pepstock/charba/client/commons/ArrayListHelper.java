@@ -40,14 +40,12 @@ public final class ArrayListHelper {
 	 * Creates a array list of doubles by a java script array of doubles.
 	 * 
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of doubles instance or <code>null</code> if the array is null.
+	 * @return a array list of doubles instance
 	 */
 	public static ArrayDoubleList list(ArrayDouble values) {
-		// checks if array is null
-		if (values == null) {
-			return new ArrayDoubleList();
-		}
 		// creates the list
+		// if values not consistent
+		// creates an empty list
 		return new ArrayDoubleList(values);
 	}
 
@@ -55,14 +53,12 @@ public final class ArrayListHelper {
 	 * Creates a array list of integers by a java script array of integers.
 	 * 
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of integers instance or <code>null</code> if the array is null.
+	 * @return a array list of integers instance
 	 */
 	public static ArrayIntegerList list(ArrayInteger values) {
-		// checks if array is null
-		if (values == null) {
-			return new ArrayIntegerList();
-		}
 		// creates the list
+		// if values not consistent
+		// creates an empty list
 		return new ArrayIntegerList(values);
 	}
 
@@ -70,14 +66,12 @@ public final class ArrayListHelper {
 	 * Creates a array list of strings by a java script array of strings.
 	 * 
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of strings instance or <code>null</code> if the array is null.
+	 * @return a array list of strings instance
 	 */
 	public static ArrayStringList list(ArrayString values) {
-		// checks if array is null
-		if (values == null) {
-			return new ArrayStringList();
-		}
 		// creates the list
+		// if values not consistent
+		// creates an empty list
 		return new ArrayStringList(values);
 	}
 
@@ -85,14 +79,12 @@ public final class ArrayListHelper {
 	 * Creates a array list of images by a java script array of images.
 	 * 
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of images instance or <code>null</code> if the array is null.
+	 * @return a array list of images instance
 	 */
 	public static ArrayImageList list(ArrayImage values) {
-		// checks if array is null
-		if (values == null) {
-			return new ArrayImageList();
-		}
 		// creates the list
+		// if values not consistent
+		// creates an empty list
 		return new ArrayImageList(values);
 	}
 
@@ -100,22 +92,13 @@ public final class ArrayListHelper {
 	 * Creates a array list of strings by an array of colors (instance of {@link org.pepstock.charba.client.colors.IsColor}).
 	 * 
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of strings instance or <code>null</code> if the array is null.
+	 * @return a array list of strings instance
 	 */
 	public static ArrayStringList list(IsColor... values) {
 		// creates the list
-		ArrayStringList result = new ArrayStringList();
-		// checks if array is null
-		if (values == null) {
-			return result;
-		}
-		// scans all colors
-		for (IsColor color : values) {
-			// adds RGBA value as element
-			result.add(color.toRGBA());
-		}
-		// returns the list
-		return result;
+		// if values not consistent
+		// creates an empty list
+		return new ArrayStringList(ArrayString.fromOrNull(values));
 	}
 
 	/**
@@ -124,17 +107,16 @@ public final class ArrayListHelper {
 	 * @param clazz enumeration class with all possible values of enumeration
 	 * @param values array of elements to load when the list is creating.
 	 * @param <E> type of key
-	 * @return a array list of values or <code>null</code> if the array is null.
+	 * @return a array list of values
 	 */
 	public static <E extends Key> ArrayEnumList<E> list(Class<E> clazz, E[] values) {
-		// checks if array is null
-		if (values == null) {
-			return new ArrayEnumList<>(clazz);
-		}
 		// creates the list
 		ArrayEnumList<E> result = new ArrayEnumList<>(clazz);
-		// adds all elements
-		result.addAll(values);
+		// checks if array is null
+		if (values != null) {
+			// adds all elements
+			result.addAll(values);
+		}
 		// returns the list
 		return result;
 	}
@@ -145,31 +127,25 @@ public final class ArrayListHelper {
 	 * @param clazz enumeration class with all possible values of enumeration
 	 * @param array array of strings to load when the list is creating.
 	 * @param <E> type of key
-	 * @return a array list of values or <code>null</code> if the array is null.
+	 * @return a array list of values.
 	 */
 	public static <E extends Key> ArrayEnumList<E> list(Class<E> clazz, ArrayString array) {
-		// checks if array is null
-		if (array == null) {
-			return new ArrayEnumList<>(clazz);
-		}
 		// returns the list adding the string array list to initialize it
 		// PAY ATTENTION: no checks if the values of strings are
 		// consistent with the enumeration values
-		return new ArrayEnumList<>(clazz.getEnumConstants(), array);
+		return new ArrayEnumList<>(clazz, array);
 	}
 
 	/**
 	 * Creates a array list of generic java script objects by a java script array.
 	 * 
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of strings instance or <code>null</code> if the array is null.
+	 * @return a array list of strings instance
 	 */
 	public static ArrayObjectList list(ArrayObject values) {
-		// checks if array is null
-		if (values == null) {
-			return new ArrayObjectList();
-		}
 		// creates the list
+		// if values not consistent
+		// creates an empty list
 		return new ArrayObjectList(values);
 	}
 
@@ -179,14 +155,12 @@ public final class ArrayListHelper {
 	 * @param array array of elements to load when the list is creating.
 	 * @param factory factory implementation to create containers by a single native object of the array.
 	 * @param <E> type of native object container
-	 * @return the instance of updated list or <code>null</code> if the array is null.
+	 * @return the instance of updated list
 	 */
 	public static <E extends NativeObjectContainer> ArrayObjectContainerList<E> list(ArrayObject array, NativeObjectContainerFactory<E> factory) {
-		// checks if array is null
-		if (array == null) {
-			return new ArrayObjectContainerList<>();
-		}
 		// creates the list
+		// if values not consistent
+		// creates an empty list
 		return new ArrayObjectContainerList<>(array, factory);
 	}
 
@@ -194,40 +168,40 @@ public final class ArrayListHelper {
 	 * Creates an unmodifiable array list of doubles by a java script array of doubles.
 	 * 
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of doubles instance or <code>null</code> if the array is null.
+	 * @return a array list of doubles instance
 	 */
 	public static List<Double> unmodifiableList(ArrayDouble values) {
-		return unmodifiableList(list(values));
+		return Collections.unmodifiableList(list(values));
 	}
 
 	/**
 	 * Creates an unmodifiable array list of integers by a java script array of integers.
 	 * 
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of integers instance or <code>null</code> if the array is null.
+	 * @return a array list of integers instance
 	 */
 	public static List<Integer> unmodifiableList(ArrayInteger values) {
-		return unmodifiableList(list(values));
+		return Collections.unmodifiableList(list(values));
 	}
 
 	/**
 	 * Creates a array list of strings by a java script array of strings.
 	 * 
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of strings instance or <code>null</code> if the array is null.
+	 * @return a array list of strings instance
 	 */
 	public static List<String> unmodifiableList(ArrayString values) {
-		return unmodifiableList(list(values));
+		return Collections.unmodifiableList(list(values));
 	}
 
 	/**
 	 * Creates a array list of images by a java script array of images.
 	 * 
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of strings instance or <code>null</code> if the array is null.
+	 * @return a array list of strings instance
 	 */
 	public static List<ImageElement> unmodifiableList(ArrayImage values) {
-		return unmodifiableList(list(values));
+		return Collections.unmodifiableList(list(values));
 	}
 
 	/**
@@ -236,10 +210,10 @@ public final class ArrayListHelper {
 	 * @param clazz enumeration class with all possible values of enumeration
 	 * @param values array of elements to load when the list is creating.
 	 * @param <E> type of key
-	 * @return a array list of values or <code>null</code> if the array is null.
+	 * @return a array list of values
 	 */
 	public static <E extends Key> List<E> unmodifiableList(Class<E> clazz, E[] values) {
-		return unmodifiableList(list(clazz, values));
+		return Collections.unmodifiableList(list(clazz, values));
 	}
 
 	/**
@@ -248,20 +222,20 @@ public final class ArrayListHelper {
 	 * @param clazz enumeration class with all possible values of enumeration
 	 * @param array array of strings to load when the list is creating.
 	 * @param <E> type of key
-	 * @return a array list of values or <code>null</code> if the array is null.
+	 * @return a array list of values
 	 */
 	public static <E extends Key> List<E> unmodifiableList(Class<E> clazz, ArrayString array) {
-		return unmodifiableList(list(clazz, array));
+		return Collections.unmodifiableList(list(clazz, array));
 	}
 
 	/**
 	 * Creates an unmodifiable array list of generic java script objects by a java script array.
 	 * 
 	 * @param values array of elements to load when the list is creating.
-	 * @return a array list of strings instance or <code>null</code> if the array is null.
+	 * @return a array list of strings instance
 	 */
 	public static List<NativeObject> unmodifiableList(ArrayObject values) {
-		return unmodifiableList(list(values));
+		return Collections.unmodifiableList(list(values));
 	}
 
 	/**
@@ -270,21 +244,10 @@ public final class ArrayListHelper {
 	 * @param array array of elements to load when the list is creating.
 	 * @param factory factory implementation to create containers by a single native object of the array.
 	 * @param <E> type of native object container
-	 * @return the instance of updated list or <code>null</code> if the array is null.
+	 * @return the instance of updated list
 	 */
 	public static <E extends NativeObjectContainer> List<E> unmodifiableList(ArrayObject array, NativeObjectContainerFactory<E> factory) {
-		return unmodifiableList(list(array, factory));
+		return Collections.unmodifiableList(list(array, factory));
 	}
 
-	/**
-	 * Returns an unmodifiable list by another list.
-	 * 
-	 * @param list array list to wrap into an unmodifiable list
-	 * @param <E> type of element
-	 * @return an unmodifiable list or <code>null</code> if the list is null.
-	 */
-	private static <E> List<E> unmodifiableList(List<E> list) {
-		// checks if null
-		return list == null ? null : Collections.unmodifiableList(list);
-	}
 }

@@ -124,12 +124,14 @@ public final class Defaults {
 	}
 
 	/**
-	 * Returns the default options by a chart type, by defaults of CHART.JS
+	 * Returns the default options by a chart type, by defaults of CHART.JS. If the type is not consistent, throws an exception.
 	 * 
 	 * @param type chart type.
-	 * @return the default options
+	 * @return the default options or throws an exception if type is not consistent.
 	 */
 	public ChartOptions getOptions(Type type) {
+		// checks if type is consistent
+		Key.checkIfValid(type);
 		// checks if the options have already stored
 		if (!chartOptions.containsKey(type.value())) {
 			// if not, creates and stores new options by chart type

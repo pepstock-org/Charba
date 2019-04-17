@@ -88,6 +88,11 @@ public abstract class NativeExtendedObject {
 	 */
 	@JsOverlay
 	public final <T extends NativeObjectContainer> T getOptions(NativeObjectContainerFactory<T> factory) {
-		return factory.create(getNativeOptions());
+		// checks if argument is consistent
+		if (factory != null) {
+			return factory.create(getNativeOptions());
+		}
+		// if here, argument is not consistent
+		return null;
 	}
 }

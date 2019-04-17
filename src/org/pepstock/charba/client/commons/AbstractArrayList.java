@@ -63,9 +63,9 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 	 * Returns true if this list contains the specified element.
 	 */
 	@Override
-	public boolean contains(Object o) {
+	public boolean contains(Object object) {
 		// checks if index of the object in JS array is not equals to -1
-		return indexOf(o) != -1;
+		return indexOf(object) != -1;
 	}
 
 	/**
@@ -88,7 +88,7 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 	 * Not implemented
 	 */
 	@Override
-	public final <T> T[] toArray(T[] a) {
+	public final <T> T[] toArray(T[] array) {
 		throw new UnsupportedOperationException(UNABLE_COPY_ARRAY_MESSAGE);
 	}
 
@@ -106,7 +106,7 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 	 * @see java.util.List#addAll(int, java.util.Collection)
 	 */
 	@Override
-	public final boolean addAll(int index, Collection<? extends E> c) {
+	public final boolean addAll(int index, Collection<? extends E> collection) {
 		// Warnings in com/google/gwt/emul/java/util/List.java
 		// [WARN] [unusable-by-js] Type of parameter 'c' in 'boolean List.addAll(int, Collection)' (exposed by
 		// 'AbstractArrayList') is not usable by but exposed to JavaScript.
@@ -119,9 +119,9 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 	 * element, it is unchanged.
 	 */
 	@Override
-	public final boolean remove(Object o) {
+	public final boolean remove(Object object) {
 		// gets index of object
-		int index = indexOf(o);
+		int index = indexOf(object);
 		// if is in the right range
 		if (checkRange(index)) {
 			// removes by index
@@ -135,31 +135,39 @@ abstract class AbstractArrayList<E, A extends Array> implements List<E> {
 	 * Returns true if this list contains all of the elements of the specified collection.
 	 */
 	@Override
-	public boolean containsAll(Collection<?> c) {
-		Iterator<?> e = c.iterator();
-		// scans all elements
-		while (e.hasNext()) {
-			// if does not contain return false
-			if (!contains(e.next())) {
-				return false;
+	public boolean containsAll(Collection<?> collection) {
+		// checks if the arguments is consistent
+		if (collection != null) {
+			Iterator<?> iter = collection.iterator();
+			// scans all elements
+			while (iter.hasNext()) {
+				// if does not contain return false
+				if (!contains(iter.next())) {
+					return false;
+				}
 			}
+			// if here, all elements are in the list
+			return true;
 		}
-		// if here, all elements are in the list
-		return true;
+		// if here, argument is not consistent
+		return false;
 	}
 
 	/**
 	 * Removes from this list all of its elements that are contained in the specified collection.
 	 */
 	@Override
-	public final boolean removeAll(Collection<?> c) {
+	public final boolean removeAll(Collection<?> collection) {
 		// set modified checking if collection is empty
-		boolean modified = !c.isEmpty();
-		Iterator<?> e = c.iterator();
-		// scans all elements
-		while (e.hasNext()) {
-			// removes and checks if modified
-			modified = modified && remove(e.next());
+		boolean modified = collection != null && !collection.isEmpty();
+		// checks if the arguments is consistent
+		if (modified) {
+			Iterator<?> iter = collection.iterator();
+			// scans all elements
+			while (iter.hasNext()) {
+				// removes and checks if modified
+				modified = modified && remove(iter.next());
+			}
 		}
 		return modified;
 	}

@@ -72,10 +72,13 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	 * @param values an array of elements to be loaded
 	 */
 	public void addAll(String... values) {
-		// scans all elements
-		for (String val : values) {
-			// adds
-			add(val);
+		// checks if arguments are consistent
+		if (values != null && values.length > 0) {
+			// scans all elements
+			for (String val : values) {
+				// adds
+				add(val);
+			}
 		}
 	}
 
@@ -83,9 +86,15 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	 * Appends the specified element to the end of this list
 	 */
 	@Override
-	public boolean add(String e) {
-		array.push(e);
-		return true;
+	public boolean add(String element) {
+		// checks if argument is consistent 
+		if (element != null) {
+			// adds element to array
+			array.push(element);
+			return true;
+		}
+		// if here, not added
+		return false;
 	}
 
 	/**
@@ -93,16 +102,18 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	 * the specified collection's iterator
 	 */
 	@Override
-	public boolean addAll(Collection<? extends String> c) {
+	public boolean addAll(Collection<? extends String> collection) {
 		// set modified
-		boolean modified = false;
-		Iterator<? extends String> e = c.iterator();
-		// scans all elements
-		while (e.hasNext()) {
-			// adds
-			add(e.next());
-			// sets modified
-			modified = true;
+		boolean modified = collection != null && !collection.isEmpty();
+		// checks if argument is consistent 
+		if (modified) {
+			Iterator<? extends String> iter = collection.iterator();
+			// scans all elements
+			while (iter.hasNext()) {
+				// adds and 
+				// sets modified
+				modified = modified && add(iter.next());
+			}
 		}
 		return modified;
 	}
@@ -112,9 +123,9 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	 * In other words, removes from this list all of its elements that are not contained in the specified collection.
 	 */
 	@Override
-	public boolean retainAll(Collection<?> c) {
+	public boolean retainAll(Collection<?> collection) {
 		// set modified checking if collection is empty
-		boolean modified = !c.isEmpty();
+		boolean modified = !collection.isEmpty();
 		if (modified) {
 			// creates a copy of elements
 			List<String> contained = new ArrayList<>();
@@ -123,7 +134,7 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 				String value = get(i);
 				// checks if not present into
 				// passed collection
-				if (!c.contains(get(i))) {
+				if (!collection.contains(value)) {
 					// adds to temporary list
 					contained.add(value);
 				}
@@ -166,8 +177,8 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	 */
 	@Override
 	public String set(int index, String element) {
-		// checks range
-		if (checkRange(index)) {
+		// checks if element is consistent and in range
+		if (element != null && checkRange(index)) {
 			// gets current element at that index
 			String old = array.get(index);
 			// replaces with new element
@@ -185,7 +196,11 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	 */
 	@Override
 	public void add(int index, String element) {
-		array.insertAt(index, element);
+		// checks if element is consistent
+		if (element != null) {
+			// inserts into array
+			array.insertAt(index, element);
+		}
 	}
 
 	/**
@@ -207,8 +222,13 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	 * element.
 	 */
 	@Override
-	public int indexOf(Object o) {
-		return array.indexOf(o.toString());
+	public int indexOf(Object object) {
+		// checks if argument is null
+		if (object != null) {
+			return array.indexOf(object.toString());
+		}
+		// if here, argument not consistent
+		return -1;
 	}
 
 	/**
@@ -216,8 +236,13 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	 * element.
 	 */
 	@Override
-	public int lastIndexOf(Object o) {
-		return array.lastIndexOf(o.toString());
+	public int lastIndexOf(Object object) {
+		// checks if argument is null
+		if (object != null) {
+			return array.lastIndexOf(object.toString());
+		}
+		// if here, argument not consistent
+		return -1;
 	}
 
 	/*

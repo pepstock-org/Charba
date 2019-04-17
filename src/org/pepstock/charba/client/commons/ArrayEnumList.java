@@ -36,17 +36,17 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	/**
 	 * Internal constructor used to set an array instance as back-end of the list.
 	 * 
-	 * @param values all values of an enumeration
+	 * @param clazz enumeration class with all values of an enumeration
 	 * @param array java script array instance. If <code>null</code>, new empty array has been created
 	 */
-	ArrayEnumList(E[] values, ArrayString array) {
-		// checks if values are consistent
-		if (values == null) {
-			// otherwise exception
-			throw new UnsupportedOperationException("Enumeration values are null. Check the class if is a enum");
+	ArrayEnumList(Class<E> clazz, ArrayString array) {
+		// checks class argument if consistent
+		if (clazz == null || !clazz.isEnum()) {
+			// if not, exception
+			throw new IllegalArgumentException("Class argument is null or is not an enum");
 		}
 		// sets all enumeration values
-		this.definedValues = values;
+		this.definedValues = clazz.getEnumConstants();
 		// if null, creates a new array
 		if (array == null) {
 			this.array = new ArrayString();
@@ -62,7 +62,7 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	 * @param clazz enumeration class with all values of an enumeration
 	 */
 	public ArrayEnumList(Class<E> clazz) {
-		this(clazz.getEnumConstants(), null);
+		this(clazz, null);
 	}
 
 	/*
@@ -81,10 +81,13 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	 * @param values an array of elements to be loaded
 	 */
 	public void addAll(E[] values) {
-		// scans all elements
-		for (E val : values) {
-			// adds
-			add(val);
+		// checks if arguments are consistent
+		if (values != null && values.length > 0) {
+			// scans all elements
+			for (E val : values) {
+				// adds
+				add(val);
+			}
 		}
 	}
 
@@ -92,9 +95,16 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	 * Appends the specified element to the end of this list
 	 */
 	@Override
-	public boolean add(E e) {
-		array.push(e.value());
-		return true;
+	public boolean add(E element) {
+		// checks if element is consistent
+		if (Key.isValid(element)) {
+			// adds element
+			array.push(element.value());
+			return true;
+		}
+		// if here, element is not consistent
+		// and not added
+		return false;
 	}
 
 	/**
@@ -102,16 +112,18 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	 * the specified collection's iterator
 	 */
 	@Override
-	public boolean addAll(Collection<? extends E> c) {
+	public boolean addAll(Collection<? extends E> collection) {
 		// set modified
-		boolean modified = false;
-		Iterator<? extends E> e = c.iterator();
-		// scans all elements
-		while (e.hasNext()) {
-			// adds
-			add(e.next());
-			// sets modified
-			modified = true;
+		boolean modified = collection != null && !collection.isEmpty();
+		// checks if argument is consistent
+		if (modified) {
+			Iterator<? extends E> iter = collection.iterator();
+			// scans all elements
+			while (iter.hasNext()) {
+				// adds and
+				// sets modified
+				modified = modified && add(iter.next());
+			}
 		}
 		return modified;
 	}
@@ -143,8 +155,8 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	 */
 	@Override
 	public E set(int index, E element) {
-		// checks range
-		if (checkRange(index)) {
+		// checks element is consistent and in range
+		if (Key.isValid(element) && checkRange(index)) {
 			// gets current element at that index
 			String old = array.get(index);
 			E oldValue = getByName(old);
@@ -163,7 +175,10 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	 */
 	@Override
 	public void add(int index, E element) {
-		array.insertAt(index, element.value());
+		// checks if element is consistent
+		if (Key.isValid(element)) {
+			array.insertAt(index, element.value());
+		}
 	}
 
 	/**
@@ -186,13 +201,16 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	 * element.
 	 */
 	@Override
-	public int indexOf(Object o) {
+	public int indexOf(Object object) {
 		// checks if EnumValue
-		if (o instanceof Key) {
+		if (object instanceof Key) {
 			// cast
-			Key val = (Key) o;
-			// search
-			return array.indexOf(val.value());
+			Key value = (Key) object;
+			// checks if is valid
+			if (Key.isValid(value)) {
+				// search
+				return array.indexOf(value.value());
+			}
 		}
 		return -1;
 	}
@@ -202,13 +220,16 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 	 * element.
 	 */
 	@Override
-	public int lastIndexOf(Object o) {
+	public int lastIndexOf(Object object) {
 		// checks if EnumValue
-		if (o instanceof Key) {
+		if (object instanceof Key) {
 			// cast
-			Key val = (Key) o;
-			// search
-			return array.lastIndexOf(val.value());
+			Key value = (Key) object;
+			// checks if is valid
+			if (Key.isValid(value)) {
+				// search
+				return array.lastIndexOf(value.value());
+			}
 		}
 		return -1;
 	}

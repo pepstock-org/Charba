@@ -74,10 +74,13 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	 * @param values an array of elements to be loaded
 	 */
 	public void addAll(ImageElement... values) {
-		// scans all elements
-		for (ImageElement val : values) {
-			// adds
-			add(val);
+		// checks if arguments are consistent
+		if (values != null && values.length > 0) {
+			// scans all elements
+			for (ImageElement val : values) {
+				// adds
+				add(val);
+			}
 		}
 	}
 
@@ -85,9 +88,16 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	 * Appends the specified element to the end of this list
 	 */
 	@Override
-	public boolean add(ImageElement e) {
-		array.push(e);
-		return true;
+	public boolean add(ImageElement element) {
+		// checks if element is consistent
+		if (element != null) {
+			// adds element
+			array.push(element);
+			return true;
+		}
+		// if here, element is not consistent
+		// and not added
+		return false;
 	}
 
 	/**
@@ -95,16 +105,18 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	 * the specified collection's iterator
 	 */
 	@Override
-	public boolean addAll(Collection<? extends ImageElement> c) {
+	public boolean addAll(Collection<? extends ImageElement> collection) {
 		// set modified
-		boolean modified = false;
-		Iterator<? extends ImageElement> e = c.iterator();
-		// scans all elements
-		while (e.hasNext()) {
-			// adds
-			add(e.next());
-			// sets modified
-			modified = true;
+		boolean modified = collection != null && !collection.isEmpty();
+		// checks if argument is consistent
+		if (modified) {
+			Iterator<? extends ImageElement> iter = collection.iterator();
+			// scans all elements
+			while (iter.hasNext()) {
+				// adds and
+				// sets modified
+				modified = modified && add(iter.next());
+			}
 		}
 		return modified;
 	}
@@ -114,9 +126,10 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	 * In other words, removes from this list all of its elements that are not contained in the specified collection.
 	 */
 	@Override
-	public boolean retainAll(Collection<?> c) {
-		// set modified checking if collection is empty
-		boolean modified = !c.isEmpty();
+	public boolean retainAll(Collection<?> collection) {
+		// set modified
+		boolean modified = collection != null && !collection.isEmpty();
+		// checks if argument is consistent
 		if (modified) {
 			// creates a copy of elements
 			List<ImageElement> contained = new ArrayList<>();
@@ -125,7 +138,7 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 				ImageElement value = get(i);
 				// checks if not present into
 				// passed collection
-				if (!c.contains(get(i))) {
+				if (!collection.contains(value)) {
 					// adds to temporary list
 					contained.add(value);
 				}
@@ -168,8 +181,8 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	 */
 	@Override
 	public ImageElement set(int index, ImageElement element) {
-		// checks range
-		if (checkRange(index)) {
+		// checks if element is consistent and in range
+		if (element != null && checkRange(index)) {
 			// gets current element at that index
 			ImageElement old = array.get(index);
 			// replaces with new element
@@ -187,7 +200,10 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	 */
 	@Override
 	public void add(int index, ImageElement element) {
-		array.insertAt(index, element);
+		// checks if element is consistent
+		if (element != null) {
+			array.insertAt(index, element);
+		}
 	}
 
 	/**
@@ -209,8 +225,12 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	 * element.
 	 */
 	@Override
-	public int indexOf(Object o) {
-		return array.indexOf(o);
+	public int indexOf(Object object) {
+		// checks if object is consistent
+		if (object != null) {
+			return array.indexOf(object);
+		}
+		return -1;
 	}
 
 	/**
@@ -218,7 +238,11 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	 * element.
 	 */
 	@Override
-	public int lastIndexOf(Object o) {
-		return array.lastIndexOf(o);
+	public int lastIndexOf(Object object) {
+		// checks if object is consistent
+		if (object != null) {
+			return array.lastIndexOf(object);
+		}
+		return -1;
 	}
 }

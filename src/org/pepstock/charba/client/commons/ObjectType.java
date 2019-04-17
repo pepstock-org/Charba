@@ -99,7 +99,7 @@ public enum ObjectType
 				}
 			}
 		}
-		// if here the default is object
-		return OBJECT;
+		// if here the default is undefined
+		return UNDEFINED;
 	}
 }
