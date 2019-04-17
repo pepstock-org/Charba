@@ -84,7 +84,7 @@ public final class Positioner {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		positionerCallbackProxy.setCallback((context, datasetItems, eventPoint) -> onToolipPosition(context, datasetItems, eventPoint));
+		positionerCallbackProxy.setCallback(this::onToolipPosition);
 	}
 
 	/**
