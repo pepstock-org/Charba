@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.controllers;
 
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.commons.Key;
 
 import com.google.gwt.safehtml.shared.UriUtils;
 
@@ -26,8 +27,6 @@ import com.google.gwt.safehtml.shared.UriUtils;
  *
  */
 final class ControllerTypeChecker {
-	// exception text when controller type is null
-	private static final String INVALID_CONTROLLER_TYPE_NULL = "Controller type can not be null ";
 	// exception text when controller type starts with dot or underscore
 	private static final String INVALID_CONTROLLER_TYPE_INVALID_FIRST_CHAR = "Controller type can not start with a dot or an underscore ";
 	// exception text when controller type is not URL safe
@@ -55,13 +54,10 @@ final class ControllerTypeChecker {
 	 * @param type controller type to be checked.
 	 */
 	public static void check(Type type) {
-		// checks if is null
-		if (type == null) {
-			throw new IllegalArgumentException(INVALID_CONTROLLER_TYPE_NULL);
-		} else if (type.value() == null) {
-			// checks if value is null
-			throw new IllegalArgumentException(INVALID_CONTROLLER_TYPE_NULL);
-		} else if (type.value().charAt(0) == DOT || type.value().charAt(0) == UNDERSCORE) {
+		// checks if is consistent
+		Key.checkIfValid(type);
+		// checks if has got invalid chars
+		if (type.value().charAt(0) == DOT || type.value().charAt(0) == UNDERSCORE) {
 			// checks if is starting with DOT or underscore
 			throw new IllegalArgumentException(buildMessage(type.value(), INVALID_CONTROLLER_TYPE_INVALID_FIRST_CHAR));
 		} else if (!UriUtils.isSafeUri(type.value())) {

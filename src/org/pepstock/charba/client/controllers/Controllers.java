@@ -91,6 +91,11 @@ public final class Controllers {
 	 * @return the wrapper controller instance or <code>null</code> if there is any error.
 	 */
 	private WrapperController check(Controller controller) {
+		// checks the consistency of controller
+		if (controller == null) {
+			// if not, returns a not inconsistent wrapper
+			return null;
+		}
 		// checks the controller type
 		ControllerTypeChecker.check(controller.getType());
 		// checks if type is already registered
@@ -110,7 +115,12 @@ public final class Controllers {
 	 * @return <code>true</code> if registered, otherwise <code>false</code>.
 	 */
 	public boolean isRegistered(String type) {
-		return controllersInstances.containsKey(type);
+		// checks if argument is consistent
+		if (type != null) {
+			return controllersInstances.containsKey(type);
+		}
+		// if here, argument is not consistent
+		return false;
 	}
 
 	/**
@@ -129,8 +139,9 @@ public final class Controllers {
 	 * @return the controller type if exists or <code>null</code> if does not exist.
 	 */
 	public ControllerType getTypeByString(String type) {
+		// checks if argument is consistent
 		// checks in the map of controller
-		if (controllersInstances.containsKey(type)) {
+		if (type != null && controllersInstances.containsKey(type)) {
 			// gets controller
 			Controller controller = controllersInstances.get(type);
 			// returns controller type

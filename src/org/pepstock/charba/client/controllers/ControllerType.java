@@ -50,7 +50,7 @@ public final class ControllerType implements Type {
 	 * @param chartType existing chart type, as extension.
 	 */
 	public ControllerType(String type, ChartType chartType) {
-		this(type, chartType, chartType.scaleType());
+		this(type, chartType, null);
 	}
 
 	/**
@@ -71,9 +71,18 @@ public final class ControllerType implements Type {
 	 * @param scaleType scale type of new chart.
 	 */
 	private ControllerType(String type, ChartType chartType, ScaleType scaleType) {
+		// checks type if consistent
+		if (type == null) {
+			throw new IllegalArgumentException("Type is null");
+		}
+		// checks chart and scale type if are consistent
+		if (chartType == null && scaleType == null) {
+			throw new IllegalArgumentException("Chart and scale types are null");
+		}
 		this.type = type;
 		this.chartType = chartType;
-		this.scaleType = scaleType;
+		// if scale type is null, takes the scale type of chart type
+		this.scaleType = scaleType == null ? chartType.scaleType() : scaleType;
 	}
 
 	/*
