@@ -31,6 +31,18 @@ import org.pepstock.charba.client.options.Tooltips;
 public interface TooltipPositioner {
 
 	/**
+	 * Returns <code>true</code> if tooltip positioner passed as argument is not <code>null</code> and its name is not
+	 * <code>null</code> as well.
+	 * 
+	 * @param tooltipPositioner tooltip positioner to be checked
+	 * @return <code>true</code> if tooltip positioner passed as argument is not <code>null</code> and its name is not
+	 *         <code>null</code>
+	 */
+	static boolean isValid(TooltipPositioner tooltipPositioner) {
+		return tooltipPositioner != null && tooltipPositioner.getName() != null;
+	}
+
+	/**
 	 * Returns the name of tooltip position which must be used in chart options.
 	 * 
 	 * @return the name of tooltip position.

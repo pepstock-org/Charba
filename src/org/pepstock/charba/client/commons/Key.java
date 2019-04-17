@@ -38,7 +38,7 @@ public interface Key {
 	 * @return <code>true</code> if key passed as argument is not <code>null</code> and its value is not <code>null</code>
 	 *         as well.
 	 */
-	public static boolean isValid(Key key) {
+	static boolean isValid(Key key) {
 		return key != null && key.value() != null;
 	}
 	
@@ -48,7 +48,7 @@ public interface Key {
 	 * 
 	 * @param key key to be checked
 	 */
-	public static void checkIfValid(Key key) {
+	static void checkIfValid(Key key) {
 		if (!isValid(key)) {
 			throw new IllegalArgumentException("Key implementation instance is null or not consistent");
 		}
@@ -62,7 +62,7 @@ public interface Key {
 	 * @param <T> type of key
 	 * @return <code>true</code> if a key into an enumeration is related to the value, otherwise <code>false</code>
 	 */
-	public static <T extends Key> boolean hasKeyByValue(Class<T> clazz, String value) {
+	static <T extends Key> boolean hasKeyByValue(Class<T> clazz, String value) {
 		return getKeyByValue(clazz, value, null) != null;
 	}
 
@@ -74,7 +74,7 @@ public interface Key {
 	 * @param <T> type of key
 	 * @return the found key by value or <code>null</code>
 	 */
-	public static <T extends Key> T getKeyByValue(Class<T> clazz, String value) {
+	static <T extends Key> T getKeyByValue(Class<T> clazz, String value) {
 		return getKeyByValue(clazz, value, null);
 	}
 
@@ -87,7 +87,7 @@ public interface Key {
 	 * @param <T> type of key
 	 * @return the found key by value or the default one
 	 */
-	public static <T extends Key> T getKeyByValue(Class<T> clazz, String value, T defaultKey) {
+	static <T extends Key> T getKeyByValue(Class<T> clazz, String value, T defaultKey) {
 		// checks if arguments are consistent
 		if (value != null && clazz != null && clazz.isEnum()) {
 			// scans enumeration

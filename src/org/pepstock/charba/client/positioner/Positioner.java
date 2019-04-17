@@ -84,37 +84,7 @@ public final class Positioner {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		positionerCallbackProxy.setCallback((context, datasetItems, eventPoint) -> {
-			// gets chart instance
-			IsChart chart = context.getChart();
-			// checks if the chart is consistent
-			if (chart != null) {
-				// gets the tooltip position requested
-				// because this callback will be set for all custom positioners
-				IsTooltipPosition position = chart.getOptions().getTooltips().getPosition();
-				// checks if the custom positioner has been registered
-				if (positioners.containsKey(position.value())) {
-					// gets the custom implementation
-					TooltipPositioner positioner = positioners.get(position.value());
-					// list of dataset items
-					List<DatasetItem> items = ArrayListHelper.unmodifiableList(datasetItems, factory);
-					// and invokes it
-					Point result = positioner.computePosition(chart, items, eventPoint);
-					// checks if the result is consistent
-					if (result != null) {
-						return result;
-					}
-				}
-			}
-			// if here, is not able to get the chart or the positioner is not defined
-			// or the result of custom positioner is not consistent
-			// then gets the default tooltip position
-			IsTooltipPosition defaultValue = DefaultsBuilder.get().getOptions().getTooltips().getPosition();
-			// invokes the positioner of the default one getting the point
-			Point defaultPoint = JsPositionerHelper.get().invoke(defaultValue, context, datasetItems, eventPoint);
-			// if the result is ok, return it otherwise returns the point of event
-			return defaultPoint != null ? defaultPoint : eventPoint;
-		});
+		positionerCallbackProxy.setCallback((context, datasetItems, eventPoint) -> onToolipPosition(context, datasetItems, eventPoint));
 	}
 
 	/**
@@ -133,7 +103,12 @@ public final class Positioner {
 	 * @return <code>true</code> if the custom positioner has been registered, otherwise <code>false</code>
 	 */
 	public boolean hasTooltipPosition(String name) {
-		return positioners.containsKey(name);
+		// checks if name argument is consistent
+		if (name != null) {
+			return positioners.containsKey(name);
+		}
+		// if here the name is not consistent
+		return false;
 	}
 
 	/**
@@ -158,21 +133,17 @@ public final class Positioner {
 	 */
 	public void register(TooltipPositioner positioner) {
 		// checks if tooltip positioner is consistent
-		if (positioner != null) {
+		if (TooltipPositioner.isValid(positioner)) {
 			CustomTooltipPosition position = positioner.getName();
-			if (position != null) {
-				// if consistent
-				// checks if is already defined
-				if (!positioners.containsKey(position.value())) {
-					// if not
-					// adds the function to invoke the custom positioner
-					JsPositionerHelper.get().register(position, positionerCallbackProxy.getProxy());
-				}
-				// stores into positioners map
-				positioners.put(position.value(), positioner);
-			} else {
-				throw new IllegalArgumentException("Custom tooltip position name is null");
+			// if consistent
+			// checks if is already defined
+			if (!positioners.containsKey(position.value())) {
+				// if not
+				// adds the function to invoke the custom positioner
+				JsPositionerHelper.get().register(position, positionerCallbackProxy.getProxy());
 			}
+			// stores into positioners map
+			positioners.put(position.value(), positioner);
 		}
 	}
 
@@ -191,5 +162,45 @@ public final class Positioner {
 			// removes the entry from maps
 			positioners.remove(position.value());
 		}
+	}
+
+	/**
+	 * Returns the point where the tooltip will appear.
+	 * 
+	 * @param context context Value of <code>this</code> to the execution context of function.
+	 * @param datasetItems dataset elements of tooltips.
+	 * @param eventPosition point on the canvas where the event occurred.
+	 * @return point to show the tooltip
+	 */
+	private Point onToolipPosition(PositionerContext context, ArrayObject datasetItems, Point eventPoint) {
+		// gets chart instance
+		IsChart chart = context.getChart();
+		// checks if the chart is consistent
+		if (chart != null) {
+			// gets the tooltip position requested
+			// because this callback will be set for all custom positioners
+			IsTooltipPosition position = chart.getOptions().getTooltips().getPosition();
+			// checks if the custom positioner has been registered
+			if (positioners.containsKey(position.value())) {
+				// gets the custom implementation
+				TooltipPositioner positioner = positioners.get(position.value());
+				// list of dataset items
+				List<DatasetItem> items = ArrayListHelper.unmodifiableList(datasetItems, factory);
+				// and invokes it
+				Point result = positioner.computePosition(chart, items, eventPoint);
+				// checks if the result is consistent
+				if (result != null) {
+					return result;
+				}
+			}
+		}
+		// if here, is not able to get the chart or the positioner is not defined
+		// or the result of custom positioner is not consistent
+		// then gets the default tooltip position
+		IsTooltipPosition defaultValue = DefaultsBuilder.get().getOptions().getTooltips().getPosition();
+		// invokes the positioner of the default one getting the point
+		Point defaultPoint = JsPositionerHelper.get().invoke(defaultValue, context, datasetItems, eventPoint);
+		// if the result is ok, return it otherwise returns the point of event
+		return defaultPoint != null ? defaultPoint : eventPoint;
 	}
 }

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.utils;
 
 import org.pepstock.charba.client.AbstractChart;
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.enums.FontStyle;
 
@@ -73,19 +74,31 @@ public final class Utilities {
 	 * See <a href="https://www.w3schools.com/tags/canvas_font.asp">here</a> CSS specification.
 	 * 
 	 * @param style font style to use
-	 * @param fontSize font size
-	 * @param fontFamily font family
+	 * @param size font size
+	 * @param family font family
 	 * @return the font string to use in the canvas object.
 	 */
-	public static String toFont(FontStyle style, int fontSize, String fontFamily) {
+	public static String toFont(FontStyle style, int size, String family) {
 		// gets template
 		final String result = FONT_TEMPLATE;
-		// checks font style. If bold is always NORMAl
-		final FontStyle fontStyle = FontStyle.BOLD.equals(style) ? FontStyle.NORMAL : style;
-		// checks font weight. If not bold is always NORMAl
-		final FontStyle fontWeight = FontStyle.BOLD.equals(style) ? FontStyle.BOLD : FontStyle.NORMAL;
+		final FontStyle fontStyle;
+		final FontStyle fontWeight;
+		// checks if font style is consistent
+		// setting style and weight CSS
+		if (style != null) {
+			// checks font style. If bold is always NORMAl
+			fontStyle = FontStyle.BOLD.equals(style) ? FontStyle.NORMAL : style;
+			// checks font weight. If not bold is always NORMAl
+			fontWeight = FontStyle.BOLD.equals(style) ? FontStyle.BOLD : FontStyle.NORMAL;
+		} else {
+			// not consistent sets normal
+			fontStyle = FontStyle.NORMAL;
+			fontWeight = FontStyle.NORMAL;
+		}
+		// checks if font family is consistent
+		final String fontFamily = family == null ? Defaults.get().getGlobal().getDefaultFontFamily() : family;
 		// by regex changes the value of format
-		return REGEXP_FONT_FAMILY.replace(REGEXP_FONT_SIZE.replace(REGEXP_FONT_WEIGHT.replace(REGEXP_FONT_STYLE.replace(result, fontStyle.value()), fontWeight.value()), String.valueOf(fontSize)), fontFamily);
+		return REGEXP_FONT_FAMILY.replace(REGEXP_FONT_SIZE.replace(REGEXP_FONT_WEIGHT.replace(REGEXP_FONT_STYLE.replace(result, fontStyle.value()), fontWeight.value()), String.valueOf(size)), fontFamily);
 	}
 
 	/**

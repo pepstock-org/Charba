@@ -91,6 +91,11 @@ public final class AnnotationBuilder {
 	 * @return an image to apply to canvas
 	 */
 	public static ImageElement build(Element htmlXmlContent, double width, double height) {
+		// checks if argument element is consistent
+		if (htmlXmlContent == null) {
+			// if not exception
+			throw new IllegalArgumentException("Element is null");
+		}
 		// inner html reference
 		final String innerHtml;
 		// checks if cached
@@ -154,6 +159,11 @@ public final class AnnotationBuilder {
 	 * @return an image to apply to canvas
 	 */
 	public static ImageElement build(String htmlXmlContent, double width, double height) {
+		// checks if argument element is consistent
+		if (htmlXmlContent == null) {
+			// if not exception
+			throw new IllegalArgumentException("Element is null");
+		}
 		// creates key
 		String key = getKey(htmlXmlContent, width, height);
 		// the result is a key of images created
