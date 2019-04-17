@@ -20,6 +20,7 @@ import java.util.List;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayDouble;
@@ -131,18 +132,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 		// gets value calling callback
 		rotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, rotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
 		// gets value calling callback
-		pointStyleCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			Object result = ScriptableUtils.getOptionValue(context, pointStyleCallback);
-			// checks result
-			if (result instanceof PointStyle) {
-				// is point style instance
-				PointStyle style = (PointStyle) result;
-				return style.value();
-			}
-			// default result
-			return getDefaultValues().getElements().getPoint().getPointStyle().value();
-		});
+		pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(context));
 	}
 
 	/*
@@ -418,6 +408,25 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.POINT_STYLE);
 		}
+	}
+	
+	/**
+	 * Returns a {@link PointStyle} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @return a object property value, as {@link PointStyle}
+	 */
+	private String onPointStyle(ScriptableContext context) {
+		// gets value
+		Object result = ScriptableUtils.getOptionValue(context, pointStyleCallback);
+		// checks result
+		if (result instanceof PointStyle) {
+			// is point style instance
+			PointStyle style = (PointStyle) result;
+			return style.value();
+		}
+		// default result
+		return getDefaultValues().getElements().getPoint().getPointStyle().value();
 	}
 
 }

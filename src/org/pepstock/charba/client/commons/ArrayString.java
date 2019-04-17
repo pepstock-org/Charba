@@ -200,8 +200,8 @@ public final class ArrayString extends Array {
 		ArrayString result = new ArrayString();
 		// scans items
 		for (Key key : items) {
-			// checks if value of key is consistent
-			if (key.value() != null) {
+			// checks if key is consistent
+			if (Key.isValid(key)) {
 				// adds element
 				result.push(key.value());
 			}
@@ -226,8 +226,8 @@ public final class ArrayString extends Array {
 		}
 		// scans items
 		for (Key key : items) {
-			// checks if value of key is consistent
-			if (key.value() != null) {
+			// checks if key is consistent
+			if (Key.isValid(key)) {
 				// adds element
 				result.push(key.value());
 			}

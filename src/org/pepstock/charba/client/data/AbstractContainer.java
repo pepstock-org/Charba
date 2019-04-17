@@ -55,7 +55,7 @@ abstract class AbstractContainer<T extends CanvasObject> extends NativeObjectCon
 	/**
 	 * Creates the object by an empty native java script object.
 	 */
-	public AbstractContainer() {
+	AbstractContainer() {
 		super();
 	}
 

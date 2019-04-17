@@ -23,6 +23,7 @@ import org.pepstock.charba.client.callbacks.BorderWidthCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -206,27 +207,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 		// gets value calling callback
 		pointRotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointRotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
 		// gets value calling callback
-		pointStyleCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			Object result = ScriptableUtils.getOptionValue(context, pointStyleCallback);
-			// checks result
-			if (result instanceof PointStyle) {
-				// is point style instance
-				PointStyle style = (PointStyle) result;
-				return style.value();
-			} else if (result instanceof Image) {
-				// is image instance
-				return Utilities.toImageElement((Image) result);
-			} else if (result instanceof ImageResource) {
-				// is image resource instance
-				return Utilities.toImageElement((ImageResource) result);
-			} else if (result instanceof ImageElement) {
-				// is image element instance
-				return (ImageElement) result;
-			}
-			// default result
-			return getDefaultValues().getElements().getPoint().getPointStyle().value();
-		});
+		pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(context));
 	}
 
 	/*
@@ -1541,4 +1522,33 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 			setValueOrArray(key, canvasGradientsList.toArray(new CanvasGradient[0]));
 		}
 	}
+
+	/**
+	 * Returns a {@link PointStyle} or {@link ImageElement} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @return a object property value, as {@link PointStyle} or {@link ImageElement}
+	 */
+	private Object onPointStyle(ScriptableContext context) {
+		// gets value
+		Object result = ScriptableUtils.getOptionValue(context, pointStyleCallback);
+		// checks result
+		if (result instanceof PointStyle) {
+			// is point style instance
+			PointStyle style = (PointStyle) result;
+			return style.value();
+		} else if (result instanceof Image) {
+			// is image instance
+			return Utilities.toImageElement((Image) result);
+		} else if (result instanceof ImageResource) {
+			// is image resource instance
+			return Utilities.toImageElement((ImageResource) result);
+		} else if (result instanceof ImageElement) {
+			// is image element instance
+			return (ImageElement) result;
+		}
+		// default result
+		return getDefaultValues().getElements().getPoint().getPointStyle().value();
+	}
+
 }

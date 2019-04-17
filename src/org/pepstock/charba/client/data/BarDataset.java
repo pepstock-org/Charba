@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.data;
 
 import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -100,18 +101,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		borderSkippedCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			BorderSkipped value = ScriptableUtils.getOptionValueAsString(context, borderSkippedCallback);
-			BorderSkipped result = value == null ? getDefaultValues().getElements().getRectangle().getBorderSkipped() : value;
-			// checks if is boolean
-			if (BorderSkipped.FALSE.equals(result)) {
-				return false;
-			} else {
-				// returns the string value
-				return result.value();
-			}
-		});
+		borderSkippedCallbackProxy.setCallback((contextFunction, context) -> onBorderSkipped(context));
 	}
 
 	/**
@@ -309,4 +299,22 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 		return getDefaultValues().getElements().getRectangle().getBorderWidth();
 	}
 
+	/**
+	 * Returns an object (boolean or {@link BorderSkipped}) when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @return a object property value, as boolean or {@link BorderSkipped}.
+	 */
+	private Object onBorderSkipped(ScriptableContext context) {
+		// gets value
+		BorderSkipped value = ScriptableUtils.getOptionValueAsString(context, borderSkippedCallback);
+		BorderSkipped result = value == null ? getDefaultValues().getElements().getRectangle().getBorderSkipped() : value;
+		// checks if is boolean
+		if (BorderSkipped.FALSE.equals(result)) {
+			return false;
+		} else {
+			// returns the string value
+			return result.value();
+		}
+	}
 }

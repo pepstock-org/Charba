@@ -536,7 +536,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	/**
 	 * Returns the type of dataset, based on type of chart.
 	 * 
-	 * @return type of dataset or null if not set. If not set or invalid, the default is {@link ChartType#BAR}.
+	 * @return type of dataset or <code>null</code> if not set.
 	 */
 	public final Type getType() {
 		// checks if the type has been set
@@ -591,10 +591,15 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @param pluginId plugin id.
 	 * @param factory factory instance to create a native object container.
 	 * @param <T> type of native object container to return
-	 * @return java script object used to configure the plugin or <code>null</code> if not exist.
+	 * @return java script object used to configure the plugin or <code>null</code> if factory is <code>null</code>.
 	 */
 	public final <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) {
-		return factory.create(getValue(PluginIdChecker.key(pluginId)));
+		// checks if factory argument is consistent
+		if (factory != null) {
+			return factory.create(getValue(PluginIdChecker.key(pluginId)));
+		}
+		// if here, factory is not consistent
+		return null;
 	}
 
 	/**

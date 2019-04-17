@@ -933,6 +933,8 @@ public abstract class NativeObjectContainer {
 			// if no, returns the default value
 			return defaultValue;
 		}
+		// checks consistency of default value
+		Key.checkIfValid(defaultValue);
 		// gets the string value
 		String value = getValue(key, defaultValue.value());
 		// gets the key by value
@@ -956,6 +958,9 @@ public abstract class NativeObjectContainer {
 			// checks if the key is consistent
 			// if not, exception
 			Key.checkIfValid(key);
+			// checks if the value is consistent
+			// if not, exception
+			Key.checkIfValid(value);
 			// if here, key is consistent
 			// sets value
 			nativeObject.defineStringProperty(key.value(), value.value());

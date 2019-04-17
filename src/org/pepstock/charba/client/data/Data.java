@@ -85,11 +85,11 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 */
 	public void setLabels(String... labels) {
 		// creates a label object
-		Labels l = Labels.build();
+		Labels internalLabels = Labels.build();
 		// loads
-		l.load(labels);
+		internalLabels.load(labels);
 		// sets labels
-		setLabels(l);
+		setLabels(internalLabels);
 	}
 
 	/**
@@ -98,7 +98,10 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * @param labels labels object to manage also multi-line labels
 	 */
 	public void setLabels(Labels labels) {
-		setArrayValue(Property.LABELS, labels.getArray());
+		// checks if argument is consistent
+		if (labels != null && !labels.getArray().isEmpty()) {
+			setArrayValue(Property.LABELS, labels.getArray());
+		}
 	}
 
 	/**
@@ -143,11 +146,11 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 */
 	public void setXLabels(String... labels) {
 		// creates a label object
-		Labels l = Labels.build();
+		Labels internalLabels = Labels.build();
 		// loads
-		l.load(labels);
+		internalLabels.load(labels);
 		// sets X labels
-		setXLabels(l);
+		setXLabels(internalLabels);
 	}
 
 	/**
@@ -156,7 +159,10 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * @param labels labels object to manage also multi-line labels
 	 */
 	public void setXLabels(Labels labels) {
-		setArrayValue(Property.X_LABELS, labels.getArray());
+		// checks if argument is consistent
+		if (labels != null && !labels.getArray().isEmpty()) {
+			setArrayValue(Property.X_LABELS, labels.getArray());
+		}
 	}
 
 	/**
@@ -201,11 +207,11 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 */
 	public void setYLabels(String... labels) {
 		// creates a label object
-		Labels l = Labels.build();
+		Labels internalLabels = Labels.build();
 		// loads
-		l.load(labels);
+		internalLabels.load(labels);
 		// sets Y labels
-		setYLabels(l);
+		setYLabels(internalLabels);
 	}
 
 	/**
@@ -214,7 +220,10 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 * @param labels labels object to manage also multi-line labels
 	 */
 	public void setYLabels(Labels labels) {
-		setArrayValue(Property.Y_LABELS, labels.getArray());
+		// checks if argument is consistent
+		if (labels != null && !labels.getArray().isEmpty()) {
+			setArrayValue(Property.Y_LABELS, labels.getArray());
+		}
 	}
 
 	/**
@@ -323,24 +332,28 @@ public final class Data extends NativeObjectContainer implements ConfigurationEl
 	 */
 	@Override
 	public void load(IsChart chart, Configuration configuration) {
-		// loads data
-		ConfigurationLoader.loadData(configuration, this);
-		// checks if there is any pattern
-		// scans all datasets
-		for (Dataset ds : currentDatasets) {
-			// checks if dataset has got some patterns
-			if (!ds.getPatternsContainer().isEmpty() || !ds.getGradientsContainer().isEmpty()) {
-				// if here
-				// there are some patterns to load
-				// checks if the plugin to apply pattern is already loaded
-				if (!chart.getPlugins().has(CanvasObjectHandler.ID)) {
-					// adds plugin
-					chart.getPlugins().add(new CanvasObjectHandler());
+		// checks if chart is consistent
+		// configuration will be check into load data method
+		if (chart != null) {
+			// loads data
+			ConfigurationLoader.loadData(configuration, this);
+			// checks if there is any pattern
+			// scans all datasets
+			for (Dataset ds : currentDatasets) {
+				// checks if dataset has got some patterns
+				if (!ds.getPatternsContainer().isEmpty() || !ds.getGradientsContainer().isEmpty()) {
+					// if here
+					// there are some patterns to load
+					// checks if the plugin to apply pattern is already loaded
+					if (!chart.getPlugins().has(CanvasObjectHandler.ID)) {
+						// adds plugin
+						chart.getPlugins().add(new CanvasObjectHandler());
+					}
+					// if here,
+					// plugin is already added to chart
+					// it shouldn't happen
+					return;
 				}
-				// if here,
-				// plugin is already added to chart
-				// it shouldn't happen
-				return;
 			}
 		}
 	}
