@@ -1545,7 +1545,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 			return Utilities.toImageElement((ImageResource) result);
 		} else if (result instanceof ImageElement) {
 			// is image element instance
-			return (ImageElement) result;
+			return result;
 		}
 		// default result
 		return getDefaultValues().getElements().getPoint().getPointStyle().value();
