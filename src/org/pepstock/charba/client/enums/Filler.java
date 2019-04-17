@@ -72,6 +72,10 @@ public final class Filler extends NativeObjectContainer {
 	 */
 	public Filler(NativeObject nativeObject, IsFill defaultValue) {
 		super(nativeObject);
+		// checks default value instance
+		if (IsFill.isValid(defaultValue)) {
+			throw new IllegalArgumentException("Default value is null or not consistent");
+		}
 		this.defaultValue = defaultValue;
 	}
 
@@ -110,27 +114,30 @@ public final class Filler extends NativeObjectContainer {
 	 * @param fill how to fill the area under the line.
 	 */
 	public void setFill(IsFill fill) {
-		// checks if is no fill
-		if (Fill.FALSE.equals(fill)) {
-			// sets the boolean value instead of string one
-			setValue(Property.FILL, false);
-			// stores the filling mode
-			setValue(Property.CHARBA_FILLING_MODE, FillingMode.PREDEFINED_BOOLEAN);
-		} else if (Fill.isPredefined(fill)) {
-			// sets value
-			setValue(Property.FILL, fill);
-			// stores the filling mode
-			setValue(Property.CHARBA_FILLING_MODE, fill.getMode());
-		} else if (FillingMode.ABSOLUTE_DATASET_INDEX.equals(fill.getMode())) {
-			// sets value
-			setValue(Property.FILL, fill.getValueAsInt());
-			// stores the filling mode
-			setValue(Property.CHARBA_FILLING_MODE, FillingMode.ABSOLUTE_DATASET_INDEX);
-		} else if (FillingMode.RELATIVE_DATASET_INDEX.equals(fill.getMode())) {
-			// sets value
-			setValue(Property.FILL, fill.getValue());
-			// stores the filling mode
-			setValue(Property.CHARBA_FILLING_MODE, FillingMode.RELATIVE_DATASET_INDEX);
+		// checks if argument is consistent
+		if (IsFill.isValid(fill)) {
+			// checks if is no fill
+			if (Fill.FALSE.equals(fill)) {
+				// sets the boolean value instead of string one
+				setValue(Property.FILL, false);
+				// stores the filling mode
+				setValue(Property.CHARBA_FILLING_MODE, FillingMode.PREDEFINED_BOOLEAN);
+			} else if (Fill.isPredefined(fill)) {
+				// sets value
+				setValue(Property.FILL, fill);
+				// stores the filling mode
+				setValue(Property.CHARBA_FILLING_MODE, fill.getMode());
+			} else if (FillingMode.ABSOLUTE_DATASET_INDEX.equals(fill.getMode())) {
+				// sets value
+				setValue(Property.FILL, fill.getValueAsInt());
+				// stores the filling mode
+				setValue(Property.CHARBA_FILLING_MODE, FillingMode.ABSOLUTE_DATASET_INDEX);
+			} else if (FillingMode.RELATIVE_DATASET_INDEX.equals(fill.getMode())) {
+				// sets value
+				setValue(Property.FILL, fill.getValue());
+				// stores the filling mode
+				setValue(Property.CHARBA_FILLING_MODE, FillingMode.RELATIVE_DATASET_INDEX);
+			}
 		}
 	}
 

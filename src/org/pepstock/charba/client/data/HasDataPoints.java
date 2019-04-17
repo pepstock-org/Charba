@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.pepstock.charba.client.enums.DataType;
@@ -33,7 +34,10 @@ public interface HasDataPoints extends HasDataset {
 	 * @param datapoints an array of data points
 	 */
 	default void setDataPoints(DataPoint... datapoints) {
-		getDataset().setInternalDataPoints(datapoints);
+		// checks if border aligner is consistent
+		if (getDataset() != null) {
+			getDataset().setInternalDataPoints(datapoints);
+		}
 	}
 
 	/**
@@ -42,7 +46,10 @@ public interface HasDataPoints extends HasDataset {
 	 * @param datapoints a list of data points
 	 */
 	default void setDataPoints(List<DataPoint> datapoints) {
-		getDataset().setInternalDataPoints(datapoints);
+		// checks if border aligner is consistent
+		if (getDataset() != null) {
+			getDataset().setInternalDataPoints(datapoints);
+		}
 	}
 
 	/**
@@ -61,7 +68,13 @@ public interface HasDataPoints extends HasDataset {
 	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
 	 */
 	default List<DataPoint> getDataPoints(boolean binding) {
-		return getDataset().getDataPoints(Dataset.DATAPOINTS_FACTORY, binding);
+		// checks if border aligner is consistent
+		if (getDataset() != null) {
+			return getDataset().getDataPoints(Dataset.DATAPOINTS_FACTORY, binding);
+		}
+		// if here, border aligner is not consistent
+		// returns an empty list
+		return new LinkedList<>();
 	}
 
 }

@@ -37,6 +37,10 @@ abstract class AbstractHandlerEvent<H extends EventHandler> extends GwtEvent<H> 
 	 * @param handlerType the type of new handler.
 	 */
 	public AbstractHandlerEvent(Type<? extends EventHandler> handlerType) {
+		// checks if argument is consistent
+		if (handlerType == null) {
+			throw new IllegalArgumentException("Handler type is null");
+		}
 		this.handlerType = handlerType;
 	}
 
@@ -49,11 +53,14 @@ abstract class AbstractHandlerEvent<H extends EventHandler> extends GwtEvent<H> 
 	 *         <code>false</code>
 	 */
 	public final boolean isRecognize(List<Type<?>> types) {
-		// scans all types
-		for (Type<?> type : types) {
-			// if types is equals to the type of event
-			if (type.equals(handlerType)) {
-				return true;
+		// checks if argument is consistent
+		if (types != null && !types.isEmpty()) {
+			// scans all types
+			for (Type<?> type : types) {
+				// if types is equals to the type of event
+				if (type.equals(handlerType)) {
+					return true;
+				}
 			}
 		}
 		// if here, the event handler type
@@ -71,6 +78,6 @@ abstract class AbstractHandlerEvent<H extends EventHandler> extends GwtEvent<H> 
 	 */
 	public final boolean isRecognize(Type<?> type) {
 		// if types is equals to the type of event
-		return type.equals(handlerType);
+		return handlerType.equals(type);
 	}
 }

@@ -45,6 +45,10 @@ public final class AxisClickEvent extends AbstractEvent<AxisClickEventHandler> {
 	 */
 	public AxisClickEvent(NativeEvent nativeEvent, ScaleItem item, Axis axis) {
 		super(nativeEvent);
+		// checks if argument is consistent
+		if (item == null) {
+			throw new IllegalArgumentException("Scale item is null");
+		}
 		this.item = item;
 		this.axis = axis;
 	}

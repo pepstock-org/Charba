@@ -42,6 +42,10 @@ public final class AnimationProgressEvent extends AbstractEvent<AnimationProgres
 	 */
 	public AnimationProgressEvent(NativeEvent nativeEvent, AnimationItem item) {
 		super(nativeEvent);
+		// checks if argument is consistent
+		if (item == null) {
+			throw new IllegalArgumentException("Animation item is null");
+		}
 		this.item = item;
 	}
 

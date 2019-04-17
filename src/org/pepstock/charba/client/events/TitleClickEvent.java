@@ -41,6 +41,10 @@ public final class TitleClickEvent extends AbstractEvent<TitleClickEventHandler>
 	 */
 	public TitleClickEvent(NativeEvent nativeEvent, Title item) {
 		super(nativeEvent);
+		// checks if argument is consistent
+		if (item == null) {
+			throw new IllegalArgumentException("Title item is null");
+		}
 		this.item = item;
 	}
 

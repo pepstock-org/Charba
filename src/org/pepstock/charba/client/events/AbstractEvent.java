@@ -42,6 +42,10 @@ public abstract class AbstractEvent<H extends EventHandler> extends GwtEvent<H> 
 	 */
 	protected AbstractEvent(NativeEvent nativeEvent) {
 		super();
+		// checks if argument is consistent
+		if (nativeEvent == null) {
+			throw new IllegalArgumentException("Native event is null");
+		}
 		this.nativeEvent = nativeEvent;
 	}
 

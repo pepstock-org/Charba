@@ -37,6 +37,18 @@ import org.pepstock.charba.client.items.UndefinedValues;
 public interface IsFill extends Key {
 
 	/**
+	 * Returns <code>true</code> if fill passed as argument is not <code>null</code> and its value is not <code>null</code> and
+	 * its mode is not <code>null</code> as well.
+	 * 
+	 * @param fill fill to be checked
+	 * @return <code>true</code> if fill passed as argument is not <code>null</code> and its value is not <code>null</code> and
+	 *         its mode is not <code>null</code> as well.
+	 */
+	public static boolean isValid(IsFill fill) {
+		return Key.isValid(fill) && fill.getMode() != null;
+	}
+
+	/**
 	 * Returns the type of filling.
 	 * 
 	 * @return the type of filling.

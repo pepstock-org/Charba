@@ -41,6 +41,10 @@ public final class LegendLeaveEvent extends AbstractEvent<LegendLeaveEventHandle
 	 */
 	public LegendLeaveEvent(NativeEvent nativeEvent, LegendItem item) {
 		super(nativeEvent);
+		// checks if argument is consistent
+		if (item == null) {
+			throw new IllegalArgumentException("Legend item is null");
+		}
 		this.item = item;
 	}
 

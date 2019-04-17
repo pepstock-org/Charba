@@ -41,6 +41,10 @@ public final class ChartResizeEvent extends AbstractEvent<ChartResizeEventHandle
 	 */
 	public ChartResizeEvent(NativeEvent nativeEvent, SizeItem size) {
 		super(nativeEvent);
+		// checks if argument is consistent
+		if (size == null) {
+			throw new IllegalArgumentException("Size is null");
+		}
 		this.size = size;
 	}
 

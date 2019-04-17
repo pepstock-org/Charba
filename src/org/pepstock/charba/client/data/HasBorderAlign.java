@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.data;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.callbacks.BorderAlignCallback;
 import org.pepstock.charba.client.enums.BorderAlign;
 
@@ -38,7 +39,10 @@ interface HasBorderAlign {
 	 * @param align the property to set the border alignment on chart datasets
 	 */
 	default void setBorderAlign(BorderAlign align) {
-		getBorderAligner().setBorderAlign(align);
+		// checks if border aligner is consistent
+		if (getBorderAligner() != null) {
+			getBorderAligner().setBorderAlign(align);
+		}
 	}
 
 	/**
@@ -47,7 +51,13 @@ interface HasBorderAlign {
 	 * @return the property to set the border alignment on chart datasets.
 	 */
 	default BorderAlign getBorderAlign() {
-		return getBorderAligner().getBorderAlign();
+		// checks if border aligner is consistent
+		if (getBorderAligner() != null) {
+			return getBorderAligner().getBorderAlign();
+		}
+		// if here, border aligner is not consistent
+		// then returns the default
+		return Defaults.get().getGlobal().getElements().getArc().getBorderAlign();
 	}
 
 	/**
@@ -56,7 +66,13 @@ interface HasBorderAlign {
 	 * @return the border align callback, if set, otherwise <code>null</code>.
 	 */
 	default BorderAlignCallback getBorderAlignCallback() {
-		return getBorderAligner().getBorderAlignCallback();
+		// checks if border aligner is consistent
+		if (getBorderAligner() != null) {
+			return getBorderAligner().getBorderAlignCallback();
+		}
+		// if here, border aligner is not consistent
+		// then returns null
+		return null;
 	}
 
 	/**
@@ -65,6 +81,9 @@ interface HasBorderAlign {
 	 * @param borderAlignCallback the border align callback to set
 	 */
 	default void setBorderAlign(BorderAlignCallback borderAlignCallback) {
-		getBorderAligner().setBorderAlign(borderAlignCallback);
+		// checks if border aligner is consistent
+		if (getBorderAligner() != null) {
+			getBorderAligner().setBorderAlign(borderAlignCallback);
+		}
 	}
 }

@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.enums;
 
+import org.pepstock.charba.client.Defaults;
+
 /**
  * Defines a configuration element which is managing the FILL property.<br>
  * It has being used into options and datasets instances where FILL is required.
@@ -37,7 +39,10 @@ public interface HasFill {
 	 * @param fill <code>true</code> to fill, otherwise <code>false</code>.
 	 */
 	default void setFill(boolean fill) {
-		getFiller().setFill(fill);
+		// checks if filler is consistent
+		if (getFiller() != null) {
+			getFiller().setFill(fill);
+		}
 	}
 
 	/**
@@ -46,7 +51,10 @@ public interface HasFill {
 	 * @param index absolute dataset index of the chart.
 	 */
 	default void setFill(int index) {
-		setFill(Fill.getFill(index));
+		// checks if filler is consistent
+		if (getFiller() != null) {
+			setFill(Fill.getFill(index));
+		}
 	}
 
 	/**
@@ -55,7 +63,10 @@ public interface HasFill {
 	 * @param index relative dataset index of the chart.
 	 */
 	default void setFill(String index) {
-		setFill(Fill.getFill(index));
+		// checks if filler is consistent
+		if (getFiller() != null) {
+			setFill(Fill.getFill(index));
+		}
 	}
 
 	/**
@@ -64,7 +75,10 @@ public interface HasFill {
 	 * @param fill how to fill the area under the line.
 	 */
 	default void setFill(IsFill fill) {
-		getFiller().setFill(fill);
+		// checks if filler is consistent
+		if (getFiller() != null) {
+			getFiller().setFill(fill);
+		}
 	}
 
 	/**
@@ -73,6 +87,12 @@ public interface HasFill {
 	 * @return how to fill the area under the line.
 	 */
 	default IsFill getFill() {
-		return getFiller().getFill();
+		// checks if filler is consistent
+		if (getFiller() != null) {
+			return getFiller().getFill();
+		}
+		// if here, filler is not consistent and then
+		// returns the default value
+		return Defaults.get().getGlobal().getElements().getLine().getFill();
 	}
 }

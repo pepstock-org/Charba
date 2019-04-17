@@ -171,8 +171,9 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 */
 	public void setPosition(IsTooltipPosition position) {
 		// checks if the tooltip position is consistent
-		// & that means that is defined both otu of the box or custom one by positioner
-		if (position != null && !Key.hasKeyByValue(TooltipPosition.class, position.value()) && !Positioner.get().hasTooltipPosition(position.value())) {
+		Key.checkIfValid(position);
+		// that means that is defined both out of the box or custom one by positioner
+		if (!Key.hasKeyByValue(TooltipPosition.class, position.value()) && !Positioner.get().hasTooltipPosition(position.value())) {
 			throw new IllegalArgumentException("Name of tooltip position is not consistent not defined: " + position);
 		}
 		// stores values

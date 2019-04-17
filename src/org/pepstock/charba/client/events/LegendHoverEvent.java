@@ -41,6 +41,10 @@ public final class LegendHoverEvent extends AbstractEvent<LegendHoverEventHandle
 	 */
 	public LegendHoverEvent(NativeEvent nativeEvent, LegendItem item) {
 		super(nativeEvent);
+		// checks if argument is consistent
+		if (item == null) {
+			throw new IllegalArgumentException("Legend item is null");
+		}
 		this.item = item;
 	}
 
