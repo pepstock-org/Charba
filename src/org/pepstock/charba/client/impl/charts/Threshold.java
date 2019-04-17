@@ -81,6 +81,8 @@ public final class Threshold implements IsThreshold {
 		this.name = name;
 		this.value = value;
 		this.color = color;
+		// checks if is consistent
+		IsThreshold.checkIfValid(this);
 	}
 
 	/*

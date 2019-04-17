@@ -44,7 +44,7 @@ public interface IsFill extends Key {
 	 * @return <code>true</code> if fill passed as argument is not <code>null</code> and its value is not <code>null</code> and
 	 *         its mode is not <code>null</code> as well.
 	 */
-	public static boolean isValid(IsFill fill) {
+	static boolean isValid(IsFill fill) {
 		return Key.isValid(fill) && fill.getMode() != null;
 	}
 

@@ -64,7 +64,10 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 	 * @param handler dataset selection handler instance to be invoke at click event
 	 */
 	public void addDatasetSelectionEventHandler(DatasetSelectionEventHandler handler) {
-		dataSelectionHandlers.add(handler);
+		// checks if argument is consistent
+		if (handler != null) {
+			dataSelectionHandlers.add(handler);
+		}
 	}
 
 	/**
@@ -74,7 +77,12 @@ public final class DataLabelsSelectionHandler extends DataLabelsPointerHandler {
 	 * @return <code>true</code> if the handler has been removed, otherwise <code>false</code>
 	 */
 	public boolean removeDatasetSelectionEventHandler(DatasetSelectionEventHandler handler) {
-		return dataSelectionHandlers.remove(handler);
+		// checks if argument is consistent
+		if (handler != null) {
+			return dataSelectionHandlers.remove(handler);
+		}
+		// if here, handler is not consistent
+		return false;
 	}
 
 	/*

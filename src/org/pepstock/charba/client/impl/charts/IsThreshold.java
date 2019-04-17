@@ -22,7 +22,31 @@ import org.pepstock.charba.client.colors.IsColor;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsThreshold {
+interface IsThreshold {
+
+	/**
+	 * Returns <code>true</code> if threshold passed as argument is not <code>null</code> and its properties are not
+	 * <code>null</code>.
+	 * 
+	 * @param threshold threshold to be checked
+	 * @return <code>true</code> if threshold passed as argument is not <code>null</code> and its properties are not
+	 *         <code>null</code>
+	 */
+	static boolean isValid(IsThreshold threshold) {
+		return threshold != null && threshold.getName() != null && threshold.getColor() != null;
+	}
+
+	/**
+	 * Checks if threshold passed as argument is not <code>null</code> and its properties are not <code>null</code>. If not,
+	 * throw a {@link IllegalArgumentException}.
+	 * 
+	 * @param threshold threshold to be checked
+	 */
+	static void checkIfValid(IsThreshold threshold) {
+		if (!isValid(threshold)) {
+			throw new IllegalArgumentException("Threshold implementation instance is null or not consistent");
+		}
+	}
 
 	/**
 	 * Returns the name of threshold.

@@ -136,26 +136,29 @@ public final class GaugeDataset extends MeterDataset {
 	/**
 	 * Sets all thresholds to use for this gauge.
 	 * 
-	 * @param thres thresholds array.
+	 * @param newThresholds thresholds array.
 	 */
-	public void setThresholds(Threshold... thres) {
-		// clears existing thresholds
-		thresholds.clear();
-		// adds all new ones
-		thresholds.addAll(Arrays.asList(thres));
-		// checks the threshold
-		current = checkLevel();
-		// sets color
-		setColor(current.getColor());
+	public void setThresholds(Threshold... newThresholds) {
+		// checks if arguments are consistent
+		if (newThresholds != null && newThresholds.length > 0) {
+			// clears existing thresholds
+			thresholds.clear();
+			// adds all new ones
+			thresholds.addAll(Arrays.asList(newThresholds));
+			// checks the threshold
+			current = checkLevel();
+			// sets color
+			setColor(current.getColor());
+		}
 	}
 
 	/**
-	 * Gets all thresholds.
+	 * Gets all thresholds by an unmodifiable list.
 	 * 
-	 * @return all thresholds
+	 * @return all thresholds by an unmodifiable list
 	 */
 	public List<Threshold> getThresholds() {
-		return thresholds;
+		return Collections.unmodifiableList(thresholds);
 	}
 
 	/*

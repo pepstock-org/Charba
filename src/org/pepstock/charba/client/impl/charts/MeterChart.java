@@ -39,7 +39,6 @@ public final class MeterChart extends BaseMeterChart<MeterDataset> {
 	 * Builds the object.
 	 */
 	public MeterChart() {
-		super();
 		// creates options
 		options = new MeterOptions(this, getDefaultChartOptions());
 	}

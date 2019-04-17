@@ -39,7 +39,6 @@ public final class GaugeChart extends BaseMeterChart<GaugeDataset> {
 	 * Builds the object.
 	 */
 	public GaugeChart() {
-		super();
 		// creates options
 		options = new GaugeOptions(this, getDefaultChartOptions());
 	}

@@ -220,8 +220,13 @@ public class MeterDataset extends Dataset {
 	public String getEmptyColorAsString() {
 		// returns list of colors
 		ArrayString array = getArrayValue(Property.BACKGROUND_COLOR);
-		// returns color as string
-		return array.get(1);
+		// checks if the array is consistent
+		if (array != null) {
+			// returns color as string
+			return array.get(1);
+		} else {
+			return DEFAULT_EMPTY_VALUE_COLOR_AS_STRING;
+		}
 	}
 
 	/**

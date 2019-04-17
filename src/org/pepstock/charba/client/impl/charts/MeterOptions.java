@@ -186,7 +186,8 @@ public class MeterOptions extends AbstractPieOptions {
 	 * @param display the display to set
 	 */
 	public final void setDisplay(MeterDisplay display) {
-		this.display = display;
+		// checks if consistent
+		this.display = display == null ? MeterDisplay.VALUE : display;
 	}
 
 	/**
@@ -204,7 +205,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * @param format the format to set
 	 */
 	public final void setFormat(String format) {
-		this.format = format;
+		this.format = format == null ? DEFAULT_FORMAT : format;
 	}
 
 	/**
@@ -222,7 +223,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * @param fontFamily the fontFamily to set
 	 */
 	public final void setFontFamily(String fontFamily) {
-		this.fontFamily = fontFamily;
+		this.fontFamily = fontFamily == null ? Defaults.get().getGlobal().getDefaultFontFamily() : fontFamily;
 	}
 
 	/**
@@ -240,7 +241,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * @param fontStyle the fontStyle to set
 	 */
 	public final void setFontStyle(FontStyle fontStyle) {
-		this.fontStyle = fontStyle;
+		this.fontStyle = fontStyle == null ? FontStyle.NORMAL : fontStyle;
 	}
 
 	/**
@@ -258,7 +259,7 @@ public class MeterOptions extends AbstractPieOptions {
 	 * @param displayFontColor the displayFontColor to set
 	 */
 	public final void setDisplayFontColor(IsColor displayFontColor) {
-		this.displayFontColor = displayFontColor;
+		this.displayFontColor = displayFontColor == null ? DEFAULT_DISPLAY_COLOR : displayFontColor;
 	}
 
 	/**

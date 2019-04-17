@@ -66,6 +66,11 @@ public final class Percentage {
 	 *         {@link Double#NaN}.
 	 */
 	public static double compute(IsChart chart, double value, ScriptableContext context, boolean stacked) {
+		// checks if arguments are consistent
+		if (chart == null || context == null) {
+			// if not consistent
+			return Double.NaN;
+		}
 		// creates the total reference
 		double total;
 		// checks if stacked

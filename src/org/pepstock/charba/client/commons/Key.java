@@ -50,10 +50,9 @@ public interface Key {
 	 */
 	public static void checkIfValid(Key key) {
 		if (!isValid(key)) {
-			throw new IllegalArgumentException("Key implementation instance is null");
+			throw new IllegalArgumentException("Key implementation instance is null or not consistent");
 		}
 	}
-
 
 	/**
 	 * Returns <code>true</code> if a key into an enumeration is related to the value, otherwise <code>false</code>.
