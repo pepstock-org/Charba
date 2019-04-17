@@ -21,6 +21,7 @@ import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.callbacks.BorderWidthCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
+import org.pepstock.charba.client.callbacks.Scriptable;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
@@ -29,6 +30,7 @@ import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.datalabels.DataLabelsOptionsFactory.DataLabelsDefaultsOptionsFactory;
 import org.pepstock.charba.client.datalabels.callbacks.AlignCallback;
@@ -356,21 +358,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		formatterCallbackProxy.setCallback((contextFunction, value, context) -> {
-			// gets chart instance
-			IsChart chart = ScriptableUtils.retrieveChart(context, formatterCallback);
-			// checks if the handler is set
-			if (chart != null) {
-				// calls callback
-				String result = formatterCallback.invoke(chart, value, context);
-				// checks result
-				if (result != null) {
-					return result;
-				}
-			}
-			// default result
-			return String.valueOf(value);
-		});
+		formatterCallbackProxy.setCallback((contextFunction, value, context) -> onFormatter(context, value));
 		// gets value calling callback
 		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, backgroundColorCallback, getBackgroundColorAsString()));
 		// gets value calling callback
@@ -390,20 +378,7 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// gets value calling callback
 		clipCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, clipCallback, isClip()).booleanValue());
 		// gets value calling callback
-		displayCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			Display value = ScriptableUtils.getOptionValueAsString(context, displayCallback);
-			Display result = value == null ? getDisplay() : value;
-			// checks if is boolean
-			// checks if it must return a boolean or string
-			if (Display.AUTO.equals(result)) {
-				// returns string
-				return Display.AUTO.value();
-			} else {
-				// returns boolean
-				return Display.TRUE.equals(result);
-			}
-		});
+		displayCallbackProxy.setCallback((contextFunction, context) -> onDisplay(context));
 		// gets value calling callback
 		offsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, offsetCallback, getOffset()).doubleValue());
 		// gets value calling callback
@@ -421,29 +396,9 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		// gets value calling callback
 		textShadowColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, textShadowColorCallback, getTextShadowColorAsString()));
 		// gets value calling callback
-		fontCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			Font result = ScriptableUtils.getOptionValue(context, fontCallback);
-			// checks if result is consistent
-			if (result != null) {
-				// returns result
-				return result.getObject();
-			}
-			// default result
-			return getFont().getObject();
-		});
+		fontCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(context, fontCallback));
 		// gets value calling callback
-		paddingCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets value
-			Padding result = ScriptableUtils.getOptionValue(context, paddingCallback);
-			// checks if result is consistent
-			if (result != null) {
-				// returns result
-				return result.getObject();
-			}
-			// default result
-			return getPadding().getObject();
-		});
+		paddingCallbackProxy.setCallback((contextFunction, context) -> onFontOrPadding(context, paddingCallback));
 	}
 
 	/**
@@ -732,9 +687,12 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @param display the visibility of labels.
 	 */
 	public void setDisplay(Display display) {
+		// checks if desiplay is auto and not a boolean
 		if (Display.AUTO.equals(display)) {
+			// apply auto
 			setValue(Property.DISPLAY, display);
 		} else {
+			// apply a boolean value
 			setValue(Property.DISPLAY, Display.TRUE.equals(display));
 		}
 	}
@@ -745,13 +703,19 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 * @return the visibility of labels.
 	 */
 	public Display getDisplay() {
+		// gets the type of display property
 		ObjectType type = type(Property.DISPLAY);
+		// checks if boolean
 		if (ObjectType.BOOLEAN.equals(type)) {
+			// gets boolean avlue
 			boolean value = getValue(Property.DISPLAY, true);
 			return value ? Display.TRUE : Display.FALSE;
 		} else if (ObjectType.STRING.equals(type)) {
+			// checks if is a string
+			// returns as string
 			return getValue(Property.DISPLAY, Display.class, defaultsOptions.getDisplay());
 		}
+		// if here returns defautl value
 		return defaultsOptions.getDisplay();
 	}
 
@@ -1504,6 +1468,70 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.PADDING);
 		}
+	}
+
+	/**
+	 * Returns a string as formatted value when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @param value value to be formatted
+	 * @return a string as formatted value
+	 */
+	private String onFormatter(ScriptableContext context, double value) {
+		// gets chart instance
+		IsChart chart = ScriptableUtils.retrieveChart(context, formatterCallback);
+		// checks if the handler is set
+		if (chart != null) {
+			// calls callback
+			String result = formatterCallback.invoke(chart, value, context);
+			// checks result
+			if (result != null) {
+				return result;
+			}
+		}
+		// default result
+		return String.valueOf(value);
+	}
+
+	/**
+	 * Returns a boolean or {@link Display} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @return a object property value, as boolean or {@link Display}
+	 */
+	private Object onDisplay(ScriptableContext context) {
+		// gets value
+		Display value = ScriptableUtils.getOptionValueAsString(context, displayCallback);
+		Display result = value == null ? getDisplay() : value;
+		// checks if is boolean
+		// checks if it must return a boolean or string
+		if (Display.AUTO.equals(result)) {
+			// returns string
+			return Display.AUTO.value();
+		} else {
+			// returns boolean
+			return Display.TRUE.equals(result);
+		}
+	}
+
+	/**
+	 * Returns a native object as font or padding when the callback has been activated.
+	 * 
+	 * @param context native object as context
+	 * @param callback callback to invoke
+	 * @param <T> type of callback result
+	 * @return a native object as font or padding
+	 */
+	private <T extends AbstractElement> NativeObject onFontOrPadding(ScriptableContext context, Scriptable<T> callback) {
+		// gets value
+		T result = ScriptableUtils.getOptionValue(context, callback);
+		// checks if result is consistent
+		if (result != null) {
+			// returns result
+			return result.getObject();
+		}
+		// default result
+		return getFont().getObject();
 	}
 
 }

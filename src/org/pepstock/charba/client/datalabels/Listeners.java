@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.datalabels;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
 import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.CallbackProxy;
@@ -63,39 +64,9 @@ public final class Listeners extends NativeObjectContainer {
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		enterEventCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets chart instance
-			IsChart chart = ScriptableUtils.retrieveChart(context, enterEventHandler);
-			// checks if the handler is set
-			if (chart != null) {
-				// calls handler
-				return enterEventHandler.onEnter(chart, context);
-			}
-			// defaults always true
-			return true;
-		});
-		leaveEventCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets chart instance
-			IsChart chart = ScriptableUtils.retrieveChart(context, leaveEventHandler);
-			// checks if the handler is set
-			if (chart != null) {
-				// calls handler
-				return leaveEventHandler.onLeave(chart, context);
-			}
-			// defaults always true
-			return true;
-		});
-		clickEventCallbackProxy.setCallback((contextFunction, context) -> {
-			// gets chart instance
-			IsChart chart = ScriptableUtils.retrieveChart(context, clickEventHandler);
-			// checks if the handler is set
-			if (chart != null) {
-				// calls handler
-				return clickEventHandler.onClick(chart, context);
-			}
-			// defaults always true
-			return true;
-		});
+		enterEventCallbackProxy.setCallback((contextFunction, context) -> onEnter(context));
+		leaveEventCallbackProxy.setCallback((contextFunction, context) -> onLeave(context));
+		clickEventCallbackProxy.setCallback((contextFunction, context) -> onClick(context));
 	}
 
 	/**
@@ -178,5 +149,58 @@ public final class Listeners extends NativeObjectContainer {
 			remove(Event.LEAVE);
 		}
 	}
+	
+	/**
+	 * Returns a boolean when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @return a object property value, as boolean
+	 */
+	private boolean onClick(ScriptableContext context) {
+		// gets chart instance
+		IsChart chart = ScriptableUtils.retrieveChart(context, clickEventHandler);
+		// checks if the handler is set
+		if (chart != null) {
+			// calls handler
+			return clickEventHandler.onClick(chart, context);
+		}
+		// defaults always true
+		return true;
+	}
 
+	/**
+	 * Returns a boolean when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @return a object property value, as boolean
+	 */
+	private boolean onEnter(ScriptableContext context) {
+		// gets chart instance
+		IsChart chart = ScriptableUtils.retrieveChart(context, enterEventHandler);
+		// checks if the handler is set
+		if (chart != null) {
+			// calls handler
+			return enterEventHandler.onEnter(chart, context);
+		}
+		// defaults always true
+		return true;
+	}
+	
+	/**
+	 * Returns a boolean when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @return a object property value, as boolean
+	 */
+	private boolean onLeave(ScriptableContext context) {
+		// gets chart instance
+		IsChart chart = ScriptableUtils.retrieveChart(context, leaveEventHandler);
+		// checks if the handler is set
+		if (chart != null) {
+			// calls handler
+			return leaveEventHandler.onLeave(chart, context);
+		}
+		// defaults always true
+		return true;
+	}
 }
