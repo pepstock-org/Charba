@@ -157,7 +157,11 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	@Override
 	public boolean containsAll(Collection<?> collection) {
 		// checks if argument is consistent
-		return collection != null ? delegate.containsAll(collection) : false;
+		if (collection != null) {
+			return delegate.containsAll(collection);			
+		}
+		// if here, collection is not consistent
+		return false;
 	}
 
 	/**

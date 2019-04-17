@@ -83,7 +83,11 @@ public abstract class NativeObjectContainer {
 	protected final boolean has(Key key) {
 		// checks arguments if consistent
 		// if not consistent, returns not found
-		return Key.isValid(key) ? nativeObject.hasProperty(key.value()) : false;
+		if (Key.isValid(key)){ 
+			return nativeObject.hasProperty(key.value());
+		}
+		// if here, key is not consistent
+		return false;
 	}
 
 	/**
