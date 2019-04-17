@@ -136,7 +136,7 @@ public final class DatasetsItemsSelectorOptionsBuilder {
 	 * @return builder instance
 	 */
 	public DatasetsItemsSelectorOptionsBuilder setBorderColor(IsColor color) {
-		options.setColor(color);
+		options.setBorderColor(color);
 		return this;
 	}
 
