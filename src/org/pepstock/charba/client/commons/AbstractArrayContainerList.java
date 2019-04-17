@@ -17,6 +17,7 @@ package org.pepstock.charba.client.commons;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -59,5 +60,27 @@ abstract class AbstractArrayContainerList<E, A extends Array> extends AbstractAr
 		}
 		return modified;
 	}
+	
+	/**
+	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by
+	 * the specified collection's iterator
+	 */
+	@Override
+	public final boolean addAll(Collection<? extends E> collection) {
+		// set modified
+		boolean modified = collection != null && !collection.isEmpty();
+		// checks if argument is consistent
+		if (modified) {
+			Iterator<? extends E> iter = collection.iterator();
+			// scans all elements
+			while (iter.hasNext()) {
+				// adds and
+				// sets modified
+				modified = modified && add(iter.next());
+			}
+		}
+		return modified;
+	}
+
 
 }

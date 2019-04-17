@@ -15,9 +15,6 @@
 */
 package org.pepstock.charba.client.commons;
 
-import java.util.Collection;
-import java.util.Iterator;
-
 /**
  * The user of this interface has precise control over where in the list each element is inserted. <br>
  * The user can access elements by their integer index (position in the list), and search for elements in the list.<br>
@@ -105,27 +102,6 @@ public final class ArrayEnumList<E extends Key> extends AbstractArrayContainerLi
 		// if here, element is not consistent
 		// and not added
 		return false;
-	}
-
-	/**
-	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by
-	 * the specified collection's iterator
-	 */
-	@Override
-	public boolean addAll(Collection<? extends E> collection) {
-		// set modified
-		boolean modified = collection != null && !collection.isEmpty();
-		// checks if argument is consistent
-		if (modified) {
-			Iterator<? extends E> iter = collection.iterator();
-			// scans all elements
-			while (iter.hasNext()) {
-				// adds and
-				// sets modified
-				modified = modified && add(iter.next());
-			}
-		}
-		return modified;
 	}
 
 	/**

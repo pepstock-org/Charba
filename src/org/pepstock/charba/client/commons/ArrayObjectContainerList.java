@@ -161,27 +161,6 @@ public final class ArrayObjectContainerList<E extends NativeObjectContainer> ext
 	}
 
 	/**
-	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by
-	 * the specified collection's iterator
-	 */
-	@Override
-	public boolean addAll(Collection<? extends E> collection) {
-		// set modified checking if collection is empty
-		boolean modified = collection != null && !collection.isEmpty();
-		// checks if argument is consistent
-		if (modified) {
-			Iterator<? extends E> iter = collection.iterator();
-			// scans all elements
-			while (iter.hasNext()) {
-				// adds and
-				// sets modified
-				modified = modified && add(iter.next());
-			}
-		}
-		return modified;
-	}
-
-	/**
 	 * Removes all of the elements from this list. The list will be empty after this call returns.
 	 */
 	@Override
