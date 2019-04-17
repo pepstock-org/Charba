@@ -216,7 +216,7 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	 * @see org.pepstock.charba.client.events.AddHandlerEventHandler#onAdd(org.pepstock.charba.client.events.AddHandlerEvent)
 	 */
 	@Override
-	public void onAdd(AddHandlerEvent event) {
+	public final void onAdd(AddHandlerEvent event) {
 		// checks which kind of handler has been added
 		if (event.isRecognize(AnimationCompleteEvent.TYPE)) {
 			// checks if property exist
@@ -244,7 +244,7 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 	 * RemoveHandlerEvent)
 	 */
 	@Override
-	public void onRemove(RemoveHandlerEvent event) {
+	public final void onRemove(RemoveHandlerEvent event) {
 		// checks which kind of handler has been removed
 		if (event.isRecognize(AnimationCompleteEvent.TYPE)) {
 			// decrements amount of handlers

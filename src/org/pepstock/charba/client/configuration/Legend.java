@@ -153,7 +153,7 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	 * @see org.pepstock.charba.client.events.AddHandlerEventHandler#onAdd(org.pepstock.charba.client.events.AddHandlerEvent)
 	 */
 	@Override
-	public void onAdd(AddHandlerEvent event) {
+	public final void onAdd(AddHandlerEvent event) {
 		// checks if type of added event handler is dataset selection or click
 		if (event.isRecognize(LegendClickEvent.TYPE)) {
 			// if java script property is missing
@@ -189,7 +189,7 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	 * RemoveHandlerEvent)
 	 */
 	@Override
-	public void onRemove(RemoveHandlerEvent event) {
+	public final void onRemove(RemoveHandlerEvent event) {
 		// checks if type of removed event handler is dataset selection or click
 		if (event.isRecognize(LegendClickEvent.TYPE)) {
 			// decrements the amount of handlers
