@@ -70,8 +70,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * @return the padding height used by clear selection element or <b>{@link ClearSelection#DEFAULT_VALUE}</b> if disabled
 	 */
 	public double getPadding(IsChart chart) {
-		// checks if there is a handler
-		if (HANDLERS.containsKey(chart.getId())) {
+		// checks if chart is consistent and there is a handler
+		if (chart != null && HANDLERS.containsKey(chart.getId())) {
 			// gets selection handler
 			SelectionHandler handler = HANDLERS.get(chart.getId());
 			// option instance
@@ -98,8 +98,8 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	public void clearSelection(IsChart chart) {
 		// flag with default to false
 		boolean fireEvent = false;
-		// checks for handler
-		if (HANDLERS.containsKey(chart.getId())) {
+		// checks chart is consistent and for handler
+		if (chart != null && HANDLERS.containsKey(chart.getId())) {
 			// gets selection handler
 			SelectionHandler handler = HANDLERS.get(chart.getId());
 			// checks into options if fire event has been set
@@ -116,6 +116,11 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * @param fireEvent if <code>true</code> an event is fired otherwise not.
 	 */
 	public void clearSelection(IsChart chart, boolean fireEvent) {
+		// checks if chart is consistent
+		if (chart == null) {
+			// if not exit
+			return;
+		}
 		// flag to know if the chart must be updated
 		boolean mustBeUpdated = false;
 		// checks if we have already an handler
@@ -149,9 +154,10 @@ public final class DatasetsItemsSelector extends AbstractPlugin {
 	 * @param chart chart instance to apply the fire events skipping.
 	 */
 	public void skipNextRefreshFireEvent(IsChart chart) {
+		// checks is chart is consistent
 		// checks if the plugin has been invoked for LINE or BAR charts
 		// checks if we have already an handler
-		if ((chart.getType().equals(ChartType.LINE) || chart.getType().equals(ChartType.BAR)) && HANDLERS.containsKey(chart.getId())) {
+		if (chart != null && (chart.getType().equals(ChartType.LINE) || chart.getType().equals(ChartType.BAR)) && HANDLERS.containsKey(chart.getId())) {
 			// gets selection handler
 			SelectionHandler handler = HANDLERS.get(chart.getId());
 			// sets the flag to skip next event after refresh

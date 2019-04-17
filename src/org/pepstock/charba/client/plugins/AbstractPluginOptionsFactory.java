@@ -35,6 +35,8 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 	 * @param pluginId plugin id
 	 */
 	protected AbstractPluginOptionsFactory(String pluginId) {
+		// checks plugin id
+		PluginIdChecker.check(pluginId);
 		// stores plugin id
 		this.pluginId = pluginId;
 	}
@@ -49,22 +51,28 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 	}
 
 	/**
-	 * Loads the default plugin options from defaults.
+	 * Loads the default plugin options from defaults. If factory, passed as argument, is <code>null</code>, returns <code>null</code>.
 	 * 
 	 * @param factory factory to load options
-	 * @return the defaults plugin options or new options instance if not exist
 	 * @param <G> type of native object container
+	 * @return the defaults plugin options or new options instance if not exist. If factory is <code>null</code>, returns <code>null</code>.
 	 */
 	protected final <G extends NativeObjectContainer> G loadGlobalsPluginOptions(NativeObjectContainerFactory<G> factory) {
-		// checks if the default global options has been added for the plugin
-		if (Defaults.get().getGlobal().getPlugins().hasOptions(pluginId)) {
-			// reads the default default global options
-			return Defaults.get().getGlobal().getPlugins().getOptions(pluginId, factory);
-		} else {
-			// if here, no default global option
-			// then the plugin will use the static defaults
-			return factory.create();
+		// checks if factory is consistent
+		if (factory != null) {
+			// checks if the default global options has been added for the plugin
+			if (Defaults.get().getGlobal().getPlugins().hasOptions(pluginId)) {
+				// reads the default default global options
+				return Defaults.get().getGlobal().getPlugins().getOptions(pluginId, factory);
+			} else {
+				// if here, no default global option
+				// then the plugin will use the static defaults
+				return factory.create();
+			}
 		}
+		// if here the factory is not consistent
+		// then returns null
+		return null;
 	}
 
 }

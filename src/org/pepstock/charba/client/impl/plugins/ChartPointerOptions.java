@@ -134,7 +134,10 @@ public final class ChartPointerOptions extends AbstractPluginOptions {
 	 * @see com.google.gwt.dom.client.Style.Cursor
 	 */
 	public void setCursorPointer(Cursor cursor) {
-		setValue(Property.CURSOR_POINTER, cursor.name());
+		// checks if cursor is consistent
+		if (cursor != null) {
+			setValue(Property.CURSOR_POINTER, cursor.name());
+		}
 	}
 
 	/**

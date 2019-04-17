@@ -52,12 +52,23 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	 * @param pluginId plugin id
 	 */
 	protected AbstractPluginCachedOptionsFactory(String pluginId) {
+		// checks plugin id
+		PluginIdChecker.check(pluginId);
 		// stores plugin id
 		this.pluginId = pluginId;
 		// adds itself as charts life cycle listener
 		Charts.addLifecycleListener(this);
 	}
 
+	/**
+	 * Returns the plugin id related to this options.
+	 * 
+	 * @return the plugin id related to this options
+	 */
+	public final String getPluginId() {
+		return pluginId;
+	}
+	
 	/**
 	 * Registers new plugin options into a map, in order to return a right object instance, mainly because the plugin options
 	 * can contain callbacks and references to be maintained.

@@ -139,15 +139,23 @@ public final class ColorSchemesOptions extends AbstractPluginOptions {
 	 * @param scheme the color scheme.
 	 */
 	public void setScheme(ColorScheme scheme) {
-		// checks if the scheme is already cached (used)
-		// checks also if scheme is consistent
-		if (!ColorSchemesUtil.hasColorScheme(scheme.category(), scheme.value())) {
-			// puts the scheme
-			ColorSchemesUtil.putColorScheme(scheme);
+		// checks if color scheme is consistent
+		if (ColorScheme.isValid(scheme)) {
+			// checks if the scheme is already cached (used)
+			// checks also if scheme is consistent
+			if (!ColorSchemesUtil.hasColorScheme(scheme.category(), scheme.value())) {
+				// puts the scheme
+				ColorSchemesUtil.putColorScheme(scheme);
+			}
+			// stores the values of scheme
+			setValue(Property.SCHEME_NAME, scheme);
+			setValue(Property.SCHEME_CATEGORY, scheme.category());
+		} else {
+			// if here color scheme is not consistent
+			// then removes the keys if exist
+			removeIfExists(Property.SCHEME_NAME);
+			removeIfExists(Property.SCHEME_CATEGORY);
 		}
-		// stores the values of scheme
-		setValue(Property.SCHEME_NAME, scheme);
-		setValue(Property.SCHEME_CATEGORY, scheme.category());
 	}
 
 	/**

@@ -84,6 +84,9 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 
 	protected AbstractPluginOptions(String pluginId, NativeObject nativeObject) {
 		super(nativeObject);
+		// checks plugin id
+		PluginIdChecker.check(pluginId);
+		// stores plugin id
 		this.pluginId = pluginId;
 	}
 
@@ -106,22 +109,28 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	}
 
 	/**
-	 * Loads the default plugin options from defaults.
+	 * Loads the default plugin options from defaults. If factory, passed as argument, is <code>null</code>, returns <code>null</code>.
 	 * 
 	 * @param factory factory to load options
-	 * @return the defaults plugin options or new options instance if not exist
 	 * @param <T> type of native object container
+	 * @return the defaults plugin options or new options instance if not exist. If factory is <code>null</code>, returns <code>null</code>.
 	 */
 	protected final <T extends NativeObjectContainer> T loadGlobalsPluginOptions(NativeObjectContainerFactory<T> factory) {
-		// checks if the default global options has been added for the plugin
-		if (Defaults.get().getGlobal().getPlugins().hasOptions(pluginId)) {
-			// reads the default default global options
-			return Defaults.get().getGlobal().getPlugins().getOptions(pluginId, factory);
-		} else {
-			// if here, no default global option
-			// then the plugin will use the static defaults
-			return factory.create();
+		// checks if factory is consistent
+		if (factory != null) {
+			// checks if the default global options has been added for the plugin
+			if (Defaults.get().getGlobal().getPlugins().hasOptions(pluginId)) {
+				// reads the default default global options
+				return Defaults.get().getGlobal().getPlugins().getOptions(pluginId, factory);
+			} else {
+				// if here, no default global option
+				// then the plugin will use the static defaults
+				return factory.create();
+			}
 		}
+		// if here the factory is not consistent
+		// then returns null
+		return null;
 	}
 
 	/**
@@ -138,8 +147,11 @@ public abstract class AbstractPluginOptions extends NativeObjectContainer {
 	 * @param chart chart instance
 	 */
 	public final void store(IsChart chart) {
-		// stores itself into defaults
-		chart.getOptions().getPlugins().setOptions(pluginId, this);
+		// checks if chart is consistent
+		if (chart != null) {
+			// stores itself into defaults
+			chart.getOptions().getPlugins().setOptions(pluginId, this);
+		}
 	}
 
 }

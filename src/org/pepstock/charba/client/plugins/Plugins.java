@@ -43,12 +43,15 @@ public final class Plugins implements ConfigurationElement {
 	 * @param plugin plugin instance
 	 */
 	public void add(Plugin plugin) {
-		// checks the plugin id
-		PluginIdChecker.check(plugin.getId());
-		// creates a java script object, wrapper of the plugin
-		WrapperPlugin wPlugin = new WrapperPlugin(plugin);
-		// stores the wrapper into a list
-		pluginsInstances.add(wPlugin);
+		// checks if plugin is consistent
+		if (plugin != null) {
+			// checks the plugin id
+			PluginIdChecker.check(plugin.getId());
+			// creates a java script object, wrapper of the plugin
+			WrapperPlugin wPlugin = new WrapperPlugin(plugin);
+			// stores the wrapper into a list
+			pluginsInstances.add(wPlugin);
+		}
 	}
 
 	/**
@@ -99,8 +102,8 @@ public final class Plugins implements ConfigurationElement {
 	 * @param chart instance of the chart
 	 */
 	public void onChartConfigure(Configuration config, IsChart chart) {
-		// checks if config is consistent
-		if (config == null) {
+		// checks if config and chart are consistent
+		if (config == null || chart == null) {
 			// otherwise do nothing
 			return;
 		}
@@ -119,6 +122,11 @@ public final class Plugins implements ConfigurationElement {
 	 */
 	@Override
 	public void load(IsChart chart, Configuration configuration) {
+		// checks if config and chart are consistent
+		if (configuration == null || chart == null) {
+			// otherwise do nothing
+			return;
+		}
 		// checks if there is any plugin to configured to chart.js
 		if (!pluginsInstances.isEmpty()) {
 			// new array

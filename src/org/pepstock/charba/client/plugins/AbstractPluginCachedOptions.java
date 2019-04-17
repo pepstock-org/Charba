@@ -47,6 +47,10 @@ public abstract class AbstractPluginCachedOptions extends AbstractPluginOptions 
 	protected AbstractPluginCachedOptions(String pluginId, AbstractPluginCachedOptionsFactory<?> factory, boolean deferredRegistration) {
 		// creates an empty native object
 		super(pluginId);
+		// checks if factory is consistent
+		if (factory == null){
+			throw new IllegalArgumentException("Factory is null");
+		}
 		// stores factory and pluginId
 		this.factory = factory;
 		// checks if it must deferred the registration to

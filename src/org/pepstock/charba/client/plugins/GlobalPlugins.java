@@ -48,6 +48,11 @@ public final class GlobalPlugins {
 	 * @param plugins the native object which maps <code>chart.plugins</code>
 	 */
 	public GlobalPlugins(NativePlugins plugins) {
+		// checks if native plugins is consistent
+		if (plugins == null) {
+			// if not, exception
+			throw new IllegalArgumentException("Native plugins instance is null");
+		}
 		this.plugins = plugins;
 	}
 
@@ -59,18 +64,23 @@ public final class GlobalPlugins {
 	 *         id of plugin instance.
 	 */
 	public boolean register(Plugin plugin) {
-		// checks the plugin id
-		PluginIdChecker.check(plugin.getId());
-		// checks if ID is already registered
-		if (getIds().contains(plugin.getId())) {
-			return false;
+		// checks if plugin is consistent
+		if (plugin != null) {
+			// checks the plugin id
+			PluginIdChecker.check(plugin.getId());
+			// checks if ID is already registered
+			if (getIds().contains(plugin.getId())) {
+				return false;
+			}
+			// creates a java script object, wrapper of the plugin
+			WrapperPlugin wPlugin = new WrapperPlugin(plugin);
+			plugins.register(wPlugin.getNativeObject());
+			// stores the id and object into a map
+			pluginIds.put(plugin.getId(), wPlugin);
+			return true;
 		}
-		// creates a java script object, wrapper of the plugin
-		WrapperPlugin wPlugin = new WrapperPlugin(plugin);
-		plugins.register(wPlugin.getNativeObject());
-		// stores the id and object into a map
-		pluginIds.put(plugin.getId(), wPlugin);
-		return true;
+		// if here, plugin instance is not consistent
+		return false;
 	}
 
 	/**
@@ -134,6 +144,8 @@ public final class GlobalPlugins {
 	 * @param enable <code>true</code> to enable to all charts, otherwise <code>false</code>.
 	 */
 	public void setEnabledAllCharts(String pluginId, boolean enable) {
+		// checks the plugin id
+		PluginIdChecker.check(pluginId);
 		// gets all global registered plugin
 		Set<String> currentIds = getIds();
 		// scans all
@@ -163,6 +175,8 @@ public final class GlobalPlugins {
 	 * @return <code>true</code> if the plugin is enabled to all charts, otherwise <code>false</code>.
 	 */
 	public boolean isEnabledAllCharts(String pluginId) {
+		// checks the plugin id
+		PluginIdChecker.check(pluginId);
 		return !pluginsToBeDisabled.contains(pluginId);
 	}
 
@@ -173,8 +187,8 @@ public final class GlobalPlugins {
 	 * @param chart instance of the chart
 	 */
 	public void onChartConfigure(Configuration config, IsChart chart) {
-		// checks if config is consistent
-		if (config == null) {
+		// checks if config and chart are consistent
+		if (config == null || chart == null) {
 			// otherwise do nothing
 			return;
 		}
