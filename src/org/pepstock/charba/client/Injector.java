@@ -52,8 +52,8 @@ public final class Injector {
 	 * @param resource script resource
 	 */
 	public static void ensureInjected(ResourcePrototype resource) {
-		// checks if already injected
-		if (!ELEMENTS_INJECTED.contains(resource.getName())) {
+		// checks if resource is consistent and if already injected
+		if (resource != null && !ELEMENTS_INJECTED.contains(resource.getName())) {
 			if (resource instanceof TextResource) {
 				TextResource textResource = (TextResource) resource;
 				// creates a script element
