@@ -286,7 +286,7 @@ public enum GwtMaterialScheme implements IsEnumeratedScheme
 	private GwtMaterialScheme(IsColor... gwtColors) {
 		scheme = new EnumeratedScheme(CATEGORY, name());
 		// adds them into the list
-		scheme.getColors().addAll(Arrays.asList(gwtColors));
+		scheme.addAll(Arrays.asList(gwtColors));
 	}
 
 	/*

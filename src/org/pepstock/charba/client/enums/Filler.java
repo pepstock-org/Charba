@@ -73,7 +73,7 @@ public final class Filler extends NativeObjectContainer {
 	public Filler(NativeObject nativeObject, IsFill defaultValue) {
 		super(nativeObject);
 		// checks default value instance
-		if (IsFill.isValid(defaultValue)) {
+		if (!IsFill.isValid(defaultValue)) {
 			throw new IllegalArgumentException("Default value is null or not consistent");
 		}
 		this.defaultValue = defaultValue;

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.impl.plugins.enums;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,7 +46,25 @@ final class EnumeratedScheme implements ColorScheme {
 		this.category = category;
 		this.value = value;
 	}
+	
+	/**
+	 * Adds a color to the list.
+	 * 
+	 * @param color color instance to add
+	 */
+	void add(IsColor color) {
+		colors.add(color);
+	}
 
+	/**
+	 * Adds a color to the list.
+	 * 
+	 * @param color color instance to add
+	 */
+	void addAll(List<IsColor> color) {
+		colors.addAll(color);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -73,7 +92,7 @@ final class EnumeratedScheme implements ColorScheme {
 	 */
 	@Override
 	public List<IsColor> getColors() {
-		return colors;
+		return Collections.unmodifiableList(colors);
 	}
 
 }

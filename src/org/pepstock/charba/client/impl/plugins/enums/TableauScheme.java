@@ -1502,7 +1502,7 @@ public enum TableauScheme implements IsEnumeratedScheme
 		// scans all hex colors and creates ISCOLOR
 		for (String color : hexColors) {
 			// and adds them into the list
-			scheme.getColors().add(ColorBuilder.parse(color));
+			scheme.add(ColorBuilder.parse(color));
 		}
 	}
 

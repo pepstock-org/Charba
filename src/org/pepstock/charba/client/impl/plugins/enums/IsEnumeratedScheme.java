@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.impl.plugins.enums;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.IsColor;
@@ -42,7 +43,13 @@ interface IsEnumeratedScheme extends ColorScheme {
 	 */
 	@Override
 	default String value() {
-		return getScheme().value();
+		// checks if scheme is consistent
+		if (getScheme() != null) {
+			return getScheme().value();
+		} else {
+			// if not, exception
+			throw new IllegalArgumentException("Color scheme instance is null");
+		}
 	}
 
 	/*
@@ -52,7 +59,12 @@ interface IsEnumeratedScheme extends ColorScheme {
 	 */
 	@Override
 	default String category() {
-		return getScheme().category();
+		// checks if scheme is consistent
+		if (getScheme() != null) {
+			return getScheme().category();
+		}
+		// returns the default category
+		return ColorScheme.super.category();
 	}
 
 	/*
@@ -62,7 +74,13 @@ interface IsEnumeratedScheme extends ColorScheme {
 	 */
 	@Override
 	default List<IsColor> getColors() {
-		return getScheme().getColors();
+		// checks if scheme is consistent
+		if (getScheme() != null) {
+			return getScheme().getColors();
+		}
+		// if here scheme is not consistent
+		// then returns an empty list
+		return new ArrayList<>();
 	}
 
 }
