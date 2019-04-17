@@ -117,7 +117,7 @@ public final class ScriptableFunctions {
 		 * 
 		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
-		 * @return a object proeprty value.
+		 * @return a object property value.
 		 */
 		Object call(Object contextFunction, ScriptableContext context);
 	}
