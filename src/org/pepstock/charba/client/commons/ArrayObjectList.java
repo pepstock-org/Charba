@@ -224,8 +224,10 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 	@Override
 	public int indexOf(Object object) {
 		// checks if argument is consistent
-		if (object != null) {
-			return array.indexOf(object);
+		if (object instanceof NativeObject) {
+			NativeObject value = (NativeObject) object;
+			// check index of
+			return array.indexOf(value);
 		}
 		// if here, element is not consistent
 		return -1;
@@ -238,8 +240,10 @@ public final class ArrayObjectList extends AbstractArrayList<NativeObject, Array
 	@Override
 	public int lastIndexOf(Object object) {
 		// checks if argument is consistent
-		if (object != null) {
-			return array.lastIndexOf(object);
+		if (object instanceof NativeObject) {
+			NativeObject value = (NativeObject) object;
+			// check last index of
+			return array.lastIndexOf(value);
 		}
 		// if here, element is not consistent
 		return -1;

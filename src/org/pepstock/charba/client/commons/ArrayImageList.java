@@ -20,6 +20,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.pepstock.charba.client.items.UndefinedValues;
+
 import com.google.gwt.dom.client.ImageElement;
 
 /**
@@ -217,7 +219,7 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 		if (checkRange(index)) {
 			return array.remove(index);
 		}
-		return null;
+		return UndefinedValues.IMAGE_ELEMENT;
 	}
 
 	/**
@@ -227,8 +229,10 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	@Override
 	public int indexOf(Object object) {
 		// checks if object is consistent
-		if (object != null) {
-			return array.indexOf(object);
+		if (object instanceof ImageElement) {
+			ImageElement value = (ImageElement) object;
+			// check index of
+			return array.indexOf(value);
 		}
 		return -1;
 	}
@@ -240,8 +244,10 @@ public final class ArrayImageList extends AbstractArrayList<ImageElement, ArrayI
 	@Override
 	public int lastIndexOf(Object object) {
 		// checks if object is consistent
-		if (object != null) {
-			return array.lastIndexOf(object);
+		if (object instanceof ImageElement) {
+			ImageElement value = (ImageElement) object;
+			// check last index of
+			return array.lastIndexOf(value);
 		}
 		return -1;
 	}
