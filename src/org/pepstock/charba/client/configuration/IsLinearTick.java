@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.Defaults;
+
 /**
  * Common methods for linear scale is use to chart numerical data.<br>
  * Can be used for cartesian and radial axes.
@@ -37,7 +39,10 @@ public interface IsLinearTick {
 	 * @param beginAtZero if true, scale will include 0 if it is not already included.
 	 */
 	default void setBeginAtZero(boolean beginAtZero) {
-		getAxis().getScale().getTicks().setBeginAtZero(beginAtZero);
+		// checks if axis is consistent
+		if (getAxis() != null) {
+			getAxis().getScale().getTicks().setBeginAtZero(beginAtZero);
+		}
 	}
 
 	/**
@@ -46,7 +51,12 @@ public interface IsLinearTick {
 	 * @return if true, scale will include 0 if it is not already included.
 	 */
 	default boolean isBeginAtZero() {
-		return getAxis().getScale().getTicks().isBeginAtZero();
+		// checks if axis is consistent
+		if (getAxis() != null) {
+			return getAxis().getScale().getTicks().isBeginAtZero();
+		}
+		// if here, axis is not consistent
+		return Defaults.get().getScale().getTicks().isBeginAtZero();
 	}
 
 	/**
@@ -55,7 +65,10 @@ public interface IsLinearTick {
 	 * @param min the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	default void setMin(double min) {
-		getAxis().getScale().getTicks().setMin(min);
+		// checks if axis is consistent
+		if (getAxis() != null) {
+			getAxis().getScale().getTicks().setMin(min);
+		}
 	}
 
 	/**
@@ -64,7 +77,12 @@ public interface IsLinearTick {
 	 * @return the user defined minimum number for the scale, overrides minimum value from data.
 	 */
 	default double getMin() {
-		return getAxis().getScale().getTicks().getMin();
+		// checks if axis is consistent
+		if (getAxis() != null) {
+			return getAxis().getScale().getTicks().getMin();
+		}
+		// if here, axis is not consistent
+		return Defaults.get().getScale().getTicks().getMin();
 	}
 
 	/**
@@ -73,7 +91,10 @@ public interface IsLinearTick {
 	 * @param max user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	default void setMax(double max) {
-		getAxis().getScale().getTicks().setMax(max);
+		// checks if axis is consistent
+		if (getAxis() != null) {
+			getAxis().getScale().getTicks().setMax(max);
+		}
 	}
 
 	/**
@@ -82,7 +103,12 @@ public interface IsLinearTick {
 	 * @return user defined maximum number for the scale, overrides maximum value from data.
 	 */
 	default double getMax() {
-		return getAxis().getScale().getTicks().getMax();
+		// checks if axis is consistent
+		if (getAxis() != null) {
+			return getAxis().getScale().getTicks().getMax();
+		}
+		// if here, axis is not consistent
+		return Defaults.get().getScale().getTicks().getMax();
 	}
 
 	/**
@@ -91,7 +117,10 @@ public interface IsLinearTick {
 	 * @param maxTicksLimit maximum number of ticks and gridlines to show.
 	 */
 	default void setMaxTicksLimit(int maxTicksLimit) {
-		getAxis().getScale().getTicks().setMaxTicksLimit(maxTicksLimit);
+		// checks if axis is consistent
+		if (getAxis() != null) {
+			getAxis().getScale().getTicks().setMaxTicksLimit(maxTicksLimit);
+		}
 	}
 
 	/**
@@ -100,7 +129,12 @@ public interface IsLinearTick {
 	 * @return maximum number of ticks and grid lines to show.
 	 */
 	default int getMaxTicksLimit() {
-		return getAxis().getScale().getTicks().getMaxTicksLimit();
+		// checks if axis is consistent
+		if (getAxis() != null) {
+			return getAxis().getScale().getTicks().getMaxTicksLimit();
+		}
+		// if here, axis is not consistent
+		return Defaults.get().getScale().getTicks().getMaxTicksLimit();
 	}
 
 	/**
@@ -109,7 +143,10 @@ public interface IsLinearTick {
 	 * @param stepSize user defined fixed step size for the scale.
 	 */
 	default void setStepSize(double stepSize) {
-		getAxis().getScale().getTicks().setStepSize(stepSize);
+		// checks if axis is consistent
+		if (getAxis() != null) {
+			getAxis().getScale().getTicks().setStepSize(stepSize);
+		}
 	}
 
 	/**
@@ -118,7 +155,12 @@ public interface IsLinearTick {
 	 * @return user defined fixed step size for the scale.
 	 */
 	default double getStepSize() {
-		return getAxis().getScale().getTicks().getStepSize();
+		// checks if axis is consistent
+		if (getAxis() != null) {
+			return getAxis().getScale().getTicks().getStepSize();
+		}
+		// if here, axis is not consistent
+		return Defaults.get().getScale().getTicks().getStepSize();
 	}
 
 	/**
@@ -127,7 +169,10 @@ public interface IsLinearTick {
 	 * @param suggestedMax adjustment used when calculating the maximum data value.
 	 */
 	default void setSuggestedMax(double suggestedMax) {
-		getAxis().getScale().getTicks().setSuggestedMax(suggestedMax);
+		// checks if axis is consistent
+		if (getAxis() != null) {
+			getAxis().getScale().getTicks().setSuggestedMax(suggestedMax);
+		}
 	}
 
 	/**
@@ -136,7 +181,12 @@ public interface IsLinearTick {
 	 * @return adjustment used when calculating the maximum data value.
 	 */
 	default double getSuggestedMax() {
-		return getAxis().getScale().getTicks().getSuggestedMax();
+		// checks if axis is consistent
+		if (getAxis() != null) {
+			return getAxis().getScale().getTicks().getSuggestedMax();
+		}
+		// if here, axis is not consistent
+		return Defaults.get().getScale().getTicks().getSuggestedMax();
 	}
 
 	/**
@@ -145,7 +195,10 @@ public interface IsLinearTick {
 	 * @param suggestedMin adjustment used when calculating the minimum data value.
 	 */
 	default void setSuggestedMin(double suggestedMin) {
-		getAxis().getScale().getTicks().setSuggestedMin(suggestedMin);
+		// checks if axis is consistent
+		if (getAxis() != null) {
+			getAxis().getScale().getTicks().setSuggestedMin(suggestedMin);
+		}
 	}
 
 	/**
@@ -154,7 +207,12 @@ public interface IsLinearTick {
 	 * @return adjustment used when calculating the minimum data value.
 	 */
 	default double getSuggestedMin() {
-		return getAxis().getScale().getTicks().getSuggestedMin();
+		// checks if axis is consistent
+		if (getAxis() != null) {
+			return getAxis().getScale().getTicks().getSuggestedMin();
+		}
+		// if here, axis is not consistent
+		return Defaults.get().getScale().getTicks().getSuggestedMin();
 	}
 
 }

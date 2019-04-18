@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.Defaults;
+
 /**
  * Implements options for chart with lines to be showed and with span gaps.
  *
@@ -35,7 +37,10 @@ interface HasLineOptions {
 	 * @param showLine If false, the lines between points are not drawn.
 	 */
 	default void setShowLines(boolean showLine) {
-		getOptions().getConfiguration().setShowLines(showLine);
+		// checks if options is consistent
+		if (getOptions() != null) {
+			getOptions().getConfiguration().setShowLines(showLine);
+		}
 	}
 
 	/**
@@ -44,7 +49,12 @@ interface HasLineOptions {
 	 * @return If false, the lines between points are not drawn.
 	 */
 	default boolean isShowLines() {
-		return getOptions().getConfiguration().isShowLines();
+		// checks if options is consistent
+		if (getOptions() != null) {
+			return getOptions().getConfiguration().isShowLines();
+		}
+		// if here, options is not consistent
+		return Defaults.get().getGlobal().isShowLines();
 	}
 
 	/**
@@ -53,7 +63,10 @@ interface HasLineOptions {
 	 * @param spanGaps If false, NaN data causes a break in the line.
 	 */
 	default void setSpanGaps(boolean spanGaps) {
-		getOptions().getConfiguration().setSpanGaps(spanGaps);
+		// checks if options is consistent
+		if (getOptions() != null) {
+			getOptions().getConfiguration().setSpanGaps(spanGaps);
+		}
 	}
 
 	/**
@@ -62,7 +75,12 @@ interface HasLineOptions {
 	 * @return If false, NaN data causes a break in the line.
 	 */
 	default boolean isSpanGaps() {
-		return getOptions().getConfiguration().isSpanGaps();
+		// checks if options is consistent
+		if (getOptions() != null) {
+			return getOptions().getConfiguration().isSpanGaps();
+		}
+		// if here, options is not consistent
+		return Defaults.get().getGlobal().isSpanGaps();
 	}
 
 }

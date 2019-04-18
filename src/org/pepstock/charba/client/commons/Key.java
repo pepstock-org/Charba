@@ -22,13 +22,6 @@ package org.pepstock.charba.client.commons;
  * @author Andrea "Stock" Stocchero
  */
 public interface Key {
-
-	/**
-	 * Returns the name value of property
-	 * 
-	 * @return the name value of property
-	 */
-	String value();
 	
 	/**
 	 * Returns <code>true</code> if key passed as argument is not <code>null</code> and its value is not <code>null</code>
@@ -104,5 +97,13 @@ public interface Key {
 		// then returns default
 		return defaultKey;
 	}
+
+
+	/**
+	 * Returns the name value of property
+	 * 
+	 * @return the name value of property
+	 */
+	String value();
 
 }
