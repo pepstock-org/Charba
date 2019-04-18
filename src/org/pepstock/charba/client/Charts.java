@@ -47,7 +47,14 @@ public final class Charts {
 	 * @param listener chart life cycle listener instance
 	 */
 	public static void addLifecycleListener(ChartsLifecycleListener listener) {
-		LISTENERS.add(listener);
+		// checks if listener is consistent
+		if (listener != null) {
+			LISTENERS.add(listener);
+		} else {
+			// if here, listener is not consistent
+			// then exception
+			throw new IllegalArgumentException("Listener is null");
+		}
 	}
 
 	/**
@@ -56,7 +63,11 @@ public final class Charts {
 	 * @param listener chart life cycle listener instance
 	 */
 	public static void removeLifecycleListener(ChartsLifecycleListener listener) {
-		LISTENERS.remove(listener);
+		// checks if listener is consistent
+		// no exception because it is removing it
+		if (listener != null) {
+			LISTENERS.remove(listener);
+		}
 	}
 
 	/**
@@ -108,7 +119,12 @@ public final class Charts {
 	 * @return chart instance or <code>null</code> if not exist.
 	 */
 	public static IsChart get(String chartId) {
-		return CHARTS_INSTANCES.get(chartId);
+		// checks if argument is consistent
+		if (chartId !=  null) {
+			return CHARTS_INSTANCES.get(chartId);
+		}
+		// if here chart id is not consistent
+		return null;
 	}
 
 	/**

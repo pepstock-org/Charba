@@ -69,7 +69,7 @@ final class ChartHandlerManager extends HandlerManager {
 			// for cleaning up when chart will be destroy
 			chartInstance.addHandlerRegistration(registration);
 		}
-		// retuns registration
+		// returns registration
 		return registration;
 	}
 

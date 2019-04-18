@@ -86,7 +86,12 @@ public final class Helpers {
 	 * @return a clone of source object
 	 */
 	public NativeObject clone(NativeObject source) {
-		return nativeObject.clone(source);
+		// checks if argument is consistent
+		if (source != null) {
+			return nativeObject.clone(source);
+		}
+		// if here source is not consistent
+		return null;
 	}
 
 }

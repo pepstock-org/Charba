@@ -120,7 +120,7 @@ public final class Point extends AbstractElement<IsDefaultPoint> implements IsDe
 	/**
 	 * Returns the style of the point.
 	 * 
-	 * @return the style of the point.
+	 * @return the style of the point or <code>null</code> if point style is set as image
 	 */
 	public PointStyle getPointStyle() {
 		// checks if image as point style has been used

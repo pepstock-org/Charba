@@ -45,6 +45,12 @@ public final class ExtendedOptions extends ScaledOptions {
 	 * @param id CHARBA id.
 	 */
 	public void setCharbaId(String id) {
+		// checks if charba id is consistent
+		if (id == null) {
+			// if inconsistent
+			// exception
+			throw new IllegalArgumentException("CHARBA id is null");
+		}
 		setValue(Id.CHARBA_ID, id);
 	}
 

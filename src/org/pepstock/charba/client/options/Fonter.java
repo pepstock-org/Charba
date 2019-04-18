@@ -80,6 +80,16 @@ public final class Fonter extends NativeObjectContainer {
 	 */
 	public Fonter(NativeObject nativeObject, AbstractModel<?,?> model, IsDefaultFontItem defaultValue) {
 		super(nativeObject);
+		// checks if model is consistent
+		if (model == null) {
+			// if not, exception
+			throw new IllegalArgumentException("Model is null");
+		}
+		// checks if default value is consistent
+		if (defaultValue == null) {
+			// if not, exception
+			throw new IllegalArgumentException("Default value is null");
+		}
 		this.model = model;
 		this.defaultValue = defaultValue;
 	}

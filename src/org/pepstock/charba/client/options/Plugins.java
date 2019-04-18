@@ -26,6 +26,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.defaults.NoDefaults;
 import org.pepstock.charba.client.plugins.PluginIdChecker;
 
 /**
@@ -36,7 +37,7 @@ import org.pepstock.charba.client.plugins.PluginIdChecker;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Plugins extends AbstractModel<Options, Void> {
+public final class Plugins extends AbstractModel<Options, NoDefaults> {
 
 	/**
 	 * Creates the object with the parent, the key of this element and native object to map java script properties.<br>
@@ -48,7 +49,7 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 */
 	Plugins(Options options, Key childKey, NativeObject nativeObject) {
 		// no default values for this element
-		super(options, childKey, null, nativeObject);
+		super(options, childKey, NoDefaults.INSTANCE, nativeObject);
 	}
 
 	/**
@@ -165,25 +166,32 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	}
 
 	/**
-	 * Returns the plugin options, if exist. It uses a factory instance to create a native object container.
+	 * Returns the plugin options, if exist. It uses a factory instance to create a native object container.<br>
+	 * If factory argument is not consistent, <code>null</code> is returned.
 	 * 
 	 * @param pluginId plugin id.
 	 * @param factory factory instance to create a native object container.
 	 * @param <T> type of native object container to return
-	 * @return java script object used to configure the plugin or an empty object if not exist.
+	 * @return java script object used to configure the plugin or an empty object if not exist. If factory argument is not
+	 *         consistent, <code>null</code> is returned.
 	 */
 	public <T extends NativeObjectContainer> T getOptions(String pluginId, NativeObjectContainerFactory<T> factory) {
-		// creates the key to avoid many calls to plugin checker
-		Key pluginIdKey = PluginIdChecker.key(pluginId);
-		// gets the type of property
-		ObjectType type = type(pluginIdKey);
-		// checks if object
-		if (ObjectType.OBJECT.equals(type)) {
-			return factory.create(getValue(PluginIdChecker.key(pluginId)));
-		} else {
-			// if here returns an empty object
-			return factory.create(null);
+		// checks if factory is consistent
+		if (factory != null) {
+			// creates the key to avoid many calls to plugin checker
+			Key pluginIdKey = PluginIdChecker.key(pluginId);
+			// gets the type of property
+			ObjectType type = type(pluginIdKey);
+			// checks if object
+			if (ObjectType.OBJECT.equals(type)) {
+				return factory.create(getValue(PluginIdChecker.key(pluginId)));
+			} else {
+				// if here returns an empty object
+				return factory.create(null);
+			}
 		}
+		// if here factory is not consistent
+		return null;
 	}
 
 	/**
@@ -196,18 +204,20 @@ public final class Plugins extends AbstractModel<Options, Void> {
 	 * @return the plugin options as list of object containers or empty list if not exist.
 	 */
 	public <T extends NativeObjectContainer> List<T> getOptionsAsList(String pluginId, NativeObjectContainerFactory<T> factory) {
-		// creates the key to avoid many calls to plugin checker
-		Key pluginIdKey = PluginIdChecker.key(pluginId);
-		// gets the type of property
-		ObjectType type = type(pluginIdKey);
-		// checks if array
-		if (ObjectType.ARRAY.equals(type)) {
-			ArrayObject array = getArrayValue(PluginIdChecker.key(pluginId));
-			return ArrayListHelper.list(array, factory);
-		} else {
-			// if here returns an empty list
-			return new LinkedList<>();
+		// checks if factory is consistent
+		if (factory != null) {
+			// creates the key to avoid many calls to plugin checker
+			Key pluginIdKey = PluginIdChecker.key(pluginId);
+			// gets the type of property
+			ObjectType type = type(pluginIdKey);
+			// checks if array
+			if (ObjectType.ARRAY.equals(type)) {
+				ArrayObject array = getArrayValue(PluginIdChecker.key(pluginId));
+				return ArrayListHelper.list(array, factory);
+			}
 		}
+		// if here returns an empty list
+		return new LinkedList<>();
 	}
 
 }

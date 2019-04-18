@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.controllers;
 
 import org.pepstock.charba.client.Type;
-import org.pepstock.charba.client.commons.Key;
 
 import com.google.gwt.safehtml.shared.UriUtils;
 
@@ -55,7 +54,7 @@ final class ControllerTypeChecker {
 	 */
 	public static void check(Type type) {
 		// checks if is consistent
-		Key.checkIfValid(type);
+		Type.checkIfValid(type);
 		// checks if has got invalid chars
 		if (type.value().charAt(0) == DOT || type.value().charAt(0) == UNDERSCORE) {
 			// checks if is starting with DOT or underscore

@@ -86,10 +86,15 @@ public class ScaledOptions extends Options implements IsDefaultScaledOptions {
 	}
 
 	/**
+	 * Sets a scale instance for options.
+	 * 
 	 * @param scale the scale to set
 	 */
-	public void setScale(Scale scale) {
-		this.scale = scale;
+	public final void setScale(Scale scale) {
+		// checks if scale is consistent
+		if (scale != null) {
+			this.scale = scale;
+		}
 	}
 
 	/*

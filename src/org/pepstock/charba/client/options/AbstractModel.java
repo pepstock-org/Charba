@@ -30,7 +30,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * @param <P> parent node class
  * @param <D> defaults provider class
  */
-public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends NativeObjectContainer {
+abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends NativeObjectContainer {
 
 	private final D defaultValues;
 
@@ -44,7 +44,7 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Na
 	 * 
 	 * @param defaultValues default provider
 	 */
-	protected AbstractModel(D defaultValues) {
+	AbstractModel(D defaultValues) {
 		this(null, null, defaultValues);
 	}
 
@@ -56,7 +56,7 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Na
 	 * @param childKey the property name of this element to use to add it to the parent.
 	 * @param defaultValues default provider
 	 */
-	protected AbstractModel(P parent, Key childKey, D defaultValues) {
+	AbstractModel(P parent, Key childKey, D defaultValues) {
 		this(parent, childKey, defaultValues, null);
 	}
 
@@ -67,7 +67,7 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Na
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	protected AbstractModel(D defaultValues, NativeObject nativeObject) {
+	AbstractModel(D defaultValues, NativeObject nativeObject) {
 		this(null, null, defaultValues, nativeObject);
 	}
 
@@ -80,8 +80,13 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Na
 	 * @param defaultValues default provider
 	 * @param nativeObject native object to map java script properties
 	 */
-	protected AbstractModel(P parent, Key childKey, D defaultValues, NativeObject nativeObject) {
+	AbstractModel(P parent, Key childKey, D defaultValues, NativeObject nativeObject) {
 		super(nativeObject);
+		// checks if default value is consistent
+		if (defaultValues == null) {
+			// if not consistent, exception
+			throw new IllegalArgumentException("Default values instance is null");
+		}
 		this.childKey = childKey;
 		this.parent = parent;
 		this.defaultValues = defaultValues;
@@ -144,6 +149,11 @@ public abstract class AbstractModel<P extends AbstractModel<?, ?>, D> extends Na
 	 * @param proxy the function proxy instance to add
 	 */
 	private void setInternalCallbackToModel(AbstractModel<?, ?> model, Key key, CallbackProxy.Proxy proxy) {
+		// checks if model is consistent
+		if (model == null) {
+			// if not exception
+			throw new IllegalArgumentException("Model si null");
+		}
 		model.setValue(key, proxy);
 		// checks if the node is already added to parent
 		model.checkAndAddToParent();

@@ -131,7 +131,7 @@ public final class Defaults {
 	 */
 	public ChartOptions getOptions(Type type) {
 		// checks if type is consistent
-		Key.checkIfValid(type);
+		Type.checkIfValid(type);
 		// checks if the options have already stored
 		if (!chartOptions.containsKey(type.value())) {
 			// if not, creates and stores new options by chart type

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.defaults.IsDefaultFontItem;
@@ -34,14 +35,17 @@ public interface HasFont extends IsDefaultFontItem {
 	 * @return a fonter instance
 	 */
 	Fonter getFonter();
-	
+
 	/**
 	 * Sets the font size.
 	 * 
 	 * @param fontSize the font size.
 	 */
 	default void setFontSize(int fontSize) {
-		getFonter().setFontSize(fontSize);
+		// checks if fonter is consistent
+		if (getFonter() != null) {
+			getFonter().setFontSize(fontSize);
+		}
 	}
 
 	/**
@@ -50,7 +54,12 @@ public interface HasFont extends IsDefaultFontItem {
 	 * @return the font size.
 	 */
 	default int getFontSize() {
-		return getFonter().getFontSize();
+		// checks if fonter is consistent
+		if (getFonter() != null) {
+			return getFonter().getFontSize();
+		}
+		// if here, fonter is not consistent
+		return Defaults.get().getGlobal().getDefaultFontSize();
 	}
 
 	/**
@@ -59,7 +68,10 @@ public interface HasFont extends IsDefaultFontItem {
 	 * @param fontStyle Font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	default void setFontStyle(FontStyle fontStyle) {
-		getFonter().setFontStyle(fontStyle);
+		// checks if fonter is consistent
+		if (getFonter() != null) {
+			getFonter().setFontStyle(fontStyle);
+		}
 	}
 
 	/**
@@ -68,7 +80,12 @@ public interface HasFont extends IsDefaultFontItem {
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	default FontStyle getFontStyle() {
-		return getFonter().getFontStyle();
+		// checks if fonter is consistent
+		if (getFonter() != null) {
+			return getFonter().getFontStyle();
+		}
+		// if here, fonter is not consistent
+		return Defaults.get().getGlobal().getDefaultFontStyle();
 	}
 
 	/**
@@ -77,7 +94,10 @@ public interface HasFont extends IsDefaultFontItem {
 	 * @param fontColor font color
 	 */
 	default void setFontColor(IsColor fontColor) {
-		getFonter().setFontColor(fontColor);
+		// checks if fonter is consistent
+		if (getFonter() != null) {
+			getFonter().setFontColor(fontColor);
+		}
 	}
 
 	/**
@@ -86,7 +106,10 @@ public interface HasFont extends IsDefaultFontItem {
 	 * @param fontColor font color as string.
 	 */
 	default void setFontColor(String fontColor) {
-		getFonter().setFontColor(fontColor);
+		// checks if fonter is consistent
+		if (getFonter() != null) {
+			getFonter().setFontColor(fontColor);
+		}
 	}
 
 	/**
@@ -95,7 +118,12 @@ public interface HasFont extends IsDefaultFontItem {
 	 * @return font color as string.
 	 */
 	default String getFontColorAsString() {
-		return getFonter().getFontColorAsString();
+		// checks if fonter is consistent
+		if (getFonter() != null) {
+			return getFonter().getFontColorAsString();
+		}
+		// if here, fonter is not consistent
+		return Defaults.get().getGlobal().getDefaultFontColorAsString();
 	}
 
 	/**
@@ -113,7 +141,10 @@ public interface HasFont extends IsDefaultFontItem {
 	 * @param fontFamily Font family, follows CSS font-family options.
 	 */
 	default void setFontFamily(String fontFamily) {
-		getFonter().setFontFamily(fontFamily);
+		// checks if fonter is consistent
+		if (getFonter() != null) {
+			getFonter().setFontFamily(fontFamily);
+		}
 	}
 
 	/**
@@ -122,7 +153,12 @@ public interface HasFont extends IsDefaultFontItem {
 	 * @return Font family, follows CSS font-family options.
 	 */
 	default String getFontFamily() {
-		return getFonter().getFontFamily();
+		// checks if fonter is consistent
+		if (getFonter() != null) {
+			return getFonter().getFontFamily();
+		}
+		// if here, fonter is not consistent
+		return Defaults.get().getGlobal().getDefaultFontFamily();
 	}
 
 }

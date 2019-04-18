@@ -176,7 +176,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 			return canvas;
 		} else {
 			// otherwise throws an exxeption
-			throw new NullPointerException(CANVAS_NOT_SUPPORTED_MESSAGE);
+			throw new UnsupportedOperationException(CANVAS_NOT_SUPPORTED_MESSAGE);
 		}
 	}
 
@@ -209,7 +209,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * @return <code>true</code> if CHART.JS chart has been initialized, otherwise <code>false</code>.
 	 */
 	@Override
-	public boolean isInitialized() {
+	public final boolean isInitialized() {
 		return chart != null;
 	}
 
@@ -470,22 +470,22 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 
 	/**
 	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales,
-	 * legends, and then re-render the chart. A config object can be provided with additional configuration for the update
+	 * legends, and then re-render the chart. A configuration object can be provided with additional configuration for the update
 	 * process. This is useful when update is manually called inside an event handler and some different animation is desired.
 	 * 
-	 * @param config a config object can be provided with additional configuration for the update process
+	 * @param configuration a configuration object can be provided with additional configuration for the update process
 	 */
 	@Override
-	public final void update(UpdateConfiguration config) {
+	public final void update(UpdateConfiguration configuration) {
 		// checks if chart is created
 		if (chart != null) {
 			// if config is not passed..
-			if (config == null) {
+			if (configuration == null) {
 				// .. calls the update
 				chart.update();
 			} else {
 				// .. otherwise calls the update with config
-				chart.update(config.getObject());
+				chart.update(configuration.getObject());
 			}
 		}
 	}
@@ -501,22 +501,22 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 
 	/**
 	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in
-	 * that case. A config object can be provided with additional configuration for the render process. This is useful when
+	 * that case. A configuration object can be provided with additional configuration for the render process. This is useful when
 	 * update is manually called inside an event handler and some different animation is desired.
 	 * 
-	 * @param config a config object can be provided with additional configuration for the render process
+	 * @param configuration a configuration object can be provided with additional configuration for the render process
 	 */
 	@Override
-	public final void render(UpdateConfiguration config) {
+	public final void render(UpdateConfiguration configuration) {
 		// checks if chart is created
 		if (chart != null) {
 			// if config is not passed..
-			if (config == null) {
+			if (configuration == null) {
 				// .. calls the render
 				chart.render();
 			} else {
 				// .. otherwise calls the render with config
-				chart.render(config.getObject());
+				chart.render(configuration.getObject());
 			}
 		}
 	}
@@ -525,7 +525,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * Looks for the dataset that matches the current index and returns that metadata.
 	 * 
 	 * @param index dataset index
-	 * @return dataset meta data item.
+	 * @return dataset meta data item or <code>null</code> if the index is out of range of datasets count.
 	 */
 	@Override
 	public final DatasetMetaItem getDatasetMeta(int index) {
@@ -542,7 +542,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * Looks for the dataset that matches the event and returns that metadata.
 	 * 
 	 * @param event event of chart.
-	 * @return dataset meta data item.
+	 * @return dataset meta data item or <code>null</code> if event is not consistent
 	 */
 	@Override
 	public DatasetMetaItem getDatasetAtEvent(ChartNativeEvent event) {
@@ -594,7 +594,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * If there are multiple items within range, only the first is returned.
 	 * 
 	 * @param event event of chart.
-	 * @return single element at the event position or null.
+	 * @return single element at the event position or <code>null</code> if event is not consistent
 	 */
 	@Override
 	public final DatasetItem getElementAtEvent(ChartNativeEvent event) {
