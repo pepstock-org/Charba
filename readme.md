@@ -32,7 +32,7 @@ Installation
 
 Currently **Charba** is available on [MVN repository](https://mvnrepository.com/artifact/org.pepstock/charba).
 
-It will be available also on [GitHub release](https://github.com/pepstock-org/Charba/releases).
+It is available also on [GitHub releases](https://github.com/pepstock-org/Charba/releases).
 
 If you are using [Apache Maven](https://maven.apache.org/):
 
