@@ -28,6 +28,45 @@ import org.pepstock.charba.client.enums.DataType;
  *
  */
 public interface HasTimeSeriesItems extends HasDataPoints {
+	
+
+	/**
+	 * Throws an exception because not available.
+	 * 
+	 * @param values ignored because will throw an exception
+	 */
+	default void setData(double... values) {
+		throw new UnsupportedOperationException(Dataset.TIME_SERIES_DATA_USAGE_MESSAGE);
+	}
+
+
+	/**
+	 * Throws an exception because not available.
+	 * 
+	 * @param values ignored because will throw an exception
+	 */
+	default void setData(List<Double> values) {
+		throw new UnsupportedOperationException(Dataset.TIME_SERIES_DATA_USAGE_MESSAGE);
+	}
+
+	/**
+	 * Throws an exception because not available.
+	 * 
+	 * @return will throw an exception
+	 */
+	default List<Double> getData() {
+		throw new UnsupportedOperationException(Dataset.TIME_SERIES_DATA_USAGE_MESSAGE);
+	}
+
+	/**
+	 * Throws an exception because not available.
+	 * 
+	 * @param binding ignored because will throw an exception
+	 * @return will throw an exception
+	 */
+	default List<Double> getData(boolean binding) {
+		throw new UnsupportedOperationException(Dataset.TIME_SERIES_DATA_USAGE_MESSAGE);
+	}
 
 	/**
 	 * Sets the data property of a dataset for a chart is specified as an array of time series items.

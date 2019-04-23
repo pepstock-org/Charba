@@ -31,8 +31,6 @@ public class TimeSeriesLineDataset extends LineDataset implements HasTimeSeriesI
 
 	// exception string message for setting or getting data string
 	private static final String INVALID_DATA_STRING_CALL = "setDataString and getDataString methods are not invokable by a time series chart.";
-	// exception string message for setting ore getting data
-	private static final String INVALID_DATA_CALL = "setData and getData methods are not invokable by a time series chart.";
 
 	/**
 	 * Creates a dataset.<br>
@@ -90,45 +88,4 @@ public class TimeSeriesLineDataset extends LineDataset implements HasTimeSeriesI
 	public final List<String> getDataString(boolean binding) {
 		throw new UnsupportedOperationException(INVALID_DATA_STRING_CALL);
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setData(double[])
-	 */
-	@Override
-	public final void setData(double... values) {
-		throw new UnsupportedOperationException(INVALID_DATA_CALL);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setData(java.util.List)
-	 */
-	@Override
-	public final void setData(List<Double> values) {
-		throw new UnsupportedOperationException(INVALID_DATA_CALL);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#getData()
-	 */
-	@Override
-	public final List<Double> getData() {
-		throw new UnsupportedOperationException(INVALID_DATA_CALL);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#getData(boolean)
-	 */
-	@Override
-	public final List<Double> getData(boolean binding) {
-		throw new UnsupportedOperationException(INVALID_DATA_CALL);
-	}
-
 }
