@@ -98,6 +98,16 @@ Continuous integration and quality gate
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
 In the project, it's also provided the [FindBugs](https://github.com/pepstock-org/Charba/blob/2.4/charba.fbp) project to looking offline for bugs.
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=pepstock-org_Charba&metric=bugs)](https://sonarcloud.io/dashboard?id=pepstock-org_Charba)
+[![Code smells](https://sonarcloud.io/api/project_badges/measure?project=pepstock-org_Charba&metric=code_smells)](https://sonarcloud.io/dashboard?id=pepstock-org_Charba)
+[![Duplicated code density](https://sonarcloud.io/api/project_badges/measure?project=pepstock-org_Charba&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=pepstock-org_Charba)
+[![Line of code](https://sonarcloud.io/api/project_badges/measure?project=pepstock-org_Charba&metric=ncloc)](https://sonarcloud.io/dashboard?id=pepstock-org_Charba)
+[![Sqale rating](https://sonarcloud.io/api/project_badges/measure?project=pepstock-org_Charba&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=pepstock-org_Charba)
+[![Sqale index](https://sonarcloud.io/api/project_badges/measure?project=pepstock-org_Charba&metric=sqale_index)](https://sonarcloud.io/dashboard?id=pepstock-org_Charba)
+[![Reliability](https://sonarcloud.io/api/project_badges/measure?project=pepstock-org_Charba&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=pepstock-org_Charba)
+[![Security](https://sonarcloud.io/api/project_badges/measure?project=pepstock-org_Charba&metric=security_rating)](https://sonarcloud.io/dashboard?id=pepstock-org_Charba)
+[![Vulnerability](https://sonarcloud.io/api/project_badges/measure?project=pepstock-org_Charba&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=pepstock-org_Charba)
  
 License
 -------
