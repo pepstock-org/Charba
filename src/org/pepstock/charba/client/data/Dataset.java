@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -66,6 +67,8 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	private final GradientsContainer gradientsContainer = new GradientsContainer();
 	// default options values
 	private final IsDefaultOptions defaultValues;
+	// internal comparator to sort time series items
+	static final Comparator<DataPoint> COMPARATOR = (DataPoint o1, DataPoint o2) -> o1.getT().compareTo(o2.getT());
 
 	/**
 	 * Name of properties of native object.
