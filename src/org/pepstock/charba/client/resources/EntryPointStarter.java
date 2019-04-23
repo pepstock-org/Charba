@@ -65,7 +65,7 @@ public final class EntryPointStarter {
 	 * 
 	 * @param runnable the entry point instance as runnable
 	 */
-	public static void run(final Runnable runnable) {
+	public static void run(final Runnable runnable){
 		// checks if the entry point is consistent
 		if (runnable == null) {
 			// if not, exception
@@ -85,7 +85,7 @@ public final class EntryPointStarter {
 				 */
 				@Override
 				public void onError(ResourceException e) {
-					throw new IllegalArgumentException("Unable to load CHART.JS resource, reason: " + e.getMessage());
+					throw new RuntimeException("Unable to load CHART.JS resource", e);
 				}
 
 				/*
@@ -104,7 +104,7 @@ public final class EntryPointStarter {
 			});
 		} catch (ResourceException e) {
 			// if here, there is an error on resource callback
-			throw new IllegalArgumentException("Unable to load CHART.JS resource, reason: " + e.getMessage());
+			throw new RuntimeException("Unable to load CHART.JS resource", e);
 		}
 	}
 }
