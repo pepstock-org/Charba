@@ -85,7 +85,7 @@ public final class EntryPointStarter {
 				 */
 				@Override
 				public void onError(ResourceException e) {
-					throw new RuntimeException("Unable to load CHART.JS resource", e);
+					throw new ResourceLoadException("Unable to load CHART.JS resource", e);
 				}
 
 				/*
@@ -104,7 +104,7 @@ public final class EntryPointStarter {
 			});
 		} catch (ResourceException e) {
 			// if here, there is an error on resource callback
-			throw new RuntimeException("Unable to load CHART.JS resource", e);
+			throw new ResourceLoadException("Unable to load CHART.JS resource", e);
 		}
 	}
 }
