@@ -23,7 +23,7 @@ import org.pepstock.charba.client.IsChart;
  * @author Andrea "Stock" Stocchero
  *
  */
-public class BarCategoryAxis extends CartesianCategoryAxis {
+public final class BarCategoryAxis extends CartesianCategoryAxis {
 
 	// specific gridlines for BAR charts
 	private final BarGridLines barGridLines;

@@ -34,7 +34,7 @@ public interface HasDataPoints extends HasDataset {
 	 * @param datapoints an array of data points
 	 */
 	default void setDataPoints(DataPoint... datapoints) {
-		// checks if border aligner is consistent
+		// checks if dataset is consistent
 		if (getDataset() != null) {
 			getDataset().setInternalDataPoints(datapoints);
 		}
@@ -46,7 +46,7 @@ public interface HasDataPoints extends HasDataset {
 	 * @param datapoints a list of data points
 	 */
 	default void setDataPoints(List<DataPoint> datapoints) {
-		// checks if border aligner is consistent
+		// checks if dataset is consistent
 		if (getDataset() != null) {
 			getDataset().setInternalDataPoints(datapoints);
 		}
@@ -68,11 +68,11 @@ public interface HasDataPoints extends HasDataset {
 	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
 	 */
 	default List<DataPoint> getDataPoints(boolean binding) {
-		// checks if border aligner is consistent
+		// checks if dataset is consistent
 		if (getDataset() != null) {
 			return getDataset().getDataPoints(Dataset.DATAPOINTS_FACTORY, binding);
 		}
-		// if here, border aligner is not consistent
+		// if here, dataset is not consistent
 		// returns an empty list
 		return new LinkedList<>();
 	}

@@ -29,7 +29,7 @@ public final class ResourceLoadException extends RuntimeException {
 	 * Creates the exception by a description and the cause.
 	 * 
 	 * @param message description of exception
-	 * @param cause cuase of teh exception
+	 * @param cause cause of the exception
 	 */
 	ResourceLoadException(String message, Throwable cause) {
 		super(message, cause);
