@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.data;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
@@ -57,10 +59,14 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	private static final boolean DEFAULT_HIDDEN = false;
 	// factory to create data points
 	static final DataPointFactory DATAPOINTS_FACTORY = new DataPointFactory();
+	// factory to create time series items
+	static final TimeSeriesItemFactory TIMESERIES_ITEMS_FACTORY = new TimeSeriesItemFactory();
 	// exception message when it's not using data points
 	static final String DATA_USAGE_MESSAGE = "Use datapoints instead of data for this chart";
 	// exception string message for setting ore getting data
-	static final String TIME_SERIES_DATA_USAGE_MESSAGE = "setData and getData methods are not invokable by a time series chart.";
+	static final String TIME_SERIES_DATA_USAGE_MESSAGE = "setData and getData methods are not invokable by a time series chart";
+	// exception string message for setting ore getting data
+	static final String TIME_SERIES_ITEM_AND_DATAPOINT_MESSAGE = "Datapoint is not a time series item";
 	// patterns container
 	private final PatternsContainer patternsContainer = new PatternsContainer();
 	// gradients container
@@ -68,7 +74,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	// default options values
 	private final IsDefaultOptions defaultValues;
 	// internal comparator to sort time series items
-	static final Comparator<DataPoint> COMPARATOR = (DataPoint o1, DataPoint o2) -> o1.getT().compareTo(o2.getT());
+	private static final Comparator<TimeSeriesItem> COMPARATOR = (TimeSeriesItem o1, TimeSeriesItem o2) -> o1.getTime().compareTo(o2.getTime());
 
 	/**
 	 * Name of properties of native object.
@@ -515,6 +521,65 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 */
 	final void setInternalDataPoints(List<DataPoint> datapoints) {
 		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(datapoints));
+		// sets data type checking if the key exists
+		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
+	}
+	
+	/**
+	 * Returns the data property of a dataset for a chart is specified as an array of data points
+	 * 
+	 * @param factory datapoint object factory
+	 * @param binding if <code>true</code> binds the new array list into container
+	 * @return a list of data points or an empty list of data points if the data type is not {@link DataType#POINTS}.
+	 */
+	final List<TimeSeriesItem> getTimeSeriesItems(TimeSeriesItemFactory factory, boolean binding) {
+		// checks if is a numbers data type
+		if (has(Dataset.Property.DATA) && DataType.POINTS.equals(getDataType())) {
+			// gets array
+			ArrayObject array = getArrayValue(Dataset.Property.DATA);
+			// returns points
+			return ArrayListHelper.list(array, factory);
+		}
+		// checks if wants to bind the array
+		if (binding) {
+			ArrayObjectContainerList<TimeSeriesItem> result = new ArrayObjectContainerList<>();
+			// set value
+			setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrEmpty(result));
+			// sets data type
+			setValue(Dataset.Property.CHARBA_DATA_TYPE, DataType.POINTS);
+			// returns list
+			return result;
+		}
+		// returns an empty list
+		return new LinkedList<>();
+	}
+
+	/**
+	 * Sets the data property of a dataset for a chart is specified as an array of time series item.
+	 * 
+	 * @param timeSeriesItems an array of time series item
+	 */
+	final void setInternalTimeSeriesItems(TimeSeriesItem... timeSeriesItems) {
+		// checks if array is consistent
+		if (timeSeriesItems != null) {
+			Arrays.sort(timeSeriesItems, COMPARATOR);
+		}
+		setArrayValue(Property.DATA, ArrayObject.fromOrNull(timeSeriesItems));
+		// sets data type checking if the key exists
+		setValue(Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
+	}
+
+	/**
+	 * Sets the data property of a dataset for a chart is specified as an array of time series items.
+	 * 
+	 * @param timeSeriesItems a list of time series items
+	 */
+	final void setInternalTimeSeriesItems(List<TimeSeriesItem> timeSeriesItems) {
+		// checks if list is consistent
+		if (timeSeriesItems != null) {
+			Collections.sort(timeSeriesItems, COMPARATOR);
+		}
+		setArrayValue(Dataset.Property.DATA, ArrayObject.fromOrNull(timeSeriesItems));
 		// sets data type checking if the key exists
 		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}

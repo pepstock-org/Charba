@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.data;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,7 +28,37 @@ import org.pepstock.charba.client.enums.DataType;
  *
  */
 public interface HasTimeSeriesItems extends HasDataPoints {
-	
+
+	/**
+	 * Returns <code>true</code> if the data point, passed as argument, has got the properties to be a time series item (time
+	 * and Y value).
+	 * 
+	 * @param datapoint data point instance to be checked
+	 * @return <code>true</code> if the data point, passed as argument, has got the properties to be a time series item (time
+	 *         and Y value)
+	 */
+	static boolean isTimeSeriesItem(DataPoint datapoint) {
+		// checks if there is data point
+		return datapoint != null && datapoint.getT() != null && Double.isNaN(datapoint.getX()) && Double.isNaN(datapoint.getR());
+	}
+
+	/**
+	 * Checks if the list of data points, passed as argument, have got the properties to be time series items (time and Y
+	 * value).<br>
+	 * If not, a {@link IllegalArgumentException} will be thrown.
+	 * 
+	 * @param datapoints list of data points to be checked
+	 */
+	static void checkTimeSeriesItems(List<DataPoint> datapoints) {
+		// scans all data points
+		for (DataPoint dp : datapoints) {
+			// checks if data point are time series item
+			if (!isTimeSeriesItem(dp)) {
+				// if not, exception
+				throw new IllegalArgumentException(Dataset.TIME_SERIES_ITEM_AND_DATAPOINT_MESSAGE);
+			}
+		}
+	}
 
 	/**
 	 * Throws an exception because not available.
@@ -39,7 +68,6 @@ public interface HasTimeSeriesItems extends HasDataPoints {
 	default void setData(double... values) {
 		throw new UnsupportedOperationException(Dataset.TIME_SERIES_DATA_USAGE_MESSAGE);
 	}
-
 
 	/**
 	 * Throws an exception because not available.
@@ -70,22 +98,44 @@ public interface HasTimeSeriesItems extends HasDataPoints {
 	}
 
 	/**
+	 * Sets the data property of a dataset for a chart is specified as an array of data points.
+	 * 
+	 * @param datapoints an array of data points
+	 */
+	@Override
+	default void setDataPoints(DataPoint... datapoints) {
+		// checks if dataset is consistent
+		if (getDataset() != null) {
+			// checks if data points are time series items
+			checkTimeSeriesItems(Arrays.asList(datapoints));
+			getDataset().setInternalDataPoints(datapoints);
+		}
+	}
+
+	/**
+	 * Sets the data property of a dataset for a chart is specified as an array of data points.
+	 * 
+	 * @param datapoints a list of data points
+	 */
+	@Override
+	default void setDataPoints(List<DataPoint> datapoints) {
+		// checks if dataset is consistent
+		if (getDataset() != null) {
+			// checks if data points are time series items
+			checkTimeSeriesItems(datapoints);
+			getDataset().setInternalDataPoints(datapoints);
+		}
+	}
+
+	/**
 	 * Sets the data property of a dataset for a chart is specified as an array of time series items.
 	 * 
 	 * @param items an array of time series items
 	 */
-	default void setTimeSeriesData(IsTimeSeriesItem... items) {
+	default void setTimeSeriesData(TimeSeriesItem... items) {
 		// checks if dataset is consistent
 		if (getDataset() != null) {
-			// creates instance of list of time series items
-			List<IsTimeSeriesItem> dataAsList  = new LinkedList<>();
-			// checks if items are consistent
-			if (items != null && items.length > 0) {
-				// adds the items to the list
-				dataAsList.addAll(Arrays.asList(items));
-			}
-			// invoke the set by list
-			setTimeSeriesData(dataAsList);
+			getDataset().setInternalTimeSeriesItems(items);
 		}
 	}
 
@@ -94,58 +144,38 @@ public interface HasTimeSeriesItems extends HasDataPoints {
 	 * 
 	 * @param items a list of time series items
 	 */
-	default void setTimeSeriesData(List<IsTimeSeriesItem> items) {
+	default void setTimeSeriesData(List<TimeSeriesItem> items) {
 		// checks if dataset is consistent
 		if (getDataset() != null) {
-			// creates instance of list of data points
-			List<DataPoint> dataPointAsList  = new LinkedList<>();
-			// checks if items are consistent
-			if (items != null && !items.isEmpty()) {
-				// scans all time series items
-				for (IsTimeSeriesItem dataItem : items) {
-					// checks if time is consistent
-					if (dataItem.getTime() == null) {
-						// if not exception
-						throw new IllegalArgumentException("Time is null");
-					}
-					// gets data point from item
-					DataPoint dp = dataItem.toDataPoint();
-					// if consistent
-					if (dp != null) {
-						// adds to the list
-						dataPointAsList.add(dp);
-					}
-				}
-				// sorts the items
-				Collections.sort(dataPointAsList, Dataset.COMPARATOR);
-			}
-			getDataset().setInternalDataPoints(dataPointAsList);
+			getDataset().setInternalTimeSeriesItems(items);
+
 		}
+	}
+
+	/**
+	 * Returns the data property of a dataset for a chart is specified as an array of time series items.
+	 * 
+	 * @return a list of time series items or an empty list of time series items if the data type is not
+	 *         {@link DataType#POINTS}.
+	 */
+	default List<TimeSeriesItem> getTimeSeriesData() {
+		return getTimeSeriesData(false);
 	}
 
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of time series items
 	 * 
+	 * @param binding if <code>true</code> binds the new array list into container
 	 * @return a list of time series items or an empty list of time series data if the data type is not {@link DataType#POINTS}.
 	 */
-	default List<TimeSeriesItem> getTimeSeriesData() {
-		// creates instance of list of time series items
-		List<TimeSeriesItem> dataAsList  = new LinkedList<>();
+	default List<TimeSeriesItem> getTimeSeriesData(boolean binding) {
 		// checks if dataset is consistent
 		if (getDataset() != null) {
-			// gets list of stored data points
-			List<DataPoint> dataPointAsList = getDataset().getDataPoints(Dataset.DATAPOINTS_FACTORY, false);
-			// scans all data points
-			for (DataPoint dp : dataPointAsList) {
-				// creating the time series item
-				TimeSeriesItem data = new TimeSeriesItem(dp);
-				// adds data
-				dataAsList.add(data);
-			}
+			return getDataset().getTimeSeriesItems(Dataset.TIMESERIES_ITEMS_FACTORY, binding);
 		}
 		// if here, dataset is not consistent
 		// returns an empty list
-		return dataAsList;
+		return new LinkedList<>();
 	}
 
 }

@@ -30,17 +30,18 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  */
 public final class DataPoint extends NativeObjectContainer {
 
-	// default value for X
-	private static final double DEFAULT_X = Double.NaN;
-	// default value for Y
-	private static final double DEFAULT_Y = Double.NaN;
-	// default value for R
-	private static final double DEFAULT_R = Double.NaN;
+	// default value for X. No private because it is used by time series item
+	static final double DEFAULT_X = Double.NaN;
+	// default value for R. No private because it is used by time series item
+	static final double DEFAULT_R = Double.NaN;
+	// default value for Y. No private because it is used by time series item
+	static final double DEFAULT_Y = Double.NaN;
 
 	/**
-	 * Name of properties of native object.
+	 * Name of properties of native object.<br>
+	 * No private because it is used by time series item
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
 		X("x"),
 		Y("y"),

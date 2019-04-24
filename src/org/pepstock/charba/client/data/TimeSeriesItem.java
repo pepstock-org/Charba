@@ -17,34 +17,40 @@ package org.pepstock.charba.client.data;
 
 import java.util.Date;
 
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainer;
+
 /**
- * Default implementation for time series item interface in order to manage time series item (time and value).<br>
- * It wraps a {@link DataPoint}.
+ * Default implementation for time series item interface in order to manage time series item (time and value).
  * 
  * @author Andrea "Stock" Stocchero
- *
+ * @see DataPoint
  */
-public final class TimeSeriesItem implements IsTimeSeriesItem {
-	// data point instance
-	private final DataPoint dataPoint;
+public final class TimeSeriesItem extends NativeObjectContainer {
 
 	/**
-	 * Creates a time series item with an empty {@link DataPoint}.
+	 * Creates a time series item setting the time passed as argument. By default the value is {@link Double#NaN}.
+	 * 
+	 * @param time time of item
 	 */
-	public TimeSeriesItem() {
-		// create with new data point
-		this(new DataPoint());
+	public TimeSeriesItem(Date time) {
+		this(time, DataPoint.DEFAULT_Y);
 	}
 
 	/**
-	 * Creates a time series item setting the time and the value apssed as argument.
+	 * Creates a time series item setting the time and the value passed as argument.
 	 * 
 	 * @param time time of item
 	 * @param value value of item
 	 */
 	public TimeSeriesItem(Date time, double value) {
-		// create with new data point
-		this(new DataPoint());
+		// create with an empty native object
+		super(null);
+		// checks if time is consistent
+		if (time == null) {
+			// if not, exception
+			throw new IllegalArgumentException("Time is null");
+		}
 		// sets time
 		setTime(time);
 		// sets value
@@ -56,8 +62,8 @@ public final class TimeSeriesItem implements IsTimeSeriesItem {
 	 * 
 	 * @param dataPoint data point which is wrapped
 	 */
-	TimeSeriesItem(DataPoint dataPoint) {
-		this.dataPoint = dataPoint;
+	TimeSeriesItem(NativeObject nativeObject) {
+		super(nativeObject);
 	}
 
 	/**
@@ -66,17 +72,16 @@ public final class TimeSeriesItem implements IsTimeSeriesItem {
 	 * @param value the value of time series item
 	 */
 	public void setValue(double value) {
-		dataPoint.setY(value);
+		setValue(DataPoint.Property.Y, value);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns the value of time series item.
 	 * 
-	 * @see org.pepstock.charba.client.data.IsTimeSeriesData#getValue()
+	 * @return the value of time series item
 	 */
-	@Override
 	public double getValue() {
-		return dataPoint.getY();
+		return getValue(DataPoint.Property.Y, DataPoint.DEFAULT_Y);
 	}
 
 	/**
@@ -84,41 +89,17 @@ public final class TimeSeriesItem implements IsTimeSeriesItem {
 	 * 
 	 * @param time the time of time series item
 	 */
-	public void setTime(Date time) {
-		// checks i argument is consistent
-		if (time == null) {
-			// if not, exception
-			throw new IllegalArgumentException("Time is null");
-		}
-		dataPoint.setT(time);
+	private void setTime(Date time) {
+		setValue(DataPoint.Property.T, time);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Returns the time of time series item.
 	 * 
-	 * @see org.pepstock.charba.client.data.IsTimeSeriesData#getTime()
+	 * @return the time of time series item
 	 */
-	@Override
 	public Date getTime() {
-		return dataPoint.getT();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.IsTimeSeriesData#toDataPoint()
-	 */
-	@Override
-	public DataPoint toDataPoint() {
-		return dataPoint;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "TimeSeriesItem [" + dataPoint.toJSON() + "]";
+		return getValue(DataPoint.Property.T, (Date) null);
 	}
 
 }
