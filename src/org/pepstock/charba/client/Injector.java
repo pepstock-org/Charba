@@ -26,7 +26,6 @@ import com.google.gwt.resources.client.TextResource;
 /**
  * This utility injects ChartJS java script and CHARBA custom java script implementation (for some utilities) into the web page
  * of GWT.<br>
- * If ChartJS is already injected, it does nothing.<br>
  * It enables also to inject other script into web page, necessary when you want to use some Chart.JS plugins.
  * 
  * @author Andrea "Stock" Stocchero
@@ -34,7 +33,7 @@ import com.google.gwt.resources.client.TextResource;
  */
 public final class Injector {
 
-	// Prefix ID of script element with CHART JS
+	// Prefix ID of injected script elements
 	private static final String CHARBA_PREFIX_SCRIPT_ELEMENT_ID = "_charba_";
 	// contains all script object injected
 	private static final Set<String> ELEMENTS_INJECTED = new HashSet<>();
