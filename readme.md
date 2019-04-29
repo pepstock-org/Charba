@@ -119,9 +119,10 @@ Here you can find the list of enhancement and updates available on `master` bran
 
  * `null` pointer exception avoidance for set color by `IsColor` instance
  * `null` pointer exception avoidance for all public methods where an argument is passed 
- * fix `setTextStrokeColor` and `setTextShadowColor` methods of datalabels plugin option
+ * fix `setTextStrokeColor` and `setTextShadowColor` methods of DATALABELS plugin option
  * `ObjectType` default is `Undefined` instead of `Object`
  * change `IllegalArgumentException` into `ResouceLoadException` into `EntryPointStarter`
+ * apply LABELS plugin pull request [#95](https://github.com/emn178/chartjs-plugin-labels/pull/95)
  
 License
 -------
