@@ -98,6 +98,30 @@ Continuous integration and quality gate
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
 In the project, it's also provided the [FindBugs](https://github.com/pepstock-org/Charba/blob/2.4/charba.fbp) project to looking offline for bugs.
+
+Going to new version
+-------
+
+Here you can find the list of enhancement and updates available on `master` branch before which will be part of new official release:
+
+### Features
+
+ * `TimeSeriesLineChart` and `TimeSeriesBarChart` to manage time series charts easier. 
+   * `TimeSeriesLineOptions` and `TimeSeriesBarOptions` to manage time series chart configuration. 
+   * `TimeSeriesLineDataset` and `TimeSeriesBarDataset` to manage time series data. 
+   * `TimeSeriesItem` to improve setting of the data into a time series chart
+
+### Documentation
+
+ * improved Wiki removing typo and wrong link to classes
+
+### Development
+
+ * `null` pointer exception avoidance for set color by `IsColor` instance
+ * `null` pointer exception avoidance for all public methods where an argument is passed 
+ * fix `setTextStrokeColor` and `setTextShadowColor` methods of datalabels plugin option
+ * `ObjectType` default is `Undefined` instead of `Object`
+ * change `IllegalArgumentException` into `ResouceLoadException` into `EntryPointStarter`
  
 License
 -------
