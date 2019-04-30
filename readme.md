@@ -110,6 +110,7 @@ Here you can find the list of enhancement and updates available on `master` bran
    * `TimeSeriesLineOptions` and `TimeSeriesBarOptions` to manage time series chart configuration. 
    * `TimeSeriesLineDataset` and `TimeSeriesBarDataset` to manage time series data. 
    * `TimeSeriesItem` to improve setting of the data into a time series chart
+ * GWT Material scheme can load a gradient with the sequence of colors  
 
 ### Documentation
 
