@@ -28,12 +28,17 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  *
  */
 public final class GradientColor extends NativeObjectContainer {
-	// offset 0 defined as default start
-	static final double OFFSET_START = 0D;
-	// offset 1 defined as default stop
-	static final double OFFSET_STOP = 1D;
+	
+	/**
+	 * Offset 0 defined as default start.
+	 */
+	public static final double DEFAULT_OFFSET_START = 0D;
+	/**
+	 * Offset 1 defined as default stop.
+	 */
+	public static final double DEFAULT_OFFSET_STOP = 1D;
 	// default offset is the start one
-	private static final double DEFAULT_OFFSET = OFFSET_START;
+	private static final double DEFAULT_OFFSET = DEFAULT_OFFSET_START;
 
 	/**
 	 * Name of properties of native object.
@@ -133,7 +138,7 @@ public final class GradientColor extends NativeObjectContainer {
 	 * @exception if the channel is nor within bounds
 	 */
 	static void checkOffsetWithinBounds(double offset) {
-		if (offset < OFFSET_START || offset > OFFSET_STOP) {
+		if (offset < DEFAULT_OFFSET_START || offset > DEFAULT_OFFSET_STOP) {
 			throw new IllegalArgumentException("Offset argument is not within bounds (0D-1D)");
 		}
 	}
