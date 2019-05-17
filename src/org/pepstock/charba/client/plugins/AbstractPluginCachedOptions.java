@@ -48,7 +48,7 @@ public abstract class AbstractPluginCachedOptions extends AbstractPluginOptions 
 		// creates an empty native object
 		super(pluginId);
 		// checks if factory is consistent
-		if (factory == null){
+		if (factory == null) {
 			throw new IllegalArgumentException("Factory is null");
 		}
 		// stores factory and pluginId

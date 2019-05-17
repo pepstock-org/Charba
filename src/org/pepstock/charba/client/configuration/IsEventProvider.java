@@ -27,7 +27,7 @@ import org.pepstock.charba.client.events.RemoveHandlerEventHandler;
  * @author Andrea "Stock" Stocchero
  *
  */
-interface IsEventProvider extends  AddHandlerEventHandler, RemoveHandlerEventHandler {
+interface IsEventProvider extends AddHandlerEventHandler, RemoveHandlerEventHandler {
 
 	/**
 	 * Adds the event provider implementation as handlers of chart.

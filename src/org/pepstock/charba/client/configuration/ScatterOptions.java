@@ -34,8 +34,10 @@ public class ScatterOptions extends MultiScalesOptions implements HasLineOptions
 	public ScatterOptions(IsChart chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.configuration.HasLineOptions#getOptions()
 	 */
 	@Override

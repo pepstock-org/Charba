@@ -264,6 +264,7 @@ public final class Merger {
 		// invokes CHART.JS to merge
 		return mergeNativeObjects(target, newObject);
 	}
+
 	/**
 	 * Copies <code>source</code> properties into <code>target</code> only if not defined in target.<br>
 	 * <code>target</code> is not cloned and will be updated with <code>source</code> properties.
@@ -277,8 +278,9 @@ public final class Merger {
 	}
 
 	/**
-	 * Checks if arguments are not <code>null</code> or not consistent. If not consistent, throws an {@link IllegalArgumentException}.
-	 *  
+	 * Checks if arguments are not <code>null</code> or not consistent. If not consistent, throws an
+	 * {@link IllegalArgumentException}.
+	 * 
 	 * @param target The target object in which <code>source</code> is merged into.
 	 * @param source Object to merge into <code>target</code>.
 	 * @param property property of root java script object to add

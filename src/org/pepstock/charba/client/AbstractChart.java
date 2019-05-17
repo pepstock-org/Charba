@@ -470,8 +470,9 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 
 	/**
 	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales,
-	 * legends, and then re-render the chart. A configuration object can be provided with additional configuration for the update
-	 * process. This is useful when update is manually called inside an event handler and some different animation is desired.
+	 * legends, and then re-render the chart. A configuration object can be provided with additional configuration for the
+	 * update process. This is useful when update is manually called inside an event handler and some different animation is
+	 * desired.
 	 * 
 	 * @param configuration a configuration object can be provided with additional configuration for the update process
 	 */
@@ -501,8 +502,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 
 	/**
 	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in
-	 * that case. A configuration object can be provided with additional configuration for the render process. This is useful when
-	 * update is manually called inside an event handler and some different animation is desired.
+	 * that case. A configuration object can be provided with additional configuration for the render process. This is useful
+	 * when update is manually called inside an event handler and some different animation is desired.
 	 * 
 	 * @param configuration a configuration object can be provided with additional configuration for the render process
 	 */

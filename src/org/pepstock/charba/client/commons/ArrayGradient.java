@@ -36,7 +36,7 @@ public final class ArrayGradient extends Array {
 	 * This method creates new array instance with a variable number of <code>CanvasGradient</code> arguments.
 	 * 
 	 * @param items canvasPattern items to create new array
-	 * @return new array instance of images.
+	 * @return new array instance of gradients.
 	 */
 	private static native ArrayGradient of(CanvasGradient... items);
 
@@ -50,7 +50,7 @@ public final class ArrayGradient extends Array {
 	 * This method creates new array instance with a variable number of <code>CanvasGradient</code> arguments.
 	 * 
 	 * @param items canvasPattern items to create new array
-	 * @return new array instance of images or <code>null</code> if argument is <code>null</code> or length to 0
+	 * @return new array instance of gradients or <code>null</code> if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
 	public static ArrayGradient fromOrNull(CanvasGradient... items) {
@@ -67,7 +67,7 @@ public final class ArrayGradient extends Array {
 	 * This method creates new array instance with a variable number of <code>CanvasGradient</code> arguments.
 	 * 
 	 * @param items canvasPattern items to create new array
-	 * @return new array instance of images or an empty array if argument is <code>null</code> or length to 0
+	 * @return new array instance of gradients or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
 	public static ArrayGradient fromOrEmpty(CanvasGradient... items) {
@@ -81,10 +81,10 @@ public final class ArrayGradient extends Array {
 	}
 
 	/**
-	 * Creates a java script array of images starting from list of images.
+	 * Creates a java script array of gradients starting from list of gradients.
 	 * 
-	 * @param items list of images to load into new java script array.
-	 * @return new array instance of images or <code>null</code> if argument is <code>null</code> or empty
+	 * @param items list of gradients to load into new java script array.
+	 * @return new array instance of gradients or <code>null</code> if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
 	public static ArrayGradient fromOrNull(List<CanvasGradient> items) {
@@ -104,10 +104,10 @@ public final class ArrayGradient extends Array {
 	}
 
 	/**
-	 * Creates a java script array of images starting from list of images.
+	 * Creates a java script array of gradients starting from list of gradients.
 	 * 
-	 * @param items list of images to load into new java script array.
-	 * @return new array instance of images or an empty array if argument is <code>null</code> or empty
+	 * @param items list of gradients to load into new java script array.
+	 * @return new array instance of gradients or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
 	public static ArrayGradient fromOrEmpty(List<CanvasGradient> items) {

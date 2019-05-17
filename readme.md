@@ -124,6 +124,8 @@ Here you can find the list of enhancement and updates available on `master` bran
  * `ObjectType` default is `Undefined` instead of `Object`
  * change `IllegalArgumentException` into `ResouceLoadException` into `EntryPointStarter`
  * apply LABELS plugin pull request [#95](https://github.com/emn178/chartjs-plugin-labels/pull/95)
+ * change the key of injected resources using also their class name to avoid overlaps with custom injection
+ * change the name of java script **Charba** classes adding `Charba` prefix to avoid conflicts with other java script packages
  
 License
 -------

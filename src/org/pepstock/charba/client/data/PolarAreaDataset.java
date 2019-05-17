@@ -27,7 +27,7 @@ public class PolarAreaDataset extends HovingDataset implements HasBorderAlign {
 
 	// instance of border aligner
 	private final BorderAligner borderAligner;
-	
+
 	/**
 	 * Creates a dataset.<br>
 	 * It uses the global options has default.
@@ -46,7 +46,7 @@ public class PolarAreaDataset extends HovingDataset implements HasBorderAlign {
 		// creates border aligner instance
 		this.borderAligner = new BorderAligner(getNativeObject(), getDefaultValues());
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

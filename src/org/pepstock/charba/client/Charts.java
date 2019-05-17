@@ -120,7 +120,7 @@ public final class Charts {
 	 */
 	public static IsChart get(String chartId) {
 		// checks if argument is consistent
-		if (chartId !=  null) {
+		if (chartId != null) {
 			return CHARTS_INSTANCES.get(chartId);
 		}
 		// if here chart id is not consistent

@@ -60,7 +60,7 @@ abstract class AbstractArrayContainerList<E, A extends Array> extends AbstractAr
 		}
 		return modified;
 	}
-	
+
 	/**
 	 * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by
 	 * the specified collection's iterator
@@ -81,6 +81,5 @@ abstract class AbstractArrayContainerList<E, A extends Array> extends AbstractAr
 		}
 		return modified;
 	}
-
 
 }

@@ -65,7 +65,7 @@ public final class EntryPointStarter {
 	 * 
 	 * @param runnable the entry point instance as runnable
 	 */
-	public static void run(final Runnable runnable){
+	public static void run(final Runnable runnable) {
 		// checks if the entry point is consistent
 		if (runnable == null) {
 			// if not, exception

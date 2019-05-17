@@ -17,7 +17,7 @@ package org.pepstock.charba.client.resources;
 
 /**
  * Exception created when it's able to load CHART.JS source in deferred mode.
- *  
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */

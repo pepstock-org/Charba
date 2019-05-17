@@ -36,7 +36,9 @@ public class LineOptions extends MultiScalesOptions implements HasLineOptions {
 		super(chart, defaultValues);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.configuration.HasLineOptions#getOptions()
 	 */
 	@Override

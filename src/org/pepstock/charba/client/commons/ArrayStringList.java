@@ -87,7 +87,7 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	 */
 	@Override
 	public boolean add(String element) {
-		// checks if argument is consistent 
+		// checks if argument is consistent
 		if (element != null) {
 			// adds element to array
 			array.push(element);
@@ -105,12 +105,12 @@ public final class ArrayStringList extends AbstractArrayList<String, ArrayString
 	public boolean addAll(Collection<? extends String> collection) {
 		// set modified
 		boolean modified = collection != null && !collection.isEmpty();
-		// checks if argument is consistent 
+		// checks if argument is consistent
 		if (modified) {
 			Iterator<? extends String> iter = collection.iterator();
 			// scans all elements
 			while (iter.hasNext()) {
-				// adds and 
+				// adds and
 				// sets modified
 				modified = modified && add(iter.next());
 			}

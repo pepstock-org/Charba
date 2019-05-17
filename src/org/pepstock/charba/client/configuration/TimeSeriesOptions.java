@@ -26,7 +26,7 @@ import org.pepstock.charba.client.IsChart;
  *
  */
 abstract class TimeSeriesOptions extends MultiScalesOptions {
-	
+
 	private final TimeSeriesScales scales;
 
 	/**
@@ -39,7 +39,7 @@ abstract class TimeSeriesOptions extends MultiScalesOptions {
 		// asks to do not create a scale
 		super(chart, defaultValues, false);
 		// creates scales for time series
-		scales =new TimeSeriesScales(chart, getConfiguration());
+		scales = new TimeSeriesScales(chart, getConfiguration());
 	}
 
 	/*

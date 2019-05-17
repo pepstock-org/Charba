@@ -37,8 +37,8 @@ public interface Type extends Key {
 	}
 
 	/**
-	 * Checks if type passed as argument is not <code>null</code> and its scale type is not <code>null</code> as well. If not, throw a
-	 * {@link IllegalArgumentException}.
+	 * Checks if type passed as argument is not <code>null</code> and its scale type is not <code>null</code> as well. If not,
+	 * throw a {@link IllegalArgumentException}.
 	 * 
 	 * @param type type to be checked
 	 */

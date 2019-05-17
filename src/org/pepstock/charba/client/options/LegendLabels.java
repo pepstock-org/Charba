@@ -58,7 +58,7 @@ public final class LegendLabels extends AbstractModel<Legend, IsDefaultLegendLab
 		}
 
 	}
-	
+
 	// instance of font manager
 	private final Fonter fonter;
 

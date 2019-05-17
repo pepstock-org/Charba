@@ -20,9 +20,10 @@ import java.util.List;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
- * The time series line chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
- * specific dataset.<br>
- * In time series charts, the data string and data (as double) are not allowed. You must use {@link DataPoint} or {@link TimeSeriesItem}. 
+ * The time series line chart allows a number of properties to be specified for each dataset. These are used to set display
+ * properties for a specific dataset.<br>
+ * In time series charts, the data string and data (as double) are not allowed. You must use {@link DataPoint} or
+ * {@link TimeSeriesItem}.
  * 
  * @author Andrea "Stock" Stocchero
  *

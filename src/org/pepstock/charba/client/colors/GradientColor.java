@@ -28,7 +28,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  *
  */
 public final class GradientColor extends NativeObjectContainer {
-	
+
 	/**
 	 * Offset 0 defined as default start.
 	 */

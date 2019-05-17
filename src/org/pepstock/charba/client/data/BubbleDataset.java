@@ -409,7 +409,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 			remove(Property.POINT_STYLE);
 		}
 	}
-	
+
 	/**
 	 * Returns a {@link PointStyle} when the callback has been activated.
 	 * 

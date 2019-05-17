@@ -68,7 +68,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	public final String getPluginId() {
 		return pluginId;
 	}
-	
+
 	/**
 	 * Registers new plugin options into a map, in order to return a right object instance, mainly because the plugin options
 	 * can contain callbacks and references to be maintained.

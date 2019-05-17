@@ -71,7 +71,7 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 	 * @param values an array of elements to be loaded
 	 */
 	public void addAll(double... values) {
-		// checks if arguments are consistent 
+		// checks if arguments are consistent
 		if (values != null && values.length > 0) {
 			// scans all elements
 			for (double val : values) {
@@ -86,7 +86,7 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 	 */
 	@Override
 	public boolean add(Double element) {
-		// checks if argument is consistent 
+		// checks if argument is consistent
 		if (element != null) {
 			// adds element to array
 			array.push(element);
@@ -104,12 +104,12 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 	public boolean addAll(Collection<? extends Double> collection) {
 		// set modified
 		boolean modified = collection != null && !collection.isEmpty();
-		// checks if argument is consistent 
+		// checks if argument is consistent
 		if (modified) {
 			Iterator<? extends Double> iter = collection.iterator();
 			// scans all elements
 			while (iter.hasNext()) {
-				// adds and 
+				// adds and
 				// sets modified
 				modified = modified && add(iter.next());
 			}
@@ -125,7 +125,7 @@ public final class ArrayDoubleList extends AbstractArrayList<Double, ArrayDouble
 	public boolean retainAll(Collection<?> collection) {
 		// set modified checking if collection is empty
 		boolean modified = collection != null && !collection.isEmpty();
-		// checks if argument is consistent 
+		// checks if argument is consistent
 		if (modified) {
 			// creates a copy of elements
 			List<Double> contained = new ArrayList<>();

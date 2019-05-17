@@ -30,11 +30,11 @@ import org.pepstock.charba.client.enums.FontStyle;
  *
  */
 public final class Fonter extends NativeObjectContainer {
-	
+
 	// default font values
 	private final IsDefaultFontItem defaultValue;
 	// model which contains the fonter
-	private final AbstractModel<?,?> model;
+	private final AbstractModel<?, ?> model;
 
 	/**
 	 * Name of properties of native object.
@@ -78,7 +78,7 @@ public final class Fonter extends NativeObjectContainer {
 	 * @param model model which contains the fonter.
 	 * @param defaultValue default value of FONTs to use when the properties do not exist
 	 */
-	public Fonter(NativeObject nativeObject, AbstractModel<?,?> model, IsDefaultFontItem defaultValue) {
+	public Fonter(NativeObject nativeObject, AbstractModel<?, ?> model, IsDefaultFontItem defaultValue) {
 		super(nativeObject);
 		// checks if model is consistent
 		if (model == null) {

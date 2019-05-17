@@ -18,21 +18,21 @@
 		and needed to improve JSINTEROP adoption for CHARBA, because 
 		JSINTEROP is not able to address all javascript model.   
 	*/
-    function JsHelper() {};
+    function CharbaJsHelper() {};
     /*
 	 Returns the java script object type of the object.
 	  
 	 @param object the object to get type.
 	 @return the object type
     */
-    JsHelper.typeOf = function(obj) {
+    CharbaJsHelper.typeOf = function(obj) {
     	return typeof obj;
     }
    /*
 	 Returns an undefined.
 	 @return undefined
     */
-    JsHelper.undefined = function(obj) {
+    CharbaJsHelper.undefined = function(obj) {
     	return undefined;
     }
    /*
@@ -41,7 +41,7 @@
 	 @param object the object on which to remove the property.
 	 @param key the string name of the property to remove.
     */
-    JsHelper.remove = function(obj, key) {
+    CharbaJsHelper.remove = function(obj, key) {
     	delete obj[key];
     }
     /*
@@ -51,7 +51,7 @@
 	 @param key the string name of the property to test.
 	 @return the object type
     */
-    JsHelper.type = function(obj, key) {
+    CharbaJsHelper.type = function(obj, key) {
     	return typeof obj[key];
     }
     /*
@@ -61,7 +61,7 @@
 	 @param key the string name of the property to test.
 	 @return true if the value is an Array; otherwise, false.
     */
-    JsHelper.isArray = function(obj, key) {
+    CharbaJsHelper.isArray = function(obj, key) {
 	    return Array.isArray(obj[key]);
     }    
     /*
@@ -71,7 +71,7 @@
 	 @param key the string name of the property to be defined or modified..
 	 @return string value
     */
-    JsHelper.propertyAsString = function(obj, key) {
+    CharbaJsHelper.propertyAsString = function(obj, key) {
     	return obj[key];
     }
     /*
@@ -81,7 +81,7 @@
 	 @param key the string name of the property to be defined or modified..
 	 @return double value
     */
-    JsHelper.propertyAsDouble = function(obj, key) {
+    CharbaJsHelper.propertyAsDouble = function(obj, key) {
     	return obj[key];
     }
     /*
@@ -91,26 +91,26 @@
 	 @param key the string name of the property to be defined or modified..
 	 @return integer value
     */
-    JsHelper.propertyAsInt = function(obj, key) {
+    CharbaJsHelper.propertyAsInt = function(obj, key) {
     	return obj[key];
     }  
-  /*
+    /*
 	 Returns a chart native event from CHART.JS event.
 	  
 	 @param event CHART.JS event
 	 @param key key of java script object
 	 @return a chart native event
     */
-    JsHelper.nativeEvent = function(obj, key) {
+    CharbaJsHelper.nativeEvent = function(obj, key) {
     	return obj[key];
     }      
-   /*
+    /*
 	 Returns an array of strings with element attributes.
 	  
 	 @param element DOM element to scan
 	 @return an array of strings with element attributes
     */
-    JsHelper.elementAttributes = function(element) {
+    CharbaJsHelper.elementAttributes = function(element) {
     	var result = new Array();
     	// First, let's verify that the paragraph has some attributes    
      	if (element.hasAttributes()) {
@@ -128,7 +128,7 @@
 	 @param context context of canvas
 	 @param object array of values that specify alternating lengths of lines and gaps which describe the pattern
     */
-    JsHelper.setLineDash = function(context, values) {
+    CharbaJsHelper.setLineDash = function(context, values) {
     	context.setLineDash(values);
     }
     /*
@@ -137,7 +137,7 @@
 	  
 	 @return new proxy for callback.
     */
-    JsHelper.newCallbackProxy = function() {
+    CharbaJsHelper.newCallbackProxy = function() {
     	/*
     		Creates an object with 2 properties.
     		CALLBACK: contains user callback implementation which must be called
@@ -172,14 +172,14 @@
 		JSControllerHelper is an object with a set of static methods used as utility
 		and needed to improve JSINTEROP adoption for CHARBA controllers implementation.   
 	*/
-    function JsControllerHelper() {};
+    function CharbaJsControllerHelper() {};
     /*
      Register the controller which does not extend any existing one.
 	  
 	 @param controllerType controller type
 	 @param instance controller java script instance
     */
-    JsControllerHelper.register = function(controllerType, instance) {
+    CharbaJsControllerHelper.register = function(controllerType, instance) {
     	Chart.controllers[controllerType] = Chart.DatasetController.extend(instance);
     }
     /*
@@ -189,7 +189,7 @@
 	 @param chartType type of extended chart
 	 @param instance controller java script instance    
     */
-    JsControllerHelper.extend = function(controllerType, chartType, instance) {
+    CharbaJsControllerHelper.extend = function(controllerType, chartType, instance) {
 		Chart.defaults[controllerType] = Chart.defaults[chartType];
 		Chart.controllers[controllerType] = Chart.controllers[chartType].extend(instance);
     }
@@ -200,7 +200,7 @@
 	 @param context context of controller
 	 @param datasetIndex dataset index
     */
-    JsControllerHelper.initialize = function(controllerType, context, datasetIndex) {
+    CharbaJsControllerHelper.initialize = function(controllerType, context, datasetIndex) {
     	Chart.controllers[controllerType].prototype.initialize.call(context, context.chart, datasetIndex);
     }
     /*
@@ -209,7 +209,7 @@
 	 @param chartType extended chart type
 	 @param context context of controller
     */
-    JsControllerHelper.addElements = function(controllerType, context) {
+    CharbaJsControllerHelper.addElements = function(controllerType, context) {
        	Chart.controllers[controllerType].prototype.addElements.call(context);
     }
     /*
@@ -219,7 +219,7 @@
 	 @param context context of controller
 	 @param index dataset index
     */
-    JsControllerHelper.addElementAndReset = function(controllerType, context, index) {
+    CharbaJsControllerHelper.addElementAndReset = function(controllerType, context, index) {
     	Chart.controllers[controllerType].prototype.addElementAndReset.call(context, index);
     }
     /*
@@ -229,7 +229,7 @@
 	 @param context context of controller
 	 @param ease if specified, this number represents how far to transition elements.
     */
-    JsControllerHelper.draw = function(controllerType, context, ease) {
+    CharbaJsControllerHelper.draw = function(controllerType, context, ease) {
     	Chart.controllers[controllerType].prototype.draw.call(context, ease);
     }
     /*
@@ -239,7 +239,7 @@
 	 @param context context of controller
 	 @param element element to be remove.
     */
-    JsControllerHelper.removeHoverStyle = function(controllerType, context, element) {
+    CharbaJsControllerHelper.removeHoverStyle = function(controllerType, context, element) {
     	Chart.controllers[controllerType].prototype.removeHoverStyle.call(context, element);
     }
     /*
@@ -249,7 +249,7 @@
 	 @param context context of controller
 	 @param element element to be set.
     */
-    JsControllerHelper.setHoverStyle = function(controllerType, context, element) {
+    CharbaJsControllerHelper.setHoverStyle = function(controllerType, context, element) {
     	Chart.controllers[controllerType].prototype.setHoverStyle.call(context, element);
     }
     /*
@@ -259,20 +259,20 @@
 	 @param context context of controller
 	 @param reset if true, put the elements into a reset state so they can animate to their final values
     */
-    JsControllerHelper.update = function(controllerType, context, reset) {
+    CharbaJsControllerHelper.update = function(controllerType, context, reset) {
     	Chart.controllers[controllerType].prototype.update.call(context, reset);
     }
     /*
 		JSWindowHelper is an object with a set of static methods used as utility
 		and needed to act on window java script object.   
 	*/
-    function JsWindowHelper() {};
+    function CharbaJsWindowHelper() {};
     /*
      CSS media queries allow changing styles when printing a page. The CSS applied from these media queries may cause charts
 	 to need to resize. However, the resize won't happen automatically. To support resizing charts when printing, one needs to
 	 hook the "onbeforeprint" event and manually trigger resizing of each chart.
     */
-    JsWindowHelper.enableResizeOnBeforePrint = function() {
+    CharbaJsWindowHelper.enableResizeOnBeforePrint = function() {
     	window.onbeforeprint = function (event) {
  			for (var id in Chart.instances) {
     			Chart.instances[id].resize();
@@ -283,14 +283,14 @@
 		JSPositionerHelper is an object with a set of static methods used as utility
 		and needed to add custom positioner on tooltips.   
 	*/
-    function JsPositionerHelper() {};
+    function CharbaJsPositionerHelper() {};
     /*
      Registers a custom postioner for tooltips into CHART.JS.
 
 	 @param name name of new position to set into tooltip config
 	 @param module function to invoke to get control
     */
-    JsPositionerHelper.register = function(name, module) {
+    CharbaJsPositionerHelper.register = function(name, module) {
     	if (module != null && typeof module === 'function'){
 	    	Chart.Tooltip.positioners[name] = module;
     	}
@@ -300,7 +300,7 @@
 
 	 @param name name of new position to set into tooltip config
     */
-    JsPositionerHelper.unregister = function(name) {
+    CharbaJsPositionerHelper.unregister = function(name) {
     	if (Chart.Tooltip.positioners[name] != 'undefined'){
  		    delete Chart.Tooltip.positioners[name];
     	}
@@ -311,7 +311,7 @@
 	 @param name name of position to be invoked
 	 @return the point calculated by positioner or <code>null</code> if positioner does not exist
     */
-    JsPositionerHelper.invoke = function(name, context, elements, eventPoint) {
+    CharbaJsPositionerHelper.invoke = function(name, context, elements, eventPoint) {
     	if (Chart.Tooltip.positioners[name] != 'undefined'){
     		return Chart.Tooltip.positioners[name].apply(context, Array.of(elements, eventPoint));
     	}

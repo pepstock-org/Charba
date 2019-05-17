@@ -36,7 +36,7 @@ public final class ArrayPattern extends Array {
 	 * This method creates new array instance with a variable number of <code>CanvasPattern</code> arguments.
 	 * 
 	 * @param items canvasPattern items to create new array
-	 * @return new array instance of images.
+	 * @return new array instance of patterns.
 	 */
 	private static native ArrayPattern of(CanvasPattern... items);
 
@@ -50,7 +50,7 @@ public final class ArrayPattern extends Array {
 	 * This method creates new array instance with a variable number of <code>CanvasPattern</code> arguments.
 	 * 
 	 * @param items canvasPattern items to create new array
-	 * @return new array instance of images or <code>null</code> if argument is <code>null</code> or length to 0
+	 * @return new array instance of patterns or <code>null</code> if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
 	public static ArrayPattern fromOrNull(CanvasPattern... items) {
@@ -67,7 +67,7 @@ public final class ArrayPattern extends Array {
 	 * This method creates new array instance with a variable number of <code>CanvasPattern</code> arguments.
 	 * 
 	 * @param items canvasPattern items to create new array
-	 * @return new array instance of images or an empty array if argument is <code>null</code> or length to 0
+	 * @return new array instance of patterns or an empty array if argument is <code>null</code> or length to 0
 	 */
 	@JsOverlay
 	public static ArrayPattern fromOrEmpty(CanvasPattern... items) {
@@ -81,10 +81,10 @@ public final class ArrayPattern extends Array {
 	}
 
 	/**
-	 * Creates a java script array of images starting from list of images.
+	 * Creates a java script array of patterns starting from list of patterns.
 	 * 
-	 * @param items list of images to load into new java script array.
-	 * @return new array instance of images or <code>null</code> if argument is <code>null</code> or empty
+	 * @param items list of patterns to load into new java script array.
+	 * @return new array instance of patterns or <code>null</code> if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
 	public static ArrayPattern fromOrNull(List<CanvasPattern> items) {
@@ -104,10 +104,10 @@ public final class ArrayPattern extends Array {
 	}
 
 	/**
-	 * Creates a java script array of images starting from list of images.
+	 * Creates a java script array of patterns starting from list of patterns.
 	 * 
-	 * @param items list of images to load into new java script array.
-	 * @return new array instance of images or an empty array if argument is <code>null</code> or empty
+	 * @param items list of patterns to load into new java script array.
+	 * @return new array instance of patterns or an empty array if argument is <code>null</code> or empty
 	 */
 	@JsOverlay
 	public static ArrayPattern fromOrEmpty(List<CanvasPattern> items) {

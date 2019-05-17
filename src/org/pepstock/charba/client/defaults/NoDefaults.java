@@ -24,7 +24,7 @@ package org.pepstock.charba.client.defaults;
 public final class NoDefaults {
 
 	/**
-	 * Unique instance of no defaults class. 
+	 * Unique instance of no defaults class.
 	 */
 	public static final NoDefaults INSTANCE = new NoDefaults();
 
@@ -34,5 +34,5 @@ public final class NoDefaults {
 	private NoDefaults() {
 		// do nothing
 	}
-	
+
 }

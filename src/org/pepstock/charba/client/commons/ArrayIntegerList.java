@@ -71,7 +71,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	 * @param values an array of elements to be loaded
 	 */
 	public void addAll(int... values) {
-		// checks if arguments are consistent 
+		// checks if arguments are consistent
 		if (values != null && values.length > 0) {
 			// scans all elements
 			for (int val : values) {
@@ -86,7 +86,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	 */
 	@Override
 	public boolean add(Integer element) {
-		// checks if argument is consistent 
+		// checks if argument is consistent
 		if (element != null) {
 			// adds element to array
 			array.push(element);
@@ -104,12 +104,12 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	public boolean addAll(Collection<? extends Integer> collection) {
 		// set modified
 		boolean modified = collection != null && !collection.isEmpty();
-		// checks if argument is consistent 
+		// checks if argument is consistent
 		if (modified) {
 			Iterator<? extends Integer> iter = collection.iterator();
 			// scans all elements
 			while (iter.hasNext()) {
-				// adds and 
+				// adds and
 				// sets modified
 				modified = modified && add(iter.next());
 			}
@@ -125,7 +125,7 @@ public final class ArrayIntegerList extends AbstractArrayList<Integer, ArrayInte
 	public boolean retainAll(Collection<?> collection) {
 		// set modified
 		boolean modified = collection != null && !collection.isEmpty();
-		// checks if argument is consistent 
+		// checks if argument is consistent
 		if (modified) {
 			// creates a copy of elements
 			List<Integer> contained = new ArrayList<>();

@@ -149,7 +149,7 @@ public final class Listeners extends NativeObjectContainer {
 			remove(Event.LEAVE);
 		}
 	}
-	
+
 	/**
 	 * Returns a boolean when the callback has been activated.
 	 * 
@@ -185,7 +185,7 @@ public final class Listeners extends NativeObjectContainer {
 		// defaults always true
 		return true;
 	}
-	
+
 	/**
 	 * Returns a boolean when the callback has been activated.
 	 * 

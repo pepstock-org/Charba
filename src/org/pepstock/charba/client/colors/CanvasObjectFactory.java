@@ -353,7 +353,7 @@ public abstract class CanvasObjectFactory {
 		// by GWT context 2d method
 		return context.createRadialGradient(x0, y0, r0, x1, y1, r1);
 	}
-	
+
 	/**
 	 * Checks consistency of arguments if not <code>null</code>. If not consistent, throws an {@link IllegalArgumentException}.
 	 * 

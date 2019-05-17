@@ -22,9 +22,9 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
- * The time series bar chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
- * specific dataset.<br>
- * In time series charts, the data (as double) is not allowed. You must use {@link DataPoint} or {@link TimeSeriesItem}. 
+ * The time series bar chart allows a number of properties to be specified for each dataset. These are used to set display
+ * properties for a specific dataset.<br>
+ * In time series charts, the data (as double) is not allowed. You must use {@link DataPoint} or {@link TimeSeriesItem}.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -33,7 +33,7 @@ public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesIte
 
 	// exception string message for setting ore getting data
 	private static final String INVALID_DATA_CALL = "setData and getData methods are not invokable by a time series chart.";
-	
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -81,7 +81,7 @@ public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesIte
 	public TimeSeriesBarDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
 	}
-	
+
 	/**
 	 * Sets the name of stack group.
 	 * 

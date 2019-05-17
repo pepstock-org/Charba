@@ -524,7 +524,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		// sets data type checking if the key exists
 		setValue(Dataset.Property.CHARBA_DATA_TYPE, has(Dataset.Property.DATA) ? DataType.POINTS : DataType.UNKNOWN);
 	}
-	
+
 	/**
 	 * Returns the data property of a dataset for a chart is specified as an array of data points
 	 * 

@@ -35,24 +35,24 @@ public final class NativeName {
 	/**
 	 * Constant to bind java script object as JsHelper with name <b>{@value JSHELPER}</b>, (internal of Charba).
 	 */
-	public static final String JSHELPER = "JsHelper";
+	public static final String JSHELPER = "CharbaJsHelper";
 
 	/**
 	 * Constant to bind java script object as JsControllerHelper with name <b>{@value JSCONTROLLERHELPER}</b>, (internal of
 	 * Charba).
 	 */
-	public static final String JSCONTROLLERHELPER = "JsControllerHelper";
+	public static final String JSCONTROLLERHELPER = "CharbaJsControllerHelper";
 
 	/**
 	 * Constant to bind java script object as JsWindowHelper with name <b>{@value JSWINDOWHELPER}</b>, (internal of Charba).
 	 */
-	public static final String JSWINDOWHELPER = "JsWindowHelper";
+	public static final String JSWINDOWHELPER = "CharbaJsWindowHelper";
 
 	/**
 	 * Constant to bind java script object as JsPositionerHelper with name <b>{@value JSPOSITIONERHELPER}</b>, (internal of
 	 * Charba).
 	 */
-	public static final String JSPOSITIONERHELPER = "JsPositionerHelper";
+	public static final String JSPOSITIONERHELPER = "CharbaJsPositionerHelper";
 
 	/**
 	 * Constant to bind java script object as chart with name <b>{@value CHART}</b>, (internal of CHART.JS).

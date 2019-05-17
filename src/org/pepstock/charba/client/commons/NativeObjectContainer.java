@@ -83,7 +83,7 @@ public abstract class NativeObjectContainer {
 	protected final boolean has(Key key) {
 		// checks arguments if consistent
 		// if not consistent, returns not found
-		if (Key.isValid(key)){ 
+		if (Key.isValid(key)) {
 			return nativeObject.hasProperty(key.value());
 		}
 		// if here, key is not consistent
@@ -780,7 +780,7 @@ public abstract class NativeObjectContainer {
 	 * This must be used when a java script property can contain an array or a gradient.
 	 * 
 	 * @param key key of the property of JavaScript object.
-	 * @param values images to be set
+	 * @param values gradients to be set
 	 */
 	protected final void setValueOrArray(Key key, CanvasGradient... values) {
 		// checks if values are consistent
@@ -872,7 +872,7 @@ public abstract class NativeObjectContainer {
 	 * This must be used when a java script property can contain an array or a pattern.
 	 * 
 	 * @param key key of the property of JavaScript object.
-	 * @param values images to be set
+	 * @param values patterns to be set
 	 */
 	protected final void setValueOrArray(Key key, CanvasPattern... values) {
 		// checks if values are consistent
@@ -1077,7 +1077,7 @@ public abstract class NativeObjectContainer {
 			removeIfExists(key);
 		}
 	}
-	
+
 	/**
 	 * Checks a color value if consistent, returning the RGBA representation, otherwise <code>null</code>.
 	 * 

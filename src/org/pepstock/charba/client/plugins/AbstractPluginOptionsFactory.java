@@ -51,11 +51,13 @@ public abstract class AbstractPluginOptionsFactory<T extends AbstractPluginOptio
 	}
 
 	/**
-	 * Loads the default plugin options from defaults. If factory, passed as argument, is <code>null</code>, returns <code>null</code>.
+	 * Loads the default plugin options from defaults. If factory, passed as argument, is <code>null</code>, returns
+	 * <code>null</code>.
 	 * 
 	 * @param factory factory to load options
 	 * @param <G> type of native object container
-	 * @return the defaults plugin options or new options instance if not exist. If factory is <code>null</code>, returns <code>null</code>.
+	 * @return the defaults plugin options or new options instance if not exist. If factory is <code>null</code>, returns
+	 *         <code>null</code>.
 	 */
 	protected final <G extends NativeObjectContainer> G loadGlobalsPluginOptions(NativeObjectContainerFactory<G> factory) {
 		// checks if factory is consistent

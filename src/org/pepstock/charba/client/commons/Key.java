@@ -22,22 +22,22 @@ package org.pepstock.charba.client.commons;
  * @author Andrea "Stock" Stocchero
  */
 public interface Key {
-	
+
 	/**
-	 * Returns <code>true</code> if key passed as argument is not <code>null</code> and its value is not <code>null</code>
-	 * as well.
+	 * Returns <code>true</code> if key passed as argument is not <code>null</code> and its value is not <code>null</code> as
+	 * well.
 	 * 
 	 * @param key key to be checked
-	 * @return <code>true</code> if key passed as argument is not <code>null</code> and its value is not <code>null</code>
-	 *         as well.
+	 * @return <code>true</code> if key passed as argument is not <code>null</code> and its value is not <code>null</code> as
+	 *         well.
 	 */
 	static boolean isValid(Key key) {
 		return key != null && key.value() != null;
 	}
-	
+
 	/**
-	 * Checks if key passed as argument is not <code>null</code> and its value is not <code>null</code>
-	 * as well. If not, throw a {@link IllegalArgumentException}.
+	 * Checks if key passed as argument is not <code>null</code> and its value is not <code>null</code> as well. If not, throw a
+	 * {@link IllegalArgumentException}.
 	 * 
 	 * @param key key to be checked
 	 */
@@ -97,7 +97,6 @@ public interface Key {
 		// then returns default
 		return defaultKey;
 	}
-
 
 	/**
 	 * Returns the name value of property
