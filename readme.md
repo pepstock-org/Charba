@@ -38,20 +38,20 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>2.4</version>
+    <version>2.5</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="2.4"/>
+<dependency org="org.pepstock" name="charba" rev="2.5"/>
 ```
 
 If you are using [Gradle](https://gradle.org/):
 
 ```json
-compile group: 'org.pepstock', name: 'charba', version: '2.4'
+compile group: 'org.pepstock', name: 'charba', version: '2.5'
 ```
 
 To install in your GWT project, you must the following configuration into your GWT project module configuration:
@@ -79,7 +79,7 @@ Documentation
 
 All **Charba** documentation will be maintained into [GitHub wiki](https://github.com/pepstock-org/Charba/wiki) of **Charba** project.
 
-API JavaDoc is published [here](http://www.pepstock.org/Charba/2.4/index.html).
+API JavaDoc is published [here](http://www.pepstock.org/Charba/2.5/index.html).
 
 Showcase
 --------
@@ -97,36 +97,8 @@ Continuous integration and quality gate
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
-In the project, it's also provided the [FindBugs](https://github.com/pepstock-org/Charba/blob/2.4/charba.fbp) project to looking offline for bugs.
+In the project, it's also provided the [FindBugs](https://github.com/pepstock-org/Charba/blob/2.5/charba.fbp) project to looking offline for bugs.
 
-Going to new version
--------
-
-Here you can find the list of enhancement and updates available on `master` branch before which will be part of new official release:
-
-### Features
-
- * `TimeSeriesLineChart` and `TimeSeriesBarChart` to manage time series charts easier. 
-   * `TimeSeriesLineOptions` and `TimeSeriesBarOptions` to manage time series chart configuration. 
-   * `TimeSeriesLineDataset` and `TimeSeriesBarDataset` to manage time series data. 
-   * `TimeSeriesItem` to improve setting of the data into a time series chart
- * GWT Material scheme can load a gradient with the sequence of colors  
-
-### Documentation
-
- * improved Wiki removing typo and wrong link to classes
-
-### Development
-
- * `null` pointer exception avoidance for set color by `IsColor` instance
- * `null` pointer exception avoidance for all public methods where an argument is passed 
- * fix `setTextStrokeColor` and `setTextShadowColor` methods of DATALABELS plugin option
- * `ObjectType` default is `Undefined` instead of `Object`
- * change `IllegalArgumentException` into `ResouceLoadException` into `EntryPointStarter`
- * apply LABELS plugin pull request [#95](https://github.com/emn178/chartjs-plugin-labels/pull/95)
- * change the key of injected resources using also their class name to avoid overlaps with custom injection
- * change the name of java script **Charba** classes adding `Charba` prefix to avoid conflicts with other java script packages
- 
 License
 -------
 
