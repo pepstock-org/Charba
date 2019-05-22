@@ -16,7 +16,7 @@
 package org.pepstock.charba.client;
 
 /**
- * Interface to catch the init and destroy of all charts. This is acting differently from achart plugin because it will get all
+ * Interface to catch the initialization and destroy of all charts. This is acting differently from a chart plugin because it will get all
  * triggers for all charts.<br>
  * Used to clean up resources, created by a special implementation and not ot-of-the-box of Charba, like CHART.JS plugins.
  * 
@@ -40,14 +40,14 @@ public interface ChartsLifecycleListener {
 	void onAfterInit(IsChart chart);
 
 	/**
-	 * Called before the chart as been destroyed.
+	 * Called before the chart has been destroyed.
 	 * 
 	 * @param chart the chart instance.
 	 */
 	void onBeforeDestroy(IsChart chart);
 
 	/**
-	 * Called after the chart as been destroyed.
+	 * Called after the chart has been destroyed.
 	 * 
 	 * @param chart the chart instance.
 	 */
