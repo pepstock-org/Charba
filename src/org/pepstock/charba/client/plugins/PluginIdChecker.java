@@ -16,7 +16,6 @@
 package org.pepstock.charba.client.plugins;
 
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.StandardKey;
 
 import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.safehtml.shared.UriUtils;
@@ -89,7 +88,7 @@ public final class PluginIdChecker {
 	public static Key key(String id) {
 		// checks
 		check(id);
-		return new StandardKey(id);
+		return Key.create(id);
 	}
 
 	/**

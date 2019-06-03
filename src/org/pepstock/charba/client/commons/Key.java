@@ -22,6 +22,16 @@ package org.pepstock.charba.client.commons;
  * @author Andrea "Stock" Stocchero
  */
 public interface Key {
+	
+	/**
+	 * Returns a key instance by its string value.
+	 * 
+	 * @param key string value to use
+	 * @return a standard key instance
+	 */
+	static Key create(String key) {
+		return new StandardKey(key);
+	}
 
 	/**
 	 * Returns <code>true</code> if key passed as argument is not <code>null</code> and its value is not <code>null</code> as

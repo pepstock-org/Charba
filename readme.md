@@ -99,6 +99,19 @@ At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/d
 
 In the project, it's also provided the [FindBugs](https://github.com/pepstock-org/Charba/blob/2.5/charba.fbp) project to looking offline for bugs.
 
+Going to new version
+-------
+
+Here you can find the list of enhancement and updates available on `master` branch before which will be part of new official release:
+
+### Fixed Bugs
+
+ * [#36](https://github.com/pepstock-org/Charba/issues/36) removed `setShowLine` method (which it will set always to `false` the options) from `ScatterDataset` in order to be able to set it freely. Thanks @lightingft
+ 
+### Development
+
+ * reduced visibility to `StandardKey` class constructor in order to use `Key create(String key)` method
+ 
 License
 -------
 

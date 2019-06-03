@@ -662,7 +662,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 			Charts.add(this);
 			// draws chart with configuration
 			chart = new Chart(canvas.getContext2d(), configuration);
-			// notify after destroy
+			// notify after init
 			Charts.fireAfterInit(this);
 		}
 	}

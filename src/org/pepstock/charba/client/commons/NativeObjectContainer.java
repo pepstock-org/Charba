@@ -124,7 +124,7 @@ public abstract class NativeObjectContainer {
 		// scans all properties names of object
 		for (String key : nativeObject.propertyKeys()) {
 			// adds a key object by name of the property
-			keys.add(new StandardKey(key));
+			keys.add(Key.create(key));
 		}
 		return keys;
 	}
