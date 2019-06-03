@@ -110,7 +110,7 @@ Here you can find the list of enhancement and updates available on `master` bran
  
 ### Development
 
- * reduced visibility to `StandardKey` class constructor in order to use `Key create(String key)` method
+ * reduced visibility to `StandardKey` class constructor in order to use `Key.create(String key)` method
  
 License
 -------
