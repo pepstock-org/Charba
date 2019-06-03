@@ -64,17 +64,6 @@ public final class ScatterDataset extends LineDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.LineDataset#setShowLine(boolean)
-	 */
-	@Override
-	public void setShowLine(boolean showLine) {
-		// force always to false
-		super.setShowLine(false);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.data.LiningDataset#setFill(org.pepstock.charba.client.enums.Fill)
 	 */
 	@Override
