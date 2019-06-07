@@ -107,7 +107,7 @@ Here you can find the list of enhancement and updates available on `master` bran
 ### Fixed Bugs
 
  * [#36](https://github.com/pepstock-org/Charba/issues/36) removed `setShowLine` method (which it will set always to `false` the options) from `ScatterDataset` in order to be able to set it freely. Thanks @lightingft
- * [#37](https://github.com/pepstock-org/Charba/issues/37) added ANT target `build-all-sources` to create a ZIP file (`charba-[version.release]-sources.zip`) which will be added to GitHub release page as artifact to be consumed, everytime new release will be published. Thanks @jake1164
+ * [#37](https://github.com/pepstock-org/Charba/issues/37) added ANT target `build-all-sources` to create a ZIP file (`charba-[version.release]-sources.zip`) which will be added to GitHub release page as artifact to be consumed, everytime new release will be published. The file will contain all sources (java, js) for security scanning purposes. Thanks @jake1164
  
 ### Development
 
