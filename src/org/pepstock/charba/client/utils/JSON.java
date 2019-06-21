@@ -60,6 +60,13 @@ public final class JSON {
 		 */
 		Object call(String key, Object value);
 	}
+	
+	/**
+	 * To avoid any instantiation
+	 */
+	private JSON() {
+		// do nothing
+	}
 
 	/**
 	 * Converts a JavaScript object or value to a JSON string, optionally replacing values if a replacer function is specified
