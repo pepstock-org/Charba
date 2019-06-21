@@ -81,8 +81,8 @@
     this.totalPercentage = 0;
     this.total = null;
     var arg = this.args[index];
-    arg.meta.data.forEach(function (element, index) {
-      this.renderToElement(dataset, arg, element, index);
+    arg.meta.data.forEach(function (element, forEachIndex) {
+      this.renderToElement(dataset, arg, element, forEachIndex);
     }.bind(this));
   };
 
