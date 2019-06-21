@@ -112,6 +112,8 @@ Here you can find the list of enhancement and updates available on `master` bran
 ### Development
 
  * reduced visibility to `StandardKey` class constructor in order to use `Key.create(String key)` method
+ * set `private` constructor to `JSON` class in order to avoid any instantiation
+ * added `compare` and `equals` methods to `Key` class
  
 License
 -------
