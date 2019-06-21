@@ -107,6 +107,46 @@ public interface Key {
 		// then returns default
 		return defaultKey;
 	}
+	
+	/**
+	 * Compares the two specified key values.
+	 * 
+	 * @param k1 the first key to compare
+	 * @param k2 the second key to compare
+	 * @return the value 0 if k1 value is equal to k2; a value less than 0 if k1 value is less than k2; and a value greater than
+	 *         0 if k1 value is greater than k2.
+	 */
+	static int compare(Key k1, Key k2) {
+		// checks if k1 argument is consistent
+		if (k1 == null) {
+			// checks if k2 argument is consistent
+			if (k2 == null) {
+				// both are null then equals
+				return 0;
+			}
+			// k2 is greater being not null
+			return -1;
+		} else {
+			// checks if k2 argument is consistent
+			if (k2 == null) {
+				// k2 is less being not null
+				return 1;
+			}
+			// compares values
+			return k1.value().compareToIgnoreCase(k2.value());
+		}
+	}
+
+	/**
+	 * Returns <code>true</code> if the keys have got the same value.
+	 * 
+	 * @param k1 the first key to compare
+	 * @param k2 the second key to compare
+	 * @return <code>true</code> if the keys have got the same value
+	 */
+	static boolean equals(Key k1, Key k2) {
+		return compare(k1, k2) == 0;
+	}
 
 	/**
 	 * Returns the name value of property

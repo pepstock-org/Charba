@@ -1496,7 +1496,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	@Override
 	protected final void applyPattern(Key key, List<CanvasPattern> canvasPatternsList) {
 		// checks if background color (ONLY one which can be used with patterns)
-		if (Property.BACKGROUND_COLOR.value().equalsIgnoreCase(key.value())) {
+		if (Key.equals(Property.BACKGROUND_COLOR, key)) {
 			// gets the first element
 			CanvasPattern pattern = canvasPatternsList.get(0);
 			// creates pattern and stores it
@@ -1512,7 +1512,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	@Override
 	protected final void applyGradient(Key key, List<CanvasGradient> canvasGradientsList) {
 		// checks if background or border colors which must be set with single value
-		if (Property.BACKGROUND_COLOR.value().equalsIgnoreCase(key.value()) || Property.BORDER_COLOR.value().equalsIgnoreCase(key.value())) {
+		if (Key.equals(Property.BACKGROUND_COLOR, key) || Key.equals(Property.BORDER_COLOR, key)) {
 			// gets the first element
 			CanvasGradient gradient = canvasGradientsList.get(0);
 			// creates gradient and stores it
