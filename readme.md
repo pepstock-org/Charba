@@ -110,6 +110,9 @@ Here you can find the list of enhancement and updates available on `master` bran
  * add `align` property to legend configuration object 
  * add `rotation` property to legend item object 
  * add `spanGaps` property to radar chart dataset and to element line configuration
+ * change `getLineWidth`, `getStrokeStyle` and `getPointStyle` methods into `LegendItem` class in order to return a single item instead of a list of them.
+ * add `getPointStyleAsImage` and `isPointStyleAsImage` methods to `LegendItem` class in order to manage images as point styles.
+ * add `setPointStyle` methods, setting a image instance, to `LegendLabelItem` class in order to manage images as point styles.
 
 ### Fixed Bugs
 
