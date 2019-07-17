@@ -290,7 +290,7 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	public Position getPosition() {
 		return getConfiguration().getLegend().getPosition();
 	}
-	
+
 	/**
 	 * Sets the alignment of the legend.
 	 * 

@@ -145,6 +145,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 		POINT_HOVER_BORDER_WIDTH("pointHoverBorderWidth"),
 		POINT_HOVER_RADIUS("pointHoverRadius"),
 		POINT_ROTATION("pointRotation"),
+		SPAN_GAPS("spanGaps"),
 		// internal key to store if point style is an image or not
 		CHARBA_POINT_STYLE("_charbaPointStyle");
 
@@ -1179,6 +1180,28 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 		// if here, is a callback
 		// then returns an empty list
 		return new ArrayDoubleList();
+	}
+
+	/**
+	 * Sets if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in
+	 * the line
+	 * 
+	 * @param spanGaps <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN
+	 *            data will create a break in the line
+	 */
+	public void setSpanGaps(boolean spanGaps) {
+		setValue(Property.SPAN_GAPS, spanGaps);
+	}
+
+	/**
+	 * Returns if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in
+	 * the line.
+	 * 
+	 * @return <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN data will
+	 *         create a break in the line.
+	 */
+	public boolean isSpanGaps() {
+		return getValue(Property.SPAN_GAPS, getDefaultValues().getElements().getLine().isSpanGaps());
 	}
 
 	/**

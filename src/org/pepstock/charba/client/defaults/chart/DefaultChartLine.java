@@ -150,4 +150,12 @@ public final class DefaultChartLine implements IsDefaultLine {
 		return line.isStepped();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#isSpanGaps()
+	 */
+	@Override
+	public boolean isSpanGaps() {
+		return line.isSpanGaps();
+	}
+	
 }

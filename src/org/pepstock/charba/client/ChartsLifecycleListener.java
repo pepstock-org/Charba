@@ -16,8 +16,8 @@
 package org.pepstock.charba.client;
 
 /**
- * Interface to catch the initialization and destroy of all charts. This is acting differently from a chart plugin because it will get all
- * triggers for all charts.<br>
+ * Interface to catch the initialization and destroy of all charts. This is acting differently from a chart plugin because it
+ * will get all triggers for all charts.<br>
  * Used to clean up resources, created by a special implementation and not ot-of-the-box of Charba, like CHART.JS plugins.
  * 
  * @author Andrea "Stock" Stocchero

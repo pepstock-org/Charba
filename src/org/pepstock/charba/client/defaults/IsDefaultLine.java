@@ -87,4 +87,12 @@ public interface IsDefaultLine extends IsDefaultOptionsElement {
 	 */
 	boolean isStepped();
 
+	/**
+	 * Returns if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in
+	 * the line.
+	 * 
+	 * @return <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN data will
+	 *         create a break in the line.
+	 */
+	boolean isSpanGaps();
 }

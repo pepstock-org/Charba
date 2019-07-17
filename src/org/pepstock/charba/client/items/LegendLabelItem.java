@@ -151,7 +151,7 @@ public final class LegendLabelItem extends LegendItem {
 	public void setPointStyle(PointStyle style) {
 		setValue(LegendItem.Property.POINT_STYLE, style);
 	}
-	
+
 	/**
 	 * Sets the rotation of the point in degrees (only used if usePointStyle is true).
 	 * 

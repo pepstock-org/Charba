@@ -59,7 +59,7 @@ public interface IsDefaultLegend {
 	 * @return position of the legend.
 	 */
 	Position getPosition();
-	
+
 	/**
 	 * Returns the alignment of the legend.
 	 * 

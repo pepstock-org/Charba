@@ -22,7 +22,7 @@ package org.pepstock.charba.client.commons;
  * @author Andrea "Stock" Stocchero
  */
 public interface Key {
-	
+
 	/**
 	 * Returns a key instance by its string value.
 	 * 
@@ -107,7 +107,7 @@ public interface Key {
 		// then returns default
 		return defaultKey;
 	}
-	
+
 	/**
 	 * Compares the two specified key values.
 	 * 

@@ -245,7 +245,7 @@ public class LegendItem extends NativeObjectContainer {
 			return Collections.unmodifiableList(Arrays.asList(getValue(Property.POINT_STYLE, PointStyle.class, Defaults.get().getGlobal().getElements().getPoint().getPointStyle())));
 		}
 	}
-	
+
 	/**
 	 * Returns the rotation of the point in degrees (only used if usePointStyle is true).
 	 * 

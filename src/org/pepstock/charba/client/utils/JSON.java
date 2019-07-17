@@ -60,7 +60,7 @@ public final class JSON {
 		 */
 		Object call(String key, Object value);
 	}
-	
+
 	/**
 	 * To avoid any instantiation
 	 */

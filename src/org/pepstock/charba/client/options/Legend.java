@@ -170,7 +170,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	public Position getPosition() {
 		return getValue(Property.POSITION, Position.class, getDefaultValues().getPosition());
 	}
-	
+
 	/**
 	 * Sets the alignment of the legend.
 	 * 
