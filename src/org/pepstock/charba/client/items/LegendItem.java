@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.items;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
@@ -24,7 +22,6 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
@@ -33,6 +30,8 @@ import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
+
+import com.google.gwt.dom.client.ImageElement;
 
 /**
  * This is a wrapper of the CHART.JS item which contains the legend item.
@@ -197,17 +196,8 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return the width of line in pixels.
 	 */
-	public final List<Integer> getLineWidth() {
-		// checks if the value into object is an array
-		if (ObjectType.ARRAY.equals(type(Property.LINE_WIDTH))) {
-			// gets the array from native object
-			ArrayInteger array = getArrayValue(Property.LINE_WIDTH);
-			// returns list
-			return ArrayListHelper.unmodifiableList(array);
-		} else {
-			// returns an array with 1 element
-			return Collections.unmodifiableList(Arrays.asList(getValue(Property.LINE_WIDTH, Defaults.get().getGlobal().getElements().getLine().getBorderWidth())));
-		}
+	public final int getLineWidth() {
+		return getValue(Property.LINE_WIDTH, Defaults.get().getGlobal().getElements().getLine().getBorderWidth());
 	}
 
 	/**
@@ -215,17 +205,17 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return the stroke style of the legend box
 	 */
-	public final List<IsColor> getStrokeStyle() {
-		// checks if is an array
-		if (ObjectType.ARRAY.equals(type(Property.STROKE_STYLE))) {
-			// gets the array from native object
-			ArrayString array = getArrayValue(Property.STROKE_STYLE);
-			// returns list
-			return Collections.unmodifiableList(ColorBuilder.parse(ArrayListHelper.list(array)));
-		} else {
-			// returns an array with 1 element
-			return Collections.unmodifiableList(ColorBuilder.parse(Arrays.asList(getValue(Property.STROKE_STYLE, Defaults.get().getGlobal().getDefaultColorAsString()))));
-		}
+	public final IsColor getStrokeStyle() {
+		return ColorBuilder.parse(getValue(Property.STROKE_STYLE, Defaults.get().getGlobal().getDefaultColorAsString()));
+	}
+
+	/**
+	 * Returns <code>true</code> if the point style is defined as image.
+	 * 
+	 * @return <code>true</code> if the point style is defined as image
+	 */
+	public final boolean isPointStyleAsImage() {
+		return !ObjectType.STRING.equals(type(Property.POINT_STYLE));
 	}
 
 	/**
@@ -233,23 +223,35 @@ public class LegendItem extends NativeObjectContainer {
 	 * 
 	 * @return the style of the legend box
 	 */
-	public final List<PointStyle> getPointStyle() {
-		// checks if is an array
-		if (ObjectType.ARRAY.equals(type(Property.POINT_STYLE))) {
-			// gets the array from native object
-			ArrayString array = getArrayValue(Property.POINT_STYLE);
-			// returns list
-			return ArrayListHelper.unmodifiableList(PointStyle.class, array);
+	public final PointStyle getPointStyle() {
+		// checks if is an point style and not an image
+		if (!isPointStyleAsImage()) {
+			return getValue(Property.POINT_STYLE, PointStyle.class, Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
 		} else {
-			// returns an array with 1 element
-			return Collections.unmodifiableList(Arrays.asList(getValue(Property.POINT_STYLE, PointStyle.class, Defaults.get().getGlobal().getElements().getPoint().getPointStyle())));
+			// returns the default
+			return Defaults.get().getGlobal().getElements().getPoint().getPointStyle();
+		}
+	}
+
+	/**
+	 * Returns the style (as image) of the legend box (only used if usePointStyle is true)
+	 * 
+	 * @return the style (as image) of the legend box
+	 */
+	public final ImageElement getPointStyleAsImage() {
+		// checks if is an point style and not an image
+		if (isPointStyleAsImage()) {
+			return getValue(Property.POINT_STYLE, UndefinedValues.IMAGE_ELEMENT);
+		} else {
+			// returns null because is a string
+			return UndefinedValues.IMAGE_ELEMENT;
 		}
 	}
 
 	/**
 	 * Returns the rotation of the point in degrees (only used if usePointStyle is true).
 	 * 
-	 * @return the rotation of the point in degrees (only used if usePointStyle is true).
+	 * @return the rotation of the point in degrees
 	 */
 	public final double getRotation() {
 		return getValue(Property.ROTATION, Defaults.get().getGlobal().getElements().getPoint().getRotation());

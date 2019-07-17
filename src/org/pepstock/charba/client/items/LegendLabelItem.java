@@ -22,6 +22,11 @@ import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
+import org.pepstock.charba.client.utils.Utilities;
+
+import com.google.gwt.dom.client.ImageElement;
+import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.Image;
 
 /**
  * This object is created by callbacks and returned to HCART.JS as native object to configure the legend.
@@ -153,9 +158,38 @@ public final class LegendLabelItem extends LegendItem {
 	}
 
 	/**
+	 * Sets the style of the point as image.
+	 * 
+	 * @param pointStyle image resource of the style of the point as image.
+	 */
+	public void setPointStyle(ImageResource pointStyle) {
+		// transform a image resource into image element by image object
+		// creates image object
+		setPointStyle(Utilities.toImageElement(pointStyle));
+	}
+
+	/**
+	 * Sets the style of the point as image.
+	 * 
+	 * @param pointStyle image resource of the style of the point as image.
+	 */
+	public void setPointStyle(Image pointStyle) {
+		setPointStyle(Utilities.toImageElement(pointStyle));
+	}
+
+	/**
+	 * Sets the style (as image) of the legend box (only used if usePointStyle is true)
+	 * 
+	 * @param pointStyle the style (as image) of the legend box
+	 */
+	public void setPointStyle(ImageElement pointStyle) {
+		setValue(LegendItem.Property.POINT_STYLE, pointStyle);
+	}
+
+	/**
 	 * Sets the rotation of the point in degrees (only used if usePointStyle is true).
 	 * 
-	 * @param rotation the rotation of the point in degrees (only used if usePointStyle is true)
+	 * @param rotation the rotation of the point in degrees
 	 */
 	public void setRotation(double rotation) {
 		setValue(LegendItem.Property.ROTATION, rotation);
