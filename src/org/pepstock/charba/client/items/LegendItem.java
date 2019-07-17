@@ -57,6 +57,7 @@ public class LegendItem extends NativeObjectContainer {
 		LINE_JOIN("lineJoin"),
 		LINE_WIDTH("lineWidth"),
 		STROKE_STYLE("strokeStyle"),
+		ROTATION("rotation"),
 		POINT_STYLE("pointStyle");
 
 		// name value of property
@@ -243,6 +244,15 @@ public class LegendItem extends NativeObjectContainer {
 			// returns an array with 1 element
 			return Collections.unmodifiableList(Arrays.asList(getValue(Property.POINT_STYLE, PointStyle.class, Defaults.get().getGlobal().getElements().getPoint().getPointStyle())));
 		}
+	}
+	
+	/**
+	 * Returns the rotation of the point in degrees (only used if usePointStyle is true).
+	 * 
+	 * @return the rotation of the point in degrees (only used if usePointStyle is true).
+	 */
+	public final double getRotation() {
+		return getValue(Property.ROTATION, Defaults.get().getGlobal().getElements().getPoint().getRotation());
 	}
 
 	/**
