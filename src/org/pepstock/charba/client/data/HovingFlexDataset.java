@@ -19,9 +19,6 @@ import java.util.List;
 
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
-import org.pepstock.charba.client.callbacks.BorderWidthCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
@@ -33,8 +30,6 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.ArrayStringList;
-import org.pepstock.charba.client.commons.CallbackProxy;
-import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
@@ -50,31 +45,11 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  */
 public abstract class HovingFlexDataset extends Dataset {
 
-	// ---------------------------
-	// -- CALLBACKS PROXIES ---
-	// ---------------------------
-	// callback proxy to invoke the background color function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the border color function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> borderColorCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the border width function
-	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
-
-	// background color callback instance
-	private BackgroundColorCallback backgroundColorCallback = null;
-	// border color callback instance
-	private BorderColorCallback borderColorCallback = null;
-	// borderWidth callback instance
-	private BorderWidthCallback borderWidthCallback = null;
-
 	/**
 	 * Name of properties of native object.
 	 */
 	enum Property implements Key
 	{
-		BACKGROUND_COLOR("backgroundColor"),
-		BORDER_COLOR("borderColor"),
-		BORDER_WIDTH("borderWidth"),
 		HOVER_BACKGROUND_COLOR("hoverBackgroundColor"),
 		HOVER_BORDER_COLOR("hoverBorderColor"),
 		HOVER_BORDER_WIDTH("hoverBorderWidth");
@@ -110,37 +85,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	HovingFlexDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
-		// -------------------------------
-		// -- SET CALLBACKS to PROXIES ---
-		// -------------------------------
-		// gets value calling callback
-		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, backgroundColorCallback, getDefaultBackgroundColorAsString()));
-		// gets value calling callback
-		borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, borderColorCallback, getDefaultBorderColorAsString(), false));
-		// gets value calling callback
-		borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, borderWidthCallback, getDefaultBorderWidth()).intValue());
 	}
-
-	/**
-	 * Returns default background color value based on type of chart.
-	 * 
-	 * @return default background color value based on type of chart.
-	 */
-	abstract String getDefaultBackgroundColorAsString();
-
-	/**
-	 * Returns default border color value based on type of chart.
-	 * 
-	 * @return default border color value based on type of chart.
-	 */
-	abstract String getDefaultBorderColorAsString();
-
-	/**
-	 * Returns default border width value based on type of chart.
-	 * 
-	 * @return default border width value based on type of chart.
-	 */
-	abstract int getDefaultBorderWidth();
 
 	/**
 	 * Sets a color property into dataset, setting a single value or an array.
@@ -206,9 +151,9 @@ public abstract class HovingFlexDataset extends Dataset {
 		// resets callback
 		setBackgroundColor((BackgroundColorCallback) null);
 		// stores value
-		setColors(Property.BACKGROUND_COLOR, backgroundColor);
+		setColors(Dataset.Property.BACKGROUND_COLOR, backgroundColor);
 		// removes previous configuration to other containers
-		resetBeingColors(Property.BACKGROUND_COLOR);
+		resetBeingColors(Dataset.Property.BACKGROUND_COLOR);
 	}
 
 	/**
@@ -220,9 +165,9 @@ public abstract class HovingFlexDataset extends Dataset {
 		// resets callback
 		setBackgroundColor((BackgroundColorCallback) null);
 		// stores value
-		setColors(Property.BACKGROUND_COLOR, backgroundColor);
+		setColors(Dataset.Property.BACKGROUND_COLOR, backgroundColor);
 		// removes previous configuration to other containers
-		resetBeingColors(Property.BACKGROUND_COLOR);
+		resetBeingColors(Dataset.Property.BACKGROUND_COLOR);
 	}
 
 	/**
@@ -234,9 +179,9 @@ public abstract class HovingFlexDataset extends Dataset {
 		// resets callback
 		setBackgroundColor((BackgroundColorCallback) null);
 		// sets value to patterns
-		getPatternsContainer().setObjects(Property.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor));
+		getPatternsContainer().setObjects(Dataset.Property.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor));
 		// removes previous configuration to other containers
-		resetBeingPatterns(Property.BACKGROUND_COLOR);
+		resetBeingPatterns(Dataset.Property.BACKGROUND_COLOR);
 	}
 
 	/**
@@ -248,9 +193,9 @@ public abstract class HovingFlexDataset extends Dataset {
 		// resets callback
 		setBackgroundColor((BackgroundColorCallback) null);
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor));
+		getGradientsContainer().setObjects(Dataset.Property.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor));
 		// removes previous configuration to other containers
-		resetBeingGradients(Property.BACKGROUND_COLOR);
+		resetBeingGradients(Dataset.Property.BACKGROUND_COLOR);
 	}
 
 	/**
@@ -260,9 +205,9 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public List<String> getBackgroundColorAsString() {
 		// checks if the property is not a color (therefore a pattern or gradient) and no callback
-		if (hasColors(Property.BACKGROUND_COLOR) && backgroundColorCallback == null) {
+		if (hasColors(Dataset.Property.BACKGROUND_COLOR) && getBackgroundColorCallback() == null) {
 			// returns list of colors
-			ArrayString array = getColors(Property.BACKGROUND_COLOR, getDefaultBackgroundColorAsString());
+			ArrayString array = getColors(Dataset.Property.BACKGROUND_COLOR, getDefaultBackgroundColorAsString());
 			return ArrayListHelper.list(array);
 		} else {
 			// if here, the property is not a object
@@ -288,8 +233,8 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public List<Pattern> getBackgroundColorAsPatterns() {
 		// checks if the property is not a pattern (therefore a color) and no callback
-		if (hasPatterns(Property.BACKGROUND_COLOR) && backgroundColorCallback == null) {
-			return getPatternsContainer().getObjects(Property.BACKGROUND_COLOR);
+		if (hasPatterns(Dataset.Property.BACKGROUND_COLOR) && getBackgroundColorCallback() == null) {
+			return getPatternsContainer().getObjects(Dataset.Property.BACKGROUND_COLOR);
 		} else {
 			// if here, the property is not a object
 			// or the property is missing or not a pattern
@@ -305,8 +250,8 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public List<Gradient> getBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern) and no callback
-		if (hasGradients(Property.BACKGROUND_COLOR) && backgroundColorCallback == null) {
-			return getGradientsContainer().getObjects(Property.BACKGROUND_COLOR);
+		if (hasGradients(Dataset.Property.BACKGROUND_COLOR) && getBackgroundColorCallback() == null) {
+			return getGradientsContainer().getObjects(Dataset.Property.BACKGROUND_COLOR);
 		} else {
 			// if here, the property is not a gradient
 			// or the property is missing
@@ -324,9 +269,9 @@ public abstract class HovingFlexDataset extends Dataset {
 		// resets callback
 		setBorderColor((BorderColorCallback) null);
 		// stores value
-		setColors(Property.BORDER_COLOR, borderColor);
+		setColors(Dataset.Property.BORDER_COLOR, borderColor);
 		// removes previous configuration to other containers
-		resetBeingColors(Property.BORDER_COLOR);
+		resetBeingColors(Dataset.Property.BORDER_COLOR);
 	}
 
 	/**
@@ -338,9 +283,9 @@ public abstract class HovingFlexDataset extends Dataset {
 		// resets callback
 		setBorderColor((BorderColorCallback) null);
 		// stores value
-		setColors(Property.BORDER_COLOR, borderColor);
+		setColors(Dataset.Property.BORDER_COLOR, borderColor);
 		// removes previous configuration to other containers
-		resetBeingColors(Property.BORDER_COLOR);
+		resetBeingColors(Dataset.Property.BORDER_COLOR);
 	}
 
 	/**
@@ -352,9 +297,9 @@ public abstract class HovingFlexDataset extends Dataset {
 		// resets callback
 		setBorderColor((BorderColorCallback) null);
 		// sets value to gradients
-		getGradientsContainer().setObjects(Property.BORDER_COLOR, ArrayObject.fromOrNull(borderColor));
+		getGradientsContainer().setObjects(Dataset.Property.BORDER_COLOR, ArrayObject.fromOrNull(borderColor));
 		// removes previous configuration to other containers
-		resetBeingGradients(Property.BORDER_COLOR);
+		resetBeingGradients(Dataset.Property.BORDER_COLOR);
 	}
 
 	/**
@@ -364,8 +309,8 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public List<String> getBorderColorAsString() {
 		// checks if the property is not a color (therefore a gradient)
-		if (hasColors(Property.BORDER_COLOR) && borderColorCallback == null) {
-			ArrayString array = getColors(Property.BORDER_COLOR, getDefaultBorderColorAsString());
+		if (hasColors(Dataset.Property.BORDER_COLOR) && getBorderColorCallback() == null) {
+			ArrayString array = getColors(Dataset.Property.BORDER_COLOR, getDefaultBorderColorAsString());
 			return ArrayListHelper.list(array);
 		} else {
 			// if here, the property is not a string
@@ -391,8 +336,8 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public List<Gradient> getBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color)
-		if (hasGradients(Property.BORDER_COLOR) && borderColorCallback == null) {
-			return getGradientsContainer().getObjects(Property.BORDER_COLOR);
+		if (hasGradients(Dataset.Property.BORDER_COLOR) && getBorderColorCallback() == null) {
+			return getGradientsContainer().getObjects(Dataset.Property.BORDER_COLOR);
 		} else {
 			// if here, the property is not a gradient
 			// or the property is missing
@@ -408,7 +353,7 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public void setBorderWidth(int... borderWidth) {
 		// stores value
-		setWidths(Property.BORDER_WIDTH, borderWidth);
+		setWidths(Dataset.Property.BORDER_WIDTH, borderWidth);
 	}
 
 	/**
@@ -418,12 +363,12 @@ public abstract class HovingFlexDataset extends Dataset {
 	 */
 	public List<Integer> getBorderWidth() {
 		// gets object type
-		ObjectType type = type(Property.BORDER_WIDTH);
+		ObjectType type = type(Dataset.Property.BORDER_WIDTH);
 		// checks if the callback has not been set and is not an object (border width object
 		// set by bar dataset)
 		if (!ObjectType.FUNCTION.equals(type) && !ObjectType.OBJECT.equals(type)) {
 			// returns the array
-			ArrayInteger array = getWidths(Property.BORDER_WIDTH, getDefaultBorderWidth());
+			ArrayInteger array = getWidths(Dataset.Property.BORDER_WIDTH, getDefaultBorderWidth());
 			return ArrayListHelper.list(array);
 		}
 		// if here, is a callback
@@ -640,91 +585,6 @@ public abstract class HovingFlexDataset extends Dataset {
 	public List<Integer> getHoverBorderWidth() {
 		ArrayInteger array = getWidths(Property.HOVER_BORDER_WIDTH, getDefaultBorderWidth());
 		return ArrayListHelper.list(array);
-	}
-
-	/**
-	 * Returns the background color callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the background color callback, if set, otherwise <code>null</code>.
-	 */
-	public BackgroundColorCallback getBackgroundColorCallback() {
-		return backgroundColorCallback;
-	}
-
-	/**
-	 * Sets the background color callback.
-	 * 
-	 * @param backgroundColorCallback the background color callback.
-	 */
-	public void setBackgroundColor(BackgroundColorCallback backgroundColorCallback) {
-		// sets the callback
-		this.backgroundColorCallback = backgroundColorCallback;
-		// checks if callback is consistent
-		if (backgroundColorCallback != null) {
-			// resets previous setting
-			resetBeingCallback(Property.BACKGROUND_COLOR);
-			// adds the callback proxy function to java script object
-			setValue(Property.BACKGROUND_COLOR, backgroundColorCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.BACKGROUND_COLOR);
-		}
-	}
-
-	/**
-	 * Returns the border color callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the border color callback, if set, otherwise <code>null</code>.
-	 */
-	public BorderColorCallback getBorderColorCallback() {
-		return borderColorCallback;
-	}
-
-	/**
-	 * Sets the border color callback.
-	 * 
-	 * @param borderColorCallback the border color callback.
-	 */
-	public void setBorderColor(BorderColorCallback borderColorCallback) {
-		// sets the callback
-		this.borderColorCallback = borderColorCallback;
-		// checks if callback is consistent
-		if (borderColorCallback != null) {
-			// resets previous setting
-			resetBeingCallback(Property.BORDER_COLOR);
-			// adds the callback proxy function to java script object
-			setValue(Property.BORDER_COLOR, borderColorCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.BORDER_COLOR);
-		}
-	}
-
-	/**
-	 * Returns the border width callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the border width callback, if set, otherwise <code>null</code>.
-	 */
-	public BorderWidthCallback getBorderWidthCallback() {
-		return borderWidthCallback;
-	}
-
-	/**
-	 * Sets the border width callback.
-	 * 
-	 * @param borderWidthCallback the border width callback to set
-	 */
-	public void setBorderWidth(BorderWidthCallback borderWidthCallback) {
-		// sets the callback
-		this.borderWidthCallback = borderWidthCallback;
-		// checks if callback is consistent
-		if (borderWidthCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.BORDER_WIDTH, borderWidthCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.BORDER_WIDTH);
-		}
 	}
 
 	/*

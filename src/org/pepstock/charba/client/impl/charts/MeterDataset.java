@@ -87,8 +87,6 @@ public class MeterDataset extends Dataset {
 	 */
 	private enum Property implements Key
 	{
-		BACKGROUND_COLOR("backgroundColor"),
-		BORDER_WIDTH("borderWidth"),
 		HOVER_BACKGROUND_COLOR("hoverBackgroundColor"),
 		HOVER_BORDER_WIDTH("hoverBorderWidth");
 
@@ -138,10 +136,10 @@ public class MeterDataset extends Dataset {
 		this.max = Math.max(max, MINIMUM_VALUE);
 		// sets default dataset values
 		// removing borders
-		setArrayValue(Property.BORDER_WIDTH, ArrayInteger.fromOrNull(0, 0));
+		setArrayValue(Dataset.Property.BORDER_WIDTH, ArrayInteger.fromOrNull(0, 0));
 		setArrayValue(Property.HOVER_BORDER_WIDTH, ArrayInteger.fromOrNull(0, 0));
 		// sets the color of datasets.
-		setArrayValue(Property.BACKGROUND_COLOR, ArrayString.fromOrNull(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR));
+		setArrayValue(Dataset.Property.BACKGROUND_COLOR, ArrayString.fromOrNull(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR));
 		// disable hover back ground color
 		setArrayValue(Property.HOVER_BACKGROUND_COLOR, ArrayString.fromOrNull(DEFAULT_VALUE_COLOR, DEFAULT_EMPTY_VALUE_COLOR));
 	}
@@ -165,7 +163,7 @@ public class MeterDataset extends Dataset {
 		// creates array reference
 		ArrayString array = ArrayString.fromOrEmpty(valueToSet, getEmptyColorAsString());
 		// stores value
-		setArrayValue(Property.BACKGROUND_COLOR, array);
+		setArrayValue(Dataset.Property.BACKGROUND_COLOR, array);
 		setArrayValue(Property.HOVER_BACKGROUND_COLOR, array);
 	}
 
@@ -176,7 +174,7 @@ public class MeterDataset extends Dataset {
 	 */
 	public String getColorAsString() {
 		// returns list of colors
-		ArrayString array = getArrayValue(Property.BACKGROUND_COLOR);
+		ArrayString array = getArrayValue(Dataset.Property.BACKGROUND_COLOR);
 		// returns color as string
 		return array.get(0);
 	}
@@ -208,7 +206,7 @@ public class MeterDataset extends Dataset {
 		String valueToSet = emptyValueColor != null ? emptyValueColor : DEFAULT_EMPTY_VALUE_COLOR_AS_STRING;
 		ArrayString array = ArrayString.fromOrEmpty(getColorAsString(), valueToSet);
 		// stores value
-		setArrayValue(Property.BACKGROUND_COLOR, array);
+		setArrayValue(Dataset.Property.BACKGROUND_COLOR, array);
 		setArrayValue(Property.HOVER_BACKGROUND_COLOR, array);
 	}
 
@@ -219,7 +217,7 @@ public class MeterDataset extends Dataset {
 	 */
 	public String getEmptyColorAsString() {
 		// returns list of colors
-		ArrayString array = getArrayValue(Property.BACKGROUND_COLOR);
+		ArrayString array = getArrayValue(Dataset.Property.BACKGROUND_COLOR);
 		// checks if the array is consistent
 		if (array != null) {
 			// returns color as string
@@ -314,6 +312,36 @@ public class MeterDataset extends Dataset {
 	@Override
 	public final void setData(List<Double> values) {
 		throw new UnsupportedOperationException(INVALID_SET_DATA_CALL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBackgroundColorAsString()
+	 */
+	@Override
+	protected String getDefaultBackgroundColorAsString() {
+		return getDefaultValues().getElements().getArc().getBackgroundColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBorderColorAsString()
+	 */
+	@Override
+	protected String getDefaultBorderColorAsString() {
+		return getDefaultValues().getElements().getArc().getBorderColorAsString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBorderWidth()
+	 */
+	@Override
+	protected int getDefaultBorderWidth() {
+		return getDefaultValues().getElements().getArc().getBorderWidth();
 	}
 
 	/*

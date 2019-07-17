@@ -272,30 +272,30 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.HovingFlexDataset#getDefaultBackgroundColorAsString()
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBackgroundColorAsString()
 	 */
 	@Override
-	String getDefaultBackgroundColorAsString() {
+	protected String getDefaultBackgroundColorAsString() {
 		return getDefaultValues().getElements().getRectangle().getBackgroundColorAsString();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.HovingFlexDataset#getDefaultBorderColorAsString()
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBorderColorAsString()
 	 */
 	@Override
-	String getDefaultBorderColorAsString() {
+	protected String getDefaultBorderColorAsString() {
 		return getDefaultValues().getElements().getRectangle().getBorderColorAsString();
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.HovingFlexDataset#getDefaultBorderWidth()
+	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBorderWidth()
 	 */
 	@Override
-	int getDefaultBorderWidth() {
+	protected int getDefaultBorderWidth() {
 		return getDefaultValues().getElements().getRectangle().getBorderWidth();
 	}
 

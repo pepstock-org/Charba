@@ -26,6 +26,11 @@ import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
+import org.pepstock.charba.client.callbacks.BorderColorCallback;
+import org.pepstock.charba.client.callbacks.BorderWidthCallback;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.commons.ArrayDouble;
@@ -33,6 +38,8 @@ import org.pepstock.charba.client.commons.ArrayDoubleList;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayObjectContainerList;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
@@ -53,6 +60,24 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  * @author Andrea "Stock" Stocchero
  */
 public abstract class Dataset extends NativeObjectContainer implements HasDataset {
+
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the background color function
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> backgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border color function
+	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> borderColorCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border width function
+	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> borderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// background color callback instance
+	private BackgroundColorCallback backgroundColorCallback = null;
+	// border color callback instance
+	private BorderColorCallback borderColorCallback = null;
+	// borderWidth callback instance
+	private BorderWidthCallback borderWidthCallback = null;
+
 	// internal count
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// default for hidden property
@@ -79,12 +104,15 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	/**
 	 * Name of properties of native object.
 	 */
-	enum Property implements Key
+	protected enum Property implements Key
 	{
 		LABEL("label"),
 		DATA("data"),
 		TYPE("type"),
 		HIDDEN("hidden"),
+		BACKGROUND_COLOR("backgroundColor"),
+		BORDER_COLOR("borderColor"),
+		BORDER_WIDTH("borderWidth"),
 		// internal key to store a unique id
 		CHARBA_ID("_charbaId"),
 		// internal key to store patterns and gradients
@@ -131,6 +159,15 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		setValue(Property.CHARBA_GRADIENTS, gradientsContainer);
 		// sets default data type
 		setValue(Property.CHARBA_DATA_TYPE, DataType.UNKNOWN);
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		// gets value calling callback
+		backgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, backgroundColorCallback, getDefaultBackgroundColorAsString()));
+		// gets value calling callback
+		borderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, borderColorCallback, getDefaultBorderColorAsString(), false));
+		// gets value calling callback
+		borderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, borderWidthCallback, getDefaultBorderWidth()).intValue());
 	}
 
 	/**
@@ -174,7 +211,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * 
 	 * @return the default options instance.
 	 */
-	final IsDefaultOptions getDefaultValues() {
+	protected final IsDefaultOptions getDefaultValues() {
 		return defaultValues;
 	}
 
@@ -289,6 +326,112 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 			}
 		}
 	}
+
+	/**
+	 * Returns the background color callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the background color callback, if set, otherwise <code>null</code>.
+	 */
+	public final BackgroundColorCallback getBackgroundColorCallback() {
+		return backgroundColorCallback;
+	}
+
+	/**
+	 * Sets the background color callback.
+	 * 
+	 * @param backgroundColorCallback the background color callback.
+	 */
+	public final void setBackgroundColor(BackgroundColorCallback backgroundColorCallback) {
+		// sets the callback
+		this.backgroundColorCallback = backgroundColorCallback;
+		// checks if callback is consistent
+		if (backgroundColorCallback != null) {
+			// resets previous setting
+			resetBeingCallback(Property.BACKGROUND_COLOR);
+			// adds the callback proxy function to java script object
+			setValue(Property.BACKGROUND_COLOR, backgroundColorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.BACKGROUND_COLOR);
+		}
+	}
+
+	/**
+	 * Returns the border color callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border color callback, if set, otherwise <code>null</code>.
+	 */
+	public final BorderColorCallback getBorderColorCallback() {
+		return borderColorCallback;
+	}
+
+	/**
+	 * Sets the border color callback.
+	 * 
+	 * @param borderColorCallback the border color callback.
+	 */
+	public final void setBorderColor(BorderColorCallback borderColorCallback) {
+		// sets the callback
+		this.borderColorCallback = borderColorCallback;
+		// checks if callback is consistent
+		if (borderColorCallback != null) {
+			// resets previous setting
+			resetBeingCallback(Property.BORDER_COLOR);
+			// adds the callback proxy function to java script object
+			setValue(Property.BORDER_COLOR, borderColorCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.BORDER_COLOR);
+		}
+	}
+
+	/**
+	 * Returns the border width callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border width callback, if set, otherwise <code>null</code>.
+	 */
+	public final BorderWidthCallback getBorderWidthCallback() {
+		return borderWidthCallback;
+	}
+
+	/**
+	 * Sets the border width callback.
+	 * 
+	 * @param borderWidthCallback the border width callback to set
+	 */
+	public final void setBorderWidth(BorderWidthCallback borderWidthCallback) {
+		// sets the callback
+		this.borderWidthCallback = borderWidthCallback;
+		// checks if callback is consistent
+		if (borderWidthCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.BORDER_WIDTH, borderWidthCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.BORDER_WIDTH);
+		}
+	}
+
+	/**
+	 * Returns default background color value based on type of chart.
+	 * 
+	 * @return default background color value based on type of chart.
+	 */
+	protected abstract String getDefaultBackgroundColorAsString();
+
+	/**
+	 * Returns default border color value based on type of chart.
+	 * 
+	 * @return default border color value based on type of chart.
+	 */
+	protected abstract String getDefaultBorderColorAsString();
+
+	/**
+	 * Returns default border width value based on type of chart.
+	 * 
+	 * @return default border width value based on type of chart.
+	 */
+	protected abstract int getDefaultBorderWidth();
 
 	/**
 	 * Stores the canvas patterns into dataset object by property name passed as key.
