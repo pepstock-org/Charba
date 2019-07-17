@@ -21,6 +21,7 @@ import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.enums.LegendAlign;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.ChartNativeEvent;
@@ -288,5 +289,23 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	 */
 	public Position getPosition() {
 		return getConfiguration().getLegend().getPosition();
+	}
+	
+	/**
+	 * Sets the alignment of the legend.
+	 * 
+	 * @param alignment alignment of the legend.
+	 */
+	public void setAlign(LegendAlign alignment) {
+		getConfiguration().getLegend().setAlign(alignment);
+	}
+
+	/**
+	 * Returns the alignment of the legend.
+	 * 
+	 * @return alignment of the legend.
+	 */
+	public LegendAlign getAlign() {
+		return getConfiguration().getLegend().getAlign();
 	}
 }

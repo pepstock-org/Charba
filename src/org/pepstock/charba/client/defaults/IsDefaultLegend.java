@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.defaults;
 
+import org.pepstock.charba.client.enums.LegendAlign;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -25,37 +26,44 @@ import org.pepstock.charba.client.enums.Position;
 public interface IsDefaultLegend {
 
 	/**
-	 * Returns labels object defaults.
+	 * Returns the labels object defaults.
 	 * 
-	 * @return the labels
+	 * @return the labels object instance
 	 */
 	IsDefaultLegendLabels getLabels();
 
 	/**
-	 * Returns if the legend is shown.
+	 * Returns <code>true</code> if the legend is shown.
 	 * 
-	 * @return if the legend is shown.
+	 * @return <code>true</code> if the legend is shown.
 	 */
 	boolean isDisplay();
 
 	/**
-	 * Returns if marks that this box should take the full width of the canvas (pushing down other boxes)
+	 * Returns <code>true</code> if marks that this box should take the full width of the canvas (pushing down other boxes)
 	 * 
-	 * @return Marks that this box should take the full width of the canvas (pushing down other boxes).
+	 * @return <code>true</code> if marks that this box should take the full width of the canvas (pushing down other boxes).
 	 */
 	boolean isFullWidth();
 
 	/**
 	 * Returns if the legend will show datasets in reverse order.
 	 * 
-	 * @return Legend will show datasets in reverse order.
+	 * @return legend will show datasets in reverse order.
 	 */
 	boolean isReverse();
 
 	/**
 	 * Returns the position of the legend.
 	 * 
-	 * @return Position of the legend.
+	 * @return position of the legend.
 	 */
 	Position getPosition();
+	
+	/**
+	 * Returns the alignment of the legend.
+	 * 
+	 * @return alignment of the legend.
+	 */
+	LegendAlign getAlign();
 }

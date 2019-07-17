@@ -18,6 +18,7 @@ package org.pepstock.charba.client.options;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultLegend;
+import org.pepstock.charba.client.enums.LegendAlign;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -36,6 +37,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	private enum Property implements Key
 	{
 		LABELS("labels"),
+		ALIGN("align"),
 		DISPLAY("display"),
 		POSITION("position"),
 		FULL_WIDTH("fullWidth"),
@@ -167,5 +169,25 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 */
 	public Position getPosition() {
 		return getValue(Property.POSITION, Position.class, getDefaultValues().getPosition());
+	}
+	
+	/**
+	 * Sets the alignment of the legend.
+	 * 
+	 * @param alignment alignment of the legend.
+	 */
+	public void setAlign(LegendAlign alignment) {
+		setValue(Property.ALIGN, alignment);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the alignment of the legend.
+	 * 
+	 * @return alignment of the legend.
+	 */
+	public LegendAlign getAlign() {
+		return getValue(Property.ALIGN, LegendAlign.class, getDefaultValues().getAlign());
 	}
 }
