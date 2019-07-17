@@ -106,7 +106,7 @@ Here you can find the list of enhancement and updates available on `master` bran
 
 ### Features
  
- * import last CHART.JS [package](https://www.chartjs.org/dist/master/Chart.bundle.min.js) from `master`. **PAY ATTENTION** that [CHART.JS](https://www.chartjs.org/docs/latest/developers/#development-releases) report the following warning using NOT tagged version: **Development builds MUST not be used for production purposes**.
+ * import last CHART.JS [package](https://www.chartjs.org/dist/master/Chart.bundle.min.js) from `development build`. **PAY ATTENTION** that [CHART.JS](https://www.chartjs.org/docs/latest/developers/#development-releases) report the following warning using NOT tagged version: **Development builds MUST not be used for production purposes**.
  * add `align` configuration property for legend object 
 
 ### Fixed Bugs
