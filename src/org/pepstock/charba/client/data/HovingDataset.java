@@ -88,36 +88,6 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBackgroundColorAsString()
-	 */
-	@Override
-	protected String getDefaultBackgroundColorAsString() {
-		return getDefaultValues().getElements().getArc().getBackgroundColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBorderColorAsString()
-	 */
-	@Override
-	protected String getDefaultBorderColorAsString() {
-		return getDefaultValues().getElements().getArc().getBorderColorAsString();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#getDefaultBorderWidth()
-	 */
-	@Override
-	protected int getDefaultBorderWidth() {
-		return getDefaultValues().getElements().getArc().getBorderWidth();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.pepstock.charba.client.data.HovingFlexDataset#setColors(org.pepstock.charba.client.commons.Key,
 	 * java.lang.String[])
 	 */

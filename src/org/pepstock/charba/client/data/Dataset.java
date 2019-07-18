@@ -413,25 +413,34 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * Returns default background color value based on type of chart.
+	 * Returns the default background color value based on type of chart.
 	 * 
-	 * @return default background color value based on type of chart.
+	 * @return the default background color value based on type of chart.
 	 */
-	protected abstract String getDefaultBackgroundColorAsString();
+	protected String getDefaultBackgroundColorAsString() {
+		// returns the ARC default value because is MOSTLY used 
+		return getDefaultValues().getElements().getArc().getBackgroundColorAsString();
+	}
 
 	/**
-	 * Returns default border color value based on type of chart.
+	 * Returns the default border color value based on type of chart.
 	 * 
-	 * @return default border color value based on type of chart.
+	 * @return the default border color value based on type of chart.
 	 */
-	protected abstract String getDefaultBorderColorAsString();
+	protected String getDefaultBorderColorAsString() {
+		// returns the ARC default value because is MOSTLY used 
+		return getDefaultValues().getElements().getArc().getBorderColorAsString();
+	}
 
 	/**
-	 * Returns default border width value based on type of chart.
+	 * Returns the default border width value based on type of chart.
 	 * 
-	 * @return default border width value based on type of chart.
+	 * @return the default border width value based on type of chart.
 	 */
-	protected abstract int getDefaultBorderWidth();
+	protected int getDefaultBorderWidth() {
+		// returns the ARC default value because is MOSTLY used 
+		return getDefaultValues().getElements().getArc().getBorderWidth();
+	}
 
 	/**
 	 * Stores the canvas patterns into dataset object by property name passed as key.
