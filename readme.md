@@ -134,6 +134,7 @@ Here you can find the list of enhancement and updates available on `master` bran
  * add `compare` and `equals` methods to `Key` class
  * move (from `LegenItem` class) and change `getLineWidth`, `getStrokeStyle` and `getPointStyle` methods into `LegendLabelItem` class in order to return a single item instead of a list of them.
  * change default `cubicInterpolationMode` property to return into `LineDataset` class.
+ * use ARC element to get default background color, border color and border width properties because used by most cases of datasets (reduce code duplications)
  
 License
 -------
