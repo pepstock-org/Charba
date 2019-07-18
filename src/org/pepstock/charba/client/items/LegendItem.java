@@ -26,12 +26,8 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
-import org.pepstock.charba.client.enums.PointStyle;
-
-import com.google.gwt.dom.client.ImageElement;
 
 /**
  * This is a wrapper of the CHART.JS item which contains the legend item.
@@ -189,63 +185,6 @@ public class LegendItem extends NativeObjectContainer {
 	 */
 	public final JoinStyle getLineJoin() {
 		return getValue(Property.LINE_JOIN, JoinStyle.class, Defaults.get().getGlobal().getElements().getLine().getBorderJoinStyle());
-	}
-
-	/**
-	 * Returns the width of line in pixels.
-	 * 
-	 * @return the width of line in pixels.
-	 */
-	public final int getLineWidth() {
-		return getValue(Property.LINE_WIDTH, Defaults.get().getGlobal().getElements().getLine().getBorderWidth());
-	}
-
-	/**
-	 * Returns the stroke style of the legend box
-	 * 
-	 * @return the stroke style of the legend box
-	 */
-	public final IsColor getStrokeStyle() {
-		return ColorBuilder.parse(getValue(Property.STROKE_STYLE, Defaults.get().getGlobal().getDefaultColorAsString()));
-	}
-
-	/**
-	 * Returns <code>true</code> if the point style is defined as image.
-	 * 
-	 * @return <code>true</code> if the point style is defined as image
-	 */
-	public final boolean isPointStyleAsImage() {
-		return !ObjectType.STRING.equals(type(Property.POINT_STYLE));
-	}
-
-	/**
-	 * Returns the style of the legend box (only used if usePointStyle is true)
-	 * 
-	 * @return the style of the legend box
-	 */
-	public final PointStyle getPointStyle() {
-		// checks if is an point style and not an image
-		if (!isPointStyleAsImage()) {
-			return getValue(Property.POINT_STYLE, PointStyle.class, Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
-		} else {
-			// returns the default
-			return Defaults.get().getGlobal().getElements().getPoint().getPointStyle();
-		}
-	}
-
-	/**
-	 * Returns the style (as image) of the legend box (only used if usePointStyle is true)
-	 * 
-	 * @return the style (as image) of the legend box
-	 */
-	public final ImageElement getPointStyleAsImage() {
-		// checks if is an point style and not an image
-		if (isPointStyleAsImage()) {
-			return getValue(Property.POINT_STYLE, UndefinedValues.IMAGE_ELEMENT);
-		} else {
-			// returns null because is a string
-			return UndefinedValues.IMAGE_ELEMENT;
-		}
 	}
 
 	/**

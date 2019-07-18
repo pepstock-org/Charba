@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.NativeObject;
 
 import jsinterop.annotations.JsFunction;
@@ -138,6 +139,24 @@ public final class ScriptableFunctions {
 		 * @return a object proeprty value.
 		 */
 		NativeObject call(Object contextFunction, ScriptableContext context);
+	}
+
+	/**
+	 * Java script FUNCTION callback called to provide an array property.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	@JsFunction
+	public interface ProxyArrayCallback {
+
+		/**
+		 * Method of function to be called to provide an array property.
+		 * 
+		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param context native object as context.
+		 * @return an array instance
+		 */
+		Array call(Object contextFunction, ScriptableContext context);
 	}
 
 	/**

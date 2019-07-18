@@ -18,7 +18,11 @@ package org.pepstock.charba.client.data;
 import java.util.List;
 
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
+import org.pepstock.charba.client.callbacks.BorderCapStyleCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
+import org.pepstock.charba.client.callbacks.BorderDashCallback;
+import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
+import org.pepstock.charba.client.callbacks.BorderJoinStyleCallback;
 import org.pepstock.charba.client.callbacks.BorderWidthCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
@@ -30,6 +34,7 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
+import org.pepstock.charba.client.commons.Array;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayDoubleList;
 import org.pepstock.charba.client.commons.ArrayImage;
@@ -75,6 +80,14 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
+	// callback proxy to invoke the border capstyle function
+	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> borderCapStyleCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border dash function
+	private final CallbackProxy<ScriptableFunctions.ProxyArrayCallback> borderDashCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border dash offset function
+	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> borderDashOffsetCallbackProxy = JsHelper.get().newCallbackProxy();
+	// callback proxy to invoke the border joinstyle function
+	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> borderJoinStyleCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point background color function
 	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> pointBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the point border color function
@@ -120,6 +133,14 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	private RotationCallback pointRotationCallback = null;
 	// point style callback instance
 	private PointStyleCallback pointStyleCallback = null;
+	// border cap style callback instance
+	private BorderCapStyleCallback borderCapStyleCallback = null;
+	// border dash callback instance
+	private BorderDashCallback borderDashCallback = null;
+	// border dash offset callback instance
+	private BorderDashOffsetCallback borderDashOffsetCallback = null;
+	// border join style callback instance
+	private BorderJoinStyleCallback borderJoinStyleCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -206,6 +227,14 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 		pointRotationCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, pointRotationCallback, getDefaultValues().getElements().getPoint().getRotation()).doubleValue());
 		// gets value calling callback
 		pointStyleCallbackProxy.setCallback((contextFunction, context) -> onPointStyle(context));
+		// gets value calling callback
+		borderCapStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderCapStyle(context));
+		// gets value calling callback
+		borderDashCallbackProxy.setCallback((contextFunction, context) -> onBorderDash(context));
+		// gets value calling callback
+		borderDashOffsetCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, borderDashOffsetCallback, getDefaultValues().getElements().getLine().getBorderDashOffset()).intValue());
+		// gets value calling callback
+		borderJoinStyleCallbackProxy.setCallback((contextFunction, context) -> onBorderJoinStyle(context));
 	}
 
 	/*
@@ -243,6 +272,9 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param backgroundColor the fill color under the line.
 	 */
 	public void setBackgroundColor(String backgroundColor) {
+		// resets callback
+		setBackgroundColor((BackgroundColorCallback) null);
+		// stores value
 		setValue(Dataset.Property.BACKGROUND_COLOR, backgroundColor);
 		// removes the flag because default is string color
 		resetBeingColors(Dataset.Property.BACKGROUND_COLOR);
@@ -254,6 +286,8 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param backgroundColor the fill pattern under the line.
 	 */
 	public void setBackgroundColor(Pattern backgroundColor) {
+		// resets callback
+		setBackgroundColor((BackgroundColorCallback) null);
 		// sets value to patterns
 		getPatternsContainer().setObjects(Dataset.Property.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor));
 		// removes the property
@@ -266,6 +300,8 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param backgroundColor the fill gradient under the line.
 	 */
 	public void setBackgroundColor(Gradient backgroundColor) {
+		// resets callback
+		setBackgroundColor((BackgroundColorCallback) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Dataset.Property.BACKGROUND_COLOR, ArrayObject.fromOrNull(backgroundColor));
 		// removes the property
@@ -279,7 +315,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public String getBackgroundColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
-		if (hasColors(Dataset.Property.BACKGROUND_COLOR)) {
+		if (hasColors(Dataset.Property.BACKGROUND_COLOR) && getBackgroundColorCallback() == null) {
 			// returns color as string
 			return getValue(Dataset.Property.BACKGROUND_COLOR, getDefaultValues().getElements().getLine().getBackgroundColorAsString());
 		} else {
@@ -306,7 +342,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public Pattern getBackgroundColorAsPattern() {
 		// checks if the property is not a pattern (therefore a color or gradient)
-		if (hasPatterns(Dataset.Property.BACKGROUND_COLOR)) {
+		if (hasPatterns(Dataset.Property.BACKGROUND_COLOR) && getBackgroundColorCallback() == null) {
 			List<Pattern> patterns = getPatternsContainer().getObjects(Dataset.Property.BACKGROUND_COLOR);
 			// returns color as pattern
 			return patterns.get(0);
@@ -325,7 +361,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public Gradient getBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
-		if (hasGradients(Dataset.Property.BACKGROUND_COLOR)) {
+		if (hasGradients(Dataset.Property.BACKGROUND_COLOR) && getBackgroundColorCallback() == null) {
 			List<Gradient> gradients = getGradientsContainer().getObjects(Dataset.Property.BACKGROUND_COLOR);
 			// returns color as gradient
 			return gradients.get(0);
@@ -352,6 +388,9 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param borderColor the color of the line.
 	 */
 	public void setBorderColor(String borderColor) {
+		// resets callback
+		setBorderColor((BorderColorCallback) null);
+		// stores value
 		setValue(Dataset.Property.BORDER_COLOR, borderColor);
 		// removes the flag because default is string color
 		resetBeingColors(Dataset.Property.BORDER_COLOR);
@@ -363,6 +402,8 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param borderColor the gradient of the line.
 	 */
 	public void setBorderColor(Gradient borderColor) {
+		// resets callback
+		setBorderColor((BorderColorCallback) null);
 		// sets value to gradients
 		getGradientsContainer().setObjects(Dataset.Property.BORDER_COLOR, ArrayObject.fromOrNull(borderColor));
 		// removes the property
@@ -376,7 +417,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public String getBorderColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
-		if (hasColors(Dataset.Property.BORDER_COLOR)) {
+		if (hasColors(Dataset.Property.BORDER_COLOR) && getBorderColorCallback() == null) {
 			// returns color as string
 			return getValue(Dataset.Property.BORDER_COLOR, getDefaultValues().getElements().getLine().getBorderColorAsString());
 		} else {
@@ -403,7 +444,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public Gradient getBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
-		if (hasGradients(Dataset.Property.BORDER_COLOR)) {
+		if (hasGradients(Dataset.Property.BORDER_COLOR) && getBorderColorCallback() == null) {
 			List<Gradient> gradients = getGradientsContainer().getObjects(Dataset.Property.BORDER_COLOR);
 			// returns color as gradient
 			return gradients.get(0);
@@ -421,6 +462,9 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param borderWidth the width of the line in pixels.
 	 */
 	public void setBorderWidth(int borderWidth) {
+		// resets callback
+		setBorderWidth((BorderWidthCallback) null);
+		// stores value
 		setValue(Dataset.Property.BORDER_WIDTH, borderWidth);
 	}
 
@@ -430,7 +474,13 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @return the width of the line in pixels.
 	 */
 	public int getBorderWidth() {
-		return getValue(Dataset.Property.BORDER_WIDTH, getDefaultValues().getElements().getLine().getBorderWidth());
+		// checks if a callback has been set for this property
+		if (getBorderWidthCallback() == null) {
+			return getValue(Dataset.Property.BORDER_WIDTH, getDefaultValues().getElements().getLine().getBorderWidth());
+		}
+		// if here, the property is a callback
+		// then returns the default
+		return getDefaultValues().getElements().getLine().getBorderWidth();
 	}
 
 	/**
@@ -441,6 +491,9 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 *            lengths of lines and gaps which describe the pattern.
 	 */
 	public void setBorderDash(int... borderDash) {
+		// resets callback
+		setBorderDash((BorderDashCallback) null);
+		// stores value
 		setArrayValue(Property.BORDER_DASH, ArrayInteger.fromOrNull(borderDash));
 	}
 
@@ -452,8 +505,14 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 *         lines and gaps which describe the pattern.
 	 */
 	public List<Integer> getBorderDash() {
-		ArrayInteger array = getArrayValue(Property.BORDER_DASH);
-		return ArrayListHelper.list(array);
+		// checks if a callback has been set for this property
+		if (getBorderDashCallback() == null) {
+			ArrayInteger array = getArrayValue(Property.BORDER_DASH);
+			return ArrayListHelper.list(array);
+		}
+		// if here, the property is a callback
+		// then returns the default
+		return new ArrayIntegerList();
 	}
 
 	/**
@@ -462,6 +521,9 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param borderDashOffset the line dash pattern offset or "phase".
 	 */
 	public void setBorderDashOffset(int borderDashOffset) {
+		// resets callback
+		setBorderDashOffset((BorderDashOffsetCallback) null);
+		// stores value
 		setValue(Property.BORDER_DASH_OFFSET, borderDashOffset);
 	}
 
@@ -471,7 +533,13 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @return the line dash pattern offset or "phase".
 	 */
 	public int getBorderDashOffset() {
-		return getValue(Property.BORDER_DASH_OFFSET, getDefaultValues().getElements().getLine().getBorderDashOffset());
+		// checks if a callback has been set for this property
+		if (getBorderDashOffsetCallback() == null) {
+			return getValue(Property.BORDER_DASH_OFFSET, getDefaultValues().getElements().getLine().getBorderDashOffset());
+		}
+		// if here, the property is a callback
+		// then returns the default
+		return getDefaultValues().getElements().getLine().getBorderDashOffset();
 	}
 
 	/**
@@ -481,6 +549,9 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param borderCapStyle how the end points of every line are drawn.
 	 */
 	public void setBorderCapStyle(CapStyle borderCapStyle) {
+		// resets callback
+		setBorderCapStyle((BorderCapStyleCallback) null);
+		// stores value
 		setValue(Property.BORDER_CAP_STYLE, borderCapStyle);
 	}
 
@@ -491,7 +562,13 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @return how the end points of every line are drawn.
 	 */
 	public CapStyle getBorderCapStyle() {
-		return getValue(Property.BORDER_CAP_STYLE, CapStyle.class, getDefaultValues().getElements().getLine().getBorderCapStyle());
+		// checks if a callback has been set for this property
+		if (getBorderCapStyleCallback() == null) {
+			return getValue(Property.BORDER_CAP_STYLE, CapStyle.class, getDefaultValues().getElements().getLine().getBorderCapStyle());
+		}
+		// if here, the property is a callback
+		// then returns the default
+		return getDefaultValues().getElements().getLine().getBorderCapStyle();
 	}
 
 	/**
@@ -503,6 +580,9 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param borderJoinStyle There are three possible values for this property: round, bevel and miter.
 	 */
 	public void setBorderJoinStyle(JoinStyle borderJoinStyle) {
+		// resets callback
+		setBorderJoinStyle((BorderJoinStyleCallback) null);
+		// stores value
 		setValue(Property.BORDER_JOIN_STYLE, borderJoinStyle);
 	}
 
@@ -515,7 +595,13 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @return There are three possible values for this property: round, bevel and miter.
 	 */
 	public JoinStyle getBorderJoinStyle() {
-		return getValue(Property.BORDER_JOIN_STYLE, JoinStyle.class, getDefaultValues().getElements().getLine().getBorderJoinStyle());
+		// checks if a callback has been set for this property
+		if (getBorderJoinStyleCallback() == null) {
+			return getValue(Property.BORDER_JOIN_STYLE, JoinStyle.class, getDefaultValues().getElements().getLine().getBorderJoinStyle());
+		}
+		// if here, the property is a callback
+		// then returns the default
+		return getDefaultValues().getElements().getLine().getBorderJoinStyle();
 	}
 
 	/**
@@ -1508,6 +1594,114 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 		removeIfExists(Property.CHARBA_POINT_STYLE);
 	}
 
+	/**
+	 * Returns the border cap style callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border cap style callback, if set, otherwise <code>null</code>.
+	 */
+	public BorderCapStyleCallback getBorderCapStyleCallback() {
+		return borderCapStyleCallback;
+	}
+
+	/**
+	 * Sets the border cap style callback.
+	 * 
+	 * @param borderCapStyleCallback the border cap style callback.
+	 */
+	public void setBorderCapStyle(BorderCapStyleCallback borderCapStyleCallback) {
+		// sets the callback
+		this.borderCapStyleCallback = borderCapStyleCallback;
+		// checks if callback is consistent
+		if (borderCapStyleCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.BORDER_CAP_STYLE, borderCapStyleCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.BORDER_CAP_STYLE);
+		}
+	}
+
+	/**
+	 * Returns the border join style callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border join style callback, if set, otherwise <code>null</code>.
+	 */
+	public BorderJoinStyleCallback getBorderJoinStyleCallback() {
+		return borderJoinStyleCallback;
+	}
+
+	/**
+	 * Sets the border join style callback.
+	 * 
+	 * @param borderJoinStyleCallback the border join style callback.
+	 */
+	public void setBorderJoinStyle(BorderJoinStyleCallback borderJoinStyleCallback) {
+		// sets the callback
+		this.borderJoinStyleCallback = borderJoinStyleCallback;
+		// checks if callback is consistent
+		if (borderJoinStyleCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.BORDER_JOIN_STYLE, borderJoinStyleCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.BORDER_JOIN_STYLE);
+		}
+	}
+
+	/**
+	 * Returns the border dash callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border dash callback, if set, otherwise <code>null</code>.
+	 */
+	public BorderDashCallback getBorderDashCallback() {
+		return borderDashCallback;
+	}
+
+	/**
+	 * Sets the border dash callback.
+	 * 
+	 * @param borderDashCallback the border dash callback.
+	 */
+	public void setBorderDash(BorderDashCallback borderDashCallback) {
+		// sets the callback
+		this.borderDashCallback = borderDashCallback;
+		// checks if callback is consistent
+		if (borderDashCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.BORDER_DASH, borderDashCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.BORDER_DASH);
+		}
+	}
+
+	/**
+	 * Returns the border dash offset callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border dash offset callback, if set, otherwise <code>null</code>.
+	 */
+	public BorderDashOffsetCallback getBorderDashOffsetCallback() {
+		return borderDashOffsetCallback;
+	}
+
+	/**
+	 * Sets the border dash offset callback.
+	 * 
+	 * @param borderDashOffsetCallback the border dash offset callback.
+	 */
+	public void setBorderDashOffset(BorderDashOffsetCallback borderDashOffsetCallback) {
+		// sets the callback
+		this.borderDashOffsetCallback = borderDashOffsetCallback;
+		// checks if callback is consistent
+		if (borderDashOffsetCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.BORDER_DASH_OFFSET, borderDashOffsetCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.BORDER_DASH_OFFSET);
+		}
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -1599,6 +1793,53 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 		}
 		// default result
 		return getDefaultValues().getElements().getPoint().getPointStyle().value();
+	}
+
+	/**
+	 * Returns a {@link CapStyle} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @return a object property value, as {@link CapStyle}
+	 */
+	private String onBorderCapStyle(ScriptableContext context) {
+		// gets value
+		CapStyle result = ScriptableUtils.getOptionValue(context, borderCapStyleCallback);
+		// checks result
+		if (result != null) {
+			return result.value();
+		}
+		// default result
+		return getDefaultValues().getElements().getLine().getBorderCapStyle().value();
+	}
+
+	/**
+	 * Returns a {@link JoinStyle} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @return a object property value, as {@link JoinStyle}
+	 */
+	private String onBorderJoinStyle(ScriptableContext context) {
+		// gets value
+		JoinStyle result = ScriptableUtils.getOptionValue(context, borderJoinStyleCallback);
+		// checks result
+		if (result != null) {
+			return result.value();
+		}
+		// default result
+		return getDefaultValues().getElements().getLine().getBorderJoinStyle().value();
+	}
+
+	/**
+	 * Returns an array of integer when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @return an array of integer
+	 */
+	private Array onBorderDash(ScriptableContext context) {
+		// gets value
+		List<Integer> result = ScriptableUtils.getOptionValue(context, borderDashCallback);
+		// default result
+		return ArrayInteger.fromOrEmpty(result);
 	}
 
 }

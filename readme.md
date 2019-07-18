@@ -107,11 +107,19 @@ Here you can find the list of enhancement and updates available on `master` bran
 ### Features
  
  * import last CHART.JS [package](https://www.chartjs.org/dist/master/Chart.bundle.min.js) from `development build`. **PAY ATTENTION** that [CHART.JS](https://www.chartjs.org/docs/latest/developers/#development-releases) report the following warning using NOT tagged version: **Development builds MUST not be used for production purposes**.
- * add `align` property to legend configuration object 
- * add `rotation` property to legend item object 
- * add `spanGaps` property to radar chart dataset and to element line configuration
- * change `getLineWidth`, `getStrokeStyle` and `getPointStyle` methods into `LegendItem` class in order to return a single item instead of a list of them.
- * add `getPointStyleAsImage` and `isPointStyleAsImage` methods to `LegendItem` class in order to manage images as point styles.
+    * add `align` property to legend configuration object 
+    * add `rotation` property to legend item object 
+    * add `spanGaps` property to radar chart dataset and to element line configuration
+    * line and radar datasets are now scriptable by callbacks for following options:
+       * `backgroundColor`
+       * `borderCapStyle`
+       * `borderColor`
+       * `borderDash`
+       * `borderDashOffset`
+       * `borderJoinStyle`
+       * `borderWidth`
+       * `cubicInterpolationMode` (only line chart)
+ * add `getPointStyleAsImage` and `isPointStyleAsImage` methods to `LegendLabelItem` class in order to manage images as point styles.
  * add `setPointStyle` methods, setting a image instance, to `LegendLabelItem` class in order to manage images as point styles.
 
 ### Fixed Bugs
@@ -121,9 +129,11 @@ Here you can find the list of enhancement and updates available on `master` bran
  
 ### Development
 
- * reduced visibility to `StandardKey` class constructor in order to use `Key.create(String key)` method
+ * reduce visibility to `StandardKey` class constructor in order to use `Key.create(String key)` method
  * set `private` constructor to `JSON` class in order to avoid any instantiation
- * added `compare` and `equals` methods to `Key` class
+ * add `compare` and `equals` methods to `Key` class
+ * move (from `LegenItem` class) and change `getLineWidth`, `getStrokeStyle` and `getPointStyle` methods into `LegendLabelItem` class in order to return a single item instead of a list of them.
+ * change default `cubicInterpolationMode` property to return into `LineDataset` class.
  
 License
 -------

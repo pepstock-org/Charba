@@ -18,9 +18,15 @@ package org.pepstock.charba.client.data;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.CubicInterpolationModeCallback;
+import org.pepstock.charba.client.callbacks.ScriptableContext;
+import org.pepstock.charba.client.callbacks.ScriptableFunctions;
+import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.ArrayStringList;
+import org.pepstock.charba.client.commons.CallbackProxy;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
@@ -38,6 +44,15 @@ import org.pepstock.charba.client.options.Scales;
  * @author Andrea "Stock" Stocchero
  */
 public class LineDataset extends LiningDataset implements HasDataPoints {
+
+	// ---------------------------
+	// -- CALLBACKS PROXIES ---
+	// ---------------------------
+	// callback proxy to invoke the cubic interpolation mode function
+	private final CallbackProxy<ScriptableFunctions.ProxyStringCallback> cubicInterpolationModeCallbackProxy = JsHelper.get().newCallbackProxy();
+
+	// cubic interpolation mode callback instance
+	private CubicInterpolationModeCallback cubicInterpolationModeCallback = null;
 
 	/**
 	 * Name of properties of native object.
@@ -89,6 +104,11 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 */
 	public LineDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
+		// -------------------------------
+		// -- SET CALLBACKS to PROXIES ---
+		// -------------------------------
+		// gets value calling callback
+		cubicInterpolationModeCallbackProxy.setCallback((contextFunction, context) -> onCubicInterpolationMode(context));
 	}
 
 	/**
@@ -148,6 +168,9 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @param mode algorithm used to interpolate a smooth curve from the discrete data points
 	 */
 	public void setCubicInterpolationMode(CubicInterpolationMode mode) {
+		// reset callback
+		setCubicInterpolationMode((CubicInterpolationModeCallback) null);
+		// stores value
 		setValue(Property.CUBIC_INTERPOLATION_MODE, mode);
 	}
 
@@ -157,7 +180,13 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @return algorithm used to interpolate a smooth curve from the discrete data points.
 	 */
 	public CubicInterpolationMode getCubicInterpolationMode() {
-		return getValue(Property.CUBIC_INTERPOLATION_MODE, CubicInterpolationMode.class, CubicInterpolationMode.DEFAULT);
+		// checks if a callback has been set for this property
+		if (getCubicInterpolationModeCallback() == null) {
+			return getValue(Property.CUBIC_INTERPOLATION_MODE, CubicInterpolationMode.class, getDefaultValues().getElements().getLine().getCubicInterpolationMode());
+		}
+		// if here, the property is a callback
+		// then returns the default
+		return getDefaultValues().getElements().getLine().getCubicInterpolationMode();
 	}
 
 	/**
@@ -287,6 +316,50 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 		}
 		// returns an empty list
 		return new LinkedList<>();
+	}
+
+	/**
+	 * Returns the border join style callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the border join style callback, if set, otherwise <code>null</code>.
+	 */
+	public CubicInterpolationModeCallback getCubicInterpolationModeCallback() {
+		return cubicInterpolationModeCallback;
+	}
+
+	/**
+	 * Sets the border join style callback.
+	 * 
+	 * @param cubicInterpolationModeCallback the border join style callback.
+	 */
+	public void setCubicInterpolationMode(CubicInterpolationModeCallback cubicInterpolationModeCallback) {
+		// sets the callback
+		this.cubicInterpolationModeCallback = cubicInterpolationModeCallback;
+		// checks if callback is consistent
+		if (cubicInterpolationModeCallback != null) {
+			// adds the callback proxy function to java script object
+			setValue(Property.CUBIC_INTERPOLATION_MODE, cubicInterpolationModeCallbackProxy.getProxy());
+		} else {
+			// otherwise sets null which removes the properties from java script object
+			remove(Property.CUBIC_INTERPOLATION_MODE);
+		}
+	}
+
+	/**
+	 * Returns a {@link CubicInterpolationMode} when the callback has been activated.
+	 * 
+	 * @param context native object as context.
+	 * @return a object property value, as {@link CubicInterpolationMode}
+	 */
+	private String onCubicInterpolationMode(ScriptableContext context) {
+		// gets value
+		CubicInterpolationMode result = ScriptableUtils.getOptionValue(context, cubicInterpolationModeCallback);
+		// checks result
+		if (result != null) {
+			return result.value();
+		}
+		// default result
+		return getDefaultValues().getElements().getLine().getCubicInterpolationMode().value();
 	}
 
 }
