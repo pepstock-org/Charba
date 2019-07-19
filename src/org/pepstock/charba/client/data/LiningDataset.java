@@ -1097,7 +1097,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public List<Double> getPointHoverRadius() {
 		// checks if the callback has not been set
-		if (getPointHoverRadius() == null) {
+		if (getPointHoverRadiusCallback() == null) {
 			// returns the array
 			ArrayDouble array = getValueOrArray(Property.POINT_HOVER_RADIUS, getDefaultValues().getElements().getPoint().getHoverRadius());
 			return ArrayListHelper.list(array);
