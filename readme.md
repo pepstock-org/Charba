@@ -127,17 +127,19 @@ Here you can find the list of enhancement and updates available on `master` bran
 
  * [#36](https://github.com/pepstock-org/Charba/issues/36) removed `setShowLine` method (which it will set always to `false` the options) from `ScatterDataset` in order to be able to set it freely. Thanks @lightingft
  * [#37](https://github.com/pepstock-org/Charba/issues/37) added ANT target `build-all-sources` to create a ZIP file (`charba-[version.release]-sources.zip`) which will be added to GitHub release page as artifact to be consumed, every time new release will be published. The file will contain all sources (java, js) for security scanning purposes. Thanks @jake1164
- * [#40](https://github.com/pepstock-org/Charba/issues/40) added scale configuration to the chart one, only for chart with a single scale 
+ * [#40](https://github.com/pepstock-org/Charba/issues/40) added scale configuration to the chart one, only for chart with a single scale.
  
 ### Development
 
- * reduce visibility to `StandardKey` class constructor in order to use `Key.create(String key)` method
- * set `private` constructor to `JSON` class in order to avoid any instantiation
- * add `compare` and `equals` methods to `Key` class
+ * reduce visibility to `StandardKey` class constructor in order to use `Key.create(String key)` method.
+ * set `private` constructor to `JSON` class in order to avoid any instantiation.
+ * add `compare` and `equals` methods to `Key` class.
  * move (from `LegenItem` class) and change `getLineWidth`, `getStrokeStyle` and `getPointStyle` methods into `LegendLabelItem` class in order to return a single item instead of a list of them.
  * change default `cubicInterpolationMode` property to return into `LineDataset` class.
- * use ARC element to get default background color, border color and border width properties because used by most cases of datasets (reduce code duplications)
+ * use ARC element to get default background color, border color and border width properties because used by most cases of datasets (reduce code duplications).
  * change visibility to `Filler` class, making it also extendable, in order to be able to implement `fill` scriptable callback.
+ * reset of callback instances when the property has been set with object object type.
+ * improve the single scale options management when a `null` is passed as argument to chart options.
  
 License
 -------
