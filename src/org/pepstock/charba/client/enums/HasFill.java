@@ -95,5 +95,5 @@ public interface HasFill {
 		// returns the default value
 		return Defaults.get().getGlobal().getElements().getLine().getFill();
 	}
-	
+
 }

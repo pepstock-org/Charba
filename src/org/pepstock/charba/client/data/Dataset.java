@@ -418,7 +418,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @return the default background color value based on type of chart.
 	 */
 	protected String getDefaultBackgroundColorAsString() {
-		// returns the ARC default value because is MOSTLY used 
+		// returns the ARC default value because is MOSTLY used
 		return getDefaultValues().getElements().getArc().getBackgroundColorAsString();
 	}
 
@@ -428,7 +428,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @return the default border color value based on type of chart.
 	 */
 	protected String getDefaultBorderColorAsString() {
-		// returns the ARC default value because is MOSTLY used 
+		// returns the ARC default value because is MOSTLY used
 		return getDefaultValues().getElements().getArc().getBorderColorAsString();
 	}
 
@@ -438,7 +438,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	 * @return the default border width value based on type of chart.
 	 */
 	protected int getDefaultBorderWidth() {
-		// returns the ARC default value because is MOSTLY used 
+		// returns the ARC default value because is MOSTLY used
 		return getDefaultValues().getElements().getArc().getBorderWidth();
 	}
 

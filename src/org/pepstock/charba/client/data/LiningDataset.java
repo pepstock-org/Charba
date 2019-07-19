@@ -1704,7 +1704,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 			remove(Property.BORDER_DASH_OFFSET);
 		}
 	}
-	
+
 	/**
 	 * Returns the fill callback, if set, otherwise <code>null</code>.
 	 * 
