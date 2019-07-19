@@ -24,6 +24,7 @@ import org.pepstock.charba.client.callbacks.BorderDashCallback;
 import org.pepstock.charba.client.callbacks.BorderDashOffsetCallback;
 import org.pepstock.charba.client.callbacks.BorderJoinStyleCallback;
 import org.pepstock.charba.client.callbacks.BorderWidthCallback;
+import org.pepstock.charba.client.callbacks.FillCallback;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
@@ -192,7 +193,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	}
 
 	// instance of filler
-	private final Filler filler;
+	private final LiningDatasetFiller filler;
 
 	/**
 	 * Creates the dataset using a default.
@@ -201,7 +202,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	LiningDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
-		filler = new Filler(getNativeObject(), getDefaultValues().getElements().getLine().getFill());
+		filler = new LiningDatasetFiller(getNativeObject(), getDefaultValues().getElements().getLine().getFill());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -819,6 +820,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param pointBorderWidth array of the width of the point border in pixels.
 	 */
 	public void setPointBorderWidth(int... pointBorderWidth) {
+		// FIXME
 		// stores value
 		setValueOrArray(Property.POINT_BORDER_WIDTH, pointBorderWidth);
 	}
@@ -846,6 +848,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param pointHitRadius array of the pixel size of the non-displayed point.
 	 */
 	public void setPointHitRadius(double... pointHitRadius) {
+		// FIXME
 		// stores value
 		setValueOrArray(Property.POINT_HIT_RADIUS, pointHitRadius);
 	}
@@ -1700,6 +1703,24 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 			// otherwise sets null which removes the properties from java script object
 			remove(Property.BORDER_DASH_OFFSET);
 		}
+	}
+	
+	/**
+	 * Returns the fill callback, if set, otherwise <code>null</code>.
+	 * 
+	 * @return the fill callback, if set, otherwise <code>null</code>.
+	 */
+	public FillCallback getFillCallback() {
+		return filler.getFillCallback();
+	}
+
+	/**
+	 * Sets the fill callback.
+	 * 
+	 * @param fillCallback the fill callback.
+	 */
+	public void setFill(FillCallback fillCallback) {
+		filler.setFill(fillCallback);
 	}
 
 	/*

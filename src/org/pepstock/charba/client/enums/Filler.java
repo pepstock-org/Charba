@@ -25,7 +25,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Filler extends NativeObjectContainer {
+public class Filler extends NativeObjectContainer {
 
 	// default value
 	private final IsFill defaultValue;
@@ -33,7 +33,7 @@ public final class Filler extends NativeObjectContainer {
 	/**
 	 * Name of properties of native object.
 	 */
-	private enum Property implements Key
+	protected enum Property implements Key
 	{
 		FILL("fill"),
 		// internal property key to map the type of FILL property
@@ -80,6 +80,15 @@ public final class Filler extends NativeObjectContainer {
 	}
 
 	/**
+	 * Returns the default value of FILL to use when the property does not exist.
+	 * 
+	 * @return the default value of FILL to use when the property does not exist
+	 */
+	protected final IsFill getDefaultValue() {
+		return defaultValue;
+	}
+
+	/**
 	 * Sets how to fill the area under the line.
 	 * 
 	 * @param fill <code>true</code> to fill, otherwise <code>false</code>.
@@ -95,7 +104,7 @@ public final class Filler extends NativeObjectContainer {
 	 * 
 	 * @param index absolute dataset index of the chart.
 	 */
-	public final void setFill(int index) {
+	public void setFill(int index) {
 		setFill(Fill.getFill(index));
 	}
 
@@ -104,7 +113,7 @@ public final class Filler extends NativeObjectContainer {
 	 * 
 	 * @param index relative dataset index of the chart.
 	 */
-	public final void setFill(String index) {
+	public void setFill(String index) {
 		setFill(Fill.getFill(index));
 	}
 
@@ -146,7 +155,7 @@ public final class Filler extends NativeObjectContainer {
 	 * 
 	 * @return how to fill the area under the line.
 	 */
-	public final IsFill getFill() {
+	public IsFill getFill() {
 		// checks if there is the property
 		if (has(Property.CHARBA_FILLING_MODE)) {
 			// gets the filling mode
