@@ -21,7 +21,14 @@ import org.pepstock.charba.client.enums.IsFill;
 import org.pepstock.charba.client.enums.RelativeDatasetIndexFill;
 
 /**
- * Callback interface to set <code>fill</code> property at runtime, using the chart instance and the context.
+ * Callback interface to set <code>fill</code> property at runtime, using the chart instance and the context.<br>
+ * The result object can have one of following type:<br>
+ * <ul>
+ * <li> {@link Fill} 
+ * <li> Boolean
+ * <li> Integer for {@link AbsoluteDatasetIndexFill}
+ * <li> String for {@link RelativeDatasetIndexFill}
+ * </ul>
  * 
  * @author Andrea "Stock" Stocchero
  *
