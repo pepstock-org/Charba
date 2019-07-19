@@ -50,6 +50,10 @@ public abstract class SingleScaleOptions extends ConfigurationOptions {
 			this.axis = axis;
 			// stores into configuration
 			getConfiguration().setScale(axis.getConfiguration());
+		} else {
+			// if here, axis is null
+			// then it resets the previous configuration
+			getConfiguration().setScale(null);
 		}
 	}
 
