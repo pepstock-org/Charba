@@ -144,8 +144,7 @@ final class LiningDatasetFiller extends Filler {
 		if (result instanceof Boolean) {
 			// is boolean
 			// cast to boolean
-			Boolean resultAsBoolean = (Boolean) result;
-			return resultAsBoolean.booleanValue();
+			return result;
 		} else if (result instanceof Integer) {
 			// is integer and then wants an absolute fill
 			// cast to integer
