@@ -44,10 +44,13 @@ public abstract class SingleScaleOptions extends ConfigurationOptions {
 	 * @param axis the axis.
 	 */
 	public void setAxis(Axis axis) {
-		// stores locally the axis
-		this.axis = axis;
-		// stores into configuration
-		getConfiguration().setScale(axis.getConfiguration());
+		// checks if axis is consistent
+		if (axis != null) {
+			// stores locally the axis
+			this.axis = axis;
+			// stores into configuration
+			getConfiguration().setScale(axis.getConfiguration());
+		}
 	}
 
 	/*

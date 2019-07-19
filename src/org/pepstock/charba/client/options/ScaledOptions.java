@@ -94,6 +94,8 @@ public class ScaledOptions extends Options implements IsDefaultScaledOptions {
 		// checks if scale is consistent
 		if (scale != null) {
 			this.scale = scale;
+			// set values
+			setValue(Property.SCALE, this.scale);
 		}
 	}
 
