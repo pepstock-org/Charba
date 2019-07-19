@@ -229,11 +229,13 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 * @return the edge to skip drawing the border for.
 	 */
 	public BorderSkipped getBorderSkipped() {
+		// gets object type
+		ObjectType type = type(Property.BORDER_SKIPPED);
 		// checks if 'false' has been set
-		if (ObjectType.BOOLEAN.equals(type(Property.BORDER_SKIPPED))) {
+		if (ObjectType.BOOLEAN.equals(type)) {
 			// returns is false
 			return BorderSkipped.FALSE;
-		} else if (ObjectType.FUNCTION.equals(type(Property.BORDER_SKIPPED))) {
+		} else if (ObjectType.FUNCTION.equals(type)) {
 			// checks if a callback has been set
 			// returns defaults
 			return getDefaultValues().getElements().getRectangle().getBorderSkipped();

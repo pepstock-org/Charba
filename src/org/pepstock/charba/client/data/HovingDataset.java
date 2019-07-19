@@ -35,7 +35,6 @@ import org.pepstock.charba.client.commons.ArrayStringList;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
@@ -202,7 +201,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	@Override
 	public List<String> getHoverBackgroundColorAsString() {
 		// checks if there is callback
-		if (hoverBackgroundColorCallback != null) {
+		if (getHoverBackgroundColorCallback() != null) {
 			// if here, the property is a callback
 			// returns empty list
 			return new ArrayStringList();
@@ -221,7 +220,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	@Override
 	public List<Pattern> getHoverBackgroundColorAsPatterns() {
 		// checks if there is callback
-		if (hoverBackgroundColorCallback != null) {
+		if (getHoverBackgroundColorCallback() != null) {
 			// if here, the property is a callback
 			// returns empty list
 			return new ArrayObjectContainerList<>();
@@ -241,7 +240,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	@Override
 	public List<Gradient> getHoverBackgroundColorAsGradient() {
 		// checks if there is callback
-		if (hoverBackgroundColorCallback != null) {
+		if (getHoverBackgroundColorCallback() != null) {
 			// if here, the property is a callback
 			// returns empty list
 			return new ArrayObjectContainerList<>();
@@ -297,7 +296,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	@Override
 	public List<String> getHoverBorderColorAsString() {
 		// checks if there is callback
-		if (hoverBorderColorCallback != null) {
+		if (getHoverBorderColorCallback() != null) {
 			// if here, the property is a callback
 			// returns empty list
 			return new ArrayStringList();
@@ -316,7 +315,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	@Override
 	public List<Gradient> getHoverBorderColorAsGradient() {
 		// checks if there is callback
-		if (hoverBorderColorCallback != null) {
+		if (getHoverBorderColorCallback() != null) {
 			// if here, the property is a callback
 			// returns empty list
 			return new ArrayObjectContainerList<>();
@@ -333,7 +332,7 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	@Override
 	public List<Integer> getHoverBorderWidth() {
 		// checks if the callback has not been set
-		if (!ObjectType.FUNCTION.equals(type(Property.HOVER_BORDER_WIDTH))) {
+		if (getHoverBorderWidthCallback() == null) {
 			// call super
 			return super.getHoverBorderWidth();
 		}

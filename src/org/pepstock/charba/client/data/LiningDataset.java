@@ -49,7 +49,6 @@ import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.Filler;
@@ -687,7 +686,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public List<String> getPointBackgroundColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
-		if (hasColors(Property.POINT_BACKGROUND_COLOR) && pointBackgroundColorCallback == null) {
+		if (hasColors(Property.POINT_BACKGROUND_COLOR) && getPointBackgroundColorCallback() == null) {
 			// returns color as string
 			ArrayString array = getValueOrArray(Property.POINT_BACKGROUND_COLOR, getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
 			return ArrayListHelper.list(array);
@@ -715,7 +714,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public List<Gradient> getPointBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
-		if (hasGradients(Property.POINT_BACKGROUND_COLOR) && pointBackgroundColorCallback == null) {
+		if (hasGradients(Property.POINT_BACKGROUND_COLOR) && getPointBackgroundColorCallback() == null) {
 			return getGradientsContainer().getObjects(Property.POINT_BACKGROUND_COLOR);
 		} else {
 			// if here, the property is not a gradient
@@ -775,7 +774,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public List<String> getPointBorderColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
-		if (hasColors(Property.POINT_BORDER_COLOR) && pointBorderColorCallback == null) {
+		if (hasColors(Property.POINT_BORDER_COLOR) && getPointBorderColorCallback() == null) {
 			// returns color as string
 			ArrayString array = getValueOrArray(Property.POINT_BORDER_COLOR, getDefaultValues().getElements().getPoint().getBorderColorAsString());
 			return ArrayListHelper.list(array);
@@ -804,7 +803,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public List<Gradient> getPointBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
-		if (hasGradients(Property.POINT_BORDER_COLOR) && pointBorderColorCallback == null) {
+		if (hasGradients(Property.POINT_BORDER_COLOR) && getPointBorderColorCallback() == null) {
 			return getGradientsContainer().getObjects(Property.POINT_BORDER_COLOR);
 		} else {
 			// if here, the property is not a gradient
@@ -820,7 +819,8 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param pointBorderWidth array of the width of the point border in pixels.
 	 */
 	public void setPointBorderWidth(int... pointBorderWidth) {
-		// FIXME
+		// reset callback
+		setPointBorderWidth((BorderWidthCallback) null);
 		// stores value
 		setValueOrArray(Property.POINT_BORDER_WIDTH, pointBorderWidth);
 	}
@@ -832,7 +832,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public List<Integer> getPointBorderWidth() {
 		// checks if the callback has not been set
-		if (!ObjectType.FUNCTION.equals(type(Property.POINT_BORDER_WIDTH))) {
+		if (getPointBorderWidthCallback() == null) {
 			// returns the array
 			ArrayInteger array = getValueOrArray(Property.POINT_BORDER_WIDTH, getDefaultValues().getElements().getPoint().getBorderWidth());
 			return ArrayListHelper.list(array);
@@ -848,7 +848,8 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param pointHitRadius array of the pixel size of the non-displayed point.
 	 */
 	public void setPointHitRadius(double... pointHitRadius) {
-		// FIXME
+		// reset callback
+		setPointHitRadius((RadiusCallback) null);
 		// stores value
 		setValueOrArray(Property.POINT_HIT_RADIUS, pointHitRadius);
 	}
@@ -860,7 +861,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public List<Double> getPointHitRadius() {
 		// checks if the callback has not been set
-		if (!ObjectType.FUNCTION.equals(type(Property.POINT_HIT_RADIUS))) {
+		if (getPointHitRadiusCallback() == null) {
 			// returns the array
 			ArrayDouble array = getValueOrArray(Property.POINT_HIT_RADIUS, getDefaultValues().getElements().getPoint().getHitRadius());
 			return ArrayListHelper.list(array);
@@ -921,7 +922,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public List<String> getPointHoverBackgroundColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
-		if (hasColors(Property.POINT_HOVER_BACKGROUND_COLOR) && pointHoverBackgroundColorCallback == null) {
+		if (hasColors(Property.POINT_HOVER_BACKGROUND_COLOR) && getPointHoverBackgroundColorCallback() == null) {
 			ArrayString array = getValueOrArray(Property.POINT_HOVER_BACKGROUND_COLOR, getDefaultValues().getElements().getPoint().getBackgroundColorAsString());
 			return ArrayListHelper.list(array);
 		} else {
@@ -950,7 +951,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public List<Gradient> getPointHoverBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
-		if (hasGradients(Property.POINT_HOVER_BACKGROUND_COLOR) && pointHoverBackgroundColorCallback == null) {
+		if (hasGradients(Property.POINT_HOVER_BACKGROUND_COLOR) && getPointHoverBackgroundColorCallback() == null) {
 			return getGradientsContainer().getObjects(Property.POINT_HOVER_BACKGROUND_COLOR);
 		} else {
 			// if here, the property is not a gradient
@@ -1010,7 +1011,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public List<String> getPointHoverBorderColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
-		if (hasColors(Property.POINT_HOVER_BORDER_COLOR) && pointHoverBorderColorCallback == null) {
+		if (hasColors(Property.POINT_HOVER_BORDER_COLOR) && getPointHoverBorderColorCallback() == null) {
 			ArrayString array = getValueOrArray(Property.POINT_HOVER_BORDER_COLOR, getDefaultValues().getElements().getPoint().getBorderColorAsString());
 			return ArrayListHelper.list(array);
 		} else {
@@ -1038,7 +1039,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public List<Gradient> getPointHoverBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
-		if (hasGradients(Property.POINT_HOVER_BORDER_COLOR) && pointHoverBorderColorCallback == null) {
+		if (hasGradients(Property.POINT_HOVER_BORDER_COLOR) && getPointHoverBorderColorCallback() == null) {
 			return getGradientsContainer().getObjects(Property.POINT_HOVER_BORDER_COLOR);
 		} else {
 			// if here, the property is not a gradient
@@ -1054,6 +1055,8 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param pointHoverBorderWidth array of the border width of point when hovered.
 	 */
 	public void setPointHoverBorderWidth(int... pointHoverBorderWidth) {
+		// resets callback
+		setPointHoverBorderWidth((BorderWidthCallback) null);
 		// stores value
 		setValueOrArray(Property.POINT_HOVER_BORDER_WIDTH, pointHoverBorderWidth);
 	}
@@ -1065,7 +1068,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public List<Integer> getPointHoverBorderWidth() {
 		// checks if the callback has not been set
-		if (!ObjectType.FUNCTION.equals(type(Property.POINT_HOVER_BORDER_WIDTH))) {
+		if (getPointHoverBorderWidthCallback() == null) {
 			// returns the array
 			ArrayInteger array = getValueOrArray(Property.POINT_HOVER_BORDER_WIDTH, getDefaultValues().getElements().getPoint().getHoverBorderWidth());
 			return ArrayListHelper.list(array);
@@ -1081,6 +1084,8 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param pointHoverRadius array of the radius of the point when hovered.
 	 */
 	public void setPointHoverRadius(double... pointHoverRadius) {
+		// resets callback
+		setPointHoverRadius((RadiusCallback) null);
 		// stores values
 		setValueOrArray(Property.POINT_HOVER_RADIUS, pointHoverRadius);
 	}
@@ -1092,7 +1097,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public List<Double> getPointHoverRadius() {
 		// checks if the callback has not been set
-		if (!ObjectType.FUNCTION.equals(type(Property.POINT_HOVER_RADIUS))) {
+		if (getPointHoverRadius() == null) {
 			// returns the array
 			ArrayDouble array = getValueOrArray(Property.POINT_HOVER_RADIUS, getDefaultValues().getElements().getPoint().getHoverRadius());
 			return ArrayListHelper.list(array);
@@ -1108,6 +1113,8 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param pointRadius array of the radius of the point shape.
 	 */
 	public void setPointRadius(double... pointRadius) {
+		// resets callback
+		setPointRadius((RadiusCallback) null);
 		// stores values
 		setValueOrArray(Property.POINT_RADIUS, pointRadius);
 	}
@@ -1119,7 +1126,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public List<Double> getPointRadius() {
 		// checks if the callback has not been set
-		if (!ObjectType.FUNCTION.equals(type(Property.POINT_RADIUS))) {
+		if (getPointRadiusCallback() == null) {
 			// returns the array
 			ArrayDouble array = getValueOrArray(Property.POINT_RADIUS, getDefaultValues().getElements().getPoint().getRadius());
 			return ArrayListHelper.list(array);
@@ -1231,7 +1238,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public List<ImageElement> getPointStyleAsImages() {
 		// checks if image as point style has been used
-		if (getValue(Property.CHARBA_POINT_STYLE, false) && pointStyleCallback == null) {
+		if (getValue(Property.CHARBA_POINT_STYLE, false) && getPointStyleCallback() == null) {
 			// gets array
 			ArrayImage array = getValueOrArray(Property.POINT_STYLE, UndefinedValues.IMAGE_ELEMENT);
 			return ArrayListHelper.list(array);
@@ -1247,6 +1254,8 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 * @param pointRotation array of the rotation of the point in degrees.
 	 */
 	public void setPointRotation(double... pointRotation) {
+		// resets callback
+		setPointRotation((RotationCallback) null);
 		// sets value
 		setValueOrArray(Property.POINT_ROTATION, pointRotation);
 	}
@@ -1258,7 +1267,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 */
 	public List<Double> getPointRotation() {
 		// checks if the callback has not been set
-		if (!ObjectType.FUNCTION.equals(type(Property.POINT_ROTATION))) {
+		if (getPointRotationCallback() == null) {
 			// returns the array
 			ArrayDouble array = getValueOrArray(Property.POINT_ROTATION, getDefaultValues().getElements().getPoint().getRotation());
 			return ArrayListHelper.list(array);
