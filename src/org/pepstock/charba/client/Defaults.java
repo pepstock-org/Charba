@@ -128,9 +128,9 @@ public final class Defaults {
 		// checks if the options have already stored
 		if (scaleOptions.containsKey(axisType.value())) {
 			// if not, gets options by axis type
-			GlobalScale scale = scaleOptions.get(axisType.value());
+			GlobalScale storedScale = scaleOptions.get(axisType.value());
 			// stores the defaults options by scale service
-			Chart.getScaleService().updateScaleDefaults(axisType.value(), scale.getObject());
+			Chart.getScaleService().updateScaleDefaults(axisType.value(), storedScale.getObject());
 		}
 	}
 
