@@ -400,10 +400,16 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return If defined, this will override the data minimum.
 	 */
 	public Date getMinAsDate() {
-		// gets the value, getting the max with 0
-		double value = Math.max(getMin(), 0);
-		// transforms as date
-		return new Date((long) JsDate.create(value).getTime());
+		// checks if there is the property
+		if (has(Property.MIN)) {
+			// gets the value, getting the max with 0
+			double value = Math.max(getMin(), 0);
+			// transforms as date
+			return new Date((long) JsDate.create(value).getTime());
+		}
+		// if here, property is missing
+		// then returns default (null)
+		return null;
 	}
 
 	/**
@@ -448,10 +454,16 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 * @return if defined, this will override the data maximum.
 	 */
 	public Date getMaxAsDate() {
-		// gets the value, getting the max with 0
-		double value = Math.max(getMax(), 0);
-		// transforms as date
-		return new Date((long) JsDate.create(value).getTime());
+		// checks if there is the property
+		if (has(Property.MIN)) {
+			// gets the value, getting the max with 0
+			double value = Math.max(getMax(), 0);
+			// transforms as date
+			return new Date((long) JsDate.create(value).getTime());
+		}
+		// if here, property is missing
+		// then returns default (null)
+		return null;
 	}
 
 	/**
