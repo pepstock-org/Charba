@@ -39,26 +39,6 @@ public class DefaultTime implements IsDefaultTime {
 		return DEFAULT_ISO_WEEKDAY;
 	}
 
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getMax()
-//	 */
-//	@Override
-//	public Date getMax() {
-//		return null;
-//	}
-//
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getMin()
-//	 */
-//	@Override
-//	public Date getMin() {
-//		return null;
-//	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
