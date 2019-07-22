@@ -107,9 +107,9 @@ Here you can find the list of enhancement and updates available on `master` bran
 ### Features
  
  * import last CHART.JS [package](https://www.chartjs.org/dist/master/Chart.bundle.min.js) from `development build`. **PAY ATTENTION** that [CHART.JS](https://www.chartjs.org/docs/latest/developers/#development-releases) report the following warning using NOT tagged version: **Development builds MUST not be used for production purposes**.
-    * add `align` property to legend configuration object 
-    * add `rotation` property to legend item object 
-    * add `spanGaps` property to radar chart dataset and to radar options configuration
+    * add `align` property to legend configuration object. 
+    * add `rotation` property to legend item object.
+    * add `spanGaps` property to radar chart dataset and to radar options configuration.
     * line and radar datasets are now scriptable by callbacks for following options:
        * `backgroundColor`
        * `borderCapStyle`
@@ -120,6 +120,8 @@ Here you can find the list of enhancement and updates available on `master` bran
        * `borderWidth`
        * `cubicInterpolationMode` (only line chart)
        * `fill`
+    * remove `min` and `max`properties from `Time` class and add them to `CartesianTimeTick`, as new CHART.JS implemented.
+    * implement `scaleService` to get and set scale defaults by scale type  
  * add `getPointStyleAsImage` and `isPointStyleAsImage` methods to `LegendLabelItem` class in order to manage images as point styles.
  * add `setPointStyle` methods, setting a image instance, to `LegendLabelItem` class in order to manage images as point styles.
 
