@@ -25,11 +25,11 @@ import org.pepstock.charba.client.Defaults;
 interface HasLineOptions {
 
 	/**
-	 * Returns a multi scale options which will implements show lines and span gaps.
+	 * Returns a options which will implements show lines and span gaps.
 	 * 
-	 * @return a multi scale options instance
+	 * @return a options instance
 	 */
-	MultiScalesOptions getOptions();
+	ConfigurationOptions getOptions();
 
 	/**
 	 * If false, the lines between points are not drawn.

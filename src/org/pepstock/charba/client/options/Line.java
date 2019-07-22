@@ -48,7 +48,6 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 		BORDER_JOIN_STYLE("borderJoinStyle"),
 		CUBIC_INTERPOLATION_MODE("cubicInterpolationMode"),
 		CAP_BEZIER_POINTS("capBezierPoints"),
-		SPAN_GAPS("spanGaps"),
 		STEPPED("stepped");
 
 		// name value of property
@@ -325,31 +324,6 @@ public final class Line extends AbstractElement<IsDefaultLine> implements IsDefa
 	@Override
 	public boolean isStepped() {
 		return getValue(Property.STEPPED, getDefaultValues().isStepped());
-	}
-
-	/**
-	 * Sets if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in
-	 * the line
-	 * 
-	 * @param spanGaps <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN
-	 *            data will create a break in the line
-	 */
-	public void setSpanGaps(boolean spanGaps) {
-		setValue(Property.SPAN_GAPS, spanGaps);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns if lines will be drawn between points with no or null data. If false, points with NaN data will create a break in
-	 * the line.
-	 * 
-	 * @return <code>true</code> if lines will be drawn between points with no or null data. If false, points with NaN data will
-	 *         create a break in the line.
-	 */
-	@Override
-	public boolean isSpanGaps() {
-		return getValue(Property.SPAN_GAPS, getDefaultValues().isSpanGaps());
 	}
 
 }

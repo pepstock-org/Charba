@@ -23,7 +23,7 @@ import org.pepstock.charba.client.IsChart;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class RadarOptions extends SingleScaleOptions {
+public class RadarOptions extends SingleScaleOptions implements HasLineOptions {
 
 	/**
 	 * Builds the object storing the chart instance and default values.
@@ -34,4 +34,14 @@ public class RadarOptions extends SingleScaleOptions {
 	public RadarOptions(IsChart chart, ChartOptions defaultValues) {
 		super(chart, defaultValues);
 	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.configuration.HasLineOptions#getOptions()
+	 */
+	@Override
+	public final ConfigurationOptions getOptions() {
+		return this;
+	}
+	
+	
 }

@@ -1296,7 +1296,7 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	 *         create a break in the line.
 	 */
 	public boolean isSpanGaps() {
-		return getValue(Property.SPAN_GAPS, getDefaultValues().getElements().getLine().isSpanGaps());
+		return getValue(Property.SPAN_GAPS, getDefaultValues().isSpanGaps());
 	}
 
 	/**

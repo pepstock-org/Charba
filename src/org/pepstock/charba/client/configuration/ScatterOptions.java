@@ -41,7 +41,7 @@ public class ScatterOptions extends MultiScalesOptions implements HasLineOptions
 	 * @see org.pepstock.charba.client.configuration.HasLineOptions#getOptions()
 	 */
 	@Override
-	public MultiScalesOptions getOptions() {
+	public final MultiScalesOptions getOptions() {
 		return this;
 	}
 

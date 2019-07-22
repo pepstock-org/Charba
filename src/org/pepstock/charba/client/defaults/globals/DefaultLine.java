@@ -44,8 +44,6 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 
 	private static final boolean DEFAULT_STEPPED = false;
 	
-	private static final boolean DEFAULT_SPANGAPS = true;
-
 	/**
 	 * Creates a defualt arc
 	 */
@@ -131,14 +129,6 @@ public final class DefaultLine extends AbstractDefaultOptionsElement implements 
 	@Override
 	public boolean isStepped() {
 		return DEFAULT_STEPPED;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.pepstock.charba.client.defaults.IsDefaultLine#isSpanGaps()
-	 */
-	@Override
-	public boolean isSpanGaps() {
-		return DEFAULT_SPANGAPS;
 	}
 
 }
