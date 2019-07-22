@@ -120,7 +120,7 @@ Here you can find the list of enhancement and updates available on `master` bran
        * `borderWidth`
        * `cubicInterpolationMode` (only line chart)
        * `fill`
-    * remove `min` and `max`properties from `Time` class and add them to `CartesianTimeTick`, as new CHART.JS implemented.
+    * remove `min` and `max`properties from `Time` class (both options and configuration) and add them to `CartesianTimeTick` (for configuration) and `Ticks` (for options), as new CHART.JS implemented.
     * implement `scaleService` to get and set scale defaults by scale type  
  * add `getPointStyleAsImage` and `isPointStyleAsImage` methods to `LegendLabelItem` class in order to manage images as point styles.
  * add `setPointStyle` methods, setting a image instance, to `LegendLabelItem` class in order to manage images as point styles.
