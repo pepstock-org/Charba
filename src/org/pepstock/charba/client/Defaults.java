@@ -110,8 +110,8 @@ public final class Defaults {
 		// checks if the options have already stored
 		if (!scaleOptions.containsKey(axisType.value())) {
 			// if not, creates and stores new options by axis type
-			GlobalScale scale = new GlobalScale(Chart.getScaleService().getScaleDefaults(axisType.value()));
-			scaleOptions.put(axisType.value(), scale);
+			GlobalScale storedScale = new GlobalScale(Chart.getScaleService().getScaleDefaults(axisType.value()));
+			scaleOptions.put(axisType.value(), storedScale);
 		}
 		// returns the existing options
 		return scaleOptions.get(axisType.value());

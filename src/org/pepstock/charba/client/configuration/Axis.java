@@ -126,7 +126,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	// user callbacks implementation for update
 	private AxisUpdateCallback axisUpdateCallback = null;
 	// stores axis type
-	private final AxisType type;
+	private final AxisType storeType;
 
 	/**
 	 * Name of properties of native object.
@@ -181,7 +181,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	Axis(IsChart chart, AxisType type) {
 		super(chart);
 		// stores internally the axis type
-		this.type = type;
+		this.storeType = type;
 		// sets the options (scale) to map attributes
 		// getting the defaults values for scales
 		setConfiguration(new ExtendedScale(new DefaultChartScale(getDefaultScale())));
@@ -321,7 +321,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			return options.getScale();
 		}
 		// returns default scale
-		return Defaults.get().getScale(this.type);
+		return Defaults.get().getScale(this.storeType);
 	}
 
 	/**
@@ -340,7 +340,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			}
 		}
 		// returns default scale
-		return Defaults.get().getScale(this.type);
+		return Defaults.get().getScale(this.storeType);
 	}
 
 	/**
