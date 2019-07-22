@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.defaults;
 
-import java.util.Date;
-
 import org.pepstock.charba.client.enums.TimeUnit;
 
 /**
@@ -34,19 +32,19 @@ public interface IsDefaultTime {
 	 */
 	boolean isIsoWeekday();
 
-	/**
-	 * If defined, this will override the data maximum.
-	 * 
-	 * @return If defined, this will override the data maximum.
-	 */
-	Date getMax();
-
-	/**
-	 * If defined, this will override the data minimum.
-	 * 
-	 * @return If defined, this will override the data minimum.
-	 */
-	Date getMin();
+//	/**
+//	 * If defined, this will override the data maximum.
+//	 * 
+//	 * @return If defined, this will override the data maximum.
+//	 */
+//	Date getMax();
+//
+//	/**
+//	 * If defined, this will override the data minimum.
+//	 * 
+//	 * @return If defined, this will override the data minimum.
+//	 */
+//	Date getMin();
 
 	/**
 	 * If defined, dates will be rounded to the start of this unit.

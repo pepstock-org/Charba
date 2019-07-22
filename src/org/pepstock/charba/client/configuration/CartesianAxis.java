@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
 import org.pepstock.charba.client.enums.Position;
 
@@ -50,8 +51,8 @@ abstract class CartesianAxis<T extends CartesianTick> extends Axis {
 	 * @param chart chart instance
 	 * @param cartesianType cartesian type
 	 */
-	CartesianAxis(IsChart chart, CartesianAxisType cartesianType) {
-		super(chart);
+	CartesianAxis(IsChart chart, AxisType type, CartesianAxisType cartesianType) {
+		super(chart, type);
 		// stores the axis type
 		this.cartesianType = cartesianType;
 		// sets to the objects

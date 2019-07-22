@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.options;
 
+import java.util.Date;
 import java.util.List;
 
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -25,6 +26,8 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.enums.TickSource;
+
+import com.google.gwt.core.client.JsDate;
 
 /**
  * All configuration for ticks of a chart.<br>
@@ -373,6 +376,35 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	public double getMin() {
 		return getValue(Property.MIN, getDefaultValues().getMin());
 	}
+	
+	/**
+	 * If defined, this will override the data minimum.
+	 * 
+	 * @param min If defined, this will override the data minimum.
+	 */
+	public void setMin(Date min) {
+		// checks if consistent
+		if (min != null) {
+			// sets min using the epoch of date
+			setMin(min.getTime());
+		} else {
+			// if here, removes property
+			removeIfExists(Property.MIN);
+		}
+
+	}
+
+	/**
+	 * If defined, this will override the data minimum.
+	 * 
+	 * @return If defined, this will override the data minimum.
+	 */
+	public Date getMinAsDate() {
+		// gets the value, getting the max with 0
+		double value = Math.max(getMin(), 0);
+		// transforms as date
+		return new Date((long) JsDate.create(value).getTime());
+	}
 
 	/**
 	 * Sets the user defined maximum number for the scale, overrides maximum value from data.
@@ -392,6 +424,34 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	 */
 	public double getMax() {
 		return getValue(Property.MAX, getDefaultValues().getMax());
+	}
+	
+	/**
+	 * If defined, this will override the data maximum.
+	 * 
+	 * @param max if defined, this will override the data maximum.
+	 */
+	public void setMax(Date max) {
+		// checks if consistent
+		if (max != null) {
+			// sets max using the epoch of date
+			setMax(max.getTime());
+		} else {
+			// if here, removes property
+			removeIfExists(Property.MAX);
+		}
+	}
+
+	/**
+	 * If defined, this will override the data maximum.
+	 * 
+	 * @return if defined, this will override the data maximum.
+	 */
+	public Date getMaxAsDate() {
+		// gets the value, getting the max with 0
+		double value = Math.max(getMax(), 0);
+		// transforms as date
+		return new Date((long) JsDate.create(value).getTime());
 	}
 
 	/**

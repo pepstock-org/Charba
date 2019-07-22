@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import java.util.Date;
-
 import org.pepstock.charba.client.enums.TimeUnit;
 
 /**
@@ -67,42 +65,6 @@ public class Time extends AxisContainer {
 	 */
 	public boolean isIsoWeekday() {
 		return getAxis().getScale().getTime().isIsoWeekday();
-	}
-
-	/**
-	 * If defined, this will override the data maximum.
-	 * 
-	 * @param max If defined, this will override the data maximum.
-	 */
-	public void setMax(Date max) {
-		getAxis().getScale().getTime().setMax(max);
-	}
-
-	/**
-	 * If defined, this will override the data maximum.
-	 * 
-	 * @return If defined, this will override the data maximum.
-	 */
-	public Date getMax() {
-		return getAxis().getScale().getTime().getMax();
-	}
-
-	/**
-	 * If defined, this will override the data minimum.
-	 * 
-	 * @param min If defined, this will override the data minimum.
-	 */
-	public void setMin(Date min) {
-		getAxis().getScale().getTime().setMin(min);
-	}
-
-	/**
-	 * If defined, this will override the data minimum.
-	 * 
-	 * @return If defined, this will override the data minimum.
-	 */
-	public Date getMin() {
-		return getAxis().getScale().getTime().getMin();
 	}
 
 	/**

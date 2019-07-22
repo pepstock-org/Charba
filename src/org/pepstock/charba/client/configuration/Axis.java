@@ -125,6 +125,8 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	private AxisTickToLabelConversionCallback axisTickToLabelConversionCallback = null;
 	// user callbacks implementation for update
 	private AxisUpdateCallback axisUpdateCallback = null;
+	// stores axis type
+	private final AxisType type;
 
 	/**
 	 * Name of properties of native object.
@@ -174,12 +176,17 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Builds the object storing the chart instance.
 	 * 
 	 * @param chart chart instance
+	 * @param type axis type 
 	 */
-	Axis(IsChart chart) {
+	Axis(IsChart chart, AxisType type) {
 		super(chart);
+		// stores internally the axis type
+		this.type = type;
 		// sets the options (scale) to map attributes
 		// getting the defaults values for scales
 		setConfiguration(new ExtendedScale(new DefaultChartScale(getDefaultScale())));
+		// stores axis type
+		setType(type);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -213,7 +220,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * 
 	 * @param type type of axis
 	 */
-	public void setType(AxisType type) {
+	private void setType(AxisType type) {
 		getScale().setType(type);
 	}
 
@@ -314,7 +321,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			return options.getScale();
 		}
 		// returns default scale
-		return Defaults.get().getScale();
+		return Defaults.get().getScale(this.type);
 	}
 
 	/**
@@ -333,7 +340,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 			}
 		}
 		// returns default scale
-		return Defaults.get().getScale();
+		return Defaults.get().getScale(this.type);
 	}
 
 	/**

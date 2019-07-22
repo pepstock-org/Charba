@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.options;
 
-import java.util.Date;
-
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
@@ -119,46 +117,6 @@ public final class Time extends AbstractModel<Scale, IsDefaultTime> implements I
 	 */
 	public boolean isIsoWeekday() {
 		return getValue(Property.ISO_WEEKDAY, getDefaultValues().isIsoWeekday());
-	}
-
-	/**
-	 * If defined, this will override the data maximum.
-	 * 
-	 * @param max if defined, this will override the data maximum.
-	 */
-	public void setMax(Date max) {
-		setValue(Property.MAX, max);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * If defined, this will override the data maximum.
-	 * 
-	 * @return if defined, this will override the data maximum.
-	 */
-	public Date getMax() {
-		return getValue(Property.MAX, getDefaultValues().getMax());
-	}
-
-	/**
-	 * If defined, this will override the data minimum.
-	 * 
-	 * @param min if defined, this will override the data minimum.
-	 */
-	public void setMin(Date min) {
-		setValue(Property.MIN, min);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * If defined, this will override the data minimum.
-	 * 
-	 * @return if defined, this will override the data minimum.
-	 */
-	public Date getMin() {
-		return getValue(Property.MIN, getDefaultValues().getMin());
 	}
 
 	/**

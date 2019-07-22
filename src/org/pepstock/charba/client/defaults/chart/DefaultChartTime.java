@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.defaults.chart;
 
-import java.util.Date;
-
 import org.pepstock.charba.client.defaults.IsDefaultTime;
 import org.pepstock.charba.client.enums.TimeUnit;
 import org.pepstock.charba.client.options.Time;
@@ -49,25 +47,25 @@ public final class DefaultChartTime implements IsDefaultTime {
 		return time.isIsoWeekday();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getMax()
-	 */
-	@Override
-	public Date getMax() {
-		return time.getMax();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getMin()
-	 */
-	@Override
-	public Date getMin() {
-		return time.getMin();
-	}
+//	/*
+//	 * (non-Javadoc)
+//	 * 
+//	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getMax()
+//	 */
+//	@Override
+//	public Date getMax() {
+//		return time.getMax();
+//	}
+//
+//	/*
+//	 * (non-Javadoc)
+//	 * 
+//	 * @see org.pepstock.charba.client.defaults.IsDefaultTime#getMin()
+//	 */
+//	@Override
+//	public Date getMin() {
+//		return time.getMin();
+//	}
 
 	/*
 	 * (non-Javadoc)

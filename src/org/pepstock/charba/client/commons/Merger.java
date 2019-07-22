@@ -18,10 +18,12 @@ package org.pepstock.charba.client.commons;
 import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.GlobalOptions;
+import org.pepstock.charba.client.GlobalScale;
 import org.pepstock.charba.client.Helpers;
 import org.pepstock.charba.client.Injector;
 import org.pepstock.charba.client.ScaleType;
 import org.pepstock.charba.client.Type;
+import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.options.Scale;
 import org.pepstock.charba.client.resources.ResourcesType;
 
@@ -115,10 +117,10 @@ public final class Merger {
 		// chart without scales don't do anything
 		if (ScaleType.SINGLE.equals(type.scaleType())) {
 			// manages single scale chart type
-			handleSingleScalesType(chartOptions, scaleOptions);
+			handleSingleScalesType(base, chartOptions, scaleOptions);
 		} else if (ScaleType.MULTI.equals(type.scaleType())) {
 			// manages multi scale chart type
-			handleMultiScalesType(chartOptions, scaleOptions);
+			handleMultiScalesType(base, chartOptions, scaleOptions);
 		}
 		// merges chart options (maybe already updated by scales)
 		// and the global ones
@@ -131,7 +133,7 @@ public final class Merger {
 	 * @param chartOptions default chart options
 	 * @param scaleOptions default scale options
 	 */
-	private void handleMultiScalesType(NativeObject chartOptions, NativeObject scaleOptions) {
+	private void handleMultiScalesType(ChartOptions base, NativeObject chartOptions, NativeObject scaleOptions) {
 		// checks if scales object is present
 		if (chartOptions.hasProperty(Property.SCALES.value())) {
 			// if here, the chart has got 2 or more scales
@@ -143,9 +145,29 @@ public final class Merger {
 				// gets the array about x axes
 				NativeArrayDescriptor<ArrayObject> xScalesDescriptor = scales.getArrayProperty(Property.X_AXES.value());
 				ArrayObject xScales = xScalesDescriptor.getValue();
-				// scans all x axes applying the default scale
-				for (int i = 0; i < xScales.length(); i++) {
-					xScales.set(i, mergeNativeObjects(xScales.get(i), scaleOptions));
+				// create instance for axis type
+				AxisType type = null;
+				// checks if there is at least 1 element
+				if (!base.getScales().getXAxes().isEmpty()) {
+					// gets default axis type of chart
+					type = base.getScales().getXAxes().get(0).getType();
+				}
+				// checks if axis type is consistent
+				if (Key.isValid(type)) {
+					// gets default by axis type
+					GlobalScale axisDefault = Defaults.get().getScale(type);
+					// scans all x axes applying the default scale
+					for (int i = 0; i < xScales.length(); i++) {
+						// before it applies the axis defaults by its type
+						NativeObject tempObject = mergeNativeObjects(xScales.get(i), axisDefault.getNativeObject());
+						// then it applies defaults scale
+						xScales.set(i, mergeNativeObjects(tempObject, scaleOptions));
+					}
+				} else {
+					// scans all x axes applying the default scale
+					for (int i = 0; i < xScales.length(); i++) {
+						xScales.set(i, mergeNativeObjects(xScales.get(i), scaleOptions));
+					}
 				}
 			}
 			// checks if there is y axes
@@ -153,9 +175,29 @@ public final class Merger {
 				// gets the array about y axes
 				NativeArrayDescriptor<ArrayObject> yScalesDescriptor = scales.getArrayProperty(Property.Y_AXES.value());
 				ArrayObject yScales = yScalesDescriptor.getValue();
-				// scans all x axes applying the default scale
-				for (int i = 0; i < yScales.length(); i++) {
-					yScales.set(i, mergeNativeObjects(yScales.get(i), scaleOptions));
+				// create instance for axis type
+				AxisType type = null;
+				// checks if there is at least 1 element
+				if (!base.getScales().getYAxes().isEmpty()) {
+					// gets default axis type of chart
+					type = base.getScales().getYAxes().get(0).getType();
+				}
+				// checks if axis type is consistent
+				if (Key.isValid(type)) {
+					// gets default by axis type
+					GlobalScale axisDefault = Defaults.get().getScale(type);
+					// scans all x axes applying the default scale
+					for (int i = 0; i < yScales.length(); i++) {
+						// before it applies the axis defaults by its type
+						NativeObject tempObject = mergeNativeObjects(yScales.get(i), axisDefault.getNativeObject());
+						// then it applies defaults scale
+						yScales.set(i, mergeNativeObjects(tempObject, scaleOptions));
+					}
+				} else {
+					// scans all x axes applying the default scale
+					for (int i = 0; i < yScales.length(); i++) {
+						yScales.set(i, mergeNativeObjects(yScales.get(i), scaleOptions));
+					}
 				}
 			}
 		}
@@ -167,13 +209,25 @@ public final class Merger {
 	 * @param chartOptions default chart options
 	 * @param scaleOptions default scale options
 	 */
-	private void handleSingleScalesType(NativeObject chartOptions, NativeObject scaleOptions) {
+	private void handleSingleScalesType(ChartOptions base, NativeObject chartOptions, NativeObject scaleOptions) {
 		// checks if scale object is present
 		if (chartOptions.hasProperty(Property.SCALE.value())) {
 			// if has got scale
 			// apply the default scale to single scale of chart options
 			NativeObjectDescriptor descriptor = chartOptions.getObjectProperty(Property.SCALE.value());
-			chartOptions.defineObjectProperty(Property.SCALE.value(), mergeNativeObjects(descriptor.getValue(), scaleOptions));
+			// gets default axis type of chart
+			AxisType type = base.getScale().getType();
+			if (Key.isValid(type)) {
+				// gets default by axis type
+				GlobalScale axisDefault = Defaults.get().getScale(type);
+				// before it applies the axis defaults by its type
+				NativeObject tempObject = mergeNativeObjects(descriptor.getValue(), axisDefault.getNativeObject());
+				// then it applies defaults scale
+				chartOptions.defineObjectProperty(Property.SCALE.value(), mergeNativeObjects(tempObject, scaleOptions));
+			} else {
+				// if here it applies ONLY scale default
+				chartOptions.defineObjectProperty(Property.SCALE.value(), mergeNativeObjects(descriptor.getValue(), scaleOptions));
+			}
 		}
 	}
 

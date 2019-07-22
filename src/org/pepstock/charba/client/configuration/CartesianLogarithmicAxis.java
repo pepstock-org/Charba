@@ -45,9 +45,7 @@ public class CartesianLogarithmicAxis extends CartesianAxis<CartesianLogarithmic
 	 * @param cartesianType cartesian axis type.
 	 */
 	public CartesianLogarithmicAxis(IsChart chart, CartesianAxisType cartesianType) {
-		super(chart, cartesianType);
-		// sets axis type
-		super.setType(AxisType.LOGARITHMIC);
+		super(chart, AxisType.LOGARITHMIC, cartesianType);
 		// creates the ticks instance
 		this.ticks = new CartesianLogarithmicTick(this);
 	}

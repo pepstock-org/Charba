@@ -56,7 +56,7 @@ public interface IsLinearTick {
 			return getAxis().getScale().getTicks().isBeginAtZero();
 		}
 		// if here, axis is not consistent
-		return Defaults.get().getScale().getTicks().isBeginAtZero();
+		return Defaults.get().getScale(getAxis().getType()).getTicks().isBeginAtZero();
 	}
 
 	/**
@@ -82,7 +82,7 @@ public interface IsLinearTick {
 			return getAxis().getScale().getTicks().getMin();
 		}
 		// if here, axis is not consistent
-		return Defaults.get().getScale().getTicks().getMin();
+		return Defaults.get().getScale(getAxis().getType()).getTicks().getMin();
 	}
 
 	/**
@@ -108,7 +108,7 @@ public interface IsLinearTick {
 			return getAxis().getScale().getTicks().getMax();
 		}
 		// if here, axis is not consistent
-		return Defaults.get().getScale().getTicks().getMax();
+		return Defaults.get().getScale(getAxis().getType()).getTicks().getMax();
 	}
 
 	/**
@@ -134,7 +134,7 @@ public interface IsLinearTick {
 			return getAxis().getScale().getTicks().getMaxTicksLimit();
 		}
 		// if here, axis is not consistent
-		return Defaults.get().getScale().getTicks().getMaxTicksLimit();
+		return Defaults.get().getScale(getAxis().getType()).getTicks().getMaxTicksLimit();
 	}
 
 	/**
@@ -160,7 +160,7 @@ public interface IsLinearTick {
 			return getAxis().getScale().getTicks().getStepSize();
 		}
 		// if here, axis is not consistent
-		return Defaults.get().getScale().getTicks().getStepSize();
+		return Defaults.get().getScale(getAxis().getType()).getTicks().getStepSize();
 	}
 
 	/**
@@ -186,7 +186,7 @@ public interface IsLinearTick {
 			return getAxis().getScale().getTicks().getSuggestedMax();
 		}
 		// if here, axis is not consistent
-		return Defaults.get().getScale().getTicks().getSuggestedMax();
+		return Defaults.get().getScale(getAxis().getType()).getTicks().getSuggestedMax();
 	}
 
 	/**
@@ -212,7 +212,7 @@ public interface IsLinearTick {
 			return getAxis().getScale().getTicks().getSuggestedMin();
 		}
 		// if here, axis is not consistent
-		return Defaults.get().getScale().getTicks().getSuggestedMin();
+		return Defaults.get().getScale(getAxis().getType()).getTicks().getSuggestedMin();
 	}
 
 }

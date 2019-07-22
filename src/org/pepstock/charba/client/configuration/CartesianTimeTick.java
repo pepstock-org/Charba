@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import java.util.Date;
+
 import org.pepstock.charba.client.enums.TickSource;
 
 /**
@@ -51,5 +53,41 @@ public class CartesianTimeTick extends CartesianTick {
 	 */
 	public TickSource getSource() {
 		return getConfiguration().getSource();
+	}
+	
+	/**
+	 * If defined, this will override the data maximum.
+	 * 
+	 * @param max If defined, this will override the data maximum.
+	 */
+	public void setMax(Date max) {
+		getConfiguration().setMax(max);
+	}
+
+	/**
+	 * If defined, this will override the data maximum.
+	 * 
+	 * @return If defined, this will override the data maximum.
+	 */
+	public Date getMax() {
+		return getConfiguration().getMaxAsDate();
+	}
+
+	/**
+	 * If defined, this will override the data minimum.
+	 * 
+	 * @param min If defined, this will override the data minimum.
+	 */
+	public void setMin(Date min) {
+		getConfiguration().setMin(min);
+	}
+
+	/**
+	 * If defined, this will override the data minimum.
+	 * 
+	 * @return If defined, this will override the data minimum.
+	 */
+	public Date getMin() {
+		return getConfiguration().getMinAsDate();
 	}
 }

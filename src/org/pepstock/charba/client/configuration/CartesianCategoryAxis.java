@@ -44,9 +44,7 @@ public class CartesianCategoryAxis extends CartesianAxis<CartesianCategoryTick> 
 	 * @param cartesianType cartesian axis type.
 	 */
 	public CartesianCategoryAxis(IsChart chart, CartesianAxisType cartesianType) {
-		super(chart, cartesianType);
-		// sets axis type
-		super.setType(AxisType.CATEGORY);
+		super(chart, AxisType.CATEGORY, cartesianType);
 		// creates the ticks instance
 		this.ticks = new CartesianCategoryTick(this);
 	}

@@ -24,6 +24,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.controllers.Controllers;
+import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.plugins.GlobalPlugins;
 import org.pepstock.charba.client.resources.ResourcesType;
 
@@ -46,6 +47,8 @@ public final class Defaults {
 	private final GlobalPlugins plugins;
 	// cache for chart options already implemented to improve performance
 	private final Map<String, ChartOptions> chartOptions = new HashMap<>();
+	// cache for scale options already implemented to improve performance
+	private final Map<String, GlobalScale> scaleOptions = new HashMap<>();
 	// controllers
 	private final Controllers controllers;
 
@@ -93,6 +96,42 @@ public final class Defaults {
 	 */
 	public GlobalScale getScale() {
 		return scale;
+	}
+
+	/**
+	 * Returns the global scale by axis type.
+	 * 
+	 * @param axisType the axis type to use to get defaults.
+	 * @return a global scale for that axis type.
+	 */
+	public GlobalScale getScale(AxisType axisType) {
+		// checks if axis type is consistent
+		Key.checkIfValid(axisType);
+		// checks if the options have already stored
+		if (!scaleOptions.containsKey(axisType.value())) {
+			// if not, creates and stores new options by axis type
+			GlobalScale scale = new GlobalScale(Chart.getScaleService().getScaleDefaults(axisType.value()));
+			scaleOptions.put(axisType.value(), scale);
+		}
+		// returns the existing options
+		return scaleOptions.get(axisType.value());
+	}
+
+	/**
+	 * Update the global scale by axis type.
+	 * 
+	 * @param axisType the axis type to use to set defaults.
+	 */
+	public void updateScale(AxisType axisType) {
+		// checks if axis type is consistent
+		Key.checkIfValid(axisType);
+		// checks if the options have already stored
+		if (scaleOptions.containsKey(axisType.value())) {
+			// if not, gets options by axis type
+			GlobalScale scale = scaleOptions.get(axisType.value());
+			// stores the defaults options by scale service
+			Chart.getScaleService().updateScaleDefaults(axisType.value(), scale.getObject());
+		}
 	}
 
 	/**

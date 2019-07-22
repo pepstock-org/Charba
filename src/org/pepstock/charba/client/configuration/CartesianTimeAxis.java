@@ -49,9 +49,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	 * @param cartesianType cartesian axis type.
 	 */
 	public CartesianTimeAxis(IsChart chart, CartesianAxisType cartesianType) {
-		super(chart, cartesianType);
-		// sets axis type
-		super.setType(AxisType.TIME);
+		super(chart, AxisType.TIME, cartesianType);
 		// creates the time object
 		this.time = new Time(this);
 		// creates the ticks instance
