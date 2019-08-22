@@ -182,7 +182,7 @@ final class LiningDatasetFiller extends Filler {
 		} else if (Fill.isPredefined(fill)) {
 			// is predefined
 			// returns the string
-			return fill.getValue();
+			return fill.value();
 		} else if (FillingMode.ABSOLUTE_DATASET_INDEX.equals(fill.getMode())) {
 			// is absolute
 			// returns the integer
