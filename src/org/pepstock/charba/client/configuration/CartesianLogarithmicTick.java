@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.TickCallback;
+
 /**
  * The logarithmic scale is use to chart numerical data. It can be placed on either the x or y axis.<br>
  * As the name suggests, logarithmic interpolation is used to determine where a value lies on the axis.
@@ -24,6 +26,9 @@ package org.pepstock.charba.client.configuration;
  */
 public class CartesianLogarithmicTick extends CartesianTick {
 
+	// handler for callback for category axis
+	private final LinearTickHandler<CartesianLogarithmicTick> tickHandler;
+	
 	/**
 	 * Builds the object storing the axis instance.
 	 * 
@@ -31,6 +36,8 @@ public class CartesianLogarithmicTick extends CartesianTick {
 	 */
 	CartesianLogarithmicTick(Axis axis) {
 		super(axis);
+		// creates handler
+		this.tickHandler = new LinearTickHandler<>(axis, this);
 	}
 
 	/**
@@ -67,6 +74,24 @@ public class CartesianLogarithmicTick extends CartesianTick {
 	 */
 	public double getMax() {
 		return getConfiguration().getMax();
+	}
+	
+	/**
+	 * Returns the user callback instance.
+	 * 
+	 * @return the callback
+	 */
+	public TickCallback getCallback() {
+		return tickHandler.getCallback();
+	}
+
+	/**
+	 * Sets the user callback instance.
+	 * 
+	 * @param callback the callback to set
+	 */
+	public void setCallback(TickCallback callback) {
+		tickHandler.setCallback(callback);
 	}
 
 }

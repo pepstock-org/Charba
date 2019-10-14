@@ -17,6 +17,7 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.Date;
 
+import org.pepstock.charba.client.callbacks.TimeTickCallback;
 import org.pepstock.charba.client.enums.TickSource;
 
 /**
@@ -27,6 +28,9 @@ import org.pepstock.charba.client.enums.TickSource;
  *
  */
 public class CartesianTimeTick extends CartesianTick {
+	
+	// handler for callback for category axis
+	private final TimeTickHandler tickHandler; 
 
 	/**
 	 * Builds the object storing the axis instance.
@@ -35,6 +39,8 @@ public class CartesianTimeTick extends CartesianTick {
 	 */
 	CartesianTimeTick(Axis axis) {
 		super(axis);
+		// creates handler
+		this.tickHandler = new TimeTickHandler(axis, this);
 	}
 
 	/**
@@ -89,5 +95,23 @@ public class CartesianTimeTick extends CartesianTick {
 	 */
 	public Date getMin() {
 		return getConfiguration().getMinAsDate();
+	}
+	
+	/**
+	 * Returns the user callback instance.
+	 * 
+	 * @return the callback
+	 */
+	public TimeTickCallback getCallback() {
+		return tickHandler.getCallback();
+	}
+
+	/**
+	 * Sets the user callback instance.
+	 * 
+	 * @param callback the callback to set
+	 */
+	public void setCallback(TimeTickCallback callback) {
+		tickHandler.setCallback(callback);
 	}
 }

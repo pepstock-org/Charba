@@ -124,12 +124,15 @@ Here you can find the list of enhancement and updates available on `master` bran
     * implement `scaleService` to get and set scale defaults by scale type  
  * add `getPointStyleAsImage` and `isPointStyleAsImage` methods to `LegendLabelItem` class in order to manage images as point styles.
  * add `setPointStyle` methods, setting a image instance, to `LegendLabelItem` class in order to manage images as point styles.
+ * add `CategoryTickCallback`and `TimeTickCallback` to manage axes which are managing strings and dates as data types. 
+ * add `TimeTickItem` in order to manage the different signature of CHART.JS callback when there is a cartesian time axis.
 
 ### Fixed Bugs
 
  * [#36](https://github.com/pepstock-org/Charba/issues/36) removed `setShowLine` method (which it will set always to `false` the options) from `ScatterDataset` in order to be able to set it freely. Thanks @lightingft
  * [#37](https://github.com/pepstock-org/Charba/issues/37) added ANT target `build-all-sources` to create a ZIP file (`charba-[version.release]-sources.zip`) which will be added to GitHub release page as artifact to be consumed, every time new release will be published. The file will contain all sources (java, js) for security scanning purposes. Thanks @jake1164
  * [#40](https://github.com/pepstock-org/Charba/issues/40) added scale configuration to the chart one, only for chart with a single scale.
+ * [#42](https://github.com/pepstock-org/Charba/issues/42) added `CategoryTickCallback`and `TimeTickCallback` to manage axes which are managing strings and dates as data types. Thanks @ak80
  
 ### Development
 

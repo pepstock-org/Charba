@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.TickCallback;
 import org.pepstock.charba.client.colors.IsColor;
 
 /**
@@ -24,6 +25,9 @@ import org.pepstock.charba.client.colors.IsColor;
  *
  */
 public class RadialLinearTick extends Tick implements IsLinearTick {
+	
+	// handler for callback for category axis
+	private final LinearTickHandler<RadialLinearTick> tickHandler;
 
 	/**
 	 * Builds the object storing the axis which this tick belongs to.
@@ -32,6 +36,8 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	 */
 	RadialLinearTick(Axis axis) {
 		super(axis);
+		// creates handler
+		this.tickHandler = new LinearTickHandler<>(axis, this);
 	}
 
 	/**
@@ -140,6 +146,24 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	 */
 	public int getPrecision() {
 		return getConfiguration().getPrecision();
+	}
+	
+	/**
+	 * Returns the user callback instance.
+	 * 
+	 * @return the callback
+	 */
+	public TickCallback getCallback() {
+		return tickHandler.getCallback();
+	}
+
+	/**
+	 * Sets the user callback instance.
+	 * 
+	 * @param callback the callback to set
+	 */
+	public void setCallback(TickCallback callback) {
+		tickHandler.setCallback(callback);
 	}
 
 }

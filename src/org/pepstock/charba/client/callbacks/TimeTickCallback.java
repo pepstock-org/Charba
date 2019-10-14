@@ -18,19 +18,16 @@ package org.pepstock.charba.client.callbacks;
 import java.util.List;
 
 import org.pepstock.charba.client.configuration.Axis;
-import org.pepstock.charba.client.configuration.CartesianLinearAxis;
-import org.pepstock.charba.client.configuration.CartesianLogarithmicAxis;
-import org.pepstock.charba.client.configuration.RadialAxis;
+import org.pepstock.charba.client.configuration.CartesianTimeAxis;
+import org.pepstock.charba.client.items.TimeTickItem;
 
 /**
- * Interface to implement if wants to change the tick marks to include information about the data type, for axes which are showing data as numbers.
+ * Interface to implement if wants to change the tick marks to include information about the data type, for cartesian time axes.
  * 
  * @author Andrea "Stock" Stocchero
- * @see CartesianLinearAxis
- * @see CartesianLogarithmicAxis
- * @see RadialAxis
+ * @see CartesianTimeAxis
  */
-public interface TickCallback {
+public interface TimeTickCallback {
 
 	/**
 	 * Changes the tick marks to include information about the data type.
@@ -41,6 +38,6 @@ public interface TickCallback {
 	 * @param values list of all tick values
 	 * @return the tick to apply or if the callback returns <code>null</code> the associated grid line will be hidden.
 	 */
-	String onCallback(Axis axis, double value, int index, List<Double> values);
+	String onCallback(Axis axis, String value, int index, List<TimeTickItem> values);
 
 }

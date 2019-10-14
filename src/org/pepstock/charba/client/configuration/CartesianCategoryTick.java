@@ -17,6 +17,8 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.CategoryTickCallback;
+
 /**
  * The category scale provides the following options for configuring tick marks.<br>
  * The labels are drawn from one of the label arrays included in the chart data.
@@ -24,6 +26,9 @@ import java.util.List;
  * @author Andrea "Stock" Stocchero
  */
 public class CartesianCategoryTick extends CartesianTick {
+	
+	// handler for callback for category axis
+	private final CategoryTickHandler tickHandler; 
 
 	/**
 	 * Builds the object storing the axis instance.
@@ -32,6 +37,8 @@ public class CartesianCategoryTick extends CartesianTick {
 	 */
 	CartesianCategoryTick(Axis axis) {
 		super(axis);
+		// creates handler
+		this.tickHandler = new CategoryTickHandler(axis, this);
 	}
 
 	/**
@@ -95,6 +102,24 @@ public class CartesianCategoryTick extends CartesianTick {
 	 */
 	public String getMax() {
 		return getConfiguration().getMaxAsString();
+	}
+	
+	/**
+	 * Returns the user callback instance.
+	 * 
+	 * @return the callback
+	 */
+	public CategoryTickCallback getCallback() {
+		return tickHandler.getCallback();
+	}
+
+	/**
+	 * Sets the user callback instance.
+	 * 
+	 * @param callback the callback to set
+	 */
+	public void setCallback(CategoryTickCallback callback) {
+		tickHandler.setCallback(callback);
 	}
 
 }

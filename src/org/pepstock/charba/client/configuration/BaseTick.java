@@ -15,17 +15,10 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.callbacks.TickCallback;
 import org.pepstock.charba.client.colors.IsColor;
-import org.pepstock.charba.client.commons.ArrayDouble;
-import org.pepstock.charba.client.commons.ArrayListHelper;
-import org.pepstock.charba.client.commons.CallbackProxy;
-import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.options.AbstractTick;
-
-import jsinterop.annotations.JsFunction;
 
 /**
  * Base object to map an axis tick.<br>
@@ -37,46 +30,13 @@ import jsinterop.annotations.JsFunction;
  */
 abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 
-	// ---------------------------
-	// -- JAVASCRIPT FUNCTIONS ---
-	// ---------------------------
-
-	/**
-	 * Java script FUNCTION callback when tick is created.<br>
-	 * Must be an interface with only 1 method.
-	 * 
-	 * @author Andrea "Stock" Stocchero
-	 */
-	@JsFunction
-	interface ProxyTickCallback {
-
-		/**
-		 * Method of function to be called when tick is created.
-		 * 
-		 * @param context value of <code>this</code> to the execution context of function.
-		 * @param value value of the tick
-		 * @param index index of tick
-		 * @param values array with all values of ticks
-		 * @return string representation of tick
-		 */
-		String call(Object context, double value, int index, ArrayDouble values);
-	}
-
-	// ---------------------------
-	// -- CALLBACKS PROXIES ---
-	// ---------------------------
-
-	// callback proxy to invoke the tick function
-	private final CallbackProxy<ProxyTickCallback> tickCallbackProxy = JsHelper.get().newCallbackProxy();
-	// user callback instance
-	private TickCallback callback = null;
 	// the axis instance, owner of this tick
 	private final T configuration;
 
 	/**
 	 * Name of properties of native object.
 	 */
-	private enum Property implements Key
+	enum Property implements Key
 	{
 		CALLBACK("callback");
 
@@ -114,19 +74,6 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 		super(axis);
 		// stores the options element
 		this.configuration = configuration;
-
-		// -------------------------------
-		// -- SET CALLBACKS to PROXIES ---
-		// -------------------------------
-		tickCallbackProxy.setCallback((context, value, index, values) -> {
-			// checks if user callback is consistent
-			if (callback != null) {
-				// then calls user callback
-				return callback.onCallback(getAxis(), value, index, ArrayListHelper.unmodifiableList(values));
-			}
-			// default tick is the string representation of the tick value
-			return String.valueOf(value);
-		});
 	}
 
 	/**
@@ -265,30 +212,4 @@ abstract class BaseTick<T extends AbstractTick<?, ?>> extends AxisContainer {
 		return getConfiguration().getLineHeightAsString();
 	}
 
-	/**
-	 * Returns the user callback instance.
-	 * 
-	 * @return the callback
-	 */
-	public TickCallback getCallback() {
-		return callback;
-	}
-
-	/**
-	 * Sets the user callback instance.
-	 * 
-	 * @param callback the callback to set
-	 */
-	public void setCallback(TickCallback callback) {
-		// sets the callback
-		this.callback = callback;
-		// checks if callback is consistent
-		if (callback != null) {
-			// adds the callback proxy function to java script object
-			getAxis().getConfiguration().setCallback(configuration, Property.CALLBACK, tickCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getAxis().getConfiguration().setCallback(configuration, Property.CALLBACK, null);
-		}
-	}
 }

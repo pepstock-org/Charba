@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.TickCallback;
+
 /**
  * The linear scale is use to chart numerical data.<br>
  * It can be placed on either the x or y axis.<br>
@@ -24,6 +26,9 @@ package org.pepstock.charba.client.configuration;
  * @author Andrea "Stock" Stocchero
  */
 public class CartesianLinearTick extends CartesianTick implements IsLinearTick {
+	
+	// handler for callback for category axis
+	private final LinearTickHandler<CartesianLinearTick> tickHandler; 
 
 	/**
 	 * Builds the object storing the axis instance.
@@ -32,6 +37,8 @@ public class CartesianLinearTick extends CartesianTick implements IsLinearTick {
 	 */
 	CartesianLinearTick(Axis axis) {
 		super(axis);
+		// creates handler
+		this.tickHandler = new LinearTickHandler<>(axis, this);
 	}
 
 	/**
@@ -50,6 +57,24 @@ public class CartesianLinearTick extends CartesianTick implements IsLinearTick {
 	 */
 	public int getPrecision() {
 		return getConfiguration().getPrecision();
+	}
+	
+	/**
+	 * Returns the user callback instance.
+	 * 
+	 * @return the callback
+	 */
+	public TickCallback getCallback() {
+		return tickHandler.getCallback();
+	}
+
+	/**
+	 * Sets the user callback instance.
+	 * 
+	 * @param callback the callback to set
+	 */
+	public void setCallback(TickCallback callback) {
+		tickHandler.setCallback(callback);
 	}
 
 }
