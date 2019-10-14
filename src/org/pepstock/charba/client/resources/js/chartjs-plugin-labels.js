@@ -436,12 +436,14 @@
 
   Chart.plugins.register({
     id: 'labels',
-    beforeDatasetsUpdate: function (chart, options) {
+    beforeDatasetsUpdate: function (chart, optionParams) {
       if (!SUPPORTED_TYPES[chart.config.type]) {
         return;
       }
-      if (!Array.isArray(options)) {
-        options = [options];
+      if (!Array.isArray(optionParams)) {
+        options = [optionParams];
+      } else {
+        options = optionParams;
       }
       var count = options.length;
       if (!chart._labels || count !== chart._labels.length) {
