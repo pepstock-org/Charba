@@ -440,10 +440,9 @@
       if (!SUPPORTED_TYPES[chart.config.type]) {
         return;
       }
+      var options = optionParams;
       if (!Array.isArray(optionParams)) {
         options = [optionParams];
-      } else {
-        options = optionParams;
       }
       var count = options.length;
       if (!chart._labels || count !== chart._labels.length) {
