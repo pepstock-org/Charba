@@ -15,8 +15,6 @@
 */
 package org.pepstock.charba.client.items;
 
-import java.util.Date;
-
 import com.google.gwt.dom.client.ImageElement;
 
 /**
@@ -51,11 +49,6 @@ public final class UndefinedValues {
 	 * Default value for ImageElement instances, <b>null</b>.
 	 */
 	public static final ImageElement IMAGE_ELEMENT = null;
-
-	/**
-	 * Default value for Date instances, <b>null</b>.
-	 */
-	public static final Date DATE = null;
 
 	/**
 	 * To avoid any instantiation

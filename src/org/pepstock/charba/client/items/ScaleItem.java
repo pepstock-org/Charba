@@ -286,7 +286,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 		}
 		// if here is not a number
 		// then returns undefined double
-		return UndefinedValues.DATE;
+		return null;
 	}
 
 	/**
@@ -307,7 +307,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 		}
 		// if here is not a number
 		// then returns undefined double
-		return UndefinedValues.DATE;
+		return null;
 	}
 
 	/**

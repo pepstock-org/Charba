@@ -20,7 +20,6 @@ import java.util.Date;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
-import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Used for sparse datasets, such as those in scatter charts. Each data point is specified using an object containing x and y
@@ -159,7 +158,7 @@ public final class DataPoint extends NativeObjectContainer {
 	 * @return T value. <code>null</code> is not set.
 	 */
 	public Date getT() {
-		return getValue(Property.T, UndefinedValues.DATE);
+		return getValue(Property.T, (Date) null);
 	}
 
 	/**

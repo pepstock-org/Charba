@@ -83,7 +83,7 @@ public final class TimeTickItem extends ScaleTickItem {
 		// checks if value is consistent
 		if (Double.isNaN(timeValue)) {
 			// if not, returns null
-			return UndefinedValues.DATE;
+			return null;
 		}
 		// gets the value, creating a js date and returning a date
 		return new Date((long) JsDate.create(timeValue).getTime());
