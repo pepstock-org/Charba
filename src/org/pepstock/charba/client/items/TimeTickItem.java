@@ -75,7 +75,7 @@ public final class TimeTickItem extends ScaleTickItem {
 	/**
 	 * Returns the date of the tick.
 	 * 
-	 * @return the date of the tick or {@link UndefinedValues#DATE} if missing.
+	 * @return the date of the tick or <code>null</code> if missing.
 	 */
 	public Date getValue() {
 		// gets the value

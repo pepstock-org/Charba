@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.AxisBuildTicksCallback;
 import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.CartesianAxisType;
 
@@ -27,6 +28,8 @@ import org.pepstock.charba.client.enums.CartesianAxisType;
 public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> {
 
 	private final CartesianLinearTick ticks;
+	
+	private final LinearAxisBuildTicksCallbackHandler buildTicksCallbackHandler;
 
 	/**
 	 * Builds the object storing the chart instance. Axis type is Y by default.
@@ -47,6 +50,8 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> {
 		super(chart, AxisType.LINEAR, cartesianType);
 		// creates the ticks instance
 		this.ticks = new CartesianLinearTick(this);
+		// create build ticks callback handler
+		this.buildTicksCallbackHandler = new LinearAxisBuildTicksCallbackHandler(this);
 	}
 
 	/*
@@ -57,6 +62,24 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> {
 	@Override
 	public CartesianLinearTick getTicks() {
 		return ticks;
+	}
+	
+	/**
+	 * Returns the user callback that runs before/after ticks are created.
+	 * 
+	 * @return the axisBuildTicksCallback
+	 */
+	public AxisBuildTicksCallback getAxisBuildTicksCallback() {
+		return buildTicksCallbackHandler.getCallback();
+	}
+
+	/**
+	 * Sets the user callback that runs before/after ticks are created.
+	 * 
+	 * @param axisBuildTicksCallback the axisBuildTicksCallback to set
+	 */
+	public void setAxisBuildTicksCallback(AxisBuildTicksCallback axisBuildTicksCallback) {
+		buildTicksCallbackHandler.setCallback(axisBuildTicksCallback);
 	}
 
 }

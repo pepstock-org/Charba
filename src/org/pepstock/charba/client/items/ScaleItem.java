@@ -271,7 +271,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the max value of scale.
 	 * 
-	 * @return the max value of scale. Default is {@link UndefinedValues#DATE}.
+	 * @return the max value of scale. If missing returns is <code>null</code>.
 	 */
 	public final Date getMaxAsDate() {
 		// checks if value is a number and the axis is a time
@@ -292,7 +292,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the minimum value of scale.
 	 * 
-	 * @return the minimum value of scale. Default is {@link UndefinedValues#DATE}.
+	 * @return the minimum value of scale. If missing returns is <code>null</code>.
 	 */
 	public final Date getMinAsDate() {
 		// checks if value is a number and the axis is a time

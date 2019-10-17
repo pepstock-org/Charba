@@ -21,7 +21,6 @@ import org.pepstock.charba.client.ChartOptions;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
-import org.pepstock.charba.client.callbacks.AxisBuildTicksCallback;
 import org.pepstock.charba.client.callbacks.AxisCalculateTickRotationCallback;
 import org.pepstock.charba.client.callbacks.AxisDataLimitsCallback;
 import org.pepstock.charba.client.callbacks.AxisDimensionsCallback;
@@ -88,10 +87,6 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	private final CallbackProxy<ProxyAxisCallback> beforeDataLimitsCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after data limit function
 	private final CallbackProxy<ProxyAxisCallback> afterDataLimitsCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the before build tricks function
-	private final CallbackProxy<ProxyAxisCallback> beforeBuildTicksCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the after build tricks function
-	private final CallbackProxy<ProxyAxisCallback> afterBuildTicksCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the before tick label conversion function
 	private final CallbackProxy<ProxyAxisCallback> beforeTickToLabelConversionCallbackProxy = JsHelper.get().newCallbackProxy();
 	// callback proxy to invoke the after tick label conversion function
@@ -110,9 +105,6 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	// ---------------------------
 	// -- USERS CALLBACKS ---
 	// ---------------------------
-
-	// user callbacks implementation for build ticks
-	private AxisBuildTicksCallback axisBuildTicksCallback = null;
 	// user callbacks implementation for tick rotation calculation
 	private AxisCalculateTickRotationCallback axisCalculateTickRotationCallback = null;
 	// user callbacks implementation for data limits
@@ -176,7 +168,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	 * Builds the object storing the chart instance.
 	 * 
 	 * @param chart chart instance
-	 * @param type axis type 
+	 * @param type axis type
 	 */
 	Axis(IsChart chart, AxisType type) {
 		super(chart);
@@ -195,8 +187,6 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		afterSetDimensionsCallbackProxy.setCallback((context, item) -> onAfterSetDimensionsCallback(item));
 		beforeDataLimitsCallbackProxy.setCallback((context, item) -> onBeforeDataLimitsCallback(item));
 		afterDataLimitsCallbackProxy.setCallback((context, item) -> onAfterDataLimitsCallback(item));
-		beforeBuildTicksCallbackProxy.setCallback((context, item) -> onBeforeBuildTicksCallback(item));
-		afterBuildTicksCallbackProxy.setCallback((context, item) -> onAfterBuildTicksCallback(item));
 		beforeTickToLabelConversionCallbackProxy.setCallback((context, item) -> onBeforeTickToLabelConversionCallback(item));
 		afterTickToLabelConversionCallbackProxy.setCallback((context, item) -> onAfterTickToLabelConversionCallback(item));
 		beforeCalculateTickRotationCallbackProxy.setCallback((context, item) -> onBeforeCalculateTickRotationCallback(item));
@@ -341,35 +331,6 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		}
 		// returns default scale
 		return Defaults.get().getScale(this.storeType);
-	}
-
-	/**
-	 * Returns the user callback that runs before/after ticks are created.
-	 * 
-	 * @return the axisBuildTicksCallback
-	 */
-	public AxisBuildTicksCallback getAxisBuildTicksCallback() {
-		return axisBuildTicksCallback;
-	}
-
-	/**
-	 * Sets the user callback that runs before/after ticks are created.
-	 * 
-	 * @param axisBuildTicksCallback the axisBuildTicksCallback to set
-	 */
-	public void setAxisBuildTicksCallback(AxisBuildTicksCallback axisBuildTicksCallback) {
-		// sets the callback
-		this.axisBuildTicksCallback = axisBuildTicksCallback;
-		// checks if callback is consistent
-		if (axisBuildTicksCallback != null) {
-			// adds the callback proxy function to java script object
-			getConfiguration().setCallback(Property.BEFORE_BUILD_TICKS, beforeBuildTicksCallbackProxy.getProxy());
-			getConfiguration().setCallback(Property.AFTER_BUILD_TICKS, afterBuildTicksCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			getConfiguration().setCallback(Property.BEFORE_BUILD_TICKS, null);
-			getConfiguration().setCallback(Property.AFTER_BUILD_TICKS, null);
-		}
 	}
 
 	/**
@@ -608,33 +569,6 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		if (axisDataLimitsCallback != null) {
 			// then it is called
 			axisDataLimitsCallback.onAfterDataLimits(this, new AxisItem(item));
-		}
-	}
-
-	/**
-	 * Invokes BUILD TICKS axis callback.
-	 * 
-	 * @param item axis item instance
-	 */
-	private void onBeforeBuildTicksCallback(NativeObject item) {
-		// if user callback is consistent
-		if (axisBuildTicksCallback != null) {
-			// then it is called
-			axisBuildTicksCallback.onBeforeBuildTicks(this, new AxisItem(item));
-		}
-	}
-
-	/**
-	 * Invokes BUILD TICKS axis callback.
-	 * 
-	 * @param item axis item instance
-	 */
-	private void onAfterBuildTicksCallback(NativeObject item) {
-		// if user callback is consistent
-		if (axisBuildTicksCallback != null) {
-			AxisItem mItem = new AxisItem(item);
-			// then it is called
-			axisBuildTicksCallback.onAfterBuildTicks(this, mItem);
 		}
 	}
 

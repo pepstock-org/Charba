@@ -28,9 +28,9 @@ import org.pepstock.charba.client.enums.TickSource;
  *
  */
 public class CartesianTimeTick extends CartesianTick {
-	
+
 	// handler for callback for category axis
-	private final TimeTickHandler tickHandler; 
+	private final TimeTickHandler tickHandler;
 
 	/**
 	 * Builds the object storing the axis instance.
@@ -60,7 +60,7 @@ public class CartesianTimeTick extends CartesianTick {
 	public TickSource getSource() {
 		return getConfiguration().getSource();
 	}
-	
+
 	/**
 	 * If defined, this will override the data maximum.
 	 * 
@@ -96,7 +96,7 @@ public class CartesianTimeTick extends CartesianTick {
 	public Date getMin() {
 		return getConfiguration().getMinAsDate();
 	}
-	
+
 	/**
 	 * Returns the user callback instance.
 	 * 
@@ -114,4 +114,14 @@ public class CartesianTimeTick extends CartesianTick {
 	public void setCallback(TimeTickCallback callback) {
 		tickHandler.setCallback(callback);
 	}
+
+	/**
+	 * Returns the tick handler.
+	 * 
+	 * @return the tick handler
+	 */
+	final TimeTickHandler getTickHandler() {
+		return tickHandler;
+	}
+
 }

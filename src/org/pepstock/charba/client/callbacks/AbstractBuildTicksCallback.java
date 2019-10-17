@@ -15,26 +15,23 @@
 */
 package org.pepstock.charba.client.callbacks;
 
-import java.util.List;
-
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.items.AxisItem;
 
 /**
- * Interface to be implemented which can be used to change parameters in the scale during ticks building.
+ * Interface to be implemented which can be used to change parameters in the scale before ticks building.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface AxisBuildTicksCallback extends AbstractBuildTicksCallback{
+public interface AbstractBuildTicksCallback {
 
 	/**
-	 * Callback that runs after ticks are created. Useful for filtering ticks.
+	 * Callback that runs before ticks are created.
 	 * 
 	 * @param axis axis instance where this callback as been defined
 	 * @param item axis item instance
-	 * @param ticks list of created ticks
 	 */
-	void onAfterBuildTicks(Axis axis, AxisItem item, List<Double> ticks);
+	void onBeforeBuildTicks(Axis axis, AxisItem item);
 
 
 }

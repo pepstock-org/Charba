@@ -26,7 +26,7 @@ import org.pepstock.charba.client.commons.CallbackProxy;
  * 
  * @author Andrea "Stock" Stocchero
  * @param <T> type of tick with configuration element
- * @param <C> type of callback 
+ * @param <C> type of callback
  */
 abstract class AbstractTickHandler<T extends Tick, C> extends AxisContainer {
 
@@ -46,7 +46,7 @@ abstract class AbstractTickHandler<T extends Tick, C> extends AxisContainer {
 		// stores the options element
 		this.configuration = configuration;
 	}
-	
+
 	/**
 	 * Returns the options element for tick.
 	 * 
@@ -57,6 +57,13 @@ abstract class AbstractTickHandler<T extends Tick, C> extends AxisContainer {
 	}
 
 	/**
+	 * Returns the callback proxy to set tick callback.
+	 * 
+	 * @return the callback proxy to set tick callback
+	 */
+	abstract CallbackProxy.Proxy getProxy();
+	
+	/**
 	 * Returns the user callback instance.
 	 * 
 	 * @return the callback
@@ -64,8 +71,6 @@ abstract class AbstractTickHandler<T extends Tick, C> extends AxisContainer {
 	final C getCallback() {
 		return callback;
 	}
-	
-	abstract CallbackProxy.Proxy getProxy();
 
 	/**
 	 * Sets the user callback instance.

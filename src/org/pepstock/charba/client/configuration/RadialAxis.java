@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.AxisBuildTicksCallback;
 import org.pepstock.charba.client.enums.AxisType;
 
 /**
@@ -37,6 +38,8 @@ public class RadialAxis extends Axis {
 	private final RadialAngleLines angleLines;
 
 	private final RadialPointLabels pointLabels;
+	
+	private final LinearAxisBuildTicksCallbackHandler buildTicksCallbackHandler;
 
 	/**
 	 * Builds the object storing the chart instance.
@@ -50,6 +53,8 @@ public class RadialAxis extends Axis {
 		grideLines = new GridLines(this);
 		ticks = new RadialLinearTick(this);
 		angleLines = new RadialAngleLines(this);
+		// create build ticks callback handler
+		this.buildTicksCallbackHandler = new LinearAxisBuildTicksCallbackHandler(this);
 	}
 
 	/**
@@ -86,6 +91,24 @@ public class RadialAxis extends Axis {
 	 */
 	public RadialPointLabels getPointLabels() {
 		return pointLabels;
+	}
+	
+	/**
+	 * Returns the user callback that runs before/after ticks are created.
+	 * 
+	 * @return the axisBuildTicksCallback
+	 */
+	public AxisBuildTicksCallback getAxisBuildTicksCallback() {
+		return buildTicksCallbackHandler.getCallback();
+	}
+
+	/**
+	 * Sets the user callback that runs before/after ticks are created.
+	 * 
+	 * @param axisBuildTicksCallback the axisBuildTicksCallback to set
+	 */
+	public void setAxisBuildTicksCallback(AxisBuildTicksCallback axisBuildTicksCallback) {
+		buildTicksCallbackHandler.setCallback(axisBuildTicksCallback);
 	}
 
 }

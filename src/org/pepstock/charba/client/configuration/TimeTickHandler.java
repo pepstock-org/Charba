@@ -15,12 +15,15 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import java.util.List;
+
 import org.pepstock.charba.client.callbacks.TimeTickCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.items.TimeTickItem;
 import org.pepstock.charba.client.items.TimeTickItem.TimeTickItemFactory;
 
 import jsinterop.annotations.JsFunction;
@@ -83,11 +86,21 @@ final class TimeTickHandler extends AbstractTickHandler<CartesianTimeTick, TimeT
 			// checks if user callback is consistent
 			if (getCallback() != null) {
 				// then calls user callback
-				return getCallback().onCallback(getAxis(), value, index, ArrayListHelper.unmodifiableList(values, factory));
+				return getCallback().onCallback(getAxis(), value, index, getTimeTickItems(values));
 			}
 			// default tick is the tick value
 			return value;
 		});
+	}
+
+	/**
+	 * Returns a list of time tick items from an array of native objects passed by CHART.JS.
+	 * 
+	 * @param values an array of native objects passed by CHART.JS
+	 * @return a list of time tick items
+	 */
+	final List<TimeTickItem> getTimeTickItems(ArrayObject values) {
+		return ArrayListHelper.unmodifiableList(values, factory);
 	}
 
 	/*
