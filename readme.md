@@ -126,6 +126,8 @@ Here you can find the list of enhancement and updates available on `master` bran
  * add `setPointStyle` methods, setting a image instance, to `LegendLabelItem` class in order to manage images as point styles.
  * add `CategoryTickCallback`and `TimeTickCallback` to manage axes which are managing strings and dates as data types. 
  * add `TimeTickItem` in order to manage the different signature of CHART.JS callback when there is a cartesian time axis.
+ * update `AxisBuildTicksCallback` adding the list of created ticks as double into `onAfterBuildTicks` method 
+ * add `CategoryAxisBuildTicksCallback`and `TimeAxisBuildTicksCallback` to manage axis build ticks callback which are managing strings and dates as data types.
 
 ### Fixed Bugs
 
