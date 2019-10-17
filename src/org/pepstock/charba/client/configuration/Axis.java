@@ -632,8 +632,9 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	private void onAfterBuildTicksCallback(NativeObject item) {
 		// if user callback is consistent
 		if (axisBuildTicksCallback != null) {
+			AxisItem mItem = new AxisItem(item);
 			// then it is called
-			axisBuildTicksCallback.onAfterBuildTicks(this, new AxisItem(item));
+			axisBuildTicksCallback.onAfterBuildTicks(this, mItem);
 		}
 	}
 

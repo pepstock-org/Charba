@@ -15,29 +15,24 @@
 */
 package org.pepstock.charba.client.items;
 
-import java.util.Date;
-
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.charba.client.configuration.CartesianTimeTick;
-
-import com.google.gwt.core.client.JsDate;
 
 /**
- * The time tick item passed when a tick callback has been set for cartesian time axis, {@link CartesianTimeTick}.<br>
+ * The tick item maps the objects passed a {@link ScaleItem}.<br>
  * This is a wrapper of the CHART.JS item with all needed info.<br>
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class TimeTickItem extends ScaleTickItem {
+public class ScaleTickItem extends AbstractTickItem {
 
 	/**
 	 * Name of properties of native object.
 	 */
 	private enum Property implements Key
 	{
-		VALUE("value");
+		LABEL("label");
 
 		// name value of property
 		private final String value;
@@ -68,25 +63,17 @@ public final class TimeTickItem extends ScaleTickItem {
 	 * 
 	 * @param nativeObject native java script object which contains all properties.
 	 */
-	TimeTickItem(NativeObject nativeObject) {
+	ScaleTickItem(NativeObject nativeObject) {
 		super(nativeObject);
 	}
 
 	/**
-	 * Returns the date of the tick.
+	 * Returns the label of the tick.
 	 * 
-	 * @return the date of the tick or {@link UndefinedValues#DATE} if missing.
+	 * @return the label of the tick or {@link UndefinedValues#STRING} if missing.
 	 */
-	public Date getValue() {
-		// gets the value
-		double timeValue = getValue(Property.VALUE, UndefinedValues.DOUBLE);
-		// checks if value is consistent
-		if (Double.isNaN(timeValue)) {
-			// if not, returns null
-			return UndefinedValues.DATE;
-		}
-		// gets the value, creating a js date and returning a date
-		return new Date((long) JsDate.create(timeValue).getTime());
+	public final String getLabel() {
+		return getValue(Property.LABEL, UndefinedValues.STRING);
 	}
 
 	/**
@@ -94,7 +81,7 @@ public final class TimeTickItem extends ScaleTickItem {
 	 * 
 	 * @author Andrea "Stock" Stocchero
 	 */
-	public static final class TimeTickItemFactory implements NativeObjectContainerFactory<TimeTickItem> {
+	static final class ScaleTickItemFactory implements NativeObjectContainerFactory<ScaleTickItem> {
 
 		/*
 		 * (non-Javadoc)
@@ -103,8 +90,8 @@ public final class TimeTickItem extends ScaleTickItem {
 		 * NativeObject)
 		 */
 		@Override
-		public TimeTickItem create(NativeObject nativeObject) {
-			return new TimeTickItem(nativeObject);
+		public ScaleTickItem create(NativeObject nativeObject) {
+			return new ScaleTickItem(nativeObject);
 		}
 	}
 

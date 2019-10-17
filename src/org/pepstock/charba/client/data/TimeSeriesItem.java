@@ -19,6 +19,7 @@ import java.util.Date;
 
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * Default implementation for time series item interface in order to manage time series item (time and value).
@@ -99,7 +100,7 @@ public final class TimeSeriesItem extends NativeObjectContainer {
 	 * @return the time of time series item
 	 */
 	public Date getTime() {
-		return getValue(DataPoint.Property.T, (Date) null);
+		return getValue(DataPoint.Property.T, UndefinedValues.DATE);
 	}
 
 }

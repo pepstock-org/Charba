@@ -15,9 +15,14 @@
 */
 package org.pepstock.charba.client.items;
 
+import java.util.Date;
+
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayString;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.configuration.CartesianLogarithmicAxis;
+import org.pepstock.charba.client.enums.AxisType;
 import org.pepstock.charba.client.enums.Position;
 
 /**
@@ -177,7 +182,7 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param min the minimum value of axis
 	 */
-	public void setMin(int min) {
+	public void setMin(double min) {
 		setValue(ScaleItem.Property.MIN, min);
 	}
 
@@ -186,8 +191,36 @@ public final class AxisItem extends ScaleItem {
 	 * 
 	 * @param max the maximum value of axis
 	 */
-	public void setMax(int max) {
+	public void setMax(double max) {
 		setValue(ScaleItem.Property.MAX, max);
+	}
+
+	/**
+	 * Sets the minimum value of axis
+	 * 
+	 * @param min the minimum value of axis
+	 */
+	public void setMin(Date min) {
+		setValue(ScaleItem.Property.MIN, min.getTime());
+	}
+
+	/**
+	 * Sets the maximum value of axis
+	 * 
+	 * @param max the maximum value of axis
+	 */
+	public void setMax(Date max) {
+		setValue(ScaleItem.Property.MAX, max.getTime());
+	}
+	
+	/**
+	 * Sets the minimum value not zero of scale, only for {@link CartesianLogarithmicAxis}.
+	 * 
+	 * @param min the minimum value not zero of scale.
+	 */
+	public void setMinNotZero(double min) {
+		// sets values
+		setValue(ScaleItem.Property.MIN_NOT_ZERO, min);
 	}
 
 	/**
@@ -223,10 +256,20 @@ public final class AxisItem extends ScaleItem {
 	 * @param ticksAsNumbers the array of ticks
 	 */
 	public void setTicksAsNumbers(double... ticksAsNumbers) {
+		// gets a key reference
+		Key key = null;
+		// checks if the axis type is log
+		if (AxisType.LOGARITHMIC.equals(getType())) {
+			// sets key value
+			key = ScaleItem.Property.TICKS_VALUES;
+		} else {
+			// sets for all other linear axes
+			key = ScaleItem.Property.TICKS_AS_NUMBERS;
+		}
 		// sets value
-		setArrayValue(ScaleItem.Property.TICKS_AS_NUMBERS, ArrayDouble.fromOrEmpty(ticksAsNumbers));
+		setArrayValue(key, ArrayDouble.fromOrEmpty(ticksAsNumbers));
 	}
-
+	
 	/**
 	 * Sets the index of line 0 of axis
 	 * 

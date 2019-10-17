@@ -15,16 +15,26 @@
 */
 package org.pepstock.charba.client.items;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.ObjectType;
+import org.pepstock.charba.client.configuration.CartesianLogarithmicAxis;
+import org.pepstock.charba.client.configuration.CartesianTimeAxis;
+import org.pepstock.charba.client.configuration.RadialAxis;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.items.ScaleTickItem.ScaleTickItemFactory;
+import org.pepstock.charba.client.items.TimeTickItem.TimeTickItemFactory;
 
 /**
  * Wraps the scale item of CHART JS chart.<br>
@@ -35,7 +45,10 @@ import org.pepstock.charba.client.enums.AxisType;
 public class ScaleItem extends BaseBoxNodeItem {
 
 	private final ScaleLongestTextCacheItem longestTextCache;
+	
+	private final ScaleTickItemFactory itemFactory;
 
+	private final TimeTickItemFactory timeItemFactory;
 	/**
 	 * Name of properties of native object.
 	 */
@@ -46,6 +59,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 		LONGEST_TEXT_CACHE("longestTextCache"),
 		MIN_INDEX("minIndex"),
 		MAX_INDEX("maxIndex"),
+		MIN_NOT_ZERO("minNotZero"),
 		MIN("min"),
 		MAX("max"),
 		TICKS("ticks"),
@@ -54,12 +68,16 @@ public class ScaleItem extends BaseBoxNodeItem {
 		START("start"),
 		END("end"),
 		TICKS_AS_NUMBERS("ticksAsNumbers"),
+		TICKS_VALUES("tickValues"),
 		ZERO_LINE_INDEX("zeroLineIndex"),
 		X_CENTER("xCenter"),
 		Y_CENTER("yCenter"),
 		DRAWING_AREA("drawingArea"),
 		POINT_LABELS("pointLabels"),
 		TYPE("type"),
+		INTERNAL_TICKS("_ticks"),
+		// override the key of parent
+		POSITION("position"),
 		OPTIONS("options"),
 		// internal key to store a unique id
 		CHARBA_ID("_charbaId");
@@ -97,6 +115,9 @@ public class ScaleItem extends BaseBoxNodeItem {
 		super(nativeObject);
 		// initializes sub objects
 		longestTextCache = new ScaleLongestTextCacheItem(getValue(Property.LONGEST_TEXT_CACHE));
+		// creates the factories
+		itemFactory = new ScaleTickItemFactory();
+		timeItemFactory = new TimeTickItemFactory();
 	}
 
 	/**
@@ -177,19 +198,42 @@ public class ScaleItem extends BaseBoxNodeItem {
 	/**
 	 * Returns the max value of scale.
 	 * 
-	 * @return the max value of scale. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the max value of scale. Default is {@link UndefinedValues#DOUBLE}.
 	 */
-	public final int getMax() {
-		return getValue(Property.MAX, UndefinedValues.INTEGER);
+	public final double getMax() {
+		// checks if value is a number
+		if (ObjectType.NUMBER.equals(type(Property.MAX))) {
+			// then returns as double
+			return getValue(Property.MAX, UndefinedValues.DOUBLE);
+		}
+		// if here is not a number
+		// then returns undefined double
+		return UndefinedValues.DOUBLE;
 	}
 
 	/**
 	 * Returns the minimum value of scale.
 	 * 
-	 * @return the minimum value of scale. Default is {@link UndefinedValues#INTEGER}.
+	 * @return the minimum value of scale. Default is {@link UndefinedValues#DOUBLE}.
 	 */
-	public final int getMin() {
-		return getValue(Property.MIN, UndefinedValues.INTEGER);
+	public final double getMin() {
+		// checks if value is a number
+		if (ObjectType.NUMBER.equals(type(Property.MIN))) {
+			// then returns as double
+			return getValue(Property.MIN, UndefinedValues.DOUBLE);
+		}
+		// if here is not a number
+		// then returns undefined double
+		return UndefinedValues.DOUBLE;
+	}
+	
+	/**
+	 * Returns the minimum value not zero of scale, only for {@link CartesianLogarithmicAxis}.
+	 * 
+	 * @return the minimum value not zero of scale. Default is {@link UndefinedValues#DOUBLE}.
+	 */
+	public final double getMinNotZero() {
+		return getValue(Property.MIN_NOT_ZERO, UndefinedValues.DOUBLE);
 	}
 
 	/**
@@ -198,7 +242,14 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the max value of scale. Default is {@link UndefinedValues#STRING}.
 	 */
 	public final String getMaxAsString() {
-		return getValue(Property.MAX, UndefinedValues.STRING);
+		// checks if value is a string
+		if (ObjectType.STRING.equals(type(Property.MAX))) {
+			// then returns as string
+			return getValue(Property.MAX, UndefinedValues.STRING);
+		}
+		// if here is not a string
+		// then returns undefined string
+		return UndefinedValues.STRING;
 	}
 
 	/**
@@ -207,7 +258,56 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the minimum value of scale. Default is {@link UndefinedValues#STRING}.
 	 */
 	public final String getMinAsString() {
-		return getValue(Property.MIN, UndefinedValues.STRING);
+		// checks if value is a string
+		if (ObjectType.STRING.equals(type(Property.MIN))) {
+			// then returns as string
+			return getValue(Property.MIN, UndefinedValues.STRING);
+		}
+		// if here is not a string
+		// then returns undefined string
+		return UndefinedValues.STRING;
+	}
+
+	/**
+	 * Returns the max value of scale.
+	 * 
+	 * @return the max value of scale. Default is {@link UndefinedValues#DATE}.
+	 */
+	public final Date getMaxAsDate() {
+		// checks if value is a number and the axis is a time
+		if (ObjectType.NUMBER.equals(type(Property.MAX)) && AxisType.TIME.equals(getType())) {
+			// then returns as double
+			double value = getValue(Property.MAX, UndefinedValues.DOUBLE);
+			// checks if is a NaN
+			if (!Double.isNaN(value)) {
+				// if not, returns a date
+				return new Date((long) value);
+			}
+		}
+		// if here is not a number
+		// then returns undefined double
+		return UndefinedValues.DATE;
+	}
+
+	/**
+	 * Returns the minimum value of scale.
+	 * 
+	 * @return the minimum value of scale. Default is {@link UndefinedValues#DATE}.
+	 */
+	public final Date getMinAsDate() {
+		// checks if value is a number and the axis is a time
+		if (ObjectType.NUMBER.equals(type(Property.MIN)) && AxisType.TIME.equals(getType())) {
+			// then returns as double
+			double value = getValue(Property.MIN, UndefinedValues.DOUBLE);
+			// checks if is a NaN
+			if (!Double.isNaN(value)) {
+				// if not, returns a date
+				return new Date((long) value);
+			}
+		}
+		// if here is not a number
+		// then returns undefined double
+		return UndefinedValues.DATE;
 	}
 
 	/**
@@ -222,6 +322,42 @@ public class ScaleItem extends BaseBoxNodeItem {
 		return ArrayListHelper.unmodifiableList(array);
 	}
 
+	/**
+	 * Returns the list of tick items.
+	 * 
+	 * @return the list of tick items.
+	 */
+	public final List<ScaleTickItem> getTickItems() {
+		// gets array from native object
+		ArrayObject array = getArrayValue(Property.INTERNAL_TICKS);
+		// checks if is a time axis
+		if (!AxisType.TIME.equals(getType())) {
+			// returns list
+			return ArrayListHelper.unmodifiableList(array, itemFactory);
+		}
+		// if here the axis is time
+		// therefore returns an empty list
+		return Collections.unmodifiableList(new ArrayList<>());
+	}
+	
+	/**
+	 * Returns the list of time tick items, only for {@link CartesianTimeAxis}.
+	 * 
+	 * @return the list of time tick items.
+	 */
+	public final List<TimeTickItem> getTimeTickItems() {
+		// gets array from native object
+		ArrayObject array = getArrayValue(Property.INTERNAL_TICKS);
+		// checks if is a time axis
+		if (AxisType.TIME.equals(getType())) {
+			// returns list
+			return ArrayListHelper.unmodifiableList(array, timeItemFactory);
+		}
+		// if here the axis is time
+		// therefore returns an empty list
+		return Collections.unmodifiableList(new ArrayList<>());
+	}
+	
 	/**
 	 * Returns the label rotation ratio.
 	 * 
@@ -264,7 +400,19 @@ public class ScaleItem extends BaseBoxNodeItem {
 	 * @return the list of ticks as number.
 	 */
 	public final List<Double> getTicksAsNumber() {
-		ArrayDouble array = getArrayValue(Property.TICKS_AS_NUMBERS);
+		// gets a key reference
+		Key key = null;
+		// checks if the axis type is log
+		if (AxisType.LOGARITHMIC.equals(getType())) {
+			// sets key value
+			key = Property.TICKS_VALUES;
+		} else {
+			// sets for all other linear axes
+			key = Property.TICKS_AS_NUMBERS;
+		}
+		// array reference to return
+		ArrayDouble array = getArrayValue(key);
+		// returns array as list
 		return ArrayListHelper.unmodifiableList(array);
 	}
 
@@ -314,5 +462,23 @@ public class ScaleItem extends BaseBoxNodeItem {
 		ArrayString array = getArrayValue(Property.POINT_LABELS);
 		// returns the list
 		return ArrayListHelper.unmodifiableList(array);
+	}
+
+	/**
+	 * Returns the position of node as string. This is implements the possibility to have a specific position for scale
+	 * item, not mapped into {@link org.pepstock.charba.client.enums.Position} enumeration, like for {@link RadialAxis}.
+	 * 
+	 * @return the position of node. Default is {@link org.pepstock.charba.client.enums.Position#TOP}.
+	 */
+	public final String getPositionAsString() {
+		// gets the value of native object
+		String value = getValue(Property.POSITION, UndefinedValues.STRING);
+		// if value is not consistent and not a enum item
+		if (value != null && !Key.hasKeyByValue(Position.class, value)) {
+			// returns simply the string
+			return value;
+		}
+		// invokes the parent implementation
+		return super.getPosition().value();
 	}
 }
