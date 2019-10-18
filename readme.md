@@ -121,13 +121,18 @@ Here you can find the list of enhancement and updates available on `master` bran
        * `cubicInterpolationMode` (only line chart)
        * `fill`
     * remove `min` and `max`properties from `Time` class (both options and configuration) and add them to `CartesianTimeTick` (for configuration) and `Ticks` (for options), as new CHART.JS implemented.
-    * implement `scaleService` to get and set scale defaults by scale type  
+    * implement `scaleService` to get and set scale defaults by scale type.  
+    * add `z` property to gridline configuration object.
+    * add `z` property to tick configuration object.
  * add `getPointStyleAsImage` and `isPointStyleAsImage` methods to `LegendLabelItem` class in order to manage images as point styles.
  * add `setPointStyle` methods, setting a image instance, to `LegendLabelItem` class in order to manage images as point styles.
  * add `CategoryTickCallback`and `TimeTickCallback` to manage axes which are managing strings and dates as data types. 
  * add `TimeTickItem` in order to manage the different signature of CHART.JS callback when there is a cartesian time axis.
- * update `AxisBuildTicksCallback` adding the list of created ticks as double into `onAfterBuildTicks` method 
+ * update `AxisBuildTicksCallback` adding the list of created ticks as double into `onAfterBuildTicks` method.
  * add `CategoryAxisBuildTicksCallback`and `TimeAxisBuildTicksCallback` to manage axis build ticks callback which are managing strings and dates as data types.
+ * add `minNotZero` property into `ScaleItem`.
+ * add methods to get `min` and `max` properties as a date from `ScaleItem`.
+ * add methods to get ticks items (not only values) from `ScaleItem`.
 
 ### Fixed Bugs
 
@@ -147,6 +152,7 @@ Here you can find the list of enhancement and updates available on `master` bran
  * change visibility to `Filler` class, making it also extendable, in order to be able to implement `fill` scriptable callback.
  * reset of callback instances when the property has been set with object object type.
  * improve the single scale options management when a `null` is passed as argument to chart options.
+ * change type from `int` to `double` for `min` and `max` properties into `ScaleItem`
  
 License
 -------

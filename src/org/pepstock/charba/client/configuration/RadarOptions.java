@@ -35,13 +35,14 @@ public class RadarOptions extends SingleScaleOptions implements HasLineOptions {
 		super(chart, defaultValues);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.configuration.HasLineOptions#getOptions()
 	 */
 	@Override
 	public final ConfigurationOptions getOptions() {
 		return this;
 	}
-	
-	
+
 }

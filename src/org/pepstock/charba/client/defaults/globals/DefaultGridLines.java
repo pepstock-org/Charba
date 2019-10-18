@@ -50,6 +50,8 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 
 	private static final boolean DEFAULT_CIRCULAR = false;
 
+	private static final int DEFAULT_Z = 0;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -178,6 +180,16 @@ public final class DefaultGridLines implements IsDefaultGridLines {
 	@Override
 	public boolean isCircular() {
 		return DEFAULT_CIRCULAR;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getZ()
+	 */
+	@Override
+	public int getZ() {
+		return DEFAULT_Z;
 	}
 
 }

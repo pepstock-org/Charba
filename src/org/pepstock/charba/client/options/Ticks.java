@@ -71,7 +71,8 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 		SHOW_LABEL_BACKDROP("showLabelBackdrop"),
 		LABELS("labels"),
 		SOURCE("source"),
-		PRECISION("precision");
+		PRECISION("precision"),
+		Z("z");
 
 		// name value of property
 		private final String value;
@@ -376,7 +377,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	public double getMin() {
 		return getValue(Property.MIN, getDefaultValues().getMin());
 	}
-	
+
 	/**
 	 * If defined, this will override the data minimum.
 	 * 
@@ -431,7 +432,7 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	public double getMax() {
 		return getValue(Property.MAX, getDefaultValues().getMax());
 	}
-	
+
 	/**
 	 * If defined, this will override the data maximum.
 	 * 
@@ -756,4 +757,27 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 		return getValue(Property.PRECISION, getDefaultValues().getPrecision());
 	}
 
+	/**
+	 * Sets z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to= 0 are drawn under
+	 * datasets, greater than 0 on top.
+	 * 
+	 * @param z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to= 0 are drawn under
+	 *            datasets, greater than 0 on top.
+	 */
+	public void setZ(int z) {
+		setValue(Property.Z, z);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to= 0 are drawn
+	 * under datasets, greater than 0 on top.
+	 * 
+	 * @return z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to= 0 are drawn
+	 *         under datasets, greater than 0 on top.
+	 */
+	public int getZ() {
+		return getValue(Property.Z, getDefaultValues().getZ());
+	}
 }

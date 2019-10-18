@@ -25,7 +25,7 @@ import org.pepstock.charba.client.defaults.IsDefaultScaledOptions;
  * @author Andrea "Stock" Stocchero
  */
 public class ScaledOptions extends Options implements IsDefaultScaledOptions {
-	
+
 	private final Scale defaultScale;
 
 	private final Scales scales;

@@ -28,7 +28,7 @@ import org.pepstock.charba.client.enums.CartesianAxisType;
 public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> {
 
 	private final CartesianLinearTick ticks;
-	
+
 	private final LinearAxisBuildTicksCallbackHandler buildTicksCallbackHandler;
 
 	/**
@@ -63,7 +63,7 @@ public class CartesianLinearAxis extends CartesianAxis<CartesianLinearTick> {
 	public CartesianLinearTick getTicks() {
 		return ticks;
 	}
-	
+
 	/**
 	 * Returns the user callback that runs before/after ticks are created.
 	 * 

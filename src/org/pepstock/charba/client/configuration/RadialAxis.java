@@ -38,7 +38,7 @@ public class RadialAxis extends Axis {
 	private final RadialAngleLines angleLines;
 
 	private final RadialPointLabels pointLabels;
-	
+
 	private final LinearAxisBuildTicksCallbackHandler buildTicksCallbackHandler;
 
 	/**
@@ -47,7 +47,7 @@ public class RadialAxis extends Axis {
 	 * @param chart chart instance
 	 */
 	public RadialAxis(IsChart chart) {
-		super(chart,AxisType.RADIAL_LINEAR);
+		super(chart, AxisType.RADIAL_LINEAR);
 		// initialize sub elements
 		pointLabels = new RadialPointLabels(this);
 		grideLines = new GridLines(this);
@@ -92,7 +92,7 @@ public class RadialAxis extends Axis {
 	public RadialPointLabels getPointLabels() {
 		return pointLabels;
 	}
-	
+
 	/**
 	 * Returns the user callback that runs before/after ticks are created.
 	 * 

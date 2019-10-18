@@ -166,4 +166,14 @@ public final class DefaultChartGridLines implements IsDefaultGridLines {
 		return gridLines.isCircular();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultGridLines#getZ()
+	 */
+	@Override
+	public int getZ() {
+		return gridLines.getZ();
+	}
+
 }

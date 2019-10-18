@@ -69,6 +69,8 @@ public class DefaultTicks extends DefaultTickItem implements IsDefaultTicks {
 
 	private static final int DEFAULT_PRECISION = 0;
 
+	private static final int DEFAULT_Z = 0;
+
 	private final DefaultMinorTickItem minor = new DefaultMinorTickItem();
 
 	private final DefaultMajorTickItem major = new DefaultMajorTickItem();
@@ -311,6 +313,16 @@ public class DefaultTicks extends DefaultTickItem implements IsDefaultTicks {
 	@Override
 	public int getPrecision() {
 		return DEFAULT_PRECISION;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getZ()
+	 */
+	@Override
+	public int getZ() {
+		return DEFAULT_Z;
 	}
 
 }

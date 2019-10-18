@@ -326,4 +326,12 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 		return ticks.getLineHeight();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getZ()
+	 */
+	@Override
+	public int getZ() {
+		return ticks.getZ();
+	}	
+
 }

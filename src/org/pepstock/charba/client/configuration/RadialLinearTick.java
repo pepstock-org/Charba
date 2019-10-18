@@ -25,7 +25,7 @@ import org.pepstock.charba.client.colors.IsColor;
  *
  */
 public class RadialLinearTick extends Tick implements IsLinearTick {
-	
+
 	// handler for callback for category axis
 	private final LinearTickHandler<RadialLinearTick> tickHandler;
 
@@ -147,7 +147,7 @@ public class RadialLinearTick extends Tick implements IsLinearTick {
 	public int getPrecision() {
 		return getConfiguration().getPrecision();
 	}
-	
+
 	/**
 	 * Returns the user callback instance.
 	 * 

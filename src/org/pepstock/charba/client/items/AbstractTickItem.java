@@ -75,5 +75,5 @@ abstract class AbstractTickItem extends NativeObjectContainer {
 	public final boolean isMajor() {
 		return getValue(Property.MAJOR, UndefinedValues.BOOLEAN);
 	}
-	
+
 }

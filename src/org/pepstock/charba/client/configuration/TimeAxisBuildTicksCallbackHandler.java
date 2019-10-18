@@ -26,14 +26,14 @@ import org.pepstock.charba.client.items.AxisItem;
 import jsinterop.annotations.JsFunction;
 
 /**
- * Base object to enable the {@link TimeAxisBuildTicksCallback} on an axis, {@link CartesianTimeAxis}, when the ticks
- * are building by CHART.JS.
+ * Base object to enable the {@link TimeAxisBuildTicksCallback} on an axis, {@link CartesianTimeAxis}, when the ticks are
+ * building by CHART.JS.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
 final class TimeAxisBuildTicksCallbackHandler extends AbstractAxisBuildTicksCallbackHandler<TimeAxisBuildTicksCallback> {
-	
+
 	// ---------------------------
 	// -- JAVASCRIPT FUNCTIONS ---
 	// ---------------------------
@@ -55,7 +55,7 @@ final class TimeAxisBuildTicksCallbackHandler extends AbstractAxisBuildTicksCall
 		 */
 		void call(Object context, NativeObject item, ArrayObject tickItems);
 	}
-	
+
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
 	// ---------------------------
@@ -79,14 +79,15 @@ final class TimeAxisBuildTicksCallbackHandler extends AbstractAxisBuildTicksCall
 		afterBuildTicksCallbackProxy.setCallback((context, item, tickItems) -> onAfterBuildTicksCallback(item, tickItems));
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.configuration.AbstractAxisBuildTicksCallbackHandler#getAfterBuildTicksCallbackProxy()
 	 */
 	@Override
 	Proxy getAfterBuildTicksCallbackProxy() {
 		return afterBuildTicksCallbackProxy.getProxy();
 	}
-	
 
 	/**
 	 * Invokes BUILD TICKS axis callback.

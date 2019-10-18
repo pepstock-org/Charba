@@ -45,10 +45,11 @@ import org.pepstock.charba.client.items.TimeTickItem.TimeTickItemFactory;
 public class ScaleItem extends BaseBoxNodeItem {
 
 	private final ScaleLongestTextCacheItem longestTextCache;
-	
+
 	private final ScaleTickItemFactory itemFactory;
 
 	private final TimeTickItemFactory timeItemFactory;
+
 	/**
 	 * Name of properties of native object.
 	 */
@@ -226,7 +227,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 		// then returns undefined double
 		return UndefinedValues.DOUBLE;
 	}
-	
+
 	/**
 	 * Returns the minimum value not zero of scale, only for {@link CartesianLogarithmicAxis}.
 	 * 
@@ -339,7 +340,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 		// therefore returns an empty list
 		return Collections.unmodifiableList(new ArrayList<>());
 	}
-	
+
 	/**
 	 * Returns the list of time tick items, only for {@link CartesianTimeAxis}.
 	 * 
@@ -357,7 +358,7 @@ public class ScaleItem extends BaseBoxNodeItem {
 		// therefore returns an empty list
 		return Collections.unmodifiableList(new ArrayList<>());
 	}
-	
+
 	/**
 	 * Returns the label rotation ratio.
 	 * 
@@ -465,8 +466,8 @@ public class ScaleItem extends BaseBoxNodeItem {
 	}
 
 	/**
-	 * Returns the position of node as string. This is implements the possibility to have a specific position for scale
-	 * item, not mapped into {@link org.pepstock.charba.client.enums.Position} enumeration, like for {@link RadialAxis}.
+	 * Returns the position of node as string. This is implements the possibility to have a specific position for scale item,
+	 * not mapped into {@link org.pepstock.charba.client.enums.Position} enumeration, like for {@link RadialAxis}.
 	 * 
 	 * @return the position of node. Default is {@link org.pepstock.charba.client.enums.Position#TOP}.
 	 */

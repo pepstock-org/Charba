@@ -33,5 +33,4 @@ public interface AbstractBuildTicksCallback {
 	 */
 	void onBeforeBuildTicks(Axis axis, AxisItem item);
 
-
 }

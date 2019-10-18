@@ -148,10 +148,10 @@ public final class Merger {
 			applyDefaultsOnScales(Property.Y_AXES, base.getScales().getYAxes(), scales, scaleOptions);
 		}
 	}
-	
+
 	/**
 	 * Applies the defaults to all scales (X and Y) defined for a chart.
-	 *  
+	 * 
 	 * @param axisProperty type of scales to be managed
 	 * @param storedScales the list of object with all defined scales
 	 * @param scales native object with scales

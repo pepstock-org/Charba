@@ -116,4 +116,11 @@ public interface IsDefaultGridLines {
 	 */
 	boolean isCircular();
 
+	/**
+	 * Returns z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * 
+	 * @return z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 */
+	int getZ();
+
 }

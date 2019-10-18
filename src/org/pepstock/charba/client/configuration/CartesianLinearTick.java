@@ -26,9 +26,9 @@ import org.pepstock.charba.client.callbacks.TickCallback;
  * @author Andrea "Stock" Stocchero
  */
 public class CartesianLinearTick extends CartesianTick implements IsLinearTick {
-	
+
 	// handler for callback for category axis
-	private final LinearTickHandler<CartesianLinearTick> tickHandler; 
+	private final LinearTickHandler<CartesianLinearTick> tickHandler;
 
 	/**
 	 * Builds the object storing the axis instance.
@@ -58,7 +58,7 @@ public class CartesianLinearTick extends CartesianTick implements IsLinearTick {
 	public int getPrecision() {
 		return getConfiguration().getPrecision();
 	}
-	
+
 	/**
 	 * Returns the user callback instance.
 	 * 

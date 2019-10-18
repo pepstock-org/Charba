@@ -26,9 +26,9 @@ import org.pepstock.charba.client.callbacks.CategoryTickCallback;
  * @author Andrea "Stock" Stocchero
  */
 public class CartesianCategoryTick extends CartesianTick {
-	
+
 	// handler for callback for category axis
-	private final CategoryTickHandler tickHandler; 
+	private final CategoryTickHandler tickHandler;
 
 	/**
 	 * Builds the object storing the axis instance.
@@ -103,7 +103,7 @@ public class CartesianCategoryTick extends CartesianTick {
 	public String getMax() {
 		return getConfiguration().getMaxAsString();
 	}
-	
+
 	/**
 	 * Returns the user callback instance.
 	 * 

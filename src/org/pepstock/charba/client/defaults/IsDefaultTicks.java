@@ -205,4 +205,13 @@ public interface IsDefaultTicks extends IsDefaultBaseTick {
 	 */
 	int getPrecision();
 
+	/**
+	 * Returns z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to= 0 are drawn
+	 * under datasets, greater than 0 on top.
+	 * 
+	 * @return z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to= 0 are drawn
+	 *         under datasets, greater than 0 on top.
+	 */
+	int getZ();
+
 }

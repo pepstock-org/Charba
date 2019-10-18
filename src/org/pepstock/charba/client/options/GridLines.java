@@ -54,7 +54,8 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 		ZERO_LINE_COLOR("zeroLineColor"),
 		ZERO_LINE_BORDER_DASH("zeroLineBorderDash"),
 		ZERO_LINE_BORDER_DASH_OFFSET("zeroLineBorderDashOffset"),
-		OFFSET_GRID_LINES("offsetGridLines");
+		OFFSET_GRID_LINES("offsetGridLines"),
+		Z("z");
 
 		// name value of property
 		private final String value;
@@ -441,6 +442,26 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	 */
 	public boolean isOffsetGridLines() {
 		return getValue(Property.OFFSET_GRID_LINES, getDefaultValues().isOffsetGridLines());
+	}
+
+	/**
+	 * Sets z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * 
+	 * @param z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 */
+	public void setZ(int z) {
+		setValue(Property.Z, z);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * 
+	 * @return z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 */
+	public int getZ() {
+		return getValue(Property.Z, getDefaultValues().getZ());
 	}
 
 	/*

@@ -212,7 +212,7 @@ public final class AxisItem extends ScaleItem {
 	public void setMax(Date max) {
 		setValue(ScaleItem.Property.MAX, max.getTime());
 	}
-	
+
 	/**
 	 * Sets the minimum value not zero of scale, only for {@link CartesianLogarithmicAxis}.
 	 * 
@@ -269,7 +269,7 @@ public final class AxisItem extends ScaleItem {
 		// sets value
 		setArrayValue(key, ArrayDouble.fromOrEmpty(ticksAsNumbers));
 	}
-	
+
 	/**
 	 * Sets the index of line 0 of axis
 	 * 

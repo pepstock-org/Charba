@@ -90,7 +90,7 @@ final class LinearAxisBuildTicksCallbackHandler extends AbstractAxisBuildTicksCa
 	 * Invokes BUILD TICKS axis callback.
 	 * 
 	 * @param item axis item instance
-	 * @param ticksItems list of created ticks 
+	 * @param ticksItems list of created ticks
 	 */
 	private void onAfterBuildTicksCallback(NativeObject item, ArrayDouble tickItems) {
 		// if user callback is consistent

@@ -23,11 +23,12 @@ import org.pepstock.charba.client.items.AxisItem;
 import org.pepstock.charba.client.items.TimeTickItem;
 
 /**
- * Interface to be implemented which can be used to change parameters in the scale during ticks building, for {@link CartesianTimeAxis}.
+ * Interface to be implemented which can be used to change parameters in the scale during ticks building, for
+ * {@link CartesianTimeAxis}.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface TimeAxisBuildTicksCallback extends AbstractBuildTicksCallback{
+public interface TimeAxisBuildTicksCallback extends AbstractBuildTicksCallback {
 
 	/**
 	 * Callback that runs after ticks are created. Useful for filtering ticks.
@@ -37,6 +38,5 @@ public interface TimeAxisBuildTicksCallback extends AbstractBuildTicksCallback{
 	 * @param ticks list of created ticks
 	 */
 	void onAfterBuildTicks(Axis axis, AxisItem item, List<TimeTickItem> ticks);
-
 
 }

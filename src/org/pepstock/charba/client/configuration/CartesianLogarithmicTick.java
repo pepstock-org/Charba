@@ -28,7 +28,7 @@ public class CartesianLogarithmicTick extends CartesianTick {
 
 	// handler for callback for category axis
 	private final LinearTickHandler<CartesianLogarithmicTick> tickHandler;
-	
+
 	/**
 	 * Builds the object storing the axis instance.
 	 * 
@@ -75,7 +75,7 @@ public class CartesianLogarithmicTick extends CartesianTick {
 	public double getMax() {
 		return getConfiguration().getMax();
 	}
-	
+
 	/**
 	 * Returns the user callback instance.
 	 * 

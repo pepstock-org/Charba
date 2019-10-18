@@ -28,7 +28,7 @@ import org.pepstock.charba.client.items.AxisItem;
  * Every axis type has got own data type therefore to activate a tick callback is needed a different signature.<br>
  * 
  * @author Andrea "Stock" Stocchero
- * @param <C> type of callback 
+ * @param <C> type of callback
  */
 abstract class AbstractAxisBuildTicksCallbackHandler<C extends AbstractBuildTicksCallback> extends AxisContainer {
 
@@ -64,7 +64,6 @@ abstract class AbstractAxisBuildTicksCallbackHandler<C extends AbstractBuildTick
 
 	}
 
-	
 	// callback proxy to invoke the before build tricks function
 	private final CallbackProxy<ProxyAxisCallback> beforeBuildTicksCallbackProxy = JsHelper.get().newCallbackProxy();
 
@@ -96,7 +95,7 @@ abstract class AbstractAxisBuildTicksCallbackHandler<C extends AbstractBuildTick
 	final C getCallback() {
 		return callback;
 	}
-	
+
 	/**
 	 * Sets the user callback instance.
 	 * 
@@ -116,7 +115,6 @@ abstract class AbstractAxisBuildTicksCallbackHandler<C extends AbstractBuildTick
 			getAxis().getConfiguration().setCallback(Property.AFTER_BUILD_TICKS, null);
 		}
 	}
-	
 
 	/**
 	 * Invokes BUILD TICKS axis callback.

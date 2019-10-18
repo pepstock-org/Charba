@@ -62,7 +62,7 @@ abstract class AbstractTickHandler<T extends Tick, C> extends AxisContainer {
 	 * @return the callback proxy to set tick callback
 	 */
 	abstract CallbackProxy.Proxy getProxy();
-	
+
 	/**
 	 * Returns the user callback instance.
 	 * 

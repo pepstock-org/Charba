@@ -25,7 +25,7 @@ import org.pepstock.charba.client.items.AxisItem;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface AxisBuildTicksCallback extends AbstractBuildTicksCallback{
+public interface AxisBuildTicksCallback extends AbstractBuildTicksCallback {
 
 	/**
 	 * Callback that runs after ticks are created. Useful for filtering ticks.
@@ -35,6 +35,5 @@ public interface AxisBuildTicksCallback extends AbstractBuildTicksCallback{
 	 * @param ticks list of created ticks
 	 */
 	void onAfterBuildTicks(Axis axis, AxisItem item, List<Double> ticks);
-
 
 }

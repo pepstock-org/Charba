@@ -22,11 +22,12 @@ import org.pepstock.charba.client.configuration.CartesianCategoryAxis;
 import org.pepstock.charba.client.items.AxisItem;
 
 /**
- * Interface to be implemented which can be used to change parameters in the scale during ticks building, for {@link CartesianCategoryAxis}.
+ * Interface to be implemented which can be used to change parameters in the scale during ticks building, for
+ * {@link CartesianCategoryAxis}.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface CategoryAxisBuildTicksCallback extends AbstractBuildTicksCallback{
+public interface CategoryAxisBuildTicksCallback extends AbstractBuildTicksCallback {
 
 	/**
 	 * Callback that runs after ticks are created. Useful for filtering ticks.
@@ -36,6 +37,5 @@ public interface CategoryAxisBuildTicksCallback extends AbstractBuildTicksCallba
 	 * @param ticks list of created ticks
 	 */
 	void onAfterBuildTicks(Axis axis, AxisItem item, List<String> ticks);
-
 
 }

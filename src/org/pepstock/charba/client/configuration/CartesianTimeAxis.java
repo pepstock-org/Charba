@@ -29,9 +29,9 @@ import org.pepstock.charba.client.enums.ScaleDistribution;
  *
  */
 public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
-	
+
 	private final CartesianTimeTick ticks;
-	
+
 	private final TimeAxisBuildTicksCallbackHandler buildTicksCallbackHandler;
 
 	private final Time time;
@@ -115,7 +115,7 @@ public class CartesianTimeAxis extends CartesianAxis<CartesianTimeTick> {
 	public ScaleBounds getBounds() {
 		return getScale().getBounds();
 	}
-	
+
 	/**
 	 * Returns the user callback that runs before/after ticks are created.
 	 * 
