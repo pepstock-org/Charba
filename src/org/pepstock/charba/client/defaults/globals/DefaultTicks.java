@@ -19,6 +19,7 @@ import org.pepstock.charba.client.defaults.IsDefaultMajorTick;
 import org.pepstock.charba.client.defaults.IsDefaultMinorTick;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.enums.TickSource;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * CHART.JS default values for TICKS element.
@@ -323,6 +324,16 @@ public class DefaultTicks extends DefaultTickItem implements IsDefaultTicks {
 	@Override
 	public int getZ() {
 		return DEFAULT_Z;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getSampleSize()
+	 */
+	@Override
+	public int getSampleSize() {
+		return UndefinedValues.INTEGER;
 	}
 
 }

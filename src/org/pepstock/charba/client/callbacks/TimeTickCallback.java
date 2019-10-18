@@ -36,7 +36,8 @@ public interface TimeTickCallback {
 	 * 
 	 * @param axis axis instance where this callback as been defined
 	 * @param value value of tick as date
-	 * @param label label of tick, passed by CHART.JS formatting the date by the selected {@link TimeUnit} and its display format. 
+	 * @param label label of tick, passed by CHART.JS formatting the date by the selected {@link TimeUnit} and its display
+	 *            format.
 	 * @param index index of tick
 	 * @param values list of all tick values
 	 * @return the tick to apply or if the callback returns <code>null</code> the associated grid line will be hidden.

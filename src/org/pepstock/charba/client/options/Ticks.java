@@ -72,7 +72,8 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 		LABELS("labels"),
 		SOURCE("source"),
 		PRECISION("precision"),
-		Z("z");
+		Z("z"),
+		SAMPLE_SIZE("sampleSize");
 
 		// name value of property
 		private final String value;
@@ -758,11 +759,11 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * Sets z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn under
-	 * datasets, greater than 0 on top.
+	 * Sets z-index of tick layer. Useful when ticks are drawn on chart area.<br>
+	 * Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 * 
-	 * @param z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn under
-	 *            datasets, greater than 0 on top.
+	 * @param z z-index of tick layer. Useful when ticks are drawn on chart area.<br>
+	 *            Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	public void setZ(int z) {
 		setValue(Property.Z, z);
@@ -771,13 +772,35 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * Returns z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn
-	 * under datasets, greater than 0 on top.
+	 * Returns z-index of tick layer. Useful when ticks are drawn on chart area.<br>
+	 * Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 * 
-	 * @return z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn
-	 *         under datasets, greater than 0 on top.
+	 * @return z-index of tick layer. Useful when ticks are drawn on chart area.<br>
+	 *         Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	public int getZ() {
 		return getValue(Property.Z, getDefaultValues().getZ());
+	}
+
+	/**
+	 * Sets the number of ticks to examine when deciding how many labels will fit.<br>
+	 * Setting a smaller value will be faster, but may be less accurate when there is large variability in label length.
+	 * 
+	 * @param sampleSize the number of ticks to examine when deciding how many labels will fit.
+	 */
+	public void setSampleSize(int sampleSize) {
+		setValue(Property.SAMPLE_SIZE, sampleSize);
+		// checks if all parents are attached
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the number of ticks to examine when deciding how many labels will fit.<br>
+	 * Setting a smaller value will be faster, but may be less accurate when there is large variability in label length.
+	 * 
+	 * @return the number of ticks to examine when deciding how many labels will fit.
+	 */
+	public int getSampleSize() {
+		return getValue(Property.SAMPLE_SIZE, getDefaultValues().getZ());
 	}
 }

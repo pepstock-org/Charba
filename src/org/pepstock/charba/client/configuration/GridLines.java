@@ -357,7 +357,7 @@ public class GridLines extends AxisContainer {
 	/**
 	 * Sets z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 * 
-	 * @param z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * @param z z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	public void setZ(int z) {
 		getAxis().getScale().getGrideLines().setZ(z);

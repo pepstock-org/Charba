@@ -80,7 +80,9 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 		return ticks.getFontFamily();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMinor()
 	 */
 	@Override
@@ -88,7 +90,9 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 		return ticks.getMinor();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getMajor()
 	 */
 	@Override
@@ -326,12 +330,24 @@ public final class DefaultChartTicks implements IsDefaultTicks {
 		return ticks.getLineHeight();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getZ()
 	 */
 	@Override
 	public int getZ() {
 		return ticks.getZ();
-	}	
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTicks#getSampleSize()
+	 */
+	@Override
+	public int getSampleSize() {
+		return ticks.getSampleSize();
+	}
 
 }

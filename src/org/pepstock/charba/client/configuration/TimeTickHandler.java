@@ -57,7 +57,8 @@ final class TimeTickHandler extends AbstractTickHandler<CartesianTimeTick, TimeT
 		 * Method of function to be called when tick is created.
 		 * 
 		 * @param context value of <code>this</code> to the execution context of function.
-		 * @param label label of tick, passed by CHART.JS formatting the date by the selected {@link TimeUnit} and its display format. 
+		 * @param label label of tick, passed by CHART.JS formatting the date by the selected {@link TimeUnit} and its display
+		 *            format.
 		 * @param index index of tick
 		 * @param values array with all values of ticks
 		 * @return string representation of tick

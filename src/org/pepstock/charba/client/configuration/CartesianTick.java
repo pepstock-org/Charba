@@ -184,4 +184,24 @@ abstract class CartesianTick extends Tick {
 		return getConfiguration().getPadding();
 	}
 
+	/**
+	 * Sets the number of ticks to examine when deciding how many labels will fit.<br>
+	 * Setting a smaller value will be faster, but may be less accurate when there is large variability in label length.
+	 * 
+	 * @param sampleSize the number of ticks to examine when deciding how many labels will fit.
+	 */
+	public void setSampleSize(int sampleSize) {
+		getConfiguration().setSampleSize(sampleSize);
+	}
+
+	/**
+	 * Returns the number of ticks to examine when deciding how many labels will fit.<br>
+	 * Setting a smaller value will be faster, but may be less accurate when there is large variability in label length.
+	 * 
+	 * @return the number of ticks to examine when deciding how many labels will fit.
+	 */
+	public int getSampleSize() {
+		return getConfiguration().getSampleSize();
+	}
+
 }

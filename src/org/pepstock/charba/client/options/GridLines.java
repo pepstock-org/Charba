@@ -447,7 +447,7 @@ public final class GridLines extends AbstractScaleLine<IsDefaultGridLines> imple
 	/**
 	 * Sets z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 * 
-	 * @param z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
+	 * @param z z-index of gridline layer. Values less than or equals to 0 are drawn under datasets, greater than 0 on top.
 	 */
 	public void setZ(int z) {
 		setValue(Property.Z, z);
