@@ -17,6 +17,7 @@ package org.pepstock.charba.client.plugins;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -27,6 +28,8 @@ import java.util.List;
  */
 public abstract class AbstractPluginCachedOptions extends AbstractPluginOptions {
 
+	// empty inner options
+	private static final Collection<AbstractPluginCachedOptions> EMPTY_INNER_OPTIONS = Collections.unmodifiableCollection(new ArrayList<>());
 	// list of chart ids or global where this options has been set
 	// this is mandatory in order to clean up the cache of plugin options
 	// when they are not longer needed
@@ -90,10 +93,10 @@ public abstract class AbstractPluginCachedOptions extends AbstractPluginOptions 
 	 * Returns a collection of inner options of the main one.<br>
 	 * Must be override if inner options must be removed from cache.
 	 * 
-	 * @return a collection of inner options of the main one. This implementation returns always <code>null</code>.
+	 * @return a collection of inner options of the main one. This implementation returns always an empty collection.
 	 */
 	protected Collection<AbstractPluginCachedOptions> getInnerOptions(){
-		return null;
+		return EMPTY_INNER_OPTIONS;
 	}
 
 }
