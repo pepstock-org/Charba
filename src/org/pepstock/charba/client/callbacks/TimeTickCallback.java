@@ -15,10 +15,12 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import java.util.Date;
 import java.util.List;
 
 import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.configuration.CartesianTimeAxis;
+import org.pepstock.charba.client.enums.TimeUnit;
 import org.pepstock.charba.client.items.TimeTickItem;
 
 /**
@@ -33,11 +35,12 @@ public interface TimeTickCallback {
 	 * Changes the tick marks to include information about the data type.
 	 * 
 	 * @param axis axis instance where this callback as been defined
-	 * @param value value of tick
+	 * @param value value of tick as date
+	 * @param label label of tick, passed by CHART.JS formatting the date by the selected {@link TimeUnit} and its display format. 
 	 * @param index index of tick
 	 * @param values list of all tick values
 	 * @return the tick to apply or if the callback returns <code>null</code> the associated grid line will be hidden.
 	 */
-	String onCallback(Axis axis, String value, int index, List<TimeTickItem> values);
+	String onCallback(Axis axis, Date value, String label, int index, List<TimeTickItem> values);
 
 }

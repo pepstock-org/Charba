@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import java.util.Date;
 import java.util.List;
 
 import org.pepstock.charba.client.callbacks.TimeTickCallback;
@@ -23,6 +24,7 @@ import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.CallbackProxy.Proxy;
 import org.pepstock.charba.client.commons.JsHelper;
+import org.pepstock.charba.client.enums.TimeUnit;
 import org.pepstock.charba.client.items.TimeTickItem;
 import org.pepstock.charba.client.items.TimeTickItem.TimeTickItemFactory;
 
@@ -55,12 +57,12 @@ final class TimeTickHandler extends AbstractTickHandler<CartesianTimeTick, TimeT
 		 * Method of function to be called when tick is created.
 		 * 
 		 * @param context value of <code>this</code> to the execution context of function.
-		 * @param value value of the tick
+		 * @param label label of tick, passed by CHART.JS formatting the date by the selected {@link TimeUnit} and its display format. 
 		 * @param index index of tick
 		 * @param values array with all values of ticks
 		 * @return string representation of tick
 		 */
-		String call(Object context, String value, int index, ArrayObject values);
+		String call(Object context, String label, int index, ArrayObject values);
 	}
 
 	// ---------------------------
@@ -82,14 +84,18 @@ final class TimeTickHandler extends AbstractTickHandler<CartesianTimeTick, TimeT
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
-		tickCallbackProxy.setCallback((context, value, index, values) -> {
+		tickCallbackProxy.setCallback((context, label, index, values) -> {
 			// checks if user callback is consistent
 			if (getCallback() != null) {
+				// gets as list the tick items
+				List<TimeTickItem> tickItems = getTimeTickItems(values);
+				// retrieves the current value
+				Date value = tickItems.get(index).getValue();
 				// then calls user callback
-				return getCallback().onCallback(getAxis(), value, index, getTimeTickItems(values));
+				return getCallback().onCallback(getAxis(), value, label, index, getTimeTickItems(values));
 			}
-			// default tick is the tick value
-			return value;
+			// default tick is the tick label
+			return label;
 		});
 	}
 
