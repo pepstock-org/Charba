@@ -25,7 +25,7 @@ import org.pepstock.charba.client.items.AxisItem;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface AxisBuildTicksCallback extends AbstractBuildTicksCallback {
+public interface AxisBuildTicksCallback extends BaseAxisBuildTicksCallback {
 
 	/**
 	 * Callback that runs after ticks are created. Useful for filtering ticks.

@@ -15,7 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
-import org.pepstock.charba.client.callbacks.AbstractBuildTicksCallback;
+import org.pepstock.charba.client.callbacks.BaseAxisBuildTicksCallback;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -30,7 +30,7 @@ import org.pepstock.charba.client.items.AxisItem;
  * @author Andrea "Stock" Stocchero
  * @param <C> type of callback
  */
-abstract class AbstractAxisBuildTicksCallbackHandler<C extends AbstractBuildTicksCallback> extends AxisContainer {
+abstract class AbstractAxisBuildTicksCallbackHandler<C extends BaseAxisBuildTicksCallback> extends AxisContainer {
 
 	/**
 	 * Name of properties of native object.

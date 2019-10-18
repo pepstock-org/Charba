@@ -28,7 +28,7 @@ import org.pepstock.charba.client.items.TimeTickItem;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface TimeAxisBuildTicksCallback extends AbstractBuildTicksCallback {
+public interface TimeAxisBuildTicksCallback extends BaseAxisBuildTicksCallback {
 
 	/**
 	 * Callback that runs after ticks are created. Useful for filtering ticks.

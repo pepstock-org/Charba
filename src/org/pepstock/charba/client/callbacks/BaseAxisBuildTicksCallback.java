@@ -19,11 +19,12 @@ import org.pepstock.charba.client.configuration.Axis;
 import org.pepstock.charba.client.items.AxisItem;
 
 /**
- * Interface to be implemented which can be used to change parameters in the scale before ticks building.
+ * Interface to be implemented which can be used to change parameters in the scale before ticks building.<br>
+ * This is the base class for axis build ticks callbacks.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface AbstractBuildTicksCallback {
+public interface BaseAxisBuildTicksCallback {
 
 	/**
 	 * Callback that runs before ticks are created.
