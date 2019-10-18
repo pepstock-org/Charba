@@ -32,7 +32,7 @@ import org.pepstock.charba.client.enums.FontStyle;
 public final class Fonter extends NativeObjectContainer {
 
 	// default font values
-	private final IsDefaultFontItem defaultValue;
+	private final IsDefaultFontItem defaultValues;
 	// model which contains the fonter
 	private final AbstractModel<?, ?> model;
 
@@ -76,9 +76,9 @@ public final class Fonter extends NativeObjectContainer {
 	 * 
 	 * @param nativeObject native object where FONTs properties must be managed
 	 * @param model model which contains the fonter.
-	 * @param defaultValue default value of FONTs to use when the properties do not exist
+	 * @param defaultValues default value of FONTs to use when the properties do not exist
 	 */
-	public Fonter(NativeObject nativeObject, AbstractModel<?, ?> model, IsDefaultFontItem defaultValue) {
+	public Fonter(NativeObject nativeObject, AbstractModel<?, ?> model, IsDefaultFontItem defaultValues) {
 		super(nativeObject);
 		// checks if model is consistent
 		if (model == null) {
@@ -86,12 +86,12 @@ public final class Fonter extends NativeObjectContainer {
 			throw new IllegalArgumentException("Model is null");
 		}
 		// checks if default value is consistent
-		if (defaultValue == null) {
+		if (defaultValues == null) {
 			// if not, exception
-			throw new IllegalArgumentException("Default value is null");
+			throw new IllegalArgumentException("Default values is null");
 		}
 		this.model = model;
-		this.defaultValue = defaultValue;
+		this.defaultValues = defaultValues;
 	}
 
 	/**
@@ -111,7 +111,7 @@ public final class Fonter extends NativeObjectContainer {
 	 * @return the font size.
 	 */
 	public int getFontSize() {
-		return getValue(Property.FONT_SIZE, defaultValue.getFontSize());
+		return getValue(Property.FONT_SIZE, defaultValues.getFontSize());
 	}
 
 	/**
@@ -131,7 +131,7 @@ public final class Fonter extends NativeObjectContainer {
 	 * @return the font style, follows CSS font-style options (i.e. normal, italic, oblique, initial, inherit).
 	 */
 	public FontStyle getFontStyle() {
-		return getValue(Property.FONT_STYLE, FontStyle.class, defaultValue.getFontStyle());
+		return getValue(Property.FONT_STYLE, FontStyle.class, defaultValues.getFontStyle());
 	}
 
 	/**
@@ -160,7 +160,7 @@ public final class Fonter extends NativeObjectContainer {
 	 * @return Font color.
 	 */
 	public String getFontColorAsString() {
-		return getValue(Property.FONT_COLOR, defaultValue.getFontColorAsString());
+		return getValue(Property.FONT_COLOR, defaultValues.getFontColorAsString());
 	}
 
 	/**
@@ -189,7 +189,7 @@ public final class Fonter extends NativeObjectContainer {
 	 * @return Font family, follows CSS font-family options.
 	 */
 	public String getFontFamily() {
-		return getValue(Property.FONT_FAMILY, defaultValue.getFontFamily());
+		return getValue(Property.FONT_FAMILY, defaultValues.getFontFamily());
 	}
 
 }

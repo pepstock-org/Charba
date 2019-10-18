@@ -19,14 +19,13 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
-import org.pepstock.charba.client.enums.TextDirection;
 
 /**
  * Interface to define tooltips object defaults.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultTooltips {
+public interface IsDefaultTooltips extends IsDefaultTextDirectioner{
 
 	/**
 	 * Returns if tooltips are enabled.
@@ -269,19 +268,4 @@ public interface IsDefaultTooltips {
 	 */
 	int getBorderWidth();
 
-	/**
-	 * Returns <code>true</code> for rendering the tooltips from right to left.
-	 * 
-	 * @return <code>true</code> for rendering the tooltips from right to left.
-	 */
-	boolean isRtl();
-
-	/**
-	 * Returns the text direction that will force on the canvas for rendering the tooltips, regardless of the CSS specified on
-	 * the canvas.
-	 * 
-	 * @return the text direction that will force on the canvas for rendering the tooltips, regardless of the CSS specified on
-	 *         the canvas
-	 */
-	TextDirection getTextDirection();
 }

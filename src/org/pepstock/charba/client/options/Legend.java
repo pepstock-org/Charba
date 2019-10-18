@@ -20,7 +20,6 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.enums.LegendAlign;
 import org.pepstock.charba.client.enums.Position;
-import org.pepstock.charba.client.enums.TextDirection;
 
 /**
  * The chart legend displays data about the datasets that area appearing on the chart.
@@ -28,9 +27,11 @@ import org.pepstock.charba.client.enums.TextDirection;
  * @author Andrea "Stock" Stocchero
  *
  */
-public final class Legend extends AbstractModel<Options, IsDefaultLegend> implements IsDefaultLegend {
+public final class Legend extends AbstractModel<Options, IsDefaultLegend> implements IsDefaultLegend, HasTextDirection {
 
 	private LegendLabels labels;
+	
+	private final TextDirectioner textDirectioner;
 
 	/**
 	 * Name of properties of native object.
@@ -83,8 +84,20 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 		super(options, childKey, defaultValues, nativeObject);
 		// gets sub element
 		labels = new LegendLabels(this, Property.LABELS, getDefaultValues().getLabels(), getValue(Property.LABELS));
+		// creates text directioner
+		this.textDirectioner = new TextDirectioner(getNativeObject(), this, defaultValues);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.options.HasTextDirection#getTextDirectioner()
+	 */
+	@Override
+	public TextDirectioner getTextDirectioner() {
+		return textDirectioner;
+	}
+	
 	/**
 	 * Returns the legend labels element.
 	 * 
@@ -192,48 +205,6 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	 */
 	public LegendAlign getAlign() {
 		return getValue(Property.ALIGN, LegendAlign.class, getDefaultValues().getAlign());
-	}
-
-	/**
-	 * Sets <code>true</code> for rendering the legends from right to left.
-	 * 
-	 * @param rtl <code>true</code> for rendering the legends from right to left
-	 */
-	public void setRtl(boolean rtl) {
-		setValue(Property.RTL, rtl);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns <code>true</code> for rendering the legends from right to left.
-	 * 
-	 * @return <code>true</code> for rendering the legends from right to left.
-	 */
-	public boolean isRtl() {
-		return getValue(Property.RTL, getDefaultValues().isRtl());
-	}
-
-	/**
-	 * Sets the text direction of the legend that will force the text direction on the canvas for rendering the legend,
-	 * regardless of the CSS specified on the canvas.
-	 * 
-	 * @param textDirection the text direction of the legend.
-	 */
-	public void setTextDirection(TextDirection textDirection) {
-		setValue(Property.TEXT_DIRECTION, textDirection);
-		// checks if the node is already added to parent
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the text direction of the legend that will force the text direction on the canvas for rendering the legend,
-	 * regardless of the CSS specified on the canvas.
-	 * 
-	 * @return the text direction of the legend.
-	 */
-	public TextDirection getTextDirection() {
-		return getValue(Property.TEXT_DIRECTION, TextDirection.class, getDefaultValues().getTextDirection());
 	}
 
 }
