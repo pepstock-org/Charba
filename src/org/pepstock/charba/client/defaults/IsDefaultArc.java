@@ -39,4 +39,11 @@ public interface IsDefaultArc extends IsDefaultOptionsElement {
 	 * @return the relative thickness of the dataset
 	 */
 	double getWeight();
+
+	/**
+	 * Returns the arc angle to cover.
+	 * 
+	 * @return the arc angle to cover
+	 */
+	double getAngle();
 }

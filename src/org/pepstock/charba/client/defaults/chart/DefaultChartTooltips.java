@@ -20,6 +20,7 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
+import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.options.Tooltips;
 
 /**
@@ -379,4 +380,25 @@ public final class DefaultChartTooltips implements IsDefaultTooltips {
 	public int getBorderWidth() {
 		return tooltips.getBorderWidth();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#isRtl()
+	 */
+	@Override
+	public boolean isRtl() {
+		return tooltips.isRtl();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getTextDirection()
+	 */
+	@Override
+	public TextDirection getTextDirection() {
+		return tooltips.getTextDirection();
+	}
+
 }

@@ -28,6 +28,7 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
+import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.items.TooltipItem;
 import org.pepstock.charba.client.items.TooltipModel;
 import org.pepstock.charba.client.options.ExtendedOptions;
@@ -931,6 +932,44 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 	 */
 	public int getBorderWidth() {
 		return getConfiguration().getTooltips().getBorderWidth();
+	}
+
+	/**
+	 * Sets <code>true</code> for rendering the tooltips from right to left.
+	 * 
+	 * @param rtl <code>true</code> for rendering the tooltips from right to left
+	 */
+	public void setRtl(boolean rtl) {
+		getConfiguration().getTooltips().setRtl(rtl);
+	}
+
+	/**
+	 * Returns <code>true</code> for rendering the tooltips from right to left.
+	 * 
+	 * @return <code>true</code> for rendering the tooltips from right to left.
+	 */
+	public boolean isRtl() {
+		return getConfiguration().getTooltips().isRtl();
+	}
+
+	/**
+	 * Sets the text direction of the tooltip that will force the text direction on the canvas for rendering the tooltip,
+	 * regardless of the CSS specified on the canvas.
+	 * 
+	 * @param textDirection the text direction of the tooltip.
+	 */
+	public void setTextDirection(TextDirection textDirection) {
+		getConfiguration().getTooltips().setTextDirection(textDirection);
+	}
+
+	/**
+	 * Returns the text direction of the tooltip that will force the text direction on the canvas for rendering the tooltip,
+	 * regardless of the CSS specified on the canvas.
+	 * 
+	 * @return the text direction of the tooltip.
+	 */
+	public TextDirection getTextDirection() {
+		return getConfiguration().getTooltips().getTextDirection();
 	}
 
 	/**

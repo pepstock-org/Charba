@@ -20,6 +20,7 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
+import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.enums.TooltipPosition;
 
 /**
@@ -68,6 +69,8 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	private static final String DEFAULT_BORDER_COLOR = "rgba(0,0,0,0)";
 
 	private static final int DEFAULT_BORDER_WIDTH = 0;
+	
+	private static final boolean DEFAULT_RTL = false;
 
 	/*
 	 * (non-Javadoc)
@@ -407,6 +410,22 @@ public final class DefaultTooltips implements IsDefaultTooltips {
 	@Override
 	public int getBorderWidth() {
 		return DEFAULT_BORDER_WIDTH;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#isRtl()
+	 */
+	@Override
+	public boolean isRtl() {
+		return DEFAULT_RTL;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultTooltips#getTextDirection()
+	 */
+	@Override
+	public TextDirection getTextDirection() {
+		return TextDirection.LEFT_TO_RIGHT;
 	}
 
 }

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults.globals;
 
 import org.pepstock.charba.client.defaults.IsDefaultArc;
 import org.pepstock.charba.client.enums.BorderAlign;
+import org.pepstock.charba.client.items.UndefinedValues;
 
 /**
  * CHART.JS default values for ARC element.
@@ -24,7 +25,7 @@ import org.pepstock.charba.client.enums.BorderAlign;
  * @author Andrea "Stock" Stocchero
  */
 public final class DefaultArc extends AbstractDefaultOptionsElement implements IsDefaultArc {
-	
+
 	private static final String DEFAULT_BACKGROUND_COLOR = "rgba(0,0,0,0.1)";
 
 	private static final int DEFAULT_BORDER_WIDTH = 2;
@@ -32,7 +33,7 @@ public final class DefaultArc extends AbstractDefaultOptionsElement implements I
 	private static final String DEFAULT_BORDER_COLOR = "#fff";
 
 	private static final double DEFAULT_WEIGHT = 1D;
-	
+
 	/**
 	 * Creates a defualt arc
 	 */
@@ -58,6 +59,16 @@ public final class DefaultArc extends AbstractDefaultOptionsElement implements I
 	@Override
 	public double getWeight() {
 		return DEFAULT_WEIGHT;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getAngle()
+	 */
+	@Override
+	public double getAngle() {
+		return UndefinedValues.DOUBLE;
 	}
 
 }

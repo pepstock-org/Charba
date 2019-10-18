@@ -19,6 +19,7 @@ import org.pepstock.charba.client.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
 import org.pepstock.charba.client.enums.LegendAlign;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.options.Legend;
 
 /**
@@ -101,6 +102,24 @@ public final class DefaultChartLegend implements IsDefaultLegend {
 	@Override
 	public LegendAlign getAlign() {
 		return legend.getAlign();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#isRtl()
+	 */
+	@Override
+	public boolean isRtl() {
+		return legend.isRtl();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#getTextDirection()
+	 */
+	@Override
+	public TextDirection getTextDirection() {
+		return legend.getTextDirection();
 	}
 
 }

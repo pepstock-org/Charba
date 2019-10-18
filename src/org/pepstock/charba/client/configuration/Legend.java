@@ -23,6 +23,7 @@ import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.LegendAlign;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.events.LegendClickEvent;
@@ -307,5 +308,43 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	 */
 	public LegendAlign getAlign() {
 		return getConfiguration().getLegend().getAlign();
+	}
+
+	/**
+	 * Sets <code>true</code> for rendering the legends from right to left.
+	 * 
+	 * @param rtl <code>true</code> for rendering the legends from right to left
+	 */
+	public void setRtl(boolean rtl) {
+		getConfiguration().getLegend().setRtl(rtl);
+	}
+
+	/**
+	 * Returns <code>true</code> for rendering the legends from right to left.
+	 * 
+	 * @return <code>true</code> for rendering the legends from right to left.
+	 */
+	public boolean isRtl() {
+		return getConfiguration().getLegend().isRtl();
+	}
+
+	/**
+	 * Sets the text direction of the legend that will force the text direction on the canvas for rendering the legend,
+	 * regardless of the CSS specified on the canvas.
+	 * 
+	 * @param textDirection the text direction of the legend.
+	 */
+	public void setTextDirection(TextDirection textDirection) {
+		getConfiguration().getLegend().setTextDirection(textDirection);
+	}
+
+	/**
+	 * Returns the text direction of the legend that will force the text direction on the canvas for rendering the legend,
+	 * regardless of the CSS specified on the canvas.
+	 * 
+	 * @return the text direction of the legend.
+	 */
+	public TextDirection getTextDirection() {
+		return getConfiguration().getLegend().getTextDirection();
 	}
 }

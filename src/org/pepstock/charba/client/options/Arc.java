@@ -34,7 +34,8 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	private enum Property implements Key
 	{
 		BORDER_ALIGN("borderAlign"),
-		WEIGHT("weight");
+		WEIGHT("weight"),
+		ANGLE("angle");
 
 		// name value of property
 		private final String value;
@@ -115,5 +116,25 @@ public class Arc extends AbstractElement<IsDefaultArc> implements IsDefaultArc {
 	 */
 	public double getWeight() {
 		return getValue(Property.WEIGHT, getDefaultValues().getWeight());
+	}
+
+	/**
+	 * Sets the arc angle to cover.
+	 * 
+	 * @param angle the arc angle to cover
+	 */
+	public void setAngle(double angle) {
+		setValue(Property.ANGLE, angle);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the arc angle to cover.
+	 * 
+	 * @return the arc angle to cover
+	 */
+	public double getAngle() {
+		return getValue(Property.ANGLE, getDefaultValues().getAngle());
 	}
 }

@@ -19,6 +19,7 @@ import org.pepstock.charba.client.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.defaults.IsDefaultLegendLabels;
 import org.pepstock.charba.client.enums.LegendAlign;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.enums.TextDirection;
 
 /**
  * CHART.JS default values for LEGEND element.
@@ -32,6 +33,8 @@ public final class DefaultLegend implements IsDefaultLegend {
 	private static final boolean DEFAULT_FULL_WIDTH = true;
 
 	private static final boolean DEFAULT_REVERSE = false;
+
+	private static final boolean DEFAULT_RTL = false;
 
 	private final DefaultLegendLabels legendLabels = new DefaultLegendLabels();
 
@@ -94,5 +97,23 @@ public final class DefaultLegend implements IsDefaultLegend {
 	public LegendAlign getAlign() {
 		return LegendAlign.CENTER;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#isRtl()
+	 */
+	@Override
+	public boolean isRtl() {
+		return DEFAULT_RTL;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultLegend#getTextDirection()
+	 */
+	@Override
+	public TextDirection getTextDirection() {
+		return TextDirection.LEFT_TO_RIGHT;
+	}	
 
 }

@@ -17,6 +17,7 @@ package org.pepstock.charba.client.defaults;
 
 import org.pepstock.charba.client.enums.LegendAlign;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.enums.TextDirection;
 
 /**
  * Interface to define legends object defaults.
@@ -66,4 +67,20 @@ public interface IsDefaultLegend {
 	 * @return alignment of the legend.
 	 */
 	LegendAlign getAlign();
+
+	/**
+	 * Returns <code>true</code> for rendering the legends from right to left.
+	 * 
+	 * @return <code>true</code> for rendering the legends from right to left.
+	 */
+	boolean isRtl();
+
+	/**
+	 * Returns the text direction that will force on the canvas for rendering the legend, regardless of the CSS specified on the
+	 * canvas.
+	 * 
+	 * @return the text direction that will force on the canvas for rendering the legend, regardless of the CSS specified on the
+	 *         canvas
+	 */
+	TextDirection getTextDirection();
 }

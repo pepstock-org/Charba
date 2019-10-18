@@ -125,6 +125,10 @@ Here you can find the list of enhancement and updates available on `master` bran
     * add `z` property to gridline configuration object.
     * add `z` property to tick configuration object.
     * add `sampleSize` property to cartesian tick configuration object.
+    * add `display` property to point labels configuration object.
+    * add `angle` property to arc configuration object.
+    * add `rtl` and `textDirection` and property to legend configuration object.
+    * add `rtl` and `textDirection` and property to tooltips configuration object.
  * add `getPointStyleAsImage` and `isPointStyleAsImage` methods to `LegendLabelItem` class in order to manage images as point styles.
  * add `setPointStyle` methods, setting a image instance, to `LegendLabelItem` class in order to manage images as point styles.
  * add `CategoryTickCallback`and `TimeTickCallback` to manage axes which are managing strings and dates as data types. 

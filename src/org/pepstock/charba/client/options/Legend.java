@@ -20,6 +20,7 @@ import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.IsDefaultLegend;
 import org.pepstock.charba.client.enums.LegendAlign;
 import org.pepstock.charba.client.enums.Position;
+import org.pepstock.charba.client.enums.TextDirection;
 
 /**
  * The chart legend displays data about the datasets that area appearing on the chart.
@@ -41,7 +42,9 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 		DISPLAY("display"),
 		POSITION("position"),
 		FULL_WIDTH("fullWidth"),
-		REVERSE("reverse");
+		REVERSE("reverse"),
+		RTL("rtl"),
+		TEXT_DIRECTION("textDirection");
 
 		// name value of property
 		private final String value;
@@ -190,4 +193,47 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	public LegendAlign getAlign() {
 		return getValue(Property.ALIGN, LegendAlign.class, getDefaultValues().getAlign());
 	}
+
+	/**
+	 * Sets <code>true</code> for rendering the legends from right to left.
+	 * 
+	 * @param rtl <code>true</code> for rendering the legends from right to left
+	 */
+	public void setRtl(boolean rtl) {
+		setValue(Property.RTL, rtl);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns <code>true</code> for rendering the legends from right to left.
+	 * 
+	 * @return <code>true</code> for rendering the legends from right to left.
+	 */
+	public boolean isRtl() {
+		return getValue(Property.RTL, getDefaultValues().isRtl());
+	}
+
+	/**
+	 * Sets the text direction of the legend that will force the text direction on the canvas for rendering the legend,
+	 * regardless of the CSS specified on the canvas.
+	 * 
+	 * @param textDirection the text direction of the legend.
+	 */
+	public void setTextDirection(TextDirection textDirection) {
+		setValue(Property.TEXT_DIRECTION, textDirection);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the text direction of the legend that will force the text direction on the canvas for rendering the legend,
+	 * regardless of the CSS specified on the canvas.
+	 * 
+	 * @return the text direction of the legend.
+	 */
+	public TextDirection getTextDirection() {
+		return getValue(Property.TEXT_DIRECTION, TextDirection.class, getDefaultValues().getTextDirection());
+	}
+
 }

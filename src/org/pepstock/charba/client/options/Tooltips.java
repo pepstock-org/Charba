@@ -24,6 +24,7 @@ import org.pepstock.charba.client.enums.FontStyle;
 import org.pepstock.charba.client.enums.InteractionMode;
 import org.pepstock.charba.client.enums.IsTooltipPosition;
 import org.pepstock.charba.client.enums.TextAlign;
+import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.enums.TooltipPosition;
 import org.pepstock.charba.client.positioner.Positioner;
 
@@ -74,7 +75,9 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 		MULTI_KEY_BACKGROUND("multiKeyBackground"),
 		DISPLAY_COLORS("displayColors"),
 		BORDER_COLOR("borderColor"),
-		BORDER_WIDTH("borderWidth");
+		BORDER_WIDTH("borderWidth"),
+		RTL("rtl"),
+		TEXT_DIRECTION("textDirection");
 
 		// name value of property
 		private final String value;
@@ -911,5 +914,47 @@ public final class Tooltips extends AbstractHover<IsDefaultTooltips> implements 
 	 */
 	public int getBorderWidth() {
 		return getValue(Property.BORDER_WIDTH, getDefaultValues().getBorderWidth());
+	}
+
+	/**
+	 * Sets <code>true</code> for rendering the tooltips from right to left.
+	 * 
+	 * @param rtl <code>true</code> for rendering the tooltips from right to left
+	 */
+	public void setRtl(boolean rtl) {
+		setValue(Property.RTL, rtl);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns <code>true</code> for rendering the tooltips from right to left.
+	 * 
+	 * @return <code>true</code> for rendering the tooltips from right to left.
+	 */
+	public boolean isRtl() {
+		return getValue(Property.RTL, getDefaultValues().isRtl());
+	}
+
+	/**
+	 * Sets the text direction of the tooltips that will force the text direction on the canvas for rendering the tooltips,
+	 * regardless of the CSS specified on the canvas.
+	 * 
+	 * @param textDirection the text direction of the tooltips.
+	 */
+	public void setTextDirection(TextDirection textDirection) {
+		setValue(Property.TEXT_DIRECTION, textDirection);
+		// checks if the node is already added to parent
+		checkAndAddToParent();
+	}
+
+	/**
+	 * Returns the text direction of the tooltips that will force the text direction on the canvas for rendering the tooltips,
+	 * regardless of the CSS specified on the canvas.
+	 * 
+	 * @return the text direction of the tooltips.
+	 */
+	public TextDirection getTextDirection() {
+		return getValue(Property.TEXT_DIRECTION, TextDirection.class, getDefaultValues().getTextDirection());
 	}
 }

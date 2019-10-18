@@ -73,4 +73,22 @@ public class Arc extends AbstractConfigurationElement {
 	public double getWeight() {
 		return getOptions().getElements().getArc().getWeight();
 	}
+
+	/**
+	 * Sets the arc angle to cover.
+	 * 
+	 * @param angle the arc angle to cover
+	 */
+	public void setAngle(double angle) {
+		getOptions().getElements().getArc().setAngle(angle);
+	}
+
+	/**
+	 * Returns the arc angle to cover.
+	 * 
+	 * @return the arc angle to cover
+	 */
+	public double getAngle() {
+		return getOptions().getElements().getArc().getAngle();
+	}
 }

@@ -87,4 +87,12 @@ public final class DefaultChartArc implements IsDefaultArc {
 		return arc.getWeight();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.pepstock.charba.client.defaults.IsDefaultArc#getAngle()
+	 */
+	@Override
+	public double getAngle() {
+		return arc.getAngle();
+	}	
+
 }
