@@ -365,7 +365,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Returns the user callback that runs before/after data limits are determined.
 	 * 
-	 * @return the axisDataLimitsCallback
+	 * @return the user callback that runs before/after data limits are determined
 	 */
 	public AxisDataLimitsCallback getAxisDataLimitsCallback() {
 		return axisDataLimitsCallback;
@@ -374,7 +374,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Sets the user callback that runs before/after data limits are determined.
 	 * 
-	 * @param axisDataLimitsCallback the axisDataLimitsCallback to set
+	 * @param axisDataLimitsCallback the user callback that runs before/after data limits are determined
 	 */
 	public void setAxisDataLimitsCallback(AxisDataLimitsCallback axisDataLimitsCallback) {
 		// sets the callback
@@ -394,7 +394,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Returns the user callback that runs before/after dimensions are set.
 	 * 
-	 * @return the axisDimensionsCallback
+	 * @return the user callback that runs before/after dimensions are set
 	 */
 	public AxisDimensionsCallback getAxisDimensionsCallback() {
 		return axisDimensionsCallback;
@@ -403,7 +403,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Sets the user callback that runs before/after dimensions are set.
 	 * 
-	 * @param axisDimensionsCallback the axisDimensionsCallback to set
+	 * @param axisDimensionsCallback the user callback that runs before/after dimensions are set
 	 */
 	public void setAxisDimensionsCallback(AxisDimensionsCallback axisDimensionsCallback) {
 		// sets the callback
@@ -423,7 +423,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Returns the user callback that runs before/after the scale fits to the canvas.
 	 * 
-	 * @return the axisFitCallback
+	 * @return the user callback that runs before/after the scale fits to the canvas
 	 */
 	public AxisFitCallback getAxisFitCallback() {
 		return axisFitCallback;
@@ -432,7 +432,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Sets the user callback that runs before/after the scale fits to the canvas.
 	 * 
-	 * @param axisFitCallback the axisFitCallback to set
+	 * @param axisFitCallback the user callback that runs before/after the scale fits to the canvas
 	 */
 	public void setAxisFitCallback(AxisFitCallback axisFitCallback) {
 		// sets the callback
@@ -452,7 +452,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Returns the user callback that runs before/after ticks are converted into strings.
 	 * 
-	 * @return the axisTickToLabelConversionCallback
+	 * @return the user callback that runs before/after ticks are converted into strings
 	 */
 	public AxisTickToLabelConversionCallback getAxisTickToLabelConversionCallback() {
 		return axisTickToLabelConversionCallback;
@@ -461,7 +461,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Sets the user callback that runs before/after ticks are converted into strings.
 	 * 
-	 * @param axisTickToLabelConversionCallback the axisTickToLabelConversionCallback to set
+	 * @param axisTickToLabelConversionCallback the user callback that runs before/after ticks are converted into strings
 	 */
 	public void setAxisTickToLabelConversionCallback(AxisTickToLabelConversionCallback axisTickToLabelConversionCallback) {
 		// sets the callback
@@ -481,7 +481,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Returns the user callback that runs before/after of the update process.
 	 * 
-	 * @return the axisUpdateCallback
+	 * @return the user callback that runs before/after of the update process
 	 */
 	public AxisUpdateCallback getAxisUpdateCallback() {
 		return axisUpdateCallback;
@@ -490,7 +490,7 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 	/**
 	 * Sets the user callback that runs before/after of the update process.
 	 * 
-	 * @param axisUpdateCallback the axisUpdateCallback to set
+	 * @param axisUpdateCallback the user callback that runs before/after of the update process
 	 */
 	public void setAxisUpdateCallback(AxisUpdateCallback axisUpdateCallback) {
 		// sets the callback
