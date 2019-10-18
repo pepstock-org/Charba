@@ -160,6 +160,7 @@ Here you can find the list of enhancement and updates available on `master` bran
  * reset of callback instances when the property has been set with object object type.
  * improve the single scale options management when a `null` is passed as argument to chart options.
  * change type from `int` to `double` for `min` and `max` properties into `ScaleItem`
+ * remove the inner options from cache of `AbstractPluginCachedOptions` when chart is destroy
  
 License
 -------

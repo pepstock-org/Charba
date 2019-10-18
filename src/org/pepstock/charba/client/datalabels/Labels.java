@@ -15,12 +15,14 @@
 */
 package org.pepstock.charba.client.datalabels;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.plugins.AbstractPluginCachedOptions;
 
 /**
  * Base object to map multi labels options for {@link DataLabelsPlugin#ID} plugin configuration.<br>
@@ -41,6 +43,15 @@ public final class Labels extends AbstractElement {
 	 */
 	Labels() {
 		super();
+	}
+
+	/**
+	 * Returns a collection with all stored data labels options.
+	 * 
+	 * @return a collection with all stored data labels options
+	 */
+	Collection<AbstractPluginCachedOptions> getAllOptions() {
+		return Collections.unmodifiableCollection(storedOptions.values());
 	}
 
 	/**

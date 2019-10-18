@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.datalabels;
 
+import java.util.Collection;
+
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
@@ -411,6 +413,16 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 */
 	void registerOptions() {
 		super.register();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.plugins.AbstractPluginCachedOptions#getInnerOptions()
+	 */
+	@Override
+	protected Collection<AbstractPluginCachedOptions> getInnerOptions() {
+		return labels.getAllOptions();
 	}
 
 	/**

@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.plugins;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -83,6 +84,16 @@ public abstract class AbstractPluginCachedOptions extends AbstractPluginOptions 
 			// registers into cache
 			factory.registerOptions(this);
 		}
+	}
+
+	/**
+	 * Returns a collection of inner options of the main one.<br>
+	 * Must be override if inner options must be removed from cache.
+	 * 
+	 * @return a collection of inner options of the main one. This implementation returns always <code>null</code>.
+	 */
+	protected Collection<AbstractPluginCachedOptions> getInnerOptions(){
+		return null;
 	}
 
 }

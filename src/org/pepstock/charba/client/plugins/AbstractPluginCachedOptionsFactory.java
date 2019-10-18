@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.plugins;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -140,7 +141,7 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	 * @param options plugin options instance
 	 * @param tag tag to add to the options
 	 */
-	private void register(T options, String tag) {
+	private void register(AbstractPluginCachedOptions options, String tag) {
 		// gets references
 		List<String> references = options.getReferences();
 		// checks if has got the reference to the chart
@@ -156,13 +157,25 @@ public abstract class AbstractPluginCachedOptionsFactory<T extends AbstractPlugi
 	 * @param options plugin options instance
 	 * @param tag tag to remove from the options
 	 */
-	private void unregister(T options, String tag) {
+	private void unregister(AbstractPluginCachedOptions options, String tag) {
 		// gets references
 		List<String> references = options.getReferences();
+		// remove tag
+		references.remove(tag);
 		// removes the reference to chart and checks if empty
-		if (references.remove(tag) && references.isEmpty()) {
+		if (references.isEmpty()) {
 			// removes from cache
 			OPTIONS.remove(options.getId());
+			// gets inner options
+			Collection<AbstractPluginCachedOptions> innerOptionsCollection = options.getInnerOptions();
+			// checks if consistent
+			if (innerOptionsCollection != null && !innerOptionsCollection.isEmpty()) {
+				// scans all inner options
+				for (AbstractPluginCachedOptions innerOptions : innerOptionsCollection) {
+					// unregister recursively
+					unregister(innerOptions, tag);
+				}
+			}
 		}
 	}
 
