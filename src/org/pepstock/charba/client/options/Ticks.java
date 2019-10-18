@@ -758,10 +758,10 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * Sets z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to= 0 are drawn under
+	 * Sets z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn under
 	 * datasets, greater than 0 on top.
 	 * 
-	 * @param z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to= 0 are drawn under
+	 * @param z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn under
 	 *            datasets, greater than 0 on top.
 	 */
 	public void setZ(int z) {
@@ -771,10 +771,10 @@ public final class Ticks extends AbstractTick<Scale, IsDefaultTicks> implements 
 	}
 
 	/**
-	 * Returns z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to= 0 are drawn
+	 * Returns z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn
 	 * under datasets, greater than 0 on top.
 	 * 
-	 * @return z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to= 0 are drawn
+	 * @return z-index of tick layer. Useful when ticks are drawn on chart area. Values less than or equals to 0 are drawn
 	 *         under datasets, greater than 0 on top.
 	 */
 	public int getZ() {
