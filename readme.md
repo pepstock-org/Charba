@@ -129,6 +129,8 @@ Here you can find the list of enhancement and updates available on `master` bran
     * add `angle` property to arc configuration object.
     * add `rtl` and `textDirection` and property to legend configuration object.
     * add `rtl` and `textDirection` and property to tooltips configuration object.
+ * import last DATALABELS CHART.JS plugin version, [0.7.0](https://github.com/chartjs/chartjs-plugin-datalabels/releases/tag/v0.7.0)
+    * Implement multiple `labels` per data element  
  * add `getPointStyleAsImage` and `isPointStyleAsImage` methods to `LegendLabelItem` class in order to manage images as point styles.
  * add `setPointStyle` methods, setting a image instance, to `LegendLabelItem` class in order to manage images as point styles.
  * add `CategoryTickCallback`and `TimeTickCallback` to manage axes which are managing strings and dates as data types. 

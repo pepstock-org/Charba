@@ -33,7 +33,7 @@ interface HasTextDirection extends IsDefaultTextDirectioner {
 	 * @return a text directioner instance
 	 */
 	TextDirectioner getTextDirectioner();
-	
+
 	/**
 	 * Sets <code>true</code> for rendering the tooltips from right to left.
 	 * 
@@ -60,7 +60,7 @@ interface HasTextDirection extends IsDefaultTextDirectioner {
 		// if here, text directioner is not consistent
 		return Defaults.get().getGlobal().getLegend().isRtl();
 	}
-	
+
 	/**
 	 * Sets the text direction of the tooltips that will force the text direction on the canvas for rendering the tooltips,
 	 * regardless of the CSS specified on the canvas.

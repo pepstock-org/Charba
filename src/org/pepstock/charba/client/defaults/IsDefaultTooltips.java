@@ -25,7 +25,7 @@ import org.pepstock.charba.client.enums.TextAlign;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultTooltips extends IsDefaultTextDirectioner{
+public interface IsDefaultTooltips extends IsDefaultTextDirectioner {
 
 	/**
 	 * Returns if tooltips are enabled.

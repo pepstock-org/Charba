@@ -273,6 +273,8 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	private final Padding padding;
 	// font inner element
 	private final Font font;
+	// labels inner element
+	private final Labels labels;
 
 	/**
 	 * Name of properties of native object.
@@ -300,7 +302,8 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		TEXT_STROKE_COLOR("textStrokeColor"),
 		TEXT_STROKE_WIDTH("textStrokeWidth"),
 		TEXT_SHADOW_BLUR("textShadowBlur"),
-		TEXT_SHADOW_COLOR("textShadowColor");
+		TEXT_SHADOW_COLOR("textShadowColor"),
+		LABELS("labels");
 
 		// name value of property
 		private final String value;
@@ -350,10 +353,12 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		padding = new Padding(defaultsOptions.getPadding());
 		font = new Font(defaultsOptions.getFont());
 		listeners = new Listeners();
+		labels = new Labels();
 		// stores inner elements
 		setValue(Property.PADDING, padding);
 		setValue(Property.FONT, font);
 		setValue(Property.LISTENERS, listeners);
+		setValue(Property.LABELS, labels);
 		// sets unique id
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
@@ -406,6 +411,15 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 	 */
 	void registerOptions() {
 		super.register();
+	}
+
+	/**
+	 * Returns the labels element.
+	 * 
+	 * @return the labels element.
+	 */
+	public Labels getLabels() {
+		return labels;
 	}
 
 	/**

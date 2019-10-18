@@ -67,8 +67,8 @@ final class TextDirectioner extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates a text directioner with the native object where FONTs properties must be managed and the default value to use when the
-	 * property does not exist.
+	 * Creates a text directioner with the native object where FONTs properties must be managed and the default value to use
+	 * when the property does not exist.
 	 * 
 	 * @param nativeObject native object where text direction properties must be managed
 	 * @param model model which contains the text directioner.
@@ -89,7 +89,6 @@ final class TextDirectioner extends NativeObjectContainer {
 		this.model = model;
 		this.defaultValues = defaultValues;
 	}
-
 
 	/**
 	 * Sets <code>true</code> for rendering the tooltips from right to left.

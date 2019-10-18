@@ -23,7 +23,7 @@ import org.pepstock.charba.client.enums.Position;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public interface IsDefaultLegend extends IsDefaultTextDirectioner{
+public interface IsDefaultLegend extends IsDefaultTextDirectioner {
 
 	/**
 	 * Returns the labels object defaults.

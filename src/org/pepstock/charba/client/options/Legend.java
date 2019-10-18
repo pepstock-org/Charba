@@ -30,7 +30,7 @@ import org.pepstock.charba.client.enums.Position;
 public final class Legend extends AbstractModel<Options, IsDefaultLegend> implements IsDefaultLegend, HasTextDirection {
 
 	private LegendLabels labels;
-	
+
 	private final TextDirectioner textDirectioner;
 
 	/**
@@ -97,7 +97,7 @@ public final class Legend extends AbstractModel<Options, IsDefaultLegend> implem
 	public TextDirectioner getTextDirectioner() {
 		return textDirectioner;
 	}
-	
+
 	/**
 	 * Returns the legend labels element.
 	 * 
