@@ -51,6 +51,14 @@ public final class Configuration {
 	 */
 	@JsProperty(name = "type")
 	native void setNativeType(String type);
+	
+	/**
+	 * Returns the options of chart by the <code>options</code> property into native object.
+	 * 
+	 * @return options options of chart as native object.
+	 */
+	@JsProperty
+	native NativeObject getOptions();
 
 	/**
 	 * Sets the options of chart by the <code>options</code> property into native object.

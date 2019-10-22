@@ -140,6 +140,7 @@ Here you can find the list of enhancement and updates available on `master` bran
  * add `minNotZero` property into `ScaleItem`.
  * add methods to get `min` and `max` properties as a date from `ScaleItem`.
  * add methods to get ticks items (not only values) from `ScaleItem`.
+ * add methods `updateOptions` to charts in order to update the options, mutating the options property in place, and update the whole chart. This is addressing the issue [23](https://github.com/pepstock-org/Charba/issues/23).
 
 ### Fixed Bugs
 

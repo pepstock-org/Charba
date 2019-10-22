@@ -492,6 +492,46 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	}
 
 	/**
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options,
+	 * mutating the options property in place.
+	 */
+	@Override
+	public final void updateOptions() {
+		updateOptions(null);
+	}
+
+	/**
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options,
+	 * mutating the options property in place. A configuration object can be provided with additional configuration for the
+	 * update process. This is useful when update is manually called inside an event handler and some different animation is
+	 * desired.
+	 * 
+	 * @param configuration a configuration object can be provided with additional configuration for the update process
+	 */
+	@Override
+	public final void updateOptions(UpdateConfiguration configuration) {
+		// checks if chart is created
+		if (chart != null) {
+			// updates option passed by configuration element
+			Configuration tempConfiguration = new Configuration();
+			// gets options
+			ConfigurationOptions internalOptions = getOptions();
+			// sets options by temporary configuration
+			tempConfiguration.setOptions(this, internalOptions);
+			// replace the options
+			chart.setOptions(tempConfiguration.getOptions());
+			// if config is not passed..
+			if (configuration == null) {
+				// .. calls the update
+				chart.update();
+			} else {
+				// .. otherwise calls the update with config
+				chart.update(configuration.getObject());
+			}
+		}
+	}
+
+	/**
 	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in
 	 * that case.
 	 */

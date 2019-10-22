@@ -209,17 +209,35 @@ public interface IsChart extends HasHandlers {
 	void update();
 
 	/**
-	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update all scales,
-	 * legends, and then re-render the chart. A config object can be provided with additional configuration for the update
-	 * process. This is useful when update is manually called inside an event handler and some different animation is desired.
+	 * Triggers an update of the chart.<br>
+	 * This can be safely called after updating the data object.<br>
+	 * This will update all scales, legends, and then re-render the chart.<br>
+	 * A config object can be provided with additional configuration for the update process.<br>
+	 * This is useful when update is manually called inside an event handler and some different animation is desired.
 	 * 
 	 * @param config a config object can be provided with additional configuration for the update process
 	 */
 	void update(UpdateConfiguration config);
+	
+	/**
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options,
+	 * mutating the options property in place.
+	 */
+	void updateOptions();
+	
+	/**
+	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options,
+	 * mutating the options property in place. A configuration object can be provided with additional configuration for the
+	 * update process. This is useful when update is manually called inside an event handler and some different animation is
+	 * desired.
+	 * 
+	 * @param configuration a configuration object can be provided with additional configuration for the update process
+	 */
+	void updateOptions(UpdateConfiguration configuration);
 
 	/**
-	 * Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use <code>.update()</code> in
-	 * that case.
+	 * Triggers a redraw of all chart elements.<br>
+	 * Note, this does not update elements for new data. Use <code>.update()</code> in that case.
 	 */
 	void render();
 
