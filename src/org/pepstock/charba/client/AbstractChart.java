@@ -520,14 +520,8 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 			tempConfiguration.setOptions(this, internalOptions);
 			// replace the options
 			chart.setOptions(tempConfiguration.getOptions());
-			// if config is not passed..
-			if (configuration == null) {
-				// .. calls the update
-				chart.update();
-			} else {
-				// .. otherwise calls the update with config
-				chart.update(configuration.getObject());
-			}
+			// update chart
+			update(configuration);
 		}
 	}
 
