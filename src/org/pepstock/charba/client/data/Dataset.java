@@ -82,6 +82,8 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	private static final AtomicInteger COUNTER = new AtomicInteger(0);
 	// default for hidden property
 	private static final boolean DEFAULT_HIDDEN = false;
+	// default for order property
+	private static final int DEFAULT_ORDER = 0;
 	// factory to create data points
 	static final DataPointFactory DATAPOINTS_FACTORY = new DataPointFactory();
 	// factory to create time series items
@@ -110,6 +112,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		DATA("data"),
 		TYPE("type"),
 		HIDDEN("hidden"),
+		ORDER("order"),
 		BACKGROUND_COLOR("backgroundColor"),
 		BORDER_COLOR("borderColor"),
 		BORDER_WIDTH("borderWidth"),
@@ -518,6 +521,25 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 		return getValue(Property.HIDDEN, DEFAULT_HIDDEN);
 	}
 
+	/**
+	 * Sets the drawing order of dataset. Also affects order for stacking, tooltip, and legend.
+	 * 
+	 * @param order the drawing order of dataset.
+	 */
+	public void setOrder(int order) {
+		// then sets it
+		setValue(Property.ORDER, order);
+	}
+
+	/**
+	 * Returns the drawing order of dataset. Also affects order for stacking, tooltip, and legend.
+	 * 
+	 * @return the drawing order of dataset
+	 */
+	public int getOrder() {
+		return getValue(Property.ORDER, DEFAULT_ORDER);
+	}
+	
 	/**
 	 * Sets the label for the dataset which appears in the legend and tooltips.
 	 * 

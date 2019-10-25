@@ -127,8 +127,9 @@ Here you can find the list of enhancement and updates available on `master` bran
     * add `sampleSize` property to cartesian tick configuration object.
     * add `display` property to point labels configuration object.
     * add `angle` property to arc configuration object.
-    * add `rtl` and `textDirection` and property to legend configuration object.
-    * add `rtl` and `textDirection` and property to tooltips configuration object.
+    * add `rtl` and `textDirection` properties to legend configuration object.
+    * add `rtl` and `textDirection` properties to tooltips configuration object.
+    * add `order` property to datasets.
  * import last DATALABELS CHART.JS plugin version, [0.7.0](https://github.com/chartjs/chartjs-plugin-datalabels/releases/tag/v0.7.0)
     * Implement multiple `labels` per data element  
  * add `getPointStyleAsImage` and `isPointStyleAsImage` methods to `LegendLabelItem` class in order to manage images as point styles.
