@@ -539,7 +539,7 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	public int getOrder() {
 		return getValue(Property.ORDER, DEFAULT_ORDER);
 	}
-	
+
 	/**
 	 * Sets the label for the dataset which appears in the legend and tooltips.
 	 * 

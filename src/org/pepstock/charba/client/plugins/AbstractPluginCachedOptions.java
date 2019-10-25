@@ -95,7 +95,7 @@ public abstract class AbstractPluginCachedOptions extends AbstractPluginOptions 
 	 * 
 	 * @return a collection of inner options of the main one. This implementation returns always an empty collection.
 	 */
-	protected Collection<AbstractPluginCachedOptions> getInnerOptions(){
+	protected Collection<AbstractPluginCachedOptions> getInnerOptions() {
 		return EMPTY_INNER_OPTIONS;
 	}
 

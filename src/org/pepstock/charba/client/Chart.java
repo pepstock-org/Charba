@@ -348,7 +348,7 @@ public final class Chart {
 	 */
 	@JsProperty
 	native NativeObject getOptions();
-	
+
 	/**
 	 * Sets new options node, as native object, for updating a existing chart.
 	 * 

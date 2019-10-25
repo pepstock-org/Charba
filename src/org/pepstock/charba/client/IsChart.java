@@ -218,13 +218,13 @@ public interface IsChart extends HasHandlers {
 	 * @param config a config object can be provided with additional configuration for the update process
 	 */
 	void update(UpdateConfiguration config);
-	
+
 	/**
 	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options,
 	 * mutating the options property in place.
 	 */
 	void updateOptions();
-	
+
 	/**
 	 * Triggers an update of the chart. This can be safely called after updating the data object. This will update the options,
 	 * mutating the options property in place. A configuration object can be provided with additional configuration for the
