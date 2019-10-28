@@ -38,20 +38,20 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>2.5</version>
+    <version>2.6</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="2.5"/>
+<dependency org="org.pepstock" name="charba" rev="2.6"/>
 ```
 
 If you are using [Gradle](https://gradle.org/):
 
 ```json
-compile group: 'org.pepstock', name: 'charba', version: '2.5'
+compile group: 'org.pepstock', name: 'charba', version: '2.6'
 ```
 
 To install in your GWT project, you must the following configuration into your GWT project module configuration:
@@ -79,7 +79,7 @@ Documentation
 
 All **Charba** documentation will be maintained into [GitHub wiki](https://github.com/pepstock-org/Charba/wiki) of **Charba** project.
 
-API JavaDoc is published [here](http://www.pepstock.org/Charba/2.5/index.html).
+API JavaDoc is published [here](http://www.pepstock.org/Charba/2.6/index.html).
 
 Showcase
 --------
@@ -97,7 +97,7 @@ Continuous integration and quality gate
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
-In the project, it's also provided the [FindBugs](https://github.com/pepstock-org/Charba/blob/2.5/charba.fbp) project to looking offline for bugs.
+In the project, it's also provided the [FindBugs](https://github.com/pepstock-org/Charba/blob/2.6/charba.fbp) project to looking offline for bugs.
 
 Going to new version
 -------
