@@ -191,6 +191,7 @@
     */
     CharbaJsControllerHelper.extend = function(controllerType, chartType, instance) {
 		Chart.defaults[controllerType] = Chart.defaults[chartType];
+		Chart.defaults.global.datasets[controllerType] = Chart.defaults.global.datasets[chartType];
 		Chart.controllers[controllerType] = Chart.controllers[chartType].extend(instance);
     }
     /*
