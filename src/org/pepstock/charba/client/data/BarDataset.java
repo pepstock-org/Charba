@@ -39,7 +39,7 @@ import org.pepstock.charba.client.utils.Utilities;
 public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasOrder {
 	// default label
 	private static final String DEFAULT_LABEL = Utilities.EMPTY_STRING;
-	
+
 	/**
 	 * If set to 'flex', the base sample widths are calculated automatically based on the previous and following samples so that
 	 * they take the full available widths without overlap. Then, bars are sized using barPercentage and categoryPercentage.
@@ -49,7 +49,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	public static final int FLEX_BAR_THICKNESS = Integer.MIN_VALUE;
 	// this is the value which must be stored in JS object when flex bar thickness is set
 	private static final String FLEX_BAR_THICKNESS_VALUE = "flex";
-	
+
 	private static final double DEFAULT_BAR_PERCENTAGE = 0.9D;
 
 	private static final double DEFAULT_CATEGORY_PERCENTAGE = 0.8D;
@@ -195,7 +195,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	public String getYAxisID() {
 		return getValue(Property.Y_AXIS_ID, Scales.DEFAULT_Y_AXIS_ID);
 	}
-	
+
 	/**
 	 * Sets the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
 	 * category width and put the bars right next to each other.
@@ -307,7 +307,6 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	public int getMinBarLength() {
 		return getValue(Property.MIN_BAR_LENGTH, DEFAULT_MIN_BAR_LENGTH);
 	}
-
 
 	/**
 	 * Sets the stroke width of the bar in pixels.
