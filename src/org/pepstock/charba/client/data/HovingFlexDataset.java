@@ -46,39 +46,6 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
 public abstract class HovingFlexDataset extends Dataset {
 
 	/**
-	 * Name of properties of native object.
-	 */
-	enum Property implements Key
-	{
-		HOVER_BACKGROUND_COLOR("hoverBackgroundColor"),
-		HOVER_BORDER_COLOR("hoverBorderColor"),
-		HOVER_BORDER_WIDTH("hoverBorderWidth");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
-
-	/**
 	 * Creates the dataset using a default.
 	 * 
 	 * @param defaultValues default options

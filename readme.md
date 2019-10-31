@@ -104,12 +104,6 @@ Going to new version
 
 Here you can find the list of enhancement and updates available on `master` branch before which will be part of new official release:
 
-**2.6** is the last stable release.
-
-Documentation: [https://github.com/pepstock-org/Charba/wiki](https://github.com/pepstock-org/Charba/wiki).
-API JavaDoc: [http://www.pepstock.org/Charba/2.6/index.html](http://www.pepstock.org/Charba/2.6/index.html).
-Showcase:  [http://www.pepstock.org/Charba-Showcase/Charba_Showcase.html](http://www.pepstock.org/Charba-Showcase/Charba_Showcase.html).
-
 ### Features
  
  * import last CHART.JS version, [2.9.1](https://github.com/chartjs/Chart.js/releases/tag/v2.9.1). Due to a bug (IE and Edge didn't work) on official published version, the [Chart.JS](http://www.chartjs.org/) version is 2.9.1 at commit `09bd524dd3dc6c8ee7cc295f479d2fba7255dd02`.

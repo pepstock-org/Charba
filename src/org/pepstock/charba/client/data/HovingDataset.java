@@ -19,9 +19,6 @@ import java.util.List;
 
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
-import org.pepstock.charba.client.callbacks.BorderWidthCallback;
-import org.pepstock.charba.client.callbacks.ScriptableFunctions;
-import org.pepstock.charba.client.callbacks.ScriptableUtils;
 import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
@@ -32,8 +29,6 @@ import org.pepstock.charba.client.commons.ArrayObjectContainerList;
 import org.pepstock.charba.client.commons.ArrayPattern;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.ArrayStringList;
-import org.pepstock.charba.client.commons.CallbackProxy;
-import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
@@ -49,23 +44,6 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
  */
 public abstract class HovingDataset extends HovingFlexDataset {
 
-	// ---------------------------
-	// -- CALLBACKS PROXIES ---
-	// ---------------------------
-	// callback proxy to invoke the hover background color function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> hoverBackgroundColorCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the hover border color function
-	private final CallbackProxy<ScriptableFunctions.ProxyObjectCallback> hoverBorderColorCallbackProxy = JsHelper.get().newCallbackProxy();
-	// callback proxy to invoke the hover border width function
-	private final CallbackProxy<ScriptableFunctions.ProxyIntegerCallback> hoverBorderWidthCallbackProxy = JsHelper.get().newCallbackProxy();
-
-	// hover background color callback instance
-	private BackgroundColorCallback hoverBackgroundColorCallback = null;
-	// hover border color callback instance
-	private BorderColorCallback hoverBorderColorCallback = null;
-	// hover borderWidth callback instance
-	private BorderWidthCallback hoverBorderWidthCallback = null;
-
 	/**
 	 * Creates the dataset using a default.
 	 * 
@@ -73,15 +51,6 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	 */
 	HovingDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
-		// -------------------------------
-		// -- SET CALLBACKS to PROXIES ---
-		// -------------------------------
-		// gets value calling callback
-		hoverBackgroundColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, hoverBackgroundColorCallback, getDefaultBackgroundColorAsString()));
-		// gets value calling callback
-		hoverBorderColorCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValueAsColor(context, hoverBorderColorCallback, getDefaultBorderColorAsString(), false));
-		// gets value calling callback
-		hoverBorderWidthCallbackProxy.setCallback((contextFunction, context) -> ScriptableUtils.getOptionValue(context, hoverBorderWidthCallback, getDefaultBorderWidth()).intValue());
 	}
 
 	/*
@@ -339,91 +308,6 @@ public abstract class HovingDataset extends HovingFlexDataset {
 		// if here, is a callback
 		// then returns an empty list
 		return new ArrayIntegerList();
-	}
-
-	/**
-	 * Returns the hover background color callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the hover background color callback, if set, otherwise <code>null</code>.
-	 */
-	public BackgroundColorCallback getHoverBackgroundColorCallback() {
-		return hoverBackgroundColorCallback;
-	}
-
-	/**
-	 * Sets the hover background color callback.
-	 * 
-	 * @param hoverBackgroundColorCallback the hover background color callback.
-	 */
-	public void setHoverBackgroundColor(BackgroundColorCallback hoverBackgroundColorCallback) {
-		// sets the callback
-		this.hoverBackgroundColorCallback = hoverBackgroundColorCallback;
-		// checks if callback is consistent
-		if (hoverBackgroundColorCallback != null) {
-			// resets previous setting
-			resetBeingCallback(Property.HOVER_BACKGROUND_COLOR);
-			// adds the callback proxy function to java script object
-			setValue(Property.HOVER_BACKGROUND_COLOR, hoverBackgroundColorCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.HOVER_BACKGROUND_COLOR);
-		}
-	}
-
-	/**
-	 * Returns the hover border color callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the hover border color callback, if set, otherwise <code>null</code>.
-	 */
-	public BorderColorCallback getHoverBorderColorCallback() {
-		return hoverBorderColorCallback;
-	}
-
-	/**
-	 * Sets the hover border color callback.
-	 * 
-	 * @param hoverBorderColorCallback the hover border color callback.
-	 */
-	public void setHoverBorderColor(BorderColorCallback hoverBorderColorCallback) {
-		// sets the callback
-		this.hoverBorderColorCallback = hoverBorderColorCallback;
-		// checks if callback is consistent
-		if (hoverBorderColorCallback != null) {
-			// resets previous setting
-			resetBeingCallback(Property.HOVER_BORDER_COLOR);
-			// adds the callback proxy function to java script object
-			setValue(Property.HOVER_BORDER_COLOR, hoverBorderColorCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.HOVER_BORDER_COLOR);
-		}
-	}
-
-	/**
-	 * Returns the hover border width callback, if set, otherwise <code>null</code>.
-	 * 
-	 * @return the hover border width callback, if set, otherwise <code>null</code>.
-	 */
-	public BorderWidthCallback getHoverBorderWidthCallback() {
-		return hoverBorderWidthCallback;
-	}
-
-	/**
-	 * Sets the hover border width callback.
-	 * 
-	 * @param hoverBorderWidthCallback the hover border width callback to set
-	 */
-	public void setHoverBorderWidth(BorderWidthCallback hoverBorderWidthCallback) {
-		// sets the callback
-		this.hoverBorderWidthCallback = hoverBorderWidthCallback;
-		// checks if callback is consistent
-		if (hoverBorderWidthCallback != null) {
-			// adds the callback proxy function to java script object
-			setValue(Property.HOVER_BORDER_WIDTH, hoverBorderWidthCallbackProxy.getProxy());
-		} else {
-			// otherwise sets null which removes the properties from java script object
-			remove(Property.HOVER_BORDER_WIDTH);
-		}
 	}
 
 	/*
