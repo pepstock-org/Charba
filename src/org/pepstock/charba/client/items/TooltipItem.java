@@ -37,8 +37,6 @@ public final class TooltipItem extends NativeObjectContainer {
 	{
 		LABEL("label"),
 		VALUE("value"),
-		X_LABEL("xLabel"),
-		Y_LABEL("yLabel"),
 		DATASET_INDEX("datasetIndex"),
 		INDEX("index"),
 		X("x"),
@@ -93,28 +91,6 @@ public final class TooltipItem extends NativeObjectContainer {
 	 */
 	public String getValue() {
 		return getValue(Property.VALUE, UndefinedValues.STRING);
-	}
-
-	/**
-	 * Returns the X location of label. Is {@link Deprecated}, use `value` or `label` instead
-	 * 
-	 * @return the X location of label. Default is {@link UndefinedValues#STRING}.
-	 * @deprecated use `value` or `label` instead
-	 */
-	@Deprecated
-	public String getXLabel() {
-		return getValue(Property.X_LABEL, UndefinedValues.STRING);
-	}
-
-	/**
-	 * Returns the Y location of label. Is {@link Deprecated}, use `value` or `label` instead
-	 * 
-	 * @return the Y location of label. Default is {@link UndefinedValues#STRING}.
-	 * @deprecated use `value` or `label` instead
-	 */
-	@Deprecated
-	public String getYLabel() {
-		return getValue(Property.Y_LABEL, UndefinedValues.STRING);
 	}
 
 	/**

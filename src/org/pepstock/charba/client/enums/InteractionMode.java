@@ -37,20 +37,6 @@ public enum InteractionMode implements Key
 	 */
 	NEAREST("nearest"),
 	/**
-	 * See 'index' mode.
-	 * 
-	 * @deprecated use 'index' instead of this
-	 */
-	@Deprecated
-	LABEL("label"),
-	/**
-	 * Finds the first item that intersects the point and returns it.
-	 * 
-	 * @deprecated CHART.JS does not use it anymore but it still there
-	 */
-	@Deprecated
-	SINGLE("single"),
-	/**
 	 * Finds item at the same index. If the intersect setting is true, the first intersecting item is used to determine the
 	 * index in the data.<br>
 	 * If intersect false the nearest item, in the x direction, is used to determine the index.
