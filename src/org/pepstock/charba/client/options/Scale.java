@@ -45,16 +45,6 @@ import org.pepstock.charba.client.items.UndefinedValues;
  */
 public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsDefaultScale {
 
-	/**
-	 * If set to 'flex', the base sample widths are calculated automatically based on the previous and following samples so that
-	 * they take the full available widths without overlap. Then, bars are sized using barPercentage and categoryPercentage.
-	 * There is no gap when the percentage options are 1. This mode generates bars with different widths when data are not
-	 * evenly spaced, {@link Integer#MIN_VALUE}.
-	 */
-	public static final int FLEX_BAR_THICKNESS = Integer.MIN_VALUE;
-	// this is the value which must be stored in JS object when flex bar thickness is set
-	private static final String FLEX_BAR_THICKNESS_VALUE = "flex";
-
 	// adds sub elements
 	private final GridLines gridLines;
 
@@ -85,11 +75,6 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 		WEIGHT("weight"),
 		POSITION("position"),
 		OFFSET("offset"),
-		BAR_PERCENTAGE("barPercentage"),
-		CATEGORY_PERCENTAGE("categoryPercentage"),
-		BAR_THICKNESS("barThickness"),
-		MAX_BAR_THICKNESS("maxBarThickness"),
-		MIN_BAR_LENGTH("minBarLength"),
 		STACKED("stacked"),
 		DISTRIBUTION("distribution"),
 		BOUNDS("bounds");
@@ -382,128 +367,6 @@ public class Scale extends AbstractModel<Options, IsDefaultScale> implements IsD
 	 */
 	public final Position getPosition() {
 		return getValue(Property.POSITION, Position.class, getDefaultValues().getPosition());
-	}
-
-	/**
-	 * Sets the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
-	 * category width and put the bars right next to each other.
-	 * 
-	 * @param barPercentage percent (0-1) of the available width each bar should be within the category width. 1.0 will take the
-	 *            whole category width and put the bars right next to each other.
-	 */
-	public final void setBarPercentage(double barPercentage) {
-		setValue(Property.BAR_PERCENTAGE, barPercentage);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
-	 * category width and put the bars right next to each other.
-	 * 
-	 * @return percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
-	 *         category width and put the bars right next to each other.
-	 */
-	public final double getBarPercentage() {
-		return getValue(Property.BAR_PERCENTAGE, getDefaultValues().getBarPercentage());
-	}
-
-	/**
-	 * Sets the percent (0-1) of the available width each category should be within the sample width.
-	 * 
-	 * @param categoryPercentage percent (0-1) of the available width each category should be within the sample width.
-	 */
-	public final void setCategoryPercentage(double categoryPercentage) {
-		setValue(Property.CATEGORY_PERCENTAGE, categoryPercentage);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the percent (0-1) of the available width each category should be within the sample width.
-	 * 
-	 * @return the percent (0-1) of the available width each category should be within the sample width.
-	 */
-	public final double getCategoryPercentage() {
-		return getValue(Property.CATEGORY_PERCENTAGE, getDefaultValues().getCategoryPercentage());
-	}
-
-	/**
-	 * Sets the width of each bar in pixels. If set to 'flex', it computes "optimal" sample widths that globally arrange bars
-	 * side by side. If not set, the base sample widths are calculated automatically so that they take the full available widths
-	 * without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
-	 * 
-	 * @param barThickness width of each bar in pixels. If not set, the base sample widths are calculated automatically so that
-	 *            they take the full available widths without overlap. Then, the bars are sized using barPercentage and
-	 *            categoryPercentage.
-	 */
-	public final void setBarThickness(int barThickness) {
-		// checks if FLEX value has been set
-		if (FLEX_BAR_THICKNESS == barThickness) {
-			// flex must be set
-			setValue(Property.BAR_THICKNESS, FLEX_BAR_THICKNESS_VALUE);
-		} else {
-			setValue(Property.BAR_THICKNESS, barThickness);
-		}
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the width of each bar in pixels. If set to 'flex', it computes "optimal" sample widths that globally arrange bars
-	 * side by side. If not set, the base sample widths are calculated automatically so that they take the full available widths
-	 * without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
-	 * 
-	 * @return width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take
-	 *         the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
-	 */
-	public final int getBarThickness() {
-		// checks if flex has been set
-		if (ObjectType.STRING.equals(type(Property.BAR_THICKNESS))) {
-			return FLEX_BAR_THICKNESS;
-		}
-		// if here, is not flex
-		return getValue(Property.BAR_THICKNESS, getDefaultValues().getBarThickness());
-	}
-
-	/**
-	 * Sets the maximum bar thickness, to ensure that bars are not sized thicker than this
-	 * 
-	 * @param maxBarThickness the maximum bar thickness.
-	 */
-	public final void setMaxBarThickness(int maxBarThickness) {
-		setValue(Property.MAX_BAR_THICKNESS, maxBarThickness);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns the maximum bar thickness.
-	 * 
-	 * @return the maximum bar thickness.
-	 */
-	public final int getMaxBarThickness() {
-		return getValue(Property.MAX_BAR_THICKNESS, getDefaultValues().getMaxBarThickness());
-	}
-
-	/**
-	 * Set this to ensure that bars have a minimum length in pixels.
-	 * 
-	 * @param minBarLength a minimum length in pixels.
-	 */
-	public final void setMinBarLength(int minBarLength) {
-		setValue(Property.MIN_BAR_LENGTH, minBarLength);
-		// checks if all parents are attached
-		checkAndAddToParent();
-	}
-
-	/**
-	 * Returns a minimum length in pixels.
-	 * 
-	 * @return a minimum length in pixels.
-	 */
-	public final int getMinBarLength() {
-		return getValue(Property.MIN_BAR_LENGTH, getDefaultValues().getMinBarLength());
 	}
 
 	/**

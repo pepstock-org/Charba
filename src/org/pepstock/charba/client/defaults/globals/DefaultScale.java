@@ -39,16 +39,6 @@ public final class DefaultScale implements IsDefaultScale {
 
 	private static final double DEFAULT_WEIGHT = 0D;
 
-	private static final double DEFAULT_BAR_PERCENTAGE = 0.9D;
-
-	private static final double DEFAULT_CATEGORY_PERCENTAGE = 0.8D;
-
-	private static final int DEFAULT_BAR_THICKNESS = 0;
-
-	private static final int DEFAULT_MAX_BAR_THICKNESS = 0;
-
-	private static final int DEFAULT_MIN_BAR_LENGTH = 0;
-
 	private static final boolean DEFAULT_STACKED = false;
 
 	private final DefaultAngleLines angleLines = new DefaultAngleLines();
@@ -181,56 +171,6 @@ public final class DefaultScale implements IsDefaultScale {
 	@Override
 	public Position getPosition() {
 		return Position.TOP;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getBarPercentage()
-	 */
-	@Override
-	public double getBarPercentage() {
-		return DEFAULT_BAR_PERCENTAGE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getCategoryPercentage()
-	 */
-	@Override
-	public double getCategoryPercentage() {
-		return DEFAULT_CATEGORY_PERCENTAGE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getBarThickness()
-	 */
-	@Override
-	public int getBarThickness() {
-		return DEFAULT_BAR_THICKNESS;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getMinBarLength()
-	 */
-	@Override
-	public int getMinBarLength() {
-		return DEFAULT_MIN_BAR_LENGTH;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getMaxBarThickness()
-	 */
-	@Override
-	public int getMaxBarThickness() {
-		return DEFAULT_MAX_BAR_THICKNESS;
 	}
 
 	/*

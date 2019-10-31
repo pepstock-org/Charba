@@ -39,6 +39,26 @@ import org.pepstock.charba.client.utils.Utilities;
 public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasOrder {
 	// default label
 	private static final String DEFAULT_LABEL = Utilities.EMPTY_STRING;
+	
+	/**
+	 * If set to 'flex', the base sample widths are calculated automatically based on the previous and following samples so that
+	 * they take the full available widths without overlap. Then, bars are sized using barPercentage and categoryPercentage.
+	 * There is no gap when the percentage options are 1. This mode generates bars with different widths when data are not
+	 * evenly spaced, {@link Integer#MIN_VALUE}.
+	 */
+	public static final int FLEX_BAR_THICKNESS = Integer.MIN_VALUE;
+	// this is the value which must be stored in JS object when flex bar thickness is set
+	private static final String FLEX_BAR_THICKNESS_VALUE = "flex";
+	
+	private static final double DEFAULT_BAR_PERCENTAGE = 0.9D;
+
+	private static final double DEFAULT_CATEGORY_PERCENTAGE = 0.8D;
+
+	private static final int DEFAULT_BAR_THICKNESS = 0;
+
+	private static final int DEFAULT_MAX_BAR_THICKNESS = 0;
+
+	private static final int DEFAULT_MIN_BAR_LENGTH = 0;
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -57,7 +77,12 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 		X_AXIS_ID("xAxisID"),
 		Y_AXIS_ID("yAxisID"),
 		BORDER_SKIPPED("borderSkipped"),
-		BORDER_WIDTH("borderWidth");
+		BORDER_WIDTH("borderWidth"),
+		BAR_PERCENTAGE("barPercentage"),
+		CATEGORY_PERCENTAGE("categoryPercentage"),
+		BAR_THICKNESS("barThickness"),
+		MAX_BAR_THICKNESS("maxBarThickness"),
+		MIN_BAR_LENGTH("minBarLength");
 
 		// name value of property
 		private final String value;
@@ -170,6 +195,119 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	public String getYAxisID() {
 		return getValue(Property.Y_AXIS_ID, Scales.DEFAULT_Y_AXIS_ID);
 	}
+	
+	/**
+	 * Sets the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
+	 * category width and put the bars right next to each other.
+	 * 
+	 * @param barPercentage percent (0-1) of the available width each bar should be within the category width. 1.0 will take the
+	 *            whole category width and put the bars right next to each other.
+	 */
+	public void setBarPercentage(double barPercentage) {
+		setValue(Property.BAR_PERCENTAGE, barPercentage);
+	}
+
+	/**
+	 * Returns the percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
+	 * category width and put the bars right next to each other.
+	 * 
+	 * @return percent (0-1) of the available width each bar should be within the category width. 1.0 will take the whole
+	 *         category width and put the bars right next to each other.
+	 */
+	public double getBarPercentage() {
+		return getValue(Property.BAR_PERCENTAGE, DEFAULT_BAR_PERCENTAGE);
+	}
+
+	/**
+	 * Sets the percent (0-1) of the available width each category should be within the sample width.
+	 * 
+	 * @param categoryPercentage percent (0-1) of the available width each category should be within the sample width.
+	 */
+	public void setCategoryPercentage(double categoryPercentage) {
+		setValue(Property.CATEGORY_PERCENTAGE, categoryPercentage);
+	}
+
+	/**
+	 * Returns the percent (0-1) of the available width each category should be within the sample width.
+	 * 
+	 * @return the percent (0-1) of the available width each category should be within the sample width.
+	 */
+	public double getCategoryPercentage() {
+		return getValue(Property.CATEGORY_PERCENTAGE, DEFAULT_CATEGORY_PERCENTAGE);
+	}
+
+	/**
+	 * Sets the width of each bar in pixels. If set to 'flex', it computes "optimal" sample widths that globally arrange bars
+	 * side by side. If not set, the base sample widths are calculated automatically so that they take the full available widths
+	 * without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
+	 * 
+	 * @param barThickness width of each bar in pixels. If not set, the base sample widths are calculated automatically so that
+	 *            they take the full available widths without overlap. Then, the bars are sized using barPercentage and
+	 *            categoryPercentage.
+	 */
+	public void setBarThickness(int barThickness) {
+		// checks if FLEX value has been set
+		if (FLEX_BAR_THICKNESS == barThickness) {
+			// flex must be set
+			setValue(Property.BAR_THICKNESS, FLEX_BAR_THICKNESS_VALUE);
+		} else {
+			setValue(Property.BAR_THICKNESS, barThickness);
+		}
+	}
+
+	/**
+	 * Returns the width of each bar in pixels. If set to 'flex', it computes "optimal" sample widths that globally arrange bars
+	 * side by side. If not set, the base sample widths are calculated automatically so that they take the full available widths
+	 * without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
+	 * 
+	 * @return width of each bar in pixels. If not set, the base sample widths are calculated automatically so that they take
+	 *         the full available widths without overlap. Then, the bars are sized using barPercentage and categoryPercentage.
+	 */
+	public int getBarThickness() {
+		// checks if flex has been set
+		if (ObjectType.STRING.equals(type(Property.BAR_THICKNESS))) {
+			return FLEX_BAR_THICKNESS;
+		}
+		// if here, is not flex
+		return getValue(Property.BAR_THICKNESS, DEFAULT_BAR_THICKNESS);
+	}
+
+	/**
+	 * Sets the maximum bar thickness, to ensure that bars are not sized thicker than this
+	 * 
+	 * @param maxBarThickness the maximum bar thickness.
+	 */
+	public void setMaxBarThickness(int maxBarThickness) {
+		setValue(Property.MAX_BAR_THICKNESS, maxBarThickness);
+	}
+
+	/**
+	 * Returns the maximum bar thickness.
+	 * 
+	 * @return the maximum bar thickness.
+	 */
+	public int getMaxBarThickness() {
+		return getValue(Property.MAX_BAR_THICKNESS, DEFAULT_MAX_BAR_THICKNESS);
+	}
+
+	/**
+	 * Set this to ensure that bars have a minimum length in pixels.
+	 * 
+	 * @param minBarLength a minimum length in pixels.
+	 */
+	public void setMinBarLength(int minBarLength) {
+		setValue(Property.MIN_BAR_LENGTH, minBarLength);
+	}
+
+	/**
+	 * Returns a minimum length in pixels.
+	 * 
+	 * @return a minimum length in pixels.
+	 */
+	public int getMinBarLength() {
+		return getValue(Property.MIN_BAR_LENGTH, DEFAULT_MIN_BAR_LENGTH);
+	}
+
 
 	/**
 	 * Sets the stroke width of the bar in pixels.

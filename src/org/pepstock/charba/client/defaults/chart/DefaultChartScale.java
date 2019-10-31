@@ -22,8 +22,8 @@ import org.pepstock.charba.client.defaults.IsDefaultScale;
 import org.pepstock.charba.client.defaults.IsDefaultScaleLabel;
 import org.pepstock.charba.client.defaults.IsDefaultTicks;
 import org.pepstock.charba.client.defaults.IsDefaultTime;
-import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.enums.Display;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.ScaleBounds;
 import org.pepstock.charba.client.enums.ScaleDistribution;
@@ -184,56 +184,6 @@ public final class DefaultChartScale implements IsDefaultScale {
 	@Override
 	public Position getPosition() {
 		return scale.getPosition();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getBarPercentage()
-	 */
-	@Override
-	public double getBarPercentage() {
-		return scale.getBarPercentage();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getCategoryPercentage()
-	 */
-	@Override
-	public double getCategoryPercentage() {
-		return scale.getCategoryPercentage();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getBarThickness()
-	 */
-	@Override
-	public int getBarThickness() {
-		return scale.getBarThickness();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getMinBarLength()
-	 */
-	@Override
-	public int getMinBarLength() {
-		return scale.getMinBarLength();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.defaults.IsDefaultScale#getMaxBarThickness()
-	 */
-	@Override
-	public int getMaxBarThickness() {
-		return scale.getMaxBarThickness();
 	}
 
 	/*
