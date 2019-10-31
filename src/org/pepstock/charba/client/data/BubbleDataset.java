@@ -42,7 +42,7 @@ import org.pepstock.charba.client.enums.PointStyle;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class BubbleDataset extends HovingDataset implements HasDataPoints {
+public final class BubbleDataset extends HovingDataset implements HasDataPoints, HasOrder {
 
 	// ---------------------------
 	// -- CALLBACKS PROXIES ---
@@ -104,6 +104,9 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 
 	}
 
+	// instance or orderer
+	private final Orderer orderer;
+
 	/**
 	 * Creates a dataset.<br>
 	 * It uses the global options has default.
@@ -119,6 +122,9 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	 */
 	public BubbleDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
+		// sets new orderer
+		orderer = new Orderer(getNativeObject());
+
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -142,6 +148,16 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints 
 	@Override
 	final boolean mustUseDataPoints() {
 		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HasOrder#getOrderer()
+	 */
+	@Override
+	public Orderer getOrderer() {
+		return orderer;
 	}
 
 	/**

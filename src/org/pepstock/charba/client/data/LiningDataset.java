@@ -73,7 +73,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Andrea "Stock" Stocchero
  *
  */
-public abstract class LiningDataset extends Dataset implements HasFill {
+public abstract class LiningDataset extends Dataset implements HasFill, HasOrder {
 	// default label
 	private static final String DEFAULT_LABEL = Utilities.EMPTY_STRING;
 
@@ -193,6 +193,8 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 
 	// instance of filler
 	private final LiningDatasetFiller filler;
+	// instance or orderer
+	private final Orderer orderer;
 
 	/**
 	 * Creates the dataset using a default.
@@ -202,6 +204,8 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	LiningDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
 		filler = new LiningDatasetFiller(getNativeObject(), getDefaultValues().getElements().getLine().getFill());
+		// sets new orderer
+		orderer = new Orderer(getNativeObject());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
@@ -245,6 +249,16 @@ public abstract class LiningDataset extends Dataset implements HasFill {
 	@Override
 	public final Filler getFiller() {
 		return filler;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HasOrder#getOrderer()
+	 */
+	@Override
+	public Orderer getOrderer() {
+		return orderer;
 	}
 
 	/**

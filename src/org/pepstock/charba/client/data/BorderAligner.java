@@ -28,7 +28,7 @@ import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.BorderAlign;
 
 /**
- * Specific dataset which contains properties for charts without or with 1 axes.
+ * Utility to manage the border alignment on chart datasets.
  * 
  * @author Andrea "Stock" Stocchero
  */
@@ -77,8 +77,9 @@ public final class BorderAligner extends NativeObjectContainer {
 	}
 
 	/**
-	 * Creates the dataset using a default.
+	 * Creates the utility using dataset native object.
 	 * 
+	 * @param nativeObject native object to update with options
 	 * @param defaultValues default options
 	 */
 	BorderAligner(NativeObject nativeObject, IsDefaultOptions defaultValues) {

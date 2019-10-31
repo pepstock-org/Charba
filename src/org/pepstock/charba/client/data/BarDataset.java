@@ -36,7 +36,7 @@ import org.pepstock.charba.client.utils.Utilities;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class BarDataset extends HovingFlexDataset implements HasDataPoints {
+public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasOrder {
 	// default label
 	private static final String DEFAULT_LABEL = Utilities.EMPTY_STRING;
 
@@ -83,6 +83,9 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 
 	}
 
+	// instance or orderer
+	private final Orderer orderer;
+
 	/**
 	 * Creates a dataset.<br>
 	 * It uses the global options has default.
@@ -98,10 +101,22 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints {
 	 */
 	public BarDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
+		// sets new orderer
+		orderer = new Orderer(getNativeObject());
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		borderSkippedCallbackProxy.setCallback((contextFunction, context) -> onBorderSkipped(context));
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.data.HasOrder#getOrderer()
+	 */
+	@Override
+	public Orderer getOrderer() {
+		return orderer;
 	}
 
 	/**
