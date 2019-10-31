@@ -137,6 +137,12 @@ Showcase:  [http://www.pepstock.org/Charba-Showcase/Charba_Showcase.html](http:/
     * add `rtl` and `textDirection` properties to tooltips configuration object.
     * add `order` property to bar, horizontal bar, bubble, line, radar and scatter datasets.
     * add `minNotZero` property into `ScaleItem`.
+    * remove `LABEL` and `SINGLE` from `InteractionMode` class because obsoleted.
+       * `SINGLE` was replaced setting  `InteractionMode.NEAREST` and intersect options to `true`.
+       * `LABEL` was replaced setting  `InteractionMode.INDEX`.
+    * remove `getXLabel` and `getYLabel` methods from `TooltipItem` class, because obsoleted, and use instead `getIndex` and `getValue` methods.
+    * move `barPercentage`, `categoryPercentage`, `barThickness`, `maxBarThickness` and `minBarLength` options from scale to bar dataset.
+    * add `hover` property to `ScriptableContext` class.
  * import last DATALABELS CHART.JS plugin version, [0.7.0](https://github.com/chartjs/chartjs-plugin-datalabels/releases/tag/v0.7.0)
     * Implement multiple `labels` per data element  
  * add `getPointStyleAsImage` and `isPointStyleAsImage` methods to `LegendLabelItem` class in order to manage images as point styles.
@@ -144,11 +150,6 @@ Showcase:  [http://www.pepstock.org/Charba-Showcase/Charba_Showcase.html](http:/
  * add methods to get `min` and `max` properties as a date from `ScaleItem`.
  * add methods to get ticks items (not only values) from `ScaleItem`.
  * add methods `updateOptions` to charts in order to update the options, mutating the options property in place, and update the whole chart. This is addressing the issue [23](https://github.com/pepstock-org/Charba/issues/23).
- * remove `LABEL` and `SINGLE` from `InteractionMode` class because obsoleted.
-    *  `SINGLE` was replaced setting  `InteractionMode.NEAREST` and intersect options to `true`.
-    *  `LABEL` was replaced setting  `InteractionMode.INDEX`.
- * remove `getXLabel` and `getYLabel` methods from `TooltipItem` class, because obsoleted, and use instead `getIndex` and `getValue` methods.
- * move `barPercentage`, `categoryPercentage`, `barThickness`, `maxBarThickness` and `minBarLength` options from scale to bar dataset.
 
 ### Fixed Bugs
 

@@ -34,6 +34,7 @@ import jsinterop.annotations.JsType;
  * <ul>
  * <li><b>index</b>(int): index of the associated data
  * <li><b>datasetIndex</b>(int): index of the associated dataset
+ * <li><b>hover</b>(boolean): if the data and dataset item is hovered
  * <li><b>active</b>(boolean): if the data and dataset item is hovered (only for datalabels plugin)
  * </ul>
  * 
@@ -79,6 +80,14 @@ public final class ScriptableContext extends NativeExtendedObject {
 	 */
 	@JsProperty(name = "active")
 	native boolean isNativeActive();
+
+	/**
+	 * Returns the <code>hover</code> property by native object.
+	 * 
+	 * @return the <code>hover</code> property by native object.
+	 */
+	@JsProperty(name = "hover")
+	native boolean isNativeHover();
 
 	/**
 	 * Returns the index of the data inside the dataset.
@@ -133,6 +142,21 @@ public final class ScriptableContext extends NativeExtendedObject {
 		}
 		// returns property value
 		return isNativeActive();
+	}
+
+	/**
+	 * Returns whether the associated element is hovered.
+	 * 
+	 * @return whether the associated element is hovered. Default is false.
+	 */
+	@JsOverlay
+	public boolean isHover() {
+		// checks if is defined
+		if (ObjectType.UNDEFINED.equals(JsHelper.get().typeOf(this, "hover"))) {
+			return false;
+		}
+		// returns property value
+		return isNativeHover();
 	}
 
 }
