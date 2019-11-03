@@ -106,7 +106,7 @@ Here you can find the list of enhancement and updates available on `master` bran
 
 ### Features
  
- * import last CHART.JS version, [2.9.1](https://github.com/chartjs/Chart.js/releases/tag/v2.9.1). Due to a bug (IE and Edge didn't work) on official published version, the [Chart.JS](http://www.chartjs.org/) version is 2.9.1 at commit `09bd524dd3dc6c8ee7cc295f479d2fba7255dd02`.
+ * import last CHART.JS version, [2.9.2](https://github.com/chartjs/Chart.js/releases/tag/v2.9.2) 
     * add `align` property to legend configuration object.
     * add `rotation` property to legend item object.
     * add `spanGaps` property to radar chart dataset and to radar options configuration.
@@ -136,7 +136,7 @@ Here you can find the list of enhancement and updates available on `master` bran
        * `LABEL` was replaced setting  `InteractionMode.INDEX`.
     * remove `getXLabel` and `getYLabel` methods from `TooltipItem` class, because obsoleted, and use instead `getIndex` and `getValue` methods.
     * move `barPercentage`, `categoryPercentage`, `barThickness`, `maxBarThickness` and `minBarLength` options from scale to bar dataset.
-    * add `hover` property to `ScriptableContext` class.
+    * manage `hover` property from `ScriptableContext` class by `isActive` method in order to reuse the same object between Chart.js and Datalabels plugin scriptable options.
  * import last DATALABELS CHART.JS plugin version, [0.7.0](https://github.com/chartjs/chartjs-plugin-datalabels/releases/tag/v0.7.0)
     * Implement multiple `labels` per data element  
  * add `getPointStyleAsImage` and `isPointStyleAsImage` methods to `LegendLabelItem` class in order to manage images as point styles.
