@@ -66,8 +66,8 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Image;
 
 /**
- * The chart allows a number of properties to be specified for each dataset. These are used to set display properties for a
- * specific dataset.<br>
+ * The chart allows a number of properties to be specified for each dataset.<br>
+ * These are used to set display properties for a specific dataset.<br>
  * This class collects a set of common field for Line and Radar charts.
  * 
  * @author Andrea "Stock" Stocchero
@@ -323,9 +323,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the fill color under the line. If property is missing or not a color, returns the default background color.
+	 * Returns the fill color under the line.<br>
+	 * If property is missing or not a color, returns the default background color.
 	 * 
-	 * @return the fill color under the line. If property is missing or not a color, returns the default background color.
+	 * @return the fill color under the line.<br>
+	 *         If property is missing or not a color, returns the default background color.
 	 */
 	public String getBackgroundColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
@@ -341,18 +343,22 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the fill color under the line. If property is missing or not a color, returns the default background color.
+	 * Returns the fill color under the line.<br>
+	 * If property is missing or not a color, returns the default background color.
 	 * 
-	 * @return the fill color under the line. If property is missing or not a color, returns the default background color.
+	 * @return the fill color under the line.<br>
+	 *         If property is missing or not a color, returns the default background color.
 	 */
 	public IsColor getBackgroundColor() {
 		return ColorBuilder.parse(getBackgroundColorAsString());
 	}
 
 	/**
-	 * Returns the fill pattern under the line. If property is missing or not a pattern, returns <code>null</code>.
+	 * Returns the fill pattern under the line.<br>
+	 * If property is missing or not a pattern, returns <code>null</code>.
 	 * 
-	 * @return the fill pattern under the line. If property is missing or not a pattern, returns <code>null</code>.
+	 * @return the fill pattern under the line.<br>
+	 *         If property is missing or not a pattern, returns <code>null</code>.
 	 */
 	public Pattern getBackgroundColorAsPattern() {
 		// checks if the property is not a pattern (therefore a color or gradient)
@@ -369,9 +375,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the fill gradient under the line. If property is missing or not a gradient, returns <code>null</code>.
+	 * Returns the fill gradient under the line.<br>
+	 * If property is missing or not a gradient, returns <code>null</code>.
 	 * 
-	 * @return the fill gradient under the line. If property is missing or not a gradient, returns <code>null</code>.
+	 * @return the fill gradient under the line.<br>
+	 *         If property is missing or not a gradient, returns <code>null</code>.
 	 */
 	public Gradient getBackgroundColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
@@ -425,9 +433,11 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the color of the line. If property is missing or not a color, returns the default border color.
+	 * Returns the color of the line.<br>
+	 * If property is missing or not a color, returns the default border color.
 	 * 
-	 * @return the color of the line. If property is missing or not a color, returns the default border color.
+	 * @return the color of the line.<br>
+	 *         If property is missing or not a color, returns the default border color.
 	 */
 	public String getBorderColorAsString() {
 		// checks if the property is not a pattern or gradient (therefore a color)
@@ -443,18 +453,22 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns the color of the line. If property is missing or not a color, returns the default border color.
+	 * Returns the color of the line.<br>
+	 * If property is missing or not a color, returns the default border color.
 	 * 
-	 * @return the color of the line. If property is missing or not a color, returns the default border color.
+	 * @return the color of the line.<br>
+	 *         If property is missing or not a color, returns the default border color.
 	 */
 	public IsColor getBorderColor() {
 		return ColorBuilder.parse(getBorderColorAsString());
 	}
 
 	/**
-	 * Returns the gradient of the line. If property is missing or not a gradient, returns <code>null</code>.
+	 * Returns the gradient of the line.<br>
+	 * If property is missing or not a gradient, returns <code>null</code>.
 	 * 
-	 * @return the gradient of the line. If property is missing or not a gradient, returns <code>null</code>.
+	 * @return the gradient of the line.<br>
+	 *         If property is missing or not a gradient, returns <code>null</code>.
 	 */
 	public Gradient getBorderColorAsGradient() {
 		// checks if the property is not a gradient (therefore a color or pattern)
@@ -557,8 +571,8 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Sets how the end points of every line are drawn. There are three possible values for this property and those are: butt,
-	 * round and square.
+	 * Sets how the end points of every line are drawn.<br>
+	 * There are three possible values for this property and those are: butt, round and square.
 	 * 
 	 * @param borderCapStyle how the end points of every line are drawn.
 	 */
@@ -570,8 +584,9 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	}
 
 	/**
-	 * Returns how the end points of every line are drawn. There are three possible values for this property and those are:
-	 * butt, round and square. By default this property is set to butt.
+	 * Returns how the end points of every line are drawn.<br>
+	 * There are three possible values for this property and those are: butt, round and square. By default this property is set
+	 * to butt.
 	 * 
 	 * @return how the end points of every line are drawn.
 	 */
