@@ -38,20 +38,20 @@ If you are using [Apache Maven](https://maven.apache.org/):
 <dependency>
     <groupId>org.pepstock</groupId>
     <artifactId>charba</artifactId>
-    <version>2.5</version>
+    <version>2.6</version>
 </dependency>
 ```
 
 If you are using [Apache Ivy](http://ant.apache.org/ivy/):
 
 ```xml
-<dependency org="org.pepstock" name="charba" rev="2.5"/>
+<dependency org="org.pepstock" name="charba" rev="2.6"/>
 ```
 
 If you are using [Gradle](https://gradle.org/):
 
 ```json
-compile group: 'org.pepstock', name: 'charba', version: '2.5'
+compile group: 'org.pepstock', name: 'charba', version: '2.6'
 ```
 
 To install in your GWT project, you must the following configuration into your GWT project module configuration:
@@ -79,7 +79,7 @@ Documentation
 
 All **Charba** documentation will be maintained into [GitHub wiki](https://github.com/pepstock-org/Charba/wiki) of **Charba** project.
 
-API JavaDoc is published [here](http://www.pepstock.org/Charba/2.5/index.html).
+API JavaDoc is published [here](http://www.pepstock.org/Charba/2.6/index.html).
 
 Showcase
 --------
@@ -97,80 +97,8 @@ Continuous integration and quality gate
 
 At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/dashboard?id=pepstock-org_Charba) in order to have the pulse of its quality.
 
-In the project, it's also provided the [FindBugs](https://github.com/pepstock-org/Charba/blob/2.5/charba.fbp) project to looking offline for bugs.
+In the project, it's also provided the [FindBugs](https://github.com/pepstock-org/Charba/blob/2.6/charba.fbp) project to looking offline for bugs.
 
-Going to new version
--------
-
-Here you can find the list of enhancement and updates available on `master` branch before which will be part of new official release:
-
-### Features
- 
- * import last CHART.JS version, [2.9.2](https://github.com/chartjs/Chart.js/releases/tag/v2.9.2) 
-    * add `align` property to legend configuration object.
-    * add `rotation` property to legend item object.
-    * add `spanGaps` property to radar chart dataset and to radar options configuration.
-    * line and radar datasets are now scriptable by callbacks for following options:
-       * `backgroundColor`
-       * `borderCapStyle`
-       * `borderColor`
-       * `borderDash`
-       * `borderDashOffset`
-       * `borderJoinStyle`
-       * `borderWidth`
-       * `cubicInterpolationMode` (only line chart)
-       * `fill`
-    * remove `min` and `max`properties from `Time` class (both options and configuration) and add them to `CartesianTimeTick` (for configuration) and `Ticks` (for options), as new CHART.JS implemented.
-    * implement `scaleService` to get and set scale defaults by scale type.  
-    * add `z` property to gridline configuration object.
-    * add `z` property to tick configuration object.
-    * add `sampleSize` property to cartesian tick configuration object.
-    * add `display` property to point labels configuration object.
-    * add `angle` property to arc configuration object.
-    * add `rtl` and `textDirection` properties to legend configuration object.
-    * add `rtl` and `textDirection` properties to tooltips configuration object.
-    * add `order` property to bar, horizontal bar, bubble, line, radar and scatter datasets.
-    * add `minNotZero` property into `ScaleItem`.
-    * remove `LABEL` and `SINGLE` from `InteractionMode` class because obsoleted.
-       * `SINGLE` was replaced setting  `InteractionMode.NEAREST` and intersect options to `true`.
-       * `LABEL` was replaced setting  `InteractionMode.INDEX`.
-    * remove `getXLabel` and `getYLabel` methods from `TooltipItem` class, because obsoleted, and use instead `getIndex` and `getValue` methods.
-    * move `barPercentage`, `categoryPercentage`, `barThickness`, `maxBarThickness` and `minBarLength` options from scale to bar dataset.
-    * manage `hover` property from `ScriptableContext` class by `isActive` method in order to reuse the same object between Chart.js and Datalabels plugin scriptable options.
- * import last DATALABELS CHART.JS plugin version, [0.7.0](https://github.com/chartjs/chartjs-plugin-datalabels/releases/tag/v0.7.0)
-    * Implement multiple `labels` per data element  
- * add `getPointStyleAsImage` and `isPointStyleAsImage` methods to `LegendLabelItem` class in order to manage images as point styles.
- * add `setPointStyle` methods, setting a image instance, to `LegendLabelItem` class in order to manage images as point styles.
- * add methods to get `min` and `max` properties as a date from `ScaleItem`.
- * add methods to get ticks items (not only values) from `ScaleItem`.
- * add methods `updateOptions` to charts in order to update the options, mutating the options property in place, and update the whole chart. This is addressing the issue [23](https://github.com/pepstock-org/Charba/issues/23).
-
-### Fixed Bugs
-
- * [#36](https://github.com/pepstock-org/Charba/issues/36) removed `setShowLine` method (which it will set always to `false` the options) from `ScatterDataset` in order to be able to set it freely. Thanks @lightingft
- * [#37](https://github.com/pepstock-org/Charba/issues/37) added ANT target `build-all-sources` to create a ZIP file (`charba-[version.release]-sources.zip`) which will be added to GitHub release page as artifact to be consumed, every time new release will be published. The file will contain all sources (java, js) for security scanning purposes. Thanks @jake1164
- * [#40](https://github.com/pepstock-org/Charba/issues/40) added scale configuration to the chart one, only for chart with a single scale.
- * [#42](https://github.com/pepstock-org/Charba/issues/42) added `CategoryTickCallback`and `TimeTickCallback` to manage axes which are managing strings and dates as data types. Thanks @ak80
-   * add `CategoryTickCallback`and `TimeTickCallback` to manage axes which are managing strings and dates as data types.
-   * add `TimeTickItem` in order to manage the different signature of CHART.JS callback when there is a cartesian time axis.
-   * update `AxisBuildTicksCallback` adding the list of created ticks as double into `onAfterBuildTicks` method.
-   * add `CategoryAxisBuildTicksCallback`and `TimeAxisBuildTicksCallback` to manage axis build ticks callback which are managing strings and dates as data types.
- 
-### Development
-
- * reduce visibility to `StandardKey` class constructor in order to use `Key.create(String key)` method.
- * set `private` constructor to `JSON` class in order to avoid any instantiation.
- * add `compare` and `equals` methods to `Key` class.
- * move (from `LegenItem` class) and change `getLineWidth`, `getStrokeStyle` and `getPointStyle` methods into `LegendLabelItem` class in order to return a single item instead of a list of them.
- * change default `cubicInterpolationMode` property to return into `LineDataset` class.
- * use ARC element to get default background color, border color and border width properties because used by most cases of datasets (reduce code duplications).
- * change visibility to `Filler` class, making it also extendable, in order to be able to implement `fill` scriptable callback.
- * reset of callback instances when the property has been set with object object type.
- * improve the single scale options management when a `null` is passed as argument to chart options.
- * change type from `int` to `double` for `min` and `max` properties into `ScaleItem`.
- * remove the inner options from cache of `AbstractPluginCachedOptions` when chart is destroy.
- * remove `BarCategoryAxis` class because is not longer needed.
- 
 License
 -------
 
