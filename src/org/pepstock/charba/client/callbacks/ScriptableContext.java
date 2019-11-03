@@ -34,7 +34,8 @@ import jsinterop.annotations.JsType;
  * <ul>
  * <li><b>index</b>(int): index of the associated data
  * <li><b>datasetIndex</b>(int): index of the associated dataset
- * <li><b>active</b>(boolean): if the data and dataset item is hovered. It also maps the <b>hover</b> property of CHART.js context.  
+ * <li><b>active</b>(boolean): if the data and dataset item is hovered. It also maps the <b>hover</b> property of CHART.js
+ * context.
  * </ul>
  * 
  * @author Andrea "Stock" Stocchero
