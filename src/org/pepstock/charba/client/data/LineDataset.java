@@ -18,6 +18,8 @@ package org.pepstock.charba.client.data;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.pepstock.charba.client.ChartType;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.CubicInterpolationModeCallback;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
@@ -94,7 +96,7 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * It uses the global options has default.
 	 */
 	public LineDataset() {
-		this(null);
+		this(ChartType.LINE);
 	}
 
 	/**
@@ -103,7 +105,26 @@ public class LineDataset extends LiningDataset implements HasDataPoints {
 	 * @param defaultValues default options
 	 */
 	public LineDataset(IsDefaultOptions defaultValues) {
-		super(defaultValues);
+		this(ChartType.LINE, defaultValues);
+	}
+
+	/**
+	 * Creates the dataset using chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 */
+	protected LineDataset(Type type) {
+		this(type, null);
+	}
+
+	/**
+	 * Creates the dataset using a default and chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 * @param defaultValues default options
+	 */
+	protected LineDataset(Type type, IsDefaultOptions defaultValues) {
+		super(type, defaultValues);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------

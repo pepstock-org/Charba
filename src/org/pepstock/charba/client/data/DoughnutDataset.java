@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.data;
 
+import org.pepstock.charba.client.ChartType;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
@@ -31,7 +33,7 @@ public class DoughnutDataset extends PieDataset {
 	 * It uses the global options has default.
 	 */
 	public DoughnutDataset() {
-		this(null);
+		this(ChartType.DOUGHNUT);
 	}
 
 	/**
@@ -40,6 +42,25 @@ public class DoughnutDataset extends PieDataset {
 	 * @param defaultValues default options
 	 */
 	public DoughnutDataset(IsDefaultOptions defaultValues) {
-		super(defaultValues);
+		this(ChartType.DOUGHNUT, defaultValues);
+	}
+
+	/**
+	 * Creates the dataset using chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 */
+	protected DoughnutDataset(Type type) {
+		this(type, null);
+	}
+
+	/**
+	 * Creates the dataset using a default and chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 * @param defaultValues default options
+	 */
+	protected DoughnutDataset(Type type, IsDefaultOptions defaultValues) {
+		super(type, defaultValues);
 	}
 }

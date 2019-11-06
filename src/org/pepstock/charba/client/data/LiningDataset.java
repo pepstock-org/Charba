@@ -17,6 +17,7 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderCapStyleCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
@@ -197,12 +198,13 @@ public abstract class LiningDataset extends Dataset implements HasFill, HasOrder
 	private final Orderer orderer;
 
 	/**
-	 * Creates the dataset using a default.
+	 * Creates the dataset using a default and chart type related to the dataset.
 	 * 
+	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
 	 */
-	LiningDataset(IsDefaultOptions defaultValues) {
-		super(defaultValues);
+	LiningDataset(Type type, IsDefaultOptions defaultValues) {
+		super(type, defaultValues);
 		filler = new LiningDatasetFiller(getNativeObject(), getDefaultValues().getElements().getLine().getFill());
 		// sets new orderer
 		orderer = new Orderer(getNativeObject());

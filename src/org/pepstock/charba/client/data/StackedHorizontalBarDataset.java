@@ -15,26 +15,27 @@
 */
 package org.pepstock.charba.client.data;
 
+import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
- * The stacked bar area chart allows a number of properties to be specified for each dataset. These are used to set display
- * properties for a specific dataset.<br>
+ * The stacked horizontal bar area chart allows a number of properties to be specified for each dataset. These are used to set
+ * display properties for a specific dataset.<br>
  * Extends the bar dataset setting <code>stack</code> property.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class StackedBarDataset extends BarDataset implements HasBarStacker {
+public class StackedHorizontalBarDataset extends HorizontalBarDataset implements HasBarStacker {
 
 	// bar stacker instance
 	private final BarStacker barStacker;
 
 	/**
-	 * Creates a dataset.<br>
+	 * Creates a dataset, for {@link ChartType#BAR}.<br>
 	 * It uses the global options has default.
 	 */
-	public StackedBarDataset() {
+	public StackedHorizontalBarDataset() {
 		this((IsDefaultOptions) null);
 	}
 
@@ -43,7 +44,7 @@ public class StackedBarDataset extends BarDataset implements HasBarStacker {
 	 * 
 	 * @param defaultValues default options
 	 */
-	public StackedBarDataset(IsDefaultOptions defaultValues) {
+	public StackedHorizontalBarDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
 		// creates bar stacker instance
 		this.barStacker = new BarStacker(getNativeObject());
@@ -54,7 +55,7 @@ public class StackedBarDataset extends BarDataset implements HasBarStacker {
 	 * 
 	 * @param type chart type related to the dataset
 	 */
-	protected StackedBarDataset(Type type) {
+	protected StackedHorizontalBarDataset(Type type) {
 		this(type, null);
 	}
 
@@ -64,7 +65,7 @@ public class StackedBarDataset extends BarDataset implements HasBarStacker {
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
 	 */
-	protected StackedBarDataset(Type type, IsDefaultOptions defaultValues) {
+	protected StackedHorizontalBarDataset(Type type, IsDefaultOptions defaultValues) {
 		super(type, defaultValues);
 		// creates bar stacker instance
 		this.barStacker = new BarStacker(getNativeObject());
@@ -79,5 +80,4 @@ public class StackedBarDataset extends BarDataset implements HasBarStacker {
 	public final BarStacker getBarStacker() {
 		return barStacker;
 	}
-
 }

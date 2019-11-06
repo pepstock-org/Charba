@@ -15,27 +15,26 @@
 */
 package org.pepstock.charba.client.data;
 
+import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
- * The stacked bar area chart allows a number of properties to be specified for each dataset. These are used to set display
+ * The horizontal bar chart allows a number of properties to be specified for each dataset. These are used to set display
  * properties for a specific dataset.<br>
- * Extends the bar dataset setting <code>stack</code> property.
+ * Some properties can be specified as an array. If these are set to an array value, the first value applies to the first bar,
+ * the second value to the second bar, and so on.
  * 
  * @author Andrea "Stock" Stocchero
  */
-public class StackedBarDataset extends BarDataset implements HasBarStacker {
-
-	// bar stacker instance
-	private final BarStacker barStacker;
+public class HorizontalBarDataset extends BarDataset {
 
 	/**
 	 * Creates a dataset.<br>
 	 * It uses the global options has default.
 	 */
-	public StackedBarDataset() {
-		this((IsDefaultOptions) null);
+	public HorizontalBarDataset() {
+		this(ChartType.HORIZONTAL_BAR);
 	}
 
 	/**
@@ -43,10 +42,8 @@ public class StackedBarDataset extends BarDataset implements HasBarStacker {
 	 * 
 	 * @param defaultValues default options
 	 */
-	public StackedBarDataset(IsDefaultOptions defaultValues) {
-		super(defaultValues);
-		// creates bar stacker instance
-		this.barStacker = new BarStacker(getNativeObject());
+	public HorizontalBarDataset(IsDefaultOptions defaultValues) {
+		this(ChartType.HORIZONTAL_BAR, defaultValues);
 	}
 
 	/**
@@ -54,7 +51,7 @@ public class StackedBarDataset extends BarDataset implements HasBarStacker {
 	 * 
 	 * @param type chart type related to the dataset
 	 */
-	protected StackedBarDataset(Type type) {
+	protected HorizontalBarDataset(Type type) {
 		this(type, null);
 	}
 
@@ -64,20 +61,8 @@ public class StackedBarDataset extends BarDataset implements HasBarStacker {
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
 	 */
-	protected StackedBarDataset(Type type, IsDefaultOptions defaultValues) {
+	protected HorizontalBarDataset(Type type, IsDefaultOptions defaultValues) {
 		super(type, defaultValues);
-		// creates bar stacker instance
-		this.barStacker = new BarStacker(getNativeObject());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.HasBarStacker#getBarStacker()
-	 */
-	@Override
-	public final BarStacker getBarStacker() {
-		return barStacker;
 	}
 
 }

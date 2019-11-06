@@ -17,15 +17,14 @@ package org.pepstock.charba.client.impl.charts;
 
 import java.util.List;
 
-import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.colors.Color;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayString;
 import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.controllers.ControllerType;
 import org.pepstock.charba.client.data.Dataset;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
@@ -130,7 +129,18 @@ public class MeterDataset extends Dataset {
 	 * @param defaultValues default options
 	 */
 	public MeterDataset(double max, IsDefaultOptions defaultValues) {
-		super(defaultValues);
+		this(MeterChart.CONTROLLER_TYPE, max, defaultValues);
+	}
+
+	/**
+	 * Creates a dataset setting the maximum value of dataset and defaults value and the controller type in case of extension
+	 * 
+	 * @param type controller type related to the dataset
+	 * @param max maximum value of dataset.
+	 * @param defaultValues default options
+	 */
+	protected MeterDataset(ControllerType type, double max, IsDefaultOptions defaultValues) {
+		super(type, defaultValues);
 		// sets the max value between the max and minimum value
 		// max value must be higher than 0
 		this.max = Math.max(max, MINIMUM_VALUE);
@@ -270,17 +280,6 @@ public class MeterDataset extends Dataset {
 	void hide() {
 		// the dataset is hidden
 		super.setHidden(true);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.pepstock.charba.client.data.Dataset#setType(org.pepstock.charba.client.Type)
-	 */
-	@Override
-	public void setType(Type type) {
-		// overrides always with doughnut
-		super.setType(ChartType.DOUGHNUT);
 	}
 
 	/*

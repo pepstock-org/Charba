@@ -17,6 +17,7 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.colors.ColorBuilder;
@@ -46,12 +47,13 @@ import com.google.gwt.canvas.dom.client.CanvasPattern;
 public abstract class HovingFlexDataset extends Dataset {
 
 	/**
-	 * Creates the dataset using a default.
+	 * Creates the dataset using a default and chart type related to the dataset.
 	 * 
+	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
 	 */
-	HovingFlexDataset(IsDefaultOptions defaultValues) {
-		super(defaultValues);
+	HovingFlexDataset(Type type, IsDefaultOptions defaultValues) {
+		super(type, defaultValues);
 	}
 
 	/**

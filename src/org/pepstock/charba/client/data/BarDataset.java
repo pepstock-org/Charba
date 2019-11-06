@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.data;
 
+import org.pepstock.charba.client.ChartType;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.BorderSkippedCallback;
 import org.pepstock.charba.client.callbacks.ScriptableContext;
 import org.pepstock.charba.client.callbacks.ScriptableFunctions;
@@ -116,7 +118,7 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * It uses the global options has default.
 	 */
 	public BarDataset() {
-		this(null);
+		this(ChartType.BAR);
 	}
 
 	/**
@@ -125,7 +127,26 @@ public class BarDataset extends HovingFlexDataset implements HasDataPoints, HasO
 	 * @param defaultValues default options
 	 */
 	public BarDataset(IsDefaultOptions defaultValues) {
-		super(defaultValues);
+		this(ChartType.BAR, defaultValues);
+	}
+
+	/**
+	 * Creates the dataset using chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 */
+	protected BarDataset(Type type) {
+		this(type, null);
+	}
+
+	/**
+	 * Creates the dataset using a default and chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 * @param defaultValues default options
+	 */
+	protected BarDataset(Type type, IsDefaultOptions defaultValues) {
+		super(type, defaultValues);
 		// sets new orderer
 		orderer = new Orderer(getNativeObject());
 		// -------------------------------

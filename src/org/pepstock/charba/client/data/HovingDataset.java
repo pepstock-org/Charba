@@ -17,6 +17,7 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.callbacks.BorderWidthCallback;
@@ -67,12 +68,13 @@ public abstract class HovingDataset extends HovingFlexDataset {
 	private BorderWidthCallback hoverBorderWidthCallback = null;
 
 	/**
-	 * Creates the dataset using a default.
+	 * Creates the dataset using a default and chart type related to the dataset.
 	 * 
+	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
 	 */
-	HovingDataset(IsDefaultOptions defaultValues) {
-		super(defaultValues);
+	HovingDataset(Type type, IsDefaultOptions defaultValues) {
+		super(type, defaultValues);
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------

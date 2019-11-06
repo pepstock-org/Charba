@@ -31,7 +31,7 @@ public final class MeterChart extends BaseMeterChart<MeterDataset> {
 	 */
 	public static final String TYPE = "meter";
 	// static reference to controller type
-	private static final ControllerType CONTROLLER_TYPE = new ControllerType(TYPE, ChartType.DOUGHNUT);
+	static final ControllerType CONTROLLER_TYPE = new ControllerType(TYPE, ChartType.DOUGHNUT);
 	// chart options
 	private final MeterOptions options;
 

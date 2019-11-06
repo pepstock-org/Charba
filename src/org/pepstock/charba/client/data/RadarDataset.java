@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.data;
 
+import org.pepstock.charba.client.ChartType;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
@@ -30,7 +32,7 @@ public class RadarDataset extends LiningDataset {
 	 * It uses the global options has default.
 	 */
 	public RadarDataset() {
-		this(null);
+		this(ChartType.RADAR);
 	}
 
 	/**
@@ -39,7 +41,27 @@ public class RadarDataset extends LiningDataset {
 	 * @param defaultValues default options
 	 */
 	public RadarDataset(IsDefaultOptions defaultValues) {
-		super(defaultValues);
+		this(ChartType.RADAR, defaultValues);
+	}
+
+	/**
+	 * Creates the dataset using chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 * 
+	 */
+	protected RadarDataset(Type type) {
+		this(type, null);
+	}
+
+	/**
+	 * Creates the dataset using a default and chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 * @param defaultValues default options
+	 */
+	protected RadarDataset(Type type, IsDefaultOptions defaultValues) {
+		super(type, defaultValues);
 	}
 
 }

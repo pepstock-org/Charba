@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.data.HorizontalBarDataset;
+
 /**
  * HORIZONTAL BAR chart implementation.<br>
  * A horizontal bar chart is a variation on a bar chart.<br>
@@ -35,4 +37,13 @@ public class HorizontalBarChart extends BarChart {
 		return ChartType.HORIZONTAL_BAR;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.pepstock.charba.client.BarChart#newDataset()
+	 */
+	@Override
+	public HorizontalBarDataset newDataset() {
+		return new HorizontalBarDataset(getDefaultChartOptions());
+	}
 }

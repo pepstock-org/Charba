@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.data;
 
+import org.pepstock.charba.client.ChartType;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.FillCallback;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.enums.Fill;
@@ -36,7 +38,7 @@ public final class ScatterDataset extends LineDataset {
 	 * Builds the object setting fixed properties
 	 */
 	public ScatterDataset() {
-		this(null);
+		this(ChartType.SCATTER);
 	}
 
 	/**
@@ -45,7 +47,26 @@ public final class ScatterDataset extends LineDataset {
 	 * @param defaultValues default options
 	 */
 	public ScatterDataset(IsDefaultOptions defaultValues) {
-		super(defaultValues);
+		this(ChartType.SCATTER, defaultValues);
+	}
+
+	/**
+	 * Creates the dataset using chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 */
+	protected ScatterDataset(Type type) {
+		super(type, null);
+	}
+
+	/**
+	 * Creates the dataset using a default and chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 * @param defaultValues default options
+	 */
+	protected ScatterDataset(Type type, IsDefaultOptions defaultValues) {
+		super(type, defaultValues);
 		// scatter is always no fill
 		super.setFill(Fill.FALSE);
 		// scatter has never show lines

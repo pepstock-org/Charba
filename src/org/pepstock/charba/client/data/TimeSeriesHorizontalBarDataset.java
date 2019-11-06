@@ -21,17 +21,14 @@ import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
- * The time series bar chart allows a number of properties to be specified for each dataset. These are used to set display
- * properties for a specific dataset.<br>
+ * The time series horizontal bar chart allows a number of properties to be specified for each dataset. These are used to set
+ * display properties for a specific dataset.<br>
  * In time series charts, the data (as double) is not allowed. You must use {@link DataPoint} or {@link TimeSeriesItem}.
  * 
  * @author Andrea "Stock" Stocchero
  *
  */
-public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesItems, HasBarStacker {
-
-	// exception string message for setting ore getting data
-	static final String INVALID_DATA_CALL = "setData and getData methods are not invokable by a time series chart.";
+public class TimeSeriesHorizontalBarDataset extends HorizontalBarDataset implements HasTimeSeriesItems, HasBarStacker {
 
 	// bar stacker instance
 	private final BarStacker barStacker;
@@ -40,7 +37,7 @@ public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesIte
 	 * Creates a dataset.<br>
 	 * It uses the global options has default.
 	 */
-	public TimeSeriesBarDataset() {
+	public TimeSeriesHorizontalBarDataset() {
 		this((IsDefaultOptions) null);
 	}
 
@@ -49,7 +46,7 @@ public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesIte
 	 * 
 	 * @param defaultValues default options
 	 */
-	public TimeSeriesBarDataset(IsDefaultOptions defaultValues) {
+	public TimeSeriesHorizontalBarDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
 		// creates bar stacker instance
 		this.barStacker = new BarStacker(getNativeObject());
@@ -60,7 +57,7 @@ public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesIte
 	 * 
 	 * @param type chart type related to the dataset
 	 */
-	protected TimeSeriesBarDataset(Type type) {
+	protected TimeSeriesHorizontalBarDataset(Type type) {
 		this(type, null);
 	}
 
@@ -70,7 +67,7 @@ public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesIte
 	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
 	 */
-	protected TimeSeriesBarDataset(Type type, IsDefaultOptions defaultValues) {
+	protected TimeSeriesHorizontalBarDataset(Type type, IsDefaultOptions defaultValues) {
 		super(type, defaultValues);
 		// creates bar stacker instance
 		this.barStacker = new BarStacker(getNativeObject());
@@ -93,7 +90,7 @@ public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesIte
 	 */
 	@Override
 	public final void setData(double... values) {
-		throw new UnsupportedOperationException(INVALID_DATA_CALL);
+		throw new UnsupportedOperationException(TimeSeriesBarDataset.INVALID_DATA_CALL);
 	}
 
 	/*
@@ -103,7 +100,7 @@ public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesIte
 	 */
 	@Override
 	public final void setData(List<Double> values) {
-		throw new UnsupportedOperationException(INVALID_DATA_CALL);
+		throw new UnsupportedOperationException(TimeSeriesBarDataset.INVALID_DATA_CALL);
 	}
 
 	/*
@@ -113,7 +110,7 @@ public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesIte
 	 */
 	@Override
 	public final List<Double> getData() {
-		throw new UnsupportedOperationException(INVALID_DATA_CALL);
+		throw new UnsupportedOperationException(TimeSeriesBarDataset.INVALID_DATA_CALL);
 	}
 
 	/*
@@ -123,7 +120,7 @@ public class TimeSeriesBarDataset extends BarDataset implements HasTimeSeriesIte
 	 */
 	@Override
 	public final List<Double> getData(boolean binding) {
-		throw new UnsupportedOperationException(INVALID_DATA_CALL);
+		throw new UnsupportedOperationException(TimeSeriesBarDataset.INVALID_DATA_CALL);
 	}
 
 }

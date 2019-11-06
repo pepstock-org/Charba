@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.data;
 
+import org.pepstock.charba.client.ChartType;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
@@ -65,7 +67,7 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * It uses the global options has default.
 	 */
 	public PieDataset() {
-		this(null);
+		this(ChartType.PIE);
 	}
 
 	/**
@@ -74,7 +76,26 @@ public class PieDataset extends HovingDataset implements HasBorderAlign {
 	 * @param defaultValues default options
 	 */
 	public PieDataset(IsDefaultOptions defaultValues) {
-		super(defaultValues);
+		this(ChartType.PIE, defaultValues);
+	}
+
+	/**
+	 * Creates the dataset using chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 */
+	protected PieDataset(Type type) {
+		this(type, null);
+	}
+
+	/**
+	 * Creates the dataset using a default and chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 * @param defaultValues default options
+	 */
+	protected PieDataset(Type type, IsDefaultOptions defaultValues) {
+		super(type, defaultValues);
 		// creates border aligner instance
 		this.borderAligner = new BorderAligner(getNativeObject(), getDefaultValues());
 	}

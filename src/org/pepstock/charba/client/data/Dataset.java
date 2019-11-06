@@ -22,7 +22,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.pepstock.charba.client.ChartType;
 import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Type;
@@ -98,6 +97,8 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	private final GradientsContainer gradientsContainer = new GradientsContainer();
 	// default options values
 	private final IsDefaultOptions defaultValues;
+	// chart type related to dataset
+	private final Type type;
 	// internal comparator to sort time series items
 	private static final Comparator<TimeSeriesItem> COMPARATOR = (TimeSeriesItem o1, TimeSeriesItem o2) -> o1.getTime().compareTo(o2.getTime());
 
@@ -149,12 +150,20 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * Creates the dataset using a default, adding patterns and gradients element.
+	 * Creates the dataset using a default and chart type related to the dataset, adding patterns and gradients element.
 	 * 
+	 * @param type chart type related to the dataset
 	 * @param defaultValues default options
 	 */
-	protected Dataset(IsDefaultOptions defaultValues) {
+	protected Dataset(Type type, IsDefaultOptions defaultValues) {
 		this.defaultValues = defaultValues == null ? Defaults.get().getGlobal() : defaultValues;
+		// checks if type is consistent
+		Type.checkIfValid(type);
+		this.type = type;
+		// stores the type
+		setValue(Property.TYPE, type);
+		// stores the id based on a counter
+		setValue(Property.CHARBA_ID, COUNTER.getAndIncrement());
 		// stores the id based on a counter
 		setValue(Property.CHARBA_ID, COUNTER.getAndIncrement());
 		// sets the Charba containers into dataset java script configuration
@@ -750,34 +759,12 @@ public abstract class Dataset extends NativeObjectContainer implements HasDatase
 	}
 
 	/**
-	 * Sets the type of dataset based on type of chart.
-	 * 
-	 * @param type type of dataset.
-	 */
-	public void setType(Type type) {
-		setValue(Property.TYPE, type);
-	}
-
-	/**
 	 * Returns the type of dataset, based on type of chart.
 	 * 
-	 * @return type of dataset or <code>null</code> if not set.
+	 * @return type of dataset.
 	 */
 	public final Type getType() {
-		// checks if the type has been set
-		if (!has(Property.TYPE)) {
-			return null;
-		}
-		// gets string value from java script object
-		String value = getValue(Property.TYPE, ChartType.BAR.value());
-		// checks if consistent with out of the box chart types
-		Type type = Key.getKeyByValue(ChartType.class, value);
-		// if not, creates new type being a controller.
-		if (type == null) {
-			// gets type from controllers
-			type = Defaults.get().getControllers().getTypeByString(value);
-		}
-		return type == null ? ChartType.BAR : type;
+		return type;
 	}
 
 	/**

@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.data;
 
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -64,7 +65,7 @@ public class StackedAreaDataset extends LineDataset {
 	 * It uses the global options has default.
 	 */
 	public StackedAreaDataset() {
-		this(null);
+		this((IsDefaultOptions) null);
 	}
 
 	/**
@@ -74,6 +75,25 @@ public class StackedAreaDataset extends LineDataset {
 	 */
 	public StackedAreaDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
+	}
+
+	/**
+	 * Creates the dataset using chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 */
+	protected StackedAreaDataset(Type type) {
+		this(type, null);
+	}
+
+	/**
+	 * Creates the dataset using a default and chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 * @param defaultValues default options
+	 */
+	protected StackedAreaDataset(Type type, IsDefaultOptions defaultValues) {
+		super(type, defaultValues);
 	}
 
 	/**

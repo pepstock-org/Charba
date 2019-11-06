@@ -17,6 +17,8 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.ChartType;
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.callbacks.PointStyleCallback;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
@@ -112,7 +114,7 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 * It uses the global options has default.
 	 */
 	public BubbleDataset() {
-		this(null);
+		this(ChartType.BUBBLE);
 	}
 
 	/**
@@ -121,10 +123,28 @@ public final class BubbleDataset extends HovingDataset implements HasDataPoints,
 	 * @param defaultValues default options
 	 */
 	public BubbleDataset(IsDefaultOptions defaultValues) {
-		super(defaultValues);
+		this(ChartType.BUBBLE, defaultValues);
+	}
+
+	/**
+	 * Creates the dataset using chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 */
+	protected BubbleDataset(Type type) {
+		this(type, null);
+	}
+
+	/**
+	 * Creates the dataset using a default and chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 * @param defaultValues default options
+	 */
+	protected BubbleDataset(Type type, IsDefaultOptions defaultValues) {
+		super(type, defaultValues);
 		// sets new orderer
 		orderer = new Orderer(getNativeObject());
-
 		// -------------------------------
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------

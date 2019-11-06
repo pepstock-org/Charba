@@ -99,6 +99,23 @@ At every build, **Charba** is also checked by [Sonar.io](https://sonarcloud.io/d
 
 In the project, it's also provided the [FindBugs](https://github.com/pepstock-org/Charba/blob/2.6/charba.fbp) project to looking offline for bugs.
 
+Going to new version
+-------
+
+Here you can find the list of enhancement and updates available on `master` branch before which will be part of new official release:
+
+### Features
+
+  * Every dataset sets automatically own type ([chart type](http://www.pepstock.org/Charba/2.6/org/pepstock/charba/client/ChartType.html)). This is the first step going to new [Chart.JS](http://www.chartjs.org/) feature about `dataset default options`, available from [version 2.9.2](https://github.com/chartjs/Chart.js/releases/tag/v2.9.2).
+    * add new constructors in order to extend the dataset for new controllers.
+    * add new `HorizontalBarDataset` class.
+      * this is a **breaking change** because now the `HorizontalChart` class needs that dataset class instead of `BarDataset`.
+    * remove `setType` method from `Dataset` class.
+    
+### Development
+
+  * implement `BarStacker` and `HasBarStacker` classes in order to manage `stack` property for bar and horizontal bar charts, reducing duplications of code.
+
 License
 -------
 

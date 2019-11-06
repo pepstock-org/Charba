@@ -17,6 +17,7 @@ package org.pepstock.charba.client.data;
 
 import java.util.List;
 
+import org.pepstock.charba.client.Type;
 import org.pepstock.charba.client.defaults.IsDefaultOptions;
 
 /**
@@ -38,7 +39,7 @@ public class TimeSeriesLineDataset extends LineDataset implements HasTimeSeriesI
 	 * It uses the global options has default.
 	 */
 	public TimeSeriesLineDataset() {
-		this(null);
+		this((IsDefaultOptions) null);
 	}
 
 	/**
@@ -48,6 +49,25 @@ public class TimeSeriesLineDataset extends LineDataset implements HasTimeSeriesI
 	 */
 	public TimeSeriesLineDataset(IsDefaultOptions defaultValues) {
 		super(defaultValues);
+	}
+
+	/**
+	 * Creates the dataset using a default and chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 */
+	protected TimeSeriesLineDataset(Type type) {
+		this(type, null);
+	}
+
+	/**
+	 * Creates the dataset using a default and chart type related to the dataset.
+	 * 
+	 * @param type chart type related to the dataset
+	 * @param defaultValues default options
+	 */
+	protected TimeSeriesLineDataset(Type type, IsDefaultOptions defaultValues) {
+		super(type, defaultValues);
 	}
 
 	/*

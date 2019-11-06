@@ -66,7 +66,7 @@ public final class GaugeDataset extends MeterDataset {
 	 * @param defaultValues default options
 	 */
 	public GaugeDataset(double max, IsDefaultOptions defaultValues) {
-		super(max, defaultValues);
+		super(GaugeChart.CONTROLLER_TYPE, max, defaultValues);
 		// loads all gauge thresholds by default
 		for (GaugeThreshold t : GaugeThreshold.values()) {
 			thresholds.add(t.getThreshold());
