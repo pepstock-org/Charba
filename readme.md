@@ -115,6 +115,7 @@ Here you can find the list of enhancement and updates available on `master` bran
 ### Development
 
   * implement `BarStacker` and `HasBarStacker` classes in order to manage `stack` property for bar and horizontal bar charts, reducing duplications of code.
+  * add `size` and `isEmpty` methods into `Labels` class.
 
 License
 -------

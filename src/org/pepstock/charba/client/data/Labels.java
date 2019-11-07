@@ -132,6 +132,24 @@ public final class Labels {
 	}
 
 	/**
+	 * Returns the amount of loaded labels.
+	 * 
+	 * @return the amount of loaded labels
+	 */
+	public int size() {
+		return array.length();
+	}
+
+	/**
+	 * Returns <code>tree</code> if no label is loaded.
+	 * 
+	 * @return <code>tree</code> if no label is loaded
+	 */
+	public boolean isEmpty() {
+		return array.isEmpty();
+	}
+
+	/**
 	 * Returns a label at a specific index. If at index there is multi-line label, returns labels with '\n' as separator. If the
 	 * index is out of bounds, throws an exception.
 	 * 
