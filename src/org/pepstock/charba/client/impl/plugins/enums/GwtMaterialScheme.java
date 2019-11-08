@@ -301,7 +301,7 @@ public enum GwtMaterialScheme implements IsEnumeratedScheme
 	public ColorScheme getScheme() {
 		return scheme;
 	}
-	
+
 	/**
 	 * Loads a gradient with the scheme of colors, setting the offset proportionally.
 	 * 
@@ -316,12 +316,12 @@ public enum GwtMaterialScheme implements IsEnumeratedScheme
 			// gets index of last calculated color
 			int lastCalculatedColorIndex = colors.size() - 1;
 			// calculates the increment of offset, and then due to 0 and 1 are already assigned
-			// the increment is 1 divided by size of list - 1 
+			// the increment is 1 divided by size of list - 1
 			double offsetIncrement = GradientColor.DEFAULT_OFFSET_STOP / lastCalculatedColorIndex;
 			// amount of offset, starting from 0
 			double offset = 0D;
-			// scans colors from 1 to last calculated index 
-			for (int i=0; i < lastCalculatedColorIndex; i++) {
+			// scans colors from 1 to last calculated index
+			for (int i = 0; i < lastCalculatedColorIndex; i++) {
 				// color at index 0 is color at offset 0
 				gradient.addColorStop(offset, colors.get(i));
 				// increments offset

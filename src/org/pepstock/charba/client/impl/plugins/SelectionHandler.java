@@ -749,7 +749,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// save context
 		ctx.save();
 		// sets font
-		ctx.setFont(Utilities.toFont(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
+		ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
 		// gets metrics
 		TextMetrics metrics = ctx.measureText(clearSelection.getLabel());
 		// stores the label width
@@ -1028,7 +1028,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 		// checks based on render type what must be draw
 		if (Render.LABEL.equals(clearSelection.getRender())) {
 			// sets font
-			ctx.setFont(Utilities.toFont(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
+			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
 			// sets color to canvas
 			ctx.setFillStyle(clearSelection.getFontColorAsString());
 			// sets alignment from center point
@@ -1037,7 +1037,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			ctx.fillText(clearSelection.getLabel(), clearSelection.getLabelX(), clearSelection.getLabelY());
 		} else if (Render.LABEL_IMAGE.equals(clearSelection.getRender())) {
 			// sets font
-			ctx.setFont(Utilities.toFont(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
+			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
 			// sets color to canvas
 			ctx.setFillStyle(clearSelection.getFontColorAsString());
 			// sets alignment from center point
@@ -1050,7 +1050,7 @@ final class SelectionHandler implements MouseDownHandler, MouseUpHandler, MouseM
 			// draws scaled image
 			ctx.drawImage(clearSelection.getImage(), clearSelection.getImageX(), clearSelection.getImageY(), clearSelection.getImageWidth(), clearSelection.getImageHeight());
 			// sets font
-			ctx.setFont(Utilities.toFont(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
+			ctx.setFont(Utilities.toCSSFontProperty(clearSelection.getFontStyle(), clearSelection.getFontSize(), clearSelection.getFontFamily()));
 			// sets color to canvas
 			ctx.setFillStyle(clearSelection.getFontColorAsString());
 			// sets alignment from center point

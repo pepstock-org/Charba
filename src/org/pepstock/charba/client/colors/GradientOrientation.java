@@ -28,43 +28,43 @@ public enum GradientOrientation implements Key
 	/**
 	 * From top to bottom (vertical)
 	 */
-	TOP_DOWN("topDown", GradientType.LINEAR),
+	TOP_DOWN("topDown", GradientType.LINEAR, "to bottom"),
 	/**
 	 * From bottom to to (vertical)
 	 */
-	BOTTOM_UP("bottomUp", GradientType.LINEAR),
+	BOTTOM_UP("bottomUp", GradientType.LINEAR, "to top"),
 	/**
 	 * From left to right (horizontal)
 	 */
-	LEFT_RIGHT("leftRight", GradientType.LINEAR),
+	LEFT_RIGHT("leftRight", GradientType.LINEAR, "to right"),
 	/**
 	 * From right to left (horizontal)
 	 */
-	RIGHT_LEFT("rightLeft", GradientType.LINEAR),
+	RIGHT_LEFT("rightLeft", GradientType.LINEAR, "to left"),
 	/**
 	 * From top(left) to right(bottom) (diagonal)
 	 */
-	TOP_RIGHT("topRight", GradientType.LINEAR),
+	TOP_RIGHT("topRight", GradientType.LINEAR, "to bottom right"),
 	/**
 	 * From bottom(right) to left(top) (diagonal)
 	 */
-	BOTTOM_LEFT("bottomLeft", GradientType.LINEAR),
+	BOTTOM_LEFT("bottomLeft", GradientType.LINEAR, "to top left"),
 	/**
 	 * From top(right) to left(bottom) (diagonal)
 	 */
-	TOP_LEFT("topLeft", GradientType.LINEAR),
+	TOP_LEFT("topLeft", GradientType.LINEAR, "to bottom left"),
 	/**
 	 * From bottom(left) to right(top) (diagonal)
 	 */
-	BOTTOM_RIGHT("bottomRight", GradientType.LINEAR),
+	BOTTOM_RIGHT("bottomRight", GradientType.LINEAR, "to top right"),
 	/**
 	 * From center to the borders (ONLY radial)
 	 */
-	IN_OUT("inOut", GradientType.RADIAL),
+	IN_OUT("inOut", GradientType.RADIAL, "circle"),
 	/**
 	 * From borders to the center (ONLY radial)
 	 */
-	OUT_IN("outIn", GradientType.RADIAL);
+	OUT_IN("outIn", GradientType.RADIAL, "circle");
 
 	// name value of property
 	private final String value;
@@ -72,15 +72,20 @@ public enum GradientOrientation implements Key
 	// supported gradient type
 	private GradientType type;
 
+	// CSS statement
+	private final String cssStatement;
+
 	/**
 	 * Creates the orientation with supported gradient type
 	 * 
 	 * @param value value of property name
 	 * @param type supported gradient type
+	 * @param cssStatement the CSS statement which represents the gradient orientation
 	 */
-	private GradientOrientation(String value, GradientType type) {
+	private GradientOrientation(String value, GradientType type, String cssStatement) {
 		this.value = value;
 		this.type = type;
+		this.cssStatement = cssStatement;
 	}
 
 	/**
@@ -116,6 +121,15 @@ public enum GradientOrientation implements Key
 			// if here, is radial
 			return IN_OUT;
 		}
+	}
+
+	/**
+	 * Returns the CSS statement which represents the gradient orientation.
+	 * 
+	 * @return the CSS statement which represents the gradient orientation
+	 */
+	public String getCssStatement() {
+		return cssStatement;
 	}
 
 }

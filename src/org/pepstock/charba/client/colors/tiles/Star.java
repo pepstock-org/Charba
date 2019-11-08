@@ -38,7 +38,7 @@ import com.google.gwt.canvas.dom.client.Context2d;
  *
  */
 class Star extends EmptyStar {
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

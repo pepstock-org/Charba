@@ -56,7 +56,7 @@ class BackSlashedLine extends ShapeDrawer {
 		// designs the shape into C line section
 		drawDiagonal(context, quarterSize, quarterSize * -4D, size + quarterSize, size);
 		// designs the shape into B line section
-		drawDiagonal(context, quarterSize * -1D, 0D,  quarterSize * 3D, size * 2D);
+		drawDiagonal(context, quarterSize * -1D, 0D, quarterSize * 3D, size * 2D);
 		// draws the current path with the current stroke style
 		context.stroke();
 	}

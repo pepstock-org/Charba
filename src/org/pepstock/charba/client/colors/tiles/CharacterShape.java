@@ -106,7 +106,7 @@ public final class CharacterShape extends AbstractShape {
 		// apply the stroke properties
 		applyFillProperties(context, shapeColor);
 		// sets font as string
-		context.setFont(Utilities.toFont(FontStyle.NORMAL, realFontSize, fontFamily));
+		context.setFont(Utilities.toCSSFontProperty(FontStyle.NORMAL, realFontSize, fontFamily));
 		// sets alignment from center point
 		context.setTextBaseline(TextBaseline.TOP);
 		// gets metrics
@@ -169,7 +169,7 @@ public final class CharacterShape extends AbstractShape {
 		// loop to calculate the size
 		while (check) {
 			// sets font
-			context.setFont(Utilities.toFont(style, calculatedFontSize, fontFamily));
+			context.setFont(Utilities.toCSSFontProperty(style, calculatedFontSize, fontFamily));
 			// gets metrics
 			TextMetrics metrics = context.measureText(value);
 			// if the width is inside of tile size

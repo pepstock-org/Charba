@@ -65,10 +65,10 @@ abstract class BaseMeterChart<D extends MeterDataset> extends AbstractChart<D> {
 		ControllerType type = getControllerType();
 		// checks if already registered
 		if (!Defaults.get().getControllers().isRegistered(type.value())) {
-			Window.getConsole().log("Eccome register "+type);
+			Window.getConsole().log("Eccome register " + type);
 			// if not, adds a controller
 			boolean added = Defaults.get().getControllers().extend(new BaseMeterController(type));
-			Window.getConsole().log("Eccome register "+type.value()+" "+added);
+			Window.getConsole().log("Eccome register " + type.value() + " " + added);
 		}
 		// calls super chart options creations
 		return super.createChartOptions();

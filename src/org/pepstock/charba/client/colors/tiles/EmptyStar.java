@@ -38,8 +38,8 @@ import com.google.gwt.canvas.dom.client.Context2d;
  *
  */
 class EmptyStar extends ShapeDrawer {
-	
-	//number of spikes of star
+
+	// number of spikes of star
 	static final int SPIKES = 5;
 
 	/*

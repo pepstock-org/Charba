@@ -111,11 +111,13 @@ Here you can find the list of enhancement and updates available on `master` bran
     * add new `HorizontalBarDataset` class.
       * this is a **breaking change** because now the `HorizontalChart` class needs that dataset class instead of `BarDataset`.
     * remove `setType` method from `Dataset` class.
+ * add `toCSSBackgroundProperty` methods for `Gradient` and `Pattern` into `Utilities` class in order to get the CSS property value of the canvas object.
     
 ### Development
 
   * implement `BarStacker` and `HasBarStacker` classes in order to manage `stack` property for bar and horizontal bar charts, reducing duplications of code.
   * add `size` and `isEmpty` methods into `Labels` class.
+  * rename `toFont` into `toCSSFontProperty` method into `Utilities` class.
 
 License
 -------

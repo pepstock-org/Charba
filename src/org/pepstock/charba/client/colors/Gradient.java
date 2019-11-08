@@ -39,12 +39,12 @@ import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
  */
 public final class Gradient extends CanvasObject {
 
+	// internal comparator to sort colors by own offset
+	private static final Comparator<GradientColor> COMPARATOR = (GradientColor o1, GradientColor o2) -> Double.compare(o1.getOffset(), o2.getOffset());
 	// contains the gradient colors
 	private final ArrayObjectContainerList<GradientColor> colors;
 	// factory to creates color by native object
 	private final GradientColorFactory factory = new GradientColorFactory();
-	// internal comparator to sort colors by own offset
-	private static final Comparator<GradientColor> COMPARATOR = (GradientColor o1, GradientColor o2) -> Double.compare(o1.getOffset(), o2.getOffset());
 
 	/**
 	 * Name of properties of native object. ALL INTERNAL USE ONLY

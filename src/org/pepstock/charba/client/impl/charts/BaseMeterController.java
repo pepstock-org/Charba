@@ -188,14 +188,14 @@ final class BaseMeterController extends AbstractController {
 		// checks if it must draw also the label
 		if ((MeterDisplay.VALUE_AND_LABEL.equals(options.getDisplay()) || MeterDisplay.PERCENTAGE_AND_LABEL.equals(options.getDisplay())) && label != null) {
 			// sets font
-			ctx.setFont(Utilities.toFont(style, fontSize, fontFamily));
+			ctx.setFont(Utilities.toCSSFontProperty(style, fontSize, fontFamily));
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.BOTTOM);
 			// draws text
 			ctx.fillText(valueToShow, centerX, centerY - PADDING);
 			// re-calculates the font size for label
 			fontSize = calculateFontSize(ctx, sideOfSquare, label, style, fontFamily);
-			ctx.setFont(Utilities.toFont(style, fontSize, fontFamily));
+			ctx.setFont(Utilities.toCSSFontProperty(style, fontSize, fontFamily));
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.TOP);
 			// draws text
@@ -203,7 +203,7 @@ final class BaseMeterController extends AbstractController {
 		} else {
 			// if here it must draw ONLY the value
 			// sets font
-			ctx.setFont(Utilities.toFont(style, fontSize, fontFamily));
+			ctx.setFont(Utilities.toCSSFontProperty(style, fontSize, fontFamily));
 			// sets alignment from center point
 			ctx.setTextBaseline(TextBaseline.MIDDLE);
 			// draws text
@@ -230,7 +230,7 @@ final class BaseMeterController extends AbstractController {
 		// loop to calculate the size
 		while (check) {
 			// sets font
-			ctx.setFont(Utilities.toFont(style, fontSize, fontFamily));
+			ctx.setFont(Utilities.toCSSFontProperty(style, fontSize, fontFamily));
 			// gets metrics
 			TextMetrics metrics = ctx.measureText(value);
 			// if the width is inside of side (and padding) or

@@ -22,7 +22,8 @@ import org.pepstock.charba.client.labels.RenderItem;
 import com.google.gwt.dom.client.ImageElement;
 
 /**
- * Callback interface of {@link LabelsPlugin#ID} plugin to provide the item to be rendered as string or as image at runtime, using the arguments.
+ * Callback interface of {@link LabelsPlugin#ID} plugin to provide the item to be rendered as string or as image at runtime,
+ * using the arguments.
  * 
  * @author Andrea "Stock" Stocchero
  * 

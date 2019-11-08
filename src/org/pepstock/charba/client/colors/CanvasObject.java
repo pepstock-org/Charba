@@ -30,6 +30,7 @@ import org.pepstock.charba.client.items.UndefinedValues;
  */
 public abstract class CanvasObject extends NativeObjectContainer {
 
+	// internal counter
 	private static final AtomicInteger counter = new AtomicInteger(0);
 
 	/**

@@ -56,7 +56,7 @@ final class SlashedLine extends ShapeDrawer {
 		// designs the shape into C section
 		drawDiagonal(context, quarterSize * 3D, quarterSize * -4D, quarterSize * -1D, size);
 		// designs the shape into B section
-		drawDiagonal(context, size + quarterSize, 0D,  quarterSize, size * 2D);
+		drawDiagonal(context, size + quarterSize, 0D, quarterSize, size * 2D);
 		// draws the current path with the current stroke style
 		context.stroke();
 	}

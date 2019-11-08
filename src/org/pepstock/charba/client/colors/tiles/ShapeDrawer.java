@@ -131,6 +131,7 @@ public abstract class ShapeDrawer {
 		context.setLineJoin(lineJoin);
 		context.setLineCap(lineCap);
 	}
+
 	/**
 	 * Applies the common configuration to context for fill designing.
 	 * 

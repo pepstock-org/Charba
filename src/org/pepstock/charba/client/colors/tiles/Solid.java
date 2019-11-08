@@ -19,7 +19,8 @@ import com.google.gwt.canvas.dom.client.Context2d;
 
 /**
  * SOLID drawer does not design anything into tile.<br>
- * It maintains an empty tile, only with background color. * 
+ * It maintains an empty tile, only with background color. *
+ * 
  * @author Andrea "Stock" Stocchero
  *
  */
@@ -33,6 +34,6 @@ final class Solid extends ShapeDrawer {
 	 */
 	@Override
 	protected void drawTile(Context2d context, String backgroundColor, String shapeColor, int size) {
-		// do nothing 
+		// do nothing
 	}
 }

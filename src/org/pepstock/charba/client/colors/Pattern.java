@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.colors;
 
+import org.pepstock.charba.client.colors.tiles.TilesFactoryDefaults;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
@@ -34,9 +35,9 @@ import com.google.gwt.user.client.ui.Image;
  *
  */
 public final class Pattern extends CanvasObject {
+
 	// exception message
 	private static final String IMG_OR_CANVAS_PATTERN_NULL_MESSAGE = "Image or canvas pattern instance is not consitent or null!";
-
 	// default instance of image.
 	private static final ImageElement DEFAULT_IMAGE = null;
 	// default instance of canvas pattern.
@@ -49,7 +50,9 @@ public final class Pattern extends CanvasObject {
 	{
 		CHARBA_PATTERN_IMG("_charbaPatternImg"),
 		CHARBA_PATTERN_REPETITION("_charbaPatternRepetition"),
-		CHARBA_PATTERN_CANVAS("_charbaPatternCanvas");
+		CHARBA_PATTERN_CANVAS("_charbaPatternCanvas"),
+		CHARBA_PATTERN_WIDTH("_charbaPatternWidth"),
+		CHARBA_PATTERN_HEIGHT("_charbaPatternHeight");
 
 		// name value of property
 		private final String value;
@@ -135,6 +138,8 @@ public final class Pattern extends CanvasObject {
 		if (image != null) {
 			// creates pattern
 			setValue(Property.CHARBA_PATTERN_IMG, image);
+			setValue(Property.CHARBA_PATTERN_WIDTH, image.getWidth());
+			setValue(Property.CHARBA_PATTERN_HEIGHT, image.getHeight());
 			setValue(Property.CHARBA_PATTERN_REPETITION, repetition == null ? Context2d.Repetition.REPEAT.name() : repetition.name());
 		} else {
 			// if here, image is null
@@ -145,11 +150,35 @@ public final class Pattern extends CanvasObject {
 
 	/**
 	 * Creates the object using an already created canvas pattern.<br>
-	 * This is mainly used by tiles.
+	 * The dimension of canvas pattern image will be the default {@link TilesFactoryDefaults#DEFAULT_SIZE}. This is mainly used
+	 * by tiles.
 	 * 
 	 * @param canvasPattern canvas pattern instance
 	 */
 	public Pattern(CanvasPattern canvasPattern) {
+		this(canvasPattern, TilesFactoryDefaults.DEFAULT_SIZE, TilesFactoryDefaults.DEFAULT_SIZE);
+	}
+
+	/**
+	 * Creates the object using an already created canvas pattern.<br>
+	 * The dimension of canvas pattern image is unique then the image of pattern is a square. This is mainly used by tiles.
+	 * 
+	 * @param canvasPattern canvas pattern instance
+	 * @param squareSize size of image applied to canvasPattern to be a square
+	 */
+	public Pattern(CanvasPattern canvasPattern, int squareSize) {
+		this(canvasPattern, squareSize, squareSize);
+	}
+
+	/**
+	 * Creates the object using an already created canvas pattern.<br>
+	 * This is mainly used by tiles.
+	 * 
+	 * @param canvasPattern canvas pattern instance
+	 * @param width width of image applied to canvasPattern
+	 * @param height height of image applied to canvasPattern
+	 */
+	public Pattern(CanvasPattern canvasPattern, int width, int height) {
 		// checks if canvas pattern is not consistent
 		if (canvasPattern != null) {
 			// creates pattern
@@ -157,6 +186,9 @@ public final class Pattern extends CanvasObject {
 			// sets repetition even is not used
 			// to normalizes the properties
 			setValue(Property.CHARBA_PATTERN_REPETITION, Context2d.Repetition.REPEAT.name());
+			// stores size checks the max value
+			setValue(Property.CHARBA_PATTERN_WIDTH, Math.max(width, TilesFactoryDefaults.DEFAULT_SIZE));
+			setValue(Property.CHARBA_PATTERN_HEIGHT, Math.max(height, TilesFactoryDefaults.DEFAULT_SIZE));
 		} else {
 			// if here, image is null
 			// then exception
@@ -174,12 +206,30 @@ public final class Pattern extends CanvasObject {
 	}
 
 	/**
-	 * Returns the image to use into pattern if exists.
+	 * Returns the image used into pattern if exists.
 	 * 
-	 * @return the image to use into pattern if exists, otherwise <code>null</code>.
+	 * @return the image used into pattern if exists, otherwise <code>null</code>.
 	 */
 	public ImageElement getImage() {
 		return getValue(Property.CHARBA_PATTERN_IMG, DEFAULT_IMAGE);
+	}
+
+	/**
+	 * Returns the image width used into pattern.
+	 * 
+	 * @return the image width used into pattern.
+	 */
+	public int getWidth() {
+		return getValue(Property.CHARBA_PATTERN_WIDTH, TilesFactoryDefaults.DEFAULT_SIZE);
+	}
+
+	/**
+	 * Returns the image height used into pattern.
+	 * 
+	 * @return the image height used into pattern.
+	 */
+	public int getHeight() {
+		return getValue(Property.CHARBA_PATTERN_HEIGHT, TilesFactoryDefaults.DEFAULT_SIZE);
 	}
 
 	/**

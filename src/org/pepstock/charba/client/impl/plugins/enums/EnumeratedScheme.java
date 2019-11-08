@@ -46,7 +46,7 @@ final class EnumeratedScheme implements ColorScheme {
 		this.category = category;
 		this.value = value;
 	}
-	
+
 	/**
 	 * Adds a color to the list.
 	 * 
@@ -64,7 +64,7 @@ final class EnumeratedScheme implements ColorScheme {
 	void addAll(List<IsColor> color) {
 		colors.addAll(color);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -30,7 +30,8 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.regexp.shared.RegExp;
 
 /**
- * Builds tiles creating a CHARBA pattern or canvas pattern passing all needed arguments and leveraging on tiles factory defaults.
+ * Builds tiles creating a CHARBA pattern or canvas pattern passing all needed arguments and leveraging on tiles factory
+ * defaults.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -275,7 +276,7 @@ public final class TilesFactory {
 	 * @return a CHARBA pattern
 	 */
 	public static Pattern createPattern(IsShape shape, String backgroundColor, String shapeColor, int size) {
-		return new Pattern(createTile(shape, backgroundColor, shapeColor, size));
+		return new Pattern(createTile(shape, backgroundColor, shapeColor, size), size);
 	}
 
 	/**
@@ -288,7 +289,7 @@ public final class TilesFactory {
 	 * @return a CHARBA pattern
 	 */
 	public static Pattern createPattern(IsShape shape, IsColor backgroundColor, IsColor shapeColor, int size) {
-		return new Pattern(createTile(shape, backgroundColor, shapeColor, size));
+		return new Pattern(createTile(shape, backgroundColor, shapeColor, size), size);
 	}
 
 }
