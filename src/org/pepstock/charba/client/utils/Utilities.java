@@ -27,6 +27,7 @@ import org.pepstock.charba.client.colors.Gradient;
 import org.pepstock.charba.client.colors.GradientColor;
 import org.pepstock.charba.client.colors.GradientOrientation;
 import org.pepstock.charba.client.colors.GradientType;
+import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.enums.FontStyle;
 
@@ -124,6 +125,18 @@ public final class Utilities {
 	 * Constant for EMPTY ARRAY string.
 	 */
 	public static final String[] EMPTY_ARRAY_STRING = new String[0];
+	/**
+	 * Constant for CSS property for {@link Pattern}.
+	 */
+	public static final String CSS_BACKGROUND_PROPERTY = "background";
+	/**
+	 * Constant for CSS property for {@link Gradient}.
+	 */
+	public static final String CSS_BACKGROUND_IMAGE_PROPERTY = "backgroundImage";
+	/**
+	 * Constant for CSS property for {@link IsColor}.
+	 */
+	public static final String CSS_BACKGROUND_COLOR_PROPERTY = "backgroundColor";
 	// string format of font CSS style
 	private static final String FONT_TEMPLATE = "{0} normal {1} {2}px {3}";
 	// string format of font style
@@ -201,6 +214,7 @@ public final class Utilities {
 	 * The dimension of canvas pattern image will be the dimension of pattern.
 	 * 
 	 * @return the CSS syntax to represent the pattern
+	 * @param pattern object to export into CSS
 	 */
 	public static String toCSSBackgroundProperty(Pattern pattern) {
 		return toCSSBackgroundProperty(pattern, Integer.MIN_VALUE);
@@ -211,6 +225,7 @@ public final class Utilities {
 	 * The dimension of canvas pattern image is unique then the image of pattern is a square.
 	 * 
 	 * @return the CSS syntax to represent the pattern
+	 * @param pattern object to export into CSS
 	 * @param squareSize size of image applied to canvasPattern to be a square
 	 */
 	public static String toCSSBackgroundProperty(Pattern pattern, int squareSize) {
@@ -221,6 +236,7 @@ public final class Utilities {
 	 * Returns the CSS syntax to represent the pattern.
 	 * 
 	 * @return the CSS syntax to represent the pattern
+	 * @param pattern object to export into CSS
 	 * @param width width of image applied to canvasPattern
 	 * @param height height of image applied to canvasPattern
 	 */
@@ -287,6 +303,7 @@ public final class Utilities {
 	 * Returns the CSS syntax to represent the gradient.<br>
 	 * The dimension of canvas pattern image will be the dimension of pattern.
 	 * 
+	 * @param gradient object to export into CSS
 	 * @return the CSS syntax to represent the gradient
 	 */
 	public static String toCSSBackgroundProperty(Gradient gradient) {

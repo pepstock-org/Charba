@@ -18,6 +18,7 @@ package org.pepstock.charba.client.impl.plugins;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.pepstock.charba.client.AbstractChart;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.Gradient;
@@ -27,6 +28,7 @@ import org.pepstock.charba.client.colors.Pattern;
 import org.pepstock.charba.client.items.SizeItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.AbstractPlugin;
+import org.pepstock.charba.client.utils.Utilities;
 
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.CanvasPattern;
@@ -197,11 +199,15 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		if (ChartBackgroundColorOptions.ColorType.COLOR.equals(bgOptions.getColorType())) {
 			// set fill canvas color
 			ctx.setFillStyle(bgOptions.getBackgroundColorAsString());
+			// sets back ground to chart HTML element
+			applyBackgroundToChartElement(chart, Utilities.CSS_BACKGROUND_COLOR_PROPERTY, bgOptions.getBackgroundColorAsString());
 		} else if (ChartBackgroundColorOptions.ColorType.PATTERN.equals(bgOptions.getColorType())) {
 			// creates the pattern
 			CanvasPattern canvasPattern = ChartBackgroundGradientFactory.get().createPattern(chart, bgOptions.getBackgroundColorAsPattern());
 			// set fill canvas pattern
 			ctx.setFillStyle(canvasPattern);
+			// sets back ground to chart HTML element
+			applyBackgroundToChartElement(chart, Utilities.CSS_BACKGROUND_PROPERTY, Utilities.toCSSBackgroundProperty(bgOptions.getBackgroundColorAsPattern()));
 		} else if (ChartBackgroundColorOptions.ColorType.GRADIENT.equals(bgOptions.getColorType())) {
 			// creates the gradient
 			CanvasGradient canvasGradient = ChartBackgroundGradientFactory.get().createGradient(chart, bgOptions.getBackgroundColorAsGradient(), UndefinedValues.INTEGER, UndefinedValues.INTEGER);
@@ -304,4 +310,20 @@ public final class ChartBackgroundColor extends AbstractPlugin {
 		return bgOptions;
 	}
 
+	/**
+	 * Applies the background CSS property into chart HTML element.
+	 * 
+	 * @param chart chart instance to use to apply CSS property
+	 * @param name name of background CSS property
+	 * @param value value of CSS property to set
+	 */
+	private void applyBackgroundToChartElement(IsChart chart, String name, String value) {
+		// checks if chart, name and value of CSS property are consistent
+		if (chart instanceof AbstractChart<?> && name != null && value != null) {
+			// cats the chart
+			AbstractChart<?> chartInstance = (AbstractChart<?>) chart;
+			// sets style property
+			chartInstance.getElement().getStyle().setProperty(name, value);
+		}
+	}
 }
