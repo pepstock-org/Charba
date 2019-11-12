@@ -251,7 +251,7 @@ public final class Utilities {
 			if (image != null) {
 				// using the template, returns the CSS value of pattern
 				return PATTERN_TEMPLATE.css(pattern.getImage().getSrc(), pattern.getRepetition().getValue()).asString();
-			} else if (pattern != null) {
+			} else if (canvasPattern != null) {
 				// sets a consistent width
 				int widthToUse = Math.max(width, pattern.getWidth());
 				// sets a consistent height
