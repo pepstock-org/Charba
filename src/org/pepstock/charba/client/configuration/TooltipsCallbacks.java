@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.TooltipBodyCallback;
 import org.pepstock.charba.client.callbacks.TooltipFooterCallback;
 import org.pepstock.charba.client.callbacks.TooltipLabelCallback;
@@ -65,11 +66,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		/**
 		 * Method of function to be called to invoke a tooltip callback on elements.
 		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
+		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param items tooltip items
 		 * @return array of strings
 		 */
-		ArrayString call(NativeObject context, ArrayObject items);
+		ArrayString call(CallbackFunctionContext context, ArrayObject items);
 	}
 
 	/**
@@ -84,11 +85,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		/**
 		 * Method of function to be called to manage the label.
 		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
+		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param item tooltip item
 		 * @return string before item
 		 */
-		String call(NativeObject context, NativeObject item);
+		String call(CallbackFunctionContext context, NativeObject item);
 	}
 
 	/**
@@ -103,11 +104,11 @@ public class TooltipsCallbacks extends ConfigurationContainer<ExtendedOptions> {
 		/**
 		 * Method of function to be called to have label color for the item.
 		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
+		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param item tooltip item
 		 * @return label color item
 		 */
-		NativeObject call(NativeObject context, NativeObject item);
+		NativeObject call(CallbackFunctionContext context, NativeObject item);
 	}
 
 	// ---------------------------

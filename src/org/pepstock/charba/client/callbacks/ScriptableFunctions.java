@@ -44,11 +44,11 @@ public final class ScriptableFunctions {
 		/**
 		 * Method of function to be called to provide a double property.
 		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param contextFunction context value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
 		 * @return a double property value.
 		 */
-		double call(Object contextFunction, ScriptableContext context);
+		double call(CallbackFunctionContext contextFunction, ScriptableContext context);
 	}
 
 	/**
@@ -62,11 +62,11 @@ public final class ScriptableFunctions {
 		/**
 		 * Method of function to be called to provide a boolean property.
 		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param contextFunction context value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
 		 * @return a boolean property value.
 		 */
-		boolean call(Object contextFunction, ScriptableContext context);
+		boolean call(CallbackFunctionContext contextFunction, ScriptableContext context);
 	}
 
 	/**
@@ -80,11 +80,11 @@ public final class ScriptableFunctions {
 		/**
 		 * Method of function to be called to provide a integer property.
 		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param contextFunction context value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
 		 * @return a integer property value.
 		 */
-		int call(Object contextFunction, ScriptableContext context);
+		int call(CallbackFunctionContext contextFunction, ScriptableContext context);
 	}
 
 	/**
@@ -98,11 +98,11 @@ public final class ScriptableFunctions {
 		/**
 		 * Method of function to be called to provide a string property.
 		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param contextFunction context value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
 		 * @return a string property value.
 		 */
-		String call(Object contextFunction, ScriptableContext context);
+		String call(CallbackFunctionContext contextFunction, ScriptableContext context);
 	}
 
 	/**
@@ -116,11 +116,11 @@ public final class ScriptableFunctions {
 		/**
 		 * Method of function to be called to provide a object property.
 		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param contextFunction context value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
 		 * @return a object property value.
 		 */
-		Object call(Object contextFunction, ScriptableContext context);
+		Object call(CallbackFunctionContext contextFunction, ScriptableContext context);
 	}
 
 	/**
@@ -134,11 +134,11 @@ public final class ScriptableFunctions {
 		/**
 		 * Method of function to be called to provide a native object property.
 		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param contextFunction context value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
 		 * @return a object proeprty value.
 		 */
-		NativeObject call(Object contextFunction, ScriptableContext context);
+		NativeObject call(CallbackFunctionContext contextFunction, ScriptableContext context);
 	}
 
 	/**
@@ -152,11 +152,11 @@ public final class ScriptableFunctions {
 		/**
 		 * Method of function to be called to provide an array property.
 		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param contextFunction context value of <code>this</code> to the execution context of function.
 		 * @param context native object as context.
 		 * @return an array instance
 		 */
-		Array call(Object contextFunction, ScriptableContext context);
+		Array call(CallbackFunctionContext contextFunction, ScriptableContext context);
 	}
 
 	/**

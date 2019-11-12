@@ -25,6 +25,7 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.controllers.Controllers;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.GlobalPlugins;
 import org.pepstock.charba.client.resources.ResourcesType;
 
@@ -178,6 +179,25 @@ public final class Defaults {
 		}
 		// returns the existing options
 		return chartOptions.get(type.value());
+	}
+	
+	/**
+	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box.
+	 * 
+	 * @param isChart chart instance to use to get default HTML legend
+	 * @return the HTML legend or {@link UndefinedValues#STRING} if chart is not initialized.
+	 */
+	public String generateLegend(IsChart isChart) {
+		// checks if argument is consistent
+		if (isChart instanceof AbstractChart<?>) {
+			// cast to abstract chart to get element of GWT object
+			AbstractChart<?> chart = (AbstractChart<?>) isChart;
+			// invokes the generate legend
+			return chart.generateDefaultLegend();
+		}
+		// if here, the chart is not abstract therefore
+		// we don't know which method has got to get default hTML legend
+		return UndefinedValues.STRING;
 	}
 
 	/**

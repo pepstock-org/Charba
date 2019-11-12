@@ -16,6 +16,7 @@
 package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.TooltipCustomCallback;
 import org.pepstock.charba.client.callbacks.TooltipFilterCallback;
 import org.pepstock.charba.client.callbacks.TooltipItemSortCallback;
@@ -61,10 +62,10 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 		 * Method of function to be called to hook into the tooltip rendering process so that you can render the tooltip in your
 		 * own custom way.
 		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
+		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param model all info about tooltip to create own HTML tooltip.
 		 */
-		void call(NativeObject context, NativeObject model);
+		void call(CallbackFunctionContext context, NativeObject model);
 	}
 
 	/**
@@ -79,11 +80,11 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 		/**
 		 * Method of function to be called to filter tooltip items. Receives 1 parameter, a tooltip Item.
 		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
+		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param item tooltip item to check.
 		 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
 		 */
-		boolean call(NativeObject context, NativeObject item);
+		boolean call(CallbackFunctionContext context, NativeObject item);
 	}
 
 	/**
@@ -98,13 +99,13 @@ public class Tooltips extends ConfigurationContainer<ExtendedOptions> {
 		/**
 		 * Method of function to be called to allow sorting of tooltip items.
 		 * 
-		 * @param context context context Value of <code>this</code> to the execution context of function.
+		 * @param context context context value of <code>this</code> to the execution context of function.
 		 * @param item1 the first object to be compared.
 		 * @param item2 the second object to be compared.
 		 * @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than
 		 *         the second.
 		 */
-		int call(NativeObject context, NativeObject item1, NativeObject item2);
+		int call(CallbackFunctionContext context, NativeObject item1, NativeObject item2);
 	}
 
 	// ---------------------------

@@ -25,6 +25,7 @@ import org.pepstock.charba.client.Configuration;
 import org.pepstock.charba.client.ConfigurationElement;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.ScaleType;
+import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.LegendCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
@@ -117,11 +118,11 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		/**
 		 * Method of function to be called when a resize event on chart is triggered.
 		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
+		 * @param context value of <code>this</code> to the execution context of function.
 		 * @param chart java script chart instance
 		 * @param size new size of chart
 		 */
-		void call(NativeObject context, Chart chart, NativeObject size);
+		void call(CallbackFunctionContext context, Chart chart, NativeObject size);
 	}
 
 	/**
@@ -136,10 +137,10 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 		/**
 		 * Method of function to be called to generate an HTML legend.
 		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
+		 * @param context value of <code>this</code> to the execution context of function.
 		 * @return an HTML string which represents the legend.
 		 */
-		String call(NativeObject context);
+		String call(CallbackFunctionContext context);
 	}
 
 	// ---------------------------

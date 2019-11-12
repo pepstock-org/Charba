@@ -17,12 +17,12 @@ package org.pepstock.charba.client.configuration;
 
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.RadialPointLabelCallback;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
-import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.FontStyle;
 
 import jsinterop.annotations.JsFunction;
@@ -54,11 +54,11 @@ public class RadialPointLabels extends AxisContainer {
 		 * Method of function to be called to transform data labels to point labels. The default implementation simply returns
 		 * the current string.
 		 * 
-		 * @param context context context Value of <code>this</code> to the execution context of function.
+		 * @param context context context value of <code>this</code> to the execution context of function.
 		 * @param item label of the point
 		 * @return new label to show.
 		 */
-		String call(NativeObject context, String item);
+		String call(CallbackFunctionContext context, String item);
 	}
 
 	// ---------------------------

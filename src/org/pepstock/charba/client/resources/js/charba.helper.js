@@ -318,3 +318,23 @@
     	}
     	return null;
     }
+    /*
+		JSCallbacksHelper is an object with a set of static methods used as utility
+		and needed to act on CHART.JS default callbacks.   
+	*/
+    function CharbaJsCallbacksHelper() {};
+    /*
+     Invokes the default generate legend callbacks from CHART.JS.
+
+	 @param context context function, this in javascript
+	 @param options chart options where generate legend callback is stored
+	 @param chart chart instance
+    */
+    CharbaJsCallbacksHelper.generateDefaultCallback = function(chart, options) {
+    	if (options != null && typeof options.legendCallback === 'function'){
+    		return options.legendCallback.call(chart, chart);
+    	}
+    	return null;
+    }
+    
+    

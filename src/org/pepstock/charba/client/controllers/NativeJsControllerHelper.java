@@ -23,8 +23,7 @@ import jsinterop.annotations.JsType;
 
 /**
  * This is a Java native object which is wrapping a CHARBA java script object implementation with some utilities to manage
- * CHART.JS controllers.<br>
- * This script will be injected with CHART.JS.
+ * CHART.JS controllers.
  * 
  * @author Andrea "Stock" Stocchero
  *

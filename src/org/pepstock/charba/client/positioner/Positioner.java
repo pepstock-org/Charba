@@ -58,7 +58,7 @@ public final class Positioner {
 		/**
 		 * Method of function to be called to invoke a custom positioner for tooltips.
 		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
+		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param datasetItems dataset elements of tooltips.
 		 * @param eventPosition point on the canvas where the event occurred.
 		 * @return point to show the tooltip
@@ -167,7 +167,7 @@ public final class Positioner {
 	/**
 	 * Returns the point where the tooltip will appear.
 	 * 
-	 * @param context context Value of <code>this</code> to the execution context of function.
+	 * @param context context value of <code>this</code> to the execution context of function.
 	 * @param datasetItems dataset elements of tooltips.
 	 * @param eventPosition point on the canvas where the event occurred.
 	 * @return point to show the tooltip

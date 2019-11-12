@@ -439,8 +439,23 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	public final String generateLegend() {
 		// checks if chart is created
 		if (chart != null) {
-			// returns legend
+			// returns custom HTML legend
 			return chart.generateLegend();
+		}
+		// default
+		return UndefinedValues.STRING;
+	}
+	
+	/**
+	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box.
+	 * 
+	 * @return the HTML legend or {@link UndefinedValues#STRING} if chart is not initialized.
+	 */
+	final String generateDefaultLegend() {
+		// checks if chart is created
+		if (chart != null) {
+			// returns default HTML legend
+			return JsCallbacksHelper.get().generateDefaultCallback(chart, options);
 		}
 		// default
 		return UndefinedValues.STRING;

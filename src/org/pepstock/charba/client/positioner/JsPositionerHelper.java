@@ -76,7 +76,7 @@ final class JsPositionerHelper {
 	 * Invokes an existing positioner to get the point.
 	 * 
 	 * @param position position of tooltips to be invoked
-	 * @param context context Value of <code>this</code> to the execution context of function.
+	 * @param context context value of <code>this</code> to the execution context of function.
 	 * @param datasetItems list of dataset items
 	 * @param eventPosition point on the canvas where the event occurred.
 	 * @return the point calculated by positioner or <code>null</code> if positioner does not exist

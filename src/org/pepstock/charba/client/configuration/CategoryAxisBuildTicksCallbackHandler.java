@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.CategoryAxisBuildTicksCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
@@ -50,11 +51,11 @@ final class CategoryAxisBuildTicksCallbackHandler extends AbstractAxisBuildTicks
 		/**
 		 * Method of function to be called to invoke a custom callback for axis.
 		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
+		 * @param context value of <code>this</code> to the execution context of function.
 		 * @param item native object of axis
 		 * @param ticks list of created ticks
 		 */
-		void call(Object context, NativeObject item, ArrayString tickItems);
+		void call(CallbackFunctionContext context, NativeObject item, ArrayString tickItems);
 	}
 
 	// ---------------------------

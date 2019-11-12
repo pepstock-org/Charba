@@ -58,7 +58,7 @@ public class Animation extends ConfigurationContainer<ExtendedOptions> implement
 		/**
 		 * Method of function to be called when animation is changing.
 		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
+		 * @param context value of <code>this</code> to the execution context of function.
 		 * @param animationObject java script object which contains animation object
 		 */
 		void call(Chart context, AnimationObject animationObject);

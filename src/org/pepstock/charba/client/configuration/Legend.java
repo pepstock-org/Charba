@@ -59,7 +59,7 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 		/**
 		 * Method of function to be called when a event on the legend is raised.
 		 * 
-		 * @param chart context Value of <code>this</code> to the execution context of function. It is the chart instance.
+		 * @param chart context value of <code>this</code> to the execution context of function. It is the chart instance.
 		 * @param event native event
 		 * @param item legend item affected by event
 		 */

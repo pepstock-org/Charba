@@ -27,6 +27,7 @@ import org.pepstock.charba.client.callbacks.AxisDimensionsCallback;
 import org.pepstock.charba.client.callbacks.AxisFitCallback;
 import org.pepstock.charba.client.callbacks.AxisTickToLabelConversionCallback;
 import org.pepstock.charba.client.callbacks.AxisUpdateCallback;
+import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
@@ -67,10 +68,10 @@ public abstract class Axis extends ConfigurationContainer<ExtendedScale> {
 		/**
 		 * Method of function to be called to invoke a custom callback for axis.
 		 * 
-		 * @param context Value of <code>this</code> to the execution context of function.
+		 * @param context value of <code>this</code> to the execution context of function.
 		 * @param item native object of axis
 		 */
-		void call(Object context, NativeObject item);
+		void call(CallbackFunctionContext context, NativeObject item);
 	}
 
 	// ---------------------------

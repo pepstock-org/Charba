@@ -17,6 +17,7 @@ package org.pepstock.charba.client.configuration;
 
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.LegendFilterCallback;
 import org.pepstock.charba.client.callbacks.LegendLabelsCallback;
 import org.pepstock.charba.client.colors.IsColor;
@@ -58,11 +59,11 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 		 * Method of function to be called to generate legend items for each thing in the legend. Default implementation returns
 		 * the text + styling for the color box.
 		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
+		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param chart chart instance.
 		 * @return array of legend items.
 		 */
-		ArrayObject call(NativeObject context, Chart chart);
+		ArrayObject call(CallbackFunctionContext context, Chart chart);
 	}
 
 	/**
@@ -77,11 +78,11 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 		/**
 		 * Method of function to be called to filter legend items out of the legend. Receives 1 parameter, a Legend Item.
 		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
+		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param item legend item to check.
 		 * @return <code>true</code> to maintain the item, otherwise <code>false</code> to hide it.
 		 */
-		boolean call(NativeObject context, NativeObject item);
+		boolean call(CallbackFunctionContext context, NativeObject item);
 	}
 
 	// ---------------------------

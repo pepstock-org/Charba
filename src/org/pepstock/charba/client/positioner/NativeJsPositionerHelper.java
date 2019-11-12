@@ -24,8 +24,7 @@ import jsinterop.annotations.JsType;
 
 /**
  * This is a Java native object which is wrapping a CHARBA java script object implementation with some utilities to manage
- * CHART.JS tooltips positioner.<br>
- * This script will be injected with CHART.JS.
+ * CHART.JS tooltips positioner.
  * 
  * @author Andrea "Stock" Stocchero
  *
@@ -59,7 +58,7 @@ final class NativeJsPositionerHelper {
 	 * Invokes an existing positioner to get the point.
 	 * 
 	 * @param position position of tooltips to be invoked
-	 * @param context context Value of <code>this</code> to the execution context of function.
+	 * @param context context value of <code>this</code> to the execution context of function.
 	 * @param datasetItems list of dataset items
 	 * @param eventPosition point on the canvas where the event occurred.
 	 * @return the point calculated by positioner or <code>null</code> if positioner does not exist

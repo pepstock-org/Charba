@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.CategoryTickCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayString;
@@ -56,7 +57,7 @@ final class CategoryTickHandler extends AbstractTickHandler<CartesianCategoryTic
 		 * @param values array with all values of ticks
 		 * @return string representation of tick
 		 */
-		String call(Object context, String value, int index, ArrayString values);
+		String call(CallbackFunctionContext context, String value, int index, ArrayString values);
 	}
 
 	// ---------------------------

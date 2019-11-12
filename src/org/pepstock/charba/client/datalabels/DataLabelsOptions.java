@@ -21,6 +21,7 @@ import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.BackgroundColorCallback;
 import org.pepstock.charba.client.callbacks.BorderColorCallback;
 import org.pepstock.charba.client.callbacks.BorderWidthCallback;
+import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.RadiusCallback;
 import org.pepstock.charba.client.callbacks.RotationCallback;
 import org.pepstock.charba.client.callbacks.Scriptable;
@@ -168,12 +169,12 @@ public final class DataLabelsOptions extends AbstractPluginCachedOptions {
 		/**
 		 * Method of function to be called to provide the value by custom formatter.
 		 * 
-		 * @param contextFunction context Value of <code>this</code> to the execution context of function.
+		 * @param contextFunction context value of <code>this</code> to the execution context of function.
 		 * @param value value to be formatter.
 		 * @param context native object as context.
 		 * @return string with formatted value.
 		 */
-		String call(Object contextFunction, double value, ScriptableContext context);
+		String call(CallbackFunctionContext contextFunction, double value, ScriptableContext context);
 	}
 
 	// ---------------------------

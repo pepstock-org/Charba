@@ -18,6 +18,7 @@ package org.pepstock.charba.client.configuration;
 import java.util.Date;
 import java.util.List;
 
+import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.TimeTickCallback;
 import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
@@ -63,7 +64,7 @@ final class TimeTickHandler extends AbstractTickHandler<CartesianTimeTick, TimeT
 		 * @param values array with all values of ticks
 		 * @return string representation of tick
 		 */
-		String call(Object context, String label, int index, ArrayObject values);
+		String call(CallbackFunctionContext context, String label, int index, ArrayObject values);
 	}
 
 	// ---------------------------

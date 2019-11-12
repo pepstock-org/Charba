@@ -55,6 +55,12 @@ public final class NativeName {
 	public static final String JSPOSITIONERHELPER = "CharbaJsPositionerHelper";
 
 	/**
+	 * Constant to bind java script object as JsCallbacksHelper with name <b>{@value JSCALLBACKSHELPER}</b>, (internal of
+	 * Charba).
+	 */
+	public static final String JSCALLBACKSHELPER = "CharbaJsCallbacksHelper";
+
+	/**
 	 * Constant to bind java script object as chart with name <b>{@value CHART}</b>, (internal of CHART.JS).
 	 */
 	public static final String CHART = "Chart";

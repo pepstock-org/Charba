@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.callbacks.TickCallback;
 import org.pepstock.charba.client.commons.ArrayDouble;
 import org.pepstock.charba.client.commons.ArrayListHelper;
@@ -57,7 +58,7 @@ final class LinearTickHandler<T extends Tick> extends AbstractTickHandler<T, Tic
 		 * @param values array with all values of ticks
 		 * @return string representation of tick
 		 */
-		String call(Object context, double value, int index, ArrayDouble values);
+		String call(CallbackFunctionContext context, double value, int index, ArrayDouble values);
 	}
 
 	// ---------------------------

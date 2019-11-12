@@ -118,6 +118,8 @@ Here you can find the list of enhancement and updates available on `master` bran
   * implement `BarStacker` and `HasBarStacker` classes in order to manage `stack` property for bar and horizontal bar charts, reducing duplications of code.
   * add `size` and `isEmpty` methods into `Labels` class.
   * rename `toFont` into `toCSSFontProperty` method into `Utilities` class.
+  * the `ChartBackgroundColor` plugin applies the background color (if color or pattern) to the chart GWT widget and not only to canvas.
+  * add to `Default` class the method `generateLegend` which will invoke the default HTML legend generator (CHART.JS out of the box implementation) for a chart.
 
 License
 -------

@@ -18,6 +18,7 @@ package org.pepstock.charba.client.labels;
 import java.util.List;
 
 import org.pepstock.charba.client.IsChart;
+import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayImage;
@@ -136,11 +137,11 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		/**
 		 * Method of function to be called to render the chart returning the label(string) and the image to show.
 		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
+		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param item native object as render item.
 		 * @return image or string for rendering.
 		 */
-		Object call(Object context, RenderItem item);
+		Object call(CallbackFunctionContext context, RenderItem item);
 	}
 
 	/**
@@ -155,11 +156,11 @@ public final class LabelsOptions extends AbstractPluginCachedOptions {
 		/**
 		 * Method of function to be called to color the font of render into chat.
 		 * 
-		 * @param context context Value of <code>this</code> to the execution context of function.
+		 * @param context context value of <code>this</code> to the execution context of function.
 		 * @param item native object as font color item.
 		 * @return string as color representation.
 		 */
-		String call(Object context, FontColorItem item);
+		String call(CallbackFunctionContext context, FontColorItem item);
 	}
 
 	// ---------------------------
