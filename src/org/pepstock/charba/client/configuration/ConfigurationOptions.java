@@ -254,10 +254,10 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// handle click event
 			handleClickEvent(event);
 			// fires the click event on the chart
-			getChart().fireEvent(new ChartClickEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
+			getChart().fireEvent(new ChartClickEvent(event, nativeChart, Property.ON_CLICK, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
 		});
 		// fires the hover hover on the chart
-		hoverCallbackProxy.setCallback((nativeChart, event, items) -> getChart().fireEvent(new ChartHoverEvent(event, ArrayListHelper.unmodifiableList(items, datasetItemFactory))));
+		hoverCallbackProxy.setCallback((nativeChart, event, items) -> getChart().fireEvent(new ChartHoverEvent(event, nativeChart, Property.ON_HOVER, ArrayListHelper.unmodifiableList(items, datasetItemFactory))));
 		// creates new native vent
 		// fires the resize event on chart
 		resizeCallbackProxy.setCallback((context, nativeChart, size) -> getChart().fireEvent(new ChartResizeEvent(Document.get().createChangeEvent(), new SizeItem(size))));

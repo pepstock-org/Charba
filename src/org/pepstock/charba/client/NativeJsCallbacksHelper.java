@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.UndefinedValues;
@@ -60,5 +61,16 @@ final class NativeJsCallbacksHelper {
 	 * @param item legend item native  
 	 */
 	static native void invokeDefaultLegendEvent(NativeObject options, String key, Chart chart, NativeEvent event, NativeObject item);
+
+	/**
+	 * Invokes the chart event callbacks, provided out of the box by CHART.JS.
+	 * 
+	 * @param options chart options, generated merging all defaults.
+	 * @param key the key of options which should have the event callback
+	 * @param chart chart instance, used as function context
+	 * @param event native event from user interface
+	 * @param items array of datasets native objects  
+	 */
+	static native void invokeDefaultChartEvent(NativeObject options, String key, Chart chart, NativeEvent event, ArrayObject item);
 
 }

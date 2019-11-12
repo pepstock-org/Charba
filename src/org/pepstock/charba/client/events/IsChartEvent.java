@@ -15,11 +15,9 @@
 */
 package org.pepstock.charba.client.events;
 
-import org.pepstock.charba.client.Chart;
-import org.pepstock.charba.client.IsChart;
-import org.pepstock.charba.client.commons.Key;
+import java.util.List;
 
-import com.google.gwt.dom.client.NativeEvent;
+import org.pepstock.charba.client.items.DatasetItem;
 
 /**
  * Interface which maps a chart event, an event generated from CHART.JS.
@@ -27,34 +25,13 @@ import com.google.gwt.dom.client.NativeEvent;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsChartEvent {
+public interface IsChartEvent extends IsCommonChartEvent{
 	
 	/**
-	 * Returns the java script function context of CHART.JS events.
+	 * Returns a list of items with dataset metadata related to the event.
 	 * 
-	 * @return the java script function context of CHART.JS events.
+	 * @return a list of items with dataset metadata related to the event
 	 */
-	Chart getContext();
-	
-	/**
-	 * Returns the options key where default function is stored.
-	 * 
-	 * @return the options key where default function is stored
-	 */
-	Key getKey();
-	
-	/**
-	 * Returns the chart instance, stored in the event as source.
-	 * 
-	 * @return the chart instance
-	 */
-	IsChart getChart();
-	
-	/**
-	 * Returns the native event instance.
-	 * 
-	 * @return the nativeEvent
-	 */
-	NativeEvent getNativeEvent();
+	List<DatasetItem> getItems();
 
 }

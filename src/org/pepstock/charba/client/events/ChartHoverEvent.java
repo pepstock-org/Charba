@@ -17,6 +17,8 @@ package org.pepstock.charba.client.events;
 
 import java.util.List;
 
+import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.items.DatasetItem;
 
 import com.google.gwt.dom.client.NativeEvent;
@@ -26,7 +28,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ChartHoverEvent extends AbstractEvent<ChartHoverEventHandler> {
+public final class ChartHoverEvent extends AbstractChartEvent<ChartHoverEventHandler> implements IsChartEvent {
 
 	/**
 	 * Event type
@@ -40,10 +42,16 @@ public final class ChartHoverEvent extends AbstractEvent<ChartHoverEventHandler>
 	 * Creates the event with a list of items with dataset metadata related to the hover
 	 * 
 	 * @param nativeEvent native event of this custom event
+	 * @param functionContext function context provided by CHART.JS
+	 * @param key options key where default function is stored
 	 * @param items a list of items with dataset metadata related to the hover
 	 */
-	public ChartHoverEvent(NativeEvent nativeEvent, List<DatasetItem> items) {
-		super(nativeEvent);
+	public ChartHoverEvent(NativeEvent nativeEvent, Chart functionContext, Key key, List<DatasetItem> items) {
+		super(nativeEvent, functionContext, key);
+		// checks if argument is consistent
+		if (items == null) {
+			throw new IllegalArgumentException("Dataset items list is null");
+		}
 		this.items = items;
 	}
 

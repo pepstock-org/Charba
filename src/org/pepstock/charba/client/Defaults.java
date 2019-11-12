@@ -18,6 +18,7 @@ package org.pepstock.charba.client;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.Merger;
 import org.pepstock.charba.client.commons.NativeObject;
@@ -25,6 +26,9 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.controllers.Controllers;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.events.ChartClickEvent;
+import org.pepstock.charba.client.events.ChartHoverEvent;
+import org.pepstock.charba.client.events.IsChartEvent;
 import org.pepstock.charba.client.events.IsLegendEvent;
 import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendHoverEvent;
@@ -204,6 +208,45 @@ public final class Defaults {
 		// we don't know which method has got to get default hTML legend
 		return UndefinedValues.STRING;
 	}
+	/**
+	 * Invokes the <code>onClick</code> chart function provided out of the box by CHART.JS.
+	 * 
+	 * @param event original event generated to invoke a chart click handler.
+	 */
+	public void invokeChartOnClick(ChartClickEvent event) {
+		invokeChartEvent(event);
+	}
+
+	/**
+	 * Invokes the <code>onLeave</code> chart function provided out of the box by CHART.JS.
+	 * 
+	 * @param event original event generated to invoke a chart hover handler.
+	 */
+	public void invokeChartOnHover(ChartHoverEvent event) {
+		invokeChartEvent(event);
+	}
+
+	/**
+	 * Invokes the event chart function provided out of the box by CHART.JS.
+	 * 
+	 * @param event original event generated to invoke a chart event handler.
+	 */
+	private void invokeChartEvent(IsChartEvent event) {
+		// checks if event is consistent
+		if (event != null) {
+			// gets chart
+			IsChart isChart = event.getChart();
+			// checks if argument is consistent
+			if (isChart instanceof AbstractChart<?> && isChart.isInitialized()) {
+				// cast to abstract chart to get element of GWT object
+				AbstractChart<?> chart = (AbstractChart<?>) isChart;
+				// gets array object
+				ArrayObject array = ArrayObject.fromOrNull(event.getItems());
+				// invokes the onclick legend out of the box
+				JsCallbacksHelper.get().invokeDefaultChartEvent(chart.getDefaultChartOptions(), event.getKey(), event.getContext(), event.getNativeEvent(), array);
+			}
+		}
+	}
 
 	/**
 	 * Invokes the <code>onClick</code> legend function provided out of the box by CHART.JS.
@@ -233,7 +276,7 @@ public final class Defaults {
 	}
 	
 	/**
-	 * Invokes the <code>onClick</code> legend function provided out of the box by CHART.JS.
+	 * Invokes the event legend function provided out of the box by CHART.JS.
 	 * 
 	 * @param event original event generated to invoke a legend event handler.
 	 */

@@ -23,7 +23,7 @@ import org.pepstock.charba.client.items.LegendItem;
  * @author Andrea "Stock" Stocchero
  *
  */
-public interface IsLegendEvent extends IsChartEvent{
+public interface IsLegendEvent extends IsCommonChartEvent{
 	
 	/**
 	 * Returns the legend item related to the event.

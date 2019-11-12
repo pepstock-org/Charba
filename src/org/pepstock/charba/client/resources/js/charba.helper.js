@@ -336,7 +336,6 @@
     	}
     	return null;
     }
-
     /*
 	 Invokes the legend event callbacks, provided out of the box by CHART.JS.
 	  
@@ -349,6 +348,20 @@
     CharbaJsCallbacksHelper.invokeDefaultLegendEvent = function(options, key, chart, event, item) {
     	if (options != null && typeof options.legend === 'object' && typeof options.legend[key] === 'function'){
     		options.legend[key].call(chart, event, item);
+    	}
+    }
+        /*
+	 Invokes the chart event callbacks, provided out of the box by CHART.JS.
+	  
+	 @param options chart options, generated merging all defaults.
+	 @param key the key of options which should have the event callback
+	 @param chart chart instance, used as function context
+	 @param event native event from user interface
+	 @param items array of datasets native objects  
+    */
+    CharbaJsCallbacksHelper.invokeDefaultChartEvent = function(options, key, chart, event, items) {
+    	if (options != null && typeof options[key] === 'function'){
+    		options[key].call(chart, event, items);
     	}
     }
     
