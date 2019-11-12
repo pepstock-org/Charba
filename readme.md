@@ -120,6 +120,7 @@ Here you can find the list of enhancement and updates available on `master` bran
   * rename `toFont` into `toCSSFontProperty` method into `Utilities` class.
   * the `ChartBackgroundColor` plugin applies the background color (if color or pattern) to the chart GWT widget and not only to canvas.
   * add to `Default` class the method `generateLegend` which will invoke the default HTML legend generator (CHART.JS out of the box implementation) for a chart.
+  * create `CallbackFunctionContext` native object to map this of javascript in order to invoke CHART.JS functions.
 
 License
 -------
