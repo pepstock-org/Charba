@@ -18,7 +18,7 @@
 		and needed to improve JSINTEROP adoption for CHARBA, because 
 		JSINTEROP is not able to address all javascript model.   
 	*/
-    function CharbaJsHelper() {};
+    function CharbaJsHelper() {}
     /*
 	 Returns the java script object type of the object.
 	  
@@ -172,7 +172,7 @@
 		JSControllerHelper is an object with a set of static methods used as utility
 		and needed to improve JSINTEROP adoption for CHARBA controllers implementation.   
 	*/
-    function CharbaJsControllerHelper() {};
+    function CharbaJsControllerHelper() {}
     /*
      Register the controller which does not extend any existing one.
 	  
@@ -267,7 +267,7 @@
 		JSWindowHelper is an object with a set of static methods used as utility
 		and needed to act on window java script object.   
 	*/
-    function CharbaJsWindowHelper() {};
+    function CharbaJsWindowHelper() {}
     /*
      CSS media queries allow changing styles when printing a page. The CSS applied from these media queries may cause charts
 	 to need to resize. However, the resize won't happen automatically. To support resizing charts when printing, one needs to
@@ -284,7 +284,7 @@
 		JSPositionerHelper is an object with a set of static methods used as utility
 		and needed to add custom positioner on tooltips.   
 	*/
-    function CharbaJsPositionerHelper() {};
+    function CharbaJsPositionerHelper() {}
     /*
      Registers a custom postioner for tooltips into CHART.JS.
 
@@ -322,7 +322,7 @@
 		JSCallbacksHelper is an object with a set of static methods used as utility
 		and needed to act on CHART.JS default callbacks.   
 	*/
-    function CharbaJsCallbacksHelper() {};
+    function CharbaJsCallbacksHelper() {}
     /*
      Invokes the default generate legend callbacks from CHART.JS.
 
