@@ -15,9 +15,14 @@
 */
 package org.pepstock.charba.client;
 
+import java.util.List;
+
+import org.pepstock.charba.client.commons.ArrayListHelper;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.items.LegendLabelItem;
+import org.pepstock.charba.client.items.LegendLabelItem.LegendLabelItemFactory;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.resources.ResourcesType;
 
@@ -34,6 +39,8 @@ import com.google.gwt.dom.client.NativeEvent;
 final class JsCallbacksHelper {
 	// static instance for singleton
 	private static final JsCallbacksHelper INSTANCE = new JsCallbacksHelper();
+	// factory of legend label iteam
+	private static final LegendLabelItemFactory FACTORY = new LegendLabelItemFactory();
 
 	/**
 	 * To avoid any instantiation
@@ -63,8 +70,20 @@ final class JsCallbacksHelper {
 	 * @param options chart options, generated merging all defaults.
 	 * @return the HTML legend or {@link UndefinedValues#STRING} if chart or options are not consistent.
 	 */
-	String generateDefaultCallback(Chart chart, ChartOptions options) {
-		return NativeJsCallbacksHelper.generateDefaultCallback(chart, options.getObject());
+	String generateDefaultLegend(Chart chart, ChartOptions options) {
+		return NativeJsCallbacksHelper.generateDefaultLegend(chart, options.getObject());
+	}
+	
+	/**
+	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box, invoking <code>generateLabels</code> function property.
+	 * 
+	 * @param chart chart instance
+	 * @param options chart options, generated merging all defaults.
+	 * @return an unmodifiable list of legend labels  or an empty list if chart is not initialized.
+	 */
+	List<LegendLabelItem> generateDefaultLabels(Chart chart, ChartOptions options) {
+		ArrayObject array = NativeJsCallbacksHelper.generateDefaultLabels(chart, options.getObject());
+		return ArrayListHelper.unmodifiableList(array, FACTORY);
 	}
 	
 	/**

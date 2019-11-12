@@ -21,6 +21,8 @@ import org.pepstock.charba.client.Defaults;
 import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
+import org.pepstock.charba.client.commons.NativeObject;
+import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
@@ -46,6 +48,15 @@ public final class LegendLabelItem extends LegendItem {
 		super();
 	}
 
+	/**
+	 * Creates the item using a native java script object which contains all properties.
+	 * 
+	 * @param nativeObject native java script object which contains all properties.
+	 */
+	LegendLabelItem(NativeObject nativeObject) {
+		super(nativeObject);
+	}
+	
 	/**
 	 * Sets the dataset index of the chart
 	 * 
@@ -253,5 +264,24 @@ public final class LegendLabelItem extends LegendItem {
 	 */
 	public void setRotation(double rotation) {
 		setValue(LegendItem.Property.ROTATION, rotation);
+	}
+	
+	/**
+	 * Inner class to create legend label item by a native object.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 */
+	public static final class LegendLabelItemFactory implements NativeObjectContainerFactory<LegendLabelItem> {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.commons.NativeObjectContainerFactory#create(org.pepstock.charba.client.commons.
+		 * NativeObject)
+		 */
+		@Override
+		public LegendLabelItem create(NativeObject nativeObject) {
+			return new LegendLabelItem(nativeObject);
+		}
 	}
 }

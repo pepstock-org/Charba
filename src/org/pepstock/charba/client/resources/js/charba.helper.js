@@ -326,14 +326,27 @@
     /*
      Invokes the default generate legend callbacks from CHART.JS.
 
-	 @param context context function, this in javascript
-	 @param options chart options where generate legend callback is stored
 	 @param chart chart instance
+	 @param options chart options where generate legend callback is stored
+	 @return HTML legend
     */
-    CharbaJsCallbacksHelper.generateDefaultCallback = function(chart, options) {
+    CharbaJsCallbacksHelper.generateDefaultLegend = function(chart, options) {
     	if (options != null && typeof options.legendCallback === 'function'){
     		return options.legendCallback.call(chart, chart);
     	}
+    	return null;
+    }
+    /*
+     Invokes the default generate labels callbacks from CHART.JS.
+
+	 @param chart chart instance
+	 @param options chart options where generate legend callback is stored
+	 @return an array of labels
+    */
+    CharbaJsCallbacksHelper.generateDefaultLabels = function(chart, options) {
+    	if (options != null && typeof options.legend === 'object' && typeof options.legend.labels === 'object' && typeof options.legend.labels.generateLabels === 'function'){
+    		return options.legend.labels.generateLabels.call(chart, chart);
+     	}
     	return null;
     }
     /*
@@ -350,7 +363,7 @@
     		options.legend[key].call(chart, event, item);
     	}
     }
-        /*
+    /*
 	 Invokes the chart event callbacks, provided out of the box by CHART.JS.
 	  
 	 @param options chart options, generated merging all defaults.

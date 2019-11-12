@@ -18,7 +18,6 @@ package org.pepstock.charba.client;
 import org.pepstock.charba.client.commons.ArrayObject;
 import org.pepstock.charba.client.commons.NativeName;
 import org.pepstock.charba.client.commons.NativeObject;
-import org.pepstock.charba.client.items.UndefinedValues;
 
 import com.google.gwt.dom.client.NativeEvent;
 
@@ -47,9 +46,18 @@ final class NativeJsCallbacksHelper {
 	 * 
 	 * @param chart chart instance
 	 * @param options chart options, generated merging all defaults.
-	 * @return the HTML legend or {@link UndefinedValues#STRING} if chart or options are not consistent.
+	 * @return the HTML legend.
 	 */
-	static native String generateDefaultCallback(Chart chart, NativeObject options);
+	static native String generateDefaultLegend(Chart chart, NativeObject options);
+	
+	/**
+	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box, invoking <code>generateLabels</code> function property.
+	 * 
+	 * @param chart chart instance
+	 * @param options chart options, generated merging all defaults.
+	 * @return an array of legend labels.
+	 */
+	static native ArrayObject generateDefaultLabels(Chart chart, NativeObject options);
 	
 	/**
 	 * Invokes the legend event callbacks, provided out of the box by CHART.JS.

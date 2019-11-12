@@ -15,7 +15,10 @@
 */
 package org.pepstock.charba.client;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.pepstock.charba.client.commons.ArrayObject;
@@ -34,6 +37,7 @@ import org.pepstock.charba.client.events.LegendClickEvent;
 import org.pepstock.charba.client.events.LegendHoverEvent;
 import org.pepstock.charba.client.events.LegendLeaveEvent;
 import org.pepstock.charba.client.items.LegendItem;
+import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.GlobalPlugins;
 import org.pepstock.charba.client.resources.ResourcesType;
@@ -202,12 +206,51 @@ public final class Defaults {
 			// cast to abstract chart to get element of GWT object
 			AbstractChart<?> chart = (AbstractChart<?>) isChart;
 			// returns default HTML legend
-			return JsCallbacksHelper.get().generateDefaultCallback(chart.getNativeObject(), chart.getDefaultChartOptions());
+			return JsCallbacksHelper.get().generateDefaultLegend(chart.getNativeObject(), chart.getDefaultChartOptions());
 		}
 		// if here, the chart is not abstract therefore
 		// we don't know which method has got to get default hTML legend
 		return UndefinedValues.STRING;
 	}
+	
+	/**
+	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box.
+	 * 
+	 * @param isChart chart instance to use to get legend labels
+	 * @return an unmodifiable list of legend labels  or an empty list if chart is not initialized.
+	 */
+	public List<LegendLabelItem> generateLabels(Chart isChart) {
+		// checks if argument is consistent
+		if (isChart != null && isChart.getChart() instanceof AbstractChart<?>) {
+			// cast to abstract chart to get element of GWT object
+			AbstractChart<?> chart = (AbstractChart<?>) isChart.getChart();
+			// returns default HTML legend
+			return JsCallbacksHelper.get().generateDefaultLabels(isChart, chart.getDefaultChartOptions());
+		}
+		// if here, the chart is not abstract therefore
+		// we don't know which method has got to get default hTML legend
+		return Collections.unmodifiableList(new ArrayList<>());
+	}
+	
+	/**
+	 * Returns an unmodifiable list of legend labels for that chart with the callback provided by CHART.JS out of the box.
+	 * 
+	 * @param isChart chart instance to use to get legend labels
+	 * @return an unmodifiable list of legend labels  or an empty list if chart is not initialized.
+	 */
+	public List<LegendLabelItem> generateLabels(IsChart isChart) {
+		// checks if argument is consistent
+		if (isChart instanceof AbstractChart<?> && isChart.isInitialized()) {
+			// cast to abstract chart to get element of GWT object
+			AbstractChart<?> chart = (AbstractChart<?>) isChart;
+			// returns default HTML legend
+			return JsCallbacksHelper.get().generateDefaultLabels(chart.getNativeObject(), chart.getDefaultChartOptions());
+		}
+		// if here, the chart is not abstract therefore
+		// we don't know which method has got to get default hTML legend
+		return Collections.unmodifiableList(new ArrayList<>());
+	}
+
 	/**
 	 * Invokes the <code>onClick</code> chart function provided out of the box by CHART.JS.
 	 * 

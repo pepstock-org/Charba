@@ -128,6 +128,8 @@ Here you can find the list of enhancement and updates available on `master` bran
   * add to `Default` class the `invokeLegendOnClick`, `invokeLegendOnHover` and `invokeLegendOnLeave` methods which enable the invocation of event's callbacks provided out of the box by CHART.JS. These methods can be helpful implementing a custom event handler on legend to delegate CHART.JS to manage the event.
   * add to `Default` class the `invokeChartOnClick` and `invokeChartOnHover` methods which enable the invocation of event's callbacks provided out of the box by CHART.JS. These methods can be helpful implementing a custom event handler on chart to delegate CHART.JS to manage the event.
   * change `LegendLabelsCallback` interface in order to return a list of `LegendLabelItem` instead of an array.
+  * change `LegendLabelsCallback` interface adding a parameter with a list of `LegendLabelItem`, as default ones provided by CHART.JS.
+  * add to `Default` class the `generateLabels` methods which enable the invocation of the callback provided out of the box by CHART.JS.
 
 License
 -------

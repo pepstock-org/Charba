@@ -31,8 +31,9 @@ public interface LegendLabelsCallback {
 	 * Generates legend items for each thing in the legend. Default implementation returns the text + styling for the color box.
 	 * 
 	 * @param chart chart instance
+	 * @param defaultLabels list of labels created by CHART.JS using the out of the box generate labels callback.
 	 * @return a list of legend items. if <code>null</code>, uses the default implementation
 	 */
-	List<LegendLabelItem> generateLegendLabels(IsChart chart);
+	List<LegendLabelItem> generateLegendLabels(IsChart chart, List<LegendLabelItem> defaultLabels);
 
 }
