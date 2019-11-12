@@ -96,6 +96,15 @@ public class LegendItem extends NativeObjectContainer {
 	}
 
 	/**
+	 * Creates the item using another legend item which contains all properties.
+	 * 
+	 * @param item legend item which contains all properties.
+	 */
+	public LegendItem(LegendItem item) {
+		this(item.getNativeObject());
+	}
+
+	/**
 	 * Returns the dataset index of the chart
 	 * 
 	 * @return the dataset index of the chart. Default is {@link UndefinedValues#INTEGER}.

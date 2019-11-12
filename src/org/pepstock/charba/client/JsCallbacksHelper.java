@@ -15,8 +15,12 @@
 */
 package org.pepstock.charba.client;
 
+import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.resources.ResourcesType;
+
+import com.google.gwt.dom.client.NativeEvent;
 
 /**
  * This is a singleton wrapper for Java native object which is wrapping a CHARBA java script object implementation with some
@@ -60,6 +64,21 @@ final class JsCallbacksHelper {
 	 */
 	String generateDefaultCallback(Chart chart, ChartOptions options) {
 		return NativeJsCallbacksHelper.generateDefaultCallback(chart, options.getObject());
+	}
+	
+	/**
+	 * Invokes the legend event callbacks, provided out of the box by CHART.JS.
+	 * 
+	 * @param options chart options, generated merging all defaults.
+	 * @param key the key of options which should have the event callback
+	 * @param chart chart instance, used as function context
+	 * @param event native event from user interface
+	 * @param item legend item native  
+	 */
+	void invokeDefaultLegendEvent(ChartOptions options, Key key, Chart context, NativeEvent event, NativeObject item) {
+		if (Key.isValid(key)) {
+			NativeJsCallbacksHelper.invokeDefaultLegendEvent(options.getObject(), key.value(), context, event, item);
+		}
 	}
 
 }

@@ -151,6 +151,15 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * @return a new dataset related to chart type.
 	 */
 	public abstract D newDataset();
+	
+	/**
+	 * Returns the native object related to CHART.JS implementation.
+	 * 
+	 * @return the native object related to CHART.JS implementation
+	 */
+	final Chart getNativeObject() {
+		return chart;
+	}
 
 	/**
 	 * Returns the ID of chart.<br>
@@ -446,21 +455,6 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 		return UndefinedValues.STRING;
 	}
 	
-	/**
-	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box.
-	 * 
-	 * @return the HTML legend or {@link UndefinedValues#STRING} if chart is not initialized.
-	 */
-	final String generateDefaultLegend() {
-		// checks if chart is created
-		if (chart != null) {
-			// returns default HTML legend
-			return JsCallbacksHelper.get().generateDefaultCallback(chart, options);
-		}
-		// default
-		return UndefinedValues.STRING;
-	}
-
 	/**
 	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called
 	 * this method manually if you change the size of the canvas nodes container element.

@@ -25,6 +25,11 @@ import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.controllers.Controllers;
 import org.pepstock.charba.client.enums.AxisType;
+import org.pepstock.charba.client.events.IsLegendEvent;
+import org.pepstock.charba.client.events.LegendClickEvent;
+import org.pepstock.charba.client.events.LegendHoverEvent;
+import org.pepstock.charba.client.events.LegendLeaveEvent;
+import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.plugins.GlobalPlugins;
 import org.pepstock.charba.client.resources.ResourcesType;
@@ -180,7 +185,7 @@ public final class Defaults {
 		// returns the existing options
 		return chartOptions.get(type.value());
 	}
-	
+
 	/**
 	 * Returns an HTML string of a legend for that chart with the callback provided by CHART.JS out of the box.
 	 * 
@@ -189,15 +194,92 @@ public final class Defaults {
 	 */
 	public String generateLegend(IsChart isChart) {
 		// checks if argument is consistent
-		if (isChart instanceof AbstractChart<?>) {
+		if (isChart instanceof AbstractChart<?> && isChart.isInitialized()) {
 			// cast to abstract chart to get element of GWT object
 			AbstractChart<?> chart = (AbstractChart<?>) isChart;
-			// invokes the generate legend
-			return chart.generateDefaultLegend();
+			// returns default HTML legend
+			return JsCallbacksHelper.get().generateDefaultCallback(chart.getNativeObject(), chart.getDefaultChartOptions());
 		}
 		// if here, the chart is not abstract therefore
 		// we don't know which method has got to get default hTML legend
 		return UndefinedValues.STRING;
+	}
+
+	/**
+	 * Invokes the <code>onClick</code> legend function provided out of the box by CHART.JS.
+	 * 
+	 * @param event original event generated to invoke a legend click handler.
+	 */
+	public void invokeLegendOnClick(LegendClickEvent event) {
+		invokeLegendEvent(event);
+	}
+
+	/**
+	 * Invokes the <code>onLeave</code> legend function provided out of the box by CHART.JS.
+	 * 
+	 * @param event original event generated to invoke a legend hover handler.
+	 */
+	public void invokeLegendOnHover(LegendHoverEvent event) {
+		invokeLegendEvent(event);
+	}
+
+	/**
+	 * Invokes the <code>onHover</code> legend function provided out of the box by CHART.JS.
+	 * 
+	 * @param event original event generated to invoke a legend hover handler.
+	 */
+	public void invokeLegendOnLeave(LegendLeaveEvent event) {
+		invokeLegendEvent(event);
+	}
+	
+	/**
+	 * Invokes the <code>onClick</code> legend function provided out of the box by CHART.JS.
+	 * 
+	 * @param event original event generated to invoke a legend event handler.
+	 */
+	private void invokeLegendEvent(IsLegendEvent event) {
+		// checks if event is consistent
+		if (event != null) {
+			// gets chart
+			IsChart isChart = event.getChart();
+			// checks if argument is consistent
+			if (isChart instanceof AbstractChart<?> && isChart.isInitialized()) {
+				// cast to abstract chart to get element of GWT object
+				AbstractChart<?> chart = (AbstractChart<?>) isChart;
+				// creates a wrapper
+				WrapperLegendItem wrapper = new WrapperLegendItem(event.getItem());
+				// invokes the onclick legend out of the box
+				JsCallbacksHelper.get().invokeDefaultLegendEvent(chart.getDefaultChartOptions(), event.getKey(), event.getContext(), event.getNativeEvent(), wrapper.getObject());
+			}
+		}
+	}
+
+	/**
+	 * Wrapper of {@link LegendItem} in order to get the native object.
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class WrapperLegendItem extends LegendItem{
+
+		/**
+		 * Creates a legend item wrapping an existing legend item.
+		 * 
+		 * @param item legend item to wrap.
+		 */
+		WrapperLegendItem(LegendItem item) {
+			super(item);
+		}
+		
+		/**
+		 * Returns the native object instance.
+		 * 
+		 * @return the native object instance.
+		 */
+		final NativeObject getObject() {
+			return super.getNativeObject();
+		}
+		
 	}
 
 	/**

@@ -119,8 +119,10 @@ Here you can find the list of enhancement and updates available on `master` bran
   * add `size` and `isEmpty` methods into `Labels` class.
   * rename `toFont` into `toCSSFontProperty` method into `Utilities` class.
   * the `ChartBackgroundColor` plugin applies the background color (if color or pattern) to the chart GWT widget and not only to canvas.
-  * add to `Default` class the method `generateLegend` which will invoke the default HTML legend generator (CHART.JS out of the box implementation) for a chart.
+  * add to `Default` class the `generateLegend` method which will invoke the default HTML legend generator (CHART.JS out of the box implementation) for a chart.
   * create `CallbackFunctionContext` native object to map this of javascript in order to invoke CHART.JS functions.
+  * add to `Default` class the `invokeLegendOnClick`, `invokeLegendOnHover` and `invokeLegendOnLeave` methods which enable the invocation of event's callbacks provided out of the box by CHART.JS. These methods can be helpful implementing a custom event handler on legend to delegate CHART.JS to manage the event.
+  
 
 License
 -------
