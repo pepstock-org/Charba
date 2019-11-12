@@ -122,6 +122,7 @@ Here you can find the list of enhancement and updates available on `master` bran
   * add to `Default` class the `generateLegend` method which will invoke the default HTML legend generator (CHART.JS out of the box implementation) for a chart.
   * create `CallbackFunctionContext` native object to map this of javascript in order to invoke CHART.JS functions.
   * add to `Default` class the `invokeLegendOnClick`, `invokeLegendOnHover` and `invokeLegendOnLeave` methods which enable the invocation of event's callbacks provided out of the box by CHART.JS. These methods can be helpful implementing a custom event handler on legend to delegate CHART.JS to manage the event.
+  * add to `Default` class the `invokeChartOnClick` and `invokeChartOnHover` methods which enable the invocation of event's callbacks provided out of the box by CHART.JS. These methods can be helpful implementing a custom event handler on chart to delegate CHART.JS to manage the event.
   
 
 License
