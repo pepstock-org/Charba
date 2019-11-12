@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.callbacks;
 
+import java.util.List;
+
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.items.LegendLabelItem;
 
@@ -29,8 +31,8 @@ public interface LegendLabelsCallback {
 	 * Generates legend items for each thing in the legend. Default implementation returns the text + styling for the color box.
 	 * 
 	 * @param chart chart instance
-	 * @return an array of legend items. if <code>null</code>, uses the default implementation
+	 * @return a list of legend items. if <code>null</code>, uses the default implementation
 	 */
-	LegendLabelItem[] generateLegendLabels(IsChart chart);
+	List<LegendLabelItem> generateLegendLabels(IsChart chart);
 
 }

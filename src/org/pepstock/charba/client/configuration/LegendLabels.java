@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.configuration;
 
+import java.util.List;
+
 import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.callbacks.CallbackFunctionContext;
@@ -159,7 +161,7 @@ public class LegendLabels extends ConfigurationContainer<ExtendedOptions> {
 			// checks if callback is consistent
 			if (labelsCallback != null) {
 				// calls callback
-				LegendLabelItem[] result = labelsCallback.generateLegendLabels(getChart());
+				List<LegendLabelItem> result = labelsCallback.generateLegendLabels(getChart());
 				// transforms into a native array
 				return ArrayObject.fromOrEmpty(result);
 			}
