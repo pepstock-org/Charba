@@ -112,6 +112,10 @@ Here you can find the list of enhancement and updates available on `master` bran
       * this is a **breaking change** because now the `HorizontalChart` class needs that dataset class instead of `BarDataset`.
     * remove `setType` method from `Dataset` class.
  * add `toCSSBackgroundProperty` methods for `Gradient` and `Pattern` into `Utilities` class in order to get the CSS property value of the canvas object.
+
+### Fixed Bugs
+
+ * [#43](https://github.com/pepstock-org/Charba/issues/43) change the implementation in order to manage whatever chart types, based on dataset or data index.
     
 ### Development
 
