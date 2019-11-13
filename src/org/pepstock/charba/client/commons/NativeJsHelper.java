@@ -17,6 +17,8 @@ package org.pepstock.charba.client.commons;
 
 import org.pepstock.charba.client.events.ChartNativeEvent;
 
+import com.google.gwt.canvas.dom.client.CanvasGradient;
+import com.google.gwt.canvas.dom.client.CanvasPattern;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.Element;
 
@@ -114,6 +116,24 @@ final class NativeJsHelper {
 	 * @return string value
 	 */
 	static native String propertyAsString(Object object, String key);
+
+	/**
+	 * Returns <code>true</code> if the property into native object is a {@link CanvasPattern}.
+	 * 
+	 * @param object the object on which to define the property.
+	 * @param key the string name of the property to be defined or modified..
+	 * @return <code>true</code> if the property into native object is a {@link CanvasPattern}
+	 */
+	static native boolean isCanvasPattern(NativeObject object, String key);
+
+	/**
+	 * Returns <code>true</code> if the property into native object is a {@link CanvasGradient}.
+	 * 
+	 * @param object the object on which to define the property.
+	 * @param key the string name of the property to be defined or modified..
+	 * @return <code>true</code> if the property into native object is a {@link CanvasGradient}
+	 */
+	static native boolean isCanvasGradient(NativeObject object, String key);
 
 	/**
 	 * Sets the line dash pattern used when stroking lines. It uses an array of values that specify alternating lengths of lines

@@ -18,17 +18,17 @@ package org.pepstock.charba.client.items;
 import java.util.List;
 
 import org.pepstock.charba.client.Defaults;
-import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
-import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
 import org.pepstock.charba.client.enums.PointStyle;
 import org.pepstock.charba.client.utils.Utilities;
 
+import com.google.gwt.canvas.dom.client.CanvasGradient;
+import com.google.gwt.canvas.dom.client.CanvasPattern;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Image;
@@ -58,7 +58,7 @@ public final class LegendLabelItem extends LegendItem {
 	}
 	
 	/**
-	 * Sets the dataset index of the chart
+	 * Sets the dataset index of the chart.
 	 * 
 	 * @param datasetIndex the dataset index of the chart
 	 */
@@ -67,7 +67,7 @@ public final class LegendLabelItem extends LegendItem {
 	}
 
 	/**
-	 * Sets the dataset index of the chart (for POLAR and PIE charts)
+	 * Sets the dataset index of the chart (for POLAR and PIE charts).
 	 * 
 	 * @param index the dataset index of the chart (for POLAR and PIE charts)
 	 */
@@ -76,7 +76,7 @@ public final class LegendLabelItem extends LegendItem {
 	}
 
 	/**
-	 * Sets the label that will be displayed
+	 * Sets the label that will be displayed.
 	 * 
 	 * @param text the label that will be displayed
 	 */
@@ -85,12 +85,39 @@ public final class LegendLabelItem extends LegendItem {
 	}
 
 	/**
-	 * Sets the fill style of the legend box
+	 * Sets the fill style of the legend box as color.
 	 * 
-	 * @param color the fill style of the legend box
+	 * @param color the fill style of the legend box as color
 	 */
 	public void setFillStyle(IsColor color) {
-		setValue(LegendItem.Property.FILL_STYLE, checkValue(color));
+		setFillStyle(checkValue(color));
+	}
+
+	/**
+	 * Sets the fill style of the legend box as color.
+	 * 
+	 * @param color the fill style of the legend box as color
+	 */
+	public void setFillStyle(String color) {
+		setValue(LegendItem.Property.FILL_STYLE, color);
+	}
+
+	/**
+	 * Sets the fill style of the legend box as pattern.
+	 * 
+	 * @param pattern the fill style of the legend box as pattern
+	 */
+	public void setFillStyle(CanvasPattern pattern) {
+		setValue(LegendItem.Property.FILL_STYLE, pattern);
+	}
+
+	/**
+	 * Sets the fill style of the legend box as gradient.
+	 * 
+	 * @param gradient the fill style of the legend box as gradient
+	 */
+	public void setFillStyle(CanvasGradient gradient) {
+		setValue(LegendItem.Property.FILL_STYLE, gradient);
 	}
 
 	/**
@@ -163,30 +190,39 @@ public final class LegendLabelItem extends LegendItem {
 	}
 
 	/**
-	 * Sets the stroke style of the legend box
+	 * Sets the stroke style of the legend box as color.
 	 * 
-	 * @param color the stroke style of the legend box
+	 * @param color the stroke style of the legend box as color
 	 */
 	public void setStrokeStyle(IsColor color) {
-		setValue(LegendItem.Property.STROKE_STYLE, checkValue(color));
+		setStrokeStyle(checkValue(color));
 	}
 
 	/**
-	 * Returns the stroke style of the legend box
+	 * Sets the stroke style of the legend box as color.
 	 * 
-	 * @return the stroke style of the legend box
+	 * @param color the stroke style of the legend box as color
 	 */
-	public IsColor getStrokeStyle() {
-		return ColorBuilder.parse(getValue(Property.STROKE_STYLE, Defaults.get().getGlobal().getDefaultColorAsString()));
+	public void setStrokeStyle(String color) {
+		setValue(LegendItem.Property.STROKE_STYLE, color);
 	}
 
 	/**
-	 * Returns <code>true</code> if the point style is defined as image.
+	 * Sets the stroke style of the legend box as pattern.
 	 * 
-	 * @return <code>true</code> if the point style is defined as image
+	 * @param pattern the stroke style of the legend box as pattern
 	 */
-	public boolean isPointStyleAsImage() {
-		return !ObjectType.STRING.equals(type(Property.POINT_STYLE));
+	public void setStrokeStyle(CanvasPattern pattern) {
+		setValue(LegendItem.Property.STROKE_STYLE, pattern);
+	}
+
+	/**
+	 * Sets the stroke style of the legend box as gradient.
+	 * 
+	 * @param gradient the stroke style of the legend box as gradient
+	 */
+	public void setStrokeStyle(CanvasGradient gradient) {
+		setValue(LegendItem.Property.STROKE_STYLE, gradient);
 	}
 
 	/**
@@ -225,36 +261,6 @@ public final class LegendLabelItem extends LegendItem {
 	 */
 	public void setPointStyle(ImageElement pointStyle) {
 		setValue(LegendItem.Property.POINT_STYLE, pointStyle);
-	}
-
-	/**
-	 * Returns the style of the legend box (only used if usePointStyle is true)
-	 * 
-	 * @return the style of the legend box
-	 */
-	public PointStyle getPointStyle() {
-		// checks if is an point style and not an image
-		if (!isPointStyleAsImage()) {
-			return getValue(Property.POINT_STYLE, PointStyle.class, Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
-		} else {
-			// returns the default
-			return Defaults.get().getGlobal().getElements().getPoint().getPointStyle();
-		}
-	}
-
-	/**
-	 * Returns the style (as image) of the legend box (only used if usePointStyle is true)
-	 * 
-	 * @return the style (as image) of the legend box
-	 */
-	public ImageElement getPointStyleAsImage() {
-		// checks if is an point style and not an image
-		if (isPointStyleAsImage()) {
-			return getValue(Property.POINT_STYLE, UndefinedValues.IMAGE_ELEMENT);
-		} else {
-			// returns null because is a string
-			return UndefinedValues.IMAGE_ELEMENT;
-		}
 	}
 
 	/**

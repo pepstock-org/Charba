@@ -39,8 +39,8 @@ import com.google.gwt.dom.client.NativeEvent;
 final class JsCallbacksHelper {
 	// static instance for singleton
 	private static final JsCallbacksHelper INSTANCE = new JsCallbacksHelper();
-	// factory of legend label iteam
-	private static final LegendLabelItemFactory FACTORY = new LegendLabelItemFactory();
+	// factory to create legend item
+	private final LegendLabelItemFactory factory = new LegendLabelItemFactory(); 
 
 	/**
 	 * To avoid any instantiation
@@ -83,7 +83,7 @@ final class JsCallbacksHelper {
 	 */
 	List<LegendLabelItem> generateDefaultLabels(Chart chart, ChartOptions options) {
 		ArrayObject array = NativeJsCallbacksHelper.generateDefaultLabels(chart, options.getObject());
-		return ArrayListHelper.unmodifiableList(array, FACTORY);
+		return ArrayListHelper.unmodifiableList(array, factory);
 	}
 	
 	/**

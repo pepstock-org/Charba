@@ -22,12 +22,19 @@ import org.pepstock.charba.client.colors.ColorBuilder;
 import org.pepstock.charba.client.colors.IsColor;
 import org.pepstock.charba.client.commons.ArrayInteger;
 import org.pepstock.charba.client.commons.ArrayListHelper;
+import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.commons.NativeObjectContainer;
 import org.pepstock.charba.client.commons.NativeObjectContainerFactory;
+import org.pepstock.charba.client.commons.ObjectType;
 import org.pepstock.charba.client.enums.CapStyle;
 import org.pepstock.charba.client.enums.JoinStyle;
+import org.pepstock.charba.client.enums.PointStyle;
+
+import com.google.gwt.canvas.dom.client.CanvasGradient;
+import com.google.gwt.canvas.dom.client.CanvasPattern;
+import com.google.gwt.dom.client.ImageElement;
 
 /**
  * This is a wrapper of the CHART.JS item which contains the legend item.
@@ -80,7 +87,7 @@ public class LegendItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * To avoid any user creation but provides an empty object
+	 * To avoid any user creation but provides an empty object.
 	 */
 	LegendItem() {
 		// do nothing
@@ -132,14 +139,143 @@ public class LegendItem extends NativeObjectContainer {
 	}
 
 	/**
-	 * Returns the fill style of the legend box
+	 * Returns <code>true</code> if the fill style is defined as color.
 	 * 
-	 * @return the fill style of the legend box
+	 * @return <code>true</code> if the fill style is defined as color
 	 */
-	public final IsColor getFillStyle() {
-		return ColorBuilder.parse(getValue(Property.FILL_STYLE, Defaults.get().getGlobal().getDefaultColorAsString()));
+	public final boolean isFillStyleAsColor() {
+		return ObjectType.STRING.equals(type(Property.FILL_STYLE));
 	}
 
+	/**
+	 * Returns <code>true</code> if the fill style is defined as gradient.
+	 * 
+	 * @return <code>true</code> if the fill style is defined as gradient
+	 */
+	public final boolean isFillStyleAsGradient() {
+		return JsHelper.get().isCanvasGradient(this, Property.FILL_STYLE.value());
+	}
+
+	/**
+	 * Returns <code>true</code> if the fill style is defined as gradient.
+	 * 
+	 * @return <code>true</code> if the fill style is defined as gradient
+	 */
+	public final boolean isFillStyleAsPattern() {
+		return JsHelper.get().isCanvasPattern(this, Property.FILL_STYLE.value());
+	}
+
+	/**
+	 * Returns the fill style of the legend box as color.
+	 * 
+	 * @return the fill style of the legend box or <code>null</code> if is not a color
+	 */
+	public final IsColor getFillStyle() {
+		// checks if the fill style has been set as color
+		if (isFillStyleAsColor()) {
+			return ColorBuilder.parse(getValue(Property.FILL_STYLE, Defaults.get().getGlobal().getDefaultColorAsString()));
+		}
+		// if here, is not a color then returns null
+		return null;
+	}
+
+	/**
+	 * Returns the fill style of the legend box as gradient.
+	 * 
+	 * @return the fill style of the legend box or <code>null</code> if is not a gradient
+	 */
+	public final CanvasGradient getFillStyleAsGradient() {
+		// checks if the fill style has been set as color
+		if (isFillStyleAsGradient()) {
+			return getValue(Property.FILL_STYLE, (CanvasGradient)null);
+		}
+		// if here, is not a color then returns null
+		return null;
+	}
+
+	/**
+	 * Returns the fill style of the legend box  as pattern.
+	 * 
+	 * @return the fill style of the legend box or <code>null</code> if is not a pattern
+	 */
+	public final CanvasPattern getFillStyleAsPattern() {
+		// checks if the fill style has been set as color
+		if (isFillStyleAsPattern()) {
+			return getValue(Property.FILL_STYLE, (CanvasPattern)null);
+		}
+		// if here, is not a color then returns null
+		return null;
+	}
+
+	/**
+	 * Returns <code>true</code> if the stroke style is defined as color.
+	 * 
+	 * @return <code>true</code> if the stroke style is defined as color
+	 */
+	public final boolean isStrokeStyleAsColor() {
+		return ObjectType.STRING.equals(type(Property.STROKE_STYLE));
+	}
+
+	/**
+	 * Returns <code>true</code> if the stroke style is defined as gradient.
+	 * 
+	 * @return <code>true</code> if the stroke style is defined as gradient
+	 */
+	public final boolean isStrokeStyleAsGradient() {
+		return JsHelper.get().isCanvasGradient(this, Property.STROKE_STYLE.value());
+	}
+
+	/**
+	 * Returns <code>true</code> if the stroke style is defined as gradient.
+	 * 
+	 * @return <code>true</code> if the stroke style is defined as gradient
+	 */
+	public final boolean isStrokeStyleAsPattern() {
+		return JsHelper.get().isCanvasPattern(this, Property.STROKE_STYLE.value());
+	}
+
+	/**
+	 * Returns the stroke style of the legend box as color.
+	 * 
+	 * @return the stroke style of the legend box or <code>null</code> if is not a color
+	 */
+	public final IsColor getStrokeStyle() {
+		// checks if the stroke style has been set as color
+		if (isStrokeStyleAsColor()) {
+			return ColorBuilder.parse(getValue(Property.STROKE_STYLE, Defaults.get().getGlobal().getDefaultColorAsString()));
+		}
+		// if here, is not a color then returns null
+		return null;
+	}
+
+	/**
+	 * Returns the stroke style of the legend box as gradient.
+	 * 
+	 * @return the stroke style of the legend box or <code>null</code> if is not a gradient
+	 */
+	public final CanvasGradient getStrokeStyleAsGradient() {
+		// checks if the stroke style has been set as color
+		if (isStrokeStyleAsGradient()) {
+			return getValue(Property.STROKE_STYLE, (CanvasGradient)null);
+		}
+		// if here, is not a color then returns null
+		return null;
+	}
+
+	/**
+	 * Returns the stroke style of the legend box  as pattern.
+	 * 
+	 * @return the stroke style of the legend box or <code>null</code> if is not a pattern
+	 */
+	public final CanvasPattern getStrokeStyleAsPattern() {
+		// checks if the stroke style has been set as color
+		if (isStrokeStyleAsPattern()) {
+			return getValue(Property.STROKE_STYLE, (CanvasPattern)null);
+		}
+		// if here, is not a color then returns null
+		return null;
+	}
+	
 	/**
 	 * Returns true if this item represents a hidden dataset. Label will be rendered with a strike-through effect
 	 * 
@@ -206,6 +342,45 @@ public class LegendItem extends NativeObjectContainer {
 	}
 
 	/**
+	 * Returns <code>true</code> if the point style is defined as image.
+	 * 
+	 * @return <code>true</code> if the point style is defined as image
+	 */
+	public final boolean isPointStyleAsImage() {
+		return !ObjectType.STRING.equals(type(Property.POINT_STYLE));
+	}
+
+	/**
+	 * Returns the style of the legend box (only used if usePointStyle is true)
+	 * 
+	 * @return the style of the legend box
+	 */
+	public final PointStyle getPointStyle() {
+		// checks if is an point style and not an image
+		if (!isPointStyleAsImage()) {
+			return getValue(Property.POINT_STYLE, PointStyle.class, Defaults.get().getGlobal().getElements().getPoint().getPointStyle());
+		} else {
+			// returns the default
+			return Defaults.get().getGlobal().getElements().getPoint().getPointStyle();
+		}
+	}
+
+	/**
+	 * Returns the style (as image) of the legend box (only used if usePointStyle is true)
+	 * 
+	 * @return the style (as image) of the legend box
+	 */
+	public final ImageElement getPointStyleAsImage() {
+		// checks if is an point style and not an image
+		if (isPointStyleAsImage()) {
+			return getValue(Property.POINT_STYLE, UndefinedValues.IMAGE_ELEMENT);
+		} else {
+			// returns null because is a string
+			return UndefinedValues.IMAGE_ELEMENT;
+		}
+	}
+	
+	/**
 	 * Inner class to create legend item by a native object.
 	 * 
 	 * @author Andrea "Stock" Stocchero
@@ -222,5 +397,6 @@ public class LegendItem extends NativeObjectContainer {
 		public LegendItem create(NativeObject nativeObject) {
 			return new LegendItem(nativeObject);
 		}
+
 	}
 }

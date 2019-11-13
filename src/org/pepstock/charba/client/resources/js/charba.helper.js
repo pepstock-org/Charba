@@ -95,6 +95,26 @@
     	return obj[key];
     }  
     /*
+	 Returns true if the property into native object is a CanvasPattern.
+	  
+	 @param object the object on which to define the property.
+	 @param key the string name of the property to be defined or modified..
+	 @return true if the property into native object is a CanvasPattern
+    */
+    CharbaJsHelper.isCanvasPattern = function(obj, key) {
+    	return obj[key] instanceof CanvasPattern;
+    } 
+    /*
+	 Returns true if the property into native object is a CanvasGradient.
+	  
+	 @param object the object on which to define the property.
+	 @param key the string name of the property to be defined or modified..
+	 @return true if the property into native object is a CanvasGradient
+    */
+    CharbaJsHelper.isCanvasGradient = function(obj, key) {
+    	return obj[key] instanceof CanvasGradient;
+    } 
+    /*
 	 Returns a chart native event from CHART.JS event.
 	  
 	 @param event CHART.JS event
@@ -377,4 +397,27 @@
     		options[key].call(chart, event, items);
     	}
     }
+    /*
+		JsHtmlLegendBuilderHelpers an object with a set of static methods used as utility
+		and needed when HtmlLegendBuilder plugin has been activated.   
+	*/
+    function CharbaJsHtmlLegendBuilderHelper() {}
+    /*
+	 Returns an array of strings with element attributes.
+	  
+	 @param element DOM element to scan
+	 @return an array of strings with element attributes
+    */
+    CharbaJsHtmlLegendBuilderHelper.addEventListener = function(event, element, proxy) {
+    	element.addEventListener(event, proxy, false);
+    } 
+        /*
+	 Returns an array of strings with element attributes.
+	  
+	 @param element DOM element to scan
+	 @return an array of strings with element attributes
+    */
+    CharbaJsHtmlLegendBuilderHelper.removeEventListener = function(event, element, proxy) {
+    	element.removeEventListener(event, proxy);
+    } 
     

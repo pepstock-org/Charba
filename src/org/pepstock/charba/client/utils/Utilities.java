@@ -121,18 +121,27 @@ public final class Utilities {
 	 * Constant for EMPTY string
 	 */
 	public static final String EMPTY_STRING = "";
+	
 	/**
 	 * Constant for EMPTY ARRAY string.
 	 */
 	public static final String[] EMPTY_ARRAY_STRING = new String[0];
+
+	/**
+	 * Constant for CSS property for font.
+	 */
+	public static final String CSS_FONT_PROPERTY = "font";
+	
 	/**
 	 * Constant for CSS property for {@link Pattern}.
 	 */
 	public static final String CSS_BACKGROUND_PROPERTY = "background";
+	
 	/**
 	 * Constant for CSS property for {@link Gradient}.
 	 */
 	public static final String CSS_BACKGROUND_IMAGE_PROPERTY = "backgroundImage";
+	
 	/**
 	 * Constant for CSS property for {@link IsColor}.
 	 */
@@ -273,7 +282,8 @@ public final class Utilities {
 	 * @param height height of image applied to canvasPattern
 	 * @return a data URL for the current content of the canvas pattern
 	 */
-	private static String getImageURLFromCanvasPattern(CanvasPattern canvasPattern, int width, int height) {
+	public static String getImageURLFromCanvasPattern(CanvasPattern canvasPattern, int width, int height) {
+		// FIXME checks contolls
 		// checks if canvas is created
 		// if not returns an empty string
 		if (WORKING_CANVAS == null) {

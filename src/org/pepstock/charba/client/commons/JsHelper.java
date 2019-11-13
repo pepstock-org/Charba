@@ -22,6 +22,8 @@ import org.pepstock.charba.client.events.ChartNativeEvent;
 import org.pepstock.charba.client.items.UndefinedValues;
 import org.pepstock.charba.client.resources.ResourcesType;
 
+import com.google.gwt.canvas.dom.client.CanvasGradient;
+import com.google.gwt.canvas.dom.client.CanvasPattern;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.Element;
 
@@ -175,6 +177,38 @@ public final class JsHelper {
 		}
 		// if here, arguments not consistent
 		return UndefinedValues.STRING;
+	}
+
+	/**
+	 * Returns <code>true</code> if the property into native object is a {@link CanvasPattern}.
+	 * 
+	 * @param object the object on which to define the property.
+	 * @param key the string name of the property to be defined or modified..
+	 * @return <code>true</code> if the property into native object is a {@link CanvasPattern}
+	 */
+	public boolean isCanvasPattern(NativeObjectContainer object, String key) {
+		// checks consistency of arguments
+		if (object != null && key != null) {
+			return NativeJsHelper.isCanvasPattern(object.getNativeObject(), key);
+		}
+		// if here, arguments not consistent
+		return false;
+	}
+
+	/**
+	 * Returns <code>true</code> if the property into native object is a {@link CanvasGradient}.
+	 * 
+	 * @param object the object on which to define the property.
+	 * @param key the string name of the property to be defined or modified..
+	 * @return <code>true</code> if the property into native object is a {@link CanvasGradient}
+	 */
+	public boolean isCanvasGradient(NativeObjectContainer object, String key) {
+		// checks consistency of arguments
+		if (object != null && key != null) {
+			return NativeJsHelper.isCanvasGradient(object.getNativeObject(), key);
+		}
+		// if here, arguments not consistent
+		return false;
 	}
 
 	/**
