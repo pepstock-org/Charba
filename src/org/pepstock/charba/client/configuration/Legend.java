@@ -19,9 +19,9 @@ import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.commons.CallbackProxy;
 import org.pepstock.charba.client.commons.JsHelper;
-import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.enums.LegendAlign;
+import org.pepstock.charba.client.enums.LegendEventProperty;
 import org.pepstock.charba.client.enums.Position;
 import org.pepstock.charba.client.enums.TextDirection;
 import org.pepstock.charba.client.events.AddHandlerEvent;
@@ -85,39 +85,6 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 	private int onLeaveHandlers = 0;
 
 	/**
-	 * Name of properties of native object.
-	 */
-	private enum Property implements Key
-	{
-		ON_CLICK("onClick"),
-		ON_HOVER("onHover"),
-		ON_LEAVE("onLeave");
-
-		// name value of property
-		private final String value;
-
-		/**
-		 * Creates with the property value to use into native object.
-		 * 
-		 * @param value value of property name
-		 */
-		private Property(String value) {
-			this.value = value;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.pepstock.charba.client.commons.Key#value()
-		 */
-		@Override
-		public String value() {
-			return value;
-		}
-
-	}
-
-	/**
 	 * Builds the object storing the chart instance and the root options element.
 	 * 
 	 * @param chart chart instance
@@ -133,11 +100,11 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 		// -- SET CALLBACKS to PROXIES ---
 		// -------------------------------
 		// fires the event
-		clickCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendClickEvent(event, nativeChart, Property.ON_CLICK, new LegendItem(item))));
+		clickCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendClickEvent(event, nativeChart, new LegendItem(item))));
 		// fires the event
-		hoverCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendHoverEvent(event, nativeChart, Property.ON_HOVER, new LegendItem(item))));
+		hoverCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendHoverEvent(event, nativeChart, new LegendItem(item))));
 		// fires the event
-		leaveCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendLeaveEvent(event, nativeChart, Property.ON_LEAVE, new LegendItem(item))));
+		leaveCallbackProxy.setCallback((nativeChart, event, item) -> getChart().fireEvent(new LegendLeaveEvent(event, nativeChart, new LegendItem(item))));
 	}
 
 	/**
@@ -161,7 +128,7 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 			// if java script property is missing
 			if (onClickHandlers == 0) {
 				// adds the java script function to catch the event
-				getConfiguration().setEvent(getConfiguration().getLegend(), Property.ON_CLICK, clickCallbackProxy.getProxy());
+				getConfiguration().setEvent(getConfiguration().getLegend(), LegendEventProperty.ON_CLICK, clickCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onClickHandlers++;
@@ -169,7 +136,7 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 			// if java script property is missing
 			if (onHoverHandlers == 0) {
 				// adds the java script function to catch the event
-				getConfiguration().setEvent(getConfiguration().getLegend(), Property.ON_HOVER, hoverCallbackProxy.getProxy());
+				getConfiguration().setEvent(getConfiguration().getLegend(), LegendEventProperty.ON_HOVER, hoverCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onHoverHandlers++;
@@ -177,7 +144,7 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 			// if java script property is missing
 			if (onLeaveHandlers == 0) {
 				// adds the java script function to catch the event
-				getConfiguration().setEvent(getConfiguration().getLegend(), Property.ON_LEAVE, leaveCallbackProxy.getProxy());
+				getConfiguration().setEvent(getConfiguration().getLegend(), LegendEventProperty.ON_LEAVE, leaveCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onLeaveHandlers++;
@@ -199,7 +166,7 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 			// if there is not any handler
 			if (onClickHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(getConfiguration().getLegend(), Property.ON_CLICK, null);
+				getConfiguration().setEvent(getConfiguration().getLegend(), LegendEventProperty.ON_CLICK, null);
 			}
 		} else if (event.isRecognize(LegendHoverEvent.TYPE)) {
 			// decrements the amount of handlers
@@ -207,7 +174,7 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 			// if there is not any handler
 			if (onHoverHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(getConfiguration().getLegend(), Property.ON_HOVER, null);
+				getConfiguration().setEvent(getConfiguration().getLegend(), LegendEventProperty.ON_HOVER, null);
 			}
 		} else if (event.isRecognize(LegendLeaveEvent.TYPE)) {
 			// decrements the amount of handlers
@@ -215,9 +182,36 @@ public class Legend extends ConfigurationContainer<ExtendedOptions> implements I
 			// if there is not any handler
 			if (onLeaveHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(getConfiguration().getLegend(), Property.ON_LEAVE, null);
+				getConfiguration().setEvent(getConfiguration().getLegend(), LegendEventProperty.ON_LEAVE, null);
 			}
 		}
+	}
+	
+	/**
+	 * Returns <code>true</code> if there is any legend click handler, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if there is any legend click handler, otherwise <code>false</code>.
+	 */
+	public final boolean hasClickHandlers() {
+		return onClickHandlers > 0;
+	}
+
+	/**
+	 * Returns <code>true</code> if there is any legend hover handler, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if there is any legend hover handler, otherwise <code>false</code>.
+	 */
+	public final boolean hasHoverHandlers() {
+		return onHoverHandlers > 0;
+	}
+
+	/**
+	 * Returns <code>true</code> if there is any legend leave handler, otherwise <code>false</code>.
+	 * 
+	 * @return <code>true</code> if there is any legend leave handler, otherwise <code>false</code>.
+	 */
+	public final boolean hasLeaveHandlers() {
+		return onLeaveHandlers > 0;
 	}
 
 	/**

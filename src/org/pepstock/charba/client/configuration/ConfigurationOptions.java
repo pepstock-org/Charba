@@ -35,6 +35,7 @@ import org.pepstock.charba.client.commons.JsHelper;
 import org.pepstock.charba.client.commons.Key;
 import org.pepstock.charba.client.commons.NativeObject;
 import org.pepstock.charba.client.defaults.chart.DefaultChartOptions;
+import org.pepstock.charba.client.enums.ChartEventProperty;
 import org.pepstock.charba.client.enums.Event;
 import org.pepstock.charba.client.events.AddHandlerEvent;
 import org.pepstock.charba.client.events.AxisClickEvent;
@@ -192,10 +193,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 	 */
 	private enum Property implements Key
 	{
-		LEGEND_CALLBACK("legendCallback"),
-		ON_RESIZE("onResize"),
-		ON_CLICK("onClick"),
-		ON_HOVER("onHover");
+		LEGEND_CALLBACK("legendCallback");
 
 		// name value of property
 		private final String value;
@@ -254,13 +252,13 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// handle click event
 			handleClickEvent(event);
 			// fires the click event on the chart
-			getChart().fireEvent(new ChartClickEvent(event, nativeChart, Property.ON_CLICK, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
+			getChart().fireEvent(new ChartClickEvent(event, nativeChart, ArrayListHelper.unmodifiableList(items, datasetItemFactory)));
 		});
 		// fires the hover hover on the chart
-		hoverCallbackProxy.setCallback((nativeChart, event, items) -> getChart().fireEvent(new ChartHoverEvent(event, nativeChart, Property.ON_HOVER, ArrayListHelper.unmodifiableList(items, datasetItemFactory))));
+		hoverCallbackProxy.setCallback((nativeChart, event, items) -> getChart().fireEvent(new ChartHoverEvent(event, nativeChart, ArrayListHelper.unmodifiableList(items, datasetItemFactory))));
 		// creates new native vent
 		// fires the resize event on chart
-		resizeCallbackProxy.setCallback((context, nativeChart, size) -> getChart().fireEvent(new ChartResizeEvent(Document.get().createChangeEvent(), new SizeItem(size))));
+		resizeCallbackProxy.setCallback((context, nativeChart, size) -> getChart().fireEvent(new ChartResizeEvent(Document.get().createChangeEvent(), nativeChart, new SizeItem(size))));
 		legendCallbackProxy.setCallback(context -> {
 			// creates the safe html to be sure about the right HTML to send back
 			SafeHtmlBuilder builder = new SafeHtmlBuilder();
@@ -505,7 +503,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// if there is not any click event handler
 			if (onClickHandlers == 0) {
 				// sets the callback proxy in order to call the user event interface
-				getConfiguration().setEvent(Property.ON_CLICK, clickCallbackProxy.getProxy());
+				getConfiguration().setEvent(ChartEventProperty.ON_CLICK, clickCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onClickHandlers++;
@@ -528,7 +526,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// if there is not any hover event handler
 			if (onHoverHandlers == 0) {
 				// sets the callback proxy in order to call the user event interface
-				getConfiguration().setEvent(Property.ON_HOVER, hoverCallbackProxy.getProxy());
+				getConfiguration().setEvent(ChartEventProperty.ON_HOVER, hoverCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onHoverHandlers++;
@@ -536,7 +534,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// if there is not any resize event handler
 			if (onResizeHandlers == 0) {
 				// sets the callback proxy in order to call the user event interface
-				getConfiguration().setEvent(Property.ON_RESIZE, resizeCallbackProxy.getProxy());
+				getConfiguration().setEvent(ChartEventProperty.ON_RESIZE, resizeCallbackProxy.getProxy());
 			}
 			// increments amount of handlers
 			onResizeHandlers++;
@@ -558,7 +556,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// if there is not any handler
 			if (onClickHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(Property.ON_CLICK, null);
+				getConfiguration().setEvent(ChartEventProperty.ON_CLICK, null);
 			}
 			// check if a dataset selection handler has been removed
 			if (event.isRecognize(DatasetSelectionEvent.TYPE)) {
@@ -581,7 +579,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// if there is not any handler
 			if (onHoverHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(Property.ON_HOVER, null);
+				getConfiguration().setEvent(ChartEventProperty.ON_HOVER, null);
 			}
 		} else if (event.isRecognize(ChartResizeEvent.TYPE)) {
 			// decrements the amount of handlers
@@ -589,7 +587,7 @@ public abstract class ConfigurationOptions extends ConfigurationContainer<Extend
 			// if there is not any handler
 			if (onResizeHandlers == 0) {
 				// removes the java script object
-				getConfiguration().setEvent(Property.ON_RESIZE, null);
+				getConfiguration().setEvent(ChartEventProperty.ON_RESIZE, null);
 			}
 		}
 	}
