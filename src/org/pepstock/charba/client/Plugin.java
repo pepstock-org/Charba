@@ -61,8 +61,9 @@ public interface Plugin {
 	 * Called after 'chart' has been initialized and before the first update.
 	 * 
 	 * @param chart the chart instance.
+	 * @param nativeChart CHART.JS chart instance
 	 */
-	void onAfterInit(IsChart chart);
+	void onAfterInit(IsChart chart, Chart nativeChart);
 
 	/**
 	 * Called before updating 'chart'. If any plugin returns <code>false</code>, the update is cancelled (and thus subsequent

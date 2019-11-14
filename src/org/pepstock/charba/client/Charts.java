@@ -32,6 +32,10 @@ public final class Charts {
 	// K = CHART id (CHARBA ID)
 	// V = chart instance
 	private static final Map<String, IsChart> CHARTS_INSTANCES = new HashMap<>();
+	// buffer with all CHART.JS charts instances
+	// K = CHART id (CHARBA ID)
+	// V = CHART.JS chart instance
+	private static final Map<String, Chart> NATIVE_CHARTS_INSTANCES = new HashMap<>();
 	// list with all charts life cycle listeners
 	private static final List<ChartsLifecycleListener> LISTENERS = new LinkedList<>();
 
@@ -76,15 +80,31 @@ public final class Charts {
 	 * @param chart chart instance
 	 */
 	static void add(IsChart chart) {
-		// putting getting the chart
-		IsChart prevChart = CHARTS_INSTANCES.put(chart.getId(), chart);
-		// if previous chart instance is not consistent
-		// means that chart is new and then...
-		if (prevChart == null) {
-			// ...scans all listener to send notification
-			for (ChartsLifecycleListener listener : LISTENERS) {
-				listener.onBeforeInit(chart);
+		// checks if chart is consistent
+		if (chart != null) {
+			// putting getting the chart
+			IsChart prevChart = CHARTS_INSTANCES.put(chart.getId(), chart);
+			// if previous chart instance is not consistent
+			// means that chart is new and then...
+			if (prevChart == null) {
+				// ...scans all listener to send notification
+				for (ChartsLifecycleListener listener : LISTENERS) {
+					listener.onBeforeInit(chart);
+				}
 			}
+		}
+	}
+
+	/**
+	 * Adds new CHART.JS charts instance into collection.
+	 * 
+	 * @param chart chart instance
+	 */
+	static void addNative(Chart chart) {
+		// checks if chart and its id are consistent
+		if (chart != null && chart.getCharbaId() != null) {
+			// stores the chart
+			NATIVE_CHARTS_INSTANCES.put(chart.getCharbaId(), chart);
 		}
 	}
 
@@ -126,9 +146,39 @@ public final class Charts {
 		// if here chart id is not consistent
 		return null;
 	}
+	
+	/**
+	 * Returns <code>true</code> if there is a CHART.JS chart instance by id.
+	 * 
+	 * @param chartId chart id
+	 * @return <code>true</code> if there is a CHART.JS chart instance by id
+	 */
+	public static boolean hasNative(String chartId) {
+		// checks if argument is consistent
+		if (chartId != null) {
+			return NATIVE_CHARTS_INSTANCES.containsKey(chartId);
+		}
+		// if here chart id is not consistent
+		return false;
+	}
 
 	/**
-	 * Removes a chart instance by its id.
+	 * Returns the CHART.JS chart instance by id.
+	 * 
+	 * @param chartId chart id
+	 * @return CHART.JS chart instance or <code>null</code> if not exist.
+	 */
+	public static Chart getNative(String chartId) {
+		// checks if argument is consistent
+		if (chartId != null) {
+			return NATIVE_CHARTS_INSTANCES.get(chartId);
+		}
+		// if here chart id is not consistent
+		return null;
+	}
+
+	/**
+	 * Removes the chart instance by its id.
 	 * 
 	 * @param chartId chart id
 	 */
@@ -142,6 +192,8 @@ public final class Charts {
 				listener.onAfterDestroy(chart);
 			}
 		}
+		// removes also the native chart
+		NATIVE_CHARTS_INSTANCES.remove(chartId);
 	}
 
 }

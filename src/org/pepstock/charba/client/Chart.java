@@ -380,7 +380,7 @@ public final class Chart {
 	 * @see org.pepstock.charba.client.commons.Id
 	 */
 	@JsOverlay
-	private String getCharbaId() {
+	public String getCharbaId() {
 		return Id.get(getOptions());
 	}
 

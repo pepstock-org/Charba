@@ -39,6 +39,7 @@ import org.pepstock.charba.client.events.LegendLeaveEvent;
 import org.pepstock.charba.client.items.LegendItem;
 import org.pepstock.charba.client.items.LegendLabelItem;
 import org.pepstock.charba.client.items.UndefinedValues;
+import org.pepstock.charba.client.plugins.AbstractPlugin;
 import org.pepstock.charba.client.plugins.GlobalPlugins;
 import org.pepstock.charba.client.resources.ResourcesType;
 
@@ -51,6 +52,10 @@ public final class Defaults {
 
 	// singleton instance
 	private static final Defaults INSTANCE = new Defaults();
+	/**
+	 * Plugin ID <b>{@value ID}</b>, for an internal plugin to track native chart instances.
+	 */
+	public static final String ID = "nativecharthandler";
 	// native defaults java script object
 	private final WrapperDefaults wrapperDefaults;
 	// global options
@@ -83,6 +88,9 @@ public final class Defaults {
 		this.plugins = new GlobalPlugins(Chart.getPlugins());
 		// creates the controller object
 		this.controllers = Controllers.get();
+		// adds the internal plugin to all charts
+		// to track native chart instances
+		this.plugins.register(new NativeChartHandler());
 	}
 
 	/**
@@ -327,7 +335,7 @@ public final class Defaults {
 		// checks if event is consistent
 		if (event != null) {
 			// gets chart
-			IsChart isChart = event.getChart();
+			IsChart isChart = event.getChart() instanceof AbstractChart<?> ? event.getChart() : event.getContext().getChart() ;
 			// checks if argument is consistent
 			if (isChart instanceof AbstractChart<?> && isChart.isInitialized()) {
 				// cast to abstract chart to get element of GWT object
@@ -454,5 +462,36 @@ public final class Defaults {
 		}
 
 	}
+	
+	/**
+	 * 
+	 * @author Andrea "Stock" Stocchero
+	 *
+	 */
+	private static class NativeChartHandler extends AbstractPlugin {
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.Plugin#getId()
+		 */
+		@Override
+		public String getId() {
+			return ID;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.pepstock.charba.client.plugins.AbstractPlugin#onAfterInit(org.pepstock.charba.client.IsChart,
+		 * org.pepstock.charba.client.Chart)
+		 */
+		@Override
+		public void onAfterInit(IsChart chart, Chart nativeChart) {
+			Charts.addNative(nativeChart);
+		}
+
+	}
+
 
 }

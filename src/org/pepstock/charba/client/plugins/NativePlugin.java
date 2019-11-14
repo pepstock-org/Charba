@@ -97,7 +97,7 @@ final class NativePlugin {
 	 */
 	@JsMethod
 	public void afterInit(Chart chart, Object options) {
-		wrapper.onAfterInit(chart.getChart());
+		wrapper.onAfterInit(chart.getChart(), chart);
 	}
 
 	/**

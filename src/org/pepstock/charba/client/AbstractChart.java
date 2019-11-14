@@ -151,7 +151,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 * @return a new dataset related to chart type.
 	 */
 	public abstract D newDataset();
-	
+
 	/**
 	 * Returns the native object related to CHART.JS implementation.
 	 * 
@@ -454,7 +454,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 		// default
 		return UndefinedValues.STRING;
 	}
-	
+
 	/**
 	 * Use this to manually resize the canvas element. This is run each time the canvas container is resized, but can be called
 	 * this method manually if you change the size of the canvas nodes container element.
@@ -529,6 +529,9 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 			tempConfiguration.setOptions(this, internalOptions);
 			// replace the options
 			chart.setOptions(tempConfiguration.getOptions());
+			// calls plugins for onConfigure method
+			Defaults.get().getPlugins().onChartConfigure(tempConfiguration, this);
+			plugins.onChartConfigure(tempConfiguration, this);
 			// update chart
 			update(configuration);
 		}

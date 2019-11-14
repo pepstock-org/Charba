@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.plugins;
 
+import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.events.ChartNativeEvent;
@@ -56,7 +57,7 @@ public abstract class AbstractPlugin implements Plugin {
 	 * @see org.pepstock.charba.client.Plugin#onAfterInit(org.pepstock.charba.client.IsChart)
 	 */
 	@Override
-	public void onAfterInit(IsChart chart) {
+	public void onAfterInit(IsChart chart, Chart nativeChart) {
 	}
 
 	/*

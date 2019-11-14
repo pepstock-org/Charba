@@ -15,6 +15,7 @@
 */
 package org.pepstock.charba.client.plugins;
 
+import org.pepstock.charba.client.Chart;
 import org.pepstock.charba.client.IsChart;
 import org.pepstock.charba.client.Plugin;
 import org.pepstock.charba.client.items.DatasetPluginItem;
@@ -94,11 +95,12 @@ final class WrapperPlugin {
 	 * Called after 'chart' has been initialized and before the first update.
 	 * 
 	 * @param chartId chart id.
+	 * @param nativeChart CHART.JS chart instance
 	 */
-	void onAfterInit(IsChart chart) {
+	void onAfterInit(IsChart chart, Chart nativeChart) {
 		// if consistent, calls plugin
 		if (chart != null) {
-			delegation.onAfterInit(chart);
+			delegation.onAfterInit(chart, nativeChart);
 		}
 	}
 
