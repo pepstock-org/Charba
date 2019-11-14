@@ -16,7 +16,7 @@
 package org.pepstock.charba.client.events;
 
 import org.pepstock.charba.client.Chart;
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.enums.LegendEventProperty;
 import org.pepstock.charba.client.items.LegendItem;
 
 import com.google.gwt.dom.client.NativeEvent;
@@ -40,11 +40,10 @@ public final class LegendClickEvent extends AbstractChartEvent<LegendClickEventH
 	 * 
 	 * @param nativeEvent native event of this custom event
 	 * @param functionContext function context provided by CHART.JS
-	 * @param key options key where default function is stored
 	 * @param item legend item related to the click
 	 */
-	public LegendClickEvent(NativeEvent nativeEvent, Chart functionContext, Key key, LegendItem item) {
-		super(nativeEvent, functionContext, key);
+	public LegendClickEvent(NativeEvent nativeEvent, Chart functionContext, LegendItem item) {
+		super(nativeEvent, functionContext, LegendEventProperty.ON_CLICK);
 		// checks if argument is consistent
 		if (item == null) {
 			throw new IllegalArgumentException("Legend item is null");

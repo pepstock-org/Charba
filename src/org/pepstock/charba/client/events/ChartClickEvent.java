@@ -18,7 +18,7 @@ package org.pepstock.charba.client.events;
 import java.util.List;
 
 import org.pepstock.charba.client.Chart;
-import org.pepstock.charba.client.commons.Key;
+import org.pepstock.charba.client.enums.ChartEventProperty;
 import org.pepstock.charba.client.items.DatasetItem;
 
 import com.google.gwt.dom.client.NativeEvent;
@@ -43,11 +43,10 @@ public final class ChartClickEvent extends AbstractChartEvent<ChartClickEventHan
 	 * 
 	 * @param nativeEvent native event of this custom event
 	 * @param functionContext function context provided by CHART.JS
-	 * @param key options key where default function is stored
 	 * @param items a list of items with dataset metadata related to the click
 	 */
-	public ChartClickEvent(NativeEvent nativeEvent, Chart functionContext, Key key, List<DatasetItem> items) {
-		super(nativeEvent, functionContext, key);
+	public ChartClickEvent(NativeEvent nativeEvent, Chart functionContext, List<DatasetItem> items) {
+		super(nativeEvent, functionContext, ChartEventProperty.ON_CLICK);
 		// checks if argument is consistent
 		if (items == null) {
 			throw new IllegalArgumentException("Dataset items list is null");

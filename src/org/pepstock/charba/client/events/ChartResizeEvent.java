@@ -15,6 +15,8 @@
 */
 package org.pepstock.charba.client.events;
 
+import org.pepstock.charba.client.Chart;
+import org.pepstock.charba.client.enums.ChartEventProperty;
 import org.pepstock.charba.client.items.SizeItem;
 
 import com.google.gwt.dom.client.NativeEvent;
@@ -24,7 +26,7 @@ import com.google.gwt.dom.client.NativeEvent;
  * 
  * @author Andrea "Stock" Stocchero
  */
-public final class ChartResizeEvent extends AbstractEvent<ChartResizeEventHandler> {
+public final class ChartResizeEvent extends AbstractChartEvent<ChartResizeEventHandler> {
 
 	/**
 	 * Event type
@@ -37,10 +39,11 @@ public final class ChartResizeEvent extends AbstractEvent<ChartResizeEventHandle
 	 * Creates the event with a item with new size of the chart
 	 * 
 	 * @param nativeEvent native event of this custom event
+	 * @param functionContext function context provided by CHART.JS
 	 * @param size item with the new size of the chart
 	 */
-	public ChartResizeEvent(NativeEvent nativeEvent, SizeItem size) {
-		super(nativeEvent);
+	public ChartResizeEvent(NativeEvent nativeEvent, Chart functionContext, SizeItem size) {
+		super(nativeEvent, functionContext, ChartEventProperty.ON_RESIZE);
 		// checks if argument is consistent
 		if (size == null) {
 			throw new IllegalArgumentException("Size is null");
