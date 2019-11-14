@@ -464,9 +464,10 @@ public final class Defaults {
 	}
 	
 	/**
+	 * Internal plugin to track native chart instances on all charts.
 	 * 
 	 * @author Andrea "Stock" Stocchero
-	 *
+	 * @see Charts
 	 */
 	private static class NativeChartHandler extends AbstractPlugin {
 
@@ -488,10 +489,10 @@ public final class Defaults {
 		 */
 		@Override
 		public void onAfterInit(IsChart chart, Chart nativeChart) {
+			// stores native object
 			Charts.addNative(nativeChart);
 		}
 
 	}
-
 
 }
