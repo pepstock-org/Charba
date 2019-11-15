@@ -27,26 +27,30 @@ public enum LegendAlign implements Key
 	/**
 	 * the property sets the start alignment.
 	 */
-	START("start"),
+	START("start", "left"),
 	/**
 	 * the property sets the center alignment.
 	 */
-	CENTER("center"),
+	CENTER("center", "center"),
 	/**
 	 * the property sets the end alignment.
 	 */
-	END("end");
+	END("end", "right");
 
 	// name value of property
 	private final String value;
+	// CSS value
+	private final String horizontalAlignmentValue;
 
 	/**
 	 * Creates with the property value to use into native object.
 	 * 
 	 * @param value value of property name
+	 * @param horizontalAlignmentValue CSS value to apply to horizontal alignment
 	 */
-	private LegendAlign(String value) {
+	private LegendAlign(String value, String horizontalAlignmentValue) {
 		this.value = value;
+		this.horizontalAlignmentValue = horizontalAlignmentValue;
 	}
 
 	/*
@@ -57,6 +61,15 @@ public enum LegendAlign implements Key
 	@Override
 	public String value() {
 		return value;
+	}
+
+	/**
+	 * Returns the CSS value for horizontal alignment into HTML element style.
+	 * 
+	 * @return the CSS value for horizontal alignment into HTML element style
+	 */
+	public String getHorizontalAlignmentValue() {
+		return horizontalAlignmentValue;
 	}
 
 }
