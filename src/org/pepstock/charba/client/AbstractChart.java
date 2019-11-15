@@ -154,11 +154,11 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 
 	/**
 	 * Returns the native object related to CHART.JS implementation.
-	 * 
+	 *
 	 * @return the native object related to CHART.JS implementation
 	 */
 	final Chart getNativeObject() {
-		return chart;
+		return lookForConsistentInstance();
 	}
 
 	/**
@@ -170,6 +170,18 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	@Override
 	public final String getId() {
 		return id;
+	}
+
+	/**
+	 * Returns the CHART.JS instance, check if the inner one is not consistent yet and then looking for the stored one into
+	 * {@link Charts}.
+	 * 
+	 * @return the CHART.JS instance, check if the inner one is not consistent yet
+	 */
+	private final Chart lookForConsistentInstance() {
+		// gets chart instance getting the stored one into map
+		// if the current one is still initializing
+		return chart != null ? chart : Charts.getNative(id);
 	}
 
 	/**
@@ -229,7 +241,7 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	 */
 	@Override
 	public final ChartNode getNode() {
-		return new ChartNode(chart);
+		return new ChartNode(lookForConsistentInstance());
 	}
 
 	/**
@@ -366,10 +378,12 @@ public abstract class AbstractChart<D extends Dataset> extends SimplePanel imple
 	public final void destroy() {
 		// notify before destroy
 		Charts.fireBeforeDestory(this);
+		// get consistent chart instance
+		Chart instance = lookForConsistentInstance();
 		// checks if chart is created
-		if (chart != null) {
+		if (instance != null) {
 			// then destroy
-			chart.destroy();
+			instance.destroy();
 		}
 		// remove handler of mouse event handler
 		removeCanvasPreventDefault();
